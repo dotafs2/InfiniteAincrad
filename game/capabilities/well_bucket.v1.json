@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "capability_id": "well_bucket",
+  "version": "1.0.0",
+  "world_id": "fixture:well-street",
+  "provenance": "fixture",
+  "actions": [
+    {
+      "id": "draw_water",
+      "from": "world.well_water",
+      "to": "resident.inventory.water",
+      "amount": 1
+    }
+  ],
+  "install": {
+    "materials": {
+      "rope": 1,
+      "bucket": 1
+    }
+  }
+}

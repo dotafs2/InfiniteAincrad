@@ -1,0 +1,525 @@
+{
+  "mock": {
+    "result": {
+      "real_model": false,
+      "encounter_exit": 0,
+      "restore_exit": 0,
+      "requests": 1,
+      "budget": {
+        "ledger_id": "77da5ee9-f0fa-4667-b4d2-663cc3b2b059",
+        "model": "kimi-k2.6",
+        "authorized_cny": 2.0,
+        "allocation_cap_cny": 2.0,
+        "settled_cny": 0.00238,
+        "prior_unverified_cny": 0.0107461,
+        "reserved_cny": 0.0,
+        "liability_cny": 0.0131261,
+        "remaining_allocatable_cny": 1.9868739,
+        "counts": {
+          "settled": 1
+        },
+        "halted": "",
+        "deadline_utc": 1789043108
+      },
+      "world_byte_identical_after_restore": true,
+      "attempt_byte_identical_after_restore": true,
+      "first_resident_unchanged": true,
+      "old_ledger_unchanged": true,
+      "gateway_thread_stopped": true
+    },
+    "encounter": {
+      "after_observation": {
+        "actions": [],
+        "available_actions": [
+          "wait"
+        ],
+        "experiences": [
+          {
+            "event": "observed_well",
+            "memory": "I observe the public well: there is a usable bucket and it has no water.",
+            "provenance": "resident_observation",
+            "turn": 3.0
+          }
+        ],
+        "identity": {
+          "id": "fixture:mira",
+          "name": "Mira (test resident)"
+        },
+        "inventory": {
+          "water": 0
+        },
+        "memory": {
+          "last_action": "created",
+          "water_drawn": 0,
+          "water_drunk": 0
+        },
+        "needs": {
+          "capability_request": null,
+          "thirst": 80
+        },
+        "observations": [
+          "I am standing on the street.",
+          "I observe the public well: there is a usable bucket and it has no water."
+        ]
+      },
+      "before_observation": {
+        "actions": [],
+        "available_actions": [
+          "wait"
+        ],
+        "experiences": [],
+        "identity": {
+          "id": "fixture:mira",
+          "name": "Mira (test resident)"
+        },
+        "inventory": {
+          "water": 0
+        },
+        "memory": {
+          "last_action": "created",
+          "water_drawn": 0,
+          "water_drunk": 0
+        },
+        "needs": {
+          "capability_request": null,
+          "thirst": 80
+        },
+        "observations": [
+          "I am standing on the street."
+        ]
+      },
+      "checks": {
+        "first_resident_unchanged": true,
+        "initially_no_well_action": true,
+        "no_errors": true,
+        "no_imported_experience": true,
+        "one_choice_or_stable_restore": true,
+        "resources_unchanged": true,
+        "same_world": true,
+        "two_persistent_residents": true,
+        "visitor_choice_saved": true,
+        "walked_before_observing": true
+      },
+      "decision": {
+        "action": "wait",
+        "reason": "Isolated delayed branch test."
+      },
+      "decisions": 1,
+      "errors": [],
+      "fixture": true,
+      "observation_distance_m": 1.7831883430481,
+      "passed": true,
+      "provenance": "opengameagent_fixture",
+      "visitor_final": {
+        "actions": [
+          {
+            "action": "wait",
+            "provenance": "opengameagent_fixture",
+            "reason": "Isolated delayed branch test.",
+            "turn": 4
+          }
+        ],
+        "consumed": {
+          "water": 0
+        },
+        "experiences": [
+          {
+            "event": "observed_well",
+            "memory": "I observe the public well: there is a usable bucket and it has no water.",
+            "provenance": "resident_observation",
+            "turn": 3.0
+          }
+        ],
+        "identity": {
+          "id": "fixture:mira",
+          "name": "Mira (test resident)"
+        },
+        "inventory": {
+          "water": 0
+        },
+        "memory": {
+          "last_action": "wait",
+          "water_drawn": 0,
+          "water_drunk": 0
+        },
+        "needs": {
+          "capability_request": null,
+          "thirst": 80
+        },
+        "observations": [
+          "I am standing on the street.",
+          "I observe the public well: there is a usable bucket and it has no water."
+        ]
+      },
+      "walked_m": 6.03576160000002
+    },
+    "restore": {
+      "before_observation": {
+        "actions": [
+          {
+            "action": "wait",
+            "provenance": "opengameagent_fixture",
+            "reason": "Isolated delayed branch test.",
+            "turn": 4.0
+          }
+        ],
+        "available_actions": [
+          "wait"
+        ],
+        "experiences": [
+          {
+            "event": "observed_well",
+            "memory": "I observe the public well: there is a usable bucket and it has no water.",
+            "provenance": "resident_observation",
+            "turn": 3.0
+          }
+        ],
+        "identity": {
+          "id": "fixture:mira",
+          "name": "Mira (test resident)"
+        },
+        "inventory": {
+          "water": 0.0
+        },
+        "memory": {
+          "last_action": "wait",
+          "water_drawn": 0.0,
+          "water_drunk": 0.0
+        },
+        "needs": {
+          "capability_request": null,
+          "thirst": 80.0
+        },
+        "observations": [
+          "I am standing on the street.",
+          "I observe the public well: there is a usable bucket and it has no water."
+        ]
+      },
+      "checks": {
+        "first_resident_unchanged": true,
+        "no_errors": true,
+        "one_choice_or_stable_restore": true,
+        "resources_unchanged": true,
+        "restore_unchanged": true,
+        "same_world": true,
+        "two_persistent_residents": true,
+        "visitor_choice_saved": true
+      },
+      "decisions": 0,
+      "errors": [],
+      "fixture": true,
+      "passed": true,
+      "restored": true,
+      "visitor_final": {
+        "actions": [
+          {
+            "action": "wait",
+            "provenance": "opengameagent_fixture",
+            "reason": "Isolated delayed branch test.",
+            "turn": 4.0
+          }
+        ],
+        "consumed": {
+          "water": 0.0
+        },
+        "experiences": [
+          {
+            "event": "observed_well",
+            "memory": "I observe the public well: there is a usable bucket and it has no water.",
+            "provenance": "resident_observation",
+            "turn": 3.0
+          }
+        ],
+        "identity": {
+          "id": "fixture:mira",
+          "name": "Mira (test resident)"
+        },
+        "inventory": {
+          "water": 0.0
+        },
+        "memory": {
+          "last_action": "wait",
+          "water_drawn": 0.0,
+          "water_drunk": 0.0
+        },
+        "needs": {
+          "capability_request": null,
+          "thirst": 80.0
+        },
+        "observations": [
+          "I am standing on the street.",
+          "I observe the public well: there is a usable bucket and it has no water."
+        ]
+      },
+      "walked_m": 0.0
+    }
+  },
+  "live": {
+    "result": {
+      "real_model": true,
+      "encounter_exit": 0,
+      "restore_exit": 0,
+      "requests": 1,
+      "budget": {
+        "ledger_id": "71d49650-fa93-458c-b226-a597d143c2ac",
+        "model": "kimi-k2.6",
+        "authorized_cny": 2.0,
+        "allocation_cap_cny": 2.0,
+        "settled_cny": 0.003401,
+        "prior_unverified_cny": 0.0107461,
+        "reserved_cny": 0.0,
+        "liability_cny": 0.0141471,
+        "remaining_allocatable_cny": 1.9858529,
+        "counts": {
+          "settled": 1
+        },
+        "halted": "",
+        "deadline_utc": 1789043150
+      },
+      "world_byte_identical_after_restore": true,
+      "attempt_byte_identical_after_restore": true,
+      "first_resident_unchanged": true,
+      "old_ledger_unchanged": true,
+      "gateway_thread_stopped": true
+    },
+    "encounter": {
+      "after_observation": {
+        "actions": [],
+        "available_actions": [
+          "wait"
+        ],
+        "experiences": [
+          {
+            "event": "observed_well",
+            "memory": "I observe the public well: there is a usable bucket and it has no water.",
+            "provenance": "resident_observation",
+            "turn": 3.0
+          }
+        ],
+        "identity": {
+          "id": "fixture:mira",
+          "name": "Mira (test resident)"
+        },
+        "inventory": {
+          "water": 0
+        },
+        "memory": {
+          "last_action": "created",
+          "water_drawn": 0,
+          "water_drunk": 0
+        },
+        "needs": {
+          "capability_request": null,
+          "thirst": 80
+        },
+        "observations": [
+          "I am standing on the street.",
+          "I observe the public well: there is a usable bucket and it has no water."
+        ]
+      },
+      "before_observation": {
+        "actions": [],
+        "available_actions": [
+          "wait"
+        ],
+        "experiences": [],
+        "identity": {
+          "id": "fixture:mira",
+          "name": "Mira (test resident)"
+        },
+        "inventory": {
+          "water": 0
+        },
+        "memory": {
+          "last_action": "created",
+          "water_drawn": 0,
+          "water_drunk": 0
+        },
+        "needs": {
+          "capability_request": null,
+          "thirst": 80
+        },
+        "observations": [
+          "I am standing on the street."
+        ]
+      },
+      "checks": {
+        "first_resident_unchanged": true,
+        "initially_no_well_action": true,
+        "no_errors": true,
+        "no_imported_experience": true,
+        "one_choice_or_stable_restore": true,
+        "resources_unchanged": true,
+        "same_world": true,
+        "two_persistent_residents": true,
+        "visitor_choice_saved": true,
+        "walked_before_observing": true
+      },
+      "decision": {
+        "action": "wait",
+        "reason": "我站在街上，看到公用水井有一个可用的桶，但里面没有水。可用的行动只有\"等待\"，我无法打水或喝水。我需要等待有人修复水井或提供打水能力，因为我现在口渴（80）且无法获取水源。"
+      },
+      "decisions": 1,
+      "errors": [],
+      "fixture": true,
+      "observation_distance_m": 1.78683531284332,
+      "passed": true,
+      "provenance": "opengameagent_live",
+      "visitor_final": {
+        "actions": [
+          {
+            "action": "wait",
+            "provenance": "opengameagent_live",
+            "reason": "我站在街上，看到公用水井有一个可用的桶，但里面没有水。可用的行动只有\"等待\"，我无法打水或喝水。我需要等待有人修复水井或提供打水能力，因为我现在口渴（80）且无法获取水源。",
+            "turn": 4
+          }
+        ],
+        "consumed": {
+          "water": 0
+        },
+        "experiences": [
+          {
+            "event": "observed_well",
+            "memory": "I observe the public well: there is a usable bucket and it has no water.",
+            "provenance": "resident_observation",
+            "turn": 3.0
+          }
+        ],
+        "identity": {
+          "id": "fixture:mira",
+          "name": "Mira (test resident)"
+        },
+        "inventory": {
+          "water": 0
+        },
+        "memory": {
+          "last_action": "wait",
+          "water_drawn": 0,
+          "water_drunk": 0
+        },
+        "needs": {
+          "capability_request": null,
+          "thirst": 80
+        },
+        "observations": [
+          "I am standing on the street.",
+          "I observe the public well: there is a usable bucket and it has no water."
+        ]
+      },
+      "walked_m": 6.02903400000002
+    },
+    "restore": {
+      "before_observation": {
+        "actions": [
+          {
+            "action": "wait",
+            "provenance": "opengameagent_live",
+            "reason": "我站在街上，看到公用水井有一个可用的桶，但里面没有水。可用的行动只有\"等待\"，我无法打水或喝水。我需要等待有人修复水井或提供打水能力，因为我现在口渴（80）且无法获取水源。",
+            "turn": 4.0
+          }
+        ],
+        "available_actions": [
+          "wait"
+        ],
+        "experiences": [
+          {
+            "event": "observed_well",
+            "memory": "I observe the public well: there is a usable bucket and it has no water.",
+            "provenance": "resident_observation",
+            "turn": 3.0
+          }
+        ],
+        "identity": {
+          "id": "fixture:mira",
+          "name": "Mira (test resident)"
+        },
+        "inventory": {
+          "water": 0.0
+        },
+        "memory": {
+          "last_action": "wait",
+          "water_drawn": 0.0,
+          "water_drunk": 0.0
+        },
+        "needs": {
+          "capability_request": null,
+          "thirst": 80.0
+        },
+        "observations": [
+          "I am standing on the street.",
+          "I observe the public well: there is a usable bucket and it has no water."
+        ]
+      },
+      "checks": {
+        "first_resident_unchanged": true,
+        "no_errors": true,
+        "one_choice_or_stable_restore": true,
+        "resources_unchanged": true,
+        "restore_unchanged": true,
+        "same_world": true,
+        "two_persistent_residents": true,
+        "visitor_choice_saved": true
+      },
+      "decisions": 0,
+      "errors": [],
+      "fixture": true,
+      "passed": true,
+      "restored": true,
+      "visitor_final": {
+        "actions": [
+          {
+            "action": "wait",
+            "provenance": "opengameagent_live",
+            "reason": "我站在街上，看到公用水井有一个可用的桶，但里面没有水。可用的行动只有\"等待\"，我无法打水或喝水。我需要等待有人修复水井或提供打水能力，因为我现在口渴（80）且无法获取水源。",
+            "turn": 4.0
+          }
+        ],
+        "consumed": {
+          "water": 0.0
+        },
+        "experiences": [
+          {
+            "event": "observed_well",
+            "memory": "I observe the public well: there is a usable bucket and it has no water.",
+            "provenance": "resident_observation",
+            "turn": 3.0
+          }
+        ],
+        "identity": {
+          "id": "fixture:mira",
+          "name": "Mira (test resident)"
+        },
+        "inventory": {
+          "water": 0.0
+        },
+        "memory": {
+          "last_action": "wait",
+          "water_drawn": 0.0,
+          "water_drunk": 0.0
+        },
+        "needs": {
+          "capability_request": null,
+          "thirst": 80.0
+        },
+        "observations": [
+          "I am standing on the street.",
+          "I observe the public well: there is a usable bucket and it has no water."
+        ]
+      },
+      "walked_m": 0.0
+    }
+  },
+  "actual_usage": {
+    "prompt_tokens": 274,
+    "completion_tokens": 60,
+    "total_tokens": 334,
+    "completion_tokens_details": {
+      "reasoning_tokens": 1
+    }
+  },
+  "actual_decision": {
+    "action": "wait",
+    "reason": "我站在街上，看到公用水井有一个可用的桶，但里面没有水。可用的行动只有\"等待\"，我无法打水或喝水。我需要等待有人修复水井或提供打水能力，因为我现在口渴（80）且无法获取水源。"
+  },
+  "owned_processes_remaining": []
+}

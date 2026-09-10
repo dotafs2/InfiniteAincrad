@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net8.0": {
+      "Godot.SourceGenerators": {
+        "type": "Direct",
+        "requested": "[4.7.2, )",
+        "resolved": "4.7.2",
+        "contentHash": "PeYESFlRxlmeClrPhlMINhVvt2HiKnx2Ux/FYA10rimDevHljji3/jmRZOMo9XDNQsZzPH4uQmDyPgQgzTFvAg=="
+      },
+      "GodotSharp": {
+        "type": "Direct",
+        "requested": "[4.7.2, )",
+        "resolved": "4.7.2",
+        "contentHash": "EPvfayB7b7MrBNdASvy86jRS5AbM9dprkVivcRD80g+ngn2M8KAIrBQH4NhyQL+pwxni0xVnuqhD9AFpZeNQpw=="
+      },
+      "GodotSharpEditor": {
+        "type": "Direct",
+        "requested": "[4.7.2, )",
+        "resolved": "4.7.2",
+        "contentHash": "Fuf2rNvajla9N8Z+ksxsSIt326wsjpB2F2uZCtxkdfWIsApabCHy5fsE2EKxOlQ4NaINGdgMIv62D0n583qe1A==",
+        "dependencies": {
+          "GodotSharp": "4.7.2"
+        }
+      },
+      "System.Text.Json": {
+        "type": "Transitive",
+        "resolved": "8.0.6",
+        "contentHash": "BvSpVBsVN9b+Y+wONbvJOHd1HjXQf33+XiC28ZMOwRsYb42mz3Q8YHnpTSwpwJLqYCMqM+0UUVC3V+pi25XfkQ=="
+      },
+      "opengameagent": {
+        "type": "Project",
+        "dependencies": {
+          "OpenGameAgent.Kernel": "[0.3.0-alpha.4, )",
+          "System.Text.Json": "[8.0.6, )"
+        }
+      },
+      "opengameagent.attachments": {
+        "type": "Project"
+      },
+      "opengameagent.client": {
+        "type": "Project",
+        "dependencies": {
+          "OpenGameAgent": "[0.3.0-alpha.4, )",
+          "OpenGameAgent.Attachments": "[0.3.0-alpha.4, )",
+          "OpenGameAgent.Runtime.Protocol": "[0.3.0-alpha.4, )",
+          "System.Text.Json": "[8.0.6, )"
+        }
+      },
+      "opengameagent.kernel": {
+        "type": "Project",
+        "dependencies": {
+          "OpenGameAgent.Attachments": "[0.3.0-alpha.4, )",
+          "System.Text.Json": "[8.0.6, )"
+        }
+      },
+      "opengameagent.runtime.protocol": {
+        "type": "Project",
+        "dependencies": {
+          "System.Text.Json": "[8.0.6, )"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "kind": "offline_3d_fixture",
+  "engine": "Godot 4.7.2 Mono, Forward+ Vulkan",
+  "passed": true,
+  "scene_checks": {
+    "3d_root": true,
+    "actual_use": true,
+    "approved": true,
+    "arrived_before_transfer": true,
+    "camera": true,
+    "collision_proxies": true,
+    "installed": true,
+    "market_imported": true,
+    "need": true,
+    "no_errors": true,
+    "one_consumption": true,
+    "resident_walked": true,
+    "water_conserved": true
+  },
+  "cold_restore_checks": {
+    "3d_root": true,
+    "actual_use": true,
+    "approved": true,
+    "camera": true,
+    "collision_proxies": true,
+    "installed": true,
+    "market_imported": true,
+    "need": true,
+    "no_errors": true,
+    "one_consumption": true,
+    "unchanged_restored_facts": true,
+    "water_conserved": true
+  },
+  "actual_resident_distance_m": 9.76541666666666,
+  "water": {
+    "consumed": 1,
+    "inventory": 0,
+    "well": 0
+  },
+  "world_id": "fixture:well-street",
+  "model_calls": 0,
+  "original_world_loaded": false,
+  "asset_sha256": "2e680ec8814a6aa7f4d09c74ad20fb859b5ccae5e3ef161f51d70e9c40f1b67d",
+  "limitations": [
+    "Primitive temporary NPC and well; not final art",
+    "Offline rule policy; no true model decision in this run",
+    "Walking position reconstructed from completed action, not saved mid-step",
+    "Scripted graphical interaction, not a manual playthrough",
+    "No exported standalone build or original-world migration"
+  ]
+}

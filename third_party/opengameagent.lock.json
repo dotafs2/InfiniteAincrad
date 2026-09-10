@@ -1,0 +1,253 @@
+{
+  "repository": "https://github.com/EricSun0218/OpenGameAgent",
+  "commit": "b1a9f149d7cfd9e6659fd6aeb2ed4cfc275d0f84",
+  "version": "0.3.0-alpha.4",
+  "license": "MIT",
+  "source_only": true,
+  "modified_upstream_files": [],
+  "packages": [
+    "OpenGameAgent",
+    "OpenGameAgent.Kernel",
+    "OpenGameAgent.Attachments",
+    "OpenGameAgent.Client",
+    "OpenGameAgent.Runtime.Protocol"
+  ],
+  "files": [
+    {
+      "path": "third_party/OpenGameAgent/Directory.Build.props",
+      "sha256": "4e354f711d43360fe8703704ca2f9976ed3eda79dda5bf8214cba03b4e7c2f35"
+    },
+    {
+      "path": "third_party/OpenGameAgent/LICENSE",
+      "sha256": "8fe1cf43e9533d8f85f1530f38fd144c1d2c83d30bedeb8f4e2af5dfaf4b3514"
+    },
+    {
+      "path": "third_party/OpenGameAgent/README.md",
+      "sha256": "7c5fc55fc9505969979842f34f541cc7b4754faa372b08b5132f3364588cc6c3"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/Actions.cs",
+      "sha256": "2ff625a225c25b1f5f5fd74fedaca33bf549d29c7e0533cd98f7983f1b6a41f3"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/AssemblyInfo.cs",
+      "sha256": "b8a1ce8bd892e239132c4ebfc7f0d50cb4e1fd4906f4a37691171ea3b152d760"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/ExecutionScope.cs",
+      "sha256": "d3cd0fc4e6c6c41ed1b5376066bb6a1f1087ceb8591121545be455414e814a13"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/ExtensionContracts.cs",
+      "sha256": "4bcf6e8617f7188c07360286b58d2050f50806f251a9a927cd2770391276dfdf"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/ExtensionHost.cs",
+      "sha256": "9547f57da120cd69fc2fd5f8ae972733fa136ec27ab4813c099de70c70c2f46d"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/GameAgentBuilder.cs",
+      "sha256": "75399b223c24604c140ec62c171c9aef0afff86013d72b85258936f4b7a8a1a7"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/GameAgentRuntime.cs",
+      "sha256": "f94f1237bb1526e037d0aa95a792bf4ea81b57128c70e16745ac9c0565133406"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/GameAgentValueComparer.cs",
+      "sha256": "94aaa551277c92e1c79d5e4ba08b11a2405c66b0fe13010bde56faad5eb95972"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/GameAgentWire.cs",
+      "sha256": "7cb999c925b6f7b613d57299214a899584815b4c5c9b93ef5ea25423fb49ab14"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/GameData.cs",
+      "sha256": "223fa82d568fef503e87e57c3ac08813483981ec2160e667d221a9f8c80f9c33"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/GameResources.cs",
+      "sha256": "1835df04fe905a985e91d4aa6122827f4db7777258990265352afca7773c8d91"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/Generation.cs",
+      "sha256": "426d1d3a74522328f7af41584f5792df08417e1e17a463d59cbabf9a90141e2f"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/Mailbox.cs",
+      "sha256": "c0f82d14282d18ff4f1e69f02f2d64de91ec4b28455fcb248d88690a7dcc94c4"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/MediaMetrics.cs",
+      "sha256": "4c14125306df327d08a5b4332c8db4e979b75eac5704a575788be75d89bec21e"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/Memory.cs",
+      "sha256": "7074921f341648d8c8dd30c22928aeef3f9036878002fc90031ab051787989d9"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/ModelGameTranscriptSummarizer.cs",
+      "sha256": "a249a86a0669127835f55de7c74949302ca2ef038d4ac2ed3b18f36f2f0d5d87"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/ModelProviders.cs",
+      "sha256": "ad164a760760e4646169b09a01841de6717249ece56eb38b1628c25c971e8ef2"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/OpenGameAgent.csproj",
+      "sha256": "a81bfae6f9fa7f6e54de25e2bfc9daf8a988aebdc7a7f09792da350a24f29caa"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/packages.lock.json",
+      "sha256": "021f398ec039cd85631471fd6a093bb47ddbd4d6c266d360ba14408a52cbf0ac"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/QueuedGameActionHandler.cs",
+      "sha256": "bb0e6c1a73ceabfbe848b93b604de6279ed3ce10fe17c011dcb22e0815fc02d3"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/RunOperations.cs",
+      "sha256": "24d9089508208129fa3f6d430a684b12fcb15805f78b9ae06729167a80799286"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/Scheduling.cs",
+      "sha256": "fe1a590b33949745727fd1bc65b34320c8b8b32be4516b6a299dcd5b4aa87b23"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/Sessions.cs",
+      "sha256": "a10eb03c53cd011b8fd79426352b0f87d469de079231a87df9c4ce7d933c4bc0"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/Skills.cs",
+      "sha256": "5e93c5f15b618ed5089ef5b087032be0478d49ceb58dbbc32210b5727ccf5c1d"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent/Transcripts.cs",
+      "sha256": "84b10b308c790f23dd29a773a93fd44f5a570b50398888d0d62fd9400ad78dc8"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Attachments/ImageAttachments.cs",
+      "sha256": "777eb981f28e767744d3bdf3b7a80cfabb2505ad3f8b0923abbd461d1a96eb55"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Attachments/OpenGameAgent.Attachments.csproj",
+      "sha256": "8e913ec0d58ae2306301d3d83f7f8fff744fd135e3b859860561b8a05bc6a795"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Attachments/packages.lock.json",
+      "sha256": "a0374e7de4d2cb70210104be9139bc441372fdbc6f9996eb7290032e7bab6a22"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Client/GameRuntimeServerClient.cs",
+      "sha256": "fd89f4a5ae5709e643c2a7c4c71ad23564a50ff1422309b115b39154dcc425ec"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Client/GameServerClientTransport.cs",
+      "sha256": "6e6367675e6f0f63deb333ed741efa497c67c1366ff6a206d4ed87017d9f03c0"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Client/OpenGameAgent.Client.csproj",
+      "sha256": "9b31bfe29b5631584a3db45094b4c242854268089f56b12bfeeba347b554d0b9"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Client/packages.lock.json",
+      "sha256": "63c669fc7d0fce22569727af125aeaacfd2fd852e3ccd6054b283dfee0d8b356"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Client/ServerGameAgentClient.cs",
+      "sha256": "4ececeb42d8a0b3ef79a4cf9a44cc698dfc455bff198199f39663ac1b3ef79ec"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Client/ServerGameAgentClient.Operations.cs",
+      "sha256": "c2fa37d218d4a176a062ddbc671f54d4c4f7e55eefeccb2f030cecebbe95fa63"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/Agent.cs",
+      "sha256": "23395c1c4c09494b4efbb01aaef639d0e9493da2891dd604614af91dc53e6cd2"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/AgentLoop.cs",
+      "sha256": "0faec2f908ae98f8bd704840f1407369d2a6f6e61aac9825a2cf1d0cfaeabb34"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/AgentOptions.cs",
+      "sha256": "a7962b36c52fdf0421472c8545c52df3ee48a66fbf48a5a3259988070a4bf0a3"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/AgentValidator.cs",
+      "sha256": "db017e011d65e33a4c8e59987f883ecb2f29b51ba0ed97c46117cdc050fe0a28"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/AssemblyInfo.cs",
+      "sha256": "659c3ac4d0592ed96bd632aba016e6f30fd72da0f47e742afad75f9a9cc82f3d"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/Content.cs",
+      "sha256": "4cbdc804fd4d74363779e5f262a3fd4cf40bcb2b91793b3c447d713f96ca0446"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/Events.cs",
+      "sha256": "9ad677bfb1a8ea772c6e94922d65f4521bdf05c41bfb3ef7b32a24112762e6c2"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/JsonSchemaValidator.cs",
+      "sha256": "5b3d5e4075064d7c7b9ab06ae91998d6c084b0110d557fa1e12ffb72aefe6f16"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/Messages.cs",
+      "sha256": "e3c8f1154f2280a1279d1efff98e525caaba0b63b5d99ce84b375a722ba1debe"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/Models.cs",
+      "sha256": "2a8e52fd2765f3d122782b72f8c56470649b4d688af0a282822daca21fabd5d4"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/OpenGameAgent.Kernel.csproj",
+      "sha256": "bf34dcbe92e6da2ef69ba9d601ea47c4a77a0ac837a21b7bf9a5e43635d2dcd1"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/packages.lock.json",
+      "sha256": "0601db4aef369fd47466f88af9bbea88aaf708f73cff3b9cc127ad9185bcd92d"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/ProviderTranscript.cs",
+      "sha256": "895f8d710ddcb428270a739fe929273bca9ac7e24784bc6f7541c8b7f29daefc"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/StreamingJson.cs",
+      "sha256": "9ed2f677c148b7e0fcb30044ce4794b4ce4d0974aa8512d406b07ee8afab157e"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Kernel/Tools.cs",
+      "sha256": "d7c74600a794f3e57992a2285ec85b9d709dbce997343fb8388576403de2ee3f"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Runtime.Protocol/GameRuntimeReducer.cs",
+      "sha256": "50d68d75e57aeb6100901c5f3b3399b41ab906dd4ae44bb2d11bd40538f110a7"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Runtime.Protocol/OpenGameAgent.Runtime.Protocol.csproj",
+      "sha256": "475314e7f753bf34f26039c1607cfdf5176ed6fa9ab57018862495701c7e70ed"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Runtime.Protocol/packages.lock.json",
+      "sha256": "fb90c6b375226e4ec950848ee305cb72cb3bda94555ca16e57b689c20cfb0171"
+    },
+    {
+      "path": "third_party/OpenGameAgent/src/OpenGameAgent.Runtime.Protocol/RuntimeProtocol.cs",
+      "sha256": "3b81cda7244b21d07f9bb5aa9226b5c8cf5091ffe543be3b33fcedbe7f4a55a8"
+    },
+    {
+      "path": "game/addons/open_game_agent/LICENSE",
+      "sha256": "8fe1cf43e9533d8f85f1530f38fd144c1d2c83d30bedeb8f4e2af5dfaf4b3514"
+    },
+    {
+      "path": "game/addons/open_game_agent/README.md",
+      "sha256": "a8bd583d1efa8052bbb37f6e2ab4e6a369b5f965518344d9fb9f8a33910f5a40"
+    },
+    {
+      "path": "game/addons/open_game_agent/runtime/OpenGameAgentNode.cs",
+      "sha256": "3e37c65b8163b34f9618bcba715fa34684a712208fe7e7374db2194ab582d47c"
+    }
+  ]
+}

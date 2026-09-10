@@ -1,0 +1,75 @@
+{
+  "first": {
+    "passed": true,
+    "decisions": 1,
+    "checks": {
+      "3d_root": true,
+      "accepted_choice": true,
+      "arrived_before_transfer": true,
+      "camera": true,
+      "collision_proxies": true,
+      "market_imported": true,
+      "no_errors": true,
+      "one_decision": true,
+      "resident_walked": true,
+      "water_conserved": true
+    },
+    "water": {
+      "consumed": 0,
+      "inventory": 0,
+      "well": 1
+    },
+    "source": "opengameagent_live",
+    "events": [
+      {
+        "need_id": "need-1",
+        "provenance": "opengameagent_live",
+        "resident_id": "fixture:luna",
+        "turn": 1,
+        "type": "resident_need_recorded"
+      }
+    ]
+  },
+  "restore": {
+    "checks": {
+      "3d_root": true,
+      "camera": true,
+      "collision_proxies": true,
+      "gm_resources_unchanged": true,
+      "market_imported": true,
+      "need": true,
+      "need_remains_open": true,
+      "no_consumption": true,
+      "no_errors": true,
+      "no_player_help": true,
+      "no_repeat_decision": true,
+      "not_installed": true,
+      "unchanged_restored_facts": true,
+      "water_conserved": true
+    },
+    "passed": true,
+    "decisions": null,
+    "proof": {
+      "gateway_was_stopped": true,
+      "world_byte_identical": true,
+      "attempt_byte_identical": true,
+      "exit_code": 0
+    }
+  },
+  "old_accounting_reconciled": false,
+  "recorded_cost_cny": 0.003149,
+  "date": "2026-09-10",
+  "real_completions": 1,
+  "world_fixture": true,
+  "supplemental_grant_cny": 2,
+  "usage": {
+    "total": 270,
+    "input": 202,
+    "cached": 0,
+    "output": 68
+  },
+  "model": "kimi-k2.6",
+  "gateway_thread_stopped": true,
+  "old_known_ledger_unchanged": true,
+  "owned_processes_remaining": 0
+}

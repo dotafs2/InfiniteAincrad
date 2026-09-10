@@ -1,0 +1,942 @@
+{
+  "round": "live-use-20260910",
+  "checks": [
+    {
+      "scenario": "used",
+      "real_model": false,
+      "result": {
+        "live": false,
+        "interaction_exit": 0,
+        "restore_exit": 0,
+        "restore_byte_identical": true,
+        "upstream_requests": 2,
+        "budget": {
+          "ledger_id": "44bf1d4e-f03f-4b4c-a4c9-9cec926cbba2",
+          "model": "kimi-k2.6",
+          "authorized_cny": 2.0,
+          "allocation_cap_cny": 2.0,
+          "settled_cny": 0.00476,
+          "prior_unverified_cny": 0.003149,
+          "reserved_cny": 0.0,
+          "liability_cny": 0.007909,
+          "remaining_allocatable_cny": 1.992091,
+          "counts": {
+            "settled": 2
+          },
+          "halted": "",
+          "deadline_utc": 1789042177
+        },
+        "gateway_thread_stopped": true,
+        "previous_ledger_unchanged": true,
+        "identity_preserved": true,
+        "events_prefix_preserved": true
+      },
+      "phases": {
+        "interaction": {
+          "automatic_acceptance": true,
+          "brain_mode": "gateway",
+          "checks": {
+            "3d_root": true,
+            "accepted_choice": true,
+            "approved": true,
+            "camera": true,
+            "collision_proxies": true,
+            "decision_limit": true,
+            "history_prefix_preserved": true,
+            "identity_preserved": true,
+            "installed": true,
+            "market_imported": true,
+            "need": true,
+            "no_errors": true,
+            "one_install": true,
+            "valid_outcome": true,
+            "water_conserved": true
+          },
+          "collision_count": 22,
+          "completed": true,
+          "decision_requests": 2,
+          "decision_runtime": "OpenGameAgent",
+          "decision_source": "opengameagent_fixture",
+          "errors": [],
+          "events": [
+            {
+              "need_id": "need-1",
+              "provenance": "opengameagent_live",
+              "resident_id": "fixture:luna",
+              "turn": 1.0,
+              "type": "resident_need_recorded"
+            },
+            {
+              "capability_id": "well_bucket",
+              "need_id": "need-1",
+              "provenance": "gm_review",
+              "turn": 1.0,
+              "type": "gm_need_approved"
+            },
+            {
+              "amount": 1,
+              "provenance": "opengameagent_fixture",
+              "resident_id": "fixture:luna",
+              "turn": 2,
+              "type": "water_drawn"
+            },
+            {
+              "amount": 1,
+              "provenance": "opengameagent_fixture",
+              "resident_id": "fixture:luna",
+              "turn": 3,
+              "type": "water_consumed"
+            }
+          ],
+          "last_decision_accepted": true,
+          "last_save_reason": "complete",
+          "market_import": {
+            "loader": "GLTFDocument",
+            "path": "res://assets/market/StartingTown_Market_CraftV5.glb",
+            "preserved_scale": true,
+            "root_scale": "(1.0, 1.0, 1.0)"
+          },
+          "need_approval": {
+            "approval_id": "street-gm-review",
+            "code": "gm_need_approved",
+            "need_id": "need-1",
+            "ok": true,
+            "provenance": "gm_review"
+          },
+          "need_install": {
+            "capability_id": "well_bucket",
+            "code": "capability_installed",
+            "ok": true,
+            "provenance": "gm_validated_manifest",
+            "version": "1.0.0"
+          },
+          "passed": true,
+          "player_position": [
+            -2.30189371109009,
+            1.12083721160889,
+            7.90361309051514
+          ],
+          "resident_position": [
+            -1.31997060775757,
+            0.219999998807907,
+            1.09415233135223
+          ],
+          "restored": false,
+          "restored_without_repeat": false,
+          "route_distance_m": 2.50131166666667,
+          "screenshot_approach": "approach.png",
+          "screenshot_complete": "complete.png",
+          "screenshot_draw": "draw.png",
+          "screenshot_need": "need.png",
+          "street_expect": "model-assisted",
+          "used": true,
+          "waited_with_water": false,
+          "water": {
+            "consumed": 1,
+            "inventory": 0,
+            "well": 0
+          },
+          "world_id": "fixture:well-street"
+        },
+        "restore": {
+          "automatic_acceptance": true,
+          "brain_mode": "gateway",
+          "checks": {
+            "3d_root": true,
+            "camera": true,
+            "collision_proxies": true,
+            "facts_unchanged": true,
+            "market_imported": true,
+            "no_errors": true,
+            "restored_stable": true,
+            "unchanged_restored_facts": true,
+            "zero_new_decisions": true
+          },
+          "collision_count": 22,
+          "errors": [],
+          "events": [
+            {
+              "need_id": "need-1",
+              "provenance": "opengameagent_live",
+              "resident_id": "fixture:luna",
+              "turn": 1.0,
+              "type": "resident_need_recorded"
+            },
+            {
+              "capability_id": "well_bucket",
+              "need_id": "need-1",
+              "provenance": "gm_review",
+              "turn": 1.0,
+              "type": "gm_need_approved"
+            },
+            {
+              "amount": 1.0,
+              "provenance": "opengameagent_fixture",
+              "resident_id": "fixture:luna",
+              "turn": 2.0,
+              "type": "water_drawn"
+            },
+            {
+              "amount": 1.0,
+              "provenance": "opengameagent_fixture",
+              "resident_id": "fixture:luna",
+              "turn": 3.0,
+              "type": "water_consumed"
+            }
+          ],
+          "market_import": {
+            "loader": "GLTFDocument",
+            "path": "res://assets/market/StartingTown_Market_CraftV5.glb",
+            "preserved_scale": true,
+            "root_scale": "(1.0, 1.0, 1.0)"
+          },
+          "passed": true,
+          "player_position": [
+            -2.38556671142578,
+            1.12083721160889,
+            7.97326755523682
+          ],
+          "resident_position": [
+            -1.39999997615814,
+            0.219999998807907,
+            1.0
+          ],
+          "restored": true,
+          "restored_without_repeat": true,
+          "resume_state": "complete",
+          "route_distance_m": 0.0,
+          "screenshot_restored": "restored.png",
+          "street_expect": "resume-stable",
+          "used": true,
+          "water": {
+            "consumed": 1,
+            "inventory": 0,
+            "well": 0
+          },
+          "world_id": "fixture:well-street"
+        }
+      }
+    },
+    {
+      "scenario": "wait-before",
+      "real_model": false,
+      "result": {
+        "live": false,
+        "interaction_exit": 0,
+        "restore_exit": 0,
+        "restore_byte_identical": true,
+        "upstream_requests": 1,
+        "budget": {
+          "ledger_id": "5f9d7c3b-d50e-4c54-a838-4506400fe0e2",
+          "model": "kimi-k2.6",
+          "authorized_cny": 2.0,
+          "allocation_cap_cny": 2.0,
+          "settled_cny": 0.00238,
+          "prior_unverified_cny": 0.003149,
+          "reserved_cny": 0.0,
+          "liability_cny": 0.005529,
+          "remaining_allocatable_cny": 1.994471,
+          "counts": {
+            "settled": 1
+          },
+          "halted": "",
+          "deadline_utc": 1789042195
+        },
+        "gateway_thread_stopped": true,
+        "previous_ledger_unchanged": true,
+        "identity_preserved": true,
+        "events_prefix_preserved": true
+      },
+      "phases": {
+        "interaction": {
+          "automatic_acceptance": true,
+          "brain_mode": "gateway",
+          "checks": {
+            "3d_root": true,
+            "accepted_choice": true,
+            "approved": true,
+            "camera": true,
+            "collision_proxies": true,
+            "decision_limit": true,
+            "history_prefix_preserved": true,
+            "identity_preserved": true,
+            "installed": true,
+            "market_imported": true,
+            "need": true,
+            "no_consumption_while_waiting": true,
+            "no_errors": true,
+            "one_install": true,
+            "valid_outcome": true,
+            "wait_stable": true,
+            "water_conserved": true
+          },
+          "collision_count": 22,
+          "decision_requests": 1,
+          "decision_requests_at_wait": 1,
+          "decision_runtime": "OpenGameAgent",
+          "decision_source": "opengameagent_fixture",
+          "deferred_wait_started": 0.735160333333334,
+          "errors": [],
+          "events": [
+            {
+              "need_id": "need-1",
+              "provenance": "opengameagent_live",
+              "resident_id": "fixture:luna",
+              "turn": 1.0,
+              "type": "resident_need_recorded"
+            },
+            {
+              "capability_id": "well_bucket",
+              "need_id": "need-1",
+              "provenance": "gm_review",
+              "turn": 1.0,
+              "type": "gm_need_approved"
+            }
+          ],
+          "last_decision_accepted": true,
+          "last_save_reason": "deferred_wait",
+          "market_import": {
+            "loader": "GLTFDocument",
+            "path": "res://assets/market/StartingTown_Market_CraftV5.glb",
+            "preserved_scale": true,
+            "root_scale": "(1.0, 1.0, 1.0)"
+          },
+          "need_approval": {
+            "approval_id": "street-gm-review",
+            "code": "gm_need_approved",
+            "need_id": "need-1",
+            "ok": true,
+            "provenance": "gm_review"
+          },
+          "need_install": {
+            "capability_id": "well_bucket",
+            "code": "capability_installed",
+            "ok": true,
+            "provenance": "gm_validated_manifest",
+            "version": "1.0.0"
+          },
+          "passed": true,
+          "player_position": [
+            3.39316129684448,
+            1.12083184719086,
+            5.13280344009399
+          ],
+          "resident_position": [
+            0.299999952316284,
+            0.219999998807907,
+            3.0
+          ],
+          "restored": false,
+          "restored_without_repeat": false,
+          "route_distance_m": 0.0,
+          "screenshot_approach": "approach.png",
+          "screenshot_need": "need.png",
+          "screenshot_waited-before-draw": "waited-before-draw.png",
+          "street_expect": "model-assisted",
+          "used": false,
+          "wait_reason": "deferred_wait",
+          "wait_receipt": {
+            "_decision_reason": "Isolated delayed branch test.",
+            "action": "wait",
+            "code": "resident_waited",
+            "ok": true,
+            "provenance": "opengameagent_fixture",
+            "turn": 2
+          },
+          "wait_seconds": 3.00579199999999,
+          "wait_stable": true,
+          "wait_turn": 2,
+          "waited_before_draw": true,
+          "water": {
+            "consumed": 0,
+            "inventory": 0,
+            "well": 1
+          },
+          "world_id": "fixture:well-street"
+        },
+        "restore": {
+          "automatic_acceptance": true,
+          "brain_mode": "gateway",
+          "checks": {
+            "3d_root": true,
+            "camera": true,
+            "collision_proxies": true,
+            "facts_unchanged": true,
+            "market_imported": true,
+            "no_errors": true,
+            "restored_stable": true,
+            "unchanged_restored_facts": true,
+            "zero_new_decisions": true
+          },
+          "collision_count": 22,
+          "errors": [],
+          "events": [
+            {
+              "need_id": "need-1",
+              "provenance": "opengameagent_live",
+              "resident_id": "fixture:luna",
+              "turn": 1.0,
+              "type": "resident_need_recorded"
+            },
+            {
+              "capability_id": "well_bucket",
+              "need_id": "need-1",
+              "provenance": "gm_review",
+              "turn": 1.0,
+              "type": "gm_need_approved"
+            }
+          ],
+          "market_import": {
+            "loader": "GLTFDocument",
+            "path": "res://assets/market/StartingTown_Market_CraftV5.glb",
+            "preserved_scale": true,
+            "root_scale": "(1.0, 1.0, 1.0)"
+          },
+          "passed": true,
+          "player_position": [
+            -2.38556671142578,
+            1.12083721160889,
+            7.97326755523682
+          ],
+          "resident_position": [
+            0.299999952316284,
+            0.219999998807907,
+            3.0
+          ],
+          "restored": true,
+          "restored_without_repeat": false,
+          "resume_state": "wait",
+          "route_distance_m": 0.0,
+          "screenshot_restored": "restored.png",
+          "street_expect": "resume-stable",
+          "used": false,
+          "water": {
+            "consumed": 0,
+            "inventory": 0,
+            "well": 1
+          },
+          "world_id": "fixture:well-street"
+        }
+      }
+    },
+    {
+      "scenario": "wait-after",
+      "real_model": false,
+      "result": {
+        "live": false,
+        "interaction_exit": 0,
+        "restore_exit": 0,
+        "restore_byte_identical": true,
+        "upstream_requests": 2,
+        "budget": {
+          "ledger_id": "abbc968a-c7d5-459f-81e4-8938dcb9831c",
+          "model": "kimi-k2.6",
+          "authorized_cny": 2.0,
+          "allocation_cap_cny": 2.0,
+          "settled_cny": 0.00476,
+          "prior_unverified_cny": 0.003149,
+          "reserved_cny": 0.0,
+          "liability_cny": 0.007909,
+          "remaining_allocatable_cny": 1.992091,
+          "counts": {
+            "settled": 2
+          },
+          "halted": "",
+          "deadline_utc": 1789042211
+        },
+        "gateway_thread_stopped": true,
+        "previous_ledger_unchanged": true,
+        "identity_preserved": true,
+        "events_prefix_preserved": true
+      },
+      "phases": {
+        "interaction": {
+          "automatic_acceptance": true,
+          "brain_mode": "gateway",
+          "checks": {
+            "3d_root": true,
+            "accepted_choice": true,
+            "approved": true,
+            "camera": true,
+            "collision_proxies": true,
+            "decision_limit": true,
+            "history_prefix_preserved": true,
+            "identity_preserved": true,
+            "installed": true,
+            "market_imported": true,
+            "need": true,
+            "no_consumption_while_waiting": true,
+            "no_errors": true,
+            "one_install": true,
+            "valid_outcome": true,
+            "wait_stable": true,
+            "water_conserved": true
+          },
+          "collision_count": 22,
+          "decision_requests": 2,
+          "decision_runtime": "OpenGameAgent",
+          "decision_source": "opengameagent_fixture",
+          "errors": [],
+          "events": [
+            {
+              "need_id": "need-1",
+              "provenance": "opengameagent_live",
+              "resident_id": "fixture:luna",
+              "turn": 1.0,
+              "type": "resident_need_recorded"
+            },
+            {
+              "capability_id": "well_bucket",
+              "need_id": "need-1",
+              "provenance": "gm_review",
+              "turn": 1.0,
+              "type": "gm_need_approved"
+            },
+            {
+              "amount": 1,
+              "provenance": "opengameagent_fixture",
+              "resident_id": "fixture:luna",
+              "turn": 2,
+              "type": "water_drawn"
+            }
+          ],
+          "last_decision_accepted": true,
+          "last_save_reason": "rest_wait",
+          "market_import": {
+            "loader": "GLTFDocument",
+            "path": "res://assets/market/StartingTown_Market_CraftV5.glb",
+            "preserved_scale": true,
+            "root_scale": "(1.0, 1.0, 1.0)"
+          },
+          "need_approval": {
+            "approval_id": "street-gm-review",
+            "code": "gm_need_approved",
+            "need_id": "need-1",
+            "ok": true,
+            "provenance": "gm_review"
+          },
+          "need_install": {
+            "capability_id": "well_bucket",
+            "code": "capability_installed",
+            "ok": true,
+            "provenance": "gm_validated_manifest",
+            "version": "1.0.0"
+          },
+          "passed": true,
+          "player_position": [
+            3.39316129684448,
+            1.12083184719086,
+            5.13280344009399
+          ],
+          "resident_position": [
+            -1.29516017436981,
+            0.219999998807907,
+            1.12334072589874
+          ],
+          "restored": false,
+          "restored_without_repeat": false,
+          "route_distance_m": 2.46300333333333,
+          "screenshot_approach": "approach.png",
+          "screenshot_draw": "draw.png",
+          "screenshot_need": "need.png",
+          "screenshot_waited-with-water": "waited-with-water.png",
+          "street_expect": "model-assisted",
+          "used": false,
+          "wait_reason": "rest_wait",
+          "wait_receipt": {
+            "_decision_reason": "Isolated delayed branch test.",
+            "action": "wait",
+            "code": "resident_waited",
+            "ok": true,
+            "provenance": "opengameagent_fixture",
+            "turn": 3
+          },
+          "wait_seconds": 3.01042655555555,
+          "wait_stable": true,
+          "wait_turn": 3,
+          "waited_with_water": true,
+          "waited_with_water_started": 3.74906166666666,
+          "water": {
+            "consumed": 0,
+            "inventory": 1,
+            "well": 0
+          },
+          "world_id": "fixture:well-street"
+        },
+        "restore": {
+          "automatic_acceptance": true,
+          "brain_mode": "gateway",
+          "checks": {
+            "3d_root": true,
+            "camera": true,
+            "collision_proxies": true,
+            "facts_unchanged": true,
+            "market_imported": true,
+            "no_errors": true,
+            "restored_stable": true,
+            "unchanged_restored_facts": true,
+            "zero_new_decisions": true
+          },
+          "collision_count": 22,
+          "errors": [],
+          "events": [
+            {
+              "need_id": "need-1",
+              "provenance": "opengameagent_live",
+              "resident_id": "fixture:luna",
+              "turn": 1.0,
+              "type": "resident_need_recorded"
+            },
+            {
+              "capability_id": "well_bucket",
+              "need_id": "need-1",
+              "provenance": "gm_review",
+              "turn": 1.0,
+              "type": "gm_need_approved"
+            },
+            {
+              "amount": 1.0,
+              "provenance": "opengameagent_fixture",
+              "resident_id": "fixture:luna",
+              "turn": 2.0,
+              "type": "water_drawn"
+            }
+          ],
+          "market_import": {
+            "loader": "GLTFDocument",
+            "path": "res://assets/market/StartingTown_Market_CraftV5.glb",
+            "preserved_scale": true,
+            "root_scale": "(1.0, 1.0, 1.0)"
+          },
+          "passed": true,
+          "player_position": [
+            -2.38556671142578,
+            1.12083721160889,
+            7.97326755523682
+          ],
+          "resident_position": [
+            -1.39999997615814,
+            0.219999998807907,
+            1.0
+          ],
+          "restored": true,
+          "restored_without_repeat": false,
+          "resume_state": "wait",
+          "route_distance_m": 0.0,
+          "screenshot_restored": "restored.png",
+          "street_expect": "resume-stable",
+          "used": false,
+          "water": {
+            "consumed": 0,
+            "inventory": 1,
+            "well": 0
+          },
+          "world_id": "fixture:well-street"
+        }
+      }
+    },
+    {
+      "scenario": "live",
+      "real_model": true,
+      "result": {
+        "live": true,
+        "interaction_exit": 0,
+        "restore_exit": 0,
+        "restore_byte_identical": true,
+        "upstream_requests": 2,
+        "budget": {
+          "ledger_id": "c449e236-b607-4137-b4c5-f85116042e8b",
+          "model": "kimi-k2.6",
+          "authorized_cny": 2.0,
+          "allocation_cap_cny": 2.0,
+          "settled_cny": 0.0075971,
+          "prior_unverified_cny": 0.003149,
+          "reserved_cny": 0.0,
+          "liability_cny": 0.0107461,
+          "remaining_allocatable_cny": 1.9892539,
+          "counts": {
+            "settled": 2
+          },
+          "halted": "",
+          "deadline_utc": 1789042230
+        },
+        "gateway_thread_stopped": true,
+        "previous_ledger_unchanged": true,
+        "identity_preserved": true,
+        "events_prefix_preserved": true
+      },
+      "phases": {
+        "interaction": {
+          "automatic_acceptance": true,
+          "brain_mode": "gateway",
+          "checks": {
+            "3d_root": true,
+            "accepted_choice": true,
+            "approved": true,
+            "camera": true,
+            "collision_proxies": true,
+            "decision_limit": true,
+            "history_prefix_preserved": true,
+            "identity_preserved": true,
+            "installed": true,
+            "market_imported": true,
+            "need": true,
+            "no_errors": true,
+            "one_install": true,
+            "valid_outcome": true,
+            "water_conserved": true
+          },
+          "collision_count": 22,
+          "completed": true,
+          "decision_requests": 2,
+          "decision_runtime": "OpenGameAgent",
+          "decision_source": "opengameagent_live",
+          "errors": [],
+          "events": [
+            {
+              "need_id": "need-1",
+              "provenance": "opengameagent_live",
+              "resident_id": "fixture:luna",
+              "turn": 1.0,
+              "type": "resident_need_recorded"
+            },
+            {
+              "capability_id": "well_bucket",
+              "need_id": "need-1",
+              "provenance": "gm_review",
+              "turn": 1.0,
+              "type": "gm_need_approved"
+            },
+            {
+              "amount": 1,
+              "provenance": "opengameagent_live",
+              "resident_id": "fixture:luna",
+              "turn": 2,
+              "type": "water_drawn"
+            },
+            {
+              "amount": 1,
+              "provenance": "opengameagent_live",
+              "resident_id": "fixture:luna",
+              "turn": 3,
+              "type": "water_consumed"
+            }
+          ],
+          "last_decision_accepted": true,
+          "last_save_reason": "complete",
+          "market_import": {
+            "loader": "GLTFDocument",
+            "path": "res://assets/market/StartingTown_Market_CraftV5.glb",
+            "preserved_scale": true,
+            "root_scale": "(1.0, 1.0, 1.0)"
+          },
+          "need_approval": {
+            "approval_id": "street-gm-review",
+            "code": "gm_need_approved",
+            "need_id": "need-1",
+            "ok": true,
+            "provenance": "gm_review"
+          },
+          "need_install": {
+            "capability_id": "well_bucket",
+            "code": "capability_installed",
+            "ok": true,
+            "provenance": "gm_validated_manifest",
+            "version": "1.0.0"
+          },
+          "passed": true,
+          "player_position": [
+            -2.30189371109009,
+            1.12083721160889,
+            7.90361309051514
+          ],
+          "resident_position": [
+            -1.29455125331879,
+            0.219999998807907,
+            1.12405753135681
+          ],
+          "restored": false,
+          "restored_without_repeat": false,
+          "route_distance_m": 2.46206333333333,
+          "screenshot_approach": "approach.png",
+          "screenshot_complete": "complete.png",
+          "screenshot_draw": "draw.png",
+          "screenshot_need": "need.png",
+          "street_expect": "model-assisted",
+          "used": true,
+          "waited_with_water": false,
+          "water": {
+            "consumed": 1,
+            "inventory": 0,
+            "well": 0
+          },
+          "world_id": "fixture:well-street"
+        },
+        "restore": {
+          "automatic_acceptance": true,
+          "brain_mode": "gateway",
+          "checks": {
+            "3d_root": true,
+            "camera": true,
+            "collision_proxies": true,
+            "facts_unchanged": true,
+            "market_imported": true,
+            "no_errors": true,
+            "restored_stable": true,
+            "unchanged_restored_facts": true,
+            "zero_new_decisions": true
+          },
+          "collision_count": 22,
+          "errors": [],
+          "events": [
+            {
+              "need_id": "need-1",
+              "provenance": "opengameagent_live",
+              "resident_id": "fixture:luna",
+              "turn": 1.0,
+              "type": "resident_need_recorded"
+            },
+            {
+              "capability_id": "well_bucket",
+              "need_id": "need-1",
+              "provenance": "gm_review",
+              "turn": 1.0,
+              "type": "gm_need_approved"
+            },
+            {
+              "amount": 1.0,
+              "provenance": "opengameagent_live",
+              "resident_id": "fixture:luna",
+              "turn": 2.0,
+              "type": "water_drawn"
+            },
+            {
+              "amount": 1.0,
+              "provenance": "opengameagent_live",
+              "resident_id": "fixture:luna",
+              "turn": 3.0,
+              "type": "water_consumed"
+            }
+          ],
+          "market_import": {
+            "loader": "GLTFDocument",
+            "path": "res://assets/market/StartingTown_Market_CraftV5.glb",
+            "preserved_scale": true,
+            "root_scale": "(1.0, 1.0, 1.0)"
+          },
+          "passed": true,
+          "player_position": [
+            -2.38556671142578,
+            1.12083721160889,
+            7.97326755523682
+          ],
+          "resident_position": [
+            -1.39999997615814,
+            0.219999998807907,
+            1.0
+          ],
+          "restored": true,
+          "restored_without_repeat": true,
+          "resume_state": "complete",
+          "route_distance_m": 0.0,
+          "screenshot_restored": "restored.png",
+          "street_expect": "resume-stable",
+          "used": true,
+          "water": {
+            "consumed": 1,
+            "inventory": 0,
+            "well": 0
+          },
+          "world_id": "fixture:well-street"
+        }
+      }
+    }
+  ],
+  "actual_decisions": [
+    {
+      "index": 1,
+      "actions_available": [
+        "wait",
+        "draw_water"
+      ],
+      "prior_experiences": [],
+      "decision": {
+        "action": "draw_water",
+        "reason": "I can see a working bucket at the well and my need for a well_bucket has been fulfilled (status: fulfilled). My thirst is at 80.0, so I should draw water now that I have the capability to do so."
+      },
+      "usage": {
+        "prompt_tokens": 422,
+        "completion_tokens": 60,
+        "total_tokens": 482,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1
+        }
+      },
+      "seconds": 2.281
+    },
+    {
+      "index": 2,
+      "actions_available": [
+        "wait",
+        "drink_water"
+      ],
+      "prior_experiences": [
+        {
+          "event": "drew_water",
+          "memory": "The well bucket can provide water when the well has water.",
+          "turn": 2
+        }
+      ],
+      "decision": {
+        "action": "drink_water",
+        "reason": "I have 1 water in my inventory and my thirst is at 80. I successfully drew water last turn using the well bucket (which I now have access to). Drinking will reduce my thirst and use the water I have available."
+      },
+      "usage": {
+        "prompt_tokens": 461,
+        "completion_tokens": 60,
+        "total_tokens": 521,
+        "cached_tokens": 256,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        }
+      },
+      "seconds": 2.25
+    }
+  ],
+  "owned_processes_remaining": [],
+  "worker_closed": true,
+  "development_usage_latest": {
+    "checked_at_utc": "2026-09-10T12:09:28.092042+00:00",
+    "participants": [
+      {
+        "role": "supervisor",
+        "id": "01a070f3-f030-7b90-8335-52f01eb1b1c7",
+        "last_event": "2026-09-10T12:08:05.786Z",
+        "input_tokens": 1133569,
+        "cached_input_tokens": 1088384,
+        "output_tokens": 9633,
+        "total_tokens": 1143202
+      },
+      {
+        "role": "developer",
+        "id": "01a08b32-5651-7211-a45e-b6c36a7200cd",
+        "last_event": "2026-09-10T12:04:19.449Z",
+        "input_tokens": 565902,
+        "cached_input_tokens": 508672,
+        "output_tokens": 5931,
+        "total_tokens": 571833
+      }
+    ],
+    "known": true,
+    "raw": 1715035,
+    "cached_input_subset": 1597056,
+    "action": "stop_implementation_and_close",
+    "remaining_to_cap": 84965,
+    "completed_responses_only": true
+  },
+  "codex_actual_cost": "unknown; cached input is an input subset",
+  "kimis_cumulative_validation_cost_cny": 0.0107461
+}

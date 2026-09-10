@@ -1,0 +1,152 @@
+{
+  "contract": [
+    {
+      "case": "success-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "success-1",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "insufficient-0",
+      "passed": true,
+      "get": 1,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "wrong-ledger-0",
+      "passed": true,
+      "get": 1,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "expired-0",
+      "passed": true,
+      "get": 0,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "unsafe-endpoint-0",
+      "passed": true,
+      "get": 0,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "uncertain-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "uncertain-1",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    }
+  ],
+  "graphical": {
+    "passed": true,
+    "checks": {
+      "3d_root": true,
+      "accepted_choice": true,
+      "arrived_before_transfer": true,
+      "camera": true,
+      "collision_proxies": true,
+      "market_imported": true,
+      "no_errors": true,
+      "one_decision": true,
+      "resident_walked": true,
+      "water_conserved": true
+    },
+    "decision_source": "opengameagent_fixture",
+    "decision_runtime": "OpenGameAgent",
+    "decision_requests": 1,
+    "water": {
+      "consumed": 0,
+      "inventory": 0,
+      "well": 1
+    }
+  },
+  "paid_calls": 0,
+  "processes": [
+    {
+      "name": "expired-0",
+      "pid": 99852,
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "name": "insufficient-0",
+      "pid": 101568,
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "name": "success-0",
+      "pid": 102340,
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "name": "success-1",
+      "pid": 100672,
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "name": "uncertain-0",
+      "pid": 100324,
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "name": "uncertain-1",
+      "pid": 99172,
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "name": "unsafe-endpoint-0",
+      "pid": 100840,
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "name": "wrong-ledger-0",
+      "pid": 102236,
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "name": "gateway-graphical",
+      "pid": 100020,
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "name": "oga-regression",
+      "pid": 100332,
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "name": "resume-regression",
+      "pid": 101744,
+      "status": "exited",
+      "exit_code": 0
+    }
+  ]
+}

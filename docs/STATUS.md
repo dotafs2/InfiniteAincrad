@@ -1,27 +1,17 @@
 # Current status
 
-Updated 2026-09-10. Stage: repository initialization and migration preparation.
+Updated 2026-09-10. Formal runtime: Godot 3D street. This is still an explicitly isolated fixture world, not a migration of the original 13 identities.
 
-## Present
+Latest visible result: two persistent fixture residents occupy the SAME saved street. Luna's prior live need/help/draw/drink facts remain unchanged. Mira walks to the well and receives only her own observation: bucket usable, well empty. One actual Kimi K2.6 request chose wait without requesting another bucket. Her private view contains no Luna experiences. Separate-process cold restore preserves world and request journal byte-for-byte, with zero new decisions. See [evidence and screenshot](validation/resident_knowledge_2026-09-10.md).
 
-- Independent repository layout and Godot startup scene.
-- One MVP scope, a single-engine direction and bounded acceptance gates.
-- Migration register, world-continuity requirements and asset exclusions.
-- Contributor and agent entry points.
+Direction review after Luna: real individual knowledge and model choice now work for a second person without a second world or memory sharing. The worker delivered the core and a test draft in about 175k raw; the supervisor fixed the test entry/JSON-number comparison, corrected observation-to-action matching, integrated physical arrival and verified. Core checks and 21 knowledge assertions pass; mock and live graphical encounters plus both cold restores pass. Worker and owned engines/gateways are closed. Failed test attempts remain private evidence.
 
-Verification: on 2026-09-10 the startup scene ran headlessly on Godot 4.7.2 Mono for three frames and exited with code 0 with no stderr output. This checks scene loading, not visual quality, world behavior or an exported release.
+Next single gap: residents lack a bounded way to ask a nearby person for help. Add a source-attributed message and a recipient decision that can refuse or wait; only perceived/received information may enter that resident's view. Do not invent a structured capability request from Mira's prose: this real reply has no `need` object. Do not add a refill, story, new engine or framework merely to force success.
 
-## Not present
+Current live validation usage: this round 274 input + 60 output = 334 tokens, CNY 0.003401. The carried validation total is CNY 0.0141471 within the same CNY 2 grant. Latest private ledger is recorded in `C:/InfiniteAincrad/tmp/continuous-20260910/progress.json`; old ledgers/guards were unchanged, old main-world unknown charges stay unresolved. No always-on paid model loop exists.
 
-- Migrated residents, world-rule execution or save migration.
-- Market-street assets, characters, movement and real player interaction.
-- A model adapter, live Kimi calls, an automated token limiter or an unattended loop.
-- A released game build, a fully verified second-model handoff or multiplayer.
+Computer transfer: user requested upload of all current code, progress and art. The existing heartbeat `infiniteaincrad` is now PAUSED to avoid simultaneous work on two computers. Development baselines and carried fees are preserved in the separate private transfer bundle, not reset. See [new-computer continuation](CONTINUE_ON_ANOTHER_PC.md). Art now includes the editable V5 Blender source, procedural textures and builder dependencies as well as the embedded runtime GLB.
 
-Historical achievements in the source project must not be presented as completed capabilities here. The startup screen only demonstrates that the new project can start.
+Delivery limits: only two temporary fixture identities, text observations generated on physical arrival, authored water capability, placeholder bodies. No actual camera input, autonomous function coding, original-save migration, full three-resident event or distributable build. First street completion UI is scripted; Mira's displayed decision reason comes from Kimi. World still conserves the single initial unit of water; it has no refill or water-source discovery action yet.
 
-## Blocking real-world migration
-
-The latest complete original save and carried API-cost ledger need private verification and synchronization. Public Git snapshots cannot restore that world. Offline scaffolding can proceed; a live same-world acceptance claim cannot.
-
-Next work: the G0 feasibility and continuity checks in [ROADMAP.md](../ROADMAP.md), within a separately started, measured batch. Repository creation has not started that batch.
+Reused MIT OpenGameAgent and official Godot node remain the decision runtime. Defaults stay offline unless gateway mode is explicitly selected. `Run-Street.ps1 -SavePath <private/world.json> -Visitor` opens the same completed test world with Mira. The market V5 GLB and 22 collision proxies are reused. See [MIT base](MIT_PLUGIN_BASE.md), [first real choice](validation/real_kimi_choice_2026-09-10.md), [real use](validation/real_kimi_use_2026-09-10.md). Private keys, configuration, fee databases and saves stay out of Git; the private migration bundle must travel separately.

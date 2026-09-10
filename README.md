@@ -4,7 +4,9 @@ A persistent AI world inspired by Sword Art Online. Residents retain their ident
 
 Maintained by [dotafs2](https://github.com/dotafs2). Project name: **InfiniteAincrad**.
 
-**Status: migration preparation.** This repository has an independent Godot startup scene and a bounded implementation plan. It does not yet contain a playable town, autonomous residents or a migrated live world. The previous experiment's results are reference evidence, not capabilities already delivered here.
+**2026-09-10 transfer:** [New-computer setup, art sources and same-world continuation](docs/CONTINUE_ON_ANOTHER_PC.md). Current real-model evidence now includes two separate resident knowledge states; see [current progress](docs/STATUS.md). Normal launches remain offline unless explicitly configured otherwise.
+
+**Status: a runnable Godot 3D street trial.** Walk through the reused market, approach a resident at the well and help with rope and a bucket. The resident physically draws and drinks water; facts continue after reopening. This is an explicitly offline fixture with temporary character/prop art, not a live-model or migrated-world release. [Verified result](docs/validation/street_rebuild_2026-09-10.md).
 
 ## 第一个可玩的作品
 
@@ -16,21 +18,19 @@ Maintained by [dotafs2](https://github.com/dotafs2). Project name: **InfiniteAin
 
 | Path | Purpose |
 | --- | --- |
-| [game/](game/project.godot) | Godot 4 startup scaffold; no model calls or world loading |
+| [game/](game/project.godot) | Godot 4 walkable 3D street trial; isolated fixture |
 | [ROADMAP.md](ROADMAP.md) | One MVP, sequential acceptance gates and stop limits |
 | [docs/MIGRATION.md](docs/MIGRATION.md) | What may move from the experiment, and how continuity is verified |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Single-engine direction and boundaries for world rules and model adapters |
 | [docs/STATUS.md](docs/STATUS.md) | Implemented, missing and blocked work |
 
-## Run the scaffold
+## Run the 3D street
 
-Open `game/project.godot` in Godot 4 and run the main scene, or use:
+Open `game/project.godot` in Godot 4.7.2 .NET and build/run the default scene, or run `./Run-Street.ps1 -Godot C:/path/to/Godot.exe`. The launcher builds the C# adapter before launching and requires .NET SDK 8 or newer. It also accepts `GODOT_EXE` or an installed `godot` command. Fetch Git LFS assets when cloning.
 
-```powershell
-godot --path game
-```
+WASD moves; click to capture the mouse, Escape releases it. Walk close to the well and press E after the resident asks for help. F8 toggles diagnostic text. The normal scene keeps its separate `user://street-trial/world.json` fixture save; reopen to continue. Damaged saves display an error rather than resetting.
 
-The screen states that migration is pending. It does not generate NPC decisions, spend API credit, initialize a replacement world or load private saves. An editor-free downloadable game is a later acceptance gate, not the current deliverable.
+The market is the existing authored V5 environment. The one resident uses primitive temporary geometry and a labeled offline observation provider running through the MIT OpenGameAgent runtime; no Kimi request is made. Player help passes through the existing need/GM approval/install checks. The old 2D panel remains available as `game/scenes/bootstrap.tscn` for internal tests. See [reused MIT foundations and module boundaries](docs/MIT_PLUGIN_BASE.md).
 
 ## Contributing
 

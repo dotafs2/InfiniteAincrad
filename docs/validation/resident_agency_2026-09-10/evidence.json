@@ -1,0 +1,230 @@
+{
+  "branches": [
+    {
+      "case": "unassisted",
+      "exit_code": 0,
+      "passed": true,
+      "checks": {
+        "3d_root": true,
+        "arrived_before_transfer": true,
+        "camera": true,
+        "collision_proxies": true,
+        "gm_resources_unchanged": true,
+        "market_imported": true,
+        "need": true,
+        "need_remains_open": true,
+        "no_consumption": true,
+        "no_errors": true,
+        "no_player_help": true,
+        "no_repeat_decision": true,
+        "not_installed": true,
+        "resident_walked": true,
+        "water_conserved": true
+      },
+      "water": {
+        "consumed": 0,
+        "inventory": 0,
+        "well": 1
+      },
+      "decision_count": 1
+    },
+    {
+      "case": "unassisted-restored",
+      "exit_code": 0,
+      "passed": true,
+      "checks": {
+        "3d_root": true,
+        "camera": true,
+        "collision_proxies": true,
+        "gm_resources_unchanged": true,
+        "market_imported": true,
+        "need": true,
+        "need_remains_open": true,
+        "no_consumption": true,
+        "no_errors": true,
+        "no_player_help": true,
+        "no_repeat_decision": true,
+        "not_installed": true,
+        "unchanged_restored_facts": true,
+        "water_conserved": true
+      },
+      "water": {
+        "consumed": 0,
+        "inventory": 0,
+        "well": 1
+      },
+      "decision_count": null
+    },
+    {
+      "case": "deferred",
+      "exit_code": 0,
+      "passed": true,
+      "checks": {
+        "3d_root": true,
+        "approved": true,
+        "arrived_before_transfer": true,
+        "camera": true,
+        "collision_proxies": true,
+        "installed": true,
+        "market_imported": true,
+        "need": true,
+        "no_errors": true,
+        "no_repeat_decision": true,
+        "no_water_consumed": true,
+        "no_water_drawn": true,
+        "resident_walked": true,
+        "restored_wait": true,
+        "valid_wait": true,
+        "water_conserved": true
+      },
+      "water": {
+        "consumed": 0,
+        "inventory": 0,
+        "well": 1
+      },
+      "decision_count": 2
+    },
+    {
+      "case": "deferred-restored",
+      "exit_code": 0,
+      "passed": true,
+      "checks": {
+        "3d_root": true,
+        "approved": true,
+        "camera": true,
+        "collision_proxies": true,
+        "installed": true,
+        "market_imported": true,
+        "need": true,
+        "no_errors": true,
+        "no_repeat_decision": true,
+        "no_water_consumed": true,
+        "no_water_drawn": true,
+        "restored_wait": true,
+        "unchanged_restored_facts": true,
+        "valid_wait": true,
+        "water_conserved": true
+      },
+      "water": {
+        "consumed": 0,
+        "inventory": 0,
+        "well": 1
+      },
+      "decision_count": null
+    },
+    {
+      "case": "success",
+      "exit_code": 0,
+      "passed": true,
+      "checks": {
+        "3d_root": true,
+        "actual_use": true,
+        "approved": true,
+        "arrived_before_transfer": true,
+        "camera": true,
+        "collision_proxies": true,
+        "installed": true,
+        "market_imported": true,
+        "need": true,
+        "no_errors": true,
+        "one_consumption": true,
+        "resident_walked": true,
+        "water_conserved": true
+      },
+      "water": {
+        "consumed": 1,
+        "inventory": 0,
+        "well": 0
+      },
+      "decision_count": 3
+    },
+    {
+      "case": "success-restored",
+      "exit_code": 0,
+      "passed": true,
+      "checks": {
+        "3d_root": true,
+        "actual_use": true,
+        "approved": true,
+        "camera": true,
+        "collision_proxies": true,
+        "installed": true,
+        "market_imported": true,
+        "need": true,
+        "no_errors": true,
+        "one_consumption": true,
+        "unchanged_restored_facts": true,
+        "water_conserved": true
+      },
+      "water": {
+        "consumed": 1,
+        "inventory": 0,
+        "well": 0
+      },
+      "decision_count": null
+    }
+  ],
+  "paid_calls": 0,
+  "processes": [
+    {
+      "name": "deferred-restored",
+      "pid": 98260,
+      "exit_code": 0,
+      "status": "exited"
+    },
+    {
+      "name": "deferred",
+      "pid": 96072,
+      "exit_code": 0,
+      "status": "exited"
+    },
+    {
+      "name": "oga-agency",
+      "pid": 97424,
+      "exit_code": 0,
+      "status": "exited"
+    },
+    {
+      "name": "resume-edges-final",
+      "pid": 95784,
+      "exit_code": 0,
+      "status": "exited"
+    },
+    {
+      "name": "resume-edges",
+      "pid": 96628,
+      "exit_code": 0,
+      "status": "exited"
+    },
+    {
+      "name": "reviewed-deferred-restore",
+      "pid": 77300,
+      "exit_code": 0,
+      "status": "exited"
+    },
+    {
+      "name": "success-restored",
+      "pid": 85924,
+      "exit_code": 0,
+      "status": "exited"
+    },
+    {
+      "name": "success",
+      "pid": 96156,
+      "exit_code": 0,
+      "status": "exited"
+    },
+    {
+      "name": "unassisted-restored",
+      "pid": 88168,
+      "exit_code": 0,
+      "status": "exited"
+    },
+    {
+      "name": "unassisted",
+      "pid": 91260,
+      "exit_code": 0,
+      "status": "exited"
+    }
+  ]
+}

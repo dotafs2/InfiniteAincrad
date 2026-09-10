@@ -1,0 +1,108 @@
+{
+  "validated": {
+    "passed": true,
+    "checks": {
+      "3d_root": true,
+      "actual_use": true,
+      "approved": true,
+      "arrived_before_transfer": true,
+      "camera": true,
+      "collision_proxies": true,
+      "installed": true,
+      "market_imported": true,
+      "need": true,
+      "no_errors": true,
+      "one_consumption": true,
+      "resident_walked": true,
+      "water_conserved": true
+    },
+    "decision_runtime": "OpenGameAgent",
+    "decision_source": "opengameagent_fixture",
+    "route_distance_m": 9.79053833333333,
+    "water": {
+      "consumed": 1,
+      "inventory": 0,
+      "well": 0
+    },
+    "restored_without_repeat": false
+  },
+  "restored": {
+    "passed": true,
+    "checks": {
+      "3d_root": true,
+      "actual_use": true,
+      "approved": true,
+      "camera": true,
+      "collision_proxies": true,
+      "installed": true,
+      "market_imported": true,
+      "need": true,
+      "no_errors": true,
+      "one_consumption": true,
+      "unchanged_restored_facts": true,
+      "water_conserved": true
+    },
+    "decision_runtime": null,
+    "decision_source": null,
+    "route_distance_m": 0.0,
+    "water": {
+      "consumed": 1,
+      "inventory": 0,
+      "well": 0
+    },
+    "restored_without_repeat": true
+  },
+  "upstream_commit": "b1a9f149d7cfd9e6659fd6aeb2ed4cfc275d0f84",
+  "real_paid_calls": 0,
+  "processes": [
+    {
+      "name": "decision-boundary",
+      "pid": 93940,
+      "status": "exited",
+      "exit_code": 0,
+      "elapsed_seconds": 0.422
+    },
+    {
+      "name": "kernel-regression",
+      "pid": 92484,
+      "status": "exited",
+      "exit_code": 0,
+      "elapsed_seconds": 0.406
+    },
+    {
+      "name": "oga-cold-restore",
+      "pid": 95424,
+      "status": "exited",
+      "exit_code": 0,
+      "elapsed_seconds": 4.5
+    },
+    {
+      "name": "oga-core",
+      "pid": 90660,
+      "status": "exited",
+      "exit_code": 0,
+      "elapsed_seconds": 0.985
+    },
+    {
+      "name": "oga-final",
+      "pid": 94200,
+      "status": "exited",
+      "exit_code": 0,
+      "elapsed_seconds": 0.875
+    },
+    {
+      "name": "oga-street-fixed",
+      "pid": 94336,
+      "status": "exited",
+      "exit_code": 0,
+      "elapsed_seconds": 9.282
+    },
+    {
+      "name": "oga-street",
+      "pid": 91976,
+      "status": "exited",
+      "exit_code": 1,
+      "elapsed_seconds": 42.672
+    }
+  ]
+}
