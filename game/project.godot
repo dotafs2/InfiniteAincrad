@@ -1,0 +1,17 @@
+; Independent Godot scaffold. No private saves or model connections are loaded.
+config_version=5
+
+[application]
+config/name="InfiniteAincrad"
+run/main_scene="res://scenes/bootstrap.tscn"
+config/features=PackedStringArray("4.0", "GL Compatibility")
+
+[display]
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/stretch/mode="canvas_items"
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.08, 0.1, 0.13, 1)

@@ -1,0 +1,45 @@
+# Godot-generated data
+.godot/
+.import/
+export_credentials.cfg
+*.translation
+
+# Private state and configuration
+.env
+.env.*
+!.env.example
+Saved/
+saved/
+saves/
+private/
+secrets/
+budget/
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.db
+*.guard.json
+*.pem
+*.key
+
+# Build and development output
+build/
+dist/
+exports/
+validation/local/
+tmp/
+logs/
+*.log
+*.dmp
+__pycache__/
+.venv/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Asset backups and known restricted source dependencies
+*.blend1
+*.blend2
+assets/characters/kirito/
+Art/ExistingSAO/
