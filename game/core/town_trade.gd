@@ -2,11 +2,15 @@ extends "res://core/town_life.gd"
 ## Bounded axe repair and tool-use continuation for the schema-2 town fixture.
 ## Legacy arrays remain authoritative; godot.trade only records new command/job state.
 
-const SPEECH_ACTIONS := ["visitor_reply", "ask_help", "reply_help", "cancel_help", "offer_repair", "accept", "reject", "cancel", "share_skill"]
+const SPEECH_ACTIONS := ["visitor_reply", "ask_help", "reply_help", "cancel_help", "offer_repair", "accept", "reject", "cancel", "share_skill", "refer_skill"]
 const SHAREABLE_SKILLS := ["wood_repair", "metal_repair"]
 const SKILL_NOTICE_TEXT := {
 	"wood_repair": "I can repair wooden handles.",
 	"metal_repair": "I can repair metal edges.",
+}
+const SKILL_REFERRAL_TEXT := {
+	"wood_repair": "%s told me they can repair wooden handles.",
+	"metal_repair": "%s told me they can repair metal edges.",
 }
 const TRADE_RANGE := 3.0
 const REPAIR_SECONDS := 60.0
@@ -172,6 +176,9 @@ func _public_skills(observer_id: String, resident_id: String) -> Array:
 		if event.get("type") == "skill_notice" and event.get("skill_id") in ["metal_repair", "wood_repair"] and event.get("actor_id") == resident_id and event.get("recipient_ids", []).has(observer_id):
 			if event.skill_id not in result:
 				result.append(event.skill_id)
+	for referred_skill in _known_referral_skills(observer_id, resident_id):
+		if referred_skill not in result:
+			result.append(referred_skill)
 	return result
 
 func _has_skill(id: String, skill_id: String) -> bool:
@@ -185,6 +192,125 @@ func _already_shared_skill(speaker_id: String, recipient_id: String, skill_id: S
 
 func _skill_notice_text(skill_id: String) -> String:
 	return str(SKILL_NOTICE_TEXT.get(skill_id, "I can perform this repair."))
+
+func _skill_referral_text(referred_name: String, skill_id: String) -> String:
+	var template := str(SKILL_REFERRAL_TEXT.get(skill_id, "%s told me they can perform this repair."))
+	return template % referred_name
+
+func _direct_skill_notices(referrer_id: String) -> Array:
+	# Read-only selection of every canonical DIRECT skill_notice that referrer_id actually received.
+	# Never sourced from role hints, own skills, freeform text/speech, reply_help, or unseen notices.
+	# Historical truth: does not require the referrer to be currently active, nor query the source's
+	# current position or skills. Only requires a known identity for the source actor.
+	var result: Array = []
+	if referrer_id.is_empty() or resident(referrer_id).is_empty():
+		return result
+	for event in _state.life.events:
+		if not event is Dictionary or event.get("type") != "skill_notice":
+			continue
+		if event.get("skill_id") not in SHAREABLE_SKILLS:
+			continue
+		if event.get("contractual", true) != false:
+			continue
+		var source_actor: String = str(event.get("actor_id", ""))
+		if source_actor.is_empty() or source_actor == referrer_id:
+			continue
+		if resident(source_actor).is_empty():
+			continue
+		if not event.get("event_id") is String or str(event.get("event_id", "")).is_empty():
+			continue
+		if typeof(event.get("seq")) != TYPE_INT or int(event.get("seq", 0)) < 1:
+			continue
+		var recipients: Variant = event.get("recipient_ids")
+		if not recipients is Array or recipients.size() != 2 or not recipients.has(source_actor) or not recipients.has(referrer_id):
+			continue
+		if str(event.get("subject_id", "")) != referrer_id:
+			continue
+		if str(event.get("text", "")) != _skill_notice_text(str(event.get("skill_id", ""))):
+			continue
+		result.append(event)
+	return result
+
+func _referral_source_notice(referrer_id: String, source_event_id: String) -> Dictionary:
+	# Select the EXACT canonical DIRECT source notice by event id from the referrer's received notices.
+	if source_event_id.is_empty():
+		return {}
+	for event in _direct_skill_notices(referrer_id):
+		if str(event.get("event_id", "")) == source_event_id:
+			return event
+	return {}
+
+func _valid_referral_record(event: Dictionary, observer_id: String) -> bool:
+	# Structural attestation in world records: a referral is only valid knowledge when its own
+	# event id is present, its recipient is a known identity, and it resolves to an actual original
+	# DIRECT source notice whose actor/recipients/seq/skill all match. This is not a cryptographic
+	# save-forgery guarantee; it is a consistency check over the recorded history.
+	if not event is Dictionary or event.get("type") != "skill_referral":
+		return false
+	if event.get("skill_id") not in SHAREABLE_SKILLS:
+		return false
+	if event.get("contractual", true) != false:
+		return false
+	var referral_event_id: String = str(event.get("event_id", ""))
+	if referral_event_id.is_empty():
+		return false
+	var referrer_id: String = str(event.get("actor_id", ""))
+	var referred_id: String = str(event.get("referred_resident_id", ""))
+	var recipient_id: String = str(event.get("subject_id", ""))
+	if referrer_id.is_empty() or referred_id.is_empty() or recipient_id.is_empty():
+		return false
+	if referrer_id == referred_id or referrer_id == recipient_id or referred_id == recipient_id:
+		return false
+	if resident(referrer_id).is_empty() or resident(referred_id).is_empty() or resident(recipient_id).is_empty():
+		return false
+	var recipients: Variant = event.get("recipient_ids")
+	if not recipients is Array or recipients.size() != 2 or not recipients.has(referrer_id) or not recipients.has(recipient_id):
+		return false
+	if not recipients.has(observer_id):
+		return false
+	var source_event_id: String = str(event.get("source_event_id", ""))
+	var source_seq: int = int(event.get("source_seq", 0))
+	if source_event_id.is_empty() or source_seq < 1:
+		return false
+	var source_notice := _referral_source_notice(referrer_id, source_event_id)
+	if source_notice.is_empty():
+		return false
+	if str(source_notice.get("actor_id", "")) != referred_id:
+		return false
+	if str(source_notice.get("skill_id", "")) != str(event.get("skill_id", "")):
+		return false
+	if int(source_notice.get("seq", 0)) != source_seq:
+		return false
+	if int(event.get("seq", 0)) <= source_seq:
+		return false
+	return true
+
+func _already_referred(speaker_id: String, recipient_id: String, referred_id: String, skill_id: String) -> bool:
+	for event in _state.life.events:
+		if event.get("type") == "skill_referral" and event.get("actor_id") == speaker_id and event.get("skill_id") == skill_id and event.get("referred_resident_id") == referred_id and event.get("recipient_ids", []).has(recipient_id):
+			if _valid_referral_record(event, recipient_id):
+				return true
+	return false
+
+func _known_referral_skills(observer_id: String, resident_id: String) -> Array:
+	# Referral-derived skills are only usable within the existing nearby/active gates and never
+	# pretend to be directly observed; they are attributed historical hearsay. Only structurally
+	# valid referral records grant knowledge.
+	var result: Array = []
+	if observer_id == resident_id or observer_id not in active_ids() or resident_id not in active_ids():
+		return result
+	if position_of(observer_id).distance_to(position_of(resident_id)) > TRADE_RANGE:
+		return result
+	for event in _state.life.events:
+		if event.get("type") != "skill_referral" or event.get("referred_resident_id") != resident_id or event.get("skill_id") not in SHAREABLE_SKILLS:
+			continue
+		if not event.get("recipient_ids", []).has(observer_id):
+			continue
+		if not _valid_referral_record(event, observer_id):
+			continue
+		if event.skill_id not in result:
+			result.append(event.skill_id)
+	return result
 
 func _required_skill(part: String) -> String:
 	return "metal_repair" if part == "edge" else "wood_repair"
@@ -255,6 +381,21 @@ func trade_options(id: String) -> Array:
 				if not _has_skill(id, skill_id) or _already_shared_skill(id, other, skill_id):
 					continue
 				_option(result, {"id": "share-skill:" + other + ":" + skill_id, "label": "Tell " + resident(other).name + " I can repair " + ("wooden handles" if skill_id == "wood_repair" else "metal edges"), "action": "share_skill", "counterparty": other, "_skill_id": skill_id, "_decision": {"action": "share_skill", "recipient_id": other, "skill_id": skill_id, "text": _skill_notice_text(skill_id)}})
+
+		# H22: voluntary one-hop sourced skill referral. Read-only option generation; no mutation.
+		# Iterate every valid DIRECT source notice the speaker received, not just the first per skill,
+		# so a speaker who heard two workers can choose which referred person to name.
+		for other in active_ids():
+			if other == id or position_of(id).distance_to(position_of(other)) > HEARING_RANGE:
+				continue
+			for source_notice in _direct_skill_notices(id):
+				var skill_id: String = str(source_notice.get("skill_id", ""))
+				var referred_id: String = str(source_notice.get("actor_id", ""))
+				var source_event_id: String = str(source_notice.get("event_id", ""))
+				var source_seq: int = int(source_notice.get("seq", 0))
+				if referred_id == other or _already_referred(id, other, referred_id, skill_id):
+					continue
+				_option(result, {"id": "refer-skill:" + other + ":" + referred_id + ":" + skill_id + ":" + source_event_id, "label": "Tell " + resident(other).name + " that " + resident(referred_id).name + " told me they can repair " + ("wooden handles" if skill_id == "wood_repair" else "metal edges"), "action": "refer_skill", "counterparty": other, "_skill_id": skill_id, "_referred_id": referred_id, "_source_event_id": source_event_id, "_source_seq": source_seq, "_decision": {"action": "refer_skill", "recipient_id": other, "referred_resident_id": referred_id, "skill_id": skill_id, "source_event_id": source_event_id, "source_seq": source_seq}})
 
 		for other in active_ids():
 			if other == id or position_of(id).distance_to(position_of(other)) > HEARING_RANGE:
@@ -402,6 +543,12 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 			return shared
 		commands[command_id] = {"payload": payload, "status": "completed"}
 		return shared
+	if action == "refer_skill":
+		var referred := _apply_skill_referral(id, option, command_id, provenance, speech)
+		if not referred.ok:
+			return referred
+		commands[command_id] = {"payload": payload, "status": "completed"}
+		return referred
 	if action in ["eat_ration", "rest", "harvest_ration"]:
 		var started := super.start_action(id, action, command_id, provenance)
 		if not started.ok:
@@ -429,6 +576,35 @@ func _apply_share_skill(id: String, option: Dictionary, command_id: String, prov
 		event["speech"] = speech
 	_append_life_event(event)
 	return {"ok": true, "code": "skill_notice", "skill_id": skill_id, "recipient_id": recipient_id, "event_id": event.event_id}
+
+func _apply_skill_referral(id: String, option: Dictionary, command_id: String, provenance: String, speech: String) -> Dictionary:
+	var recipient_id: String = str(option.get("counterparty", ""))
+	var skill_id: String = str(option.get("_skill_id", ""))
+	var referred_id: String = str(option.get("_referred_id", ""))
+	var source_event_id: String = str(option.get("_source_event_id", ""))
+	var source_seq: int = int(option.get("_source_seq", 0))
+	if skill_id not in SHAREABLE_SKILLS or recipient_id == id or referred_id == id or referred_id == recipient_id:
+		return _failure("skill_referral_unavailable")
+	if recipient_id not in active_ids() or position_of(id).distance_to(position_of(recipient_id)) > HEARING_RANGE:
+		return _failure("skill_referral_unavailable")
+	if source_event_id.is_empty() or source_seq < 1 or resident(referred_id).is_empty():
+		return _failure("skill_referral_unavailable")
+	# Re-validate the actual canonical DIRECT source notice by exact event id; never trust the option payload alone.
+	var source_notice := _referral_source_notice(id, source_event_id)
+	if source_notice.is_empty() or str(source_notice.get("actor_id", "")) != referred_id or str(source_notice.get("skill_id", "")) != skill_id or int(source_notice.get("seq", 0)) != source_seq:
+		return _failure("skill_referral_unavailable")
+	if _already_referred(id, recipient_id, referred_id, skill_id):
+		return _failure("skill_referral_unavailable")
+	var referred_name: String = str(resident(referred_id).get("name", referred_id))
+	var event := {"type": "skill_referral", "actor_id": id, "subject_id": recipient_id, "recipient_ids": [id, recipient_id],
+		"operation_id": command_id, "source": provenance, "provenance": provenance, "contractual": false,
+		"referred_resident_id": referred_id, "skill_id": skill_id,
+		"source_event_id": source_event_id, "source_seq": source_seq,
+		"text": _skill_referral_text(referred_name, skill_id)}
+	if not speech.is_empty():
+		event["speech"] = speech
+	_append_life_event(event)
+	return {"ok": true, "code": "skill_referral", "skill_id": skill_id, "referred_resident_id": referred_id, "recipient_id": recipient_id, "event_id": event.event_id}
 
 func _apply_trade_start(id: String, option: Dictionary, command_id: String, provenance: String) -> Dictionary:
 	var action: String = option.action
@@ -686,6 +862,22 @@ func resident_view(id: String = "") -> Dictionary:
 			"source": event.get("source", ""), "provenance": event.get("provenance", ""),
 			"text": event.get("text", "")})
 	view["known_skill_notices"] = known_notices
+	var known_referrals: Array = []
+	for event in _state.life.events:
+		if event.get("type") != "skill_referral" or event.get("skill_id") not in SHAREABLE_SKILLS or not event.get("recipient_ids", []).has(id) or event.get("actor_id") == id:
+			continue
+		if not _valid_referral_record(event, id):
+			continue
+		var referrer_id: String = str(event.get("actor_id", ""))
+		var referred_resident_id: String = str(event.get("referred_resident_id", ""))
+		# Attributed historical record: original source identity and date reference, no transcript,
+		# no current availability, no position, no resources. Survives A inactive/far/skill removal.
+		known_referrals.append({"referrer_id": referrer_id, "referred_resident_id": referred_resident_id,
+			"skill_id": event.get("skill_id", ""), "referral_event_id": event.get("event_id", ""),
+			"seq": event.get("seq", 0), "source_event_id": event.get("source_event_id", ""),
+			"source_seq": event.get("source_seq", 0), "provenance": event.get("provenance", ""),
+			"text": event.get("text", "")})
+	view["known_skill_referrals"] = known_referrals
 	view["contracts"] = own_contracts
 	view["life_account"] = _trade_account(id).duplicate(true)
 	view["wallet"] = {"coins_col": resident(id).get("coins_col", 0)}
