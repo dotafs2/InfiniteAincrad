@@ -8,7 +8,7 @@ The current goal and stop thresholds are newly restated in this repository. The 
 
 | Source | Purpose here | Current state |
 | --- | --- | --- |
-| `ThreeHearthsVillage/Plugins/ThreeHearths/Source/ThreeHearths/Private/HearthAincradLife.cpp` and relevant resident runtime actions | Preserve the exact rules for a bounded repair/delivery/payment/use event | Not copied or ported |
+| `ThreeHearthsVillage/Plugins/ThreeHearths/Source/ThreeHearths/Private/HearthAincradLife.cpp` and relevant resident runtime actions | Preserve the exact rules for a bounded repair/delivery/payment/use event | Edge repair/delivery/payment ported and fixture-verified; handle/tool use and private-source replay pending |
 | `HearthAincradIntent.cpp`, `HearthAincradSurvival.cpp`, `HearthAincradForaging.cpp` in that module | Preserve only facts and rules needed for the selected event and continuity | Eat/rest/forage and live-time depletion/growth ported into `game/core/town_life.gd`; intent/runtime history retained, execution not yet ported |
 | `Prototypes/StartingTownWalkthrough/Art/ReferenceScenes` | Select a small authored market-street asset subset after dependency and redistribution review | V5 market and editable Blender source obtained and hash verified |
 | `Prototypes/StartingTownWalkthrough/Art/Asset_Publication.md` | Asset provenance and exclusions | Referenced, not a blanket license |
@@ -30,5 +30,7 @@ Launch that copy with `./Run-Street.ps1 -Town -SavePath <output/world.json>`. It
 5. Show its result in the street, perform a cold restart, and verify that the following decision receives the actual experience.
 
 The personal-intent journal's 128-entry ceiling is not the authoritative transaction deduplication ledger. Treat actual continuity failures locally; do not use it to justify a wholesale state-platform rewrite.
+
+The first Godot repair slice is documented in [the 2026-09-11 fixture validation](validation/repair_work_2026-09-11.md). It does not automatically resume an old active contract and does not create a damaged tool or missing material. A real migrated copy must already contain a legal item, skill, balance and material state before the new interaction is offered.
 
 Old UE experiments, unrelated websites, repeated capture outputs, local tool paths, temporary helpers, paid-run controllers, API keys, private configuration, operational ledgers and Saved directories remain outside this project. The source Kirito asset and its derived files are not approved for redistribution and are excluded.

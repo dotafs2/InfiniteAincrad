@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "id": "StartingTown_Floor1_HeroKit",
+  "style_id": "floor1_starting_town_hero_kit_v1",
+  "seed": 101,
+  "blender_version": "5.2.1 LTS",
+  "source": "project-authored Codex-assisted Blender Python",
+  "copyright_boundary": "original broad setting language; no traced frames or restricted source assets",
+  "design_basis": [
+    "ancient-European fortified starting-city language",
+    "warm stone/timber commerce",
+    "walkable gate and readable resident-scale props",
+    "restrained blue system-light accents"
+  ],
+  "embedded_project_texture_sha256": {
+    "stone_normal.png": "a1e7d8614f7546705c18b1f103649e88f09a07f168426b44124754d39aed7586",
+    "wood_normal.png": "9afaba21f12edba28b6c7a7bee6c0bbe079af31eabf280f1f5ba7ebd79e8a55a",
+    "plaster_normal.png": "a1e7d8614f7546705c18b1f103649e88f09a07f168426b44124754d39aed7586"
+  },
+  "glb": "StartingTown_Floor1_HeroKit.glb",
+  "sha256": "7620ee5e2d0fc13aba95773820a01c2c7c4cd420edc8a1e3faf24435189f62ce",
+  "visual_triangles": 974262,
+  "collision_triangles": 324,
+  "mesh_objects": 32,
+  "renders": [
+    "docs/validation/floor1_art_2026-09-11/floor1_hero.png",
+    "docs/validation/floor1_art_2026-09-11/floor1_gate_detail.png"
+  ],
+  "modules": [
+    {
+      "id": "plaza",
+      "walkable_width_m": 12.0,
+      "waystone_is_original": true
+    },
+    {
+      "id": "gatehouse",
+      "dimensions_m": [
+        15.8,
+        4.8,
+        12.8
+      ],
+      "walkable_opening_m": [
+        4.8,
+        6.6
+      ]
+    },
+    {
+      "id": "F1_wayfarer_inn",
+      "dimensions_m": [
+        8.705,
+        6.5,
+        7.2
+      ],
+      "variant_seed": 11
+    },
+    {
+      "id": "F1_supply_shop",
+      "dimensions_m": [
+        8.572,
+        6.5,
+        7.481
+      ],
+      "variant_seed": 29
+    },
+    {
+      "id": "forge",
+      "dimensions_m": [
+        8.2,
+        6.8,
+        10.8
+      ],
+      "interactive_props": [
+        "hearth",
+        "anvil",
+        "quench_barrel",
+        "tool_rack"
+      ]
+    }
+  ],
+  "props": [
+    {
+      "id": "contract_notice_board",
+      "future_state_surface": true
+    },
+    {
+      "id": "street_lantern",
+      "instances": 4
+    },
+    {
+      "id": "merchant_handcart",
+      "wheel_spokes": 20
+    }
+  ],
+  "visual_approval": false,
+  "first_version_complete": false
+}

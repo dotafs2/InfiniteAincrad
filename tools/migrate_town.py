@@ -52,7 +52,7 @@ def prepare(raw):
         'active_ids': active, 'all_original_fields_preserved': True,
         'status': 'separate migration-validation copy, not promoted maintained world',
         'unsupported_execution': ['UE coordinates/routes/camera geometry', 'pending UE operations',
-                                  'UE repair/communication execution (history preserved)',
+                                  'pending UE repair/communication execution (history preserved; never auto-resumed)',
                                   'old private billing authorization and pending model requests'],
         'placement_change': 'Three work locations mapped to explicit Godot market anchors; old coordinates retained',
     }

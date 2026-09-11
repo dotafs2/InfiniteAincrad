@@ -1,0 +1,493 @@
+{
+  "suite": "environment_v2_export_audit",
+  "glbs": 60,
+  "game_scenes": 20,
+  "checks": "hashes, attributes, finite positions, wind masks, nondegenerate topology, monotonic LOD triangles",
+  "triangles_by_lod": [
+    575121,
+    240400,
+    126890
+  ],
+  "assets": [
+    {
+      "id": "F1_ancient_oak",
+      "lod": 0,
+      "triangles": 139062,
+      "moving_vertices": 111606,
+      "rigid_vertices": 4507,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_ancient_oak",
+      "lod": 1,
+      "triangles": 52538,
+      "moving_vertices": 40626,
+      "rigid_vertices": 4245,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_ancient_oak",
+      "lod": 2,
+      "triangles": 28016,
+      "moving_vertices": 17592,
+      "rigid_vertices": 4130,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_birch_grove",
+      "lod": 0,
+      "triangles": 47616,
+      "moving_vertices": 38610,
+      "rigid_vertices": 3486,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_birch_grove",
+      "lod": 1,
+      "triangles": 25596,
+      "moving_vertices": 19326,
+      "rigid_vertices": 3306,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_birch_grove",
+      "lod": 2,
+      "triangles": 13996,
+      "moving_vertices": 8361,
+      "rigid_vertices": 3288,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_cypress_column",
+      "lod": 0,
+      "triangles": 66068,
+      "moving_vertices": 55440,
+      "rigid_vertices": 1620,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_cypress_column",
+      "lod": 1,
+      "triangles": 20312,
+      "moving_vertices": 18144,
+      "rigid_vertices": 1350,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_cypress_column",
+      "lod": 2,
+      "triangles": 7484,
+      "moving_vertices": 5994,
+      "rigid_vertices": 1344,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_stone_pine",
+      "lod": 0,
+      "triangles": 49068,
+      "moving_vertices": 41160,
+      "rigid_vertices": 1212,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_stone_pine",
+      "lod": 1,
+      "triangles": 15040,
+      "moving_vertices": 13416,
+      "rigid_vertices": 1010,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_stone_pine",
+      "lod": 2,
+      "triangles": 5532,
+      "moving_vertices": 4410,
+      "rigid_vertices": 1004,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_orchard_apple",
+      "lod": 0,
+      "triangles": 77458,
+      "moving_vertices": 61490,
+      "rigid_vertices": 4969,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_orchard_apple",
+      "lod": 1,
+      "triangles": 41566,
+      "moving_vertices": 30662,
+      "rigid_vertices": 4315,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_orchard_apple",
+      "lod": 2,
+      "triangles": 22660,
+      "moving_vertices": 13271,
+      "rigid_vertices": 4032,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_young_maple",
+      "lod": 0,
+      "triangles": 105490,
+      "moving_vertices": 84194,
+      "rigid_vertices": 3737,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_young_maple",
+      "lod": 1,
+      "triangles": 40110,
+      "moving_vertices": 30662,
+      "rigid_vertices": 3475,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_young_maple",
+      "lod": 2,
+      "triangles": 21540,
+      "moving_vertices": 13271,
+      "rigid_vertices": 3360,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_flowering_shrub",
+      "lod": 0,
+      "triangles": 17986,
+      "moving_vertices": 14688,
+      "rigid_vertices": 612,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_flowering_shrub",
+      "lod": 1,
+      "triangles": 8932,
+      "moving_vertices": 7164,
+      "rigid_vertices": 510,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_flowering_shrub",
+      "lod": 2,
+      "triangles": 4744,
+      "moving_vertices": 3195,
+      "rigid_vertices": 510,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_berry_bush",
+      "lod": 0,
+      "triangles": 14620,
+      "moving_vertices": 9690,
+      "rigid_vertices": 2176,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_berry_bush",
+      "lod": 1,
+      "triangles": 7648,
+      "moving_vertices": 4758,
+      "rigid_vertices": 1462,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_berry_bush",
+      "lod": 2,
+      "triangles": 4664,
+      "moving_vertices": 1932,
+      "rigid_vertices": 1462,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_fern_patch",
+      "lod": 0,
+      "triangles": 9882,
+      "moving_vertices": 8640,
+      "rigid_vertices": 135,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_fern_patch",
+      "lod": 1,
+      "triangles": 4974,
+      "moving_vertices": 4272,
+      "rigid_vertices": 135,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_fern_patch",
+      "lod": 2,
+      "triangles": 2370,
+      "moving_vertices": 1809,
+      "rigid_vertices": 135,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_meadow_grass",
+      "lod": 0,
+      "triangles": 2496,
+      "moving_vertices": 2340,
+      "rigid_vertices": 0,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_meadow_grass",
+      "lod": 1,
+      "triangles": 1128,
+      "moving_vertices": 1128,
+      "rigid_vertices": 0,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_meadow_grass",
+      "lod": 2,
+      "triangles": 336,
+      "moving_vertices": 378,
+      "rigid_vertices": 0,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_wildflower_patch",
+      "lod": 0,
+      "triangles": 7796,
+      "moving_vertices": 6540,
+      "rigid_vertices": 125,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_wildflower_patch",
+      "lod": 1,
+      "triangles": 3938,
+      "moving_vertices": 3288,
+      "rigid_vertices": 125,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_wildflower_patch",
+      "lod": 2,
+      "triangles": 2042,
+      "moving_vertices": 1491,
+      "rigid_vertices": 125,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_ivy_wall_panel",
+      "lod": 0,
+      "triangles": 5184,
+      "moving_vertices": 3780,
+      "rigid_vertices": 450,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_ivy_wall_panel",
+      "lod": 1,
+      "triangles": 2160,
+      "moving_vertices": 1296,
+      "rigid_vertices": 450,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_ivy_wall_panel",
+      "lod": 2,
+      "triangles": 1264,
+      "moving_vertices": 450,
+      "rigid_vertices": 450,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_reed_cluster",
+      "lod": 0,
+      "triangles": 2912,
+      "moving_vertices": 1923,
+      "rigid_vertices": 291,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_reed_cluster",
+      "lod": 1,
+      "triangles": 1768,
+      "moving_vertices": 1069,
+      "rigid_vertices": 237,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_reed_cluster",
+      "lod": 2,
+      "triangles": 1200,
+      "moving_vertices": 591,
+      "rigid_vertices": 215,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_mossy_fallen_log",
+      "lod": 0,
+      "triangles": 4218,
+      "moving_vertices": 0,
+      "rigid_vertices": 2802,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_mossy_fallen_log",
+      "lod": 1,
+      "triangles": 3318,
+      "moving_vertices": 0,
+      "rigid_vertices": 2023,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_mossy_fallen_log",
+      "lod": 2,
+      "triangles": 2822,
+      "moving_vertices": 0,
+      "rigid_vertices": 1559,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_herb_planter",
+      "lod": 0,
+      "triangles": 14308,
+      "moving_vertices": 6820,
+      "rigid_vertices": 8281,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_herb_planter",
+      "lod": 1,
+      "triangles": 5976,
+      "moving_vertices": 3424,
+      "rigid_vertices": 2686,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_herb_planter",
+      "lod": 2,
+      "triangles": 4044,
+      "moving_vertices": 1591,
+      "rigid_vertices": 2686,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_mossy_boulder_cluster",
+      "lod": 0,
+      "triangles": 2100,
+      "moving_vertices": 0,
+      "rigid_vertices": 3528,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_mossy_boulder_cluster",
+      "lod": 1,
+      "triangles": 1236,
+      "moving_vertices": 0,
+      "rigid_vertices": 2388,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_mossy_boulder_cluster",
+      "lod": 2,
+      "triangles": 612,
+      "moving_vertices": 0,
+      "rigid_vertices": 1476,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_roadside_milestone",
+      "lod": 0,
+      "triangles": 1449,
+      "moving_vertices": 0,
+      "rigid_vertices": 2897,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_roadside_milestone",
+      "lod": 1,
+      "triangles": 588,
+      "moving_vertices": 0,
+      "rigid_vertices": 1060,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_roadside_milestone",
+      "lod": 2,
+      "triangles": 436,
+      "moving_vertices": 0,
+      "rigid_vertices": 916,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_timber_fence_vine",
+      "lod": 0,
+      "triangles": 1916,
+      "moving_vertices": 1050,
+      "rigid_vertices": 560,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_timber_fence_vine",
+      "lod": 1,
+      "triangles": 1064,
+      "moving_vertices": 420,
+      "rigid_vertices": 524,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_timber_fence_vine",
+      "lod": 2,
+      "triangles": 772,
+      "moving_vertices": 144,
+      "rigid_vertices": 524,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_stone_water_trough",
+      "lod": 0,
+      "triangles": 2384,
+      "moving_vertices": 0,
+      "rigid_vertices": 5360,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_stone_water_trough",
+      "lod": 1,
+      "triangles": 1064,
+      "moving_vertices": 0,
+      "rigid_vertices": 2064,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_stone_water_trough",
+      "lod": 2,
+      "triangles": 912,
+      "moving_vertices": 0,
+      "rigid_vertices": 1920,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_canvas_rest_shelter",
+      "lod": 0,
+      "triangles": 3108,
+      "moving_vertices": 0,
+      "rigid_vertices": 7560,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_canvas_rest_shelter",
+      "lod": 1,
+      "triangles": 1444,
+      "moving_vertices": 0,
+      "rigid_vertices": 2884,
+      "degenerate_triangles": 0
+    },
+    {
+      "id": "F1_canvas_rest_shelter",
+      "lod": 2,
+      "triangles": 1444,
+      "moving_vertices": 0,
+      "rigid_vertices": 2884,
+      "degenerate_triangles": 0
+    }
+  ]
+}

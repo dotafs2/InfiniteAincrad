@@ -1,0 +1,84 @@
+{
+  "active": 3,
+  "dialogue": "修好的柴斧已归还，2 Col 已结算\n（玩家促成 · 居民步骤为离线规则 · 已保存）",
+  "foraging": {
+    "capacity": 3,
+    "growth_remainder_seconds": 64.0666666666666,
+    "harvested_total": 0,
+    "initial_stock": 1,
+    "produced_total": 0,
+    "stock": 1
+  },
+  "life_seq": 6,
+  "new_decisions": "local_rule_policy",
+  "new_events": [
+    "life_event_1",
+    "life_event_2",
+    "life_event_3",
+    "life_event_4",
+    "life_event_5",
+    "life_event_6"
+  ],
+  "original_identities": 3,
+  "paid_calls": 0,
+  "pending_count": 1,
+  "repair_accounts": [
+    {
+      "iron": 0,
+      "kindling": 0,
+      "reserved_col": 0,
+      "resident_id": "fixture:a",
+      "source": "fixture",
+      "wood": 2
+    },
+    {
+      "iron": 0,
+      "kindling": 0,
+      "reserved_col": 0,
+      "resident_id": "fixture:b",
+      "source": "fixture",
+      "wood": 0
+    },
+    {
+      "iron": 0,
+      "kindling": 0,
+      "reserved_col": 0,
+      "resident_id": "fixture:c",
+      "source": "fixture",
+      "wood": 1
+    }
+  ],
+  "repair_checks": {
+    "contract_collected": true,
+    "custody_returned": true,
+    "edge_repaired": true,
+    "fee_settled": true,
+    "money_conserved": true,
+    "one_iron_consumed": true,
+    "paid_calls_zero": true
+  },
+  "repair_contract": {
+    "id": "godot_repair:godot-repair:propose:0",
+    "item_id": "fixture:axe",
+    "owner_id": "fixture:a",
+    "part": "edge",
+    "price_col": 2,
+    "reserved_col": 0,
+    "status": "collected",
+    "worker_id": "fixture:b"
+  },
+  "repair_input": "scripted_player_fixture",
+  "repair_items": [
+    {
+      "custodian_id": "fixture:a",
+      "edge": 100,
+      "handle": 20,
+      "id": "fixture:axe",
+      "kind": "axe",
+      "owner_id": "fixture:a",
+      "source": "fixture"
+    }
+  ],
+  "repair_passed": true,
+  "source_seq": 0
+}

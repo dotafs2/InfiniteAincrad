@@ -1,0 +1,125 @@
+{
+  "arrived_before_water": true,
+  "automatic_acceptance": true,
+  "brain_mode": "normal",
+  "checks": {
+    "3d_root": true,
+    "actual_use": true,
+    "approved": true,
+    "arrived_before_transfer": true,
+    "camera": true,
+    "collision_proxies": true,
+    "installed": true,
+    "market_imported": true,
+    "need": true,
+    "no_errors": true,
+    "one_consumption": true,
+    "resident_walked": true,
+    "water_conserved": true
+  },
+  "collision_count": 22,
+  "completed": true,
+  "decision_requests": 3,
+  "decision_runtime": "OpenGameAgent",
+  "decision_source": "opengameagent_fixture",
+  "environment_dressing": {
+    "asset_ids": [
+      "F1_young_maple",
+      "F1_orchard_apple",
+      "F1_cypress_column",
+      "F1_herb_planter",
+      "F1_mossy_boulder_cluster",
+      "F1_wildflower_patch",
+      "F1_fern_patch",
+      "F1_meadow_grass",
+      "F1_roadside_milestone",
+      "F1_timber_fence_vine",
+      "F1_mossy_fallen_log",
+      "F1_canvas_rest_shelter"
+    ],
+    "collision_mode": "visual_only_pending_route_review",
+    "instances": 12,
+    "kit": "floor1_environment_kit_20_v1"
+  },
+  "errors": [],
+  "events": [
+    {
+      "need_id": "need-1",
+      "provenance": "opengameagent_fixture",
+      "resident_id": "fixture:luna",
+      "turn": 1,
+      "type": "resident_need_recorded"
+    },
+    {
+      "capability_id": "well_bucket",
+      "need_id": "need-1",
+      "provenance": "gm_review",
+      "turn": 1,
+      "type": "gm_need_approved"
+    },
+    {
+      "amount": 1,
+      "provenance": "opengameagent_fixture",
+      "resident_id": "fixture:luna",
+      "turn": 2,
+      "type": "water_drawn"
+    },
+    {
+      "amount": 1,
+      "provenance": "opengameagent_fixture",
+      "resident_id": "fixture:luna",
+      "turn": 3,
+      "type": "water_consumed"
+    }
+  ],
+  "last_decision_accepted": true,
+  "last_save_reason": "complete",
+  "market_import": {
+    "loader": "ResourceLoader",
+    "path": "res://assets/market/StartingTown_Market_CraftV5.glb",
+    "preserved_scale": true,
+    "root_scale": "(1.0, 1.0, 1.0)"
+  },
+  "need_approval": {
+    "approval_id": "street-gm-review",
+    "code": "gm_need_approved",
+    "need_id": "need-1",
+    "ok": true,
+    "provenance": "gm_review"
+  },
+  "need_install": {
+    "capability_id": "well_bucket",
+    "code": "capability_installed",
+    "ok": true,
+    "provenance": "gm_validated_manifest",
+    "version": "1.0.0"
+  },
+  "need_source": "fixture_resident_observation",
+  "passed": true,
+  "player_position": [
+    -2.30189371109009,
+    1.12083721160889,
+    7.90361309051514
+  ],
+  "resident_position": [
+    -1.2945431470871,
+    0.219999998807907,
+    1.13802933692932
+  ],
+  "restored": false,
+  "restored_without_repeat": false,
+  "route_distance_m": 9.74379333333333,
+  "save_path": "/Users/dotafs/Documents/ChatGPT/New project/tmp/floor1_environment_kit_20-smoke-v1/world.json",
+  "screenshot_approach": "approach.png",
+  "screenshot_complete": "complete.png",
+  "screenshot_draw": "draw.png",
+  "screenshot_need": "need.png",
+  "street_expect": "",
+  "used": true,
+  "water": {
+    "consumed": 1,
+    "inventory": 0,
+    "well": 0
+  },
+  "world_id": "fixture:well-street"
+}

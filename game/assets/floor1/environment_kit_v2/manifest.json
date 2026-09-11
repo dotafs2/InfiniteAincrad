@@ -1,0 +1,830 @@
+{
+  "schema": 2,
+  "id": "floor1_environment_v2",
+  "asset_count": 20,
+  "unit": "metre",
+  "wind_encoding": "UV2.x flexibility, UV2.y phase; zero on rigid structure",
+  "source": "project-authored botanical meshes; no external asset dependency",
+  "assets": [
+    {
+      "id": "F1_ancient_oak",
+      "label_zh": "古橡树",
+      "plant_group": "canopy_trees",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_ancient_oak_LOD0.glb",
+          "triangles": 139062,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            7.3216,
+            7.4409,
+            7.5621
+          ],
+          "sha256": "df62ca803808fd369c5f285d67c9aeef36ddaa650026e35a96c993b9d1060399"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_ancient_oak_LOD1.glb",
+          "triangles": 52538,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            7.3542,
+            7.3753,
+            7.5255
+          ],
+          "sha256": "faf1751048b17ea5dce3a5005aa638c876f8e8f7bd15f8849be56bb40f91f791"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_ancient_oak_LOD2.glb",
+          "triangles": 28016,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            7.1769,
+            7.4351,
+            7.5474
+          ],
+          "sha256": "6297c8a81d091e09251c2b0ded562daf020fa175dc35ffb41b8250326c1ed807"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_ancient_oak.tscn"
+    },
+    {
+      "id": "F1_birch_grove",
+      "label_zh": "白桦组三株",
+      "plant_group": "canopy_trees",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_birch_grove_LOD0.glb",
+          "triangles": 47616,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            4.5119,
+            4.0741,
+            6.5087
+          ],
+          "sha256": "9b9aa329697c4342046fb079b436cab51520dac77d7deeb0f6c49f1c43f026f9"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_birch_grove_LOD1.glb",
+          "triangles": 25596,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            4.3705,
+            4.1203,
+            6.5082
+          ],
+          "sha256": "8f11b0dbce20d948d96a2d6462badb1181c09454400b157ae409ee94893bab4c"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_birch_grove_LOD2.glb",
+          "triangles": 13996,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            4.3983,
+            4.0768,
+            6.5076
+          ],
+          "sha256": "c1c9181c94f2cc03d183828d18c1f3acca0ffd072619ea8a5d2436e4631467dc"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_birch_grove.tscn"
+    },
+    {
+      "id": "F1_cypress_column",
+      "label_zh": "柱形柏树",
+      "plant_group": "canopy_trees",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_cypress_column_LOD0.glb",
+          "triangles": 66068,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            1.673,
+            1.6286,
+            6.9389
+          ],
+          "sha256": "71281ba890980962e558a59e04aa50ea830ff674dc8a049705a35a6232e42e3a"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_cypress_column_LOD1.glb",
+          "triangles": 20312,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            1.7489,
+            1.674,
+            6.9674
+          ],
+          "sha256": "6b261fb2436e2b6f3fa690810aba033ca1df55fd5b76d5f6c95e0e3fa8fbf108"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_cypress_column_LOD2.glb",
+          "triangles": 7484,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            1.7183,
+            1.8248,
+            7.0223
+          ],
+          "sha256": "bbba2f1913dbb338a8e97884a7a697a4ee52d63f554e331d2c78164df67dcc32"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_cypress_column.tscn"
+    },
+    {
+      "id": "F1_stone_pine",
+      "label_zh": "石地松树",
+      "plant_group": "canopy_trees",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_stone_pine_LOD0.glb",
+          "triangles": 49068,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            4.0912,
+            4.1905,
+            6.2032
+          ],
+          "sha256": "500b5acd8e03d0aa40fe6d1a19dbd4008062d90f4b2b37a21a1d4c437dbfd7fa"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_stone_pine_LOD1.glb",
+          "triangles": 15040,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            4.1086,
+            4.1339,
+            6.203
+          ],
+          "sha256": "85f5228cc3667e374dd07da6ef33e3013a8e42cef8c2abf05c7af7d3bcc92e49"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_stone_pine_LOD2.glb",
+          "triangles": 5532,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            4.017,
+            4.1339,
+            6.2028
+          ],
+          "sha256": "13d43a3e31573d113dcd53624197ebced85dcb23deff4f7a2ec2ad857e0e8d02"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_stone_pine.tscn"
+    },
+    {
+      "id": "F1_orchard_apple",
+      "label_zh": "果园苹果树",
+      "plant_group": "canopy_trees",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_orchard_apple_LOD0.glb",
+          "triangles": 77458,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            5.5711,
+            5.4401,
+            4.9526
+          ],
+          "sha256": "82a588662c1f378e312160b5f0f16cd14d738bb1b34b1ba3ddf223781402d0a6"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_orchard_apple_LOD1.glb",
+          "triangles": 41566,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            5.6343,
+            5.3892,
+            4.9581
+          ],
+          "sha256": "9218b0aa912b21a7ca644662875ff1cc6226144b0fcc82b1dcf2b3928d33cf9d"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_orchard_apple_LOD2.glb",
+          "triangles": 22660,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            5.4227,
+            5.4942,
+            4.9759
+          ],
+          "sha256": "33d9dde964ac7ea4be4547981aabd089fe0362083f79adf2242093379e19c9e5"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_orchard_apple.tscn"
+    },
+    {
+      "id": "F1_young_maple",
+      "label_zh": "幼枫树",
+      "plant_group": "canopy_trees",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_young_maple_LOD0.glb",
+          "triangles": 105490,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            5.694,
+            5.5795,
+            5.0948
+          ],
+          "sha256": "d2baf0875d148de9e140b1aaea7012bb0b95edf305b957902dd19d14ac70c2ec"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_young_maple_LOD1.glb",
+          "triangles": 40110,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            5.6057,
+            5.64,
+            5.0338
+          ],
+          "sha256": "2e2dd58afedaa80d0812a8d3ac1fd11eb5e02caece4f9faaf0cc541322419a85"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_young_maple_LOD2.glb",
+          "triangles": 21540,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            5.6171,
+            5.5801,
+            5.0296
+          ],
+          "sha256": "122ee1d2b86662f2f28450201c5194370ec920c63c049356c2672ace51758ff8"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_young_maple.tscn"
+    },
+    {
+      "id": "F1_flowering_shrub",
+      "label_zh": "开花灌木",
+      "plant_group": "shrubs_and_cultivated",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_flowering_shrub_LOD0.glb",
+          "triangles": 17986,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            1.6517,
+            1.7065,
+            1.1675
+          ],
+          "sha256": "5d16c672e54b3dfea39c6b30380c6e524185936553e4ba073eb3e8e26c0578ea"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_flowering_shrub_LOD1.glb",
+          "triangles": 8932,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            1.6859,
+            1.7362,
+            1.1759
+          ],
+          "sha256": "4b106a0bb93e0830b75017e6b3c5dcd66529b983cdddc4291d9b256c1626a444"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_flowering_shrub_LOD2.glb",
+          "triangles": 4744,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            1.5306,
+            1.5712,
+            1.1843
+          ],
+          "sha256": "d4c41c28b2f7e9b210c0fff9473d409506936ac10862060029be3d079ff70d14"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_flowering_shrub.tscn"
+    },
+    {
+      "id": "F1_berry_bush",
+      "label_zh": "浆果丛",
+      "plant_group": "shrubs_and_cultivated",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_berry_bush_LOD0.glb",
+          "triangles": 14620,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            1.5724,
+            1.4621,
+            1.1534
+          ],
+          "sha256": "f2663ab9f5eb0e0b0e6502c99d7206891008c4bfaa700a6bf5142b354a9fb597"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_berry_bush_LOD1.glb",
+          "triangles": 7648,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            1.5912,
+            1.4463,
+            1.1614
+          ],
+          "sha256": "765aa50da0d34fe69e92ef95c34ea53d8e92c2852a38890850c750f442867255"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_berry_bush_LOD2.glb",
+          "triangles": 4664,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            1.6291,
+            1.4358,
+            1.1197
+          ],
+          "sha256": "0b28af952bf5736c2653779634ee5234bd390a8fadeb945466591aad53a4f8a2"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_berry_bush.tscn"
+    },
+    {
+      "id": "F1_fern_patch",
+      "label_zh": "蕨类地被",
+      "plant_group": "groundcovers",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_fern_patch_LOD0.glb",
+          "triangles": 9882,
+          "surfaces": 1,
+          "dimensions_xyz_blender_m": [
+            1.4899,
+            2.1191,
+            0.4785
+          ],
+          "sha256": "87b0bf869d89441f5936bd6c1233c3f29ab997721c6295b606b1dcfc89f2f042"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_fern_patch_LOD1.glb",
+          "triangles": 4974,
+          "surfaces": 1,
+          "dimensions_xyz_blender_m": [
+            1.5021,
+            2.1316,
+            0.4756
+          ],
+          "sha256": "f58dce74afebce84c1476ada2d537aca1898d245b15dc8a3dcce8a540993f1c5"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_fern_patch_LOD2.glb",
+          "triangles": 2370,
+          "surfaces": 1,
+          "dimensions_xyz_blender_m": [
+            1.5398,
+            2.1019,
+            0.4874
+          ],
+          "sha256": "ee02fde4004bb641e4aadc4a84dad687dbed8fc32c15af88151763e2219c5786"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_fern_patch.tscn"
+    },
+    {
+      "id": "F1_meadow_grass",
+      "label_zh": "草甸草簇",
+      "plant_group": "groundcovers",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_meadow_grass_LOD0.glb",
+          "triangles": 2496,
+          "surfaces": 1,
+          "dimensions_xyz_blender_m": [
+            1.1635,
+            1.753,
+            0.4333
+          ],
+          "sha256": "b081003470f524f5bf5aca6eb64344fa205d59d8751dd174f7b88ffb33ffc90d"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_meadow_grass_LOD1.glb",
+          "triangles": 1128,
+          "surfaces": 1,
+          "dimensions_xyz_blender_m": [
+            1.0933,
+            1.6909,
+            0.4896
+          ],
+          "sha256": "da0a038ecd7bbd2cfc6a6dee8a2ae21784a27d8da0cd8d66a5b80081493a57ba"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_meadow_grass_LOD2.glb",
+          "triangles": 336,
+          "surfaces": 1,
+          "dimensions_xyz_blender_m": [
+            1.1314,
+            0.9759,
+            0.5979
+          ],
+          "sha256": "53de4dd43cbb46f5ec4d102808dae8b0f937adfa869506e53b4f73656ba88436"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_meadow_grass.tscn"
+    },
+    {
+      "id": "F1_wildflower_patch",
+      "label_zh": "野花草簇",
+      "plant_group": "groundcovers",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_wildflower_patch_LOD0.glb",
+          "triangles": 7796,
+          "surfaces": 1,
+          "dimensions_xyz_blender_m": [
+            1.6521,
+            1.2523,
+            0.6487
+          ],
+          "sha256": "c11d2da0373d3eafe24dbd6d7079e0d51f50b0dac028445ce9d21beec7b91aec"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_wildflower_patch_LOD1.glb",
+          "triangles": 3938,
+          "surfaces": 1,
+          "dimensions_xyz_blender_m": [
+            1.6436,
+            1.2652,
+            0.6489
+          ],
+          "sha256": "2fbb79e8352c0a8235a4e67f1259f7c76a8e094efaf768ef664af1c2f9da89d6"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_wildflower_patch_LOD2.glb",
+          "triangles": 2042,
+          "surfaces": 1,
+          "dimensions_xyz_blender_m": [
+            1.5085,
+            1.0852,
+            0.6491
+          ],
+          "sha256": "947be2ac189850c76680b79fe04f11591c8c88ae09584f37a9bb4aa664def543"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_wildflower_patch.tscn"
+    },
+    {
+      "id": "F1_ivy_wall_panel",
+      "label_zh": "常春藤墙面",
+      "plant_group": "climbers",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_ivy_wall_panel_LOD0.glb",
+          "triangles": 5184,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            3.0672,
+            0.0926,
+            3.1595
+          ],
+          "sha256": "99d398840053da6e742f79375aff07d544f3c1b7d18dbb66a3351ab97b65ac5d"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_ivy_wall_panel_LOD1.glb",
+          "triangles": 2160,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            3.0463,
+            0.0954,
+            3.1821
+          ],
+          "sha256": "dc618dda05dadf94f081ed7b53d1a07f3d883aa98896e913016bbe16b9a021aa"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_ivy_wall_panel_LOD2.glb",
+          "triangles": 1264,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            2.8567,
+            0.1126,
+            3.2301
+          ],
+          "sha256": "234a3ceab26e8d9ccb701b63bddef9abf4a2827e450a2a330b73c44d5a60fbd0"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_ivy_wall_panel.tscn"
+    },
+    {
+      "id": "F1_reed_cluster",
+      "label_zh": "芦苇簇",
+      "plant_group": "wetland",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_reed_cluster_LOD0.glb",
+          "triangles": 2912,
+          "surfaces": 1,
+          "dimensions_xyz_blender_m": [
+            2.3646,
+            2.2169,
+            1.8757
+          ],
+          "sha256": "ee953e9ba3cb2cb97892b062c023d6ffd0cb9e7558e765be0c36e9f4bd521492"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_reed_cluster_LOD1.glb",
+          "triangles": 1768,
+          "surfaces": 1,
+          "dimensions_xyz_blender_m": [
+            2.456,
+            1.8926,
+            1.8758
+          ],
+          "sha256": "28cc1ab73e9ededac2e58a8a22d079aafb3f3d6ca138281e0c3a234e49e145a3"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_reed_cluster_LOD2.glb",
+          "triangles": 1200,
+          "surfaces": 1,
+          "dimensions_xyz_blender_m": [
+            2.5143,
+            1.7437,
+            1.8758
+          ],
+          "sha256": "c1699b5806c4488f087bfab553e6e58a39717d1c23f1c9476689b601cdfb3e62"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_reed_cluster.tscn"
+    },
+    {
+      "id": "F1_mossy_fallen_log",
+      "label_zh": "苔藓倒木",
+      "plant_group": "deadwood_and_moss",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_mossy_fallen_log_LOD0.glb",
+          "triangles": 4218,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            3.814,
+            0.7976,
+            0.9326
+          ],
+          "sha256": "045544e5fb390f903352d6347539f7452b85c8e9a491af7c51cc98b79b663c8a"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_mossy_fallen_log_LOD1.glb",
+          "triangles": 3318,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            3.8137,
+            0.8266,
+            0.9471
+          ],
+          "sha256": "075b9d602bcf953db5a9d21efc176a4c45f757739b4e1cfaaf3238cde428e54c"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_mossy_fallen_log_LOD2.glb",
+          "triangles": 2822,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            3.8133,
+            0.7895,
+            0.9575
+          ],
+          "sha256": "988d95b62203d4394f1f0620908242843e7cfc88518849e2b1ecc3db5e65aab7"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_mossy_fallen_log.tscn"
+    },
+    {
+      "id": "F1_herb_planter",
+      "label_zh": "香草种植箱",
+      "plant_group": "shrubs_and_cultivated",
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_herb_planter_LOD0.glb",
+          "triangles": 14308,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            2.48,
+            0.9439,
+            1.115
+          ],
+          "sha256": "246c777ba503f47f559d0a71860cfe815a6d3317d2e696350f1e34cb59fb7911"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_herb_planter_LOD1.glb",
+          "triangles": 5976,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            2.48,
+            0.942,
+            1.115
+          ],
+          "sha256": "f05f65de0ed85e10ca932e9cb801d2c2603c518e52136ed41ff949b1b9825f21"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_herb_planter_LOD2.glb",
+          "triangles": 4044,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            2.48,
+            0.942,
+            1.115
+          ],
+          "sha256": "03ce67c5b99237b028220466799d9c6324eac6f0b0096aea524765bd89fadcb1"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_herb_planter.tscn"
+    },
+    {
+      "id": "F1_mossy_boulder_cluster",
+      "label_zh": "苔石组",
+      "plant_group": null,
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_mossy_boulder_cluster_LOD0.glb",
+          "triangles": 2100,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            2.8564,
+            1.7232,
+            1.2932
+          ],
+          "sha256": "7c1c44cd4ab61fc2b76f5ecc25585f97ccf0d91b47b9a76bd33fda79f2dfc64d"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_mossy_boulder_cluster_LOD1.glb",
+          "triangles": 1236,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            2.8235,
+            1.7702,
+            1.28
+          ],
+          "sha256": "84fe5a1aa6a11fc0eecca8ad8c6850ccf18bef7a9d711613bf30206425932500"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_mossy_boulder_cluster_LOD2.glb",
+          "triangles": 612,
+          "surfaces": 2,
+          "dimensions_xyz_blender_m": [
+            2.732,
+            1.7724,
+            1.28
+          ],
+          "sha256": "ac7c118f75e14e9b5b0cfa4d05d645fe5ff49e2784375768f3c7b14364edf655"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_mossy_boulder_cluster.tscn"
+    },
+    {
+      "id": "F1_roadside_milestone",
+      "label_zh": "道路里程碑",
+      "plant_group": null,
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_roadside_milestone_LOD0.glb",
+          "triangles": 1449,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            0.9,
+            0.7,
+            1.93
+          ],
+          "sha256": "2d4b839349424907768604dc7a8af6b2633899fd180fc2066d14504b83ca2ccd"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_roadside_milestone_LOD1.glb",
+          "triangles": 588,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            0.9185,
+            0.7,
+            1.93
+          ],
+          "sha256": "01628a25a68e0dd6f4b7db5f526102e896f2e1e278450db0f13da1113857c231"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_roadside_milestone_LOD2.glb",
+          "triangles": 436,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            0.9,
+            0.7,
+            1.93
+          ],
+          "sha256": "9f083ec3a645899f4cb65980e365b592ede754c68d0f9623574d5e9edd34599e"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_roadside_milestone.tscn"
+    },
+    {
+      "id": "F1_timber_fence_vine",
+      "label_zh": "藤蔓木栅栏",
+      "plant_group": null,
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_timber_fence_vine_LOD0.glb",
+          "triangles": 1916,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            4.64,
+            0.343,
+            1.7506
+          ],
+          "sha256": "d73f9caa008b7a3191554fd25d776366e8c01ad7195a2191f620eb450017324a"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_timber_fence_vine_LOD1.glb",
+          "triangles": 1064,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            4.64,
+            0.3499,
+            1.7478
+          ],
+          "sha256": "64aa3decc9fc598b80e870b6c346ccedfa172f1465035489579f222fc2f223ff"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_timber_fence_vine_LOD2.glb",
+          "triangles": 772,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            4.64,
+            0.3619,
+            1.7872
+          ],
+          "sha256": "114a6b6abc4f8cdbf37f46ef3983540e08b37ce2f37934128272ee2e215f46cc"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_timber_fence_vine.tscn"
+    },
+    {
+      "id": "F1_stone_water_trough",
+      "label_zh": "石质水槽",
+      "plant_group": null,
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_stone_water_trough_LOD0.glb",
+          "triangles": 2384,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            3.32,
+            1.3874,
+            1.0862
+          ],
+          "sha256": "3aef3f6fffdee5a6b0a10c1b0fc64307b6a0ede1b945e276235bfa42d1eac0b9"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_stone_water_trough_LOD1.glb",
+          "triangles": 1064,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            3.32,
+            1.3993,
+            1.0911
+          ],
+          "sha256": "0d8aa44f7e7cac4f0bfb0de7004e9691276648bbafc78a51870884b7ba12304a"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_stone_water_trough_LOD2.glb",
+          "triangles": 912,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            3.32,
+            1.3798,
+            1.0967
+          ],
+          "sha256": "4de237df9e55e4836efa6f13cec8224bde218e5af103441defabc5c391e51ca8"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_stone_water_trough.tscn"
+    },
+    {
+      "id": "F1_canvas_rest_shelter",
+      "label_zh": "帆布休憩棚",
+      "plant_group": null,
+      "lods": [
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_canvas_rest_shelter_LOD0.glb",
+          "triangles": 3108,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            4.56,
+            2.92,
+            3.9077
+          ],
+          "sha256": "fa552a1d600813277fb8671dfa8a13326466185a9c895b6be6145ae9e1d1a17e"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_canvas_rest_shelter_LOD1.glb",
+          "triangles": 1444,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            4.56,
+            2.92,
+            3.9077
+          ],
+          "sha256": "6f85c1854b01497a1c70a282523b215bc768eedf61907acb59b73af48cd72317"
+        },
+        {
+          "file": "game/assets/floor1/environment_kit_v2/F1_canvas_rest_shelter_LOD2.glb",
+          "triangles": 1444,
+          "surfaces": 3,
+          "dimensions_xyz_blender_m": [
+            4.56,
+            2.92,
+            3.9077
+          ],
+          "sha256": "1e986cc0262b49ee3953f7d8750f11c413f813d15db22d534cf2e1815b76c92f"
+        }
+      ],
+      "game_scene": "game/assets/floor1/environment_kit_v2/F1_canvas_rest_shelter.tscn"
+    }
+  ]
+}

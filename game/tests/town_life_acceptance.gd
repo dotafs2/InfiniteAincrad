@@ -9,15 +9,24 @@ func _initialize() -> void:
 
 func fixture() -> Dictionary:
 	var world := {"schema_version": 2, "world_id": "fixture:town-rules", "elapsed_seconds": 0,
-		"residents": [], "life": {"seq": 0, "events": []},
+		"residents": [], "life": {"seq": 0, "events": [],
+			"items": [{"id": "fixture:axe", "kind": "axe", "owner_id": "fixture:a",
+				"custodian_id": "fixture:a", "edge": 20, "handle": 20, "source": "fixture"}],
+			"skills": [{"resident_id": "fixture:b", "skill_id": "metal_repair", "source": "fixture"},
+				{"resident_id": "fixture:c", "skill_id": "wood_repair", "source": "fixture"}],
+			"accounts": [], "contracts": []},
 		"survival": {"accounts": [], "tick_remainder_seconds": 0},
 		"foraging": {"stock": 1, "capacity": 3, "initial_stock": 1, "produced_total": 0, "harvested_total": 0, "growth_remainder_seconds": 0},
 		"godot": {"schema_version": 1, "mode": "migration_validation", "positions": {}, "homes": {},
 			"pending": {}, "commands": {}, "new_events": [], "elapsed_seconds": 0,
 			"observations": {}, "berry_position": [4, 0, 0]}}
 	for id in ["fixture:a", "fixture:b", "fixture:c"]:
-		world.residents.append({"stable_id": id, "name": id, "role": "tester", "needs": {"hunger": 60}, "coins_col": 10, "runtime": {"private_memory": id, "historical_coordinate": -1551.6842461617832}})
+		var names := {"fixture:a": "艾琳", "fixture:b": "拓真", "fixture:c": "柏木"}
+		var roles := {"fixture:a": "innkeeper", "fixture:b": "blacksmith", "fixture:c": "carpenter"}
+		world.residents.append({"stable_id": id, "name": names[id], "role": roles[id], "needs": {"hunger": 60}, "coins_col": 10, "runtime": {"private_memory": id, "historical_coordinate": -1551.6842461617832}})
 		world.survival.accounts.append({"resident_id": id, "food": 1, "energy": 50})
+		world.life.accounts.append({"resident_id": id, "wood": 2 if id == "fixture:a" else (1 if id == "fixture:c" else 0),
+			"iron": 1 if id == "fixture:b" else 0, "kindling": 0, "reserved_col": 0, "source": "fixture"})
 		world.godot.positions[id] = [0, 0, 0]
 		world.godot.homes[id] = [0, 0, 0]
 		world.godot.observations[id] = []
