@@ -449,6 +449,13 @@ func _build_environment() -> void:
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
 	environment.ambient_light_energy = 0.65
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	# Compatibility clips white highlights harder than Forward+; raise the white
+	# reference only for that backend so the intended Forward+ look is untouched.
+	# Also lower exposure for compatibility highlight mapping; this reduces
+	# clipping but is not a full fix.
+	if RenderingServer.get_current_rendering_method() == "gl_compatibility":
+		environment.tonemap_white = 6.0
+		environment.tonemap_exposure = 0.65
 	_environment.environment = environment
 	add_child(_environment)
 	var sun: DirectionalLight3D = DirectionalLight3D.new()

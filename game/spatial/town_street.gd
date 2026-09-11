@@ -10,6 +10,7 @@ extends "res://spatial/street_trial.gd"
 const Town = preload("res://core/town_runtime.gd")
 const TownTurns = preload("res://agents/town_turns.gd")
 const TownTools = preload("res://spatial/town_tools.gd")
+const TownNameplates = preload("res://spatial/town_nameplates.gd")
 const MaterialSources = preload("res://spatial/town_material_sources.gd")
 var town := Town.new()
 var actors: Dictionary = {}
@@ -48,6 +49,7 @@ var repair_fixture_started := false
 var repair_fixture_finished_at := -1.0
 var repair_initial_money := -1
 var repair_initial_iron := -1
+var nameplates: Node = null
 
 func _ready() -> void:
 	restore_only = OS.get_cmdline_user_args().has("--town-restore")
@@ -130,6 +132,7 @@ func _ready() -> void:
 	add_child(material_sources)
 	material_sources.configure(town)
 	_build_town_hud()
+	_build_nameplates()
 	if gateway_mode:
 		model_turns = TownTurns.new()
 		add_child(model_turns)
@@ -408,6 +411,25 @@ func _build_town_hud() -> void:
 			get_viewport().set_input_as_handled())
 	conversation.add_child(dialogue_input)
 
+func _build_nameplates() -> void:
+	var overlay := TownNameplates.new()
+	add_child(overlay)
+	var hud_controls: Array[Control] = []
+	if is_instance_valid(status):
+		var status_panel := status.get_parent() as Control
+		if status_panel != null:
+			hud_controls.append(status_panel)
+	if is_instance_valid(dialogue):
+		var dialogue_panel: Node = dialogue.get_parent()
+		while dialogue_panel != null and not (dialogue_panel is PanelContainer):
+			dialogue_panel = dialogue_panel.get_parent()
+		if dialogue_panel is Control:
+			hud_controls.append(dialogue_panel as Control)
+	overlay.configure(town, actors, cards, _camera, _player, hud_controls)
+	if town_tools != null:
+		town_tools.facts_enabled = false
+	nameplates = overlay
+
 func _composing_dialogue() -> bool:
 	return is_instance_valid(dialogue_input) and dialogue_input.visible
 
@@ -602,10 +624,19 @@ func _refresh() -> void:
 		if item.get("kind") == "axe":
 			axe = item
 			break
+	# Build held-item projection lines ONCE from the snapshot already taken above.
+	# projection_lines(snap) avoids re-snapshotting the town for every resident.
+	var held_lines: Dictionary = {}
+	if town_tools != null:
+		held_lines = town_tools.projection_lines(snap)
 	for id in town.active_ids():
 		var a := town.account(id)
 		var job: Dictionary = town.pending_job(id)
-		cards[id].text = "%s\n%s · 口粮 %d" % [town.resident(id).name, "休整" if job.is_empty() else _action_label(job.action), a.food]
+		var held: String = str(held_lines.get(id, ""))
+		var base := "%s\n%s · 口粮 %d" % [town.resident(id).name, "休整" if job.is_empty() else _action_label(job.action), a.food]
+		cards[id].text = base if held.is_empty() else base + "\n" + held
+		if nameplates != null and nameplates.has_method("set_card_hidden"):
+			nameplates.set_card_hidden(id, true)
 		# Projection policy: each world axe is shown only through TownTools in every
 		# mode except the explicitly labelled legacy --town-repair-fixture demo, where
 		# the Mac hand-axe HUD is the projector and the duplicate TownTools axe for the
