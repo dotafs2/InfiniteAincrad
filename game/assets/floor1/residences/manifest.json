@@ -1,0 +1,249 @@
+{
+  "id": "floor1_residences_5",
+  "source": "original procedural geometry and PBR textures",
+  "unit": "metre",
+  "interiors": "unfurnished shell; closed doors; no resident housing state",
+  "textures": {
+    "resolution": 2048,
+    "sets": 4,
+    "maps": [
+      "sRGB albedo",
+      "OpenGL tangent normal",
+      "linear ORM (R=1,G=roughness,B=0)"
+    ],
+    "metric_repeat_m": 2.0
+  },
+  "assets": [
+    {
+      "id": "F1_Residence_01",
+      "label": "Linden Court",
+      "label_zh": "菩提庭院宅",
+      "collision_boxes_blender_xyz": [
+        [
+          0,
+          0,
+          4.5,
+          8.2,
+          6.5,
+          9
+        ]
+      ],
+      "lods": [
+        {
+          "level": 0,
+          "triangles": 189988,
+          "surfaces": 7,
+          "vertices": 107138
+        },
+        {
+          "level": 1,
+          "triangles": 79794,
+          "surfaces": 7,
+          "vertices": 52041
+        },
+        {
+          "level": 2,
+          "triangles": 30338,
+          "surfaces": 7,
+          "vertices": 27185
+        }
+      ],
+      "file": "game/assets/floor1/residences/F1_Residence_01.glb",
+      "sha256": "6c406a932f9f5bb4b5e6b745a2f5b899337b4d4e0f529d52d45744e220b2445e",
+      "bytes": 73003124,
+      "dimensions_blender_xyz_m": [
+        9.3077,
+        8.465,
+        10.4703
+      ]
+    },
+    {
+      "id": "F1_Residence_02",
+      "label": "Copper Gable",
+      "label_zh": "铜檐窄街宅",
+      "collision_boxes_blender_xyz": [
+        [
+          0,
+          0,
+          5.6,
+          5.25,
+          6.6,
+          11.2
+        ]
+      ],
+      "lods": [
+        {
+          "level": 0,
+          "triangles": 186570,
+          "surfaces": 7,
+          "vertices": 106534
+        },
+        {
+          "level": 1,
+          "triangles": 78358,
+          "surfaces": 7,
+          "vertices": 52428
+        },
+        {
+          "level": 2,
+          "triangles": 29791,
+          "surfaces": 7,
+          "vertices": 27968
+        }
+      ],
+      "file": "game/assets/floor1/residences/F1_Residence_02.glb",
+      "sha256": "104c03e95d9dff842f3e0bfcc09dba759a0308007f8b5a77020ade9a65a3cede",
+      "bytes": 71648184,
+      "dimensions_blender_xyz_m": [
+        6.3573,
+        8.55,
+        12.4924
+      ]
+    },
+    {
+      "id": "F1_Residence_03",
+      "label": "Rose Courtyard",
+      "label_zh": "蔷薇花院宅",
+      "collision_boxes_blender_xyz": [
+        [
+          0,
+          0,
+          4,
+          6.4,
+          6,
+          8
+        ],
+        [
+          4.6,
+          1,
+          2.3,
+          5,
+          4.3,
+          4.6
+        ]
+      ],
+      "lods": [
+        {
+          "level": 0,
+          "triangles": 224836,
+          "surfaces": 7,
+          "vertices": 127013
+        },
+        {
+          "level": 1,
+          "triangles": 94429,
+          "surfaces": 7,
+          "vertices": 61810
+        },
+        {
+          "level": 2,
+          "triangles": 35885,
+          "surfaces": 7,
+          "vertices": 32360
+        }
+      ],
+      "file": "game/assets/floor1/residences/F1_Residence_03.glb",
+      "sha256": "b85b5bb58c4e215f5b5e2f5120266c2694065d3d44c1a6af406dece8fd9aefdc",
+      "bytes": 83140096,
+      "dimensions_blender_xyz_m": [
+        12.2887,
+        8.1387,
+        9.9346
+      ]
+    },
+    {
+      "id": "F1_Residence_04",
+      "label": "Sage Gallery",
+      "label_zh": "鼠尾草长廊宅",
+      "collision_boxes_blender_xyz": [
+        [
+          0,
+          0,
+          4.2,
+          10.4,
+          5.8,
+          8.4
+        ]
+      ],
+      "lods": [
+        {
+          "level": 0,
+          "triangles": 190044,
+          "surfaces": 7,
+          "vertices": 107406
+        },
+        {
+          "level": 1,
+          "triangles": 79816,
+          "surfaces": 7,
+          "vertices": 52293
+        },
+        {
+          "level": 2,
+          "triangles": 30289,
+          "surfaces": 7,
+          "vertices": 27436
+        }
+      ],
+      "file": "game/assets/floor1/residences/F1_Residence_04.glb",
+      "sha256": "71b34bac8b6ca5bc980cd17ae6a4de1197656ffebd26591eb6aa221a2fdb645c",
+      "bytes": 73224636,
+      "dimensions_blender_xyz_m": [
+        11.5129,
+        8.0446,
+        10.2868
+      ]
+    },
+    {
+      "id": "F1_Residence_05",
+      "label": "Azure Corner",
+      "label_zh": "青瓷转角宅",
+      "collision_boxes_blender_xyz": [
+        [
+          0,
+          0,
+          4.4,
+          7,
+          6.3,
+          8.8
+        ],
+        [
+          3.8,
+          -1.65,
+          5.7,
+          3.6,
+          3.6,
+          11.4
+        ]
+      ],
+      "lods": [
+        {
+          "level": 0,
+          "triangles": 277969,
+          "surfaces": 7,
+          "vertices": 158716
+        },
+        {
+          "level": 1,
+          "triangles": 116746,
+          "surfaces": 7,
+          "vertices": 78038
+        },
+        {
+          "level": 2,
+          "triangles": 44393,
+          "surfaces": 7,
+          "vertices": 41546
+        }
+      ],
+      "file": "game/assets/floor1/residences/F1_Residence_05.glb",
+      "sha256": "f7597ea2fa9c5938faf925384777c3abd361796d4208c6866567ee26e42a7f01",
+      "bytes": 99739904,
+      "dimensions_blender_xyz_m": [
+        10.209,
+        8.765,
+        11.7112
+      ]
+    }
+  ]
+}

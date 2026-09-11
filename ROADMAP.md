@@ -16,6 +16,8 @@ The selected route is **S1: a playable persistent-resident game, with a technica
 
 ## Current baseline
 
+- Residential art now adds five distinct first-floor exterior components with editable Blender source, directional metric UVs, packed secondary UVs, four 2K PBR sets, three LODs and an isolated Godot review street. This improves the first street's housing forms, not resident housing behavior. Next obtain visual approval, choose actual town placements, then scope one enterable interior and its real housing rules; no dense-district performance claim.
+
 - Source baseline: `59bd52e`; two explicitly isolated fixture residents, authored market, pinned OpenGameAgent, authoritative world rules, existing knowledge/decision/save tests and recorded Kimi decisions.
 - The market GLB and editable Blender source have been obtained and passed LFS integrity checks.
 - No project-wide license has been applied. A Windows export preset, pinned manual/PR CI workflow and locally verified self-contained package now exist; independent external testers and an actual CI run remain pending.

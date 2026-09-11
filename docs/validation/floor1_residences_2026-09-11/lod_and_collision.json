@@ -1,0 +1,190 @@
+{
+  "failed": 0,
+  "failures": [],
+  "physics": [
+    {
+      "closed_exterior_blocks_ray": true,
+      "variant": 1
+    },
+    {
+      "closed_exterior_blocks_ray": true,
+      "variant": 2
+    },
+    {
+      "closed_exterior_blocks_ray": true,
+      "variant": 3
+    },
+    {
+      "porch_gap_clear": true,
+      "variant": 3
+    },
+    {
+      "closed_exterior_blocks_ray": true,
+      "variant": 4
+    },
+    {
+      "porch_gap_clear": true,
+      "variant": 4
+    },
+    {
+      "closed_exterior_blocks_ray": true,
+      "variant": 5
+    }
+  ],
+  "physics_cases": 7,
+  "render_cases": 30,
+  "results": [
+    {
+      "distance": 31.75,
+      "variant": 1,
+      "visible_samples": 981
+    },
+    {
+      "distance": 32.0,
+      "variant": 1,
+      "visible_samples": 981
+    },
+    {
+      "distance": 32.25,
+      "variant": 1,
+      "visible_samples": 980
+    },
+    {
+      "distance": 69.75,
+      "variant": 1,
+      "visible_samples": 979
+    },
+    {
+      "distance": 70.0,
+      "variant": 1,
+      "visible_samples": 979
+    },
+    {
+      "distance": 70.25,
+      "variant": 1,
+      "visible_samples": 981
+    },
+    {
+      "distance": 31.75,
+      "variant": 2,
+      "visible_samples": 547
+    },
+    {
+      "distance": 32.0,
+      "variant": 2,
+      "visible_samples": 547
+    },
+    {
+      "distance": 32.25,
+      "variant": 2,
+      "visible_samples": 551
+    },
+    {
+      "distance": 69.75,
+      "variant": 2,
+      "visible_samples": 551
+    },
+    {
+      "distance": 70.0,
+      "variant": 2,
+      "visible_samples": 549
+    },
+    {
+      "distance": 70.25,
+      "variant": 2,
+      "visible_samples": 549
+    },
+    {
+      "distance": 31.75,
+      "variant": 3,
+      "visible_samples": 726
+    },
+    {
+      "distance": 32.0,
+      "variant": 3,
+      "visible_samples": 726
+    },
+    {
+      "distance": 32.25,
+      "variant": 3,
+      "visible_samples": 727
+    },
+    {
+      "distance": 69.75,
+      "variant": 3,
+      "visible_samples": 727
+    },
+    {
+      "distance": 70.0,
+      "variant": 3,
+      "visible_samples": 727
+    },
+    {
+      "distance": 70.25,
+      "variant": 3,
+      "visible_samples": 727
+    },
+    {
+      "distance": 31.75,
+      "variant": 4,
+      "visible_samples": 959
+    },
+    {
+      "distance": 32.0,
+      "variant": 4,
+      "visible_samples": 959
+    },
+    {
+      "distance": 32.25,
+      "variant": 4,
+      "visible_samples": 959
+    },
+    {
+      "distance": 69.75,
+      "variant": 4,
+      "visible_samples": 958
+    },
+    {
+      "distance": 70.0,
+      "variant": 4,
+      "visible_samples": 963
+    },
+    {
+      "distance": 70.25,
+      "variant": 4,
+      "visible_samples": 962
+    },
+    {
+      "distance": 31.75,
+      "variant": 5,
+      "visible_samples": 927
+    },
+    {
+      "distance": 32.0,
+      "variant": 5,
+      "visible_samples": 927
+    },
+    {
+      "distance": 32.25,
+      "variant": 5,
+      "visible_samples": 927
+    },
+    {
+      "distance": 69.75,
+      "variant": 5,
+      "visible_samples": 926
+    },
+    {
+      "distance": 70.0,
+      "variant": 5,
+      "visible_samples": 926
+    },
+    {
+      "distance": 70.25,
+      "variant": 5,
+      "visible_samples": 925
+    }
+  ],
+  "save_writes": 0,
+  "suite": "residences_lod_and_collision"
+}
