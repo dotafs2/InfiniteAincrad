@@ -1,0 +1,475 @@
+{
+  "case_count": 54,
+  "cases": [
+    {
+      "actual_hit": false,
+      "expected_hit": false,
+      "id": "open_porch_approach",
+      "passed": true
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": [
+        0.0,
+        1.60000002384186,
+        3.34999990463257
+      ],
+      "id": "closed_main_wall",
+      "passed": true
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": [
+        -1.75,
+        1.60000002384186,
+        3.34999990463257
+      ],
+      "id": "closed_door",
+      "passed": true
+    },
+    {
+      "actual_hit": false,
+      "expected_hit": false,
+      "id": "empty_space_right_of_visual_steps",
+      "passed": true
+    },
+    {
+      "actual_hit": false,
+      "expected_hit": false,
+      "id": "door_flowerbox_clear_visual",
+      "passed": true
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": true,
+      "x": -1.95,
+      "z": 4.6
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.95,
+      "z": 4.6
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": true,
+      "x": -1.95,
+      "z": 4.3
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.95,
+      "z": 4.3
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": true,
+      "x": -1.95,
+      "z": 4.0
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.95,
+      "z": 4.0
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": true,
+      "x": -1.95,
+      "z": 3.8
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.95,
+      "z": 3.8
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": true,
+      "x": -1.75,
+      "z": 4.6
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.75,
+      "z": 4.6
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": true,
+      "x": -1.75,
+      "z": 4.3
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.75,
+      "z": 4.3
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": true,
+      "x": -1.75,
+      "z": 4.0
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.75,
+      "z": 4.0
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": true,
+      "x": -1.75,
+      "z": 3.8
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.75,
+      "z": 3.8
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": true,
+      "x": -1.55,
+      "z": 4.6
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.55,
+      "z": 4.6
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": true,
+      "x": -1.55,
+      "z": 4.3
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.55,
+      "z": 4.3
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": true,
+      "x": -1.55,
+      "z": 4.0
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.55,
+      "z": 4.0
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": true,
+      "x": -1.55,
+      "z": 3.8
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.55,
+      "z": 3.8
+    },
+    {
+      "height_error": 0.00499993562698364,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 3.7
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 4.0
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 4.3
+    },
+    {
+      "height_error": 0.0000000298023223876953,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 4.6
+    },
+    {
+      "height_error": 0.0000000894069671630859,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 4.9
+    },
+    {
+      "height_error": 0.0000000149011611938477,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 5.2
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": false,
+      "visual_hit": false,
+      "x": -2.0,
+      "z": 5.5
+    },
+    {
+      "height_error": 0.00499993562698364,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 3.7
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 4.0
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 4.3
+    },
+    {
+      "height_error": 0.0000000298023223876953,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 4.6
+    },
+    {
+      "height_error": 0.0000000894069671630859,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 4.9
+    },
+    {
+      "height_error": 0.0000000149011611938477,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 5.2
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": false,
+      "visual_hit": false,
+      "x": -1.75,
+      "z": 5.5
+    },
+    {
+      "height_error": 0.00499993562698364,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 3.7
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 4.0
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 4.3
+    },
+    {
+      "height_error": 0.0000000298023223876953,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 4.6
+    },
+    {
+      "height_error": 0.0000000894069671630859,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 4.9
+    },
+    {
+      "height_error": 0.0000000149011611938477,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": true,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 5.2
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": true,
+      "proxy_hit": false,
+      "visual_hit": false,
+      "x": -1.5,
+      "z": 5.5
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": [
+        -2.76500010490417,
+        1.39999997615814,
+        4.5
+      ],
+      "id": "visible_pier",
+      "passed": true
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": [
+        -2.76500010490417,
+        1.39999997615814,
+        4.55999994277954
+      ],
+      "id": "solid_pier",
+      "passed": true
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": [
+        -0.735000014305115,
+        1.39999997615814,
+        4.5
+      ],
+      "id": "visible_pier",
+      "passed": true
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": [
+        -0.735000014305115,
+        1.39999997615814,
+        4.55999994277954
+      ],
+      "id": "solid_pier",
+      "passed": true
+    }
+  ],
+  "failed": 0,
+  "failures": [],
+  "resident_model_calls": 0,
+  "suite": "house06_independent_physics",
+  "world_save_writes": 0
+}
