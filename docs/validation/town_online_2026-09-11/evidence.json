@@ -1,0 +1,44 @@
+{
+  "checks": 18,
+  "elapsed_seconds": 32.55,
+  "existing_bodies_preserved": true,
+  "failures": 0,
+  "final_actor_count": 3,
+  "initial_actor_count": 2,
+  "paid_calls": 0,
+  "provenance": "fault_injection_fixture",
+  "samples": [
+    {
+      "actor_count": 3,
+      "elapsed_seconds": 2.06666666666667,
+      "moving_distance": 2.02499866485596,
+      "paused": false,
+      "phase": "waiting"
+    }
+  ],
+  "suite": "town_online_scene",
+  "world_id": "fixture:town-trade-validation",
+  "core_checks": 63,
+  "core_failures": 0,
+  "regressions": {
+    "turns": 20,
+    "trade": 63,
+    "life": 31,
+    "social": 24,
+    "visitor": 17,
+    "failures": 0
+  },
+  "cold": {
+    "before": "719548C1523C5D47D421028A0EC933C3843DBC69838BB8B56522227DA9B8AAF5",
+    "same_bytes": true,
+    "after": "719548C1523C5D47D421028A0EC933C3843DBC69838BB8B56522227DA9B8AAF5",
+    "active": 3,
+    "new_decisions": "none_restore"
+  },
+  "limits": [
+    "fixture providers, not real Kimi",
+    "trusted host APIs, not remote authentication",
+    "no runtime art/gameplay package loader",
+    "original private source absent"
+  ]
+}

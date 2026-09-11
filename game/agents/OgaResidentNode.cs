@@ -23,7 +23,8 @@ public partial class OgaResidentNode : OpenGameAgentNode
             if (_ownedRuntime != null) return "already_configured";
             _gatewayProvider = new BudgetGatewayProvider(configPath);
             _provenance = _gatewayProvider.Provenance;
-            SetupRuntime(_gatewayProvider, "kimi-k2.6");
+            // Request the exact model the run config pinned; no host default here.
+            SetupRuntime(_gatewayProvider, _gatewayProvider.ModelId);
             return "";
         }
         catch

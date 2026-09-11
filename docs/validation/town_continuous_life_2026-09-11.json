@@ -1,0 +1,53 @@
+{
+  "date": "2026-09-11",
+  "world_id": "fixture:town-trade-validation",
+  "fictional_world": true,
+  "original_save_recovered": false,
+  "from_seq": 16,
+  "to_seq": 47,
+  "checks": {
+    "same_world": true,
+    "same_identities": true,
+    "old_history_prefix": true,
+    "old_contracts_unchanged": true,
+    "currency_total_30": true,
+    "contract_collected_paid_once": true,
+    "two_wood_became_two_kindling": true,
+    "iron_consumed_once": true,
+    "no_jobs": true,
+    "no_controller_errors": true
+  },
+  "cold_restart_bytes_unchanged": true,
+  "wallets_col": {
+    "fixture:innkeeper": 10,
+    "fixture:smith": 13,
+    "fixture:carpenter": 7
+  },
+  "material_result": {
+    "iron_used": 1,
+    "wood_used": 2,
+    "kindling_created": 2
+  },
+  "human_intervention": "Several explicitly scripted player clues/clarifications; choices and consequences are real Kimi.",
+  "gm_role": "Development agents reviewed a real public concern, implemented and installed a known optional module. Not an automatic generic development service.",
+  "kimi_calls_this_turn": 38,
+  "kimi_cny_this_turn": 1.8590149,
+  "ledger_cny_settled": 2.4358423,
+  "prior_unverified_cny": 0.0141471,
+  "current_allocated_cny": 3,
+  "remaining_allocatable_cny": 0.5500106,
+  "development_observed": {
+    "input_tokens": 19832342,
+    "cached_input_tokens": 19121536,
+    "output_tokens": 155104,
+    "total_tokens": 19987446
+  },
+  "development_measurement_limit": "Snapshot excludes final reporting tail; raw includes cached input once and is not a monetary invoice.",
+  "outstanding": [
+    "finite iron replenishment",
+    "independent skill discovery and planning",
+    "original private source recovery",
+    "tested model replacement",
+    "sustainable town and final art"
+  ]
+}

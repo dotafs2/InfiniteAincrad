@@ -2,6 +2,8 @@
 
 A persistent AI world inspired by Sword Art Online. Residents retain their identities, experiences and commitments as the models behind them change.
 
+2026-09-11生活验证：同一个三人测试档已完成真实Kimi修理、付款、取回、工具使用及冷启动续接；一次居民顾虑已推动新结算能力的开发和实际使用。过程有明确标记的玩家澄清，原镇主档和正式人物美术仍未恢复。[结果与限制](docs/validation/town_continuous_life_2026-09-11.md) · [唯一全景进度图](ROADMAP.md)。
+
 Maintained by [dotafs2](https://github.com/dotafs2). Project name: **InfiniteAincrad**.
 
 **2026-09-10 transfer:** [New-computer setup, art sources and same-world continuation](docs/CONTINUE_ON_ANOTHER_PC.md). Current real-model evidence now includes two separate resident knowledge states; see [current progress](docs/STATUS.md). Normal launches remain offline unless explicitly configured otherwise.
@@ -15,6 +17,8 @@ Maintained by [dotafs2](https://github.com/dotafs2). Project name: **InfiniteAin
 已经加入原存档的独立迁移验证入口：`./Run-Street.ps1 -Town -SavePath <迁移输出/world.json>`。三人可进食、休息、到公共浆果地采集；新选择明确使用离线规则。先按 [迁移说明](docs/MIGRATION.md) 生成私有副本。启动暂停，空格继续；这仍不是完整迁移或第一版。
 
 唯一长期目标：建立能进入、能影响、能长期延续的AI世界。模型升级增强同一批居民的生活，已经发生的事情不会随模型更换消失。
+
+2026-09-11：新增 Godot 修理、交付、结算与工具使用。真实 Kimi 在明确的三人测试世界完成一笔 2 Col 修斧柄交易并冷启动保持；完整双部件修理/使用仅脚本验收通过，尚未证明原镇自主闭环。原镇最新私有存档未随 Git 同步到本机。[本轮报告与实机画面](docs/validation/town_trade_2026-09-11.md)。
 
 ## Current repository
 

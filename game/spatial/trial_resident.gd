@@ -39,6 +39,9 @@ func _process(delta: float) -> void:
 			_left_arm.rotation.x = 0.5
 		elif _gesture == "carry":
 			_right_arm.rotation.x = 0.12
+		elif _gesture == "work":
+			_right_arm.rotation.x = 0.9 + sin(_motion_time * 5.0) * 0.55
+			_left_arm.rotation.x = 0.5
 	if _gesture in ["bend", "harvest", "rest"] and _body != null:
 		_body.rotation.x = lerp(_body.rotation.x, 0.32, minf(delta * 7.0, 1.0))
 	elif _body != null:

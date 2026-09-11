@@ -1,0 +1,35 @@
+extends "res://tests/town_trade_acceptance.gd"
+
+func run() -> void:
+	var path := "user://handover-context-%d.json" % Time.get_ticks_usec()
+	_write_fixture(path, trade_fixture())
+	var town := _load_trade(path)
+	var owner := "fictional:ember"
+	var smith := "fictional:forge"
+	execute(town, path, owner, _option(town, owner, "offer_repair", "edge", smith, 2), "context-offer")
+	var contract := _contract(town, "fictional:axe-edge", "proposed")
+	execute(town, path, smith, "contract:accept:" + str(contract.id), "context-accept")
+	town.host_move(owner, Vector3(10, 0, 0))
+	var view := town.resident_view(owner)
+	check(view.unavailable_actions.any(func(x): return x.action == "deliver" and x.counterparty == smith), "owner is told why distant handover is unavailable")
+	check(not town.resident_view("fictional:birch").unavailable_actions.any(func(x): return x.get("contract_id") == contract.id), "other resident does not learn private handover contract")
+	town.host_move(owner, town.position_of(smith) + Vector3(0.85, 0, 0))
+	execute(town, path, owner, "contract:deliver:" + str(contract.id), "context-deliver")
+	arrive(town, owner); elapse(town, path, 1)
+	execute(town, path, smith, "contract:work:" + str(contract.id) + ":edge", "context-work")
+	arrive(town, smith); elapse(town, path, 60)
+	town.host_move(owner, town.position_of(smith) + Vector3(10, 0, 0))
+	view = town.resident_view(owner)
+	check(view.unavailable_actions.any(func(x): return x.action == "collect" and x.counterparty == smith), "completed tool out of range explains approach prerequisite")
+	check(view.unavailable_actions.any(func(x): return x.action == "use_tool" and x.get("custodian_id") == smith), "ownership does not falsely imply possession")
+	var facts := town.snapshot()
+	for entry in view.unavailable_actions:
+		check(not entry.has("position") and not entry.has("target_position"), "explanation does not reveal distant worker coordinates")
+	check(town.snapshot() == facts, "context explanation has no gameplay side effect")
+	town.host_move(owner, town.position_of(smith) + Vector3(0.85, 0, 0))
+	check(not town.resident_view(owner).unavailable_actions.any(func(x): return x.action == "collect"), "explanation disappears once actual range allows collection")
+	check(town.trade_options(owner).any(func(x): return x.action == "collect"), "underlying collection action becomes available")
+	town.release_writer(path)
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	print(JSON.stringify({"suite": "town_handover_context", "checks": checks, "failures": failures, "paid_calls": 0}))
+	quit(0 if failures == 0 else 1)
