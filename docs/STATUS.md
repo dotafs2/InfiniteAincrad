@@ -1,4 +1,4 @@
-最新进展：Windows 功能与 Mac 美术已整合并通过测试；已获得 Windows 功能与 Mac 美术整合的验证收益。缺口：原始存档缺失、N3 真实第二模型未验证、H20 视觉问题未解决。下一步：H5 有来源的技能发现与 H20 视觉修复。详见 [跨机器合并验证报告](validation/cross_machine_2026-09-12.md)。
+最新进展：Windows 功能 H21 自愿技能介绍与有来源的个人记忆已离线验证（95项专测＋26套件，0失败，NPC 模型调用0；DeepSeek 开发调用另记）；H5 仍为部分完成，真实自主发现与第三方转介待验。详见 [报告](validation/town_skill_notice_2026-09-12.md)。
 
 # Current status
 
