@@ -1,5 +1,8 @@
-param([string]$Godot = $env:GODOT_EXE, [switch]$SkipBuild, [string]$SavePath, [switch]$Visitor, [switch]$Town)
+param([string]$Godot = $env:GODOT_EXE, [switch]$SkipBuild, [string]$SavePath, [switch]$Visitor, [switch]$Town, [switch]$TownGateway)
 $ErrorActionPreference = 'Stop'
+if ($TownGateway -and (-not $Town -or -not $env:AINCRAD_GATEWAY_RUN_CONFIG)) {
+    throw 'TownGateway requires -Town and an explicit bounded AINCRAD_GATEWAY_RUN_CONFIG.'
+}
 if (-not $Godot) {
     $localEngine = Join-Path $PSScriptRoot 'tmp/toolchain/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64.exe'
     if (Test-Path -LiteralPath $localEngine) { $Godot = $localEngine }
@@ -31,5 +34,6 @@ if ($SavePath) {
     $gameArgs += ($saveFlag + [IO.Path]::GetFullPath($SavePath))
 }
 if ($Visitor) { $gameArgs += '--visitor-encounter' }
+if ($TownGateway) { $gameArgs += '--town-gateway' }
 & $Godot @gameArgs
 exit $LASTEXITCODE

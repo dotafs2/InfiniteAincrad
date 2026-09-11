@@ -1,0 +1,277 @@
+{
+  "report": "N3 same-identity model-continuity integration",
+  "date_utc": "2026-09-11",
+  "claim_scope": "fixture/offline + gateway contract; real cross-model behavior NOT proven",
+  "build": {
+    "result": "succeeded",
+    "command": "dotnet build game/InfiniteAincrad.csproj --no-restore -v minimal -m:1 -nodeReuse:false",
+    "note": "the parallel --disable-build-servers build failed with 0 diagnostic errors while the -m:1 -nodeReuse:false build of the same sources succeeded; the cause is not fully established (the worker's sandbox explanation was an inference, not a demonstrated cause)"
+  },
+  "gdscript_suites": [
+    {
+      "checks": 92,
+      "failures": 0,
+      "model_claim": "fixture_controllers_only",
+      "paid_calls": 0,
+      "provenance": "scripted_fixture_controllers",
+      "suite": "town_model_continuity"
+    },
+    {
+      "checks": 63,
+      "failures": 0,
+      "paid_calls": 0,
+      "provenance": "fault_injection_fixture",
+      "suite": "town_online"
+    },
+    {
+      "checks": 27,
+      "failures": 0,
+      "paid_calls": 0,
+      "suite": "town_feedback"
+    }
+  ],
+  "gateway_adapter_cases": [
+    {
+      "case": "success-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "success-1",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "town-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "unicode-context-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "continuation-0",
+      "passed": true,
+      "get": 12,
+      "post": 12,
+      "contract_errors": []
+    },
+    {
+      "case": "pinned-model-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "pinned-model-1",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "model-mismatch-0",
+      "passed": true,
+      "get": 0,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "reply-model-mismatch-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "insufficient-0",
+      "passed": true,
+      "get": 1,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "wrong-ledger-0",
+      "passed": true,
+      "get": 1,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "expired-0",
+      "passed": true,
+      "get": 0,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "unsafe-endpoint-0",
+      "passed": true,
+      "get": 0,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "uncertain-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "uncertain-1",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    }
+  ],
+  "gateway_adapter_note": "model-mismatch sends 0 HTTP calls: the built C# BudgetGatewayProvider rejects a run-pinned model the endpoint does not advertise, before any request",
+  "maintained_save_readonly_copy": {
+    "copy_load": {
+      "seq": 51,
+      "world_id": "fixture:town-trade-validation",
+      "ok": true,
+      "contracts": 5,
+      "resident_ids": [
+        "fixture:innkeeper",
+        "fixture:smith",
+        "fixture:carpenter"
+      ]
+    },
+    "source": "maintained seq51 save (fixture:town-trade-validation), fictional test world under a described local private evidence dir",
+    "sha256_after": "F97AAAC5645B88FEF80107DCC08808FF4077A7ED377D9DBA714541B34CC0BFB6",
+    "sha256_before": "F97AAAC5645B88FEF80107DCC08808FF4077A7ED377D9DBA714541B34CC0BFB6",
+    "note": "load performed against a byte-exact private COPY in this worktree; no writer taken on the maintained world; copy hash unchanged too"
+  },
+  "process_cleanup": {
+    "dotnet_processes_stopped": 370,
+    "selection_method": "Get-Process name plus StartTime window 18:35-18:38:30",
+    "ancestry_proof_recorded": false,
+    "ownership_certified": false,
+    "note": "no ancestry proof was recorded, so ownership of all stopped processes is not certified and this is not a verified-safe-cleanup claim; no damage and no security cause is asserted; future cleanup must select by PID, start identity and recorded parent chain"
+  },
+  "development_usage": {
+    "aggregate": {
+      "runs_total": 5,
+      "runs_completed": 5,
+      "runs_failed": 0,
+      "runs_incomplete": 0,
+      "runs_invalid": 0,
+      "completed_turns": 5,
+      "raw_tokens": 14598879,
+      "cache_miss_tokens": 189976,
+      "weighted_cache_hit": 0.986767,
+      "input_tokens": 14356632,
+      "cached_input_tokens": 14166656,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 242247,
+      "reasoning_output_tokens": 159266
+    },
+    "runs": [
+      {
+        "run_id": "20260911T102402926966Z",
+        "pid": 230496,
+        "model": "deepseek-flash",
+        "status": "completed",
+        "turn_count": 1,
+        "result_present": true,
+        "limitations": [],
+        "input_tokens": 1384539,
+        "cached_input_tokens": 1357952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 33138,
+        "reasoning_output_tokens": 23118,
+        "raw_tokens": 1417677,
+        "cache_miss_tokens": 26587,
+        "weighted_cache_hit": 0.980797
+      },
+      {
+        "run_id": "20260911T102403352217Z",
+        "pid": 231376,
+        "model": "deepseek-flash",
+        "status": "completed",
+        "turn_count": 1,
+        "result_present": true,
+        "limitations": [],
+        "input_tokens": 4290342,
+        "cached_input_tokens": 4229632,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 91635,
+        "reasoning_output_tokens": 77168,
+        "raw_tokens": 4381977,
+        "cache_miss_tokens": 60710,
+        "weighted_cache_hit": 0.98585
+      },
+      {
+        "run_id": "20260911T102402505735Z",
+        "pid": 229920,
+        "model": "deepseek-flash",
+        "status": "completed",
+        "turn_count": 1,
+        "result_present": true,
+        "limitations": [],
+        "input_tokens": 2011940,
+        "cached_input_tokens": 1989888,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 49793,
+        "reasoning_output_tokens": 23350,
+        "raw_tokens": 2061733,
+        "cache_miss_tokens": 22052,
+        "weighted_cache_hit": 0.989039
+      },
+      {
+        "run_id": "20260911T103302751052Z",
+        "pid": 158560,
+        "model": "deepseek-flash",
+        "status": "completed",
+        "turn_count": 1,
+        "result_present": true,
+        "limitations": [],
+        "input_tokens": 397112,
+        "cached_input_tokens": 388736,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 14414,
+        "reasoning_output_tokens": 5294,
+        "raw_tokens": 411526,
+        "cache_miss_tokens": 8376,
+        "weighted_cache_hit": 0.978908
+      },
+      {
+        "run_id": "20260911T103435909607Z",
+        "pid": 228864,
+        "model": "deepseek-flash",
+        "status": "completed",
+        "turn_count": 1,
+        "result_present": true,
+        "limitations": [],
+        "input_tokens": 6272699,
+        "cached_input_tokens": 6200448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 53267,
+        "reasoning_output_tokens": 30336,
+        "raw_tokens": 6325966,
+        "cache_miss_tokens": 72251,
+        "weighted_cache_hit": 0.988482
+      }
+    ],
+    "limitations": [
+      "counters only from completed turns; missing usage is unknown, not zero",
+      "raw = input + output includes cached input; not a cost estimate",
+      "no ledger, money estimate or cumulative session counter is written",
+      "totals cover only these five runs; they exclude this tiny closeout task and the root GPT-6 orchestration session"
+    ],
+    "note": "development run counters: zero paid NPC inference; these are paid DeepSeek DEVELOPMENT tasks with currency unavailable, not NPC calls and not a currency bill"
+  }
+}

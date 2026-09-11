@@ -1,0 +1,64 @@
+{
+  "as_of_utc": "2026-09-11T07:25:12.073148+00:00",
+  "world_id": "fixture:town-trade-validation",
+  "original_world_restored": false,
+  "seq_before": 13,
+  "seq_after": 16,
+  "offline_checks": 158,
+  "checks": {
+    "original_events_preserved": true,
+    "original_histories_preserved": true,
+    "items_contracts_trade_accounts_preserved": true,
+    "coins_preserved": true,
+    "cold_world_and_ledger_bytes_preserved": true,
+    "old_carpenter_error_preserved": true
+  },
+  "new_real_decisions": [
+    {
+      "action": "visitor-reply:visitor_inquiry:visitor:5:willing",
+      "model_choice": "a4",
+      "reason": "访客(visitor:local)再次主动询问是否需要帮忙（seq:14），我当前精力(93)和饱食度(93)都很充足。我的柴斧刃部仍只有20耐久，无法使用，但访客可能提供其他帮助或资源。之前我已表示愿意谈谈（willing），访客再次询问说明可能有新的互动机会。选择\"willing\"回应，看看是否能获得推进制作引火柴目标的新机会。",
+      "command_id": "turn:fixture:innkeeper:1:8",
+      "provenance": "opengameagent_live",
+      "status": "settled",
+      "result": {
+        "ok": true,
+        "code": "visitor_reply",
+        "text": "我愿意谈谈需要的帮助。",
+        "choice": "willing"
+      }
+    },
+    {
+      "action": "ask:fixture:carpenter",
+      "model_choice": "a3",
+      "reason": "我的柴斧刃部仅20耐久，无法使用（需要刃和柄都达到100）。我已与木匠有过成功合作（修理斧柄），现在需要修理斧刃才能用自有木料制作引火柴。附近木匠有wood_repair技能，我应主动询问木匠是否愿意帮忙修理斧刃，以便推进目标。",
+      "command_id": "turn:fixture:innkeeper:1:9",
+      "provenance": "opengameagent_live",
+      "status": "settled",
+      "result": {
+        "ok": true,
+        "code": "ask_help",
+        "request_id": "godot_help:turn:fixture:innkeeper:1:9",
+        "event_id": "life_event_16"
+      }
+    }
+  ],
+  "new_real_requests": 2,
+  "kimi_input_tokens": 11542,
+  "kimi_cached_input_tokens": 1536,
+  "kimi_output_tokens": 181,
+  "kimi_charge_cny": 0.0719228,
+  "whole_world_validation_passed": false,
+  "remaining_error": {
+    "fixture:carpenter": "provider_error"
+  },
+  "development_usage_observed": {
+    "input_tokens": 2568911,
+    "cached_input_tokens": 2428032,
+    "output_tokens": 25124,
+    "total_tokens": 2594035
+  },
+  "development_checkpoint_raw": 2000000,
+  "checkpoint_exceeded": true,
+  "cold_engine_exit": 0
+}
