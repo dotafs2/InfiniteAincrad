@@ -2,9 +2,16 @@ extends "res://core/world_kernel.gd"
 ## Continuation module: reuse the existing single-writer/atomic JSON persistence.
 ## Source residents/history stay intact; only this module owns new life effects.
 
-const DURATIONS := {"eat_ration": 30.0, "rest": 60.0, "harvest_ration": 20.0}
+const DURATIONS := {"eat_ration": 30.0, "rest": 60.0, "harvest_ration": 20.0,
+	"repair_edge": 60.0, "repair_handle": 60.0}
 const SOCIAL_ACTIONS := ["ask_help", "reply_help", "cancel_help"]
+const REPAIR_COMMAND_ACTIONS := ["repair_propose", "repair_accept", "repair_reject",
+	"repair_deliver", "repair_collect"]
+const REPAIR_ACTIVE_STATUSES := ["proposed", "accepted", "delivered", "completed"]
+const REPAIR_PRICES := [2, 5, 8]
 const HEARING_RANGE := 3.0
+const WORK_STATION_RANGE := 2.5
+const HANDOFF_RANGE := 2.2
 const JsonCodec = preload("res://core/TownJsonCodec.cs")
 var _visitor_position := Vector3.INF
 
@@ -58,7 +65,25 @@ func resident_view(resident_id: String = "") -> Dictionary:
 		"needs": person.needs.duplicate(true), "inventory": account(resident_id).duplicate(true),
 		"experiences": own_events, "observations": _state.godot.observations[resident_id].duplicate(true),
 		"available_actions": available(resident_id), "pending": _state.godot.pending.get(resident_id, {}).duplicate(true),
-		"nearby_residents": nearby(resident_id)}
+		"nearby_residents": nearby(resident_id), "work": work_view(resident_id)}
+
+func work_view(id: String) -> Dictionary:
+	if not active_ids().has(id) or not _has_repair_state():
+		return {}
+	var own_items: Array = []
+	for value in _state.life.items:
+		if value.get("owner_id") == id or value.get("custodian_id") == id:
+			own_items.append(value.duplicate(true))
+	var own_skills: Array = []
+	for value in _state.life.skills:
+		if value.get("resident_id") == id:
+			own_skills.append(value.duplicate(true))
+	var own_contracts: Array = []
+	for value in _state.life.contracts:
+		if value.get("owner_id") == id or value.get("worker_id") == id:
+			own_contracts.append(value.duplicate(true))
+	return {"materials": work_account(id).duplicate(true), "items": own_items,
+		"skills": own_skills, "contracts": own_contracts}
 
 func nearby(id: String) -> Array:
 	var result: Array = []
@@ -162,6 +187,246 @@ func communicate(id: String, decision: Dictionary, command_id: String, provenanc
 	_state.godot.commands[command_id] = {"payload": payload, "status": "completed"}
 	return {"ok": true, "code": action, "request_id": request_id, "event_id": event.event_id}
 
+func work_account(id: String) -> Dictionary:
+	if not _has_repair_state():
+		return {}
+	for value in _state.life.accounts:
+		if value.get("resident_id") == id:
+			return value
+	return {}
+
+func repair_contracts() -> Array:
+	return _state.life.get("contracts", []).duplicate(true) if _has_repair_state() else []
+
+func active_repair_for(id: String) -> Dictionary:
+	if not _has_repair_state():
+		return {}
+	for value in _state.life.contracts:
+		if str(value.get("id", "")).begins_with("godot_repair:") and value.get("status") in REPAIR_ACTIVE_STATUSES and (value.get("owner_id") == id or value.get("worker_id") == id):
+			return value.duplicate(true)
+	return {}
+
+func repair_candidate(part: String = "edge") -> Dictionary:
+	if not _has_repair_state() or not _repair_part(part).has("skill"):
+		return {}
+	var rule := _repair_part(part)
+	for value in _state.life.items:
+		var owner: String = value.get("owner_id", "")
+		if value.get("kind") != "axe" or value.get(part, 100) >= 100 or value.get("custodian_id") != owner or owner not in active_ids() or not _active_contract_for_item(value.id).is_empty():
+			continue
+		for worker in active_ids():
+			if worker != owner and _has_skill(worker, rule.skill) and work_account(worker).get(rule.material, 0) >= 1 and resident(owner).get("coins_col", 0) >= (2 if part == "edge" else 5):
+				return {"owner_id": owner, "worker_id": worker, "item_id": value.id,
+					"part": part, "price_col": 2 if part == "edge" else 5}
+	return {}
+
+func propose_repair(owner_id: String, item_id: String, worker_id: String, part: String,
+		price_col: int, command_id: String, provenance: String = "local_rule_policy") -> Dictionary:
+	var rule := _repair_part(part)
+	if owner_id not in active_ids() or worker_id not in active_ids() or owner_id == worker_id or rule.is_empty() or price_col not in REPAIR_PRICES or not _valid_repair_caller(command_id, provenance) or ("godot_repair:" + command_id).length() > 128:
+		return _failure("invalid_repair_proposal")
+	var payload := {"actor_id": owner_id, "action": "repair_propose", "item_id": item_id,
+		"worker_id": worker_id, "part": part, "price_col": price_col, "provenance": provenance}
+	var prior := _prior_repair_command(command_id, payload)
+	if not prior.is_empty():
+		prior["contract_id"] = "godot_repair:" + command_id
+		return prior
+	var item := _find_repair_item(item_id)
+	if item.is_empty() or item.get("owner_id") != owner_id or item.get("custodian_id") != owner_id or item.get(part, 100) >= 100 or not _has_skill(worker_id, rule.skill) or not _active_contract_for_item(item_id).is_empty():
+		return _failure("repair_proposal_unavailable")
+	var contract_id := "godot_repair:" + command_id
+	if not _find_repair_contract(contract_id).is_empty():
+		return _failure("repair_contract_conflict")
+	var contract := {"id": contract_id, "part": part, "item_id": item_id,
+		"owner_id": owner_id, "worker_id": worker_id, "price_col": price_col,
+		"reserved_col": 0, "status": "proposed"}
+	_state.life.contracts.append(contract)
+	var event := {"type": "repair_" + part, "actor_id": owner_id, "subject_id": worker_id,
+		"recipient_ids": [owner_id, worker_id], "operation_id": command_id, "source": provenance,
+		"text": "%s向%s提出修%s委托，报价%d Col。" % [resident(owner_id).name, resident(worker_id).name, "刃" if part == "edge" else "柄", price_col],
+		"contract_id": contract_id, "item_id": item_id, "part": part, "price_col": price_col}
+	_append_life_event(event)
+	_complete_repair_command(command_id, payload)
+	return {"ok": true, "code": "repair_proposed", "contract_id": contract_id, "event_id": event.event_id}
+
+func respond_repair(worker_id: String, contract_id: String, choice: String, command_id: String,
+		provenance: String = "local_rule_policy") -> Dictionary:
+	if worker_id not in active_ids() or choice not in ["accept", "reject"] or not _valid_repair_caller(command_id, provenance):
+		return _failure("invalid_repair_response")
+	var payload := {"actor_id": worker_id, "action": "repair_" + choice,
+		"contract_id": contract_id, "provenance": provenance}
+	var prior := _prior_repair_command(command_id, payload)
+	if not prior.is_empty():
+		return prior
+	var contract := _find_repair_contract(contract_id)
+	if contract.is_empty() or contract.get("worker_id") != worker_id or contract.get("status") != "proposed":
+		return _failure("repair_response_unavailable")
+	var owner_id: String = contract.owner_id
+	var rule := _repair_part(contract.part)
+	if choice == "accept":
+		var materials := work_account(worker_id)
+		var owner_materials := work_account(owner_id)
+		var owner := resident(owner_id)
+		if materials.is_empty() or owner_materials.is_empty() or not _has_skill(worker_id, rule.skill) or materials.get(rule.material, 0) < 1:
+			return _failure("worker_missing_skill_or_material")
+		if not _at_worker_station(worker_id, worker_id):
+			return _failure("worker_not_at_station")
+		if owner.get("coins_col", 0) < contract.price_col:
+			return _failure("owner_balance_insufficient")
+		owner.coins_col -= contract.price_col
+		owner_materials.reserved_col += contract.price_col
+		contract.reserved_col = contract.price_col
+		contract.status = "accepted"
+	else:
+		contract.status = "rejected"
+	var event := {"type": choice, "actor_id": worker_id, "subject_id": owner_id,
+		"recipient_ids": [worker_id, owner_id], "operation_id": command_id, "source": provenance,
+		"text": "%s%s了%s的修%s委托%s" % [resident(worker_id).name, "接受" if choice == "accept" else "拒绝", resident(owner_id).name,
+			"刃" if contract.part == "edge" else "柄", "，已预留%d Col。" % contract.price_col if choice == "accept" else "。"],
+		"contract_id": contract_id, "item_id": contract.item_id}
+	_append_life_event(event)
+	_complete_repair_command(command_id, payload)
+	return {"ok": true, "code": "repair_" + choice, "contract_id": contract_id, "event_id": event.event_id}
+
+func deliver_repair(owner_id: String, contract_id: String, command_id: String,
+		provenance: String = "local_rule_policy") -> Dictionary:
+	if owner_id not in active_ids() or not _valid_repair_caller(command_id, provenance):
+		return _failure("invalid_repair_delivery")
+	var payload := {"actor_id": owner_id, "action": "repair_deliver",
+		"contract_id": contract_id, "provenance": provenance}
+	var prior := _prior_repair_command(command_id, payload)
+	if not prior.is_empty():
+		return prior
+	var contract := _find_repair_contract(contract_id)
+	var item := _find_repair_item(contract.get("item_id", ""))
+	if contract.is_empty() or item.is_empty() or contract.get("owner_id") != owner_id or contract.get("status") != "accepted" or item.get("custodian_id") != owner_id:
+		return _failure("repair_delivery_unavailable")
+	var worker_id: String = contract.worker_id
+	if not _both_at_worker_station(owner_id, worker_id):
+		return _failure("repair_delivery_out_of_range")
+	item.custodian_id = worker_id
+	contract.status = "delivered"
+	var event := {"type": "deliver", "actor_id": owner_id, "subject_id": worker_id,
+		"recipient_ids": [owner_id, worker_id], "operation_id": command_id, "source": provenance,
+		"text": "%s已把柴斧交到%s的岗位，等待实际修理。" % [resident(owner_id).name, resident(worker_id).name],
+		"contract_id": contract_id, "item_id": item.id}
+	_append_life_event(event)
+	_complete_repair_command(command_id, payload)
+	return {"ok": true, "code": "repair_delivered", "contract_id": contract_id, "event_id": event.event_id}
+
+func start_repair_work(worker_id: String, contract_id: String, command_id: String,
+		provenance: String = "local_rule_policy") -> Dictionary:
+	if worker_id not in active_ids() or not _valid_repair_caller(command_id, provenance):
+		return _failure("invalid_repair_work")
+	var contract := _find_repair_contract(contract_id)
+	var rule := _repair_part(contract.get("part", ""))
+	var action: String = "repair_" + str(contract.get("part", ""))
+	var payload := {"actor_id": worker_id, "action": action,
+		"contract_id": contract_id, "provenance": provenance}
+	var prior := _prior_repair_command(command_id, payload)
+	if not prior.is_empty():
+		return prior
+	var item := _find_repair_item(contract.get("item_id", ""))
+	var materials := work_account(worker_id)
+	if contract.is_empty() or item.is_empty() or rule.is_empty() or contract.get("worker_id") != worker_id or contract.get("status") != "delivered" or item.get("custodian_id") != worker_id or not _has_skill(worker_id, rule.skill) or materials.get(rule.material, 0) < 1 or _state.godot.pending.has(worker_id):
+		return _failure("repair_work_unavailable")
+	if not _at_worker_station(worker_id, worker_id):
+		return _failure("worker_not_at_station")
+	_state.godot.commands[command_id] = {"payload": payload, "status": "pending"}
+	_state.godot.pending[worker_id] = {"action": action, "command_id": command_id,
+		"contract_id": contract_id, "elapsed": 0.0, "provenance": provenance}
+	return {"ok": true, "code": "repair_work_started", "contract_id": contract_id}
+
+func collect_repair(owner_id: String, contract_id: String, command_id: String,
+		provenance: String = "local_rule_policy") -> Dictionary:
+	if owner_id not in active_ids() or not _valid_repair_caller(command_id, provenance):
+		return _failure("invalid_repair_collection")
+	var payload := {"actor_id": owner_id, "action": "repair_collect",
+		"contract_id": contract_id, "provenance": provenance}
+	var prior := _prior_repair_command(command_id, payload)
+	if not prior.is_empty():
+		return prior
+	var contract := _find_repair_contract(contract_id)
+	var item := _find_repair_item(contract.get("item_id", ""))
+	if contract.is_empty() or item.is_empty() or contract.get("owner_id") != owner_id or contract.get("status") != "completed":
+		return _failure("repair_collection_unavailable")
+	var worker_id: String = contract.worker_id
+	var owner_materials := work_account(owner_id)
+	if item.get("custodian_id") != worker_id or owner_materials.get("reserved_col", -1) < contract.price_col or contract.get("reserved_col") != contract.price_col or not _both_at_worker_station(owner_id, worker_id):
+		return _failure("repair_collection_out_of_range_or_unsettled")
+	owner_materials.reserved_col -= contract.price_col
+	resident(worker_id).coins_col += contract.price_col
+	item.custodian_id = owner_id
+	contract.reserved_col = 0
+	contract.status = "collected"
+	var event := {"type": "collect", "actor_id": owner_id, "subject_id": worker_id,
+		"recipient_ids": [owner_id, worker_id], "operation_id": command_id, "source": provenance,
+		"text": "%s取回柴斧，向%s结算%d Col。" % [resident(owner_id).name, resident(worker_id).name, contract.price_col],
+		"contract_id": contract_id, "item_id": item.id}
+	_append_life_event(event)
+	_complete_repair_command(command_id, payload)
+	return {"ok": true, "code": "repair_collected", "contract_id": contract_id, "event_id": event.event_id}
+
+func _has_repair_state() -> bool:
+	return _state.get("life") is Dictionary and _state.life.get("items") is Array and _state.life.get("skills") is Array and _state.life.get("accounts") is Array and _state.life.get("contracts") is Array
+
+func _repair_part(part: String) -> Dictionary:
+	if part == "edge":
+		return {"skill": "metal_repair", "material": "iron"}
+	if part == "handle":
+		return {"skill": "wood_repair", "material": "wood"}
+	return {}
+
+func _has_skill(id: String, skill: String) -> bool:
+	if not _has_repair_state():
+		return false
+	for value in _state.life.skills:
+		if value.get("resident_id") == id and value.get("skill_id") == skill:
+			return true
+	return false
+
+func _find_repair_item(item_id: String) -> Dictionary:
+	if not _has_repair_state():
+		return {}
+	for value in _state.life.items:
+		if value.get("id") == item_id:
+			return value
+	return {}
+
+func _find_repair_contract(contract_id: String) -> Dictionary:
+	if not _has_repair_state():
+		return {}
+	for value in _state.life.contracts:
+		if value.get("id") == contract_id:
+			return value
+	return {}
+
+func _active_contract_for_item(item_id: String) -> Dictionary:
+	if not _has_repair_state():
+		return {}
+	for value in _state.life.contracts:
+		if value.get("item_id") == item_id and value.get("status") in REPAIR_ACTIVE_STATUSES:
+			return value
+	return {}
+
+func _valid_repair_caller(command_id: String, provenance: String) -> bool:
+	return _has_repair_state() and _validate_decision_command_id(command_id).ok and provenance in ALLOWED_DECISION_PROVENANCE
+
+func _prior_repair_command(command_id: String, payload: Dictionary) -> Dictionary:
+	if not _state.godot.commands.has(command_id):
+		return {}
+	var matches: bool = _state.godot.commands[command_id].payload == payload
+	return {"ok": matches, "duplicate": matches, "code": "duplicate" if matches else "command_conflict"}
+
+func _complete_repair_command(command_id: String, payload: Dictionary) -> void:
+	_state.godot.commands[command_id] = {"payload": payload, "status": "completed"}
+
+func _at_worker_station(id: String, worker_id: String) -> bool:
+	return position_of(id).distance_to(destination(worker_id, "rest")) <= WORK_STATION_RANGE
+
+func _both_at_worker_station(owner_id: String, worker_id: String) -> bool:
+	return _at_worker_station(owner_id, worker_id) and _at_worker_station(worker_id, worker_id) and position_of(owner_id).distance_to(position_of(worker_id)) <= HANDOFF_RANGE
+
 func _append_life_event(event: Dictionary) -> void:
 	_state.life.seq += 1
 	event.seq = _state.life.seq
@@ -255,6 +520,8 @@ func advance(delta: float) -> Dictionary:
 	return {"ok": true, "completed": completed}
 
 func _finish(id: String, pending: Dictionary) -> Dictionary:
+	if pending.action in ["repair_edge", "repair_handle"]:
+		return _finish_repair(id, pending)
 	var a := account(id)
 	var needs: Dictionary = resident(id).needs
 	var action: String = pending.action
@@ -288,6 +555,29 @@ func _finish(id: String, pending: Dictionary) -> Dictionary:
 		_state.life.events.append(event)
 		_state.godot.new_events.append(event.event_id)
 	return receipt
+
+func _finish_repair(worker_id: String, pending: Dictionary) -> Dictionary:
+	var contract := _find_repair_contract(pending.get("contract_id", ""))
+	var item := _find_repair_item(contract.get("item_id", ""))
+	var part: String = contract.get("part", "")
+	var rule := _repair_part(part)
+	var materials := work_account(worker_id)
+	var valid: bool = not contract.is_empty() and not item.is_empty() and not rule.is_empty() and contract.get("worker_id") == worker_id and contract.get("status") == "delivered" and item.get("custodian_id") == worker_id and _has_skill(worker_id, rule.skill) and materials.get(rule.material, 0) >= 1 and _at_worker_station(worker_id, worker_id)
+	_state.godot.commands[pending.command_id].status = "completed" if valid else "rejected"
+	_state.godot.pending.erase(worker_id)
+	if not valid:
+		return {"ok": false, "code": "repair_resources_unavailable", "actor_id": worker_id,
+			"command_id": pending.command_id, "contract_id": pending.get("contract_id", "")}
+	materials[rule.material] -= 1
+	item[part] = 100
+	contract.status = "completed"
+	var event := {"type": "work", "actor_id": worker_id, "subject_id": contract.owner_id,
+		"recipient_ids": [contract.owner_id, worker_id], "operation_id": pending.command_id,
+		"source": pending.provenance, "text": "%s完成了柴斧的修%s。" % [resident(worker_id).name, "刃" if part == "edge" else "柄"],
+		"contract_id": contract.id, "item_id": item.id, "part": part}
+	_append_life_event(event)
+	return {"ok": true, "code": "repair_completed", "actor_id": worker_id,
+		"command_id": pending.command_id, "contract_id": contract.id, "event_id": event.event_id}
 
 func transaction(path: String, operation: Callable) -> Dictionary:
 	# Acquire before touching state; roll back in-memory consequences on save failure.
@@ -350,6 +640,14 @@ func _validate_state(value: Variant) -> Dictionary:
 		var job = g.pending[id]
 		if id not in active or not job is Dictionary or job.get("action") not in DURATIONS or not _valid_nonnegative(job.get("elapsed")) or not g.commands.has(job.get("command_id")) or job.get("provenance") not in ALLOWED_DECISION_PROVENANCE:
 			return _failure("invalid_pending")
+		if job.action in ["repair_edge", "repair_handle"]:
+			var contract: Dictionary = {}
+			for candidate in value.life.get("contracts", []):
+				if candidate is Dictionary and candidate.get("id") == job.get("contract_id"):
+					contract = candidate
+					break
+			if contract.is_empty() or contract.get("worker_id") != id or contract.get("status") != "delivered" or "repair_" + str(contract.get("part", "")) != job.action:
+				return _failure("invalid_pending_repair")
 	for command_id in g.commands:
 		var command = g.commands[command_id]
 		if not command_id is String or not _validate_decision_command_id(command_id).ok or not command is Dictionary or command.get("status") not in ["pending", "completed", "rejected"] or not command.get("payload") is Dictionary:
@@ -364,10 +662,12 @@ func _validate_state(value: Variant) -> Dictionary:
 			elif payload.get("actor_id") not in active or payload.get("provenance") not in ALLOWED_DECISION_PROVENANCE or payload.get("choice") not in ["willing", "unavailable", "unsure"]:
 				return _failure("invalid_visitor_reply_command")
 			continue
-		if payload.get("actor_id") not in active or (payload.get("action") not in DURATIONS and payload.get("action") not in SOCIAL_ACTIONS) or payload.get("provenance") not in ALLOWED_DECISION_PROVENANCE:
+		if payload.get("actor_id") not in active or (payload.get("action") not in DURATIONS and payload.get("action") not in SOCIAL_ACTIONS and payload.get("action") not in REPAIR_COMMAND_ACTIONS) or payload.get("provenance") not in ALLOWED_DECISION_PROVENANCE:
 			return _failure("invalid_command_payload")
 		if payload.action in SOCIAL_ACTIONS and (command.status != "completed" or not payload.get("decision") is Dictionary):
 			return _failure("invalid_social_command")
+		if payload.action in REPAIR_COMMAND_ACTIONS and (command.status != "completed" or not payload.get("contract_id", payload.get("item_id", "")) is String):
+			return _failure("invalid_repair_command")
 		if command.status == "pending":
 			var pending: Dictionary = g.pending.get(payload.actor_id, {})
 			if pending.get("command_id") != command_id or pending.get("action") != payload.action or pending.get("provenance") != payload.provenance:

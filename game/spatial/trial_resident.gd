@@ -13,11 +13,14 @@ var _right_arm: Node3D
 var _bucket: Node3D
 var _ration: MeshInstance3D
 var _right_hand: MeshInstance3D
+var _axe: Node3D
+var _axe_head: MeshInstance3D
 @export var shirt_color := Color("31506b")
 @export var hair_color := Color("4b3629")
 var _walking: bool = false
 var _motion_time: float = 0.0
 var _gesture: String = "idle"
+var _holds_axe := false
 
 func _ready() -> void:
 	_build_body()
@@ -37,6 +40,9 @@ func _process(delta: float) -> void:
 		elif _gesture in ["bend", "harvest"]:
 			_right_arm.rotation.x = 0.6 + sin(_motion_time * 3.0) * 0.12
 			_left_arm.rotation.x = 0.5
+		elif _gesture == "repair":
+			_right_arm.rotation.x = 0.65 + sin(_motion_time * 5.0) * 0.75
+			_left_arm.rotation.x = 0.8
 		elif _gesture == "carry":
 			_right_arm.rotation.x = 0.12
 	if _gesture in ["bend", "harvest", "rest"] and _body != null:
@@ -49,12 +55,19 @@ func _process(delta: float) -> void:
 		_bucket.rotation.x = -0.45 if _gesture == "drink" else 0.0
 	if _ration != null:
 		_ration.visible = _gesture == "eat"
+	if _axe != null:
+		_axe.visible = _holds_axe
 
 func set_walking(value: bool) -> void:
 	_walking = value
 
 func set_gesture(value: String) -> void:
 	_gesture = value
+
+func set_holds_axe(value: bool, repaired: bool = false) -> void:
+	_holds_axe = value
+	if _axe_head != null:
+		_axe_head.material_override = _material(Color("b7c2c4") if repaired else Color("756d65"))
 
 func bucket_visible() -> bool:
 	return _bucket != null and _bucket.visible
@@ -120,6 +133,14 @@ func _build_body() -> void:
 	_right_hand = _box(_right_arm, "Hand", Vector3(0, -0.59, 0), Vector3(0.15, 0.16, 0.15), Color("d69b72"))
 	_ration = _box(_right_hand, "Ration", Vector3(0, -0.03, -0.07), Vector3(0.16, 0.09, 0.12), Color("c99245"))
 	_ration.visible = false
+	_axe = Node3D.new()
+	_axe.name = "HandAxe"
+	_axe.position = Vector3(0, -0.2, -0.04)
+	_axe.rotation.z = -0.25
+	_right_hand.add_child(_axe)
+	_box(_axe, "AxeHandle", Vector3(0, -0.18, 0), Vector3(0.055, 0.48, 0.055), Color("704c2d"))
+	_axe_head = _box(_axe, "AxeHead", Vector3(0.10, 0.04, 0), Vector3(0.25, 0.13, 0.07), Color("756d65"))
+	_axe.visible = false
 
 	_bucket = Node3D.new()
 	_bucket.name = "HandBucket"

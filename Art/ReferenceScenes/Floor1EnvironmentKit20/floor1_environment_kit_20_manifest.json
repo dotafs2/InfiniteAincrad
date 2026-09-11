@@ -1,0 +1,447 @@
+{
+  "schema": 1,
+  "id": "Floor1_EnvironmentKit20",
+  "style_id": "floor1_environment_kit_20_v1",
+  "seed": 1120,
+  "blender_version": "5.2.1 LTS",
+  "source": "project-authored Codex-assisted Blender Python",
+  "copyright_boundary": "original broad-setting environment components; no traced frames or restricted source/private assets",
+  "asset_count": 20,
+  "vegetation_and_natural_asset_count": 15,
+  "plant_groups": {
+    "canopy_trees": {
+      "label_zh": "乔木冠层",
+      "asset_ids": [
+        "F1_ancient_oak",
+        "F1_birch_grove",
+        "F1_cypress_column",
+        "F1_stone_pine",
+        "F1_orchard_apple",
+        "F1_young_maple"
+      ],
+      "wind_profile": "tree_gentle"
+    },
+    "shrubs_and_cultivated": {
+      "label_zh": "灌木与栽培",
+      "asset_ids": [
+        "F1_flowering_shrub",
+        "F1_berry_bush",
+        "F1_herb_planter"
+      ],
+      "wind_profile": "shrub_soft"
+    },
+    "groundcovers": {
+      "label_zh": "地被植物",
+      "asset_ids": [
+        "F1_fern_patch",
+        "F1_meadow_grass",
+        "F1_wildflower_patch"
+      ],
+      "wind_profile": "ground_breeze"
+    },
+    "climbers": {
+      "label_zh": "攀援植物",
+      "asset_ids": [
+        "F1_ivy_wall_panel"
+      ],
+      "wind_profile": "climber_subtle"
+    },
+    "wetland": {
+      "label_zh": "湿地植物",
+      "asset_ids": [
+        "F1_reed_cluster"
+      ],
+      "wind_profile": "reed_sway"
+    },
+    "deadwood_and_moss": {
+      "label_zh": "枯木与苔藓",
+      "asset_ids": [
+        "F1_mossy_fallen_log"
+      ],
+      "wind_profile": "static"
+    }
+  },
+  "wind_overrides": {
+    "F1_herb_planter": "static_container"
+  },
+  "showcase": {
+    "file": "game/assets/floor1/environment_kit_20/Floor1_EnvironmentKit20_Showcase.glb",
+    "sha256": "8d2abcbdccacb3a6bfb8a03e28f658c4b4b23a9f8d9092a21c39567cf0714423",
+    "purpose": "catalogue preview only; use individual GLBs for placement"
+  },
+  "renders": [
+    "docs/validation/floor1_environment_kit_20_2026-09-11/environment_kit_20_vegetation.png",
+    "docs/validation/floor1_environment_kit_20_2026-09-11/environment_kit_20_components.png"
+  ],
+  "assets": [
+    {
+      "id": "F1_ancient_oak",
+      "label_zh": "古橡树",
+      "category": "tree",
+      "dimensions_m": [
+        5.8,
+        5.5,
+        8.2
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_ancient_oak.glb",
+      "sha256": "c07677e1cedeabe0a30ef4384d6187b017e5dd9e322333ce5807f7238bbda0d5",
+      "visual_triangles": 9518,
+      "collision_triangles": 36,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": "canopy_trees",
+      "wind_profile": "tree_gentle"
+    },
+    {
+      "id": "F1_birch_grove",
+      "label_zh": "白桦组三株",
+      "category": "tree",
+      "dimensions_m": [
+        3.2,
+        3.0,
+        6.8
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_birch_grove.glb",
+      "sha256": "016c795245c6b819dd0c27277698feca09bb5d02f92d3a0128660786bed7a27b",
+      "visual_triangles": 13388,
+      "collision_triangles": 84,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": "canopy_trees",
+      "wind_profile": "tree_gentle"
+    },
+    {
+      "id": "F1_cypress_column",
+      "label_zh": "柱形柏树",
+      "category": "tree",
+      "dimensions_m": [
+        1.7,
+        1.7,
+        7.5
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_cypress_column.glb",
+      "sha256": "fb48408b54187d575ec401f39f4911852ed4f82e3c9694c2f1ef13026d8338ea",
+      "visual_triangles": 2776,
+      "collision_triangles": 28,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": "canopy_trees",
+      "wind_profile": "tree_gentle"
+    },
+    {
+      "id": "F1_stone_pine",
+      "label_zh": "石地松树",
+      "category": "tree",
+      "dimensions_m": [
+        5.2,
+        5.0,
+        6.8
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_stone_pine.glb",
+      "sha256": "a71c2202f897b9d4c176800939aafcb6f66054ebc7cedaa40cea150354d20825",
+      "visual_triangles": 24116,
+      "collision_triangles": 28,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": "canopy_trees",
+      "wind_profile": "tree_gentle"
+    },
+    {
+      "id": "F1_orchard_apple",
+      "label_zh": "果园苹果树",
+      "category": "tree",
+      "dimensions_m": [
+        3.8,
+        3.8,
+        5.2
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_orchard_apple.glb",
+      "sha256": "053731dabe55e864bd6bfd06ec0ee7aff50c305959a838bdfa4edfca059e2ecd",
+      "visual_triangles": 12216,
+      "collision_triangles": 36,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": "canopy_trees",
+      "wind_profile": "tree_gentle"
+    },
+    {
+      "id": "F1_young_maple",
+      "label_zh": "幼枫树",
+      "category": "tree",
+      "dimensions_m": [
+        3.1,
+        3.1,
+        4.6
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_young_maple.glb",
+      "sha256": "e2d691f94d5248687c163245d5cf4d2eeedf00756cd20e4b71d2a71e2eba3f7b",
+      "visual_triangles": 7482,
+      "collision_triangles": 36,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": "canopy_trees",
+      "wind_profile": "tree_gentle"
+    },
+    {
+      "id": "F1_flowering_shrub",
+      "label_zh": "开花灌木",
+      "category": "shrub",
+      "dimensions_m": [
+        2.0,
+        2.0,
+        1.8
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_flowering_shrub.glb",
+      "sha256": "c2884ce3f3da93239dd2ec028bd40a5173138098e2cc0fd5bfd99ed0abf17899",
+      "visual_triangles": 21920,
+      "collision_triangles": 80,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": "shrubs_and_cultivated",
+      "wind_profile": "shrub_soft"
+    },
+    {
+      "id": "F1_berry_bush",
+      "label_zh": "浆果丛",
+      "category": "shrub",
+      "dimensions_m": [
+        1.8,
+        1.8,
+        1.4
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_berry_bush.glb",
+      "sha256": "543dd7b17ac93b2de7598cbdb7d491f9b44ccd2726bec6c92aa29f191519993b",
+      "visual_triangles": 14928,
+      "collision_triangles": 80,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": "shrubs_and_cultivated",
+      "wind_profile": "shrub_soft"
+    },
+    {
+      "id": "F1_fern_patch",
+      "label_zh": "蕨类地被",
+      "category": "groundcover",
+      "dimensions_m": [
+        2.0,
+        1.8,
+        0.9
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_fern_patch.glb",
+      "sha256": "be3de3c87603098410715c403a1abe2af9c4eb89c16c18d04ad29683c52456d9",
+      "visual_triangles": 36514,
+      "collision_triangles": 0,
+      "collision_proxy": false,
+      "origin": "ground_center",
+      "plant_group": "groundcovers",
+      "wind_profile": "ground_breeze"
+    },
+    {
+      "id": "F1_meadow_grass",
+      "label_zh": "草甸草簇",
+      "category": "groundcover",
+      "dimensions_m": [
+        1.8,
+        1.8,
+        0.9
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_meadow_grass.glb",
+      "sha256": "84823a55ee211b7bb431b481b33e213b8db572491e0c2c8686663b33700f30b4",
+      "visual_triangles": 2470,
+      "collision_triangles": 0,
+      "collision_proxy": false,
+      "origin": "ground_center",
+      "plant_group": "groundcovers",
+      "wind_profile": "ground_breeze"
+    },
+    {
+      "id": "F1_wildflower_patch",
+      "label_zh": "野花草簇",
+      "category": "groundcover",
+      "dimensions_m": [
+        1.8,
+        1.8,
+        0.9
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_wildflower_patch.glb",
+      "sha256": "0d9642041ecb2335faf1f8bd97bd71155552c20c0dd9ef13cb610370b48c8379",
+      "visual_triangles": 43814,
+      "collision_triangles": 0,
+      "collision_proxy": false,
+      "origin": "ground_center",
+      "plant_group": "groundcovers",
+      "wind_profile": "ground_breeze"
+    },
+    {
+      "id": "F1_ivy_wall_panel",
+      "label_zh": "常春藤墙面",
+      "category": "climber",
+      "dimensions_m": [
+        3.2,
+        0.4,
+        3.2
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_ivy_wall_panel.glb",
+      "sha256": "609b4349d2f3b3b2fe39bbc3e36ba4db6e91a50372a068ca4e2fa55e72eea633",
+      "visual_triangles": 18040,
+      "collision_triangles": 0,
+      "collision_proxy": false,
+      "origin": "ground_center",
+      "plant_group": "climbers",
+      "wind_profile": "climber_subtle"
+    },
+    {
+      "id": "F1_reed_cluster",
+      "label_zh": "芦苇簇",
+      "category": "waterside",
+      "dimensions_m": [
+        1.8,
+        1.8,
+        2.5
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_reed_cluster.glb",
+      "sha256": "192fbb4f89d203ad83271bf10d89e00601170eb14e7d85dc88812c8468332652",
+      "visual_triangles": 9892,
+      "collision_triangles": 0,
+      "collision_proxy": false,
+      "origin": "ground_center",
+      "plant_group": "wetland",
+      "wind_profile": "reed_sway"
+    },
+    {
+      "id": "F1_mossy_fallen_log",
+      "label_zh": "苔藓倒木",
+      "category": "natural_prop",
+      "dimensions_m": [
+        4.6,
+        1.2,
+        1.0
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_mossy_fallen_log.glb",
+      "sha256": "798aee4626a9980a59a18df820d8e519cfc6af9990006fc3fe92a8f1a5d4c7f1",
+      "visual_triangles": 3234,
+      "collision_triangles": 12,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": "deadwood_and_moss",
+      "wind_profile": "static"
+    },
+    {
+      "id": "F1_herb_planter",
+      "label_zh": "香草种植箱",
+      "category": "cultivated",
+      "dimensions_m": [
+        2.7,
+        1.1,
+        1.3
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_herb_planter.glb",
+      "sha256": "25bf44a7f09ada97672a8af53da725fb90d6788eb5e59c19a3c0b5b10ba66883",
+      "visual_triangles": 9800,
+      "collision_triangles": 12,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": "shrubs_and_cultivated",
+      "wind_profile": "static_container"
+    },
+    {
+      "id": "F1_mossy_boulder_cluster",
+      "label_zh": "苔石组",
+      "category": "natural_prop",
+      "dimensions_m": [
+        3.0,
+        2.2,
+        1.6
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_mossy_boulder_cluster.glb",
+      "sha256": "c5871242a832c32a8f5f5d1066568b94a6ed0f24bc322adb91b3d7cbf58c8f6b",
+      "visual_triangles": 1854,
+      "collision_triangles": 240,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": null,
+      "wind_profile": "static"
+    },
+    {
+      "id": "F1_roadside_milestone",
+      "label_zh": "道路里程碑",
+      "category": "street_prop",
+      "dimensions_m": [
+        1.6,
+        1.6,
+        2.5
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_roadside_milestone.glb",
+      "sha256": "59fb5557eac45a565f90c742a38bc84862f3c821dc51c456e29d698a275e3c91",
+      "visual_triangles": 4108,
+      "collision_triangles": 36,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": null,
+      "wind_profile": "static"
+    },
+    {
+      "id": "F1_timber_fence_vine",
+      "label_zh": "藤蔓木栅栏",
+      "category": "boundary",
+      "dimensions_m": [
+        5.2,
+        0.7,
+        2.6
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_timber_fence_vine.glb",
+      "sha256": "1ee51eba5108930b10b13d34cdaabadb3d681f4dca87c05a4c135a44d55a7e64",
+      "visual_triangles": 6304,
+      "collision_triangles": 36,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": null,
+      "wind_profile": "static"
+    },
+    {
+      "id": "F1_stone_water_trough",
+      "label_zh": "石质水槽",
+      "category": "street_prop",
+      "dimensions_m": [
+        3.9,
+        1.7,
+        1.2
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_stone_water_trough.glb",
+      "sha256": "b68de9a673adf4a1ef1dec185f0d34261771219b6d144070d9d412b78e64aade",
+      "visual_triangles": 1944,
+      "collision_triangles": 48,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": null,
+      "wind_profile": "static"
+    },
+    {
+      "id": "F1_canvas_rest_shelter",
+      "label_zh": "帆布休憩棚",
+      "category": "large_component",
+      "dimensions_m": [
+        5.2,
+        3.6,
+        4.4
+      ],
+      "file": "game/assets/floor1/environment_kit_20/F1_canvas_rest_shelter.glb",
+      "sha256": "3c577b5863368b52299fba1a12190dc76e1e15597c3f80f90d165994cea3343c",
+      "visual_triangles": 2196,
+      "collision_triangles": 48,
+      "collision_proxy": true,
+      "origin": "ground_center",
+      "plant_group": null,
+      "wind_profile": "static"
+    }
+  ],
+  "limits": [
+    "first authored variation per component; not biome-scale variation",
+    "individual LOD tiers and vertex or branch-level wind deformation are not included",
+    "Godot provides category-tuned visual-root sway while collision stays static",
+    "collision proxies are conservative and require gameplay review after placement",
+    "visual approval remains pending"
+  ],
+  "visual_approval": false,
+  "first_version_complete": false
+}

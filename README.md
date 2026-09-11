@@ -14,6 +14,12 @@ Maintained by [dotafs2](https://github.com/dotafs2). Project name: **InfiniteAin
 
 已经加入原存档的独立迁移验证入口：`./Run-Street.ps1 -Town -SavePath <迁移输出/world.json>`。三人可进食、休息、到公共浆果地采集；新选择明确使用离线规则。先按 [迁移说明](docs/MIGRATION.md) 生成私有副本。启动暂停，空格继续；这仍不是完整迁移或第一版。
 
+城镇端也已加入修刃委托的 Godot 规则和可见流程：靠近斧子主人按 R，可经过接单预留、当面交付、60 秒修理、耗铁、取回和付款；H 仍用于近距离询问。该流程已在三人离线 fixture 中验证并冷恢复，尚未在这台电脑缺失的 13 人私有存档上重放，详见 [修理验收](docs/validation/repair_work_2026-09-11.md)。
+
+第一层美术新增一套原创 Blender 英雄街角：双塔城门、木石商屋、锻造铺、契约告示板、灯具、货车和 12 米可行走街道。Godot 已实际导入并验证碰撞与门洞；这是一块可编辑的质量/风格样板，不是“无限城市”完成声明，也不含复制的动画场景或旧工程受限人物。详见 [美术验收](docs/validation/floor1_art_2026-09-11.md)。
+
+第一批 20 件环境组件已按新的近景要求全部重制为 V2：独立分枝和弯曲叶片、六类植物、顶点权重风动、三档 LOD、可直接拖入 Godot 的组件场景。默认井边 demo 与城镇模式的 8 个装饰实例已替换，其中 7 个具有局部植物风动；新隔离存档的原有井边流程检查通过。提供 Blender 源、6 秒实录和近景，详见 [V2 美术与接入验收](docs/validation/floor1_environment_v2_2026-09-11.md)。
+
 唯一长期目标：建立能进入、能影响、能长期延续的AI世界。模型升级增强同一批居民的生活，已经发生的事情不会随模型更换消失。
 
 ## Current repository
@@ -40,7 +46,7 @@ The market is the existing authored V5 environment. The one resident uses primit
 
 ## Contributing
 
-Start with [CONTRIBUTING.md](CONTRIBUTING.md) and the [current delivery gate](ROADMAP.md). The immediate contribution is independently reproducing or testing the Windows preview. The next new world behavior is nearby, source-attributed resident inquiry with a choice to respond, refuse or defer.
+Start with [CONTRIBUTING.md](CONTRIBUTING.md) and the [current delivery gate](ROADMAP.md). The immediate contribution is independently reproducing or testing the Windows preview. Nearby source-attributed inquiry is now present in the town fixture; the next bounded gameplay work is the remaining source-defined handle repair, repaired-tool use and material exchange, followed by the accounted 5–10-resident food/labor loop.
 
 This is an independent fan-inspired project, not an official SAO product. The initial repository contains newly written scaffolding and planning documents; no third-party character models, animation screenshots or private save data. Reuse and asset licensing status is recorded in [ASSET_POLICY.md](ASSET_POLICY.md). A public repository does not by itself grant a general reuse license; the project-wide license has not yet been selected.
 

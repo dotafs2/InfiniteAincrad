@@ -1,6 +1,7 @@
 extends Node3D
 
 const MARKET_GLB: String = "res://assets/market/StartingTown_Market_CraftV5.glb"
+const ENVIRONMENT_V2: GDScript = preload("res://spatial/environment_v2.gd")
 const MANIFEST_PATH: String = "res://capabilities/well_bucket.v1.json"
 const DEFAULT_SAVE_PATH: String = "user://street-trial/world.json"
 const RESIDENT_SCRIPT: GDScript = preload("res://spatial/trial_resident.gd")
@@ -69,6 +70,7 @@ func _ready() -> void:
 	_build_environment()
 	_build_ground_collision()
 	_load_market_runtime()
+	_load_floor1_environment_dressing()
 	_build_well()
 	_build_player()
 	_build_resident()
@@ -514,6 +516,37 @@ func _hide_proxy_visuals_and_build_collision(node: Node, inherited_hidden: bool)
 				_collision_count += 1
 	for child: Node in node.get_children():
 		_hide_proxy_visuals_and_build_collision(child, hidden_visual)
+
+func _load_floor1_environment_dressing() -> void:
+	# Visual-only placement keeps the existing authoritative navigation and
+	# persistence behavior unchanged while the new kit awaits route review.
+	var placements: Array[Dictionary] = [
+		{"id": "F1_herb_planter", "position": Vector3(6.4, 0.0, 4.8), "yaw": 90.0, "scale": 0.92},
+		{"id": "F1_wildflower_patch", "position": Vector3(-4.8, 0.0, 2.0), "yaw": 12.0, "scale": 0.82},
+		{"id": "F1_fern_patch", "position": Vector3(5.1, 0.0, 1.4), "yaw": -16.0, "scale": 0.88},
+		{"id": "F1_meadow_grass", "position": Vector3(-5.4, 0.0, 6.8), "yaw": 41.0, "scale": 0.90},
+		{"id": "F1_flowering_shrub", "position": Vector3(-5.2, 0.0, 10.3), "yaw": 24.0, "scale": 0.72},
+		{"id": "F1_berry_bush", "position": Vector3(5.2, 0.0, 8.2), "yaw": -31.0, "scale": 0.70},
+		{"id": "F1_roadside_milestone", "position": Vector3(5.7, 0.0, 10.6), "yaw": -12.0, "scale": 0.78},
+		{"id": "F1_ivy_wall_panel", "position": Vector3(-6.15, 0.05, 4.2), "yaw": 90.0, "scale": 0.72},
+	]
+	var root := Node3D.new()
+	root.name = "Floor1EnvironmentDressing"
+	add_child(root)
+	var loaded_ids: Array[String] = []
+	var wind_instances := 0
+	for placement in placements:
+		var asset_id := str(placement.id)
+		var instance: Node3D = ENVIRONMENT_V2.create(asset_id, false)
+		instance.name = asset_id + "_Dressing"
+		instance.position = placement.position
+		instance.rotation_degrees.y = float(placement.yaw)
+		instance.scale = Vector3.ONE * float(placement.scale)
+		root.add_child(instance)
+		if asset_id != "F1_roadside_milestone":
+			wind_instances += 1
+		loaded_ids.append(asset_id)
+	_evidence["environment_dressing"] = {"kit": "floor1_environment_v2", "instances": loaded_ids.size(), "wind_instances": wind_instances, "asset_ids": loaded_ids, "lods_per_asset": 3, "collision_mode": "visual_only_pending_route_review", "wind_mode": "UV2_weighted_vertex_shader"}
 
 func _build_well() -> void:
 	_well = Node3D.new()
