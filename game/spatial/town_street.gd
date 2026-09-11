@@ -12,6 +12,7 @@ const TownTurns = preload("res://agents/town_turns.gd")
 const TownTools = preload("res://spatial/town_tools.gd")
 const TownNameplates = preload("res://spatial/town_nameplates.gd")
 const MaterialSources = preload("res://spatial/town_material_sources.gd")
+const MaterialVisibility = preload("res://spatial/town_material_visibility.gd")
 var town := Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
@@ -50,6 +51,7 @@ var repair_fixture_finished_at := -1.0
 var repair_initial_money := -1
 var repair_initial_iron := -1
 var nameplates: Node = null
+var material_visibility: Node3D = null
 
 func _ready() -> void:
 	restore_only = OS.get_cmdline_user_args().has("--town-restore")
@@ -131,6 +133,12 @@ func _ready() -> void:
 	var material_sources := MaterialSources.new()
 	add_child(material_sources)
 	material_sources.configure(town)
+	# Bind real line-of-sight sensing for the actual town street BEFORE any tick
+	# or model decision, in every mode (offline, gateway, restore).
+	material_visibility = MaterialVisibility.new()
+	add_child(material_visibility)
+	material_visibility.configure(town, bodies, material_sources)
+	town.require_material_visibility(Callable(material_visibility, "can_observe"))
 	_build_town_hud()
 	_build_nameplates()
 	if gateway_mode:

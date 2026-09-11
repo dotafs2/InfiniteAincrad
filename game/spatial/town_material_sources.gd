@@ -76,6 +76,19 @@ func _update_source(source_id: String, label_text: String, stock: int) -> void:
 	for index in 5:
 		display.get_child(index + 1).visible = index < bundle_count
 
+func observation_target(source_id: String) -> Vector3:
+	# Read-only actual target: the center of the material tray bars. Returns
+	# Vector3.INF when the source is unknown, freed, hidden or not in the tree.
+	if not sources.has(source_id):
+		return Vector3.INF
+	var entry: Dictionary = sources[source_id]
+	var display: Variant = entry.get("display")
+	if not is_instance_valid(display):
+		return Vector3.INF
+	if not display is Node3D or not display.is_inside_tree() or not display.is_visible_in_tree():
+		return Vector3.INF
+	return (display as Node3D).to_global(Vector3(0, 0.11, 0))
+
 func _stock(source: Dictionary) -> int:
 	return clampi(int(source.get("stock", 0)), 0, 100)
 

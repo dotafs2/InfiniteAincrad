@@ -3,6 +3,16 @@ extends "res://core/town_trade.gd"
 const MATERIAL_WORK_SECONDS := 60.0
 const MATERIAL_OBSERVATION_RANGE := 3.0
 
+var _material_visibility_probe: Callable = Callable()
+var _material_visibility_required := false
+
+func require_material_visibility(probe: Callable) -> void:
+	# Opt-in line-of-sight sensing for the actual town street. Legacy headless
+	# fixtures keep the explicitly labelled proximity sensing by default so prior
+	# offline evidence is preserved; this never claims standalone headless is LOS.
+	_material_visibility_required = true
+	_material_visibility_probe = probe
+
 func _materials() -> Dictionary:
 	return _state.godot.get("materials", {})
 
@@ -61,6 +71,16 @@ func install_material_source(spec: Dictionary, source_seq: int, command_id: Stri
 func _known_materials(id: String) -> Dictionary:
 	return _materials().get("known", {}).get(id, {})
 
+func _material_source_visible(id: String, source_id: String) -> bool:
+	if not _material_visibility_required:
+		return true
+	if not _material_visibility_probe.is_valid():
+		return false
+	var verdict: Variant = _material_visibility_probe.call(id, source_id)
+	if not verdict is bool:
+		return false
+	return verdict
+
 func _observe_materials() -> void:
 	for id in active_ids():
 		for source in material_sources():
@@ -69,11 +89,16 @@ func _observe_materials() -> void:
 			var previous: Dictionary = _known_materials(id).get(source.id, {})
 			if previous.get("stock", -1) == source.stock:
 				continue
+			if not _material_source_visible(id, source.id):
+				continue
 			var m := _ensure_materials()
 			if not m.known.has(id):
 				m.known[id] = {}
-			# This is attributed proximity sensing, not a camera/FOV claim.
-			_append_life_event({"type": "material_source_observed", "actor_id": id, "recipient_ids": [id], "operation_id": "material-observation:%s:%s:%d" % [id, source.id, int(_state.life.seq) + 1], "source": "host_proximity_observation", "source_id": source.id, "stock": source.stock, "text": "%s：公共%s料，看到剩余%d份；每次整理60秒可取得1份，现场库存为准。" % [source.label, "铁" if source.material == "iron" else "木", source.stock]})
+			# Attributed sensing: line-of-sight when the town street opted in,
+			# otherwise the legacy explicitly labelled proximity sensing. Neither
+			# is a camera/FOV claim.
+			var observation_source := "host_line_of_sight_observation" if _material_visibility_required else "host_proximity_observation"
+			_append_life_event({"type": "material_source_observed", "actor_id": id, "recipient_ids": [id], "operation_id": "material-observation:%s:%s:%d" % [id, source.id, int(_state.life.seq) + 1], "source": observation_source, "source_id": source.id, "stock": source.stock, "text": "%s：公共%s料，看到剩余%d份；每次整理60秒可取得1份，现场库存为准。" % [source.label, "铁" if source.material == "iron" else "木", source.stock]})
 			m.known[id][source.id] = {"stock": source.stock, "observed_elapsed": _state.godot.elapsed_seconds, "event_seq": _state.life.seq}
 
 func _busy(id: String) -> bool:
@@ -160,8 +185,21 @@ func resident_view(id: String = "") -> Dictionary:
 	for source_id in _known_materials(id):
 		var source: Dictionary = _materials().sources[source_id]
 		var observation: Dictionary = _known_materials(id)[source_id]
-		view.material_sources.append({"id": source.id, "label": source.label, "material": source.material, "access": source.access, "position": source.position.duplicate(), "last_observed_stock": observation.stock, "observed_elapsed": observation.observed_elapsed, "observation_event_seq": observation.event_seq, "knowledge_source": "personal_proximity_observation", "work_seconds_per_unit": MATERIAL_WORK_SECONDS, "stock_may_have_changed": true})
+		view.material_sources.append({"id": source.id, "label": source.label, "material": source.material, "access": source.access, "position": source.position.duplicate(), "last_observed_stock": observation.stock, "observed_elapsed": observation.observed_elapsed, "observation_event_seq": observation.event_seq, "knowledge_source": _knowledge_source_for(id, source_id, observation), "work_seconds_per_unit": MATERIAL_WORK_SECONDS, "stock_may_have_changed": true})
 	return view
+
+func _knowledge_source_for(id: String, source_id: String, observation: Dictionary) -> String:
+	# Derive the personal knowledge source from the exact observation event that
+	# produced it. Old proximity observations are never relabelled as new LOS.
+	for event in _state.life.events:
+		if event.get("seq") == observation.get("event_seq") and event.get("type") == "material_source_observed" and event.get("actor_id") == id and event.get("source_id") == source_id and event.get("stock") == observation.get("stock"):
+			var recorded := str(event.get("source", ""))
+			if recorded == "host_line_of_sight_observation":
+				return "personal_line_of_sight_observation"
+			if recorded == "host_proximity_observation":
+				return "personal_proximity_observation"
+			return "historical_material_observation"
+	return "historical_material_observation"
 
 func _validate_state(value: Variant) -> Dictionary:
 	var base := super._validate_state(value)

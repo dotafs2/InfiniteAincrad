@@ -1,0 +1,1165 @@
+{
+  "calls": [
+    {
+      "task": "01-prepare-merge",
+      "peak_usd_upper_estimate": 0.004917,
+      "status": "completed",
+      "finish_reason": "stop",
+      "error_type": "ValueError",
+      "number": 1,
+      "usage": {
+        "prompt_tokens": 910,
+        "completion_tokens": 3870,
+        "total_tokens": 4780,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 910
+      }
+    },
+    {
+      "task": "01-prepare-merge",
+      "peak_usd_upper_estimate": 0.004914816,
+      "status": "completed",
+      "finish_reason": "length",
+      "error_type": "ValueError",
+      "number": 2,
+      "usage": {
+        "prompt_tokens": 5024,
+        "completion_tokens": 4000,
+        "total_tokens": 9024,
+        "prompt_tokens_details": {
+          "cached_tokens": 4736
+        },
+        "prompt_cache_hit_tokens": 4736,
+        "prompt_cache_miss_tokens": 288
+      }
+    },
+    {
+      "task": "01-prepare-merge",
+      "peak_usd_upper_estimate": 0.00452526,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 3,
+      "usage": {
+        "prompt_tokens": 9177,
+        "completion_tokens": 3672,
+        "total_tokens": 12849,
+        "prompt_tokens_details": {
+          "cached_tokens": 8960
+        },
+        "prompt_cache_hit_tokens": 8960,
+        "prompt_cache_miss_tokens": 217
+      }
+    },
+    {
+      "task": "02-merge-scene",
+      "peak_usd_upper_estimate": 0.0293946,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 4,
+      "usage": {
+        "prompt_tokens": 53850,
+        "completion_tokens": 11033,
+        "total_tokens": 64883,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 53850
+      }
+    },
+    {
+      "task": "03-integration-review",
+      "peak_usd_upper_estimate": 0.0122076,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 5,
+      "usage": {
+        "prompt_tokens": 5584,
+        "completion_tokens": 8777,
+        "total_tokens": 14361,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5584
+      }
+    },
+    {
+      "task": "03-integration-review",
+      "peak_usd_upper_estimate": 0.013677216,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 6,
+      "usage": {
+        "prompt_tokens": 18608,
+        "completion_tokens": 10258,
+        "total_tokens": 28866,
+        "prompt_tokens_details": {
+          "cached_tokens": 14336
+        },
+        "prompt_cache_hit_tokens": 14336,
+        "prompt_cache_miss_tokens": 4272
+      }
+    },
+    {
+      "task": "04-codec-lifetime",
+      "peak_usd_upper_estimate": 0.0067583999999999995,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 7,
+      "usage": {
+        "prompt_tokens": 19792,
+        "completion_tokens": 684,
+        "total_tokens": 20476,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 19792
+      }
+    },
+    {
+      "task": "05-merged-street-visual",
+      "peak_usd_upper_estimate": 0.0095577,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 8,
+      "usage": {
+        "prompt_tokens": 16111,
+        "completion_tokens": 3937,
+        "total_tokens": 20048,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 16111
+      }
+    },
+    {
+      "task": "05-merged-street-visual",
+      "peak_usd_upper_estimate": 0.010681907999999999,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 9,
+      "usage": {
+        "prompt_tokens": 35671,
+        "completion_tokens": 4876,
+        "total_tokens": 40547,
+        "prompt_tokens_details": {
+          "cached_tokens": 19968
+        },
+        "prompt_cache_hit_tokens": 19968,
+        "prompt_cache_miss_tokens": 15703
+      }
+    },
+    {
+      "task": "runner-task",
+      "peak_usd_upper_estimate": 0.011763,
+      "status": "completed",
+      "finish_reason": "length",
+      "error_type": "ValueError",
+      "number": 10,
+      "usage": {
+        "prompt_tokens": 15210,
+        "completion_tokens": 6000,
+        "total_tokens": 21210,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 15210
+      }
+    },
+    {
+      "task": "runner-task",
+      "peak_usd_upper_estimate": 0.01025712,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 11,
+      "usage": {
+        "prompt_tokens": 36440,
+        "completion_tokens": 4612,
+        "total_tokens": 41052,
+        "prompt_tokens_details": {
+          "cached_tokens": 21120
+        },
+        "prompt_cache_hit_tokens": 21120,
+        "prompt_cache_miss_tokens": 15320
+      }
+    },
+    {
+      "task": "runner-fix",
+      "peak_usd_upper_estimate": 0.0046695,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 12,
+      "usage": {
+        "prompt_tokens": 11097,
+        "completion_tokens": 1117,
+        "total_tokens": 12214,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 11097
+      }
+    },
+    {
+      "task": "publish-task",
+      "peak_usd_upper_estimate": 0.0156198,
+      "status": "completed",
+      "finish_reason": "length",
+      "error_type": "ValueError",
+      "number": 13,
+      "usage": {
+        "prompt_tokens": 22066,
+        "completion_tokens": 7500,
+        "total_tokens": 29566,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 22066
+      }
+    },
+    {
+      "task": "publish-task",
+      "peak_usd_upper_estimate": 0.01708554,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 14,
+      "usage": {
+        "prompt_tokens": 51887,
+        "completion_tokens": 8479,
+        "total_tokens": 60366,
+        "prompt_tokens_details": {
+          "cached_tokens": 29440
+        },
+        "prompt_cache_hit_tokens": 29440,
+        "prompt_cache_miss_tokens": 22447
+      }
+    },
+    {
+      "task": "publish-fix",
+      "peak_usd_upper_estimate": 0.017204699999999996,
+      "status": "completed",
+      "finish_reason": "length",
+      "error_type": "ValueError",
+      "number": 15,
+      "usage": {
+        "prompt_tokens": 27349,
+        "completion_tokens": 7500,
+        "total_tokens": 34849,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 27349
+      }
+    },
+    {
+      "task": "publish-fix",
+      "peak_usd_upper_estimate": 0.019144896,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 16,
+      "usage": {
+        "prompt_tokens": 62156,
+        "completion_tokens": 8945,
+        "total_tokens": 71101,
+        "prompt_tokens_details": {
+          "cached_tokens": 34816
+        },
+        "prompt_cache_hit_tokens": 34816,
+        "prompt_cache_miss_tokens": 27340
+      }
+    },
+    {
+      "task": "publish-final-fix",
+      "peak_usd_upper_estimate": 0.0054402,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 17,
+      "usage": {
+        "prompt_tokens": 8782,
+        "completion_tokens": 2338,
+        "total_tokens": 11120,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 8782
+      }
+    },
+    {
+      "task": "publish-log-fix",
+      "peak_usd_upper_estimate": 0.0033726,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 18,
+      "usage": {
+        "prompt_tokens": 8850,
+        "completion_tokens": 598,
+        "total_tokens": 9448,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 8850
+      }
+    },
+    {
+      "task": "h5-skill",
+      "peak_usd_upper_estimate": 0.0154212,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 19,
+      "usage": {
+        "prompt_tokens": 30884,
+        "completion_tokens": 5130,
+        "total_tokens": 36014,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 30884
+      }
+    },
+    {
+      "task": "h5-skill",
+      "peak_usd_upper_estimate": 0.016704708,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 20,
+      "usage": {
+        "prompt_tokens": 67499,
+        "completion_tokens": 5858,
+        "total_tokens": 73357,
+        "prompt_tokens_details": {
+          "cached_tokens": 35968
+        },
+        "prompt_cache_hit_tokens": 35968,
+        "prompt_cache_miss_tokens": 31531
+      }
+    },
+    {
+      "task": "h5-fix",
+      "peak_usd_upper_estimate": 0.013692899999999997,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 21,
+      "usage": {
+        "prompt_tokens": 29259,
+        "completion_tokens": 4096,
+        "total_tokens": 33355,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 29259
+      }
+    },
+    {
+      "task": "h5-test-fix",
+      "peak_usd_upper_estimate": 0.0028872,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 22,
+      "usage": {
+        "prompt_tokens": 5692,
+        "completion_tokens": 983,
+        "total_tokens": 6675,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5692
+      }
+    },
+    {
+      "task": "h5-delivery",
+      "peak_usd_upper_estimate": 0.009747,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 23,
+      "usage": {
+        "prompt_tokens": 12114,
+        "completion_tokens": 5094,
+        "total_tokens": 17208,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 12114
+      }
+    },
+    {
+      "task": "h5-delivery-fix",
+      "peak_usd_upper_estimate": 0.0075492,
+      "status": "completed",
+      "finish_reason": "length",
+      "error_type": "ValueError",
+      "number": 24,
+      "usage": {
+        "prompt_tokens": 5164,
+        "completion_tokens": 5000,
+        "total_tokens": 10164,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5164
+      }
+    },
+    {
+      "task": "h5-delivery-fix",
+      "peak_usd_upper_estimate": 0.008676672,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 25,
+      "usage": {
+        "prompt_tokens": 15288,
+        "completion_tokens": 5886,
+        "total_tokens": 21174,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        },
+        "prompt_cache_hit_tokens": 10112,
+        "prompt_cache_miss_tokens": 5176
+      }
+    },
+    {
+      "task": "h20-baseline",
+      "peak_usd_upper_estimate": 0.0061143000000000005,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 26,
+      "usage": {
+        "prompt_tokens": 5005,
+        "completion_tokens": 3844,
+        "total_tokens": 8849,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5005
+      }
+    },
+    {
+      "task": "h20-baseline-fix",
+      "peak_usd_upper_estimate": 0.0036011999999999997,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 27,
+      "usage": {
+        "prompt_tokens": 3584,
+        "completion_tokens": 2105,
+        "total_tokens": 5689,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3584
+      }
+    },
+    {
+      "task": "h20-lighting",
+      "peak_usd_upper_estimate": 0.004412999999999999,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 28,
+      "usage": {
+        "prompt_tokens": 13862,
+        "completion_tokens": 212,
+        "total_tokens": 14074,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 13862
+      }
+    },
+    {
+      "task": "h21-push-retry",
+      "peak_usd_upper_estimate": 0.004880099999999999,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 29,
+      "usage": {
+        "prompt_tokens": 6703,
+        "completion_tokens": 2391,
+        "total_tokens": 9094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 6703
+      }
+    },
+    {
+      "task": "h20-exposure",
+      "peak_usd_upper_estimate": 0.0044814,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 30,
+      "usage": {
+        "prompt_tokens": 13782,
+        "completion_tokens": 289,
+        "total_tokens": 14071,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 13782
+      }
+    },
+    {
+      "task": "h21-http2",
+      "peak_usd_upper_estimate": 0.0025089,
+      "status": "completed",
+      "finish_reason": "length",
+      "error_type": "ValueError",
+      "number": 31,
+      "usage": {
+        "prompt_tokens": 2363,
+        "completion_tokens": 1500,
+        "total_tokens": 3863,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 2363
+      }
+    },
+    {
+      "task": "h21-http2",
+      "peak_usd_upper_estimate": 0.0026157,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 32,
+      "usage": {
+        "prompt_tokens": 6203,
+        "completion_tokens": 629,
+        "total_tokens": 6832,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 6203
+      }
+    },
+    {
+      "task": "h20-labels",
+      "peak_usd_upper_estimate": 0.009747,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 33,
+      "usage": {
+        "prompt_tokens": 14654,
+        "completion_tokens": 4459,
+        "total_tokens": 19113,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 14654
+      }
+    },
+    {
+      "task": "h20-label-fix",
+      "peak_usd_upper_estimate": 0.011154899999999999,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 34,
+      "usage": {
+        "prompt_tokens": 13691,
+        "completion_tokens": 5873,
+        "total_tokens": 19564,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 13691
+      }
+    },
+    {
+      "task": "h20-acceptance",
+      "peak_usd_upper_estimate": 0.014411099999999998,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 35,
+      "usage": {
+        "prompt_tokens": 21725,
+        "completion_tokens": 6578,
+        "total_tokens": 28303,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 21725
+      }
+    },
+    {
+      "task": "h20-test-fix",
+      "peak_usd_upper_estimate": 0.0112623,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 36,
+      "usage": {
+        "prompt_tokens": 10657,
+        "completion_tokens": 6721,
+        "total_tokens": 17378,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 10657
+      }
+    },
+    {
+      "task": "h20-test-final",
+      "peak_usd_upper_estimate": 0.0057713999999999994,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 37,
+      "usage": {
+        "prompt_tokens": 9414,
+        "completion_tokens": 2456,
+        "total_tokens": 11870,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 9414
+      }
+    },
+    {
+      "task": "h20-resize",
+      "peak_usd_upper_estimate": 0.0055106999999999995,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 38,
+      "usage": {
+        "prompt_tokens": 9757,
+        "completion_tokens": 2153,
+        "total_tokens": 11910,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 9757
+      }
+    },
+    {
+      "task": "h20-delivery",
+      "peak_usd_upper_estimate": 0.0085725,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 39,
+      "usage": {
+        "prompt_tokens": 15623,
+        "completion_tokens": 3238,
+        "total_tokens": 18861,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 15623
+      }
+    },
+    {
+      "task": "h20-delivery-fix",
+      "peak_usd_upper_estimate": 0.0169173,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 40,
+      "usage": {
+        "prompt_tokens": 12091,
+        "completion_tokens": 11075,
+        "total_tokens": 23166,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 12091
+      }
+    },
+    {
+      "task": "h20-publish-schema",
+      "peak_usd_upper_estimate": 0.010926,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 41,
+      "usage": {
+        "prompt_tokens": 10652,
+        "completion_tokens": 6442,
+        "total_tokens": 17094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 10652
+      }
+    },
+    {
+      "task": "h20-final-doc-fix",
+      "peak_usd_upper_estimate": 0.0018066,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 42,
+      "usage": {
+        "prompt_tokens": 2010,
+        "completion_tokens": 1003,
+        "total_tokens": 3013,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 2010
+      }
+    },
+    {
+      "task": "h22-referral",
+      "peak_usd_upper_estimate": 0.0174939,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 43,
+      "usage": {
+        "prompt_tokens": 21893,
+        "completion_tokens": 9105,
+        "total_tokens": 30998,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 21893
+      }
+    },
+    {
+      "task": "h22-fix",
+      "peak_usd_upper_estimate": 0.0131334,
+      "status": "completed",
+      "finish_reason": "stop",
+      "error_type": "ValueError",
+      "number": 44,
+      "usage": {
+        "prompt_tokens": 26422,
+        "completion_tokens": 4339,
+        "total_tokens": 30761,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 26422
+      }
+    },
+    {
+      "task": "h22-fix",
+      "peak_usd_upper_estimate": 0.024975419999999998,
+      "status": "completed",
+      "finish_reason": "length",
+      "error_type": "ValueError",
+      "number": 45,
+      "usage": {
+        "prompt_tokens": 57357,
+        "completion_tokens": 14000,
+        "total_tokens": 71357,
+        "prompt_tokens_details": {
+          "cached_tokens": 30720
+        },
+        "prompt_cache_hit_tokens": 30720,
+        "prompt_cache_miss_tokens": 26637
+      }
+    },
+    {
+      "task": "h22-repair-compact",
+      "peak_usd_upper_estimate": 0.0224112,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 46,
+      "usage": {
+        "prompt_tokens": 26872,
+        "completion_tokens": 11958,
+        "total_tokens": 38830,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 26872
+      }
+    },
+    {
+      "task": "h22-fixture-fix",
+      "peak_usd_upper_estimate": 0.005106,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 47,
+      "usage": {
+        "prompt_tokens": 7388,
+        "completion_tokens": 2408,
+        "total_tokens": 9796,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 7388
+      }
+    },
+    {
+      "task": "h22-delivery",
+      "peak_usd_upper_estimate": 0.0051864,
+      "status": "completed",
+      "finish_reason": "stop",
+      "error_type": "ValueError",
+      "number": 48,
+      "usage": {
+        "prompt_tokens": 11032,
+        "completion_tokens": 1564,
+        "total_tokens": 12596,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 11032
+      }
+    },
+    {
+      "task": "h22-delivery-files",
+      "peak_usd_upper_estimate": 0.009130200000000002,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 49,
+      "usage": {
+        "prompt_tokens": 10934,
+        "completion_tokens": 4875,
+        "total_tokens": 15809,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 10934
+      }
+    },
+    {
+      "task": "h22-delivery-correct",
+      "peak_usd_upper_estimate": 0.0106671,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 50,
+      "usage": {
+        "prompt_tokens": 5257,
+        "completion_tokens": 7575,
+        "total_tokens": 12832,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5257
+      }
+    },
+    {
+      "task": "h22-helper-final",
+      "peak_usd_upper_estimate": 0.0036908999999999996,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 51,
+      "usage": {
+        "prompt_tokens": 5703,
+        "completion_tokens": 1650,
+        "total_tokens": 7353,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5703
+      }
+    },
+    {
+      "task": "h23-baseline",
+      "peak_usd_upper_estimate": 0.0066384,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 52,
+      "usage": {
+        "prompt_tokens": 9452,
+        "completion_tokens": 3169,
+        "total_tokens": 12621,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 9452
+      }
+    },
+    {
+      "task": "h23-baseline-fix",
+      "peak_usd_upper_estimate": 0.0048594,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 53,
+      "usage": {
+        "prompt_tokens": 3674,
+        "completion_tokens": 3131,
+        "total_tokens": 6805,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3674
+      }
+    },
+    {
+      "task": "h23-los",
+      "peak_usd_upper_estimate": 0.0094212,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 54,
+      "usage": {
+        "prompt_tokens": 19488,
+        "completion_tokens": 2979,
+        "total_tokens": 22467,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 19488
+      }
+    },
+    {
+      "task": "h23-acceptance",
+      "peak_usd_upper_estimate": 0.013208399999999999,
+      "status": "completed",
+      "finish_reason": "stop",
+      "error_type": "ValueError",
+      "number": 55,
+      "usage": {
+        "prompt_tokens": 14844,
+        "completion_tokens": 7296,
+        "total_tokens": 22140,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 14844
+      }
+    },
+    {
+      "task": "h23-acceptance-fix",
+      "peak_usd_upper_estimate": 0.0101916,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 56,
+      "usage": {
+        "prompt_tokens": 6452,
+        "completion_tokens": 6880,
+        "total_tokens": 13332,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 6452
+      }
+    },
+    {
+      "task": "h23-test-surgical",
+      "peak_usd_upper_estimate": 0.005877299999999999,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 57,
+      "usage": {
+        "prompt_tokens": 7011,
+        "completion_tokens": 3145,
+        "total_tokens": 10156,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 7011
+      }
+    },
+    {
+      "task": "h23-test-final",
+      "peak_usd_upper_estimate": 0.0009881999999999998,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 58,
+      "usage": {
+        "prompt_tokens": 678,
+        "completion_tokens": 654,
+        "total_tokens": 1332,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 678
+      }
+    },
+    {
+      "task": "h23-bind-check",
+      "peak_usd_upper_estimate": 0.0004911000000000001,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 59,
+      "usage": {
+        "prompt_tokens": 573,
+        "completion_tokens": 266,
+        "total_tokens": 839,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 573
+      }
+    },
+    {
+      "task": "h23-delivery-helper",
+      "peak_usd_upper_estimate": 0.006045599999999999,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 60,
+      "usage": {
+        "prompt_tokens": 7004,
+        "completion_tokens": 3287,
+        "total_tokens": 10291,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 7004
+      }
+    },
+    {
+      "task": "h23-roadmap",
+      "peak_usd_upper_estimate": 0.003588,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 61,
+      "usage": {
+        "prompt_tokens": 5228,
+        "completion_tokens": 1683,
+        "total_tokens": 6911,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5228
+      }
+    },
+    {
+      "task": "h23-helper-fix",
+      "peak_usd_upper_estimate": 0.003564,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 62,
+      "usage": {
+        "prompt_tokens": 3516,
+        "completion_tokens": 2091,
+        "total_tokens": 5607,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3516
+      }
+    },
+    {
+      "task": "h23-report",
+      "peak_usd_upper_estimate": 0.0018758999999999998,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 63,
+      "usage": {
+        "prompt_tokens": 977,
+        "completion_tokens": 1319,
+        "total_tokens": 2296,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 977
+      }
+    },
+    {
+      "task": "h23-delivery-final",
+      "peak_usd_upper_estimate": 0.0026027999999999997,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 64,
+      "usage": {
+        "prompt_tokens": 2648,
+        "completion_tokens": 1507,
+        "total_tokens": 4155,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 2648
+      }
+    },
+    {
+      "task": "h23-wording",
+      "peak_usd_upper_estimate": 0.00023730000000000002,
+      "status": "completed",
+      "finish_reason": "stop",
+      "number": 65,
+      "usage": {
+        "prompt_tokens": 343,
+        "completion_tokens": 112,
+        "total_tokens": 455,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 343
+      }
+    }
+  ],
+  "totals": {
+    "prompt_tokens": 1000986,
+    "completion_tokens": 286204,
+    "total_tokens": 1287190,
+    "prompt_cache_hit_tokens": 210176
+  },
+  "peak_usd_upper_estimate": 0.581948856,
+  "peak_is_estimate_not_invoice": true,
+  "prior_round_usage": {
+    "prompt_tokens": 287303,
+    "completion_tokens": 53344,
+    "total_tokens": 340647
+  },
+  "older_public_history": {
+    "source": "docs/validation/deepseek_residence_06/REVIEW.md at 336f033",
+    "private_original_ledger_present": false,
+    "status": "Known published historical totals retained; no claim of recovered private raw responses or reconciled account charges.",
+    "calls": 3,
+    "input_tokens": 53692,
+    "cached_input_tokens_included": 23296,
+    "output_tokens": 41636,
+    "total_tokens": 95328,
+    "published_peak_usd_upper_estimate": 0.059221776
+  },
+  "windows_published_history": {
+    "source": "docs/STATUS.md at e123706e2b14bda4f646f654d61ee98736ae292c",
+    "completed_deepseek_tasks": 6,
+    "input_tokens": 14821409,
+    "cached_input_tokens_included": 14613248,
+    "output_tokens": 257512,
+    "reasoning_tokens_included_in_output": 167768,
+    "total_tokens": 15078921,
+    "raw_private_run_logs_available": false,
+    "currency": "unavailable; do not infer a reconciled bill"
+  },
+  "pricing": {
+    "source": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "checked_date": "2026-09-12",
+    "peak_usd_per_million": {
+      "cache_hit_input": 0.006,
+      "cache_miss_input": 0.3,
+      "output": 1.2
+    }
+  },
+  "prior_ledger_sha256": "26e0187b92ccc76029b535d7205d982bb52689e2b294f8d8a1c7a2d28cbb8655"
+}

@@ -152,6 +152,9 @@ func run() -> void:
 
 	check(_scene._market_loaded, "market asset loaded")
 	check(_scene.paused, "scene starts paused")
+	check(is_instance_valid(_scene.material_visibility) and _scene.material_visibility.is_inside_tree(), "material_visibility is valid and in tree")
+	check(_scene.town._material_visibility_required == true, "material visibility is required")
+	check(_scene.town._material_visibility_probe is Callable and _scene.town._material_visibility_probe.is_valid() and _scene.town._material_visibility_probe.get_object() == _scene.material_visibility, "material visibility probe is bound to scene node")
 	check(_scene.model_turns == null, "no model_turns attached (no live provider)")
 	check(_scene.get("town_tools") != null, "scene stores a reference to the configured TownTools node")
 	check(_scene.get("town_tools") is TownToolsScript, "stored TownTools reference is the configured projector")

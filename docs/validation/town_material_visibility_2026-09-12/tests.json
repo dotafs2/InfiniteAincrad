@@ -1,0 +1,213 @@
+{
+  "phase": "tests",
+  "started_at_utc": "2026-09-11T19:43:46.943376+00:00",
+  "finished_at_utc": "2026-09-11T19:44:16.859296+00:00",
+  "status": "ok",
+  "suites": [
+    {
+      "suite": "core_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "decision_boundary_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "oga_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "deepseek_residence_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_completion_escrow_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_contract_speech_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_controller_recovery_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_dialogue_ui_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_feedback_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_handover_context_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_life_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_material_visibility_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_materials_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_merge_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_model_continuity_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_online_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_public_speech_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_repair_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_replan_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_skill_notice_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_skill_referral_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_social_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_social_trigger_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_specific_help_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_trade_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_turns_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_validation_limit_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    },
+    {
+      "suite": "town_visitor_acceptance",
+      "exit_code": 0,
+      "passed": true,
+      "script_errors": []
+    }
+  ],
+  "validators": [
+    {
+      "argv": [
+        "python.exe",
+        "-X",
+        "utf8",
+        "tools/validate_environment_v2.py"
+      ],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "argv": [
+        "python.exe",
+        "-X",
+        "utf8",
+        "tools/validate_residences.py"
+      ],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "argv": [
+        "python.exe",
+        "-X",
+        "utf8",
+        "tools/review_deepseek_residence.py",
+        "--output",
+        "house06-glb.json",
+        "--baseline",
+        "docs/validation/deepseek_residence_06/repair_2026-09-12/before-glb.json"
+      ],
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "failures": []
+}
