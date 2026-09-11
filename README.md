@@ -10,7 +10,9 @@ Maintained by [dotafs2](https://github.com/dotafs2). Project name: **InfiniteAin
 
 ## 第一个可玩的作品
 
-一条起始之城风格街道，三个有连续经历的居民，一件真实生活事件。玩家提供一次材料帮助或不帮助，居民自主回应；行动产生可见后果，保存重启后继续。
+当前井边包只算内部技术预览。第一版目标已提高为完整首镇：保留原世界的 13 个身份，先在 Godot 恢复三名活跃居民的生活能力，再达到 5–10 人的食物、劳动与交换循环，完善人物、美术、玩家介入和模型更换后的连续生活。
+
+已经加入原存档的独立迁移验证入口：`./Run-Street.ps1 -Town -SavePath <迁移输出/world.json>`。三人可进食、休息、到公共浆果地采集；新选择明确使用离线规则。先按 [迁移说明](docs/MIGRATION.md) 生成私有副本。启动暂停，空格继续；这仍不是完整迁移或第一版。
 
 唯一长期目标：建立能进入、能影响、能长期延续的AI世界。模型升级增强同一批居民的生活，已经发生的事情不会随模型更换消失。
 
@@ -26,7 +28,11 @@ Maintained by [dotafs2](https://github.com/dotafs2). Project name: **InfiniteAin
 
 ## Run the 3D street
 
-Open `game/project.godot` in Godot 4.7.2 .NET and build/run the default scene, or run `./Run-Street.ps1 -Godot C:/path/to/Godot.exe`. The launcher builds the C# adapter before launching and requires .NET SDK 8 or newer. It also accepts `GODOT_EXE` or an installed `godot` command. Fetch Git LFS assets when cloning.
+A local Windows technical preview can now be built with `./Build-WindowsPreview.ps1 -Godot C:/path/to/Godot.exe`.
+The complete ZIP runs without an editor, SDK or API key. See [build and verification instructions](docs/release/WINDOWS_PREVIEW.md).
+The local package has passed offline event and cold-restore checks; external first-time testers and the [license scope](docs/release/RIGHTS_REVIEW.md) are still pending.
+
+Open `game/project.godot` in Godot 4.7.2 .NET and build/run the default scene, or run `./Run-Street.ps1 -Godot C:/path/to/Godot.exe`. The launcher builds the C# adapter and imports the market before launching; it requires .NET SDK 8 or newer. It also accepts `GODOT_EXE` or an installed `godot` command. Fetch Git LFS assets when cloning. `-SkipBuild` assumes compilation and imports are already current.
 
 WASD moves; click to capture the mouse, Escape releases it. Walk close to the well and press E after the resident asks for help. F8 toggles diagnostic text. The normal scene keeps its separate `user://street-trial/world.json` fixture save; reopen to continue. Damaged saves display an error rather than resetting.
 
@@ -34,7 +40,7 @@ The market is the existing authored V5 environment. The one resident uses primit
 
 ## Contributing
 
-Start with [CONTRIBUTING.md](CONTRIBUTING.md). The first implementation task is a bounded test of whether the existing world semantics can continue inside a single Godot runtime. Avoid parallel rewrites, new populations, full-city art production or unattended model loops.
+Start with [CONTRIBUTING.md](CONTRIBUTING.md) and the [current delivery gate](ROADMAP.md). The immediate contribution is independently reproducing or testing the Windows preview. The next new world behavior is nearby, source-attributed resident inquiry with a choice to respond, refuse or defer.
 
 This is an independent fan-inspired project, not an official SAO product. The initial repository contains newly written scaffolding and planning documents; no third-party character models, animation screenshots or private save data. Reuse and asset licensing status is recorded in [ASSET_POLICY.md](ASSET_POLICY.md). A public repository does not by itself grant a general reuse license; the project-wide license has not yet been selected.
 

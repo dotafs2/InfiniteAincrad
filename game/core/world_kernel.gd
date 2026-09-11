@@ -364,7 +364,8 @@ func save_to(path: String) -> Dictionary:
 		if not owned_here:
 			release_writer(path)
 		return {"ok": false, "code": "save_temp_open_failed", "path": path}
-	file.store_string(JSON.stringify(_state))
+	# Full precision is required for preserved source coordinates/timers/history.
+	file.store_string(_serialize_state())
 	file.flush()
 	file.close()
 	var marker_path := path + ".replace-pending"
@@ -402,6 +403,9 @@ func save_to(path: String) -> Dictionary:
 	if not owned_here:
 		release_writer(path)
 	return {"ok": true, "code": "saved", "path": path, "state_version": STATE_VERSION}
+
+func _serialize_state() -> String:
+	return JSON.stringify(_state, "", true, true)
 
 func load_from(path: String) -> Dictionary:
 	if typeof(path) != TYPE_STRING or path.is_empty():

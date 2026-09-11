@@ -472,34 +472,25 @@ func _load_market_runtime() -> void:
 	_market_root = Node3D.new()
 	_market_root.name = "MarketGLTFRuntime"
 	add_child(_market_root)
-	if not FileAccess.file_exists(MARKET_GLB):
+	if not ResourceLoader.exists(MARKET_GLB):
 		_show_error("找不到市场 GLB：" + MARKET_GLB)
 		_evidence["market_import_error"] = "asset_missing"
 		return
-	var file: FileAccess = FileAccess.open(MARKET_GLB, FileAccess.READ)
-	if file == null:
-		_show_error("市场 GLB 无法读取。")
-		_evidence["market_import_error"] = "open_failed"
+	var scene_resource: PackedScene = load(MARKET_GLB) as PackedScene
+	if scene_resource == null:
+		_show_error("市场导入资源无法读取。")
+		_evidence["market_import_error"] = "imported_scene_missing"
 		return
-	var bytes: PackedByteArray = file.get_buffer(file.get_length())
-	file.close()
-	var document: GLTFDocument = GLTFDocument.new()
-	var state: GLTFState = GLTFState.new()
-	var parse_error: Error = document.append_from_buffer(bytes, "", state)
-	if parse_error != OK:
-		_show_error("GLTFDocument 运行时解析失败：" + str(parse_error))
-		_evidence["market_import_error"] = str(parse_error)
-		return
-	var instance: Node = document.generate_scene(state)
+	var instance: Node = scene_resource.instantiate()
 	if instance == null:
-		_show_error("GLTFDocument 未生成场景。")
+		_show_error("市场导入资源未生成场景。")
 		_evidence["market_import_error"] = "generate_failed"
 		return
 	instance.name = "StartingTownMarketCraftV5"
 	_market_root.add_child(instance)
 	_market_loaded = true
 	_hide_proxy_visuals_and_build_collision(instance, false)
-	_evidence["market_import"] = {"loader": "GLTFDocument", "path": MARKET_GLB, "preserved_scale": true, "root_scale": str(instance.scale)}
+	_evidence["market_import"] = {"loader": "ResourceLoader", "path": MARKET_GLB, "preserved_scale": true, "root_scale": str(instance.scale)}
 
 func _hide_proxy_visuals_and_build_collision(node: Node, inherited_hidden: bool) -> void:
 	var lower_name: String = str(node.name).to_lower()
@@ -724,6 +715,8 @@ func _load_manifest() -> Dictionary:
 	return parser.data
 
 func _parse_command_line() -> void:
+	if OS.has_feature("technical_preview"):
+		_save_path = "user://technical-preview/world.json"
 	for argument: String in OS.get_cmdline_user_args():
 		if argument.begins_with("--street-smoke="):
 			_smoke_dir = argument.trim_prefix("--street-smoke=")
@@ -808,6 +801,9 @@ func _run_smoke_step() -> void:
 		_finish_smoke(0)
 
 func _capture_smoke(label: String) -> void:
+	if DisplayServer.get_name() == "headless":
+		_evidence["rendered_capture"] = false
+		return
 	await RenderingServer.frame_post_draw
 	if _smoke_dir.is_empty():
 		return

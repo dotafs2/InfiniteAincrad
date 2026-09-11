@@ -1,0 +1,26 @@
+{
+  "checks": {
+    "same_world": true,
+    "source_hash": true,
+    "history_prefix_exact": true,
+    "unported_life_fields_exact": true,
+    "unported_world_fields_exact": true,
+    "same_roster_order": true,
+    "identity_runtime_wallets_exact": true,
+    "food_accounted": true,
+    "berry_accounted": true,
+    "new_actions_honestly_attributed": true
+  },
+  "passed": true,
+  "original_identities": 13,
+  "active": 3,
+  "source_seq": 37,
+  "result_seq": 44,
+  "new_event_types": {
+    "eat_ration": 4,
+    "harvest_ration": 3
+  },
+  "new_paid_calls": 0,
+  "current_sha256": "9a445f841f54ce9eb786e3159f24b6431a9a997d50985714c9c15e05ddac434a",
+  "status": "partial life port on a separate validation copy; not full migration or v1"
+}
