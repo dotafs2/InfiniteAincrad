@@ -1,0 +1,52 @@
+{
+  "automatic_lod_configuration_only": [
+    {
+      "begin": 0.0,
+      "begin_margin": 0.0,
+      "end": 32.0,
+      "end_margin": 0.0,
+      "name": "F1_Residence_06_LOD0"
+    },
+    {
+      "begin": 32.0,
+      "begin_margin": 0.0,
+      "end": 70.0,
+      "end_margin": 0.0,
+      "name": "F1_Residence_06_LOD1"
+    },
+    {
+      "begin": 70.0,
+      "begin_margin": 0.0,
+      "end": 0.0,
+      "end_margin": 0.0,
+      "name": "F1_Residence_06_LOD2"
+    }
+  ],
+  "cases": [
+    {
+      "actual_hit": true,
+      "expected_hit": false,
+      "hit_position": "(-1.75, 1.6, 4.7)",
+      "id": "open_porch_approach",
+      "passed": false
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": "(0.0, 1.6, 3.35)",
+      "id": "closed_main_wall",
+      "passed": true
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": false,
+      "hit_position": "(0.8, 0.44, 4.5)",
+      "id": "empty_space_right_of_visual_steps",
+      "passed": false
+    }
+  ],
+  "failed": 2,
+  "resident_model_calls": 0,
+  "save_writes": 0,
+  "suite": "deepseek_house_06_supervisor_physics"
+}

@@ -1,0 +1,63 @@
+{
+  "asset": "F1_Residence_06",
+  "capture_dir": "/Users/dotafs/Documents/ChatGPT/New project/docs/validation/deepseek_residence_06/rendered",
+  "forced_lod": 0,
+  "lod_forced_state": [
+    {
+      "lod": 0,
+      "name": "F1_Residence_06_LOD0",
+      "visible": true
+    },
+    {
+      "lod": 1,
+      "name": "F1_Residence_06_LOD1",
+      "visible": false
+    },
+    {
+      "lod": 2,
+      "name": "F1_Residence_06_LOD2",
+      "visible": false
+    }
+  ],
+  "mesh_report": [
+    {
+      "lod": 0,
+      "name": "F1_Residence_06_LOD0",
+      "surfaces": 7,
+      "triangles": 165462,
+      "visible": true
+    },
+    {
+      "lod": 1,
+      "name": "F1_Residence_06_LOD1",
+      "surfaces": 7,
+      "triangles": 69494,
+      "visible": false
+    },
+    {
+      "lod": 2,
+      "name": "F1_Residence_06_LOD2",
+      "surfaces": 7,
+      "triangles": 26417,
+      "visible": false
+    }
+  ],
+  "shots": [
+    {
+      "file": "/Users/dotafs/Documents/ChatGPT/New project/docs/validation/deepseek_residence_06/rendered/front_three_quarter.png",
+      "name": "front_three_quarter",
+      "save_err": 0
+    },
+    {
+      "file": "/Users/dotafs/Documents/ChatGPT/New project/docs/validation/deepseek_residence_06/rendered/rear_three_quarter.png",
+      "name": "rear_three_quarter",
+      "save_err": 0
+    },
+    {
+      "file": "/Users/dotafs/Documents/ChatGPT/New project/docs/validation/deepseek_residence_06/rendered/near_facade_door.png",
+      "name": "near_facade_door",
+      "save_err": 0
+    }
+  ],
+  "warm_frames": 30
+}

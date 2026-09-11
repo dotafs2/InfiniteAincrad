@@ -1,0 +1,90 @@
+{
+  "id": "floor1_deepseek_residences",
+  "source": "DeepSeek original composition extending the approved project library",
+  "attribution": {
+    "reused_library": "Art/ReferenceScenes/Floor1Residences/build_residences.py",
+    "reused_textures": "game/assets/floor1/residences/textures (4 shared PBR sets)",
+    "new_author": "DeepSeek, F1_Residence_06 original composition"
+  },
+  "unit": "metre",
+  "interiors": "unfurnished shell; closed doors; no resident housing state",
+  "textures": {
+    "resolution": 2048,
+    "sets": 4,
+    "maps": [
+      "sRGB albedo",
+      "OpenGL tangent normal",
+      "linear ORM (R=1,G=roughness,B=0)"
+    ],
+    "metric_repeat_m": 2.0
+  },
+  "assets": [
+    {
+      "id": "F1_Residence_06",
+      "label": "Gallery Cross House",
+      "label_zh": "连廊十字屋",
+      "collision_boxes_blender_xyz": [
+        [
+          0.0,
+          0.0,
+          3.0749999999999997,
+          7.7,
+          6.7,
+          6.1499999999999995
+        ],
+        [
+          -1.75,
+          -3.875,
+          1.615,
+          2.7,
+          1.6500000000000001,
+          3.23
+        ],
+        [
+          0.0,
+          -4.25,
+          0.22,
+          2.1,
+          1.15,
+          0.44
+        ],
+        [
+          3.8000000000000003,
+          0.7,
+          4.2,
+          0.3,
+          3.2,
+          2.1
+        ]
+      ],
+      "lods": [
+        {
+          "level": 0,
+          "triangles": 165462,
+          "surfaces": 7,
+          "vertices": 93958
+        },
+        {
+          "level": 1,
+          "triangles": 69494,
+          "surfaces": 7,
+          "vertices": 45974
+        },
+        {
+          "level": 2,
+          "triangles": 26417,
+          "surfaces": 7,
+          "vertices": 24313
+        }
+      ],
+      "file": "game/assets/floor1/deepseek_residences/F1_Residence_06.glb",
+      "sha256": "d29f19112ac138b55dc82bcb65e4ef0024c71db406cb18db66c6bb72a98abc4d",
+      "bytes": 65067580,
+      "dimensions_blender_xyz_m": [
+        8.5117,
+        9.7403,
+        10.2574
+      ]
+    }
+  ]
+}
