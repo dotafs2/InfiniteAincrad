@@ -1,0 +1,371 @@
+{
+  "suite": "town_merge_acceptance",
+  "renderers": [
+    {
+      "renderer": "gl_compatibility",
+      "engine_headline_gpu_renderer": "OpenGL API 3.3.0 NVIDIA 591.74 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5080",
+      "engine_exit_code": 0,
+      "fixture_sha256_before": "0fb8509c4051827c31084c1b05feb1be42d3ab585b9d62fa45613ca2e2191653",
+      "fixture_sha256_after": "0fb8509c4051827c31084c1b05feb1be42d3ab585b9d62fa45613ca2e2191653",
+      "fixture_byte_equal": true,
+      "result_summary": {
+        "checks": 197,
+        "failures": 0,
+        "errors": [],
+        "nameplate_checks": 145,
+        "nameplate_failures": 0,
+        "model_calls": 0,
+        "suite": "town_merge_acceptance",
+        "world_save_byte_equal": true
+      },
+      "counters": {
+        "checks": 197,
+        "failures": 0,
+        "errors": 0,
+        "nameplate_checks": 145,
+        "nameplate_failures": 0,
+        "model_calls": 0
+      },
+      "nameplate_geometry": [
+        {
+          "measured": [
+            {
+              "anchor": [
+                536.739135742188,
+                459.852966308594
+              ],
+              "id": "fixture:innkeeper",
+              "rect": [
+                442.239135742188,
+                359.852966308594,
+                189.0,
+                86.0
+              ],
+              "text": "测试旅店主\n休整 · 口粮 1\n持有斧头 · 刃 20 · 柄 20"
+            },
+            {
+              "anchor": [
+                700.0,
+                459.852966308594
+              ],
+              "id": "fixture:smith",
+              "rect": [
+                646.0,
+                386.852966308594,
+                108.0,
+                59.0
+              ],
+              "text": "测试铁匠\n休整 · 口粮 1"
+            },
+            {
+              "anchor": [
+                568.839172363281,
+                409.203826904297
+              ],
+              "id": "fixture:carpenter",
+              "rect": [
+                514.839172363281,
+                273.203826904297,
+                108.0,
+                59.0
+              ],
+              "text": "测试木匠\n休整 · 口粮 1"
+            }
+          ],
+          "view": "overview",
+          "viewport": [
+            1400.0,
+            900.0
+          ],
+          "visible": 3
+        },
+        {
+          "measured": [
+            {
+              "anchor": [
+                575.883117675781,
+                359.637603759766
+              ],
+              "id": "fixture:innkeeper",
+              "rect": [
+                288.383117675781,
+                259.637603759766,
+                189.0,
+                86.0
+              ],
+              "text": "测试旅店主\n休整 · 口粮 1\n持有斧头 · 刃 20 · 柄 20"
+            },
+            {
+              "anchor": [
+                700.0,
+                379.900970458984
+              ],
+              "id": "fixture:smith",
+              "rect": [
+                646.0,
+                306.900970458984,
+                108.0,
+                59.0
+              ],
+              "text": "测试铁匠\n休整 · 口粮 1"
+            },
+            {
+              "anchor": [
+                700.0,
+                345.925628662109
+              ],
+              "id": "fixture:carpenter",
+              "rect": [
+                646.0,
+                209.925628662109,
+                108.0,
+                59.0
+              ],
+              "text": "测试木匠\n休整 · 口粮 1"
+            }
+          ],
+          "view": "close",
+          "viewport": [
+            1400.0,
+            900.0
+          ],
+          "visible": 3
+        },
+        {
+          "logical_viewport": [
+            1400.0,
+            900.0
+          ],
+          "physical_window": [
+            1200.0,
+            800.0
+          ],
+          "view": "physical_window_1200x800"
+        },
+        {
+          "dialogue_visible": true,
+          "status_visible": true,
+          "view": "logical_1000x700",
+          "viewport": [
+            1000.0,
+            700.0
+          ],
+          "visible": 3
+        },
+        {
+          "hidden_rows": 3,
+          "view": "face_away",
+          "visible": 0
+        }
+      ],
+      "dressing_ids": [
+        "F1_herb_planter",
+        "F1_wildflower_patch",
+        "F1_fern_patch",
+        "F1_meadow_grass",
+        "F1_flowering_shrub",
+        "F1_berry_bush",
+        "F1_roadside_milestone",
+        "F1_ivy_wall_panel"
+      ],
+      "image_sizes": [
+        "1400x900",
+        "1400x900"
+      ],
+      "image_paths": [
+        "docs/validation/town_visual_readability_2026-09-12/after_gl_overview.png",
+        "docs/validation/town_visual_readability_2026-09-12/after_gl_residents.png"
+      ],
+      "nameplate_image_paths": [
+        "docs/validation/town_visual_readability_2026-09-12/after_gl_logical.png"
+      ],
+      "world_save_byte_equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "engine_headline_gpu_renderer": "Vulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 5080",
+      "engine_exit_code": 0,
+      "fixture_sha256_before": "0fb8509c4051827c31084c1b05feb1be42d3ab585b9d62fa45613ca2e2191653",
+      "fixture_sha256_after": "0fb8509c4051827c31084c1b05feb1be42d3ab585b9d62fa45613ca2e2191653",
+      "fixture_byte_equal": true,
+      "result_summary": {
+        "checks": 197,
+        "failures": 0,
+        "errors": [],
+        "nameplate_checks": 145,
+        "nameplate_failures": 0,
+        "model_calls": 0,
+        "suite": "town_merge_acceptance",
+        "world_save_byte_equal": true
+      },
+      "counters": {
+        "checks": 197,
+        "failures": 0,
+        "errors": 0,
+        "nameplate_checks": 145,
+        "nameplate_failures": 0,
+        "model_calls": 0
+      },
+      "nameplate_geometry": [
+        {
+          "measured": [
+            {
+              "anchor": [
+                536.739135742188,
+                459.852966308594
+              ],
+              "id": "fixture:innkeeper",
+              "rect": [
+                442.239135742188,
+                359.852966308594,
+                189.0,
+                86.0
+              ],
+              "text": "测试旅店主\n休整 · 口粮 1\n持有斧头 · 刃 20 · 柄 20"
+            },
+            {
+              "anchor": [
+                700.0,
+                459.852966308594
+              ],
+              "id": "fixture:smith",
+              "rect": [
+                646.0,
+                386.852966308594,
+                108.0,
+                59.0
+              ],
+              "text": "测试铁匠\n休整 · 口粮 1"
+            },
+            {
+              "anchor": [
+                568.839172363281,
+                409.203826904297
+              ],
+              "id": "fixture:carpenter",
+              "rect": [
+                514.839172363281,
+                273.203826904297,
+                108.0,
+                59.0
+              ],
+              "text": "测试木匠\n休整 · 口粮 1"
+            }
+          ],
+          "view": "overview",
+          "viewport": [
+            1400.0,
+            900.0
+          ],
+          "visible": 3
+        },
+        {
+          "measured": [
+            {
+              "anchor": [
+                575.883117675781,
+                359.637603759766
+              ],
+              "id": "fixture:innkeeper",
+              "rect": [
+                288.383117675781,
+                259.637603759766,
+                189.0,
+                86.0
+              ],
+              "text": "测试旅店主\n休整 · 口粮 1\n持有斧头 · 刃 20 · 柄 20"
+            },
+            {
+              "anchor": [
+                700.0,
+                379.900970458984
+              ],
+              "id": "fixture:smith",
+              "rect": [
+                646.0,
+                306.900970458984,
+                108.0,
+                59.0
+              ],
+              "text": "测试铁匠\n休整 · 口粮 1"
+            },
+            {
+              "anchor": [
+                700.0,
+                345.925628662109
+              ],
+              "id": "fixture:carpenter",
+              "rect": [
+                646.0,
+                209.925628662109,
+                108.0,
+                59.0
+              ],
+              "text": "测试木匠\n休整 · 口粮 1"
+            }
+          ],
+          "view": "close",
+          "viewport": [
+            1400.0,
+            900.0
+          ],
+          "visible": 3
+        },
+        {
+          "logical_viewport": [
+            1400.0,
+            900.0
+          ],
+          "physical_window": [
+            1200.0,
+            800.0
+          ],
+          "view": "physical_window_1200x800"
+        },
+        {
+          "dialogue_visible": true,
+          "status_visible": true,
+          "view": "logical_1000x700",
+          "viewport": [
+            1000.0,
+            700.0
+          ],
+          "visible": 3
+        },
+        {
+          "hidden_rows": 3,
+          "view": "face_away",
+          "visible": 0
+        }
+      ],
+      "dressing_ids": [
+        "F1_herb_planter",
+        "F1_wildflower_patch",
+        "F1_fern_patch",
+        "F1_meadow_grass",
+        "F1_flowering_shrub",
+        "F1_berry_bush",
+        "F1_roadside_milestone",
+        "F1_ivy_wall_panel"
+      ],
+      "image_sizes": [
+        "1400x900",
+        "1400x900"
+      ],
+      "image_paths": [
+        "docs/validation/town_visual_readability_2026-09-12/after_forward_overview.png",
+        "docs/validation/town_visual_readability_2026-09-12/after_forward_residents.png"
+      ],
+      "nameplate_image_paths": [],
+      "world_save_byte_equal": true
+    }
+  ],
+  "png_sha256": {
+    "before_gl_overview.png": "5c8f71c1dfd7c9aad3deb1da470333f30610b9cdd80910e43864f463fd2e1d79",
+    "after_gl_overview.png": "7330947fe81adfd803af01b385514130f271d2c18614243c5ddbff7c0367b8f6",
+    "after_gl_residents.png": "e20534a3c0378f412d8e02ce4a1321962237ec29783f0987e936414a225b4169",
+    "after_gl_logical.png": "9e2c0832fdc29eecfee6f277c8a2cefa0e2eeb27eb1c6766a3060122fd7383c2",
+    "after_forward_overview.png": "5e00f73a5c296ba9ed87978a53747f2fa419f77474a8e28b16e70c97415a998c",
+    "after_forward_residents.png": "95739299010662018892f9170344c71f28f5d637f95a8b532199d0b8095fc490"
+  }
+}

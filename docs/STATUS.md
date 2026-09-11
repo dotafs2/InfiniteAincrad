@@ -1,3 +1,7 @@
+最新进展：H20 兼容渲染过曝与三人标签重叠已修复并接受：两种渲染后端（GL Compatibility、Forward+）＋独立无窗口各 197 项检查通过，0 失败，NPC 模型调用 0，测试档逐字节不变；真实视觉仅限 2 视角 3 名 fixture 居民。详见 [可读性报告](validation/town_visual_readability_2026-09-12.md)。
+
+缺口：仅 3 名 fixture 居民、单射线遮挡（非逐像素）、非自主发现。下一步：H5 基于来源的第三方转介。
+
 最新进展：Windows 功能 H21 自愿技能介绍与有来源的个人记忆已离线验证（95项专测＋26套件，0失败，NPC 模型调用0；DeepSeek 开发调用另记）；H5 仍为部分完成，真实自主发现与第三方转介待验。详见 [报告](validation/town_skill_notice_2026-09-12.md)。
 
 # Current status
