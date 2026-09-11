@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using OpenGameAgent.Kernel;
 
@@ -9,14 +10,26 @@ using OpenGameAgent.Kernel;
 // This journal counts this run's attempts; it never creates or resets a balance.
 public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
 {
-    private const string Model = "kimi-k2.6";
+    // Backward-compatible default. A run may pin another model through an
+    // explicit run-scoped `expected_model`; the loopback ledger gateway, not
+    // this host, remains the sole fee and credential owner.
+    private const string DefaultModel = "kimi-k2.6";
+    // This is UTF-8 JSON in an HTTP body, never embedded in HTML. Escaping
+    // Chinese as six ASCII characters needlessly exhausts the byte budget.
+    private static readonly JsonSerializerOptions WireJson = new()
+    {
+        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+    };
     private readonly HttpClient _http;
     private readonly Uri _baseUri;
     private readonly string _token, _ledger, _statePath, _scopeHash;
+    private readonly string _model;
     private readonly DateTimeOffset _deadline;
     private readonly int _limit;
     private readonly decimal _externalLiability;
     public string Provenance { get; }
+    // The pinned model id is published so the host runtime requests exactly it.
+    public string ModelId => _model;
 
     private sealed class RunState
     {
@@ -34,20 +47,29 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
         var c = document.RootElement;
         Require(c.GetProperty("schema_version").GetInt32() == 1);
         _ledger = S(c, "expected_ledger_id");
+        if (c.TryGetProperty("expected_model", out var pinned))
+        {
+            Require(pinned.ValueKind == JsonValueKind.String);
+            _model = PinnedModel(pinned.GetString()!);
+        }
+        else
+        {
+            _model = DefaultModel;
+        }
         _statePath = S(c, "run_state_path");
         var endpointPath = S(c, "endpoint_path");
         Require(Path.IsPathFullyQualified(_statePath) && Path.IsPathFullyQualified(endpointPath));
         _deadline = DateTimeOffset.Parse(S(c, "deadline_utc"), System.Globalization.CultureInfo.InvariantCulture);
         Require(_deadline.Offset == TimeSpan.Zero && _deadline > DateTimeOffset.UtcNow);
         _limit = c.GetProperty("max_requests").GetInt32();
-        Require(_limit is >= 1 and <= 3);
+        Require(_limit is >= 1 and <= 32);
         _externalLiability = c.GetProperty("external_liability_cny").GetDecimal();
         Require(_externalLiability >= 0);
         Provenance = S(c, "provenance");
         Require(Provenance is "opengameagent_live" or "opengameagent_fixture");
         using var endpointDocument = JsonDocument.Parse(ReadSmallFile(endpointPath));
         var e = endpointDocument.RootElement;
-        Require(S(e, "ledger_id") == _ledger && S(e, "model") == Model);
+        Require(S(e, "ledger_id") == _ledger && S(e, "model") == _model);
         _baseUri = new Uri(S(e, "base_url"), UriKind.Absolute);
         Require(_baseUri.Scheme == "http" && _baseUri.Host == "127.0.0.1" && _baseUri.AbsolutePath == "/v1"
             && _baseUri.UserInfo.Length == 0 && _baseUri.Query.Length == 0 && _baseUri.Fragment.Length == 0);
@@ -78,7 +100,7 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
 
     private async Task<ModelResponse> Complete(ModelRequest request, CancellationToken ct)
     {
-        Require(DateTimeOffset.UtcNow < _deadline && request.Model == Model);
+        Require(DateTimeOffset.UtcNow < _deadline && request.Model == _model);
         var latest = request.Messages.Last(m => m.Role == AgentRole.User);
         Require(latest.Metadata.TryGetValue("game.input_id", out var operation) && Guid.TryParse(operation, out _));
         Require(latest.Metadata.TryGetValue("game.actor_id", out var actor) && actor.Length is > 0 and <= 128);
@@ -88,19 +110,24 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
         var view = payload.GetProperty("resident_view");
         // Explicit projection prevents incidental host fields from being sent.
         var personal = new Dictionary<string, JsonElement>();
-        foreach (var key in new[] { "identity", "observations", "needs", "experiences", "memory", "inventory", "actions", "available_actions" })
-            personal[key] = view.GetProperty(key);
-        var observation = JsonSerializer.Serialize(personal);
+        foreach (var key in new[] { "identity", "observations", "needs", "experiences", "memory", "inventory", "actions", "available_actions",
+            "nearby_residents", "items", "skills", "contracts", "life_account", "wallet", "nearby_skilled_roles", "action_details", "known_rules", "unavailable_actions" })
+            if (view.TryGetProperty(key, out var value)) personal[key] = value;
+        Require(personal.ContainsKey("identity") && personal.ContainsKey("available_actions"));
+        var observation = JsonSerializer.Serialize(personal, WireJson);
         const string instructions = "You are this resident, using only your personal observations and experiences. " +
-            "Choose one action from available_actions: wait, draw_water, drink_water. An available action is optional. " +
+            "Choose exactly one action ID from available_actions. action_details explains the offered choices. An available action is optional. " +
             "Return only JSON {action,reason}; give reason in Simplified Chinese, at most 512 characters. " +
+            "reason is private and never spoken. For an action with speech_allowed=true, you may add speech (public words in Simplified Chinese, at most512 characters) to explain or ask in your own words. Public speech is an attributed statement, not a change to contract terms or resources. " +
             "If no available action meets your need, you may additionally propose need:{capability_id:<short missing ability ID>,reason:<your reason>}. " +
             "Do not request an ability you already observe working; a proposal does not create it. Waiting without a need is valid. " +
+            "World inventory, contract fields and known_rules describe authoritative current facts. Previous reasons and spoken statements can be mistaken beliefs; revise those beliefs when they conflict with current facts, without rewriting history. " +
+            "Other residents may refuse; only a recorded contract or action receipt establishes an outcome. " +
             "Do not invent resources or memories, install anything, modify rules, or include any other fields.";
         Require(Encoding.UTF8.GetByteCount(instructions + observation) <= 24576);
-        var body = JsonSerializer.Serialize(new { model = Model, messages = new[] {
+        var body = JsonSerializer.Serialize(new { model = _model, messages = new[] {
             new { role = "system", content = instructions }, new { role = "user", content = observation } },
-            stream = false, max_tokens = 512, thinking = new { type = "disabled" }, response_format = new { type = "json_object" } });
+            stream = false, max_tokens = 512, thinking = new { type = "disabled" }, response_format = new { type = "json_object" } }, WireJson);
         Require(Encoding.UTF8.GetByteCount(body) <= 32768);
 
         Directory.CreateDirectory(Path.GetDirectoryName(_statePath)!);
@@ -115,7 +142,9 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
         using (var preflight = await Send(HttpMethod.Get, "/budget", null, null, null, ct).ConfigureAwait(false))
         {
             ValidateBudget(preflight.RootElement);
-            Require(preflight.RootElement.GetProperty("remaining_allocatable_cny").GetDecimal() >= 1.718m + _externalLiability);
+            // The ledger atomically reserves its own policy-specific worst case.
+            // Do not impose the obsolete 262k-context price on a smaller run policy.
+            Require(preflight.RootElement.GetProperty("remaining_allocatable_cny").GetDecimal() > _externalLiability);
         }
         Require(DateTimeOffset.UtcNow < _deadline);
         state.Count++;
@@ -124,7 +153,7 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
         WriteState(stateFile, state); // Durable before sending: crash/timeout cannot mint another attempt.
         using var reply = await Send(HttpMethod.Post, "/v1/chat/completions", body, operation, actor, ct).ConfigureAwait(false);
         var result = reply.RootElement;
-        Require(S(result, "model") == Model);
+        Require(S(result, "model") == _model);
         ValidateBudget(result.GetProperty("_hearth_budget"));
         var usage = result.GetProperty("usage");
         var prompt = usage.GetProperty("prompt_tokens").GetInt64();
@@ -135,7 +164,7 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
             && usage.GetProperty("total_tokens").GetInt64() == prompt + output);
         var text = S(result.GetProperty("choices")[0].GetProperty("message"), "content");
         var response = new ModelResponse(new AgentContent[] { new TextContent(text) }, ModelStopReason.Stop,
-            new ModelUsage(prompt, output, cached), provider: "budget-gateway", responseModel: Model);
+            new ModelUsage(prompt, output, cached), provider: "budget-gateway", responseModel: _model);
         state.Unknown = false;
         WriteState(stateFile, state);
         return response;
@@ -144,6 +173,14 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
     private void ValidateBudget(JsonElement budget)
     {
         Require(S(budget, "ledger_id") == _ledger && budget.GetProperty("halted").GetString() == "");
+    }
+
+    // A model id is a short ASCII token, never host config, a URL or a prompt.
+    private static string PinnedModel(string value)
+    {
+        Require(value.Length is >= 1 and <= 64);
+        foreach (var ch in value) Require(char.IsAsciiLetterOrDigit(ch) || ch is '.' or '-' or '_' or ':' or '/');
+        return value;
     }
 
     private async Task<JsonDocument> Send(HttpMethod method, string path, string? body, string? operation,

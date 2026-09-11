@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "original_world_promoted": false,
+  "world_id": "fixture:town-trade-validation",
+  "life_seq_before": 6,
+  "life_seq_after": 13,
+  "paid_calls": 10,
+  "new_cost_cny": 0.3331213,
+  "life_chain_passed": false,
+  "final_model_errors": {
+    "fixture:carpenter": "provider_error"
+  },
+  "cold_restore_byte_identical": true,
+  "cold_restore_paid_calls": 0,
+  "checks": {
+    "turns": 29,
+    "online": 63,
+    "gateway_cases": 10,
+    "consecutive_mock_decisions": 12
+  },
+  "development_snapshot_raw": 5095802,
+  "development_checkpoint_raw": 1600000,
+  "development_control_passed": false
+}

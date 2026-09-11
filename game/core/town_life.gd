@@ -17,11 +17,15 @@ var _visitor_position := Vector3.INF
 
 func _parse_json_text(text: String) -> Variant:
 	var codec = JsonCodec.new()
-	return codec.Decode(text)
+	var decoded: Variant = codec.Decode(text)
+	codec.Release()
+	return decoded
 
 func _serialize_state() -> String:
 	var codec = JsonCodec.new()
-	return codec.Encode(_state)
+	var encoded: String = codec.Encode(_state)
+	codec.Release()
+	return encoded
 
 func _init() -> void:
 	_state = {}
@@ -137,6 +141,18 @@ func reply_to_visitor(id: String, request_id: String, choice: String, text: Stri
 	_state.godot.commands[command_id] = {"payload": payload, "status": "completed"}
 	return {"ok": true, "code": "visitor_reply", "text": text, "choice": choice}
 
+func has_open_help_request(sender: String, recipient: String, need: Dictionary = {}) -> bool:
+	var open_requests: Dictionary = {}
+	for event in _state.life.events:
+		if event.get("type") == "ask_help" and event.get("actor_id") == sender and event.get("subject_id") == recipient and event.get("need", {}) == need:
+			open_requests[str(event.get("request_id", ""))] = true
+		elif event.get("type") in ["reply_help", "cancel_help"]:
+			open_requests.erase(str(event.get("request_id", "")))
+	return not open_requests.is_empty()
+
+func _validate_communicate_need(_sender_id: String, _need: Variant) -> Dictionary:
+	return _failure("unsupported_need")
+
 func communicate(id: String, decision: Dictionary, command_id: String, provenance: String = "local_rule_policy") -> Dictionary:
 	if id not in active_ids() or not _validate_decision_command_id(command_id).ok or provenance not in ALLOWED_DECISION_PROVENANCE:
 		return _failure("invalid_actor_command_or_provenance")
@@ -146,6 +162,8 @@ func communicate(id: String, decision: Dictionary, command_id: String, provenanc
 	var keys: Array = ["action", "recipient_id", "text"]
 	if action != "ask_help":
 		keys.append("request_id")
+	elif decision.has("need"):
+		keys.append("need")
 	if action == "reply_help":
 		keys.append("choice")
 	if not _exact_keys(decision, keys) or not decision.get("recipient_id") is String or not decision.get("text") is String or decision.text.strip_edges().is_empty() or decision.text.length() > MAX_REASON_LENGTH:
@@ -157,8 +175,14 @@ func communicate(id: String, decision: Dictionary, command_id: String, provenanc
 	if _state.godot.commands.has(command_id):
 		var matches: bool = _state.godot.commands[command_id].payload == payload
 		return {"ok": matches, "duplicate": matches, "code": "duplicate" if matches else "command_conflict"}
+	if decision.has("need"):
+		var checked := _validate_communicate_need(id, decision.need)
+		if not checked.ok:
+			return checked
 	if position_of(id).distance_to(position_of(target)) > HEARING_RANGE:
 		return _failure("recipient_out_of_range")
+	if action == "ask_help" and has_open_help_request(id, target, decision.get("need", {})):
+		return _failure("help_request_pending")
 	var request_id := "godot_help:" + command_id
 	if action != "ask_help":
 		if not decision.get("request_id") is String:
@@ -181,6 +205,8 @@ func communicate(id: String, decision: Dictionary, command_id: String, provenanc
 	var event := {"type": action, "actor_id": id, "subject_id": target, "recipient_ids": [id, target],
 		"operation_id": command_id, "source": provenance, "text": decision.text,
 		"request_id": request_id, "topic": "help_availability", "contractual": false}
+	if action == "ask_help" and decision.has("need"):
+		event.need = decision.need.duplicate(true)
 	if action == "reply_help":
 		event.reply_choice = decision.choice
 	_append_life_event(event)
@@ -545,6 +571,7 @@ func _finish(id: String, pending: Dictionary) -> Dictionary:
 				_state.foraging.harvested_total += 1
 	var receipt := {"ok": valid, "code": action if valid else "resources_unavailable", "actor_id": id, "command_id": pending.command_id}
 	_state.godot.commands[pending.command_id].status = "completed" if valid else "rejected"
+	_state.godot.commands[pending.command_id].result = receipt.duplicate(true)
 	_state.godot.pending.erase(id)
 	if valid:
 		_state.life.seq += 1

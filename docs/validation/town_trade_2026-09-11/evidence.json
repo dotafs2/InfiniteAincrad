@@ -1,0 +1,299 @@
+{
+  "date": "2026-09-11",
+  "source_commit": "e3ab07b556e9a1d9923ebf17790955a7782ad4e2",
+  "implementation": "uncommitted working-tree changes on codex/publish-street-20260910",
+  "original_world_restored": false,
+  "original_source_available_here": false,
+  "world_id": "fixture:town-trade-validation",
+  "world_sha256": "370ffeacf9b437ad2dd4419eb34fc053a5273ba47ee83495ff5c0f42c2cb16b4",
+  "life_seq": 6,
+  "checks": {
+    "trade-visitor-final": {
+      "exit_code": 0,
+      "elapsed_seconds": 0.703,
+      "results": [
+        {
+          "checks": 63,
+          "failures": 0,
+          "paid_calls": 0,
+          "suite": "town_trade"
+        }
+      ]
+    },
+    "turns-r2": {
+      "exit_code": 0,
+      "elapsed_seconds": 0.531,
+      "results": [
+        {
+          "checks": 19,
+          "failures": 0,
+          "paid_calls": 0,
+          "suite": "town_turns"
+        }
+      ]
+    },
+    "town-life-final": {
+      "exit_code": 0,
+      "elapsed_seconds": 0.516,
+      "results": [
+        {
+          "checks": 31,
+          "failures": 0,
+          "paid_calls": 0,
+          "suite": "town_life"
+        }
+      ]
+    },
+    "town-social-final": {
+      "exit_code": 0,
+      "elapsed_seconds": 0.515,
+      "results": [
+        {
+          "checks": 24,
+          "failures": 0,
+          "paid_calls": 0,
+          "suite": "town_social"
+        }
+      ]
+    },
+    "town-visitor-final": {
+      "exit_code": 0,
+      "elapsed_seconds": 0.515,
+      "results": [
+        {
+          "checks": 17,
+          "failures": 0,
+          "paid_calls": 0,
+          "suite": "town_visitor"
+        }
+      ]
+    },
+    "core-final": {
+      "exit_code": 0,
+      "elapsed_seconds": 0.421,
+      "results": [
+        {
+          "evidence": [
+            {
+              "events": 6,
+              "receipt_count": 7,
+              "resident_id": "fixture:luna",
+              "resource": {
+                "consumed_water": 1.0,
+                "resident_water": 0.0,
+                "well_water": 0.0
+              },
+              "test": "full",
+              "world_id": "fixture:well-street"
+            }
+          ],
+          "ok": true,
+          "phase": "full"
+        }
+      ]
+    },
+    "scene-r2": {
+      "exit_code": 0,
+      "elapsed_seconds": 33.375,
+      "results": [
+        {
+          "paid_calls": 0,
+          "passed": true,
+          "provenance": "scripted_test",
+          "steps": 13,
+          "suite": "town_trade_scene",
+          "world_id": "fixture:town-trade-validation"
+        }
+      ]
+    },
+    "live-cold": {
+      "exit_code": 0,
+      "elapsed_seconds": 5.11,
+      "results": []
+    }
+  },
+  "gateway": [
+    {
+      "case": "success-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "success-1",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "town-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "insufficient-0",
+      "passed": true,
+      "get": 1,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "wrong-ledger-0",
+      "passed": true,
+      "get": 1,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "expired-0",
+      "passed": true,
+      "get": 0,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "unsafe-endpoint-0",
+      "passed": true,
+      "get": 0,
+      "post": 0,
+      "contract_errors": []
+    },
+    {
+      "case": "uncertain-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "uncertain-1",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    }
+  ],
+  "live": {
+    "model": "kimi-k2.6",
+    "requests": 12,
+    "first_run_requests": 8,
+    "first_run_passed": false,
+    "first_run_failure": "invalid long action id; refused before payment",
+    "continuation_requests": 4,
+    "continuation_passed": true,
+    "same_world": true,
+    "developer_protocol_review_count": 1,
+    "final_rule_clarification_live_tested": false,
+    "wallets": {
+      "fixture:innkeeper": 18,
+      "fixture:smith": 5,
+      "fixture:carpenter": 7
+    },
+    "items": [
+      {
+        "id": "fixture:axe",
+        "kind": "axe",
+        "owner_id": "fixture:innkeeper",
+        "custodian_id": "fixture:innkeeper",
+        "edge": 20,
+        "handle": 100,
+        "source": "explicit_test_fixture"
+      }
+    ],
+    "accounts": [
+      {
+        "resident_id": "fixture:innkeeper",
+        "wood": 2,
+        "iron": 0,
+        "kindling": 0,
+        "reserved_col": 0
+      },
+      {
+        "resident_id": "fixture:smith",
+        "wood": 0,
+        "iron": 1,
+        "kindling": 0,
+        "reserved_col": 0
+      },
+      {
+        "resident_id": "fixture:carpenter",
+        "wood": 0,
+        "iron": 0,
+        "kindling": 0,
+        "reserved_col": 0
+      }
+    ],
+    "contracts": [
+      {
+        "id": "trade_contract_ae5881ff-2d96-4d06-ad71-2228b3c2fb97",
+        "part": "handle",
+        "item_id": "fixture:axe",
+        "owner_id": "fixture:innkeeper",
+        "worker_id": "fixture:carpenter",
+        "status": "collected",
+        "price_col": 2,
+        "reserved_col": 0
+      }
+    ],
+    "last_choices": {
+      "fixture:innkeeper": {
+        "action": "wait",
+        "status": "settled"
+      },
+      "fixture:smith": {
+        "action": "wait",
+        "status": "settled"
+      },
+      "fixture:carpenter": {
+        "action": "wait",
+        "status": "settled"
+      }
+    },
+    "full_autonomous_tool_use": false,
+    "new_estimated_cny": 0.1717833,
+    "carried_cny": 0.0141471,
+    "total_estimated_cny": 0.1859304,
+    "reserved_cny": 0
+  },
+  "cold_restore": {
+    "passed": true,
+    "new_decisions": "none_restore",
+    "new_requests": 0,
+    "byte_identical": [
+      "world.json",
+      "continuation.sqlite3",
+      "continuation.guard.json",
+      "attempt.json"
+    ]
+  },
+  "development": {
+    "luna": {
+      "input_tokens": 2309025,
+      "cached_input_tokens": 2190592,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 40413,
+      "reasoning_output_tokens": 11766,
+      "total_tokens": 2349438
+    },
+    "worker_target_raw": 300000,
+    "worker_target_met": false,
+    "root_current_turn_delta": null,
+    "currency_cost": null
+  },
+  "screenshots_sha256": {
+    "live-cold.png": "18f0e5a3d1b8ed8eebe22631e4725a927f4ad77e871bd25cbd10adbe9040dc10",
+    "scripted-chain.png": "3e66dc363babfe461b060586415ed5005e63eb4bb66c6aa889dc078f6780ad88"
+  },
+  "limits": [
+    "fictional identities",
+    "placeholder character/tool art",
+    "no camera FOV",
+    "original-world private source missing",
+    "no second-model continuity",
+    "partial legacy life port"
+  ]
+}

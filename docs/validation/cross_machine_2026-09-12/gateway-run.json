@@ -1,0 +1,32 @@
+{
+  "phase": "gateway",
+  "started_at_utc": "2026-09-11T17:25:08.476322+00:00",
+  "run": {
+    "label": "gateway-adapter",
+    "argv": [
+      "C:\\Users\\Chenxi Qu\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-X",
+      "utf8",
+      "tools/validate_gateway_adapter.py",
+      "--godot",
+      "D:\\lucidgloves\\InfiniteAincrad\\tmp\\toolchain\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64_console.exe",
+      "--out",
+      "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\gateway"
+    ],
+    "cwd": "D:\\lucidgloves\\InfiniteAincrad",
+    "started_at_utc": "2026-09-11T17:25:08.477320+00:00",
+    "timeout_seconds": 600,
+    "stdout_log": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T172508477320-gateway-adapter.stdout.log",
+    "stderr_log": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T172508477320-gateway-adapter.stderr.log",
+    "process_record": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T172508477320-gateway-adapter.process.json",
+    "pid": 25888,
+    "status": "exited",
+    "exit_code": 0,
+    "elapsed_seconds": 15.75,
+    "finished_at_utc": "2026-09-11T17:25:24.222195+00:00",
+    "stdout_tail": "{\"case\": \"success-0\", \"passed\": true, \"get\": 1, \"post\": 1, \"contract_errors\": []}\n{\"case\": \"success-1\", \"passed\": true, \"get\": 1, \"post\": 1, \"contract_errors\": []}\n{\"case\": \"town-0\", \"passed\": true, \"get\": 1, \"post\": 1, \"contract_errors\": []}\n{\"case\": \"unicode-context-0\", \"passed\": true, \"get\": 1, \"post\": 1, \"contract_errors\": []}\n{\"case\": \"continuation-0\", \"passed\": true, \"get\": 12, \"post\": 12, \"contract_errors\": []}\n{\"case\": \"pinned-model-0\", \"passed\": true, \"get\": 1, \"post\": 1, \"contract_errors\": []}\n{\"case\": \"pinned-model-1\", \"passed\": true, \"get\": 1, \"post\": 1, \"contract_errors\": []}\n{\"case\": \"model-mismatch-0\", \"passed\": true, \"get\": 0, \"post\": 0, \"contract_errors\": []}\n{\"case\": \"reply-model-mismatch-0\", \"passed\": true, \"get\": 1, \"post\": 1, \"contract_errors\": []}\n{\"case\": \"insufficient-0\", \"passed\": true, \"get\": 1, \"post\": 0, \"contract_errors\": []}\n{\"case\": \"wrong-ledger-0\", \"passed\": true, \"get\": 1, \"post\": 0, \"contract_errors\": []}\n{\"case\": \"expired-0\", \"passed\": true, \"get\": 0, \"post\": 0, \"contract_errors\": []}\n{\"case\": \"unsafe-endpoint-0\", \"passed\": true, \"get\": 0, \"post\": 0, \"contract_errors\": []}\n{\"case\": \"uncertain-0\", \"passed\": true, \"get\": 1, \"post\": 1, \"contract_errors\": []}\n{\"case\": \"uncertain-1\", \"passed\": true, \"get\": 1, \"post\": 1, \"contract_errors\": []}\n",
+    "stderr_tail": ""
+  },
+  "status": "ok",
+  "finished_at_utc": "2026-09-11T17:25:24.231712+00:00"
+}
