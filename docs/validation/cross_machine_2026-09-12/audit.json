@@ -1,0 +1,818 @@
+{
+  "phase": "audit",
+  "started_at_utc": "2026-09-11T17:56:36.345709+00:00",
+  "heads": {
+    "HEAD": "d3ba1e99868f14d06f4285708ed1477bf8db8390",
+    "MERGE_HEAD": "e123706e2b14bda4f646f654d61ee98736ae292c",
+    "base": "e3ab07b556e9a1d9923ebf17790955a7782ad4e2"
+  },
+  "unmerged_stages": [],
+  "union_count": 922,
+  "missing_from_index": [],
+  "missing_from_workspace": [],
+  "reviewed_exception": {
+    "path": "game/core/TownJsonCodec.cs",
+    "expected_sha256": "16e50559ec9e21c00207a53eb3df0350ffb7ce53260e7b32a03b8ea2bb7188c0",
+    "actual_sha256": "16e50559ec9e21c00207a53eb3df0350ffb7ce53260e7b32a03b8ea2bb7188c0",
+    "note": "Reviewed exception: game/core/TownJsonCodec.cs is the single intentional previously-identical file allowed to differ; it adds public Release()=>Dispose() and the explicit lifetime comment. Pinned by normalized-LF content SHA256."
+  },
+  "both_side_changed": [
+    "AGENTS.md",
+    "README.md",
+    "ROADMAP.md",
+    "docs/CONTINUE_ON_ANOTHER_PC.md",
+    "docs/STATUS.md",
+    "game/core/town_life.gd",
+    "game/spatial/town_street.gd",
+    "game/spatial/trial_resident.gd"
+  ],
+  "unexpected_changed_paths": [],
+  "nonoverlap_blob_mismatch": [],
+  "identical_blob_mismatch": [],
+  "asset_path_count": 457,
+  "asset_blob_mismatch": [],
+  "source_path_count": 152,
+  "lfs_pointers": [
+    {
+      "path": "Art/ReferenceScenes/DeepSeekResidences/F1_Residence_06.blend",
+      "pointer_oid": "38472a9b8fcb7a702218199f4da36c6d99713ebb",
+      "expected_size": 30029774,
+      "actual_size": 30029774,
+      "expected_sha256": "7f233982758af922a9776adb4f60900878034e452f637eba5bbba34c6d3df8e9",
+      "actual_sha256": "7f233982758af922a9776adb4f60900878034e452f637eba5bbba34c6d3df8e9"
+    },
+    {
+      "path": "Art/ReferenceScenes/Floor1EnvironmentKit20/Floor1_EnvironmentKit20.blend",
+      "pointer_oid": "f7f6f928d7584922f3a089acbd22379282b14e23",
+      "expected_size": 6174001,
+      "actual_size": 6174001,
+      "expected_sha256": "aaa50f541c2ca59aea850f516ce497358e2dd82bfcc8753a1160f956ef2193ba",
+      "actual_sha256": "aaa50f541c2ca59aea850f516ce497358e2dd82bfcc8753a1160f956ef2193ba"
+    },
+    {
+      "path": "Art/ReferenceScenes/Floor1EnvironmentKit20/Floor1_EnvironmentKit20_V2.blend",
+      "pointer_oid": "16f11b7c7566e6aaa401e8613ffaab04c2ad8aa6",
+      "expected_size": 36894614,
+      "actual_size": 36894614,
+      "expected_sha256": "c136cf3b3cbc4ba82a4dcb3f5d192c7ae6f7eb2ee9f100923e488bc8579320d0",
+      "actual_sha256": "c136cf3b3cbc4ba82a4dcb3f5d192c7ae6f7eb2ee9f100923e488bc8579320d0"
+    },
+    {
+      "path": "Art/ReferenceScenes/Floor1HeroKit/StartingTown_Floor1_HeroKit.blend",
+      "pointer_oid": "c8eebde438c8aab057e2349fd309dea281e833f3",
+      "expected_size": 22102932,
+      "actual_size": 22102932,
+      "expected_sha256": "1116300fc9d2fd272b767a5a7108cc151afb847529ec3bb6af5c1054a6a6091e",
+      "actual_sha256": "1116300fc9d2fd272b767a5a7108cc151afb847529ec3bb6af5c1054a6a6091e"
+    },
+    {
+      "path": "Art/ReferenceScenes/Floor1Residences/Floor1_Residences_5.blend",
+      "pointer_oid": "d4808452a2d715248f2a6af82e8886baef9a8cdc",
+      "expected_size": 104093899,
+      "actual_size": 104093899,
+      "expected_sha256": "06551cc25c5fae9b39e7c169d69a358aefc20575523ac23af61de061d5ba680e",
+      "actual_sha256": "06551cc25c5fae9b39e7c169d69a358aefc20575523ac23af61de061d5ba680e"
+    },
+    {
+      "path": "Art/ReferenceScenes/MarketCraftV5/StartingTown_Market_CraftV5.blend",
+      "pointer_oid": "6733a4c2d1b938af249f850bb5c5477c8ee72b88",
+      "expected_size": 34246266,
+      "actual_size": 34246266,
+      "expected_sha256": "ccd3261b89500d1b1878b29d8aebf0282291bf5e1c21b6bf1bf69b7bc9ae9b2b",
+      "actual_sha256": "ccd3261b89500d1b1878b29d8aebf0282291bf5e1c21b6bf1bf69b7bc9ae9b2b"
+    },
+    {
+      "path": "docs/validation/floor1_environment_v2_2026-09-11/all20_wind.mp4",
+      "pointer_oid": "5f655ab4efe1e16fa9411a254cddfa8008c651eb",
+      "expected_size": 15075755,
+      "actual_size": 15075755,
+      "expected_sha256": "d85eb3d24e3bf8bb7f87fc168b6a5c4a8daee7ce45517196a5bb5ae1a5da37fa",
+      "actual_sha256": "d85eb3d24e3bf8bb7f87fc168b6a5c4a8daee7ce45517196a5bb5ae1a5da37fa"
+    },
+    {
+      "path": "docs/validation/floor1_environment_v2_2026-09-11/wind_preview.mp4",
+      "pointer_oid": "bf5c1cae1d7891c696911f33da1cb434661f2975",
+      "expected_size": 6468597,
+      "actual_size": 6468597,
+      "expected_sha256": "caf927ae984d8eeff71ef501767920168ef91d0d217f0b4e07a7607ab34aea92",
+      "actual_sha256": "caf927ae984d8eeff71ef501767920168ef91d0d217f0b4e07a7607ab34aea92"
+    },
+    {
+      "path": "game/assets/floor1/StartingTown_Floor1_HeroKit.glb",
+      "pointer_oid": "e3c03d9748d2f2603e1d2bc46a71033e22dcab79",
+      "expected_size": 69677888,
+      "actual_size": 69677888,
+      "expected_sha256": "7620ee5e2d0fc13aba95773820a01c2c7c4cd420edc8a1e3faf24435189f62ce",
+      "actual_sha256": "7620ee5e2d0fc13aba95773820a01c2c7c4cd420edc8a1e3faf24435189f62ce"
+    },
+    {
+      "path": "game/assets/floor1/deepseek_residences/F1_Residence_06.glb",
+      "pointer_oid": "0a4caf751ed89ba7189b7fef9d0d039ddd5ec7a7",
+      "expected_size": 63655396,
+      "actual_size": 63655396,
+      "expected_sha256": "61d63c9a3b5157cecf99afe89f38d7650340650aeae1f875d13150b2ac4642d3",
+      "actual_sha256": "61d63c9a3b5157cecf99afe89f38d7650340650aeae1f875d13150b2ac4642d3"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_ancient_oak.glb",
+      "pointer_oid": "7c2439c0db3ec302fe22942dd8c89e12b1b4af5c",
+      "expected_size": 764764,
+      "actual_size": 764764,
+      "expected_sha256": "c07677e1cedeabe0a30ef4384d6187b017e5dd9e322333ce5807f7238bbda0d5",
+      "actual_sha256": "c07677e1cedeabe0a30ef4384d6187b017e5dd9e322333ce5807f7238bbda0d5"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_berry_bush.glb",
+      "pointer_oid": "6c8012518eb0f336ef720cf1b4e45886c4e958f5",
+      "expected_size": 1070028,
+      "actual_size": 1070028,
+      "expected_sha256": "543dd7b17ac93b2de7598cbdb7d491f9b44ccd2726bec6c92aa29f191519993b",
+      "actual_sha256": "543dd7b17ac93b2de7598cbdb7d491f9b44ccd2726bec6c92aa29f191519993b"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_birch_grove.glb",
+      "pointer_oid": "9505997eec9bf27f61da1e100be23eaf63c2fa94",
+      "expected_size": 992832,
+      "actual_size": 992832,
+      "expected_sha256": "016c795245c6b819dd0c27277698feca09bb5d02f92d3a0128660786bed7a27b",
+      "actual_sha256": "016c795245c6b819dd0c27277698feca09bb5d02f92d3a0128660786bed7a27b"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_canvas_rest_shelter.glb",
+      "pointer_oid": "728875b7aa0931d71970036837cb57f09f53f9e2",
+      "expected_size": 995480,
+      "actual_size": 995480,
+      "expected_sha256": "3c577b5863368b52299fba1a12190dc76e1e15597c3f80f90d165994cea3343c",
+      "actual_sha256": "3c577b5863368b52299fba1a12190dc76e1e15597c3f80f90d165994cea3343c"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_cypress_column.glb",
+      "pointer_oid": "db293bc59adf63ac3da2091df264d7b94d58afa9",
+      "expected_size": 546112,
+      "actual_size": 546112,
+      "expected_sha256": "fb48408b54187d575ec401f39f4911852ed4f82e3c9694c2f1ef13026d8338ea",
+      "actual_sha256": "fb48408b54187d575ec401f39f4911852ed4f82e3c9694c2f1ef13026d8338ea"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_fern_patch.glb",
+      "pointer_oid": "47b34108b7f5cb06b3169160a22d0b02cee8da7b",
+      "expected_size": 2233200,
+      "actual_size": 2233200,
+      "expected_sha256": "be3de3c87603098410715c403a1abe2af9c4eb89c16c18d04ad29683c52456d9",
+      "actual_sha256": "be3de3c87603098410715c403a1abe2af9c4eb89c16c18d04ad29683c52456d9"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_flowering_shrub.glb",
+      "pointer_oid": "059767876f3bfe3ea8ce94550f4958e07a0b2176",
+      "expected_size": 1127932,
+      "actual_size": 1127932,
+      "expected_sha256": "c2884ce3f3da93239dd2ec028bd40a5173138098e2cc0fd5bfd99ed0abf17899",
+      "actual_sha256": "c2884ce3f3da93239dd2ec028bd40a5173138098e2cc0fd5bfd99ed0abf17899"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_herb_planter.glb",
+      "pointer_oid": "7c6340e0af83f00c3f691ea15fb2e18aa3010d08",
+      "expected_size": 1012544,
+      "actual_size": 1012544,
+      "expected_sha256": "25bf44a7f09ada97672a8af53da725fb90d6788eb5e59c19a3c0b5b10ba66883",
+      "actual_sha256": "25bf44a7f09ada97672a8af53da725fb90d6788eb5e59c19a3c0b5b10ba66883"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_ivy_wall_panel.glb",
+      "pointer_oid": "d6e1ab477825749f904f271bdcf20a19a9055164",
+      "expected_size": 1558420,
+      "actual_size": 1558420,
+      "expected_sha256": "609b4349d2f3b3b2fe39bbc3e36ba4db6e91a50372a068ca4e2fa55e72eea633",
+      "actual_sha256": "609b4349d2f3b3b2fe39bbc3e36ba4db6e91a50372a068ca4e2fa55e72eea633"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_meadow_grass.glb",
+      "pointer_oid": "a2359689b4a00c9a5157660bd8b616a84eece66f",
+      "expected_size": 182208,
+      "actual_size": 182208,
+      "expected_sha256": "84823a55ee211b7bb431b481b33e213b8db572491e0c2c8686663b33700f30b4",
+      "actual_sha256": "84823a55ee211b7bb431b481b33e213b8db572491e0c2c8686663b33700f30b4"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_mossy_boulder_cluster.glb",
+      "pointer_oid": "97c75aa9c246614ba4747a17da2bc78c4d9c1cc1",
+      "expected_size": 532664,
+      "actual_size": 532664,
+      "expected_sha256": "c5871242a832c32a8f5f5d1066568b94a6ed0f24bc322adb91b3d7cbf58c8f6b",
+      "actual_sha256": "c5871242a832c32a8f5f5d1066568b94a6ed0f24bc322adb91b3d7cbf58c8f6b"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_mossy_fallen_log.glb",
+      "pointer_oid": "bbb4d515d6a4e80355d3a2e3c1617eb105bfec10",
+      "expected_size": 548972,
+      "actual_size": 548972,
+      "expected_sha256": "798aee4626a9980a59a18df820d8e519cfc6af9990006fc3fe92a8f1a5d4c7f1",
+      "actual_sha256": "798aee4626a9980a59a18df820d8e519cfc6af9990006fc3fe92a8f1a5d4c7f1"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_orchard_apple.glb",
+      "pointer_oid": "a60f0e386558384f97b9adb15124ccaa37ef9cd2",
+      "expected_size": 877604,
+      "actual_size": 877604,
+      "expected_sha256": "053731dabe55e864bd6bfd06ec0ee7aff50c305959a838bdfa4edfca059e2ecd",
+      "actual_sha256": "053731dabe55e864bd6bfd06ec0ee7aff50c305959a838bdfa4edfca059e2ecd"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_reed_cluster.glb",
+      "pointer_oid": "9a82f8242f5ee277dfbe289dbf226bccf5f786c2",
+      "expected_size": 787572,
+      "actual_size": 787572,
+      "expected_sha256": "192fbb4f89d203ad83271bf10d89e00601170eb14e7d85dc88812c8468332652",
+      "actual_sha256": "192fbb4f89d203ad83271bf10d89e00601170eb14e7d85dc88812c8468332652"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_roadside_milestone.glb",
+      "pointer_oid": "ec3845c51239bb79428d8728edab575568c81c78",
+      "expected_size": 554996,
+      "actual_size": 554996,
+      "expected_sha256": "59fb5557eac45a565f90c742a38bc84862f3c821dc51c456e29d698a275e3c91",
+      "actual_sha256": "59fb5557eac45a565f90c742a38bc84862f3c821dc51c456e29d698a275e3c91"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_stone_pine.glb",
+      "pointer_oid": "b3798ad0c5b5c97c1fd45a94fe3469eb4677f053",
+      "expected_size": 1258580,
+      "actual_size": 1258580,
+      "expected_sha256": "a71c2202f897b9d4c176800939aafcb6f66054ebc7cedaa40cea150354d20825",
+      "actual_sha256": "a71c2202f897b9d4c176800939aafcb6f66054ebc7cedaa40cea150354d20825"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_stone_water_trough.glb",
+      "pointer_oid": "c08f14e42c1b26786dd05b8f4bb78e51e342a048",
+      "expected_size": 549612,
+      "actual_size": 549612,
+      "expected_sha256": "b68de9a673adf4a1ef1dec185f0d34261771219b6d144070d9d412b78e64aade",
+      "actual_sha256": "b68de9a673adf4a1ef1dec185f0d34261771219b6d144070d9d412b78e64aade"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_timber_fence_vine.glb",
+      "pointer_oid": "299d015db9e09120cc35179ea22ff778c2806bcf",
+      "expected_size": 800540,
+      "actual_size": 800540,
+      "expected_sha256": "1ee51eba5108930b10b13d34cdaabadb3d681f4dca87c05a4c135a44d55a7e64",
+      "actual_sha256": "1ee51eba5108930b10b13d34cdaabadb3d681f4dca87c05a4c135a44d55a7e64"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_wildflower_patch.glb",
+      "pointer_oid": "103a54a796308593ae6de8b33c13f304b67a15ce",
+      "expected_size": 1527396,
+      "actual_size": 1527396,
+      "expected_sha256": "0d9642041ecb2335faf1f8bd97bd71155552c20c0dd9ef13cb610370b48c8379",
+      "actual_sha256": "0d9642041ecb2335faf1f8bd97bd71155552c20c0dd9ef13cb610370b48c8379"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/F1_young_maple.glb",
+      "pointer_oid": "d182f1a41a9549a9535ea5fb2050b5a6c616bbfd",
+      "expected_size": 700720,
+      "actual_size": 700720,
+      "expected_sha256": "e2d691f94d5248687c163245d5cf4d2eeedf00756cd20e4b71d2a71e2eba3f7b",
+      "actual_sha256": "e2d691f94d5248687c163245d5cf4d2eeedf00756cd20e4b71d2a71e2eba3f7b"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_20/Floor1_EnvironmentKit20_Showcase.glb",
+      "pointer_oid": "d80423415380d414cb54153510113a1966f1b8e8",
+      "expected_size": 11554840,
+      "actual_size": 11554840,
+      "expected_sha256": "8d2abcbdccacb3a6bfb8a03e28f658c4b4b23a9f8d9092a21c39567cf0714423",
+      "actual_sha256": "8d2abcbdccacb3a6bfb8a03e28f658c4b4b23a9f8d9092a21c39567cf0714423"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_ancient_oak_LOD0.glb",
+      "pointer_oid": "9ac163ff7aa4c3d31c01fea21738500a243f469d",
+      "expected_size": 7597564,
+      "actual_size": 7597564,
+      "expected_sha256": "df62ca803808fd369c5f285d67c9aeef36ddaa650026e35a96c993b9d1060399",
+      "actual_sha256": "df62ca803808fd369c5f285d67c9aeef36ddaa650026e35a96c993b9d1060399"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_ancient_oak_LOD1.glb",
+      "pointer_oid": "db5215441f4b88d93c71aaa818bba60bd8404545",
+      "expected_size": 2651520,
+      "actual_size": 2651520,
+      "expected_sha256": "faf1751048b17ea5dce3a5005aa638c876f8e8f7bd15f8849be56bb40f91f791",
+      "actual_sha256": "faf1751048b17ea5dce3a5005aa638c876f8e8f7bd15f8849be56bb40f91f791"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_ancient_oak_LOD2.glb",
+      "pointer_oid": "8c7f686c3c853db51a3b8b9a7baecd88d638389b",
+      "expected_size": 1300636,
+      "actual_size": 1300636,
+      "expected_sha256": "6297c8a81d091e09251c2b0ded562daf020fa175dc35ffb41b8250326c1ed807",
+      "actual_sha256": "6297c8a81d091e09251c2b0ded562daf020fa175dc35ffb41b8250326c1ed807"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_berry_bush_LOD0.glb",
+      "pointer_oid": "3bc3ea51ebdfa9f19729a74e5b5a4af48098c900",
+      "expected_size": 708956,
+      "actual_size": 708956,
+      "expected_sha256": "f2663ab9f5eb0e0b0e6502c99d7206891008c4bfaa700a6bf5142b354a9fb597",
+      "actual_sha256": "f2663ab9f5eb0e0b0e6502c99d7206891008c4bfaa700a6bf5142b354a9fb597"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_berry_bush_LOD1.glb",
+      "pointer_oid": "ca695b7bd0288668c61c80869b9b3cffcf83eb30",
+      "expected_size": 373520,
+      "actual_size": 373520,
+      "expected_sha256": "765aa50da0d34fe69e92ef95c34ea53d8e92c2852a38890850c750f442867255",
+      "actual_sha256": "765aa50da0d34fe69e92ef95c34ea53d8e92c2852a38890850c750f442867255"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_berry_bush_LOD2.glb",
+      "pointer_oid": "461e37cd3241ccf9eb543cc8063bb8a985c75a2c",
+      "expected_size": 208660,
+      "actual_size": 208660,
+      "expected_sha256": "0b28af952bf5736c2653779634ee5234bd390a8fadeb945466591aad53a4f8a2",
+      "actual_sha256": "0b28af952bf5736c2653779634ee5234bd390a8fadeb945466591aad53a4f8a2"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_birch_grove_LOD0.glb",
+      "pointer_oid": "9bf49525295b375cc231fbec88166f9c84098140",
+      "expected_size": 2478900,
+      "actual_size": 2478900,
+      "expected_sha256": "9b9aa329697c4342046fb079b436cab51520dac77d7deeb0f6c49f1c43f026f9",
+      "actual_sha256": "9b9aa329697c4342046fb079b436cab51520dac77d7deeb0f6c49f1c43f026f9"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_birch_grove_LOD1.glb",
+      "pointer_oid": "67e60128753b3f1821af0ac2868d596823d1b21e",
+      "expected_size": 1334652,
+      "actual_size": 1334652,
+      "expected_sha256": "8f11b0dbce20d948d96a2d6462badb1181c09454400b157ae409ee94893bab4c",
+      "actual_sha256": "8f11b0dbce20d948d96a2d6462badb1181c09454400b157ae409ee94893bab4c"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_birch_grove_LOD2.glb",
+      "pointer_oid": "53d4a115f28ef2a35c8c8024977126ba43c3eb14",
+      "expected_size": 693916,
+      "actual_size": 693916,
+      "expected_sha256": "c1c9181c94f2cc03d183828d18c1f3acca0ffd072619ea8a5d2436e4631467dc",
+      "actual_sha256": "c1c9181c94f2cc03d183828d18c1f3acca0ffd072619ea8a5d2436e4631467dc"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_canvas_rest_shelter_LOD0.glb",
+      "pointer_oid": "7a6b89be99096cadd961d42569c0930e2dd63d6b",
+      "expected_size": 415952,
+      "actual_size": 415952,
+      "expected_sha256": "fa552a1d600813277fb8671dfa8a13326466185a9c895b6be6145ae9e1d1a17e",
+      "actual_sha256": "fa552a1d600813277fb8671dfa8a13326466185a9c895b6be6145ae9e1d1a17e"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_canvas_rest_shelter_LOD1.glb",
+      "pointer_oid": "bf7ca52588fc0bd03e9d4e655d74160bb4387bab",
+      "expected_size": 162800,
+      "actual_size": 162800,
+      "expected_sha256": "6f85c1854b01497a1c70a282523b215bc768eedf61907acb59b73af48cd72317",
+      "actual_sha256": "6f85c1854b01497a1c70a282523b215bc768eedf61907acb59b73af48cd72317"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_canvas_rest_shelter_LOD2.glb",
+      "pointer_oid": "27584dc5ec8c10785812d6f2ec3bdd70f01b4eca",
+      "expected_size": 162800,
+      "actual_size": 162800,
+      "expected_sha256": "1e986cc0262b49ee3953f7d8750f11c413f813d15db22d534cf2e1815b76c92f",
+      "actual_sha256": "1e986cc0262b49ee3953f7d8750f11c413f813d15db22d534cf2e1815b76c92f"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_cypress_column_LOD0.glb",
+      "pointer_oid": "69c200583980f14a543f66119211c30976a23ac5",
+      "expected_size": 3366524,
+      "actual_size": 3366524,
+      "expected_sha256": "71281ba890980962e558a59e04aa50ea830ff674dc8a049705a35a6232e42e3a",
+      "actual_sha256": "71281ba890980962e558a59e04aa50ea830ff674dc8a049705a35a6232e42e3a"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_cypress_column_LOD1.glb",
+      "pointer_oid": "4690d3dbe0bab4cdcb442bf52b3bf74da703ab84",
+      "expected_size": 1138556,
+      "actual_size": 1138556,
+      "expected_sha256": "6b261fb2436e2b6f3fa690810aba033ca1df55fd5b76d5f6c95e0e3fa8fbf108",
+      "actual_sha256": "6b261fb2436e2b6f3fa690810aba033ca1df55fd5b76d5f6c95e0e3fa8fbf108"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_cypress_column_LOD2.glb",
+      "pointer_oid": "a81e630dca1efcc17112da391fbefdf85e46bd6d",
+      "expected_size": 429464,
+      "actual_size": 429464,
+      "expected_sha256": "bbba2f1913dbb338a8e97884a7a697a4ee52d63f554e331d2c78164df67dcc32",
+      "actual_sha256": "bbba2f1913dbb338a8e97884a7a697a4ee52d63f554e331d2c78164df67dcc32"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_fern_patch_LOD0.glb",
+      "pointer_oid": "892bb0d0a868ced9379546708583f3f40ba7bc0a",
+      "expected_size": 517356,
+      "actual_size": 517356,
+      "expected_sha256": "87b0bf869d89441f5936bd6c1233c3f29ab997721c6295b606b1dcfc89f2f042",
+      "actual_sha256": "87b0bf869d89441f5936bd6c1233c3f29ab997721c6295b606b1dcfc89f2f042"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_fern_patch_LOD1.glb",
+      "pointer_oid": "19594b7827bca376e2e3a9180250e150a2505256",
+      "expected_size": 260768,
+      "actual_size": 260768,
+      "expected_sha256": "f58dce74afebce84c1476ada2d537aca1898d245b15dc8a3dcce8a540993f1c5",
+      "actual_sha256": "f58dce74afebce84c1476ada2d537aca1898d245b15dc8a3dcce8a540993f1c5"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_fern_patch_LOD2.glb",
+      "pointer_oid": "f11cd093dfcd82c2989e725e707ce6d0c9d8b661",
+      "expected_size": 117064,
+      "actual_size": 117064,
+      "expected_sha256": "ee02fde4004bb641e4aadc4a84dad687dbed8fc32c15af88151763e2219c5786",
+      "actual_sha256": "ee02fde4004bb641e4aadc4a84dad687dbed8fc32c15af88151763e2219c5786"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_flowering_shrub_LOD0.glb",
+      "pointer_oid": "9045f7429924b99fa65b91e734a87f98a5de115c",
+      "expected_size": 906520,
+      "actual_size": 906520,
+      "expected_sha256": "5d16c672e54b3dfea39c6b30380c6e524185936553e4ba073eb3e8e26c0578ea",
+      "actual_sha256": "5d16c672e54b3dfea39c6b30380c6e524185936553e4ba073eb3e8e26c0578ea"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_flowering_shrub_LOD1.glb",
+      "pointer_oid": "64b655bbf8964b73723350aa98b141236edd4a69",
+      "expected_size": 455632,
+      "actual_size": 455632,
+      "expected_sha256": "4b106a0bb93e0830b75017e6b3c5dcd66529b983cdddc4291d9b256c1626a444",
+      "actual_sha256": "4b106a0bb93e0830b75017e6b3c5dcd66529b983cdddc4291d9b256c1626a444"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_flowering_shrub_LOD2.glb",
+      "pointer_oid": "240becfc4465b6e2d55b2ada9c1382cdb39d2090",
+      "expected_size": 224116,
+      "actual_size": 224116,
+      "expected_sha256": "d4c41c28b2f7e9b210c0fff9473d409506936ac10862060029be3d079ff70d14",
+      "actual_sha256": "d4c41c28b2f7e9b210c0fff9473d409506936ac10862060029be3d079ff70d14"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_herb_planter_LOD0.glb",
+      "pointer_oid": "4ee8a6e86ec7f5f21704b70f18965b269d380134",
+      "expected_size": 875284,
+      "actual_size": 875284,
+      "expected_sha256": "246c777ba503f47f559d0a71860cfe815a6d3317d2e696350f1e34cb59fb7911",
+      "actual_sha256": "246c777ba503f47f559d0a71860cfe815a6d3317d2e696350f1e34cb59fb7911"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_herb_planter_LOD1.glb",
+      "pointer_oid": "ffb18b6d62d77f27b966c6c15a7cd9347fb664d6",
+      "expected_size": 357756,
+      "actual_size": 357756,
+      "expected_sha256": "f05f65de0ed85e10ca932e9cb801d2c2603c518e52136ed41ff949b1b9825f21",
+      "actual_sha256": "f05f65de0ed85e10ca932e9cb801d2c2603c518e52136ed41ff949b1b9825f21"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_herb_planter_LOD2.glb",
+      "pointer_oid": "b0c88246da6131cd3db000bdc52bb4a5b1883a31",
+      "expected_size": 250844,
+      "actual_size": 250844,
+      "expected_sha256": "03ce67c5b99237b028220466799d9c6324eac6f0b0096aea524765bd89fadcb1",
+      "actual_sha256": "03ce67c5b99237b028220466799d9c6324eac6f0b0096aea524765bd89fadcb1"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_ivy_wall_panel_LOD0.glb",
+      "pointer_oid": "531953ba3f60a8ca1f41bb209d28bb0ac9345d67",
+      "expected_size": 254036,
+      "actual_size": 254036,
+      "expected_sha256": "99d398840053da6e742f79375aff07d544f3c1b7d18dbb66a3351ab97b65ac5d",
+      "actual_sha256": "99d398840053da6e742f79375aff07d544f3c1b7d18dbb66a3351ab97b65ac5d"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_ivy_wall_panel_LOD1.glb",
+      "pointer_oid": "71846be7dfb6f64c9195bce09d413cbbad0e5d5f",
+      "expected_size": 106720,
+      "actual_size": 106720,
+      "expected_sha256": "dc618dda05dadf94f081ed7b53d1a07f3d883aa98896e913016bbe16b9a021aa",
+      "actual_sha256": "dc618dda05dadf94f081ed7b53d1a07f3d883aa98896e913016bbe16b9a021aa"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_ivy_wall_panel_LOD2.glb",
+      "pointer_oid": "b2883e0cfa48911ecf00c76daf8483f4ee60d8bc",
+      "expected_size": 57344,
+      "actual_size": 57344,
+      "expected_sha256": "234a3ceab26e8d9ccb701b63bddef9abf4a2827e450a2a330b73c44d5a60fbd0",
+      "actual_sha256": "234a3ceab26e8d9ccb701b63bddef9abf4a2827e450a2a330b73c44d5a60fbd0"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_meadow_grass_LOD0.glb",
+      "pointer_oid": "43f10ddc8bc727bf4e3db4df528906579f41d142",
+      "expected_size": 138420,
+      "actual_size": 138420,
+      "expected_sha256": "b081003470f524f5bf5aca6eb64344fa205d59d8751dd174f7b88ffb33ffc90d",
+      "actual_sha256": "b081003470f524f5bf5aca6eb64344fa205d59d8751dd174f7b88ffb33ffc90d"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_meadow_grass_LOD1.glb",
+      "pointer_oid": "3dd50d16f8775af8bd3c5e633c29720c5705c910",
+      "expected_size": 67184,
+      "actual_size": 67184,
+      "expected_sha256": "da0a038ecd7bbd2cfc6a6dee8a2ae21784a27d8da0cd8d66a5b80081493a57ba",
+      "actual_sha256": "da0a038ecd7bbd2cfc6a6dee8a2ae21784a27d8da0cd8d66a5b80081493a57ba"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_meadow_grass_LOD2.glb",
+      "pointer_oid": "ae48f4721a9e78ac252e4062baab26b8edc4dab4",
+      "expected_size": 23420,
+      "actual_size": 23420,
+      "expected_sha256": "53de4dd43cbb46f5ec4d102808dae8b0f937adfa869506e53b4f73656ba88436",
+      "actual_sha256": "53de4dd43cbb46f5ec4d102808dae8b0f937adfa869506e53b4f73656ba88436"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_mossy_boulder_cluster_LOD0.glb",
+      "pointer_oid": "fcc82cf69deb199f746d8ad9b3ab6350d270e090",
+      "expected_size": 199056,
+      "actual_size": 199056,
+      "expected_sha256": "7c1c44cd4ab61fc2b76f5ecc25585f97ccf0d91b47b9a76bd33fda79f2dfc64d",
+      "actual_sha256": "7c1c44cd4ab61fc2b76f5ecc25585f97ccf0d91b47b9a76bd33fda79f2dfc64d"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_mossy_boulder_cluster_LOD1.glb",
+      "pointer_oid": "df86484a236937810421e8311d6b01d8f11b7c8f",
+      "expected_size": 134576,
+      "actual_size": 134576,
+      "expected_sha256": "84fe5a1aa6a11fc0eecca8ad8c6850ccf18bef7a9d711613bf30206425932500",
+      "actual_sha256": "84fe5a1aa6a11fc0eecca8ad8c6850ccf18bef7a9d711613bf30206425932500"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_mossy_boulder_cluster_LOD2.glb",
+      "pointer_oid": "8fb394d35ed3e2d5bcf560242cf14a4c2cdc9bca",
+      "expected_size": 83404,
+      "actual_size": 83404,
+      "expected_sha256": "ac7c118f75e14e9b5b0cfa4d05d645fe5ff49e2784375768f3c7b14364edf655",
+      "actual_sha256": "ac7c118f75e14e9b5b0cfa4d05d645fe5ff49e2784375768f3c7b14364edf655"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_mossy_fallen_log_LOD0.glb",
+      "pointer_oid": "52fc1f8abd48d6fe0c6de49d30f4b04a6317c7e3",
+      "expected_size": 174004,
+      "actual_size": 174004,
+      "expected_sha256": "045544e5fb390f903352d6347539f7452b85c8e9a491af7c51cc98b79b663c8a",
+      "actual_sha256": "045544e5fb390f903352d6347539f7452b85c8e9a491af7c51cc98b79b663c8a"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_mossy_fallen_log_LOD1.glb",
+      "pointer_oid": "d7248a27d02eccc917bc719b28fa821fdd61c096",
+      "expected_size": 128084,
+      "actual_size": 128084,
+      "expected_sha256": "075b9d602bcf953db5a9d21efc176a4c45f757739b4e1cfaaf3238cde428e54c",
+      "actual_sha256": "075b9d602bcf953db5a9d21efc176a4c45f757739b4e1cfaaf3238cde428e54c"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_mossy_fallen_log_LOD2.glb",
+      "pointer_oid": "7edcb67ab777d9bf551b59766ac987c066c57654",
+      "expected_size": 100976,
+      "actual_size": 100976,
+      "expected_sha256": "988d95b62203d4394f1f0620908242843e7cfc88518849e2b1ecc3db5e65aab7",
+      "actual_sha256": "988d95b62203d4394f1f0620908242843e7cfc88518849e2b1ecc3db5e65aab7"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_orchard_apple_LOD0.glb",
+      "pointer_oid": "c06cd307e5be763334ed78e3c279dc458d5c7fed",
+      "expected_size": 3924836,
+      "actual_size": 3924836,
+      "expected_sha256": "82a588662c1f378e312160b5f0f16cd14d738bb1b34b1ba3ddf223781402d0a6",
+      "actual_sha256": "82a588662c1f378e312160b5f0f16cd14d738bb1b34b1ba3ddf223781402d0a6"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_orchard_apple_LOD1.glb",
+      "pointer_oid": "123539a81e26457aafe9f79fbdc350b01be9a02d",
+      "expected_size": 2072416,
+      "actual_size": 2072416,
+      "expected_sha256": "9218b0aa912b21a7ca644662875ff1cc6226144b0fcc82b1dcf2b3928d33cf9d",
+      "actual_sha256": "9218b0aa912b21a7ca644662875ff1cc6226144b0fcc82b1dcf2b3928d33cf9d"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_orchard_apple_LOD2.glb",
+      "pointer_oid": "41d57ffed25b1677549eac572190ba83d4cc1c37",
+      "expected_size": 1039916,
+      "actual_size": 1039916,
+      "expected_sha256": "33d9dde964ac7ea4be4547981aabd089fe0362083f79adf2242093379e19c9e5",
+      "actual_sha256": "33d9dde964ac7ea4be4547981aabd089fe0362083f79adf2242093379e19c9e5"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_reed_cluster_LOD0.glb",
+      "pointer_oid": "6a3ca27fe91c25d7fb7ac8c2ef4070cfe01cb406",
+      "expected_size": 134356,
+      "actual_size": 134356,
+      "expected_sha256": "ee953e9ba3cb2cb97892b062c023d6ffd0cb9e7558e765be0c36e9f4bd521492",
+      "actual_sha256": "ee953e9ba3cb2cb97892b062c023d6ffd0cb9e7558e765be0c36e9f4bd521492"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_reed_cluster_LOD1.glb",
+      "pointer_oid": "605baffa2a950834630717e3a69c2a7b30914b01",
+      "expected_size": 80276,
+      "actual_size": 80276,
+      "expected_sha256": "28cc1ab73e9ededac2e58a8a22d079aafb3f3d6ca138281e0c3a234e49e145a3",
+      "actual_sha256": "28cc1ab73e9ededac2e58a8a22d079aafb3f3d6ca138281e0c3a234e49e145a3"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_reed_cluster_LOD2.glb",
+      "pointer_oid": "dfefedc8abbbad026d1bf3025de6224c351d67f9",
+      "expected_size": 50856,
+      "actual_size": 50856,
+      "expected_sha256": "c1699b5806c4488f087bfab553e6e58a39717d1c23f1c9476689b601cdfb3e62",
+      "actual_sha256": "c1699b5806c4488f087bfab553e6e58a39717d1c23f1c9476689b601cdfb3e62"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_roadside_milestone_LOD0.glb",
+      "pointer_oid": "117adf9a0812f76445b934f668e7c89191763d92",
+      "expected_size": 163520,
+      "actual_size": 163520,
+      "expected_sha256": "2d4b839349424907768604dc7a8af6b2633899fd180fc2066d14504b83ca2ccd",
+      "actual_sha256": "2d4b839349424907768604dc7a8af6b2633899fd180fc2066d14504b83ca2ccd"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_roadside_milestone_LOD1.glb",
+      "pointer_oid": "dbd5910281b04b86e5de028cb70638da1ae1004f",
+      "expected_size": 62800,
+      "actual_size": 62800,
+      "expected_sha256": "01628a25a68e0dd6f4b7db5f526102e896f2e1e278450db0f13da1113857c231",
+      "actual_sha256": "01628a25a68e0dd6f4b7db5f526102e896f2e1e278450db0f13da1113857c231"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_roadside_milestone_LOD2.glb",
+      "pointer_oid": "2f0f31c55ced48408a7b460c4c3431a21a51e431",
+      "expected_size": 54392,
+      "actual_size": 54392,
+      "expected_sha256": "9f083ec3a645899f4cb65980e365b592ede754c68d0f9623574d5e9edd34599e",
+      "actual_sha256": "9f083ec3a645899f4cb65980e365b592ede754c68d0f9623574d5e9edd34599e"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_stone_pine_LOD0.glb",
+      "pointer_oid": "d8bed230ef5a7a22ba18cb1bfd2e521e0867cd4d",
+      "expected_size": 2500732,
+      "actual_size": 2500732,
+      "expected_sha256": "500b5acd8e03d0aa40fe6d1a19dbd4008062d90f4b2b37a21a1d4c437dbfd7fa",
+      "actual_sha256": "500b5acd8e03d0aa40fe6d1a19dbd4008062d90f4b2b37a21a1d4c437dbfd7fa"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_stone_pine_LOD1.glb",
+      "pointer_oid": "d7112dd341ecaf039d229dcfe0e6d9c68c8cf929",
+      "expected_size": 843368,
+      "actual_size": 843368,
+      "expected_sha256": "85f5228cc3667e374dd07da6ef33e3013a8e42cef8c2abf05c7af7d3bcc92e49",
+      "actual_sha256": "85f5228cc3667e374dd07da6ef33e3013a8e42cef8c2abf05c7af7d3bcc92e49"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_stone_pine_LOD2.glb",
+      "pointer_oid": "70c241b9068f9f2f66130e10eb1fc51614018073",
+      "expected_size": 317684,
+      "actual_size": 317684,
+      "expected_sha256": "13d43a3e31573d113dcd53624197ebced85dcb23deff4f7a2ec2ad857e0e8d02",
+      "actual_sha256": "13d43a3e31573d113dcd53624197ebced85dcb23deff4f7a2ec2ad857e0e8d02"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_stone_water_trough_LOD0.glb",
+      "pointer_oid": "a0f72685d927c7677ebb93513a3bbd9a42d43ddb",
+      "expected_size": 297164,
+      "actual_size": 297164,
+      "expected_sha256": "3aef3f6fffdee5a6b0a10c1b0fc64307b6a0ede1b945e276235bfa42d1eac0b9",
+      "actual_sha256": "3aef3f6fffdee5a6b0a10c1b0fc64307b6a0ede1b945e276235bfa42d1eac0b9"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_stone_water_trough_LOD1.glb",
+      "pointer_oid": "b607eb4d50001ff6dfa6c4324862a5bab723dbd1",
+      "expected_size": 117844,
+      "actual_size": 117844,
+      "expected_sha256": "0d8aa44f7e7cac4f0bfb0de7004e9691276648bbafc78a51870884b7ba12304a",
+      "actual_sha256": "0d8aa44f7e7cac4f0bfb0de7004e9691276648bbafc78a51870884b7ba12304a"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_stone_water_trough_LOD2.glb",
+      "pointer_oid": "5d3a6e50bc20d628ee6ad2ff829d162abb5a04b6",
+      "expected_size": 109432,
+      "actual_size": 109432,
+      "expected_sha256": "4de237df9e55e4836efa6f13cec8224bde218e5af103441defabc5c391e51ca8",
+      "actual_sha256": "4de237df9e55e4836efa6f13cec8224bde218e5af103441defabc5c391e51ca8"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_timber_fence_vine_LOD0.glb",
+      "pointer_oid": "f0673cbc82e648c5eb991ac0583e00d9a52c9411",
+      "expected_size": 99388,
+      "actual_size": 99388,
+      "expected_sha256": "d73f9caa008b7a3191554fd25d776366e8c01ad7195a2191f620eb450017324a",
+      "actual_sha256": "d73f9caa008b7a3191554fd25d776366e8c01ad7195a2191f620eb450017324a"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_timber_fence_vine_LOD1.glb",
+      "pointer_oid": "b38e424e1b6ec21320f8f665b1b114125e92b5e0",
+      "expected_size": 59632,
+      "actual_size": 59632,
+      "expected_sha256": "64aa3decc9fc598b80e870b6c346ccedfa172f1465035489579f222fc2f223ff",
+      "actual_sha256": "64aa3decc9fc598b80e870b6c346ccedfa172f1465035489579f222fc2f223ff"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_timber_fence_vine_LOD2.glb",
+      "pointer_oid": "fbeb8891db91a4f013e9d8d3e723ce5d4b86899b",
+      "expected_size": 43524,
+      "actual_size": 43524,
+      "expected_sha256": "114a6b6abc4f8cdbf37f46ef3983540e08b37ce2f37934128272ee2e215f46cc",
+      "actual_sha256": "114a6b6abc4f8cdbf37f46ef3983540e08b37ce2f37934128272ee2e215f46cc"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_wildflower_patch_LOD0.glb",
+      "pointer_oid": "fa2155bb27d07602a835bbb35c216fb7daa089e8",
+      "expected_size": 395136,
+      "actual_size": 395136,
+      "expected_sha256": "c11d2da0373d3eafe24dbd6d7079e0d51f50b0dac028445ce9d21beec7b91aec",
+      "actual_sha256": "c11d2da0373d3eafe24dbd6d7079e0d51f50b0dac028445ce9d21beec7b91aec"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_wildflower_patch_LOD1.glb",
+      "pointer_oid": "ee66d232271d733bcc312b08dba5555bc86ec631",
+      "expected_size": 202884,
+      "actual_size": 202884,
+      "expected_sha256": "2fbb79e8352c0a8235a4e67f1259f7c76a8e094efaf768ef664af1c2f9da89d6",
+      "actual_sha256": "2fbb79e8352c0a8235a4e67f1259f7c76a8e094efaf768ef664af1c2f9da89d6"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_wildflower_patch_LOD2.glb",
+      "pointer_oid": "b9b565fc3d8f3874c97ac208f52c9a12655eb789",
+      "expected_size": 98056,
+      "actual_size": 98056,
+      "expected_sha256": "947be2ac189850c76680b79fe04f11591c8c88ae09584f37a9bb4aa664def543",
+      "actual_sha256": "947be2ac189850c76680b79fe04f11591c8c88ae09584f37a9bb4aa664def543"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_young_maple_LOD0.glb",
+      "pointer_oid": "f025ca413a10aa2815873efd984fbe370b339c24",
+      "expected_size": 5753244,
+      "actual_size": 5753244,
+      "expected_sha256": "d2baf0875d148de9e140b1aaea7012bb0b95edf305b957902dd19d14ac70c2ec",
+      "actual_sha256": "d2baf0875d148de9e140b1aaea7012bb0b95edf305b957902dd19d14ac70c2ec"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_young_maple_LOD1.glb",
+      "pointer_oid": "c65bd03fd0531d8303c1eabba6dae863a1197820",
+      "expected_size": 2018776,
+      "actual_size": 2018776,
+      "expected_sha256": "2e2dd58afedaa80d0812a8d3ac1fd11eb5e02caece4f9faaf0cc541322419a85",
+      "actual_sha256": "2e2dd58afedaa80d0812a8d3ac1fd11eb5e02caece4f9faaf0cc541322419a85"
+    },
+    {
+      "path": "game/assets/floor1/environment_kit_v2/F1_young_maple_LOD2.glb",
+      "pointer_oid": "439bcd451546a7586795c7a7eb008ffcb30f2a6d",
+      "expected_size": 997028,
+      "actual_size": 997028,
+      "expected_sha256": "122ee1d2b86662f2f28450201c5194370ec920c63c049356c2672ace51758ff8",
+      "actual_sha256": "122ee1d2b86662f2f28450201c5194370ec920c63c049356c2672ace51758ff8"
+    },
+    {
+      "path": "game/assets/floor1/residences/F1_Residence_01.glb",
+      "pointer_oid": "3348a65910ccc403b47aa793964cdf2acf6f94c7",
+      "expected_size": 73003124,
+      "actual_size": 73003124,
+      "expected_sha256": "6c406a932f9f5bb4b5e6b745a2f5b899337b4d4e0f529d52d45744e220b2445e",
+      "actual_sha256": "6c406a932f9f5bb4b5e6b745a2f5b899337b4d4e0f529d52d45744e220b2445e"
+    },
+    {
+      "path": "game/assets/floor1/residences/F1_Residence_02.glb",
+      "pointer_oid": "78035f3ff7e19071e6ba75c6249d5a15739cf6a0",
+      "expected_size": 71648184,
+      "actual_size": 71648184,
+      "expected_sha256": "104c03e95d9dff842f3e0bfcc09dba759a0308007f8b5a77020ade9a65a3cede",
+      "actual_sha256": "104c03e95d9dff842f3e0bfcc09dba759a0308007f8b5a77020ade9a65a3cede"
+    },
+    {
+      "path": "game/assets/floor1/residences/F1_Residence_03.glb",
+      "pointer_oid": "15ef2ac98fcc3c9aca71855bc8384b8fc7d7d36d",
+      "expected_size": 83140096,
+      "actual_size": 83140096,
+      "expected_sha256": "b85b5bb58c4e215f5b5e2f5120266c2694065d3d44c1a6af406dece8fd9aefdc",
+      "actual_sha256": "b85b5bb58c4e215f5b5e2f5120266c2694065d3d44c1a6af406dece8fd9aefdc"
+    },
+    {
+      "path": "game/assets/floor1/residences/F1_Residence_04.glb",
+      "pointer_oid": "2e254724c3b599f24bb7ce6a8581a80166d0eebd",
+      "expected_size": 73224636,
+      "actual_size": 73224636,
+      "expected_sha256": "71b34bac8b6ca5bc980cd17ae6a4de1197656ffebd26591eb6aa221a2fdb645c",
+      "actual_sha256": "71b34bac8b6ca5bc980cd17ae6a4de1197656ffebd26591eb6aa221a2fdb645c"
+    },
+    {
+      "path": "game/assets/floor1/residences/F1_Residence_05.glb",
+      "pointer_oid": "cc8f7ee002dde7bc04a2bf24db710242af4dcc51",
+      "expected_size": 99739904,
+      "actual_size": 99739904,
+      "expected_sha256": "f7597ea2fa9c5938faf925384777c3abd361796d4208c6866567ee26e42a7f01",
+      "actual_sha256": "f7597ea2fa9c5938faf925384777c3abd361796d4208c6866567ee26e42a7f01"
+    },
+    {
+      "path": "game/assets/market/StartingTown_Market_CraftV5.glb",
+      "pointer_oid": "8b2f3f1e43973ce0873e54a68f72d3cc660b2480",
+      "expected_size": 114210064,
+      "actual_size": 114210064,
+      "expected_sha256": "2e680ec8814a6aa7f4d09c74ad20fb859b5ccae5e3ef161f51d70e9c40f1b67d",
+      "actual_sha256": "2e680ec8814a6aa7f4d09c74ad20fb859b5ccae5e3ef161f51d70e9c40f1b67d"
+    }
+  ],
+  "lfs_failures": [],
+  "tracked_secret_candidates": [],
+  "status": "ok",
+  "reminder": "Restage intentional fixes before reauditing; audit uses the staged snapshot.",
+  "finished_at_utc": "2026-09-11T17:56:41.812211+00:00"
+}

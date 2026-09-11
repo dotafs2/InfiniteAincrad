@@ -1,0 +1,12 @@
+{
+  "id": "repair_completion_escrow",
+  "version": "v1",
+  "kind": "trade_settlement",
+  "description": "Reviewed repair contracts may settle their existing escrow after validated completion.",
+  "supported_event_types": ["visitor_reply", "reply_help"],
+  "variants": [
+    {"id": "repair_completion_2", "price_col": 2, "settlement": "completion"},
+    {"id": "repair_completion_5", "price_col": 5, "settlement": "completion"},
+    {"id": "repair_completion_8", "price_col": 8, "settlement": "completion"}
+  ]
+}

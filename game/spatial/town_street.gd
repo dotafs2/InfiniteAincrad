@@ -1,7 +1,16 @@
 extends "res://spatial/street_trial.gd"
 ## The same market/player scene, using the continuation module instead of Luna's fixture.
+##
+## Merge note: this scene combines the Mac art/legacy-repair branch with the Windows
+## canonical functional roadmap. Legacy Mac repair execution (hand-axe HUD, R shortcut,
+## _request_edge_repair, _progress_repair, repair route auto-movement) is supported ONLY
+## in clearly labelled offline/local_rule_policy mode and is never executed in
+## gateway_mode or restore_only.
 
-const Town = preload("res://core/town_life.gd")
+const Town = preload("res://core/town_runtime.gd")
+const TownTurns = preload("res://agents/town_turns.gd")
+const TownTools = preload("res://spatial/town_tools.gd")
+const MaterialSources = preload("res://spatial/town_material_sources.gd")
 var town := Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
@@ -15,25 +24,69 @@ var status: Label
 var berry_visuals: Array[Node3D] = []
 var latest := "世界已暂停。按空格继续；原事件与钱物已经载入。"
 var dialogue: Label
+var dialogue_input: LineEdit
+var dialogue_target := ""
+var last_public_reply_seq := -1
 var last_inquiry_seconds := -10.0
 var dialogue_fixture := false
+var fixture_inquiry_text := "这里有什么需要我帮忙的吗？"
 var dialogue_fixture_done := false
+var dialogue_resident_id := ""
+var model_turns: Node
+var gateway_mode := false
+var last_model_note := ""
+var capture_seconds := 90.0
+var scripted_trade := false
+var restore_only := false
+var stop_on_idle := false # Bounded validation only, never normal gameplay.
+var validation_decision_limit := -1
+var validation_decisions_started := 0
+# Legacy Mac repair demo state (offline/local_rule_policy only).
 var repair_fixture := false
+var town_tools: Node = null
 var repair_fixture_started := false
 var repair_fixture_finished_at := -1.0
 var repair_initial_money := -1
 var repair_initial_iron := -1
 
 func _ready() -> void:
+	restore_only = OS.get_cmdline_user_args().has("--town-restore")
+	stop_on_idle = OS.get_cmdline_user_args().has("--town-stop-on-idle")
 	for arg in OS.get_cmdline_user_args():
+		if arg == "--town-gateway":
+			gateway_mode = true
+		if arg.begins_with("--town-duration="):
+			capture_seconds = clampf(float(arg.trim_prefix("--town-duration=")), 3, 900)
+		if arg.begins_with("--town-max-decisions="):
+			var count_text := arg.trim_prefix("--town-max-decisions=")
+			if not count_text.is_valid_int() or int(count_text) < 0 or int(count_text) > 32:
+				push_error("Invalid bounded validation decision limit")
+				get_tree().quit(2)
+				return
+			validation_decision_limit = int(count_text)
 		if arg == "--town-dialogue-fixture":
 			dialogue_fixture = true
+		if arg.begins_with("--town-inquire-text="):
+			fixture_inquiry_text = arg.trim_prefix("--town-inquire-text=")
+			if fixture_inquiry_text.strip_edges().is_empty() or fixture_inquiry_text.length() > 512:
+				push_error("Scripted inquiry must contain 1..512 characters")
+				get_tree().quit(2)
+				return
+		if arg.begins_with("--town-inquire-resident="):
+			dialogue_resident_id = arg.trim_prefix("--town-inquire-resident=")
 		if arg == "--town-repair-fixture":
 			repair_fixture = true
 		if arg.begins_with("--town-save="):
 			_save_path = arg.trim_prefix("--town-save=")
 		if arg.begins_with("--town-capture="):
 			capture_dir = arg.trim_prefix("--town-capture=")
+	# The legacy Mac repair demo is an offline/local_rule_policy path only. It must
+	# never run in gateway_mode or restore_only, and incompatible startup is rejected
+	# before any world mutation.
+	if repair_fixture and (gateway_mode or restore_only):
+		push_error("--town-repair-fixture is incompatible with --town-gateway/--town-restore")
+		get_tree().quit(2)
+		return
 	if _save_path == DEFAULT_SAVE_PATH:
 		push_error("Town mode requires an explicit separately migrated --town-save path")
 		get_tree().quit(2)
@@ -41,6 +94,10 @@ func _ready() -> void:
 	var loaded := town.load_from(_save_path)
 	if not loaded.ok:
 		push_error(JSON.stringify(loaded))
+		get_tree().quit(2)
+		return
+	if not dialogue_resident_id.is_empty() and dialogue_resident_id not in town.active_ids():
+		push_error("Scripted inquiry target is not an active resident: " + dialogue_resident_id)
 		get_tree().quit(2)
 		return
 	var lock := town.acquire_writer(_save_path)
@@ -53,14 +110,55 @@ func _ready() -> void:
 	_build_environment()
 	_build_ground_collision()
 	_load_market_runtime()
+	if not _market_loaded:
+		push_error("Market asset import is missing; town simulation has not started")
+		get_tree().quit(2)
+		return
+	# Mac environment dressing runs only after a successful market load.
 	_load_floor1_environment_dressing()
 	_build_player()
 	_player.position = Vector3(0, 1.22, 12)
 	_camera_pivot.rotation.y = 0
 	_camera_pitch.rotation.x = -0.05
+	_sync_residents()
+	_build_berry_patch()
+	var tools := TownTools.new()
+	add_child(tools)
+	tools.configure(town, actors)
+	town_tools = tools
+	var material_sources := MaterialSources.new()
+	add_child(material_sources)
+	material_sources.configure(town)
+	_build_town_hud()
+	if gateway_mode:
+		model_turns = TownTurns.new()
+		add_child(model_turns)
+		model_turns.configure(town, _save_path)
+	_refresh_public_dialogue(town.snapshot().life.events, true)
+	_refresh()
+	if not capture_dir.is_empty():
+		DirAccess.make_dir_recursive_absolute(capture_dir)
+		paused = restore_only
+		_camera.global_position = Vector3(0.0, 5.0, 14.0)
+		_camera.look_at(Vector3(0, 0.9, 4.0))
+		if dialogue_fixture or (restore_only and not dialogue_resident_id.is_empty()):
+			var fixture_id: String = dialogue_resident_id if not dialogue_resident_id.is_empty() else town.active_ids()[1]
+			_player.position = town.position_of(fixture_id) + Vector3(0, 0.9, 1.5)
+			_camera.global_position = _player.position + Vector3(-2, 1.6, 2)
+			_camera.look_at(town.position_of(fixture_id) + Vector3(0, 1.1, 0))
+		elif repair_fixture:
+			var candidate := town.repair_candidate("edge")
+			if not candidate.is_empty():
+				_player.position = town.position_of(candidate.owner_id) + Vector3(0, 0.9, 1.5)
+				_camera.global_position = Vector3(0, 5.2, 13.0)
+				_camera.look_at(town.destination(candidate.worker_id, "rest") + Vector3(0, 1.0, 0))
+
+func _sync_residents() -> void:
 	var palette := [Color("954f42"), Color("345f79"), Color("657448")]
-	var index := 0
 	for id in town.active_ids():
+		if actors.has(id):
+			continue
+		var index := actors.size()
 		var body := CharacterBody3D.new()
 		body.name = "ResidentBody%d" % index
 		add_child(body)
@@ -73,10 +171,10 @@ func _ready() -> void:
 		collider.position.y = 0.75
 		body.add_child(collider)
 		var actor: Node3D = RESIDENT_SCRIPT.new()
-		actor.shirt_color = palette[index]
-		actor.hair_color = [Color("563827"), Color("302d2a"), Color("766953")][index]
+		actor.shirt_color = palette[index % palette.size()]
+		actor.hair_color = [Color("563827"), Color("302d2a"), Color("766953")][index % 3]
 		body.add_child(actor)
-		actor.get_node("OriginalResidentBody/Torso").material_override = _simple_material(palette[index])
+		actor.get_node("OriginalResidentBody/Torso").material_override = _simple_material(palette[index % palette.size()])
 		actors[id] = actor
 		bodies[id] = body
 		var title := Label3D.new()
@@ -87,52 +185,52 @@ func _ready() -> void:
 		title.modulate = Color("f5e6c8")
 		body.add_child(title)
 		cards[id] = title
-		_work_marker(town.destination(id, "rest"), ["旅店 · 艾琳", "铁匠铺 · 拓真", "木工坊 · 柏木"][index])
-		index += 1
-	_build_berry_patch()
-	_build_town_hud()
-	for event in town.snapshot().life.events:
-		if event.type == "visitor_reply":
-			dialogue.text = "%s\n%s\n（已保存的交流 · 离线规则回应）" % [town.resident(event.actor_id).name, event.text]
-	_refresh()
-	if not capture_dir.is_empty():
-		DirAccess.make_dir_recursive_absolute(capture_dir)
-		paused = OS.get_cmdline_user_args().has("--town-restore")
-		_camera.global_position = Vector3(0.0, 5.0, 14.0)
-		_camera.look_at(Vector3(0, 0.9, 4.0))
-		if dialogue_fixture:
-			_player.position = town.position_of(town.active_ids()[1]) + Vector3(0, 0.9, 1.5)
-			_camera.global_position = _player.position + Vector3(-2, 1.6, 2)
-			_camera.look_at(town.position_of(town.active_ids()[1]) + Vector3(0, 1.1, 0))
-		elif repair_fixture:
-			var candidate := town.repair_candidate("edge")
-			if not candidate.is_empty():
-				_player.position = town.position_of(candidate.owner_id) + Vector3(0, 0.9, 1.5)
-				_camera.global_position = Vector3(0, 5.2, 13.0)
-				_camera.look_at(town.destination(candidate.worker_id, "rest") + Vector3(0, 1.0, 0))
+		_work_marker(town.destination(id, "rest"), str(town.resident(id).name) + " · 工作点")
+		if gateway_mode and model_turns != null:
+			model_turns.ensure_brain(id)
+
+func admit_resident(person: Dictionary, maintainer: String, point: Vector3, command: String) -> Dictionary:
+	var admitted := town.transaction(_save_path, func(): return town.admit_resident(person, maintainer, point, command))
+	if admitted.ok:
+		_sync_residents()
+		_refresh()
+	return admitted
 
 func _process(delta: float) -> void:
 	if status == null:
 		return
+	if gateway_mode and not paused and not _validation_limit_reached():
+		var ready: String = model_turns.ready_resident()
+		if not ready.is_empty():
+			_run_model_turn(ready)
 	if not capture_dir.is_empty():
 		capture_age += delta
 		if dialogue_fixture and capture_age > 1.0 and not dialogue_fixture_done:
 			dialogue_fixture_done = true
 			_inquire_nearby(true)
-		if repair_fixture and capture_age > 0.1 and not repair_fixture_started:
+		# Legacy Mac repair demo: offline/local_rule_policy only.
+		if repair_fixture and not gateway_mode and not restore_only and capture_age > 0.1 and not repair_fixture_started:
 			repair_fixture_started = true
 			_request_edge_repair(true)
-		if repair_fixture and repair_fixture_started and not _has_active_repair() and town.repair_candidate("edge").is_empty() and repair_fixture_finished_at < 0:
+		if repair_fixture and not gateway_mode and not restore_only and repair_fixture_started and not _has_active_repair() and town.repair_candidate("edge").is_empty() and repair_fixture_finished_at < 0:
 			repair_fixture_finished_at = capture_age
-		var capture_timeout := 150.0 if repair_fixture else (3.0 if paused else 90.0)
-		if (capture_age > capture_timeout or (repair_fixture_finished_at >= 0 and capture_age - repair_fixture_finished_at > 1.5)) and not capture_started:
+		if stop_on_idle and gateway_mode and not restore_only and capture_age > 8.0 and not capture_started and not model_turns.busy and (_validation_limit_reached() or model_turns.ready_resident().is_empty()):
+			var idle := true
+			for id in town.active_ids():
+				if not town.pending_job(id).is_empty():
+					idle = false
+			if idle:
+				capture_started = true
+				_capture_town.call_deferred()
+		var capture_timeout := 150.0 if (repair_fixture and not gateway_mode and not restore_only) else (3.0 if paused else capture_seconds)
+		if (capture_age > capture_timeout or (repair_fixture and not gateway_mode and not restore_only and repair_fixture_finished_at >= 0 and capture_age - repair_fixture_finished_at > 1.5)) and not capture_started and not (gateway_mode and model_turns.busy):
 			capture_started = true
 			_capture_town.call_deferred()
 
 func _physics_process(delta: float) -> void:
 	if status == null:
 		return
-	if capture_dir.is_empty():
+	if capture_dir.is_empty() and not _composing_dialogue():
 		super._physics_process(delta)
 	town.host_visitor_position(_player.position)
 	if paused:
@@ -155,12 +253,15 @@ func _physics_process(delta: float) -> void:
 			else:
 				body.velocity.x = 0
 				body.velocity.z = 0
-			actor.set_gesture("idle" if moving else {"eat_ration": "eat", "rest": "rest", "harvest_ration": "harvest", "repair_edge": "repair", "repair_handle": "repair"}.get(job.action, "idle"))
+			actor.set_gesture("idle" if moving else {"eat_ration": "eat", "rest": "rest", "harvest_ration": "harvest", "repair_edge": "repair", "repair_handle": "repair", "work": "work", "use_tool": "work", "recover_material": "work"}.get(job.action, "idle"))
 		else:
-			# Repair hand-offs temporarily route the owner to the worker; otherwise
-			# a finished local routine returns to its own work place.
-			var route_target := _repair_route_target(id)
-			var home_offset := (route_target if route_target.is_finite() else town.destination(id, "rest")) - body.position
+			# Legacy Mac repair hand-offs temporarily route the owner to the worker.
+			# This route auto-movement is offline/local_rule_policy only and is never
+			# executed in gateway_mode or restore_only.
+			var route_target := Vector3.INF
+			if not gateway_mode and not restore_only:
+				route_target = _repair_route_target(id)
+			var home_offset := Vector3.ZERO if gateway_mode or scripted_trade else (route_target if route_target.is_finite() else town.destination(id, "rest")) - body.position
 			home_offset.y = 0
 			moving = home_offset.length() > 0.30
 			body.velocity.x = home_offset.normalized().x * 1.35 if moving else 0.0
@@ -181,15 +282,17 @@ func _physics_process(delta: float) -> void:
 		var advanced := town.advance(step)
 		if not advanced.ok:
 			return advanced
-		var repair_step := _progress_repair()
-		if not repair_step.ok:
-			return repair_step
-		if repair_step.code != "repair_waiting":
-			advanced["repair_step"] = repair_step
-		if repair_fixture and repair_step.code == "repair_collected":
-			return advanced
+		# Legacy Mac repair progression is offline/local_rule_policy only.
+		if not gateway_mode and not restore_only:
+			var repair_step := _progress_repair()
+			if not repair_step.ok:
+				return repair_step
+			if repair_step.code != "repair_waiting":
+				advanced["repair_step"] = repair_step
+			if repair_fixture and repair_step.code == "repair_collected":
+				return advanced
 		for id in town.active_ids():
-			if town.pending_job(id).is_empty() and town.active_repair_for(id).is_empty():
+			if not gateway_mode and not scripted_trade and town.pending_job(id).is_empty() and town.active_repair_for(id).is_empty():
 				var choice := town.choose_local(id)
 				if choice != "wait":
 					var command := "godot-life:%s:%d" % [id, town.command_count()]
@@ -201,6 +304,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		for receipt in result.completed:
 			latest = str(town.resident(receipt.actor_id).name) + " · " + _action_label(receipt.code)
+			actors[receipt.actor_id].set_gesture("idle")
 		if result.has("repair_step"):
 			latest = _repair_step_label(result.repair_step)
 			dialogue.text = latest + "\n（玩家促成 · 居民步骤为离线规则 · 已保存）"
@@ -208,16 +312,45 @@ func _physics_process(delta: float) -> void:
 				paused = true
 	_refresh()
 
+func _validation_limit_reached() -> bool:
+	return gateway_mode and not capture_dir.is_empty() and validation_decision_limit >= 0 and validation_decisions_started >= validation_decision_limit
+
+func _run_model_turn(id: String) -> void:
+	# Validation cap stops BEFORE preparing another durable resident request.
+	# The gateway ledger remains the independent fee authority.
+	if _validation_limit_reached():
+		return
+	validation_decisions_started += 1
+	var result: Dictionary = await model_turns.step(id)
+	if not is_instance_valid(status):
+		return
+	if result.get("code") == "stale_controller_reply":
+		return # An obsolete connection must not overwrite the replacement's UI.
+	if not result.ok:
+		latest = "%s 的连接待处理：%s；其他居民继续。" % [town.resident(id).name, result.code]
+	elif result.has("actor_id"):
+		# A model's reason is private deliberation, not something it said aloud.
+		last_model_note = "%s 已作出选择。" % town.resident(result.actor_id).name
+	_refresh()
+
 func _unhandled_input(event: InputEvent) -> void:
+	if _composing_dialogue():
+		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_SPACE:
 		paused = not paused
 		latest = "生活已暂停" if paused else "生活继续；时间只在运行时流逝"
 		_refresh()
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_H:
-		_inquire_nearby()
+		if not dialogue_resident_id.is_empty():
+			return
+		_open_dialogue()
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_R:
+		# Legacy Mac repair suggestion: offline/local_rule_policy only. Never force
+		# actions in model mode or restore_only.
+		if gateway_mode or restore_only:
+			return
 		_request_edge_repair()
 		return
 	if event is InputEventKey and event.keycode in [KEY_E, KEY_F8]:
@@ -245,40 +378,93 @@ func _build_town_hud() -> void:
 	dialogue_panel.anchor_top = 1.0
 	dialogue_panel.anchor_bottom = 1.0
 	dialogue_panel.offset_left = 22
-	dialogue_panel.offset_right = 582
-	dialogue_panel.offset_top = -160
+	dialogue_panel.offset_right = 742
+	dialogue_panel.offset_top = -250
 	dialogue_panel.offset_bottom = -20
 	dialogue_panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	dialogue_panel.add_theme_stylebox_override("panel", style)
 	layer.add_child(dialogue_panel)
+	var conversation := VBoxContainer.new()
+	dialogue_panel.add_child(conversation)
+	var scroll := ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(680, 180)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	conversation.add_child(scroll)
 	dialogue = Label.new()
-	dialogue.custom_minimum_size.x = 520
+	dialogue.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	dialogue.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	dialogue.add_theme_font_size_override("font_size", 20)
-	dialogue.text = "走近居民：H 询问近况；靠近斧子主人按 R 建议修刃。"
-	dialogue_panel.add_child(dialogue)
+	dialogue.text = "走近居民，按 H 输入你想说的话。"
+	scroll.add_child(dialogue)
+	dialogue_input = LineEdit.new()
+	dialogue_input.max_length = 512
+	dialogue_input.placeholder_text = "Enter 发送 · Esc 取消（世界继续运行）"
+	dialogue_input.add_theme_font_size_override("font_size", 20)
+	dialogue_input.visible = false
+	dialogue_input.text_submitted.connect(_submit_dialogue)
+	dialogue_input.gui_input.connect(func(event: InputEvent):
+		if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+			_close_dialogue()
+			get_viewport().set_input_as_handled())
+	conversation.add_child(dialogue_input)
 
-func _inquire_nearby(fixture_input: bool = false) -> void:
-	var now := Time.get_ticks_msec() / 1000.0
-	if now - last_inquiry_seconds < 3.0:
-		return
+func _composing_dialogue() -> bool:
+	return is_instance_valid(dialogue_input) and dialogue_input.visible
+
+func _nearest_dialogue_resident() -> String:
 	var nearest := ""
-	var distance := 3.0
+	var distance := town.HEARING_RANGE
 	for id in town.active_ids():
 		var candidate := _player.position.distance_to(town.position_of(id))
 		if candidate < distance:
 			nearest = id
 			distance = candidate
-	if nearest.is_empty():
+	return nearest
+
+func _open_dialogue() -> void:
+	dialogue_target = _nearest_dialogue_resident()
+	if dialogue_target.is_empty():
 		dialogue.text = "离得太远了。靠近居民再交谈。"
 		return
-	last_inquiry_seconds = now
+	dialogue.text = "对 %s 说：" % town.resident(dialogue_target).name
+	dialogue_input.visible = true
+	dialogue_input.grab_focus()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func _close_dialogue() -> void:
+	dialogue_input.visible = false
+	dialogue_input.release_focus()
+	dialogue_target = ""
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func _submit_dialogue(text: String) -> void:
+	if text.strip_edges().is_empty():
+		return
+	if _inquire_nearby(false, text, dialogue_target):
+		dialogue_input.clear()
+		_close_dialogue()
+
+func _inquire_nearby(fixture_input: bool = false, message: String = "这里有什么需要我帮忙的吗？", target: String = "") -> bool:
+	var now := Time.get_ticks_msec() / 1000.0
+	if now - last_inquiry_seconds < 3.0:
+		dialogue.text = "请稍等片刻再说。"
+		return false
+	var nearest := dialogue_resident_id if fixture_input else target
+	if nearest.is_empty():
+		nearest = _nearest_dialogue_resident()
+	if nearest.is_empty():
+		dialogue.text = "离得太远了。靠近居民再交谈。"
+		return false
 	var command := "visitor:%d" % town.command_count()
 	var result := town.transaction(_save_path, func():
-		return town.visitor_inquiry(nearest, "这里有什么需要我帮忙的吗？", command, "scripted_player_fixture" if fixture_input else "human_player"))
+		return town.visitor_inquiry(nearest, fixture_inquiry_text if fixture_input else message, command, "scripted_player_fixture" if fixture_input else "human_player"))
 	if not result.ok:
 		dialogue.text = "交流未送达：" + str(result.code)
-		return
+		return false
+	last_inquiry_seconds = now
+	if gateway_mode:
+		dialogue.text = "询问已送达，居民会根据自己的处境决定是否回应。"
+		return true
 	# This explicitly labelled local policy uses only the selected resident's view.
 	var view := town.resident_view(nearest)
 	var choice := "unsure"
@@ -293,8 +479,22 @@ func _inquire_nearby(fixture_input: bool = false) -> void:
 		return town.reply_to_visitor(nearest, result.request_id, choice, response, command + ":reply"))
 	dialogue.text = "%s\n%s\n（离线规则回应 · 交流已保存）" % [view.identity.name, response] if replied.ok else "回复未送达：" + str(replied.code)
 	_refresh()
+	return true
+
+func _refresh_public_dialogue(events: Array, replay: bool = false) -> void:
+	for event in events:
+		if event.get("type") != "visitor_reply" or "visitor:local" not in event.get("recipient_ids", []) or int(event.get("seq", -1)) <= last_public_reply_seq:
+			continue
+		last_public_reply_seq = int(event.seq)
+		var source := "AI 居民回应" if event.get("source") == "opengameagent_live" else "离线回应"
+		if replay:
+			source += " · 历史对话"
+		dialogue.text = "%s：\n%s\n（%s · 已保存）" % [town.resident(event.actor_id).name, event.get("text", ""), source]
 
 func _request_edge_repair(fixture_input: bool = false) -> void:
+	# Legacy Mac repair demo: offline/local_rule_policy only.
+	if gateway_mode or restore_only:
+		return
 	var candidate := town.repair_candidate("edge")
 	if candidate.is_empty():
 		dialogue.text = "当前没有材料、技能和余额都满足的待修斧刃。"
@@ -383,12 +583,20 @@ func _work_material_total(material: String) -> int:
 
 func _refresh() -> void:
 	var snap := town.snapshot()
-	var repair_text := "修理：尚未开始"
+	_refresh_public_dialogue(snap.life.events)
+	var mode_label := "独立 AI 连接（每人单独等待）" if gateway_mode else "离线生活规则"
+	if scripted_trade:
+		mode_label = "脚本化交易验收（无模型调用）"
+	if restore_only:
+		mode_label = "冷启动检查 · 暂停 · 无新增选择"
+	if repair_fixture and not gateway_mode and not restore_only:
+		mode_label = "离线自动修理演示（local_rule_policy）"
+	var title := "交易流程测试 · 非原镇存档" if str(snap.world_id).begins_with("fixture:") else "起始之城 · 生活移植验证"
+	var repair_text := ""
 	if not snap.life.get("contracts", []).is_empty():
 		var contract: Dictionary = snap.life.contracts[-1]
-		repair_text = "修理：%s · %s" % [_repair_part_label(contract.part), _repair_status_label(contract.status)]
-	var roster_text := "13 个原身份" if snap.residents.size() == 13 else "%d 个测试身份" % snap.residents.size()
-	status.text = "起始之城 · 生活移植验证\n%s · %d 人活动 · 新行动：离线规则选择\n空格 暂停/继续 · WASD 行走 · H 询问 · R 建议修刃 · ESC 释放\n%s\n公共浆果 %d / %d · 生活事件 %d · %s" % [roster_text, town.active_ids().size(), latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text]
+		repair_text = " · 修理：%s · %s" % [_repair_part_label(contract.part), _repair_status_label(contract.status)]
+	status.text = "%s\n%d 个存档身份 · %d 人活动 · %s\n空格 暂停/继续 · WASD 行走 · H 询问 · ESC 释放\n%s\n公共浆果 %d / %d · 生活事件 %d%s" % [title, snap.residents.size(), town.active_ids().size(), mode_label, latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text]
 	var axe: Dictionary = {}
 	for item in snap.life.get("items", []):
 		if item.get("kind") == "axe":
@@ -396,16 +604,26 @@ func _refresh() -> void:
 			break
 	for id in town.active_ids():
 		var a := town.account(id)
-		var job: Dictionary = snap.godot.pending.get(id, {})
-		cards[id].text = "%s\n%s · 口粮 %d · %d Col" % [town.resident(id).name, "休整" if job.is_empty() else _action_label(job.action), a.food, town.resident(id).coins_col]
-		actors[id].set_holds_axe(not axe.is_empty() and axe.get("custodian_id") == id and (not snap.life.get("contracts", []).is_empty() or repair_fixture), axe.get("edge", 0) == 100)
+		var job: Dictionary = town.pending_job(id)
+		cards[id].text = "%s\n%s · 口粮 %d" % [town.resident(id).name, "休整" if job.is_empty() else _action_label(job.action), a.food]
+		# Projection policy: each world axe is shown only through TownTools in every
+		# mode except the explicitly labelled legacy --town-repair-fixture demo, where
+		# the Mac hand-axe HUD is the projector and the duplicate TownTools axe for the
+		# same item is suppressed (material piles/facts are preserved). The legacy path
+		# also excludes gateway_mode, restore_only and scripted_trade.
+		var legacy_hand_axe := repair_fixture and not gateway_mode and not restore_only and not scripted_trade
+		actors[id].set_holds_axe(legacy_hand_axe and not axe.is_empty() and axe.get("custodian_id") == id, axe.get("edge", 0) == 100)
+	if town_tools != null:
+		var tools_axes: Dictionary = town_tools.axes
+		for item_id in tools_axes.keys():
+			var node: Node3D = tools_axes[item_id]
+			if is_instance_valid(node):
+				node.visible = not (repair_fixture and not gateway_mode and not restore_only and not scripted_trade and not axe.is_empty() and item_id == axe.get("id"))
 	for index in berry_visuals.size():
 		berry_visuals[index].visible = index < snap.foraging.stock
 
 func _action_label(action: String) -> String:
-	return {"eat_ration": "进食", "rest": "休息", "harvest_ration": "采集",
-		"repair_edge": "修刃", "repair_handle": "修柄", "repair_completed": "修理完成",
-		"resources_unavailable": "资源不足，未完成"}.get(action, action)
+	return {"eat_ration": "进食", "rest": "休息", "harvest_ration": "采集", "approach": "走近交谈", "deliver": "交付工具", "work": "修理", "collect": "取回工具", "use_tool": "使用工具", "recover_material": "整理余料", "material_recovered": "已取得材料", "material_depleted": "余料已取完，本次未取得", "repair_edge": "修刃", "repair_handle": "修柄", "repair_completed": "修理完成", "resources_unavailable": "资源不足，未完成"}.get(action, action)
 
 func _repair_part_label(part: String) -> String:
 	return "斧刃" if part == "edge" else "斧柄"
@@ -456,11 +674,20 @@ func _capture_town() -> void:
 		await RenderingServer.frame_post_draw
 		get_viewport().get_texture().get_image().save_png(capture_dir.path_join("town.png"))
 	var snap := town.snapshot()
-	var evidence := {"original_identities": snap.residents.size(), "active": town.active_ids().size(), "life_seq": snap.life.seq,
-		"source_seq": snap.godot.get("source_life_seq", 0), "new_events": snap.godot.new_events,
-		"new_decisions": "local_rule_policy", "paid_calls": 0, "foraging": snap.foraging, "pending_count": snap.godot.pending.size()}
+	var evidence := {"original_identities": 0 if str(snap.world_id).begins_with("fixture:") else snap.residents.size(), "active": town.active_ids().size(), "life_seq": snap.life.seq,
+		"source_seq": snap.godot.source_life_seq, "new_events": snap.godot.new_events,
+		"new_decisions": "none_restore" if restore_only else "scripted_trade_fixture" if scripted_trade else "controller_records" if gateway_mode else "local_rule_policy", "foraging": snap.foraging, "pending_count": snap.godot.pending.size(), "resident_turns": snap.godot.get("resident_turns", {})}
+	evidence["world_id"] = snap.world_id
+	evidence["is_fixture"] = str(snap.world_id).begins_with("fixture:")
+	evidence["scripted_trade"] = scripted_trade
+	evidence["validation_decisions_started"] = validation_decisions_started
+	evidence["validation_decision_limit"] = validation_decision_limit
+	evidence["validation_limit_reached"] = _validation_limit_reached()
+	evidence["trade_items"] = snap.life.get("items", [])
+	evidence["trade_contracts"] = snap.life.get("contracts", [])
 	if dialogue_fixture:
 		evidence["player_input"] = "scripted_player_fixture"
+		evidence["player_message"] = fixture_inquiry_text
 		evidence["dialogue"] = dialogue.text
 	if repair_fixture:
 		evidence["repair_input"] = "scripted_player_fixture"

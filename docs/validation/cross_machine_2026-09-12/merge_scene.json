@@ -1,0 +1,108 @@
+{
+  "phase": "merge_scene",
+  "started_at_utc": "2026-09-11T17:46:09.241955+00:00",
+  "capture": true,
+  "failures": [],
+  "fixture": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\fixtures\\merge-scene-4a34148d8a6948ceaad8d0b71d3cbd45.json",
+  "fixture_record": {
+    "label": "fixture-merge-scene",
+    "argv": [
+      "C:\\Users\\Chenxi Qu\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-X",
+      "utf8",
+      "D:\\lucidgloves\\InfiniteAincrad\\tools\\create_trade_fixture.py",
+      "--output",
+      "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\fixtures\\merge-scene-4a34148d8a6948ceaad8d0b71d3cbd45.json"
+    ],
+    "cwd": "D:\\lucidgloves\\InfiniteAincrad",
+    "started_at_utc": "2026-09-11T17:46:09.243462+00:00",
+    "timeout_seconds": 60,
+    "stdout_log": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T174609243462-fixture-merge-scene.stdout.log",
+    "stderr_log": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T174609243462-fixture-merge-scene.stderr.log",
+    "process_record": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T174609243462-fixture-merge-scene.process.json",
+    "pid": 45672,
+    "status": "exited",
+    "exit_code": 0,
+    "elapsed_seconds": 0.141,
+    "finished_at_utc": "2026-09-11T17:46:09.380539+00:00",
+    "stdout_tail": "{\"world_id\": \"fixture:town-trade-validation\", \"path\": \"D:\\\\lucidgloves\\\\InfiniteAincrad\\\\tmp\\\\overnight-20260912\\\\fixtures\\\\merge-scene-4a34148d8a6948ceaad8d0b71d3cbd45.json\", \"original_world\": false}\n",
+    "stderr_tail": ""
+  },
+  "run": {
+    "label": "merge-scene",
+    "argv": [
+      "C:\\Users\\Chenxi Qu\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "D:\\lucidgloves\\InfiniteAincrad\\tools\\run_godot.py",
+      "--godot",
+      "D:\\lucidgloves\\InfiniteAincrad\\tmp\\toolchain\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64_console.exe",
+      "--name",
+      "merge-scene",
+      "--timeout",
+      "120",
+      "--out",
+      "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\merge_scene\\graphical-f4f793b5e41b48088d6fce7279d40243",
+      "--",
+      "--rendering-method",
+      "gl_compatibility",
+      "--script",
+      "res://tests/town_merge_acceptance.gd",
+      "--",
+      "--town-save=D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\fixtures\\merge-scene-4a34148d8a6948ceaad8d0b71d3cbd45.json",
+      "--merge-output=D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\merge_scene\\graphical-f4f793b5e41b48088d6fce7279d40243\\merge-result.json",
+      "--merge-capture=D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\merge_scene\\graphical-f4f793b5e41b48088d6fce7279d40243\\capture"
+    ],
+    "cwd": "D:\\lucidgloves\\InfiniteAincrad",
+    "started_at_utc": "2026-09-11T17:46:09.388591+00:00",
+    "timeout_seconds": 150,
+    "stdout_log": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T174609388591-merge-scene.stdout.log",
+    "stderr_log": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T174609388591-merge-scene.stderr.log",
+    "process_record": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T174609388591-merge-scene.process.json",
+    "pid": 50456,
+    "status": "exited",
+    "exit_code": 0,
+    "elapsed_seconds": 7.266,
+    "finished_at_utc": "2026-09-11T17:46:16.668446+00:00",
+    "stdout_tail": "{\"name\": \"merge-scene\", \"started_at_utc\": \"2026-09-11T17:46:09.508704+00:00\", \"command\": [\"D:\\\\lucidgloves\\\\InfiniteAincrad\\\\tmp\\\\toolchain\\\\Godot_v4.7.2-stable_mono_win64\\\\Godot_v4.7.2-stable_mono_win64_console.exe\", \"--path\", \"D:\\\\lucidgloves\\\\InfiniteAincrad\\\\game\", \"--rendering-method\", \"gl_compatibility\", \"--script\", \"res://tests/town_merge_acceptance.gd\", \"--\", \"--town-save=D:\\\\lucidgloves\\\\InfiniteAincrad\\\\tmp\\\\overnight-20260912\\\\fixtures\\\\merge-scene-4a34148d8a6948ceaad8d0b71d3cbd45.json\", \"--merge-output=D:\\\\lucidgloves\\\\InfiniteAincrad\\\\tmp\\\\overnight-20260912\\\\merge_scene\\\\graphical-f4f793b5e41b48088d6fce7279d40243\\\\merge-result.json\", \"--merge-capture=D:\\\\lucidgloves\\\\InfiniteAincrad\\\\tmp\\\\overnight-20260912\\\\merge_scene\\\\graphical-f4f793b5e41b48088d6fce7279d40243\\\\capture\"], \"working_directory\": \"D:\\\\lucidgloves\\\\InfiniteAincrad\", \"timeout_seconds\": 120, \"pid\": 31044, \"status\": \"exited\", \"exit_code\": 0, \"elapsed_seconds\": 7.14, \"finished_at_utc\": \"2026-09-11T17:46:16.650881+00:00\"}\nmerge-scene.stdout.log:\nGodot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 591.74 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5080\n\n{\"checks\":52,\"dressing_ids\":[\"F1_herb_planter\",\"F1_wildflower_patch\",\"F1_fern_patch\",\"F1_meadow_grass\",\"F1_flowering_shrub\",\"F1_berry_bush\",\"F1_roadside_milestone\",\"F1_ivy_wall_panel\"],\"errors\":[],\"failures\":0,\"image_paths\":[\"D:\\\\lucidgloves\\\\InfiniteAincrad\\\\tmp\\\\overnight-20260912\\\\merge_scene\\\\graphical-f4f793b5e41b48088d6fce7279d40243\\\\capture/merge_overview.png\",\"D:\\\\lucidgloves\\\\InfiniteAincrad\\\\tmp\\\\overnight-20260912\\\\merge_scene\\\\graphical-f4f793b5e41b48088d6fce7279d40243\\\\capture/merge_residents.png\"],\"image_sizes\":[\"1400x900\",\"1400x900\"],\"model_calls\":0,\"model_turns_attached\":false,\"suite\":\"town_merge_acceptance\",\"world_save_byte_equal\":true}\n\n",
+    "stderr_tail": ""
+  },
+  "error_lines": [],
+  "evidence": {
+    "checks": 52,
+    "dressing_ids": [
+      "F1_herb_planter",
+      "F1_wildflower_patch",
+      "F1_fern_patch",
+      "F1_meadow_grass",
+      "F1_flowering_shrub",
+      "F1_berry_bush",
+      "F1_roadside_milestone",
+      "F1_ivy_wall_panel"
+    ],
+    "errors": [],
+    "failures": 0,
+    "image_paths": [
+      "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\merge_scene\\graphical-f4f793b5e41b48088d6fce7279d40243\\capture/merge_overview.png",
+      "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\merge_scene\\graphical-f4f793b5e41b48088d6fce7279d40243\\capture/merge_residents.png"
+    ],
+    "image_sizes": [
+      "1400x900",
+      "1400x900"
+    ],
+    "model_calls": 0,
+    "model_turns_attached": false,
+    "suite": "town_merge_acceptance",
+    "world_save_byte_equal": true
+  },
+  "missing_dressing": [],
+  "result_path": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\merge_scene\\graphical-f4f793b5e41b48088d6fce7279d40243\\merge-result.json",
+  "screenshot_paths": [
+    "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\merge_scene\\graphical-f4f793b5e41b48088d6fce7279d40243\\capture/merge_overview.png",
+    "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\merge_scene\\graphical-f4f793b5e41b48088d6fce7279d40243\\capture/merge_residents.png"
+  ],
+  "screenshot_sizes": [
+    "1400x900",
+    "1400x900"
+  ],
+  "status": "ok",
+  "finished_at_utc": "2026-09-11T17:46:16.676958+00:00"
+}

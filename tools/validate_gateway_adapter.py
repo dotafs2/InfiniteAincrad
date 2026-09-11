@@ -1,6 +1,8 @@
 """Isolated loopback contract tests. No Kimi key, real ledger or paid upstream.
 
 Uses the existing bounded Godot runner; mock server lifetime is this process.
+Scenarios cover the default kimi-k2.6 run, an explicit `expected_model` pin,
+endpoint/response model mismatch, request-journal replay and view projection.
 """
 import argparse
 from contextlib import contextmanager
@@ -16,10 +18,24 @@ import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Only these keys may leave the host. Anything else is private-knowledge leakage.
+PROJECTED = {"identity", "observations", "needs", "experiences", "memory", "inventory", "actions",
+             "available_actions", "nearby_residents", "items", "skills", "contracts", "life_account",
+             "wallet", "nearby_skilled_roles", "action_details", "known_rules", "unavailable_actions"}
+
 
 @contextmanager
 def gateway(scenario):
     calls = {"get": 0, "post": 0, "contract_errors": []}
+
+    def wire_model(kind):
+        # pinned-model carries the run-pinned id on both sides; reply-model-mismatch
+        # keeps the request pinned but answers with a different served model.
+        if scenario == "pinned-model":
+            return "fixture-compat-model"
+        if scenario == "reply-model-mismatch":
+            return "fixture-compat-model" if kind == "request" else "kimi-k2.6"
+        return "kimi-k2.6"
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_args):
@@ -68,19 +84,40 @@ def gateway(scenario):
                 assert 0 < size <= 32768
                 body = json.loads(self.rfile.read(size))
                 assert set(body) == {"model", "messages", "stream", "max_tokens", "thinking", "response_format"}
-                assert body["model"] == "kimi-k2.6" and body["stream"] is False and body["max_tokens"] == 512
+                assert body["model"] == wire_model("request") and body["stream"] is False and body["max_tokens"] == 512
                 assert body["thinking"] == {"type": "disabled"}
                 assert body["response_format"] == {"type": "json_object"}
                 assert len(body["messages"]) == 2
                 observation = body["messages"][-1]["content"]
                 assert "available_actions" in observation
                 assert all(key not in observation for key in ["gm_resources", "gm_budget", "command_payloads"])
+                personal = json.loads(observation)
+                assert set(personal) <= PROJECTED, sorted(set(personal) - PROJECTED)
+                assert isinstance(personal["identity"], dict), "identity must survive projection"
+                assert "hidden_neighbor_wallet" not in observation
+                if scenario == "continuation":
+                    personal = json.loads(observation)
+                    assert personal['identity']['story'].startswith('I remember my own life.')
+                    assert personal['memory']['previous_decisions'][0]['reason'] == 'I previously chose to wait.'
+                if scenario == "unicode-context":
+                    personal = json.loads(observation)
+                    assert personal['observations'] == ['树' * 4000 + ' 引号"与反斜线\\仍应正确编码。']
+                    assert len(observation.encode('utf-8')) < 24576
+                if scenario == "town":
+                    personal = json.loads(observation)
+                    assert personal["available_actions"] == ["wait", "accept:fixture-contract"]
+                    assert personal["identity"]["story"] == "I prefer dependable work."
+                    assert personal["contracts"][0]["id"] == "fixture-contract"
+                    assert personal["known_rules"]["axe_use"] == "Both parts require 100."
+                    assert personal["unavailable_actions"][0]["required_each"] == 100
+                    assert "hidden_neighbor_wallet" not in observation
+                    assert "wait, draw_water, drink_water" not in body["messages"][0]["content"]
             except Exception:
                 calls["contract_errors"].append("POST contract")
                 return self.reply(400, {"error": "fixture contract"})
             if scenario == "uncertain":
                 return self.reply(502, {"error": "fixture unknown upstream outcome"})
-            self.reply(200, {"model": "kimi-k2.6", "choices": [{"message": {"role": "assistant", "content":
+            self.reply(200, {"model": wire_model("reply"), "choices": [{"message": {"role": "assistant", "content":
                 json.dumps({"action": "wait", "reason": "I choose to wait."})}, "finish_reason": "stop"}],
                 "usage": {"prompt_tokens": 120, "completion_tokens": 15, "total_tokens": 135,
                           "prompt_tokens_details": {"cached_tokens": 30}}, "_hearth_budget": self.budget()})
@@ -103,31 +140,48 @@ def main():
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     cases = []
-    for scenario in ["success", "insufficient", "wrong-ledger", "expired", "unsafe-endpoint", "uncertain"]:
+    # Expected POST count per scenario; an absent scenario must never reach the gateway.
+    posts = {"continuation": 12, "success": 1, "town": 1, "unicode-context": 1, "uncertain": 1,
+             "pinned-model": 1, "reply-model-mismatch": 1}
+    for scenario in ["success", "town", "unicode-context", "continuation", "pinned-model", "model-mismatch",
+                     "reply-model-mismatch", "insufficient", "wrong-ledger", "expired", "unsafe-endpoint", "uncertain"]:
         folder = args.out / scenario
         folder.mkdir(exist_ok=False)  # Never reset an earlier run journal to get new capacity.
         with gateway(scenario) as (port, calls):
+            # A run-scoped pin may name another model, but the endpoint must advertise it.
+            endpoint_model = "fixture-compat-model" if scenario in ("pinned-model", "reply-model-mismatch") else "kimi-k2.6"
             endpoint = folder / "endpoint.json"
             endpoint.write_text(json.dumps({"base_url": f"http://127.0.0.1:{port}/v1", "api_key": "local-fixture-token",
-                "model": "kimi-k2.6", "ledger_id": "fixture-ledger"}))
+                "model": endpoint_model, "ledger_id": "fixture-ledger"}))
             if scenario == "unsafe-endpoint":
                 endpoint.write_text(json.dumps({"base_url": "https://example.invalid/v1", "api_key": "local-fixture-token",
                     "model": "kimi-k2.6", "ledger_id": "fixture-ledger"}))
-            config = folder / "run.json"
-            config.write_text(json.dumps({"schema_version": 1, "endpoint_path": str(endpoint.resolve()),
+            run_config = {"schema_version": 1, "endpoint_path": str(endpoint.resolve()),
                 "expected_ledger_id": "fixture-ledger", "run_state_path": str((folder / "state.json").resolve()),
                 "deadline_utc": (datetime.now(timezone.utc) + timedelta(seconds=-1 if scenario == "expired" else 180)).isoformat(),
-                "max_requests": 1, "external_liability_cny": 0, "provenance": "opengameagent_fixture"}))
-            repeats = 2 if scenario in ("success", "uncertain") else 1
+                "max_requests": 12 if scenario == "continuation" else 1, "external_liability_cny": 0, "provenance": "opengameagent_fixture"}
+            if scenario == "pinned-model":
+                run_config["expected_model"] = "fixture-compat-model"
+            elif scenario == "model-mismatch":
+                run_config["expected_model"] = "fixture-other-model"  # endpoint still advertises kimi-k2.6
+            elif scenario == "reply-model-mismatch":
+                run_config["expected_model"] = "fixture-compat-model"
+            elif scenario == "continuation":
+                run_config["expected_model"] = "kimi-k2.6"  # explicit default pin must not change behaviour
+            config = folder / "run.json"
+            config.write_text(json.dumps(run_config))
+            # Replaying a fresh controller against the same journal must not mint requests.
+            repeats = 2 if scenario in ("success", "uncertain", "pinned-model") else 1
             for index in range(repeats):
                 label = f"{scenario}-{index}"
-                env = dict(os.environ, AINCRAD_GATEWAY_RUN_CONFIG=str(config.resolve()),
-                           AINCRAD_GATEWAY_TEST_EXPECT="success" if scenario == "success" and index == 0 else "rejected")
+                expect = "rejected" if index else {"success": "success", "town": "town", "unicode-context": "unicode-context",
+                                                   "continuation": "continuation", "pinned-model": "success"}.get(scenario, "rejected")
+                env = dict(os.environ, AINCRAD_GATEWAY_RUN_CONFIG=str(config.resolve()), AINCRAD_GATEWAY_TEST_EXPECT=expect)
                 command = [sys.executable, str(ROOT / "tools/run_godot.py"), "--godot", args.godot, "--name", label,
                            "--timeout", "42", "--out", str(args.out / "runs"), "--", "--headless", "--script", "res://tests/gateway_acceptance.gd"]
                 result = subprocess.run(command, cwd=ROOT, env=env, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=50)
                 (folder / f"{index}.runner.log").write_text(result.stdout + result.stderr, encoding="utf-8")
-                expected_posts = 1 if scenario in ("success", "uncertain") else 0
+                expected_posts = posts.get(scenario, 0)
                 passed = result.returncode == 0 and calls["post"] == expected_posts and not calls["contract_errors"]
                 row = {"case": label, "passed": passed, **calls}
                 cases.append(row)

@@ -8,6 +8,11 @@ using Godot;
 // No new package: this is part of the project's existing .NET runtime.
 public partial class TownJsonCodec : RefCounted
 {
+    // Deterministic lifetime: callers must capture the Decode/Encode result and
+    // then call Release() so the managed RefCounted wrapper is disposed before
+    // native engine teardown instead of surviving to the finalizer queue.
+    public void Release() => Dispose();
+
     public Variant Decode(string text)
     {
         try

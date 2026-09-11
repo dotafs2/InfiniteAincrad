@@ -1,0 +1,68 @@
+{
+  "phase": "build",
+  "started_at_utc": "2026-09-11T17:29:10.346772+00:00",
+  "steps": [
+    {
+      "label": "dotnet-build",
+      "argv": [
+        "dotnet",
+        "build",
+        "game/InfiniteAincrad.csproj",
+        "--no-restore",
+        "-v",
+        "minimal",
+        "-m:1",
+        "-nodeReuse:false",
+        "/p:UseSharedCompilation=false"
+      ],
+      "cwd": "D:\\lucidgloves\\InfiniteAincrad",
+      "started_at_utc": "2026-09-11T17:29:10.346772+00:00",
+      "timeout_seconds": 600,
+      "stdout_log": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T172910346772-dotnet-build.stdout.log",
+      "stderr_log": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T172910346772-dotnet-build.stderr.log",
+      "process_record": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T172910346772-dotnet-build.process.json",
+      "pid": 16904,
+      "status": "exited",
+      "exit_code": 0,
+      "elapsed_seconds": 3.016,
+      "finished_at_utc": "2026-09-11T17:29:13.362970+00:00",
+      "stdout_tail": "  OpenGameAgent.Attachments -> D:\\lucidgloves\\InfiniteAincrad\\third_party\\OpenGameAgent\\src\\OpenGameAgent.Attachments\\bin\\Debug\\netstandard2.1\\OpenGameAgent.Attachments.dll\n  OpenGameAgent.Kernel -> D:\\lucidgloves\\InfiniteAincrad\\third_party\\OpenGameAgent\\src\\OpenGameAgent.Kernel\\bin\\Debug\\netstandard2.1\\OpenGameAgent.Kernel.dll\n  OpenGameAgent -> D:\\lucidgloves\\InfiniteAincrad\\third_party\\OpenGameAgent\\src\\OpenGameAgent\\bin\\Debug\\netstandard2.1\\OpenGameAgent.dll\n  OpenGameAgent.Runtime.Protocol -> D:\\lucidgloves\\InfiniteAincrad\\third_party\\OpenGameAgent\\src\\OpenGameAgent.Runtime.Protocol\\bin\\Debug\\netstandard2.1\\OpenGameAgent.Runtime.Protocol.dll\n  OpenGameAgent.Client -> D:\\lucidgloves\\InfiniteAincrad\\third_party\\OpenGameAgent\\src\\OpenGameAgent.Client\\bin\\Debug\\netstandard2.1\\OpenGameAgent.Client.dll\n  InfiniteAincrad -> D:\\lucidgloves\\InfiniteAincrad\\game\\.godot\\mono\\temp\\bin\\Debug\\InfiniteAincrad.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.80\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "godot-import",
+      "argv": [
+        "C:\\Users\\Chenxi Qu\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "D:\\lucidgloves\\InfiniteAincrad\\tools\\run_godot.py",
+        "--godot",
+        "D:\\lucidgloves\\InfiniteAincrad\\tmp\\toolchain\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64_console.exe",
+        "--name",
+        "integration-import",
+        "--timeout",
+        "180",
+        "--out",
+        "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\validation",
+        "--",
+        "--headless",
+        "--editor",
+        "--import"
+      ],
+      "cwd": "D:\\lucidgloves\\InfiniteAincrad",
+      "started_at_utc": "2026-09-11T17:29:13.370984+00:00",
+      "timeout_seconds": 240,
+      "stdout_log": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T172913369986-godot-import.stdout.log",
+      "stderr_log": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T172913369986-godot-import.stderr.log",
+      "process_record": "D:\\lucidgloves\\InfiniteAincrad\\tmp\\overnight-20260912\\logs\\20260911T172913369986-godot-import.process.json",
+      "pid": 16928,
+      "status": "exited",
+      "exit_code": 0,
+      "elapsed_seconds": 3.922,
+      "finished_at_utc": "2026-09-11T17:29:17.288563+00:00",
+      "stdout_tail": "{\"name\": \"integration-import\", \"started_at_utc\": \"2026-09-11T17:29:13.496569+00:00\", \"command\": [\"D:\\\\lucidgloves\\\\InfiniteAincrad\\\\tmp\\\\toolchain\\\\Godot_v4.7.2-stable_mono_win64\\\\Godot_v4.7.2-stable_mono_win64_console.exe\", \"--path\", \"D:\\\\lucidgloves\\\\InfiniteAincrad\\\\game\", \"--headless\", \"--editor\", \"--import\"], \"working_directory\": \"D:\\\\lucidgloves\\\\InfiniteAincrad\", \"timeout_seconds\": 180, \"pid\": 52044, \"status\": \"exited\", \"exit_code\": 0, \"elapsed_seconds\": 3.781, \"finished_at_utc\": \"2026-09-11T17:29:17.272026+00:00\"}\nintegration-import.stdout.log:\nGodot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org\n\n[   0% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Started Project initialization (5 steps)\u001b[39m\u001b[0m\n[   0% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Scanning file structure...\u001b[39m\u001b[0m\n[  16% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Loading global class names...\u001b[39m\u001b[0m\n[  33% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Verifying GDExtensions...\u001b[39m\u001b[0m\n[  50% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Creating autoload scripts...\u001b[39m\u001b[0m\n[  66% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Initializing plugins...\u001b[39m\u001b[0m\n[  83% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Starting file scan...\u001b[39m\u001b[0m\n\u001b[92m[ DONE ]\u001b[39m \u001b[1mfirst_scan_filesystem\u001b[22m\n\u001b[0m\n[   0% ] \u001b[90m\u001b[1mupdate_scripts_classes\u001b[22m | Started Registering global classes... (2 steps)\u001b[39m\u001b[0m\n[   0% ] \u001b[90m\u001b[1mupdate_scripts_classes\u001b[22m | \u001b[39m\u001b[0m\n[  33% ] \u001b[90m\u001b[1mupdate_scripts_classes\u001b[22m | \u001b[39m\u001b[0m\n\u001b[92m[ DONE ]\u001b[39m \u001b[1mupdate_scripts_classes\u001b[22m\n\u001b[0m\n[   0% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Started Loading editor (5 steps)\u001b[39m\u001b[0m\n[   0% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Loading editor layout...\u001b[39m\u001b[0m\n[  16% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Loading docks...\u001b[39m\u001b[0m\n\u001b[92m[ DONE ]\u001b[39m \u001b[1mloading_editor_layout\u001b[22m\n\u001b[0m\n\nintegration-import.stderr.log:\nERROR: Failed to read the root certificate store.\n   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)\n\n",
+      "stderr_tail": ""
+    }
+  ],
+  "parse_error_lines": [],
+  "status": "ok",
+  "finished_at_utc": "2026-09-11T17:29:17.297704+00:00"
+}

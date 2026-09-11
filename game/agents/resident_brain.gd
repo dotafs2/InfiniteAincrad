@@ -53,8 +53,13 @@ func propose(view: Dictionary, world_turn: int) -> Dictionary:
 	_pending = str(_adapter.call("NewOperationId"))
 	var id := _pending
 	_result = {}
-	var input := {"sessionId": "street-fixture", "actorId": view.identity.id,
-		"inputId": id, "type": "personal_observation", "timelineId": "fixture:well-street",
+	var timeline := str(view.get("world_id", "fixture:well-street"))
+	# The host save supplies bounded personal memories on EVERY decision. The
+	# gateway sends only this view; retaining copies of past views in OGA's
+	# transcript wastes context and eventually prevents dispatch. Scope only the
+	# adapter transcript to this operation; actor/timeline/world history persist.
+	var input := {"sessionId": "decision:" + id, "actorId": view.identity.id,
+		"inputId": id, "type": "personal_observation", "timelineId": timeline,
 		"tick": world_turn, "payload": {"resident_view": view}}
 	_adapter.call("RunJson", JSON.stringify(input))
 	var started := Time.get_ticks_msec()
@@ -68,6 +73,11 @@ func propose(view: Dictionary, world_turn: int) -> Dictionary:
 	outcome["provenance"] = _source
 	_pending = ""
 	return outcome
+
+func cancel_pending() -> void:
+	if not _pending.is_empty():
+		_adapter.call("Cancel", _pending)
+		_result = {"ok": false, "code": "controller_disconnected"}
 
 func _on_completed(input_id: String, result_json: String) -> void:
 	if input_id != _pending:
@@ -94,6 +104,8 @@ func _on_completed(input_id: String, result_json: String) -> void:
 				return
 	_result = {"ok": false, "code": "brain_response_invalid"}
 
-func _on_failed(input_id: String, _error: String) -> void:
+func _on_failed(input_id: String, error: String) -> void:
 	if input_id == _pending:
-		_result = {"ok": false, "code": "brain_provider_failed"}
+		# Expose only a verified constant, never arbitrary provider text or secrets.
+		var code := "brain_context_window_exceeded" if error == "The estimated model request exceeds the context window and no transcript compactor is configured." else "brain_provider_failed"
+		_result = {"ok": false, "code": code}

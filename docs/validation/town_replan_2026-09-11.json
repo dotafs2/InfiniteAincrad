@@ -1,0 +1,72 @@
+{
+  "date": "2026-09-11",
+  "reviewers": [
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "lens": "scheduler continuity",
+      "closed": true
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "lens": "demand-driven autonomy vs scope",
+      "closed": true
+    }
+  ],
+  "tests": [
+    {
+      "suite": "town_replan",
+      "checks": 66,
+      "failures": 0,
+      "paid_calls": 0
+    },
+    {
+      "suite": "town_social_trigger",
+      "checks": 19,
+      "failures": 0,
+      "paid_calls": 0
+    },
+    {
+      "suite": "town_online",
+      "checks": 63,
+      "failures": 0,
+      "paid_calls": 0
+    },
+    {
+      "suite": "town_turns",
+      "checks": 29,
+      "failures": 0,
+      "paid_calls": 0
+    },
+    {
+      "suite": "town_contract_speech",
+      "checks": 20,
+      "failures": 0,
+      "paid_calls": 0
+    }
+  ],
+  "checks": 197,
+  "cold": {
+    "world_id": "fixture:town-trade-validation",
+    "life_seq": 47,
+    "bytes_unchanged": {
+      "world": true,
+      "ledger": true,
+      "guard": true
+    },
+    "kimi_calls": 0
+  },
+  "real_model_replanning_proven": false,
+  "original_town_restored": false,
+  "kimi_calls": 0,
+  "kimi_cost_cny": 0,
+  "usage_observed": {
+    "input_tokens": 1493610,
+    "cached_input_tokens": 1348352,
+    "output_tokens": 14954,
+    "total_tokens": 1508564
+  },
+  "usage_limits": "Excludes pre-baseline initial reads and final tail; cached input is a subset, not added twice; not a fee bill.",
+  "policy": "Only newly classified option_unavailable may refresh after1800 simulation seconds; never auto-replay an unknown/provider/protocol failure."
+}

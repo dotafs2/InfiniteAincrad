@@ -1,0 +1,101 @@
+{
+  "date": "2026-09-11",
+  "continuity": {
+    "world_id": "fixture:town-trade-validation",
+    "from_seq": 47,
+    "to_seq": 51,
+    "same_identities": true,
+    "old_history_prefix": true,
+    "old_items_contracts_skills": true,
+    "iron_transferred_once": true,
+    "wallets_unchanged": true,
+    "no_jobs_or_errors": true,
+    "cold_bytes_unchanged": [
+      "world",
+      "ledger",
+      "guard"
+    ],
+    "view_is_proximity_not_camera": true
+  },
+  "tests": [
+    {
+      "checks": 58,
+      "failures": 0,
+      "paid_calls": 0,
+      "suite": "town_materials"
+    },
+    {
+      "checks": 63,
+      "failures": 0,
+      "paid_calls": 0,
+      "provenance": "fault_injection_fixture",
+      "suite": "town_online"
+    },
+    {
+      "checks": 27,
+      "failures": 0,
+      "paid_calls": 0,
+      "suite": "town_feedback"
+    }
+  ],
+  "checks": 148,
+  "kimi": {
+    "calls": 2,
+    "input_tokens": 8368,
+    "output_tokens": 231,
+    "cached_input_tokens": 0,
+    "cost_cny": 0.060629
+  },
+  "ledger_after": {
+    "ledger_id": "893739bf-ae73-48fd-b0a6-4d65790612d7",
+    "model": "kimi-k2.6",
+    "authorized_cny": 3.0,
+    "allocation_cap_cny": 3.0,
+    "settled_cny": 2.4964713,
+    "prior_unverified_cny": 0.0141471,
+    "reserved_cny": 0.0,
+    "liability_cny": 2.5106184,
+    "remaining_allocatable_cny": 0.4893816,
+    "counts": {
+      "settled": 64
+    },
+    "halted": "",
+    "deadline_utc": 1789120060
+  },
+  "development_usage": {
+    "observed_at": "2026-09-11T09:47:18.772696+00:00",
+    "root": {
+      "input_tokens": 2612029,
+      "cached_input_tokens": 2549120,
+      "output_tokens": 22865,
+      "total_tokens": 2634894
+    },
+    "worker": {
+      "input_tokens": 151709,
+      "cached_input_tokens": 115712,
+      "output_tokens": 3864,
+      "total_tokens": 155573
+    },
+    "total": {
+      "input_tokens": 2763738,
+      "cached_input_tokens": 2664832,
+      "output_tokens": 26729,
+      "total_tokens": 2790467
+    },
+    "limits": "Excludes pre-baseline reads and final tail; cached input is a subset; not currency billing."
+  },
+  "development_worker": {
+    "model": "gpt-5.6-luna",
+    "closed": true
+  },
+  "result": {
+    "source_stock_before": 3,
+    "source_stock_after": 2,
+    "smith_iron_before": 0,
+    "smith_iron_after": 1,
+    "work_seconds": 60,
+    "next_choice": "wait",
+    "scripted_player_inquiries": 0,
+    "original_world_recovered": false
+  }
+}

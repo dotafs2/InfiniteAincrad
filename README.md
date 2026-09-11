@@ -1,6 +1,10 @@
 # InfiniteAincrad
 
+合并来源可用性：[跨机器合并验证报告](docs/validation/cross_machine_2026-09-12.md)
+
 A persistent AI world inspired by Sword Art Online. Residents retain their identities, experiences and commitments as the models behind them change.
+
+2026-09-11生活验证：同一个三人测试档已完成真实Kimi修理、付款、取回、工具使用及冷启动续接；一次居民顾虑已推动新结算能力的开发和实际使用。过程有明确标记的玩家澄清，原镇主档和正式人物美术仍未恢复。[结果与限制](docs/validation/town_continuous_life_2026-09-11.md) · [唯一全景进度图](ROADMAP.md)。
 
 Maintained by [dotafs2](https://github.com/dotafs2). Project name: **InfiniteAincrad**.
 
@@ -23,6 +27,8 @@ Maintained by [dotafs2](https://github.com/dotafs2). Project name: **InfiniteAin
 第一层另新增 5 种原创住宅外观：庭院宅、窄三层宅、L 形花院宅、长廊宅和转角宅。包含高精度 Blender 源、四套 2K PBR 材质、双 UV、三档 LOD 与独立 Godot 组件；在 `game/scenes/floor1_residences_review.tscn` 查看。该批是外观资产，不含可进入的精装室内或居民住房逻辑，详见 [住宅图集与验收](docs/validation/floor1_residences_2026-09-11.md)。
 
 唯一长期目标：建立能进入、能影响、能长期延续的AI世界。模型升级增强同一批居民的生活，已经发生的事情不会随模型更换消失。
+
+2026-09-11：新增 Godot 修理、交付、结算与工具使用。真实 Kimi 在明确的三人测试世界完成一笔 2 Col 修斧柄交易并冷启动保持；完整双部件修理/使用仅脚本验收通过，尚未证明原镇自主闭环。原镇最新私有存档未随 Git 同步到本机。[本轮报告与实机画面](docs/validation/town_trade_2026-09-11.md)。
 
 ## Current repository
 
