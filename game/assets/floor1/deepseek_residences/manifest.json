@@ -18,11 +18,66 @@
     ],
     "metric_repeat_m": 2.0
   },
+  "porch_design": {
+    "type": "open entrance gallery",
+    "door_x": -1.75,
+    "porch_width": 2.35,
+    "porch_depth": 1.35,
+    "landing_z": 0.35,
+    "landing_y0": -4.550000000000001,
+    "landing_y1": -3.2,
+    "pier_count": 2,
+    "pier_y": -4.3500000000000005,
+    "arch_spring_z": 2.3,
+    "arch_inner_radius": 0.72,
+    "arch_outer_radius": 0.88,
+    "arch_crown_outer_z": 3.1799999999999997,
+    "lintel_z0": 3.23,
+    "lintel_z1": 3.53,
+    "roof_origin_y": -3.25,
+    "roof_origin_z": 3.86,
+    "roof_slope": 0.2,
+    "roof_z_at_pier": 3.6399999999999997,
+    "front_beam_z": 3.51,
+    "wall_beam_z": 3.73,
+    "deck_thickness": 0.06,
+    "tile_eave_y": -4.995433623790741,
+    "tile_eave_z": 3.510913280546665,
+    "deck_y_wall": -3.25,
+    "deck_y_eave": -4.970433623790741,
+    "deck_z_wall_top": 3.86,
+    "deck_z_eave_top": 3.515913275241852,
+    "deck_x_min": -3.1525,
+    "deck_x_max": -0.4975000000000014,
+    "tile_x_min": -3.1725,
+    "tile_x_max": -0.47750000000000137,
+    "tile_len": 0.52,
+    "tile_width": 0.295,
+    "row_pitch": 0.42,
+    "rows": 4,
+    "tread_rises": [
+      0.0875,
+      0.175,
+      0.2625
+    ],
+    "tread_depth": 0.3,
+    "tread_width": 1.86,
+    "entry_steps": "three broad ground-seated exterior treads continuing forward from the landing at x=-1.75; library steps buried inside this solid approach volume",
+    "suppressed_inherited_upper_front_flowerbox": true
+  },
+  "element_roles": {
+    "main_body": "closed two-storey exterior shell",
+    "porch": "open traversable entrance gallery",
+    "flowerboxes": "lower flowerboxes under real lower windows only; inherited upper-front flowerbox suppressed to avoid roof conflict",
+    "chimney": "one library chimney only",
+    "lantern": "library door-side wall lantern only; no extra porch lantern",
+    "roof_deck": "solid sloped timber deck between rafters and tiles, extended to the actual tile eave"
+  },
   "assets": [
     {
       "id": "F1_Residence_06",
-      "label": "Gallery Cross House",
-      "label_zh": "连廊十字屋",
+      "label": "Gallery House",
+      "label_zh": "连廊屋",
       "collision_boxes_blender_xyz": [
         [
           0.0,
@@ -34,56 +89,88 @@
         ],
         [
           -1.75,
-          -3.875,
-          1.615,
-          2.7,
-          1.6500000000000001,
-          3.23
+          -3.8750000000000004,
+          0.175,
+          2.65,
+          1.35,
+          0.35
         ],
         [
-          0.0,
-          -4.25,
-          0.22,
-          2.1,
-          1.15,
-          0.44
+          -2.7649999999999997,
+          -4.3500000000000005,
+          1.79,
+          0.42,
+          0.42,
+          2.88
         ],
         [
-          3.8000000000000003,
-          0.7,
-          4.2,
+          -0.735,
+          -4.3500000000000005,
+          1.79,
+          0.42,
+          0.42,
+          2.88
+        ],
+        [
+          -1.75,
+          -4.3500000000000005,
+          3.38,
+          2.35,
+          0.42,
+          0.3
+        ],
+        [
+          -1.75,
+          -5.300000000000001,
+          0.04375,
+          1.86,
           0.3,
-          3.2,
-          2.1
+          0.0875
+        ],
+        [
+          -1.75,
+          -5.000000000000001,
+          0.0875,
+          1.86,
+          0.3,
+          0.175
+        ],
+        [
+          -1.75,
+          -4.700000000000001,
+          0.13125,
+          1.86,
+          0.3,
+          0.2625
         ]
       ],
       "lods": [
         {
           "level": 0,
-          "triangles": 165462,
+          "triangles": 162006,
           "surfaces": 7,
-          "vertices": 93958
+          "vertices": 92710
         },
         {
           "level": 1,
-          "triangles": 69494,
+          "triangles": 67194,
           "surfaces": 7,
-          "vertices": 45974
+          "vertices": 45301
         },
         {
           "level": 2,
-          "triangles": 26417,
+          "triangles": 24645,
           "surfaces": 7,
-          "vertices": 24313
+          "vertices": 23898
         }
       ],
       "file": "game/assets/floor1/deepseek_residences/F1_Residence_06.glb",
-      "sha256": "d29f19112ac138b55dc82bcb65e4ef0024c71db406cb18db66c6bb72a98abc4d",
-      "bytes": 65067580,
+      "sha256": "61d63c9a3b5157cecf99afe89f38d7650340650aeae1f875d13150b2ac4642d3",
+      "bytes": 63655396,
       "dimensions_blender_xyz_m": [
         8.5117,
-        9.7403,
-        10.2574
+        9.1903,
+        9.6358
       ]
     }
   ]

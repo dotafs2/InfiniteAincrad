@@ -1,0 +1,817 @@
+{
+  "case_count": 54,
+  "cases": [
+    {
+      "actual_hit": true,
+      "expected_hit": false,
+      "hit_position": [
+        -1.75,
+        1.60000002384186,
+        4.69999980926514
+      ],
+      "id": "open_porch_approach",
+      "passed": false
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": [
+        0.0,
+        1.60000002384186,
+        3.34999990463257
+      ],
+      "id": "closed_main_wall",
+      "passed": true
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": [
+        -1.75,
+        1.60000002384186,
+        3.34999990463257
+      ],
+      "id": "closed_door",
+      "passed": true
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": false,
+      "hit_position": [
+        0.800000011920929,
+        0.440000027418137,
+        4.5
+      ],
+      "id": "empty_space_right_of_visual_steps",
+      "passed": false
+    },
+    {
+      "actual_hit": false,
+      "expected_hit": false,
+      "id": "door_flowerbox_clear_visual",
+      "passed": true
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.95,
+      "z": 4.6
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.95,
+      "z": 4.6
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.95,
+      "z": 4.3
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.95,
+      "z": 4.3
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.95,
+      "z": 4.0
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": false,
+      "x": -1.95,
+      "z": 4.0
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.95,
+      "z": 3.8
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": false,
+      "x": -1.95,
+      "z": 3.8
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.75,
+      "z": 4.6
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.75,
+      "z": 4.6
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.75,
+      "z": 4.3
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.75,
+      "z": 4.3
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.75,
+      "z": 4.0
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.75,
+      "z": 4.0
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.75,
+      "z": 3.8
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": false,
+      "x": -1.75,
+      "z": 3.8
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.55,
+      "z": 4.6
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.55,
+      "z": 4.6
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.55,
+      "z": 4.3
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.55,
+      "z": 4.3
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.55,
+      "z": 4.0
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.55,
+      "z": 4.0
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.55,
+      "z": 3.8
+    },
+    {
+      "hits": 0,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": true,
+      "x": -1.55,
+      "z": 3.8
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 3.7
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 4.0
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 4.3
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 4.6
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 4.9
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 5.2
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 5.5
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 3.7
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 4.0
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 4.3
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 4.6
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 4.9
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 5.2
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 5.5
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 3.7
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 4.0
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 4.3
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 4.6
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 4.9
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 5.2
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 5.5
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": [
+        -2.76500010490417,
+        1.39999997615814,
+        4.02500057220459
+      ],
+      "id": "visible_pier",
+      "passed": true
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": [
+        -2.76500010490417,
+        1.39999997615814,
+        4.69999980926514
+      ],
+      "id": "solid_pier",
+      "passed": true
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": [
+        -0.735000014305115,
+        1.39999997615814,
+        4.02500009536743
+      ],
+      "id": "visible_pier",
+      "passed": true
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": true,
+      "hit_position": [
+        -0.735000014305115,
+        1.39999997615814,
+        4.69999980926514
+      ],
+      "id": "solid_pier",
+      "passed": true
+    }
+  ],
+  "failed": 38,
+  "failures": [
+    {
+      "actual_hit": true,
+      "expected_hit": false,
+      "hit_position": [
+        -1.75,
+        1.60000002384186,
+        4.69999980926514
+      ],
+      "id": "open_porch_approach",
+      "passed": false
+    },
+    {
+      "actual_hit": true,
+      "expected_hit": false,
+      "hit_position": [
+        0.800000011920929,
+        0.440000027418137,
+        4.5
+      ],
+      "id": "empty_space_right_of_visual_steps",
+      "passed": false
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.95,
+      "z": 4.6
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.95,
+      "z": 4.3
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.95,
+      "z": 4.0
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": false,
+      "x": -1.95,
+      "z": 4.0
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.95,
+      "z": 3.8
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": false,
+      "x": -1.95,
+      "z": 3.8
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.75,
+      "z": 4.6
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.75,
+      "z": 4.3
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.75,
+      "z": 4.0
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.75,
+      "z": 3.8
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 2,
+      "passed": false,
+      "x": -1.75,
+      "z": 3.8
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.55,
+      "z": 4.6
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.55,
+      "z": 4.3
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.55,
+      "z": 4.0
+    },
+    {
+      "hits": 1,
+      "id": "resident_capsule_clear",
+      "mask": 1,
+      "passed": false,
+      "x": -1.55,
+      "z": 3.8
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 3.7
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 4.0
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 4.3
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 4.6
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 4.9
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 5.2
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -2.0,
+      "z": 5.5
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 3.7
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 4.0
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 4.3
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 4.6
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 4.9
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 5.2
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.75,
+      "z": 5.5
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 3.7
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 4.0
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 4.3
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 4.6
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 4.9
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 5.2
+    },
+    {
+      "height_error": 0.0,
+      "id": "visible_landing_step_support",
+      "passed": false,
+      "proxy_hit": false,
+      "visual_hit": true,
+      "x": -1.5,
+      "z": 5.5
+    }
+  ],
+  "resident_model_calls": 0,
+  "suite": "house06_independent_physics",
+  "world_save_writes": 0
+}

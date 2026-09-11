@@ -16,6 +16,8 @@ The selected route is **S1: a playable persistent-resident game, with a technica
 
 ## Current baseline
 
+- House 06's previously rejected exterior has been repaired by DeepSeek under GPT-6 review (2026-09-12): open porch and aligned steps, coherent roof support, 54/54 independent physics checks and three audited LODs. This is an isolated exterior, with no town placement or resident housing yet. Next choose its actual street position and character-scale route before an enterable-interior/housing batch; see [repair evidence](docs/validation/deepseek_residence_06/REPAIR_2026-09-12.md).
+
 - Residential art now adds five distinct first-floor exterior components with editable Blender source, directional metric UVs, packed secondary UVs, four 2K PBR sets, three LODs and an isolated Godot review street. This improves the first street's housing forms, not resident housing behavior. Next obtain visual approval, choose actual town placements, then scope one enterable interior and its real housing rules; no dense-district performance claim.
 
 - Source baseline: `59bd52e`; two explicitly isolated fixture residents, authored market, pinned OpenGameAgent, authoritative world rules, existing knowledge/decision/save tests and recorded Kimi decisions.

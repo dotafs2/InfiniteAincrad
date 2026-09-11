@@ -1,0 +1,178 @@
+{
+  "model": "deepseek-flash",
+  "official_model_mapping_checked_2026_09_12": "DeepSeek-V4.1-Flash",
+  "pricing": {
+    "source": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "checked_date": "2026-09-12",
+    "peak_usd_per_million": {
+      "cache_hit_input": 0.006,
+      "cache_miss_input": 0.3,
+      "output": 1.2
+    }
+  },
+  "historical_carry": {
+    "source": "docs/validation/deepseek_residence_06/REVIEW.md at 336f033",
+    "private_original_ledger_present": false,
+    "status": "Known published historical totals retained; no claim of recovered private raw responses or reconciled account charges.",
+    "calls": 3,
+    "input_tokens": 53692,
+    "cached_input_tokens_included": 23296,
+    "output_tokens": 41636,
+    "total_tokens": 95328,
+    "published_peak_usd_upper_estimate": 0.059221776
+  },
+  "calls": [
+    {
+      "call": 1,
+      "model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 18729,
+        "completion_tokens": 5292,
+        "total_tokens": 24021,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 18729
+      },
+      "peak_usd_upper_estimate": 0.011969099999999998,
+      "outcome": "rejected_static_roof_steps"
+    },
+    {
+      "call": 2,
+      "model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 24798,
+        "completion_tokens": 6661,
+        "total_tokens": 31459,
+        "prompt_tokens_details": {
+          "cached_tokens": 23936
+        },
+        "prompt_cache_hit_tokens": 23936,
+        "prompt_cache_miss_tokens": 862
+      },
+      "peak_usd_upper_estimate": 0.008395416,
+      "outcome": "rejected_static_duplicate_geometry_reverse_steps"
+    },
+    {
+      "call": 3,
+      "model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 32073,
+        "completion_tokens": 7077,
+        "total_tokens": 39150,
+        "prompt_tokens_details": {
+          "cached_tokens": 31360
+        },
+        "prompt_cache_hit_tokens": 31360,
+        "prompt_cache_miss_tokens": 713
+      },
+      "peak_usd_upper_estimate": 0.00889446,
+      "outcome": "built_physics_pass_visual_rejected"
+    },
+    {
+      "call": 4,
+      "model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 39823,
+        "completion_tokens": 7699,
+        "total_tokens": 47522,
+        "prompt_tokens_details": {
+          "cached_tokens": 39040
+        },
+        "prompt_cache_hit_tokens": 39040,
+        "prompt_cache_miss_tokens": 783
+      },
+      "peak_usd_upper_estimate": 0.009707939999999998,
+      "outcome": "rejected_static_deck_rotation"
+    },
+    {
+      "call": 5,
+      "model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 48108,
+        "completion_tokens": 8758,
+        "total_tokens": 56866,
+        "prompt_tokens_details": {
+          "cached_tokens": 47488
+        },
+        "prompt_cache_hit_tokens": 47488,
+        "prompt_cache_miss_tokens": 620
+      },
+      "peak_usd_upper_estimate": 0.010980528,
+      "outcome": "rejected_static_deck_normals_bounds"
+    },
+    {
+      "call": 6,
+      "model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 57235,
+        "completion_tokens": 8872,
+        "total_tokens": 66107,
+        "prompt_tokens_details": {
+          "cached_tokens": 56832
+        },
+        "prompt_cache_hit_tokens": 56832,
+        "prompt_cache_miss_tokens": 403
+      },
+      "peak_usd_upper_estimate": 0.011108291999999999,
+      "outcome": "built_physics_visual_pass_export_degenerate"
+    },
+    {
+      "call": 7,
+      "model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 66537,
+        "completion_tokens": 8985,
+        "total_tokens": 75522,
+        "prompt_tokens_details": {
+          "cached_tokens": 66048
+        },
+        "prompt_cache_hit_tokens": 66048,
+        "prompt_cache_miss_tokens": 489
+      },
+      "peak_usd_upper_estimate": 0.011324988,
+      "outcome": "accepted_after_independent_checks"
+    }
+  ],
+  "current_round_totals": {
+    "prompt_tokens": 287303,
+    "completion_tokens": 53344,
+    "total_tokens": 340647,
+    "prompt_cache_hit_tokens": 264704,
+    "peak_usd_upper_estimate": 0.072380724
+  },
+  "cache_hit_tokens_included_in_prompt_tokens": true,
+  "currency_estimates_are_not_reconciled_account_charges": true,
+  "known_combined_peak_usd_upper_estimate": 0.13160249999999998,
+  "core_implementation": {
+    "file": "Art/ReferenceScenes/DeepSeekResidences/build_house_06.py",
+    "sha256": "a68ca38e3887fca0a330e28a2cfd629a473a44f34cc6a9dcf65d4ae5e0b645d2",
+    "matches_deepseek_call_07_file": true,
+    "supervisor_core_code_edits": false
+  },
+  "supervisor_role": "scope, transport/accounting, static review, independent validation, build/render, documentation",
+  "root_usage_snapshot": {
+    "scope": "current user-authorized house06 iteration, excluding prior sync and key setup",
+    "baseline": {
+      "input_tokens": 4647077,
+      "cached_input_tokens": 4495488,
+      "output_tokens": 24523,
+      "total_tokens": 4671600
+    },
+    "latest": {
+      "input_tokens": 12662257,
+      "cached_input_tokens": 12359808,
+      "output_tokens": 73597,
+      "total_tokens": 12735854
+    },
+    "increment": {
+      "input_tokens": 8015180,
+      "cached_input_tokens": 7864320,
+      "output_tokens": 49074,
+      "total_tokens": 8064254
+    },
+    "cached_input_is_subset": true,
+    "currency_cost": "not measured; no conversion from ChatGPT token counts to API fees"
+  }
+}

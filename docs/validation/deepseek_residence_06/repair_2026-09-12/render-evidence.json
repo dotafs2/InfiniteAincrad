@@ -1,0 +1,114 @@
+{
+  "lod_state": [
+    {
+      "lod": 0,
+      "name": "F1_Residence_06_LOD0",
+      "visible": true
+    },
+    {
+      "lod": 1,
+      "name": "F1_Residence_06_LOD1",
+      "visible": false
+    },
+    {
+      "lod": 2,
+      "name": "F1_Residence_06_LOD2",
+      "visible": false
+    }
+  ],
+  "meshes": [
+    {
+      "lod": 0,
+      "name": "F1_Residence_06_LOD0",
+      "surfaces": 7,
+      "triangles": 162006,
+      "visible": true
+    },
+    {
+      "lod": 1,
+      "name": "F1_Residence_06_LOD1",
+      "surfaces": 7,
+      "triangles": 67194,
+      "visible": false
+    },
+    {
+      "lod": 2,
+      "name": "F1_Residence_06_LOD2",
+      "surfaces": 7,
+      "triangles": 24645,
+      "visible": false
+    }
+  ],
+  "resident_model_calls": 0,
+  "shots": [
+    {
+      "camera": "(15.0, 9.5, 13.5)",
+      "file": "after/front.png",
+      "fov": 42.0,
+      "height": 900,
+      "id": "front",
+      "look": "(0.0, 3.4, 0.0)",
+      "save_error": 0,
+      "width": 1400,
+      "sha256": "8307fb533a8f274d25a84b4f71ec30030a139e57b226b44e301131f430db94e4"
+    },
+    {
+      "camera": "(-15.0, 10.0, -16.0)",
+      "file": "after/rear.png",
+      "fov": 42.0,
+      "height": 900,
+      "id": "rear",
+      "look": "(0.0, 4.0, 0.0)",
+      "save_error": 0,
+      "width": 1400,
+      "sha256": "f892217bd40e61b762d88850f951d344c42ed081670c2693280e89837afc82e2"
+    },
+    {
+      "camera": "(-4.5, 2.4, 9.0)",
+      "file": "after/near_door.png",
+      "fov": 42.0,
+      "height": 900,
+      "id": "near_door",
+      "look": "(-1.6, 1.8, 0.0)",
+      "save_error": 0,
+      "width": 1400,
+      "sha256": "691961a45150ba67526962bcf683df9d97ed9f23746a9f37fcbe8c42bd94b88b"
+    },
+    {
+      "camera": "(13.0, 5.5, 0.0)",
+      "file": "after/right_facade.png",
+      "fov": 48.0,
+      "height": 900,
+      "id": "right_facade",
+      "look": "(0.0, 3.3, 0.0)",
+      "save_error": 0,
+      "width": 1400,
+      "sha256": "f6324cf9743c23cfa89471c16a827e77d232ff058efb70a15ba29006d3e71991"
+    },
+    {
+      "camera": "(2.3, 5.4, 8.8)",
+      "file": "after/porch_structure.png",
+      "fov": 48.0,
+      "height": 900,
+      "id": "porch_structure",
+      "look": "(-1.75, 3.0, 4.0)",
+      "save_error": 0,
+      "width": 1400,
+      "sha256": "3f7852ab077d4800d3b4181371fa61e607e2ff5b30751898cf121cdbb968f841"
+    },
+    {
+      "camera": "(-1.75, 1.65, 6.2)",
+      "file": "after/porch_eye.png",
+      "fov": 65.0,
+      "height": 900,
+      "id": "porch_eye",
+      "look": "(-1.75, 1.8, 3.2)",
+      "save_error": 0,
+      "width": 1400,
+      "sha256": "eb5a2fa628e7da2c9eca9da6917f76513d5892767a79cee8aa6a9029e798e6ec"
+    }
+  ],
+  "suite": "house06_review_views",
+  "world_save_writes": 0,
+  "copied_without_image_modification": true
+}

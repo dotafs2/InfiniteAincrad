@@ -2,6 +2,8 @@
 
 Read this file, README.md and docs/STATUS.md first; then only the relevant gate in ROADMAP.md and the files needed for the task. User instructions take precedence.
 
+- Current execution policy (2026-09-12): GPT-6 owns thinking, scope, dispatch, validation and review; DeepSeek owns core implementation. Use `deepseek-flash` (currently DeepSeek-V4.1-Flash), verified against the official API; do not silently substitute a model or have the supervisor implement rejected core fixes. The user removed the prior USD 1 / three-request limit for authorized DeepSeek iteration. Keep actual usage, known historical charges, failures and per-delivery stop conditions; unlimited calls do not expand the project scope or authorize unattended runs.
+
 - One goal: an enterable, consequential, persistent AI world whose residents survive model changes. Latest user scope (2026-09-10): the well package is only an internal technical preview. Continue art and gameplay to the original Kimi town's verified capabilities and then 5–10 active residents before calling it the first version. Public licensing/external testing are publication gates, not blockers for authorized internal development.
 - This is the formal project's single-engine Godot direction. The old UE repository is a reference and recovery source; no wholesale copy, parallel engine rewrite or automatic world reset.
 - Do not invent an NPC's success, knowledge, capabilities or resources. The world validates actions; models propose choices. Label fixtures, replay, local fallback and real model decisions accurately.
