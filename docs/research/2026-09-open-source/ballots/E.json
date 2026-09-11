@@ -1,0 +1,65 @@
+{
+  "role": "E",
+  "proposal_version": "v1",
+  "strategy": "S1",
+  "strategy_reason": "现有 Godot 街道、隔离 fixture、持久事实和 OpenGameAgent 边界已经给出可验证的最小产品；先交付有明确限制的 Windows 技术预览，再用附近消息和模型替换证明差异化，比先建研究基准或平台框架更贴近已授权目标。S1 只有在把预览、真实模型和原主世界迁移严格分开时成立。",
+  "votes": {
+    "M01": {
+      "vote": "yes",
+      "reason": "MIT/CC BY 4.0 是交给权利人确认的默认建议，第三方逐项保留原许可；本票不宣布授权，符合当前无根许可证和资产清单未完成的事实。"
+    },
+    "M02": {
+      "vote": "yes",
+      "reason": "Godot 单引擎、固定 OGA、world_kernel、JSON 存档和现有 SceneTree 已有实际边界与测试；迁移 runtime 或测试框架不会直接证明居民连续性。"
+    },
+    "M03": {
+      "vote": "yes",
+      "reason": "setup-godot 可按精确 Action SHA 安装 Godot 4.7.2 .NET 与模板，适合有限 Windows 构建试验；它只负责安装，仍必须另验 export presets、C# build、资源导入、测试、物理与保存。Action SHA 尚未锁定，实施时必须先固定并记录。"
+    },
+    "M04": {
+      "vote": "yes",
+      "reason": "NavigationAgent3D/NavigationRegion3D/AnimationTree 是引擎原生能力，能在出现绕障或动画需求时替换真实自研成本；按交叉辩论修正为需求触发的最小井边试件，不把整街重烘设为消息前置。当前固定井边路径已足够先做近距离消息。"
+    },
+    "M05": {
+      "vote": "defer",
+      "reason": "Quaternius 单角色试验有 CC0 和可逆优势，但应在消息路径和分发主路径明确后进行，并先核包内许可、动作、比例和根运动；当前占位体足以验证世界规则。"
+    },
+    "M06": {
+      "vote": "defer",
+      "reason": "Kenney 少量 UI/音效可能改善拒绝、等待和求助的可读性，但现有文字面板先能支持行为验收；只有明确交互可读性缺口且不阻塞消息时试验。"
+    },
+    "M07": {
+      "vote": "no",
+      "reason": "Poly Haven 木材不会证明消息、存档或贡献者可运行性；美术评审也已撤回即时材质试验，最多在人物和消息反馈后出现明确近景缺口时触发。"
+    },
+    "M08": {
+      "vote": "no",
+      "reason": "Beehave/LimboAI 都会新增编排状态和维护边界，不能解决消息真实性或世界事实；只有第三个以上居民共享行动导致现有阶段逻辑重复，才应试 Beehave，并先证明需要状态机后再评估 LimboAI。"
+    },
+    "M09": {
+      "vote": "no",
+      "reason": "现有 SceneTree 测试已覆盖保存、知识隔离和决策边界；现在迁移 GUT/GdUnit4 只增加基础设施。只有标准 JUnit/场景 runner 对外部贡献成为明确缺口时，才用一个复制试件比较。"
+    },
+    "M10": {
+      "vote": "yes",
+      "reason": "无密钥 fixture 预览不被本地模型阻挡；在预览之后可按机器、模型许可和授权有限试验 Ollama 的 IModelProvider 适配。必须固定模型/权重许可、schema、超时、取消、provenance 和冷恢复；llama.cpp 仅在 Ollama 暴露明确缺口后评估，不做双运行时前置基准。"
+    },
+    "M11": {
+      "vote": "no",
+      "reason": "LiteLLM、agent 框架、向量/GraphRAG、AI Town/Convex 会重复现有 provider、个人视图和存档职责，增加服务、隐私和回滚面；当前证据不足以证明简单可审计 JSON/检索失败。"
+    },
+    "M12": {
+      "vote": "yes",
+      "reason": "外部启动、真实贡献和再次贡献是协作主张的可反证目标；人数和时间应作为可调整试验目标，不能当成功保证，也不能未经授权自动联络。"
+    }
+  },
+  "strongest_remaining_objection": "S1 的技术预览可能被误读为已完成的自主世界，而项目仍无项目许可证、正式导出包和真实模型替换证据；即使 P1 可运行，也不能把 fixture、回放或一段对白宣传成原 13 人迁移或人格连续。另一个关键风险是消息语义若把 timeout、断网、规则拒绝统称 wait，会伪造居民选择。",
+  "changed_position": "yes",
+  "changed_position_detail": "第一轮曾把原生导航列为现在唯一推荐，交叉质询后改为原生优先但需求触发：固定井边路径先支持消息，只有绕障或位置稳定性需求才做最小井边网格；我也接受 setup-godot 仅是安装器，不能替代完整工程验收。",
+  "reopen_trigger": [
+    "官方 4.7.2 .NET editor/template 或固定 Action 在干净 Windows runner 上无法取得，或导出包无法在无编辑器环境启动并通过现有保存/冷恢复检查。",
+    "井边消息出现越权、超距接收、重复投递、冷启动重发，或无法把居民 wait/refuse 与 provider timeout、规则拒绝分开持久化。",
+    "第三个身份或第二个实际模型的证据显示 identity、经历、承诺/资源或事件序号不能连续；此时暂停 P3，不引入新框架补洞。",
+    "现有阶段逻辑在第三名以上居民共享行动后出现可重复维护成本，才重审 Beehave/LimboAI；标准 JUnit/场景 runner 成为外部贡献的真实阻塞时，才重审 GUT/GdUnit4。"
+  ]
+}

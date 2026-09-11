@@ -1,0 +1,140 @@
+{
+  "build": {
+    "passed": true,
+    "package": "InfiniteAincrad-0.0.1-preview-win-x64.zip",
+    "sha256": "8b3516617b9e2651d3142a4bd560987905368e78b1d6c7e69e7f794165743a5a",
+    "source_checks": [
+      "core_acceptance",
+      "decision_boundary_acceptance",
+      "resident_knowledge",
+      "oga_acceptance",
+      "street_resume_edges",
+      "cold-write",
+      "cold-read"
+    ],
+    "package_checks": [
+      "archive-checksums",
+      "no-dotnet-in-PATH",
+      "first-start",
+      "cold-restore-byte-equality"
+    ],
+    "rendered_validation": false,
+    "external_testers": 0,
+    "paid_calls": 0
+  },
+  "headless": {
+    "passed": true,
+    "rendered": false,
+    "external_testers": 0,
+    "paid_calls": 0,
+    "cold_restore_byte_equal": true,
+    "scenarios": {
+      "first-start": {
+        "passed": true,
+        "elapsed_seconds": 7.0,
+        "checks": {
+          "3d_root": true,
+          "actual_use": true,
+          "approved": true,
+          "arrived_before_transfer": true,
+          "camera": true,
+          "collision_proxies": true,
+          "installed": true,
+          "market_imported": true,
+          "need": true,
+          "no_errors": true,
+          "one_consumption": true,
+          "resident_walked": true,
+          "water_conserved": true
+        },
+        "water": {
+          "consumed": 1,
+          "inventory": 0,
+          "well": 0
+        }
+      },
+      "cold-restore": {
+        "passed": true,
+        "elapsed_seconds": 6.657,
+        "checks": {
+          "3d_root": true,
+          "camera": true,
+          "collision_proxies": true,
+          "facts_unchanged": true,
+          "market_imported": true,
+          "no_errors": true,
+          "restored_stable": true,
+          "unchanged_restored_facts": true,
+          "zero_new_decisions": true
+        },
+        "water": {
+          "consumed": 1,
+          "inventory": 0,
+          "well": 0
+        }
+      }
+    }
+  },
+  "rendered": {
+    "passed": true,
+    "rendered": true,
+    "external_testers": 0,
+    "paid_calls": 0,
+    "cold_restore_byte_equal": true,
+    "scenarios": {
+      "first-start": {
+        "passed": true,
+        "elapsed_seconds": 9.89,
+        "checks": {
+          "3d_root": true,
+          "actual_use": true,
+          "approved": true,
+          "arrived_before_transfer": true,
+          "camera": true,
+          "collision_proxies": true,
+          "installed": true,
+          "market_imported": true,
+          "need": true,
+          "no_errors": true,
+          "one_consumption": true,
+          "resident_walked": true,
+          "water_conserved": true
+        },
+        "water": {
+          "consumed": 1,
+          "inventory": 0,
+          "well": 0
+        }
+      },
+      "cold-restore": {
+        "passed": true,
+        "elapsed_seconds": 11.469,
+        "checks": {
+          "3d_root": true,
+          "camera": true,
+          "collision_proxies": true,
+          "facts_unchanged": true,
+          "market_imported": true,
+          "no_errors": true,
+          "restored_stable": true,
+          "unchanged_restored_facts": true,
+          "zero_new_decisions": true
+        },
+        "water": {
+          "consumed": 1,
+          "inventory": 0,
+          "well": 0
+        }
+      }
+    }
+  },
+  "default_startup": {
+    "passed": true,
+    "default_save_created": true,
+    "no_user_args": true,
+    "same_bytes_after_restart": true,
+    "well_water": 1,
+    "decisions": 1,
+    "paid_calls": 0
+  }
+}

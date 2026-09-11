@@ -1,52 +1,82 @@
-# One world, one first playable loop
+# One persistent world, one public collaboration path
 
-Updated 2026-09-10. This is the only implementation roadmap in this repository. Creating this repository does not start an unattended development run or paid NPC loop.
+Updated 2026-09-10 after the six-reviewer research and vote. This is the only execution roadmap. [Evidence and rationale](docs/research/2026-09-open-source/REPORT.md) · [Individual votes](docs/research/2026-09-open-source/vote-results.md).
 
-## Goal and first release
+## Goal
 
-Build a world that people can enter and affect, where residents retain their lives when AI models change. SAO's first-floor town is the initial setting reference.
+Build an enterable, consequential, persistent AI world in Godot. Residents retain their identities, experiences and commitments when their models change. **Latest user decision, 2026-09-10: continue art and gameplay; the well slice is an internal technical preview, not the first version.** The first town must reach the old project's actual repair/delivery/payment/tool-use/eat/rest/forage capabilities, then its intended 5–10 active-resident scope, with meaningful player intervention and cold-save continuity.
 
-First release: one street, three existing active residents, one meaningful player intervention, one real delivery/use event, a subsequent decision informed by that experience, and save/restart continuity. Preserve the experiment's 13 identities during migration; focus presentation on the existing three active residents. A new repository is not permission to reset their world.
+Verified reference: world `F4390752-4A07-7DE7-FACD-32BAC6F72C54`, 13 identities, three active residents (艾琳、拓真、柏木), life sequence 37. The local full source save dated 2026-09-10 08:30:40 has now been found, SHA256 `baaab67073a91b9db0b44691c05b4734f235898037074fc835d674d17ae63650`. This resolves source availability, not migration correctness or outstanding private billing. Preserve it read-only and validate separate migration outputs. Do not copy old UE movement/pending requests into a running Godot simulation.
 
-The player may offer available material or decline to help. Residents may accept, refuse or wait according to their own information and actual conditions. A refusal is valid autonomous behavior but does not count as successful delivery. Do not rerun paid requests until a scripted outcome appears.
+Internal sequence now takes precedence over the earlier gate ordering below: (1) original state preservation and three-person life-rule port alongside visible character/prop improvements; (2) attributed communication, repair/work/exchange and player consequences; (3) a sustainable, accounted food/labor loop with 5–10 active residents across multiple game days; (4) actual model substitution and private-knowledge checks; (5) first-version art/readability review, independent testing and licensed distribution. Public authorization and external testers do not block steps 1–4. Art imports may be reconsidered for a specific visible gap; the earlier deferral vote is historical, not a veto on this new scope.
 
-## Formal project direction
+The public collaboration goal adds a requirement: strangers can obtain, run, modify and contribute to that slice. A public repository, a recording or a star count alone does not establish this outcome.
 
-Godot is the intended single game runtime. World rules and persistence stay separate from scene presentation; model adapters propose actions, and authoritative rules validate and execute them. Migrate only the smallest required behavior, with explicit source provenance and checks. Keep the old UE project available as evidence and a recovery reference.
+The selected route is **S1: a playable persistent-resident game, with a technical preview before the differentiated v0.1 release** (6/6 votes). Research evidence supports the game; a general-purpose agent platform is not the first deliverable.
 
-This supersedes the experiment's proposed UE-plus-Godot delivery route for this new project. It is a direction to validate, not a claim that the UE life system has been ported. If bounded migration fails, report the exact gap and stop; do not automatically add a second production engine or rewrite the entire simulation.
+## Current baseline
 
-## Sequential acceptance gates
+- Source baseline: `59bd52e`; two explicitly isolated fixture residents, authored market, pinned OpenGameAgent, authoritative world rules, existing knowledge/decision/save tests and recorded Kimi decisions.
+- The market GLB and editable Blender source have been obtained and passed LFS integrity checks.
+- No project-wide license has been applied. A Windows export preset, pinned manual/PR CI workflow and locally verified self-contained package now exist; independent external testers and an actual CI run remain pending.
+- The original 13-person world has not been migrated. Its latest complete source save and private ledgers must be verified separately; public fixtures never count as that recovery.
 
-Active continuous authorization, 2026-09-10: the user requested ongoing iteration without another “continue” prompt after each result. Advance one visible gap at a time, with one scoped Luna worker and supervisor review. The cumulative baseline is `C:/InfiniteAincrad/tmp/continuous-20260910/budget.json`; total development stop is 3,000,000 raw tokens or 2026-09-12 12:14:22 UTC, whichever comes first, with 2,500,000 stopping new implementation. These thresholds span this turn and scheduled continuations, never restart at each heartbeat. The existing hourly heartbeat resumes only within this record. Latest paid-ledger identity/path and counts are in adjacent `progress.json`; the CNY 2 validation grant carries all prior debits and this continuous batch permits at most six new event requests. Original main-world unknown charges remain unresolved. User authorization replaces earlier no-continuation wording only for this bounded ongoing run. If accounting is unknown or a threshold is reached, save progress and pause the heartbeat; do not silently replenish budgets.
+## Sequential delivery gates
 
-Current bounded continuation, 2026-09-10: after the MIT runtime integration, the user requested continued Luna implementation with a supervisor direction review after every round. This round addresses one existing defect: a valid resident `wait` must not be treated as failure or overridden by the 3D presentation. Verify assisted, unassisted and voluntarily deferred outcomes plus cold restore, using isolated fixtures. Keep the 3-million raw-token stop cap across supervisor and one worker, with a 55-minute wall deadline recorded in the private batch record. This does not initialize a paid ledger, reset the maintained world, pass the main-world gates, or authorize an unattended loop.
+| Gate | One concrete result | Acceptance | Current state |
+|---|---|---|---|
+| P0 — Reproducible baseline and rights | A documented build baseline and precise code/art/third-party rights inventory | Official Godot 4.7.2 .NET/editor templates and SDK identified; existing assets verified; exact license proposal reviewable by the rights holder | Official binaries/checksums, source snapshot build and [rights proposal](docs/release/RIGHTS_REVIEW.md) delivered; license grant pending |
+| P1 — Technical preview v0.0.x | A Windows package of the existing well event, with no editor, API key or maintainer-only path required | Existing core/save checks; independent package startup and cold restore; checksums and limitations; three new testers can launch and at least two complete/understand an intervention and restore within 15 minutes | Local v0.0.1 package passes headless and rendered event/restore; [evidence](docs/validation/windows_preview_2026-09-10.md); external tester gate pending |
+| P2 — Nearby resident communication | A source-attributed inquiry/help request with a recipient choice that may reply, refuse or defer | Same street and writer; host-validated receiving range; private knowledge; unknown/out-of-range rejection; idempotent send/receive; saved response; cold restore without re-delivery | Next new world behavior |
+| P3 — Differentiation | A three-person public demonstration and two different actual models continuing the same demonstration save with new decisions | Identities, old experiences, resources/commitments and event order preserved; private views respected; visible consequences; actual model provenance and honest error states | Not demonstrated |
+| P4 — Collaborator release v0.1 | A licensed, reproducible slice with a short actual-play/restore recording and a complete first-contribution path | P1–P3 evidence; concise Chinese/English README; one runnable contribution example; 3–6 scoped tasks; source/asset notices; PR/Issue templates and release notes | Not delivered |
+| P5 — Observed collaboration | Independent people run the project, contribute a bounded improvement and participate again | Suggested first 30-day observation target: five independent testers, three external contributors with accepted work, two returning participants | No external evidence collected |
 
-Every round ends with a short evidence-based direction review in `docs/STATUS.md`: the actual gain toward choice/consequences/continuity/playability, the most important remaining gap, and one next result. More dependencies, tests or code alone are not sufficient. If a proposed next round only repeats a fixture or adds generic infrastructure, revise its scope before dispatching Luna.
+Time and participant numbers above are proposed experiment targets, not industry standards, development deadlines, promised adoption or permission for automatic outreach.
 
-Latest scoped authorization, 2026-09-10: the independent capability trial may proceed offline while original-save/ledger verification remains blocked. Its new root and one Luna worker share a maximum of 2,000,000 raw tokens or four hours from 09:16:42 UTC, whichever arrives first. This supersedes the old G0 trial limit for this batch only, does not reset historical paid charges, and cannot satisfy main-world gates. The batch stopped with a runnable partial result; see docs/validation/capability_trial_2026-09-10.md. No automatic continuation is authorized.
+P0 build preparation can proceed while a rights decision is pending. A public open-source release must wait for the corresponding permission and license scope. P1 gives potential collaborators a shared test object; it does not claim autonomous life, original-world migration or completion of P3. Failures block the affected claim and trigger diagnosis, not automatic replacement of the project.
 
-At the next explicitly started implementation batch, record a baseline. Limits below are cumulative from that start; time or tokens, whichever comes first. They are stop thresholds, not estimates or guarantees of completion. The new repository does not grant an extra budget beyond the previously selected 48-hour / 3-million-raw-token batch.
+## P2: smallest new world behavior
 
-| Gate | Required evidence | Cumulative wall time | Cumulative development raw tokens |
-| --- | --- | --- | --- |
-| G0 | Verify latest original save and carried fee ledger; demonstrate Godot export can launch; document one bounded world-rule migration and its continuity checks | 2 hours | 200,000 |
-| G1 | One street displays actual resident movement/actions and authoritative event updates; evidence identifies the real world or explicitly labeled fixture | 8 hours | 800,000 |
-| G2 | A validated material offer causes a real consequence; at least one delivery/use completes and its experience enters a subsequent decision in the continuing main world | 24 hours | 2,000,000 |
-| G3 | Save/restart and duplicate-command checks pass; the distributable demo runs on an independent Windows environment without development editors; provide a short actual-play recording | 48 hours | 3,000,000 |
+Start with Luna and Mira already in the isolated street. A message records its sender, recipient, unique event/command ID, time/turn and content. The host verifies the receiving range from authoritative positions; model-supplied coordinates or a prompt saying “you heard it” are not sufficient. The recipient receives only allowed information and may respond, refuse or defer. A received claim remains an attributed statement, not an automatic world fact.
 
-Technical fixtures can establish G0/G1 implementation behavior but cannot establish real-world migration or paid resident acceptance. Missing real-world prerequisites must remain explicitly blocked; a fixture never upgrades itself into the main save.
+Cover unknown actors, excessive/invalid content, unavailable targets, out-of-range delivery, repeated commands, duplicate delivery, cancellation, failed saves and cold restore. Keep provider error, world-rule rejection and the resident's voluntary `wait` separate. A timeout pauses/reports a system problem and retains the last valid decision; it does not invent a resident action.
 
-Each gate follows a passing previous gate. Stop on failure or limit, preserve work and evidence, and report the blocker and measured usage. No automatic extension, fallback project, model escalation loop or budget reset. Fix bounded code errors within the current gate; unresolved semantic questions require a decision before dependent work continues.
+Use a third explicitly labelled demonstration identity to test who did and did not receive information. Do not pretend that this identity restores a member of the original world. Do not refill the well, invent a new water source, infer Mira's structured `need` from prose, or force a successful request. Begin with the existing well path; only add the smallest native navigation example when an actual obstacle/new destination requires it.
 
-Count the root and workers together: input plus output; cached input is a subset of input, reasoning a subset of output. Do not add every cumulative log record. No automatic hard token limiter exists yet; establish reliable batch measurement before new development dispatches. At an unknown counter, stop new dispatches. In-flight calls may exceed a threshold and must be reported.
+## P3: model change and original-world continuity
 
-The existing carried Kimi allowance and unresolved charges remain in force privately. A future validation batch adds a maximum of 12 new request attempts within that allowance, failures included, never a requirement to consume them. Ordinary paid thinking retains at least 30 real minutes of cooldown; use existing rules for event-triggered decisions. This scaffold makes zero calls.
+A replay proves deterministic world submission and recovery within its test. A fixture provider proves adapter/rule boundaries. Running the same weights through two inference servers proves a runtime substitution. None of these alone proves the two-actual-model experiment.
 
-## After the first release
+For P3, use two different actual models to make new decisions in the same isolated save. Preserve previous state and provide the appropriate resident view. Record identity/model provenance, accepted command IDs, prior and resulting world facts, and cold recovery. The models may choose differently; identical wording is not required. A valid refusal is not a completed delivery.
 
-1. Switch to a second real model in the same save and continue unfinished commitments; compare actual continuity and cost.
-2. Fulfill one genuinely missing resident capability: proposal, review, development, validation, versioned installation into the same save, use, and reuse by another resident.
-3. Resolve demonstrated food/labor constraints before expanding to 5–10 active residents, new streets or outside exploration.
+Model/weight licensing, hardware and any paid-call scope, ledger, cooldowns and stop condition must be established before a live run. Missing evidence keeps the release at technical-preview status; it does not authorize fresh billing or repeated calls until a desired answer appears.
 
-Full first-floor geography, VR, multiplayer, complete combat, automated asset factories and city-wide art replacement are outside this first release. Public local demos use explicitly separate world IDs; they are not multiple writers to the maintained world.
+Separately preserve all 13 original identities and recover the three existing active residents when the complete source is available. Migrations write separate outputs, compare identity/history/ownership/resources/commitments/events and report unsupported data. Never overwrite or silently replace the maintained world with public demonstration state.
+
+## Dependencies selected by vote
+
+- **Keep (6/6):** Godot, the current pinned OpenGameAgent commit, world_kernel/JSON state, existing SceneTree tests, authored market and Blender sources.
+- **Bounded build trial (6/6):** chickensoft-games/setup-godot. Pin an exact Action SHA and engine/templates. The Action installs tools; the project still needs export presets, .NET build, import, tests and independent package verification.
+- **Native capability as needed (5/6, one defer):** NavigationAgent3D/NavigationRegion3D/AnimationTree, limited to a demonstrated movement/animation need. No whole-street rewrite as a communication prerequisite.
+- **Optional after-preview trial (5/6, one defer):** one Ollama provider through the existing IModelProvider boundary, with a separately reviewed model. No local-model installation required for ordinary preview use. Reconsider llama.cpp only after a concrete deployment/hardware/performance gap appears.
+- **Deferred:** Quaternius single-character trial (1 yes / 5 defer), Kenney UI/sounds (2 yes / 4 defer), Poly Haven first-release material work (0 yes / 5 no / 1 defer). Retain the candidates and license evidence; gather actual readability feedback before another scoped proposal. Do not import them now merely because they are available.
+- **Do not add now (0/6 support):** Beehave/LimboAI as mandatory orchestration, wholesale migration to GUT/GdUnit4, or a new LiteLLM/agent/vector/GraphRAG/AI Town runtime stack. Reconsider only a measured gap, using one isolated example and a clear exit path.
+
+The recommended rights proposal passed 5/6 with one defer: MIT for original code, CC BY 4.0 for original art and standalone documentation, third-party terms preserved by scope. This is a proposal to the rights holder, not a license grant. If mandatory openness of derivatives is desired, revisit the code-license choice before publication.
+
+## First contribution paths
+
+Open a small number of tasks tied to the current gate: startup documentation, independent export reproduction, one message-boundary regression, recipient/error display, one cold-restore counterexample, or a bilingual instruction fix. Each task needs relevant files, expected behavior, a verification command/result and an acceptance owner. World-authority changes receive maintainer review; they are not context-free beginner tasks.
+
+Measure discovery → launch → understood consequence → first accepted contribution → return. Code, art, translation, documentation and testing can all count when accepted and verifiable. Automated agent PRs, stars and expressions of interest do not count as independent community adoption. If participation stalls, classify the obstacle and shrink tasks rather than expanding the world by default.
+
+## Scope and historical authorization
+
+Implementation authorized on 2026-09-10: continue this roadmap in visible batches and reassess direction after each batch. Additionally perform a formal direction review after every **100,000,000 raw development tokens** (input plus output, including cached input). This is a review interval, not a hard spending allowance or an API currency budget. Record root/worker deltas from actual session counters with `tools/record_agent_usage.py` in an ignored local ledger; repeated cumulative snapshots must not be counted again. A checkpoint is observed between batches, not enforced continuously by an automatic limiter. Reuse small task contexts when useful; do not assume a new conversation guarantees a cache hit. Prefer the user's requested Codex 5.3 family for simple bounded work when available; Kimi work still needs an available invocation path and applicable billing prerequisites. This batch used GPT-5.3-Codex-Spark for a bounded audit and reused that task for a static check; no Kimi coding or live resident call was started.
+
+This review did not implement gameplay, import candidates, run paid models, publish a release or contact external people. It does not resume old heartbeats or reset previous development/API accounting. Current owned research workers have finished; later implementation must follow the applicable user-authorized scope, and live calls require their own verified prerequisites.
+
+Earlier G0–G3 migration/budget records remain available in [the prior roadmap at 59bd52e](https://github.com/dotafs2/InfiniteAincrad/blob/59bd52e/ROADMAP.md) and the private transfer records. Those historical deadlines and automatic-run instructions are not fresh authorization. No original-world gate is marked complete by this public-preview plan.
+
+Full geography, VR, multiplayer, combat, autonomous code installation, generic plugin marketplaces and a replacement engine/backend remain outside this first collaboration release.
