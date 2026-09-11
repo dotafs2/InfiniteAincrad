@@ -20,6 +20,8 @@ Maintained by [dotafs2](https://github.com/dotafs2). Project name: **InfiniteAin
 
 第一批 20 件环境组件已按新的近景要求全部重制为 V2：独立分枝和弯曲叶片、六类植物、顶点权重风动、三档 LOD、可直接拖入 Godot 的组件场景。默认井边 demo 与城镇模式的 8 个装饰实例已替换，其中 7 个具有局部植物风动；新隔离存档的原有井边流程检查通过。提供 Blender 源、6 秒实录和近景，详见 [V2 美术与接入验收](docs/validation/floor1_environment_v2_2026-09-11.md)。
 
+第一层另新增 5 种原创住宅外观：庭院宅、窄三层宅、L 形花院宅、长廊宅和转角宅。包含高精度 Blender 源、四套 2K PBR 材质、双 UV、三档 LOD 与独立 Godot 组件；在 `game/scenes/floor1_residences_review.tscn` 查看。该批是外观资产，不含可进入的精装室内或居民住房逻辑，详见 [住宅图集与验收](docs/validation/floor1_residences_2026-09-11.md)。
+
 唯一长期目标：建立能进入、能影响、能长期延续的AI世界。模型升级增强同一批居民的生活，已经发生的事情不会随模型更换消失。
 
 ## Current repository
