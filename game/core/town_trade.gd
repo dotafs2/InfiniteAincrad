@@ -2,7 +2,12 @@ extends "res://core/town_life.gd"
 ## Bounded axe repair and tool-use continuation for the schema-2 town fixture.
 ## Legacy arrays remain authoritative; godot.trade only records new command/job state.
 
-const SPEECH_ACTIONS := ["visitor_reply", "ask_help", "reply_help", "cancel_help", "offer_repair", "accept", "reject", "cancel"]
+const SPEECH_ACTIONS := ["visitor_reply", "ask_help", "reply_help", "cancel_help", "offer_repair", "accept", "reject", "cancel", "share_skill"]
+const SHAREABLE_SKILLS := ["wood_repair", "metal_repair"]
+const SKILL_NOTICE_TEXT := {
+	"wood_repair": "I can repair wooden handles.",
+	"metal_repair": "I can repair metal edges.",
+}
 const TRADE_RANGE := 3.0
 const REPAIR_SECONDS := 60.0
 const WALK_SECONDS := 1.0
@@ -172,6 +177,15 @@ func _public_skills(observer_id: String, resident_id: String) -> Array:
 func _has_skill(id: String, skill_id: String) -> bool:
 	return skill_id in _skill_ids(id)
 
+func _already_shared_skill(speaker_id: String, recipient_id: String, skill_id: String) -> bool:
+	for event in _state.life.events:
+		if event.get("type") == "skill_notice" and event.get("actor_id") == speaker_id and event.get("skill_id") == skill_id and event.get("recipient_ids", []).has(recipient_id):
+			return true
+	return false
+
+func _skill_notice_text(skill_id: String) -> String:
+	return str(SKILL_NOTICE_TEXT.get(skill_id, "I can perform this repair."))
+
 func _required_skill(part: String) -> String:
 	return "metal_repair" if part == "edge" else "wood_repair"
 
@@ -233,6 +247,14 @@ func trade_options(id: String) -> Array:
 			var target := _meeting_point(id, other)
 			if position_of(id).distance_to(target) > 0.45:
 				_option(result, {"id": "approach:" + other, "label": "Approach " + resident(other).name, "action": "approach", "counterparty": other, "target_position": [target.x, target.y, target.z], "duration_seconds": WALK_SECONDS, "_target": other})
+
+		for other in active_ids():
+			if other == id or not _near(id, other):
+				continue
+			for skill_id in SHAREABLE_SKILLS:
+				if not _has_skill(id, skill_id) or _already_shared_skill(id, other, skill_id):
+					continue
+				_option(result, {"id": "share-skill:" + other + ":" + skill_id, "label": "Tell " + resident(other).name + " I can repair " + ("wooden handles" if skill_id == "wood_repair" else "metal edges"), "action": "share_skill", "counterparty": other, "_skill_id": skill_id, "_decision": {"action": "share_skill", "recipient_id": other, "skill_id": skill_id, "text": _skill_notice_text(skill_id)}})
 
 		for other in active_ids():
 			if other == id or position_of(id).distance_to(position_of(other)) > HEARING_RANGE:
@@ -374,6 +396,12 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 			return social
 		commands[command_id] = {"payload": payload, "status": "completed"}
 		return social
+	if action == "share_skill":
+		var shared := _apply_share_skill(id, option, command_id, provenance, speech)
+		if not shared.ok:
+			return shared
+		commands[command_id] = {"payload": payload, "status": "completed"}
+		return shared
 	if action in ["eat_ration", "rest", "harvest_ration"]:
 		var started := super.start_action(id, action, command_id, provenance)
 		if not started.ok:
@@ -387,6 +415,20 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 		return result
 	commands[command_id] = {"payload": payload, "status": "pending" if result.get("pending", false) else "completed"}
 	return result
+
+func _apply_share_skill(id: String, option: Dictionary, command_id: String, provenance: String, speech: String) -> Dictionary:
+	var recipient_id: String = str(option.get("counterparty", ""))
+	var skill_id: String = str(option.get("_skill_id", ""))
+	if skill_id not in SHAREABLE_SKILLS or recipient_id == id or recipient_id not in active_ids() or not _has_skill(id, skill_id) or not _near(id, recipient_id) or _already_shared_skill(id, recipient_id, skill_id):
+		return _failure("skill_notice_unavailable")
+	# Canonical truthful declaration is always persisted; freeform speech is attributed separately and cannot replace it.
+	var event := {"type": "skill_notice", "actor_id": id, "subject_id": recipient_id, "recipient_ids": [id, recipient_id],
+		"operation_id": command_id, "source": provenance, "provenance": provenance, "skill_id": skill_id,
+		"text": _skill_notice_text(skill_id), "contractual": false}
+	if not speech.is_empty():
+		event["speech"] = speech
+	_append_life_event(event)
+	return {"ok": true, "code": "skill_notice", "skill_id": skill_id, "recipient_id": recipient_id, "event_id": event.event_id}
 
 func _apply_trade_start(id: String, option: Dictionary, command_id: String, provenance: String) -> Dictionary:
 	var action: String = option.action
@@ -630,6 +672,20 @@ func resident_view(id: String = "") -> Dictionary:
 			own_contracts.append(visible_contract)
 	view["items"] = own_items
 	view["skills"] = _skill_ids(id)
+	var known_notices: Array = []
+	for event in _state.life.events:
+		if event.get("type") != "skill_notice" or event.get("skill_id") not in SHAREABLE_SKILLS or not event.get("recipient_ids", []).has(id) or event.get("actor_id") == id:
+			continue
+		# Historical source projection persists even if the known speaker left the active pool;
+		# require only that the speaker is a known identity, never hidden fields or current availability.
+		var speaker_id: String = str(event.get("actor_id", ""))
+		if speaker_id.is_empty() or resident(speaker_id).is_empty():
+			continue
+		known_notices.append({"actor_id": speaker_id, "skill_id": event.get("skill_id", ""),
+			"source_event_id": event.get("event_id", ""), "seq": event.get("seq", 0),
+			"source": event.get("source", ""), "provenance": event.get("provenance", ""),
+			"text": event.get("text", "")})
+	view["known_skill_notices"] = known_notices
 	view["contracts"] = own_contracts
 	view["life_account"] = _trade_account(id).duplicate(true)
 	view["wallet"] = {"coins_col": resident(id).get("coins_col", 0)}
