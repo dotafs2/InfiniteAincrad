@@ -1,0 +1,40 @@
+{
+  "measured_utc": "2026-09-12T06:53:03.6804027Z",
+  "scope": "This root and its two delegated workers; high-water increments counted once; snapshot excludes later in-flight messages.",
+  "totals": {
+    "input_tokens": 13161014,
+    "cached_input_tokens": 12773760,
+    "output_tokens": 100388,
+    "total_tokens": 13261402
+  },
+  "sessions": [
+    {
+      "session": "rollout-2026-09-12T14-21-13-01a09446-f4cf-7f52-8014-261e856a140b.jsonl",
+      "counters": {
+        "input_tokens": 5701041,
+        "cached_input_tokens": 5546624,
+        "output_tokens": 36401,
+        "total_tokens": 5737442
+      }
+    },
+    {
+      "session": "rollout-2026-09-12T14-23-19-01a09448-df53-7ed1-baf7-38ccf6795bef.jsonl",
+      "counters": {
+        "input_tokens": 4472141,
+        "cached_input_tokens": 4320896,
+        "output_tokens": 36966,
+        "total_tokens": 4509107
+      }
+    },
+    {
+      "session": "rollout-2026-09-12T14-23-46-01a09449-492f-7610-bb5d-75af98c782fc.jsonl",
+      "counters": {
+        "input_tokens": 2987832,
+        "cached_input_tokens": 2906240,
+        "output_tokens": 27021,
+        "total_tokens": 3014853
+      }
+    }
+  ],
+  "accounting": "cached input is a subset of input; no currency estimate and no account-usage attribution"
+}

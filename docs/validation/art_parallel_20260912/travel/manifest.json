@@ -1,0 +1,1218 @@
+{
+  "pack": "travel_cargo_20260912",
+  "asset_count": 36,
+  "units": "metres",
+  "source_up": "Z",
+  "glb_up": "Y",
+  "source": "Original procedural geometry. Primitive helper adapted from project MarketLife20260912.",
+  "scope": "Decorative art only; no rig, interaction, collision, or resident behavior.",
+  "license": "Project-wide license remains maintainer-controlled; no new third-party rights granted.",
+  "external_dependencies": [],
+  "blender_version": "5.2.1 LTS",
+  "assets": [
+    {
+      "id": "covered_caravan_wagon",
+      "label_zh": "帆篷四轮旅行车",
+      "file": "game/assets/generated/travel_cargo_20260912/covered_caravan_wagon.glb",
+      "triangles": 15728,
+      "vertices": 7182,
+      "dimensions_m": [
+        2.137,
+        3.93,
+        2.205
+      ],
+      "bounds_min_m": [
+        -1.056999921798706,
+        -2.625,
+        0.0
+      ],
+      "bounds_max_m": [
+        1.0800000429153442,
+        1.3049999475479126,
+        2.2049999237060547
+      ],
+      "ground_origin": true,
+      "material_count": 9,
+      "materials": [
+        "TC_oak_light",
+        "TC_grain",
+        "TC_oak_dark",
+        "TC_iron",
+        "TC_oak",
+        "TC_sage",
+        "TC_canvas",
+        "TC_thread",
+        "TC_rope"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "fc38e2b53e933cda1bd77ed372382f6be4c01524e53da83ab282b0c5d3465753",
+      "bytes": 679944
+    },
+    {
+      "id": "water_delivery_cart",
+      "label_zh": "横桶送水车",
+      "file": "game/assets/generated/travel_cargo_20260912/water_delivery_cart.glb",
+      "triangles": 14836,
+      "vertices": 6540,
+      "dimensions_m": [
+        1.689,
+        3.369,
+        1.869
+      ],
+      "bounds_min_m": [
+        -0.8330000042915344,
+        -2.299999952316284,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.8560000061988831,
+        1.069000005722046,
+        1.8690000772476196
+      ],
+      "ground_origin": true,
+      "material_count": 5,
+      "materials": [
+        "TC_oak_light",
+        "TC_oak_dark",
+        "TC_iron",
+        "TC_oak",
+        "TC_brass"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "b6771170033add7bf2128917714718f39f57c46017a881d13faf29210c41b6a3",
+      "bytes": 650348
+    },
+    {
+      "id": "porters_luggage_trolley",
+      "label_zh": "搬运双轮行李架",
+      "file": "game/assets/generated/travel_cargo_20260912/porters_luggage_trolley.glb",
+      "triangles": 5524,
+      "vertices": 2484,
+      "dimensions_m": [
+        0.928,
+        0.951,
+        1.425
+      ],
+      "bounds_min_m": [
+        -0.45249998569488525,
+        -0.4399999976158142,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.4754999876022339,
+        0.5109999775886536,
+        1.4250000715255737
+      ],
+      "ground_origin": true,
+      "material_count": 6,
+      "materials": [
+        "TC_oak",
+        "TC_iron",
+        "TC_oak_light",
+        "TC_oak_dark",
+        "TC_canvas_dark",
+        "TC_leather"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "70215ef4d4d5c436332b3249929730ae477fc6ca55174917511b5c9b683f0036",
+      "bytes": 234824
+    },
+    {
+      "id": "timber_pack_saddle",
+      "label_zh": "木制驮架",
+      "file": "game/assets/generated/travel_cargo_20260912/timber_pack_saddle.glb",
+      "triangles": 1464,
+      "vertices": 656,
+      "dimensions_m": [
+        1.07581,
+        0.94,
+        0.615
+      ],
+      "bounds_min_m": [
+        -0.5379056930541992,
+        -0.4699999988079071,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.5379056930541992,
+        0.4699999988079071,
+        0.6149999499320984
+      ],
+      "ground_origin": true,
+      "material_count": 4,
+      "materials": [
+        "TC_oak",
+        "TC_oak_light",
+        "TC_leather",
+        "TC_brass"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "58074726dc6d1fc52956e809b1ca39e5b89d35e769632fc1867abb597ea7385e",
+      "bytes": 68524
+    },
+    {
+      "id": "paired_leather_panniers",
+      "label_zh": "双侧皮革驮袋",
+      "file": "game/assets/generated/travel_cargo_20260912/paired_leather_panniers.glb",
+      "triangles": 888,
+      "vertices": 368,
+      "dimensions_m": [
+        1.39205,
+        0.62,
+        0.78957
+      ],
+      "bounds_min_m": [
+        -0.6981865167617798,
+        -0.3199999928474426,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.6938673853874207,
+        0.30000001192092896,
+        0.7895650863647461
+      ],
+      "ground_origin": true,
+      "material_count": 4,
+      "materials": [
+        "TC_leather",
+        "TC_oak_dark",
+        "TC_canvas_dark",
+        "TC_brass"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "8b6e02aad494229152964772f8a6d9295f3cd8faa4f5d976392a79d7a068c496",
+      "bytes": 54084
+    },
+    {
+      "id": "open_traveller_tent",
+      "label_zh": "敞口旅行帐篷",
+      "file": "game/assets/generated/travel_cargo_20260912/open_traveller_tent.glb",
+      "triangles": 1224,
+      "vertices": 643,
+      "dimensions_m": [
+        2.746,
+        2.494,
+        1.87
+      ],
+      "bounds_min_m": [
+        -1.3730000257492065,
+        -1.246999979019165,
+        0.0
+      ],
+      "bounds_max_m": [
+        1.3730000257492065,
+        1.246999979019165,
+        1.8700000047683716
+      ],
+      "ground_origin": true,
+      "material_count": 7,
+      "materials": [
+        "TC_oak",
+        "TC_oak_dark",
+        "TC_canvas",
+        "TC_canvas_dark",
+        "TC_rope",
+        "TC_sage",
+        "TC_rust_cloth"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "79134b354d2ac13328721a867b3b195673e853bd4e08e80df894cd7bc98edeb0",
+      "bytes": 60356
+    },
+    {
+      "id": "strapped_tent_bundle",
+      "label_zh": "绑扎帐篷与营杆",
+      "file": "game/assets/generated/travel_cargo_20260912/strapped_tent_bundle.glb",
+      "triangles": 3216,
+      "vertices": 1616,
+      "dimensions_m": [
+        1.55,
+        0.486,
+        0.67414
+      ],
+      "bounds_min_m": [
+        -0.7799999713897705,
+        -0.24300000071525574,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.7699997425079346,
+        0.24300000071525574,
+        0.6741399765014648
+      ],
+      "ground_origin": true,
+      "material_count": 4,
+      "materials": [
+        "TC_canvas",
+        "TC_leather",
+        "TC_oak_light",
+        "TC_canvas_dark"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "9dc99eae5bd26627f265e6099491be4e430e9c031419aeca677c2a53f7bb631d",
+      "bytes": 109384
+    },
+    {
+      "id": "folding_field_stool",
+      "label_zh": "交叉折叠营凳",
+      "file": "game/assets/generated/travel_cargo_20260912/folding_field_stool.glb",
+      "triangles": 544,
+      "vertices": 242,
+      "dimensions_m": [
+        0.556,
+        0.5,
+        0.52987
+      ],
+      "bounds_min_m": [
+        -0.27799999713897705,
+        -0.25,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.27799999713897705,
+        0.25,
+        0.5298681259155273
+      ],
+      "ground_origin": true,
+      "material_count": 5,
+      "materials": [
+        "TC_oak",
+        "TC_oak_light",
+        "TC_brass",
+        "TC_oak_dark",
+        "TC_sage"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "fa1de4f5943a0448dc6fa6f25992141a943b5090713fc79cbc5b2e48dd422bf9",
+      "bytes": 36884
+    },
+    {
+      "id": "leather_scroll_case",
+      "label_zh": "皮革地图筒",
+      "file": "game/assets/generated/travel_cargo_20260912/leather_scroll_case.glb",
+      "triangles": 1200,
+      "vertices": 584,
+      "dimensions_m": [
+        0.7,
+        0.204,
+        0.38389
+      ],
+      "bounds_min_m": [
+        -0.3400000035762787,
+        -0.10199999809265137,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.35999998450279236,
+        0.10199999809265137,
+        0.38388606905937195
+      ],
+      "ground_origin": true,
+      "material_count": 2,
+      "materials": [
+        "TC_leather",
+        "TC_brass"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "5b2c013b8b25a24ceb989aaae196861fecb1005c9c3186cf531ae493f5cc3d17",
+      "bytes": 45720
+    },
+    {
+      "id": "stitched_waterskin",
+      "label_zh": "缝线皮水囊",
+      "file": "game/assets/generated/travel_cargo_20260912/stitched_waterskin.glb",
+      "triangles": 1324,
+      "vertices": 668,
+      "dimensions_m": [
+        0.49578,
+        0.164,
+        0.56928
+      ],
+      "bounds_min_m": [
+        -0.17000000178813934,
+        -0.0820000022649765,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.32578229904174805,
+        0.0820000022649765,
+        0.5692833662033081
+      ],
+      "ground_origin": true,
+      "material_count": 4,
+      "materials": [
+        "TC_leather",
+        "TC_oak_light",
+        "TC_rope",
+        "TC_thread"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "7f5d96e2e2edcef33db673bbfb061078f7e377b2992661591e9e41e8b0c91705",
+      "bytes": 44756
+    },
+    {
+      "id": "open_travel_ration_case",
+      "label_zh": "开盖旅行食盒",
+      "file": "game/assets/generated/travel_cargo_20260912/open_travel_ration_case.glb",
+      "triangles": 1556,
+      "vertices": 714,
+      "dimensions_m": [
+        0.5,
+        0.5375,
+        0.215
+      ],
+      "bounds_min_m": [
+        -0.25,
+        -0.16750000417232513,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.25,
+        0.3700000047683716,
+        0.2150000035762787
+      ],
+      "ground_origin": true,
+      "material_count": 5,
+      "materials": [
+        "TC_oak_light",
+        "TC_oak",
+        "TC_brass",
+        "TC_bread",
+        "TC_wheat"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "eb158cd28bfc30096c5aa29342624ab2f0fd1ba8152f8077806cf832352595df",
+      "bytes": 64860
+    },
+    {
+      "id": "coiled_hemp_rope",
+      "label_zh": "连续盘绕麻绳",
+      "file": "game/assets/generated/travel_cargo_20260912/coiled_hemp_rope.glb",
+      "triangles": 9688,
+      "vertices": 4846,
+      "dimensions_m": [
+        0.98745,
+        0.73725,
+        0.04
+      ],
+      "bounds_min_m": [
+        -0.3684718906879425,
+        -0.37932103872299194,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.6189736723899841,
+        0.3579258620738983,
+        0.03999999910593033
+      ],
+      "ground_origin": true,
+      "material_count": 1,
+      "materials": [
+        "TC_rope"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "87a965b0258c7f73db7d1a8b5412b787ff23925da5fa416974b7452f497efa68",
+      "bytes": 298748
+    },
+    {
+      "id": "wooden_pulley_block",
+      "label_zh": "木壳吊运滑轮",
+      "file": "game/assets/generated/travel_cargo_20260912/wooden_pulley_block.glb",
+      "triangles": 2684,
+      "vertices": 1352,
+      "dimensions_m": [
+        0.28,
+        0.26,
+        0.55836
+      ],
+      "bounds_min_m": [
+        -0.14000000059604645,
+        -0.12999999523162842,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.14000000059604645,
+        0.12999996542930603,
+        0.5583570599555969
+      ],
+      "ground_origin": true,
+      "material_count": 4,
+      "materials": [
+        "TC_oak",
+        "TC_brass",
+        "TC_rope",
+        "TC_iron"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "8177069cee15b6a66e552f7f143cce67945d0c37b69b7ffd187e37180654a9a5",
+      "bytes": 84460
+    },
+    {
+      "id": "iron_mooring_cleat",
+      "label_zh": "铁制系缆座",
+      "file": "game/assets/generated/travel_cargo_20260912/iron_mooring_cleat.glb",
+      "triangles": 340,
+      "vertices": 168,
+      "dimensions_m": [
+        0.7428,
+        0.3,
+        0.3856
+      ],
+      "bounds_min_m": [
+        -0.3713991940021515,
+        -0.15000000596046448,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.3713991940021515,
+        0.15000000596046448,
+        0.38559669256210327
+      ],
+      "ground_origin": true,
+      "material_count": 3,
+      "materials": [
+        "TC_oak_dark",
+        "TC_iron",
+        "TC_rope"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "e030d40e69d380901a273f5b894376c1ad75951a13bc60043f9bbe4a4027bb47",
+      "bytes": 19356
+    },
+    {
+      "id": "fishing_rod_stand",
+      "label_zh": "渔竿与浮标架",
+      "file": "game/assets/generated/travel_cargo_20260912/fishing_rod_stand.glb",
+      "triangles": 4600,
+      "vertices": 2264,
+      "dimensions_m": [
+        0.86,
+        0.6,
+        1.92229
+      ],
+      "bounds_min_m": [
+        -0.4300000071525574,
+        -0.30000001192092896,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.4300000071525574,
+        0.30000001192092896,
+        1.9222924709320068
+      ],
+      "ground_origin": true,
+      "material_count": 6,
+      "materials": [
+        "TC_oak",
+        "TC_oak_light",
+        "TC_oak_dark",
+        "TC_leather",
+        "TC_thread",
+        "TC_rust_cloth"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "5735171f9cdc0748ef8bbc101e7df9b5ea6649d0f1fb2139a71306093999fb70",
+      "bytes": 181096
+    },
+    {
+      "id": "woven_fishing_creel",
+      "label_zh": "开口编织鱼篓",
+      "file": "game/assets/generated/travel_cargo_20260912/woven_fishing_creel.glb",
+      "triangles": 12440,
+      "vertices": 6308,
+      "dimensions_m": [
+        0.60485,
+        0.564,
+        0.6348
+      ],
+      "bounds_min_m": [
+        -0.3228546977043152,
+        -0.28200000524520874,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.28200000524520874,
+        0.28200000524520874,
+        0.6347997188568115
+      ],
+      "ground_origin": true,
+      "material_count": 5,
+      "materials": [
+        "TC_thread",
+        "TC_oak_light",
+        "TC_oak",
+        "TC_oak_dark",
+        "TC_leather"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "37ca1493fd573402055a716b1865421635de10a1d2d6ba228503d20b634ad7b4",
+      "bytes": 428684
+    },
+    {
+      "id": "air_drying_fish_rack",
+      "label_zh": "悬挂风干鱼架",
+      "file": "game/assets/generated/travel_cargo_20260912/air_drying_fish_rack.glb",
+      "triangles": 3724,
+      "vertices": 1872,
+      "dimensions_m": [
+        1.44,
+        0.5241,
+        1.18897
+      ],
+      "bounds_min_m": [
+        -0.7200000286102295,
+        -0.26204854249954224,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.7199999094009399,
+        0.2620485723018646,
+        1.1889688968658447
+      ],
+      "ground_origin": true,
+      "material_count": 5,
+      "materials": [
+        "TC_oak",
+        "TC_oak_dark",
+        "TC_rope",
+        "TC_fish",
+        "TC_black"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "d03dc1c3b9cc7aee3ffb9edbab09a1d80f92531e540268662021bf3cc4c0a215",
+      "bytes": 132520
+    },
+    {
+      "id": "netted_cargo_bundle",
+      "label_zh": "绳网货物包",
+      "file": "game/assets/generated/travel_cargo_20260912/netted_cargo_bundle.glb",
+      "triangles": 1848,
+      "vertices": 934,
+      "dimensions_m": [
+        0.99912,
+        0.914,
+        0.95
+      ],
+      "bounds_min_m": [
+        -0.4995598793029785,
+        -0.45699992775917053,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.4995598793029785,
+        0.45699992775917053,
+        0.949999988079071
+      ],
+      "ground_origin": true,
+      "material_count": 3,
+      "materials": [
+        "TC_canvas_dark",
+        "TC_canvas",
+        "TC_rope"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "5836d03c76d0ca42e709e062e0f352894b476f61cfc045223e5f82c6c249e7fc",
+      "bytes": 88488
+    },
+    {
+      "id": "stacked_timber_pallets",
+      "label_zh": "叠放木货板",
+      "file": "game/assets/generated/travel_cargo_20260912/stacked_timber_pallets.glb",
+      "triangles": 3852,
+      "vertices": 1728,
+      "dimensions_m": [
+        1.15,
+        0.93,
+        0.41723
+      ],
+      "bounds_min_m": [
+        -0.574999988079071,
+        -0.4650000035762787,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.574999988079071,
+        0.4650000035762787,
+        0.4172265827655792
+      ],
+      "ground_origin": true,
+      "material_count": 3,
+      "materials": [
+        "TC_oak_dark",
+        "TC_oak_light",
+        "TC_grain"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "046d3cc0e5d994e990a128a88163c4370a7d6ed851c687a4affafc14f6a57edd",
+      "bytes": 203972
+    },
+    {
+      "id": "partitioned_ceramic_crate",
+      "label_zh": "陶器分格运输箱",
+      "file": "game/assets/generated/travel_cargo_20260912/partitioned_ceramic_crate.glb",
+      "triangles": 30572,
+      "vertices": 15066,
+      "dimensions_m": [
+        1.065,
+        0.784,
+        0.5655
+      ],
+      "bounds_min_m": [
+        -0.5325000286102295,
+        -0.39800000190734863,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.5325000286102295,
+        0.38600000739097595,
+        0.5654999613761902
+      ],
+      "ground_origin": true,
+      "material_count": 8,
+      "materials": [
+        "TC_oak_light",
+        "TC_grain",
+        "TC_iron",
+        "TC_oak",
+        "TC_oak_dark",
+        "TC_terracotta",
+        "TC_clay_light",
+        "TC_canvas_dark"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "199a5d7f00898a370a9e439e6795abde2aa43ea81de28c76d07c6220919c5ea0",
+      "bytes": 1060576
+    },
+    {
+      "id": "rope_bound_cloth_bale",
+      "label_zh": "麻绳布料包",
+      "file": "game/assets/generated/travel_cargo_20260912/rope_bound_cloth_bale.glb",
+      "triangles": 756,
+      "vertices": 314,
+      "dimensions_m": [
+        0.9871,
+        0.68442,
+        0.57715
+      ],
+      "bounds_min_m": [
+        -0.49818652868270874,
+        -0.34599998593330383,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.4889161288738251,
+        0.3384193778038025,
+        0.5771530270576477
+      ],
+      "ground_origin": true,
+      "material_count": 4,
+      "materials": [
+        "TC_canvas",
+        "TC_rope",
+        "TC_canvas_dark",
+        "TC_paper"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "bbedb3d64057cd12f5c39ef5b14fe265d3b910c1f8a388292176c0137d4f248a",
+      "bytes": 48516
+    },
+    {
+      "id": "hoist_barrel_sling",
+      "label_zh": "吊桶绳套",
+      "file": "game/assets/generated/travel_cargo_20260912/hoist_barrel_sling.glb",
+      "triangles": 3100,
+      "vertices": 1578,
+      "dimensions_m": [
+        0.752,
+        0.752,
+        1.13134
+      ],
+      "bounds_min_m": [
+        -0.37599998712539673,
+        -0.37599998712539673,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.37599998712539673,
+        0.37599998712539673,
+        1.131341576576233
+      ],
+      "ground_origin": true,
+      "material_count": 4,
+      "materials": [
+        "TC_oak",
+        "TC_iron",
+        "TC_grain",
+        "TC_rope"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "176abb9f48023a80164f82d0193bc0a27b38edc7880fd00ccae8ab348a2199b5",
+      "bytes": 109396
+    },
+    {
+      "id": "carved_route_waystone",
+      "label_zh": "刻箭头路石",
+      "file": "game/assets/generated/travel_cargo_20260912/carved_route_waystone.glb",
+      "triangles": 716,
+      "vertices": 320,
+      "dimensions_m": [
+        0.58,
+        0.58,
+        0.766
+      ],
+      "bounds_min_m": [
+        -0.28999999165534973,
+        -0.28999999165534973,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.28999999165534973,
+        0.28999999165534973,
+        0.765999972820282
+      ],
+      "ground_origin": true,
+      "material_count": 4,
+      "materials": [
+        "TC_stone",
+        "TC_stone_light",
+        "TC_ink",
+        "TC_sage"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "d834a04cf38880aa5e72a9193c8d2719b00acb94b40763b034ab58842ef7c335",
+      "bytes": 35428
+    },
+    {
+      "id": "caged_travel_lantern",
+      "label_zh": "护笼旅行提灯",
+      "file": "game/assets/generated/travel_cargo_20260912/caged_travel_lantern.glb",
+      "triangles": 968,
+      "vertices": 456,
+      "dimensions_m": [
+        0.34,
+        0.34,
+        0.658
+      ],
+      "bounds_min_m": [
+        -0.17000000178813934,
+        -0.17000000178813934,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.17000000178813934,
+        0.17000000178813934,
+        0.6579999923706055
+      ],
+      "ground_origin": true,
+      "material_count": 4,
+      "materials": [
+        "TC_iron",
+        "TC_glass",
+        "TC_canvas",
+        "TC_copper"
+      ],
+      "removed_small_faces": 0,
+      "sha256": "c01391649cd3040f1380886b437cb7ad08b9d2a19090bcf77cec573908a1ba07",
+      "bytes": 46732
+    },
+    {
+      "id": "lapstrake_river_rowboat",
+      "label_zh": "搭接木板河舟",
+      "file": "game/assets/generated/travel_cargo_20260912/lapstrake_river_rowboat.glb",
+      "triangles": 3136,
+      "vertices": 1511,
+      "dimensions_m": [
+        1.358,
+        3.36093,
+        0.729
+      ],
+      "bounds_min_m": [
+        -0.6790000200271606,
+        -1.6804674863815308,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.6790000200271606,
+        1.6804674863815308,
+        0.7289999723434448
+      ],
+      "ground_origin": true,
+      "materials": [
+        "TC_oak",
+        "TC_oak_light",
+        "TC_oak_dark",
+        "TC_grain",
+        "TC_iron"
+      ],
+      "material_count": 5,
+      "sha256": "c033e4dcc49e3dcc0e0ed58d05767651d5ba09984aa14ac497b57183ee061c03",
+      "bytes": 141684
+    },
+    {
+      "id": "paired_wooden_oars",
+      "label_zh": "双支木桨",
+      "file": "game/assets/generated/travel_cargo_20260912/paired_wooden_oars.glb",
+      "triangles": 1912,
+      "vertices": 920,
+      "dimensions_m": [
+        0.65,
+        2.075,
+        0.06612
+      ],
+      "bounds_min_m": [
+        -0.32499998807907104,
+        -0.5249999761581421,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.32499998807907104,
+        1.5499998331069946,
+        0.06612436473369598
+      ],
+      "ground_origin": true,
+      "materials": [
+        "TC_oak_light",
+        "TC_oak_dark",
+        "TC_leather"
+      ],
+      "material_count": 3,
+      "sha256": "ce1fe48db6699355e9739ca90cdf336b3134f0822ecfec65bec3ed569c69d1da",
+      "bytes": 79416
+    },
+    {
+      "id": "wood_stock_river_anchor",
+      "label_zh": "木横杆河锚",
+      "file": "game/assets/generated/travel_cargo_20260912/wood_stock_river_anchor.glb",
+      "triangles": 928,
+      "vertices": 444,
+      "dimensions_m": [
+        0.92,
+        0.175,
+        1.12422
+      ],
+      "bounds_min_m": [
+        -0.46000000834465027,
+        -0.10499998927116394,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.46000000834465027,
+        0.07000000029802322,
+        1.124223232269287
+      ],
+      "ground_origin": true,
+      "materials": [
+        "TC_iron",
+        "TC_oak"
+      ],
+      "material_count": 2,
+      "sha256": "74b71430ab68600a507caf3287d866155b2a00434cfe77ae8997788a1f064de6",
+      "bytes": 40760
+    },
+    {
+      "id": "woven_funnel_fish_trap",
+      "label_zh": "漏斗口编织鱼笼",
+      "file": "game/assets/generated/travel_cargo_20260912/woven_funnel_fish_trap.glb",
+      "triangles": 6768,
+      "vertices": 3498,
+      "dimensions_m": [
+        0.54078,
+        1.04426,
+        0.60973
+      ],
+      "bounds_min_m": [
+        -0.2703922986984253,
+        -0.4543386995792389,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.2703922986984253,
+        0.589919924736023,
+        0.6097336411476135
+      ],
+      "ground_origin": true,
+      "materials": [
+        "TC_oak_light",
+        "TC_oak",
+        "TC_oak_dark",
+        "TC_rope"
+      ],
+      "material_count": 4,
+      "sha256": "87f09f7f167e0822d879caba7a4b90fccfc47b5b2221f4ba993c5cfbec1dc49b",
+      "bytes": 259864
+    },
+    {
+      "id": "diamond_fishing_net_frame",
+      "label_zh": "菱格渔网晾架",
+      "file": "game/assets/generated/travel_cargo_20260912/diamond_fishing_net_frame.glb",
+      "triangles": 8488,
+      "vertices": 4294,
+      "dimensions_m": [
+        1.7,
+        0.5,
+        1.7
+      ],
+      "bounds_min_m": [
+        -0.8500000238418579,
+        -0.25,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.8500000238418579,
+        0.25,
+        1.7000000476837158
+      ],
+      "ground_origin": true,
+      "materials": [
+        "TC_oak",
+        "TC_oak_dark",
+        "TC_oak_light",
+        "TC_rope"
+      ],
+      "material_count": 4,
+      "sha256": "47ad8a5d5ac57280dec067f77cd5597af6d4eaec63432ce2491b44bfcd742da0",
+      "bytes": 319072
+    },
+    {
+      "id": "flagged_wooden_fishing_buoy",
+      "label_zh": "木浮标与布旗",
+      "file": "game/assets/generated/travel_cargo_20260912/flagged_wooden_fishing_buoy.glb",
+      "triangles": 1884,
+      "vertices": 950,
+      "dimensions_m": [
+        0.60934,
+        0.50885,
+        1.137
+      ],
+      "bounds_min_m": [
+        -0.24899999797344208,
+        -0.25984662771224976,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.3603411614894867,
+        0.24899999797344208,
+        1.1369975805282593
+      ],
+      "ground_origin": true,
+      "materials": [
+        "TC_oak_light",
+        "TC_rust_cloth",
+        "TC_oak_dark",
+        "TC_sage",
+        "TC_rope"
+      ],
+      "material_count": 5,
+      "sha256": "1f6df00aed4c0bebb263ec16da4cbceeefb1adbf4b2a24ae1cabc47da798c39d",
+      "bytes": 65384
+    },
+    {
+      "id": "furled_canvas_sail",
+      "label_zh": "卷帆与桁杆",
+      "file": "game/assets/generated/travel_cargo_20260912/furled_canvas_sail.glb",
+      "triangles": 3056,
+      "vertices": 1532,
+      "dimensions_m": [
+        2.08,
+        0.416,
+        0.416
+      ],
+      "bounds_min_m": [
+        -1.0399999618530273,
+        -0.20799998939037323,
+        0.0
+      ],
+      "bounds_max_m": [
+        1.0399997234344482,
+        0.20800000429153442,
+        0.41600000858306885
+      ],
+      "ground_origin": true,
+      "materials": [
+        "TC_canvas",
+        "TC_oak_light",
+        "TC_rope",
+        "TC_canvas_dark"
+      ],
+      "material_count": 4,
+      "sha256": "6bb802fbdaa3c151f22bb175582d2b4f6bcd653650bb592773e1015c5dae4863",
+      "bytes": 107256
+    },
+    {
+      "id": "timber_frame_hammock",
+      "label_zh": "木架悬吊布床",
+      "file": "game/assets/generated/travel_cargo_20260912/timber_frame_hammock.glb",
+      "triangles": 916,
+      "vertices": 434,
+      "dimensions_m": [
+        3.05,
+        1.0,
+        1.03958
+      ],
+      "bounds_min_m": [
+        -1.524999976158142,
+        -0.5,
+        0.0
+      ],
+      "bounds_max_m": [
+        1.524999976158142,
+        0.5,
+        1.0395773649215698
+      ],
+      "ground_origin": true,
+      "materials": [
+        "TC_oak",
+        "TC_oak_dark",
+        "TC_sage",
+        "TC_canvas",
+        "TC_oak_light",
+        "TC_rope"
+      ],
+      "material_count": 6,
+      "sha256": "eadc8f2f2b1a47b5ff82f13d8439ffc48e60ca9cb1f3f0bc926027bf5a7e8ff5",
+      "bytes": 62248
+    },
+    {
+      "id": "roped_ferry_gangplank",
+      "label_zh": "扶绳渡船跳板",
+      "file": "game/assets/generated/travel_cargo_20260912/roped_ferry_gangplank.glb",
+      "triangles": 3080,
+      "vertices": 1404,
+      "dimensions_m": [
+        0.91,
+        2.435,
+        0.99345
+      ],
+      "bounds_min_m": [
+        -0.45500001311302185,
+        -1.2174999713897705,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.45500001311302185,
+        1.2174999713897705,
+        0.9934532642364502
+      ],
+      "ground_origin": true,
+      "materials": [
+        "TC_oak_dark",
+        "TC_oak_light",
+        "TC_grain",
+        "TC_iron",
+        "TC_rope"
+      ],
+      "material_count": 5,
+      "sha256": "7df31b9a9fe0e59253b7a8301fbd3489bf65db86a2987e3d97bfa3281e75d0f8",
+      "bytes": 165044
+    },
+    {
+      "id": "trail_walking_stick_rack",
+      "label_zh": "旅行手杖架",
+      "file": "game/assets/generated/travel_cargo_20260912/trail_walking_stick_rack.glb",
+      "triangles": 4596,
+      "vertices": 2304,
+      "dimensions_m": [
+        0.63,
+        0.37,
+        1.49731
+      ],
+      "bounds_min_m": [
+        -0.3149999976158142,
+        -0.1850000023841858,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.3149999976158142,
+        0.1850000023841858,
+        1.4973074197769165
+      ],
+      "ground_origin": true,
+      "materials": [
+        "TC_oak_dark",
+        "TC_oak",
+        "TC_iron",
+        "TC_leather",
+        "TC_oak_light"
+      ],
+      "material_count": 5,
+      "sha256": "2501c25b1ea4e0bdf3111d598443c0250d38c56e9fc5ae962d190bafc863a6ae",
+      "bytes": 169800
+    },
+    {
+      "id": "empty_courier_bird_cage",
+      "label_zh": "空信鸟运输笼",
+      "file": "game/assets/generated/travel_cargo_20260912/empty_courier_bird_cage.glb",
+      "triangles": 9442,
+      "vertices": 4745,
+      "dimensions_m": [
+        0.64379,
+        0.444,
+        0.786
+      ],
+      "bounds_min_m": [
+        -0.32189276814460754,
+        -0.22200000286102295,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.32189276814460754,
+        0.22200000286102295,
+        0.7859999537467957
+      ],
+      "ground_origin": true,
+      "materials": [
+        "TC_oak_light",
+        "TC_iron",
+        "TC_oak",
+        "TC_oak_dark",
+        "TC_terracotta",
+        "TC_clay_light",
+        "TC_leather"
+      ],
+      "material_count": 7,
+      "sha256": "3927f94eeef808b9a035e4798b9739d0d2e4c338262e828aa3fbbf30a21328ed",
+      "bytes": 334836
+    },
+    {
+      "id": "folding_route_map_table",
+      "label_zh": "折叠路线图桌",
+      "file": "game/assets/generated/travel_cargo_20260912/folding_route_map_table.glb",
+      "triangles": 2556,
+      "vertices": 1204,
+      "dimensions_m": [
+        1.072,
+        0.82,
+        0.96456
+      ],
+      "bounds_min_m": [
+        -0.5360000133514404,
+        -0.4099999964237213,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.5360000133514404,
+        0.4099999964237213,
+        0.9645602107048035
+      ],
+      "ground_origin": true,
+      "materials": [
+        "TC_oak",
+        "TC_oak_light",
+        "TC_brass",
+        "TC_grain",
+        "TC_paper",
+        "TC_sage",
+        "TC_ink",
+        "TC_iron"
+      ],
+      "material_count": 8,
+      "sha256": "e86f483376d79c65bfe489c1eecf7ee68d8683e4bdbc1f7063c1de0bfff28af4",
+      "bytes": 127296
+    }
+  ],
+  "total_triangles": 169554,
+  "source_libraries": [
+    "Art/Generated/TravelCargo20260912/travel_cargo_library.blend",
+    "Art/Generated/TravelCargo20260912/river_trade_library.blend"
+  ]
+}

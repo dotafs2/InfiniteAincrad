@@ -1,0 +1,576 @@
+{
+  "units": "metres",
+  "source_axes": "Blender X right, -Y front, Z up; standard glTF Y-up conversion",
+  "authorship": "2026-09-12 GPT-6 Astra authorized parallel art task",
+  "external_inputs": [],
+  "asset_count": 16,
+  "assets": [
+    {
+      "id": "SF01_Mercer_Display_Window",
+      "title": "18-pane mercer display window",
+      "file": "game/assets/generated/shopfront_details_20260912/SF01_Mercer_Display_Window.glb",
+      "sha256": "49fd7f3e49d57aea532344ecc5663c04196dccfe133a6b67890fda6199c06c32",
+      "bytes": 1242432,
+      "dimensions_xyz_m": [
+        2.96,
+        0.55,
+        2.2125
+      ],
+      "bounds_xyz_m": [
+        [
+          -1.4800000190734863,
+          -0.4300000071525574,
+          0.0
+        ],
+        [
+          1.4800000190734863,
+          0.12000000476837158,
+          2.2125000953674316
+        ]
+      ],
+      "triangles": 5196,
+      "materials": [
+        "Shopfront_darkwood",
+        "Shopfront_oak",
+        "Shopfront_oak_light",
+        "Shopfront_stone_light",
+        "Shopfront_slate",
+        "Shopfront_glass",
+        "Shopfront_brass"
+      ],
+      "origin": "wall attachment: lower sill centre, Y=0; requires facade recess",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF02_Folding_Service_Hatch",
+      "title": "Open folding service hatch",
+      "file": "game/assets/generated/shopfront_details_20260912/SF02_Folding_Service_Hatch.glb",
+      "sha256": "aab7c1abbc2471b2b0adfee94e7a7906f52b0ab3d15fb33add664bb593ca1ab7",
+      "bytes": 1038688,
+      "dimensions_xyz_m": [
+        2.55,
+        1.185,
+        2.18079
+      ],
+      "bounds_xyz_m": [
+        [
+          -1.274999976158142,
+          -0.9450000524520874,
+          0.0
+        ],
+        [
+          1.274999976158142,
+          0.24000000953674316,
+          2.180793285369873
+        ]
+      ],
+      "triangles": 6892,
+      "materials": [
+        "Shopfront_oak",
+        "Shopfront_darkwood",
+        "Shopfront_oak_light",
+        "Shopfront_iron",
+        "Shopfront_brass",
+        "Shopfront_sage",
+        "Shopfront_paper"
+      ],
+      "origin": "wall attachment: bracket foot centre, Y=0; display pose is fixed",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF03_Diamond_Lead_Casement",
+      "title": "Diamond lead casement",
+      "file": "game/assets/generated/shopfront_details_20260912/SF03_Diamond_Lead_Casement.glb",
+      "sha256": "41b568763f7a35d7b2b9f0998e40f9c196fb4c59416d4ee14910213fb4c716ee",
+      "bytes": 1315056,
+      "dimensions_xyz_m": [
+        1.64,
+        0.47,
+        2.13
+      ],
+      "bounds_xyz_m": [
+        [
+          -0.8199999928474426,
+          -0.38499999046325684,
+          0.0
+        ],
+        [
+          0.8199999928474426,
+          0.08499999344348907,
+          2.130000114440918
+        ]
+      ],
+      "triangles": 5314,
+      "materials": [
+        "Shopfront_darkwood",
+        "Shopfront_glass",
+        "Shopfront_iron",
+        "Shopfront_oak_light",
+        "Shopfront_brass",
+        "Shopfront_stone_light"
+      ],
+      "origin": "wall attachment: sill base centre, Y=0",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF04_Radial_Attic_Oculus",
+      "title": "Radial attic oculus",
+      "file": "game/assets/generated/shopfront_details_20260912/SF04_Radial_Attic_Oculus.glb",
+      "sha256": "742a4d320beb4d34a6b5b506f289b6ed395536da151f6af83b995dd2fcbfb0fe",
+      "bytes": 2600296,
+      "dimensions_xyz_m": [
+        1.23,
+        0.2725,
+        1.23
+      ],
+      "bounds_xyz_m": [
+        [
+          -0.6150000095367432,
+          -0.2475000023841858,
+          0.0
+        ],
+        [
+          0.6150000095367432,
+          0.02500000037252903,
+          1.2299998998641968
+        ]
+      ],
+      "triangles": 15756,
+      "materials": [
+        "Shopfront_stone_light",
+        "Shopfront_oak",
+        "Shopfront_glass",
+        "Shopfront_oak_light",
+        "Shopfront_brass",
+        "Shopfront_stone"
+      ],
+      "origin": "wall attachment: bounding base, Y=0",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF05_Tiled_Gable_Dormer",
+      "title": "Tiled gable dormer",
+      "file": "game/assets/generated/shopfront_details_20260912/SF05_Tiled_Gable_Dormer.glb",
+      "sha256": "c439f73989750b23015dd28ce49a5fc43734701366342e36cde0971fce63f7ef",
+      "bytes": 1801036,
+      "dimensions_xyz_m": [
+        1.78,
+        1.405,
+        2.163
+      ],
+      "bounds_xyz_m": [
+        [
+          -0.8899999856948853,
+          -0.7825000882148743,
+          0.0
+        ],
+        [
+          0.8899999856948853,
+          0.6225000619888306,
+          2.1629998683929443
+        ]
+      ],
+      "triangles": 9236,
+      "materials": [
+        "Shopfront_stone_light",
+        "Shopfront_oak",
+        "Shopfront_glass",
+        "Shopfront_oak_light",
+        "Shopfront_stone",
+        "Shopfront_darkwood",
+        "Shopfront_roof_dark",
+        "Shopfront_roof",
+        "Shopfront_roof_light"
+      ],
+      "origin": "roof attachment: base centre, Y=0; roof cutout/placement required",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF06_Open_Flue_Chimney",
+      "title": "Open flue chimney with tiled cap",
+      "file": "game/assets/generated/shopfront_details_20260912/SF06_Open_Flue_Chimney.glb",
+      "sha256": "b0eb4e63808bf95000f14052424a857893c89e1363bb1e284e7e61c739c52c00",
+      "bytes": 2762548,
+      "dimensions_xyz_m": [
+        1.39,
+        1.095,
+        1.887
+      ],
+      "bounds_xyz_m": [
+        [
+          -0.6949999928474426,
+          -0.5475000143051147,
+          0.0
+        ],
+        [
+          0.6949999928474426,
+          0.5475000143051147,
+          1.8869998455047607
+        ]
+      ],
+      "triangles": 17040,
+      "materials": [
+        "Shopfront_roof",
+        "Shopfront_roof_dark",
+        "Shopfront_roof_light",
+        "Shopfront_stone_light",
+        "Shopfront_stone",
+        "Shopfront_darkwood",
+        "Shopfront_oak"
+      ],
+      "origin": "roof attachment: base centre; flashing and roof cutout not included",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF07_Clay_Tile_Rain_Eave",
+      "title": "Supported clay tile rain eave",
+      "file": "game/assets/generated/shopfront_details_20260912/SF07_Clay_Tile_Rain_Eave.glb",
+      "sha256": "1ad719955fe2ec6df6416c82e017a7e87097328993398f2db4ba82d875b9d6ca",
+      "bytes": 1370776,
+      "dimensions_xyz_m": [
+        2.65,
+        0.94456,
+        0.79971
+      ],
+      "bounds_xyz_m": [
+        [
+          -1.3250000476837158,
+          -0.8986865878105164,
+          0.0
+        ],
+        [
+          1.3250000476837158,
+          0.04587726294994354,
+          0.7997075319290161
+        ]
+      ],
+      "triangles": 8604,
+      "materials": [
+        "Shopfront_oak",
+        "Shopfront_oak_light",
+        "Shopfront_brass",
+        "Shopfront_roof_light",
+        "Shopfront_roof_dark",
+        "Shopfront_roof"
+      ],
+      "origin": "wall attachment: bracket foot, Y=0",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF08_Carved_Timber_Corbel",
+      "title": "Carved timber corbel",
+      "file": "game/assets/generated/shopfront_details_20260912/SF08_Carved_Timber_Corbel.glb",
+      "sha256": "5b3915c0e525a8768fdfce5a7184ecf61ecddeb09982827cdc5b5c332577d1db",
+      "bytes": 570068,
+      "dimensions_xyz_m": [
+        0.25,
+        0.97009,
+        1.4
+      ],
+      "bounds_xyz_m": [
+        [
+          -0.125,
+          -0.9500890970230103,
+          0.0
+        ],
+        [
+          0.125,
+          0.02000001072883606,
+          1.399999976158142
+        ]
+      ],
+      "triangles": 2756,
+      "materials": [
+        "Shopfront_oak",
+        "Shopfront_oak_light",
+        "Shopfront_iron",
+        "Shopfront_brass"
+      ],
+      "origin": "wall attachment: bracket foot, Y=0",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF09_Scalloped_Cloth_Canopy",
+      "title": "Curved scalloped cloth canopy",
+      "file": "game/assets/generated/shopfront_details_20260912/SF09_Scalloped_Cloth_Canopy.glb",
+      "sha256": "aab9dcba8d2240af2cc219f6f64899581475d768d5372b3b53b95d9009a46cdd",
+      "bytes": 4071344,
+      "dimensions_xyz_m": [
+        2.62,
+        1.2435,
+        0.745
+      ],
+      "bounds_xyz_m": [
+        [
+          -1.309999942779541,
+          -1.2260000705718994,
+          0.0
+        ],
+        [
+          1.309999704360962,
+          0.017500001937150955,
+          0.7450003027915955
+        ]
+      ],
+      "triangles": 26212,
+      "materials": [
+        "Shopfront_cloth",
+        "Shopfront_paper",
+        "Shopfront_iron",
+        "Shopfront_brass",
+        "Shopfront_oak"
+      ],
+      "origin": "wall attachment: support base, Y=0",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF10_Stone_Double_Portal",
+      "title": "Stone arched double portal",
+      "file": "game/assets/generated/shopfront_details_20260912/SF10_Stone_Double_Portal.glb",
+      "sha256": "0daac13e212233336eb4f32bce53f565ff0b202c99473450a507305089131a9e",
+      "bytes": 2064640,
+      "dimensions_xyz_m": [
+        2.69,
+        0.57,
+        3.4
+      ],
+      "bounds_xyz_m": [
+        [
+          -1.3450000286102295,
+          -0.36000001430511475,
+          0.0
+        ],
+        [
+          1.3450000286102295,
+          0.21000000834465027,
+          3.4000000953674316
+        ]
+      ],
+      "triangles": 11340,
+      "materials": [
+        "Shopfront_stone",
+        "Shopfront_stone_light",
+        "Shopfront_oak",
+        "Shopfront_stone_dark"
+      ],
+      "origin": "ground/door threshold centre, Y=0; clear opening 1.99m width",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF11_Glazed_Shop_Door",
+      "title": "Glazed panel shop door",
+      "file": "game/assets/generated/shopfront_details_20260912/SF11_Glazed_Shop_Door.glb",
+      "sha256": "edc35c8a1b2865082ccf2a87511a4c5c22f36982a7bbc75a5834cffb9b739aa6",
+      "bytes": 1054368,
+      "dimensions_xyz_m": [
+        1.54,
+        0.45205,
+        2.7825
+      ],
+      "bounds_xyz_m": [
+        [
+          -0.7699999809265137,
+          -0.3070489168167114,
+          0.0
+        ],
+        [
+          0.7699999809265137,
+          0.14500001072883606,
+          2.7825000286102295
+        ]
+      ],
+      "triangles": 3632,
+      "materials": [
+        "Shopfront_oak",
+        "Shopfront_sage",
+        "Shopfront_oak_light",
+        "Shopfront_glass",
+        "Shopfront_iron",
+        "Shopfront_brass",
+        "Shopfront_stone"
+      ],
+      "origin": "ground threshold centre, Y=0; closed static visual",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF12_Herbal_Stone_Niche",
+      "title": "Herbal amphora stone niche",
+      "file": "game/assets/generated/shopfront_details_20260912/SF12_Herbal_Stone_Niche.glb",
+      "sha256": "e8a1fee87d430406dff1d35d4ad09b50f618eed8824b977261295ea81ccd77ff",
+      "bytes": 1571564,
+      "dimensions_xyz_m": [
+        1.56,
+        0.84,
+        2.11706
+      ],
+      "bounds_xyz_m": [
+        [
+          -0.7799999713897705,
+          -0.6000000238418579,
+          0.0
+        ],
+        [
+          0.7799999713897705,
+          0.24000000953674316,
+          2.117060899734497
+        ]
+      ],
+      "triangles": 7720,
+      "materials": [
+        "Shopfront_stone_dark",
+        "Shopfront_stone_light",
+        "Shopfront_stone",
+        "Shopfront_sage",
+        "Shopfront_oak_light"
+      ],
+      "origin": "wall attachment: sill base centre, Y=0; needs wall recess",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF13_Bakery_Pretzel_Emblem",
+      "title": "Bakery pretzel and wheat emblem",
+      "file": "game/assets/generated/shopfront_details_20260912/SF13_Bakery_Pretzel_Emblem.glb",
+      "sha256": "2e41939bd98723b3527de4ef9504549cd298c4223e7fc5a2ac961880f39c9ca9",
+      "bytes": 644620,
+      "dimensions_xyz_m": [
+        0.86,
+        0.89,
+        1.14
+      ],
+      "bounds_xyz_m": [
+        [
+          -0.4300000071525574,
+          -0.8899999856948853,
+          0.0
+        ],
+        [
+          0.4300000071525574,
+          0.0,
+          1.1399999856948853
+        ]
+      ],
+      "triangles": 3768,
+      "materials": [
+        "Shopfront_iron",
+        "Shopfront_brass",
+        "Shopfront_oak_light"
+      ],
+      "origin": "wall attachment: lower bracket centre, Y=0",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF14_Apothecary_Mortar_Emblem",
+      "title": "Apothecary mortar emblem",
+      "file": "game/assets/generated/shopfront_details_20260912/SF14_Apothecary_Mortar_Emblem.glb",
+      "sha256": "8b46f854764560ea9985340aa7a86f73649011eb39d6078d2c4d13901139fe48",
+      "bytes": 413924,
+      "dimensions_xyz_m": [
+        0.77,
+        0.965,
+        1.14
+      ],
+      "bounds_xyz_m": [
+        [
+          -0.38499999046325684,
+          -0.9649999737739563,
+          0.0
+        ],
+        [
+          0.38499999046325684,
+          0.0,
+          1.1399999856948853
+        ]
+      ],
+      "triangles": 1548,
+      "materials": [
+        "Shopfront_iron",
+        "Shopfront_brass",
+        "Shopfront_sage",
+        "Shopfront_oak_light"
+      ],
+      "origin": "wall attachment: lower bracket centre, Y=0",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF15_Tailor_Shears_Emblem",
+      "title": "Tailor shears and needle emblem",
+      "file": "game/assets/generated/shopfront_details_20260912/SF15_Tailor_Shears_Emblem.glb",
+      "sha256": "676c3a1104c7e514e7b76215a89737a30b6f6d799972f9020026f7fa4d849b3e",
+      "bytes": 681504,
+      "dimensions_xyz_m": [
+        0.66029,
+        0.89,
+        1.14
+      ],
+      "bounds_xyz_m": [
+        [
+          -0.30422738194465637,
+          -0.8899999856948853,
+          0.0
+        ],
+        [
+          0.35605868697166443,
+          0.0,
+          1.1399999856948853
+        ]
+      ],
+      "triangles": 5448,
+      "materials": [
+        "Shopfront_iron",
+        "Shopfront_brass"
+      ],
+      "origin": "wall attachment: lower bracket centre, Y=0",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    },
+    {
+      "id": "SF16_Barber_Spiral_Emblem",
+      "title": "Barber spiral pole emblem",
+      "file": "game/assets/generated/shopfront_details_20260912/SF16_Barber_Spiral_Emblem.glb",
+      "sha256": "ee987a4e5f5ca0787e8489166c8cb119903fa0a3bbf735ec6acf096f4ea23885",
+      "bytes": 4028336,
+      "dimensions_xyz_m": [
+        0.33567,
+        0.99783,
+        1.14
+      ],
+      "bounds_xyz_m": [
+        [
+          -0.16783463954925537,
+          -0.9978345632553101,
+          0.0
+        ],
+        [
+          0.16783463954925537,
+          0.0,
+          1.1399999856948853
+        ]
+      ],
+      "triangles": 28324,
+      "materials": [
+        "Shopfront_iron",
+        "Shopfront_brass",
+        "Shopfront_paper",
+        "Shopfront_roof_light",
+        "Shopfront_sage"
+      ],
+      "origin": "wall attachment: lower bracket centre, Y=0",
+      "source": "Original procedural geometry in build_shopfront_details.py; local minimal helper adapted from StreetStructures20260912; all texture maps generated from seeded arithmetic",
+      "runtime_scope": "static visual attachment; no interaction, collision, animation, navigation, LOD or world-state integration"
+    }
+  ]
+}
