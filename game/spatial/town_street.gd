@@ -17,6 +17,7 @@ const MaterialSteering = preload("res://spatial/town_material_steering.gd")
 const ForagingLayout = preload("res://spatial/town_foraging_layout.gd")
 const ForagingSteering = preload("res://spatial/town_foraging_steering.gd")
 const SocialSteering = preload("res://spatial/town_social_steering.gd")
+const TownExpansion = preload("res://spatial/town_expansion.gd")
 var town := Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
@@ -57,6 +58,7 @@ var repair_initial_iron := -1
 var nameplates: Node = null
 var material_visibility: Node3D = null
 var material_steering: RefCounted = null
+var town_expansion_evidence: Dictionary = {}
 var foraging_steering: RefCounted = null
 var social_steering: RefCounted = null
 var foraging_layout_status: Dictionary = {}
@@ -139,6 +141,7 @@ func _ready() -> void:
 		return
 	# Mac environment dressing runs only after a successful market load.
 	_load_floor1_environment_dressing()
+	_load_town_expansion()
 	_build_player()
 	_player.position = Vector3(0, 1.22, 12)
 	_camera_pivot.rotation.y = 0
@@ -452,6 +455,16 @@ func _physics_process(delta: float) -> void:
 
 func _validation_limit_reached() -> bool:
 	return gateway_mode and not capture_dir.is_empty() and validation_decision_limit >= 0 and validation_decisions_started >= validation_decision_limit
+
+func _load_town_expansion() -> void:
+	## Visible walkable expansion south of the plaza, built from existing residence and
+	## environment v2 art. Art only: no resident moves, no home rewrite, no new resources.
+	var expansion := TownExpansion.new()
+	add_child(expansion)
+	expansion.build()
+	town_expansion_evidence = expansion.evidence
+	set_meta("town_expansion", expansion.evidence)
+
 
 func write_gm_evidence_export() -> Dictionary:
 	if gm_export_path.is_empty():
