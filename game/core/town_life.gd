@@ -453,7 +453,18 @@ func _complete_repair_command(command_id: String, payload: Dictionary) -> void:
 	_state.godot.commands[command_id] = {"payload": payload, "status": "completed"}
 
 func _at_worker_station(id: String, worker_id: String) -> bool:
-	return position_of(id).distance_to(destination(worker_id, "rest")) <= WORK_STATION_RANGE
+	## The repair workstation is the worker's own FIXED home/work point, read straight from the
+	## save. It deliberately does not go through destination(), so a pending public-place rest or
+	## trip can never move where repair and production actually happen.
+	return position_of(id).distance_to(home_point(worker_id)) <= WORK_STATION_RANGE
+
+func home_point(id: String) -> Vector3:
+	## Fixed saved home/work point of a resident. This is the only lookup host code should use for
+	## home or workstation semantics; destination(id, action) is for a resident's actual pending
+	## action and may legitimately be a public place instead.
+	if not active_ids().has(id):
+		return Vector3.INF
+	return _vector(_state.godot.homes[id])
 
 func _both_at_worker_station(owner_id: String, worker_id: String) -> bool:
 	return _at_worker_station(owner_id, worker_id) and _at_worker_station(worker_id, worker_id) and position_of(owner_id).distance_to(position_of(worker_id)) <= HANDOFF_RANGE
@@ -590,7 +601,10 @@ func choose_local(id: String) -> String:
 			return action
 	return "wait"
 
-func start_action(id: String, action: String, command_id: String, provenance: String = "local_rule_policy") -> Dictionary:
+func start_action(id: String, action: String, command_id: String, provenance: String = "local_rule_policy", target_position: Vector3 = Vector3.INF) -> Dictionary:
+	## target_position is optional and used only by a place-bound action: the resident must
+	## actually stand at that world point for this action's own rule to accrue. Callers that
+	## omit it keep the original home/berry destination.
 	if not active_ids().has(id) or not _validate_decision_command_id(command_id).ok or provenance not in ALLOWED_DECISION_PROVENANCE:
 		return _failure("invalid_actor_command_or_provenance")
 	var payload := {"actor_id": id, "action": action, "provenance": provenance}
@@ -601,6 +615,12 @@ func start_action(id: String, action: String, command_id: String, provenance: St
 		return _failure("action_unavailable")
 	_state.godot.commands[command_id] = {"payload": payload, "status": "pending"}
 	_state.godot.pending[id] = {"action": action, "command_id": command_id, "elapsed": 0.0, "provenance": provenance}
+	if target_position.is_finite():
+		if not _valid_position([target_position.x, target_position.y, target_position.z]):
+			_state.godot.commands.erase(command_id)
+			_state.godot.pending.erase(id)
+			return _failure("invalid_action_target")
+		_state.godot.pending[id]["target_position"] = [target_position.x, target_position.y, target_position.z]
 	return {"ok": true, "code": "action_started"}
 
 func advance(delta: float) -> Dictionary:

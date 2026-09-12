@@ -132,6 +132,10 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
         ProjectKnowledge(view, personal, "material_sources", 8,
             "id", "label", "material", "access", "position", "last_observed_stock", "observed_elapsed", "observation_event_seq",
             "knowledge_source", "work_seconds_per_unit", "stock_may_have_changed");
+        // Personally learned public places: only the resident's own sourced knowledge, never
+        // another resident's travel, target or the world's full place catalog.
+        ProjectKnowledge(view, personal, "known_places", 8,
+            "place_id", "label", "public_use", "source", "source_id", "learned_event_id", "seq");
         var observation = JsonSerializer.Serialize(personal, WireJson);
         const string instructions = "You are this resident, using only your personal observations and experiences. " +
             "Choose exactly one action ID from available_actions. action_details explains the offered choices. An available action is optional. " +
@@ -141,6 +145,7 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
             "Do not request an ability you already observe working; a proposal does not create it. Waiting without a need is valid. " +
             "World inventory, contract fields and known_rules describe authoritative current facts. Previous reasons and spoken statements can be mistaken beliefs; revise those beliefs when they conflict with current facts, without rewriting history. " +
             "known_skill_notices, known_skill_referrals and material_sources are bounded personal historical knowledge, not proof of current skills, availability or stock. Their absence does not prove nobody has a skill or that no material exists. " +
+            "known_places is your own sourced knowledge of public places you personally read about or saw; walking there is a voluntary choice and arriving grants no resource, no product and no skill. " +
             "Other residents may refuse; only a recorded contract or action receipt establishes an outcome. " +
             "Do not invent resources or memories, install anything, modify rules, or include any other fields.";
         Require(Encoding.UTF8.GetByteCount(instructions + observation) <= 24576);

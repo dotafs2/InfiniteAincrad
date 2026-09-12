@@ -301,11 +301,15 @@ func _feedback_history(id: String, record: Dictionary) -> Array:
 	var trade_commands: Dictionary = town._state.godot.get("trade", {}).get("commands", {})
 	var life_commands: Dictionary = town._state.godot.get("commands", {})
 	var material_commands: Dictionary = town._state.godot.get("materials", {}).get("commands", {})
+	# Voluntary place trips and place-bound rest keep their own journal; without it an accepted
+	# travel choice would still look like "no authoritative execution receipt" after arrival.
+	var place_commands: Dictionary = town._state.godot.get("places", {}).get("commands", {})
 	for item in history:
 		if not item is Dictionary:
 			continue
 		var command_id := str(item.get("command_id", ""))
-		var command: Dictionary = trade_commands.get(command_id, life_commands.get(command_id, material_commands.get(command_id, {})))
+		var command: Dictionary = trade_commands.get(command_id, life_commands.get(command_id,
+			material_commands.get(command_id, place_commands.get(command_id, {}))))
 		var feedback := {"ok": false, "code": "unknown", "reason": "no authoritative execution receipt"}
 		if command.get("payload", {}).get("actor_id", "") == id:
 			# Older trade wrappers may still say pending while the life command settled.

@@ -5,6 +5,16 @@ GPT-6 discusses alternatives, challenges direction and reviews reported outcomes
 the user; it does not implement. Routing or dispatching an authorized DeepSeek task is
 orchestration, not implementation.
 
+Current routing note, 2026-09-13 01:48 Asia/Shanghai: the user explicitly asked to
+continue with DeepSeek plus Codex5.3Spark assistance. DeepSeek stays the implementation
+and test executor for the active capability in its one reused native session; the
+supervisor separately dispatches **one read-only Spark audit on an immutable snapshot**
+(no product writer, no recursive worker, no second paid runtime). GPT-6 keeps planning,
+dispatch and review ownership, DeepSeek development usage stays measured with its cache
+reuse recorded as usual, and the production Kimi-resident / DeepSeek-GM runtime
+assignments and their ledgers are unchanged. This annotation adds a bounded read-only
+reviewer, not a new writer or a budget change.
+
 ## Launchers (verified on this machine vs. legacy machine notes)
 
 The legacy shared launcher notes recorded an older machine's install root

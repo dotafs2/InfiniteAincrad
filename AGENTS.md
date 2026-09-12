@@ -1,4 +1,13 @@
-- 2026-09-12 15:32 Asia/Shanghai latest user routing (current): return to the original
+- 2026-09-13 01:48 Asia/Shanghai latest user routing (current): continue this same chain with
+  DeepSeek plus Codex5.3Spark assistance. DeepSeek remains the implementation/test executor in
+  its one reused native session for the active capability; the supervisor separately dispatches
+  ONE read-only Spark audit on an immutable snapshot (no product writer, no recursive worker, no
+  second paid runtime). GPT-6 keeps planning/dispatch/review; DeepSeek development usage stays
+  measured with its cache reuse recorded; production Kimi-resident and DeepSeek-GM runtime
+  assignments and ledgers are unchanged. Everything below is the previous entry, still in force
+  except where this sentence is narrower.
+
+- 2026-09-12 15:32 Asia/Shanghai user routing (previous): return to the original
   GPT-6 Extra High supervisor plus DeepSeek implementation/execution workflow and
   continue iteration toward the actual ten-Kimi-resident + ten-DeepSeek-background-GM
   world. The GPT-6-only window ended at 15:00 the same day, so that timed override below

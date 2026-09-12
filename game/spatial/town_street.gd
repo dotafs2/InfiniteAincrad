@@ -7,7 +7,7 @@ extends "res://spatial/street_trial.gd"
 ## in clearly labelled offline/local_rule_policy mode and is never executed in
 ## gateway_mode or restore_only.
 
-const Town = preload("res://core/town_runtime.gd")
+const Town = preload("res://core/town_places.gd")
 const TownTurns = preload("res://agents/town_turns.gd")
 const TownTools = preload("res://spatial/town_tools.gd")
 const TownNameplates = preload("res://spatial/town_nameplates.gd")
@@ -18,6 +18,8 @@ const ForagingLayout = preload("res://spatial/town_foraging_layout.gd")
 const ForagingSteering = preload("res://spatial/town_foraging_steering.gd")
 const SocialSteering = preload("res://spatial/town_social_steering.gd")
 const TownExpansion = preload("res://spatial/town_expansion.gd")
+const PlaceNotice = preload("res://spatial/town_place_notice.gd")
+const PlaceSteering = preload("res://spatial/town_place_steering.gd")
 var town := Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
@@ -61,6 +63,9 @@ var material_steering: RefCounted = null
 var town_expansion_evidence: Dictionary = {}
 var foraging_steering: RefCounted = null
 var social_steering: RefCounted = null
+var place_notice: Node3D = null
+var place_steering: RefCounted = null
+var place_notice_evidence: Dictionary = {}
 var foraging_layout_status: Dictionary = {}
 var _foraging_layout_attempted := false
 var _spaced_foraging := false
@@ -163,7 +168,11 @@ func _ready() -> void:
 	material_steering = MaterialSteering.new()
 	foraging_steering = ForagingSteering.new()
 	social_steering = SocialSteering.new()
+	place_steering = PlaceSteering.new()
 	town.require_material_visibility(Callable(material_visibility, "can_observe"))
+	# The public wayfinding notice is one real prop with real line-of-sight sensing. It only
+	# answers "can this resident read/see it"; the world grants and persists the knowledge.
+	_load_public_notice()
 	_build_town_hud()
 	_build_nameplates()
 	if gateway_mode:
@@ -195,7 +204,7 @@ func _ready() -> void:
 			if not candidate.is_empty():
 				_player.position = town.position_of(candidate.owner_id) + Vector3(0, 0.9, 1.5)
 				_camera.global_position = Vector3(0, 5.2, 13.0)
-				_camera.look_at(town.destination(candidate.worker_id, "rest") + Vector3(0, 1.0, 0))
+				_camera.look_at(town.home_point(candidate.worker_id) + Vector3(0, 1.0, 0))
 
 func _sync_residents() -> void:
 	var palette := [Color("954f42"), Color("345f79"), Color("657448")]
@@ -229,7 +238,8 @@ func _sync_residents() -> void:
 		title.modulate = Color("f5e6c8")
 		body.add_child(title)
 		cards[id] = title
-		_work_marker(town.destination(id, "rest"), str(town.resident(id).name) + " · 工作点")
+		## Home/work marker only: the fixed saved home, never a resident's transient public rest.
+		_work_marker(town.home_point(id), str(town.resident(id).name) + " · 工作点")
 		if gateway_mode and model_turns != null:
 			model_turns.ensure_brain(id)
 
@@ -343,6 +353,8 @@ func _physics_process(delta: float) -> void:
 		foraging_steering.retain_active(town.active_ids())
 	if social_steering != null:
 		social_steering.retain_active(town.active_ids())
+	if place_steering != null:
+		place_steering.retain_active(town.active_ids())
 	for id in town.active_ids():
 		var job: Dictionary = town.pending_job(id)
 		var body: CharacterBody3D = bodies[id]
@@ -352,7 +364,9 @@ func _physics_process(delta: float) -> void:
 			_foraging_exit_targets.erase(id)
 			var target := town.destination(id, job.action)
 			var direction := Vector3.ZERO
-			if job.action == "recover_material" and material_steering != null:
+			if (job.action == "travel" or (job.action == "rest" and job.has("place_id"))) and place_steering != null:
+				direction = place_steering.direction_for(id, str(job.command_id), body, target)
+			elif job.action == "recover_material" and material_steering != null:
 				direction = material_steering.direction_for(id, str(job.command_id), body, target)
 			elif _spaced_foraging and job.action in ["harvest_ration", "eat_ration", "rest"] and foraging_steering != null:
 				direction = foraging_steering.direction_for(id, str(job.command_id), body, target)
@@ -367,6 +381,9 @@ func _physics_process(delta: float) -> void:
 				offset.y = 0
 				if offset.length() > 0.30:
 					direction = offset.normalized()
+			if not (job.action == "travel" or (job.action == "rest" and job.has("place_id"))):
+				if place_steering != null:
+					place_steering.clear_route(id)
 			moving = direction.length() > 0.0
 			if moving:
 				body.velocity.x = direction.x * 1.35
@@ -382,13 +399,15 @@ func _physics_process(delta: float) -> void:
 				material_steering.clear_route(id)
 			if social_steering != null:
 				social_steering.clear_route(id)
+			if place_steering != null:
+				place_steering.clear_route(id)
 			# Legacy Mac repair hand-offs temporarily route the owner to the worker.
 			# This route auto-movement is offline/local_rule_policy only and is never
 			# executed in gateway_mode or restore_only.
 			var route_target := Vector3.INF
 			if not gateway_mode and not restore_only:
 				route_target = _repair_route_target(id)
-			var home_offset := Vector3.ZERO if gateway_mode or scripted_trade else (route_target if route_target.is_finite() else town.destination(id, "rest")) - body.position
+			var home_offset := Vector3.ZERO if gateway_mode or scripted_trade else (route_target if route_target.is_finite() else town.home_point(id)) - body.position
 			home_offset.y = 0
 			if _spaced_foraging and foraging_steering != null and not gateway_mode and not scripted_trade and not restore_only:
 				var exit_target := _foraging_idle_exit(id, body)
@@ -421,6 +440,15 @@ func _physics_process(delta: float) -> void:
 				continue
 			if town.pending_job(id).get("action", "") == "recover_material":
 				town.observe_material_travel(id, bodies[id].position, step)
+			if town.pending_job(id).get("action", "") == "travel":
+				town.observe_place_travel(id, bodies[id].position, step)
+		# Public-notice perception: the real scene answers the physics line-of-sight question
+		# and the world grants attributed knowledge only to the resident who could actually
+		# read or see it. Restore-only/paused runs never reach here.
+		if place_notice != null:
+			var observed: Variant = place_notice.observe()
+			if observed is Dictionary and not (observed as Dictionary).get("ok", false):
+				place_notice_evidence = place_notice.evidence()
 		# Legacy Mac repair progression is offline/local_rule_policy only.
 		if not gateway_mode and not restore_only:
 			var repair_step := _progress_repair()
@@ -464,6 +492,19 @@ func _load_town_expansion() -> void:
 	expansion.build()
 	town_expansion_evidence = expansion.evidence
 	set_meta("town_expansion", expansion.evidence)
+
+func _load_public_notice() -> void:
+	## The public wayfinding notice stands at the old-market exit. It is one existing-art prop
+	## plus a straight line-of-sight sensor. The prop is built here during scene load; the sensor
+	## only runs inside the world step, so a paused/restore-only run renders the notice but never
+	## lets anybody read it and never grants knowledge by itself.
+	var notice := PlaceNotice.new()
+	add_child(notice)
+	notice.configure(town, bodies)
+	notice.build()
+	place_notice = notice
+	place_notice_evidence = notice.evidence()
+	set_meta("town_place_notice", place_notice_evidence)
 
 
 func write_gm_evidence_export() -> Dictionary:
@@ -716,8 +757,8 @@ func _repair_route_target(id: String) -> Vector3:
 	if contract.is_empty():
 		return Vector3.INF
 	if id == contract.owner_id and contract.status in ["accepted", "delivered", "completed"]:
-		return town.destination(contract.worker_id, "rest")
-	return town.destination(id, "rest")
+		return town.home_point(contract.worker_id)
+	return town.home_point(id)
 
 func _progress_repair() -> Dictionary:
 	var contract: Dictionary = {}
@@ -729,7 +770,7 @@ func _progress_repair() -> Dictionary:
 		return {"ok": true, "code": "repair_waiting"}
 	var owner_id: String = contract.owner_id
 	var worker_id: String = contract.worker_id
-	var worker_home := town.destination(worker_id, "rest")
+	var worker_home: Vector3 = town.home_point(worker_id)
 	var owner_at_work := town.position_of(owner_id).distance_to(worker_home) <= Town.WORK_STATION_RANGE
 	var worker_at_work := town.position_of(worker_id).distance_to(worker_home) <= Town.WORK_STATION_RANGE
 	match contract.status:
@@ -878,17 +919,21 @@ func pending_breakdown(snap: Dictionary) -> Dictionary:
 	# unfinished, because only godot.pending (life and material jobs) was counted.
 	# Trade jobs live in godot.trade.jobs, so they are counted here and named
 	# separately, and a future report cannot silently drop a social job again.
-	var zero := {"pending_life_count": 0, "pending_trade_count": 0, "pending_count": 0}
+	# Place travel and place-bound rest live in godot.places, so they are counted too.
+	var zero := {"pending_life_count": 0, "pending_trade_count": 0, "pending_place_count": 0, "pending_count": 0}
 	var godot_state: Variant = snap.get("godot", {})
 	if not godot_state is Dictionary:
 		return zero
 	var life_jobs: Variant = godot_state.get("pending", {})
 	var trade: Variant = godot_state.get("trade", {})
 	var trade_jobs: Variant = trade.get("jobs", {}) if trade is Dictionary else {}
+	var places: Variant = godot_state.get("places", {})
+	var place_jobs: Variant = places.get("jobs", {}) if places is Dictionary else {}
 	var life_count: int = life_jobs.size() if life_jobs is Dictionary else 0
 	var trade_count: int = trade_jobs.size() if trade_jobs is Dictionary else 0
+	var place_count: int = place_jobs.size() if place_jobs is Dictionary else 0
 	return {"pending_life_count": life_count, "pending_trade_count": trade_count,
-		"pending_count": life_count + trade_count}
+		"pending_place_count": place_count, "pending_count": life_count + trade_count + place_count}
 
 func _capture_town() -> void:
 	paused = true
