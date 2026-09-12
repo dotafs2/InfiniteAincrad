@@ -24,6 +24,29 @@ Previous routing note, 2026-09-13 01:48 Asia/Shanghai: this earlier one requeste
 Codex5.3Spark assistance with **one read-only Spark audit** on an immutable snapshot, no product
 writer and no second paid runtime. It is now historical for implementation routing.
 
+## Tracked-repository freeze during real runs (operational rule, 2026-09-13)
+
+While any actual canonical-world model run or production GM runner is active, **all tracked files and Git HEAD stay
+frozen**, docs and commits included, because the GM runner guards the whole repository HEAD/worktree rather than a
+single file list. Only disjoint private preparation may run in parallel (tmp-only recipes, capture coordinators,
+read-only reviews). Reviewed source/doc commits are batched into a paused or no-active-run release window.
+
+This rule is a technical correction from the task31 orchestration failure: root committed only `ROADMAP.md` and
+`docs/STATUS.md` (063a1f9f → 77e8169) during the ten-GM observation, all five explicit protected files stayed
+byte-identical, and the batch was still recorded as `incomplete` / runner exit 1. The ten GM replies themselves were
+10/10 structurally valid (73 dispositions: 55 `no_action` + 18 `observe`, 0 new issues, 0 coding claims, no new
+unknown). It is neither a passed batch nor a code contribution: do not replay those paid calls and do not weaken the
+GM guard. The rule is not a new user permission gate and not a global ban on parallel private work.
+
+Long same-world observations have a separate pending control gap (H42). The current launcher limits one scene to
+900 seconds and 32 decisions. Without `--town-stop-on-idle`, reaching the decision cap blocks further controller
+turns while physics and world time continue; with it, a temporarily idle scene exits before a long cooldown can
+elapse. Do not change the 1800-world-second cooldown, scheduler, ledger, prices, or retry rules to work around this.
+H42 requires a narrow, offline-tested mode that advances through legitimate idle time and, after the decision cap
+is exhausted, waits only for an in-flight model result and its accounting/transaction to settle before the existing
+normal capture/quit. Durable physical jobs stay saved and pending for cold continuation; waiting for a long walk or
+blocked job would recreate the same denied-agency interval.
+
 ## Launchers (verified on this machine vs. legacy machine notes)
 
 The legacy shared launcher notes recorded an older machine's install root
