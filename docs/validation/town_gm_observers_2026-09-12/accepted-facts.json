@@ -1,0 +1,464 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-12",
+  "scope": "ten real DeepSeek GM observer sessions consume deterministic offline Godot fixture evidence; no live Kimi, no coding claim or delivery",
+  "base_revision": "b50f9f7dffad8a48d444b88ce94a8c899dc5d6ea",
+  "world_id": "fixture:town-trade-validation",
+  "resident_fixture_count": 3,
+  "original_resident_identities_restored": 0,
+  "paid_kimi_calls": 0,
+  "gm_native_sessions": 10,
+  "unique_native_sessions": 10,
+  "gm_completed_provider_responses": 65,
+  "observation_mode": "serial; one bounded turn per GM",
+  "model": "deepseek-flash",
+  "usage": {
+    "input_tokens": 4083973,
+    "cached_input_tokens": 3813504,
+    "output_tokens": 57023,
+    "raw_input_plus_output": 4140996,
+    "input_cache_hit_fraction": 0.9337730685291015
+  },
+  "gm_unknown_usage": 0,
+  "historical_development_unknown_incidents_retained": 1,
+  "currency_billing": "not inferred from token counters",
+  "real_coding_claims": 0,
+  "real_candidates": 0,
+  "deployed": false,
+  "repeat_same_snapshot_new_model_dispatches": 0,
+  "tests": {
+    "transport": "fake subprocess; separate from real observer evidence",
+    "full_suite": {
+      "passed": 29,
+      "failed": 0,
+      "exit_code": 0,
+      "elapsed_seconds": 117.183
+    },
+    "focused_coding_continuity": {
+      "passed": 4,
+      "exit_code": 0,
+      "elapsed_seconds": 55.863
+    }
+  },
+  "runs": [
+    {
+      "id": "run-20260912T045812Z-da82c5",
+      "dispatched": 2,
+      "status": "ok",
+      "started_utc": "2026-09-12T04:58:12.326796+00:00",
+      "finished_utc": "2026-09-12T04:59:51.243407+00:00",
+      "protected_files_changed": [],
+      "credential_leaks_found": 0
+    },
+    {
+      "id": "run-20260912T050028Z-f3780e",
+      "dispatched": 8,
+      "status": "ok",
+      "started_utc": "2026-09-12T05:00:28.944032+00:00",
+      "finished_utc": "2026-09-12T05:08:42.486602+00:00",
+      "protected_files_changed": [],
+      "credential_leaks_found": 0
+    },
+    {
+      "id": "run-20260912T050929Z-24240b",
+      "dispatched": 0,
+      "status": "ok",
+      "started_utc": "2026-09-12T05:09:29.720375+00:00",
+      "finished_utc": "2026-09-12T05:09:29.769058+00:00",
+      "protected_files_changed": [],
+      "credential_leaks_found": 0
+    }
+  ],
+  "source_evidence_sha256": "a738fe085078172764ae8bfafdeb800e099ce009792603c29ab0c53764773d8f",
+  "protected_fixture_save_sha256": "be0e1f3838fca5a8dda9faeda939d4eaa8b4cc38e0a722e6509d6724246d3e1e",
+  "code_lf_sha256": {
+    "tools\\gm_runner.py": "2e33246e2a3d5d6df03465ad4a344325ce432fccefc50d74ae2291e33c121590",
+    "tools\\test_gm_runner.py": "09db346ae3b66cc58cebca590d814cdd0cbc91946b6ef8c55ab21918a1e01ec1",
+    "tools\\gm_coding_scope.example.json": "ba62ecbebf6ac5e67ae4825d5fe597530d5f3740dcead21bdd16aebe1890d502"
+  },
+  "gms": [
+    {
+      "gm_id": "gm-01",
+      "native_session_id": "01a093fa-f6cf-71a2-9219-8f13b2565b24",
+      "model": "deepseek-flash",
+      "provider": "chain_deepseek",
+      "status": "ok",
+      "usage": {
+        "input_tokens": 281864,
+        "cached_input_tokens": 175488,
+        "output_tokens": 4848
+      },
+      "results": [
+        {
+          "claim_coding": false,
+          "disposition": "no_action",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json#proposals[0]",
+            "docs/validation/town_gm_evidence_2026-09-12/accepted-facts.json#scope",
+            "game/tests/town_material_blocked_probe.gd:825",
+            "game/tests/town_material_blocked_probe.gd:858"
+          ],
+          "issue_id": "issue-6605290c098f",
+          "summary": "claim.implemented=false and verified_in_world=false; not achieved. Its capability_id/reason come from a deterministic offline fixture probe (game/tests/town_material_blocked_probe.gd:825,858 -> 'NEED_REASON_TEXT'), not live resident demand. Export contains evidence:[] (no collision/travel issues). Outside gm-01 focus; no code claim made."
+        },
+        {
+          "claim_coding": false,
+          "disposition": "no_action",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json#proposals[1]",
+            "game/tests/town_material_blocked_probe.gd:913"
+          ],
+          "issue_id": "issue-e08bffa00eb2",
+          "summary": "Single occurrence, claim.implemented=false, verified_in_world=false, public_utterance=false. Reason 'INNKEEPER_NEED_TEXT' is a hardcoded fixture string (game/tests/town_material_blocked_probe.gd:913) in fixture world town-trade-validation. No travel/collision content and no exported travel evidence; needs no work from gm-01."
+        }
+      ],
+      "provider_responses": 5
+    },
+    {
+      "gm_id": "gm-02",
+      "native_session_id": "01a093fb-c8a4-7430-9af9-ffce3e41dd81",
+      "model": "deepseek-flash",
+      "provider": "chain_deepseek",
+      "status": "ok",
+      "usage": {
+        "input_tokens": 314538,
+        "cached_input_tokens": 295168,
+        "output_tokens": 6283
+      },
+      "results": [
+        {
+          "claim_coding": false,
+          "disposition": "observe",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json",
+            "docs/validation/town_gm_evidence_2026-09-12.md",
+            "game/tests/town_material_blocked_probe.gd",
+            "ROADMAP.md (M20D/M20H)",
+            "tools/gm_runner.py"
+          ],
+          "issue_id": "issue-6605290c098f",
+          "summary": "Deterministic offline fixture proposal: capability_id 'iron_source_waypoint' and reason 'NEED_REASON_TEXT' exist only as placeholder strings in game/tests/town_material_blocked_probe.gd; implemented/verified_in_world are false. No live resident demand, so no verified gap to fix; nothing here justifies a coding claim. Real missing loop (GM consume/claim/implement) is M20D, design-owned."
+        },
+        {
+          "claim_coding": false,
+          "disposition": "observe",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json",
+            "docs/validation/town_gm_evidence_2026-09-12/accepted-facts.json",
+            "docs/validation/town_gm_evidence_2026-09-12.md",
+            "game/tests/town_material_blocked_probe.gd",
+            "ROADMAP.md (M20D/M20H)"
+          ],
+          "issue_id": "issue-e08bffa00eb2",
+          "summary": "Same fixture export: 'innkeeper_lantern' / 'INNKEEPER_NEED_TEXT' appear only in the offline probe fixture, occurrences=1, implemented/verified_in_world false, no public utterance. H29 report states the final snapshot is 2 pending proposals that are test markers, not real Kimi needs. No verified gap and no code claim; GM consumption is M20D."
+        }
+      ],
+      "provider_responses": 5
+    },
+    {
+      "gm_id": "gm-03",
+      "native_session_id": "01a093fd-0aa9-7991-af07-38dc4658f2ea",
+      "model": "deepseek-flash",
+      "provider": "chain_deepseek",
+      "status": "ok",
+      "usage": {
+        "input_tokens": 454995,
+        "cached_input_tokens": 430464,
+        "output_tokens": 4119
+      },
+      "results": [
+        {
+          "claim_coding": false,
+          "disposition": "no_action",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json",
+            "docs/validation/town_gm_evidence_2026-09-12/accepted-facts.json",
+            "game/tests/town_material_blocked_probe.gd:825"
+          ],
+          "issue_id": "issue-6605290c098f",
+          "summary": "Fixture-origin capability proposal iron_source_waypoint (fixture:smith, world fixture:town-trade-validation) with placeholder reason text; claim.implemented=false and verified_in_world=false, so nothing is achieved. Not a trade/payment defect and no live resident demand is exported. Capability-gap ownership is gm-02. No action from gm-03."
+        },
+        {
+          "claim_coding": false,
+          "disposition": "no_action",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json",
+            "game/tests/town_material_blocked_probe.gd:913"
+          ],
+          "issue_id": "issue-e08bffa00eb2",
+          "summary": "Fixture-origin capability proposal innkeeper_lantern (fixture:innkeeper), one occurrence, placeholder reason INNKEEPER_NEED_TEXT; implemented=false and verified_in_world=false. Concerns lighting, not price, deferred payment, receipts or accounting; export lists 0 issues in my focus. No action from gm-03."
+        }
+      ],
+      "provider_responses": 7
+    },
+    {
+      "gm_id": "gm-04",
+      "native_session_id": "01a093fd-ebee-7670-81c8-caa7d0f9d4f7",
+      "model": "deepseek-flash",
+      "provider": "chain_deepseek",
+      "status": "ok",
+      "usage": {
+        "input_tokens": 514008,
+        "cached_input_tokens": 490880,
+        "output_tokens": 6501
+      },
+      "results": [
+        {
+          "claim_coding": false,
+          "disposition": "no_action",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json#proposals[0]",
+            "sha256:a738fe085078172764ae8bfafdeb800e099ce009792603c29ab0c53764773d8f",
+            "docs/validation/town_gm_evidence_2026-09-12/accepted-facts.json#scope"
+          ],
+          "issue_id": "issue-6605290c098f",
+          "summary": "fixture:smith asks for capability iron_source_waypoint (gm_proposal:1, occurrences=2) in the deterministic fixture; implemented=false, verified_in_world=false, public_utterance=false. A waypoint/iron-source marker is navigation plus resource discovery, not item ownership/consumption/loss, so it is out of my focus (gm-02 capability gaps, gm-05 resources). Export evidence array is empty; no defect s"
+        },
+        {
+          "claim_coding": false,
+          "disposition": "observe",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json#proposals[1]",
+            "sha256:a738fe085078172764ae8bfafdeb800e099ce009792603c29ab0c53764773d8f",
+            "game/spatial/town_tools.gd:2"
+          ],
+          "issue_id": "issue-e08bffa00eb2",
+          "summary": "fixture:innkeeper asks for capability innkeeper_lantern (gm_proposal:2, occurrences=1): a lantern is a tool, so item availability is my focus, but this is an unmet capability in a deterministic offline fixture, not a defect in ownership/consumption/loss. implementation claimed false, not verified in world, not spoken publicly. I observe it and take no coding action; no item-level world evidence wa"
+        }
+      ],
+      "provider_responses": 8
+    },
+    {
+      "gm_id": "gm-05",
+      "native_session_id": "01a093fe-e441-7773-8343-f67a3e934b4d",
+      "model": "deepseek-flash",
+      "provider": "chain_deepseek",
+      "status": "ok",
+      "usage": {
+        "input_tokens": 282337,
+        "cached_input_tokens": 274432,
+        "output_tokens": 3411
+      },
+      "results": [
+        {
+          "claim_coding": false,
+          "disposition": "no_action",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json",
+            "docs/validation/town_gm_evidence_2026-09-12.md",
+            "game/tests/town_material_blocked_probe.gd:825",
+            "COMMON_WORLD_EVIDENCE.proposals[0]"
+          ],
+          "issue_id": "issue-6605290c098f",
+          "summary": "Fixture-only proposal. Export world_id is fixture:town-trade-validation; its reason field is the placeholder token NEED_REASON_TEXT and provenance import reports duplicates=2 with an empty evidence array. claim.implemented=false and verified_in_world=false only mean the capability is not achieved; no live resident demand and no bounded stock/capacity/production defect is shown, so nothing for me t"
+        },
+        {
+          "claim_coding": false,
+          "disposition": "no_action",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json",
+            "docs/validation/town_gm_evidence_2026-09-12.md",
+            "game/tests/town_material_blocked_probe.gd:913",
+            "COMMON_WORLD_EVIDENCE.proposals[1]"
+          ],
+          "issue_id": "issue-e08bffa00eb2",
+          "summary": "Same offline-fixture origin: one occurrence, reason placeholder INNKEEPER_NEED_TEXT, no public utterance, unimplemented/unverified. Validation notes state these text markers did not impersonate real Kimi needs. This lighting capability is outside my resources/foraging focus and the token reason carries no actionable requirement; no coding claim."
+        }
+      ],
+      "provider_responses": 5
+    },
+    {
+      "gm_id": "gm-06",
+      "native_session_id": "01a093ff-74e2-7d40-9d16-6c5276f3e38c",
+      "model": "deepseek-flash",
+      "provider": "chain_deepseek",
+      "status": "ok",
+      "usage": {
+        "input_tokens": 164951,
+        "cached_input_tokens": 157568,
+        "output_tokens": 4250
+      },
+      "results": [
+        {
+          "claim_coding": false,
+          "disposition": "observe",
+          "evidence_refs": [
+            "COMMON_WORLD_EVIDENCE.proposals[0]",
+            "game/tests/town_material_blocked_probe.gd:825",
+            "game/tests/town_material_blocked_probe.gd:858",
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json"
+          ],
+          "issue_id": "issue-6605290c098f",
+          "summary": "Fixture-sourced capability proposal, not a defect: reasons 'NEED_REASON_TEXT'/'NEED_REASON_TEXT_TWO' match game/tests/town_material_blocked_probe.gd:825,858 verbatim and resident_id 'fixture:smith' is a probe constant. implemented/verified_in_world/public_utterance all false. No resident demand, and no perception/attribution evidence in this projection."
+        },
+        {
+          "claim_coding": false,
+          "disposition": "observe",
+          "evidence_refs": [
+            "COMMON_WORLD_EVIDENCE.proposals[1]",
+            "game/tests/town_material_blocked_probe.gd:913",
+            "game/tests/town_material_blocked_probe.gd:986",
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json"
+          ],
+          "issue_id": "issue-e08bffa00eb2",
+          "summary": "Same fixture provenance: 'INNKEEPER_NEED_TEXT' matches probe line 913 and fixture:innkeeper is a probe constant. The probe asserts the opposite of a perception leak (gm_proposal_broadcast_to_npcs, ~line 986). implemented=false, unverified, unspoken. No missing perception capability evidenced; nothing for me to implement."
+        }
+      ],
+      "provider_responses": 3
+    },
+    {
+      "gm_id": "gm-07",
+      "native_session_id": "01a09400-31cc-74c3-b030-ed908c7ef1c7",
+      "model": "deepseek-flash",
+      "provider": "chain_deepseek",
+      "status": "ok",
+      "usage": {
+        "input_tokens": 297804,
+        "cached_input_tokens": 279936,
+        "output_tokens": 3506
+      },
+      "results": [
+        {
+          "claim_coding": false,
+          "disposition": "observe",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json",
+            "game/tests/town_material_blocked_probe.gd:825,858,988-1005"
+          ],
+          "issue_id": "issue-6605290c098f",
+          "summary": "Fixture-only capability_proposed from resident fixture:smith; reasons are probe placeholders (NEED_REASON_TEXT/TWO), implemented=false, verified_in_world=false, public_utterance=false. Not live demand and not a persistence defect. Cold-reload fidelity of this same projection is already covered by the probe's gm_reload checks (89 checks, 0 failures). No change needed from me."
+        },
+        {
+          "claim_coding": false,
+          "disposition": "observe",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json",
+            "game/tests/town_material_blocked_probe.gd:913-918"
+          ],
+          "issue_id": "issue-e08bffa00eb2",
+          "summary": "Fixture-only capability_proposed from resident fixture:innkeeper, single occurrence, placeholder reason INNKEEPER_NEED_TEXT; implemented=false, verified_in_world=false, public_utterance=false. Second-resident case for the same fixture export; nothing in the projection ties it to persistence or shows a defect, so no action from me."
+        }
+      ],
+      "provider_responses": 5
+    },
+    {
+      "gm_id": "gm-08",
+      "native_session_id": "01a09401-08b5-7003-9ac5-8fc222e6cfd1",
+      "model": "deepseek-flash",
+      "provider": "chain_deepseek",
+      "status": "ok",
+      "usage": {
+        "input_tokens": 641359,
+        "cached_input_tokens": 623360,
+        "output_tokens": 7805
+      },
+      "results": [
+        {
+          "claim_coding": false,
+          "disposition": "no_action",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json",
+            "game/core/town_runtime.gd:89-126",
+            "tools/gm_runner.py:562-579"
+          ],
+          "issue_id": "issue-6605290c098f",
+          "summary": "Capability proposal from fixture:smith (occurrences 2, seq 6; request_ids turn:...0:1 and 0:2). Not an ordering defect: two distinct accepted turns sharing one life seq is consistent, and request_id disambiguates them. Counters match (life_seq 7, proposal_sequence 2); no gap, no out-of-order turn. Capability-gap scope (gm-02), not gm-08."
+        },
+        {
+          "claim_coding": false,
+          "disposition": "no_action",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json",
+            "tools/gm_runner.py:581-604"
+          ],
+          "issue_id": "issue-e08bffa00eb2",
+          "summary": "Capability proposal from fixture:innkeeper (occurrences 1, seq 6, first==latest). Nothing time/turn-ordering related in this projection: a single contiguous occurrence. Out of gm-08 focus (capability gap). Fixture-only export; no live resident demand proven."
+        }
+      ],
+      "provider_responses": 10
+    },
+    {
+      "gm_id": "gm-09",
+      "native_session_id": "01a09402-1b2d-7cc0-8060-21b88f06cac9",
+      "model": "deepseek-flash",
+      "provider": "chain_deepseek",
+      "status": "ok",
+      "usage": {
+        "input_tokens": 454565,
+        "cached_input_tokens": 432000,
+        "output_tokens": 7793
+      },
+      "results": [
+        {
+          "claim_coding": false,
+          "disposition": "observe",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json",
+            "docs/validation/town_gm_evidence_2026-09-12.md",
+            "game/core/town_runtime.gd#130-174"
+          ],
+          "issue_id": "issue-6605290c098f",
+          "summary": "Fixture proposal (fixture:smith): claim implemented=false, verified_in_world=false, public_utterance=false; first/latest reasons are placeholders NEED_REASON_TEXT / NEED_REASON_TEXT_TWO. Export is a deterministic offline fixture, not live resident demand, so this is not a verified defect or a buildable capability. Snapshot exports counts.issues=0, i.e. no obstruction evidence. Outside my blocked-f"
+        },
+        {
+          "claim_coding": false,
+          "disposition": "observe",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json",
+            "docs/validation/town_material_blocked_2026-09-12.md",
+            "game/agents/town_turns.gd#250-263"
+          ],
+          "issue_id": "issue-e08bffa00eb2",
+          "summary": "Fixture proposal (fixture:innkeeper): claim implemented=false, verified_in_world=false, public_utterance=false; reason is placeholder INNKEEPER_NEED_TEXT, occurrences=1. Offline fixture provenance, not live resident demand; no defect shown and not in my blocked-feedback focus. No movement_blocked evidence in this projection (issues=0). Not claiming coding."
+        }
+      ],
+      "provider_responses": 7
+    },
+    {
+      "gm_id": "gm-10",
+      "native_session_id": "01a09403-3164-7582-882d-99b1870c78f8",
+      "model": "deepseek-flash",
+      "provider": "chain_deepseek",
+      "status": "ok",
+      "usage": {
+        "input_tokens": 677552,
+        "cached_input_tokens": 654208,
+        "output_tokens": 8507
+      },
+      "results": [
+        {
+          "claim_coding": false,
+          "disposition": "no_action",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json#proposals[0]",
+            "game/tests/town_material_blocked_probe.gd:825",
+            "game/tests/town_material_blocked_probe.gd:858",
+            "game/core/town_runtime.gd:record_capability_need"
+          ],
+          "issue_id": "issue-6605290c098f",
+          "summary": "Fixture-only proposal (world_id fixture:town-trade-validation); reason text is the probe placeholder NEED_REASON_TEXT/_TWO (see town_material_blocked_probe.gd:825,858), occurrences 2. implemented=false, verified_in_world=false, not public speech. No ownership, contract or cancellation facts are shown, so nothing in my focus is demonstrated broken and I claim no coding. Not live resident demand; le"
+        },
+        {
+          "claim_coding": false,
+          "disposition": "no_action",
+          "evidence_refs": [
+            "docs/validation/town_gm_evidence_2026-09-12/evidence-final.json#proposals[1]",
+            "game/tests/town_material_blocked_probe.gd:913",
+            "docs/validation/town_gm_evidence_2026-09-12.md",
+            "tools/gm_runner.py:65"
+          ],
+          "issue_id": "issue-e08bffa00eb2",
+          "summary": "Fixture-only proposal (world_id fixture:town-trade-validation); reason text is the probe placeholder INNKEEPER_NEED_TEXT (town_material_blocked_probe.gd:913), occurrences 1, status proposed. implemented=false and verified_in_world=false, so no capability exists and no commitment, cancellation or ownership change is evidenced. No action from me; no coding claim. Keep visible until real demand or a "
+        }
+      ],
+      "provider_responses": 10
+    }
+  ],
+  "limitations": [
+    "GM inputs are two test-marker proposals, not real resident needs or proven defects",
+    "All GMs elected observe/no_action; task claim, real coding, reviewed delivery and resident adoption remain unverified",
+    "Ten initial sessions plus persistent dedup verified; actual paid resume on changed evidence not exercised",
+    "No continuous scheduler, visual anomaly recognition, formal 10-resident world or 10+10 joint operation claimed",
+    "Coding failure/resume tests use fake transport; native cumulative usage must be reconciled by session high-water records on future resumes"
+  ]
+}
