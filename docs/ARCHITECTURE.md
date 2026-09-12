@@ -2,6 +2,8 @@
 
 Status: intended structure, not completed implementation.
 
+2026-09-12 最新范围：以[原流程图M20](../ROADMAP.md)的“10名正式Kimi居民 + 10个独立后台AI GM”为近期共同运行目标。GM是可由不同维护者提供的持续开发/维护代理，既可回应居民困难，也可主动改进世界；他们不占普通NPC名额。居民只获本人可感知的世界事实和有来源的信息，不接收GM派工、代码、测试日志或其他居民的私有记忆。十GM隔离开发、统一验收发布，世界事实保持一个权威写入通道；主动暂停/重启后的同档续接仍可用。下文“接入只属远期”“任何常规内容必须热插入”“等待模型全局暂停”等旧限制或历史实现描述，以M20和最新已验证报告为准；旧文不构成已完成声明。
+
 The formal game targets one Godot runtime. Keep a small world domain independent of nodes, cameras, rendering and model vendors. The contribution design below extends this boundary for the user's three-computer/community workflow; it does not authorize building a generic agent platform or replacing the runtime. Implement only the smallest contribution required by the existing one-event slice.
 
 | Boundary | Responsibility | Must not do |
