@@ -12,8 +12,13 @@ const REPAIR_PRICES := [2, 5, 8]
 const HEARING_RANGE := 3.0
 const WORK_STATION_RANGE := 2.5
 const HANDOFF_RANGE := 2.2
+const FORAGING_SPOT_RANGE := 2.0
+const FORAGING_SPOT_HEIGHT_RANGE := 0.5
+const FORAGING_SPOT_SPACING := 0.55
 const JsonCodec = preload("res://core/TownJsonCodec.cs")
 var _visitor_position := Vector3.INF
+var _foraging_access_probe: Callable = Callable()
+var _foraging_access_required := false
 
 func _parse_json_text(text: String) -> Variant:
 	var codec = JsonCodec.new()
@@ -469,8 +474,89 @@ func pending_job(id: String) -> Dictionary:
 func command_count() -> int:
 	return _state.godot.commands.size()
 
+func berry_center() -> Vector3:
+	return _vector(_state.godot.berry_position)
+
+func require_foraging_access(probe: Callable) -> void:
+	# The scene validates the assigned work point against actual static geometry.
+	# A configured but unavailable host probe cannot grant work through a blocker.
+	_foraging_access_required = true
+	_foraging_access_probe = probe
+
+func _foraging_accessible(id: String) -> bool:
+	if not _foraging_access_required:
+		return true
+	if not _foraging_access_probe.is_valid():
+		return false
+	var verdict: Variant = _foraging_access_probe.call(id)
+	return verdict is bool and verdict
+
+func _valid_foraging_spots(spots: Variant, center: Vector3, identities: Array) -> bool:
+	if not spots is Dictionary or spots.is_empty():
+		return false
+	var points: Array[Vector3] = []
+	for id in spots:
+		if not id is String or id not in identities or not _valid_position(spots[id]):
+			return false
+		var point := _vector(spots[id])
+		var offset := point - center
+		if absf(offset.y) > FORAGING_SPOT_HEIGHT_RANGE:
+			return false
+		offset.y = 0
+		if offset.length() > FORAGING_SPOT_RANGE:
+			return false
+		for previous in points:
+			var separation := point - previous
+			separation.y = 0
+			if separation.length() < FORAGING_SPOT_SPACING:
+				return false
+		points.append(point)
+	return true
+
+func _same_foraging_position(left: Variant, right: Variant) -> bool:
+	if not _valid_position(left) or not _valid_position(right):
+		return false
+	for axis in 3:
+		if left[axis] != right[axis]:
+			return false
+	return true
+
+func _same_foraging_spots(left: Dictionary, right: Dictionary) -> bool:
+	if not _exact_keys(left, right.keys()):
+		return false
+	for id in left:
+		if not _same_foraging_position(left[id], right[id]):
+			return false
+	return true
+
+func configure_foraging_work_spots(spots: Dictionary, command_id: String) -> Dictionary:
+	# Trusted host release only. The caller must also check scene walkability;
+	# bounded geometric spacing alone cannot prove a spot is reachable.
+	if not command_id.begins_with("development_gm:") or not _validate_decision_command_id(command_id).ok:
+		return _failure("development_gm_required")
+	if _state.godot.has("foraging_work_spots"):
+		var old: Variant = _state.godot.foraging_work_spots
+		var same: bool = old is Dictionary and old.get("positions") is Dictionary and old.get("command_id") == command_id and _same_foraging_spots(spots, old.positions)
+		return {"ok": same, "duplicate": same, "code": "duplicate" if same else "foraging_layout_conflict"}
+	if not _exact_keys(spots, active_ids()) or not _valid_foraging_spots(spots, berry_center(), active_ids()):
+		return _failure("invalid_foraging_work_spots")
+	if _state.godot.commands.has(command_id):
+		return _failure("command_conflict")
+	for event in _state.life.events:
+		if event.get("operation_id", "") == command_id:
+			return _failure("command_conflict")
+	_state.godot.foraging_work_spots = {"schema_version": 1, "positions": spots.duplicate(true), "command_id": command_id}
+	_append_life_event({"type": "foraging_work_spots_installed", "actor_id": "development_gm",
+		"recipient_ids": [], "operation_id": command_id, "source": "development_gm_review",
+		"positions": spots.duplicate(true), "berry_center": _state.godot.berry_position.duplicate()})
+	return {"ok": true, "code": "foraging_work_spots_installed"}
+
 func destination(id: String, action: String) -> Vector3:
-	return _vector(_state.godot.berry_position if action == "harvest_ration" else _state.godot.homes[id])
+	if action == "harvest_ration":
+		# Old saves and a later admitted, unassigned resident keep the legacy center.
+		var spots: Dictionary = _state.godot.get("foraging_work_spots", {}).get("positions", {})
+		return _vector(spots[id]) if spots.has(id) else berry_center()
+	return _vector(_state.godot.homes[id])
 
 func host_move(id: String, position_value: Vector3) -> void:
 	# Host scene passes the collision-resolved body position; never exposed to a model.
@@ -539,6 +625,8 @@ func advance(delta: float) -> Dictionary:
 	for id in _state.godot.pending.keys():
 		var pending: Dictionary = _state.godot.pending[id]
 		if position_of(id).distance_to(destination(id, pending.action)) > 0.45:
+			continue
+		if pending.action == "harvest_ration" and not _foraging_accessible(id):
 			continue
 		pending.elapsed += delta
 		if pending.elapsed >= DURATIONS[pending.action]:
@@ -717,6 +805,27 @@ func _validate_state(value: Variant) -> Dictionary:
 			return _failure("nonconsecutive_history")
 	if value.life.get("seq") != seq:
 		return _failure("missing_history")
+	if g.has("foraging_work_spots"):
+		var layout: Variant = g.foraging_work_spots
+		if not layout is Dictionary or not _exact_keys(layout, ["schema_version", "positions", "command_id"]) or typeof(layout.schema_version) != TYPE_INT or layout.schema_version != 1:
+			return _failure("invalid_foraging_work_spots")
+		if not layout.command_id is String or not layout.command_id.begins_with("development_gm:") or not _validate_decision_command_id(layout.command_id).ok or not _valid_foraging_spots(layout.positions, _vector(g.berry_position), active):
+			return _failure("invalid_foraging_work_spots")
+		var matching_installs := 0
+		for event in value.life.events:
+			if event.get("type", "") != "foraging_work_spots_installed":
+				continue
+			if event.get("operation_id", "") != layout.command_id or event.get("actor_id", "") != "development_gm" or event.get("source", "") != "development_gm_review" or event.get("recipient_ids") != [] or event.has("text"):
+				return _failure("invalid_foraging_work_spot_evidence")
+			if not event.get("positions") is Dictionary or not _same_foraging_spots(event.positions, layout.positions) or not _same_foraging_position(event.get("berry_center"), g.berry_position):
+				return _failure("invalid_foraging_work_spot_evidence")
+			matching_installs += 1
+		if matching_installs != 1:
+			return _failure("invalid_foraging_work_spot_evidence")
+	else:
+		for event in value.life.events:
+			if event.get("type", "") == "foraging_work_spots_installed":
+				return _failure("foraging_work_spots_missing")
 	return {"ok": true, "code": "town_state_valid"}
 
 func _bounded(value: Variant, maximum: float, integral: bool = true) -> bool:

@@ -1,6 +1,7 @@
 {
-  "_label": "TEMPLATE ONLY: not an approved scope and not a claimed issue. Replace every value with a reviewed issue, an approved revision and one concrete objective before dispatching `code`.",
+  "_label": "TEMPLATE ONLY: not an approved scope and not a claimed issue. Review the source evidence/hypothesis and replace every value with the claimed issue, current GM owner, approved revision and one concrete objective before dispatching `code`. A GM proposal never grants its own coding scope or release approval.",
   "issue_id": "issue-xxxxxxxxxxxx",
+  "owner_gm": "<registered GM holding the current claim>",
   "base_revision": "<40-character approved revision sha>",
   "objective": "<one concrete sentence describing the single fix the worker must implement>",
   "files": [

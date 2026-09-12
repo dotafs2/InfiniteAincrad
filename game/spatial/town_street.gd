@@ -14,6 +14,8 @@ const TownNameplates = preload("res://spatial/town_nameplates.gd")
 const MaterialSources = preload("res://spatial/town_material_sources.gd")
 const MaterialVisibility = preload("res://spatial/town_material_visibility.gd")
 const MaterialSteering = preload("res://spatial/town_material_steering.gd")
+const ForagingLayout = preload("res://spatial/town_foraging_layout.gd")
+const ForagingSteering = preload("res://spatial/town_foraging_steering.gd")
 var town := Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
@@ -54,6 +56,11 @@ var repair_initial_iron := -1
 var nameplates: Node = null
 var material_visibility: Node3D = null
 var material_steering: RefCounted = null
+var foraging_steering: RefCounted = null
+var foraging_layout_status: Dictionary = {}
+var _foraging_layout_attempted := false
+var _spaced_foraging := false
+var _foraging_exit_targets: Dictionary = {}
 var gm_export_path := ""
 var gm_export_status := ""
 
@@ -149,6 +156,7 @@ func _ready() -> void:
 	add_child(material_visibility)
 	material_visibility.configure(town, bodies, material_sources)
 	material_steering = MaterialSteering.new()
+	foraging_steering = ForagingSteering.new()
 	town.require_material_visibility(Callable(material_visibility, "can_observe"))
 	_build_town_hud()
 	_build_nameplates()
@@ -166,6 +174,9 @@ func _ready() -> void:
 	if not capture_dir.is_empty():
 		DirAccess.make_dir_recursive_absolute(capture_dir)
 		paused = restore_only
+		if not restore_only:
+			latest = "生活继续；时间只在运行时流逝"
+		_refresh()
 		_camera.global_position = Vector3(0.0, 5.0, 14.0)
 		_camera.look_at(Vector3(0, 0.9, 4.0))
 		if dialogue_fixture or (restore_only and not dialogue_resident_id.is_empty()):
@@ -223,6 +234,62 @@ func admit_resident(person: Dictionary, maintainer: String, point: Vector3, comm
 		_refresh()
 	return admitted
 
+func _ensure_foraging_layout() -> bool:
+	if _foraging_layout_attempted:
+		return bool(foraging_layout_status.get("ok", true))
+	_foraging_layout_attempted = true
+	var snap := town.snapshot()
+	if snap.godot.has("foraging_work_spots"):
+		_spaced_foraging = true
+		town.require_foraging_access(Callable(self, "_foraging_can_work"))
+		foraging_layout_status = {"ok": true, "code": "foraging_layout_restored"}
+		return true
+	var independent: bool = not str(snap.world_id).begins_with("fixture:") and (bool(snap.godot.get("new_world_seed", false)) or str(snap.get("origin", {}).get("kind", "")) == "new_world_seed")
+	if restore_only or not independent or town.active_ids().size() != 10:
+		foraging_layout_status = {"ok": true, "code": "foraging_layout_not_applicable"}
+		return true
+	var exclude: Array[RID] = [_player.get_rid()]
+	foraging_layout_status = ForagingLayout.new().build(town, bodies, get_world_3d().direct_space_state, exclude)
+	if foraging_layout_status.get("ok", false):
+		var spots: Dictionary = foraging_layout_status.spots
+		var installed := town.transaction(_save_path, func():
+			return town.configure_foraging_work_spots(spots, "development_gm:foraging-layout:v1"))
+		foraging_layout_status["installation"] = installed
+		foraging_layout_status["ok"] = installed.get("ok", false)
+		_spaced_foraging = bool(installed.get("ok", false))
+		if _spaced_foraging:
+			town.require_foraging_access(Callable(self, "_foraging_can_work"))
+	if not _spaced_foraging:
+		paused = true
+		latest = "采集工作点未通过物理检查，生活已暂停：" + str(foraging_layout_status.get("code", "invalid_layout"))
+		_refresh()
+	return _spaced_foraging
+
+func _foraging_can_work(id: String) -> bool:
+	var exclude: Array[RID] = [_player.get_rid()]
+	return ForagingLayout.new().can_work(town, bodies, get_world_3d().direct_space_state, id, exclude)
+
+func _foraging_idle_exit(id: String, body: CharacterBody3D) -> Vector3:
+	if _foraging_exit_targets.has(id):
+		var prior: Vector3 = _foraging_exit_targets[id]
+		if body.position.distance_to(prior) > 0.30:
+			return prior
+		_foraging_exit_targets.erase(id)
+	var center: Vector3 = town.berry_center()
+	var outward := body.position - center
+	outward.y = 0.0
+	if outward.length() > 2.35:
+		return Vector3.INF
+	if outward.length() < 0.1:
+		outward = town.destination(id, "harvest_ration") - center
+		outward.y = 0.0
+	if outward.length() < 0.1:
+		return Vector3.INF
+	var point := center + outward.normalized() * 2.7
+	point.y = body.position.y
+	_foraging_exit_targets[id] = point
+	return point
+
 func _process(delta: float) -> void:
 	if status == null:
 		return
@@ -262,18 +329,25 @@ func _physics_process(delta: float) -> void:
 	town.host_visitor_position(_player.position)
 	if paused:
 		return
+	if not _ensure_foraging_layout():
+		return
 	if material_steering != null:
 		material_steering.retain_active(town.active_ids())
+	if foraging_steering != null:
+		foraging_steering.retain_active(town.active_ids())
 	for id in town.active_ids():
 		var job: Dictionary = town.pending_job(id)
 		var body: CharacterBody3D = bodies[id]
 		var actor: Node3D = actors[id]
 		var moving := false
 		if not job.is_empty():
+			_foraging_exit_targets.erase(id)
 			var target := town.destination(id, job.action)
 			var direction := Vector3.ZERO
 			if job.action == "recover_material" and material_steering != null:
 				direction = material_steering.direction_for(id, str(job.command_id), body, target)
+			elif _spaced_foraging and job.action in ["harvest_ration", "eat_ration", "rest"] and foraging_steering != null:
+				direction = foraging_steering.direction_for(id, str(job.command_id), body, target)
 			else:
 				if material_steering != null:
 					material_steering.clear_route(id)
@@ -289,7 +363,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				body.velocity.x = 0
 				body.velocity.z = 0
-			var material_blocked: bool = job.action == "recover_material" and not moving and direction.length() <= 0.0 and body.position.distance_to(target) > 0.45
+			var material_blocked: bool = job.action in ["recover_material", "harvest_ration"] and not moving and direction.length() <= 0.0 and body.position.distance_to(target) > 0.45
 			actor.set_gesture("idle" if (moving or material_blocked) else {"eat_ration": "eat", "rest": "rest", "harvest_ration": "harvest", "repair_edge": "repair", "repair_handle": "repair", "work": "work", "use_tool": "work", "recover_material": "work"}.get(job.action, "idle"))
 		else:
 			if material_steering != null:
@@ -302,6 +376,10 @@ func _physics_process(delta: float) -> void:
 				route_target = _repair_route_target(id)
 			var home_offset := Vector3.ZERO if gateway_mode or scripted_trade else (route_target if route_target.is_finite() else town.destination(id, "rest")) - body.position
 			home_offset.y = 0
+			if _spaced_foraging and foraging_steering != null and not gateway_mode and not scripted_trade and not restore_only:
+				var exit_target := _foraging_idle_exit(id, body)
+				if exit_target.is_finite():
+					home_offset = foraging_steering.direction_for(id, "foraging-clearance:" + id, body, exit_target)
 			moving = home_offset.length() > 0.30
 			body.velocity.x = home_offset.normalized().x * 1.35 if moving else 0.0
 			body.velocity.z = home_offset.normalized().z * 1.35 if moving else 0.0
@@ -683,6 +761,8 @@ func _refresh() -> void:
 	if repair_fixture and not gateway_mode and not restore_only:
 		mode_label = "离线自动修理演示（local_rule_policy）"
 	var title := "交易流程测试 · 非原镇存档" if str(snap.world_id).begins_with("fixture:") else "起始之城 · 生活移植验证"
+	if not str(snap.world_id).begins_with("fixture:") and (bool(snap.godot.get("new_world_seed", false)) or str(snap.get("origin", {}).get("kind", "")) == "new_world_seed"):
+		title = "起始之城 · 独立新世界"
 	var repair_text := ""
 	if not snap.life.get("contracts", []).is_empty():
 		var contract: Dictionary = snap.life.contracts[-1]
@@ -745,7 +825,7 @@ func _work_marker(point: Vector3, title: String) -> void:
 	add_child(marker)
 
 func _build_berry_patch() -> void:
-	var point := town.destination(town.active_ids()[0], "harvest_ration")
+	var point := town.berry_center()
 	_work_marker(point, "公共浆果地")
 	for i in 3:
 		var bush := MeshInstance3D.new()
@@ -775,11 +855,15 @@ func _capture_town() -> void:
 		await RenderingServer.frame_post_draw
 		get_viewport().get_texture().get_image().save_png(capture_dir.path_join("town.png"))
 	var snap := town.snapshot()
-	var evidence := {"original_identities": 0 if str(snap.world_id).begins_with("fixture:") else snap.residents.size(), "active": town.active_ids().size(), "life_seq": snap.life.seq,
+	var is_fixture := str(snap.world_id).begins_with("fixture:")
+	var is_new_world := bool(snap.godot.get("new_world_seed", false)) or str(snap.get("origin", {}).get("kind", "")) == "new_world_seed"
+	var evidence := {"original_identities": 0 if is_fixture or is_new_world else snap.residents.size(), "active": town.active_ids().size(), "life_seq": snap.life.seq,
 		"source_seq": snap.godot.source_life_seq, "new_events": snap.godot.new_events,
 		"new_decisions": "none_restore" if restore_only else "scripted_trade_fixture" if scripted_trade else "controller_records" if gateway_mode else "local_rule_policy", "foraging": snap.foraging, "pending_count": snap.godot.pending.size(), "resident_turns": snap.godot.get("resident_turns", {})}
 	evidence["world_id"] = snap.world_id
-	evidence["is_fixture"] = str(snap.world_id).begins_with("fixture:")
+	evidence["is_fixture"] = is_fixture
+	evidence["identity_count"] = snap.residents.size()
+	evidence["world_origin"] = "fixture" if is_fixture else "independent_new_world" if is_new_world else "migration_validation"
 	evidence["scripted_trade"] = scripted_trade
 	evidence["validation_decisions_started"] = validation_decisions_started
 	evidence["validation_decision_limit"] = validation_decision_limit

@@ -112,16 +112,32 @@ func _material_need(seq: int) -> Dictionary:
 	return {}
 
 func install_material_source(spec: Dictionary, source_seq: int, command_id: String) -> Dictionary:
+	return _install_material_source(spec, source_seq, command_id, _material_need(source_seq))
+
+func _material_private_need_in(_value: Dictionary, _resident_id: String, _request_id: String) -> Dictionary:
+	# Only the full town runtime owns accepted resident turn journals.
+	return {}
+
+func install_material_source_from_need(spec: Dictionary, resident_id: String, request_id: String, command_id: String) -> Dictionary:
+	# Host-reviewed installation may respond to a private accepted need. It does
+	# not turn the resident's thought into speech or grant the resident GM powers.
+	var need := _material_private_need_in(_state, resident_id, request_id)
+	if need.is_empty():
+		return _failure("source_need_missing")
+	return _install_material_source(spec, int(need.seq), command_id, need)
+
+func _install_material_source(spec: Dictionary, source_seq: int, command_id: String, need: Dictionary) -> Dictionary:
 	if not command_id.begins_with("development_gm:") or not _validate_decision_command_id(command_id).ok:
 		return _failure("development_gm_required")
 	if not _valid_material_spec(spec):
 		return _failure("invalid_material_source")
 	var payload := {"spec": spec.duplicate(true), "source_seq": source_seq}
+	if need.get("kind", "") == "resident_capability_need":
+		payload["source_need"] = need.duplicate(true)
 	var old: Dictionary = _materials().get("installs", {}).get(command_id, {})
 	if not old.is_empty():
-		var same: bool = old.payload.source_seq == source_seq and old.payload.spec.id == spec.id and old.payload.spec.label == spec.label and old.payload.spec.material == spec.material and old.payload.spec.initial_stock == spec.initial_stock and old.payload.spec.access == spec.access and _vector(old.payload.spec.position) == _vector(spec.position)
+		var same: bool = old.payload.source_seq == source_seq and old.payload.get("source_need", {}) == payload.get("source_need", {}) and old.payload.spec.id == spec.id and old.payload.spec.label == spec.label and old.payload.spec.material == spec.material and old.payload.spec.initial_stock == spec.initial_stock and old.payload.spec.access == spec.access and _vector(old.payload.spec.position) == _vector(spec.position)
 		return {"ok": same, "duplicate": same, "code": "duplicate" if same else "command_conflict"}
-	var need := _material_need(source_seq)
 	if need.is_empty():
 		return _failure("source_need_missing")
 	if _materials().get("sources", {}).has(spec.id):
@@ -136,7 +152,11 @@ func install_material_source(spec: Dictionary, source_seq: int, command_id: Stri
 	var materials := _ensure_materials()
 	materials.sources[spec.id] = source
 	materials.installs[command_id] = {"payload": payload}
-	_append_life_event({"type": "material_source_installed", "actor_id": "development_gm", "recipient_ids": [], "operation_id": command_id, "source": "development_gm_review", "source_id": spec.id, "material": spec.material, "initial_stock": spec.initial_stock, "source_seq": source_seq})
+	var event := {"type": "material_source_installed", "actor_id": "development_gm", "recipient_ids": [], "operation_id": command_id, "source": "development_gm_review", "source_id": spec.id, "material": spec.material, "initial_stock": spec.initial_stock, "source_seq": source_seq}
+	if payload.has("source_need"):
+		event["source_need_request_id"] = need.need_request_id
+		event["source_need_resident_id"] = need.actor_id
+	_append_life_event(event)
 	return {"ok": true, "code": "material_source_installed", "source_id": spec.id}
 
 func _known_materials(id: String) -> Dictionary:
@@ -500,7 +520,7 @@ func _validate_state(value: Variant) -> Dictionary:
 			return _failure("invalid_material_command")
 	for command_id in m.installs:
 		var install: Variant = m.installs[command_id]
-		if not command_id is String or not command_id.begins_with("development_gm:") or not _validate_decision_command_id(command_id).ok or not install is Dictionary or not _exact_keys(install, ["payload"]) or not install.payload is Dictionary or not _exact_keys(install.payload, ["spec", "source_seq"]) or not install.payload.spec is Dictionary or not _valid_material_spec(install.payload.spec):
+		if not command_id is String or not command_id.begins_with("development_gm:") or not _validate_decision_command_id(command_id).ok or not install is Dictionary or not _exact_keys(install, ["payload"]) or not install.payload is Dictionary or not (_exact_keys(install.payload, ["spec", "source_seq"]) or _exact_keys(install.payload, ["spec", "source_seq", "source_need"])) or not install.payload.spec is Dictionary or not _valid_material_spec(install.payload.spec):
 			return _failure("invalid_material_install")
 		if not m.sources.has(install.payload.spec.id) or m.sources[install.payload.spec.id].get("install_command") != command_id:
 			return _failure("invalid_material_install")
@@ -514,21 +534,29 @@ func _validate_state(value: Variant) -> Dictionary:
 		if not _valid_material_spec(spec) or source.id != source_id or not _bounded(source.stock, source.initial_stock) or not _bounded(source.recovered, source.initial_stock) or source.stock + source.recovered != source.initial_stock:
 			return _failure("material_conservation_failed")
 		var need: Variant = source.source_need
-		if not need is Dictionary or not _exact_keys(need, ["seq", "actor_id", "text"]) or not m.installs.has(source.install_command):
+		if not need is Dictionary or not m.installs.has(source.install_command):
+			return _failure("invalid_material_evidence")
+		var private_need: bool = need.get("kind", "") == "resident_capability_need"
+		if not _exact_keys(need, ["seq", "actor_id", "text", "kind", "need_request_id", "need_controller_epoch", "capability_id"] if private_need else ["seq", "actor_id", "text"]):
 			return _failure("invalid_material_evidence")
 		var recorded: Dictionary = m.installs[source.install_command].payload
 		if recorded.source_seq != need.seq or not value.godot.positions.has(need.actor_id):
 			return _failure("invalid_material_evidence")
+		if private_need:
+			if not need.actor_id is String or not need.need_request_id is String or recorded.get("source_need", {}) != need or _material_private_need_in(value, need.actor_id, need.need_request_id) != need:
+				return _failure("invalid_material_evidence")
+		elif recorded.has("source_need"):
+			return _failure("invalid_material_evidence")
 		for key in spec:
 			if (key == "position" and _vector(spec[key]) != _vector(recorded.spec[key])) or (key != "position" and spec[key] != recorded.spec[key]):
 				return _failure("material_install_spec_changed")
-		var matching := false
+		var matching := private_need
 		var installed := false
 		for event in value.life.events:
-			if event.get("seq") == need.seq and event.get("actor_id") == need.actor_id and event.get("text") == need.text and event.get("type") in ["ask_help", "reply_help", "visitor_reply"]:
+			if not private_need and event.get("seq") == need.seq and event.get("actor_id") == need.actor_id and event.get("text") == need.text and event.get("type") in ["ask_help", "reply_help", "visitor_reply"]:
 				matching = true
 			if event.get("type") == "material_source_installed" and event.get("operation_id") == source.install_command and event.get("source_id") == source_id and event.get("source_seq") == need.seq and event.get("initial_stock") == source.initial_stock and event.get("material") == source.material and event.get("actor_id") == "development_gm" and event.get("recipient_ids") == []:
-				installed = true
+				installed = (event.get("source_need_request_id", "") == need.need_request_id and event.get("source_need_resident_id", "") == need.actor_id) if private_need else not event.has("source_need_request_id") and not event.has("source_need_resident_id")
 		if not matching or not installed:
 			return _failure("invalid_material_evidence")
 		var recovered := 0

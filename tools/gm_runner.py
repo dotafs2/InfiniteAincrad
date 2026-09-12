@@ -13,11 +13,14 @@ issue into an isolated candidate checkout based on an explicitly approved revisi
 Candidate changes, base hash and test evidence stay unapproved until a supervisor
 reviews them.
 
-Rules enforced here: no global Codex config mutation (--ignore-user-config plus
-per-invocation -c overrides), no commits or pushes, no NPC or paid model calls, no
-secret or private-save reads, no automatic retry of uncertain requests, one
-authoritative state snapshot, one writer per issue, one world per state directory,
-and a new unknown paid measurement stops further paid dispatch in this runner.
+Controls here: no global Codex config mutation (--ignore-user-config plus invocation
+overrides), no automatic retry of uncertain requests, one authoritative state snapshot,
+one writer per issue, one world per state directory, and unknown usage stops dispatch.
+Native tools request read-only observation or workspace-write candidate sandboxing with
+network disabled; there is no danger-full-access fallback. Instructions prohibit secret
+reads, maintained-save writes, commits, pushes and additional model calls. Candidate and
+protected-path checks detect mutations after execution; fake-process tests do not prove
+native platform sandbox enforcement.
 
 Commands (repository-relative):
   python tools/gm_runner.py observe --evidence <reviewed.json> --state-dir <out> --dry-run
@@ -39,6 +42,7 @@ import argparse
 import datetime as dt
 import hashlib
 import json
+import math
 import os
 import re
 import shlex
@@ -74,7 +78,7 @@ STATE_SCHEMA = 2
 REQUIRED_BOUNDARY_FLAGS = ('contains_private_reply_reason', 'contains_other_resident_memories')
 DISPOSITIONS = ('observe', 'proposal', 'no_action')
 CLOSED_STATES = ('closed', 'resolved', 'cancelled', 'retracted')
-REPAIRABLE_STATUSES = ('scope_tests_failed', 'invalid_output')
+REPAIRABLE_STATUSES = ('scope_tests_failed', 'invalid_output', 'worker_blocked')
 # Authoritative per-issue source identity. proposal_id / issue_id come first so that
 # two residents proposing the same capability keep two separate issue sources.
 IDENTITY_FIELDS = ('proposal_id', 'issue_id', 'symbol_id', 'collision_id', 'request_id')
@@ -82,6 +86,8 @@ SESSION_UUID = re.compile(r'[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}')
 KEY_PATTERN = re.compile(r'sk-[A-Za-z0-9_-]{16,200}')
 PROXY_KEYS = ('HTTP_PROXY', 'HTTPS_PROXY', 'ALL_PROXY', 'http_proxy', 'https_proxy', 'all_proxy')
 SECRET_ENV_KEYS = ('DEEPSEEK_API_KEY', 'OPENAI_API_KEY', 'KIMI_API_KEY', 'MOONSHOT_API_KEY')
+USAGE_FIELDS = ('input_tokens', 'cached_input_tokens', 'cache_write_input_tokens',
+                'output_tokens', 'reasoning_output_tokens', 'total_tokens')
 
 STABLE_INSTRUCTIONS = """You are one of ten independent BACKGROUND GM processes of the InfiniteAincrad persistent world.
 You inspect world-scoped evidence and decide whether one bounded issue needs work from you.
@@ -112,6 +118,9 @@ OUTPUT CONTRACT: end your turn with exactly one fenced ```json block and nothing
               "claim_coding": true | false,
               "summary": "<=400 chars",
               "evidence_refs": ["<ref>"]}],
+ "new_issues": [{"proposal_key": "<stable short key>", "summary": "<=400 chars",
+                 "evidence_refs": ["<pointer from investigation.evidence_refs>"],
+                 "claim_coding": true | false}],
  "note": "<optional, <=200 chars>"}
 Rules for results:
 - every issue_id must be copied verbatim from open_issues in your GM STATE block;
@@ -121,6 +130,11 @@ Rules for results:
   active coding worker may own an issue, and a claim on an issue already owned by another GM is
   refused;
 - if open_issues is empty return "results": [].
+- new_issues is optional and permits at most ONE evidence-backed hypothesis, only when
+  GM STATE contains an investigation. Copy its evidence_refs literally. An investigation is
+  supervisor_specified: never describe it as spontaneous discovery. Your proposal is unverified,
+  does not grant coding scope, and must retain the distinction between observed facts and inference.
+- return new_issues: [] when investigation yields no concrete supported proposal; do not invent work.
 """
 
 STABLE_CODE_INSTRUCTIONS = """You are the active coding worker of one of the ten BACKGROUND GMs of the InfiniteAincrad
@@ -208,9 +222,91 @@ def usage_is_measured(usage) -> bool:
         return False
     for field in ('input_tokens', 'output_tokens'):
         value = usage.get(field)
-        if isinstance(value, bool) or not isinstance(value, (int, float)) or value < 0:
+        if (isinstance(value, bool) or not isinstance(value, (int, float))
+                or not math.isfinite(value) or value < 0):
             return False
+    for field in USAGE_FIELDS:
+        if field in usage and (isinstance(usage[field], bool)
+                               or not isinstance(usage[field], (int, float))
+                               or not math.isfinite(usage[field]) or usage[field] < 0):
+            return False
+    if usage.get('cached_input_tokens', 0) > usage['input_tokens']:
+        return False
+    if usage.get('reasoning_output_tokens', 0) > usage['output_tokens']:
+        return False
     return True
+
+
+def account_native_usage(state: dict, attempt: dict, resume_id: str | None) -> None:
+    """Codex turn.completed.usage is session cumulative, including resumed history.
+
+    Keep the native counters separately and expose only a persisted highwater delta as
+    additive `usage`. Missing baselines and decreases are unknown, never zero or a reset.
+    Old runner records remain untouched; their raw cumulative usage can seed the baseline.
+    """
+    cumulative = attempt.get('usage')
+    attempt['usage_cumulative'] = cumulative
+    attempt['usage_accounting'] = {'basis': 'native_session_cumulative_highwater',
+                                   'status': 'unknown', 'baseline': None}
+    session = attempt.get('thread_returned') or resume_id
+    if not usage_is_measured(cumulative):
+        attempt['usage'] = None
+        attempt['usage_measured'] = False
+        return
+    if not session:
+        # A new invocation's measured counters remain additive even if the transport omitted
+        # its session id; no durable resume baseline can be associated with that measurement.
+        attempt['usage_accounting']['status'] = 'unbound_measurement'
+        return
+    highwaters = state.setdefault('usage_highwater', {})
+    previous = highwaters.get(session)
+    if previous is None and resume_id == session:
+        legacy = []
+        for record in state['sessions'].values():
+            legacy.extend(record.get('attempts', []))
+            legacy.extend((record.get('coding') or {}).get('attempts', []))
+        for record in state['issues'].values():
+            if record.get('coding_provider_result'):
+                legacy.append(record['coding_provider_result'])
+        for old in legacy:
+            if old.get('session_returned') != session:
+                continue
+            raw = old.get('usage_cumulative') if 'usage_cumulative' in old else old.get('usage')
+            if usage_is_measured(raw):
+                previous = {field: max((previous or {}).get(field, 0), raw[field])
+                            for field in USAGE_FIELDS if field in raw}
+        if previous is None:
+            attempt['usage_accounting']['status'] = 'missing_resume_baseline'
+            attempt['usage'] = None
+            attempt['usage_measured'] = False
+            return
+    baseline = previous or {field: 0 for field in USAGE_FIELDS if field in cumulative}
+    attempt['usage_accounting']['baseline'] = baseline
+    if any(cumulative[field] < baseline[field] for field in USAGE_FIELDS
+           if field in cumulative and field in baseline):
+        attempt['usage_accounting']['status'] = 'counter_decreased'
+        attempt['usage'] = None
+        attempt['usage_measured'] = False
+        return
+    delta = {field: cumulative[field] - baseline[field] for field in USAGE_FIELDS
+             if field in cumulative and field in baseline}
+    if not usage_is_measured(delta):
+        attempt['usage'] = None
+        attempt['usage_measured'] = False
+        attempt['usage_accounting']['status'] = 'invalid_delta'
+        return
+    highwaters[session] = {**baseline, **{field: cumulative[field] for field in USAGE_FIELDS
+                                         if field in cumulative}}
+    attempt['usage'] = delta
+    attempt['usage_measured'] = usage_is_measured(delta)
+    attempt['usage_accounting'].update({'status': 'measured_delta', 'session_id': session,
+                                       'unknown_detail_fields': [field for field in USAGE_FIELDS
+                                                                if field not in delta],
+                                       'coverage': 'since last measured session highwater'})
+
+
+def usage_evidence(attempt: dict) -> dict:
+    return {key: attempt.get(key) for key in ('usage_cumulative', 'usage_accounting')}
 
 
 # --------------------------------------------------------------------------- route
@@ -316,9 +412,10 @@ def codex_catalog(instructions: str) -> dict:
 
 
 def codex_command(route: Route, workdir: Path, result_path: Path, instructions_path: Path,
-                  catalog_path: Path, resume_id: str | None) -> list[str]:
+                  catalog_path: Path, resume_id: str | None,
+                  sandbox: str = 'read-only') -> list[str]:
     command = [*route.codex_argv, 'exec', '--ignore-user-config', '-C', str(workdir),
-               '-s', 'danger-full-access', '--json', '--color', 'never', '-o', str(result_path)]
+               '-s', sandbox, '--json', '--color', 'never', '-o', str(result_path)]
     values = {'model': 'deepseek-flash', 'model_provider': 'chain_deepseek',
               'model_reasoning_effort': 'low', 'model_catalog_json': str(catalog_path),
               'model_instructions_file': str(instructions_path), 'approval_policy': 'never',
@@ -330,6 +427,9 @@ def codex_command(route: Route, workdir: Path, result_path: Path, instructions_p
               'model_providers.chain_deepseek.stream_max_retries': 0,
               'model_providers.chain_deepseek.supports_websockets': False,
               'features.multi_agent': False,
+              'sandbox_workspace_write.network_access': False,
+              'sandbox_workspace_write.exclude_tmpdir_env_var': True,
+              'sandbox_workspace_write.exclude_slash_tmp': True,
               'shell_environment_policy.exclude': list(SECRET_ENV_KEYS),
               'web_search': 'disabled'}
     for name, value in values.items():
@@ -663,7 +763,8 @@ def import_source(state: dict, document: dict, path: Path, digest: str) -> dict:
         record['absent_since'] = None
         record['import_count'] += 1
     for issue_id, record in state['issues'].items():
-        if record['world_id'] != world_id or issue_id in present:
+        if (record['world_id'] != world_id or issue_id in present
+                or record.get('source_channel') == 'gm_proposal'):
             continue
         if record['lifecycle'] == 'current':
             record['lifecycle'] = 'not_in_current_projection'
@@ -688,7 +789,132 @@ def issue_projection(record: dict) -> dict:
             'proposal_id': record.get('proposal_id'), 'source_status': record.get('source_status'),
             'lifecycle': record.get('lifecycle'), 'owner_gm': record.get('owner_gm'),
             'occurrences': record.get('occurrences'), 'claim': record.get('claim'),
-            'first': record.get('first'), 'latest': record.get('latest')}
+            'first': record.get('first'), 'latest': record.get('latest'),
+            'provenance': record.get('provenance'), 'summary': record.get('summary')}
+
+
+def evidence_pointer(document: dict, pointer: str):
+    """Resolve a JSON pointer only within the producer's public GM projection."""
+    if not isinstance(pointer, str) or not pointer.startswith('/') or len(pointer) > 300:
+        raise ValueError('evidence_refs must be bounded non-root JSON pointers')
+    tokens = pointer[1:].split('/')
+    if tokens[0] not in ('evidence', 'proposals', 'source_revision', 'counts',
+                         'projection_note', 'world_id', 'kind'):
+        raise ValueError(f'evidence pointer {pointer!r} is outside the public GM projection')
+    value = document
+    try:
+        for token in tokens:
+            if re.search(r'~(?![01])', token):
+                raise ValueError('invalid JSON pointer escape')
+            token = token.replace('~1', '/').replace('~0', '~')
+            if isinstance(value, list):
+                if not re.fullmatch(r'0|[1-9][0-9]*', token):
+                    raise ValueError('array pointer index must be a nonnegative integer')
+                value = value[int(token)]
+            elif isinstance(value, dict):
+                value = value[token]
+            else:
+                raise ValueError('evidence pointer traverses a scalar')
+    except (KeyError, IndexError) as error:
+        raise ValueError(f'evidence pointer {pointer!r} does not exist') from error
+    return value
+
+
+def read_investigation(path: Path | None, document: dict, digest: str) -> dict | None:
+    if path is None:
+        return None
+    request = load_json(path)
+    if not isinstance(request, dict):
+        raise ValueError('investigation must be a JSON object')
+    key = request.get('investigation_id')
+    if not isinstance(key, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,99}', key):
+        raise ValueError('investigation_id must be a stable 1..100 character key')
+    if request.get('world_id') != document['world_id'] or request.get('source_sha256') != digest:
+        raise ValueError('investigation world_id/source_sha256 must match the reviewed evidence')
+    objective, refs = request.get('objective'), request.get('evidence_refs')
+    if not isinstance(objective, str) or not 12 <= len(objective.strip()) <= 800:
+        raise ValueError('investigation objective must be a concrete 12..800 character sentence')
+    if (not isinstance(refs, list) or not 1 <= len(refs) <= 8
+            or any(not isinstance(ref, str) for ref in refs) or len(set(refs)) != len(refs)):
+        raise ValueError('investigation evidence_refs must contain 1..8 distinct JSON pointers')
+    investigation = {'investigation_id': key, 'world_id': document['world_id'],
+                     'source_sha256': digest, 'origin': 'supervisor_specified',
+                     'objective': objective.strip(), 'evidence_refs': refs,
+                     'evidence': {ref: evidence_pointer(document, ref) for ref in refs}}
+    investigation['content_digest'] = sha256_bytes(canonical(investigation).encode())
+    return investigation
+
+
+def validate_new_issues(answer, investigation: dict | None) -> tuple[list[dict], list[str]]:
+    entries = answer.get('new_issues', []) if isinstance(answer, dict) else []
+    if not isinstance(entries, list) or len(entries) > 1:
+        return [], ['new_issues must be a list containing at most one bounded proposal']
+    if not entries:
+        return [], []
+    if investigation is None:
+        return [], ['new_issues requires an explicit evidence-sourced investigation']
+    entry = entries[0]
+    if not isinstance(entry, dict):
+        return [], ['new_issues[0] must be an object']
+    key, summary, refs = entry.get('proposal_key'), entry.get('summary'), entry.get('evidence_refs')
+    if not isinstance(key, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,99}', key):
+        return [], ['new_issues[0].proposal_key must be a stable 1..100 character key']
+    if not isinstance(summary, str) or not 12 <= len(summary.strip()) <= 400:
+        return [], ['new_issues[0].summary must describe one hypothesis in 12..400 characters']
+    if (not isinstance(refs, list) or not 1 <= len(refs) <= 8
+            or any(not isinstance(ref, str) or ref not in investigation['evidence_refs']
+                   for ref in refs) or len(set(refs)) != len(refs)):
+        return [], ['new_issues[0].evidence_refs must copy selected investigation pointers']
+    if not isinstance(entry.get('claim_coding'), bool):
+        return [], ['new_issues[0].claim_coding must be boolean']
+    return [{'proposal_key': key, 'summary': summary.strip(), 'evidence_refs': refs,
+             'claim_coding': entry['claim_coding']}], []
+
+
+def register_new_issues(state: dict, gm_id: str, entries: list[dict], investigation: dict,
+                        run_id: str) -> list[dict]:
+    """Register hypotheses, never a verified defect, coding approval or world mutation."""
+    results = []
+    for entry in entries:
+        key = canonical([gm_id, investigation['investigation_id'], entry['proposal_key']])
+        issue_id = issue_id_for(state['world_id'], 'gm_proposal', key)
+        # Preserve proposals made before tuple encoding without reproducing the ambiguous
+        # colon-delimited identity: all recorded components must match exactly.
+        for existing in state['issues'].values():
+            prior = existing.get('provenance') or {}
+            if (existing.get('source_channel') == 'gm_proposal'
+                    and prior.get('proposed_by_gm') == gm_id
+                    and (prior.get('investigation') or {}).get('investigation_id') ==
+                    investigation['investigation_id']
+                    and (existing.get('entry') or {}).get('proposal_key') == entry['proposal_key']):
+                issue_id = existing['issue_id']
+                break
+        provenance = {'origin': 'gm_proposed', 'proposed_by_gm': gm_id,
+                      'status': 'hypothesis', 'verified_in_world': False,
+                      'investigation': investigation, 'first_investigation': investigation,
+                      'run_id': run_id,
+                      'session_id': state['sessions'][gm_id]['session_id']}
+        record = state['issues'].setdefault(issue_id, {
+            'issue_id': issue_id, 'world_id': state['world_id'], 'evidence_kind': 'gm_proposal',
+            'identity_key': key, 'identity_field': 'gm+investigation+proposal_key',
+            'source_channel': 'gm_proposal', 'source_status': 'proposed', 'lifecycle': 'current',
+            'summary': entry['summary'], 'provenance': provenance,
+            'entry': entry, 'content_digest': issue_content_digest(entry, 'proposed'),
+            'claim': {'implemented': False, 'verified_in_world': False},
+            'first_import_utc': utc_iso(), 'owner_gm': None, 'owner_since': None,
+            'owner_run_id': None, 'coding_session_id': None, 'coding_owner_gm': None,
+            'coding_attempt': None, 'coding_unresolved': None, 'candidates': [],
+            'outcomes': [], 'settled': {}, 'absent_since': None})
+        record['provenance']['investigation'] = investigation
+        record['provenance']['latest_run_id'] = run_id
+        record['entry'] = entry
+        record['summary'] = entry['summary']
+        record['content_digest'] = issue_content_digest(
+            {'proposal': entry, 'source_sha256': investigation['source_sha256']}, 'proposed')
+        results.append({'issue_id': issue_id, 'disposition': 'proposal',
+                        'claim_coding': entry['claim_coding'], 'summary': entry['summary'],
+                        'evidence_refs': entry['evidence_refs']})
+    return results
 
 
 def issue_eligible(record: dict, gm_id: str) -> bool:
@@ -700,15 +926,19 @@ def issue_eligible(record: dict, gm_id: str) -> bool:
     return not settled or settled.get('content_digest') != record['content_digest']
 
 
-def plan_observation(state: dict, selected: list[str], max_issues: int) -> list[dict]:
+def plan_observation(state: dict, selected: list[str], max_issues: int,
+                     investigation: dict | None = None) -> list[dict]:
     plan = []
     for gm_id in selected:
         eligible = [issue for issue in state['issues'].values() if issue_eligible(issue, gm_id)]
         eligible.sort(key=lambda issue: issue['issue_id'])
         slice_records = eligible[:max_issues]
+        investigate = investigation if investigation and investigation['content_digest'] not in \
+            state['sessions'][gm_id].get('investigations', {}) else None
         plan.append({'gm_id': gm_id, 'session_id': state['sessions'][gm_id].get('session_id'),
                      'slice': [issue['issue_id'] for issue in slice_records],
-                     'can_dispatch': bool(slice_records), '_records': slice_records,
+                     'can_dispatch': bool(slice_records or investigate), '_records': slice_records,
+                     'investigation': investigate,
                      'settled_issue_ids': sorted(issue_id for issue_id, issue in
                                                  state['issues'].items()
                                                  if issue['world_id'] == state['world_id']
@@ -763,6 +993,7 @@ def gm_state_block(state: dict, item: dict, previous: list[dict], run_id: str, d
              'session': {'mode': 'resume' if item['session_id'] else 'new',
                          'session_id': item['session_id']},
              'open_issues': [issue_projection(record) for record in item['_records']],
+             'investigation': item.get('investigation'),
              'settled_issue_ids': item['settled_issue_ids'],
              'closed_or_absent_issue_ids': sorted(issue['issue_id'] for issue in
                                                   state['issues'].values()
@@ -810,31 +1041,32 @@ def parse_events(text: str) -> dict:
 
 
 def extract_json_object(text: str):
-    """Return the outer JSON contract object of an answer, not a nested element.
-
-    A per-issue dictionary also carries "disposition", so a bare last-match rule would
-    silently accept a single nested element and lose the rest of the answer.
-    """
+    """Return one unambiguous outer contract, never a nested example/status object."""
     decoder = json.JSONDecoder()
-    contract = disposition_only = None
-    attempts = 0
-    for index, character in enumerate(text):
-        if character != '{':
-            continue
+    contracts, dispositions = [], []
+    attempts, cursor = 0, 0
+    while cursor < len(text):
+        index = text.find('{', cursor)
+        if index < 0:
+            break
         attempts += 1
         if attempts > 4000:
             break
         try:
-            value, _ = decoder.raw_decode(text[index:])
+            value, consumed = decoder.raw_decode(text[index:])
         except json.JSONDecodeError:
+            cursor = index + 1
             continue
+        # The decoder includes every nested object and quoted brace in this span.
+        cursor = index + consumed
         if not isinstance(value, dict):
             continue
         if 'results' in value or 'status' in value:
-            contract = value
+            contracts.append(value)
         elif 'disposition' in value:
-            disposition_only = value
-    return contract if contract is not None else disposition_only
+            dispositions.append(value)
+    candidates = contracts or dispositions
+    return candidates[0] if len(candidates) == 1 else None
 
 
 def validate_gm_output(document, gm_id: str, slice_ids: list[str]) -> tuple[list[dict], list[str]]:
@@ -885,7 +1117,8 @@ def run_codex_once(route: Route, workdir: Path, run_dir: Path, tag: str, prompt:
     stderr_path = run_dir / f'{tag}.stderr.log'
     result_path = run_dir / f'{tag}.result.md'
     (run_dir / f'{tag}.prompt.txt').write_text(prompt, encoding='utf-8')
-    command = codex_command(route, workdir, result_path, instructions_path, catalog_path, resume_id)
+    command = codex_command(route, workdir, result_path, instructions_path, catalog_path, resume_id,
+                            sandbox='workspace-write' if tag == 'coding' else 'read-only')
     record = {'tag': tag, 'workdir': str(workdir), 'resume_requested': resume_id, 'command': command,
               'prompt_sha256': sha256_bytes(prompt.encode()), 'prompt_bytes': len(prompt.encode()),
               'started_utc': utc_iso(), 'pid': None, 'exit_code': None, 'timed_out': False,
@@ -976,6 +1209,7 @@ def classify_attempt(record: dict, resume_requested: str | None) -> dict:
 
 def unresolved_record(outcome: dict, status: str, cost: str, attempt: dict, note: str = '') -> dict:
     return {'kind': 'unknown_cost' if cost == 'unknown' else 'measured_failure',
+            **usage_evidence(attempt),
             'status': status, 'cost': cost, 'run_id': outcome.get('run_id'),
             'pid': attempt.get('pid'), 'resume_requested': attempt.get('resume_requested'),
             'session_returned': attempt.get('thread_returned'),
@@ -1173,6 +1407,10 @@ def observe(args) -> int:
     if errors:
         return refusal('malformed_source', '; '.join(errors[:8]), 4, error_count=len(errors),
                        evidence_sha256=digest)
+    try:
+        investigation = read_investigation(args.investigation_file, document, digest)
+    except (ValueError, OSError) as error:
+        return refusal('investigation_invalid', str(error), 4)
     prior_reference = prior_ledger_reference(Path(args.prior_ledger))
 
     if args.dry_run:
@@ -1187,7 +1425,7 @@ def observe(args) -> int:
                            'source counters are older than the imported snapshot', 3,
                            world_id=report['world_id'], sequence=report['vector'],
                            previous_vector=report['previous_vector'])
-        plan = plan_observation(state, selected, args.max_issues_per_gm)
+        plan = plan_observation(state, selected, args.max_issues_per_gm, investigation)
         run_id = 'run-' + utc_stamp() + '-' + os.urandom(3).hex()
         return emit({'status': 'dry_run', 'kind': 'gm_observe', 'run_id': run_id,
                      'route': route.reference(),
@@ -1202,6 +1440,7 @@ def observe(args) -> int:
                      'plan': [{'gm_id': item['gm_id'], 'session_id': item['session_id'],
                                'session_mode': 'resume' if item['session_id'] else 'new',
                                'can_dispatch': item['can_dispatch'], 'slice': item['slice'],
+                               'investigation': item['investigation'],
                                'settled_issue_ids': item['settled_issue_ids'],
                                'blocked_by_owner': item['blocked_by_owner']} for item in plan],
                      'prompt_bytes': {item['gm_id']: len(build_prompt(
@@ -1238,7 +1477,7 @@ def observe(args) -> int:
             return refusal('unresolved_prior_attempt',
                            'acknowledge the recorded failed attempt before re-dispatching this GM',
                            5, gms={gm: state['sessions'][gm]['unresolved'] for gm in blocked})
-        plan = plan_observation(state, selected, args.max_issues_per_gm)
+        plan = plan_observation(state, selected, args.max_issues_per_gm, investigation)
         run_id = 'run-' + utc_stamp() + '-' + os.urandom(3).hex()
         run_dir = state_dir / 'runs' / run_id
         run_dir.mkdir(parents=True, exist_ok=False)
@@ -1246,7 +1485,9 @@ def observe(args) -> int:
         instructions.write_text(STABLE_INSTRUCTIONS, encoding='utf-8')
         catalog = run_dir / 'models.json'
         save_json(catalog, codex_catalog(STABLE_INSTRUCTIONS))
-        protected = [evidence_path] + [Path(path).resolve() for path in (args.protect or [])]
+        protected = [evidence_path] + ([args.investigation_file.resolve()]
+                                      if args.investigation_file else []) + \
+                    [Path(path).resolve() for path in (args.protect or [])]
         guards_before = guard_snapshot(protected)
         results, exit_code, aborted = [], 0, None
         for item in plan:
@@ -1290,6 +1531,7 @@ def observe(args) -> int:
 
             attempt = run_codex_once(route, ROOT, run_dir, gm_id, prompt, instructions, catalog,
                                      resume_id, args.timeout, on_process=on_process)
+            account_native_usage(state, attempt, resume_id)
             verdict = classify_attempt(attempt, resume_id)
             status, cost = verdict['status'], verdict['cost']
             record['in_flight'] = None
@@ -1298,8 +1540,10 @@ def observe(args) -> int:
                            'usage': attempt.get('usage') if usage_is_measured(attempt.get('usage'))
                            else None,
                            'usage_measured': usage_is_measured(attempt.get('usage')),
-                           'session_returned': attempt.get('thread_returned')})
+                           'session_returned': attempt.get('thread_returned'),
+                           **usage_evidence(attempt)})
             outcome = {'gm_id': gm_id, 'status': status, 'cost': cost,
+                       **usage_evidence(attempt),
                        'exit_code': attempt.get('exit_code'), 'pid': attempt.get('pid'),
                        'resume_requested': resume_id,
                        'session_returned': attempt.get('thread_returned'),
@@ -1316,6 +1560,8 @@ def observe(args) -> int:
             if status == 'ok':
                 answer = extract_json_object(attempt['result_text'])
                 accepted, validation_errors = validate_gm_output(answer, gm_id, item['slice'])
+                proposals, proposal_errors = validate_new_issues(answer, item['investigation'])
+                validation_errors.extend(proposal_errors)
                 outcome['results'] = accepted
                 outcome['validation_errors'] = validation_errors
                 if validation_errors:
@@ -1323,8 +1569,18 @@ def observe(args) -> int:
                     outcome['status'] = status
                     outcome['cost'] = cost
                 else:
+                    created = register_new_issues(state, gm_id, proposals, item['investigation'],
+                                                  run_id) if proposals else []
+                    accepted.extend(created)
+                    outcome['new_issue_ids'] = [entry['issue_id'] for entry in created]
                     outcome['claim_conflicts'] = apply_gm_outcomes(state, gm_id, accepted, digest,
                                                                    run_id)
+                    if item['investigation']:
+                        record.setdefault('investigations', {})[
+                            item['investigation']['content_digest']] = {
+                                'investigation_id': item['investigation']['investigation_id'],
+                                'source_sha256': digest, 'run_id': run_id,
+                                'new_issue_ids': outcome['new_issue_ids'], 'utc': utc_iso()}
                     record['outcomes'].append({'kind': 'observation', 'run_id': run_id,
                                                'snapshot_sha256': digest,
                                                'dispositions': [entry['disposition']
@@ -1407,6 +1663,25 @@ def validate_scope(scope, issue_id: str, base_revision: str) -> list[str]:
     return errors
 
 
+def validate_coding_output(answer, issue_id: str) -> list[str]:
+    if not isinstance(answer, dict):
+        return ['coding answer must be a JSON contract object']
+    errors = []
+    if answer.get('issue_id') != issue_id:
+        errors.append('coding answer issue_id must match the claimed issue')
+    if answer.get('status') not in ('implemented', 'blocked'):
+        errors.append('coding answer status must be implemented or blocked')
+    changed, commands = answer.get('changed_files'), answer.get('test_commands')
+    if not isinstance(changed, list) or any(not isinstance(path, str) for path in changed):
+        errors.append('coding answer changed_files must be a list of paths')
+    if (not isinstance(commands, list) or any(not isinstance(command, list) or not command
+            or any(not isinstance(token, str) for token in command) for command in commands)):
+        errors.append('coding answer test_commands must be a list of argv lists')
+    if not isinstance(answer.get('test_results'), str):
+        errors.append('coding answer test_results must be a string')
+    return errors
+
+
 def code_preconditions(state: dict, issue_id: str, scope) -> tuple[str, str, int] | None:
     """Coding belongs to one registered GM: current claim, no bypass via stale scope."""
     issue = state['issues'].get(issue_id)
@@ -1451,14 +1726,28 @@ def code_preconditions(state: dict, issue_id: str, scope) -> tuple[str, str, int
 
 def normalize_status_paths(text: str) -> list[str]:
     paths = []
+    if '\0' in text:
+        entries, index = text.split('\0'), 0
+        while index < len(entries):
+            record = entries[index]
+            index += 1
+            if not record:
+                continue
+            paths.append(record[3:].replace('\\', '/'))
+            if 'R' in record[:2] or 'C' in record[:2]:
+                # Porcelain -z puts destination first, then the original path as its
+                # own NUL field. Both endpoints are consequential scope changes.
+                if index < len(entries) and entries[index]:
+                    paths.append(entries[index].replace('\\', '/'))
+                    index += 1
+        return sorted(set(paths))
     for line in text.splitlines():
         if not line.strip():
             continue
         entry = line[3:] if len(line) > 3 else line.strip()
-        if ' -> ' in entry:
-            entry = entry.split(' -> ')[-1]
-        paths.append(entry.strip().strip('"').replace('\\', '/'))
-    return paths
+        endpoints = entry.split(' -> ') if ('R' in line[:2] or 'C' in line[:2]) else [entry]
+        paths.extend(path.strip().strip('"').replace('\\', '/') for path in endpoints)
+    return sorted(set(paths))
 
 
 def code(args) -> int:
@@ -1480,7 +1769,7 @@ def code(args) -> int:
                        requested_base=args.base_revision)
     candidate = Path(args.candidate).resolve() if args.candidate \
         else (state_dir / 'candidates' / args.issue).resolve()
-    if candidate != state_dir and state_dir not in candidate.parents:
+    if candidate == state_dir or state_dir not in candidate.parents or candidate == ROOT.resolve():
         return refusal('candidate_outside_state_dir', str(candidate), 6)
     try:
         route = Route(args.config, args.key_file, args.codex, args.codex_home)
@@ -1523,6 +1812,10 @@ def code(args) -> int:
                 return refusal('resume_preflight_failed', reason, 2, resume_requested=resume_id)
         candidate.parent.mkdir(parents=True, exist_ok=True)
         if candidate.exists():
+            top = git(['rev-parse', '--show-toplevel'], cwd=candidate)
+            if top.returncode != 0 or Path(top.stdout.strip()).resolve() != candidate:
+                return refusal('candidate_not_isolated_worktree',
+                               'existing candidate must be its own isolated git worktree', 6)
             existing = git(['rev-parse', 'HEAD'], cwd=candidate)
             if existing.returncode != 0 or existing.stdout.strip() != base_sha:
                 return refusal('candidate_base_mismatch',
@@ -1581,6 +1874,7 @@ def code(args) -> int:
 
         attempt = run_codex_once(route, candidate, run_dir, 'coding', prompt, instructions, catalog,
                                  resume_id, args.timeout, on_process=on_process)
+        account_native_usage(state, attempt, resume_id)
         verdict = classify_attempt(attempt, resume_id)
         status, cost = verdict['status'], verdict['cost']
         measured = usage_is_measured(attempt.get('usage'))
@@ -1589,7 +1883,8 @@ def code(args) -> int:
         intent.update({'pid': attempt.get('pid') or intent.get('pid'), 'status': status,
                        'cost': cost, 'finished_utc': utc_iso(),
                        'usage': attempt.get('usage') if measured else None,
-                       'usage_measured': measured, 'session_returned': returned})
+                       'usage_measured': measured, 'session_returned': returned,
+                       **usage_evidence(attempt)})
         # Persist the measured provider result and the real returned session BEFORE any local
         # scope test runs: a later test failure or timeout must not lose the resume binding or
         # leave an apparently in-flight paid call.
@@ -1600,6 +1895,7 @@ def code(args) -> int:
             issue['coding_session_source'] = 'resumed' if resume_id else 'created'
         issue['coding_owner_gm'] = owner
         issue['coding_provider_result'] = {
+            **usage_evidence(attempt),
             'run_id': run_id, 'status': status, 'cost': cost,
             'provider_request_started': attempt.get('provider_request_started', False),
             'exit_code': attempt.get('exit_code'), 'pid': attempt.get('pid'),
@@ -1614,8 +1910,11 @@ def code(args) -> int:
         store_state(state_dir, state)
         save_json(run_dir / 'coding-attempt.json', attempt)
         answer = extract_json_object(attempt.get('result_text', ''))
-        if status == 'ok' and not isinstance(answer, dict):
+        validation_errors = validate_coding_output(answer, args.issue)
+        if status == 'ok' and validation_errors:
             status = 'invalid_output'
+        elif status == 'ok' and answer['status'] == 'blocked':
+            status = 'worker_blocked'
         scope_tests = []
         if status == 'ok' and args.run_scope_tests and scope['test_commands']:
             scope_timeout = min(args.timeout, 900)
@@ -1650,8 +1949,10 @@ def code(args) -> int:
         candidate_head = head_after.stdout.strip() if head_after.returncode == 0 else None
         if status == 'ok' and candidate_head != base_sha:
             status = 'worker_committed'
-        changed = git(['status', '--porcelain'], cwd=candidate)
+        changed = git(['status', '--porcelain', '-z', '--untracked-files=all'], cwd=candidate)
         observed_changed = normalize_status_paths(changed.stdout) if changed.returncode == 0 else None
+        if status == 'ok' and observed_changed is None:
+            status = 'candidate_status_failed'
         out_of_scope = [] if observed_changed is None else [path for path in observed_changed
                                                             if path not in allowed_files]
         if status == 'ok' and out_of_scope:
@@ -1691,6 +1992,7 @@ def code(args) -> int:
                                        'run_id': run_id})
         owner_record['coding'].setdefault('attempts', []).append(
             {'run_id': run_id, 'issue_id': args.issue, 'status': status, 'cost': cost,
+             **usage_evidence(attempt),
              'usage_measured': measured, 'usage': attempt.get('usage') if measured else None,
              'provider_request_started': attempt.get('provider_request_started', False),
              'session_returned': returned, 'session_bound': bound,
@@ -1713,6 +2015,7 @@ def code(args) -> int:
         store_state(state_dir, state)
         save_json(run_dir / 'coding-attempt.json', attempt)
         summary = {'status': status, 'kind': 'gm_code', 'run_id': run_id,
+                   **usage_evidence(attempt),
                    'cost': cost,
                    'run_dir': relative(run_dir), 'issue_id': args.issue, 'owner_gm': owner,
                    'candidate': relative(candidate), 'base_revision': args.base_revision,
@@ -1727,6 +2030,7 @@ def code(args) -> int:
                    'usage_measured': usage_is_measured(attempt.get('usage')),
                    'exit_code': attempt.get('exit_code'), 'pid': attempt.get('pid'),
                    'worker_answer': answer,
+                   'validation_errors': validation_errors,
                    'worker_claims': {'changed_files': (answer or {}).get('changed_files'),
                                      'test_results': (answer or {}).get('test_results')},
                    'observed_changed_files': observed_changed,
@@ -1887,6 +2191,8 @@ def build_parser() -> argparse.ArgumentParser:
     observe_parser = subparsers.add_parser('observe', parents=[shared],
                                            help='import reviewed evidence and dispatch GM turns')
     observe_parser.add_argument('--evidence', required=True, type=Path)
+    observe_parser.add_argument('--investigation-file', type=Path,
+                                help='explicit supervisor investigation bound to evidence hash/pointers')
     observe_parser.add_argument('--state-dir', required=True, type=Path)
     observe_parser.add_argument('--dry-run', action='store_true')
     observe_parser.add_argument('--max-gms', type=int, default=10)

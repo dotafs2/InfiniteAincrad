@@ -2,6 +2,8 @@
 
 Status: the source audit below describes current implementation; later sections retain intended structure and historical designs.
 
+2026-09-12 15:00前工程续接：[本轮报告](validation/gpt6_sprint_2026-09-12.md)已验证十人持久世界、最终请求中的个人知识、进程内共享调用等待、有来源GM候选、从私有已接受需求安装有限材料，以及脚本选择下的同档实际采用。采集拥堵修复取得原任务结果，但最终障碍验收存在重复原生崩溃，H33部分/H34开放；Windows执行器进程清理与后代失败上报H35已修复。正式生产仍是Kimi居民与DeepSeek后台GM，本轮临时GPT-6专用窗口的离线结果不能替代真实10+10。
+
 2026-09-12后续实测更新：[H29](validation/town_gm_evidence_2026-09-12.md)已将提交的世界变化和居民need导出到独立GM文件；[H30](validation/town_gm_observers_2026-09-12.md)已由十个不同DeepSeek会话实际消费测试投影。`tools/gm_runner.py`提供持久观察、去重、认领与隔离编码候选入口；真实观察已验，真实认领/编码/发布/居民采用尚未验。下方原始审计基线及其“尚未消费”描述保留为历史发现，当前状态以上述实测和原ROADMAP为准。GM仍在世界外，不是十个NPC身体；没有把串行观察说成永久自主后台。
 
 ## 2026-09-12 源码架构复核：先让简单世界运行并持续改进

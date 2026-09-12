@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
@@ -20,6 +21,11 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
     {
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
     };
+    // Multiple resident adapters in this process share one durable run journal.
+    // Wait before opening its exclusive handle instead of quarantining a healthy
+    // resident with a sharing violation. External processes still fail closed.
+    private static readonly ConcurrentDictionary<string, SemaphoreSlim> JournalGates = new(
+        OperatingSystem.IsWindows() ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal);
     private readonly HttpClient _http;
     private readonly Uri _baseUri;
     private readonly string _token, _ledger, _statePath, _scopeHash;
@@ -59,6 +65,7 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
         _statePath = S(c, "run_state_path");
         var endpointPath = S(c, "endpoint_path");
         Require(Path.IsPathFullyQualified(_statePath) && Path.IsPathFullyQualified(endpointPath));
+        _statePath = Path.GetFullPath(_statePath);
         _deadline = DateTimeOffset.Parse(S(c, "deadline_utc"), System.Globalization.CultureInfo.InvariantCulture);
         Require(_deadline.Offset == TimeSpan.Zero && _deadline > DateTimeOffset.UtcNow);
         _limit = c.GetProperty("max_requests").GetInt32();
@@ -114,6 +121,17 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
             "nearby_residents", "items", "skills", "contracts", "life_account", "wallet", "nearby_skilled_roles", "action_details", "known_rules", "unavailable_actions" })
             if (view.TryGetProperty(key, out var value)) personal[key] = value;
         Require(personal.ContainsKey("identity") && personal.ContainsKey("available_actions"));
+        Require(S(personal["identity"], "id") == actor);
+        // These are the town's recipient-filtered historical projections, never
+        // the world event log, another resident's view, or the GM installation state.
+        // Keep the latest bounded records independently of the 16 recent events.
+        ProjectKnowledge(view, personal, "known_skill_notices", 16,
+            "actor_id", "skill_id", "source_event_id", "seq", "source", "provenance", "text");
+        ProjectKnowledge(view, personal, "known_skill_referrals", 16,
+            "referrer_id", "referred_resident_id", "skill_id", "referral_event_id", "seq", "source_event_id", "source_seq", "provenance", "text");
+        ProjectKnowledge(view, personal, "material_sources", 8,
+            "id", "label", "material", "access", "position", "last_observed_stock", "observed_elapsed", "observation_event_seq",
+            "knowledge_source", "work_seconds_per_unit", "stock_may_have_changed");
         var observation = JsonSerializer.Serialize(personal, WireJson);
         const string instructions = "You are this resident, using only your personal observations and experiences. " +
             "Choose exactly one action ID from available_actions. action_details explains the offered choices. An available action is optional. " +
@@ -122,6 +140,7 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
             "If no available action meets your need, you may additionally propose need:{capability_id:<short missing ability ID>,reason:<your reason>}. " +
             "Do not request an ability you already observe working; a proposal does not create it. Waiting without a need is valid. " +
             "World inventory, contract fields and known_rules describe authoritative current facts. Previous reasons and spoken statements can be mistaken beliefs; revise those beliefs when they conflict with current facts, without rewriting history. " +
+            "known_skill_notices, known_skill_referrals and material_sources are bounded personal historical knowledge, not proof of current skills, availability or stock. Their absence does not prove nobody has a skill or that no material exists. " +
             "Other residents may refuse; only a recorded contract or action receipt establishes an outcome. " +
             "Do not invent resources or memories, install anything, modify rules, or include any other fields.";
         Require(Encoding.UTF8.GetByteCount(instructions + observation) <= 24576);
@@ -130,6 +149,23 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
             stream = false, max_tokens = 512, thinking = new { type = "disabled" }, response_format = new { type = "json_object" } }, WireJson);
         Require(Encoding.UTF8.GetByteCount(body) <= 32768);
 
+        var gate = JournalGates.GetOrAdd(_statePath, _ => new SemaphoreSlim(1, 1));
+        await gate.WaitAsync(ct).ConfigureAwait(false);
+        try
+        {
+            // A cancelled/deadline-expired waiter has not attempted an upstream call.
+            ct.ThrowIfCancellationRequested();
+            Require(DateTimeOffset.UtcNow < _deadline);
+            return await CompleteRecorded(body, operation!, actor!, ct).ConfigureAwait(false);
+        }
+        finally
+        {
+            gate.Release();
+        }
+    }
+
+    private async Task<ModelResponse> CompleteRecorded(string body, string operation, string actor, CancellationToken ct)
+    {
         Directory.CreateDirectory(Path.GetDirectoryName(_statePath)!);
         var existed = File.Exists(_statePath);
         using var stateFile = new FileStream(_statePath, existed ? FileMode.Open : FileMode.CreateNew,
@@ -168,6 +204,42 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
         state.Unknown = false;
         WriteState(stateFile, state);
         return response;
+    }
+
+    private static void ProjectKnowledge(JsonElement view, Dictionary<string, JsonElement> personal,
+        string key, int limit, params string[] fields)
+    {
+        if (!view.TryGetProperty(key, out var records)) return; // Legacy well views have none.
+        Require(records.ValueKind == JsonValueKind.Array);
+        var projected = new List<Dictionary<string, JsonElement>>();
+        // Preserve whole source-attributed records. Incidental nested private fields
+        // cannot ride along when a future host adds data to one of these records.
+        foreach (var record in records.EnumerateArray().Reverse().Take(limit))
+        {
+            Require(record.ValueKind == JsonValueKind.Object);
+            var entry = new Dictionary<string, JsonElement>();
+            foreach (var field in fields)
+            {
+                var value = record.GetProperty(field);
+                if (field == "position")
+                {
+                    Require(value.ValueKind == JsonValueKind.Array && value.GetArrayLength() == 3);
+                    foreach (var coordinate in value.EnumerateArray())
+                        Require(coordinate.ValueKind == JsonValueKind.Number && double.IsFinite(coordinate.GetDouble()));
+                }
+                else
+                {
+                    Require(value.ValueKind is JsonValueKind.String or JsonValueKind.Number or JsonValueKind.True or JsonValueKind.False);
+                    if (value.ValueKind == JsonValueKind.String) Require(value.GetString()!.Length <= 512);
+                }
+                entry[field] = value;
+            }
+            projected.Add(entry);
+        }
+        projected.Reverse();
+        personal[key] = JsonSerializer.SerializeToElement(projected, WireJson);
+        // The existing 24 KiB prompt and 32 KiB wire guards still apply to all
+        // knowledge together; a large input must never enlarge the paid context.
     }
 
     private void ValidateBudget(JsonElement budget)
