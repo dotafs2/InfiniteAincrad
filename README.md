@@ -2,7 +2,7 @@
 
 [手机看进度与实机画面](docs/PROGRESS.md) · [唯一原路线图](ROADMAP.md)
 
-合并来源可用性：[跨机器合并验证报告](docs/validation/cross_machine_2026-09-12.md)
+最新：**首条真实闭环**——真实Kimi十人世界中，一个后台DeepSeek GM读取证据、写代码、跑测试、经独立复核发布修复，同一世界的居民随后自然完成原委托并冷恢复。[实机与事实](docs/validation/real_ten_2026-09-12/report.md) · 合并来源可用性：[跨机器合并验证报告](docs/validation/cross_machine_2026-09-12.md)
 
 2026-09-12最新：[十人实际街道、私有需求交付与同档恢复](docs/validation/gpt6_sprint_2026-09-12.md)已有离线工程验收；真实10Kimi＋10DeepSeek尚未完成，采集拥堵与原生崩溃继续在原图追踪。
 

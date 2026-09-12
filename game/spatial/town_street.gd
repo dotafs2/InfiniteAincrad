@@ -16,6 +16,7 @@ const MaterialVisibility = preload("res://spatial/town_material_visibility.gd")
 const MaterialSteering = preload("res://spatial/town_material_steering.gd")
 const ForagingLayout = preload("res://spatial/town_foraging_layout.gd")
 const ForagingSteering = preload("res://spatial/town_foraging_steering.gd")
+const SocialSteering = preload("res://spatial/town_social_steering.gd")
 var town := Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
@@ -57,6 +58,7 @@ var nameplates: Node = null
 var material_visibility: Node3D = null
 var material_steering: RefCounted = null
 var foraging_steering: RefCounted = null
+var social_steering: RefCounted = null
 var foraging_layout_status: Dictionary = {}
 var _foraging_layout_attempted := false
 var _spaced_foraging := false
@@ -157,6 +159,7 @@ func _ready() -> void:
 	material_visibility.configure(town, bodies, material_sources)
 	material_steering = MaterialSteering.new()
 	foraging_steering = ForagingSteering.new()
+	social_steering = SocialSteering.new()
 	town.require_material_visibility(Callable(material_visibility, "can_observe"))
 	_build_town_hud()
 	_build_nameplates()
@@ -335,6 +338,8 @@ func _physics_process(delta: float) -> void:
 		material_steering.retain_active(town.active_ids())
 	if foraging_steering != null:
 		foraging_steering.retain_active(town.active_ids())
+	if social_steering != null:
+		social_steering.retain_active(town.active_ids())
 	for id in town.active_ids():
 		var job: Dictionary = town.pending_job(id)
 		var body: CharacterBody3D = bodies[id]
@@ -348,9 +353,13 @@ func _physics_process(delta: float) -> void:
 				direction = material_steering.direction_for(id, str(job.command_id), body, target)
 			elif _spaced_foraging and job.action in ["harvest_ration", "eat_ration", "rest"] and foraging_steering != null:
 				direction = foraging_steering.direction_for(id, str(job.command_id), body, target)
+			elif job.action == "approach" and social_steering != null:
+				direction = social_steering.direction_for(id, str(job.command_id), body, target)
 			else:
 				if material_steering != null:
 					material_steering.clear_route(id)
+				if social_steering != null:
+					social_steering.clear_route(id)
 				var offset := target - body.position
 				offset.y = 0
 				if offset.length() > 0.30:
@@ -368,6 +377,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			if material_steering != null:
 				material_steering.clear_route(id)
+			if social_steering != null:
+				social_steering.clear_route(id)
 			# Legacy Mac repair hand-offs temporarily route the owner to the worker.
 			# This route auto-movement is offline/local_rule_policy only and is never
 			# executed in gateway_mode or restore_only.
@@ -848,6 +859,24 @@ func _build_berry_patch() -> void:
 		bush.add_child(fruit)
 		berry_visuals.append(fruit)
 
+func pending_breakdown(snap: Dictionary) -> Dictionary:
+	# Truthful pending work for every journey source. The reviewed shared-world
+	# capture reported pending_count 0 while one accepted social approach was still
+	# unfinished, because only godot.pending (life and material jobs) was counted.
+	# Trade jobs live in godot.trade.jobs, so they are counted here and named
+	# separately, and a future report cannot silently drop a social job again.
+	var zero := {"pending_life_count": 0, "pending_trade_count": 0, "pending_count": 0}
+	var godot_state: Variant = snap.get("godot", {})
+	if not godot_state is Dictionary:
+		return zero
+	var life_jobs: Variant = godot_state.get("pending", {})
+	var trade: Variant = godot_state.get("trade", {})
+	var trade_jobs: Variant = trade.get("jobs", {}) if trade is Dictionary else {}
+	var life_count: int = life_jobs.size() if life_jobs is Dictionary else 0
+	var trade_count: int = trade_jobs.size() if trade_jobs is Dictionary else 0
+	return {"pending_life_count": life_count, "pending_trade_count": trade_count,
+		"pending_count": life_count + trade_count}
+
 func _capture_town() -> void:
 	paused = true
 	_refresh()
@@ -857,9 +886,11 @@ func _capture_town() -> void:
 	var snap := town.snapshot()
 	var is_fixture := str(snap.world_id).begins_with("fixture:")
 	var is_new_world := bool(snap.godot.get("new_world_seed", false)) or str(snap.get("origin", {}).get("kind", "")) == "new_world_seed"
+	var pending := pending_breakdown(snap)
 	var evidence := {"original_identities": 0 if is_fixture or is_new_world else snap.residents.size(), "active": town.active_ids().size(), "life_seq": snap.life.seq,
 		"source_seq": snap.godot.source_life_seq, "new_events": snap.godot.new_events,
-		"new_decisions": "none_restore" if restore_only else "scripted_trade_fixture" if scripted_trade else "controller_records" if gateway_mode else "local_rule_policy", "foraging": snap.foraging, "pending_count": snap.godot.pending.size(), "resident_turns": snap.godot.get("resident_turns", {})}
+		"new_decisions": "none_restore" if restore_only else "scripted_trade_fixture" if scripted_trade else "controller_records" if gateway_mode else "local_rule_policy", "foraging": snap.foraging, "pending_count": pending.pending_count,
+		"pending_life_count": pending.pending_life_count, "pending_trade_count": pending.pending_trade_count, "resident_turns": snap.godot.get("resident_turns", {})}
 	evidence["world_id"] = snap.world_id
 	evidence["is_fixture"] = is_fixture
 	evidence["identity_count"] = snap.residents.size()

@@ -5,27 +5,43 @@ GPT-6 discusses alternatives, challenges direction and reviews reported outcomes
 the user; it does not implement. Routing or dispatching an authorized DeepSeek task is
 orchestration, not implementation.
 
-## Shared launcher
+## Launchers (verified on this machine vs. legacy machine notes)
 
-- Launcher: `C:/InfiniteAincrad/scripts/deepseek.py` (the one shared, launcher-root install).
-- `--workdir` is optional and points the run at a specific worktree, e.g. this one.
-- Profile: `infiniteaincrad-deepseek`; model: `deepseek-flash`.
-- API key: `C:/InfiniteAincrad/private/deepseek-api-key.txt` (launcher-root private/).
-  The agent never reads, copies or prints this key, and never commits it.
-- Run logs: `C:/InfiniteAincrad/private/deepseek-runs`.
-- No automatic background run; no hard token or money cap is implied by this doc.
+The legacy shared launcher notes recorded an older machine's install root
+(`<LEGACY_LAUNCHER_ROOT>/scripts/deepseek.py`, key and run logs under that root's
+private directory, a `deepseek-flash` profile). That install does not exist here; those
+paths stay only as history and are not the current instructions. Do not silently
+recreate them or copy a launcher between roots, because a launcher's credential root
+decides which account and ledger a run charges.
 
-## Example (bounded)
+This machine's verified local native launcher is:
 
-Invoke the existing shared launcher by absolute path, targeting this worktree, with a
-bounded timeout:
+- Launcher: `tmp/chain-20260912/dispatch_native.py` (repository-relative, inside this
+  project's ignored `tmp/` output; never committed).
+- It runs one bounded native `codex exec` turn against the configured provider, passes
+  the task file on stdin, and keeps the run directory (events, stderr, result) for
+  usage accounting.
+- Resume: pass the saved session's canonical UUID with `--resume <uuid>`. The launcher
+  preflights the UUID syntax and the existence of the saved rollout file, and refuses a CLI
+  fallback that would create a new session. Whether the provider actually resumed the
+  requested session is observable rather than enforced by the launcher: the returned
+  `thread.started.thread_id` is read from the run's own events and was independently
+  verified by the supervisor for a real resumed run.
+- Counting the run afterwards is offline and inference-free via `tools/deepseek_usage.py
+  --run-dir <run-dir>`, which reads only `process.json`, `events.jsonl` and `result.md`.
+- No automatic background run; no hard token or money cap is implied by this doc. The
+  agent never reads, copies or prints a provider key and never commits one.
+
+## Example (bounded, placeholders)
 
 ```
-python C:\InfiniteAincrad\scripts\deepseek.py `
-  --workdir C:\Users\quchenxi\.codex\worktrees\0b50\InfiniteAincrad `
-  --task-file <authorized-task.md> `
-  --timeout-seconds 300
+python tmp/chain-20260912/dispatch_native.py <authorized-task.md>
+python tmp/chain-20260912/dispatch_native.py <follow-up-task.md> --resume <saved-session-uuid>
 ```
+
+## Interrupted-usage continuation (supervisor operational interpretation)
+
+The user removed the cheap-DeepSeek call cap and asked for the chain to be finished and real 10+10 tested before reporting. When a bounded paid turn is cut off (for example the GM09 code turn that exceeded its 900 s bound), its measured completed responses are recorded individually and the interrupted tail stays **unknown**: never settled, zero or fully measured. The scoped work then continues through `gm_runner.py recover --usage unknown` plus `acknowledge`, with the supervisor citation in the reconciliation note — not a new user reply, and not a waiver of the Kimi ledger, new-unknown stop or currency bounds. This is the current policy; the earlier annotation that confined every continuation to the single 2026-09-12 02:26 stream incident was too narrow relative to those later instructions and is retained only as history.
 
 ## Boundaries
 
@@ -59,10 +75,12 @@ dotnet build game/InfiniteAincrad.csproj --no-restore -v minimal -m:1 -nodeReuse
 
 ## Usage accounting (offline, no inference)
 
-Aggregate one or more finished run directories with the shared runtime:
+Aggregate one or more finished run directories with the shared runtime. The run directory is
+wherever the launcher above wrote it; the `C:\InfiniteAincrad\private\deepseek-runs` form in
+the older notes is the **legacy machine's** layout, kept only as history:
 
 ```
-python tools/deepseek_usage.py --run-dir C:\InfiniteAincrad\private\deepseek-runs\<run-id> [--run-dir <run-id> ...]
+python tools/deepseek_usage.py --run-dir <run-directory> [--run-dir <run-directory> ...]
 ```
 
 - Reads only `process.json`, `events.jsonl` and `result.md`; it counts each completed
@@ -76,6 +94,7 @@ python tools/deepseek_usage.py --run-dir C:\InfiniteAincrad\private\deepseek-run
   DeepSeek DEVELOPMENT tasks with currency unavailable. They are not a currency bill and no
   money estimate is produced.
 
-Optional reasoning effort: the shared launcher accepts
-`--reasoning-effort {low,medium,high}` (omitted keeps the profile value; passed through as
-`-c model_reasoning_effort=<value>`).
+Reasoning effort is set by the launcher's own model configuration
+(`-c model_reasoning_effort=<value>` in the generated command). An optional
+`--reasoning-effort` flag was described in the legacy notes; it is **not** verified for the
+current launcher and must not be advertised without checking that launcher's arguments.
