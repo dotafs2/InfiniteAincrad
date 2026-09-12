@@ -1,0 +1,311 @@
+{
+  "method": "Blender native glTF importer on every actual exported GLB; finite positions/normals/UVs, triangle area and material assignment checks",
+  "count": 16,
+  "passed": true,
+  "assets": [
+    {
+      "file": "SF01_Mercer_Display_Window.glb",
+      "triangles": 5196,
+      "vertices": 12872,
+      "dimensions_xyz_m": [
+        2.96,
+        0.55,
+        2.2125
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF02_Folding_Service_Hatch.glb",
+      "triangles": 6892,
+      "vertices": 16069,
+      "dimensions_xyz_m": [
+        2.55,
+        1.185,
+        2.18079
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF03_Diamond_Lead_Casement.glb",
+      "triangles": 5314,
+      "vertices": 14394,
+      "dimensions_xyz_m": [
+        1.64,
+        0.47,
+        2.13
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 10,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF04_Radial_Attic_Oculus.glb",
+      "triangles": 15756,
+      "vertices": 39862,
+      "dimensions_xyz_m": [
+        1.23,
+        0.2725,
+        1.23
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF05_Tiled_Gable_Dormer.glb",
+      "triangles": 9236,
+      "vertices": 23957,
+      "dimensions_xyz_m": [
+        1.78,
+        1.405,
+        2.163
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF06_Open_Flue_Chimney.glb",
+      "triangles": 17040,
+      "vertices": 43060,
+      "dimensions_xyz_m": [
+        1.39,
+        1.095,
+        1.887
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF07_Clay_Tile_Rain_Eave.glb",
+      "triangles": 8604,
+      "vertices": 22800,
+      "dimensions_xyz_m": [
+        2.65,
+        0.94456,
+        0.79971
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF08_Carved_Timber_Corbel.glb",
+      "triangles": 2756,
+      "vertices": 6896,
+      "dimensions_xyz_m": [
+        0.25,
+        0.97009,
+        1.4
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF09_Scalloped_Cloth_Canopy.glb",
+      "triangles": 26212,
+      "vertices": 73976,
+      "dimensions_xyz_m": [
+        2.62,
+        1.2435,
+        0.745
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF10_Stone_Double_Portal.glb",
+      "triangles": 11340,
+      "vertices": 29302,
+      "dimensions_xyz_m": [
+        2.69,
+        0.57,
+        3.4
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF11_Glazed_Shop_Door.glb",
+      "triangles": 3632,
+      "vertices": 9150,
+      "dimensions_xyz_m": [
+        1.54,
+        0.45205,
+        2.7825
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF12_Herbal_Stone_Niche.glb",
+      "triangles": 7720,
+      "vertices": 19458,
+      "dimensions_xyz_m": [
+        1.56,
+        0.84,
+        2.11706
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF13_Bakery_Pretzel_Emblem.glb",
+      "triangles": 3768,
+      "vertices": 8347,
+      "dimensions_xyz_m": [
+        0.86,
+        0.89,
+        1.14
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF14_Apothecary_Mortar_Emblem.glb",
+      "triangles": 1548,
+      "vertices": 3794,
+      "dimensions_xyz_m": [
+        0.77,
+        0.965,
+        1.14
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF15_Tailor_Shears_Emblem.glb",
+      "triangles": 5448,
+      "vertices": 13464,
+      "dimensions_xyz_m": [
+        0.66029,
+        0.89,
+        1.14
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    },
+    {
+      "file": "SF16_Barber_Spiral_Emblem.glb",
+      "triangles": 28324,
+      "vertices": 75725,
+      "dimensions_xyz_m": [
+        0.33567,
+        0.99783,
+        1.14
+      ],
+      "zero_derived_vertex_averages_not_shading_normals": 0,
+      "errors": {
+        "nonfinite_positions": 0,
+        "invalid_normals": 0,
+        "missing_or_nonfinite_uvs": 0,
+        "degenerate_triangles": 0,
+        "invalid_material_assignments": 0
+      },
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,956 @@
+{
+  "style_id": "floor1_artisan_workshops_20260912",
+  "units": "metres",
+  "source_up": "Z",
+  "gltf_up": "Y via official Blender exporter",
+  "generator": "Art/Generated/ArtisanWorkshops20260912/build_workshops.py",
+  "blender_version": "5.2.1 LTS",
+  "asset_count": 18,
+  "source_provenance": "Original procedural workshop designs by GPT-6 Astra under user art authorization. Minimal repository-original mesh/PBR helpers copied from MarketLife20260912/build_market_life.py; its builders were neither imported nor run.",
+  "external_dependencies": [],
+  "third_party_assets": [],
+  "rights_note": "No imported images, source characters or private world state. Project-wide redistribution license is not selected by this delivery.",
+  "scope": "Decorative static props only. No working production logic, collision, resident skill, LOD, rig or save behavior claimed.",
+  "assets": [
+    {
+      "id": "treadle_potters_wheel",
+      "name": "Treadle pottery wheel",
+      "file": "game/assets/generated/artisan_workshops_20260912/treadle_potters_wheel.glb",
+      "triangles": 6628,
+      "vertices": 3260,
+      "dimensions_m": [
+        1.05,
+        1.235868,
+        1.2237
+      ],
+      "bounds_min_m": [
+        -0.525,
+        -0.645868,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.525,
+        0.59,
+        1.2237
+      ],
+      "materials": [
+        "AW_oak_light",
+        "AW_grain",
+        "AW_oak_dark",
+        "AW_oak",
+        "AW_iron",
+        "AW_stone_light",
+        "AW_stone",
+        "AW_clay_light",
+        "AW_glaze"
+      ],
+      "glb_bytes": 269592,
+      "sha256": "27033786a5bfa7caeebadee93645e027ddfafe812e645b91fa077419de8bafcf",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 3260,
+        "triangles": 6628,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 9,
+        "bounds_min_m": [
+          -0.5249999761581421,
+          -0.6458683609962463,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.5249999761581421,
+          0.5899999737739563,
+          1.223699927330017
+        ]
+      }
+    },
+    {
+      "id": "arched_pottery_kiln",
+      "name": "Arched pottery kiln",
+      "file": "game/assets/generated/artisan_workshops_20260912/arched_pottery_kiln.glb",
+      "triangles": 9796,
+      "vertices": 4020,
+      "dimensions_m": [
+        1.48,
+        1.39,
+        2.085
+      ],
+      "bounds_min_m": [
+        -0.74,
+        -0.695,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.74,
+        0.695,
+        2.085
+      ],
+      "materials": [
+        "AW_stone",
+        "AW_clay_light",
+        "AW_terracotta",
+        "AW_stone_light",
+        "AW_black",
+        "AW_oak_dark",
+        "AW_iron"
+      ],
+      "glb_bytes": 504724,
+      "sha256": "d27992a1648a5368c1d77fab72bb170570b18b22d1100c2e73e4686a01fd4df7",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 4020,
+        "triangles": 9796,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 7,
+        "bounds_min_m": [
+          -0.7400000095367432,
+          -0.6949999928474426,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.7400000095367432,
+          0.6949999928474426,
+          2.0850000381469727
+        ]
+      }
+    },
+    {
+      "id": "clay_drying_shelves",
+      "name": "Clay drying shelves",
+      "file": "game/assets/generated/artisan_workshops_20260912/clay_drying_shelves.glb",
+      "triangles": 18748,
+      "vertices": 9144,
+      "dimensions_m": [
+        1.451,
+        0.659663,
+        1.74
+      ],
+      "bounds_min_m": [
+        -0.743,
+        -0.319663,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.708,
+        0.34,
+        1.74
+      ],
+      "materials": [
+        "AW_oak",
+        "AW_oak_dark",
+        "AW_oak_light",
+        "AW_grain",
+        "AW_terracotta",
+        "AW_clay_light",
+        "AW_iron",
+        "AW_sage"
+      ],
+      "glb_bytes": 682468,
+      "sha256": "5056a4873ac2fb77192f458f50c3235918e83651716f1efa2638929d797cb967",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 9144,
+        "triangles": 18748,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 8,
+        "bounds_min_m": [
+          -0.7430000305175781,
+          -0.3196629583835602,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.7080000042915344,
+          0.3400000035762787,
+          1.7400000095367432
+        ]
+      }
+    },
+    {
+      "id": "horn_anvil_stump",
+      "name": "Horn anvil on banded stump",
+      "file": "game/assets/generated/artisan_workshops_20260912/horn_anvil_stump.glb",
+      "triangles": 3584,
+      "vertices": 1780,
+      "dimensions_m": [
+        1.135,
+        0.66,
+        1.058
+      ],
+      "bounds_min_m": [
+        -0.485,
+        -0.33,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.65,
+        0.33,
+        1.058
+      ],
+      "materials": [
+        "AW_oak",
+        "AW_endgrain",
+        "AW_grain",
+        "AW_oak_dark",
+        "AW_iron",
+        "AW_stone",
+        "AW_black",
+        "AW_oak_light"
+      ],
+      "glb_bytes": 146336,
+      "sha256": "0cb1faf657bd67c2dfd2b3d476f8d2586e1f25046be207566a4ac3c852ab4c5a",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 1780,
+        "triangles": 3584,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 8,
+        "bounds_min_m": [
+          -0.48500001430511475,
+          -0.33000001311302185,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.6499999761581421,
+          0.33000001311302185,
+          1.0579999685287476
+        ]
+      }
+    },
+    {
+      "id": "forge_with_bellows",
+      "name": "Hooded forge with bellows",
+      "file": "game/assets/generated/artisan_workshops_20260912/forge_with_bellows.glb",
+      "triangles": 3392,
+      "vertices": 1472,
+      "dimensions_m": [
+        2.080199,
+        0.925,
+        2.4
+      ],
+      "bounds_min_m": [
+        -0.55,
+        -0.425,
+        0.0
+      ],
+      "bounds_max_m": [
+        1.530199,
+        0.5,
+        2.4
+      ],
+      "materials": [
+        "AW_stone",
+        "AW_terracotta",
+        "AW_stone_light",
+        "AW_black",
+        "AW_iron",
+        "AW_oak",
+        "AW_oak_dark",
+        "AW_leather",
+        "AW_oak_light"
+      ],
+      "glb_bytes": 186816,
+      "sha256": "b45cecf1294bf5427105effccdc7cb9b503fbe65a9f5bc0b3e5424d44babea86",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 1472,
+        "triangles": 3392,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 9,
+        "bounds_min_m": [
+          -0.550000011920929,
+          -0.42500001192092896,
+          0.0
+        ],
+        "bounds_max_m": [
+          1.5301992893218994,
+          0.5,
+          2.4000000953674316
+        ]
+      }
+    },
+    {
+      "id": "smith_tong_rack",
+      "name": "Smith tong and iron rack",
+      "file": "game/assets/generated/artisan_workshops_20260912/smith_tong_rack.glb",
+      "triangles": 3720,
+      "vertices": 1800,
+      "dimensions_m": [
+        1.28,
+        0.65,
+        1.58
+      ],
+      "bounds_min_m": [
+        -0.64,
+        -0.325,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.64,
+        0.325,
+        1.58
+      ],
+      "materials": [
+        "AW_oak",
+        "AW_oak_dark",
+        "AW_iron",
+        "AW_oak_light"
+      ],
+      "glb_bytes": 154768,
+      "sha256": "a7f39bc1846d9cc59c69d349f47cb3ca8634e2f435439b08831f2e0a0bce34ea",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 1800,
+        "triangles": 3720,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 4,
+        "bounds_min_m": [
+          -0.6399999856948853,
+          -0.32499998807907104,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.6399999856948853,
+          0.32499998807907104,
+          1.5800000429153442
+        ]
+      }
+    },
+    {
+      "id": "sage_dye_vat",
+      "name": "Sage cloth dye vat",
+      "file": "game/assets/generated/artisan_workshops_20260912/sage_dye_vat.glb",
+      "triangles": 6032,
+      "vertices": 2796,
+      "dimensions_m": [
+        1.4,
+        1.08,
+        1.528
+      ],
+      "bounds_min_m": [
+        -0.7,
+        -0.54,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.7,
+        0.54,
+        1.528
+      ],
+      "materials": [
+        "AW_oak",
+        "AW_oak_dark",
+        "AW_iron",
+        "AW_glaze_dark",
+        "AW_oak_light",
+        "AW_sage",
+        "AW_stone"
+      ],
+      "glb_bytes": 239748,
+      "sha256": "a939bf0a805da870bbb572e1428a7b50cd41c034c490878dbcd29e2f6a02937f",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 2796,
+        "triangles": 6032,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 7,
+        "bounds_min_m": [
+          -0.699999988079071,
+          -0.5400000214576721,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.6999998688697815,
+          0.5400000214576721,
+          1.5280001163482666
+        ]
+      }
+    },
+    {
+      "id": "laced_leather_frame",
+      "name": "Laced leather stretching frame",
+      "file": "game/assets/generated/artisan_workshops_20260912/laced_leather_frame.glb",
+      "triangles": 3832,
+      "vertices": 1876,
+      "dimensions_m": [
+        1.52,
+        0.72,
+        1.94
+      ],
+      "bounds_min_m": [
+        -0.76,
+        -0.36,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.76,
+        0.36,
+        1.94
+      ],
+      "materials": [
+        "AW_oak",
+        "AW_oak_dark",
+        "AW_oak_light",
+        "AW_leather",
+        "AW_thread",
+        "AW_brass",
+        "AW_iron"
+      ],
+      "glb_bytes": 171156,
+      "sha256": "8819ce73259a014fce48a99b383fb3d72463580ea7aa373b6977c1e73f1fc356",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 1876,
+        "triangles": 3832,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 7,
+        "bounds_min_m": [
+          -0.7599999904632568,
+          -0.36000001430511475,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.7599999904632568,
+          0.36000001430511475,
+          1.940000057220459
+        ]
+      }
+    },
+    {
+      "id": "jewelers_drawbench",
+      "name": "Jeweler drawplate and winding bench",
+      "file": "game/assets/generated/artisan_workshops_20260912/jewelers_drawbench.glb",
+      "triangles": 5968,
+      "vertices": 2832,
+      "dimensions_m": [
+        1.38,
+        0.654,
+        1.32923
+      ],
+      "bounds_min_m": [
+        -0.69,
+        -0.327,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.69,
+        0.327,
+        1.32923
+      ],
+      "materials": [
+        "AW_oak",
+        "AW_oak_dark",
+        "AW_oak_light",
+        "AW_grain",
+        "AW_iron",
+        "AW_black",
+        "AW_brass",
+        "AW_stone_light"
+      ],
+      "glb_bytes": 262740,
+      "sha256": "91d1e31e58d3eb90b36f7f855361497c8052fe89a4bafa0994f78086cd8b8052",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 2832,
+        "triangles": 5968,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 8,
+        "bounds_min_m": [
+          -0.6899999976158142,
+          -0.3269999921321869,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.6899999976158142,
+          0.3269999921321869,
+          1.3292300701141357
+        ]
+      }
+    },
+    {
+      "id": "candle_mold_rack",
+      "name": "Six candle molds and curing rack",
+      "file": "game/assets/generated/artisan_workshops_20260912/candle_mold_rack.glb",
+      "triangles": 5076,
+      "vertices": 2328,
+      "dimensions_m": [
+        0.91,
+        0.526391,
+        1.501668
+      ],
+      "bounds_min_m": [
+        -0.455,
+        -0.263195,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.455,
+        0.263195,
+        1.501668
+      ],
+      "materials": [
+        "AW_oak",
+        "AW_oak_dark",
+        "AW_oak_light",
+        "AW_grain",
+        "AW_iron",
+        "AW_thread",
+        "AW_canvas",
+        "AW_black",
+        "AW_wheat"
+      ],
+      "glb_bytes": 245372,
+      "sha256": "1a56612d47cd46f800eaaa240151598104d53a257bf93973674fc6ac78face24",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 2328,
+        "triangles": 5076,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 9,
+        "bounds_min_m": [
+          -0.45500001311302185,
+          -0.2631952464580536,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.45500001311302185,
+          0.263195276260376,
+          1.5016676187515259
+        ]
+      }
+    },
+    {
+      "id": "screw_book_press",
+      "name": "Threaded bookbinding press",
+      "file": "game/assets/generated/artisan_workshops_20260912/screw_book_press.glb",
+      "triangles": 5892,
+      "vertices": 2746,
+      "dimensions_m": [
+        0.99,
+        0.74,
+        1.36
+      ],
+      "bounds_min_m": [
+        -0.495,
+        -0.37,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.495,
+        0.37,
+        1.36
+      ],
+      "materials": [
+        "AW_oak_light",
+        "AW_grain",
+        "AW_oak_dark",
+        "AW_paper",
+        "AW_leather",
+        "AW_oak",
+        "AW_iron"
+      ],
+      "glb_bytes": 267984,
+      "sha256": "6f3aa64f9d1fb67f09e9beef94ea9641a310f4a01582c7f98dd024572490a306",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 2746,
+        "triangles": 5892,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 7,
+        "bounds_min_m": [
+          -0.4950000047683716,
+          -0.3700000047683716,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.4950000047683716,
+          0.3700000047683716,
+          1.3600000143051147
+        ]
+      }
+    },
+    {
+      "id": "coopers_stave_jig",
+      "name": "Cooper stave shaping jig",
+      "file": "game/assets/generated/artisan_workshops_20260912/coopers_stave_jig.glb",
+      "triangles": 13016,
+      "vertices": 5286,
+      "dimensions_m": [
+        1.054,
+        0.83,
+        0.895
+      ],
+      "bounds_min_m": [
+        -0.525,
+        -0.415,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.529,
+        0.415,
+        0.895
+      ],
+      "materials": [
+        "AW_oak_light",
+        "AW_grain",
+        "AW_oak_dark",
+        "AW_oak",
+        "AW_iron"
+      ],
+      "glb_bytes": 692712,
+      "sha256": "a566a94f94705dadbd09c3d0a2f3ccf0125258653722f94a57c0aa8dd54a34ae",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 5286,
+        "triangles": 13016,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 5,
+        "bounds_min_m": [
+          -0.5249999761581421,
+          -0.41499999165534973,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.5289999842643738,
+          0.41499999165534973,
+          0.8950000405311584
+        ]
+      }
+    },
+    {
+      "id": "bowyers_shaping_form",
+      "name": "Bowyer pegged shaping form",
+      "file": "game/assets/generated/artisan_workshops_20260912/bowyers_shaping_form.glb",
+      "triangles": 4120,
+      "vertices": 1942,
+      "dimensions_m": [
+        1.44,
+        0.64,
+        1.4075
+      ],
+      "bounds_min_m": [
+        -0.72,
+        -0.32,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.72,
+        0.32,
+        1.4075
+      ],
+      "materials": [
+        "AW_oak",
+        "AW_oak_dark",
+        "AW_oak_light",
+        "AW_grain",
+        "AW_thread",
+        "AW_brass",
+        "AW_leather"
+      ],
+      "glb_bytes": 179624,
+      "sha256": "6a33a4fbdd647be64bcc2917836bd1d708566d878b77ed2b11a9354e002e7219",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 1942,
+        "triangles": 4120,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 7,
+        "bounds_min_m": [
+          -0.7200000286102295,
+          -0.3199999928474426,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.7200000286102295,
+          0.3199999928474426,
+          1.4075000286102295
+        ]
+      }
+    },
+    {
+      "id": "rope_winding_winch",
+      "name": "Rope winding winch",
+      "file": "game/assets/generated/artisan_workshops_20260912/rope_winding_winch.glb",
+      "triangles": 8032,
+      "vertices": 3946,
+      "dimensions_m": [
+        1.3,
+        0.89,
+        1.16
+      ],
+      "bounds_min_m": [
+        -0.54,
+        -0.445,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.76,
+        0.445,
+        1.16
+      ],
+      "materials": [
+        "AW_oak_light",
+        "AW_grain",
+        "AW_oak_dark",
+        "AW_oak",
+        "AW_iron",
+        "AW_thread"
+      ],
+      "glb_bytes": 311972,
+      "sha256": "06be33b4c435bf72a5e9d868bc2be896b0e57c6332fdc99c71436bda1b61a176",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 3946,
+        "triangles": 8032,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 6,
+        "bounds_min_m": [
+          -0.5400000214576721,
+          -0.4449999928474426,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.7599999308586121,
+          0.4449999928474426,
+          1.1600000858306885
+        ]
+      }
+    },
+    {
+      "id": "grain_hand_quern",
+      "name": "Grain hand quern and catch bowl",
+      "file": "game/assets/generated/artisan_workshops_20260912/grain_hand_quern.glb",
+      "triangles": 4164,
+      "vertices": 1996,
+      "dimensions_m": [
+        0.825699,
+        0.947,
+        1.11171
+      ],
+      "bounds_min_m": [
+        -0.412849,
+        -0.58,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.412849,
+        0.367,
+        1.11171
+      ],
+      "materials": [
+        "AW_oak",
+        "AW_oak_dark",
+        "AW_oak_light",
+        "AW_grain",
+        "AW_stone",
+        "AW_stone_light",
+        "AW_terracotta",
+        "AW_wheat"
+      ],
+      "glb_bytes": 189092,
+      "sha256": "a861b4f3ed84cb13997cdd352e6f3ac25f2d0bd12bf66ecd67954969d071cab9",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 1996,
+        "triangles": 4164,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 8,
+        "bounds_min_m": [
+          -0.41284942626953125,
+          -0.5800000429153442,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.41284942626953125,
+          0.367000013589859,
+          1.1117098331451416
+        ]
+      }
+    },
+    {
+      "id": "honey_basket_press",
+      "name": "Honey basket press and catch crock",
+      "file": "game/assets/generated/artisan_workshops_20260912/honey_basket_press.glb",
+      "triangles": 9200,
+      "vertices": 4326,
+      "dimensions_m": [
+        1.1,
+        1.035,
+        1.744
+      ],
+      "bounds_min_m": [
+        -0.55,
+        -0.57,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.55,
+        0.465,
+        1.744
+      ],
+      "materials": [
+        "AW_oak_light",
+        "AW_grain",
+        "AW_oak_dark",
+        "AW_iron",
+        "AW_oak",
+        "AW_glaze",
+        "AW_clay_light",
+        "AW_wheat"
+      ],
+      "glb_bytes": 400348,
+      "sha256": "42fe9bbe87aba05409c158690390f77b64fd73fdd25cac5c5354964b11cf2acd",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 4326,
+        "triangles": 9200,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 8,
+        "bounds_min_m": [
+          -0.550000011920929,
+          -0.5699999928474426,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.550000011920929,
+          0.4650000035762787,
+          1.7440000772476196
+        ]
+      }
+    },
+    {
+      "id": "bakers_oven_peel_rack",
+      "name": "Baker oven peel and brush rack",
+      "file": "game/assets/generated/artisan_workshops_20260912/bakers_oven_peel_rack.glb",
+      "triangles": 2632,
+      "vertices": 1258,
+      "dimensions_m": [
+        1.18,
+        0.61,
+        1.913
+      ],
+      "bounds_min_m": [
+        -0.59,
+        -0.305,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.59,
+        0.305,
+        1.913
+      ],
+      "materials": [
+        "AW_oak",
+        "AW_oak_dark",
+        "AW_oak_light",
+        "AW_leather",
+        "AW_iron",
+        "AW_thread"
+      ],
+      "glb_bytes": 113548,
+      "sha256": "3cff17bba4ae8d040fc9fb963004ee7820527d919f7aa7db190806e6b906f578",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 1258,
+        "triangles": 2632,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 6,
+        "bounds_min_m": [
+          -0.5899999737739563,
+          -0.3050000071525574,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.5899999737739563,
+          0.3050000071525574,
+          1.9129999876022339
+        ]
+      }
+    },
+    {
+      "id": "treadle_shaving_horse",
+      "name": "Treadle shaving horse with drawknife",
+      "file": "game/assets/generated/artisan_workshops_20260912/treadle_shaving_horse.glb",
+      "triangles": 2220,
+      "vertices": 1006,
+      "dimensions_m": [
+        1.48,
+        0.606632,
+        1.099453
+      ],
+      "bounds_min_m": [
+        -0.74,
+        -0.303316,
+        0.0
+      ],
+      "bounds_max_m": [
+        0.74,
+        0.303316,
+        1.099453
+      ],
+      "materials": [
+        "AW_oak",
+        "AW_oak_light",
+        "AW_grain",
+        "AW_oak_dark",
+        "AW_iron",
+        "AW_endgrain"
+      ],
+      "glb_bytes": 120688,
+      "sha256": "4331b1b9439055e90c827ceed0c42c8f815886a54911aba900bdd362c85f8bee",
+      "origin": "ground centered; source Z=0",
+      "external_dependencies": [],
+      "source_validation": {
+        "vertices": 1006,
+        "triangles": 2220,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "material_slots": 6,
+        "bounds_min_m": [
+          -0.7400000095367432,
+          -0.3033159077167511,
+          0.0
+        ],
+        "bounds_max_m": [
+          0.7400000095367432,
+          0.3033159077167511,
+          1.0994534492492676
+        ]
+      }
+    }
+  ],
+  "total_triangles": 116052
+}

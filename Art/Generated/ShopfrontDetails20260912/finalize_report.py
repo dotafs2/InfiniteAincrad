@@ -1,0 +1,33 @@
+"""Freeze reviewable delivery evidence after actual checks and processes finish."""
+import json, hashlib, datetime
+from pathlib import Path
+HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[2]
+QA=ROOT/'docs/validation/art_parallel_20260912/shopfront'
+manifest=json.loads((HERE/'manifest.json').read_text(encoding='utf-8'))
+binary=json.loads((QA/'glb_binary_audit.json').read_text(encoding='utf-8'))
+roundtrip=json.loads((QA/'glb_roundtrip_validation.json').read_text(encoding='utf-8'))
+assert binary['passed'] and roundtrip['passed'] and len(manifest['assets'])==16
+processes=[json.loads(p.read_text(encoding='utf-8')) for p in sorted(QA.glob('process*.json'))]
+assert all(p['state']=='exited' for p in processes)
+files=[HERE/'build_shopfront_details.py',HERE/'geometry_helpers.py',HERE/'audit_exported_glb.py',HERE/'render_craft_closeups.py',HERE/'finalize_report.py',HERE/'ShopfrontDetails20260912.blend',HERE/'README.md']+sorted((HERE/'textures').glob('*.png'))+sorted(QA.glob('*.png'))
+integrity={'completed_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'session_id':'01a09448-df53-7ed1-baf7-38ccf6795bef','count':16,'total_triangles':binary['total_triangles'],'runtime_glb_bytes':binary['total_bytes'],'all_current_checks_pass':True,'recorded_processes_exited':True,'process_ids':[p['pid'] for p in processes],'files':[{'file':str(p.relative_to(ROOT)).replace('\\','/'),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in files]}
+(QA/'delivery_integrity.json').write_text(json.dumps(integrity,indent=2),encoding='utf-8')
+lines=['# Shopfront detail delivery — 2026-09-12','',
+f"Delivered **16 different static facade attachments**, {binary['total_triangles']:,} triangles in total and {binary['total_bytes']:,} bytes of self-contained runtime GLB data. The editable Blend, deterministic Blender source, generated packed normal maps, per-asset manifests and seven real renders are present. No external or private asset was read.",'',
+'The visuals follow the adjacent first-floor street kit: light warm stone, muted oak, sage glazing/paint, clay tiles and restrained cloth. Distinct construction includes a multi-pane shop display, open service hatch, diamond leading, radial oculus, roof dormer, hollow chimney, supported eave, carved corbel, curved scalloped canopy, open portal, closed glazed door, herbal niche and four sculptural trade emblems.','',
+'## Validation','',
+'- `glb_binary_audit.json`: **16/16 pass** on the actual GLB chunks/accessors. Valid float32 positions, unit NORMAL attributes, tangents/UVs, triangle indices and positive triangle area; standard PBR factors; embedded images; matching SHA-256, triangle counts and dimensions; no unexpected node transform and the attachment bottom at glTF Y=0.','- `glb_roundtrip_validation.json`: **16/16 pass** through Blender’s real glTF importer, checking finite positions, actual split corner shading normals, UVs, triangle area and material assignments.','- Initial review found exposed eave rafters, brick-course ends extending past the chimney boundary and presentation panels intersecting roof backs. The final rebuild moves the rafters below the tiles, uses half-brick ends for staggered courses and moves the non-exported panels clear. The first window is accurately labelled 18 panes.','- The first roundtrip checker incorrectly treated Blender’s derived per-vertex averaged normals as the glTF shading normals. Ten derived averages on the diamond lattice were zero; exported NORMAL attributes and all 15,942 imported split-corner normals were valid. `inspect_import_normals.json` preserves that investigation. The final checker checks actual imported corner normals while retaining the zero-derived-average count as diagnostic information. The initial stderr/exception is preserved; it is not recorded as an initial all-pass run.','- The first Blender invocation had the application’s default exception exit behavior. Subsequent Blender runs use `--python-exit-code 1`; report contents and not exit status alone determine acceptance.','',
+'- Closeup inspection also found gaps at emblem hanging connections. The final geometry extends the mounting arms, carries the bakery hanger into the pretzel, adds an apothecary crossbar, and connects the tailor hanger to the shears pivot plus a fine link to the needle eye. All four affected images were regenerated after the final geometry freeze. No further asset expansion or visual micro-adjustment followed.','',
+'## Files and scope','',
+'Source and Blend: `Art/Generated/ShopfrontDetails20260912/`. Runtime: `game/assets/generated/shopfront_details_20260912/`. Render/check evidence: this directory. `delivery_integrity.json` records source, Blend, texture and render hashes. Each runtime manifest entry records dimensions, triangles, materials, source, origin and its GLB hash.','',
+'These are static visual attachments. There is no Godot placement, collision, interaction, animation, navigation, LOD, interior gameplay or maintained-world change. Receiving walls/roofs require appropriate openings and placement. The portal is about 1.99 m clear above the base plinths (about 1.91 m between the plinth feet); no engine traversal is claimed. Glazing is opaque reflective PBR. The hatch is fixed open and the shop door fixed closed.','',
+'## Asset catalogue','',
+'| Asset | Blender XYZ dimensions (m) | Triangles |','| --- | --- | --- |']
+for a in manifest['assets']:
+    dims=' × '.join(f'{v:.3f}' for v in a['dimensions_xyz_m'])
+    lines.append(f"| {a['id']} | {dims} | {a['triangles']:,} |")
+lines+=['','## Rendering and cleanup','','`overview.png`, `detail_windows.png`, `detail_roofwork.png`, `detail_canopy_portal.png`, `detail_craft_emblems.png`, `close_bakery_apothecary.png` and `close_tailor_barber.png` are actual Cycles renders from the delivered geometry. The whole library stays at metric scale in the overview; the last two images bring the small emblems close to the camera.','',
+'All owned Blender and wrapper process records are exited; their PIDs and timings are retained in `process*.json`. No engine, browser, paid model loop, helper or worker was launched by this subtask outside those recorded processes. No shared STATUS/ROADMAP, git index, commit, push or world state was modified.','',
+'Usage identity for root incremental accounting: `01a09448-df53-7ed1-baf7-38ccf6795bef`. The root owns the carried usage ledger; this worker did not modify or reset it.','']
+(QA/'REPORT.md').write_text('\n'.join(lines),encoding='utf-8')
+print(json.dumps({k:v for k,v in integrity.items() if k!='files'},indent=2))
