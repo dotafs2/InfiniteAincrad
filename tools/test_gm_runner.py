@@ -181,6 +181,9 @@ class RunnerTestBase(unittest.TestCase):
         self.state = self.root / 'state'
         self.codex_home = self.root / 'codex-home'
         self.codex_home.mkdir()
+        # Fake host config: the runner now requires a verifiable Windows sandbox backend.
+        self.codex_config = self.codex_home / 'config.toml'
+        self.codex_config.write_text('[windows]\nsandbox = "unelevated"\n', encoding='utf-8')
         self.log = self.root / 'fake-calls.jsonl'
         self.config = self.root / 'deepseek.local.json'
         self.config.write_text(json.dumps({'model': 'deepseek-flash',
@@ -233,10 +236,11 @@ class RunnerTestBase(unittest.TestCase):
                        text=True)
 
     def cli(self, subcommand, *args, mode='ok', modes=None, timeout=300, route=True,
-            state_dir=None, wait=True, codex=None):
+            state_dir=None, wait=True, codex=None, codex_home=None):
         environment = dict(os.environ)
+        home = str(codex_home or self.codex_home)
         environment.update({'FAKE_GM_MODE': mode, 'FAKE_GM_LOG': str(self.log),
-                            'CODEX_HOME': str(self.codex_home)})
+                            'CODEX_HOME': home})
         if modes:
             environment['FAKE_GM_MODES'] = json.dumps(modes)
         command = [sys.executable, str(ROOT / 'tools' / 'gm_runner.py'), subcommand]
@@ -244,7 +248,7 @@ class RunnerTestBase(unittest.TestCase):
             codex_value = codex or (f'"{str(sys.executable).replace(chr(92), "/")}" '
                                     f'"{str(self.fake).replace(chr(92), "/")}"')
             command += ['--config', str(self.config), '--key-file', str(self.key_file),
-                        '--codex-home', str(self.codex_home),
+                        '--codex-home', home,
                         '--codex', codex_value]
         command += [str(item) for item in args]
         if not wait:
@@ -371,6 +375,90 @@ class RunnerTestBase(unittest.TestCase):
 
 
 class CoreObservationTests(RunnerTestBase):
+    @unittest.skipUnless(os.name == 'nt', 'Windows-only sandbox backend behavior')
+    def test_windows_backend_is_forwarded_and_other_config_data_is_never_used(self):
+        marker = 'fake-unrelated-config-value'
+        self.codex_config.write_text(
+            f'model = "{marker}"\n[windows]\nsandbox = "unelevated"\nextra = "{marker}"\n',
+            encoding='utf-8')
+        code, payload, _ = self.observe('--max-gms', '1', '--dry-run')
+        self.assertEqual(code, 0, payload)
+        self.assertEqual(payload['route']['windows_sandbox'], 'unelevated')
+        route = gm_runner.Route(self.config, self.key_file, 'codex', self.codex_home)
+        command = gm_runner.codex_command(route, self.root, self.root / 'r.md',
+                                          self.root / 'i.md', self.root / 'c.json', None,
+                                          sandbox='workspace-write')
+        self.assertIn('windows.sandbox="unelevated"', command)
+        self.assertIn('workspace-write', command)
+        self.assertNotIn(marker, ' '.join(command) + json.dumps(route.reference()))
+
+    @unittest.skipUnless(os.name == 'nt', 'Windows-only sandbox backend behavior')
+    def test_observe_code_and_resume_all_carry_the_backend(self):
+        for backend, expected in (('unelevated', 'unelevated'), ('elevated', 'elevated')):
+            self.codex_config.write_text(f'[windows]\nsandbox = "{backend}"\n', encoding='utf-8')
+            route = gm_runner.Route(self.config, self.key_file, 'codex', self.codex_home)
+            command = gm_runner.codex_command(route, self.root, self.root / 'r.md',
+                                              self.root / 'i.md', self.root / 'c.json', None,
+                                              sandbox='workspace-write')
+            self.assertIn(f'windows.sandbox="{expected}"', command)
+            self.assertEqual(route.reference()['windows_sandbox'], expected)
+        for sandbox, resume in (('read-only', None), ('workspace-write', None),
+                                ('read-only', '11111111-2222-3333-4444-555555555555')):
+            command = gm_runner.codex_command(route, self.root, self.root / 'r.md',
+                                              self.root / 'i.md', self.root / 'c.json', resume,
+                                              sandbox=sandbox)
+            self.assertIn('windows.sandbox="elevated"', command)
+            self.assertIn(sandbox, command)
+            if resume:
+                self.assertIn(resume, command)
+
+    @unittest.skipUnless(os.name == 'nt', 'Windows-only sandbox backend behavior')
+    def test_missing_invalid_or_malformed_backend_fails_before_any_dispatch(self):
+        cases = (('model = "x"\n', 'missing'),
+                 ('[windows]\nsandbox = "banana"\n', 'invalid'),
+                 ('[windows]\nsandbox = "unelev\n', 'malformed'))
+        for body, label in cases:
+            home = self.root / f'codex-home-{label}'
+            home.mkdir()
+            (home / 'config.toml').write_text(body, encoding='utf-8')
+            calls = len(self.fake_calls())
+            code, payload, _ = self.cli('observe', '--state-dir', str(self.root / f'state-{label}'),
+                                        '--evidence', str(self.evidence), '--max-gms', '1',
+                                        '--dry-run', codex_home=home)
+            self.assertEqual(code, 2, payload)
+            self.assertEqual(payload['kind'], 'route_preflight')
+            self.assertEqual(len(self.fake_calls()), calls)
+            self.assertFalse((self.root / f'state-{label}').exists())
+
+    def test_sensitive_invalid_backend_value_is_never_echoed(self):
+        sensitive = 'fake-misplaced-secret-value'
+        home = self.root / 'codex-home-sensitive'
+        home.mkdir()
+        (home / 'config.toml').write_text(f'[windows]\nsandbox = "{sensitive}"\n', encoding='utf-8')
+        with self.assertRaises(ValueError) as caught:
+            gm_runner.read_windows_sandbox_backend(home, is_windows=True)
+        self.assertNotIn(sensitive, str(caught.exception))
+        if os.name == 'nt':
+            code, payload, finished = self.cli(
+                'observe', '--state-dir', str(self.root / 'state-sensitive'),
+                '--evidence', str(self.evidence), '--max-gms', '1', '--dry-run', codex_home=home)
+            self.assertEqual(code, 2, payload)
+            self.assertEqual(payload['kind'], 'route_preflight')
+            self.assertNotIn(sensitive, json.dumps(payload) + finished.stdout + finished.stderr)
+
+    def test_non_windows_path_needs_no_backend_and_never_forwards_one(self):
+        empty = self.root / 'codex-home-nonwindows'
+        empty.mkdir()
+        self.assertEqual(gm_runner.read_windows_sandbox_backend(empty, is_windows=False), '')
+        with self.assertRaises(ValueError):
+            gm_runner.read_windows_sandbox_backend(empty, is_windows=True)
+        if os.name == 'nt':
+            route = gm_runner.Route(self.config, self.key_file, 'codex', self.codex_home)
+            route.windows_sandbox = ''  # injected selector outcome: no host backend to carry
+            command = gm_runner.codex_command(route, self.root, self.root / 'r.md',
+                                              self.root / 'i.md', self.root / 'c.json', None)
+            self.assertFalse(any('windows.sandbox' in token for token in command))
+
     def test_ten_distinct_sessions_stable_prefix_and_usage(self):
         code, payload, _ = self.observe('--max-gms', '10')
         self.assertEqual(code, 0, payload)

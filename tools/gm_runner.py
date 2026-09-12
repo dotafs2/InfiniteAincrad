@@ -311,6 +311,54 @@ def usage_evidence(attempt: dict) -> dict:
 
 # --------------------------------------------------------------------------- route
 
+WINDOWS_SANDBOX_BACKENDS = ('elevated', 'unelevated')
+
+
+def codex_home_path(codex_home: Path | None) -> Path:
+    return Path(codex_home).resolve() if codex_home \
+        else Path(os.environ.get('CODEX_HOME', str(Path.home() / '.codex')))
+
+
+def read_windows_sandbox_backend(codex_home: Path, is_windows: bool | None = None) -> str:
+    """Return ONLY the configured `windows.sandbox` backend, or '' off Windows.
+
+    The Codex user config may contain provider credentials and unrelated settings, so this
+    parses the file with a strict allowlist and never returns, logs or copies any other
+    field. An unsupported, malformed or missing backend is a hard preflight failure: this
+    runner never guesses a sandbox backend and never selects a weaker one.
+    """
+    if is_windows is None:
+        is_windows = os.name == 'nt'
+    if not is_windows:
+        return ''
+    config_path = Path(codex_home) / 'config.toml'
+    if not config_path.is_file():
+        raise ValueError(
+            f'no Codex config at {config_path}; the Windows sandbox backend cannot be '
+            'verified, so this runner refuses to dispatch')
+    try:
+        import tomllib
+        with config_path.open('rb') as handle:
+            document = tomllib.load(handle)
+    except Exception as error:  # parse/permission/encoding: never expose file content
+        raise ValueError(
+            f'cannot read windows.sandbox from {config_path} ({type(error).__name__}); '
+            'refusing to dispatch without a verified sandbox backend')
+    windows = document.get('windows') if isinstance(document, dict) else None
+    value = windows.get('sandbox') if isinstance(windows, dict) else None
+    if value is None:
+        raise ValueError(
+            f'{config_path} does not declare windows.sandbox; this runner will not guess a '
+            'sandbox backend')
+    if value not in WINDOWS_SANDBOX_BACKENDS:
+        # Deliberately does not echo the supplied value: a misplaced secret in the wrong key
+        # must never reach logs, summaries or errors.
+        raise ValueError(
+            f'{config_path} declares an unsupported windows.sandbox value; supported values are '
+            f'{list(WINDOWS_SANDBOX_BACKENDS)}')
+    return value
+
+
 def codex_argv_from(value: str) -> list[str]:
     """Split a quoted test command line, but never split a real executable path.
 
@@ -343,6 +391,9 @@ class Route:
             raise ValueError('key file does not hold a single API key')
         self.codex_argv = codex_argv_from(codex)
         self.codex_home = Path(codex_home).resolve() if codex_home else None
+        # Only the configured Windows backend is forwarded, and only as the existing choice;
+        # a missing/unsupported backend fails here, before any paid dispatch.
+        self.windows_sandbox = read_windows_sandbox_backend(codex_home_path(codex_home))
         self.config_sha256 = sha256_file(self.config_path)
         self.key_sha256 = sha256_bytes(self.key.encode())
 
@@ -352,7 +403,8 @@ class Route:
                 'key_path': relative(self.key_path), 'key_sha256': self.key_sha256,
                 'model': 'deepseek-flash', 'wire_api': 'responses',
                 'codex_argv': self.codex_argv,
-                'codex_home': str(self.codex_home) if self.codex_home else None}
+                'codex_home': str(self.codex_home) if self.codex_home else None,
+                'windows_sandbox': self.windows_sandbox or None}
 
     def environment(self) -> dict:
         env = dict(os.environ)
@@ -432,6 +484,11 @@ def codex_command(route: Route, workdir: Path, result_path: Path, instructions_p
               'sandbox_workspace_write.exclude_slash_tmp': True,
               'shell_environment_policy.exclude': list(SECRET_ENV_KEYS),
               'web_search': 'disabled'}
+    if route.windows_sandbox:
+        # Carry the host's already-configured Windows sandbox backend into this invocation,
+        # preserving the requested -s policy above unchanged. This forwards a setting only;
+        # actual containment still requires separate verification.
+        values['windows.sandbox'] = route.windows_sandbox
     for name, value in values.items():
         command += ['-c', name + '=' + json.dumps(value)]
     if resume_id:
