@@ -13,6 +13,7 @@ const TownTools = preload("res://spatial/town_tools.gd")
 const TownNameplates = preload("res://spatial/town_nameplates.gd")
 const MaterialSources = preload("res://spatial/town_material_sources.gd")
 const MaterialVisibility = preload("res://spatial/town_material_visibility.gd")
+const MaterialSteering = preload("res://spatial/town_material_steering.gd")
 var town := Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
@@ -52,6 +53,7 @@ var repair_initial_money := -1
 var repair_initial_iron := -1
 var nameplates: Node = null
 var material_visibility: Node3D = null
+var material_steering: RefCounted = null
 
 func _ready() -> void:
 	restore_only = OS.get_cmdline_user_args().has("--town-restore")
@@ -138,6 +140,7 @@ func _ready() -> void:
 	material_visibility = MaterialVisibility.new()
 	add_child(material_visibility)
 	material_visibility.configure(town, bodies, material_sources)
+	material_steering = MaterialSteering.new()
 	town.require_material_visibility(Callable(material_visibility, "can_observe"))
 	_build_town_hud()
 	_build_nameplates()
@@ -246,6 +249,8 @@ func _physics_process(delta: float) -> void:
 	town.host_visitor_position(_player.position)
 	if paused:
 		return
+	if material_steering != null:
+		material_steering.retain_active(town.active_ids())
 	for id in town.active_ids():
 		var job: Dictionary = town.pending_job(id)
 		var body: CharacterBody3D = bodies[id]
@@ -253,19 +258,29 @@ func _physics_process(delta: float) -> void:
 		var moving := false
 		if not job.is_empty():
 			var target := town.destination(id, job.action)
-			var offset := target - body.position
-			offset.y = 0
-			moving = offset.length() > 0.30
+			var direction := Vector3.ZERO
+			if job.action == "recover_material" and material_steering != null:
+				direction = material_steering.direction_for(id, str(job.command_id), body, target)
+			else:
+				if material_steering != null:
+					material_steering.clear_route(id)
+				var offset := target - body.position
+				offset.y = 0
+				if offset.length() > 0.30:
+					direction = offset.normalized()
+			moving = direction.length() > 0.0
 			if moving:
-				var direction := offset.normalized()
 				body.velocity.x = direction.x * 1.35
 				body.velocity.z = direction.z * 1.35
 				actor.look_at(actor.global_position + direction)
 			else:
 				body.velocity.x = 0
 				body.velocity.z = 0
-			actor.set_gesture("idle" if moving else {"eat_ration": "eat", "rest": "rest", "harvest_ration": "harvest", "repair_edge": "repair", "repair_handle": "repair", "work": "work", "use_tool": "work", "recover_material": "work"}.get(job.action, "idle"))
+			var material_blocked: bool = job.action == "recover_material" and not moving and direction.length() <= 0.0 and body.position.distance_to(target) > 0.45
+			actor.set_gesture("idle" if (moving or material_blocked) else {"eat_ration": "eat", "rest": "rest", "harvest_ration": "harvest", "repair_edge": "repair", "repair_handle": "repair", "work": "work", "use_tool": "work", "recover_material": "work"}.get(job.action, "idle"))
 		else:
+			if material_steering != null:
+				material_steering.clear_route(id)
 			# Legacy Mac repair hand-offs temporarily route the owner to the worker.
 			# This route auto-movement is offline/local_rule_policy only and is never
 			# executed in gateway_mode or restore_only.
@@ -293,6 +308,14 @@ func _physics_process(delta: float) -> void:
 		var advanced := town.advance(step)
 		if not advanced.ok:
 			return advanced
+		# Physical travel observation for material recovery: the collision-resolved
+		# body position and the unpaused seconds of this batch. The world owns the
+		# bounded stagnant-travel verdict and the personal consequence.
+		for id in town.active_ids():
+			if not bodies.has(id):
+				continue
+			if town.pending_job(id).get("action", "") == "recover_material":
+				town.observe_material_travel(id, bodies[id].position, step)
 		# Legacy Mac repair progression is offline/local_rule_policy only.
 		if not gateway_mode and not restore_only:
 			var repair_step := _progress_repair()

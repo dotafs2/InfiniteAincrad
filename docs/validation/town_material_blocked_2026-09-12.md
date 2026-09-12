@@ -1,6 +1,6 @@
 # H26 受阻取材：个人失败感知与后台GM诊断（离线）
 
-> GPT-6复核状态：本地候选，尚未接受或发布。长指令ID、取消成功反馈与32条关闭历史＋10个在途任务并存仍需补验收；下文通过记录不代表这些额外情况已通过。2026-09-12 10:26模型流中断，代码和测试已保留，未知费用单列，未重放工具。用户随后授权本次例外继续，收尾修复已恢复。
+> GPT-6已接受本轮离线范围：五类实际场景226项、状态专项254项、10套相关回归全部通过。包含合法128字符原指令、取消成功/原任务失败的双回执、32条关闭历史与10个同时进行任务的保存及冷恢复。真实Kimi、GM消费与10+10共同运行仍未完成。完整验收计数、场景事实与源码哈希见[公开验收事实](town_material_blocked_2026-09-12/accepted-facts.json)。
 日期：2026-09-12。范围：现有 Godot 城镇材料取料链的最小真实接通——居民在
 取料途中**物理上没有进展**时得到一条个人生活事实，保留未完成的任务，并可被
 调度后在“等待/继续”与“自愿放弃这次出行”之间选择；同时由**独立只读投影**
@@ -11,8 +11,9 @@
 - `game/core/town_materials.gd`：新增有界的**物理行进观测** `observe_material_travel(id, position, elapsed)`。
   场景提供碰撞解算后的实际位置与**未暂停**秒数；世界判定“有剩余距离但位移/接近量均低于阈值”为停滞。
   阈值：`MATERIAL_BLOCKED_NO_PROGRESS_SECONDS = 8.0`，位移/接近 epsilon `0.05`，到达半径 `0.45`。
-  停滞达标后持久化一条 episode（`materials.blocked`，键与 `episode_id` 均为
-  `material_blocked:<resident>:<command>:<n>`，`n` 由持久计数器单调分配），
+  停滞达标后持久化一条 episode（`materials.blocked`，键与 `episode_id` 均为**不透明有界标识**
+  `material_blocked:<n>`，`n` 由持久计数器单调分配；居民/作业命令/料点/world 来源保存在记录字段与
+  GM 投影里，因此合法的最长 128 字符原请求 ID 不会撑爆派生标识的长度上限），
   并只追加**一条**个人事件（`material_travel_blocked`，文本“我没能到达那个材料点；这次取材任务还没有完成。”，
   仅带不透明的 `episode_id` 归属，无坐标/碰撞/测量字段）。**同一作业可反复受阻**：
   上一次 episode 关闭后再次停滞会新建一条可归属 episode，各 episode 各自只上报一次；
@@ -36,6 +37,10 @@
   `resident_view`（因此不会进入 `BudgetGatewayProvider` 的个人白名单）。
 - `game/spatial/town_street.gd`：在既有 0.5 秒事务批次内、`advance` 之后，把**实际物理位置**
   与该批次未暂停秒数交给世界观测。暂停时不进入该路径，因此暂停时间不是受阻时间。
+- 放弃命令在 `trade.commands` 中写入**属于它自己的成功回执**（`ok = true`、
+  `target_command_id = 原命令`、`quantity = 0`、内嵌原回执），原出行命令仍是 `rejected` +
+  `material_cancelled`（`quantity = 0`）。因此 `_feedback_history` 不会把已完成的放弃报成失败。
+  重复放弃只由这本持久日志裁决（payload 相同→`duplicate`），已关闭记录不再作为第二套重复来源。
 
 ## 排除项（针对最强反驳）
 
@@ -50,9 +55,8 @@
 
 Godot .NET 4.7.2（console），`game/tests/town_material_blocked_probe.gd` 为离线 SceneTree 探针，
 fixture 控制器是**确定性本地控制器**（无网络、无 Kimi 调用，`paid_kimi_calls = 0`）。
-证据目录：`tmp/chain-20260912/task01-tests/repair-final/`（评审修复后的最终代码；
-不触碰任何私有存档）与 `tmp/chain-20260912/task01-tests/repair7/suites/`
-（同代码的受影响回归）；`final*` 是修复前的等价重复批次。
+证据目录：`tmp/chain-20260912/task01-tests/supp-1/`（三轮评审补充修复后的最终代码；
+不触碰任何私有存档）；`repair-final/`、`repair7/suites/`、`final*` 是更早代码的等价批次。
 
 | 场景 | 检查 | 失败 | 关键实测 |
 | --- | --- | --- | --- |
@@ -60,15 +64,18 @@ fixture 控制器是**确定性本地控制器**（无网络、无 Kimi 调用�
 | at-target | 23 | 0 | 站在料点 12 秒：无 episode、无事件、任务计时 > 5、未离开工作点 |
 | detour-crate（H24 短绕障几何） | 22 | 0 | 横向绕行 max\|x\| = 2.047（H24 记录 2.02）、到达并 `material_recovered` 1 份、库存 3→2、无任何受阻上报 |
 | recurring-block（同一待办作业） | 32 | 0 | 受阻→真实位移恢复→再次受阻：episode 1 `progress_resumed`、episode 2 `resident_cancelled`（两个 episode ID、两条个人事实）、放弃后原命令零转移、冷读通过 |
-| blocked-enclosed（全封闭目标） | 125 | 0 | 见下 |
+| blocked-enclosed（全封闭目标） | 128 | 0 | 见下 |
 
 状态级验收 `game/tests/town_material_blocked_state_acceptance.gd`（离线世界 API，无场景无模型）：
-206 项检查 0 失败，含命令日志冲突（复用 `wait`/原材料/他人材料命令 ID 全部 `command_conflict`
+254 项检查 0 失败，含命令日志冲突（复用 `wait`/原材料/他人材料命令 ID 全部 `command_conflict`
 且原日志未改写、任务未取消、历史未增长）、异居民取消、未知目标、未列 provenance、带 speech、
 幂等重复放弃、closed 不再二次取消、同一作业 block→progress→block、重复停滞不重发事件、
 后续 tick 不改写已关闭结果、10 名居民 × 4 轮共 40 次受阻+放弃后：关闭历史 = 32（设界生效）、
 活跃记录 0、个人受阻事实 46 条全部保留、`blocked_seq` 单调、冷读逐字节一致且校验通过、
-设界后仍可新建 episode。
+设界后仍可新建 episode；**最长 128 字符原请求 ID** 的受阻观测/复发/放弃可正常写档与校验；
+**32 条关闭 + 10 条同时活跃（每名居民一条）共 42 条记录**可写档、冷读，随后放弃其中一条，
+保持 10 个身份与其余 9 条作业/episode 不变（32/9）；两个动作的 `_feedback_history` 个人投影
+（放弃=成功且指向原命令且零转移；原出行=终态失败）在重复提交与冷读后仍然正确。
 
 blocked-enclosed 实测：
 
@@ -77,7 +84,8 @@ blocked-enclosed 实测：
 - 个人事件恰好 1 条，收件人为本人；字段集恰为 `type/actor_id/recipient_ids/operation_id/source/
   source_id/material/episode_id/text/seq/event_id`，文本无数字/坐标/碰撞字段；`resident_view` 不含
   `no_progress_seconds`/`observed_position`/`target_position`/`remaining_distance`/`progress_evidence`。
-- 后台诊断恰好 1 条：`episode_id = material_blocked:fixture:smith:fixture:blocked-open:1`，
+- 后台诊断恰好 1 条：`episode_id = material_blocked:<n>`（不透明序列，`world_id/resident_id/
+  job_command_id/source_id` 另行给出来源），
   `job_command_id = fixture:blocked-open`，`remaining_distance = 2.0`，`report_count = 1`。
 - 再跑 6 秒重复观测：个人事件仍 1 条、诊断仍 1 条、任务仍待办、钱物料不变。
 - 逐字节副本冷恢复：episode/事件/诊断各 1，任务待办，`elapsed = 0.0`，库存 3、钱物合同不变；
@@ -90,7 +98,7 @@ blocked-enclosed 实测：
 - 替换任务：放弃后新开一条取料命令，旧 episode 不提供取消、不产生诊断（陈旧任务不继承问题）。
 - **替换任务在真实物理下继续运行 16 秒**（不再以暂停提交收尾）：旧 episode 的
   `closed_reason = resident_cancelled` 与 `cancel_command_id` 保持不变（不被改写为 `job_replaced`），
-  新任务得到自己的 episode（`...blocked-open-2:2`，`opened_elapsed = 31.0`）与自己的个人事实，
+  新任务得到自己的 episode（不同的 `material_blocked:<n>`，`opened_elapsed = 31.0`）与自己的个人事实，
   保存未失败（场景未因写档失败暂停），随后冷读校验通过。
 - 新字段校验：去掉/复制个人事件、open 带关闭原因、open 未上报、命令/居民/episode/key 不匹配、
   删任务、`blocked_seq` 非法、复制 episode ID、事件归属到别的 episode 等 12 种篡改全部被
@@ -124,6 +132,7 @@ town_controller_recovery 17、town_online 63、town_model_continuity 92、town_v
   在“已贴住障碍”的姿态下可绕行，而“先直线走进障碍”的姿态可能长时间零位移。
 - 探针是离线确定性 fixture 控制器，不证明模型会选择放弃或等待，也不证明 10+10 或自主 GM 修复。
 - 本轮只提供只读投影与单人流程；没有 GM 认领/实现/发布，没有真实 provider 调用。
-- `materials.blocked` 只保留最近 32 条 episode（个人事件仍是长期事实）。
+- `materials.blocked` 的**关闭历史**只保留最近 32 条 episode（活跃 watch/open 不裁剪，个人事件是长期事实）；
+  单条 episode 标识为不透明序列，居民/命令来源在字段中显式保留。
 - H24 四个未提交文件未改动、未发布；其原探针（固定写入 H24 沙箱目录）本轮未重跑，
   改在新探针内复现同一 crate 几何与绕行量级。

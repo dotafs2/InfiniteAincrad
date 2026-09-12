@@ -1,0 +1,703 @@
+{
+  "accepted_scope": "Offline H24/H26; not real Kimi or ten-GM joint operation",
+  "source_sha256_lf": {
+    "game/core/town_materials.gd": "ac3efc8e768b4458d64e50dcd10f627a19cef6681077f543d95d941999fad27b",
+    "game/agents/town_turns.gd": "33ed85b642bfaeab91db451e2e36bb0cdb0451b31e906b8156a34486aee981ff",
+    "game/spatial/town_street.gd": "2997f4604bc57ecef376dc92844f559c2c5c5c34ddf26ad5fe5b2eaa52c676e8",
+    "game/tests/town_material_blocked_probe.gd": "ba0c76e9979f61bee07acb3780a63b43b8edad80aafda09f8f34f21ccd9ce9d8",
+    "game/tests/town_material_blocked_state_acceptance.gd": "bc01e95be272a650a3cde322df4a9496668264e5e903e5449b13b3b402ecad84",
+    "game/spatial/town_material_steering.gd": "93a70ff32e7663e33f1ea4ab92786e6deb4c0006af660ff19d45743273eb85af",
+    "game/tests/town_material_travel_probe.gd": "56b3674638b7509394e431b0fc79ad9f925dbb93ecdea2e3d58f68b7248c8485",
+    "game/tests/town_material_resume_probe.gd": "49612094bb3d577096ef02a8b76166ce5d61f11fc7da011671f07924e7ffc33a"
+  },
+  "physical_scenarios": [
+    {
+      "scenario": "at-target",
+      "checks": 23,
+      "failure_count": 0,
+      "failures": [],
+      "result": {
+        "blocked_events": 0,
+        "conserved": true,
+        "diagnostics": 0,
+        "episode": {},
+        "max_distance": 0.0,
+        "pending": true,
+        "pending_elapsed": 11.8833333333333,
+        "scenario": "at-target",
+        "unpaused_ms": 12000
+      }
+    },
+    {
+      "scenario": "blocked-enclosed",
+      "checks": 128,
+      "failure_count": 0,
+      "failures": [],
+      "result": {
+        "before_threshold_reported": false,
+        "cancel_turn": {
+          "action": "material:cancel:fixture:blocked-open",
+          "cancel_command": "turn:fixture:smith:0:2",
+          "duplicate": {
+            "code": "duplicate",
+            "duplicate": true,
+            "ok": true
+          },
+          "episode": {
+            "cancel_command_id": "turn:fixture:smith:0:2",
+            "closed_elapsed": 22.7333333333333,
+            "closed_reason": "resident_cancelled",
+            "command_id": "fixture:blocked-open",
+            "episode_id": "material_blocked:1",
+            "last_distance": 2,
+            "no_progress_seconds": 21.7,
+            "observed_position": [
+              0,
+              0.219999998807907,
+              7
+            ],
+            "opened_elapsed": 9.3,
+            "reported": true,
+            "resident_id": "fixture:smith",
+            "source_id": "fixture:blocked-iron",
+            "status": "closed",
+            "target_position": [
+              0,
+              0.219999998807907,
+              5
+            ]
+          },
+          "next_options": 9,
+          "ok": true,
+          "original_receipt": {
+            "actor_id": "fixture:smith",
+            "code": "material_cancelled",
+            "command_id": "fixture:blocked-open",
+            "material": "iron",
+            "ok": false,
+            "quantity": 0,
+            "source_id": "fixture:blocked-iron"
+          },
+          "recover_offered": true
+        },
+        "conserved": true,
+        "diagnostics": [
+          {
+            "episode_id": "material_blocked:1",
+            "job_command_id": "fixture:blocked-open",
+            "material": "iron",
+            "no_progress_seconds": 8.26666666666667,
+            "opened_elapsed": 9.3,
+            "progress_evidence": {
+              "arrival_radius": 0.45,
+              "no_progress_seconds": 8.26666666666667,
+              "observed_position": [
+                0.0,
+                0.219999998807907,
+                7.0
+              ],
+              "target_position": [
+                0,
+                0.219999998807907,
+                5
+              ],
+              "travel_epsilon": 0.05
+            },
+            "remaining_distance": 2.0,
+            "report_count": 1,
+            "resident_id": "fixture:smith",
+            "source_id": "fixture:blocked-iron",
+            "status": "open",
+            "world_id": "fixture:town-trade-validation"
+          }
+        ],
+        "legacy_without_blocked_key": {
+          "code": "loaded",
+          "loaded": true,
+          "prior_shape_loaded": true
+        },
+        "no_progress_seconds": 8.26666666666667,
+        "opened_elapsed": 9.3,
+        "personal_event_keys": [
+          "type",
+          "actor_id",
+          "recipient_ids",
+          "operation_id",
+          "source",
+          "source_id",
+          "material",
+          "episode_id",
+          "text",
+          "seq",
+          "event_id"
+        ],
+        "personal_text": "我没能到达那个材料点；这次取材任务还没有完成。",
+        "replacement_trip": {
+          "closed_reason": "resident_cancelled",
+          "episode": {
+            "cancel_command_id": "",
+            "closed_elapsed": 0.0,
+            "closed_reason": "",
+            "command_id": "fixture:blocked-open-2",
+            "episode_id": "material_blocked:2",
+            "last_distance": 2.0,
+            "no_progress_seconds": 8.26666666666667,
+            "observed_position": [
+              0.0,
+              0.219999998807907,
+              7.0
+            ],
+            "opened_elapsed": 31.0,
+            "reported": true,
+            "resident_id": "fixture:smith",
+            "source_id": "fixture:blocked-iron",
+            "status": "open",
+            "target_position": [
+              0,
+              0.219999998807907,
+              5
+            ]
+          },
+          "events": 1,
+          "save_paused": false
+        },
+        "restart": {
+          "diagnostics": 1,
+          "episode": {
+            "cancel_command_id": "",
+            "closed_elapsed": 0,
+            "closed_reason": "",
+            "command_id": "fixture:blocked-open",
+            "episode_id": "material_blocked:1",
+            "last_distance": 2,
+            "no_progress_seconds": 13.95,
+            "observed_position": [
+              0,
+              0.219999998807907,
+              7
+            ],
+            "opened_elapsed": 9.3,
+            "reported": true,
+            "resident_id": "fixture:smith",
+            "source_id": "fixture:blocked-iron",
+            "status": "open",
+            "target_position": [
+              0,
+              0.219999998807907,
+              5
+            ]
+          },
+          "events": 1,
+          "pending_elapsed": 0.0
+        },
+        "samples": [
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 12,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 33,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 47,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 68,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 81,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 95,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 116,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 130,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 150,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 164,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 185,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 199,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 213,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 233,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 247,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 268,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 281,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 295,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 316,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 330,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 355,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 364,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 378,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 399,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 412,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 433,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 447,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 468,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 482,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 495,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 516,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 530,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 551,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 564,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 578,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 599,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 613,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 633,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 647,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 668,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 682,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 695,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 716,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 730,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 751,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 764,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 778,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 799,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 813,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 834,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 847,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 870,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 882,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 896,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 916,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 930,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 951,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 965,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 978,
+            "x": 0.0
+          },
+          {
+            "distance": 2.0,
+            "episode": false,
+            "t_ms": 999,
+            "x": 0.0
+          }
+        ],
+        "saved_bytes_sha_len": 8208,
+        "scenario": "blocked-enclosed",
+        "smith_iron_before": 1,
+        "stall_displacement": 0.0,
+        "wait_turn": {
+          "action": "wait",
+          "ok": true,
+          "schedulable_after": false
+        },
+        "wall_ms_to_report": 8096
+      }
+    },
+    {
+      "scenario": "detour-crate",
+      "checks": 22,
+      "failure_count": 0,
+      "failures": [],
+      "result": {
+        "blocked_events": 0,
+        "coins_conserved": true,
+        "detour_x": 2.04749965667725,
+        "iron": 2,
+        "receipt": {
+          "actor_id": "fixture:smith",
+          "code": "material_recovered",
+          "command_id": "fixture:detour",
+          "material": "iron",
+          "ok": true,
+          "quantity": 1,
+          "source_id": "fixture:blocked-iron"
+        },
+        "reported_while_travelling": false,
+        "scenario": "detour-crate",
+        "stock": 2,
+        "wall_ms": 63366
+      }
+    },
+    {
+      "scenario": "paused-enclosed",
+      "checks": 21,
+      "failure_count": 0,
+      "failures": [],
+      "result": {
+        "blocked_events": 0,
+        "conserved": true,
+        "diagnostics": 0,
+        "episode": {},
+        "paused_ms": 10000,
+        "pending": true,
+        "pending_elapsed": 0.0,
+        "scenario": "paused-enclosed",
+        "threshold_seconds": 8.0
+      }
+    },
+    {
+      "scenario": "recurring-block",
+      "checks": 32,
+      "failure_count": 0,
+      "failures": [],
+      "result": {
+        "bytes": 11342,
+        "events": 2,
+        "first_closed_reason": "progress_resumed",
+        "first_episode_id": "material_blocked:1",
+        "receipt": {
+          "actor_id": "fixture:smith",
+          "code": "material_cancelled",
+          "command_id": "fixture:recurring",
+          "material": "iron",
+          "ok": false,
+          "quantity": 0,
+          "source_id": "fixture:blocked-iron"
+        },
+        "reload_ok": true,
+        "scenario": "recurring-block",
+        "schedulable": false,
+        "second_closed_reason": "resident_cancelled",
+        "second_episode_id": "material_blocked:2"
+      }
+    }
+  ],
+  "state_acceptance": {
+    "active_records": 0,
+    "blocked_events": 48,
+    "checks": 254,
+    "closed_history": 32,
+    "coexistence_active": 10,
+    "coexistence_closed": 32,
+    "failures": 0,
+    "paid_calls": 0,
+    "suite": "town_material_blocked_state"
+  },
+  "affected_regressions": [
+    {
+      "suite": "town_controller_recovery_acceptance",
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "suite": "town_feedback_acceptance",
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "suite": "town_life_acceptance",
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "suite": "town_material_visibility_acceptance",
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "suite": "town_materials_acceptance",
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "suite": "town_model_continuity_acceptance",
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "suite": "town_online_acceptance",
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "suite": "town_replan_acceptance",
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "suite": "town_trade_acceptance",
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "suite": "town_turns_acceptance",
+      "status": "exited",
+      "exit_code": 0
+    }
+  ],
+  "paid_npc_calls": 0,
+  "development_executor": "DeepSeek deepseek-flash native Codex tools",
+  "reviewer": "GPT-6",
+  "remaining_runtime_gap": "GM evidence consumption, need proposals, ten distinct GM sessions, real Kimi and formal world source"
+}
