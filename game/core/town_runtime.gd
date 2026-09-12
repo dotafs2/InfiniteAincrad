@@ -167,21 +167,45 @@ func background_gm_snapshot() -> Dictionary:
 	# Read-only. Never mutates world state, never takes the writer path, and never
 	# enters a resident view or the personal provider whitelist.
 	var issues: Array = []
+	# Every stalled ACTIVE journey the world can physically source: the accepted material-recovery
+	# episode plus the social-approach and public-travel stalls (H36). One code path so the privacy
+	# boundary, limits and "physical facts only, no verdict" wording cannot drift apart.
+	var movements: Array = []
 	for diagnostic in blocked_material_diagnostics():
+		movements.append({"journey": "material_recovery", "diagnostic": diagnostic})
+	if has_method("journey_stall_diagnostics"):
+		## Dynamic call: the journey-stall projection belongs to the place-capable runtime below
+		## this one, and the plain runtime must keep working without it.
+		var stalls: Variant = call("journey_stall_diagnostics")
+		if stalls is Array:
+			for diagnostic in stalls:
+				if diagnostic is Dictionary:
+					movements.append({"journey": str(diagnostic.get("journey", "")), "diagnostic": diagnostic})
+	for movement in movements:
 		if issues.size() >= BACKGROUND_GM_EVIDENCE_LIMIT:
 			break
+		var diagnostic: Dictionary = movement.diagnostic
 		var observed: Array = diagnostic.get("progress_evidence", {}).get("observed_position", [])
 		var target: Array = diagnostic.get("progress_evidence", {}).get("target_position", [])
+		## The progress threshold of the diagnostic that actually produced this entry: the journey
+		## detector publishes `progress_epsilon`, older material diagnostics published
+		## `travel_epsilon`, and the exported value must be the one really used (never a silent 0).
+		var evidence_facts: Dictionary = diagnostic.get("progress_evidence", {})
+		var progress_epsilon: float = float(evidence_facts.get("progress_epsilon",
+			evidence_facts.get("travel_epsilon", 0.0)))
 		issues.append({"evidence_kind": "movement_blocked", "issue_id": diagnostic.get("episode_id", ""),
 			"episode_id": diagnostic.get("episode_id", ""), "world_id": diagnostic.get("world_id", ""),
 			"resident_id": diagnostic.get("resident_id", ""), "job_command_id": diagnostic.get("job_command_id", ""),
+			"journey": str(movement.journey), "place_id": diagnostic.get("place_id", ""),
 			"source_id": diagnostic.get("source_id", ""), "material": diagnostic.get("material", ""),
 			"status": diagnostic.get("status", ""), "opened_elapsed": diagnostic.get("opened_elapsed", 0.0),
 			"physical_facts": {"observed_position": observed.duplicate(), "target_position": target.duplicate(),
 				"remaining_distance": diagnostic.get("remaining_distance", -1.0),
+				"remaining_route_m": diagnostic.get("remaining_route_m", -1.0),
 				"no_progress_seconds": diagnostic.get("no_progress_seconds", 0.0),
 				"arrival_radius": diagnostic.get("progress_evidence", {}).get("arrival_radius", 0.0),
-				"progress_epsilon": diagnostic.get("progress_evidence", {}).get("travel_epsilon", 0.0),
+				"progress_epsilon": progress_epsilon,
+				"progress_measure": diagnostic.get("progress_evidence", {}).get("progress_measure", ""),
 				"observation_source": "host_physics_frame_position"},
 			"discriminators": {"movement_blocked": true, "collision_proved": false, "contact_recorded": false,
 				"obstacle_identified": false, "image_analysis": false, "repair_task_inferred": false,

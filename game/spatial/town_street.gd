@@ -442,6 +442,14 @@ func _physics_process(delta: float) -> void:
 				town.observe_material_travel(id, bodies[id].position, step)
 			if town.pending_job(id).get("action", "") == "travel":
 				town.observe_place_travel(id, bodies[id].position, step)
+			## H36 journey-stall evidence: the same physical position stream feeds the world-scoped
+			## stall record for an ACTIVE social approach or public trip. The world only states the
+			## facts; a separate GM decides whether that is a defect, contention or slow going.
+			var journey_action := str(town.pending_job(id).get("action", ""))
+			if journey_action == "approach" and town.has_method("observe_journey_stall"):
+				town.observe_journey_stall(id, "approach", bodies[id].position, step)
+			elif journey_action == "travel" and town.has_method("observe_journey_stall"):
+				town.observe_journey_stall(id, "place_travel", bodies[id].position, step)
 		# Public-notice perception: the real scene answers the physics line-of-sight question
 		# and the world grants attributed knowledge only to the resident who could actually
 		# read or see it. Restore-only/paused runs never reach here.
