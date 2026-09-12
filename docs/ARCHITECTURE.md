@@ -2,6 +2,8 @@
 
 Status: the source audit below describes current implementation; later sections retain intended structure and historical designs.
 
+2026-09-12后续实测更新：[H29](validation/town_gm_evidence_2026-09-12.md)已将提交的世界变化和居民need导出到独立GM文件；[H30](validation/town_gm_observers_2026-09-12.md)已由十个不同DeepSeek会话实际消费测试投影。`tools/gm_runner.py`提供持久观察、去重、认领与隔离编码候选入口；真实观察已验，真实认领/编码/发布/居民采用尚未验。下方原始审计基线及其“尚未消费”描述保留为历史发现，当前状态以上述实测和原ROADMAP为准。GM仍在世界外，不是十个NPC身体；没有把串行观察说成永久自主后台。
+
 ## 2026-09-12 源码架构复核：先让简单世界运行并持续改进
 
 用户再次明确：目标是十名Kimi居民从自身处境发现需求、尽可能生活；十个后台GM全部由DeepSeek驱动，观察同一个运行世界中的碰撞、房屋、行动受阻和功能缺口，持续维护开发。GPT-6负责方向与审查。不要先把完整城镇、复杂经济和长期稳定性做完才开始共同运行。进度与顺序仍只维护在[原流程图](../ROADMAP.md)。
