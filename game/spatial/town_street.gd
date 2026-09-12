@@ -48,6 +48,7 @@ var capture_seconds := 90.0
 var scripted_trade := false
 var restore_only := false
 var stop_on_idle := false # Bounded validation only, never normal gameplay.
+var stop_on_decision_limit := false # Keep legitimate idle time; stop only after the cap's in-flight model turn returns.
 var validation_decision_limit := -1
 var validation_decisions_started := 0
 # Legacy Mac repair demo state (offline/local_rule_policy only).
@@ -76,6 +77,7 @@ var gm_export_status := ""
 func _ready() -> void:
 	restore_only = OS.get_cmdline_user_args().has("--town-restore")
 	stop_on_idle = OS.get_cmdline_user_args().has("--town-stop-on-idle")
+	stop_on_decision_limit = OS.get_cmdline_user_args().has("--town-stop-on-decision-limit")
 	for arg in OS.get_cmdline_user_args():
 		if arg == "--town-gateway":
 			gateway_mode = true
@@ -324,6 +326,13 @@ func _process(delta: float) -> void:
 			_request_edge_repair(true)
 		if repair_fixture and not gateway_mode and not restore_only and repair_fixture_started and not _has_active_repair() and town.repair_candidate("edge").is_empty() and repair_fixture_finished_at < 0:
 			repair_fixture_finished_at = capture_age
+		# Unlike stop-on-idle, this boundary deliberately does not wait for physical
+		# jobs. Their accepted command IDs, targets and progress already live in the
+		# save and must cold-continue. Only the model coroutine may still own an
+		# unsettled provider/accounting/world transaction, so wait for busy=false.
+		if _decision_limit_capture_ready():
+			capture_started = true
+			_capture_town.call_deferred()
 		if stop_on_idle and gateway_mode and not restore_only and capture_age > 8.0 and not capture_started and not model_turns.busy and (_validation_limit_reached() or model_turns.ready_resident().is_empty()):
 			var idle := true
 			for id in town.active_ids():
@@ -491,6 +500,10 @@ func _physics_process(delta: float) -> void:
 
 func _validation_limit_reached() -> bool:
 	return gateway_mode and not capture_dir.is_empty() and validation_decision_limit >= 0 and validation_decisions_started >= validation_decision_limit
+
+func _decision_limit_capture_ready() -> bool:
+	return stop_on_decision_limit and gateway_mode and not restore_only and not capture_started \
+		and _validation_limit_reached() and model_turns != null and not model_turns.busy
 
 func _load_town_expansion() -> void:
 	## Visible walkable expansion south of the plaza, built from existing residence and
@@ -965,6 +978,7 @@ func _capture_town() -> void:
 	evidence["validation_decisions_started"] = validation_decisions_started
 	evidence["validation_decision_limit"] = validation_decision_limit
 	evidence["validation_limit_reached"] = _validation_limit_reached()
+	evidence["stop_on_decision_limit"] = stop_on_decision_limit
 	evidence["trade_items"] = snap.life.get("items", [])
 	evidence["trade_contracts"] = snap.life.get("contracts", [])
 	if dialogue_fixture:

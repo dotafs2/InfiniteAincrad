@@ -56,6 +56,8 @@ def main():
     parser.add_argument('--inquire-text', help='Exact explicitly scripted player message; requires --inquire-resident.')
     parser.add_argument('--headless', action='store_true')
     parser.add_argument('--stop-on-idle', action='store_true', help='End this bounded validation once current requests/jobs settle; never force another decision.')
+    parser.add_argument('--stop-on-decision-limit', action='store_true',
+                        help='Keep advancing through idle time, then pause/capture after the decision cap and any in-flight model result; durable physical jobs remain pending.')
     parser.add_argument('--gm-export', type=Path, help='Optional .json file beneath the new --out directory for background-GM evidence from this same world.')
     args = parser.parse_args()
     if not 5 <= args.seconds <= 900 or not 1 <= args.max_requests <= 32:
@@ -111,6 +113,8 @@ def main():
         command += ['--town-inquire-text=' + args.inquire_text]
     if args.stop_on_idle:
         command += ['--town-stop-on-idle']
+    if args.stop_on_decision_limit:
+        command += ['--town-stop-on-decision-limit']
     try:
         result = subprocess.run(command, cwd=ROOT, env=dict(os.environ, AINCRAD_GATEWAY_RUN_CONFIG=str(run)),
                                 capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=args.seconds + 60)
