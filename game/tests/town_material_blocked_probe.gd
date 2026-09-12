@@ -16,12 +16,13 @@ const TownScene := preload("res://scenes/town_street.tscn")
 const ALLOWED_ROOT_REL := "../tmp/chain-20260912/task01-tests"
 const SMITH := "fixture:smith"
 const INNKEEPER := "fixture:innkeeper"
+const CARPENTER := "fixture:carpenter"
 const SOURCE_ID := "fixture:blocked-iron"
 const SOURCE_POSITION := Vector3(0, 0.22, 5)
 const START_POSITION := Vector3(0, 0.22, 7)
 const BLOCKED_EVENT := "material_travel_blocked"
 const CANCEL_EVENT := "material_travel_cancelled"
-const SCENARIOS := ["paused-enclosed", "at-target", "blocked-enclosed", "detour-crate", "recurring-block"]
+const SCENARIOS := ["paused-enclosed", "at-target", "blocked-enclosed", "detour-crate", "recurring-block", "gm-evidence"]
 
 class FixtureController extends Node:
 	## Deterministic offline fixture controller. It performs no network call and
@@ -29,22 +30,36 @@ class FixtureController extends Node:
 	var preference := "wait"
 	var calls := 0
 	var selected := ""
+	var need: Variant = null
+	var fail_response := false
+	var private_reason := "deterministic fixture controller choice"
+	var last_reply: Dictionary = {}
+	var last_view: Dictionary = {}
 	func propose(view: Dictionary, _seq: int) -> Dictionary:
 		calls += 1
+		last_view = view.duplicate(true)
+		if fail_response:
+			last_reply = {"ok": false, "code": "provider_error", "command_id": "fixture-controller:%d" % calls, "provenance": "opengameagent_fixture"}
+			return last_reply
 		var wanted := "Wait" if preference == "wait" else "放弃"
 		var alias := ""
 		for detail in view.get("action_details", []):
 			if str(detail.get("label", "")).begins_with(wanted):
 				alias = str(detail.get("id", ""))
 		selected = alias
-		return {"ok": true, "decision": {"action": alias, "reason": "deterministic fixture controller choice"},
-			"command_id": "fixture-controller:%d" % calls, "provenance": "opengameagent_fixture"}
+		var decision := {"action": alias, "reason": private_reason}
+		if need != null:
+			decision.need = need
+		last_reply = {"ok": true, "decision": decision, "command_id": "fixture-controller:%d" % calls, "provenance": "opengameagent_fixture"}
+		return last_reply
 
 var _fixture_path := ""
 var _save_path := ""
 var _restart_path := ""
 var _out_path := ""
 var _scenario := ""
+var _gm_export_dir := ""
+var _cancel_diag: Dictionary = {}
 var _allowed_root := ""
 var _scene: Node = null
 var _writer_path := ""
@@ -97,8 +112,12 @@ func _parse_args() -> void:
 			_out_path = _norm(ProjectSettings.globalize_path(arg.trim_prefix("--blocked-probe-output=")))
 		elif arg.begins_with("--blocked-probe-scenario="):
 			_scenario = arg.trim_prefix("--blocked-probe-scenario=")
+		elif arg.begins_with("--gm-export-dir="):
+			_gm_export_dir = _norm(ProjectSettings.globalize_path(arg.trim_prefix("--gm-export-dir=")))
 		elif arg == "--town-gateway" or arg == "--town-restore":
 			_fail("forbidden_mode:" + arg.trim_prefix("--"))
+	if _scenario == "gm-evidence" and (_gm_export_dir.is_empty() or not _under_root(_gm_export_dir)):
+		_fail("gm_export_dir_required")
 
 func _validate_paths() -> bool:
 	if _fixture_path.is_empty() or _save_path.is_empty() or _out_path.is_empty() or _scenario.is_empty():
@@ -128,6 +147,10 @@ func _validate_paths() -> bool:
 			if not _under_root(parent) or DirAccess.make_dir_recursive_absolute(parent) != OK:
 				_fail("parent_create_failed")
 				return false
+	if not _gm_export_dir.is_empty() and not DirAccess.dir_exists_absolute(_gm_export_dir):
+		if not _under_root(_gm_export_dir) or DirAccess.make_dir_recursive_absolute(_gm_export_dir) != OK:
+			_fail("gm_export_dir_create_failed")
+			return false
 	return true
 
 func _copy_fixture() -> bool:
@@ -759,6 +782,317 @@ func _restart_phase(bytes: PackedByteArray, summary: Dictionary) -> bool:
 		"save_paused": save_paused, "events": len(_town_blocked_events("fixture:blocked-open-2"))}
 	return true
 
+# World-to-GM evidence bridge scenario: one real scene run produces one blocked
+# travel issue plus one validated capability proposal, both exported through the
+# explicit read-only snapshot for a separate GM process.
+func _scenario_gm_evidence() -> void:
+	var primary := _gm_export_dir + "/gm-evidence-primary.json"
+	var secondary := _gm_export_dir + "/gm-evidence-secondary.json"
+	var tertiary := _gm_export_dir + "/gm-evidence-inactive.json"
+	# The scene is launched with the real --town-gm-export flag: the file must update
+	# from the committed world/turn flow without any manual exporter call.
+	if not await _load_scene(_save_path):
+		return
+	if not _check(FileAccess.file_exists(primary), "gm_flag_export_missing"):
+		return
+	var baseline := _read_export(primary)
+	_check(int(baseline.get("counts", {}).get("issues", -1)) == 0 and int(baseline.get("counts", {}).get("proposals", -1)) == 0, "gm_startup_not_baseline:" + JSON.stringify(baseline.get("counts", {})))
+	await _unpause_for(1200)
+	if not _check(_scene.town.resident_view(SMITH).material_sources.size() > 0, "gm_source_not_observed"):
+		return
+	await _add_fixture_obstacles(true)
+	if not _submit_job("fixture:gm-open"):
+		return
+	var observed: Dictionary = await _blocked_open(40000)
+	if not _check(not observed.episode.is_empty(), "gm_issue_missing"):
+		_result = {"scenario": "gm-evidence", "observed": observed}
+		return
+	var episode_id := str(observed.episode.get("episode_id", ""))
+	# The blockage reached the FILE during physics, with no manual export call.
+	var after_blockage := _read_export(primary)
+	var blocked_evidence := _first_entry(after_blockage.get("evidence", []))
+	_check(int(after_blockage.get("counts", {}).get("issues", -1)) == 1 and str(blocked_evidence.get("issue_id", "")) == episode_id, "gm_physics_export_missing_issue")
+	_check(str(_scene.gm_export_status).begins_with("GM证据已更新"), "gm_export_status_not_surfaced:" + str(_scene.gm_export_status))
+	# Timer-only advance must not rewrite or re-date the export.
+	var stable_bytes := _read_bytes(primary)
+	await _unpause_for(4000)
+	_check(_read_bytes(primary) == stable_bytes, "gm_timer_only_rewrite")
+	_check(int(_read_export(primary).get("counts", {}).get("issues", -1)) == 1, "gm_timer_only_issue_lost")
+	# A real apply_reply need reaches the same file through the turn flow.
+	_controller = FixtureController.new()
+	_controller.preference = "wait"
+	_controller.private_reason = "PRIVATE_DELIBERATION_TEXT"
+	_controller.need = {"capability_id": "iron_source_waypoint", "reason": "NEED_REASON_TEXT"}
+	root.add_child(_controller)
+	var innkeeper_controller := FixtureController.new()
+	innkeeper_controller.preference = "wait"
+	innkeeper_controller.private_reason = "PRIVATE_DELIBERATION_TEXT"
+	root.add_child(innkeeper_controller)
+	_turns = Turns.new()
+	_turns.town = _scene.town
+	_turns.save_path = _writer_path
+	_turns.brains[SMITH] = _controller
+	_turns.brains[INNKEEPER] = innkeeper_controller
+	root.add_child(_turns)
+	_scene.model_turns = _turns
+	await _scene._run_model_turn(SMITH)
+	var turn_one: Dictionary = _scene.town._state.godot.resident_turns.get(SMITH, {})
+	var record_one: Dictionary = _scene.town._state.godot.resident_turns.get(SMITH, {})
+	var request_one := str(record_one.get("request_id", ""))
+	_check(str(turn_one.get("status", "")) == "settled", "gm_turn_failed:" + str(turn_one.get("status", "")))
+	_check(str(record_one.get("need_status", "")) == "capability_proposed", "gm_need_not_recorded:" + str(record_one.get("need_status", "")))
+	var after_turn_one := _read_export(primary)
+	var proposal_one := _first_entry(after_turn_one.get("proposals", []))
+	_check(int(after_turn_one.get("counts", {}).get("proposals", -1)) == 1, "gm_turn_export_missing_proposal")
+	_check(str(proposal_one.get("capability_id", "")) == "iron_source_waypoint" and str(proposal_one.get("first", {}).get("reason", "")) == "NEED_REASON_TEXT" and str(proposal_one.get("first", {}).get("request_id", "")) == request_one and str(proposal_one.get("latest", {}).get("request_id", "")) == request_one and int(proposal_one.get("occurrences", 0)) == 1, "gm_proposal_content")
+	# Canonical private journal keeps the exact accepted need and its attribution.
+	var journal_one: Array = _need_entries(record_one)
+	_check(journal_one.size() == 1 and str(journal_one[0].get("need", {}).get("capability_id", "")) == "iron_source_waypoint" and str(journal_one[0].get("need", {}).get("reason", "")) == "NEED_REASON_TEXT" and str(journal_one[0].get("need_request_id", "")) == request_one and int(journal_one[0].get("need_controller_epoch", -1)) == 0 and int(journal_one[0].get("need_source_sequence", -1)) > 0, "gm_canonical_need_missing")
+	# Replaying the identical accepted reply must not duplicate or rewrite anything.
+	var save_before_replay := _read_bytes(_writer_path)
+	var export_before_replay := _read_bytes(primary)
+	var replay: Dictionary = _turns.apply_reply(SMITH, 0, request_one, _controller.last_reply)
+	_check(replay.get("duplicate", false), "gm_duplicate_reply_not_deduplicated")
+	_check(_read_bytes(_writer_path) == save_before_replay and _read_bytes(primary) == export_before_replay, "gm_duplicate_reply_changed_state")
+	# A later accepted turn with changed content aggregates without rewriting originals.
+	_controller.need = {"capability_id": "iron_source_waypoint", "reason": "NEED_REASON_TEXT_TWO"}
+	await _scene._run_model_turn(SMITH)
+	var turn_two: Dictionary = _scene.town._state.godot.resident_turns.get(SMITH, {})
+	var record_two: Dictionary = _scene.town._state.godot.resident_turns.get(SMITH, {})
+	var request_two := str(record_two.get("request_id", ""))
+	_check(str(turn_two.get("status", "")) == "settled" and request_two != request_one, "gm_second_turn_failed")
+	var journal_two: Array = _need_entries(record_two)
+	_check(journal_two.size() == 2, "gm_canonical_need_loss:" + str(journal_two.size()))
+	var after_turn_two := _read_export(primary)
+	var proposal_two := _first_entry(after_turn_two.get("proposals", []))
+	_check(int(after_turn_two.get("counts", {}).get("proposals", -1)) == 1 and int(proposal_two.get("occurrences", 0)) == 2, "gm_proposal_no_aggregate")
+	_check(str(proposal_two.get("first", {}).get("reason", "")) == "NEED_REASON_TEXT" and str(proposal_two.get("first", {}).get("request_id", "")) == request_one, "gm_proposal_original_rewritten")
+	_check(str(proposal_two.get("latest", {}).get("request_id", "")) == request_two and str(proposal_two.get("latest", {}).get("reason", "")) == "NEED_REASON_TEXT_TWO", "gm_proposal_latest_missing")
+	# The ACTUALLY prepared NPC context for this ordinary turn — not a lower-level view —
+	# must still carry the personal consequence, the previous choice and the resident's
+	# OWN authored intention text, without the GM/developer source metadata. The
+	# canonical journal above keeps that metadata intact.
+	var canonical_first: Dictionary = _need_entries(record_two)[0]
+	var prepared_memory: Array = _controller.last_view.get("memory", {}).get("previous_decisions", [])
+	var prepared_text := JSON.stringify(prepared_memory)
+	_check(prepared_memory.size() == 1 and prepared_memory[0].get("result") is Dictionary and prepared_memory[0].get("result").has("code"), "gm_context_lost_personal_consequence:" + prepared_text)
+	_check(str(prepared_memory[0].get("action", "")) == str(canonical_first.get("action", "")) and str(prepared_memory[0].get("command_id", "")) == request_one and str(prepared_memory[0].get("model_choice", "")) == str(canonical_first.get("model_choice", "")) and str(prepared_memory[0].get("status", "")) == str(canonical_first.get("status", "")), "gm_context_lost_previous_choice:" + prepared_text)
+	_check(str(prepared_memory[0].get("need", {}).get("reason", "")) == "NEED_REASON_TEXT" and prepared_memory[0].get("need").keys() == ["reason"], "gm_context_lost_own_intention:" + prepared_text)
+	_check(not prepared_text.contains("capability_id") and not prepared_text.contains("need_request_id") and not prepared_text.contains("need_controller_epoch") and not prepared_text.contains("need_source_sequence"), "gm_context_developer_metadata:" + prepared_text)
+	_check(not prepared_text.contains("proposal_id") and not prepared_text.contains("need_status") and not prepared_text.contains("background_gm"), "gm_context_gm_metadata:" + prepared_text)
+	_check(str(canonical_first.get("need", {}).get("capability_id", "")) == "iron_source_waypoint" and str(canonical_first.get("need_request_id", "")) == request_one, "gm_context_canonical_history_altered")
+	# Invalid proposals and stale replies cannot create work or provenance.
+	var before_invalid := _read_bytes(primary)
+	_controller.need = {"capability_id": "Bad Id!", "reason": "y"}
+	await _scene._run_model_turn(SMITH)
+	_check(str(_scene.town._state.godot.resident_turns.get(SMITH, {}).get("need_status", "")) == "invalid_capability_need", "gm_invalid_capability_recorded")
+	_controller.need = {"capability_id": "valid_id", "reason": "   "}
+	await _scene._run_model_turn(SMITH)
+	_controller.need = "not-a-dictionary"
+	await _scene._run_model_turn(SMITH)
+	var record_after_invalid: Dictionary = _scene.town._state.godot.resident_turns.get(SMITH, {})
+	_check(str(record_after_invalid.get("need_status", "")) == "invalid_capability_need", "gm_invalid_shape_recorded")
+	_check(_need_entries(record_after_invalid).size() == 2, "gm_invalid_acquired_provenance")
+	var stale_request := str(record_after_invalid.get("request_id", ""))
+	var stale: Dictionary = _turns.apply_reply(SMITH, 99, stale_request, _controller.last_reply)
+	_check(not stale.get("ok", true) and str(stale.get("code", "")) == "stale_controller_reply", "gm_stale_reply_accepted")
+	_check(_read_bytes(primary) == before_invalid and _need_entries(record_after_invalid).size() == 2, "gm_invalid_changed_export_or_history")
+	# A rejected provider reply cannot acquire proposal provenance either. It uses a
+	# third resident so the acting resident stays schedulable for the cancel turn.
+	var carpenter_controller := FixtureController.new()
+	carpenter_controller.preference = "wait"
+	carpenter_controller.need = {"capability_id": "never_proposed", "reason": "provider failure must not propose"}
+	carpenter_controller.fail_response = true
+	root.add_child(carpenter_controller)
+	_turns.brains[CARPENTER] = carpenter_controller
+	await _scene._run_model_turn(CARPENTER)
+	var record_after_error: Dictionary = _scene.town._state.godot.resident_turns.get(CARPENTER, {})
+	_check(str(record_after_error.get("status", "")) == "provider_error", "gm_provider_error_not_quarantined")
+	_check(_need_entries(record_after_error).is_empty() and int(_read_export(primary).get("counts", {}).get("proposals", -1)) == 1, "gm_provider_error_acquired_provenance")
+	# A second resident's proposal reaches the same file (subject for inactivity below).
+	innkeeper_controller.need = {"capability_id": "innkeeper_lantern", "reason": "INNKEEPER_NEED_TEXT"}
+	await _scene._run_model_turn(INNKEEPER)
+	var innkeeper_turn: Dictionary = _scene.town._state.godot.resident_turns.get(INNKEEPER, {})
+	var innkeeper_record: Dictionary = _scene.town._state.godot.resident_turns.get(INNKEEPER, {})
+	_check(str(innkeeper_turn.get("status", "")) == "settled" and str(innkeeper_record.get("need_status", "")) == "capability_proposed", "gm_second_resident_need_missing")
+	_check(int(_read_export(primary).get("counts", {}).get("proposals", -1)) == 2, "gm_second_proposal_missing")
+	# Closing the issue must reach the file as well.
+	_controller.fail_response = false
+	_controller.need = null
+	_controller.preference = "cancel"
+	var cancel_result: Dictionary = await _scene._run_model_turn(SMITH)
+	var cancel_turn: Dictionary = _scene.town._state.godot.resident_turns.get(SMITH, {})
+	var cancel_episode: Dictionary = {}
+	for candidate in _town_blocked_records("fixture:gm-open"):
+		cancel_episode = candidate
+	_check(str(cancel_episode.get("closed_reason", "")) == "resident_cancelled" and str(cancel_turn.get("status", "")) == "settled", "gm_cancel_turn_failed:" + str(cancel_episode.get("closed_reason", "")) + ":" + JSON.stringify(_turns.last_result))
+	# A normal no-need turn keeps the canonical journal and the personal projection
+	# intact: need_absent is reported, nothing new is projected, and the resident still
+	# remembers its own earlier intentions without any GM/developer metadata.
+	_check(str(cancel_turn.get("need_status", "")) == "need_absent", "gm_no_need_turn_status:" + str(cancel_turn.get("need_status", "")))
+	_check(_need_entries(cancel_turn).size() == 2, "gm_no_need_turn_changed_journal:" + str(_need_entries(cancel_turn).size()))
+	var no_need_memory: Array = _controller.last_view.get("memory", {}).get("previous_decisions", [])
+	var no_need_text := JSON.stringify(no_need_memory)
+	var projected_needs := 0
+	var projection_shape_ok := true
+	for decision in no_need_memory:
+		if not decision.get("result") is Dictionary or not str(decision.get("command_id", "")).begins_with("turn:"):
+			projection_shape_ok = false
+		if decision.get("need", null) is Dictionary:
+			projected_needs += 1
+			if decision.need.keys() != ["reason"]:
+				projection_shape_ok = false
+	_check(projected_needs == 2 and projection_shape_ok, "gm_no_need_context_projection:" + no_need_text)
+	_check(no_need_text.contains("NEED_REASON_TEXT") and no_need_text.contains("NEED_REASON_TEXT_TWO") and not no_need_text.contains("capability_id") and not no_need_text.contains("need_request_id") and not no_need_text.contains("proposal_id") and not no_need_text.contains("need_status"), "gm_no_need_context_metadata:" + no_need_text)
+	var after_cancel := _read_export(primary)
+	_cancel_diag = {"record_status": str(cancel_turn.get("status", "")), "closed_reason": str(cancel_episode.get("closed_reason", "")),
+		"blocked_records": _town_blocked_records("fixture:gm-open").size(), "export_counts": after_cancel.get("counts", {}),
+		"last_result": _turns.last_result, "cancel_result": cancel_result, "export_status": gm_export_status_for_test()}
+	_check(int(after_cancel.get("counts", {}).get("issues", -1)) == 0 and int(after_cancel.get("counts", {}).get("proposals", -1)) == 2, "gm_resolution_not_exported:" + JSON.stringify(after_cancel.get("counts", {})))
+	# Explicit host export stays available and matches the automatic file.
+	var save_before_manual := _read_bytes(_writer_path)
+	_scene.gm_export_path = secondary
+	var manual: Dictionary = _scene.write_gm_evidence_export()
+	_check(manual.get("ok", false), "gm_manual_export_failed")
+	var manual_payload := _read_export(secondary)
+	_check(int(manual_payload.get("counts", {}).get("issues", -1)) == int(after_cancel.get("counts", {}).get("issues", -1)) and int(manual_payload.get("counts", {}).get("proposals", -1)) == int(after_cancel.get("counts", {}).get("proposals", -1)), "gm_manual_export_differs")
+	_check(_read_bytes(_writer_path) == save_before_manual, "gm_export_touched_source_save")
+	# A configured export failure must be inspectable in real startup/tick execution on
+	# the small existing host status line, must never relabel the older file as current,
+	# and must not rewrite anything on every half-second tick. The world save path is a
+	# deterministic failure: it conflicts with the writer lock this scene holds.
+	_check(str(_scene.gm_export_status).begins_with("GM证据已更新"), "gm_export_status_not_displayed:" + str(_scene.gm_export_status))
+	_check(str(_scene.status.text).contains("GM证据已更新"), "gm_export_status_not_in_hud")
+	var primary_before_failure := _read_bytes(primary)
+	_scene.gm_export_path = _writer_path
+	await _unpause_for(1200)
+	_check(str(_scene.gm_export_status).begins_with("GM证据导出失败") and str(_scene.gm_export_status).contains("conflicts"), "gm_failed_export_not_surfaced:" + str(_scene.gm_export_status))
+	_check(str(_scene.status.text).contains("GM证据导出失败"), "gm_failed_export_not_in_hud:" + str(_scene.status.text))
+	_check(_read_bytes(primary) == primary_before_failure, "gm_failed_export_rewrote_older_file")
+	await _unpause_for(1200)
+	_check(str(_scene.gm_export_status).contains("沿用旧文件"), "gm_failed_export_relabelled_as_current:" + str(_scene.gm_export_status))
+	_check(_read_bytes(primary) == primary_before_failure, "gm_stale_export_rewrote_older_file")
+	_scene.gm_export_path = primary
+	var retry: Dictionary = _scene.write_gm_evidence_export()
+	_check(retry.get("ok", false) and str(_scene.gm_export_status).begins_with("GM证据已更新"), "gm_explicit_retry_not_recovered:" + str(_scene.gm_export_status))
+	_check(int(_read_export(primary).get("counts", {}).get("proposals", -1)) == 2, "gm_explicit_retry_lost_proposals")
+	var export_text := _read_bytes(primary).get_string_from_utf8()
+	_check(not export_text.contains("PRIVATE_DELIBERATION_TEXT") and export_text.contains("NEED_REASON_TEXT") and export_text.contains("INNKEEPER_NEED_TEXT"), "gm_export_private_reason_leak")
+	_check(not export_text.contains("experiences") and not export_text.contains("inventory") and not export_text.contains("我没能到达"), "gm_export_contains_npc_context")
+	_check(not _read_export(primary).get("evidence", []).size() > 0, "gm_closed_issue_still_exported")
+	var personal := JSON.stringify(_scene.town.resident_view(SMITH))
+	var other_personal := JSON.stringify(_scene.town.resident_view(INNKEEPER))
+	_check(not personal.contains("background_gm") and not personal.contains("capability_id") and not personal.contains("proposal_id") and not personal.contains("need_status"), "gm_fields_in_personal_view")
+	_check(not personal.contains("NEED_REASON_TEXT") and not other_personal.contains("NEED_REASON_TEXT") and not other_personal.contains("iron_source_waypoint"), "gm_proposal_broadcast_to_npcs")
+	var proposals_before_reload: Array = _read_export(primary).get("proposals", [])
+	# Fresh-object cold reload: one proposal per resident, original sources intact.
+	var bytes := _read_bytes(_writer_path)
+	_scene.town.release_writer(_writer_path)
+	_scene.queue_free()
+	await process_frame
+	await process_frame
+	_scene = null
+	var cold: RefCounted = Runtime.new()
+	var reload_ok: Dictionary = cold.load_from(_writer_path)
+	_check(reload_ok.get("ok", false), "gm_reload_failed:" + JSON.stringify(reload_ok))
+	var cold_snapshot: Dictionary = cold.background_gm_snapshot()
+	_check(int(cold_snapshot.get("counts", {}).get("proposals", -1)) == 2 and int(cold_snapshot.get("counts", {}).get("issues", -1)) == 0, "gm_reload_counts")
+	var cold_smith := _entry_by_id(cold_snapshot.get("proposals", []), "resident_id", SMITH)
+	_check(str(cold_smith.get("proposal_id", "")) == str(_entry_by_id(proposals_before_reload, "resident_id", SMITH).get("proposal_id", "")) and int(cold_smith.get("occurrences", 0)) == 2 and str(cold_smith.get("first", {}).get("request_id", "")) == request_one and str(cold_smith.get("first", {}).get("reason", "")) == "NEED_REASON_TEXT" and str(cold_smith.get("latest", {}).get("request_id", "")) == request_two and str(cold_smith.get("latest", {}).get("reason", "")) == "NEED_REASON_TEXT_TWO", "gm_reload_proposal_not_one")
+	var cold_bytes_before := _read_bytes(_writer_path)
+	var cold_export: Dictionary = cold.write_background_gm_snapshot(tertiary)
+	_check(cold_export.get("ok", false) and int(cold_export.get("proposals", 0)) == 2, "gm_cold_export_failed:" + JSON.stringify(cold_export))
+	_check(_read_bytes(_writer_path) == cold_bytes_before and _read_bytes(_writer_path) == bytes, "gm_cold_export_touched_source_save")
+	# A pre-bridge save has no projection at all and must still load unchanged; the
+	# bridge adds evidence only, never a compatibility break for older worlds.
+	var legacy_path := _save_path + ".legacy.json"
+	var legacy_world: Variant = cold._parse_json_text(FileAccess.get_file_as_string(_writer_path))
+	var legacy_ok := _check(legacy_world is Dictionary, "gm_legacy_parse_failed")
+	if legacy_ok:
+		legacy_world.godot.erase("background_gm")
+		var legacy_file := FileAccess.open(legacy_path, FileAccess.WRITE)
+		if _check(legacy_file != null, "gm_legacy_write_failed"):
+			legacy_file.store_string(JSON.stringify(legacy_world, "", true, true))
+			legacy_file.close()
+			var legacy: RefCounted = Runtime.new()
+			var legacy_loaded: Dictionary = legacy.load_from(legacy_path)
+			_check(legacy_loaded.get("ok", false), "gm_legacy_save_rejected:" + JSON.stringify(legacy_loaded))
+			_check(int(legacy.background_gm_snapshot().get("counts", {}).get("proposals", -1)) == 0, "gm_legacy_save_invented_projection")
+	# Historical evidence survives its resident becoming inactive. The town has no
+	# general deactivation flow, so this is tested directly against the proposal
+	# validator with a stable identity the world no longer drives: the candidate state
+	# drops that resident's live activity while its canonical accepted need stays.
+	# No original history is deleted to build this fixture.
+	var inactive_path := _save_path + ".inactive.json"
+	var inactive_world: Variant = cold._parse_json_text(FileAccess.get_file_as_string(_writer_path))
+	var inactive_ok := _check(inactive_world is Dictionary, "gm_inactive_parse_failed")
+	if inactive_ok:
+		for key in ["positions", "homes", "observations"]:
+			inactive_world.godot[key].erase(INNKEEPER)
+		var remaining: Array = []
+		for account in inactive_world.survival.accounts:
+			if account.get("resident_id") != INNKEEPER:
+				remaining.append(account)
+		inactive_world.survival.accounts = remaining
+		inactive_world.godot.materials.known.erase(INNKEEPER)
+		var kept_commands: Dictionary = {}
+		for cid in inactive_world.godot.trade.commands:
+			if str(inactive_world.godot.trade.commands[cid].get("payload", {}).get("actor_id", "")) != INNKEEPER:
+				kept_commands[cid] = inactive_world.godot.trade.commands[cid]
+		inactive_world.godot.trade.commands = kept_commands
+		var inactive_file := FileAccess.open(inactive_path, FileAccess.WRITE)
+		if _check(inactive_file != null, "gm_inactive_write_failed"):
+			inactive_file.store_string(JSON.stringify(inactive_world, "", true, true))
+			inactive_file.close()
+			_check(not inactive_world.godot.positions.has(INNKEEPER), "gm_inactive_still_active")
+			var inactive_valid: Dictionary = cold._validate_background_gm(inactive_world, inactive_world.godot)
+			_check(inactive_valid.ok, "gm_inactive_proposal_rejected:" + str(inactive_valid.get("code", "")))
+			var inactive_records: Array = []
+			for key in inactive_world.godot.background_gm.proposals:
+				inactive_records.append(inactive_world.godot.background_gm.proposals[key])
+			var inactive_proposal := _entry_by_id(inactive_records, "resident_id", INNKEEPER)
+			var expected_inactive := _entry_by_id(proposals_before_reload, "resident_id", INNKEEPER)
+			_check(inactive_records.size() == 2 and str(inactive_proposal.get("proposal_id", "")) == str(expected_inactive.get("proposal_id", "")) and str(inactive_proposal.get("capability_id", "")) == "innkeeper_lantern" and str(inactive_proposal.get("reason", "")) == "INNKEEPER_NEED_TEXT" and str(inactive_proposal.get("latest_reason", "")) == "INNKEEPER_NEED_TEXT", "gm_inactive_history_lost")
+			_check(JSON.stringify(inactive_world.godot.get("resident_turns", {}).get(INNKEEPER, {})).contains("innkeeper_lantern"), "gm_inactive_deleted_canonical_need")
+			# The removed host-injection exception: a projection whose source was never
+			# accepted must not validate, even with a stable identity and valid fields.
+			var tampered: Variant = cold._parse_json_text(FileAccess.get_file_as_string(_writer_path))
+			var tampered_key := str(inactive_proposal.get("proposal_id", ""))
+			tampered.godot.background_gm.proposals[tampered_key].reason = "never accepted content"
+			tampered.godot.background_gm.proposals[tampered_key].latest_reason = "never accepted content"
+			var tampered_valid: Dictionary = cold._validate_background_gm(tampered, tampered.godot)
+			_check(not tampered_valid.ok and str(tampered_valid.get("code", "")) == "background_gm_proposal_source_mismatch", "gm_invented_provenance_accepted:" + str(tampered_valid.get("code", "")))
+	_result = {"scenario": "gm-evidence", "cancel": _cancel_diag, "issue_id": episode_id, "export_primary": primary, "export_secondary": secondary,
+		"export_inactive": tertiary, "export_bytes": _read_bytes(primary).size(), "reload_ok": reload_ok.get("ok", false),
+		"counts_after_cancel": after_cancel.get("counts", {}), "proposals": cold_snapshot.get("counts", {}).get("proposals", 0)}
+
+func gm_export_status_for_test() -> String:
+	var scene: Variant = _scene
+	return str(scene.gm_export_status) if scene != null else ""
+
+func _read_export(path: String) -> Dictionary:
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	return parsed if parsed is Dictionary else {}
+
+func _first_entry(entries: Array) -> Dictionary:
+	return entries[0] if not entries.is_empty() and entries[0] is Dictionary else {}
+
+func _entry_by_id(entries: Array, field: String, value: String) -> Dictionary:
+	for entry in entries:
+		if entry is Dictionary and str(entry.get(field, "")) == value:
+			return entry
+	return {}
+
+func _need_entries(record: Dictionary) -> Array:
+	var result: Array = []
+	for entry in record.get("history", []):
+		if not entry is Dictionary:
+			continue
+		var need_value: Variant = entry.get("need", null)
+		if need_value is Dictionary:
+			result.append(entry)
+	return result
+
 func _scenario_recurring_block() -> void:
 	# One still-pending job: blocked -> genuine progress -> blocked again at
 	# another obstacle, and the resident still gets a voluntary decision for the
@@ -951,6 +1285,8 @@ func _run() -> void:
 						await _scenario_detour()
 					"recurring-block":
 						await _scenario_recurring_block()
+					"gm-evidence":
+						await _scenario_gm_evidence()
 	await _finish()
 
 func _initialize() -> void:

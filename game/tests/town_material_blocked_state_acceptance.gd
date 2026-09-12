@@ -37,6 +37,33 @@ func _blocked_events(town, trip_command: String) -> Array:
 			result.append(event)
 	return result
 
+func _snapshot_entry(entries: Array, proposal_id: String) -> Dictionary:
+	for entry in entries:
+		if entry is Dictionary and str(entry.get("proposal_id", "")) == proposal_id:
+			return entry
+	return {}
+
+func _apply_need_turn(turns, resident_id: String, capability_id: String, reason: String, serial: int) -> Dictionary:
+	# Real turn flow: prepare one pending request, then apply a valid reply, so the
+	# canonical journal entry and the GM projection episode share one accepted source.
+	# This is NOT a paid model call; it is the same apply_reply path the host uses.
+	var epoch := 0
+	var request_id := "focused:turn-%d" % serial
+	var prepared: Dictionary = turns.town.transaction(_path, func():
+		var existing: Dictionary = turns.town._state.godot.get("resident_turns", {}).get(resident_id, {})
+		if not turns.town._state.godot.has("resident_turns"):
+			turns.town._state.godot.resident_turns = {}
+		turns.town._state.godot.resident_turns[resident_id] = {"status": "pending", "seen_seq": int(turns.town._state.life.seq),
+			"history": existing.get("history", []).duplicate(true), "controller_epoch": epoch, "controller_id": "local:focused",
+			"request_number": serial + 1, "request_id": request_id, "choice_protocol": 2,
+			"offered_actions": {"a0": "wait"}, "speech_actions": [], "reviews": existing.get("reviews", []).duplicate(true)}
+		return {"ok": true})
+	if not prepared.ok:
+		return {"ok": false, "code": "prepare_failed"}
+	var reply := {"ok": true, "command_id": "focused-controller:%d" % serial, "provenance": "opengameagent_fixture",
+		"decision": {"action": "a0", "reason": "focused fixture choice", "need": {"capability_id": capability_id, "reason": reason}}}
+	return turns.apply_reply(resident_id, epoch, request_id, reply)
+
 func run() -> void:
 	_path = "user://focused-blocked-state-%d.json" % Time.get_ticks_usec()
 	_write_fixture(_path, material_fixture())
@@ -277,6 +304,87 @@ func run() -> void:
 	var reload_feedback: Array = reload_turns._feedback_history(ember, {"history": [{"command_id": "focused:cancel-a", "status": "settled"}]})
 	check(reload_feedback.size() == 1 and bool(reload_feedback[0].get("result", {}).get("ok", false)) and str(reload_feedback[0].get("result", {}).get("target_command_id", "")) == "focused:trip-a", "cancel feedback survives cold reload")
 	reload_turns.free()
+	# GM proposal projection: bounded, deduplicated, and never the canonical history.
+	# Every proposal below comes from a real accepted turn (apply_reply), so each
+	# source can be checked against the canonical journal. A host-injected projection
+	# without a real accepted need is invented provenance and must be rejected.
+	var need_turns := TurnsScript.new()
+	need_turns.town = coexist_final
+	need_turns.save_path = _path
+	var accepted_needs := 0
+	for index in 40:
+		var outcome: Dictionary = _apply_need_turn(need_turns, all[index % 10], "capability_%d" % index, "bounded projection fixture %d" % index, index)
+		if outcome.get("ok", false) and str(outcome.get("code", "")) == "settled":
+			accepted_needs += 1
+	check(accepted_needs == 40, "40 validated capability proposals accepted from real turns: " + str(accepted_needs))
+	var projected: Dictionary = coexist_final.snapshot().godot.background_gm.proposals
+	check(projected.size() == 32, "proposal projection bounded at 32: " + str(projected.size()))
+	check(coexist_final.snapshot().godot.resident_turns[all[0]].history.size() == 4, "canonical turn journal keeps every accepted need")
+	# The earliest ask was pruned out of the bounded inbox; asking that same capability
+	# again opens a NEW projection episode. Its validation must not count the older
+	# same-capability accepted needs as occurrences of the new episode.
+	var canonical_old: Array = []
+	for entry in coexist_final.snapshot().godot.resident_turns[all[0]].history:
+		if str(entry.get("need", {}).get("capability_id", "")) == "capability_0":
+			canonical_old.append(entry.duplicate(true))
+	check(canonical_old.size() == 1, "the earliest capability has one canonical accepted need before the repeat")
+	var earliest_pruned := true
+	for key in projected:
+		var candidate: Dictionary = projected[key]
+		if str(candidate.get("resident_id", "")) == all[0] and str(candidate.get("capability_id", "")) == "capability_0":
+			earliest_pruned = false
+	check(earliest_pruned, "the earliest projection episode was pruned out of the bounded inbox")
+	var repeat: Dictionary = _apply_need_turn(need_turns, all[0], "capability_0", "changed intention after pruning", 40)
+	check(repeat.get("ok", false) and str(repeat.get("code", "")) == "settled", "repeat of the pruned capability accepted: " + str(repeat.get("code", "")))
+	var repeated_again: Dictionary = _apply_need_turn(need_turns, all[0], "capability_0", "second changed intention", 41)
+	check(repeated_again.get("ok", false) and str(repeated_again.get("code", "")) == "settled", "repeat inside the new episode accepted: " + str(repeated_again.get("code", "")))
+	var after_repeat: Dictionary = coexist_final.snapshot().godot
+	var canonical_new: Array = []
+	for entry in after_repeat.resident_turns[all[0]].history:
+		if str(entry.get("need", {}).get("capability_id", "")) == "capability_0":
+			canonical_new.append(entry.duplicate(true))
+	check(canonical_new.size() == 3, "each accepted repeat keeps its own canonical need: " + str(canonical_new.size()))
+	check(canonical_new[0] == canonical_old[0], "the oldest accepted need stays byte-for-byte intact")
+	var episode: Dictionary = {}
+	for key in after_repeat.background_gm.proposals:
+		var candidate: Dictionary = after_repeat.background_gm.proposals[key]
+		if str(candidate.get("resident_id", "")) == all[0] and str(candidate.get("capability_id", "")) == "capability_0":
+			episode = candidate
+	check(not episode.is_empty() and int(episode.get("occurrences", 0)) == 2, "new episode counts only its own accepted turns: " + JSON.stringify(episode))
+	check(str(episode.get("reason", "")) == "changed intention after pruning" and str(episode.get("latest_reason", "")) == "second changed intention", "new episode labels first vs latest content")
+	check(str(episode.get("request_id", "")) == str(canonical_new[1].get("need_request_id", "")) and str(episode.get("latest_request_id", "")) == str(canonical_new[2].get("need_request_id", "")), "new episode sources point at its own accepted turns")
+	check(after_repeat.background_gm.proposals.size() == 32, "projection stays bounded after the new episode: " + str(after_repeat.background_gm.proposals.size()))
+	var episode_view: Dictionary = _snapshot_entry(coexist_final.background_gm_snapshot().get("proposals", []), str(episode.get("proposal_id", "")))
+	check(str(episode_view.get("first", {}).get("reason", "")) == "changed intention after pruning" and str(episode_view.get("latest", {}).get("reason", "")) == "second changed intention", "exported snapshot labels first vs latest: " + JSON.stringify(episode_view))
+	check(coexist_final._validate_state(coexist_final.snapshot()).ok, "re-projected episode validates without counting older entries")
+	# A projection that is not backed by a real accepted need is not evidence.
+	var forged_key := str(after_repeat.background_gm.proposals.keys()[0])
+	var tampered: Dictionary = coexist_final.snapshot()
+	tampered.godot.background_gm.proposals[forged_key].request_id = "focused:never-accepted"
+	tampered.godot.background_gm.proposals[forged_key].latest_request_id = "focused:never-accepted"
+	var tamper_result: Dictionary = coexist_final._validate_state(tampered)
+	check(not tamper_result.ok and str(tamper_result.get("code", "")) == "background_gm_proposal_source_mismatch", "invented provenance rejected: " + str(tamper_result.get("code", "")))
+	var dropped_journal: Dictionary = coexist_final.snapshot()
+	dropped_journal.godot.resident_turns.erase(all[0])
+	var dropped_result: Dictionary = coexist_final._validate_state(dropped_journal)
+	check(not dropped_result.ok and str(dropped_result.get("code", "")) == "background_gm_proposal_source_mismatch", "projection with no accepted need rejected: " + str(dropped_result.get("code", "")))
+	# A host replay of an already-accepted source stays idempotent at the world layer.
+	var before_duplicate: Dictionary = coexist_final.snapshot()
+	var replay_source: Dictionary = canonical_new[1]
+	var duplicate_need: Dictionary = coexist_final.transaction(_path, func(): return coexist_final.record_capability_need(all[0], {"capability_id": "capability_0", "reason": "second changed intention"}, str(replay_source.get("need_request_id", "")), int(replay_source.get("need_controller_epoch", 0)), int(replay_source.get("need_source_sequence", 0))))
+	check(duplicate_need.get("ok", false) and duplicate_need.get("duplicate", false) and coexist_final.snapshot() == before_duplicate, "replayed accepted source deduplicated without state change: " + JSON.stringify(duplicate_need))
+	var invalid_need: Dictionary = coexist_final.transaction(_path, func(): return coexist_final.record_capability_need(all[0], {"capability_id": "bad id", "reason": "x"}, "focused:need-bad", 0, int(coexist_final._state.life.seq)))
+	check(not invalid_need.get("ok", true) and invalid_need.get("code", "") == "invalid_capability_need", "invalid proposal rejected: " + str(invalid_need.get("code", "")))
+	need_turns.free()
+	check(coexist_final._validate_state(coexist_final.snapshot()).ok, "bounded proposal state validates")
+	var bound_bytes := FileAccess.get_file_as_bytes(_path)
+	coexist_final.release_writer(_path)
+	var bound_town = load_materials(_path)
+	check(FileAccess.get_file_as_bytes(_path) == bound_bytes, "bounded proposal cold reload keeps exact bytes")
+	check(bound_town._validate_state(bound_town.snapshot()).ok, "bounded proposal cold reload validates")
+	var bound_snapshot: Dictionary = bound_town.background_gm_snapshot()
+	check(int(bound_snapshot.get("counts", {}).get("proposals", -1)) == 32 and bound_snapshot.get("limits", {}).get("proposal_limit") == 32, "reloaded projection counts stay bounded")
+	bound_town.release_writer(_path)
 	coexist_final.release_writer(_path)
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(_path))
 	print(JSON.stringify({"suite": "town_material_blocked_state", "checks": checks, "failures": failures,

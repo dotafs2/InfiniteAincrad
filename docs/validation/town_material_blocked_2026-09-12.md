@@ -136,3 +136,28 @@ town_controller_recovery 17、town_online 63、town_model_continuity 92、town_v
   单条 episode 标识为不透明序列，居民/命令来源在字段中显式保留。
 - H24 四个未提交文件未改动、未发布；其原探针（固定写入 H24 沙箱目录）本轮未重跑，
   改在新探针内复现同一 crate 几何与绕行量级。
+
+## 独立复核修正（追加，未重跑未改动的场景）
+
+范围：本次只改 GM 证据桥、个人历史投影与导出错误可见性。导航/物理场景（paused-enclosed、
+at-target、detour-crate、recurring-block、blocked-enclosed）与美术场景未改动、未重跑。
+
+1. 个人上下文投影（`game/agents/town_turns.gd:_feedback_history`）：`prepare_turn()` 实际交给模型的
+   `memory.previous_decisions` 保留个人生活后果、上一次选择与居民自己写的 `need.reason`，
+   但剥离 `capability_id / need_request_id / need_controller_epoch / need_source_sequence`；
+   世界正典 turn journal 逐字节不变（探针同时断言两侧）。
+2. 正典来源校验（`game/core/town_runtime.gd:_validate_background_gm`）：投影的第一条与最近一条
+   来源都必须匹配该居民正典 turn journal 中真实被接受的 need（居民、命令、epoch、序号、内容），
+   移除了“日志里没有已接受 need 就放行宿主注入投影”的例外；`occurrences` 不得超过该能力在正典
+   日志中的条目数，因此设界裁剪后重新提出的同一能力算作**新 episode**，不会把历史条目计入本次
+   次数。投影记录新增 `latest_reason`，导出改为显式 `first`/`latest` 两组来源与内容。
+   无 `background_gm` 的旧档不经过该校验，仍可加载（探针内显式验证）。
+3. 导出失败可见性（`game/spatial/town_street.gd`）：启动、回合、0.5 秒批次三条路径都调用
+   `_note_gm_export()`，状态显示在既有 HUD 状态行（不进居民对话、不进居民模型上下文）；同一内容
+   重复失败返回 `gm_export_stale`（`ok:false`，不重写、不再每半秒重试、绝不把旧文件标成最新），
+   只有显式重试成功或新的成功导出才清除。目标路径变化时清空上一路径的成功/失败记忆。
+
+本轮实际执行（Godot .NET 4.7.2 console，离线 fixture，NPC 付费调用 0，DeepSeek 开发调用另记）：
+`tmp/chain-20260912/task01-tests/final-review-3/`：gm-evidence 探针 89 项 0 失败（退出码 0）；
+`tmp/chain-20260912/task01-tests/final-review-2/suites/`：state 278 项 0 失败、town_turns 29、
+town_feedback 27，全部退出码 0。
