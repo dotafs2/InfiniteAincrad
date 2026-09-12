@@ -1,3 +1,14 @@
+- 2026-09-13 当前操作规则（tracked-repository freeze，技术性纠正，不是新的用户许可门槛）：
+  在**任何**实际canonical世界模型运行或生产GM runner运行期间，冻结**全部tracked文件与Git HEAD**——包括
+  docs与提交，因为GM runner的guard覆盖整个仓库HEAD/worktree。此窗口内只允许互不冲突的**private**准备工作并行
+  （例如只写tmp/的recipe或capture协调器）；被审核的源码/文档提交应集中放在**无活跃运行的暂停/发布窗口**批量落地。
+  该规则源于 task31编排事故：root在十GM观察期间提交了ROADMAP/STATUS（063a1f9f→77e8169，仅2个文档文件），
+  五个显式protected文件哈希全部未变，但整个批次被记为 incomplete / runner exit 1；十份GM回复本身10/10结构化有效，
+  73条disposition（55 no_action + 18 observe）、0新issue、0 coding claim，也没有新增未知。整批并未通过，
+  这些回复也不是新的代码贡献；不得重放其付费调用，不得削弱GM guard。
+  工程人员池（GPT-5.6-sol、gpt-5.3-codex-spark、DeepSeek deepseek-flash）、最多两名工程师并发、canonical世界单写者、
+  Kimi居民与后台GM的provider/账本/冷却设置、10:00 Asia/Shanghai截止与前序历史未知均保持不变。
+
 - 2026-09-13 latest user routing (current; no instruction time asserted): continue the agreed chain through
   2026-09-13 10:00 Asia/Shanghai (02:00 UTC). GPT-6 keeps direction, modeling, dispatch and
   outcome acceptance only. GPT-5.6-sol, gpt-5.3-codex-spark and DeepSeek `deepseek-flash` perform
