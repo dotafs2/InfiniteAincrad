@@ -1,3 +1,5 @@
+- 2026-09-12 current-task exception: the user explicitly authorized continuing after the single DeepSeek stream failure recorded at 02:26:15 UTC. Preserve that unresolved usage/charge as unknown and continue the supervised resident/GM-chain work without replaying completed tools. This is an exception for that incident, not a zero-cost entry, blanket waiver for future unknown charges, NPC-budget reset or overnight-automation restart.
+
 - 2026-09-12: User authorized consolidating and pushing main with continuous iteration
   until 2026-09-12 08:00 Asia/Shanghai. GPT6 plans and reviews; DeepSeek implements.
   The prior no-unattended sentence is superseded for this time-limited run. The prior
