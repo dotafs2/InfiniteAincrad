@@ -1,0 +1,144 @@
+{
+  "recorded_utc": "2026-09-12T04:04:18.852348+00:00",
+  "scope": "offline Godot bridge only; deterministic fixture choices; no GM model consumer and no Kimi call",
+  "source_sha256_lf": {
+    "game/agents/town_turns.gd": "dbc7b31f0e7fe2e9f5b487f0f2484158cd87bd0a60a2599cda03bf194b0dc9b0",
+    "game/core/town_runtime.gd": "2931426212e446d3baf46cda36a6b45297e163cb49a7526d1799b03690246231",
+    "game/spatial/town_street.gd": "0ae996731c2450315fd4c7fe968ee19abe7ca35def02da9f1f3caf49ed60cff0",
+    "game/tests/town_material_blocked_probe.gd": "5af75c041cd5a00d53bac9561092d3ba087a641601009a13691a7887764417bf",
+    "game/tests/town_material_blocked_state_acceptance.gd": "cbf62a37284a87bff4f7f27e441ce4c3be0f655352e444e448907be7d5b9e260"
+  },
+  "tests": [
+    {
+      "case": "gm-evidence",
+      "result": {
+        "checks": 89,
+        "failure_count": 0,
+        "failures": [],
+        "scenario": "gm-evidence"
+      },
+      "process": {
+        "name": "gm-evidence",
+        "started_at_utc": "2026-09-12T04:00:08.814236+00:00",
+        "command": [
+          "tmp/toolchain/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64_console.exe",
+          "--path",
+          "D:\\lucidgloves\\InfiniteAincrad\\game",
+          "--headless",
+          "--script",
+          "res://tests/town_material_blocked_probe.gd",
+          "--",
+          "--fixture=D:/lucidgloves/InfiniteAincrad/tmp/chain-20260912/task01-tests/final-review-3/fixture-base.json",
+          "--town-save=D:/lucidgloves/InfiniteAincrad/tmp/chain-20260912/task01-tests/final-review-3/saves/gm-evidence.json",
+          "--blocked-probe-output=D:/lucidgloves/InfiniteAincrad/tmp/chain-20260912/task01-tests/final-review-3/out/gm-evidence.json",
+          "--blocked-probe-scenario=gm-evidence",
+          "--gm-export-dir=D:/lucidgloves/InfiniteAincrad/tmp/chain-20260912/task01-tests/final-review-3/gm-export",
+          "--town-gm-export=D:/lucidgloves/InfiniteAincrad/tmp/chain-20260912/task01-tests/final-review-3/gm-export/gm-evidence-primary.json"
+        ],
+        "working_directory": "D:\\lucidgloves\\InfiniteAincrad",
+        "timeout_seconds": 200,
+        "pid": 24320,
+        "status": "exited",
+        "exit_code": 0,
+        "elapsed_seconds": 16.766,
+        "finished_at_utc": "2026-09-12T04:00:25.582690+00:00"
+      },
+      "stderr_empty": true
+    },
+    {
+      "case": "state",
+      "result": {
+        "active_records": 0,
+        "blocked_events": 48,
+        "checks": 278,
+        "closed_history": 32,
+        "coexistence_active": 10,
+        "coexistence_closed": 32,
+        "failures": 0,
+        "paid_calls": 0,
+        "suite": "town_material_blocked_state"
+      },
+      "process": {
+        "name": "blocked-state",
+        "started_at_utc": "2026-09-12T03:59:51.315573+00:00",
+        "command": [
+          "tmp/toolchain/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64_console.exe",
+          "--path",
+          "D:\\lucidgloves\\InfiniteAincrad\\game",
+          "--headless",
+          "--script",
+          "res://tests/town_material_blocked_state_acceptance.gd"
+        ],
+        "working_directory": "D:\\lucidgloves\\InfiniteAincrad",
+        "timeout_seconds": 120,
+        "pid": 57148,
+        "status": "exited",
+        "exit_code": 0,
+        "elapsed_seconds": 3.563,
+        "finished_at_utc": "2026-09-12T03:59:54.868612+00:00"
+      },
+      "stderr_empty": true
+    },
+    {
+      "case": "turns",
+      "result": {
+        "checks": 29,
+        "failures": 0,
+        "paid_calls": 0,
+        "suite": "town_turns"
+      },
+      "process": {
+        "name": "town_turns_acceptance",
+        "started_at_utc": "2026-09-12T03:59:11.102340+00:00",
+        "command": [
+          "tmp/toolchain/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64_console.exe",
+          "--path",
+          "D:\\lucidgloves\\InfiniteAincrad\\game",
+          "--headless",
+          "--script",
+          "res://tests/town_turns_acceptance.gd"
+        ],
+        "working_directory": "D:\\lucidgloves\\InfiniteAincrad",
+        "timeout_seconds": 120,
+        "pid": 64616,
+        "status": "exited",
+        "exit_code": 0,
+        "elapsed_seconds": 0.469,
+        "finished_at_utc": "2026-09-12T03:59:11.568002+00:00"
+      },
+      "stderr_empty": true
+    },
+    {
+      "case": "feedback",
+      "result": {
+        "checks": 27,
+        "failures": 0,
+        "paid_calls": 0,
+        "suite": "town_feedback"
+      },
+      "process": {
+        "name": "town_feedback_acceptance",
+        "started_at_utc": "2026-09-12T03:59:11.740857+00:00",
+        "command": [
+          "tmp/toolchain/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64_console.exe",
+          "--path",
+          "D:\\lucidgloves\\InfiniteAincrad\\game",
+          "--headless",
+          "--script",
+          "res://tests/town_feedback_acceptance.gd"
+        ],
+        "working_directory": "D:\\lucidgloves\\InfiniteAincrad",
+        "timeout_seconds": 120,
+        "pid": 46608,
+        "status": "exited",
+        "exit_code": 0,
+        "elapsed_seconds": 0.453,
+        "finished_at_utc": "2026-09-12T03:59:12.204876+00:00"
+      },
+      "stderr_empty": true
+    }
+  ],
+  "export_source": "tmp\\chain-20260912\\task01-tests\\final-review-3\\gm-export\\gm-evidence-primary.json",
+  "export_sha256_lf": "a738fe085078172764ae8bfafdeb800e099ce009792603c29ab0c53764773d8f",
+  "inactive_limit": "Direct proposal-validator test retains canonical need history; not a full-world deactivation/cold-load claim."
+}

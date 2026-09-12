@@ -1,0 +1,82 @@
+{
+  "boundaries": {
+    "consumed_by_npc_model": false,
+    "contains_other_resident_memories": false,
+    "contains_private_reply_reason": false,
+    "image_analysis": false,
+    "note": "world-scoped evidence for a separate GM process only"
+  },
+  "counts": {
+    "issues": 0,
+    "proposals": 2
+  },
+  "evidence": [],
+  "kind": "background_gm_evidence_snapshot",
+  "limits": {
+    "evidence_limit": 64,
+    "proposal_limit": 32
+  },
+  "projection_note": "bounded GM-visible projection; the canonical accepted-need record stays in the world's private turn journal",
+  "proposals": [
+    {
+      "capability_id": "iron_source_waypoint",
+      "claim": {
+        "implemented": false,
+        "note": "resident proposal from an accepted turn; not an achieved capability and not spoken publicly",
+        "public_utterance": false,
+        "verified_in_world": false
+      },
+      "evidence_kind": "capability_proposed",
+      "first": {
+        "controller_epoch": 0,
+        "reason": "NEED_REASON_TEXT",
+        "request_id": "turn:fixture:smith:0:1",
+        "source_sequence": 6
+      },
+      "latest": {
+        "controller_epoch": 0,
+        "reason": "NEED_REASON_TEXT_TWO",
+        "request_id": "turn:fixture:smith:0:2",
+        "source_sequence": 6
+      },
+      "occurrences": 2,
+      "proposal_id": "gm_proposal:1",
+      "resident_id": "fixture:smith",
+      "status": "proposed"
+    },
+    {
+      "capability_id": "innkeeper_lantern",
+      "claim": {
+        "implemented": false,
+        "note": "resident proposal from an accepted turn; not an achieved capability and not spoken publicly",
+        "public_utterance": false,
+        "verified_in_world": false
+      },
+      "evidence_kind": "capability_proposed",
+      "first": {
+        "controller_epoch": 0,
+        "reason": "INNKEEPER_NEED_TEXT",
+        "request_id": "turn:fixture:innkeeper:0:1",
+        "source_sequence": 6
+      },
+      "latest": {
+        "controller_epoch": 0,
+        "reason": "INNKEEPER_NEED_TEXT",
+        "request_id": "turn:fixture:innkeeper:0:1",
+        "source_sequence": 6
+      },
+      "occurrences": 1,
+      "proposal_id": "gm_proposal:2",
+      "resident_id": "fixture:innkeeper",
+      "status": "proposed"
+    }
+  ],
+  "schema_version": 1,
+  "source_revision": {
+    "godot_elapsed_seconds": 15.5,
+    "life_seq": 7,
+    "proposal_sequence": 2,
+    "world_elapsed_seconds": 15.5
+  },
+  "world_id": "fixture:town-trade-validation"
+}

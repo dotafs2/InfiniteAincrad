@@ -247,8 +247,35 @@ func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary) 
 				effect["speech_delivery"] = speech_delivery.duplicate(true)
 		record.status = "settled" if effect.ok else "rule_rejection"
 		record.result = effect.duplicate(true)
-		record.history.append({"action": record.action, "model_choice": decision.action, "reason": decision.reason, "command_id": request_id,
-			"provenance": record.provenance, "status": record.status, "result": effect.duplicate(true)})
+		# A validated capability proposal becomes a bounded, deduplicated world-scoped
+		# proposal for the separate GM projection. It is never an achieved capability,
+		# never public speech, and the reply's private reason is not exported.
+		var accepted_need: Dictionary = {}
+		if town.has_method("record_capability_need"):
+			var need_outcome: Variant = town.record_capability_need(id, decision.get("need", null), request_id, epoch, int(town._state.life.seq))
+			if need_outcome is Dictionary:
+				record.need_status = need_outcome.get("code", "unknown")
+				if need_outcome.has("proposal_id"):
+					record.need_proposal_id = need_outcome.proposal_id
+				var accepted_value: Variant = need_outcome.get("accepted", {})
+				if accepted_value is Dictionary:
+					accepted_need = accepted_value
+			else:
+				record.need_status = "invalid_need_outcome"
+		else:
+			# A partial/lower-level fixture runtime owns no GM projection.
+			record.need_status = "unsupported_runtime"
+		var history_entry := {"action": record.action, "model_choice": decision.action, "reason": decision.reason, "command_id": request_id,
+			"provenance": record.provenance, "status": record.status, "result": effect.duplicate(true)}
+		if not accepted_need.is_empty():
+			# Canonical private history keeps the exact validated need and its source
+			# attribution, independent of the bounded GM projection. The reply's private
+			# deliberation reason is not duplicated into the need record.
+			history_entry.need = {"capability_id": accepted_need.get("capability_id", ""), "reason": accepted_need.get("reason", "")}
+			history_entry.need_request_id = accepted_need.get("request_id", "")
+			history_entry.need_controller_epoch = int(accepted_need.get("controller_epoch", 0))
+			history_entry.need_source_sequence = int(accepted_need.get("source_sequence", 0))
+		record.history.append(history_entry)
 		if not speech_delivery.is_empty():
 			record.history[-1]["speech_delivery"] = speech_delivery.duplicate(true)
 		# The immediate effect of this decision is already known to its author.
@@ -304,4 +331,18 @@ func _feedback_history(id: String, record: Dictionary) -> Array:
 		elif command.is_empty() and item.get("status") == "rule_rejection":
 			feedback = item.get("result", feedback).duplicate(true)
 		item.result = feedback
+		# The resident's own previous-decision memory keeps its personal consequence and
+		# its OWN authored intention text, but not the developer/source attribution the
+		# world uses to link a validated capability proposal to a GM-visible episode.
+		# Canonical history is untouched: this is a personal projection only.
+		var own_need: Variant = item.get("need", null)
+		if own_need is Dictionary:
+			var own_reason := str(own_need.get("reason", ""))
+			if own_reason.is_empty():
+				item.erase("need")
+			else:
+				item.need = {"reason": own_reason}
+		item.erase("need_request_id")
+		item.erase("need_controller_epoch")
+		item.erase("need_source_sequence")
 	return history

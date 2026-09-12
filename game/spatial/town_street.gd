@@ -54,6 +54,8 @@ var repair_initial_iron := -1
 var nameplates: Node = null
 var material_visibility: Node3D = null
 var material_steering: RefCounted = null
+var gm_export_path := ""
+var gm_export_status := ""
 
 func _ready() -> void:
 	restore_only = OS.get_cmdline_user_args().has("--town-restore")
@@ -86,6 +88,12 @@ func _ready() -> void:
 			_save_path = arg.trim_prefix("--town-save=")
 		if arg.begins_with("--town-capture="):
 			capture_dir = arg.trim_prefix("--town-capture=")
+		if arg.begins_with("--town-gm-export="):
+			gm_export_path = arg.trim_prefix("--town-gm-export=")
+			if gm_export_path.strip_edges().is_empty():
+				push_error("--town-gm-export requires a path")
+				get_tree().quit(2)
+				return
 	# The legacy Mac repair demo is an offline/local_rule_policy path only. It must
 	# never run in gateway_mode or restore_only, and incompatible startup is rejected
 	# before any world mutation.
@@ -148,6 +156,11 @@ func _ready() -> void:
 		model_turns = TownTurns.new()
 		add_child(model_turns)
 		model_turns.configure(town, _save_path)
+	# One explicit, bounded evidence snapshot for a separate GM process. No daemon and
+	# no loop; nothing from this export enters a resident model context. The startup
+	# result is not ignored: a failed configured export shows on the host status line.
+	if not gm_export_path.is_empty():
+		write_gm_evidence_export()
 	_refresh_public_dialogue(town.snapshot().life.events, true)
 	_refresh()
 	if not capture_dir.is_empty():
@@ -336,6 +349,8 @@ func _physics_process(delta: float) -> void:
 		paused = true
 		latest = "保存失败，生活已暂停：" + str(result.code)
 	else:
+		if not gm_export_path.is_empty():
+			_note_gm_export(town.maybe_write_background_gm_snapshot(gm_export_path))
 		for receipt in result.completed:
 			latest = str(town.resident(receipt.actor_id).name) + " · " + _action_label(receipt.code)
 			actors[receipt.actor_id].set_gesture("idle")
@@ -349,23 +364,46 @@ func _physics_process(delta: float) -> void:
 func _validation_limit_reached() -> bool:
 	return gateway_mode and not capture_dir.is_empty() and validation_decision_limit >= 0 and validation_decisions_started >= validation_decision_limit
 
-func _run_model_turn(id: String) -> void:
+func write_gm_evidence_export() -> Dictionary:
+	if gm_export_path.is_empty():
+		return {"ok": false, "code": "gm_export_path_missing"}
+	var result: Dictionary = town.write_background_gm_snapshot(gm_export_path)
+	_note_gm_export(result)
+	return result
+
+func _note_gm_export(result: Dictionary) -> void:
+	# Host status line only. A failed or stale export keeps an explicit failure status,
+	# shown in the HUD until a successful export or explicit retry replaces it. It is
+	# never written into resident dialogue and never enters a resident model context.
+	var code := str(result.get("code", "unknown"))
+	if result.get("ok", false):
+		if code == "gm_export_written":
+			gm_export_status = "GM证据已更新：%d个问题/%d个提议" % [int(result.get("issues", 0)), int(result.get("proposals", 0))]
+	elif code == "gm_export_stale":
+		gm_export_status = "GM证据导出失败（沿用旧文件）：" + str(result.get("last_error", "unknown"))
+	else:
+		gm_export_status = "GM证据导出失败：" + code
+
+func _run_model_turn(id: String) -> Dictionary:
 	# Validation cap stops BEFORE preparing another durable resident request.
 	# The gateway ledger remains the independent fee authority.
 	if _validation_limit_reached():
-		return
+		return {"ok": false, "code": "validation_limit_reached", "actor_id": id}
 	validation_decisions_started += 1
 	var result: Dictionary = await model_turns.step(id)
 	if not is_instance_valid(status):
-		return
+		return result
 	if result.get("code") == "stale_controller_reply":
-		return # An obsolete connection must not overwrite the replacement's UI.
+		return result # An obsolete connection must not overwrite the replacement's UI.
 	if not result.ok:
 		latest = "%s 的连接待处理：%s；其他居民继续。" % [town.resident(id).name, result.code]
 	elif result.has("actor_id"):
 		# A model's reason is private deliberation, not something it said aloud.
 		last_model_note = "%s 已作出选择。" % town.resident(result.actor_id).name
+		if not gm_export_path.is_empty():
+			_note_gm_export(town.maybe_write_background_gm_snapshot(gm_export_path))
 	_refresh()
+	return result
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _composing_dialogue():
@@ -649,7 +687,8 @@ func _refresh() -> void:
 	if not snap.life.get("contracts", []).is_empty():
 		var contract: Dictionary = snap.life.contracts[-1]
 		repair_text = " · 修理：%s · %s" % [_repair_part_label(contract.part), _repair_status_label(contract.status)]
-	status.text = "%s\n%d 个存档身份 · %d 人活动 · %s\n空格 暂停/继续 · WASD 行走 · H 询问 · ESC 释放\n%s\n公共浆果 %d / %d · 生活事件 %d%s" % [title, snap.residents.size(), town.active_ids().size(), mode_label, latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text]
+	var gm_text := "" if gm_export_status.is_empty() else "\n" + gm_export_status
+	status.text = "%s\n%d 个存档身份 · %d 人活动 · %s\n空格 暂停/继续 · WASD 行走 · H 询问 · ESC 释放\n%s\n公共浆果 %d / %d · 生活事件 %d%s%s" % [title, snap.residents.size(), town.active_ids().size(), mode_label, latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text, gm_text]
 	var axe: Dictionary = {}
 	for item in snap.life.get("items", []):
 		if item.get("kind") == "axe":
