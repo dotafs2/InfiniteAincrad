@@ -88,8 +88,23 @@ def main():
     rollout.parent.mkdir(parents=True, exist_ok=True)
     with rollout.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps({"type": "offline-fake-session", "prompt_chars": len(prompt)}) + "\n")
+    usage_path = home / ("offline-usage-" + session + ".json")
+    previous_usage = json.loads(usage_path.read_text()) if usage_path.exists() else {}
+    cumulative = {key: value + previous_usage.get(key, 0) for key, value in USAGE.items()}
+    if mode == "usage_decrease":
+        cumulative = {key: value // 2 for key, value in USAGE.items()}
+    elif mode == "usage_repeat":
+        cumulative = previous_usage
+    usage_path.write_text(json.dumps(cumulative))
 
     if coding_state is not None:
+        if mode == "rename_out_of_scope":
+            subprocess.run(["git", "mv", "README.md", coding_state["scope"]["files"][0]],
+                           cwd=os.getcwd(), capture_output=True, text=True, check=True)
+        if mode in ("candidate_fail", "candidate_repair"):
+            target = Path(os.getcwd()) / coding_state["scope"]["files"][0]
+            target.write_text("reviewable fixture candidate" if mode == "candidate_repair"
+                              else "incomplete fixture candidate", encoding="utf-8")
         if mode == "out_of_scope":
             target = Path(os.getcwd()) / "game" / "rogue-note.txt"
             target.write_text("offline fake out-of-scope change", encoding="utf-8")
@@ -99,8 +114,13 @@ def main():
                            cwd=os.getcwd(), capture_output=True, text=True)
         answer = None if mode == "bad_contract" else {
             "issue_id": coding_state["open_issues"][0]["issue_id"], "status": "implemented",
-            "changed_files": [], "test_commands": coding_state["scope"].get("test_commands", []),
+            "changed_files": coding_state["scope"]["files"] if mode.startswith("candidate_") else [],
+            "test_commands": coding_state["scope"].get("test_commands", []),
             "test_results": "offline fake: nothing else executed", "notes": "offline fake runner"}
+        if mode == "coding_wrong_issue":
+            answer["issue_id"] = "issue-wrong"
+        if mode == "coding_blocked":
+            answer["status"] = "blocked"
     else:
         issues = [item["issue_id"] for item in gm_state["open_issues"]]
         if mode == "invalid_output":
@@ -119,6 +139,13 @@ def main():
                                   for issue in issues]}
         elif mode == "bad_contract":
             answer = None
+        elif mode in ("discover", "discover_bad_ref"):
+            refs = (gm_state.get("investigation") or {}).get("evidence_refs", ["/counts"])
+            answer = {"gm_id": gm_state["gm_id"], "results": [],
+                      "new_issues": [{"proposal_key": "fixture-bounded-check",
+                                      "summary": "Offline fixture hypothesis requires a scoped candidate.",
+                                      "evidence_refs": refs if mode == "discover" else ["/secret"],
+                                      "claim_coding": True}]}
         else:
             answer = {"gm_id": gm_state["gm_id"],
                       "results": [{"issue_id": issue, "disposition": "observe",
@@ -132,7 +159,7 @@ def main():
         result_path.write_text(text, encoding="utf-8")
     emit({"type": "item.completed", "item": {"type": "agent_message", "text": text}})
     if mode != "no_usage":
-        emit({"type": "turn.completed", "usage": USAGE})
+        emit({"type": "turn.completed", "usage": cumulative})
     return 0
 
 

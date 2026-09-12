@@ -4,6 +4,8 @@
 
 合并来源可用性：[跨机器合并验证报告](docs/validation/cross_machine_2026-09-12.md)
 
+2026-09-12最新：[十人实际街道、私有需求交付与同档恢复](docs/validation/gpt6_sprint_2026-09-12.md)已有离线工程验收；真实10Kimi＋10DeepSeek尚未完成，采集拥堵与原生崩溃继续在原图追踪。
+
 A persistent AI world inspired by Sword Art Online. Residents retain their identities, experiences and commitments as the models behind them change.
 
 2026-09-11生活验证：同一个三人测试档已完成真实Kimi修理、付款、取回、工具使用及冷启动续接；一次居民顾虑已推动新结算能力的开发和实际使用。过程有明确标记的玩家澄清，原镇主档和正式人物美术仍未恢复。[结果与限制](docs/validation/town_continuous_life_2026-09-11.md) · [唯一全景进度图](ROADMAP.md)。

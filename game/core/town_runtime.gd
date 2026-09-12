@@ -127,6 +127,42 @@ func record_capability_need(resident_id: String, need: Variant, request_id: Stri
 	_prune_background_gm()
 	return {"ok": true, "code": "capability_proposed", "proposal_id": proposal_key, "accepted": accepted}
 
+func _material_private_need_in(value: Dictionary, resident_id: String, request_id: String) -> Dictionary:
+	# The accepted turn journal is canonical. The bounded GM projection may have
+	# pruned this need, or may contain a newer wording; neither rewrites its source.
+	if not _validate_decision_command_id(request_id).ok or not value.godot.positions.has(resident_id):
+		return {}
+	var all_turns: Variant = value.godot.get("resident_turns", {})
+	if not all_turns is Dictionary:
+		return {}
+	var turn: Variant = all_turns.get(resident_id, {})
+	if not turn is Dictionary or not turn.get("history", null) is Array:
+		return {}
+	var found: Dictionary = {}
+	for entry in turn.history:
+		if not entry is Dictionary or entry.get("need_request_id", "") != request_id:
+			continue
+		var need: Variant = entry.get("need", null)
+		if not found.is_empty() or entry.get("command_id", "") != request_id or not need is Dictionary or not _exact_keys(need, ["capability_id", "reason"]):
+			return {}
+		# A handful of copied need fields is not an accepted turn. Preserve the
+		# controller's actual result/provenance, including a rejected world action.
+		if entry.get("status", "") not in ["settled", "rule_rejection"] or entry.get("provenance", "") not in ALLOWED_DECISION_PROVENANCE or not entry.get("result", null) is Dictionary:
+			return {}
+		var result: Dictionary = entry.result
+		if not result.get("ok", null) is bool or result.ok != (entry.status == "settled") or not result.get("code", null) is String:
+			return {}
+		if not entry.get("action", null) is String or not entry.get("model_choice", null) is String or not entry.get("reason", null) is String or entry.reason.length() > 512:
+			return {}
+		if typeof(entry.get("need_controller_epoch", null)) != TYPE_INT or typeof(entry.get("need_source_sequence", null)) != TYPE_INT:
+			return {}
+		if not _valid_capability_id(need.capability_id) or not _valid_need_text(need.reason) or not _bounded(entry.need_controller_epoch, 1000000000) or not _bounded(entry.need_source_sequence, value.life.seq):
+			return {}
+		found = {"kind": "resident_capability_need", "seq": entry.need_source_sequence,
+			"actor_id": resident_id, "text": need.reason, "need_request_id": request_id,
+			"need_controller_epoch": entry.need_controller_epoch, "capability_id": need.capability_id}
+	return found
+
 func background_gm_snapshot() -> Dictionary:
 	# Read-only. Never mutates world state, never takes the writer path, and never
 	# enters a resident view or the personal provider whitelist.
