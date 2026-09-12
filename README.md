@@ -1,5 +1,7 @@
 # InfiniteAincrad
 
+[手机看进度与实机画面](docs/PROGRESS.md) · [唯一原路线图](ROADMAP.md)
+
 合并来源可用性：[跨机器合并验证报告](docs/validation/cross_machine_2026-09-12.md)
 
 A persistent AI world inspired by Sword Art Online. Residents retain their identities, experiences and commitments as the models behind them change.
