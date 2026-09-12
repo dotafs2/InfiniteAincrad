@@ -1,19 +1,28 @@
 # Model workflow (development execution routing)
 
-Decision, 2026-09-11: all development execution goes to DeepSeek `deepseek-flash`.
+Historical decision, 2026-09-11, superseded for current engineering routing: all development
+execution went to DeepSeek `deepseek-flash`.
 GPT-6 discusses alternatives, challenges direction and reviews reported outcomes with
 the user; it does not implement. Routing or dispatching an authorized DeepSeek task is
 orchestration, not implementation.
 
-Current routing note, 2026-09-13 01:48 Asia/Shanghai: the user explicitly asked to
-continue with DeepSeek plus Codex5.3Spark assistance. DeepSeek stays the implementation
-and test executor for the active capability in its one reused native session; the
-supervisor separately dispatches **one read-only Spark audit on an immutable snapshot**
-(no product writer, no recursive worker, no second paid runtime). GPT-6 keeps planning,
-dispatch and review ownership, DeepSeek development usage stays measured with its cache
-reuse recorded as usual, and the production Kimi-resident / DeepSeek-GM runtime
-assignments and their ledgers are unchanged. This annotation adds a bounded read-only
-reviewer, not a new writer or a budget change.
+Current routing note, 2026-09-13 (no instruction time asserted): the user authorized continuing the
+same chain with explicit timeboxing and disambiguated ownership. GPT-6 keeps direction,
+modeling, dispatch and outcome acceptance only. GPT-5.6-sol, gpt-5.3-codex-spark and
+DeepSeek `deepseek-flash` handle engineering, code and tests. Current disjoint ownership assigns
+the H36 runtime task to DeepSeek, the GM-candidate isolation fix to GPT-5.6-sol, and the bounded
+routing-document task to Spark; DeepSeek is not the only permitted engineering executor.
+Production assignments and ledgers are unchanged: 10 production Kimi residents plus 10
+background production DeepSeek GMs. At most two engineers may run in parallel with disjoint
+ownership and a single maintained-world writer. The future checkpoint is 09:50; do not begin any
+work that cannot be bounded to complete by 10:00, pause heartbeat at cutoff, preserve owned process
+identity, and close only task-owned processes. Unknown DeepSeek development tails remain unknown
+under the carried-continuation rule; Kimi new-unknown/currency stops are unchanged. The older
+2026-09-12 08:00/15:00 windows are historical.
+
+Previous routing note, 2026-09-13 01:48 Asia/Shanghai: this earlier one requested DeepSeek plus
+Codex5.3Spark assistance with **one read-only Spark audit** on an immutable snapshot, no product
+writer and no second paid runtime. It is now historical for implementation routing.
 
 ## Launchers (verified on this machine vs. legacy machine notes)
 

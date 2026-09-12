@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "background_gm_evidence_snapshot",
+  "world_id": "fixture:gm-journey-consumer-synthetic",
+  "fixture_note": "sanitized synthetic world-scoped consumer fixture; not a physics run, resident decision, model observation, or maintained save",
+  "source_revision": {
+    "life_seq": 1,
+    "godot_elapsed_seconds": 12.0,
+    "world_elapsed_seconds": 12.0,
+    "proposal_sequence": 0
+  },
+  "boundaries": {
+    "consumed_by_npc_model": false,
+    "image_analysis": false,
+    "contains_private_reply_reason": false,
+    "contains_other_resident_memories": false,
+    "note": "synthetic public physical fields for portable runner validation only"
+  },
+  "limits": {
+    "evidence_limit": 64,
+    "proposal_limit": 32
+  },
+  "projection_note": "synthetic portable fixture using the public GM projection schema",
+  "counts": {
+    "issues": 1,
+    "proposals": 0
+  },
+  "evidence": [
+    {
+      "evidence_kind": "movement_blocked",
+      "issue_id": "journey_stall:synthetic-1",
+      "episode_id": "journey_stall:synthetic-1",
+      "world_id": "fixture:gm-journey-consumer-synthetic",
+      "resident_id": "fixture:synthetic-mover",
+      "job_command_id": "fixture:synthetic-approach:1",
+      "journey": "approach",
+      "place_id": "",
+      "source_id": "",
+      "material": "",
+      "status": "open",
+      "opened_elapsed": 12.0,
+      "physical_facts": {
+        "observed_position": [1.0, 0.2, 2.0],
+        "target_position": [1.0, 0.2, 5.0],
+        "remaining_distance": 3.0,
+        "remaining_route_m": -1.0,
+        "no_progress_seconds": 8.0,
+        "arrival_radius": 0.45,
+        "progress_epsilon": 0.05,
+        "progress_measure": "remaining_meeting_distance_m",
+        "observation_source": "host_physics_frame_position"
+      },
+      "discriminators": {
+        "movement_blocked": true,
+        "collision_proved": false,
+        "contact_recorded": false,
+        "obstacle_identified": false,
+        "image_analysis": false,
+        "repair_task_inferred": false,
+        "note": "synthetic no-progress facts only; no defect verdict"
+      }
+    }
+  ],
+  "proposals": []
+}

@@ -29,6 +29,200 @@ const TRAVEL_BLOCKED_SECONDS := 45.0
 const TRAVEL_PROGRESS_STEP := 0.25
 const PLACE_EVENT_TYPES := ["place_learned", "place_visited", "travel_blocked"]
 
+## Journey-stall evidence (H36): world-scoped physical facts for an ACTIVE journey that stops
+## making progress, exported to the existing background-GM projection. It is not a verdict: the
+## record says only where the resident was, where it was going and how long it has not improved,
+## and it stays the same episode while that journey continues, closing when the journey ends.
+const JOURNEY_STALL_KEY_PREFIX := "journey_stall:"
+const JOURNEY_STALL_NO_PROGRESS_SECONDS := 8.0
+const JOURNEY_STALL_PROGRESS_EPSILON := 0.05
+const JOURNEY_STALL_ARRIVAL_RADIUS := 0.45
+const JOURNEY_STALL_CLOSED_LIMIT := 24
+const JOURNEY_STALL_KINDS := ["approach", "place_travel"]
+
+func _journey_stalls() -> Dictionary:
+	var value: Variant = _state.godot.get("journey_stalls", {})
+	return value if value is Dictionary else {}
+
+func _ensure_journey_stalls() -> Dictionary:
+	if not _state.godot.get("journey_stalls", null) is Dictionary:
+		_state.godot.journey_stalls = {"schema_version": 1, "next": 0, "records": {}}
+	var store: Dictionary = _state.godot.journey_stalls
+	if not store.get("records") is Dictionary:
+		store.records = {}
+	return store
+
+func _journey_stall_records() -> Array:
+	var store := _journey_stalls()
+	var records: Dictionary = store.get("records", {})
+	var keys: Array = records.keys()
+	keys.sort()
+	var result: Array = []
+	for key in keys:
+		var record: Variant = records[key]
+		if record is Dictionary:
+			result.append(record)
+	return result
+
+func _allocate_journey_stall_key() -> String:
+	var store := _ensure_journey_stalls()
+	var sequence: int = maxi(0, int(store.get("next", 0)))
+	var records: Dictionary = store.records
+	var key := ""
+	while true:
+		sequence += 1
+		key = "%s%d" % [JOURNEY_STALL_KEY_PREFIX, sequence]
+		if not records.has(key):
+			break
+	store.next = sequence
+	return key
+
+func _active_journey_stall(id: String, command_id: String) -> Dictionary:
+	## The identity of one LIVE intent: the open episode, the silent watch, or — after a stall that
+	## ended because the resident genuinely made progress — that very same record, so the SAME
+	## command can never accumulate a second issue id. A record closed because its command ended is
+	## never reused; a brand-new command gets a brand-new identity.
+	var records: Dictionary = _journey_stalls().get("records", {})
+	var keys: Array = records.keys()
+	keys.sort()
+	var watching: Dictionary = {}
+	var resumable: Dictionary = {}
+	for key in keys:
+		var record: Variant = records[key]
+		if not record is Dictionary or str(record.get("resident_id", "")) != id or str(record.get("command_id", "")) != command_id:
+			continue
+		if record.get("status") == "open":
+			return {"key": str(key), "record": record}
+		if record.get("status") == "watching":
+			watching = {"key": str(key), "record": record}
+			continue
+		if str(record.get("close_reason", "")) == "progress_resumed":
+			resumable = {"key": str(key), "record": record}
+	if not watching.is_empty():
+		return watching
+	return resumable
+
+func _journey_progress_scalar(kind: String, job: Dictionary, id: String, position_value: Vector3) -> float:
+	## The physical progress measure, from the world's own save, never from a model or a guess:
+	## how much road is still to walk to a public point, or how far the counterparty meeting point
+	## still is. Both improve monotonically as the body genuinely advances.
+	var target := _vector(job.get("target_position", [0, 0, 0]))
+	if not target.is_finite() or not position_value.is_finite():
+		return -1.0
+	if kind == "place_travel":
+		return _remaining_route(str(job.get("place_id", "")), job, position_value)
+	return Vector2(target.x - position_value.x, target.z - position_value.z).length()
+
+func observe_journey_stall(id: String, kind: String, position_value: Vector3, elapsed: float) -> Dictionary:
+	## Called by the real scene every world step for a resident whose own choice left an approach
+	## or a public-place trip pending. Identity is (resident, command): the same journey keeps one
+	## episode while it continues, so a report cannot churn or duplicate.
+	if not JOURNEY_STALL_KINDS.has(kind) or id not in active_ids():
+		return _failure("invalid_journey_stall_call")
+	if not position_value.is_finite() or not is_finite(elapsed) or elapsed <= 0.0:
+		return _failure("invalid_journey_stall_call")
+	var job: Dictionary = pending_job(id)
+	if job.is_empty() or str(job.get("action", "")) != ("travel" if kind == "place_travel" else "approach"):
+		return _failure("journey_stall_without_pending_job")
+	var scalar := _journey_progress_scalar(kind, job, id, position_value)
+	if scalar < 0.0:
+		return _failure("invalid_journey_stall_progress")
+	var command_id := str(job.get("command_id", ""))
+	var active := _active_journey_stall(id, command_id)
+	var record: Dictionary = active.get("record", {})
+	var record_key := str(active.get("key", ""))
+	if record.is_empty() or str(record.get("kind", "")) != kind:
+		record_key = _allocate_journey_stall_key()
+		record = {"episode_id": record_key, "resident_id": id, "command_id": command_id, "kind": kind,
+			"place_id": str(job.get("place_id", "")), "target_position": job.get("target_position", []).duplicate(),
+			"observed_position": [position_value.x, position_value.y, position_value.z],
+			"best_progress": scalar, "no_progress_seconds": 0.0, "opened_elapsed": 0.0,
+			"status": "watching", "reported": false, "close_reason": ""}
+	elif record.get("status") == "closed":
+		## The same live command stalled again after real progress: keep the identity, drop the old
+		## close reason and measure this new stagnation from scratch. The earlier progress is not
+		## denied and the earlier stalled period is not re-reported as a second issue.
+		record.status = "watching"
+		record.close_reason = ""
+		record.no_progress_seconds = 0.0
+		record.best_progress = scalar
+	var best := float(record.get("best_progress", scalar))
+	if scalar <= JOURNEY_STALL_ARRIVAL_RADIUS or scalar <= best - JOURNEY_STALL_PROGRESS_EPSILON:
+		## Real progress (including slow progress and a necessary detour) or arrival: no stall time.
+		record.best_progress = minf(best, scalar)
+		record.no_progress_seconds = 0.0
+		if record.get("status") == "open":
+			_close_journey_stall(record, "progress_resumed")
+	else:
+		record.no_progress_seconds = float(record.get("no_progress_seconds", 0.0)) + elapsed
+		if record.get("status") == "watching" and float(record.no_progress_seconds) >= JOURNEY_STALL_NO_PROGRESS_SECONDS:
+			record.status = "open"
+			record.reported = true
+			record.opened_elapsed = float(_state.godot.elapsed_seconds)
+			_append_life_event({"type": "journey_stall_noticed", "actor_id": id, "subject_id": id,
+				"recipient_ids": [id], "operation_id": record.episode_id, "source": "host_physics_frame_position",
+				"kind": kind, "text": "我一直在往那个方向走，但这段路没有前进；我还没有到达。"})
+	record.observed_position = [position_value.x, position_value.y, position_value.z]
+	var store := _ensure_journey_stalls()
+	store.records[record_key] = record
+	_prune_journey_stalls()
+	return {"ok": true, "code": "journey_stall_" + str(record.get("status", ""))}
+
+func _close_journey_stall(record: Dictionary, reason: String) -> void:
+	record.status = "closed"
+	record.close_reason = reason
+
+func _close_journey_stalls_without_pending_job() -> void:
+	## Closure driven by the world's own job bookkeeping: when the journey ends for ANY reason
+	## (arrival, cancellation, replacement), its episode closes instead of staying open forever.
+	var records: Dictionary = _journey_stalls().get("records", {})
+	for key in records.keys():
+		var record: Variant = records[key]
+		if not record is Dictionary or record.get("status") == "closed":
+			continue
+		var id := str(record.get("resident_id", ""))
+		var job: Dictionary = pending_job(id) if id in active_ids() else {}
+		var still_pending := str(job.get("command_id", "")) == str(record.get("command_id", ""))
+		if not still_pending:
+			_close_journey_stall(record, "journey_released")
+
+func _prune_journey_stalls() -> void:
+	var store := _ensure_journey_stalls()
+	var records: Dictionary = store.records
+	var closed: Array = []
+	for key in records.keys():
+		var record: Variant = records[key]
+		if record is Dictionary and record.get("status") == "closed":
+			closed.append(str(key))
+	closed.sort()
+	while closed.size() > JOURNEY_STALL_CLOSED_LIMIT:
+		records.erase(closed.pop_front())
+
+func journey_stall_diagnostics() -> Array:
+	## Read-only, world-scoped projection for the existing background-GM export. Same privacy
+	## boundary as the material diagnostic: physical facts only, never a resident's private
+	## reason, never another resident's data, and never a verdict about whether this is a defect.
+	var result: Array = []
+	for record in _journey_stall_records():
+		if record.get("status") != "open" or not record.get("reported", false):
+			continue
+		var observed := _vector(record.get("observed_position", [0, 0, 0]))
+		var target := _vector(record.get("target_position", [0, 0, 0]))
+		var kind := str(record.get("kind", ""))
+		result.append({"world_id": _state.world_id, "resident_id": str(record.get("resident_id", "")),
+			"job_command_id": str(record.get("command_id", "")), "episode_id": str(record.get("episode_id", "")),
+			"journey": kind, "kind": kind, "place_id": str(record.get("place_id", "")),
+			"status": "open", "opened_elapsed": float(record.get("opened_elapsed", 0.0)),
+			"no_progress_seconds": float(record.get("no_progress_seconds", 0.0)),
+			"remaining_distance": observed.distance_to(target) if target.is_finite() else -1.0,
+			"remaining_route_m": _remaining_route(str(record.get("place_id", "")), record, observed) if kind == "place_travel" else -1.0,
+			"progress_evidence": {"observed_position": record.get("observed_position", []).duplicate(),
+				"target_position": record.get("target_position", []).duplicate(),
+				"arrival_radius": JOURNEY_STALL_ARRIVAL_RADIUS, "no_progress_seconds": float(record.get("no_progress_seconds", 0.0)),
+				"progress_epsilon": JOURNEY_STALL_PROGRESS_EPSILON, "progress_measure": "route_remaining_m" if kind == "place_travel" else "remaining_meeting_distance_m",
+				"observation_source": "host_physics_frame_position"}})
+	return result
+
 func _places() -> Dictionary:
 	var value: Variant = _state.godot.get("places", {})
 	return value if value is Dictionary else {}
@@ -247,6 +441,10 @@ func advance(delta: float) -> Dictionary:
 			# Bounded, honest failure: no arrival, no receipt of success, no teleport. The
 			# resident keeps its identity/history and may choose again afterwards.
 			result.completed.append(_close_place_job(id, job, false, "travel_blocked"))
+	## After the world's own journey endings, a journey that is no longer pending takes its stall
+	## episode with it in the SAME transaction, so no still-open episode can outlive its journey.
+	if not _journey_stalls().is_empty():
+		_close_journey_stalls_without_pending_job()
 	return result
 
 func _place_job(id: String) -> Dictionary:
@@ -532,7 +730,87 @@ func _validate_places(value: Dictionary) -> Dictionary:
 				return _failure("unsettled_place_rest_mirror")
 			if mirror_status != "pending" and mirror_status != base_status:
 				return _failure("inconsistent_place_rest_mirror")
+	var stall_valid := _validate_journey_stalls(value)
+	if not stall_valid.ok:
+		return stall_valid
 	return {"ok": true, "code": "places_valid"}
+
+func _validate_journey_stalls(value: Dictionary) -> Dictionary:
+	## Journey-stall evidence is world-scoped physical evidence only. Every record must stay tied to
+	## a real resident and to that resident's own command, and an OPEN episode must still match a
+	## journey that is genuinely pending, so a stale entry cannot be exported as current.
+	var g: Dictionary = value.godot
+	var raw: Variant = g.get("journey_stalls", {})
+	if raw == {}:
+		return {"ok": true, "code": "journey_stalls_absent"}
+	if not raw is Dictionary or not _exact_keys(raw, ["schema_version", "next", "records"]):
+		return _failure("invalid_journey_stalls")
+	var store: Dictionary = raw
+	if typeof(store.schema_version) != TYPE_INT or store.schema_version != 1:
+		return _failure("invalid_journey_stalls")
+	if not _bounded(store.next, 1000000000) or not store.records is Dictionary:
+		return _failure("invalid_journey_stalls")
+	var active: Array = g.positions.keys()
+	var closed := 0
+	for key in store.records:
+		var record_value: Variant = store.records[key]
+		if not record_value is Dictionary:
+			return _failure("invalid_journey_stall_record")
+		var record: Dictionary = record_value
+		if not _exact_keys(record, ["episode_id", "resident_id", "command_id", "kind", "place_id",
+				"target_position", "observed_position", "best_progress", "no_progress_seconds",
+				"opened_elapsed", "status", "reported", "close_reason"]):
+			return _failure("invalid_journey_stall_record")
+		if str(record.episode_id) != str(key) or not str(key).begins_with(JOURNEY_STALL_KEY_PREFIX):
+			return _failure("invalid_journey_stall_identity")
+		if record.resident_id not in active or not JOURNEY_STALL_KINDS.has(str(record.kind)):
+			return _failure("invalid_journey_stall_identity")
+		if not record.command_id is String or record.command_id.is_empty() or not _validate_decision_command_id(record.command_id).ok:
+			return _failure("invalid_journey_stall_identity")
+		if not typeof(record.reported) == TYPE_BOOL or str(record.status) not in ["watching", "open", "closed"]:
+			return _failure("invalid_journey_stall_status")
+		if not record.close_reason is String or record.close_reason.length() > 64:
+			return _failure("invalid_journey_stall_status")
+		if not _valid_position(record.target_position) or not _valid_position(record.observed_position):
+			return _failure("invalid_journey_stall_position")
+		if not float_is_valid(record.best_progress) or float(record.best_progress) < 0.0:
+			return _failure("invalid_journey_stall_progress")
+		if not float_is_valid(record.no_progress_seconds) or float(record.no_progress_seconds) < 0.0:
+			return _failure("invalid_journey_stall_progress")
+		if not float_is_valid(record.opened_elapsed) or float(record.opened_elapsed) < 0.0:
+			return _failure("invalid_journey_stall_progress")
+		if str(record.kind) == "place_travel" and not Catalog.is_place_id(str(record.place_id)):
+			return _failure("invalid_journey_stall_identity")
+		if str(record.status) == "closed":
+			closed += 1
+			if str(record.close_reason).is_empty():
+				return _failure("invalid_journey_stall_status")
+			continue
+		if str(record.close_reason) != "":
+			return _failure("invalid_journey_stall_status")
+		## Crosslink: a live episode must still match that resident's own pending journey, whichever
+		## store owns it (life pending, places travel, or trade approach).
+		var job: Dictionary = {}
+		var life_job: Variant = g.pending.get(record.resident_id, {})
+		if life_job is Dictionary and not (life_job as Dictionary).is_empty():
+			job = life_job
+		else:
+			var place_record: Variant = g.get("places", {})
+			var place_jobs: Variant = place_record.get("jobs", {}) if place_record is Dictionary else {}
+			var trade_record: Variant = g.get("trade", {})
+			var trade_jobs: Variant = trade_record.get("jobs", {}) if trade_record is Dictionary else {}
+			var place_job: Variant = place_jobs.get(record.resident_id, {}) if place_jobs is Dictionary else {}
+			var trade_job: Variant = trade_jobs.get(record.resident_id, {}) if trade_jobs is Dictionary else {}
+			## An absent store entry is `{}`, which is still a Dictionary: require a real job.
+			if place_job is Dictionary and not (place_job as Dictionary).is_empty():
+				job = place_job
+			elif trade_job is Dictionary and not (trade_job as Dictionary).is_empty():
+				job = trade_job
+		if str(job.get("command_id", "")) != str(record.command_id):
+			return _failure("stale_journey_stall_episode")
+	if closed > JOURNEY_STALL_CLOSED_LIMIT:
+		return _failure("invalid_journey_stalls")
+	return {"ok": true, "code": "journey_stalls_valid"}
 
 func _is_catalog_point(place_id: String, point: Vector3) -> bool:
 	if not point.is_finite():

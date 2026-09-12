@@ -1739,7 +1739,16 @@ def validate_coding_output(answer, issue_id: str) -> list[str]:
     return errors
 
 
-def code_preconditions(state: dict, issue_id: str, scope) -> tuple[str, str, int] | None:
+def candidate_path_key(value) -> str:
+    """Stable candidate identity across relative paths, separators and Windows case."""
+    path = Path(value)
+    if not path.is_absolute():
+        path = ROOT / path
+    return os.path.normcase(str(path.resolve()))
+
+
+def code_preconditions(state: dict, issue_id: str, scope,
+                       candidate: Path | None = None) -> tuple[str, str, int] | None:
     """Coding belongs to one registered GM: current claim, no bypass via stale scope."""
     issue = state['issues'].get(issue_id)
     if issue is None:
@@ -1762,6 +1771,17 @@ def code_preconditions(state: dict, issue_id: str, scope) -> tuple[str, str, int
     if isinstance(scope.get('owner_gm'), str) and scope['owner_gm'] != owner:
         return ('scope_owner_mismatch',
                 f'scope.owner_gm {scope["owner_gm"]!r} is not the current owner {owner!r}', 6)
+    if candidate is not None:
+        requested_candidate = candidate_path_key(candidate)
+        for recorded_issue_id, recorded_issue in state['issues'].items():
+            if recorded_issue_id == issue_id:
+                continue
+            for record in recorded_issue.get('candidates', []):
+                recorded_candidate = record.get('candidate')
+                if isinstance(recorded_candidate, str) \
+                        and candidate_path_key(recorded_candidate) == requested_candidate:
+                    return ('candidate_issue_mismatch',
+                            f'candidate is already bound to issue {recorded_issue_id}', 6)
     unknown = global_unknown_gms(state)
     if unknown:
         return ('unresolved_unknown_cost',
@@ -1836,7 +1856,7 @@ def code(args) -> int:
 
     if args.dry_run:
         state = load_state(state_dir)
-        blocked = code_preconditions(state, args.issue, scope)
+        blocked = code_preconditions(state, args.issue, scope, candidate)
         if blocked:
             return refusal(blocked[0], blocked[1], blocked[2], issue_id=args.issue)
         issue = state['issues'][args.issue]
@@ -1853,7 +1873,7 @@ def code(args) -> int:
     with StateLock(state_dir, args.break_lock):
         state = load_state(state_dir)
         recovered = roll_in_flight_recovery(state)
-        blocked = code_preconditions(state, args.issue, scope)
+        blocked = code_preconditions(state, args.issue, scope, candidate)
         if blocked:
             if recovered:
                 store_state(state_dir, state)

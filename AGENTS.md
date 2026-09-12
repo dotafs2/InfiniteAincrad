@@ -1,11 +1,21 @@
-- 2026-09-13 01:48 Asia/Shanghai latest user routing (current): continue this same chain with
-  DeepSeek plus Codex5.3Spark assistance. DeepSeek remains the implementation/test executor in
-  its one reused native session for the active capability; the supervisor separately dispatches
-  ONE read-only Spark audit on an immutable snapshot (no product writer, no recursive worker, no
-  second paid runtime). GPT-6 keeps planning/dispatch/review; DeepSeek development usage stays
-  measured with its cache reuse recorded; production Kimi-resident and DeepSeek-GM runtime
-  assignments and ledgers are unchanged. Everything below is the previous entry, still in force
-  except where this sentence is narrower.
+- 2026-09-13 latest user routing (current; no instruction time asserted): continue the agreed chain through
+  2026-09-13 10:00 Asia/Shanghai (02:00 UTC). GPT-6 keeps direction, modeling, dispatch and
+  outcome acceptance only. GPT-5.6-sol, gpt-5.3-codex-spark and DeepSeek `deepseek-flash` perform
+  engineering/code/tests. Current disjoint ownership assigns the H36 runtime task to DeepSeek,
+  the GM-candidate isolation fix to GPT-5.6-sol, and the bounded routing-document task to Spark;
+  this assignment does not make DeepSeek the only permitted coder. Production Kimi-resident and
+  background DeepSeek-GM runtime assignments stay unchanged. Default is at most two engineers
+  concurrently with disjoint ownership and only one maintained-world writer. The future checkpoint
+  is 09:50; do not start
+  work that cannot finish by 10:00, pause heartbeat at cutoff, preserve owned-process identity, and
+  close only task-owned processes. Unknown DeepSeek development tails remain unknown under the prior
+  carried-continuation rule; Kimi unknown/currency stops are unchanged.
+  Prior 2026-09-12 08:00/15:00 windows remain historical and not active.
+
+- 2026-09-13 01:48 Asia/Shanghai previous routing note: same chain with DeepSeek plus Codex5.3Spark
+  assistance, with DeepSeek as implementation/test executor in its one reused native session and a
+  separate read-only Spark audit on immutable snapshot only. This now remains historical and is fully
+  superseded on implementation by the 10:00 routing above.
 
 - 2026-09-12 15:32 Asia/Shanghai user routing (previous): return to the original
   GPT-6 Extra High supervisor plus DeepSeek implementation/execution workflow and
