@@ -1,0 +1,260 @@
+{
+  "recorded_at_utc": "2026-09-11T20:48:07.338355+00:00",
+  "original_source_sha256": {
+    "game/spatial/town_material_steering.gd": "93a70ff32e7663e33f1ea4ab92786e6deb4c0006af660ff19d45743273eb85af",
+    "game/spatial/town_street.gd": "6423adfbe6697cc27d3e7e4d36c1c7c7a47892982cdc0f57da3e1b93859c6ed0",
+    "game/tests/town_material_travel_probe.gd": "56b3674638b7509394e431b0fc79ad9f925dbb93ecdea2e3d58f68b7248c8485",
+    "game/tests/town_material_resume_probe.gd": "49612094bb3d577096ef02a8b76166ce5d61f11fc7da011671f07924e7ffc33a"
+  },
+  "resume_source_sha256": {
+    "game/spatial/town_material_steering.gd": "93a70ff32e7663e33f1ea4ab92786e6deb4c0006af660ff19d45743273eb85af",
+    "game/spatial/town_street.gd": "6423adfbe6697cc27d3e7e4d36c1c7c7a47892982cdc0f57da3e1b93859c6ed0",
+    "game/tests/town_material_resume_probe.gd": "d74ffcf2d29e64d468674f3a4b85f9800ab1ba42284f552f66c03833ead90bc3",
+    "game/tests/town_material_travel_probe.gd": "56b3674638b7509394e431b0fc79ad9f925dbb93ecdea2e3d58f68b7248c8485"
+  },
+  "enclosed_source_sha256": {
+    "game/spatial/town_material_steering.gd": "93a70ff32e7663e33f1ea4ab92786e6deb4c0006af660ff19d45743273eb85af",
+    "game/spatial/town_street.gd": "6423adfbe6697cc27d3e7e4d36c1c7c7a47892982cdc0f57da3e1b93859c6ed0",
+    "game/tests/town_material_resume_probe.gd": "49612094bb3d577096ef02a8b76166ce5d61f11fc7da011671f07924e7ffc33a",
+    "game/tests/town_material_travel_probe.gd": "56b3674638b7509394e431b0fc79ad9f925dbb93ecdea2e3d58f68b7248c8485"
+  },
+  "baseline_world_sha256": "c5be9bd9e30f0dd87cfb5f4cbab5a02b2f9501a48b0b2159273115e95a5f11cd",
+  "observations": {
+    "open": {
+      "failure_count": 0,
+      "failures": [],
+      "final_distance": 0.290034055709839,
+      "final_position": [
+        0.0,
+        0.2208381742239,
+        5.29003286361694
+      ],
+      "mode": "offline_scripted_open_travel",
+      "open_path_passed": true,
+      "pending_elapsed": -1.0,
+      "receipt": {
+        "actor_id": "fixture:smith",
+        "code": "material_recovered",
+        "command_id": "fixture:travel-open",
+        "material": "iron",
+        "ok": true,
+        "quantity": 1,
+        "source_id": "fixture:travel-iron"
+      },
+      "smith_iron": 2,
+      "source_stock": 2,
+      "wall_elapsed_ms": 61307
+    },
+    "baseline": {
+      "crate_diagnosis": {
+        "attempted": true,
+        "blocked_reproduced": false,
+        "blocked_samples": 0,
+        "collider_hit_count": 698,
+        "distance": 1.5013701915741,
+        "fixture_relocation": true,
+        "iron": 2,
+        "last5s_displacement": -1.0,
+        "pending_job": {
+          "action": "recover_material",
+          "command_id": "fixture:travel-crate",
+          "duration_seconds": 60.0,
+          "elapsed": 0.0,
+          "provenance": "opengameagent_fixture",
+          "source_id": "fixture:travel-iron"
+        },
+        "receipt": {},
+        "start_iron": 2,
+        "start_stock": 2,
+        "stock": 2,
+        "visible_samples": 721,
+        "wall_elapsed_ms": 12004,
+        "independent_last_window": {
+          "start_ms": 7001,
+          "end_ms": 12004,
+          "displacement": 0.0,
+          "samples": 25
+        }
+      },
+      "failure_count": 0,
+      "failures": [],
+      "final_distance": 0.290034055709839,
+      "final_position": [
+        0.0,
+        0.2208381742239,
+        5.29003286361694
+      ],
+      "mode": "offline_scripted_open_travel",
+      "open_path_passed": true,
+      "pending_elapsed": -1.0,
+      "receipt": {
+        "actor_id": "fixture:smith",
+        "code": "material_recovered",
+        "command_id": "fixture:travel-open",
+        "material": "iron",
+        "ok": true,
+        "quantity": 1,
+        "source_id": "fixture:travel-iron"
+      },
+      "smith_iron": 2,
+      "source_stock": 2,
+      "wall_elapsed_ms": 61302
+    },
+    "resume": {
+      "after_iron": 3,
+      "after_stock": 1,
+      "before_iron": 2,
+      "before_stock": 2,
+      "cold_bytes_equal": true,
+      "cold_receipt": {
+        "actor_id": "fixture:smith",
+        "code": "material_recovered",
+        "command_id": "fixture:travel-crate",
+        "material": "iron",
+        "ok": true,
+        "quantity": 1,
+        "source_id": "fixture:travel-iron"
+      },
+      "collider_hits": 0,
+      "detour_x": 2.02499938011169,
+      "failure_count": 0,
+      "failures": [],
+      "final_distance": 0.284647226333618,
+      "history_prefix_equal": true,
+      "invalid_frames": 0,
+      "life_stable": true,
+      "mode": "offline_scripted_same_world_material_resume",
+      "overlap_frames": 0,
+      "receipt": {
+        "actor_id": "fixture:smith",
+        "code": "material_recovered",
+        "command_id": "fixture:travel-crate",
+        "material": "iron",
+        "ok": true,
+        "quantity": 1,
+        "source_id": "fixture:travel-iron"
+      },
+      "residents_stable": true,
+      "resumed_previous_command": true,
+      "sample_frames": 3782,
+      "success": true,
+      "wall_elapsed_ms": 63048
+    },
+    "enclosed": {
+      "after_iron": 2,
+      "after_stock": 2,
+      "before_iron": 2,
+      "before_stock": 2,
+      "blocked_animation_correct": true,
+      "blocked_animation_samples": 11,
+      "body_displacement": 0.0,
+      "coins_after": 30,
+      "coins_before": 30,
+      "cold_bytes_equal": true,
+      "cold_pending": {
+        "action": "recover_material",
+        "command_id": "fixture:travel-crate",
+        "duration_seconds": 60,
+        "elapsed": 0,
+        "provenance": "opengameagent_fixture",
+        "source_id": "fixture:travel-iron"
+      },
+      "cold_receipt": {},
+      "collider_hits": 0,
+      "detour_x": 0.0,
+      "enclosed_mode": true,
+      "failure_count": 0,
+      "failures": [],
+      "final_distance": 1.5013701915741,
+      "geometry": {
+        "FixtureEnclosureBack": {
+          "center": [
+            0.0,
+            0.495000004768372,
+            4.0
+          ],
+          "size": [
+            4.0,
+            0.550000011920929,
+            0.5
+          ]
+        },
+        "FixtureEnclosureSideLeft": {
+          "center": [
+            -2.0,
+            0.495000004768372,
+            5.0
+          ],
+          "size": [
+            0.5,
+            0.550000011920929,
+            2.0
+          ]
+        },
+        "FixtureEnclosureSideRight": {
+          "center": [
+            2.0,
+            0.495000004768372,
+            5.0
+          ],
+          "size": [
+            0.5,
+            0.550000011920929,
+            2.0
+          ]
+        },
+        "front_crate": {
+          "center": [
+            0,
+            0.495,
+            6
+          ],
+          "size": [
+            4.0,
+            0.550000011920929,
+            0.5
+          ]
+        }
+      },
+      "history_prefix_equal": true,
+      "invalid_frames": 0,
+      "life_stable": true,
+      "mode": "offline_scripted_same_world_material_enclosed",
+      "overlap_frames": 0,
+      "pending_job": {
+        "action": "recover_material",
+        "command_id": "fixture:travel-crate",
+        "duration_seconds": 60,
+        "elapsed": 0,
+        "provenance": "opengameagent_fixture",
+        "source_id": "fixture:travel-iron"
+      },
+      "receipt": {},
+      "residents_stable": true,
+      "resumed_previous_command": true,
+      "sample_frames": 300,
+      "success": true,
+      "total_iron_after": 4,
+      "total_iron_before": 4,
+      "wall_elapsed_ms": 5010
+    }
+  },
+  "historical_regression": {
+    "suite_count": 28,
+    "validators": [
+      {
+        "tool": "tools/validate_environment_v2.py",
+        "exit_code": 0
+      },
+      {
+        "tool": "tools/validate_residences.py",
+        "exit_code": 0
+      },
+      {
+        "tool": "tools/review_deepseek_residence.py",
+        "exit_code": 0
+      }
+    ]
+  },
+  "provenance": "Earlier H24 same-fixture observations; not rerun in the later H26 session. Later H26 detour-crate is a separate 22-check regression."
+}

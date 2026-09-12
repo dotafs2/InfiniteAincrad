@@ -130,7 +130,10 @@ func ready_resident() -> String:
 		var record := _record(id)
 		if not brains.has(id) or inflight.has(id) or _requires_review(record) or _replan_cooling(record):
 			continue
-		if not town.pending_job(id).is_empty():
+		# A pending job normally excludes the resident. A reported blocked material
+		# travel episode is the explicit exception: the resident observes the
+		# failure and may choose to continue waiting or to cancel that one trip.
+		if not town.pending_job(id).is_empty() and town.blocked_material_episode(id).is_empty():
 			continue
 		if record.is_empty() or _own_seq(id) > int(record.get("seen_seq", 0)) or town._state.godot.elapsed_seconds >= float(record.get("next_due", INF)):
 			return id
@@ -147,7 +150,7 @@ func step(requested_id: String = "") -> Dictionary:
 		return {"ok": false, "code": "saved_model_turn_requires_review", "actor_id": id}
 	if _replan_cooling(previous):
 		return {"ok": false, "code": "replan_cooldown", "actor_id": id}
-	if not town.pending_job(id).is_empty():
+	if not town.pending_job(id).is_empty() and town.blocked_material_episode(id).is_empty():
 		return {"ok": false, "code": "resident_working", "actor_id": id}
 	var epoch := int(previous.get("controller_epoch", 0))
 	var number := int(previous.get("request_number", 0)) + 1
