@@ -6,7 +6,9 @@ const OWNER := "fictional:ember"
 const WOOD := "fictional:birch"
 const SMITH := "fictional:forge"
 
-class PrivacyProbeTown extends "res://core/town_runtime.gd":
+const Catalog := preload("res://spatial/town_places.gd")
+
+class PrivacyProbeTown extends "res://core/town_places.gd":
 	func resident_view(id: String = "") -> Dictionary:
 		var view := super.resident_view(id)
 		# Add only adversarial incidental keys to the genuine personal projection.
@@ -16,6 +18,9 @@ class PrivacyProbeTown extends "res://core/town_runtime.gd":
 			for record in view[key]:
 				record.gm_internal = {"private_sentinel": "nested_gm_secret"}
 				record.other_resident_private = {"private_sentinel": "nested_neighbor_secret"}
+		for record in view["known_places"]:
+			record.gm_internal = {"private_sentinel": "nested_gm_secret"}
+			record.other_resident_private = {"private_sentinel": "nested_neighbor_secret"}
 		return view
 
 func _move(town, path: String, id: String, position: Vector3) -> void:
@@ -37,6 +42,11 @@ func _seed_history(town, path: String) -> void:
 	execute(town, path, WOOD, "share-skill:" + OWNER + ":wood_repair", "history-direct-wood")
 	_move(town, path, OWNER, Vector3(0, 0, 3.6))
 	elapse(town, path, 0)
+	# The owner personally reads the public notice at the old-market exit, then walks back. The
+	# knowledge is world-owned and attributed; no catalog is injected into any other resident.
+	_move(town, path, OWNER, Vector3(float(Catalog.NOTICE["position"][0]), float(Catalog.NOTICE["position"][1]), float(Catalog.NOTICE["position"][2])))
+	var learned: Dictionary = town.transaction(path, func(): return town.observe_public_places(OWNER, true, []))
+	check(learned.ok and learned.get("learned", []).size() == Catalog.place_ids().size(), "owner personally reads the public notice: " + str(learned.get("code", "")))
 	_move(town, path, OWNER, Vector3.ZERO)
 	# Another resident really consumes stock while OWNER cannot observe it. The
 	# wire must retain OWNER's historical 3, never leak authoritative current 2.
@@ -66,8 +76,11 @@ func _step(turns, town, id: String) -> Dictionary:
 		check(recent.all(func(event): return event.type in ["ask_help", "cancel_help"]), "historical knowledge absent from recent sixteen events")
 		check(view.known_skill_notices.size() == 1 and view.known_skill_referrals.size() == 1 and view.material_sources.size() == 1, "actual private historical records retained")
 		check(view.known_skill_notices[0].seq < recent[0].seq and view.known_skill_referrals[0].seq < recent[0].seq and view.material_sources[0].observation_event_seq < recent[0].seq, "all knowledge sources predate recent experience window")
+		check(view.known_places.size() == Catalog.place_ids().size(), "the owner keeps its own sourced public places")
+		check(view.known_places[0].source == "public_notice" and view.known_places[0].source_id == str(Catalog.NOTICE["id"]) and not str(view.known_places[0].learned_event_id).is_empty(), "each public place keeps its own source attribution")
 	else:
 		check(view.known_skill_notices.is_empty() and view.known_skill_referrals.is_empty() and view.material_sources.is_empty(), "uninformed resident has none of another resident's knowledge")
+		check(view.known_places.is_empty(), "an uninformed resident receives no other resident's places")
 	var result: Dictionary = await turns.step(id)
 	check(result.get("ok", false), "actual town turns and gateway accept historical view: " + str(result.get("code", "")))
 	check(result.get("record", {}).get("provenance") == "opengameagent_fixture", "HTTP decisions are explicitly fake local transport")

@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PROJECTED = {"identity", "observations", "needs", "experiences", "memory", "inventory", "actions",
              "available_actions", "nearby_residents", "items", "skills", "contracts", "life_account",
              "wallet", "nearby_skilled_roles", "action_details", "known_rules", "unavailable_actions"}
-PROJECTED |= {"known_skill_notices", "known_skill_referrals", "material_sources"}
+PROJECTED |= {"known_skill_notices", "known_skill_referrals", "material_sources", "known_places"}
 
 
 @contextmanager
@@ -117,6 +117,7 @@ def gateway(scenario, capture_folder=None):
                     assert personal["identity"]["id"] == expected_actor
                     assert all(secret not in observation for secret in ["gm_install_secret", "neighbor_private_secret", "nested_gm_secret", "nested_neighbor_secret", "gm_internal", "other_resident_private", "development_gm:"])
                     assert "not proof of current skills, availability or stock" in body["messages"][0]["content"]
+                    assert "known_places is your own sourced knowledge" in body["messages"][0]["content"]
                     if expected_actor == "fictional:ember":
                         recent = personal["experiences"]
                         assert len(recent) == 16 and all(event["type"] in ("ask_help", "cancel_help") for event in recent)
@@ -130,8 +131,15 @@ def gateway(scenario, capture_folder=None):
                         assert notices[0]["seq"] < recent[0]["seq"] and materials[0]["observation_event_seq"] < recent[0]["seq"]
                         assert materials[0]["last_observed_stock"] == 3 and materials[0]["stock_may_have_changed"] is True
                         assert materials[0]["knowledge_source"] == "personal_proximity_observation"
+                        places = personal["known_places"]
+                        assert len(places) == 4, places
+                        assert all(entry["source"] == "public_notice" and entry["source_id"] == "public_notice:market_exit"
+                                   and entry["learned_event_id"] and entry["seq"] for entry in places), places
+                        assert all(set(entry) == {"place_id", "label", "public_use", "source", "source_id", "learned_event_id", "seq"} for entry in places), places
+                        assert all("nested_gm_secret" not in json.dumps(entry) and "nested_neighbor_secret" not in json.dumps(entry) for entry in places)
                     else:
                         assert personal["known_skill_notices"] == personal["known_skill_referrals"] == personal["material_sources"] == []
+                        assert personal["known_places"] == [], "another resident's place knowledge never leaks"
                     if calls["post"] == 2:
                         offered = [entry for entry in personal["action_details"] if "Public iron offcuts" in entry["label"]]
                         assert len(offered) == 1
