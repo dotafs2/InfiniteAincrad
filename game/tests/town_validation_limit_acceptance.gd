@@ -6,6 +6,7 @@ var failures := 0
 
 class Counter extends Node:
 	var calls := 0
+	var busy := false
 	func step(_id: String) -> Dictionary:
 		calls += 1
 		await get_tree().process_frame
@@ -39,6 +40,21 @@ func run() -> void:
 	check(not street._validation_limit_reached(), "default scene remains unlimited by validation cap")
 	street.validation_decision_limit = 0
 	check(street._validation_limit_reached(), "explicit zero means no validation decisions")
+	check(not street._decision_limit_capture_ready(), "existing default does not enable cap-only capture")
+	street.stop_on_decision_limit = true
+	turns.busy = true
+	check(not street._decision_limit_capture_ready(), "cap capture waits for the in-flight model result")
+	turns.busy = false
+	check(street._decision_limit_capture_ready(), "cap capture may pause once model result handling is finished")
+	street.capture_started = true
+	check(not street._decision_limit_capture_ready(), "cap capture is scheduled only once")
+	street.capture_started = false
+	street.validation_decisions_started = 0
+	street.validation_decision_limit = 1
+	check(not street._decision_limit_capture_ready(), "legitimate idle time does not trigger cap-only capture")
+	street.restore_only = true
+	street.validation_decisions_started = 1
+	check(not street._decision_limit_capture_ready(), "cold restore never starts a cap-only continuation")
 	street.free()
 	turns.free()
 	print(JSON.stringify({"suite": "town_validation_limit", "checks": checks, "failures": failures, "real_paid_calls": 0}))

@@ -38,14 +38,18 @@ byte-identical, and the batch was still recorded as `incomplete` / runner exit 1
 unknown). It is neither a passed batch nor a code contribution: do not replay those paid calls and do not weaken the
 GM guard. The rule is not a new user permission gate and not a global ban on parallel private work.
 
-Long same-world observations have a separate pending control gap (H42). The current launcher limits one scene to
-900 seconds and 32 decisions. Without `--town-stop-on-idle`, reaching the decision cap blocks further controller
-turns while physics and world time continue; with it, a temporarily idle scene exits before a long cooldown can
-elapse. Do not change the 1800-world-second cooldown, scheduler, ledger, prices, or retry rules to work around this.
-H42 requires a narrow, offline-tested mode that advances through legitimate idle time and, after the decision cap
-is exhausted, waits only for an in-flight model result and its accounting/transaction to settle before the existing
-normal capture/quit. Durable physical jobs stay saved and pending for cold continuation; waiting for a long walk or
-blocked job would recreate the same denied-agency interval.
+Long same-world observations now have a bounded cap-only control (H42), implemented and offline-tested:
+`tools/run_town_model_validation.py --stop-on-decision-limit` forwards `--town-stop-on-decision-limit`. Before the
+cap, legitimate idle time keeps advancing world time; at the cap no further request is scheduled; once the
+in-flight model result and its accounting/transaction settle, the scene pauses, captures and quits without
+waiting for durable physical jobs. A pending command keeps its ID, target, progress and history for a separate
+cold process and completes once on resume. Defaults, `--stop-on-idle`, the 900-second/32-decision bounds, the
+1800-world-second cooldown, the scheduler and the original ledger/fee/unknown/no-retry semantics are unchanged.
+Accepted scope is explicitly limited: launcher forwarding is proven by a mocked-engine unit test and the Godot cap
+logic by a fixture that sets controller fields directly; there is no launcher-to-compiled-adapter fake-gateway
+end-to-end episode and no real Kimi cap-only run yet. The next real recovery gap is a separate pending node (H43):
+the same identity must naturally obtain a fresh request/options plus its prior rejection feedback and a new
+authoritative outcome after the unchanged cooldown, without forcing a choice or replaying turn 18.
 
 ## Launchers (verified on this machine vs. legacy machine notes)
 

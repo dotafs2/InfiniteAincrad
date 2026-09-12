@@ -346,9 +346,11 @@ class BudgetLauncherTests(unittest.TestCase):
         pin_path.write_text(json.dumps(self.pin), encoding='utf-8')
         args = ['launcher', '--godot', 'FAKE_GODOT', '--ledger', str(self.ledger.path),
                 '--save', str(save), '--config', str(config), '--out', str(out), '--seconds', '5',
-                '--max-requests', '1', '--carried-uncertainty-pin', str(pin_path), '--gm-export', str(gm)]
+                '--max-requests', '1', '--stop-on-decision-limit',
+                '--carried-uncertainty-pin', str(pin_path), '--gm-export', str(gm)]
         def fake_engine(command, **kwargs):
             self.assertIn('--town-gm-export=' + str(gm), command)
+            self.assertIn('--town-stop-on-decision-limit', command)
             scope = json.loads(Path(kwargs['env']['AINCRAD_GATEWAY_RUN_CONFIG']).read_text())
             self.assertEqual(scope['concurrency'], 1)
             self.assertEqual(scope['gm_export_path'], str(gm))
