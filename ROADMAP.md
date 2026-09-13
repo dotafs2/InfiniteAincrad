@@ -1,6 +1,6 @@
 # One persistent world, one public collaboration path
 
-Updated 2026-09-13 for the user's 10-resident / 10-background-GM milestone. 维护中的独立十人世界已完成第二次有界实际生活续接；本轮事实与限制分别并入既有 H39/H41 证据行，H36/M20H/M20E 仍未完成。这是唯一执行路线图。The 2026-09-10 research remains historical context: [Evidence and rationale](docs/research/2026-09-open-source/REPORT.md) · [Individual votes](docs/research/2026-09-open-source/vote-results.md).
+Updated 2026-09-14 for the user's 10-resident / 10-background-GM milestone. 维护中的独立十人世界已完成第二次有界实际生活续接；本轮事实与限制分别并入既有 H39/H41 证据行，H36/M20H/M20E 仍未完成。这是唯一执行路线图。The 2026-09-10 research remains historical context: [Evidence and rationale](docs/research/2026-09-open-source/REPORT.md) · [Individual votes](docs/research/2026-09-open-source/vote-results.md).
 
 ## Goal
 
@@ -197,6 +197,9 @@ flowchart TD
     H46 -.监督心跳之间的持续开发缺口.-> H47
     H47["H47 自主GM开发周期（部分）<br/>原十居民生活与十GM维护持续接线；GPT每15分钟只读巡检<br/>离线闭环有证据，真实持续10+10待验"]
     H47 -.真实GM自主生命.-> M20H
+    M20H -.渔夫真实技能求助缺口.-> H48
+    H48["H48 原GM02具体技能求助（部分）<br/>真实认领、实现与独立验收；同档Kimi采用待验"]
+    H48 --> M20E
     M20E --> M20
     M20 -.持续稳定性.-> M20F
     H20 --> M20G
@@ -225,7 +228,7 @@ flowchart TD
     class H18,H19,H20,H21,H22,H23,H24,H26,H29,H30 done;
     class S1,H34,H36 issue;
     class H37,H40,H41,H42,H44,H45,H46 done;
-    class H47 partial;
+    class H47,H48 partial;
     class H38 partial;
     class H39 done;
     class H43 partial;
@@ -293,7 +296,8 @@ flowchart TD
 | H45 | 精确恢复副本经独立审核并采用，Fisher/Smith旧失败各归档一次、epoch提升且其余控制器与世界事实保全。task65 Fisher `turn:shared:fisher:2:16`得到`ask_help`，Smith `turn:shared:smith:1:17`得到`trade_started`，均未重放旧请求。 | **同档有界绿**：十人身份、住宅、财物、历史前缀与旧命令保全，1项交易任务继续保存；只证明这两个新epoch请求及结果，不代表持续稳定或自动恢复。 |
 | H46 | task58 Fisher回复的私有reason 657字超过宿主512上限而严格拒绝；逐请求`known_rules`强化经109项连续性与26例编译适配器假网关验收。task65实际请求结构含512边界，Fisher新turn随后得到权威`ask_help`结果。 | **首次实际采用已验**：这是一次合规结果，不是解析器修复或模型今后必然遵守；旧turn0:14与turn1:15失败仍按原历史归档。 |
 | H35 | Windows进程包装器超时实测留下仍运行的子/孙进程，原先只终止包装PID不足 | 11项Windows专项通过；任务独占进程树覆盖超时/中断/包装器先退，子进程失败不再被包装器0掩盖。实际引擎退出另见本轮报告；这是进程清理修复，不是H34原因修复。 |
-| H47 | **本地有界交付接受**：100单测；实际Godot因果修复21项、同一watch两GM连续交付26项；此前隔离兼容回归51项。旧入口为脚本GM、一个居民的内核fixture，保留其失败与未知历史。详见[独立验收](docs/validation/gm_autonomy_2026-09-13.md)。 | **整体部分**：晚间最新方向是原十名Kimi居民自主生活、十个DeepSeek后台GM自行维护，GPT每15分钟只读巡检，不逐轮决定或审批。真实城镇入口连接同档生活、公共证据、GM候选/测试/本地发布与续跑；启用前完成部署预检。自动交付首个宿主验证范围限于城镇路径停滞；更广功能、真实持续10+10与居民采用仍待实际证据，不能用旧fixture替代。初轮最长24小时并沿用原币种余额、身份、冷却及未知记录；真实状态以私有运行记录为准。 |
+| H47 | 本地有界循环原有离线证据保留；本轮实际观察形成原GM01行程停滞、原GM02渔夫技能求助、原GM07本地调用上限三项认领。GM02实现已独立验收，见H48；原GM07候选仍在修正验收，GM01待实现。 | **整体部分**：最新授权推进到2026-09-14北京时间09:00，取代旧只读与24小时安排。原十居民/十GM、同档及原账本保持；局部居民错误由GM接手。持续自主交付及真实居民采用仍待证据，不能把准备或fixture称作10+10已跑通。 |
+| H48 | 原GM02从原Kimi渔夫真实提议 `ask_carpenter_help` 自主认领并实现具体技能求助。独立验收25项求助、63项交易、55项答复/取消/恢复检查通过；源码仅town_trade.gd。[证据与限制](docs/validation/gm_skill_help_2026-09-14.md)。 | **部分**：发布到同一世界后仍需Kimi自主选择并获得真实结果。该功能只允许提出具体技能求助，不会自动完成木工或强制对方接单。GM原运行费用未知尾部保留，最终runner的usage_incomplete不伪装成成功。 |
 
 **维护规则：**每次有新证据只更新这个全景图和本表。新增问题沿发现它的节点分支，保留稳定ID、验收条件和证据；通过后原位变绿，不删掉问题来制造进度。复发改回问题状态并链接失败证据。范围扩大另开子节点，不能扩大已绿节点的含义。没有新证据不改变状态。流程图记录工作进度，不是后台运行器。
 
