@@ -116,6 +116,22 @@ class ScopeGateTests(unittest.TestCase):
                 self.assertTrue(self.validate(scope)[1])
 
 
+class ProductionRuntimePolicyTests(unittest.TestCase):
+    def test_production_host_contract_is_explicit_and_inference_free(self):
+        policy = example_policy()
+        policy['mode'] = 'production'
+        policy['runtime'] = {
+            'kind': 'production_host_contract', 'godot': 'C:/godot.exe',
+            'save_path': 'tmp/world.json', 'timeout_seconds': 120,
+            'host_command': ['python', 'host_check.py', '--save={save_copy}', '--out={out}'],
+            'supported_issue_prefixes': ['journey_stall:'],
+            'required_release_paths': ['game/spatial/**']}
+        self.assertEqual(gm_autonomy.policy_errors(policy), [])
+        policy['mode'] = 'offline_fixture'
+        self.assertTrue(any('only valid in production' in value
+                            for value in gm_autonomy.policy_errors(policy)))
+
+
 class MappingTests(unittest.TestCase):
     def test_path_matches_globs(self):
         self.assertTrue(gm_autonomy.path_matches('game/capabilities/a.json', 'game/**'))
@@ -1412,6 +1428,95 @@ class VerifyBindingTests(CorrectionBase):
         self.assertEqual(cycle['blocked_reason'], 'release_binding_stale_after_publish')
         self.assertEqual(cycle['stages']['verify']['status'], 'refused')
         self.assertFalse(list(self.cycle.cycle_dir().glob('verify-open-*.json')))
+
+
+class ProductionHostContractTests(CorrectionBase):
+    def setUp(self):
+        super().setUp()
+        write_json(self.root / 'runtime' / 'save.json',
+                   {'world_id': WORLD, 'life': {'seq': 7}, 'private': {'kept': True}})
+        self.policy['mode'] = 'production'
+        self.policy['runtime'] = {
+            'kind': 'production_host_contract', 'godot': str(self.root / 'godot.exe'),
+            'save_path': str(self.root / 'runtime' / 'save.json'), 'timeout_seconds': 30,
+            'host_command': ['host-check', '--save={save_copy}', '--out={out}',
+                             '--release={release_digest}', '--issue={issue_id}',
+                             '--identity={issue_identity}', '--target-sha={target_sha256}',
+                             '--phase={phase}'],
+            'supported_issue_prefixes': ['journey_stall:'],
+            'required_release_paths': ['game/spatial/**']}
+        write_json(self.policy_path, self.policy)
+        self.cycle = gm_autonomy.Cycle(self.policy_path, self.policy, {}, None)
+        self.cycle.autonomy_dir().mkdir(parents=True, exist_ok=True)
+
+    def ready(self):
+        cycle = self.cycle.load_cycle()
+        cycle['issue_id'] = 'issue-real'
+        cycle['stages']['publish'] = {
+            'status': 'done', 'release_digest': 'release-1',
+            'files': [{'source': 'game/spatial/town_street.gd',
+                       'target': 'spatial/town_street.gd', 'sha256': 'target-sha'}]}
+        return cycle
+
+    def test_real_town_contract_uses_a_copy_and_never_claims_resident_adoption(self):
+        cycle = self.ready()
+        original = (self.root / 'runtime' / 'save.json').read_bytes()
+        prior_load, prior_run = gm_runner.load_state, gm_autonomy.run_process
+        commands = []
+        try:
+            gm_runner.load_state = lambda _path: {
+                'issues': {'issue-real': {'identity_key': 'journey_stall:19'}}}
+            def fake_run(command, _budget, deadline=None):
+                commands.append(command)
+                values = {token.split('=', 1)[0]: token.split('=', 1)[1]
+                          for token in command if '=' in token}
+                save_copy = Path(values['--save'])
+                self.assertNotEqual(save_copy, self.root / 'runtime' / 'save.json')
+                write_json(Path(values['--out']), {
+                    'ok': True, 'continuation_ok': True, 'world_id': WORLD,
+                    'issue_id': values['--issue'], 'issue_identity': values['--identity'],
+                    'release_digest': values['--release'],
+                    'source_world_sha256': gm_runner.sha256_bytes(original),
+                    'loaded_target_sha256': values['--target-sha'],
+                    'causal_checks': {'actual_town_job_progressed': True,
+                                      'bound_issue_closed_or_progressed': True}})
+                return {'exit_code': 0, 'timed_out': False, 'seconds': 0.1,
+                        'stdout': '', 'stderr': '',
+                        'owned': {'all_members_exited': True, 'observed_members': []}}
+            gm_autonomy.run_process = fake_run
+            self.assertEqual(self.cycle.stage_verify_production_host_contract(cycle),
+                             gm_autonomy.OK)
+        finally:
+            gm_runner.load_state, gm_autonomy.run_process = prior_load, prior_run
+        verify = cycle['stages']['verify']
+        self.assertTrue(verify['ok'])
+        self.assertFalse(verify['resident_adoption'])
+        self.assertEqual((self.root / 'runtime' / 'save.json').read_bytes(), original)
+        self.assertEqual(len(commands), 2)
+        self.assertFalse(any('--ledger' in token or '--town-gateway' in token
+                             for command in commands for token in command))
+
+    def test_wrong_issue_family_and_inference_command_fail_before_execution(self):
+        cycle = self.ready()
+        prior_load, prior_run = gm_runner.load_state, gm_autonomy.run_process
+        called = []
+        try:
+            gm_runner.load_state = lambda _path: {
+                'issues': {'issue-real': {'identity_key': 'unrelated:1'}}}
+            gm_autonomy.run_process = lambda *args, **kwargs: called.append(args)
+            self.assertEqual(self.cycle.stage_verify_production_host_contract(cycle),
+                             gm_autonomy.PRECONDITION)
+            self.assertFalse(called)
+            cycle = self.ready()
+            gm_runner.load_state = lambda _path: {
+                'issues': {'issue-real': {'identity_key': 'journey_stall:19'}}}
+            self.cycle.policy['runtime']['host_command'] = [
+                'python', 'tools/run_town_model_validation.py', '--out={out}']
+            self.assertEqual(self.cycle.stage_verify_production_host_contract(cycle),
+                             gm_autonomy.PRECONDITION)
+            self.assertFalse(called)
+        finally:
+            gm_runner.load_state, gm_autonomy.run_process = prior_load, prior_run
 
 
 if __name__ == '__main__':

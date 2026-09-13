@@ -219,9 +219,30 @@ def policy_errors(policy: dict) -> list[str]:
                       f'{RELEASE_FILES_THIS_VERSION} in this version; a multi-file release '
                       'transaction is not implemented and is refused up front')
     runtime = policy.get('runtime') or {}
-    for field in ('godot', 'save_path', 'script'):
+    runtime_kind = runtime.get('kind', 'fixture_script')
+    for field in ('godot', 'save_path'):
         if not isinstance(runtime.get(field), str) or not runtime[field].strip():
             errors.append(f'runtime.{field} must be a non-empty string')
+    if runtime_kind == 'fixture_script':
+        if not isinstance(runtime.get('script'), str) or not runtime['script'].strip():
+            errors.append('runtime.script must be a non-empty string')
+    elif runtime_kind == 'production_host_contract':
+        command = runtime.get('host_command')
+        prefixes = runtime.get('supported_issue_prefixes')
+        release_paths = runtime.get('required_release_paths')
+        if policy.get('mode') != 'production':
+            errors.append('runtime production_host_contract is only valid in production mode')
+        if (not isinstance(command, list) or not command
+                or any(not isinstance(token, str) or not token for token in command)):
+            errors.append('runtime.host_command must be a non-empty argv list')
+        if (not isinstance(prefixes, list) or not prefixes
+                or any(not isinstance(value, str) or not value for value in prefixes)):
+            errors.append('runtime.supported_issue_prefixes must be non-empty strings')
+        if (not isinstance(release_paths, list) or not release_paths
+                or any(safe_relpath(value) is None for value in release_paths)):
+            errors.append('runtime.required_release_paths must be safe repo-relative patterns')
+    else:
+        errors.append('runtime.kind must be fixture_script or production_host_contract')
     extra = runtime.get('extra_args', [])
     if not isinstance(extra, list) or any(not isinstance(value, str) for value in extra):
         errors.append('runtime.extra_args must be a list of strings when present')
@@ -1483,6 +1504,8 @@ class Cycle:
         self.save_cycle(cycle)
         return self.block(cycle, 'release_conflict_third_bytes', PRECONDITION)
     def stage_verify(self, cycle: dict) -> int:
+        if self.policy.get('runtime', {}).get('kind') == 'production_host_contract':
+            return self.stage_verify_production_host_contract(cycle)
         record = self.stage_record(cycle, 'verify')
         if record['status'] == 'done':
             return OK
@@ -1624,6 +1647,105 @@ class Cycle:
             record.update({'status': 'failed', 'reason': reason, 'failed_checks': failed_checks})
             self.save_cycle(cycle)
             return self.block(cycle, reason, RUNTIME)
+        self.finish_stage(cycle, 'verify', record)
+        return OK
+
+    def stage_verify_production_host_contract(self, cycle: dict) -> int:
+        """Run an inference-free, issue-bound town contract on a COPY of the real save.
+
+        The command is host-owned policy, not GM output. It may inspect/advance only the copied
+        save and must return explicit causal checks bound to the evidence issue and release bytes.
+        This proves host verification. It never claims a resident selected the change; that can
+        only be observed by a later sole-writer canonical life phase.
+        """
+        record = self.stage_record(cycle, 'verify')
+        if record['status'] == 'done':
+            return OK
+        publish = cycle['stages'].get('publish') or {}
+        if publish.get('status') != 'done':
+            record.update({'status': 'skipped', 'reason': 'nothing was published'})
+            self.save_cycle(cycle)
+            return OK
+        stopped = self.in_flight_stop(cycle, record, 'verify')
+        if stopped:
+            return stopped
+        state = gm_runner.load_state(self.state_dir)
+        issue = (state.get('issues') or {}).get(cycle.get('issue_id')) or {}
+        identity = str(issue.get('identity_key') or '')
+        runtime = self.policy.get('runtime') or {}
+        if not any(identity.startswith(value) for value in runtime['supported_issue_prefixes']):
+            record.update({'status': 'refused', 'issue_identity': identity})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'runtime_issue_contract_unsupported', PRECONDITION)
+        files = publish.get('files') or []
+        if (not files or any(not any(path_matches(item.get('source', ''), pattern)
+                                    for pattern in runtime['required_release_paths'])
+                             for item in files)):
+            record.update({'status': 'refused', 'files': [item.get('source') for item in files]})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'runtime_release_outside_contract', PRECONDITION)
+        source_sha = sha256_file(self.save_path)
+        verify_root = self.cycle_dir() / 'verify-production'
+        verify_root.mkdir(parents=True, exist_ok=True)
+        save_copy = verify_root / 'world-copy.json'
+        if not save_copy.exists():
+            shutil.copyfile(self.save_path, save_copy)
+        if sha256_file(self.save_path) != source_sha:
+            return self.block(cycle, 'runtime_source_world_changed_before_verify', STALE)
+        release_digest = publish['release_digest']
+        first = files[0]
+        runs = []
+        forbidden = ('run_town_model_validation.py', '--ledger', '--config', 'kimi_gateway',
+                     '--town-gateway')
+        for phase in ('open', 'resume'):
+            out_path = verify_root / ('contract-' + phase + '.json')
+            try:
+                out_path.unlink()
+            except OSError:
+                pass
+            values = {'checkout': self.checkout, 'save_copy': save_copy, 'out': out_path,
+                      'release_digest': release_digest, 'issue_id': cycle.get('issue_id') or '',
+                      'issue_identity': identity, 'target': first.get('target') or '',
+                      'target_sha256': first.get('sha256') or '', 'evidence': self.evidence,
+                      'phase': phase, 'godot': self.godot, 'root': ROOT,
+                      'source_world_sha': source_sha}
+            command, errors = resolve_command(runtime['host_command'], values)
+            if errors or any(marker in token.casefold() for token in command for marker in forbidden):
+                record.update({'status': 'refused', 'command_errors': errors,
+                               'reason': 'production verification command may not invoke inference'})
+                self.save_cycle(cycle)
+                return self.block(cycle, 'runtime_host_command_refused', PRECONDITION)
+            outcome = run_process(command, int(runtime.get('timeout_seconds', 120)),
+                                  deadline=self.deadline)
+            observed = gm_runner.load_json(out_path) if out_path.is_file() else None
+            runs.append({'phase': phase, 'exit_code': outcome['exit_code'],
+                         'timed_out': outcome['timed_out'], 'owned': outcome['owned'],
+                         'observed': observed})
+            if outcome['timed_out']:
+                break
+        expected = {'world_id': self.policy['world_id'], 'issue_id': cycle.get('issue_id'),
+                    'issue_identity': identity, 'release_digest': release_digest,
+                    'source_world_sha256': source_sha,
+                    'loaded_target_sha256': first.get('sha256')}
+        def valid(run):
+            observed = run.get('observed') or {}
+            checks = observed.get('causal_checks')
+            return (run.get('exit_code') == 0 and not run.get('timed_out')
+                    and all(observed.get(key) == value for key, value in expected.items())
+                    and isinstance(checks, dict) and bool(checks)
+                    and all(value is True for value in checks.values())
+                    and observed.get('ok') is True and observed.get('continuation_ok') is True)
+        ok = len(runs) == 2 and all(valid(run) for run in runs) \
+            and sha256_file(self.save_path) == source_sha
+        record.update({'runs': runs, 'checks': [{'check': 'host_contract_bound_and_causal',
+                                                 'ok': ok}], 'ok': ok,
+                       'installed': bool(files), 'used': ok,
+                       'resident_adoption': False, 'source_world_unchanged':
+                       sha256_file(self.save_path) == source_sha,
+                       'issue_identity': identity})
+        self.save_cycle(cycle)
+        if not ok:
+            return self.block(cycle, 'runtime_host_contract_failed', RUNTIME)
         self.finish_stage(cycle, 'verify', record)
         return OK
 
