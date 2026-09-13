@@ -27,6 +27,8 @@ class FixtureController extends Node:
 	var calls := 0
 	var captured: Dictionary = {}
 	var last_reply: Dictionary = {}
+	var reason_chars := 0
+	var speech_chars := 0
 
 	func propose(view: Dictionary, _seq: int) -> Dictionary:
 		calls += 1
@@ -44,7 +46,13 @@ class FixtureController extends Node:
 		elif mode == "invalid":
 			reply = {"ok": true, "decision": {"reason": "fixture decision without a lawful action"}}
 		else:
-			reply = {"ok": true, "decision": {"action": alias, "reason": "fixture controller decision"},
+			var reason := "fixture controller decision"
+			if reason_chars > 0:
+				reason = "r".repeat(reason_chars)
+			var decision := {"action": alias, "reason": reason}
+			if speech_chars > 0:
+				decision.speech = "s".repeat(speech_chars)
+			reply = {"ok": true, "decision": decision,
 				"command_id": "fixture-controller-reply", "provenance": "opengameagent_fixture"}
 		last_reply = reply.duplicate(true)
 		return reply
@@ -265,6 +273,63 @@ func run() -> void:
 	check(_facts_only(town) == facts_before_rogue, "a fabricated option changes no world fact")
 	check(town.resident(SMITH).coins_col == 5 and town._item(AXE).edge == 100, "no controller failure can pay or repair on its own")
 	check(town.resident(WOODWORKER) == other_resident_before and town.account(WOODWORKER) == other_account_before, "another resident is untouched by the smith's controller failures")
+
+	# --- the model-facing decision contract is disclosed per request. Boundary disclosure
+	# only: it never relaxes the bound, truncates text or invents a choice.
+	var contract_view: Dictionary = controller_b.captured
+	var request_rules: Dictionary = contract_view.get("known_rules", {})
+	var decision_format: Dictionary = request_rules.get("decision_format", {})
+	check(not decision_format.is_empty(), "the decision format is disclosed inside the existing known_rules view key")
+	check(str(decision_format.get("action", "")).contains("available_actions"), "the contract points at the provided aliases")
+	check(str(decision_format.get("reason", "")).contains("512") and str(decision_format.get("speech", "")).contains("512"), "the contract states the exact 512-character bounds")
+	check(str(decision_format.get("need", "")).contains("optional") and str(decision_format.get("need", "")).contains("capability_id"), "the contract retains the existing optional capability proposal")
+	check(decision_format.values().all(func(entry): return entry is String), "every contract field is type-explicit")
+	check(not JSON.stringify(contract_view).contains(private_marker), "the new contract text carries no private history")
+
+	# --- one genuinely offered action, taken from the world own offer list.
+	var offered_pairs: Dictionary = turns._record(SMITH).get("offered_actions", {})
+	var speech_aliases: Array = turns._record(SMITH).get("speech_actions", [])
+	var probe_option := ""
+	for alias_key in offered_pairs:
+		if not str(offered_pairs[alias_key]).begins_with("place:"):
+			probe_option = str(offered_pairs[alias_key])
+			if speech_aliases.has(alias_key):
+				break
+	check(probe_option != "", "a non-travel offered action exists for the contract checks")
+
+	# 513 characters is outside the bound: fail-closed, no action and no world effect.
+	var over_reason := FixtureController.new()
+	over_reason.turns = turns
+	over_reason.option = probe_option
+	over_reason.reason_chars = 513
+	check(turns.connect_controller(SMITH, over_reason, "fixture:contract_over_reason").ok, "an over-long-reason controller attaches")
+	var facts_before_over := _facts_only(town)
+	await drive(turns, SMITH, "over_reason")
+	check(turns._record(SMITH).get("status", "") == "provider_error" and turns._record(SMITH).get("error", "") == "invalid_decision" and turns._record(SMITH).get("error_detail", "") == "reason_too_long", "a 513-character reason preserves invalid_decision with a structural reason_too_long detail")
+	check(_facts_only(town) == facts_before_over and str(turns._record(SMITH).get("action", "")) == "", "an over-long reason records no action and changes no world fact")
+	check(turns.ready_resident() != SMITH, "an over-long reason is never silently retried")
+
+	var over_speech := FixtureController.new()
+	over_speech.turns = turns
+	over_speech.option = probe_option
+	over_speech.speech_chars = 513
+	check(turns.connect_controller(SMITH, over_speech, "fixture:contract_over_speech").ok, "an over-long-speech controller attaches")
+	var facts_before_over_speech := _facts_only(town)
+	await drive(turns, SMITH, "over_speech")
+	check(turns._record(SMITH).get("status", "") == "provider_error" and turns._record(SMITH).get("error", "") == "invalid_decision" and turns._record(SMITH).get("error_detail", "") == "speech_too_long", "a 513-character speech preserves invalid_decision with a structural speech_too_long detail")
+	check(_facts_only(town) == facts_before_over_speech and str(turns._record(SMITH).get("action", "")) == "", "an over-long speech records no action and changes no world fact")
+
+	# Exactly 512 characters is inside the bound and is not refused by the contract.
+	var at_bound := FixtureController.new()
+	at_bound.turns = turns
+	at_bound.option = probe_option
+	at_bound.reason_chars = 512
+	at_bound.speech_chars = 512
+	check(turns.connect_controller(SMITH, at_bound, "fixture:contract_at_bound").ok, "a boundary-length controller attaches")
+	await drive(turns, SMITH, "at_bound")
+	var bound_record: Dictionary = turns._record(SMITH)
+	check(bound_record.get("status", "") != "provider_error", "a 512-character reason and speech pass the fail-closed contract check")
+	check(str(bound_record.get("reason", "")).length() == 512, "the accepted reason keeps its exact 512 characters, untruncated")
 
 	_reload_matches(town, path, contract_id, "final")
 	turns.free()

@@ -6,6 +6,9 @@ const IDLE_COOLDOWN := 1800.0
 var town
 var save_path := ""
 var brains: Dictionary = {}
+## Existing model-facing text bounds; disclosed in the request view so the
+## provider can see them. The authoritative check below stays fail-closed.
+const DECISION_TEXT_LIMIT := 512
 var inflight: Dictionary = {}
 var busy: bool:
 	get:
@@ -180,6 +183,19 @@ func step(requested_id: String = "") -> Dictionary:
 		if option.get("speech_allowed", false):
 			speech_actions.append(alias)
 		view.action_details.append({"id": alias, "label": option.label, "speech_allowed": option.get("speech_allowed", false)})
+	# Model-facing decision contract for THIS request: reply shape, required field
+	# types, the provided aliases and the exact text bounds. Disclosure only - the
+	# authoritative check in apply_reply is unchanged, still fail-closed, and never
+	# truncates text, invents a choice or relaxes the bound.
+	var request_rules: Dictionary = view.get("known_rules", {}).duplicate(true)
+	request_rules["decision_format"] = {
+		"reply": "one JSON object following this field contract",
+		"action": "string naming exactly one id from available_actions",
+		"reason": "string, required, at most %d characters" % DECISION_TEXT_LIMIT,
+		"speech": "string, optional, only for actions whose action_details entry has speech_allowed true, at most %d characters" % DECISION_TEXT_LIMIT,
+		"need": "optional object with capability_id and reason, only when no available action meets the need",
+	}
+	view["known_rules"] = request_rules
 	# Context is bounded; canonical full history remains in the world save.
 	view.experiences = view.get("experiences", []).slice(-16)
 	var seen := _own_seq(id)
@@ -222,9 +238,23 @@ func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary) 
 			record.error = reply.get("code", "unknown_provider_error")
 			return {"ok": true, "code": "provider_error"}
 		var decision = reply.get("decision")
-		if not decision is Dictionary or not decision.get("action") is String or not decision.get("reason") is String or decision.reason.length() > 512 or (decision.has("speech") and (not decision.speech is String or decision.speech.length() > 512)):
+		if not decision is Dictionary or not decision.get("action") is String or not decision.get("reason") is String:
 			record.status = "provider_error"
 			record.error = "invalid_decision"
+			return {"ok": true, "code": "provider_error"}
+		if decision.reason.length() > DECISION_TEXT_LIMIT:
+			record.status = "provider_error"
+			record.error = "invalid_decision"
+			record.error_detail = "reason_too_long"
+			return {"ok": true, "code": "provider_error"}
+		if decision.has("speech") and not decision.speech is String:
+			record.status = "provider_error"
+			record.error = "invalid_decision"
+			return {"ok": true, "code": "provider_error"}
+		if decision.has("speech") and decision.speech.length() > DECISION_TEXT_LIMIT:
+			record.status = "provider_error"
+			record.error = "invalid_decision"
+			record.error_detail = "speech_too_long"
 			return {"ok": true, "code": "provider_error"}
 		record.model_choice = decision.action
 		record.action = aliases.get(decision.action, "")
