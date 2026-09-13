@@ -11,6 +11,15 @@ const BACKGROUND_GM_SCHEMA_VERSION := 1
 const BACKGROUND_GM_PROPOSAL_LIMIT := 32
 const BACKGROUND_GM_EVIDENCE_LIMIT := 64
 const BACKGROUND_GM_PROPOSAL_PREFIX := "gm_proposal:"
+## The world's own basic survival actions, exactly the ones town_life starts for a resident and
+## accrues work for. Only these are published as pending basic-action facts; contract repair work,
+## material recovery and public travel keep their own existing channels.
+const BACKGROUND_GM_BASIC_ACTIONS := ["eat_ration", "rest", "harvest_ration"]
+## Published value of the arrival gate town_life.advance() already applies to a pending action
+## (a 3D distance test against the action's own destination). It is exported as a threshold so a
+## remaining distance can be read; this module never uses it to decide anything.
+const BASIC_ACTION_ARRIVAL_RADIUS := 0.45
+const BASIC_ACTION_PENDING_PREFIX := "basic_action_pending:"
 const CAPABILITY_ID_MAX_LENGTH := 48
 const NEED_REASON_MAX_LENGTH := 512
 
@@ -210,6 +219,12 @@ func background_gm_snapshot() -> Dictionary:
 			"discriminators": {"movement_blocked": true, "collision_proved": false, "contact_recorded": false,
 				"obstacle_identified": false, "image_analysis": false, "repair_task_inferred": false,
 				"note": "no-progress evidence only; a deliberate or legitimate obstacle is not distinguishable here from a defect"}})
+	## Pending basic-action facts share this one bounded evidence channel and are appended AFTER
+	## the movement diagnostics, so an existing issue never loses its content or its priority.
+	for pending in _basic_action_pending_evidence():
+		if issues.size() >= BACKGROUND_GM_EVIDENCE_LIMIT:
+			break
+		issues.append(pending)
 	var proposals: Array = []
 	for record in _background_gm_records():
 		proposals.append({"evidence_kind": "capability_proposed", "proposal_id": record.get("proposal_id", ""),
@@ -232,6 +247,48 @@ func background_gm_snapshot() -> Dictionary:
 		"limits": {"evidence_limit": BACKGROUND_GM_EVIDENCE_LIMIT, "proposal_limit": BACKGROUND_GM_PROPOSAL_LIMIT},
 		"projection_note": "bounded GM-visible projection; the canonical accepted-need record stays in the world's private turn journal",
 		"counts": {"issues": issues.size(), "proposals": proposals.size()}, "evidence": issues, "proposals": proposals}
+
+func _basic_action_pending_evidence() -> Array:
+	## Read-only, world-scoped facts about the basic action each resident is really running right
+	## now: the action, the work seconds THIS command has actually accrued, that action's own
+	## duration, the authoritative host position and the remaining distance to the action's own
+	## live destination. The destination is asked at call time through destination(id, action), so
+	## a rest bound to a public place answers that public point instead of being assumed to be
+	## home, and a foraging trip answers the resident's own work spot or the legacy berry centre.
+	## Nothing is mutated here (no world, pending, controller, resource or command write), no model
+	## text, private reason or other resident's data is included, and the identity is stable per
+	## resident+command so a completed or rejected action disappears instead of leaving a stale
+	## entry. An ordinary pending action is a normal fact: it is never presented as a stall.
+	var result: Array = []
+	for id in active_ids():
+		var job: Dictionary = pending_job(id)
+		var action := str(job.get("action", ""))
+		if job.is_empty() or not BACKGROUND_GM_BASIC_ACTIONS.has(action) or not DURATIONS.has(action):
+			continue
+		result.append(_basic_action_pending_entry(id, job, action))
+	return result
+
+func _basic_action_pending_entry(id: String, job: Dictionary, action: String) -> Dictionary:
+	var command_id := str(job.get("command_id", ""))
+	var raw_elapsed: Variant = job.get("elapsed", 0.0)
+	var elapsed := 0.0
+	if typeof(raw_elapsed) in [TYPE_INT, TYPE_FLOAT] and is_finite(float(raw_elapsed)) and float(raw_elapsed) >= 0.0:
+		elapsed = float(raw_elapsed)
+	var observed := position_of(id)
+	var target := destination(id, action)
+	var target_position: Array = [] if not target.is_finite() else [target.x, target.y, target.z]
+	return {"evidence_kind": "basic_action_pending",
+		"issue_id": BASIC_ACTION_PENDING_PREFIX + id + ":" + command_id,
+		"world_id": _state.world_id, "resident_id": id, "action": action,
+		"job_command_id": command_id, "status": "observed",
+		"physical_facts": {"observed_position": [observed.x, observed.y, observed.z],
+			"target_position": target_position,
+			"remaining_distance": observed.distance_to(target) if target.is_finite() else -1.0,
+			"arrival_radius": BASIC_ACTION_ARRIVAL_RADIUS,
+			"work_elapsed_seconds": elapsed, "work_duration_seconds": float(DURATIONS[action]),
+			"observation_source": "authoritative_current_job"},
+		"discriminators": {"movement_blocked": false, "collision_proved": false, "stall_proved": false,
+			"note": "pending basic-action facts only; an ordinary pending action is not a stall, a defect or a blocked body"}}
 
 func background_gm_content_signature() -> String:
 	# Meaningful GM-visible content only: advancing timers (no_progress_seconds) and
