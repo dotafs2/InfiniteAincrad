@@ -1,0 +1,785 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-09-13T10:16:29.4233090Z",
+  "source_head": "f3a8c7e339a6a2a39610748f4579bc659ac503b4",
+  "branch": "codex/2026-09-13-local-work",
+  "scope": "Saved on-disk files from the shader lab and same-project neighbor task; existing committed work is preserved by parent history.",
+  "source_files_modified_by_upload": false,
+  "original_bytes_verified_before_and_after_copy": true,
+  "files": [
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "ROADMAP.md",
+      "destination": "ROADMAP.md",
+      "bytes": 83870,
+      "sha256": "8cf7144b0160296e3244bcc9f3ccf47861e79c908580066f566461d5b2fa3fa8"
+    },
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "docs/STATUS.md",
+      "destination": "docs/STATUS.md",
+      "bytes": 56032,
+      "sha256": "1f26def58e9ea7d8330302f424cba2305d4db88d1b2132995b50e9a8fdfb4dac"
+    },
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "tools/gm_runner.py",
+      "destination": "tools/gm_runner.py",
+      "bytes": 147909,
+      "sha256": "c16afb25708a8d273bb31ee72a938bf4fb191698f1b525b85d7f8d2a4b2156b6"
+    },
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "tools/test_gm_runner.py",
+      "destination": "tools/test_gm_runner.py",
+      "bytes": 75529,
+      "sha256": "4c23ccb98d5c2b373f3f2a2baecc0362a495ec113181d844b59587750fbd1f1a"
+    },
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "docs/validation/gm_autonomy_2026-09-13.md",
+      "destination": "docs/validation/gm_autonomy_2026-09-13.md",
+      "bytes": 61478,
+      "sha256": "9a3e77ca00895b3a42043f888275e005ee229802cdab8bcfdd6bfefda5b3c56f"
+    },
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "game/tests/gm_autonomy_acceptance.gd",
+      "destination": "game/tests/gm_autonomy_acceptance.gd",
+      "bytes": 19903,
+      "sha256": "8aeb2204b29da3e9a0d484f4edcc9255575b5f51ece5500c44c8bea79462bfad"
+    },
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "game/tests/gm_autonomy_module_smoke.gd",
+      "destination": "game/tests/gm_autonomy_module_smoke.gd",
+      "bytes": 4523,
+      "sha256": "393c1884408bba8c21704444632a4017295e6ce25d720af988e032ed0ef8f77a"
+    },
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "tools/gm_autonomy.py",
+      "destination": "tools/gm_autonomy.py",
+      "bytes": 142006,
+      "sha256": "96c7914f2f3ce9b9780403e89a7337de5f765408662f2e970260e11b465b4a66"
+    },
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "tools/gm_autonomy_policy.example.json",
+      "destination": "tools/gm_autonomy_policy.example.json",
+      "bytes": 2010,
+      "sha256": "2191b66ed70be7f59a90a9e49f926329b5e51cf2ed38146baa97da79e90190af"
+    },
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "tools/prepare_gm_autonomy_local.py",
+      "destination": "tools/prepare_gm_autonomy_local.py",
+      "bytes": 14366,
+      "sha256": "37425c471808f48786dff9975e6db435886340df94fdce9bd1c51a8245a7f736"
+    },
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "tools/test_gm_autonomy.py",
+      "destination": "tools/test_gm_autonomy.py",
+      "bytes": 78157,
+      "sha256": "461cc2d41e4258887e2e2794f1c1b566c27f25890f6636f93c2b9e5228dbc83e"
+    },
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "tools/test_prepare_gm_autonomy_local.py",
+      "destination": "tools/test_prepare_gm_autonomy_local.py",
+      "bytes": 15666,
+      "sha256": "f7c114fee94852989ca18df5f875e082d19fa88235b778c3c6c21f30c8987fef"
+    },
+    {
+      "scope": "neighbor_project_work",
+      "source_relative": "tools/validate_gm_autonomy.py",
+      "destination": "tools/validate_gm_autonomy.py",
+      "bytes": 99398,
+      "sha256": "1818c7eaf4245c4e1a3afa11bdcb31aeb4c32e2bccb98b120077002d3e17091b"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": ".gitignore",
+      "destination": "experiments/godot-anime-lab/.gitignore",
+      "bytes": 243,
+      "sha256": "6ba867e3b344317cc31140b258469bf45ea8f8904c904eed51aa363879a8f04c"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "MODEL_CATALOG.md",
+      "destination": "experiments/godot-anime-lab/MODEL_CATALOG.md",
+      "bytes": 53578,
+      "sha256": "283f25ba07e3fcf4913359c44d20d6a103767a33344416fb5a3f6c0918065b1c"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "Open-Lab.ps1",
+      "destination": "experiments/godot-anime-lab/Open-Lab.ps1",
+      "bytes": 6537,
+      "sha256": "5cfdd5712c590023e6a4d94356634bd391c9fe1f089bd827b4794d3c1ecbf0ff"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "README.md",
+      "destination": "experiments/godot-anime-lab/README.md",
+      "bytes": 7935,
+      "sha256": "670d741df34d78f2f18bbe4938b8a790b93862d12156d41d264acb6c4367773f"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "addons/lab_boot/lab_boot.gd",
+      "destination": "experiments/godot-anime-lab/addons/lab_boot/lab_boot.gd",
+      "bytes": 2992,
+      "sha256": "7a63932c7117252b9ee81a4c9df792317774da33289583068967937eebbdc05b"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "addons/lab_boot/lab_boot.gd.uid",
+      "destination": "experiments/godot-anime-lab/addons/lab_boot/lab_boot.gd.uid",
+      "bytes": 20,
+      "sha256": "8c81f07261f4f190aaaddaef7d50bcd9ad65c00240097603b348a7fbf3a1dab9"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "addons/lab_boot/plugin.cfg",
+      "destination": "experiments/godot-anime-lab/addons/lab_boot/plugin.cfg",
+      "bytes": 233,
+      "sha256": "cee2f53a62f6652d5c970658c1f5d5fda51cdeb9760cc2832bf4a2b752451c47"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/props/F1_herb_planter_LOD1.glb",
+      "destination": "experiments/godot-anime-lab/assets/props/F1_herb_planter_LOD1.glb",
+      "bytes": 357756,
+      "sha256": "f05f65de0ed85e10ca932e9cb801d2c2603c518e52136ed41ff949b1b9825f21"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/props/F1_meadow_grass_LOD1.glb",
+      "destination": "experiments/godot-anime-lab/assets/props/F1_meadow_grass_LOD1.glb",
+      "bytes": 67184,
+      "sha256": "da0a038ecd7bbd2cfc6a6dee8a2ae21784a27d8da0cd8d66a5b80081493a57ba"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/props/F1_mossy_boulder_cluster_LOD1.glb",
+      "destination": "experiments/godot-anime-lab/assets/props/F1_mossy_boulder_cluster_LOD1.glb",
+      "bytes": 134576,
+      "sha256": "84fe5a1aa6a11fc0eecca8ad8c6850ccf18bef7a9d711613bf30206425932500"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/props/F1_roadside_milestone_LOD1.glb",
+      "destination": "experiments/godot-anime-lab/assets/props/F1_roadside_milestone_LOD1.glb",
+      "bytes": 62800,
+      "sha256": "01628a25a68e0dd6f4b7db5f526102e896f2e1e278450db0f13da1113857c231"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01.glb",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01.glb",
+      "bytes": 73003124,
+      "sha256": "6c406a932f9f5bb4b5e6b745a2f5b899337b4d4e0f529d52d45744e220b2445e"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01_clay_albedo.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01_clay_albedo.png",
+      "bytes": 1423759,
+      "sha256": "18af0117121198b2a21f854add87c02f642a0c36fb508093a3cfc361033d3c27"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01_clay_normal.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01_clay_normal.png",
+      "bytes": 2810338,
+      "sha256": "5cb07abd7f0e8e0eb78023ee2abe7e8f4d3a2089e5c0647ae0723870635cebc6"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01_clay_orm.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01_clay_orm.png",
+      "bytes": 671124,
+      "sha256": "baeda5fbe074c0579939cb9f294ab481f14e450cb7de9c94616247e7d33a31ec"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01_limestone_albedo.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01_limestone_albedo.png",
+      "bytes": 1517822,
+      "sha256": "b2918bc8859eb78369976af907fec383393d134abd34b032616fcc35f2fd7513"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01_limestone_normal.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01_limestone_normal.png",
+      "bytes": 3398867,
+      "sha256": "c0a2c161185e76d16ce01108a09c49e8ce48d85a950b881bd3fd873713d43e33"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01_limestone_orm.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01_limestone_orm.png",
+      "bytes": 552378,
+      "sha256": "1f15dfbac4350b8a8b3e9473e8f0dc5cdd98518386f8d94e6a5ef9e0d822886e"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01_oak_albedo.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01_oak_albedo.png",
+      "bytes": 1081779,
+      "sha256": "451ba44a1a80e52409c4845c351a9203572c0ab00beeb2615076aca59e66d2c6"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01_oak_normal.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01_oak_normal.png",
+      "bytes": 1041067,
+      "sha256": "935ade0319d946c9d7d646f8b21cbae05075c81bc04502493ec0d029af37eae0"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01_oak_orm.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01_oak_orm.png",
+      "bytes": 474156,
+      "sha256": "969e33505f3bc81cc15c6cfba80ddf4d016ebe48fa00f79eb268ca9bab476a9d"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01_plaster_albedo.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01_plaster_albedo.png",
+      "bytes": 1186472,
+      "sha256": "9f996aab89fa59677e03a5bcc35ed892c3b36636200c9505664d7ccc9b7af837"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01_plaster_normal.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01_plaster_normal.png",
+      "bytes": 2686067,
+      "sha256": "adf138241b6917b04007e60cbb5d7eb3249f02f99aba6db24555bd20858057c0"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_01_plaster_orm.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_01_plaster_orm.png",
+      "bytes": 366202,
+      "sha256": "376976b527f22b1cc66a970935c672a9cb1c7b62258700fabcc3801dc041f7c2"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03.glb",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03.glb",
+      "bytes": 83140096,
+      "sha256": "b85b5bb58c4e215f5b5e2f5120266c2694065d3d44c1a6af406dece8fd9aefdc"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03_clay_albedo.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03_clay_albedo.png",
+      "bytes": 1423759,
+      "sha256": "18af0117121198b2a21f854add87c02f642a0c36fb508093a3cfc361033d3c27"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03_clay_normal.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03_clay_normal.png",
+      "bytes": 2810338,
+      "sha256": "5cb07abd7f0e8e0eb78023ee2abe7e8f4d3a2089e5c0647ae0723870635cebc6"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03_clay_orm.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03_clay_orm.png",
+      "bytes": 671124,
+      "sha256": "baeda5fbe074c0579939cb9f294ab481f14e450cb7de9c94616247e7d33a31ec"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03_limestone_albedo.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03_limestone_albedo.png",
+      "bytes": 1517822,
+      "sha256": "b2918bc8859eb78369976af907fec383393d134abd34b032616fcc35f2fd7513"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03_limestone_normal.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03_limestone_normal.png",
+      "bytes": 3398867,
+      "sha256": "c0a2c161185e76d16ce01108a09c49e8ce48d85a950b881bd3fd873713d43e33"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03_limestone_orm.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03_limestone_orm.png",
+      "bytes": 552378,
+      "sha256": "1f15dfbac4350b8a8b3e9473e8f0dc5cdd98518386f8d94e6a5ef9e0d822886e"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03_oak_albedo.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03_oak_albedo.png",
+      "bytes": 1081779,
+      "sha256": "451ba44a1a80e52409c4845c351a9203572c0ab00beeb2615076aca59e66d2c6"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03_oak_normal.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03_oak_normal.png",
+      "bytes": 1041067,
+      "sha256": "935ade0319d946c9d7d646f8b21cbae05075c81bc04502493ec0d029af37eae0"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03_oak_orm.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03_oak_orm.png",
+      "bytes": 474156,
+      "sha256": "969e33505f3bc81cc15c6cfba80ddf4d016ebe48fa00f79eb268ca9bab476a9d"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03_plaster_albedo.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03_plaster_albedo.png",
+      "bytes": 1186472,
+      "sha256": "9f996aab89fa59677e03a5bcc35ed892c3b36636200c9505664d7ccc9b7af837"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03_plaster_normal.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03_plaster_normal.png",
+      "bytes": 2686067,
+      "sha256": "adf138241b6917b04007e60cbb5d7eb3249f02f99aba6db24555bd20858057c0"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/F1_Residence_03_plaster_orm.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/F1_Residence_03_plaster_orm.png",
+      "bytes": 366202,
+      "sha256": "376976b527f22b1cc66a970935c672a9cb1c7b62258700fabcc3801dc041f7c2"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/textures/clay_albedo.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/textures/clay_albedo.png",
+      "bytes": 1423759,
+      "sha256": "18af0117121198b2a21f854add87c02f642a0c36fb508093a3cfc361033d3c27"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/textures/clay_orm.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/textures/clay_orm.png",
+      "bytes": 671124,
+      "sha256": "baeda5fbe074c0579939cb9f294ab481f14e450cb7de9c94616247e7d33a31ec"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/textures/limestone_albedo.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/textures/limestone_albedo.png",
+      "bytes": 1517822,
+      "sha256": "b2918bc8859eb78369976af907fec383393d134abd34b032616fcc35f2fd7513"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/textures/limestone_orm.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/textures/limestone_orm.png",
+      "bytes": 552378,
+      "sha256": "1f15dfbac4350b8a8b3e9473e8f0dc5cdd98518386f8d94e6a5ef9e0d822886e"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/textures/oak_albedo.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/textures/oak_albedo.png",
+      "bytes": 1081779,
+      "sha256": "451ba44a1a80e52409c4845c351a9203572c0ab00beeb2615076aca59e66d2c6"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/textures/oak_orm.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/textures/oak_orm.png",
+      "bytes": 474156,
+      "sha256": "969e33505f3bc81cc15c6cfba80ddf4d016ebe48fa00f79eb268ca9bab476a9d"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/textures/plaster_albedo.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/textures/plaster_albedo.png",
+      "bytes": 1186472,
+      "sha256": "9f996aab89fa59677e03a5bcc35ed892c3b36636200c9505664d7ccc9b7af837"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/residences/textures/plaster_orm.png",
+      "destination": "experiments/godot-anime-lab/assets/residences/textures/plaster_orm.png",
+      "bytes": 366202,
+      "sha256": "376976b527f22b1cc66a970935c672a9cb1c7b62258700fabcc3801dc041f7c2"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/v2_trees/F1_ancient_oak_LOD1.glb",
+      "destination": "experiments/godot-anime-lab/assets/v2_trees/F1_ancient_oak_LOD1.glb",
+      "bytes": 2651520,
+      "sha256": "faf1751048b17ea5dce3a5005aa638c876f8e8f7bd15f8849be56bb40f91f791"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/v2_trees/F1_stone_pine_LOD1.glb",
+      "destination": "experiments/godot-anime-lab/assets/v2_trees/F1_stone_pine_LOD1.glb",
+      "bytes": 843368,
+      "sha256": "85f5228cc3667e374dd07da6ef33e3013a8e42cef8c2abf05c7af7d3bcc92e49"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "assets/v2_trees/F1_young_maple_LOD1.glb",
+      "destination": "experiments/godot-anime-lab/assets/v2_trees/F1_young_maple_LOD1.glb",
+      "bytes": 2018776,
+      "sha256": "2e2dd58afedaa80d0812a8d3ac1fd11eb5e02caece4f9faaf0cc541322419a85"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/anime_post.tres",
+      "destination": "experiments/godot-anime-lab/materials/anime_post.tres",
+      "bytes": 379,
+      "sha256": "e7bb7677c0466f11ee171dba1226c9951d7d890479c807fd8e09628e1b6fb0bf"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/f2_foliage.tres",
+      "destination": "experiments/godot-anime-lab/materials/f2_foliage.tres",
+      "bytes": 717,
+      "sha256": "fcaf416aa130a94be5c19ae9c98662b9a047fcd44cfbab3897110e5f937d360e"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/f2_solid.tres",
+      "destination": "experiments/godot-anime-lab/materials/f2_solid.tres",
+      "bytes": 716,
+      "sha256": "52f0f6733b33ac7e707fc731bd1e22a8c719acb51e74621d8748d533ea911a83"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/f2_wood.tres",
+      "destination": "experiments/godot-anime-lab/materials/f2_wood.tres",
+      "bytes": 715,
+      "sha256": "d3cff4fddbdd5392a2a437c4e801418851547bf928abc3ba5d76863251eb7eb6"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/lab_ground.tres",
+      "destination": "experiments/godot-anime-lab/materials/lab_ground.tres",
+      "bytes": 746,
+      "sha256": "06a52acde89115d899ad5453f809d911077d27c441c500955f1a4398e611b06c"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/lab_sphere.tres",
+      "destination": "experiments/godot-anime-lab/materials/lab_sphere.tres",
+      "bytes": 747,
+      "sha256": "ac3cea9d219994fecc4921098bd9ef2eb1513f384da35f9505d9260fc8234b20"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/residence_clay.tres",
+      "destination": "experiments/godot-anime-lab/materials/residence_clay.tres",
+      "bytes": 881,
+      "sha256": "73bca2f0c41256387ed02a514f18973e7e1ebcb42799c5d3966490d43f6cc152"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/residence_glass.tres",
+      "destination": "experiments/godot-anime-lab/materials/residence_glass.tres",
+      "bytes": 723,
+      "sha256": "f634c7ce64776268bd6c2706105dc8d9ce5c7ceaff1532458c23f7d4276838a3"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/residence_limestone.tres",
+      "destination": "experiments/godot-anime-lab/materials/residence_limestone.tres",
+      "bytes": 891,
+      "sha256": "7a167bdd748de2839805ac11c62a9fee030bd6a8377c381e1d11799236e68458"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/residence_metal.tres",
+      "destination": "experiments/godot-anime-lab/materials/residence_metal.tres",
+      "bytes": 723,
+      "sha256": "9a281ce3e77e07ab844666a1452fc773ea94da8e9472914b629d032f2915427e"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/residence_oak.tres",
+      "destination": "experiments/godot-anime-lab/materials/residence_oak.tres",
+      "bytes": 879,
+      "sha256": "eda6b5df08d200363323f9dc307a8764eebeb286163b1bebf9305d1e118200e5"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/residence_plain.tres",
+      "destination": "experiments/godot-anime-lab/materials/residence_plain.tres",
+      "bytes": 723,
+      "sha256": "1b3eccdbe33da305272be98e395f160d9d3d5b9dee40058445634b28fe358981"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "materials/residence_plaster.tres",
+      "destination": "experiments/godot-anime-lab/materials/residence_plaster.tres",
+      "bytes": 887,
+      "sha256": "3dc70b2f58300be93429c81d6a255bd64c9195c84d00b17b3aba9d2715d9decc"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "meshes/f1_ancient_oak_lod1.res",
+      "destination": "experiments/godot-anime-lab/meshes/f1_ancient_oak_lod1.res",
+      "bytes": 2450009,
+      "sha256": "e91299d864de28ad74cecd09b01f79b157df16119b9d0e50a15320661dfa8801"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "meshes/f1_herb_planter_lod1.res",
+      "destination": "experiments/godot-anime-lab/meshes/f1_herb_planter_lod1.res",
+      "bytes": 339917,
+      "sha256": "86796c101b5468950c684900060bfdc7f0a5ec3e6162852a80b9918aa973e9f1"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "meshes/f1_meadow_grass_lod1.res",
+      "destination": "experiments/godot-anime-lab/meshes/f1_meadow_grass_lod1.res",
+      "bytes": 59625,
+      "sha256": "56e68e91f4326dd9bfaa907ae5790a5d9674ceb3b481814df9e952aee4579433"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "meshes/f1_mossy_boulder_cluster_lod1.res",
+      "destination": "experiments/godot-anime-lab/meshes/f1_mossy_boulder_cluster_lod1.res",
+      "bytes": 87901,
+      "sha256": "346f8c4aa995665ca3a2f6b7bf699eebebea4f7b7af5f69253b1df54fb50d87b"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "meshes/f1_residence_01_lod1.res",
+      "destination": "experiments/godot-anime-lab/meshes/f1_residence_01_lod1.res",
+      "bytes": 11782574,
+      "sha256": "e8c0c7415e31360dee6f8c0a9f1ec57d939ab2b3e27846a9ae5b6bb2a2cd14d3"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "meshes/f1_residence_03_lod1.res",
+      "destination": "experiments/godot-anime-lab/meshes/f1_residence_03_lod1.res",
+      "bytes": 14307516,
+      "sha256": "60646d530e4faabc34977e024fe858d51a7949d89628ca606968b0c7670e3186"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "meshes/f1_roadside_milestone_lod1.res",
+      "destination": "experiments/godot-anime-lab/meshes/f1_roadside_milestone_lod1.res",
+      "bytes": 56505,
+      "sha256": "02e8265c08b7ae4ccf7953050db5499a0d0b2abd788d494d1003de175bedfc01"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "meshes/f1_stone_pine_lod1.res",
+      "destination": "experiments/godot-anime-lab/meshes/f1_stone_pine_lod1.res",
+      "bytes": 721920,
+      "sha256": "bf5ea5c81cc2e8da88df9b0a4d34ebf600df9c6ab0b001a52ffeb683678a3881"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "meshes/f1_young_maple_lod1.res",
+      "destination": "experiments/godot-anime-lab/meshes/f1_young_maple_lod1.res",
+      "bytes": 2420969,
+      "sha256": "3788a9f757ff0c4050c2fed68bd7a5354d6ed75d14b77c05e76fd418f4c73bd7"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "model_catalog.json",
+      "destination": "experiments/godot-anime-lab/model_catalog.json",
+      "bytes": 95822,
+      "sha256": "a01dca2a50a385b53fe49e900594b47c465c7ecc84d12e0792031959ff1afdbb"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "project.godot",
+      "destination": "experiments/godot-anime-lab/project.godot",
+      "bytes": 801,
+      "sha256": "2c976912666222ca48f96e06200bdeaf9616bae6386c925e079ffa6fee922265"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "scenes/material_lab.tscn",
+      "destination": "experiments/godot-anime-lab/scenes/material_lab.tscn",
+      "bytes": 8489,
+      "sha256": "fa91910f398f443607e8589fe57331dcf4b8a2720840e5d9f2534e9ae5666943"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "shaders/anime_post.gdshader",
+      "destination": "experiments/godot-anime-lab/shaders/anime_post.gdshader",
+      "bytes": 3337,
+      "sha256": "4b651a52d78a07631171deaad3ccf8cb0ec7db275463a34fa6908b6ac243d97d"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "shaders/anime_post.gdshader.uid",
+      "destination": "experiments/godot-anime-lab/shaders/anime_post.gdshader.uid",
+      "bytes": 20,
+      "sha256": "5207a8861cf040883442652db7c1bc5f90663c56a487d1aa720246d27ce93cfc"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "shaders/anime_style.gdshaderinc",
+      "destination": "experiments/godot-anime-lab/shaders/anime_style.gdshaderinc",
+      "bytes": 3638,
+      "sha256": "4646312d6258d41af0f3c516445107964ef42ebdc91a6f5e9c591849f8376290"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "shaders/anime_style.gdshaderinc.uid",
+      "destination": "experiments/godot-anime-lab/shaders/anime_style.gdshaderinc.uid",
+      "bytes": 19,
+      "sha256": "226785ad91462588b8455cd1cfc1965883870037287ca5149ee5fdbd68a91b69"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "shaders/anime_surface.gdshader",
+      "destination": "experiments/godot-anime-lab/shaders/anime_surface.gdshader",
+      "bytes": 5364,
+      "sha256": "f20b538c54500af67120cdc4bd5914df0f4f63d4215d114dc8a880b2815945f6"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "shaders/anime_surface.gdshader.uid",
+      "destination": "experiments/godot-anime-lab/shaders/anime_surface.gdshader.uid",
+      "bytes": 20,
+      "sha256": "755c1ad977ca55e4be7cb09777895a2c2026c63d96c8fce16224ce0cb8378979"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "tools/build_catalog.py",
+      "destination": "experiments/godot-anime-lab/tools/build_catalog.py",
+      "bytes": 14207,
+      "sha256": "383b556fdef789c9c1a3301f055e907475ccfe62252671c9e5ef60c15367e44e"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "tools/build_lab.gd",
+      "destination": "experiments/godot-anime-lab/tools/build_lab.gd",
+      "bytes": 15160,
+      "sha256": "f97e3474e1e5c0622ef8a63676c3796af27f44bdd953ea8bf01d60d15301541b"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "tools/build_lab.gd.uid",
+      "destination": "experiments/godot-anime-lab/tools/build_lab.gd.uid",
+      "bytes": 20,
+      "sha256": "662990765617e6cfcfc0229584a1f888e05463af65b65fa2d105eaad1b2e6f12"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "tools/render_probe.gd",
+      "destination": "experiments/godot-anime-lab/tools/render_probe.gd",
+      "bytes": 12477,
+      "sha256": "80f0dda4794c17c3721882d74ed20c52cb56a4290bf766a87f3489cdc760d8bb"
+    },
+    {
+      "scope": "shader_lab_saved_files",
+      "source_relative": "tools/render_probe.gd.uid",
+      "destination": "experiments/godot-anime-lab/tools/render_probe.gd.uid",
+      "bytes": 20,
+      "sha256": "d366cf2e26fd5f0ccb6c872df5e7f710c63a26fb7820e20207cdd35099abfaa9"
+    },
+    {
+      "scope": "earlier_shader_validation_capture",
+      "source_relative": "_work/captures/01_baseline_post_on.png",
+      "destination": "docs/validation/local_work_2026-09-13/shader-lab/01_baseline_post_on.png",
+      "bytes": 170514,
+      "sha256": "e953c77d1120fd535e7315771a6005f47fb4bac84f89f50144c0f316d25f3f01"
+    },
+    {
+      "scope": "earlier_shader_validation_capture",
+      "source_relative": "_work/captures/01b_baseline_post_off.png",
+      "destination": "docs/validation/local_work_2026-09-13/shader-lab/01b_baseline_post_off.png",
+      "bytes": 167424,
+      "sha256": "5631300c9a5711a1832de68aaa0427d70d5e87968ef7bf558df1c294a732007b"
+    },
+    {
+      "scope": "earlier_shader_validation_capture",
+      "source_relative": "_work/captures/02_live_include_edit.png",
+      "destination": "docs/validation/local_work_2026-09-13/shader-lab/02_live_include_edit.png",
+      "bytes": 167285,
+      "sha256": "ef5256d01d6900fe57588ed1a78d1654f491aec0865b504ed2789ae74411b439"
+    },
+    {
+      "scope": "earlier_shader_validation_capture",
+      "source_relative": "_work/captures/03_shared_disk_reload_edit.png",
+      "destination": "docs/validation/local_work_2026-09-13/shader-lab/03_shared_disk_reload_edit.png",
+      "bytes": 167285,
+      "sha256": "ef5256d01d6900fe57588ed1a78d1654f491aec0865b504ed2789ae74411b439"
+    },
+    {
+      "scope": "earlier_shader_validation_capture",
+      "source_relative": "_work/captures/04_restored_default.png",
+      "destination": "docs/validation/local_work_2026-09-13/shader-lab/04_restored_default.png",
+      "bytes": 170514,
+      "sha256": "e953c77d1120fd535e7315771a6005f47fb4bac84f89f50144c0f316d25f3f01"
+    },
+    {
+      "scope": "earlier_shader_validation_record",
+      "source_relative": "_work/validation.json",
+      "destination": "docs/validation/local_work_2026-09-13/shader-lab/validation.json",
+      "bytes": 10864,
+      "sha256": "8bb3d9e3c88a739c570eb95005346f70141d5a14fa97d89416092d0271a5c819"
+    },
+    {
+      "scope": "earlier_shader_validation_record",
+      "source_relative": "_work/copy_manifest.json",
+      "destination": "docs/validation/local_work_2026-09-13/shader-lab/copy_manifest.json",
+      "bytes": 15446,
+      "sha256": "a927c85a70632844294b4cc943a99afc922b939d0fa6662730f31507ffaf1168"
+    },
+    {
+      "scope": "earlier_shader_validation_record",
+      "source_relative": "_work/SUPERVISOR_ACCEPTANCE.md",
+      "destination": "docs/validation/local_work_2026-09-13/shader-lab/SUPERVISOR_ACCEPTANCE.md",
+      "bytes": 3458,
+      "sha256": "8f6cb3aec34aa8ecaafc493dc2c906785cf56a675f777c7bffeb6fe7bc03cdd1"
+    },
+    {
+      "scope": "earlier_gm_validation_record",
+      "source_relative": "tmp/gm-autonomy-20260913/supervisor-final-review.json",
+      "destination": "docs/validation/local_work_2026-09-13/gm/supervisor-final-review.json",
+      "bytes": 1503,
+      "sha256": "5c2a1aa104459daa73b4cf8d870eb68f335ae7463771e96f6a01b04e4b852178"
+    },
+    {
+      "scope": "earlier_gm_validation_record",
+      "source_relative": "tmp/gm-autonomy-20260913/validate-causal_repair.json",
+      "destination": "docs/validation/local_work_2026-09-13/gm/validate-causal_repair.json",
+      "bytes": 30016,
+      "sha256": "470824baa352e58c6e498c6243a8b6b3aa975d221cc02b64012bc0fadef0b173"
+    },
+    {
+      "scope": "earlier_gm_validation_record",
+      "source_relative": "tmp/gm-autonomy-20260913/validate-watch_two_delivery.json",
+      "destination": "docs/validation/local_work_2026-09-13/gm/validate-watch_two_delivery.json",
+      "bytes": 8559,
+      "sha256": "c3ce6c9ed2dbd4b005977b34c4260623e3634b37355ba99e718d025a4298d701"
+    },
+    {
+      "scope": "earlier_gm_validation_record",
+      "source_relative": "tmp/gm-autonomy-20260913/local-trial-h47r2-verification-20260913.json",
+      "destination": "docs/validation/local_work_2026-09-13/gm/local-trial-h47r2-verification-20260913.json",
+      "bytes": 2622,
+      "sha256": "aa74b84b12d244c75ccbe7e2e9e8f855cac96ca4a694d50d59147f95d7885156"
+    }
+  ],
+  "excluded": [
+    "Transfer/ contains private world state",
+    "Old deliveries/20260912-art and plugin_probe_2026-09-10 outputs are outside today's pending work",
+    "Private saves, API credentials, model/account databases and private execution logs",
+    "Godot import/editor cache and desktop/browser screenshots",
+    "Third-party SAO reference-image binary files; source links and external previews are documented separately"
+  ],
+  "limitations": [
+    "Unsaved editor buffers cannot be captured by this filesystem snapshot",
+    "Prior validation evidence is preserved with its original scope; this upload does not rerun engines or model providers"
+  ]
+}

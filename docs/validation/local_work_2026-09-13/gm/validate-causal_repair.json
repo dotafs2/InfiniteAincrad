@@ -1,0 +1,878 @@
+{
+  "checks": [
+    {
+      "check": "exit_ok_after_the_causal_repair",
+      "detail": "",
+      "ok": true
+    },
+    {
+      "check": "status_completed",
+      "detail": {
+        "blocked_reason": null,
+        "cycle_id": "auto-d827199916e7b1ab",
+        "declined": [],
+        "deferred_claims": [
+          {
+            "gm_id": "gm-07",
+            "issue_id": "issue-7d65d91dee0c"
+          }
+        ],
+        "gm": {
+          "gm_id": "gm-02",
+          "issue_id": "issue-14e0bda801d5",
+          "observation_origin": "autonomous_observation"
+        },
+        "independently_tested": {
+          "failed_checks": [],
+          "host_gate_ok": true,
+          "runtime_checks": {
+            "deployed_bytes_match_release": true,
+            "every_phase_bound_to_this_release": true,
+            "every_phase_reported_ok": true,
+            "fresh_output_for_this_nonce": true,
+            "installed": true,
+            "issue_id_matches": true,
+            "no_phase_timed_out": true,
+            "owned_processes_exited": true,
+            "release_digest_matches": true,
+            "runtime_exit_ok": true,
+            "runtime_reports_ok": true,
+            "same_save_continuation": true,
+            "used_not_invented": true,
+            "world_id_matches": true
+          }
+        },
+        "installed": true,
+        "kind": "gm_autonomy_cycle_report",
+        "limits": {
+          "deadline_seconds": 1500,
+          "max_attempts_per_issue": 3,
+          "max_dispatches": 8,
+          "max_gms": 10,
+          "max_issues_per_cycle": 1,
+          "max_issues_per_gm": 4,
+          "max_publishes": 2
+        },
+        "mode": "offline_fixture",
+        "next_stage": null,
+        "note": "offline fixture plumbing; the GM decisions are scripted fakes and this is not real DeepSeek GM autonomy",
+        "owned_processes": {
+          "all_observed_members_exited": true,
+          "members": [
+            {
+              "creation_time_windows_100ns": 134337607972552527,
+              "exit_code": 0,
+              "pid": 504024,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607973545157,
+              "exit_code": 0,
+              "pid": 498804,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607975595638,
+              "exit_code": 0,
+              "pid": 517044,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607975726069,
+              "exit_code": 0,
+              "pid": 502560,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607976231585,
+              "exit_code": 0,
+              "pid": 495960,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607976339438,
+              "exit_code": 0,
+              "pid": 507924,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607976726498,
+              "exit_code": 0,
+              "pid": 515940,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607976780669,
+              "exit_code": 0,
+              "pid": 516852,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607978063090,
+              "exit_code": 0,
+              "pid": 198844,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607978115260,
+              "exit_code": 0,
+              "pid": 509580,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607979342339,
+              "exit_code": 0,
+              "pid": 507856,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607979397551,
+              "exit_code": 0,
+              "pid": 515904,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607980684098,
+              "exit_code": 0,
+              "pid": 444420,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607980868674,
+              "exit_code": 0,
+              "pid": 514112,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607982123537,
+              "exit_code": 0,
+              "pid": 516816,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607982172818,
+              "exit_code": 0,
+              "pid": 503796,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607983430002,
+              "exit_code": 0,
+              "pid": 205576,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607983487463,
+              "exit_code": 0,
+              "pid": 511140,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607984745363,
+              "exit_code": 0,
+              "pid": 514532,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607984798387,
+              "exit_code": 0,
+              "pid": 516872,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607986085299,
+              "exit_code": 0,
+              "pid": 507520,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607986149468,
+              "exit_code": 0,
+              "pid": 513448,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607987374179,
+              "exit_code": 0,
+              "pid": 494604,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607987425421,
+              "exit_code": 0,
+              "pid": 494536,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607988656966,
+              "exit_code": 0,
+              "pid": 507760,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607988709208,
+              "exit_code": 0,
+              "pid": 482620,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607989911561,
+              "exit_code": 0,
+              "pid": 515948,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607990024054,
+              "exit_code": 0,
+              "pid": 517012,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607990502696,
+              "exit_code": 0,
+              "pid": 492144,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337607990612582,
+              "exit_code": 0,
+              "pid": 490284,
+              "stage": "observe"
+            },
+            {
+              "creation_time_windows_100ns": 134337608037001869,
+              "exit_code": 0,
+              "pid": 517836,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608037980683,
+              "exit_code": 0,
+              "pid": 517784,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608039818947,
+              "exit_code": 0,
+              "pid": 518076,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608039936869,
+              "exit_code": 0,
+              "pid": 518036,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608040398312,
+              "exit_code": 0,
+              "pid": 518056,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608040790687,
+              "exit_code": 0,
+              "pid": 517960,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608040897974,
+              "exit_code": 0,
+              "pid": 517944,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608041237594,
+              "exit_code": 0,
+              "pid": 502420,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608041347095,
+              "exit_code": 0,
+              "pid": 517284,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608041853809,
+              "exit_code": 0,
+              "pid": 517312,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608041965334,
+              "exit_code": 0,
+              "pid": 517204,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608042327690,
+              "exit_code": 0,
+              "pid": 491288,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608042380539,
+              "exit_code": 0,
+              "pid": 517260,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608043621115,
+              "exit_code": 0,
+              "pid": 517448,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608045125237,
+              "exit_code": 0,
+              "pid": 516932,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608048460741,
+              "exit_code": 0,
+              "pid": 517144,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608048886748,
+              "exit_code": 0,
+              "pid": 517640,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608048990660,
+              "exit_code": 0,
+              "pid": 517844,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608049406354,
+              "exit_code": 0,
+              "pid": 517632,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608049511975,
+              "exit_code": 0,
+              "pid": 517868,
+              "stage": "candidate"
+            },
+            {
+              "creation_time_windows_100ns": 134337608058549307,
+              "exit_code": 0,
+              "pid": 517152,
+              "stage": "verify"
+            },
+            {
+              "creation_time_windows_100ns": 134337608063863851,
+              "exit_code": 0,
+              "pid": 517908,
+              "stage": "verify"
+            },
+            {
+              "creation_time_windows_100ns": 134337608068283275,
+              "exit_code": 0,
+              "pid": 516340,
+              "stage": "feedback"
+            },
+            {
+              "creation_time_windows_100ns": 134337608069298749,
+              "exit_code": 0,
+              "pid": 514124,
+              "stage": "feedback"
+            },
+            {
+              "creation_time_windows_100ns": 134337608071290974,
+              "exit_code": 0,
+              "pid": 518004,
+              "stage": "feedback"
+            },
+            {
+              "creation_time_windows_100ns": 134337608071422322,
+              "exit_code": 0,
+              "pid": 518136,
+              "stage": "feedback"
+            },
+            {
+              "creation_time_windows_100ns": 134337608071920828,
+              "exit_code": 0,
+              "pid": 501140,
+              "stage": "feedback"
+            },
+            {
+              "creation_time_windows_100ns": 134337608072391495,
+              "exit_code": 0,
+              "pid": 517256,
+              "stage": "feedback"
+            },
+            {
+              "creation_time_windows_100ns": 134337608072444193,
+              "exit_code": 0,
+              "pid": 510432,
+              "stage": "feedback"
+            },
+            {
+              "creation_time_windows_100ns": 134337608073637978,
+              "exit_code": 0,
+              "pid": 518120,
+              "stage": "feedback"
+            },
+            {
+              "creation_time_windows_100ns": 134337608073742568,
+              "exit_code": 0,
+              "pid": 498232,
+              "stage": "feedback"
+            },
+            {
+              "creation_time_windows_100ns": 134337608074444486,
+              "exit_code": 0,
+              "pid": 517340,
+              "stage": "feedback"
+            },
+            {
+              "creation_time_windows_100ns": 134337608074676225,
+              "exit_code": 0,
+              "pid": 517912,
+              "stage": "feedback"
+            }
+          ],
+          "windows_job": true
+        },
+        "owner_lock_recovered": null,
+        "policy": {
+          "policy_id": "gm-autonomy-offline-causal_repair",
+          "policy_sha256": "7caf81c26ea5439cee56666d378f7e8aefa1bd3b6073951a71398ba8de38eca0",
+          "world_id": "fixture:well-street"
+        },
+        "provenance": {
+          "gm_transport": "scripted_fake_local_subprocess",
+          "mode": "offline_fixture",
+          "world_origin": "labelled_fixture_genesis"
+        },
+        "release_digest": "b38d6c8c9040e6e852826945da97092ab32e52f497d4fbe311ba8183c4e8d44b",
+        "report_path": "tmp\\gm-autonomy-20260913\\runs\\causal_repair-20260913T081316Z-2c87\\state\\autonomy\\auto-d827199916e7b1ab\\report.json",
+        "schema_version": 1,
+        "stage_status": {
+          "candidate": "done",
+          "feedback": "done",
+          "observe": "done",
+          "publish": "done",
+          "validate": "done",
+          "verify": "done"
+        },
+        "started_utc": "2026-09-13T08:13:17.239725+00:00",
+        "status": "completed",
+        "updated_utc": "2026-09-13T08:13:27.543755+00:00",
+        "usage": {
+          "attempts": {
+            "issue-14e0bda801d5": 2
+          },
+          "batch_note": "one observe batch can carry up to max_gms GM turns; dispatch_batches counts the subprocess batches, not HTTP requests",
+          "currency": "not derived from token counters",
+          "dispatch_batches": {
+            "code": 2,
+            "feedback": 2,
+            "observe": 1
+          },
+          "feedback_attempts": [
+            {
+              "acknowledged": true,
+              "attempt": 1,
+              "decision": "accept",
+              "exit_code": 0,
+              "next_work": "offline fixture acknowledgement of receipt outcome released_and_verified",
+              "owned": {
+                "active_processes": 0,
+                "all_member_exit_codes_known": false,
+                "all_members_exited": true,
+                "containment": "windows_kill_on_close_job",
+                "member_identity_list_complete": false,
+                "observed_members": [
+                  {
+                    "creation_time_windows_100ns": 134337608068283275,
+                    "exit_code": 0,
+                    "pid": 516340,
+                    "running": false
+                  },
+                  {
+                    "creation_time_windows_100ns": 134337608069298749,
+                    "exit_code": 0,
+                    "pid": 514124,
+                    "running": false
+                  },
+                  {
+                    "creation_time_windows_100ns": 134337608071290974,
+                    "exit_code": 0,
+                    "pid": 518004,
+                    "running": false
+                  },
+                  {
+                    "creation_time_windows_100ns": 134337608071422322,
+                    "exit_code": 0,
+                    "pid": 518136,
+                    "running": false
+                  },
+                  {
+                    "creation_time_windows_100ns": 134337608071920828,
+                    "exit_code": 0,
+                    "pid": 501140,
+                    "running": false
+                  },
+                  {
+                    "creation_time_windows_100ns": 134337608072391495,
+                    "exit_code": 0,
+                    "pid": 517256,
+                    "running": false
+                  },
+                  {
+                    "creation_time_windows_100ns": 134337608072444193,
+                    "exit_code": 0,
+                    "pid": 510432,
+                    "running": false
+                  },
+                  {
+                    "creation_time_windows_100ns": 134337608073637978,
+                    "exit_code": 0,
+                    "pid": 518120,
+                    "running": false
+                  },
+                  {
+                    "creation_time_windows_100ns": 134337608073742568,
+                    "exit_code": 0,
+                    "pid": 498232,
+                    "running": false
+                  },
+                  {
+                    "creation_time_windows_100ns": 134337608074444486,
+                    "exit_code": 0,
+                    "pid": 517340,
+                    "running": false
+                  },
+                  {
+                    "creation_time_windows_100ns": 134337608074676225,
+                    "exit_code": 0,
+                    "pid": 517912,
+                    "running": false
+                  }
+                ],
+                "observed_nonzero_exits": [],
+                "total_assigned_processes": 12,
+                "wrapper_pid": 516340
+              },
+              "receipt_sha256": "5b3c47e349c68a6854a77896767f20adc3bd9adbc524188adf947f5db1aea8a7",
+              "seconds": 0.705,
+              "status": "ok",
+              "usage": {
+                "cached_input_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 0,
+                "reasoning_output_tokens": 0
+              },
+              "usage_measured": true
+            }
+          ],
+          "gm_turns": 14,
+          "gm_turns_note": "native GM turn dispatches (one GM decision is one turn), including an in-flight reservation; this is not an HTTP request count and not a currency charge",
+          "max_model_calls": 80,
+          "model_calls": 14,
+          "unknown": null
+        },
+        "used": true,
+        "what_changed": [
+          "capabilities/well_stock_lookup.gd"
+        ],
+        "world_observed": {
+          "capability_status": "enabled",
+          "current_mechanism_code": "",
+          "depleted_probe": false,
+          "event_types": [
+            "resident_need_recorded",
+            "gm_need_approved",
+            "water_drawn",
+            "water_consumed"
+          ],
+          "installed_but_unused": false,
+          "mechanism_invoked": false,
+          "phase": "resume",
+          "resident_consumed_water": 1.0,
+          "resident_inventory_water": 0.0,
+          "resident_water_drawn": 1.0,
+          "save_sha256": "80b525746fc01250d3920d0f66d68f42392db313c073e040016e5b534a3ff4c9",
+          "turn": 3.0,
+          "water_drawn_this_phase": 0,
+          "well_water": 0.0,
+          "world_id": "fixture:well-street"
+        }
+      },
+      "ok": true
+    },
+    {
+      "check": "one_observe_and_two_coding_batches",
+      "detail": {
+        "code": 2,
+        "feedback": 2,
+        "observe": 1
+      },
+      "ok": true
+    },
+    {
+      "check": "exactly_two_permitted_publications",
+      "detail": 2,
+      "ok": true
+    },
+    {
+      "check": "exactly_one_repair_round",
+      "detail": 1,
+      "ok": true
+    },
+    {
+      "check": "cycle_is_not_left_blocked",
+      "detail": {
+        "blocked_reason": null,
+        "status": "completed"
+      },
+      "ok": true
+    },
+    {
+      "check": "the_first_candidate_failed_before_install_or_use",
+      "detail": {
+        "installed": false,
+        "installed_but_unused": false,
+        "status": "failed",
+        "used": false
+      },
+      "ok": true
+    },
+    {
+      "check": "the_failure_is_a_reported_runtime_mechanism_error",
+      "detail": {
+        "code": "runtime_mechanism_error",
+        "detail": "the world snapshot has no key wellWater",
+        "ok": false,
+        "resolved_key": "wellWater"
+      },
+      "ok": true
+    },
+    {
+      "check": "the_failure_is_conclusive_not_inconclusive",
+      "detail": [
+        "every_phase_reported_ok",
+        "installed",
+        "runtime_exit_ok",
+        "runtime_reports_ok",
+        "same_save_continuation",
+        "used_not_invented"
+      ],
+      "ok": true
+    },
+    {
+      "check": "the_owner_asked_for_the_repair",
+      "detail": null,
+      "ok": true
+    },
+    {
+      "check": "the_two_releases_published_behaviorally_different_bytes",
+      "detail": {
+        "first": "87d8d1cf1a2c79722e660e7d865de726e4cd13b8f642bb109b83757270af859c",
+        "second": "80e9eac4849ee099facdd3445378840867ed3765f0603e0232c3a1b85d2a6f26"
+      },
+      "ok": true
+    },
+    {
+      "check": "the_second_release_used_the_owned_prior_bytes_as_its_base",
+      "detail": {
+        "bytes": 738,
+        "previous_sha256": "87d8d1cf1a2c79722e660e7d865de726e4cd13b8f642bb109b83757270af859c",
+        "sha256": "80e9eac4849ee099facdd3445378840867ed3765f0603e0232c3a1b85d2a6f26",
+        "source": "game/capabilities/well_stock_lookup.gd",
+        "target": "capabilities/well_stock_lookup.gd"
+      },
+      "ok": true
+    },
+    {
+      "check": "the_deployed_module_is_the_corrected_release",
+      "detail": null,
+      "ok": true
+    },
+    {
+      "check": "the_second_verification_passed_every_phase",
+      "detail": [],
+      "ok": true
+    },
+    {
+      "check": "the_same_save_continued_with_exactly_one_water_use",
+      "detail": {
+        "consumed": 1,
+        "drawn": 1,
+        "well_water": 0
+      },
+      "ok": true
+    },
+    {
+      "check": "the_failed_candidate_bytes_were_preserved",
+      "detail": [
+        "tmp\\gm-autonomy-20260913\\runs\\causal_repair-20260913T081316Z-2c87\\state\\candidates\\issue-14e0bda801d5\\game\\capabilities\\well_stock_lookup.gd"
+      ],
+      "ok": true
+    },
+    {
+      "check": "dev_checkout_gained_no_source_file",
+      "detail": null,
+      "ok": true
+    },
+    {
+      "check": "counterfactual_replayed_bad_bytes_against_fresh_facts",
+      "detail": {
+        "exit_code": 1,
+        "manipulated": true,
+        "observed": {
+          "code": "runtime_mechanism_error",
+          "continuation_ok": false,
+          "failures": [
+            "candidate mechanism lookup failed before install/use: runtime_mechanism_error"
+          ],
+          "installed": false,
+          "issue_id": "counterfactual",
+          "mechanism": {
+            "code": "runtime_mechanism_error",
+            "detail": "the world snapshot has no key wellWater",
+            "ok": false,
+            "resolved_key": "wellWater"
+          },
+          "nonce": "counterfactual-replay",
+          "observation": {
+            "capability_status": null,
+            "current_mechanism_code": "runtime_mechanism_error",
+            "depleted_probe": false,
+            "event_types": [
+              "resident_need_recorded"
+            ],
+            "installed_but_unused": false,
+            "mechanism_invoked": true,
+            "phase": "open",
+            "resident_consumed_water": 0.0,
+            "resident_inventory_water": 0.0,
+            "resident_water_drawn": 0.0,
+            "save_sha256": "147c3ea4f57ce2b5a49f01267e38809a70108853270fdee6e98f8dd967f9f89c",
+            "turn": 1.0,
+            "water_drawn_this_phase": 0,
+            "well_water": 1.0,
+            "world_id": "fixture:well-street"
+          },
+          "ok": false,
+          "paid_model_calls": 0,
+          "provenance": "offline_gm_autonomy_fixture",
+          "release_digest": "counterfactual-bad",
+          "used": false,
+          "world_id": "fixture:well-street"
+        },
+        "replay_stdout_tail": "_water\":0.0,\"resident_inventory_water\":0.0,\"resident_water_drawn\":0.0,\"save_sha256\":\"147c3ea4f57ce2b5a49f01267e38809a70108853270fdee6e98f8dd967f9f89c\",\"turn\":1.0,\"water_drawn_this_phase\":0,\"well_water\":1.0,\"world_id\":\"fixture:well-street\"},\"ok\":false,\"paid_model_calls\":0,\"provenance\":\"offline_gm_autonomy_fixture\",\"release_digest\":\"counterfactual-bad\",\"used\":false,\"world_id\":\"fixture:well-street\"}\n",
+        "save_sha_after": "147c3ea4f57ce2b5a49f01267e38809a70108853270fdee6e98f8dd967f9f89c",
+        "save_sha_before": "147c3ea4f57ce2b5a49f01267e38809a70108853270fdee6e98f8dd967f9f89c",
+        "seeded": true
+      },
+      "ok": true
+    },
+    {
+      "check": "bad_bytes_still_fail_after_marker_and_count_manipulation",
+      "detail": {
+        "code": "runtime_mechanism_error",
+        "exit_code": 1
+      },
+      "ok": true
+    },
+    {
+      "check": "counterfactual_never_installed_or_used",
+      "detail": {
+        "code": "runtime_mechanism_error",
+        "continuation_ok": false,
+        "failures": [
+          "candidate mechanism lookup failed before install/use: runtime_mechanism_error"
+        ],
+        "installed": false,
+        "issue_id": "counterfactual",
+        "mechanism": {
+          "code": "runtime_mechanism_error",
+          "detail": "the world snapshot has no key wellWater",
+          "ok": false,
+          "resolved_key": "wellWater"
+        },
+        "nonce": "counterfactual-replay",
+        "observation": {
+          "capability_status": null,
+          "current_mechanism_code": "runtime_mechanism_error",
+          "depleted_probe": false,
+          "event_types": [
+            "resident_need_recorded"
+          ],
+          "installed_but_unused": false,
+          "mechanism_invoked": true,
+          "phase": "open",
+          "resident_consumed_water": 0.0,
+          "resident_inventory_water": 0.0,
+          "resident_water_drawn": 0.0,
+          "save_sha256": "147c3ea4f57ce2b5a49f01267e38809a70108853270fdee6e98f8dd967f9f89c",
+          "turn": 1.0,
+          "water_drawn_this_phase": 0,
+          "well_water": 1.0,
+          "world_id": "fixture:well-street"
+        },
+        "ok": false,
+        "paid_model_calls": 0,
+        "provenance": "offline_gm_autonomy_fixture",
+        "release_digest": "counterfactual-bad",
+        "used": false,
+        "world_id": "fixture:well-street"
+      },
+      "ok": true
+    },
+    {
+      "check": "seed_fixture_preceded_publication",
+      "detail": {
+        "exit_code": 0,
+        "observed": {
+          "code": "seed_saved",
+          "continuation_ok": false,
+          "failures": [],
+          "installed": false,
+          "issue_id": "",
+          "nonce": "provision-seed",
+          "observation": {
+            "capability_status": null,
+            "current_mechanism_code": "",
+            "depleted_probe": false,
+            "event_types": [
+              "resident_need_recorded"
+            ],
+            "installed_but_unused": false,
+            "mechanism_invoked": false,
+            "phase": "seed",
+            "resident_consumed_water": 0.0,
+            "resident_inventory_water": 0.0,
+            "resident_water_drawn": 0.0,
+            "save_sha256": "78d7fdafe680255960e1bf612b6618801cfb6aac08408d0b03032b0f84bf74b0",
+            "turn": 1.0,
+            "water_drawn_this_phase": 0,
+            "well_water": 1.0,
+            "world_id": "fixture:well-street"
+          },
+          "ok": true,
+          "paid_model_calls": 0,
+          "provenance": "offline_gm_autonomy_fixture",
+          "release_digest": "",
+          "seed": true,
+          "used": false,
+          "world_id": "fixture:well-street"
+        },
+        "stderr_tail": "ERROR: Could not create directory: 'user://logs'.\n   at: make_dir_recursive (core/io/dir_access.cpp:179)\nERROR: Failed to open log file for writing: user://logs/godot.log\n   at: rotate_file (core/io/logger.cpp:169)\nERROR: Failed to read the root certificate store.\n   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)\n"
+      },
+      "ok": true
+    }
+  ],
+  "cycle_dir": "tmp\\gm-autonomy-20260913\\runs\\causal_repair-20260913T081316Z-2c87\\state\\autonomy\\auto-d827199916e7b1ab",
+  "kind": "gm_autonomy_scenario",
+  "ok": true,
+  "scenario": "causal_repair"
+}

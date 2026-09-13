@@ -1,0 +1,61 @@
+{
+  "fixture_root": "C:\\InfiniteAincrad\\tmp\\gm-autonomy-20260913\\local-trial\\local-trial-h47r2-20260913",
+  "hashes_after": {
+    "marker": "4a6fc8d5f7922cd9252415a7cee937009455fa8bd003e5b463b5d3cc4568af7f",
+    "policy": "a4cdb3c74d090e58512590a95ba96dd3d3bd4f94a7359a6452789c0487c9fd8c",
+    "save": "85480e697d83f94ab4a739614a598446e7f3a1e155b547196048f5056ee4460c"
+  },
+  "hashes_before": {
+    "marker": "4a6fc8d5f7922cd9252415a7cee937009455fa8bd003e5b463b5d3cc4568af7f",
+    "policy": "a4cdb3c74d090e58512590a95ba96dd3d3bd4f94a7359a6452789c0487c9fd8c",
+    "save": "85480e697d83f94ab4a739614a598446e7f3a1e155b547196048f5056ee4460c"
+  },
+  "hashes_unchanged": true,
+  "key_file_exists": true,
+  "key_file_path": "C:\\InfiniteAincrad\\private\\deepseek-api-key.txt",
+  "ledger_interrupted_unknown_tail": {
+    "note": "the interrupted DeepSeek correction stream tail stays unknown; it is never settled, zeroed, replayed or re-counted here",
+    "preserved": true,
+    "status": "unknown"
+  },
+  "ledger_kind": "carried_accounting_reference_ledger",
+  "ledger_measured_references": [
+    {
+      "path": "tmp/gm-autonomy-20260913/accounting-summary.json",
+      "present": true,
+      "sha256": "e3b811704efdd559676ae5b7a1278ca8eb952fda3946d491ef53777522bdbf1a"
+    },
+    {
+      "path": "tmp/gm-autonomy-20260913/usage-root.json",
+      "present": true,
+      "sha256": "b1176dcdc34af628301ae2f972211870f775a6445c1ac4c9dfd72b2950d09fe0"
+    },
+    {
+      "path": "tmp/gm-autonomy-20260913/deepseek-correction-usage-incomplete.json",
+      "present": true,
+      "sha256": "df5907e9c61e454217580d8931a8062e452e74744a046faff31b3055b654ed3c"
+    }
+  ],
+  "old_label_refusal_exit": 4,
+  "old_label_refusal_ledger_kind": "fixture_prior_ledger",
+  "old_label_refusal_status": "refused_fake_prior_ledger",
+  "preflight": {
+    "dispatched_turns": 0,
+    "dry_run_status": true,
+    "exit_code": 0,
+    "key_file_reference": "private\\deepseek-api-key.txt",
+    "model": "deepseek-flash",
+    "ok": true,
+    "planned_gm_identities": 10,
+    "prior_ledger_is_fake_fixture": false,
+    "prior_ledger_kind": "carried_accounting_reference_ledger",
+    "required_paths_missing": [],
+    "windows_sandbox": "unelevated"
+  },
+  "prior_ledger_path": "C:\\InfiniteAincrad\\tmp\\gm-autonomy-20260913\\local-trial\\local-trial-h47r2-20260913\\prior-ledger.json",
+  "required_paths_missing": [],
+  "reuse_exit": 0,
+  "reuse_status": "already_prepared",
+  "save_sha256_from_marker": "85480e697d83f94ab4a739614a598446e7f3a1e155b547196048f5056ee4460c",
+  "status_exit": 0
+}

@@ -1,0 +1,3249 @@
+{
+ "generated_at_utc": "2026-09-13T07:23:58Z",
+ "generator": "tools/build_catalog.py",
+ "source_root": "C:\\InfiniteAincrad",
+ "lab_root": "C:\\GodotAnimeLab",
+ "scanned_dirs": [
+  "game/assets/floor1/environment_kit_v2",
+  "game/assets/floor1/environment_kit_20",
+  "game/assets/floor1/residences",
+  "game/assets/floor1/deepseek_residences",
+  "game/assets/floor1",
+  "game/assets/market",
+  "game/assets/generated/artisan_workshops_20260912",
+  "game/assets/generated/shopfront_details_20260912",
+  "game/assets/generated/travel_cargo_20260912"
+ ],
+ "bounds": {
+  "max_depth": 4,
+  "max_files": 2000,
+  "model_ext": [
+   ".fbx",
+   ".glb",
+   ".gltf",
+   ".obj"
+  ]
+ },
+ "scope_note": "只扫描上列运行时光美术目录里的模型文件，不含 Blender 源文件、不含 private/ 目录、不含其它工程；不是全仓库美术清单。",
+ "totals": {
+  "logical_models": 119,
+  "model_files": 159,
+  "model_bytes": 767401756,
+  "copied_files": 9,
+  "copied_bytes": 169552892,
+  "displayed_files": 9
+ },
+ "folders": [
+  {
+   "dir": "game/assets/floor1/environment_kit_v2",
+   "category": "V2 现行环境套件（运行时）",
+   "exists": true,
+   "model_files": 60,
+   "bytes": 49894244,
+   "logical_models": 20
+  },
+  {
+   "dir": "game/assets/floor1/environment_kit_20",
+   "category": "V1 旧环境套件（运行时）",
+   "exists": true,
+   "model_files": 21,
+   "bytes": 30177016,
+   "logical_models": 21
+  },
+  {
+   "dir": "game/assets/floor1/residences",
+   "category": "住宅 01-05（运行时 art 目录，GLB 内含 LOD0/1/2）",
+   "exists": true,
+   "model_files": 5,
+   "bytes": 400755944,
+   "logical_models": 5
+  },
+  {
+   "dir": "game/assets/floor1/deepseek_residences",
+   "category": "住宅 06（草稿/待评审目录，见 manifest 状态字段）",
+   "exists": true,
+   "model_files": 1,
+   "bytes": 63655396,
+   "logical_models": 1
+  },
+  {
+   "dir": "game/assets/floor1",
+   "category": "Hero Kit（单文件，含大量模块）",
+   "exists": true,
+   "model_files": 1,
+   "bytes": 69677888,
+   "logical_models": 1
+  },
+  {
+   "dir": "game/assets/market",
+   "category": "Market Craft V5（单文件）",
+   "exists": true,
+   "model_files": 1,
+   "bytes": 114210064,
+   "logical_models": 1
+  },
+  {
+   "dir": "game/assets/generated/artisan_workshops_20260912",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "exists": true,
+   "model_files": 18,
+   "bytes": 5139688,
+   "logical_models": 18
+  },
+  {
+   "dir": "game/assets/generated/shopfront_details_20260912",
+   "category": "生成物 20260912 店面细节",
+   "exists": true,
+   "model_files": 16,
+   "bytes": 27231200,
+   "logical_models": 16
+  },
+  {
+   "dir": "game/assets/generated/travel_cargo_20260912",
+   "category": "生成物 20260912 旅行/货运道具",
+   "exists": true,
+   "model_files": 36,
+   "bytes": 6660316,
+   "logical_models": 36
+  }
+ ],
+ "models": [
+  {
+   "logical_id": "F1_ancient_oak",
+   "display_name": "古橡树",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 11549720,
+   "copied_variants": 1,
+   "displayed_variants": 1,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_ancient_oak_LOD0.glb",
+     "name": "F1_ancient_oak_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 7597564,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_ancient_oak_LOD1.glb",
+     "name": "F1_ancient_oak_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 2651520,
+     "sha256_in_manifest": "faf1751048b17ea5dce3a5005aa638c876f8e8f7bd15f8849be56bb40f91f791",
+     "copied": true,
+     "displayed_in_lab_scene": true,
+     "lab_path": "assets/v2_trees/F1_ancient_oak_LOD1.glb"
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_ancient_oak_LOD2.glb",
+     "name": "F1_ancient_oak_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 1300636,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_berry_bush",
+   "display_name": "浆果丛",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 1291136,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_berry_bush_LOD0.glb",
+     "name": "F1_berry_bush_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 708956,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_berry_bush_LOD1.glb",
+     "name": "F1_berry_bush_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 373520,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_berry_bush_LOD2.glb",
+     "name": "F1_berry_bush_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 208660,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_birch_grove",
+   "display_name": "白桦组三株",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 4507468,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_birch_grove_LOD0.glb",
+     "name": "F1_birch_grove_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 2478900,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_birch_grove_LOD1.glb",
+     "name": "F1_birch_grove_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 1334652,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_birch_grove_LOD2.glb",
+     "name": "F1_birch_grove_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 693916,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_canvas_rest_shelter",
+   "display_name": "帆布休憩棚",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 741552,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_canvas_rest_shelter_LOD0.glb",
+     "name": "F1_canvas_rest_shelter_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 415952,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_canvas_rest_shelter_LOD1.glb",
+     "name": "F1_canvas_rest_shelter_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 162800,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_canvas_rest_shelter_LOD2.glb",
+     "name": "F1_canvas_rest_shelter_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 162800,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_cypress_column",
+   "display_name": "柱形柏树",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 4934544,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_cypress_column_LOD0.glb",
+     "name": "F1_cypress_column_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 3366524,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_cypress_column_LOD1.glb",
+     "name": "F1_cypress_column_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 1138556,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_cypress_column_LOD2.glb",
+     "name": "F1_cypress_column_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 429464,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_fern_patch",
+   "display_name": "蕨类地被",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 895188,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_fern_patch_LOD0.glb",
+     "name": "F1_fern_patch_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 517356,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_fern_patch_LOD1.glb",
+     "name": "F1_fern_patch_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 260768,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_fern_patch_LOD2.glb",
+     "name": "F1_fern_patch_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 117064,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_flowering_shrub",
+   "display_name": "开花灌木",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 1586268,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_flowering_shrub_LOD0.glb",
+     "name": "F1_flowering_shrub_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 906520,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_flowering_shrub_LOD1.glb",
+     "name": "F1_flowering_shrub_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 455632,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_flowering_shrub_LOD2.glb",
+     "name": "F1_flowering_shrub_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 224116,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_herb_planter",
+   "display_name": "香草种植箱",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 1483884,
+   "copied_variants": 1,
+   "displayed_variants": 1,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_herb_planter_LOD0.glb",
+     "name": "F1_herb_planter_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 875284,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_herb_planter_LOD1.glb",
+     "name": "F1_herb_planter_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 357756,
+     "sha256_in_manifest": "f05f65de0ed85e10ca932e9cb801d2c2603c518e52136ed41ff949b1b9825f21",
+     "copied": true,
+     "displayed_in_lab_scene": true,
+     "lab_path": "assets/props/F1_herb_planter_LOD1.glb"
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_herb_planter_LOD2.glb",
+     "name": "F1_herb_planter_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 250844,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_ivy_wall_panel",
+   "display_name": "常春藤墙面",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 418100,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_ivy_wall_panel_LOD0.glb",
+     "name": "F1_ivy_wall_panel_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 254036,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_ivy_wall_panel_LOD1.glb",
+     "name": "F1_ivy_wall_panel_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 106720,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_ivy_wall_panel_LOD2.glb",
+     "name": "F1_ivy_wall_panel_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 57344,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_meadow_grass",
+   "display_name": "草甸草簇",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 229024,
+   "copied_variants": 1,
+   "displayed_variants": 1,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_meadow_grass_LOD0.glb",
+     "name": "F1_meadow_grass_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 138420,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_meadow_grass_LOD1.glb",
+     "name": "F1_meadow_grass_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 67184,
+     "sha256_in_manifest": "da0a038ecd7bbd2cfc6a6dee8a2ae21784a27d8da0cd8d66a5b80081493a57ba",
+     "copied": true,
+     "displayed_in_lab_scene": true,
+     "lab_path": "assets/props/F1_meadow_grass_LOD1.glb"
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_meadow_grass_LOD2.glb",
+     "name": "F1_meadow_grass_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 23420,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_mossy_boulder_cluster",
+   "display_name": "苔石组",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 417036,
+   "copied_variants": 1,
+   "displayed_variants": 1,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_mossy_boulder_cluster_LOD0.glb",
+     "name": "F1_mossy_boulder_cluster_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 199056,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_mossy_boulder_cluster_LOD1.glb",
+     "name": "F1_mossy_boulder_cluster_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 134576,
+     "sha256_in_manifest": "84fe5a1aa6a11fc0eecca8ad8c6850ccf18bef7a9d711613bf30206425932500",
+     "copied": true,
+     "displayed_in_lab_scene": true,
+     "lab_path": "assets/props/F1_mossy_boulder_cluster_LOD1.glb"
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_mossy_boulder_cluster_LOD2.glb",
+     "name": "F1_mossy_boulder_cluster_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 83404,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_mossy_fallen_log",
+   "display_name": "苔藓倒木",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 403064,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_mossy_fallen_log_LOD0.glb",
+     "name": "F1_mossy_fallen_log_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 174004,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_mossy_fallen_log_LOD1.glb",
+     "name": "F1_mossy_fallen_log_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 128084,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_mossy_fallen_log_LOD2.glb",
+     "name": "F1_mossy_fallen_log_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 100976,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_orchard_apple",
+   "display_name": "果园苹果树",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 7037168,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_orchard_apple_LOD0.glb",
+     "name": "F1_orchard_apple_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 3924836,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_orchard_apple_LOD1.glb",
+     "name": "F1_orchard_apple_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 2072416,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_orchard_apple_LOD2.glb",
+     "name": "F1_orchard_apple_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 1039916,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_reed_cluster",
+   "display_name": "芦苇簇",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 265488,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_reed_cluster_LOD0.glb",
+     "name": "F1_reed_cluster_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 134356,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_reed_cluster_LOD1.glb",
+     "name": "F1_reed_cluster_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 80276,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_reed_cluster_LOD2.glb",
+     "name": "F1_reed_cluster_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 50856,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_roadside_milestone",
+   "display_name": "道路里程碑",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 280712,
+   "copied_variants": 1,
+   "displayed_variants": 1,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_roadside_milestone_LOD0.glb",
+     "name": "F1_roadside_milestone_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 163520,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_roadside_milestone_LOD1.glb",
+     "name": "F1_roadside_milestone_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 62800,
+     "sha256_in_manifest": "01628a25a68e0dd6f4b7db5f526102e896f2e1e278450db0f13da1113857c231",
+     "copied": true,
+     "displayed_in_lab_scene": true,
+     "lab_path": "assets/props/F1_roadside_milestone_LOD1.glb"
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_roadside_milestone_LOD2.glb",
+     "name": "F1_roadside_milestone_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 54392,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_stone_pine",
+   "display_name": "石地松树",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 3661784,
+   "copied_variants": 1,
+   "displayed_variants": 1,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_stone_pine_LOD0.glb",
+     "name": "F1_stone_pine_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 2500732,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_stone_pine_LOD1.glb",
+     "name": "F1_stone_pine_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 843368,
+     "sha256_in_manifest": "85f5228cc3667e374dd07da6ef33e3013a8e42cef8c2abf05c7af7d3bcc92e49",
+     "copied": true,
+     "displayed_in_lab_scene": true,
+     "lab_path": "assets/v2_trees/F1_stone_pine_LOD1.glb"
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_stone_pine_LOD2.glb",
+     "name": "F1_stone_pine_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 317684,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_stone_water_trough",
+   "display_name": "石质水槽",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 524440,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_stone_water_trough_LOD0.glb",
+     "name": "F1_stone_water_trough_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 297164,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_stone_water_trough_LOD1.glb",
+     "name": "F1_stone_water_trough_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 117844,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_stone_water_trough_LOD2.glb",
+     "name": "F1_stone_water_trough_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 109432,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_timber_fence_vine",
+   "display_name": "藤蔓木栅栏",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 202544,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_timber_fence_vine_LOD0.glb",
+     "name": "F1_timber_fence_vine_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 99388,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_timber_fence_vine_LOD1.glb",
+     "name": "F1_timber_fence_vine_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 59632,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_timber_fence_vine_LOD2.glb",
+     "name": "F1_timber_fence_vine_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 43524,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_wildflower_patch",
+   "display_name": "野花草簇",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 696076,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_wildflower_patch_LOD0.glb",
+     "name": "F1_wildflower_patch_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 395136,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_wildflower_patch_LOD1.glb",
+     "name": "F1_wildflower_patch_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 202884,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_wildflower_patch_LOD2.glb",
+     "name": "F1_wildflower_patch_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 98056,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_young_maple",
+   "display_name": "幼枫树",
+   "label_source": "manifest",
+   "category": "V2 现行环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_v2",
+   "variant_count": 3,
+   "bytes": 8769048,
+   "copied_variants": 1,
+   "displayed_variants": 1,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_young_maple_LOD0.glb",
+     "name": "F1_young_maple_LOD0.glb",
+     "lod": "LOD0",
+     "bytes": 5753244,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_young_maple_LOD1.glb",
+     "name": "F1_young_maple_LOD1.glb",
+     "lod": "LOD1",
+     "bytes": 2018776,
+     "sha256_in_manifest": "2e2dd58afedaa80d0812a8d3ac1fd11eb5e02caece4f9faaf0cc541322419a85",
+     "copied": true,
+     "displayed_in_lab_scene": true,
+     "lab_path": "assets/v2_trees/F1_young_maple_LOD1.glb"
+    },
+    {
+     "file": "game/assets/floor1/environment_kit_v2/F1_young_maple_LOD2.glb",
+     "name": "F1_young_maple_LOD2.glb",
+     "lod": "LOD2",
+     "bytes": 997028,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_ancient_oak",
+   "display_name": "古橡树",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 764764,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_ancient_oak.glb",
+     "name": "F1_ancient_oak.glb",
+     "lod": "-",
+     "bytes": 764764,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_berry_bush",
+   "display_name": "浆果丛",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 1070028,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_berry_bush.glb",
+     "name": "F1_berry_bush.glb",
+     "lod": "-",
+     "bytes": 1070028,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_birch_grove",
+   "display_name": "白桦组三株",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 992832,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_birch_grove.glb",
+     "name": "F1_birch_grove.glb",
+     "lod": "-",
+     "bytes": 992832,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_canvas_rest_shelter",
+   "display_name": "帆布休憩棚",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 995480,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_canvas_rest_shelter.glb",
+     "name": "F1_canvas_rest_shelter.glb",
+     "lod": "-",
+     "bytes": 995480,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_cypress_column",
+   "display_name": "柱形柏树",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 546112,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_cypress_column.glb",
+     "name": "F1_cypress_column.glb",
+     "lod": "-",
+     "bytes": 546112,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_fern_patch",
+   "display_name": "蕨类地被",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 2233200,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_fern_patch.glb",
+     "name": "F1_fern_patch.glb",
+     "lod": "-",
+     "bytes": 2233200,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_flowering_shrub",
+   "display_name": "开花灌木",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 1127932,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_flowering_shrub.glb",
+     "name": "F1_flowering_shrub.glb",
+     "lod": "-",
+     "bytes": 1127932,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_herb_planter",
+   "display_name": "香草种植箱",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 1012544,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_herb_planter.glb",
+     "name": "F1_herb_planter.glb",
+     "lod": "-",
+     "bytes": 1012544,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_ivy_wall_panel",
+   "display_name": "常春藤墙面",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 1558420,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_ivy_wall_panel.glb",
+     "name": "F1_ivy_wall_panel.glb",
+     "lod": "-",
+     "bytes": 1558420,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_meadow_grass",
+   "display_name": "草甸草簇",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 182208,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_meadow_grass.glb",
+     "name": "F1_meadow_grass.glb",
+     "lod": "-",
+     "bytes": 182208,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_mossy_boulder_cluster",
+   "display_name": "苔石组",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 532664,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_mossy_boulder_cluster.glb",
+     "name": "F1_mossy_boulder_cluster.glb",
+     "lod": "-",
+     "bytes": 532664,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_mossy_fallen_log",
+   "display_name": "苔藓倒木",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 548972,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_mossy_fallen_log.glb",
+     "name": "F1_mossy_fallen_log.glb",
+     "lod": "-",
+     "bytes": 548972,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_orchard_apple",
+   "display_name": "果园苹果树",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 877604,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_orchard_apple.glb",
+     "name": "F1_orchard_apple.glb",
+     "lod": "-",
+     "bytes": 877604,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_reed_cluster",
+   "display_name": "芦苇簇",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 787572,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_reed_cluster.glb",
+     "name": "F1_reed_cluster.glb",
+     "lod": "-",
+     "bytes": 787572,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_roadside_milestone",
+   "display_name": "道路里程碑",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 554996,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_roadside_milestone.glb",
+     "name": "F1_roadside_milestone.glb",
+     "lod": "-",
+     "bytes": 554996,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_stone_pine",
+   "display_name": "石地松树",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 1258580,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_stone_pine.glb",
+     "name": "F1_stone_pine.glb",
+     "lod": "-",
+     "bytes": 1258580,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_stone_water_trough",
+   "display_name": "石质水槽",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 549612,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_stone_water_trough.glb",
+     "name": "F1_stone_water_trough.glb",
+     "lod": "-",
+     "bytes": 549612,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_timber_fence_vine",
+   "display_name": "藤蔓木栅栏",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 800540,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_timber_fence_vine.glb",
+     "name": "F1_timber_fence_vine.glb",
+     "lod": "-",
+     "bytes": 800540,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_wildflower_patch",
+   "display_name": "野花草簇",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 1527396,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_wildflower_patch.glb",
+     "name": "F1_wildflower_patch.glb",
+     "lod": "-",
+     "bytes": 1527396,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_young_maple",
+   "display_name": "幼枫树",
+   "label_source": "manifest",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 700720,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/F1_young_maple.glb",
+     "name": "F1_young_maple.glb",
+     "lod": "-",
+     "bytes": 700720,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "Floor1_EnvironmentKit20_Showcase",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "V1 旧环境套件（运行时）",
+   "source_dir": "game/assets/floor1/environment_kit_20",
+   "variant_count": 1,
+   "bytes": 11554840,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/environment_kit_20/Floor1_EnvironmentKit20_Showcase.glb",
+     "name": "Floor1_EnvironmentKit20_Showcase.glb",
+     "lod": "-",
+     "bytes": 11554840,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_Residence_01",
+   "display_name": "菩提庭院宅",
+   "label_source": "manifest",
+   "category": "住宅 01-05（运行时 art 目录，GLB 内含 LOD0/1/2）",
+   "source_dir": "game/assets/floor1/residences",
+   "variant_count": 1,
+   "bytes": 73003124,
+   "copied_variants": 1,
+   "displayed_variants": 1,
+   "variants": [
+    {
+     "file": "game/assets/floor1/residences/F1_Residence_01.glb",
+     "name": "F1_Residence_01.glb",
+     "lod": "-",
+     "bytes": 73003124,
+     "sha256_in_manifest": "6c406a932f9f5bb4b5e6b745a2f5b899337b4d4e0f529d52d45744e220b2445e",
+     "copied": true,
+     "displayed_in_lab_scene": true,
+     "lab_path": "assets/residences/F1_Residence_01.glb"
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_Residence_02",
+   "display_name": "铜檐窄街宅",
+   "label_source": "manifest",
+   "category": "住宅 01-05（运行时 art 目录，GLB 内含 LOD0/1/2）",
+   "source_dir": "game/assets/floor1/residences",
+   "variant_count": 1,
+   "bytes": 71648184,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/residences/F1_Residence_02.glb",
+     "name": "F1_Residence_02.glb",
+     "lod": "-",
+     "bytes": 71648184,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_Residence_03",
+   "display_name": "蔷薇花院宅",
+   "label_source": "manifest",
+   "category": "住宅 01-05（运行时 art 目录，GLB 内含 LOD0/1/2）",
+   "source_dir": "game/assets/floor1/residences",
+   "variant_count": 1,
+   "bytes": 83140096,
+   "copied_variants": 1,
+   "displayed_variants": 1,
+   "variants": [
+    {
+     "file": "game/assets/floor1/residences/F1_Residence_03.glb",
+     "name": "F1_Residence_03.glb",
+     "lod": "-",
+     "bytes": 83140096,
+     "sha256_in_manifest": "b85b5bb58c4e215f5b5e2f5120266c2694065d3d44c1a6af406dece8fd9aefdc",
+     "copied": true,
+     "displayed_in_lab_scene": true,
+     "lab_path": "assets/residences/F1_Residence_03.glb"
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_Residence_04",
+   "display_name": "鼠尾草长廊宅",
+   "label_source": "manifest",
+   "category": "住宅 01-05（运行时 art 目录，GLB 内含 LOD0/1/2）",
+   "source_dir": "game/assets/floor1/residences",
+   "variant_count": 1,
+   "bytes": 73224636,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/residences/F1_Residence_04.glb",
+     "name": "F1_Residence_04.glb",
+     "lod": "-",
+     "bytes": 73224636,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_Residence_05",
+   "display_name": "青瓷转角宅",
+   "label_source": "manifest",
+   "category": "住宅 01-05（运行时 art 目录，GLB 内含 LOD0/1/2）",
+   "source_dir": "game/assets/floor1/residences",
+   "variant_count": 1,
+   "bytes": 99739904,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/residences/F1_Residence_05.glb",
+     "name": "F1_Residence_05.glb",
+     "lod": "-",
+     "bytes": 99739904,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "F1_Residence_06",
+   "display_name": "连廊屋",
+   "label_source": "manifest",
+   "category": "住宅 06（草稿/待评审目录，见 manifest 状态字段）",
+   "source_dir": "game/assets/floor1/deepseek_residences",
+   "variant_count": 1,
+   "bytes": 63655396,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/deepseek_residences/F1_Residence_06.glb",
+     "name": "F1_Residence_06.glb",
+     "lod": "-",
+     "bytes": 63655396,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "StartingTown_Floor1_HeroKit",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "Hero Kit（单文件，含大量模块）",
+   "source_dir": "game/assets/floor1",
+   "variant_count": 1,
+   "bytes": 69677888,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/floor1/StartingTown_Floor1_HeroKit.glb",
+     "name": "StartingTown_Floor1_HeroKit.glb",
+     "lod": "-",
+     "bytes": 69677888,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "StartingTown_Market_CraftV5",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "Market Craft V5（单文件）",
+   "source_dir": "game/assets/market",
+   "variant_count": 1,
+   "bytes": 114210064,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/market/StartingTown_Market_CraftV5.glb",
+     "name": "StartingTown_Market_CraftV5.glb",
+     "lod": "-",
+     "bytes": 114210064,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "arched_pottery_kiln",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 504724,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/arched_pottery_kiln.glb",
+     "name": "arched_pottery_kiln.glb",
+     "lod": "-",
+     "bytes": 504724,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "bakers_oven_peel_rack",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 113548,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/bakers_oven_peel_rack.glb",
+     "name": "bakers_oven_peel_rack.glb",
+     "lod": "-",
+     "bytes": 113548,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "bowyers_shaping_form",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 179624,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/bowyers_shaping_form.glb",
+     "name": "bowyers_shaping_form.glb",
+     "lod": "-",
+     "bytes": 179624,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "candle_mold_rack",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 245372,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/candle_mold_rack.glb",
+     "name": "candle_mold_rack.glb",
+     "lod": "-",
+     "bytes": 245372,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "clay_drying_shelves",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 682468,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/clay_drying_shelves.glb",
+     "name": "clay_drying_shelves.glb",
+     "lod": "-",
+     "bytes": 682468,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "coopers_stave_jig",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 692712,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/coopers_stave_jig.glb",
+     "name": "coopers_stave_jig.glb",
+     "lod": "-",
+     "bytes": 692712,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "forge_with_bellows",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 186816,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/forge_with_bellows.glb",
+     "name": "forge_with_bellows.glb",
+     "lod": "-",
+     "bytes": 186816,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "grain_hand_quern",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 189092,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/grain_hand_quern.glb",
+     "name": "grain_hand_quern.glb",
+     "lod": "-",
+     "bytes": 189092,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "honey_basket_press",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 400348,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/honey_basket_press.glb",
+     "name": "honey_basket_press.glb",
+     "lod": "-",
+     "bytes": 400348,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "horn_anvil_stump",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 146336,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/horn_anvil_stump.glb",
+     "name": "horn_anvil_stump.glb",
+     "lod": "-",
+     "bytes": 146336,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "jewelers_drawbench",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 262740,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/jewelers_drawbench.glb",
+     "name": "jewelers_drawbench.glb",
+     "lod": "-",
+     "bytes": 262740,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "laced_leather_frame",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 171156,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/laced_leather_frame.glb",
+     "name": "laced_leather_frame.glb",
+     "lod": "-",
+     "bytes": 171156,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "rope_winding_winch",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 311972,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/rope_winding_winch.glb",
+     "name": "rope_winding_winch.glb",
+     "lod": "-",
+     "bytes": 311972,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "sage_dye_vat",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 239748,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/sage_dye_vat.glb",
+     "name": "sage_dye_vat.glb",
+     "lod": "-",
+     "bytes": 239748,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "screw_book_press",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 267984,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/screw_book_press.glb",
+     "name": "screw_book_press.glb",
+     "lod": "-",
+     "bytes": 267984,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "smith_tong_rack",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 154768,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/smith_tong_rack.glb",
+     "name": "smith_tong_rack.glb",
+     "lod": "-",
+     "bytes": 154768,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "treadle_potters_wheel",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 269592,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/treadle_potters_wheel.glb",
+     "name": "treadle_potters_wheel.glb",
+     "lod": "-",
+     "bytes": 269592,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "treadle_shaving_horse",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 工匠作坊道具（无 manifest）",
+   "source_dir": "game/assets/generated/artisan_workshops_20260912",
+   "variant_count": 1,
+   "bytes": 120688,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/artisan_workshops_20260912/treadle_shaving_horse.glb",
+     "name": "treadle_shaving_horse.glb",
+     "lod": "-",
+     "bytes": 120688,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF01_Mercer_Display_Window",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 1242432,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF01_Mercer_Display_Window.glb",
+     "name": "SF01_Mercer_Display_Window.glb",
+     "lod": "-",
+     "bytes": 1242432,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF02_Folding_Service_Hatch",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 1038688,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF02_Folding_Service_Hatch.glb",
+     "name": "SF02_Folding_Service_Hatch.glb",
+     "lod": "-",
+     "bytes": 1038688,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF03_Diamond_Lead_Casement",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 1315056,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF03_Diamond_Lead_Casement.glb",
+     "name": "SF03_Diamond_Lead_Casement.glb",
+     "lod": "-",
+     "bytes": 1315056,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF04_Radial_Attic_Oculus",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 2600296,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF04_Radial_Attic_Oculus.glb",
+     "name": "SF04_Radial_Attic_Oculus.glb",
+     "lod": "-",
+     "bytes": 2600296,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF05_Tiled_Gable_Dormer",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 1801036,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF05_Tiled_Gable_Dormer.glb",
+     "name": "SF05_Tiled_Gable_Dormer.glb",
+     "lod": "-",
+     "bytes": 1801036,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF06_Open_Flue_Chimney",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 2762548,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF06_Open_Flue_Chimney.glb",
+     "name": "SF06_Open_Flue_Chimney.glb",
+     "lod": "-",
+     "bytes": 2762548,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF07_Clay_Tile_Rain_Eave",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 1370776,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF07_Clay_Tile_Rain_Eave.glb",
+     "name": "SF07_Clay_Tile_Rain_Eave.glb",
+     "lod": "-",
+     "bytes": 1370776,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF08_Carved_Timber_Corbel",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 570068,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF08_Carved_Timber_Corbel.glb",
+     "name": "SF08_Carved_Timber_Corbel.glb",
+     "lod": "-",
+     "bytes": 570068,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF09_Scalloped_Cloth_Canopy",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 4071344,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF09_Scalloped_Cloth_Canopy.glb",
+     "name": "SF09_Scalloped_Cloth_Canopy.glb",
+     "lod": "-",
+     "bytes": 4071344,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF10_Stone_Double_Portal",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 2064640,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF10_Stone_Double_Portal.glb",
+     "name": "SF10_Stone_Double_Portal.glb",
+     "lod": "-",
+     "bytes": 2064640,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF11_Glazed_Shop_Door",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 1054368,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF11_Glazed_Shop_Door.glb",
+     "name": "SF11_Glazed_Shop_Door.glb",
+     "lod": "-",
+     "bytes": 1054368,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF12_Herbal_Stone_Niche",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 1571564,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF12_Herbal_Stone_Niche.glb",
+     "name": "SF12_Herbal_Stone_Niche.glb",
+     "lod": "-",
+     "bytes": 1571564,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF13_Bakery_Pretzel_Emblem",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 644620,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF13_Bakery_Pretzel_Emblem.glb",
+     "name": "SF13_Bakery_Pretzel_Emblem.glb",
+     "lod": "-",
+     "bytes": 644620,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF14_Apothecary_Mortar_Emblem",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 413924,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF14_Apothecary_Mortar_Emblem.glb",
+     "name": "SF14_Apothecary_Mortar_Emblem.glb",
+     "lod": "-",
+     "bytes": 413924,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF15_Tailor_Shears_Emblem",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 681504,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF15_Tailor_Shears_Emblem.glb",
+     "name": "SF15_Tailor_Shears_Emblem.glb",
+     "lod": "-",
+     "bytes": 681504,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "SF16_Barber_Spiral_Emblem",
+   "display_name": null,
+   "label_source": "filename-derived",
+   "category": "生成物 20260912 店面细节",
+   "source_dir": "game/assets/generated/shopfront_details_20260912",
+   "variant_count": 1,
+   "bytes": 4028336,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/shopfront_details_20260912/SF16_Barber_Spiral_Emblem.glb",
+     "name": "SF16_Barber_Spiral_Emblem.glb",
+     "lod": "-",
+     "bytes": 4028336,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "air_drying_fish_rack",
+   "display_name": "悬挂风干鱼架",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 132520,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/air_drying_fish_rack.glb",
+     "name": "air_drying_fish_rack.glb",
+     "lod": "-",
+     "bytes": 132520,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "caged_travel_lantern",
+   "display_name": "护笼旅行提灯",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 46732,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/caged_travel_lantern.glb",
+     "name": "caged_travel_lantern.glb",
+     "lod": "-",
+     "bytes": 46732,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "carved_route_waystone",
+   "display_name": "刻箭头路石",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 35428,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/carved_route_waystone.glb",
+     "name": "carved_route_waystone.glb",
+     "lod": "-",
+     "bytes": 35428,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "coiled_hemp_rope",
+   "display_name": "连续盘绕麻绳",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 298748,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/coiled_hemp_rope.glb",
+     "name": "coiled_hemp_rope.glb",
+     "lod": "-",
+     "bytes": 298748,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "covered_caravan_wagon",
+   "display_name": "帆篷四轮旅行车",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 679944,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/covered_caravan_wagon.glb",
+     "name": "covered_caravan_wagon.glb",
+     "lod": "-",
+     "bytes": 679944,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "diamond_fishing_net_frame",
+   "display_name": "菱格渔网晾架",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 319072,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/diamond_fishing_net_frame.glb",
+     "name": "diamond_fishing_net_frame.glb",
+     "lod": "-",
+     "bytes": 319072,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "empty_courier_bird_cage",
+   "display_name": "空信鸟运输笼",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 334836,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/empty_courier_bird_cage.glb",
+     "name": "empty_courier_bird_cage.glb",
+     "lod": "-",
+     "bytes": 334836,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "fishing_rod_stand",
+   "display_name": "渔竿与浮标架",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 181096,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/fishing_rod_stand.glb",
+     "name": "fishing_rod_stand.glb",
+     "lod": "-",
+     "bytes": 181096,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "flagged_wooden_fishing_buoy",
+   "display_name": "木浮标与布旗",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 65384,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/flagged_wooden_fishing_buoy.glb",
+     "name": "flagged_wooden_fishing_buoy.glb",
+     "lod": "-",
+     "bytes": 65384,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "folding_field_stool",
+   "display_name": "交叉折叠营凳",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 36884,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/folding_field_stool.glb",
+     "name": "folding_field_stool.glb",
+     "lod": "-",
+     "bytes": 36884,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "folding_route_map_table",
+   "display_name": "折叠路线图桌",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 127296,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/folding_route_map_table.glb",
+     "name": "folding_route_map_table.glb",
+     "lod": "-",
+     "bytes": 127296,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "furled_canvas_sail",
+   "display_name": "卷帆与桁杆",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 107256,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/furled_canvas_sail.glb",
+     "name": "furled_canvas_sail.glb",
+     "lod": "-",
+     "bytes": 107256,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "hoist_barrel_sling",
+   "display_name": "吊桶绳套",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 109396,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/hoist_barrel_sling.glb",
+     "name": "hoist_barrel_sling.glb",
+     "lod": "-",
+     "bytes": 109396,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "iron_mooring_cleat",
+   "display_name": "铁制系缆座",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 19356,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/iron_mooring_cleat.glb",
+     "name": "iron_mooring_cleat.glb",
+     "lod": "-",
+     "bytes": 19356,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "lapstrake_river_rowboat",
+   "display_name": "搭接木板河舟",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 141684,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/lapstrake_river_rowboat.glb",
+     "name": "lapstrake_river_rowboat.glb",
+     "lod": "-",
+     "bytes": 141684,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "leather_scroll_case",
+   "display_name": "皮革地图筒",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 45720,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/leather_scroll_case.glb",
+     "name": "leather_scroll_case.glb",
+     "lod": "-",
+     "bytes": 45720,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "netted_cargo_bundle",
+   "display_name": "绳网货物包",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 88488,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/netted_cargo_bundle.glb",
+     "name": "netted_cargo_bundle.glb",
+     "lod": "-",
+     "bytes": 88488,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "open_travel_ration_case",
+   "display_name": "开盖旅行食盒",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 64860,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/open_travel_ration_case.glb",
+     "name": "open_travel_ration_case.glb",
+     "lod": "-",
+     "bytes": 64860,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "open_traveller_tent",
+   "display_name": "敞口旅行帐篷",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 60356,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/open_traveller_tent.glb",
+     "name": "open_traveller_tent.glb",
+     "lod": "-",
+     "bytes": 60356,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "paired_leather_panniers",
+   "display_name": "双侧皮革驮袋",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 54084,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/paired_leather_panniers.glb",
+     "name": "paired_leather_panniers.glb",
+     "lod": "-",
+     "bytes": 54084,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "paired_wooden_oars",
+   "display_name": "双支木桨",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 79416,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/paired_wooden_oars.glb",
+     "name": "paired_wooden_oars.glb",
+     "lod": "-",
+     "bytes": 79416,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "partitioned_ceramic_crate",
+   "display_name": "陶器分格运输箱",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 1060576,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/partitioned_ceramic_crate.glb",
+     "name": "partitioned_ceramic_crate.glb",
+     "lod": "-",
+     "bytes": 1060576,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "porters_luggage_trolley",
+   "display_name": "搬运双轮行李架",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 234824,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/porters_luggage_trolley.glb",
+     "name": "porters_luggage_trolley.glb",
+     "lod": "-",
+     "bytes": 234824,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "rope_bound_cloth_bale",
+   "display_name": "麻绳布料包",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 48516,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/rope_bound_cloth_bale.glb",
+     "name": "rope_bound_cloth_bale.glb",
+     "lod": "-",
+     "bytes": 48516,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "roped_ferry_gangplank",
+   "display_name": "扶绳渡船跳板",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 165044,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/roped_ferry_gangplank.glb",
+     "name": "roped_ferry_gangplank.glb",
+     "lod": "-",
+     "bytes": 165044,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "stacked_timber_pallets",
+   "display_name": "叠放木货板",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 203972,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/stacked_timber_pallets.glb",
+     "name": "stacked_timber_pallets.glb",
+     "lod": "-",
+     "bytes": 203972,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "stitched_waterskin",
+   "display_name": "缝线皮水囊",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 44756,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/stitched_waterskin.glb",
+     "name": "stitched_waterskin.glb",
+     "lod": "-",
+     "bytes": 44756,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "strapped_tent_bundle",
+   "display_name": "绑扎帐篷与营杆",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 109384,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/strapped_tent_bundle.glb",
+     "name": "strapped_tent_bundle.glb",
+     "lod": "-",
+     "bytes": 109384,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "timber_frame_hammock",
+   "display_name": "木架悬吊布床",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 62248,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/timber_frame_hammock.glb",
+     "name": "timber_frame_hammock.glb",
+     "lod": "-",
+     "bytes": 62248,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "timber_pack_saddle",
+   "display_name": "木制驮架",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 68524,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/timber_pack_saddle.glb",
+     "name": "timber_pack_saddle.glb",
+     "lod": "-",
+     "bytes": 68524,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "trail_walking_stick_rack",
+   "display_name": "旅行手杖架",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 169800,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/trail_walking_stick_rack.glb",
+     "name": "trail_walking_stick_rack.glb",
+     "lod": "-",
+     "bytes": 169800,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "water_delivery_cart",
+   "display_name": "横桶送水车",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 650348,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/water_delivery_cart.glb",
+     "name": "water_delivery_cart.glb",
+     "lod": "-",
+     "bytes": 650348,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "wood_stock_river_anchor",
+   "display_name": "木横杆河锚",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 40760,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/wood_stock_river_anchor.glb",
+     "name": "wood_stock_river_anchor.glb",
+     "lod": "-",
+     "bytes": 40760,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "wooden_pulley_block",
+   "display_name": "木壳吊运滑轮",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 84460,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/wooden_pulley_block.glb",
+     "name": "wooden_pulley_block.glb",
+     "lod": "-",
+     "bytes": 84460,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "woven_fishing_creel",
+   "display_name": "开口编织鱼篓",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 428684,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/woven_fishing_creel.glb",
+     "name": "woven_fishing_creel.glb",
+     "lod": "-",
+     "bytes": 428684,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  },
+  {
+   "logical_id": "woven_funnel_fish_trap",
+   "display_name": "漏斗口编织鱼笼",
+   "label_source": "manifest",
+   "category": "生成物 20260912 旅行/货运道具",
+   "source_dir": "game/assets/generated/travel_cargo_20260912",
+   "variant_count": 1,
+   "bytes": 259864,
+   "copied_variants": 0,
+   "displayed_variants": 0,
+   "variants": [
+    {
+     "file": "game/assets/generated/travel_cargo_20260912/woven_funnel_fish_trap.glb",
+     "name": "woven_funnel_fish_trap.glb",
+     "lod": "-",
+     "bytes": 259864,
+     "sha256_in_manifest": null,
+     "copied": false,
+     "displayed_in_lab_scene": false,
+     "lab_path": null
+    }
+   ]
+  }
+ ]
+}

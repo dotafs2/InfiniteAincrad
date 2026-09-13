@@ -1,0 +1,273 @@
+{
+  "checks": [
+    {
+      "check": "watch_exit_ok",
+      "detail": "",
+      "ok": true
+    },
+    {
+      "check": "watch_status_ok",
+      "detail": {
+        "budget_file": "tmp\\gm-autonomy-20260913\\runs\\watch_two_delivery-20260913T081328Z-ca4e\\state\\autonomy\\watch.json",
+        "dispatch_batches": 5,
+        "gm_turns": 14,
+        "gm_turns_note": "gm_turns counts native GM turn dispatches: one GM decision is one turn, reconciled from each cycle durable counter and including an in-flight reservation. dispatch_batches counts the subprocess batches that carried those turns. Neither is an HTTP request count and neither is a currency charge.",
+        "idle_exits": 1,
+        "iterations": 3,
+        "last_exit_code": 0,
+        "max_calls": null,
+        "max_iterations": 4,
+        "max_seconds": 1200,
+        "model_calls": 14,
+        "model_turns": 14,
+        "reason": "idle: no new evidence and nothing pending; no model call was made (idle_exits=1)",
+        "status": "ok",
+        "watch": "bounded_repeat_coordinator",
+        "watched_cycles": {
+          "auto-72ebf9adfddfc51f": {
+            "batch_count": 3,
+            "blocked_reason": null,
+            "evidence_sha256": "d5d26261879a9a0e0a59ed431baaca758ccaa4972b5e085be815f7830b9df6b0",
+            "exit_code": 0,
+            "gm_id": "gm-02",
+            "gm_turns": 12,
+            "in_flight": [],
+            "issue_id": "issue-911335c320da",
+            "path": "tmp\\gm-autonomy-20260913\\runs\\watch_two_delivery-20260913T081328Z-ca4e\\state\\autonomy\\auto-72ebf9adfddfc51f\\cycle.json",
+            "policy_sha256": "71a28ddaf0a54e4782eccc1c66f932da538729d66c9a0912103e1493e559b0ce",
+            "stage": "feedback",
+            "status": "completed",
+            "unknown": false
+          },
+          "auto-cb4fa55e1a694331": {
+            "batch_count": 2,
+            "blocked_reason": null,
+            "evidence_sha256": "d5d26261879a9a0e0a59ed431baaca758ccaa4972b5e085be815f7830b9df6b0",
+            "exit_code": 0,
+            "gm_id": "gm-07",
+            "gm_turns": 2,
+            "in_flight": [],
+            "issue_id": "issue-3bafa08150b0",
+            "path": "tmp\\gm-autonomy-20260913\\runs\\watch_two_delivery-20260913T081328Z-ca4e\\state\\autonomy\\auto-cb4fa55e1a694331\\cycle.json",
+            "policy_sha256": "71a28ddaf0a54e4782eccc1c66f932da538729d66c9a0912103e1493e559b0ce",
+            "stage": "feedback",
+            "status": "completed",
+            "unknown": false
+          }
+        }
+      },
+      "ok": true
+    },
+    {
+      "check": "one_observe_batch_of_ten_native_turns",
+      "detail": {
+        "coding": 2,
+        "feedback": 2,
+        "observe": 10
+      },
+      "ok": true
+    },
+    {
+      "check": "two_coding_deliveries_one_per_owner",
+      "detail": {
+        "coding": 2,
+        "feedback": 2,
+        "observe": 10
+      },
+      "ok": true
+    },
+    {
+      "check": "two_owner_feedback_turns",
+      "detail": {
+        "coding": 2,
+        "feedback": 2,
+        "observe": 10
+      },
+      "ok": true
+    },
+    {
+      "check": "exactly_two_cycles_after_a_failed_third_iteration_idles",
+      "detail": [
+        "auto-72ebf9adfddfc51f",
+        "auto-cb4fa55e1a694331"
+      ],
+      "ok": true
+    },
+    {
+      "check": "the_first_delivery_is_owned_by_gm02",
+      "detail": "completed",
+      "ok": true
+    },
+    {
+      "check": "the_second_delivery_is_owned_by_gm07",
+      "detail": "completed",
+      "ok": true
+    },
+    {
+      "check": "the_first_cycle_deferred_gm07_from_the_same_observation",
+      "detail": [
+        {
+          "gm_id": "gm-07",
+          "issue_id": "issue-3bafa08150b0"
+        }
+      ],
+      "ok": true
+    },
+    {
+      "check": "the_second_cycle_consumed_the_first_cycles_durable_queue",
+      "detail": {
+        "queued_from_cycle": "auto-72ebf9adfddfc51f",
+        "source": "auto-72ebf9adfddfc51f"
+      },
+      "ok": true
+    },
+    {
+      "check": "the_queued_delivery_paid_no_second_observation",
+      "detail": {
+        "batches": {
+          "code": 1,
+          "feedback": 1
+        },
+        "model_calls": 2
+      },
+      "ok": true
+    },
+    {
+      "check": "the_first_cycle_is_one_observe_one_code_one_feedback",
+      "detail": {
+        "code": 1,
+        "feedback": 1,
+        "observe": 1
+      },
+      "ok": true
+    },
+    {
+      "check": "both_cycles_published_exactly_one_release",
+      "detail": {
+        "first": 1,
+        "second": 1
+      },
+      "ok": true
+    },
+    {
+      "check": "the_two_releases_are_behaviorally_different_bytes",
+      "detail": {
+        "first": "390ac49a8acbf85033586ff973da51e87fc06389ca5b1e133f9b137e424df33f",
+        "second": "7a545ef6f01fc9870438457da5d235a2955e6e01fc533993271602c1c0b42cc2"
+      },
+      "ok": true
+    },
+    {
+      "check": "the_second_release_replaced_the_accepted_first_release_as_its_base",
+      "detail": {
+        "first_release": "390ac49a8acbf85033586ff973da51e87fc06389ca5b1e133f9b137e424df33f",
+        "previous_sha256": "390ac49a8acbf85033586ff973da51e87fc06389ca5b1e133f9b137e424df33f"
+      },
+      "ok": true
+    },
+    {
+      "check": "the_first_release_installed_and_drew_exactly_once",
+      "detail": {
+        "mechanism": "well_stock_available",
+        "water_drawn": 1.0,
+        "well_water": 0.0
+      },
+      "ok": true
+    },
+    {
+      "check": "the_second_release_probed_the_depleted_state_on_the_same_save",
+      "detail": {
+        "depleted_probe": true,
+        "installed_but_unused": false,
+        "open_mechanism": "well_stock_empty",
+        "reload_mechanism": "well_stock_empty"
+      },
+      "ok": true
+    },
+    {
+      "check": "the_second_result_is_not_a_second_drink_or_new_adoption",
+      "detail": {
+        "resident_water_drawn": 1.0,
+        "water_drawn_this_phase": 0,
+        "well_water": 0.0
+      },
+      "ok": true
+    },
+    {
+      "check": "the_same_save_stays_byte_identical_after_the_second_release",
+      "detail": {
+        "first": "534cddd29879e301c109148e837893f18db61fadab8461e21af8ec60907f3853",
+        "on_disk": "534cddd29879e301c109148e837893f18db61fadab8461e21af8ec60907f3853",
+        "second": "534cddd29879e301c109148e837893f18db61fadab8461e21af8ec60907f3853"
+      },
+      "ok": true
+    },
+    {
+      "check": "exact_native_gm_turn_counts",
+      "detail": 14,
+      "ok": true
+    },
+    {
+      "check": "the_watch_went_idle_after_two_deliveries",
+      "detail": {
+        "idle_exits": 1,
+        "reason": "idle: no new evidence and nothing pending; no model call was made (idle_exits=1)"
+      },
+      "ok": true
+    },
+    {
+      "check": "both_owner_receipts_are_measured_and_distinct",
+      "detail": {
+        "gm02": 1,
+        "gm07": 1
+      },
+      "ok": true
+    },
+    {
+      "check": "the_bad_first_version_depletion_counterfactual_is_caught",
+      "detail": {
+        "exit_code": 1,
+        "failures": [
+          "the depleted-state probe reports a non-ok mechanism result",
+          "the corrected mechanism reports the expected well_stock_empty result"
+        ],
+        "first_module": [
+          "tmp\\gm-autonomy-20260913\\runs\\watch_two_delivery-20260913T081328Z-ca4e\\state\\candidates\\issue-911335c320da\\game\\capabilities\\well_stock_lookup.gd"
+        ],
+        "observed_code": "well_stock_available"
+      },
+      "ok": true
+    },
+    {
+      "check": "rerun_made_no_new_native_turn",
+      "detail": {
+        "after": {
+          "coding": 2,
+          "feedback": 2,
+          "observe": 10
+        },
+        "before": {
+          "coding": 2,
+          "feedback": 2,
+          "observe": 10
+        },
+        "exit": 0
+      },
+      "ok": true
+    },
+    {
+      "check": "rerun_made_no_new_publication_or_cycle",
+      "detail": "idle: no new evidence and nothing pending; no model call was made (idle_exits=2)",
+      "ok": true
+    },
+    {
+      "check": "rerun_made_no_save_mutation",
+      "detail": "534cddd29879e301c109148e837893f18db61fadab8461e21af8ec60907f3853",
+      "ok": true
+    }
+  ],
+  "cycle_dir": "tmp\\gm-autonomy-20260913\\runs\\watch_two_delivery-20260913T081328Z-ca4e\\state\\autonomy\\auto-cb4fa55e1a694331",
+  "kind": "gm_autonomy_scenario",
+  "ok": true,
+  "scenario": "watch_two_delivery"
+}
