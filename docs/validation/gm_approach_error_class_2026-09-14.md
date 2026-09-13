@@ -29,3 +29,13 @@ life03原定900秒，实际89.9世界秒后画面显示 `invalid_journey_stalls`
 宿主桥接增加净化错误标识白名单，23项测试证明新类别能进入原GM证据，未知及疑似密钥文本不进入投影。测试路径已改为可移植的真实相邻模块校验；其真实自动循环采用仍待下一轮。原十GM已分别完成本轮有效观察，分批读取真实检查点；不称20个同时推理或持续无人值守服务完成。
 
 私有补充索引：`gm01-retirement-final-review/`、`gm06-code-02/`、`gm06-essential-input-review/`（保留的错误样例）、`host-corrections-40/`、`gm-observe-03/`、`gm-observe-04/`，均位于 `tmp/autonomy-live-20260914/`。
+
+## life04 首次同档采用
+
+组合版本 `6358b75f0affe311a80b9ffb105b6de29bc42a25` 下，原世界seq180→192、时间3766.5→4666.0167，实际推进899.5167世界秒，15次上游Kimi全部结算，＋0.5049829CNY，旧未知6→6。八个原身份产生新事件，含两次到访和一次进食；不是所有十个人在这一段都行动。引擎0、外层1、validator=false，原因是医生原 `turn:shared:healer:0:11` 仍为选择失效且正常冷却到4972.85，没有预算停止或新的模型故障。
+
+铁匠旧 `turn:shared:smith:1:17` 恰好产生一次 `approach_blocked`/事件181，挂起任务结束；真实新turn1:18得到 `action_started`。木匠 `turn:shared:carpenter:2:14` 向渔夫回复/事件182，2:15继续行动，旧0:12通用错误和1:13输入超限同时保留。井守原冷却自然到期后，新0:17得到 `ask_help`，未由宿主跳过冷却。新适配器确实安装并用于这些新请求；没有单独测量实际输入压缩前后长度，因此不推断某个实际请求必定触发了裁剪分支。
+
+完整街道的零模型冷恢复8秒通过，seq192、十身份、历史前缀、住宅、钱款与既有物品/契约/技能一致。原档和冷副本SHA均为 `18d4980a5f2ef3e2abf286c2c2aabee189a69fe661a952afa5cd0cd449f89371`，恢复不改原档。原GM01、GM03、GM06分别实际消费并确认了注明边界的采用回执。H50/H52只按首次同档范围标绿，持续20-agent服务仍未完成。
+
+私有事实：`life-04/result.json`、`life04-cold-proof/result.json`、`life04-cold-proof/root-continuity.json`、`gm-delivery-feedback-02/`，均在 `tmp/autonomy-live-20260914/`。
