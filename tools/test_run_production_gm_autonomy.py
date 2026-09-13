@@ -75,8 +75,11 @@ class ProductionBridgeTests(unittest.TestCase):
                                    'counts': {'settled':1140,'uncertain':6}},
                   'budget_stop_reason':'','carried_uncertainty_reviewed':True,
                   'upstream_requests': 1})
-            write(Path(values['--evidence']), {'world_id': WORLD, 'source_revision': current['life']['seq'],
-                                               'evidence': []})
+            write(Path(values['--evidence']), {
+                'world_id': WORLD, 'evidence': [],
+                'source_revision': {'life_seq': current['life']['seq'],
+                                    'world_elapsed_seconds': current.get('elapsed_seconds', 3076.75)}})
+            current.setdefault('elapsed_seconds', 3076.75)
         else:
             Path(log).parent.mkdir(parents=True, exist_ok=True)
             Path(log).write_text('diagnostic\n' + json.dumps({
@@ -103,10 +106,309 @@ class ProductionBridgeTests(unittest.TestCase):
         self.assertEqual(status['status'], 'completed_finite')
         self.assertEqual(status['pid'], result['pid'])
 
+    def _life_run(self, model_errors, mutate=None, evidence_revision=None, exit_code=0,
+                  capture=None, export_world=WORLD):
+        # Actual launcher schema from the real run: per-actor model_errors, settled ledger
+        # counts, and a public export carrying source_revision.
+        def run(command, cwd, timeout, log, env=None):
+            if command[0] != 'life':
+                if capture is not None:
+                    capture['autonomy_command'] = list(command)
+                Path(log).parent.mkdir(parents=True, exist_ok=True)
+                Path(log).write_text('diagnostic\n' + json.dumps({
+                    'status': 'no_action', 'cycle_id': 'local-failure-cycle',
+                    'usage': {'model_calls': 10}}) + '\n', encoding='utf-8')
+                return {'exit_code': 0, 'timed_out': False,
+                        'owned': {'all_members_exited': True, 'active': 0}}
+            values = dict(token.split('=', 1) for token in command[1:])
+            current = json.loads(self.world.read_text())
+            if mutate is not None:
+                mutate(current)
+            current['life']['seq'] += 1
+            write(self.world, current)
+            out = Path(values['--out'])
+            write(out/'result.json', {'engine_exit': 0, 'validation_passed': False,
+                  'model_errors': dict(model_errors), 'upstream_requests': 1,
+                  'budget_stop_reason': '', 'carried_uncertainty_reviewed': True,
+                  'ledger_before': {'ledger_id': 'ledger', 'model': 'kimi-k2.6',
+                                    'counts': {'settled': 1139, 'uncertain': 6}},
+                  'ledger_after': {'ledger_id': 'ledger', 'model': 'kimi-k2.6', 'halted': '',
+                                   'counts': {'settled': 1140, 'uncertain': 6}}})
+            export = {'world_id': export_world, 'evidence': []}
+            export['source_revision'] = ({'life_seq': current['life']['seq'],
+                                          'world_elapsed_seconds': current.get('elapsed_seconds', 3076.75)}
+                                         if evidence_revision is None else evidence_revision)
+            write(Path(values['--evidence']), export)
+            return {'exit_code': exit_code, 'timed_out': False,
+                    'owned': {'all_members_exited': True, 'active': 0}}
+        return run
+
+    def test_real_schema_local_provider_error_is_quarantined_and_life_and_gm_continue(self):
+        write(self.scope, self.base_scope)
+        def herder(current):
+            current['godot']['resident_turns']['shared:herder'] = {
+                'status': 'provider_error', 'request_id': 'turn:shared:herder:0:9',
+                'result': {'code': 'provider_error'}}
+        fixed = {'head': 'head', 'files': {'a': '1'}}
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value=fixed), \
+             mock.patch.object(bridge, 'run_owned',
+                               side_effect=self._life_run({'shared:herder': 'provider_error'},
+                                                          mutate=herder, exit_code=1)):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 0)
+        result = json.loads((self.out/'run.json').read_text())
+        self.assertEqual(result['status'], 'completed_finite')
+        self.assertEqual(len(result['cycles']), 2, "a local settled failure must not stop the loop")
+        self.assertEqual(result['degraded_residents'], ['shared:herder'])
+        self.assertEqual(result['local_failure_classes'], ['resident_local_settled_quarantine'])
+        receipt = result['cycles'][0]['local_failures'][0]
+        self.assertEqual((receipt['actor'], receipt['classification'], receipt['request_id']),
+                         ('shared:herder', 'resident_local_settled_quarantine', 'turn:shared:herder:0:9'))
+        self.assertNotIn('reason', receipt)
+
+    def test_real_schema_known_stale_option_cooldown_is_not_fatal(self):
+        scope = dict(self.base_scope)
+        scope['allowed_existing_model_errors'] = {'shared:well-keeper': {
+            'status': 'rule_rejection', 'request_id': 'turn:shared:well-keeper:0:17',
+            'result_code': 'option_unavailable', 'replan_policy': 'stale_option_v1'}}
+        write(self.scope, scope)
+        stale = {'status': 'rule_rejection', 'request_id': 'turn:shared:well-keeper:0:17',
+                 'result': {'code': 'option_unavailable'}, 'replan_policy': 'stale_option_v1'}
+        def seed(current):
+            current['godot']['resident_turns']['shared:well-keeper'] = dict(stale)
+        seeded = world()
+        current = json.loads(self.world.read_text()); seed(current); write(self.world, current)
+        fixed = {'head': 'head', 'files': {'a': '1'}}
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value=fixed), \
+             mock.patch.object(bridge, 'run_owned',
+                               side_effect=self._life_run({'shared:well-keeper': 'rule_rejection'})):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 0)
+        result = json.loads((self.out/'run.json').read_text())
+        self.assertEqual(result['status'], 'completed_finite')
+        self.assertEqual(result['local_failure_classes'], ['known_stale_option_cooldown'])
+
+    def test_ambiguous_or_global_error_code_still_stops_the_run(self):
+        write(self.scope, self.base_scope)
+        def ambiguous(current):
+            current['godot']['resident_turns']['shared:herder'] = {
+                'status': 'provider_error', 'request_id': 'turn:shared:herder:0:9',
+                'result': {'code': 'provider_error'}}
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value={'head': 'head', 'files': {}}), \
+             mock.patch.object(bridge, 'run_owned',
+                               side_effect=self._life_run({'shared:herder': 'gateway_timeout'},
+                                                          mutate=ambiguous, exit_code=1)):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 1)
+        result = json.loads((self.out/'run.json').read_text())
+        self.assertEqual(result['reason'], 'new_life_model_error')
+        self.assertEqual(result['cycles'][0]['fatal_errors'][0]['classification'],
+                         'fatal_global_or_ambiguous')
+
+    def test_absolute_cutoff_and_admission_buffer_stop_without_dispatch(self):
+        import datetime as _dt
+        now = _dt.datetime.now(_dt.timezone.utc)
+        exhausted = dict(self.base_scope)
+        exhausted['cutoff_utc'] = (now - _dt.timedelta(seconds=60)).isoformat()
+        write(self.scope, exhausted)
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value={'head': 'head', 'files': {}}), \
+             mock.patch.object(bridge, 'run_owned', side_effect=AssertionError('no dispatch')):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 0)
+        result = json.loads((self.out/'run.json').read_text())
+        self.assertEqual(result['reason'], 'absolute_cutoff')
+        self.assertEqual(result['cycles'], [])
+
+        tight = dict(self.base_scope)
+        tight['out_root'] = str(self.root/'run-tight')
+        tight['status_path'] = str(self.root/'status-tight.json')
+        tight['cutoff_utc'] = (now + _dt.timedelta(seconds=30)).isoformat()
+        write(self.scope, tight)
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value={'head': 'head', 'files': {}}), \
+             mock.patch.object(bridge, 'run_owned', side_effect=AssertionError('no dispatch')):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 0)
+        tight_result = json.loads((self.root/'run-tight'/'run.json').read_text())
+        self.assertEqual(tight_result['reason'], 'absolute_cutoff_admission_buffer')
+        self.assertEqual(tight_result['cycles'], [], "no cycle may start without its settling buffer")
+
+    def test_cutoff_utc_is_type_and_format_validated(self):
+        bad = dict(self.base_scope); bad['cutoff_utc'] = 'not-a-timestamp'
+        errors = bridge.validate(bad)
+        self.assertTrue(any('cutoff_utc' in e for e in errors), errors)
+        wrong = dict(self.base_scope); wrong['admission_buffer_seconds'] = 'soon'
+        self.assertTrue(any('admission_buffer_seconds' in e for e in bridge.validate(wrong)))
+
+    def test_final_evidence_freshness_is_recorded_and_enforced_when_required(self):
+        scope = dict(self.base_scope)
+        write(self.scope, scope)
+        stale_revision = {'life_seq': 142, 'world_elapsed_seconds': 2177.75}
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value={'head': 'head', 'files': {}}), \
+             mock.patch.object(bridge, 'run_owned',
+                               side_effect=self._life_run({'shared:innkeeper': 'rule_rejection'},
+                                                          evidence_revision=stale_revision)):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 0)
+        result = json.loads((self.out/'run.json').read_text())
+        freshness = result['cycles'][0]['final_evidence_freshness']
+        self.assertFalse(freshness['fresh'], "the real stale-export gap must be visible in the durable run")
+        self.assertEqual(freshness['export_life_seq'], 142)
+
+        strict = dict(self.base_scope); strict['require_fresh_final_evidence'] = True
+        self.out2 = self.root/'run2'
+        strict['out_root'] = str(self.out2); strict['status_path'] = str(self.root/'status2.json')
+        write(self.scope, strict)
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value={'head': 'head', 'files': {}}), \
+             mock.patch.object(bridge, 'run_owned',
+                               side_effect=self._life_run({'shared:innkeeper': 'rule_rejection'},
+                                                          evidence_revision=stale_revision)):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 1)
+        strict_result = json.loads((self.out2/'run.json').read_text())
+        self.assertEqual(strict_result['reason'], 'final_evidence_stale_or_unverifiable')
+
+    def _error_world(self, extra_failures=()):
+        current = world()
+        current['elapsed_seconds'] = 3076.75
+        current['godot']['resident_turns']['shared:well-keeper'] = {
+            'status': 'rule_rejection', 'request_id': 'turn:shared:well-keeper:0:17',
+            'result': {'code': 'option_unavailable'}, 'replan_policy': 'stale_option_v1',
+            'error': 'PRIVATE_SENTINEL_TEXT', 'accepted_reply': {'reason': 'PRIVATE_SENTINEL_TEXT'}}
+        current['godot']['resident_turns']['shared:herder'] = {
+            'status': 'provider_error', 'request_id': 'turn:shared:herder:0:9',
+            'result': {'code': 'provider_error'}, 'error': 'PRIVATE_SENTINEL_TEXT'}
+        return current
+
+    def test_operational_projection_reaches_gm_with_both_real_schema_failures(self):
+        scope = dict(self.base_scope)
+        scope['allowed_existing_model_errors'] = {'shared:well-keeper': {
+            'status': 'rule_rejection', 'request_id': 'turn:shared:well-keeper:0:17',
+            'result_code': 'option_unavailable', 'replan_policy': 'stale_option_v1'}}
+        write(self.scope, scope)
+        seeded = self._error_world(); write(self.world, seeded)
+        capture = {}
+        export_hashes = {}
+        def mutate(current):
+            current['elapsed_seconds'] = 3100.5
+            for actor in ('shared:well-keeper', 'shared:herder'):
+                current['godot']['resident_turns'][actor] = dict(seeded['godot']['resident_turns'][actor])
+        inner = self._life_run({'shared:well-keeper': 'rule_rejection', 'shared:herder': 'provider_error'},
+                               mutate=mutate, exit_code=1, capture=capture)
+        def run(command, cwd, timeout, log, env=None):
+            if command[0] == 'life':
+                passed = inner(command, cwd, timeout, log, env)
+                export = Path(dict(tok.split('=', 1) for tok in command[1:])['--evidence'])
+                export_hashes['after'] = bridge.sha(export)
+                return passed
+            return inner(command, cwd, timeout, log, env)
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value={'head': 'head', 'files': {}}), \
+             mock.patch.object(bridge, 'run_owned', side_effect=run):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 0)
+        result = json.loads((self.out/'run.json').read_text())
+        self.assertEqual(result['status'], 'completed_finite', "healthy life and the GM phase continue")
+        self.assertEqual(result['degraded_residents'], ['shared:herder', 'shared:well-keeper'])
+        record = result['cycles'][-1]
+        projection_path = Path(record['operational_evidence']['path'])
+        policy_path = Path(capture['autonomy_command'][capture['autonomy_command'].index('--policy') + 1])
+        policy = json.loads(policy_path.read_text())
+        self.assertEqual(Path(policy['paths']['evidence']), projection_path,
+                         "the GM intake must read the labelled combined projection")
+        document = json.loads(projection_path.read_text())
+        self.assertEqual(bridge.gm_runner.validate_evidence(document), [], "the GM parser must accept it")
+        self.assertEqual(document['counts'],
+                         {'issues': len(document['evidence']), 'proposals': len(document['proposals'])})
+        self.assertTrue(document['boundaries'])
+        kinds = [e['evidence_kind'] for e in document['evidence']]
+        self.assertEqual(kinds.count(bridge.OPERATIONAL_EVIDENCE_KIND), 2,
+                         "both degraded actors must be visible to the GM intake")
+        self.assertEqual(document['operational_projection']['source_export_sha256'],
+                         record['operational_evidence']['source_export_sha256'])
+        self.assertTrue(record['operational_evidence']['source_export_bytes_unchanged'])
+        self.assertEqual(record['operational_evidence']['source_export_sha256'], export_hashes['after'],
+                         "the game export bytes are preserved")
+        blob = json.dumps(document)
+        self.assertNotIn('PRIVATE_SENTINEL_TEXT', blob,
+                         "no raw error text, reason or accepted reply may reach the projection")
+        receipts = [e['operational'] for e in document['evidence'] if e['evidence_kind'] == bridge.OPERATIONAL_EVIDENCE_KIND]
+        self.assertEqual(sorted(r['actor'] for r in receipts), ['shared:herder', 'shared:well-keeper'])
+        self.assertTrue(all(set(r) <= {'actor', 'controller_status', 'request_id', 'code', 'result_code',
+                                       'replan_policy', 'classification'} for r in receipts))
+
+    def test_freshness_requires_exact_world_seq_and_elapsed_time(self):
+        write(self.scope, dict(self.base_scope))
+        cases = [
+            ('same_seq_stale_time', {'life_seq': 2, 'world_elapsed_seconds': 100.0}, WORLD),
+            ('future_seq', {'life_seq': 99, 'world_elapsed_seconds': 3100.5}, WORLD),
+            ('wrong_world', {'life_seq': 2, 'world_elapsed_seconds': 3100.5}, 'shared:other-town'),
+        ]
+        for label, revision, export_world in cases:
+            self.out = self.root / f'run-{label}'
+            scope = dict(self.base_scope)
+            scope['out_root'] = str(self.out)
+            scope['status_path'] = str(self.root / f'status-{label}.json')
+            write(self.scope, scope)
+            def mutate(current):
+                current['elapsed_seconds'] = 3100.5
+            with mock.patch.object(bridge, 'validate', return_value=[]), \
+                 mock.patch.object(bridge, 'tracked', return_value={'head': 'head', 'files': {}}), \
+                 mock.patch.object(bridge, 'run_owned',
+                                   side_effect=self._life_run({'shared:innkeeper': 'rule_rejection'},
+                                                              mutate=mutate, evidence_revision=revision,
+                                                              export_world=export_world)):
+                self.assertEqual(bridge.main(['--scope', str(self.scope)]), 0)
+            freshness = json.loads((self.out/'run.json').read_text())['cycles'][0]['final_evidence_freshness']
+            self.assertFalse(freshness['fresh'], label)
+
+    def test_cutoff_naive_timestamp_is_refused_without_crashing(self):
+        naive = dict(self.base_scope)
+        naive['cutoff_utc'] = '2026-09-14T01:00:00'
+        self.assertTrue(any('timezone offset' in e for e in bridge.validate(naive)))
+        write(self.scope, naive)
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value={'head': 'head', 'files': {}}), \
+             mock.patch.object(bridge, 'run_owned', side_effect=AssertionError('no dispatch')):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 2, "a naive cutoff is refused, never a crash")
+        self.assertFalse(self.out.exists(), "refusal happens before any output or dispatch")
+
+    def test_unknown_accounting_change_still_stops_the_run(self):
+        write(self.scope, dict(self.base_scope))
+        def run(command, cwd, timeout, log, env=None):
+            values = dict(token.split('=', 1) for token in command[1:])
+            current = json.loads(self.world.read_text()); current['life']['seq'] += 1
+            current['elapsed_seconds'] = 3100.5; write(self.world, current)
+            out = Path(values['--out'])
+            write(out/'result.json', {'engine_exit': 0, 'validation_passed': False,
+                  'model_errors': {'shared:herder': 'provider_error'}, 'upstream_requests': 1,
+                  'budget_stop_reason': '', 'carried_uncertainty_reviewed': True,
+                  'ledger_before': {'ledger_id': 'ledger', 'model': 'kimi-k2.6', 'counts': {'uncertain': 6}},
+                  'ledger_after': {'ledger_id': 'ledger', 'model': 'kimi-k2.6', 'halted': '',
+                                   'counts': {'uncertain': 7}}})
+            write(Path(values['--evidence']), {'world_id': WORLD, 'evidence': [],
+                                               'source_revision': {'life_seq': current['life']['seq'],
+                                                                   'world_elapsed_seconds': 3100.5}})
+            return {'exit_code': 1, 'timed_out': False,
+                    'owned': {'all_members_exited': True, 'active': 0}}
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value={'head': 'head', 'files': {}}), \
+             mock.patch.object(bridge, 'run_owned', side_effect=run):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 1)
+        result = json.loads((self.out/'run.json').read_text())
+        self.assertEqual(result['reason'], 'ledger_identity_or_uncertainty_changed',
+                         "a new unknown cost is never swallowed as a local failure")
+
+
+
     def test_new_provider_error_fails_closed_with_nonzero_exit(self):
         scope = dict(self.base_scope)
         write(self.scope, scope)
         def bad_run(command, cwd, timeout, log, env=None):
+            if command[0] != 'life':
+                Path(log).parent.mkdir(parents=True, exist_ok=True)
+                Path(log).write_text(json.dumps({'status': 'no_action', 'usage': {'model_calls': 0}}) + '\n',
+                                     encoding='utf-8')
+                return {'exit_code': 0, 'timed_out': False,
+                        'owned': {'all_members_exited': True, 'active': 0}}
             values = dict(token.split('=', 1) for token in command[1:])
             changed = world()
             changed['godot']['resident_turns']['shared:fisher'] = {
@@ -115,11 +417,14 @@ class ProductionBridgeTests(unittest.TestCase):
             write(self.world, changed)
             out = Path(values['--out'])
             write(out/'result.json', {'engine_exit': 0, 'validation_passed': False,
-                  'model_errors': {'shared:fisher': 'provider_error'}, 'upstream_requests': 1,
+                  'model_errors': {'shared:fisher': 'gateway_contract_violation'}, 'upstream_requests': 1,
                   'budget_stop_reason':'','carried_uncertainty_reviewed':True,
                   'ledger_before': {'ledger_id':'ledger','model':'kimi-k2.6','counts':{'uncertain':6}},
                   'ledger_after': {'ledger_id':'ledger','model':'kimi-k2.6','halted':'','counts':{'uncertain':6}}})
-            write(Path(values['--evidence']), {'world_id': WORLD, 'evidence': []})
+            write(Path(values['--evidence']), {
+                'world_id': WORLD, 'evidence': [],
+                'source_revision': {'life_seq': changed['life']['seq'],
+                                    'world_elapsed_seconds': changed.get('elapsed_seconds', 3076.75)}})
             return {'exit_code': 1, 'timed_out': False,
                     'owned': {'all_members_exited': True, 'active': 0}}
         with mock.patch.object(bridge, 'validate', return_value=[]), \
