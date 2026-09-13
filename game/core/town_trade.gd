@@ -19,6 +19,17 @@ const SKILL_ASK_NAMES := {
 const TRADE_RANGE := 3.0
 const REPAIR_SECONDS := 60.0
 const WALK_SECONDS := 1.0
+## Bounded, honest close for an ACTIVE social approach (issue-8e69ca9fbae5). The world already
+## gives a blocked trip its own bounded failure in town_places; the same shape is applied here to
+## an approach job: while the mover is still outside the world's own arrival radius and its real
+## remaining distance to this job's meeting point stops improving by the journey detector's own
+## 0.05 m epsilon for APPROACH_BLOCKED_SECONDS (2x TRAVEL_BLOCKED_SECONDS), the approach closes
+## once as `approach_blocked` with no arrival, no work and no property change. Slow walking and a
+## necessary detour keep the approach alive, because only real improvement resets the counter.
+const APPROACH_ARRIVAL_RADIUS := 0.45
+const APPROACH_PROGRESS_EPSILON := 0.05
+const APPROACH_BLOCKED_SECONDS := 90.0
+const APPROACH_BLOCKED_EVENT := "approach_blocked"
 const TRADE_ACTIONS := [
 	"walk", "approach", "offer_repair", "accept", "reject", "cancel", "deliver", "work", "collect", "use_tool"
 ]
@@ -456,7 +467,7 @@ func trade_options(id: String) -> Array:
 			if other == id:
 				continue
 			var target := _meeting_point(id, other)
-			if position_of(id).distance_to(target) > 0.45:
+			if position_of(id).distance_to(target) > APPROACH_ARRIVAL_RADIUS:
 				_option(result, {"id": "approach:" + other, "label": "Approach " + resident(other).name, "action": "approach", "counterparty": other, "target_position": [target.x, target.y, target.z], "duration_seconds": WALK_SECONDS, "_target": other})
 
 		for other in active_ids():
@@ -758,7 +769,7 @@ func _apply_trade_start(id: String, option: Dictionary, command_id: String, prov
 	var contract_id: String = str(option.get("_contract_id", ""))
 	if action in ["walk", "approach"]:
 		var target_position: Array = option.get("target_position", _position_array(target))
-		if action == "approach" and position_of(id).distance_to(_vector(target_position)) <= 0.45:
+		if action == "approach" and position_of(id).distance_to(_vector(target_position)) <= APPROACH_ARRIVAL_RADIUS:
 			return {"ok": true, "code": "no_change", "changed": false}
 		return _start_job(id, action, command_id, provenance, target_position, option.get("duration_seconds", WALK_SECONDS), {"target_id": target})
 	if action == "use_tool":
@@ -886,13 +897,86 @@ func advance(delta: float) -> Dictionary:
 	var jobs: Dictionary = _trade().get("jobs", {})
 	for id in jobs.keys().duplicate():
 		var job: Dictionary = jobs.get(id, {})
-		if job.is_empty() or not active_ids().has(id) or position_of(id).distance_to(_vector(job.target_position)) > 0.45:
+		if job.is_empty() or not active_ids().has(id) or position_of(id).distance_to(_vector(job.target_position)) > APPROACH_ARRIVAL_RADIUS:
 			continue
 		job.elapsed += delta
 		if job.elapsed >= job.duration_seconds:
 			var receipt := _finish_trade_job(id, job)
 			completed.append(receipt)
+	## After the world's own journey endings, an approach that still makes no real progress is
+	## closed honestly instead of staying pending forever.
+	_observe_approach_stalls(delta, completed)
 	return {"ok": true, "completed": completed}
+
+func _observe_approach_stalls(delta: float, completed: Array) -> void:
+	## Physical progress observation for an ACTIVE social approach, owned by the world: the scene
+	## already writes the collision-resolved body position every step, and advance() is the one
+	## place that sees the pending job and the elapsed world time together. The measured quantity
+	## is the same real remaining distance the job's own arrival rule uses, so arrival and
+	## progress can never disagree with the close.
+	var jobs: Dictionary = _trade().get("jobs", {})
+	for id in jobs.keys().duplicate():
+		var job: Dictionary = jobs.get(id, {})
+		if job.is_empty() or str(job.get("action", "")) != "approach" or not active_ids().has(id):
+			continue
+		if not _valid_position(job.get("target_position")):
+			continue
+		var remaining := position_of(id).distance_to(_vector(job.target_position))
+		if remaining <= APPROACH_ARRIVAL_RADIUS:
+			## Inside the world's own arrival radius the ordinary walk rule owns this job.
+			job.best_remaining = remaining
+			job.progress_credit = 0.0
+			job.no_progress_seconds = 0.0
+			continue
+		var best := float(job.get("best_remaining", INF))
+		var gain := 0.0
+		if is_finite(best):
+			gain = maxf(0.0, best - remaining)
+			job.best_remaining = best - gain
+		else:
+			job.best_remaining = remaining
+		## Forward improvement is credited cumulatively, exactly as a blocked public trip is
+		## measured: only closing the distance earns credit, and only credit that actually reaches
+		## the epsilon resets the bound. Oscillation earns nothing, and a drifting mover whose whole
+		## gain never reaches the epsilon still owes the world real progress: every observation the
+		## epsilon does not credit counts elapsed time, however small its positive gain.
+		var credit := float(job.get("progress_credit", 0.0)) + gain
+		var credited := false
+		while credit >= APPROACH_PROGRESS_EPSILON:
+			credit -= APPROACH_PROGRESS_EPSILON
+			credited = true
+		job.progress_credit = credit
+		if credited:
+			job.no_progress_seconds = 0.0
+			continue
+		job.no_progress_seconds = float(job.get("no_progress_seconds", 0.0)) + delta
+		if float(job.no_progress_seconds) >= APPROACH_BLOCKED_SECONDS:
+			completed.append(_close_blocked_approach(id, job))
+
+func _close_blocked_approach(id: String, job: Dictionary) -> Dictionary:
+	## One bounded, honest failure of an active approach: the pending job is erased, its own
+	## command is rejected and the mover receives exactly one personal event. No arrival receipt,
+	## no work, no coin, item or stock change, and no other resident is touched or moved.
+	## The durable personal fact stays a plain, string-only record of what happened to the mover.
+	## The measured distance and no-progress seconds are physical diagnostics; they belong to the
+	## world-scoped journey projection the background GMs already read, never as raw coordinates
+	## inside a resident's own experience.
+	var command_id := str(job.get("command_id", ""))
+	var provenance := str(job.get("provenance", "local_rule_policy"))
+	var target_id := str(job.get("target_id", ""))
+	var trade := _ensure_trade()
+	trade.jobs.erase(id)
+	var receipt := {"ok": false, "code": APPROACH_BLOCKED_EVENT, "actor_id": id, "command_id": command_id}
+	if trade.commands.has(command_id):
+		trade.commands[command_id].status = "rejected"
+		trade.commands[command_id].result = receipt.duplicate(true)
+	var text := "这次走近没有走通，我停了下来，没有到达。"
+	if target_id in active_ids():
+		text = "这次走近%s没有走通，我停了下来，没有到达。" % resident(target_id).name
+	_append_life_event({"type": APPROACH_BLOCKED_EVENT, "actor_id": id, "subject_id": id, "recipient_ids": [id],
+		"operation_id": command_id, "command_id": command_id, "source": provenance, "provenance": provenance,
+		"contractual": false, "target_id": target_id, "text": text})
+	return receipt
 
 func _finish_trade_job(id: String, job: Dictionary) -> Dictionary:
 	var command_id: String = job.command_id

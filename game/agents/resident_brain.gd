@@ -6,6 +6,22 @@ const CONFIG_PATH := "res://agents/resident_brain.json"
 ## cannot survive a cold restart, so town_turns may admit one fresh turn for a saved
 ## receipt naming this identifier instead of holding that resident forever.
 const SESSION_REQUEST_LIMIT_CODE := "brain_session_request_limit"
+## Failure texts the adapter already produces, verbatim from the current sources
+## (third_party OpenGameAgent GameAgentRuntime/GameData/OpenGameAgentNode, and
+## BudgetGatewayProvider.cs), mapped to sanitized identifiers a maintainer can read.
+## Classification is exact-match only: the identifier never claims more than the
+## adapter said, and the two gateway texts deliberately keep their ambiguity because
+## neither one names a particular guard or cause.
+const PROVIDER_FAILURE_IDENTIFIERS := {
+	"The estimated model request exceeds the context window and no transcript compactor is configured.": "brain_context_window_exceeded",
+	"The input payload is too large.": "brain_input_too_large",
+	"budget_gateway_rejected_or_uncertain": "brain_gateway_rejected_or_uncertain",
+	"gateway_validation_failed": "brain_gateway_validation_failed",
+	"canceled": "brain_run_canceled",
+}
+## A near match, an unrecognized text or a text carrying provider/secret material
+## keeps this truthful fallback so the receipt never asserts an unverified cause.
+const GENERIC_PROVIDER_FAILURE_CODE := "brain_provider_failed"
 var _adapter: Node
 var _pending := ""
 var _result: Dictionary = {}
@@ -111,5 +127,10 @@ func _on_completed(input_id: String, result_json: String) -> void:
 func _on_failed(input_id: String, error: String) -> void:
 	if input_id == _pending:
 		# Expose only a verified constant, never arbitrary provider text or secrets.
-		var code := "brain_context_window_exceeded" if error == "The estimated model request exceeds the context window and no transcript compactor is configured." else "brain_provider_failed"
-		_result = {"ok": false, "code": code}
+		_result = {"ok": false, "code": provider_failure_identifier(error)}
+
+func provider_failure_identifier(error: String) -> String:
+	## Static mapping, no state and no side effect: the same adapter text always yields
+	## the same identifier, and any text outside the verified set stays generic. This
+	## changes no limit, retry count, replay decision or controller lifecycle.
+	return str(PROVIDER_FAILURE_IDENTIFIERS.get(error, GENERIC_PROVIDER_FAILURE_CODE))

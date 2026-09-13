@@ -172,16 +172,50 @@ func run() -> void:
 	check(restored.resident(MOVER).coins_col == town.resident(MOVER).coins_col
 		and restored.snapshot().life.items == town.snapshot().life.items,
 		"cold reopen keeps money and items")
+	# Part 2.4 (contract aligned 2026-09-14): an approach that makes no credited progress for 90 s
+	# now ends honestly as one bounded failure instead of staying pending forever. Root reviewed and
+	# deliberately superseded the old "stays truthfully pending after 1200 s" expectation, because
+	# demanding the new failure behaviour and indefinite pending at the same time is contradictory.
+	# The invariant this block exists to protect is unchanged and is asserted more strongly below:
+	# no fabricated arrival, movement, work, delivery, coin or item effect.
+	var mover_position_before: Array = _flat(restored.position_of(MOVER))
+	var mover_coins_before: int = restored.resident(MOVER).coins_col
+	var items_before: Array = restored.snapshot().life.items.duplicate(true)
 	var events_before: int = _command_events(restored.snapshot(), command)
 	var advanced := true
 	for step in 10:
 		var elapsed: Dictionary = restored.transaction(path, func(): return restored.advance(120.0))
 		advanced = advanced and elapsed.ok
 	check(advanced, "world time advances on the restored save: the engine caps one step at 120 s, so ten steps run")
-	check(restored.pending_job(MOVER).get("elapsed") == 0.0 and _command_events(restored.snapshot(), command) == events_before,
-		"an unarrived approach accrues no work and no receipt over 1200 s")
-	check(str(restored.pending_job(MOVER).get("command_id", "")) == command,
-		"the unreached approach stays truthfully pending")
+	var receipts: Array = _command_event_records(restored.snapshot(), command)
+	var blocked_receipts: Array = []
+	var fabricated_receipts: Array = []
+	for event in receipts:
+		var kind := str(event.get("type", "")) + ":" + str(event.get("code", ""))
+		if kind.contains("approach_blocked"):
+			blocked_receipts.append(event)
+		else:
+			fabricated_receipts.append(kind)
+	check(events_before == 0, "the unresolved approach had no receipt before the clock ran")
+	check(receipts.size() == 1 and blocked_receipts.size() == 1,
+		"the stalled approach fails honestly exactly once as approach_blocked across 1200 s: " + str(receipts.size()))
+	check(blocked_receipts.size() == 1 and str(blocked_receipts[0].get("actor_id", "")) == MOVER
+		and (blocked_receipts[0].get("recipient_ids", []) as Array) == [MOVER],
+		"the single failure receipt belongs to the mover and names nobody else")
+	check(fabricated_receipts.is_empty(),
+		"no fabricated movement, arrival, delivery or success receipt appears for the failed approach: " + str(fabricated_receipts))
+	check(_flat(restored.position_of(MOVER)) == mover_position_before,
+		"the mover never physically moved during the failed approach: " + str(_flat(restored.position_of(MOVER))))
+	check(restored.pending_job(MOVER).is_empty(), "the failed approach leaves no pending job behind")
+	var failed_command: Dictionary = restored.snapshot().godot.trade.commands.get(command, {})
+	var failed_result: Variant = failed_command.get("result", {})
+	var failed_code := str(failed_result.get("code", "")) if failed_result is Dictionary else ""
+	check(str(failed_command.get("status", "")) == "rejected" and failed_code == "approach_blocked",
+		"the command is rejected as approach_blocked rather than left pending: "
+		+ str(failed_command.get("status", "")) + "/" + failed_code)
+	check(restored.resident(MOVER).coins_col == mover_coins_before
+		and restored.snapshot().life.items == items_before,
+		"the failed approach moves no money and no items")
 	restored.release_writer(path)
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	# Part 1: real physics on the reviewed geometry.
@@ -230,6 +264,15 @@ func _idle_snapshot(town) -> Dictionary:
 	snap.godot.pending = {}
 	snap.godot.trade = {"jobs": {}, "commands": {}}
 	return snap
+
+func _command_event_records(snap: Dictionary, command: String) -> Array:
+	var out: Array = []
+	for event in snap.life.get("events", []):
+		if str(event.get("operation_id", "")) != command and str(event.get("command_id", "")) != command:
+			continue
+		out.append({"type": str(event.get("type", "")), "code": str(event.get("code", "")),
+			"actor_id": str(event.get("actor_id", "")), "recipient_ids": event.get("recipient_ids", [])})
+	return out
 
 func _command_events(snap: Dictionary, command: String) -> int:
 	var total := 0
