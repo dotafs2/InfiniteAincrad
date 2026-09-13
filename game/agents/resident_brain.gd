@@ -2,6 +2,10 @@ extends Node
 
 # Replace this adapter through the manifest; world facts remain in world_kernel.
 const CONFIG_PATH := "res://agents/resident_brain.json"
+## The per-process request budget's exact failure identifier. The counter it reports
+## cannot survive a cold restart, so town_turns may admit one fresh turn for a saved
+## receipt naming this identifier instead of holding that resident forever.
+const SESSION_REQUEST_LIMIT_CODE := "brain_session_request_limit"
 var _adapter: Node
 var _pending := ""
 var _result: Dictionary = {}
@@ -48,7 +52,7 @@ func propose(view: Dictionary, world_turn: int) -> Dictionary:
 	if not _pending.is_empty():
 		return {"ok": false, "code": "brain_busy"}
 	if _requests >= 12:
-		return {"ok": false, "code": "brain_session_request_limit"}
+		return {"ok": false, "code": SESSION_REQUEST_LIMIT_CODE}
 	_requests += 1
 	_pending = str(_adapter.call("NewOperationId"))
 	var id := _pending

@@ -3,6 +3,9 @@ extends Node
 ## A pending/failed request isolates its resident; the rest of the world continues.
 const Brain = preload("res://agents/resident_brain.gd")
 const IDLE_COOLDOWN := 1800.0
+## Request ids this process failed with the brain's process-local request limit.
+## Their cause is in force here, so they are never treated as cold-restored.
+var _local_limit_failures: Dictionary = {}
 var town
 var save_path := ""
 var brains: Dictionary = {}
@@ -102,6 +105,19 @@ func _retire_brain(id: String) -> void:
 func _record(id: String) -> Dictionary:
 	return town._state.godot.get("resident_turns", {}).get(id, {})
 
+func _cold_recoverable(id: String, record: Dictionary) -> bool:
+	## One saved failure has a cause that cannot survive a restart: the brain's
+	## per-process request counter. A checkpoint carrying it is admitted for exactly
+	## one fresh turn, which is never a replay of the settled request. Every other
+	## held state keeps its review boundary, and so does a failure this process
+	## created or a receipt whose own single recovery already failed.
+	if record.get("status", "") != "provider_error" or str(record.get("error", "")) != Brain.SESSION_REQUEST_LIMIT_CODE:
+		return false
+	var request_id := str(record.get("request_id", ""))
+	if request_id.is_empty() or str(record.get("session_limit_recovery_spent", "")) == request_id:
+		return false
+	return str(_local_limit_failures.get(id, "")) != request_id
+
 func _own_seq(id: String) -> int:
 	var seq := 0
 	for event in town._state.life.events:
@@ -109,9 +125,11 @@ func _own_seq(id: String) -> int:
 			seq = maxi(seq, int(event.seq))
 	return seq
 
-func _requires_review(record: Dictionary) -> bool:
-	if record.get("status", "") in ["pending", "provider_error", "disconnected"]:
+func _requires_review(record: Dictionary, id: String = "") -> bool:
+	if record.get("status", "") in ["pending", "disconnected"]:
 		return true
+	if record.get("status", "") == "provider_error":
+		return not _cold_recoverable(id, record)
 	if record.get("status", "") != "rule_rejection":
 		return false
 	# Only newly classified, terminal stale-option results may replan. Old or
@@ -131,7 +149,7 @@ func ready_resident() -> String:
 	for offset in residents.size():
 		var id: String = residents[(_next_resident_index + offset) % residents.size()]
 		var record := _record(id)
-		if not brains.has(id) or inflight.has(id) or _requires_review(record) or _replan_cooling(record):
+		if not brains.has(id) or inflight.has(id) or _requires_review(record, id) or _replan_cooling(record):
 			continue
 		# A pending job normally excludes the resident. A reported blocked material
 		# travel episode is the explicit exception: the resident observes the
@@ -149,7 +167,7 @@ func step(requested_id: String = "") -> Dictionary:
 	var previous := _record(id)
 	if not brains.has(id) or inflight.has(id) or inflight.size() >= max_parallel:
 		return {"ok": false, "code": "controller_unavailable", "actor_id": id}
-	if _requires_review(previous):
+	if _requires_review(previous, id):
 		return {"ok": false, "code": "saved_model_turn_requires_review", "actor_id": id}
 	if _replan_cooling(previous):
 		return {"ok": false, "code": "replan_cooldown", "actor_id": id}
@@ -199,12 +217,23 @@ func step(requested_id: String = "") -> Dictionary:
 	# Context is bounded; canonical full history remains in the world save.
 	view.experiences = view.get("experiences", []).slice(-16)
 	var seen := _own_seq(id)
+	var recovering := _cold_recoverable(id, previous)
+	var reviews: Array = previous.get("reviews", []).duplicate(true)
+	if recovering:
+		# Keep the exact prior failed receipt, its request id and its epoch as world
+		# evidence before the recovery replaces the working record. If this recovery
+		# turn fails the same way, its own newer receipt is marked denied durably, so
+		# a restart cannot buy another paid retry for it.
+		reviews.append({"status": previous.get("status", ""), "error": previous.get("error", ""),
+			"request_id": previous.get("request_id", ""), "epoch": epoch, "reason": "cold_restored_local_recovery"})
 	var prepared: Dictionary = town.transaction(save_path, func():
 		if not town._state.godot.has("resident_turns"):
 			town._state.godot.resident_turns = {}
 		town._state.godot.resident_turns[id] = {"status": "pending", "seen_seq": seen, "history": previous.get("history", []).duplicate(true),
 			"controller_epoch": epoch, "controller_id": previous.get("controller_id", "local:gateway"), "request_number": number, "request_id": request_id,
-			"choice_protocol": 2, "offered_actions": aliases.duplicate(true), "speech_actions": speech_actions.duplicate(), "reviews": previous.get("reviews", []).duplicate(true)}
+			"choice_protocol": 2, "offered_actions": aliases.duplicate(true), "speech_actions": speech_actions.duplicate(), "reviews": reviews,
+			"session_limit_recovery_spent": str(previous.get("session_limit_recovery_spent", "")),
+			"session_limit_recovery_attempt": recovering}
 		return {"ok": true})
 	if not prepared.ok:
 		return prepared
@@ -233,9 +262,23 @@ func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary) 
 		record.command_id = request_id
 		record.provider_command_id = reply.get("command_id", "")
 		record.provenance = reply.get("provenance", "")
+		# The recovery attempt is a property of this one request: it is consumed here
+		# whatever the outcome, and re-decided at the next admission.
+		var recovery_attempt := bool(record.get("session_limit_recovery_attempt", false))
+		record.session_limit_recovery_attempt = false
 		if not reply.get("ok", false):
 			record.status = "provider_error"
 			record.error = reply.get("code", "unknown_provider_error")
+			if record.error == Brain.SESSION_REQUEST_LIMIT_CODE:
+				if recovery_attempt:
+					# The recovery's own turn hit the cap again. That newer receipt
+					# must stay denied, or every cold restart would buy one more paid
+					# retry instead of holding the resident.
+					record.session_limit_recovery_spent = request_id
+				else:
+					# Created here: the cause is still in force in this process, so this
+					# failure is held rather than treated as a cold-restored one.
+					_local_limit_failures[id] = request_id
 			return {"ok": true, "code": "provider_error"}
 		var decision = reply.get("decision")
 		if not decision is Dictionary or not decision.get("action") is String or not decision.get("reason") is String:
