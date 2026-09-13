@@ -21,6 +21,28 @@ ELAPSED_TOLERANCE = 1e-6
 OPERATIONAL_EVIDENCE_NAME = 'gm-operational-evidence.json'
 OPERATIONAL_EVIDENCE_KIND = 'host_operational_controller_failure'
 
+# Only explicitly published, sanitized controller error identifiers may cross the host bridge.
+# The list is the published vocabulary of game/agents/resident_brain.gd (including the GM-03 exact
+# input-size class and the legacy local request-cap constant). Anything else - raw provider text,
+# secrets, unknown categories - yields None so the bridge never forwards unverified text.
+KNOWN_CONTROLLER_ERROR_IDENTIFIERS = (
+    'brain_input_too_large',
+    'brain_context_window_exceeded',
+    'brain_session_request_limit',
+    'brain_gateway_validation_failed',
+    'brain_gateway_rejected_or_uncertain',
+    'brain_provider_failed',
+    'brain_response_invalid',
+    'brain_run_failed',
+    'brain_run_canceled',
+    'brain_timeout',
+)
+
+def known_error_identifier(turn):
+    """Return the published sanitized identifier a controller record carries, else None."""
+    value = turn.get('error') if isinstance(turn, dict) else None
+    return value if isinstance(value, str) and value in KNOWN_CONTROLLER_ERROR_IDENTIFIERS else None
+
 def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def load(path): return json.loads(Path(path).read_text(encoding='utf-8-sig'))
 def save(path, value):
@@ -139,7 +161,8 @@ def build_operational_evidence(source_path, local_failures, destination):
                                         'code':receipt.get('code'),
                                         'result_code':receipt.get('result_code'),
                                         'replan_policy':receipt.get('replan_policy'),
-                                        'classification':receipt.get('classification')}})
+                                        'classification':receipt.get('classification'),
+                                        'error_identifier':receipt.get('error_identifier')}})
         appended+=1
     document['evidence']=evidence; document['proposals']=proposals
     document['counts']={'issues':len(evidence),'proposals':len(proposals)}
@@ -308,7 +331,8 @@ def main(argv=None):
             result_code=((turn.get('result') or {}).get('code'))
             receipt={'actor':actor,'code':code,'controller_status':turn.get('status'),
                      'request_id':turn.get('request_id'),'result_code':result_code,
-                     'replan_policy':turn.get('replan_policy')}
+                     'replan_policy':turn.get('replan_policy'),
+                     'error_identifier':known_error_identifier(turn)}
             if (actor in allowed and code==allowed[actor].get('status')
                     and controller_error_matches(after_world,actor,allowed[actor])
                     and controller_error_matches(before_world_state,actor,allowed[actor])):

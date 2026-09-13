@@ -445,6 +445,10 @@ func advance(delta: float) -> Dictionary:
 	## episode with it in the SAME transaction, so no still-open episode can outlive its journey.
 	if not _journey_stalls().is_empty():
 		_close_journey_stalls_without_pending_job()
+		## Retiring the closed episode is part of the same transaction. A journey that ends here is
+		## the last event of its own command, so no later observation would ever run the bounded
+		## closed-history prune and the next save would exceed the closed-record limit it validates.
+		_prune_journey_stalls()
 	return result
 
 func _place_job(id: String) -> Dictionary:
