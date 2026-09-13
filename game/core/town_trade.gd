@@ -4,6 +4,18 @@ extends "res://core/town_life.gd"
 
 const SPEECH_ACTIONS := ["visitor_reply", "ask_help", "reply_help", "cancel_help", "offer_repair", "accept", "reject", "cancel", "share_skill", "refer_skill"]
 const SHAREABLE_SKILLS := ["wood_repair", "metal_repair"]
+## Minimal consensual lesson (issue-7444ea09db62). The world already lets a skill holder announce
+## its own skill (share_skill) and lets a listener pass that attribution on (refer_skill), but skill
+## rows could only ever be seeded, so real production capacity could not grow by consent. A lesson is
+## one more voluntary social exchange: a learner that already received an attributed notice/referral
+## about a nearby resident's own shareable repair skill asks that resident to teach it, and that
+## resident answers separately. Only a willing answer from a teacher that really can do the work, with
+## both still inside actual hearing range and the recorded grounding still verified, adds exactly that
+## one skill row to the learner. Nothing is minted, no existing row is touched, and every other kind of
+## request keeps its original meaning.
+const LESSON_NEED_KIND := "lesson"
+const LESSON_EVENT := "skill_lesson"
+const LESSON_ACTIONS := ["notice", "referral"]
 const SKILL_NOTICE_TEXT := {
 	"wood_repair": "I can repair wooden handles.",
 	"metal_repair": "I can repair metal edges.",
@@ -355,6 +367,96 @@ func _has_open_skill_ask(id: String, recipient_id: String, need: Dictionary) -> 
 	# The existing open-request rule, restricted to one structured skill need. Read-only.
 	return not need.is_empty() and has_open_help_request(id, recipient_id, need)
 
+func _lesson_need(option: Dictionary) -> Dictionary:
+	# Canonical structured need of a lesson request, rebuilt from the re-validated skill id so a forged
+	# payload cannot name another kind of need, another skill or another case.
+	var skill_id: String = _option_skill_id(option)
+	if skill_id not in SHAREABLE_SKILLS:
+		return {}
+	return {"kind": LESSON_NEED_KIND, "skill_id": skill_id}
+
+func _lesson_ask_text(skill_id: String) -> String:
+	return "Can you teach me " + _skill_name(skill_id) + "?"
+
+func _lesson_grounding(learner_id: String, teacher_id: String, skill_id: String) -> Dictionary:
+	# The learner's OWN attributed knowledge that this very resident holds this very shareable repair
+	# skill: either that resident's own DIRECT notice the learner actually received, or a structurally
+	# valid referral the learner received naming that resident. Role hints, prose, public speech, the
+	# learner's own skills, unseen notices, contracts and reply_help never ground a lesson. This is
+	# historical attribution only: the teacher's actual current skill is checked separately.
+	if learner_id.is_empty() or teacher_id.is_empty() or learner_id == teacher_id or skill_id not in SHAREABLE_SKILLS:
+		return {}
+	if learner_id not in active_ids() or teacher_id not in active_ids():
+		return {}
+	for notice in _direct_skill_notices(learner_id):
+		if str(notice.get("actor_id", "")) == teacher_id and str(notice.get("skill_id", "")) == skill_id:
+			return {"kind": "notice", "event_id": str(notice.get("event_id", "")), "seq": int(notice.get("seq", 0))}
+	for event in _state.life.events:
+		if not event is Dictionary or event.get("type") != "skill_referral":
+			continue
+		if str(event.get("referred_resident_id", "")) != teacher_id or str(event.get("skill_id", "")) != skill_id:
+			continue
+		if not event.get("recipient_ids", []).has(learner_id) or not _valid_referral_record(event, learner_id):
+			continue
+		return {"kind": "referral", "event_id": str(event.get("event_id", "")), "seq": int(event.get("seq", 0))}
+	return {}
+
+func _lesson_request(request_id: String) -> Dictionary:
+	# Read-only selection of a recorded lesson request, including the attributed grounding it was made
+	# on. Only a canonical shared ask_help carrying a lesson need plus a complete grounding record is a
+	# lesson request; an ordinary, generic or skill-only ask never is.
+	if request_id.is_empty():
+		return {}
+	for event in _state.life.events:
+		if not event is Dictionary or event.get("type") != "ask_help" or str(event.get("request_id", "")) != request_id:
+			continue
+		var need: Variant = event.get("need")
+		if not need is Dictionary or need.get("kind") != LESSON_NEED_KIND or str(need.get("skill_id", "")) not in SHAREABLE_SKILLS:
+			continue
+		if str(event.get("lesson_grounding_kind", "")) not in LESSON_ACTIONS:
+			continue
+		if str(event.get("lesson_grounding_event_id", "")).is_empty() or int(event.get("lesson_grounding_seq", 0)) < 1:
+			continue
+		return event
+	return {}
+
+func _lesson_blocker(learner_id: String, teacher_id: String, skill_id: String) -> String:
+	# Single read-only prerequisite predicate for a minimal consensual lesson: the learner cannot
+	# already do this repair, this nearby resident really holds that shareable skill, the learner
+	# already received an attributed notice/referral about that resident and that skill, and both are
+	# currently active inside actual hearing range. The option builder lists a lesson only while this
+	# returns ""; the authoritative submit path re-derives the same answer instead of trusting the
+	# option. It never mutates world state and never grants the skill by itself.
+	if skill_id not in SHAREABLE_SKILLS or learner_id.is_empty() or teacher_id.is_empty() or learner_id == teacher_id:
+		return "lesson_unavailable"
+	if learner_id not in active_ids() or teacher_id not in active_ids():
+		return "lesson_unavailable"
+	if _has_skill(learner_id, skill_id) or not _has_skill(teacher_id, skill_id):
+		return "lesson_unavailable"
+	if position_of(learner_id).distance_to(position_of(teacher_id)) > HEARING_RANGE:
+		return "lesson_unavailable"
+	if _lesson_grounding(learner_id, teacher_id, skill_id).is_empty():
+		return "lesson_unavailable"
+	return ""
+
+func _lesson_reply_gate(id: String, event: Dictionary) -> String:
+	# "" for every ordinary or skill-only help request, so their reply path stays exactly as it was.
+	# For a lesson request it returns "" only while this resident can really complete that lesson right
+	# now; only then is the willing answer listed truthfully, and the authoritative submit path
+	# re-derives the same answer from the stored request instead of the option payload.
+	var need: Variant = event.get("need")
+	if not need is Dictionary or need.get("kind") != LESSON_NEED_KIND:
+		return ""
+	if str(event.get("lesson_grounding_kind", "")) not in LESSON_ACTIONS or str(event.get("lesson_grounding_event_id", "")).is_empty():
+		return "lesson_unavailable"
+	return _lesson_blocker(str(event.get("actor_id", "")), id, str(need.get("skill_id", "")))
+
+func _lesson_recorded(request_id: String) -> bool:
+	for event in _state.life.events:
+		if event is Dictionary and event.get("type") == LESSON_EVENT and str(event.get("request_id", "")) == request_id:
+			return true
+	return false
+
 func _part_damaged(item: Dictionary, part: String) -> bool:
 	return item.get(part, 0) < 100
 
@@ -424,6 +526,16 @@ func _validate_communicate_need(sender_id: String, need: Variant) -> Dictionary:
 		if sender_id not in active_ids():
 			return _failure("need_invalid")
 		return {"ok": true}
+	if need.get("kind") == LESSON_NEED_KIND:
+		# A structured lesson ask names the one shareable repair skill the asker already received an
+		# attributed notice/referral about. Exactly like the skill ask it claims nothing about property,
+		# teaches nothing by itself and authorizes no repair, price or exchange; the grounding and the
+		# teacher's separately chosen consent are re-derived when a willing answer is recorded.
+		if not _exact_keys(need, ["kind", "skill_id"]) or not need.get("skill_id") is String or need.skill_id not in SHAREABLE_SKILLS:
+			return _failure("need_invalid")
+		if sender_id not in active_ids():
+			return _failure("need_invalid")
+		return {"ok": true}
 	if not _exact_keys(need, ["kind", "item_id", "part"]):
 		return _failure("need_invalid")
 	if need.get("kind") != "repair" or not need.get("item_id") is String or need.get("part") not in ["edge", "handle"]:
@@ -434,7 +546,20 @@ func _validate_communicate_need(sender_id: String, need: Variant) -> Dictionary:
 	return {"ok": true}
 
 func _help_reply_text(id: String, event: Dictionary, choice: String) -> String:
-	if choice != "unavailable" or not event.get("need") is Dictionary:
+	if not event.get("need") is Dictionary:
+		return choice
+	var need: Dictionary = event.need
+	if need.get("kind") == LESSON_NEED_KIND:
+		# A lesson request names the shareable repair skill the asker already received an attributed
+		# notice about. The honest answer is about that skill and this resident's own real capability:
+		# it names no part, no price and no resource, and it never claims the lesson happened.
+		var lesson_name: String = _skill_name(str(need.get("skill_id", "")))
+		if choice == "willing":
+			return "Yes, I will teach you " + lesson_name + "." if _has_skill(id, str(need.get("skill_id", ""))) else "I cannot teach " + lesson_name + "."
+		if choice == "unsure":
+			return "I am not sure I can teach " + lesson_name + " right now."
+		return "I am unavailable; " + ("I can do this work myself, but not right now." if _has_skill(id, str(need.get("skill_id", ""))) else "I cannot do this work myself.")
+	if choice != "unavailable":
 		return choice
 	var skills := _skill_ids(id)
 	var capabilities: Array[String] = []
@@ -527,6 +652,24 @@ func trade_options(id: String) -> Array:
 						"_decision": {"action": "ask_help", "recipient_id": other,
 							"text": "Can you repair the " + part + " of my axe?", "need": need}})
 
+		# Minimal consensual lesson. The learner may ask a nearby resident whose own attributed
+		# repair-skill notice or referral it already received to teach exactly that one skill. Listing
+		# is read-only: the request itself grants no skill, no work and no resource, and the teacher
+		# still answers separately. A request already open with the same need stays listed, because
+		# repeating it is recorded as the very same request rather than a second one.
+		for other in active_ids():
+			if other == id or position_of(id).distance_to(position_of(other)) > HEARING_RANGE:
+				continue
+			for skill_id in SHAREABLE_SKILLS:
+				if not _lesson_blocker(id, other, skill_id).is_empty():
+					continue
+				_option(result, {"id": "ask-teach:" + other + ":" + skill_id,
+					"label": "Ask " + resident(other).name + " to teach me " + _skill_name(skill_id),
+					"action": "ask_help", "counterparty": other, "_skill_id": skill_id, "_lesson": true,
+					"_decision": {"action": "ask_help", "recipient_id": other, "skill_id": skill_id,
+						"need": {"kind": LESSON_NEED_KIND, "skill_id": skill_id},
+						"text": _lesson_ask_text(skill_id)}})
+
 		for event in _state.life.events:
 			if event.get("type") == "visitor_inquiry" and event.get("subject_id") == id and not _request_closed(str(event.request_id)) and _visitor_position.is_finite() and _visitor_position.distance_to(position_of(id)) <= HEARING_RANGE:
 				for choice in ["willing", "unavailable", "unsure"]:
@@ -534,7 +677,12 @@ func trade_options(id: String) -> Array:
 			if event.get("type") == "ask_help" and event.get("subject_id") == id and event.get("actor_id") in active_ids() and not _request_closed(event.request_id):
 				var other: String = event.actor_id
 				if position_of(id).distance_to(position_of(other)) <= HEARING_RANGE:
+					var lesson_gate := _lesson_reply_gate(id, event)
 					for choice in ["willing", "unavailable", "unsure"]:
+						if choice == "willing" and not lesson_gate.is_empty():
+							# A lesson is completed only by a willing teacher that really can teach it
+							# here; while that is untrue the honest remaining answers are refusal/unsure.
+							continue
 						_option(result, {"id": "reply:" + event.request_id + ":" + choice, "label": "Reply: " + _help_reply_text(id, event, choice), "action": "reply_help", "counterparty": other, "_decision": {"action": "reply_help", "recipient_id": other, "request_id": event.request_id, "choice": choice, "text": _help_reply_text(id, event, choice)}})
 			if event.get("type") == "ask_help" and event.get("actor_id") == id and not _request_closed(event.request_id):
 				var target_id: String = event.subject_id
@@ -646,6 +794,12 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 		# A structured skill ask carries its own named skill, so its prerequisites are re-derived and
 		# then recorded through the same shared social path as every other ask. Every ordinary reply,
 		# cancel and generic ask keeps that path untouched.
+		if action == "ask_help" and option.get("_lesson", false):
+			var lesson_asked := _apply_ask_lesson(id, option, command_id, provenance, speech)
+			if not lesson_asked.ok:
+				return lesson_asked
+			commands[command_id] = {"payload": payload, "status": "completed"}
+			return lesson_asked
 		if action == "ask_help" and not _option_skill_id(option).is_empty():
 			var asked := _apply_ask_skill(id, option, command_id, provenance, speech)
 			if not asked.ok:
@@ -655,6 +809,13 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 		var message: Dictionary = option._decision.duplicate(true)
 		if not speech.is_empty():
 			message.text = speech
+		if action == "reply_help":
+			var lesson := _lesson_willing_reply(id, option, command_id, provenance, message)
+			if not lesson.is_empty():
+				if not lesson.ok:
+					return lesson
+				commands[command_id] = {"payload": payload, "status": "completed"}
+				return lesson
 		var social := communicate(id, message, command_id, provenance)
 		if not social.ok:
 			return social
@@ -762,6 +923,86 @@ func _apply_ask_skill(id: String, option: Dictionary, command_id: String, proven
 			break
 	return {"ok": true, "code": "ask_help", "request_id": social.get("request_id", ""), "event_id": social.get("event_id", ""),
 		"skill_id": skill_id, "recipient_id": recipient_id}
+
+func _apply_ask_lesson(id: String, option: Dictionary, command_id: String, provenance: String, speech: String) -> Dictionary:
+	# Authoritative record for a minimal lesson request. Every prerequisite is re-derived from world
+	# state instead of trusting the option payload: the learner's own attributed notice/referral about
+	# that nearby resident's shareable repair skill, that resident really holding it, both inside actual
+	# hearing range, and the learner not already able to do that repair. It moves no Col, item, material
+	# or reservation and it grants no skill by itself. The ask is recorded through the shared social
+	# path, so actor/subject/recipient attribution and the whole reply/cancel lifecycle are exactly the
+	# existing ones; only the machine-readable need and the grounding this request rests on are added to
+	# that same event, as the existing structured asks already do.
+	var teacher_id: String = str(option.get("counterparty", ""))
+	var skill_id: String = _option_skill_id(option)
+	var need := _lesson_need(option)
+	if need.is_empty() or teacher_id == id or teacher_id not in active_ids():
+		return _failure("lesson_unavailable")
+	if not _lesson_blocker(id, teacher_id, skill_id).is_empty():
+		return _failure("lesson_unavailable")
+	if has_open_help_request(id, teacher_id, need):
+		# The identical lesson request is already open: recorded as the same request, no second event
+		# and no resource movement.
+		return {"ok": true, "duplicate": true, "code": "help_request_pending", "skill_id": skill_id, "recipient_id": teacher_id}
+	var grounding := _lesson_grounding(id, teacher_id, skill_id)
+	if grounding.is_empty():
+		return _failure("lesson_unavailable")
+	var decision := {"action": "ask_help", "recipient_id": teacher_id, "need": need, "text": _lesson_ask_text(skill_id)}
+	if not speech.is_empty():
+		decision.text = speech
+	var social := communicate(id, decision, command_id, provenance)
+	if not social.ok:
+		return social
+	for event in _state.life.events:
+		if event is Dictionary and str(event.get("event_id", "")) == str(social.get("event_id", "")):
+			event["lesson_grounding_kind"] = str(grounding.get("kind", ""))
+			event["lesson_grounding_event_id"] = str(grounding.get("event_id", ""))
+			event["lesson_grounding_seq"] = int(grounding.get("seq", 0))
+			break
+	return {"ok": true, "code": "ask_help", "request_id": social.get("request_id", ""), "event_id": social.get("event_id", ""),
+		"skill_id": skill_id, "recipient_id": teacher_id}
+
+func _lesson_willing_reply(id: String, option: Dictionary, command_id: String, provenance: String, message: Dictionary) -> Dictionary:
+	# The teacher's separately chosen answer to a lesson request. It returns {} for every other reply
+	# (ordinary help, a skill-only ask, or an unwilling/unsure answer), so those keep the shared path and
+	# grant nothing. Only a willing answer that the authoritative state still supports completes the
+	# lesson: exactly one row for exactly that one shareable repair skill is added to the learner, the
+	# teacher's own rows are untouched, and no coin, material, item, contract or reserve moves. It is
+	# idempotent per request id: a second willing answer for the same request acknowledges the one
+	# recorded exchange instead of granting the skill twice.
+	var decision: Dictionary = option.get("_decision", {})
+	if str(decision.get("choice", "")) != "willing":
+		return {}
+	var request_id: String = str(decision.get("request_id", ""))
+	var request := _lesson_request(request_id)
+	if request.is_empty():
+		return {}
+	var skill_id: String = str(request.get("need", {}).get("skill_id", ""))
+	var learner_id: String = str(request.get("actor_id", ""))
+	if _lesson_recorded(request_id):
+		return {"ok": true, "duplicate": true, "code": "skill_lesson_recorded", "skill_id": skill_id,
+			"learner_id": learner_id, "request_id": request_id}
+	if _request_closed(request_id):
+		return _failure("lesson_unavailable")
+	var blocker := _lesson_reply_gate(id, request)
+	if not blocker.is_empty():
+		return _failure(blocker)
+	var reply := communicate(id, message, command_id, provenance)
+	if not reply.ok:
+		return reply
+	# The recorded willing answer is the consent this exchange rests on; the learner's single new row is
+	# its consequence, exactly the strict skill schema the world already stores.
+	_state.life.skills.append({"resident_id": learner_id, "skill_id": skill_id})
+	var event := {"type": LESSON_EVENT, "actor_id": id, "subject_id": learner_id, "recipient_ids": [id, learner_id],
+		"operation_id": command_id, "source": provenance, "provenance": provenance, "contractual": false,
+		"skill_id": skill_id, "request_id": request_id, "reply_event_id": str(reply.get("event_id", "")),
+		"text": str(message.get("text", "")),
+		"lesson_grounding_kind": str(request.get("lesson_grounding_kind", "")),
+		"lesson_grounding_event_id": str(request.get("lesson_grounding_event_id", "")),
+		"lesson_grounding_seq": int(request.get("lesson_grounding_seq", 0))}
+	_append_life_event(event)
+	return {"ok": true, "code": "skill_lesson", "skill_id": skill_id, "learner_id": learner_id,
+		"teacher_id": id, "request_id": request_id, "event_id": event.event_id}
 
 func _apply_trade_start(id: String, option: Dictionary, command_id: String, provenance: String) -> Dictionary:
 	var action: String = option.action
