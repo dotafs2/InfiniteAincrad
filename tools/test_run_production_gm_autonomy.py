@@ -166,6 +166,82 @@ class ProductionBridgeTests(unittest.TestCase):
                          ('shared:herder', 'resident_local_settled_quarantine', 'turn:shared:herder:0:9'))
         self.assertNotIn('reason', receipt)
 
+    def test_bridge_module_is_the_exact_sibling_under_test(self):
+        # Portable: anchored in THIS file's own directory, so a private run verifies the private
+        # sibling and an installed run verifies the installed sibling - never a hardcoded path.
+        module_path = Path(bridge.__file__).resolve()
+        sibling = (Path(__file__).resolve().parent / 'run_production_gm_autonomy.py').resolve()
+        self.assertEqual(module_path, sibling,
+                         'the imported bridge must be the exact sibling module next to this test file')
+
+    def test_input_too_large_identifier_reaches_the_host_projection(self):
+        write(self.scope, self.base_scope)
+        def carpenter(current):
+            current['godot']['resident_turns']['shared:carpenter'] = {
+                'status': 'provider_error', 'error': 'brain_input_too_large',
+                'request_id': 'turn:shared:carpenter:1:13',
+                'result': {'code': 'provider_error'}}
+        fixed = {'head': 'head', 'files': {'a': '1'}}
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value=fixed), \
+             mock.patch.object(bridge, 'run_owned',
+                               side_effect=self._life_run({'shared:carpenter': 'provider_error'},
+                                                          mutate=carpenter, exit_code=1)):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 0)
+        result = json.loads((self.out/'run.json').read_text())
+        receipt = result['cycles'][0]['local_failures'][0]
+        self.assertEqual((receipt['actor'], receipt['request_id'], receipt['error_identifier']),
+                         ('shared:carpenter', 'turn:shared:carpenter:1:13', 'brain_input_too_large'))
+        self.assertEqual(receipt['classification'], 'resident_local_settled_quarantine')
+        projections = list(Path(self.out).rglob(bridge.OPERATIONAL_EVIDENCE_NAME))
+        self.assertTrue(projections, "the host operational projection must exist")
+        document = json.loads(projections[0].read_text())
+        entries = [e for e in document['evidence']
+                   if e.get('evidence_kind') == bridge.OPERATIONAL_EVIDENCE_KIND]
+        self.assertEqual(len(entries), 1)
+        self.assertEqual((entries[0]['operational']['actor'], entries[0]['operational']['request_id'],
+                          entries[0]['operational']['error_identifier']),
+                         ('shared:carpenter', 'turn:shared:carpenter:1:13', 'brain_input_too_large'))
+        self.assertNotIn('reason', entries[0]['operational'])
+
+    def test_unknown_or_secret_like_error_text_never_reaches_the_projection(self):
+        secret = 'token=sk-live-9f3c-private-marker'
+        self.assertIsNone(bridge.known_error_identifier({'error': secret}))
+        self.assertIsNone(bridge.known_error_identifier({'error': None}))
+        self.assertIsNone(bridge.known_error_identifier({}))
+        self.assertIsNone(bridge.known_error_identifier({'error': 'brand_new_unknown_class'}))
+        self.assertEqual(bridge.known_error_identifier({'error': 'brain_input_too_large'}),
+                         'brain_input_too_large')
+        self.assertEqual(bridge.known_error_identifier({'error': 'brain_session_request_limit'}),
+                         'brain_session_request_limit')
+        source = self.out/'source-export.json'
+        write(source, {'world_id': WORLD, 'evidence': [], 'proposals': [],
+                       'source_revision': {'life_seq': 180, 'world_elapsed_seconds': 3766.5}})
+        receipts = [
+            {'actor': 'shared:carpenter', 'code': 'provider_error', 'controller_status': 'provider_error',
+             'request_id': 'turn:shared:carpenter:1:13', 'result_code': None, 'replan_policy': None,
+             'classification': 'resident_local_settled_quarantine',
+             'error_identifier': bridge.known_error_identifier({'error': secret})},
+            {'actor': 'shared:herder', 'code': 'provider_error', 'controller_status': 'provider_error',
+             'request_id': 'turn:shared:herder:0:16', 'result_code': None, 'replan_policy': None,
+             'classification': 'resident_local_settled_quarantine'},
+        ]
+        destination = self.out/'projection.json'
+        result = bridge.build_operational_evidence(source, receipts, destination)
+        text = destination.read_text()
+        self.assertNotIn(secret, text)
+        self.assertNotIn('sk-live', text)
+        self.assertEqual(result['appended_operational_entries'], 2)
+        self.assertEqual(result['parser_errors'], [])
+        entries = result and json.loads(text)['evidence']
+        by_actor = {e['operational']['actor']: e['operational'] for e in entries}
+        self.assertIsNone(by_actor['shared:carpenter']['error_identifier'],
+                          "unknown text must be omitted, never forwarded")
+        self.assertIsNone(by_actor['shared:herder']['error_identifier'],
+                          "a legacy receipt without an identifier keeps its generic semantics")
+        self.assertEqual(by_actor['shared:herder']['classification'], 'resident_local_settled_quarantine')
+        self.assertEqual(by_actor['shared:herder']['code'], 'provider_error')
+
     def test_real_schema_known_stale_option_cooldown_is_not_fatal(self):
         scope = dict(self.base_scope)
         scope['allowed_existing_model_errors'] = {'shared:well-keeper': {
@@ -333,6 +409,7 @@ class ProductionBridgeTests(unittest.TestCase):
         receipts = [e['operational'] for e in document['evidence'] if e['evidence_kind'] == bridge.OPERATIONAL_EVIDENCE_KIND]
         self.assertEqual(sorted(r['actor'] for r in receipts), ['shared:herder', 'shared:well-keeper'])
         self.assertTrue(all(set(r) <= {'actor', 'controller_status', 'request_id', 'code', 'result_code',
+                                       'error_identifier',
                                        'replan_policy', 'classification'} for r in receipts))
 
     def test_freshness_requires_exact_world_seq_and_elapsed_time(self):
