@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "policy_id": "gm-autonomy-offline-example",
+  "mode": "offline_fixture",
+  "world_id": "fixture:well-street",
+  "base_revision": null,
+  "objective": "Find one bounded, evidence-backed repair for the trial installation and prove it with the host gate and a running save.",
+  "scope_constraints": {
+    "allowed_source_paths": [
+      "game/capabilities/**"
+    ],
+    "excluded_paths": [
+      "secrets/**",
+      "private/**",
+      "tmp/**",
+      ".git/**",
+      "tools/**",
+      "game/core/**",
+      "game/tests/**",
+      "game/project.godot",
+      "game/scenes/**",
+      "game/agents/**"
+    ],
+    "max_changed_files": 1
+  },
+  "host_owned_paths": [
+    "tools/gm_runner.py",
+    "tools/gm_autonomy.py",
+    "tools/validate_gm_autonomy.py",
+    "game/tests/gm_autonomy_acceptance.gd",
+    "game/tests/gm_autonomy_module_smoke.gd"
+  ],
+  "required_test_commands": [
+    [
+      "python",
+      "tools/validate_gm_autonomy.py",
+      "validate-candidate",
+      "--candidate",
+      ".",
+      "--scope",
+      "{scope_file}",
+      "--policy",
+      "{policy_file}"
+    ]
+  ],
+  "limits": {
+    "max_gms": 10,
+    "max_issues_per_gm": 4,
+    "max_issues_per_cycle": 1,
+    "max_attempts_per_issue": 3,
+    "max_dispatches": 8,
+    "max_publishes": 1,
+    "deadline_seconds": 1500
+  },
+  "paths": {
+    "evidence": "tmp/gm-autonomy-20260913/evidence.json",
+    "state_dir": "tmp/gm-autonomy-20260913/state",
+    "prior_ledger": "tmp/gm-autonomy-20260913/prior-ledger.json"
+  },
+  "deployment": {
+    "checkout": "tmp/gm-autonomy-20260913/trial-deployment",
+    "base_manifest": "tmp/gm-autonomy-20260913/trial-deployment/deployment-base.json",
+    "candidate_isolation": "sparse_alternates",
+    "path_map": {
+      "game/": ""
+    }
+  },
+  "runtime": {
+    "godot": "C:/path/to/Godot_v4.7.2-stable_mono_win64.exe",
+    "save_path": "tmp/gm-autonomy-20260913/runtime/trial-save.json",
+    "script": "res://tests/gm_autonomy_acceptance.gd",
+    "timeout_seconds": 180
+  }
+}

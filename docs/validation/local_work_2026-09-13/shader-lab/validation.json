@@ -1,0 +1,332 @@
+{
+  "captures": [
+    {
+      "height": 540,
+      "is_baseline": true,
+      "mean_rgb": 0.55270847927664,
+      "path": "res://_work/captures/01_baseline_post_on.png",
+      "save_error": 0,
+      "sha256": "e953c77d1120fd535e7315771a6005f47fb4bac84f89f50144c0f316d25f3f01",
+      "tag": "01_baseline_post_on",
+      "width": 960
+    },
+    {
+      "changed_sample_ratio": 0.0177777777777778,
+      "height": 540,
+      "mean_abs_diff_vs_baseline": 0.00679056702825574,
+      "mean_rgb": 0.557101644670951,
+      "path": "res://_work/captures/01b_baseline_post_off.png",
+      "save_error": 0,
+      "sha256": "5631300c9a5711a1832de68aaa0427d70d5e87968ef7bf558df1c294a732007b",
+      "tag": "01b_baseline_post_off",
+      "width": 960
+    },
+    {
+      "changed_sample_ratio": 0.554012345679012,
+      "height": 540,
+      "mean_abs_diff_vs_baseline": 0.0301941046216084,
+      "mean_rgb": 0.522514374655031,
+      "path": "res://_work/captures/02_live_include_edit.png",
+      "save_error": 0,
+      "sha256": "ef5256d01d6900fe57588ed1a78d1654f491aec0865b504ed2789ae74411b439",
+      "tag": "02_live_include_edit",
+      "width": 960
+    },
+    {
+      "changed_sample_ratio": 0.554012345679012,
+      "height": 540,
+      "mean_abs_diff_vs_baseline": 0.0301941046216084,
+      "mean_rgb": 0.522514374655031,
+      "path": "res://_work/captures/03_shared_disk_reload_edit.png",
+      "save_error": 0,
+      "sha256": "ef5256d01d6900fe57588ed1a78d1654f491aec0865b504ed2789ae74411b439",
+      "tag": "03_shared_disk_reload_edit",
+      "width": 960
+    },
+    {
+      "changed_sample_ratio": 0.0,
+      "height": 540,
+      "mean_abs_diff_vs_baseline": 0.0,
+      "mean_rgb": 0.55270847927664,
+      "path": "res://_work/captures/04_restored_default.png",
+      "save_error": 0,
+      "sha256": "e953c77d1120fd535e7315771a6005f47fb4bac84f89f50144c0f316d25f3f01",
+      "tag": "04_restored_default",
+      "width": 960
+    }
+  ],
+  "checks": {
+    "distinct_material_resources": 13,
+    "distinct_models_in_preview": 14,
+    "include_file_on_disk_restored": true,
+    "live_include_code_edit_changed_image": true,
+    "real_gpu_rendering": true,
+    "restored_matches_baseline_again": true,
+    "scene_object_still_same_instance": true,
+    "shared_const_edit_changed_image": true,
+    "single_shared_shader_on_all_surfaces": true,
+    "surface_count": 32
+  },
+  "engine": {
+    "build": "official",
+    "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "hex": 263938,
+    "major": 4,
+    "minor": 7,
+    "patch": 2,
+    "status": "stable",
+    "string": "4.7.2-stable (official)",
+    "timestamp": 0
+  },
+  "failures": [],
+  "finished_at_utc": "2026-09-13T07:25:37",
+  "limits": [
+    "屏幕纹理在“不透明之后、透明之前”采样，因此后处理看不到之后绘制的半透明物，不是最终合成器。",
+    "探针只验证“场景存活 + 改一个共享常量 -> 所有材质一起变 + 截图不同”；它不等于在原生编辑器里手动编辑 shader 的交互验证。",
+    "为了截图可比，探针把 material_wind 在内存里置 0；场景文件里植被风仍是开启的。"
+  ],
+  "mutations": {
+    "const float STYLE_HIGHLIGHT_GAIN = 1.28;": "const float STYLE_HIGHLIGHT_GAIN = 1.55;",
+    "const float STYLE_THRESHOLD = 0.42;": "const float STYLE_THRESHOLD = 0.78;",
+    "const vec3 STYLE_SHADOW_TINT = vec3(0.86, 0.90, 1.00);": "const vec3 STYLE_SHADOW_TINT = vec3(0.62, 0.28, 0.30);"
+  },
+  "notes": [
+    "为了截图可比，探针把材质的 material_wind 临时设为 0（只在内存中，不写回 .tres）",
+    "live edit: 直接改内存里的 ShaderInclude.code（模拟编辑器里改 include 文件）"
+  ],
+  "probe": "tools/render_probe.gd",
+  "probe_ms": 8179,
+  "rendering_method": "forward_plus",
+  "scene": "res://scenes/material_lab.tscn",
+  "surface_sharing": [
+    {
+      "material": "res://scenes/material_lab.tscn::ShaderMaterial_7udhj",
+      "mesh": "PostOutlineQuad",
+      "model": "PreviewCamera",
+      "shader": "res://shaders/anime_post.gdshader",
+      "surface": 0
+    },
+    {
+      "material": "res://materials/lab_ground.tres",
+      "mesh": "Ground",
+      "model": "Ground",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 0
+    },
+    {
+      "material": "res://materials/lab_sphere.tres",
+      "mesh": "TestSphere",
+      "model": "TestSphere",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 0
+    },
+    {
+      "material": "res://materials/f2_wood.tres",
+      "mesh": "F1_ancient_oak_LOD1",
+      "model": "AncientOak",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 0
+    },
+    {
+      "material": "res://materials/f2_foliage.tres",
+      "mesh": "F1_ancient_oak_LOD1",
+      "model": "AncientOak",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 1
+    },
+    {
+      "material": "res://materials/f2_wood.tres",
+      "mesh": "F1_stone_pine_LOD1",
+      "model": "StonePine",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 0
+    },
+    {
+      "material": "res://materials/f2_foliage.tres",
+      "mesh": "F1_stone_pine_LOD1",
+      "model": "StonePine",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 1
+    },
+    {
+      "material": "res://materials/f2_wood.tres",
+      "mesh": "F1_young_maple_LOD1",
+      "model": "YoungMaple",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 0
+    },
+    {
+      "material": "res://materials/f2_foliage.tres",
+      "mesh": "F1_young_maple_LOD1",
+      "model": "YoungMaple",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 1
+    },
+    {
+      "material": "res://materials/residence_metal.tres",
+      "mesh": "F1_Residence_01_LOD1",
+      "model": "Residence01_LindenCourt",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 0
+    },
+    {
+      "material": "res://materials/residence_limestone.tres",
+      "mesh": "F1_Residence_01_LOD1",
+      "model": "Residence01_LindenCourt",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 1
+    },
+    {
+      "material": "res://materials/residence_plaster.tres",
+      "mesh": "F1_Residence_01_LOD1",
+      "model": "Residence01_LindenCourt",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 2
+    },
+    {
+      "material": "res://materials/residence_plain.tres",
+      "mesh": "F1_Residence_01_LOD1",
+      "model": "Residence01_LindenCourt",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 3
+    },
+    {
+      "material": "res://materials/residence_glass.tres",
+      "mesh": "F1_Residence_01_LOD1",
+      "model": "Residence01_LindenCourt",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 4
+    },
+    {
+      "material": "res://materials/residence_oak.tres",
+      "mesh": "F1_Residence_01_LOD1",
+      "model": "Residence01_LindenCourt",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 5
+    },
+    {
+      "material": "res://materials/residence_clay.tres",
+      "mesh": "F1_Residence_01_LOD1",
+      "model": "Residence01_LindenCourt",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 6
+    },
+    {
+      "material": "res://materials/residence_limestone.tres",
+      "mesh": "F1_Residence_03_LOD1",
+      "model": "Residence03_RoseCourtyard",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 0
+    },
+    {
+      "material": "res://materials/residence_plaster.tres",
+      "mesh": "F1_Residence_03_LOD1",
+      "model": "Residence03_RoseCourtyard",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 1
+    },
+    {
+      "material": "res://materials/residence_plain.tres",
+      "mesh": "F1_Residence_03_LOD1",
+      "model": "Residence03_RoseCourtyard",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 2
+    },
+    {
+      "material": "res://materials/residence_glass.tres",
+      "mesh": "F1_Residence_03_LOD1",
+      "model": "Residence03_RoseCourtyard",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 3
+    },
+    {
+      "material": "res://materials/residence_oak.tres",
+      "mesh": "F1_Residence_03_LOD1",
+      "model": "Residence03_RoseCourtyard",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 4
+    },
+    {
+      "material": "res://materials/residence_metal.tres",
+      "mesh": "F1_Residence_03_LOD1",
+      "model": "Residence03_RoseCourtyard",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 5
+    },
+    {
+      "material": "res://materials/residence_clay.tres",
+      "mesh": "F1_Residence_03_LOD1",
+      "model": "Residence03_RoseCourtyard",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 6
+    },
+    {
+      "material": "res://materials/f2_solid.tres",
+      "mesh": "F1_roadside_milestone_LOD1",
+      "model": "Milestone",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 0
+    },
+    {
+      "material": "res://materials/f2_wood.tres",
+      "mesh": "F1_roadside_milestone_LOD1",
+      "model": "Milestone",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 1
+    },
+    {
+      "material": "res://materials/f2_foliage.tres",
+      "mesh": "F1_roadside_milestone_LOD1",
+      "model": "Milestone",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 2
+    },
+    {
+      "material": "res://materials/f2_solid.tres",
+      "mesh": "F1_mossy_boulder_cluster_LOD1",
+      "model": "BoulderCluster",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 0
+    },
+    {
+      "material": "res://materials/f2_foliage.tres",
+      "mesh": "F1_mossy_boulder_cluster_LOD1",
+      "model": "BoulderCluster",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 1
+    },
+    {
+      "material": "res://materials/f2_wood.tres",
+      "mesh": "F1_herb_planter_LOD1",
+      "model": "HerbPlanter",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 0
+    },
+    {
+      "material": "res://materials/f2_solid.tres",
+      "mesh": "F1_herb_planter_LOD1",
+      "model": "HerbPlanter",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 1
+    },
+    {
+      "material": "res://materials/f2_foliage.tres",
+      "mesh": "F1_herb_planter_LOD1",
+      "model": "HerbPlanter",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 2
+    },
+    {
+      "material": "res://materials/f2_foliage.tres",
+      "mesh": "F1_meadow_grass_LOD1",
+      "model": "MeadowGrass",
+      "shader": "res://shaders/anime_surface.gdshader",
+      "surface": 0
+    }
+  ],
+  "video_adapter": "NVIDIA GeForce RTX 4060",
+  "window_size": [
+    960,
+    540
+  ]
+}

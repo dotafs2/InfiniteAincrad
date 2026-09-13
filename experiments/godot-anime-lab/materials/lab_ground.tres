@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://shaders/anime_surface.gdshader" id="1_hdd23"]
+
+[resource]
+resource_name = "lab_ground"
+render_priority = 0
+shader = ExtResource("1_hdd23")
+shader_parameter/material_tint = Color(0.4, 0.45, 0.34, 1)
+shader_parameter/material_use_texture = null
+shader_parameter/material_texture_strength = null
+shader_parameter/material_use_vertex_color = 0.0
+shader_parameter/material_normal_strength = null
+shader_parameter/material_two_sided_normal = null
+shader_parameter/material_alpha_scissor = null
+shader_parameter/material_alpha_threshold = null
+shader_parameter/material_wind = null
+shader_parameter/material_roughness = null
+shader_parameter/material_specular = null

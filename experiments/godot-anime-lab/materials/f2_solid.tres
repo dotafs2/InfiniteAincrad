@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://shaders/anime_surface.gdshader" id="1_xc55l"]
+
+[resource]
+resource_name = "F2_solid"
+render_priority = 0
+shader = ExtResource("1_xc55l")
+shader_parameter/material_tint = null
+shader_parameter/material_use_texture = 0.0
+shader_parameter/material_texture_strength = 1.0
+shader_parameter/material_use_vertex_color = 1.0
+shader_parameter/material_normal_strength = 0.0
+shader_parameter/material_two_sided_normal = 0.0
+shader_parameter/material_alpha_scissor = 0.0
+shader_parameter/material_alpha_threshold = null
+shader_parameter/material_wind = 0.0
+shader_parameter/material_roughness = 0.8
+shader_parameter/material_specular = 0.25

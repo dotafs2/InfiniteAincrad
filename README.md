@@ -1,5 +1,7 @@
 # InfiniteAincrad
 
+本分支的 2026-09-13 本地备份：[Shader 实验室与打开方法](experiments/godot-anime-lab/SNAPSHOT.md) · [SAO 场景参考图](docs/references/sao-season1/README.md) · [今天的 GM 工程与实机截图](docs/validation/local_work_2026-09-13/README.md)。本地磁盘快照，不代表真实十 GM 自主运行已经完成。
+
 [手机看进度与实机画面](docs/PROGRESS.md) · [唯一原路线图](ROADMAP.md)
 
 最新（2026-09-13）：**居民真的用上了扩建街区的公共地点**——十人世界里，居民靠本人读到真实路牌或亲眼看到获得地点知识，20次真实决策中8次自愿前往/在公共点休息，6名居民实际到达，+0.5754353元、无新增未知。[实机图与事实](docs/validation/town_places_2026-09-13.md) · 上一交付：**首条真实闭环**——真实Kimi十人世界中，一个后台DeepSeek GM读取证据、写代码、跑测试、经独立复核发布修复，同一世界的居民随后自然完成原委托并冷恢复。[实机与事实](docs/validation/real_ten_2026-09-12/report.md) · 合并来源可用性：[跨机器合并验证报告](docs/validation/cross_machine_2026-09-12.md)
