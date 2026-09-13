@@ -49,6 +49,7 @@ import shlex
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -79,6 +80,14 @@ REQUIRED_BOUNDARY_FLAGS = ('contains_private_reply_reason', 'contains_other_resi
 DISPOSITIONS = ('observe', 'proposal', 'no_action')
 CLOSED_STATES = ('closed', 'resolved', 'cancelled', 'retracted')
 REPAIRABLE_STATUSES = ('scope_tests_failed', 'invalid_output', 'worker_blocked')
+# Opt-in autonomy: one standing preauthorization lets a bounded cycle run observation, coding,
+# host validation, publication and runtime verification without a supervisor step per stage.
+# Defaults are unchanged and no paid work starts without an explicit policy file.
+AUTONOMY_SCHEMA = 1
+# local_trial is a labelled local fixture whose GM decisions travel over the real provider
+# route; the world it drives is a fresh fixture genesis, never migrated canonical state.
+AUTONOMY_MODES = ('offline_fixture', 'local_trial', 'production')
+AUTONOMY_ORIGIN = 'autonomous_observation'
 # Authoritative per-issue source identity. proposal_id / issue_id come first so that
 # two residents proposing the same capability keep two separate issue sources.
 IDENTITY_FIELDS = ('proposal_id', 'issue_id', 'symbol_id', 'collision_id', 'request_id')
@@ -131,9 +140,12 @@ Rules for results:
   refused;
 - if open_issues is empty return "results": [].
 - new_issues is optional and permits at most ONE evidence-backed hypothesis, only when
-  GM STATE contains an investigation. Copy its evidence_refs literally. An investigation is
-  supervisor_specified: never describe it as spontaneous discovery. Your proposal is unverified,
-  does not grant coding scope, and must retain the distinction between observed facts and inference.
+  GM STATE contains an investigation. Copy its evidence_refs literally. Read the investigation's
+  origin field literally: "autonomous_observation" means the host derived the pointers from the
+  standing autonomy policy and the exported evidence, so nothing was discovered spontaneously;
+  "supervisor_specified" means a human supervisor asked for the investigation. Your proposal is
+  unverified, does not grant coding scope, and must retain the distinction between observed facts
+  and inference.
 - return new_issues: [] when investigation yields no concrete supported proposal; do not invent work.
 """
 
@@ -160,6 +172,31 @@ OUTPUT CONTRACT: end your turn with exactly one fenced ```json block and nothing
  "notes": "<=400 chars>"}
 """
 
+FEEDBACK_DECISIONS = ('accept', 'repair', 'no_action', 'escalate')
+STABLE_FEEDBACK_INSTRUCTIONS = """You are one of the ten independent BACKGROUND GMs of the InfiniteAincrad persistent world.
+You are receiving the host's factual receipt for the release you proposed and claimed. The host
+gate, the publication and the running world - not you - produced these facts.
+
+Rules: read the receipt literally. installed=true and used=true mean the running world used the
+change; installed_but_unused=true means it was installed and did nothing; a verification failure
+means the world did not confirm your proposal. Do not claim a resident learned, owns or did
+something the receipt does not show. Do not describe a hypothesis as verified. You must not
+modify the repository, the world save or configuration, must not run paid or NPC model calls and
+must not commit or push.
+
+OUTPUT CONTRACT: end your turn with exactly one fenced ```json block and nothing after it:
+{"gm_id": "<gm id from GM STATE>",
+ "receipt_sha256": "<receipt_sha256 copied verbatim from GM STATE: binds this answer to this receipt>",
+ "acknowledged": true,
+ "decision": "accept" | "repair" | "no_action" | "escalate",
+ "next_work": "<=400 chars: what you will do next, or why nothing is needed",
+ "evidence_refs": ["<pointer from the receipt that you relied on>"],
+ "note": "<optional, <=200 chars>"}
+Use "repair" only when the receipt shows a bounded defect you will fix yourself in your own next
+coding attempt; the host grants at most one bounded same-owner repair opportunity. Use "escalate"
+when the receipt shows a condition you cannot resolve inside your own bounded scope.
+"""
+
 
 def utc_stamp() -> str:
     return dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
@@ -180,9 +217,16 @@ def sha256_file(path: Path) -> str:
 def save_json(path: Path, value) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + '.next')
-    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + '\n',
-                         encoding='utf-8')
-    os.replace(temporary, path)
+    payload = json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + '\n'
+    for attempt in range(5):
+        temporary.write_text(payload, encoding='utf-8')
+        try:
+            os.replace(temporary, path)
+            return
+        except PermissionError:
+            if attempt == 4:
+                raise
+            time.sleep(0.2 * (attempt + 1))
 
 
 def load_json(path: Path):
@@ -902,6 +946,78 @@ def read_investigation(path: Path | None, document: dict, digest: str) -> dict |
     return investigation
 
 
+def read_autonomy_policy(path: Path) -> dict:
+    """Load the standing preauthorization that lets one bounded cycle run without a step-per-stage
+    supervisor dispatch. Defaults stay unchanged: without this file nothing autonomous happens."""
+    policy = load_json(Path(path))
+    if not isinstance(policy, dict):
+        raise ValueError('autonomy policy must be a JSON object')
+    if policy.get('schema_version') != AUTONOMY_SCHEMA:
+        raise ValueError(f'autonomy policy schema_version must be {AUTONOMY_SCHEMA}')
+    if policy.get('mode') not in AUTONOMY_MODES:
+        raise ValueError(f'autonomy policy mode must be one of {AUTONOMY_MODES}')
+    for field in ('policy_id', 'world_id', 'objective'):
+        value = policy.get(field)
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f'autonomy policy {field} must be a non-empty string')
+    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,99}', policy['policy_id']):
+        raise ValueError('autonomy policy policy_id must be a stable 1..100 character key')
+    if not 12 <= len(policy['objective'].strip()) <= 800:
+        raise ValueError('autonomy policy objective must be a 12..800 character sentence')
+    return policy
+
+
+def autonomy_scope_constraints(policy: dict) -> dict:
+    constraints = policy.get('scope_constraints') or {}
+    return {'allowed_source_paths': list(constraints.get('allowed_source_paths') or []),
+            'excluded_paths': list(constraints.get('excluded_paths') or []),
+            'max_changed_files': constraints.get('max_changed_files'),
+            'host_owned_paths': list(policy.get('host_owned_paths') or []),
+            'required_test_commands': policy.get('required_test_commands') or []}
+
+
+def autonomy_investigation(document: dict, digest: str, policy: dict) -> dict:
+    """Host-derived evidence pointers for an autonomous observation turn.
+
+    The origin is explicit: this is not a supervisor investigation and never claims that the GM
+    spontaneously discovered anything. A GM hypothesis built from these pointers stays a
+    hypothesis until the host validates a scope and a real runtime observation exists.
+    """
+    refs = [f'/evidence/{index}' for index in range(min(len(document['evidence']), 4))]
+    refs += [f'/proposals/{index}' for index in range(min(len(document['proposals']), 4))]
+    refs.append('/counts')
+    refs = refs[:8]
+    investigation = {'investigation_id': 'autonomy:' + policy['policy_id'],
+                     'world_id': document['world_id'], 'source_sha256': digest,
+                     'origin': AUTONOMY_ORIGIN, 'objective': policy['objective'].strip(),
+                     'evidence_refs': refs,
+                     'evidence': {ref: evidence_pointer(document, ref) for ref in refs}}
+    investigation['content_digest'] = sha256_bytes(canonical(investigation).encode())
+    return investigation
+
+
+def autonomy_policy_block(policy: dict) -> str:
+    """Bounded preauthorization the GM can see; the host still derives and enforces the scope."""
+    constants = autonomy_scope_constraints(policy)
+    block = {'policy_id': policy['policy_id'], 'mode': policy['mode'],
+             'world_id': policy['world_id'], 'objective': policy['objective'],
+             'origin': AUTONOMY_ORIGIN, 'constraints': constants,
+             'contract_extension': (
+                 'You may propose your own bounded coding scope. Put it in a "scope" object on the '
+                 'single new_issues entry and/or on a results entry: '
+                 '{"objective": "<one concrete sentence>", "files": ["<repo-relative path>"], '
+                 '"acceptance": ["<observable check>"]}. The host validates every path against '
+                 'constraints.allowed_source_paths and excluded_paths, rejects more than '
+                 'max_changed_files paths, and ignores any test command you name: only the host '
+                 'required_test_commands run, and host_owned_paths must stay byte-identical. Your '
+                 'proposal is a hypothesis, not a verified fact, an approval or a release.'),
+             'derived_by_host': ('allowed paths, changed-file limit, test commands, publication, '
+                                 'runtime verification and GM feedback')}
+    return ('[AUTONOMY_POLICY]\n'
+            + json.dumps(block, ensure_ascii=False, sort_keys=True, indent=2)
+            + '\n[END_AUTONOMY_POLICY]\n')
+
+
 def validate_new_issues(answer, investigation: dict | None) -> tuple[list[dict], list[str]]:
     entries = answer.get('new_issues', []) if isinstance(answer, dict) else []
     if not isinstance(entries, list) or len(entries) > 1:
@@ -924,8 +1040,11 @@ def validate_new_issues(answer, investigation: dict | None) -> tuple[list[dict],
         return [], ['new_issues[0].evidence_refs must copy selected investigation pointers']
     if not isinstance(entry.get('claim_coding'), bool):
         return [], ['new_issues[0].claim_coding must be boolean']
+    scope = entry.get('scope')
+    if scope is not None and not isinstance(scope, dict):
+        return [], ['new_issues[0].scope must be an object when present']
     return [{'proposal_key': key, 'summary': summary.strip(), 'evidence_refs': refs,
-             'claim_coding': entry['claim_coding']}], []
+             'claim_coding': entry['claim_coding'], 'scope': scope}], []
 
 
 def register_new_issues(state: dict, gm_id: str, entries: list[dict], investigation: dict,
@@ -950,7 +1069,9 @@ def register_new_issues(state: dict, gm_id: str, entries: list[dict], investigat
                       'status': 'hypothesis', 'verified_in_world': False,
                       'investigation': investigation, 'first_investigation': investigation,
                       'run_id': run_id,
-                      'session_id': state['sessions'][gm_id]['session_id']}
+                      'session_id': state['sessions'][gm_id]['session_id'],
+                      'observation_origin': investigation.get('origin', 'supervisor_specified'),
+                      'proposed_scope': entry.get('scope')}
         record = state['issues'].setdefault(issue_id, {
             'issue_id': issue_id, 'world_id': state['world_id'], 'evidence_kind': 'gm_proposal',
             'identity_key': key, 'identity_field': 'gm+investigation+proposal_key',
@@ -965,6 +1086,7 @@ def register_new_issues(state: dict, gm_id: str, entries: list[dict], investigat
         record['provenance']['investigation'] = investigation
         record['provenance']['latest_run_id'] = run_id
         record['entry'] = entry
+        record['proposed_scope'] = entry.get('scope')
         record['summary'] = entry['summary']
         record['content_digest'] = issue_content_digest(
             {'proposal': entry, 'source_sha256': investigation['source_sha256']}, 'proposed')
@@ -1063,6 +1185,8 @@ def build_prompt(document, evidence_path, digest, report, state, item, run_id, b
     common = common_evidence_block(document, evidence_path, digest, report, max(2000, budget - 6000))
     record = state['sessions'][item['gm_id']]
     prompt = common + gm_state_block(state, item, record['outcomes'][-5:], run_id, digest)
+    if item.get('autonomy_policy'):
+        prompt += autonomy_policy_block(item['autonomy_policy'])
     if len(prompt.encode('utf-8')) > budget:
         raise ValueError(f'prompt for {item["gm_id"]} exceeds --max-prompt-bytes {budget}')
     return prompt
@@ -1118,7 +1242,7 @@ def extract_json_object(text: str):
         cursor = index + consumed
         if not isinstance(value, dict):
             continue
-        if 'results' in value or 'status' in value:
+        if 'results' in value or 'status' in value or 'acknowledged' in value:
             contracts.append(value)
         elif 'disposition' in value:
             dispositions.append(value)
@@ -1159,10 +1283,15 @@ def validate_gm_output(document, gm_id: str, slice_ids: list[str]) -> tuple[list
         if disposition == 'no_action' and claim:
             errors.append(f'results[{index}] claims coding while declaring no_action')
             continue
+        scope = item.get('scope')
+        if scope is not None and not isinstance(scope, dict):
+            errors.append(f'results[{index}].scope must be an object when present')
+            continue
         seen.add(issue_id)
         accepted.append({'issue_id': issue_id, 'disposition': disposition, 'claim_coding': claim,
                          'summary': str(item.get('summary', ''))[:400],
-                         'evidence_refs': [str(ref) for ref in (item.get('evidence_refs') or [])][:8]})
+                         'evidence_refs': [str(ref) for ref in (item.get('evidence_refs') or [])][:8],
+                         'scope': scope})
     return accepted, errors
 
 
@@ -1393,7 +1522,7 @@ def global_unknown_gms(state: dict) -> list[str]:
 
 
 def apply_gm_outcomes(state: dict, gm_id: str, results: list[dict], digest: str,
-                      run_id: str) -> list[dict]:
+                      run_id: str, observation_origin: str = 'evidence_observation') -> list[dict]:
     notes = []
     for result in results:
         issue = state['issues'][result['issue_id']]
@@ -1401,7 +1530,8 @@ def apply_gm_outcomes(state: dict, gm_id: str, results: list[dict], digest: str,
                  'claim_coding': result['claim_coding'], 'summary': result['summary'],
                  'evidence_refs': result['evidence_refs'], 'snapshot_sha256': digest,
                  'content_digest': issue['content_digest'], 'run_id': run_id, 'utc': utc_iso(),
-                 'claim_verified_in_world': False}
+                 'claim_verified_in_world': False, 'observation_origin': observation_origin,
+                 'proposed_scope': result.get('scope')}
         if result['claim_coding']:
             owner = issue.get('owner_gm')
             if owner and owner != gm_id:
@@ -1417,6 +1547,8 @@ def apply_gm_outcomes(state: dict, gm_id: str, results: list[dict], digest: str,
                 issue['owner_since'] = utc_iso()
                 issue['owner_run_id'] = run_id
                 entry['claim_accepted'] = True
+                if isinstance(result.get('scope'), dict):
+                    issue['proposed_scope'] = result['scope']
         issue['outcomes'].append(entry)
         issue['settled'][gm_id] = {'content_digest': issue['content_digest'],
                                    'disposition': result['disposition'], 'run_id': run_id,
@@ -1464,8 +1596,24 @@ def observe(args) -> int:
     if errors:
         return refusal('malformed_source', '; '.join(errors[:8]), 4, error_count=len(errors),
                        evidence_sha256=digest)
+    policy_path = Path(args.autonomy_policy).resolve() if args.autonomy_policy else None
+    policy = None
+    if policy_path is not None:
+        if args.investigation_file is not None:
+            return refusal('usage', '--autonomy-policy and --investigation-file are mutually '
+                           'exclusive; one observation has one explicit origin', 2)
+        try:
+            policy = read_autonomy_policy(policy_path)
+        except (ValueError, OSError, json.JSONDecodeError) as error:
+            return refusal('autonomy_policy_invalid', str(error), 2)
+        if policy['world_id'] != document['world_id']:
+            return refusal('autonomy_world_mismatch',
+                           'autonomy policy world_id does not match the evidence world', 4,
+                           policy_world_id=policy['world_id'], evidence_world_id=document['world_id'])
+    observation_origin = AUTONOMY_ORIGIN if policy else 'evidence_observation'
     try:
-        investigation = read_investigation(args.investigation_file, document, digest)
+        investigation = autonomy_investigation(document, digest, policy) if policy else \
+            read_investigation(args.investigation_file, document, digest)
     except (ValueError, OSError) as error:
         return refusal('investigation_invalid', str(error), 4)
     prior_reference = prior_ledger_reference(Path(args.prior_ledger))
@@ -1484,8 +1632,14 @@ def observe(args) -> int:
                            previous_vector=report['previous_vector'])
         plan = plan_observation(state, selected, args.max_issues_per_gm, investigation)
         run_id = 'run-' + utc_stamp() + '-' + os.urandom(3).hex()
+        for item in plan:
+            item['autonomy_policy'] = policy
+        autonomy_reference = {'policy_id': policy['policy_id'], 'mode': policy['mode'],
+                              'origin': AUTONOMY_ORIGIN, 'policy_sha256': sha256_file(policy_path)} \
+            if policy else None
         return emit({'status': 'dry_run', 'kind': 'gm_observe', 'run_id': run_id,
                      'route': route.reference(),
+                     'autonomy': autonomy_reference,
                      'world_binding': state.get('world_id'),
                      'evidence': {'path': relative(evidence_path), 'sha256': digest,
                                   'world_id': document['world_id'], 'kind': document['kind'],
@@ -1537,6 +1691,11 @@ def observe(args) -> int:
         plan = plan_observation(state, selected, args.max_issues_per_gm, investigation)
         run_id = 'run-' + utc_stamp() + '-' + os.urandom(3).hex()
         run_dir = state_dir / 'runs' / run_id
+        for item in plan:
+            item['autonomy_policy'] = policy
+        autonomy_reference = {'policy_id': policy['policy_id'], 'mode': policy['mode'],
+                              'origin': AUTONOMY_ORIGIN, 'policy_sha256': sha256_file(policy_path)} \
+            if policy else None
         run_dir.mkdir(parents=True, exist_ok=False)
         instructions = run_dir / 'instructions.md'
         instructions.write_text(STABLE_INSTRUCTIONS, encoding='utf-8')
@@ -1544,6 +1703,7 @@ def observe(args) -> int:
         save_json(catalog, codex_catalog(STABLE_INSTRUCTIONS))
         protected = [evidence_path] + ([args.investigation_file.resolve()]
                                       if args.investigation_file else []) + \
+                    ([policy_path] if policy_path else []) + \
                     [Path(path).resolve() for path in (args.protect or [])]
         guards_before = guard_snapshot(protected)
         results, exit_code, aborted = [], 0, None
@@ -1631,7 +1791,8 @@ def observe(args) -> int:
                     accepted.extend(created)
                     outcome['new_issue_ids'] = [entry['issue_id'] for entry in created]
                     outcome['claim_conflicts'] = apply_gm_outcomes(state, gm_id, accepted, digest,
-                                                                   run_id)
+                                                                   run_id,
+                                                                   observation_origin=observation_origin)
                     if item['investigation']:
                         record.setdefault('investigations', {})[
                             item['investigation']['content_digest']] = {
@@ -1668,6 +1829,7 @@ def observe(args) -> int:
         store_state(state_dir, state)
         summary = {'status': 'ok' if exit_code == 0 else 'incomplete', 'kind': 'gm_observe',
                    'run_id': run_id, 'run_dir': relative(run_dir), 'route': route.reference(),
+                   'autonomy': autonomy_reference,
                    'world_binding': state.get('world_id'),
                    'evidence': {'path': relative(evidence_path), 'sha256': digest,
                                 'world_id': document['world_id'],
@@ -2245,6 +2407,190 @@ def acknowledge(args) -> int:
                      'note': 'the uncertain record is preserved in history, not zeroed'}, 0)
 
 
+def build_feedback_prompt(state: dict, gm_id: str, receipt: dict, receipt_sha: str,
+                          run_id: str) -> str:
+    owned = [issue_projection(issue) for issue in state['issues'].values()
+             if issue.get('owner_gm') in (gm_id, None) and issue.get('lifecycle') == 'current']
+    block = {'gm_id': gm_id, 'run_id': run_id, 'receipt_sha256': receipt_sha,
+             'session_id': state['sessions'][gm_id].get('session_id'),
+             'owned_or_open_issues': owned[:8]}
+    return ('[FEEDBACK_RECEIPT]\n'
+            + json.dumps(receipt, ensure_ascii=False, sort_keys=True, indent=2)
+            + '\n[END_FEEDBACK_RECEIPT]\n[GM_STATE]\n'
+            + json.dumps(block, ensure_ascii=False, sort_keys=True, indent=2)
+            + '\n[END_GM_STATE]\n')
+
+
+def validate_feedback_output(answer, gm_id: str, receipt_sha256: str = '') -> tuple[dict, list[str]]:
+    errors = []
+    if not isinstance(answer, dict):
+        return {}, ['no JSON contract object found in the feedback answer']
+    if answer.get('gm_id') not in (None, gm_id):
+        errors.append(f'gm_id mismatch: answer claims {answer.get("gm_id")!r}')
+    echoed = answer.get('receipt_sha256')
+    if not receipt_sha256:
+        errors.append('no receipt digest was supplied to bind the acknowledgement')
+    elif not isinstance(echoed, str) or echoed != receipt_sha256:
+        errors.append('the answer must echo the supplied receipt_sha256 so the acknowledgement '
+                      'belongs to this exact receipt, not a stale or generic success')
+    if answer.get('acknowledged') is not True:
+        errors.append('acknowledged must be true')
+    decision = answer.get('decision')
+    if decision not in FEEDBACK_DECISIONS:
+        errors.append(f'decision must be one of {FEEDBACK_DECISIONS}')
+    next_work = answer.get('next_work')
+    if not isinstance(next_work, str) or not 1 <= len(next_work.strip()) <= 400:
+        errors.append('next_work must be 1..400 characters')
+    refs = answer.get('evidence_refs')
+    if refs is not None and (not isinstance(refs, list)
+                             or any(not isinstance(ref, str) for ref in refs)):
+        errors.append('evidence_refs must be a list of strings when present')
+    if errors:
+        return {}, errors
+    return {'gm_id': gm_id, 'acknowledged': True, 'decision': decision,
+            'next_work': next_work.strip(),
+            'receipt_sha256': receipt_sha256,
+            'evidence_refs': [str(ref) for ref in (refs or [])][:8],
+            'note': str(answer.get('note', ''))[:200]}, []
+
+
+def feedback(args) -> int:
+    """One real transport turn that delivers a host receipt to its owning GM and requires a
+    structured acknowledgement bound to that receipt. This is a model-consumed delivery, not a
+    queued JSON item."""
+    try:
+        route = Route(args.config, args.key_file, args.codex, args.codex_home)
+    except (ValueError, OSError) as error:
+        return refusal('route_preflight', str(error), 2)
+    receipt_path = Path(args.receipt_file).resolve()
+    if not receipt_path.is_file():
+        return refusal('feedback_receipt_missing', str(receipt_path), 2)
+    receipt_bytes = receipt_path.read_bytes()
+    receipt = load_json(receipt_path)
+    if not isinstance(receipt, dict):
+        return refusal('feedback_receipt_invalid', 'receipt must be a JSON object', 2)
+    if args.dry_run:
+        return emit({'status': 'dry_run', 'gm_id': args.gm,
+                     'receipt_sha256': sha256_bytes(receipt_bytes)}, 0)
+    state_dir = Path(args.state_dir).resolve()
+    with StateLock(state_dir, args.break_lock):
+        state = load_state(state_dir)
+        recovered = roll_in_flight_recovery(state)
+        if args.gm not in state['sessions']:
+            return refusal('unknown_gm', args.gm, 2)
+        unknown = global_unknown_gms(state)
+        if unknown:
+            store_state(state_dir, state)
+            return refusal('unresolved_unknown_cost',
+                           'unknown paid usage blocks a new dispatch', 5,
+                           gms=global_unknown_cost(state), recovered=recovered)
+        record = state['sessions'][args.gm]
+        if record.get('unresolved'):
+            store_state(state_dir, state)
+            return refusal('unresolved_prior_attempt',
+                           'acknowledge the recorded failed attempt before a new dispatch', 5,
+                           gms={args.gm: record['unresolved']})
+        run_id = 'feedback-' + utc_stamp() + '-' + os.urandom(3).hex()
+        run_dir = state_dir / 'runs' / run_id
+        run_dir.mkdir(parents=True, exist_ok=False)
+        instructions = run_dir / 'instructions.md'
+        instructions.write_text(STABLE_FEEDBACK_INSTRUCTIONS, encoding='utf-8')
+        catalog = run_dir / 'models.json'
+        save_json(catalog, codex_catalog(STABLE_FEEDBACK_INSTRUCTIONS))
+        receipt_sha = sha256_bytes(receipt_bytes)
+        prompt = build_feedback_prompt(state, args.gm, receipt, receipt_sha, run_id)
+        protected = [receipt_path] + [Path(path).resolve() for path in (args.protect or [])]
+        guards_before = guard_snapshot(protected)
+        resume_id = record.get('session_id') or None
+        if resume_id:
+            reason = route.preflight_resume(resume_id)
+            if reason:
+                record['last_status'] = 'resume_preflight_failed'
+                store_state(state_dir, state)
+                return refusal('resume_preflight_failed', reason, 2)
+        intent = {'run_id': run_id, 'gm_id': args.gm, 'kind': 'feedback',
+                  'receipt_sha256': receipt_sha, 'pid': None, 'status': 'waiting',
+                  'started_utc': utc_iso()}
+        record['in_flight'] = intent
+        store_state(state_dir, state)
+
+        def on_process(pid, intent=intent):
+            intent['pid'] = pid
+            intent['status'] = 'running'
+            store_state(state_dir, state)
+
+        attempt = run_codex_once(route, ROOT, run_dir, 'feedback', prompt, instructions, catalog,
+                                 resume_id, args.timeout, on_process=on_process)
+        account_native_usage(state, attempt, resume_id)
+        verdict = classify_attempt(attempt, resume_id)
+        status, cost = verdict['status'], verdict['cost']
+        record['in_flight'] = None
+        changed = guard_diff(guards_before, guard_snapshot(protected))
+        outcome = {'run_id': run_id, 'gm_id': args.gm, 'kind': 'autonomy_feedback_ack',
+                   'receipt_sha256': receipt_sha, 'cost': cost,
+                   'acknowledged': False, 'decision': None, 'next_work': None,
+                   'usage': attempt.get('usage') if usage_is_measured(attempt.get('usage'))
+                   else None,
+                   'usage_measured': usage_is_measured(attempt.get('usage')),
+                   'pid': attempt.get('pid'), 'exit_code': attempt.get('exit_code'),
+                   'protected_paths_changed': changed,
+                   'errors': attempt.get('events', {}).get('errors', [])[:5],
+                   'utc': utc_iso(), **usage_evidence(attempt)}
+        if status == 'ok' and not resume_id and attempt.get('thread_returned'):
+            record['session_id'] = attempt['thread_returned']
+            record['session_source'] = 'created'
+        if status == 'ok':
+            ack, errors = validate_feedback_output(extract_json_object(attempt['result_text']),
+                                                   args.gm, receipt_sha)
+            outcome['validation_errors'] = errors
+            if errors:
+                status = 'invalid_output'
+            else:
+                outcome.update(ack)
+                outcome['validation_errors'] = []
+                if args.issue and ack['decision'] == 'repair':
+                    issue = state['issues'].get(args.issue)
+                    if issue is not None and issue.get('owner_gm') in (None, args.gm):
+                        issue.setdefault('repair_requests', []).append(
+                            {'run_id': run_id, 'gm_id': args.gm, 'next_work': ack['next_work'],
+                             'utc': utc_iso()})
+                        issue['repair_requests'] = issue['repair_requests'][-10:]
+                        issue['settled'].pop(args.gm, None)
+                        outcome['repair_requested_issue'] = args.issue
+        outcome['status'] = status
+        record['outcomes'].append(outcome)
+        record['outcomes'] = record['outcomes'][-20:]
+        record.setdefault('feedback_attempts', []).append(
+            {key: outcome[key] for key in ('run_id', 'status', 'cost', 'acknowledged', 'decision',
+                                           'next_work', 'usage_measured', 'utc', 'receipt_sha256')})
+        record['feedback_attempts'] = record['feedback_attempts'][-10:]
+        if status != 'ok':
+            if cost == 'unknown':
+                record['unresolved'] = unresolved_record(
+                    outcome, status, cost, attempt, note='feedback turn with unknown usage')
+                store_state(state_dir, state)
+                return emit({'status': status, 'kind': 'unresolved_unknown_cost', 'cost': cost,
+                             'gm_id': args.gm, 'receipt_sha256': receipt_sha,
+                             **usage_evidence(attempt)}, 5)
+            record['last_status'] = status
+            store_state(state_dir, state)
+            return emit({'status': status, 'cost': cost, 'gm_id': args.gm, 'run_id': run_id,
+                         'acknowledged': False,
+                         'validation_errors': outcome.get('validation_errors') or [],
+                         'protected_paths_changed': changed,
+                         'usage_measured': outcome['usage_measured'],
+                         'usage': outcome['usage']}, 1)
+        store_state(state_dir, state)
+        return emit({'status': 'ok', 'gm_id': args.gm, 'run_id': run_id,
+                     'acknowledged': True, 'decision': outcome['decision'],
+                     'next_work': outcome['next_work'],
+                     'repair_requested_issue': outcome.get('repair_requested_issue'),
+                     'receipt_sha256': receipt_sha,
+                     'protected_paths_changed': changed,
+                     'usage_measured': outcome['usage_measured'], 'usage': outcome['usage'],
+                     'cost': cost}, 0)
+
+
 # --------------------------------------------------------------------------- cli
 
 def build_parser() -> argparse.ArgumentParser:
@@ -2270,6 +2616,10 @@ def build_parser() -> argparse.ArgumentParser:
     observe_parser.add_argument('--evidence', required=True, type=Path)
     observe_parser.add_argument('--investigation-file', type=Path,
                                 help='explicit supervisor investigation bound to evidence hash/pointers')
+    observe_parser.add_argument('--autonomy-policy', type=Path,
+                                help='opt-in standing preauthorization for an autonomous cycle; '
+                                     'synthesizes an autonomic observation origin and lets the GM '
+                                     'propose a host-validated scope')
     observe_parser.add_argument('--state-dir', required=True, type=Path)
     observe_parser.add_argument('--dry-run', action='store_true')
     observe_parser.add_argument('--max-gms', type=int, default=10)
@@ -2289,6 +2639,16 @@ def build_parser() -> argparse.ArgumentParser:
     code_parser.add_argument('--dry-run', action='store_true')
     code_parser.add_argument('--run-scope-tests', action='store_true')
     code_parser.set_defaults(func=code)
+
+    feedback_parser = subparsers.add_parser(
+        'feedback', parents=[shared],
+        help='deliver a host receipt to its owning GM and require a structured acknowledgement')
+    feedback_parser.add_argument('--state-dir', required=True, type=Path)
+    feedback_parser.add_argument('--gm', required=True)
+    feedback_parser.add_argument('--receipt-file', required=True, type=Path)
+    feedback_parser.add_argument('--issue', help='issue id the receipt belongs to')
+    feedback_parser.add_argument('--dry-run', action='store_true')
+    feedback_parser.set_defaults(func=feedback)
 
     status_parser = subparsers.add_parser('status', help='read-only state summary')
     status_parser.add_argument('--state-dir', required=True, type=Path)

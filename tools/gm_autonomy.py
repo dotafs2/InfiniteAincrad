@@ -1,0 +1,2513 @@
+#!/usr/bin/env python3
+"""Bounded autonomous GM development cycle built directly on tools/gm_runner.py.
+
+One invocation under one standing policy advances a single visible result:
+
+  evidence -> GM-selected and claimed work with a GM-proposed scope -> candidate implementation
+  -> host-executed validation -> controlled publication into an explicitly supplied trial
+  checkout -> real runtime verification against a continued save -> durable feedback to that GM.
+
+The cycle never manufactures issues, scope files or per-stage supervisor dispatches. The GM
+proposes; the host validates the proposal against the immutable policy, derives the executed
+scope and test commands, owns the release decision and reports what the world actually did.
+`no_action` and "no supported evidence" are preserved as useful outcomes.
+
+Reused unchanged from gm_runner: identity, provenance, evidence validation, transport, candidate
+worktree isolation, usage accounting, locking, unknown-cost gates and code execution. Nothing here
+calls a model itself; it drives `gm_runner.py observe|code|acknowledge` as subprocesses and runs
+the host gate, the publication and the runtime check.
+
+Commands (repository-relative):
+  python tools/gm_autonomy.py cycle --policy <policy.json>
+  python tools/gm_autonomy.py cycle --policy <policy.json> --stop-after publish
+  python tools/gm_autonomy.py status --state-dir <state-dir>
+
+Exit codes: 0 ok (including a bounded no_action/limit stop), 1 runtime failure,
+2 usage or missing-requirement preflight (no model dispatch), 3 stale or wrong-world source,
+4 unacceptable source, 5 unresolved accounting / interrupted paid call, 6 scope or release
+precondition refused, 7 state directory lock held by another run.
+
+Production mode refuses before any dispatch unless evidence, carried state, prior ledger,
+trial checkout and the Godot runtime all exist. Offline fixture mode is labelled as a fixture
+everywhere it appears and proves code paths, not real DeepSeek GM autonomy.
+"""
+from __future__ import annotations
+
+import argparse
+import copy
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+import threading
+import time
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'tools'))
+import gm_runner  # noqa: E402
+import owned_windows_job  # noqa: E402
+
+CYCLE_SCHEMA = 1
+STAGES = ('observe', 'candidate', 'validate', 'publish', 'verify', 'feedback')
+REPAIRABLE = ('scope_tests_failed', 'invalid_output', 'worker_blocked')
+# One reopened repair round is only allowed for an actionable, owned, host-observed failure: a
+# runtime verification defect the running world actually reported, or an ordinary owned candidate
+# test failure at the host gate. Guard/scope/conflict refusals, unknown or interrupted calls and
+# installed-but-unused are never turned into a coding retry.
+REPAIRABLE_FAILURE_REASONS = ('runtime_verification_failed',)
+REPAIRABLE_VALIDATE_CHECKS = ('host_test_commands_pass',)
+# A semantic repair may only be justified by fresh, exactly bound evidence from processes that
+# fully exited. A failure here means the observation is NOT a trustworthy report about this
+# release: a timeout, a missing/stale output file, a foreign nonce/world/release/issue or a
+# still-live child process. Such a run is inconclusive and must stay stopped.
+REPAIRABLE_VERIFY_INTEGRITY_CHECKS = ('deployed_bytes_match_release',
+                                      'every_phase_bound_to_this_release', 'no_phase_timed_out',
+                                      'owned_processes_exited', 'fresh_output_for_this_nonce',
+                                      'release_digest_matches', 'world_id_matches',
+                                      'issue_id_matches')
+# The running world's own report about candidate behavior. These are the only failed checks a
+# repair round may reopen for; installed-but-unused keeps its own stopped reason and is never
+# converted into a forced adoption.
+# `runtime_exit_ok` is deliberately NOT an integrity check: the world's own defect report exits
+# nonzero, so a nonzero code is expected here while a crash still fails the freshness/binding
+# checks above.
+REPAIRABLE_VERIFY_DEFECT_CHECKS = ('every_phase_reported_ok', 'runtime_exit_ok',
+                                   'runtime_reports_ok', 'installed', 'used_not_invented',
+                                   'same_save_continuation')
+
+
+def conclusive_runtime_defect(failed_checks) -> bool:
+    """True only for a functionally defective candidate observed under valid evidence."""
+    failed = set(failed_checks or ())
+    if not failed:
+        return False
+    if failed & set(REPAIRABLE_VERIFY_INTEGRITY_CHECKS):
+        return False
+    return failed <= set(REPAIRABLE_VERIFY_DEFECT_CHECKS)
+OK, RUNTIME, USAGE, STALE, UNACCEPTABLE, ACCOUNTING, PRECONDITION, LOCK = range(8)
+RELEASE_FILES_THIS_VERSION = 1
+
+
+def sha256_bytes(payload: bytes) -> str:
+    return gm_runner.sha256_bytes(payload)
+
+
+def sha256_file(path: Path) -> str | None:
+    return gm_runner.sha256_file(path)
+
+
+def file_digest_or_none(path) -> str | None:
+    """The sha256 of an existing file, or None when it is absent or unreadable. Never raises:
+    a missing pin must refuse a release, not crash the runner."""
+    try:
+        return sha256_file(path) if path and Path(path).is_file() else None
+    except OSError:
+        return None
+
+
+def safe_relpath(value) -> str | None:
+    """A repo- or checkout-relative path with no drive, leading slash or traversal."""
+    text = str(value).replace('\\', '/').strip()
+    if text in ('', '.'):
+        return ''
+    if text.startswith('/') or re.match(r'^[A-Za-z]:', text):
+        return None
+    parts = [part for part in text.split('/') if part not in ('', '.')]
+    if any(part == '..' for part in parts):
+        return None
+    return '/'.join(parts)
+
+
+def is_within(child: Path, root: Path) -> bool:
+    """True only when child resolves to root or a real descendant of root."""
+    try:
+        child_resolved, root_resolved = child.resolve(), root.resolve()
+    except OSError:
+        return False
+    return child_resolved == root_resolved or root_resolved in child_resolved.parents
+
+
+def reparse_escape(target: Path, root: Path) -> str | None:
+    """Refuse a symlink/junction hop below root. Never relaxes a guard to make a path fit."""
+    root_resolved = root.resolve()
+    try:
+        relative = target.resolve().relative_to(root_resolved)
+    except (OSError, ValueError):
+        return f'{target} is not inside {root_resolved}'
+    probe = root_resolved
+    for part in relative.parts:
+        probe = probe / part
+        try:
+            if probe.is_symlink():
+                return f'{probe} is a symlink; refusing to traverse it'
+            if hasattr(Path, 'is_junction') and probe.is_junction():
+                return f'{probe} is a junction/reparse point; refusing to traverse it'
+        except OSError as error:
+            return f'{probe} could not be inspected: {error}'
+    return None
+
+
+def resolve_path(value, base: Path = ROOT) -> Path | None:
+    if value is None or str(value).strip() == '':
+        return None
+    path = Path(str(value))
+    return path if path.is_absolute() else (base / path)
+
+
+def policy_values(policy: dict) -> dict:
+    return {'limits': policy.get('limits') or {}, 'paths': policy.get('paths') or {},
+            'deployment': policy.get('deployment') or {}, 'runtime': policy.get('runtime') or {}}
+
+
+def path_matches(rel: str, pattern: str) -> bool:
+    rel = rel.replace('\\', '/').strip('/')
+    pattern = pattern.replace('\\', '/').strip('/')
+    if pattern.endswith('/**'):
+        prefix = pattern[:-3].rstrip('/')
+        return rel == prefix or rel.startswith(prefix + '/')
+    if pattern.endswith('/*'):
+        prefix = pattern[:-2].rstrip('/')
+        tail = rel[len(prefix) + 1:] if rel.startswith(prefix + '/') else None
+        return tail is not None and tail != '' and '/' not in tail
+    return rel == pattern
+
+def policy_errors(policy: dict) -> list[str]:
+    errors = []
+    constraints = policy.get('scope_constraints') or {}
+    allowed = constraints.get('allowed_source_paths')
+    if not isinstance(allowed, list) or not allowed or not all(isinstance(v, str) for v in allowed):
+        errors.append('scope_constraints.allowed_source_paths must be a non-empty list of globs')
+    excluded = constraints.get('excluded_paths', [])
+    if not isinstance(excluded, list) or not all(isinstance(v, str) for v in excluded):
+        errors.append('scope_constraints.excluded_paths must be a list of globs')
+    max_files = constraints.get('max_changed_files')
+    if not isinstance(max_files, int) or not 1 <= max_files <= 8:
+        errors.append('scope_constraints.max_changed_files must be an integer 1..8')
+    host_owned = policy.get('host_owned_paths')
+    if not isinstance(host_owned, list) or not host_owned or not all(isinstance(v, str) for v in host_owned):
+        errors.append('host_owned_paths must be a non-empty list of repo-relative paths')
+    commands = policy.get('required_test_commands')
+    if (not isinstance(commands, list) or not commands
+            or any(not isinstance(command, list) or not command
+                   or any(not isinstance(token, str) for token in command) for command in commands)):
+        errors.append('required_test_commands must be a non-empty list of argv lists')
+    limits = policy.get('limits') or {}
+    for key, low, high in (('max_issues_per_cycle', 1, 4), ('max_attempts_per_issue', 1, 5),
+                           ('max_dispatches', 1, 32), ('max_publishes', 0, 4),
+                           ('deadline_seconds', 30, 7200)):
+        value = limits.get(key)
+        if not isinstance(value, int) or not low <= value <= high:
+            errors.append(f'limits.{key} must be an integer {low}..{high}')
+    deployment = policy.get('deployment') or {}
+    path_map = deployment.get('path_map')
+    if (not isinstance(path_map, dict) or not path_map
+            or not all(isinstance(k, str) and isinstance(v, str) for k, v in path_map.items())):
+        errors.append('deployment.path_map must map a repo prefix string to a checkout prefix string')
+    else:
+        for key, value in path_map.items():
+            if (safe_relpath(key) in (None, '') or safe_relpath(value) is None
+                    or safe_relpath(key) != key.replace('\\', '/').strip('/').strip()):
+                errors.append(f'deployment.path_map entry {key!r}->{value!r} must stay a plain '
+                              'relative prefix without traversal or an absolute target')
+    release_limit = deployment.get('max_files_per_release', RELEASE_FILES_THIS_VERSION)
+    if release_limit != RELEASE_FILES_THIS_VERSION:
+        errors.append('deployment.max_files_per_release must be '
+                      f'{RELEASE_FILES_THIS_VERSION} in this version; a multi-file release '
+                      'transaction is not implemented and is refused up front')
+    runtime = policy.get('runtime') or {}
+    for field in ('godot', 'save_path', 'script'):
+        if not isinstance(runtime.get(field), str) or not runtime[field].strip():
+            errors.append(f'runtime.{field} must be a non-empty string')
+    extra = runtime.get('extra_args', [])
+    if not isinstance(extra, list) or any(not isinstance(value, str) for value in extra):
+        errors.append('runtime.extra_args must be a list of strings when present')
+    timeout = runtime.get('timeout_seconds', 120)
+    if not isinstance(timeout, int) or not 5 <= timeout <= 1800:
+        errors.append('runtime.timeout_seconds must be an integer 5..1800')
+    feedback_attempts = limits.get('max_feedback_attempts', 2)
+    if not isinstance(feedback_attempts, int) or not 1 <= feedback_attempts <= 3:
+        errors.append('limits.max_feedback_attempts must be an integer 1..3')
+    model_calls = limits.get('max_model_calls')
+    if model_calls is not None and (not isinstance(model_calls, int) or not 1 <= model_calls <= 64):
+        errors.append('limits.max_model_calls must be an integer 1..64 when present')
+    return errors
+
+
+def stale_world(policy: dict) -> str | None:
+    """A pre-existing runtime save from another world is refused before any dispatch."""
+    save = resolve_path(policy_values(policy)['runtime'].get('save_path'))
+    if save is None or not save.is_file():
+        return None
+    try:
+        existing = gm_runner.load_json(save)
+    except (OSError, ValueError):
+        return None
+    if isinstance(existing, dict) and existing.get('world_id') not in (None, policy['world_id']):
+        return ('runtime.save_path already holds world ' + str(existing.get('world_id'))
+                + ', not ' + policy['world_id'])
+    return None
+
+
+def missing_requirements(policy: dict, mode: str) -> list[str]:
+    """Concrete absent inputs. Production refuses on these before any model dispatch; the offline
+    fixture still needs the executable pieces it is labelled as proving."""
+    values = policy_values(policy)
+    missing = []
+    evidence = resolve_path(values['paths'].get('evidence'))
+    state_dir = resolve_path(values['paths'].get('state_dir'))
+    ledger = resolve_path(values['paths'].get('prior_ledger'))
+    checkout = resolve_path(values['deployment'].get('checkout'))
+    base_manifest = resolve_path(values['deployment'].get('base_manifest'))
+    godot = resolve_path(values['runtime'].get('godot'))
+    save_path = resolve_path(values['runtime'].get('save_path'))
+    if evidence is None or not evidence.is_file():
+        missing.append('paths.evidence (reviewed evidence snapshot file)')
+    if state_dir is None:
+        missing.append('paths.state_dir')
+    elif mode == 'production' and not (state_dir / gm_runner.STATE_FILE).is_file():
+        missing.append('paths.state_dir/' + gm_runner.STATE_FILE + ' (carried GM/world state)')
+    if ledger is None or not ledger.is_file():
+        missing.append('paths.prior_ledger (carried paid-usage ledger reference)')
+    if checkout is None or not checkout.is_dir():
+        missing.append('deployment.checkout (disposable trial installation)')
+    if base_manifest is None or not base_manifest.is_file():
+        missing.append('deployment.base_manifest (declared trial base hashes)')
+    if godot is None or not godot.is_file():
+        missing.append('runtime.godot (Godot 4 executable)')
+    if save_path is None or not save_path.parent.is_dir():
+        missing.append('runtime.save_path parent directory')
+    return missing
+
+
+def validate_proposed_scope(scope, policy: dict) -> tuple:
+    """Host validation of a GM proposal against the immutable policy. The GM never approves
+    itself: only paths inside allowed_source_paths, outside excluded_paths and outside
+    host_owned_paths survive, and the executed test commands are always the policy's."""
+    constraints = policy.get('scope_constraints') or {}
+    host_owned = policy.get('host_owned_paths') or []
+    errors = []
+    if not isinstance(scope, dict):
+        return None, ['no usable scope object was proposed']
+    objective = scope.get('objective')
+    if not isinstance(objective, str) or not 12 <= len(objective.strip()) <= 400:
+        errors.append('scope.objective must be one concrete 12..400 character sentence')
+    files = scope.get('files')
+    if not isinstance(files, list) or not files or any(not isinstance(v, str) for v in files):
+        errors.append('scope.files must be a non-empty list of repo-relative paths')
+    elif len(files) > constraints.get('max_changed_files', 0):
+        errors.append('scope.files exceeds max_changed_files '
+                      + str(constraints.get('max_changed_files')))
+    else:
+        for entry in files:
+            rel = str(entry).replace('\\', '/')
+            if Path(rel).is_absolute() or ':' in rel or '..' in Path(rel).parts:
+                errors.append(f'scope file {entry!r} is not repo-relative')
+                continue
+            if not any(path_matches(rel, pattern)
+                       for pattern in constraints.get('allowed_source_paths', [])):
+                errors.append(f'scope file {entry!r} is outside allowed_source_paths')
+            if any(path_matches(rel, pattern) for pattern in constraints.get('excluded_paths', [])):
+                errors.append(f'scope file {entry!r} is excluded by policy')
+            if any(path_matches(rel, pattern) for pattern in host_owned):
+                errors.append(f'scope file {entry!r} is host-owned and cannot be modified by a coder')
+    acceptance = scope.get('acceptance')
+    if (not isinstance(acceptance, list) or not acceptance or len(acceptance) > 8
+            or any(not isinstance(v, str) or not v.strip() for v in acceptance)):
+        errors.append('scope.acceptance must be 1..8 non-empty observable checks')
+    if errors:
+        return None, errors
+    return {'objective': objective.strip(), 'files': [str(v).replace('\\', '/') for v in files],
+            'acceptance': [str(v).strip() for v in acceptance]}, []
+
+
+def resolve_command(command: list, values: dict) -> tuple:
+    resolved, errors = [], []
+    for token in command:
+        text = str(token)
+        for key, replacement in values.items():
+            text = text.replace('{' + key + '}', str(replacement))
+        if re.search(r'\{[a-z_]+\}', text):
+            errors.append(f'test command token {token!r} keeps an unresolved placeholder')
+        resolved.append(text)
+    return (None, errors) if errors else (resolved, [])
+
+
+def deployment_target(rel: str, path_map: dict) -> str | None:
+    rel = rel.replace('\\', '/')
+    for prefix in sorted(path_map, key=len, reverse=True):
+        if rel.startswith(prefix):
+            head = str(path_map[prefix]).replace('\\', '/').strip('/')
+            tail = rel[len(prefix):].strip('/')
+            return ((head + '/' + tail).strip('/')) if head else tail
+    return None
+
+
+def _drain(stream, sink: list) -> None:
+    try:
+        for line in stream:
+            sink.append(line)
+    except (OSError, ValueError):
+        pass
+
+
+def run_process(command: list, timeout: int, cwd: Path = ROOT, deadline=None) -> dict:
+    """One bounded owned subprocess, capped by the remaining cycle deadline.
+
+    On Windows this uses the existing tools/owned_windows_job.py kill-on-close job so the child
+    and every descendant are contained and terminated on timeout; observed member PIDs and exit
+    codes are returned instead of an unconditional "waited" claim.
+    """
+    budget = max(1, int(timeout))
+    if deadline is not None and int(deadline - time.time()) <= 0:
+        # The pinned deadline already expired: do not start a new process the caller cannot own.
+        return {'command': command, 'exit_code': None, 'timed_out': True,
+                'deadline_exceeded': True, 'stdout': '', 'stderr': '', 'seconds': 0.0,
+                'owned': {'containment': 'not_started_deadline', 'wrapper_pid': None,
+                          'observed_members': [], 'all_members_exited': None,
+                          'member_identity_list_complete': None}}
+    if deadline is not None:
+        budget = max(1, min(budget, int(deadline - time.time())))
+    started = time.time()
+    outcome = {'command': command, 'exit_code': None, 'timed_out': False, 'stdout': '',
+               'stderr': '', 'seconds': 0.0, 'deadline_exceeded': False,
+               'owned': {'containment': 'not_windows_job', 'wrapper_pid': None,
+                         'observed_members': [], 'all_members_exited': None,
+                         'member_identity_list_complete': None}}
+    if os.name == 'nt':
+        tree = owned_windows_job.WindowsProcessTree(
+            command, cwd=str(cwd), stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            text=True, encoding='utf-8', errors='replace')
+        stdout_chunks, stderr_chunks = [], []
+        readers = [threading.Thread(target=_drain, args=(tree.process.stdout, stdout_chunks),
+                                    daemon=True),
+                   threading.Thread(target=_drain, args=(tree.process.stderr, stderr_chunks),
+                                    daemon=True)]
+        try:
+            for reader in readers:
+                reader.start()
+            try:
+                outcome['exit_code'] = tree.wait(budget)
+            except subprocess.TimeoutExpired:
+                outcome['timed_out'] = True
+                tree.terminate()
+            for reader in readers:
+                reader.join(timeout=10)
+            outcome['stdout'] = ''.join(stdout_chunks)
+            outcome['stderr'] = ''.join(stderr_chunks)
+        finally:
+            for stream in (tree.process.stdout, tree.process.stderr):
+                try:
+                    stream.close()
+                except (AttributeError, OSError):
+                    pass
+            try:
+                outcome['owned'] = tree.snapshot()
+            finally:
+                tree.close()
+            members = (outcome['owned'] or {}).get('observed_members') or []
+            nonzero = [member.get('exit_code') for member in members
+                       if member.get('exit_code') not in (None, 0)]
+            if outcome['exit_code'] == 0 and nonzero:
+                outcome['exit_code'] = nonzero[0]
+                outcome['exit_reconciled_from_member'] = True
+    else:
+        process = subprocess.Popen(command, cwd=str(cwd), stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE, text=True, encoding='utf-8',
+                                   errors='replace', start_new_session=True)
+        try:
+            outcome['stdout'], outcome['stderr'] = process.communicate(timeout=budget)
+            outcome['exit_code'] = process.returncode
+        except subprocess.TimeoutExpired:
+            outcome['timed_out'] = True
+            try:
+                os.killpg(process.pid, 15)
+                process.communicate(timeout=10)
+            except (OSError, subprocess.TimeoutExpired):
+                process.kill()
+            outcome['owned'] = {'containment': 'posix_process_group', 'wrapper_pid': process.pid,
+                                'observed_members': [{'pid': process.pid}],
+                                'all_members_exited': process.poll() is not None,
+                                'member_identity_list_complete': True}
+    outcome['seconds'] = round(time.time() - started, 3)
+    return outcome
+
+
+def last_json_line(text: str):
+    for line in reversed((text or '').splitlines()):
+        line = line.strip()
+        if line.startswith('{'):
+            try:
+                return json.loads(line)
+            except json.JSONDecodeError:
+                continue
+    return None
+
+
+def runner_command(runner: dict, subcommand: str, *args) -> list:
+    command = [sys.executable, str(ROOT / 'tools' / 'gm_runner.py'), subcommand]
+    if subcommand in ('observe', 'code', 'feedback'):
+        for name in ('config', 'key_file', 'codex', 'codex_home'):
+            if runner.get(name):
+                command += ['--' + name.replace('_', '-'), str(runner[name])]
+        if runner.get('timeout'):
+            command += ['--timeout', str(runner['timeout'])]
+    command += [str(item) for item in args]
+    return command
+
+
+def installation_lock_root() -> Path:
+    """Machine-level lock root keyed by an installation path.
+
+    A deployment is a machine-level resource, so its lock must not live under one policy's
+    state directory: two policies with different state dirs but the same deployment path must
+    still exclude each other. The key is derived from the resolved deployment path only.
+    """
+    override = os.environ.get('GM_AUTONOMY_LOCK_ROOT')
+    base = (Path(override) if override
+            else Path(tempfile.gettempdir()) / 'infiniteaincrad-autonomy')
+    return base / 'installations'
+
+
+class OwnerLock:
+    """Owner-identified OS lock built on gm_runner.StateLock.
+
+    Liveness is decided by the platform byte-range lock, never by probing a PID. A live owner is
+    never displaced; a provably dead owner's leftover metadata (its real PID and acquire time)
+    is recorded in self.recovered and taken over explicitly.
+    """
+
+    def __init__(self, directory: Path, name: str):
+        self.directory = Path(directory) / name
+        self.handle = gm_runner.StateLock(self.directory, True)
+        self.recovered = None
+
+    def __enter__(self):
+        self.handle.__enter__()
+        self.recovered = self.handle.previous
+        return self
+
+    def __exit__(self, kind, value, traceback):
+        return self.handle.__exit__(kind, value, traceback)
+
+
+class Cycle:
+    """One durable cycle. Stage records live in cycle.json so a restart resumes, never replays.
+
+    The evidence bytes and the deadline are pinned once, when the cycle is first created, and
+    persisted in cycle.json: a later edit to the evidence file cannot silently move the running
+    cycle, and a restarted process does not get a fresh budget.
+    """
+
+    def __init__(self, policy_path: Path, policy: dict, runner: dict, stop_after,
+                 watch_deadline=None, watch_calls=None, allow_deferred_advance=False):
+        self.policy_path = policy_path
+        self.policy = policy
+        self.policy_sha = sha256_file(policy_path)
+        self.runner = runner
+        self.stop_after = stop_after
+        self.values = policy_values(policy)
+        self.mode = policy['mode']
+        self.limits = self.values['limits']
+        self.evidence = resolve_path(self.values['paths'].get('evidence'))
+        self.state_dir = resolve_path(self.values['paths'].get('state_dir'))
+        self.ledger = resolve_path(self.values['paths'].get('prior_ledger'))
+        self.checkout = resolve_path(self.values['deployment'].get('checkout'))
+        self.base_manifest = resolve_path(self.values['deployment'].get('base_manifest'))
+        self.godot = resolve_path(self.values['runtime'].get('godot'))
+        self.save_path = resolve_path(self.values['runtime'].get('save_path'))
+        self.evidence_bytes = (self.evidence.read_bytes()
+                               if self.evidence and self.evidence.is_file() else b'')
+        self.evidence_sha256 = sha256_bytes(self.evidence_bytes)
+        self.watch_deadline = float(watch_deadline) if watch_deadline is not None else None
+        self.watch_calls_remaining = int(watch_calls) if watch_calls is not None else None
+        self.allow_deferred_advance = bool(allow_deferred_advance)
+        self.deadline = time.time() + int(self.limits['deadline_seconds'])
+        if self.watch_deadline is not None:
+            self.deadline = min(self.deadline, self.watch_deadline)
+        self.recovered_lock = None
+        self.last_payload = None
+        identity = '|'.join([self.policy['policy_id'], str(self.policy_sha),
+                             self.policy['world_id'], self.evidence_sha256,
+                             str(self.generation())])
+        self._cycle_dir = self.state_dir / 'autonomy' / (
+            'auto-' + sha256_bytes(identity.encode())[:16])
+
+    # -- durable state -------------------------------------------------------------
+
+    def cycle_dir(self) -> Path:
+        return self._cycle_dir
+
+    def autonomy_dir(self) -> Path:
+        return self.state_dir / 'autonomy'
+
+    def pointer_path(self) -> Path:
+        return self.autonomy_dir() / 'current.json'
+
+    def cycle_lock(self) -> OwnerLock:
+        return OwnerLock(self.autonomy_dir(), 'cycle-owner')
+
+    def watch_lock(self) -> OwnerLock:
+        """One OS lock per state directory for the bounded watch coordinator.
+
+        It is deliberately distinct from the cycle-owner lock and is held across the whole
+        read/reconcile/write/run sequence, so two watch invocations can never spend the same
+        persisted budget or drive the same cycle at the same time. Liveness comes from the
+        platform byte-range lock, never from probing a PID.
+        """
+        return OwnerLock(self.autonomy_dir(), 'watch-owner')
+
+    def generation(self) -> int:
+        path = self.generation_path()
+        if not path.is_file():
+            return 0
+        try:
+            value = gm_runner.load_json(path)
+        except (OSError, ValueError):
+            return 0
+        return int((value or {}).get('generation', 0))
+
+    def generation_path(self) -> Path:
+        base = '|'.join([self.policy['policy_id'], str(self.policy_sha),
+                         self.policy['world_id'], self.evidence_sha256])
+        return self.state_dir / 'autonomy' / ('generation-'
+                                              + sha256_bytes(base.encode())[:16] + '.json')
+
+    def bump_generation(self) -> int:
+        value = self.generation() + 1
+        gm_runner.save_json(self.generation_path(),
+                            {'generation': value, 'updated_utc': gm_runner.utc_iso()})
+        return value
+
+    def installation_lock(self) -> OwnerLock:
+        """One OS lock per installation, shared across policies and state directories."""
+        # Normalize case and separators: two Windows spellings of one deployment must not take
+        # two different locks and both write the same installation.
+        resolved = (os.path.normcase(str(self.checkout.resolve()))
+                    if self.checkout else 'none')
+        return OwnerLock(installation_lock_root(), sha256_bytes(resolved.encode())[:16])
+
+    def load_cycle(self) -> dict:
+        path = self.cycle_dir() / 'cycle.json'
+        if path.is_file():
+            cycle = gm_runner.load_json(path)
+            if cycle.get('schema_version') != CYCLE_SCHEMA:
+                raise ValueError('unsupported autonomy cycle schema '
+                                 + str(cycle.get('schema_version')))
+            if cycle.get('policy_sha256') != self.policy_sha:
+                raise ValueError('the standing policy changed after this cycle started; refusing '
+                                 'to resume under a different preauthorization')
+            return self.adopt(cycle)
+        return {'schema_version': CYCLE_SCHEMA, 'cycle_id': self.cycle_dir().name,
+                'policy_id': self.policy['policy_id'], 'policy_sha256': self.policy_sha,
+                'mode': self.mode, 'world_id': self.policy['world_id'], 'status': 'running',
+                'stage': STAGES[0], 'stages': {}, 'dispatch_batches': {}, 'model_calls': 0,
+                'attempts': {}, 'evidence_path': str(self.evidence),
+                'evidence_sha256': self.evidence_sha256,
+                'base_manifest_sha256': file_digest_or_none(self.base_manifest),
+                'host_owned_pinned': self.host_owned_hashes(),
+                'deadline_seconds': int(self.limits['deadline_seconds']),
+                'deadline_epoch': self.deadline,
+                'deferred_claims': [], 'declined': [], 'blocked_reason': None,
+                'started_utc': gm_runner.utc_iso(), 'updated_utc': gm_runner.utc_iso()}
+
+    def adopt(self, cycle: dict) -> dict:
+        """Rebind this process to an unfinished cycle started earlier: its pinned evidence,
+        its pinned deadline and its own directory. Newer incoming evidence never displaces it."""
+        pinned = Path(cycle['evidence_path']) if cycle.get('evidence_path') else self.evidence
+        self.evidence = pinned
+        self.evidence_sha256 = cycle.get('evidence_sha256') or self.evidence_sha256
+        pinned = float(cycle.get('deadline_epoch') or self.deadline)
+        self.deadline = pinned if self.watch_deadline is None else min(pinned, self.watch_deadline)
+        self._cycle_dir = self.autonomy_dir() / cycle['cycle_id']
+        return cycle
+
+    def save_cycle(self, cycle: dict) -> None:
+        self.cycle_dir().mkdir(parents=True, exist_ok=True)
+        cycle['updated_utc'] = gm_runner.utc_iso()
+        gm_runner.save_json(self.cycle_dir() / 'cycle.json', cycle)
+        gm_runner.save_json(self.pointer_path(), {
+            'cycle_id': cycle['cycle_id'], 'status': cycle.get('status'),
+            'stage': cycle.get('stage'), 'policy_sha256': cycle.get('policy_sha256'),
+            'evidence_path': cycle.get('evidence_path'),
+            'evidence_sha256': cycle.get('evidence_sha256'),
+            'deadline_epoch': cycle.get('deadline_epoch'),
+            'updated_utc': cycle['updated_utc']})
+
+    def stage_record(self, cycle: dict, name: str) -> dict:
+        return cycle['stages'].setdefault(name, {'status': 'pending'})
+
+    def finish_stage(self, cycle: dict, name: str, record: dict, status: str = 'done') -> None:
+        record.pop('in_flight', None)
+        record['status'] = status
+        record['finished_utc'] = gm_runner.utc_iso()
+        self.save_cycle(cycle)
+
+    # -- limits --------------------------------------------------------------------
+
+    def max_model_calls(self) -> int:
+        limit = self.limits.get('max_model_calls')
+        if isinstance(limit, int) and limit > 0:
+            base = limit
+        else:
+            base = int(self.limits['max_dispatches']) * int(self.limits.get('max_gms', 10))
+        if self.watch_calls_remaining is not None:
+            return max(0, min(base, self.watch_calls_remaining))
+        return base
+
+    def dispatch_budget(self, cycle: dict, stage: str, model_calls: int = 1) -> str | None:
+        if time.time() > self.deadline:
+            return (f'pinned deadline_seconds={cycle.get("deadline_seconds")} reached before '
+                    f'{stage}')
+        if sum(cycle['dispatch_batches'].values()) >= int(self.limits['max_dispatches']):
+            return f'max_dispatches={self.limits["max_dispatches"]} reached before {stage}'
+        if int(cycle.get('model_calls', 0)) + max(0, int(model_calls)) > self.max_model_calls():
+            return (f'max_model_calls={self.max_model_calls()} reached before {stage}; '
+                    'one dispatch batch can be up to max_gms model calls')
+        return None
+
+    def reserve(self, cycle: dict, record: dict, stage: str, model_calls: int,
+                count_batch: bool = True) -> None:
+        """Reserve the external action and persist it before the process is started, so a restart
+        never re-issues it and the model-call bound counts it even if the call is interrupted."""
+        record['in_flight'] = {'stage': stage, 'model_calls_reserved': int(model_calls),
+                               'reserved_utc': gm_runner.utc_iso()}
+        if count_batch:
+            cycle['dispatch_batches'][stage] = cycle['dispatch_batches'].get(stage, 0) + 1
+        cycle['model_calls'] = int(cycle.get('model_calls', 0)) + int(model_calls)
+        self.save_cycle(cycle)
+
+    def settle(self, cycle: dict, record: dict, observed_model_calls=None) -> dict:
+        """Reconcile the reserved bound with what actually happened.
+
+        The reservation is deliberately kept in the record until the stage durably records its
+        result (finish_stage) or a terminal failure. A crash between this save and the result
+        save therefore still shows the call as in flight, so a restart stops as unknown instead
+        of re-issuing a paid external call.
+        """
+        reserved = record.get('in_flight') or {}
+        if observed_model_calls is not None:
+            cycle['model_calls'] = max(
+                0, int(cycle.get('model_calls', 0)) - int(reserved.get('model_calls_reserved', 0))
+                + int(observed_model_calls))
+        record['last_reserved'] = reserved
+        record['settled_utc'] = gm_runner.utc_iso()
+        self.save_cycle(cycle)
+        return reserved
+
+    def in_flight_stop(self, cycle: dict, record: dict, stage: str) -> int | None:
+        reserved = record.get('in_flight')
+        if not reserved:
+            return None
+        record['unknown_evidence'] = reserved
+        record['status'] = 'unknown'
+        cycle['unknown'] = {'stage': stage, 'reserved': reserved}
+        return self.block(cycle, f'interrupted_inflight_{stage}: the external call outcome is '
+                                  'unknown and is not replayed', ACCOUNTING)
+
+    # -- stages --------------------------------------------------------------------
+
+    def stage_observe(self, cycle: dict) -> int:
+        record = self.stage_record(cycle, 'observe')
+        if record['status'] == 'done':
+            return OK
+        stopped = self.in_flight_stop(cycle, record, 'observe')
+        if stopped:
+            return stopped
+        # A queued GM claim is consumed before any new observe dispatch: generation advance alone
+        # is not delivery, and unchanged evidence must not be observed twice.
+        queued = self.examine_queued_claims(cycle, record)
+        if queued is not None:
+            return queued
+        estimate = int(self.limits.get('max_gms', 10))
+        remaining_calls = self.max_model_calls() - int(cycle.get('model_calls', 0))
+        if self.watch_calls_remaining is not None:
+            estimate = max(0, min(estimate, remaining_calls))
+            if estimate <= 0:
+                return self.stop(cycle, record, 'the remaining local watch model-call budget is '
+                                                'exhausted before observe; no call was made')
+        blocked = self.dispatch_budget(cycle, 'observe', estimate)
+        if blocked:
+            return self.stop(cycle, record, blocked)
+        pre = self.pre_dispatch_state_check(cycle)
+        if pre:
+            return pre
+        command = runner_command(self.runner, 'observe', '--autonomy-policy', str(self.policy_path),
+                                 '--evidence', str(self.evidence), '--state-dir', str(self.state_dir),
+                                 '--max-gms', str(estimate),
+                                 '--max-issues-per-gm', str(self.limits.get('max_issues_per_gm', 4)),
+                                 '--prior-ledger', str(self.ledger),
+                                 '--protect', str(self.policy_path))
+        self.reserve(cycle, record, 'observe', estimate)
+        result = run_process(command, self.runner.get('timeout') or 900, deadline=self.deadline)
+        summary = last_json_line(result['stdout'])
+        if summary is None:
+            # The transport outcome is ambiguous. Keep the conservative reservation so an
+            # interrupted batch is never counted as free, and never replayed.
+            self.settle(cycle, record, None)
+            observed_calls = None
+        else:
+            dispatched = summary.get('dispatched')
+            observed_calls = (dispatched if isinstance(dispatched, int)
+                              else len(summary.get('results') or []))
+            self.settle(cycle, record, observed_calls)
+        evidence = (summary or {}).get('evidence') or {}
+        record.update({'run_id': (summary or {}).get('run_id'), 'exit_code': result['exit_code'],
+                       'seconds': result['seconds'], 'dispatched': (summary or {}).get('dispatched'),
+                       'model_calls_observed': observed_calls,
+                       'owned': result.get('owned'), 'timed_out': result['timed_out'],
+                       'evidence_sha256': evidence.get('sha256'),
+                       'evidence_kind': evidence.get('kind'),
+                       'world_binding': (summary or {}).get('world_binding'),
+                       'unknown_cost_gms': (summary or {}).get('unknown_cost_gms'),
+                       'stderr_tail': result['stderr'][-400:]})
+        if summary is None or result['exit_code'] != 0:
+            record['status'] = 'failed'
+            record['blocked_reason'] = (summary or {}).get('message') or 'gm_runner observe failed'
+            self.save_cycle(cycle)
+            kind = (summary or {}).get('kind')
+            if kind in ('stale_source', 'world_binding_conflict', 'autonomy_world_mismatch'):
+                return self.block(cycle, 'stale_or_wrong_world_source', STALE)
+            if kind == 'unresolved_unknown_cost':
+                return self.block(cycle, 'unresolved_unknown_cost', ACCOUNTING)
+            if any((item or {}).get('cost') == 'unknown' for item in
+                   ((summary or {}).get('results') or [])):
+                return self.block(cycle, 'unknown_usage_stops_dispatch', ACCOUNTING)
+            return self.block(cycle, 'observe_failed', RUNTIME)
+        self.select_claim(cycle, record)
+        self.finish_stage(cycle, 'observe', record,
+                          'no_action' if record.get('no_action') else 'done')
+        return OK
+
+    def pre_dispatch_state_check(self, cycle: dict) -> int | None:
+        """Do not spend again while a previous paid attempt is unresolved or ambiguous."""
+        if not (self.state_dir / gm_runner.STATE_FILE).is_file():
+            return None
+        unknown = gm_runner.global_unknown_gms(gm_runner.load_state(self.state_dir))
+        if unknown:
+            return self.block(cycle, 'unresolved_unknown_cost:' + ','.join(unknown), ACCOUNTING)
+        return None
+
+    def select_claim(self, cycle: dict, record: dict) -> None:
+        state = gm_runner.load_state(self.state_dir)
+        run_id = record.get('run_id')
+        claims = [issue for issue in state['issues'].values()
+                  if issue.get('owner_run_id') == run_id and issue.get('owner_gm')
+                  and issue.get('proposed_scope')]
+        if not claims:
+            record['no_action'] = True
+            record['selection'] = ('no GM claimed a bounded scope in this observation; no_action '
+                                   'preserved and nothing published')
+            return
+        claims.sort(key=lambda item: (item['owner_gm'], item['issue_id']))
+        selected = claims[0]
+        record['gm_id'] = selected['owner_gm']
+        record['issue_id'] = selected['issue_id']
+        record['observation_origin'] = (selected.get('provenance') or {}).get('observation_origin')
+        record['proposed_scope'] = selected.get('proposed_scope')
+        record['deferred_claims'] = [{'gm_id': item['owner_gm'], 'issue_id': item['issue_id']}
+                                     for item in claims[1:]]
+        cycle['deferred_claims'] = record['deferred_claims']
+        cycle['gm_id'] = record['gm_id']
+        cycle['issue_id'] = record['issue_id']
+    # -- queued GM claims -----------------------------------------------------------
+
+    def queued_claim_cycle(self) -> dict | None:
+        """The earlier finished cycle whose deferred GM claims this evidence still owes.
+
+        A cycle consumes ONE claimed issue and defers the rest, so the queue lives in the finished
+        cycle's own durable record. Only a cycle over the SAME pinned policy and evidence can hand
+        claims over, a source is never handed over twice, and the newest such source wins. The
+        queue is rebuilt from cycle.json, not remembered in process memory.
+        """
+        root = self.autonomy_dir()
+        if not root.is_dir():
+            return None
+        current = self.cycle_dir().name
+        sources = []
+        documents = []
+        for path in sorted(root.glob('*/cycle.json')):
+            document = gm_runner.load_json(path) if path.is_file() else None
+            if not isinstance(document, dict) or not document.get('cycle_id'):
+                continue
+            documents.append(document)
+        # A source that some other cycle already handed over from is spent, whatever order the
+        # cycle directories sort in.
+        consumed = {str(item['queued_from_cycle']) for item in documents
+                    if item.get('queued_from_cycle')}
+        for document in documents:
+            cycle_id = str(document['cycle_id'])
+            if cycle_id == current or cycle_id in consumed:
+                continue
+            if document.get('policy_sha256') != self.policy_sha:
+                continue
+            if document.get('evidence_sha256') != self.evidence_sha256:
+                continue
+            if document.get('status') not in ('completed', 'no_action'):
+                continue
+            if not document.get('deferred_claims'):
+                continue
+            sources.append(document)
+        if not sources:
+            return None
+        sources.sort(key=lambda item: (str(item.get('updated_utc') or ''), str(item['cycle_id'])))
+        return sources[-1]
+
+    def resolve_queued_claim(self, pending: list) -> tuple:
+        """Split a durable queued-claim list into (next claim, still queued, unresolvable).
+
+        The original owner and issue provenance are preserved: an entry is only consumed when the
+        SAME GM still owns that issue and it still carries a proposed scope. Anything else stays on
+        disk as an honest unresolved entry instead of being silently dropped or re-attributed.
+        """
+        state = gm_runner.load_state(self.state_dir)
+        issues = state.get('issues') or {}
+        remaining = list(pending)
+        skipped = []
+        chosen = None
+        for entry in pending:
+            remaining = remaining[1:]
+            issue = issues.get(entry.get('issue_id')) if isinstance(entry, dict) else None
+            if (isinstance(issue, dict) and issue.get('owner_gm') == entry.get('gm_id')
+                    and issue.get('proposed_scope')):
+                chosen = issue
+                break
+            skipped.append(entry)
+        return chosen, remaining, skipped
+
+    def examine_queued_claims(self, cycle: dict, record: dict) -> int | None:
+        """Resolve the observe stage from the durable queue instead of paying for another observe.
+
+        Returns None when nothing is queued (a fresh observation is then allowed), and the observe
+        status when the queue resolved this stage - including the honest no_action case where the
+        queued claims no longer exist, which must not be answered with a fresh paid observation of
+        unchanged evidence.
+        """
+        source = self.queued_claim_cycle()
+        if source is None:
+            return None
+        pending = list(source.get('deferred_claims') or [])
+        chosen, remaining, skipped = self.resolve_queued_claim(pending)
+        record['queued_from_cycle'] = source['cycle_id']
+        # The hand-over is recorded on the cycle itself, so the same source is never handed to a
+        # second cycle and a resumed cycle does not consume its own queue twice.
+        cycle['queued_from_cycle'] = source['cycle_id']
+        record['queued_pending'] = len(pending)
+        record['queued_unresolvable'] = skipped
+        record['deferred_claims'] = remaining
+        cycle['deferred_claims'] = remaining
+        if chosen is None:
+            record['no_action'] = True
+            record['observation_origin'] = 'queued_claim_unresolvable'
+            record['selection'] = ('every queued GM claim for this evidence no longer resolves to '
+                                   'an owned issue with a proposed scope; no new observation is '
+                                   'bought for unchanged evidence and nothing is published')
+            self.finish_stage(cycle, 'observe', record, 'no_action')
+            return OK
+        record.update({'gm_id': chosen.get('owner_gm'), 'issue_id': chosen.get('issue_id'),
+                       'proposed_scope': chosen.get('proposed_scope'),
+                       'queued_owner_run_id': chosen.get('owner_run_id'),
+                       'observation_origin': (chosen.get('provenance') or {}).get(
+                           'observation_origin'),
+                       'selection': ('selected the next queued GM-owned claim from cycle '
+                                     + str(source['cycle_id']) + ' without a new observation of '
+                                     'unchanged evidence')})
+        cycle['gm_id'] = record['gm_id']
+        cycle['issue_id'] = record['issue_id']
+        self.finish_stage(cycle, 'observe', record, 'done')
+        return OK
+
+    def stage_candidate(self, cycle: dict) -> int:
+        record = self.stage_record(cycle, 'candidate')
+        if record['status'] == 'done':
+            return OK
+        stopped = self.in_flight_stop(cycle, record, 'candidate')
+        if stopped:
+            return stopped
+        observe = cycle['stages'].get('observe') or {}
+        issue_id, gm_id = observe.get('issue_id'), observe.get('gm_id')
+        if not issue_id:
+            record.update({'status': 'skipped', 'reason': 'no claimed issue to implement'})
+            self.save_cycle(cycle)
+            return OK
+        scope, errors = validate_proposed_scope(observe.get('proposed_scope'), self.policy)
+        if errors or scope is None:
+            record.update({'status': 'refused', 'policy_errors': errors,
+                           'proposed_scope': observe.get('proposed_scope')})
+            cycle['declined'].append({'issue_id': issue_id, 'gm_id': gm_id, 'errors': errors})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'scope_rejected_by_policy', PRECONDITION)
+        previous = record.get('derived_scope')
+        prior_attempts = list(record.get('attempts') or [])
+        # Attempt counters survive a reopened repair round: the bound is per issue, not per round.
+        carried_attempts = int((cycle.get('carried_attempts') or {}).get(issue_id, 0))
+        base_revision = self.policy.get('base_revision') or gm_runner.git(
+            ['rev-parse', 'HEAD']).stdout.strip()
+        scope_file = self.cycle_dir() / 'scope.json'
+        # Round-specific candidate identity: a reopened round gets its OWN checkout derived from
+        # the pinned base, so the failed candidate's bytes stay on disk as immutable, independently
+        # reviewable evidence instead of being deleted to make room for the repair. Re-running the
+        # same round resumes the same directory; nothing is deleted or recreated on resume.
+        repair_rounds = int(cycle.get('repair_rounds', 0))
+        candidate = self.state_dir / 'candidates' / (
+            issue_id if repair_rounds == 0 else f'{issue_id}-r{repair_rounds}')
+        placeholder = {'root': ROOT, 'candidate': candidate, 'scope_file': scope_file,
+                       'policy_file': self.policy_path, 'evidence': self.evidence}
+        commands = []
+        for command in self.policy['required_test_commands']:
+            resolved, command_errors = resolve_command(command, placeholder)
+            if command_errors:
+                record.update({'status': 'refused', 'policy_errors': command_errors})
+                self.save_cycle(cycle)
+                return self.block(cycle, 'host_test_command_invalid', USAGE)
+            commands.append(resolved)
+        scope_document = {'issue_id': issue_id, 'owner_gm': gm_id, 'base_revision': base_revision,
+                          'objective': scope['objective'], 'files': scope['files'],
+                          'acceptance': scope['acceptance'], 'test_commands': commands,
+                          'review_state': 'unapproved', 'source': 'gm_proposed_host_derived'}
+        gm_runner.save_json(scope_file, scope_document)
+        isolation = str((self.policy.get('deployment') or {}).get('candidate_isolation')
+                        or 'git_worktree')
+        if isolation == 'sparse_alternates' and not candidate.exists():
+            failure = self.provision_sparse_candidate(candidate, base_revision)
+            if failure:
+                record.update({'status': 'failed', 'blocked_reason': failure})
+                self.save_cycle(cycle)
+                return self.block(cycle, 'candidate_isolation_failed', PRECONDITION)
+        record.update({'scope_file': gm_runner.relative(scope_file),
+                       'scope_sha256': sha256_file(scope_file), 'derived_scope': scope_document,
+                       'base_revision': base_revision, 'candidate': gm_runner.relative(candidate),
+                       'candidate_abs': str(candidate), 'host_test_commands': commands,
+                       'attempts_carried': carried_attempts,
+                       'host_owned_before': self.host_owned_hashes()})
+        if previous == scope_document:
+            record['attempts'] = prior_attempts
+        else:
+            record['attempts'] = []
+        self.save_cycle(cycle)
+        while True:
+            blocked = self.dispatch_budget(cycle, 'code', 1)
+            if blocked:
+                return self.stop(cycle, record, blocked)
+            attempt = carried_attempts + len(record['attempts']) + 1
+            if attempt > int(self.limits['max_attempts_per_issue']):
+                return self.block(cycle, 'max_attempts_per_issue reached without passing host tests',
+                                  RUNTIME)
+            command = runner_command(self.runner, 'code', '--state-dir', str(self.state_dir),
+                                     '--issue', issue_id, '--scope-file', str(scope_file),
+                                     '--base-revision', base_revision, '--candidate', str(candidate),
+                                     '--run-scope-tests', '--protect', str(self.policy_path),
+                                     '--protect', str(self.evidence))
+            self.reserve(cycle, record, 'code', 1)
+            result = run_process(command, self.runner.get('timeout') or 900, deadline=self.deadline)
+            cycle['attempts'][issue_id] = attempt
+            summary = last_json_line(result['stdout'])
+            status = (summary or {}).get('status')
+            failures = [test.get('exit_code') for test in ((summary or {}).get('scope_tests') or [])
+                        if test.get('exit_code') != 0]
+            self.settle(cycle, record, 1 if summary is not None else None)
+            record['attempts'].append({'attempt': attempt, 'run_id': (summary or {}).get('run_id'),
+                                       'status': status, 'exit_code': result['exit_code'],
+                                       'usage_measured': (summary or {}).get('usage_measured'),
+                                       'scope_test_failures': failures,
+                                       'owned': result.get('owned'),
+                                       'seconds': result['seconds']})
+            if summary is None:
+                record['status'] = 'failed'
+                record['blocked_reason'] = 'gm_runner code produced no summary'
+                self.save_cycle(cycle)
+                return self.block(cycle, 'code_failed_no_summary', RUNTIME)
+            if status == 'ok':
+                record.update({'status': 'done', 'candidate_run_id': summary.get('run_id'),
+                               'candidate_head': summary.get('candidate_head'),
+                               'changed_files': summary.get('observed_changed_files'),
+                               'scope_tests': summary.get('scope_tests')})
+                self.finish_stage(cycle, 'candidate', record)
+                return OK
+            if status in REPAIRABLE:
+                if not summary.get('usage_measured'):
+                    return self.block(cycle, 'coding_failure_with_unknown_usage', ACCOUNTING)
+                acknowledge = runner_command(self.runner, 'acknowledge', '--state-dir',
+                                             str(self.state_dir), '--gm', gm_id, '--note',
+                                             f'autonomy retry {attempt} after measured {status}')
+                ack = run_process(acknowledge, 120, deadline=self.deadline)
+                record['attempts'][-1]['acknowledge_exit'] = ack['exit_code']
+                self.save_cycle(cycle)
+                if ack['exit_code'] != 0:
+                    record['status'] = 'failed'
+                    record['blocked_reason'] = ('measured failure could not be acknowledged for '
+                                                'the same-GM repair retry')
+                    return self.block(cycle, 'measured_repair_acknowledge_failed', RUNTIME)
+                continue
+            if status == 'refused' and (summary or {}).get('kind') in (
+                    'unresolved_unknown_cost', 'unresolved_coding_attempt', 'owner_gm_unresolved'):
+                return self.block(cycle, 'unresolved_accounting_before_retry', ACCOUNTING)
+            record['status'] = 'failed'
+            record['blocked_reason'] = 'coding ended as ' + str(status)
+            self.save_cycle(cycle)
+            return self.block(cycle, 'coding_' + str(status), RUNTIME)
+
+    def host_owned_hashes(self) -> dict:
+        return {path: sha256_file(ROOT / path) for path in self.policy['host_owned_paths']}
+
+    def provision_sparse_candidate(self, candidate: Path, base_revision: str) -> str | None:
+        """Opt-in candidate isolation for hosts whose development .git is read-only.
+
+        The normal path is gm_runner's own `git worktree add`. Some restricted hosts cannot write
+        .git/worktrees and block git's local transport shell. In that case this builds an isolated
+        repository inside the state directory whose object store only *reads* the approved
+        checkout through an alternates file, with a sparse checkout limited to the allowed source
+        paths. gm_runner still re-verifies that the candidate is its own checkout at exactly
+        base_revision, and the coder still cannot reach the development checkout.
+        """
+        candidate.mkdir(parents=True, exist_ok=True)
+        environment = dict(os.environ)
+        environment['GIT_LFS_SKIP_SMUDGE'] = '1'
+
+        def invoke(argv):
+            return subprocess.run(argv, capture_output=True, text=True, encoding='utf-8',
+                                  errors='replace', env=environment, timeout=600)
+
+        initialized = invoke(['git', 'init', '--quiet', str(candidate)])
+        if initialized.returncode != 0:
+            return 'candidate_init_failed: ' + initialized.stderr.strip()[-300:]
+        alternates = candidate / '.git' / 'objects' / 'info' / 'alternates'
+        alternates.parent.mkdir(parents=True, exist_ok=True)
+        alternates.write_text(str((ROOT / '.git' / 'objects').resolve()).replace('\\', '/'),
+                              encoding='utf-8')
+        directories = []
+        for pattern in (self.policy.get('scope_constraints') or {}).get('allowed_source_paths', []):
+            directory = pattern[:-3].strip('/') if pattern.endswith('/**') else pattern.strip('/')
+            if directory and directory not in directories:
+                directories.append(directory)
+        if directories:
+            sparse = invoke(['git', '-C', str(candidate), 'sparse-checkout', 'set', *directories])
+            if sparse.returncode != 0:
+                return 'sparse_checkout_failed: ' + sparse.stderr.strip()[-300:]
+        checkout = invoke(['git', '-C', str(candidate), 'checkout', '--detach', base_revision])
+        if checkout.returncode != 0:
+            return 'candidate_checkout_failed: ' + checkout.stderr.strip()[-300:]
+        head = gm_runner.git(['rev-parse', 'HEAD'], cwd=candidate)
+        if head.stdout.strip() != base_revision:
+            return 'candidate_base_mismatch after sparse provision'
+        return None
+    def stage_validate(self, cycle: dict) -> int:
+        record = self.stage_record(cycle, 'validate')
+        if record['status'] == 'done':
+            return OK
+        candidate_record = cycle['stages'].get('candidate') or {}
+        if candidate_record.get('status') != 'done':
+            record.update({'status': 'skipped', 'reason': 'no completed candidate'})
+            self.save_cycle(cycle)
+            return OK
+        candidate = Path(candidate_record['candidate_abs'])
+        base = candidate_record['base_revision']
+        scope_files = candidate_record['derived_scope']['files']
+        checks = []
+        head = gm_runner.git(['rev-parse', 'HEAD'], cwd=candidate)
+        checks.append({'check': 'candidate_head_is_base', 'ok': head.stdout.strip() == base,
+                       'detail': head.stdout.strip()})
+        status = gm_runner.git(['status', '--porcelain', '-z', '--untracked-files=all'],
+                               cwd=candidate)
+        observed = gm_runner.normalize_status_paths(status.stdout) if status.returncode == 0 else None
+        out_of_scope = [] if observed is None else [path for path in observed
+                                                    if path not in scope_files]
+        checks.append({'check': 'candidate_changes_within_scope',
+                       'ok': observed is not None and not out_of_scope,
+                       'detail': {'observed': observed, 'out_of_scope': out_of_scope}})
+        host_after = self.host_owned_hashes()
+        checks.append({'check': 'host_owned_paths_unchanged',
+                       'ok': host_after == candidate_record['host_owned_before'],
+                       'detail': host_after})
+        hashes = {entry: (sha256_file(candidate / entry) if (candidate / entry).is_file() else None)
+                  for entry in scope_files}
+        checks.append({'check': 'scope_files_exist', 'ok': all(hashes.values()), 'detail': hashes})
+        test_runs = []
+        for command in candidate_record['host_test_commands']:
+            outcome = run_process(command, min(self.runner.get('timeout') or 900, 300),
+                                  cwd=candidate, deadline=self.deadline)
+            test_runs.append({'command': command, 'exit_code': outcome['exit_code'],
+                              'timed_out': outcome['timed_out'], 'seconds': outcome['seconds'],
+                              'owned': outcome.get('owned'),
+                              'stdout_tail': outcome['stdout'][-400:],
+                              'stderr_tail': outcome['stderr'][-400:]})
+        checks.append({'check': 'host_test_commands_pass',
+                       'ok': all(run['exit_code'] == 0 for run in test_runs), 'detail': test_runs})
+        record.update({'checks': checks, 'file_hashes': hashes,
+                       'ok': all(check['ok'] for check in checks)})
+        self.save_cycle(cycle)
+        if not record['ok']:
+            record['status'] = 'failed'
+            cycle['declined'].append({'issue_id': cycle.get('issue_id'), 'stage': 'validate',
+                                      'failed_checks': [c['check'] for c in checks
+                                                        if not c['ok']]})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'host_gate_refused_candidate', PRECONDITION)
+        self.finish_stage(cycle, 'validate', record)
+        return OK
+
+    def stale_release_binding(self, cycle: dict) -> str | None:
+        """Compare the LIVE policy, pinned trial base and host-owned script bytes to the digests
+        pinned when this cycle started.
+
+        The in-memory self.policy_sha is not evidence: it was cached when this process built the
+        cycle, so comparing it to the cached cycle.policy_sha256 would miss an edit made on disk
+        between the host gate and the release. Every value here is re-read from disk now, and a
+        missing pin is refused rather than silently re-granted to a reopened repair or restarted
+        process.
+        """
+        pinned_policy = cycle.get('policy_sha256')
+        live_policy = file_digest_or_none(self.policy_path)
+        if not pinned_policy:
+            return 'this cycle pins no standing-policy digest; refusing to release'
+        if live_policy != pinned_policy:
+            return (f'the standing policy changed on disk after this cycle started '
+                    f'({pinned_policy} -> {live_policy}); refusing to release')
+        pinned_base = cycle.get('base_manifest_sha256')
+        if not pinned_base:
+            return ('this cycle pins no base-manifest digest; refusing to release rather than '
+                    'granting a fresh baseline to a reopened cycle')
+        live_base = file_digest_or_none(self.base_manifest)
+        if live_base != pinned_base:
+            return (f'the declared trial base manifest changed after this cycle started '
+                    f'({pinned_base} -> {live_base}); refusing to release')
+        pinned_host = cycle.get('host_owned_pinned')
+        if not pinned_host:
+            return 'this cycle pins no host-owned test/script digests; refusing to release'
+        if self.host_owned_hashes() != pinned_host:
+            return ('a host-owned test or host script changed after this cycle started; '
+                    'refusing to release')
+        return None
+
+    def stage_publish(self, cycle: dict) -> int:
+        record = self.stage_record(cycle, 'publish')
+        if record['status'] == 'done':
+            return OK
+        validate = cycle['stages'].get('validate') or {}
+        if not validate.get('ok'):
+            record.update({'status': 'skipped', 'reason': 'host gate not passed'})
+            self.save_cycle(cycle)
+            return OK
+        if int(self.limits['max_publishes']) < 1:
+            record.update({'status': 'skipped', 'reason': 'max_publishes=0'})
+            self.save_cycle(cycle)
+            return OK
+        # The publication bound is cumulative over the cycle, not per repair round: a policy that
+        # allows one release must stop a reopened round from releasing a second time. A publish
+        # intent journal left by a crash is still completed idempotently instead of being refused.
+        publishes_done = int(cycle.get('publishes_total', 0))
+        if (publishes_done >= int(self.limits['max_publishes'])
+                and not self.publish_journal_path().is_file()):
+            record.update({'status': 'refused', 'publishes_total': publishes_done,
+                           'reason': (f'max_publishes={self.limits["max_publishes"]} is already '
+                                      f'spent by {publishes_done} completed release(s); this round '
+                                      'may not publish again')})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'max_publishes_reached', PRECONDITION)
+        root = ROOT.resolve()
+        checkout = self.checkout.resolve()
+        disposable = root / 'tmp'
+        inside_disposable = checkout == disposable or disposable in checkout.parents
+        if checkout == root or (root in checkout.parents and not inside_disposable):
+            record.update({'status': 'refused',
+                           'reason': 'trial checkout must be outside the development checkout or '
+                                     'inside its ignored tmp/ area'})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'deployment_checkout_inside_dev_checkout', PRECONDITION)
+        if (checkout / '.git').is_file():
+            record.update({'status': 'refused',
+                           'reason': 'trial checkout shares the development checkout git metadata'})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'deployment_checkout_shares_dev_git', PRECONDITION)
+        stale = self.stale_release_binding(cycle)
+        if stale:
+            record.update({'status': 'refused', 'reason': stale})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'release_binding_stale', UNACCEPTABLE)
+        base = gm_runner.load_json(self.base_manifest)
+        declared = base.get('files') if isinstance(base, dict) else None
+        if not isinstance(declared, dict):
+            record.update({'status': 'refused', 'reason': 'base manifest must hold a files object'})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'base_manifest_invalid', UNACCEPTABLE)
+        # A second intentional release by this same owner compares against its own last accepted
+        # release bytes, not only the pinned base manifest. Owned bytes may be replaced; bytes
+        # that are neither the owned prior release nor the pinned base still refuse.
+        declared = dict(declared)
+        declared.update(self.accepted_release_base(cycle))
+        path_map = self.policy['deployment']['path_map']
+        scope_files = list(validate['file_hashes'].keys())
+        if len(scope_files) != RELEASE_FILES_THIS_VERSION:
+            record.update({'status': 'refused', 'reason': (
+                f'this version releases exactly {RELEASE_FILES_THIS_VERSION} changed file; the '
+                f'host gate validated {len(scope_files)}')})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'multi_file_release_not_supported', PRECONDITION)
+        candidate_record = cycle['stages'].get('candidate') or {}
+        candidate_root = Path(candidate_record['candidate_abs']).resolve()
+        prepared = []
+        for rel in scope_files:
+            digest = validate['file_hashes'][rel]
+            source_rel = safe_relpath(rel)
+            if source_rel in (None, ''):
+                record.update({'status': 'refused', 'reason': f'source {rel!r} is not a plain '
+                               'repo-relative path'})
+                self.save_cycle(cycle)
+                return self.block(cycle, 'release_source_escape', PRECONDITION)
+            source = (candidate_root / source_rel).resolve()
+            if source == candidate_root or not is_within(source, candidate_root):
+                record.update({'status': 'refused',
+                               'reason': f'candidate source {rel!r} escapes the candidate'})
+                self.save_cycle(cycle)
+                return self.block(cycle, 'release_source_escape', PRECONDITION)
+            if not source.is_file():
+                record.update({'status': 'refused', 'reason': f'candidate source {rel!r} is absent'})
+                self.save_cycle(cycle)
+                return self.block(cycle, 'release_source_escape', PRECONDITION)
+            payload = source.read_bytes()
+            if sha256_bytes(payload) != digest:
+                record.update({'status': 'refused',
+                               'reason': f'candidate bytes for {rel!r} changed after the host gate'})
+                self.save_cycle(cycle)
+                return self.block(cycle, 'candidate_bytes_changed_after_gate', UNACCEPTABLE)
+            target_rel = deployment_target(rel, path_map)
+            if target_rel is None or safe_relpath(target_rel) is None:
+                record.update({'status': 'refused',
+                               'reason': f'no safe deployment mapping for {rel!r}'})
+                self.save_cycle(cycle)
+                return self.block(cycle, 'release_target_escape', PRECONDITION)
+            prepared.append({'source': rel, 'target': safe_relpath(target_rel), 'sha256': digest,
+                             'payload': payload, 'absolute': checkout / safe_relpath(target_rel)})
+        release_digest = sha256_bytes(json.dumps(
+            sorted([[entry['target'], entry['sha256']] for entry in prepared]),
+            sort_keys=True).encode())
+        binding = {'policy_sha256': self.policy_sha, 'base_manifest_sha256':
+                   sha256_file(self.base_manifest), 'host_owned_hashes': self.host_owned_hashes(),
+                   'candidate_base_revision': candidate_record.get('base_revision'),
+                   'gate_ok': bool(validate.get('ok'))}
+        pinned_host = candidate_record.get('host_owned_before') or {}
+        if self.policy_sha != cycle.get('policy_sha256') or self.host_owned_hashes() != pinned_host:
+            record.update({'status': 'refused',
+                           'reason': 'the pinned policy or host-owned hashes changed before '
+                                     'release'})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'release_pinned_binding_drift', UNACCEPTABLE)
+        recovered = self.recover_publish(cycle, record, checkout, prepared, declared,
+                                         release_digest, binding)
+        if recovered is not None:
+            return recovered
+        return self.execute_publish(cycle, record, checkout, prepared, declared, release_digest,
+                                    binding)
+
+    def owned_release_bytes(self, cycle: dict) -> dict:
+        """Targets this same owned cycle already released, with their accepted bytes.
+
+        A second intentional release is compared against the previous owned release bytes, not
+        only the pinned (possibly empty) base manifest, so the same owner may replace its own
+        last release while a third party's drift is still refused. The pinned base manifest file
+        itself is never rewritten."""
+        owned = {}
+        sources = [cycle.get('release') or {}]
+        sources += [((record.get('previous_stages') or {}).get('publish') or {})
+                    for record in (cycle.get('repair_history') or [])]
+        for source in sources:
+            for item in source.get('files') or []:
+                target, digest = item.get('target'), item.get('sha256')
+                if target and digest:
+                    owned[target] = digest
+        return owned
+
+    def queued_source_cycle_documents(self, cycle: dict) -> list:
+        """Walk the durable queued_from_cycle hand-over chain of this cycle's sources."""
+        documents = []
+        seen = set()
+        current = cycle.get('queued_from_cycle')
+        root = self.autonomy_dir()
+        while current and str(current) not in seen:
+            seen.add(str(current))
+            path = root / str(current) / 'cycle.json'
+            if not path.is_file():
+                break
+            document = gm_runner.load_json(path)
+            if not isinstance(document, dict):
+                break
+            documents.append(document)
+            current = document.get('queued_from_cycle')
+        return documents
+
+    def accepted_release_base(self, cycle: dict) -> dict:
+        """The bytes this cycle may intentionally replace: its own prior release plus the
+        ACCEPTED release bytes of the earlier cycle whose queued GM claim it took over. A source
+        release only counts after its own verification passed, so a third party's unreviewed
+        drift is still refused and the pinned base manifest file is never rewritten."""
+        owned = self.owned_release_bytes(cycle)
+        for document in self.queued_source_cycle_documents(cycle):
+            stages = document.get('stages') or {}
+            publish = stages.get('publish') or {}
+            verify = stages.get('verify') or {}
+            if publish.get('status') != 'done' or not verify.get('ok'):
+                continue
+            for item in publish.get('files') or []:
+                target, digest = item.get('target'), item.get('sha256')
+                if target and digest:
+                    owned.setdefault(target, digest)
+        return owned
+
+    def publish_journal_path(self) -> Path:
+        return self.cycle_dir() / 'publish-intent.json'
+
+    def finish_publish(self, cycle: dict, record: dict, prepared: list, checkout: Path,
+                       release_digest: str, binding: dict) -> int:
+        receipt = {'schema_version': 1, 'cycle_id': cycle['cycle_id'],
+                   'release_digest': release_digest,
+                   'files': [{'source': entry['source'], 'target': entry['target'],
+                              'sha256': entry['sha256'], 'bytes': len(entry['payload']),
+                              'previous_sha256': entry.get('previous_sha256')}
+                             for entry in prepared],
+                   'checkout': gm_runner.relative(checkout), 'binding': binding,
+                   'published_utc': gm_runner.utc_iso()}
+        # Counted only when the release really completed, so a refused or crashed attempt is not
+        # charged and a repaired round cannot silently publish past the policy bound.
+        cycle['publishes_total'] = int(cycle.get('publishes_total', 0)) + 1
+        record.update({'status': 'done', 'files': receipt['files'],
+                       'release_digest': release_digest,
+                       'publishes_total': cycle['publishes_total'],
+                       'checkout': gm_runner.relative(checkout),
+                       'base_manifest_sha256': binding['base_manifest_sha256'],
+                       'publish_receipt': receipt, 'published_utc': receipt['published_utc']})
+        cycle['release'] = {'digest': release_digest, 'files': receipt['files'],
+                            'checkout': gm_runner.relative(checkout)}
+        # Persist the completed receipt BEFORE removing the intent journal: a crash in between
+        # must leave either the journal (safe, idempotent recovery) or the receipt, never neither.
+        self.finish_stage(cycle, 'publish', record)
+        try:
+            self.publish_journal_path().unlink()
+        except OSError:
+            pass
+        return OK
+
+    def execute_publish(self, cycle: dict, record: dict, checkout: Path, prepared: list,
+                        declared: dict, release_digest: str, binding: dict) -> int:
+        """Install the immutable validated bytes exactly once, under the owner-identified
+        installation lock, rechecking the declared trial base while that lock is held."""
+        with self.installation_lock() as lock:
+            if lock.recovered:
+                record['recovered_install_lock'] = lock.recovered
+            conflicts = []
+            for entry in prepared:
+                target = entry['absolute']
+                escape = reparse_escape(target, checkout)
+                if escape:
+                    conflicts.append({'file': entry['target'], 'reason': escape})
+                    continue
+                current = sha256_file(target) if target.is_file() else None
+                if current == entry['sha256']:
+                    continue  # already installed by this same release; idempotent
+                if declared.get(entry['target']) != current:
+                    conflicts.append({'file': entry['target'],
+                                      'reason': 'trial base drifted from the declared manifest; '
+                                                'refusing to overwrite another writer',
+                                      'declared': declared.get(entry['target']),
+                                      'current': current})
+                    continue
+                entry['previous_sha256'] = current
+            if conflicts:
+                record.update({'status': 'refused', 'conflicts': conflicts})
+                self.save_cycle(cycle)
+                return self.block(cycle, 'release_conflict', PRECONDITION)
+            journal = {'schema_version': 1, 'cycle_id': cycle['cycle_id'],
+                       'release_digest': release_digest, 'binding': binding,
+                       'files': [{'source': entry['source'], 'target': entry['target'],
+                                  'sha256': entry['sha256'],
+                                  'previous_sha256': entry.get('previous_sha256')}
+                                 for entry in prepared],
+                       'written_utc': gm_runner.utc_iso()}
+            gm_runner.save_json(self.publish_journal_path(), journal)
+            record['publish_intent'] = {'release_digest': release_digest,
+                                        'files': journal['files'],
+                                        'written_utc': journal['written_utc']}
+            self.save_cycle(cycle)
+            for entry in prepared:
+                target = entry['absolute']
+                if target.is_file() and sha256_file(target) == entry['sha256']:
+                    continue
+                target.parent.mkdir(parents=True, exist_ok=True)
+                temporary = target.with_name(target.name + '.autonomy-new')
+                temporary.write_bytes(entry['payload'])
+                if sha256_file(temporary) != entry['sha256']:
+                    try:
+                        temporary.unlink()
+                    except OSError:
+                        pass
+                    return self.block(cycle, 'staged_bytes_mismatch', RUNTIME)
+                os.replace(str(temporary), str(target))
+                if sha256_file(target) != entry['sha256']:
+                    return self.block(cycle, 'published_bytes_mismatch', RUNTIME)
+        return self.finish_publish(cycle, record, prepared, checkout, release_digest, binding)
+
+    def recover_publish(self, cycle: dict, record: dict, checkout: Path, prepared: list,
+                        declared: dict, release_digest: str, binding: dict):
+        """Idempotent recovery when the process died between the replace and the receipt.
+        Never rolls world history back and never replays a completed publication."""
+        journal = self.publish_journal_path()
+        if record.get('publish_receipt') and record.get('release_digest') == release_digest:
+            try:
+                journal.unlink()
+            except OSError:
+                pass
+            self.finish_stage(cycle, 'publish', record)
+            cycle['release'] = {'digest': release_digest, 'files': record.get('files'),
+                                'checkout': gm_runner.relative(checkout)}
+            return OK
+        if not journal.is_file():
+            return None
+        prior = gm_runner.load_json(journal)
+        if (not isinstance(prior, dict) or prior.get('release_digest') != release_digest
+                or len(prior.get('files') or []) != len(prepared)):
+            record.update({'status': 'refused', 'reason': 'an unfinished publication journal '
+                           'exists for a different release; refusing to mix releases'})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'publish_journal_conflict', PRECONDITION)
+        entry = prepared[0]
+        current = sha256_file(entry['absolute']) if entry['absolute'].is_file() else None
+        if current == entry['sha256']:
+            return self.finish_publish(cycle, record, prepared, checkout, release_digest, binding)
+        if declared.get(entry['target']) == current:
+            return None  # the replace never happened; a safe re-attempt under the same journal
+        record.update({'status': 'refused', 'reason': 'the trial target holds bytes from neither '
+                       'the declared base nor this release; refusing to overwrite',
+                       'current': current})
+        self.save_cycle(cycle)
+        return self.block(cycle, 'release_conflict_third_bytes', PRECONDITION)
+    def stage_verify(self, cycle: dict) -> int:
+        record = self.stage_record(cycle, 'verify')
+        if record['status'] == 'done':
+            return OK
+        publish = cycle['stages'].get('publish') or {}
+        if publish.get('status') != 'done':
+            record.update({'status': 'skipped', 'reason': 'nothing was published'})
+            self.save_cycle(cycle)
+            return OK
+        stopped = self.in_flight_stop(cycle, record, 'verify')
+        if stopped:
+            return stopped
+        checkout = self.checkout.resolve()
+        release_digest = publish['release_digest']
+        issue_id = cycle.get('issue_id') or ''
+        self.save_path.parent.mkdir(parents=True, exist_ok=True)
+        if not self.save_path.is_file():
+            record.update({'status': 'refused',
+                           'reason': 'the runtime save is absent; this version never creates or '
+                                     'resets a save while verifying. Seed the labelled fixture '
+                                     'before publication instead.'})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'runtime_save_absent_refused_to_create', STALE)
+        existing = gm_runner.load_json(self.save_path)
+        if not isinstance(existing, dict) or existing.get('world_id') != self.policy['world_id']:
+            record.update({'status': 'refused', 'reason': 'runtime save belongs to another world',
+                           'save_world_id': (existing or {}).get('world_id')
+                           if isinstance(existing, dict) else None})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'stale_or_wrong_world_save', STALE)
+        first_target = (publish['files'][0]['target'] if publish.get('files') else '')
+        nonce = sha256_bytes('|'.join([cycle['cycle_id'], release_digest, issue_id,
+                                       gm_runner.utc_iso(), str(os.getpid())]).encode())[:16]
+        budget = int(self.policy['runtime'].get('timeout_seconds', 120))
+        out_paths = {phase: self.cycle_dir() / ('verify-' + phase + '-' + nonce + '.json')
+                     for phase in ('open', 'resume')}
+        runs = []
+        deployed = []
+        # The shared installation lock is held while the deployed bytes are checked and the world
+        # is executed, so no concurrent writer can change the artifact under verification and a
+        # stale deployment cannot be reported as this release's behaviour.
+        with self.installation_lock() as lock:
+            if lock.recovered:
+                record['recovered_install_lock'] = lock.recovered
+            # Re-verify the pinned policy/base/host-owned bindings under the installation lock and
+            # BEFORE the host script runs: a host script edited after publication must not be
+            # executed as though it were the one the host gate approved, and holding the lock keeps
+            # a concurrent writer from moving those bytes between this check and the run.
+            stale = self.stale_release_binding(cycle)
+            if stale:
+                record.update({'status': 'refused', 'reason': stale})
+                self.save_cycle(cycle)
+                return self.block(cycle, 'release_binding_stale_after_publish', UNACCEPTABLE)
+            for item in publish.get('files') or []:
+                target = checkout / item['target'] if item.get('target') else None
+                actual = (sha256_file(target)
+                          if target is not None and target.is_file() else None)
+                deployed.append({'target': item.get('target'), 'expected': item.get('sha256'),
+                                 'actual': actual, 'ok': actual == item.get('sha256')})
+            for phase in ('open', 'resume'):
+                out_path = out_paths[phase]
+                try:
+                    out_path.unlink()
+                except OSError:
+                    pass
+                command = [str(self.godot), '--headless', '--path', str(checkout),
+                           '--script', self.policy['runtime']['script'], '--',
+                           '--save=' + str(self.save_path), '--manifest=res://' + first_target,
+                           '--release-digest=' + release_digest, '--issue-id=' + issue_id,
+                           '--nonce=' + nonce, '--phase=' + phase, '--out=' + str(out_path)]
+                if phase == 'resume':
+                    command += ['--prior-file=' + str(out_paths['open'])]
+                command += [str(item) for item in self.policy['runtime'].get('extra_args', [])]
+                self.reserve(cycle, record, 'verify-' + phase, 0, count_batch=False)
+                outcome = run_process(command, budget, deadline=self.deadline)
+                self.settle(cycle, record, 0)
+                observed = gm_runner.load_json(out_path) if out_path.is_file() else None
+                exited = bool(outcome['owned'] and outcome['owned'].get('all_members_exited'))
+                runs.append({'phase': phase, 'exit_code': outcome['exit_code'],
+                             'timed_out': outcome['timed_out'], 'seconds': outcome['seconds'],
+                             'owned': outcome['owned'], 'owned_members_exited': exited,
+                             'fresh_output_file': gm_runner.relative(out_path),
+                             'observed': observed,
+                             'stdout_tail': outcome['stdout'][-600:],
+                             'stderr_tail': outcome['stderr'][-600:]})
+                if outcome['timed_out']:
+                    break
+        final = runs[-1]['observed'] if runs else None
+        installed_only = bool(final and final.get('installed') and not final.get('used'))
+        checks = [
+            {'check': 'deployed_bytes_match_release',
+             'ok': bool(deployed) and all(item['ok'] for item in deployed),
+             'detail': deployed},
+            {'check': 'every_phase_reported_ok',
+             'ok': bool(runs) and all(bool((run.get('observed') or {}).get('ok'))
+                                      for run in runs)},
+            {'check': 'every_phase_bound_to_this_release',
+             'ok': bool(runs) and all((run.get('observed') or {}).get('nonce') == nonce
+                                      and (run.get('observed') or {}).get('release_digest')
+                                      == release_digest
+                                      and (run.get('observed') or {}).get('world_id')
+                                      == self.policy['world_id'] for run in runs)},
+            {'check': 'runtime_exit_ok',
+             'ok': bool(runs) and all(run['exit_code'] == 0 for run in runs)},
+            {'check': 'no_phase_timed_out',
+             'ok': bool(runs) and not any(run.get('timed_out') for run in runs)},
+            {'check': 'owned_processes_exited',
+             'ok': bool(runs) and all(run['owned_members_exited'] for run in runs)},
+            {'check': 'fresh_output_for_this_nonce',
+             'ok': bool(final and final.get('nonce') == nonce)},
+            {'check': 'runtime_reports_ok', 'ok': bool(final and final.get('ok'))},
+            {'check': 'release_digest_matches',
+             'ok': bool(final and final.get('release_digest') == release_digest)},
+            {'check': 'world_id_matches',
+             'ok': bool(final and final.get('world_id') == self.policy['world_id'])},
+            {'check': 'issue_id_matches', 'ok': bool(final and final.get('issue_id') == issue_id)},
+            {'check': 'same_save_continuation', 'ok': bool(final and final.get('continuation_ok'))},
+            {'check': 'installed', 'ok': bool(final and final.get('installed'))},
+            {'check': 'used_not_invented',
+             'ok': bool(final and final.get('used') and not installed_only)}]
+        record.update({'runs': runs, 'checks': checks, 'ok': all(check['ok'] for check in checks),
+                       'installed': bool(final and final.get('installed')),
+                       'used': bool(final and final.get('used')),
+                       'installed_but_unused': installed_only,
+                       'nonce': nonce,
+                       'observation': (final or {}).get('observation')})
+        self.save_cycle(cycle)
+        if not record['ok']:
+            failed_checks = [c['check'] for c in checks if not c.get('ok')]
+            if installed_only:
+                reason = 'installed_but_unused'
+            elif conclusive_runtime_defect(failed_checks):
+                reason = 'runtime_verification_failed'
+            else:
+                # Timeout, missing/stale output, foreign nonce/world/release/issue or a live child
+                # process: not an actionable defect, so no further candidate/model turn.
+                reason = 'runtime_verification_inconclusive'
+            # A blocked cycle reason is not by itself a failure fact: record the failed stage so
+            # failure_facts and the owner receipt describe what actually happened.
+            record.update({'status': 'failed', 'reason': reason, 'failed_checks': failed_checks})
+            self.save_cycle(cycle)
+            return self.block(cycle, reason, RUNTIME)
+        self.finish_stage(cycle, 'verify', record)
+        return OK
+
+    def stage_feedback(self, cycle: dict) -> int:
+        record = self.stage_record(cycle, 'feedback')
+        if record['status'] == 'done':
+            return OK
+        gm_id, issue_id = cycle.get('gm_id'), cycle.get('issue_id')
+        if not gm_id:
+            record.update({'status': 'skipped', 'reason': 'no GM owned this cycle'})
+            self.save_cycle(cycle)
+            return OK
+        stopped = self.in_flight_stop(cycle, record, 'feedback')
+        if stopped:
+            return stopped
+        verify = cycle['stages'].get('verify') or {}
+        observe = cycle['stages'].get('observe') or {}
+        validate = cycle['stages'].get('validate') or {}
+        failure = self.failure_facts(cycle)
+        publish = cycle['stages'].get('publish') or {}
+        if failure:
+            if failure.get('stage') != 'verify':
+                receipt_outcome = str(failure.get('stage')) + '_failed'
+            elif verify.get('installed_but_unused'):
+                receipt_outcome = 'installed_but_unused'
+            elif verify.get('reason') == 'runtime_verification_inconclusive':
+                receipt_outcome = 'runtime_verification_inconclusive'
+            else:
+                receipt_outcome = 'verification_failed'
+        elif verify.get('status') == 'done' and verify.get('ok'):
+            receipt_outcome = 'released_and_verified'
+        else:
+            receipt_outcome = 'not_released'
+        receipt = {'kind': 'autonomy_release_receipt', 'cycle_id': cycle['cycle_id'],
+                   'issue_id': issue_id, 'world_id': cycle['world_id'], 'gm_id': gm_id,
+                   'release_digest': (cycle.get('release') or {}).get('digest')
+                                     or publish.get('release_digest'),
+                   'outcome': receipt_outcome,
+                   'published': publish.get('status') == 'done',
+                   'runtime_verification': {
+                       'installed': verify.get('installed'), 'used': verify.get('used'),
+                       'installed_but_unused': verify.get('installed_but_unused'),
+                       'observation': verify.get('observation')},
+                   'host_gate_failed_checks': [c['check'] for c in (validate.get('checks') or [])
+                                               if not c.get('ok')],
+                   'failure': failure,
+                   'observation_origin': observe.get('observation_origin'),
+                   'not_claimed': ('a GM proposal is a hypothesis; this receipt reports only what '
+                                   'the host gate and the running fixture actually did'),
+                   'utc': gm_runner.utc_iso()}
+        attempts = record.setdefault('attempts', [])
+        max_attempts = int(self.limits.get('max_feedback_attempts', 2))
+        dispatched = int(cycle.get('feedback_attempts_total', 0))
+        if dispatched >= max_attempts:
+            record['status'] = 'failed'
+            self.save_cycle(cycle)
+            return self.block(cycle, 'feedback_not_acknowledged_after_max_attempts', ACCOUNTING)
+        receipt_path = self.cycle_dir() / f'feedback-{len(attempts) + 1}.json'
+        gm_runner.save_json(receipt_path, receipt)
+        blocked = self.dispatch_budget(cycle, 'feedback', 1)
+        if blocked:
+            record['status'] = 'stopped'
+            record['blocked_reason'] = blocked
+            self.save_cycle(cycle)
+            return OK
+        command = runner_command(self.runner, 'feedback', '--state-dir', str(self.state_dir),
+                                 '--gm', gm_id, '--receipt-file', str(receipt_path))
+        if issue_id:
+            command += ['--issue', issue_id]
+        command += ['--protect', str(self.policy_path), '--protect', str(receipt_path)]
+        cycle['feedback_attempts_total'] = dispatched + 1
+        self.reserve(cycle, record, 'feedback', 1)
+        result = run_process(command, self.runner.get('timeout') or 900, deadline=self.deadline)
+        summary = last_json_line(result['stdout'])
+        self.settle(cycle, record, 1 if summary is not None else None)
+        attempts.append({'attempt': len(attempts) + 1, 'exit_code': result['exit_code'],
+                         'status': (summary or {}).get('status'),
+                         'acknowledged': bool((summary or {}).get('acknowledged')),
+                         'decision': (summary or {}).get('decision'),
+                         'next_work': (summary or {}).get('next_work'),
+                         'usage_measured': (summary or {}).get('usage_measured'),
+                         'usage': (summary or {}).get('usage'),
+                         'receipt_sha256': sha256_file(receipt_path),
+                         'owned': result.get('owned'), 'seconds': result['seconds']})
+        if summary is None or result['timed_out']:
+            record['status'] = 'unknown'
+            cycle['unknown'] = {'stage': 'feedback', 'exit_code': result['exit_code']}
+            self.save_cycle(cycle)
+            return self.block(cycle, 'feedback_call_outcome_unknown', ACCOUNTING)
+        if ((summary or {}).get('kind') == 'unresolved_unknown_cost'
+                or (summary or {}).get('cost') == 'unknown'):
+            record['status'] = 'failed'
+            self.save_cycle(cycle)
+            return self.block(cycle, 'feedback_unknown_usage_stops_dispatch', ACCOUNTING)
+        # Transport, guard, receipt binding and measured usage must all pass before an
+        # acknowledgement, decision or next_work is accepted as a real owner response.
+        if result['exit_code'] != 0 or (summary or {}).get('status') != 'ok':
+            record['status'] = 'failed'
+            record['reason'] = ('the feedback transport exited with code '
+                                + str(result['exit_code']) + ' and status '
+                                + str((summary or {}).get('status'))
+                                + '; its acknowledgement is not accepted')
+            self.save_cycle(cycle)
+            return self.block(cycle, 'feedback_transport_failed_not_accepted', RUNTIME)
+        if (summary or {}).get('protected_paths_changed'):
+            record['status'] = 'refused'
+            record['reason'] = 'the feedback turn changed a protected host file'
+            self.save_cycle(cycle)
+            return self.block(cycle, 'feedback_guard_violation_not_accepted', RUNTIME)
+        receipt_sha = sha256_file(receipt_path)
+        echoed = (summary or {}).get('receipt_sha256')
+        if not isinstance(echoed, str) or echoed != receipt_sha:
+            record['status'] = 'refused'
+            record['reason'] = ('the acknowledgement is not bound to this exact receipt digest; an '
+                                'absent or stale digest is not an acknowledgement')
+            self.save_cycle(cycle)
+            return self.block(cycle, 'feedback_receipt_binding_mismatch', RUNTIME)
+        if (summary or {}).get('gm_id') != gm_id:
+            record['status'] = 'refused'
+            record['reason'] = 'the acknowledgement was not returned by the owning GM'
+            self.save_cycle(cycle)
+            return self.block(cycle, 'feedback_owner_mismatch', RUNTIME)
+        if (summary or {}).get('usage_measured') is not True:
+            record['status'] = 'failed'
+            record['reason'] = 'the feedback turn did not report measured usage'
+            self.save_cycle(cycle)
+            return self.block(cycle, 'feedback_usage_not_measured', ACCOUNTING)
+        if not (summary or {}).get('acknowledged') or not (summary or {}).get('decision'):
+            record['status'] = 'failed'
+            record['reason'] = 'the owning GM did not return a structured acknowledgement'
+            self.save_cycle(cycle)
+            return self.block(cycle, 'feedback_acknowledgement_missing', RUNTIME)
+        record.update({'status': 'done', 'receipt': receipt, 'receipt_sha256':
+                       sha256_file(receipt_path),
+                       'acknowledgement': {'acknowledged': True,
+                                           'decision': (summary or {}).get('decision'),
+                                           'next_work': (summary or {}).get('next_work'),
+                                           'run_id': (summary or {}).get('run_id')}})
+        self.finish_stage(cycle, 'feedback', record)
+        return OK
+
+    def failure_facts(self, cycle: dict) -> dict:
+        for name in STAGES:
+            stub = cycle['stages'].get(name) or {}
+            if stub.get('status') in ('failed', 'refused', 'unknown', 'stopped'):
+                return {'stage': name, 'status': stub.get('status'),
+                        'blocked_reason': cycle.get('blocked_reason'),
+                        'failed_checks': [c['check'] for c in (stub.get('checks') or [])
+                                          if not c.get('ok')],
+                        'attempts': [{'attempt': item.get('attempt'), 'status': item.get('status')}
+                                     for item in (stub.get('attempts') or [])]}
+        return {}
+
+    # -- control -------------------------------------------------------------------
+
+    def stop(self, cycle: dict, record: dict, reason: str) -> int:
+        record.update({'status': 'stopped', 'blocked_reason': reason})
+        self.save_cycle(cycle)
+        return OK
+
+    def block(self, cycle: dict, reason: str, exit_code: int) -> int:
+        cycle['status'] = 'blocked'
+        cycle['blocked_reason'] = reason
+        self.save_cycle(cycle)
+        return exit_code
+    def write_report(self, cycle: dict) -> Path:
+        observe = cycle['stages'].get('observe') or {}
+        validate = cycle['stages'].get('validate') or {}
+        publish = cycle['stages'].get('publish') or {}
+        verify = cycle['stages'].get('verify') or {}
+        owned_pids, runs_owned = [], False
+        for name in STAGES:
+            stub = cycle['stages'].get(name) or {}
+            for item in [stub] + list(stub.get('runs') or []) + list(stub.get('attempts') or []):
+                owned = (item or {}).get('owned')
+                if not isinstance(owned, dict):
+                    continue
+                runs_owned = True
+                for member in owned.get('observed_members') or []:
+                    owned_pids.append({'stage': name, 'pid': member.get('pid'),
+                                       'creation_time_windows_100ns':
+                                           member.get('creation_time_windows_100ns'),
+                                       'exit_code': member.get('exit_code')})
+        all_owned_exited = bool(owned_pids) and all(
+            member['exit_code'] is not None for member in owned_pids)
+        report = {'kind': 'gm_autonomy_cycle_report', 'schema_version': CYCLE_SCHEMA,
+                  'cycle_id': cycle['cycle_id'], 'mode': cycle['mode'],
+                  'policy': {'policy_id': cycle['policy_id'],
+                             'policy_sha256': cycle['policy_sha256'],
+                             'world_id': cycle['world_id']},
+                  'status': cycle['status'], 'blocked_reason': cycle['blocked_reason'],
+                  'stage_status': {name: (cycle['stages'].get(name) or {}).get('status', 'pending')
+                                   for name in STAGES},
+                  'what_changed': [item['target'] for item in publish.get('files', [])],
+                  'release_digest': publish.get('release_digest'),
+                  'independently_tested': {
+                      'host_gate_ok': validate.get('ok'),
+                      'failed_checks': [c['check'] for c in (validate.get('checks') or [])
+                                        if not c.get('ok')],
+                      'runtime_checks': {c['check']: c['ok'] for c in (verify.get('checks') or [])}},
+                  'world_observed': verify.get('observation'),
+                  'installed': verify.get('installed'), 'used': verify.get('used'),
+                  'gm': {'gm_id': cycle.get('gm_id'), 'issue_id': cycle.get('issue_id'),
+                         'observation_origin': observe.get('observation_origin')},
+                  'deferred_claims': cycle.get('deferred_claims'), 'declined': cycle.get('declined'),
+                  'usage': {'gm_turns': cycle.get('model_calls', 0),
+                            'model_calls': cycle.get('model_calls', 0),
+                            'gm_turns_note': ('native GM turn dispatches (one GM decision is one '
+                                              'turn), including an in-flight reservation; this is '
+                                              'not an HTTP request count and not a currency charge'),
+                            'dispatch_batches': cycle.get('dispatch_batches', {}),
+                            'batch_note': ('one observe batch can carry up to max_gms GM turns; '
+                                           'dispatch_batches counts the subprocess batches, not '
+                                           'HTTP requests'),
+                            'max_model_calls': self.max_model_calls(),
+                            'attempts': cycle['attempts'],
+                            'feedback_attempts': (cycle['stages'].get('feedback') or {}).get(
+                                'attempts'),
+                            'unknown': cycle.get('unknown'),
+                            'currency': 'not derived from token counters'},
+                  'limits': self.limits, 'owner_lock_recovered': self.recovered_lock,
+                  'owned_processes': {'windows_job': runs_owned,
+                                      'all_observed_members_exited': all_owned_exited,
+                                      'members': owned_pids},
+                  'next_stage': (cycle['stage'] if cycle['status'] == 'blocked' else None),
+                  'started_utc': cycle['started_utc'], 'updated_utc': cycle['updated_utc'],
+                  'provenance': {
+                      'mode': cycle['mode'],
+                      'world_origin': ('labelled_fixture_genesis'
+                                       if cycle['mode'] in ('offline_fixture', 'local_trial')
+                                       else 'carried_canonical_state'),
+                      'gm_transport': ('scripted_fake_local_subprocess'
+                                       if cycle['mode'] == 'offline_fixture'
+                                       else 'real_provider_route')},
+                  'note': PROVENANCE_NOTES.get(cycle['mode'], 'unlabelled autonomy mode')}
+        path = self.cycle_dir() / 'report.json'
+        gm_runner.save_json(path, report)
+        return path
+
+    def next_stage(self, cycle: dict) -> str:
+        for name in STAGES:
+            if (cycle['stages'].get(name) or {}).get('status') not in ('done', 'skipped', 'no_action'):
+                return name
+        return STAGES[-1]
+
+    def finish_cycle(self, cycle: dict, status: str, exit_code: int) -> int:
+        cycle['status'] = status
+        cycle['exit_code'] = int(exit_code)
+        if status in ('completed', 'no_action') and cycle.get('deferred_claims'):
+            cycle['next_generation'] = self.bump_generation()
+        self.save_cycle(cycle)
+        report_path = self.write_report(cycle)
+        payload = gm_runner.load_json(report_path)
+        payload['status'] = status
+        payload['report_path'] = gm_runner.relative(report_path)
+        self.last_payload = payload
+        gm_runner.emit(payload, exit_code)
+        return exit_code
+
+    def run(self) -> int:
+        if self.state_dir is None or self.checkout is None:
+            gm_runner.emit({'status': 'refused', 'kind': 'usage',
+                            'message': 'policy paths could not be resolved'}, USAGE)
+            return USAGE
+        self.autonomy_dir().mkdir(parents=True, exist_ok=True)
+        with self.cycle_lock() as lock:
+            if lock.recovered:
+                self.recovered_lock = lock.recovered
+            adopted = self.unfinished_cycle()
+            if adopted is not None and adopted.get('status') in ('completed', 'no_action',
+                                                                 'blocked'):
+                return self.emit_existing(adopted, 'previous_cycle_' + str(adopted.get('status'))
+                                          + '_not_replayed')
+            cycle = self.adopt(adopted) if adopted else self.load_cycle()
+            if cycle.get('status') in ('completed', 'no_action'):
+                return self.emit_existing(cycle, 'unchanged_evidence_already_finished')
+            index = 0
+            while index < len(STAGES):
+                name = STAGES[index]
+                cycle['stage'] = name
+                self.save_cycle(cycle)
+                status = getattr(self, 'stage_' + name)(cycle)
+                record = cycle['stages'].get(name) or {}
+                if status != OK:
+                    original_reason = cycle.get('blocked_reason')
+                    if name != 'feedback' and cycle.get('gm_id'):
+                        self.stage_feedback(cycle)
+                        cycle['blocked_reason'] = original_reason
+                        cycle['feedback_outcome'] = (
+                            cycle['stages'].get('feedback') or {}).get('status')
+                        if self.advance_repair(cycle):
+                            index = STAGES.index('candidate')
+                            continue
+                    return self.finish_cycle(cycle, 'blocked', status)
+                if record.get('status') == 'no_action':
+                    return self.finish_cycle(cycle, 'no_action', OK)
+                if record.get('status') == 'stopped':
+                    return self.finish_cycle(cycle, 'limit_reached', OK)
+                if self.stop_after == name:
+                    return self.finish_cycle(cycle, 'paused', OK)
+                index += 1
+            return self.finish_cycle(cycle, 'completed', OK)
+
+    def advance_repair(self, cycle: dict) -> bool:
+        """Let one measured, accepted same-owner `repair` decision re-open the work stages.
+
+        Only an actionable, owned, host-observed failure that the owner answered with a measured
+        and accepted `repair` decision advances (see `repairable_failure`). Unknown or interrupted
+        in-flight calls, guard/scope/conflict refusals, unmeasured usage and installed-but-unused
+        never do. Attempt counters, dispatch counters and the failure record are all carried into
+        the new round, and the number of rounds is bounded, so this cannot become an unbounded
+        loop or a fresh attempt budget."""
+        feedback = cycle['stages'].get('feedback') or {}
+        acknowledgement = feedback.get('acknowledgement') or {}
+        if feedback.get('status') != 'done' or acknowledgement.get('decision') != 'repair':
+            return False
+        if cycle.get('unknown') or cycle.get('repair_blocked'):
+            return False
+        failure = self.failure_facts(cycle)
+        if not self.repairable_failure(failure):
+            return False
+        rounds = int(cycle.get('repair_rounds', 0))
+        if rounds >= int(self.limits.get('max_repair_rounds', 1)):
+            return False
+        if self.dispatch_budget(cycle, 'repair', 1) is not None:
+            return False
+        # Preserve every counter across the round: the reopened round gets no fresh budget.
+        issue_id = cycle.get('issue_id') or ''
+        candidate_record = cycle['stages'].get('candidate') or {}
+        carried = dict(cycle.get('carried_attempts') or {})
+        carried[issue_id] = int(carried.get(issue_id, 0)) + len(
+            candidate_record.get('attempts') or [])
+        cycle['carried_attempts'] = carried
+        previous = {}
+        for stage in ('candidate', 'validate', 'publish', 'verify', 'feedback'):
+            stub = cycle['stages'].get(stage)
+            if isinstance(stub, dict):
+                previous[stage] = copy.deepcopy(stub)
+                stub.clear()
+                stub['status'] = 'pending'
+        cycle['repair_rounds'] = rounds + 1
+        cycle.setdefault('repair_history', []).append(
+            {'round': rounds + 1, 'failed_stage': failure.get('stage'),
+             'failed_status': failure.get('status'),
+             'blocked_reason': cycle.get('blocked_reason'),
+             'decision': acknowledgement.get('decision'),
+             'next_work': acknowledgement.get('next_work'),
+             'failed_checks': failure.get('failed_checks'),
+             'previous_stages': previous, 'utc': gm_runner.utc_iso()})
+        # A reopened cycle is running again, not blocked: a restart must resume the repair round
+        # instead of reporting the previous failure as terminal and never replaying.
+        cycle['status'] = 'running'
+        cycle['blocked_reason'] = None
+        self.save_cycle(cycle)
+        return True
+
+    def repairable_failure(self, failure: dict) -> bool:
+        """Explicit, narrow repairability for one reopened round.
+
+        `runtime_verification_failed` is an actionable defect the running world reported. This
+        stage requires that the runtime evidence itself is conclusive: every integrity check
+        passed, so the failure is the world's own report about this release under a fresh,
+        exactly bound nonce/world/release/issue and fully exited processes. A timeout, a missing
+        or stale output file, a mismatched binding or a live child process is inconclusive and
+        stays stopped. A validate-stage failure counts only when the sole failed check is the
+        ordinary owned candidate test command. Everything else stays stopped: scope/
+        protected-path/conflict refusals, byte drift, unknown or interrupted calls, and
+        installed-but-unused (which alone is not proof of a defect and must never force
+        adoption)."""
+        if not failure:
+            return False
+        stage, status = failure.get('stage'), failure.get('status')
+        if status != 'failed':
+            return False
+        failed = set(failure.get('failed_checks') or ())
+        if stage == 'verify':
+            return (failure.get('blocked_reason') in REPAIRABLE_FAILURE_REASONS
+                    and conclusive_runtime_defect(failed))
+        if stage == 'validate':
+            return (failure.get('blocked_reason') == 'host_gate_refused_candidate'
+                    and bool(failed) and failed <= set(REPAIRABLE_VALIDATE_CHECKS))
+        return False
+
+    def unfinished_cycle(self) -> dict | None:
+        """The cycle the previous process was working on, if it never reached a terminal state.
+        Newer evidence does not displace it: the pinned cycle resumes first."""
+        pointer_path = self.pointer_path()
+        if not pointer_path.is_file():
+            return None
+        pointer = gm_runner.load_json(pointer_path)
+        if not isinstance(pointer, dict) or not pointer.get('cycle_id'):
+            return None
+        directory = self.autonomy_dir() / str(pointer['cycle_id'])
+        if not (directory / 'cycle.json').is_file():
+            return None
+        document = gm_runner.load_json(directory / 'cycle.json')
+        if not isinstance(document, dict) or document.get('policy_sha256') != self.policy_sha:
+            return None
+        if document.get('status') == 'running' and document.get('evidence_sha256') != \
+                self.evidence_sha256:
+            return document
+        if document.get('status') == 'paused':
+            return document
+        if document.get('status') in ('completed', 'no_action') and \
+                document.get('evidence_sha256') == self.evidence_sha256:
+            if document.get('deferred_claims') and self.allow_deferred_advance:
+                # The finished cycle bumped the generation: a later generation must consume the
+                # deferred claims instead of the coordinator stopping as "unchanged".
+                return None
+            return document
+        if document.get('status') == 'blocked':
+            return document
+        return None
+
+    def emit_existing(self, cycle: dict, reason: str) -> int:
+        report_path = self.cycle_dir() / 'report.json'
+        payload = gm_runner.load_json(report_path) if report_path.is_file() else {}
+        payload = dict(payload or {})
+        payload['status'] = cycle.get('status')
+        payload['idempotent_no_dispatch'] = reason
+        payload['no_new_model_call'] = True
+        payload['report_path'] = gm_runner.relative(report_path) if report_path.is_file() else None
+        exit_code = int(cycle.get('exit_code') or 0) if cycle.get('status') == 'blocked' else 0
+        self.last_payload = payload
+        return gm_runner.emit(payload, exit_code)
+
+
+def preflight(cycle: Cycle):
+    if sha256_file(cycle.policy_path) is None:
+        return USAGE, {'status': 'refused', 'kind': 'policy_missing',
+                       'message': f'no standing policy at {cycle.policy_path}; no paid work starts '
+                                  'without an explicit preauthorization'}
+    errors = policy_errors(cycle.policy)
+    if errors:
+        return USAGE, {'status': 'refused', 'kind': 'policy_invalid', 'errors': errors}
+    stale = stale_world(cycle.policy)
+    if stale:
+        return STALE, {'status': 'refused', 'kind': 'stale_world', 'message': stale}
+    missing = missing_requirements(cycle.policy, cycle.mode)
+    if missing:
+        return USAGE, {'status': 'refused', 'kind': 'missing_requirements', 'mode': cycle.mode,
+                       'missing': missing,
+                       'message': 'no model dispatch happened; supply the declared inputs first'}
+    return None, {}
+
+
+def command_cycle(args) -> int:
+    policy_path = Path(args.policy).resolve()
+    try:
+        policy = gm_runner.read_autonomy_policy(policy_path)
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        return gm_runner.refusal('autonomy_policy_invalid', str(error), USAGE)
+    runner = {key: value for key, value in
+              {'config': args.config, 'key_file': args.key_file, 'codex': args.codex,
+               'codex_home': args.codex_home, 'timeout': args.timeout}.items() if value}
+    cycle = Cycle(policy_path, policy, runner, args.stop_after)
+    blocked, payload = preflight(cycle)
+    if blocked is not None:
+        return gm_runner.emit(payload, blocked)
+    try:
+        return cycle.run()
+    except RuntimeError as error:
+        return gm_runner.refusal('lock_held', str(error), LOCK)
+    except ValueError as error:
+        return gm_runner.refusal('preflight', str(error), USAGE)
+
+
+PROVENANCE_NOTES = {
+    'offline_fixture': ('offline fixture plumbing; the GM decisions are scripted fakes and this '
+                        'is not real DeepSeek GM autonomy'),
+    'local_trial': ('labelled local trial fixture: GM decisions travel over the real provider '
+                    'route named in the route config, while the world is a fresh fixture genesis, '
+                    'not migrated canonical state; no result is claimed until a run completes'),
+    'production': 'production cycle; read host checks and the runtime observation',
+}
+
+WATCH_SCHEMA = 2
+WATCH_COUNTER_NOTE = (
+    'gm_turns counts native GM turn dispatches: one GM decision is one turn, reconciled from '
+    'each cycle durable counter and including an in-flight reservation. dispatch_batches counts '
+    'the subprocess batches that carried those turns. Neither is an HTTP request count and '
+    'neither is a currency charge.')
+
+
+def watch_paths_match(left: Path | None, right: Path | None) -> bool:
+    """Same directory, ignoring Windows case and separator spelling."""
+    if left is None or right is None:
+        return left is right
+    return os.path.normcase(os.path.abspath(str(left))) == os.path.normcase(
+        os.path.abspath(str(right)))
+
+
+def watch_cycle_records(state_dir: Path) -> dict:
+    """Reconcile the durable per-cycle counters that bound a watch.
+
+    watch.json can be stale: a crash between the reservation save inside cycle.json and the
+    watch-ledger save would otherwise hide an already-counted native GM turn and let the next
+    invocation spend past its bound. Every cycle under this state directory is re-read from disk
+    here, the in-flight reservation is already part of cycle['model_calls'], and each cycle is
+    counted exactly once. The scan stays inside the state directory's own autonomy/ area.
+    """
+    records, _ = watch_cycle_scan(state_dir)
+    return records
+
+
+def watch_cycle_scan(state_dir: Path) -> tuple:
+    """Readable per-cycle counters plus the cycle files that could not be read.
+
+    A malformed, unreadable or missing cycle.json is reported instead of silently skipped: a lost
+    counter must never look like a cycle that was never charged.
+    """
+    records = {}
+    problems = []
+    root = state_dir / 'autonomy'
+    if not root.is_dir():
+        return records, problems
+    for path in sorted(root.glob('*/cycle.json')):
+        try:
+            document = gm_runner.load_json(path)
+        except (OSError, ValueError):
+            problems.append({'cycle_id': path.parent.name, 'path': gm_runner.relative(path),
+                             'problem': 'unreadable_cycle_file'})
+            continue
+        if not isinstance(document, dict) or not document.get('cycle_id'):
+            problems.append({'cycle_id': path.parent.name, 'path': gm_runner.relative(path),
+                             'problem': 'cycle_file_without_identity'})
+            continue
+        stages = document.get('stages') or {}
+        in_flight = sorted(name for name, stage in stages.items()
+                           if isinstance(stage, dict) and stage.get('in_flight'))
+        batches = document.get('dispatch_batches') or {}
+        records[str(document['cycle_id'])] = {
+            'cycle_id': str(document['cycle_id']), 'status': document.get('status'),
+            'stage': document.get('stage'), 'gm_id': document.get('gm_id'),
+            'issue_id': document.get('issue_id'),
+            'policy_sha256': document.get('policy_sha256'),
+            'evidence_sha256': document.get('evidence_sha256'),
+            'deferred_claims': list(document.get('deferred_claims') or []),
+            'gm_turns': int(document.get('model_calls') or 0),
+            'dispatch_batches': {str(key): int(value) for key, value in batches.items()},
+            'batch_count': sum(int(value) for value in batches.values()),
+            'unknown': bool(document.get('unknown')), 'in_flight': in_flight,
+            'exit_code': document.get('exit_code'),
+            'blocked_reason': document.get('blocked_reason'),
+            'path': gm_runner.relative(path)}
+    return records, problems
+
+
+def reconcile_watch_counters(state_dir: Path, budget: dict) -> tuple:
+    """Merge readable per-cycle counters into the persisted maps without ever decreasing one.
+
+    Returns the readable records and the list of previously charged cycles whose file can no
+    longer be read. A lost counter is retained and reported, never treated as unspent.
+    """
+    records, problems = watch_cycle_scan(state_dir)
+    turns = {key: int(value) for key, value in (budget.get('cycle_gm_turns') or {}).items()}
+    batches = {key: int(value)
+               for key, value in (budget.get('cycle_dispatch_batches') or {}).items()}
+    for key, item in records.items():
+        turns[key] = max(int(turns.get(key, 0)), int(item['gm_turns']))
+        batches[key] = max(int(batches.get(key, 0)), int(item['batch_count']))
+    lost = [{'cycle_id': key, 'gm_turns': turns[key],
+             'problem': 'cycle_file_missing_or_unreadable'}
+            for key in sorted(turns) if key not in records]
+    seen = {item['cycle_id'] for item in lost}
+    lost += [{'cycle_id': item['cycle_id'], 'gm_turns': 0, 'problem': item['problem'],
+              'path': item['path']} for item in problems if item['cycle_id'] not in seen]
+    budget['cycle_gm_turns'] = turns
+    budget['cycle_dispatch_batches'] = batches
+    budget['lost_counters'] = lost
+    budget['gm_turns_total'] = sum(turns.values())
+    budget['dispatch_batches_total'] = sum(batches.values())
+    return records, lost
+
+
+def watch_lost_counter_stop(ledger: Path, budget: dict, turns_total: int) -> int:
+    """Stop conservatively when a previously charged cycle file can no longer be read."""
+    budget['stop_reason'] = 'cycle_counter_unreadable_stop'
+    gm_runner.save_json(ledger, budget)
+    return gm_runner.emit(watch_summary(
+        budget, ledger, 'cycle_counter_unreadable_stop: a previously charged cycle file is '
+        'missing or unreadable, so its recorded counters are retained and no further cycle is '
+        'started; a lost file must never free a spent allowance', turns_total, ACCOUNTING),
+        ACCOUNTING)
+
+
+def watch_budget_reset(previous, args) -> dict:
+    """A fresh budget that keeps the old ledger's history and unresolved usage as facts.
+
+    A reset restarts the bound; it never rewrites what already happened. The previous ledger is
+    appended to history and any interrupted-unknown usage is carried forward, so an explicit
+    --reset-watch-budget cannot erase a recorded fact.
+    """
+    history = list(previous.get('history') or []) if isinstance(previous, dict) else []
+    carried = list(previous.get('unresolved_usage') or []) if isinstance(previous, dict) else []
+    if isinstance(previous, dict):
+        history.append({key: previous.get(key) for key in (
+            'schema_version', 'started_utc', 'max_iterations', 'max_seconds', 'max_calls',
+            'iterations', 'gm_turns_total', 'dispatch_batches_total', 'idle_exits', 'stop_reason',
+            'stopped_cycles', 'unresolved_usage')})
+    return {'schema_version': WATCH_SCHEMA, 'started_utc': gm_runner.utc_iso(),
+            'started_epoch': time.time(), 'max_iterations': int(args.max_iterations),
+            'max_seconds': int(args.max_seconds),
+            'max_calls': int(args.max_calls) if args.max_calls else None,
+            'iterations': 0, 'idle_exits': 0, 'gm_turns_total': 0, 'dispatch_batches_total': 0,
+            'cycle_gm_turns': {}, 'cycle_dispatch_batches': {}, 'watched_cycles': {},
+            'stopped_cycles': [], 'unresolved_usage': carried, 'history': history,
+            'stop_reason': None, 'counter_note': WATCH_COUNTER_NOTE}
+
+
+def watch_summary(budget: dict, ledger: Path, reason: str, turns_total: int, code: int,
+                  stopped=None, unresolved=None) -> dict:
+    summary = {'status': 'ok' if code == OK else 'stopped',
+               'watch': 'bounded_repeat_coordinator', 'reason': reason,
+               'iterations': budget['iterations'], 'idle_exits': budget['idle_exits'],
+               'gm_turns': turns_total, 'model_turns': turns_total, 'model_calls': turns_total,
+               'gm_turns_note': budget.get('counter_note') or WATCH_COUNTER_NOTE,
+               'dispatch_batches': budget['dispatch_batches_total'],
+               'max_iterations': budget['max_iterations'], 'max_seconds': budget['max_seconds'],
+               'max_calls': budget['max_calls'], 'watched_cycles': budget['watched_cycles'],
+               'budget_file': gm_runner.relative(ledger), 'last_exit_code': code}
+    if stopped is not None:
+        summary['stopped_cycle'] = stopped
+    if unresolved is not None:
+        summary['unresolved_usage'] = unresolved
+    if budget.get('lost_counters'):
+        summary['lost_counters'] = budget['lost_counters']
+    return summary
+
+
+def carry_unknown_usage(previous: list, unresolved: list) -> list:
+    """Keep every recorded interrupted-unknown fact, adding only ones not already carried."""
+    known = {(item.get('cycle_id'), item.get('stage')) for item in previous
+             if isinstance(item, dict)}
+    carried = list(previous)
+    for item in unresolved:
+        if (item.get('cycle_id'), item.get('stage')) not in known:
+            carried.append(item)
+    return carried
+
+
+def run_watch(args, policy_path: Path, policy: dict, runner: dict, state_dir: Path,
+              ledger: Path) -> int:
+    """The watch loop body. The caller holds the watch lock for the whole sequence."""
+    previous = gm_runner.load_json(ledger) if ledger.is_file() else None
+    if (args.reset_watch_budget or not isinstance(previous, dict)
+            or previous.get('schema_version') != WATCH_SCHEMA):
+        budget = watch_budget_reset(previous, args)
+    else:
+        budget = previous
+        budget.setdefault('counter_note', WATCH_COUNTER_NOTE)
+    reason, code = 'max_iterations=' + str(budget['max_iterations']) + ' reached', OK
+    turns_total = 0
+    while True:
+        records, lost = reconcile_watch_counters(state_dir, budget)
+        turns_total = budget['gm_turns_total']
+        budget['watched_cycles'] = {key: {field: item[field] for field in (
+            'status', 'stage', 'gm_id', 'issue_id', 'policy_sha256', 'evidence_sha256',
+            'gm_turns', 'batch_count', 'unknown', 'in_flight', 'exit_code', 'blocked_reason',
+            'path')} for key, item in records.items()}
+        if lost:
+            return watch_lost_counter_stop(ledger, budget, turns_total)
+        unresolved = [{'cycle_id': key, 'path': item['path'], 'stage': item['stage'],
+                       'in_flight': item['in_flight']}
+                      for key, item in records.items() if item['unknown'] or item['in_flight']]
+        carried_unreconciled = [item for item in (budget.get('unresolved_usage') or [])
+                                if isinstance(item, dict) and item.get('cycle_id') not in records]
+        if carried_unreconciled:
+            # The cycle file that carried this unknown usage is gone, so the fact can no longer
+            # be reconciled from disk: it stays a stop and is never settled, dropped or zeroed.
+            unresolved = carried_unreconciled + [
+                item for item in unresolved
+                if all(item.get('cycle_id') != carried.get('cycle_id')
+                       for carried in carried_unreconciled)]
+        if unresolved:
+            budget['unresolved_usage'] = carry_unknown_usage(budget['unresolved_usage'],
+                                                            unresolved)
+            budget['stop_reason'] = 'interrupted_unknown_stop'
+            gm_runner.save_json(ledger, budget)
+            return gm_runner.emit(watch_summary(
+                budget, ledger, 'interrupted_unknown_stop: an interrupted external call has an '
+                'unknown outcome; it stays stopped, is never replayed and is never zeroed',
+                turns_total, ACCOUNTING, unresolved=unresolved), ACCOUNTING)
+        gm_runner.save_json(ledger, budget)
+        if budget['iterations'] >= budget['max_iterations']:
+            reason = 'max_iterations=' + str(budget['max_iterations']) + ' reached'
+            break
+        if time.time() - float(budget['started_epoch']) >= budget['max_seconds']:
+            reason = 'max_seconds=' + str(budget['max_seconds']) + ' reached'
+            break
+        if budget['max_calls'] is not None and turns_total >= int(budget['max_calls']):
+            reason = 'max_calls=' + str(budget['max_calls']) + ' native GM turns reached'
+            break
+        remaining_seconds = float(budget['started_epoch']) + budget['max_seconds'] - time.time()
+        cycle = Cycle(policy_path, policy, runner, None,
+                      watch_deadline=time.time() + remaining_seconds, allow_deferred_advance=True)
+        planned = records.get(cycle.cycle_dir().name)
+        already_counted = int(planned['gm_turns']) if planned else 0
+        if budget['max_calls'] is not None:
+            # A resumed cycle's cumulative ceiling includes the turns it already spent; only the
+            # OTHER cycles are subtracted, so nothing is double subtracted and a resumed cycle is
+            # not starved of the turns it already paid for.
+            cycle.watch_calls_remaining = max(
+                0, int(budget['max_calls']) - (turns_total - already_counted))
+        blocked, payload = preflight(cycle)
+        if blocked is not None:
+            budget['stop_reason'] = 'preflight_' + str((payload or {}).get('kind'))
+            gm_runner.save_json(ledger, budget)
+            return gm_runner.emit(payload, blocked)
+        budget['iterations'] += 1
+        gm_runner.save_json(ledger, budget)
+        try:
+            code = cycle.run()
+        except RuntimeError as error:
+            budget['stop_reason'] = 'lock_held'
+            gm_runner.save_json(ledger, budget)
+            return gm_runner.refusal('lock_held', str(error), LOCK)
+        except ValueError as error:
+            budget['stop_reason'] = 'preflight'
+            gm_runner.save_json(ledger, budget)
+            return gm_runner.refusal('preflight', str(error), USAGE)
+        payload = cycle.last_payload or {}
+        records, lost = reconcile_watch_counters(state_dir, budget)
+        turns_total = budget['gm_turns_total']
+        if lost:
+            return watch_lost_counter_stop(ledger, budget, turns_total)
+        status = payload.get('status')
+        if code != OK or status == 'blocked':
+            # A payload that reports blocked while the cycle returned 0 is normalized here, before
+            # watch_summary is built and before the process exit: the JSON must never report
+            # ok/last_exit_code 0 while the command itself fails with a nonzero process status.
+            effective_code = code if code != OK else RUNTIME
+            stopped = {'cycle_id': payload.get('cycle_id') or cycle.cycle_dir().name,
+                       'status': status, 'exit_code': effective_code,
+                       'blocked_reason': payload.get('blocked_reason')}
+            budget['stopped_cycles'] = list(budget['stopped_cycles']) + [stopped]
+            budget['stop_reason'] = 'cycle_' + str(status or 'failed')
+            gm_runner.save_json(ledger, budget)
+            return gm_runner.emit(watch_summary(
+                budget, ledger, budget['stop_reason'] + ': the cycle failed or blocked and its own '
+                'nonzero status is returned; no further observation is started and the failure is '
+                'never reported as a bounded idle stop', turns_total, effective_code,
+                stopped=stopped), effective_code)
+        if status not in ('completed', 'no_action'):
+            reason = ('cycle ended as ' + str(status) + ' without a failed release; stopping '
+                      'instead of re-observing unchanged evidence')
+            budget['stop_reason'] = 'cycle_' + str(status)
+            gm_runner.save_json(ledger, budget)
+            break
+        if payload.get('no_new_model_call'):
+            budget['idle_exits'] += 1
+            gm_runner.save_json(ledger, budget)
+            if budget['idle_exits'] >= args.idle_exits:
+                reason = ('idle: no new evidence and nothing pending; no model call was made '
+                          '(idle_exits=' + str(budget['idle_exits']) + ')')
+                break
+        else:
+            budget['idle_exits'] = 0
+            gm_runner.save_json(ledger, budget)
+        if args.interval and time.time() + args.interval < (float(budget['started_epoch'])
+                                                            + budget['max_seconds']):
+            time.sleep(args.interval)
+    budget['stop_reason'] = reason
+    gm_runner.save_json(ledger, budget)
+    return gm_runner.emit(watch_summary(budget, ledger, reason, turns_total, code), OK)
+
+
+def command_watch(args) -> int:
+    """Bounded local repeat coordinator: no supervisor dispatch per stage.
+
+    Each iteration advances at most one cycle, and a cycle delivers ONE queued GM-owned claim: an
+    earlier finished cycle's deferred claim is selected from the durable GM state before any new
+    observation is paid for, so a queued claim is delivered instead of re-observing unchanged
+    evidence. The coordinator holds a distinct OS watch lock across its whole
+    read/reconcile/write/run sequence, so two invocations cannot spend the same budget, and it
+    reconciles each cycle's durable native-GM-turn counter before computing what is left. It exits
+    when the evidence is unchanged and nothing is queued, or when the pinned iteration, duration or
+    GM-turn budget is reached. A failed, blocked or interrupted-unknown cycle returns its own
+    nonzero status immediately. This is not a daemon.
+    """
+    policy_path = Path(args.policy).resolve()
+    try:
+        policy = gm_runner.read_autonomy_policy(policy_path)
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        return gm_runner.refusal('autonomy_policy_invalid', str(error), USAGE)
+    if (int(args.max_iterations) < 0 or int(args.max_seconds) < 0
+            or int(args.max_calls or 0) < 0 or int(args.idle_exits) < 1
+            or float(args.interval) < 0):
+        return gm_runner.refusal('watch_limits_invalid',
+                                 'watch limits must not be negative, --idle-exits must be at least '
+                                 '1 and --interval must not be negative; refusing a nonsensical '
+                                 'bound instead of guessing one', USAGE)
+    runner = {key: value for key, value in
+              {'config': args.config, 'key_file': args.key_file, 'codex': args.codex,
+               'codex_home': args.codex_home, 'timeout': args.timeout}.items() if value}
+    probe = Cycle(policy_path, policy, runner, None, allow_deferred_advance=True)
+    state_dir = probe.state_dir
+    declared = resolve_path((policy_values(policy)['paths'] or {}).get('state_dir'))
+    requested = Path(args.state_dir) if args.state_dir else None
+    if requested is not None and declared is not None and not watch_paths_match(requested, declared):
+        return gm_runner.refusal('state_dir_mismatch',
+                                 f'--state-dir {requested} does not match the policy '
+                                 f'paths.state_dir {declared}; refusing to keep the watch ledger '
+                                 'and the cycles it drives in two different directories', USAGE)
+    if state_dir is None:
+        return gm_runner.refusal('state_dir_missing',
+                                 'no --state-dir and no policy paths.state_dir; the watch cannot '
+                                 'place a durable budget', USAGE)
+    ledger = state_dir / 'autonomy' / 'watch.json'
+    try:
+        with probe.watch_lock() as lock:
+            if lock.recovered:
+                previous = gm_runner.load_json(ledger) if ledger.is_file() else None
+                if isinstance(previous, dict):
+                    previous['recovered_watch_lock'] = lock.recovered
+                    gm_runner.save_json(ledger, previous)
+            return run_watch(args, policy_path, policy, runner, state_dir, ledger)
+    except RuntimeError as error:
+        return gm_runner.refusal('watch_lock_held', str(error), LOCK)
+
+
+def command_status(args) -> int:
+    state_dir = Path(args.state_dir).resolve()
+    root = state_dir / 'autonomy'
+    cycles = []
+    if root.is_dir():
+        for path in sorted(root.glob('*/cycle.json')):
+            try:
+                cycle = gm_runner.load_json(path)
+            except (OSError, ValueError):
+                continue
+            report = path.parent / 'report.json'
+            cycles.append({'cycle_id': cycle.get('cycle_id'), 'status': cycle.get('status'),
+                           'blocked_reason': cycle.get('blocked_reason'),
+                           'report': gm_runner.relative(report) if report.is_file() else None,
+                           'stage_status': {name: (cycle.get('stages', {}).get(name)
+                                                   or {}).get('status') for name in STAGES},
+                           'gm_id': cycle.get('gm_id'), 'issue_id': cycle.get('issue_id')})
+    return gm_runner.emit({'status': 'ok', 'state_dir': str(state_dir), 'cycles': cycles}, OK)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    subparsers = parser.add_subparsers(dest='command', required=True)
+    cycle_parser = subparsers.add_parser('cycle', help='advance one bounded autonomous cycle')
+    cycle_parser.add_argument('--policy', required=True, type=Path)
+    cycle_parser.add_argument('--stop-after', choices=STAGES,
+                              help='finish this stage then exit paused, for a bounded restart test')
+    cycle_parser.add_argument('--config', type=Path, help='passed through to gm_runner')
+    cycle_parser.add_argument('--key-file', type=Path)
+    cycle_parser.add_argument('--codex', help='passed through to gm_runner (tests inject a fake)')
+    cycle_parser.add_argument('--codex-home', type=Path)
+    cycle_parser.add_argument('--timeout', type=int, default=900)
+    cycle_parser.set_defaults(func=command_cycle)
+    watch_parser = subparsers.add_parser(
+        'watch', help='bounded local repeat coordinator (no supervisor dispatch per stage)')
+    watch_parser.add_argument('--policy', required=True, type=Path)
+    watch_parser.add_argument('--state-dir', type=Path,
+                              help='defaults to policy paths.state_dir')
+    watch_parser.add_argument('--max-iterations', type=int, default=4)
+    watch_parser.add_argument('--max-seconds', type=int, default=900)
+    watch_parser.add_argument('--max-calls', type=int, default=0,
+                              help='0 means only the dispatch/model limits in the policy apply')
+    watch_parser.add_argument('--idle-exits', type=int, default=1,
+                              help='consecutive idle iterations before the watch stops')
+    watch_parser.add_argument('--interval', type=float, default=5.0)
+    watch_parser.add_argument('--reset-watch-budget', action='store_true')
+    watch_parser.add_argument('--config', type=Path)
+    watch_parser.add_argument('--key-file', type=Path)
+    watch_parser.add_argument('--codex')
+    watch_parser.add_argument('--codex-home', type=Path)
+    watch_parser.add_argument('--timeout', type=int, default=900)
+    watch_parser.set_defaults(func=command_watch)
+    status_parser = subparsers.add_parser('status', help='read-only cycle summary')
+    status_parser.add_argument('--state-dir', required=True, type=Path)
+    status_parser.set_defaults(func=command_status)
+    return parser
+
+
+def main(argv=None) -> int:
+    args = build_parser().parse_args(argv)
+    return args.func(args)
+
+
+if __name__ == '__main__':
+    sys.exit(main())

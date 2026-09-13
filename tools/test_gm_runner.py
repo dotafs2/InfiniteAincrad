@@ -24,8 +24,24 @@ sys.path.insert(0, str(ROOT / 'tools'))
 import gm_runner  # noqa: E402
 
 ACCEPTED_EVIDENCE = ROOT / 'docs' / 'validation' / 'town_gm_evidence_2026-09-12' / 'evidence-final.json'
-FIXTURE_SAVE = ROOT / 'tmp' / 'chain-20260912' / 'task01-tests' / 'final-review-3' / \
-    'saves' / 'gm-evidence.json'
+FIXTURE_SAVE = ROOT / 'tmp' / 'gm-autonomy-20260913' / 'gm-runner-fixture' / 'sentinel-save.json'
+
+
+def ensure_fixture_save() -> Path:
+    """A labelled, test-owned sentinel save.
+
+    The byte-guard assertions only need one existing protected file whose bytes must stay
+    identical. They previously pointed at a private save under tmp/chain-20260912 that does not
+    exist on every checkout, which made the test fail for portability rather than for a guard
+    regression. This fixture is explicitly labelled as not being a canonical world save.
+    """
+    if not FIXTURE_SAVE.is_file():
+        FIXTURE_SAVE.parent.mkdir(parents=True, exist_ok=True)
+        gm_runner.save_json(FIXTURE_SAVE, {
+            'kind': 'test_owned_sentinel_save', 'world_id': 'fixture:runner-test',
+            'labelled': 'not a canonical world save; byte-guard fixture only',
+            'note': 'portable replacement for the absent private chain-20260912 save path'})
+    return FIXTURE_SAVE
 FAKE_KEY = 'sk-offline-fake-key-not-a-credential'
 USAGE = {'input_tokens': 1200, 'cached_input_tokens': 800, 'output_tokens': 60,
          'reasoning_output_tokens': 0}
@@ -574,7 +590,7 @@ class CoreObservationTests(RunnerTestBase):
 
     def test_source_tree_save_and_state_outputs_are_guarded(self):
         save_copy = self.root / 'final-review-3-gm-evidence.protected-copy.json'
-        shutil.copyfile(FIXTURE_SAVE, save_copy)
+        shutil.copyfile(ensure_fixture_save(), save_copy)
         status_before = subprocess.run(['git', 'status', '--porcelain'], cwd=str(ROOT),
                                        capture_output=True, text=True).stdout
         code, payload, _ = self.observe('--max-gms', '2', '--protect', str(save_copy))
@@ -1022,7 +1038,7 @@ class CodingTests(RunnerTestBase):
         issue_id = self.prepare()[0]
         head = self.head_sha()
         save_copy = self.root / 'final-review-3-gm-evidence.protected-copy.json'
-        shutil.copyfile(FIXTURE_SAVE, save_copy)
+        shutil.copyfile(ensure_fixture_save(), save_copy)
         status_before = subprocess.run(['git', 'status', '--porcelain'], cwd=str(ROOT),
                                        capture_output=True, text=True).stdout
         scope = self.write_scope(issue_id, head, test_commands=[

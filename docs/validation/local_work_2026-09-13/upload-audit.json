@@ -1,0 +1,24 @@
+{
+  "checked_utc": "2026-09-13T10:20:26.208694+00:00",
+  "saved_files": 109,
+  "saved_bytes": 238156886,
+  "source_files_still_unchanged": 109,
+  "accepted_gm_source_hashes_matched": 8,
+  "python_files_syntax_parsed": 8,
+  "unreviewed_credential_pattern_findings": 0,
+  "reviewed_offline_fixture_matches": [
+    {
+      "file": "tools/test_gm_runner.py",
+      "line": 45,
+      "reason": "Explicit FAKE_KEY in offline tests"
+    },
+    {
+      "file": "tools/validate_gm_autonomy.py",
+      "line": 717,
+      "reason": "Explicit fake_transport fixture key creation"
+    }
+  ],
+  "validation_scope": "Backup integrity and syntax checks only. Earlier model/Godot evidence is preserved, not rerun.",
+  "image_scope": "Five project-authored lab render captures committed; five third-party SAO images linked as external previews only.",
+  "normalization_note": "Manifest hashes describe raw source bytes before Git text normalization."
+}
