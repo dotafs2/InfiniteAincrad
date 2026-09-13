@@ -12,6 +12,10 @@ const SKILL_REFERRAL_TEXT := {
 	"wood_repair": "%s told me they can repair wooden handles.",
 	"metal_repair": "%s told me they can repair metal edges.",
 }
+const SKILL_ASK_NAMES := {
+	"wood_repair": "carpentry",
+	"metal_repair": "metalwork",
+}
 const TRADE_RANGE := 3.0
 const REPAIR_SECONDS := 60.0
 const WALK_SECONDS := 1.0
@@ -315,6 +319,31 @@ func _known_referral_skills(observer_id: String, resident_id: String) -> Array:
 func _required_skill(part: String) -> String:
 	return "metal_repair" if part == "edge" else "wood_repair"
 
+func _skill_name(skill_id: String) -> String:
+	# Natural, NPC-facing name of a shareable repair skill. The machine-readable id stays in the
+	# structured need and in the option payload; only the spoken wording uses this name.
+	return str(SKILL_ASK_NAMES.get(skill_id, "repair"))
+
+func _skill_ask_text(skill_id: String) -> String:
+	return "Can you help me with " + _skill_name(skill_id) + "?"
+
+func _option_skill_id(option: Dictionary) -> String:
+	# Named skill of a structured skill ask, read from the option's own explicit field. The
+	# authoritative submit path re-validates it against public knowledge rather than trusting it.
+	return str(option.get("_skill_id", ""))
+
+func _skill_ask_need(option: Dictionary) -> Dictionary:
+	# Canonical structured need of a skill ask. Never copied from the option payload: it is rebuilt
+	# from the re-validated skill id so a forged payload cannot invent another kind of need.
+	var skill_id: String = _option_skill_id(option)
+	if skill_id not in SHAREABLE_SKILLS:
+		return {}
+	return {"kind": "skill", "skill_id": skill_id}
+
+func _has_open_skill_ask(id: String, recipient_id: String, need: Dictionary) -> bool:
+	# The existing open-request rule, restricted to one structured skill need. Read-only.
+	return not need.is_empty() and has_open_help_request(id, recipient_id, need)
+
 func _part_damaged(item: Dictionary, part: String) -> bool:
 	return item.get(part, 0) < 100
 
@@ -374,7 +403,17 @@ func _accept_explanation(contract: Dictionary, blocker: String) -> Dictionary:
 	return entry
 
 func _validate_communicate_need(sender_id: String, need: Variant) -> Dictionary:
-	if not need is Dictionary or not _exact_keys(need, ["kind", "item_id", "part"]):
+	if not need is Dictionary:
+		return _failure("need_invalid")
+	if need.get("kind") == "skill":
+		# A structured repair-skill ask names the shareable repair skill the asker needs help with.
+		# It claims nothing about the asker's property and authorizes no repair or exchange.
+		if not _exact_keys(need, ["kind", "skill_id"]) or not need.get("skill_id") is String or need.skill_id not in SHAREABLE_SKILLS:
+			return _failure("need_invalid")
+		if sender_id not in active_ids():
+			return _failure("need_invalid")
+		return {"ok": true}
+	if not _exact_keys(need, ["kind", "item_id", "part"]):
 		return _failure("need_invalid")
 	if need.get("kind") != "repair" or not need.get("item_id") is String or need.get("part") not in ["edge", "handle"]:
 		return _failure("need_invalid")
@@ -393,11 +432,17 @@ func _help_reply_text(id: String, event: Dictionary, choice: String) -> String:
 	if "metal_repair" in skills:
 		capabilities.append("metal edges")
 	var capability := "I have no listed repair skill" if capabilities.is_empty() else "I can repair " + " and ".join(capabilities)
+	if event.need.get("kind") == "skill":
+		# A skill ask names a repair skill directly. The truthful refusal must be about that skill,
+		# never about a damaged axe part that the request never mentioned.
+		if str(event.need.get("skill_id", "")) not in skills:
+			capability += "; I cannot perform this repair"
+		return "I am unavailable; " + capability + "."
 	if _required_skill(str(event.need.get("part", ""))) not in skills:
 		capability += "; I cannot perform this repair"
 	return "I am unavailable; " + capability + "."
 
-func trade_options(id: String) -> Array:
+func trade_options(id: String, include_open_skill_asks: bool = false) -> Array:
 	var result: Array = [{"id": "wait", "label": "Wait", "action": "wait"}]
 	if id not in active_ids():
 		return result
@@ -442,6 +487,20 @@ func trade_options(id: String) -> Array:
 				continue
 			if not has_open_help_request(id, other):
 				_option(result, {"id": "ask:" + other, "label": "Ask " + resident(other).name + " for help", "action": "ask_help", "counterparty": other, "_decision": {"action": "ask_help", "recipient_id": other, "text": "Can you help me?"}})
+			# Structured repair-skill ask. The asker may name a skill that the world already shows as
+			# public knowledge of this nearby resident; the ask itself grants no skill, no work and no
+			# resource, and it never discloses the asker's private inventory or a damaged part.
+			for skill_id in _public_skills(id, other):
+				if skill_id not in SHAREABLE_SKILLS:
+					continue
+				var need := {"kind": "skill", "skill_id": skill_id}
+				if not include_open_skill_asks and _has_open_skill_ask(id, other, need):
+					continue
+				_option(result, {"id": "ask-skill:" + other + ":" + skill_id,
+					"label": "Ask " + resident(other).name + " for help with " + _skill_name(skill_id),
+					"action": "ask_help", "counterparty": other, "_skill_id": skill_id,
+					"_decision": {"action": "ask_help", "recipient_id": other, "skill_id": skill_id, "need": need,
+						"text": _skill_ask_text(skill_id)}})
 			for item_value in _legacy_array("items"):
 				if not item_value is Dictionary or item_value.get("kind") != "axe" or item_value.get("owner_id") != id or item_value.get("custodian_id") != id:
 					continue
@@ -529,8 +588,8 @@ func _request_closed(request_id: String) -> bool:
 			return true
 	return false
 
-func _find_option(id: String, option_id: String) -> Dictionary:
-	for option in trade_options(id):
+func _find_option(id: String, option_id: String, include_open_skill_asks: bool = false) -> Dictionary:
+	for option in trade_options(id, include_open_skill_asks):
 		if option.get("id") == option_id:
 			return option
 	return {}
@@ -551,7 +610,10 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 		return {"ok": same, "duplicate": same, "code": "duplicate" if same else "command_conflict"}
 	if _state.godot.commands.has(command_id):
 		return _failure("command_conflict")
-	var option := _find_option(id, option_id)
+	# An already-open structured skill ask is no longer listed as a new choice, but repeating its own
+	# id stays resolvable so the identical request is acknowledged instead of looking like an unknown
+	# option. It can only ever reach the duplicate receipt: no second event and no resource movement.
+	var option := _find_option(id, option_id, true)
 	if option.is_empty():
 		return _failure("option_unavailable")
 	if not speech.is_empty() and option.action not in SPEECH_ACTIONS:
@@ -573,6 +635,15 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 			commands[command_id] = {"payload": payload, "status": "completed"}
 		return answered
 	if action in ["ask_help", "reply_help", "cancel_help"]:
+		# A structured skill ask carries its own named skill, so its prerequisites are re-derived and
+		# then recorded through the same shared social path as every other ask. Every ordinary reply,
+		# cancel and generic ask keeps that path untouched.
+		if action == "ask_help" and not _option_skill_id(option).is_empty():
+			var asked := _apply_ask_skill(id, option, command_id, provenance, speech)
+			if not asked.ok:
+				return asked
+			commands[command_id] = {"payload": payload, "status": "completed"}
+			return asked
 		var message: Dictionary = option._decision.duplicate(true)
 		if not speech.is_empty():
 			message.text = speech
@@ -649,6 +720,40 @@ func _apply_skill_referral(id: String, option: Dictionary, command_id: String, p
 		event["speech"] = speech
 	_append_life_event(event)
 	return {"ok": true, "code": "skill_referral", "skill_id": skill_id, "referred_resident_id": referred_id, "recipient_id": recipient_id, "event_id": event.event_id}
+
+func _apply_ask_skill(id: String, option: Dictionary, command_id: String, provenance: String, speech: String) -> Dictionary:
+	# Authoritative record for a structured repair-skill ask. Every prerequisite is re-derived from
+	# world state instead of trusting the option payload: a known shareable skill, a currently active
+	# counterparty inside hearing range, and public knowledge of that skill for the asker. It moves no
+	# Col, item, material or reservation, and it cannot teach or perform the skill. The ask is then
+	# recorded by the shared social path, so actor/subject/recipient attribution and the whole
+	# reply/cancel lifecycle are exactly the existing ones.
+	var recipient_id: String = str(option.get("counterparty", ""))
+	var skill_id: String = _option_skill_id(option)
+	var need := _skill_ask_need(option)
+	if need.is_empty() or recipient_id == id or recipient_id not in active_ids():
+		return _failure("skill_ask_unavailable")
+	if position_of(id).distance_to(position_of(recipient_id)) > HEARING_RANGE:
+		return _failure("skill_ask_unavailable")
+	if not _public_skills(id, recipient_id).has(skill_id):
+		return _failure("skill_ask_unavailable")
+	if _has_open_skill_ask(id, recipient_id, need):
+		# The identical request is already open: no second event is appended and no resource moves.
+		return {"ok": true, "duplicate": true, "code": "help_request_pending", "skill_id": skill_id, "recipient_id": recipient_id}
+	var decision := {"action": "ask_help", "recipient_id": recipient_id, "need": need, "text": _skill_ask_text(skill_id)}
+	if not speech.is_empty():
+		decision.text = speech
+	var social := communicate(id, decision, command_id, provenance)
+	if not social.ok:
+		return social
+	# The request itself keeps the shared ask_help shape. Only the machine-readable skill it named is
+	# added to that same recorded event, so nothing about reply, cancel or attribution changes.
+	for event in _state.life.events:
+		if event is Dictionary and str(event.get("event_id", "")) == str(social.get("event_id", "")):
+			event["skill_id"] = skill_id
+			break
+	return {"ok": true, "code": "ask_help", "request_id": social.get("request_id", ""), "event_id": social.get("event_id", ""),
+		"skill_id": skill_id, "recipient_id": recipient_id}
 
 func _apply_trade_start(id: String, option: Dictionary, command_id: String, provenance: String) -> Dictionary:
 	var action: String = option.action
