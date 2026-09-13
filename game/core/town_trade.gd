@@ -442,7 +442,7 @@ func _help_reply_text(id: String, event: Dictionary, choice: String) -> String:
 		capability += "; I cannot perform this repair"
 	return "I am unavailable; " + capability + "."
 
-func trade_options(id: String, include_open_skill_asks: bool = false) -> Array:
+func trade_options(id: String) -> Array:
 	var result: Array = [{"id": "wait", "label": "Wait", "action": "wait"}]
 	if id not in active_ids():
 		return result
@@ -489,13 +489,13 @@ func trade_options(id: String, include_open_skill_asks: bool = false) -> Array:
 				_option(result, {"id": "ask:" + other, "label": "Ask " + resident(other).name + " for help", "action": "ask_help", "counterparty": other, "_decision": {"action": "ask_help", "recipient_id": other, "text": "Can you help me?"}})
 			# Structured repair-skill ask. The asker may name a skill that the world already shows as
 			# public knowledge of this nearby resident; the ask itself grants no skill, no work and no
-			# resource, and it never discloses the asker's private inventory or a damaged part.
+			# resource, and it never discloses the asker's private inventory or a damaged part. A skill
+			# ask that is still open stays listed, because repeating it is acknowledged as the very
+			# same request instead of quietly becoming a second one.
 			for skill_id in _public_skills(id, other):
 				if skill_id not in SHAREABLE_SKILLS:
 					continue
 				var need := {"kind": "skill", "skill_id": skill_id}
-				if not include_open_skill_asks and _has_open_skill_ask(id, other, need):
-					continue
 				_option(result, {"id": "ask-skill:" + other + ":" + skill_id,
 					"label": "Ask " + resident(other).name + " for help with " + _skill_name(skill_id),
 					"action": "ask_help", "counterparty": other, "_skill_id": skill_id,
@@ -588,8 +588,8 @@ func _request_closed(request_id: String) -> bool:
 			return true
 	return false
 
-func _find_option(id: String, option_id: String, include_open_skill_asks: bool = false) -> Dictionary:
-	for option in trade_options(id, include_open_skill_asks):
+func _find_option(id: String, option_id: String) -> Dictionary:
+	for option in trade_options(id):
 		if option.get("id") == option_id:
 			return option
 	return {}
@@ -610,10 +610,7 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 		return {"ok": same, "duplicate": same, "code": "duplicate" if same else "command_conflict"}
 	if _state.godot.commands.has(command_id):
 		return _failure("command_conflict")
-	# An already-open structured skill ask is no longer listed as a new choice, but repeating its own
-	# id stays resolvable so the identical request is acknowledged instead of looking like an unknown
-	# option. It can only ever reach the duplicate receipt: no second event and no resource movement.
-	var option := _find_option(id, option_id, true)
+	var option := _find_option(id, option_id)
 	if option.is_empty():
 		return _failure("option_unavailable")
 	if not speech.is_empty() and option.action not in SPEECH_ACTIONS:
