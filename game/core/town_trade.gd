@@ -333,6 +333,46 @@ func _option(result: Array, value: Dictionary) -> void:
 			return
 	result.append(value)
 
+func _accept_blocker(id: String, contract: Dictionary) -> String:
+	# Single read-only prerequisite predicate for a worker's acceptance. The option builder lists an
+	# executable acceptance only while this returns ""; the authoritative submit path maps the same
+	# answer back onto the codes it has always returned. It never mutates world state and it reuses
+	# the existing skill/material/range/account helpers rather than a second copy of the rules.
+	if contract.get("worker_id") != id or contract.get("status") != "proposed" or not _near(id, str(contract.get("owner_id", ""))):
+		return "contract_unavailable"
+	var owner_id: String = str(contract.get("owner_id", ""))
+	var owner_account := _trade_account(owner_id)
+	if owner_account.is_empty() or owner_account.get("reserved_col", -1) < 0 or resident(owner_id).coins_col < int(contract.get("price_col", -1)):
+		return "funds_unavailable"
+	var part: String = str(contract.get("part", ""))
+	if not _has_skill(id, _required_skill(part)):
+		return "skill_unavailable"
+	if _trade_account(id).get("iron" if part == "edge" else "wood", -1) < 1:
+		return "material_unavailable"
+	return ""
+
+func _accept_failure_code(blocker: String) -> String:
+	# Historical authoritative codes are preserved exactly; only the worker-facing explanation is
+	# more specific than the single "insufficient_funds" the submit path always returned.
+	return "contract_unavailable" if blocker == "contract_unavailable" else "insufficient_funds"
+
+func _accept_explanation(contract: Dictionary, blocker: String) -> Dictionary:
+	# Worker-only, read-only statement of the real missing prerequisite. It never repeats another
+	# resident's private inventory, dialogue or position.
+	var part: String = str(contract.get("part", ""))
+	var entry := {"action": "accept", "contract_id": contract.get("id"), "counterparty": contract.get("owner_id"),
+		"part": part, "price_col": contract.get("price_col", 0), "code": blocker}
+	match blocker:
+		"funds_unavailable":
+			entry["reason"] = "接受修理前必须先从委托方钱包预留这笔报酬，委托方目前无法预留，因此这一步不可执行。你可以拒绝，或等对方备好钱再谈。"
+		"skill_unavailable":
+			entry["reason"] = "这项委托需要对应的修理技能（斧刃要metal_repair，斧柄要wood_repair），你的技能列表里没有该技能，因此不能接受。"
+		_:
+			entry["reason"] = "施工时必须由你消耗1" + ("铁" if part == "edge" else "木") + "，你目前不足1，因此不能接受。先在取材点取得材料再谈。"
+			entry["required_material"] = "iron" if part == "edge" else "wood"
+			entry["required_quantity"] = 1
+	return entry
+
 func _validate_communicate_need(sender_id: String, need: Variant) -> Dictionary:
 	if not need is Dictionary or not _exact_keys(need, ["kind", "item_id", "part"]):
 		return _failure("need_invalid")
@@ -461,7 +501,11 @@ func trade_options(id: String) -> Array:
 			if contract.get("worker_id") == id and contract.get("status") == "proposed" and position_of(id).distance_to(position_of(contract.owner_id)) <= HEARING_RANGE:
 				var settlement := _contract_settlement(contract)
 				var settlement_label := "完成施工并验证后结算" if settlement == "completion" else "物主取回时结算"
-				_option(result, {"id": "contract:accept:" + contract_id, "label": "接受修理" + str(contract.get("part", "")) + "：报酬" + str(contract.get("price_col", 0)) + " Col；先预留报酬，交付后施工60秒，" + settlement_label, "action": "accept", "counterparty": contract.owner_id, "_contract_id": contract_id})
+				# An acceptance is listed as an executable choice only while the authoritative submit
+				# path would accept it under the current real prerequisites; otherwise the worker is
+				# told the actual missing prerequisite in resident_view instead of a silent omission.
+				if _accept_blocker(id, contract).is_empty():
+					_option(result, {"id": "contract:accept:" + contract_id, "label": "接受修理" + str(contract.get("part", "")) + "：报酬" + str(contract.get("price_col", 0)) + " Col；先预留报酬，交付后施工60秒，" + settlement_label, "action": "accept", "counterparty": contract.owner_id, "_contract_id": contract_id})
 				_option(result, {"id": "contract:reject:" + contract_id, "label": "拒绝修理" + str(contract.get("part", "")) + "，本次报价" + str(contract.get("price_col", 0)) + " Col", "action": "reject", "counterparty": contract.owner_id, "_contract_id": contract_id})
 			if contract.get("worker_id") == id and contract.get("status") == "delivered" and item.get("custodian_id") == id:
 				for part in ["edge", "handle"]:
@@ -647,13 +691,11 @@ func _apply_trade_start(id: String, option: Dictionary, command_id: String, prov
 	if contract.is_empty():
 		return _failure("unknown_contract")
 	if action == "accept":
-		if contract.worker_id != id or contract.status != "proposed" or not _near(id, contract.owner_id):
-			return _failure("contract_unavailable")
+		var accept_blocker := _accept_blocker(id, contract)
+		if not accept_blocker.is_empty():
+			return _failure(_accept_failure_code(accept_blocker))
 		var owner_account := _trade_account(contract.owner_id)
 		var price: int = int(contract.price_col)
-		var material: String = "iron" if contract.get("part") == "edge" else "wood"
-		if owner_account.is_empty() or not _has_skill(id, _required_skill(contract.part)) or _trade_account(id).get(material, -1) < 1 or owner_account.get("reserved_col", -1) < 0 or resident(contract.owner_id).coins_col < price:
-			return _failure("insufficient_funds")
 		resident(contract.owner_id).coins_col -= price
 		owner_account.reserved_col += price
 		contract.reserved_col = price
@@ -902,6 +944,15 @@ func resident_view(id: String = "") -> Dictionary:
 			var action := "collect" if contract.status == "completed" else "deliver"
 			view.unavailable_actions.append({"action": action, "contract_id": contract.id, "counterparty": contract.worker_id,
 				"reason": "交付和取回都需要双方在3米交接范围内。你目前不在工人身边；先接近该工人后才能交接，这不是系统还在处理。"})
+	for contract in own_contracts:
+		if contract.get("worker_id") != id or contract.get("status") != "proposed":
+			continue
+		# Truthful personal feedback: an acceptance that the authoritative path would refuse is not
+		# offered as an executable choice, and the worker is told the real missing prerequisite.
+		var accept_blocker := _accept_blocker(id, contract)
+		if accept_blocker.is_empty() or accept_blocker == "contract_unavailable":
+			continue
+		view.unavailable_actions.append(_accept_explanation(contract, accept_blocker))
 	var public_roles: Array = []
 	for other in active_ids():
 		if other == id or position_of(id).distance_to(position_of(other)) > HEARING_RANGE:
