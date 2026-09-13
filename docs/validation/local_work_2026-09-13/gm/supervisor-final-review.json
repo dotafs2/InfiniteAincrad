@@ -1,0 +1,27 @@
+{
+  "recorded_utc": "2026-09-13T08:17:04.833702+00:00",
+  "status": "accepted_local_bounded_scope",
+  "roadmap_h47": "partial_real_models_unverified",
+  "production_gm_or_kimi_started": false,
+  "latest_worker": "20260913T080840341827Z",
+  "source_sha256": {
+    "tools/gm_runner.py": "c16afb25708a8d273bb31ee72a938bf4fb191698f1b525b85d7f8d2a4b2156b6",
+    "tools/gm_autonomy.py": "96c7914f2f3ce9b9780403e89a7337de5f765408662f2e970260e11b465b4a66",
+    "tools/validate_gm_autonomy.py": "1818c7eaf4245c4e1a3afa11bdcb31aeb4c32e2bccb98b120077002d3e17091b",
+    "tools/prepare_gm_autonomy_local.py": "37425c471808f48786dff9975e6db435886340df94fdce9bd1c51a8245a7f736",
+    "tools/test_gm_autonomy.py": "461cc2d41e4258887e2e2794f1c1b566c27f25890f6636f93c2b9e5228dbc83e",
+    "tools/test_prepare_gm_autonomy_local.py": "f7c114fee94852989ca18df5f875e082d19fa88235b778c3c6c21f30c8987fef",
+    "game/tests/gm_autonomy_acceptance.gd": "8aeb2204b29da3e9a0d484f4edcc9255575b5f51ece5500c44c8bea79462bfad",
+    "game/tests/gm_autonomy_module_smoke.gd": "393c1884408bba8c21704444632a4017295e6ce25d720af988e032ed0ef8f77a"
+  },
+  "evidence": [
+    "validate-causal_repair.json",
+    "validate-watch_two_delivery.json",
+    "local-trial-h47r2-verification-20260913.json"
+  ],
+  "unit_tests": 100,
+  "legacy_isolated_tests_previous_turn": 51,
+  "known_batch_raw_subtotal": 159103885,
+  "interrupted_tail": "unknown",
+  "native_worker_pid_470160_and_launcher_490948": "confirmed_exited_by_root"
+}
