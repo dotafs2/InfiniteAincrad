@@ -22,7 +22,7 @@ const SOURCE_POSITION := Vector3(0, 0.22, 5)
 const START_POSITION := Vector3(0, 0.22, 7)
 const BLOCKED_EVENT := "material_travel_blocked"
 const CANCEL_EVENT := "material_travel_cancelled"
-const SCENARIOS := ["paused-enclosed", "at-target", "blocked-enclosed", "detour-crate", "recurring-block", "gm-evidence"]
+const SCENARIOS := ["paused-enclosed", "at-target", "blocked-enclosed", "detour-crate", "recurring-block", "gm-evidence", "gm-evidence-capture-exit", "gm-evidence-capture-exit-no-content"]
 
 class FixtureController extends Node:
 	## Deterministic offline fixture controller. It performs no network call and
@@ -116,7 +116,7 @@ func _parse_args() -> void:
 			_gm_export_dir = _norm(ProjectSettings.globalize_path(arg.trim_prefix("--gm-export-dir=")))
 		elif arg == "--town-gateway" or arg == "--town-restore":
 			_fail("forbidden_mode:" + arg.trim_prefix("--"))
-	if _scenario == "gm-evidence" and (_gm_export_dir.is_empty() or not _under_root(_gm_export_dir)):
+	if _scenario in ["gm-evidence", "gm-evidence-capture-exit", "gm-evidence-capture-exit-no-content"] and (_gm_export_dir.is_empty() or not _under_root(_gm_export_dir)):
 		_fail("gm_export_dir_required")
 
 func _validate_paths() -> bool:
@@ -1066,6 +1066,135 @@ func _scenario_gm_evidence() -> void:
 		"export_inactive": tertiary, "export_bytes": _read_bytes(primary).size(), "reload_ok": reload_ok.get("ok", false),
 		"counts_after_cancel": after_cancel.get("counts", {}), "proposals": cold_snapshot.get("counts", {}).get("proposals", 0)}
 
+func _scenario_gm_evidence_capture_exit() -> void:
+	var primary := _gm_export_dir + "/gm-capture-exit-final.json"
+	var capture_root := _out_path.get_base_dir().path_join("capture-exit")
+	if DirAccess.make_dir_recursive_absolute(capture_root) != OK:
+		_check(false, "gm_capture_exit_capture_dir_failed")
+		_result = {"scenario": "gm-evidence-capture-exit", "capture_root": capture_root, "ok": false}
+		_write_output()
+		return
+	if not await _load_scene(_save_path):
+		return
+	await _unpause_for(1200)
+	_scene.gm_export_path = primary
+	var startup_export: Dictionary = {}
+	startup_export = _scene.write_gm_evidence_export()
+	_check(startup_export.get("ok", false), "gm_capture_exit_startup_export_failed:" + str(startup_export.get("code", "unknown")))
+	var startup_payload = _read_export(primary)
+	var startup_seq := int(startup_payload.get("source_revision", {}).get("life_seq", -1))
+	_check(startup_seq >= 0, "gm_capture_exit_missing_startup_seq")
+	if startup_seq < 0:
+		_result = {"scenario": "gm-evidence-capture-exit", "startup_seq": startup_seq}
+		_write_output()
+		return
+	_scene.paused = false
+	if not _check(_scene.town.resident_view(SMITH).material_sources.size() > 0, "gm_capture_exit_source_not_observed"):
+		_result = {"scenario": "gm-evidence-capture-exit", "startup_seq": startup_seq}
+		_write_output()
+		return
+	var body: CharacterBody3D = _scene.bodies[SMITH]
+	body.position = SOURCE_POSITION
+	body.velocity = Vector3.ZERO
+	var relocate: Dictionary = _scene.town.transaction(_writer_path, func():
+		_scene.town.host_move(SMITH, SOURCE_POSITION)
+		return {"ok": true, "code": "fixture_relocated"})
+	_check(relocate.get("ok", false), "gm_capture_exit_relocate_failed:" + str(relocate))
+	if not _submit_job("fixture:gm-capture-exit"):
+		_result = {"scenario": "gm-evidence-capture-exit", "startup_seq": startup_seq, "submit_failed": true}
+		_write_output()
+		_scene.paused = true
+		return
+	var inquiry: Dictionary = _scene.town.transaction(_writer_path, func():
+		return _scene.town.communicate(SMITH, {"action": "ask_help", "recipient_id": CARPENTER, "text": "Capture-exit path check."}, "fixture:gm-capture-exit-help", "local_rule_policy"))
+	_check(inquiry.get("ok", false), "gm_capture_exit_help_failed:" + str(inquiry.get("code", "unknown")))
+	# The submit command must advance the live projection; otherwise there is no
+	# measurable evidence that any new capture can be authoritative.
+	var post_action_seq := int(_scene.town.snapshot().life.seq)
+	_check(post_action_seq > startup_seq, "gm_capture_exit_no_life_progress")
+	_scene.capture_dir = capture_root
+	_scene.capture_seconds = 3.0
+	_scene.gm_export_path = primary
+	_result = {"scenario": "gm-evidence-capture-exit", "startup_seq": startup_seq, "post_action_seq": post_action_seq,
+		"export_path": primary, "capture_root": capture_root, "capture_path": capture_root.path_join("evidence.json")}
+	_write_output()
+	_scene._capture_town()
+
+func _scenario_gm_evidence_capture_exit_no_content() -> void:
+	var primary_startup := _gm_export_dir + "/gm-capture-exit-no-content-startup.json"
+	var primary_final := _gm_export_dir + "/gm-capture-exit-no-content-final.json"
+	var capture_root := _out_path.get_base_dir().path_join("capture-exit-no-content")
+	if DirAccess.make_dir_recursive_absolute(capture_root) != OK:
+		_check(false, "gm_capture_exit_no_content_capture_dir_failed")
+		_result = {"scenario": "gm-evidence-capture-exit-no-content", "capture_root": capture_root, "ok": false}
+		_write_output()
+		return
+	if not await _load_scene(_save_path):
+		return
+	await _unpause_for(1200)
+	_scene.gm_export_path = primary_startup
+	var startup_export: Dictionary = {}
+	startup_export = _scene.write_gm_evidence_export()
+	_check(startup_export.get("ok", false), "gm_capture_exit_no_content_startup_export_failed:" + str(startup_export.get("code", "unknown")))
+	var startup_payload = _read_export(primary_startup)
+	var startup_seq := int(startup_payload.get("source_revision", {}).get("life_seq", -1))
+	var startup_counts: Dictionary = startup_payload.get("counts", {})
+	_check(startup_seq >= 0, "gm_capture_exit_no_content_missing_startup_seq")
+	if startup_seq < 0:
+		_result = {"scenario": "gm-evidence-capture-exit-no-content", "startup_seq": startup_seq}
+		_write_output()
+		return
+	var action_name: String = "rest"
+	if _scene.town.available(SMITH).has("harvest_ration"):
+		action_name = "harvest_ration"
+	elif _scene.town.available(SMITH).has("eat_ration"):
+		action_name = "eat_ration"
+	var action_target: Vector3 = _scene.town.destination(SMITH, action_name)
+	var move_to_action: Dictionary = _scene.town.transaction(_writer_path, func():
+		_scene.town.host_move(SMITH, action_target)
+		return {"ok": true, "code": "fixture:gm-capture-exit-no-content-move", "actor": SMITH, "action": "host_move"})
+	if not _check(move_to_action.get("ok", false), "gm_capture_exit_no_content_move_failed"):
+		_result = {"scenario": "gm-evidence-capture-exit-no-content", "startup_seq": startup_seq, "move_failed": move_to_action}
+		_write_output()
+		return
+	var action_command: Dictionary = _scene.town.start_action(SMITH, action_name, "fixture:gm-capture-exit-no-content-life", "local_rule_policy")
+	if not _check(bool(action_command.get("ok", false)), "gm_capture_exit_no_content_action_failed:" + str(action_command.get("code", "unknown"))):
+		_result = {"scenario": "gm-evidence-capture-exit-no-content", "startup_seq": startup_seq, "action_name": action_name, "action_failed": action_command}
+		_write_output()
+		return
+	await _unpause_for(22000 if action_name == "harvest_ration" else 35000)
+	var post_snapshot: Dictionary = _scene.town.snapshot()
+	var post_action_seq := int(post_snapshot.life.seq)
+	var post_elapsed := float(post_snapshot.godot.elapsed_seconds)
+	var startup_elapsed := float(_read_export(primary_startup).get("source_revision", {}).get("world_elapsed_seconds", -1.0))
+	# Only the clock is required to advance. A life seq change is allowed but never
+	# required, so this scenario does not depend on a decision or a new event.
+	_check(post_action_seq >= startup_seq, "gm_capture_exit_no_content_life_seq_regressed")
+	_check(post_elapsed > startup_elapsed, "gm_capture_exit_no_content_clock_did_not_advance")
+	# Content identity: the GM evidence/proposal content must be unchanged while time
+	# advanced. Write the projection once before the final capture, compare it with the
+	# startup projection, and record the comparison for the caller.
+	_scene.gm_export_path = primary_final
+	var pre_capture_export: Dictionary = _scene.write_gm_evidence_export()
+	_check(pre_capture_export.get("ok", false), "gm_capture_exit_no_content_pre_capture_export_failed")
+	var pre_payload: Dictionary = _read_export(primary_final)
+	var post_counts: Dictionary = pre_payload.get("counts", {})
+	var content_identical: bool = (post_counts == startup_counts
+		and _read_export(primary_startup).get("evidence", []) == pre_payload.get("evidence", [])
+		and _read_export(primary_startup).get("proposals", []) == pre_payload.get("proposals", []))
+	_check(content_identical, "gm_capture_exit_no_content_content_changed")
+	_result = {"scenario": "gm-evidence-capture-exit-no-content", "startup_seq": startup_seq, "post_action_seq": post_action_seq,
+		"startup_counts": startup_counts, "post_counts": post_counts, "content_identical": content_identical,
+		"startup_elapsed": startup_elapsed, "post_elapsed": post_elapsed,
+		"pre_capture_export_seq": int(pre_payload.get("source_revision", {}).get("life_seq", -1)),
+		"startup_path": primary_startup, "final_path": primary_final, "capture_root": capture_root,
+		"world_save_path": _save_path, "expect_final_seq": post_action_seq, "expect_final_elapsed": post_elapsed}
+	_write_output()
+	_scene.capture_dir = capture_root
+	_scene.capture_seconds = 0.0
+	_scene.gm_export_path = primary_final
+	_scene._capture_town()
+
 func gm_export_status_for_test() -> String:
 	var scene: Variant = _scene
 	return str(scene.gm_export_status) if scene != null else ""
@@ -1287,6 +1416,10 @@ func _run() -> void:
 						await _scenario_recurring_block()
 					"gm-evidence":
 						await _scenario_gm_evidence()
+					"gm-evidence-capture-exit":
+						await _scenario_gm_evidence_capture_exit()
+					"gm-evidence-capture-exit-no-content":
+						await _scenario_gm_evidence_capture_exit_no_content()
 	await _finish()
 
 func _initialize() -> void:

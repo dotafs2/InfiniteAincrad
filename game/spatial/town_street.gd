@@ -1009,4 +1009,6 @@ func _capture_town() -> void:
 	var file := FileAccess.open(capture_dir.path_join("evidence.json"), FileAccess.WRITE)
 	file.store_string(JSON.stringify(evidence, "  "))
 	file.close()
+	if not gm_export_path.is_empty():
+		_note_gm_export(town.write_background_gm_snapshot(gm_export_path))
 	get_tree().quit(0)
