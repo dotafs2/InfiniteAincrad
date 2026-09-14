@@ -137,9 +137,9 @@ OUTPUT CONTRACT: end your turn with exactly one fenced ```json block and nothing
  "results": [{"issue_id": "<copied verbatim from open_issues>",
               "disposition": "observe" | "proposal" | "no_action",
               "claim_coding": true | false,
-              "summary": "<=400 chars",
+              "summary": "concise text (400 chars recommended)",
               "evidence_refs": ["<ref>"]}],
- "new_issues": [{"proposal_key": "<stable short key>", "summary": "<=400 chars",
+ "new_issues": [{"proposal_key": "<stable short key>", "summary": "concise text (400 chars recommended)",
                  "evidence_refs": ["<pointer from investigation.evidence_refs>"],
                  "claim_coding": true | false}],
  "note": "<optional, <=200 chars>"}
@@ -1309,8 +1309,8 @@ def validate_new_issues(answer, investigation: dict | None) -> tuple[list[dict],
     key, summary, refs = entry.get('proposal_key'), entry.get('summary'), entry.get('evidence_refs')
     if not isinstance(key, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,99}', key):
         return [], ['new_issues[0].proposal_key must be a stable 1..100 character key']
-    if not isinstance(summary, str) or not 12 <= len(summary.strip()) <= 400:
-        return [], ['new_issues[0].summary must describe one hypothesis in 12..400 characters']
+    if not isinstance(summary, str) or len(summary.strip()) < 12:
+        return [], ['new_issues[0].summary must describe one hypothesis in at least 12 characters']
     if (not isinstance(refs, list) or not 1 <= len(refs) <= 8
             or any(not isinstance(ref, str) or ref not in investigation['evidence_refs']
                    for ref in refs) or len(set(refs)) != len(refs)):
