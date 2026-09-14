@@ -227,6 +227,12 @@ flowchart TD
     H55 -.面包师收到过长理由后停住.-> H57
     H57["H57 原GM09过长理由一次冷恢复（离线已验）<br/>保留512上限与旧失败；待原面包师新请求"]
     H57 --> M20C
+    H57 -.实际启动原生崩溃与未结算请求.-> H58
+    H58["H58 原生崩溃与新费用未知（开放）<br/>十身份存档已保住；待定位崩溃与核对请求"]
+    H58 --> M20H
+    H58 -.退出时仍可能有在途请求.-> H59
+    H59["H59 原GM07退出时有界结算等待<br/>独立验收与关闭证据见检查点；真实采用待验"]
+    H59 --> M20H
     M20E --> M20
     M20 -.持续稳定性.-> M20F
     H20 --> M20G
@@ -257,7 +263,7 @@ flowchart TD
     class H37,H40,H41,H42,H44,H45,H46 done;
     class H47 partial;
     class H48,H49,H50,H51,H52 done;
-    class H53,H56,H57 partial;
+    class H53,H56,H57,H58,H59 partial;
     class H55 done;
     class H54 done;
     class H38 partial;
@@ -336,6 +342,10 @@ flowchart TD
 | H53 | 原GM05从真实渔夫需求认领并实现双方同意的教学，原31＋63及独立46＋41项通过；life06事件203中渔夫真实提出木工教学请求。[验收与纠正](docs/validation/gm_teaching_2026-09-14.md)。 | **部分：真实请求已发生，尚无skill_lesson**；木匠返家进食受阻，老师未完成自愿授课。无播种技能或代选，旧失败保留。 |
 | H54 | 原GM09两文件修复已进入life07，四个原进食/休息命令于事件232–235各完成一次；26次真实Kimi、无模型错误、无新增未知，seq257冷恢复一致，原GM09确认采用回执。[事实](docs/validation/gm_home_return_2026-09-14.md)。 | **此次同档采用已验**；之前45项完整场景验证与宿主错误均保留，不宣称所有拥堵或短途路径均已解决。 |
 | H55 | GM10单文件改动在life08捕获3个真实休息任务、12份哈希绑定快照；两原任务完成后条目消失。原10GM全部实际读取，GM06引用49.6/60秒进度，GM08识别正常休息，原作者确认采用；seq264冷恢复通过。[事实](docs/validation/gm_home_return_2026-09-14.md)。 | **本次真实导出、消费和同档恢复已验**；正常pending不是缺陷，GM07曾误把中间49.6秒称完成，已在回执中纠正；两次编码未知费用与首次冷加载失败保留。 |
+| H56 | 原GM01认领issue-fefb577df7e8，复用既有道路寻路处理原采集动作；原目标、碰撞、0.45米到达与20秒工作保持。私有完整场景验证见本机记录。 | **部分：离线验收已接受，待原Kimi世界实际完成原织工任务**；移动不等于完成，不声称所有碰撞已修复。 |
+| H57 | 原GM09认领issue-5e0154668121，仅对实际收到且因理由超过512字被拒的回执，冷启动准入一次新请求；155项既有测试及39项独立检查通过。 | **部分：离线已验，待原面包师实际恢复**；第二次连续过长保持阻塞，原调用上限通道独立，旧失败与未知费用保留。 |
+| H58 | life10原生0xC0000005后保留新请求pending与1笔未解决预留，seq291及十身份冷恢复字节一致。[检查点](docs/validation/checkpoint_2026-09-14_0900.md)。 | **开放**：无收到响应可真实结算，Kimi停止新派发；崩溃原因未知。 |
+| H59 | 原GM07已完成一文件有界关闭等待，独立离线假上游与私有账本验证通过，接受进本地main；尚无真实Kimi采用，也不能恢复已丢失的响应。[检查点](docs/validation/checkpoint_2026-09-14_0900.md)。 | **部分**：历史未知保留，不能宣称原生崩溃或本次费用已恢复。 |
 
 **维护规则：**每次有新证据只更新这个全景图和本表。新增问题沿发现它的节点分支，保留稳定ID、验收条件和证据；通过后原位变绿，不删掉问题来制造进度。复发改回问题状态并链接失败证据。范围扩大另开子节点，不能扩大已绿节点的含义。没有新证据不改变状态。流程图记录工作进度，不是后台运行器。
 
@@ -555,6 +565,3 @@ This review did not implement gameplay, import candidates, run paid models, publ
 Earlier G0–G3 migration/budget records remain available in [the prior roadmap at 59bd52e](https://github.com/dotafs2/InfiniteAincrad/blob/59bd52e/ROADMAP.md) and the private transfer records. Those historical deadlines and automatic-run instructions are not fresh authorization. No original-world gate is marked complete by this public-preview plan.
 
 Full geography, VR, multiplayer, combat, autonomous code installation, generic plugin marketplaces and a replacement engine/backend remain outside this first collaboration release.
-
-| H56 | 原GM01认领issue-fefb577df7e8，复用既有道路寻路处理原采集动作；原目标、碰撞、0.45米到达与20秒工作保持。私有完整场景验证见本机记录。 | **部分：离线验收已接受，待原Kimi世界实际完成原织工任务**；移动不等于完成，不声称所有碰撞已修复。 |
-| H57 | 原GM09认领issue-5e0154668121，仅对实际收到且因理由超过512字被拒的回执，冷启动准入一次新请求；155项既有测试及39项独立检查通过。 | **部分：离线已验，待原面包师实际恢复**；第二次连续过长保持阻塞，原调用上限通道独立，旧失败与未知费用保留。 |
