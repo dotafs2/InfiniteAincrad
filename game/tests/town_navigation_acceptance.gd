@@ -51,6 +51,26 @@ func _walk_to(id: String, target: Vector3, command_id: String, max_frames: int) 
 		"frames": max_frames, "start": start, "end": body.global_position,
 		"first_direction": first_direction, "saw_direction": saw_direction}
 
+func _stop_check() -> void:
+	var id := "shared:well-keeper"
+	var body: CharacterBody3D = scene.bodies[id]
+	var navigation = scene.town_navigation
+	var agent: NavigationAgent3D = navigation.agents[id]
+	body.position = Vector3(0.0, 0.22, 30.0)
+	await physics_frame
+	navigation.direction_for(id, "nav-stop-start", body, Vector3(0.0, 0.22, 33.0))
+	navigation.clear_route(id)
+	check(navigation.route_status(id) == "inactive", "clear_route clears the active route")
+	check(agent.target_position.distance_to(body.global_position) <= 0.01,
+		"clear_route targets the parent body position")
+	check(agent.velocity == Vector3.ZERO, "clear_route clears agent velocity")
+	await physics_frame
+	var restarted: Vector3 = navigation.direction_for(id, "nav-stop-restart", body, Vector3(0.0, 0.22, 33.0))
+	check(navigation.route_status(id) == "following", "route can restart after clear_route")
+	print(JSON.stringify({"ok": failures == 0, "checks": checks, "failures": failures,
+		"stop_check": true, "restart_direction": restarted, "save_path": _arg("--save=")}))
+	quit(0 if failures == 0 else 1)
+
 func run() -> void:
 	var save_path := _arg("--save=")
 	if save_path.is_empty():
@@ -70,6 +90,9 @@ func run() -> void:
 		print(JSON.stringify({"ok": false, "checks": checks, "failures": failures,
 			"navigation_status": navigation.bake_status if navigation != null else "missing"}))
 		quit(1)
+		return
+	if OS.get_cmdline_user_args().has("--stop-check"):
+		await _stop_check()
 		return
 	var id := "shared:well-keeper"
 	var body: CharacterBody3D = scene.bodies[id]

@@ -119,6 +119,15 @@ code, test logs, GM discussion, issue ids or diagnostics; residents learn about 
 through attributed perception and use. Do not claim a resident learned, owns or did something the
 evidence does not show.
 
+The world may need new play, content or skills. When evidence shows a real resident need, you may
+design and implement a bounded new mechanic or content as a proposal; describe it as new proposed
+design, never as historical world fact, an already available skill, or something a resident already
+knows unless the evidence proves that. A resident's role or title does not prove that resident has
+any particular skill. A new skill may have learning or action prerequisites chosen by the design;
+do not require a particular design merely because the need is new. Do not invent resident demand
+without evidence, but do not treat absence of an existing mechanic as a ban on addressing an
+evidence-backed need.
+
 In an observation turn you may read repository files for context. You must not modify the
 repository, the world save or configuration, must not run paid or NPC model calls, must not read
 secrets or private saves, and must not commit or push.
@@ -149,7 +158,8 @@ Rules for results:
   "supervisor_specified" means a human supervisor asked for the investigation. Your proposal is
   unverified, does not grant coding scope, and must retain the distinction between observed facts
   and inference.
-- return new_issues: [] when investigation yields no concrete supported proposal; do not invent work.
+- return new_issues: [] when investigation yields no concrete supported proposal; do not invent
+  resident demand, but a concrete evidence-backed proposal may introduce new mechanics or content.
 """
 
 STABLE_CODE_INSTRUCTIONS = """You are the active coding worker of one of the ten BACKGROUND GMs of the InfiniteAincrad
@@ -159,12 +169,16 @@ checkout created from the approved revision.
 Rules: implement only the explicit coding scope given to you; touch only the scope files; work only
 inside the candidate directory; never commit, push, or touch the git metadata of the main checkout;
 never modify a maintained world save, private/secret files or configuration; never read API keys;
-no paid NPC/GM model calls and no network fetches; if a declared test command fails, fix the
-candidate and re-run it.
+no paid NPC/GM model calls and no network fetches. Develop the scoped change yourself and run the
+most useful bounded self-tests available in the candidate; report the commands and results you
+actually ran. If a self-test fails, fix the candidate and re-run it. The main AI normally provides
+advice; it blocks only for a concrete major problem. After a release, the original GM checks the
+runtime receipt in a later turn and verifies whether the change had the intended effect.
 
-Your completion is NOT a deployment. The supervisor reviews changed files, base revision and test
-evidence before anything is accepted. A change outside the scope files, or any commit, is a
-failure.
+Your completion is NOT a deployment. Scope, file ownership, save/secret and commit/push rules are
+still enforced by the host. A change outside the scope files, or any commit, is a failure. Main-AI
+review and any fixed host checks are review evidence and safety checks; fixed host test commands do
+not replace your own self-testing or automatically veto an otherwise valid candidate.
 
 OUTPUT CONTRACT: end your turn with exactly one fenced ```json block and nothing after it:
 {"issue_id": "<the issue id from CODING SCOPE>",
@@ -1265,12 +1279,16 @@ def autonomy_policy_block(policy: dict) -> str:
                  'You may propose your own bounded coding scope. Put it in a "scope" object on the '
                  'single new_issues entry and/or on a results entry: '
                  '{"objective": "<one concrete sentence>", "files": ["<repo-relative path>"], '
-                 '"acceptance": ["<observable check>"]}. The host validates every path against '
-                 'constraints.allowed_source_paths and excluded_paths, rejects more than '
-                 'max_changed_files paths, and ignores any test command you name: only the host '
-                 'required_test_commands run, and host_owned_paths must stay byte-identical. Your '
-                 'proposal is a hypothesis, not a verified fact, an approval or a release.'),
-             'derived_by_host': ('allowed paths, changed-file limit, test commands, publication, '
+                 '"acceptance": ["<observable check>"], "test_commands": [["<argv>"]]}. The GM '
+                 'owns the implementation and self-testing and should list commands it actually '
+                 'ran. The host validates every path against constraints.allowed_source_paths and '
+                 'excluded_paths, rejects more than max_changed_files paths, and keeps '
+                 'host_owned_paths byte-identical. Any fixed host test commands are advisory '
+                 'evidence, not an automatic acceptance gate. Main-AI review is normally advice and '
+                 'blocks only on a concrete major problem; after release the original GM verifies '
+                 'the runtime effect in a later turn. Your proposal is a hypothesis, not a verified '
+                 'fact, an approval or a release.'),
+             'derived_by_host': ('allowed paths, changed-file limit, safety checks, publication, '
                                  'runtime verification and GM feedback')}
     return ('[AUTONOMY_POLICY]\n'
             + json.dumps(block, ensure_ascii=False, sort_keys=True, indent=2)
