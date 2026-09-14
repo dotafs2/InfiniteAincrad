@@ -1,5 +1,7 @@
 # InfiniteAincrad
 
+2026-09-13/14 两天工程与真实运行合并记录：[两天活动报告](docs/validation/work_log_2026-09-13_14.md) · [09:00 真实检查点](docs/validation/checkpoint_2026-09-14_0900.md)（截至该检查点：原10名Kimi已多轮真实生活，原10个DeepSeek后台GM已实际读取同一世界，最新原生崩溃与新预留仍未解决；不代表持续10+10已验收）。
+
 本分支的 2026-09-13 本地备份：[Shader 实验室与打开方法](experiments/godot-anime-lab/SNAPSHOT.md) · [SAO 场景参考图](docs/references/sao-season1/README.md) · [今天的 GM 工程与实机截图](docs/validation/local_work_2026-09-13/README.md)。本地磁盘快照，不代表真实十 GM 自主运行已经完成。
 
 [手机看进度与实机画面](docs/PROGRESS.md) · [唯一原路线图](ROADMAP.md)
