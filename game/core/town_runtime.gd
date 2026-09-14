@@ -31,6 +31,10 @@ const BACKGROUND_GM_LIFE_EVENT_TEXT_LIMIT := 280
 ## stated recipients. Optional speech that was never sent (speech_not_supported_for_action)
 ## and the reply's private deliberation reason are never in this set.
 const BACKGROUND_GM_PUBLIC_LIFE_EVENT_TYPES := ["ask_help", "reply_help"]
+## Complete resident-model reply archive. Unlike the bounded NPC/GM projections this is
+## append-only world state: raw Assistant text is retained for the explicit GM archive route.
+const RESIDENT_ARCHIVE_SCHEMA_VERSION := 1
+const RESIDENT_ARCHIVE_KEY := "resident_archive"
 
 var _gm_export_path := ""
 var _gm_export_signature := ""
@@ -45,6 +49,51 @@ func _ensure_background_gm() -> Dictionary:
 	if not _state.godot.get("background_gm", null) is Dictionary:
 		_state.godot.background_gm = {"schema_version": BACKGROUND_GM_SCHEMA_VERSION, "seq": 0, "proposals": {}}
 	return _state.godot.background_gm
+
+func _resident_archive() -> Dictionary:
+	var archive: Variant = _state.godot.get(RESIDENT_ARCHIVE_KEY, {})
+	return archive if archive is Dictionary else {}
+
+func _ensure_resident_archive() -> Dictionary:
+	var archive := _resident_archive()
+	if archive.is_empty():
+		_state.godot[RESIDENT_ARCHIVE_KEY] = {"schema_version": RESIDENT_ARCHIVE_SCHEMA_VERSION,
+			"world_id": _state.world_id, "order": [], "entries": {}}
+	return _state.godot[RESIDENT_ARCHIVE_KEY]
+
+func record_resident_reply(entry: Dictionary) -> Dictionary:
+	## Called inside the existing world transaction. The request id is the stable archive key;
+	## a replay with identical facts is a no-op, while a conflicting reply is retained under the
+	## same request without deleting the first authoritative record.
+	if not entry.get("world_id", "") == _state.world_id or not entry.get("request_id", "") is String or not _validate_decision_command_id(str(entry.request_id)).ok:
+		return _failure("invalid_resident_archive_identity")
+	if not entry.get("resident_id", "") is String or entry.resident_id not in active_ids():
+		return _failure("invalid_resident_archive_resident")
+	if not entry.get("provider_id", "") is String or not entry.get("original_reply", null) is Dictionary:
+		return _failure("invalid_resident_archive_reply")
+	if not entry.get("assistant_text_parts", []) is Array or not entry.get("assistant_text", "") is String:
+		return _failure("invalid_resident_archive_text")
+	if not entry.get("application", null) is Dictionary:
+		return _failure("invalid_resident_archive_application")
+	var archive := _ensure_resident_archive()
+	if archive.get("world_id", _state.world_id) != _state.world_id:
+		return _failure("resident_archive_world_mismatch")
+	var entries: Dictionary = archive.entries
+	var key := str(entry.request_id)
+	if entries.has(key):
+		var prior: Dictionary = entries[key]
+		if prior.get("original_reply", {}) == entry.original_reply and prior.get("application", {}) == entry.application:
+			return {"ok": true, "duplicate": true, "code": "resident_archive_duplicate", "archive_id": key}
+		if not prior.has("replays"):
+			prior.replays = []
+		for replay in prior.replays:
+			if replay is Dictionary and replay.get("original_reply", {}) == entry.original_reply and replay.get("application", {}) == entry.application:
+				return {"ok": true, "duplicate": true, "code": "resident_archive_duplicate", "archive_id": key}
+		prior.replays.append(entry.duplicate(true))
+		return {"ok": true, "conflict": true, "code": "resident_archive_replay_recorded", "archive_id": key}
+	entries[key] = entry.duplicate(true)
+	archive.order.append(key)
+	return {"ok": true, "code": "resident_archive_recorded", "archive_id": key}
 
 func _background_gm_records() -> Array:
 	var proposals: Dictionary = _background_gm().get("proposals", {})
@@ -558,6 +607,31 @@ func _validate_state(value: Variant) -> Dictionary:
 	for key in ["admissions", "maintainers", "resident_turns"]:
 		if value.godot.has(key) and not value.godot[key] is Dictionary:
 			return _failure("invalid_" + key)
+	var ids: Array = []
+	for person in value.residents:
+		if person is Dictionary:
+			ids.append(str(person.get("stable_id", "")))
+	if value.godot.has(RESIDENT_ARCHIVE_KEY):
+		var archive: Variant = value.godot[RESIDENT_ARCHIVE_KEY]
+		if not archive is Dictionary or archive.get("schema_version") != RESIDENT_ARCHIVE_SCHEMA_VERSION or archive.get("world_id") != value.world_id:
+			return _failure("invalid_resident_archive")
+		if not archive.get("order", null) is Array or not archive.get("entries", null) is Dictionary:
+			return _failure("invalid_resident_archive_shape")
+		var archived_ids: Array = []
+		for archive_id in archive.order:
+			if not archive_id is String or archive_id in archived_ids or not archive.entries.has(archive_id):
+				return _failure("invalid_resident_archive_order")
+			var archived: Variant = archive.entries[archive_id]
+			if not archived is Dictionary or archived.get("request_id", "") != archive_id or archived.get("world_id", "") != value.world_id:
+				return _failure("invalid_resident_archive_entry")
+			if archived.get("resident_id", "") not in ids or not archived.get("provider_id", "") is String or not archived.get("original_reply", null) is Dictionary:
+				return _failure("invalid_resident_archive_identity")
+			if not archived.get("assistant_text_parts", null) is Array or not archived.get("assistant_text", "") is String or not archived.get("application", null) is Dictionary:
+				return _failure("invalid_resident_archive_content")
+			archived_ids.append(archive_id)
+		for archive_id in archive.entries:
+			if archive_id not in archived_ids:
+				return _failure("invalid_resident_archive_orphan")
 	# Older saves have no background-GM projection; both shapes stay loadable.
 	if value.godot.has("background_gm"):
 		var gm_valid := _validate_background_gm(value, value.godot)

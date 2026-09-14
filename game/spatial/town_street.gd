@@ -20,6 +20,7 @@ const SocialSteering = preload("res://spatial/town_social_steering.gd")
 const TownExpansion = preload("res://spatial/town_expansion.gd")
 const PlaceNotice = preload("res://spatial/town_place_notice.gd")
 const PlaceSteering = preload("res://spatial/town_place_steering.gd")
+const TownNavigation = preload("res://spatial/town_navigation.gd")
 var town := Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
@@ -66,6 +67,7 @@ var foraging_steering: RefCounted = null
 var social_steering: RefCounted = null
 var place_notice: Node3D = null
 var place_steering: RefCounted = null
+var town_navigation: Node3D = null
 var place_notice_evidence: Dictionary = {}
 var foraging_layout_status: Dictionary = {}
 var _foraging_layout_attempted := false
@@ -149,6 +151,10 @@ func _ready() -> void:
 	# Mac environment dressing runs only after a successful market load.
 	_load_floor1_environment_dressing()
 	_load_town_expansion()
+	town_navigation = TownNavigation.new()
+	town_navigation.name = "TownNavigation"
+	add_child(town_navigation)
+	town_navigation.build()
 	_build_player()
 	_player.position = Vector3(0, 1.22, 12)
 	_camera_pivot.rotation.y = 0
@@ -232,6 +238,8 @@ func _sync_residents() -> void:
 		actor.get_node("OriginalResidentBody/Torso").material_override = _simple_material(palette[index % palette.size()])
 		actors[id] = actor
 		bodies[id] = body
+		if town_navigation != null:
+			town_navigation.register_body(id, body)
 		var title := Label3D.new()
 		title.position.y = 2.05
 		title.font_size = 38
@@ -373,6 +381,12 @@ func _physics_process(delta: float) -> void:
 			_foraging_exit_targets.erase(id)
 			var target := town.destination(id, job.action)
 			var direction := Vector3.ZERO
+			if town_navigation != null:
+				direction = town_navigation.direction_for(id, str(job.command_id), body, target)
+				if town_navigation.is_unreachable(id):
+					latest = "%s 无法到达当前目的地，已停止移动。" % town.resident(id).name
+				elif not town_navigation.enabled:
+					latest = "导航地图尚未就绪，暂不移动。"
 			## A public-place trip (and its place-bound rest) keeps the accepted place steering.
 			var place_trip: bool = job.action == "travel" or (job.action == "rest" and job.has("place_id"))
 			## Basic-life travel to the resident's own fixed point: eat_ration, harvest_ration, and
@@ -385,7 +399,9 @@ func _physics_process(delta: float) -> void:
 			## collisions and its 20 s work; only the walking route changes, and when the road
 			## method yields no direction the pre-existing bounded local push still applies.
 			var home_trip: bool = _spaced_foraging and (job.action in ["eat_ration", "harvest_ration"] or (job.action == "rest" and not job.has("place_id")))
-			if place_trip and place_steering != null:
+			if town_navigation != null:
+				pass
+			elif place_trip and place_steering != null:
 				direction = place_steering.direction_for(id, str(job.command_id), body, target)
 			elif home_trip and place_steering != null:
 				direction = place_steering.direction_to_point(id, str(job.command_id), body, target)
@@ -418,6 +434,8 @@ func _physics_process(delta: float) -> void:
 			var material_blocked: bool = job.action in ["recover_material", "harvest_ration"] and not moving and direction.length() <= 0.0 and body.position.distance_to(target) > 0.45
 			actor.set_gesture("idle" if (moving or material_blocked) else {"eat_ration": "eat", "rest": "rest", "harvest_ration": "harvest", "repair_edge": "repair", "repair_handle": "repair", "work": "work", "use_tool": "work", "recover_material": "work"}.get(job.action, "idle"))
 		else:
+			if town_navigation != null:
+				town_navigation.clear_route(id)
 			if material_steering != null:
 				material_steering.clear_route(id)
 			if social_steering != null:

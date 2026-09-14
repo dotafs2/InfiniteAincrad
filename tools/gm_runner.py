@@ -39,6 +39,7 @@ lock held by a live run.
 from __future__ import annotations
 
 import argparse
+import copy
 import datetime as dt
 import hashlib
 import json
@@ -72,10 +73,12 @@ GM_FOCUS = {
     'gm-09': 'blocked feedback: how a resident learns of an obstruction and reacts to it',
     'gm-10': 'property and commitments: ownership, contracts, cancellation and accepted work',
 }
+GM_ARCHIVE_FULL_IDS = {'gm-02', 'gm-06'}
 
 EVIDENCE_KIND = 'background_gm_evidence_snapshot'
 EVIDENCE_SCHEMA = 1
 STATE_SCHEMA = 2
+GM_MEMORY_LIMIT = 12
 REQUIRED_BOUNDARY_FLAGS = ('contains_private_reply_reason', 'contains_other_resident_memories')
 DISPOSITIONS = ('observe', 'proposal', 'no_action')
 CLOSED_STATES = ('closed', 'resolved', 'cancelled', 'retracted')
@@ -647,6 +650,179 @@ def blank_state() -> dict:
             'sessions': {}, 'lock_incidents': []}
 
 
+def _gm_archive_script() -> Path:
+    return (ROOT / 'tools' / 'gm_archive.py').resolve()
+
+
+def gm_archive_prompt_access(gm_id: str, source: dict | None = None) -> dict:
+    """Describe the explicit host-bound archive route with executable argv elements."""
+    if gm_id in GM_ARCHIVE_FULL_IDS:
+        permission = 'full_dialogue_and_assistant_text'
+    else:
+        permission = 'delivered_dialogue_only'
+    bound = isinstance(source, dict) and isinstance(source.get('path'), str) \
+        and isinstance(source.get('world_id'), str)
+    save = source.get('path') if bound else None
+    world = source.get('world_id') if bound else None
+    script = _gm_archive_script()
+    source_sha = source.get('sha256') if bound else None
+    argv = [sys.executable, str(script), 'read', '--save', str(save),
+            '--world-id', str(world), '--gm', gm_id, '--cursor', 'N', '--limit', 'N'] \
+        if bound else None
+    if argv is not None and source_sha:
+        argv.extend(['--source-sha256', str(source_sha)])
+    return {'permission': permission, 'available': bound, 'script': str(script),
+            'argv': argv,
+            'source': source if bound else None,
+            'requires_explicit_world_binding': True, 'npc_view_included': False}
+
+
+def gm_memory_prompt_access(gm_id: str, state_dir: Path | str | None = None) -> dict:
+    """Return the real, explicitly bound paging command for this GM's private memory."""
+    script = _gm_archive_script()
+    bound = state_dir is not None
+    directory = str(Path(state_dir).resolve()) if bound else None
+    argv = [sys.executable, str(script), 'memory', '--state-dir', directory,
+            '--gm', gm_id, '--cursor', 'N', '--limit', 'N'] if bound else None
+    return {'available': bound, 'script': str(script), 'state_dir': directory,
+            'argv': argv, 'cursor': 'nonnegative offset', 'limit': 'positive page size',
+            'next_cursor': 'returned by the command'}
+
+
+def _memory_event_key(event: dict) -> tuple:
+    """Return a stable key for idempotently migrating/appending memory events."""
+    return (event.get('kind'), event.get('run_id'), event.get('receipt_sha256'),
+            event.get('issue_id'))
+
+
+def _feedback_event_key(event: dict) -> tuple:
+    return (event.get('run_id'), event.get('receipt_sha256'))
+
+
+def ensure_gm_memory(record: dict, gm_id: str) -> dict:
+    """Ensure one GM's durable, private memory projection exists on its session record.
+
+    The projection is deliberately nested under that GM's record.  It is derived from this
+    runner's authoritative outcomes and host receipts, rather than from a second memory store
+    or from another resident's context.  Existing state is migrated in place so a session id
+    change cannot erase the GM's history.
+    """
+    memory = record.setdefault('memory', {})
+    if not isinstance(memory, dict):
+        memory = {}
+        record['memory'] = memory
+    memory.setdefault('responsibility', GM_FOCUS[gm_id])
+    if not isinstance(memory.get('responsibility'), str):
+        memory['responsibility'] = GM_FOCUS[gm_id]
+    task_history = memory.setdefault('task_history', [])
+    host_feedback = memory.setdefault('host_feedback', [])
+    if not isinstance(task_history, list):
+        task_history = []
+        memory['task_history'] = task_history
+    if not isinstance(host_feedback, list):
+        host_feedback = []
+        memory['host_feedback'] = host_feedback
+
+    # Preserve useful history written by older runner versions.  These are facts already in
+    # this GM's session record; no cross-GM issue or resident context is introduced.
+    known = {_memory_event_key(event) for event in task_history if isinstance(event, dict)}
+    known_runs = {event.get('run_id') for event in task_history
+                  if isinstance(event, dict) and event.get('run_id')}
+    for outcome in record.get('outcomes', []):
+        if not isinstance(outcome, dict):
+            continue
+        event = copy.deepcopy(outcome)
+        event.setdefault('kind', 'legacy_outcome')
+        # A current runner stores a richer task event beside the legacy `outcomes` summary.
+        # Matching the run id prevents that summary from being migrated as a duplicate on the
+        # first reload, while still importing genuinely older records that have no memory event.
+        if (_memory_event_key(event) not in known
+                and event.get('run_id') not in known_runs):
+            task_history.append(event)
+            known.add(_memory_event_key(event))
+            if event.get('run_id'):
+                known_runs.add(event['run_id'])
+        if outcome.get('kind') == 'autonomy_feedback_ack':
+            feedback_event = copy.deepcopy(outcome)
+            feedback_event['kind'] = 'host_feedback'
+            feedback_known = {_feedback_event_key(item) for item in host_feedback
+                              if isinstance(item, dict)}
+            if _feedback_event_key(feedback_event) not in feedback_known:
+                host_feedback.append(feedback_event)
+    # Keep the complete append-only history on disk.  Prompt projections are bounded below;
+    # persistence must not silently discard old tasks or receipts.
+    return memory
+
+
+def read_gm_memory(state: dict, gm_id: str, cursor: int = 0, limit: int = 8) -> dict:
+    """Read one GM's own memory window; cursor and limit affect the view, never stored history.
+
+    The cursor is an offset applied independently to the task and host-feedback streams.  This
+    keeps the two authoritative event types separate while allowing callers to page through all
+    of one GM's old memory without exposing another GM's record.
+    """
+    if gm_id not in state.get('sessions', {}):
+        raise ValueError(f'unknown gm id: {gm_id}')
+    if isinstance(cursor, bool) or not isinstance(cursor, int) or cursor < 0:
+        raise ValueError('memory cursor must be a nonnegative integer')
+    if isinstance(limit, bool) or not isinstance(limit, int) or limit < 1:
+        raise ValueError('memory limit must be a positive integer')
+    memory = ensure_gm_memory(state['sessions'][gm_id], gm_id)
+    task_end = min(cursor + limit, len(memory['task_history']))
+    feedback_end = min(cursor + limit, len(memory['host_feedback']))
+    return {'responsibility': memory['responsibility'],
+            'task_history': copy.deepcopy(memory['task_history'][cursor:task_end]),
+            'host_feedback': copy.deepcopy(memory['host_feedback'][cursor:feedback_end]),
+            'cursor': cursor,
+            'count': (task_end - cursor) + (feedback_end - cursor),
+            'counts': {'task_history': task_end - cursor, 'host_feedback': feedback_end - cursor},
+            'next_cursor': (cursor + limit if task_end < len(memory['task_history'])
+                            or feedback_end < len(memory['host_feedback']) else None)}
+
+
+def gm_memory_projection(state: dict, gm_id: str, limit: int = 8) -> dict:
+    """Return the selected GM's responsibility and latest bounded memory for a prompt."""
+    if isinstance(limit, bool) or not isinstance(limit, int) or limit < 1:
+        raise ValueError('memory limit must be a positive integer')
+    if gm_id not in state.get('sessions', {}):
+        raise ValueError(f'unknown gm id: {gm_id}')
+    limit = min(limit, GM_MEMORY_LIMIT)
+    memory = ensure_gm_memory(state['sessions'][gm_id], gm_id)
+    task_cursor = max(0, len(memory['task_history']) - limit)
+    feedback_cursor = max(0, len(memory['host_feedback']) - limit)
+    return {'responsibility': memory['responsibility'],
+            'task_history': copy.deepcopy(memory['task_history'][task_cursor:]),
+            'host_feedback': copy.deepcopy(memory['host_feedback'][feedback_cursor:])}
+
+
+def remember_gm_task(record: dict, gm_id: str, event: dict) -> None:
+    """Append one factual task event to this GM's durable memory."""
+    memory = ensure_gm_memory(record, gm_id)
+    incoming = copy.deepcopy(event)
+    run_id = incoming.get('run_id')
+    if run_id:
+        for existing in memory['task_history']:
+            if isinstance(existing, dict) and existing.get('run_id') == run_id:
+                # The legacy outcome and the richer task event describe one execution.  Merge
+                # them in place so repeated reloads retain the original decision/result without
+                # growing a second entry.
+                existing.update(incoming)
+                return
+    memory['task_history'].append(incoming)
+
+
+def remember_host_feedback(record: dict, gm_id: str, receipt: dict, receipt_sha256: str,
+                           run_id: str) -> None:
+    """Persist the host receipt facts delivered to this GM, scoped to that GM only."""
+    memory = ensure_gm_memory(record, gm_id)
+    event = {'kind': 'host_feedback', 'run_id': run_id, 'receipt_sha256': receipt_sha256,
+             'receipt': copy.deepcopy(receipt), 'received_utc': utc_iso()}
+    prior = {_feedback_event_key(item) for item in memory['host_feedback']
+             if isinstance(item, dict)}
+    if _feedback_event_key(event) not in prior:
+        memory['host_feedback'].append(event)
+
+
 def load_state(state_dir: Path) -> dict:
     state_dir = Path(state_dir)
     path = state_dir / STATE_FILE
@@ -670,6 +846,7 @@ def load_state(state_dir: Path) -> dict:
         record.setdefault('outcomes', [])
         record.setdefault('unresolved', None)
         record.setdefault('last_status', 'never_dispatched')
+        ensure_gm_memory(record, gm_id)
     return state
 
 
@@ -915,7 +1092,8 @@ def public_snapshot_index(document: dict) -> dict:
 
 
 def issue_projection(record: dict, public_index: dict | None = None,
-                     snapshot_sha: str | None = None) -> dict:
+                     snapshot_sha: str | None = None, compact: bool = False,
+                     state_file: str | None = None) -> dict:
     projection = {'issue_id': record['issue_id'], 'evidence_kind': record['evidence_kind'],
                   'capability_id': record.get('capability_id'),
                   'resident_id': record.get('resident_id'),
@@ -925,6 +1103,35 @@ def issue_projection(record: dict, public_index: dict | None = None,
                   'occurrences': record.get('occurrences'), 'claim': record.get('claim'),
                   'first': record.get('first'), 'latest': record.get('latest'),
                   'provenance': record.get('provenance'), 'summary': record.get('summary')}
+    if compact:
+        # Full provenance and entry bodies remain authoritative in state.json.  The prompt gets
+        # only the identity-bearing facts and a precise local JSON pointer, so a large old
+        # investigation cannot consume the whole observation budget.
+        provenance = record.get('provenance') if isinstance(record.get('provenance'), dict) else {}
+        investigation = provenance.get('investigation') or provenance.get('first_investigation')
+        projection['provenance'] = {
+            key: provenance.get(key) for key in
+            ('origin', 'status', 'verified_in_world', 'proposed_by_gm', 'run_id', 'session_id')
+            if key in provenance}
+        if isinstance(investigation, dict):
+            projection['provenance']['investigation'] = {
+                key: investigation.get(key) for key in
+                ('investigation_id', 'origin', 'world_id', 'source_sha256', 'objective',
+                 'evidence_refs', 'content_digest') if key in investigation}
+            objective = projection['provenance']['investigation'].get('objective')
+            if isinstance(objective, str) and len(objective) > 800:
+                projection['provenance']['investigation']['objective'] = objective[:800]
+                projection['provenance']['investigation']['objective_truncated'] = True
+        summary = projection.get('summary')
+        if isinstance(summary, str) and len(summary) > 1200:
+            projection['summary'] = summary[:1200]
+            projection['summary_truncated'] = True
+        projection['source_ref'] = {
+            'state_file': state_file,
+            'json_pointer': '/issues/' + str(record['issue_id']).replace('~', '~0').replace('/', '~1'),
+            'instruction': 'Read this pointer only if the bounded projection is insufficient; '
+                           'preserve the issue identity and current decision context.'}
+        projection.pop('entry', None)
     entry = record.get('entry') if isinstance(record.get('entry'), dict) else {}
     if record.get('evidence_kind') == PUBLIC_SPEECH_KIND:
         # The exact public source this opaque issue id came from: original identity and speakers,
@@ -1202,7 +1409,7 @@ def common_evidence_block(document: dict, path: Path, digest: str, report: dict,
         payload = {'provenance': provenance, 'evidence': evidence, 'proposals': proposals}
         text = json.dumps(payload, ensure_ascii=False, sort_keys=True, indent=2)
         block = '[COMMON_WORLD_EVIDENCE]\n' + text + '\n[END_COMMON_WORLD_EVIDENCE]\n'
-        if len(block) <= budget:
+        if len(block.encode('utf-8')) <= budget:
             break
         if proposals:
             proposals.pop()
@@ -1224,7 +1431,13 @@ def gm_state_block(state: dict, item: dict, previous: list[dict], run_id: str, d
              'world_id': state['world_id'],
              'session': {'mode': 'resume' if item['session_id'] else 'new',
                          'session_id': item['session_id']},
-             'open_issues': [issue_projection(record, public_index, digest)
+             'memory': gm_memory_projection(state, gm_id),
+             'memory_paging': gm_memory_prompt_access(gm_id, item.get('memory_state_dir')),
+             'archive_access': gm_archive_prompt_access(gm_id, item.get('archive_source')),
+             'open_issues': [issue_projection(record, public_index, digest, compact=True,
+                                              state_file=str(Path(item.get('memory_state_dir', ''))
+                                                             / STATE_FILE)
+                                              if item.get('memory_state_dir') else None)
                              for record in item['_records']],
              'investigation': item.get('investigation'),
              'settled_issue_ids': item['settled_issue_ids'],
@@ -1236,12 +1449,16 @@ def gm_state_block(state: dict, item: dict, previous: list[dict], run_id: str, d
 
 
 def build_prompt(document, evidence_path, digest, report, state, item, run_id, budget) -> str:
-    common = common_evidence_block(document, evidence_path, digest, report, max(2000, budget - 6000))
     record = state['sessions'][item['gm_id']]
-    prompt = common + gm_state_block(state, item, record['outcomes'][-5:], run_id, digest,
-                                     public_snapshot_index(document))
-    if item.get('autonomy_policy'):
-        prompt += autonomy_policy_block(item['autonomy_policy'])
+    gm_block = gm_state_block(state, item, record['outcomes'][-5:], run_id, digest,
+                              public_snapshot_index(document))
+    policy_block = autonomy_policy_block(item['autonomy_policy']) \
+        if item.get('autonomy_policy') else ''
+    tail_bytes = len((gm_block + policy_block).encode('utf-8'))
+    if tail_bytes >= budget:
+        raise ValueError(f'GM state/policy for {item["gm_id"]} exceeds --max-prompt-bytes {budget}')
+    common = common_evidence_block(document, evidence_path, digest, report, budget - tail_bytes)
+    prompt = common + gm_block + policy_block
     if len(prompt.encode('utf-8')) > budget:
         raise ValueError(f'prompt for {item["gm_id"]} exceeds --max-prompt-bytes {budget}')
     return prompt
@@ -1672,6 +1889,21 @@ def observe(args) -> int:
     except (ValueError, OSError) as error:
         return refusal('investigation_invalid', str(error), 4)
     prior_reference = prior_ledger_reference(Path(args.prior_ledger))
+    archive_source = None
+    if args.archive_save is not None:
+        archive_path = Path(args.archive_save).resolve()
+        if not archive_path.is_file():
+            return refusal('archive_save_missing', str(archive_path), 2)
+        try:
+            archive_document = load_json(archive_path)
+        except (OSError, json.JSONDecodeError, UnicodeDecodeError) as error:
+            return refusal('archive_save_invalid', type(error).__name__, 4)
+        if not isinstance(archive_document, dict) or archive_document.get('world_id') != document['world_id']:
+            return refusal('archive_world_mismatch',
+                           'archive save world_id does not match the evidence world', 4)
+        archive_source = {'path': str(archive_path), 'world_id': document['world_id'],
+                          'binding': 'host_explicit_world_save',
+                          'sha256': sha256_file(archive_path)}
 
     if args.dry_run:
         state = load_state(state_dir)
@@ -1689,6 +1921,8 @@ def observe(args) -> int:
         run_id = 'run-' + utc_stamp() + '-' + os.urandom(3).hex()
         for item in plan:
             item['autonomy_policy'] = policy
+            item['archive_source'] = archive_source
+            item['memory_state_dir'] = str(state_dir)
         autonomy_reference = {'policy_id': policy['policy_id'], 'mode': policy['mode'],
                               'origin': AUTONOMY_ORIGIN, 'policy_sha256': sha256_file(policy_path)} \
             if policy else None
@@ -1746,8 +1980,12 @@ def observe(args) -> int:
         plan = plan_observation(state, selected, args.max_issues_per_gm, investigation)
         run_id = 'run-' + utc_stamp() + '-' + os.urandom(3).hex()
         run_dir = state_dir / 'runs' / run_id
+        if archive_source is not None:
+            state['archive_source'] = archive_source
         for item in plan:
             item['autonomy_policy'] = policy
+            item['archive_source'] = archive_source
+            item['memory_state_dir'] = str(state_dir)
         autonomy_reference = {'policy_id': policy['policy_id'], 'mode': policy['mode'],
                               'origin': AUTONOMY_ORIGIN, 'policy_sha256': sha256_file(policy_path)} \
             if policy else None
@@ -1873,6 +2111,15 @@ def observe(args) -> int:
                     aborted = f'{gm_id}:{status}'
             else:
                 record['last_status'] = 'ok'
+            remember_gm_task(record, gm_id, {
+                'kind': 'observation_task', 'run_id': run_id, 'status': status,
+                'issue_ids': list(item['slice']),
+                'dispositions': [entry['disposition'] for entry in outcome.get('results', [])],
+                'results': copy.deepcopy(outcome.get('results', [])),
+                'new_issue_ids': list(outcome.get('new_issue_ids', [])),
+                'claim_conflicts': copy.deepcopy(outcome.get('claim_conflicts', [])),
+                'validation_errors': outcome.get('validation_errors', [])[:5],
+                'snapshot_sha256': digest, 'utc': utc_iso()})
             save_json(run_dir / f'{gm_id}.attempt.json', attempt)
             store_state(state_dir, state)
             results.append(outcome)
@@ -2140,6 +2387,9 @@ def code(args) -> int:
                         'focus': GM_FOCUS[owner], 'resident_body': None,
                         'world_id': state.get('world_id'),
                         'session': {'mode': 'resume' if resume_id else 'new', 'session_id': resume_id},
+                        'memory': gm_memory_projection(state, owner),
+                        'memory_paging': gm_memory_prompt_access(owner, state_dir),
+                        'archive_access': gm_archive_prompt_access(owner, state.get('archive_source')),
                         'open_issues': [issue_projection(issue)],
                         'your_recent_outcomes': owner_record['outcomes'][-5:],
                         'run_id': run_id, 'candidate': relative(candidate), 'base_sha': base_sha,
@@ -2298,6 +2548,13 @@ def code(args) -> int:
                                          'status': status, 'cost': cost,
                                          'changed_files': observed_changed, 'utc': utc_iso()})
         owner_record['outcomes'] = owner_record['outcomes'][-20:]
+        remember_gm_task(owner_record, owner, {
+            'kind': 'coding_task', 'run_id': run_id, 'issue_id': args.issue,
+            'status': status, 'cost': cost, 'changed_files': observed_changed,
+            'worker_answer': copy.deepcopy(answer) if isinstance(answer, dict) else None,
+            'scope_test_failures': [test['exit_code'] for test in scope_tests
+                                    if test['exit_code'] != 0],
+            'validation_errors': validation_errors[:5], 'utc': utc_iso()})
         issue['candidates'].append({'candidate': relative(candidate), 'base_sha': base_sha,
                                     'run_id': run_id, 'status': status, 'owner_gm': owner,
                                     'changed_files': observed_changed,
@@ -2463,11 +2720,15 @@ def acknowledge(args) -> int:
 
 
 def build_feedback_prompt(state: dict, gm_id: str, receipt: dict, receipt_sha: str,
-                          run_id: str) -> str:
+                          run_id: str, state_dir: Path | str | None = None) -> str:
     owned = [issue_projection(issue) for issue in state['issues'].values()
              if issue.get('owner_gm') in (gm_id, None) and issue.get('lifecycle') == 'current']
-    block = {'gm_id': gm_id, 'run_id': run_id, 'receipt_sha256': receipt_sha,
+    block = {'gm_id': gm_id, 'focus': GM_FOCUS[gm_id],
+             'run_id': run_id, 'receipt_sha256': receipt_sha,
              'session_id': state['sessions'][gm_id].get('session_id'),
+             'memory': gm_memory_projection(state, gm_id),
+             'memory_paging': gm_memory_prompt_access(gm_id, state_dir or state.get('state_dir')),
+             'archive_access': gm_archive_prompt_access(gm_id, state.get('archive_source')),
              'owned_or_open_issues': owned[:8]}
     return ('[FEEDBACK_RECEIPT]\n'
             + json.dumps(receipt, ensure_ascii=False, sort_keys=True, indent=2)
@@ -2553,7 +2814,11 @@ def feedback(args) -> int:
         catalog = run_dir / 'models.json'
         save_json(catalog, codex_catalog(STABLE_FEEDBACK_INSTRUCTIONS))
         receipt_sha = sha256_bytes(receipt_bytes)
-        prompt = build_feedback_prompt(state, args.gm, receipt, receipt_sha, run_id)
+        # The host receipt is authoritative feedback.  Persist it before dispatch so a transport
+        # or validation failure still leaves the GM with the feedback on its next turn.
+        remember_host_feedback(record, args.gm, receipt, receipt_sha, run_id)
+        store_state(state_dir, state)
+        prompt = build_feedback_prompt(state, args.gm, receipt, receipt_sha, run_id, state_dir)
         protected = [receipt_path] + [Path(path).resolve() for path in (args.protect or [])]
         guards_before = guard_snapshot(protected)
         resume_id = record.get('session_id') or None
@@ -2615,6 +2880,11 @@ def feedback(args) -> int:
         outcome['status'] = status
         record['outcomes'].append(outcome)
         record['outcomes'] = record['outcomes'][-20:]
+        remember_gm_task(record, args.gm, {
+            'kind': 'feedback_task', 'run_id': run_id, 'status': status,
+            'receipt_sha256': receipt_sha, 'decision': outcome.get('decision'),
+            'next_work': outcome.get('next_work'),
+            'validation_errors': outcome.get('validation_errors', [])[:5], 'utc': utc_iso()})
         record.setdefault('feedback_attempts', []).append(
             {key: outcome[key] for key in ('run_id', 'status', 'cost', 'acknowledged', 'decision',
                                            'next_work', 'usage_measured', 'utc', 'receipt_sha256')})
@@ -2660,6 +2930,9 @@ def build_parser() -> argparse.ArgumentParser:
                         help='codex executable, or a quoted command line (tests inject a fake)')
     shared.add_argument('--codex-home', type=Path,
                         help='CODEX_HOME for the resume preflight and the child process')
+    shared.add_argument('--archive-save', type=Path,
+                        help='explicit host-provided world save for the bounded GM archive route; '
+                             'its world_id must match the evidence/state world')
     shared.add_argument('--timeout', type=int, default=900, help='seconds per dispatch, 30..3600')
     shared.add_argument('--protect', action='append', default=[],
                         help='path whose sha256 must not change during the dispatch')

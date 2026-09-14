@@ -251,26 +251,62 @@ func _on_completed(input_id: String, result_json: String) -> void:
 	if input_id != _pending:
 		return
 	var parsed: Variant = JSON.parse_string(result_json)
-	if not parsed is Dictionary or parsed.get("status") != "Completed":
-		_result = {"ok": false, "code": "brain_run_failed"}
-		return
-	var messages: Array = parsed.get("agent", {}).get("newMessages", [])
-	for index in range(messages.size() - 1, -1, -1):
-		var message: Dictionary = messages[index]
-		if message.get("role") != "Assistant":
+	var assistant_text_parts: Array = []
+	var messages: Array = []
+	if parsed is Dictionary and parsed.get("agent", {}) is Dictionary:
+		var received_messages: Variant = parsed.agent.get("newMessages", [])
+		if received_messages is Array:
+			messages = received_messages
+	for message in messages:
+		if not message is Dictionary or message.get("role") != "Assistant":
 			continue
-		for part: Dictionary in message.get("content", []):
-			if part.get("kind") != "text":
+		var content: Variant = message.get("content", [])
+		if not content is Array:
+			continue
+		for part in content:
+			if part is Dictionary and part.get("kind") == "text":
+				# Keep only actual Assistant text parts. Tool messages, metadata and the
+				# provider envelope never enter the durable world reply.
+				assistant_text_parts.append(str(part.get("text", "")))
+	var received_text := "\n".join(assistant_text_parts)
+	var received := {"assistant_text_parts": assistant_text_parts,
+		"assistant_text": received_text, "model_returned": not assistant_text_parts.is_empty(),
+		"provider_id": _source, "runtime": "OpenGameAgent",
+		"fixture": _source != "opengameagent_live"}
+	if not parsed is Dictionary or parsed.get("status") != "Completed":
+		received["ok"] = false
+		received["code"] = "brain_run_failed"
+		_result = received
+		return
+	# Preserve the historical selection semantics: newest Assistant message first, then
+	# its text parts in order; a malformed candidate is a hard invalid reply and never
+	# falls back to an older Assistant message.
+	for message_index in range(messages.size() - 1, -1, -1):
+		var message: Variant = messages[message_index]
+		if not message is Dictionary or message.get("role") != "Assistant":
+			continue
+		var content: Variant = message.get("content", [])
+		if not content is Array:
+			continue
+		for part_index in content.size():
+			var part: Variant = content[part_index]
+			if not part is Dictionary or part.get("kind") != "text":
 				continue
 			var parser := JSON.new()
 			if parser.parse(str(part.get("text", ""))) != OK:
-				_result = {"ok": false, "code": "brain_response_invalid"}
+				received["ok"] = false
+				received["code"] = "brain_response_invalid"
+				_result = received
 				return
 			var decision: Variant = parser.data
 			if decision is Dictionary:
-				_result = {"ok": true, "decision": decision, "runtime": "OpenGameAgent", "fixture": _source != "opengameagent_live"}
+				received["ok"] = true
+				received["decision"] = decision
+				_result = received
 				return
-	_result = {"ok": false, "code": "brain_response_invalid"}
+	received["ok"] = false
+	received["code"] = "brain_response_invalid"
+	_result = received
 
 func _on_failed(input_id: String, error: String) -> void:
 	if input_id == _pending:

@@ -4,7 +4,67 @@
 
 <a id="mvp-goal-20260914"></a>
 
+## 2026-09-14 · 继续落实全局档案、独立GM与意见评审（进行中）
+
+按用户再次明确的四项要求继续工程；同一时间仅一名Luna执行，主GPT6负责范围与源码复核，没有新增GPT6子评审或定时任务。当前canonical仍为shared:mvp-test-20260914、seq79、十居民，SHA256 756835a0b56db91526949609ffe82f09210f7beeedb9572b6792fe00672d4765；十GM原session均在，GM04此前timeout_unknown如实保留。没有新增居民/GM运行调用，不把工程修改冒充MVP闭环完成。
+
+H75新增完整磁盘记忆和有限prompt投影，观察/编码/反馈均接入，反馈在派发前落盘。主评审实际复现同一outcome/task双记后要求合并保留原决定；分页函数已有，实际可执行的历史读取入口仍需收尾。H74已写Assistant原文保留、世界内resident_archive、失败/过期/冲突记录、GM02/06完整读取与其他GM仅送达对话的查询代码，以及显式archive-save/world绑定。主评审纠正“最新JSON错误时执行更早合法文本”的行为变化；仅保存原文，保留原决定选择语义。新增Python档案/记忆定向7项与原文解析probe通过，尚非完整归档验收。
+
+实际环境卡点为本机缺少game的Mono编译产物，CSharpScript.new无法加载。主AI执行单并行、禁编译服务器的锁文件构建后成功（0警告/0错误），owned进程退出；town_turns_acceptance随后29项通过、0付费调用。记录在tmp/mvp-userflow-20260914/verification。另对seq79只读检查发现life.events有73条带文本和接收者的事件，而新查询对gm01返回0条、gm02仅40条决定历史；旧完整对话未接入查询，已即时报告用户。Luna补入实际对话事件后，主AI同档查询确认gm01可读15条已送达对话、gm02可读55条对话与决定，原档SHA不变；分页增加source_sha256以识别跨页存档变化。完整运行时归档probe首跑有测试脚本类型错误，修复与冷恢复验证进行中，不冒称H74已完成。
+
+H76实现交回：新增record-review/review CLI，GM自测交主AI意见评审、重大问题才block，多文件发布和原GM下一轮效果复查pending；作者报告175项及24项定向检查通过。主AI已实际核对CLI和关键路径，并指出意见须返还原GM记忆、重大block修复上下文及中断后多文件恢复的边界问题。
+
+H74/H75收尾：档案与CLI定向10项通过（tmp/h74-closeout-python.log）。完整TownRuntime在真实测试档副本上的probe第5次成功：正常原文和失败回包均可重新载入，下一轮增加新原文但legacy条数保持2，冷读取不改字节；此前类型错误、参数错误与失败结果全部保留，不把早期失败改写成功。证据为tmp/mvp-userflow-20260914/verification/h74-closeout.runtime5.wrapper.log，owned引擎退出0。原canonical未改，私有probe脚本需留存以便复跑。
+
+H76最终收尾：主AI评审完整内容经稳定review ID写入原GM task_history；重大block后的新候选从记忆读取意见；删除不可达旧verify代码。发布失败仅回滚本次实际替换的文件，新增partial resume后再次失败检查，原已安装文件保持不变。Luna报告最终22项定向通过及py_compile通过，记录tmp/h76-autonomy-20260914-verification.log；主AI复核上述实现。H77由同一名Luna开始统一NavigationMesh/NavigationAgent3D接线与真实碰撞路径验证。尚未启动新的真实居民或GM调用。
+
+为用户明确授权的后续续跑，主AI核对GM04旧PID647644已不存在、未发布候选ZIP仍在，执行recover --usage unknown及acknowledge。原GM04 session未变，旧timeout的usage仍null、cost仍unknown，失败候选未发布也未重试；canonical SHA不变。恢复前备份及两步回执保存在tmp/mvp-userflow-20260914/gm04-continuation。本步骤零provider调用，不把未知费用结清或清零。
+
+真实续跑前的只读dry-run发现默认24000字节提示上限仍会拒绝派发；临时扩大纯离线测量上限后，十GM提示为26851—39371字节。进一步定位gm01新memory投影约1.3KB，主要膨胀是某旧issue provenance达17846字节；common_evidence_block还按字符而非UTF8字节裁剪。已即时报告用户，排队由一名Luna修复prompt投影与实际字节预算，保留完整磁盘来源，不能仅抬高上限。证据在verification/gm-memory-dry-run.json和gm-memory-size-probe.json；没有真实调用。
+
+H77已由原Luna交回，主AI复核真实场景14项通过：market/field双向行走、西侧(-22,0.1,39)回市场、水槽附近0.45m内抵达、地图外目标明确不可达。西侧返回1227帧，水槽533帧；均为存档副本上的真实CharacterBody碰撞移动，非居民自主采用。导航使用实际静态碰撞体烘焙、RVO安全速度、部分路径终点检查，未就绪时停止，不暗退旧steering。日志verification/h77/town-navigation-final4.stdout.log及process.json；owned引擎退出。已保留可复跑H74私有脚本verification/h74_archive_runtime_smoke.gd。
+
+H75提示预算收尾由一名短上下文Luna执行：issue只投影摘要和准确state.json/JSONpointer，完整provenance保留磁盘；common按UTF8字节和GM/policy实际余量生成。默认24KB下十GM均dry-run通过，实际23036—23836字节；长中文/来源样本23145字节，原来源引用和GM04续跑说明均保留。PublicEventLinkageTests四项通过；误写不存在的MemoryPersistenceTests及旧fake集成挂起被如实保留，不冒称整套通过。自有挂起Python已终止。记录verification/prompt-budget。所有工程worker已关闭。
+
+交付清理：主AI补回两个与既有部署原GLB及.import哈希一致的缺失.scn缓存，仅约65KB和202KB；未全仓导入。262个.import被Git标记变化但规范化内容差异为0、无暂存变化；备份原字节后恢复仓库格式。13个本轮自动生成的旧脚本UID sidecar也备份清理，仅保留本轮新导航脚本对应UID。用户原Transfer/deliveries/plugin_probe/patch-h60b均保留。
+
+主AI已将五份档案/寻路运行脚本安装到原gm-trial运行副本，各旧目标与本轮修改前源码逐个核对一致，备份及SHA回执位于tmp/mvp-userflow-20260914/framework-install。canonical保持seq79及原SHA。原GM04另收到main-ai-context.json持久反馈，明确observe_work已发布但未证实采用、net_frame未完成、旧费用未知。Kimi只读账本当前142笔settled、无挂起、无停止标记；这包含其他历史调用，本轮本世界计数仍40 Kimi/38已计量GM+1未知。尚未启动新真实生活轮次，MVP仍未完成。
+
 ## 2026-09-14 · 目标模式、三方讨论与测试范围纠正（进行中）
+
+用户再次明确：三个GPT6可互相评审前进方案，工程执行应使用其他模型以节省token，并要求上网找有公开依据的节省方法安装本机。本次仅复用一名Luna完成安装，没有启动额外GPT6评审。用户另提供的新AGENTS已替换此前全部AGENTS指令，仅保留资源安全与明确授权才委派的规则；不得重新将旧AGENTS历史条款当当前约束。
+
+节省方案已安装并核对：采用上游rtk-ai/rtk正式v0.49.0（Windows），zip SHA256 cb971046598f0e8bd51f6c27780fcdd2c39a4c459a811bd95b0d77ba8c0d7c9f匹配官方checksums，二进制位于C:/Users/quchenxi/.local/bin/rtk.exe，实际--version正确，PATH原已包含此目录。正式版Codex集成是AGENTS/RTK指令方式，不是开发分支的透明hook。root将上游“所有命令都压缩、视为完整输出”模板改为选择性只读摘要；关键证据可随时读取原文，写操作保持原样。遥测保存为不授权，并设置用户RTK_TELEMETRY_DISABLED=1；没有创建守护/定时任务或自动更新。
+
+同时备份并调整本机Codex配置：GPT6型号保持不变，默认推理xhigh→模型目录默认medium，tool_output_token_limit=4000；新增token-review.config.toml（GPT6 medium）和token-worker.config.toml（Luna low）。两个profile已通过本机CLI实际加载；此前试图在features/mcp附加不支持的strict-config得到拒绝，保留为失败检查，不冒称它们通过。原身份/费用/世界存档没有参与本次安装。新任务或重启应用读取新默认，现有任务显式选择可覆盖；不承诺热切换当前任务。
+
+本机三组命令输出字符数对照（统一换行并去除末尾换行）：git diff --stat 872→325，git log -5 970→464，git status --short 190→190；预期失败命令原版和RTK均退出129。只是输出字符减少，不是GPT6实测token或账户账单节省，也不保证上游宣传的60—90%适用于本项目总消耗。原输出、安装摘要、备份和恢复路径在tmp/token-efficiency-20260914/installation-report.json及同目录。主要依据：[RTK正式发布](https://github.com/rtk-ai/rtk/releases/tag/v0.49.0)、[Codex官方配置](https://learn.chatgpt.com/docs/config-file/config-reference)、[GPT6官方指南](https://developers.openai.com/api/docs/guides/latest-model)。原GM功能补丁仍为中断未发布；本次仅完成省量工具和配置交付。
+
+用户最新纠正：普通非定时任务出现阻塞立即报告；所有居民对话和模型实际输出的思想/动机全局保存，GM按职责分配读取权限；每GM独立agent并保留记忆，可用GPT5.3/Luna/DeepSeek；取消固定自动验收，GM自己开发/自测后交主AI意见评审，只有具体重大问题才block，原GM下一轮核对实际效果；NPC改为合理的统一寻路。root与两名GPT6只读复核一致，原自动测试/identity门禁不再是交付前置；普通NPC仍按个人见闻行动，原文归档不等于全知输入。新H74—H77已加入原图，统一3D导航选用NavigationMesh/NavigationAgent3D，尚未实施。参考Godot官方3D导航文档。
+
+随后用户要求核实子agent模型并指出额度压力。已立即中断两个工程子agent，读取本机session_meta/turn_context确认：gm_memory_update（Harvey）和gm_review_flow（Socrates）均为gpt-5.6-luna/high；autonomy_design（Boyle）和continuity_review（Boole）为gpt-6-astra/medium，复核已结束。此前“已指定Luna”现有实际运行记录支持，并非全是GPT6；但本次再次调用两个GPT6复核的消耗如实承担，不隐藏。成本控制后默认单名工程执行、窄任务上下文，不再主动追加GPT6评审子agent。
+
+中断时tools/gm_runner.py及其测试已有记忆投影候选，tools/gm_autonomy.py只有部分流程改动；均未发布，不能宣称新流程已经实现。GM memory完整测试运行已中断，不作通过结论，现存补丁保留。真实Kimi/GM未恢复，原费用未知和seq79存档不变。模型审计记录：tmp/mvp-autonomy-20260914/cost-control-model-audit.json。
+
+约14:29，同一H73新生产GM用量/费用未知已跨连续三轮保持阻塞。首次保存失败与候选；第二轮完成零模型实际身体绕行验证、静态审查和恢复材料；本轮再次读取权威GM状态，coding_attempt=null、coding_unresolved仍为原run的timeout_unknown/reconciled=null，未发布。原GM job与离线引擎均active_processes=0，canonical摘要未变，没有活跃任务可继续等待。用户尚未回答承接该笔未知的问题；系统目标续行提示不视为该授权。已将目标状态标记blocked，MVP未完成，停止自动重复检查。后续需可信费用核对或用户明确承接后，才沿原会话和已准备的限定范围恢复；不重建测试世界、不清零费用、不伪造采用。
+
+约14:27，目标自动续行仅推进零模型离线验收，没有将系统续行提示当作用户承接新费用未知的回答。H73状态仍为timeout_unknown、未恢复/未ack、新付费继续暂停；原GM候选9个变更文件的摘要与上轮归档逐项一致。
+
+H72补充独立物理实证：root复核旧v2发现“经中点”都共线，不构成绕行；七个净空点里(10.5,48.4)位于水槽顶部约1.005米，另有失败撞到铺路，先前“都被House07挡住”的概括不准确。新私有probe排除该高点，对其余六个地面点各测四条明确绕行（共24，12条水平胶囊sweep/沿途地面预检通过），只选择一条执行真实身体行走：(0,53)→(0,46)→(6,46)→(10.5,47.8)。复用场景实际0.25米半径/1.5米高的居民胶囊，以及运行时1.35m/s、重力18、move_and_slide规则；784帧到达(10.401843,0.060838,47.761665)，on_floor=true，0墙壁碰撞。body仅在一次离线fixture初始化时放置于起点，之后没有传送或world host_move，没有模型选择/模型实例/世界安装；不能冒称居民实际到达或采用。
+
+本次证据在tmp/mvp-autonomy-20260914/net-frame-host/out/supervisor-detour-1789367029910547700，真实引擎PID663452正常退出0，job active_processes=0/all_members_exited=true，stderr空，原副本和canonical SHA均未变。说明附近确实有一条物理路线，不是整体无路。当前GM部分候选另在(5.6,50.6)提议新水点，town_street尚未实施它，因此此次旧水槽附近路线不能替代新水点安装后的净空、交互范围和实际移动验证。
+
+候选静态审查：实际保留两文件+786/-3行，town_trade.gd第740行已有trade_options，第2392行又以同名空函数头结尾；源码仍未完成，不宣称解析/行为通过。spatial目录的“ten measured standing positions”文字并无对应新场景测量，间隔1.4米的注释也与部分点横向1米不符，后续必须据实际几何修正或验证。主代理仅记录，不接手核心实现。恢复时应将固定原GM会话、已归档候选和这些精确失败/几何证据交回作者；不重跑十GM观察、不重建世界、不凭借工具支持recover --usage unknown就推定已有用户承接授权。
+
+约14:20，新增H71—H73并暂停新付费运行，MVP未完成。GM04的code-20260914T055705Z-ee75fc从13:57:05开始，于14:12:05被主代理设置的900秒宿主时限终止；0个completed turn，usage=null、cost=unknown、timeout_unknown，原会话01a09e7d-948f-7703-b37c-78f239cd5f20保留。此为新的生产GM编码未知，不能套用此前开发DeepSeek中断例外，也不能当H60已结算局部失败继续。累计40次已结算Kimi、38次已计量GM，另1次GM编码未知；原失败和历史未知均不清零。后续付费需要可信核对或明确承接此未知的范围，当前未自行修改账本或解除guard。
+
+该候选仅修改town_trade.gd和spatial/town_places.gd，尚未写完town_life.gd和town_street.gd；七个.verify临时文件也未清理，全部作为原失败留存。监督独立重跑零模型宿主门禁，out/run-1789366573175105100-529484在Git范围阶段拒绝，owned_pids=[]，没有引擎/行为验收/发布/采用。主代理不接手核心实现、不删除残留来改写失败。15分钟限制不足以容纳这次广度的调查与四文件修改，是编排失误；不能仅加时继续堆功能，应先提供最小物理前提，再把作者回执限制为可完成的增量。
+
+独立物理证据：私有net-frame-host/fullscene使用旧部署的真实TownStreet，确认水槽(10.5,0,50)，32个有限候选中7点有实际居民胶囊净空，但从现有planted_commons道路点的直线与单中点sweep均被ExpansionHouse07外墙阻挡，0条通过；未执行身体行走阶段。此结果不能推断所有绕行路径都不存在。两个GPT6复核同意先证明一条完整可行路线，失败则原位置保持未安装并重审有限试验点；不把净空当可达、不传送、不扩通用导航。执行器早期“作者仍运行”报告为历史状态，已被最新超时回执覆盖。
+
+13:45—13:57真实GM工作：run-20260914T054506Z-121845先建议委托造斧，已计量但未认领；主代理反驳其未满足渔夫明确网框用途，保留原提案。随后原GM04在run-20260914T054909Z-8a2ada提出并认领issue-c96d58e256f6，两个观察均有效、guard无变化，GM累计36→38。第二份原提案是三文件、缓慢再生库存和制作后直接交给委托者；监督审核明确改为必要四文件、全木格栅捞框、新增基础组装规则、有限库存3且不再生、所有权归委托者但实物留制作人直到近距离取回。不是从13Col/1wood自动成交，不授旧职业技能。首次提示体超过24000的预检未调用，随后以有界48000上限容纳25310字节；两者分别保留。
+
+当前安全收尾：GM外层Windows job报告active_processes=0/all_members_exited=true，tracked_frozen=true、guards.changed=[]；进程成员清单不完整和部分后代退出码未知仍保留，不能说每个子进程都成功。私有物理执行器已退出；其实际引擎PIDs657404/658152均退出，原解析失败658416保留。canonical仍为同一seq79、SHA756835a0b56db91526949609ffe82f09210f7beeedb9572b6792fe00672d4765，未安装网框功能；HEAD仍6b2b08fc98b8c4ebe87eee79bc2880135d9bfd2b，暂停窗口再更新本流水和原图。开发计量高水位本次增量4,472,887 raw，累计172,149,986（input170,803,117，cached167,426,560包含于input，output1,346,869）；该开发账不包含本次GM未知，不是费用结算。
 
 约13:40，真实生活第二阶段已暂停：原十居民40累计Kimi请求，本轮20均settled、新增0.4470938元，累计本试验0.7652717元（账本总2.4174613元），0模型错误/新增未知；40 Kimi /36 GM。seq57→79、elapsed233.533333，十身份与全部旧事件逐字段保留，world SHA756835a0b56db91526949609ffe82f09210f7beeedb9572b6792fe00672d4765。二十个真实请求均无Watch选项，0work_observed；当前没有符合条件的生产机会，不能称已采用，也不安排假工作来凑验收。
 
