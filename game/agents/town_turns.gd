@@ -6,12 +6,21 @@ const IDLE_COOLDOWN := 1800.0
 ## Request ids this process failed with the brain's process-local request limit.
 ## Their cause is in force here, so they are never treated as cold-restored.
 var _local_limit_failures: Dictionary = {}
+## Request ids this process received and refused only for an over-long reason.
+## That refusal is a property of the held receipt, but the resident is still held
+## here until a cold restart, so an ordinary turn never becomes an in-process
+## paid retry. This channel is separate from the request-limit one: neither
+## recovery class can spend the other's single allowance.
+var _local_length_failures: Dictionary = {}
 var town
 var save_path := ""
 var brains: Dictionary = {}
 ## Existing model-facing text bounds; disclosed in the request view so the
 ## provider can see them. The authoritative check below stays fail-closed.
 const DECISION_TEXT_LIMIT := 512
+## Structural detail of a received reply refused only for exceeding the unchanged
+## text bound. The one locally recoverable invalid_decision class.
+const REASON_TOO_LONG_DETAIL := "reason_too_long"
 var inflight: Dictionary = {}
 var busy: bool:
 	get:
@@ -106,17 +115,50 @@ func _record(id: String) -> Dictionary:
 	return town._state.godot.get("resident_turns", {}).get(id, {})
 
 func _cold_recoverable(id: String, record: Dictionary) -> bool:
-	## One saved failure has a cause that cannot survive a restart: the brain's
-	## per-process request counter. A checkpoint carrying it is admitted for exactly
-	## one fresh turn, which is never a replay of the settled request. Every other
-	## held state keeps its review boundary, and so does a failure this process
-	## created or a receipt whose own single recovery already failed.
-	if record.get("status", "") != "provider_error" or str(record.get("error", "")) != Brain.SESSION_REQUEST_LIMIT_CODE:
-		return false
+	return not _cold_recovery_class(id, record).is_empty()
+
+func _cold_recovery_class(id: String, record: Dictionary) -> String:
+	## Two saved provider_error receipts describe a cause the next cold process no
+	## longer has: the brain's per-process request counter, and a reply that was
+	## genuinely received and refused only because its reason exceeded the unchanged
+	## text bound. A checkpoint holding one of them is admitted for exactly one
+	## fresh turn under that class's own bookkeeping - two separate attempt/spent
+	## channels, so one class never consumes the other's allowance - and the fresh
+	## turn is a new request, never a replay of the settled one. Every other held
+	## state keeps its review boundary, and so does a failure this process created
+	## or a receipt whose own single recovery failed.
+	if record.get("status", "") != "provider_error":
+		return ""
 	var request_id := str(record.get("request_id", ""))
-	if request_id.is_empty() or str(record.get("session_limit_recovery_spent", "")) == request_id:
+	if request_id.is_empty():
+		return ""
+	var error := str(record.get("error", ""))
+	if error == Brain.SESSION_REQUEST_LIMIT_CODE:
+		if str(record.get("session_limit_recovery_spent", "")) == request_id or str(_local_limit_failures.get(id, "")) == request_id:
+			return ""
+		return "session_request_limit"
+	if error != "invalid_decision" or str(record.get("error_detail", "")) != REASON_TOO_LONG_DETAIL:
+		# A missing or malformed decision and an over-long speech keep their review
+		# boundary exactly as before.
+		return ""
+	# Structural metadata alone is never enough. This class is admitted only when
+	# the archived receipt is a reply the world actually received, carrying the
+	# structured decision whose reason is the over-long one. A missing, failed or
+	# otherwise unrelated receipt stays held.
+	if not _received_overlong_reason(record):
+		return ""
+	if str(record.get("length_recovery_spent", "")) == request_id or str(_local_length_failures.get(id, "")) == request_id:
+		return ""
+	return REASON_TOO_LONG_DETAIL
+
+func _received_overlong_reason(record: Dictionary) -> bool:
+	var receipt: Variant = record.get("accepted_reply", null)
+	if not receipt is Dictionary or not bool(receipt.get("ok", false)):
 		return false
-	return str(_local_limit_failures.get(id, "")) != request_id
+	var decision: Variant = receipt.get("decision")
+	if not decision is Dictionary or not decision.get("reason") is String:
+		return false
+	return decision.reason.length() > DECISION_TEXT_LIMIT
 
 func _own_seq(id: String) -> int:
 	var seq := 0
@@ -217,14 +259,17 @@ func step(requested_id: String = "") -> Dictionary:
 	# Context is bounded; canonical full history remains in the world save.
 	view.experiences = view.get("experiences", []).slice(-16)
 	var seen := _own_seq(id)
-	var recovering := _cold_recoverable(id, previous)
+	var recovery_class := _cold_recovery_class(id, previous)
+	var recovering := not recovery_class.is_empty()
 	var reviews: Array = previous.get("reviews", []).duplicate(true)
 	if recovering:
-		# Keep the exact prior failed receipt, its request id and its epoch as world
-		# evidence before the recovery replaces the working record. If this recovery
-		# turn fails the same way, its own newer receipt is marked denied durably, so
-		# a restart cannot buy another paid retry for it.
+		# Keep the exact prior failed receipt, its structural detail, its request id
+		# and its epoch as world evidence before the recovery replaces the working
+		# record. If this recovery turn fails the same way, its own newer receipt is
+		# marked denied durably in that class's own spent channel, so a restart
+		# cannot buy another paid retry for it.
 		reviews.append({"status": previous.get("status", ""), "error": previous.get("error", ""),
+			"error_detail": previous.get("error_detail", ""),
 			"request_id": previous.get("request_id", ""), "epoch": epoch, "reason": "cold_restored_local_recovery"})
 	var prepared: Dictionary = town.transaction(save_path, func():
 		if not town._state.godot.has("resident_turns"):
@@ -233,7 +278,9 @@ func step(requested_id: String = "") -> Dictionary:
 			"controller_epoch": epoch, "controller_id": previous.get("controller_id", "local:gateway"), "request_number": number, "request_id": request_id,
 			"choice_protocol": 2, "offered_actions": aliases.duplicate(true), "speech_actions": speech_actions.duplicate(), "reviews": reviews,
 			"session_limit_recovery_spent": str(previous.get("session_limit_recovery_spent", "")),
-			"session_limit_recovery_attempt": recovering}
+			"length_recovery_spent": str(previous.get("length_recovery_spent", "")),
+			"session_limit_recovery_attempt": recovery_class == "session_request_limit",
+			"reason_recovery_attempt": recovery_class == REASON_TOO_LONG_DETAIL}
 		return {"ok": true})
 	if not prepared.ok:
 		return prepared
@@ -262,10 +309,13 @@ func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary) 
 		record.command_id = request_id
 		record.provider_command_id = reply.get("command_id", "")
 		record.provenance = reply.get("provenance", "")
-		# The recovery attempt is a property of this one request: it is consumed here
-		# whatever the outcome, and re-decided at the next admission.
+		# Each recovery attempt is a property of this one request, in its own class:
+		# it is consumed here whatever the outcome, and re-decided at the next
+		# admission. The reason class never touches the request-limit allowance.
 		var recovery_attempt := bool(record.get("session_limit_recovery_attempt", false))
+		var reason_recovery_attempt := bool(record.get("reason_recovery_attempt", false))
 		record.session_limit_recovery_attempt = false
+		record.reason_recovery_attempt = false
 		if not reply.get("ok", false):
 			record.status = "provider_error"
 			record.error = reply.get("code", "unknown_provider_error")
@@ -288,7 +338,17 @@ func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary) 
 		if decision.reason.length() > DECISION_TEXT_LIMIT:
 			record.status = "provider_error"
 			record.error = "invalid_decision"
-			record.error_detail = "reason_too_long"
+			record.error_detail = REASON_TOO_LONG_DETAIL
+			# The unchanged 512 contract still refuses this reply. The one fresh
+			# cold-restored turn is consumed here whatever comes of it: a rejection
+			# created in this process is held as local, and a recovery refused the
+			# same way is recorded against its own newer request, so no later cold
+			# start can buy another paid turn for the same held receipt. The
+			# request-limit class keeps its own separate allowance.
+			if reason_recovery_attempt:
+				record.length_recovery_spent = request_id
+			else:
+				_local_length_failures[id] = request_id
 			return {"ok": true, "code": "provider_error"}
 		if decision.has("speech") and not decision.speech is String:
 			record.status = "provider_error"
