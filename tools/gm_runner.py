@@ -208,7 +208,7 @@ OUTPUT CONTRACT: end your turn with exactly one fenced ```json block and nothing
  "receipt_sha256": "<receipt_sha256 copied verbatim from GM STATE: binds this answer to this receipt>",
  "acknowledged": true,
  "decision": "accept" | "repair" | "no_action" | "escalate",
- "next_work": "<=400 chars: what you will do next, or why nothing is needed",
+ "next_work": "briefly state what you will do next, or why nothing is needed (<=400 chars recommended)",
  "evidence_refs": ["<pointer from the receipt that you relied on>"],
  "note": "<optional, <=200 chars>"}
 Use "repair" only when your independent check identifies a bounded defect you will fix yourself
@@ -2775,8 +2775,8 @@ def validate_feedback_output(answer, gm_id: str, receipt_sha256: str = '') -> tu
     if decision not in FEEDBACK_DECISIONS:
         errors.append(f'decision must be one of {FEEDBACK_DECISIONS}')
     next_work = answer.get('next_work')
-    if not isinstance(next_work, str) or not 1 <= len(next_work.strip()) <= 400:
-        errors.append('next_work must be 1..400 characters')
+    if not isinstance(next_work, str) or not next_work.strip():
+        errors.append('next_work must be a non-empty string')
     refs = answer.get('evidence_refs')
     if refs is not None and (not isinstance(refs, list)
                              or any(not isinstance(ref, str) for ref in refs)):
