@@ -2,6 +2,18 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-14 · H79 原GM06改进已被居民使用，等待原GM效果复查
+
+seq102的十GM观察run-20260914T092618Z-18f648已结束：10次已计量、9份原协议有效、GM06原426字符提案因旧长度规则拒收，无新未知，owned全退出。观察期间主AI/Luna做了已记录修复并提交7123433、e5a8b98，故原guard显示git_head/git_worktree变化；保留incomplete及host-change-audit.json，不宣称无修改、不归咎观察GM。修掉长度硬门禁后，主AI按原prompt/来源SHA重新验证GM06原回包，零调用登记其原认领issue-3a61170c7bcd，原invalid_output及用量仍在acknowledged历史。GM09独立提出相同方向issue-727b46421ada，保留两人来源，仅GM06执行。GM04网框issue-20e83bce9799及未调用的source-only候选继续保留。
+
+GM06编码code-20260914T094610Z-0aeb2c使用DeepSeek，原GM身份/记忆连续，独立编码session 01a09f4f-5200-75f2-84e1-3f98e33b6fd4。首次稀疏worktree未取出文件的preflight失败发生在provider之前，补执行read-tree后才真实派发；失败回执另存preflight-source-missing。最终已计量ok、guard无变化、仅town_trade.gd变更、无越界、owned全退出。作者自行验证双求助对象55项、旧标签负对照仅6项姓名检查失败，另报告life31/trade63/specific_help33项通过；不是主AI预建自动验收契约。
+
+主AI实际评审单文件diff：新增Reply to <真实请求者姓名>: <原回复文本>，请求ID、别名、收件人和提交数据不变，无重大问题，advisory放行并返还原GM记忆。安装前后用原seq102存档副本实际加载菜单：36个回复选项均显示正确对象，别名/decision完全一致，副本未写，无引擎错误。备份、作者回包、review.json、release.json及runtime-label-review.json均在tmp/mvp-userflow-20260914/reply-label-next；候选SHA 9c6dc844ea7f3599b764f14feb01916d8a5b79fdf1652c9371def0ba2063b9f5。
+
+随后同一十居民真实运行20次Kimi，seq102→124，新增费用0.6187632元；本世界累计80次Kimi、49次已计量GM及1次历史GM未知。9条新reply_help由居民自行选择，来自园丁、医师、守井人、木匠四名原居民，actual ask/request/recipient绑定可核对，见live-reply-adoption/reply-use-evidence.json。没有强制回复、赠送资源或将网框对话改写合同。身份与旧事件前缀、运行代码、GM state保持，档案49条，engine_error_counts为空、gateway排空、无新未知，owned全退出。不能从9次使用推出所有跑题已消除，仍见居民反复商量同行、未变成共同出行。
+
+独立新Godot进程冷加载seq124副本，全部居民字段、事件、49条档案、pending和居民回合记录均与源一致，canonical字节不变、无引擎错误。见reply-label-next/cold-continuity.json。总账settled为3.5932161元，含此前其他历史；本次从原seq79续跑40次Kimi新增1.1757548元，不把总账182笔当本世界调用数。原GM06的下轮独立效果复查待执行，MVP暂不标完成；无新定时任务。
+
 ## 2026-09-14 · 同档真实续跑至seq102，停止导航分支报错（进行中）
 
 工程检查点7c2b633已在本地提交并安装到原gm-trial，未push。先以canonical副本冷启动真实场景，正常退出且副本字节不变；随后原canonical连续运行2次及18次真实Kimi决策，seq79→84→102。新增20次已结算Kimi，合计本世界60次；这20次费用0.5569916元，既有总账settled为2.9744529元，无新挂起或未知。当前全局resident_archive有29条，包含历史缺失标记，不能把条目数当付费调用数。十名稳定身份字段、原事件前缀、各阶段冻结运行脚本和GM state均保持；两个批次所有自有进程退出。证据tmp/mvp-userflow-20260914/live-canary及live-round-next。第一次launcher将饥饿值也纳入identity全量比较导致false；保留原结果，另存identity-review.json纠正，第二批按稳定字段与旧事件前缀检查均通过。

@@ -783,7 +783,12 @@ func trade_options(id: String) -> Array:
 							# A lesson is completed only by a willing teacher that really can teach it
 							# here; while that is untrue the honest remaining answers are refusal/unsure.
 							continue
-						_option(result, {"id": "reply:" + event.request_id + ":" + choice, "label": "Reply: " + _help_reply_text(id, event, choice), "action": "reply_help", "counterparty": other, "_decision": {"action": "reply_help", "recipient_id": other, "request_id": event.request_id, "choice": choice, "text": _help_reply_text(id, event, choice)}})
+						# The label names the resident whose open request this option answers, so a
+						# responder holding several open asks can attribute its own reply to the right
+						# asker. The label still carries the exact public text the choice would send,
+						# and the alias, decision fields and recipient binding are unchanged.
+						var reply_text := _help_reply_text(id, event, choice)
+						_option(result, {"id": "reply:" + event.request_id + ":" + choice, "label": "Reply to " + resident(other).name + ": " + reply_text, "action": "reply_help", "counterparty": other, "_decision": {"action": "reply_help", "recipient_id": other, "request_id": event.request_id, "choice": choice, "text": reply_text}})
 			if event.get("type") == "ask_help" and event.get("actor_id") == id and not _request_closed(event.request_id):
 				var target_id: String = event.subject_id
 				if target_id in active_ids() and position_of(id).distance_to(position_of(target_id)) <= HEARING_RANGE:
