@@ -261,6 +261,9 @@ func step(requested_id: String = "") -> Dictionary:
 	var seen := _own_seq(id)
 	var recovery_class := _cold_recovery_class(id, previous)
 	var recovering := not recovery_class.is_empty()
+	var migrated_previous := _archive_legacy_previous(id, previous)
+	if not migrated_previous.ok:
+		return migrated_previous
 	var reviews: Array = previous.get("reviews", []).duplicate(true)
 	if recovering:
 		# Keep the exact prior failed receipt, its structural detail, its request id
@@ -295,13 +298,87 @@ func step(requested_id: String = "") -> Dictionary:
 		brain.queue_free()
 	return result
 
+func _reply_archive_entry(id: String, request_id: String, reply: Dictionary, application_status: String,
+		application_code: String, effect: Dictionary = {}, speech_delivery: Dictionary = {}) -> Dictionary:
+	var decision: Variant = reply.get("decision", {})
+	if not decision is Dictionary:
+		decision = {}
+	return {"archive_id": request_id, "world_id": town._state.world_id, "resident_id": id,
+		"request_id": request_id, "provider_id": str(reply.get("provider_id", reply.get("provenance", ""))),
+		"model_returned": bool(reply.get("model_returned", false)),
+		"assistant_text_parts": reply.get("assistant_text_parts", []).duplicate(true) if reply.get("assistant_text_parts", []) is Array else [],
+		"assistant_text": str(reply.get("assistant_text", "")), "original_reply": reply.duplicate(true),
+		"reason": str(decision.get("reason", "")), "speech": str(decision.get("speech", "")),
+		"delivered_text": str(speech_delivery.get("text", "")),
+		"application": {"status": application_status, "code": application_code,
+			"effect": effect.duplicate(true), "speech_delivery": speech_delivery.duplicate(true)}}
+
+func _archive_reply(id: String, request_id: String, reply: Dictionary, application_status: String,
+		application_code: String, effect: Dictionary = {}, speech_delivery: Dictionary = {}) -> Dictionary:
+	return town.transaction(save_path, func():
+		return _record_archive_entry(_reply_archive_entry(id, request_id, reply, application_status,
+			application_code, effect, speech_delivery)))
+
+func _archive_legacy_previous(id: String, previous: Dictionary) -> Dictionary:
+	var old_reply: Variant = previous.get("accepted_reply", null)
+	var old_request := str(previous.get("request_id", ""))
+	if not old_reply is Dictionary or old_request.is_empty():
+		return {"ok": true, "code": "no_legacy_reply"}
+	# A full archive entry already owns this request.  The compatibility migration runs before
+	# replacing `previous`, so re-reading the same accepted reply on every next step must not
+	# manufacture a legacy_incomplete replay beside the complete record.
+	var existing_archive: Variant = town._state.godot.get("resident_archive", null)
+	if existing_archive is Dictionary and existing_archive.get("entries", null) is Dictionary \
+			and existing_archive.entries.has(old_request):
+		return {"ok": true, "duplicate": true, "code": "resident_archive_already_present",
+			"archive_id": old_request}
+	var old_effect: Variant = previous.get("result", {})
+	var effect: Dictionary = old_effect if old_effect is Dictionary else {}
+	var entry := _reply_archive_entry(id, old_request, old_reply,
+		str(previous.get("status", "legacy")), str(effect.get("code", "legacy")), effect,
+		{"attempted": false, "delivered": false, "code": "legacy_incomplete"})
+	entry.source = "legacy_resident_turn"
+	entry.complete = false
+	entry.incomplete_fields = ["provider_id", "assistant_text", "speech_delivery"]
+	return town.transaction(save_path, func(): return _record_archive_entry(entry))
+
+func _record_archive_entry(entry: Dictionary) -> Dictionary:
+	# Lightweight TownLife fixtures and older host adapters do not own the archive method.
+	# Preserve their established turn semantics while the full TownRuntime opts into archiving.
+	if not town.has_method("record_resident_reply"):
+		return {"ok": true, "code": "resident_archive_unsupported_runtime"}
+	return town.record_resident_reply(entry)
+
+func _speech_delivery(id: String, request_id: String, speech: String, effect: Dictionary) -> Dictionary:
+	if not effect.get("ok", false):
+		return {"attempted": not speech.is_empty(), "delivered": false, "code": effect.get("code", "speech_rejected")}
+	for event in town._state.life.get("events", []):
+		if event is Dictionary and event.get("operation_id", "") == request_id and event.get("actor_id", "") == id and event.get("text", "") == speech:
+			return {"attempted": true, "delivered": true, "code": "speech_delivered",
+				"text": str(event.get("text", "")),
+				"event_id": event.get("event_id", ""), "event_seq": event.get("seq", 0),
+				"recipient_ids": event.get("recipient_ids", []).duplicate() if event.get("recipient_ids", []) is Array else []}
+	# Social/visitor actions can deliver their own canonical text when the model omitted
+	# optional speech. That actual event text is the dialogue archive, never a guessed thought.
+	for event in town._state.life.get("events", []):
+		if event is Dictionary and event.get("operation_id", "") == request_id and event.get("actor_id", "") == id and not str(event.get("text", "")).is_empty():
+			return {"attempted": false, "delivered": true, "code": "speech_delivered",
+				"text": str(event.get("text", "")),
+				"event_id": event.get("event_id", ""), "event_seq": event.get("seq", 0),
+				"recipient_ids": event.get("recipient_ids", []).duplicate() if event.get("recipient_ids", []) is Array else []}
+	return {"attempted": false, "delivered": false, "code": "no_dialogue"}
+
 func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary) -> Dictionary:
 	var current := _record(id)
 	if int(current.get("controller_epoch", -1)) != epoch or current.get("request_id", "") != request_id:
-		return {"ok": false, "code": "stale_controller_reply", "actor_id": id}
+		var archived_stale := _archive_reply(id, request_id, reply, "stale_controller_reply", "stale_controller_reply")
+		return {"ok": false, "code": "stale_controller_reply", "actor_id": id, "archive": archived_stale}
 	if current.get("status") != "pending":
 		var duplicate: bool = current.get("accepted_reply", {}) == reply
-		return {"ok": duplicate, "duplicate": duplicate, "code": "duplicate" if duplicate else "reply_conflict", "actor_id": id}
+		if duplicate:
+			return {"ok": true, "duplicate": true, "code": "duplicate", "actor_id": id}
+		var archived_conflict := _archive_reply(id, request_id, reply, "reply_conflict", "reply_conflict")
+		return {"ok": false, "duplicate": false, "code": "reply_conflict", "actor_id": id, "archive": archived_conflict}
 	var aliases: Dictionary = current.offered_actions
 	var applied: Dictionary = town.transaction(save_path, func():
 		var record: Dictionary = town._state.godot.resident_turns[id]
@@ -329,11 +406,19 @@ func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary) 
 					# Created here: the cause is still in force in this process, so this
 					# failure is held rather than treated as a cold-restored one.
 					_local_limit_failures[id] = request_id
+			var archived_provider: Dictionary = _record_archive_entry(_reply_archive_entry(id, request_id, reply,
+				"provider_error", str(record.error), {}, {"attempted": false, "delivered": false, "code": "no_world_action"}))
+			if not archived_provider.ok:
+				return archived_provider
 			return {"ok": true, "code": "provider_error"}
 		var decision = reply.get("decision")
 		if not decision is Dictionary or not decision.get("action") is String or not decision.get("reason") is String:
 			record.status = "provider_error"
 			record.error = "invalid_decision"
+			var archived_invalid: Dictionary = _record_archive_entry(_reply_archive_entry(id, request_id, reply,
+				"provider_error", "invalid_decision", {}, {"attempted": false, "delivered": false, "code": "no_world_action"}))
+			if not archived_invalid.ok:
+				return archived_invalid
 			return {"ok": true, "code": "provider_error"}
 		if decision.reason.length() > DECISION_TEXT_LIMIT:
 			record.status = "provider_error"
@@ -349,15 +434,27 @@ func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary) 
 				record.length_recovery_spent = request_id
 			else:
 				_local_length_failures[id] = request_id
+			var archived_long_reason: Dictionary = _record_archive_entry(_reply_archive_entry(id, request_id, reply,
+				"provider_error", "reason_too_long", {}, {"attempted": false, "delivered": false, "code": "no_world_action"}))
+			if not archived_long_reason.ok:
+				return archived_long_reason
 			return {"ok": true, "code": "provider_error"}
 		if decision.has("speech") and not decision.speech is String:
 			record.status = "provider_error"
 			record.error = "invalid_decision"
+			var archived_invalid_speech: Dictionary = _record_archive_entry(_reply_archive_entry(id, request_id, reply,
+				"provider_error", "invalid_decision", {}, {"attempted": false, "delivered": false, "code": "no_world_action"}))
+			if not archived_invalid_speech.ok:
+				return archived_invalid_speech
 			return {"ok": true, "code": "provider_error"}
 		if decision.has("speech") and decision.speech.length() > DECISION_TEXT_LIMIT:
 			record.status = "provider_error"
 			record.error = "invalid_decision"
 			record.error_detail = "speech_too_long"
+			var archived_long_speech: Dictionary = _record_archive_entry(_reply_archive_entry(id, request_id, reply,
+				"provider_error", "speech_too_long", {}, {"attempted": false, "delivered": false, "code": "no_world_action"}))
+			if not archived_long_speech.ok:
+				return archived_long_speech
 			return {"ok": true, "code": "provider_error"}
 		record.model_choice = decision.action
 		record.action = aliases.get(decision.action, "")
@@ -423,6 +520,11 @@ func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary) 
 			record.replan_policy = "stale_option_v1"
 			record.replan_not_before = town._state.godot.elapsed_seconds + IDLE_COOLDOWN
 			record.next_due = record.replan_not_before
+		var delivered_speech: Dictionary = speech_delivery if not speech_delivery.is_empty() else _speech_delivery(id, request_id, str(decision.get("speech", "")), effect)
+		var archived_settled: Dictionary = _record_archive_entry(_reply_archive_entry(id, request_id, reply,
+			record.status, str(effect.get("code", record.status)), effect, delivered_speech))
+		if not archived_settled.ok:
+			return archived_settled
 		return {"ok": true, "code": record.status, "effect": effect})
 	last_result = {"ok": applied.ok and applied.get("code") == "settled", "actor_id": id,
 		"code": applied.get("code", "save_failed"), "record": _record(id).duplicate(true)}

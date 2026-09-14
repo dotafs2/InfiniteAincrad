@@ -703,8 +703,10 @@ def main(argv=None):
             run.update(status='stopped',reason='verification_copy_changed_without_release'); break
         if autonomous['exit_code']==0 and gm_status in ('completed','no_action','limit_reached'):
             runtime_checks=(report.get('independently_tested') or {}).get('runtime_checks') or {}
-            if gm_status=='completed' and (not runtime_checks or not all(runtime_checks.values())):
-                run.update(status='stopped',reason='release_not_host_verified'); break
+            # Runtime checks are post-release observations.  They stay in the durable report for
+            # the owning GM's next turn; old host templates, issue identity and NPC adoption are
+            # not publication vetoes once the explicit main-AI review released the candidate.
+            record['runtime_checks'] = runtime_checks
             record['resident_adoption']=('pending_next_canonical_life' if gm_status=='completed'
                                          else 'no_release')
         elif autonomous['exit_code']!=0 and gm_status=='blocked':

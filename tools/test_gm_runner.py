@@ -530,6 +530,102 @@ class CoreObservationTests(RunnerTestBase):
         rollouts = list(self.codex_home.glob('sessions/*/*/*/rollout-*.jsonl'))
         self.assertEqual(len(rollouts), 10)
 
+    def test_gm_memory_is_isolated_and_survives_reload_and_session_change(self):
+        state = gm_runner.load_state(self.state)
+        state['world_id'] = 'fixture:memory'
+        gm_one = state['sessions']['gm-01']
+        gm_two = state['sessions']['gm-02']
+        gm_one['session_id'] = '11111111-2222-3333-4444-555555555555'
+        gm_two['session_id'] = '66666666-7777-8888-9999-aaaaaaaaaaaa'
+        gm_one['outcomes'] = [{'kind': 'observation', 'run_id': 'run-memory-1',
+                               'results': [{'issue_id': 'issue-gm-one',
+                                            'summary': 'original GM decision'}]}]
+        gm_runner.remember_gm_task(gm_one, 'gm-01', {
+            'kind': 'observation_task', 'run_id': 'run-memory-1',
+            'issue_ids': ['issue-gm-one'], 'status': 'invalid_output',
+            'validation_errors': ['worker answer was malformed']})
+        gm_runner.remember_host_feedback(
+            gm_one, 'gm-01',
+            {'review_state': 'failed', 'review_comment': 'host test failed'},
+            'receipt-memory-1', 'feedback-memory-1')
+        gm_runner.store_state(self.state, state)
+
+        reloaded = gm_runner.load_state(self.state)
+        reloaded['sessions']['gm-01']['session_id'] = 'bbbbbbbb-cccc-dddd-eeee-ffffffffffff'
+        projection = gm_runner.gm_memory_projection(reloaded, 'gm-01')
+        other = gm_runner.gm_memory_projection(reloaded, 'gm-02')
+        self.assertEqual(projection['responsibility'], gm_runner.GM_FOCUS['gm-01'])
+        self.assertEqual(projection['task_history'][0]['issue_ids'], ['issue-gm-one'])
+        self.assertEqual(len(projection['task_history']), 1)
+        self.assertEqual(projection['task_history'][0]['results'][0]['summary'],
+                         'original GM decision')
+        self.assertEqual(projection['host_feedback'][0]['receipt']['review_state'], 'failed')
+        self.assertNotIn('issue-gm-one', json.dumps(other))
+        self.assertNotIn('host test failed', json.dumps(other))
+        self.assertEqual(len(reloaded['sessions']['gm-01']['memory']['host_feedback']), 1)
+
+    def test_gm_memory_keeps_more_than_prompt_window_across_reloads(self):
+        state = gm_runner.load_state(self.state)
+        record = state['sessions']['gm-03']
+        for index in range(15):
+            gm_runner.remember_gm_task(record, 'gm-03', {
+                'kind': 'observation_task', 'run_id': f'run-memory-{index}',
+                'issue_ids': [f'issue-{index}'], 'status': 'ok'})
+        gm_runner.store_state(self.state, state)
+        for _ in range(3):
+            state = gm_runner.load_state(self.state)
+            gm_runner.store_state(self.state, state)
+        state['sessions']['gm-03']['session_id'] = 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
+        gm_runner.store_state(self.state, state)
+        reloaded = gm_runner.load_state(self.state)
+        memory = reloaded['sessions']['gm-03']['memory']
+        self.assertEqual(len(memory['task_history']), 15)
+        self.assertEqual(memory['task_history'][0]['run_id'], 'run-memory-0')
+        self.assertEqual(memory['task_history'][-1]['run_id'], 'run-memory-14')
+        page = gm_runner.read_gm_memory(reloaded, 'gm-03', cursor=0, limit=5)
+        self.assertEqual([item['run_id'] for item in page['task_history']],
+                         [f'run-memory-{index}' for index in range(5)])
+        self.assertEqual(page['next_cursor'], 5)
+        tail = gm_runner.gm_memory_projection(reloaded, 'gm-03')
+        self.assertEqual(tail['task_history'][-1]['run_id'], 'run-memory-14')
+        self.assertNotIn('run-memory-14', json.dumps(
+            gm_runner.gm_memory_projection(reloaded, 'gm-04')))
+
+    def test_next_round_prompts_include_durable_task_and_host_feedback(self):
+        state = gm_runner.load_state(self.state)
+        state['world_id'] = 'fixture:memory-prompts'
+        record = state['sessions']['gm-01']
+        gm_runner.remember_gm_task(record, 'gm-01', {
+            'kind': 'coding_task', 'run_id': 'code-memory-1', 'issue_id': 'issue-1',
+            'status': 'scope_tests_failed', 'validation_errors': ['test command failed']})
+        gm_runner.remember_host_feedback(
+            record, 'gm-01',
+            {'review_state': 'failed', 'failed_checks': ['scope test'],
+             'review_comment': 'review requires a repair'},
+            'receipt-memory-2', 'feedback-memory-2')
+        item = {'gm_id': 'gm-01', 'session_id': record['session_id'], '_records': [],
+                'investigation': None, 'settled_issue_ids': [],
+                'memory_state_dir': str(self.state)}
+        observation = gm_runner.gm_state_block(
+            state, item, [], 'run-memory-2', 'evidence-memory-2')
+        feedback = gm_runner.build_feedback_prompt(
+            state, 'gm-01', {'review_state': 'failed'}, 'receipt-memory-3', 'feedback-memory-3')
+        for prompt in (observation, feedback):
+            self.assertIn('responsibility', prompt)
+            self.assertIn('code-memory-1', prompt)
+            self.assertIn('scope_tests_failed', prompt)
+            self.assertIn('review requires a repair', prompt)
+            self.assertIn('receipt-memory-2', prompt)
+        block = json.loads(re.search(r'\[GM_STATE\]\n(.*?)\n\[END_GM_STATE\]', observation, re.S).group(1))
+        memory_argv = block['memory_paging']['argv']
+        self.assertEqual(Path(memory_argv[1]).resolve(), (gm_runner.ROOT / 'tools' / 'gm_archive.py').resolve())
+        self.assertIn(str(self.state.resolve()), memory_argv)
+        self.assertEqual(block['archive_access']['available'], False)
+        self.assertNotIn('code-memory-1', gm_runner.gm_state_block(
+            state, {'gm_id': 'gm-02', 'session_id': None, '_records': [],
+                    'investigation': None, 'settled_issue_ids': []}, [],
+            'run-memory-3', 'evidence-memory-3'))
+
     def test_duplicate_import_deduplicates_and_does_not_reloop(self):
         code, first, _ = self.observe('--max-gms', '1')
         self.assertEqual(code, 0, first)

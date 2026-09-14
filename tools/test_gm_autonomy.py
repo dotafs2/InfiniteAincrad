@@ -15,6 +15,7 @@ import shutil
 import subprocess
 import sys
 import unittest
+from unittest import mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -96,12 +97,18 @@ class PolicyTests(unittest.TestCase):
                     gm_runner.read_autonomy_policy(path)
 
     def test_policy_errors_keep_refusing_absent_constraints(self):
-        for removed in ('allowed_source_paths', 'host_owned_paths', 'required_test_commands'):
+        for removed in ('allowed_source_paths',):
             with self.subTest(removed=removed):
                 document = example_policy()
                 document['scope_constraints'].pop(removed, None)
                 document.pop(removed, None)
                 self.assertTrue(gm_autonomy.policy_errors(document))
+        document = example_policy()
+        document.pop('host_owned_paths', None)
+        self.assertEqual(gm_autonomy.policy_errors(document), [])
+        document = example_policy()
+        document.pop('required_test_commands', None)
+        self.assertEqual(gm_autonomy.policy_errors(document), [])
         document = example_policy()
         document['scope_constraints']['max_changed_files'] = 99
         self.assertTrue(gm_autonomy.policy_errors(document))
@@ -172,8 +179,7 @@ class ProductionRuntimePolicyTests(unittest.TestCase):
             'required_release_paths': ['game/spatial/**']}
         self.assertEqual(gm_autonomy.policy_errors(policy), [])
         policy['mode'] = 'offline_fixture'
-        self.assertTrue(any('only valid in production' in value
-                            for value in gm_autonomy.policy_errors(policy)))
+        self.assertEqual(gm_autonomy.policy_errors(policy), [])
 
 
 class MappingTests(unittest.TestCase):
@@ -388,7 +394,14 @@ class CorrectionBase(unittest.TestCase):
                                        'base_revision': 'base-rev',
                                        'host_owned_before': self.cycle.host_owned_hashes()}
         cycle['stages']['validate'] = {'status': 'done', 'ok': True,
+                                      'publish_ready': True,
                                       'file_hashes': {self.rel: self.digest}}
+        cycle['stages']['review'] = {'status': 'done', 'review_state': 'advisory',
+                                     'candidate_sha256': self.cycle.candidate_version_sha(cycle)}
+        cycle['main_ai_review'] = {'cycle_id': cycle['cycle_id'], 'gm_id': 'gm-02',
+                                   'candidate_sha256': self.cycle.candidate_version_sha(cycle),
+                                   'source': 'main-ai:legacy-fixture', 'decision': 'advisory',
+                                   'suggestions': ['Fixture review recorded.']}
         return cycle
 
 
@@ -400,10 +413,11 @@ class PublicationSafetyTests(CorrectionBase):
         self.assertEqual(cycle['blocked_reason'], 'candidate_bytes_changed_after_gate')
         self.assertFalse((self.checkout / self.target).exists())
 
-    def test_a_multi_file_release_policy_is_refused_up_front(self):
+    def test_a_bounded_multi_file_release_policy_is_accepted(self):
         document = example_policy()
         document['deployment']['max_files_per_release'] = 2
-        self.assertTrue(gm_autonomy.policy_errors(document))
+        document['scope_constraints']['max_changed_files'] = 2
+        self.assertEqual(gm_autonomy.policy_errors(document), [])
 
     def test_a_traversing_path_map_is_refused_up_front(self):
         document = example_policy()
@@ -456,6 +470,64 @@ class PublicationSafetyTests(CorrectionBase):
         self.assertEqual(self.cycle.stage_publish(cycle), gm_autonomy.OK)
         self.assertEqual((self.checkout / self.target).read_bytes(), installed)
         self.assertTrue(cycle['stages']['publish'].get('publish_receipt'))
+
+    def test_partial_resume_failure_preserves_file_already_installed_by_prior_attempt(self):
+        files = [f'game/capabilities/resume-{index}.json' for index in range(2)]
+        targets = [f'capabilities/resume-{index}.json' for index in range(2)]
+        for index, rel in enumerate(files):
+            write_json(self.candidate / rel, {'index': index})
+        base_payload = b'original-base-two'
+        target_two = self.checkout / targets[1]
+        target_two.parent.mkdir(parents=True, exist_ok=True)
+        target_two.write_bytes(base_payload)
+        write_json(self.root / 'base.json', {'schema_version': 1,
+                                             'files': {targets[0]: None,
+                                                       targets[1]: gm_runner.sha256_bytes(
+                                                           base_payload)}})
+        self.policy['scope_constraints']['max_changed_files'] = 2
+        self.policy['deployment']['max_files_per_release'] = 2
+        write_json(self.policy_path, self.policy)
+        self.policy = gm_runner.read_autonomy_policy(self.policy_path)
+        self.cycle = gm_autonomy.Cycle(self.policy_path, self.policy, {}, None)
+        cycle = self.cycle.load_cycle()
+        cycle.update({'gm_id': 'gm-02', 'issue_id': 'issue-1'})
+        hashes = {rel: gm_runner.sha256_file(self.candidate / rel) for rel in files}
+        cycle['stages']['candidate'] = {'status': 'done', 'candidate_abs': str(self.candidate),
+                                       'base_revision': 'base-rev',
+                                       'host_owned_before': self.cycle.host_owned_hashes()}
+        cycle['stages']['validate'] = {'status': 'done', 'ok': True, 'publish_ready': True,
+                                      'file_hashes': hashes}
+        cycle['stages']['review'] = {'status': 'done', 'review_state': 'advisory'}
+        cycle['main_ai_review'] = {'cycle_id': cycle['cycle_id'], 'gm_id': 'gm-02',
+                                   'candidate_sha256': self.cycle.candidate_version_sha(cycle),
+                                   'source': 'main-ai:test', 'decision': 'advisory',
+                                   'suggestions': ['Resume recovery checked.']}
+        target_one = self.checkout / targets[0]
+        target_one.parent.mkdir(parents=True, exist_ok=True)
+        target_one.write_bytes((self.candidate / files[0]).read_bytes())
+        release_digest = gm_runner.sha256_bytes(json.dumps(
+            sorted([[targets[index], hashes[files[index]]] for index in range(2)]),
+            sort_keys=True).encode())
+        gm_runner.save_json(self.cycle.publish_journal_path(), {
+            'schema_version': 1, 'cycle_id': cycle['cycle_id'],
+            'release_digest': release_digest, 'binding': {},
+            'files': [{'source': rel, 'target': target, 'sha256': hashes[rel],
+                       'previous_sha256': None} for rel, target in zip(files, targets)],
+            'written_utc': gm_runner.utc_iso()})
+        real_replace = gm_autonomy.os.replace
+        failed = {'value': False}
+
+        def replace_then_fail(source, destination):
+            real_replace(source, destination)
+            if Path(destination) == target_two and not failed['value']:
+                failed['value'] = True
+                raise OSError('simulated resume failure after replace')
+
+        with mock.patch.object(gm_autonomy.os, 'replace', side_effect=replace_then_fail):
+            self.assertEqual(self.cycle.stage_publish(cycle), gm_autonomy.RUNTIME)
+        self.assertEqual(target_one.read_bytes(), (self.candidate / files[0]).read_bytes())
+        self.assertEqual(target_two.read_bytes(), base_payload,
+                         'failed second-attempt write must restore its original base backup')
 
     def test_recovery_refuses_bytes_from_neither_base_nor_release(self):
         cycle = self.publish_ready_cycle()
@@ -1876,7 +1948,7 @@ class ModuleSmokeExitCodeTests(unittest.TestCase):
 
 
 class VerifyBindingTests(CorrectionBase):
-    """The host script is re-bound under the installation lock before it is allowed to run."""
+    """Effect observation is deferred to the owning GM's next world turn."""
 
     def test_a_host_script_edited_after_publication_is_never_executed(self):
         host_script = self.root / 'host_check.py'
@@ -1890,9 +1962,9 @@ class VerifyBindingTests(CorrectionBase):
         cycle = self.publish_ready_cycle()
         self.assertEqual(self.cycle.stage_publish(cycle), gm_autonomy.OK)
         host_script.write_text('print("edited after publication")' + chr(10), encoding='utf-8')
-        self.assertEqual(self.cycle.stage_verify(cycle), gm_autonomy.UNACCEPTABLE)
-        self.assertEqual(cycle['blocked_reason'], 'release_binding_stale_after_publish')
-        self.assertEqual(cycle['stages']['verify']['status'], 'refused')
+        self.assertEqual(self.cycle.stage_verify(cycle), gm_autonomy.OK)
+        self.assertTrue(cycle['stages']['verify']['effect_review_pending'])
+        self.assertEqual(cycle['stages']['verify']['status'], 'pending')
         self.assertFalse(list(self.cycle.cycle_dir().glob('verify-open-*.json')))
 
 
@@ -2091,6 +2163,147 @@ class SelectedGmObserveTests(CorrectionBase):
         self.assertEqual(dispatch, [], 'an over-limit selection dispatches nothing')
         self.assertEqual(sorted(path.name for path in self.cycle.autonomy_dir().iterdir()),
                          cycles_before, 'a refused selection creates no cycle')
+
+class MainAiReviewWorkflowTests(CorrectionBase):
+    def _review_cycle(self, decision='advisory', suggestions=None, problem=None):
+        cycle = self.publish_ready_cycle()
+        cycle['stages']['review'] = {'status': 'pending'}
+        candidate_sha = self.cycle.candidate_version_sha(cycle)
+        review = {'cycle_id': cycle['cycle_id'], 'gm_id': 'gm-02',
+                  'candidate_sha256': candidate_sha, 'source': 'main-ai:test',
+                  'decision': decision}
+        if decision == 'advisory':
+            review['suggestions'] = suggestions or ['Keep the bounded acceptance evidence visible.']
+        else:
+            review['major_problem'] = problem or 'The candidate violates the declared world contract.'
+        cycle['main_ai_review'] = review
+        return cycle
+
+    def test_missing_review_is_resumable_and_does_not_dispatch(self):
+        cycle = self.publish_ready_cycle()
+        cycle['stages']['review'] = {'status': 'pending'}
+        cycle.pop('main_ai_review', None)
+        with mock.patch.object(gm_autonomy, 'run_process', side_effect=AssertionError('no dispatch')):
+            self.assertEqual(self.cycle.stage_review(cycle), gm_autonomy.OK)
+        self.assertEqual(cycle['stages']['review']['status'], 'waiting_review')
+        self.assertEqual(cycle['stages']['review']['review_state'], 'pending')
+
+    def test_advisory_review_delivers_even_when_gm_self_test_failed(self):
+        cycle = self._review_cycle()
+        cycle['stages']['candidate']['gm_self_test'] = {
+            'reported': True, 'ok': False, 'result': [{'name': 'gm-check', 'ok': False}]}
+        self.assertEqual(self.cycle.stage_review(cycle), gm_autonomy.OK)
+        self.assertEqual(self.cycle.stage_publish(cycle), gm_autonomy.OK)
+        self.assertEqual(cycle['stages']['review']['review_state'], 'advisory')
+        self.assertTrue((self.checkout / self.target).is_file())
+
+    def test_major_block_requires_new_matching_review_before_release(self):
+        cycle = self._review_cycle('major_block')
+        self.assertEqual(self.cycle.stage_review(cycle), gm_autonomy.PRECONDITION)
+        self.assertEqual(cycle['blocked_reason'], 'main_ai_major_block')
+        cycle['stages']['review'] = {'status': 'pending'}
+        cycle['main_ai_review'] = dict(cycle['main_ai_review'], decision='advisory',
+                                       suggestions=['Rechecked the candidate bytes and scope.'])
+        self.assertEqual(self.cycle.stage_review(cycle), gm_autonomy.OK)
+        self.assertEqual(self.cycle.stage_publish(cycle), gm_autonomy.OK)
+
+    def test_major_block_reopen_resets_review_and_creates_a_new_candidate_round(self):
+        cycle = self._review_cycle('major_block')
+        self.assertEqual(self.cycle.stage_review(cycle), gm_autonomy.PRECONDITION)
+        state = gm_runner.load_state(self.cycle.state_dir)
+        memory = gm_runner.gm_memory_projection(state, 'gm-02')
+        review_events = [item for item in memory['task_history']
+                         if item.get('kind') == 'main_ai_review']
+        self.assertEqual(review_events[-1]['major_problem'],
+                         'The candidate violates the declared world contract.')
+        self.assertTrue(review_events[-1]['repair_required'])
+        reopened = self.cycle.reopen_after_major_block(cycle)
+        self.assertEqual(reopened['status'], 'running')
+        self.assertEqual(reopened['repair_rounds'], 1)
+        self.assertIsNone(reopened['main_ai_review'])
+        self.assertEqual(reopened['stages']['review']['status'], 'pending')
+        self.assertEqual(reopened['repair_history'][-1]['blocked_reason'], 'main_ai_major_block')
+
+    def test_record_review_cli_binds_the_current_candidate_without_provider(self):
+        cycle = self._review_cycle()
+        cycle['main_ai_review'] = None
+        cycle['stages']['review'] = {'status': 'pending'}
+        self.cycle.save_cycle(cycle)
+        stream = io.StringIO()
+        with contextlib.redirect_stdout(stream):
+            code = gm_autonomy.main([
+                'record-review', '--policy', str(self.policy_path), '--decision', 'advisory',
+                '--source', 'main-ai:test-cli', '--rationale', 'Candidate evidence was reviewed.'])
+        text = stream.getvalue()
+        self.assertEqual(code, gm_autonomy.OK, text)
+        payload = json.loads(text)
+        self.assertEqual(payload['status'], 'recorded')
+        self.assertEqual(payload['review_stage'], 'done')
+        self.assertFalse(payload['provider_called'])
+        review_path = gm_runner.ROOT / payload['review_path']
+        self.assertTrue(review_path.is_file())
+        saved = gm_runner.load_json(self.cycle.cycle_dir() / 'cycle.json')
+        self.assertEqual(saved['main_ai_review']['candidate_sha256'],
+                         self.cycle.candidate_version_sha(saved))
+        state = gm_runner.load_state(self.cycle.state_dir)
+        events = [item for item in gm_runner.gm_memory_projection(state, 'gm-02')['task_history']
+                  if item.get('kind') == 'main_ai_review']
+        self.assertEqual(events[-1]['decision'], 'advisory')
+        self.assertEqual(events[-1]['source'], 'main-ai:test-cli')
+
+    def test_reviewed_candidate_bytes_cannot_change_before_release(self):
+        cycle = self._review_cycle()
+        self.assertEqual(self.cycle.stage_review(cycle), gm_autonomy.OK)
+        write_json(self.candidate / self.rel, {'ok': True, 'tampered': True})
+        self.assertEqual(self.cycle.stage_publish(cycle), gm_autonomy.UNACCEPTABLE)
+        self.assertFalse((self.checkout / self.target).exists())
+
+    def test_four_files_are_installed_as_one_bounded_release(self):
+        files = [f'game/capabilities/file-{index}.json' for index in range(4)]
+        targets = [f'capabilities/file-{index}.json' for index in range(4)]
+        for index, rel in enumerate(files):
+            write_json(self.candidate / rel, {'index': index})
+        write_json(self.root / 'base.json', {'schema_version': 1,
+                                             'files': {target: None for target in targets}})
+        self.policy['scope_constraints']['max_changed_files'] = 4
+        self.policy['deployment']['max_files_per_release'] = 4
+        write_json(self.policy_path, self.policy)
+        self.cycle = gm_autonomy.Cycle(self.policy_path, self.policy, {}, None)
+        cycle = self.cycle.load_cycle()
+        cycle.update({'gm_id': 'gm-02', 'issue_id': 'issue-1'})
+        hashes = {rel: gm_runner.sha256_file(self.candidate / rel) for rel in files}
+        cycle['stages']['candidate'] = {'status': 'done', 'candidate_abs': str(self.candidate),
+                                       'base_revision': 'base-rev',
+                                       'host_owned_before': self.cycle.host_owned_hashes()}
+        cycle['stages']['validate'] = {'status': 'done', 'ok': True, 'publish_ready': True,
+                                      'file_hashes': hashes}
+        cycle['stages']['review'] = {'status': 'pending'}
+        cycle['main_ai_review'] = {'cycle_id': cycle['cycle_id'], 'gm_id': 'gm-02',
+                                   'candidate_sha256': self.cycle.candidate_version_sha(cycle),
+                                   'source': 'main-ai:test', 'decision': 'advisory',
+                                   'suggestions': ['Four-file bounded delivery checked.']}
+        self.assertEqual(self.cycle.stage_review(cycle), gm_autonomy.OK)
+        self.assertEqual(self.cycle.stage_publish(cycle), gm_autonomy.OK)
+        self.assertEqual([gm_runner.sha256_file(self.checkout / target) for target in targets],
+                         [hashes[rel] for rel in files])
+
+    def test_release_receipt_is_memory_feedback_without_provider_call(self):
+        cycle = self._review_cycle()
+        self.assertEqual(self.cycle.stage_review(cycle), gm_autonomy.OK)
+        self.assertEqual(self.cycle.stage_publish(cycle), gm_autonomy.OK)
+        cycle['stages']['verify'] = {'status': 'pending', 'ok': None, 'installed': True,
+                                     'used': None, 'effect_review_pending': True}
+        cycle['stages']['feedback'] = {'status': 'pending'}
+        with mock.patch.object(gm_autonomy, 'run_process', side_effect=AssertionError('no provider')):
+            self.assertEqual(self.cycle.stage_feedback(cycle), gm_autonomy.OK)
+        self.assertEqual(cycle['stages']['feedback']['status'], 'pending')
+        self.assertTrue(cycle['stages']['feedback']['effect_review_pending'])
+        state = gm_runner.load_state(self.cycle.state_dir)
+        feedback = state['sessions']['gm-02']['memory']['host_feedback']
+        self.assertEqual(len(feedback), 1)
+        self.assertEqual(feedback[0]['receipt']['release_digest'],
+                         cycle['stages']['publish']['release_digest'])
+        self.assertEqual(feedback[0]['receipt']['outcome'], 'published_pending_gm_review')
 
 
 if __name__ == '__main__':

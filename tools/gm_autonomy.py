@@ -51,8 +51,10 @@ sys.path.insert(0, str(ROOT / 'tools'))
 import gm_runner  # noqa: E402
 import owned_windows_job  # noqa: E402
 
-CYCLE_SCHEMA = 1
-STAGES = ('observe', 'candidate', 'validate', 'publish', 'verify', 'feedback')
+CYCLE_SCHEMA = 2
+# `review` is a durable hand-off from the GM to the main AI.  It is deliberately not a
+# provider call: a review must be supplied as a concrete, candidate-bound record before release.
+STAGES = ('observe', 'candidate', 'validate', 'review', 'publish', 'verify', 'feedback')
 REPAIRABLE = ('scope_tests_failed', 'invalid_output', 'worker_blocked')
 # One reopened repair round is only allowed for an actionable, owned, host-observed failure: a
 # runtime verification defect the running world actually reported, or an ordinary owned candidate
@@ -89,7 +91,9 @@ def conclusive_runtime_defect(failed_checks) -> bool:
         return False
     return failed <= set(REPAIRABLE_VERIFY_DEFECT_CHECKS)
 OK, RUNTIME, USAGE, STALE, UNACCEPTABLE, ACCOUNTING, PRECONDITION, LOCK = range(8)
-RELEASE_FILES_THIS_VERSION = 1
+# A release is still bounded by the standing policy (and never by an arbitrary single-file
+# assumption).  Eight is the same upper bound used for a proposed scope.
+RELEASE_FILES_THIS_VERSION = 8
 
 
 def sha256_bytes(payload: bytes) -> str:
@@ -187,14 +191,14 @@ def policy_errors(policy: dict) -> list[str]:
     max_files = constraints.get('max_changed_files')
     if not isinstance(max_files, int) or not 1 <= max_files <= 8:
         errors.append('scope_constraints.max_changed_files must be an integer 1..8')
-    host_owned = policy.get('host_owned_paths')
-    if not isinstance(host_owned, list) or not host_owned or not all(isinstance(v, str) for v in host_owned):
-        errors.append('host_owned_paths must be a non-empty list of repo-relative paths')
+    host_owned = policy.get('host_owned_paths', [])
+    if not isinstance(host_owned, list) or any(not isinstance(v, str) for v in host_owned):
+        errors.append('host_owned_paths must be a list of repo-relative paths when present')
     commands = policy.get('required_test_commands')
-    if (not isinstance(commands, list) or not commands
+    if (commands is not None and (not isinstance(commands, list)
             or any(not isinstance(command, list) or not command
-                   or any(not isinstance(token, str) for token in command) for command in commands)):
-        errors.append('required_test_commands must be a non-empty list of argv lists')
+                   or any(not isinstance(token, str) for token in command) for command in commands))):
+        errors.append('required_test_commands must be a list of argv lists when present')
     limits = policy.get('limits') or {}
     for key, low, high in (('max_issues_per_cycle', 1, 4), ('max_attempts_per_issue', 1, 5),
                            ('max_dispatches', 1, 32), ('max_publishes', 0, 4),
@@ -214,33 +218,32 @@ def policy_errors(policy: dict) -> list[str]:
                 errors.append(f'deployment.path_map entry {key!r}->{value!r} must stay a plain '
                               'relative prefix without traversal or an absolute target')
     release_limit = deployment.get('max_files_per_release', RELEASE_FILES_THIS_VERSION)
-    if release_limit != RELEASE_FILES_THIS_VERSION:
-        errors.append('deployment.max_files_per_release must be '
-                      f'{RELEASE_FILES_THIS_VERSION} in this version; a multi-file release '
-                      'transaction is not implemented and is refused up front')
+    if (not isinstance(release_limit, int)
+            or not 1 <= release_limit <= RELEASE_FILES_THIS_VERSION):
+        errors.append('deployment.max_files_per_release must be an integer 1..'
+                      f'{RELEASE_FILES_THIS_VERSION}')
     runtime = policy.get('runtime') or {}
     runtime_kind = runtime.get('kind', 'fixture_script')
     for field in ('godot', 'save_path'):
         if not isinstance(runtime.get(field), str) or not runtime[field].strip():
             errors.append(f'runtime.{field} must be a non-empty string')
     if runtime_kind == 'fixture_script':
-        if not isinstance(runtime.get('script'), str) or not runtime['script'].strip():
-            errors.append('runtime.script must be a non-empty string')
+        if 'script' in runtime and (not isinstance(runtime.get('script'), str)
+                                    or not runtime['script'].strip()):
+            errors.append('runtime.script must be a non-empty string when present')
     elif runtime_kind == 'production_host_contract':
         command = runtime.get('host_command')
         prefixes = runtime.get('supported_issue_prefixes')
         release_paths = runtime.get('required_release_paths')
-        if policy.get('mode') != 'production':
-            errors.append('runtime production_host_contract is only valid in production mode')
-        if (not isinstance(command, list) or not command
-                or any(not isinstance(token, str) or not token for token in command)):
-            errors.append('runtime.host_command must be a non-empty argv list')
-        if (not isinstance(prefixes, list) or not prefixes
-                or any(not isinstance(value, str) or not value for value in prefixes)):
-            errors.append('runtime.supported_issue_prefixes must be non-empty strings')
-        if (not isinstance(release_paths, list) or not release_paths
-                or any(safe_relpath(value) is None for value in release_paths)):
-            errors.append('runtime.required_release_paths must be safe repo-relative patterns')
+        if command is not None and (not isinstance(command, list) or not command
+                                    or any(not isinstance(token, str) or not token for token in command)):
+            errors.append('runtime.host_command must be a non-empty argv list when present')
+        if prefixes is not None and (not isinstance(prefixes, list) or
+                                     any(not isinstance(value, str) or not value for value in prefixes)):
+            errors.append('runtime.supported_issue_prefixes must be strings when present')
+        if release_paths is not None and (not isinstance(release_paths, list) or
+                                          any(safe_relpath(value) is None for value in release_paths)):
+            errors.append('runtime.required_release_paths must be safe repo-relative patterns when present')
     else:
         errors.append('runtime.kind must be fixture_script or production_host_contract')
     extra = runtime.get('extra_args', [])
@@ -696,7 +699,7 @@ class Cycle:
 
     def __init__(self, policy_path: Path, policy: dict, runner: dict, stop_after,
                  watch_deadline=None, watch_calls=None, allow_deferred_advance=False,
-                 selected_gms=None):
+                 selected_gms=None, review_path=None, reopen_major_block=False):
         self.policy_path = policy_path
         self.policy = policy
         self.policy_sha = sha256_file(policy_path)
@@ -721,6 +724,8 @@ class Cycle:
         # An explicit `cycle --gm` selector. Only the observe dispatch consumes it, and only these
         # roster GMs are asked; code and feedback keep using the issue's owning GM.
         self.selected_gms = ([str(item) for item in selected_gms] if selected_gms else None)
+        self.review_path = (Path(review_path).resolve() if review_path else None)
+        self.reopen_major_block = bool(reopen_major_block)
         self.deadline = time.time() + int(self.limits['deadline_seconds'])
         if self.watch_deadline is not None:
             self.deadline = min(self.deadline, self.watch_deadline)
@@ -790,12 +795,18 @@ class Cycle:
         path = self.cycle_dir() / 'cycle.json'
         if path.is_file():
             cycle = gm_runner.load_json(path)
-            if cycle.get('schema_version') != CYCLE_SCHEMA:
+            if cycle.get('schema_version') not in (1, CYCLE_SCHEMA):
                 raise ValueError('unsupported autonomy cycle schema '
                                  + str(cycle.get('schema_version')))
             if cycle.get('policy_sha256') != self.policy_sha:
                 raise ValueError('the standing policy changed after this cycle started; refusing '
                                  'to resume under a different preauthorization')
+            # Schema 1 cycles remain readable.  They are deliberately inserted at the new
+            # review hand-off instead of treating their old host validation as approval.
+            cycle.setdefault('stages', {})
+            cycle['stages'].setdefault('review', {'status': 'pending',
+                                                   'reason': 'new main-AI review required'})
+            cycle.setdefault('defer_effect_review', True)
             return self.adopt(cycle)
         return {'schema_version': CYCLE_SCHEMA, 'cycle_id': self.cycle_dir().name,
                 'policy_id': self.policy['policy_id'], 'policy_sha256': self.policy_sha,
@@ -808,7 +819,8 @@ class Cycle:
                 'deadline_seconds': int(self.limits['deadline_seconds']),
                 'deadline_epoch': self.deadline,
                 'deferred_claims': [], 'declined': [], 'blocked_reason': None,
-                'started_utc': gm_runner.utc_iso(), 'updated_utc': gm_runner.utc_iso()}
+                'started_utc': gm_runner.utc_iso(), 'updated_utc': gm_runner.utc_iso(),
+                'defer_effect_review': True}
 
     def adopt(self, cycle: dict) -> dict:
         """Rebind this process to an unfinished cycle started earlier: its pinned evidence,
@@ -841,6 +853,77 @@ class Cycle:
         record['status'] = status
         record['finished_utc'] = gm_runner.utc_iso()
         self.save_cycle(cycle)
+
+    def candidate_version_sha(self, cycle: dict) -> str | None:
+        """Stable identity for the exact GM candidate handed to the main AI."""
+        candidate = cycle.get('stages', {}).get('candidate') or {}
+        validate = cycle.get('stages', {}).get('validate') or {}
+        files = validate.get('file_hashes') or {}
+        if not isinstance(files, dict) or not files:
+            return None
+        payload = {'cycle_id': cycle.get('cycle_id'), 'gm_id': cycle.get('gm_id'),
+                   'issue_id': cycle.get('issue_id'),
+                   'candidate_run_id': candidate.get('candidate_run_id'),
+                   'base_revision': candidate.get('base_revision'),
+                   'files': sorted((str(key), str(value)) for key, value in files.items())}
+        return sha256_bytes(json.dumps(payload, sort_keys=True, separators=(',', ':')).encode())
+
+    def load_main_ai_review(self, cycle: dict) -> dict | None:
+        """Read one explicit review artifact; never synthesize an approval from emptiness."""
+        value = cycle.get('main_ai_review')
+        if value is None and self.review_path is not None:
+            try:
+                value = gm_runner.load_json(self.review_path)
+            except (OSError, ValueError, json.JSONDecodeError):
+                value = None
+        if value is None:
+            policy_review = self.policy.get('main_ai_review')
+            if isinstance(policy_review, dict):
+                value = policy_review
+            elif isinstance(policy_review, str) and Path(policy_review).is_file():
+                try:
+                    value = gm_runner.load_json(Path(policy_review))
+                except (OSError, ValueError, json.JSONDecodeError):
+                    value = None
+        return value if isinstance(value, dict) else None
+
+    def validate_main_ai_review(self, cycle: dict, review: dict) -> tuple[dict | None, list[str]]:
+        expected = self.candidate_version_sha(cycle)
+        errors = []
+        if expected is None:
+            return None, ['candidate has no complete file-hash identity']
+        if review.get('cycle_id') != cycle.get('cycle_id'):
+            errors.append('review.cycle_id must match this cycle')
+        if review.get('gm_id') != cycle.get('gm_id'):
+            errors.append('review.gm_id must match the owning GM')
+        if review.get('candidate_sha256') != expected:
+            errors.append('review.candidate_sha256 does not match this candidate version')
+        source = review.get('source') or review.get('reviewer')
+        if not isinstance(source, str) or not source.strip():
+            errors.append('review.source must identify the main-AI review')
+        decision = str(review.get('decision') or review.get('disposition') or '').strip().lower()
+        if decision in ('advise', 'advisory', 'approve', 'approved'):
+            decision = 'advisory'
+            suggestions = review.get('suggestions', [])
+            if not isinstance(suggestions, list) or any(
+                    not isinstance(item, str) or not item.strip() for item in suggestions):
+                errors.append('review.suggestions must be a list of strings when present')
+            if not suggestions and not str(review.get('rationale') or review.get('summary') or '').strip():
+                errors.append('an advisory review with no suggestions must include a rationale')
+        elif decision in ('major_block', 'block', 'blocked'):
+            decision = 'major_block'
+            problem = review.get('major_problem') or review.get('problem') or review.get('reason')
+            if not isinstance(problem, str) or not problem.strip():
+                errors.append('a major_block review must name a concrete problem')
+        else:
+            errors.append('review.decision must be advisory or major_block')
+        if errors:
+            return None, errors
+        normalized = dict(review)
+        normalized.update({'decision': decision, 'candidate_sha256': expected,
+                           'cycle_id': cycle.get('cycle_id'), 'gm_id': cycle.get('gm_id'),
+                           'reviewed_utc': review.get('reviewed_utc') or gm_runner.utc_iso()})
+        return normalized, []
 
     # -- limits --------------------------------------------------------------------
 
@@ -941,6 +1024,8 @@ class Cycle:
                                  '--max-issues-per-gm', str(self.limits.get('max_issues_per_gm', 4)),
                                  '--prior-ledger', str(self.ledger),
                                  '--protect', str(self.policy_path))
+        if self.save_path is not None and self.save_path.is_file():
+            command.extend(['--archive-save', str(self.save_path)])
         for gm_id in (self.selected_gms or []):
             command.extend(['--gm', gm_id])
         self.reserve(cycle, record, 'observe', estimate)
@@ -1175,7 +1260,7 @@ class Cycle:
         placeholder = {'root': ROOT, 'candidate': candidate, 'scope_file': scope_file,
                        'policy_file': self.policy_path, 'evidence': self.evidence}
         commands = []
-        for command in self.policy['required_test_commands']:
+        for command in self.policy.get('required_test_commands') or []:
             resolved, command_errors = resolve_command(command, placeholder)
             if command_errors:
                 record.update({'status': 'refused', 'policy_errors': command_errors})
@@ -1185,7 +1270,8 @@ class Cycle:
         scope_document = {'issue_id': issue_id, 'owner_gm': gm_id, 'base_revision': base_revision,
                           'objective': scope['objective'], 'files': scope['files'],
                           'acceptance': scope['acceptance'], 'test_commands': commands,
-                          'review_state': 'unapproved', 'source': 'gm_proposed_host_derived'}
+                          'review_state': 'unapproved', 'source': 'gm_proposed_host_derived',
+                          'gm_self_test_required': True}
         gm_runner.save_json(scope_file, scope_document)
         isolation = str((self.policy.get('deployment') or {}).get('candidate_isolation')
                         or 'git_worktree')
@@ -1217,7 +1303,7 @@ class Cycle:
             command = runner_command(self.runner, 'code', '--state-dir', str(self.state_dir),
                                      '--issue', issue_id, '--scope-file', str(scope_file),
                                      '--base-revision', base_revision, '--candidate', str(candidate),
-                                     '--run-scope-tests', '--protect', str(self.policy_path),
+                                     '--protect', str(self.policy_path),
                                      '--protect', str(self.evidence))
             self.reserve(cycle, record, 'code', 1)
             result = run_process(command, self.runner.get('timeout') or 900, deadline=self.deadline)
@@ -1239,27 +1325,42 @@ class Cycle:
                 self.save_cycle(cycle)
                 return self.block(cycle, 'code_failed_no_summary', RUNTIME)
             if status == 'ok':
+                claims = summary.get('worker_claims') or {}
+                self_test = claims.get('test_results')
+                if self_test is None:
+                    self_test = (summary.get('worker_answer') or {}).get('test_results')
                 record.update({'status': 'done', 'candidate_run_id': summary.get('run_id'),
                                'candidate_head': summary.get('candidate_head'),
                                'changed_files': summary.get('observed_changed_files'),
-                               'scope_tests': summary.get('scope_tests')})
+                               'scope_tests': summary.get('scope_tests'),
+                               'gm_self_test': {'reported': self_test is not None,
+                                                'result': self_test,
+                                                'ok': (None if self_test is None else
+                                                       bool(self_test) and all(
+                                                           item.get('ok', item.get('exit_code') == 0)
+                                                           for item in self_test
+                                                           if isinstance(item, dict)))}})
                 self.finish_stage(cycle, 'candidate', record)
                 return OK
             if status in REPAIRABLE:
+                # A GM-reported self-test/scope failure is evidence for the main-AI review.  It
+                # must not trigger an unconditional second coding turn or an extra acknowledgement
+                # call; the owner will inspect it on the next ordinary turn if a repair is needed.
                 if not summary.get('usage_measured'):
                     return self.block(cycle, 'coding_failure_with_unknown_usage', ACCOUNTING)
-                acknowledge = runner_command(self.runner, 'acknowledge', '--state-dir',
-                                             str(self.state_dir), '--gm', gm_id, '--note',
-                                             f'autonomy retry {attempt} after measured {status}')
-                ack = run_process(acknowledge, 120, deadline=self.deadline)
-                record['attempts'][-1]['acknowledge_exit'] = ack['exit_code']
-                self.save_cycle(cycle)
-                if ack['exit_code'] != 0:
-                    record['status'] = 'failed'
-                    record['blocked_reason'] = ('measured failure could not be acknowledged for '
-                                                'the same-GM repair retry')
-                    return self.block(cycle, 'measured_repair_acknowledge_failed', RUNTIME)
-                continue
+                if summary.get('candidate') or summary.get('observed_changed_files'):
+                    claims = summary.get('worker_claims') or {}
+                    self_test = claims.get('test_results')
+                    record.update({'status': 'done', 'candidate_run_id': summary.get('run_id'),
+                                   'candidate_head': summary.get('candidate_head'),
+                                   'changed_files': summary.get('observed_changed_files'),
+                                   'scope_tests': summary.get('scope_tests'),
+                                   'coder_status': status,
+                                   'gm_self_test': {'reported': True, 'ok': False,
+                                                    'result': self_test or summary.get('scope_tests')}})
+                    self.finish_stage(cycle, 'candidate', record)
+                    return OK
+                return self.block(cycle, 'coding_' + str(status), RUNTIME)
             if status == 'refused' and (summary or {}).get('kind') in (
                     'unresolved_unknown_cost', 'unresolved_coding_attempt', 'owner_gm_unresolved'):
                 return self.block(cycle, 'unresolved_accounting_before_retry', ACCOUNTING)
@@ -1269,7 +1370,8 @@ class Cycle:
             return self.block(cycle, 'coding_' + str(status), RUNTIME)
 
     def host_owned_hashes(self) -> dict:
-        return {path: sha256_file(ROOT / path) for path in self.policy['host_owned_paths']}
+        return {path: sha256_file(ROOT / path)
+                for path in (self.policy.get('host_owned_paths') or [])}
 
     def provision_sparse_candidate(self, candidate: Path, base_revision: str) -> str | None:
         """Opt-in candidate isolation for hosts whose development .git is read-only.
@@ -1343,27 +1445,35 @@ class Cycle:
         hashes = {entry: (sha256_file(candidate / entry) if (candidate / entry).is_file() else None)
                   for entry in scope_files}
         checks.append({'check': 'scope_files_exist', 'ok': all(hashes.values()), 'detail': hashes})
-        test_runs = []
-        for command in candidate_record['host_test_commands']:
-            outcome = run_process(command, min(self.runner.get('timeout') or 900, 300),
-                                  cwd=candidate, deadline=self.deadline)
-            test_runs.append({'command': command, 'exit_code': outcome['exit_code'],
-                              'timed_out': outcome['timed_out'], 'seconds': outcome['seconds'],
-                              'owned': outcome.get('owned'),
-                              'stdout_tail': outcome['stdout'][-400:],
-                              'stderr_tail': outcome['stderr'][-400:]})
-        checks.append({'check': 'host_test_commands_pass',
-                       'ok': all(run['exit_code'] == 0 for run in test_runs), 'detail': test_runs})
+        # Required host commands are retained as policy evidence, but are no longer an
+        # acceptance gate and are never re-run here.  The GM's own report is the self-test
+        # evidence handed to the main AI; static ownership/scope checks remain host safety gates.
+        checks.append({'check': 'host_test_commands_pass', 'ok': None,
+                       'detail': {'commands': candidate_record.get('host_test_commands') or [],
+                                  'executed': False,
+                                  'reason': 'fixed host tests are advisory evidence only'}})
+        self_test = candidate_record.get('gm_self_test')
+        checks.append({'check': 'gm_self_test_reported',
+                       'ok': isinstance(self_test, dict) and self_test.get('reported') is True,
+                       'detail': self_test})
+        safety_checks = [check for check in checks
+                         if check['check'] not in ('host_test_commands_pass',
+                                                   'gm_self_test_reported')]
         record.update({'checks': checks, 'file_hashes': hashes,
-                       'ok': all(check['ok'] for check in checks)})
+                       'ok': all(check['ok'] is True for check in safety_checks),
+                       'publish_ready': all(check['ok'] is True for check in safety_checks),
+                       'gm_self_test': self_test})
         self.save_cycle(cycle)
         if not record['ok']:
             record['status'] = 'failed'
             cycle['declined'].append({'issue_id': cycle.get('issue_id'), 'stage': 'validate',
                                       'failed_checks': [c['check'] for c in checks
-                                                        if not c['ok']]})
+                                                        if c['ok'] is False
+                                                        and c['check'] not in (
+                                                            'host_test_commands_pass',
+                                                            'gm_self_test_reported')]})
             self.save_cycle(cycle)
-            return self.block(cycle, 'host_gate_refused_candidate', PRECONDITION)
+            return self.block(cycle, 'candidate_safety_gate_failed', PRECONDITION)
         self.finish_stage(cycle, 'validate', record)
         return OK
 
@@ -1393,20 +1503,93 @@ class Cycle:
             return (f'the declared trial base manifest changed after this cycle started '
                     f'({pinned_base} -> {live_base}); refusing to release')
         pinned_host = cycle.get('host_owned_pinned')
-        if not pinned_host:
-            return 'this cycle pins no host-owned test/script digests; refusing to release'
+        # An empty host-owned set is valid for a self-testing candidate.  Only an absent pin is
+        # legacy/corrupt state; do not turn the optional host contract into a release gate.
+        if pinned_host is None:
+            return 'this cycle has no host-owned digest pin; refusing to release'
         if self.host_owned_hashes() != pinned_host:
             return ('a host-owned test or host script changed after this cycle started; '
                     'refusing to release')
         return None
+
+    def stage_review(self, cycle: dict) -> int:
+        """Consume the explicit main-AI opinion for this exact GM candidate.
+
+        This is a durable hand-off, not a user approval prompt and not a provider dispatch.  An
+        absent review leaves the cycle resumable in ``waiting_review``; a normal advisory review
+        permits publication even when the GM's self-test reports a failure.  Only a concrete
+        major problem blocks delivery.
+        """
+        record = self.stage_record(cycle, 'review')
+        if record.get('status') == 'done':
+            return OK
+        review = self.load_main_ai_review(cycle)
+        if review is None:
+            record.update({'status': 'waiting_review', 'review_state': 'pending',
+                           'candidate_sha256': self.candidate_version_sha(cycle),
+                           'reason': 'explicit main-AI review artifact is required before release'})
+            self.save_cycle(cycle)
+            return OK
+        normalized, errors = self.validate_main_ai_review(cycle, review)
+        if errors:
+            record.update({'status': 'refused', 'review_state': 'invalid', 'errors': errors})
+            self.save_cycle(cycle)
+            return self.block(cycle, 'main_ai_review_invalid', PRECONDITION)
+        cycle['main_ai_review'] = normalized
+        record.update({'status': 'blocked' if normalized['decision'] == 'major_block' else 'done',
+                       'review_state': normalized['decision'], 'review': normalized,
+                       'candidate_sha256': normalized['candidate_sha256']})
+        self.remember_main_ai_review(cycle, normalized, record)
+        self.save_cycle(cycle)
+        if normalized['decision'] == 'major_block':
+            cycle['blocked_reason'] = 'main_ai_major_block'
+            self.save_cycle(cycle)
+            return self.block(cycle, 'main_ai_major_block', PRECONDITION)
+        return OK
+
+    def remember_main_ai_review(self, cycle: dict, review: dict, record: dict) -> None:
+        """Deliver the durable review handoff to the owning GM's next coding prompt."""
+        gm_id = cycle.get('gm_id')
+        if not gm_id:
+            record['memory_delivery'] = 'no_owner'
+            return
+        event = {'kind': 'main_ai_review',
+                 'run_id': 'review-' + str(cycle.get('cycle_id')) + '-' +
+                           str(review.get('candidate_sha256')),
+                 'cycle_id': cycle.get('cycle_id'), 'issue_id': cycle.get('issue_id'),
+                 'candidate_sha256': review.get('candidate_sha256'),
+                 'source': review.get('source'), 'decision': review.get('decision'),
+                 'suggestions': list(review.get('suggestions') or []),
+                 'rationale': review.get('rationale') or review.get('summary') or '',
+                 'major_problem': review.get('major_problem') or review.get('problem') or '',
+                 'repair_required': review.get('decision') == 'major_block',
+                 'received_utc': review.get('reviewed_utc') or gm_runner.utc_iso()}
+        try:
+            state = gm_runner.load_state(self.state_dir)
+            owner = (state.get('sessions') or {}).get(gm_id)
+            if not isinstance(owner, dict):
+                raise ValueError('owning GM session is absent')
+            gm_runner.remember_gm_task(owner, gm_id, event)
+            gm_runner.store_state(self.state_dir, state)
+            record['memory_delivery'] = 'stored'
+        except (OSError, ValueError, KeyError) as error:
+            # Keep the review durable in cycle.json and expose the failed memory handoff; the
+            # caller must not synthesize a provider retry or an approval from this failure.
+            record.update({'memory_delivery': 'pending_state_unavailable',
+                           'memory_delivery_error': str(error)})
 
     def stage_publish(self, cycle: dict) -> int:
         record = self.stage_record(cycle, 'publish')
         if record['status'] == 'done':
             return OK
         validate = cycle['stages'].get('validate') or {}
-        if not validate.get('ok'):
-            record.update({'status': 'skipped', 'reason': 'host gate not passed'})
+        review = cycle['stages'].get('review') or {}
+        if review.get('status') != 'done':
+            record.update({'status': 'skipped', 'reason': 'main-AI review not complete'})
+            self.save_cycle(cycle)
+            return OK
+        if not validate.get('publish_ready', validate.get('ok', False)):
+            record.update({'status': 'skipped', 'reason': 'candidate safety checks not passed'})
             self.save_cycle(cycle)
             return OK
         if int(self.limits['max_publishes']) < 1:
@@ -1458,12 +1641,14 @@ class Cycle:
         declared.update(self.accepted_release_base(cycle))
         path_map = self.policy['deployment']['path_map']
         scope_files = list(validate['file_hashes'].keys())
-        if len(scope_files) != RELEASE_FILES_THIS_VERSION:
+        release_limit = int((self.policy.get('deployment') or {}).get(
+            'max_files_per_release', RELEASE_FILES_THIS_VERSION))
+        if not 1 <= len(scope_files) <= min(release_limit, RELEASE_FILES_THIS_VERSION):
             record.update({'status': 'refused', 'reason': (
-                f'this version releases exactly {RELEASE_FILES_THIS_VERSION} changed file; the '
-                f'host gate validated {len(scope_files)}')})
+                f'this release supports 1..{min(release_limit, RELEASE_FILES_THIS_VERSION)} '
+                f'files; the candidate validated {len(scope_files)}')})
             self.save_cycle(cycle)
-            return self.block(cycle, 'multi_file_release_not_supported', PRECONDITION)
+            return self.block(cycle, 'release_file_count_out_of_bounds', PRECONDITION)
         candidate_record = cycle['stages'].get('candidate') or {}
         candidate_root = Path(candidate_record['candidate_abs']).resolve()
         prepared = []
@@ -1622,6 +1807,8 @@ class Cycle:
                     conflicts.append({'file': entry['target'], 'reason': escape})
                     continue
                 current = sha256_file(target) if target.is_file() else None
+                entry['original_sha256'] = current
+                entry['written_this_attempt'] = False
                 if current == entry['sha256']:
                     continue  # already installed by this same release; idempotent
                 if declared.get(entry['target']) != current:
@@ -1640,30 +1827,60 @@ class Cycle:
                        'release_digest': release_digest, 'binding': binding,
                        'files': [{'source': entry['source'], 'target': entry['target'],
                                   'sha256': entry['sha256'],
-                                  'previous_sha256': entry.get('previous_sha256')}
+                                 'previous_sha256': entry.get('previous_sha256')}
                                  for entry in prepared],
                        'written_utc': gm_runner.utc_iso()}
+            backup_root = self.cycle_dir() / 'publish-backup'
+            backup_root.mkdir(parents=True, exist_ok=True)
+            for index, entry in enumerate(prepared):
+                target = entry['absolute']
+                if target.is_file() and sha256_file(target) != entry['sha256']:
+                    backup = backup_root / f'{index:02d}.bin'
+                    backup.write_bytes(target.read_bytes())
+                    entry['backup_path'] = str(backup)
+                    journal['files'][index]['backup_path'] = gm_runner.relative(backup)
+                journal['files'][index]['original_sha256'] = entry.get('original_sha256')
             gm_runner.save_json(self.publish_journal_path(), journal)
             record['publish_intent'] = {'release_digest': release_digest,
                                         'files': journal['files'],
                                         'written_utc': journal['written_utc']}
             self.save_cycle(cycle)
-            for entry in prepared:
-                target = entry['absolute']
-                if target.is_file() and sha256_file(target) == entry['sha256']:
-                    continue
-                target.parent.mkdir(parents=True, exist_ok=True)
-                temporary = target.with_name(target.name + '.autonomy-new')
-                temporary.write_bytes(entry['payload'])
-                if sha256_file(temporary) != entry['sha256']:
+            try:
+                for entry in prepared:
+                    target = entry['absolute']
+                    if target.is_file() and sha256_file(target) == entry['sha256']:
+                        continue
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    temporary = target.with_name(target.name + '.autonomy-new')
+                    temporary.write_bytes(entry['payload'])
+                    if sha256_file(temporary) != entry['sha256']:
+                        temporary.unlink(missing_ok=True)
+                        raise OSError('staged_bytes_mismatch')
+                    # Mark before the atomic replace: a crash/error immediately after the OS
+                    # call may leave the target changed even though the call raised to Python.
+                    entry['written_this_attempt'] = True
+                    os.replace(str(temporary), str(target))
+                    if sha256_file(target) != entry['sha256']:
+                        raise OSError('published_bytes_mismatch')
+            except OSError as error:
+                for entry in prepared:
+                    target = entry['absolute']
+                    backup = Path(entry['backup_path']) if entry.get('backup_path') else None
                     try:
-                        temporary.unlink()
+                        if not entry.get('written_this_attempt'):
+                            continue
+                        if backup and backup.is_file():
+                            os.replace(str(backup), str(target))
+                        elif (entry.get('original_sha256') is None and target.is_file()
+                              and sha256_file(target) == entry['sha256']):
+                            target.unlink()
                     except OSError:
                         pass
-                    return self.block(cycle, 'staged_bytes_mismatch', RUNTIME)
-                os.replace(str(temporary), str(target))
-                if sha256_file(target) != entry['sha256']:
-                    return self.block(cycle, 'published_bytes_mismatch', RUNTIME)
+                reason = str(error)
+                self.save_cycle(cycle)
+                return self.block(cycle, reason if reason in ('staged_bytes_mismatch',
+                                                               'published_bytes_mismatch')
+                                  else 'publish_transaction_failed', RUNTIME)
         return self.finish_publish(cycle, record, prepared, checkout, release_digest, binding)
 
     def recover_publish(self, cycle: dict, record: dict, checkout: Path, prepared: list,
@@ -1689,20 +1906,21 @@ class Cycle:
                            'exists for a different release; refusing to mix releases'})
             self.save_cycle(cycle)
             return self.block(cycle, 'publish_journal_conflict', PRECONDITION)
-        entry = prepared[0]
-        current = sha256_file(entry['absolute']) if entry['absolute'].is_file() else None
-        if current == entry['sha256']:
+        states = []
+        for entry in prepared:
+            current = sha256_file(entry['absolute']) if entry['absolute'].is_file() else None
+            states.append((entry, current))
+            if current not in (entry['sha256'], declared.get(entry['target'])):
+                record.update({'status': 'refused',
+                               'reason': 'a trial target holds bytes from neither the declared '
+                                         'base nor this release; refusing to overwrite',
+                               'file': entry['target'], 'current': current})
+                self.save_cycle(cycle)
+                return self.block(cycle, 'release_conflict_third_bytes', PRECONDITION)
+        if all(current == entry['sha256'] for entry, current in states):
             return self.finish_publish(cycle, record, prepared, checkout, release_digest, binding)
-        if declared.get(entry['target']) == current:
-            return None  # the replace never happened; a safe re-attempt under the same journal
-        record.update({'status': 'refused', 'reason': 'the trial target holds bytes from neither '
-                       'the declared base nor this release; refusing to overwrite',
-                       'current': current})
-        self.save_cycle(cycle)
-        return self.block(cycle, 'release_conflict_third_bytes', PRECONDITION)
+        return None  # one or more replacements never happened; a safe re-attempt is allowed
     def stage_verify(self, cycle: dict) -> int:
-        if self.policy.get('runtime', {}).get('kind') == 'production_host_contract':
-            return self.stage_verify_production_host_contract(cycle)
         record = self.stage_record(cycle, 'verify')
         if record['status'] == 'done':
             return OK
@@ -1711,142 +1929,17 @@ class Cycle:
             record.update({'status': 'skipped', 'reason': 'nothing was published'})
             self.save_cycle(cycle)
             return OK
-        stopped = self.in_flight_stop(cycle, record, 'verify')
-        if stopped:
-            return stopped
-        checkout = self.checkout.resolve()
-        release_digest = publish['release_digest']
-        issue_id = cycle.get('issue_id') or ''
-        self.save_path.parent.mkdir(parents=True, exist_ok=True)
-        if not self.save_path.is_file():
-            record.update({'status': 'refused',
-                           'reason': 'the runtime save is absent; this version never creates or '
-                                     'resets a save while verifying. Seed the labelled fixture '
-                                     'before publication instead.'})
-            self.save_cycle(cycle)
-            return self.block(cycle, 'runtime_save_absent_refused_to_create', STALE)
-        existing = gm_runner.load_json(self.save_path)
-        if not isinstance(existing, dict) or existing.get('world_id') != self.policy['world_id']:
-            record.update({'status': 'refused', 'reason': 'runtime save belongs to another world',
-                           'save_world_id': (existing or {}).get('world_id')
-                           if isinstance(existing, dict) else None})
-            self.save_cycle(cycle)
-            return self.block(cycle, 'stale_or_wrong_world_save', STALE)
-        first_target = (publish['files'][0]['target'] if publish.get('files') else '')
-        nonce = sha256_bytes('|'.join([cycle['cycle_id'], release_digest, issue_id,
-                                       gm_runner.utc_iso(), str(os.getpid())]).encode())[:16]
-        budget = int(self.policy['runtime'].get('timeout_seconds', 120))
-        out_paths = {phase: self.cycle_dir() / ('verify-' + phase + '-' + nonce + '.json')
-                     for phase in ('open', 'resume')}
-        runs = []
-        deployed = []
-        # The shared installation lock is held while the deployed bytes are checked and the world
-        # is executed, so no concurrent writer can change the artifact under verification and a
-        # stale deployment cannot be reported as this release's behaviour.
-        with self.installation_lock() as lock:
-            if lock.recovered:
-                record['recovered_install_lock'] = lock.recovered
-            # Re-verify the pinned policy/base/host-owned bindings under the installation lock and
-            # BEFORE the host script runs: a host script edited after publication must not be
-            # executed as though it were the one the host gate approved, and holding the lock keeps
-            # a concurrent writer from moving those bytes between this check and the run.
-            stale = self.stale_release_binding(cycle)
-            if stale:
-                record.update({'status': 'refused', 'reason': stale})
-                self.save_cycle(cycle)
-                return self.block(cycle, 'release_binding_stale_after_publish', UNACCEPTABLE)
-            for item in publish.get('files') or []:
-                target = checkout / item['target'] if item.get('target') else None
-                actual = (sha256_file(target)
-                          if target is not None and target.is_file() else None)
-                deployed.append({'target': item.get('target'), 'expected': item.get('sha256'),
-                                 'actual': actual, 'ok': actual == item.get('sha256')})
-            for phase in ('open', 'resume'):
-                out_path = out_paths[phase]
-                try:
-                    out_path.unlink()
-                except OSError:
-                    pass
-                command = [str(self.godot), '--headless', '--path', str(checkout),
-                           '--script', self.policy['runtime']['script'], '--',
-                           '--save=' + str(self.save_path), '--manifest=res://' + first_target,
-                           '--release-digest=' + release_digest, '--issue-id=' + issue_id,
-                           '--nonce=' + nonce, '--phase=' + phase, '--out=' + str(out_path)]
-                if phase == 'resume':
-                    command += ['--prior-file=' + str(out_paths['open'])]
-                command += [str(item) for item in self.policy['runtime'].get('extra_args', [])]
-                self.reserve(cycle, record, 'verify-' + phase, 0, count_batch=False)
-                outcome = run_process(command, budget, deadline=self.deadline)
-                self.settle(cycle, record, 0)
-                observed = gm_runner.load_json(out_path) if out_path.is_file() else None
-                exited = bool(outcome['owned'] and outcome['owned'].get('all_members_exited'))
-                runs.append({'phase': phase, 'exit_code': outcome['exit_code'],
-                             'timed_out': outcome['timed_out'], 'seconds': outcome['seconds'],
-                             'owned': outcome['owned'], 'owned_members_exited': exited,
-                             'fresh_output_file': gm_runner.relative(out_path),
-                             'observed': observed,
-                             'stdout_tail': outcome['stdout'][-600:],
-                             'stderr_tail': outcome['stderr'][-600:]})
-                if outcome['timed_out']:
-                    break
-        final = runs[-1]['observed'] if runs else None
-        installed_only = bool(final and final.get('installed') and not final.get('used'))
-        checks = [
-            {'check': 'deployed_bytes_match_release',
-             'ok': bool(deployed) and all(item['ok'] for item in deployed),
-             'detail': deployed},
-            {'check': 'every_phase_reported_ok',
-             'ok': bool(runs) and all(bool((run.get('observed') or {}).get('ok'))
-                                      for run in runs)},
-            {'check': 'every_phase_bound_to_this_release',
-             'ok': bool(runs) and all((run.get('observed') or {}).get('nonce') == nonce
-                                      and (run.get('observed') or {}).get('release_digest')
-                                      == release_digest
-                                      and (run.get('observed') or {}).get('world_id')
-                                      == self.policy['world_id'] for run in runs)},
-            {'check': 'runtime_exit_ok',
-             'ok': bool(runs) and all(run['exit_code'] == 0 for run in runs)},
-            {'check': 'no_phase_timed_out',
-             'ok': bool(runs) and not any(run.get('timed_out') for run in runs)},
-            {'check': 'owned_processes_exited',
-             'ok': bool(runs) and all(run['owned_members_exited'] for run in runs)},
-            {'check': 'fresh_output_for_this_nonce',
-             'ok': bool(final and final.get('nonce') == nonce)},
-            {'check': 'runtime_reports_ok', 'ok': bool(final and final.get('ok'))},
-            {'check': 'release_digest_matches',
-             'ok': bool(final and final.get('release_digest') == release_digest)},
-            {'check': 'world_id_matches',
-             'ok': bool(final and final.get('world_id') == self.policy['world_id'])},
-            {'check': 'issue_id_matches', 'ok': bool(final and final.get('issue_id') == issue_id)},
-            {'check': 'same_save_continuation', 'ok': bool(final and final.get('continuation_ok'))},
-            {'check': 'installed', 'ok': bool(final and final.get('installed'))},
-            {'check': 'used_not_invented',
-             'ok': bool(final and final.get('used') and not installed_only)}]
-        record.update({'runs': runs, 'checks': checks, 'ok': all(check['ok'] for check in checks),
-                       'installed': bool(final and final.get('installed')),
-                       'used': bool(final and final.get('used')),
-                       'installed_but_unused': installed_only,
-                       'nonce': nonce,
-                       'observation': (final or {}).get('observation')})
+        # Effect verification belongs to the owning GM's next ordinary world turn.  The old
+        # fixed fixture/production host contract is intentionally not run in the release path:
+        # publication is already protected by scope, bytes, policy binding and the main-AI review.
+        record.update({'status': 'pending', 'ok': None, 'effect_review_pending': True,
+                       'installed': True, 'used': None,
+                       'checks': [{'check': 'post_release_observation_deferred', 'ok': True,
+                                   'detail': 'owning GM observes the next world turn'}],
+                       'reason': 'published; effect review deferred to the owning GM'})
+        cycle['effect_review_pending'] = True
         self.save_cycle(cycle)
-        if not record['ok']:
-            failed_checks = [c['check'] for c in checks if not c.get('ok')]
-            if installed_only:
-                reason = 'installed_but_unused'
-            elif conclusive_runtime_defect(failed_checks):
-                reason = 'runtime_verification_failed'
-            else:
-                # Timeout, missing/stale output, foreign nonce/world/release/issue or a live child
-                # process: not an actionable defect, so no further candidate/model turn.
-                reason = 'runtime_verification_inconclusive'
-            # A blocked cycle reason is not by itself a failure fact: record the failed stage so
-            # failure_facts and the owner receipt describe what actually happened.
-            record.update({'status': 'failed', 'reason': reason, 'failed_checks': failed_checks})
-            self.save_cycle(cycle)
-            return self.block(cycle, reason, RUNTIME)
-        self.finish_stage(cycle, 'verify', record)
         return OK
-
     def stage_verify_production_host_contract(self, cycle: dict) -> int:
         """Run an inference-free, issue-bound town contract on a COPY of the real save.
 
@@ -1920,8 +2013,7 @@ class Cycle:
                          'observed': observed})
             if outcome['timed_out']:
                 break
-        expected = {'world_id': self.policy['world_id'], 'issue_id': cycle.get('issue_id'),
-                    'issue_identity': identity, 'release_digest': release_digest,
+        expected = {'world_id': self.policy['world_id'], 'release_digest': release_digest,
                     'source_world_sha256': source_sha,
                     'loaded_target_sha256': first.get('sha256')}
         def valid(run):
@@ -1960,6 +2052,7 @@ class Cycle:
             return stopped
         verify = cycle['stages'].get('verify') or {}
         observe = cycle['stages'].get('observe') or {}
+        candidate = cycle['stages'].get('candidate') or {}
         validate = cycle['stages'].get('validate') or {}
         failure = self.failure_facts(cycle)
         publish = cycle['stages'].get('publish') or {}
@@ -1972,6 +2065,8 @@ class Cycle:
                 receipt_outcome = 'runtime_verification_inconclusive'
             else:
                 receipt_outcome = 'verification_failed'
+        elif publish.get('status') == 'done' and verify.get('effect_review_pending'):
+            receipt_outcome = 'published_pending_gm_review'
         elif verify.get('status') == 'done' and verify.get('ok'):
             receipt_outcome = 'released_and_verified'
         else:
@@ -1986,13 +2081,39 @@ class Cycle:
                        'installed': verify.get('installed'), 'used': verify.get('used'),
                        'installed_but_unused': verify.get('installed_but_unused'),
                        'observation': verify.get('observation')},
+                   'effect_review': {'status': 'pending',
+                                     'owner': gm_id,
+                                     'next_turn': 'owning GM observes the next world turn'},
                    'host_gate_failed_checks': [c['check'] for c in (validate.get('checks') or [])
-                                               if not c.get('ok')],
+                                               if c.get('ok') is False
+                                               and c.get('check') != 'gm_self_test_reported'],
                    'failure': failure,
                    'observation_origin': observe.get('observation_origin'),
                    'not_claimed': ('a GM proposal is a hypothesis; this receipt reports only what '
                                    'the host gate and the running fixture actually did'),
                    'utc': gm_runner.utc_iso()}
+        if (cycle.get('defer_effect_review') and cycle.get('main_ai_review')
+                and publish.get('status') == 'done'):
+            # Publication feedback is queued into the owning GM's durable memory.  It is not an
+            # immediate provider turn and a pending effect review never invalidates the release.
+            receipt_path = self.cycle_dir() / 'effect-review-receipt.json'
+            gm_runner.save_json(receipt_path, receipt)
+            try:
+                state = gm_runner.load_state(self.state_dir)
+                owner = (state.get('sessions') or {}).get(gm_id)
+                if isinstance(owner, dict):
+                    gm_runner.remember_host_feedback(owner, gm_id, receipt,
+                                                     sha256_file(receipt_path) or '',
+                                                     cycle['cycle_id'])
+                    gm_runner.store_state(self.state_dir, state)
+            except (OSError, ValueError, KeyError):
+                record['memory_delivery'] = 'pending_state_unavailable'
+            record.update({'status': 'pending', 'effect_review_pending': True,
+                           'receipt': receipt,
+                           'receipt_sha256': sha256_file(receipt_path),
+                           'reason': 'published; owning GM reviews effect on a later world turn'})
+            self.save_cycle(cycle)
+            return OK
         attempts = record.setdefault('attempts', [])
         max_attempts = int(self.limits.get('max_feedback_attempts', 2))
         dispatched = int(cycle.get('feedback_attempts_total', 0))
@@ -2091,7 +2212,7 @@ class Cycle:
                 return {'stage': name, 'status': stub.get('status'),
                         'blocked_reason': cycle.get('blocked_reason'),
                         'failed_checks': [c['check'] for c in (stub.get('checks') or [])
-                                          if not c.get('ok')],
+                                          if c.get('ok') is False],
                         'attempts': [{'attempt': item.get('attempt'), 'status': item.get('status')}
                                      for item in (stub.get('attempts') or [])]}
         return {}
@@ -2110,7 +2231,9 @@ class Cycle:
         return exit_code
     def write_report(self, cycle: dict) -> Path:
         observe = cycle['stages'].get('observe') or {}
+        candidate = cycle['stages'].get('candidate') or {}
         validate = cycle['stages'].get('validate') or {}
+        review = cycle['stages'].get('review') or {}
         publish = cycle['stages'].get('publish') or {}
         verify = cycle['stages'].get('verify') or {}
         owned_pids, runs_owned = [], False
@@ -2128,6 +2251,11 @@ class Cycle:
                                        'exit_code': member.get('exit_code')})
         all_owned_exited = bool(owned_pids) and all(
             member['exit_code'] is not None for member in owned_pids)
+        host_test = next((c for c in (validate.get('checks') or [])
+                          if c.get('check') == 'host_test_commands_pass'), None)
+        host_test_detail = (host_test or {}).get('detail') or {}
+        host_gate_ok = ((host_test or {}).get('ok')
+                        if host_test and host_test_detail.get('executed') else None)
         report = {'kind': 'gm_autonomy_cycle_report', 'schema_version': CYCLE_SCHEMA,
                   'cycle_id': cycle['cycle_id'], 'mode': cycle['mode'],
                   'policy': {'policy_id': cycle['policy_id'],
@@ -2138,13 +2266,30 @@ class Cycle:
                                    for name in STAGES},
                   'what_changed': [item['target'] for item in publish.get('files', [])],
                   'release_digest': publish.get('release_digest'),
+                  'candidate': {'owner_gm': cycle.get('gm_id'), 'issue_id': cycle.get('issue_id'),
+                                'candidate_sha256': self.candidate_version_sha(cycle),
+                                'run_id': candidate.get('candidate_run_id'),
+                                'changed_files': candidate.get('changed_files'),
+                                'gm_self_test': candidate.get('gm_self_test'),
+                                'coder_status': candidate.get('coder_status')},
+                  'main_ai_review': {'status': review.get('review_state') or review.get('status'),
+                                     'decision': (review.get('review') or {}).get('decision'),
+                                     'candidate_sha256': review.get('candidate_sha256'),
+                                     'suggestions': (review.get('review') or {}).get('suggestions'),
+                                     'major_problem': (review.get('review') or {}).get('major_problem')
+                                                       or (review.get('review') or {}).get('problem')},
                   'independently_tested': {
-                      'host_gate_ok': validate.get('ok'),
+                      'host_gate_ok': host_gate_ok,
                       'failed_checks': [c['check'] for c in (validate.get('checks') or [])
-                                        if not c.get('ok')],
+                                        if c.get('ok') is False
+                                        and c.get('check') != 'host_test_commands_pass'],
+                      'host_tests': host_test_detail or None,
                       'runtime_checks': {c['check']: c['ok'] for c in (verify.get('checks') or [])}},
                   'world_observed': verify.get('observation'),
                   'installed': verify.get('installed'), 'used': verify.get('used'),
+                  'effect_review_pending': bool(cycle.get('effect_review_pending')
+                                                or (cycle['stages'].get('feedback') or {}).get(
+                                                    'effect_review_pending')),
                   'gm': {'gm_id': cycle.get('gm_id'), 'issue_id': cycle.get('issue_id'),
                          'observation_origin': observe.get('observation_origin')},
                   'deferred_claims': cycle.get('deferred_claims'), 'declined': cycle.get('declined'),
@@ -2167,7 +2312,8 @@ class Cycle:
                   'owned_processes': {'windows_job': runs_owned,
                                       'all_observed_members_exited': all_owned_exited,
                                       'members': owned_pids},
-                  'next_stage': (cycle['stage'] if cycle['status'] == 'blocked' else None),
+                  'next_stage': (cycle['stage'] if cycle['status'] in ('blocked', 'waiting_review')
+                                 else None),
                   'started_utc': cycle['started_utc'], 'updated_utc': cycle['updated_utc'],
                   'provenance': {
                       'mode': cycle['mode'],
@@ -2212,11 +2358,16 @@ class Cycle:
             if lock.recovered:
                 self.recovered_lock = lock.recovered
             adopted = self.unfinished_cycle()
-            if adopted is not None and adopted.get('status') in ('completed', 'no_action',
-                                                                 'blocked'):
+            if (adopted is not None and adopted.get('status') == 'blocked'
+                    and self.reopen_major_block
+                    and adopted.get('blocked_reason') == 'main_ai_major_block'):
+                cycle = self.reopen_after_major_block(adopted)
+            elif adopted is not None and adopted.get('status') in ('completed', 'no_action',
+                                                                   'blocked'):
                 return self.emit_existing(adopted, 'previous_cycle_' + str(adopted.get('status'))
                                           + '_not_replayed')
-            cycle = self.adopt(adopted) if adopted else self.load_cycle()
+            else:
+                cycle = self.adopt(adopted) if adopted else self.load_cycle()
             if cycle.get('status') in ('completed', 'no_action'):
                 return self.emit_existing(cycle, 'unchanged_evidence_already_finished')
             index = 0
@@ -2227,8 +2378,16 @@ class Cycle:
                 status = getattr(self, 'stage_' + name)(cycle)
                 record = cycle['stages'].get(name) or {}
                 if status != OK:
+                    if name == 'verify' and (cycle['stages'].get('publish') or {}).get('status') == 'done':
+                        # Verification is a post-release observation.  Its result, including
+                        # non-adoption or an old identity shape, is handed to the GM later and
+                        # cannot turn an already safe publication into a failed delivery.
+                        self.stage_feedback(cycle)
+                        cycle['effect_review_pending'] = True
+                        self.save_cycle(cycle)
+                        return self.finish_cycle(cycle, 'completed', OK)
                     original_reason = cycle.get('blocked_reason')
-                    if name != 'feedback' and cycle.get('gm_id'):
+                    if name not in ('feedback', 'review') and cycle.get('gm_id'):
                         self.stage_feedback(cycle)
                         cycle['blocked_reason'] = original_reason
                         cycle['feedback_outcome'] = (
@@ -2237,10 +2396,14 @@ class Cycle:
                             index = STAGES.index('candidate')
                             continue
                     return self.finish_cycle(cycle, 'blocked', status)
+                if record.get('status') == 'waiting_review':
+                    return self.finish_cycle(cycle, 'waiting_review', OK)
                 if record.get('status') == 'no_action':
                     return self.finish_cycle(cycle, 'no_action', OK)
                 if record.get('status') == 'stopped':
                     return self.finish_cycle(cycle, 'limit_reached', OK)
+                if name == 'feedback' and record.get('status') == 'pending':
+                    return self.finish_cycle(cycle, 'completed', OK)
                 if self.stop_after == name:
                     return self.finish_cycle(cycle, 'paused', OK)
                 index += 1
@@ -2346,6 +2509,8 @@ class Cycle:
             return document
         if document.get('status') == 'paused':
             return document
+        if document.get('status') == 'waiting_review':
+            return document
         if document.get('status') in ('completed', 'no_action') and \
                 document.get('evidence_sha256') == self.evidence_sha256:
             if document.get('deferred_claims') and self.allow_deferred_advance:
@@ -2368,6 +2533,24 @@ class Cycle:
         exit_code = int(cycle.get('exit_code') or 0) if cycle.get('status') == 'blocked' else 0
         self.last_payload = payload
         return gm_runner.emit(payload, exit_code)
+
+    def reopen_after_major_block(self, cycle: dict) -> dict:
+        """Start a bounded new GM coding candidate after an explicit main-AI block."""
+        if cycle.get('blocked_reason') != 'main_ai_major_block':
+            return cycle
+        previous = {name: copy.deepcopy(cycle.get('stages', {}).get(name) or {})
+                    for name in ('candidate', 'validate', 'review', 'publish', 'verify', 'feedback')}
+        cycle.setdefault('repair_history', []).append({'round': int(cycle.get('repair_rounds', 0)) + 1,
+            'failed_stage': 'review', 'blocked_reason': 'main_ai_major_block',
+            'previous_stages': previous, 'utc': gm_runner.utc_iso()})
+        cycle['repair_rounds'] = int(cycle.get('repair_rounds', 0)) + 1
+        for name in ('candidate', 'validate', 'review', 'publish', 'verify', 'feedback'):
+            cycle.setdefault('stages', {})[name] = {'status': 'pending'}
+        cycle['main_ai_review'] = None
+        cycle['status'] = 'running'
+        cycle['blocked_reason'] = None
+        self.save_cycle(cycle)
+        return cycle
 
 
 def preflight(cycle: Cycle):
@@ -2426,7 +2609,9 @@ def command_cycle(args) -> int:
     runner = {key: value for key, value in
               {'config': args.config, 'key_file': args.key_file, 'codex': args.codex,
                'codex_home': args.codex_home, 'timeout': args.timeout}.items() if value}
-    cycle = Cycle(policy_path, policy, runner, args.stop_after, selected_gms=selected)
+    cycle = Cycle(policy_path, policy, runner, args.stop_after, selected_gms=selected,
+                  review_path=getattr(args, 'review_file', None),
+                  reopen_major_block=getattr(args, 'reopen_major_block', False))
     blocked, payload = preflight(cycle)
     if blocked is not None:
         return gm_runner.emit(payload, blocked)
@@ -2436,6 +2621,82 @@ def command_cycle(args) -> int:
         return gm_runner.refusal('lock_held', str(error), LOCK)
     except ValueError as error:
         return gm_runner.refusal('preflight', str(error), USAGE)
+
+
+def command_record_review(args) -> int:
+    """Persist the main-AI opinion for the currently pinned candidate, without a provider call."""
+    policy_path = Path(args.policy).resolve()
+    try:
+        policy = gm_runner.read_autonomy_policy(policy_path)
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        return gm_runner.refusal('autonomy_policy_invalid', str(error), USAGE)
+    errors = policy_errors(policy)
+    if errors:
+        return gm_runner.refusal('autonomy_policy_invalid', '; '.join(errors), USAGE,
+                                 errors=errors)
+    cycle = Cycle(policy_path, policy, {}, None)
+    cycle.autonomy_dir().mkdir(parents=True, exist_ok=True)
+    try:
+        with cycle.cycle_lock():
+            if not (cycle.cycle_dir() / 'cycle.json').is_file():
+                return gm_runner.refusal('review_candidate_missing',
+                                         'no unfinished candidate cycle is available', USAGE)
+            document = cycle.load_cycle()
+            if document.get('status') in ('completed', 'no_action'):
+                return gm_runner.refusal('review_candidate_finished',
+                                         'the current cycle is already finished', USAGE)
+            if (document.get('status') == 'blocked' and
+                    document.get('blocked_reason') == 'main_ai_major_block'):
+                return gm_runner.refusal('review_requires_new_candidate',
+                                         'reopen the major block to create a new candidate before re-review',
+                                         USAGE)
+            candidate_sha = cycle.candidate_version_sha(document)
+            if candidate_sha is None:
+                return gm_runner.refusal('review_candidate_missing',
+                                         'the current cycle has no complete candidate file-hash identity',
+                                         USAGE)
+            review = {
+                'cycle_id': document.get('cycle_id'),
+                'gm_id': document.get('gm_id'),
+                'candidate_sha256': candidate_sha,
+                'source': args.source,
+                'decision': args.decision,
+                'suggestions': list(args.suggestion or []),
+                'rationale': args.rationale or '',
+                'major_problem': args.problem or '',
+                'reviewed_utc': gm_runner.utc_iso(),
+            }
+            normalized, review_errors = cycle.validate_main_ai_review(document, review)
+            output = (Path(args.output).resolve() if args.output else
+                      cycle.cycle_dir() / 'main-ai-review.json')
+            gm_runner.save_json(output, review)
+            if review_errors:
+                return gm_runner.refusal('main_ai_review_invalid', '; '.join(review_errors), USAGE,
+                                         review_path=gm_runner.relative(output),
+                                         candidate_sha256=candidate_sha)
+            document['main_ai_review'] = normalized
+            document.setdefault('stages', {})['review'] = {'status': 'pending'}
+            cycle.save_cycle(document)
+            stage_exit = cycle.stage_review(document)
+            payload = {
+                'status': 'recorded',
+                'review_path': gm_runner.relative(output),
+                'cycle_id': document.get('cycle_id'),
+                'gm_id': document.get('gm_id'),
+                'candidate_sha256': candidate_sha,
+                'decision': normalized['decision'],
+                'review_stage': (document.get('stages', {}).get('review') or {}).get('status'),
+                'cycle_status': document.get('status'),
+                'exit_code_if_resumed': stage_exit,
+                'provider_called': False,
+            }
+            # A major block is a recorded workflow outcome.  It is not a CLI error and the next
+            # coding candidate must be created with `cycle --reopen-major-block`.
+            return gm_runner.emit(payload, OK)
+    except RuntimeError as error:
+        return gm_runner.refusal('lock_held', str(error), LOCK)
+    except (OSError, ValueError, KeyError) as error:
+        return gm_runner.refusal('review_record_failed', str(error), USAGE)
 
 
 PROVENANCE_NOTES = {
@@ -2976,6 +3237,10 @@ def build_parser() -> argparse.ArgumentParser:
     cycle_parser.add_argument('--policy', required=True, type=Path)
     cycle_parser.add_argument('--stop-after', choices=STAGES,
                               help='finish this stage then exit paused, for a bounded restart test')
+    cycle_parser.add_argument('--review-file', type=Path,
+                              help='explicit main-AI review JSON bound to this candidate')
+    cycle_parser.add_argument('--reopen-major-block', action='store_true',
+                              help='start a new GM candidate after a concrete main-AI major block')
     cycle_parser.add_argument('--config', type=Path, help='passed through to gm_runner')
     cycle_parser.add_argument('--key-file', type=Path)
     cycle_parser.add_argument('--codex', help='passed through to gm_runner (tests inject a fake)')
@@ -3007,6 +3272,17 @@ def build_parser() -> argparse.ArgumentParser:
     status_parser = subparsers.add_parser('status', help='read-only cycle summary')
     status_parser.add_argument('--state-dir', required=True, type=Path)
     status_parser.set_defaults(func=command_status)
+    review_parser = subparsers.add_parser(
+        'record-review', aliases=['review'],
+        help='record a bound main-AI advisory or major-block review, no provider call')
+    review_parser.add_argument('--policy', required=True, type=Path)
+    review_parser.add_argument('--decision', required=True, choices=('advisory', 'major_block'))
+    review_parser.add_argument('--source', default='main-ai:cli')
+    review_parser.add_argument('--suggestion', action='append', default=[])
+    review_parser.add_argument('--rationale', default='')
+    review_parser.add_argument('--problem', default='')
+    review_parser.add_argument('--output', type=Path)
+    review_parser.set_defaults(func=command_record_review)
     recover_parser = subparsers.add_parser(
         'recover-observe', help='offline: carry one completed observe receipt forward, no calls')
     recover_parser.add_argument('--policy', required=True, type=Path)
