@@ -2,6 +2,12 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-14 · H80 用户要求的最新村民实录
+
+H79及此前六个本地提交已按用户要求push至origin/main，远端HEAD核对为11c58e944471235f96006d55888362c9439a2029。随后按用户“最小视频、无文字讲解”请求，从同一seq124存档启动可见Godot场景及真实Kimi；未派发GM、未增加定时任务。录像启动器首次缺tools导入路径，provider前失败，修复并保留preflight-failure日志。引擎内置Movie Maker最终触发125秒墙钟超时，engine_exit124、validation_passed=false、无结束capture回执；不将录像当成功完成的生活批次。4次Kimi已结算，新增0.1294048元，gateway已排空，无挂起或新未知，全部owned进程退出；canonical保存到seq128，原身份与旧事件前缀保持，GM state未改。当前累计84次Kimi、50次已计量GM及1次历史GM未知。
+
+从已录AVI导出46.57秒、2倍速的实际MP4，无新增字幕或配音。画面中居民主要等待，园丁、守井人报告前往种植公共地没有前进/路线不可达；不将镜头当作共同出行或寻路全覆盖成功，不编排虚假行动。视频tmp/mvp-video-20260914/latest-villagers.mp4；启动失败、超时、用量、存档、录像及转码进程回执均保留在同目录，汇总video-receipt.json。此次为记录现状，未修改玩法；上述寻路现象留待后续GM定位。
+
 ## 2026-09-14 · H79 原GM06改进被居民使用并由原GM复查接受，最小闭环完成
 
 seq102的十GM观察run-20260914T092618Z-18f648已结束：10次已计量、9份原协议有效、GM06原426字符提案因旧长度规则拒收，无新未知，owned全退出。观察期间主AI/Luna做了已记录修复并提交7123433、e5a8b98，故原guard显示git_head/git_worktree变化；保留incomplete及host-change-audit.json，不宣称无修改、不归咎观察GM。修掉长度硬门禁后，主AI按原prompt/来源SHA重新验证GM06原回包，零调用登记其原认领issue-3a61170c7bcd，原invalid_output及用量仍在acknowledged历史。GM09独立提出相同方向issue-727b46421ada，保留两人来源，仅GM06执行。GM04网框issue-20e83bce9799及未调用的source-only候选继续保留。
