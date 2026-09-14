@@ -2,6 +2,18 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-14 · H81 原GM01修复本轮寻路受阻，原守井人实际抵达并获原GM复查接受
+
+用户要求主AI监看GM迭代修复H80受阻。仅原GM01使用DeepSeek执行，未增加GPT6子agent或定时任务。主AI从seq128原坐标做只读场景复现：园丁/守井人的导航路径都止于街道z≈19.8，离各自目标仍差34.40/32.00m；从(0,0.22,30)则完整可达。旧14项行走测试的起点在断点另一侧，未覆盖这两个真实起点；不能由参数值直接断言网格断裂的具体成因。证据tmp/gm01-navigation-20260914/probe.stdout.log。任务摘要首次超过旧800字符限制，派发前缩短并把详情保留task-brief.json，零费用。
+
+原GM01观察run-20260914T103904Z-5ffe68自行认领issue-e83de6e84b38，提出仅修改town_street.gd：完整导航路径不可用时，使用现有道路/局部绕行，保持真实碰撞、原目标和0.45m到达判断。编码会话01a09f82-c2a6-7103-8982-c97b5b1901fb写出22增/5删补丁，作者副本自测显示园丁36秒、守井人37秒到达，产生place_visited；园丁的测试任务是显式local_rule_policy提交，不能称其真实自主采用。作者又追加长测，code-20260914T104221Z-c56882在600秒超时，原timeout_unknown和全部记录保留，owned进程退出。主AI已即时报告，不重写补丁；同一编码会话仅交接续接code-20260914T105520Z-7210cd，实际交回implemented及原测试说明。执行器因missing_resume_baseline标usage_incomplete；利用先前已保存的原生token_count和交接完整累计恢复两次调度计量，累计只计一次并固定新highwater。usage-reconciliation.json保留来源及差额，原两次状态不改写，不由token猜货币费用；旧GM04未知仍保留。
+
+主AI独立在原存档副本上仅续接守井人原任务turn:shared:well-keeper:0:13，2047物理帧实际走到(-2.39638,0.100935,51.64025)，距原目标约0.16m。第一次监看脚本误触发未连接模型入口，2047条Nil错误如实留存；关闭监看脚本中不需要的模型调度后，独立重跑无脚本错误、零新决策，同一原任务产生place_visited。证据physical-review-clean.json及日志。主AI给advisory评审，明确底层导航图断点仍在、本版沿既有道路补足行走；发布到主源码和原gm-trial，备份及review/release在publication，候选SHA256 0ee6dec000e4a8d9ca4fa7817dec7942e4f4fd77b3e84e6b22025cda2fc328c9。
+
+正式续跑首次被H80录像超时遗留的空writer-lock拒绝，零provider调用、seq未变；确认所有Godot及owned进程退出、锁为空后记录并删除该精确旧锁，失败回执另存original-jobs-writer-lock-failure。随后同一canonical仅推进已接受物理任务90秒，新增Kimi调用0、账本186笔/3.7226209元不变、无挂起、无引擎错误；守井人的原operation生成life_event_129 place_visited，身份/旧事件前缀、GM状态和运行源码均保持，正常释放写锁，全部owned退出。当前seq129，本世界累计84次Kimi。seq129独立冷加载居民、历史、档案、位置、任务和回合记录均保持，canonical字节不变，见cold-continuity.json。
+
+原GM01观察会话01a09e04-02cf-7b92-95f4-7d43ee93fc82在feedback-20260914T110249Z-1296c4独立核对已发布源码及canonical原任务，给出accept，明确不声称园丁真实采用，也不声称所有导航图连通。issue按该有限范围resolved，完整意见写回本人记忆。十GM原观察会话均保持。本轮共4次GM调度（2次自动计量、2次原生累计恢复计量），0次新增居民模型调用；汇总result.json。本轮保存暂停，无新定时任务；网格断裂本体、所有路线覆盖及超时后写锁的自动恢复均未在此修复中宣称完成。
+
 ## 2026-09-14 · H80 用户要求的最新村民实录
 
 H79及此前六个本地提交已按用户要求push至origin/main，远端HEAD核对为11c58e944471235f96006d55888362c9439a2029。随后按用户“最小视频、无文字讲解”请求，从同一seq124存档启动可见Godot场景及真实Kimi；未派发GM、未增加定时任务。录像启动器首次缺tools导入路径，provider前失败，修复并保留preflight-failure日志。引擎内置Movie Maker最终触发125秒墙钟超时，engine_exit124、validation_passed=false、无结束capture回执；不将录像当成功完成的生活批次。4次Kimi已结算，新增0.1294048元，gateway已排空，无挂起或新未知，全部owned进程退出；canonical保存到seq128，原身份与旧事件前缀保持，GM state未改。当前累计84次Kimi、50次已计量GM及1次历史GM未知。
