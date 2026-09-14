@@ -381,12 +381,19 @@ func _physics_process(delta: float) -> void:
 			_foraging_exit_targets.erase(id)
 			var target := town.destination(id, job.action)
 			var direction := Vector3.ZERO
+			## The navmesh route is authoritative only while it really reaches THIS journey's target.
+			## The bake has a measured gap across the market/field junction (cell_size 0.10 with
+			## agent_max_climb 0.04): from the market floor the server returns a partial path, the
+			## helper calls the trip unreachable and used to leave the body standing still while the
+			## world's own stall rule counted zero movement and closed the accepted journey as
+			## travel_blocked. A route that does not reach the target - or a map that is not baked
+			## yet - now falls back to the same road-graph steering the place trips, place-bound
+			## rests and home trips already use. The destination, the 0.45 m arrival gate, the job
+			## timers and every collider stay exactly the world's own.
+			var nav_reaches_target := false
 			if town_navigation != null:
 				direction = town_navigation.direction_for(id, str(job.command_id), body, target)
-				if town_navigation.is_unreachable(id):
-					latest = "%s 无法到达当前目的地，已停止移动。" % town.resident(id).name
-				elif not town_navigation.enabled:
-					latest = "导航地图尚未就绪，暂不移动。"
+				nav_reaches_target = town_navigation.enabled and not town_navigation.is_unreachable(id)
 			## A public-place trip (and its place-bound rest) keeps the accepted place steering.
 			var place_trip: bool = job.action == "travel" or (job.action == "rest" and job.has("place_id"))
 			## Basic-life travel to the resident's own fixed point: eat_ration, harvest_ration, and
@@ -399,7 +406,7 @@ func _physics_process(delta: float) -> void:
 			## collisions and its 20 s work; only the walking route changes, and when the road
 			## method yields no direction the pre-existing bounded local push still applies.
 			var home_trip: bool = _spaced_foraging and (job.action in ["eat_ration", "harvest_ration"] or (job.action == "rest" and not job.has("place_id")))
-			if town_navigation != null:
+			if nav_reaches_target:
 				pass
 			elif place_trip and place_steering != null:
 				direction = place_steering.direction_for(id, str(job.command_id), body, target)
@@ -420,6 +427,16 @@ func _physics_process(delta: float) -> void:
 				offset.y = 0
 				if offset.length() > 0.30:
 					direction = offset.normalized()
+			if town_navigation != null and not nav_reaches_target:
+				## The status line stays honest: the street route is reported only when the body
+				## really has a steering direction to walk, otherwise the stop is still stated.
+				var resident_name: String = str(town.resident(id).name)
+				if direction.length() > 0.0:
+					latest = "%s 的导航路线到不了当前目的地，改沿街道前往。" % resident_name
+				elif town_navigation.enabled:
+					latest = "%s 无法到达当前目的地，已停止移动。" % resident_name
+				else:
+					latest = "导航地图尚未就绪，暂不移动。"
 			if not place_trip and not home_trip:
 				if place_steering != null:
 					place_steering.clear_route(id)
