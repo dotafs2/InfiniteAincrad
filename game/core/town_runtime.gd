@@ -22,6 +22,15 @@ const BASIC_ACTION_ARRIVAL_RADIUS := 0.45
 const BASIC_ACTION_PENDING_PREFIX := "basic_action_pending:"
 const CAPABILITY_ID_MAX_LENGTH := 48
 const NEED_REASON_MAX_LENGTH := 512
+## Bounded PUBLIC LIFE EVENT projection for the separate GM process: the words residents
+## actually delivered in public, published as neutral observational utterance evidence only.
+const BACKGROUND_GM_LIFE_EVENT_LIMIT := 8
+const BACKGROUND_GM_LIFE_EVENT_TEXT_LIMIT := 280
+## The delivered public help-utterance event types. town_life appends one of these to
+## life.events only after the world accepted the turn and the words were delivered to the
+## stated recipients. Optional speech that was never sent (speech_not_supported_for_action)
+## and the reply's private deliberation reason are never in this set.
+const BACKGROUND_GM_PUBLIC_LIFE_EVENT_TYPES := ["ask_help", "reply_help"]
 
 var _gm_export_path := ""
 var _gm_export_signature := ""
@@ -225,6 +234,13 @@ func background_gm_snapshot() -> Dictionary:
 		if issues.size() >= BACKGROUND_GM_EVIDENCE_LIMIT:
 			break
 		issues.append(pending)
+	## Delivered public life events share this same bounded channel, appended last: a resident's
+	## delivered public words are observational evidence of what they actually said, never a
+	## stall, a defect or an automatic capability.
+	for delivered in _public_life_event_evidence():
+		if issues.size() >= BACKGROUND_GM_EVIDENCE_LIMIT:
+			break
+		issues.append(delivered)
 	var proposals: Array = []
 	for record in _background_gm_records():
 		proposals.append({"evidence_kind": "capability_proposed", "proposal_id": record.get("proposal_id", ""),
@@ -290,6 +306,46 @@ func _basic_action_pending_entry(id: String, job: Dictionary, action: String) ->
 		"discriminators": {"movement_blocked": false, "collision_proved": false, "stall_proved": false,
 			"note": "pending basic-action facts only; an ordinary pending action is not a stall, a defect or a blocked body"}}
 
+func _public_life_event_evidence() -> Array:
+	# Read-only. Publishes, as bounded neutral utterance evidence for the separate GM process, the words
+	# a resident ACTUALLY delivered in public: immutable world id plus event id and world sequence,
+	# speaker and recipients, the original request reference and the delivered text. It is NOT an
+	# achieved capability, an invented need, a defect, a stall or a proven missing mechanism, and
+	# it never carries a private reply reason, undelivered speech or another resident's private
+	# memory. Only allowlisted fields are copied; the raw life event is never dumped.
+	var result: Array = []
+	var events: Variant = _state.life.get("events", [])
+	if not events is Array:
+		return result
+	for index in range(events.size() - 1, -1, -1):
+		if result.size() >= BACKGROUND_GM_LIFE_EVENT_LIMIT:
+			break
+		var event: Variant = events[index]
+		if not event is Dictionary or not BACKGROUND_GM_PUBLIC_LIFE_EVENT_TYPES.has(str(event.get("type", ""))):
+			continue
+		var text := str(event.get("text", "")).strip_edges()
+		if text.is_empty():
+			continue
+		var recipients: Array = []
+		for recipient in event.get("recipient_ids", []):
+			recipients.append(str(recipient))
+		var event_id := str(event.get("event_id", ""))
+		result.append({"evidence_kind": "public_life_event",
+			"issue_id": "public_life_event:" + event_id,
+			"world_id": _state.world_id, "event_id": event_id, "seq": int(event.get("seq", 0)),
+			"event_type": str(event.get("type", "")), "speaker_id": str(event.get("actor_id", "")),
+			"recipient_ids": recipients, "request_ref": str(event.get("request_id", "")),
+			"operation_id": str(event.get("operation_id", "")),
+			"delivered_text": text.substr(0, BACKGROUND_GM_LIFE_EVENT_TEXT_LIMIT),
+			"text_truncated": text.length() > BACKGROUND_GM_LIFE_EVENT_TEXT_LIMIT,
+			"status": "observed", "event_source": str(event.get("source", "")),
+			"event_provenance": str(event.get("provenance", "")),
+			"discriminators": {"delivered": true, "public_utterance": true,
+				"missing_mechanism_proved": false, "achieved_capability": false, "invented_need": false,
+				"note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation"}})
+	result.reverse()
+	return result
+
 func background_gm_content_signature() -> String:
 	# Meaningful GM-visible content only: advancing timers (no_progress_seconds) and
 	# clocks are excluded, so a stagnant-but-unchanged issue never rewrites the file.
@@ -297,8 +353,9 @@ func background_gm_content_signature() -> String:
 	var evidence: Array = []
 	for entry in snapshot.evidence:
 		var trimmed: Dictionary = entry.duplicate(true)
-		if trimmed.get("physical_facts", {}) is Dictionary:
-			trimmed.physical_facts.erase("no_progress_seconds")
+		var facts: Variant = trimmed.get("physical_facts")
+		if facts is Dictionary:
+			facts.erase("no_progress_seconds")
 		evidence.append(trimmed)
 	return JSON.stringify({"evidence": evidence, "proposals": snapshot.proposals})
 

@@ -430,10 +430,11 @@ def run_process(command: list, timeout: int, cwd: Path = ROOT, deadline=None) ->
             finally:
                 tree.close()
             members = (outcome['owned'] or {}).get('observed_members') or []
-            nonzero = [member.get('exit_code') for member in members
-                       if member.get('exit_code') not in (None, 0)]
+            nonzero = [member for member in members if isinstance(member, dict)
+                       and member.get('exit_code') not in (None, 0)]
+            outcome['wrapper_exit_code'] = outcome['exit_code']
             if outcome['exit_code'] == 0 and nonzero:
-                outcome['exit_code'] = nonzero[0]
+                outcome['exit_code'] = nonzero[0]['exit_code']
                 outcome['exit_reconciled_from_member'] = True
     else:
         process = subprocess.Popen(command, cwd=str(cwd), stdout=subprocess.PIPE,
@@ -453,6 +454,18 @@ def run_process(command: list, timeout: int, cwd: Path = ROOT, deadline=None) ->
                                 'observed_members': [{'pid': process.pid}],
                                 'all_members_exited': process.poll() is not None,
                                 'member_identity_list_complete': True}
+    # Command exit provenance. The process this host started carries the AUTHORITATIVE outcome
+    # of the command; a nested tool/probe that failed after the command's own work settled is
+    # kept as evidence instead of being invented as that command's result. `exit_code` keeps
+    # the long-standing reconciled value, so a caller that owns the whole tree - every host
+    # test command - still fails on a hidden child failure, while a caller that trusts a
+    # completed runner receipt can compare the wrapper's own exit.
+    nested = [item for item in ((outcome['owned'] or {}).get('observed_members') or [])
+              if isinstance(item, dict) and item.get('exit_code') not in (None, 0)]
+    outcome.setdefault('wrapper_exit_code', outcome['exit_code'])
+    outcome.setdefault('observed_nonzero_member_exits',
+                       [{'pid': item.get('pid'), 'exit_code': item.get('exit_code')}
+                        for item in nested])
     outcome['seconds'] = round(time.time() - started, 3)
     return outcome
 
@@ -478,6 +491,164 @@ def runner_command(runner: dict, subcommand: str, *args) -> list:
             command += ['--timeout', str(runner['timeout'])]
     command += [str(item) for item in args]
     return command
+
+
+def validated_observe_receipt(cycle, run_id, dispatched=None):
+    """The durable gm_runner observe receipt for this exact run, or None when it is not trusted.
+
+    The host never certifies an observation from a stdout status: it re-reads the run.json the
+    runner itself wrote under runs/<run_id>/ and requires the whole closed set - the exact run id,
+    the pinned world and evidence digest, unchanged guards, no credential leak, no deploy, and
+    every dispatched GM settled ok with measured, known usage. Anything missing returns None,
+    which callers must treat as unverified, never as success.
+    """
+    if (not isinstance(run_id, str) or not run_id or safe_relpath(run_id) != run_id
+            or '/' in run_id or '\\' in run_id):
+        return None
+    runs_root = cycle.state_dir / 'runs'
+    path = runs_root / run_id / 'run.json'
+    if not is_within(path, runs_root) or not path.is_file():
+        return None
+    try:
+        receipt = gm_runner.load_json(path)
+    except (OSError, ValueError):
+        return None
+    if not isinstance(receipt, dict) or receipt.get('kind') != 'gm_observe':
+        return None
+    if receipt.get('status') != 'ok' or receipt.get('run_id') != run_id:
+        return None
+    if receipt.get('aborted_by') or receipt.get('credential_leak_in_run_dir'):
+        return None
+    guards = receipt.get('guards') or {}
+    before, after, claimed = guards.get('before'), guards.get('after'), guards.get('changed')
+    if not isinstance(before, dict) or not isinstance(after, dict):
+        return None
+    if not isinstance(claimed, list) or claimed:
+        return None
+    try:
+        if gm_runner.guard_diff(before, after):
+            return None
+    except KeyError:
+        return None
+    if receipt.get('deployed') or receipt.get('review_state') != 'unapproved':
+        return None
+    world_id = cycle.policy.get('world_id')
+    evidence = receipt.get('evidence') or {}
+    if receipt.get('world_binding') != world_id:
+        return None
+    if evidence.get('world_id') != world_id or evidence.get('sha256') != cycle.evidence_sha256:
+        return None
+    if sha256_file(cycle.evidence) != cycle.evidence_sha256:
+        return None
+    results = receipt.get('results')
+    if not isinstance(results, list) or not results:
+        return None
+    if receipt.get('dispatched') != len(results):
+        return None
+    if dispatched is not None and int(dispatched) != len(results):
+        return None
+    gms = []
+    for item in results:
+        if not isinstance(item, dict):
+            return None
+        gm_id = item.get('gm_id')
+        if not isinstance(gm_id, str) or not gm_id or gm_id in gms:
+            return None
+        if item.get('status') != 'ok' or item.get('usage_measured') is not True:
+            return None
+        if item.get('exit_code') != 0:
+            return None
+        if item.get('cost') != 'measured' or item.get('unknown') or item.get('error'):
+            return None
+        if not item.get('dispatched'):
+            return None
+        gms.append(gm_id)
+    return {'run_id': run_id, 'receipt_path': gm_runner.relative(path),
+            'receipt_sha256': sha256_file(path), 'dispatched': len(results), 'gm_ids': sorted(gms),
+            'world_id': world_id, 'evidence_sha256': cycle.evidence_sha256}
+
+
+def observe_receipt_reference(cycle, summary, result):
+    """The exact carried receipt for one just-finished gm_runner observe dispatch, else None.
+
+    The dispatch starts ONE gm_runner command, so the wrapper this host started is the
+    authoritative exit and only the durable receipt may certify what the observation did. A
+    timeout, a live member, a held-open tree or a wrapper that itself exited nonzero refuses; the
+    nested probe exits are returned as evidence, never as the outcome.
+    """
+    if not isinstance(summary, dict) or summary.get('kind') != 'gm_observe':
+        return None
+    if (summary.get('status') != 'ok' or result.get('timed_out') is not False
+            or result.get('deadline_exceeded')):
+        return None
+    owned = result.get('owned') or {}
+    if not isinstance(owned, dict) or owned.get('all_members_exited') is not True:
+        return None
+    if owned.get('active_processes') not in (None, 0):
+        return None
+    if any(isinstance(member, dict) and member.get('running')
+           for member in (owned.get('observed_members') or [])):
+        return None
+    wrapper = result.get('wrapper_exit_code')
+    if wrapper is None:
+        wrapper = result.get('exit_code')
+    if type(wrapper) is not int or wrapper != 0:
+        return None
+    if summary.get('evidence', {}).get('sha256') != cycle.evidence_sha256:
+        return None
+    dispatched = summary.get('dispatched')
+    if not isinstance(dispatched, int) or dispatched < 1:
+        return None
+    reference = validated_observe_receipt(cycle, summary.get('run_id'), dispatched)
+    if reference is None:
+        return None
+    reference['reconciled_member_exit'] = bool(result.get('exit_reconciled_from_member'))
+    reference['observed_nonzero_member_exits'] = result.get('observed_nonzero_member_exits') or []
+    return reference
+
+
+def carried_observe_receipt(cycle, record):
+    """The receipt a blocked observe_failed record already earned, or None.
+
+    Offline recovery only. The retained record must show that the command this host started
+    (wrapper_pid) exited 0 and that the record's own reconciled exit came solely from nested
+    children, and the durable receipt must still prove the whole closed set. A record that cannot
+    prove both - or one that failed for its own reason - is refused rather than carried.
+    """
+    if not isinstance(record, dict) or record.get('status') != 'failed':
+        return None
+    if record.get('timed_out') is not False or record.get('deadline_exceeded'):
+        return None
+    if record.get('unknown_cost_gms'):
+        return None
+    owned = record.get('owned') or {}
+    if not isinstance(owned, dict) or owned.get('all_members_exited') is not True:
+        return None
+    if owned.get('active_processes') not in (None, 0):
+        return None
+    members = [item for item in (owned.get('observed_members') or []) if isinstance(item, dict)]
+    if any(member.get('running') for member in members):
+        return None
+    wrapper = record.get('wrapper_exit_code')
+    if wrapper is None:
+        wrapper = next((member.get('exit_code') for member in members
+                        if member.get('pid') == owned.get('wrapper_pid')), None)
+    if type(wrapper) is not int or wrapper != 0:
+        return None
+    nested = record.get('observed_nonzero_member_exits') or owned.get('observed_nonzero_exits')
+    if not nested:
+        return None
+    dispatched = record.get('dispatched')
+    if not isinstance(dispatched, int) or dispatched < 1:
+        return None
+    reference = validated_observe_receipt(cycle, record.get('run_id'), dispatched)
+    if reference is None:
+        return None
+    reference['reconciled_member_exit'] = True
+    reference['observed_nonzero_member_exits'] = [
+        {'pid': item.get('pid'), 'exit_code': item.get('exit_code')}
+        for item in nested if isinstance(item, dict)]
+    return reference
 
 
 def installation_lock_root() -> Path:
@@ -524,7 +695,8 @@ class Cycle:
     """
 
     def __init__(self, policy_path: Path, policy: dict, runner: dict, stop_after,
-                 watch_deadline=None, watch_calls=None, allow_deferred_advance=False):
+                 watch_deadline=None, watch_calls=None, allow_deferred_advance=False,
+                 selected_gms=None):
         self.policy_path = policy_path
         self.policy = policy
         self.policy_sha = sha256_file(policy_path)
@@ -546,6 +718,9 @@ class Cycle:
         self.watch_deadline = float(watch_deadline) if watch_deadline is not None else None
         self.watch_calls_remaining = int(watch_calls) if watch_calls is not None else None
         self.allow_deferred_advance = bool(allow_deferred_advance)
+        # An explicit `cycle --gm` selector. Only the observe dispatch consumes it, and only these
+        # roster GMs are asked; code and feedback keep using the issue's owning GM.
+        self.selected_gms = ([str(item) for item in selected_gms] if selected_gms else None)
         self.deadline = time.time() + int(self.limits['deadline_seconds'])
         if self.watch_deadline is not None:
             self.deadline = min(self.deadline, self.watch_deadline)
@@ -744,6 +919,10 @@ class Cycle:
         if queued is not None:
             return queued
         estimate = int(self.limits.get('max_gms', 10))
+        if self.selected_gms:
+            # An explicit selector is the exact dispatch set: never widened to the roster and never
+            # silently trimmed. The reservation below is the same count that is dispatched.
+            estimate = len(self.selected_gms)
         remaining_calls = self.max_model_calls() - int(cycle.get('model_calls', 0))
         if self.watch_calls_remaining is not None:
             estimate = max(0, min(estimate, remaining_calls))
@@ -762,9 +941,21 @@ class Cycle:
                                  '--max-issues-per-gm', str(self.limits.get('max_issues_per_gm', 4)),
                                  '--prior-ledger', str(self.ledger),
                                  '--protect', str(self.policy_path))
+        for gm_id in (self.selected_gms or []):
+            command.extend(['--gm', gm_id])
         self.reserve(cycle, record, 'observe', estimate)
         result = run_process(command, self.runner.get('timeout') or 900, deadline=self.deadline)
         summary = last_json_line(result['stdout'])
+        # Command exit provenance for this ONE gm_runner command. Nested codex probes can settle
+        # with a nonzero exit after the runner itself finished, so the reconciled `exit_code`
+        # alone must not turn a completed observation into observe_failed. Only the exact durable
+        # receipt the runner wrote - bound to this pinned world and evidence, with every dispatch
+        # settled ok and measured, the guards clean, no leak and no live child - may certify the
+        # observation, and the nested exits stay in the record as evidence. Every other command
+        # (host test commands, candidate coding) still fails on its own reconciled exit.
+        carried = None
+        if summary is not None and result['exit_code'] != 0:
+            carried = observe_receipt_reference(self, summary, result)
         if summary is None:
             # The transport outcome is ambiguous. Keep the conservative reservation so an
             # interrupted batch is never counted as free, and never replayed.
@@ -777,6 +968,12 @@ class Cycle:
             self.settle(cycle, record, observed_calls)
         evidence = (summary or {}).get('evidence') or {}
         record.update({'run_id': (summary or {}).get('run_id'), 'exit_code': result['exit_code'],
+                       'wrapper_exit_code': result.get('wrapper_exit_code'),
+                       'exit_reconciled_from_member':
+                           bool(result.get('exit_reconciled_from_member')),
+                       'observed_nonzero_member_exits':
+                           result.get('observed_nonzero_member_exits') or [],
+                       'carried_receipt': carried,
                        'seconds': result['seconds'], 'dispatched': (summary or {}).get('dispatched'),
                        'model_calls_observed': observed_calls,
                        'owned': result.get('owned'), 'timed_out': result['timed_out'],
@@ -785,7 +982,7 @@ class Cycle:
                        'world_binding': (summary or {}).get('world_binding'),
                        'unknown_cost_gms': (summary or {}).get('unknown_cost_gms'),
                        'stderr_tail': result['stderr'][-400:]})
-        if summary is None or result['exit_code'] != 0:
+        if summary is None or (result['exit_code'] != 0 and carried is None):
             record['status'] = 'failed'
             record['blocked_reason'] = (summary or {}).get('message') or 'gm_runner observe failed'
             self.save_cycle(cycle)
@@ -2192,16 +2389,44 @@ def preflight(cycle: Cycle):
     return None, {}
 
 
+def selected_gm_selection(selected, policy):
+    """Validate an explicit `cycle --gm` selection before anything is dispatched.
+
+    The selection is checked against the real gm_runner roster and the policy's own max_gms and is
+    then forwarded verbatim to gm_runner.observe: never widened to the roster, never silently
+    trimmed, never reordered. Returns (refusal_exit_code, None) or (None, ordered_selection).
+    """
+    if not selected:
+        return None, None
+    unknown = sorted({item for item in selected if item not in gm_runner.GM_IDS})
+    if unknown:
+        return gm_runner.refusal('unknown_gm_selection',
+                                 f'not a gm_runner roster id: {unknown}', USAGE), None
+    duplicates = sorted({item for item in selected if selected.count(item) > 1})
+    if duplicates:
+        return gm_runner.refusal('duplicate_gm_selection',
+                                 f'selected more than once: {duplicates}', USAGE), None
+    maximum = int((policy_values(policy).get('limits') or {}).get('max_gms', 10))
+    if len(selected) > maximum:
+        return gm_runner.refusal('gm_selection_over_limit',
+                                 f'{len(selected)} GMs selected but max_gms is {maximum}',
+                                 USAGE), None
+    return None, [str(item) for item in selected]
+
+
 def command_cycle(args) -> int:
     policy_path = Path(args.policy).resolve()
     try:
         policy = gm_runner.read_autonomy_policy(policy_path)
     except (OSError, ValueError, json.JSONDecodeError) as error:
         return gm_runner.refusal('autonomy_policy_invalid', str(error), USAGE)
+    refused, selected = selected_gm_selection(list(getattr(args, 'gm', None) or []), policy)
+    if refused is not None:
+        return refused
     runner = {key: value for key, value in
               {'config': args.config, 'key_file': args.key_file, 'codex': args.codex,
                'codex_home': args.codex_home, 'timeout': args.timeout}.items() if value}
-    cycle = Cycle(policy_path, policy, runner, args.stop_after)
+    cycle = Cycle(policy_path, policy, runner, args.stop_after, selected_gms=selected)
     blocked, payload = preflight(cycle)
     if blocked is not None:
         return gm_runner.emit(payload, blocked)
@@ -2587,6 +2812,162 @@ def command_status(args) -> int:
     return gm_runner.emit({'status': 'ok', 'state_dir': str(state_dir), 'cycles': cycles}, OK)
 
 
+def recovery_identity(source_cycle_id: str, reference: dict) -> str:
+    """One stable identity per source cycle plus its exact durable receipt.
+
+    A second `recover-observe` for the same pair must return the recovery that already exists
+    rather than writing another cycle, another generation bump or another usage record.
+    """
+    material = '|'.join([source_cycle_id, str(reference.get('receipt_sha256'))])
+    return 'rec-' + sha256_bytes(material.encode())[:16]
+
+
+def recorded_recovery(cycle, identity: str, marker: Path) -> dict:
+    """The completed recovery this identity already recorded, or a truthful refusal."""
+    try:
+        recorded = gm_runner.load_json(marker)
+    except (OSError, ValueError) as error:
+        raise ValueError('the recovery index for this source and receipt is unreadable: '
+                         + str(error))
+    if not isinstance(recorded, dict) or recorded.get('identity') != identity:
+        raise ValueError('the recovery index for this source and receipt does not match it')
+    new_dir = cycle.autonomy_dir() / str(recorded.get('new_cycle_id'))
+    cycle_path = new_dir / 'cycle.json'
+    if not cycle_path.is_file():
+        raise ValueError('a recovery for this source and receipt is recorded but its cycle is gone')
+    try:
+        document = gm_runner.load_json(cycle_path)
+    except (OSError, ValueError) as error:
+        raise ValueError('the recorded recovery cycle is unreadable: ' + str(error))
+    if document.get('status') not in ('no_action', 'completed'):
+        raise ValueError('a recovery for this source and receipt exists but is not terminal')
+    return {'recovery': recorded.get('recovery'), 'cycle_id': document.get('cycle_id'),
+            'report_path': gm_runner.relative(new_dir / 'report.json'),
+            'exit_code': OK, 'already_recovered': True}
+
+
+def recover_observe_cycle(cycle, source_cycle_id: str) -> dict:
+    """Serialized entry point: the same `cycle-owner` lock every bounded run takes, so a
+    competing owner refuses through the existing lock rather than racing the pointer."""
+    cycle.autonomy_dir().mkdir(parents=True, exist_ok=True)
+    with cycle.cycle_lock() as lock:
+        return carry_observe_cycle(cycle, source_cycle_id,
+                                   lock_recovered=getattr(lock, 'recovered', None))
+
+
+def carry_observe_cycle(cycle, source_cycle_id: str, lock_recovered=None) -> dict:
+    """Carry one already-completed observe receipt into a fresh cycle with NO new model call.
+
+    The original blocked cycle and its report are history and are never rewritten. A NEW cycle
+    directory (next generation over the same pinned policy and evidence) records an explicit
+    carried-receipt recovery, the carried observe stage itself, and the truthful empty-claims
+    no_action terminal state, so the next outer phase closes it without buying the observation
+    again. A source cycle that still owes a claimed scope, or whose retained record and durable
+    receipt do not prove a completed observation, is refused rather than guessed at. Repeating
+    the same source cycle and receipt returns the recovery already recorded for that exact pair.
+    """
+    if (not isinstance(source_cycle_id, str) or not source_cycle_id
+            or safe_relpath(source_cycle_id) != source_cycle_id or '/' in source_cycle_id):
+        raise ValueError('the source cycle must be one plain autonomy directory name')
+    source_dir = cycle.autonomy_dir() / source_cycle_id
+    source_path = source_dir / 'cycle.json'
+    source_report = source_dir / 'report.json'
+    if not source_path.is_file() or not source_report.is_file():
+        raise ValueError('the source cycle document and its report must both exist')
+    source = gm_runner.load_json(source_path)
+    if source.get('status') != 'blocked' or source.get('blocked_reason') != 'observe_failed':
+        raise ValueError('only a blocked observe_failed cycle can carry its observation forward')
+    if source.get('unknown'):
+        raise ValueError('the source cycle still carries unresolved unknown usage')
+    if source.get('policy_sha256') != cycle.policy_sha:
+        raise ValueError('the standing policy changed; refusing to carry an older observation')
+    if source.get('world_id') != cycle.policy.get('world_id'):
+        raise ValueError('the source cycle belongs to another world')
+    if source.get('evidence_sha256') != cycle.evidence_sha256:
+        raise ValueError('the pinned evidence changed; refusing to carry a stale observation')
+    record = (source.get('stages') or {}).get('observe') or {}
+    reference = carried_observe_receipt(cycle, record)
+    if reference is None:
+        raise ValueError('the retained observe record and its durable receipt do not prove a '
+                         'completed observation')
+    state = gm_runner.load_state(cycle.state_dir)
+    # A currently unresolved unknown-cost GM stops the recovery. The stale `in_flight` reservation
+    # this failed observe still carries is NOT that: the durable receipt proves all ten dispatches
+    # settled, and global_unknown_gms reads the GM state, where this run left none.
+    unknown_gms = gm_runner.global_unknown_gms(state)
+    if unknown_gms:
+        raise ValueError('unresolved unknown-cost GMs stop the recovery: ' + ','.join(unknown_gms))
+    claims = [issue for issue in state['issues'].values()
+              if issue.get('owner_run_id') == reference['run_id'] and issue.get('owner_gm')
+              and issue.get('proposed_scope')]
+    if claims:
+        raise ValueError('this observation still owes a claimed scope; carrying it forward without '
+                         'a candidate stage is not supported')
+    identity = recovery_identity(source_cycle_id, reference)
+    index_dir = cycle.autonomy_dir() / 'recoveries'
+    marker = index_dir / (identity + '.json')
+    if marker.is_file():
+        return recorded_recovery(cycle, identity, marker)
+    generation = cycle.bump_generation()
+    fresh = Cycle(cycle.policy_path, cycle.policy, cycle.runner, None)
+    document = fresh.load_cycle()
+    carried = dict(record)
+    carried.pop('in_flight', None)
+    carried.update({'status': 'done', 'no_action': True,
+                    'carried_from_cycle': source_cycle_id, 'carried_receipt': reference,
+                    'carried_model_calls': int(source.get('model_calls') or 0),
+                    'no_new_model_call': True,
+                    'selection': ('the carried observation completed with no claimed scope; '
+                                  'no_action preserved and nothing published')})
+    recovery = {'schema_version': CYCLE_SCHEMA, 'kind': 'gm_observe_carried_receipt_recovery',
+                'source_cycle_id': source_cycle_id,
+                'source_cycle_sha256': sha256_file(source_path),
+                'source_report_path': gm_runner.relative(source_report),
+                'source_report_sha256': sha256_file(source_report),
+                'source_blocked_reason': source.get('blocked_reason'),
+                'source_policy_sha256': source.get('policy_sha256'),
+                'carried_stage': 'observe', 'carried_status': 'no_action',
+                'carried_model_calls': int(source.get('model_calls') or 0),
+                'no_new_model_call': True, 'generation': generation, 'identity': identity,
+                'owner_lock_recovered': lock_recovered,
+                'new_cycle_id': fresh.cycle_dir().name, 'receipt': reference,
+                'written_utc': gm_runner.utc_iso()}
+    document['status'] = 'running'
+    document['stage'] = 'observe'
+    document['model_calls'] = 0
+    document['stages'] = {'observe': carried}
+    document['carried_receipt_recovery'] = recovery
+    fresh.save_cycle(document)
+    gm_runner.save_json(fresh.cycle_dir() / 'carried-receipt-recovery.json', recovery)
+    exit_code = fresh.finish_cycle(document, 'no_action', OK)
+    # Recorded only after the recovery cycle is terminal, so a crash mid-write leaves a refusal
+    # on the next attempt instead of a duplicate cycle.
+    index_dir.mkdir(parents=True, exist_ok=True)
+    gm_runner.save_json(marker, dict(recovery, identity=identity))
+    return {'recovery': recovery, 'cycle_id': document['cycle_id'],
+            'report_path': gm_runner.relative(fresh.cycle_dir() / 'report.json'),
+            'exit_code': exit_code, 'already_recovered': False}
+
+
+def command_recover_observe(args) -> int:
+    policy_path = Path(args.policy).resolve()
+    try:
+        policy = gm_runner.read_autonomy_policy(policy_path)
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        return gm_runner.refusal('autonomy_policy_invalid', str(error), USAGE)
+    runner = {key: value for key, value in
+              {'config': args.config, 'key_file': args.key_file, 'codex': args.codex,
+               'codex_home': args.codex_home, 'timeout': args.timeout}.items() if value}
+    cycle = Cycle(policy_path, policy, runner, None)
+    try:
+        result = recover_observe_cycle(cycle, args.cycle)
+    except RuntimeError as error:
+        return gm_runner.refusal('lock_held', str(error), LOCK)
+    except (OSError, ValueError) as error:
+        return gm_runner.refusal('observe_recovery_refused', str(error), USAGE)
+    return result['exit_code']
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -2600,6 +2981,9 @@ def build_parser() -> argparse.ArgumentParser:
     cycle_parser.add_argument('--codex', help='passed through to gm_runner (tests inject a fake)')
     cycle_parser.add_argument('--codex-home', type=Path)
     cycle_parser.add_argument('--timeout', type=int, default=900)
+    cycle_parser.add_argument('--gm', action='append', default=[],
+                              help='observe only these gm_runner roster GMs (repeatable); the '
+                                   'default observes the roster bounded by max_gms')
     cycle_parser.set_defaults(func=command_cycle)
     watch_parser = subparsers.add_parser(
         'watch', help='bounded local repeat coordinator (no supervisor dispatch per stage)')
@@ -2623,6 +3007,17 @@ def build_parser() -> argparse.ArgumentParser:
     status_parser = subparsers.add_parser('status', help='read-only cycle summary')
     status_parser.add_argument('--state-dir', required=True, type=Path)
     status_parser.set_defaults(func=command_status)
+    recover_parser = subparsers.add_parser(
+        'recover-observe', help='offline: carry one completed observe receipt forward, no calls')
+    recover_parser.add_argument('--policy', required=True, type=Path)
+    recover_parser.add_argument('--cycle', required=True,
+                                help='the blocked autonomy cycle directory name to recover')
+    recover_parser.add_argument('--config', type=Path)
+    recover_parser.add_argument('--key-file', type=Path)
+    recover_parser.add_argument('--codex')
+    recover_parser.add_argument('--codex-home', type=Path)
+    recover_parser.add_argument('--timeout', type=int, default=900)
+    recover_parser.set_defaults(func=command_recover_observe)
     return parser
 
 
