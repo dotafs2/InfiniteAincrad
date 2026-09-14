@@ -221,6 +221,12 @@ flowchart TD
     H54 -.基础pending不在GM投影.-> H55
     H55["H55 原GM10基础动作可见性（实际已验）<br/>真实行进与工作记录；原十GM读取并由作者确认"]
     H55 --> M20H
+    H55 -.真实采集长期未到达.-> H56
+    H56["H56 原GM01采集点道路寻路（离线已验）<br/>保留原采集目标与工作；待同档实际采用"]
+    H56 --> M20E
+    H55 -.面包师收到过长理由后停住.-> H57
+    H57["H57 原GM09过长理由一次冷恢复（离线已验）<br/>保留512上限与旧失败；待原面包师新请求"]
+    H57 --> M20C
     M20E --> M20
     M20 -.持续稳定性.-> M20F
     H20 --> M20G
@@ -251,7 +257,7 @@ flowchart TD
     class H37,H40,H41,H42,H44,H45,H46 done;
     class H47 partial;
     class H48,H49,H50,H51,H52 done;
-    class H53 partial;
+    class H53,H56,H57 partial;
     class H55 done;
     class H54 done;
     class H38 partial;
@@ -549,3 +555,6 @@ This review did not implement gameplay, import candidates, run paid models, publ
 Earlier G0–G3 migration/budget records remain available in [the prior roadmap at 59bd52e](https://github.com/dotafs2/InfiniteAincrad/blob/59bd52e/ROADMAP.md) and the private transfer records. Those historical deadlines and automatic-run instructions are not fresh authorization. No original-world gate is marked complete by this public-preview plan.
 
 Full geography, VR, multiplayer, combat, autonomous code installation, generic plugin marketplaces and a replacement engine/backend remain outside this first collaboration release.
+
+| H56 | 原GM01认领issue-fefb577df7e8，复用既有道路寻路处理原采集动作；原目标、碰撞、0.45米到达与20秒工作保持。私有完整场景验证见本机记录。 | **部分：离线验收已接受，待原Kimi世界实际完成原织工任务**；移动不等于完成，不声称所有碰撞已修复。 |
+| H57 | 原GM09认领issue-5e0154668121，仅对实际收到且因理由超过512字被拒的回执，冷启动准入一次新请求；155项既有测试及39项独立检查通过。 | **部分：离线已验，待原面包师实际恢复**；第二次连续过长保持阻塞，原调用上限通道独立，旧失败与未知费用保留。 |

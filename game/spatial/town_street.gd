@@ -375,13 +375,16 @@ func _physics_process(delta: float) -> void:
 			var direction := Vector3.ZERO
 			## A public-place trip (and its place-bound rest) keeps the accepted place steering.
 			var place_trip: bool = job.action == "travel" or (job.action == "rest" and job.has("place_id"))
-			## Basic-life travel to the resident's own fixed point: eat_ration, and rest with no public
-			## place target. With the spaced-foraging layout installed those bodies walk the lower
-			## field, where the straight local push stops at the market floor's south lip (a vertical
-			## step outside the junction ramp) and the accepted job accrues no time. The same verified
-			## road graph the place trips use crosses that junction on the ramp, so the body can come
-			## home and satisfy the world's own 0.45 m gate. harvest_ration keeps its foraging steering.
-			var home_trip: bool = _spaced_foraging and (job.action == "eat_ration" or (job.action == "rest" and not job.has("place_id")))
+			## Basic-life travel to the resident's own fixed point: eat_ration, harvest_ration, and
+			## rest with no public place target. With the spaced-foraging layout installed those
+			## bodies walk the lower field, where the straight local push stops at the market
+			## floor's south lip (a vertical step outside the junction ramp) and the accepted job
+			## accrues no time and never reaches its own point. The same verified road graph the
+			## place trips use crosses that junction on the ramp, so the body can come home and
+			## satisfy the world's own 0.45 m gate. The accepted harvest keeps its own target, its
+			## collisions and its 20 s work; only the walking route changes, and when the road
+			## method yields no direction the pre-existing bounded local push still applies.
+			var home_trip: bool = _spaced_foraging and (job.action in ["eat_ration", "harvest_ration"] or (job.action == "rest" and not job.has("place_id")))
 			if place_trip and place_steering != null:
 				direction = place_steering.direction_for(id, str(job.command_id), body, target)
 			elif home_trip and place_steering != null:
