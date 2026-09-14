@@ -2,7 +2,7 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
-## 2026-09-14 · H79 原GM06改进已被居民使用，等待原GM效果复查
+## 2026-09-14 · H79 原GM06改进被居民使用并由原GM复查接受，最小闭环完成
 
 seq102的十GM观察run-20260914T092618Z-18f648已结束：10次已计量、9份原协议有效、GM06原426字符提案因旧长度规则拒收，无新未知，owned全退出。观察期间主AI/Luna做了已记录修复并提交7123433、e5a8b98，故原guard显示git_head/git_worktree变化；保留incomplete及host-change-audit.json，不宣称无修改、不归咎观察GM。修掉长度硬门禁后，主AI按原prompt/来源SHA重新验证GM06原回包，零调用登记其原认领issue-3a61170c7bcd，原invalid_output及用量仍在acknowledged历史。GM09独立提出相同方向issue-727b46421ada，保留两人来源，仅GM06执行。GM04网框issue-20e83bce9799及未调用的source-only候选继续保留。
 
@@ -13,6 +13,10 @@ GM06编码code-20260914T094610Z-0aeb2c使用DeepSeek，原GM身份/记忆连续�
 随后同一十居民真实运行20次Kimi，seq102→124，新增费用0.6187632元；本世界累计80次Kimi、49次已计量GM及1次历史GM未知。9条新reply_help由居民自行选择，来自园丁、医师、守井人、木匠四名原居民，actual ask/request/recipient绑定可核对，见live-reply-adoption/reply-use-evidence.json。没有强制回复、赠送资源或将网框对话改写合同。身份与旧事件前缀、运行代码、GM state保持，档案49条，engine_error_counts为空、gateway排空、无新未知，owned全退出。不能从9次使用推出所有跑题已消除，仍见居民反复商量同行、未变成共同出行。
 
 独立新Godot进程冷加载seq124副本，全部居民字段、事件、49条档案、pending和居民回合记录均与源一致，canonical字节不变、无引擎错误。见reply-label-next/cold-continuity.json。总账settled为3.5932161元，含此前其他历史；本次从原seq79续跑40次Kimi新增1.1757548元，不把总账182笔当本世界调用数。原GM06的下轮独立效果复查待执行，MVP暂不标完成；无新定时任务。
+
+最终复查feedback-20260914T100306Z-bbb808恢复原GM06观察session，实际读取已发布源码和seq124全局档案，抽查园丁、医师、木匠的原请求及真实回复，独立给出accept。确认四名原居民9次使用，无需修复此项；未宣称标签必然防止跑题，保留下一步关注园丁/守井人反复商量同行的问题。执行器仅因next_work为403字符而超过旧400字符硬限制拒收；立即报告后，一名Luna将长度改为建议、保留非空类型校验，主AI按原回包离线重处理，零额外调用、原invalid_output和已计量费用保留。证据gm06-effect-review/reviewed-original-ack.json及原feedback.result.md，原文SHA256 80082e47ff4a4b9d8ffeb11de4c3029bba03f97aa689b46df2f155cea1f30f88。GM06记忆记录独立复查和原失败，issue-3a61170c7bcd按有限证据resolved；GM09同题提案仅关联解决，不重复归属作者。
+
+本轮最小MVP闭环至此完成：同一十Kimi居民及十个独立DeepSeek GM发现真实需求，原GM开发/自测，主AI意见评审发布，原居民自愿实际使用，原GM下一轮独立检查；同档更新与冷恢复连续。当前seq124，累计80次已结算Kimi、50次已计量GM，另1次历史GM未知保持；没有新增未知、挂起或未解决调用，全部自有运行进程退出。本轮保存并暂停，无新定时任务。回复对象标签是此次实际成果，网框制作、共同出行及长期持续自治仍待后续，不冒称已完成。
 
 ## 2026-09-14 · 同档真实续跑至seq102，停止导航分支报错（进行中）
 
