@@ -107,7 +107,9 @@ func clear_route(id: String) -> void:
 	safe_velocity_ready.erase(id)
 	var agent: NavigationAgent3D = agents.get(id)
 	if is_instance_valid(agent):
-		agent.target_position = agent.global_position
+		var body := agent.get_parent() as CharacterBody3D
+		if is_instance_valid(body):
+			agent.target_position = body.global_position
 		agent.set_velocity(Vector3.ZERO)
 
 func is_unreachable(id: String) -> bool:
