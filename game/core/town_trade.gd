@@ -31,6 +31,24 @@ const SKILL_ASK_NAMES := {
 const TRADE_RANGE := 3.0
 const REPAIR_SECONDS := 60.0
 const WALK_SECONDS := 1.0
+## Voluntary, read-only observation of a neighbour's own running work (issue-194d1db6d25f, following
+## the real life_event_47 ask). The world already lets a resident work; it had no way to notice that a
+## nearby neighbour is genuinely working, so no resident could learn a neighbour's work from its own
+## sight. This adds exactly that one personal fact: a free resident standing within sight of a
+## neighbour that really is executing work at its own work point may record what it saw. Nothing is
+## granted - no skill, item, material, coin, account or contract - the observed worker's own job is
+## untouched, and only the observer's own view gains the fact. Only a job that really is work AND
+## really is accruing qualifies: rest, waiting, walking/approaching, a public-place trip, a material
+## recovery trip and a material-blocked or otherwise unsatisfiable action never do, so the observation
+## can never claim work the world is not actually doing.
+const OBSERVE_WORK := "observe_work"
+const WORK_OBSERVED_EVENT := "work_observed"
+const OBSERVE_WORK_RANGE := 3.0
+const OBSERVE_WORK_ARRIVAL_RADIUS := 0.45
+## The world's own productive work actions. Each one is listed with the live prerequisite that its
+## own completion rule applies, so an action whose prerequisite is missing is a failing trip, never a
+## watchable work.
+const WORK_ACTIONS := ["harvest_ration", "use_tool", "work"]
 ## Bounded, honest close for an ACTIVE social approach (issue-8e69ca9fbae5). The world already
 ## gives a blocked trip its own bounded failure in town_places; the same shape is applied here to
 ## an approach job: while the mover is still outside the world's own arrival radius and its real
@@ -578,6 +596,79 @@ func _help_reply_text(id: String, event: Dictionary, choice: String) -> String:
 		capability += "; I cannot perform this repair"
 	return "I am unavailable; " + capability + "."
 
+func _work_observed_here(id: String) -> Dictionary:
+	# Read-only: answers "is this resident really working right now?" from the world's own
+	# authoritative current job, the same arrival rule advance() applies, and the action's own live
+	# prerequisite. An idle resident, a traveller that has not arrived, a rester and a blocked or
+	# unsatisfiable action all answer no, and nothing is mutated.
+	if id not in active_ids():
+		return {}
+	var job: Dictionary = pending_job(id)
+	var action := str(job.get("action", ""))
+	if action not in WORK_ACTIONS:
+		return {}
+	if not _valid_nonnegative(job.get("elapsed")) or float(job.get("elapsed", 0.0)) <= 0.0:
+		return {}
+	var target := destination(id, action)
+	if not target.is_finite() or position_of(id).distance_to(target) > OBSERVE_WORK_ARRIVAL_RADIUS:
+		return {}
+	if not _work_prerequisite_met(id, action, job):
+		return {}
+	return job
+
+func _work_prerequisite_met(id: String, action: String, job: Dictionary) -> bool:
+	# Re-derives the very prerequisite the job's own completion rule applies. A material-blocked
+	# action is therefore never presented as work: it is a trip that would fail, not a craft.
+	match action:
+		"harvest_ration":
+			return _foraging_accessible(id)
+		"use_tool":
+			return _functioning_axe(id) and _trade_account(id).get("wood", -1) >= 1
+		"work":
+			return _repair_work_ready(id, job)
+	return false
+
+func _repair_work_ready(id: String, job: Dictionary) -> bool:
+	# The same acceptance _finish_trade_job applies to a repair "work" job, read-only.
+	var contract := _contract(str(job.get("contract_id", "")))
+	var part := str(job.get("part", ""))
+	if contract.is_empty() or str(contract.get("status", "")) != "delivered" or part not in ["edge", "handle"]:
+		return false
+	var item := _item(str(contract.get("item_id", "")))
+	if item.get("custodian_id") != id:
+		return false
+	var material := "iron" if part == "edge" else "wood"
+	if not _has_skill(id, _required_skill(part)) or _trade_account(id).get(material, -1) < 1 or not _part_damaged(item, part):
+		return false
+	if _contract_settlement(contract) != "completion":
+		return true
+	return _trade_account(str(contract.get("owner_id", ""))).get("reserved_col", -1) >= int(contract.get("price_col", -1))
+
+func _observe_work_text(worker_id: String, action: String) -> String:
+	# The world's own verified fact, not the observer's words: it names the resident actually seen
+	# and the action it was really executing. The worker's private reason, inventory and job stay out.
+	return "我看见了%s在附近干活：%s。" % [resident(worker_id).name, action]
+
+func _apply_work_observation(id: String, option: Dictionary, command_id: String, provenance: String) -> Dictionary:
+	# The whole precondition is re-derived on submit. If the job finished, the neighbour walked away
+	# or its work stopped being real, this is honestly unavailable and no fact is appended.
+	var worker_id := str(option.get("_worker_id", ""))
+	if _busy(id) or worker_id == id or worker_id not in active_ids():
+		return _failure("option_unavailable")
+	if position_of(id).distance_to(position_of(worker_id)) > OBSERVE_WORK_RANGE:
+		return _failure("option_unavailable")
+	var job := _work_observed_here(worker_id)
+	var action := str(job.get("action", ""))
+	var observed_command_id := str(job.get("command_id", ""))
+	if job.is_empty() or observed_command_id.is_empty():
+		return _failure("option_unavailable")
+	var event := {"type": WORK_OBSERVED_EVENT, "actor_id": id, "subject_id": worker_id,
+		"recipient_ids": [id], "operation_id": command_id, "source": provenance, "provenance": provenance,
+		"observed_action": action, "observed_job_command_id": observed_command_id, "contractual": false,
+		"text": _observe_work_text(worker_id, action)}
+	_append_life_event(event)
+	return {"ok": true, "code": WORK_OBSERVED_EVENT, "event_id": event.event_id, "subject_id": worker_id}
+
 func trade_options(id: String) -> Array:
 	var result: Array = [{"id": "wait", "label": "Wait", "action": "wait"}]
 	if id not in active_ids():
@@ -594,6 +685,15 @@ func trade_options(id: String) -> Array:
 			var target := _meeting_point(id, other)
 			if position_of(id).distance_to(target) > APPROACH_ARRIVAL_RADIUS:
 				_option(result, {"id": "approach:" + other, "label": "Approach " + resident(other).name, "action": "approach", "counterparty": other, "target_position": [target.x, target.y, target.z], "duration_seconds": WALK_SECONDS, "_target": other})
+
+		# Voluntary work observation. Listing is pure derivation and grants nothing; the option is
+		# re-derived on submit, so a job that ended or a neighbour that moved away stays unavailable.
+		for other in active_ids():
+			if other == id or position_of(id).distance_to(position_of(other)) > OBSERVE_WORK_RANGE:
+				continue
+			if _work_observed_here(other).is_empty():
+				continue
+			_option(result, {"id": "observe-work:" + other, "label": "Watch " + resident(other).name + " work", "action": OBSERVE_WORK, "counterparty": other, "_worker_id": other})
 
 		for other in active_ids():
 			if other == id or not _near(id, other):
@@ -784,6 +884,14 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 	if action == "wait":
 		commands[command_id] = {"payload": payload, "status": "completed"}
 		return {"ok": true, "code": "wait"}
+	if action == OBSERVE_WORK:
+		# A verified, read-only sighting. Freeform speech is never accepted for it, so no observer's
+		# words can ever be presented as the observed fact.
+		var sighted := _apply_work_observation(id, option, command_id, provenance)
+		if not sighted.ok:
+			return sighted
+		commands[command_id] = {"payload": payload, "status": "completed"}
+		return sighted
 	if action == "visitor_reply":
 		var response := {"willing": "我愿意谈谈需要的帮助。", "unavailable": "现在不方便，我想先处理自己的事。", "unsure": "我还没想好，稍后再说。"}
 		var answered := reply_to_visitor(id, option._request_id, option._choice, speech if not speech.is_empty() else response[option._choice], command_id, provenance)

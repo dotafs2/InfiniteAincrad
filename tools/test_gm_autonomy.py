@@ -8,6 +8,8 @@ explicit observation origin and durable cycle identity. Scripted end-to-end plum
 runtime, restart, publication) lives in tools/validate_gm_autonomy.py.
 """
 import json
+import contextlib
+import io
 import os
 import shutil
 import subprocess
@@ -35,6 +37,48 @@ def write_json(path, value):
 
 def example_policy():
     return json.loads(EXAMPLE.read_text(encoding='utf-8'))
+
+
+def observe_guards(before_files=None, after_files=None, changed=None, git_head='f' * 40):
+    """The real gm_runner.guard_snapshot pair: identical content, two different taken_utc stamps.
+
+    The two snapshots are never byte-equal because each carries its own clock reading, so equality
+    of the two dicts is never the right question - gm_runner.guard_diff over files/git_head/
+    git_status_sha256 is, plus the record's own `changed` list.
+    """
+    before_files = ({'game/spatial/town_street.gd': 'a' * 64}
+                    if before_files is None else before_files)
+    after_files = dict(before_files) if after_files is None else after_files
+
+    def snapshot(files, taken):
+        return {'files': files, 'git_head': git_head, 'git_status_sha256': 'b' * 64,
+                'taken_utc': taken}
+
+    return {'before': snapshot(before_files, '2026-09-14T03:44:17.990815+00:00'),
+            'after': snapshot(after_files, '2026-09-14T03:46:00.350046+00:00'),
+            'changed': [] if changed is None else changed}
+
+
+def observe_receipt_fixture(cycle, run_id='run-1', dispatched=10, **overrides):
+    """The durable gm_observe run.json shape gm_runner writes, as an offline fixture."""
+    results = [{'gm_id': 'gm-%02d' % (index + 1), 'status': 'ok', 'exit_code': 0,
+                'usage_measured': True, 'cost': 'measured', 'dispatched': True,
+                'usage': {'turns': 1}}
+               for index in range(dispatched)]
+    receipt = {'status': 'ok', 'kind': 'gm_observe', 'run_id': run_id,
+               'run_dir': 'runs/' + run_id, 'route': {'kind': 'codex'}, 'world_binding': WORLD,
+               'evidence': {'path': gm_runner.relative(cycle.evidence),
+                            'sha256': cycle.evidence_sha256, 'world_id': WORLD,
+                            'source_revision': {'life_seq': 1}},
+               'import': {'created': dispatched}, 'issue_total': dispatched,
+               'dispatched': dispatched, 'aborted_by': None, 'results': results,
+               'guards': observe_guards(),
+               'credential_leak_in_run_dir': [], 'recovered_in_flight': [], 'prior_ledger': None,
+               'review_state': 'unapproved', 'deployed': False,
+               'currency_billing': 'not derived from token counters'}
+    receipt.update(overrides)
+    write_json(cycle.state_dir / 'runs' / run_id / 'run.json', receipt)
+    return receipt
 
 
 class PolicyTests(unittest.TestCase):
@@ -720,6 +764,428 @@ class OwnedProcessTests(unittest.TestCase):
         self.assertFalse(pid_alive(grandchild), grandchild)
         for member in owned['observed_members']:
             self.assertFalse(pid_alive(member['pid']), member)
+
+
+class ObserveExitProvenanceTests(CorrectionBase):
+    """The observe dispatch is ONE gm_runner command: only the wrapper this host started carries
+    the authoritative exit, and only the durable receipt may certify a completed observation."""
+
+    def _summary(self, run_id='run-1', dispatched=10, **overrides):
+        summary = {'status': 'ok', 'kind': 'gm_observe', 'run_id': run_id,
+                   'run_dir': 'runs/' + run_id, 'world_binding': WORLD,
+                   'evidence': {'sha256': self.cycle.evidence_sha256, 'world_id': WORLD},
+                   'dispatched': dispatched,
+                   'results': [{'gm_id': 'gm-%02d' % (index + 1)} for index in range(dispatched)]}
+        summary.update(overrides)
+        return summary
+
+    def _result(self, exit_code=1, wrapper_exit=0, timed_out=False, owned=None):
+        # The real run_process shape after the provenance change: the wrapper's own exit, the
+        # reconciled exit, and the nested nonzero members kept as evidence.
+        if owned is None:
+            owned = {'containment': 'windows_kill_on_close_job', 'wrapper_pid': 4242,
+                     'observed_members': [{'pid': 4242, 'running': False, 'exit_code': wrapper_exit},
+                                          {'pid': 4243, 'running': False, 'exit_code': exit_code}],
+                     'total_assigned_processes': 2, 'active_processes': 0,
+                     'all_members_exited': True, 'member_identity_list_complete': True,
+                     'observed_nonzero_exits': ([] if exit_code == 0
+                                                else [{'pid': 4243, 'exit_code': exit_code}])}
+        return {'exit_code': exit_code, 'wrapper_exit_code': wrapper_exit,
+                'exit_reconciled_from_member': bool(exit_code and not wrapper_exit),
+                'observed_nonzero_member_exits': owned.get('observed_nonzero_exits') or [],
+                'timed_out': timed_out, 'seconds': 0.2, 'stderr': '',
+                'stdout': 'diagnostic\n' + json.dumps(self._summary()) + '\n', 'owned': owned}
+
+    def _observe(self, result):
+        shutil.rmtree(self.cycle.autonomy_dir(), ignore_errors=True)
+        self.cycle.autonomy_dir().mkdir(parents=True, exist_ok=True)
+        cycle = self.cycle.load_cycle()
+        original = gm_autonomy.run_process
+        gm_autonomy.run_process = lambda *args, **kwargs: result
+        try:
+            return cycle, self.cycle.stage_observe(cycle)
+        finally:
+            gm_autonomy.run_process = original
+
+    def test_a_completed_runner_receipt_survives_nested_probe_failures(self):
+        observe_receipt_fixture(self.cycle)
+        cycle, status = self._observe(self._result())
+        self.assertEqual(status, gm_autonomy.OK)
+        record = cycle['stages']['observe']
+        self.assertEqual(record['exit_code'], 1, 'the reconciled exit stays visible, not hidden')
+        self.assertEqual(record['wrapper_exit_code'], 0)
+        self.assertEqual(record['owned']['wrapper_pid'], 4242)
+        self.assertEqual(record['observed_nonzero_member_exits'], [{'pid': 4243, 'exit_code': 1}])
+        self.assertEqual(record['carried_receipt']['run_id'], 'run-1')
+        self.assertEqual(record['carried_receipt']['dispatched'], 10)
+        self.assertEqual(len(record['carried_receipt']['gm_ids']), 10)
+        self.assertEqual(record['model_calls_observed'], 10)
+        self.assertEqual(record['status'], 'no_action', 'this fixture has no claimed scope')
+        self.assertIsNone(cycle.get('blocked_reason'))
+
+    def test_a_nonzero_authoritative_runner_exit_still_fails(self):
+        observe_receipt_fixture(self.cycle)
+        cycle, status = self._observe(self._result(exit_code=1, wrapper_exit=1))
+        self.assertEqual(status, gm_autonomy.RUNTIME)
+        self.assertEqual(cycle['blocked_reason'], 'observe_failed')
+        self.assertIsNone(cycle['stages']['observe'].get('carried_receipt'))
+
+    def test_a_missing_or_mismatched_receipt_still_fails(self):
+        cases = {
+            'absent receipt': lambda: None,
+            'another run id': lambda: observe_receipt_fixture(self.cycle, run_id='run-2'),
+            'wrong evidence': lambda: observe_receipt_fixture(
+                self.cycle, evidence={'world_id': WORLD, 'sha256': '0' * 64}),
+            'wrong world': lambda: observe_receipt_fixture(self.cycle, world_binding='shared:other'),
+            'incomplete status': lambda: observe_receipt_fixture(self.cycle, status='incomplete'),
+            'short dispatch list': lambda: observe_receipt_fixture(self.cycle, dispatched=9),
+        }
+        for name, setup in cases.items():
+            with self.subTest(case=name):
+                path = self.cycle.state_dir / 'runs' / 'run-1' / 'run.json'
+                if path.is_file():
+                    path.unlink()
+                setup()
+                cycle, status = self._observe(self._result())
+                self.assertEqual(status, gm_autonomy.RUNTIME, name)
+                self.assertEqual(cycle['blocked_reason'], 'observe_failed', name)
+                self.assertIsNone(cycle['stages']['observe'].get('carried_receipt'), name)
+
+    def test_dirty_guards_or_unknown_usage_still_fail(self):
+        observe_receipt_fixture(
+            self.cycle, guards={'before': {'f': '1'}, 'after': {'f': '2'}, 'changed': ['f']})
+        cycle, status = self._observe(self._result())
+        self.assertEqual(status, gm_autonomy.RUNTIME)
+        self.assertEqual(cycle['blocked_reason'], 'observe_failed')
+        receipt = observe_receipt_fixture(self.cycle)
+        receipt['results'][0].update({'cost': 'unknown', 'usage_measured': False})
+        write_json(self.cycle.state_dir / 'runs' / 'run-1' / 'run.json', receipt)
+        cycle, status = self._observe(self._result())
+        self.assertEqual(status, gm_autonomy.RUNTIME)
+
+    def test_guard_evidence_uses_the_real_snapshot_schema(self):
+        # A timestamp-only difference between the two snapshots is not a change; a changed file
+        # digest, a moved HEAD, a non-empty claimed change list or a truncated snapshot is.
+        observe_receipt_fixture(self.cycle)
+        cycle, status = self._observe(self._result())
+        self.assertEqual(status, gm_autonomy.OK, 'a later taken_utc alone is not a guard change')
+        moved_head = observe_guards()
+        moved_head['after'] = dict(moved_head['after'], git_head='0' * 40)
+        cases = {
+            'changed file digest': observe_guards(
+                after_files={'game/spatial/town_street.gd': '9' * 64}),
+            'git head moved': moved_head,
+            'claimed change list': observe_guards(changed=['file:game/spatial/town_street.gd']),
+            'snapshot without the digests': {'before': {'files': {}}, 'after': {'files': {}},
+                                             'changed': []},
+        }
+        for name, guards in cases.items():
+            with self.subTest(case=name):
+                observe_receipt_fixture(self.cycle, guards=guards)
+                cycle, status = self._observe(self._result())
+                self.assertEqual(status, gm_autonomy.RUNTIME, name)
+                self.assertEqual(cycle['blocked_reason'], 'observe_failed', name)
+                self.assertIsNone(cycle['stages']['observe'].get('carried_receipt'), name)
+
+    def test_a_live_child_or_a_timeout_still_fails(self):
+        observe_receipt_fixture(self.cycle)
+        live = self._result()['owned']
+        live.update({'all_members_exited': False, 'active_processes': 1,
+                     'observed_members': [{'pid': 4242, 'running': True, 'exit_code': None}]})
+        cycle, status = self._observe(self._result(owned=live))
+        self.assertEqual(status, gm_autonomy.RUNTIME)
+        observe_receipt_fixture(self.cycle)
+        cycle, status = self._observe(self._result(timed_out=True))
+        self.assertEqual(status, gm_autonomy.RUNTIME)
+
+    def test_a_contradictory_result_or_an_expired_deadline_still_fails(self):
+        # A status of "ok" is not enough: the durable result must be a settled, measured, zero-exit
+        # dispatch, and an expired pinned deadline is never a completed observation.
+        receipt = observe_receipt_fixture(self.cycle)
+        receipt['results'][0]['exit_code'] = 1
+        write_json(self.cycle.state_dir / 'runs' / 'run-1' / 'run.json', receipt)
+        cycle, status = self._observe(self._result())
+        self.assertEqual(status, gm_autonomy.RUNTIME)
+        self.assertEqual(cycle['blocked_reason'], 'observe_failed')
+
+        receipt = observe_receipt_fixture(self.cycle)
+        receipt['results'][0]['cost'] = 'none'
+        write_json(self.cycle.state_dir / 'runs' / 'run-1' / 'run.json', receipt)
+        cycle, status = self._observe(self._result())
+        self.assertEqual(status, gm_autonomy.RUNTIME)
+        self.assertEqual(cycle['blocked_reason'], 'observe_failed')
+
+        observe_receipt_fixture(self.cycle)
+        expired = self._result()
+        expired['deadline_exceeded'] = True
+        cycle, status = self._observe(expired)
+        self.assertEqual(status, gm_autonomy.RUNTIME)
+        self.assertEqual(cycle['blocked_reason'], 'observe_failed')
+
+    def test_a_host_test_command_still_fails_on_its_hidden_child(self):
+        script = self.root / 'hidden_failure.py'
+        script.write_text('import subprocess, sys, time\n'
+                          'child = subprocess.Popen([sys.executable, "-c", '
+                          '"raise SystemExit(3)"])\n'
+                          'assert child.wait() == 3\n'
+                          'time.sleep(0.2)\n'
+                          'print("wrapper ok", flush=True)\n', encoding='utf-8')
+        outcome = gm_autonomy.run_process([sys.executable, str(script)], 60)
+        self.assertEqual(outcome['wrapper_exit_code'], 0, outcome['owned'])
+        self.assertNotEqual(outcome['exit_code'], 0,
+                            'a host test command still fails on its own hidden child failure')
+        self.assertTrue(outcome['observed_nonzero_member_exits'], outcome['owned'])
+        self.assertTrue(outcome['owned']['all_members_exited'])
+
+
+class ObserveCarriedRecoveryTests(CorrectionBase):
+    """Offline recovery: carry one completed observe receipt forward with NO new model call."""
+
+    def _source_cycle(self, record=None):
+        cycle = self.cycle.load_cycle()
+        record = record or {
+            'status': 'failed', 'exit_code': 1, 'wrapper_exit_code': 0,
+            'exit_reconciled_from_member': True,
+            'observed_nonzero_member_exits': [{'pid': 4243, 'exit_code': 1}],
+            'timed_out': False, 'seconds': 0.2, 'stderr_tail': '',
+            'run_id': 'run-1', 'dispatched': 10, 'model_calls_observed': 10,
+            'owned': {'containment': 'windows_kill_on_close_job', 'wrapper_pid': 4242,
+                      'observed_members': [{'pid': 4242, 'running': False, 'exit_code': 0},
+                                           {'pid': 4243, 'running': False, 'exit_code': 1}],
+                      'active_processes': 0, 'all_members_exited': True,
+                      'member_identity_list_complete': False},
+            'blocked_reason': 'gm_runner observe failed'}
+        cycle['status'] = 'blocked'
+        cycle['blocked_reason'] = 'observe_failed'
+        cycle['stage'] = 'observe'
+        cycle['model_calls'] = 10
+        cycle['stages'] = {'observe': record}
+        self.cycle.save_cycle(cycle)
+        write_json(self.cycle.cycle_dir() / 'report.json',
+                   {'status': 'blocked', 'blocked_reason': 'observe_failed',
+                    'cycle_id': cycle['cycle_id'], 'policy': {'world_id': WORLD}})
+        return cycle
+
+    def _call(self, argv):
+        stream = io.StringIO()
+        with contextlib.redirect_stdout(stream):
+            return gm_autonomy.main(argv)
+
+    def _recover(self, cycle_id):
+        return self._recover_text(cycle_id)[0]
+
+    def _recover_text(self, cycle_id):
+        stream = io.StringIO()
+        with contextlib.redirect_stdout(stream):
+            code = gm_autonomy.main(['recover-observe', '--policy', str(self.policy_path),
+                                     '--cycle', str(cycle_id)])
+        return code, stream.getvalue()
+
+    def test_offline_recovery_carries_the_completed_observe_without_a_new_call(self):
+        observe_receipt_fixture(self.cycle)
+        cycle = self._source_cycle()
+        source_dir = self.cycle.cycle_dir()
+        before = {name: gm_runner.sha256_file(source_dir / name)
+                  for name in ('cycle.json', 'report.json')}
+        dispatch = []
+        original = gm_autonomy.run_process
+        gm_autonomy.run_process = lambda *args, **kwargs: dispatch.append(args)
+        try:
+            code = self._recover(source_dir.name)
+            after = {name: gm_runner.sha256_file(source_dir / name)
+                     for name in ('cycle.json', 'report.json')}
+            again = self._call(['cycle', '--policy', str(self.policy_path)])
+        finally:
+            gm_autonomy.run_process = original
+        self.assertEqual(code, 0)
+        self.assertEqual(before, after, 'the failed cycle and its report stay untouched history')
+        self.assertFalse(dispatch, 'recovery and the next cycle call dispatch no command')
+        pointer = json.loads((self.cycle.autonomy_dir() / 'current.json').read_text())
+        self.assertNotEqual(pointer['cycle_id'], source_dir.name)
+        new_dir = self.cycle.autonomy_dir() / pointer['cycle_id']
+        recovery = json.loads((new_dir / 'carried-receipt-recovery.json').read_text())
+        self.assertEqual(recovery['kind'], 'gm_observe_carried_receipt_recovery')
+        self.assertTrue(recovery['no_new_model_call'])
+        self.assertEqual(recovery['source_cycle_id'], source_dir.name)
+        self.assertEqual(recovery['carried_model_calls'], 10)
+        self.assertEqual(recovery['carried_status'], 'no_action')
+        self.assertEqual(recovery['receipt']['run_id'], 'run-1')
+        document = json.loads((new_dir / 'cycle.json').read_text())
+        self.assertEqual(document['status'], 'no_action')
+        self.assertEqual(document['model_calls'], 0)
+        self.assertEqual(document['stages']['observe']['carried_from_cycle'], source_dir.name)
+        self.assertTrue(document['stages']['observe']['no_new_model_call'])
+        self.assertEqual(again, 0, 'the next cycle closes as no_action with no dispatch')
+
+    def test_recovery_refuses_a_record_whose_receipt_does_not_prove_completion(self):
+        observe_receipt_fixture(self.cycle, evidence={'world_id': WORLD, 'sha256': '0' * 64})
+        cycle = self._source_cycle()
+        code = self._recover(cycle['cycle_id'])
+        self.assertNotEqual(code, 0)
+        self.assertEqual([path.name for path in self.cycle.autonomy_dir().iterdir()
+                          if path.is_dir() and path.name.startswith('auto-')], [cycle['cycle_id']],
+                         'a refused recovery writes no new cycle')
+
+    def test_recovery_refuses_a_record_without_a_nested_child_failure(self):
+        observe_receipt_fixture(self.cycle)
+        record = {'status': 'failed', 'exit_code': 0, 'wrapper_exit_code': 0,
+                  'observed_nonzero_member_exits': [], 'timed_out': False, 'seconds': 0.1,
+                  'run_id': 'run-1', 'dispatched': 10,
+                  'owned': {'wrapper_pid': 4242, 'active_processes': 0, 'all_members_exited': True,
+                            'observed_members': [{'pid': 4242, 'running': False, 'exit_code': 0}]}}
+        cycle = self._source_cycle(record)
+        self.assertNotEqual(self._recover(cycle['cycle_id']), 0)
+
+    def test_recovery_uses_the_real_retained_record_shape(self):
+        # The retained record from the real blocked run carries no top-level wrapper_exit_code and
+        # no observed_nonzero_member_exits: the wrapper's own exit is only in owned.observed_members
+        # (keyed by owned.wrapper_pid) and the nested failures only in owned.observed_nonzero_exits.
+        observe_receipt_fixture(self.cycle)
+        members = [{'pid': 603976, 'running': False, 'exit_code': 0},
+                   {'pid': 593108, 'running': False, 'exit_code': 1},
+                   {'pid': 589796, 'running': False, 'exit_code': 1}]
+        record = {'status': 'failed', 'exit_code': 1, 'timed_out': False, 'seconds': 102.8,
+                  'stderr_tail': '', 'run_id': 'run-1', 'dispatched': 10,
+                  'model_calls_observed': 10, 'unknown_cost_gms': None,
+                  'in_flight': {'stage': 'observe', 'model_calls_reserved': 10,
+                                'reserved_utc': '2026-09-14T03:44:17.589397+00:00'},
+                  'blocked_reason': 'gm_runner observe failed',
+                  'owned': {'containment': 'windows_kill_on_close_job', 'wrapper_pid': 603976,
+                            'observed_members': members, 'total_assigned_processes': 293,
+                            'active_processes': 0, 'all_members_exited': True,
+                            'all_member_exit_codes_known': False,
+                            'member_identity_list_complete': False,
+                            'observed_nonzero_exits': [dict(item) for item in members
+                                                       if item['exit_code']]}}
+        cycle = self._source_cycle(record)
+        dispatch = []
+        original = gm_autonomy.run_process
+        gm_autonomy.run_process = lambda *args, **kwargs: dispatch.append(args)
+        try:
+            code = self._recover(cycle['cycle_id'])
+        finally:
+            gm_autonomy.run_process = original
+        self.assertEqual(code, 0, 'the real retained shape is a carried receipt')
+        self.assertFalse(dispatch, 'carrying a receipt never dispatches a command')
+        pointer = json.loads((self.cycle.autonomy_dir() / 'current.json').read_text())
+        document = json.loads((self.cycle.autonomy_dir() / pointer['cycle_id'] /
+                               'cycle.json').read_text())
+        self.assertEqual(document['status'], 'no_action')
+        self.assertEqual(document['stages']['observe']['carried_receipt']['dispatched'], 10)
+        self.assertNotIn('in_flight', document['stages']['observe'],
+                         'the settled stale reservation is not carried as pending work')
+        # ... but a wrapper that itself exited nonzero is never carried, however many children failed.
+        observe_receipt_fixture(self.cycle, run_id='run-2')
+        bad = dict(record, run_id='run-2')
+        bad['owned'] = dict(record['owned'], observed_members=[
+            dict(item, exit_code=1) if item['pid'] == 603976 else item
+            for item in record['owned']['observed_members']])
+        refused = self._source_cycle(bad)
+        self.assertNotEqual(self._recover(refused['cycle_id']), 0)
+
+    def test_a_second_recovery_returns_the_same_one_and_keeps_the_source_history(self):
+        observe_receipt_fixture(self.cycle)
+        cycle = self._source_cycle()
+        source_dir = self.cycle.cycle_dir()
+        before = {name: gm_runner.sha256_file(source_dir / name)
+                  for name in ('cycle.json', 'report.json')}
+        first = self._recover(cycle['cycle_id'])
+        pointer = gm_runner.sha256_file(self.cycle.autonomy_dir() / 'current.json')
+        markers = sorted(path.name for path in (self.cycle.autonomy_dir() / 'recoveries').iterdir())
+        recorded = json.loads((self.cycle.autonomy_dir() / 'recoveries' /
+                               markers[0]).read_text(encoding='utf-8'))
+        second, text = self._recover_text(cycle['cycle_id'])
+        self.assertEqual((first, second), (0, 0))
+        self.assertNotIn('refused', text, 'the repeat is the recorded recovery, not a new one')
+        self.assertEqual(len(markers), 1, 'one stable source-cycle + receipt identity')
+        self.assertTrue(markers[0].startswith('rec-') and markers[0].endswith('.json')
+                        and len(markers[0]) == len('rec-') + 16 + len('.json'))
+        self.assertEqual(gm_runner.sha256_file(self.cycle.autonomy_dir() / 'current.json'),
+                         pointer, 'the second call moves no pointer')
+        self.assertEqual(sorted(path.name for path in self.cycle.autonomy_dir().iterdir()
+                                if path.is_dir() and path.name.startswith('auto-')),
+                         sorted([source_dir.name, recorded['new_cycle_id']]),
+                         'exactly one recovery cycle exists')
+        self.assertEqual({name: gm_runner.sha256_file(source_dir / name)
+                          for name in ('cycle.json', 'report.json')}, before,
+                         'the failed cycle and its report stay untouched history')
+
+    def test_a_competing_owner_refuses_through_the_existing_lock(self):
+        observe_receipt_fixture(self.cycle)
+        cycle = self._source_cycle()
+        with self.cycle.cycle_lock():
+            code, text = self._recover_text(cycle['cycle_id'])
+        self.assertEqual(code, gm_autonomy.LOCK)
+        self.assertIn('lock_held', text)
+        self.assertFalse((self.cycle.autonomy_dir() / 'recoveries').exists(),
+                         'a refused recovery records nothing')
+        self.assertEqual([path.name for path in self.cycle.autonomy_dir().iterdir()
+                          if path.is_dir()], sorted(['cycle-owner', cycle['cycle_id']]))
+
+    def test_recovery_refuses_a_timed_out_deadline_or_unknown_record(self):
+        observe_receipt_fixture(self.cycle)
+        cases = {'timed out': {'timed_out': True},
+                 'deadline expired': {'deadline_exceeded': True},
+                 'ambiguous: no timed_out flag': {'timed_out': None},
+                 'unknown cost GMs': {'unknown_cost_gms': ['gm-01']}}
+        for name, change in cases.items():
+            with self.subTest(case=name):
+                record = dict(self._source_cycle()['stages']['observe'])
+                record.update(change)
+                if change.get('timed_out') is None and 'timed_out' in change:
+                    record.pop('timed_out')
+                cycle = self._source_cycle(record)
+                code, text = self._recover_text(cycle['cycle_id'])
+                self.assertNotEqual(code, 0, name)
+                self.assertIn('observe_recovery_refused', text, name)
+                self.assertFalse((self.cycle.autonomy_dir() / 'recoveries').exists(), name)
+
+    def test_recovery_refuses_a_contradictory_durable_result(self):
+        cases = {'nonzero measured exit': {'exit_code': 1},
+                 'unmeasured cost': {'cost': 'none'},
+                 'usage not measured': {'usage_measured': False}}
+        for name, change in cases.items():
+            with self.subTest(case=name):
+                receipt = observe_receipt_fixture(self.cycle)
+                receipt['results'][0].update(change)
+                write_json(self.cycle.state_dir / 'runs' / 'run-1' / 'run.json', receipt)
+                cycle = self._source_cycle()
+                code, text = self._recover_text(cycle['cycle_id'])
+                self.assertNotEqual(code, 0, name)
+                self.assertIn('observe_recovery_refused', text, name)
+
+    def test_recovery_refuses_current_unknown_usage(self):
+        observe_receipt_fixture(self.cycle)
+        cycle = self._source_cycle()
+        state = gm_runner.blank_state()
+        state['world_id'] = WORLD
+        state['sessions'] = {'gm-01': {'unresolved': {'kind': 'unknown_cost', 'run_id': 'run-1'}}}
+        gm_runner.store_state(self.cycle.state_dir, state)
+        self.assertEqual(gm_runner.global_unknown_gms(state), ['gm-01'])
+        code, text = self._recover_text(cycle['cycle_id'])
+        self.assertNotEqual(code, 0)
+        self.assertIn('unknown-cost', text)
+        self.assertFalse((self.cycle.autonomy_dir() / 'recoveries').exists())
+
+    def test_recovery_refuses_a_source_cycle_that_still_carries_unknown_usage(self):
+        observe_receipt_fixture(self.cycle)
+        cycle = self._source_cycle()
+        cycle['unknown'] = {'stage': 'observe', 'exit_code': None}
+        self.cycle.save_cycle(cycle)
+        code, text = self._recover_text(cycle['cycle_id'])
+        self.assertNotEqual(code, 0)
+        self.assertIn('unresolved unknown usage', text)
+        self.assertFalse((self.cycle.autonomy_dir() / 'recoveries').exists())
+
+    def test_recovery_refuses_a_cycle_that_still_owes_a_claimed_scope(self):
+        observe_receipt_fixture(self.cycle)
+        cycle = self._source_cycle()
+        state = gm_runner.blank_state()
+        state['world_id'] = WORLD
+        state['issues'] = {'issue-1': {'issue_id': 'issue-1', 'owner_gm': 'gm-01',
+                                       'owner_run_id': 'run-1', 'proposed_scope': {'files': []}}}
+        gm_runner.store_state(self.cycle.state_dir, state)
+        self.assertNotEqual(self._recover(cycle['cycle_id']), 0)
 
 
 class WatchCoordinatorTests(CorrectionBase):
@@ -1517,6 +1983,114 @@ class ProductionHostContractTests(CorrectionBase):
             self.assertFalse(called)
         finally:
             gm_runner.load_state, gm_autonomy.run_process = prior_load, prior_run
+
+
+class SelectedGmObserveTests(CorrectionBase):
+    """`cycle --gm` forwards an explicit roster selector to gm_runner.observe only."""
+
+    def _cycle(self, selected=None):
+        return gm_autonomy.Cycle(self.policy_path, self.policy, {}, None, selected_gms=selected)
+
+    @staticmethod
+    def _flags(command, name):
+        return [command[index + 1] for index, token in enumerate(command) if token == name]
+
+    def _dispatch(self, cycle):
+        """Drive one observe dispatch through an offline fake runner and capture its command."""
+        seen = {}
+
+        def fake(command, *args, **kwargs):
+            seen['command'] = list(command)
+            summary = {'run_id': 'run-selected', 'dispatched': 1,
+                       'results': [{'gm_id': 'gm-04', 'status': 'ok', 'exit_code': 0,
+                                    'usage_measured': True, 'cost': 'measured',
+                                    'dispatched': True, 'usage': {'turns': 1}}]}
+            return {'exit_code': 0, 'wrapper_exit_code': 0, 'timed_out': False, 'seconds': 0.1,
+                    'stdout': json.dumps(summary) + '\n', 'stderr': '',
+                    'owned': {'wrapper_pid': 11, 'active_processes': 0,
+                              'all_members_exited': True, 'member_identity_list_complete': True,
+                              'observed_members': []}}
+
+        original = gm_autonomy.run_process
+        gm_autonomy.run_process = fake
+        try:
+            cycle.stage_observe(cycle.load_cycle())
+        finally:
+            gm_autonomy.run_process = original
+        return seen
+
+    def test_observe_command_carries_only_the_requested_roster_gm(self):
+        cycle = self._cycle(['gm-04'])
+        seen = self._dispatch(cycle)
+        self.assertTrue(seen, 'the observe dispatch reached the runner command')
+        self.assertEqual(self._flags(seen['command'], '--gm'), ['gm-04'],
+                         'the selector is forwarded verbatim, never expanded to the roster')
+        self.assertEqual(self._flags(seen['command'], '--max-gms'), ['1'])
+
+    def test_the_reserved_observation_count_is_one_even_though_the_roster_limit_is_higher(self):
+        maximum = int(self.cycle.limits['max_gms'])
+        self.assertGreater(maximum, 1)
+        cycle = self._cycle(['gm-04'])
+        self._dispatch(cycle)
+        record = cycle.load_cycle()['stages']['observe']
+        self.assertEqual(record['last_reserved']['model_calls_reserved'], 1)
+        self.assertEqual(record['model_calls_observed'], 1)
+
+    def test_default_observe_command_is_unchanged_without_a_selector(self):
+        maximum = str(int(self.cycle.limits['max_gms']))
+        cycle = self._cycle(None)
+        seen = self._dispatch(cycle)
+        self.assertTrue(seen, 'the default observe dispatch still runs')
+        self.assertEqual(self._flags(seen['command'], '--gm'), [])
+        self.assertEqual(self._flags(seen['command'], '--max-gms'), [maximum])
+
+    def test_only_the_observe_dispatch_consumes_the_selector(self):
+        source = Path(gm_autonomy.__file__).read_text(encoding='utf-8')
+        lines = [line.strip() for line in source.splitlines() if 'self.selected_gms' in line]
+        self.assertEqual(lines, [
+            'self.selected_gms = ([str(item) for item in selected_gms] if selected_gms else None)',
+            'if self.selected_gms:',
+            'estimate = len(self.selected_gms)',
+            'for gm_id in (self.selected_gms or []):'],
+            'code and feedback never read the selector; the owning GM is unchanged')
+
+    def test_the_selection_helper_keeps_order_and_the_default_stays_empty(self):
+        self.assertEqual(gm_autonomy.selected_gm_selection([], self.policy), (None, None))
+        refused, selected = gm_autonomy.selected_gm_selection(['gm-04', 'gm-02'], self.policy)
+        self.assertIsNone(refused)
+        self.assertEqual(selected, ['gm-04', 'gm-02'])
+        self.assertEqual(gm_runner.GM_IDS[:2], ['gm-01', 'gm-02'],
+                         'the selector is validated against the real roster')
+
+    def _cli(self, argv):
+        stream = io.StringIO()
+        dispatch = []
+        original = gm_autonomy.run_process
+        gm_autonomy.run_process = lambda *args, **kwargs: dispatch.append(args)
+        try:
+            with contextlib.redirect_stdout(stream):
+                code = gm_autonomy.main(argv)
+        finally:
+            gm_autonomy.run_process = original
+        return code, stream.getvalue(), dispatch
+
+    def test_unknown_duplicate_and_over_limit_selections_refuse_before_any_dispatch(self):
+        cycles_before = sorted(path.name for path in self.cycle.autonomy_dir().iterdir())
+        for extra, reason in ((['--gm', 'gm-99'], 'unknown_gm_selection'),
+                              (['--gm', 'gm-04', '--gm', 'gm-04'], 'duplicate_gm_selection')):
+            code, text, dispatch = self._cli(['cycle', '--policy', str(self.policy_path)] + extra)
+            self.assertNotEqual(code, 0)
+            self.assertIn(reason, text)
+            self.assertEqual(dispatch, [], 'a refused selection dispatches nothing')
+        self.policy['limits']['max_gms'] = 1
+        write_json(self.policy_path, self.policy)
+        code, text, dispatch = self._cli(['cycle', '--policy', str(self.policy_path),
+                                          '--gm', 'gm-04', '--gm', 'gm-05'])
+        self.assertNotEqual(code, 0)
+        self.assertIn('gm_selection_over_limit', text)
+        self.assertEqual(dispatch, [], 'an over-limit selection dispatches nothing')
+        self.assertEqual(sorted(path.name for path in self.cycle.autonomy_dir().iterdir()),
+                         cycles_before, 'a refused selection creates no cycle')
 
 
 if __name__ == '__main__':

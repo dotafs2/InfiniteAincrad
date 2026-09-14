@@ -11,6 +11,7 @@ Kimi behaviour.
 """
 import copy
 import json
+import re
 import os
 import shutil
 import subprocess
@@ -1317,6 +1318,184 @@ class CodingContinuityTests(RunnerTestBase):
         code, payload, _ = self.observe('--max-gms', '1', '--gm', 'gm-02')
         self.assertEqual(code, 0, payload)
         self.assertEqual(payload['dispatched'], 1)
+
+
+class PublicEventLinkageTests(RunnerTestBase):
+    """The GM must be able to link an opaque open issue id back to the exact public speech event.
+
+    These exercise the real chain: import_source -> plan_observation -> issue_projection ->
+    GM_STATE/build_prompt, plus the real validate_new_issues response check. The evidence document
+    is the accepted schema, only its entries are replaced with labelled public_life_event fixtures.
+    """
+
+    SENTINEL = 'PRIVATE_SENTINEL_NEVER_PROMPTED'
+
+    def speech_entry(self, seq, position_note=None, **overrides):
+        entry = {'evidence_kind': 'public_life_event',
+                 'issue_id': f'public_life_event:life_event_{seq}',
+                 'event_id': f'life_event_{seq}', 'seq': seq, 'status': 'observed',
+                 'speaker_id': f'shared:speaker{seq}',
+                 'recipient_ids': [f'shared:listener{seq}'],
+                 'request_ref': f'godot_help:turn:shared:speaker{seq}:0:1',
+                 'operation_id': f'turn:shared:speaker{seq}:0:1',
+                 'event_type': 'ask_help', 'event_source': 'opengameagent_live',
+                 'delivered_text': 'public words from event %s' % seq,
+                 'world_id': self.document_world(),
+                 'private_reason': self.SENTINEL, 'accepted_reply': self.SENTINEL}
+        if position_note is not None:
+            entry['delivered_text'] = position_note
+        entry.update(overrides)
+        return entry
+
+    def document_world(self):
+        return self.accepted_document()['world_id']
+
+    def document_with(self, entries, proposals=None, revision=None):
+        document = self.accepted_document()
+        document['evidence'] = entries
+        document['proposals'] = proposals or []
+        document['counts'] = {'issues': len(entries), 'proposals': len(document['proposals'])}
+        if revision is not None:
+            document['source_revision'] = revision
+        document['world_id'] = self.document_world()
+        return document
+
+    def observe_chain(self, document, state=None, max_issues=4, gm_id='gm-01'):
+        """Real import -> plan -> prompt. Returns (state, document, digest, report, item, prompt)."""
+        path = self.root / ('snapshot-%d.json' % len(list(self.root.glob('snapshot-*.json'))))
+        path.write_text(json.dumps(document), encoding='utf-8')
+        digest = gm_runner.sha256_bytes(path.read_bytes())
+        state = state if state is not None else gm_runner.load_state(self.state)
+        report = gm_runner.import_source(state, document, path, digest)
+        investigation = gm_runner.autonomy_investigation(
+            document, digest, {'policy_id': 'linkage-fixture', 'objective': 'investigate'})
+        plan = gm_runner.plan_observation(state, [gm_id], max_issues, investigation)
+        item = plan[0]
+        prompt = gm_runner.build_prompt(document, path, digest, report, state, item, 'run-fixture',
+                                       200000)
+        return state, document, digest, investigation, item, prompt
+
+    def gm_state(self, prompt):
+        match = re.search(r'\[GM_STATE\]\n(.*?)\n\[END_GM_STATE\]', prompt, re.S)
+        self.assertIsNotNone(match, 'the prompt must carry a GM_STATE block')
+        return json.loads(match.group(1))
+
+    def test_late_public_events_map_to_their_own_entry_and_stay_citable(self):
+        seqs = [37, 45, 47, 48, 53, 61, 70]
+        document = self.document_with([self.speech_entry(seq) for seq in seqs])
+        state, document, digest, investigation, item, prompt = self.observe_chain(document)
+
+        # the two events past the old index-3 cutoff are still offered as evidence
+        self.assertIn('/evidence/6', investigation['evidence_refs'])
+        self.assertEqual(len(investigation['evidence_refs']), 8)
+        self.assertEqual(investigation['evidence_refs'][-1], '/counts')
+
+        block = self.gm_state(prompt)
+        self.assertEqual(len(block['open_issues']), 4, 'the assigned slice is unchanged')
+        for projection in block['open_issues']:
+            source = projection['public_source']
+            seq = int(source['event_id'].rsplit('_', 1)[1])
+            self.assertEqual(source['identity_key'], f'public_life_event:life_event_{seq}')
+            self.assertEqual(source['snapshot_pointer'], f'/evidence/{seqs.index(seq)}')
+            self.assertEqual(source['speaker_id'], f'shared:speaker{seq}')
+            self.assertEqual(source['request_ref'], f'godot_help:turn:shared:speaker{seq}:0:1')
+            self.assertIs(source['is_current_snapshot_entry'], True)
+            self.assertEqual(source['snapshot_sha256'], digest)
+            pointed = gm_runner.evidence_pointer(document, source['snapshot_pointer'])
+            self.assertEqual(pointed['event_id'], source['event_id'])
+            self.assertEqual(pointed['speaker_id'], source['speaker_id'])
+            self.assertEqual(pointed['request_ref'], source['request_ref'])
+            self.assertEqual(pointed['issue_id'], f'public_life_event:life_event_{seq}')
+            self.assertEqual(pointed['delivered_text'], f'public words from event {seq}')
+        # The mapping copies four named identity fields and nothing else: private sentinel fields
+        # a producer might add to its own entry are never carried into the GM_STATE projection.
+        for projection in block['open_issues']:
+            self.assertEqual(sorted(projection['public_source']),
+                             ['event_id', 'evidence_kind', 'identity_key',
+                              'is_current_snapshot_entry', 'operation_id', 'request_ref',
+                              'snapshot_pointer', 'snapshot_sha256', 'speaker_id'])
+        mapped = json.dumps([p['public_source'] for p in block['open_issues']])
+        self.assertNotIn(self.SENTINEL, mapped,
+                         'the linkage mapping carries identity fields, never private ones')
+
+        # a later event is a legitimate source for one bounded new issue
+        answer = {'new_issues': [{'proposal_key': 'linkage-late-event',
+                                  'summary': 'the late public request names a mechanism worth '
+                                             'investigating',
+                                  'evidence_refs': ['/evidence/6'], 'claim_coding': False}]}
+        entries, errors = gm_runner.validate_new_issues(answer, investigation)
+        self.assertEqual(errors, [])
+        self.assertEqual(entries[0]['evidence_refs'], ['/evidence/6'])
+
+    def test_identical_text_distinct_events_map_distinctly_after_reordering(self):
+        shared_text = 'same public words, different speaker and request'
+        left = self.speech_entry(47, position_note=shared_text)
+        right = self.speech_entry(53, position_note=shared_text)
+        for entries in ([left, right], [right, left]):
+            with self.subTest(order=[entry['event_id'] for entry in entries]):
+                state, document, digest, investigation, item, prompt = self.observe_chain(
+                    self.document_with(entries), max_issues=2)
+                by_event = {p['public_source']['event_id']: p['public_source']
+                            for p in self.gm_state(prompt)['open_issues']}
+                self.assertEqual(sorted(by_event), ['life_event_47', 'life_event_53'])
+                for index, entry in enumerate(entries):
+                    source = by_event[entry['event_id']]
+                    self.assertEqual(source['snapshot_pointer'], f'/evidence/{index}',
+                                     'the pointer follows the entry, not a fixed position')
+                    self.assertEqual(source['speaker_id'], entry['speaker_id'])
+                    self.assertEqual(source['request_ref'], entry['request_ref'])
+                    pointed = gm_runner.evidence_pointer(document, source['snapshot_pointer'])
+                    self.assertEqual(pointed['event_id'], entry['event_id'])
+                    self.assertEqual(pointed['speaker_id'], entry['speaker_id'])
+                self.assertEqual(by_event['life_event_47']['speaker_id'], 'shared:speaker47')
+                self.assertEqual(by_event['life_event_53']['speaker_id'], 'shared:speaker53')
+
+    def test_a_departed_entry_is_never_labelled_current(self):
+        first = self.document_with([self.speech_entry(37), self.speech_entry(45)])
+        state, _doc, _digest, _inv, _item, _prompt = self.observe_chain(first)
+        kept = [issue for issue in state['issues'].values()
+                if issue.get('identity_key') == 'public_life_event:life_event_45'][0]
+        gone = [issue for issue in state['issues'].values()
+                if issue.get('identity_key') == 'public_life_event:life_event_37'][0]
+
+        second = self.document_with([self.speech_entry(45)], revision={'life_seq': 99,
+                                                                      'proposal_sequence': 0})
+        _state, document, digest, _inv, _item, prompt = self.observe_chain(second, state=state)
+        index = gm_runner.public_snapshot_index(document)
+        projection = gm_runner.issue_projection(gone, index, digest)
+        self.assertIsNone(projection['public_source']['snapshot_pointer'])
+        self.assertIsNone(projection['public_source']['snapshot_sha256'])
+        self.assertIs(projection['public_source']['is_current_snapshot_entry'], False)
+        current = gm_runner.issue_projection(kept, index, digest)
+        self.assertEqual(current['public_source']['snapshot_pointer'], '/evidence/0')
+        self.assertEqual(current['public_source']['snapshot_sha256'], digest)
+        self.assertNotIn(gone['issue_id'],
+                         [p['issue_id'] for p in self.gm_state(prompt)['open_issues']],
+                         'an entry this snapshot does not carry is not offered as open work')
+
+    def test_proposal_pointers_are_citable_and_foreign_pointers_are_refused(self):
+        proposals = [{'evidence_kind': 'capability_proposed', 'proposal_id': f'proposal_{n}',
+                      'status': 'proposed', 'summary': f'bounded proposal {n}',
+                      'first': {'utc': 'x'}, 'latest': {'utc': 'y'}}
+                     for n in (1, 2, 3)]
+        document = self.document_with([self.speech_entry(37)], proposals=proposals)
+        _state, document, _digest, investigation, _item, _prompt = self.observe_chain(document)
+        self.assertIn('/proposals/2', investigation['evidence_refs'])
+        accepted, errors = gm_runner.validate_new_issues(
+            {'new_issues': [{'proposal_key': 'linkage-proposal',
+                             'summary': 'a later proposal is a legitimate bounded source',
+                             'evidence_refs': ['/proposals/2'], 'claim_coding': False}]},
+            investigation)
+        self.assertEqual(errors, [])
+        self.assertEqual(accepted[0]['evidence_refs'], ['/proposals/2'])
+        for foreign in ('/evidence/9', '/limits', '/world_id'):
+            with self.subTest(ref=foreign):
+                _accepted, errors = gm_runner.validate_new_issues(
+                    {'new_issues': [{'proposal_key': 'linkage-foreign',
+                                     'summary': 'a pointer outside the investigation is refused',
+                                     'evidence_refs': [foreign], 'claim_coding': False}]},
+                    investigation)
+                self.assertTrue(errors, foreign)
 
 
 if __name__ == '__main__':

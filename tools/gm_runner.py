@@ -884,14 +884,65 @@ def import_source(state: dict, document: dict, path: Path, digest: str) -> dict:
     return report
 
 
-def issue_projection(record: dict) -> dict:
-    return {'issue_id': record['issue_id'], 'evidence_kind': record['evidence_kind'],
-            'capability_id': record.get('capability_id'), 'resident_id': record.get('resident_id'),
-            'proposal_id': record.get('proposal_id'), 'source_status': record.get('source_status'),
-            'lifecycle': record.get('lifecycle'), 'owner_gm': record.get('owner_gm'),
-            'occurrences': record.get('occurrences'), 'claim': record.get('claim'),
-            'first': record.get('first'), 'latest': record.get('latest'),
-            'provenance': record.get('provenance'), 'summary': record.get('summary')}
+PUBLIC_SPEECH_KIND = 'public_life_event'
+INVESTIGATION_POINTER_LIMIT = 8
+
+
+def public_snapshot_entries(document: dict) -> list:
+    """(evidence_kind, identity_key, JSON pointer) for every public entry of THIS snapshot.
+
+    The pointer comes from where the entry actually sits in the document; the identity comes from
+    issue_identity, the same function the import uses, so a pointer can never be attached to the
+    wrong entry or guessed from an array position.
+    """
+    found = []
+    for bucket, default_kind in (('evidence', 'world_evidence'),
+                                 ('proposals', 'capability_proposed')):
+        for position, entry in enumerate(document.get(bucket) or []):
+            if not isinstance(entry, dict):
+                continue
+            kind, key, _field = issue_identity(entry, default_kind)
+            found.append((kind, key, f'/{bucket}/{position}'))
+    return found
+
+
+def public_snapshot_index(document: dict) -> dict:
+    """(evidence_kind, identity_key) -> pointer in the CURRENT snapshot, identity-verified."""
+    index = {}
+    for kind, key, pointer in public_snapshot_entries(document):
+        index.setdefault((kind, key), pointer)
+    return index
+
+
+def issue_projection(record: dict, public_index: dict | None = None,
+                     snapshot_sha: str | None = None) -> dict:
+    projection = {'issue_id': record['issue_id'], 'evidence_kind': record['evidence_kind'],
+                  'capability_id': record.get('capability_id'),
+                  'resident_id': record.get('resident_id'),
+                  'proposal_id': record.get('proposal_id'),
+                  'source_status': record.get('source_status'),
+                  'lifecycle': record.get('lifecycle'), 'owner_gm': record.get('owner_gm'),
+                  'occurrences': record.get('occurrences'), 'claim': record.get('claim'),
+                  'first': record.get('first'), 'latest': record.get('latest'),
+                  'provenance': record.get('provenance'), 'summary': record.get('summary')}
+    entry = record.get('entry') if isinstance(record.get('entry'), dict) else {}
+    if record.get('evidence_kind') == PUBLIC_SPEECH_KIND:
+        # The exact public source this opaque issue id came from: original identity and speakers,
+        # the request it answers, and where that entry is in the snapshot this prompt shows. No
+        # delivered entry body, private reason or accepted reply is copied here.
+        pointer = (public_index or {}).get((record.get('evidence_kind'),
+                                            record.get('identity_key')))
+        projection['public_source'] = {
+            'evidence_kind': PUBLIC_SPEECH_KIND,
+            'identity_key': record.get('identity_key'),
+            'event_id': entry.get('event_id'),
+            'speaker_id': entry.get('speaker_id'),
+            'request_ref': entry.get('request_ref'),
+            'operation_id': entry.get('operation_id'),
+            'snapshot_pointer': pointer,
+            'snapshot_sha256': snapshot_sha if pointer else None,
+            'is_current_snapshot_entry': pointer is not None}
+    return projection
 
 
 def evidence_pointer(document: dict, pointer: str):
@@ -983,10 +1034,11 @@ def autonomy_investigation(document: dict, digest: str, policy: dict) -> dict:
     spontaneously discovered anything. A GM hypothesis built from these pointers stays a
     hypothesis until the host validates a scope and a real runtime observation exists.
     """
-    refs = [f'/evidence/{index}' for index in range(min(len(document['evidence']), 4))]
-    refs += [f'/proposals/{index}' for index in range(min(len(document['proposals']), 4))]
+    entries = public_snapshot_entries(document)
+    speech = [pointer for kind, _key, pointer in entries if kind == PUBLIC_SPEECH_KIND]
+    others = [pointer for kind, _key, pointer in entries if kind != PUBLIC_SPEECH_KIND]
+    refs = (speech + others)[:INVESTIGATION_POINTER_LIMIT - 1]
     refs.append('/counts')
-    refs = refs[:8]
     investigation = {'investigation_id': 'autonomy:' + policy['policy_id'],
                      'world_id': document['world_id'], 'source_sha256': digest,
                      'origin': AUTONOMY_ORIGIN, 'objective': policy['objective'].strip(),
@@ -1165,13 +1217,15 @@ def common_evidence_block(document: dict, path: Path, digest: str, report: dict,
     return block
 
 
-def gm_state_block(state: dict, item: dict, previous: list[dict], run_id: str, digest: str) -> str:
+def gm_state_block(state: dict, item: dict, previous: list[dict], run_id: str, digest: str,
+                   public_index: dict | None = None) -> str:
     gm_id = item['gm_id']
     block = {'gm_id': gm_id, 'focus': GM_FOCUS[gm_id], 'resident_body': None,
              'world_id': state['world_id'],
              'session': {'mode': 'resume' if item['session_id'] else 'new',
                          'session_id': item['session_id']},
-             'open_issues': [issue_projection(record) for record in item['_records']],
+             'open_issues': [issue_projection(record, public_index, digest)
+                             for record in item['_records']],
              'investigation': item.get('investigation'),
              'settled_issue_ids': item['settled_issue_ids'],
              'closed_or_absent_issue_ids': sorted(issue['issue_id'] for issue in
@@ -1184,7 +1238,8 @@ def gm_state_block(state: dict, item: dict, previous: list[dict], run_id: str, d
 def build_prompt(document, evidence_path, digest, report, state, item, run_id, budget) -> str:
     common = common_evidence_block(document, evidence_path, digest, report, max(2000, budget - 6000))
     record = state['sessions'][item['gm_id']]
-    prompt = common + gm_state_block(state, item, record['outcomes'][-5:], run_id, digest)
+    prompt = common + gm_state_block(state, item, record['outcomes'][-5:], run_id, digest,
+                                     public_snapshot_index(document))
     if item.get('autonomy_policy'):
         prompt += autonomy_policy_block(item['autonomy_policy'])
     if len(prompt.encode('utf-8')) > budget:

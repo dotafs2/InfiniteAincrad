@@ -39,7 +39,16 @@ class ProductionBridgeTests(unittest.TestCase):
         self.deploy.mkdir()
         self.state.mkdir()
         write(self.world, world())
-        write(self.policy, {'paths': {}, 'deployment': {}, 'runtime': {},
+        # A real bounded deployment: one manifest-declared file inside the checkout, so the
+        # bridge's deployment content digest is exercised for real instead of through a mock.
+        self.manifest = self.root / 'base-manifest.json'
+        self.deployed_file = self.deploy / 'game/spatial/town_street.gd'
+        self.deployed_file.parent.mkdir(parents=True, exist_ok=True)
+        self.deployed_file.write_text('release-bytes', encoding='utf-8')
+        write(self.manifest, {'files': {'game/spatial/town_street.gd':
+                                        bridge.sha(self.deployed_file)}})
+        write(self.policy, {'paths': {}, 'runtime': {},
+                            'deployment': {'base_manifest': str(self.manifest), 'path_map': {}},
                             'limits': {'max_model_calls': 20}})
         self.base_scope = {
             'schema_version': 1, 'world_id': WORLD, 'canonical_world': str(self.world),
@@ -548,6 +557,529 @@ class ProductionBridgeTests(unittest.TestCase):
             self.assertEqual(bridge.main(['--scope', str(self.scope)]), 0)
         self.assertFalse(called)
         self.assertEqual(json.loads((self.out/'run.json').read_text())['reason'], 'time_limit')
+
+
+class SettledLocalGmFailureTests(unittest.TestCase):
+    """One already-reported, never-published candidate failure may settle locally. Every other
+    blocked/nonzero autonomy outcome must keep the global stop it had before."""
+
+    # The bridge fixture is shared, but inheriting the parent test cases would replay them here.
+    setUp = ProductionBridgeTests.setUp
+    tearDown = ProductionBridgeTests.tearDown
+
+    def _blocked_candidate_report(self, **overrides):
+        report = {'status': 'blocked', 'cycle_id': 'blocked-candidate-cycle',
+                  'mode': 'production',
+                  'blocked_reason': 'host_gate_refused_candidate', 'next_stage': 'validate',
+                  'policy': {'world_id': WORLD},
+                  'stage_status': {'observe': 'done', 'candidate': 'done', 'validate': 'failed',
+                                   'publish': 'pending', 'verify': 'pending', 'feedback': 'done'},
+                  'what_changed': [], 'release_digest': None, 'installed': False, 'used': False,
+                  'independently_tested': {'host_gate_ok': False,
+                                           'failed_checks': ['host_test_commands_pass'],
+                                           'runtime_checks': {}},
+                  'gm': {'gm_id': 'gm-01', 'issue_id': 'issue-7',
+                         'observation_origin': 'public_export'},
+                  'deferred_claims': [], 'declined': [],
+                  'usage': {'model_calls': 4, 'unknown': None},
+                  'owned_processes': {'windows_job': True, 'all_observed_members_exited': True,
+                                      'members': [{'stage': 'observe', 'pid': 4321,
+                                                   'exit_code': 0}]}}
+        report.update(overrides)
+        return report
+
+    def _host_test_run(self, **overrides):
+        # The real gm_autonomy validate detail shape: one entry per required host test command,
+        # carrying the owned-tree snapshot of the command that actually ran.
+        run = {'command': ['py', '-3.12', '-m', 'unittest', 'tools.test_target'],
+               'exit_code': 1, 'timed_out': False, 'seconds': 1.5,
+               'owned': {'containment': 'windows_kill_on_close_job', 'wrapper_pid': 4321,
+                         'observed_members': [{'pid': 4322, 'running': False, 'exit_code': 1,
+                                               'creation_time_windows_100ns': 638000000000000000}],
+                         'total_assigned_processes': 1, 'active_processes': 0,
+                         'member_identity_list_complete': True, 'all_members_exited': True},
+               'stdout_tail': 'FAILED (failures=1)', 'stderr_tail': ''}
+        run.update(overrides)
+        return run
+
+    def _retain_cycle(self, report, decision='no_action', suffix='', receipt_digest=None,
+                      acknowledge_gm=None, measured=True, observe_calls=2, host_test_run=None,
+                      host_test_runs=None, deferred_claims=()):
+        directory = self.state / 'autonomy' / ('auto-blockedcandidate' + suffix)
+        gm_id, issue_id = report['gm']['gm_id'], report['gm']['issue_id']
+        if host_test_runs is None:
+            host_test_runs = [host_test_run]
+        runs = [self._host_test_run() if item is None else item for item in host_test_runs]
+        checks = [{'check': 'candidate_head_is_base', 'ok': True, 'detail': 'base-revision'},
+                  {'check': 'candidate_changes_within_scope', 'ok': True,
+                   'detail': {'observed': [], 'out_of_scope': []}},
+                  {'check': 'host_owned_paths_unchanged', 'ok': True, 'detail': {}},
+                  {'check': 'scope_files_exist', 'ok': True,
+                   'detail': {'game/spatial/town_street.gd': 'sha'}},
+                  {'check': 'host_test_commands_pass', 'ok': False}]
+        commands = []
+        if all(item is not False for item in runs):
+            checks[-1]['detail'] = runs
+            commands = [item['command'] for item in runs]
+        receipt = {'kind': 'autonomy_release_receipt', 'cycle_id': report['cycle_id'],
+                   'issue_id': issue_id, 'world_id': WORLD, 'gm_id': gm_id,
+                   'release_digest': None, 'outcome': 'validate_failed', 'published': False,
+                   'runtime_verification': {'installed': None, 'used': None,
+                                            'installed_but_unused': None, 'observation': None},
+                   'host_gate_failed_checks': ['host_test_commands_pass'],
+                   'failure': {'stage': 'validate', 'status': 'failed',
+                               'blocked_reason': report['blocked_reason'],
+                               'failed_checks': ['host_test_commands_pass']}}
+        receipt_path = directory / 'feedback-1.json'
+        write(receipt_path, receipt)
+        recorded_digest = receipt_digest or bridge.sha(receipt_path)
+        attempts = [{'attempt': 1, 'exit_code': 0, 'status': 'ok', 'acknowledged': True,
+                     'decision': decision, 'next_work': 'none', 'usage_measured': True,
+                     'receipt_sha256': recorded_digest, 'owned': {'all_members_exited': True}}]
+        usage = report.setdefault('usage', {})
+        usage['attempts'] = {issue_id: 1}
+        usage['feedback_attempts'] = attempts
+        report['deferred_claims'] = list(deferred_claims)
+        report['report_path'] = str(directory / 'report.json')
+        write(directory / 'report.json', report)
+        write(directory / 'cycle.json', {
+            'schema_version': 1, 'cycle_id': report['cycle_id'], 'mode': 'production',
+            'world_id': WORLD, 'status': 'blocked', 'gm_id': gm_id, 'issue_id': issue_id,
+            'blocked_reason': report['blocked_reason'], 'unknown': None, 'repair_blocked': None,
+            'deferred_claims': list(deferred_claims), 'declined': [], 'release': None,
+            'model_calls': usage.get('model_calls'), 'attempts': dict(usage['attempts']),
+            'stages': {'observe': {'status': 'done', 'model_calls_observed': observe_calls},
+                       'candidate': {'status': 'done', 'host_test_commands': commands,
+                                     'attempts': [{'attempt': 1, 'status': 'ok', 'exit_code': 0,
+                                                   'usage_measured': measured}]},
+                       'validate': {'status': 'failed', 'ok': False, 'checks': checks},
+                       'publish': {'status': 'pending'}, 'verify': {'status': 'pending'},
+                       'feedback': {'status': 'done', 'receipt_sha256': recorded_digest,
+                                    'attempts': attempts,
+                                    'acknowledgement': {'acknowledged': True,
+                                                        'gm_id': acknowledge_gm or gm_id,
+                                                        'decision': decision,
+                                                        'next_work': 'none'},
+                                    'receipt': receipt}}})
+        return report
+
+    def _gm_cycle_run(self, reports, exit_code=1, gm_mutate=None, owned_exited=True):
+        queue = list(reports) if isinstance(reports, list) else [reports]
+        def run(command, cwd, timeout, log, env=None):
+            if command[0] != 'life':
+                report = queue.pop(0) if len(queue) > 1 else queue[0]
+                if gm_mutate is not None:
+                    gm_mutate()
+                Path(log).parent.mkdir(parents=True, exist_ok=True)
+                Path(log).write_text('diagnostic\n' + json.dumps(report) + '\n', encoding='utf-8')
+                return {'exit_code': exit_code, 'timed_out': False,
+                        'owned': {'all_members_exited': owned_exited, 'active': 0}}
+            values = dict(token.split('=', 1) for token in command[1:])
+            current = json.loads(self.world.read_text())
+            current['life']['seq'] += 1
+            write(self.world, current)
+            out = Path(values['--out'])
+            write(out / 'result.json', {
+                'engine_exit': 0, 'validation_passed': False, 'model_errors': {},
+                'upstream_requests': 1, 'budget_stop_reason': '',
+                'carried_uncertainty_reviewed': True,
+                'ledger_before': {'ledger_id': 'ledger', 'model': 'kimi-k2.6',
+                                  'counts': {'settled': 1139, 'uncertain': 6}},
+                'ledger_after': {'ledger_id': 'ledger', 'model': 'kimi-k2.6', 'halted': '',
+                                 'counts': {'settled': 1140, 'uncertain': 6}}})
+            write(Path(values['--evidence']), {
+                'world_id': WORLD, 'evidence': [],
+                'source_revision': {'life_seq': current['life']['seq'],
+                                    'world_elapsed_seconds': current.get('elapsed_seconds', 3076.75)}})
+            return {'exit_code': 0, 'timed_out': False,
+                    'owned': {'all_members_exited': True, 'active': 0}}
+        return run
+
+    def _run_bridge(self, scope_overrides, report, expect, **run_kwargs):
+        scope = dict(self.base_scope)
+        scope.update(scope_overrides)
+        write(self.scope, scope)
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value={'head': 'head', 'files': {'a': '1'}}), \
+             mock.patch.object(bridge, 'run_owned', side_effect=self._gm_cycle_run(report,
+                                                                                  **run_kwargs)):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), expect)
+        return json.loads((Path(scope['out_root']) / 'run.json').read_text())
+
+    def test_settled_local_candidate_failure_continues_to_the_next_life_stage(self):
+        first_report = self._retain_cycle(
+            self._blocked_candidate_report(cycle_id='blocked-candidate-1'), suffix='one')
+        second_report = self._retain_cycle(
+            self._blocked_candidate_report(cycle_id='blocked-candidate-2'), suffix='two')
+        result = self._run_bridge({'max_cycles': 2}, [first_report, second_report], 0)
+        self.assertEqual(result['status'], 'completed_finite')
+        self.assertEqual(len(result['cycles']), 2, 'the next canonical life stage still runs')
+        first = result['cycles'][0]
+        self.assertEqual(first['status'], 'closed')
+        self.assertEqual(first['resident_adoption'], 'no_release')
+        self.assertTrue(first['gm_usage_counted'])
+        receipt = first['gm_local_failures'][0]
+        self.assertEqual(receipt['classification'],
+                         'settled_local_candidate_failure_unpublished')
+        self.assertEqual(receipt['cycle_id'], 'blocked-candidate-1')
+        self.assertEqual(receipt['author_decision'], 'no_action')
+        self.assertEqual(receipt['accounted_model_calls'], 4)
+        self.assertEqual(receipt['deployment_files'], ['game/spatial/town_street.gd'])
+        self.assertTrue(receipt['deployment_matches_pinned_base'])
+        self.assertEqual(receipt['failed_validate_checks'], ['host_test_commands_pass'])
+        self.assertEqual(receipt['blocked_reason'], 'host_gate_refused_candidate')
+        self.assertFalse(receipt['published'])
+        self.assertEqual(receipt['model_calls'], 4)
+        self.assertEqual(result['gm_local_failures_total'], 2,
+                         'each canonical life stage reports its own settled local failure')
+        self.assertEqual(result['gm_local_failure_classes'],
+                         ['settled_local_candidate_failure_unpublished'])
+        self.assertEqual(result['cycles'][1]['gm_local_failures'][0]['cycle_id'],
+                         'blocked-candidate-2')
+        self.assertEqual(result['gm_model_calls'], 8, 'each distinct cycle is charged once')
+        self.assertEqual([c['gm_usage_counted'] for c in result['cycles']], [True, True])
+        self.assertEqual(result['kimi_requests'], 2)
+
+    def test_candidate_failure_usage_contributes_to_the_total_gm_cap(self):
+        report = self._retain_cycle(self._blocked_candidate_report(
+            usage={'model_calls': 6, 'unknown': None}), observe_calls=4)
+        result = self._run_bridge({'max_cycles': 3, 'max_gm_model_calls': 6}, report, 0)
+        self.assertEqual(result['reason'], 'lifetime_model_call_limit')
+        self.assertEqual(result['gm_model_calls'], 6)
+        self.assertEqual(len(result['cycles']), 1, 'the spent cap stops the next life stage')
+        self.assertEqual(result['cycles'][0]['status'], 'closed')
+
+    def test_known_calls_are_charged_and_the_unknown_tail_is_marked_without_settling(self):
+        report = self._retain_cycle(self._blocked_candidate_report(
+            usage={'model_calls': 4,
+                   'unknown': {'stage': 'code', 'reserved': {'model_calls_reserved': 1}}}))
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_usage_unknown')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+        self.assertEqual(result['gm_model_calls'], 4,
+                         'the known part of the quota count stays in the cumulative scope')
+        self.assertEqual(result['cycles'][0]['gm_quota_calls_charged'], 4)
+        self.assertEqual(result['gm_unknown_usage'],
+                         {'cycle_id': 'blocked-candidate-cycle', 'quota_calls_charged': 4,
+                          'counts_including_unresolved_reservations': 4,
+                          'usage_unknown': {'stage': 'code',
+                                            'reserved': {'model_calls_reserved': 1}}})
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_unmeasured_cycle_total_is_never_read_as_zero(self):
+        report = self._retain_cycle(self._blocked_candidate_report(usage={'unknown': None}))
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_usage_unmeasured')
+        self.assertEqual(result['gm_model_calls'], 0, 'nothing measurable is charged or invented')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_live_gm_descendants_stop_the_run(self):
+        report = self._retain_cycle(self._blocked_candidate_report())
+        result = self._run_bridge({'max_cycles': 2}, report, 1, owned_exited=False)
+        self.assertEqual(result['reason'], 'autonomy_failed')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_report_level_live_descendant_stops_local_classification(self):
+        report = self._retain_cycle(self._blocked_candidate_report(
+            owned_processes={'windows_job': True, 'all_observed_members_exited': False,
+                             'members': [{'stage': 'observe', 'pid': 99, 'exit_code': None}]}))
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_world_conflict_stops_before_local_classification(self):
+        report = self._retain_cycle(self._blocked_candidate_report())
+        def mutate():
+            changed = json.loads(self.world.read_text())
+            changed['life']['seq'] += 99
+            write(self.world, changed)
+        result = self._run_bridge({'max_cycles': 2}, report, 1, gm_mutate=mutate)
+        self.assertEqual(result['reason'], 'canonical_world_changed_during_gm_cycle')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_published_but_unverified_stays_global_even_with_unchanged_save_bytes(self):
+        report = self._retain_cycle(self._blocked_candidate_report(
+            stage_status={'observe': 'done', 'candidate': 'done', 'validate': 'failed',
+                          'publish': 'done', 'verify': 'failed', 'feedback': 'done'},
+            what_changed=['game/spatial/town_street.gd'], release_digest='digest-1',
+            installed=True,
+            independently_tested={'host_gate_ok': False,
+                                  'failed_checks': ['host_test_commands_pass'],
+                                  'runtime_checks': {'deployed_bytes_match_release': False}}))
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+        self.assertEqual(result['gm_model_calls'], 4, 'the published attempt is still charged')
+
+    def test_repair_decision_is_not_a_settled_local_failure(self):
+        report = self._retain_cycle(self._blocked_candidate_report(), decision='repair')
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_escalate_decision_is_not_a_settled_local_failure(self):
+        report = self._retain_cycle(self._blocked_candidate_report(), decision='escalate')
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+
+    def test_arbitrary_decision_string_is_not_a_settled_local_failure(self):
+        report = self._retain_cycle(self._blocked_candidate_report(),
+                                    decision='definitely-not-a-decision')
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+
+    def test_stale_receipt_digest_is_not_a_settled_local_failure(self):
+        report = self._retain_cycle(self._blocked_candidate_report(),
+                                    receipt_digest='0' * 64)
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_unmeasured_individual_attempt_hidden_by_the_summary_stops(self):
+        report = self._retain_cycle(self._blocked_candidate_report(), measured=False)
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_acknowledgement_from_another_gm_stops(self):
+        report = self._retain_cycle(self._blocked_candidate_report(),
+                                    acknowledge_gm='gm-99')
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+
+    def test_summary_total_that_the_retained_attempts_cannot_account_for_stops(self):
+        report = self._retain_cycle(self._blocked_candidate_report(
+            usage={'model_calls': 9, 'unknown': None}), observe_calls=2)
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+
+    def test_changed_deployment_bytes_with_identical_status_stop_the_local_path(self):
+        report = self._retain_cycle(self._blocked_candidate_report())
+        def mutate():
+            # Same path, same would-be porcelain entry, different bytes.
+            self.deployed_file.write_text('release-bytes-tampered', encoding='utf-8')
+        result = self._run_bridge({'max_cycles': 2}, report, 1, gm_mutate=mutate)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_missing_base_manifest_fails_closed_instead_of_claiming_the_parent_repo(self):
+        report = self._retain_cycle(self._blocked_candidate_report())
+        unverifiable = json.loads(self.policy.read_text())
+        unverifiable['deployment'] = {'path_map': {}}
+        write(self.policy, unverifiable)
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+        self.assertIsNone(bridge.deployment_content_digest(self.deploy, None),
+                          'an absent manifest is None, never a parent-repo claim')
+
+    def test_deployment_digest_reads_bytes_and_never_consults_version_control(self):
+        before = bridge.deployment_content_digest(self.deploy, self.manifest)
+        self.assertEqual(before['files'], {'game/spatial/town_street.gd':
+                                           bridge.sha(self.deployed_file)})
+        self.assertTrue(before['matches_pinned_base'])
+        self.deployed_file.write_text('tampered', encoding='utf-8')
+        after = bridge.deployment_content_digest(self.deploy, self.manifest)
+        self.assertNotEqual(before['files'], after['files'],
+                            'same path and same porcelain text, different bytes')
+        self.assertFalse(after['matches_pinned_base'])
+        with mock.patch.object(bridge.subprocess, 'check_output',
+                               side_effect=AssertionError('git must never be consulted')):
+            self.assertEqual(bridge.deployment_content_digest(self.deploy, self.manifest),
+                             after)
+
+    def test_missing_declared_deployment_file_fails_closed(self):
+        self.deployed_file.unlink()
+        self.assertIsNone(bridge.deployment_content_digest(self.deploy, self.manifest))
+
+    def test_empty_supported_base_manifest_cannot_verify_the_deployment(self):
+        # The supported validate_gm_autonomy harness pins the trial base as
+        # {'schema_version': 1, 'files': {}} (validate_gm_autonomy.py:700), and every prepared
+        # scenario under tmp/gm-autonomy-20260913 carries that same empty declaration. An empty
+        # declaration pins no bounded deployment content, so the bridge must stop truthfully
+        # instead of treating an empty file set as proof that the deployment is unchanged.
+        write(self.manifest, {'schema_version': 1, 'files': {}})
+        self.assertIsNone(bridge.deployment_content_digest(self.deploy, self.manifest))
+        report = self._retain_cycle(self._blocked_candidate_report())
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_checkout_under_a_parent_repository_is_measured_by_content_only(self):
+        # A checkout that is not itself a repository must never be measured by letting version
+        # control discover an enclosing parent repository: only manifest-declared files inside
+        # the checkout are read.
+        outer = self.root / 'outer'
+        (outer / '.git').mkdir(parents=True)
+        checkout = outer / 'trial-deployment'
+        target = checkout / 'game/spatial/town_street.gd'
+        target.parent.mkdir(parents=True)
+        target.write_text('parent-repo-bytes', encoding='utf-8')
+        (checkout / 'unrelated.bin').write_bytes(b'not declared by the manifest')
+        manifest = self.root / 'parent-repo-base.json'
+        write(manifest, {'files': {'game/spatial/town_street.gd': bridge.sha(target)}})
+        with mock.patch.object(bridge.subprocess, 'check_output',
+                               side_effect=AssertionError('git must never be consulted')):
+            digest = bridge.deployment_content_digest(checkout, manifest)
+        self.assertEqual(digest['checkout'], str(checkout.resolve()))
+        self.assertEqual(digest['files'], {'game/spatial/town_street.gd': bridge.sha(target)})
+        self.assertTrue(digest['matches_pinned_base'])
+        target.write_text('parent-repo-bytes-tampered', encoding='utf-8')
+        with mock.patch.object(bridge.subprocess, 'check_output',
+                               side_effect=AssertionError('git must never be consulted')):
+            changed = bridge.deployment_content_digest(checkout, manifest)
+        self.assertNotEqual(digest['files'], changed['files'],
+                            'same path and same porcelain text, different bytes')
+        self.assertFalse(changed['matches_pinned_base'])
+
+    def test_repeated_cycle_id_is_charged_only_the_incremental_delta(self):
+        first = self._retain_cycle(self._blocked_candidate_report(cycle_id='resumed-cycle'),
+                                   suffix='one')
+        resumed = self._retain_cycle(self._blocked_candidate_report(
+            cycle_id='resumed-cycle', usage={'model_calls': 6, 'unknown': None}),
+            suffix='two', observe_calls=4)
+        result = self._run_bridge({'max_cycles': 2}, [first, resumed], 0)
+        self.assertEqual(result['status'], 'completed_finite')
+        self.assertEqual([c['gm_quota_calls_charged'] for c in result['cycles']], [4, 2])
+        self.assertEqual([c['gm_usage_counted'] for c in result['cycles']], [True, True])
+        self.assertEqual(result['gm_model_calls'], 6, 'the cumulative total is charged once')
+        self.assertEqual(result['counted_gm_cycle_calls'], {'resumed-cycle': 6})
+        self.assertEqual(result['cycles'][0]['gm_local_failures'][0]['model_calls_basis'],
+                         'gm_autonomy_quota_count_including_retained_reservations')
+
+    def test_real_schema_directory_prefix_path_map_forms_still_settle_locally(self):
+        # gm_autonomy.deployment_target maps concrete SOURCE paths through a directory PREFIX
+        # map. Both real forms must leave the manifest-target digest usable; a digest that
+        # hashed the prefix value would return None and never settle.
+        for index, path_map in enumerate(({'game/': ''}, {'game/': 'game/'})):
+            with self.subTest(path_map=path_map):
+                policy = json.loads(self.policy.read_text())
+                policy['deployment']['path_map'] = path_map
+                write(self.policy, policy)
+                self.assertIsNotNone(
+                    bridge.deployment_content_digest(self.deploy, self.manifest))
+                report = self._retain_cycle(
+                    self._blocked_candidate_report(cycle_id='prefix-form-%d' % index),
+                    suffix='prefix%d' % index)
+                result = self._run_bridge(
+                    {'max_cycles': 1, 'out_root': str(self.root / ('run-prefix-%d' % index))},
+                    report, 0)
+                first = result['cycles'][0]
+                self.assertEqual(first['status'], 'closed')
+                self.assertEqual(first['gm_local_failures'][0]['classification'],
+                                 'settled_local_candidate_failure_unpublished')
+                self.assertEqual(result['gm_local_failures_total'], 1)
+
+    def test_timed_out_host_test_is_not_a_settled_local_failure(self):
+        report = self._retain_cycle(
+            self._blocked_candidate_report(),
+            host_test_run=self._host_test_run(exit_code=None, timed_out=True))
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_live_host_test_descendant_is_not_a_settled_local_failure(self):
+        owned = dict(self._host_test_run()['owned'])
+        owned.update({'all_members_exited': False, 'active_processes': 1,
+                      'observed_members': [{'pid': 4322, 'running': True, 'exit_code': None,
+                                            'creation_time_windows_100ns': 1}]})
+        report = self._retain_cycle(self._blocked_candidate_report(),
+                                    host_test_run=self._host_test_run(owned=owned))
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_absent_host_test_detail_is_not_a_settled_local_failure(self):
+        report = self._retain_cycle(self._blocked_candidate_report(), host_test_run=False)
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_multiple_required_host_tests_settle_when_every_run_is_fully_observed(self):
+        failing = self._host_test_run(command=['py', '-3.12', '-m', 'unittest', 'tools.test_a'])
+        passing = self._host_test_run(
+            command=['py', '-3.12', '-m', 'unittest', 'tools.test_b'], exit_code=0,
+            owned={'containment': 'windows_kill_on_close_job', 'wrapper_pid': 4331,
+                   'observed_members': [{'pid': 4332, 'running': False, 'exit_code': 0,
+                                         'creation_time_windows_100ns': 638000000000000001}],
+                   'total_assigned_processes': 1, 'active_processes': 0,
+                   'member_identity_list_complete': True, 'all_members_exited': True})
+        report = self._retain_cycle(self._blocked_candidate_report(cycle_id='two-command-cycle'),
+                                    suffix='two-command', host_test_runs=[failing, passing])
+        result = self._run_bridge({'max_cycles': 1}, report, 0)
+        first = result['cycles'][0]
+        self.assertEqual(first['status'], 'closed')
+        self.assertEqual(first['gm_local_failures'][0]['classification'],
+                         'settled_local_candidate_failure_unpublished')
+        self.assertEqual(first['gm_local_failures'][0]['model_calls'], 4)
+
+    def test_host_test_detail_shorter_than_the_required_commands_stops(self):
+        report = self._retain_cycle(self._blocked_candidate_report())
+        cycle_file = self.state / 'autonomy' / 'auto-blockedcandidate' / 'cycle.json'
+        document = json.loads(cycle_file.read_text())
+        document['stages']['candidate']['host_test_commands'].append(
+            ['py', '-3.12', '-m', 'unittest', 'tools.test_second'])
+        write(cycle_file, document)
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_a_failed_host_gate_with_only_zero_exits_is_not_settled(self):
+        report = self._retain_cycle(self._blocked_candidate_report(),
+                                    host_test_run=self._host_test_run(exit_code=0))
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_a_second_failed_validate_check_is_not_a_settled_local_failure(self):
+        report = self._retain_cycle(self._blocked_candidate_report())
+        cycle_file = self.state / 'autonomy' / 'auto-blockedcandidate' / 'cycle.json'
+        document = json.loads(cycle_file.read_text())
+        document['stages']['validate']['checks'][3] = {
+            'check': 'scope_files_exist', 'ok': False, 'detail': {}}
+        write(cycle_file, document)
+        result = self._run_bridge({'max_cycles': 2}, report, 1)
+        self.assertEqual(result['reason'], 'autonomy_blocked_unresolved')
+        self.assertNotIn('gm_local_failures', result['cycles'][0])
+
+    def test_another_gm_deferred_claim_does_not_block_a_settled_local_failure(self):
+        # The real deferred-claim shape gm_autonomy retains for another GM pending work.
+        claim = {'gm_id': 'gm-02', 'issue_id': 'issue-9'}
+        report = self._retain_cycle(self._blocked_candidate_report(), deferred_claims=[claim],
+                                    suffix='claims')
+        result = self._run_bridge({'max_cycles': 2}, report, 0)
+        self.assertEqual(result['status'], 'completed_finite')
+        self.assertEqual(len(result['cycles']), 2, 'the next canonical life stage still runs')
+        receipt = result['cycles'][0]['gm_local_failures'][0]
+        self.assertEqual(receipt['other_gm_deferred_claims'], 1,
+                         'another GM claims are pending work, not an integrity failure')
+        retained = json.loads((self.state / 'autonomy' / 'auto-blockedcandidateclaims'
+                               / 'cycle.json').read_text())
+        self.assertEqual(retained['deferred_claims'], [claim],
+                         'the claim is preserved, neither refused nor cleared')
+
+    def test_shrinking_cycle_cumulative_stops_instead_of_crediting_calls_back(self):
+        first = self._retain_cycle(self._blocked_candidate_report(
+            cycle_id='shrinking-cycle', usage={'model_calls': 6, 'unknown': None}),
+            suffix='one', observe_calls=4)
+        shrunk = self._retain_cycle(self._blocked_candidate_report(cycle_id='shrinking-cycle'),
+                                    suffix='two')
+        result = self._run_bridge({'max_cycles': 2}, [first, shrunk], 1)
+        self.assertEqual(result['reason'], 'autonomy_usage_regressed')
+        self.assertEqual(result['gm_model_calls'], 6)
+
+    def test_completed_release_path_still_closes_the_cycle(self):
+        report = self._blocked_candidate_report(
+            status='completed', blocked_reason=None, next_stage=None,
+            independently_tested={'host_gate_ok': True, 'failed_checks': [],
+                                  'runtime_checks': {'deployed_bytes_match_release': True}})
+        result = self._run_bridge({'max_cycles': 1}, report, 0, exit_code=0)
+        self.assertEqual(result['status'], 'completed_finite')
+        self.assertEqual(result['cycles'][0]['status'], 'closed')
+        self.assertEqual(result['cycles'][0]['resident_adoption'],
+                         'pending_next_canonical_life')
+        self.assertEqual(result['cycles'][0]['gm_usage_counted'], True)
+        self.assertEqual(result['gm_model_calls'], 4)
 
 
 class JourneyHostContractTests(unittest.TestCase):
