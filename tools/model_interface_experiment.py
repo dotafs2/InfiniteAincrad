@@ -83,7 +83,8 @@ def emit(value):
 
 
 class Probe:
-    def __init__(self, directory, world_source, resident=RESIDENT):
+    def __init__(self, directory, world_source, resident=RESIDENT,
+                 script='res://experiments/model_interface_probe.gd', extra_args=()):
         self.directory = Path(directory).resolve()
         self.directory.mkdir(parents=True, exist_ok=True)
         self.world = self.directory / 'world.json'
@@ -95,8 +96,8 @@ class Probe:
         self.logs = [open(self.directory / name, 'w', encoding='utf-8')
                      for name in ('engine.stdout.log', 'engine.stderr.log')]
         command = [str(GODOT), '--path', str(ROOT / 'game'), '--headless', '--fixed-fps', '60',
-                   '--script', 'res://experiments/model_interface_probe.gd', '--', '--town-restore',
-                   '--town-save=' + self.world.as_posix(), '--experiment-dir=' + self.directory.as_posix()]
+                   '--script', script, '--', '--town-restore',
+                   '--town-save=' + self.world.as_posix(), '--experiment-dir=' + self.directory.as_posix(), *extra_args]
         self.job = WindowsProcessTree(command, stdout=self.logs[0], stderr=self.logs[1], cwd=ROOT)
         self.started = time.monotonic()
         write(self.directory / 'process.json', {'pid': self.job.process.pid, 'command': command, 'status': 'running'})

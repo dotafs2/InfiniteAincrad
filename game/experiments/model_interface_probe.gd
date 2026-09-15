@@ -28,6 +28,9 @@ func _initialize() -> void:
 func _boot() -> void:
 	var packed = load("res://scenes/town_street.tscn")
 	scene = packed.instantiate()
+	var runtime = _runtime_override()
+	if runtime != null:
+		scene.town = runtime
 	root.add_child(scene)
 	current_scene = scene
 	scene.scripted_trade = true
@@ -37,6 +40,9 @@ func _boot() -> void:
 		await physics_frame
 	_write("ready.json", {"ready": scene.status != null, "world_id": scene.town._state.world_id,
 		"resident_ids": scene.town.active_ids(), "physics": "original town scene"})
+
+func _runtime_override():
+	return null
 
 func _process(_delta: float) -> bool:
 	if Time.get_ticks_msec() - boot_ms > 900000:

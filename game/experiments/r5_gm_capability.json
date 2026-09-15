@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "capability_id": "warm_food_at_work_point",
+  "version": "1.0.0",
+  "provenance": "resident_request:r5-resident-warm-food",
+  "runtime_script": "res://experiments/r5_gm_runtime.gd",
+  "runtime_extends": "res://core/town_places.gd",
+  "prepare_action_id": "warm:prepare",
+  "consume_action_id": "warm:eat:<meal_id>",
+  "prepare_event": "warm_meal_prepared",
+  "consume_event": "warm_meal_eaten",
+  "blocked_event": "warm_meal_blocked",
+  "state_namespace": "godot.warm_food",
+  "description": "One real preparation action and one real consumption action, both bound to the resident's own saved home/work point (the same point the world's own workstation rule uses). `warm:prepare` needs a body inside 2.5 m of that point, spends 60 s of real world time there, CONSUMES exactly one existing ration from the resident's own survival account at completion and creates exactly one new held item (`warm_meal_<serial>`); it never eats on preparation. `warm:eat:<meal_id>` needs the same body position, spends 20 s, consumes that one held item and restores satiety (50 fresh, 25 after the 3600 s world-time freshness window) and nothing else: no food unit, energy, money or material is created. A preparation whose body stops making real progress toward its own work point closes once as `warm_meal_blocked` with no ration consumed and no item created. All new state lives in its own `godot.warm_food` namespace, so no base namespace that rejects unknown job types is asked to hold one; validation runs on load and on every transaction and refuses a prepared meal that is neither held nor eaten exactly once, a pending command without its job, a rewritten freshness deadline, or a job placed away from the resident's own work point.",
+  "self_test_command": [
+    "C:\\Users\\quchenxi\\.cache\\level0-tools\\godot-4.7.2-mono\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64.exe",
+    "--headless",
+    "--path",
+    "game",
+    "--script",
+    "res://tests/r5_gm_capability_test.gd",
+    "--",
+    "--r5-tmp=tmp/r5-warm-food-self-test",
+    "--r5-world=tmp/r5-evidence/world-before.json"
+  ]
+}
