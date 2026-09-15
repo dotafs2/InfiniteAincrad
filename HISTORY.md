@@ -2,6 +2,25 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-15 · H83 当前代码架构整理（源码核对，仅文档变更）
+
+用户要求整理当前代码设计架构。本轮针对启动脚本、Godot场景、核心继承、居民模型适配、导航、Python编排和GM档案权限做有界源码检查；没有启动世界、GM或其他子agent，没有新增定时任务或居民/GM模型调用。
+
+架构说明集中放入[ROADMAP.md当前代码架构与修改入口](ROADMAP.md#current-architecture)，包含文件职责表、核心继承表、两条AI工作链、存储归属及按行为查找修改位置。在原有唯一Mermaid图中加入H83运行架构子图及对应证据行；不增加第五份项目文档，README继续为空，ART_STYLE未改。
+
+本次确认的关键事实：
+
+- 默认入口是`street_trial`预览，真正持久小镇由`town_street.tscn` / `town_street.gd`进入；`Run-Street.ps1 -Town`需要明确存档，真实模型还需本轮网关配置。
+- 世界规则为`world_kernel → town_life → town_trade → town_materials → town_runtime → town_places`六层继承，最后一层实例共享一个`_state`。`core/town_places.gd`管理场所规则，`spatial/town_places.gd`提供地点/道路目录。
+- NPC个人回合通过`town_turns → resident_brain → OgaResidentNode → BudgetGatewayProvider → 本地Kimi网关`，每次选择已有动作；实际移动由Godot导航、避让、道路回退和碰撞执行，不能把模型选择当作已经抵达或完工。
+- `run_production_gm_autonomy.py`衔接生活/开发阶段，`gm_autonomy.py`管理候选和发布，`gm_runner.py`维护具名GM与实际模型会话。现行`review`读取主AI意见，`verify`留待原GM后续观察；旧宿主质量验收方法保留在源码中，但不在当前发布路径执行。
+- 世界JSON保存居民连续性及完整实际回包；GM状态保存独立职责、会话和记忆；Kimi SQLite账本与GM计量各有归属。GM02/GM06拥有完整全局对话及实际模型文字读取权限，普通NPC仍只接收个人见闻。Git上传不等于私有运行状态一起同步。
+- 当前生活与开发仍分阶段，十居民/十GM身份不等于二十路模型同时运行。H82参与者自主选题、共建和接续仍待实验，SwarmWorld没有下载或接入。
+
+架构判断：可复用现有权威世界、个人知识、GM记忆和发布闭环；后续按需求逐步分离现场调度、世界存储和工程交付接口。六层共享状态与几个职责集中的大文件会增加修改关联面，旧fixture和过时注释也易误导入口选择；本轮没有借整理文档改动行为或重写引擎。
+
+核对范围：文档本地链接、单一Mermaid图、旧流水保留、差异空白、README空白及世界存档摘要。仅文档变更不运行构建或游戏回归；原H79/H81证据边界不变，当前同档seq129继续暂停。
+
 ## 2026-09-15 · H82 五位GPT-6评审参与者自主共建终局路线（设计评审，未实施转型）
 
 用户提出让世界参与者自己发现问题、共同建设、持续扩张的愿景，要求五个agent各自提案并互评打分。主AI派出五个GPT-6子agent，按居民自主权、工程连续性、公共协作、计算成本、游玩体验分工，分批运行。每位只读取同一份当前证据摘要，先独立提案，再读取全部五案完成唯一一轮交叉评审；没有增加执行agent、游戏模型调用或定时任务。本轮仅评审和文档记录，世界仍停在seq129。
