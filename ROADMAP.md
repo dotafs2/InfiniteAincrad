@@ -1,10 +1,85 @@
 # 唯一流程图
 
-路线评审更新：2026-09-15，H82完成五位GPT-6独立提案及交叉评分，推荐参与者掌握发展方向、GM提供受委托建设能力和公开维护职责。定额算力自治工坊P4与生活驱动扩张P5并列80.1/100（设计评分）；下一项是居民自行选择并接续建设的有界实验，尚未实施角色转型或启动运行。完整七案评分、分歧与原文见HISTORY.md顶部H82。
+架构整理：2026-09-15，H83根据当前源码补齐[代码架构与修改入口](#current-architecture)，并在原全景图内补充运行架构；仅更新文档，运行状态仍为seq129暂停。
+
+路线评审更新：2026-09-15，H82完成五位GPT-6独立提案及交叉评分，推荐参与者掌握发展方向、GM提供受委托建设能力和公开维护职责。定额算力自治工坊P4与生活驱动扩张P5并列80.1/100（设计评分）；下一项是居民自行选择并接续建设的有界实验，尚未实施角色转型或启动运行。完整七案评分、分歧与原文见HISTORY.md的H82条目。
 
 更新：2026-09-14，H79最小闭环完成后，H81原GM01修复H80暴露的本轮行走受阻：导航图不完整时沿既有道路行走，原守井人任务已在同一canonical实际抵达种植公共地，原GM独立复查accept。当前seq129，累计84次Kimi；本轮新增居民模型调用0、GM调度4次（2次自动计量、2次原生累计恢复计量），旧GM04未知仍保留。53条档案及身份/历史/任务/位置冷恢复保持。编码长测超时、交接计量缺失和旧写锁阻塞均已如实记录并处理；底层网格断点仍在，未宣称全路线修复。当前保存暂停，无新定时任务。
 
 [历史全部流水](HISTORY.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
+
+<a id="current-architecture"></a>
+
+## 当前代码架构与修改入口
+
+**当前实现是“Godot维护一个权威世界，Kimi为居民选择行动，外部Python工具组织GM开发与发布”。** GDScript负责玩法和空间表现，C#连接OpenGameAgent与模型网关，Python负责模型费用、GM会话和开发流程。这是当前代码的职责划分，尚未全部拆成独立模块。H83只整理已有实现；H82的参与者自主共建、SwarmWorld机制和持续并行施工都没有因此接入。
+
+### 1. 从哪里启动、从哪里读代码
+
+| 入口或目录 | 当前职责与阅读起点 |
+| --- | --- |
+| [Run-Street.ps1](Run-Street.ps1)、[game/project.godot](game/project.godot) | 默认启动`street_trial`预览。`-Town -SavePath <明确存档>`才进入持久小镇；`-TownGateway`还要求有效的`AINCRAD_GATEWAY_RUN_CONFIG`。Godot 4.7.2 .NET / .NET 8，不是打开默认场景就自动启动10+10。 |
+| [game/scenes/town_street.tscn](game/scenes/town_street.tscn) → [game/spatial/town_street.gd](game/spatial/town_street.gd) | 小镇现场入口：创建世界对象、居民身体、UI及模型调度器，推进生活和物理帧，保存、导出GM证据。当前仍集中承担多项职责。 |
+| `game/core/` | 世界规则和状态，见下方六层继承；是身份、事件、任务和实际结果的权威来源。 |
+| [game/agents/town_turns.gd](game/agents/town_turns.gd)、[resident_brain.gd](game/agents/resident_brain.gd) | 为居民组织个人输入、安排回合、保存请求状态、接收回复并提交合法动作。 |
+| [OgaResidentNode.cs](game/agents/OgaResidentNode.cs)、[BudgetGatewayProvider.cs](game/agents/BudgetGatewayProvider.cs) | OpenGameAgent适配与HTTP模型通道；依赖由[InfiniteAincrad.csproj](game/InfiniteAincrad.csproj)引用。适配器不拥有世界状态。 |
+| [game/spatial/town_navigation.gd](game/spatial/town_navigation.gd)及同目录`town_*_steering.gd` | 导航、避让、材料/场所/社交目标的真实移动；`town_*_layout.gd`负责空间布置。美术预览与正式生活入口分开。 |
+| [tools/run_town_model_validation.py](tools/run_town_model_validation.py)、[tools/kimi/kimi_gateway.py](tools/kimi/kimi_gateway.py) | 有界真实居民运行和本地Kimi预算网关；使用指定的现有账本及运行配置。文件名里的validation不代表居民都是脚本模拟。 |
+| [tools/run_production_gm_autonomy.py](tools/run_production_gm_autonomy.py)、[gm_autonomy.py](tools/gm_autonomy.py)、[gm_runner.py](tools/gm_runner.py) | 分别负责生活/开发阶段衔接、候选到发布的状态机、独立GM会话与实际模型调用。 |
+| `game/tests/`、`tools/test_*.py` | 引擎及编排的回归证据。旧fixture、迁移和演示入口仍保留，不等同于当前小镇运行链。 |
+
+### 2. 世界内核：一个状态对象，六层继承
+
+实际链条为`world_kernel → town_life → town_trade → town_materials → town_runtime → town_places`。现场实例化最后一层，继承链共同操作一个`_state`；这六个文件不是六份世界，也不是六个并行服务。
+
+| 文件 | 负责什么 |
+| --- | --- |
+| [world_kernel.gd](game/core/world_kernel.gd) | 基础命令边界、幂等处理、读写存档、目录写锁和中断替换恢复；还保留早期能力演示接口。 |
+| [town_life.gd](game/core/town_life.gd) | 原居民身份、个人见闻、生活事件、体力/饱腹、基础劳动及时间推进；[TownJsonCodec.cs](game/core/TownJsonCodec.cs)处理存档JSON数值精度。 |
+| [town_trade.gd](game/core/town_trade.gd) | 求助与回复、交换和合同、技能介绍/教学/观察工作，以及提供给居民选择的动作列表。 |
+| [town_materials.gd](game/core/town_materials.gd) | 有限材料源、发现和获取、可见性及材料出行受阻记录。 |
+| [town_runtime.gd](game/core/town_runtime.gd) | 宿主居民准入、完整居民回包档案、后台GM观察所需的世界证据导出；不在世界内调用GM开发模型。 |
+| [core/town_places.gd](game/core/town_places.gd) | 公共场所知识、前往/休息任务、旅途受阻记录与规则；引用[spatial/town_places.gd](game/spatial/town_places.gd)中的地点和道路目录。同名文件职责不同。 |
+
+### 3. 两条AI工作链
+
+**居民链：** 个人见闻与当前可选动作 → `town_turns`挑选可运行居民 → `resident_brain` / OpenGameAgent → C# Provider → 本地预算网关 → Kimi → 关联原请求并归档 → 提交动作 → 世界与身体执行 → 后果进入下一次个人观察。
+
+每次模型请求从当下动作别名`a0/a1/…`中选一个，可返回理由、发言和需要；NPC目前没有任意改规则、写宿主代码或安装新能力的工具。行动意图也不等于完成：前往目标仍需真实走路，劳动和合同按世界条件推进。`resident_id + controller_epoch + request_id`关联请求与回复，待处理回合进入存档，避免重启后把旧回复交给新回合。
+
+空间移动使用Godot导航网格、`NavigationAgent3D`路径和RVO避让；H81为不完整路径增加既有道路/局部转向回退。身体继续通过碰撞移动和实际到达判断执行。底层导航网格的断点仍存在，单条实际抵达证据不代表全部路线畅通。
+
+**GM链：** 世界证据与获准读取的居民档案 → `gm_runner`中的具名GM观察/选题 → 隔离候选目录开发并自测 → 主AI针对确切候选留评审意见 → `gm_autonomy`交付版本 → 后续同档生活 → 原GM读取效果并接受、修复或上报。GM会话、职责和记忆由稳定`gm_id`关联；当前真实执行使用DeepSeek，模型可换，身份不随模型重建。
+
+代码阶段名仍为`observe → candidate → validate → review → publish → verify → feedback`。其中`validate`核对修改范围、版本和宿主文件未被误改，固定宿主测试只是参考证据；`review`消费主AI的明确意见文件，缺少文件时保存为`waiting_review`，不是自动再叫一个评审模型。正常意见允许继续，具体重大问题才`major_block`。当前`verify`记录等待原GM在后续世界回合复查，不调用旧固定质量验收流程；源码中保留的`stage_verify_production_host_contract`不能据此当成现行发布步骤。
+
+### 4. 身份、记忆、费用分别存在哪里
+
+| 数据 | 权威位置与读取边界 |
+| --- | --- |
+| 世界与居民连续性 | 指定的canonical JSON：居民身份、生活事件、财物、任务和位置等；一个写入者维护。通过临时文件、备份及替换标记处理存档替换中断，不是多个进程随意共同写JSON。 |
+| 居民回合与完整回包 | 同一存档的`godot.resident_turns`和`godot.resident_archive`。保存实际返回的原文、理由、发言与交付结果；历史缺失明确标记，不补造。个人输入按本人经历检索，不能直接塞入全局档案。 |
+| GM的世界视图 | `godot.background_gm`及世界证据导出是观察投影，摘要有界；完整档案通过[gm_archive.py](tools/gm_archive.py)按世界和GM身份分页读取。当前`gm-02/gm-06`可读全体完整对话及模型返回文字，其余GM的对话读取受交付记录等权限限制。摘要裁剪不等于删除全局原文。 |
+| GM自身记忆 | 独立GM状态目录的`state.json`及关联会话/产物：稳定ID、职责、会话、`task_history`、`host_feedback`、开发和计量记录。主AI意见写回原GM记忆；十GM身份不等于十个永久同时运行的进程。 |
+| 请求与费用 | [kimi_budget.py](tools/kimi/kimi_budget.py)维护现有SQLite账本的预留/结算；GM调用在其状态与[deepseek_usage.py](tools/deepseek_usage.py)等计量记录中追踪。世界事件数、模型请求数和账单不能互相替代。 |
+| 代码、部署与证据 | Git工作区、GM候选、部署副本、运行报告各有用途。推送Git不会同时上传被忽略的私有世界、GM运行记忆、账本或密钥配置。 |
+
+### 5. 当前并发边界与后续修改建议
+
+十居民可以在同一场景中推进身体和任务；模型请求另受回合调度、预算和网关限制。当前有界居民启动器允许1—3的调度上限，但其上游完成请求仍串行化，不能把10名居民理解为10路模型同时调用。生产桥按生活阶段与GM开发阶段交替推进，保存并释放世界后衔接发布和续跑；这也没有证明持续在线并行施工或不停机更新。
+
+主要维护成本来自六层共享状态继承，以及`town_street.gd`、`town_trade.gd`、`gm_runner.py`和`gm_autonomy.py`中的职责集中。旧演示、历史校验路径和现行流程同时存在，部分注释仍描述旧宿主验收；判断现行行为应追调用路径。后续宜随真实需求逐步抽出回合调度、世界存储、开发交付接口，保持存档兼容，避免先重写整个引擎。
+
+| 想改的行为 | 先看哪里 |
+| --- | --- |
+| 居民能选择什么、交换/劳动产生什么结果 | 对应`core/`规则；动作列表从`town_trade.gd`继续沿继承查到`town_places.gd`。 |
+| 居民何时思考、输入什么、重复回复怎么处理 | `agents/town_turns.gd`；输入整理和通道生命周期再看`resident_brain.gd`。 |
+| 寻路受阻、抵达判断、场景碰撞 | `spatial/town_street.gd`、`town_navigation.gd`和对应steering；同时检查核心层任务目标，不能只改画面位置。 |
+| 全局留档或GM读取权限 | `core/town_runtime.gd`与`tools/gm_archive.py`；普通居民的知识仍走`resident_view`。 |
+| GM职责/记忆、候选开发、主AI意见、发布 | 分别看`gm_runner.py`、`gm_autonomy.py`；阶段接续看`run_production_gm_autonomy.py`。 |
+| 模型消费和并发 | C# Provider、居民启动器、本地Kimi网关及账本；GM费用走自身路由与记录。 |
+
+下一项推荐仍沿H82：先让原居民自己选择一个需要，认领或委托建设，再亲自使用并提出后续选择。需要补的是目标/委托/成果复用与阶段唤醒的衔接；目前只有既有动作选择和后台工程链，不能把推荐路线写成已完成的居民自主开发平台。
 
 ## 更新规则
 
@@ -58,6 +133,35 @@ H82终局推荐：参与者在生活中发现需要，自主选择建设目标�
 
 ```mermaid
 flowchart TD
+    subgraph H83["H83 当前代码运行架构｜源码整理，未新增能力"]
+        A83Entry["持久小镇入口<br/>Run-Street -Town / town_street.tscn"]
+        A83Scene["town_street.gd<br/>现场调度、UI、世界与身体衔接"]
+        A83Core["game/core 六层继承<br/>一个权威世界状态 _state"]
+        A83Move["game/spatial<br/>导航网格、避让、道路回退与真实碰撞"]
+        A83NPC["town_turns → resident_brain → OpenGameAgent<br/>个人见闻 / 单次选择已有动作"]
+        A83Kimi["C# Provider → 本地Kimi网关 → Kimi<br/>独立SQLite预算账本"]
+        A83Save["canonical JSON<br/>身份、事件、任务、位置、回合、完整回包"]
+        A83Evidence["世界证据导出 / gm_archive<br/>按GM职责读取，全局档案不直入NPC"]
+        A83GM["gm_runner / 独立GM会话记忆<br/>观察、开发、自测、后续效果复查"]
+        A83Release["gm_autonomy<br/>候选 → 主AI意见 → 版本交付"]
+        A83Host["run_production_gm_autonomy<br/>有界生活与开发阶段交替"]
+        A83Entry --> A83Scene
+        A83Scene --> A83Core
+        A83Scene --> A83Move
+        A83Move -->|实际位置与到达结果| A83Core
+        A83Core -->|个人视图和可选动作| A83NPC
+        A83NPC -->|模型请求| A83Kimi
+        A83Kimi -->|关联原请求的回复| A83NPC
+        A83NPC -->|归档并提交动作| A83Core
+        A83Core <-->|单写者保存与恢复| A83Save
+        A83Core --> A83Evidence
+        A83Evidence --> A83GM
+        A83GM -->|具名候选和自测| A83Release
+        A83Release -.交付版本后续跑.-> A83Scene
+        A83Host -.生活阶段.-> A83Entry
+        A83Host -.开发阶段.-> A83Release
+    end
+    H83 -.当前实现支撑.-> M20
     N1["N1 已验证：个人行动结果反馈与接近去重<br/>难度中 · 158项离线检查＋同测试档2次Kimi＋冷恢复"]
     N2["N2 历史已验：三人测试街生活链<br/>含脚本玩家澄清；seq47冷恢复；当前世界已转至M20"]
     H1["H1 已验证：具体需求传达与可解释拒绝<br/>难度中 · 33项离线专测；真实自主选择另验"]
@@ -472,7 +576,8 @@ flowchart TD
 | H79 | **原GM改进已被真实使用并复查接受**：GM06独立实现回复选项标明请求者，主AIadvisory发布；4名原居民9条真实reply_help，seq102→124。 | 原GM06同一观察会话已独立复查accept；冷恢复连续。不宣称全体对话或同行需求已经解决。 |
 | H80 | 46.57秒真实游戏录像已导出；录制批次超时，4次Kimi已结算并保存seq128，暴露实际起点寻路受阻。 | 录像可用不代表运行批次成功；阻塞后续处理见H81。 |
 | H81 | GM01发布现有道路回退，原守井人原任务实际抵达种植公共地，seq129；零新增Kimi，原GM复查accept、冷恢复连续。 | 底层网格断点仍在，未证明园丁实际采用或所有路线畅通。 |
-| H82 | 五位GPT-6各提一案并交叉评七案，P4/P5五人均分同为80.1/100；评分、分歧与完整原文存HISTORY.md顶部。 | 仅设计评审：推荐参与者掌握发展方向，以有限算力、真实生活用途和受托建设能力推进；下一项自主选题/建设/接续实验未运行。 |
+| H82 | 五位GPT-6各提一案并交叉评七案，P4/P5五人均分同为80.1/100；评分、分歧与完整原文存HISTORY.md的H82条目。 | 仅设计评审：推荐参与者掌握发展方向，以有限算力、真实生活用途和受托建设能力推进；下一项自主选题/建设/接续实验未运行。 |
+| H83 | 按现行源码整理启动入口、六层共享状态继承、居民/GM工作链、存储归属、并发边界与修改入口；补入本文件的唯一流程图。 | 文档整理，不是架构重构或新运行证据；seq129保持暂停，未接入SwarmWorld或居民自主编程。 |
 | N5 | 可持续起始之城：食物/材料来源、劳动交换、住房关系、个人视觉和统一人物/美术。既有十人生活是基础。 | 多轮生活有可核算供需，玩家行为有可见且持久的后果。沿实际需求增加能力，M20首次通过不自动让完整首镇变绿。 |
 | N6 | 城内外冒险：准备、探索、战斗或避战、带回资源并影响城内生活。 | 伤害、死亡、掉落和成长的世界语义先明确，再验证一个有限区域循环；不预造整套无生活用途的战斗平台。 |
 | N7 | 完整可玩第一层：城镇、野外、迷宫、Boss、成长和返回后的持续后果。 | 有完整可复现的游玩过程，不以地图或资产数量验收。 |
