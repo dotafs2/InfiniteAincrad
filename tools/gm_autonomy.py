@@ -62,6 +62,11 @@ REPAIRABLE = ('scope_tests_failed', 'invalid_output', 'worker_blocked')
 # installed-but-unused are never turned into a coding retry.
 REPAIRABLE_FAILURE_REASONS = ('runtime_verification_failed',)
 REPAIRABLE_VALIDATE_CHECKS = ('host_test_commands_pass',)
+# gm_runner.observe applies its --timeout to each selected GM in sequence.  The owning wrapper
+# therefore needs a batch allowance instead of reusing one GM's allowance for the whole process.
+# This covers bounded runner cleanup between sessions; run_process still caps the result at the
+# cycle's pinned deadline.
+OBSERVE_CLEANUP_SECONDS_PER_GM = 30
 # A semantic repair may only be justified by fresh, exactly bound evidence from processes that
 # fully exited. A failure here means the observation is NOT a trustworthy report about this
 # release: a timeout, a missing/stale output file, a foreign nonce/world/release/issue or a
@@ -249,6 +254,9 @@ def policy_errors(policy: dict) -> list[str]:
     extra = runtime.get('extra_args', [])
     if not isinstance(extra, list) or any(not isinstance(value, str) for value in extra):
         errors.append('runtime.extra_args must be a list of strings when present')
+    observe_archive = runtime.get('observe_archive_save', False)
+    if not isinstance(observe_archive, bool):
+        errors.append('runtime.observe_archive_save must be boolean when present')
     timeout = runtime.get('timeout_seconds', 120)
     if not isinstance(timeout, int) or not 5 <= timeout <= 1800:
         errors.append('runtime.timeout_seconds must be an integer 5..1800')
@@ -471,6 +479,12 @@ def run_process(command: list, timeout: int, cwd: Path = ROOT, deadline=None) ->
                         for item in nested])
     outcome['seconds'] = round(time.time() - started, 3)
     return outcome
+
+
+def observe_batch_timeout(per_gm_timeout: int, gm_count: int) -> int:
+    """Bound one serial gm_runner.observe batch while preserving its per-GM timeout."""
+    return max(1, int(gm_count)) * (
+        max(1, int(per_gm_timeout)) + OBSERVE_CLEANUP_SECONDS_PER_GM)
 
 
 def last_json_line(text: str):
@@ -1274,12 +1288,15 @@ class Cycle:
                                  '--max-issues-per-gm', str(self.limits.get('max_issues_per_gm', 4)),
                                  '--prior-ledger', str(self.ledger),
                                  '--protect', str(self.policy_path))
-        if self.save_path is not None and self.save_path.is_file():
+        if (self.values['runtime'].get('observe_archive_save', False)
+                and self.save_path is not None and self.save_path.is_file()):
             command.extend(['--archive-save', str(self.save_path)])
         for gm_id in (self.selected_gms or []):
             command.extend(['--gm', gm_id])
         self.reserve(cycle, record, 'observe', estimate)
-        result = run_process(command, self.runner.get('timeout') or 900, deadline=self.deadline)
+        per_gm_timeout = self.runner.get('timeout') or 900
+        result = run_process(command, observe_batch_timeout(per_gm_timeout, estimate),
+                             deadline=self.deadline)
         summary = last_json_line(result['stdout'])
         # Command exit provenance for this ONE gm_runner command. Nested codex probes can settle
         # with a nonzero exit after the runner itself finished, so the reconciled `exit_code`
