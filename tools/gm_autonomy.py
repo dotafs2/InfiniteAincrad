@@ -575,9 +575,11 @@ def _authoritative_action_result(world: dict, resident_id: str, entry: dict) -> 
     life_commands = godot.get('commands') if isinstance(godot.get('commands'), dict) else {}
     trade = godot.get('trade') if isinstance(godot.get('trade'), dict) else {}
     material = godot.get('materials') if isinstance(godot.get('materials'), dict) else {}
+    baking = godot.get('baking') if isinstance(godot.get('baking'), dict) else {}
     places = godot.get('places') if isinstance(godot.get('places'), dict) else {}
     journals = (('trade', trade.get('commands')), ('life', life_commands),
-                ('materials', material.get('commands')), ('places', places.get('commands')))
+                ('materials', material.get('commands')), ('baking', baking.get('commands')),
+                ('places', places.get('commands')))
     namespace, command = None, None
     for candidate_namespace, commands in journals:
         if isinstance(commands, dict) and isinstance(commands.get(command_id), dict):
