@@ -18,6 +18,7 @@ import sys
 import unittest
 from unittest import mock
 from pathlib import Path
+from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
@@ -2735,6 +2736,203 @@ class MainAiReviewWorkflowTests(CorrectionBase):
         self.assertEqual(feedback[0]['receipt']['release_digest'],
                          cycle['stages']['publish']['release_digest'])
         self.assertEqual(feedback[0]['receipt']['outcome'], 'published_pending_gm_review')
+
+
+class ScopeFeedbackRecoveryTests(unittest.TestCase):
+    FILES = [
+        'game/core/town_baking.gd',
+        'game/spatial/town_baking_points.gd',
+        'game/tools/install_baking_route_cli.gd',
+        'game/capabilities/baking_route.v1.json',
+        'game/tests/town_baking_route_acceptance.gd',
+        'game/core/town_runtime.gd',
+        'game/agents/town_turns.gd',
+        'game/spatial/town_street.gd',
+    ]
+
+    def setUp(self):
+        self.root = WORK / 'scope-feedback-recovery'
+        shutil.rmtree(self.root, ignore_errors=True)
+        self.root.mkdir(parents=True)
+        self.state_dir = self.root / 'state'
+        self.state_dir.mkdir()
+        evidence = write_json(self.root / 'evidence.json',
+                              {'world_id': WORLD, 'counts': {}, 'evidence': []})
+        ledger = write_json(self.root / 'ledger.json', {'kind': 'fixture', 'calls': []})
+        checkout = self.root / 'trial'
+        checkout.mkdir()
+        base = write_json(self.root / 'base.json', {'schema_version': 1, 'files': {}})
+        godot = write_json(self.root / 'godot.exe', {'stub': True})
+        runtime = self.root / 'runtime'
+        runtime.mkdir()
+        self.policy = example_policy()
+        self.policy['policy_id'] = 'scope-feedback-recovery-test'
+        self.policy['world_id'] = WORLD
+        self.policy['paths'].update({'evidence': str(evidence), 'state_dir': str(self.state_dir),
+                                     'prior_ledger': str(ledger)})
+        self.policy['scope_constraints']['max_changed_files'] = 8
+        self.policy['scope_constraints']['allowed_source_paths'] = list(self.FILES)
+        self.policy['scope_constraints']['excluded_paths'] = []
+        self.policy['host_owned_paths'] = []
+        self.policy['deployment']['checkout'] = str(checkout)
+        self.policy['deployment']['base_manifest'] = str(base)
+        self.policy['deployment']['max_files_per_release'] = 8
+        self.policy['runtime']['godot'] = str(godot)
+        self.policy['runtime']['save_path'] = str(runtime / 'save.json')
+        self.policy_path = write_json(self.root / 'policy.json', self.policy)
+        self.cycle = gm_autonomy.Cycle(self.policy_path, self.policy, {}, None)
+        self.old_scope = {
+            'objective': 'x' * 401,
+            'files': list(self.FILES),
+            'acceptance': ['old scope was too long'],
+        }
+        self.new_scope = {
+            'objective': ('Revise public_baking_route with finite flour, personal sight, voluntary '
+                          'work, edible output, conservation and exact terminal identity.'),
+            'files': list(self.FILES),
+            'acceptance': ['finite stock', 'cold restore', 'five-journal identity'],
+        }
+        self.observe_run = 'run-observe-exact'
+        self.feedback_run = 'feedback-exact'
+        observe_result = self.state_dir / 'runs' / self.observe_run / 'gm-07.result.md'
+        observe_result.parent.mkdir(parents=True)
+        observe_result.write_text('```json\n' + json.dumps({
+            'gm_id': 'gm-07', 'results': [],
+            'new_issues': [{'proposal_key': 'public-baking-route',
+                            'resident_id': 'shared:baker',
+                            'capability_id': 'public_baking_route',
+                            'claim_coding': True, 'scope': self.old_scope}],
+        }) + '\n```\n', encoding='utf-8')
+        self.observe_result = observe_result
+
+        document = self.cycle.load_cycle()
+        document.update({'gm_id': 'gm-07', 'issue_id': 'issue-baking',
+                         'status': 'blocked', 'stage': 'candidate',
+                         'blocked_reason': 'scope_rejected_by_policy', 'exit_code': 6,
+                         'feedback_outcome': 'failed', 'model_calls': 2,
+                         'feedback_attempts_total': 1,
+                         'declined': [{'issue_id': 'issue-baking'}]})
+        document['stages'] = {
+            'observe': {'status': 'done', 'run_id': self.observe_run,
+                        'proposed_scope': copy.deepcopy(self.old_scope)},
+            'candidate': {'status': 'refused', 'policy_errors': [
+                'scope.objective must be one concrete 12..400 character sentence']},
+            'feedback': {'status': 'failed', 'attempts': []},
+        }
+        self.cycle.save_cycle(document)
+        self.cycle_id = document['cycle_id']
+        self.receipt = self.cycle.cycle_dir() / 'feedback-1.json'
+        write_json(self.receipt, {
+            'kind': 'autonomy_release_receipt', 'cycle_id': self.cycle_id,
+            'gm_id': 'gm-07', 'issue_id': 'issue-baking', 'world_id': WORLD,
+            'outcome': 'candidate_failed',
+            'failure': {'stage': 'candidate', 'status': 'refused',
+                        'blocked_reason': 'scope_rejected_by_policy'},
+        })
+        self.receipt_sha = gm_runner.sha256_file(self.receipt)
+        document = gm_runner.load_json(self.cycle.cycle_dir() / 'cycle.json')
+        document['stages']['feedback']['attempts'] = [{
+            'attempt': 1, 'exit_code': 1, 'status': 'ok', 'acknowledged': True,
+            'decision': 'repair', 'usage_measured': True,
+            'receipt_sha256': self.receipt_sha,
+        }]
+        self.cycle.save_cycle(document)
+
+        feedback_result = self.state_dir / 'runs' / self.feedback_run / 'feedback.result.md'
+        feedback_result.parent.mkdir(parents=True)
+        feedback_result.write_text('```json\n' + json.dumps({
+            'gm_id': 'gm-07', 'receipt_sha256': self.receipt_sha,
+            'acknowledged': True, 'decision': 'repair',
+            'results': [{'issue_id': 'issue-baking', 'disposition': 'proposal',
+                         'claim_coding': True, 'scope': self.new_scope}],
+            'new_issues': [], 'next_work': 'resubmit corrected scope',
+        }) + '\n```\n', encoding='utf-8')
+        self.feedback_result = feedback_result
+        state = gm_runner.blank_state()
+        state['world_id'] = WORLD
+        state['issues']['issue-baking'] = {
+            'issue_id': 'issue-baking', 'world_id': WORLD, 'owner_gm': 'gm-07',
+            'owner_run_id': self.observe_run, 'lifecycle': 'current',
+            'source_status': 'proposed', 'capability_id': 'public_baking_route',
+            'resident_id': 'shared:baker',
+            'entry': {'proposal_key': 'public-baking-route'},
+        }
+        state['sessions']['gm-07'] = {
+            'gm_id': 'gm-07',
+            'outcomes': [{
+                'run_id': self.feedback_run, 'kind': 'autonomy_feedback_ack',
+                'status': 'ok', 'exit_code': 0, 'acknowledged': True,
+                'decision': 'repair', 'usage_measured': True, 'cost': 'measured',
+                'receipt_sha256': self.receipt_sha,
+                'repair_requested_issue': 'issue-baking', 'protected_paths_changed': [],
+            }],
+            'feedback_attempts': [{
+                'run_id': self.feedback_run, 'status': 'ok', 'usage_measured': True,
+                'receipt_sha256': self.receipt_sha,
+            }],
+        }
+        gm_runner.save_json(self.state_dir / gm_runner.STATE_FILE, state)
+        self.args = SimpleNamespace(
+            cycle=self.cycle_id, gm='gm-07', issue='issue-baking',
+            proposal_key='public-baking-route', capability_id='public_baking_route',
+            resident_id='shared:baker', feedback_run=self.feedback_run,
+            receipt_file=self.receipt, receipt_sha256=self.receipt_sha,
+            observe_result=self.observe_result,
+            observe_result_sha256=gm_runner.sha256_file(self.observe_result),
+            feedback_result=self.feedback_result,
+            feedback_result_sha256=gm_runner.sha256_file(self.feedback_result),
+        )
+
+    def _bytes(self):
+        return ((self.cycle.cycle_dir() / 'cycle.json').read_bytes(),
+                (self.state_dir / gm_runner.STATE_FILE).read_bytes())
+
+    def test_success_recovers_exact_scope_and_preserves_failure_history(self):
+        state_before = (self.state_dir / gm_runner.STATE_FILE).read_bytes()
+        with self.cycle.cycle_lock():
+            result = gm_autonomy.recover_scope_feedback(self.cycle, self.args)
+        self.assertEqual(result['status'], 'ok')
+        self.assertFalse(result['provider_called'])
+        self.assertEqual((self.state_dir / gm_runner.STATE_FILE).read_bytes(), state_before)
+        document = gm_runner.load_json(self.cycle.cycle_dir() / 'cycle.json')
+        self.assertEqual(document['status'], 'running')
+        self.assertEqual(document['stage'], 'candidate')
+        self.assertEqual(document['stages']['observe']['proposed_scope'], self.new_scope)
+        for name in ('candidate', 'validate', 'publish', 'verify', 'feedback'):
+            self.assertEqual(document['stages'][name], {'status': 'pending'})
+        recovery = document['scope_feedback_recovery']
+        self.assertEqual(recovery['previous_stages']['candidate']['status'], 'refused')
+        self.assertTrue(recovery['previous_stages']['feedback']['attempts'][0]['usage_measured'])
+        self.assertEqual(document['model_calls'], 2)
+        self.assertEqual(document['feedback_attempts_total'], 1)
+        self.assertEqual(document['declined'], [{'issue_id': 'issue-baking'}])
+        self.assertTrue((self.cycle.cycle_dir() / 'scope-feedback-recovery.json').is_file())
+
+    def test_digest_mismatch_refuses_without_touching_cycle_or_state(self):
+        before = self._bytes()
+        self.args.feedback_result_sha256 = '0' * 64
+        with self.assertRaisesRegex(ValueError, 'feedback result SHA-256 mismatch'):
+            gm_autonomy.recover_scope_feedback(self.cycle, self.args)
+        self.assertEqual(self._bytes(), before)
+
+    def test_private_or_changed_file_scope_refuses_without_writing(self):
+        answer = gm_runner.extract_json_object(self.feedback_result.read_text(encoding='utf-8'))
+        answer['results'][0]['scope']['files'][-1] = 'private/secret.json'
+        self.feedback_result.write_text('```json\n' + json.dumps(answer) + '\n```\n',
+                                        encoding='utf-8')
+        self.args.feedback_result_sha256 = gm_runner.sha256_file(self.feedback_result)
+        before = self._bytes()
+        with self.assertRaisesRegex(ValueError, 'violates policy'):
+            gm_autonomy.recover_scope_feedback(self.cycle, self.args)
+        self.assertEqual(self._bytes(), before)
+
+    def test_double_recovery_is_refused_without_further_changes(self):
+        with self.cycle.cycle_lock():
+            gm_autonomy.recover_scope_feedback(self.cycle, self.args)
+        before = self._bytes()
+        with self.assertRaisesRegex(ValueError, 'already consumed'):
+            gm_autonomy.recover_scope_feedback(self.cycle, self.args)
+        self.assertEqual(self._bytes(), before)
 
 
 if __name__ == '__main__':

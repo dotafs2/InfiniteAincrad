@@ -3528,6 +3528,273 @@ def command_recover_observe(args) -> int:
     return result['exit_code']
 
 
+def _required_sha256(path: Path, expected: str, label: str) -> str:
+    """Return an exact caller-pinned digest or refuse before any durable write."""
+    if not isinstance(expected, str) or not re.fullmatch(r'[0-9a-f]{64}', expected):
+        raise ValueError(label + ' SHA-256 must be 64 lowercase hexadecimal characters')
+    if not path.is_file():
+        raise ValueError(label + ' file is missing: ' + str(path))
+    actual = sha256_file(path)
+    if actual != expected:
+        raise ValueError(label + ' SHA-256 mismatch: expected ' + expected + ', got ' + actual)
+    return actual
+
+
+def _one_matching(values, predicate, label: str) -> dict:
+    matches = [value for value in (values or [])
+               if isinstance(value, dict) and predicate(value)]
+    if len(matches) != 1:
+        raise ValueError(label + ' must contain exactly one matching record')
+    return matches[0]
+
+
+def recover_scope_feedback(cycle: Cycle, args) -> dict:
+    """Offline recovery for one exact GM-authored correction to a refused scope.
+
+    This deliberately does not turn an arbitrary scope refusal into a repair round.  It accepts
+    only the current blocked cycle and an exact, measured, guard-clean feedback turn whose raw
+    GM result contains a corrected scope for that same owned issue.  All bindings are checked
+    before the first write.  GM state and its settled records remain byte-identical.
+    """
+    cycle_id = str(args.cycle)
+    if safe_relpath(cycle_id) != cycle_id or '/' in cycle_id:
+        raise ValueError('cycle must be one plain autonomy directory name')
+    cycle_dir = cycle.autonomy_dir() / cycle_id
+    cycle_path = cycle_dir / 'cycle.json'
+    pointer_path = cycle.pointer_path()
+    state_path = cycle.state_dir / gm_runner.STATE_FILE
+    if not cycle_path.is_file() or not pointer_path.is_file() or not state_path.is_file():
+        raise ValueError('cycle, current pointer and GM state must all exist')
+
+    pointer = gm_runner.load_json(pointer_path)
+    document = gm_runner.load_json(cycle_path)
+    state = gm_runner.load_state(cycle.state_dir)
+    if pointer.get('cycle_id') != cycle_id:
+        raise ValueError('only the current autonomy cycle may be recovered')
+    if document.get('cycle_id') != cycle_id:
+        raise ValueError('cycle document identity does not match --cycle')
+    if document.get('policy_sha256') != cycle.policy_sha:
+        raise ValueError('cycle is not bound to the supplied policy bytes')
+    if document.get('evidence_sha256') != cycle.evidence_sha256:
+        raise ValueError('cycle is not bound to the supplied evidence bytes')
+    if document.get('world_id') != cycle.policy.get('world_id'):
+        raise ValueError('cycle world does not match the supplied policy')
+    if document.get('scope_feedback_recovery') is not None:
+        raise ValueError('this cycle already consumed a scope-feedback recovery')
+    if (document.get('status') != 'blocked'
+            or document.get('blocked_reason') != 'scope_rejected_by_policy'):
+        raise ValueError('cycle must be blocked only by scope_rejected_by_policy')
+    if document.get('gm_id') != args.gm or document.get('issue_id') != args.issue:
+        raise ValueError('cycle GM/issue binding does not match the requested recovery')
+    observe = (document.get('stages') or {}).get('observe') or {}
+    candidate = (document.get('stages') or {}).get('candidate') or {}
+    feedback = (document.get('stages') or {}).get('feedback') or {}
+    if observe.get('status') != 'done' or not isinstance(observe.get('proposed_scope'), dict):
+        raise ValueError('cycle has no completed GM-authored observe scope to revise')
+    if candidate.get('status') != 'refused' \
+            or candidate.get('policy_errors') != [
+                'scope.objective must be one concrete 12..400 character sentence']:
+        raise ValueError('candidate refusal is not the exact objective-length scope failure')
+    if feedback.get('status') != 'failed' \
+            or document.get('feedback_outcome') != 'failed':
+        raise ValueError('cycle does not retain the failed outer feedback hand-off')
+
+    issue = (state.get('issues') or {}).get(args.issue)
+    session = (state.get('sessions') or {}).get(args.gm)
+    if not isinstance(issue, dict) or not isinstance(session, dict):
+        raise ValueError('bound issue or GM session is absent from state')
+    entry = issue.get('entry') or {}
+    if (issue.get('owner_gm') != args.gm or issue.get('lifecycle') != 'current'
+            or issue.get('source_status') in gm_runner.CLOSED_STATES):
+        raise ValueError('issue is no longer a current claim owned by this GM')
+    if (entry.get('proposal_key') != args.proposal_key
+            or issue.get('capability_id') != args.capability_id
+            or issue.get('resident_id') != args.resident_id):
+        raise ValueError('proposal/capability/resident binding mismatch')
+
+    observe_run = str(observe.get('run_id') or '')
+    expected_observe_result = (cycle.state_dir / 'runs' / observe_run
+                               / (str(args.gm) + '.result.md')).resolve()
+    observe_result_path = Path(args.observe_result).resolve()
+    if observe_result_path != expected_observe_result:
+        raise ValueError('observe result path is not the exact owning GM run result')
+    _required_sha256(observe_result_path, args.observe_result_sha256, 'observe result')
+    observed_answer = gm_runner.extract_json_object(
+        observe_result_path.read_text(encoding='utf-8-sig'))
+    if not isinstance(observed_answer, dict) or observed_answer.get('gm_id') != args.gm:
+        raise ValueError('observe result has no matching GM JSON contract')
+    original_claim = _one_matching(
+        observed_answer.get('new_issues'),
+        lambda value: value.get('proposal_key') == args.proposal_key,
+        'observe result new_issues')
+    if (original_claim.get('resident_id') != args.resident_id
+            or original_claim.get('capability_id') != args.capability_id
+            or original_claim.get('claim_coding') is not True
+            or original_claim.get('scope') != observe.get('proposed_scope')
+            or issue.get('owner_run_id') != observe_run):
+        raise ValueError('observe result does not bind the retained scope and stable identity')
+
+    feedback_run = str(args.feedback_run)
+    if safe_relpath(feedback_run) != feedback_run or '/' in feedback_run:
+        raise ValueError('feedback run must be one plain run directory name')
+    feedback_result_path = Path(args.feedback_result).resolve()
+    expected_feedback_result = (cycle.state_dir / 'runs' / feedback_run
+                                / 'feedback.result.md').resolve()
+    if feedback_result_path != expected_feedback_result:
+        raise ValueError('feedback result path is not inside the exact feedback run')
+    _required_sha256(feedback_result_path, args.feedback_result_sha256, 'feedback result')
+    receipt_path = Path(args.receipt_file).resolve()
+    expected_receipt = (cycle_dir / 'feedback-1.json').resolve()
+    if receipt_path != expected_receipt:
+        raise ValueError('receipt is not the first feedback receipt of this cycle')
+    receipt_sha = _required_sha256(receipt_path, args.receipt_sha256, 'feedback receipt')
+    receipt = gm_runner.load_json(receipt_path)
+    failure = receipt.get('failure') or {}
+    if (receipt.get('kind') != 'autonomy_release_receipt'
+            or receipt.get('cycle_id') != cycle_id or receipt.get('gm_id') != args.gm
+            or receipt.get('issue_id') != args.issue
+            or receipt.get('world_id') != document.get('world_id')
+            or receipt.get('outcome') != 'candidate_failed'
+            or failure.get('stage') != 'candidate' or failure.get('status') != 'refused'
+            or failure.get('blocked_reason') != 'scope_rejected_by_policy'):
+        raise ValueError('feedback receipt is not the exact refused-candidate failure')
+
+    outer_attempt = _one_matching(
+        feedback.get('attempts'),
+        lambda value: value.get('receipt_sha256') == receipt_sha,
+        'cycle feedback attempts')
+    if (outer_attempt.get('status') != 'ok' or outer_attempt.get('acknowledged') is not True
+            or outer_attempt.get('decision') != 'repair'
+            or outer_attempt.get('usage_measured') is not True):
+        raise ValueError('cycle did not retain a measured repair acknowledgement')
+    outcome = _one_matching(
+        session.get('outcomes'),
+        lambda value: value.get('run_id') == feedback_run
+                      and value.get('kind') == 'autonomy_feedback_ack',
+        'GM feedback outcomes')
+    if (outcome.get('status') != 'ok' or outcome.get('exit_code') != 0
+            or outcome.get('acknowledged') is not True or outcome.get('decision') != 'repair'
+            or outcome.get('usage_measured') is not True or outcome.get('cost') != 'measured'
+            or outcome.get('receipt_sha256') != receipt_sha
+            or outcome.get('repair_requested_issue') != args.issue
+            or outcome.get('protected_paths_changed') != []):
+        raise ValueError('feedback outcome is not ok, measured, guard-clean and issue-bound')
+    feedback_attempt = _one_matching(
+        session.get('feedback_attempts'),
+        lambda value: value.get('run_id') == feedback_run,
+        'GM feedback attempt index')
+    if (feedback_attempt.get('status') != 'ok'
+            or feedback_attempt.get('usage_measured') is not True
+            or feedback_attempt.get('receipt_sha256') != receipt_sha):
+        raise ValueError('feedback attempt index does not retain the measured receipt binding')
+
+    feedback_answer = gm_runner.extract_json_object(
+        feedback_result_path.read_text(encoding='utf-8-sig'))
+    if (not isinstance(feedback_answer, dict) or feedback_answer.get('gm_id') != args.gm
+            or feedback_answer.get('receipt_sha256') != receipt_sha
+            or feedback_answer.get('acknowledged') is not True
+            or feedback_answer.get('decision') != 'repair'
+            or feedback_answer.get('new_issues') not in (None, [])):
+        raise ValueError('feedback result is not the exact same-owner repair acknowledgement')
+    revision = _one_matching(
+        feedback_answer.get('results'),
+        lambda value: value.get('issue_id') == args.issue,
+        'feedback results')
+    if revision.get('disposition') != 'proposal' or revision.get('claim_coding') is not True:
+        raise ValueError('feedback result does not resubmit a coding proposal')
+    raw_scope = revision.get('scope')
+    if not isinstance(raw_scope, dict) or set(raw_scope) != {'objective', 'files', 'acceptance'}:
+        raise ValueError('recovered scope must contain only objective, files and acceptance')
+    recovered_scope, errors = validate_proposed_scope(raw_scope, cycle.policy)
+    if errors or recovered_scope is None:
+        raise ValueError('recovered scope violates policy: ' + '; '.join(errors))
+    original_scope = observe['proposed_scope']
+    if (len(recovered_scope['files']) != 8
+            or recovered_scope['files'] != original_scope.get('files')):
+        raise ValueError('recovered scope must retain the exact original eight allowed files')
+    if recovered_scope == original_scope:
+        raise ValueError('feedback did not revise the refused scope')
+    if (args.capability_id not in recovered_scope['objective']
+            or args.resident_id not in gm_runner.canonical(state)):
+        raise ValueError('recovered scope lost the capability or resident binding')
+
+    audit_path = cycle_dir / 'scope-feedback-recovery.json'
+    if audit_path.exists():
+        raise ValueError('scope-feedback recovery audit already exists')
+    state_sha_before = sha256_file(state_path)
+    cycle_sha_before = sha256_file(cycle_path)
+    prior_stages = {name: copy.deepcopy((document.get('stages') or {}).get(name))
+                    for name in ('candidate', 'validate', 'publish', 'verify', 'feedback')}
+    recovery = {
+        'schema_version': 1, 'kind': 'scope_feedback_recovery',
+        'cycle_id': cycle_id, 'gm_id': args.gm, 'issue_id': args.issue,
+        'proposal_key': args.proposal_key, 'capability_id': args.capability_id,
+        'resident_id': args.resident_id, 'observe_run_id': observe_run,
+        'feedback_run_id': feedback_run, 'receipt_sha256': receipt_sha,
+        'observe_result_sha256': args.observe_result_sha256,
+        'feedback_result_sha256': args.feedback_result_sha256,
+        'old_scope_sha256': sha256_bytes(gm_runner.canonical(original_scope).encode()),
+        'recovered_scope_sha256': sha256_bytes(gm_runner.canonical(recovered_scope).encode()),
+        'previous_cycle': {'status': document.get('status'),
+                           'stage': document.get('stage'),
+                           'blocked_reason': document.get('blocked_reason'),
+                           'exit_code': document.get('exit_code')},
+        'previous_stages': prior_stages, 'state_sha256': state_sha_before,
+        'provider_calls': 0, 'generation_bumped': False,
+        'settled_state_edited': False, 'recovered_utc': gm_runner.utc_iso(),
+    }
+    document['stages']['observe']['proposed_scope'] = recovered_scope
+    for name in ('candidate', 'validate', 'publish', 'verify', 'feedback'):
+        document['stages'][name] = {'status': 'pending'}
+    document['scope_feedback_recovery'] = recovery
+    document['status'] = 'running'
+    document['stage'] = 'candidate'
+    document['blocked_reason'] = None
+    document.pop('exit_code', None)
+    cycle.adopt(document)
+    cycle.save_cycle(document)
+    state_sha_after = sha256_file(state_path)
+    if state_sha_after != state_sha_before:
+        raise RuntimeError('GM state changed during offline scope recovery')
+    audit = dict(recovery,
+                 cycle_sha256_before=cycle_sha_before,
+                 cycle_sha256_after=sha256_file(cycle_path),
+                 state_sha256_after=state_sha_after,
+                 recovered_scope=recovered_scope,
+                 reset_stages=['candidate', 'validate', 'publish', 'verify', 'feedback'],
+                 observe_replayed=False)
+    gm_runner.save_json(audit_path, audit)
+    return {'status': 'ok', 'kind': 'scope_feedback_recovery',
+            'cycle_id': cycle_id, 'gm_id': args.gm, 'issue_id': args.issue,
+            'audit_path': gm_runner.relative(audit_path),
+            'audit_sha256': sha256_file(audit_path),
+            'cycle_sha256': sha256_file(cycle_path),
+            'state_sha256': state_sha_after, 'provider_called': False,
+            'observe_replayed': False, 'generation_bumped': False,
+            'recovered_scope_sha256': recovery['recovered_scope_sha256']}
+
+
+def command_recover_scope_feedback(args) -> int:
+    policy_path = Path(args.policy).resolve()
+    try:
+        policy = gm_runner.read_autonomy_policy(policy_path)
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        return gm_runner.refusal('autonomy_policy_invalid', str(error), USAGE)
+    errors = policy_errors(policy)
+    if errors:
+        return gm_runner.refusal('autonomy_policy_invalid', '; '.join(errors), USAGE,
+                                 errors=errors)
+    cycle = Cycle(policy_path, policy, {}, None)
+    try:
+        with cycle.cycle_lock():
+            payload = recover_scope_feedback(cycle, args)
+    except RuntimeError as error:
+        return gm_runner.refusal('lock_held', str(error), LOCK)
+    except (OSError, ValueError, KeyError) as error:
+        return gm_runner.refusal('scope_feedback_recovery_refused', str(error), PRECONDITION)
+    return gm_runner.emit(payload, OK)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -3597,6 +3864,24 @@ def build_parser() -> argparse.ArgumentParser:
     recover_parser.add_argument('--codex-home', type=Path)
     recover_parser.add_argument('--timeout', type=int, default=900)
     recover_parser.set_defaults(func=command_recover_observe)
+    scope_recover = subparsers.add_parser(
+        'recover-scope-feedback',
+        help='offline: apply one exact GM-authored corrected scope after a bound refusal')
+    scope_recover.add_argument('--policy', required=True, type=Path)
+    scope_recover.add_argument('--cycle', required=True)
+    scope_recover.add_argument('--gm', required=True)
+    scope_recover.add_argument('--issue', required=True)
+    scope_recover.add_argument('--proposal-key', required=True)
+    scope_recover.add_argument('--capability-id', required=True)
+    scope_recover.add_argument('--resident-id', required=True)
+    scope_recover.add_argument('--feedback-run', required=True)
+    scope_recover.add_argument('--receipt-file', required=True, type=Path)
+    scope_recover.add_argument('--receipt-sha256', required=True)
+    scope_recover.add_argument('--observe-result', required=True, type=Path)
+    scope_recover.add_argument('--observe-result-sha256', required=True)
+    scope_recover.add_argument('--feedback-result', required=True, type=Path)
+    scope_recover.add_argument('--feedback-result-sha256', required=True)
+    scope_recover.set_defaults(func=command_recover_scope_feedback)
     return parser
 
 
