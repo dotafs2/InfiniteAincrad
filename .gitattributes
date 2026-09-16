@@ -8,9 +8,16 @@
 *.glb filter=lfs diff=lfs merge=lfs -text
 *.blend filter=lfs diff=lfs merge=lfs -text
 *.mp4 filter=lfs diff=lfs merge=lfs -text
+# Runtime textures for the 2026-09-16 art batch; review images remain in Git.
+game/assets/floor1/*20260916/**/*.png filter=lfs diff=lfs merge=lfs -text
+game/assets/floor1/*20260916/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+game/assets/floor1/meshy_houses_lod/**/*.png filter=lfs diff=lfs merge=lfs -text
+game/assets/floor1/meshy_houses_lod/**/*.jpg filter=lfs diff=lfs merge=lfs -text
 *.py text eol=lf
 *.cs text eol=lf
 *.csproj text eol=lf
 # Pinned upstream hashes refer to exact original bytes.
 third_party/OpenGameAgent/** -text
 game/addons/open_game_agent/** -text
+# Keep generated evidence and frozen source snapshots byte-identical to receipts.
+Art/Generated/*20260916/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol

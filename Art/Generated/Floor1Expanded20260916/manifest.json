@@ -1,0 +1,529 @@
+{
+  "schema": "floor1-expanded-art-layout-v1",
+  "generated_at_utc": "2026-09-15T20:02:26.849921+00:00",
+  "purpose": "Independent original first-floor art sample; not canonical seq129 world adoption",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "script": "res://spatial/floor1_expanded_world.gd",
+  "layout": {
+    "building_layout": [
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_01_01_hearth_cottage",
+        "role": "interactive",
+        "variant": "01_hearth_cottage",
+        "x": -24.5,
+        "yaw_deg": -90.0,
+        "z": 35.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_02_02_market_house",
+        "role": "interactive",
+        "variant": "02_market_house",
+        "x": -45.5,
+        "yaw_deg": 90.0,
+        "z": 43.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_03_02_market_house",
+        "role": "interactive",
+        "variant": "02_market_house",
+        "x": -24.5,
+        "yaw_deg": -90.0,
+        "z": 0.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_04_03_corner_turret",
+        "role": "interactive",
+        "variant": "03_corner_turret",
+        "x": -45.5,
+        "yaw_deg": 90.0,
+        "z": 8.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_05_03_corner_turret",
+        "role": "interactive",
+        "variant": "03_corner_turret",
+        "x": -24.5,
+        "yaw_deg": -90.0,
+        "z": -59.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_06_01_hearth_cottage",
+        "role": "interactive",
+        "variant": "01_hearth_cottage",
+        "x": -45.5,
+        "yaw_deg": 90.0,
+        "z": -30.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_07_01_hearth_cottage",
+        "role": "interactive",
+        "variant": "01_hearth_cottage",
+        "x": 24.5,
+        "yaw_deg": 90.0,
+        "z": 35.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_08_02_market_house",
+        "role": "interactive",
+        "variant": "02_market_house",
+        "x": 45.5,
+        "yaw_deg": -90.0,
+        "z": 43.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_09_02_market_house",
+        "role": "interactive",
+        "variant": "02_market_house",
+        "x": 24.5,
+        "yaw_deg": 90.0,
+        "z": 0.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_10_03_corner_turret",
+        "role": "interactive",
+        "variant": "03_corner_turret",
+        "x": 45.5,
+        "yaw_deg": -90.0,
+        "z": 8.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_11_03_corner_turret",
+        "role": "interactive",
+        "variant": "03_corner_turret",
+        "x": 24.5,
+        "yaw_deg": 90.0,
+        "z": -59.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_12_01_hearth_cottage",
+        "role": "interactive",
+        "variant": "01_hearth_cottage",
+        "x": 45.5,
+        "yaw_deg": -90.0,
+        "z": -30.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_01_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -14.1999998092651,
+        "yaw_deg": 92.9999923706055,
+        "z": 26.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_02_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -15.0,
+        "yaw_deg": 87.4999923706055,
+        "z": 12.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_03_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -13.8999996185303,
+        "yaw_deg": 90.9999923706055,
+        "z": -8.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_04_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -15.3999996185303,
+        "yaw_deg": 85.9999923706055,
+        "z": -26.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_05_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -14.3000001907349,
+        "yaw_deg": 91.9999923706055,
+        "z": -44.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_06_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -52.0,
+        "yaw_deg": 91.9999923706055,
+        "z": 60.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_07_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -53.5999984741211,
+        "yaw_deg": 86.9999923706055,
+        "z": 27.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_08_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -51.2000007629395,
+        "yaw_deg": 93.9999923706055,
+        "z": -6.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_09_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -52.5999984741211,
+        "yaw_deg": 89.0,
+        "z": -49.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_10_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -70.5,
+        "yaw_deg": 90.0,
+        "z": 60.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_11_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -68.6999969482422,
+        "yaw_deg": 93.9999923706055,
+        "z": 42.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_12_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -70.1999969482422,
+        "yaw_deg": 86.9999923706055,
+        "z": 24.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_13_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -68.0,
+        "yaw_deg": 91.9999923706055,
+        "z": 6.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_14_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -69.1999969482422,
+        "yaw_deg": 89.0,
+        "z": -16.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_15_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -70.6999969482422,
+        "yaw_deg": 92.9999923706055,
+        "z": -36.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_16_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -68.4000015258789,
+        "yaw_deg": 87.9999923706055,
+        "z": -56.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_17_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 14.1999998092651,
+        "yaw_deg": -86.9999923706055,
+        "z": 27.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_18_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 15.0,
+        "yaw_deg": -92.5,
+        "z": 11.5
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_19_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 13.8999996185303,
+        "yaw_deg": -89.0,
+        "z": -9.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_20_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 15.3999996185303,
+        "yaw_deg": -93.9999923706055,
+        "z": -25.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_21_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 14.3000001907349,
+        "yaw_deg": -87.9999923706055,
+        "z": -43.5
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_22_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 52.0,
+        "yaw_deg": -87.9999923706055,
+        "z": 58.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_23_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 53.5999984741211,
+        "yaw_deg": -92.9999923706055,
+        "z": 29.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_24_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 51.2000007629395,
+        "yaw_deg": -85.9999923706055,
+        "z": -6.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_25_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 52.5999984741211,
+        "yaw_deg": -90.9999923706055,
+        "z": -51.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_26_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 70.5,
+        "yaw_deg": -90.0,
+        "z": 60.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_27_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 68.6999969482422,
+        "yaw_deg": -85.9999923706055,
+        "z": 45.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_28_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 70.1999969482422,
+        "yaw_deg": -92.9999923706055,
+        "z": 23.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_29_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 68.0,
+        "yaw_deg": -87.9999923706055,
+        "z": 8.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_30_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 69.1999969482422,
+        "yaw_deg": -90.9999923706055,
+        "z": -18.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_31_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 70.6999969482422,
+        "yaw_deg": -86.9999923706055,
+        "z": -35.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_32_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 68.4000015258789,
+        "yaw_deg": -91.9999923706055,
+        "z": -56.0
+      }
+    ],
+    "collision_bodies_created": 19,
+    "countryside_path_end_z_m": -230,
+    "exterior_lod_houses": 32,
+    "farm_plots": 4,
+    "fountain_intended_height_m": 2.2,
+    "fountain_uniform_scale": 1.98586759087567,
+    "ground_centre_z_m": -5,
+    "interactive_houses": 12,
+    "labyrinth_entry_art": "grounded visual-only silhouette; playable maze not authored",
+    "northern_gate_z_m": -85,
+    "plaza_diameter_m": 24,
+    "props": 29,
+    "residential_lane_width_m": 5,
+    "town_extent_m": [
+      180,
+      170
+    ],
+    "town_street_width_m": 8,
+    "tree_instances": 97,
+    "vegetation_instances": 218,
+    "world_extent_m": [
+      420,
+      460
+    ]
+  },
+  "asset_sources": {
+    "near_exteriors": "res://assets/floor1/meshy_houses_lod/<variant>_lod.glb (Meshy quad-remesh LOD0)",
+    "interactive_houses": "res://assets/floor1/modular_houses_20260916/<variant>.glb",
+    "selected_gate": "res://assets/floor1/StartingTown_Floor1_HeroKit.glb selected F1_gate* nodes",
+    "selected_market": "res://assets/market/StartingTown_Market_CraftV5.glb selected V5_produce_stall",
+    "vegetation": "individual res://assets/floor1/environment_kit_20/*.glb",
+    "plaza_focus": "res://assets/floor1/plaza_fountain_20260916/F1_plaza_fountain.glb",
+    "cargo": "selected res://assets/generated/travel_cargo_20260912/*.glb"
+  },
+  "authored_review_views": [
+    "panorama",
+    "residence_near",
+    "market_street",
+    "north_gate",
+    "countryside_path",
+    "door_closed",
+    "door_open_exterior",
+    "open_door_interior"
+  ],
+  "state": "approved first continuous 3D camera-tour art milestone; final modular-v4 door aperture and sky captured; later yards/country/maze art work remains",
+  "resident_model_calls": 0,
+  "world_save_writes": 0,
+  "verification": {
+    "engine_checks": 144,
+    "engine_failures": 0,
+    "actual_walker_capsule_radius_m": 0.32,
+    "actual_walker_capsule_height_m": 1.8,
+    "all_twelve_open_door_lane_to_inside_paths_checked": true,
+    "all_twelve_closed_door_paths_blocked": true,
+    "F_window_action": "select nearest actual front/rear/side window; toggle all windows of its house",
+    "physics_json": "tmp/floor1-art-20260916/world/physics.json",
+    "gpu_capture_final": "Art/Generated/Floor1Expanded20260916/milestone-v1-stills/capture.json",
+    "actual_png_px": [
+      1680,
+      1080
+    ],
+    "market_median_frame_interval_ms": 4.166,
+    "market_p95_frame_interval_ms": 4.289,
+    "market_draw_calls_with_shadows": 3524,
+    "continuous_camera_tour_mp4": "exports/floor1-art-20260916/floor1-world-tour-v1.mp4",
+    "tour_actual_px": [
+      1400,
+      900
+    ],
+    "tour_duration_s": 30.03,
+    "tour_offline_frames": 901,
+    "provenance": "Art/Generated/Floor1Expanded20260916/milestone-v1-provenance.json"
+  },
+  "visual_limitations": [
+    "maze entry is a grounded, plain visual-only unfinished silhouette; no playable maze is authored",
+    "courtyards and countryside vegetation remain sparse in first milestone",
+    "outer-town density and house interior furnishing need later art work",
+    "camera tour is interpolated visual evidence, not recorded walker motion or runtime FPS"
+  ]
+}

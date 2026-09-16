@@ -1,0 +1,66 @@
+{
+  "schema": "floor1-coordinate-faithful-handoff-map-v1",
+  "source_world_acceptance": "tmp/floor1-art-20260916/world/tour-v3-approved-grove/default-physics.json",
+  "source_sha256": "33f8966805454e23d22ddcd719ca00cda95a21f73d9c27e8759ce57d82eb6e69",
+  "source_check_count": 254,
+  "source_failures": 0,
+  "building_layout_rows": 44,
+  "interactive": 12,
+  "exterior_lod": 32,
+  "furnished": 3,
+  "source_world_scene": "game/spatial/floor1_expanded_world.gd; exact road geometry lines557-588, western inner-lane insert condition lines844-850, L-ground lines1240-1275, focal oak site line772, native grove site lines1320-1330 and1369-1390",
+  "ground_union_polygon_world_xz_m": [
+    [
+      -210,
+      -335
+    ],
+    [
+      85,
+      -335
+    ],
+    [
+      85,
+      -235
+    ],
+    [
+      210,
+      -235
+    ],
+    [
+      210,
+      225
+    ],
+    [
+      -210,
+      225
+    ]
+  ],
+  "ground_union_area_m2": 222700,
+  "ground_union_rectangular": false,
+  "plaza_center_world_xz_m": [
+    0,
+    0
+  ],
+  "fountain_center_world_xz_m": [
+    -7.5,
+    0
+  ],
+  "north_grove_world_bounds": {
+    "x": [
+      -90,
+      -55
+    ],
+    "z": [
+      -313,
+      -273
+    ]
+  },
+  "preview_note": "PNG is drawn from the same coordinates and style data as SVG with Pillow; it is a raster preview, not a new scene render.",
+  "svg": "floor1-handoff-map.svg",
+  "svg_sha256": "3162a066715d105a7f62a8a73142dfeea3b65dc6369e21ba4c599fb127dc3ae5",
+  "png": "floor1-handoff-map-preview.png",
+  "png_sha256": "07066b060d21ebaa77a7e0ddc22efe3fa8b8e01ee75b784075cab0289d4cd524",
+  "model_calls": 0,
+  "godot_runs": 0,
+  "gpu_runs": 0
+}

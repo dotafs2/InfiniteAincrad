@@ -1,0 +1,27 @@
+; Independent Godot scaffold. No private saves or model connections are loaded.
+config_version=5
+
+[application]
+config/name="InfiniteAincrad - Starting Town Street"
+run/main_scene="res://scenes/street_trial.tscn"
+config/features=PackedStringArray("4.7", "C#", "Forward Plus")
+
+[dotnet]
+project/assembly_name="InfiniteAincrad"
+
+[display]
+window/size/viewport_width=1400
+window/size/viewport_height=900
+window/size/window_width_override=1400
+window/size/window_height_override=900
+window/size/min_width=1100
+window/size/min_height=720
+window/stretch/mode="canvas_items"
+
+[rendering]
+renderer/rendering_method="forward_plus"
+renderer/rendering_method.mobile="gl_compatibility"
+lights_and_shadows/use_physical_light_units=false
+environment/defaults/default_clear_color=Color(0.12, 0.16, 0.17, 1)
+
+anti_aliasing/quality/msaa_3d=2

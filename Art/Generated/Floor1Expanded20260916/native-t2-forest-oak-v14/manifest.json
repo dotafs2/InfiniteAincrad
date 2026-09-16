@@ -1,0 +1,105 @@
+{
+  "schema": "floor1_native_t2_one_tree_actual_world_comparison_v14",
+  "state": "root accepted exactly one native forest-edge oak as expanded-world default after actual off/on review",
+  "source_model": "exports/floor1-art-20260916/oak-smart-topology/F1_oak_smart15k.glb",
+  "game_candidate": "game/assets/floor1/courtyard_oak_20260916/F1_oak_smart15k_forest_trial.glb",
+  "source_game_sha256_equal": "fd14e2b0f3201f626391905e76f07d0d7fabe266ee73e44a8b738eaf11434f20",
+  "source_game_bytes": 9140052,
+  "actual_imported_triangles": 14783,
+  "actual_imported_surfaces": 1,
+  "raw_source_images": 4,
+  "author_display_height_m": 7.2,
+  "placement_world_m": [
+    -55.0,
+    2.373898,
+    -275.0
+  ],
+  "actual_collision_surface_y_m": 2.373886,
+  "actual_root_ray_offset_m": 1.2e-05,
+  "collision": "trunk-only 0.36m-radius, 2.2m-height cylinder; no canopy wall",
+  "world_default": "exactly one tree enabled; --native-oak-trial=off preserves the matching off-scene baseline",
+  "approved_existing_100k_courtyard_oak_count_unchanged": 1,
+  "original_kit_north_sector_trees_unchanged": 24,
+  "off_actual_world_checks": 234,
+  "on_actual_world_checks": 240,
+  "failures": 0,
+  "actual_png_pixels": [
+    1680,
+    1080
+  ],
+  "image_receipts": [
+    {
+      "name": "off_north_path_edge_eye.png",
+      "sha256": "8a6c6b1f945646684e31f2ab0bba3600d5800066ad44c0c4ea0fe4b3d69fa48c",
+      "bytes": 645562
+    },
+    {
+      "name": "off_forest_oak_walk_eye.png",
+      "sha256": "116155aa74dc6702192c922985a7f356ea86c14b53c07bd1a480f912d20ba616",
+      "bytes": 871842
+    },
+    {
+      "name": "off_forest_oak_bank_overview.png",
+      "sha256": "5e68e1b193b05b6218c97dc3f662949dfcacc5dbf3699561b8afc8742b8c4518",
+      "bytes": 1009968
+    },
+    {
+      "name": "on_north_path_edge_eye.png",
+      "sha256": "748d57fcf1d960154ad224f8b0413662b30058ea1dfd901c2aa13d7a7b652928",
+      "bytes": 651636
+    },
+    {
+      "name": "on_forest_oak_walk_eye.png",
+      "sha256": "9fa275706ecaaeeb0435483209b156890c59469369364a3d78f6283ce220295d",
+      "bytes": 898936
+    },
+    {
+      "name": "on_forest_oak_bank_overview.png",
+      "sha256": "69f2d2b7127bcde68acccb085c9786c56c5f59bd5f40d8f7064e16a69de876c0",
+      "bytes": 1032036
+    }
+  ],
+  "same_camera_comparisons": [
+    {
+      "camera": "north_path_edge_eye",
+      "mean_absolute_rgb_channel_difference_255": 0.08507366990005878,
+      "above_3_luma_changed_bbox_px": [
+        564,
+        481,
+        703,
+        573
+      ]
+    },
+    {
+      "camera": "forest_oak_walk_eye",
+      "mean_absolute_rgb_channel_difference_255": 0.8125788139329805,
+      "above_3_luma_changed_bbox_px": [
+        751,
+        433,
+        1085,
+        649
+      ]
+    },
+    {
+      "camera": "forest_oak_bank_overview",
+      "mean_absolute_rgb_channel_difference_255": 0.48506356554967667,
+      "above_3_luma_changed_bbox_px": [
+        902,
+        482,
+        1153,
+        665
+      ]
+    }
+  ],
+  "off_capture": "off_capture.json",
+  "on_capture": "on_capture.json",
+  "off_physics": "off_physics.json",
+  "on_physics": "on_physics.json",
+  "packaging_era_world_script_sha256": "5620973b0f051849e2e255c85c4113647416dbcd01f94e84cf91d95014daa907",
+  "packaging_era_world_test_sha256": "f23039a59d7b7cd1ceda660f78fa3754e79bdf17f2e41f513392e663f2275b9a",
+  "frame_interval_limit": "frame_post_draw intervals include VSync, CPU and presentation; these six stills are appearance evidence, not a measured FPS gain",
+  "visual_observation": "Root accepted the richer/brighter source foliage for one mid forest-edge tree in actual daylight. Raw root curves remain partly visible on the shallow slope; only the lowest pivot endpoint has true collision-surface grounding proof. No broader tree scatter is approved.",
+  "rejected_6k_2k_topology_collapse_not_used": true,
+  "world_save_writes": 0,
+  "model_calls": 0
+}

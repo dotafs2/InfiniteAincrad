@@ -1,0 +1,584 @@
+{
+  "schema": "meshy-house-lod-build-v1",
+  "generated_at_utc": "2026-09-15T18:12:24.174765+00:00",
+  "builder": "tools/build_meshy_house_lods.py",
+  "blender_version": "5.2.1 LTS",
+  "method": "Blender collapse decimate; successive 40k/12k/3k targets; original UVs and PBR material retained",
+  "asset_role": "exterior appearance LOD only; intended heights are display authoring, not source true-scale measurement",
+  "sources_immutable": true,
+  "houses": [
+    {
+      "id": "01_hearth_cottage",
+      "source": "exports/meshy-houses-20260916/models/01_hearth_cottage.glb",
+      "source_sha256": "1c98cb4b0586201f55ae6d20557d615d9c6d8c8832850c6ce6542b38e5bbc578",
+      "source_bytes": 78366592,
+      "source_metrics": {
+        "triangles": 1630308,
+        "vertices": 903591,
+        "faces": 1630308,
+        "surfaces": 1,
+        "material_count": 1,
+        "image_count": 3,
+        "uv_layer_count": 1,
+        "uv_loop_count": 4890924,
+        "uv_finite": true,
+        "uv_min": [
+          9.999999747378752e-06,
+          1.1026859283447266e-05
+        ],
+        "uv_max": [
+          0.9999979734420776,
+          0.999987006187439
+        ],
+        "bounds_min_blender_xyz": [
+          -0.68952,
+          -0.71995,
+          -0.95227
+        ],
+        "bounds_max_blender_xyz": [
+          0.68412,
+          0.72005,
+          0.95092
+        ],
+        "size_blender_xyz": [
+          1.37364,
+          1.44,
+          1.90319
+        ]
+      },
+      "output": "game/assets/floor1/meshy_houses_lod/01_hearth_cottage_lod.glb",
+      "output_sha256": "7ef680cc12e77aec28e7411313ffc85127cd4c7463a7a2eeea7ad9ae2dfa3ca6",
+      "output_metrics": {
+        "mesh_nodes": [
+          {
+            "node": "LOD0",
+            "triangles": 40000,
+            "vertices": 47974,
+            "surfaces": 1
+          },
+          {
+            "node": "LOD1",
+            "triangles": 12000,
+            "vertices": 20437,
+            "surfaces": 1
+          },
+          {
+            "node": "LOD2",
+            "triangles": 3000,
+            "vertices": 6650,
+            "surfaces": 1
+          }
+        ],
+        "material_count": 1,
+        "image_count": 3,
+        "texture_count": 3,
+        "all_images_embedded": true,
+        "bytes": 32620932
+      },
+      "lod_metrics_blender": [
+        {
+          "triangles": 40000,
+          "vertices": 49372,
+          "faces": 40000,
+          "surfaces": 1,
+          "material_count": 1,
+          "image_count": 3,
+          "uv_layer_count": 1,
+          "uv_loop_count": 120000,
+          "uv_finite": true,
+          "uv_min": [
+            7.699999696342275e-05,
+            1.5020370483398438e-05
+          ],
+          "uv_max": [
+            0.9999963045120239,
+            0.999987006187439
+          ],
+          "bounds_min_blender_xyz": [
+            -3.60838,
+            -3.78079,
+            0.0
+          ],
+          "bounds_max_blender_xyz": [
+            3.66189,
+            3.77948,
+            10.0
+          ],
+          "size_blender_xyz": [
+            7.27026,
+            7.56027,
+            10.0
+          ]
+        },
+        {
+          "triangles": 12000,
+          "vertices": 24583,
+          "faces": 12000,
+          "surfaces": 1,
+          "material_count": 1,
+          "image_count": 3,
+          "uv_layer_count": 1,
+          "uv_loop_count": 36000,
+          "uv_finite": true,
+          "uv_min": [
+            0.0002900472027249634,
+            1.5020370483398438e-05
+          ],
+          "uv_max": [
+            0.9994590282440186,
+            0.999987006187439
+          ],
+          "bounds_min_blender_xyz": [
+            -3.69994,
+            -3.83281,
+            0.0
+          ],
+          "bounds_max_blender_xyz": [
+            3.8058,
+            3.86519,
+            10.0
+          ],
+          "size_blender_xyz": [
+            7.50574,
+            7.698,
+            10.0
+          ]
+        },
+        {
+          "triangles": 3000,
+          "vertices": 15878,
+          "faces": 3000,
+          "surfaces": 1,
+          "material_count": 1,
+          "image_count": 3,
+          "uv_layer_count": 1,
+          "uv_loop_count": 9000,
+          "uv_finite": true,
+          "uv_min": [
+            0.0004621786065399647,
+            0.0006380081176757812
+          ],
+          "uv_max": [
+            0.9988619685173035,
+            0.9995946884155273
+          ],
+          "bounds_min_blender_xyz": [
+            -3.95348,
+            -3.83281,
+            0.0
+          ],
+          "bounds_max_blender_xyz": [
+            3.95938,
+            3.93386,
+            10.0
+          ],
+          "size_blender_xyz": [
+            7.91286,
+            7.76667,
+            10.0
+          ]
+        }
+      ],
+      "target_triangles": [
+        40000,
+        12000,
+        3000
+      ],
+      "intended_display_height_m": 10.0,
+      "presentation_yaw_deg": 0.0,
+      "normalized_scale": 5.254336,
+      "source_to_lod0_triangle_reduction_pct": 97.5465,
+      "source_to_lod0_byte_reduction_pct": 58.3739,
+      "comparison_images": {
+        "source": "Art/Generated/MeshyHouseLods20260916/01_hearth_cottage_source.png",
+        "lod0": "Art/Generated/MeshyHouseLods20260916/01_hearth_cottage_lod0.png"
+      },
+      "source_unchanged_after_build": true
+    },
+    {
+      "id": "02_market_house",
+      "source": "exports/meshy-houses-20260916/models/02_market_house.glb",
+      "source_sha256": "b1a54c0381bb4ebe1aeac266104a7679aa036198ba7c6455d8ad07f3e2fa40f7",
+      "source_bytes": 65346804,
+      "source_metrics": {
+        "triangles": 1263506,
+        "vertices": 705263,
+        "faces": 1263506,
+        "surfaces": 1,
+        "material_count": 1,
+        "image_count": 3,
+        "uv_layer_count": 1,
+        "uv_loop_count": 3790518,
+        "uv_finite": true,
+        "uv_min": [
+          0.00014699999883305281,
+          6.020069122314453e-06
+        ],
+        "uv_max": [
+          0.9999939799308777,
+          0.9999960064888
+        ],
+        "bounds_min_blender_xyz": [
+          -0.52641,
+          -0.59561,
+          -0.95213
+        ],
+        "bounds_max_blender_xyz": [
+          0.52388,
+          0.58504,
+          0.95126
+        ],
+        "size_blender_xyz": [
+          1.05029,
+          1.18065,
+          1.90339
+        ]
+      },
+      "output": "game/assets/floor1/meshy_houses_lod/02_market_house_lod.glb",
+      "output_sha256": "3527ae1d431c76de0578ab1a929e8911ceebe1fcb7dd8f4c52b0a899fcb4f458",
+      "output_metrics": {
+        "mesh_nodes": [
+          {
+            "node": "LOD0",
+            "triangles": 40000,
+            "vertices": 45974,
+            "surfaces": 1
+          },
+          {
+            "node": "LOD1",
+            "triangles": 12000,
+            "vertices": 19247,
+            "surfaces": 1
+          },
+          {
+            "node": "LOD2",
+            "triangles": 3000,
+            "vertices": 6121,
+            "surfaces": 1
+          }
+        ],
+        "material_count": 1,
+        "image_count": 3,
+        "texture_count": 3,
+        "all_images_embedded": true,
+        "bytes": 30230280
+      },
+      "lod_metrics_blender": [
+        {
+          "triangles": 40000,
+          "vertices": 47409,
+          "faces": 40000,
+          "surfaces": 1,
+          "material_count": 1,
+          "image_count": 3,
+          "uv_layer_count": 1,
+          "uv_loop_count": 120000,
+          "uv_finite": true,
+          "uv_min": [
+            0.00022743210138287395,
+            0.00018425194139126688
+          ],
+          "uv_max": [
+            0.9999340176582336,
+            0.9999709725379944
+          ],
+          "bounds_min_blender_xyz": [
+            -3.17453,
+            -3.57625,
+            0.0
+          ],
+          "bounds_max_blender_xyz": [
+            3.16965,
+            3.57304,
+            11.5
+          ],
+          "size_blender_xyz": [
+            6.34418,
+            7.14928,
+            11.5
+          ]
+        },
+        {
+          "triangles": 12000,
+          "vertices": 22979,
+          "faces": 12000,
+          "surfaces": 1,
+          "material_count": 1,
+          "image_count": 3,
+          "uv_layer_count": 1,
+          "uv_loop_count": 36000,
+          "uv_finite": true,
+          "uv_min": [
+            0.0005290000117383897,
+            0.0006797864916734397
+          ],
+          "uv_max": [
+            0.9999340176582336,
+            1.000178575515747
+          ],
+          "bounds_min_blender_xyz": [
+            -3.18891,
+            -3.61427,
+            0.0
+          ],
+          "bounds_max_blender_xyz": [
+            3.1829,
+            3.60884,
+            11.5
+          ],
+          "size_blender_xyz": [
+            6.37181,
+            7.22311,
+            11.5
+          ]
+        },
+        {
+          "triangles": 3000,
+          "vertices": 14334,
+          "faces": 3000,
+          "surfaces": 1,
+          "material_count": 1,
+          "image_count": 3,
+          "uv_layer_count": 1,
+          "uv_loop_count": 9000,
+          "uv_finite": true,
+          "uv_min": [
+            0.0009043031604960561,
+            0.001413484220393002
+          ],
+          "uv_max": [
+            0.999040424823761,
+            0.999871551990509
+          ],
+          "bounds_min_blender_xyz": [
+            -3.24303,
+            -3.69448,
+            0.0
+          ],
+          "bounds_max_blender_xyz": [
+            3.58846,
+            3.63987,
+            11.5
+          ],
+          "size_blender_xyz": [
+            6.83148,
+            7.33435,
+            11.5
+          ]
+        }
+      ],
+      "target_triangles": [
+        40000,
+        12000,
+        3000
+      ],
+      "intended_display_height_m": 11.5,
+      "presentation_yaw_deg": 0.0,
+      "normalized_scale": 6.041852,
+      "source_to_lod0_triangle_reduction_pct": 96.8342,
+      "source_to_lod0_byte_reduction_pct": 53.7387,
+      "comparison_images": {},
+      "source_unchanged_after_build": true
+    },
+    {
+      "id": "03_corner_turret",
+      "source": "exports/meshy-houses-20260916/models/03_corner_turret.glb",
+      "source_sha256": "69710decc857406cb3b4f96bd1a1ec50470c6055767f1685e5c84fa5fa7522a1",
+      "source_bytes": 86631376,
+      "source_metrics": {
+        "triangles": 1792188,
+        "vertices": 1011346,
+        "faces": 1792188,
+        "surfaces": 1,
+        "material_count": 1,
+        "image_count": 3,
+        "uv_layer_count": 1,
+        "uv_loop_count": 5376564,
+        "uv_finite": true,
+        "uv_min": [
+          3.899999865097925e-05,
+          1.1980533599853516e-05
+        ],
+        "uv_max": [
+          0.9999840259552002,
+          0.9999989867210388
+        ],
+        "bounds_min_blender_xyz": [
+          -0.93307,
+          -0.95034,
+          -0.89796
+        ],
+        "bounds_max_blender_xyz": [
+          0.9416,
+          0.94797,
+          0.89875
+        ],
+        "size_blender_xyz": [
+          1.87467,
+          1.89832,
+          1.79671
+        ]
+      },
+      "output": "game/assets/floor1/meshy_houses_lod/03_corner_turret_lod.glb",
+      "output_sha256": "1a169e23e82178577bb1256e09644ded29bbad75414b5d43aefe344dbdb3fea6",
+      "output_metrics": {
+        "mesh_nodes": [
+          {
+            "node": "LOD0",
+            "triangles": 40000,
+            "vertices": 51677,
+            "surfaces": 1
+          },
+          {
+            "node": "LOD1",
+            "triangles": 12000,
+            "vertices": 21295,
+            "surfaces": 1
+          },
+          {
+            "node": "LOD2",
+            "triangles": 3000,
+            "vertices": 6482,
+            "surfaces": 1
+          }
+        ],
+        "material_count": 1,
+        "image_count": 3,
+        "texture_count": 3,
+        "all_images_embedded": true,
+        "bytes": 35635584
+      },
+      "lod_metrics_blender": [
+        {
+          "triangles": 40000,
+          "vertices": 55829,
+          "faces": 40000,
+          "surfaces": 1,
+          "material_count": 1,
+          "image_count": 3,
+          "uv_layer_count": 1,
+          "uv_loop_count": 120000,
+          "uv_finite": true,
+          "uv_min": [
+            0.00016700000560376793,
+            0.00019401311874389648
+          ],
+          "uv_max": [
+            0.999779224395752,
+            0.9999020099639893
+          ],
+          "bounds_min_blender_xyz": [
+            -6.34032,
+            -6.25263,
+            0.00273
+          ],
+          "bounds_max_blender_xyz": [
+            6.33788,
+            6.26127,
+            11.9792
+          ],
+          "size_blender_xyz": [
+            12.6782,
+            12.5139,
+            11.97647
+          ]
+        },
+        {
+          "triangles": 12000,
+          "vertices": 30367,
+          "faces": 12000,
+          "surfaces": 1,
+          "material_count": 1,
+          "image_count": 3,
+          "uv_layer_count": 1,
+          "uv_loop_count": 36000,
+          "uv_finite": true,
+          "uv_min": [
+            0.00016700000560376793,
+            0.00030006046290509403
+          ],
+          "uv_max": [
+            0.999504029750824,
+            0.9999020099639893
+          ],
+          "bounds_min_blender_xyz": [
+            -6.43196,
+            -6.28812,
+            0.0
+          ],
+          "bounds_max_blender_xyz": [
+            6.38883,
+            6.29531,
+            12.0
+          ],
+          "size_blender_xyz": [
+            12.82079,
+            12.58343,
+            12.0
+          ]
+        },
+        {
+          "triangles": 3000,
+          "vertices": 21639,
+          "faces": 3000,
+          "surfaces": 1,
+          "material_count": 1,
+          "image_count": 3,
+          "uv_layer_count": 1,
+          "uv_loop_count": 9000,
+          "uv_finite": true,
+          "uv_min": [
+            0.00109475280623883,
+            0.0012575548607856035
+          ],
+          "uv_max": [
+            0.9994536638259888,
+            0.9996514916419983
+          ],
+          "bounds_min_blender_xyz": [
+            -6.53259,
+            -6.4127,
+            0.0
+          ],
+          "bounds_max_blender_xyz": [
+            6.47537,
+            6.41887,
+            12.0
+          ],
+          "size_blender_xyz": [
+            13.00796,
+            12.83157,
+            12.0
+          ]
+        }
+      ],
+      "target_triangles": [
+        40000,
+        12000,
+        3000
+      ],
+      "intended_display_height_m": 12.0,
+      "presentation_yaw_deg": 90.0,
+      "normalized_scale": 6.678874,
+      "source_to_lod0_triangle_reduction_pct": 97.7681,
+      "source_to_lod0_byte_reduction_pct": 58.8653,
+      "comparison_images": {},
+      "source_unchanged_after_build": true
+    }
+  ],
+  "known_visual_limitations": [
+    "At 40k triangles the cottage comparison render shows visible roof-tile and window-edge breakup; this is a measured collapse-decimate baseline, not an approved near-camera hero mesh.",
+    "The 12k and 3k levels preserve source textures but their smaller silhouettes require in-engine distance review before art approval."
+  ],
+  "godot_import_note": "Godot 4.7 may extract one JPG set per house from its embedded GLB images as import sidecars; the three LOD nodes in each GLB share one material/image set.",
+  "validation": {
+    "godot_version": "4.7.2 stable mono",
+    "headless_editor_import_exit": 0,
+    "engine_test_checks": 106,
+    "engine_test_failures": 0,
+    "engine_test_report": "tmp/floor1-art-20260916/lod/godot-lod-test.json",
+    "all_source_hashes_rechecked_after_engine_import": true,
+    "all_output_hashes_rechecked": true,
+    "glb_single_material_three_embedded_images_each": true
+  }
+}

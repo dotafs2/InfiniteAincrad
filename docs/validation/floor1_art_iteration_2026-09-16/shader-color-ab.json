@@ -1,0 +1,175 @@
+{
+  "schema": "floor1-expanded-world-procedural-ground-color-ab-v1",
+  "fixture": "same world, palette, lighting, geometry and eight fixed camera views under actual non-headless Godot Vulkan Forward+",
+  "sole_change": "unhinted vec3 tone_a shader uniform now receives Color(hex).srgb_to_linear() instead of raw Color(hex) RGB components",
+  "reason": "Forward+ ALBEDO is linear; original uniform treated hex sRGB numbers as linear and washed out procedural ground/roads",
+  "official_reference": "https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html#using-source-color",
+  "before_capture_json": "tmp/floor1-art-20260916/world/captures-v5-yards/capture.json",
+  "after_capture_json": "tmp/floor1-art-20260916/world/captures-v5-linear-ab/capture.json",
+  "before_capture_sha256": "c4c02628fd690bdbef46468729e0ed052cc985337a7e2ff98fcf7fe3e94b9b24",
+  "after_capture_sha256": "490fdc32610797de44a1910b7f119863e95d356e4476434e57275756c4b408cf",
+  "saved_png_px": [
+    1680,
+    1080
+  ],
+  "pixel_samples": [
+    {
+      "shot": "countryside_path",
+      "label": "near_grass",
+      "pixel_xy": [
+        760,
+        820
+      ],
+      "before_rgb_8bit": [
+        183,
+        198,
+        169
+      ],
+      "after_rgb_8bit": [
+        119,
+        150,
+        105
+      ],
+      "before_after_equal": false
+    },
+    {
+      "shot": "countryside_path",
+      "label": "earth_road",
+      "pixel_xy": [
+        1280,
+        850
+      ],
+      "before_rgb_8bit": [
+        208,
+        195,
+        172
+      ],
+      "after_rgb_8bit": [
+        177,
+        152,
+        114
+      ],
+      "before_after_equal": false
+    },
+    {
+      "shot": "countryside_path",
+      "label": "imported_oak_canopy_control",
+      "pixel_xy": [
+        500,
+        470
+      ],
+      "before_rgb_8bit": [
+        51,
+        84,
+        58
+      ],
+      "after_rgb_8bit": [
+        51,
+        84,
+        58
+      ],
+      "before_after_equal": true
+    },
+    {
+      "shot": "countryside_path",
+      "label": "sky_control",
+      "pixel_xy": [
+        900,
+        180
+      ],
+      "before_rgb_8bit": [
+        116,
+        150,
+        174
+      ],
+      "after_rgb_8bit": [
+        116,
+        150,
+        174
+      ],
+      "before_after_equal": true
+    },
+    {
+      "shot": "residence_near",
+      "label": "town_grass",
+      "pixel_xy": [
+        1210,
+        900
+      ],
+      "before_rgb_8bit": [
+        184,
+        195,
+        172
+      ],
+      "after_rgb_8bit": [
+        126,
+        150,
+        112
+      ],
+      "before_after_equal": false
+    },
+    {
+      "shot": "residence_near",
+      "label": "cobble_lane",
+      "pixel_xy": [
+        700,
+        900
+      ],
+      "before_rgb_8bit": [
+        204,
+        201,
+        192
+      ],
+      "after_rgb_8bit": [
+        161,
+        157,
+        145
+      ],
+      "before_after_equal": false
+    },
+    {
+      "shot": "residence_near",
+      "label": "modular_house_wall_control",
+      "pixel_xy": [
+        1400,
+        700
+      ],
+      "before_rgb_8bit": [
+        196,
+        188,
+        156
+      ],
+      "after_rgb_8bit": [
+        196,
+        188,
+        156
+      ],
+      "before_after_equal": true
+    },
+    {
+      "shot": "residence_near",
+      "label": "sky_control",
+      "pixel_xy": [
+        800,
+        190
+      ],
+      "before_rgb_8bit": [
+        114,
+        152,
+        173
+      ],
+      "after_rgb_8bit": [
+        114,
+        152,
+        173
+      ],
+      "before_after_equal": true
+    }
+  ],
+  "result": "procedural grass/dirt/cobble darkened to useful value contrast; imported oak canopy, modular house wall and sky controls stayed pixel-identical at measured samples",
+  "limitations": [
+    "This fixes color-space input, not the continuous terrain's flat geometry or distant maze placeholder",
+    "Pixel probes are fixed samples, not a perceptual color calibration for every monitor",
+    "Captured frame intervals remain VSync/presentation-inclusive and are not pure GPU timings"
+  ]
+}

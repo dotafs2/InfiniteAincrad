@@ -1,0 +1,38 @@
+{
+  "revision": "isolated-original-topology-collapse-v1",
+  "source": "exports/floor1-art-20260916/courtyard-oak/raw/F1_courtyard_oak_raw.glb",
+  "source_sha256_before_after": "deb14d907284e94e8e126509e1b7094b0d5576676b8a6aa96613af88e918ee5a",
+  "source_triangles": 4775932,
+  "builder": "tools/build_courtyard_oak_lods.py",
+  "method": "Blender DECIMATE COLLAPSE on the original imported textured topology, with triangulation retained; no leaf island is automatically deleted.",
+  "trial_only": true,
+  "candidates": [
+    {
+      "target_triangles": 100000,
+      "actual_triangles": 100000,
+      "glb": "Art/Generated/CourtyardOak20260916/models/F1_courtyard_oak_originalcollapse_100k.glb",
+      "sha256": "0fce70f8c7b77db2c5783295fa381e65dca0d3680e1bc80f616f3b190821b263",
+      "bytes": 11221296,
+      "max_relative_bounds_endpoint_change": 0.001174,
+      "receipt": "tmp/floor1-art-20260916/oak-lods/oak-originalcollapse-100k.json"
+    },
+    {
+      "target_triangles": 60000,
+      "actual_triangles": 60000,
+      "glb": "Art/Generated/CourtyardOak20260916/models/F1_courtyard_oak_originalcollapse_60k.glb",
+      "sha256": "f3b7d690f8f4e7031ed5028a5d5e3c0174ccbcecd6597b9325cbed13666174e3",
+      "bytes": 9615816,
+      "max_relative_bounds_endpoint_change": 0.001395,
+      "receipt": "tmp/floor1-art-20260916/oak-lods/oak-originalcollapse-60k.json"
+    }
+  ],
+  "uv_and_texture_evidence": "Both exported meshes have one finite sampled UV layer, one material, three textures, and three embedded JPEG payload hashes exactly matching the immutable source (image order differs).",
+  "visual_qa": "Eight actual 1024x1024 BLENDER_EEVEE PNGs at az038/128/218/308 under Art/Generated/CourtyardOak20260916/previews/renders/ were inspected at full pixels against the immutable raw preview's matching views. Both collapse LODs retain the large full foliage clusters and twisted trunk/root silhouette; no obvious isolated floating debris appears. The 60K root tips and several leaf edges are visibly more angular, while the 100K view preserves more close-up lobe fullness. Both remain trial models, not game footage.",
+  "visual_report": "Art/Generated/CourtyardOak20260916/previews/render-report.json (rendered 2 models x 4 azimuths, missing 0, untouched input hashes before/after)",
+  "same_angle_pixels": "tmp/floor1-art-20260916/oak-lods/same-angle-pixels.json: nearly-white-background dark-silhouette IoU over four raw/LOD views is 0.9835-0.9969 for 100K and 0.9753-0.9961 for 60K; the threshold metric is supporting evidence, not a leaf-quality verdict.",
+  "root_actual_image_review": "Root inspected the raw and both candidate az038/az218 actual PNGs against the failed 31K Meshy remesh. Root approved 100K original-collapse for exactly one near-focus courtyard tree; 60K may be a farther tier. The original 4.78M source and thin-leaf remesh are rejected for the near scene.",
+  "approved_near_tier": "100K original-collapse GLB, pending scene placement and actual in-world still by the separately owned world worker",
+  "runtime_y_up_position_bounds_100k": {"min": [-0.950143, -0.939651, -0.623839], "max": [0.953894, 0.938755, 0.610032], "raw_height_m": 1.878406},
+  "recommended_runtime_transform_100k": {"target_height_m": 8.5, "uniform_scale": 4.525113486, "mesh_local_y_lift_m": 4.252027469, "scaled_aabb_width_m": 8.615981343, "scaled_aabb_depth_m": 5.583404877, "note": "Lift the scaled mesh child by -raw_min_y*scale so roots touch the parent's terrain height; keep placement terrain/world-owned."},
+  "game_asset_adoption": "approved 100K trial for one focus tree; copy/import/placement and in-world review are owned by the world worker"
+}

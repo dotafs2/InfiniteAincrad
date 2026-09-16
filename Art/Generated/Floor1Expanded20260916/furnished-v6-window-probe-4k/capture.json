@@ -1,0 +1,60 @@
+{
+  "capture_png_px": [
+    1680,
+    1080
+  ],
+  "fixture": "independent whole expanded art world; actual built house openings",
+  "furnished_houses": 3,
+  "model_calls": 0,
+  "rows": [
+    {
+      "draw_calls_with_shadows": 1645,
+      "host": "Modular_01_01_hearth_cottage",
+      "name": "furnished_home_windows_closed",
+      "p95_frame_interval_ms": 7.701,
+      "png_saved": true,
+      "same_local_camera_eye": "(0.0, 1.62, 1.7)",
+      "same_local_target": "(0.25, 0.85, -1.5)",
+      "window_state": false
+    },
+    {
+      "draw_calls_with_shadows": 1643,
+      "host": "Modular_01_01_hearth_cottage",
+      "name": "furnished_home_windows_open",
+      "p95_frame_interval_ms": 4.324,
+      "png_saved": true,
+      "same_local_camera_eye": "(0.0, 1.62, 1.7)",
+      "same_local_target": "(0.25, 0.85, -1.5)",
+      "window_state": true
+    },
+    {
+      "draw_calls_with_shadows": 2032,
+      "host": "Modular_03_02_market_house",
+      "name": "furnished_bakery_windows_closed",
+      "p95_frame_interval_ms": 4.432,
+      "png_saved": true,
+      "same_local_camera_eye": "(-0.9, 1.62, 2.45)",
+      "same_local_target": "(0.0, 0.9, -1.5)",
+      "window_state": false
+    },
+    {
+      "draw_calls_with_shadows": 2027,
+      "host": "Modular_03_02_market_house",
+      "name": "furnished_bakery_windows_open",
+      "p95_frame_interval_ms": 4.397,
+      "png_saved": true,
+      "same_local_camera_eye": "(-0.9, 1.62, 2.45)",
+      "same_local_target": "(0.0, 0.9, -1.5)",
+      "window_state": true
+    }
+  ],
+  "saved_shots": [
+    "furnished_home_windows_closed",
+    "furnished_home_windows_open",
+    "furnished_bakery_windows_closed",
+    "furnished_bakery_windows_open"
+  ],
+  "suite": "furnished_real_window_open_visual_probe",
+  "texture_tier": "4k",
+  "world_state_mutations": 0
+}

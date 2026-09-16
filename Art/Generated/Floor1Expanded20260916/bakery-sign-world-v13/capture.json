@@ -1,0 +1,76 @@
+{
+  "after_probe_sign_restored_visible": true,
+  "capture_png_px": [
+    1680,
+    1080
+  ],
+  "frame_interval_definition": "actual non-headless frame_post_draw intervals include VSync/presentation and CPU waits",
+  "independent_sign_local_anchor": "(-2.35, 2.68, 4.62)",
+  "model_calls": 0,
+  "one_bakery_host": "Modular_03_02_market_house",
+  "persistent_world_state_mutations": 0,
+  "real_12_house_3_furnished_walker_routes": "see world physics companion receipt",
+  "saved_shots": [
+    "bakery_front_lane_baseline_hidden",
+    "bakery_front_lane_with_sign",
+    "bakery_sign_eye_baseline_hidden",
+    "bakery_sign_eye_with_sign"
+  ],
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "shot_rows": [
+    {
+      "bakery_host": "Modular_03_02_market_house",
+      "benchmark_frames": 120,
+      "camera_eye_local": "(-0.7, 1.72, 10.7)",
+      "draw_calls_with_shadows": 2220,
+      "median_frame_interval_ms": 4.16,
+      "name": "bakery_front_lane_baseline_hidden",
+      "p95_frame_interval_ms": 4.287,
+      "png_saved": true,
+      "primitives_with_shadows": 1595674,
+      "sign_visible": false,
+      "target_local": "(-1.4, 2.6, 4.8)"
+    },
+    {
+      "bakery_host": "Modular_03_02_market_house",
+      "benchmark_frames": 120,
+      "camera_eye_local": "(-0.7, 1.72, 10.7)",
+      "draw_calls_with_shadows": 2229,
+      "median_frame_interval_ms": 4.167,
+      "name": "bakery_front_lane_with_sign",
+      "p95_frame_interval_ms": 4.34,
+      "png_saved": true,
+      "primitives_with_shadows": 1604254,
+      "sign_visible": true,
+      "target_local": "(-1.4, 2.6, 4.8)"
+    },
+    {
+      "bakery_host": "Modular_03_02_market_house",
+      "benchmark_frames": 120,
+      "camera_eye_local": "(-2.1, 1.62, 7.25)",
+      "draw_calls_with_shadows": 1638,
+      "median_frame_interval_ms": 4.174,
+      "name": "bakery_sign_eye_baseline_hidden",
+      "p95_frame_interval_ms": 4.306,
+      "png_saved": true,
+      "primitives_with_shadows": 956205,
+      "sign_visible": false,
+      "target_local": "(-2.35, 3.05, 5.05)"
+    },
+    {
+      "bakery_host": "Modular_03_02_market_house",
+      "benchmark_frames": 120,
+      "camera_eye_local": "(-2.1, 1.62, 7.25)",
+      "draw_calls_with_shadows": 1644,
+      "median_frame_interval_ms": 4.164,
+      "name": "bakery_sign_eye_with_sign",
+      "p95_frame_interval_ms": 4.305,
+      "png_saved": true,
+      "primitives_with_shadows": 963741,
+      "sign_visible": true,
+      "target_local": "(-2.35, 3.05, 5.05)"
+    }
+  ],
+  "suite": "floor1_one_real_bakery_exterior_sign_in_actual_world",
+  "temporary_visual_visibility_assignments": 4
+}

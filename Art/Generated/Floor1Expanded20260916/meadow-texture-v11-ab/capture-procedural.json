@@ -1,0 +1,68 @@
+{
+  "capture_png_px": [
+    1680,
+    1080
+  ],
+  "frame_interval_definition": "actual non-headless frame_post_draw intervals include VSync/presentation and CPU waits",
+  "imported_image_has_mipmaps": false,
+  "imported_texture_px": [],
+  "meadow_texture_mix": 0.0,
+  "meadow_texture_path": "",
+  "model_calls": 0,
+  "painted_tile_repeat_m": 2.0,
+  "saved_shots": [
+    "country_road_eye",
+    "forest_bank_walk_eye",
+    "painted_tile_overhead",
+    "painted_tile_eye"
+  ],
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "shot_rows": [
+    {
+      "benchmark_frames": 120,
+      "camera": "(-7.0, 1.72, -179.0)",
+      "draw_calls_with_shadows": 382,
+      "median_frame_interval_ms": 4.165,
+      "name": "country_road_eye",
+      "p95_frame_interval_ms": 4.523,
+      "png_saved": true,
+      "primitives_with_shadows": 728335,
+      "target": "(-15.0, 0.2, -205.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-50.0, 2.751533, -216.0)",
+      "draw_calls_with_shadows": 120,
+      "median_frame_interval_ms": 4.158,
+      "name": "forest_bank_walk_eye",
+      "p95_frame_interval_ms": 4.304,
+      "png_saved": true,
+      "primitives_with_shadows": 163739,
+      "target": "(-62.0, 0.8, -222.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-43.0, 13.0, -194.0)",
+      "draw_calls_with_shadows": 778,
+      "median_frame_interval_ms": 4.164,
+      "name": "painted_tile_overhead",
+      "p95_frame_interval_ms": 4.289,
+      "png_saved": true,
+      "primitives_with_shadows": 1102646,
+      "target": "(-42.0, 0.0, -194.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-42.0, 1.72, -194.0)",
+      "draw_calls_with_shadows": 124,
+      "median_frame_interval_ms": 4.155,
+      "name": "painted_tile_eye",
+      "p95_frame_interval_ms": 4.292,
+      "png_saved": true,
+      "primitives_with_shadows": 154238,
+      "target": "(-42.0, 0.65, -210.0)"
+    }
+  ],
+  "suite": "floor1_meadow_albedo_actual_world_tiling_probe",
+  "world_state_mutations": 0
+}

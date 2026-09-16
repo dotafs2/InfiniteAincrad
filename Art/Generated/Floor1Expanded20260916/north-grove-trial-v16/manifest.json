@@ -1,0 +1,311 @@
+{
+  "schema": "floor1-northwest-shared-native-t2-oak-pocket-actual-world-ab-v16",
+  "review_state": "root-approved visual comparison; ten-tree pocket adopted as independent world default for v3",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "world_switch": "default includes nine additional trunks/visuals; --north-grove-trial=off preserves the v2 single-tree rollback",
+  "current_world_default": true,
+  "adoption_provenance": "Art/Generated/Floor1Expanded20260916/milestone-v3-provenance.json",
+  "adopted_full_world_checks": {"default": [254, 0], "off_rollback": [249, 0]},
+  "retained_approved_focal_native_t2_oak": 1,
+  "candidate_added_native_t2_oaks": 9,
+  "coherent_pocket_total_native_t2_oaks": 10,
+  "group_patch_bounds_m": {
+    "x": [
+      -90,
+      -55
+    ],
+    "z": [
+      -313,
+      -273
+    ]
+  },
+  "existing_northwest_kit_trees_unchanged": 24,
+  "existing_100k_town_courtyard_oak_unchanged": 1,
+  "each_candidate_imported_triangles": 14783,
+  "additional_candidate_triangles": 133047,
+  "asset_source_and_game_identical_receipt": [
+    {
+      "path": "exports/floor1-art-20260916/oak-smart-topology/F1_oak_smart15k.glb",
+      "bytes": 9140052,
+      "sha256": "fd14e2b0f3201f626391905e76f07d0d7fabe266ee73e44a8b738eaf11434f20"
+    },
+    {
+      "path": "game/assets/floor1/courtyard_oak_20260916/F1_oak_smart15k_forest_trial.glb",
+      "bytes": 9140052,
+      "sha256": "fd14e2b0f3201f626391905e76f07d0d7fabe266ee73e44a8b738eaf11434f20"
+    }
+  ],
+  "shared_geometry_material_proof": "all nine MeshInstance3D.mesh and surface material references identical to retained foreground oak in imported Godot scene",
+  "nine_true_collidable_triangle_floor_sites": [
+    {
+      "actual_collision_floor_y_m": 3.83058547973633,
+      "actual_tris": 14783,
+      "authored_display_height_m": 6.40000009536743,
+      "focal_trunk_gap_m": 7.81024980545044,
+      "imported_mesh_nodes": 1,
+      "min_group_trunk_gap_m": 7.61577320098877,
+      "min_old_kit_trunk_gap_m": 13.4536237716675,
+      "name": "NorthGroveNativeT2Oak00",
+      "site_m": "(-60.0, 3.830602, -281.0)"
+    },
+    {
+      "actual_collision_floor_y_m": 5.61887550354004,
+      "actual_tris": 14783,
+      "authored_display_height_m": 6.80000019073486,
+      "focal_trunk_gap_m": 15.0,
+      "imported_mesh_nodes": 1,
+      "min_group_trunk_gap_m": 7.61577320098877,
+      "min_old_kit_trunk_gap_m": 7.28010988235474,
+      "name": "NorthGroveNativeT2Oak01",
+      "site_m": "(-67.0, 5.618888, -284.0)"
+    },
+    {
+      "actual_collision_floor_y_m": 6.21854019165039,
+      "actual_tris": 14783,
+      "authored_display_height_m": 6.0,
+      "focal_trunk_gap_m": 22.1359443664551,
+      "imported_mesh_nodes": 1,
+      "min_group_trunk_gap_m": 9.21954441070557,
+      "min_old_kit_trunk_gap_m": 11.0453605651855,
+      "name": "NorthGroveNativeT2Oak02",
+      "site_m": "(-76.0, 6.218551, -282.0)"
+    },
+    {
+      "actual_collision_floor_y_m": 8.44339179992676,
+      "actual_tris": 14783,
+      "authored_display_height_m": 6.5,
+      "focal_trunk_gap_m": 33.6154708862305,
+      "imported_mesh_nodes": 1,
+      "min_group_trunk_gap_m": 11.6619033813477,
+      "min_old_kit_trunk_gap_m": 5.0990195274353,
+      "name": "NorthGroveNativeT2Oak03",
+      "site_m": "(-86.0, 8.443419, -288.0)"
+    },
+    {
+      "actual_collision_floor_y_m": 5.72477340698242,
+      "actual_tris": 14783,
+      "authored_display_height_m": 6.30000019073486,
+      "focal_trunk_gap_m": 18.0277557373047,
+      "imported_mesh_nodes": 1,
+      "min_group_trunk_gap_m": 10.0,
+      "min_old_kit_trunk_gap_m": 8.06225776672363,
+      "name": "NorthGroveNativeT2Oak04",
+      "site_m": "(-61.0, 5.724766, -292.0)"
+    },
+    {
+      "actual_collision_floor_y_m": 8.41155433654785,
+      "actual_tris": 14783,
+      "authored_display_height_m": 6.69999980926514,
+      "focal_trunk_gap_m": 27.4590606689453,
+      "imported_mesh_nodes": 1,
+      "min_group_trunk_gap_m": 10.8166542053223,
+      "min_old_kit_trunk_gap_m": 7.07106781005859,
+      "name": "NorthGroveNativeT2Oak05",
+      "site_m": "(-70.0, 8.41156, -298.0)"
+    },
+    {
+      "actual_collision_floor_y_m": 11.1603994369507,
+      "actual_tris": 14783,
+      "authored_display_height_m": 6.0,
+      "focal_trunk_gap_m": 41.7252922058105,
+      "imported_mesh_nodes": 1,
+      "min_group_trunk_gap_m": 11.1803398132324,
+      "min_old_kit_trunk_gap_m": 4.12310552597046,
+      "name": "NorthGroveNativeT2Oak06",
+      "site_m": "(-84.0, 11.16043, -305.0)"
+    },
+    {
+      "actual_collision_floor_y_m": 6.28256225585938,
+      "actual_tris": 14783,
+      "authored_display_height_m": 6.5,
+      "focal_trunk_gap_m": 30.1496276855469,
+      "imported_mesh_nodes": 1,
+      "min_group_trunk_gap_m": 13.34166431427,
+      "min_old_kit_trunk_gap_m": 17.7200450897217,
+      "name": "NorthGroveNativeT2Oak07",
+      "site_m": "(-58.0, 6.28256, -305.0)"
+    },
+    {
+      "actual_collision_floor_y_m": 9.81692314147949,
+      "actual_tris": 14783,
+      "authored_display_height_m": 6.19999980926514,
+      "focal_trunk_gap_m": 39.8246154785156,
+      "imported_mesh_nodes": 1,
+      "min_group_trunk_gap_m": 11.1803398132324,
+      "min_old_kit_trunk_gap_m": 9.05538558959961,
+      "name": "NorthGroveNativeT2Oak08",
+      "site_m": "(-74.0, 9.816952, -310.0)"
+    }
+  ],
+  "nearest_existing_kit_trunk_distance_m": 4.12310552597046,
+  "nearest_new_trunk_distance_m": 7.61577320098877,
+  "actual_walker_capsule": {
+    "radius_m": 0.32,
+    "height_m": 1.8
+  },
+  "front_gap_walker_points": [
+    {
+      "actual_floor_y_m": 0.852167129516602,
+      "capsule_contacts": 0,
+      "world_xz": "(-50.0, -268.0)"
+    },
+    {
+      "actual_floor_y_m": 1.40772819519043,
+      "capsule_contacts": 0,
+      "world_xz": "(-50.0, -274.0)"
+    },
+    {
+      "actual_floor_y_m": 2.15151023864746,
+      "capsule_contacts": 0,
+      "world_xz": "(-50.0, -282.0)"
+    },
+    {
+      "actual_floor_y_m": 3.12505912780762,
+      "capsule_contacts": 0,
+      "world_xz": "(-50.0, -292.0)"
+    }
+  ],
+  "off_on_full_world_checks": {
+    "off_passed": 247,
+    "on_passed": 252,
+    "off_failed": 0,
+    "on_failed": 0
+  },
+  "actual_png_pixels": [
+    1680,
+    1080
+  ],
+  "actual_world_image_receipts": [
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/north-grove-trial-v16/off/country_road_eye.png",
+      "bytes": 714331,
+      "sha256": "2c09d8411bdc754550a39d82597dccd4d9519a49199d5d8fcba745c23e0be1e6",
+      "pixels": [
+        1680,
+        1080
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/north-grove-trial-v16/off/forest_bank_side_eye.png",
+      "bytes": 1032535,
+      "sha256": "33ab1f9c807f0b26f2a80c2243ae6980ea75d87924c15f3b022adc9e06a64edf",
+      "pixels": [
+        1680,
+        1080
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/north-grove-trial-v16/off/forest_edge_walk_eye.png",
+      "bytes": 856295,
+      "sha256": "554caa709cb3ec4fe1615b04d4c40b5c8b90fac59a32d77e7e15faf38e3b8815",
+      "pixels": [
+        1680,
+        1080
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/north-grove-trial-v16/on/country_road_eye.png",
+      "bytes": 726273,
+      "sha256": "e09fff5b04f75242b5562681aa14d39ead23963309ae01a953447f17b07c9463",
+      "pixels": [
+        1680,
+        1080
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/north-grove-trial-v16/on/forest_bank_side_eye.png",
+      "bytes": 1099301,
+      "sha256": "2bc68970691448917d3c2be0499941666833485e6ce384e353c47f1368028a45",
+      "pixels": [
+        1680,
+        1080
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/north-grove-trial-v16/on/forest_edge_walk_eye.png",
+      "bytes": 892722,
+      "sha256": "70986accac4154513d3d7aeb195da5ce77ce7727782c91dda4da6e4ef79e327d",
+      "pixels": [
+        1680,
+        1080
+      ]
+    }
+  ],
+  "actual_world_capture_receipts": [
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/north-grove-trial-v16/off/capture.json",
+      "bytes": 1901,
+      "sha256": "a0f38414be7cc8424ac3cbbe8bde6dbcdf09bf88ca2980ea0056a833af1ca3a8"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/north-grove-trial-v16/on/capture.json",
+      "bytes": 1905,
+      "sha256": "7d7c56d20a72599c0b176df512b6181ddddebe7277b5de44a01114613f0d5210"
+    }
+  ],
+  "physical_receipts": [
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/north-grove-trial-v16/off-physics.json",
+      "bytes": 63185,
+      "sha256": "503beb93623bbbabf8f4e62f1d8ed91d30c5aac790a00a51bd3b05ca4dd4a03c"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/north-grove-trial-v16/on-physics.json",
+      "bytes": 76531,
+      "sha256": "b1822c49799f0a655dd928a51383ef094eeabe213a68bb6cd847f7135028dc09"
+    }
+  ],
+  "comparable_frame_interval_and_draw_counts": [
+    {
+      "shot": "country_road_eye",
+      "camera": "(0.0, 1.72, -222.0)",
+      "target": "(-73.0, 11.0, -290.0)",
+      "off_median_frame_interval_ms": 4.161,
+      "on_median_frame_interval_ms": 4.163,
+      "off_p95_frame_interval_ms": 4.377,
+      "on_p95_frame_interval_ms": 4.639,
+      "off_draw_calls_with_shadows": 104,
+      "on_draw_calls_with_shadows": 104,
+      "off_visible_primitives_with_shadows": 204598,
+      "on_visible_primitives_with_shadows": 352428
+    },
+    {
+      "shot": "forest_edge_walk_eye",
+      "camera": "(-31.0, 2.05, -255.0)",
+      "target": "(-69.0, 11.5, -293.0)",
+      "off_median_frame_interval_ms": 4.168,
+      "on_median_frame_interval_ms": 4.169,
+      "off_p95_frame_interval_ms": 4.348,
+      "on_p95_frame_interval_ms": 4.306,
+      "off_draw_calls_with_shadows": 71,
+      "on_draw_calls_with_shadows": 73,
+      "off_visible_primitives_with_shadows": 223762,
+      "on_visible_primitives_with_shadows": 519422
+    },
+    {
+      "shot": "forest_bank_side_eye",
+      "camera": "(-117.0, 7.4, -285.0)",
+      "target": "(-70.0, 12.0, -297.0)",
+      "off_median_frame_interval_ms": 4.169,
+      "on_median_frame_interval_ms": 4.163,
+      "off_p95_frame_interval_ms": 4.367,
+      "on_p95_frame_interval_ms": 4.287,
+      "off_draw_calls_with_shadows": 230,
+      "on_draw_calls_with_shadows": 235,
+      "off_visible_primitives_with_shadows": 462288,
+      "on_visible_primitives_with_shadows": 772731
+    }
+  ],
+  "interval_caveat": "frame_post_draw includes VSync, presentation and CPU waits; 120-frame intervals do not establish live FPS or GPU headroom",
+  "source_script_at_capture": {
+    "path": "game/spatial/floor1_expanded_world.gd",
+    "bytes": 110012,
+    "sha256": "9d9111754f4678673896eef78d57c7055f53752fa195d828a847ab6248f34b96"
+  },
+  "test_script_at_capture": {
+    "path": "game/tests/floor1_expanded_world_test.gd",
+    "bytes": 47551,
+    "sha256": "5361115cab13c61b9acc974958a47a8d6565e713e72bfa95fb97cc0c9dc7c4a3"
+  },
+  "visual_limit": "one pocket improves the first NW sightline; outside it the forest line remains sparse and some copies retain the source-model shallow-slope root exposure"
+}

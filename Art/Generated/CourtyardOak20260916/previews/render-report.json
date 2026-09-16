@@ -1,0 +1,167 @@
+{
+  "trial_id": "courtyard-oak-original-collapse-four-angle-v1",
+  "phase": "render",
+  "generated_at_utc": "2026-09-15T21:02:17.103991+00:00",
+  "blender_version": "5.2.1 LTS",
+  "engine_requested": "EEVEE",
+  "size": 1024,
+  "fixture": false,
+  "source": "offline Blender render of generated GLB (Meshy trial)",
+  "trial_path": "D:/lucidgloves/InfiniteAincrad/tmp/floor1-art-20260916/oak-lods/render-trial.json",
+  "models_dir": "D:/lucidgloves/InfiniteAincrad/Art/Generated/CourtyardOak20260916/models",
+  "houses": [
+    {
+      "id": "F1_courtyard_oak_originalcollapse_100k",
+      "name_zh": "院落橡树原网格十万面",
+      "source_glb": "D:/lucidgloves/InfiniteAincrad/Art/Generated/CourtyardOak20260916/models/F1_courtyard_oak_originalcollapse_100k.glb",
+      "source_sha256_before": "0fce70f8c7b77db2c5783295fa381e65dca0d3680e1bc80f616f3b190821b263",
+      "source_sha256_after": "0fce70f8c7b77db2c5783295fa381e65dca0d3680e1bc80f616f3b190821b263",
+      "source_unchanged": true,
+      "engine": "BLENDER_EEVEE",
+      "resolution": 1024,
+      "ortho_scale": 1.5768,
+      "presentation_scale": 0.5252,
+      "presentation_yaw_deg": 0.0,
+      "presentation_bounds_min": [
+        -0.5,
+        -0.324,
+        0.0
+      ],
+      "presentation_bounds_max": [
+        0.5,
+        0.324,
+        0.9865
+      ],
+      "render_paths": {
+        "az038": "D:\\lucidgloves\\InfiniteAincrad\\Art\\Generated\\CourtyardOak20260916\\previews\\renders\\F1_courtyard_oak_originalcollapse_100k-az038.png",
+        "az128": "D:\\lucidgloves\\InfiniteAincrad\\Art\\Generated\\CourtyardOak20260916\\previews\\renders\\F1_courtyard_oak_originalcollapse_100k-az128.png",
+        "az218": "D:\\lucidgloves\\InfiniteAincrad\\Art\\Generated\\CourtyardOak20260916\\previews\\renders\\F1_courtyard_oak_originalcollapse_100k-az218.png",
+        "az308": "D:\\lucidgloves\\InfiniteAincrad\\Art\\Generated\\CourtyardOak20260916\\previews\\renders\\F1_courtyard_oak_originalcollapse_100k-az308.png"
+      },
+      "render_roles": {
+        "az038": "front",
+        "az128": "right",
+        "az218": "back",
+        "az308": "left"
+      },
+      "camera_azimuths": {
+        "az038": 38.0,
+        "az128": 128.0,
+        "az218": 218.0,
+        "az308": 308.0
+      },
+      "camera_elevation_deg": 22.0,
+      "blend_path": "D:/lucidgloves/InfiniteAincrad/Art/Generated/CourtyardOak20260916/previews/blend/F1_courtyard_oak_originalcollapse_100k.blend",
+      "raw_metrics": {
+        "triangles": 100000,
+        "vertices": 100970,
+        "materials": [
+          "Material_0"
+        ],
+        "material_count": 1,
+        "textures": [
+          "Image_0",
+          "Image_1",
+          "Image_2"
+        ],
+        "texture_count": 3,
+        "raw_bounds_min": [
+          -0.9501,
+          -0.61,
+          -0.9397
+        ],
+        "raw_bounds_max": [
+          0.9539,
+          0.6238,
+          0.9388
+        ],
+        "raw_size": [
+          1.904,
+          1.2339,
+          1.8784
+        ],
+        "raw_max_dimension": 1.904
+      },
+      "note": "raw metrics are measured on the untouched import; scale, yaw and floor normalisation are presentation only and are not real building dimensions"
+    },
+    {
+      "id": "F1_courtyard_oak_originalcollapse_60k",
+      "name_zh": "院落橡树原网格六万面",
+      "source_glb": "D:/lucidgloves/InfiniteAincrad/Art/Generated/CourtyardOak20260916/models/F1_courtyard_oak_originalcollapse_60k.glb",
+      "source_sha256_before": "f3b7d690f8f4e7031ed5028a5d5e3c0174ccbcecd6597b9325cbed13666174e3",
+      "source_sha256_after": "f3b7d690f8f4e7031ed5028a5d5e3c0174ccbcecd6597b9325cbed13666174e3",
+      "source_unchanged": true,
+      "engine": "BLENDER_EEVEE",
+      "resolution": 1024,
+      "ortho_scale": 1.5772,
+      "presentation_scale": 0.525537,
+      "presentation_yaw_deg": 0.0,
+      "presentation_bounds_min": [
+        -0.5,
+        -0.3236,
+        0.0
+      ],
+      "presentation_bounds_max": [
+        0.5,
+        0.3236,
+        0.9871
+      ],
+      "render_paths": {
+        "az038": "D:\\lucidgloves\\InfiniteAincrad\\Art\\Generated\\CourtyardOak20260916\\previews\\renders\\F1_courtyard_oak_originalcollapse_60k-az038.png",
+        "az128": "D:\\lucidgloves\\InfiniteAincrad\\Art\\Generated\\CourtyardOak20260916\\previews\\renders\\F1_courtyard_oak_originalcollapse_60k-az128.png",
+        "az218": "D:\\lucidgloves\\InfiniteAincrad\\Art\\Generated\\CourtyardOak20260916\\previews\\renders\\F1_courtyard_oak_originalcollapse_60k-az218.png",
+        "az308": "D:\\lucidgloves\\InfiniteAincrad\\Art\\Generated\\CourtyardOak20260916\\previews\\renders\\F1_courtyard_oak_originalcollapse_60k-az308.png"
+      },
+      "render_roles": {
+        "az038": "front",
+        "az128": "right",
+        "az218": "back",
+        "az308": "left"
+      },
+      "camera_azimuths": {
+        "az038": 38.0,
+        "az128": 128.0,
+        "az218": 218.0,
+        "az308": 308.0
+      },
+      "camera_elevation_deg": 22.0,
+      "blend_path": "D:/lucidgloves/InfiniteAincrad/Art/Generated/CourtyardOak20260916/previews/blend/F1_courtyard_oak_originalcollapse_60k.blend",
+      "raw_metrics": {
+        "triangles": 60000,
+        "vertices": 65799,
+        "materials": [
+          "Material_0"
+        ],
+        "material_count": 1,
+        "textures": [
+          "Image_0",
+          "Image_1",
+          "Image_2"
+        ],
+        "texture_count": 3,
+        "raw_bounds_min": [
+          -0.9489,
+          -0.6076,
+          -0.9394
+        ],
+        "raw_bounds_max": [
+          0.9539,
+          0.6238,
+          0.9388
+        ],
+        "raw_size": [
+          1.9028,
+          1.2315,
+          1.8782
+        ],
+        "raw_max_dimension": 1.9028
+      },
+      "note": "raw metrics are measured on the untouched import; scale, yaw and floor normalisation are presentation only and are not real building dimensions"
+    }
+  ],
+  "missing": [],
+  "unknown_house_ids": [],
+  "rendered_count": 2,
+  "missing_count": 0,
+  "disclaimer": "offline presentation preview of the generated model; not game footage. Geometry is the untouched import, never repaired or synthesised."
+}

@@ -1,0 +1,336 @@
+{
+  "actual_bakery_opening_world_centre_m": "(-29.0, 1.1, -0.9)",
+  "actual_staged_door_open_close_s": [
+    17,
+    30
+  ],
+  "continuous_camera_not_recorded_player_walking": true,
+  "fixed_movie_frames_not_performance_evidence": true,
+  "grounded_nw_added_area_m2": 29500,
+  "model_calls": 0,
+  "native_t2_forest_oak_trial_enabled": true,
+  "performance_interval_definition": "non-headless frame_post_draw includes VSync/presentation and CPU waits",
+  "persistent_world_state_mutations": 0,
+  "route": [
+    {
+      "duration_to_next_s": 4.0,
+      "look_target_m": "(0.0, 2.1, 16.0)",
+      "position_m": "(0.0, 1.72, 60.0)",
+      "time_s": 0.0
+    },
+    {
+      "duration_to_next_s": 3.0,
+      "look_target_m": "(0.0, 2.4, 0.0)",
+      "position_m": "(0.0, 1.72, 24.0)",
+      "time_s": 4.0
+    },
+    {
+      "duration_to_next_s": 2.0,
+      "look_target_m": "(0.0, 1.6, 0.0)",
+      "position_m": "(0.0, 1.72, 6.0)",
+      "time_s": 7.0
+    },
+    {
+      "duration_to_next_s": 3.0,
+      "look_target_m": "(-17.0, 3.2, -8.0)",
+      "position_m": "(0.0, 1.72, -15.0)",
+      "time_s": 9.0
+    },
+    {
+      "duration_to_next_s": 2.0,
+      "look_target_m": "(-29.0, 2.8, -1.0)",
+      "position_m": "(-35.0, 1.72, -16.0)",
+      "time_s": 12.0
+    },
+    {
+      "duration_to_next_s": 3.0,
+      "look_target_m": "(-29.1, 3.05, -2.35)",
+      "position_m": "(-35.0, 1.62, -0.9)",
+      "time_s": 14.0
+    },
+    {
+      "duration_to_next_s": 2.0,
+      "look_target_m": "(-29.0, 1.65, -0.9)",
+      "position_m": "(-35.0, 1.62, -0.9)",
+      "time_s": 17.0
+    },
+    {
+      "duration_to_next_s": 4.0,
+      "look_target_m": "(-25.0, 1.7, -0.9)",
+      "position_m": "(-31.5, 1.62, -0.9)",
+      "time_s": 19.0
+    },
+    {
+      "duration_to_next_s": 4.0,
+      "look_target_m": "(-20.5, 1.3, -2.2)",
+      "position_m": "(-24.7, 1.62, -0.9)",
+      "time_s": 23.0
+    },
+    {
+      "duration_to_next_s": 3.0,
+      "look_target_m": "(-24.7, 1.7, 1.15)",
+      "position_m": "(-24.7, 1.62, -0.9)",
+      "time_s": 27.0
+    },
+    {
+      "duration_to_next_s": 4.0,
+      "look_target_m": "(-29.0, 2.2, -0.9)",
+      "position_m": "(-35.0, 1.62, -0.9)",
+      "time_s": 30.0
+    },
+    {
+      "duration_to_next_s": 3.0,
+      "look_target_m": "(-24.8, 4.5, 16.8)",
+      "position_m": "(-35.0, 1.72, 19.0)",
+      "time_s": 34.0
+    },
+    {
+      "duration_to_next_s": 5.0,
+      "look_target_m": "(-24.8, 4.5, 16.8)",
+      "position_m": "(-35.0, 1.72, 25.0)",
+      "time_s": 37.0
+    },
+    {
+      "duration_to_next_s": 3.0,
+      "look_target_m": "(0.0, 5.0, -85.0)",
+      "position_m": "(-35.0, 1.72, -73.0)",
+      "time_s": 42.0
+    },
+    {
+      "duration_to_next_s": 3.0,
+      "look_target_m": "(0.0, 4.5, -87.0)",
+      "position_m": "(0.0, 1.72, -79.0)",
+      "time_s": 45.0
+    },
+    {
+      "duration_to_next_s": 5.0,
+      "look_target_m": "(-13.0, 2.2, -150.0)",
+      "position_m": "(0.0, 1.72, -118.0)",
+      "time_s": 48.0
+    },
+    {
+      "duration_to_next_s": 4.0,
+      "look_target_m": "(-35.0, 2.8, -205.0)",
+      "position_m": "(0.0, 1.72, -175.0)",
+      "time_s": 53.0
+    },
+    {
+      "duration_to_next_s": 3.0,
+      "look_target_m": "(-55.0, 5.5, -275.0)",
+      "position_m": "(0.0, 1.72, -225.0)",
+      "time_s": 57.0
+    },
+    {
+      "duration_to_next_s": 0.0,
+      "look_target_m": "(-55.0, 6.0, -275.0)",
+      "position_m": "(-25.0, 1.72, -262.0)",
+      "time_s": 60.0
+    }
+  ],
+  "route_duration_s": 60.0,
+  "saved_images": [
+    "01_market_street",
+    "02_plaza_fountain",
+    "03_west_market_pocket",
+    "04_bakery_sign_closed",
+    "05_bakery_door_open",
+    "05b_shopbay_fix_exact_previous_eye",
+    "06_true_doorway_crossing",
+    "07_furnished_bakery_inside",
+    "08_exit_open_door",
+    "09_courtyard_oak",
+    "10_northern_gate",
+    "11_farm_path",
+    "12_true_north_extension",
+    "13_new_forest_edge"
+  ],
+  "saved_png_px": [
+    1680,
+    1080
+  ],
+  "still_rows": [
+    {
+      "bakery_door_open": false,
+      "benchmark_frames": 120,
+      "camera_position_m": "(0.0, 1.72, 24.0)",
+      "draw_calls_with_shadows": 2730,
+      "look_target_m": "(0.0, 2.4, 0.0)",
+      "median_frame_interval_ms": 4.142,
+      "name": "01_market_street",
+      "p95_frame_interval_ms": 4.772,
+      "png_saved": true,
+      "primitives_with_shadows": 3053277,
+      "time_s": 4.0
+    },
+    {
+      "bakery_door_open": false,
+      "benchmark_frames": 120,
+      "camera_position_m": "(0.0, 1.72, 7.333334)",
+      "draw_calls_with_shadows": 2109,
+      "look_target_m": "(0.0, 1.659259, 0.0)",
+      "median_frame_interval_ms": 4.162,
+      "name": "02_plaza_fountain",
+      "p95_frame_interval_ms": 4.329,
+      "png_saved": true,
+      "primitives_with_shadows": 2557703,
+      "time_s": 6.5
+    },
+    {
+      "bakery_door_open": false,
+      "benchmark_frames": 120,
+      "camera_position_m": "(-32.40741, 1.72, -15.92593)",
+      "draw_calls_with_shadows": 2186,
+      "look_target_m": "(-28.11111, 2.82963, -1.518518)",
+      "median_frame_interval_ms": 4.165,
+      "name": "03_west_market_pocket",
+      "p95_frame_interval_ms": 4.302,
+      "png_saved": true,
+      "primitives_with_shadows": 1075073,
+      "time_s": 11.5
+    },
+    {
+      "bakery_door_open": false,
+      "benchmark_frames": 120,
+      "camera_position_m": "(-35.0, 1.62, -0.9)",
+      "draw_calls_with_shadows": 2233,
+      "look_target_m": "(-29.07407, 2.687037, -1.974074)",
+      "median_frame_interval_ms": 4.166,
+      "name": "04_bakery_sign_closed",
+      "p95_frame_interval_ms": 4.321,
+      "png_saved": true,
+      "primitives_with_shadows": 1660981,
+      "time_s": 15.0
+    },
+    {
+      "bakery_door_open": true,
+      "benchmark_frames": 120,
+      "camera_position_m": "(-34.84961, 1.62, -0.9)",
+      "draw_calls_with_shadows": 2224,
+      "look_target_m": "(-28.82813, 1.652148, -0.9)",
+      "median_frame_interval_ms": 4.165,
+      "name": "05_bakery_door_open",
+      "p95_frame_interval_ms": 4.34,
+      "png_saved": true,
+      "primitives_with_shadows": 1507923,
+      "time_s": 17.25
+    },
+    {
+      "bakery_door_open": true,
+      "benchmark_frames": 120,
+      "camera_position_m": "(-31.73438, 1.62, -0.9)",
+      "draw_calls_with_shadows": 2185,
+      "look_target_m": "(-25.625, 1.692188, -0.9)",
+      "median_frame_interval_ms": 4.166,
+      "name": "05b_shopbay_fix_exact_previous_eye",
+      "p95_frame_interval_ms": 4.363,
+      "png_saved": true,
+      "primitives_with_shadows": 1644459,
+      "time_s": 18.5
+    },
+    {
+      "bakery_door_open": true,
+      "benchmark_frames": 120,
+      "camera_position_m": "(-25.7625, 1.62, -0.9)",
+      "draw_calls_with_shadows": 2260,
+      "look_target_m": "(-21.20313, 1.3625, -1.996875)",
+      "median_frame_interval_ms": 4.164,
+      "name": "06_true_doorway_crossing",
+      "p95_frame_interval_ms": 4.35,
+      "png_saved": true,
+      "primitives_with_shadows": 1936980,
+      "time_s": 22.0
+    },
+    {
+      "bakery_door_open": true,
+      "benchmark_frames": 120,
+      "camera_position_m": "(-24.7, 1.62, -0.9)",
+      "draw_calls_with_shadows": 2260,
+      "look_target_m": "(-20.84086, 1.332462, -1.928127)",
+      "median_frame_interval_ms": 4.167,
+      "name": "07_furnished_bakery_inside",
+      "p95_frame_interval_ms": 4.344,
+      "png_saved": true,
+      "primitives_with_shadows": 1954185,
+      "time_s": 23.7
+    },
+    {
+      "bakery_door_open": true,
+      "benchmark_frames": 120,
+      "camera_position_m": "(-29.85, 1.62, -0.9)",
+      "draw_calls_with_shadows": 1907,
+      "look_target_m": "(-26.85, 1.95, 0.125)",
+      "median_frame_interval_ms": 4.165,
+      "name": "08_exit_open_door",
+      "p95_frame_interval_ms": 4.318,
+      "png_saved": true,
+      "primitives_with_shadows": 1427771,
+      "time_s": 28.5
+    },
+    {
+      "bakery_door_open": false,
+      "benchmark_frames": 120,
+      "camera_position_m": "(-35.0, 1.72, 20.55556)",
+      "draw_calls_with_shadows": 2216,
+      "look_target_m": "(-24.8, 4.5, 16.8)",
+      "median_frame_interval_ms": 4.176,
+      "name": "09_courtyard_oak",
+      "p95_frame_interval_ms": 4.293,
+      "png_saved": true,
+      "primitives_with_shadows": 1985022,
+      "time_s": 35.0
+    },
+    {
+      "bakery_door_open": false,
+      "benchmark_frames": 120,
+      "camera_position_m": "(-9.074076, 1.72, -77.44444)",
+      "draw_calls_with_shadows": 734,
+      "look_target_m": "(0.0, 4.62963, -86.48148)",
+      "median_frame_interval_ms": 4.168,
+      "name": "10_northern_gate",
+      "p95_frame_interval_ms": 4.302,
+      "png_saved": true,
+      "primitives_with_shadows": 1981887,
+      "time_s": 44.0
+    },
+    {
+      "bakery_door_open": false,
+      "benchmark_frames": 120,
+      "camera_position_m": "(0.0, 1.72, -123.928)",
+      "draw_calls_with_shadows": 641,
+      "look_target_m": "(-15.288, 2.2624, -155.72)",
+      "median_frame_interval_ms": 4.166,
+      "name": "11_farm_path",
+      "p95_frame_interval_ms": 4.282,
+      "png_saved": true,
+      "primitives_with_shadows": 1525751,
+      "time_s": 49.0
+    },
+    {
+      "bakery_door_open": false,
+      "benchmark_frames": 120,
+      "camera_position_m": "(0.0, 1.72, -217.1875)",
+      "draw_calls_with_shadows": 144,
+      "look_target_m": "(-51.875, 5.078125, -264.0625)",
+      "median_frame_interval_ms": 4.168,
+      "name": "12_true_north_extension",
+      "p95_frame_interval_ms": 4.287,
+      "png_saved": true,
+      "primitives_with_shadows": 276963,
+      "time_s": 56.0
+    },
+    {
+      "bakery_door_open": false,
+      "benchmark_frames": 120,
+      "camera_position_m": "(-23.14815, 1.72, -259.2592)",
+      "draw_calls_with_shadows": 93,
+      "look_target_m": "(-55.0, 5.962963, -275.0)",
+      "median_frame_interval_ms": 4.164,
+      "name": "13_new_forest_edge",
+      "p95_frame_interval_ms": 4.271,
+      "png_saved": true,
+      "primitives_with_shadows": 242664,
+      "time_s": 59.5
+    }
+  ],
+  "suite": "floor1_v2_60s_continuous_camera_tour_draft_actual_world_stills"
+}

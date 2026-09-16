@@ -1,0 +1,51 @@
+{
+  "revision": "merchant ShopBay entrance-support fix v6.1",
+  "scope": "02_market_house only; door/window apertures, door units, independent window units, roof, lighting and world call-sites retained",
+  "cause": "One of two visual-only awning posts at local x=-0.9, front depth4.75m was collinear with the real merchant doorway centre x=-0.9; a physical walker passed through the rendered post.",
+  "pre_fix_snapshot": "tmp/floor1-art-20260916/modular/provenance-v6-pre-merchant-bay-post/",
+  "pre_fix_hash_receipt": "tmp/floor1-art-20260916/modular/provenance-v6-pre-merchant-bay-post/snapshot-sha256.json",
+  "pre_fix_main_merchant_glb_sha256": "088f93061a355306e98f9d90e341e6b6f83d49b0eb05d3d401ac475820e76a3e",
+  "post_fix_positions_blender_m": [
+    {"id": "shop_post_left", "centre": [-2.45, -4.75, 1.35], "size": [0.14, 0.5, 2.5]},
+    {"id": "shop_post_right", "centre": [2.45, -4.75, 1.35], "size": [0.14, 0.5, 2.5]}
+  ],
+  "source_logic": "Both posts and their original diagonal braces moved to solid outer front piers x=main.x0+0.65 and x=main.x1-0.65, under the existing scalloped awning; each post has a matching Godot BoxShape3D under the ShopBay semantic node, authored from the same manifest centres and sizes.",
+  "main_source_sha256": "459ceb4fc63b60eaeab04bec285a3d3391cb1acf01fffaa88a04462852b9dc94",
+  "main_merchant_glb_sha256": "9ab37225313c8f98ea6854b5463db7b1f89fd5c90a8091752a61132df0d89364",
+  "main_manifest_sha256": "79d856b71124c03135bd1e57a67388e64e2f7247384c174f85c93b292ed331e3",
+  "main_component_sha256": "5110633cd2ee66ffe151580a950c6072f09b17fc20936262cb9bfb48befc7046",
+  "main_acceptance_test_sha256": "310d8f7f15529af7e42b1ddf4f8bbafcf5be4abdf4f263774107f054c86e4f31",
+  "blender_mesh_triangles_from_author": 13472,
+  "godot_imported_triangles_including_runtime_parts": 16224,
+  "own_godot_acceptance": {
+    "checks": 150,
+    "failures": 0,
+    "process": "tmp/floor1-art-20260916/modular/merchant-bay-post-fix/merchant-post-v61-acceptance.process.json",
+    "closed_door_capsule_signed_distance_m": 0.345,
+    "open_door_capsule_signed_distance_m": -0.833,
+    "actual_imported_shopbay_visible_mesh_eye_height_centre_ray": "clear",
+    "left_post_actual_capsule_stop_signed_distance_m": 0.8,
+    "right_post_actual_capsule_stop_signed_distance_m": 0.8,
+    "complete_door_and_window_unit_detach_reinstall": "passed with unchanged 90-degree transformed swap, all four facade window movement, and independent instances"
+  },
+  "world_same_real_mesh_ray_before": {
+    "report": "tmp/floor1-art-20260916/world/tour-v2-draft/shopbay-visual-before.json",
+    "checks": 246,
+    "failures": 1,
+    "ShopBay_hit_world_m": [-29.5, 1.62, -0.9]
+  },
+  "world_same_real_mesh_ray_after": {
+    "report": "tmp/floor1-art-20260916/world/tour-v2-draft/shopbay-visual-after.json",
+    "checks": 246,
+    "failures": 0,
+    "ShopBay_hit": "clear",
+    "real_walker_and_camera_route": "all twelve houses, three furnished routes and 241 quarter-second v2 camera-sphere samples pass"
+  },
+  "actual_same_camera_before_open_door": "tmp/floor1-art-20260916/world/tour-v2-draft/stills-off/05_bakery_door_open.png",
+  "actual_same_camera_after_open_door": "tmp/floor1-art-20260916/world/tour-v2-draft/stills-final/05b_shopbay_fix_exact_previous_eye.png",
+  "after_png_sha256": "181519f55953cb791e198b04a329d670466ebaef3cc308d25e7c351b49543995",
+  "actual_visual_review": "The same eye-height door view was inspected: the former centre pillar is gone from the real aperture, the two structural supports remain at the outer front piers, and the open oak door/furnished room are visible. Root reviewed actual 05b and the farther final 05 view and accepted for v2 movie.",
+  "process_ownership": "All owned Blender and Godot import/acceptance processes exited0 with active_processes0; the world worker owns the separate world checks, captures and movie.",
+  "model_calls": 0,
+  "main_world_script_writes": 0
+}

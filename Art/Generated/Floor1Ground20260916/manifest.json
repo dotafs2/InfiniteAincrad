@@ -1,0 +1,37 @@
+{
+  "id": "meadow_grass_albedo_v1",
+  "source": "Built-in imagegen; original game ground texture candidate",
+  "actual_px": [
+    1254,
+    1254
+  ],
+  "sha256": "bdc2ea4de4d2f3b0377b3df0f0e7ce4dd26afcca5e189f042f0d34432f96b38a",
+  "bytes": 2778137,
+  "mean_rgb": [
+    110.21364234131799,
+    133.06539965253137,
+    77.76303770518074
+  ],
+  "edge_lr_mean_abs_rgb": [
+    12.872408293460925,
+    11.855661881977671,
+    7.613237639553429
+  ],
+  "edge_tb_mean_abs_rgb": [
+    11.374003189792663,
+    10.309409888357257,
+    7.405103668261563
+  ],
+  "adjacent_horizontal_mean_abs_rgb": [
+    7.7324698236194855,
+    7.444627948744385,
+    4.799377188527439
+  ],
+  "intent": "Low-contrast anime-style meadow ground; original generated material image, not a screenshot",
+  "root_review": "Root viewed real1680x1080 eyeheight off/on, overhead and countryroad images. Approved0.22blend fordefaultcountrygrass: subtlepaintedstrokes, noobviousstrongcheckerboard inreviewedframes. Originaledge mismatch remains; no seamfree guarantee.",
+  "game_adoption": "Adopted as default0.22, retaining0 override; 212 default /209 fallback engine checks at adoption,233 current world checks after NW and sign.",
+  "source_retention": "Original retained in local Codex generated_images cache; this workspace copy is byte-identical.",
+  "prompt_summary": "Single opaque tileable painted meadow grass/soil albedo; top-down, flat diffuse, restrained sage/olive greens, small dry grass and earth gaps, no scene/horizon/UI/shadows. Requested1024px, actual1254px recorded.",
+  "actual_world_ab": "Art/Generated/Floor1Expanded20260916/meadow-texture-v11-ab/manifest.json",
+  "default_adoption_evidence": "Art/Generated/Floor1Expanded20260916/meadow-default-v11b/"
+}

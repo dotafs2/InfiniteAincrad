@@ -1,0 +1,72 @@
+{
+  "schema": "floor1-meadow-texture-controlled-ab-v11",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "default_mix": 0.0,
+  "selectable_trial_mix": 0.22,
+  "painted_tile_repeat_m": 2.0,
+  "source_art_path": "Art/Generated/Floor1Ground20260916/meadow_grass_albedo_v1.png",
+  "game_asset_path": "game/assets/floor1/ground_textures_20260916/meadow_grass_albedo_v1.png",
+  "source_and_game_sha256": "bdc2ea4de4d2f3b0377b3df0f0e7ce4dd26afcca5e189f042f0d34432f96b38a",
+  "source_bytes": 2778137,
+  "source_image_px": [
+    1254,
+    1254
+  ],
+  "imported_texture_px": [
+    1254,
+    1254
+  ],
+  "actual_import_image_has_mipmaps": true,
+  "sample_source_color": true,
+  "country_grass_only": true,
+  "town_roads_farms_unchanged": true,
+  "off_world_engine_checks": 203,
+  "off_world_engine_failures": 0,
+  "on_world_engine_checks": 206,
+  "on_world_engine_failures": 0,
+  "actual_world_png_px": [
+    1680,
+    1080
+  ],
+  "same_camera_pairs": [
+    {
+      "shot": "country_road_eye",
+      "same_camera_full_frame_mad_255": 0.8909424603174603,
+      "procedural_sha256": "d4e88404afd78f8d55cc9dc32a60eca80c91dddf30f2d7685d10d7053a76e138",
+      "mix022_sha256": "76d6748c05ab0f6fe98bca47a31ecb0eea4353015238c0700d28374a8c7d09f1",
+      "road_control_mad_255": 0.0,
+      "sky_control_mad_255": 0.0
+    },
+    {
+      "shot": "forest_bank_walk_eye",
+      "same_camera_full_frame_mad_255": 1.3502189888301,
+      "procedural_sha256": "b9eef5d6ac4eb4b967c4200af3ad27299df54af84ba25454f346abfd25afc06c",
+      "mix022_sha256": "7d3aae5666ef66b7c2914ee71a4a3550c75e69ace6936f358276e622376dd7bf"
+    },
+    {
+      "shot": "painted_tile_overhead",
+      "same_camera_full_frame_mad_255": 1.9531244488536155,
+      "procedural_sha256": "60f264f9a95f64536887eb34a1053d3154148688724e6260f1e9856aa733e5ec",
+      "mix022_sha256": "166275a481ac35d95eed2a8fe7bf87b0d5a7b4fd5195be77cae6350341d78180"
+    },
+    {
+      "shot": "painted_tile_eye",
+      "same_camera_full_frame_mad_255": 1.2402474647266315,
+      "procedural_sha256": "87e55d740a24d0c605e23e3f8a0a8a296b9a343592c30f1968320511dca2468d",
+      "mix022_sha256": "5c6734d30c644f4b6e21012b0092cf7e1a478070322c40996a0850feff5155f5",
+      "foreground_grass_mad_255": 2.635051051051051,
+      "sky_control_mad_255": 0.0
+    }
+  ],
+  "source_tile_edge_metrics": {
+    "left_right_edge_mad_255": 10.780435938330676,
+    "top_bottom_edge_mad_255": 9.696172248803828,
+    "left_neighbor_mad_255": 5.086656034024455,
+    "top_neighbor_mad_255": 3.648325358851675
+  },
+  "source_seam_status": "Edge mismatch exceeds adjacent-pixel differences; the bitmap is not proven seamless. At the limited 0.22 world mix the reviewed four captures have no prominent 2m checkerboard, but artist approval remains separate.",
+  "far_terrain_status": "Low painted detail improves near grass texture; broad countryside floor and visual-only distant maze remain unfinished.",
+  "performance_limit": "Captured frame_post_draw intervals include presentation, VSync and CPU waits, and this A/B does not prove a GPU speed change.",
+  "world_state_mutations": 0,
+  "model_calls": 0
+}

@@ -1,0 +1,2370 @@
+{
+  "check_count": 247,
+  "checks": [
+    {
+      "case": "scene_imported",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "world_script_loaded",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "continuous_extent",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "town_extent",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "twelve_modular_house_instances",
+      "detail": 12,
+      "passed": true
+    },
+    {
+      "case": "thirty_two_exterior_lod_houses",
+      "detail": 32,
+      "passed": true
+    },
+    {
+      "case": "selected_exterior_texture_tier",
+      "detail": "2k",
+      "passed": true
+    },
+    {
+      "case": "selectable_meadow_mix_actual_world_state",
+      "detail": 0.22,
+      "passed": true
+    },
+    {
+      "case": "painted_texture_affects_only_country_grass_not_town_patch",
+      "detail": {
+        "country_mix": 0.22,
+        "town_mix": 0.0
+      },
+      "passed": true
+    },
+    {
+      "case": "painted_meadow_1254px_actual_import",
+      "detail": [
+        1254,
+        1254
+      ],
+      "passed": true
+    },
+    {
+      "case": "painted_meadow_actual_import_has_mipmaps",
+      "detail": true,
+      "passed": true
+    },
+    {
+      "case": "country_shader_uses_one_imported_meadow_resource",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "all_32_exteriors_use_one_selected_texture_tier",
+      "detail": 32,
+      "passed": true
+    },
+    {
+      "case": "gate_at_north85",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "path_to_north230",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "four_distinct_farm_plots",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "grouped_residential_and_roadside_trees",
+      "detail": 158,
+      "passed": true
+    },
+    {
+      "case": "grouped_yard_and_field_edge_vegetation",
+      "detail": 359,
+      "passed": true
+    },
+    {
+      "case": "two_real_grounded_outer_ridge_collisions",
+      "detail": 2,
+      "passed": true
+    },
+    {
+      "case": "restrained_low_polygon_side_ridges",
+      "detail": 784,
+      "passed": true
+    },
+    {
+      "case": "side_ridges_gently_grounded_under_9m",
+      "detail": 8.36309443274764,
+      "passed": true
+    },
+    {
+      "case": "detached_sphere_hill_props_removed",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "grounded_ridge_crest_real_walk_surface_-1",
+      "detail": {
+        "collider": "PerimeterRidgeCollisionWest",
+        "hit": "(-178.0, 7.24144, -155.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "original_woodland_roots_stay_ground_level_-1_-120",
+      "detail": "(-136.0, -0.039999, -120.0)",
+      "passed": true
+    },
+    {
+      "case": "original_woodland_roots_stay_ground_level_-1_-200",
+      "detail": "(-136.0, -0.039999, -200.0)",
+      "passed": true
+    },
+    {
+      "case": "grounded_ridge_crest_real_walk_surface_1",
+      "detail": {
+        "collider": "PerimeterRidgeCollisionEast",
+        "hit": "(178.0, 8.098932, -155.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "original_woodland_roots_stay_ground_level_1_-120",
+      "detail": "(136.0, -0.039999, -120.0)",
+      "passed": true
+    },
+    {
+      "case": "original_woodland_roots_stay_ground_level_1_-200",
+      "detail": "(136.0, -0.039999, -200.0)",
+      "passed": true
+    },
+    {
+      "case": "one_real_near_west_forest_edge_bank_collision",
+      "detail": 1,
+      "passed": true
+    },
+    {
+      "case": "low_west_bank_actual_triangles",
+      "detail": 168,
+      "passed": true
+    },
+    {
+      "case": "west_bank_rises_only_about_one_metre",
+      "detail": 1.17685827913442,
+      "passed": true
+    },
+    {
+      "case": "west_forest_bank_stays_before_ground_edge_minus235",
+      "detail": "[P: (-69.0, 0.015, -229.0), S: (29.0, 1.176858, 25.0)]",
+      "passed": true
+    },
+    {
+      "case": "near_bank_crest_is_actual_walkable_surface",
+      "detail": {
+        "collider": "WestForestEdgeBankCollision",
+        "normal": "(-0.016421, 0.999626, 0.021868)",
+        "position": "(-56.0, 1.06153, -216.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "bank_fades_to_real_ground_-40_-216",
+      "detail": "(-40.0, 0.015, -216.0)",
+      "passed": true
+    },
+    {
+      "case": "bank_fades_to_real_ground_-69_-216",
+      "detail": "(-69.0, 0.015, -216.0)",
+      "passed": true
+    },
+    {
+      "case": "bank_fades_to_real_ground_-56_-204",
+      "detail": "(-56.0, 0.015, -204.0)",
+      "passed": true
+    },
+    {
+      "case": "bank_fades_to_real_ground_-56_-229",
+      "detail": "(-56.0, 0.015, -229.0)",
+      "passed": true
+    },
+    {
+      "case": "west_existing_grove_root_north_of_bank_unchanged",
+      "detail": "(-57.0, -0.04, -192.5)",
+      "passed": true
+    },
+    {
+      "case": "actual_walker_size_shelter_approach_over_west_bank_clear",
+      "detail": [
+        {
+          "collider": "ContinuousGroundCollision",
+          "contacts": [],
+          "surface_y": -0.0400001853704453,
+          "xz": "(-34.0, -211.0)"
+        },
+        {
+          "collider": "WestForestEdgeBankCollision",
+          "contacts": [],
+          "surface_y": 0.0149998664855957,
+          "xz": "(-40.0, -214.0)"
+        },
+        {
+          "collider": "WestForestEdgeBankCollision",
+          "contacts": [],
+          "surface_y": 0.60053014755249,
+          "xz": "(-45.0, -216.0)"
+        },
+        {
+          "collider": "WestForestEdgeBankCollision",
+          "contacts": [],
+          "surface_y": 1.06076812744141,
+          "xz": "(-50.0, -218.0)"
+        },
+        {
+          "collider": "WestForestEdgeBankCollision",
+          "contacts": [],
+          "surface_y": 1.14355993270874,
+          "xz": "(-55.0, -220.0)"
+        },
+        {
+          "collider": "WestForestEdgeBankCollision",
+          "contacts": [],
+          "surface_y": 0.808058738708496,
+          "xz": "(-60.0, -222.0)"
+        },
+        {
+          "collider": "WestForestEdgeBankCollision",
+          "contacts": [],
+          "surface_y": 0.306083679199219,
+          "xz": "(-65.0, -224.0)"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "north_sector_is_specific_added_ground_not_bounding_box_claim",
+      "detail": {
+        "addition": {
+          "x": [
+            -210,
+            85
+          ],
+          "z": [
+            -335,
+            -235
+          ]
+        },
+        "base": [
+          420,
+          460
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case": "north_sector_real_low_polygon_imported_mesh_and_true_collision",
+      "detail": {
+        "mesh_triangles": 340,
+        "reported": 340
+      },
+      "passed": true
+    },
+    {
+      "case": "north_sector_mesh_true_bounds_and_8_to_15m_rising_mass",
+      "detail": {
+        "aabb": "[P: (-210.0, -0.05, -335.0), S: (295.0, 13.17696, 100.0)]",
+        "max_h": 13.1269649116678
+      },
+      "passed": true
+    },
+    {
+      "case": "north_sector_old_ground_zero_height_seam_at_x_-200",
+      "detail": {
+        "collider": "ContinuousGroundCollision",
+        "position": "(-200.0, -0.039999, -235.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "north_sector_old_ground_zero_height_seam_at_x_-120",
+      "detail": {
+        "collider": "ContinuousGroundCollision",
+        "position": "(-120.0, -0.039999, -235.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "north_sector_old_ground_zero_height_seam_at_x_-50",
+      "detail": {
+        "collider": "ContinuousGroundCollision",
+        "position": "(-50.0, -0.039999, -235.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "north_sector_old_ground_zero_height_seam_at_x_-10",
+      "detail": {
+        "collider": "ContinuousGroundCollision",
+        "position": "(-10.0, -0.039999, -235.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "north_sector_old_ground_zero_height_seam_at_x_0",
+      "detail": {
+        "collider": "ContinuousGroundCollision",
+        "position": "(0.0, -0.039999, -235.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "north_sector_old_ground_zero_height_seam_at_x_10",
+      "detail": {
+        "collider": "ContinuousGroundCollision",
+        "position": "(10.0, -0.039999, -235.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "north_sector_old_ground_zero_height_seam_at_x_70",
+      "detail": {
+        "collider": "ContinuousGroundCollision",
+        "position": "(70.0, -0.039999, -235.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "north_sector_true_crest_walk_surface_-180",
+      "detail": {
+        "collider": "NorthwestSectorTerrainCollision",
+        "normal": "(0.030849, 0.993717, -0.10759)",
+        "position": "(-180.0, 11.35407, -310.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "north_sector_true_crest_walk_surface_-130",
+      "detail": {
+        "collider": "NorthwestSectorTerrainCollision",
+        "normal": "(0.13819, 0.990057, -0.026266)",
+        "position": "(-130.0, 9.108278, -310.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "north_sector_true_crest_walk_surface_-90",
+      "detail": {
+        "collider": "NorthwestSectorTerrainCollision",
+        "normal": "(-0.057485, 0.998286, 0.010941)",
+        "position": "(-90.0, 10.8697, -310.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "visible_five_metre_path_crosses_original_minus235_edge",
+      "detail": "[P: (-2.5, 0.0, -19.5), S: (5.0, 0.0, 39.0)]",
+      "passed": true
+    },
+    {
+      "case": "real_0_32_by_1_80_walker_main_axis_old_to_new_sector_clear",
+      "detail": [
+        {
+          "collider": "ContinuousGroundCollision",
+          "contacts": [],
+          "floor_y": -0.0399992316961288,
+          "xz": "(0.0, -225.0)"
+        },
+        {
+          "collider": "ContinuousGroundCollision",
+          "contacts": [],
+          "floor_y": -0.0399992316961288,
+          "xz": "(0.0, -232.0)"
+        },
+        {
+          "collider": "ContinuousGroundCollision",
+          "contacts": [],
+          "floor_y": -0.0399992316961288,
+          "xz": "(0.0, -235.0)"
+        },
+        {
+          "collider": "NorthwestSectorTerrainCollision",
+          "contacts": [],
+          "floor_y": 0.0,
+          "xz": "(0.0, -245.0)"
+        },
+        {
+          "collider": "NorthwestSectorTerrainCollision",
+          "contacts": [],
+          "floor_y": 0.0,
+          "xz": "(0.0, -260.0)"
+        },
+        {
+          "collider": "NorthwestSectorTerrainCollision",
+          "contacts": [],
+          "floor_y": -0.0000019073486328125,
+          "xz": "(0.0, -267.0)"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "real_0_32_by_1_80_walker_can_climb_sampled_north_ridge",
+      "detail": [
+        {
+          "collider": "NorthwestSectorTerrainCollision",
+          "contacts": [],
+          "floor_y": -0.0437469482421875,
+          "xz": "(-105.0, -236.0)"
+        },
+        {
+          "collider": "NorthwestSectorTerrainCollision",
+          "contacts": [],
+          "floor_y": 0.0334682464599609,
+          "xz": "(-105.0, -251.0)"
+        },
+        {
+          "collider": "NorthwestSectorTerrainCollision",
+          "contacts": [],
+          "floor_y": 2.20523071289063,
+          "xz": "(-105.0, -268.0)"
+        },
+        {
+          "collider": "NorthwestSectorTerrainCollision",
+          "contacts": [],
+          "floor_y": 4.92150497436523,
+          "xz": "(-105.0, -282.0)"
+        },
+        {
+          "collider": "NorthwestSectorTerrainCollision",
+          "contacts": [],
+          "floor_y": 7.60725021362305,
+          "xz": "(-105.0, -295.0)"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "exactly_24_grouped_original_kit_forestline_trees_only_on_new_slope",
+      "detail": {
+        "count": 24,
+        "reported": 24
+      },
+      "passed": true
+    },
+    {
+      "case": "all_24_new_tree_pivots_sample_real_collision_triangle_heights",
+      "detail": [
+        {
+          "actual_mesh_surface_y": 6.73998832702637,
+          "delta_y": 0.0000295639038085938,
+          "name": "NorthSectorForestLineTree00",
+          "parent_y": 6.73995876312256
+        },
+        {
+          "actual_mesh_surface_y": 8.84309959411621,
+          "delta_y": 0.0000247955322265625,
+          "name": "NorthSectorForestLineTree01",
+          "parent_y": 8.84307479858398
+        },
+        {
+          "actual_mesh_surface_y": 10.5508375167847,
+          "delta_y": 0.00000762939453125,
+          "name": "NorthSectorForestLineTree02",
+          "parent_y": 10.5508451461792
+        },
+        {
+          "actual_mesh_surface_y": 11.230658531189,
+          "delta_y": 0.0000209808349609375,
+          "name": "NorthSectorForestLineTree03",
+          "parent_y": 11.2306795120239
+        },
+        {
+          "actual_mesh_surface_y": 11.8509654998779,
+          "delta_y": 0.0000200271606445313,
+          "name": "NorthSectorForestLineTree04",
+          "parent_y": 11.8509454727173
+        },
+        {
+          "actual_mesh_surface_y": 6.59582710266113,
+          "delta_y": 0.0000400543212890625,
+          "name": "NorthSectorForestLineTree05",
+          "parent_y": 6.59578704833984
+        },
+        {
+          "actual_mesh_surface_y": 10.4613056182861,
+          "delta_y": 0.0000286102294921875,
+          "name": "NorthSectorForestLineTree06",
+          "parent_y": 10.4613342285156
+        },
+        {
+          "actual_mesh_surface_y": 12.9368553161621,
+          "delta_y": 0.0000238418579101563,
+          "name": "NorthSectorForestLineTree07",
+          "parent_y": 12.9368314743042
+        },
+        {
+          "actual_mesh_surface_y": 8.6588077545166,
+          "delta_y": 0.0000209808349609375,
+          "name": "NorthSectorForestLineTree08",
+          "parent_y": 8.65878677368164
+        },
+        {
+          "actual_mesh_surface_y": 9.08799457550049,
+          "delta_y": 0.00000476837158203125,
+          "name": "NorthSectorForestLineTree09",
+          "parent_y": 9.08799934387207
+        },
+        {
+          "actual_mesh_surface_y": 8.36854934692383,
+          "delta_y": 0.0000295639038085938,
+          "name": "NorthSectorForestLineTree10",
+          "parent_y": 8.36857891082764
+        },
+        {
+          "actual_mesh_surface_y": 11.8942527770996,
+          "delta_y": 0.00000095367431640625,
+          "name": "NorthSectorForestLineTree11",
+          "parent_y": 11.8942518234253
+        },
+        {
+          "actual_mesh_surface_y": 4.78198432922363,
+          "delta_y": 0.0000224113464355469,
+          "name": "NorthSectorForestLineTree12",
+          "parent_y": 4.7819619178772
+        },
+        {
+          "actual_mesh_surface_y": 6.68709373474121,
+          "delta_y": 0.0000109672546386719,
+          "name": "NorthSectorForestLineTree13",
+          "parent_y": 6.68708276748657
+        },
+        {
+          "actual_mesh_surface_y": 8.99812126159668,
+          "delta_y": 0.00000476837158203125,
+          "name": "NorthSectorForestLineTree14",
+          "parent_y": 8.99812602996826
+        },
+        {
+          "actual_mesh_surface_y": 8.56631278991699,
+          "delta_y": 0.000019073486328125,
+          "name": "NorthSectorForestLineTree15",
+          "parent_y": 8.56629371643066
+        },
+        {
+          "actual_mesh_surface_y": 8.9415168762207,
+          "delta_y": 0.00000667572021484375,
+          "name": "NorthSectorForestLineTree16",
+          "parent_y": 8.94151020050049
+        },
+        {
+          "actual_mesh_surface_y": 11.0316505432129,
+          "delta_y": 0.0000324249267578125,
+          "name": "NorthSectorForestLineTree17",
+          "parent_y": 11.0316829681396
+        },
+        {
+          "actual_mesh_surface_y": 9.46043872833252,
+          "delta_y": 0.0000162124633789063,
+          "name": "NorthSectorForestLineTree18",
+          "parent_y": 9.4604549407959
+        },
+        {
+          "actual_mesh_surface_y": 9.90997886657715,
+          "delta_y": 0.0,
+          "name": "NorthSectorForestLineTree19",
+          "parent_y": 9.90997886657715
+        },
+        {
+          "actual_mesh_surface_y": 6.85265922546387,
+          "delta_y": 0.00000143051147460938,
+          "name": "NorthSectorForestLineTree20",
+          "parent_y": 6.85266065597534
+        },
+        {
+          "actual_mesh_surface_y": 7.23835372924805,
+          "delta_y": 0.00000715255737304688,
+          "name": "NorthSectorForestLineTree21",
+          "parent_y": 7.23836088180542
+        },
+        {
+          "actual_mesh_surface_y": 10.242654800415,
+          "delta_y": 0.0000209808349609375,
+          "name": "NorthSectorForestLineTree22",
+          "parent_y": 10.24267578125
+        },
+        {
+          "actual_mesh_surface_y": 8.13430976867676,
+          "delta_y": 0.0000057220458984375,
+          "name": "NorthSectorForestLineTree23",
+          "parent_y": 8.13430404663086
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "native_t2_oak_trial_is_exactly_one_only_when_requested",
+      "detail": {
+        "instances": 1,
+        "requested": true
+      },
+      "passed": true
+    },
+    {
+      "case": "native_t2_oak_trial_root_samples_real_nw_ground_surface",
+      "detail": {
+        "actual_ground": "(-55.0, 2.373886, -275.0)",
+        "parent": "(-55.0, 2.373898, -275.0)"
+      },
+      "passed": true
+    },
+    {
+      "case": "native_t2_oak_trial_is_separate_asset_not_approved_courtyard_100k",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "native_t2_oak_trial_real_imported_14783_triangles",
+      "detail": {
+        "surfaces": 1,
+        "tris": 14783
+      },
+      "passed": true
+    },
+    {
+      "case": "native_t2_oak_trial_true_visual_7_2m_root_and_crown_bounds",
+      "detail": {
+        "high": "(-51.37878, 9.573898, -271.987)",
+        "low": "(-58.62122, 2.373898, -278.0413)"
+      },
+      "passed": true
+    },
+    {
+      "case": "native_t2_oak_trial_only_trunk_proxy_blocks",
+      "detail": "NativeT2OakTrunkOnlyCollision",
+      "passed": true
+    },
+    {
+      "case": "native_t2_oak_trial_main_road_path_clear",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "native_nw_grove_is_bounded_default_off_or_exactly_nine_additions",
+      "detail": {
+        "additional": 0,
+        "approved_focal": 1,
+        "requested": false
+      },
+      "passed": true
+    },
+    {
+      "case": "exactly_one_approved_100k_courtyard_oak",
+      "detail": {
+        "metrics": 1,
+        "nodes": 1
+      },
+      "passed": true
+    },
+    {
+      "case": "oak_authored_in_west_residential_garden",
+      "detail": "(-24.8, 0.0, 16.8)",
+      "passed": true
+    },
+    {
+      "case": "oak_imported_approved_asset_only",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "oak_actual_imported_meshes_present",
+      "detail": 1,
+      "passed": true
+    },
+    {
+      "case": "oak_reported_100k_triangles_are_real_imported_geometry",
+      "detail": 100000,
+      "passed": true
+    },
+    {
+      "case": "oak_actual_visual_height_8_5m",
+      "detail": {
+        "height": 8.5,
+        "max": "(-20.48352, 8.5, 19.56046)",
+        "min": "(-29.0995, 0.0, 13.97706)"
+      },
+      "passed": true
+    },
+    {
+      "case": "oak_visual_roots_touch_residential_ground",
+      "detail": 0.0,
+      "passed": true
+    },
+    {
+      "case": "oak_crown_clear_of_two_neighboring_house_footprints",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "courtyard_oak_trunk_only_proxy_blocks",
+      "detail": "CourtyardOakTrunkOnlyCollision",
+      "passed": true
+    },
+    {
+      "case": "real_walker_capsule_lane_to_oak_garden_access_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "ground_z75.0",
+      "detail": "(0.0, -0.04, 75.0)",
+      "passed": true
+    },
+    {
+      "case": "ground_z52.0",
+      "detail": "(0.0, -0.04, 52.0)",
+      "passed": true
+    },
+    {
+      "case": "ground_z12.0",
+      "detail": "(0.0, -0.04, 12.0)",
+      "passed": true
+    },
+    {
+      "case": "ground_z0.0",
+      "detail": "(0.0, -0.04, 0.0)",
+      "passed": true
+    },
+    {
+      "case": "ground_z-20.0",
+      "detail": "(0.0, -0.04, -20.0)",
+      "passed": true
+    },
+    {
+      "case": "ground_z-55.0",
+      "detail": "(0.0, -0.04, -55.0)",
+      "passed": true
+    },
+    {
+      "case": "ground_z-80.0",
+      "detail": "(0.0, -0.04, -80.0)",
+      "passed": true
+    },
+    {
+      "case": "ground_z-86.0",
+      "detail": "(0.0, -0.04, -86.0)",
+      "passed": true
+    },
+    {
+      "case": "ground_z-120.0",
+      "detail": "(0.0, -0.04, -120.0)",
+      "passed": true
+    },
+    {
+      "case": "ground_z-180.0",
+      "detail": "(0.0, -0.04, -180.0)",
+      "passed": true
+    },
+    {
+      "case": "ground_z-225.0",
+      "detail": "(0.0, -0.04, -225.0)",
+      "passed": true
+    },
+    {
+      "case": "ground_z-230.0",
+      "detail": "(0.0, -0.04, -230.0)",
+      "passed": true
+    },
+    {
+      "case": "main_walk_clear_z52.0",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "main_walk_clear_z0.0",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "main_walk_clear_z-20.0",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "main_walk_clear_z-55.0",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "main_walk_clear_z-83.0",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "main_walk_clear_z-87.0",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "main_walk_clear_z-120.0",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "main_walk_clear_z-180.0",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "fountain_basin_real_collision",
+      "detail": "ReviewedFountainBasinCollision",
+      "passed": true
+    },
+    {
+      "case": "plaza_bench_physical_-11.25",
+      "detail": "PlazaBenchProxy-1",
+      "passed": true
+    },
+    {
+      "case": "plaza_bench_physical_11.25",
+      "detail": "PlazaBenchProxy1",
+      "passed": true
+    },
+    {
+      "case": "residential_yard_seat_physical_-1",
+      "detail": "ResidenceGardenSeat-1_18Collision",
+      "passed": true
+    },
+    {
+      "case": "country_verge_rail_physical_-1",
+      "detail": "CountryHedgeRail-1_-122Collision",
+      "passed": true
+    },
+    {
+      "case": "residential_yard_seat_physical_1",
+      "detail": "ResidenceGardenSeat1_18Collision",
+      "passed": true
+    },
+    {
+      "case": "country_verge_rail_physical_1",
+      "detail": "CountryHedgeRail1_-122Collision",
+      "passed": true
+    },
+    {
+      "case": "grove_path_centreline_still_clear_-122",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "grove_path_centreline_still_clear_-163",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "grove_path_centreline_still_clear_-196",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "north_gate_capsule_centreline",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "gate_width_x-2.1",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "gate_width_x-1.7",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "gate_width_x-0.9",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "gate_width_x0.0",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "gate_width_x0.9",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "gate_width_x1.7",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "gate_width_x2.1",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "lane_floor_-1_42",
+      "detail": "(-35.0, -0.04, 42.0)",
+      "passed": true
+    },
+    {
+      "case": "lane_walk_-1_42",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "lane_floor_-1_0",
+      "detail": "(-35.0, -0.04, 0.0)",
+      "passed": true
+    },
+    {
+      "case": "lane_walk_-1_0",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "lane_floor_-1_-35",
+      "detail": "(-35.0, -0.04, -35.0)",
+      "passed": true
+    },
+    {
+      "case": "lane_walk_-1_-35",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "lane_floor_1_42",
+      "detail": "(35.0, -0.04, 42.0)",
+      "passed": true
+    },
+    {
+      "case": "lane_walk_1_42",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "lane_floor_1_0",
+      "detail": "(35.0, -0.04, 0.0)",
+      "passed": true
+    },
+    {
+      "case": "lane_walk_1_0",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "lane_floor_1_-35",
+      "detail": "(35.0, -0.04, -35.0)",
+      "passed": true
+    },
+    {
+      "case": "lane_walk_1_-35",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "building_footprints_do_not_overlap",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_01_01_hearth_cottage_real_doorway",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_01_01_hearth_cottage_lane_to_door_approach_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_01_01_hearth_cottage_closed_door_blocks",
+      "detail": "DoorCollision",
+      "passed": true
+    },
+    {
+      "case": "Modular_01_01_hearth_cottage_closed_actual_walker_capsule_blocks",
+      "detail": [
+        "DoorCollision"
+      ],
+      "passed": true
+    },
+    {
+      "case": "Modular_01_01_hearth_cottage_open_door_ray_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_01_01_hearth_cottage_open_actual_walker_capsule_route_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_01_01_hearth_cottage_F_selects_actual_rear_window_house",
+      "detail": {
+        "sample": "(-20.1, 0.92, 33.66667)",
+        "selected": "Modular_01_01_hearth_cottage"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_01_01_hearth_cottage_actual_F_interaction_opens_selected_house_windows",
+      "detail": {
+        "sample": "(-20.1, 0.92, 33.66667)",
+        "selected": "Modular_01_01_hearth_cottage"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_01_01_hearth_cottage_actual_F_interaction_closes_selected_house_windows",
+      "detail": "(-20.1, 0.92, 33.66667)",
+      "passed": true
+    },
+    {
+      "case": "first_window_opens",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "first_window_closes",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_02_02_market_house_real_doorway",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_02_02_market_house_lane_to_door_approach_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_02_02_market_house_closed_door_blocks",
+      "detail": "DoorCollision",
+      "passed": true
+    },
+    {
+      "case": "Modular_02_02_market_house_closed_actual_walker_capsule_blocks",
+      "detail": [
+        "DoorCollision"
+      ],
+      "passed": true
+    },
+    {
+      "case": "Modular_02_02_market_house_open_door_ray_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_02_02_market_house_open_actual_walker_capsule_route_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_02_02_market_house_F_selects_actual_rear_window_house",
+      "detail": {
+        "sample": "(-50.9, 0.92, 44.03333)",
+        "selected": "Modular_02_02_market_house"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_03_02_market_house_real_doorway",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_03_02_market_house_lane_to_door_approach_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_03_02_market_house_closed_door_blocks",
+      "detail": "DoorCollision",
+      "passed": true
+    },
+    {
+      "case": "Modular_03_02_market_house_closed_actual_walker_capsule_blocks",
+      "detail": [
+        "DoorCollision"
+      ],
+      "passed": true
+    },
+    {
+      "case": "Modular_03_02_market_house_open_door_ray_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_03_02_market_house_open_actual_walker_capsule_route_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_03_02_market_house_F_selects_actual_rear_window_house",
+      "detail": {
+        "sample": "(-19.1, 0.92, -1.033333)",
+        "selected": "Modular_03_02_market_house"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_03_02_market_house_actual_F_interaction_opens_selected_house_windows",
+      "detail": {
+        "sample": "(-19.1, 0.92, -1.033333)",
+        "selected": "Modular_03_02_market_house"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_03_02_market_house_actual_F_interaction_closes_selected_house_windows",
+      "detail": "(-19.1, 0.92, -1.033333)",
+      "passed": true
+    },
+    {
+      "case": "Modular_04_03_corner_turret_real_doorway",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_04_03_corner_turret_lane_to_door_approach_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_04_03_corner_turret_closed_door_blocks",
+      "detail": "DoorCollision",
+      "passed": true
+    },
+    {
+      "case": "Modular_04_03_corner_turret_closed_actual_walker_capsule_blocks",
+      "detail": [
+        "DoorCollision"
+      ],
+      "passed": true
+    },
+    {
+      "case": "Modular_04_03_corner_turret_open_door_ray_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_04_03_corner_turret_open_actual_walker_capsule_route_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_04_03_corner_turret_F_selects_actual_rear_window_house",
+      "detail": {
+        "sample": "(-49.9, 0.92, 8.0)",
+        "selected": "Modular_04_03_corner_turret"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_04_03_corner_turret_F_selects_actual_side_window_house",
+      "detail": {
+        "sample": "(-44.33333, 0.92, 13.4)",
+        "selected": "Modular_04_03_corner_turret"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_05_03_corner_turret_real_doorway",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_05_03_corner_turret_lane_to_door_approach_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_05_03_corner_turret_closed_door_blocks",
+      "detail": "DoorCollision",
+      "passed": true
+    },
+    {
+      "case": "Modular_05_03_corner_turret_closed_actual_walker_capsule_blocks",
+      "detail": [
+        "DoorCollision"
+      ],
+      "passed": true
+    },
+    {
+      "case": "Modular_05_03_corner_turret_open_door_ray_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_05_03_corner_turret_open_actual_walker_capsule_route_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_05_03_corner_turret_F_selects_actual_rear_window_house",
+      "detail": {
+        "sample": "(-20.1, 0.92, -59.0)",
+        "selected": "Modular_05_03_corner_turret"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_05_03_corner_turret_F_selects_actual_side_window_house",
+      "detail": {
+        "sample": "(-25.66667, 0.92, -64.4)",
+        "selected": "Modular_05_03_corner_turret"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_06_01_hearth_cottage_real_doorway",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_06_01_hearth_cottage_lane_to_door_approach_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_06_01_hearth_cottage_closed_door_blocks",
+      "detail": "DoorCollision",
+      "passed": true
+    },
+    {
+      "case": "Modular_06_01_hearth_cottage_closed_actual_walker_capsule_blocks",
+      "detail": [
+        "DoorCollision"
+      ],
+      "passed": true
+    },
+    {
+      "case": "Modular_06_01_hearth_cottage_open_door_ray_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_06_01_hearth_cottage_open_actual_walker_capsule_route_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_06_01_hearth_cottage_F_selects_actual_rear_window_house",
+      "detail": {
+        "sample": "(-49.9, 0.92, -28.66667)",
+        "selected": "Modular_06_01_hearth_cottage"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_07_01_hearth_cottage_real_doorway",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_07_01_hearth_cottage_lane_to_door_approach_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_07_01_hearth_cottage_closed_door_blocks",
+      "detail": "DoorCollision",
+      "passed": true
+    },
+    {
+      "case": "Modular_07_01_hearth_cottage_closed_actual_walker_capsule_blocks",
+      "detail": [
+        "DoorCollision"
+      ],
+      "passed": true
+    },
+    {
+      "case": "Modular_07_01_hearth_cottage_open_door_ray_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_07_01_hearth_cottage_open_actual_walker_capsule_route_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_07_01_hearth_cottage_F_selects_actual_rear_window_house",
+      "detail": {
+        "sample": "(20.1, 0.92, 36.33333)",
+        "selected": "Modular_07_01_hearth_cottage"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_08_02_market_house_real_doorway",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_08_02_market_house_lane_to_door_approach_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_08_02_market_house_closed_door_blocks",
+      "detail": "DoorCollision",
+      "passed": true
+    },
+    {
+      "case": "Modular_08_02_market_house_closed_actual_walker_capsule_blocks",
+      "detail": [
+        "DoorCollision"
+      ],
+      "passed": true
+    },
+    {
+      "case": "Modular_08_02_market_house_open_door_ray_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_08_02_market_house_open_actual_walker_capsule_route_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_08_02_market_house_F_selects_actual_rear_window_house",
+      "detail": {
+        "sample": "(50.9, 0.92, 41.96667)",
+        "selected": "Modular_08_02_market_house"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_09_02_market_house_real_doorway",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_09_02_market_house_lane_to_door_approach_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_09_02_market_house_closed_door_blocks",
+      "detail": "DoorCollision",
+      "passed": true
+    },
+    {
+      "case": "Modular_09_02_market_house_closed_actual_walker_capsule_blocks",
+      "detail": [
+        "DoorCollision"
+      ],
+      "passed": true
+    },
+    {
+      "case": "Modular_09_02_market_house_open_door_ray_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_09_02_market_house_open_actual_walker_capsule_route_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_09_02_market_house_F_selects_actual_rear_window_house",
+      "detail": {
+        "sample": "(19.1, 0.92, 1.033334)",
+        "selected": "Modular_09_02_market_house"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_10_03_corner_turret_real_doorway",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_10_03_corner_turret_lane_to_door_approach_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_10_03_corner_turret_closed_door_blocks",
+      "detail": "DoorCollision",
+      "passed": true
+    },
+    {
+      "case": "Modular_10_03_corner_turret_closed_actual_walker_capsule_blocks",
+      "detail": [
+        "DoorCollision"
+      ],
+      "passed": true
+    },
+    {
+      "case": "Modular_10_03_corner_turret_open_door_ray_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_10_03_corner_turret_open_actual_walker_capsule_route_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_10_03_corner_turret_F_selects_actual_rear_window_house",
+      "detail": {
+        "sample": "(49.9, 0.92, 8.0)",
+        "selected": "Modular_10_03_corner_turret"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_10_03_corner_turret_F_selects_actual_side_window_house",
+      "detail": {
+        "sample": "(44.33333, 0.92, 2.6)",
+        "selected": "Modular_10_03_corner_turret"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_11_03_corner_turret_real_doorway",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_11_03_corner_turret_lane_to_door_approach_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_11_03_corner_turret_closed_door_blocks",
+      "detail": "DoorCollision",
+      "passed": true
+    },
+    {
+      "case": "Modular_11_03_corner_turret_closed_actual_walker_capsule_blocks",
+      "detail": [
+        "DoorCollision"
+      ],
+      "passed": true
+    },
+    {
+      "case": "Modular_11_03_corner_turret_open_door_ray_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_11_03_corner_turret_open_actual_walker_capsule_route_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_11_03_corner_turret_F_selects_actual_rear_window_house",
+      "detail": {
+        "sample": "(20.1, 0.92, -59.0)",
+        "selected": "Modular_11_03_corner_turret"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_11_03_corner_turret_F_selects_actual_side_window_house",
+      "detail": {
+        "sample": "(25.66667, 0.92, -53.6)",
+        "selected": "Modular_11_03_corner_turret"
+      },
+      "passed": true
+    },
+    {
+      "case": "Modular_12_01_hearth_cottage_real_doorway",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "Modular_12_01_hearth_cottage_lane_to_door_approach_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_12_01_hearth_cottage_closed_door_blocks",
+      "detail": "DoorCollision",
+      "passed": true
+    },
+    {
+      "case": "Modular_12_01_hearth_cottage_closed_actual_walker_capsule_blocks",
+      "detail": [
+        "DoorCollision"
+      ],
+      "passed": true
+    },
+    {
+      "case": "Modular_12_01_hearth_cottage_open_door_ray_clear",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "Modular_12_01_hearth_cottage_open_actual_walker_capsule_route_clear",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "Modular_12_01_hearth_cottage_F_selects_actual_rear_window_house",
+      "detail": {
+        "sample": "(49.9, 0.92, -31.33333)",
+        "selected": "Modular_12_01_hearth_cottage"
+      },
+      "passed": true
+    },
+    {
+      "case": "three_dedicated_ground_floor_inserts",
+      "detail": [
+        {
+          "bakery_exterior_sign": false,
+          "ground_floor_only": true,
+          "kind": "home",
+          "local_shadow_lights": 1,
+          "prop_instances": 57,
+          "removable_floor": true,
+          "solid_proxies": 4,
+          "variant": "01_hearth_cottage",
+          "workshop_assets": []
+        },
+        {
+          "bakery_exterior_sign": true,
+          "ground_floor_only": true,
+          "kind": "bakery",
+          "local_shadow_lights": 1,
+          "prop_instances": 57,
+          "removable_floor": true,
+          "solid_proxies": 6,
+          "variant": "02_market_house",
+          "workshop_assets": [
+            "bakers_oven_peel_rack",
+            "grain_hand_quern"
+          ]
+        },
+        {
+          "bakery_exterior_sign": false,
+          "ground_floor_only": true,
+          "kind": "artisan",
+          "local_shadow_lights": 1,
+          "prop_instances": 47,
+          "removable_floor": true,
+          "solid_proxies": 4,
+          "variant": "03_corner_turret",
+          "workshop_assets": [
+            "forge_with_bellows",
+            "horn_anvil_stump"
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "furnished_01_hearth_cottage_direct_child_and_ground_floor_only",
+      "detail": {
+        "bakery_exterior_sign": false,
+        "ground_floor_only": true,
+        "kind": "home",
+        "local_shadow_lights": 1,
+        "prop_instances": 57,
+        "removable_floor": true,
+        "solid_proxies": 4,
+        "variant": "01_hearth_cottage",
+        "workshop_assets": []
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_01_hearth_cottage_variant_layout_and_real_props",
+      "detail": {
+        "bakery_exterior_sign": false,
+        "ground_floor_only": true,
+        "kind": "home",
+        "local_shadow_lights": 1,
+        "prop_instances": 57,
+        "removable_floor": true,
+        "solid_proxies": 4,
+        "variant": "01_hearth_cottage",
+        "workshop_assets": []
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_01_hearth_cottage_one_original_local_light_actual_energy_range_shadows",
+      "detail": {
+        "energy": 0.800000011920929,
+        "lights": 1,
+        "range": 4.59999990463257
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_01_hearth_cottage_real_independent_caged_lantern_and_period_mount_in_world",
+      "detail": {
+        "lantern": "TC_caged_travel_lantern"
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_01_hearth_cottage_no_bakery_exterior_sign_on_other_home",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "furnished_01_hearth_cottage_actual_walker_capsule_door_to_room_route",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "furnished_02_market_house_direct_child_and_ground_floor_only",
+      "detail": {
+        "bakery_exterior_sign": true,
+        "ground_floor_only": true,
+        "kind": "bakery",
+        "local_shadow_lights": 1,
+        "prop_instances": 57,
+        "removable_floor": true,
+        "solid_proxies": 6,
+        "variant": "02_market_house",
+        "workshop_assets": [
+          "bakers_oven_peel_rack",
+          "grain_hand_quern"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_02_market_house_variant_layout_and_real_props",
+      "detail": {
+        "bakery_exterior_sign": true,
+        "ground_floor_only": true,
+        "kind": "bakery",
+        "local_shadow_lights": 1,
+        "prop_instances": 57,
+        "removable_floor": true,
+        "solid_proxies": 6,
+        "variant": "02_market_house",
+        "workshop_assets": [
+          "bakers_oven_peel_rack",
+          "grain_hand_quern"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_02_market_house_one_original_local_light_actual_energy_range_shadows",
+      "detail": {
+        "energy": 0.800000011920929,
+        "lights": 1,
+        "range": 4.59999990463257
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_02_market_house_real_independent_caged_lantern_and_period_mount_in_world",
+      "detail": {
+        "lantern": "TC_caged_travel_lantern"
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_02_market_house_unique_actual_bakery_exterior_identity_mesh_by_real_door",
+      "detail": {
+        "local": "(-2.35, 2.68, 4.62)",
+        "sign": "BakeryExteriorSign"
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_02_market_house_actual_walker_capsule_door_to_room_route",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "furnished_03_corner_turret_direct_child_and_ground_floor_only",
+      "detail": {
+        "bakery_exterior_sign": false,
+        "ground_floor_only": true,
+        "kind": "artisan",
+        "local_shadow_lights": 1,
+        "prop_instances": 47,
+        "removable_floor": true,
+        "solid_proxies": 4,
+        "variant": "03_corner_turret",
+        "workshop_assets": [
+          "forge_with_bellows",
+          "horn_anvil_stump"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_03_corner_turret_variant_layout_and_real_props",
+      "detail": {
+        "bakery_exterior_sign": false,
+        "ground_floor_only": true,
+        "kind": "artisan",
+        "local_shadow_lights": 1,
+        "prop_instances": 47,
+        "removable_floor": true,
+        "solid_proxies": 4,
+        "variant": "03_corner_turret",
+        "workshop_assets": [
+          "forge_with_bellows",
+          "horn_anvil_stump"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_03_corner_turret_one_original_local_light_actual_energy_range_shadows",
+      "detail": {
+        "energy": 0.800000011920929,
+        "lights": 1,
+        "range": 4.59999990463257
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_03_corner_turret_real_independent_caged_lantern_and_period_mount_in_world",
+      "detail": {
+        "lantern": "TC_caged_travel_lantern"
+      },
+      "passed": true
+    },
+    {
+      "case": "furnished_03_corner_turret_no_bakery_exterior_sign_on_other_home",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "furnished_03_corner_turret_actual_walker_capsule_door_to_room_route",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "one_of_each_furnished_variant",
+      "detail": [
+        "01_hearth_cottage",
+        "02_market_house",
+        "03_corner_turret"
+      ],
+      "passed": true
+    },
+    {
+      "case": "same_variant_instances_independent",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "v2_camera_tour_60s_route_is_one_real_scene_without_cut",
+      "detail": {
+        "duration_s": 60.0,
+        "keys": 19
+      },
+      "passed": true
+    },
+    {
+      "case": "v2_camera_centreline_uses_actual_furnished_bakery_door_manifest",
+      "detail": "(-29.0, 1.1, -0.9)",
+      "passed": true
+    },
+    {
+      "case": "v2_bakery_imported_shopbay_real_mesh_present",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "case": "v2_real_imported_shopbay_visual_mesh_does_not_cross_door_centreline",
+      "detail": "clear",
+      "passed": true
+    },
+    {
+      "case": "v2_camera_60s_all_241_quarter_second_samples_clear_of_solid_collision",
+      "detail": [],
+      "passed": true
+    },
+    {
+      "case": "v2_staged_real_door_recloses_after_camera_exits",
+      "detail": null,
+      "passed": true
+    }
+  ],
+  "failure_count": 0,
+  "failures": [],
+  "layout": {
+    "approved_courtyard_oak_display_height_m": 8.5,
+    "approved_courtyard_oak_instances": 1,
+    "approved_courtyard_oak_site_m": "(-24.8, 0.0, 16.8)",
+    "building_layout": [
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_01_01_hearth_cottage",
+        "role": "interactive",
+        "variant": "01_hearth_cottage",
+        "x": -24.5,
+        "yaw_deg": -90.0,
+        "z": 35.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_02_02_market_house",
+        "role": "interactive",
+        "variant": "02_market_house",
+        "x": -45.5,
+        "yaw_deg": 90.0,
+        "z": 43.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_03_02_market_house",
+        "role": "interactive",
+        "variant": "02_market_house",
+        "x": -24.5,
+        "yaw_deg": -90.0,
+        "z": 0.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_04_03_corner_turret",
+        "role": "interactive",
+        "variant": "03_corner_turret",
+        "x": -45.5,
+        "yaw_deg": 90.0,
+        "z": 8.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_05_03_corner_turret",
+        "role": "interactive",
+        "variant": "03_corner_turret",
+        "x": -24.5,
+        "yaw_deg": -90.0,
+        "z": -59.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_06_01_hearth_cottage",
+        "role": "interactive",
+        "variant": "01_hearth_cottage",
+        "x": -45.5,
+        "yaw_deg": 90.0,
+        "z": -30.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_07_01_hearth_cottage",
+        "role": "interactive",
+        "variant": "01_hearth_cottage",
+        "x": 24.5,
+        "yaw_deg": 90.0,
+        "z": 35.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_08_02_market_house",
+        "role": "interactive",
+        "variant": "02_market_house",
+        "x": 45.5,
+        "yaw_deg": -90.0,
+        "z": 43.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_09_02_market_house",
+        "role": "interactive",
+        "variant": "02_market_house",
+        "x": 24.5,
+        "yaw_deg": 90.0,
+        "z": 0.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_10_03_corner_turret",
+        "role": "interactive",
+        "variant": "03_corner_turret",
+        "x": 45.5,
+        "yaw_deg": -90.0,
+        "z": 8.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_11_03_corner_turret",
+        "role": "interactive",
+        "variant": "03_corner_turret",
+        "x": 24.5,
+        "yaw_deg": 90.0,
+        "z": -59.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_12_01_hearth_cottage",
+        "role": "interactive",
+        "variant": "01_hearth_cottage",
+        "x": 45.5,
+        "yaw_deg": -90.0,
+        "z": -30.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_01_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -14.1999998092651,
+        "yaw_deg": 92.9999923706055,
+        "z": 26.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_02_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -15.0,
+        "yaw_deg": 87.4999923706055,
+        "z": 12.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_03_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -13.8999996185303,
+        "yaw_deg": 90.9999923706055,
+        "z": -8.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_04_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -15.3999996185303,
+        "yaw_deg": 85.9999923706055,
+        "z": -26.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_05_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -14.3000001907349,
+        "yaw_deg": 91.9999923706055,
+        "z": -44.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_06_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -52.0,
+        "yaw_deg": 91.9999923706055,
+        "z": 60.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_07_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -53.5999984741211,
+        "yaw_deg": 86.9999923706055,
+        "z": 27.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_08_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -51.2000007629395,
+        "yaw_deg": 93.9999923706055,
+        "z": -6.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_09_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -52.5999984741211,
+        "yaw_deg": 89.0,
+        "z": -49.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_10_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -70.5,
+        "yaw_deg": 90.0,
+        "z": 60.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_11_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -68.6999969482422,
+        "yaw_deg": 93.9999923706055,
+        "z": 42.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_12_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -70.1999969482422,
+        "yaw_deg": 86.9999923706055,
+        "z": 24.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_13_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -68.0,
+        "yaw_deg": 91.9999923706055,
+        "z": 6.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_14_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -69.1999969482422,
+        "yaw_deg": 89.0,
+        "z": -16.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_15_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -70.6999969482422,
+        "yaw_deg": 92.9999923706055,
+        "z": -36.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_16_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -68.4000015258789,
+        "yaw_deg": 87.9999923706055,
+        "z": -56.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_17_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 14.1999998092651,
+        "yaw_deg": -86.9999923706055,
+        "z": 27.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_18_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 15.0,
+        "yaw_deg": -92.5,
+        "z": 11.5
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_19_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 13.8999996185303,
+        "yaw_deg": -89.0,
+        "z": -9.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_20_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 15.3999996185303,
+        "yaw_deg": -93.9999923706055,
+        "z": -25.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_21_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 14.3000001907349,
+        "yaw_deg": -87.9999923706055,
+        "z": -43.5
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_22_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 52.0,
+        "yaw_deg": -87.9999923706055,
+        "z": 58.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_23_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 53.5999984741211,
+        "yaw_deg": -92.9999923706055,
+        "z": 29.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_24_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 51.2000007629395,
+        "yaw_deg": -85.9999923706055,
+        "z": -6.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_25_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 52.5999984741211,
+        "yaw_deg": -90.9999923706055,
+        "z": -51.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_26_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 70.5,
+        "yaw_deg": -90.0,
+        "z": 60.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_27_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 68.6999969482422,
+        "yaw_deg": -85.9999923706055,
+        "z": 45.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_28_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 70.1999969482422,
+        "yaw_deg": -92.9999923706055,
+        "z": 23.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_29_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 68.0,
+        "yaw_deg": -87.9999923706055,
+        "z": 8.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_30_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 69.1999969482422,
+        "yaw_deg": -90.9999923706055,
+        "z": -18.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_31_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 70.6999969482422,
+        "yaw_deg": -86.9999923706055,
+        "z": -35.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_32_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 68.4000015258789,
+        "yaw_deg": -91.9999923706055,
+        "z": -56.0
+      }
+    ],
+    "collision_bodies_created": 29,
+    "countryside_path_end_z_m": -230,
+    "exterior_lod_houses": 32,
+    "exterior_texture_tier": "2k",
+    "farm_plots": 4,
+    "fountain_intended_height_m": 2.2,
+    "fountain_uniform_scale": 1.98586759087567,
+    "furnished_ground_floor_instances": 3,
+    "furnished_interior_metrics": [
+      {
+        "bakery_exterior_sign": false,
+        "ground_floor_only": true,
+        "kind": "home",
+        "local_shadow_lights": 1,
+        "prop_instances": 57,
+        "removable_floor": true,
+        "solid_proxies": 4,
+        "variant": "01_hearth_cottage",
+        "workshop_assets": []
+      },
+      {
+        "bakery_exterior_sign": true,
+        "ground_floor_only": true,
+        "kind": "bakery",
+        "local_shadow_lights": 1,
+        "prop_instances": 57,
+        "removable_floor": true,
+        "solid_proxies": 6,
+        "variant": "02_market_house",
+        "workshop_assets": [
+          "bakers_oven_peel_rack",
+          "grain_hand_quern"
+        ]
+      },
+      {
+        "bakery_exterior_sign": false,
+        "ground_floor_only": true,
+        "kind": "artisan",
+        "local_shadow_lights": 1,
+        "prop_instances": 47,
+        "removable_floor": true,
+        "solid_proxies": 4,
+        "variant": "03_corner_turret",
+        "workshop_assets": [
+          "forge_with_bellows",
+          "horn_anvil_stump"
+        ]
+      }
+    ],
+    "ground_centre_z_m": -5,
+    "ground_union_area_m2": 222700,
+    "ground_union_is_rectangular": false,
+    "interactive_houses": 12,
+    "labyrinth_entry_art": "grounded visual-only silhouette; playable maze not authored",
+    "meadow_texture_mix": 0.22,
+    "meadow_texture_path": "res://assets/floor1/ground_textures_20260916/meadow_grass_albedo_v1.png",
+    "native_forest_oak_one_tree_default_adopted": true,
+    "native_forest_oak_trial_display_height_m": 7.2,
+    "native_forest_oak_trial_instances": 1,
+    "native_forest_oak_trial_site_m": "(-55.0, 2.373898, -275.0)",
+    "north_grove_additional_native_t2_oaks": 0,
+    "north_grove_bounds_m": {
+      "x": [
+        -90,
+        -55
+      ],
+      "z": [
+        -313,
+        -273
+      ]
+    },
+    "north_grove_trial_enabled": false,
+    "north_sector_actual_triangles": 340,
+    "north_sector_added_area_m2": 29500,
+    "north_sector_bounds_m": {
+      "x": [
+        -210,
+        85
+      ],
+      "z": [
+        -335,
+        -235
+      ]
+    },
+    "north_sector_collision_bodies": 1,
+    "north_sector_kit_tree_instances": 24,
+    "north_sector_max_height_m": 13.1269649116678,
+    "northern_gate_z_m": -85,
+    "perimeter_grounded_ridge_collision_bodies": 2,
+    "perimeter_grounded_ridge_triangles": 784,
+    "perimeter_ridge_max_height_m": 8.36309443274764,
+    "plaza_diameter_m": 24,
+    "props": 29,
+    "residential_lane_width_m": 5,
+    "town_extent_m": [
+      180,
+      170
+    ],
+    "town_street_width_m": 8,
+    "tree_instances": 158,
+    "vegetation_instances": 359,
+    "west_forest_bank_collision_bodies": 1,
+    "west_forest_bank_max_height_m": 1.17685827913442,
+    "west_forest_bank_triangles": 168,
+    "world_extent_m": [
+      420,
+      460
+    ]
+  },
+  "model_calls": 0,
+  "suite": "floor1_expanded_world_geometry_physics",
+  "world_state_mutations": 0
+}

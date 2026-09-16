@@ -1,0 +1,182 @@
+{
+  "trial_id": "meshy-houses-20260916",
+  "purpose": "Three textured house appearance trials for InfiniteAincrad; evaluate actual generated geometry before game integration.",
+  "status": "completed_appearance_trial",
+  "image_settings": {
+    "ai_model": "nano-banana-2",
+    "aspect_ratio": "1:1",
+    "generate_multi_view": false
+  },
+  "model_settings": {
+    "ai_model": "meshy-7",
+    "model_type": "standard",
+    "should_remesh": false,
+    "should_texture": true,
+    "enable_pbr": true,
+    "texture_resolution": "4k",
+    "remove_lighting": true,
+    "ultra_mode": false,
+    "target_formats": [
+      "glb"
+    ]
+  },
+  "expected_credits": {
+    "image_each": 6,
+    "model_with_texture_each": 30,
+    "total": 108
+  },
+  "maximum_image_creations": 3,
+  "maximum_model_creations": 3,
+  "houses": [
+    {
+      "id": "01_hearth_cottage",
+      "name_zh": "暖炉小住宅",
+      "detail": "One compact two-storey cottage: steep gable roof, single dormer, stone chimney, arched front door, small sheltered porch and flower boxes. ",
+      "prompt": "Sword Art Online Aincrad town mood, original anime fantasy design. Cream limestone, ivory plaster, honey oak, terracotta red tiles, teal shutters; clean broad hand-painted colors, crisp edges, subtle wear, no gritty texture. One compact two-storey cottage: steep gable roof, single dormer, stone chimney, arched front door, small sheltered porch and flower boxes. Single isolated complete building, front three-quarter view, full roof and base visible, plain light-gray background, soft even light. No people, trees, street, plinth, text or cutaway.",
+      "concept_task_id": "01a0a621-4503-75d4-942a-954f18668231",
+      "model_task_id": "01a0a623-3cf4-728e-ad69-0558a6b78087",
+      "concept_credits": 6,
+      "model_credits": 30,
+      "source_glb": "exports/meshy-houses-20260916/models/01_hearth_cottage.glb",
+      "source_sha256": "1c98cb4b0586201f55ae6d20557d615d9c6d8c8832850c6ce6542b38e5bbc578",
+      "triangles": 1630308,
+      "vertices": 903591,
+      "material_count": 1,
+      "texture_dimensions": {
+        "base_color": [
+          4096,
+          4096
+        ],
+        "normal": [
+          4096,
+          4096
+        ],
+        "metallic": [
+          2048,
+          2048
+        ],
+        "roughness": [
+          2048,
+          2048
+        ]
+      },
+      "source_unchanged_after_render": true,
+      "raw_size": [
+        1.3736,
+        1.44,
+        1.9032
+      ],
+      "presentation_scale": 0.525434,
+      "render_angles_degrees": [
+        38,
+        128,
+        218,
+        308
+      ],
+      "blend": "exports/meshy-houses-20260916/blend/01_hearth_cottage.blend"
+    },
+    {
+      "id": "02_market_house",
+      "name_zh": "集市商铺住宅",
+      "detail": "One three-storey narrow merchant house: tiled gable, recessed ground-floor shop entrance, wooden display windows, cream canvas awning, modest balcony and small chimney. ",
+      "prompt": "Sword Art Online Aincrad town mood, original anime fantasy design. Cream limestone, ivory plaster, honey oak, terracotta red tiles, teal shutters; clean broad hand-painted colors, crisp edges, subtle wear, no gritty texture. One three-storey narrow merchant house: tiled gable, recessed ground-floor shop entrance, wooden display windows, cream canvas awning, modest balcony and small chimney. Single isolated complete building, front three-quarter view, full roof and base visible, plain light-gray background, soft even light. No people, trees, street, plinth, text or cutaway.",
+      "concept_task_id": "01a0a621-4798-76af-9d8b-003fd46e775e",
+      "model_task_id": "01a0a623-66f3-72b4-8f0b-6320ade8c63b",
+      "concept_credits": 6,
+      "model_credits": 30,
+      "source_glb": "exports/meshy-houses-20260916/models/02_market_house.glb",
+      "source_sha256": "b1a54c0381bb4ebe1aeac266104a7679aa036198ba7c6455d8ad07f3e2fa40f7",
+      "triangles": 1263506,
+      "vertices": 705263,
+      "material_count": 1,
+      "texture_dimensions": {
+        "base_color": [
+          4096,
+          4096
+        ],
+        "normal": [
+          4096,
+          4096
+        ],
+        "metallic": [
+          2048,
+          2048
+        ],
+        "roughness": [
+          2048,
+          2048
+        ]
+      },
+      "source_unchanged_after_render": true,
+      "raw_size": [
+        1.0503,
+        1.1806,
+        1.9034
+      ],
+      "presentation_scale": 0.525378,
+      "render_angles_degrees": [
+        38,
+        128,
+        218,
+        308
+      ],
+      "blend": "exports/meshy-houses-20260916/blend/02_market_house.blend"
+    },
+    {
+      "id": "03_corner_turret",
+      "name_zh": "转角塔楼宅",
+      "detail": "One three-storey corner residence: clear L-shaped body, small octagonal stair turret with conical red tile roof, stone arch doorway, orderly windows and timber balcony. ",
+      "prompt": "Sword Art Online Aincrad town mood, original anime fantasy design. Cream limestone, ivory plaster, honey oak, terracotta red tiles, teal shutters; clean broad hand-painted colors, crisp edges, subtle wear, no gritty texture. One three-storey corner residence: clear L-shaped body, small octagonal stair turret with conical red tile roof, stone arch doorway, orderly windows and timber balcony. Single isolated complete building, front three-quarter view, full roof and base visible, plain light-gray background, soft even light. No people, trees, street, plinth, text or cutaway.",
+      "concept_task_id": "01a0a621-4a0a-73ec-83a0-1339cf3f2af6",
+      "model_task_id": "01a0a623-88fc-74a3-ad08-6e902f043c0f",
+      "concept_credits": 6,
+      "model_credits": 30,
+      "source_glb": "exports/meshy-houses-20260916/models/03_corner_turret.glb",
+      "source_sha256": "69710decc857406cb3b4f96bd1a1ec50470c6055767f1685e5c84fa5fa7522a1",
+      "triangles": 1792188,
+      "vertices": 1011346,
+      "material_count": 1,
+      "texture_dimensions": {
+        "base_color": [
+          4096,
+          4096
+        ],
+        "normal": [
+          4096,
+          4096
+        ],
+        "metallic": [
+          2048,
+          2048
+        ],
+        "roughness": [
+          2048,
+          2048
+        ]
+      },
+      "source_unchanged_after_render": true,
+      "raw_size": [
+        1.8747,
+        1.8983,
+        1.7967
+      ],
+      "presentation_scale": 0.526783,
+      "render_angles_degrees": [
+        38,
+        128,
+        218,
+        308
+      ],
+      "blend": "exports/meshy-houses-20260916/blend/03_corner_turret.blend"
+    }
+  ],
+  "output_directory": "exports/meshy-houses-20260916",
+  "generated_at_utc": "2026-09-15T17:53:04.894Z",
+  "measured_credits": 108,
+  "game_integration": "not_integrated",
+  "presentation_yaw_degrees": {
+    "01_hearth_cottage": 0,
+    "02_market_house": 0,
+    "03_corner_turret": 90
+  }
+}

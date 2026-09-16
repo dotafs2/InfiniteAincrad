@@ -1,0 +1,523 @@
+{
+  "schema": "floor1-expanded-world-v5-yard-layout-checkpoint",
+  "generated_at_utc": "2026-09-15T20:16:45.368034+00:00",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "revision": "post-milestone optimized modular v5 plus grouped residential courts and roadside groves; no interior insert yet",
+  "layout": {
+    "building_layout": [
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_01_01_hearth_cottage",
+        "role": "interactive",
+        "variant": "01_hearth_cottage",
+        "x": -24.5,
+        "yaw_deg": -90.0,
+        "z": 35.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_02_02_market_house",
+        "role": "interactive",
+        "variant": "02_market_house",
+        "x": -45.5,
+        "yaw_deg": 90.0,
+        "z": 43.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_03_02_market_house",
+        "role": "interactive",
+        "variant": "02_market_house",
+        "x": -24.5,
+        "yaw_deg": -90.0,
+        "z": 0.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_04_03_corner_turret",
+        "role": "interactive",
+        "variant": "03_corner_turret",
+        "x": -45.5,
+        "yaw_deg": 90.0,
+        "z": 8.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_05_03_corner_turret",
+        "role": "interactive",
+        "variant": "03_corner_turret",
+        "x": -24.5,
+        "yaw_deg": -90.0,
+        "z": -59.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_06_01_hearth_cottage",
+        "role": "interactive",
+        "variant": "01_hearth_cottage",
+        "x": -45.5,
+        "yaw_deg": 90.0,
+        "z": -30.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_07_01_hearth_cottage",
+        "role": "interactive",
+        "variant": "01_hearth_cottage",
+        "x": 24.5,
+        "yaw_deg": 90.0,
+        "z": 35.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_08_02_market_house",
+        "role": "interactive",
+        "variant": "02_market_house",
+        "x": 45.5,
+        "yaw_deg": -90.0,
+        "z": 43.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_09_02_market_house",
+        "role": "interactive",
+        "variant": "02_market_house",
+        "x": 24.5,
+        "yaw_deg": 90.0,
+        "z": 0.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_10_03_corner_turret",
+        "role": "interactive",
+        "variant": "03_corner_turret",
+        "x": 45.5,
+        "yaw_deg": -90.0,
+        "z": 8.0
+      },
+      {
+        "district": "LaneInner",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_11_03_corner_turret",
+        "role": "interactive",
+        "variant": "03_corner_turret",
+        "x": 24.5,
+        "yaw_deg": 90.0,
+        "z": -59.0
+      },
+      {
+        "district": "LaneOuter",
+        "footprint_radius_m": 6.7,
+        "id": "Modular_12_01_hearth_cottage",
+        "role": "interactive",
+        "variant": "01_hearth_cottage",
+        "x": 45.5,
+        "yaw_deg": -90.0,
+        "z": -30.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_01_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -14.1999998092651,
+        "yaw_deg": 92.9999923706055,
+        "z": 26.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_02_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -15.0,
+        "yaw_deg": 87.4999923706055,
+        "z": 12.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_03_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -13.8999996185303,
+        "yaw_deg": 90.9999923706055,
+        "z": -8.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_04_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -15.3999996185303,
+        "yaw_deg": 85.9999923706055,
+        "z": -26.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_05_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -14.3000001907349,
+        "yaw_deg": 91.9999923706055,
+        "z": -44.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_06_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -52.0,
+        "yaw_deg": 91.9999923706055,
+        "z": 60.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_07_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -53.5999984741211,
+        "yaw_deg": 86.9999923706055,
+        "z": 27.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_08_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -51.2000007629395,
+        "yaw_deg": 93.9999923706055,
+        "z": -6.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_09_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -52.5999984741211,
+        "yaw_deg": 89.0,
+        "z": -49.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_10_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -70.5,
+        "yaw_deg": 90.0,
+        "z": 60.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_11_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -68.6999969482422,
+        "yaw_deg": 93.9999923706055,
+        "z": 42.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_12_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -70.1999969482422,
+        "yaw_deg": 86.9999923706055,
+        "z": 24.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_13_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -68.0,
+        "yaw_deg": 91.9999923706055,
+        "z": 6.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_14_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": -69.1999969482422,
+        "yaw_deg": 89.0,
+        "z": -16.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_15_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": -70.6999969482422,
+        "yaw_deg": 92.9999923706055,
+        "z": -36.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_16_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": -68.4000015258789,
+        "yaw_deg": 87.9999923706055,
+        "z": -56.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_17_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 14.1999998092651,
+        "yaw_deg": -86.9999923706055,
+        "z": 27.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_18_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 15.0,
+        "yaw_deg": -92.5,
+        "z": 11.5
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_19_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 13.8999996185303,
+        "yaw_deg": -89.0,
+        "z": -9.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_20_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 15.3999996185303,
+        "yaw_deg": -93.9999923706055,
+        "z": -25.0
+      },
+      {
+        "district": "MarketFrontage",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_21_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 14.3000001907349,
+        "yaw_deg": -87.9999923706055,
+        "z": -43.5
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_22_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 52.0,
+        "yaw_deg": -87.9999923706055,
+        "z": 58.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_23_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 53.5999984741211,
+        "yaw_deg": -92.9999923706055,
+        "z": 29.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_24_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 51.2000007629395,
+        "yaw_deg": -85.9999923706055,
+        "z": -6.0
+      },
+      {
+        "district": "LaneBackfill",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_25_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 52.5999984741211,
+        "yaw_deg": -90.9999923706055,
+        "z": -51.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_26_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 70.5,
+        "yaw_deg": -90.0,
+        "z": 60.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_27_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 68.6999969482422,
+        "yaw_deg": -85.9999923706055,
+        "z": 45.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_28_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 70.1999969482422,
+        "yaw_deg": -92.9999923706055,
+        "z": 23.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_29_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 68.0,
+        "yaw_deg": -87.9999923706055,
+        "z": 8.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_30_02_market_house",
+        "role": "exterior_lod",
+        "variant": "02_market_house",
+        "x": 69.1999969482422,
+        "yaw_deg": -90.9999923706055,
+        "z": -18.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 8.0,
+        "id": "Exterior_31_03_corner_turret",
+        "role": "exterior_lod",
+        "variant": "03_corner_turret",
+        "x": 70.6999969482422,
+        "yaw_deg": -86.9999923706055,
+        "z": -35.0
+      },
+      {
+        "district": "PerimeterRoofline",
+        "footprint_radius_m": 5.5,
+        "id": "Exterior_32_01_hearth_cottage",
+        "role": "exterior_lod",
+        "variant": "01_hearth_cottage",
+        "x": 68.4000015258789,
+        "yaw_deg": -91.9999923706055,
+        "z": -56.0
+      }
+    ],
+    "collision_bodies_created": 29,
+    "countryside_path_end_z_m": -230,
+    "exterior_lod_houses": 32,
+    "farm_plots": 4,
+    "fountain_intended_height_m": 2.2,
+    "fountain_uniform_scale": 1.98586759087567,
+    "ground_centre_z_m": -5,
+    "interactive_houses": 12,
+    "labyrinth_entry_art": "grounded visual-only silhouette; playable maze not authored",
+    "northern_gate_z_m": -85,
+    "plaza_diameter_m": 24,
+    "props": 29,
+    "residential_lane_width_m": 5,
+    "town_extent_m": [
+      180,
+      170
+    ],
+    "town_street_width_m": 8,
+    "tree_instances": 133,
+    "vegetation_instances": 334,
+    "world_extent_m": [
+      420,
+      460
+    ]
+  },
+  "engine_checks": 153,
+  "engine_failures": 0,
+  "physics": "tmp/floor1-art-20260916/world/physics-v5-yard-153.json",
+  "actual_gpu_capture": "tmp/floor1-art-20260916/world/captures-v5-yards/capture.json",
+  "actual_png_px": [
+    1680,
+    1080
+  ],
+  "actual_still_sha_receipts": {
+    "countryside_path.png": {
+      "bytes": 614893,
+      "sha256": "0af0ef0df9aae4e913cf29d83f5b4634644b920d49a2e9f4e4162d66bfbf02da"
+    },
+    "door_closed.png": {
+      "bytes": 541664,
+      "sha256": "4fe3e5d7e745050f664e0ca13d2f9b2e65a0e786e761488719fc3d10d659cea5"
+    },
+    "door_open_exterior.png": {
+      "bytes": 504999,
+      "sha256": "b7c35dfbe25c8eaf615a2dcdfc68cec51e4c6625b8fec2200168a012bf7f6407"
+    },
+    "market_street.png": {
+      "bytes": 1205618,
+      "sha256": "c020f94f153e858ffd2f2df6b4fb548ce528df390e6c3dd777b473559f7f5680"
+    },
+    "north_gate.png": {
+      "bytes": 539819,
+      "sha256": "da9eb6fa26aefeb3b12f3a5fbd39e0248f184bb57c81881f4aacc01370aad1d4"
+    },
+    "open_door_interior.png": {
+      "bytes": 531701,
+      "sha256": "1e1258b132361ea0436110fdc6fd8b4561f8e0ab823a1f9cb56ecb71dbf93249"
+    },
+    "panorama.png": {
+      "bytes": 1147983,
+      "sha256": "e16296c34a34df197265c82e3eadab357a16442bea66281a18cd0942779d5fab"
+    },
+    "residence_near.png": {
+      "bytes": 542430,
+      "sha256": "0673a8b10d1e6a5c543547581ededd78a4239323ccb552cfa4defe0d6c3672c3"
+    }
+  },
+  "performance_note": "time between actual non-headless RenderingServer.frame_post_draw events; includes presentation/vsync and CPU waits; not pure GPU kernel time",
+  "visual_limitations": [
+    "Foreground courts and country verge improved, but countryside remains a broad flat green slab",
+    "Distant maze is grounded visual-only unfinished silhouette",
+    "Three dedicated modular interior inserts are pending their sole-owned acceptance and world integration"
+  ],
+  "first_milestone_frozen_provenance": "Art/Generated/Floor1Expanded20260916/milestone-v1-provenance.json"
+}

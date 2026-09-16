@@ -1,0 +1,59 @@
+{
+  "task": "One merchant facade average-neutral warm ivory plaster modulation A/B",
+  "status": "REJECTED_FOR_MAIN_SCENE_AFTER_ROOT_SAME_VIEW_REVIEW",
+  "scope": "Exactly one 02_market_house static imported plaster surface role, two material surfaces; no geometry, door/window hole, collision, light, camera, exposure, other surface or world scene change",
+  "root_owned_bitmap_read_only": "Art/Generated/Floor1Facade20260916/ivory_plaster_albedo_v1.png",
+  "root_owned_bitmap_sha256_before_after": "97e4641e21027aabaf3a1536b21f01937edfae7d5d6909e832a573cf94676b8f",
+  "root_bitmap_note": "1254px warm ivory source is not proven naturally seamless and would change the authored cream wall hue if multiplied as-is.",
+  "candidate_modulation": {
+    "method": "Desaturate to luminance only, use 40 percent of the source brightness deviation, clip factor0.96..1.025 around grayscale sRGB248, then compensate actual Godot glTF material albedo numeric mean",
+    "texture": "tmp/floor1-art-20260916/modular/plaster-review/plaster_brightness_modulation_v1.png",
+    "texture_sha256": "b178ebae49d338a0114a4b05cc370604274ab829397a33ea57f7c40a7f686986",
+    "dimensions_px": [1254, 1254],
+    "bytes": 927437,
+    "grayscale_srgb_mean_std_p1_p99": [248.04, 2.892, 238.0, 254.0],
+    "physical_triplanar_tile_m": 2.0,
+    "cpu_report": "tmp/floor1-art-20260916/modular/plaster-review/cpu-preparation.json"
+  },
+  "main_assets_unchanged_after_both_godot_trials": {
+    "merchant_glb_sha256": "9ab37225313c8f98ea6854b5463db7b1f89fd5c90a8091752a61132df0d89364",
+    "manifest_sha256": "79d856b71124c03135bd1e57a67388e64e2f7247384c174f85c93b292ed331e3",
+    "component_sha256": "5110633cd2ee66ffe151580a950c6072f09b17fc20936262cb9bfb48befc7046"
+  },
+  "fixture": {
+    "script": "tmp/floor1-art-20260916/modular/plaster-review/plaster_same_view_capture.gd",
+    "script_sha256": "436aab0b0a2d729480dc3f11121b35d85286926e43cd946082df980653c870ca",
+    "engine": "Godot 4.7.2 Forward+ Vulkan actual NVIDIA RTX 5080 capture",
+    "sun_energy": 0.88,
+    "sun_shadow": true,
+    "ambient_energy": 0.42,
+    "camera_pair": "same 55deg FOV, eye-height1.62m, target and exposure for street14m and upper-close7.5m shots",
+    "image_dimensions_px": [1680, 1080],
+    "static_plaster_material_surfaces_overridden": 2,
+    "process_status": "both bounded Godot trees exit0; all_members_exited=true, active_processes=0"
+  },
+  "preserved_rejected_first_trial": {
+    "capture_dir": "tmp/floor1-art-20260916/modular/plaster-review/captures-v1/",
+    "process": "tmp/floor1-art-20260916/modular/plaster-review/merchant-plaster-sameview-v1.process.json",
+    "reason": "Used linear mean0.939 to compensate imported glTF material whose actual Godot albedo color numerics are sRGB-like. Real plaster ROI street +4.49/+4.99/+4.60 RGB/255 and close +4.42/+4.43/+4.86, making the wall brighter rather than mean-neutral."
+  },
+  "current_mean_neutral_trial": {
+    "capture_dir": "tmp/floor1-art-20260916/modular/plaster-review/captures-v2-color-neutral/",
+    "process": "tmp/floor1-art-20260916/modular/plaster-review/merchant-plaster-sameview-v2-neutral.process.json",
+    "compensation": "divide imported baseline albedo numerics by actual normalized bitmap mean sRGB248.04/255 instead of linear0.939",
+    "street_roi_mean_rgb_delta_255": [-0.126, 0.255, -0.372],
+    "upper_close_roi_mean_rgb_delta_255": [-0.142, -0.253, -0.064],
+    "street_full_frame_mean_absolute_rgb_255": [0.085, 0.0883, 0.0908],
+    "upper_close_full_frame_mean_absolute_rgb_255": [0.3055, 0.3166, 0.3297],
+    "sky_top_170px_mean_absolute_delta_255": 0.0,
+    "same_view_pixel_receipt": "tmp/floor1-art-20260916/modular/plaster-review/same-view-pixel-comparison.json",
+    "views": [
+      "baseline_street.png", "candidate_street.png",
+      "baseline_upper_close.png", "candidate_upper_close.png"
+    ]
+  },
+  "visual_assessment": "Root inspected the actual v2 street and upper-close same-camera Godot pairs. Color is preserved, but street-view visual benefit is very small. Root decided not to adopt this modulation in the main scene. The source bitmap, normalized derivative and both failed/mean-neutral fixture receipts remain for provenance; no further parameter sweep is planned.",
+  "root_visual_decision": "Do not adopt in the current game/world; no texture or override added to main modular assets.",
+  "model_calls": 0,
+  "main_world_script_writes": 0
+}

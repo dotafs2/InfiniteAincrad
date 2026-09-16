@@ -1,0 +1,36 @@
+{
+  "schema": "floor1-meadow-painted-grass-approved-default-v11b",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "root_actual_image_review_decision": "Approved 0.22 as the country grass default: fine brush detail improved in actual eye/overhead and country-road views; no obvious checkerboard at this restrained mix.",
+  "current_default_meadow_mix": 0.22,
+  "cli_fallback": "--meadow-texture-mix=0",
+  "first_controlled_ab_manifest": "Art/Generated/Floor1Expanded20260916/meadow-texture-v11-ab/manifest.json",
+  "first_controlled_ab_sky_road_mad_255": [
+    0.0,
+    0.0
+  ],
+  "source_game_sha256_same": "bdc2ea4de4d2f3b0377b3df0f0e7ce4dd26afcca5e189f042f0d34432f96b38a",
+  "actual_texture_import_px": [
+    1254,
+    1254
+  ],
+  "actual_texture_import_has_mipmaps": true,
+  "tile_repeat_m": 2.0,
+  "current_default_full_world_checks": 212,
+  "current_default_full_world_failures": 0,
+  "cli_fallback_full_world_checks": 209,
+  "cli_fallback_full_world_failures": 0,
+  "one_room_shadow_light_unchanged": true,
+  "complete_12_door_3_furnished_real_walker_routes_still_green": true,
+  "source_seam_limit": "Edge mismatch exceeds adjacent-pixel differences; the bitmap is not proven seamless. At the limited 0.22 world mix the reviewed four captures have no prominent 2m checkerboard, but artist approval remains separate.",
+  "source_edge_metrics": {
+    "left_right_edge_mad_255": 10.780435938330676,
+    "top_bottom_edge_mad_255": 9.696172248803828,
+    "left_neighbor_mad_255": 5.086656034024455,
+    "top_neighbor_mad_255": 3.648325358851675
+  },
+  "new_gpu_pngs": 0,
+  "visual_evidence": "Reuse preserved four actual 1680x1080 A/B pairs in first_controlled_ab_manifest; this approval receipt adds default/override physics, not new images.",
+  "world_state_mutations": 0,
+  "model_calls": 0
+}

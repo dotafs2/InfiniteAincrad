@@ -1,0 +1,120 @@
+{
+  "schema": "floor1-country-ground-world-coordinate-shader-ab",
+  "before": "tmp/floor1-art-20260916/world/landscape-v7-baseline",
+  "after": "tmp/floor1-art-20260916/world/landscape-v8-country-ground",
+  "same_camera_four_views": true,
+  "change": "grass underlay shader only: smooth world-coordinate dry/damp variation; town grass, farm plots, road, imported meshes, lighting, collision and camera unchanged",
+  "headless_physics": "tmp/floor1-art-20260916/world/physics-v8-country-shader.json",
+  "headless_checks": 180,
+  "headless_failures": 0,
+  "rows": {
+    "country_road_eye": {
+      "before": {
+        "bytes": 568842,
+        "sha256": "1a3ff52af6232f108209688bf4af0d14dad49d9d09042a6f7e8a307aa2606e80"
+      },
+      "after": {
+        "bytes": 570055,
+        "sha256": "0b12d36fbba4abfb20c3b735b3f49b0f6a0025c563cb17e09ef180a2637dda82"
+      },
+      "full_mean_abs_rgb_channel_255": 0.85877,
+      "full_changed_channels_gt_10_percent": 0.43458,
+      "sky_control": {
+        "rect_px": [
+          850,
+          120,
+          1300,
+          400
+        ],
+        "mean_abs_rgb_channel_255": 0.0,
+        "changed_channels_gt_10_percent": 0.0
+      },
+      "left_grass_foreground": {
+        "rect_px": [
+          65,
+          730,
+          580,
+          1040
+        ],
+        "mean_abs_rgb_channel_255": 2.21092,
+        "changed_channels_gt_10_percent": 0.0
+      },
+      "road_control": {
+        "rect_px": [
+          1030,
+          720,
+          1310,
+          1030
+        ],
+        "mean_abs_rgb_channel_255": 0.0,
+        "changed_channels_gt_10_percent": 0.0
+      }
+    },
+    "west_field_ridge_eye": {
+      "before": {
+        "bytes": 498856,
+        "sha256": "1d3df42590110df8f0dd227bda24ccb16b88ae76e4b0e17f82773f6017e55256"
+      },
+      "after": {
+        "bytes": 496139,
+        "sha256": "dad674264427fd55f4a23cf39b222619b10ef837a24338242ba6b3d87c41debb"
+      },
+      "full_mean_abs_rgb_channel_255": 1.1901,
+      "full_changed_channels_gt_10_percent": 0.88534,
+      "sky_control": {
+        "rect_px": [
+          850,
+          120,
+          1300,
+          400
+        ],
+        "mean_abs_rgb_channel_255": 0.0,
+        "changed_channels_gt_10_percent": 0.0
+      }
+    },
+    "west_field_ridge_overview": {
+      "before": {
+        "bytes": 579760,
+        "sha256": "525f2ec99eda53b3927cedd6005fe6a5a31ca6b3f26170b79514b9221eacdf99"
+      },
+      "after": {
+        "bytes": 598150,
+        "sha256": "daf11c5623819edbeee95e5e49d453fe91c0959133a7107f3bb90982ba16903f"
+      },
+      "full_mean_abs_rgb_channel_255": 1.58269,
+      "full_changed_channels_gt_10_percent": 3.94529,
+      "sky_control": {
+        "rect_px": [
+          850,
+          120,
+          1300,
+          400
+        ],
+        "mean_abs_rgb_channel_255": 0.0,
+        "changed_channels_gt_10_percent": 0.0
+      }
+    },
+    "east_field_ridge_eye": {
+      "before": {
+        "bytes": 514343,
+        "sha256": "4116ff3262582994710eac73c8f35d1e672913b0fc3cd987437ab8a67ebd3da3"
+      },
+      "after": {
+        "bytes": 524889,
+        "sha256": "7c25d42cb631c31a27df5ceca6263def2373a29c500702d02d0a705b352b06fb"
+      },
+      "full_mean_abs_rgb_channel_255": 0.85036,
+      "full_changed_channels_gt_10_percent": 0.33603,
+      "sky_control": {
+        "rect_px": [
+          850,
+          120,
+          1300,
+          400
+        ],
+        "mean_abs_rgb_channel_255": 0.0,
+        "changed_channels_gt_10_percent": 0.0
+      }
+    }
+  }
+}

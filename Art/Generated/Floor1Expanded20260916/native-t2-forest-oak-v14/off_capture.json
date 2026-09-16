@@ -1,0 +1,55 @@
+{
+  "approved_100k_courtyard_oak_instances": 1,
+  "capture_png_px": [
+    1680,
+    1080
+  ],
+  "frame_interval_definition": "non-headless frame_post_draw includes VSync/presentation and CPU waits",
+  "model_calls": 0,
+  "old_kit_north_sector_trees": 24,
+  "saved_shots": [
+    "north_path_edge_eye",
+    "forest_oak_walk_eye",
+    "forest_oak_bank_overview"
+  ],
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "shot_rows": [
+    {
+      "benchmark_frames": 120,
+      "camera": "(0.0, 1.72, -222.0)",
+      "draw_calls_with_shadows": 66,
+      "median_frame_interval_ms": 4.171,
+      "name": "north_path_edge_eye",
+      "p95_frame_interval_ms": 4.36,
+      "primitives_with_shadows": 124420,
+      "target": "(-37.0, 4.4, -285.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-31.0, 2.05, -255.0)",
+      "draw_calls_with_shadows": 71,
+      "median_frame_interval_ms": 4.163,
+      "name": "forest_oak_walk_eye",
+      "p95_frame_interval_ms": 4.281,
+      "primitives_with_shadows": 187086,
+      "target": "(-55.0, 5.5, -275.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-40.0, 10.5, -240.0)",
+      "draw_calls_with_shadows": 70,
+      "median_frame_interval_ms": 4.165,
+      "name": "forest_oak_bank_overview",
+      "p95_frame_interval_ms": 4.286,
+      "primitives_with_shadows": 189170,
+      "target": "(-72.0, 5.0, -290.0)"
+    }
+  ],
+  "suite": "one_native_t2_oak_isolated_actual_world_forestline_trial",
+  "trial_asset_path": "",
+  "trial_display_height_m": 0.0,
+  "trial_enabled": false,
+  "trial_parent_position_m": "(0.0, 0.0, 0.0)",
+  "trial_source_triangles": 0,
+  "world_state_mutations": 0
+}

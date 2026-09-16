@@ -1,0 +1,68 @@
+{
+  "schema": "floor1-adopted-complete-doorunit-v6-actual-world-stills",
+  "generated_at_utc": "2026-09-15T21:37:39.593651+00:00",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "actual_godot_saved_png_px": [
+    1680,
+    1080
+  ],
+  "selected_public_real_png_count": 7,
+  "private_full_world_view_count": 15,
+  "private_full_world_capture": "tmp/floor1-art-20260916/world/captures-v9-one-oak-doorunit-v6/capture.json",
+  "adopted_modular_component_sha256_at_capture": "17000b6096c30fe1c9bd64b1d94fa3f0177e83ef0843ab9b624a7793fbce87ae",
+  "real_0_32x1_80m_world_checks": 190,
+  "world_failures": 0,
+  "same_camera_v7_to_v6_closed_door_region_mad_255": 0.0,
+  "same_camera_v7_to_v6_open_aperture_region_mad_255": 0.0,
+  "window_behavior": "Home and bakery same-camera closed/open actual windows; all windows of the selected house toggle together, and outdoor district is visible through the apertures.",
+  "attribution_limit": "The world source also gained one approved garden oak and changed only country grass underlay since the before shot; a full-frame difference is not solely DoorUnit geometry. Blender 18 same-angle v5/v6 house views were exact pixel equality in the modular owner's evidence.",
+  "visual_review": "Exterior oak leaf closes/opens without covering the door shoulder; interior open view reaches the district, and home/bakery shutters/panes leave their actual holes clear when open.",
+  "frame_interval_note": "Real non-headless intervals include VSync/presentation/CPU waits; no runtime FPS claim inferred from the offline capture.",
+  "first_camera_tour_provenance_unchanged": "Art/Generated/Floor1Expanded20260916/milestone-v1-provenance.json",
+  "files": {
+    "door/door_closed.png": {
+      "bytes": 546561,
+      "sha256": "061008159b28e13805dbf88e4dc9b9eb40fa01a08c584acfaaf16a70627183be"
+    },
+    "door/door_open_exterior.png": {
+      "bytes": 523165,
+      "sha256": "6d860c4bea971101e071e178bb3feabff5d8641380ede7b584592ab03346d692"
+    },
+    "door/open_door_interior.png": {
+      "bytes": 549794,
+      "sha256": "c76a90e7fa51a4711f2b69189c5ceec78112780309b562cff5612d17ac708a70"
+    },
+    "door/capture.json": {
+      "bytes": 21402,
+      "sha256": "0a4b1052c49e73dbbf668a1c061666b41e1304cf169192f596b9eeb166289d3e"
+    },
+    "windows/furnished_home_windows_closed.png": {
+      "bytes": 363867,
+      "sha256": "de4aaf3e9a34ef03779d4ddb8a3e8e998d3244ed0b0396064094b6bb3172f598"
+    },
+    "windows/furnished_home_windows_open.png": {
+      "bytes": 405807,
+      "sha256": "2b99ca8173d1ca3bd4face7211eee1a3db695aa73e0cdf0a2b52d799919d04d0"
+    },
+    "windows/furnished_bakery_windows_closed.png": {
+      "bytes": 434184,
+      "sha256": "48a9716dce0682c366c0b67844d477955e92696654e3f3d0b7cbb9e7988d2966"
+    },
+    "windows/furnished_bakery_windows_open.png": {
+      "bytes": 469099,
+      "sha256": "094719144c559f232c884ea8dd42a6730f3e59d26b47568bd0c0246e28d79038"
+    },
+    "windows/capture.json": {
+      "bytes": 1808,
+      "sha256": "1460d5dbcd62662dc4ad7196755085c1545f1183e231a2de07b79446e2d79c61"
+    },
+    "comparison.json": {
+      "bytes": 3538,
+      "sha256": "a8979187356354b8a2da84b8f60358f3adaba3bf633a65ea682b6a9d7acfb39a"
+    },
+    "physics-190.json": {
+      "bytes": 43093,
+      "sha256": "23eeca4e8e7da694467ec21319481b7cb49e0406d74eb558fbf0872e75450925"
+    }
+  }
+}

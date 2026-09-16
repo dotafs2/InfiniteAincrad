@@ -1,0 +1,4133 @@
+{
+  "generated_at_utc": "2026-09-15T23:02:29.369919+00:00",
+  "blender_version": "5.2.1 LTS",
+  "authoring": "Art/Generated/Floor1Modular20260916/build_modular_houses.py",
+  "note": "authored modular low-poly replacement derived from the Meshy concept art; not automatic semantic segmentation of a one-piece generated mesh",
+  "palette_source": "repository floor1 role palette (Art/ReferenceScenes/Floor1Residences)",
+  "houses": [
+    {
+      "variant_id": "01_hearth_cottage",
+      "name_zh": "暖炉小住宅",
+      "source_glb": "res://assets/floor1/modular_houses_20260916/01_hearth_cottage.glb",
+      "coordinates": {
+        "authoring": "blender_z_up",
+        "runtime": "godot_y_up",
+        "front_normal_godot": "+Z"
+      },
+      "dimensions_m": {
+        "target_height": 10.0,
+        "blocks": [
+          {
+            "name": "main",
+            "width": 8.0,
+            "depth": 7.0,
+            "floors": 2,
+            "floor_height": 3.0,
+            "roof_rise": 4.0
+          }
+        ]
+      },
+      "spaces": [
+        {
+          "id": "main",
+          "kind": "interior",
+          "access": "through the main door",
+          "x": [
+            -4.0,
+            4.0
+          ],
+          "y": [
+            -3.5,
+            3.5
+          ],
+          "floors": 2,
+          "floor_height": 3.0
+        }
+      ],
+      "parts": [
+        {
+          "id": "BuildingShell",
+          "type": "shell",
+          "node": "BuildingShell"
+        },
+        {
+          "id": "Roof",
+          "type": "roof",
+          "node": "Roof"
+        },
+        {
+          "id": "TimberFrame",
+          "type": "timber_frame",
+          "node": "TimberFrame"
+        },
+        {
+          "id": "DoorFrame",
+          "type": "door_frame",
+          "node": "DoorFrame"
+        },
+        {
+          "id": "DoorLeaf",
+          "type": "door_leaf",
+          "node": "DoorLeaf"
+        },
+        {
+          "id": "WindowFrame_00",
+          "type": "window_frame",
+          "node": "WindowFrame_00"
+        },
+        {
+          "id": "WindowFrame_01",
+          "type": "window_frame",
+          "node": "WindowFrame_01"
+        },
+        {
+          "id": "WindowFrame_02",
+          "type": "window_frame",
+          "node": "WindowFrame_02"
+        },
+        {
+          "id": "WindowFrame_03",
+          "type": "window_frame",
+          "node": "WindowFrame_03"
+        },
+        {
+          "id": "WindowFrame_04",
+          "type": "window_frame",
+          "node": "WindowFrame_04"
+        },
+        {
+          "id": "WindowFrame_05",
+          "type": "window_frame",
+          "node": "WindowFrame_05"
+        },
+        {
+          "id": "WindowFrame_06",
+          "type": "window_frame",
+          "node": "WindowFrame_06"
+        },
+        {
+          "id": "WindowFrame_07",
+          "type": "window_frame",
+          "node": "WindowFrame_07"
+        },
+        {
+          "id": "WindowFrame_08",
+          "type": "window_frame",
+          "node": "WindowFrame_08"
+        },
+        {
+          "id": "WindowFrame_09",
+          "type": "window_frame",
+          "node": "WindowFrame_09"
+        },
+        {
+          "id": "WindowFrame_10",
+          "type": "window_frame",
+          "node": "WindowFrame_10"
+        },
+        {
+          "id": "WindowFrame_11",
+          "type": "window_frame",
+          "node": "WindowFrame_11"
+        },
+        {
+          "id": "WindowFrame_12",
+          "type": "window_frame",
+          "node": "WindowFrame_12"
+        },
+        {
+          "id": "WindowFrame_13",
+          "type": "window_frame",
+          "node": "WindowFrame_13"
+        },
+        {
+          "id": "WindowFrame_14",
+          "type": "window_frame",
+          "node": "WindowFrame_14"
+        },
+        {
+          "id": "WindowFrame_15",
+          "type": "window_frame",
+          "node": "WindowFrame_15"
+        },
+        {
+          "id": "WindowSash_00",
+          "type": "window_sash",
+          "node": "WindowSash_00"
+        },
+        {
+          "id": "WindowSash_01",
+          "type": "window_sash",
+          "node": "WindowSash_01"
+        },
+        {
+          "id": "WindowSash_02",
+          "type": "window_sash",
+          "node": "WindowSash_02"
+        },
+        {
+          "id": "WindowSash_03",
+          "type": "window_sash",
+          "node": "WindowSash_03"
+        },
+        {
+          "id": "WindowSash_04",
+          "type": "window_sash",
+          "node": "WindowSash_04"
+        },
+        {
+          "id": "WindowSash_05",
+          "type": "window_sash",
+          "node": "WindowSash_05"
+        },
+        {
+          "id": "WindowSash_06",
+          "type": "window_sash",
+          "node": "WindowSash_06"
+        },
+        {
+          "id": "WindowSash_07",
+          "type": "window_sash",
+          "node": "WindowSash_07"
+        },
+        {
+          "id": "WindowSash_08",
+          "type": "window_sash",
+          "node": "WindowSash_08"
+        },
+        {
+          "id": "WindowSash_09",
+          "type": "window_sash",
+          "node": "WindowSash_09"
+        },
+        {
+          "id": "WindowSash_10",
+          "type": "window_sash",
+          "node": "WindowSash_10"
+        },
+        {
+          "id": "WindowSash_11",
+          "type": "window_sash",
+          "node": "WindowSash_11"
+        },
+        {
+          "id": "WindowSash_12",
+          "type": "window_sash",
+          "node": "WindowSash_12"
+        },
+        {
+          "id": "WindowSash_13",
+          "type": "window_sash",
+          "node": "WindowSash_13"
+        },
+        {
+          "id": "WindowSash_14",
+          "type": "window_sash",
+          "node": "WindowSash_14"
+        },
+        {
+          "id": "WindowSash_15",
+          "type": "window_sash",
+          "node": "WindowSash_15"
+        },
+        {
+          "id": "ShutterPivot_L_00",
+          "type": "shutter",
+          "node": "ShutterPivot_L_00"
+        },
+        {
+          "id": "ShutterPivot_R_00",
+          "type": "shutter",
+          "node": "ShutterPivot_R_00"
+        },
+        {
+          "id": "ShutterPivot_L_01",
+          "type": "shutter",
+          "node": "ShutterPivot_L_01"
+        },
+        {
+          "id": "ShutterPivot_R_01",
+          "type": "shutter",
+          "node": "ShutterPivot_R_01"
+        },
+        {
+          "id": "ShutterPivot_L_02",
+          "type": "shutter",
+          "node": "ShutterPivot_L_02"
+        },
+        {
+          "id": "ShutterPivot_R_02",
+          "type": "shutter",
+          "node": "ShutterPivot_R_02"
+        },
+        {
+          "id": "ShutterPivot_L_03",
+          "type": "shutter",
+          "node": "ShutterPivot_L_03"
+        },
+        {
+          "id": "ShutterPivot_R_03",
+          "type": "shutter",
+          "node": "ShutterPivot_R_03"
+        },
+        {
+          "id": "ShutterPivot_L_04",
+          "type": "shutter",
+          "node": "ShutterPivot_L_04"
+        },
+        {
+          "id": "ShutterPivot_R_04",
+          "type": "shutter",
+          "node": "ShutterPivot_R_04"
+        },
+        {
+          "id": "ShutterPivot_L_05",
+          "type": "shutter",
+          "node": "ShutterPivot_L_05"
+        },
+        {
+          "id": "ShutterPivot_R_05",
+          "type": "shutter",
+          "node": "ShutterPivot_R_05"
+        },
+        {
+          "id": "ShutterPivot_L_06",
+          "type": "shutter",
+          "node": "ShutterPivot_L_06"
+        },
+        {
+          "id": "ShutterPivot_R_06",
+          "type": "shutter",
+          "node": "ShutterPivot_R_06"
+        },
+        {
+          "id": "ShutterPivot_L_07",
+          "type": "shutter",
+          "node": "ShutterPivot_L_07"
+        },
+        {
+          "id": "ShutterPivot_R_07",
+          "type": "shutter",
+          "node": "ShutterPivot_R_07"
+        },
+        {
+          "id": "ShutterPivot_L_08",
+          "type": "shutter",
+          "node": "ShutterPivot_L_08"
+        },
+        {
+          "id": "ShutterPivot_R_08",
+          "type": "shutter",
+          "node": "ShutterPivot_R_08"
+        },
+        {
+          "id": "ShutterPivot_L_09",
+          "type": "shutter",
+          "node": "ShutterPivot_L_09"
+        },
+        {
+          "id": "ShutterPivot_R_09",
+          "type": "shutter",
+          "node": "ShutterPivot_R_09"
+        },
+        {
+          "id": "ShutterPivot_L_10",
+          "type": "shutter",
+          "node": "ShutterPivot_L_10"
+        },
+        {
+          "id": "ShutterPivot_R_10",
+          "type": "shutter",
+          "node": "ShutterPivot_R_10"
+        },
+        {
+          "id": "ShutterPivot_L_11",
+          "type": "shutter",
+          "node": "ShutterPivot_L_11"
+        },
+        {
+          "id": "ShutterPivot_R_11",
+          "type": "shutter",
+          "node": "ShutterPivot_R_11"
+        },
+        {
+          "id": "ShutterPivot_L_12",
+          "type": "shutter",
+          "node": "ShutterPivot_L_12"
+        },
+        {
+          "id": "ShutterPivot_R_12",
+          "type": "shutter",
+          "node": "ShutterPivot_R_12"
+        },
+        {
+          "id": "ShutterPivot_L_13",
+          "type": "shutter",
+          "node": "ShutterPivot_L_13"
+        },
+        {
+          "id": "ShutterPivot_R_13",
+          "type": "shutter",
+          "node": "ShutterPivot_R_13"
+        },
+        {
+          "id": "ShutterPivot_L_14",
+          "type": "shutter",
+          "node": "ShutterPivot_L_14"
+        },
+        {
+          "id": "ShutterPivot_R_14",
+          "type": "shutter",
+          "node": "ShutterPivot_R_14"
+        },
+        {
+          "id": "ShutterPivot_L_15",
+          "type": "shutter",
+          "node": "ShutterPivot_L_15"
+        },
+        {
+          "id": "ShutterPivot_R_15",
+          "type": "shutter",
+          "node": "ShutterPivot_R_15"
+        },
+        {
+          "id": "Porch",
+          "type": "bay",
+          "node": "Porch"
+        }
+      ],
+      "door_unit_node": "DoorUnit",
+      "pivots": [
+        {
+          "id": "DoorPivot",
+          "type": "door",
+          "node": "DoorPivot",
+          "unit_node": "DoorUnit",
+          "axis_gltf": [
+            0,
+            1,
+            0
+          ],
+          "hinge_range_deg": [
+            0,
+            90
+          ],
+          "closed_angle_deg": 0,
+          "open_angle_deg": 88,
+          "leaf_node": "DoorLeaf"
+        },
+        {
+          "id": "WindowSash",
+          "type": "window",
+          "nodes": [
+            "WindowSash_00",
+            "WindowSash_01",
+            "WindowSash_02",
+            "WindowSash_03",
+            "WindowSash_04",
+            "WindowSash_05",
+            "WindowSash_06",
+            "WindowSash_07",
+            "WindowSash_08",
+            "WindowSash_09",
+            "WindowSash_10",
+            "WindowSash_11",
+            "WindowSash_12",
+            "WindowSash_13",
+            "WindowSash_14",
+            "WindowSash_15"
+          ],
+          "travel_m": 0.715,
+          "axis_gltf": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "Shutters",
+          "type": "shutter",
+          "nodes": [
+            "ShutterPivot_L_00",
+            "ShutterPivot_R_00",
+            "ShutterPivot_L_01",
+            "ShutterPivot_R_01",
+            "ShutterPivot_L_02",
+            "ShutterPivot_R_02",
+            "ShutterPivot_L_03",
+            "ShutterPivot_R_03",
+            "ShutterPivot_L_04",
+            "ShutterPivot_R_04",
+            "ShutterPivot_L_05",
+            "ShutterPivot_R_05",
+            "ShutterPivot_L_06",
+            "ShutterPivot_R_06",
+            "ShutterPivot_L_07",
+            "ShutterPivot_R_07",
+            "ShutterPivot_L_08",
+            "ShutterPivot_R_08",
+            "ShutterPivot_L_09",
+            "ShutterPivot_R_09",
+            "ShutterPivot_L_10",
+            "ShutterPivot_R_10",
+            "ShutterPivot_L_11",
+            "ShutterPivot_R_11",
+            "ShutterPivot_L_12",
+            "ShutterPivot_R_12",
+            "ShutterPivot_L_13",
+            "ShutterPivot_R_13",
+            "ShutterPivot_L_14",
+            "ShutterPivot_R_14",
+            "ShutterPivot_L_15",
+            "ShutterPivot_R_15"
+          ],
+          "axis_gltf": [
+            0,
+            1,
+            0
+          ],
+          "hinge_range_deg": [
+            0,
+            75
+          ],
+          "open_angle_deg": 75
+        }
+      ],
+      "openings": [
+        {
+          "kind": "door",
+          "id": "door_main",
+          "centre": [
+            0.0,
+            -3.5,
+            1.1
+          ],
+          "size": [
+            1.2,
+            0.26,
+            2.2
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "clear_width": 1.2,
+          "clear_height": 2.2,
+          "node_window_id": null
+        },
+        {
+          "kind": "window",
+          "id": "window_00",
+          "centre": [
+            -1.3333333333333335,
+            -3.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_00"
+        },
+        {
+          "kind": "window",
+          "id": "window_01",
+          "centre": [
+            1.333333333333333,
+            -3.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_01"
+        },
+        {
+          "kind": "window",
+          "id": "window_02",
+          "centre": [
+            -1.3333333333333335,
+            -3.5,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_02"
+        },
+        {
+          "kind": "window",
+          "id": "window_03",
+          "centre": [
+            1.333333333333333,
+            -3.5,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_03"
+        },
+        {
+          "kind": "window",
+          "id": "window_04",
+          "centre": [
+            -1.3333333333333335,
+            3.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_04"
+        },
+        {
+          "kind": "window",
+          "id": "window_05",
+          "centre": [
+            1.333333333333333,
+            3.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_05"
+        },
+        {
+          "kind": "window",
+          "id": "window_06",
+          "centre": [
+            -1.3333333333333335,
+            3.5,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_06"
+        },
+        {
+          "kind": "window",
+          "id": "window_07",
+          "centre": [
+            1.333333333333333,
+            3.5,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_07"
+        },
+        {
+          "kind": "window",
+          "id": "window_08",
+          "centre": [
+            -4.0,
+            -1.1666666666666665,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_08"
+        },
+        {
+          "kind": "window",
+          "id": "window_09",
+          "centre": [
+            -4.0,
+            1.166666666666667,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_09"
+        },
+        {
+          "kind": "window",
+          "id": "window_10",
+          "centre": [
+            -4.0,
+            -1.1666666666666665,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_10"
+        },
+        {
+          "kind": "window",
+          "id": "window_11",
+          "centre": [
+            -4.0,
+            1.166666666666667,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_11"
+        },
+        {
+          "kind": "window",
+          "id": "window_12",
+          "centre": [
+            4.0,
+            -1.1666666666666665,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_12"
+        },
+        {
+          "kind": "window",
+          "id": "window_13",
+          "centre": [
+            4.0,
+            1.166666666666667,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_13"
+        },
+        {
+          "kind": "window",
+          "id": "window_14",
+          "centre": [
+            4.0,
+            -1.1666666666666665,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_14"
+        },
+        {
+          "kind": "window",
+          "id": "window_15",
+          "centre": [
+            4.0,
+            1.166666666666667,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_15"
+        }
+      ],
+      "collision": [
+        {
+          "id": "shell",
+          "node": "BuildingShell",
+          "kind": "trimesh",
+          "source_mesh": "BuildingShell"
+        },
+        {
+          "id": "timber",
+          "node": "TimberFrame",
+          "kind": "trimesh",
+          "source_mesh": "TimberFrame"
+        },
+        {
+          "id": "roof",
+          "node": "Roof",
+          "kind": "trimesh",
+          "source_mesh": "Roof"
+        },
+        {
+          "id": "door_leaf",
+          "node": "DoorLeaf",
+          "kind": "box",
+          "parent_pivot": "DoorPivot",
+          "size": [
+            1.1199999999999999,
+            0.09,
+            2.1500000000000004
+          ],
+          "centre_local": [
+            0.6,
+            0.0,
+            1.0750000000000002
+          ]
+        }
+      ],
+      "roof_removable": true,
+      "triangles_by_part": {
+        "BuildingShell": 3616,
+        "Roof": 4200,
+        "TimberFrame": 588,
+        "DoorFrame": 36,
+        "DoorLeaf": 72,
+        "WindowFrame_00": 72,
+        "WindowSash_00": 72,
+        "Shutter_L_00": 60,
+        "Shutter_R_00": 60,
+        "WindowFrame_01": 72,
+        "WindowSash_01": 72,
+        "Shutter_L_01": 60,
+        "Shutter_R_01": 60,
+        "WindowFrame_02": 72,
+        "WindowSash_02": 72,
+        "Shutter_L_02": 60,
+        "Shutter_R_02": 60,
+        "WindowFrame_03": 72,
+        "WindowSash_03": 72,
+        "Shutter_L_03": 60,
+        "Shutter_R_03": 60,
+        "WindowFrame_04": 72,
+        "WindowSash_04": 72,
+        "Shutter_L_04": 60,
+        "Shutter_R_04": 60,
+        "WindowFrame_05": 72,
+        "WindowSash_05": 72,
+        "Shutter_L_05": 60,
+        "Shutter_R_05": 60,
+        "WindowFrame_06": 72,
+        "WindowSash_06": 72,
+        "Shutter_L_06": 60,
+        "Shutter_R_06": 60,
+        "WindowFrame_07": 72,
+        "WindowSash_07": 72,
+        "Shutter_L_07": 60,
+        "Shutter_R_07": 60,
+        "WindowFrame_08": 72,
+        "WindowSash_08": 72,
+        "Shutter_L_08": 60,
+        "Shutter_R_08": 60,
+        "WindowFrame_09": 72,
+        "WindowSash_09": 72,
+        "Shutter_L_09": 60,
+        "Shutter_R_09": 60,
+        "WindowFrame_10": 72,
+        "WindowSash_10": 72,
+        "Shutter_L_10": 60,
+        "Shutter_R_10": 60,
+        "WindowFrame_11": 72,
+        "WindowSash_11": 72,
+        "Shutter_L_11": 60,
+        "Shutter_R_11": 60,
+        "WindowFrame_12": 72,
+        "WindowSash_12": 72,
+        "Shutter_L_12": 60,
+        "Shutter_R_12": 60,
+        "WindowFrame_13": 72,
+        "WindowSash_13": 72,
+        "Shutter_L_13": 60,
+        "Shutter_R_13": 60,
+        "WindowFrame_14": 72,
+        "WindowSash_14": 72,
+        "Shutter_L_14": 60,
+        "Shutter_R_14": 60,
+        "WindowFrame_15": 72,
+        "WindowSash_15": 72,
+        "Shutter_L_15": 60,
+        "Shutter_R_15": 60,
+        "Porch": 264
+      },
+      "triangles_total": 13000,
+      "render_paths": {
+        "front34_closed": "D:/lucidgloves/InfiniteAincrad/Art/Generated/Floor1Modular20260916/renders/01_hearth_cottage-front34-closed.png",
+        "back34_closed": "D:/lucidgloves/InfiniteAincrad/Art/Generated/Floor1Modular20260916/renders/01_hearth_cottage-back34-closed.png",
+        "side34_closed": "D:/lucidgloves/InfiniteAincrad/Art/Generated/Floor1Modular20260916/renders/01_hearth_cottage-side34-closed.png",
+        "front34_open": "D:/lucidgloves/InfiniteAincrad/Art/Generated/Floor1Modular20260916/renders/01_hearth_cottage-front34-open.png"
+      }
+    },
+    {
+      "variant_id": "02_market_house",
+      "name_zh": "集市商铺住宅",
+      "source_glb": "res://assets/floor1/modular_houses_20260916/02_market_house.glb",
+      "coordinates": {
+        "authoring": "blender_z_up",
+        "runtime": "godot_y_up",
+        "front_normal_godot": "+Z"
+      },
+      "dimensions_m": {
+        "target_height": 11.5,
+        "blocks": [
+          {
+            "name": "main",
+            "width": 6.2,
+            "depth": 9.0,
+            "floors": 2,
+            "floor_height": 3.4,
+            "roof_rise": 4.7
+          }
+        ]
+      },
+      "spaces": [
+        {
+          "id": "main",
+          "kind": "interior",
+          "access": "through the main door",
+          "x": [
+            -3.1,
+            3.1
+          ],
+          "y": [
+            -4.5,
+            4.5
+          ],
+          "floors": 2,
+          "floor_height": 3.4
+        }
+      ],
+      "parts": [
+        {
+          "id": "BuildingShell",
+          "type": "shell",
+          "node": "BuildingShell"
+        },
+        {
+          "id": "Roof",
+          "type": "roof",
+          "node": "Roof"
+        },
+        {
+          "id": "TimberFrame",
+          "type": "timber_frame",
+          "node": "TimberFrame"
+        },
+        {
+          "id": "DoorFrame",
+          "type": "door_frame",
+          "node": "DoorFrame"
+        },
+        {
+          "id": "DoorLeaf",
+          "type": "door_leaf",
+          "node": "DoorLeaf"
+        },
+        {
+          "id": "WindowFrame_00",
+          "type": "window_frame",
+          "node": "WindowFrame_00"
+        },
+        {
+          "id": "WindowFrame_01",
+          "type": "window_frame",
+          "node": "WindowFrame_01"
+        },
+        {
+          "id": "WindowFrame_02",
+          "type": "window_frame",
+          "node": "WindowFrame_02"
+        },
+        {
+          "id": "WindowFrame_03",
+          "type": "window_frame",
+          "node": "WindowFrame_03"
+        },
+        {
+          "id": "WindowFrame_04",
+          "type": "window_frame",
+          "node": "WindowFrame_04"
+        },
+        {
+          "id": "WindowFrame_05",
+          "type": "window_frame",
+          "node": "WindowFrame_05"
+        },
+        {
+          "id": "WindowFrame_06",
+          "type": "window_frame",
+          "node": "WindowFrame_06"
+        },
+        {
+          "id": "WindowFrame_07",
+          "type": "window_frame",
+          "node": "WindowFrame_07"
+        },
+        {
+          "id": "WindowFrame_08",
+          "type": "window_frame",
+          "node": "WindowFrame_08"
+        },
+        {
+          "id": "WindowFrame_09",
+          "type": "window_frame",
+          "node": "WindowFrame_09"
+        },
+        {
+          "id": "WindowFrame_10",
+          "type": "window_frame",
+          "node": "WindowFrame_10"
+        },
+        {
+          "id": "WindowFrame_11",
+          "type": "window_frame",
+          "node": "WindowFrame_11"
+        },
+        {
+          "id": "WindowFrame_12",
+          "type": "window_frame",
+          "node": "WindowFrame_12"
+        },
+        {
+          "id": "WindowFrame_13",
+          "type": "window_frame",
+          "node": "WindowFrame_13"
+        },
+        {
+          "id": "WindowFrame_14",
+          "type": "window_frame",
+          "node": "WindowFrame_14"
+        },
+        {
+          "id": "WindowFrame_15",
+          "type": "window_frame",
+          "node": "WindowFrame_15"
+        },
+        {
+          "id": "WindowFrame_16",
+          "type": "window_frame",
+          "node": "WindowFrame_16"
+        },
+        {
+          "id": "WindowFrame_17",
+          "type": "window_frame",
+          "node": "WindowFrame_17"
+        },
+        {
+          "id": "WindowFrame_18",
+          "type": "window_frame",
+          "node": "WindowFrame_18"
+        },
+        {
+          "id": "WindowSash_00",
+          "type": "window_sash",
+          "node": "WindowSash_00"
+        },
+        {
+          "id": "WindowSash_01",
+          "type": "window_sash",
+          "node": "WindowSash_01"
+        },
+        {
+          "id": "WindowSash_02",
+          "type": "window_sash",
+          "node": "WindowSash_02"
+        },
+        {
+          "id": "WindowSash_03",
+          "type": "window_sash",
+          "node": "WindowSash_03"
+        },
+        {
+          "id": "WindowSash_04",
+          "type": "window_sash",
+          "node": "WindowSash_04"
+        },
+        {
+          "id": "WindowSash_05",
+          "type": "window_sash",
+          "node": "WindowSash_05"
+        },
+        {
+          "id": "WindowSash_06",
+          "type": "window_sash",
+          "node": "WindowSash_06"
+        },
+        {
+          "id": "WindowSash_07",
+          "type": "window_sash",
+          "node": "WindowSash_07"
+        },
+        {
+          "id": "WindowSash_08",
+          "type": "window_sash",
+          "node": "WindowSash_08"
+        },
+        {
+          "id": "WindowSash_09",
+          "type": "window_sash",
+          "node": "WindowSash_09"
+        },
+        {
+          "id": "WindowSash_10",
+          "type": "window_sash",
+          "node": "WindowSash_10"
+        },
+        {
+          "id": "WindowSash_11",
+          "type": "window_sash",
+          "node": "WindowSash_11"
+        },
+        {
+          "id": "WindowSash_12",
+          "type": "window_sash",
+          "node": "WindowSash_12"
+        },
+        {
+          "id": "WindowSash_13",
+          "type": "window_sash",
+          "node": "WindowSash_13"
+        },
+        {
+          "id": "WindowSash_14",
+          "type": "window_sash",
+          "node": "WindowSash_14"
+        },
+        {
+          "id": "WindowSash_15",
+          "type": "window_sash",
+          "node": "WindowSash_15"
+        },
+        {
+          "id": "WindowSash_16",
+          "type": "window_sash",
+          "node": "WindowSash_16"
+        },
+        {
+          "id": "WindowSash_17",
+          "type": "window_sash",
+          "node": "WindowSash_17"
+        },
+        {
+          "id": "WindowSash_18",
+          "type": "window_sash",
+          "node": "WindowSash_18"
+        },
+        {
+          "id": "ShutterPivot_L_00",
+          "type": "shutter",
+          "node": "ShutterPivot_L_00"
+        },
+        {
+          "id": "ShutterPivot_R_00",
+          "type": "shutter",
+          "node": "ShutterPivot_R_00"
+        },
+        {
+          "id": "ShutterPivot_L_01",
+          "type": "shutter",
+          "node": "ShutterPivot_L_01"
+        },
+        {
+          "id": "ShutterPivot_R_01",
+          "type": "shutter",
+          "node": "ShutterPivot_R_01"
+        },
+        {
+          "id": "ShutterPivot_L_02",
+          "type": "shutter",
+          "node": "ShutterPivot_L_02"
+        },
+        {
+          "id": "ShutterPivot_R_02",
+          "type": "shutter",
+          "node": "ShutterPivot_R_02"
+        },
+        {
+          "id": "ShutterPivot_L_03",
+          "type": "shutter",
+          "node": "ShutterPivot_L_03"
+        },
+        {
+          "id": "ShutterPivot_R_03",
+          "type": "shutter",
+          "node": "ShutterPivot_R_03"
+        },
+        {
+          "id": "ShutterPivot_L_04",
+          "type": "shutter",
+          "node": "ShutterPivot_L_04"
+        },
+        {
+          "id": "ShutterPivot_R_04",
+          "type": "shutter",
+          "node": "ShutterPivot_R_04"
+        },
+        {
+          "id": "ShutterPivot_L_05",
+          "type": "shutter",
+          "node": "ShutterPivot_L_05"
+        },
+        {
+          "id": "ShutterPivot_R_05",
+          "type": "shutter",
+          "node": "ShutterPivot_R_05"
+        },
+        {
+          "id": "ShutterPivot_L_06",
+          "type": "shutter",
+          "node": "ShutterPivot_L_06"
+        },
+        {
+          "id": "ShutterPivot_R_06",
+          "type": "shutter",
+          "node": "ShutterPivot_R_06"
+        },
+        {
+          "id": "ShutterPivot_L_07",
+          "type": "shutter",
+          "node": "ShutterPivot_L_07"
+        },
+        {
+          "id": "ShutterPivot_R_07",
+          "type": "shutter",
+          "node": "ShutterPivot_R_07"
+        },
+        {
+          "id": "ShutterPivot_L_08",
+          "type": "shutter",
+          "node": "ShutterPivot_L_08"
+        },
+        {
+          "id": "ShutterPivot_R_08",
+          "type": "shutter",
+          "node": "ShutterPivot_R_08"
+        },
+        {
+          "id": "ShutterPivot_L_09",
+          "type": "shutter",
+          "node": "ShutterPivot_L_09"
+        },
+        {
+          "id": "ShutterPivot_R_09",
+          "type": "shutter",
+          "node": "ShutterPivot_R_09"
+        },
+        {
+          "id": "ShutterPivot_L_10",
+          "type": "shutter",
+          "node": "ShutterPivot_L_10"
+        },
+        {
+          "id": "ShutterPivot_R_10",
+          "type": "shutter",
+          "node": "ShutterPivot_R_10"
+        },
+        {
+          "id": "ShutterPivot_L_11",
+          "type": "shutter",
+          "node": "ShutterPivot_L_11"
+        },
+        {
+          "id": "ShutterPivot_R_11",
+          "type": "shutter",
+          "node": "ShutterPivot_R_11"
+        },
+        {
+          "id": "ShutterPivot_L_12",
+          "type": "shutter",
+          "node": "ShutterPivot_L_12"
+        },
+        {
+          "id": "ShutterPivot_R_12",
+          "type": "shutter",
+          "node": "ShutterPivot_R_12"
+        },
+        {
+          "id": "ShutterPivot_L_13",
+          "type": "shutter",
+          "node": "ShutterPivot_L_13"
+        },
+        {
+          "id": "ShutterPivot_R_13",
+          "type": "shutter",
+          "node": "ShutterPivot_R_13"
+        },
+        {
+          "id": "ShutterPivot_L_14",
+          "type": "shutter",
+          "node": "ShutterPivot_L_14"
+        },
+        {
+          "id": "ShutterPivot_R_14",
+          "type": "shutter",
+          "node": "ShutterPivot_R_14"
+        },
+        {
+          "id": "ShutterPivot_L_15",
+          "type": "shutter",
+          "node": "ShutterPivot_L_15"
+        },
+        {
+          "id": "ShutterPivot_R_15",
+          "type": "shutter",
+          "node": "ShutterPivot_R_15"
+        },
+        {
+          "id": "ShutterPivot_L_16",
+          "type": "shutter",
+          "node": "ShutterPivot_L_16"
+        },
+        {
+          "id": "ShutterPivot_R_16",
+          "type": "shutter",
+          "node": "ShutterPivot_R_16"
+        },
+        {
+          "id": "ShutterPivot_L_17",
+          "type": "shutter",
+          "node": "ShutterPivot_L_17"
+        },
+        {
+          "id": "ShutterPivot_R_17",
+          "type": "shutter",
+          "node": "ShutterPivot_R_17"
+        },
+        {
+          "id": "ShutterPivot_L_18",
+          "type": "shutter",
+          "node": "ShutterPivot_L_18"
+        },
+        {
+          "id": "ShutterPivot_R_18",
+          "type": "shutter",
+          "node": "ShutterPivot_R_18"
+        },
+        {
+          "id": "ShopBay",
+          "type": "bay",
+          "node": "ShopBay"
+        }
+      ],
+      "door_unit_node": "DoorUnit",
+      "pivots": [
+        {
+          "id": "DoorPivot",
+          "type": "door",
+          "node": "DoorPivot",
+          "unit_node": "DoorUnit",
+          "axis_gltf": [
+            0,
+            1,
+            0
+          ],
+          "hinge_range_deg": [
+            0,
+            90
+          ],
+          "closed_angle_deg": 0,
+          "open_angle_deg": 88,
+          "leaf_node": "DoorLeaf"
+        },
+        {
+          "id": "WindowSash",
+          "type": "window",
+          "nodes": [
+            "WindowSash_00",
+            "WindowSash_01",
+            "WindowSash_02",
+            "WindowSash_03",
+            "WindowSash_04",
+            "WindowSash_05",
+            "WindowSash_06",
+            "WindowSash_07",
+            "WindowSash_08",
+            "WindowSash_09",
+            "WindowSash_10",
+            "WindowSash_11",
+            "WindowSash_12",
+            "WindowSash_13",
+            "WindowSash_14",
+            "WindowSash_15",
+            "WindowSash_16",
+            "WindowSash_17",
+            "WindowSash_18"
+          ],
+          "travel_m": 0.715,
+          "axis_gltf": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "Shutters",
+          "type": "shutter",
+          "nodes": [
+            "ShutterPivot_L_00",
+            "ShutterPivot_R_00",
+            "ShutterPivot_L_01",
+            "ShutterPivot_R_01",
+            "ShutterPivot_L_02",
+            "ShutterPivot_R_02",
+            "ShutterPivot_L_03",
+            "ShutterPivot_R_03",
+            "ShutterPivot_L_04",
+            "ShutterPivot_R_04",
+            "ShutterPivot_L_05",
+            "ShutterPivot_R_05",
+            "ShutterPivot_L_06",
+            "ShutterPivot_R_06",
+            "ShutterPivot_L_07",
+            "ShutterPivot_R_07",
+            "ShutterPivot_L_08",
+            "ShutterPivot_R_08",
+            "ShutterPivot_L_09",
+            "ShutterPivot_R_09",
+            "ShutterPivot_L_10",
+            "ShutterPivot_R_10",
+            "ShutterPivot_L_11",
+            "ShutterPivot_R_11",
+            "ShutterPivot_L_12",
+            "ShutterPivot_R_12",
+            "ShutterPivot_L_13",
+            "ShutterPivot_R_13",
+            "ShutterPivot_L_14",
+            "ShutterPivot_R_14",
+            "ShutterPivot_L_15",
+            "ShutterPivot_R_15",
+            "ShutterPivot_L_16",
+            "ShutterPivot_R_16",
+            "ShutterPivot_L_17",
+            "ShutterPivot_R_17",
+            "ShutterPivot_L_18",
+            "ShutterPivot_R_18"
+          ],
+          "axis_gltf": [
+            0,
+            1,
+            0
+          ],
+          "hinge_range_deg": [
+            0,
+            75
+          ],
+          "open_angle_deg": 75
+        }
+      ],
+      "openings": [
+        {
+          "kind": "door",
+          "id": "door_main",
+          "centre": [
+            -0.9,
+            -4.5,
+            1.1
+          ],
+          "size": [
+            1.2,
+            0.26,
+            2.2
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "clear_width": 1.2,
+          "clear_height": 2.2,
+          "node_window_id": null
+        },
+        {
+          "kind": "window",
+          "id": "window_00",
+          "centre": [
+            1.0333333333333337,
+            -4.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_00"
+        },
+        {
+          "kind": "window",
+          "id": "window_01",
+          "centre": [
+            -1.0333333333333332,
+            -4.5,
+            5.0
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_01"
+        },
+        {
+          "kind": "window",
+          "id": "window_02",
+          "centre": [
+            1.0333333333333337,
+            -4.5,
+            5.0
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_02"
+        },
+        {
+          "kind": "window",
+          "id": "window_03",
+          "centre": [
+            -1.0333333333333332,
+            4.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_03"
+        },
+        {
+          "kind": "window",
+          "id": "window_04",
+          "centre": [
+            1.0333333333333337,
+            4.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_04"
+        },
+        {
+          "kind": "window",
+          "id": "window_05",
+          "centre": [
+            -1.0333333333333332,
+            4.5,
+            5.0
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_05"
+        },
+        {
+          "kind": "window",
+          "id": "window_06",
+          "centre": [
+            1.0333333333333337,
+            4.5,
+            5.0
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_06"
+        },
+        {
+          "kind": "window",
+          "id": "window_07",
+          "centre": [
+            -3.1,
+            -2.25,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_07"
+        },
+        {
+          "kind": "window",
+          "id": "window_08",
+          "centre": [
+            -3.1,
+            0.0,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_08"
+        },
+        {
+          "kind": "window",
+          "id": "window_09",
+          "centre": [
+            -3.1,
+            2.25,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_09"
+        },
+        {
+          "kind": "window",
+          "id": "window_10",
+          "centre": [
+            -3.1,
+            -2.25,
+            5.0
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_10"
+        },
+        {
+          "kind": "window",
+          "id": "window_11",
+          "centre": [
+            -3.1,
+            0.0,
+            5.0
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_11"
+        },
+        {
+          "kind": "window",
+          "id": "window_12",
+          "centre": [
+            -3.1,
+            2.25,
+            5.0
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_12"
+        },
+        {
+          "kind": "window",
+          "id": "window_13",
+          "centre": [
+            3.1,
+            -2.25,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_13"
+        },
+        {
+          "kind": "window",
+          "id": "window_14",
+          "centre": [
+            3.1,
+            0.0,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_14"
+        },
+        {
+          "kind": "window",
+          "id": "window_15",
+          "centre": [
+            3.1,
+            2.25,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_15"
+        },
+        {
+          "kind": "window",
+          "id": "window_16",
+          "centre": [
+            3.1,
+            -2.25,
+            5.0
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_16"
+        },
+        {
+          "kind": "window",
+          "id": "window_17",
+          "centre": [
+            3.1,
+            0.0,
+            5.0
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_17"
+        },
+        {
+          "kind": "window",
+          "id": "window_18",
+          "centre": [
+            3.1,
+            2.25,
+            5.0
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_18"
+        }
+      ],
+      "collision": [
+        {
+          "id": "shell",
+          "node": "BuildingShell",
+          "kind": "trimesh",
+          "source_mesh": "BuildingShell"
+        },
+        {
+          "id": "timber",
+          "node": "TimberFrame",
+          "kind": "trimesh",
+          "source_mesh": "TimberFrame"
+        },
+        {
+          "id": "roof",
+          "node": "Roof",
+          "kind": "trimesh",
+          "source_mesh": "Roof"
+        },
+        {
+          "id": "door_leaf",
+          "node": "DoorLeaf",
+          "kind": "box",
+          "parent_pivot": "DoorPivot",
+          "size": [
+            1.1199999999999999,
+            0.09,
+            2.1500000000000004
+          ],
+          "centre_local": [
+            0.6,
+            0.0,
+            1.0750000000000002
+          ]
+        },
+        {
+          "id": "shop_post_left",
+          "node": "ShopBay",
+          "kind": "box",
+          "size": [
+            0.14,
+            0.5,
+            2.5
+          ],
+          "centre_local": [
+            -2.45,
+            -4.75,
+            1.35
+          ]
+        },
+        {
+          "id": "shop_post_right",
+          "node": "ShopBay",
+          "kind": "box",
+          "size": [
+            0.14,
+            0.5,
+            2.5
+          ],
+          "centre_local": [
+            2.45,
+            -4.75,
+            1.35
+          ]
+        }
+      ],
+      "roof_removable": true,
+      "triangles_by_part": {
+        "BuildingShell": 3976,
+        "Roof": 3528,
+        "TimberFrame": 600,
+        "DoorFrame": 36,
+        "DoorLeaf": 72,
+        "WindowFrame_00": 72,
+        "WindowSash_00": 72,
+        "Shutter_L_00": 60,
+        "Shutter_R_00": 60,
+        "WindowFrame_01": 72,
+        "WindowSash_01": 72,
+        "Shutter_L_01": 60,
+        "Shutter_R_01": 60,
+        "WindowFrame_02": 72,
+        "WindowSash_02": 72,
+        "Shutter_L_02": 60,
+        "Shutter_R_02": 60,
+        "WindowFrame_03": 72,
+        "WindowSash_03": 72,
+        "Shutter_L_03": 60,
+        "Shutter_R_03": 60,
+        "WindowFrame_04": 72,
+        "WindowSash_04": 72,
+        "Shutter_L_04": 60,
+        "Shutter_R_04": 60,
+        "WindowFrame_05": 72,
+        "WindowSash_05": 72,
+        "Shutter_L_05": 60,
+        "Shutter_R_05": 60,
+        "WindowFrame_06": 72,
+        "WindowSash_06": 72,
+        "Shutter_L_06": 60,
+        "Shutter_R_06": 60,
+        "WindowFrame_07": 72,
+        "WindowSash_07": 72,
+        "Shutter_L_07": 60,
+        "Shutter_R_07": 60,
+        "WindowFrame_08": 72,
+        "WindowSash_08": 72,
+        "Shutter_L_08": 60,
+        "Shutter_R_08": 60,
+        "WindowFrame_09": 72,
+        "WindowSash_09": 72,
+        "Shutter_L_09": 60,
+        "Shutter_R_09": 60,
+        "WindowFrame_10": 72,
+        "WindowSash_10": 72,
+        "Shutter_L_10": 60,
+        "Shutter_R_10": 60,
+        "WindowFrame_11": 72,
+        "WindowSash_11": 72,
+        "Shutter_L_11": 60,
+        "Shutter_R_11": 60,
+        "WindowFrame_12": 72,
+        "WindowSash_12": 72,
+        "Shutter_L_12": 60,
+        "Shutter_R_12": 60,
+        "WindowFrame_13": 72,
+        "WindowSash_13": 72,
+        "Shutter_L_13": 60,
+        "Shutter_R_13": 60,
+        "WindowFrame_14": 72,
+        "WindowSash_14": 72,
+        "Shutter_L_14": 60,
+        "Shutter_R_14": 60,
+        "WindowFrame_15": 72,
+        "WindowSash_15": 72,
+        "Shutter_L_15": 60,
+        "Shutter_R_15": 60,
+        "WindowFrame_16": 72,
+        "WindowSash_16": 72,
+        "Shutter_L_16": 60,
+        "Shutter_R_16": 60,
+        "WindowFrame_17": 72,
+        "WindowSash_17": 72,
+        "Shutter_L_17": 60,
+        "Shutter_R_17": 60,
+        "WindowFrame_18": 72,
+        "WindowSash_18": 72,
+        "Shutter_L_18": 60,
+        "Shutter_R_18": 60,
+        "ShopBay": 244
+      },
+      "triangles_total": 13472,
+      "render_paths": {
+        "front34_closed": "D:/lucidgloves/InfiniteAincrad/Art/Generated/Floor1Modular20260916/renders/02_market_house-front34-closed.png",
+        "back34_closed": "D:/lucidgloves/InfiniteAincrad/Art/Generated/Floor1Modular20260916/renders/02_market_house-back34-closed.png",
+        "side34_closed": "D:/lucidgloves/InfiniteAincrad/Art/Generated/Floor1Modular20260916/renders/02_market_house-side34-closed.png",
+        "front34_open": "D:/lucidgloves/InfiniteAincrad/Art/Generated/Floor1Modular20260916/renders/02_market_house-front34-open.png"
+      }
+    },
+    {
+      "variant_id": "03_corner_turret",
+      "name_zh": "转角塔楼宅",
+      "source_glb": "res://assets/floor1/modular_houses_20260916/03_corner_turret.glb",
+      "coordinates": {
+        "authoring": "blender_z_up",
+        "runtime": "godot_y_up",
+        "front_normal_godot": "+Z"
+      },
+      "dimensions_m": {
+        "target_height": 12.0,
+        "blocks": [
+          {
+            "name": "main",
+            "width": 9.0,
+            "depth": 7.0,
+            "floors": 3,
+            "floor_height": 3.0,
+            "roof_rise": 3.0
+          },
+          {
+            "name": "wing",
+            "width": 3.4,
+            "depth": 3.5,
+            "floors": 2,
+            "floor_height": 3.0,
+            "roof_rise": 2.4
+          }
+        ]
+      },
+      "spaces": [
+        {
+          "id": "main",
+          "kind": "interior",
+          "access": "through the main door",
+          "x": [
+            -4.5,
+            4.5
+          ],
+          "y": [
+            -3.5,
+            3.5
+          ],
+          "floors": 3,
+          "floor_height": 3.0
+        },
+        {
+          "id": "wing",
+          "kind": "interior",
+          "access": "through the main door",
+          "x": [
+            -4.5,
+            -1.1
+          ],
+          "y": [
+            3.5,
+            7.0
+          ],
+          "floors": 2,
+          "floor_height": 3.0
+        },
+        {
+          "id": "turret",
+          "kind": "exterior_accessory_tower",
+          "access": "not enterable in this prototype",
+          "footprint": "octagonal, inner corner"
+        }
+      ],
+      "parts": [
+        {
+          "id": "BuildingShell",
+          "type": "shell",
+          "node": "BuildingShell"
+        },
+        {
+          "id": "Roof",
+          "type": "roof",
+          "node": "Roof"
+        },
+        {
+          "id": "TimberFrame",
+          "type": "timber_frame",
+          "node": "TimberFrame"
+        },
+        {
+          "id": "DoorFrame",
+          "type": "door_frame",
+          "node": "DoorFrame"
+        },
+        {
+          "id": "DoorLeaf",
+          "type": "door_leaf",
+          "node": "DoorLeaf"
+        },
+        {
+          "id": "WindowFrame_00",
+          "type": "window_frame",
+          "node": "WindowFrame_00"
+        },
+        {
+          "id": "WindowFrame_01",
+          "type": "window_frame",
+          "node": "WindowFrame_01"
+        },
+        {
+          "id": "WindowFrame_02",
+          "type": "window_frame",
+          "node": "WindowFrame_02"
+        },
+        {
+          "id": "WindowFrame_03",
+          "type": "window_frame",
+          "node": "WindowFrame_03"
+        },
+        {
+          "id": "WindowFrame_04",
+          "type": "window_frame",
+          "node": "WindowFrame_04"
+        },
+        {
+          "id": "WindowFrame_05",
+          "type": "window_frame",
+          "node": "WindowFrame_05"
+        },
+        {
+          "id": "WindowFrame_06",
+          "type": "window_frame",
+          "node": "WindowFrame_06"
+        },
+        {
+          "id": "WindowFrame_07",
+          "type": "window_frame",
+          "node": "WindowFrame_07"
+        },
+        {
+          "id": "WindowFrame_08",
+          "type": "window_frame",
+          "node": "WindowFrame_08"
+        },
+        {
+          "id": "WindowFrame_09",
+          "type": "window_frame",
+          "node": "WindowFrame_09"
+        },
+        {
+          "id": "WindowFrame_10",
+          "type": "window_frame",
+          "node": "WindowFrame_10"
+        },
+        {
+          "id": "WindowFrame_11",
+          "type": "window_frame",
+          "node": "WindowFrame_11"
+        },
+        {
+          "id": "WindowFrame_12",
+          "type": "window_frame",
+          "node": "WindowFrame_12"
+        },
+        {
+          "id": "WindowFrame_13",
+          "type": "window_frame",
+          "node": "WindowFrame_13"
+        },
+        {
+          "id": "WindowFrame_14",
+          "type": "window_frame",
+          "node": "WindowFrame_14"
+        },
+        {
+          "id": "WindowFrame_15",
+          "type": "window_frame",
+          "node": "WindowFrame_15"
+        },
+        {
+          "id": "WindowFrame_16",
+          "type": "window_frame",
+          "node": "WindowFrame_16"
+        },
+        {
+          "id": "WindowFrame_17",
+          "type": "window_frame",
+          "node": "WindowFrame_17"
+        },
+        {
+          "id": "WindowFrame_18",
+          "type": "window_frame",
+          "node": "WindowFrame_18"
+        },
+        {
+          "id": "WindowFrame_19",
+          "type": "window_frame",
+          "node": "WindowFrame_19"
+        },
+        {
+          "id": "WindowFrame_20",
+          "type": "window_frame",
+          "node": "WindowFrame_20"
+        },
+        {
+          "id": "WindowFrame_21",
+          "type": "window_frame",
+          "node": "WindowFrame_21"
+        },
+        {
+          "id": "WindowFrame_22",
+          "type": "window_frame",
+          "node": "WindowFrame_22"
+        },
+        {
+          "id": "WindowFrame_23",
+          "type": "window_frame",
+          "node": "WindowFrame_23"
+        },
+        {
+          "id": "WindowFrame_24",
+          "type": "window_frame",
+          "node": "WindowFrame_24"
+        },
+        {
+          "id": "WindowFrame_25",
+          "type": "window_frame",
+          "node": "WindowFrame_25"
+        },
+        {
+          "id": "WindowFrame_26",
+          "type": "window_frame",
+          "node": "WindowFrame_26"
+        },
+        {
+          "id": "WindowFrame_27",
+          "type": "window_frame",
+          "node": "WindowFrame_27"
+        },
+        {
+          "id": "WindowFrame_28",
+          "type": "window_frame",
+          "node": "WindowFrame_28"
+        },
+        {
+          "id": "WindowFrame_29",
+          "type": "window_frame",
+          "node": "WindowFrame_29"
+        },
+        {
+          "id": "WindowFrame_30",
+          "type": "window_frame",
+          "node": "WindowFrame_30"
+        },
+        {
+          "id": "WindowFrame_31",
+          "type": "window_frame",
+          "node": "WindowFrame_31"
+        },
+        {
+          "id": "WindowFrame_32",
+          "type": "window_frame",
+          "node": "WindowFrame_32"
+        },
+        {
+          "id": "WindowFrame_33",
+          "type": "window_frame",
+          "node": "WindowFrame_33"
+        },
+        {
+          "id": "WindowFrame_34",
+          "type": "window_frame",
+          "node": "WindowFrame_34"
+        },
+        {
+          "id": "WindowFrame_35",
+          "type": "window_frame",
+          "node": "WindowFrame_35"
+        },
+        {
+          "id": "WindowFrame_36",
+          "type": "window_frame",
+          "node": "WindowFrame_36"
+        },
+        {
+          "id": "WindowFrame_37",
+          "type": "window_frame",
+          "node": "WindowFrame_37"
+        },
+        {
+          "id": "WindowFrame_38",
+          "type": "window_frame",
+          "node": "WindowFrame_38"
+        },
+        {
+          "id": "WindowSash_00",
+          "type": "window_sash",
+          "node": "WindowSash_00"
+        },
+        {
+          "id": "WindowSash_01",
+          "type": "window_sash",
+          "node": "WindowSash_01"
+        },
+        {
+          "id": "WindowSash_02",
+          "type": "window_sash",
+          "node": "WindowSash_02"
+        },
+        {
+          "id": "WindowSash_03",
+          "type": "window_sash",
+          "node": "WindowSash_03"
+        },
+        {
+          "id": "WindowSash_04",
+          "type": "window_sash",
+          "node": "WindowSash_04"
+        },
+        {
+          "id": "WindowSash_05",
+          "type": "window_sash",
+          "node": "WindowSash_05"
+        },
+        {
+          "id": "WindowSash_06",
+          "type": "window_sash",
+          "node": "WindowSash_06"
+        },
+        {
+          "id": "WindowSash_07",
+          "type": "window_sash",
+          "node": "WindowSash_07"
+        },
+        {
+          "id": "WindowSash_08",
+          "type": "window_sash",
+          "node": "WindowSash_08"
+        },
+        {
+          "id": "WindowSash_09",
+          "type": "window_sash",
+          "node": "WindowSash_09"
+        },
+        {
+          "id": "WindowSash_10",
+          "type": "window_sash",
+          "node": "WindowSash_10"
+        },
+        {
+          "id": "WindowSash_11",
+          "type": "window_sash",
+          "node": "WindowSash_11"
+        },
+        {
+          "id": "WindowSash_12",
+          "type": "window_sash",
+          "node": "WindowSash_12"
+        },
+        {
+          "id": "WindowSash_13",
+          "type": "window_sash",
+          "node": "WindowSash_13"
+        },
+        {
+          "id": "WindowSash_14",
+          "type": "window_sash",
+          "node": "WindowSash_14"
+        },
+        {
+          "id": "WindowSash_15",
+          "type": "window_sash",
+          "node": "WindowSash_15"
+        },
+        {
+          "id": "WindowSash_16",
+          "type": "window_sash",
+          "node": "WindowSash_16"
+        },
+        {
+          "id": "WindowSash_17",
+          "type": "window_sash",
+          "node": "WindowSash_17"
+        },
+        {
+          "id": "WindowSash_18",
+          "type": "window_sash",
+          "node": "WindowSash_18"
+        },
+        {
+          "id": "WindowSash_19",
+          "type": "window_sash",
+          "node": "WindowSash_19"
+        },
+        {
+          "id": "WindowSash_20",
+          "type": "window_sash",
+          "node": "WindowSash_20"
+        },
+        {
+          "id": "WindowSash_21",
+          "type": "window_sash",
+          "node": "WindowSash_21"
+        },
+        {
+          "id": "WindowSash_22",
+          "type": "window_sash",
+          "node": "WindowSash_22"
+        },
+        {
+          "id": "WindowSash_23",
+          "type": "window_sash",
+          "node": "WindowSash_23"
+        },
+        {
+          "id": "WindowSash_24",
+          "type": "window_sash",
+          "node": "WindowSash_24"
+        },
+        {
+          "id": "WindowSash_25",
+          "type": "window_sash",
+          "node": "WindowSash_25"
+        },
+        {
+          "id": "WindowSash_26",
+          "type": "window_sash",
+          "node": "WindowSash_26"
+        },
+        {
+          "id": "WindowSash_27",
+          "type": "window_sash",
+          "node": "WindowSash_27"
+        },
+        {
+          "id": "WindowSash_28",
+          "type": "window_sash",
+          "node": "WindowSash_28"
+        },
+        {
+          "id": "WindowSash_29",
+          "type": "window_sash",
+          "node": "WindowSash_29"
+        },
+        {
+          "id": "WindowSash_30",
+          "type": "window_sash",
+          "node": "WindowSash_30"
+        },
+        {
+          "id": "WindowSash_31",
+          "type": "window_sash",
+          "node": "WindowSash_31"
+        },
+        {
+          "id": "WindowSash_32",
+          "type": "window_sash",
+          "node": "WindowSash_32"
+        },
+        {
+          "id": "WindowSash_33",
+          "type": "window_sash",
+          "node": "WindowSash_33"
+        },
+        {
+          "id": "WindowSash_34",
+          "type": "window_sash",
+          "node": "WindowSash_34"
+        },
+        {
+          "id": "WindowSash_35",
+          "type": "window_sash",
+          "node": "WindowSash_35"
+        },
+        {
+          "id": "WindowSash_36",
+          "type": "window_sash",
+          "node": "WindowSash_36"
+        },
+        {
+          "id": "WindowSash_37",
+          "type": "window_sash",
+          "node": "WindowSash_37"
+        },
+        {
+          "id": "WindowSash_38",
+          "type": "window_sash",
+          "node": "WindowSash_38"
+        },
+        {
+          "id": "ShutterPivot_L_00",
+          "type": "shutter",
+          "node": "ShutterPivot_L_00"
+        },
+        {
+          "id": "ShutterPivot_R_00",
+          "type": "shutter",
+          "node": "ShutterPivot_R_00"
+        },
+        {
+          "id": "ShutterPivot_L_01",
+          "type": "shutter",
+          "node": "ShutterPivot_L_01"
+        },
+        {
+          "id": "ShutterPivot_R_01",
+          "type": "shutter",
+          "node": "ShutterPivot_R_01"
+        },
+        {
+          "id": "ShutterPivot_L_02",
+          "type": "shutter",
+          "node": "ShutterPivot_L_02"
+        },
+        {
+          "id": "ShutterPivot_R_02",
+          "type": "shutter",
+          "node": "ShutterPivot_R_02"
+        },
+        {
+          "id": "ShutterPivot_L_03",
+          "type": "shutter",
+          "node": "ShutterPivot_L_03"
+        },
+        {
+          "id": "ShutterPivot_R_03",
+          "type": "shutter",
+          "node": "ShutterPivot_R_03"
+        },
+        {
+          "id": "ShutterPivot_L_04",
+          "type": "shutter",
+          "node": "ShutterPivot_L_04"
+        },
+        {
+          "id": "ShutterPivot_R_04",
+          "type": "shutter",
+          "node": "ShutterPivot_R_04"
+        },
+        {
+          "id": "ShutterPivot_L_05",
+          "type": "shutter",
+          "node": "ShutterPivot_L_05"
+        },
+        {
+          "id": "ShutterPivot_R_05",
+          "type": "shutter",
+          "node": "ShutterPivot_R_05"
+        },
+        {
+          "id": "ShutterPivot_L_06",
+          "type": "shutter",
+          "node": "ShutterPivot_L_06"
+        },
+        {
+          "id": "ShutterPivot_R_06",
+          "type": "shutter",
+          "node": "ShutterPivot_R_06"
+        },
+        {
+          "id": "ShutterPivot_L_07",
+          "type": "shutter",
+          "node": "ShutterPivot_L_07"
+        },
+        {
+          "id": "ShutterPivot_R_07",
+          "type": "shutter",
+          "node": "ShutterPivot_R_07"
+        },
+        {
+          "id": "ShutterPivot_L_08",
+          "type": "shutter",
+          "node": "ShutterPivot_L_08"
+        },
+        {
+          "id": "ShutterPivot_R_08",
+          "type": "shutter",
+          "node": "ShutterPivot_R_08"
+        },
+        {
+          "id": "ShutterPivot_L_09",
+          "type": "shutter",
+          "node": "ShutterPivot_L_09"
+        },
+        {
+          "id": "ShutterPivot_R_09",
+          "type": "shutter",
+          "node": "ShutterPivot_R_09"
+        },
+        {
+          "id": "ShutterPivot_L_10",
+          "type": "shutter",
+          "node": "ShutterPivot_L_10"
+        },
+        {
+          "id": "ShutterPivot_R_10",
+          "type": "shutter",
+          "node": "ShutterPivot_R_10"
+        },
+        {
+          "id": "ShutterPivot_L_11",
+          "type": "shutter",
+          "node": "ShutterPivot_L_11"
+        },
+        {
+          "id": "ShutterPivot_R_11",
+          "type": "shutter",
+          "node": "ShutterPivot_R_11"
+        },
+        {
+          "id": "ShutterPivot_L_12",
+          "type": "shutter",
+          "node": "ShutterPivot_L_12"
+        },
+        {
+          "id": "ShutterPivot_R_12",
+          "type": "shutter",
+          "node": "ShutterPivot_R_12"
+        },
+        {
+          "id": "ShutterPivot_L_13",
+          "type": "shutter",
+          "node": "ShutterPivot_L_13"
+        },
+        {
+          "id": "ShutterPivot_R_13",
+          "type": "shutter",
+          "node": "ShutterPivot_R_13"
+        },
+        {
+          "id": "ShutterPivot_L_14",
+          "type": "shutter",
+          "node": "ShutterPivot_L_14"
+        },
+        {
+          "id": "ShutterPivot_R_14",
+          "type": "shutter",
+          "node": "ShutterPivot_R_14"
+        },
+        {
+          "id": "ShutterPivot_L_15",
+          "type": "shutter",
+          "node": "ShutterPivot_L_15"
+        },
+        {
+          "id": "ShutterPivot_R_15",
+          "type": "shutter",
+          "node": "ShutterPivot_R_15"
+        },
+        {
+          "id": "ShutterPivot_L_16",
+          "type": "shutter",
+          "node": "ShutterPivot_L_16"
+        },
+        {
+          "id": "ShutterPivot_R_16",
+          "type": "shutter",
+          "node": "ShutterPivot_R_16"
+        },
+        {
+          "id": "ShutterPivot_L_17",
+          "type": "shutter",
+          "node": "ShutterPivot_L_17"
+        },
+        {
+          "id": "ShutterPivot_R_17",
+          "type": "shutter",
+          "node": "ShutterPivot_R_17"
+        },
+        {
+          "id": "ShutterPivot_L_18",
+          "type": "shutter",
+          "node": "ShutterPivot_L_18"
+        },
+        {
+          "id": "ShutterPivot_R_18",
+          "type": "shutter",
+          "node": "ShutterPivot_R_18"
+        },
+        {
+          "id": "ShutterPivot_L_19",
+          "type": "shutter",
+          "node": "ShutterPivot_L_19"
+        },
+        {
+          "id": "ShutterPivot_R_19",
+          "type": "shutter",
+          "node": "ShutterPivot_R_19"
+        },
+        {
+          "id": "ShutterPivot_L_20",
+          "type": "shutter",
+          "node": "ShutterPivot_L_20"
+        },
+        {
+          "id": "ShutterPivot_R_20",
+          "type": "shutter",
+          "node": "ShutterPivot_R_20"
+        },
+        {
+          "id": "ShutterPivot_L_21",
+          "type": "shutter",
+          "node": "ShutterPivot_L_21"
+        },
+        {
+          "id": "ShutterPivot_R_21",
+          "type": "shutter",
+          "node": "ShutterPivot_R_21"
+        },
+        {
+          "id": "ShutterPivot_L_22",
+          "type": "shutter",
+          "node": "ShutterPivot_L_22"
+        },
+        {
+          "id": "ShutterPivot_R_22",
+          "type": "shutter",
+          "node": "ShutterPivot_R_22"
+        },
+        {
+          "id": "ShutterPivot_L_23",
+          "type": "shutter",
+          "node": "ShutterPivot_L_23"
+        },
+        {
+          "id": "ShutterPivot_R_23",
+          "type": "shutter",
+          "node": "ShutterPivot_R_23"
+        },
+        {
+          "id": "ShutterPivot_L_24",
+          "type": "shutter",
+          "node": "ShutterPivot_L_24"
+        },
+        {
+          "id": "ShutterPivot_R_24",
+          "type": "shutter",
+          "node": "ShutterPivot_R_24"
+        },
+        {
+          "id": "ShutterPivot_L_25",
+          "type": "shutter",
+          "node": "ShutterPivot_L_25"
+        },
+        {
+          "id": "ShutterPivot_R_25",
+          "type": "shutter",
+          "node": "ShutterPivot_R_25"
+        },
+        {
+          "id": "ShutterPivot_L_26",
+          "type": "shutter",
+          "node": "ShutterPivot_L_26"
+        },
+        {
+          "id": "ShutterPivot_R_26",
+          "type": "shutter",
+          "node": "ShutterPivot_R_26"
+        },
+        {
+          "id": "ShutterPivot_L_27",
+          "type": "shutter",
+          "node": "ShutterPivot_L_27"
+        },
+        {
+          "id": "ShutterPivot_R_27",
+          "type": "shutter",
+          "node": "ShutterPivot_R_27"
+        },
+        {
+          "id": "ShutterPivot_L_28",
+          "type": "shutter",
+          "node": "ShutterPivot_L_28"
+        },
+        {
+          "id": "ShutterPivot_R_28",
+          "type": "shutter",
+          "node": "ShutterPivot_R_28"
+        },
+        {
+          "id": "ShutterPivot_L_29",
+          "type": "shutter",
+          "node": "ShutterPivot_L_29"
+        },
+        {
+          "id": "ShutterPivot_R_29",
+          "type": "shutter",
+          "node": "ShutterPivot_R_29"
+        },
+        {
+          "id": "ShutterPivot_L_30",
+          "type": "shutter",
+          "node": "ShutterPivot_L_30"
+        },
+        {
+          "id": "ShutterPivot_R_30",
+          "type": "shutter",
+          "node": "ShutterPivot_R_30"
+        },
+        {
+          "id": "ShutterPivot_L_31",
+          "type": "shutter",
+          "node": "ShutterPivot_L_31"
+        },
+        {
+          "id": "ShutterPivot_R_31",
+          "type": "shutter",
+          "node": "ShutterPivot_R_31"
+        },
+        {
+          "id": "ShutterPivot_L_32",
+          "type": "shutter",
+          "node": "ShutterPivot_L_32"
+        },
+        {
+          "id": "ShutterPivot_R_32",
+          "type": "shutter",
+          "node": "ShutterPivot_R_32"
+        },
+        {
+          "id": "ShutterPivot_L_33",
+          "type": "shutter",
+          "node": "ShutterPivot_L_33"
+        },
+        {
+          "id": "ShutterPivot_R_33",
+          "type": "shutter",
+          "node": "ShutterPivot_R_33"
+        },
+        {
+          "id": "ShutterPivot_L_34",
+          "type": "shutter",
+          "node": "ShutterPivot_L_34"
+        },
+        {
+          "id": "ShutterPivot_R_34",
+          "type": "shutter",
+          "node": "ShutterPivot_R_34"
+        },
+        {
+          "id": "ShutterPivot_L_35",
+          "type": "shutter",
+          "node": "ShutterPivot_L_35"
+        },
+        {
+          "id": "ShutterPivot_R_35",
+          "type": "shutter",
+          "node": "ShutterPivot_R_35"
+        },
+        {
+          "id": "ShutterPivot_L_36",
+          "type": "shutter",
+          "node": "ShutterPivot_L_36"
+        },
+        {
+          "id": "ShutterPivot_R_36",
+          "type": "shutter",
+          "node": "ShutterPivot_R_36"
+        },
+        {
+          "id": "ShutterPivot_L_37",
+          "type": "shutter",
+          "node": "ShutterPivot_L_37"
+        },
+        {
+          "id": "ShutterPivot_R_37",
+          "type": "shutter",
+          "node": "ShutterPivot_R_37"
+        },
+        {
+          "id": "ShutterPivot_L_38",
+          "type": "shutter",
+          "node": "ShutterPivot_L_38"
+        },
+        {
+          "id": "ShutterPivot_R_38",
+          "type": "shutter",
+          "node": "ShutterPivot_R_38"
+        }
+      ],
+      "door_unit_node": "DoorUnit",
+      "pivots": [
+        {
+          "id": "DoorPivot",
+          "type": "door",
+          "node": "DoorPivot",
+          "unit_node": "DoorUnit",
+          "axis_gltf": [
+            0,
+            1,
+            0
+          ],
+          "hinge_range_deg": [
+            0,
+            90
+          ],
+          "closed_angle_deg": 0,
+          "open_angle_deg": 88,
+          "leaf_node": "DoorLeaf"
+        },
+        {
+          "id": "WindowSash",
+          "type": "window",
+          "nodes": [
+            "WindowSash_00",
+            "WindowSash_01",
+            "WindowSash_02",
+            "WindowSash_03",
+            "WindowSash_04",
+            "WindowSash_05",
+            "WindowSash_06",
+            "WindowSash_07",
+            "WindowSash_08",
+            "WindowSash_09",
+            "WindowSash_10",
+            "WindowSash_11",
+            "WindowSash_12",
+            "WindowSash_13",
+            "WindowSash_14",
+            "WindowSash_15",
+            "WindowSash_16",
+            "WindowSash_17",
+            "WindowSash_18",
+            "WindowSash_19",
+            "WindowSash_20",
+            "WindowSash_21",
+            "WindowSash_22",
+            "WindowSash_23",
+            "WindowSash_24",
+            "WindowSash_25",
+            "WindowSash_26",
+            "WindowSash_27",
+            "WindowSash_28",
+            "WindowSash_29",
+            "WindowSash_30",
+            "WindowSash_31",
+            "WindowSash_32",
+            "WindowSash_33",
+            "WindowSash_34",
+            "WindowSash_35",
+            "WindowSash_36",
+            "WindowSash_37",
+            "WindowSash_38"
+          ],
+          "travel_m": 0.715,
+          "axis_gltf": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "Shutters",
+          "type": "shutter",
+          "nodes": [
+            "ShutterPivot_L_00",
+            "ShutterPivot_R_00",
+            "ShutterPivot_L_01",
+            "ShutterPivot_R_01",
+            "ShutterPivot_L_02",
+            "ShutterPivot_R_02",
+            "ShutterPivot_L_03",
+            "ShutterPivot_R_03",
+            "ShutterPivot_L_04",
+            "ShutterPivot_R_04",
+            "ShutterPivot_L_05",
+            "ShutterPivot_R_05",
+            "ShutterPivot_L_06",
+            "ShutterPivot_R_06",
+            "ShutterPivot_L_07",
+            "ShutterPivot_R_07",
+            "ShutterPivot_L_08",
+            "ShutterPivot_R_08",
+            "ShutterPivot_L_09",
+            "ShutterPivot_R_09",
+            "ShutterPivot_L_10",
+            "ShutterPivot_R_10",
+            "ShutterPivot_L_11",
+            "ShutterPivot_R_11",
+            "ShutterPivot_L_12",
+            "ShutterPivot_R_12",
+            "ShutterPivot_L_13",
+            "ShutterPivot_R_13",
+            "ShutterPivot_L_14",
+            "ShutterPivot_R_14",
+            "ShutterPivot_L_15",
+            "ShutterPivot_R_15",
+            "ShutterPivot_L_16",
+            "ShutterPivot_R_16",
+            "ShutterPivot_L_17",
+            "ShutterPivot_R_17",
+            "ShutterPivot_L_18",
+            "ShutterPivot_R_18",
+            "ShutterPivot_L_19",
+            "ShutterPivot_R_19",
+            "ShutterPivot_L_20",
+            "ShutterPivot_R_20",
+            "ShutterPivot_L_21",
+            "ShutterPivot_R_21",
+            "ShutterPivot_L_22",
+            "ShutterPivot_R_22",
+            "ShutterPivot_L_23",
+            "ShutterPivot_R_23",
+            "ShutterPivot_L_24",
+            "ShutterPivot_R_24",
+            "ShutterPivot_L_25",
+            "ShutterPivot_R_25",
+            "ShutterPivot_L_26",
+            "ShutterPivot_R_26",
+            "ShutterPivot_L_27",
+            "ShutterPivot_R_27",
+            "ShutterPivot_L_28",
+            "ShutterPivot_R_28",
+            "ShutterPivot_L_29",
+            "ShutterPivot_R_29",
+            "ShutterPivot_L_30",
+            "ShutterPivot_R_30",
+            "ShutterPivot_L_31",
+            "ShutterPivot_R_31",
+            "ShutterPivot_L_32",
+            "ShutterPivot_R_32",
+            "ShutterPivot_L_33",
+            "ShutterPivot_R_33",
+            "ShutterPivot_L_34",
+            "ShutterPivot_R_34",
+            "ShutterPivot_L_35",
+            "ShutterPivot_R_35",
+            "ShutterPivot_L_36",
+            "ShutterPivot_R_36",
+            "ShutterPivot_L_37",
+            "ShutterPivot_R_37",
+            "ShutterPivot_L_38",
+            "ShutterPivot_R_38"
+          ],
+          "axis_gltf": [
+            0,
+            1,
+            0
+          ],
+          "hinge_range_deg": [
+            0,
+            75
+          ],
+          "open_angle_deg": 75
+        }
+      ],
+      "openings": [
+        {
+          "kind": "door",
+          "id": "door_main",
+          "centre": [
+            2.2,
+            -3.5,
+            1.1
+          ],
+          "size": [
+            1.2,
+            0.26,
+            2.2
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "clear_width": 1.2,
+          "clear_height": 2.2,
+          "node_window_id": null
+        },
+        {
+          "kind": "window",
+          "id": "window_00",
+          "centre": [
+            -2.25,
+            -3.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_00"
+        },
+        {
+          "kind": "window",
+          "id": "window_01",
+          "centre": [
+            0.0,
+            -3.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_01"
+        },
+        {
+          "kind": "window",
+          "id": "window_02",
+          "centre": [
+            -2.25,
+            -3.5,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_02"
+        },
+        {
+          "kind": "window",
+          "id": "window_03",
+          "centre": [
+            0.0,
+            -3.5,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_03"
+        },
+        {
+          "kind": "window",
+          "id": "window_04",
+          "centre": [
+            2.25,
+            -3.5,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_04"
+        },
+        {
+          "kind": "window",
+          "id": "window_05",
+          "centre": [
+            -2.25,
+            -3.5,
+            7.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_05"
+        },
+        {
+          "kind": "window",
+          "id": "window_06",
+          "centre": [
+            0.0,
+            -3.5,
+            7.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_06"
+        },
+        {
+          "kind": "window",
+          "id": "window_07",
+          "centre": [
+            2.25,
+            -3.5,
+            7.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_07"
+        },
+        {
+          "kind": "window",
+          "id": "window_08",
+          "centre": [
+            0.0,
+            3.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_08"
+        },
+        {
+          "kind": "window",
+          "id": "window_09",
+          "centre": [
+            2.25,
+            3.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_09"
+        },
+        {
+          "kind": "window",
+          "id": "window_10",
+          "centre": [
+            0.0,
+            3.5,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_10"
+        },
+        {
+          "kind": "window",
+          "id": "window_11",
+          "centre": [
+            2.25,
+            3.5,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_11"
+        },
+        {
+          "kind": "window",
+          "id": "window_12",
+          "centre": [
+            -2.25,
+            3.5,
+            7.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_12"
+        },
+        {
+          "kind": "window",
+          "id": "window_13",
+          "centre": [
+            0.0,
+            3.5,
+            7.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_13"
+        },
+        {
+          "kind": "window",
+          "id": "window_14",
+          "centre": [
+            2.25,
+            3.5,
+            7.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_14"
+        },
+        {
+          "kind": "window",
+          "id": "window_15",
+          "centre": [
+            -4.5,
+            -1.1666666666666665,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_15"
+        },
+        {
+          "kind": "window",
+          "id": "window_16",
+          "centre": [
+            -4.5,
+            1.166666666666667,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_16"
+        },
+        {
+          "kind": "window",
+          "id": "window_17",
+          "centre": [
+            -4.5,
+            -1.1666666666666665,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_17"
+        },
+        {
+          "kind": "window",
+          "id": "window_18",
+          "centre": [
+            -4.5,
+            1.166666666666667,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_18"
+        },
+        {
+          "kind": "window",
+          "id": "window_19",
+          "centre": [
+            -4.5,
+            -1.1666666666666665,
+            7.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_19"
+        },
+        {
+          "kind": "window",
+          "id": "window_20",
+          "centre": [
+            -4.5,
+            1.166666666666667,
+            7.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_20"
+        },
+        {
+          "kind": "window",
+          "id": "window_21",
+          "centre": [
+            4.5,
+            -1.1666666666666665,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_21"
+        },
+        {
+          "kind": "window",
+          "id": "window_22",
+          "centre": [
+            4.5,
+            1.166666666666667,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_22"
+        },
+        {
+          "kind": "window",
+          "id": "window_23",
+          "centre": [
+            4.5,
+            -1.1666666666666665,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_23"
+        },
+        {
+          "kind": "window",
+          "id": "window_24",
+          "centre": [
+            4.5,
+            1.166666666666667,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_24"
+        },
+        {
+          "kind": "window",
+          "id": "window_25",
+          "centre": [
+            4.5,
+            -1.1666666666666665,
+            7.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_25"
+        },
+        {
+          "kind": "window",
+          "id": "window_26",
+          "centre": [
+            4.5,
+            1.166666666666667,
+            7.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_26"
+        },
+        {
+          "kind": "window",
+          "id": "window_27",
+          "centre": [
+            -3.3666666666666667,
+            7.0,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_27"
+        },
+        {
+          "kind": "window",
+          "id": "window_28",
+          "centre": [
+            -2.2333333333333334,
+            7.0,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_28"
+        },
+        {
+          "kind": "window",
+          "id": "window_29",
+          "centre": [
+            -3.3666666666666667,
+            7.0,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_29"
+        },
+        {
+          "kind": "window",
+          "id": "window_30",
+          "centre": [
+            -2.2333333333333334,
+            7.0,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_30"
+        },
+        {
+          "kind": "window",
+          "id": "window_31",
+          "centre": [
+            -4.5,
+            4.666666666666667,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_31"
+        },
+        {
+          "kind": "window",
+          "id": "window_32",
+          "centre": [
+            -4.5,
+            5.833333333333334,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_32"
+        },
+        {
+          "kind": "window",
+          "id": "window_33",
+          "centre": [
+            -4.5,
+            4.666666666666667,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_33"
+        },
+        {
+          "kind": "window",
+          "id": "window_34",
+          "centre": [
+            -4.5,
+            5.833333333333334,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_34"
+        },
+        {
+          "kind": "window",
+          "id": "window_35",
+          "centre": [
+            -1.1,
+            4.666666666666667,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_35"
+        },
+        {
+          "kind": "window",
+          "id": "window_36",
+          "centre": [
+            -1.1,
+            5.833333333333334,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_36"
+        },
+        {
+          "kind": "window",
+          "id": "window_37",
+          "centre": [
+            -1.1,
+            4.666666666666667,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_37"
+        },
+        {
+          "kind": "window",
+          "id": "window_38",
+          "centre": [
+            -1.1,
+            5.833333333333334,
+            4.6000000000000005
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_38"
+        }
+      ],
+      "collision": [
+        {
+          "id": "shell",
+          "node": "BuildingShell",
+          "kind": "trimesh",
+          "source_mesh": "BuildingShell"
+        },
+        {
+          "id": "timber",
+          "node": "TimberFrame",
+          "kind": "trimesh",
+          "source_mesh": "TimberFrame"
+        },
+        {
+          "id": "roof",
+          "node": "Roof",
+          "kind": "trimesh",
+          "source_mesh": "Roof"
+        },
+        {
+          "id": "door_leaf",
+          "node": "DoorLeaf",
+          "kind": "box",
+          "parent_pivot": "DoorPivot",
+          "size": [
+            1.1199999999999999,
+            0.09,
+            2.1500000000000004
+          ],
+          "centre_local": [
+            0.6,
+            0.0,
+            1.0750000000000002
+          ]
+        }
+      ],
+      "roof_removable": true,
+      "triangles_by_part": {
+        "BuildingShell": 6380,
+        "Roof": 4488,
+        "TimberFrame": 1140,
+        "DoorFrame": 36,
+        "DoorLeaf": 72,
+        "WindowFrame_00": 72,
+        "WindowSash_00": 72,
+        "Shutter_L_00": 60,
+        "Shutter_R_00": 60,
+        "WindowFrame_01": 72,
+        "WindowSash_01": 72,
+        "Shutter_L_01": 60,
+        "Shutter_R_01": 60,
+        "WindowFrame_02": 72,
+        "WindowSash_02": 72,
+        "Shutter_L_02": 60,
+        "Shutter_R_02": 60,
+        "WindowFrame_03": 72,
+        "WindowSash_03": 72,
+        "Shutter_L_03": 60,
+        "Shutter_R_03": 60,
+        "WindowFrame_04": 72,
+        "WindowSash_04": 72,
+        "Shutter_L_04": 60,
+        "Shutter_R_04": 60,
+        "WindowFrame_05": 72,
+        "WindowSash_05": 72,
+        "Shutter_L_05": 60,
+        "Shutter_R_05": 60,
+        "WindowFrame_06": 72,
+        "WindowSash_06": 72,
+        "Shutter_L_06": 60,
+        "Shutter_R_06": 60,
+        "WindowFrame_07": 72,
+        "WindowSash_07": 72,
+        "Shutter_L_07": 60,
+        "Shutter_R_07": 60,
+        "WindowFrame_08": 72,
+        "WindowSash_08": 72,
+        "Shutter_L_08": 60,
+        "Shutter_R_08": 60,
+        "WindowFrame_09": 72,
+        "WindowSash_09": 72,
+        "Shutter_L_09": 60,
+        "Shutter_R_09": 60,
+        "WindowFrame_10": 72,
+        "WindowSash_10": 72,
+        "Shutter_L_10": 60,
+        "Shutter_R_10": 60,
+        "WindowFrame_11": 72,
+        "WindowSash_11": 72,
+        "Shutter_L_11": 60,
+        "Shutter_R_11": 60,
+        "WindowFrame_12": 72,
+        "WindowSash_12": 72,
+        "Shutter_L_12": 60,
+        "Shutter_R_12": 60,
+        "WindowFrame_13": 72,
+        "WindowSash_13": 72,
+        "Shutter_L_13": 60,
+        "Shutter_R_13": 60,
+        "WindowFrame_14": 72,
+        "WindowSash_14": 72,
+        "Shutter_L_14": 60,
+        "Shutter_R_14": 60,
+        "WindowFrame_15": 72,
+        "WindowSash_15": 72,
+        "Shutter_L_15": 60,
+        "Shutter_R_15": 60,
+        "WindowFrame_16": 72,
+        "WindowSash_16": 72,
+        "Shutter_L_16": 60,
+        "Shutter_R_16": 60,
+        "WindowFrame_17": 72,
+        "WindowSash_17": 72,
+        "Shutter_L_17": 60,
+        "Shutter_R_17": 60,
+        "WindowFrame_18": 72,
+        "WindowSash_18": 72,
+        "Shutter_L_18": 60,
+        "Shutter_R_18": 60,
+        "WindowFrame_19": 72,
+        "WindowSash_19": 72,
+        "Shutter_L_19": 60,
+        "Shutter_R_19": 60,
+        "WindowFrame_20": 72,
+        "WindowSash_20": 72,
+        "Shutter_L_20": 60,
+        "Shutter_R_20": 60,
+        "WindowFrame_21": 72,
+        "WindowSash_21": 72,
+        "Shutter_L_21": 60,
+        "Shutter_R_21": 60,
+        "WindowFrame_22": 72,
+        "WindowSash_22": 72,
+        "Shutter_L_22": 60,
+        "Shutter_R_22": 60,
+        "WindowFrame_23": 72,
+        "WindowSash_23": 72,
+        "Shutter_L_23": 60,
+        "Shutter_R_23": 60,
+        "WindowFrame_24": 72,
+        "WindowSash_24": 72,
+        "Shutter_L_24": 60,
+        "Shutter_R_24": 60,
+        "WindowFrame_25": 72,
+        "WindowSash_25": 72,
+        "Shutter_L_25": 60,
+        "Shutter_R_25": 60,
+        "WindowFrame_26": 72,
+        "WindowSash_26": 72,
+        "Shutter_L_26": 60,
+        "Shutter_R_26": 60,
+        "WindowFrame_27": 72,
+        "WindowSash_27": 72,
+        "Shutter_L_27": 60,
+        "Shutter_R_27": 60,
+        "WindowFrame_28": 72,
+        "WindowSash_28": 72,
+        "Shutter_L_28": 60,
+        "Shutter_R_28": 60,
+        "WindowFrame_29": 72,
+        "WindowSash_29": 72,
+        "Shutter_L_29": 60,
+        "Shutter_R_29": 60,
+        "WindowFrame_30": 72,
+        "WindowSash_30": 72,
+        "Shutter_L_30": 60,
+        "Shutter_R_30": 60,
+        "WindowFrame_31": 72,
+        "WindowSash_31": 72,
+        "Shutter_L_31": 60,
+        "Shutter_R_31": 60,
+        "WindowFrame_32": 72,
+        "WindowSash_32": 72,
+        "Shutter_L_32": 60,
+        "Shutter_R_32": 60,
+        "WindowFrame_33": 72,
+        "WindowSash_33": 72,
+        "Shutter_L_33": 60,
+        "Shutter_R_33": 60,
+        "WindowFrame_34": 72,
+        "WindowSash_34": 72,
+        "Shutter_L_34": 60,
+        "Shutter_R_34": 60,
+        "WindowFrame_35": 72,
+        "WindowSash_35": 72,
+        "Shutter_L_35": 60,
+        "Shutter_R_35": 60,
+        "WindowFrame_36": 72,
+        "WindowSash_36": 72,
+        "Shutter_L_36": 60,
+        "Shutter_R_36": 60,
+        "WindowFrame_37": 72,
+        "WindowSash_37": 72,
+        "Shutter_L_37": 60,
+        "Shutter_R_37": 60,
+        "WindowFrame_38": 72,
+        "WindowSash_38": 72,
+        "Shutter_L_38": 60,
+        "Shutter_R_38": 60
+      },
+      "triangles_total": 22412,
+      "render_paths": {
+        "front34_closed": "D:/lucidgloves/InfiniteAincrad/Art/Generated/Floor1Modular20260916/renders/03_corner_turret-front34-closed.png",
+        "back34_closed": "D:/lucidgloves/InfiniteAincrad/Art/Generated/Floor1Modular20260916/renders/03_corner_turret-back34-closed.png",
+        "side34_closed": "D:/lucidgloves/InfiniteAincrad/Art/Generated/Floor1Modular20260916/renders/03_corner_turret-side34-closed.png",
+        "front34_open": "D:/lucidgloves/InfiniteAincrad/Art/Generated/Floor1Modular20260916/renders/03_corner_turret-front34-open.png"
+      }
+    }
+  ],
+  "geometry_revision": "v6.1: merchant canopy posts on solid outer piers with matching collision; door, window and detachable unit contract preserved",
+  "total_triangles": 48884
+}

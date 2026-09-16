@@ -1,0 +1,82 @@
+{
+  "schema": "floor1-one-approved-original-collapse-courtyard-oak-v9-world-evidence",
+  "generated_at_utc": "2026-09-15T21:32:51.730865+00:00",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "source": "Art/Generated/CourtyardOak20260916/models/F1_courtyard_oak_originalcollapse_100k.glb",
+  "game_asset": "game/assets/floor1/courtyard_oak_20260916/F1_courtyard_oak_100k.glb",
+  "source_and_game_asset_exact_receipt": {
+    "bytes": 11221296,
+    "sha256": "0fce70f8c7b77db2c5783295fa381e65dca0d3680e1bc80f616f3b190821b263"
+  },
+  "number_of_adopted_tree_instances": 1,
+  "replaced_existing_maple_site_m": [
+    -24.8,
+    0.0,
+    16.8
+  ],
+  "real_imported_triangles": 100000,
+  "actual_visual_world_bounds": {
+    "height": 8.5,
+    "max": "(-20.48352, 8.5, 19.56046)",
+    "min": "(-29.0995, 0.0, 13.97706)"
+  },
+  "actual_root_min_y_m": 0.0,
+  "authored_display_height_m": 8.5,
+  "actual_walker_capsule_m": {
+    "radius": 0.32,
+    "height": 1.8
+  },
+  "trunk_only_proxy_radius_m": 0.52,
+  "garden_lane_capsule_path_clear": true,
+  "neighboring_house_footprints_clear": true,
+  "full_world_engine_checks": 190,
+  "full_world_engine_failures": 0,
+  "actual_saved_godot_near_views": 3,
+  "actual_png_px": [
+    1680,
+    1080
+  ],
+  "source_code_receipts_at_capture": {
+    "world_script": {
+      "bytes": 64715,
+      "sha256": "5533fdc81faedcf4fcd82afd1bc7f7e8704883a9586f75ce290cd08db926b88b"
+    },
+    "world_test": {
+      "bytes": 20968,
+      "sha256": "5add4721ac4048aac60ba84c62eb73bd3823ce5fa8d9cc3af5a5016d25d39982"
+    },
+    "modular_component_at_capture": {
+      "bytes": 11155,
+      "sha256": "17000b6096c30fe1c9bd64b1d94fa3f0177e83ef0843ab9b624a7793fbce87ae"
+    },
+    "interior_component_at_capture": {
+      "bytes": 17018,
+      "sha256": "15e78c9a105fe205fadab8dc9d185af3129cf50fdec9c95c500b6cd8af174a07"
+    }
+  },
+  "files": {
+    "west_lane_to_oak.png": {
+      "bytes": 1130083,
+      "sha256": "2e83af63d16f9e13a8401ea11bf57e4ee55ad4da883210e6c548f1d67505b7f1"
+    },
+    "west_garden_oak_eye.png": {
+      "bytes": 1481750,
+      "sha256": "69347b29b45f30bc7a06980b0d1f5d59fced3c09055882468cb44106c0478b7e"
+    },
+    "west_court_oak_overview.png": {
+      "bytes": 1120258,
+      "sha256": "75aef4c85a12c6e8e854006fbdc996a540a6db7efa75276e1c2e9437e5a54521"
+    },
+    "capture.json": {
+      "bytes": 1697,
+      "sha256": "94b35efa514084dcc877d5674680260c1eb3d938aad35473c0a38941089a6434"
+    },
+    "physics-190.json": {
+      "bytes": 43093,
+      "sha256": "23eeca4e8e7da694467ec21319481b7cb49e0406d74eb558fbf0872e75450925"
+    }
+  },
+  "performance_note": "120-frame real non-headless p95 intervals include VSync/presentation/CPU waits; no FPS or live VRAM gain is inferred from one tree.",
+  "art_note": "One broad layered canopy and twisting roots form a western residential garden focus; 4.78M-triangle raw tree and failed thin-leaf 31K remesh are excluded from game assets.",
+  "first_tour_provenance_unchanged": "Art/Generated/Floor1Expanded20260916/milestone-v1-provenance.json"
+}
