@@ -643,7 +643,7 @@ func _work_prerequisite_met(id: String, action: String, job: Dictionary) -> bool
 		"harvest_ration":
 			return _foraging_accessible(id)
 		"use_tool":
-			return _functioning_axe(id) and _trade_account(id).get("wood", -1) >= 1
+			return _functioning_axe(id) and _available_repair_material(id, "wood") >= 1
 		"work":
 			return _repair_work_ready(id, job)
 	return false
@@ -855,8 +855,7 @@ func trade_options(id: String) -> Array:
 					if part == contract.get("part") and _part_damaged(item, part) and _has_skill(id, _required_skill(part)) and _trade_account(id).get("iron" if part == "edge" else "wood", 0) > 0:
 						_option(result, {"id": "contract:work:" + contract_id + ":" + part, "label": "Repair " + part + " of " + contract.item_id, "action": "work", "counterparty": contract.owner_id, "duration_seconds": REPAIR_SECONDS, "_contract_id": contract_id, "_part": part})
 
-		var account := _trade_account(id)
-		if _functioning_axe(id) and account.get("wood", -1) >= 1:
+		if _functioning_axe(id) and _available_repair_material(id, "wood") >= 1:
 			_option(result, {"id": "tool:use", "label": "Use axe to make kindling", "action": "use_tool", "target_position": _state.godot.homes[id], "duration_seconds": REPAIR_SECONDS})
 	for option in result:
 		option.speech_allowed = option.action in SPEECH_ACTIONS
@@ -1147,7 +1146,7 @@ func _apply_trade_start(id: String, option: Dictionary, command_id: String, prov
 			return {"ok": true, "code": "no_change", "changed": false}
 		return _start_job(id, action, command_id, provenance, target_position, option.get("duration_seconds", WALK_SECONDS), {"target_id": target})
 	if action == "use_tool":
-		if not _functioning_axe(id) or _trade_account(id).get("wood", -1) < 1:
+		if not _functioning_axe(id) or _available_repair_material(id, "wood") < 1:
 			return _failure("resources_unavailable")
 		return _start_job(id, action, command_id, provenance, option.get("target_position", _position_array(id)), REPAIR_SECONDS, {})
 	if action == "offer_repair":
@@ -1364,7 +1363,9 @@ func _finish_trade_job(id: String, job: Dictionary) -> Dictionary:
 			_append_trade_event("resident_moved", id, [id, str(job.get("target_id", id))], command_id, {}, job.get("provenance", "local_rule_policy"))
 		"use_tool":
 			var account := _trade_account(id)
-			ok = _functioning_axe(id) and account.get("wood", -1) >= 1
+			# Recheck the same uncommitted balance at completion. A stale pending tool job cannot consume
+			# wood that a later/legacy accepted repair contract now owes.
+			ok = _functioning_axe(id) and _available_repair_material(id, "wood") >= 1
 			if ok:
 				account.wood -= 1
 				account.kindling += 1

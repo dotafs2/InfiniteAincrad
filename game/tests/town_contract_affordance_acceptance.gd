@@ -50,6 +50,17 @@ func _two_edge_contract_fixture(smith_iron: int) -> Dictionary:
 		"owner_id": WOODWORKER, "worker_id": SMITH, "status": "proposed", "price_col": 2, "reserved_col": 0})
 	return world
 
+func _handle_commitment_fixture() -> Dictionary:
+	var world := _affordance_fixture(12, 1, true, true)
+	world.life.contracts[1].part = "handle"
+	world.life.skills.append({"resident_id": SMITH, "skill_id": "wood_repair"})
+	for account in world.life.accounts:
+		if account.resident_id == SMITH:
+			account.wood = 1
+	world.life.items.append({"id": "fictional:smith-axe", "kind": "axe", "owner_id": SMITH,
+		"custodian_id": SMITH, "edge": 100, "handle": 100, "source": "fictional_fixture"})
+	return world
+
 func _accept_notes(town: TownTrade, id: String, contract_id: String) -> Array:
 	return town.resident_view(id).unavailable_actions.filter(func(entry): return entry.get("action") == "accept" and entry.get("contract_id") == contract_id)
 
@@ -215,6 +226,51 @@ func run() -> void:
 	check(delivered_notes.size() == 1 and delivered_notes[0].get("code") == "material_unavailable" and delivered_notes[0].get("required_material") == "iron", "the holding worker receives one concrete delivered-contract material blocker")
 	check(not JSON.stringify(delivered.resident_view(OWNER).unavailable_actions).contains("material_unavailable"), "the worker's material shortfall is not disclosed to the owner")
 	_cleanup(delivered_path, delivered)
+
+	# Other live wood consumers cannot spend a repair promise, while that contract's own work can.
+	var own_work_path := _path("handle-own-work")
+	_write_fixture(own_work_path, _handle_commitment_fixture())
+	var own_work := _load_trade(own_work_path)
+	check(not _option(own_work, SMITH, "use_tool").is_empty(), "uncommitted wood starts available to the worker's functioning axe")
+	own_work.submit_trade(SMITH, "contract:accept:" + EDGE_CONTRACT, "handle-accept", "opengameagent_fixture")
+	check(_option(own_work, SMITH, "use_tool").is_empty(), "an accepted handle repair removes tool use before it can spend the promised wood")
+	var forged_tool := own_work._apply_trade_start(SMITH, {"action": "use_tool"}, "handle-forged-tool", "opengameagent_fixture")
+	check(not forged_tool.ok and forged_tool.code == "resources_unavailable" and own_work._trade_account(SMITH).wood == 1, "the authoritative tool start also preserves committed wood")
+	own_work.submit_trade(OWNER, "contract:deliver:" + EDGE_CONTRACT, "handle-deliver", "opengameagent_fixture")
+	arrive(own_work, OWNER)
+	own_work.advance(2.0)
+	check(not _option(own_work, SMITH, "work", "handle").is_empty(), "the delivered contract may use its own promised wood")
+	own_work.submit_trade(SMITH, "contract:work:" + EDGE_CONTRACT + ":handle", "handle-work", "opengameagent_fixture")
+	arrive(own_work, SMITH)
+	own_work.advance(61.0)
+	check(own_work._contract(EDGE_CONTRACT).status == "completed" and own_work._trade_account(SMITH).wood == 0 and own_work._trade_account(SMITH).kindling == 0, "contract work consumes its own one wood exactly once without producing kindling")
+	_cleanup(own_work_path, own_work)
+
+	var tool_release_path := _path("handle-tool-release")
+	_write_fixture(tool_release_path, _handle_commitment_fixture())
+	var tool_release := _load_trade(tool_release_path)
+	tool_release.submit_trade(SMITH, "contract:accept:" + EDGE_CONTRACT, "tool-release-accept", "opengameagent_fixture")
+	check(_option(tool_release, SMITH, "use_tool").is_empty(), "accepted handle commitment initially holds the wood away from tool use")
+	tool_release.submit_trade(OWNER, "contract:cancel:" + EDGE_CONTRACT, "tool-release-cancel", "opengameagent_fixture")
+	check(not _option(tool_release, SMITH, "use_tool").is_empty(), "cancelling the undelivered handle repair releases wood to tool use")
+	tool_release.submit_trade(SMITH, "tool:use", "tool-release-use", "opengameagent_fixture")
+	arrive(tool_release, SMITH)
+	tool_release.advance(61.0)
+	check(tool_release._trade_account(SMITH).wood == 0 and tool_release._trade_account(SMITH).kindling == 1, "released wood is consumed once by the normal tool action")
+	_cleanup(tool_release_path, tool_release)
+
+	# Terminal defense for a stale pending tool job whose wood becomes committed before completion.
+	var stale_tool_path := _path("stale-tool-terminal")
+	_write_fixture(stale_tool_path, _handle_commitment_fixture())
+	var stale_tool := _load_trade(stale_tool_path)
+	stale_tool.submit_trade(SMITH, "tool:use", "stale-tool-use", "opengameagent_fixture")
+	var late_accept := stale_tool._apply_trade_start(SMITH, {"action": "accept", "_contract_id": EDGE_CONTRACT}, "stale-late-accept", "opengameagent_fixture")
+	check(late_accept.ok and stale_tool._contract(EDGE_CONTRACT).status == "accepted", "stale terminal fixture adds a later authoritative handle commitment")
+	arrive(stale_tool, SMITH)
+	var stale_done := stale_tool.advance(61.0)
+	var stale_receipt: Dictionary = stale_done.completed[-1] if not stale_done.completed.is_empty() else {}
+	check(not stale_receipt.get("ok", true) and stale_receipt.get("code") == "resources_unavailable" and stale_tool._trade_account(SMITH).wood == 1 and stale_tool._trade_account(SMITH).kindling == 0, "terminal recheck rejects stale tool work without consuming committed wood")
+	_cleanup(stale_tool_path, stale_tool)
 
 	# --- 4. Negative matrix on a pre-existing proposed contract: each real prerequisite on its own.
 	var cases := [
