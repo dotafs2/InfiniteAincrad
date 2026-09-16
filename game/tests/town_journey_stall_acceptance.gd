@@ -15,6 +15,7 @@ extends SceneTree
 ## Disposable fixture, default Forward+, scripted choices (labelled), real collision and motion.
 ## The test clock is accelerated (Engine.time_scale) and the run is labelled as such.
 const TownScene := preload("res://scenes/town_street.tscn")
+const Town := preload("res://core/town_places.gd")
 const Catalog := preload("res://spatial/town_places.gd")
 
 const MOVER := "fixture:mover"
@@ -478,10 +479,76 @@ func _verify_export_boundaries() -> void:
 	check(boundaries.get("consumed_by_npc_model", true) == false, "the export is not consumed by any NPC model")
 	var json := JSON.stringify(snapshot)
 	check(not json.contains(PRIVATE_SENTINEL), "the whole snapshot carries no private fixture reason text")
-	## Both journeys are resolved/closed by now, so the export must be empty of open issues again:
-	## the evidence channel reports current physical stalls, not a permanent accusation.
-	check(int(snapshot.get("counts", {}).get("issues", -1)) == 0,
-		"closed journeys leave no open issue in the export")
+	## Both journeys are resolved/closed, so no live movement_blocked entry survives. The honestly
+	## rejected public trip remains as a distinct terminal observation and is never relabelled open.
+	var open_stalls: Array = []
+	var terminal_rejections: Array = []
+	for entry in snapshot.get("evidence", []):
+		if not entry is Dictionary:
+			continue
+		if entry.get("evidence_kind", "") == "movement_blocked":
+			open_stalls.append(entry)
+		elif entry.get("evidence_kind", "") == "journey_rejected":
+			terminal_rejections.append(entry)
+	check(open_stalls.is_empty(), "closed journeys leave no open movement issue in the export")
+	check(terminal_rejections.size() == 1, "the rejected trip leaves one terminal observation")
+	if terminal_rejections.size() == 1:
+		var terminal: Dictionary = terminal_rejections[0]
+		var event_ref: Dictionary = terminal.get("event_ref", {})
+		check(str(terminal.get("issue_id", "")) == "journey_rejected:" + _travel_command
+			and str(terminal.get("world_id", "")) == str(town().snapshot().world_id)
+			and str(terminal.get("resident_id", "")) == TRAVELLER
+			and str(terminal.get("job_command_id", "")) == _travel_command,
+			"terminal identity is bound to the same world, actor and command")
+		check(str(terminal.get("journey", "")) == "place_travel"
+			and str(terminal.get("place_id", "")) == "planted_commons"
+			and str(terminal.get("command_status", "")) == "rejected"
+			and str(terminal.get("result_code", "")) == "travel_blocked"
+			and str(terminal.get("status", "")) == "observed",
+			"terminal rejection remains observed terminal evidence, never an open stall or proven bug")
+		check(terminal.get("discriminators", {}).get("terminal_rejection", false)
+			and not terminal.get("discriminators", {}).get("collision_proved", true)
+			and not terminal.get("discriminators", {}).get("defect_proved", true),
+			"terminal rejection states the observed outcome without claiming its cause is a bug")
+		check(str(event_ref.get("event_type", "")) == "travel_blocked"
+			and not str(event_ref.get("event_id", "")).is_empty() and int(event_ref.get("seq", 0)) > 0,
+			"terminal rejection is tied to its persisted matching event")
+		check(not terminal.has("text") and not terminal.has("reason") and not terminal.has("payload")
+			and not event_ref.has("text") and not event_ref.has("reason") and not event_ref.has("recipient_ids"),
+			"terminal rejection exports only the privacy allowlist")
+	## Load a byte-for-byte copy through the real cold path while the live scene still owns its
+	## writer lock, then prove future command completion or actor mutation cannot reuse this record.
+	var cold_path := _work.path_join("terminal-rejection-cold.json")
+	var cold_file := FileAccess.open(cold_path, FileAccess.WRITE)
+	if cold_file == null:
+		check(false, "cold terminal copy can be opened")
+	else:
+		cold_file.store_buffer(FileAccess.get_file_as_bytes(_save))
+		cold_file.close()
+		var cold := Town.new()
+		check(cold.load_from(cold_path).ok, "cold terminal copy loads")
+		var cold_terminal: Array = []
+		for entry in cold.background_gm_snapshot().get("evidence", []):
+			if entry is Dictionary and entry.get("evidence_kind", "") == "journey_rejected":
+				cold_terminal.append(entry)
+		check(cold_terminal.size() == 1 and str(cold_terminal[0].get("issue_id", "")) == "journey_rejected:" + _travel_command,
+			"cold load retains the stable terminal identity")
+		cold._state.godot.places.commands[_travel_command].status = "completed"
+		check(cold.terminal_journey_rejection_evidence().is_empty(),
+			"a later completed command cannot reuse the old closed stall")
+		cold._state.godot.places.commands[_travel_command].status = "rejected"
+		cold._state.godot.places.commands[_travel_command].payload.actor_id = CONTROL
+		check(cold.terminal_journey_rejection_evidence().is_empty(),
+			"a modified command actor cannot point the old stall at another resident")
+		cold._state.godot.places.commands[_travel_command].payload.actor_id = TRAVELLER
+		for index in range(cold._state.life.events.size() - 1, -1, -1):
+			var event: Variant = cold._state.life.events[index]
+			if event is Dictionary and str(event.get("operation_id", "")) == _travel_command:
+				cold._state.life.events.remove_at(index)
+		check(cold.terminal_journey_rejection_evidence().is_empty(),
+			"a closed stall and rejected command cannot project without their matching persisted event")
+		cold.release_writer(cold_path)
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(cold_path))
 	_notes.final_issue_count = snapshot.get("counts", {}).get("issues", -1)
 	_notes.final_snapshot_evidence = snapshot.get("evidence", [])
 

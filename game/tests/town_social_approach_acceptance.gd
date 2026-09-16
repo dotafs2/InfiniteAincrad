@@ -17,7 +17,7 @@ extends SceneTree
 ## The source observation is a real Kimi run; every number here is an explicitly
 ## labelled offline fixture and no model choice is claimed.
 
-const Town = preload("res://core/town_trade.gd")
+const Town = preload("res://core/town_places.gd")
 const TownStreet = preload("res://spatial/town_street.gd")
 const SocialSteering = preload("res://spatial/town_social_steering.gd")
 
@@ -172,6 +172,14 @@ func run() -> void:
 	check(restored.resident(MOVER).coins_col == town.resident(MOVER).coins_col
 		and restored.snapshot().life.items == town.snapshot().life.items,
 		"cold reopen keeps money and items")
+	# Persist one real host-physics stall observation before the world's own bounded approach
+	# rejection. The terminal GM projection below must be sourced from this record, the rejected
+	# command and its matching life event together; none of the three may stand in for the others.
+	var observed_stall: Dictionary = restored.transaction(path, func():
+		restored._ensure_places()
+		return restored.observe_journey_stall(MOVER, "approach", restored.position_of(MOVER), 8.0))
+	check(observed_stall.ok and str(observed_stall.get("code", "")) == "journey_stall_open",
+		"the real pending approach owns one persisted reported stall before rejection")
 	# Part 2.4 (contract aligned 2026-09-14): an approach that makes no credited progress for 90 s
 	# now ends honestly as one bounded failure instead of staying pending forever. Root reviewed and
 	# deliberately superseded the old "stays truthfully pending after 1200 s" expectation, because
@@ -216,7 +224,40 @@ func run() -> void:
 	check(restored.resident(MOVER).coins_col == mover_coins_before
 		and restored.snapshot().life.items == items_before,
 		"the failed approach moves no money and no items")
+	var terminal_entries: Array = []
+	for entry in restored.background_gm_snapshot().get("evidence", []):
+		if entry is Dictionary and entry.get("evidence_kind", "") == "journey_rejected":
+			terminal_entries.append(entry)
+	check(terminal_entries.size() == 1, "the terminal approach rejection remains in the GM projection")
+	if terminal_entries.size() == 1:
+		var terminal: Dictionary = terminal_entries[0]
+		check(str(terminal.get("issue_id", "")) == "journey_rejected:" + command
+			and str(terminal.get("world_id", "")) == str(restored.snapshot().world_id)
+			and str(terminal.get("resident_id", "")) == MOVER
+			and str(terminal.get("job_command_id", "")) == command,
+			"terminal identity is stably bound to world, actor and command")
+		check(str(terminal.get("journey", "")) == "approach"
+			and str(terminal.get("target_id", "")) == COUNTERPARTY
+			and str(terminal.get("result_code", "")) == "approach_blocked"
+			and str(terminal.get("command_status", "")) == "rejected",
+			"terminal facts copy the matched rejected approach without inferring a bug")
+		var event_ref: Dictionary = terminal.get("event_ref", {})
+		check(str(event_ref.get("event_type", "")) == "approach_blocked"
+			and not str(event_ref.get("event_id", "")).is_empty() and int(event_ref.get("seq", 0)) > 0,
+			"terminal evidence carries the matching persisted event identity")
+		check(not terminal.has("text") and not terminal.has("reason") and not terminal.has("payload")
+			and not event_ref.has("text") and not event_ref.has("reason") and not event_ref.has("recipient_ids"),
+			"the terminal allowlist exports no event text, model reason, raw payload or recipient memory")
 	restored.release_writer(path)
+	var cold := Town.new()
+	check(cold.load_from(path).ok, "cold reopen accepts the terminal rejection world")
+	var cold_entries: Array = []
+	for entry in cold.background_gm_snapshot().get("evidence", []):
+		if entry is Dictionary and entry.get("evidence_kind", "") == "journey_rejected":
+			cold_entries.append(entry)
+	check(cold_entries.size() == 1 and str(cold_entries[0].get("issue_id", "")) == "journey_rejected:" + command,
+		"cold reopen retains the same terminal rejection identity")
+	cold.release_writer(path)
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	# Part 1: real physics on the reviewed geometry.
 	var world := Node3D.new()

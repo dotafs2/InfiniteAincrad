@@ -73,6 +73,7 @@ def main():
     prompt = sys.stdin.read()
     gm_state = section(prompt, "GM_STATE")
     coding_state = section(prompt, "CODING_SCOPE")
+    feedback_receipt = section(prompt, "FEEDBACK_RECEIPT")
     context = coding_state if coding_state is not None else (gm_state or {})
     modes = json.loads(os.environ.get("FAKE_GM_MODES") or "{}")
     mode = modes.get(context.get("gm_id"), os.environ.get("FAKE_GM_MODE", "ok"))
@@ -114,7 +115,12 @@ def main():
         cumulative = previous_usage
     usage_path.write_text(json.dumps(cumulative))
 
-    if coding_state is not None:
+    if feedback_receipt is not None:
+        answer = None if mode == "bad_contract" else {
+            "gm_id": gm_state["gm_id"], "receipt_sha256": gm_state["receipt_sha256"],
+            "acknowledged": True, "decision": "no_action",
+            "next_work": "bounded offline effect receipt acknowledged", "evidence_refs": []}
+    elif coding_state is not None:
         if mode == "rename_out_of_scope":
             subprocess.run(["git", "mv", "README.md", coding_state["scope"]["files"][0]],
                            cwd=os.getcwd(), capture_output=True, text=True, check=True)
@@ -189,8 +195,12 @@ class RunnerTestBase(unittest.TestCase):
     maxDiff = None
 
     def setUp(self):
-        self.root = ROOT / 'tmp' / 'gm-runner-tests' / f'{self._testMethodName}-{os.getpid()}'
-        workspace = (ROOT / 'tmp' / 'gm-runner-tests').resolve()
+        # Candidate worktrees contain every tracked asset.  Keep their test-owned prefix short so
+        # Git for Windows can check out the repository even when core.longpaths is not configured.
+        case = gm_runner.sha256_bytes(
+            f'{type(self).__name__}.{self._testMethodName}'.encode('utf-8'))[:12]
+        workspace = (ROOT / 'tmp' / 'grt').resolve()
+        self.root = workspace / f'{case}-{os.getpid()}'
         target = self.root.resolve()
         if target.exists() and workspace in target.parents:
             shutil.rmtree(target, ignore_errors=True)
@@ -389,6 +399,117 @@ class RunnerTestBase(unittest.TestCase):
                 os.kill(pid, signal.SIGTERM)
             except ProcessLookupError:
                 pass
+
+
+class WorldBootstrapTests(RunnerTestBase):
+    def write_world(self, name='world.json', world_id='shared:new-world', resident_ids=None):
+        ids = resident_ids or [f'shared:new-resident-{index}' for index in range(10)]
+        path = self.root / name
+        path.write_text(json.dumps({'world_id': world_id,
+                                    'residents': [{'stable_id': value} for value in ids],
+                                    'life': {'seq': 0}, 'godot': {}}, indent=2), encoding='utf-8')
+        return path
+
+    def bootstrap(self, world, state_dir=None, *extra):
+        return self.cli('bootstrap-world', '--state-dir', str(state_dir or self.state),
+                        '--world-save', str(world), *extra, route=False)
+
+    def test_new_world_bootstrap_is_empty_atomic_and_idempotent(self):
+        world = self.write_world()
+        code, first, _ = self.bootstrap(world, None, '--world-id', 'shared:new-world')
+        self.assertEqual(code, 0, first)
+        self.assertTrue(first['created'])
+        before = (self.state / gm_runner.STATE_FILE).read_bytes()
+        state = json.loads(before)
+        self.assertEqual(state['world_id'], 'shared:new-world')
+        self.assertEqual(list(state['sessions']), gm_runner.GM_IDS)
+        self.assertEqual(state['sources'], [])
+        self.assertEqual(state['issues'], {})
+        self.assertEqual(state['world_bootstrap']['resident_ids'],
+                         [f'shared:new-resident-{index}' for index in range(10)])
+        for gm_id, session in state['sessions'].items():
+            self.assertEqual(session['gm_id'], gm_id)
+            self.assertIsNone(session['session_id'])
+            self.assertEqual(session['attempts'], [])
+            self.assertEqual(session['outcomes'], [])
+            self.assertEqual(session['memory']['task_history'], [])
+            self.assertEqual(session['memory']['host_feedback'], [])
+        code, second, _ = self.bootstrap(world, None, '--world-id', 'shared:new-world')
+        self.assertEqual(code, 0, second)
+        self.assertTrue(second['idempotent'])
+        self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), before)
+
+    def test_bootstrap_refuses_foreign_world_and_preserves_existing_state(self):
+        first_world = self.write_world('first.json', 'shared:first')
+        foreign_world = self.write_world('foreign.json', 'shared:foreign')
+        self.assertEqual(self.bootstrap(first_world)[0], 0)
+        before = (self.state / gm_runner.STATE_FILE).read_bytes()
+        code, payload, _ = self.bootstrap(foreign_world)
+        self.assertEqual(code, 4, payload)
+        self.assertEqual(payload['kind'], 'world_bootstrap_state_exists')
+        self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), before)
+
+    def test_bootstrap_never_adopts_an_existing_unlabelled_state(self):
+        world = self.write_world()
+        self.state.mkdir(parents=True)
+        gm_runner.save_json(self.state / gm_runner.STATE_FILE, gm_runner.blank_state())
+        before = (self.state / gm_runner.STATE_FILE).read_bytes()
+        code, payload, _ = self.bootstrap(world)
+        self.assertEqual(code, 4, payload)
+        self.assertEqual(payload['kind'], 'world_bootstrap_state_exists')
+        self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), before)
+
+    def test_bootstrap_refuses_corrupt_ten_key_roster_even_with_matching_provenance(self):
+        world = self.write_world()
+        self.assertEqual(self.bootstrap(world)[0], 0)
+        state = self.state_json()
+        state['sessions']['gm-wrong'] = state['sessions'].pop('gm-10')
+        gm_runner.save_json(self.state / gm_runner.STATE_FILE, state)
+        before = (self.state / gm_runner.STATE_FILE).read_bytes()
+        code, payload, _ = self.bootstrap(world)
+        self.assertEqual(code, 4, payload)
+        self.assertEqual(payload['kind'], 'world_bootstrap_state_exists')
+        self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), before)
+
+    def test_bootstrap_refuses_invalid_resident_identity_without_state(self):
+        world = self.write_world(resident_ids=['shared:duplicate'] * 10)
+        code, payload, _ = self.bootstrap(world)
+        self.assertEqual(code, 2, payload)
+        self.assertEqual(payload['kind'], 'world_bootstrap_invalid')
+        self.assertFalse((self.state / gm_runner.STATE_FILE).exists())
+
+
+class EffectFeedbackConsumptionTests(RunnerTestBase):
+    def test_feedback_consumes_only_the_exact_pending_release_receipt(self):
+        state = gm_runner.load_state(self.state)
+        state['world_id'] = 'shared:effect-world'
+        release = {'kind': 'autonomy_release_receipt', 'cycle_id': 'cycle-1',
+                   'issue_id': 'issue-1', 'world_id': 'shared:effect-world',
+                   'gm_id': 'gm-02', 'release_digest': 'release-abc', 'published': True,
+                   'effect_review': {'status': 'pending', 'resident_id': 'shared:r1',
+                                     'capability_id': 'warm_food',
+                                     'baseline_life_seq': 4, 'baseline_history_count': 0}}
+        gm_runner.remember_host_feedback(state['sessions']['gm-02'], 'gm-02', release,
+                                         'parent-release-sha', 'cycle-1')
+        gm_runner.store_state(self.state, state)
+        receipt = self.root / 'effect.json'
+        gm_runner.save_json(receipt, {
+            'kind': 'autonomy_effect_observation_receipt', 'schema_version': 1,
+            'parent': {'receipt_sha256': 'parent-release-sha', 'cycle_id': 'cycle-1',
+                       'issue_id': 'issue-1', 'world_id': 'shared:effect-world',
+                       'gm_id': 'gm-02', 'release_digest': 'release-abc'},
+            'outcome': 'no_adoption_observed', 'adoption_claimed': False,
+            'observation_window': {'baseline_life_seq': 4, 'observed_life_seq': 5},
+            'matching_action_receipts': []})
+        code, payload, _ = self.cli('feedback', '--state-dir', str(self.state), '--gm', 'gm-02',
+                                    '--issue', 'issue-1', '--receipt-file', str(receipt))
+        self.assertEqual(code, 0, payload)
+        self.assertTrue(payload['effect_review_consumed'])
+        saved = self.sessions()['gm-02']['memory']['host_feedback']
+        parent = next(event for event in saved
+                      if event.get('receipt_sha256') == 'parent-release-sha')
+        self.assertEqual(parent['effect_review_result']['status'], 'consumed')
+        self.assertEqual(parent['effect_review_result']['decision'], 'no_action')
 
 
 class CoreObservationTests(RunnerTestBase):

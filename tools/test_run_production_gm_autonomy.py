@@ -76,6 +76,8 @@ class ProductionBridgeTests(unittest.TestCase):
             current['life']['seq'] += 1
             write(self.world, current)
             out = Path(values['--out'])
+            write(out/'carried-uncertainty-review.json',
+                  {'authorized': True, 'uncertain_rows': 6, 'source': 'test-fixture'})
             write(out/'result.json', {'engine_exit': 0, 'validation_passed': False,
                   'model_errors': {'shared:innkeeper': 'rule_rejection'},
                   'ledger_before': {'ledger_id':'ledger','model':'kimi-k2.6',
@@ -136,6 +138,8 @@ class ProductionBridgeTests(unittest.TestCase):
             current['life']['seq'] += 1
             write(self.world, current)
             out = Path(values['--out'])
+            write(out/'carried-uncertainty-review.json',
+                  {'authorized': True, 'uncertain_rows': 6, 'source': 'test-fixture'})
             write(out/'result.json', {'engine_exit': 0, 'validation_passed': False,
                   'model_errors': dict(model_errors), 'upstream_requests': 1,
                   'budget_stop_reason': '', 'carried_uncertainty_reviewed': True,
@@ -483,6 +487,71 @@ class ProductionBridgeTests(unittest.TestCase):
         self.assertEqual(result['reason'], 'ledger_identity_or_uncertainty_changed',
                          "a new unknown cost is never swallowed as a local failure")
 
+    def test_sparse_zero_uncertainty_needs_no_exception_review(self):
+        scope = dict(self.base_scope); scope['max_cycles'] = 1
+        write(self.scope, scope)
+        inner = self._life_run({})
+        def run(command, cwd, timeout, log, env=None):
+            outcome = inner(command, cwd, timeout, log, env)
+            if command[0] == 'life':
+                values = dict(token.split('=', 1) for token in command[1:])
+                result_path = Path(values['--out'])/'result.json'
+                result = json.loads(result_path.read_text())
+                result['carried_uncertainty_reviewed'] = False
+                result['ledger_before']['counts'] = {}
+                result['ledger_after']['counts'] = {'settled': 1}
+                write(result_path, result)
+                (Path(values['--out'])/'carried-uncertainty-review.json').unlink()
+            return outcome
+        fixed = {'head': 'head', 'files': {'a': '1'}}
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value=fixed), \
+             mock.patch.object(bridge, 'run_owned', side_effect=run):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 0)
+        result = json.loads((self.out/'run.json').read_text())
+        self.assertEqual(result['status'], 'completed_finite')
+        self.assertEqual(result['cycles'][0]['carried_uncertainty'], {
+            'rows': 0, 'review_required': False, 'reviewed': False})
+
+    def test_positive_uncertainty_requires_retained_review_artifact(self):
+        scope = dict(self.base_scope); scope['max_cycles'] = 1
+        write(self.scope, scope)
+        inner = self._life_run({})
+        def run(command, cwd, timeout, log, env=None):
+            outcome = inner(command, cwd, timeout, log, env)
+            if command[0] == 'life':
+                values = dict(token.split('=', 1) for token in command[1:])
+                (Path(values['--out'])/'carried-uncertainty-review.json').unlink()
+            return outcome
+        fixed = {'head': 'head', 'files': {'a': '1'}}
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value=fixed), \
+             mock.patch.object(bridge, 'run_owned', side_effect=run):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 1)
+        result = json.loads((self.out/'run.json').read_text())
+        self.assertEqual(result['reason'], 'carried_uncertainty_review_missing')
+
+    def test_missing_uncertainty_counts_remain_unknown(self):
+        scope = dict(self.base_scope); scope['max_cycles'] = 1
+        write(self.scope, scope)
+        inner = self._life_run({})
+        def run(command, cwd, timeout, log, env=None):
+            outcome = inner(command, cwd, timeout, log, env)
+            if command[0] == 'life':
+                values = dict(token.split('=', 1) for token in command[1:])
+                result_path = Path(values['--out'])/'result.json'
+                result = json.loads(result_path.read_text())
+                result['ledger_after'].pop('counts')
+                write(result_path, result)
+            return outcome
+        fixed = {'head': 'head', 'files': {'a': '1'}}
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value=fixed), \
+             mock.patch.object(bridge, 'run_owned', side_effect=run):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 1)
+        result = json.loads((self.out/'run.json').read_text())
+        self.assertEqual(result['reason'], 'ledger_identity_or_uncertainty_changed')
+
 
 
     def test_new_provider_error_fails_closed_with_nonzero_exit(self):
@@ -502,6 +571,8 @@ class ProductionBridgeTests(unittest.TestCase):
                 'result': {'code': 'brain_response_invalid'}}
             write(self.world, changed)
             out = Path(values['--out'])
+            write(out/'carried-uncertainty-review.json',
+                  {'authorized': True, 'uncertain_rows': 6, 'source': 'test-fixture'})
             write(out/'result.json', {'engine_exit': 0, 'validation_passed': False,
                   'model_errors': {'shared:fisher': 'gateway_contract_violation'}, 'upstream_requests': 1,
                   'budget_stop_reason':'','carried_uncertainty_reviewed':True,
@@ -557,6 +628,97 @@ class ProductionBridgeTests(unittest.TestCase):
             self.assertEqual(bridge.main(['--scope', str(self.scope)]), 0)
         self.assertFalse(called)
         self.assertEqual(json.loads((self.out/'run.json').read_text())['reason'], 'time_limit')
+
+    def _exercise_waiting_review_resume(self, review_candidate_sha256='candidate-sha'):
+        scope = dict(self.base_scope); scope['max_cycles'] = 1
+        write(self.scope, scope)
+        calls = {'life': 0, 'autonomy': 0}
+        def run(command, cwd, timeout, log, env=None):
+            if command[0] == 'life':
+                calls['life'] += 1
+                values = dict(token.split('=', 1) for token in command[1:])
+                current = json.loads(self.world.read_text()); current['life']['seq'] += 1
+                current['elapsed_seconds'] = 3100.5; write(self.world, current)
+                live = Path(values['--out'])
+                write(live/'result.json', {
+                    'engine_exit': 0, 'validation_passed': True, 'model_errors': {},
+                    'upstream_requests': 1, 'budget_stop_reason': '',
+                    'carried_uncertainty_reviewed': False,
+                    'ledger_before': {'ledger_id': 'ledger', 'model': 'kimi-k2.6', 'counts': {}},
+                    'ledger_after': {'ledger_id': 'ledger', 'model': 'kimi-k2.6',
+                                     'halted': '', 'counts': {'settled': 1}}})
+                write(Path(values['--evidence']), {
+                    'world_id': WORLD, 'evidence': [], 'proposals': [], 'boundaries': {
+                        'consumed_by_npc_model': False, 'contains_other_resident_memories': False,
+                        'contains_private_reply_reason': False, 'image_analysis': False},
+                    'kind': bridge.gm_runner.EVIDENCE_KIND, 'schema_version': 1,
+                    'counts': {'issues': 0, 'proposals': 0},
+                    'source_revision': {'life_seq': current['life']['seq'],
+                                        'proposal_sequence': 0,
+                                        'world_elapsed_seconds': 3100.5}})
+            else:
+                calls['autonomy'] += 1
+                if calls['autonomy'] == 1:
+                    report = {'status': 'waiting_review', 'cycle_id': 'review-cycle',
+                              'next_stage': 'review', 'release_digest': None,
+                              'candidate': {'candidate_sha256': 'candidate-sha'},
+                              'main_ai_review': {'status': 'pending'},
+                              'usage': {'model_calls': 3, 'unknown': None},
+                              'report_path': 'retained/report.json'}
+                else:
+                    review = {'status': 'advisory', 'decision': 'advisory'}
+                    if review_candidate_sha256 is not None:
+                        review['candidate_sha256'] = review_candidate_sha256
+                    report = {'status': 'completed', 'cycle_id': 'review-cycle',
+                              'release_digest': 'release-sha',
+                              'candidate': {'candidate_sha256': 'candidate-sha'},
+                              'main_ai_review': review,
+                              'independently_tested': {'runtime_checks': {}},
+                              'usage': {'model_calls': 3, 'unknown': None}}
+                Path(log).parent.mkdir(parents=True, exist_ok=True)
+                Path(log).write_text(json.dumps(report) + '\n', encoding='utf-8')
+            return {'exit_code': 0, 'timed_out': False,
+                    'owned': {'all_members_exited': True, 'active': 0}}
+        fixed = {'head': 'head', 'files': {'a': '1'}}
+        with mock.patch.object(bridge, 'validate', return_value=[]), \
+             mock.patch.object(bridge, 'tracked', return_value=fixed), \
+             mock.patch.object(bridge, 'run_owned', side_effect=run):
+            self.assertEqual(bridge.main(['--scope', str(self.scope)]), 0)
+            paused = json.loads((self.out/'run.json').read_text())
+            self.assertEqual(paused['status'], 'waiting_review')
+            self.assertEqual(paused['reason'], 'explicit_main_ai_review_required')
+            self.assertNotIn('finished_utc', paused)
+            self.assertEqual(paused['cycles'][0]['waiting_review']['candidate_sha256'],
+                             'candidate-sha')
+            resume_code = bridge.main(['--scope', str(self.scope), '--resume'])
+        resumed = json.loads((self.out/'run.json').read_text())
+        return resume_code, resumed, calls
+
+    def test_waiting_review_pauses_and_explicit_resume_never_replays_life(self):
+        resume_code, resumed, calls = self._exercise_waiting_review_resume()
+        self.assertEqual(resume_code, 0)
+        self.assertEqual(resumed['status'], 'completed_finite')
+        self.assertEqual(calls, {'life': 1, 'autonomy': 2})
+        self.assertEqual(resumed['kimi_requests'], 1)
+        self.assertEqual(resumed['gm_model_calls'], 3,
+                         'same-cycle cumulative usage is charged only once')
+        self.assertEqual(resumed['counted_gm_cycle_calls'], {'review-cycle': 3})
+        self.assertEqual([item['resume'] for item in
+                          resumed['cycles'][0]['autonomy_attempts']], [False, True])
+
+    def test_resume_refuses_missing_main_ai_review_candidate_hash(self):
+        resume_code, resumed, calls = self._exercise_waiting_review_resume(None)
+        self.assertEqual(resume_code, 1)
+        self.assertEqual(resumed['status'], 'stopped')
+        self.assertEqual(resumed['reason'], 'resume_main_ai_review_not_bound')
+        self.assertEqual(calls, {'life': 1, 'autonomy': 2})
+
+    def test_resume_refuses_wrong_main_ai_review_candidate_hash(self):
+        resume_code, resumed, calls = self._exercise_waiting_review_resume('wrong-candidate')
+        self.assertEqual(resume_code, 1)
+        self.assertEqual(resumed['status'], 'stopped')
+        self.assertEqual(resumed['reason'], 'resume_main_ai_review_not_bound')
+        self.assertEqual(calls, {'life': 1, 'autonomy': 2})
 
 
 class SettledLocalGmFailureTests(unittest.TestCase):
@@ -679,6 +841,8 @@ class SettledLocalGmFailureTests(unittest.TestCase):
             current['life']['seq'] += 1
             write(self.world, current)
             out = Path(values['--out'])
+            write(out / 'carried-uncertainty-review.json',
+                  {'authorized': True, 'uncertain_rows': 6, 'source': 'test-fixture'})
             write(out / 'result.json', {
                 'engine_exit': 0, 'validation_passed': False, 'model_errors': {},
                 'upstream_requests': 1, 'budget_stop_reason': '',

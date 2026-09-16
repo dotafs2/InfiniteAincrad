@@ -2,9 +2,31 @@ import unittest
 import tempfile
 from pathlib import Path
 from model_interface_experiment import resolve_step, personal_payload, finished, freeze_manifest, Providers
+from create_demo_preview import create_preview
 
 
 class InterfaceIsolationTests(unittest.TestCase):
+    def test_fresh_living_quarter_can_have_an_independent_world_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / 'genesis.json'
+            create_preview(destination, 'research:test:independent', 'isolated research seed')
+            import json
+            world = json.loads(destination.read_text(encoding='utf-8'))
+            self.assertEqual(world['world_id'], 'research:test:independent')
+            self.assertEqual(world['life']['seq'], 0)
+            self.assertEqual(len(world['residents']), 10)
+            self.assertIsNone(world['origin']['migrated_from'])
+            self.assertEqual(world['godot']['spatial_layout']['id'],
+                             'first-floor-market-quarter-v1')
+            self.assertIn('layout_sha256', world['godot']['spatial_layout'])
+
+    def test_provider_routes_require_explicit_local_credential_paths(self):
+        providers = Providers('unused-output')
+        with self.assertRaisesRegex(ValueError, '--kimi-config'):
+            providers._kimi({}, 'no-call')
+        with self.assertRaisesRegex(ValueError, '--deepseek-key'):
+            providers._deepseek({})
+
     def test_identical_frozen_plan_can_reopen_after_json_roundtrip(self):
         with tempfile.TemporaryDirectory() as directory:
             path=Path(directory)/'manifest.json'

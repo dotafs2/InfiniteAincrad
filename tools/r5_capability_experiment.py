@@ -93,7 +93,7 @@ def run_trial(provider, repetition, phase):
         base.write(directory/'initial-observation.json',initial)
         result['initial_observation_sha256']=base.sha(directory/'initial-observation.json')
         for turn in range(4):
-            persisted = base.read(engine.world)['godot'].get('interface_experiment',{})
+            persisted = observation.get('plan_state', {})
             call_id = f'{name}-c{turn+1}'
             decision,receipt,raw = providers.call(provider,'r5',observe_payload(observation,trace,persisted),call_id)
             result['calls'].append(receipt)
@@ -139,7 +139,7 @@ def run_trial(provider, repetition, phase):
                 engine=host(directory/'resumed',old_world,True)
                 observation=engine.request('observe')
                 result['midplan_restart']={'full_state_equal':snapshot==base.read(engine.world),
-                    'saved_goal':base.read(engine.world)['godot'].get('interface_experiment',{}).get('goal')}
+                    'saved_goal':observation.get('plan_state',{}).get('goal')}
                 assert result['midplan_restart']['full_state_equal'],'midplan_restore_changed_state'
             if installed:
                 types=[e['type'] for e in events]
@@ -176,9 +176,13 @@ def run_trial(provider, repetition, phase):
 
 
 def main():
+    global OUT
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('phase',choices=['before','after'])
+    base.add_runtime_arguments(parser, OUT)
     args=parser.parse_args()
+    base.configure_runtime(args)
+    OUT=args.out.resolve()
     assert base.sha(base.SOURCE)==base.SOURCE_SHA
     order=[('luna',1),('astra',1),('astra',2),('luna',2)]
     manifest={'order':order,'instructions':INSTRUCTIONS,'goal':GOAL,'max_calls':4,
