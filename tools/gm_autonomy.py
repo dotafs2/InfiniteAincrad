@@ -3795,6 +3795,235 @@ def command_recover_scope_feedback(args) -> int:
     return gm_runner.emit(payload, OK)
 
 
+def _native_timeout_receipt(path: Path, expected_thread: str) -> dict:
+    """Read only lifecycle and token counters from one exact Codex rollout."""
+    thread = None
+    usage_records = []
+    turn_completed = 0
+    for line in path.read_text(encoding='utf-8').splitlines():
+        value = json.loads(line)
+        payload = value.get('payload') if isinstance(value.get('payload'), dict) else {}
+        if value.get('type') == 'session_meta':
+            candidate = payload.get('id') or payload.get('session_id')
+            if candidate:
+                thread = candidate
+        if value.get('type') == 'event_msg' and payload.get('type') == 'token_count':
+            info = payload.get('info') or {}
+            total = info.get('total_token_usage')
+            if isinstance(total, dict):
+                usage_records.append({'utc': value.get('timestamp'), 'usage': total})
+        if ((value.get('type') == 'event_msg' and payload.get('type') == 'turn_completed')
+                or value.get('type') == 'turn.completed'):
+            turn_completed += 1
+    if thread != expected_thread:
+        raise ValueError('native rollout thread identity mismatch')
+    if not usage_records:
+        raise ValueError('native rollout has no partial usage high-water')
+    if turn_completed:
+        raise ValueError('native rollout is completed; timeout recovery is not applicable')
+    return {'thread_id': thread, 'usage_records': len(usage_records),
+            'partial_high_water': usage_records[-1]}
+
+
+def recover_code_timeout(cycle: Cycle, args) -> dict:
+    """Offline continuation for one acknowledged code timeout with an exact native receipt."""
+    cycle_id = str(args.cycle)
+    if safe_relpath(cycle_id) != cycle_id or '/' in cycle_id:
+        raise ValueError('cycle must be one plain autonomy directory name')
+    cycle_dir = cycle.autonomy_dir() / cycle_id
+    cycle_path = cycle_dir / 'cycle.json'
+    state_path = cycle.state_dir / gm_runner.STATE_FILE
+    pointer_path = cycle.pointer_path()
+    if not cycle_path.is_file() or not state_path.is_file() or not pointer_path.is_file():
+        raise ValueError('cycle, current pointer and GM state must all exist')
+    document = gm_runner.load_json(cycle_path)
+    state = gm_runner.load_state(cycle.state_dir)
+    pointer = gm_runner.load_json(pointer_path)
+    if pointer.get('cycle_id') != cycle_id or document.get('cycle_id') != cycle_id:
+        raise ValueError('only the exact current autonomy cycle may be recovered')
+    if (document.get('policy_sha256') != cycle.policy_sha
+            or document.get('evidence_sha256') != cycle.evidence_sha256
+            or document.get('world_id') != cycle.policy.get('world_id')):
+        raise ValueError('cycle policy/evidence/world binding mismatch')
+    if document.get('code_timeout_recovery') is not None:
+        raise ValueError('this cycle already consumed a code-timeout recovery')
+    if (document.get('status') != 'blocked'
+            or document.get('blocked_reason') != 'code_failed_no_summary'
+            or document.get('stage') != 'candidate'):
+        raise ValueError('cycle is not blocked by a candidate code timeout')
+    if document.get('gm_id') != args.gm or document.get('issue_id') != args.issue:
+        raise ValueError('cycle GM/issue binding mismatch')
+    candidate = (document.get('stages') or {}).get('candidate') or {}
+    attempts = candidate.get('attempts') or []
+    reservation = candidate.get('in_flight') or {}
+    if (candidate.get('status') != 'failed'
+            or candidate.get('blocked_reason') != 'gm_runner code produced no summary'
+            or len(attempts) != 1 or attempts[0].get('run_id') is not None
+            or attempts[0].get('usage_measured') is not None
+            or reservation.get('stage') != 'code'
+            or reservation.get('model_calls_reserved') != 1
+            or candidate.get('last_reserved') != reservation):
+        raise ValueError('candidate does not retain the exact no-summary attempt')
+    owned = attempts[0].get('owned') or {}
+    if owned.get('all_members_exited') is not True or owned.get('active_processes') != 0:
+        raise ValueError('owned timeout process tree is not fully exited')
+
+    run_id = str(args.run)
+    if safe_relpath(run_id) != run_id or '/' in run_id:
+        raise ValueError('run must be one plain run directory name')
+    run_dir = cycle.state_dir / 'runs' / run_id
+    process_path = run_dir / 'coding.process.json'
+    events_path = run_dir / 'coding.events.jsonl'
+    result_path = run_dir / 'coding.result.md'
+    _required_sha256(process_path, args.process_sha256, 'coding process receipt')
+    _required_sha256(events_path, args.events_sha256, 'coding event export')
+    if result_path.exists():
+        raise ValueError('coding result exists; no-summary timeout recovery is not applicable')
+    process = gm_runner.load_json(process_path)
+    if (process.get('pid') != args.pid
+            or process.get('prompt_sha256') != args.prompt_sha256):
+        raise ValueError('coding process receipt binding mismatch')
+    event_thread = None
+    event_completed = 0
+    for line in events_path.read_text(encoding='utf-8').splitlines():
+        value = json.loads(line)
+        if value.get('type') == 'thread.started':
+            event_thread = value.get('thread_id')
+        if value.get('type') == 'turn.completed':
+            event_completed += 1
+    if event_thread != args.thread or event_completed:
+        raise ValueError('coding event export lifecycle mismatch')
+
+    rollout_path = Path(args.rollout_file).resolve()
+    rollout_sha = _required_sha256(rollout_path, args.rollout_sha256, 'native rollout')
+    native = _native_timeout_receipt(rollout_path, args.thread)
+    report_path = Path(args.report).resolve()
+    report_sha = _required_sha256(report_path, args.report_sha256, 'forensics report')
+    report = gm_runner.load_json(report_path)
+    scope = report.get('scope') or {}
+    conclusion = report.get('conclusion') or {}
+    recorded_rollout = report.get('native_rollout') or {}
+    if (report.get('kind') != 'gm_code_timeout_forensics'
+            or scope.get('cycle_id') != cycle_id or scope.get('gm_id') != args.gm
+            or scope.get('issue_id') != args.issue or scope.get('run_id') != run_id
+            or conclusion.get('attempt_outcome') !=
+            'interrupted_after_host_timeout_without_gm_runner_summary'
+            or conclusion.get('provider_was_invoked') is not True
+            or conclusion.get('success_claimed') is not False
+            or conclusion.get('usage_accounting') !=
+            'unknown_total_with_measured_partial_native_high_water'
+            or recorded_rollout.get('thread_id') != args.thread
+            or recorded_rollout.get('sha256') != rollout_sha
+            or recorded_rollout.get('event_export_sha256') != args.events_sha256
+            or recorded_rollout.get('last_recorded_cumulative_usage') != {
+                **native['partial_high_water']['usage'],
+                'recorded_utc': native['partial_high_water']['utc']}):
+        raise ValueError('forensics report does not bind the exact interrupted native run')
+
+    issue = (state.get('issues') or {}).get(args.issue)
+    session = (state.get('sessions') or {}).get(args.gm)
+    if not isinstance(issue, dict) or not isinstance(session, dict) \
+            or issue.get('owner_gm') != args.gm:
+        raise ValueError('current issue ownership mismatch')
+    issue_ack = _one_matching(
+        issue.get('coding_acknowledged'),
+        lambda value: (value.get('unresolved') or {}).get('run_id') == run_id,
+        'issue coding acknowledgements')
+    gm_ack = _one_matching(
+        session.get('acknowledged'),
+        lambda value: (value.get('unresolved') or {}).get('run_id') == run_id,
+        'GM acknowledgements')
+    unresolved = issue_ack.get('unresolved') or {}
+    reconciliation = unresolved.get('reconciled') or {}
+    if (unresolved.get('status') != 'interrupted_in_flight'
+            or unresolved.get('cost') != 'unknown'
+            or reconciliation.get('observed_usage') != 'unknown'
+            or issue.get('coding_unresolved') is not None
+            or session.get('unresolved') is not None
+            or (gm_ack.get('unresolved') or {}).get('run_id') != run_id):
+        raise ValueError('run was not recovered and acknowledged as unknown usage')
+
+    audit_path = cycle_dir / 'code-timeout-recovery.json'
+    if audit_path.exists():
+        raise ValueError('code-timeout recovery audit already exists')
+    state_sha_before = sha256_file(state_path)
+    cycle_sha_before = sha256_file(cycle_path)
+    previous_stages = {name: copy.deepcopy((document.get('stages') or {}).get(name))
+                       for name in ('candidate', 'validate', 'publish', 'verify', 'feedback')}
+    recovery = {
+        'schema_version': 1, 'kind': 'code_timeout_recovery', 'cycle_id': cycle_id,
+        'gm_id': args.gm, 'issue_id': args.issue, 'run_id': run_id,
+        'thread_id': args.thread, 'report_sha256': report_sha,
+        'process_sha256': args.process_sha256, 'events_sha256': args.events_sha256,
+        'rollout_sha256': rollout_sha, 'partial_usage_high_water':
+        native['partial_high_water'], 'usage_total': 'unknown',
+        'previous_cycle': {'status': document.get('status'), 'stage': document.get('stage'),
+                           'blocked_reason': document.get('blocked_reason'),
+                           'exit_code': document.get('exit_code')},
+        'previous_stages': previous_stages, 'provider_calls': 0,
+        'observe_replayed': False, 'generation_bumped': False,
+        'recovered_utc': gm_runner.utc_iso(),
+    }
+    issue['coding_session_id'] = args.thread
+    issue['coding_session_source'] = 'acknowledged_timeout_native_rollout'
+    issue['coding_owner_gm'] = args.gm
+    issue['coding_provider_result'] = {
+        'run_id': run_id, 'status': 'interrupted_in_flight', 'cost': 'unknown',
+        'provider_request_started': True, 'pid': args.pid, 'usage': None,
+        'usage_measured': False, 'partial_usage_high_water': native['partial_high_water'],
+        'session_requested': None, 'session_returned': args.thread,
+        'session_bound': True, 'result_text_sha256': None, 'utc': gm_runner.utc_iso(),
+    }
+    issue.setdefault('code_timeout_recoveries', []).append(recovery)
+    session.setdefault('coding', {})['session_id'] = args.thread
+    candidate.pop('blocked_reason', None)
+    candidate['in_flight'] = None
+    candidate['status'] = 'pending'
+    for name in ('validate', 'publish', 'verify', 'feedback'):
+        document['stages'][name] = {'status': 'pending'}
+    document['code_timeout_recovery'] = recovery
+    document['status'] = 'running'
+    document['stage'] = 'candidate'
+    document['blocked_reason'] = None
+    document.pop('exit_code', None)
+    gm_runner.store_state(cycle.state_dir, state)
+    cycle.adopt(document)
+    cycle.save_cycle(document)
+    audit = dict(recovery, state_sha256_before=state_sha_before,
+                 state_sha256_after=sha256_file(state_path),
+                 cycle_sha256_before=cycle_sha_before,
+                 cycle_sha256_after=sha256_file(cycle_path),
+                 reset_stages=['candidate', 'validate', 'publish', 'verify', 'feedback'])
+    gm_runner.save_json(audit_path, audit)
+    return {'status': 'ok', 'kind': 'code_timeout_recovery', 'cycle_id': cycle_id,
+            'gm_id': args.gm, 'issue_id': args.issue,
+            'audit_path': gm_runner.relative(audit_path),
+            'audit_sha256': sha256_file(audit_path), 'provider_called': False,
+            'observe_replayed': False, 'generation_bumped': False,
+            'usage_total': 'unknown', 'coding_session_id': args.thread}
+
+
+def command_recover_code_timeout(args) -> int:
+    policy_path = Path(args.policy).resolve()
+    try:
+        policy = gm_runner.read_autonomy_policy(policy_path)
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        return gm_runner.refusal('autonomy_policy_invalid', str(error), USAGE)
+    errors = policy_errors(policy)
+    if errors:
+        return gm_runner.refusal('autonomy_policy_invalid', '; '.join(errors), USAGE,
+                                 errors=errors)
+    cycle = Cycle(policy_path, policy, {}, None)
+    try:
+        with cycle.cycle_lock():
+            payload = recover_code_timeout(cycle, args)
+    except RuntimeError as error:
+        return gm_runner.refusal('lock_held', str(error), LOCK)
+    except (OSError, ValueError, KeyError, json.JSONDecodeError) as error:
+        return gm_runner.refusal('code_timeout_recovery_refused', str(error), PRECONDITION)
+    return gm_runner.emit(payload, OK)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -3882,6 +4111,24 @@ def build_parser() -> argparse.ArgumentParser:
     scope_recover.add_argument('--feedback-result', required=True, type=Path)
     scope_recover.add_argument('--feedback-result-sha256', required=True)
     scope_recover.set_defaults(func=command_recover_scope_feedback)
+    code_recover = subparsers.add_parser(
+        'recover-code-timeout',
+        help='offline: resume one acknowledged no-summary coding timeout, no calls')
+    code_recover.add_argument('--policy', required=True, type=Path)
+    code_recover.add_argument('--cycle', required=True)
+    code_recover.add_argument('--gm', required=True)
+    code_recover.add_argument('--issue', required=True)
+    code_recover.add_argument('--run', required=True)
+    code_recover.add_argument('--pid', required=True, type=int)
+    code_recover.add_argument('--prompt-sha256', required=True)
+    code_recover.add_argument('--thread', required=True)
+    code_recover.add_argument('--process-sha256', required=True)
+    code_recover.add_argument('--events-sha256', required=True)
+    code_recover.add_argument('--rollout-file', required=True, type=Path)
+    code_recover.add_argument('--rollout-sha256', required=True)
+    code_recover.add_argument('--report', required=True, type=Path)
+    code_recover.add_argument('--report-sha256', required=True)
+    code_recover.set_defaults(func=command_recover_code_timeout)
     return parser
 
 

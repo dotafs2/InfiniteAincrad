@@ -2935,5 +2935,195 @@ class ScopeFeedbackRecoveryTests(unittest.TestCase):
         self.assertEqual(self._bytes(), before)
 
 
+class CodeTimeoutRecoveryTests(unittest.TestCase):
+    def setUp(self):
+        self.root = WORK / 'code-timeout-recovery'
+        shutil.rmtree(self.root, ignore_errors=True)
+        self.root.mkdir(parents=True)
+        self.state_dir = self.root / 'state'
+        self.state_dir.mkdir()
+        evidence = write_json(self.root / 'evidence.json',
+                              {'world_id': WORLD, 'counts': {}, 'evidence': []})
+        ledger = write_json(self.root / 'ledger.json', {'kind': 'fixture', 'calls': []})
+        checkout = self.root / 'trial'
+        checkout.mkdir()
+        base = write_json(self.root / 'base.json', {'schema_version': 1, 'files': {}})
+        godot = write_json(self.root / 'godot.exe', {'stub': True})
+        runtime = self.root / 'runtime'
+        runtime.mkdir()
+        self.policy = example_policy()
+        self.policy['policy_id'] = 'code-timeout-recovery-test'
+        self.policy['world_id'] = WORLD
+        self.policy['paths'].update({'evidence': str(evidence), 'state_dir': str(self.state_dir),
+                                     'prior_ledger': str(ledger)})
+        self.policy['deployment']['checkout'] = str(checkout)
+        self.policy['deployment']['base_manifest'] = str(base)
+        self.policy['runtime']['godot'] = str(godot)
+        self.policy['runtime']['save_path'] = str(runtime / 'save.json')
+        self.policy_path = write_json(self.root / 'policy.json', self.policy)
+        self.cycle = gm_autonomy.Cycle(self.policy_path, self.policy, {}, None)
+        self.run_id = 'code-timeout-exact'
+        self.thread = '01a0ac4c-2fbb-7ae0-ad11-9424ed88b7bd'
+        self.prompt_sha = 'd' * 64
+        self.pid = 60180
+        run_dir = self.state_dir / 'runs' / self.run_id
+        run_dir.mkdir(parents=True)
+        self.process = write_json(run_dir / 'coding.process.json', {
+            'pid': self.pid, 'prompt_sha256': self.prompt_sha,
+            'output': str(run_dir / 'coding.result.md')})
+        self.events = run_dir / 'coding.events.jsonl'
+        self.events.write_text(
+            json.dumps({'type': 'thread.started', 'thread_id': self.thread}) + '\n'
+            + json.dumps({'type': 'turn.started'}) + '\n'
+            + json.dumps({'type': 'item.completed',
+                          'item': {'type': 'agent_message', 'text': 'partial'}}) + '\n',
+            encoding='utf-8')
+        self.usage = {'input_tokens': 200, 'cached_input_tokens': 150,
+                      'cache_write_input_tokens': 0, 'output_tokens': 20,
+                      'reasoning_output_tokens': 10, 'total_tokens': 220}
+        self.recorded_utc = '2026-09-16T22:37:25.759Z'
+        self.rollout = self.root / 'rollout.jsonl'
+        self.rollout.write_text(
+            json.dumps({'type': 'session_meta', 'payload': {'id': self.thread}}) + '\n'
+            + json.dumps({'timestamp': self.recorded_utc, 'type': 'event_msg',
+                          'payload': {'type': 'token_count', 'info': {
+                              'total_token_usage': self.usage}}}) + '\n'
+            + json.dumps({'timestamp': '2026-09-16T22:37:48.350Z',
+                          'type': 'response_item',
+                          'payload': {'type': 'message', 'role': 'assistant'}}) + '\n',
+            encoding='utf-8')
+        document = self.cycle.load_cycle()
+        document.update({'gm_id': 'gm-07', 'issue_id': 'issue-baking',
+                         'status': 'blocked', 'stage': 'candidate',
+                         'blocked_reason': 'code_failed_no_summary', 'exit_code': 7,
+                         'model_calls': 4, 'feedback_attempts_total': 2,
+                         'attempts': {'issue-baking': 1}})
+        document['stages'] = {
+            'observe': {'status': 'done'},
+            'candidate': {
+                'status': 'failed',
+                'blocked_reason': 'gm_runner code produced no summary',
+                'derived_scope': {'objective': 'A bounded baking repair.',
+                                  'files': ['game/capabilities/well.v1.json'],
+                                  'acceptance': ['bounded']},
+                'in_flight': {'stage': 'code', 'model_calls_reserved': 1,
+                              'reserved_utc': '2026-09-16T22:17:48Z'},
+                'last_reserved': {'stage': 'code', 'model_calls_reserved': 1,
+                                  'reserved_utc': '2026-09-16T22:17:48Z'},
+                'attempts': [{'attempt': 1, 'run_id': None, 'status': None,
+                              'usage_measured': None, 'seconds': 1200.2,
+                              'owned': {'active_processes': 0,
+                                        'all_members_exited': True}}]},
+            'validate': {'status': 'pending'}, 'publish': {'status': 'pending'},
+            'verify': {'status': 'pending'},
+            'feedback': {'status': 'failed', 'attempts': [{'status': 'refused'}]},
+        }
+        self.cycle.save_cycle(document)
+        self.cycle_id = document['cycle_id']
+        unresolved = {
+            'kind': 'unknown_cost', 'status': 'interrupted_in_flight',
+            'cost': 'unknown', 'run_id': self.run_id, 'pid': self.pid,
+            'usage': None, 'usage_measured': False,
+            'reconciled': {'observed_usage': 'unknown', 'note': 'partial native usage only'},
+        }
+        state = gm_runner.blank_state()
+        state['world_id'] = WORLD
+        state['issues']['issue-baking'] = {
+            'issue_id': 'issue-baking', 'world_id': WORLD, 'owner_gm': 'gm-07',
+            'lifecycle': 'current', 'coding_attempt': dict(unresolved),
+            'coding_unresolved': None,
+            'coding_acknowledged': [{'unresolved': copy.deepcopy(unresolved),
+                                     'note': 'acknowledged timeout'}],
+        }
+        state['sessions']['gm-07'] = {
+            'gm_id': 'gm-07', 'unresolved': None,
+            'acknowledged': [
+                {'unresolved': copy.deepcopy(unresolved), 'note': 'acknowledged timeout'}],
+            'coding': {'issue_id': 'issue-baking',
+                       'last_status': 'interrupted_in_flight', 'attempts': []},
+        }
+        gm_runner.save_json(self.state_dir / gm_runner.STATE_FILE, state)
+        self.report = write_json(self.root / 'report.json', {
+            'kind': 'gm_code_timeout_forensics',
+            'scope': {'cycle_id': self.cycle_id, 'gm_id': 'gm-07',
+                      'issue_id': 'issue-baking', 'run_id': self.run_id},
+            'conclusion': {
+                'attempt_outcome': 'interrupted_after_host_timeout_without_gm_runner_summary',
+                'provider_was_invoked': True, 'success_claimed': False,
+                'usage_accounting': 'unknown_total_with_measured_partial_native_high_water'},
+            'native_rollout': {
+                'thread_id': self.thread, 'sha256': gm_runner.sha256_file(self.rollout),
+                'event_export_sha256': gm_runner.sha256_file(self.events),
+                'last_recorded_cumulative_usage': {
+                    **self.usage, 'recorded_utc': self.recorded_utc}},
+        })
+        self.args = SimpleNamespace(
+            cycle=self.cycle_id, gm='gm-07', issue='issue-baking', run=self.run_id,
+            pid=self.pid, prompt_sha256=self.prompt_sha, thread=self.thread,
+            process_sha256=gm_runner.sha256_file(self.process),
+            events_sha256=gm_runner.sha256_file(self.events),
+            rollout_file=self.rollout, rollout_sha256=gm_runner.sha256_file(self.rollout),
+            report=self.report, report_sha256=gm_runner.sha256_file(self.report))
+
+    def _bytes(self):
+        return ((self.cycle.cycle_dir() / 'cycle.json').read_bytes(),
+                (self.state_dir / gm_runner.STATE_FILE).read_bytes())
+
+    def test_success_binds_session_preserves_failed_attempt_and_reopens_candidate(self):
+        with mock.patch.object(gm_autonomy, 'run_process',
+                               side_effect=AssertionError('no provider')):
+            with self.cycle.cycle_lock():
+                result = gm_autonomy.recover_code_timeout(self.cycle, self.args)
+        self.assertEqual(result['status'], 'ok')
+        self.assertFalse(result['provider_called'])
+        self.assertEqual(result['usage_total'], 'unknown')
+        document = gm_runner.load_json(self.cycle.cycle_dir() / 'cycle.json')
+        self.assertEqual(document['status'], 'running')
+        self.assertEqual(document['stage'], 'candidate')
+        self.assertEqual(len(document['stages']['candidate']['attempts']), 1)
+        self.assertEqual(document['stages']['candidate']['status'], 'pending')
+        self.assertIsNone(document['stages']['candidate']['in_flight'])
+        self.assertEqual(document['code_timeout_recovery']['previous_stages']
+                         ['feedback']['status'], 'failed')
+        self.assertEqual(document['model_calls'], 4)
+        state = gm_runner.load_state(self.state_dir)
+        issue = state['issues']['issue-baking']
+        self.assertEqual(issue['coding_session_id'], self.thread)
+        self.assertFalse(issue['coding_provider_result']['usage_measured'])
+        self.assertEqual(issue['coding_provider_result']['partial_usage_high_water']
+                         ['usage'], self.usage)
+
+    def test_hash_or_binding_mismatch_refuses_without_writes(self):
+        for field, value, message in (
+                ('rollout_sha256', '0' * 64, 'native rollout SHA-256 mismatch'),
+                ('thread', '01a00000-0000-7000-8000-000000000000',
+                 'coding event export lifecycle mismatch')):
+            with self.subTest(field=field):
+                before = self._bytes()
+                original = getattr(self.args, field)
+                setattr(self.args, field, value)
+                with self.assertRaisesRegex(ValueError, message):
+                    gm_autonomy.recover_code_timeout(self.cycle, self.args)
+                self.assertEqual(self._bytes(), before)
+                setattr(self.args, field, original)
+
+    def test_missing_acknowledgement_refuses_without_writes(self):
+        state = gm_runner.load_state(self.state_dir)
+        state['sessions']['gm-07']['acknowledged'] = []
+        gm_runner.save_json(self.state_dir / gm_runner.STATE_FILE, state)
+        before = self._bytes()
+        with self.assertRaisesRegex(ValueError, 'GM acknowledgements'):
+            gm_autonomy.recover_code_timeout(self.cycle, self.args)
+        self.assertEqual(self._bytes(), before)
+
+    def test_double_recovery_refuses_without_further_writes(self):
+        with self.cycle.cycle_lock():
+            gm_autonomy.recover_code_timeout(self.cycle, self.args)
+        before = self._bytes()
+        with self.assertRaisesRegex(ValueError, 'already consumed'):
+            gm_autonomy.recover_code_timeout(self.cycle, self.args)
+        self.assertEqual(self._bytes(), before)
+
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
