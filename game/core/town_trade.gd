@@ -487,6 +487,22 @@ func _functioning_axe(id: String) -> bool:
 func _busy(id: String) -> bool:
 	return super.pending_job(id).is_empty() == false or _trade().get("jobs", {}).get(id, {}).is_empty() == false
 
+func _repair_material_commitments(id: String, material: String) -> int:
+	# Accepted and delivered contracts still owe one future unit. Completed work has already consumed
+	# its unit, while cancelled/rejected/collected contracts owe none. Keep this derived from the
+	# authoritative contracts so cancellation releases capacity without adding a second reservation.
+	var result := 0
+	for value in _legacy_array("contracts"):
+		if not value is Dictionary or value.get("worker_id") != id or value.get("status") not in ["accepted", "delivered"]:
+			continue
+		var promised_material := "iron" if value.get("part") == "edge" else "wood"
+		if promised_material == material:
+			result += 1
+	return result
+
+func _available_repair_material(id: String, material: String) -> int:
+	return int(_trade_account(id).get(material, -1)) - _repair_material_commitments(id, material)
+
 func _option(result: Array, value: Dictionary) -> void:
 	for existing in result:
 		if existing.get("id") == value.get("id"):
@@ -507,7 +523,8 @@ func _accept_blocker(id: String, contract: Dictionary) -> String:
 	var part: String = str(contract.get("part", ""))
 	if not _has_skill(id, _required_skill(part)):
 		return "skill_unavailable"
-	if _trade_account(id).get("iron" if part == "edge" else "wood", -1) < 1:
+	var material := "iron" if part == "edge" else "wood"
+	if _available_repair_material(id, material) < 1:
 		return "material_unavailable"
 	return ""
 
@@ -528,9 +545,12 @@ func _accept_explanation(contract: Dictionary, blocker: String) -> Dictionary:
 		"skill_unavailable":
 			entry["reason"] = "这项委托需要对应的修理技能（斧刃要metal_repair，斧柄要wood_repair），你的技能列表里没有该技能，因此不能接受。"
 		_:
-			entry["reason"] = "施工时必须由你消耗1" + ("铁" if part == "edge" else "木") + "，你目前不足1，因此不能接受。先在取材点取得材料再谈。"
-			entry["required_material"] = "iron" if part == "edge" else "wood"
+			var material := "iron" if part == "edge" else "wood"
+			entry["reason"] = "每份已接受或已交付的修理都要为施工留出1" + ("铁" if part == "edge" else "木") + "；扣除你尚未完成的承诺后，本委托可用材料不足1，因此不能接受。先取得材料或等已有承诺结束再谈。"
+			entry["required_material"] = material
 			entry["required_quantity"] = 1
+			entry["committed_quantity"] = _repair_material_commitments(str(contract.get("worker_id", "")), material)
+			entry["available_quantity"] = maxi(0, _available_repair_material(str(contract.get("worker_id", "")), material))
 	return entry
 
 func _validate_communicate_need(sender_id: String, need: Variant) -> Dictionary:
@@ -1493,6 +1513,19 @@ func resident_view(id: String = "") -> Dictionary:
 		if accept_blocker.is_empty() or accept_blocker == "contract_unavailable":
 			continue
 		view.unavailable_actions.append(_accept_explanation(contract, accept_blocker))
+	for contract in own_contracts:
+		if contract.get("worker_id") != id or contract.get("status") != "delivered":
+			continue
+		var item := _item(str(contract.get("item_id", "")))
+		var part: String = str(contract.get("part", ""))
+		var material := "iron" if part == "edge" else "wood"
+		# This is the worker's own current shortfall after an already accepted hand-off. It explains why
+		# the work option is absent without exposing the owner's inventory or inventing a cancellation.
+		if item.get("custodian_id") == id and _part_damaged(item, part) and _has_skill(id, _required_skill(part)) and _trade_account(id).get(material, -1) < 1:
+			view.unavailable_actions.append({"action": "work", "contract_id": contract.id,
+				"counterparty": contract.owner_id, "part": part, "code": "material_unavailable",
+				"reason": "工具已交给你，但施工必须消耗你自己的1" + ("铁" if part == "edge" else "木") + "；你目前不足1，因此现在不能施工。先取得材料后再继续。",
+				"required_material": material, "required_quantity": 1})
 	var public_roles: Array = []
 	for other in active_ids():
 		if other == id or position_of(id).distance_to(position_of(other)) > HEARING_RANGE:

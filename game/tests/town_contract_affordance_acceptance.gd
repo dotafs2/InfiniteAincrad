@@ -12,7 +12,9 @@ const OWNER := "fictional:ember"       # axe owner: 12 Col, 2 wood, 0 iron
 const WOODWORKER := "fictional:birch"  # wood carpenter: 3 Col, 1 wood, 0 iron
 const SMITH := "fictional:forge"       # metal smith: 3 Col, 0 wood, 1 iron, metal_repair
 const AXE := "fictional:axe-edge"
+const SECOND_AXE := "fictional:axe-second"
 const EDGE_CONTRACT := "fixture:proposed-edge"
+const SECOND_EDGE_CONTRACT := "fixture:proposed-edge-second"
 
 func _path(tag: String) -> String:
 	return "user://contract-affordance-%s-%d.json" % [tag, Time.get_ticks_usec()]
@@ -39,6 +41,14 @@ func _accept_option(town: TownTrade, id: String, contract_id: String) -> Diction
 		if str(option.get("id", "")) == "contract:accept:" + contract_id:
 			return option
 	return {}
+
+func _two_edge_contract_fixture(smith_iron: int) -> Dictionary:
+	var world := _affordance_fixture(12, smith_iron, true, true)
+	world.life.items.append({"id": SECOND_AXE, "kind": "axe", "owner_id": WOODWORKER,
+		"custodian_id": WOODWORKER, "edge": 20, "handle": 100, "source": "fictional_fixture"})
+	world.life.contracts.append({"id": SECOND_EDGE_CONTRACT, "part": "edge", "item_id": SECOND_AXE,
+		"owner_id": WOODWORKER, "worker_id": SMITH, "status": "proposed", "price_col": 2, "reserved_col": 0})
+	return world
 
 func _accept_notes(town: TownTrade, id: String, contract_id: String) -> Array:
 	return town.resident_view(id).unavailable_actions.filter(func(entry): return entry.get("action") == "accept" and entry.get("contract_id") == contract_id)
@@ -113,7 +123,100 @@ func run() -> void:
 	check(_accept_option(cold_accept, SMITH, EDGE_CONTRACT).is_empty(), "cold restore never re-offers an accepted contract")
 	_cleanup(ok_path, good)
 
-	# --- 3. Negative matrix on a pre-existing proposed contract: each real prerequisite on its own.
+	# --- 3. One material unit backs at most one unfinished promise by this worker.
+	var over_path := _path("material-commitment")
+	_write_fixture(over_path, _two_edge_contract_fixture(1))
+	var over := _load_trade(over_path)
+	var first_accept := over.transaction(over_path, func(): return over.submit_trade(SMITH, "contract:accept:" + EDGE_CONTRACT, "commit-first", "opengameagent_fixture"))
+	check(first_accept.ok and over._contract(EDGE_CONTRACT).status == "accepted", "one iron backs the first accepted edge repair")
+	check(_accept_option(over, SMITH, SECOND_EDGE_CONTRACT).is_empty(), "the same iron is not offered for a second unfinished edge promise")
+	var over_notes := _accept_notes(over, SMITH, SECOND_EDGE_CONTRACT)
+	var over_note: Dictionary = over_notes[0] if over_notes.size() == 1 else {}
+	check(over_note.get("code") == "material_unavailable" and over_note.get("committed_quantity") == 1 and over_note.get("available_quantity") == 0, "the second offer states that the worker's existing commitment consumed the available capacity")
+	var over_before := over.snapshot()
+	var refused_over := over.transaction(over_path, func(): return _forged_accept(over, SMITH, SECOND_EDGE_CONTRACT, "overcommitted acceptance", "commit-second-refused"))
+	check(not refused_over.ok and over.snapshot() == over_before and over.resident(WOODWORKER).coins_col == 3 and over._trade_account(WOODWORKER).reserved_col == 0, "authoritative refusal charges neither second owner nor material")
+	_cleanup(over_path, over)
+
+	var two_path := _path("two-material-units")
+	_write_fixture(two_path, _two_edge_contract_fixture(2))
+	var two := _load_trade(two_path)
+	check(two.transaction(two_path, func(): return two.submit_trade(SMITH, "contract:accept:" + EDGE_CONTRACT, "two-first", "opengameagent_fixture")).ok, "two iron permits the first promise")
+	check(not _accept_option(two, SMITH, SECOND_EDGE_CONTRACT).is_empty(), "one uncommitted iron leaves the second promise executable")
+	var second_accept := two.transaction(two_path, func(): return two.submit_trade(SMITH, "contract:accept:" + SECOND_EDGE_CONTRACT, "two-second", "opengameagent_fixture"))
+	check(second_accept.ok and two._contract(SECOND_EDGE_CONTRACT).status == "accepted" and two._trade_account(SMITH).iron == 2, "two iron permits two accepted repairs without consuming material before work")
+	var second_duplicate := two.submit_trade(SMITH, "contract:accept:" + SECOND_EDGE_CONTRACT, "two-second", "opengameagent_fixture")
+	check(second_duplicate.get("duplicate", false) and two.resident(OWNER).coins_col == 10 and two.resident(WOODWORKER).coins_col == 1 and two._trade_account(OWNER).reserved_col == 2 and two._trade_account(WOODWORKER).reserved_col == 2, "replaying the second acceptance cannot charge either owner twice")
+	_cleanup(two_path, two)
+
+	var release_path := _path("cancel-release")
+	_write_fixture(release_path, _two_edge_contract_fixture(1))
+	var release := _load_trade(release_path)
+	check(release.transaction(release_path, func(): return release.submit_trade(SMITH, "contract:accept:" + EDGE_CONTRACT, "release-first", "opengameagent_fixture")).ok, "release control starts with one committed unit")
+	check(release.transaction(release_path, func(): return release.submit_trade(OWNER, "contract:cancel:" + EDGE_CONTRACT, "release-cancel", "opengameagent_fixture")).ok, "the owner can cancel the still-undelivered contract")
+	check(not _accept_option(release, SMITH, SECOND_EDGE_CONTRACT).is_empty(), "cancellation releases the derived material capacity")
+	check(release.transaction(release_path, func(): return release.submit_trade(SMITH, "contract:accept:" + SECOND_EDGE_CONTRACT, "release-second", "opengameagent_fixture")).ok and release.resident(OWNER).coins_col == 12 and release._trade_account(OWNER).reserved_col == 0 and release.resident(WOODWORKER).coins_col == 1 and release._trade_account(WOODWORKER).reserved_col == 2, "released capacity moves only the second owner's escrow")
+	_cleanup(release_path, release)
+
+	var completed_path := _path("completed-release")
+	_write_fixture(completed_path, _two_edge_contract_fixture(2))
+	var completed := _load_trade(completed_path)
+	completed.submit_trade(SMITH, "contract:accept:" + EDGE_CONTRACT, "completed-accept", "opengameagent_fixture")
+	completed.submit_trade(OWNER, "contract:deliver:" + EDGE_CONTRACT, "completed-deliver", "opengameagent_fixture")
+	arrive(completed, OWNER)
+	completed.advance(2.0)
+	completed.submit_trade(SMITH, "contract:work:" + EDGE_CONTRACT + ":edge", "completed-work", "opengameagent_fixture")
+	arrive(completed, SMITH)
+	completed.advance(61.0)
+	check(completed._contract(EDGE_CONTRACT).status == "completed" and completed._trade_account(SMITH).iron == 1, "completed work consumes its promised unit exactly once")
+	check(not _accept_option(completed, SMITH, SECOND_EDGE_CONTRACT).is_empty(), "a completed contract no longer counts as an unconsumed material promise")
+	_cleanup(completed_path, completed)
+
+	# Same worker, different material: a handle promise consumes wood capacity, not iron capacity.
+	var resource_path := _path("resource-isolation")
+	var resource_world := _two_edge_contract_fixture(1)
+	resource_world.life.contracts[1].part = "handle"
+	resource_world.life.items[0].handle = 20
+	resource_world.life.skills.append({"resident_id": SMITH, "skill_id": "wood_repair"})
+	for account in resource_world.life.accounts:
+		if account.resident_id == SMITH:
+			account.wood = 1
+	_write_fixture(resource_path, resource_world)
+	var resource := _load_trade(resource_path)
+	check(resource.transaction(resource_path, func(): return resource.submit_trade(SMITH, "contract:accept:" + EDGE_CONTRACT, "resource-handle", "opengameagent_fixture")).ok, "the worker can commit its wood to a handle")
+	check(not _accept_option(resource, SMITH, SECOND_EDGE_CONTRACT).is_empty(), "a wood commitment does not consume the same worker's iron capacity")
+	_cleanup(resource_path, resource)
+
+	# Same material, different worker: commitments are personal and cannot consume a neighbour's stock.
+	var worker_path := _path("worker-isolation")
+	var worker_world := _two_edge_contract_fixture(1)
+	worker_world.life.contracts[1].worker_id = WOODWORKER
+	worker_world.life.skills.append({"resident_id": WOODWORKER, "skill_id": "metal_repair"})
+	for account in worker_world.life.accounts:
+		if account.resident_id == WOODWORKER:
+			account.iron = 1
+	_write_fixture(worker_path, worker_world)
+	var workers := _load_trade(worker_path)
+	check(workers.transaction(worker_path, func(): return workers.submit_trade(WOODWORKER, "contract:accept:" + EDGE_CONTRACT, "worker-other", "opengameagent_fixture")).ok, "another worker can commit its own iron")
+	check(not _accept_option(workers, SMITH, SECOND_EDGE_CONTRACT).is_empty(), "another worker's promise does not consume this smith's iron capacity")
+	_cleanup(worker_path, workers)
+
+	# A legacy or externally changed world can still lose material after hand-off; explain that truth.
+	var delivered_path := _path("delivered-shortage")
+	_write_fixture(delivered_path, _affordance_fixture(12, 1, true, true))
+	var delivered := _load_trade(delivered_path)
+	delivered.submit_trade(SMITH, "contract:accept:" + EDGE_CONTRACT, "delivered-accept", "opengameagent_fixture")
+	delivered.submit_trade(OWNER, "contract:deliver:" + EDGE_CONTRACT, "delivered-handoff", "opengameagent_fixture")
+	arrive(delivered, OWNER)
+	delivered.advance(2.0)
+	delivered._trade_account(SMITH).iron = 0
+	check(_option(delivered, SMITH, "work").is_empty(), "post-accept material loss leaves work honestly unavailable")
+	var delivered_notes: Array = delivered.resident_view(SMITH).unavailable_actions.filter(func(entry): return entry.get("action") == "work" and entry.get("contract_id") == EDGE_CONTRACT)
+	check(delivered_notes.size() == 1 and delivered_notes[0].get("code") == "material_unavailable" and delivered_notes[0].get("required_material") == "iron", "the holding worker receives one concrete delivered-contract material blocker")
+	check(not JSON.stringify(delivered.resident_view(OWNER).unavailable_actions).contains("material_unavailable"), "the worker's material shortfall is not disclosed to the owner")
+	_cleanup(delivered_path, delivered)
+
+	# --- 4. Negative matrix on a pre-existing proposed contract: each real prerequisite on its own.
 	var cases := [
 		{"tag": "skill", "coins": 12, "iron": 1, "skill": false, "code": "skill_unavailable"},
 		{"tag": "funds", "coins": 1, "iron": 1, "skill": true, "code": "funds_unavailable"},
@@ -134,7 +237,7 @@ func run() -> void:
 		check(part.resident(OWNER).coins_col == coins_before and part._trade_account(OWNER).get("reserved_col", -1) == 0 and part._contract(EDGE_CONTRACT).get("status") == "proposed" and part._trade_account(SMITH).get("iron", -1) == int(case.iron), tag + ": the refusal conserves money, material and contract")
 		_cleanup(case_path, part)
 
-	# --- 4. Stale-choice control: generated while valid, submitted after the world changed.
+	# --- 5. Stale-choice control: generated while valid, submitted after the world changed.
 	var stale_path := _path("stale")
 	_write_fixture(stale_path, _affordance_fixture(12, 1, true, true))
 	var stale := _load_trade(stale_path)
@@ -159,7 +262,7 @@ func run() -> void:
 	check(not spent_result.ok and spent.snapshot() == spent_before and spent._trade_account(OWNER).get("reserved_col", -1) == 0, "an offer the owner can no longer fund cannot be accepted or reserved")
 	_cleanup(spent_path, spent)
 
-	# --- 5. Same world, cold-restored: the shortage, the need and the honest statement are unchanged.
+	# --- 6. Same world, cold-restored: the shortage, the need and the honest statement are unchanged.
 	var restore_path := _path("restore")
 	_write_fixture(restore_path, _affordance_fixture(8, 0, true, true))
 	var first := _load_trade(restore_path)
