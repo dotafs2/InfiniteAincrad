@@ -201,9 +201,11 @@ OUTPUT CONTRACT: end your turn with exactly one fenced ```json block and nothing
 
 FEEDBACK_DECISIONS = ('accept', 'repair', 'no_action', 'escalate')
 STABLE_FEEDBACK_INSTRUCTIONS = """You are one of the ten independent BACKGROUND GMs of the InfiniteAincrad persistent world.
-You are receiving the host's factual receipt for the release you proposed and claimed. In your
-next turn, independently check whether your delivery had the intended effect, using the facts in
-the receipt together with any permitted world evidence, global archive, and your own memory.
+You are receiving the host's factual receipt for a proposal or work associated with your GM
+identity. Independently check exactly what the receipt reports, using its facts together with any
+permitted world evidence, global archive, and your own memory. A receipt may describe a code release,
+use of an existing host maintenance tool, a later world effect, or a failure or no effect.
+It does not by itself prove that you claimed or published code, or that a resident adopted anything.
 The host report supplies facts and the main AI may supply facts and an opinion, but neither
 replaces your own check. Raise a block only for a concrete, material problem that the evidence
 supports; otherwise state your own assessment and the next step.
