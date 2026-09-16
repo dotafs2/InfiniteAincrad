@@ -27,9 +27,9 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'tmp/mvp-autonomy-20260914/prepared/real/canonical-world.json'
 SOURCE_SHA = 'da4f47b07518a42717b960d7c23471fa0e86d3425eb1180bc77501e4d145e2b4'
 DEFAULT_OUT = ROOT / 'tmp/model-interface-experiment-20260915'
-GODOT = Path.home() / '.cache/level0-tools/godot-4.7.2-mono/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64.exe'
-KIMI_CONFIG = Path('C:/vibeGamingDemo1/ThreeHearthsVillage/Saved/ThreeHearths/api-config.json')
-DEEPSEEK_KEY = ROOT / 'private/deepseek-api-key.txt'
+GODOT = ROOT / 'tmp/toolchain/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64.exe'
+KIMI_CONFIG = None
+DEEPSEEK_KEY = None
 RESIDENT = 'shared:well-keeper'
 MODELS = {'kimi': 'kimi-k2.6', 'deepseek': 'deepseek-flash',
           'luna': 'gpt-5.6-luna', 'astra': 'gpt-6-astra'}
@@ -82,9 +82,46 @@ def emit(value):
     print(json.dumps(value, ensure_ascii=False), flush=True)
 
 
+def add_runtime_arguments(parser, default_out=DEFAULT_OUT):
+    """Shared explicit research paths; provider secrets remain opt-in."""
+    parser.add_argument('--source', type=Path, default=SOURCE)
+    parser.add_argument('--source-sha256', help='Expected SHA-256. Defaults to the observed startup digest.')
+    parser.add_argument('--out', type=Path, default=default_out)
+    parser.add_argument('--godot', type=Path, default=GODOT)
+    parser.add_argument('--resident', default=RESIDENT)
+    parser.add_argument('--kimi-config', type=Path)
+    parser.add_argument('--deepseek-key', type=Path)
+
+
+def configure_runtime(args):
+    """Bind legacy helpers to one explicitly selected, immutable source world."""
+    global SOURCE, SOURCE_SHA, DEFAULT_OUT, GODOT, KIMI_CONFIG, DEEPSEEK_KEY, RESIDENT
+    SOURCE = args.source.resolve()
+    if not SOURCE.is_file():
+        raise FileNotFoundError(SOURCE)
+    observed = sha(SOURCE)
+    SOURCE_SHA = args.source_sha256 or observed
+    if observed != SOURCE_SHA:
+        raise ValueError('source SHA-256 does not match --source-sha256')
+    DEFAULT_OUT = args.out.resolve()
+    GODOT = args.godot.resolve()
+    if not GODOT.is_file():
+        raise FileNotFoundError(GODOT)
+    RESIDENT = args.resident.strip()
+    if not RESIDENT:
+        raise ValueError('--resident must not be empty')
+    KIMI_CONFIG = args.kimi_config.resolve() if args.kimi_config else None
+    DEEPSEEK_KEY = args.deepseek_key.resolve() if args.deepseek_key else None
+    args.source, args.out, args.godot = SOURCE, DEFAULT_OUT, GODOT
+    return {'source': SOURCE, 'source_sha256': SOURCE_SHA, 'out': DEFAULT_OUT,
+            'godot': GODOT, 'resident': RESIDENT, 'kimi_config': KIMI_CONFIG,
+            'deepseek_key': DEEPSEEK_KEY}
+
+
 class Probe:
-    def __init__(self, directory, world_source, resident=RESIDENT,
-                 script='res://experiments/model_interface_probe.gd', extra_args=()):
+    def __init__(self, directory, world_source, resident=None,
+                 script='res://experiments/model_interface_probe.gd', extra_args=(), godot=None,
+                 restore_only=True):
         self.directory = Path(directory).resolve()
         self.directory.mkdir(parents=True, exist_ok=True)
         self.world = self.directory / 'world.json'
@@ -92,12 +129,18 @@ class Probe:
             shutil.copyfile(world_source, self.world)
         for name in ('ready.json', 'request.json', 'response.json'):
             (self.directory / name).unlink(missing_ok=True)
-        self.resident, self.number = resident, 0
+        self.resident, self.number = resident or RESIDENT, 0
+        executable = Path(godot or GODOT)
+        if not executable.is_file():
+            raise FileNotFoundError(executable)
         self.logs = [open(self.directory / name, 'w', encoding='utf-8')
                      for name in ('engine.stdout.log', 'engine.stderr.log')]
-        command = [str(GODOT), '--path', str(ROOT / 'game'), '--headless', '--fixed-fps', '60',
-                   '--script', script, '--', '--town-restore',
-                   '--town-save=' + self.world.as_posix(), '--experiment-dir=' + self.directory.as_posix(), *extra_args]
+        command = [str(executable), '--path', str(ROOT / 'game'), '--headless', '--fixed-fps', '60',
+                   '--script', script, '--']
+        if restore_only:
+            command.append('--town-restore')
+        command += ['--town-save=' + self.world.as_posix(),
+                    '--experiment-dir=' + self.directory.as_posix(), *extra_args]
         self.job = WindowsProcessTree(command, stdout=self.logs[0], stderr=self.logs[1], cwd=ROOT)
         self.started = time.monotonic()
         write(self.directory / 'process.json', {'pid': self.job.process.pid, 'command': command, 'status': 'running'})
@@ -159,13 +202,18 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 
 
 class Providers:
-    def __init__(self, out):
+    def __init__(self, out, kimi_config=None, deepseek_key=None, resident=None):
         self.out = Path(out)
+        self.kimi_config = Path(kimi_config) if kimi_config else KIMI_CONFIG
+        self.deepseek_key = Path(deepseek_key) if deepseek_key else DEEPSEEK_KEY
+        self.resident = resident or RESIDENT
         self.opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
         self.kimi = None
 
     def _kimi(self, body, call_id):
         if self.kimi is None:
+            if self.kimi_config is None:
+                raise ValueError('Kimi calls require --kimi-config')
             sys.path.insert(0, str(ROOT / 'tools/kimi'))
             from kimi_budget import Ledger, Policy, NANO
             from kimi_gateway import Gateway, KimiProvider
@@ -175,11 +223,13 @@ class Providers:
             ledger = Ledger(self.out / 'kimi-experiment.sqlite3', policy)
             if not ledger.path.exists() and not ledger.guard.exists():
                 ledger.initialize()
-            self.kimi = Gateway(ledger, KimiProvider(read(KIMI_CONFIG)))
-        return self.kimi.complete(call_id, RESIDENT, body)
+            self.kimi = Gateway(ledger, KimiProvider(read(self.kimi_config)))
+        return self.kimi.complete(call_id, self.resident, body)
 
     def _deepseek(self, body):
-        key = DEEPSEEK_KEY.read_text(encoding='utf-8-sig').strip()
+        if self.deepseek_key is None:
+            raise ValueError('DeepSeek calls require --deepseek-key')
+        key = self.deepseek_key.read_text(encoding='utf-8-sig').strip()
         request = urllib.request.Request('https://api.deepseek.com/chat/completions',
                   data=json.dumps(body, ensure_ascii=False).encode(),
                   headers={'Authorization': 'Bearer '+key, 'Content-Type': 'application/json'})
@@ -465,16 +515,132 @@ def offline(out):
     emit({'offline': 'passed', 'directory': str(directory)})
 
 
+def _offline_archive_entry(observation, resident, request_id):
+    return {'world_id': observation['world_id'], 'request_id': request_id,
+            'resident_id': resident, 'provider_id': 'offline_probe_test',
+            'original_reply': {'offline': True}, 'assistant_text': '',
+            'assistant_text_parts': [],
+            'application': {'status': 'offline_probe_test', 'model_returned': False}}
+
+
+def bootstrap(out, action='eat_ration'):
+    """One fresh-world observation/action/restart, plus resident-plan isolation."""
+    directory = out / 'bootstrap'
+    if directory.exists():
+        raise FileExistsError('bootstrap output already exists; choose a new --out')
+    source_before = SOURCE.read_bytes()
+    source_state = json.loads(source_before)
+    resident_ids = [value['stable_id'] for value in source_state['residents']]
+    if RESIDENT not in resident_ids or len(resident_ids) < 2:
+        raise ValueError('bootstrap requires the selected resident and a second resident')
+    second = next(value for value in resident_ids if value != RESIDENT)
+    host = Probe(directory / 'live', SOURCE, resident=RESIDENT)
+    try:
+        initial = host.request('observe')
+        write(directory / 'personal-observation.json', initial)
+        option, error = resolve_step({'action': action}, initial)
+        if error:
+            raise ValueError(f'offline action unavailable: {action}: {error}')
+        after_action = host.request('apply', option_id=option['id'],
+                                    command_id='research:bootstrap:offline-action',
+                                    seconds=180, provenance='local_rule_policy')
+        write(directory / 'offline-action.json', {'resident_id': RESIDENT,
+              'option': option, 'result': after_action})
+        first_plan = {'resident_id': RESIDENT, 'marker': 'first-resident-offline-plan'}
+        first_remember = host.request('remember', plan_state=first_plan,
+            entry=_offline_archive_entry(after_action, RESIDENT, 'research:bootstrap:resident-one'))
+        host.resident = second
+        second_before = host.request('observe')
+        if second_before.get('plan_state'):
+            raise AssertionError('second resident saw first resident plan')
+        second_plan = {'resident_id': second, 'marker': 'second-resident-offline-plan'}
+        second_remember = host.request('remember', plan_state=second_plan,
+            entry=_offline_archive_entry(second_before, second, 'research:bootstrap:resident-two'))
+        second_after = host.request('observe')
+        host.resident = RESIDENT
+        first_after = host.request('observe')
+        write(directory / 'resident-plan-isolation-live.json', {
+              'first_resident': RESIDENT, 'first_plan': first_after['plan_state'],
+              'second_resident': second, 'second_plan': second_after['plan_state'],
+              'remember_receipts': [first_remember, second_remember]})
+    finally:
+        host.close()
+    warm_state = read(host.world)
+    cold = Probe(directory / 'cold', host.world, resident=RESIDENT)
+    try:
+        first_cold = cold.request('observe')
+        cold.resident = second
+        second_cold = cold.request('observe')
+    finally:
+        cold.close()
+    cold_state = read(cold.world)
+    result = {'schema_version': 1, 'offline': True, 'paid_model_calls': 0,
+              'world_id': source_state['world_id'], 'source': str(SOURCE),
+              'source_sha256': SOURCE_SHA, 'working_world': str(cold.world),
+              'resident_ids': resident_ids, 'resident_count': len(resident_ids),
+              'layout_id': source_state.get('godot', {}).get('spatial_layout', {}).get('id'),
+              'observed_resident': RESIDENT, 'action': action,
+              'action_ok': bool(after_action.get('action_result', {}).get('ok')),
+              'action_pending': after_action.get('pending', {}),
+              'cold_state_equal': warm_state == cold_state,
+              'source_unchanged': SOURCE.read_bytes() == source_before,
+              'resident_plan_isolation': {
+                  'first': first_cold.get('plan_state'), 'second': second_cold.get('plan_state'),
+                  'distinct': first_cold.get('plan_state') == first_plan and
+                              second_cold.get('plan_state') == second_plan}}
+    if not (result['action_ok'] and not result['action_pending'] and
+            result['cold_state_equal'] and result['source_unchanged'] and
+            result['resident_plan_isolation']['distinct']):
+        raise AssertionError('offline bootstrap verification failed')
+    write(directory / 'bootstrap-result.json', result)
+    emit(result)
+    return result
+
+
+def diagnose_layout(out):
+    """Run the ordinary fresh-world layout gate briefly, without a provider."""
+    directory = out / 'layout-diagnostic'
+    if directory.exists():
+        raise FileExistsError('layout diagnostic already exists; choose a new --out')
+    source_before = SOURCE.read_bytes()
+    host = Probe(directory, SOURCE, extra_args=['--diagnose-live-layout'], restore_only=False)
+    try:
+        result = read(directory / 'ready.json')['layout_diagnostic']
+    finally:
+        host.close()
+    source_state = json.loads(source_before)
+    counts = {}
+    for candidate in result.get('candidates', []):
+        reason = candidate.get('reason', 'unknown')
+        counts[reason] = counts.get(reason, 0) + 1
+    result.update({'schema_version': 1, 'offline': True, 'paid_model_calls': 0,
+                   'source': str(SOURCE), 'source_sha256': SOURCE_SHA,
+                   'source_unchanged': SOURCE.read_bytes() == source_before,
+                   'working_world': str(host.world), 'candidate_summary': counts,
+                   'source_spatial_layout_keys': sorted(source_state.get('godot', {})
+                                                        .get('spatial_layout', {}).keys())})
+    write(directory / 'layout-diagnostic.json', result)
+    emit({key: value for key, value in result.items() if key != 'candidates'})
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=('offline', 'preflight', 'run'))
-    parser.add_argument('--out', type=Path, default=DEFAULT_OUT)
+    parser.add_argument('mode', choices=('bootstrap', 'diagnose-layout', 'offline', 'preflight', 'run'))
+    add_runtime_arguments(parser)
     parser.add_argument('--providers', nargs='+', choices=MODELS, default=list(MODELS))
     parser.add_argument('--scenarios', nargs='+', choices=SCENARIOS, default=list(SCENARIOS))
     parser.add_argument('--repetitions', type=int, default=2)
+    parser.add_argument('--offline-action', default='eat_ration')
     args = parser.parse_args()
-    assert sha(SOURCE) == SOURCE_SHA, 'canonical source changed; freeze a new experiment explicitly'
+    configure_runtime(args)
     args.out.mkdir(parents=True, exist_ok=True)
+    if args.mode == 'bootstrap':
+        bootstrap(args.out, args.offline_action)
+        return
+    if args.mode == 'diagnose-layout':
+        diagnose_layout(args.out)
+        return
     if args.mode == 'offline':
         offline(args.out)
         return

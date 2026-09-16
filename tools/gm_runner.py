@@ -78,6 +78,7 @@ GM_ARCHIVE_FULL_IDS = {'gm-02', 'gm-06'}
 EVIDENCE_KIND = 'background_gm_evidence_snapshot'
 EVIDENCE_SCHEMA = 1
 STATE_SCHEMA = 2
+WORLD_BOOTSTRAP_SCHEMA = 1
 GM_MEMORY_LIMIT = 12
 REQUIRED_BOUNDARY_FLAGS = ('contains_private_reply_reason', 'contains_other_resident_memories')
 DISPOSITIONS = ('observe', 'proposal', 'no_action')
@@ -666,6 +667,92 @@ def blank_state() -> dict:
             'sessions': {}, 'lock_incidents': []}
 
 
+def world_bootstrap_identity(world_path: Path, expected_world_id: str | None = None) -> dict:
+    """Read the minimum public identity needed to bind a brand-new GM state directory.
+
+    This deliberately does not migrate a prior GM state, ledger, issue, or session.  A new
+    world's ten resident identities are provenance for the binding, not GM resident bodies.
+    """
+    path = Path(world_path).resolve()
+    if not path.is_file():
+        raise ValueError(f'world save is missing: {path}')
+    world = load_json(path)
+    if not isinstance(world, dict):
+        raise ValueError('world save root must be a JSON object')
+    world_id = world.get('world_id')
+    if not isinstance(world_id, str) or not world_id.strip() or world_id != world_id.strip():
+        raise ValueError('world save must carry one non-empty, trimmed world_id')
+    if expected_world_id is not None and world_id != expected_world_id:
+        raise ValueError(f'world save is {world_id}, not expected world {expected_world_id}')
+    residents = world.get('residents')
+    if not isinstance(residents, list) or len(residents) != 10:
+        raise ValueError('world bootstrap requires exactly ten resident records')
+    resident_ids = []
+    for index, resident in enumerate(residents):
+        stable_id = resident.get('stable_id') if isinstance(resident, dict) else None
+        if (not isinstance(stable_id, str) or not stable_id.strip()
+                or stable_id != stable_id.strip()):
+            raise ValueError(f'residents[{index}].stable_id must be a non-empty trimmed string')
+        resident_ids.append(stable_id)
+    if len(set(resident_ids)) != 10:
+        raise ValueError('world bootstrap requires ten unique stable resident identities')
+    return {'schema_version': WORLD_BOOTSTRAP_SCHEMA, 'world_id': world_id,
+            'resident_ids': resident_ids, 'world_save_sha256': sha256_file(path)}
+
+
+def bootstrap_world(args) -> int:
+    """Atomically create the empty ten-GM state for one explicitly selected new world.
+
+    An existing state is accepted only when this command created it from the exact same world
+    bytes and resident identities.  No legacy, partially initialized, or merely empty state is
+    inferred to be safe to overwrite.
+    """
+    state_dir = Path(args.state_dir).resolve()
+    try:
+        identity = world_bootstrap_identity(args.world_save, args.world_id)
+    except (OSError, ValueError, json.JSONDecodeError, UnicodeDecodeError) as error:
+        return refusal('world_bootstrap_invalid', str(error), 2)
+    state_path = state_dir / STATE_FILE
+    with StateLock(state_dir, args.break_lock):
+        if state_path.is_file():
+            try:
+                existing = load_json(state_path)
+            except (OSError, json.JSONDecodeError, UnicodeDecodeError) as error:
+                return refusal('world_bootstrap_existing_state_unreadable', type(error).__name__, 4)
+            prior = existing.get('world_bootstrap') if isinstance(existing, dict) else None
+            if (isinstance(prior, dict)
+                    and prior.get('schema_version') == WORLD_BOOTSTRAP_SCHEMA
+                    and all(prior.get(key) == identity.get(key)
+                            for key in ('world_id', 'resident_ids', 'world_save_sha256'))
+                    and existing.get('world_id') == identity['world_id']
+                    and set(existing.get('sessions') or {}) == set(GM_IDS)
+                    and all(isinstance((existing.get('sessions') or {}).get(gm_id), dict)
+                            and existing['sessions'][gm_id].get('gm_id') == gm_id
+                            for gm_id in GM_IDS)):
+                return emit({'status': 'ok', 'kind': 'gm_world_bootstrap',
+                             'created': False, 'idempotent': True,
+                             'world_id': identity['world_id'],
+                             'resident_ids': identity['resident_ids'],
+                             'gm_ids': list(GM_IDS), 'state_dir': str(state_dir),
+                             'state_sha256': sha256_file(state_path)}, 0)
+            return refusal('world_bootstrap_state_exists',
+                           'state.json already exists and is not this exact bootstrap; refusing '
+                           'to read, migrate, or overwrite prior GM state', 4,
+                           state_dir=str(state_dir), requested_world_id=identity['world_id'],
+                           existing_world_id=(existing.get('world_id')
+                                              if isinstance(existing, dict) else None))
+        state = load_state(state_dir)
+        state['world_id'] = identity['world_id']
+        state['world_bootstrap'] = dict(identity, created_utc=utc_iso(),
+                                        source='explicit_new_world_bootstrap')
+        store_state(state_dir, state)
+        return emit({'status': 'ok', 'kind': 'gm_world_bootstrap',
+                     'created': True, 'idempotent': False,
+                     'world_id': identity['world_id'],
+                     'resident_ids': identity['resident_ids'], 'gm_ids': list(GM_IDS),
+                     'state_dir': str(state_dir), 'state_sha256': sha256_file(state_path)}, 0)
+
+
 def _gm_archive_script() -> Path:
     return (ROOT / 'tools' / 'gm_archive.py').resolve()
 
@@ -837,6 +924,43 @@ def remember_host_feedback(record: dict, gm_id: str, receipt: dict, receipt_sha2
              if isinstance(item, dict)}
     if _feedback_event_key(event) not in prior:
         memory['host_feedback'].append(event)
+
+
+def consume_effect_review(record: dict, observation_receipt: dict, decision: str,
+                          feedback_run_id: str) -> bool:
+    """Mark the exact pending publication receipt consumed after its owner acknowledged facts.
+
+    The observation receipt must bind the original receipt hash, release, issue, world and owner.
+    A stale or foreign receipt never consumes pending work.  This state transition is deliberately
+    kept in the owning GM's private memory; residents are not told about the development process.
+    """
+    if observation_receipt.get('kind') != 'autonomy_effect_observation_receipt':
+        return False
+    parent = observation_receipt.get('parent')
+    if not isinstance(parent, dict):
+        return False
+    memory = ensure_gm_memory(record, record.get('gm_id'))
+    for event in memory['host_feedback']:
+        if not isinstance(event, dict) or event.get('receipt_sha256') != parent.get('receipt_sha256'):
+            continue
+        receipt = event.get('receipt')
+        if not isinstance(receipt, dict) or receipt.get('kind') != 'autonomy_release_receipt':
+            continue
+        expected = {'cycle_id': receipt.get('cycle_id'), 'issue_id': receipt.get('issue_id'),
+                    'world_id': receipt.get('world_id'), 'gm_id': receipt.get('gm_id'),
+                    'release_digest': receipt.get('release_digest')}
+        if any(parent.get(key) != value for key, value in expected.items()):
+            return False
+        if event.get('effect_review_result'):
+            return False
+        event['effect_review_result'] = {
+            'status': 'consumed', 'decision': decision, 'feedback_run_id': feedback_run_id,
+            'observation_outcome': observation_receipt.get('outcome'),
+            'observation_receipt_sha256': sha256_bytes(
+                canonical(observation_receipt).encode('utf-8')),
+            'consumed_utc': utc_iso()}
+        return True
+    return False
 
 
 def load_state(state_dir: Path) -> dict:
@@ -2888,6 +3012,13 @@ def feedback(args) -> int:
             else:
                 outcome.update(ack)
                 outcome['validation_errors'] = []
+                if receipt.get('kind') == 'autonomy_effect_observation_receipt':
+                    outcome['effect_review_consumed'] = consume_effect_review(
+                        record, receipt, ack['decision'], run_id)
+                    if not outcome['effect_review_consumed']:
+                        status = 'invalid_output'
+                        outcome['validation_errors'] = [
+                            'effect observation did not bind one unconsumed publication receipt']
                 if args.issue and ack['decision'] == 'repair':
                     issue = state['issues'].get(args.issue)
                     if issue is not None and issue.get('owner_gm') in (None, args.gm):
@@ -2929,6 +3060,7 @@ def feedback(args) -> int:
         return emit({'status': 'ok', 'gm_id': args.gm, 'run_id': run_id,
                      'acknowledged': True, 'decision': outcome['decision'],
                      'next_work': outcome['next_work'],
+                     'effect_review_consumed': outcome.get('effect_review_consumed'),
                      'repair_requested_issue': outcome.get('repair_requested_issue'),
                      'receipt_sha256': receipt_sha,
                      'protected_paths_changed': changed,
@@ -2958,6 +3090,15 @@ def build_parser() -> argparse.ArgumentParser:
                         help='path whose sha256 must not change during the dispatch')
     shared.add_argument('--break-lock', action='store_true',
                         help='take over a lock file left by a run that already died')
+
+    bootstrap_parser = subparsers.add_parser(
+        'bootstrap-world', help='bind a brand-new empty ten-GM state to one ten-resident world')
+    bootstrap_parser.add_argument('--state-dir', required=True, type=Path)
+    bootstrap_parser.add_argument('--world-save', required=True, type=Path)
+    bootstrap_parser.add_argument('--world-id',
+                                  help='optional exact expected world_id; mismatch is refused')
+    bootstrap_parser.add_argument('--break-lock', action='store_true')
+    bootstrap_parser.set_defaults(func=bootstrap_world)
 
     observe_parser = subparsers.add_parser('observe', parents=[shared],
                                            help='import reviewed evidence and dispatch GM turns')

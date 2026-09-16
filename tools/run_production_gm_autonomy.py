@@ -309,7 +309,18 @@ def settled_local_candidate_failure(report, state_dir, deployment_before, deploy
             'model_calls':model_calls,'usage_unknown':None,'owned_processes_exited':True,
             'deployment_unchanged':True,'report_path':report.get('report_path')}
 
-def validate(scope):
+def uncertainty_rows(ledger):
+    """Return the explicit non-negative uncertain-row count, with absent sparse count meaning 0.
+
+    The real Kimi ledger omits zero-valued status buckets.  A missing counts object or a malformed
+    value is still unknown and must fail closed; only an absent ``uncertain`` key inside a real
+    counts object means zero.
+    """
+    if not isinstance(ledger,dict) or not isinstance(ledger.get('counts'),dict): return None
+    value=ledger['counts'].get('uncertain',0)
+    return value if type(value) is int and value>=0 else None
+
+def validate(scope, resume=False):
     errors=[]
     required=('world_id','canonical_world','gm_state_dir','deployment_checkout','autonomy_policy_template',
               'life_command','out_root','max_cycles','max_seconds','life_timeout','autonomy_timeout','head',
@@ -335,7 +346,9 @@ def validate(scope):
     for k in ('canonical_world','gm_state_dir','deployment_checkout','autonomy_policy_template'):
         if scope.get(k) and not resolve(scope[k]).exists(): errors.append(k+' missing')
     out=resolve(scope.get('out_root','.'))
-    if out.exists(): errors.append('out_root must be absent')
+    if resume:
+        if not (out/'run.json').is_file(): errors.append('resume requires out_root/run.json')
+    elif out.exists(): errors.append('out_root must be absent')
     for k,kind in (('cutoff_utc',str),('admission_buffer_seconds',int),('require_fresh_final_evidence',bool)):
         if k in scope and scope[k] is not None and type(scope[k]) is not kind: errors.append(k+' has the wrong type')
     if 'cutoff_utc' in scope and scope['cutoff_utc']:
@@ -348,7 +361,7 @@ def validate(scope):
     world=load(resolve(scope['canonical_world']))
     ids=[x.get('stable_id') for x in world.get('residents',[]) if isinstance(x,dict)]
     if world.get('world_id')!=scope['world_id'] or len(ids)!=10 or len(set(ids))!=10: errors.append('canonical world identity/ten residents mismatch')
-    if sha(resolve(scope['canonical_world'])) != scope.get('canonical_world_sha256'):
+    if not resume and sha(resolve(scope['canonical_world'])) != scope.get('canonical_world_sha256'):
         errors.append('canonical world hash pin mismatch')
     state=gm_runner.load_state(resolve(scope['gm_state_dir']))
     if state.get('world_id')!=scope['world_id'] or len(state.get('sessions',{}))!=10: errors.append('retained GM state/world/ten identities mismatch')
@@ -482,7 +495,8 @@ def main(argv=None):
     if argv and argv[0]=='verify-journey-stall':
         return verify_journey_stall(argv[1:])
     ap=argparse.ArgumentParser(); ap.add_argument('--scope',type=Path,required=True); ap.add_argument('--preflight',action='store_true')
-    args=ap.parse_args(argv); scope=load(args.scope); errors=validate(scope)
+    ap.add_argument('--resume',action='store_true',help='resume the one durable waiting-review GM phase without replaying its completed life phase')
+    args=ap.parse_args(argv); scope=load(args.scope); errors=validate(scope,args.resume)
     if errors: print(json.dumps({'status':'refused','errors':errors})); return 2
     cutoff=None
     if scope.get('cutoff_utc'):
@@ -494,11 +508,50 @@ def main(argv=None):
             print(json.dumps({'status':'refused','errors':['cutoff_utc unparseable at runtime']})); return 2
         if cutoff.tzinfo is None:
             print(json.dumps({'status':'refused','errors':['cutoff_utc must include a timezone offset']})); return 2
-    if args.preflight: print(json.dumps({'status':'ready','model_calls':0})); return 0
-    out=resolve(scope['out_root']); out.mkdir(parents=True)
-    baseline=tracked(); deadline=time.monotonic()+scope['max_seconds']
+    if args.preflight: print(json.dumps({'status':'ready','model_calls':0,'resume':args.resume})); return 0
+    out=resolve(scope['out_root']); now_utc=dt.datetime.now(dt.timezone.utc)
+    scope_sha=sha(args.scope)
+    if args.resume:
+        try: run=load(out/'run.json')
+        except Exception as error:
+            print(json.dumps({'status':'refused','errors':['resume run.json unreadable: '+str(error)]})); return 2
+        baseline=run.get('tracked_baseline')
+        records=run.get('cycles')
+        resume_record=(records[-1] if isinstance(records,list) and records else None)
+        resume_errors=[]
+        if run.get('schema_version')!=1: resume_errors.append('resume run schema mismatch')
+        if run.get('scope_sha256')!=scope_sha: resume_errors.append('resume scope digest mismatch')
+        if run.get('status')!='waiting_review' or run.get('reason')!='explicit_main_ai_review_required':
+            resume_errors.append('run is not durably paused at explicit main-AI review')
+        if not isinstance(baseline,dict) or not isinstance(baseline.get('files'),dict):
+            resume_errors.append('resume run has no complete tracked baseline')
+        elif tracked()!=baseline: resume_errors.append('development checkout changed since the paused run')
+        if not isinstance(resume_record,dict) or resume_record.get('status')!='waiting_review':
+            resume_errors.append('last cycle is not the waiting-review phase')
+        elif type(resume_record.get('index')) is not int or not 1<=resume_record['index']<=scope['max_cycles']:
+            resume_errors.append('waiting-review cycle index is invalid')
+        try:
+            deadline_utc=dt.datetime.fromisoformat(str(run.get('deadline_utc')).replace('Z','+00:00'))
+            if deadline_utc.tzinfo is None: raise ValueError('naive deadline')
+        except (TypeError,ValueError):
+            deadline_utc=None; resume_errors.append('resume run has no valid original deadline_utc')
+        if resume_errors:
+            print(json.dumps({'status':'refused','errors':resume_errors})); return 2
+        remaining_seconds=(deadline_utc-now_utc).total_seconds()
+        deadline=time.monotonic()+max(0,remaining_seconds)
+        run['status']='running'; run['reason']=None; run['pid']=os.getpid()
+        run.setdefault('resumed_utc',[]).append(now_utc.isoformat())
+    else:
+        out.mkdir(parents=True)
+        baseline=tracked(); deadline=time.monotonic()+scope['max_seconds']
+        deadline_utc=now_utc+dt.timedelta(seconds=scope['max_seconds'])
+        resume_record=None
     admission_buffer=int(scope.get('admission_buffer_seconds') or scope.get('settlement_reserve_seconds') or 120)
-    run={'schema_version':1,'status':'running','scope_sha256':sha(args.scope),'head':baseline['head'],'cycles':[],'started_utc':dt.datetime.now(dt.timezone.utc).isoformat(),'pid':os.getpid(),'kimi_requests':0,'gm_model_calls':0,'counted_gm_cycle_ids':[],'counted_gm_cycle_calls':{}}
+    if not args.resume:
+        run={'schema_version':1,'status':'running','scope_sha256':scope_sha,'head':baseline['head'],
+             'tracked_baseline':baseline,'deadline_utc':deadline_utc.isoformat(),'cycles':[],
+             'started_utc':now_utc.isoformat(),'pid':os.getpid(),'kimi_requests':0,
+             'gm_model_calls':0,'counted_gm_cycle_ids':[],'counted_gm_cycle_calls':{}}
     def checkpoint():
         save(out/'run.json',run)
         save(resolve(scope['status_path']), {'status':run['status'],'reason':run.get('reason'),
@@ -508,9 +561,162 @@ def main(argv=None):
              'updated_utc':dt.datetime.now(dt.timezone.utc).isoformat()})
     checkpoint()
     world=resolve(scope['canonical_world']); deployment=resolve(scope['deployment_checkout'])
-    for index in range(1,scope['max_cycles']+1):
+
+    def run_autonomy_phase(record,phase,policy_path,verify_copy,verify_copy_before,
+                           post_life_sha,deployment_before,manifest_path,resuming=False):
+        auto=[sys.executable,str(ROOT/'tools/gm_autonomy.py'),'cycle','--policy',str(policy_path)]
+        auto += [str(x) for x in scope.get('gm_runner_args',[])]
+        record['status']='autonomy_in_flight'; checkpoint()
+        attempts=record.setdefault('autonomy_attempts',[])
+        log=(phase/(f'autonomy-resume-{len(attempts):02d}.log') if resuming
+             else phase/'autonomy.log')
+        autonomous=run_owned(auto,ROOT,scope['autonomy_timeout'],log)
+        record['autonomy']=autonomous
+        report=None
+        try: report=gm_autonomy.last_json_line(log.read_text(encoding='utf-8'))
+        except Exception: pass
+        record['autonomy_summary']=report
+        attempts.append({'resume':bool(resuming),'log':str(log),'exit_code':autonomous['exit_code'],
+                         'timed_out':autonomous['timed_out'],
+                         'owned_processes_exited':(autonomous.get('owned') or {}).get(
+                             'all_members_exited'),'status':(report or {}).get('status'),
+                         'cycle_id':(report or {}).get('cycle_id')})
+        if (autonomous['timed_out']
+                or (autonomous.get('owned') or {}).get('all_members_exited') is not True or not report):
+            run.update(status='stopped',reason='autonomy_failed'); return 'stopped'
+        gm_status=report.get('status')
+        gm_cycle_id=report.get('cycle_id')
+        if not isinstance(gm_cycle_id,str) or not gm_cycle_id:
+            run.update(status='stopped',reason='autonomy_report_missing_cycle_id'); return 'stopped'
+        expected=record.get('gm_cycle_id')
+        if resuming and expected!=gm_cycle_id:
+            run.update(status='stopped',reason='resume_gm_cycle_identity_changed'); return 'stopped'
+        record['gm_cycle_id']=gm_cycle_id
+        gm_usage=report.get('usage') if isinstance(report.get('usage'),dict) else {}
+        measured_calls=gm_usage.get('model_calls')
+        unknown_usage=gm_usage.get('unknown')
+        # Attempt accounting is settled before any classification. usage.model_calls is
+        # gm_autonomy's call/quota count: it keeps the admission reservations of interrupted or
+        # unknown calls, so it is not proof that every call completed or a currency figure.
+        if type(measured_calls) is not int or measured_calls<0:
+            run.update(status='stopped',reason='autonomy_usage_unmeasured'); return 'stopped'
+        cumulative=dict(run.get('counted_gm_cycle_calls') or {})
+        already=int(cumulative.get(gm_cycle_id,0))
+        if measured_calls<already:
+            run.update(status='stopped',reason='autonomy_usage_regressed'); return 'stopped'
+        charged=measured_calls-already
+        if charged:
+            run['gm_model_calls']+=charged
+            if gm_cycle_id not in run['counted_gm_cycle_ids']:
+                run['counted_gm_cycle_ids'].append(gm_cycle_id)
+        cumulative[gm_cycle_id]=measured_calls
+        run['counted_gm_cycle_calls']=cumulative
+        record['gm_usage_counted']=bool(charged); record['gm_quota_calls_charged']=charged
+        if run['gm_model_calls'] > int(scope['max_gm_model_calls']):
+            run.update(status='stopped',reason='lifetime_gm_limit_exceeded'); return 'stopped'
+        if unknown_usage:
+            record['gm_usage_unknown']=unknown_usage
+            run['gm_unknown_usage']={'cycle_id':gm_cycle_id,'usage_unknown':unknown_usage,
+                                     'quota_calls_charged':charged,
+                                     'counts_including_unresolved_reservations':measured_calls}
+            run.update(status='stopped',reason='autonomy_usage_unknown'); return 'stopped'
+        if sha(world) != post_life_sha:
+            run.update(status='stopped',reason='canonical_world_changed_during_gm_cycle'); return 'stopped'
+        if sha(verify_copy)!=verify_copy_before and gm_status!='completed':
+            run.update(status='stopped',reason='verification_copy_changed_without_release'); return 'stopped'
+        if resuming and gm_status not in ('waiting_review','blocked'):
+            review=(report.get('main_ai_review') or {})
+            candidate=(report.get('candidate') or {}).get('candidate_sha256')
+            expected_candidate=(record.get('waiting_review') or {}).get('candidate_sha256')
+            if (gm_status!='completed' or review.get('status')!='advisory'
+                    or review.get('decision')!='advisory' or not expected_candidate
+                    or review.get('candidate_sha256')!=expected_candidate
+                    or candidate!=expected_candidate):
+                run.update(status='stopped',reason='resume_main_ai_review_not_bound')
+                return 'stopped'
+        if autonomous['exit_code']==0 and gm_status=='waiting_review':
+            review=(report.get('main_ai_review') or {})
+            if (report.get('release_digest') is not None or report.get('next_stage')!='review'
+                    or review.get('status') not in ('pending','waiting_review')):
+                run.update(status='stopped',reason='waiting_review_report_invalid'); return 'stopped'
+            record.update(status='waiting_review',waiting_review={
+                'cycle_id':gm_cycle_id,'candidate_sha256':(report.get('candidate') or {}).get(
+                    'candidate_sha256'),'policy_path':str(policy_path),
+                'report_path':report.get('report_path'),'main_ai_review_required':True})
+            run.update(status='waiting_review',reason='explicit_main_ai_review_required')
+            checkpoint(); return 'waiting_review'
+        if autonomous['exit_code']==0 and gm_status in ('completed','no_action','limit_reached'):
+            runtime_checks=(report.get('independently_tested') or {}).get('runtime_checks') or {}
+            record['runtime_checks'] = runtime_checks
+            record['resident_adoption']=('pending_next_canonical_life' if gm_status=='completed'
+                                         else 'no_release')
+        elif autonomous['exit_code']!=0 and gm_status=='blocked':
+            gm_local=settled_local_candidate_failure(report,resolve(scope['gm_state_dir']),
+                                                     deployment_before,
+                                                     deployment_content_digest(deployment,
+                                                                               manifest_path))
+            if gm_local is None:
+                run.update(status='stopped',reason='autonomy_blocked_unresolved'); return 'stopped'
+            record.setdefault('gm_local_failures',[]).append(gm_local)
+            run['gm_local_failures_total']=int(run.get('gm_local_failures_total',0))+1
+            run['gm_local_failure_classes']=sorted(set(run.get('gm_local_failure_classes') or [])
+                                                   | {gm_local['classification']})
+            record['resident_adoption']='no_release'
+        elif autonomous['exit_code']==0:
+            run.update(status='stopped',reason='autonomy_not_terminal_success'); return 'stopped'
+        else:
+            run.update(status='stopped',reason='autonomy_failed'); return 'stopped'
+        record['status']='closed'; record['world_after_sha256']=sha(world); checkpoint()
+        return 'closed'
+
+    start_index=(int(resume_record.get('index')) if resume_record else 1)
+    for index in range(start_index,scope['max_cycles']+1):
         stop_file=resolve(scope['stop_file']) if scope.get('stop_file') else None
         if stop_file and stop_file.exists(): run.update(status='stopped',reason='operator_stop_file'); break
+        if resume_record is not None and index==start_index:
+            # The life phase is already closed and paid.  Resume is intentionally narrower than
+            # a normal cycle admission: it may only advance the exact retained GM cycle after an
+            # explicit review, and it never recreates the life output or consumes Kimi budget.
+            if time.monotonic()>=deadline:
+                run.update(status='stopped',reason='time_limit'); break
+            if cutoff is not None:
+                left=(cutoff-dt.datetime.now(dt.timezone.utc)).total_seconds()
+                if left <= 0:
+                    run.update(status='stopped',reason='absolute_cutoff'); break
+                if left < int(scope['settlement_reserve_seconds']):
+                    run.update(status='stopped',reason='absolute_cutoff_admission_buffer'); break
+            phase=(out/f'cycle-{index:02d}').resolve()
+            binding=resume_record.get('resume_binding') or {}
+            policy_path=Path(binding.get('policy_path','')).resolve()
+            verify_copy=Path(binding.get('verify_copy','')).resolve()
+            evidence=Path(binding.get('evidence_path','')).resolve()
+            manifest_value=binding.get('manifest_path')
+            manifest_path=Path(manifest_value).resolve() if manifest_value else None
+            deployment_before=binding.get('deployment_before')
+            resume_binding_errors=[]
+            if phase.parent!=out.resolve() or not phase.is_dir():
+                resume_binding_errors.append('retained phase directory is absent')
+            if policy_path.parent!=phase or not policy_path.is_file() \
+                    or sha(policy_path)!=binding.get('policy_sha256'):
+                resume_binding_errors.append('retained per-cycle policy changed or is absent')
+            if verify_copy.parent!=phase or not verify_copy.is_file() \
+                    or sha(verify_copy)!=binding.get('verify_copy_sha256'):
+                resume_binding_errors.append('retained verification copy changed or is absent')
+            if not evidence.is_file() or sha(evidence)!=binding.get('evidence_sha256'):
+                resume_binding_errors.append('retained life evidence changed or is absent')
+            if sha(world)!=binding.get('post_life_world_sha256'):
+                resume_binding_errors.append('canonical world changed after the paused life phase')
+            if deployment_content_digest(deployment,manifest_path)!=deployment_before:
+                resume_binding_errors.append('deployment changed before reviewed publication resume')
+            if resume_binding_errors:
+                run.update(status='stopped',reason='resume_binding_changed',
+                           resume_errors=resume_binding_errors); break
+            outcome=run_autonomy_phase(
+                resume_record,phase,policy_path,verify_copy,binding['verify_copy_sha256'],
+                binding['post_life_world_sha256'],deployment_before,manifest_path,resuming=True)
+            if outcome!='closed': break
+            resume_record=None
+            continue
         if run['kimi_requests']>=int(scope.get('max_kimi_requests',2147483647)) or run['gm_model_calls']>=int(scope.get('max_gm_model_calls',2147483647)):
             run.update(status='stopped',reason='lifetime_model_call_limit'); break
         if time.monotonic()>=deadline: run.update(status='stopped',reason='time_limit'); break
@@ -543,20 +749,30 @@ def main(argv=None):
                 or (life.get('owned') or {}).get('all_members_exited') is not True
                 or not evidence.is_file()
                 or not result or result.get('engine_exit') != 0
-                or result.get('budget_stop_reason') not in ('', None)
-                or result.get('carried_uncertainty_reviewed') is not True):
+                or result.get('budget_stop_reason') not in ('', None)):
             run.update(status='stopped',reason='life_failed_or_missing_evidence'); break
         if tracked()!=baseline:
             run.update(status='stopped',reason='development_checkout_changed'); break
         run['kimi_requests']+=int(result.get('upstream_requests') or 0)
         before_ledger=result.get('ledger_before') or {}; after_ledger=result.get('ledger_after') or {}
+        before_uncertain=uncertainty_rows(before_ledger); after_uncertain=uncertainty_rows(after_ledger)
         ledger_stable=(before_ledger.get('ledger_id')==after_ledger.get('ledger_id')
             and before_ledger.get('model')==after_ledger.get('model')
-            and (before_ledger.get('counts') or {}).get('uncertain')
-                == (after_ledger.get('counts') or {}).get('uncertain')
+            and before_uncertain is not None and before_uncertain==after_uncertain
             and not after_ledger.get('halted'))
         if not ledger_stable:
             run.update(status='stopped',reason='ledger_identity_or_uncertainty_changed'); break
+        carried_review=live/'carried-uncertainty-review.json'
+        if before_uncertain>0:
+            if (result.get('carried_uncertainty_reviewed') is not True
+                    or not carried_review.is_file()):
+                run.update(status='stopped',reason='carried_uncertainty_review_missing'); break
+            record['carried_uncertainty']={'rows':before_uncertain,'review_required':True,
+                'reviewed':True,'review_path':str(carried_review),
+                'review_sha256':sha(carried_review)}
+        else:
+            record['carried_uncertainty']={'rows':0,'review_required':False,
+                'reviewed':result.get('carried_uncertainty_reviewed') is True}
         model_errors=result.get('model_errors') or {}
         allowed=scope.get('allowed_existing_model_errors') or {}
         after_world=load(world); before_world_state=load(before_world)
@@ -636,9 +852,7 @@ def main(argv=None):
             int(policy['limits'].get('deadline_seconds', scope['autonomy_timeout'])),
             int(deadline-time.monotonic())))
         policy_path=phase/'autonomy-policy.json'; save(policy_path,policy)
-        auto=[sys.executable,str(ROOT/'tools/gm_autonomy.py'),'cycle','--policy',str(policy_path)]
-        auto += [str(x) for x in scope.get('gm_runner_args',[])]
-        record['status']='autonomy_in_flight'; record['evidence_sha256']=sha(evidence); checkpoint()
+        record['evidence_sha256']=sha(evidence)
         # The deployment is verified by bounded content, not by version-control text status:
         # only the concrete target files the pinned base manifest declares are read.
         deployment_policy=policy.get('deployment') if isinstance(policy.get('deployment'),dict) else {}
@@ -646,92 +860,22 @@ def main(argv=None):
         manifest_path=(resolve(manifest_value)
                        if isinstance(manifest_value,str) and manifest_value.strip() else None)
         deployment_before=deployment_content_digest(deployment,manifest_path)
-        autonomous=run_owned(auto,ROOT,scope['autonomy_timeout'],phase/'autonomy.log'); record['autonomy']=autonomous
-        report=None
-        # gm_autonomy emits one JSON object to its log; durable report remains under retained state.
-        try:
-            text=(phase/'autonomy.log').read_text(encoding='utf-8'); report=gm_autonomy.last_json_line(text)
-        except Exception: pass
-        record['autonomy_summary']=report
-        if (autonomous['timed_out']
-                or (autonomous.get('owned') or {}).get('all_members_exited') is not True or not report):
-            run.update(status='stopped',reason='autonomy_failed'); break
-        gm_status=report.get('status')
-        gm_cycle_id=report.get('cycle_id')
-        if not isinstance(gm_cycle_id,str) or not gm_cycle_id:
-            run.update(status='stopped',reason='autonomy_report_missing_cycle_id'); break
-        gm_usage=report.get('usage') if isinstance(report.get('usage'),dict) else {}
-        measured_calls=gm_usage.get('model_calls')
-        unknown_usage=gm_usage.get('unknown')
-        # Attempt accounting is settled before any classification. usage.model_calls is
-        # gm_autonomy's call/quota count: it keeps the admission reservations of interrupted or
-        # unknown calls (gm_autonomy reserve/settle), so it is not proof that every call
-        # completed and it is not a currency figure. A total that is absent or not an integer is
-        # unmeasured, which is never the same as zero.
-        if type(measured_calls) is not int or measured_calls<0:
-            run.update(status='stopped',reason='autonomy_usage_unmeasured'); break
-        # A cycle id reports a cumulative per-cycle total, and the checkpointed ledger keeps what
-        # this run already charged for that id, so a resumed or repeated cycle is charged only the
-        # delta against the same conservative quota cap. Broader restart/resume semantics are
-        # deliberately out of scope here.
-        cumulative=dict(run.get('counted_gm_cycle_calls') or {})
-        already=int(cumulative.get(gm_cycle_id,0))
-        if measured_calls<already:
-            run.update(status='stopped',reason='autonomy_usage_regressed'); break
-        charged=measured_calls-already
-        if charged:
-            run['gm_model_calls']+=charged
-            if gm_cycle_id not in run['counted_gm_cycle_ids']:
-                run['counted_gm_cycle_ids'].append(gm_cycle_id)
-        cumulative[gm_cycle_id]=measured_calls
-        run['counted_gm_cycle_calls']=cumulative
-        record['gm_usage_counted']=bool(charged); record['gm_quota_calls_charged']=charged
-        if run['gm_model_calls'] > int(scope['max_gm_model_calls']):
-            run.update(status='stopped',reason='lifetime_gm_limit_exceeded'); break
-        if unknown_usage:
-            # The known part of the quota count stays charged and the unknown tail is carried as
-            # an explicit marker that includes the retained reservations. It is never dropped,
-            # never recorded as zero and never claimed as settled completion or currency.
-            record['gm_usage_unknown']=unknown_usage
-            run['gm_unknown_usage']={'cycle_id':gm_cycle_id,'usage_unknown':unknown_usage,
-                                     'quota_calls_charged':charged,
-                                     'counts_including_unresolved_reservations':measured_calls}
-            run.update(status='stopped',reason='autonomy_usage_unknown'); break
-        if sha(world) != post_life_sha:
-            run.update(status='stopped',reason='canonical_world_changed_during_gm_cycle'); break
-        if sha(verify_copy)!=verify_copy_before and gm_status!='completed':
-            run.update(status='stopped',reason='verification_copy_changed_without_release'); break
-        if autonomous['exit_code']==0 and gm_status in ('completed','no_action','limit_reached'):
-            runtime_checks=(report.get('independently_tested') or {}).get('runtime_checks') or {}
-            # Runtime checks are post-release observations.  They stay in the durable report for
-            # the owning GM's next turn; old host templates, issue identity and NPC adoption are
-            # not publication vetoes once the explicit main-AI review released the candidate.
-            record['runtime_checks'] = runtime_checks
-            record['resident_adoption']=('pending_next_canonical_life' if gm_status=='completed'
-                                         else 'no_release')
-        elif autonomous['exit_code']!=0 and gm_status=='blocked':
-            # A nonzero blocked exit stays the global stop it already was unless every listed
-            # fact is proven now, after accounting and integrity, by the durable evidence.
-            gm_local=settled_local_candidate_failure(report,resolve(scope['gm_state_dir']),
-                                                     deployment_before,
-                                                     deployment_content_digest(deployment,
-                                                                               manifest_path))
-            if gm_local is None:
-                run.update(status='stopped',reason='autonomy_blocked_unresolved'); break
-            record.setdefault('gm_local_failures',[]).append(gm_local)
-            run['gm_local_failures_total']=int(run.get('gm_local_failures_total',0))+1
-            run['gm_local_failure_classes']=sorted(set(run.get('gm_local_failure_classes') or [])
-                                                   | {gm_local['classification']})
-            record['resident_adoption']='no_release'
-        elif autonomous['exit_code']==0:
-            run.update(status='stopped',reason='autonomy_not_terminal_success'); break
-        else:
-            run.update(status='stopped',reason='autonomy_failed'); break
-        record['status']='closed'
-        record['world_after_sha256']=sha(world); checkpoint()
+        record['resume_binding']={
+            'policy_path':str(policy_path.resolve()),'policy_sha256':sha(policy_path),
+            'verify_copy':str(verify_copy.resolve()),'verify_copy_sha256':verify_copy_before,
+            'evidence_path':str(evidence.resolve()),'evidence_sha256':sha(evidence),
+            'post_life_world_sha256':post_life_sha,
+            'manifest_path':str(manifest_path) if manifest_path else None,
+            'deployment_before':deployment_before}
+        outcome=run_autonomy_phase(record,phase,policy_path,verify_copy,verify_copy_before,
+                                   post_life_sha,deployment_before,manifest_path)
+        if outcome!='closed': break
     else: run.update(status='completed_finite',reason='max_cycles')
-    run['finished_utc']=dt.datetime.now(dt.timezone.utc).isoformat(); run['tracked_frozen']=tracked()==baseline
+    stamp=dt.datetime.now(dt.timezone.utc).isoformat()
+    if run['status']=='waiting_review': run['paused_utc']=stamp
+    else: run['finished_utc']=stamp
+    run['tracked_frozen']=tracked()==baseline
     checkpoint(); print(json.dumps(run,ensure_ascii=False))
     clean_stops={'operator_stop_file','time_limit','lifetime_model_call_limit','absolute_cutoff','absolute_cutoff_admission_buffer'}
-    return 0 if run['status']=='completed_finite' or (run['status']=='stopped' and run.get('reason') in clean_stops) else 1
+    return 0 if run['status'] in ('completed_finite','waiting_review') or (run['status']=='stopped' and run.get('reason') in clean_stops) else 1
 if __name__=='__main__': raise SystemExit(main())

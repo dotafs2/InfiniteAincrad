@@ -496,6 +496,200 @@ def runner_command(runner: dict, subcommand: str, *args) -> list:
     return command
 
 
+def effect_review_baseline(state: dict, issue_id: str | None, save_path: Path | None) -> dict | None:
+    """Bind a capability release to the resident history position visible at publication."""
+    issue = (state.get('issues') or {}).get(issue_id) if issue_id else None
+    if not isinstance(issue, dict) or save_path is None or not save_path.is_file():
+        return None
+    resident_id, capability_id = issue.get('resident_id'), issue.get('capability_id')
+    if not isinstance(resident_id, str) or not resident_id:
+        resident_id = (issue.get('entry') or {}).get('resident_id')
+    if not isinstance(capability_id, str) or not capability_id:
+        capability_id = (issue.get('entry') or {}).get('capability_id')
+    if not all(isinstance(value, str) and value for value in (resident_id, capability_id)):
+        return None
+    try:
+        world = gm_runner.load_json(save_path)
+    except (OSError, ValueError, json.JSONDecodeError, UnicodeDecodeError):
+        return None
+    if not isinstance(world, dict) or world.get('world_id') != state.get('world_id'):
+        return None
+    turn = ((world.get('godot') or {}).get('resident_turns') or {}).get(resident_id) or {}
+    history = turn.get('history') if isinstance(turn, dict) else None
+    if not isinstance(history, list):
+        history = []
+    life_seq = (world.get('life') or {}).get('seq')
+    if type(life_seq) is not int:
+        return None
+    return {'status': 'pending', 'resident_id': resident_id, 'capability_id': capability_id,
+            'baseline_life_seq': life_seq, 'baseline_history_count': len(history),
+            'required_action_binding': ('terminal command result with matching world, resident, '
+                                        'command_id and capability_id')}
+
+
+def _bounded_action_result(value) -> dict:
+    """Keep authoritative action facts while excluding resident prose and private reasoning."""
+    if not isinstance(value, dict):
+        return {}
+    forbidden = ('reason', 'text', 'speech', 'message', 'prompt')
+    result = {}
+    for key, item in value.items():
+        if any(marker in str(key).casefold() for marker in forbidden):
+            continue
+        if isinstance(item, (str, int, float, bool)) or item is None:
+            result[str(key)] = item
+        elif isinstance(item, list) and len(item) <= 16 and all(
+                isinstance(part, (str, int, float, bool)) or part is None for part in item):
+            result[str(key)] = list(item)
+    return result
+
+
+def _authoritative_action_result(world: dict, resident_id: str, entry: dict) -> dict:
+    """Resolve one resident decision through the world's durable command journals.
+
+    The archived turn result is only the submission-time effect.  Long-running actions remain
+    accepted/pending there, so adoption must come from a terminal journal receipt.  Trade wrappers
+    may mirror a life command under the same id; this follows the runtime's feedback projection and
+    only accepts the mirror when both records name the same actor.
+    """
+    command_id = entry.get('command_id')
+    if not isinstance(command_id, str) or not command_id:
+        return {'status': 'missing', 'reason': 'missing_command_id'}
+    godot = world.get('godot')
+    if not isinstance(godot, dict):
+        return {'status': 'missing', 'command_id': command_id, 'reason': 'missing_godot_state'}
+    life_commands = godot.get('commands') if isinstance(godot.get('commands'), dict) else {}
+    trade = godot.get('trade') if isinstance(godot.get('trade'), dict) else {}
+    material = godot.get('materials') if isinstance(godot.get('materials'), dict) else {}
+    places = godot.get('places') if isinstance(godot.get('places'), dict) else {}
+    journals = (('trade', trade.get('commands')), ('life', life_commands),
+                ('materials', material.get('commands')), ('places', places.get('commands')))
+    namespace, command = None, None
+    for candidate_namespace, commands in journals:
+        if isinstance(commands, dict) and isinstance(commands.get(command_id), dict):
+            namespace, command = candidate_namespace, commands[command_id]
+            break
+    if command is None:
+        return {'status': 'missing', 'command_id': command_id,
+                'reason': 'no_authoritative_command'}
+    payload = command.get('payload')
+    actor_id = payload.get('actor_id') if isinstance(payload, dict) else None
+    if actor_id != resident_id:
+        return {'status': 'invalid', 'command_id': command_id, 'namespace': namespace,
+                'reason': 'actor_mismatch'}
+    # A pending trade wrapper can lag the life command it started.  The runtime uses that exact
+    # terminal mirror for resident feedback; require the same actor before doing so here.
+    if namespace == 'trade' and command.get('status') == 'pending':
+        mirror = life_commands.get(command_id)
+        mirror_payload = mirror.get('payload') if isinstance(mirror, dict) else None
+        if (isinstance(mirror_payload, dict) and mirror_payload.get('actor_id') == resident_id
+                and mirror.get('status') in ('completed', 'rejected')):
+            namespace, command = 'life', mirror
+    status = command.get('status')
+    if status == 'pending':
+        return {'status': 'pending', 'command_id': command_id, 'namespace': namespace}
+    if status not in ('completed', 'rejected'):
+        return {'status': 'invalid', 'command_id': command_id, 'namespace': namespace,
+                'reason': 'invalid_command_status'}
+    receipt = command.get('result')
+    if not isinstance(receipt, dict):
+        return {'status': status, 'command_id': command_id, 'namespace': namespace,
+                'reason': 'missing_terminal_result'}
+    if receipt.get('actor_id') != resident_id or receipt.get('command_id') != command_id:
+        return {'status': 'invalid', 'command_id': command_id, 'namespace': namespace,
+                'reason': 'terminal_receipt_mismatch'}
+    return {'status': status, 'command_id': command_id, 'namespace': namespace,
+            'result': _bounded_action_result(receipt)}
+
+
+def pending_effect_observation(state: dict, save_path: Path | None) -> dict | None:
+    """Produce one release-bound next-life observation, or None when no new window exists."""
+    if save_path is None or not save_path.is_file():
+        return None
+    try:
+        world = gm_runner.load_json(save_path)
+    except (OSError, ValueError, json.JSONDecodeError, UnicodeDecodeError):
+        return None
+    if not isinstance(world, dict) or world.get('world_id') != state.get('world_id'):
+        return None
+    life_seq = (world.get('life') or {}).get('seq')
+    if type(life_seq) is not int:
+        return None
+    for gm_id in gm_runner.GM_IDS:
+        owner = (state.get('sessions') or {}).get(gm_id)
+        if not isinstance(owner, dict):
+            continue
+        memory = gm_runner.ensure_gm_memory(owner, gm_id)
+        for event in memory['host_feedback']:
+            if not isinstance(event, dict) or event.get('effect_review_result'):
+                continue
+            release = event.get('receipt')
+            if (not isinstance(release, dict) or release.get('kind') != 'autonomy_release_receipt'
+                    or release.get('gm_id') != gm_id or release.get('world_id') != state['world_id']
+                    or not release.get('published') or not release.get('release_digest')):
+                continue
+            binding = release.get('effect_review')
+            if not isinstance(binding, dict) or binding.get('status') != 'pending':
+                continue
+            baseline_seq = binding.get('baseline_life_seq')
+            baseline_count = binding.get('baseline_history_count')
+            if type(baseline_seq) is not int or type(baseline_count) is not int:
+                continue
+            # The original resident must have made a later decision and the public life window
+            # must have advanced.  Another resident changing life_seq never wakes this review.
+            if life_seq <= baseline_seq:
+                continue
+            resident_id, capability_id = binding.get('resident_id'), binding.get('capability_id')
+            turn = ((world.get('godot') or {}).get('resident_turns') or {}).get(resident_id) or {}
+            history = turn.get('history') if isinstance(turn, dict) else None
+            if not isinstance(history, list) or len(history) <= baseline_count:
+                continue
+            observed = []
+            matching_pending = False
+            for entry in history[baseline_count:]:
+                if not isinstance(entry, dict):
+                    continue
+                resolved = _authoritative_action_result(world, resident_id, entry)
+                action = {'command_id': entry.get('command_id'), 'action': entry.get('action'),
+                          'command': resolved}
+                observed.append(action)
+                submitted = entry.get('result')
+                submitted_capability = (submitted.get('capability_id')
+                                        if isinstance(submitted, dict) else None)
+                final = resolved.get('result') if isinstance(resolved.get('result'), dict) else {}
+                if (submitted_capability == capability_id
+                        and resolved.get('status') == 'pending'):
+                    matching_pending = True
+            # An accepted asynchronous action is not adoption.  Keep the release pending so its
+            # eventual terminal receipt can wake the original owner exactly once.
+            if matching_pending:
+                continue
+            matches = [entry for entry in observed
+                       if entry['command'].get('status') == 'completed'
+                       and entry['command'].get('result', {}).get('ok') is True
+                       and entry['command']['result'].get('capability_id') == capability_id]
+            adopted = bool(matches)
+            parent = {'receipt_sha256': event.get('receipt_sha256'),
+                      'cycle_id': release.get('cycle_id'), 'issue_id': release.get('issue_id'),
+                      'world_id': release.get('world_id'), 'gm_id': release.get('gm_id'),
+                      'release_digest': release.get('release_digest')}
+            return {'kind': 'autonomy_effect_observation_receipt', 'schema_version': 1,
+                    'parent': parent, 'outcome': ('resident_action_observed'
+                                                  if adopted else 'no_adoption_observed'),
+                    'observation_window': {'baseline_life_seq': baseline_seq,
+                                           'observed_life_seq': life_seq,
+                                           'resident_id': resident_id,
+                                           'capability_id': capability_id,
+                                           'baseline_history_count': baseline_count,
+                                           'observed_history_count': len(history)},
+                    'matching_action_receipts': matches,
+                    'new_action_receipt_count': len(observed),
+                    'adoption_claimed': adopted,
+                    'note': ('the original resident decision and life window open review; only a '
+                             'matching terminal command result is evidence of adoption')}
+    return None
+
+
 def validated_observe_receipt(cycle, run_id, dispatched=None):
     """The durable gm_runner observe receipt for this exact run, or None when it is not trusted.
 
@@ -989,6 +1183,59 @@ class Cycle:
 
     # -- stages --------------------------------------------------------------------
 
+    def deliver_pending_effect_review(self, cycle: dict, observe_record: dict) -> int | None:
+        """Send one new, release-bound life observation through the existing feedback route.
+
+        No new observation window means no provider call.  A crash after reservation remains an
+        explicit unknown instead of replaying the owning GM's acknowledgement.
+        """
+        delivery = observe_record.setdefault('effect_feedback', {})
+        if delivery.get('status') == 'done':
+            return None
+        if delivery.get('in_flight'):
+            cycle['unknown'] = {'stage': 'effect_feedback',
+                                'reserved': delivery.get('in_flight')}
+            return self.block(cycle, 'interrupted_inflight_effect_feedback', ACCOUNTING)
+        state = gm_runner.load_state(self.state_dir)
+        receipt = pending_effect_observation(state, self.save_path)
+        if receipt is None:
+            delivery['status'] = 'no_new_observation'
+            self.save_cycle(cycle)
+            return None
+        blocked = self.dispatch_budget(cycle, 'effect_feedback', 1)
+        if blocked:
+            delivery.update({'status': 'stopped', 'blocked_reason': blocked})
+            self.save_cycle(cycle)
+            return self.stop(cycle, observe_record, blocked)
+        receipt_path = self.cycle_dir() / 'effect-observation.json'
+        gm_runner.save_json(receipt_path, receipt)
+        gm_id = receipt['parent']['gm_id']
+        issue_id = receipt['parent'].get('issue_id')
+        command = runner_command(self.runner, 'feedback', '--state-dir', str(self.state_dir),
+                                 '--gm', gm_id, '--receipt-file', str(receipt_path))
+        if issue_id:
+            command += ['--issue', issue_id]
+        command += ['--protect', str(self.policy_path), '--protect', str(receipt_path)]
+        self.reserve(cycle, delivery, 'effect_feedback', 1)
+        result = run_process(command, self.runner.get('timeout') or 900, deadline=self.deadline)
+        summary = last_json_line(result['stdout'])
+        self.settle(cycle, delivery, 1 if summary is not None else None)
+        delivery.update({'receipt': receipt, 'receipt_sha256': sha256_file(receipt_path),
+                         'exit_code': result['exit_code'], 'timed_out': result['timed_out'],
+                         'owned': result.get('owned'), 'summary': summary})
+        if (summary is None or result['exit_code'] != 0 or result['timed_out']
+                or (result.get('owned') or {}).get('all_members_exited') is not True
+                or summary.get('status') != 'ok' or summary.get('acknowledged') is not True
+                or summary.get('effect_review_consumed') is not True):
+            delivery['status'] = 'failed'
+            self.save_cycle(cycle)
+            return self.block(cycle, 'effect_feedback_failed', ACCOUNTING)
+        delivery.pop('in_flight', None)
+        delivery['status'] = 'done'
+        delivery['decision'] = summary.get('decision')
+        self.save_cycle(cycle)
+        return None
+
     def stage_observe(self, cycle: dict) -> int:
         record = self.stage_record(cycle, 'observe')
         if record['status'] == 'done':
@@ -996,6 +1243,9 @@ class Cycle:
         stopped = self.in_flight_stop(cycle, record, 'observe')
         if stopped:
             return stopped
+        effect_status = self.deliver_pending_effect_review(cycle, record)
+        if effect_status is not None:
+            return effect_status
         # A queued GM claim is consumed before any new observe dispatch: generation advance alone
         # is not delivery, and unchanged evidence must not be observed twice.
         queued = self.examine_queued_claims(cycle, record)
@@ -2071,6 +2321,13 @@ class Cycle:
             receipt_outcome = 'released_and_verified'
         else:
             receipt_outcome = 'not_released'
+        effect_binding = None
+        if publish.get('status') == 'done':
+            try:
+                effect_binding = effect_review_baseline(
+                    gm_runner.load_state(self.state_dir), issue_id, self.save_path)
+            except (OSError, ValueError, KeyError):
+                effect_binding = None
         receipt = {'kind': 'autonomy_release_receipt', 'cycle_id': cycle['cycle_id'],
                    'issue_id': issue_id, 'world_id': cycle['world_id'], 'gm_id': gm_id,
                    'release_digest': (cycle.get('release') or {}).get('digest')
@@ -2081,9 +2338,11 @@ class Cycle:
                        'installed': verify.get('installed'), 'used': verify.get('used'),
                        'installed_but_unused': verify.get('installed_but_unused'),
                        'observation': verify.get('observation')},
-                   'effect_review': {'status': 'pending',
-                                     'owner': gm_id,
-                                     'next_turn': 'owning GM observes the next world turn'},
+                   'effect_review': (dict(effect_binding, owner=gm_id,
+                                          next_turn='owning GM observes a later bounded life window')
+                                     if effect_binding else
+                                     {'status': 'unbound', 'owner': gm_id,
+                                      'next_turn': 'no resident/capability baseline was available'}),
                    'host_gate_failed_checks': [c['check'] for c in (validate.get('checks') or [])
                                                if c.get('ok') is False
                                                and c.get('check') != 'gm_self_test_reported'],

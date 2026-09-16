@@ -93,6 +93,24 @@ class BudgetLauncherTests(unittest.TestCase):
     def gate(self, **kwargs):
         return CarriedLedgerGate(self.ledger, self.pin, **kwargs)
 
+    def gm_snapshot(self, world_id='fixture:model-validation-world', life_seq=0,
+                    godot_elapsed=0.0, world_elapsed=0.0):
+        return {'kind': 'background_gm_evidence_snapshot', 'schema_version': 1,
+                'world_id': world_id,
+                'source_revision': {'life_seq': life_seq, 'proposal_sequence': 0,
+                                    'godot_elapsed_seconds': godot_elapsed,
+                                    'world_elapsed_seconds': world_elapsed},
+                'boundaries': {'contains_private_reply_reason': False,
+                               'contains_other_resident_memories': False},
+                'counts': {'issues': 0, 'proposals': 0},
+                'evidence': [], 'proposals': []}
+
+    def world_save(self, world_id='fixture:model-validation-world', life_seq=0,
+                   godot_elapsed=0.0, world_elapsed=0.0):
+        return {'world_id': world_id, 'life': {'seq': life_seq},
+                'godot': {'elapsed_seconds': godot_elapsed},
+                'elapsed_seconds': world_elapsed}
+
     @contextmanager
     def server(self, provider=None, **kwargs):
         gate = self.gate(**kwargs)
@@ -335,9 +353,101 @@ class BudgetLauncherTests(unittest.TestCase):
         self.assertFalse((self.root / 'new-run').exists())
         self.assert_original_preserved()
 
+    def test_formal_validation_classification_requires_a_decision_and_upstream_call(self):
+        capture = {'world_id': 'fixture:model-validation-world',
+                   'validation_decisions_started': 1, 'resident_turns': {},
+                   'source_seq': 8, 'life_seq': 8, 'new_events': []}
+        passed = launcher.classify_validation(0, capture, {}, '', False, 1)
+        self.assertEqual(passed['validation_status'], 'passed')
+        self.assertTrue(passed['validation_exercised'])
+        baseline = {'status': 'available', 'world_id': capture['world_id'], 'life_seq': 8,
+                    'godot_elapsed_seconds': 20.0, 'world_elapsed_seconds': 20.0}
+        self.assertFalse(launcher.world_progress(baseline, capture)['observed'])
+        # A valid model turn may choose wait: unchanged world counters are reported,
+        # but are not grounds to relabel an exercised validation as failed.
+        incomplete = launcher.classify_validation(0, capture, {}, '', False, 0)
+        self.assertEqual(incomplete['validation_status'], 'not_exercised')
+        self.assertEqual(incomplete['classification_reasons'], ['no_upstream_requests'])
+        failed = launcher.classify_validation(7, capture, {}, '', False, 1)
+        self.assertEqual(failed['validation_status'], 'failed')
+        self.assertEqual(failed['classification_reasons'], ['engine_exit_nonzero'])
+
+    def test_world_progress_uses_same_world_prelaunch_delta_not_absolute_history(self):
+        world_id = 'fixture:restored-world'
+        baseline = {'status': 'available', 'world_id': world_id, 'life_seq': 5,
+                    'godot_elapsed_seconds': 120.0, 'world_elapsed_seconds': 120.0}
+        capture = {'world_id': world_id, 'source_seq': 0, 'life_seq': 5,
+                   'new_events': [{'seq': 4, 'kind': 'historical_fixture_event'}]}
+        unchanged = launcher.world_progress(
+            baseline, capture, self.gm_snapshot(world_id, 5, 120.0, 120.0))
+        self.assertEqual(unchanged['comparison_status'], 'comparable')
+        self.assertFalse(unchanged['observed'])
+        self.assertEqual(unchanged['absolute']['capture']['source_seq'], 0)
+        self.assertEqual(unchanged['absolute']['capture']['new_event_count'], 1)
+        self.assertEqual(unchanged['absolute']['gm_export']['world_elapsed_seconds'], 120.0)
+        self.assertEqual(unchanged['delta']['capture_life_seq'], 0)
+        self.assertEqual(unchanged['delta']['gm_world_elapsed_seconds'], 0.0)
+
+        crossed = launcher.world_progress(
+            baseline, dict(capture, world_id='fixture:other-world'),
+            self.gm_snapshot('fixture:other-world', 99, 999.0, 999.0))
+        self.assertEqual(crossed['comparison_status'], 'world_mismatch')
+        self.assertFalse(crossed['observed'])
+        self.assertEqual(crossed['delta'], {})
+
+        unknown = launcher.world_progress({'status': 'unknown'}, capture,
+                                          self.gm_snapshot(world_id, 99, 999.0, 999.0))
+        self.assertEqual(unknown['comparison_status'], 'unknown')
+        self.assertFalse(unknown['observed'])
+        self.assertEqual(unknown['delta'], {})
+
+    def test_startup_fault_append_is_idempotent_and_refuses_wrong_world_or_schema(self):
+        capture = {'world_id': 'fixture:model-validation-world', 'source_seq': 0,
+                   'life_seq': 0, 'pending_count': 0, 'validation_decisions_started': 0}
+        classification = launcher.classify_validation(0, capture, {}, '', False, 0)
+        valid = self.root / 'valid-gm.json'
+        valid.write_text(json.dumps(self.gm_snapshot()), encoding='utf-8')
+        first = launcher.append_startup_fault(valid, capture, classification, 0, 0)
+        second = launcher.append_startup_fault(valid, capture, classification, 0, 0)
+        self.assertEqual(first['status'], 'appended')
+        self.assertEqual(second['status'], 'already_present')
+        document = json.loads(valid.read_text())
+        self.assertEqual(document['counts'], {'issues': 1, 'proposals': 0})
+        self.assertEqual(len(document['evidence']), 1)
+        fault = document['evidence'][0]
+        self.assertEqual(fault['cause'], 'unknown')
+        self.assertFalse(fault['cause_identified'])
+        self.assertFalse(fault['resident_demand'])
+        self.assertEqual(fault['world_id'], capture['world_id'])
+        self.assertIn('did not complete a valid model-decision path', fault['first']['reason'])
+        self.assertNotIn('first model decision', fault['first']['reason'])
+
+        wrong = self.root / 'wrong-world-gm.json'
+        wrong.write_text(json.dumps(self.gm_snapshot('fixture:another-world')), encoding='utf-8')
+        wrong_before = wrong.read_bytes()
+        refused = launcher.append_startup_fault(wrong, capture, classification, 0, 0)
+        self.assertEqual(refused, {'status': 'refused', 'reason': 'gm_export_world_mismatch'})
+        self.assertEqual(wrong.read_bytes(), wrong_before)
+
+        malformed = self.root / 'malformed-gm.json'
+        malformed.write_text('{"provenance":"not-an-engine-snapshot"}', encoding='utf-8')
+        malformed_before = malformed.read_bytes()
+        refused = launcher.append_startup_fault(malformed, capture, classification, 0, 0)
+        self.assertEqual(refused, {'status': 'refused', 'reason': 'gm_export_schema_invalid'})
+        self.assertEqual(malformed.read_bytes(), malformed_before)
+
+        unsafe = self.root / 'unsafe-boundaries-gm.json'
+        unsafe_document = self.gm_snapshot()
+        unsafe_document['boundaries']['contains_private_reply_reason'] = True
+        unsafe.write_text(json.dumps(unsafe_document), encoding='utf-8')
+        unsafe_before = unsafe.read_bytes()
+        refused = launcher.append_startup_fault(unsafe, capture, classification, 0, 0)
+        self.assertEqual(refused, {'status': 'refused', 'reason': 'gm_export_boundaries_invalid'})
+        self.assertEqual(unsafe.read_bytes(), unsafe_before)
+
     def test_main_gm_export_scope_and_command_pass_through_without_real_engine(self):
         save = self.root / 'world.json'
-        save.write_text('{"fixture":true}', encoding='utf-8')
+        save.write_text(json.dumps(self.world_save()), encoding='utf-8')
         out = self.root / 'new-run'
         gm = out / 'gm' / 'evidence.json'
         config = self.root / 'fake-config.json'
@@ -355,14 +465,29 @@ class BudgetLauncherTests(unittest.TestCase):
             self.assertEqual(scope['concurrency'], 1)
             self.assertEqual(scope['gm_export_path'], str(gm))
             (out / 'capture').mkdir()
-            (out / 'capture' / 'evidence.json').write_text('{"resident_turns":{}}', encoding='utf-8')
-            gm.write_text('{"provenance":"offline fake engine"}', encoding='utf-8')
+            capture = {'world_id': 'fixture:model-validation-world', 'source_seq': 0,
+                       'life_seq': 0, 'new_events': [], 'pending_count': 0,
+                       'validation_decisions_started': 0, 'resident_turns': {}}
+            (out / 'capture' / 'evidence.json').write_text(json.dumps(capture), encoding='utf-8')
+            gm.write_text(json.dumps(self.gm_snapshot()), encoding='utf-8')
             return subprocess.CompletedProcess(command, 0, 'Offline engine stub', '')
         with patch.object(sys, 'argv', args), patch.object(launcher, 'KimiProvider', return_value=self.provider), \
                 patch.object(launcher.subprocess, 'run', side_effect=fake_engine), redirect_stdout(io.StringIO()):
-            self.assertEqual(launcher.main(), 0)
+            self.assertEqual(launcher.main(), 1)
         self.assertTrue(gm.is_file())
         self.assertEqual(self.provider.calls, 0)
+        result = json.loads((out / 'result.json').read_text())
+        self.assertEqual(result['validation_status'], 'not_exercised')
+        self.assertFalse(result['validation_passed'])
+        self.assertFalse(result['validation_exercised'])
+        self.assertEqual(result['validation_decisions_started'], 0)
+        self.assertEqual(result['upstream_requests'], 0)
+        self.assertFalse(result['world_progress_observed'])
+        self.assertEqual(result['startup_fault_export']['status'], 'appended')
+        gm_document = json.loads(gm.read_text())
+        self.assertEqual(gm_document['counts'], {'issues': 1, 'proposals': 0})
+        self.assertEqual(gm_document['evidence'][0]['evidence_kind'],
+                         'model_validation_startup_fault')
         self.assertEqual(json.loads((out / 'helper.json').read_text())['status'], 'closed')
         for path in out.rglob('*'):
             if path.is_file():

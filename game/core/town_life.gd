@@ -15,6 +15,10 @@ const HANDOFF_RANGE := 2.2
 const FORAGING_SPOT_RANGE := 2.0
 const FORAGING_SPOT_HEIGHT_RANGE := 0.5
 const FORAGING_SPOT_SPACING := 0.55
+# A layout hash identifies the reviewed map revision in both a fresh world and a migration. Only
+# relocation bridge/provenance fields claim migration and therefore require before/after evidence.
+const SPATIAL_MIGRATION_KEYS := ["foraging_before", "foraging_after", "migration", "source_sha256"]
+const PREVIEW_LAYOUT_SHA256 := "be6659494b9812df0ee41fd27db0ba652dcf32a97a44ac004e497b99d03445de"
 const JsonCodec = preload("res://core/TownJsonCodec.cs")
 var _visitor_position := Vector3.INF
 var _foraging_access_probe: Callable = Callable()
@@ -734,6 +738,26 @@ func transaction(path: String, operation: Callable) -> Dictionary:
 		return saved
 	return result
 
+func _spatial_claims_migration(spatial: Dictionary) -> bool:
+	for key in SPATIAL_MIGRATION_KEYS:
+		if spatial.has(key):
+			return true
+	return false
+
+func _declared_preview_genesis(value: Dictionary, spatial: Dictionary) -> bool:
+	# The boolean alone is not provenance: bind it to the reviewed map bytes and to the persistent
+	# new-world markers written by the genesis builder. A migrated save cannot select this branch by
+	# deleting its bridge and adding one truthy field.
+	var origin: Variant = value.get("origin")
+	var godot: Variant = value.get("godot")
+	return typeof(spatial.get("preview_genesis")) == TYPE_BOOL and spatial.preview_genesis == true \
+		and spatial.get("layout_sha256") == PREVIEW_LAYOUT_SHA256 \
+		and origin is Dictionary and origin.get("kind") == "new_world_seed" \
+		and typeof(origin.get("genesis")) == TYPE_BOOL and origin.genesis == true \
+		and origin.get("migrated_from") == null \
+		and godot is Dictionary and typeof(godot.get("new_world_seed")) == TYPE_BOOL \
+		and godot.new_world_seed == true and godot.get("source_life_seq") == 0
+
 func _validate_state(value: Variant) -> Dictionary:
 	if not value is Dictionary or value.get("schema_version") != 2:
 		return _failure("unsupported_town_schema")
@@ -837,26 +861,30 @@ func _validate_state(value: Variant) -> Dictionary:
 		var evidence_spots: Dictionary = layout.positions
 		var evidence_center: Array = g.berry_position
 		if g.has("spatial_layout"):
-			var migration: Variant = g.spatial_layout
-			if not migration is Dictionary or migration.get("id") != "first-floor-market-quarter-v1":
+			var spatial: Variant = g.spatial_layout
+			if not spatial is Dictionary or spatial.get("id") != "first-floor-market-quarter-v1":
 				return _failure("unsupported_spatial_layout")
-			var before: Variant = migration.get("foraging_before")
-			var after: Variant = migration.get("foraging_after")
-			if not before is Dictionary or not after is Dictionary or not _valid_position(before.get("center")) or not _valid_position(after.get("center")):
-				return _failure("invalid_spatial_foraging_record")
-			if not _valid_foraging_spots(before.get("positions"), _vector(before.center), active) or not after.get("positions") is Dictionary:
-				return _failure("invalid_spatial_foraging_record")
-			if not _same_foraging_spots(after.positions, layout.positions) or not _same_foraging_position(after.center, g.berry_position):
-				return _failure("invalid_spatial_foraging_record")
-			if not _exact_keys(before.positions, after.positions.keys()):
-				return _failure("invalid_spatial_foraging_record")
-			var shift: Vector3 = _vector(after.center) - _vector(before.center)
-			for id in after.positions:
-				var offset: Vector3 = _vector(after.positions[id]) - _vector(before.positions[id]) - shift
-				if absf(offset.x) > 0.001 or absf(offset.z) > 0.001 or absf(offset.y) > 0.1:
-					return _failure("invalid_spatial_foraging_transform")
-			evidence_spots = before.positions
-			evidence_center = before.center
+			# A declared fresh genesis relocated nothing, so its reviewed installation evidence is
+			# the current physical ring itself. A record that claims relocation provenance must still
+			# pass the full before/after transform check; a preview flag alone never stands in for it.
+			if _spatial_claims_migration(spatial) or not _declared_preview_genesis(value, spatial):
+				var before: Variant = spatial.get("foraging_before")
+				var after: Variant = spatial.get("foraging_after")
+				if not before is Dictionary or not after is Dictionary or not _valid_position(before.get("center")) or not _valid_position(after.get("center")):
+					return _failure("invalid_spatial_foraging_record")
+				if not _valid_foraging_spots(before.get("positions"), _vector(before.center), active) or not after.get("positions") is Dictionary:
+					return _failure("invalid_spatial_foraging_record")
+				if not _same_foraging_spots(after.positions, layout.positions) or not _same_foraging_position(after.center, g.berry_position):
+					return _failure("invalid_spatial_foraging_record")
+				if not _exact_keys(before.positions, after.positions.keys()):
+					return _failure("invalid_spatial_foraging_record")
+				var shift: Vector3 = _vector(after.center) - _vector(before.center)
+				for id in after.positions:
+					var offset: Vector3 = _vector(after.positions[id]) - _vector(before.positions[id]) - shift
+					if absf(offset.x) > 0.001 or absf(offset.z) > 0.001 or absf(offset.y) > 0.1:
+						return _failure("invalid_spatial_foraging_transform")
+				evidence_spots = before.positions
+				evidence_center = before.center
 		for event in value.life.events:
 			if event.get("type", "") != "foraging_work_spots_installed":
 				continue

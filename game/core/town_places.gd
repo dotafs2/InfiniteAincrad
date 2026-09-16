@@ -223,6 +223,104 @@ func journey_stall_diagnostics() -> Array:
 				"observation_source": "host_physics_frame_position"}})
 	return result
 
+func terminal_journey_rejection_evidence() -> Array:
+	## A terminal rejection remains GM-visible after its live stall closes, but only when three
+	## persisted authorities agree: the reported stall episode, its rejected command receipt and
+	## the matching life event. This is a read-only public projection. It never copies event text,
+	## model reasoning, turn history, memories or the command payload itself, and it does not call a
+	## rejection a defect or a collision. A later completion, rewritten actor/target, missing event
+	## or reused old stall therefore removes the entry instead of pointing at the wrong resident.
+	var result: Array = []
+	var events: Variant = _state.life.get("events", [])
+	if not events is Array:
+		return result
+	for stall_value in _journey_stall_records():
+		if not stall_value is Dictionary:
+			continue
+		var stall: Dictionary = stall_value
+		if stall.get("status", "") != "closed" or stall.get("close_reason", "") != "journey_released" or not stall.get("reported", false):
+			continue
+		var journey := str(stall.get("kind", ""))
+		var expected_code := "approach_blocked" if journey == "approach" else "travel_blocked" if journey == "place_travel" else ""
+		if expected_code.is_empty():
+			continue
+		var resident_id := str(stall.get("resident_id", ""))
+		var command_id := str(stall.get("command_id", ""))
+		var command_store: Variant = _state.godot.get("trade", {}) if journey == "approach" else _state.godot.get("places", {})
+		var commands: Variant = command_store.get("commands", {}) if command_store is Dictionary else {}
+		var command_value: Variant = commands.get(command_id, {}) if commands is Dictionary else {}
+		if not command_value is Dictionary:
+			continue
+		var command: Dictionary = command_value
+		var payload: Variant = command.get("payload", {})
+		var receipt: Variant = command.get("result", {})
+		if command.get("status", "") != "rejected" or not payload is Dictionary or not receipt is Dictionary:
+			continue
+		if str(payload.get("actor_id", "")) != resident_id or str(receipt.get("actor_id", "")) != resident_id \
+				or str(receipt.get("command_id", "")) != command_id or typeof(receipt.get("ok", null)) != TYPE_BOOL \
+				or bool(receipt.ok) or str(receipt.get("code", "")) != expected_code:
+			continue
+		var provenance := str(payload.get("provenance", ""))
+		var target_id := ""
+		var place_id := ""
+		if journey == "approach":
+			var option_id := str(payload.get("option_id", ""))
+			if payload.get("action", "") != "trade_option" or not option_id.begins_with("approach:"):
+				continue
+			target_id = option_id.trim_prefix("approach:")
+			if target_id.is_empty():
+				continue
+		else:
+			place_id = str(stall.get("place_id", ""))
+			if payload.get("action", "") != "place_option" or str(payload.get("option_id", "")) != TRAVEL_PREFIX + place_id \
+					or str(receipt.get("place_id", "")) != place_id or place_id.is_empty():
+				continue
+		var matched_event: Dictionary = {}
+		var match_count := 0
+		for event_value in events:
+			if not event_value is Dictionary:
+				continue
+			var event: Dictionary = event_value
+			if str(event.get("type", "")) != expected_code or str(event.get("actor_id", "")) != resident_id \
+					or str(event.get("subject_id", "")) != resident_id or event.get("recipient_ids", []) != [resident_id] \
+					or str(event.get("operation_id", "")) != command_id or str(event.get("source", "")) != provenance:
+				continue
+			if event.has("command_id") and str(event.get("command_id", "")) != command_id:
+				continue
+			if journey == "approach" and (str(event.get("target_id", "")) != target_id \
+					or str(event.get("provenance", "")) != provenance or event.get("contractual", true) != false):
+				continue
+			if journey == "place_travel" and str(event.get("place_id", "")) != place_id:
+				continue
+			if not event.get("event_id", null) is String or str(event.event_id).is_empty() \
+					or typeof(event.get("seq", null)) != TYPE_INT or int(event.seq) <= 0:
+				continue
+			matched_event = event
+			match_count += 1
+		if match_count != 1:
+			continue
+		var observed := _vector(stall.get("observed_position", [0, 0, 0]))
+		var target := _vector(stall.get("target_position", [0, 0, 0]))
+		var physical_facts := {"observed_position": stall.get("observed_position", []).duplicate(),
+			"target_position": stall.get("target_position", []).duplicate(),
+			"remaining_distance": observed.distance_to(target) if observed.is_finite() and target.is_finite() else -1.0,
+			"remaining_route_m": _remaining_route(place_id, stall, observed) if journey == "place_travel" and observed.is_finite() else -1.0,
+			"no_progress_seconds": float(stall.get("no_progress_seconds", 0.0)),
+			"arrival_radius": JOURNEY_STALL_ARRIVAL_RADIUS, "progress_epsilon": JOURNEY_STALL_PROGRESS_EPSILON,
+			"progress_measure": "route_remaining_m" if journey == "place_travel" else "remaining_meeting_distance_m",
+			"observation_source": "persisted_journey_stall"}
+		result.append({"evidence_kind": "journey_rejected", "issue_id": "journey_rejected:" + command_id,
+			"world_id": _state.world_id, "resident_id": resident_id, "job_command_id": command_id,
+			"journey": journey, "target_id": target_id, "place_id": place_id,
+			"command_status": "rejected", "result_code": expected_code, "status": "observed",
+			"event_ref": {"event_id": str(matched_event.event_id), "seq": int(matched_event.seq),
+				"event_type": expected_code, "source": str(matched_event.source)},
+			"physical_facts": physical_facts,
+			"discriminators": {"terminal_rejection": true, "arrival_recorded": false,
+				"collision_proved": false, "defect_proved": false, "private_reason_included": false,
+				"note": "persisted rejected command and matching event only; cause and need are not inferred"}})
+	return result
+
 func _places() -> Dictionary:
 	var value: Variant = _state.godot.get("places", {})
 	return value if value is Dictionary else {}

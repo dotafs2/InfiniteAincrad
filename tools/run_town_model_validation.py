@@ -217,6 +217,223 @@ def validate_paths(out, save, gm_export=None):
             raise ValueError('--gm-export requires a separate .json path, outside launcher artifacts.')
 
 
+def _nonnegative_int(value):
+    """Return a trustworthy counter value; bool is not an integer counter here."""
+    if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+        return 0
+    return value
+
+
+def _finite_number(value):
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    value = float(value)
+    if value < 0 or value == float('inf') or value == float('-inf') or value != value:
+        return None
+    return value
+
+
+def read_world_baseline(save):
+    """Read only the identity and monotonic counters needed for this run's delta."""
+    try:
+        document = json.loads(save.read_text(encoding='utf-8-sig'))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return {'status': 'unknown', 'reason': 'save_unreadable'}
+    if not isinstance(document, dict):
+        return {'status': 'unknown', 'reason': 'save_root_invalid'}
+    world_id = document.get('world_id')
+    life = document.get('life')
+    godot = document.get('godot')
+    life_seq = life.get('seq') if isinstance(life, dict) else None
+    godot_elapsed = godot.get('elapsed_seconds') if isinstance(godot, dict) else None
+    world_elapsed = document.get('elapsed_seconds')
+    if (not isinstance(world_id, str) or not world_id.strip()
+            or isinstance(life_seq, bool) or not isinstance(life_seq, int) or life_seq < 0
+            or _finite_number(godot_elapsed) is None or _finite_number(world_elapsed) is None):
+        return {'status': 'unknown', 'reason': 'save_baseline_invalid'}
+    return {'status': 'available', 'world_id': world_id, 'life_seq': life_seq,
+            'godot_elapsed_seconds': _finite_number(godot_elapsed),
+            'world_elapsed_seconds': _finite_number(world_elapsed)}
+
+
+def classify_validation(engine_exit, capture, model_errors, budget_stop_reason,
+                        shutdown_incomplete, upstream_requests):
+    """Classify this formal model-validation launch, separately from engine health.
+
+    A clean engine capture proves that the process ran, but it does not exercise the
+    model-validation path. At least one validation decision and one accepted upstream
+    request are required before this launcher may call the validation passed. A model
+    turn that deliberately chooses ``wait`` still satisfies this gate.
+    """
+    decisions = _nonnegative_int(capture.get('validation_decisions_started', 0)) \
+        if isinstance(capture, dict) else 0
+    requests = _nonnegative_int(upstream_requests)
+    exercised = decisions > 0 and requests > 0
+    reasons = []
+    if engine_exit != 0:
+        reasons.append('engine_exit_nonzero')
+    if not isinstance(capture, dict) or not capture:
+        reasons.append('capture_missing_or_invalid')
+    if model_errors:
+        reasons.append('model_errors')
+    if budget_stop_reason:
+        reasons.append('budget_stop')
+    if shutdown_incomplete:
+        reasons.append('gateway_shutdown_incomplete')
+    if reasons:
+        status = 'failed'
+    elif not exercised:
+        status = 'not_exercised'
+        if decisions == 0:
+            reasons.append('no_validation_decisions')
+        if requests == 0:
+            reasons.append('no_upstream_requests')
+    else:
+        status = 'passed'
+    return {'validation_status': status, 'validation_exercised': exercised,
+            'validation_decisions_started': decisions,
+            'classification_reasons': reasons}
+
+
+def world_progress(baseline, capture, gm_document=None):
+    """Compare same-world end counters to the pre-launch save baseline.
+
+    Absolute values remain visible for diagnosis, while only positive, same-world
+    deltas count as progress. The capture source_seq is reported but is never treated
+    as this launch's starting sequence.
+    """
+    baseline = baseline if isinstance(baseline, dict) else {'status': 'unknown'}
+    capture = capture if isinstance(capture, dict) else {}
+    source_seq = _nonnegative_int(capture.get('source_seq', 0))
+    life_seq = _nonnegative_int(capture.get('life_seq', 0))
+    new_events = capture.get('new_events', [])
+    event_count = len(new_events) if isinstance(new_events, list) else 0
+    revision = gm_document.get('source_revision', {}) if isinstance(gm_document, dict) else {}
+    revision = revision if isinstance(revision, dict) else {}
+    gm_absolute = {}
+    for name in ('godot_elapsed_seconds', 'world_elapsed_seconds'):
+        gm_absolute[name] = _finite_number(revision.get(name))
+    gm_life_raw = revision.get('life_seq')
+    gm_life_seq = (gm_life_raw if isinstance(gm_life_raw, int)
+                   and not isinstance(gm_life_raw, bool) and gm_life_raw >= 0 else None)
+    absolute = {
+        'baseline': baseline,
+        'capture': {'world_id': capture.get('world_id'), 'source_seq': source_seq,
+                    'life_seq': life_seq, 'new_event_count': event_count},
+        'gm_export': {'world_id': gm_document.get('world_id'),
+                      'source_revision': revision, **gm_absolute}
+        if isinstance(gm_document, dict) else {},
+    }
+    if baseline.get('status') != 'available':
+        return {'comparison_status': 'unknown', 'observed': False,
+                'absolute': absolute, 'delta': {}}
+    world_id = baseline['world_id']
+    if capture.get('world_id') != world_id:
+        return {'comparison_status': 'world_mismatch', 'observed': False,
+                'absolute': absolute, 'delta': {}}
+    gm_comparable = (not isinstance(gm_document, dict)
+                     or gm_document.get('world_id') == world_id)
+    delta = {
+        'capture_life_seq': life_seq - baseline['life_seq'],
+    }
+    if gm_comparable and isinstance(gm_document, dict):
+        if gm_life_seq is not None:
+            delta['gm_life_seq'] = gm_life_seq - baseline['life_seq']
+        if gm_absolute['godot_elapsed_seconds'] is not None:
+            delta['gm_godot_elapsed_seconds'] = (gm_absolute['godot_elapsed_seconds']
+                                                 - baseline['godot_elapsed_seconds'])
+        if gm_absolute['world_elapsed_seconds'] is not None:
+            delta['gm_world_elapsed_seconds'] = (gm_absolute['world_elapsed_seconds']
+                                                 - baseline['world_elapsed_seconds'])
+    comparable_deltas = [value for value in delta.values()
+                         if isinstance(value, (int, float)) and not isinstance(value, bool)]
+    return {'comparison_status': 'comparable' if gm_comparable else 'gm_world_mismatch',
+            'observed': any(value > 0 for value in comparable_deltas),
+            'absolute': absolute, 'delta': delta}
+
+
+def _gm_snapshot_error(document, capture):
+    if not isinstance(document, dict):
+        return 'gm_export_root_invalid'
+    if document.get('kind') != 'background_gm_evidence_snapshot' or document.get('schema_version') != 1:
+        return 'gm_export_schema_invalid'
+    world_id = document.get('world_id')
+    capture_world = capture.get('world_id') if isinstance(capture, dict) else None
+    if not isinstance(world_id, str) or not world_id.strip() or world_id != capture_world:
+        return 'gm_export_world_mismatch'
+    if not isinstance(document.get('source_revision'), dict):
+        return 'gm_export_source_revision_invalid'
+    boundaries = document.get('boundaries')
+    if (not isinstance(boundaries, dict)
+            or boundaries.get('contains_private_reply_reason') is not False
+            or boundaries.get('contains_other_resident_memories') is not False):
+        return 'gm_export_boundaries_invalid'
+    evidence, proposals, counts = document.get('evidence'), document.get('proposals'), document.get('counts')
+    if not isinstance(evidence, list) or not isinstance(proposals, list) or not isinstance(counts, dict):
+        return 'gm_export_collections_invalid'
+    if counts.get('issues') != len(evidence) or counts.get('proposals') != len(proposals):
+        return 'gm_export_counts_invalid'
+    return ''
+
+
+def append_startup_fault(gm_export, capture, classification, engine_exit, upstream_requests):
+    """Atomically append one idempotent, world-bound host observation.
+
+    This never creates a GM snapshot. It can only annotate a valid snapshot emitted by
+    the engine for the exact captured world, and it says the startup cause is unknown.
+    """
+    if gm_export is None:
+        return {'status': 'not_requested'}
+    if not gm_export.is_file():
+        return {'status': 'refused', 'reason': 'gm_export_missing'}
+    try:
+        document = json.loads(gm_export.read_text(encoding='utf-8-sig'))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return {'status': 'refused', 'reason': 'gm_export_unreadable'}
+    error = _gm_snapshot_error(document, capture)
+    if error:
+        return {'status': 'refused', 'reason': error}
+    world_id = document['world_id']
+    source_seq = _nonnegative_int(capture.get('source_seq', 0))
+    life_seq = _nonnegative_int(capture.get('life_seq', 0))
+    issue_id = f'host:model-validation-startup-fault:{world_id}:{source_seq}:{life_seq}'
+    for entry in document['evidence']:
+        if (isinstance(entry, dict)
+                and entry.get('evidence_kind') == 'model_validation_startup_fault'
+                and entry.get('issue_id') == issue_id
+                and entry.get('world_id') == world_id):
+            return {'status': 'already_present', 'issue_id': issue_id}
+    reason = ('The formal model-validation launcher did not complete a valid model-decision '
+              'path; startup cause is unknown.')
+    entry = {
+        'evidence_kind': 'model_validation_startup_fault',
+        'issue_id': issue_id,
+        'world_id': world_id,
+        'status': 'open',
+        'occurrences': 1,
+        'cause': 'unknown',
+        'cause_identified': False,
+        'resident_demand': False,
+        'engine_exit': engine_exit,
+        'validation_decisions_started': classification['validation_decisions_started'],
+        'upstream_requests': _nonnegative_int(upstream_requests),
+        'source_seq': source_seq,
+        'life_seq': life_seq,
+        'pending_count': _nonnegative_int(capture.get('pending_count', 0)),
+        'first': {'reason': reason, 'source_sequence': life_seq},
+        'latest': {'reason': reason, 'source_sequence': life_seq},
+        'claim': {'cause_identified': False, 'resident_demand': False,
+                  'note': 'Host-observed launcher fault only; it does not replace an engine issue.'},
+    }
+    document['evidence'].append(entry)
+    document['counts']['issues'] = len(document['evidence'])
+    try:
+        write_private_json(gm_export, document)
+    except OSError as exc:
+        return {'status': 'write_failed', 'reason': type(exc).__name__}
+    return {'status': 'appended', 'issue_id': issue_id}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
@@ -249,6 +466,7 @@ def main():
     deadline = datetime.now(timezone.utc) + timedelta(seconds=args.seconds + 55)
     try:
         validate_paths(out, save, gm_export)
+        baseline = read_world_baseline(save)
         guard = json.loads(args.ledger.with_suffix('.guard.json').read_text(encoding='utf-8'))
         policy = (CityValidationPolicy if 'request_limit' in guard['policy'] else Policy)(**guard['policy'])
         ledger = Ledger(args.ledger, policy, runtime_deadline_utc=int(deadline.timestamp()))
@@ -322,13 +540,28 @@ def main():
     # the ledger still shows no unresolved row: an accepted handler may be between
     # admission and its own durable reservation when the grace expired.
     shutdown_incomplete = not shutdown.get('drained_complete', False) or bool(shutdown.get('drain_error'))
-    passed = (result.returncode == 0 and bool(capture) and not errors and not gate.failure
-              and not shutdown_incomplete)
-    summary = {'engine_exit': result.returncode, 'validation_passed': passed, 'model_errors': errors, 'ledger_before': before, 'ledger_after': ledger.status(),
+    classification = classify_validation(result.returncode, capture, errors, gate.failure,
+                                         shutdown_incomplete, gate.sent)
+    gm_document = None
+    if gm_export is not None and gm_export.is_file():
+        try:
+            gm_document = json.loads(gm_export.read_text(encoding='utf-8-sig'))
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            pass
+    progress = world_progress(baseline, capture, gm_document)
+    startup_fault = {'status': 'not_applicable'}
+    if classification['validation_status'] == 'not_exercised':
+        startup_fault = append_startup_fault(gm_export, capture, classification,
+                                             result.returncode, gate.sent)
+    passed = classification['validation_status'] == 'passed'
+    summary = {'engine_exit': result.returncode, 'validation_passed': passed,
+               **classification, 'model_errors': errors, 'ledger_before': before, 'ledger_after': ledger.status(),
                'capture_exists': (out / 'capture/evidence.json').exists(), 'original_world_promoted': False,
                'budget_stop_reason': gate.failure, 'upstream_requests': gate.sent, 'upstream_concurrency': 1,
                'carried_uncertainty_reviewed': gate.review is not None, 'gateway_shutdown': shutdown,
-               'shutdown_incomplete': bool(shutdown_incomplete)}
+               'shutdown_incomplete': bool(shutdown_incomplete),
+               'world_progress_observed': progress['observed'], 'world_progress': progress,
+               'startup_fault_export': startup_fault}
     (out / 'result.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
     print(json.dumps(summary))
     return 0 if passed else 1

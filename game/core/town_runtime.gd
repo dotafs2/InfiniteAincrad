@@ -277,6 +277,17 @@ func background_gm_snapshot() -> Dictionary:
 			"discriminators": {"movement_blocked": true, "collision_proved": false, "contact_recorded": false,
 				"obstacle_identified": false, "image_analysis": false, "repair_task_inferred": false,
 				"note": "no-progress evidence only; a deliberate or legitimate obstacle is not distinguishable here from a defect"}})
+	## A live stall remains a current physical issue only while its journey is pending. Once the
+	## world honestly rejects that command, a separate terminal observation may remain visible —
+	## never relabelled open — when the place-capable runtime can cross-link all persisted facts.
+	if has_method("terminal_journey_rejection_evidence"):
+		var terminal_rejections: Variant = call("terminal_journey_rejection_evidence")
+		if terminal_rejections is Array:
+			for rejection in terminal_rejections:
+				if issues.size() >= BACKGROUND_GM_EVIDENCE_LIMIT:
+					break
+				if rejection is Dictionary:
+					issues.append(rejection)
 	## Pending basic-action facts share this one bounded evidence channel and are appended AFTER
 	## the movement diagnostics, so an existing issue never loses its content or its priority.
 	for pending in _basic_action_pending_evidence():

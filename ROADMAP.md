@@ -1,5 +1,9 @@
 # 唯一流程图
 
+当前工作更新：2026-09-17，北京时间 03:07。新地图首个真实故障闭环已通过：DeepSeek GM05 诊断并认领，GPT-5.6 修订超时初稿，真实 Kimi 居民恢复行动，同档纯冷恢复状态完全一致，原 GM05 独立反馈 accept。十位居民累计 28 次已结算请求，26 个成功结果、1 次拒绝、1 次等待，无悬挂动作；seq42 存档再次全状态冷恢复通过。GM01—03 已基于真实公开求助完成独立观察，连同 GM05 共 4 位实际参与，其余六位待调度。美术留到白天，本轮继续至北京时间 09:00。见[H101 当前研究](HISTORY.md#2026-09-17--h101-新地图-gmnpc-闭环研究进行中)及[本轮验收](docs/validation/gm_npc_closure_2026-09-17.md)。此优先级替代下方 H100 的旧档接续与图形退出问题顺序，旧 seq129 历史仍保留。
+
+本机接收更新：2026-09-17，已拉取 `4b958f3` 的 H89—H99 成果，404 个 LFS 文件齐全。换机检查发现 Terrain3D 动态库被 `bin/` 忽略规则漏掉，已按固定哈希在本机补齐；正式 seq129 私有世界与 GM 状态未随 Git 接续。当前先完成可重复启动及退出资源错误诊断，再衔接原世界生活闭环。详见[工作交接与本机检查](docs/validation/work_handoff_2026-09-17.md)。
+
 Demo交接更新：2026-09-16，H98修正后复查40路线／30实走／64门窗通过，145道具、116树、6.6万草。H99按用户要求归档今日代码、原始模型、离线对比页和错误日志；退出资源错误仍待修，回家继续。启动和交接见[H99历史](HISTORY.md)及[最新实渲](ART_STYLE.md#demo-town)。
 
 PCG首版更新：2026-09-16，H97在原街区试验副本接入SimpleGrassTextured和PBR方向EZ-Tree，经ProtonScatter投放50棵树／24,100丛草，40条路线和64项门窗检查通过；正式世界未改。7张实渲已出；东侧弯道6丛草进入70cm空带，已询问留空尺度，待用户评判。见[实渲与限制](ART_STYLE.md#native-pcg)。
@@ -563,6 +567,14 @@ flowchart TD
     H85 --> H86
     H86 -.降低上下文成本与人工接力.-> H47
     H86 -.下一项：居民自选需要，保留拒绝与改计划.-> N5
+    H86 --> H101A
+    H101A["H101 新地图独立研究档已建立<br/>10居民、10 GM状态；离线动作与冷恢复通过<br/>并不代表20个模型已实际运行"]
+    H101A --> H101B
+    H101B["真实启动故障已复现，DeepSeek GM05已认领<br/>新spatial_layout误走迁移校验，生活暂停<br/>首次Kimi 0调用，旧passed不能算生活验收"]
+    H101B --> H101C
+    H101C["真实启动故障闭环通过：修复、Kimi行动、冷恢复<br/>4次真实决策，3成功/1拒绝；原GM05复查accept<br/>保留DeepSeek超时初稿与GPT-5.6修订归属"]
+    H101C --> H101D
+    H101D["进行中：10 NPC + 10 GM各自实际参与<br/>10居民有真实终态；4位GM独立参与，其余6位待调度<br/>继续需求与故障闭环；分阶段不等于20人同时运行"]
     H79 --> M20E
     M20E --> M20
     M20 -.持续稳定性.-> M20F
@@ -587,6 +599,8 @@ flowchart TD
     classDef partial fill:#ffedd5,stroke:#c2410c,color:#7c2d12;
     classDef issue fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d;
     classDef future fill:#f1f5f9,stroke:#64748b,color:#0f172a;
+    class H101A,H101B,H101C done;
+    class H101D partial;
     class H93 partial;
     class H94 done;
     class H95 done;
