@@ -142,6 +142,8 @@ OUTPUT CONTRACT: end your turn with exactly one fenced ```json block and nothing
               "evidence_refs": ["<ref>"]}],
  "new_issues": [{"proposal_key": "<stable short key>", "summary": "concise text (400 chars recommended)",
                  "evidence_refs": ["<pointer from investigation.evidence_refs>"],
+                 "resident_id": "<optional exact speaker_id/resident_id from cited evidence>",
+                 "capability_id": "<optional stable lowercase capability id; paired with resident_id>",
                  "claim_coding": true | false}],
  "note": "<optional, <=200 chars>"}
 Rules for results:
@@ -159,6 +161,13 @@ Rules for results:
   "supervisor_specified" means a human supervisor asked for the investigation. Your proposal is
   unverified, does not grant coding scope, and must retain the distinction between observed facts
   and inference.
+- A proposal for a NEW resident capability must use new_issues (do not claim the raw speech issue)
+  and must include resident_id and capability_id together. Copy resident_id exactly from a cited
+  public speaker_id/resident_id; never derive the resident identity from names, roles, summary
+  prose or keywords. capability_id is your explicit stable lowercase identifier for the proposed
+  new design. It does not mean the resident spoke that identifier or already has the capability,
+  and must not be guessed from narrative as evidence of an existing capability. Ordinary faults
+  that do not propose a resident capability may omit both fields.
 - return new_issues: [] when investigation yields no concrete supported proposal; do not invent
   resident demand, but a concrete evidence-backed proposal may introduce new mechanics or content.
 """
@@ -1446,8 +1455,49 @@ def validate_new_issues(answer, investigation: dict | None) -> tuple[list[dict],
     scope = entry.get('scope')
     if scope is not None and not isinstance(scope, dict):
         return [], ['new_issues[0].scope must be an object when present']
-    return [{'proposal_key': key, 'summary': summary.strip(), 'evidence_refs': refs,
-             'claim_coding': entry['claim_coding'], 'scope': scope}], []
+    resident_present, capability_present = 'resident_id' in entry, 'capability_id' in entry
+    if resident_present != capability_present:
+        return [], ['new_issues[0].resident_id and capability_id must be provided together']
+    accepted = {'proposal_key': key, 'summary': summary.strip(), 'evidence_refs': refs,
+                'claim_coding': entry['claim_coding'], 'scope': scope}
+    if resident_present:
+        resident_id, capability_id = entry.get('resident_id'), entry.get('capability_id')
+        if (not isinstance(resident_id, str) or not resident_id.strip()
+                or resident_id != resident_id.strip() or len(resident_id) > 160):
+            return [], ['new_issues[0].resident_id must be one exact cited resident identity']
+        # Match the runtime capability-id contract: 1..48 lowercase ASCII letters/digits plus
+        # `_-.:`.  A summary or role name is never parsed to manufacture this binding.
+        if (not isinstance(capability_id, str)
+                or not re.fullmatch(r'[a-z0-9][a-z0-9_.:-]{0,47}', capability_id)):
+            return [], ['new_issues[0].capability_id must be a stable lowercase capability id']
+        source_sha = investigation.get('source_sha256')
+        source_world = investigation.get('world_id')
+        sources = investigation.get('evidence')
+        if (not isinstance(source_sha, str) or not re.fullmatch(r'[0-9a-f]{64}', source_sha)
+                or not isinstance(source_world, str) or not source_world
+                or not isinstance(sources, dict)):
+            return [], ['typed new_issues requires a world/hash-bound investigation projection']
+        matching_refs = []
+        for ref in refs:
+            source = sources.get(ref)
+            if not isinstance(source, dict):
+                continue
+            entry_world = source.get('world_id')
+            if entry_world is not None and entry_world != source_world:
+                return [], [f'new_issues[0].evidence_refs contains foreign world evidence {ref}']
+            source_resident = source.get('resident_id')
+            if source.get('evidence_kind') == PUBLIC_SPEECH_KIND:
+                source_resident = source.get('speaker_id')
+            if source_resident == resident_id:
+                matching_refs.append(ref)
+        if not matching_refs:
+            return [], ['new_issues[0].resident_id must exactly match speaker_id/resident_id in '
+                        'at least one cited evidence ref']
+        accepted.update({'resident_id': resident_id, 'capability_id': capability_id,
+                         'resident_evidence_refs': matching_refs,
+                         'binding_world_id': source_world,
+                         'binding_source_sha256': source_sha})
+    return [accepted], []
 
 
 def register_new_issues(state: dict, gm_id: str, entries: list[dict], investigation: dict,
@@ -1475,27 +1525,72 @@ def register_new_issues(state: dict, gm_id: str, entries: list[dict], investigat
                       'session_id': state['sessions'][gm_id]['session_id'],
                       'observation_origin': investigation.get('origin', 'supervisor_specified'),
                       'proposed_scope': entry.get('scope')}
-        record = state['issues'].setdefault(issue_id, {
+        record = state['issues'].get(issue_id)
+        created = record is None
+        if created:
+            record = {
             'issue_id': issue_id, 'world_id': state['world_id'], 'evidence_kind': 'gm_proposal',
             'identity_key': key, 'identity_field': 'gm+investigation+proposal_key',
             'source_channel': 'gm_proposal', 'source_status': 'proposed', 'lifecycle': 'current',
             'summary': entry['summary'], 'provenance': provenance,
             'entry': entry, 'content_digest': issue_content_digest(entry, 'proposed'),
+            'resident_id': entry.get('resident_id'),
+            'capability_id': entry.get('capability_id'),
+            'typed_binding': ({'status': 'typed',
+                               'resident_evidence_refs': entry.get('resident_evidence_refs', []),
+                               'world_id': entry.get('binding_world_id'),
+                               'source_sha256': entry.get('binding_source_sha256')}
+                              if entry.get('resident_id') and entry.get('capability_id') else None),
             'claim': {'implemented': False, 'verified_in_world': False},
             'first_import_utc': utc_iso(), 'owner_gm': None, 'owner_since': None,
             'owner_run_id': None, 'coding_session_id': None, 'coding_owner_gm': None,
             'coding_attempt': None, 'coding_unresolved': None, 'candidates': [],
-            'outcomes': [], 'settled': {}, 'absent_since': None})
-        record['provenance']['investigation'] = investigation
-        record['provenance']['latest_run_id'] = run_id
-        record['entry'] = entry
-        record['proposed_scope'] = entry.get('scope')
-        record['summary'] = entry['summary']
-        record['content_digest'] = issue_content_digest(
-            {'proposal': entry, 'source_sha256': investigation['source_sha256']}, 'proposed')
+            'outcomes': [], 'settled': {}, 'absent_since': None}
+            state['issues'][issue_id] = record
+        incoming_binding = (entry.get('resident_id'), entry.get('capability_id'))
+        existing_binding = (record.get('resident_id'), record.get('capability_id'))
+        binding_status = 'unbound'
+        may_update = True
+        claim_coding = entry['claim_coding']
+        if all(incoming_binding):
+            if created:
+                binding_status = 'typed'
+            elif all(existing_binding) and incoming_binding == existing_binding:
+                binding_status = 'typed_duplicate'
+            else:
+                # Never turn a historical prose-only hypothesis into release/adoption evidence,
+                # and never rewrite one typed identity under the same stable proposal key.
+                binding_status = ('historical_unbound_preserved' if not any(existing_binding)
+                                  else 'typed_binding_conflict')
+                may_update = False
+                claim_coding = False
+                record.setdefault('binding_refusals', []).append({
+                    'status': binding_status, 'run_id': run_id,
+                    'resident_id': entry.get('resident_id'),
+                    'capability_id': entry.get('capability_id'), 'utc': utc_iso()})
+        elif all(existing_binding):
+            # An untyped replay of the same stable proposal key cannot replace the typed source
+            # entry/scope while leaving its old top-level binding behind.
+            binding_status = 'typed_downgrade_refused'
+            may_update = False
+            claim_coding = False
+            record.setdefault('binding_refusals', []).append({
+                'status': binding_status, 'run_id': run_id,
+                'resident_id': None, 'capability_id': None, 'utc': utc_iso()})
+        if may_update:
+            record['provenance']['investigation'] = investigation
+            record['provenance']['latest_run_id'] = run_id
+            record['entry'] = entry
+            record['proposed_scope'] = entry.get('scope')
+            record['summary'] = entry['summary']
+            record['content_digest'] = issue_content_digest(
+                {'proposal': entry, 'source_sha256': investigation['source_sha256']}, 'proposed')
         results.append({'issue_id': issue_id, 'disposition': 'proposal',
-                        'claim_coding': entry['claim_coding'], 'summary': entry['summary'],
-                        'evidence_refs': entry['evidence_refs']})
+                        'claim_coding': claim_coding, 'summary': entry['summary'],
+                        'evidence_refs': entry['evidence_refs'],
+                        'resident_id': record.get('resident_id'),
+                        'capability_id': record.get('capability_id'),
+                        'binding_status': binding_status})
     return results
 
 
@@ -1941,6 +2036,12 @@ def apply_gm_outcomes(state: dict, gm_id: str, results: list[dict], digest: str,
                       run_id: str, observation_origin: str = 'evidence_observation') -> list[dict]:
     notes = []
     for result in results:
+        if result.get('binding_status') in {
+                'historical_unbound_preserved', 'typed_binding_conflict',
+                'typed_downgrade_refused'}:
+            # register_new_issues already retained an audit refusal. Do not let the generic
+            # observation path settle, claim, or append an outcome to the preserved proposal.
+            continue
         issue = state['issues'][result['issue_id']]
         entry = {'kind': 'observation', 'gm_id': gm_id, 'disposition': result['disposition'],
                  'claim_coding': result['claim_coding'], 'summary': result['summary'],

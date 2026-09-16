@@ -23,6 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
 import gm_runner  # noqa: E402
+import gm_autonomy  # noqa: E402
 
 ACCEPTED_EVIDENCE = ROOT / 'docs' / 'validation' / 'town_gm_evidence_2026-09-12' / 'evidence-final.json'
 FIXTURE_SAVE = ROOT / 'tmp' / 'gm-autonomy-20260913' / 'gm-runner-fixture' / 'sentinel-save.json'
@@ -1713,6 +1714,193 @@ class PublicEventLinkageTests(RunnerTestBase):
                                      'evidence_refs': [foreign], 'claim_coding': False}]},
                     investigation)
                 self.assertTrue(errors, foreign)
+
+    def typed_answer(self, resident_id, capability_id, ref='/evidence/0',
+                     key='typed-water-work', claim=True):
+        return {'new_issues': [{
+            'proposal_key': key,
+            'summary': 'a typed resident capability hypothesis backed by one public request',
+            'evidence_refs': [ref], 'resident_id': resident_id,
+            'capability_id': capability_id, 'claim_coding': claim,
+            'scope': {'objective': 'add one bounded water work action',
+                      'files': ['game/core/town_life.gd'],
+                      'acceptance': ['the same resident receives a terminal capability receipt']}
+            if claim else None}]}
+
+    def test_typed_new_issue_binds_exact_resident_and_effect_review(self):
+        document = self.document_with([self.speech_entry(27)])
+        state, _document, _digest, investigation, _item, _prompt = self.observe_chain(document)
+        resident_id = 'shared:speaker27'
+        answer = self.typed_answer(resident_id, 'water_work.v1')
+        entries, errors = gm_runner.validate_new_issues(answer, investigation)
+        self.assertEqual(errors, [])
+        self.assertEqual(entries[0]['resident_id'], resident_id)
+        self.assertEqual(entries[0]['capability_id'], 'water_work.v1')
+        self.assertEqual(entries[0]['resident_evidence_refs'], ['/evidence/0'])
+        self.assertEqual(entries[0]['binding_world_id'], document['world_id'])
+        self.assertEqual(entries[0]['binding_source_sha256'], investigation['source_sha256'])
+
+        state['sessions']['gm-01']['session_id'] = 'typed-gm-session'
+        created = gm_runner.register_new_issues(
+            state, 'gm-01', entries, investigation, 'run-typed-first')
+        issue_id = created[0]['issue_id']
+        record = state['issues'][issue_id]
+        self.assertEqual(created[0]['binding_status'], 'typed')
+        self.assertTrue(created[0]['claim_coding'])
+        self.assertEqual(record['resident_id'], resident_id)
+        self.assertEqual(record['capability_id'], 'water_work.v1')
+        self.assertEqual(record['typed_binding']['source_sha256'], investigation['source_sha256'])
+        conflicts = gm_runner.apply_gm_outcomes(
+            state, 'gm-01', created, investigation['source_sha256'], 'run-typed-first',
+            observation_origin=investigation['origin'])
+        self.assertEqual(conflicts, [])
+        self.assertEqual(record['owner_gm'], 'gm-01')
+        self.assertEqual(record['owner_run_id'], 'run-typed-first')
+        self.assertIsInstance(record['proposed_scope'], dict)
+
+        # Repeating the same typed identity is idempotent and cannot fork or rewrite it.
+        repeated = gm_runner.register_new_issues(
+            state, 'gm-01', entries, investigation, 'run-typed-repeat')
+        self.assertEqual(repeated[0]['issue_id'], issue_id)
+        self.assertEqual(repeated[0]['binding_status'], 'typed_duplicate')
+        self.assertEqual(len([issue for issue in state['issues'].values()
+                              if issue.get('source_channel') == 'gm_proposal']), 1)
+
+        save = self.root / 'typed-effect-world.json'
+        gm_runner.save_json(save, {
+            'world_id': document['world_id'], 'life': {'seq': 42},
+            'godot': {'resident_turns': {resident_id: {'history': []}}}})
+        baseline = gm_autonomy.effect_review_baseline(state, issue_id, save)
+        self.assertEqual(baseline['resident_id'], resident_id)
+        self.assertEqual(baseline['capability_id'], 'water_work.v1')
+        self.assertEqual(baseline['baseline_life_seq'], 42)
+        self.assertEqual(baseline['baseline_history_count'], 0)
+
+    def test_typed_new_issue_rejects_half_invalid_actor_ref_and_world_bindings(self):
+        document = self.document_with([self.speech_entry(27), self.speech_entry(31)])
+        _state, _document, _digest, investigation, _item, _prompt = self.observe_chain(document)
+        valid = self.typed_answer('shared:speaker27', 'water_work.v1')
+        cases = []
+        missing_capability = copy.deepcopy(valid)
+        missing_capability['new_issues'][0].pop('capability_id')
+        cases.append(('missing capability half', missing_capability, investigation))
+        missing_resident = copy.deepcopy(valid)
+        missing_resident['new_issues'][0].pop('resident_id')
+        cases.append(('missing resident half', missing_resident, investigation))
+        invalid_capability = copy.deepcopy(valid)
+        invalid_capability['new_issues'][0]['capability_id'] = 'Water Work*'
+        cases.append(('invalid capability', invalid_capability, investigation))
+        wrong_actor = self.typed_answer('shared:someone-else', 'water_work.v1')
+        cases.append(('wrong actor', wrong_actor, investigation))
+        wrong_ref = self.typed_answer('shared:speaker27', 'water_work.v1', '/evidence/1')
+        cases.append(('wrong resident ref', wrong_ref, investigation))
+        count_ref = self.typed_answer('shared:speaker27', 'water_work.v1', '/counts')
+        cases.append(('nonidentity ref', count_ref, investigation))
+        foreign_investigation = copy.deepcopy(investigation)
+        foreign_investigation['evidence']['/evidence/0']['world_id'] = 'foreign:world'
+        cases.append(('foreign world', valid, foreign_investigation))
+        no_hash = copy.deepcopy(investigation)
+        no_hash['source_sha256'] = ''
+        cases.append(('missing source hash', valid, no_hash))
+        malformed_hash = copy.deepcopy(investigation)
+        malformed_hash['source_sha256'] = 'not-a-sha256'
+        cases.append(('malformed source hash', valid, malformed_hash))
+        for label, answer, source in cases:
+            with self.subTest(label=label):
+                accepted, errors = gm_runner.validate_new_issues(answer, source)
+                self.assertEqual(accepted, [])
+                self.assertTrue(errors)
+
+    def test_historical_untyped_proposal_is_never_backfilled_from_later_typed_text(self):
+        document = self.document_with([self.speech_entry(27)])
+        state, _document, _digest, investigation, _item, _prompt = self.observe_chain(document)
+        state['sessions']['gm-01']['session_id'] = 'legacy-gm-session'
+        untyped = self.typed_answer('shared:speaker27', 'water_work.v1', claim=False)
+        untyped['new_issues'][0].pop('resident_id')
+        untyped['new_issues'][0].pop('capability_id')
+        entries, errors = gm_runner.validate_new_issues(untyped, investigation)
+        self.assertEqual(errors, [])
+        first = gm_runner.register_new_issues(
+            state, 'gm-01', entries, investigation, 'run-untyped-first')
+        issue_id = first[0]['issue_id']
+        record = state['issues'][issue_id]
+        self.assertIsNone(record['resident_id'])
+        self.assertIsNone(record['capability_id'])
+        self.assertNotIn('resident_id', record['entry'])
+
+        typed = self.typed_answer('shared:speaker27', 'water_work.v1', claim=True)
+        typed_entries, errors = gm_runner.validate_new_issues(typed, investigation)
+        self.assertEqual(errors, [])
+        repeated = gm_runner.register_new_issues(
+            state, 'gm-01', typed_entries, investigation, 'run-typed-later')
+        self.assertEqual(repeated[0]['issue_id'], issue_id)
+        self.assertEqual(repeated[0]['binding_status'], 'historical_unbound_preserved')
+        self.assertFalse(repeated[0]['claim_coding'])
+        self.assertIsNone(record['resident_id'])
+        self.assertIsNone(record['capability_id'])
+        self.assertNotIn('resident_id', record['entry'])
+
+        save = self.root / 'legacy-effect-world.json'
+        gm_runner.save_json(save, {
+            'world_id': document['world_id'], 'life': {'seq': 42},
+            'godot': {'resident_turns': {'shared:speaker27': {'history': []}}}})
+        self.assertIsNone(gm_autonomy.effect_review_baseline(state, issue_id, save))
+        self.assertIn('NEW resident capability must use new_issues', gm_runner.STABLE_INSTRUCTIONS)
+
+    def test_typed_proposal_refuses_untyped_downgrade_and_different_legal_binding(self):
+        document = self.document_with([self.speech_entry(27), self.speech_entry(31)])
+        state, _document, _digest, investigation, _item, _prompt = self.observe_chain(document)
+        state['sessions']['gm-01']['session_id'] = 'binding-conflict-session'
+        first_answer = self.typed_answer('shared:speaker27', 'water_work.v1')
+        first_entries, errors = gm_runner.validate_new_issues(first_answer, investigation)
+        self.assertEqual(errors, [])
+        first = gm_runner.register_new_issues(
+            state, 'gm-01', first_entries, investigation, 'run-typed-original')
+        issue_id = first[0]['issue_id']
+        record = state['issues'][issue_id]
+        original = copy.deepcopy(record)
+
+        # A prose-only replay cannot replace the proposal body while retaining a stale binding.
+        untyped = copy.deepcopy(first_answer)
+        untyped['new_issues'][0].pop('resident_id')
+        untyped['new_issues'][0].pop('capability_id')
+        untyped['new_issues'][0]['summary'] = 'attempted untyped replacement'
+        untyped['new_issues'][0]['scope'] = {'objective': 'different untyped scope'}
+        untyped_entries, errors = gm_runner.validate_new_issues(untyped, investigation)
+        self.assertEqual(errors, [])
+        downgrade = gm_runner.register_new_issues(
+            state, 'gm-01', untyped_entries, investigation, 'run-untyped-downgrade')
+        self.assertEqual(downgrade[0]['binding_status'], 'typed_downgrade_refused')
+        self.assertFalse(downgrade[0]['claim_coding'])
+        gm_runner.apply_gm_outcomes(
+            state, 'gm-01', downgrade, investigation['source_sha256'],
+            'run-untyped-downgrade', observation_origin=investigation['origin'])
+        for field in ('resident_id', 'capability_id', 'typed_binding', 'entry',
+                      'proposed_scope', 'summary', 'content_digest', 'provenance',
+                      'outcomes', 'settled'):
+            self.assertEqual(record[field], original[field], field)
+        self.assertEqual(record['binding_refusals'][-1]['status'], 'typed_downgrade_refused')
+
+        # The second identity is independently valid for its cited public event, but the stable
+        # proposal key cannot be rebound to it.
+        conflict_answer = self.typed_answer(
+            'shared:speaker31', 'repair_work.v1', ref='/evidence/1')
+        conflict_entries, errors = gm_runner.validate_new_issues(conflict_answer, investigation)
+        self.assertEqual(errors, [])
+        conflict = gm_runner.register_new_issues(
+            state, 'gm-01', conflict_entries, investigation, 'run-typed-conflict')
+        self.assertEqual(conflict[0]['binding_status'], 'typed_binding_conflict')
+        self.assertFalse(conflict[0]['claim_coding'])
+        gm_runner.apply_gm_outcomes(
+            state, 'gm-01', conflict, investigation['source_sha256'],
+            'run-typed-conflict', observation_origin=investigation['origin'])
+        for field in ('resident_id', 'capability_id', 'typed_binding', 'entry',
+                      'proposed_scope', 'summary', 'content_digest', 'provenance',
+                      'outcomes', 'settled'):
+            self.assertEqual(record[field], original[field], field)
+        self.assertEqual(record['binding_refusals'][-1]['status'], 'typed_binding_conflict')
+        self.assertEqual(record['binding_refusals'][-1]['resident_id'], 'shared:speaker31')
+        self.assertEqual(record['binding_refusals'][-1]['capability_id'], 'repair_work.v1')
 
 
 if __name__ == '__main__':
