@@ -154,6 +154,7 @@ func _ready() -> void:
 	town_navigation = TownNavigation.new()
 	town_navigation.name = "TownNavigation"
 	add_child(town_navigation)
+	_configure_navigation()
 	town_navigation.build()
 	_build_player()
 	_player.position = Vector3(0, 1.22, 12)
@@ -213,6 +214,9 @@ func _ready() -> void:
 				_player.position = town.position_of(candidate.owner_id) + Vector3(0, 0.9, 1.5)
 				_camera.global_position = Vector3(0, 5.2, 13.0)
 				_camera.look_at(town.home_point(candidate.worker_id) + Vector3(0, 1.0, 0))
+
+func _configure_navigation() -> void:
+	pass
 
 func _sync_residents() -> void:
 	var palette := [Color("954f42"), Color("345f79"), Color("657448")]

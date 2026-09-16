@@ -1,0 +1,23 @@
+{
+  "source": "https://github.com/FaRu85/Godot-Foliage",
+  "download": "https://github.com/FaRu85/Godot-Foliage/archive/refs/heads/main.zip",
+  "retrieved_date": "2026-09-16",
+  "archive_sha256": "5bcc1b9183b6b66af3c92c289556d8b4e6dc4a4f7d3b710dfbc57dad6db16e22",
+  "source_shader_license": "MIT, FaRu85 2022; full license retained in third_party/godot_foliage/LICENSE",
+  "textures_license": "Leaves001-03.png and Leaves001-04.png explicitly CC0 in upstream LICENSE",
+  "tree_generator": "EZ-Tree For Godot 0.2.0, upstream files unchanged",
+  "adaptations": [
+    "Retain exact source branch vertices and indices; replace photographic bark material with matte toon diffuse",
+    "Retain one of every four native leaf centers; adapt native quads to camera-facing cards expected by foliage shader",
+    "Pass per-card size through UV2.y and random rotation through UV2.x; smooth canopy normals",
+    "Set two-sided toon diffuse and alpha scissor; disable leaf shadow reception to avoid card self-shadow artifacts",
+    "Keep cutout shadow casting onto the ground; suppress upstream distance-dependent alpha fill within the demo"
+  ],
+  "controls": "1: comparison; 2: original; 3: stylized; left drag: orbit individual tree; Escape: exit",
+  "comparison": "../../../Art/Generated/EZTree20260916/stylized-v3/report.json",
+  "limitations": [
+    "Leaf surfaces do not receive neighboring-object or self shadows in this candidate",
+    "Close views still reveal repeated flat leaf shapes",
+    "Forest performance, NPC collisions and world lighting integration remain untested"
+  ]
+}

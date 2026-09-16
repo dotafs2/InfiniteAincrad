@@ -45,3 +45,7 @@ Thumbs.db
 *.blend2
 assets/characters/kirito/
 Art/ExistingSAO/
+# Local transfer bundles can contain private world state; public sources live in Art/.
+/Transfer/
+/deliveries/
+/patch-h60b.tmp

@@ -1,0 +1,162 @@
+{
+  "fixture": false,
+  "generated_at_utc": "2026-09-16T03:15:52.904724+00:00",
+  "size": 1024,
+  "overview": [
+    1800,
+    1200
+  ],
+  "blender": "5.2.1 LTS",
+  "houses": [
+    {
+      "id": "meshy_refine",
+      "name_zh": "Meshy 7",
+      "source_glb": "C:/InfiniteAincrad/exports/tripo-meshy-comparison-20260916/meshy_refine.glb",
+      "engine": "BLENDER_EEVEE",
+      "presentation_scale": 0.52547,
+      "display_bounds_min": [
+        -0.4202,
+        -0.3654,
+        0.0
+      ],
+      "display_bounds_max": [
+        0.4202,
+        0.3654,
+        1.0
+      ],
+      "renders": {
+        "front34": "C:\\InfiniteAincrad\\exports\\tripo-meshy-comparison-20260916\\renders\\meshy_refine-front34.png",
+        "side128": "C:\\InfiniteAincrad\\exports\\tripo-meshy-comparison-20260916\\renders\\meshy_refine-side128.png",
+        "back34": "C:\\InfiniteAincrad\\exports\\tripo-meshy-comparison-20260916\\renders\\meshy_refine-back34.png",
+        "side308": "C:\\InfiniteAincrad\\exports\\tripo-meshy-comparison-20260916\\renders\\meshy_refine-side308.png"
+      },
+      "view_azimuths": {
+        "front34": 38.0,
+        "side128": 128.0,
+        "back34": 218.0,
+        "side308": 308.0
+      },
+      "blend": "C:/InfiniteAincrad/exports/tripo-meshy-comparison-20260916/blend/meshy_refine.blend",
+      "raw": {
+        "triangles": 77478,
+        "vertices": 95928,
+        "materials": [
+          "Material_0"
+        ],
+        "textures": [
+          "Image_0",
+          "Image_1",
+          "Image_2"
+        ],
+        "texture_sizes": {
+          "Image_0": [
+            4096,
+            4096
+          ],
+          "Image_1": [
+            2048,
+            2048
+          ],
+          "Image_2": [
+            4096,
+            4096
+          ]
+        },
+        "bounds_min": [
+          -0.7993,
+          -0.693,
+          -0.9519
+        ],
+        "bounds_max": [
+          0.8001,
+          0.6977,
+          0.9512
+        ],
+        "bounds_size": [
+          1.5994,
+          1.3907,
+          1.9031
+        ],
+        "max_dimension": 1.9031
+      },
+      "note": "bounds and scale are presentation values from generation geometry, not verified real-world building dimensions"
+    },
+    {
+      "id": "tripo",
+      "name_zh": "Tripo H3.1",
+      "source_glb": "C:/InfiniteAincrad/exports/tripo-meshy-comparison-20260916/tripo.glb",
+      "engine": "BLENDER_EEVEE",
+      "presentation_scale": 1.0,
+      "display_bounds_min": [
+        -0.424,
+        -0.5,
+        0.0
+      ],
+      "display_bounds_max": [
+        0.424,
+        0.5,
+        0.8057
+      ],
+      "renders": {
+        "front34": "C:\\InfiniteAincrad\\exports\\tripo-meshy-comparison-20260916\\renders\\tripo-front34.png",
+        "side128": "C:\\InfiniteAincrad\\exports\\tripo-meshy-comparison-20260916\\renders\\tripo-side128.png",
+        "back34": "C:\\InfiniteAincrad\\exports\\tripo-meshy-comparison-20260916\\renders\\tripo-back34.png",
+        "side308": "C:\\InfiniteAincrad\\exports\\tripo-meshy-comparison-20260916\\renders\\tripo-side308.png"
+      },
+      "view_azimuths": {
+        "front34": 38.0,
+        "side128": 128.0,
+        "back34": 218.0,
+        "side308": 308.0
+      },
+      "blend": "C:/InfiniteAincrad/exports/tripo-meshy-comparison-20260916/blend/tripo.blend",
+      "raw": {
+        "triangles": 72970,
+        "vertices": 42987,
+        "materials": [
+          "tripo_material_d2430eb1-5367-4b49-92e0-92ab3d4b00c8"
+        ],
+        "textures": [
+          "Color_d2430eb1-5367-4b49-92e0-92ab3d4b00c8",
+          "NormalGL_d2430eb1-5367-4b49-92e0-92ab3d4b00c8",
+          "ORM_d2430eb1-5367-4b49-92e0-92ab3d4b00c8"
+        ],
+        "texture_sizes": {
+          "Color_d2430eb1-5367-4b49-92e0-92ab3d4b00c8": [
+            4096,
+            4096
+          ],
+          "NormalGL_d2430eb1-5367-4b49-92e0-92ab3d4b00c8": [
+            4096,
+            4096
+          ],
+          "ORM_d2430eb1-5367-4b49-92e0-92ab3d4b00c8": [
+            4096,
+            4096
+          ]
+        },
+        "bounds_min": [
+          -0.424,
+          -0.5,
+          -0.4028
+        ],
+        "bounds_max": [
+          0.424,
+          0.5,
+          0.4028
+        ],
+        "bounds_size": [
+          0.848,
+          1.0,
+          0.8057
+        ],
+        "max_dimension": 1.0
+      },
+      "note": "bounds and scale are presentation values from generation geometry, not verified real-world building dimensions"
+    }
+  ],
+  "missing": [],
+  "overview_path": "C:\\InfiniteAincrad\\exports\\tripo-meshy-comparison-20260916\\overview.png",
+  "rendered_count": 2,
+  "note": "offline render of the downloaded GLBs; geometry is the untouched import"
+}

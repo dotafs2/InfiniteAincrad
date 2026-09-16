@@ -1,0 +1,1428 @@
+{
+	"checks": [
+		{
+			"details": {
+				"instances": 20.0,
+				"missing": []
+			},
+			"id": "tripo/all_18_assets",
+			"pass": true
+		},
+		{
+			"details": {
+				"stopped_z": 3.7959361076355
+			},
+			"id": "tripo/closed_door_blocks_capsule",
+			"pass": true
+		},
+		{
+			"details": {
+				"entered_z": 1.19256019592285
+			},
+			"id": "tripo/open_door_capsule_enters",
+			"pass": true
+		},
+		{
+			"details": {
+				"exit_z": 5.16681814193726
+			},
+			"id": "tripo/capsule_exits",
+			"pass": true
+		},
+		{
+			"details": {
+				"stop_x": -3.60857486724854
+			},
+			"id": "tripo/wall_blocks_capsule",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/floor_(0.0, 0.0, -1.8)",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/floor_(-1.5, 0.0, 1.2)",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/floor_(1.3, 0.0, 1.6)",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/ceiling_collision",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#35114714802>",
+				"open_hit": "none"
+			},
+			"id": "tripo/window_WindowSash_07",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/fixed_mullion_WindowSash_07",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#35852912342>",
+				"open_hit": "none"
+			},
+			"id": "tripo/window_WindowSash_06",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/fixed_mullion_WindowSash_06",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#36591109858>",
+				"open_hit": "none"
+			},
+			"id": "tripo/window_WindowSash_05",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/fixed_mullion_WindowSash_05",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#37329307374>",
+				"open_hit": "none"
+			},
+			"id": "tripo/window_WindowSash_04",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/fixed_mullion_WindowSash_04",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#38067504890>",
+				"open_hit": "none"
+			},
+			"id": "tripo/window_WindowSash_03",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/fixed_mullion_WindowSash_03",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#38805702406>",
+				"open_hit": "none"
+			},
+			"id": "tripo/window_WindowSash_02",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/fixed_mullion_WindowSash_02",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#39543899922>",
+				"open_hit": "none"
+			},
+			"id": "tripo/window_WindowSash_01",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/fixed_mullion_WindowSash_01",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#40282097438>",
+				"open_hit": "none"
+			},
+			"id": "tripo/window_WindowSash_00",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/fixed_mullion_WindowSash_00",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/Bed",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/Chest",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/CookingHearth",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/Workbench",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/Anvil",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/WeaponRack",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/Shelf",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/DiningTable",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/DiningChairA",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/DiningChairB",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/Sword",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/WorkLantern",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/Shield",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/MealA",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/MealB",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/WaterJug",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/PotionA",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/PotionB",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/BedLantern",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/prop_collision/CookingPot",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/placed_on_support/Sword",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/placed_on_support/WorkLantern",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/placed_on_support/MealA",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/placed_on_support/MealB",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/placed_on_support/WaterJug",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/placed_on_support/PotionA",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/placed_on_support/PotionB",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/state_roundtrip",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "tripo/unique_instance_ids",
+			"pass": true
+		},
+		{
+			"details": {
+				"instances": 20.0,
+				"missing": []
+			},
+			"id": "meshy/all_18_assets",
+			"pass": true
+		},
+		{
+			"details": {
+				"stopped_z": 3.80054092407227
+			},
+			"id": "meshy/closed_door_blocks_capsule",
+			"pass": true
+		},
+		{
+			"details": {
+				"entered_z": 1.19169628620148
+			},
+			"id": "meshy/open_door_capsule_enters",
+			"pass": true
+		},
+		{
+			"details": {
+				"exit_z": 5.16682004928589
+			},
+			"id": "meshy/capsule_exits",
+			"pass": true
+		},
+		{
+			"details": {
+				"stop_x": -3.60315108299255
+			},
+			"id": "meshy/wall_blocks_capsule",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/floor_(0.0, 0.0, -1.8)",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/floor_(-1.5, 0.0, 1.2)",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/floor_(1.3, 0.0, 1.6)",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/ceiling_collision",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#75161929987>",
+				"open_hit": "none"
+			},
+			"id": "meshy/window_WindowSash_07",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/fixed_mullion_WindowSash_07",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#75900127527>",
+				"open_hit": "none"
+			},
+			"id": "meshy/window_WindowSash_06",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/fixed_mullion_WindowSash_06",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#76638325043>",
+				"open_hit": "none"
+			},
+			"id": "meshy/window_WindowSash_05",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/fixed_mullion_WindowSash_05",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#77376522559>",
+				"open_hit": "none"
+			},
+			"id": "meshy/window_WindowSash_04",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/fixed_mullion_WindowSash_04",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#78114720075>",
+				"open_hit": "none"
+			},
+			"id": "meshy/window_WindowSash_03",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/fixed_mullion_WindowSash_03",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#78852917591>",
+				"open_hit": "none"
+			},
+			"id": "meshy/window_WindowSash_02",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/fixed_mullion_WindowSash_02",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#79591115107>",
+				"open_hit": "none"
+			},
+			"id": "meshy/window_WindowSash_01",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/fixed_mullion_WindowSash_01",
+			"pass": true
+		},
+		{
+			"details": {
+				"closed_hit": "ShutterPhysical:<StaticBody3D#80329312623>",
+				"open_hit": "none"
+			},
+			"id": "meshy/window_WindowSash_00",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/fixed_mullion_WindowSash_00",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/Bed",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/Chest",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/CookingHearth",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/Workbench",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/Anvil",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/WeaponRack",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/Shelf",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/DiningTable",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/DiningChairA",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/DiningChairB",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/Sword",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/WorkLantern",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/Shield",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/MealA",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/MealB",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/WaterJug",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/PotionA",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/PotionB",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/BedLantern",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/prop_collision/CookingPot",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/placed_on_support/Sword",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/placed_on_support/WorkLantern",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/placed_on_support/MealA",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/placed_on_support/MealB",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/placed_on_support/WaterJug",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/placed_on_support/PotionA",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/placed_on_support/PotionB",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/state_roundtrip",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "meshy/unique_instance_ids",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/00_two_houses_closed",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/tripo_01_entrance",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/tripo_02_inside",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/tripo_03_workshop",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/tripo_04_living",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/tripo_05_kitchen",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/tripo_06_window_open",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/tripo_07_window_closed",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/meshy_01_entrance",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/meshy_02_inside",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/meshy_03_workshop",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/meshy_04_living",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/meshy_05_kitchen",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/meshy_06_window_open",
+			"pass": true
+		},
+		{
+			"details": {},
+			"id": "capture/meshy_07_window_closed",
+			"pass": true
+		}
+	],
+	"failures": 0,
+	"houses": [
+		{
+			"missing": [],
+			"props": 20,
+			"provider": "tripo",
+			"transforms": {
+				"Anvil": {
+					"id": "anvil",
+					"position": [
+						2.90000009536743,
+						0.0299999993294477,
+						-0.649999976158142
+					],
+					"uniform_scale": 0.85,
+					"yaw_degrees": 0.0
+				},
+				"Bed": {
+					"id": "bed",
+					"position": [
+						-2.65000009536743,
+						0.0299999993294477,
+						-1.64999997615814
+					],
+					"uniform_scale": 2.1,
+					"yaw_degrees": 0.0
+				},
+				"BedLantern": {
+					"id": "lantern",
+					"position": [
+						-3.45000004768372,
+						0.0299999993294477,
+						0.0
+					],
+					"uniform_scale": 0.35,
+					"yaw_degrees": 0.0
+				},
+				"Chest": {
+					"id": "chest",
+					"position": [
+						-2.70000004768372,
+						0.0299999993294477,
+						0.0
+					],
+					"uniform_scale": 1.0,
+					"yaw_degrees": 0.0
+				},
+				"CookingHearth": {
+					"id": "hearth",
+					"position": [
+						-3.0,
+						0.0299999993294477,
+						1.85000002384186
+					],
+					"uniform_scale": 1.9,
+					"yaw_degrees": 90.0
+				},
+				"CookingPot": {
+					"id": "cooking_pot",
+					"position": [
+						-2.09999990463257,
+						0.0299999993294477,
+						2.09999990463257
+					],
+					"uniform_scale": 0.4,
+					"yaw_degrees": 0.0
+				},
+				"DiningChairA": {
+					"id": "chair",
+					"position": [
+						-0.899999976158142,
+						0.0299999993294477,
+						-0.150000005960464
+					],
+					"uniform_scale": 0.95,
+					"yaw_degrees": 90.0
+				},
+				"DiningChairB": {
+					"id": "chair",
+					"position": [
+						1.45000004768372,
+						0.0299999993294477,
+						-0.150000005960464
+					],
+					"uniform_scale": 0.95,
+					"yaw_degrees": -90.0
+				},
+				"DiningTable": {
+					"id": "table",
+					"position": [
+						0.300000011920929,
+						0.0299999993294477,
+						-0.150000005960464
+					],
+					"uniform_scale": 1.35,
+					"yaw_degrees": 0.0
+				},
+				"DoorVisual0": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						1.57430624961853,
+						2.15000009536743,
+						1.01823949813843
+					],
+					"id": "door_leaf"
+				},
+				"MealA": {
+					"id": "meal",
+					"position": [
+						-0.0500001907348633,
+						0.832987427711487,
+						-0.100000001490116
+					],
+					"support": "DiningTable",
+					"uniform_scale": 0.300000035762791,
+					"yaw_degrees": 0.0
+				},
+				"MealB": {
+					"id": "meal",
+					"position": [
+						0.699999809265137,
+						0.831505656242371,
+						-0.100000001490116
+					],
+					"support": "DiningTable",
+					"uniform_scale": 0.300000035762791,
+					"yaw_degrees": 180.0
+				},
+				"PotionA": {
+					"id": "potion",
+					"position": [
+						0.199999809265137,
+						0.83168762922287,
+						0.100000001490116
+					],
+					"support": "DiningTable",
+					"uniform_scale": 0.18,
+					"yaw_degrees": 0.0
+				},
+				"PotionB": {
+					"id": "potion",
+					"position": [
+						0.429999828338623,
+						0.833799064159393,
+						0.100000001490116
+					],
+					"support": "DiningTable",
+					"uniform_scale": 0.18,
+					"yaw_degrees": 0.0
+				},
+				"Shelf": {
+					"id": "shelf",
+					"position": [
+						-0.400000005960464,
+						0.0299999993294477,
+						-2.92000007629395
+					],
+					"uniform_scale": 1.8,
+					"yaw_degrees": 0.0
+				},
+				"Shield": {
+					"id": "shield",
+					"position": [
+						2.90000009536743,
+						0.0399999991059303,
+						2.27999997138977
+					],
+					"uniform_scale": 0.65,
+					"yaw_degrees": -90.0
+				},
+				"ShutterVisual1": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual10": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual11": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual12": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual13": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual14": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual15": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual16": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual2": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual3": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual4": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual5": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual6": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual7": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual8": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual9": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.614249229431152,
+						1.25999999046326,
+						0.326719343662262
+					],
+					"id": "shutter_leaf"
+				},
+				"Sword": {
+					"id": "sword",
+					"position": [
+						2.25,
+						1.02396070957184,
+						-2.45000004768372
+					],
+					"support": "Workbench",
+					"uniform_scale": 0.672146006325471,
+					"yaw_degrees": 0.0
+				},
+				"WaterJug": {
+					"id": "jug",
+					"position": [
+						0.300000190734863,
+						0.834172129631042,
+						-0.349999994039536
+					],
+					"support": "DiningTable",
+					"uniform_scale": 0.3,
+					"yaw_degrees": 0.0
+				},
+				"WeaponRack": {
+					"id": "weapon_rack",
+					"position": [
+						3.0,
+						0.0299999993294477,
+						1.5
+					],
+					"uniform_scale": 1.5,
+					"yaw_degrees": -90.0
+				},
+				"WorkLantern": {
+					"id": "lantern",
+					"position": [
+						3.02999997138977,
+						1.03136777877808,
+						-2.57999992370605
+					],
+					"support": "Workbench",
+					"uniform_scale": 0.35,
+					"yaw_degrees": 0.0
+				},
+				"Workbench": {
+					"id": "workbench",
+					"position": [
+						2.5,
+						0.0299999993294477,
+						-2.59999990463257
+					],
+					"uniform_scale": 1.8,
+					"yaw_degrees": 0.0
+				}
+			},
+			"windows": 8
+		},
+		{
+			"missing": [],
+			"props": 20,
+			"provider": "meshy",
+			"transforms": {
+				"Anvil": {
+					"id": "anvil",
+					"position": [
+						2.90000009536743,
+						0.0299999993294477,
+						-0.649999976158142
+					],
+					"uniform_scale": 0.446460902626194,
+					"yaw_degrees": 0.0
+				},
+				"Bed": {
+					"id": "bed",
+					"position": [
+						-2.65000009536743,
+						0.0299999993294477,
+						-1.64999997615814
+					],
+					"uniform_scale": 1.10400756256924,
+					"yaw_degrees": 0.0
+				},
+				"BedLantern": {
+					"id": "lantern",
+					"position": [
+						-3.45000004768372,
+						0.0299999993294477,
+						0.0
+					],
+					"uniform_scale": 0.18401595265947,
+					"yaw_degrees": 0.0
+				},
+				"Chest": {
+					"id": "chest",
+					"position": [
+						-2.70000004768372,
+						0.0299999993294477,
+						0.0
+					],
+					"uniform_scale": 0.525252560671102,
+					"yaw_degrees": 0.0
+				},
+				"CookingHearth": {
+					"id": "hearth",
+					"position": [
+						-3.0,
+						0.0299999993294477,
+						1.85000002384186
+					],
+					"uniform_scale": 0.998164490435169,
+					"yaw_degrees": 90.0
+				},
+				"CookingPot": {
+					"id": "cooking_pot",
+					"position": [
+						-2.09999990463257,
+						0.0299999993294477,
+						2.09999990463257
+					],
+					"uniform_scale": 0.210316336669285,
+					"yaw_degrees": 0.0
+				},
+				"DiningChairA": {
+					"id": "chair",
+					"position": [
+						-0.899999976158142,
+						0.0299999993294477,
+						-0.150000005960464
+					],
+					"uniform_scale": 0.49936555231488,
+					"yaw_degrees": 90.0
+				},
+				"DiningChairB": {
+					"id": "chair",
+					"position": [
+						1.45000004768372,
+						0.0299999993294477,
+						-0.150000005960464
+					],
+					"uniform_scale": 0.49936555231488,
+					"yaw_degrees": -90.0
+				},
+				"DiningTable": {
+					"id": "table",
+					"position": [
+						0.300000011920929,
+						0.0299999993294477,
+						-0.150000005960464
+					],
+					"uniform_scale": 0.709668312170514,
+					"yaw_degrees": 0.0
+				},
+				"DoorVisual0": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						1.13862335681915,
+						1.13003873825073,
+						1.15023767948151
+					],
+					"id": "door_leaf"
+				},
+				"MealA": {
+					"id": "meal",
+					"position": [
+						-0.0500001907348633,
+						0.636539041996002,
+						-0.100000001490116
+					],
+					"support": "DiningTable",
+					"uniform_scale": 0.157652449280674,
+					"yaw_degrees": 0.0
+				},
+				"MealB": {
+					"id": "meal",
+					"position": [
+						0.699999809265137,
+						0.636010944843292,
+						-0.100000001490116
+					],
+					"support": "DiningTable",
+					"uniform_scale": 0.157652449280674,
+					"yaw_degrees": 180.0
+				},
+				"PotionA": {
+					"id": "potion",
+					"position": [
+						0.199999809265137,
+						0.636642932891846,
+						0.100000001490116
+					],
+					"support": "DiningTable",
+					"uniform_scale": 0.0946582284702367,
+					"yaw_degrees": 0.0
+				},
+				"PotionB": {
+					"id": "potion",
+					"position": [
+						0.429999828338623,
+						0.636021256446838,
+						0.100000001490116
+					],
+					"support": "DiningTable",
+					"uniform_scale": 0.0946582284702367,
+					"yaw_degrees": 0.0
+				},
+				"Shelf": {
+					"id": "shelf",
+					"position": [
+						-0.400000005960464,
+						0.0299999993294477,
+						-2.92000007629395
+					],
+					"uniform_scale": 0.945833164727184,
+					"yaw_degrees": 0.0
+				},
+				"Shield": {
+					"id": "shield",
+					"position": [
+						2.90000009536743,
+						0.0399999991059303,
+						2.27999997138977
+					],
+					"uniform_scale": 0.341949228967338,
+					"yaw_degrees": -90.0
+				},
+				"ShutterVisual1": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual10": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual11": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual12": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual13": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual14": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual15": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual16": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual2": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual3": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual4": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual5": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual6": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual7": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual8": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"ShutterVisual9": {
+					"fit_reason": "existing hinge aperture",
+					"fit_xyz": [
+						0.378161400556564,
+						0.662244260311127,
+						0.294623821973801
+					],
+					"id": "shutter_leaf"
+				},
+				"Sword": {
+					"id": "sword",
+					"position": [
+						2.25,
+						0.993659496307373,
+						-2.45000004768372
+					],
+					"support": "Workbench",
+					"uniform_scale": 0.525557187761119,
+					"yaw_degrees": 0.0
+				},
+				"WaterJug": {
+					"id": "jug",
+					"position": [
+						0.300000190734863,
+						0.636723518371582,
+						-0.349999994039536
+					],
+					"support": "DiningTable",
+					"uniform_scale": 0.157735176293452,
+					"yaw_degrees": 0.0
+				},
+				"WeaponRack": {
+					"id": "weapon_rack",
+					"position": [
+						3.0,
+						0.0299999993294477,
+						1.5
+					],
+					"uniform_scale": 0.788965516203564,
+					"yaw_degrees": -90.0
+				},
+				"WorkLantern": {
+					"id": "lantern",
+					"position": [
+						3.02999973297119,
+						0.986122488975525,
+						-2.57999992370605
+					],
+					"support": "Workbench",
+					"uniform_scale": 0.18401595265947,
+					"yaw_degrees": 0.0
+				},
+				"Workbench": {
+					"id": "workbench",
+					"position": [
+						2.5,
+						0.0299999993294477,
+						-2.59999990463257
+					],
+					"uniform_scale": 0.945476987196185,
+					"yaw_degrees": 0.0
+				}
+			},
+			"windows": 8
+		}
+	]
+}

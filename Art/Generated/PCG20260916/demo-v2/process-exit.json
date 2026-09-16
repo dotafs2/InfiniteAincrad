@@ -1,0 +1,25 @@
+{
+  "containment": "windows_kill_on_close_job",
+  "wrapper_pid": 80760,
+  "observed_members": [
+    {
+      "pid": 80760,
+      "creation_time_windows_100ns": 134340388198970714,
+      "running": false,
+      "exit_code": 130
+    }
+  ],
+  "total_assigned_processes": 1,
+  "active_processes": 0,
+  "member_identity_list_complete": true,
+  "observed_nonzero_exits": [
+    {
+      "pid": 80760,
+      "creation_time_windows_100ns": 134340388198970714,
+      "running": false,
+      "exit_code": 130
+    }
+  ],
+  "all_member_exit_codes_known": true,
+  "all_members_exited": true
+}

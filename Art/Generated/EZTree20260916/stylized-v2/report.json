@@ -1,0 +1,24 @@
+{
+	"foliage_shader": "FaRu85/Godot-Foliage MIT, adapted for two-sided toon/cutout",
+	"ground_shadow_casting": true,
+	"identical_branch_geometry": true,
+	"leaf_mask": "FaRu85 Leaves001-04.png CC0",
+	"leaf_processing": "retain first quad of every fourth native leaf; enlarge 2.3 around original attachment; bend shading normals",
+	"leaf_shadow_reception": false,
+	"paid_calls": 0,
+	"same_lighting_and_camera": true,
+	"specimens": [
+		{
+			"id": "original",
+			"label": "调整前 · 原始材质",
+			"triangles": 24352
+		},
+		{
+			"id": "stylized",
+			"label": "调整后 · 叶簇与柔和色块",
+			"triangles": 6964
+		}
+	],
+	"town_placement": false,
+	"wind_paused_for_comparison": true
+}

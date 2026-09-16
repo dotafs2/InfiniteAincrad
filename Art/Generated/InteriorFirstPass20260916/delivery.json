@@ -1,0 +1,23 @@
+{
+  "archive": "exports/interior-first-pass-20260916/FirstPassHomes-Godot.zip",
+  "bytes": 385645679,
+  "sha256": "6ba4f4f6862ee3ef7fa21d46e3b1a1d7a5f932747834ac0bea554fe3a152064c",
+  "file_count": 50,
+  "models": 36,
+  "authored_shells": 1,
+  "houses_in_scene": 2,
+  "no_credentials_or_private_state": true,
+  "controls": {
+    "move": "WASD",
+    "look": "click + mouse",
+    "door": "E near entrance",
+    "windows": "Q",
+    "choose_house": "1 / 2",
+    "jump": "Space",
+    "save": "F5",
+    "load": "F9",
+    "release_cursor": "Esc"
+  },
+  "launch": "Extract archive, run Start.cmd (uses installed Godot 4.7), or import project.godot in Godot.",
+  "first_import": "Godot builds its own texture/import cache on first launch; no model API is called."
+}

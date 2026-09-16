@@ -832,12 +832,37 @@ func _validate_state(value: Variant) -> Dictionary:
 		if not layout.command_id is String or not layout.command_id.begins_with("development_gm:") or not _validate_decision_command_id(layout.command_id).ok or not _valid_foraging_spots(layout.positions, _vector(g.berry_position), active):
 			return _failure("invalid_foraging_work_spots")
 		var matching_installs := 0
+		# A reviewed spatial migration keeps the installation event verbatim. Its explicit
+		# before/after record bridges the old source coordinates to the current physical ring.
+		var evidence_spots: Dictionary = layout.positions
+		var evidence_center: Array = g.berry_position
+		if g.has("spatial_layout"):
+			var migration: Variant = g.spatial_layout
+			if not migration is Dictionary or migration.get("id") != "first-floor-market-quarter-v1":
+				return _failure("unsupported_spatial_layout")
+			var before: Variant = migration.get("foraging_before")
+			var after: Variant = migration.get("foraging_after")
+			if not before is Dictionary or not after is Dictionary or not _valid_position(before.get("center")) or not _valid_position(after.get("center")):
+				return _failure("invalid_spatial_foraging_record")
+			if not _valid_foraging_spots(before.get("positions"), _vector(before.center), active) or not after.get("positions") is Dictionary:
+				return _failure("invalid_spatial_foraging_record")
+			if not _same_foraging_spots(after.positions, layout.positions) or not _same_foraging_position(after.center, g.berry_position):
+				return _failure("invalid_spatial_foraging_record")
+			if not _exact_keys(before.positions, after.positions.keys()):
+				return _failure("invalid_spatial_foraging_record")
+			var shift: Vector3 = _vector(after.center) - _vector(before.center)
+			for id in after.positions:
+				var offset: Vector3 = _vector(after.positions[id]) - _vector(before.positions[id]) - shift
+				if absf(offset.x) > 0.001 or absf(offset.z) > 0.001 or absf(offset.y) > 0.1:
+					return _failure("invalid_spatial_foraging_transform")
+			evidence_spots = before.positions
+			evidence_center = before.center
 		for event in value.life.events:
 			if event.get("type", "") != "foraging_work_spots_installed":
 				continue
 			if event.get("operation_id", "") != layout.command_id or event.get("actor_id", "") != "development_gm" or event.get("source", "") != "development_gm_review" or event.get("recipient_ids") != [] or event.has("text"):
 				return _failure("invalid_foraging_work_spot_evidence")
-			if not event.get("positions") is Dictionary or not _same_foraging_spots(event.positions, layout.positions) or not _same_foraging_position(event.get("berry_center"), g.berry_position):
+			if not event.get("positions") is Dictionary or not _same_foraging_spots(event.positions, evidence_spots) or not _same_foraging_position(event.get("berry_center"), evidence_center):
 				return _failure("invalid_foraging_work_spot_evidence")
 			matching_installs += 1
 		if matching_installs != 1:

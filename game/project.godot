@@ -9,6 +9,9 @@ config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 [dotnet]
 project/assembly_name="InfiniteAincrad"
 
+[editor_plugins]
+enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/road-generator/plugin.cfg", "res://addons/simplegrasstextured/plugin.cfg", "res://addons/ez-tree-godot-port/plugin.cfg")
+
 [display]
 window/size/viewport_width=1400
 window/size/viewport_height=900
@@ -25,3 +28,48 @@ lights_and_shadows/use_physical_light_units=false
 environment/defaults/default_clear_color=Color(0.12, 0.16, 0.17, 1)
 
 anti_aliasing/quality/msaa_3d=2
+
+[autoload]
+SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
+
+[shader_globals]
+sgt_legacy_renderer={
+"type": "int",
+"value": 0
+}
+sgt_player_position={
+"type": "vec3",
+"value": Vector3(1000000, 1000000, 1000000)
+}
+sgt_player_mov={
+"type": "vec3",
+"value": Vector3(0, 0, 0)
+}
+sgt_normal_displacement={
+"type": "sampler2D",
+"value": "res://addons/simplegrasstextured/images/normal.png"
+}
+sgt_motion_texture={
+"type": "sampler2D",
+"value": "res://addons/simplegrasstextured/images/motion.png"
+}
+sgt_wind_direction={
+"type": "vec3",
+"value": Vector3(0.9, 0, 0.3)
+}
+sgt_wind_movement={
+"type": "vec3",
+"value": Vector3(0, 0, 0)
+}
+sgt_wind_strength={
+"type": "float",
+"value": 0.12
+}
+sgt_wind_turbulence={
+"type": "float",
+"value": 0.7
+}
+sgt_wind_pattern={
+"type": "sampler2D",
+"value": "res://addons/simplegrasstextured/images/wind_pattern.png"
+}

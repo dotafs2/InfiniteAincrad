@@ -21,3 +21,13 @@ third_party/OpenGameAgent/** -text
 game/addons/open_game_agent/** -text
 # Keep generated evidence and frozen source snapshots byte-identical to receipts.
 Art/Generated/*20260916/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
+# Preserve the installed upstream plugin bytes and their licenses/provenance.
+game/addons/ez-tree-godot-port/** -text
+game/addons/proton_scatter/** -text
+game/addons/road-generator/** -text
+game/addons/simplegrasstextured/** -text
+game/addons/terrain_3d/** -text
+experiments/ez-tree-trial/addons/** -text
+experiments/ez-tree-trial/vendor/** -text
+experiments/ez-tree-trial/stylized/third_party/** -text
+Art/Generated/PCG20260916/model-review/*.zip filter=lfs diff=lfs merge=lfs -text
