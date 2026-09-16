@@ -1,0 +1,21 @@
+{
+  "name": "EZ-Tree For Godot",
+  "plugin_version": "0.2.0",
+  "retrieved_date": "2026-09-16",
+  "listing": "https://store.godotengine.org/asset/leomclaughlin4/ez-tree-godot-port/",
+  "download": "https://store.godotengine.org/asset/leomclaughlin4/ez-tree-godot-port/download/5633/",
+  "source": "https://github.com/leomclaughlin4/ez-tree-godot-port/tree/main",
+  "archive_sha256": "8d165091778eac55f3607cdcd0cbb94a26f627d159d2e3afbe5cab6cca6cf16e",
+  "archive_bytes": 2763397,
+  "upstream_status": "Publisher marks this version unstable",
+  "license": "MIT; included bark maps credited by upstream to ambientCG CC0",
+  "installation_changes": [
+    "Excluded upstream .import cache metadata; Godot rebuilt local imports",
+    "Normalized addon folder name to lowercase to match upstream res:// references"
+  ],
+  "plugin_source_edits": 0,
+  "trial_scene": "trial.tscn",
+  "controls": "1: overview; 2/3/4: individual trees; left drag: orbit selected tree; Escape: exit",
+  "results": "../../Art/Generated/EZTree20260916/report.json",
+  "scope": "Isolated visual trial with three parameter presets; no town placement or forest performance claim"
+}

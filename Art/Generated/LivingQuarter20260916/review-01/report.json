@@ -1,0 +1,391 @@
+{
+	"life_seq": 129,
+	"mode": "paused_physics_diagnostic_no_model_calls",
+	"navigation": "ready",
+	"physical_walks": [],
+	"residents": [
+		{
+			"home": [
+				-11.8999996185303,
+				0.0450000017881393,
+				3.0
+			],
+			"id": "shared:well-keeper",
+			"name": "阿岚",
+			"position": [
+				-7.0,
+				0.0599999986588955,
+				4.0
+			],
+			"screen": [
+				779.549499511719,
+				353.077758789063
+			]
+		},
+		{
+			"home": [
+				11.8000001907349,
+				0.0450000017881393,
+				-14.8999996185303
+			],
+			"id": "shared:baker",
+			"name": "白枝",
+			"position": [
+				6.0,
+				0.0599999986588955,
+				-15.0
+			],
+			"screen": [
+				890.227111816406,
+				338.403839111328
+			]
+		},
+		{
+			"home": [
+				-30.6932621002197,
+				0.0450000017881393,
+				29.9053401947021
+			],
+			"id": "shared:smith",
+			"name": "石青",
+			"position": [
+				-24.0,
+				0.0599999986588955,
+				36.0
+			],
+			"screen": [
+				610.074462890625,
+				389.762542724609
+			]
+		},
+		{
+			"home": [
+				-33.1573524475098,
+				0.0450000017881393,
+				51.2929344177246
+			],
+			"id": "shared:carpenter",
+			"name": "木生",
+			"position": [
+				-26.0,
+				0.0599999986588955,
+				48.0
+			],
+			"screen": [
+				561.653015136719,
+				414.219055175781
+			]
+		},
+		{
+			"home": [
+				12.8000001907349,
+				0.0450000017881393,
+				7.09999990463257
+			],
+			"id": "shared:innkeeper",
+			"name": "灯姐",
+			"position": [
+				6.0,
+				0.0599999986588955,
+				10.0
+			],
+			"screen": [
+				803.76025390625,
+				399.545166015625
+			]
+		},
+		{
+			"home": [
+				35.4500007629395,
+				0.0450000017881393,
+				82.0473709106445
+			],
+			"id": "shared:herder",
+			"name": "草见",
+			"position": [
+				31.0,
+				0.0599999986588955,
+				77.0
+			],
+			"screen": [
+				658.495910644531,
+				624.545166015625
+			]
+		},
+		{
+			"home": [
+				-13.6237773895264,
+				0.0450000017881393,
+				62.9663391113281
+			],
+			"id": "shared:gardener",
+			"name": "叶禾",
+			"position": [
+				-12.0,
+				0.0599999986588955,
+				59.0
+			],
+			"screen": [
+				572.028991699219,
+				475.360382080078
+			]
+		},
+		{
+			"home": [
+				12.8000001907349,
+				0.0450000017881393,
+				31.1000003814697
+			],
+			"id": "shared:weaver",
+			"name": "细娘",
+			"position": [
+				6.0,
+				0.0599999986588955,
+				31.0
+			],
+			"screen": [
+				731.128051757813,
+				450.903839111328
+			]
+		},
+		{
+			"home": [
+				33.9167098999023,
+				0.0450000017881393,
+				52.8089866638184
+			],
+			"id": "shared:fisher",
+			"name": "渡白",
+			"position": [
+				28.0,
+				0.0599999986588955,
+				52.0
+			],
+			"screen": [
+				734.586730957031,
+				556.06689453125
+			]
+		},
+		{
+			"home": [
+				-30.0989322662354,
+				1.24500000476837,
+				79.3690643310547
+			],
+			"id": "shared:healer",
+			"name": "枚青",
+			"position": [
+				-23.0,
+				0.765789151191711,
+				77.0
+			],
+			"screen": [
+				471.727478027344,
+				490.038848876953
+			]
+		}
+	],
+	"routes": [
+		{
+			"place": "market_plaza",
+			"reaches": true,
+			"resident": "shared:well-keeper"
+		},
+		{
+			"place": "west_forecourt",
+			"reaches": true,
+			"resident": "shared:well-keeper"
+		},
+		{
+			"place": "planted_commons",
+			"reaches": true,
+			"resident": "shared:well-keeper"
+		},
+		{
+			"place": "caravan_rest",
+			"reaches": true,
+			"resident": "shared:well-keeper"
+		},
+		{
+			"place": "market_plaza",
+			"reaches": true,
+			"resident": "shared:baker"
+		},
+		{
+			"place": "west_forecourt",
+			"reaches": true,
+			"resident": "shared:baker"
+		},
+		{
+			"place": "planted_commons",
+			"reaches": true,
+			"resident": "shared:baker"
+		},
+		{
+			"place": "caravan_rest",
+			"reaches": true,
+			"resident": "shared:baker"
+		},
+		{
+			"place": "market_plaza",
+			"reaches": true,
+			"resident": "shared:smith"
+		},
+		{
+			"place": "west_forecourt",
+			"reaches": true,
+			"resident": "shared:smith"
+		},
+		{
+			"place": "planted_commons",
+			"reaches": true,
+			"resident": "shared:smith"
+		},
+		{
+			"place": "caravan_rest",
+			"reaches": true,
+			"resident": "shared:smith"
+		},
+		{
+			"place": "market_plaza",
+			"reaches": true,
+			"resident": "shared:carpenter"
+		},
+		{
+			"place": "west_forecourt",
+			"reaches": true,
+			"resident": "shared:carpenter"
+		},
+		{
+			"place": "planted_commons",
+			"reaches": true,
+			"resident": "shared:carpenter"
+		},
+		{
+			"place": "caravan_rest",
+			"reaches": true,
+			"resident": "shared:carpenter"
+		},
+		{
+			"place": "market_plaza",
+			"reaches": true,
+			"resident": "shared:innkeeper"
+		},
+		{
+			"place": "west_forecourt",
+			"reaches": true,
+			"resident": "shared:innkeeper"
+		},
+		{
+			"place": "planted_commons",
+			"reaches": true,
+			"resident": "shared:innkeeper"
+		},
+		{
+			"place": "caravan_rest",
+			"reaches": true,
+			"resident": "shared:innkeeper"
+		},
+		{
+			"place": "market_plaza",
+			"reaches": true,
+			"resident": "shared:herder"
+		},
+		{
+			"place": "west_forecourt",
+			"reaches": true,
+			"resident": "shared:herder"
+		},
+		{
+			"place": "planted_commons",
+			"reaches": true,
+			"resident": "shared:herder"
+		},
+		{
+			"place": "caravan_rest",
+			"reaches": true,
+			"resident": "shared:herder"
+		},
+		{
+			"place": "market_plaza",
+			"reaches": true,
+			"resident": "shared:gardener"
+		},
+		{
+			"place": "west_forecourt",
+			"reaches": true,
+			"resident": "shared:gardener"
+		},
+		{
+			"place": "planted_commons",
+			"reaches": true,
+			"resident": "shared:gardener"
+		},
+		{
+			"place": "caravan_rest",
+			"reaches": true,
+			"resident": "shared:gardener"
+		},
+		{
+			"place": "market_plaza",
+			"reaches": true,
+			"resident": "shared:weaver"
+		},
+		{
+			"place": "west_forecourt",
+			"reaches": true,
+			"resident": "shared:weaver"
+		},
+		{
+			"place": "planted_commons",
+			"reaches": true,
+			"resident": "shared:weaver"
+		},
+		{
+			"place": "caravan_rest",
+			"reaches": true,
+			"resident": "shared:weaver"
+		},
+		{
+			"place": "market_plaza",
+			"reaches": true,
+			"resident": "shared:fisher"
+		},
+		{
+			"place": "west_forecourt",
+			"reaches": true,
+			"resident": "shared:fisher"
+		},
+		{
+			"place": "planted_commons",
+			"reaches": true,
+			"resident": "shared:fisher"
+		},
+		{
+			"place": "caravan_rest",
+			"reaches": true,
+			"resident": "shared:fisher"
+		},
+		{
+			"place": "market_plaza",
+			"reaches": true,
+			"resident": "shared:healer"
+		},
+		{
+			"place": "west_forecourt",
+			"reaches": true,
+			"resident": "shared:healer"
+		},
+		{
+			"place": "planted_commons",
+			"reaches": true,
+			"resident": "shared:healer"
+		},
+		{
+			"place": "caravan_rest",
+			"reaches": true,
+			"resident": "shared:healer"
+		}
+	],
+	"world_id": "shared:mvp-test-20260914"
+}

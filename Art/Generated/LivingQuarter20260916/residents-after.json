@@ -1,0 +1,203 @@
+{
+  "status": "integrated_canonical_world_paused",
+  "world_id": "shared:mvp-test-20260914",
+  "life_seq": 129,
+  "canonical_sha256": "7b5ee17b83c5fdbc623dcee992cf2eeef82665992503c70c1c1a97e68ed46493",
+  "all_history_and_property_preserved": true,
+  "residents": [
+    {
+      "id": "shared:well-keeper",
+      "name": "阿岚",
+      "role": "interest_water",
+      "role_zh": "关注取水",
+      "story": "我总在街口水槽边停留，喜欢看水怎么被人分走；我还没学会怎么把水变成生计。",
+      "position_godot_xyz": [
+        -7,
+        0.06,
+        4
+      ],
+      "home_godot_xyz": [
+        -11.9,
+        0.045,
+        3.0
+      ],
+      "implemented_skills": [],
+      "number": 1
+    },
+    {
+      "id": "shared:baker",
+      "name": "白枝",
+      "role": "interest_baking",
+      "role_zh": "想学烘焙",
+      "story": "我常闻面包铺的味道，想有一天学会烤面包；现在只是自己找吃的。",
+      "position_godot_xyz": [
+        6,
+        0.06,
+        -15
+      ],
+      "home_godot_xyz": [
+        11.8,
+        0.045,
+        -14.9
+      ],
+      "implemented_skills": [],
+      "number": 2
+    },
+    {
+      "id": "shared:smith",
+      "name": "石青",
+      "role": "repair_metal",
+      "role_zh": "金属修理",
+      "story": "我会修铁器，希望靠这份手艺换口粮；接不接委托由我自己决定。",
+      "position_godot_xyz": [
+        -24,
+        0.06,
+        36
+      ],
+      "home_godot_xyz": [
+        -30.693262133943033,
+        0.045,
+        29.905340519233665
+      ],
+      "implemented_skills": [
+        "metal_repair"
+      ],
+      "number": 3
+    },
+    {
+      "id": "shared:carpenter",
+      "name": "木生",
+      "role": "repair_wood",
+      "role_zh": "木柄修理",
+      "story": "我会修木柄，看重明确的交付和报酬；我可以拒绝不合适的活。",
+      "position_godot_xyz": [
+        -26,
+        0.06,
+        48
+      ],
+      "home_godot_xyz": [
+        -33.157351112569124,
+        0.045,
+        51.29293362934481
+      ],
+      "implemented_skills": [
+        "wood_repair"
+      ],
+      "number": 4
+    },
+    {
+      "id": "shared:innkeeper",
+      "name": "灯姐",
+      "role": "interest_hospitality",
+      "role_zh": "想经营住处待客",
+      "story": "我喜欢看街上人来人往，想以后守着住处招呼客人；现在住处只是我自己住。",
+      "position_godot_xyz": [
+        6,
+        0.06,
+        10
+      ],
+      "home_godot_xyz": [
+        12.8,
+        0.045,
+        7.1
+      ],
+      "implemented_skills": [],
+      "number": 5
+    },
+    {
+      "id": "shared:herder",
+      "name": "草见",
+      "role": "interest_herding",
+      "role_zh": "关注养畜",
+      "story": "我对牲畜有兴趣，喜欢看它们被人照顾；我还没有自己的牲畜。",
+      "position_godot_xyz": [
+        31,
+        0.06,
+        77
+      ],
+      "home_godot_xyz": [
+        35.45,
+        0.045,
+        82.04737205583712
+      ],
+      "implemented_skills": [],
+      "number": 6
+    },
+    {
+      "id": "shared:gardener",
+      "name": "叶禾",
+      "role": "interest_gardening",
+      "role_zh": "想学园艺",
+      "story": "我留意街边的植物，想学着照料一小片地；现在只是观察。",
+      "position_godot_xyz": [
+        -12,
+        0.06,
+        59
+      ],
+      "home_godot_xyz": [
+        -13.623777842341765,
+        0.045,
+        62.9663381171355
+      ],
+      "implemented_skills": [],
+      "number": 7
+    },
+    {
+      "id": "shared:weaver",
+      "name": "细娘",
+      "role": "interest_weaving",
+      "role_zh": "想学纺织",
+      "story": "我喜欢摸布料，想以后学会织东西；现在只是有耐心。",
+      "position_godot_xyz": [
+        6,
+        0.06,
+        31
+      ],
+      "home_godot_xyz": [
+        12.8,
+        0.045,
+        31.1
+      ],
+      "implemented_skills": [],
+      "number": 8
+    },
+    {
+      "id": "shared:fisher",
+      "name": "渡白",
+      "role": "interest_fishing",
+      "role_zh": "想学捕鱼",
+      "story": "我喜欢待在近水的地方，想着以后能靠水吃饭；我还没有网或船。",
+      "position_godot_xyz": [
+        28,
+        0.06,
+        52
+      ],
+      "home_godot_xyz": [
+        33.91671147168657,
+        0.045,
+        52.808987004566376
+      ],
+      "implemented_skills": [],
+      "number": 9
+    },
+    {
+      "id": "shared:healer",
+      "name": "枚青",
+      "role": "interest_herbs",
+      "role_zh": "关注药草",
+      "story": "我留意药草的样子，想以后能帮人处理小伤；我还没有行医的能力。",
+      "position_godot_xyz": [
+        -23,
+        0.7657891787702233,
+        77
+      ],
+      "home_godot_xyz": [
+        -30.09893275128211,
+        1.2449999999999999,
+        79.36906592001385
+      ],
+      "implemented_skills": [],
+      "number": 10
+    }
+  ]
+}

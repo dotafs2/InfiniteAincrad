@@ -1,0 +1,78 @@
+{
+  "checks": [
+    {
+      "asset": "ez-oak",
+      "seed": 91658,
+      "count": 22,
+      "road_clearance_min_m": 26.18,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0,
+      "height_range_m": [
+        0.0,
+        4.479
+      ]
+    },
+    {
+      "asset": "ez-small-oak",
+      "seed": 91659,
+      "count": 16,
+      "road_clearance_min_m": 6.962,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0,
+      "height_range_m": [
+        0.0,
+        1.918
+      ]
+    },
+    {
+      "asset": "ez-oak",
+      "seed": 91660,
+      "count": 12,
+      "road_clearance_min_m": 13.279,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0,
+      "height_range_m": [
+        0.05,
+        2.703
+      ]
+    },
+    {
+      "asset": "simple-grass",
+      "seed": 91661,
+      "count": 12000,
+      "road_clearance_min_m": 0.701,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0,
+      "height_range_m": [
+        0.0,
+        5.02
+      ]
+    },
+    {
+      "asset": "simple-grass",
+      "seed": 91662,
+      "count": 8500,
+      "road_clearance_min_m": 0.009,
+      "road_margin_violations": 6,
+      "house_exclusion_violations": 0,
+      "height_range_m": [
+        0.0,
+        3.357
+      ]
+    },
+    {
+      "asset": "simple-grass",
+      "seed": 91663,
+      "count": 3600,
+      "road_clearance_min_m": 0.713,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0,
+      "height_range_m": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "scope": "Checks instance origins against existing road corridors and conservative house footprints; not a full-world navigation proof.",
+  "canonical_world_sha256": "3ed26a1024e59cad84960022c09bbb0f0bc18062bdc15f79903a9268014e526a"
+}

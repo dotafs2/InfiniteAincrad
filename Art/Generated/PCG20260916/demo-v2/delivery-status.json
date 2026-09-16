@@ -1,0 +1,36 @@
+{
+  "status": "uploaded_handoff_requested_with_known_renderer_exit_error",
+  "user_direction": "Keep the unresolved error online for continuation at home",
+  "counts": {
+    "houses": 16,
+    "residents": 10,
+    "dressing_instances": 145,
+    "dressing_asset_types": 39,
+    "trees": 116,
+    "grass": 66000,
+    "boulders": 28,
+    "fallen_logs": 8
+  },
+  "checks": {
+    "routes": "40/40",
+    "physical_walks": "30/30",
+    "door_window_checks": "64/64",
+    "scatter_exclusions": "passed",
+    "preview_load_save_cold_restore": "passed",
+    "pool_tests": 21,
+    "migration_tests": 6
+  },
+  "renderer_exit_fixed": false,
+  "failed_attempt": "Queue-free scene children and wait four frames before quit; error persisted",
+  "performance": {
+    "mean_ms": 15.9435444444444,
+    "p95_ms": 19.781,
+    "uncontrolled_external_UE4_GPU_workload": true,
+    "not_a_whole_map_fps_guarantee": true
+  },
+  "meshy_new_credits": 120,
+  "npc_gm_api_calls": 0,
+  "owned_active_processes": 0,
+  "canonical_world_sha256": "3ed26a1024e59cad84960022c09bbb0f0bc18062bdc15f79903a9268014e526a",
+  "fresh_checkout_full_visual_test": "not performed on a second machine"
+}

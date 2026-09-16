@@ -1,0 +1,291 @@
+{
+  "id": "tripo-meshy-comparison-20260916",
+  "completed_utc": "2026-09-16T03:14:01.517Z",
+  "source_commit": "aa026a3e441c71af754dab8d0ac609d4c5df61c3",
+  "cli": {
+    "package": "tripo-cli",
+    "version": "0.4.0",
+    "doctor": "passed",
+    "profile": "infiniteaincrad",
+    "region": "ov",
+    "credentials_included": false
+  },
+  "request": {
+    "id": "tripo-meshy-comparison-20260916",
+    "prompt": "One complete standalone two-storey fantasy cottage. Pale cream stone and plaster, honey oak framing, muted terracotta gable roof, teal shutters. Arched front door, small covered porch, one dormer, chimney and window flower boxes. Cohesive hand-painted anime European town style, clean broad colors, soft wear and clear shapes. Complete roof and all four exterior walls, including a finished back. Only one building: no people, text, landscape, base slab, cutaway or baked shadows. Intended game building about 7 metres wide.",
+    "maximum_creations": {
+      "tripo": 1,
+      "meshy_preview": 1,
+      "meshy_refine": 1
+    },
+    "planned_credits": {
+      "tripo": 30,
+      "meshy": 30
+    },
+    "expected_target_faces": 80000,
+    "tripo": {
+      "prompt": "One complete standalone two-storey fantasy cottage. Pale cream stone and plaster, honey oak framing, muted terracotta gable roof, teal shutters. Arched front door, small covered porch, one dormer, chimney and window flower boxes. Cohesive hand-painted anime European town style, clean broad colors, soft wear and clear shapes. Complete roof and all four exterior walls, including a finished back. Only one building: no people, text, landscape, base slab, cutaway or baked shadows. Intended game building about 7 metres wide.",
+      "model": "v3.1-20260211",
+      "face_limit": 80000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "detailed",
+      "geometry_quality": "standard"
+    },
+    "meshy": {
+      "mode": "preview",
+      "prompt": "One complete standalone two-storey fantasy cottage. Pale cream stone and plaster, honey oak framing, muted terracotta gable roof, teal shutters. Arched front door, small covered porch, one dormer, chimney and window flower boxes. Cohesive hand-painted anime European town style, clean broad colors, soft wear and clear shapes. Complete roof and all four exterior walls, including a finished back. Only one building: no people, text, landscape, base slab, cutaway or baked shadows. Intended game building about 7 metres wide.",
+      "ai_model": "meshy-7",
+      "model_type": "standard",
+      "should_remesh": true,
+      "topology": "triangle",
+      "target_polycount": 80000,
+      "ultra_mode": false,
+      "target_formats": [
+        "glb"
+      ]
+    },
+    "refine": {
+      "mode": "refine",
+      "ai_model": "meshy-7",
+      "enable_pbr": true,
+      "texture_resolution": "4k",
+      "texture_prompt": "One complete standalone two-storey fantasy cottage. Pale cream stone and plaster, honey oak framing, muted terracotta gable roof, teal shutters. Arched front door, small covered porch, one dormer, chimney and window flower boxes. Cohesive hand-painted anime European town style, clean broad colors, soft wear and clear shapes. Complete roof and all four exterior walls, including a finished back. Only one building: no people, text, landscape, base slab, cutaway or baked shadows. Intended game building about 7 metres wide.",
+      "target_formats": [
+        "glb"
+      ]
+    },
+    "limitations": [
+      "One specimen per provider; no general model ranking.",
+      "Same text and approximate face target; provider algorithms and texture semantics differ.",
+      "Geometry and texture are generated separately in Meshy, together in Tripo."
+    ]
+  },
+  "initial_balances": {
+    "tripo": {
+      "balance": 600,
+      "frozen": 0
+    },
+    "meshy": {
+      "balance": 1414
+    }
+  },
+  "final_balances": {
+    "tripo": {
+      "balance": 570,
+      "frozen": 0
+    },
+    "meshy": {
+      "balance": 1384
+    }
+  },
+  "render": {
+    "blender": "5.2.1 LTS",
+    "size": 1024,
+    "azimuths": [
+      38,
+      128,
+      218,
+      308
+    ],
+    "elevation_degrees": 16,
+    "presentation_only": "Uniform scale, centring and floor alignment. No mesh or material edits.",
+    "glb_originals_unchanged": true,
+    "all_owned_processes_exited": true
+  },
+  "stages": {
+    "tripo": {
+      "task_id": "d2430eb1-5367-4b49-92e0-92ab3d4b00c8",
+      "status": "success",
+      "submitted_at": "2026-09-16T03:08:28.106Z",
+      "observed_complete_at": "2026-09-16T03:12:00.669Z",
+      "credits_consumed": 30,
+      "submission_to_observed_complete_seconds": 212.563,
+      "provider_timestamps": {
+        "created_at": "2026-09-16T03:08:30.310943Z"
+      }
+    },
+    "meshy_preview": {
+      "task_id": "01a0a82f-f600-72af-b4e2-7c37d32b6f68",
+      "status": "SUCCEEDED",
+      "submitted_at": "2026-09-16T03:08:30.521Z",
+      "observed_complete_at": "2026-09-16T03:12:03.615Z",
+      "credits_consumed": 20,
+      "submission_to_observed_complete_seconds": 213.094,
+      "provider_timestamps": {
+        "created_at": 1789528112751,
+        "started_at": 1789528112757,
+        "finished_at": 1789528218307
+      },
+      "provider_processing_seconds": 105.55
+    },
+    "meshy_refine": {
+      "task_id": "01a0a833-381d-7478-bd85-c24ebcf47991",
+      "status": "SUCCEEDED",
+      "submitted_at": "2026-09-16T03:12:03.617Z",
+      "observed_complete_at": "2026-09-16T03:13:59.191Z",
+      "credits_consumed": 10,
+      "submission_to_observed_complete_seconds": 115.574,
+      "provider_timestamps": {
+        "created_at": 1789528325704,
+        "started_at": 1789528325708,
+        "finished_at": 1789528435761
+      },
+      "provider_processing_seconds": 110.053
+    }
+  },
+  "models": {
+    "tripo": {
+      "local_glb": "exports/tripo-meshy-comparison-20260916/tripo.glb",
+      "bytes": 4974712,
+      "sha256": "7fec3b52f263cf8d86edbfe19b90a85d324a986efbdc214a03b31d3ba407a0ec",
+      "raw_metrics": {
+        "triangles": 72970,
+        "vertices": 42987,
+        "materials": [
+          "tripo_material_d2430eb1-5367-4b49-92e0-92ab3d4b00c8"
+        ],
+        "textures": [
+          "Color_d2430eb1-5367-4b49-92e0-92ab3d4b00c8",
+          "NormalGL_d2430eb1-5367-4b49-92e0-92ab3d4b00c8",
+          "ORM_d2430eb1-5367-4b49-92e0-92ab3d4b00c8"
+        ],
+        "texture_sizes": {
+          "Color_d2430eb1-5367-4b49-92e0-92ab3d4b00c8": [
+            4096,
+            4096
+          ],
+          "NormalGL_d2430eb1-5367-4b49-92e0-92ab3d4b00c8": [
+            4096,
+            4096
+          ],
+          "ORM_d2430eb1-5367-4b49-92e0-92ab3d4b00c8": [
+            4096,
+            4096
+          ]
+        },
+        "bounds_min": [
+          -0.424,
+          -0.5,
+          -0.4028
+        ],
+        "bounds_max": [
+          0.424,
+          0.5,
+          0.4028
+        ],
+        "bounds_size": [
+          0.848,
+          1.0,
+          0.8057
+        ],
+        "max_dimension": 1.0
+      },
+      "images": [
+        {
+          "declared_mime": "image/jpeg",
+          "bytes": 1277795
+        },
+        {
+          "declared_mime": "image/jpeg",
+          "bytes": 821450
+        },
+        {
+          "declared_mime": "image/jpeg",
+          "bytes": 622145
+        }
+      ],
+      "mesh_objects": 1,
+      "local_blend": "exports/tripo-meshy-comparison-20260916/blend/tripo.blend"
+    },
+    "meshy_refine": {
+      "local_glb": "exports/tripo-meshy-comparison-20260916/meshy_refine.glb",
+      "bytes": 30960556,
+      "sha256": "e4724387b11d91a2b0712dd62d1d1e8703057ea8b241d8d233bdaad28f5aeaf6",
+      "raw_metrics": {
+        "triangles": 77478,
+        "vertices": 95928,
+        "materials": [
+          "Material_0"
+        ],
+        "textures": [
+          "Image_0",
+          "Image_1",
+          "Image_2"
+        ],
+        "texture_sizes": {
+          "Image_0": [
+            4096,
+            4096
+          ],
+          "Image_1": [
+            2048,
+            2048
+          ],
+          "Image_2": [
+            4096,
+            4096
+          ]
+        },
+        "bounds_min": [
+          -0.7993,
+          -0.693,
+          -0.9519
+        ],
+        "bounds_max": [
+          0.8001,
+          0.6977,
+          0.9512
+        ],
+        "bounds_size": [
+          1.5994,
+          1.3907,
+          1.9031
+        ],
+        "max_dimension": 1.9031
+      },
+      "images": [
+        {
+          "declared_mime": "image/jpeg",
+          "bytes": 14491567
+        },
+        {
+          "declared_mime": "image/jpeg",
+          "bytes": 2491249
+        },
+        {
+          "declared_mime": "image/jpeg",
+          "bytes": 9976064
+        }
+      ],
+      "mesh_objects": 1,
+      "local_blend": "exports/tripo-meshy-comparison-20260916/blend/meshy_refine.blend"
+    }
+  },
+  "pricing": {
+    "checked_date": "2026-09-16",
+    "tripo_credit_usd": 0.01,
+    "tripo_equivalent_usd": 0.3,
+    "meshy_actual_credits": 30,
+    "meshy_user_plan_unknown": true,
+    "meshy_pro_monthly_example_usd": 0.6,
+    "meshy_price_note": "Example only: 30 * $20 / 1000, assuming all monthly Pro credits used; not an invoice or a top-up price.",
+    "sources": [
+      "https://developers.tripo3d.ai/en/pricing",
+      "https://docs.meshy.ai/en/api/pricing",
+      "https://help.meshy.ai/en/articles/12062933-which-meshy-plan-is-right-for-you-free-vs-pro-vs-premium-vs-ultra"
+    ]
+  },
+  "assessment_zh": "本次Tripo的圆润体块、粗木梁和红瓦色块更接近卡通手绘方向，四侧细节较丰富；Meshy更规整、接近欧式住宅，但侧墙有突兀的大块石墙纹理。两者都是单体网格，不是可直接开门入住的模块建筑。",
+  "limitations": [
+    "One specimen per provider; no general model ranking.",
+    "Same text and approximate face target; provider algorithms and texture semantics differ.",
+    "Geometry and texture are generated separately in Meshy, together in Tripo.",
+    "No direct timing winner: Tripo exposes no finished_at here; observation timing includes manual polling gaps.",
+    "Disk size is not runtime memory or performance. Both models use JPEG images with different byte sizes.",
+    "No Godot adoption, collision, interior, walkability or movable door/window validation in this comparison.",
+    "Doors face different native axes; all four world-space azimuths are shown without rotating either source."
+  ],
+  "contact_sheet": "contact-sheet.png",
+  "public_artifacts_contain_keys_or_signed_urls": false
+}

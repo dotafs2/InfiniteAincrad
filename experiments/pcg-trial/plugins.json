@@ -1,0 +1,45 @@
+[
+  {
+    "url": "https://github.com/TokisanGames/Terrain3D/releases/download/v1.0.2-stable/Terrain3D_v1.0.2-stable.zip",
+    "sha256": "a071850250ec5e596aa54da61c01d75768774eb379ee997584d426a45f4884a2",
+    "bytes": 42312488,
+    "addon": "terrain_3d",
+    "installed_files": 143
+  },
+  {
+    "url": "https://github.com/TheDuckCow/godot-road-generator/archive/refs/tags/0.9.3.zip",
+    "sha256": "ae91be0e23799408f160ea4c87cc7b476d64c87e0ec861fcd57395bc969839c6",
+    "bytes": 16332675,
+    "addon": "road-generator",
+    "installed_files": 95
+  },
+  {
+    "url": "https://github.com/HungryProton/scatter/archive/refs/heads/main.zip",
+    "sha256": "ff3dc29a4dc0c588969a8d148ea036939ef1d230e5165181977ec1bcfff25f08",
+    "bytes": 10139666,
+    "addon": "proton_scatter",
+    "installed_files": 266
+  },
+  {
+    "url": "https://codeload.github.com/IcterusGames/SimpleGrassTextured/zip/refs/heads/main",
+    "sha256": "920f0f6169468405e108a8cefc7ea057440fb61a1cf917b466cc15d18c27cf28",
+    "bytes": 371774,
+    "addon": "simplegrasstextured",
+    "installed_files": 124,
+    "version": "2.1.0",
+    "code_license": "MIT",
+    "texture_license": "CC0",
+    "texture_author": "FabinhoSC",
+    "texture_source": "https://opengameart.org/content/stylized-grass-and-bush-textures-0",
+    "installation_changes": [
+      "Enabled upstream shader and material directories by removing their .gdignore, as plugin activation does."
+    ],
+    "runtime_use": "Original mesh, texture, shader and wind singleton; ProtonScatter handles placement and chunked MultiMesh."
+  },
+  {
+    "addon": "ez-tree-godot-port",
+    "version": "0.2.0",
+    "source_manifest": "experiments/ez-tree-trial/provenance.json",
+    "copied_to": "game/addons/ez-tree-godot-port"
+  }
+]

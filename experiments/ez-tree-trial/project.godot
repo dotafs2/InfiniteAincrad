@@ -1,0 +1,20 @@
+config_version=5
+
+[application]
+config/name="Infinite Aincrad - EZ-Tree trial"
+run/main_scene="res://stylized_trial.tscn"
+
+[display]
+window/size/viewport_width=1600
+window/size/viewport_height=1000
+window/size/window_width_override=1280
+window/size/window_height_override=800
+window/stretch/mode="canvas_items"
+
+[editor_plugins]
+enabled=PackedStringArray("res://addons/ez-tree-godot-port/plugin.cfg")
+
+[rendering]
+renderer/rendering_method="forward_plus"
+anti_aliasing/quality/msaa_3d=2
+textures/default_filters/use_nearest_mipmap_filter=false

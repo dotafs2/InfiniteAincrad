@@ -1,0 +1,21 @@
+[
+	{
+		"asset": "ez-oak",
+		"bark": "original albedo + normal + roughness maps",
+		"leaves": "original textured lit wind shader; receives shadows",
+		"triangles": 17440
+	},
+	{
+		"asset": "ez-small-oak",
+		"bark": "original albedo + normal + roughness maps",
+		"leaves": "original textured lit wind shader; receives shadows",
+		"triangles": 17440
+	},
+	{
+		"asset": "simple-grass",
+		"interactive_trampling": false,
+		"mesh_shader_texture": "SimpleGrassTextured 2.1.0 originals",
+		"placement_and_multimesh": "ProtonScatter",
+		"triangles": 4
+	}
+]

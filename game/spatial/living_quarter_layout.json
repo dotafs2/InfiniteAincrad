@@ -1,0 +1,37 @@
+{
+  "id": "first-floor-market-quarter-v1",
+  "reference_scope": "First floor only. Town of Beginnings market composition; Tolbana is a separate comparison, not an adjacent invented town.",
+  "terrain_bounds": [-140, -130, 140, 180],
+  "houses": [
+    {"resident":"shared:well-keeper","variant":"01_hearth_cottage","at":[-13,0,3],"yaw":90},
+    {"resident":"shared:baker","variant":"02_market_house","at":[13,0,-14],"yaw":-90},
+    {"resident":"shared:smith","variant":"03_corner_turret","at":[-33,0,30],"yaw":20},
+    {"resident":"shared:carpenter","variant":"01_hearth_cottage","at":[-34,0,52],"yaw":130},
+    {"resident":"shared:innkeeper","variant":"02_market_house","at":[14,0,8],"yaw":-90},
+    {"resident":"shared:herder","variant":"01_hearth_cottage","at":[36,0,83],"yaw":-150},
+    {"resident":"shared:gardener","variant":"01_hearth_cottage","at":[-14,0,64],"yaw":160},
+    {"resident":"shared:weaver","variant":"02_market_house","at":[14,0,32],"yaw":-90},
+    {"resident":"shared:fisher","variant":"01_hearth_cottage","at":[35,0,53],"yaw":-100},
+    {"resident":"shared:healer","variant":"01_hearth_cottage","at":[-31,1.2,80],"yaw":125}
+  ],
+  "infill": [
+    {"variant":"02_market_house","at":[-13,0,-18],"yaw":90},
+    {"variant":"03_corner_turret","at":[-14,0,-41],"yaw":90},
+    {"variant":"02_market_house","at":[13,0,-37],"yaw":-90},
+    {"variant":"01_hearth_cottage","at":[-16,0,25],"yaw":90},
+    {"variant":"01_hearth_cottage","at":[27,0,7],"yaw":180},
+    {"variant":"01_hearth_cottage","at":[-45,1.8,65],"yaw":90}
+  ],
+  "roads": [
+    {"width":9,"points":[[0,-130],[0,-80],[0,-40],[0,-15],[1,14],[0,35],[-3,53],[0,66],[8,91],[2,116],[-8,138],[-9,180]]},
+    {"width":5,"points":[[0,39.5],[-13.5,40],[-20.8,40],[-26,48],[-24,63],[-23,77],[-15,88],[8,91]]},
+    {"width":5,"points":[[0,39.5],[23,41],[27,53],[22,66],[25.9,72.9],[30,77],[8,91]]},
+    {"width":4,"points":[[0,66],[13.5,66],[25.9,72.9],[47,79],[65,96],[92,114],[140,128]]}
+  ],
+  "berry_position": [7,0.045,53],
+  "spawn_points": [[-7,0.06,4],[6,0.06,-15],[-24,0.06,36],[-26,0.06,48],[6,0.06,10],[31,0.06,77],[-12,0.06,59],[6,0.06,31],[28,0.06,52],[-23,0.06,77]],
+  "connections": [
+    {"name":"通往整城 · 预留","point":[0,0,-72]},
+    {"name":"通往野外 · 预留","point":[72,0,101]}
+  ]
+}

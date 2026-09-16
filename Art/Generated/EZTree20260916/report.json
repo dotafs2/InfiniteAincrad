@@ -1,0 +1,61 @@
+{
+	"godot": {
+		"build": "official",
+		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+		"hex": 263938,
+		"major": 4,
+		"minor": 7,
+		"patch": 2,
+		"status": "stable",
+		"string": "4.7.2-stable (official)",
+		"timestamp": 0
+	},
+	"paid_generation_calls": 0,
+	"plugin": "EZ-Tree For Godot 0.2.0",
+	"scope": "isolated visual trial; no town placement, no NPC save changes",
+	"shader_edits": 0,
+	"specimens": [
+		{
+			"bounds_size": "(13.19099, 17.68116, 11.99742)",
+			"generation_ms": 125.272,
+			"id": "default-oak",
+			"label": "原始默认树",
+			"native_wind": true,
+			"plugin_materials_unchanged": true,
+			"seed": 35729,
+			"surface_triangles": [
+				3166,
+				10640
+			],
+			"triangles": 13806
+		},
+		{
+			"bounds_size": "(15.27528, 15.97373, 14.21918)",
+			"generation_ms": 72.967,
+			"id": "broad-canopy",
+			"label": "宽冠树 · 参数调整",
+			"native_wind": true,
+			"plugin_materials_unchanged": true,
+			"seed": 91627,
+			"surface_triangles": [
+				4480,
+				19872
+			],
+			"triangles": 24352
+		},
+		{
+			"bounds_size": "(7.815079, 11.01874, 7.22971)",
+			"generation_ms": 68.381,
+			"id": "compact-canopy",
+			"label": "紧凑树 · 参数调整",
+			"native_wind": true,
+			"plugin_materials_unchanged": true,
+			"seed": 91633,
+			"surface_triangles": [
+				4012,
+				16128
+			],
+			"triangles": 20140
+		}
+	]
+}

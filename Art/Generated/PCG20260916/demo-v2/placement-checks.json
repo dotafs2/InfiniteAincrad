@@ -1,0 +1,102 @@
+{
+  "checks": [
+    {
+      "asset": "ez-oak",
+      "seed": 91688,
+      "placed": 42,
+      "min_road_clearance": 36.263,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0
+    },
+    {
+      "asset": "ez-small-oak",
+      "seed": 91689,
+      "placed": 38,
+      "min_road_clearance": 4.712,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0
+    },
+    {
+      "asset": "ez-oak",
+      "seed": 91690,
+      "placed": 28,
+      "min_road_clearance": 4.974,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0
+    },
+    {
+      "asset": "ez-small-oak",
+      "seed": 91691,
+      "placed": 8,
+      "min_road_clearance": 23.425,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0
+    },
+    {
+      "asset": "simple-grass",
+      "seed": 91692,
+      "placed": 26000,
+      "min_road_clearance": 0.861,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0
+    },
+    {
+      "asset": "simple-grass",
+      "seed": 91693,
+      "placed": 24000,
+      "min_road_clearance": 0.858,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0
+    },
+    {
+      "asset": "simple-grass",
+      "seed": 91694,
+      "placed": 9000,
+      "min_road_clearance": 0.868,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0
+    },
+    {
+      "asset": "simple-grass",
+      "seed": 91695,
+      "placed": 7000,
+      "min_road_clearance": 0.851,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0
+    },
+    {
+      "asset": "boulder",
+      "seed": 91696,
+      "placed": 16,
+      "min_road_clearance": 61.309,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0
+    },
+    {
+      "asset": "boulder",
+      "seed": 91697,
+      "placed": 12,
+      "min_road_clearance": 10.151,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0
+    },
+    {
+      "asset": "fallen-log",
+      "seed": 91698,
+      "placed": 8,
+      "min_road_clearance": 10.201,
+      "road_margin_violations": 0,
+      "house_exclusion_violations": 0
+    }
+  ],
+  "placement_checks_passed": true,
+  "routes_passed": 40,
+  "routes_total": 40,
+  "physical_walks_passed": 30,
+  "physical_walks_total": 30,
+  "fixture_checks_passed": 64,
+  "dressing_instances": 145,
+  "dressing_asset_types": 39,
+  "canonical_world_sha256": "3ed26a1024e59cad84960022c09bbb0f0bc18062bdc15f79903a9268014e526a",
+  "limits": "Origin clearance and bounded resident checks do not prove every possible route is valid."
+}

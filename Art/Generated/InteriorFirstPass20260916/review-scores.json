@@ -1,0 +1,27 @@
+{
+  "schema": "first-result-human-review-v1",
+  "scope": "18 component pairs, 1 whole-generated-house pair, 1 assembled-house pair; all original generations unchanged; scores are the assistant's subjective project-fit judgement, not user votes or commercial certification.",
+  "scale": {"range": [0, 10], "axes": ["外观", "符合用途", "模块可用性"], "anchors": "8—10 可保留候选；5—7 有明确待改处；0—4 当前不宜按预定用途采用。模块可用性评独立拆分和装配基础，不宣称已实现战斗、烹饪或库存逻辑。"},
+  "items": [
+    {"id":"door_leaf","name":"橡木门板","group":"组件","intent":"独立门板，门框固定，门板绕轴转动。","tripo":{"scores":[7,4,3],"verdict":"需拆分","reason":"木质风格鲜明，但夹带石门框；现状整件旋转会连框一起动。"},"meshy":{"scores":[8,8,7],"verdict":"保留候选","reason":"门板较规整，少了石框干扰；边缘木条仍需确认属于门板装饰还是门框。"}},
+    {"id":"shutter_leaf","name":"木窗扇","group":"组件","intent":"一片独立木窗扇，固定窗框不随之转动。","tripo":{"scores":[8,8,8],"verdict":"保留候选","reason":"薄木板与横撑清楚，风格统一，适合作独立可动窗扇。"},"meshy":{"scores":[7,4,3],"verdict":"需拆分","reason":"造型整齐但夹带石框；整件转动不符合真实窗扇结构。"}},
+    {"id":"sword","name":"初级单手剑","group":"组件","intent":"一把有明确剑尖、单个握柄的普通单手剑。","tripo":{"scores":[6,7,7],"verdict":"保留候选","reason":"单柄结构成立，轮廓和金属细节偏粗；原始斜姿态已用刚体旋转摆正。"},"meshy":{"scores":[5,2,2],"verdict":"不按剑采用","reason":"两端都是剑柄，没有合理剑尖；漂亮的局部不能抵消武器结构错误。"}},
+    {"id":"shield","name":"木圆盾","group":"组件","intent":"木盾、金属盾脐和背部把手，少量青色点缀。","tripo":{"scores":[8,7,7],"verdict":"保留候选","reason":"青色木板和铁箍较符合本项目色彩，但木面出现额外建筑样装饰。"},"meshy":{"scores":[7,8,8],"verdict":"保留候选","reason":"轮廓与板条更规整，背侧把手可见；缺少要求的青色条纹。"}},
+    {"id":"weapon_rack","name":"空武器架","group":"组件","intent":"空架与武器分开，便于居民存取和库存管理。","tripo":{"scores":[6,3,2],"verdict":"需拆武器","reason":"夹带武器、石脚及装饰；当前不能当作独立空架。"},"meshy":{"scores":[7,3,2],"verdict":"需拆武器","reason":"木架规整但已经附带三把剑，不能视作三件独立库存。"}},
+    {"id":"workbench","name":"修理工作台","group":"组件","intent":"空木工作台，带一只小铁台钳，能摆放独立工具。","tripo":{"scores":[6,6,7],"verdict":"风格需收敛","reason":"圆润体块可用，紫色台钳、石脚和亮色点缀较突兀。"},"meshy":{"scores":[8,8,8],"verdict":"优先候选","reason":"台面平整、结构清晰、铁钳较克制，更像普通工匠工作台。"}},
+    {"id":"anvil","name":"铁砧","group":"组件","intent":"深色铁砧放在短木墩上，两者合成一件设备。","tripo":{"scores":[6,6,7],"verdict":"风格需收敛","reason":"铁砧能辨识，木墩形体偏软，周围附带青色石块。"},"meshy":{"scores":[8,9,8],"verdict":"优先候选","reason":"砧面、砧角和木墩区分明确，接近实用铁匠设备。"}},
+    {"id":"hearth","name":"石砌炉灶","group":"组件","intent":"独立炉灶，锅、食物、火焰另作游戏对象。","tripo":{"scores":[6,6,6],"verdict":"需整理","reason":"暖色卡通风格统一，但石块轮廓和开口偏糊，台面不够干净。"},"meshy":{"scores":[7,7,5],"verdict":"需拆小物","reason":"炉口与石块更清楚，附带小锅等内容，需要分离才能独立交互。"}},
+    {"id":"bed","name":"木床","group":"组件","intent":"普通单人木床、枕头与青色毯子。","tripo":{"scores":[7,7,8],"verdict":"保留候选","reason":"床品柔软、生活感强；床头装饰和黄色床尾略显繁杂。"},"meshy":{"scores":[8,9,8],"verdict":"优先候选","reason":"床架清楚，枕头、床垫与毯子分区自然，更适合基础住宅。"}},
+    {"id":"chest","name":"储物箱","group":"组件","intent":"闭合木箱；后续箱盖应能独立开合。","tripo":{"scores":[6,6,4],"verdict":"需拆箱盖","reason":"闭箱状态正确，但附带石底座、过量图案，箱盖未独立。"},"meshy":{"scores":[8,4,3],"verdict":"需拆箱盖","reason":"造型干净但生成了打开状态，且箱盖未独立，不能直接接开合逻辑。"}},
+    {"id":"table","name":"餐桌","group":"组件","intent":"普通空餐桌，桌上物品独立摆放。","tripo":{"scores":[6,7,8],"verdict":"风格需收敛","reason":"木纹和边缘过于起伏，支撑处有额外装饰；仍能作为独立桌体。"},"meshy":{"scores":[8,9,8],"verdict":"优先候选","reason":"桌面平整、四腿与支撑清楚，易摆放餐盘和水壶。"}},
+    {"id":"chair","name":"木椅","group":"组件","intent":"朴素、无扶手的四腿木椅。","tripo":{"scores":[6,6,8],"verdict":"风格需收敛","reason":"青色小块和高频木纹较多，显得像特殊家具而非日常木椅。"},"meshy":{"scores":[8,9,8],"verdict":"优先候选","reason":"结构整洁、座面清楚，更适合反复使用的基础家具。"}},
+    {"id":"shelf","name":"空置物架","group":"组件","intent":"空架子，存放的物品应独立。","tripo":{"scores":[6,6,7],"verdict":"需整理顶面","reason":"粗木和青色装饰较多，顶面还有额外小突起，空架感不够干净。"},"meshy":{"scores":[8,8,8],"verdict":"优先候选","reason":"层板规整、空间明确，层数比要求多一层，但更便于实际陈列。"}},
+    {"id":"potion","name":"补给药瓶","group":"组件","intent":"矮胖、软木塞、蓝色药液的普通补给瓶。","tripo":{"scores":[8,8,8],"verdict":"优先候选","reason":"矮胖轮廓易辨识，青蓝色协调，适合作基础补给物品。"},"meshy":{"scores":[7,6,8],"verdict":"保留候选","reason":"细节清楚，但长瓶颈和长绳与矮胖补给瓶需求有偏差。"}},
+    {"id":"lantern","name":"铁提灯","group":"组件","intent":"四面玻璃、铁壳和蜡烛的普通可携提灯。","tripo":{"scores":[7,8,8],"verdict":"保留候选","reason":"暗铁、提环与内部蜡烛可辨，表面略粗但没有明显多余物件。"},"meshy":{"scores":[8,7,8],"verdict":"保留候选","reason":"轮廓干净、远看易识别；烘焙的明亮灯面不等于已接入真实发光逻辑。"}},
+    {"id":"cooking_pot","name":"炖锅","group":"组件","intent":"普通铸铁炖锅，食物和火独立。","tripo":{"scores":[5,3,6],"verdict":"不作基础炖锅","reason":"锅身变成房屋图案的装饰器皿，偏离普通厨房用具。"},"meshy":{"scores":[8,9,8],"verdict":"优先候选","reason":"黑铁、开口、双耳和短脚清楚，最接近基础炖锅需求。"}},
+    {"id":"meal","name":"面包餐盘","group":"组件","intent":"一份整体食物：木盘、一块面包、两块奶酪。","tripo":{"scores":[7,8,8],"verdict":"保留候选","reason":"组合与要求接近、颜色柔和，食物细节略软；可按整份餐管理。"},"meshy":{"scores":[8,7,8],"verdict":"保留候选","reason":"面包切纹更清楚，但多了圆形食物，奶酪块数和组合偏离要求。"}},
+    {"id":"jug","name":"陶水壶","group":"组件","intent":"朴素奶油色陶壶，仅一圈青色装饰。","tripo":{"scores":[6,3,7],"verdict":"可作装饰壶","reason":"造型完整，但大片房屋浮雕抢眼，不适合作默认素陶壶。"},"meshy":{"scores":[8,9,8],"verdict":"优先候选","reason":"壶嘴、把手和青色带都清楚，最符合日常生活道具定位。"}},
+    {"id":"generated_house","name":"整栋生成房屋","group":"房屋","intent":"H89 一次生成的完整外观模型；目前未提供可进入室内与独立门窗。","tripo":{"scores":[8,7,2],"verdict":"优先外观参考","reason":"圆润屋瓦、粗木梁和青色窗扇较统一；整体网格不能直接当作可交互房屋。"},"meshy":{"scores":[7,7,2],"verdict":"立面参考","reason":"比例与立面较规整，但侧墙大块石纹突兀；同样缺乏可直接使用的室内与独立门窗。"}},
+    {"id":"assembled_house","name":"装配后可进入住宅","group":"房屋","intent":"H90 同一自建外壳，每屋20个家具道具实例、1扇门、8组窗；108项工程检查覆盖两屋。","tripo":{"scores":[6,6,6],"verdict":"工程样板","reason":"可进出、门窗与碰撞已实现；石门框跟门动、过度装饰和架上武器未分离仍需处理。整体摆放偏稀疏，室内外材质尚不统一。"},"meshy":{"scores":[7,7,6],"verdict":"较好装配基础","reason":"基础家具更统一、更像可生活空间；双柄剑、石窗框、开箱和附带武器仍影响最终交互。摆放、照明与房壳细节仍属样板水平。"}}
+  ]
+}

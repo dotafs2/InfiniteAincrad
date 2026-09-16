@@ -1,0 +1,24 @@
+{
+  "review_type": "Human-readable visual judgement of all 36 frozen first results, not a general provider benchmark",
+  "scope": "No prompt-quality excuses, no regeneration, no mesh repair or texture repaint. Assembly rotation/scaling and host collision are separate engineering work.",
+  "overall_zh": "本次室内基础家具更倾向Meshy：体块规整，桌椅、床、置物架、锅和水壶较干净。Tripo更卡通，但多件出现过度装饰、石块底座或建筑图案。两家首轮都存在明确的语义和模块分离失败，不能将整套原样标成商业成品。",
+  "tripo": [
+    {"asset":"door_leaf","finding_zh":"要求独立门板，首轮带石砌门框；若整个模型随门轴转动，石框也一起运动。","production_blocker":true},
+    {"asset":"weapon_rack","finding_zh":"要求空架，首轮包含武器；这些武器没有独立物品身份。","production_blocker":true},
+    {"asset":"workbench","finding_zh":"偏圆润卡通，出现鲜亮蓝紫色台钳与石质脚座。","production_blocker":false},
+    {"asset":"chest","finding_zh":"闭合箱体可辨，但附带石底座和额外装饰，箱盖不是独立游戏组件。","production_blocker":false},
+    {"asset":"cooking_pot","finding_zh":"普通铸铁锅变成带房屋图案的装饰器皿，偏离实用生活道具。","production_blocker":true},
+    {"asset":"jug","finding_zh":"仅需素陶壶加色带，首轮附带大幅房屋图案。","production_blocker":true},
+    {"asset":"sword","finding_zh":"能辨识为单手剑，但原始姿态倾斜，装配时只作刚体朝向对齐。","production_blocker":false}
+  ],
+  "meshy": [
+    {"asset":"shutter_leaf","finding_zh":"要求独立木窗扇，首轮带石砌外框；整个模型随窗轴转动时外框也运动。","production_blocker":true},
+    {"asset":"sword","finding_zh":"上下两端均出现剑柄，缺少合理剑尖；正背面都能看到双柄结构。","production_blocker":true},
+    {"asset":"weapon_rack","finding_zh":"要求空架，首轮带三把剑；不能当作已分离的武器库存。","production_blocker":true},
+    {"asset":"hearth","finding_zh":"炉灶外形清晰，但附带小锅等内容，与独立道具要求不完全一致。","production_blocker":false},
+    {"asset":"chest","finding_zh":"要求闭合箱，结果为开箱；箱盖仍在同一个模型中，当前不提供箱盖开合逻辑。","production_blocker":true},
+    {"asset":"bed/table/chair/shelf/cooking_pot/jug","finding_zh":"整体结构较规整，作为本次室内家具基础更易继续使用。","production_blocker":false}
+  ],
+  "commercial_status": "Playable engineering study with first-result visual defects. MIT demo code does not automatically give the generated asset set an unrestricted MIT license. See NOTICE.txt.",
+  "source_render_directory": "props/"
+}

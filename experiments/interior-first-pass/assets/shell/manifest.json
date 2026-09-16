@@ -1,0 +1,573 @@
+{
+  "houses": [
+    {
+      "variant_id": "01_hearth_cottage",
+      "name_zh": "首轮组件对照住宅",
+      "source_glb": "res://assets/shell/01_hearth_cottage.glb",
+      "coordinates": {
+        "authoring": "blender_z_up",
+        "runtime": "godot_y_up",
+        "front_normal_godot": "+Z"
+      },
+      "dimensions_m": {
+        "target_height": 5.4,
+        "blocks": [
+          {
+            "name": "main",
+            "width": 8.0,
+            "depth": 7.0,
+            "floors": 1,
+            "floor_height": 3.2,
+            "roof_rise": 2.2
+          }
+        ]
+      },
+      "spaces": [
+        {
+          "id": "main",
+          "kind": "interior",
+          "access": "through the main door",
+          "x": [
+            -4.0,
+            4.0
+          ],
+          "y": [
+            -3.5,
+            3.5
+          ],
+          "floors": 1,
+          "floor_height": 3.2
+        }
+      ],
+      "parts": [
+        {
+          "id": "BuildingShell",
+          "type": "shell",
+          "node": "BuildingShell"
+        },
+        {
+          "id": "Roof",
+          "type": "roof",
+          "node": "Roof"
+        },
+        {
+          "id": "TimberFrame",
+          "type": "timber_frame",
+          "node": "TimberFrame"
+        },
+        {
+          "id": "DoorFrame",
+          "type": "door_frame",
+          "node": "DoorFrame"
+        },
+        {
+          "id": "DoorLeaf",
+          "type": "door_leaf",
+          "node": "DoorLeaf"
+        },
+        {
+          "id": "WindowFrame_00",
+          "type": "window_frame",
+          "node": "WindowFrame_00"
+        },
+        {
+          "id": "WindowFrame_01",
+          "type": "window_frame",
+          "node": "WindowFrame_01"
+        },
+        {
+          "id": "WindowFrame_02",
+          "type": "window_frame",
+          "node": "WindowFrame_02"
+        },
+        {
+          "id": "WindowFrame_03",
+          "type": "window_frame",
+          "node": "WindowFrame_03"
+        },
+        {
+          "id": "WindowFrame_04",
+          "type": "window_frame",
+          "node": "WindowFrame_04"
+        },
+        {
+          "id": "WindowFrame_05",
+          "type": "window_frame",
+          "node": "WindowFrame_05"
+        },
+        {
+          "id": "WindowFrame_06",
+          "type": "window_frame",
+          "node": "WindowFrame_06"
+        },
+        {
+          "id": "WindowFrame_07",
+          "type": "window_frame",
+          "node": "WindowFrame_07"
+        },
+        {
+          "id": "WindowSash_00",
+          "type": "window_sash",
+          "node": "WindowSash_00"
+        },
+        {
+          "id": "WindowSash_01",
+          "type": "window_sash",
+          "node": "WindowSash_01"
+        },
+        {
+          "id": "WindowSash_02",
+          "type": "window_sash",
+          "node": "WindowSash_02"
+        },
+        {
+          "id": "WindowSash_03",
+          "type": "window_sash",
+          "node": "WindowSash_03"
+        },
+        {
+          "id": "WindowSash_04",
+          "type": "window_sash",
+          "node": "WindowSash_04"
+        },
+        {
+          "id": "WindowSash_05",
+          "type": "window_sash",
+          "node": "WindowSash_05"
+        },
+        {
+          "id": "WindowSash_06",
+          "type": "window_sash",
+          "node": "WindowSash_06"
+        },
+        {
+          "id": "WindowSash_07",
+          "type": "window_sash",
+          "node": "WindowSash_07"
+        },
+        {
+          "id": "ShutterPivot_L_00",
+          "type": "shutter",
+          "node": "ShutterPivot_L_00"
+        },
+        {
+          "id": "ShutterPivot_R_00",
+          "type": "shutter",
+          "node": "ShutterPivot_R_00"
+        },
+        {
+          "id": "ShutterPivot_L_01",
+          "type": "shutter",
+          "node": "ShutterPivot_L_01"
+        },
+        {
+          "id": "ShutterPivot_R_01",
+          "type": "shutter",
+          "node": "ShutterPivot_R_01"
+        },
+        {
+          "id": "ShutterPivot_L_02",
+          "type": "shutter",
+          "node": "ShutterPivot_L_02"
+        },
+        {
+          "id": "ShutterPivot_R_02",
+          "type": "shutter",
+          "node": "ShutterPivot_R_02"
+        },
+        {
+          "id": "ShutterPivot_L_03",
+          "type": "shutter",
+          "node": "ShutterPivot_L_03"
+        },
+        {
+          "id": "ShutterPivot_R_03",
+          "type": "shutter",
+          "node": "ShutterPivot_R_03"
+        },
+        {
+          "id": "ShutterPivot_L_04",
+          "type": "shutter",
+          "node": "ShutterPivot_L_04"
+        },
+        {
+          "id": "ShutterPivot_R_04",
+          "type": "shutter",
+          "node": "ShutterPivot_R_04"
+        },
+        {
+          "id": "ShutterPivot_L_05",
+          "type": "shutter",
+          "node": "ShutterPivot_L_05"
+        },
+        {
+          "id": "ShutterPivot_R_05",
+          "type": "shutter",
+          "node": "ShutterPivot_R_05"
+        },
+        {
+          "id": "ShutterPivot_L_06",
+          "type": "shutter",
+          "node": "ShutterPivot_L_06"
+        },
+        {
+          "id": "ShutterPivot_R_06",
+          "type": "shutter",
+          "node": "ShutterPivot_R_06"
+        },
+        {
+          "id": "ShutterPivot_L_07",
+          "type": "shutter",
+          "node": "ShutterPivot_L_07"
+        },
+        {
+          "id": "ShutterPivot_R_07",
+          "type": "shutter",
+          "node": "ShutterPivot_R_07"
+        },
+        {
+          "id": "Porch",
+          "type": "bay",
+          "node": "Porch"
+        }
+      ],
+      "door_unit_node": "DoorUnit",
+      "pivots": [
+        {
+          "id": "DoorPivot",
+          "type": "door",
+          "node": "DoorPivot",
+          "unit_node": "DoorUnit",
+          "axis_gltf": [
+            0,
+            1,
+            0
+          ],
+          "hinge_range_deg": [
+            0,
+            90
+          ],
+          "closed_angle_deg": 0,
+          "open_angle_deg": 88,
+          "leaf_node": "DoorLeaf"
+        },
+        {
+          "id": "WindowSash",
+          "type": "window",
+          "nodes": [
+            "WindowSash_00",
+            "WindowSash_01",
+            "WindowSash_02",
+            "WindowSash_03",
+            "WindowSash_04",
+            "WindowSash_05",
+            "WindowSash_06",
+            "WindowSash_07"
+          ],
+          "travel_m": 0.715,
+          "axis_gltf": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "Shutters",
+          "type": "shutter",
+          "nodes": [
+            "ShutterPivot_L_00",
+            "ShutterPivot_R_00",
+            "ShutterPivot_L_01",
+            "ShutterPivot_R_01",
+            "ShutterPivot_L_02",
+            "ShutterPivot_R_02",
+            "ShutterPivot_L_03",
+            "ShutterPivot_R_03",
+            "ShutterPivot_L_04",
+            "ShutterPivot_R_04",
+            "ShutterPivot_L_05",
+            "ShutterPivot_R_05",
+            "ShutterPivot_L_06",
+            "ShutterPivot_R_06",
+            "ShutterPivot_L_07",
+            "ShutterPivot_R_07"
+          ],
+          "axis_gltf": [
+            0,
+            1,
+            0
+          ],
+          "hinge_range_deg": [
+            0,
+            75
+          ],
+          "open_angle_deg": 75
+        }
+      ],
+      "openings": [
+        {
+          "kind": "door",
+          "id": "door_main",
+          "centre": [
+            0.0,
+            -3.5,
+            1.1
+          ],
+          "size": [
+            1.2,
+            0.26,
+            2.2
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "clear_width": 1.2,
+          "clear_height": 2.2,
+          "node_window_id": null
+        },
+        {
+          "kind": "window",
+          "id": "window_00",
+          "centre": [
+            -1.3333333333333335,
+            -3.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_00"
+        },
+        {
+          "kind": "window",
+          "id": "window_01",
+          "centre": [
+            1.333333333333333,
+            -3.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_01"
+        },
+        {
+          "kind": "window",
+          "id": "window_02",
+          "centre": [
+            -1.3333333333333335,
+            3.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_02"
+        },
+        {
+          "kind": "window",
+          "id": "window_03",
+          "centre": [
+            1.333333333333333,
+            3.5,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_03"
+        },
+        {
+          "kind": "window",
+          "id": "window_04",
+          "centre": [
+            -4.0,
+            -1.1666666666666665,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_04"
+        },
+        {
+          "kind": "window",
+          "id": "window_05",
+          "centre": [
+            -4.0,
+            1.166666666666667,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_05"
+        },
+        {
+          "kind": "window",
+          "id": "window_06",
+          "centre": [
+            4.0,
+            -1.1666666666666665,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_06"
+        },
+        {
+          "kind": "window",
+          "id": "window_07",
+          "centre": [
+            4.0,
+            1.166666666666667,
+            1.6
+          ],
+          "size": [
+            1.05,
+            0.26,
+            1.3
+          ],
+          "outward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "node_window_id": "WindowSash_07"
+        }
+      ],
+      "collision": [
+        {
+          "id": "shell",
+          "node": "BuildingShell",
+          "kind": "trimesh",
+          "source_mesh": "BuildingShell"
+        },
+        {
+          "id": "timber",
+          "node": "TimberFrame",
+          "kind": "trimesh",
+          "source_mesh": "TimberFrame"
+        },
+        {
+          "id": "roof",
+          "node": "Roof",
+          "kind": "trimesh",
+          "source_mesh": "Roof"
+        },
+        {
+          "id": "door_leaf",
+          "node": "DoorLeaf",
+          "kind": "box",
+          "parent_pivot": "DoorPivot",
+          "size": [
+            1.1199999999999999,
+            0.09,
+            2.1500000000000004
+          ],
+          "centre_local": [
+            0.6,
+            0.0,
+            1.0750000000000002
+          ]
+        }
+      ],
+      "roof_removable": true,
+      "triangles_by_part": {
+        "BuildingShell": 2980,
+        "Roof": 2832,
+        "TimberFrame": 372,
+        "DoorFrame": 36,
+        "DoorLeaf": 72,
+        "WindowFrame_00": 72,
+        "WindowSash_00": 72,
+        "Shutter_L_00": 60,
+        "Shutter_R_00": 60,
+        "WindowFrame_01": 72,
+        "WindowSash_01": 72,
+        "Shutter_L_01": 60,
+        "Shutter_R_01": 60,
+        "WindowFrame_02": 72,
+        "WindowSash_02": 72,
+        "Shutter_L_02": 60,
+        "Shutter_R_02": 60,
+        "WindowFrame_03": 72,
+        "WindowSash_03": 72,
+        "Shutter_L_03": 60,
+        "Shutter_R_03": 60,
+        "WindowFrame_04": 72,
+        "WindowSash_04": 72,
+        "Shutter_L_04": 60,
+        "Shutter_R_04": 60,
+        "WindowFrame_05": 72,
+        "WindowSash_05": 72,
+        "Shutter_L_05": 60,
+        "Shutter_R_05": 60,
+        "WindowFrame_06": 72,
+        "WindowSash_06": 72,
+        "Shutter_L_06": 60,
+        "Shutter_R_06": 60,
+        "WindowFrame_07": 72,
+        "WindowSash_07": 72,
+        "Shutter_L_07": 60,
+        "Shutter_R_07": 60,
+        "Porch": 264
+      },
+      "triangles_total": 8668,
+      "render_paths": {}
+    }
+  ],
+  "authoring": "Existing H88 modular shell, one floor; not AI house generation."
+}

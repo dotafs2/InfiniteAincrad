@@ -2,6 +2,136 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-16 · H99 当日成果归档与回家接续
+
+用户要求上传今天所有改动，并在退出错误未解决后明确要求“这个错误也放到线上交接，我回家继续干”。本次按此指示保留可预览结果和已知问题，不继续图形调试，不把未解决项写成完成。
+
+上传范围覆盖H89—H98：Tripo/Meshy房屋和36件首轮组件对比、可运行双住宅示例、账号池脚本、16栋/10居民生活街区、EZ-Tree三种树形与风格候选、Meshy植物原始试验、原生PCG插件和首个装配Demo。此前H88美术扩建已在 `aa026a3`；新增原始素材64个文件、543,707,621字节已按白名单归档，清单与SHA在 `Art/SourceModels/20260916/manifest.json`。`python tools/archive_art_20260916.py --restore` 可恢复旧工具的exports输入路径，不重新调用API。双住宅可直接打开 `experiments/interior-first-pass/project.godot`；组件比较页 `Art/Generated/InteriorFirstPass20260916/first-result-review.html`、植物比较页 `Art/Generated/PCG20260916/model-review/pcg-model-review.html` 可离线打开。旧Transfer私有压缩包、重复deliveries、账号与运行存档未进入上传。
+
+**回家入口：** 拉取代码后运行 `git lfs pull`，安装Python和Godot 4.7.2 .NET及.NET 8 SDK，运行 `StartDemo.cmd`；可传 `--godot "完整exe路径"`。首次会准备C#桥接与资源导入；原街区私有档存在则复制，缺失时使用公共十居民初始设定创建独立离线预览，明确不包含原世界历史。`--save` 可选择自行复制的原档，源文件不会被覆盖。V高空总览、WASD移动、E门、F窗；居民默认暂停，不发NPC/GM/API请求。全新预览的加载、完整保存和冷恢复检查通过；首次干净克隆后的完整渲染尚未在另一台电脑验证。账号池21项、迁移6项离线测试通过。
+
+**下一步仍是退出资源错误。** 完整实渲日志 `Art/Generated/PCG20260916/demo-v2/engine-exit.log.txt`、进程退出记录和delivery-status.json一起交接。可复制的继续提示词与全部改动文件绝对路径在 `Art/Generated/PCG20260916/handoff/continue-prompt.txt` 和 `changed-files.json`。唯一流程图和美术记录同步；README继续保持空白。
+
+## 2026-09-16 · H98 首个 Demo 小镇批量装配（复测完成，退出待修）
+
+用户接受H97初步草树效果，要求批量使用已有模型，按第一层方向补缺，搭建第一个Demo小镇。本轮保留原16栋住宅和10位居民，以已确认的第一层市场街/托尔巴纳图片约束风格；院落功能分组是项目设计，未宣称为原著精确地图。新增 `game/scenes/demo_town.tscn` 与 `StartDemo.cmd`，启动器每次复制私有试验存档；正式世界SHA不变。NPC/GM模型调用0。
+
+整理42类模型目录，实放39类／145处独立道具，包含市场货摊、铁匠/木工/烘焙/染织/渔具/陶艺院落、旅店桌椅、货运停靠和路灯。7种已有Meshy室内小件重新打包为1K贴图，保留原几何；其余复用现有家具、工坊和货运资产。仅补4个Meshy首轮模型：摊位、木桶、果蔬箱、手推车，全部完成、未重抽；服务商回执120积分，按12元/1100积分约1.31元，无未知扣费，旧植物队列仍暂停。原始GLB在 `exports/meshy-pool/floor1-demo-props-20260916-v1`，生成计划与预算在 `experiments/pcg-trial/demo-assets.json`。
+
+ProtonScatter原生修改器投放116棵EZ-Tree、66,000丛SimpleGrassTextured草、28组岩石、8根倒木；沿用Terrain3D和180段Road Generator道路。增加道路节点圆形排除区、院落和门前进路排除区，修复H97弯道草侵入空带的问题。首次批量运行的所有实例中心道路/住宅排除检查通过；40/40导航路线、30/30真实居民行走、64/64门窗检查通过。截图及报告在 `Art/Generated/PCG20260916/demo-v1`，此轮道具只增加场景呈现和碰撞，不自动授予居民新职业、物品或动作规则。
+
+首轮实渲发现旧环境LOD顶点色未启用、摊位背朝街道和手推车源轴向问题。已重建42个预制体、启用真实源顶点色、修正摊位/车朝向、将烘焙区移至面包师住宅侧、增加院落铺地。修正后的13张实渲位于 `Art/Generated/PCG20260916/demo-v2`；复查40/40路线、30/30实际行走、64/64门窗及所有散布中心道路/住宅排除均通过，原正式世界SHA保持不变。首轮demo-v1保留供比较。
+
+**退出错误仍未解决，用户要求连同问题上传交接。** v1短采样181.85ms/帧、P95 218.48ms；无Godot时GPU仍5573/8188MiB、63%负载，存在两台非本任务UE4编辑器。v2同类市场视角90帧为15.94ms、P95 19.78ms，约62.7FPS，5896 draw calls/7,552,160 primitives。这证明此前5.5FPS不能当作场景稳定性能；后台负载未受控，仍不能宣称整图稳定60FPS。未关闭非自有编辑器。
+
+两轮均在检查完成、报告写出后出现 `Pages in use exist at exit in PagedAllocator`（GeometryInstanceSurfaceDataCache/GeometryInstanceForwardClustered）、5个SceneForwardClusteredShaderRD未释放及依赖泄漏警告。v2尝试先释放场景子节点、等待4帧再quit，同样报错；代码保留此清理步骤，但不声称已修复。监管脚本见错误终止自有进程，完整日志可能止于强制结束处；正常程序退出码不能从它推断。自有进程最终0，4个远程模型均已完成，无未决生成和自动定时续跑。尚未确定责任在插件、渲染资源引用或引擎；下一轮应先做组件隔离和资源生命周期诊断，不要重复无目的整图试跑。
+
+## 2026-09-16 · H97 SimpleGrassTextured + EZ-Tree 首版 PCG 投放
+
+用户明确选用 IcterusGames/SimpleGrassTextured，要求用现成插件简单刷一版；同时纠正上一版树的方向为“减少三渲二、多一些PBR”。安装 SimpleGrassTextured 2.1.0（MIT，FabinhoSC草贴图CC0），将已有 EZ-Tree 0.2.0复制进主Godot工程，保留插件原始源码。下载包SHA与使用方式记入 `experiments/pcg-trial/plugins.json`。GitHub版本API限流后使用官方codeload包并固定SHA，未调用付费服务。
+
+新增 `native_trial.tscn`，复用原十居民生活街区与试验存档：Terrain3D显示既有坡地，Road Generator生成180段道路；ProtonScatter的随机布点、缩放旋转、地面投影与排除形状负责50棵树／24,100丛草。草使用SimpleGrassTextured原交叉面、贴图、风动着色器与风场单例，由ProtonScatter分块MultiMesh绘制；没有重写草生成器或散布算法。树恢复EZ-Tree原树皮颜色／法线／粗糙度贴图及接收阴影的叶片风动材质，两种17,440三角面的树形预先生成保存，树干有独立碰撞。当前只有树和草，花卉、独立灌木与踩草交互未实现。
+
+原先启用编辑器插件时的headless导入退出错误，通过只在导入期间关闭编辑器插件、finally恢复项目设置避开；本轮导入／资产准备／Vulkan实渲错误数均0，自有进程均退出。40/40公共地点导航路径、16栋×4项门窗检查通过；本轮未重做30段真实居民行走。市场固定视角90帧均值15.84ms、P95 18.23ms，仅为RTX4060本机短采样，不是整图性能结论。既有导航合并警告仍在，第一次烘焙4处、含树干重新烘焙后2处；未视为全世界导航已无瑕疵。正式世界SHA仍 `3ed26a1024e59cad84960022c09bbb0f0bc18062bdc15f79903a9268014e526a`，没有推进时间或调用NPC/GM。
+
+7张Godot实渲与报告在 `Art/Generated/PCG20260916/native-v1`。视觉判断：PCG组合已跑通，草能贴坡；树比上一版更PBR，但草色偏亮、重复草簇及街区地面单薄仍明显。额外坐标检查发现东侧弯道(23,41)连接处6丛草进入预留70cm空带，草中心尚在道路宽度外，房屋排除区违规0；已立即告知用户并询问严格留空还是允许探边，暂停进一步摆放修改。首版保留供评判。`python tools/play_pcg_trial.py` 可从私有试验档再复制一份打开本版，默认暂停居民；没有覆盖主场景入口。
+
+## 2026-09-16 · H96 EZ-Tree 二次元材质候选
+
+用户认为默认树偏写实，要求更二次元。下载现成 FaRu85/Godot-Foliage，保留原MIT代码、CC0叶簇贴图和许可证，单独增加适配版着色器；EZ-Tree原插件源文件未改。沿用同一宽冠树的全部枝干，简化树皮、叶簇数量和轮廓、统一色彩，适配朝向相机的叶片布局与树冠法线。两树对照保持同灯光／同机位，枝干顶点与索引一致断言通过；原24,352三角面，候选6,964，尚无森林性能结论。
+
+v1发现现成着色器的距离补叶会使叶簇粘连、自阴影出现条纹；v2禁用试验距离范围内的补叶并关闭叶片接收阴影；v3将原旋转叶面正确适配为着色器所需的面片中心，减少侧视角薄边和斜切。最终六张Godot 4.7.2 Vulkan实渲、原版／候选快照场景及报告在 `Art/Generated/EZTree20260916/stylized-v3`，之前图片全部保留。近景重复面片感与场景阴影融合仍有限制；这轮只交付风格候选，没有宣布符合原著最终美术或投放正式小镇。
+
+独立项目默认入口改为 `stylized_trial.tscn`，原 `trial.tscn` 仍可运行。四份文档范围保持，README未写内容，唯一流程图同步H96与待评判阶段。此次新增付费API／NPC／GM调用均为0；导入、三次有明确视觉问题驱动的实渲日志无错误，所有自有进程退出。
+
+## 2026-09-16 · H95 EZ-Tree For Godot 实机试用
+
+用户查看本批 Meshy 植物后质疑碎片状叶片，随后要求试用现成 EZ-Tree For Godot。只读核对确认此前 Meshy 参数开启重拓扑，榆树／白桦／灌木分别为4,082／1,327／1,107三角面；其白模与带材质模型的顶点、索引一致，材质双面且无透明通道。重拓扑仍是嫌疑，尚未用同一高模完成受控归因；原始文件保留，未为诊断再次付费生成。
+
+从 Godot Asset Store 下载 EZ-Tree For Godot 0.2.0（MIT，作者标记实验版），安装在独立项目 `experiments/ez-tree-trial`。插件源代码与材质未改动；仅将目录名规范为其自身引用的小写路径，排除打包的导入缓存。下载地址及SHA256见 `experiments/ez-tree-trial/provenance.json`。由插件原生生成默认、宽冠、紧凑三棵树，13,806／24,352／20,140三角面，保留自带树皮、叶簇贴图、圆润法线和风动着色器。
+
+Godot 4.7.2 / Vulkan / RTX4060完成导入与真实截图，日志无错误。五张实渲、三份参数场景及报告位于 `Art/Generated/EZTree20260916`；最后一次单棵生成约68—125毫秒，仅是本机小样记录。试验进程全部退出。叶片轮廓与枝干结构比此前候选完整，默认画风仍偏写实、细节密集，未称二次元成品；未在正式小镇投放，未验证大规模森林性能、碰撞或寻路。本次API生成0、NPC/GM调用0。用户先看效果，再决定风格化与PCG接入方向。
+
+## 2026-09-16 · H94 原十居民世界接入第一层生活街区
+
+用户要求把新增美术替换进原小镇，按第一层参考建设一个生活街区及周边、保留整城和野外道路；只采用第一层，排除22层／47层等其他楼层。已确认托尔巴纳高视角与起始之城市场街两张参考、允许重排十人坐标和住所，保留身份、历史和财物。两图属于不同城镇；当前市场街区为项目原创组合，没有把两城虚构成原著相邻街区，也没有宣称获得整层精确地图。用户要求重启时立即暂停、保存初稿；收到“继续吧”后恢复实现。
+
+原 `town_street.tscn` 入口现按存档中的 `spatial_layout` 加载新街区，未迁移的旧测试存档继续使用原场景。正式测试存档 `tmp/mvp-autonomy-20260914/prepared/real/canonical-world.json` 已启用16栋模块房，其中10栋分配给原居民且有可进入的一层室内；复用8种首次生成的Meshy组件（床、桌、椅、箱、壁炉、壶、架、工作台），几何保持、贴图打包至2K。门、窗保持独立与真实碰撞，状态可保存；弯曲支路、连续地形和两处抬高宅地连接原四个公共地点，整城／野外道路预留。家具是独立美术物件，本次没有新增居民生产能力、食物、金钱或技能。
+
+迁移保留全部非空间字段：原生活流水、全局居民档案、对话、居民身份、财物、修理合同、已知地点记录逐项保持。旧采集布局安装事件原样保留，以独立的迁移前后空间记录连接新采集点，拒绝不匹配的记录。使用世界已有writer-lock并核对源哈希后原子替换。迁移前SHA256 `da4f47b07518a42717b960d7c23471fa0e86d3425eb1180bc77501e4d145e2b4`，启用后 `7b5ee17b83c5fdbc623dcee992cf2eeef82665992503c70c1c1a97e68ed46493`。双份本机备份在 `private/living-quarter-20260916/original-seq129.json` 与 `candidate-final.pre-activation.json`，可回退。
+
+发现并修复两个真实卡点：多人占据市场到达点时RVO停滞，增加保持原目的地的局部绕人路线；家具替换后窄门转弯贴框，增加门洞中心的进入／退出短路径。最终真实碰撞体30段行走全部到达（十人进屋→市场→回家），其中使用30次门洞通行、1次人群绕行；不是LLM决定的生活成果。40条家到公共地点的导航路径、64项门窗开关碰撞、10个采集工作点通过；6项Python迁移／锁／防覆盖回归和34项Godot保存／冷恢复／历史保护检查通过。记录和截图在 [H94发布证据](Art/Generated/LivingQuarter20260916/release/report.json)、[实走证据](Art/Generated/LivingQuarter20260916/release/walking-proof.json)、[存档证据](Art/Generated/LivingQuarter20260916/release/state-proof.json)。Godot仍给出导航边合并警告，当前测试覆盖范围已通过，不据此声称所有未来路线永远无阻。
+
+正式世界仍seq129暂停。本轮居民／GM模型调用0，付费模型生成0；没有定时任务。所有本轮Godot检查均由Windows Job封装、结束后所属进程为0。提供 [游览启动入口](experiments/living-quarter/Start.cmd)：WASD移动，鼠标观察，E开关附近房门，F开关该房窗户，V切换45°总览；居民时间保持暂停，继续真实AI生活仍走原网关启动流程。[总览、确认参考与十居民原著依据](ART_STYLE.md#living-quarter) 已整理。[迁移后身份与坐标](Art/Generated/LivingQuarter20260916/residents-after.json) 可与原状态逐项对照。十人为项目原创，只有石青／木生现有两种实际修理技能，其余是兴趣，不冒称原著职业或原著人物。
+
+代码入口：`game/spatial/living_town.gd`、`living_quarter.gd`、`living_quarter_interior.gd`、`living_quarter_layout.json`，原导航与存档校验的相应扩展，`tools/migrate_living_quarter.py`、`prepare_living_props.py`、`check_living_quarter.py`、`play_living_quarter.py` 及针对性回归。README仍为空；本轮没有新增第五份说明文档，代码尚未提交或上传。
+
+## 2026-09-16 · H93 Meshy 多账号流水线与首个账号接入
+
+用户希望将每个12元／1100积分的Meshy账号接成批量生成流水线，并提供一个商品标称“30天Pro＋1100积分”的账号用于配置。新增[流水线](tools/meshy_pool.py)、[官方网页账号接入](tools/meshy_pool_browser.mjs)、[任务样例](experiments/meshy-pool/jobs.example.json)与[启动入口](experiments/meshy-pool/Start.cmd)。经官方可见网页登录、创建一次性API Key并保存，首个账号`meshy-001`的API余额实测1100。凭据仅存本机Git忽略目录，文档不记录邮箱、密码或Key。本次没有创建付费模型；示例锅和椅子仍未提交。
+
+流水线支持文字／本地图片生成、按整件模型余额分配账号、跨账号并发、同账号建模接续贴图、GLB下载与哈希、费用记录和断点续跑。提交前先写状态；网络超时或崩溃后不自动重发付费请求；429、未知结果、任务失败和价格超过估算会停止新任务。恢复不确定提交时，可明确绑定原任务ID；下载失败只取回原模型。默认同时最多2个账号、每账号1件模型，单次运行30分钟，远端已提交任务可继续完成，下一次沿用同批次状态取回结果。没有新增定时任务。
+
+实测网页登录、Key创建、余额查询成功；重复接入跳过已配置账号。21项[离线测试](tools/test_meshy_pool.py)通过，覆盖账号绑定、余额预留、并发、提交超时／崩溃、限流停止、下载恢复、预算、异常费用、任务归属和图片变更；该结果不等同于新流水线已完成付费端到端生成。首次浏览器运行的19个所属进程全部正常退出，重复接入也已退出。发现Windows无窗口子进程未转发输出后，补了结构化事件转发并实测重复接入事件可见。
+
+按[官方API积分表](https://help.meshy.ai/en/articles/16815622-how-many-credits-does-each-meshy-api-task-cost)和用户购入价，Meshy7普通网格20积分约0.2182元，普通2K／4K贴图完整模型30积分约0.3273元；每账号可完成36件，余20积分不跨账号合并，若余量不用则每件实际分摊0.3333元。代码、费用表与[使用方法](ART_STYLE.md#meshy-account-pool)已保存，唯一流程图同步H93。正式世界仍保持暂停。
+
+## 2026-09-16 · H92 房屋与小组件表现反转原因调查
+
+用户认为本批小组件Meshy胜出，询问整屋不如Tripo是否偶现。核对H89参数、四面实渲及H88更早三栋Meshy图生房屋，并查阅Meshy官方文本生成指南、API参数和2026-08-12图生几何评测。当前证据支持本批整屋的风格／整体设计偏差；图生旧样本说明Meshy并非不能做出更完整房屋。文字／图片、自动重拓扑和随机样本相互混杂，各家仅一栋同题，无法判断稳定优势或估计偶现概率。没有发现用了旧Meshy版本、低分辨率颜色贴图或单独低几何档的证据。最高原始质量与本次约8万面交付质量是不同问题。
+
+结论与引用已写入[美术记录](ART_STYLE.md)。只保存用户总体偏好，未生成个人逐项分数；没有新增付费任务、改变原模型、开启定时任务或替换世界资产。
+
+## 2026-09-16 · H91 首轮组件与房屋逐项人工评判
+
+用户要求把组件和房屋列齐，自己评判，同时要Codex独立判断。本次覆盖H89／H90的18组组件、整栋生成房屋、装配住宅，共20组／40个对象；收集94张已有图像供正背面、整屋四面及实机视角切换。用户评分初始留空；Codex评分按外观、符合用途、模块可用性三个0—10维度记录，意见默认折叠。交互页支持本机暂存、查看可复制文本和用户主动发送意见；未把Codex意见当作用户选择或自动采用结果。
+
+全部评分及具体理由见[review-scores.json](Art/Generated/InteriorFirstPass20260916/review-scores.json)和[美术记录](ART_STYLE.md)。页面来源为[review.template.html](Art/Generated/InteriorFirstPass20260916/review.template.html)，由[构建工具](tools/build_first_pass_review.py)嵌入已有图像缩略图；本机输出位置见[review-delivery.json](Art/Generated/InteriorFirstPass20260916/review-delivery.json)。没有重新调用模型API、修模型、重生成图片或启动后台任务。主观结论：整栋外观倾向Tripo，基础家具倾向Meshy；两家都保留明显结构／拆分缺陷，不以评分代替商用授权或最终质量确认。
+
+## 2026-09-16 · H90 两套首轮室内组件与可进入住宅
+
+用户要求Tripo、Meshy分别测试第一层生活／武器小组件，只看每项第一次生成，不重抽、不修美术，不把失败归因于提示词；追加完整可进入房屋、可开关门窗和碰撞，并希望MIT许可。用户确认两家均仅购买API积分。按同一份预先冻结的[18项请求](Art/Generated/InteriorFirstPass20260916/request.json)，每家生成门板、窗扇、剑、盾、武器架、工作台、铁砧、炉灶、床、箱、桌、椅、架、药瓶、提灯、锅、餐盘和水壶。全部36个GLB成功，本轮54个付费生成阶段（Tripo18；Meshy preview18＋refine18），没有质量重试、重贴图或再次减面。
+
+| 本轮实际 | Tripo H3.1 | Meshy 7 |
+| --- | --- | --- |
+| 组件种类／首轮模型 | 18／18 | 18／18 |
+| 消费与余额 | 540积分；570→30 | 540积分；1384→844 |
+| 原始三角面合计 | 183,644 | 176,008 |
+| 原始GLB总量（十进制） | 43.36MB | 352.97MB |
+
+Tripo按API标价等值$5.40；Meshy用户为API积分购买，未取得充值单价，不套用Pro订阅摊销价。不同文件编码体积不能直接等同于显存与帧率。完整来源、任务ID、费用、原件哈希、参数及边界见[清单](Art/Generated/InteriorFirstPass20260916/manifest.json)。密钥、原始响应和签名URL只在被忽略的本机目录。
+
+住宅不是让模型一次生成的整栋房：复用H88自建模块房算法生成一层8×7米外壳，使用同一布局放置两家组件，各20个家具／道具实例、1扇门、8组窗。门窗有独立节点、转轴和随动碰撞；家具保留独立GLB、稳定asset_id／instance_id与碰撞，桌面小物按实际承托面放置。门板／窗扇为匹配既有洞口做三轴尺寸适配，家具做统一比例、位置和刚体朝向适配；36份原始GLB和项目拷贝字节哈希均保持。Godot正常生成自己的导入与纹理缓存，不回写生成原件。
+
+工程入口[main.gd](experiments/interior-first-pass/main.gd)、[house.gd](experiments/interior-first-pass/house.gd)。两屋108项引擎检查通过，包括0.5米直径、1.72米高角色关门受阻、开门进入／退出、墙地与顶碰撞、16组窗开闭后窗格通断和固定中柱阻挡、40个道具实例的碰撞、14处承托面落位及独立ID。最初窗测试射线落在固定中柱，改为同时检查窗格和中柱，未删除真实窗框碰撞；实机发现剑／灯悬空后修正了旋转模型的精确包围和台面定位。未修补或重抽AI美术。
+
+初版外观结论与整栋H89不同：本轮基础家具倾向Meshy，桌椅、床、置物架、锅、水壶较干净规整；Tripo更卡通但多件过度装饰，锅／壶出现房屋图案。两家都有模块化失败：Tripo门板带石框，Meshy窗扇带石框；两家空武器架都带武器；Meshy剑有上下双柄，箱子要求关闭却生成打开且箱盖未独立。**可进入、可开关的工程样板已实现；首轮模型整套尚不够直接作商业成品。** 不因为角色能走通就把视觉、语义或拆分缺陷判成合格。[逐项目视记录](Art/Generated/InteriorFirstPass20260916/visual-review.json)。
+
+用户要求的MIT已用于本轮演示软件，见[LICENSE](experiments/interior-first-pass/LICENSE)；API模型不自动继承代码许可。Tripo条款5.2.2及官方API说明支持付费输出的商业／分发许可，但受服务条款约束；Meshy帮助页区分付费订阅与免费CC BY 4.0，单买积分的具体权利和无条件MIT再许可未确认。详见[NOTICE](experiments/interior-first-pass/NOTICE.txt)。项目为早期Aincrad低幻想生活需求下的原创布局，不宣称原著某栋住宅的精确复刻或取得SAO商标／IP授权。
+
+本机交付：`exports/interior-first-pass-20260916/project/Start.cmd`启动，需Godot4.7；WASD行走、点击后鼠标转向、门口E开关门、Q开关窗、1／2切换住宅、空格跳跃、Esc释放鼠标、F5／F9保存读取门窗状态。保存接口本轮验证内存状态往返，未将它写成居民世界的冷恢复证据。完整Godot工程包、原模型和截图见[交付清单](Art/Generated/InteriorFirstPass20260916/delivery.json)。正式居民世界仍seq129暂停，没有居民／GM调用、新定时任务或后台自动生成循环。
+
+## 2026-09-16 · H89 Tripo CLI安装与Tripo／Meshy同题住宅实测
+
+用户提供官方CLI文档并填写两家密钥，明确要求Meshy也重新生成。已用`npm install -g tripo-cli`安装官方0.4.0，配置本机`infiniteaincrad`国际区profile；`tripo.cmd doctor --json --no-open`的运行时、认证、网络、余额检查全部通过。密钥保存在被忽略的`secrets/`及本机CLI配置，未写入公开证据。此前国际API网络异常已恢复，无需代理或修改系统DNS。
+
+用相同英文住宅描述，各生成一栋带PBR贴图的两层小屋，目标约80K三角面：Tripo `v3.1-20260211`标准几何＋HD贴图；Meshy 7 preview＋4K refine，Ultra关闭。新工具[compare_house_providers.mjs](tools/compare_house_providers.mjs)提交前落盘保留调用状态，禁用Tripo客户端创建重试；本轮只有Tripo一次、Meshy两阶段共两次付费创建，没有重抽样。原始响应、签名下载地址和任务状态留在被忽略的`tmp/tripo-meshy-comparison-20260916/`。
+
+| 实测 | Tripo H3.1 | Meshy 7 |
+| --- | --- | --- |
+| 实际积分 | 30；600→570 | preview 20＋refine 10；1414→1384 |
+| 原始三角面 | 72,970 | 77,478 |
+| 原始GLB体积（十进制） | 4.97MB | 30.96MB |
+| 材质／贴图 | 单材质，3张4K | 单材质，2张4K＋1张2K |
+
+按[Tripo官方API定价](https://developers.tripo3d.ai/en/pricing)，30积分等值$0.30。Meshy按[官方API定价](https://docs.meshy.ai/en/api/pricing)实际30积分；若按[Pro月付$20／1000积分](https://help.meshy.ai/en/articles/12062933-which-meshy-plan-is-right-for-you-free-vs-pro-vs-premium-vs-ultra)全部用完摊销，则约$0.60，但用户实际套餐和积分来源未知，不能当作本次美元账单。
+
+使用本机Blender 5.2.1 LTS渲染两模型的38°／128°／218°／308°四方位。修复既有渲染工具固定相机距离裁切屋顶／墙脚的问题，统一按视角包住模型；新增四面输出和贴图尺寸记录。原GLB渲染前后SHA256完全一致，所有自建渲染进程已退出。Meshy服务器两阶段实际处理合计约216秒；Tripo提交至首次观察成功约213秒，但无服务端完成时间且存在人工轮询间隔，因此不据此排名速度。
+
+本样本目视倾向Tripo：圆润体块、粗木梁和红瓦色块更接近卡通手绘方向，侧背面细节丰富。Meshy更规整，但一侧有突兀的大块石墙纹理。两者均只有单体网格，未验证室内、可动门窗、碰撞或NPC通行。GLB大小差异主要来自嵌入贴图字节数，不能等同于显存或帧率差异；单样本也不是厂商总体排名。下一步宜用同一参考图比较，并把候选接入已有LOD／模块门窗流程，而不是直接替换现有住宅。
+
+公开证据：[四面实渲对照](Art/Generated/TripoMeshyComparison20260916/contact-sheet.png)、[参数／扣费／面数／原件哈希](Art/Generated/TripoMeshyComparison20260916/manifest.json)。本机原件及可打开的Blender文件在`exports/tripo-meshy-comparison-20260916/`，该目录未纳入Git。唯一流程图和美术文档同步更新；正式世界仍seq129暂停，本轮没有居民／GM模型调用或新定时任务。
+
 ## 2026-09-16 · H88 第一层轻量建筑与连续场景迭代（本轮已收尾）
 
 用户授权以GPT-6负责方向/建模审查、GPT-5.6和DeepSeek负责工程，持续推进至约定早上9点；允许在已有余额内自主调用Meshy生成、修整场景模型。因凌晨“明天”有歧义，已询问日期，当前按本次睡醒的2026-09-16 09:00北京时间继续，收到更正后调整。

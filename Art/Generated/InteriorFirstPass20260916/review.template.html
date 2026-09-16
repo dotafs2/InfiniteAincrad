@@ -1,0 +1,153 @@
+<div id="aincrad-first-result-review">
+  <h2>组件与房屋 · 首轮评判</h2>
+  <div class="viz-row"><span>18 组组件 · 2 组房屋</span><span id="ar-progress" class="tabular-nums" aria-live="polite">尚未评分</span></div>
+  <div id="ar-items" class="ar-item-grid" aria-label="全部评判条目"></div>
+  <hr>
+  <h3 id="ar-title"></h3>
+  <div id="ar-intent"></div>
+  <div class="viz-controls">
+    <label class="form-label">观察角度<select id="ar-view" class="form-select"></select></label>
+    <span class="text-small">原图缩略展示 · 各项首次生成</span>
+  </div>
+  <div class="ar-compare">
+    <section aria-labelledby="ar-tripo-name">
+      <h3 id="ar-tripo-name">Tripo H3.1</h3>
+      <img id="ar-tripo-image" class="ar-image" alt="Tripo 原始模型">
+      <div class="viz-controls" data-provider="tripo">
+        <label class="form-label">我的外观分<input class="form-control" type="number" min="0" max="10" step="1" data-axis="0" aria-label="Tripo 我的外观分，0至10"></label>
+        <label class="form-label">我的用途分<input class="form-control" type="number" min="0" max="10" step="1" data-axis="1" aria-label="Tripo 我的符合用途分，0至10"></label>
+        <label class="form-label">我的模块分<input class="form-control" type="number" min="0" max="10" step="1" data-axis="2" aria-label="Tripo 我的模块可用性分，0至10"></label>
+        <label class="form-label">我的意见<textarea class="form-control" rows="2" maxlength="1200" data-note="tripo" aria-label="Tripo 我的意见"></textarea></label>
+      </div>
+    </section>
+    <section aria-labelledby="ar-meshy-name">
+      <h3 id="ar-meshy-name">Meshy 7</h3>
+      <img id="ar-meshy-image" class="ar-image" alt="Meshy 原始模型">
+      <div class="viz-controls" data-provider="meshy">
+        <label class="form-label">我的外观分<input class="form-control" type="number" min="0" max="10" step="1" data-axis="0" aria-label="Meshy 我的外观分，0至10"></label>
+        <label class="form-label">我的用途分<input class="form-control" type="number" min="0" max="10" step="1" data-axis="1" aria-label="Meshy 我的符合用途分，0至10"></label>
+        <label class="form-label">我的模块分<input class="form-control" type="number" min="0" max="10" step="1" data-axis="2" aria-label="Meshy 我的模块可用性分，0至10"></label>
+        <label class="form-label">我的意见<textarea class="form-control" rows="2" maxlength="1200" data-note="meshy" aria-label="Meshy 我的意见"></textarea></label>
+      </div>
+    </section>
+  </div>
+  <details>
+    <summary>Codex 对此项的评分与理由</summary>
+    <div class="ar-compare">
+      <section><h3>Tripo</h3><div id="ar-tripo-scores" class="tabular-nums"></div><div id="ar-tripo-verdict"></div></section>
+      <section><h3>Meshy</h3><div id="ar-meshy-scores" class="tabular-nums"></div><div id="ar-meshy-verdict"></div></section>
+    </div>
+  </details>
+  <details>
+    <summary>评分标准</summary>
+    <dl>
+      <dt>外观</dt><dd>轮廓、材质与本项目低幻想生活风格。</dd>
+      <dt>符合用途</dt><dd>是否做对物品，有没有多出或缺少关键部分。</dd>
+      <dt>模块可用性</dt><dd>独立拆分和装配基础；不等于已经实现战斗、烹饪或库存逻辑。</dd>
+      <dt>0—10 分</dt><dd>8—10：可保留候选；5—7：有明确待改处；0—4：当前不宜按预定用途采用。主观评判，不含商用授权结论。</dd>
+    </dl>
+  </details>
+  <details>
+    <summary>Codex 全部逐项评分</summary>
+    <div class="table-responsive"><table class="table table-sm"><thead><tr><th>条目</th><th>Tripo 外观 / 用途 / 模块</th><th>Meshy 外观 / 用途 / 模块</th></tr></thead><tbody id="ar-all-scores"></tbody></table></div>
+  </details>
+  <hr>
+  <div class="viz-row"><button id="ar-send" type="button" class="btn btn-primary" disabled>发送我的评判给 Codex</button><button id="ar-show-text" type="button" class="btn">查看我的评判文本</button><span id="ar-save-state" class="text-small" aria-live="polite"></span></div>
+  <label id="ar-text-label" class="form-label" hidden>我的评判文本<textarea id="ar-export" class="form-control" rows="8" readonly></textarea></label>
+  <div id="ar-status" aria-live="polite"></div>
+</div>
+<style>
+  #aincrad-first-result-review .ar-item-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:6px;margin:14px 0;}
+  #aincrad-first-result-review .ar-compare {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:12px 0;}
+  #aincrad-first-result-review .ar-image {display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:contain;}
+  #aincrad-first-result-review details {margin:16px 0;}
+  #aincrad-first-result-review summary {cursor:pointer;}
+  #aincrad-first-result-review dd {margin-bottom:8px;}
+  @media(max-width:560px){#aincrad-first-result-review .ar-compare {grid-template-columns:1fr;}}
+</style>
+<script type="application/json" id="ar-data">__REVIEW_DATA__</script>
+<script>
+(() => {
+  const root = document.getElementById('aincrad-first-result-review');
+  const data = JSON.parse(document.getElementById('ar-data').textContent);
+  const get = id => root.querySelector('#' + id);
+  const key = 'aincrad-first-result-review-v1';
+  const providers = ['tripo', 'meshy'];
+  let selected = 0, view = 0, answers = {}, storage = false;
+  try { const saved = JSON.parse(localStorage.getItem(key) || '{}'); if (saved && typeof saved === 'object' && !Array.isArray(saved)) answers = saved; storage = true; } catch (_) {}
+  const node = (tag, text) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; return e; };
+  const answerFor = (id, provider) => {
+    answers[id] ||= {};
+    const old = answers[id][provider];
+    if (!old || !Array.isArray(old.scores) || old.scores.length !== 3) answers[id][provider] = {scores:[null,null,null],note:''};
+    return answers[id][provider];
+  };
+  const hasEntry = a => a && (a.scores.some(v => v !== null) || Boolean(a.note));
+  function exportText() {
+    const rows = ['我的首轮组件／房屋评判（0—10分；顺序为外观 / 符合用途 / 模块可用性；未评记为—）：'];
+    data.items.forEach((item, i) => {
+      const lines = providers.flatMap(p => {
+        const a = answers[item.id]?.[p];
+        return hasEntry(a) ? [p + '：' + a.scores.map(v => v === null ? '—' : v).join(' / ') + (a.note ? '；' + a.note : '')] : [];
+      });
+      if (lines.length) rows.push(String(i+1).padStart(2,'0') + ' ' + item.name + '\n' + lines.join('\n'));
+    });
+    if (rows.length === 1) rows.push('尚未填写。');
+    return rows.join('\n\n');
+  }
+  function updateProgress() {
+    let count = 0;
+    for (const item of data.items) for (const p of providers) if (hasEntry(answers[item.id]?.[p])) count++;
+    get('ar-progress').textContent = '已记录 ' + count + ' / 40 个对象';
+    get('ar-send').disabled = count === 0;
+    get('ar-save-state').textContent = storage ? '本机暂存；发送后可在对话中保留' : '本页暂存；关闭前可发送或复制';
+    get('ar-export').value = exportText();
+  }
+  function save() {
+    try { localStorage.setItem(key, JSON.stringify(answers)); storage = true; } catch (_) { storage = false; }
+    updateProgress();
+  }
+  function showImages() {
+    const item = data.items[selected];
+    const angle = item.views[view];
+    for (const p of providers) { get('ar-'+p+'-image').src = angle[p]; get('ar-'+p+'-image').alt = p + ' · ' + item.name + ' · ' + angle.label; }
+  }
+  function selectItem(index) {
+    selected = index; view = 0;
+    const item = data.items[index];
+    get('ar-title').textContent = String(index+1).padStart(2,'0') + ' ' + item.name;
+    get('ar-intent').textContent = item.intent;
+    get('ar-items').querySelectorAll('button').forEach((b,i) => b.setAttribute('aria-pressed', String(i === index)));
+    get('ar-view').replaceChildren(...item.views.map((v,i) => { const o=node('option',v.label); o.value=i; return o; }));
+    for (const p of providers) {
+      const a = answerFor(item.id,p);
+      root.querySelectorAll('[data-provider="'+p+'"] input').forEach(input => { input.value = a.scores[Number(input.dataset.axis)] ?? ''; });
+      root.querySelector('[data-note="'+p+'"]').value = a.note || '';
+      get('ar-'+p+'-scores').textContent = '外观 ' + item[p].scores[0] + ' / 用途 ' + item[p].scores[1] + ' / 模块 ' + item[p].scores[2];
+      get('ar-'+p+'-verdict').textContent = item[p].verdict + '：' + item[p].reason;
+    }
+    showImages(); updateProgress();
+  }
+  data.items.forEach((item,i) => {
+    const b=node('button', String(i+1).padStart(2,'0')+' '+item.name); b.type='button'; b.className='btn viz-tile'; b.setAttribute('aria-pressed','false'); b.addEventListener('click',()=>selectItem(i)); get('ar-items').append(b);
+    const tr=node('tr'); tr.append(node('td',String(i+1).padStart(2,'0')+' '+item.name),node('td',item.tripo.scores.join(' / ')),node('td',item.meshy.scores.join(' / '))); get('ar-all-scores').append(tr);
+  });
+  get('ar-view').addEventListener('change',e=>{ view=Number(e.target.value); showImages(); });
+  root.querySelectorAll('[data-provider] input').forEach(input=>input.addEventListener('input',()=>{
+    if (!input.validity.valid) return;
+    const p=input.closest('[data-provider]').dataset.provider;
+    answerFor(data.items[selected].id,p).scores[Number(input.dataset.axis)] = input.value==='' ? null : Number(input.value);
+    save();
+  }));
+  root.querySelectorAll('[data-note]').forEach(input=>input.addEventListener('input',()=>{ answerFor(data.items[selected].id,input.dataset.note).note=input.value; save(); }));
+  get('ar-show-text').addEventListener('click',()=>{ get('ar-text-label').hidden=!get('ar-text-label').hidden; get('ar-export').value=exportText(); });
+  get('ar-send').addEventListener('click',async()=>{
+    if (!window.openai?.sendFollowUpMessage) { get('ar-text-label').hidden=false; get('ar-status').textContent='此预览不支持直接发送，请复制下面的评判文本到对话。'; return; }
+    get('ar-send').disabled=true;
+    try { await window.openai.sendFollowUpMessage({prompt: exportText()+'\n\n请记录我的评判，与之前 Codex 的意见逐项比较；先不要重新生成模型。',title:'发送我的组件与房屋评判'}); get('ar-status').textContent='已调用发送；以对话中的消息为准。'; }
+    catch (_) { get('ar-text-label').hidden=false; get('ar-status').textContent='发送未完成，可复制评判文本到对话。'; }
+    finally { updateProgress(); }
+  });
+  selectItem(0);
+})();
+</script>

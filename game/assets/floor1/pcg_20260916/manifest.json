@@ -1,0 +1,65 @@
+{
+  "plan": "floor1-pcg-20260916-v1",
+  "assets": [
+    {
+      "id": "elm-tree",
+      "source": "exports/meshy-pool/floor1-pcg-20260916-v1/elm-tree.glb",
+      "sha256": "f9408fa3bbd4322a386c5824b91a09d3ce11669a0bf39ab0495b91c461482f46",
+      "bytes": 3723964,
+      "prompt": "One beautiful mature European elm tree for a sunny hand-painted fantasy MMORPG village. Airy layered crown of many separate clusters of small fresh green leaves, visible natural branching and warm brown textured trunk, graceful irregular silhouette. Balanced medium canopy, readable gaps between branches, lush spring colors, clean stylized PBR, subtle painterly texture, believable botany. Freestanding single tree with roots ending at ground level, no soil pedestal, no scenery, no pot, no other objects. Game vegetation asset, solid leaf clusters with crisp leaf detail.",
+      "geometry_and_textures_unchanged": true,
+      "stages": {
+        "preview": {
+          "task_id": "01a0a98d-0f4d-749f-aaec-69488fd9026f",
+          "actual_credits": 20,
+          "status": "succeeded"
+        },
+        "refine": {
+          "task_id": "01a0a990-3d38-73f5-93d9-6e50e0e44917",
+          "actual_credits": 10,
+          "status": "succeeded"
+        }
+      }
+    },
+    {
+      "id": "birch-tree",
+      "source": "exports/meshy-pool/floor1-pcg-20260916-v1/birch-tree.glb",
+      "sha256": "275556c5078e47bb3c9562a5869e7fa78507695afe35cce6156256185f357b4b",
+      "bytes": 8166568,
+      "prompt": "One graceful silver birch tree, slender white bark trunk with dark markings, fine branching and small layered clusters of fresh light green leaves. Airy natural asymmetrical canopy with gaps, elegant tall silhouette, sunny temperate fantasy MMORPG village, hand-painted clean stylized PBR, visible leaf detail and softly varied greens. Isolated single tree, bottom at ground level, no soil mound, no base, no pot, no surrounding scenery. Separate reusable game vegetation asset.",
+      "geometry_and_textures_unchanged": true,
+      "stages": {
+        "preview": {
+          "task_id": "01a0a991-3bcf-76b4-9f93-8f8a482c2195",
+          "actual_credits": 20,
+          "status": "succeeded"
+        },
+        "refine": {
+          "task_id": "01a0a993-36d5-7249-b9e6-2028858031d9",
+          "actual_credits": 10,
+          "status": "succeeded"
+        }
+      }
+    },
+    {
+      "id": "leafy-shrub",
+      "source": "exports/meshy-pool/floor1-pcg-20260916-v1/leafy-shrub.glb",
+      "sha256": "6b08ebb46c64a3cebc321d2e0e5abddec2f3e01da26b6c406e528f2dc33d96cc",
+      "bytes": 6958836,
+      "prompt": "One lush low rounded hazel shrub, a few visible brown stems and many small layered green leaves, irregular natural silhouette with leafy lobes and gaps. Sunny temperate fantasy village, clean hand-painted stylized PBR, fresh varied green shades, crisp leaf texture, no flowers. Wide low shrub about one meter tall. Isolated game vegetation prop with stems reaching ground, no pot, no soil mound, no pedestal, no scenery.",
+      "geometry_and_textures_unchanged": true,
+      "stages": {
+        "preview": {
+          "task_id": "01a0a994-36e3-7336-91cb-ca9bfaf8d83f",
+          "actual_credits": 20,
+          "status": "succeeded"
+        },
+        "refine": {
+          "task_id": "01a0a998-5927-7273-aca2-6ca8e8da1119",
+          "actual_credits": 10,
+          "status": "succeeded"
+        }
+      }
+    }
+  ]
+}

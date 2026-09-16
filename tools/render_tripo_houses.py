@@ -15,7 +15,7 @@ What it does, per GLB found in --glb-dir:
     and world-space bounds from the evaluated meshes;
   * builds a presentation copy (uniform scale + floor/centring transform) so all houses share one
     framing; the imported originals are hidden from render and their bytes are never written;
-  * renders a front three-quarter and a back three-quarter image at --size square;
+  * renders two opposing three-quarter views at --size square, or four with --all-sides;
   * saves a per-house .blend with packed textures.
 Afterwards it renders one five-house overview contact board (--overview-width/--overview-height).
 
@@ -55,6 +55,10 @@ def parse_args(argv):
     parser.add_argument("--overview-width", type=int, default=1800)
     parser.add_argument("--overview-height", type=int, default=1200)
     parser.add_argument("--samples", type=int, default=24)
+    parser.add_argument("--all-sides", action="store_true",
+                        help="render four azimuths; front/back names do not verify door orientation")
+    parser.add_argument("--no-labels", action="store_true",
+                        help="omit 3D text when making an externally labelled comparison sheet")
     parser.add_argument("--fixture", action="store_true",
                         help="mark the run as an offline Blender-primitive fixture, not a Tripo result")
     return parser.parse_args(argv)
@@ -126,6 +130,7 @@ def measure(objects):
     size = high - low
     return {"triangles": triangles, "vertices": vertices,
             "materials": sorted(materials), "textures": sorted(images),
+            "texture_sizes": {name: list(bpy.data.images[name].size) for name in sorted(images)},
             "bounds_min": [round(value, 4) for value in low],
             "bounds_max": [round(value, 4) for value in high],
             "bounds_size": [round(value, 4) for value in size],
@@ -219,7 +224,15 @@ def aim_camera(target, radius, azimuth_deg, elevation_deg, name):
     camera_data = bpy.data.cameras.new(name)
     camera = bpy.data.objects.new(name, camera_data)
     bpy.context.scene.collection.objects.link(camera)
-    distance = max(radius, 0.4) * 2.6
+    # Fit the bounding sphere inside both image dimensions, including wide overviews.
+    # The previous fixed multiplier clipped tall buildings and side-by-side boards.
+    camera_data.sensor_fit = "HORIZONTAL"
+    scene = bpy.context.scene
+    aspect = (scene.render.resolution_x * scene.render.pixel_aspect_x) / (
+        scene.render.resolution_y * scene.render.pixel_aspect_y)
+    horizontal_fov = 2.0 * math.atan(camera_data.sensor_width / (2.0 * camera_data.lens))
+    vertical_fov = 2.0 * math.atan(math.tan(horizontal_fov * 0.5) / aspect)
+    distance = max(radius, 0.4) / math.sin(min(horizontal_fov, vertical_fov) * 0.5) * 1.12
     azimuth = math.radians(azimuth_deg)
     elevation = math.radians(elevation_deg)
     camera.location = (target.x + distance * math.cos(elevation) * math.sin(azimuth),
@@ -300,9 +313,13 @@ def render_one(glb_path, metadata, args, report):
     label = "%s%s" % ("FIXTURE " if args.fixture else "", metadata["id"])
     if metadata.get("name_zh"):
         label += "  " + metadata["name_zh"]
-    add_label(label, Vector((0.0, 0.0, high.z + 0.25)))
+    if not args.no_labels:
+        add_label(label, Vector((0.0, 0.0, high.z + 0.25)))
     outputs = {}
-    for name, azimuth in (("front34", 38.0), ("back34", 218.0)):
+    views = (("front34", 38.0), ("back34", 218.0))
+    if args.all_sides:
+        views = (("front34", 38.0), ("side128", 128.0), ("back34", 218.0), ("side308", 308.0))
+    for name, azimuth in views:
         aim_camera(centre, radius, azimuth, 16.0, "Camera_" + name)
         target = Path(args.out_dir) / "renders" / ("%s-%s.png" % (metadata["id"], name))
         outputs[name] = render_to(target)
@@ -321,7 +338,8 @@ def render_one(glb_path, metadata, args, report):
                    "engine": enginE, "presentation_scale": round(scale, 6),
                    "display_bounds_min": [round(value, 4) for value in low],
                    "display_bounds_max": [round(value, 4) for value in high],
-                   "renders": outputs, "blend": str(blend_path).replace("\\", "/"),
+                   "renders": outputs, "view_azimuths": dict(views),
+                   "blend": str(blend_path).replace("\\", "/"),
                    "raw": metrics,
                    "note": "bounds and scale are presentation values from generation geometry, "
                            "not verified real-world building dimensions"})
@@ -347,7 +365,8 @@ def render_overview(entries, args):
         label = "%s%s" % ("FIXTURE " if args.fixture else "", entry["id"])
         if entry.get("name_zh"):
             label += "  " + entry["name_zh"]
-        add_label(label, Vector(((low.x + high.x) * 0.5, (low.y + high.y) * 0.5, high.z + 0.12)))
+        if not args.no_labels:
+            add_label(label, Vector(((low.x + high.x) * 0.5, (low.y + high.y) * 0.5, high.z + 0.12)))
         placed.append((low, high))
         offset += width + 0.55
     if not placed:
@@ -358,7 +377,7 @@ def render_overview(entries, args):
                     max(item[1].z for item in placed)))
     centre = (lows + highs) * 0.5
     radius = max((highs - lows).length * 0.5, 0.5)
-    aim_camera(centre, radius * 0.78, 6.0, 14.0, "OverviewCamera")
+    aim_camera(centre, radius, 6.0, 14.0, "OverviewCamera")
     target = Path(args.out_dir) / ("overview%s.png" % ("-fixture" if args.fixture else ""))
     return render_to(target)
 
