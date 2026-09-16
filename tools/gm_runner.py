@@ -937,11 +937,13 @@ def remember_host_feedback(record: dict, gm_id: str, receipt: dict, receipt_sha2
 
 def consume_effect_review(record: dict, observation_receipt: dict, decision: str,
                           feedback_run_id: str) -> bool:
-    """Mark the exact pending publication receipt consumed after its owner acknowledged facts.
+    """Apply one exact effect observation after its owner acknowledged the facts.
 
     The observation receipt must bind the original receipt hash, release, issue, world and owner.
-    A stale or foreign receipt never consumes pending work.  This state transition is deliberately
-    kept in the owning GM's private memory; residents are not told about the development process.
+    A stale or foreign receipt never changes pending work.  A successful matching resident action
+    closes the review.  A bounded no-adoption observation is acknowledged at most once but leaves
+    the release pending, so a later terminal adoption can still wake the same owner.  These state
+    transitions stay in the owning GM's private memory; residents are not told about development.
     """
     if observation_receipt.get('kind') != 'autonomy_effect_observation_receipt':
         return False
@@ -962,12 +964,67 @@ def consume_effect_review(record: dict, observation_receipt: dict, decision: str
             return False
         if event.get('effect_review_result'):
             return False
-        event['effect_review_result'] = {
-            'status': 'consumed', 'decision': decision, 'feedback_run_id': feedback_run_id,
+        binding = receipt.get('effect_review')
+        window = observation_receipt.get('observation_window')
+        if (not isinstance(binding, dict) or not isinstance(window, dict)
+                or window.get('resident_id') != binding.get('resident_id')
+                or window.get('capability_id') != binding.get('capability_id')):
+            return False
+        baseline_seq = binding.get('baseline_life_seq')
+        baseline_count = binding.get('baseline_history_count')
+        observed_seq = window.get('observed_life_seq')
+        observed_count = window.get('observed_history_count')
+        if (type(baseline_seq) is not int or type(baseline_count) is not int
+                or window.get('baseline_life_seq') != baseline_seq
+                or window.get('baseline_history_count') != baseline_count
+                or type(observed_seq) is not int or observed_seq <= baseline_seq
+                or type(observed_count) is not int or observed_count <= baseline_count):
+            return False
+        observation_sha = sha256_bytes(canonical(observation_receipt).encode('utf-8'))
+        matches = observation_receipt.get('matching_action_receipts')
+        valid_matches = isinstance(matches, list) and bool(matches)
+        if valid_matches:
+            for action in matches:
+                command = action.get('command') if isinstance(action, dict) else None
+                result = command.get('result') if isinstance(command, dict) else None
+                command_id = action.get('command_id') if isinstance(action, dict) else None
+                if (not isinstance(command_id, str) or not command_id
+                        or not isinstance(result, dict)
+                        or command.get('status') != 'completed'
+                        or command.get('command_id') != command_id
+                        or result.get('ok') is not True
+                        or result.get('actor_id') != binding.get('resident_id')
+                        or result.get('command_id') != command_id
+                        or result.get('capability_id') != binding.get('capability_id')):
+                    valid_matches = False
+                    break
+        adopted = (observation_receipt.get('outcome') == 'resident_action_observed'
+                   and observation_receipt.get('adoption_claimed') is True
+                   and valid_matches)
+        if adopted:
+            event['effect_review_result'] = {
+                'status': 'consumed', 'decision': decision, 'feedback_run_id': feedback_run_id,
+                'observation_outcome': observation_receipt.get('outcome'),
+                'observation_receipt_sha256': observation_sha,
+                'consumed_utc': utc_iso()}
+            return True
+        if (observation_receipt.get('outcome') != 'no_adoption_observed'
+                or observation_receipt.get('adoption_claimed') is not False
+                or observation_receipt.get('matching_action_receipts') != []):
+            return False
+        progress = event.get('effect_review_progress')
+        # The host emits at most one preliminary negative, but defend the durable state against a
+        # repeated or hand-crafted receipt as well.  New action facts remain visible to the later
+        # matching-adoption scan; they do not buy repeated negative feedback turns.
+        if isinstance(progress, dict) and progress.get('negative_feedback_sent') is True:
+            return False
+        event['effect_review_progress'] = {
+            'status': 'pending', 'negative_feedback_sent': True, 'decision': decision,
+            'feedback_run_id': feedback_run_id, 'observed_life_seq': observed_seq,
+            'observed_history_count': observed_count,
             'observation_outcome': observation_receipt.get('outcome'),
-            'observation_receipt_sha256': sha256_bytes(
-                canonical(observation_receipt).encode('utf-8')),
-            'consumed_utc': utc_iso()}
+            'observation_receipt_sha256': observation_sha,
+            'acknowledged_utc': utc_iso()}
         return True
     return False
 
