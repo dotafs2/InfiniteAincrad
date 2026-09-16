@@ -1,0 +1,69 @@
+{
+  "schema": "floor1-country-ground-colour-v8-controlled-godot-ab",
+  "generated_at_utc": "2026-09-15T21:16:13.694146+00:00",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "actual_saved_frames": 8,
+  "same_camera_pairs": 4,
+  "actual_png_px": [
+    1680,
+    1080
+  ],
+  "engine_checks": 180,
+  "engine_failures": 0,
+  "one_change": "continuous floor grass underlay uses smooth world-coordinate dry/damp sRGB-to-linear tones instead of broad hard hash cells; town grass, roads, four farm plots, imported meshes, lighting, collision and cameras fixed",
+  "country_left_grass_mean_abs_rgb_channel_255": 2.21092,
+  "country_road_control_mean_abs_rgb_channel_255": 0.0,
+  "sky_control_mean_abs_rgb_channel_255": 0.0,
+  "visual_limit": "Controlled field-edge views show subdued organic dry patches and grounded outer contours; the near road remains broad and level and needs separate walkable landform art. Far maze stays unfinished visual-only.",
+  "first_camera_tour_unchanged": "exports/floor1-art-20260916/floor1-world-tour-v1.mp4",
+  "files": {
+    "before/country_road_eye.png": {
+      "bytes": 568842,
+      "sha256": "1a3ff52af6232f108209688bf4af0d14dad49d9d09042a6f7e8a307aa2606e80"
+    },
+    "before/west_field_ridge_eye.png": {
+      "bytes": 498856,
+      "sha256": "1d3df42590110df8f0dd227bda24ccb16b88ae76e4b0e17f82773f6017e55256"
+    },
+    "before/west_field_ridge_overview.png": {
+      "bytes": 579760,
+      "sha256": "525f2ec99eda53b3927cedd6005fe6a5a31ca6b3f26170b79514b9221eacdf99"
+    },
+    "before/east_field_ridge_eye.png": {
+      "bytes": 514343,
+      "sha256": "4116ff3262582994710eac73c8f35d1e672913b0fc3cd987437ab8a67ebd3da3"
+    },
+    "before/capture.json": {
+      "bytes": 1937,
+      "sha256": "30dcb2184a287b609fe04748d737b2aeb83cccedd43553f8d8994cdccdda445a"
+    },
+    "after/country_road_eye.png": {
+      "bytes": 570055,
+      "sha256": "0b12d36fbba4abfb20c3b735b3f49b0f6a0025c563cb17e09ef180a2637dda82"
+    },
+    "after/west_field_ridge_eye.png": {
+      "bytes": 496139,
+      "sha256": "dad674264427fd55f4a23cf39b222619b10ef837a24338242ba6b3d87c41debb"
+    },
+    "after/west_field_ridge_overview.png": {
+      "bytes": 598150,
+      "sha256": "daf11c5623819edbeee95e5e49d453fe91c0959133a7107f3bb90982ba16903f"
+    },
+    "after/east_field_ridge_eye.png": {
+      "bytes": 524889,
+      "sha256": "7c25d42cb631c31a27df5ceca6263def2373a29c500702d02d0a705b352b06fb"
+    },
+    "after/capture.json": {
+      "bytes": 1938,
+      "sha256": "7053bd5234147b6d390d2ccaed33dace518e7f5eaa555b52a5bb507cd52de2c8"
+    },
+    "comparison-ab.json": {
+      "bytes": 3615,
+      "sha256": "b11c6fbea5cb7a14cf43d0d358a96c7ea1fc6ac9bc083292f0ace02159b43df1"
+    },
+    "physics-180.json": {
+      "bytes": 41590,
+      "sha256": "77ae78569787170b61a2d1abab2662c972ffb1df3c7671032357eb516fef02ca"
+    }
+  }
+}

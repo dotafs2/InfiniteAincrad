@@ -1,0 +1,56 @@
+{
+  "asset_path": "res://assets/floor1/courtyard_oak_20260916/F1_courtyard_oak_100k.glb",
+  "authored_height_m": 8.5,
+  "capture_png_px": [
+    1680,
+    1080
+  ],
+  "frame_interval_definition": "actual non-headless frame_post_draw intervals include VSync/presentation and CPU waits",
+  "model_calls": 0,
+  "one_tree": true,
+  "placement_m": "(-24.8, 0.0, 16.8)",
+  "saved_shots": [
+    "west_lane_to_oak",
+    "west_garden_oak_eye",
+    "west_court_oak_overview"
+  ],
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "shot_rows": [
+    {
+      "benchmark_frames": 120,
+      "camera": "(-35.0, 1.72, 26.0)",
+      "draw_calls_with_shadows": 2635,
+      "median_frame_interval_ms": 4.229,
+      "name": "west_lane_to_oak",
+      "p95_frame_interval_ms": 5.625,
+      "png_saved": true,
+      "primitives_with_shadows": 2665554,
+      "target": "(-24.8, 4.2, 16.8)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-30.2, 1.72, 11.0)",
+      "draw_calls_with_shadows": 1182,
+      "median_frame_interval_ms": 4.172,
+      "name": "west_garden_oak_eye",
+      "p95_frame_interval_ms": 4.282,
+      "png_saved": true,
+      "primitives_with_shadows": 1115531,
+      "target": "(-24.8, 4.0, 16.8)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-40.0, 10.5, 29.0)",
+      "draw_calls_with_shadows": 3628,
+      "median_frame_interval_ms": 4.167,
+      "name": "west_court_oak_overview",
+      "p95_frame_interval_ms": 4.297,
+      "png_saved": true,
+      "primitives_with_shadows": 2620980,
+      "target": "(-24.8, 3.9, 16.8)"
+    }
+  ],
+  "suite": "floor1_one_approved_courtyard_oak_in_actual_world",
+  "trunk_collision_only": true,
+  "world_state_mutations": 0
+}

@@ -1,0 +1,34 @@
+{
+  "id": "F1_oak_door_leaf",
+  "label_zh": "独立橡木门板",
+  "source": "Original concept → Meshy7 2k PBR model → quad remesh",
+  "source_tasks": {
+    "concept": "01a0a66d-3577-75ae-a09c-f443b5da85aa",
+    "model": "01a0a674-4e14-75e2-8fa5-6d801ed40f0c",
+    "remesh": "01a0a67c-0c22-7342-a764-eb011f934ee1"
+  },
+  "consumed_credits": 41,
+  "glb": "F1_oak_door_leaf.glb",
+  "sha256": "ed40b6a4a9ac38ac608540d1c9d035068826ea96b44b53dd3d9d63f689093587",
+  "measured_triangles": 2752,
+  "bytes": 13755592,
+  "material_count": 1,
+  "embedded_image_count": 3,
+  "raw_bounds_gltf_y_up": {
+    "min": [
+      -0.489703,
+      -0.951983,
+      -0.075845
+    ],
+    "max": [
+      0.488866,
+      0.950974,
+      0.073337
+    ]
+  },
+  "authored_leaf_height_m": 2.15,
+  "scale_note": "Raw source preserved; normalize uniformly and align hinge in runtime. Thickness includes hardware.",
+  "request_target_quad_polygons": 1000,
+  "art_review": "Root approved actual raw GLB front/back renders and corrected v4 Godot closed/open exterior images. Door fills the aperture and follows its hinge with coherent hardware. Nearby shutter overlap fixed in modular asset; 99 component/rendered-clearance checks and144 actual-walker world checks pass.",
+  "semantic_role": "Replaceable door leaf only; frame, hinge pivot and movement collision belong to modular house component."
+}

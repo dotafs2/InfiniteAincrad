@@ -1,0 +1,82 @@
+{
+  "schema": "floor1-northwest-continuous-real-ground-v12b",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "root_actual_visual_review": "Accepted first northwest sector after v12b same-camera old-edge images removed the bright seam and showed a rising wooded mass.",
+  "base_world_ground_bounds_m": {
+    "x": [
+      -210,
+      210
+    ],
+    "z": [
+      -235,
+      225
+    ]
+  },
+  "new_north_sector_added_bounds_m": {
+    "x": [
+      -210,
+      85
+    ],
+    "z": [
+      -335,
+      -235
+    ]
+  },
+  "base_ground_area_m2": 193200,
+  "added_sector_area_m2": 29500,
+  "actual_nonrectangular_ground_union_area_m2": 222700,
+  "bounding_rectangle_is_not_covered": true,
+  "new_mesh_real_triangles": 340,
+  "new_true_terrain_collision_bodies": 1,
+  "new_actual_max_height_m": 13.1269649116678,
+  "original_environment_kit_tree_instances_on_new_slope": 24,
+  "max_tree_parent_to_real_collider_root_offset_m": 4.00543212890625e-05,
+  "short_existing_path_extension_z_m": [
+    -269,
+    -230
+  ],
+  "real_walker_capsule_radius_m": 0.32,
+  "real_walker_capsule_height_m": 1.8,
+  "real_axis_and_climb_routes_clear": true,
+  "actual_world_checks": 230,
+  "actual_world_failures": 0,
+  "actual_png_px": [
+    1680,
+    1080
+  ],
+  "actual_corrected_png_count": 6,
+  "same_camera_old_meadow_before_after": [
+    {
+      "shot": "country_road_eye",
+      "before_sha256": "76d6748c05ab0f6fe98bca47a31ecb0eea4353015238c0700d28374a8c7d09f1",
+      "after_sha256": "3088e64737053f685252ba54f990c4abb6ffd303e95d8a8ab67ee87e3270978d",
+      "actual_px": [
+        1680,
+        1080
+      ],
+      "full_frame_mad_255": 0.9057462522045855,
+      "identical_camera": true
+    },
+    {
+      "shot": "forest_bank_walk_eye",
+      "before_sha256": "7d3aae5666ef66b7c2914ee71a4a3550c75e69ace6936f358276e622376dd7bf",
+      "after_sha256": "b929f7365a314666946d0b711a0559bd7b469b7513c90a9904da4983f37b78d8",
+      "actual_px": [
+        1680,
+        1080
+      ],
+      "full_frame_mad_255": 3.591038176072898,
+      "identical_camera": true
+    }
+  ],
+  "first_rejected_bright_line": "forest_bank_walk_eye_first_seam_rejected.png",
+  "seam_diagnosis": "The old continuous PlaneMesh renders at y=-0.05m (collision top -0.04m). First trial set the new y0 inner vertices, exposing a thin sky-coloured 5cm discontinuity. Corrected actual new triangle vertices match the old visual y=-0.05m along z=-235 and rise continuously behind it; no decorative cover/sky/fog/camera trick was added.",
+  "same_camera_seam_roi_pixels_changed_gt25_rgb": 2129,
+  "visual_limit": "This is the first northwest sector only. The flat path-axis and unexpanded northeast/far land still produce some straight low horizon; the distant labyrinth remains visual-only unfinished.",
+  "world_script_sha256_at_corrected_capture": "4c38a36522e836a5defbd24b083fb612cf0a14427dfb49b9d4f4a149af86cc01",
+  "test_script_sha256_at_corrected_capture": "548cde3c58b7816e30a16e6ccedee213919c5ffade425db6c182f51d1bdab2b8",
+  "asset_state_at_corrected_capture": "Period lantern accepted; bakery exterior sign candidate not yet adopted at capture time.",
+  "world_state_mutations": 0,
+  "model_calls": 0,
+  "frame_interval_limit": "actual non-headless frame_post_draw intervals include VSync/presentation and CPU waits"
+}

@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "date": "2026-09-16",
+  "purpose": "Offline remesh comparison for three existing house exteriors; distinct authored modular houses are used for functional doors/windows.",
+  "method": "Meshy quad topology target20,000 polygons; exported triangle counts measured from GLB, not assumed equal to the requested polygon count.",
+  "consumed_credits": 15,
+  "source_manifest": "Art/Generated/MeshyHouses20260916/manifest.json",
+  "render_report": "exports/floor1-art-20260916/remesh-preview/render-report.json",
+  "houses": [
+    {
+      "id": "01_hearth_cottage",
+      "source_task": "01a0a623-3cf4-728e-ad69-0558a6b78087",
+      "remesh_task": "01a0a642-5ede-75b9-b23d-8a478c314cf9",
+      "source_triangles": 1630308,
+      "remesh_triangles": 38021,
+      "reduction_percent": 97.67,
+      "credits": 5,
+      "model": "exports/floor1-art-20260916/remesh/01_hearth_cottage.glb"
+    },
+    {
+      "id": "02_market_house",
+      "source_task": "01a0a623-66f3-72b4-8f0b-6320ade8c63b",
+      "remesh_task": "01a0a642-6163-755e-bc6e-e91381130d51",
+      "source_triangles": 1263506,
+      "remesh_triangles": 39717,
+      "reduction_percent": 96.86,
+      "credits": 5,
+      "model": "exports/floor1-art-20260916/remesh/02_market_house.glb"
+    },
+    {
+      "id": "03_corner_turret",
+      "source_task": "01a0a623-88fc-74a3-ad08-6e902f043c0f",
+      "remesh_task": "01a0a642-6408-73a4-ba39-87da6fc54116",
+      "source_triangles": 1792188,
+      "remesh_triangles": 42902,
+      "reduction_percent": 97.61,
+      "credits": 5,
+      "model": "exports/floor1-art-20260916/remesh/03_corner_turret.glb"
+    }
+  ],
+  "review": {
+    "decision": "Adopt remesh for near exterior LOD, derive12k/3k farther levels with Blender",
+    "positive": "Roof tiles, window lines and plaster texture less broken than direct aggressive collapse at similar triangle budgets",
+    "remaining": "Painted shutter imperfections, mesh fused door/window units; source exteriors have no validated interiors or functional openings"
+  }
+}

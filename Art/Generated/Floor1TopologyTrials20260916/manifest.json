@@ -1,0 +1,32 @@
+{
+  "asset": "F1_cottage_smart15k",
+  "task_id": "01a0a6f5-c609-72c0-b823-81580ae26176",
+  "provider": "Meshy",
+  "ai_model": "meshy-t2",
+  "model_type": "smart-topology",
+  "source_concept": "exports/meshy-houses-20260916/concepts/01_hearth_cottage.png",
+  "requested_triangle_target": 15000,
+  "actual": {
+    "triangles": 13188,
+    "bytes": 9240096,
+    "sha256": "505e6f5a5066058c8098cb0b71b96fc0e8994b2cc43a15f7d2cf98680be2e125",
+    "mesh_count": 1,
+    "material_count": 1,
+    "node_names": [
+      ""
+    ],
+    "mesh_names": [
+      ""
+    ],
+    "image_count": 4
+  },
+  "actual_credits": 15,
+  "status": "SUCCEEDED, visually rejected; no game adoption",
+  "part_semantics": "Single unnamed mesh and node; no detachable door/window units",
+  "review": "Root viewed all four actual1024px Blender angles. Missing roof surfaces, crossed roof ridges, black facade gaps. Do not adopt merely because triangle count is low.",
+  "original_collapse_comparison": "Separate100K and200K source-preserving trials retain more window detail, but white roof artifacts remain in both; not adopted.",
+  "previews": [
+    "F1_cottage_smart15k-az038.png",
+    "F1_cottage_smart15k-az218.png"
+  ]
+}

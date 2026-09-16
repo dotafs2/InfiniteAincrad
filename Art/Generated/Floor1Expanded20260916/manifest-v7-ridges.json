@@ -1,0 +1,67 @@
+{
+  "schema": "floor1-expanded-grounded-ridges-v7-evidence",
+  "generated_at_utc": "2026-09-15T21:04:20.539299+00:00",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "art_sample_only": true,
+  "world_exterior_texture_tier": "2k",
+  "actual_walker_capsule_m": {
+    "radius": 0.32,
+    "height": 1.8
+  },
+  "dedicated_furnished_ground_floors": 3,
+  "actual_engine_checks": 180,
+  "engine_failures": 0,
+  "grounded_ridge_collision_bodies": 2,
+  "grounded_ridge_triangles": 784,
+  "ridge_max_height_m": 8.36309443274764,
+  "actual_saved_capture_px": [
+    1680,
+    1080
+  ],
+  "actual_full_capture_saved_views": 15,
+  "full_private_capture": "tmp/floor1-art-20260916/world/captures-v7-grounded-ridges-wing",
+  "public_stage": "Art/Generated/Floor1Expanded20260916/grounded-ridges-v7",
+  "files": {
+    "panorama.png": {
+      "bytes": 1140613,
+      "sha256": "ef209aa01b90ed0fdbcf97c091b9f40c979b4b0b60809c21741e857675cae875"
+    },
+    "countryside_path.png": {
+      "bytes": 616197,
+      "sha256": "63f4e3dbb282cb9a0f5f7e470a84fd4806f11564cbfc3d0a81e84eb1941d0025"
+    },
+    "furnished_artisan_from_door.png": {
+      "bytes": 437822,
+      "sha256": "9765f079aa4b015af7de4b386efb14c0cedf0007e878746140d189debbb052d1"
+    },
+    "furnished_artisan_at_forge.png": {
+      "bytes": 401705,
+      "sha256": "9f4ef1e653ce056c95202e73a5e8224fa9bf12ac658c6cf3893362fdc04d72b4"
+    },
+    "capture.json": {
+      "bytes": 21251,
+      "sha256": "954e834b4c8e6b595f133e41082a96c1fa92b28f8a093b9de1fe27e22b702fdd"
+    },
+    "physics-180.json": {
+      "bytes": 41590,
+      "sha256": "77ae78569787170b61a2d1abab2662c972ffb1df3c7671032357eb516fef02ca"
+    }
+  },
+  "source_receipts_at_capture": {
+    "world_script": {
+      "bytes": 56858,
+      "sha256": "cbbc9205b2802acbc24aa24a7dc03a7be8992f627c9c00d492fb0042444f9be8"
+    },
+    "world_test": {
+      "bytes": 17592,
+      "sha256": "54fb45535055ddf70f8ca9eaabd9ee7c97eab43288376587003cf90511c40873"
+    },
+    "interior_component": {
+      "bytes": 17018,
+      "sha256": "15e78c9a105fe205fadab8dc9d185af3129cf50fdec9c95c500b6cd8af174a07"
+    }
+  },
+  "visual_review": "Outer detached spheres are replaced by restrained grounded contours; artisan L-wing floor shows matching slate joints. The countryside-path eye-height camera barely sees x>=144 side ridges and its central grass still reads broadly flat. Distant maze remains visual-only unfinished.",
+  "performance_note": "Actual non-headless frame intervals include VSync, presentation and CPU waits; not pure GPU time.",
+  "first_tour_provenance_untouched": "Art/Generated/Floor1Expanded20260916/milestone-v1-provenance.json"
+}

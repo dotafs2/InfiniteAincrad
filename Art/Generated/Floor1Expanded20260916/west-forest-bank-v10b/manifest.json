@@ -1,0 +1,137 @@
+{
+  "schema": "floor1-low-walkable-west-forest-bank-v10b-actual-world-evidence",
+  "generated_at_utc": "2026-09-15T21:46:25.291377+00:00",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "actual_bank_extent_m": {
+    "x": [
+      -69.0,
+      -40.0
+    ],
+    "z": [
+      -229.0,
+      -204.0
+    ]
+  },
+  "continuous_ground_south_boundary_z_m": -235.0,
+  "real_bank_static_collision_bodies": 1,
+  "real_bank_mesh_triangles": 168,
+  "measured_bank_max_height_m": 1.17685827913442,
+  "measured_real_crest_hit": {
+    "collider": "WestForestEdgeBankCollision",
+    "normal": "(-0.016421, 0.999626, 0.021868)",
+    "position": "(-56.0, 1.06153, -216.0)"
+  },
+  "actual_walker_capsule_m": {
+    "radius": 0.32,
+    "height": 1.8
+  },
+  "real_capsule_path_clear": true,
+  "real_capsule_surface_samples": [
+    {
+      "collider": "ContinuousGroundCollision",
+      "contacts": [],
+      "surface_y": -0.0400001853704453,
+      "xz": "(-34.0, -211.0)"
+    },
+    {
+      "collider": "WestForestEdgeBankCollision",
+      "contacts": [],
+      "surface_y": 0.0149998664855957,
+      "xz": "(-40.0, -214.0)"
+    },
+    {
+      "collider": "WestForestEdgeBankCollision",
+      "contacts": [],
+      "surface_y": 0.60053014755249,
+      "xz": "(-45.0, -216.0)"
+    },
+    {
+      "collider": "WestForestEdgeBankCollision",
+      "contacts": [],
+      "surface_y": 1.06076812744141,
+      "xz": "(-50.0, -218.0)"
+    },
+    {
+      "collider": "WestForestEdgeBankCollision",
+      "contacts": [],
+      "surface_y": 1.14355993270874,
+      "xz": "(-55.0, -220.0)"
+    },
+    {
+      "collider": "WestForestEdgeBankCollision",
+      "contacts": [],
+      "surface_y": 0.808058738708496,
+      "xz": "(-60.0, -222.0)"
+    },
+    {
+      "collider": "WestForestEdgeBankCollision",
+      "contacts": [],
+      "surface_y": 0.306083679199219,
+      "xz": "(-65.0, -224.0)"
+    }
+  ],
+  "all_four_bank_edges_grounded": true,
+  "western_existing_grove_root_unchanged": "(-57.0, -0.04, -192.5)",
+  "central_road_and_four_farms_unchanged": true,
+  "full_world_godot_checks": 201,
+  "full_world_failures": 0,
+  "actual_saved_godot_near_png": 4,
+  "actual_png_px": [
+    1680,
+    1080
+  ],
+  "source_script_sha256_at_capture": "1cc204ae47db5a48c4252936ec55fafb3af6ff8be6e83cd64115ce047c107c3b",
+  "files": {
+    "country_path_to_west_bank.png": {
+      "bytes": 524526,
+      "sha256": "5a5a6c4681bccb8b0c394d21dfb133fbc5275558fd39abf20febcfa93519ffed"
+    },
+    "west_shelter_bank_eye.png": {
+      "bytes": 417937,
+      "sha256": "fe756697e137f2fec14c5b45c540ef4549c36bc66b9cbc87cd05de966e8f8b03"
+    },
+    "west_bank_walk_eye.png": {
+      "bytes": 349747,
+      "sha256": "b9eef5d6ac4eb4b967c4200af3ad27299df54af84ba25454f346abfd25afc06c"
+    },
+    "west_bank_overview.png": {
+      "bytes": 409713,
+      "sha256": "41fa8b3e485e47ae47663560837e427ff149ce0ab0a96b82c9b77d139a82db9d"
+    },
+    "capture.json": {
+      "bytes": 2046,
+      "sha256": "e34583032c1080d00b08eeafc460e755c508257231d1b17aae9ea21882e722da"
+    },
+    "physics-201.json": {
+      "bytes": 46038,
+      "sha256": "306fcd3b100c5c32eaded570cffbafcd704f1c06e6062a3b57de9cbae1c911c1"
+    }
+  },
+  "rejected_first_earth_wedge_private_capture": "tmp/floor1-art-20260916/world/captures-v10-west-bank-near",
+  "rejected_first_earth_wedge_receipts": {
+    "country_path_to_west_bank.png": {
+      "bytes": 524657,
+      "sha256": "2c2a7344da9e8a19928f84e83131c75d52f739afdef057537de22c7ee688ac44"
+    },
+    "west_shelter_bank_eye.png": {
+      "bytes": 418326,
+      "sha256": "b8ae3c93f8b26ba45a53a5e51a60f21f2eddbe15ec3e7e83d4e51ee296dbc504"
+    },
+    "west_bank_walk_eye.png": {
+      "bytes": 351849,
+      "sha256": "d82aa1a712721d974353eba00034eb8fe026da208259407ac3353ca2ff8fd464"
+    },
+    "west_bank_overview.png": {
+      "bytes": 411065,
+      "sha256": "ba3e67de7285f113039887b3d65dd7bb17bee1ec38e6cf5d98b9cfab15dd36e1"
+    },
+    "capture.json": {
+      "bytes": 2044,
+      "sha256": "fd0d38d8489b8eb6d7374f7141e359b4aee89fcd8bde054373fb67ca95c72a20"
+    }
+  },
+  "art_review": "The first existing earth material created a conspicuous tan polygon wedge, so it was removed. The final bank uses continuous accepted grass and a subdued low contour; painterly texture trial will evaluate a softer grass/soil transition separately.",
+  "remaining_limit": "The broad central country floor and visual-only distant maze remain early art placeholders; this one low bank does not make the entire 420x460m landscape sculpted.",
+  "performance_note": "Actual non-headless frame intervals include VSync/presentation/CPU waits, not pure GPU kernel time.",
+  "first_video_provenance_unchanged": "Art/Generated/Floor1Expanded20260916/milestone-v1-provenance.json"
+}

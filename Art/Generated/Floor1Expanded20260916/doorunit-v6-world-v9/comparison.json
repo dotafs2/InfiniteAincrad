@@ -1,0 +1,94 @@
+{
+  "schema": "floor1-adopted-doorunit-v6-same-world-camera-review",
+  "before_door_capture": "tmp/floor1-art-20260916/world/captures-v7-grounded-ridges-wing",
+  "after_door_capture": "tmp/floor1-art-20260916/world/captures-v9-one-oak-doorunit-v6",
+  "after_closed_open_window_capture": "tmp/floor1-art-20260916/world/captures-v9-doorunit-v6-window",
+  "same_saved_pixels": [
+    1680,
+    1080
+  ],
+  "door_rows": {
+    "door_closed": {
+      "before": {
+        "bytes": 546552,
+        "sha256": "e0ef9a3726024743b6155fa392a07115e3321018c6f73336bd10dff0f406a2b9"
+      },
+      "after": {
+        "bytes": 546561,
+        "sha256": "061008159b28e13805dbf88e4dc9b9eb40fa01a08c584acfaaf16a70627183be"
+      },
+      "full_frame": {
+        "mean_abs_rgb_channel_255": 0.0079,
+        "max_abs_rgb_channel_255": 13,
+        "changed_channels_gt_10_percent": 0.00191
+      },
+      "front_door_or_aperture_region": {
+        "mean_abs_rgb_channel_255": 0.0,
+        "max_abs_rgb_channel_255": 0,
+        "changed_channels_gt_10_percent": 0.0
+      }
+    },
+    "door_open_exterior": {
+      "before": {
+        "bytes": 523138,
+        "sha256": "d3bdcde55610c22e3ad0c9ab3ef4c2706a6ea82385d5899730a4667db353c66e"
+      },
+      "after": {
+        "bytes": 523165,
+        "sha256": "6d860c4bea971101e071e178bb3feabff5d8641380ede7b584592ab03346d692"
+      },
+      "full_frame": {
+        "mean_abs_rgb_channel_255": 0.0079,
+        "max_abs_rgb_channel_255": 13,
+        "changed_channels_gt_10_percent": 0.00191
+      },
+      "front_door_or_aperture_region": {
+        "mean_abs_rgb_channel_255": 0.0,
+        "max_abs_rgb_channel_255": 0,
+        "changed_channels_gt_10_percent": 0.0
+      }
+    },
+    "open_door_interior": {
+      "before": {
+        "bytes": 549752,
+        "sha256": "28f248f83fdd5b9db1402f65cc0aaa189a56bc88185015a3de4f74b8975767f6"
+      },
+      "after": {
+        "bytes": 549794,
+        "sha256": "c76a90e7fa51a4711f2b69189c5ceec78112780309b562cff5612d17ac708a70"
+      },
+      "full_frame": {
+        "mean_abs_rgb_channel_255": 6e-05,
+        "max_abs_rgb_channel_255": 18,
+        "changed_channels_gt_10_percent": 4e-05
+      },
+      "front_door_or_aperture_region": {
+        "mean_abs_rgb_channel_255": 8e-05,
+        "max_abs_rgb_channel_255": 2,
+        "changed_channels_gt_10_percent": 0.0
+      }
+    }
+  },
+  "window_files": {
+    "furnished_home_windows_closed.png": {
+      "bytes": 363867,
+      "sha256": "de4aaf3e9a34ef03779d4ddb8a3e8e998d3244ed0b0396064094b6bb3172f598"
+    },
+    "furnished_home_windows_open.png": {
+      "bytes": 405807,
+      "sha256": "2b99ca8173d1ca3bd4face7211eee1a3db695aa73e0cdf0a2b52d799919d04d0"
+    },
+    "furnished_bakery_windows_closed.png": {
+      "bytes": 434184,
+      "sha256": "48a9716dce0682c366c0b67844d477955e92696654e3f3d0b7cbb9e7988d2966"
+    },
+    "furnished_bakery_windows_open.png": {
+      "bytes": 469099,
+      "sha256": "094719144c559f232c884ea8dd42a6730f3e59d26b47568bd0c0246e28d79038"
+    }
+  },
+  "headless_world_physics": "tmp/floor1-art-20260916/world/physics-v9-one-oak-doorunit.json",
+  "headless_checks": 190,
+  "headless_failures": 0,
+  "attribution_limit": "The world source also gained one approved garden oak and changed only country grass underlay since the before shot; a full-frame difference is not solely DoorUnit geometry. Blender 18 same-angle v5/v6 house views were exact pixel equality in the modular owner's evidence."
+}

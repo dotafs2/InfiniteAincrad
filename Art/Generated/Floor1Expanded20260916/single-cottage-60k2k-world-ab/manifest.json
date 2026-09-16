@@ -1,0 +1,160 @@
+{
+  "schema": "floor1-one-cottage-uv-rebaked-60k-color2k-actual-world-ab",
+  "review_state": "root review requested; candidate default-off and not adopted",
+  "target": "one west MarketFrontage cottage at (-13.9,0,-8), yaw91°",
+  "target_role": "exterior appearance only; not the enterable modular dwelling",
+  "other_31_exterior_houses_untouched": true,
+  "same_art_display_height_m": 10.0,
+  "candidate_switch": "--cottage-rebake-trial=on (default/off retains accepted LOD0/1/2 2K exterior)",
+  "candidate_imported_actual_triangles": 60000,
+  "candidate_imported_materials": 1,
+  "actual_godot_extracted_embedded_color_receipt": {
+    "path": "game/assets/floor1/meshy_houses_lod/candidates/01_hearth_cottage_uv_rebaked_60000_color2k_01_hearth_cottage_uv_rebaked_basecolor4096.png",
+    "bytes": 7178021,
+    "sha256": "370e17d300aa18e5b602d49ccd8f1078d0d8fb8b2d8ce16b24f84a153e2585d7",
+    "pixels": [
+      2048,
+      2048
+    ]
+  },
+  "extracted_image_note": "Godot sidecar name inherits the source 4096 label, but actual extracted pixels are 2048x2048 RGBA",
+  "source_tmp_and_staged_game_asset_byte_identical": [
+    {
+      "path": "tmp/floor1-art-20260916/uv-preserving-lod/01_hearth_cottage_uv_rebaked_60000_color2k.glb",
+      "bytes": 9402780,
+      "sha256": "fd4dd00e6256abe4a047443689a4850b643758a6ceaec5ff8552ab8b2ed37da5"
+    },
+    {
+      "path": "game/assets/floor1/meshy_houses_lod/candidates/01_hearth_cottage_uv_rebaked_60000_color2k.glb",
+      "bytes": 9402780,
+      "sha256": "fd4dd00e6256abe4a047443689a4850b643758a6ceaec5ff8552ab8b2ed37da5"
+    }
+  ],
+  "accepted_2k_baseline_asset_unchanged": {
+    "path": "game/assets/floor1/meshy_houses_lod/01_hearth_cottage_lod_2k.glb",
+    "bytes": 12797072,
+    "sha256": "811ba20a917fb419baf190dd6445eb61b0811e5275ace62d2ad55c183e59c16e"
+  },
+  "immutable_raw_highpoly_unchanged": {
+    "path": "exports/meshy-houses-20260916/models/01_hearth_cottage.glb",
+    "bytes": 78366592,
+    "sha256": "1c98cb4b0586201f55ae6d20557d615d9c6d8c8832850c6ce6542b38e5bbc578"
+  },
+  "engine_import_exit": 0,
+  "actual_full_world_checks": {
+    "off_passed": 249,
+    "on_passed": 251,
+    "off_failed": 0,
+    "on_failed": 0
+  },
+  "same_camera_shots": [
+    {
+      "camera": "(-5.971027, 3.5, -12.13901)",
+      "name": "front_close_shutter_flower_box",
+      "target": "(-13.9, 5.0, -8.0)"
+    },
+    {
+      "camera": "(-22.96844, 8.8, -11.84232)",
+      "name": "back_roof_close_chimney_pickup",
+      "target": "(-13.9, 7.8, -8.0)"
+    },
+    {
+      "camera": "(2.010302, 3.0, -13.27848)",
+      "name": "front_mid_actual_street",
+      "target": "(-13.9, 5.0, -8.0)"
+    }
+  ],
+  "actual_png_pixels": [
+    1680,
+    1080
+  ],
+  "six_actual_world_image_receipts": [
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/single-cottage-60k2k-world-ab/off/back_roof_close_chimney_pickup.png",
+      "bytes": 1267075,
+      "sha256": "54982b4902c6dc49427ae9d3c7b29b49f09a17ad49c23421c533b763ea7305d0",
+      "pixels": [
+        1680,
+        1080
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/single-cottage-60k2k-world-ab/off/front_close_shutter_flower_box.png",
+      "bytes": 1388823,
+      "sha256": "d544f0d9b3bb0505efba1fdf279bab5055a969b6b915264b1184c808d1612c99",
+      "pixels": [
+        1680,
+        1080
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/single-cottage-60k2k-world-ab/off/front_mid_actual_street.png",
+      "bytes": 1029654,
+      "sha256": "d17b859c6d34b05aaeaee7e8795fd0bc5eeb9419e406a6098e10f2480bb5b52a",
+      "pixels": [
+        1680,
+        1080
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/single-cottage-60k2k-world-ab/on/back_roof_close_chimney_pickup.png",
+      "bytes": 1248620,
+      "sha256": "e974d7fc11bde4b219d898185df38089bd39742d2041c08de9647ac980f725e8",
+      "pixels": [
+        1680,
+        1080
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/single-cottage-60k2k-world-ab/on/front_close_shutter_flower_box.png",
+      "bytes": 1356326,
+      "sha256": "d3d0a5021c495d437f53861c26270640c7c406901c7c98ee9dd8eedca39db6f4",
+      "pixels": [
+        1680,
+        1080
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/single-cottage-60k2k-world-ab/on/front_mid_actual_street.png",
+      "bytes": 1047018,
+      "sha256": "fb16dfdb37f8b5fd30661cbada79cc67068318aefade7f034dde1a604ed4c929",
+      "pixels": [
+        1680,
+        1080
+      ]
+    }
+  ],
+  "capture_json_receipts": [
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/single-cottage-60k2k-world-ab/off/capture.json",
+      "bytes": 1714,
+      "sha256": "8f7c2967f0df085d43b3b77a2d4e538e87c18bed433cf0ba82875029af816385"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/single-cottage-60k2k-world-ab/on/capture.json",
+      "bytes": 1842,
+      "sha256": "35b9531f366484195bf8aea22473522185c4b55a0a97733ae54ade61165fa528"
+    }
+  ],
+  "full_world_physics_receipts": [
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/single-cottage-60k2k-world-ab/off-physics.json",
+      "bytes": 63820,
+      "sha256": "1f9c8ce400ac7e27882e44047d361e93b93685a95c5cd659b9708e938f31dba4"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/single-cottage-60k2k-world-ab/on-physics.json",
+      "bytes": 64355,
+      "sha256": "cc4ace87d60e53f701ec3dde9afe730fc834396d2be1a42fc23b970731a86ccb"
+    }
+  ],
+  "visual_assessment": {
+    "front_close": "new geometry preserves teal upper shutters, ground shutters, flower boxes, wall/window surrounds and roof volume much better than the 38K near baseline",
+    "street_mid": "cleaner facade remains readable; roof takes on a somewhat uneven tile silhouette",
+    "back_roof_close": "several obvious white baked-color pickups immediately beside chimney appear in 60K candidate, absent from accepted 38K baseline; unconditional near adoption is not justified"
+  },
+  "material_tradeoff": "candidate has only a fresh 2K baked base-color image, metallic0, matte roughness0.78; no source normal/ORM rebake",
+  "performance_limitation": "visual A/B only: candidate pass hides but still loads the original baseline GLB/resources, so no runtime memory, draw-call or frame-rate inference",
+  "movie_provenance": "root-accepted v2 movie was recorded before this candidate and uses the original 38K/2K exterior default",
+  "related_isolated_topology_provenance": "Art/Generated/Floor1TopologyTrials20260916/uv-preserving-lod/manifest.json"
+}

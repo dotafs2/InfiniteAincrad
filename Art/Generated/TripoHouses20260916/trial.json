@@ -1,0 +1,37 @@
+{
+  "trial_id": "tripo-houses-20260916",
+  "purpose": "Five original fantasy town house appearance candidates; not playable interiors or deployed world assets.",
+  "model": "v3.1-20260211",
+  "base_url": "https://openapi.tripo3d.ai/v3",
+  "expected_credits_per_house": 30,
+  "maximum_creations": 5,
+  "settings": {"texture": true, "pbr": true, "texture_quality": "detailed", "geometry_quality": "standard", "face_limit": 80000},
+  "negative_prompt": "people, characters, vehicles, text, logos, watermarks, floating parts, dollhouse cutaway, missing rear walls, large ground base, whole village, photorealistic grime, extreme perspective",
+  "houses": [
+    {
+      "id": "01_woodland_cottage",
+      "name_zh": "林边小屋",
+      "prompt": "One complete standalone two-storey woodland cottage for a charming anime fantasy town, a 3D game environment asset with all four exterior walls and a complete roof. Cream lime plaster, pale limestone foundation, warm dark oak timber framing, muted terracotta clay roof tiles, sage green shutters. Broad asymmetrical gable roof, small front dormer, stone chimney, recessed arched wooden front door, simple covered porch, two flower boxes attached below windows. Compact cozy silhouette, readable large forms, restrained hand-painted textures and soft color transitions. Matching cohesive stylized medieval European architecture. Clean daylight material colors without baked strong shadows. Only the building, no landscape or display pedestal. Exterior appearance study, not a cutaway. Intended full-size cottage proportions, about 7 metres wide. Complete and attractive from the front, sides and back."
+    },
+    {
+      "id": "02_narrow_townhouse",
+      "name_zh": "窄面街屋",
+      "prompt": "One complete standalone three-storey narrow merchant street townhouse for a charming anime fantasy town, a 3D game environment asset. Pale limestone ground floor, cream plaster upper walls, warm dark oak details, a steep muted blue-grey tiled gable roof with two small dormers. Tall elegant slim silhouette, three vertical window bays, arched recessed front entrance, shallow wooden balcony on the second storey, modest wrought iron railing, one small chimney. All four walls are finished and visible when rotated, no cutaway. Cohesive stylized medieval European architecture, clean readable forms and restrained hand-painted PBR textures, soft desaturated palette without baked strong shadows. Only one building, no attached neighbours, people, lettering or landscape. Intended full-size proportions about 5 metres wide and 12 metres tall. Architectural details must belong to the building, not float."
+    },
+    {
+      "id": "03_merchant_courtyard",
+      "name_zh": "商人庭院宅",
+      "prompt": "One complete standalone L-shaped two-storey merchant courtyard residence for a charming anime fantasy town. A 3D game environment asset with a clear L-shaped footprint and an open recessed courtyard between the wings, not a miniature village. Pale limestone arcades on the ground floor, warm cream plaster upper walls, restrained oak timber details, muted terracotta roof tiles and sage shutters. Main wing has a broad gable roof, shorter side wing a lower matching roof, one stone chimney, arched wooden entrance and a small upstairs balcony facing the courtyard. Cohesive stylized medieval European architecture, readable silhouette, carefully grouped detail, subtle hand-painted PBR textures without noisy grime or painted lighting. Full exterior walls and roof on all sides. Only the house and its attached doorstep, no large ground slab, furniture, people or landscape. Intended main wing width about 10 metres."
+    },
+    {
+      "id": "04_artisan_home",
+      "name_zh": "工匠住宅",
+      "prompt": "One complete standalone two-storey artisan family house with a small attached workshop wing for a charming anime fantasy town. Stylized 3D game building, not an interior cutaway. Ground floor pale limestone, cream plaster upstairs, expressive warm oak framing and cross braces, muted terracotta roof tiles. Main house has a steep gable roof and one offset dormer; lower side workshop has a simple lean-to roof, wide double wooden doors, small high windows and a substantial stone chimney. Residential entrance is a separate smaller arched door. A modest wooden canopy over the workshop door gives the silhouette character. Coherent hand-painted anime environment style with readable medium-scale architectural details and clean material color. All rear and side walls fully formed. Only one building, no tools scattered outside, no people, signs, ground pedestal or landscape. Intended house width about 9 metres."
+    },
+    {
+      "id": "05_corner_turret_home",
+      "name_zh": "塔楼转角宅",
+      "prompt": "One complete standalone three-storey corner residence with a small attached octagonal stair turret, for a charming anime fantasy town. Refined stylized 3D game architecture, pale limestone lower walls and window surrounds, warm cream plaster, dark oak balcony details. Main roof muted blue-grey clay tiles, turret has a slightly taller matching conical roof and a modest finial. Distinctive but believable compact corner-house silhouette, arched recessed front door, tall narrow windows on the turret, a shallow balcony on the main building and one dormer. No fantasy castle scale or excessive ornament. Cohesive hand-painted European medieval town style, restrained colors, clean topology-friendly shapes, natural material colors without strong baked shadows. A complete building on all four sides, not a cutaway. No people, lettering, trees or ground pedestal. Intended width about 8 metres and height about 13 metres."
+    }
+  ]
+}

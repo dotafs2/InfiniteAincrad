@@ -1,0 +1,103 @@
+{
+  "schema": "floor1-authored-modular-v6.1-final-handoff-v1",
+  "state": "CPU verified against present main assets and preserved real Godot 150-check report; no new engine or render run",
+  "manifest": "game/assets/floor1/modular_houses_20260916/manifest.json",
+  "manifest_sha256": "79d856b71124c03135bd1e57a67388e64e2f7247384c174f85c93b292ed331e3",
+  "component": "game/spatial/modular_house_component.gd",
+  "component_sha256": "5110633cd2ee66ffe151580a950c6072f09b17fc20936262cb9bfb48befc7046",
+  "acceptance_test_sha256": "310d8f7f15529af7e42b1ddf4f8bbafcf5be4abdf4f263774107f054c86e4f31",
+  "real_acceptance_log": "tmp/floor1-art-20260916/modular/merchant-bay-post-fix/merchant-post-v61-acceptance.stdout.log",
+  "checks": 150,
+  "failures": 0,
+  "external_oak_leaf": "game/assets/floor1/door_leaf_20260916/F1_oak_door_leaf.glb",
+  "external_oak_leaf_sha256": "ed40b6a4a9ac38ac608540d1c9d035068826ea96b44b53dd3d9d63f689093587",
+  "external_oak_leaf_triangles": 2752,
+  "variants": [
+    {
+      "id": "01_hearth_cottage",
+      "glb": "game/assets/floor1/modular_houses_20260916/01_hearth_cottage.glb",
+      "glb_sha256": "52b5c9978d347b6ffcd6fa34ac0f17353589cc35357d6102e954483d89ab84dc",
+      "glb_bytes": 776068,
+      "authored_and_glTF_triangles": 13000,
+      "godot_imported_triangles_including_external_oak_leaf": 15752,
+      "DoorUnit": 1,
+      "WindowUnit_count": 16,
+      "DoorUnit_descendants": [
+        "DoorFrame",
+        "DoorLeaf",
+        "DoorPivot"
+      ],
+      "WindowUnit_required_descendants": "WindowFrame_NN, WindowSash_NN, ShutterPivot_L_NN, ShutterPivot_R_NN and both shutter leaves",
+      "tested_complete_door_capsule_signed_axis_displacement_m": -0.833330154418945,
+      "tested_window_detach_and_reinstall": {
+        "detached": "clear",
+        "restored": "WindowCollision_00"
+      }
+    },
+    {
+      "id": "02_market_house",
+      "glb": "game/assets/floor1/modular_houses_20260916/02_market_house.glb",
+      "glb_sha256": "9ab37225313c8f98ea6854b5463db7b1f89fd5c90a8091752a61132df0d89364",
+      "glb_bytes": 813864,
+      "authored_and_glTF_triangles": 13472,
+      "godot_imported_triangles_including_external_oak_leaf": 16224,
+      "DoorUnit": 1,
+      "WindowUnit_count": 19,
+      "DoorUnit_descendants": [
+        "DoorFrame",
+        "DoorLeaf",
+        "DoorPivot"
+      ],
+      "WindowUnit_required_descendants": "WindowFrame_NN, WindowSash_NN, ShutterPivot_L_NN, ShutterPivot_R_NN and both shutter leaves",
+      "tested_complete_door_capsule_signed_axis_displacement_m": -0.833330154418945,
+      "tested_window_detach_and_reinstall": {
+        "detached": "clear",
+        "restored": "WindowCollision_00"
+      }
+    },
+    {
+      "id": "03_corner_turret",
+      "glb": "game/assets/floor1/modular_houses_20260916/03_corner_turret.glb",
+      "glb_sha256": "e6c6b163f3088019239bb99fa684dac455ff870014d2a5437b6b19dbd9df36c7",
+      "glb_bytes": 1365864,
+      "authored_and_glTF_triangles": 22412,
+      "godot_imported_triangles_including_external_oak_leaf": 25164,
+      "DoorUnit": 1,
+      "WindowUnit_count": 39,
+      "DoorUnit_descendants": [
+        "DoorFrame",
+        "DoorLeaf",
+        "DoorPivot"
+      ],
+      "WindowUnit_required_descendants": "WindowFrame_NN, WindowSash_NN, ShutterPivot_L_NN, ShutterPivot_R_NN and both shutter leaves",
+      "tested_complete_door_capsule_signed_axis_displacement_m": -0.833330154418945,
+      "tested_window_detach_and_reinstall": {
+        "detached": "clear",
+        "restored": "WindowCollision_00"
+      }
+    }
+  ],
+  "nonmerchant_glbs_equal_adopted_v6_doorunit_candidate": true,
+  "merchant_is_only_v6.1_visual_and_collision_update": true,
+  "capsule_signed_axis_displacement_definition": "Acceptance _walk starts at the authored doorway centre and reports (final_world_position - doorway_centre).dot(outward_world). Positive means the capsule stayed outside; negative means it advanced inside. A value below -0.60m passes the open or detached-door entry test. This is a signed travel coordinate, not doorway clear width.",
+  "updated_component_contract": "tmp/floor1-art-20260916/modular/contract.json",
+  "updated_component_contract_sha256": "5023263a32ec801c61b408abdbc0fa1cb20c53e4388d6cbe66928c1e6ac78e61",
+  "parts_manifest_semantics": "The current parts[] table inventories individual renderable mesh nodes. DoorUnit is separately declared by door_unit_node and exists once per GLB; WindowUnit_NN nodes are real imported composite nodes but are not individually enumerated in parts[]. Use the names verified here, not a claim that parts[] alone exposes the whole assembly.",
+  "runtime_collision_exact_scope": "ShellCollision trimesh from actual BuildingShell; DoorCollision box under moving DoorPivot; one WindowCollision_NN pane box under each movable WindowSash_NN; merchant-only ShopBayPostCollision with two boxes from manifest centres x=-2.45/+2.45, Blender y=-4.75,z=1.35,size0.14x0.5x2.5m. The component does not create collision bodies for the manifest's timber and roof candidate entries.",
+  "operation": {
+    "instantiate": "Create ModularHouseComponent, set variant_id, add to scene; build_on_ready defaults true or call build() once. res:// paths are relative to game/ as Godot project root.",
+    "door": "set_door_open(bool)/interact_door() use the manifest 88 degree hinge angle; detach_door_unit() returns the complete live DoorUnit. install_door_unit(Node3D) requires detached DoorFrame, DoorPivot, DoorLeaf and DoorCollision descendants and aligns it to the authored anchor. The unchanged shell aperture remains; a rotated cross-variant same-size unit transplant was physically verified.",
+    "oak_leaf": "external_door_visual_path defaults to the root-owned oak door GLB and only replaces the visible leaf. clear_external_door_visual() restores the authored fallback; it never replaces the full door physical assembly.",
+    "window": "set_window_open(bool) lifts all sashes by0.715m and swings paired shutters to +/-75 degrees. To detach one complete unit, find WindowUnit_NN in instance, retain its parent/transform, remove_child(unit), and add_child(unit) with original transform to restore. One front unit per variant was physically verified; there is no dedicated cross-variant custom-window replacement API.",
+    "roof": "roof_node() exposes a separate visual Roof node for callers to hide/remove; no independent runtime roof collision is currently authored."
+  },
+  "explicit_remaining_scope": [
+    "These DoorUnit/WindowUnit nodes belong to newly authored three modular replacement GLBs; the separate 32 Meshy LOD exterior houses are visual exteriors and have not been automatically semantic-segmented into independently operable doors/windows.",
+    "Complete cross-variant custom WindowUnit transplant and arbitrary window-size replacement have not been demonstrated; current proof is each original unit's real detach/reinstall and sash/shutter motion.",
+    "Upper-floor stairs/furnishing, turret interior entry, persistent housing/inventory and NPC interactions are outside this module delivery."
+  ],
+  "merchant_shopbay_world_visual": "tmp/floor1-art-20260916/world/tour-v2-draft/shopbay-visual-before.json (1/246 fails) versus shopbay-visual-after.json (246/246), plus exact-eye actual before/after PNG at stills-off/05_bakery_door_open.png and stills-final/05b_shopbay_fix_exact_previous_eye.png; root reviewed and accepted.",
+  "model_calls": 0,
+  "new_blender_runs": 0,
+  "new_godot_runs": 0
+}

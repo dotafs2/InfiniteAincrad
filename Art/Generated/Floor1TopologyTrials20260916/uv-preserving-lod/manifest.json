@@ -1,0 +1,160 @@
+{
+  "task": "Immutable high-poly hearth cottage: two reversible Blender UV-aware 60K exterior LOD trials",
+  "status": "ISOLATED_WORLD_NEAR_AB_REVIEWED_NOT_ADOPTED",
+  "recorded_at_utc": "2026-09-15T22:54:16.208807+00:00",
+  "model_calls": 0,
+  "source": {
+    "raw_glb": "exports/meshy-houses-20260916/models/01_hearth_cottage.glb",
+    "sha256_before_after": "1c98cb4b0586201f55ae6d20557d615d9c6d8c8832850c6ce6542b38e5bbc578",
+    "bytes": 78366592,
+    "actual_triangles": 1630308,
+    "original_4_actual_1024px_views": "exports/meshy-houses-20260916/renders/01_hearth_cottage-az{038,128,218,308}.png",
+    "original_pbr_images_px": {
+      "base_color": [
+        4096,
+        4096
+      ],
+      "metallic_roughness": [
+        2048,
+        2048
+      ],
+      "normal": [
+        4096,
+        4096
+      ]
+    }
+  },
+  "control": {
+    "root_merge_vertices_40000_trial": "tmp/floor1-art-20260916/root-cottage-merge-40000/",
+    "control_model_triangles": 40000,
+    "observed_failure": "Root's four actual 1024px views retain front window detail but show red atlas-color triangles on rear/side cream plaster and white roof points."
+  },
+  "adopted_38021_triangle_reference": {
+    "glb": "exports/floor1-art-20260916/remesh/01_hearth_cottage.glb",
+    "sha256": "e74b9b2333ac12b13569a6f0cea33c23aadd3a514596a2630045559e895f99b5",
+    "actual_triangles": 38021,
+    "actual_four_1024px_views": "exports/floor1-art-20260916/remesh-preview/renders/01_hearth_cottage-az{038,128,218,308}.png",
+    "same_view_evidence": "Both preview reports use 1024px, az038/128/218/308, elevation22 and yaw0; fitted presentation scale differs by 0.17 percent because GLB bounds differ.",
+    "observed_baseline_defects": "Front and rear teal shutters show broken teal/white fragments, ground-floor window frames tear into the stone, and the right-front flower box is degraded. Rear and side plaster, window surrounds and shutter silhouettes are less complete than the 60K rebake.",
+    "comparison_decision": "Root reviewed all four adopted 38K and all four 60K fixed rebake views; the 60K variant is a substantial whole-house improvement despite a smaller chimney-neighbor roof white spot. Approved as an isolated one-cottage near-world A/B candidate, not for main adoption yet."
+  },
+  "measured_corner_uv_topology": {
+    "diagnostic": "tmp/floor1-art-20260916/uv-preserving-lod/uv-seam-diagnostic.json",
+    "import_merge_vertices": true,
+    "imported_mesh_vertices": 815016,
+    "total_geometry_edges": 2445462,
+    "uv_discontinuous_edges": 82943,
+    "uv_discontinuous_endpoint_vertices": 77311,
+    "seam_endpoint_fraction": 0.094858,
+    "geometric_boundary_or_nonmanifold_edges": 0,
+    "tool_semantics": "Blender 5.2 Collapse uses vertex-group weights to influence collapsing; UV/Seam Delimit belongs to Planar dissolve, not Collapse. Higher weights favor collapse, so true measured seam endpoints received lower weight than interior vertices.",
+    "official_reference": "https://docs.blender.org/manual/en/5.2/modeling/modifiers/generate/decimate.html"
+  },
+  "candidate1": {
+    "method": "Measured per-corner UV discontinuities from glTF; interior vertices Collapse group weight1, seam endpoints low nonzero weight0.03, factor5, target60000",
+    "glb": "tmp/floor1-art-20260916/uv-preserving-lod/01_hearth_cottage_uv_weighted_60000target.glb",
+    "sha256": "e642b196dc3d718aea97678b6eb8379cb45304533ea253ccc7d9e5105b7ea128",
+    "actual_triangles": 60000,
+    "bytes": 32827020,
+    "image_count": 3,
+    "all_three_pbr_maps_embedded": true,
+    "four_actual_1024px_views": "tmp/floor1-art-20260916/uv-preserving-lod/candidate1-preview/renders/01_hearth_cottage_uv_weighted_60000target-az{038,128,218,308}.png",
+    "view_assessment": "Front roof/window detail is more coherent than the 40K control; red triangles on rear cream plaster are greatly reduced. Black texture pulling remains under the rear timber band and a small rear roof white speck remains, so the four-view no-color-contamination criterion fails.",
+    "metric_receipt": "tmp/floor1-art-20260916/uv-preserving-lod/candidate1-weighted-metrics.json",
+    "build_process": {
+      "receipt": "tmp/floor1-art-20260916/uv-preserving-lod/candidate1-lowweight-build-run/cottage-uv-lowweight-build.process.json",
+      "status": "exited",
+      "exit_code": 0,
+      "elapsed_seconds": 27.187,
+      "active_processes": 0
+    },
+    "render_process": {
+      "receipt": "tmp/floor1-art-20260916/uv-preserving-lod/candidate1-render-blender-run/cottage-uv-lowweight-fourview-blender.process.json",
+      "status": "exited",
+      "exit_code": 0,
+      "elapsed_seconds": 3.219,
+      "active_processes": 0
+    },
+    "failed_strict_zero_seam_build": {
+      "preserved_script": "tmp/floor1-art-20260916/uv-preserving-lod/failed-zero-seam-build.py",
+      "stderr": "tmp/floor1-art-20260916/uv-preserving-lod/candidate1-build-run/cottage-uv-weighted-build.stderr.log",
+      "actual_stop_triangles": 180264,
+      "process": {
+        "receipt": "tmp/floor1-art-20260916/uv-preserving-lod/candidate1-build-run/cottage-uv-weighted-build.process.json",
+        "status": "exited",
+        "exit_code": 0,
+        "elapsed_seconds": 23.969,
+        "active_processes": 0
+      },
+      "assessment": "A true zero/unassigned seam group could not reach the 60K target; Blender process returned 0 despite script assertion, so stderr and missing output are the reliable failure evidence."
+    },
+    "adopted": false
+  },
+  "candidate2": {
+    "method": "Smart UV Project on candidate1 60K geometry, new 4096px color atlas, Cycles DIFFUSE COLOR-only selected-to-active bake from immutable 1.63M source",
+    "glb": "tmp/floor1-art-20260916/uv-preserving-lod/01_hearth_cottage_uv_rebaked_60000.glb",
+    "sha256": "965477e32e2d025b62ae20fb48dd9d920aa7520bcb76106100fdb850b317af63",
+    "actual_triangles": 60000,
+    "bytes": 25306192,
+    "rebaked_4096px_color_image": "tmp/floor1-art-20260916/uv-preserving-lod/01_hearth_cottage_uv_rebaked_basecolor4096.png",
+    "rebaked_color_sha256": "d43528d806214c4edf93b6ac3dbfed8f72164dd8c63b990135c06e34655db616",
+    "glb_embedded_image_count": 1,
+    "original_highpoly_and_candidate1_sha_before_after_unchanged": true,
+    "material_tradeoff": "The source metallic-roughness and normal images remain preserved in immutable source; only base color is rebaked on this candidate. Candidate roughness is a matte constant0.78 and metallic0, so same-camera visual review must decide whether light response is suitable.",
+    "four_actual_1024px_final_views": "tmp/floor1-art-20260916/uv-preserving-lod/candidate2-preview-fixed/renders/01_hearth_cottage_uv_rebaked_60000-az{038,128,218,308}.png",
+    "view_assessment": "Against the actually adopted 38,021-triangle Meshy LOD0 at matching az038/128/218/308, doors, teal shutter silhouettes, window frames, flower boxes and rear plaster are markedly more complete. White color pick-up persists on roof tiles immediately beside the chimney in az128/az218; the pristine high-poly reference has no such marks. Root approved isolated real-world near-camera A/B, but not main adoption.",
+    "metric_receipt": "tmp/floor1-art-20260916/uv-preserving-lod/candidate2-rebake-metrics.json",
+    "build_process": {
+      "receipt": "tmp/floor1-art-20260916/uv-preserving-lod/candidate2-dependencyfix-run/cottage-uv-rebake-cpu-dependencyfix.process.json",
+      "status": "exited",
+      "exit_code": 0,
+      "elapsed_seconds": 12.5,
+      "active_processes": 0
+    },
+    "render_process": {
+      "receipt": "tmp/floor1-art-20260916/uv-preserving-lod/candidate2-fixed-render-run/cottage-uv-rebaked-fixed-fourview.process.json",
+      "status": "exited",
+      "exit_code": 0,
+      "elapsed_seconds": 3.156,
+      "active_processes": 0
+    },
+    "preserved_first_bake": "tmp/floor1-art-20260916/uv-preserving-lod/candidate2-first-bake-preserved/ (first model, texture, script and 4 actual angles)",
+    "failed_gpu_enumeration": {
+      "preserved_script": "tmp/floor1-art-20260916/uv-preserving-lod/failed-optix-enumeration-build.py",
+      "stderr": "tmp/floor1-art-20260916/uv-preserving-lod/candidate2-bake-run/cottage-uv-rebake-build.stderr.log",
+      "process": {
+        "receipt": "tmp/floor1-art-20260916/uv-preserving-lod/candidate2-bake-run/cottage-uv-rebake-build.process.json",
+        "status": "exited",
+        "exit_code": 3221225477,
+        "elapsed_seconds": 4.422,
+        "active_processes": 0
+      },
+      "assessment": "Blender 5.2 Windows GPU device enumeration hit ze_loader.dll access violation before bake; process tree fully exited. Bounded CPU-only 4096px color bake completed in 12.5s."
+    },
+    "dependency_and_cage_recheck": "Final candidate connects its destination texture only after bake and uses 0.008m cage rather than 0.025m. Circular warning vanished but chimney-adjacent white roof marks did not.",
+    "adopted": false
+  },
+  "candidate2_derived_2k_color": {
+    "method": "No rebake or geometry changes; LANCZOS downsample only the final 4096px RGBA color atlas and replace the final GLB PNG bufferView",
+    "candidate_glb": "tmp/floor1-art-20260916/uv-preserving-lod/01_hearth_cottage_uv_rebaked_60000_color2k.glb",
+    "candidate_glb_sha256": "fd4dd00e6256abe4a047443689a4850b643758a6ceaec5ff8552ab8b2ed37da5",
+    "candidate_glb_bytes": 9402780,
+    "candidate_color_png": "tmp/floor1-art-20260916/uv-preserving-lod/01_hearth_cottage_uv_rebaked_basecolor2048.png",
+    "candidate_color_png_sha256": "370e17d300aa18e5b602d49ccd8f1078d0d8fb8b2d8ce16b24f84a153e2585d7",
+    "candidate_color_png_bytes": 7178021,
+    "actual_triangles": 60000,
+    "geometry_uv_indices_nodes_materials_proof": "Source and 2K derivative glTF nodes, meshes, accessors and materials compare equal; all geometry/UV/index BIN bytes before the final color PNG are identical SHA c3f2407f1eca8e5faf9f275cd63b60f4d7d5f95b4ae937f3ec50911dd9c71dec.",
+    "receipt": "tmp/floor1-art-20260916/uv-preserving-lod/color2k-derivation.json",
+    "status": "isolated; 4K source SHA965477e3 unchanged; main game assets untouched"
+  },
+  "current_decision": "The actually adopted 38K LOD0 remains the main game baseline. Root viewed the one-cottage same-world-light 60K/2K off/on front-close, rear-chimney roof-close and street-mid Godot pairs. Window/shutter/flower-box completeness improves, but white roof pick-up near the chimney remains conspicuous in real world lighting. Keep the 60K/2K trial isolated; do not replace the adopted LOD0, and do not continue parameter sweeps.",
+  "real_world_single_cottage_ab": {
+    "receipt_dir": "tmp/floor1-art-20260916/world/single-cottage-60k-ab/",
+    "candidate": "one west MarketFrontage cottage only, 60,000 imported triangles, one material, original other Meshy exterior resources preserved",
+    "same_camera_views": ["front_close_shutter_flower_box.png", "back_roof_close_chimney_pickup.png", "front_mid_actual_street.png"],
+    "baseline_dir": "tmp/floor1-art-20260916/world/single-cottage-60k-ab/off/",
+    "candidate_dir": "tmp/floor1-art-20260916/world/single-cottage-60k-ab/on/",
+    "root_actual_image_decision": "Rear/chimney white roof mark is still prominent; preserve candidate only."
+  },
+  "possible_later_fix": "A future color-category-aware bake cage or separate chimney/roof projection could avoid ray hits onto white masonry; this was not started inside the bounded two-method trial."
+}

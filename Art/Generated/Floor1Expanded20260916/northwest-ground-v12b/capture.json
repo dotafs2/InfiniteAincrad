@@ -1,0 +1,108 @@
+{
+  "authored_ground_union_area_m2": 222700,
+  "base_world_extent_m": [
+    420,
+    460
+  ],
+  "capture_png_px": [
+    1680,
+    1080
+  ],
+  "default_painted_meadow_mix": 0.22,
+  "frame_interval_definition": "actual non-headless frame_post_draw intervals include VSync/presentation and CPU waits",
+  "height_sampled_original_kit_trees": 24,
+  "model_calls": 0,
+  "north_sector_collision_bodies": 1,
+  "north_sector_real_max_height_m": 13.1269649116678,
+  "north_sector_real_tris": 340,
+  "old_camera_baseline": "tmp/floor1-art-20260916/world/meadow-v11-captures-on/capture.json",
+  "root_approved_sector_bounds_m": {
+    "x": [
+      -210,
+      85
+    ],
+    "z": [
+      -335,
+      -235
+    ]
+  },
+  "saved_shots": [
+    "country_road_eye",
+    "forest_bank_walk_eye",
+    "west_bank_overview",
+    "north_path_edge_eye",
+    "north_sector_forestline_eye",
+    "north_sector_overview"
+  ],
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "shot_rows": [
+    {
+      "benchmark_frames": 120,
+      "camera": "(-7.0, 1.72, -179.0)",
+      "draw_calls_with_shadows": 400,
+      "median_frame_interval_ms": 4.179,
+      "name": "country_road_eye",
+      "p95_frame_interval_ms": 4.812,
+      "png_saved": true,
+      "primitives_with_shadows": 823077,
+      "target": "(-15.0, 0.2, -205.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-50.0, 2.751533, -216.0)",
+      "draw_calls_with_shadows": 160,
+      "median_frame_interval_ms": 4.163,
+      "name": "forest_bank_walk_eye",
+      "p95_frame_interval_ms": 4.28,
+      "png_saved": true,
+      "primitives_with_shadows": 323131,
+      "target": "(-62.0, 0.8, -222.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-30.0, 12.0, -196.0)",
+      "draw_calls_with_shadows": 192,
+      "median_frame_interval_ms": 4.164,
+      "name": "west_bank_overview",
+      "p95_frame_interval_ms": 4.312,
+      "png_saved": true,
+      "primitives_with_shadows": 434904,
+      "target": "(-55.0, 0.9, -218.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(0.0, 1.72, -222.0)",
+      "draw_calls_with_shadows": 66,
+      "median_frame_interval_ms": 4.166,
+      "name": "north_path_edge_eye",
+      "p95_frame_interval_ms": 4.294,
+      "png_saved": true,
+      "primitives_with_shadows": 124420,
+      "target": "(-37.0, 4.4, -285.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-80.0, 2.1, -255.0)",
+      "draw_calls_with_shadows": 96,
+      "median_frame_interval_ms": 4.167,
+      "name": "north_sector_forestline_eye",
+      "p95_frame_interval_ms": 4.291,
+      "png_saved": true,
+      "primitives_with_shadows": 271162,
+      "target": "(-135.0, 8.0, -307.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(0.0, 42.0, -207.0)",
+      "draw_calls_with_shadows": 99,
+      "median_frame_interval_ms": 4.175,
+      "name": "north_sector_overview",
+      "p95_frame_interval_ms": 4.328,
+      "png_saved": true,
+      "primitives_with_shadows": 245784,
+      "target": "(-122.0, 7.0, -294.0)"
+    }
+  ],
+  "suite": "floor1_northwest_real_ground_extension_actual_world_views",
+  "world_state_mutations": 0
+}

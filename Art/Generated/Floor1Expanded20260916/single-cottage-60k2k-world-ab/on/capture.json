@@ -1,0 +1,48 @@
+{
+  "actual_saved_png_px": [
+    1680,
+    1080
+  ],
+  "art_display_height_m": 10.0,
+  "candidate_asset": "res://assets/floor1/meshy_houses_lod/candidates/01_hearth_cottage_uv_rebaked_60000_color2k.glb",
+  "candidate_enabled": true,
+  "candidate_imported_surfaces": 1,
+  "candidate_imported_triangles": 60000,
+  "candidate_known_geometry_color_limit": "white atlas pickup near chimney; original highpoly roof had no such white marks",
+  "candidate_material_limit": "new 2K baked color only, matte roughness0.78; no PBR normal/ORM re-bake",
+  "candidate_raw_bounds_high": "(0.684254, 0.951495, 0.719355)",
+  "candidate_raw_bounds_low": "(-0.68937, -0.953671, -0.722211)",
+  "model_calls": 0,
+  "on_pass_hidden_baseline_still_loaded": true,
+  "other_exterior_lod_houses_untouched": 31,
+  "same_camera_shots": [
+    {
+      "camera": "(-5.971027, 3.5, -12.13901)",
+      "name": "front_close_shutter_flower_box",
+      "target": "(-13.9, 5.0, -8.0)"
+    },
+    {
+      "camera": "(-22.96844, 8.8, -11.84232)",
+      "name": "back_roof_close_chimney_pickup",
+      "target": "(-13.9, 7.8, -8.0)"
+    },
+    {
+      "camera": "(2.010302, 3.0, -13.27848)",
+      "name": "front_mid_actual_street",
+      "target": "(-13.9, 5.0, -8.0)"
+    }
+  ],
+  "saved_shots": [
+    "front_close_shutter_flower_box",
+    "back_roof_close_chimney_pickup",
+    "front_mid_actual_street"
+  ],
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "suite": "one_west_market_cottage_60k2k_uv_rebake_actual_world_light_ab",
+  "target_default_lod_asset": "res://assets/floor1/meshy_houses_lod/01_hearth_cottage_lod_2k.glb",
+  "target_house_name": "Exterior_03_01_hearth_cottage",
+  "target_house_world_site_m": "(-13.9, 0.0, -8.0)",
+  "target_house_yaw_deg": 90.9999923706055,
+  "this_is_not_resource_memory_or_performance_proof": true,
+  "world_state_mutations": 0
+}

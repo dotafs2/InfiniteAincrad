@@ -1,0 +1,44 @@
+{
+  "name": "expanded-world-tour-v3-approved-grove",
+  "started_at_utc": "2026-09-16T00:10:29.093393+00:00",
+  "command": [
+    "tmp/toolchain/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64.exe",
+    "--path",
+    "game",
+    "--scene",
+    "res://scenes/floor1_expanded_world.tscn",
+    "--resolution",
+    "1280x720",
+    "--write-movie",
+    "D:/lucidgloves/InfiniteAincrad/tmp/floor1-art-20260916/world/tour-v3.avi",
+    "--fixed-fps",
+    "30",
+    "--",
+    "--tour-version=v3",
+    "--tour-output=D:/lucidgloves/InfiniteAincrad/tmp/floor1-art-20260916/world/tour-v3-route.json"
+  ],
+  "timeout_seconds": 240,
+  "pid": 50952,
+  "status": "exited",
+  "exit_code": 0,
+  "process_tree": {
+    "containment": "windows_kill_on_close_job",
+    "wrapper_pid": 50952,
+    "observed_members": [
+      {
+        "pid": 50952,
+        "creation_time_windows_100ns": 134339910290948327,
+        "running": false,
+        "exit_code": 0
+      }
+    ],
+    "total_assigned_processes": 1,
+    "active_processes": 0,
+    "member_identity_list_complete": true,
+    "observed_nonzero_exits": [],
+    "all_member_exit_codes_known": true,
+    "all_members_exited": true
+  },
+  "elapsed_seconds": 52.36,
+  "finished_at_utc": "2026-09-16T00:11:21.456601+00:00"
+}

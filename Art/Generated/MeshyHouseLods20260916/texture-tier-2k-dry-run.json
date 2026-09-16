@@ -1,0 +1,184 @@
+{
+  "schema": "meshy-house-selectable-2k-glb-tier-v1",
+  "generated_at_utc": "2026-09-15T20:20:10.455632+00:00",
+  "builder": "Art/Generated/MeshyHouseLods20260916/build_texture2k_tier.py",
+  "state": "dry-run candidate only",
+  "houses": [
+    {
+      "id": "01_hearth_cottage",
+      "source_4k_glb": "game/assets/floor1/meshy_houses_lod/01_hearth_cottage_lod.glb",
+      "source_4k_sha256_before_after": "a1df96ee18a0db150a450af5df5cec5550b2be0fb8dc7b60d4e6f970cfbd7537",
+      "source_4k_bytes": 40040092,
+      "derived_2k_glb": "game/assets/floor1/meshy_houses_lod/01_hearth_cottage_lod_2k.glb",
+      "derived_2k_sha256": "811ba20a917fb419baf190dd6445eb61b0811e5275ace62d2ad55c183e59c16e",
+      "derived_2k_bytes": 12797072,
+      "source_geometry_buffer_views_sha256": "77b5ceafc1149f163cf57d6fda01e10cafd856371497fed962b227d29df1261d",
+      "derived_geometry_buffer_views_sha256": "77b5ceafc1149f163cf57d6fda01e10cafd856371497fed962b227d29df1261d",
+      "mesh_nodes": [
+        "LOD0",
+        "LOD1",
+        "LOD2"
+      ],
+      "material_refs": [
+        0,
+        0,
+        0
+      ],
+      "material_count": 1,
+      "embedded_image_count": 3,
+      "images": [
+        {
+          "semantic": "normal",
+          "original_encoded_bytes": 12645646,
+          "derived_encoded_bytes": 3838297,
+          "derived_sha256": "8062cd3b61fbe8ab5e13c7e0bfeee4973246347667e8099b60a1b6fa2e0f3499",
+          "dimensions_px": [
+            2048,
+            2048
+          ],
+          "resampling": "BOX + tangent normal renormalization"
+        },
+        {
+          "semantic": "texture_0",
+          "original_encoded_bytes": 16789910,
+          "derived_encoded_bytes": 4846820,
+          "derived_sha256": "8070266119b5a9f7f7522b61924073626bcc395b0290e215f9b9ce06c382d208",
+          "dimensions_px": [
+            2048,
+            2048
+          ],
+          "resampling": "LANCZOS RGB"
+        },
+        {
+          "semantic": "texture_0_metallic_roughness",
+          "original_encoded_bytes": 8646244,
+          "derived_encoded_bytes": 2153668,
+          "derived_sha256": "3ab06caa4d67ff0b2b18803d1c0fcb6e1978d2b22d4002d813a9a81f90acec20",
+          "dimensions_px": [
+            2048,
+            2048
+          ],
+          "resampling": "BOX channel average"
+        }
+      ]
+    },
+    {
+      "id": "02_market_house",
+      "source_4k_glb": "game/assets/floor1/meshy_houses_lod/02_market_house_lod.glb",
+      "source_4k_sha256_before_after": "89de28a29f353681a1efd7a4533c829960ad2fabba98445dfa868d93fa3c716f",
+      "source_4k_bytes": 41523636,
+      "derived_2k_glb": "game/assets/floor1/meshy_houses_lod/02_market_house_lod_2k.glb",
+      "derived_2k_sha256": "1ca505902f11a17e1015bd1c4e524d67e642e329757385a58d862fb902d3cea9",
+      "derived_2k_bytes": 13142220,
+      "source_geometry_buffer_views_sha256": "9b3dfa4dd76a97421ea72ce9ffcd97f6a8ed0d4b390c0f0fc7d612d763da6174",
+      "derived_geometry_buffer_views_sha256": "9b3dfa4dd76a97421ea72ce9ffcd97f6a8ed0d4b390c0f0fc7d612d763da6174",
+      "mesh_nodes": [
+        "LOD0",
+        "LOD1",
+        "LOD2"
+      ],
+      "material_refs": [
+        0,
+        0,
+        0
+      ],
+      "material_count": 1,
+      "embedded_image_count": 3,
+      "images": [
+        {
+          "semantic": "normal",
+          "original_encoded_bytes": 13368373,
+          "derived_encoded_bytes": 4040732,
+          "derived_sha256": "64073fd72a27cac0fb2f29863599209ce89658ff1a4d45dc73ce1e6fa56f98eb",
+          "dimensions_px": [
+            2048,
+            2048
+          ],
+          "resampling": "BOX + tangent normal renormalization"
+        },
+        {
+          "semantic": "texture_0",
+          "original_encoded_bytes": 17653822,
+          "derived_encoded_bytes": 4960340,
+          "derived_sha256": "79543f3f21125402429ddc7eef20d6299733d68d8be1914f46732abf3df09e57",
+          "dimensions_px": [
+            2048,
+            2048
+          ],
+          "resampling": "LANCZOS RGB"
+        },
+        {
+          "semantic": "texture_0_metallic_roughness",
+          "original_encoded_bytes": 8453462,
+          "derived_encoded_bytes": 2093180,
+          "derived_sha256": "265f7b7307efb384d91b509689d21dc684e4ea202f321a07afeef98af99b1168",
+          "dimensions_px": [
+            2048,
+            2048
+          ],
+          "resampling": "BOX channel average"
+        }
+      ]
+    },
+    {
+      "id": "03_corner_turret",
+      "source_4k_glb": "game/assets/floor1/meshy_houses_lod/03_corner_turret_lod.glb",
+      "source_4k_sha256_before_after": "6180d5ac4adae57cd97d42d161c2989a369dfe63a5c1c4498c56d86c28185cbc",
+      "source_4k_bytes": 38036016,
+      "derived_2k_glb": "game/assets/floor1/meshy_houses_lod/03_corner_turret_lod_2k.glb",
+      "derived_2k_sha256": "e414e6feb12f6cd5da2d922bc67a88cdbc0cf84fe0f3121ebd9e2ef6cb6dccfd",
+      "derived_2k_bytes": 12328372,
+      "source_geometry_buffer_views_sha256": "0fa14a7f3395c8ce9ac548a197c934a978e069a64c0aed40424a7b2841f2f6ae",
+      "derived_geometry_buffer_views_sha256": "0fa14a7f3395c8ce9ac548a197c934a978e069a64c0aed40424a7b2841f2f6ae",
+      "mesh_nodes": [
+        "LOD0",
+        "LOD1",
+        "LOD2"
+      ],
+      "material_refs": [
+        0,
+        0,
+        0
+      ],
+      "material_count": 1,
+      "embedded_image_count": 3,
+      "images": [
+        {
+          "semantic": "normal",
+          "original_encoded_bytes": 12099859,
+          "derived_encoded_bytes": 3682849,
+          "derived_sha256": "49879b684ffa6e22f22a0e1a0818bb9c238ea82cbe4bd53c17655640d07f75f2",
+          "dimensions_px": [
+            2048,
+            2048
+          ],
+          "resampling": "BOX + tangent normal renormalization"
+        },
+        {
+          "semantic": "texture_0",
+          "original_encoded_bytes": 15698041,
+          "derived_encoded_bytes": 4524314,
+          "derived_sha256": "b0be8ff5bfbf22081b3fd817513efb6c38d7c3095570c61804f9bca94357c2b7",
+          "dimensions_px": [
+            2048,
+            2048
+          ],
+          "resampling": "LANCZOS RGB"
+        },
+        {
+          "semantic": "texture_0_metallic_roughness",
+          "original_encoded_bytes": 8159158,
+          "derived_encoded_bytes": 2042253,
+          "derived_sha256": "ad3285bf415760ad4694f1cae0af5e0d977e2fd5c21932e276d04c65b0802a87",
+          "dimensions_px": [
+            2048,
+            2048
+          ],
+          "resampling": "BOX channel average"
+        }
+      ]
+    }
+  ],
+  "runtime_selection_note": "Texture tier is selected per house by the LOD adapter; do not load both 4K and 2K GLBs per house concurrently if seeking memory savings.",
+  "gpu_vram_note": "Encoded GLB bytes and uncompressed image dimensions are measured, not live GPU allocation."
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "floor1-one-independent-bakery-exterior-sign-in-real-world-v13",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "source_shopfront_asset": "res://assets/generated/shopfront_details_20260912/SF13_Bakery_Pretzel_Emblem.glb",
+  "source_sha256_unchanged_at_capture": "2e41939bd98723b3527de4ef9504549cd298c4223e7fc5a2ac961880f39c9ca9",
+  "source_bytes": 644620,
+  "interior_component_sha256_at_capture": "c3485285ec9397ccb1289cfcf48364e5d7c8099d740626b97779846c59f5fc52",
+  "world_script_sha256_at_capture": "7cc8a21d0e3ed85e6815110c335dc5dca1a27774810d4248e1fe639c00bb5606",
+  "one_real_imported_mesh_three_surfaces": true,
+  "only_furnished_bakery_has_sign": true,
+  "house_local_anchor_m": [
+    -2.35,
+    2.68,
+    4.62
+  ],
+  "independently_removable": true,
+  "honey_oak_override_hex": "B99767",
+  "sign_local_material_only": "duplicated original oak surface; roughness0.72, no emissive; original iron/brass/source geometry unchanged",
+  "actual_world_png_px": [
+    1680,
+    1080
+  ],
+  "actual_saved_views": [
+    "bakery_front_lane_baseline_hidden",
+    "bakery_front_lane_with_sign",
+    "bakery_sign_eye_baseline_hidden",
+    "bakery_sign_eye_with_sign"
+  ],
+  "two_same_camera_hidden_visible_pairs": [
+    {
+      "shot": "bakery_front_lane",
+      "same_camera_full_frame_mad_255": 0.28430812757201646,
+      "sign_region_mad_255": 7.512548076923077,
+      "sky_control_mad_255": 0.0,
+      "hidden_sha256": "0ca74780c68efe9570f04ca1a899be6ea030ff8b8c64a8ec7704644d86045ef8",
+      "visible_sha256": "55d9217d42ea2b1ba16277ac3acbc6df490ddcc72579169b9ddfdcba3c748833",
+      "sign_region_px": [
+        560,
+        320,
+        820,
+        560
+      ]
+    },
+    {
+      "shot": "bakery_sign_eye",
+      "same_camera_full_frame_mad_255": 1.434357914462081,
+      "sign_region_mad_255": 22.971888227513226,
+      "sky_control_mad_255": 0.0,
+      "hidden_sha256": "4faf44a4971c73fb1895e0673b911cfbe6f9113e31825d21ad8cd5993b15c6ab",
+      "visible_sha256": "48a655a35ea946660df21411d6a536030b6f9ecbf71f90c624b7b2af8ca74e30",
+      "sign_region_px": [
+        600,
+        300,
+        1020,
+        540
+      ]
+    }
+  ],
+  "temporary_render_visibility_assignments": 4,
+  "sign_visible_restored_after_probe": true,
+  "persistent_world_state_mutations": 0,
+  "world_actual_walker_full_checks": 233,
+  "world_actual_walker_failures": 0,
+  "house_door_and_three_furnished_walker_routes_still_clear": true,
+  "visual_review": "Both lane and near player-eye views show the double-knot honey timber and independent iron bracket left of the entrance with no apparent awning/window/door-shoulder overlap. Broader upper-facade art remains first-pass; root final approval separate.",
+  "first_northwest_ground_manifest": "Art/Generated/Floor1Expanded20260916/northwest-ground-v12b/manifest.json",
+  "model_calls": 0,
+  "frame_interval_limit": "actual non-headless frame_post_draw intervals include VSync/presentation and CPU waits"
+}

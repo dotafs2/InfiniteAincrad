@@ -1,0 +1,65 @@
+{
+  "capture_png_px": [
+    1680,
+    1080
+  ],
+  "frame_interval_definition": "actual non-headless frame_post_draw intervals include VSync/presentation and CPU waits",
+  "model_calls": 0,
+  "saved_shots": [
+    "country_road_eye",
+    "west_field_ridge_eye",
+    "west_field_ridge_overview",
+    "east_field_ridge_eye"
+  ],
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "shot_rows": [
+    {
+      "benchmark_frames": 120,
+      "camera": "(-2.0, 1.72, -121.0)",
+      "draw_calls_with_shadows": 690,
+      "median_frame_interval_ms": 4.163,
+      "name": "country_road_eye",
+      "p95_frame_interval_ms": 4.282,
+      "png_saved": true,
+      "primitives_with_shadows": 1529951,
+      "target": "(-17.0, 2.5, -185.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-72.0, 1.72, -151.0)",
+      "draw_calls_with_shadows": 172,
+      "median_frame_interval_ms": 4.16,
+      "name": "west_field_ridge_eye",
+      "p95_frame_interval_ms": 4.351,
+      "png_saved": true,
+      "primitives_with_shadows": 620474,
+      "target": "(-178.0, 5.0, -162.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-67.0, 14.0, -169.0)",
+      "draw_calls_with_shadows": 156,
+      "median_frame_interval_ms": 4.169,
+      "name": "west_field_ridge_overview",
+      "p95_frame_interval_ms": 4.376,
+      "png_saved": true,
+      "primitives_with_shadows": 485151,
+      "target": "(-178.0, 4.0, -160.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(73.0, 1.72, -158.0)",
+      "draw_calls_with_shadows": 188,
+      "median_frame_interval_ms": 4.164,
+      "name": "east_field_ridge_eye",
+      "p95_frame_interval_ms": 4.454,
+      "png_saved": true,
+      "primitives_with_shadows": 583682,
+      "target": "(178.0, 5.0, -158.0)"
+    }
+  ],
+  "suite": "floor1_country_landscape_fixed_camera_probe",
+  "terrain_actual_triangles": 784,
+  "terrain_collision_bodies": 2,
+  "world_state_mutations": 0
+}

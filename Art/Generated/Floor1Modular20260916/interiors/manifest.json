@@ -1,0 +1,141 @@
+{
+  "revision": "ground-floor-v6-one-bakery-double-knot-sign",
+  "component": "res://spatial/floor1_modular_interior.gd",
+  "parent": "ModularHouseComponent",
+  "attach": "Add one Floor1ModularInterior as a direct child after setting the house variant; set build_on_ready=false, then call build().",
+  "ground_floor_only": true,
+  "removable_units": [
+    "Floor1ModularInterior",
+    "RemovableGroundFloor",
+    "CagedLanternVisual",
+    "BakeryExteriorSign"
+  ],
+  "lighting": "Exactly one unchanged WarmInteriorFill shadow-casting OmniLight3D per furnished room: energy0.80, range4.6m, old position and color. Imported cage/mount/hanger do not cast self-shadows into it; room furniture still casts actual contact shadows.",
+  "fixtures": "Accepted v4-wing route baseline preserves 35/35 and 9 views. Period-lantern v5 headless verifies imported complete visual plus exactly one unchanged light and real routes in 32/32; actual 12-view player-height old-cylinder baseline and final period-lantern capture each pass 38/38. One bakery sign add-on passes 36/36 main headless and 50/50 main actual-player-height views (14 PNGs).",
+  "rooms": [
+    {
+      "variant_id": "01_hearth_cottage",
+      "kind": "home",
+      "floor": "warm oak planks",
+      "useful_goal": "dining table",
+      "route_min_width_m": 0.97,
+      "existing_artisan_assets": []
+    },
+    {
+      "variant_id": "02_market_house",
+      "kind": "bakery",
+      "floor": "worn stone",
+      "useful_goal": "bread counter",
+      "route_min_width_m": 0.93,
+      "existing_artisan_assets": [
+        "bakers_oven_peel_rack",
+        "grain_hand_quern"
+      ],
+      "exterior_identity": "one independent warm-oak double-knot bakery sign on the left solid front pier"
+    },
+    {
+      "variant_id": "03_corner_turret",
+      "kind": "artisan",
+      "floor": "slate stone in main room and orthogonal rear L-wing",
+      "useful_goal": "workbench",
+      "route_min_width_m": 1.04,
+      "existing_artisan_assets": [
+        "forge_with_bellows",
+        "horn_anvil_stump"
+      ]
+    }
+  ],
+  "limits": "Ground-floor art inserts and collision proxy routes only; no upper-floor furnishing or resident/NPC interactions are implemented.",
+  "lamp": {
+    "source_glb": "res://assets/generated/travel_cargo_20260912/caged_travel_lantern.glb",
+    "original_source_sha256": "c01391649cd3040f1380886b437cb7ad08b9d2a19090bcf77cec573908a1ba07",
+    "original_triangles": 968,
+    "original_materials": 4,
+    "raw_y_up_bounds_m": {
+      "min": [
+        -0.17,
+        0.0,
+        -0.17
+      ],
+      "max": [
+        0.17,
+        0.658,
+        0.17
+      ]
+    },
+    "visual": "Independent CagedLanternVisual at 0.70 uniform scale; 0.16m dark iron ceiling mount and 0.20m hanger meet the source ring. Imported iron/copper are unchanged; the duplicated glass material has restrained warm amber emission. Source GLB bytes unchanged.",
+    "root_actual_image_review": "Root viewed home, bakery and artisan final at_lantern player-height PNGs and approved the small period fitting/body/proportions with lighting retained; no further lamp iteration needed.",
+    "source_four_angle_preview": "tmp/floor1-art-20260916/modular/lantern-review/previews/renders/caged_travel_lantern-az{038,128,218,308}.png: actual untouched existing GLB four-angle Blender views; corrected render-report.json records equal pre/post source SHA256",
+    "headless_32_check_receipt": "tmp/floor1-art-20260916/modular/lantern-review/final-headless/modular-lantern-final-headless.stdout.log",
+    "actual_38_check_receipt": "tmp/floor1-art-20260916/modular/lantern-review/period-mount-process/modular-lantern-period-mount-visual.stdout.log",
+    "old_cylinder_baseline": "tmp/floor1-art-20260916/modular/lantern-review/baseline-cyl/ (12 actual same-camera PNGs)",
+    "accepted_fixture": "tmp/floor1-art-20260916/modular/lantern-review/candidate-period-mount/ (12 actual same-camera PNGs)",
+    "failed_self_shadow": "tmp/floor1-art-20260916/modular/lantern-review/candidate-caged/: cage self-shadow cast large radiating hard ceiling wedges and darkened the room, rejected after actual image inspection",
+    "failed_broad_pale_base": "tmp/floor1-art-20260916/modular/lantern-review/candidate-shadowfix/: lighting recovered but original oversized bright ceiling disc looked modern, rejected by root after actual image inspection",
+    "same_camera_pixel_receipt": "tmp/floor1-art-20260916/modular/lantern-review/same-camera-fixture-pixels.json",
+    "world_ambient042_integration": "209/209 full expanded-world Godot checks, zero failures: 12 modular houses, three actual 0.32m-radius/1.80m-height furnished routes, each complete imported lantern plus original single 0.80-energy/4.6m-range shadow light. Six actual 1680x1080 eye-height home/bakery/artisan from-door/at-lantern images at tmp/floor1-art-20260916/world/period-lantern-v11-captures/; root inspected home_at_lantern, bakery_from_door and artisan_at_lantern and accepted scene coherence and room lighting.",
+    "world_check_receipt": "tmp/floor1-art-20260916/world/period-lantern-v11-physics/world-final.json",
+    "world_capture_receipt": "tmp/floor1-art-20260916/world/period-lantern-v11-captures/capture.json",
+    "accepted_lamp_component_sha256_before_sign": "c77cf35a62e3297759952375e71bd8b52d117c456524c45858f40e97aecbf90d",
+    "accepted_lamp_test_sha256_before_sign": "eb5ff9941f591874d4cf7c630e20ad78377ebe421bbc3528ac7e849b213e1596"
+  },
+  "recorded_at_utc": "2026-09-15T22:34:38.681295+00:00",
+  "current_component_sha256": "c3485285ec9397ccb1289cfcf48364e5d7c8099d740626b97779846c59f5fc52",
+  "current_test_sha256": "c4ef628b9bf8648714397fe556e623684df0074dc4a4b264767c4968e50248a6",
+  "bakery_sign": {
+    "identity": "double-knot/infinity wooden bakery sign; the actual raw model is not a standard pretzel silhouette",
+    "source_glb": "res://assets/generated/shopfront_details_20260912/SF13_Bakery_Pretzel_Emblem.glb",
+    "source_sha256": "2e41939bd98723b3527de4ef9504549cd298c4223e7fc5a2ac961880f39c9ca9",
+    "source_bytes": 644620,
+    "actual_triangles": 3768,
+    "actual_primitives": 3,
+    "source_four_angle_preview": "tmp/floor1-art-20260916/modular/bakery-sign-review/previews/renders/",
+    "unit": "BakeryExteriorSign direct child of Floor1ModularInterior.room; separately removable with the insert or alone",
+    "placement_local_m": [
+      -2.35,
+      2.68,
+      4.62
+    ],
+    "actual_local_bounds_m": {
+      "x": [
+        -2.78,
+        -1.92
+      ],
+      "y": [
+        2.68,
+        3.82
+      ],
+      "z": [
+        4.62,
+        5.509
+      ]
+    },
+    "door_clearance_m": {
+      "lateral": 0.42,
+      "head": 0.48
+    },
+    "material": {
+      "oak_local_albedo": "#B99767",
+      "source_oak_roughness_preserved": 0.72,
+      "source_oak_normal_preserved": true,
+      "oak_emission": false,
+      "iron_and_brass_source_materials_preserved": true,
+      "source_glb_bytes_preserved": true,
+      "added_light": false
+    },
+    "accepted_older_plain_wood_fixture": "tmp/floor1-art-20260916/modular/bakery-sign-review/sandbox-captures/",
+    "adopted_honey_fixture": "tmp/floor1-art-20260916/modular/bakery-sign-review/main-captures/",
+    "root_fixture_actual_review": "Root viewed the original and honey same-camera outdoor PNGs; accepted original position/proportion/door clearance and approved the locally brightened matte double-knot wood with iron distinction.",
+    "main_headless_checks": 36,
+    "main_actual_visual_checks": 50,
+    "main_actual_player_height_images": 14,
+    "main_vs_isolated_honey_14_views_pixel_exact": true,
+    "source_receipt": "tmp/floor1-art-20260916/modular/bakery-sign-review/adopted-receipt.json",
+    "world_check_receipt": "tmp/floor1-art-20260916/world/bakery-sign-v13-jobs/world.json",
+    "world_actual_checks": 233,
+    "world_capture_receipt": "tmp/floor1-art-20260916/world/bakery-sign-v13-captures/capture.json",
+    "world_four_actual_1680x1080_views": "tmp/floor1-art-20260916/world/bakery-sign-v13-captures/{bakery_front_lane,bakery_sign_eye}_{baseline_hidden,with_sign}.png",
+    "actual_world_image_assessment": "Module and world workers inspected all four same-camera Godot images: honey-oak double-knot reads distinctly from its original iron hanger on the left front pier; the visible door shoulder/head, awning edge and window remain clear. One bakery node and all 12-door/3-furnished walker routes pass the world suite. Root viewed the actual front-lane and sign-eye with-sign Godot frames and accepted this single bakery identity detail.",
+    "limits": "Only one furnished bakery receives this sign. It is an exterior identity detail, not a completion of the otherwise broad upper wall or a standard pretzel emblem."
+  }
+}

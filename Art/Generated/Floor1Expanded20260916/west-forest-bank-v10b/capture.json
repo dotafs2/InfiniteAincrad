@@ -1,0 +1,67 @@
+{
+  "bank_actual_triangles": 168,
+  "bank_collision_bodies": 1,
+  "bank_max_height_m": 1.17685827913442,
+  "capture_png_px": [
+    1680,
+    1080
+  ],
+  "frame_interval_definition": "actual non-headless frame_post_draw intervals include VSync/presentation and CPU waits",
+  "model_calls": 0,
+  "on_bank_camera_nominal_eye_above_authored_floor_m": 1.72,
+  "saved_shots": [
+    "country_path_to_west_bank",
+    "west_shelter_bank_eye",
+    "west_bank_walk_eye",
+    "west_bank_overview"
+  ],
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "shot_rows": [
+    {
+      "benchmark_frames": 120,
+      "camera": "(-11.0, 1.72, -191.0)",
+      "draw_calls_with_shadows": 251,
+      "median_frame_interval_ms": 4.166,
+      "name": "country_path_to_west_bank",
+      "p95_frame_interval_ms": 4.313,
+      "png_saved": true,
+      "primitives_with_shadows": 467519,
+      "target": "(-54.0, 1.0, -218.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-34.0, 1.72, -209.0)",
+      "draw_calls_with_shadows": 133,
+      "median_frame_interval_ms": 4.167,
+      "name": "west_shelter_bank_eye",
+      "p95_frame_interval_ms": 4.303,
+      "png_saved": true,
+      "primitives_with_shadows": 263692,
+      "target": "(-58.0, 1.0, -220.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-50.0, 2.751533, -216.0)",
+      "draw_calls_with_shadows": 120,
+      "median_frame_interval_ms": 4.168,
+      "name": "west_bank_walk_eye",
+      "p95_frame_interval_ms": 4.294,
+      "png_saved": true,
+      "primitives_with_shadows": 163739,
+      "target": "(-62.0, 0.8, -222.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-30.0, 12.0, -196.0)",
+      "draw_calls_with_shadows": 181,
+      "median_frame_interval_ms": 4.161,
+      "name": "west_bank_overview",
+      "p95_frame_interval_ms": 4.275,
+      "png_saved": true,
+      "primitives_with_shadows": 328622,
+      "target": "(-55.0, 0.9, -218.0)"
+    }
+  ],
+  "suite": "floor1_actual_west_forest_edge_walkable_bank_views",
+  "world_state_mutations": 0
+}

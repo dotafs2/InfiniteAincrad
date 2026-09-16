@@ -1,0 +1,54 @@
+{
+  "name": "expanded-world-tour-v3-mp4",
+  "started_at_utc": "2026-09-16T00:12:46.992734+00:00",
+  "command": [
+    "tmp/floor1-art-20260916/video-deps/imageio_ffmpeg/binaries/ffmpeg-win-x86_64-v7.1.exe",
+    "-hide_banner",
+    "-loglevel",
+    "warning",
+    "-y",
+    "-i",
+    "tmp/floor1-art-20260916/world/tour-v3.avi",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "medium",
+    "-crf",
+    "20",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "exports/floor1-art-20260916/floor1-world-tour-v3.mp4"
+  ],
+  "timeout_seconds": 150,
+  "pid": 61408,
+  "status": "exited",
+  "exit_code": 0,
+  "process_tree": {
+    "containment": "windows_kill_on_close_job",
+    "wrapper_pid": 61408,
+    "observed_members": [
+      {
+        "pid": 61408,
+        "creation_time_windows_100ns": 134339911669941291,
+        "running": false,
+        "exit_code": 0
+      },
+      {
+        "pid": 31092,
+        "creation_time_windows_100ns": 134339911670757477,
+        "running": false,
+        "exit_code": 0
+      }
+    ],
+    "total_assigned_processes": 2,
+    "active_processes": 0,
+    "member_identity_list_complete": true,
+    "observed_nonzero_exits": [],
+    "all_member_exit_codes_known": true,
+    "all_members_exited": true
+  },
+  "elapsed_seconds": 7.766,
+  "finished_at_utc": "2026-09-16T00:12:54.751637+00:00"
+}

@@ -1,0 +1,386 @@
+{
+  "schema": "floor1-expanded-art-camera-tour-v3-approved-pocket-provenance",
+  "status": "root-approved independent art-world 60-second camera tour with ten-tree native NW oak pocket",
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "ordinary_free_walk_command_powershell": "& 'D:/lucidgloves/InfiniteAincrad/tmp/toolchain/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64.exe' --path 'D:/lucidgloves/InfiniteAincrad/game' --scene res://scenes/floor1_expanded_world.tscn",
+  "ordinary_free_walk_command_status": "exact local executable, project and scene from actual rendered capture; movie/probe flags omitted; this plain command was not separately hand-operated",
+  "observed_renderer": "Godot 4.7.2 Forward+ / Vulkan 1.4.325 on NVIDIA GeForce RTX 5080 (movie stdout); game/project.godot selects forward_plus",
+  "free_walk_source_controls": "WASD move; Shift run; E nearest door; F nearest actual window opening toggles all windows of that selected house; Esc releases mouse",
+  "actual_walker_capsule_m": {
+    "radius": 0.32,
+    "height": 1.8
+  },
+  "camera_policy": "same 19-keyframe continuous eased v2 route through actual 3D scene; not a recording of player locomotion",
+  "route_exactly_equal_to_frozen_v2": true,
+  "frozen_v2_route_sha256": "3c9109f9f7cc664ba15aebb0e6eeba9f3419140a22dbd1eb99cefe1efff16a42",
+  "recording_policy": "Godot Movie Maker fixed 30fps is visual evidence, not a live FPS measurement",
+  "frames_submitted": 1801,
+  "duration_s": 60,
+  "movie_actual_pixels": [
+    1400,
+    900
+  ],
+  "movie": {
+    "path": "exports/floor1-art-20260916/floor1-world-tour-v3.mp4",
+    "bytes": 34688264,
+    "sha256": "2b3fad72c3dcc2677aaf9846e55d675de8c909be7ccebf20d0fdbefc66e63b6b"
+  },
+  "original_avi": {
+    "path": "tmp/floor1-art-20260916/world/tour-v3.avi",
+    "bytes": 147709468,
+    "sha256": "2addcc5b77e4819cec5b057d8d33f5e4b13bea5d1fee85d4625da61517e91bc7"
+  },
+  "original_v1_movie_preserved": {
+    "path": "exports/floor1-art-20260916/floor1-world-tour-v1.mp4",
+    "bytes": 16815610,
+    "sha256": "29c5cf20504708461dded83fb376fcdddca1798f16f0007024c0d413ce771085"
+  },
+  "original_v2_movie_preserved": {
+    "path": "exports/floor1-art-20260916/floor1-world-tour-v2.mp4",
+    "bytes": 34478848,
+    "sha256": "ec58764617b0568a17e7bb20058950966b07f93e14b25c5db2ce41afc8314ea5"
+  },
+  "route": {
+    "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-source/tour-v3-route.json",
+    "bytes": 5546,
+    "sha256": "8c3442609fcf8929c47e5a2218afa13dccf4498be3e359cd6de07cd4562486e1"
+  },
+  "video_qa_frames": [
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-video-qa/frame-01.png",
+      "bytes": 759007,
+      "sha256": "fa49f29d9b82a045df2c2296a27c403f002fb9810c5b7ca98bd5a0931a49aba7",
+      "pixels": [
+        1400,
+        900
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-video-qa/frame-02.png",
+      "bytes": 1095846,
+      "sha256": "291aa0031ba7c945b42db48ea8a20a073974719f4b689b51dc1a6ee1e3f11f24",
+      "pixels": [
+        1400,
+        900
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-video-qa/frame-03.png",
+      "bytes": 968028,
+      "sha256": "3f5b9d0bc032f39664e6b58f4c540c85c4e6d5bacb824762cccf63852733cc93",
+      "pixels": [
+        1400,
+        900
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-video-qa/frame-04.png",
+      "bytes": 653644,
+      "sha256": "49879402ccbab6599ba9d48ce1250bf2680e002b92f16292c715dd1436051be9",
+      "pixels": [
+        1400,
+        900
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-video-qa/frame-05.png",
+      "bytes": 427994,
+      "sha256": "f6ba2e4b7297701529a19e009459b3c1c37ce2b4d3869eab8da62251d6e38199",
+      "pixels": [
+        1400,
+        900
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-video-qa/frame-06.png",
+      "bytes": 406027,
+      "sha256": "7f8acbc650bf18f2625c6f64ba04bfb60cdbe8c941fc483e2e86b765419a7a30",
+      "pixels": [
+        1400,
+        900
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-video-qa/frame-07.png",
+      "bytes": 1263668,
+      "sha256": "c5e8a12dd1bd5fd345bdded8d271e0ff94e7522d0471cc0a8e39352d1587197c",
+      "pixels": [
+        1400,
+        900
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-video-qa/frame-08.png",
+      "bytes": 749956,
+      "sha256": "b528aa8cfa0b87e2742c6839c00d7a99d55aabbdda59bdd1ee2f2d94134e42b4",
+      "pixels": [
+        1400,
+        900
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-video-qa/frame-09.png",
+      "bytes": 444343,
+      "sha256": "82a6f75cd2ec29616cd07fbc724e52b5e55fbf6db3fa60ba44399418d78a5b4e",
+      "pixels": [
+        1400,
+        900
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-video-qa/frame-10.png",
+      "bytes": 266983,
+      "sha256": "461766d5906b71f9aa0bae981296475267e3ac3a0d17f4b726c79b96e4265d72",
+      "pixels": [
+        1400,
+        900
+      ]
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-video-qa/frame-11.png",
+      "bytes": 332062,
+      "sha256": "e09bb2d233da5bf111079de4817a13f05b4c083972f3f0114cc49df0484beb61",
+      "pixels": [
+        1400,
+        900
+      ]
+    }
+  ],
+  "video_qa_frame_indices": [
+    0,
+    180,
+    450,
+    540,
+    660,
+    750,
+    1050,
+    1350,
+    1560,
+    1740,
+    1785
+  ],
+  "default_world_physics": {
+    "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-physics/default-254-pass.json",
+    "bytes": 77166,
+    "sha256": "33f8966805454e23d22ddcd719ca00cda95a21f73d9c27e8759ce57d82eb6e69"
+  },
+  "off_rollback_world_physics": {
+    "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-physics/off-249-pass.json",
+    "bytes": 63820,
+    "sha256": "1f9c8ce400ac7e27882e44047d361e93b93685a95c5cd659b9708e938f31dba4"
+  },
+  "world_checks": {
+    "grove_default": [
+      254,
+      0
+    ],
+    "grove_off_rollback": [
+      249,
+      0
+    ]
+  },
+  "north_gate_evidence": {
+    "clear_actual_collision_rays_at_y_m": 1.45,
+    "centre_and_x_offsets_m": [
+      0,
+      -2.1,
+      -1.7,
+      -0.9,
+      0.0,
+      0.9,
+      1.7,
+      2.1
+    ],
+    "visual_frame": "Art/Generated/Floor1Expanded20260916/milestone-v3-video-qa/frame-08.png",
+    "scope": "actual frame-08 shows open lower passage/road and sky beyond; visual mesh never separately triangle-ray tested"
+  },
+  "approved_nw_native_t2_pocket": {
+    "display_trees_total": 10,
+    "new_shared_mesh_instances": 9,
+    "retained_one_focal_tree": 1,
+    "terrain_sector_xz_m": {
+      "x": [
+        -210,
+        85
+      ],
+      "z": [
+        -335,
+        -235
+      ]
+    },
+    "grove_patch_xz_m": {
+      "x": [
+        -90,
+        -55
+      ],
+      "z": [
+        -313,
+        -273
+      ]
+    },
+    "existing_kit_trees_unchanged": 24,
+    "off_rollback": "--north-grove-trial=off",
+    "visual_ab": "Art/Generated/Floor1Expanded20260916/north-grove-trial-v16/manifest.json"
+  },
+  "approved_default_world_metrics": {
+    "interactive_dwellings": 12,
+    "exterior_lod_houses": 32,
+    "furnished_ground_floors": 3,
+    "selected_exterior_texture_tier": "2k",
+    "meadow_mix": 0.22,
+    "north_sector_real_additional_ground_area_m2": 29500,
+    "isolated_60k_cottage_candidate_instances": 0
+  },
+  "single_house_candidate_unadopted": {
+    "asset": {
+      "path": "game/assets/floor1/meshy_houses_lod/candidates/01_hearth_cottage_uv_rebaked_60000_color2k.glb",
+      "bytes": 9402780,
+      "sha256": "fd4dd00e6256abe4a047443689a4850b643758a6ceaec5ff8552ab8b2ed37da5"
+    },
+    "same_world_ab": "Art/Generated/Floor1Expanded20260916/single-cottage-60k2k-world-ab/manifest.json",
+    "reason": "front detail improved, but rear chimney-side white baked-color tile strip and roof unevenness worsen; color-only matte texture"
+  },
+  "bounded_process_exit_receipts": [
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-process/world-v3-approved-grove-default-full.process.json",
+      "bytes": 1147,
+      "sha256": "219a0165438ba1ad47648ef26bfb5ed07d54b49db087aaeb24324615ae3a9419"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-process/world-v3-approved-grove-off-rollback.process.json",
+      "bytes": 1182,
+      "sha256": "48903fbe9df6984e3b778d960f822893c4f9ba96c641e9e58f7233f2a9c5b620"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-process/expanded-world-tour-v3-approved-grove.process.json",
+      "bytes": 1304,
+      "sha256": "5f8349f1dd6336de64ee983f3b9c67818f4df9d9bcb9ad3bb8c0e8366800e53d"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-process/expanded-world-tour-v3-mp4.process.json",
+      "bytes": 1391,
+      "sha256": "8d73a8208f12bdecfc1918b069ee5bb15142fe18f68879d9ad6f8afd00b96651"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-process/expanded-world-tour-v3-frames.process.json",
+      "bytes": 1444,
+      "sha256": "0f0d65753acfeabff754e6b5fb196de44d4724d33501c9f7a34ac56b8a254d45"
+    }
+  ],
+  "owned_source_snapshot": [
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-source/project.godot",
+      "bytes": 825,
+      "sha256": "1b1ad47b3b931402fcea0f0c31d5cbd714140b0f78c78be7bffffdfcdac0eb9b"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-source/floor1_expanded_world.tscn",
+      "bytes": 203,
+      "sha256": "c372523dc72562c7495250b1b88563a342b330c66438d44976a3fa81ed5221e6"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-source/floor1_expanded_world.gd",
+      "bytes": 117985,
+      "sha256": "3b5f459ebf1e57eb8ab2907083b4b47040d16eff4822d55922cb27783a1e684a"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-source/floor1_art_walker.gd",
+      "bytes": 3808,
+      "sha256": "295af5cac649a1ca232e6749ae23233e1c738b20da524690b1f91f5dd9ca2fb8"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-source/floor1_expanded_world_test.gd",
+      "bytes": 51243,
+      "sha256": "5d316fe106ac3a9beaf05f9ebb50e75495316904e6574b1d107f157c619b44a9"
+    },
+    {
+      "path": "Art/Generated/Floor1Expanded20260916/milestone-v3-source/meshy_house_lod_component.gd",
+      "bytes": 3937,
+      "sha256": "34de9e11ee9986b79f230008a83bdadee4a1273ad1a9334e9ca776269eef13af"
+    }
+  ],
+  "hashed_render_dependencies": [
+    {
+      "path": "game/spatial/modular_house_component.gd",
+      "bytes": 12242,
+      "sha256": "5110633cd2ee66ffe151580a950c6072f09b17fc20936262cb9bfb48befc7046"
+    },
+    {
+      "path": "game/spatial/floor1_modular_interior.gd",
+      "bytes": 21297,
+      "sha256": "c3485285ec9397ccb1289cfcf48364e5d7c8099d740626b97779846c59f5fc52"
+    },
+    {
+      "path": "game/assets/floor1/modular_houses_20260916/01_hearth_cottage.glb",
+      "bytes": 776068,
+      "sha256": "52b5c9978d347b6ffcd6fa34ac0f17353589cc35357d6102e954483d89ab84dc"
+    },
+    {
+      "path": "game/assets/floor1/modular_houses_20260916/02_market_house.glb",
+      "bytes": 813864,
+      "sha256": "9ab37225313c8f98ea6854b5463db7b1f89fd5c90a8091752a61132df0d89364"
+    },
+    {
+      "path": "game/assets/floor1/modular_houses_20260916/03_corner_turret.glb",
+      "bytes": 1365864,
+      "sha256": "e6c6b163f3088019239bb99fa684dac455ff870014d2a5437b6b19dbd9df36c7"
+    },
+    {
+      "path": "game/assets/floor1/meshy_houses_lod/01_hearth_cottage_lod_2k.glb",
+      "bytes": 12797072,
+      "sha256": "811ba20a917fb419baf190dd6445eb61b0811e5275ace62d2ad55c183e59c16e"
+    },
+    {
+      "path": "game/assets/floor1/meshy_houses_lod/02_market_house_lod_2k.glb",
+      "bytes": 13142220,
+      "sha256": "1ca505902f11a17e1015bd1c4e524d67e642e329757385a58d862fb902d3cea9"
+    },
+    {
+      "path": "game/assets/floor1/meshy_houses_lod/03_corner_turret_lod_2k.glb",
+      "bytes": 12328372,
+      "sha256": "e414e6feb12f6cd5da2d922bc67a88cdbc0cf84fe0f3121ebd9e2ef6cb6dccfd"
+    },
+    {
+      "path": "game/assets/floor1/courtyard_oak_20260916/F1_courtyard_oak_100k.glb",
+      "bytes": 11221296,
+      "sha256": "0fce70f8c7b77db2c5783295fa381e65dca0d3680e1bc80f616f3b190821b263"
+    },
+    {
+      "path": "game/assets/floor1/courtyard_oak_20260916/F1_oak_smart15k_forest_trial.glb",
+      "bytes": 9140052,
+      "sha256": "fd14e2b0f3201f626391905e76f07d0d7fabe266ee73e44a8b738eaf11434f20"
+    },
+    {
+      "path": "game/assets/floor1/plaza_fountain_20260916/F1_plaza_fountain.glb",
+      "bytes": 27676488,
+      "sha256": "ed69fddf72aa9c7026af0e7eadfc2ac29473c3e6b2378d9880a1ddeb67f8ac51"
+    },
+    {
+      "path": "game/assets/floor1/ground_textures_20260916/meadow_grass_albedo_v1.png",
+      "bytes": 2778137,
+      "sha256": "bdc2ea4de4d2f3b0377b3df0f0e7ce4dd26afcca5e189f042f0d34432f96b38a"
+    },
+    {
+      "path": "game/assets/floor1/StartingTown_Floor1_HeroKit.glb",
+      "bytes": 69677888,
+      "sha256": "7620ee5e2d0fc13aba95773820a01c2c7c4cd420edc8a1e3faf24435189f62ce"
+    }
+  ],
+  "visual_limits": [
+    "northwestern land is expanded only in x[-210,85], z[-335,-235]; northeastern perimeter remains incomplete",
+    "outside the ten-tree pocket, country forest line and broad ground remain sparse/flat in places",
+    "distant labyrinth remains an unfinished visual-only silhouette, not a traversable maze",
+    "one native NW oak's exposed root strands were judged visually acceptable; only parent/root lowest pivot measured grounded",
+    "furnished bakery and shaded interior surfaces remain cool; no global ambient redesign",
+    "current 38K exterior LOD0 roof/window defects are not fully repaired by the rejected 60K candidate"
+  ],
+  "scope_limit": "independent art-world scene; no canonical sequence adoption, residents, NPC behavior, save writes or provider calls",
+  "repository_movie": {
+    "path": "docs/validation/floor1_art_iteration_2026-09-16/floor1-world-tour-v3.mp4",
+    "bytes": 34688264,
+    "sha256": "2b3fad72c3dcc2677aaf9846e55d675de8c909be7ccebf20d0fdbefc66e63b6b",
+    "storage": "Git LFS",
+    "same_bytes_as_accepted_local_movie": true
+  },
+  "repository_text_note": "Recorded source hashes describe the Windows files at capture time. Frozen generated evidence is kept byte-identical by .gitattributes. Live project source text follows the existing repository LF policy; line-ending normalization can change its byte hash without changing game logic. Binary model and movie hashes remain identical."
+}

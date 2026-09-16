@@ -1,0 +1,42 @@
+{
+  "checked_at_utc": "2026-09-16T00:10:38.174064+00:00",
+  "raw_house_sources": [
+    {
+      "path": "exports/meshy-houses-20260916/models/01_hearth_cottage.glb",
+      "bytes": 78366592,
+      "sha256": "1c98cb4b0586201f55ae6d20557d615d9c6d8c8832850c6ce6542b38e5bbc578",
+      "matches_original": true
+    },
+    {
+      "path": "exports/meshy-houses-20260916/models/02_market_house.glb",
+      "bytes": 65346804,
+      "sha256": "b1a54c0381bb4ebe1aeac266104a7679aa036198ba7c6455d8ad07f3e2fa40f7",
+      "matches_original": true
+    },
+    {
+      "path": "exports/meshy-houses-20260916/models/03_corner_turret.glb",
+      "bytes": 86631376,
+      "sha256": "69710decc857406cb3b4f96bd1a1ec50470c6055767f1685e5c84fa5fa7522a1",
+      "matches_original": true
+    }
+  ],
+  "source_paths_are_ignored_local_exports": true,
+  "meshy_credits": {
+    "starting_balance_before_this_art_iteration": 1587,
+    "confirmed_art_iteration_spend": 173,
+    "latest_tool_balance": 1414,
+    "prior_three_houses_separate": 108,
+    "reserved_pending": 0,
+    "breakdown": {
+      "three_house_remeshes": 15,
+      "fountain_concept_and_model": 41,
+      "door_concept_and_model": 41,
+      "rejected_middle_lod_remesh_trial": 5,
+      "hero_oak_concept_model_remesh": 41,
+      "native_lowpoly_cottage_trial": 15,
+      "native_lowpoly_oak": 15
+    }
+  },
+  "imagegen_usage": "Two generated textures; tool did not expose billed usage or tokens. Unknown, not zero.",
+  "llm_usage_note": "This manifest is not a complete Codex/DeepSeek token ledger. It must not be summed as total AI cost."
+}

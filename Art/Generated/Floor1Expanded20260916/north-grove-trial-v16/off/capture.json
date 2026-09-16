@@ -1,0 +1,66 @@
+{
+  "additional_source_triangles": 0,
+  "approved_town_100k_oak_instances": 1,
+  "camera_mode": "actual non-headless same-world off/on",
+  "candidate_additional_instances": 0,
+  "capture_png_px": [
+    1680,
+    1080
+  ],
+  "foreground_approved_native_oak_instances": 1,
+  "frame_interval_definition": "frame_post_draw includes VSync/presentation and CPU waits; not FPS promise",
+  "group_bounds_m": {
+    "x": [
+      -90,
+      -55
+    ],
+    "z": [
+      -313,
+      -273
+    ]
+  },
+  "group_enabled": false,
+  "model_calls": 0,
+  "original_nw_kit_trees": 24,
+  "saved_shots": [
+    "country_road_eye",
+    "forest_edge_walk_eye",
+    "forest_bank_side_eye"
+  ],
+  "scene": "res://scenes/floor1_expanded_world.tscn",
+  "shared_asset_path": "res://assets/floor1/courtyard_oak_20260916/F1_oak_smart15k_forest_trial.glb",
+  "shot_rows": [
+    {
+      "benchmark_frames": 120,
+      "camera": "(0.0, 1.72, -222.0)",
+      "draw_calls_with_shadows": 104,
+      "median_frame_interval_ms": 4.161,
+      "name": "country_road_eye",
+      "p95_frame_interval_ms": 4.377,
+      "primitives_with_shadows": 204598,
+      "target": "(-73.0, 11.0, -290.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-31.0, 2.05, -255.0)",
+      "draw_calls_with_shadows": 71,
+      "median_frame_interval_ms": 4.168,
+      "name": "forest_edge_walk_eye",
+      "p95_frame_interval_ms": 4.348,
+      "primitives_with_shadows": 223762,
+      "target": "(-69.0, 11.5, -293.0)"
+    },
+    {
+      "benchmark_frames": 120,
+      "camera": "(-117.0, 7.4, -285.0)",
+      "draw_calls_with_shadows": 230,
+      "median_frame_interval_ms": 4.169,
+      "name": "forest_bank_side_eye",
+      "p95_frame_interval_ms": 4.367,
+      "primitives_with_shadows": 462288,
+      "target": "(-70.0, 12.0, -297.0)"
+    }
+  ],
+  "suite": "northwest_35_by_40m_grouped_native_oak_actual_world_trial",
+  "world_state_mutations": 0
+}

@@ -1,0 +1,37 @@
+{
+  "id": "ivory_plaster_albedo_v1",
+  "source": "Built-in imagegen, original plaster texture candidate",
+  "actual_px": [
+    1254,
+    1254
+  ],
+  "bytes": 2714374,
+  "sha256": "97e4641e21027aabaf3a1536b21f01937edfae7d5d6909e832a573cf94676b8f",
+  "mean_rgb": [
+    241.4001326536582,
+    229.74786329678045,
+    205.03570011370314
+  ],
+  "std_rgb": [
+    5.715810711120345,
+    7.501318898516926,
+    9.047947566043032
+  ],
+  "left_right_edge_mad_rgb255": 5.04120148856991,
+  "top_bottom_edge_mad_rgb255": 6.266081871345029,
+  "adjacent_horizontal_mad_rgb255": 4.499508250904899,
+  "root_image_review": "Warm ivory, fine plaster trowel variation, no structural content. Approved isolated material trial only; no world adoption yet. Generated texture may contain subtle baked relief cues; actual shading/blend must be reviewed.",
+  "seamless_status": "Requested tiling; edge metrics recorded, no seamless guarantee.",
+  "meshy_credits": 0,
+  "imagegen_usage": "Tool does not expose measured bill/tokens; unknown, not known zero.",
+  "source_retention": "Byte-identical source copy retained in Codex generated_images cache.",
+  "game_adoption": false,
+  "prompt_file": "prompt.txt",
+  "source_image": "ivory_plaster_albedo_v1.png",
+  "root_world_review": {
+    "decision": "not_adopted",
+    "at_local": "2026-09-16T08:10:00+08:00",
+    "evidence": "Art/Generated/Floor1Modular20260916/merchant-plaster-isolated-review-v1.json",
+    "reason": "Reviewed actual matched street and upper close screenshots. Color-neutral v2 adds fine grain but limited street-scale visual benefit; retain source and failed brightness-shift v1, leave production materials unchanged."
+  }
+}
