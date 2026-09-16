@@ -2496,6 +2496,25 @@ class SelectedGmObserveTests(CorrectionBase):
         self.assertEqual(self._flags(seen['command'], '--gm'), [])
         self.assertEqual(self._flags(seen['command'], '--max-gms'), [maximum])
 
+    def test_cycle_prompt_limit_reaches_the_actual_nested_observe_command(self):
+        cycle = self._cycle(['gm-04'], {'max_prompt_bytes': 64000})
+        seen = self._dispatch(cycle)
+        self.assertEqual(self._flags(seen['command'], '--max-prompt-bytes'), ['64000'])
+
+    def test_cycle_prompt_limit_default_stays_24000(self):
+        args = gm_autonomy.build_parser().parse_args([
+            'cycle', '--policy', str(self.policy_path)])
+        self.assertEqual(args.max_prompt_bytes, 24000)
+        cycle = self._cycle(['gm-04'], {'max_prompt_bytes': args.max_prompt_bytes})
+        seen = self._dispatch(cycle)
+        self.assertEqual(self._flags(seen['command'], '--max-prompt-bytes'), ['24000'])
+
+    def test_prompt_limit_is_forwarded_only_to_observe(self):
+        runner = {'max_prompt_bytes': 64000}
+        for subcommand in ('code', 'feedback', 'acknowledge'):
+            command = gm_autonomy.runner_command(runner, subcommand, '--state-dir', 'state')
+            self.assertNotIn('--max-prompt-bytes', command, subcommand)
+
     def test_existing_save_is_private_from_observe_without_explicit_archive_opt_in(self):
         write_json(self.cycle.save_path, {'world_id': WORLD, 'life': {'seq': 1}})
         seen = self._dispatch(self._cycle(['gm-04']))
@@ -2546,6 +2565,17 @@ class SelectedGmObserveTests(CorrectionBase):
         finally:
             gm_autonomy.run_process = original
         return code, stream.getvalue(), dispatch
+
+    def test_invalid_prompt_limits_refuse_before_any_dispatch(self):
+        cycles_before = sorted(path.name for path in self.cycle.autonomy_dir().iterdir())
+        for value in ('0', '1023', '1048577'):
+            code, text, dispatch = self._cli([
+                'cycle', '--policy', str(self.policy_path), '--max-prompt-bytes', value])
+            self.assertNotEqual(code, 0)
+            self.assertIn('prompt_limit_invalid', text)
+            self.assertEqual(dispatch, [], 'invalid prompt limit dispatches nothing')
+        self.assertEqual(sorted(path.name for path in self.cycle.autonomy_dir().iterdir()),
+                         cycles_before, 'invalid prompt limit creates no cycle')
 
     def test_unknown_duplicate_and_over_limit_selections_refuse_before_any_dispatch(self):
         cycles_before = sorted(path.name for path in self.cycle.autonomy_dir().iterdir())

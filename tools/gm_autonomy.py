@@ -67,6 +67,12 @@ REPAIRABLE_VALIDATE_CHECKS = ('host_test_commands_pass',)
 # This covers bounded runner cleanup between sessions; run_process still caps the result at the
 # cycle's pinned deadline.
 OBSERVE_CLEANUP_SECONDS_PER_GM = 30
+# Keep the cycle default identical to gm_runner.observe while allowing a reviewed run to
+# raise the bound for a larger, still finite state projection. The upper bound prevents a
+# typo from turning a bounded observation into an effectively unbounded prompt.
+DEFAULT_MAX_PROMPT_BYTES = 24000
+MIN_MAX_PROMPT_BYTES = 1024
+MAX_MAX_PROMPT_BYTES = 1048576
 # A semantic repair may only be justified by fresh, exactly bound evidence from processes that
 # fully exited. A failure here means the observation is NOT a trustworthy report about this
 # release: a timeout, a missing/stale output file, a foreign nonce/world/release/issue or a
@@ -506,6 +512,8 @@ def runner_command(runner: dict, subcommand: str, *args) -> list:
                 command += ['--' + name.replace('_', '-'), str(runner[name])]
         if runner.get('timeout'):
             command += ['--timeout', str(runner['timeout'])]
+    if subcommand == 'observe' and runner.get('max_prompt_bytes') is not None:
+        command += ['--max-prompt-bytes', str(runner['max_prompt_bytes'])]
     command += [str(item) for item in args]
     return command
 
@@ -2890,9 +2898,16 @@ def command_cycle(args) -> int:
     refused, selected = selected_gm_selection(list(getattr(args, 'gm', None) or []), policy)
     if refused is not None:
         return refused
+    max_prompt_bytes = int(args.max_prompt_bytes)
+    if not MIN_MAX_PROMPT_BYTES <= max_prompt_bytes <= MAX_MAX_PROMPT_BYTES:
+        return gm_runner.refusal(
+            'prompt_limit_invalid',
+            f'--max-prompt-bytes must be {MIN_MAX_PROMPT_BYTES}..{MAX_MAX_PROMPT_BYTES}',
+            USAGE)
     runner = {key: value for key, value in
               {'config': args.config, 'key_file': args.key_file, 'codex': args.codex,
-               'codex_home': args.codex_home, 'timeout': args.timeout}.items() if value}
+               'codex_home': args.codex_home, 'timeout': args.timeout,
+               'max_prompt_bytes': max_prompt_bytes}.items() if value is not None}
     cycle = Cycle(policy_path, policy, runner, args.stop_after, selected_gms=selected,
                   review_path=getattr(args, 'review_file', None),
                   reopen_major_block=getattr(args, 'reopen_major_block', False))
@@ -3530,6 +3545,10 @@ def build_parser() -> argparse.ArgumentParser:
     cycle_parser.add_argument('--codex', help='passed through to gm_runner (tests inject a fake)')
     cycle_parser.add_argument('--codex-home', type=Path)
     cycle_parser.add_argument('--timeout', type=int, default=900)
+    cycle_parser.add_argument('--max-prompt-bytes', type=int,
+                              default=DEFAULT_MAX_PROMPT_BYTES,
+                              help='forwarded only to gm_runner observe; default 24000, '
+                                   'valid range 1024..1048576')
     cycle_parser.add_argument('--gm', action='append', default=[],
                               help='observe only these gm_runner roster GMs (repeatable); the '
                                    'default observes the roster bounded by max_gms')
