@@ -1434,12 +1434,12 @@ class EffectReviewObservationTests(unittest.TestCase):
         return write_json(self.save, {'world_id': WORLD, 'life': {'seq': life_seq},
                                       'godot': runtime})
 
-    def install_pending(self, baseline_seq=4, baseline_count=0):
+    def install_pending(self, baseline_seq=4, baseline_count=0, capability_id='warm_food'):
         receipt = {'kind': 'autonomy_release_receipt', 'cycle_id': 'cycle-1',
                    'issue_id': self.issue_id, 'world_id': WORLD, 'gm_id': 'gm-02',
                    'release_digest': 'release-abc', 'published': True,
                    'effect_review': {'status': 'pending', 'resident_id': 'fixture:resident-1',
-                                     'capability_id': 'warm_food',
+                                     'capability_id': capability_id,
                                      'baseline_life_seq': baseline_seq,
                                      'baseline_history_count': baseline_count,
                                      'required_action_binding': ('terminal command result with '
@@ -1536,6 +1536,84 @@ class EffectReviewObservationTests(unittest.TestCase):
         self.assertFalse(observed['adoption_claimed'])
         self.assertEqual(observed['matching_action_receipts'], [])
         self.assertEqual(observed['new_action_receipt_count'], 1)
+
+    def test_baking_pending_command_keeps_effect_review_waiting(self):
+        self.install_pending(capability_id='public_baking_route')
+        history = [{'command_id': 'turn:bake', 'action': 'bake', 'status': 'settled',
+                    'result': {'ok': True, 'pending': True,
+                               'capability_id': 'public_baking_route'}}]
+        self.write_world(5, history, {'baking': {'commands': {'turn:bake': {
+            'payload': {'actor_id': 'fixture:resident-1', 'action': 'bake'},
+            'status': 'pending'}}}})
+        self.assertIsNone(gm_autonomy.pending_effect_observation(self.state, self.save))
+
+    def test_baking_terminal_command_is_bounded_adoption_evidence(self):
+        self.install_pending(capability_id='public_baking_route')
+        history = [{'command_id': 'turn:bake', 'action': 'bake', 'status': 'settled',
+                    'reason': 'private deliberation',
+                    'result': {'ok': True, 'pending': True,
+                               'capability_id': 'public_baking_route'}}]
+        self.write_world(5, history, {'baking': {'commands': {'turn:bake': {
+            'payload': {'actor_id': 'fixture:resident-1', 'action': 'bake'},
+            'status': 'completed',
+            'result': {'ok': True, 'actor_id': 'fixture:resident-1',
+                       'command_id': 'turn:bake', 'capability_id': 'public_baking_route',
+                       'route_id': 'public-oven', 'loaf_id': 'loaf-1',
+                       'text': 'private terminal prose',
+                       'private_reason': 'must not leave the world'}}}}})
+        observed = gm_autonomy.pending_effect_observation(self.state, self.save)
+        self.assertTrue(observed['adoption_claimed'])
+        self.assertEqual(observed['matching_action_receipts'][0]['command']['namespace'],
+                         'baking')
+        result = observed['matching_action_receipts'][0]['command']['result']
+        self.assertEqual(result['route_id'], 'public-oven')
+        self.assertEqual(result['loaf_id'], 'loaf-1')
+        self.assertNotIn('text', result)
+        self.assertNotIn('private_reason', result)
+        self.assertNotIn('private deliberation', json.dumps(observed, ensure_ascii=False))
+
+    def test_baking_wrong_actor_cannot_be_adoption_evidence(self):
+        self.install_pending(capability_id='public_baking_route')
+        history = [{'command_id': 'turn:bake', 'action': 'bake', 'status': 'settled',
+                    'result': {'ok': True, 'capability_id': 'public_baking_route'}}]
+        self.write_world(5, history, {'baking': {'commands': {'turn:bake': {
+            'payload': {'actor_id': 'fixture:resident-2', 'action': 'bake'},
+            'status': 'completed',
+            'result': {'ok': True, 'actor_id': 'fixture:resident-2',
+                       'command_id': 'turn:bake',
+                       'capability_id': 'public_baking_route'}}}}})
+        observed = gm_autonomy.pending_effect_observation(self.state, self.save)
+        self.assertFalse(observed['adoption_claimed'])
+        self.assertEqual(observed['matching_action_receipts'], [])
+        self.assertEqual(observed['new_action_receipt_count'], 1)
+
+    def test_baking_wrong_receipt_command_cannot_be_adoption_evidence(self):
+        self.install_pending(capability_id='public_baking_route')
+        history = [{'command_id': 'turn:bake', 'action': 'bake', 'status': 'settled',
+                    'result': {'ok': True, 'capability_id': 'public_baking_route'}}]
+        self.write_world(5, history, {'baking': {'commands': {'turn:bake': {
+            'payload': {'actor_id': 'fixture:resident-1', 'action': 'bake'},
+            'status': 'completed',
+            'result': {'ok': True, 'actor_id': 'fixture:resident-1',
+                       'command_id': 'turn:other',
+                       'capability_id': 'public_baking_route'}}}}})
+        observed = gm_autonomy.pending_effect_observation(self.state, self.save)
+        self.assertFalse(observed['adoption_claimed'])
+        self.assertEqual(observed['matching_action_receipts'], [])
+
+    def test_baking_terminal_without_capability_cannot_claim_adoption(self):
+        self.install_pending(capability_id='public_baking_route')
+        history = [{'command_id': 'turn:bake', 'action': 'bake', 'status': 'settled',
+                    'result': {'ok': True, 'pending': True}}]
+        self.write_world(5, history, {'baking': {'commands': {'turn:bake': {
+            'payload': {'actor_id': 'fixture:resident-1', 'action': 'bake'},
+            'status': 'completed',
+            'result': {'ok': True, 'actor_id': 'fixture:resident-1',
+                       'command_id': 'turn:bake', 'route_id': 'public-oven'}}}}})
+        observed = gm_autonomy.pending_effect_observation(self.state, self.save)
+        self.assertFalse(observed['adoption_claimed'])
+        self.assertEqual(observed['matching_action_receipts'], [])
+        self.assertFalse(observed['review_terminal'])
 
     def test_negative_progress_does_not_repeat_but_keeps_release_pending(self):
         self.install_pending()
