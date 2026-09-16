@@ -115,6 +115,12 @@ class PolicyTests(unittest.TestCase):
         document = example_policy()
         document['limits']['max_attempts_per_issue'] = 0
         self.assertTrue(gm_autonomy.policy_errors(document))
+
+    def test_observe_archive_save_is_an_explicit_boolean_opt_in(self):
+        document = example_policy()
+        document['runtime']['observe_archive_save'] = 'yes'
+        self.assertIn('runtime.observe_archive_save must be boolean when present',
+                      gm_autonomy.policy_errors(document))
 class ScopeGateTests(unittest.TestCase):
     def setUp(self):
         self.policy = gm_runner.read_autonomy_policy(EXAMPLE)
@@ -2261,8 +2267,9 @@ class ProductionHostContractTests(CorrectionBase):
 class SelectedGmObserveTests(CorrectionBase):
     """`cycle --gm` forwards an explicit roster selector to gm_runner.observe only."""
 
-    def _cycle(self, selected=None):
-        return gm_autonomy.Cycle(self.policy_path, self.policy, {}, None, selected_gms=selected)
+    def _cycle(self, selected=None, runner=None):
+        return gm_autonomy.Cycle(self.policy_path, self.policy, runner or {}, None,
+                                 selected_gms=selected)
 
     @staticmethod
     def _flags(command, name):
@@ -2274,6 +2281,8 @@ class SelectedGmObserveTests(CorrectionBase):
 
         def fake(command, *args, **kwargs):
             seen['command'] = list(command)
+            seen['timeout'] = args[0]
+            seen['deadline'] = kwargs.get('deadline')
             summary = {'run_id': 'run-selected', 'dispatched': 1,
                        'results': [{'gm_id': 'gm-04', 'status': 'ok', 'exit_code': 0,
                                     'usage_measured': True, 'cost': 'measured',
@@ -2316,6 +2325,27 @@ class SelectedGmObserveTests(CorrectionBase):
         self.assertTrue(seen, 'the default observe dispatch still runs')
         self.assertEqual(self._flags(seen['command'], '--gm'), [])
         self.assertEqual(self._flags(seen['command'], '--max-gms'), [maximum])
+
+    def test_existing_save_is_private_from_observe_without_explicit_archive_opt_in(self):
+        write_json(self.cycle.save_path, {'world_id': WORLD, 'life': {'seq': 1}})
+        seen = self._dispatch(self._cycle(['gm-04']))
+        self.assertNotIn('--archive-save', seen['command'])
+
+    def test_observe_archive_opt_in_passes_the_declared_save(self):
+        write_json(self.cycle.save_path, {'world_id': WORLD, 'life': {'seq': 1}})
+        self.policy['runtime']['observe_archive_save'] = True
+        write_json(self.policy_path, self.policy)
+        seen = self._dispatch(self._cycle(['gm-04']))
+        self.assertEqual(self._flags(seen['command'], '--archive-save'),
+                         [str(self.cycle.save_path)])
+
+    def test_serial_observe_batch_has_one_timeout_allowance_per_selected_gm(self):
+        selected = ['gm-04', 'gm-06', 'gm-07', 'gm-08', 'gm-09', 'gm-10']
+        cycle = self._cycle(selected, {'timeout': 600})
+        seen = self._dispatch(cycle)
+        self.assertEqual(seen['timeout'], 6 * (600 + 30))
+        self.assertEqual(seen['deadline'], cycle.deadline,
+                         'run_process applies the pinned cycle deadline to the batch allowance')
 
     def test_only_the_observe_dispatch_consumes_the_selector(self):
         source = Path(gm_autonomy.__file__).read_text(encoding='utf-8')
