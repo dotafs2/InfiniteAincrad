@@ -8,6 +8,7 @@ explicit observation origin and durable cycle identity. Scripted end-to-end plum
 runtime, restart, publication) lives in tools/validate_gm_autonomy.py.
 """
 import json
+import copy
 import contextlib
 import io
 import os
@@ -1488,7 +1489,9 @@ class EffectReviewObservationTests(unittest.TestCase):
             'status': 'pending'}}}
         self.write_world(5, history, {'trade': trade, 'commands': {}})
         self.assertIsNone(gm_autonomy.pending_effect_observation(self.state, self.save))
-        self.write_world(6, history, {'trade': trade, 'commands': {'turn:1': {
+        # The authoritative journal may settle between resident turns.  The same life sequence
+        # and history row must still be re-read instead of requiring a fabricated new decision.
+        self.write_world(5, history, {'trade': trade, 'commands': {'turn:1': {
             'payload': {'actor_id': 'fixture:resident-1', 'action': 'prepare'},
             'status': 'completed',
             'result': {'ok': True, 'actor_id': 'fixture:resident-1',
@@ -1496,6 +1499,9 @@ class EffectReviewObservationTests(unittest.TestCase):
         observed = gm_autonomy.pending_effect_observation(self.state, self.save)
         self.assertTrue(observed['adoption_claimed'])
         self.assertEqual(observed['matching_action_receipts'][0]['command']['namespace'], 'life')
+        self.assertTrue(gm_runner.consume_effect_review(
+            self.state['sessions']['gm-02'], observed, 'accept', 'feedback-terminal'))
+        self.assertIsNone(gm_autonomy.pending_effect_observation(self.state, self.save))
 
     def test_other_resident_life_event_without_owner_decision_never_opens_review(self):
         self.install_pending()
@@ -1512,6 +1518,8 @@ class EffectReviewObservationTests(unittest.TestCase):
         observed = gm_autonomy.pending_effect_observation(self.state, self.save)
         self.assertEqual(observed['outcome'], 'no_adoption_observed')
         self.assertFalse(observed['adoption_claimed'])
+        self.assertFalse(observed['review_terminal'])
+        self.assertEqual(observed['effect_review_status'], 'pending_after_observation')
         self.assertEqual(observed['matching_action_receipts'], [])
         self.assertIn('terminal command result', observed['note'])
 
@@ -1529,7 +1537,7 @@ class EffectReviewObservationTests(unittest.TestCase):
         self.assertEqual(observed['matching_action_receipts'], [])
         self.assertEqual(observed['new_action_receipt_count'], 1)
 
-    def test_no_new_window_or_consumed_receipt_does_not_dispatch_again(self):
+    def test_negative_progress_does_not_repeat_but_keeps_release_pending(self):
         self.install_pending()
         self.write_world(4)
         self.assertIsNone(gm_autonomy.pending_effect_observation(self.state, self.save))
@@ -1540,6 +1548,90 @@ class EffectReviewObservationTests(unittest.TestCase):
             self.state['sessions']['gm-02'], observed, 'no_action', 'feedback-1'))
         self.assertFalse(gm_runner.consume_effect_review(
             self.state['sessions']['gm-02'], observed, 'no_action', 'feedback-2'))
+        parent = self.state['sessions']['gm-02']['memory']['host_feedback'][0]
+        self.assertNotIn('effect_review_result', parent)
+        self.assertTrue(parent['effect_review_progress']['negative_feedback_sent'])
+        self.assertEqual(parent['effect_review_progress']['observed_history_count'], 1)
+        self.assertIsNone(gm_autonomy.pending_effect_observation(self.state, self.save))
+        # A later non-capability decision is a new resident fact, but the one preliminary
+        # negative was already paid and must not become a recurring feedback charge.
+        self.write_world(6, [
+            {'command_id': 'turn:wait', 'action': 'wait', 'status': 'settled',
+             'result': {'ok': True}},
+            {'command_id': 'turn:travel', 'action': 'travel', 'status': 'settled',
+             'result': {'ok': True}},
+        ], {'places': {'commands': {'turn:travel': {
+            'payload': {'actor_id': 'fixture:resident-1', 'action': 'travel'},
+            'status': 'completed',
+            'result': {'ok': True, 'actor_id': 'fixture:resident-1',
+                       'command_id': 'turn:travel', 'code': 'arrived'}}}}})
+        self.assertIsNone(gm_autonomy.pending_effect_observation(self.state, self.save))
+
+    def test_multistep_preparation_negative_once_then_late_terminal_adoption(self):
+        self.install_pending()
+        prep_history = [
+            {'command_id': 'turn:travel', 'action': 'travel', 'status': 'settled',
+             'result': {'ok': True, 'code': 'arrived'}},
+            {'command_id': 'turn:recover', 'action': 'recover_material', 'status': 'settled',
+             'result': {'ok': True, 'code': 'material_recovered'}},
+        ]
+        travel_command = {
+                'payload': {'actor_id': 'fixture:resident-1', 'action': 'travel'},
+                'status': 'completed',
+                'result': {'ok': True, 'actor_id': 'fixture:resident-1',
+                           'command_id': 'turn:travel', 'code': 'arrived'}}
+        recover_command = {
+                'payload': {'actor_id': 'fixture:resident-1', 'action': 'recover_material'},
+                'status': 'completed',
+                'result': {'ok': True, 'actor_id': 'fixture:resident-1',
+                           'command_id': 'turn:recover', 'code': 'material_recovered'}}
+        prep_godot = {
+            'places': {'commands': {'turn:travel': travel_command}},
+            'materials': {'commands': {'turn:recover': recover_command}},
+        }
+        self.write_world(5, prep_history, prep_godot)
+        negative = gm_autonomy.pending_effect_observation(self.state, self.save)
+        self.assertEqual(negative['outcome'], 'no_adoption_observed')
+        self.assertFalse(negative['review_terminal'])
+        self.assertTrue(gm_runner.consume_effect_review(
+            self.state['sessions']['gm-02'], negative, 'no_action', 'feedback-prep'))
+        self.assertIsNone(gm_autonomy.pending_effect_observation(self.state, self.save))
+
+        use = {'command_id': 'turn:use', 'action': 'prepare', 'status': 'settled',
+               'result': {'ok': True, 'pending': True, 'capability_id': 'warm_food'}}
+        terminal_godot = copy.deepcopy(prep_godot)
+        terminal_godot['commands'] = {'turn:use': {
+            'payload': {'actor_id': 'fixture:resident-1', 'action': 'prepare'},
+            'status': 'completed',
+            'result': {'ok': True, 'actor_id': 'fixture:resident-1',
+                       'command_id': 'turn:use', 'capability_id': 'warm_food',
+                       'meal_id': 'meal-after-recovery'}}}
+        self.write_world(6, prep_history + [use], terminal_godot)
+        adopted = gm_autonomy.pending_effect_observation(self.state, self.save)
+        self.assertEqual(adopted['outcome'], 'resident_action_observed')
+        self.assertTrue(adopted['review_terminal'])
+        self.assertEqual(adopted['matching_action_receipts'][0]['command']['result']['meal_id'],
+                         'meal-after-recovery')
+        self.assertTrue(gm_runner.consume_effect_review(
+            self.state['sessions']['gm-02'], adopted, 'accept', 'feedback-adopted'))
+        parent = self.state['sessions']['gm-02']['memory']['host_feedback'][0]
+        self.assertEqual(parent['effect_review_result']['observation_outcome'],
+                         'resident_action_observed')
+        self.assertIsNone(gm_autonomy.pending_effect_observation(self.state, self.save))
+
+    def test_old_consumed_negative_record_stays_closed_for_compatibility(self):
+        self.install_pending()
+        parent = self.state['sessions']['gm-02']['memory']['host_feedback'][0]
+        parent['effect_review_result'] = {
+            'status': 'consumed', 'decision': 'no_action',
+            'observation_outcome': 'no_adoption_observed'}
+        history = [{'command_id': 'turn:late', 'action': 'prepare', 'status': 'settled',
+                    'result': {'ok': True, 'capability_id': 'warm_food'}}]
+        self.write_world(6, history, {'commands': {'turn:late': {
+            'payload': {'actor_id': 'fixture:resident-1', 'action': 'prepare'},
+            'status': 'completed',
+            'result': {'ok': True, 'actor_id': 'fixture:resident-1',
+                       'command_id': 'turn:late', 'capability_id': 'warm_food'}}}})
         self.assertIsNone(gm_autonomy.pending_effect_observation(self.state, self.save))
 
     def test_foreign_release_cannot_consume_pending_effect_review(self):

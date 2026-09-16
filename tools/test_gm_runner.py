@@ -16,6 +16,7 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 import unittest
 from pathlib import Path
@@ -200,7 +201,8 @@ class RunnerTestBase(unittest.TestCase):
         # Git for Windows can check out the repository even when core.longpaths is not configured.
         case = gm_runner.sha256_bytes(
             f'{type(self).__name__}.{self._testMethodName}'.encode('utf-8'))[:12]
-        workspace = (ROOT / 'tmp' / 'grt').resolve()
+        workspace = (Path(tempfile.gettempdir()) / 'ia-grt').resolve()
+        self.workspace = workspace
         self.root = workspace / f'{case}-{os.getpid()}'
         target = self.root.resolve()
         if target.exists() and workspace in target.parents:
@@ -243,7 +245,7 @@ class RunnerTestBase(unittest.TestCase):
                 self.kill_owned_pid(json.loads(path.read_text(encoding='utf-8')).get('pid'))
             except (json.JSONDecodeError, OSError):
                 continue
-        workspace = (ROOT / 'tmp').resolve()
+        workspace = self.workspace
         for worktree in self.worktrees:
             path = Path(worktree).resolve()
             if path != workspace and workspace in path.parents:
@@ -500,7 +502,11 @@ class EffectFeedbackConsumptionTests(RunnerTestBase):
                        'issue_id': 'issue-1', 'world_id': 'shared:effect-world',
                        'gm_id': 'gm-02', 'release_digest': 'release-abc'},
             'outcome': 'no_adoption_observed', 'adoption_claimed': False,
-            'observation_window': {'baseline_life_seq': 4, 'observed_life_seq': 5},
+            'observation_window': {'baseline_life_seq': 4, 'observed_life_seq': 5,
+                                   'resident_id': 'shared:r1',
+                                   'capability_id': 'warm_food',
+                                   'baseline_history_count': 0,
+                                   'observed_history_count': 1},
             'matching_action_receipts': []})
         code, payload, _ = self.cli('feedback', '--state-dir', str(self.state), '--gm', 'gm-02',
                                     '--issue', 'issue-1', '--receipt-file', str(receipt))
@@ -509,8 +515,82 @@ class EffectFeedbackConsumptionTests(RunnerTestBase):
         saved = self.sessions()['gm-02']['memory']['host_feedback']
         parent = next(event for event in saved
                       if event.get('receipt_sha256') == 'parent-release-sha')
-        self.assertEqual(parent['effect_review_result']['status'], 'consumed')
-        self.assertEqual(parent['effect_review_result']['decision'], 'no_action')
+        self.assertNotIn('effect_review_result', parent)
+        self.assertEqual(parent['effect_review_progress']['status'], 'pending')
+        self.assertTrue(parent['effect_review_progress']['negative_feedback_sent'])
+        self.assertEqual(parent['effect_review_progress']['decision'], 'no_action')
+
+    def test_feedback_rejects_forged_nonempty_adoption_match(self):
+        state = gm_runner.load_state(self.state)
+        state['world_id'] = 'shared:effect-world'
+        release = {'kind': 'autonomy_release_receipt', 'cycle_id': 'cycle-1',
+                   'issue_id': 'issue-1', 'world_id': 'shared:effect-world',
+                   'gm_id': 'gm-02', 'release_digest': 'release-abc', 'published': True,
+                   'effect_review': {'status': 'pending', 'resident_id': 'shared:r1',
+                                     'capability_id': 'warm_food',
+                                     'baseline_life_seq': 4, 'baseline_history_count': 0}}
+        gm_runner.remember_host_feedback(state['sessions']['gm-02'], 'gm-02', release,
+                                         'parent-release-sha', 'cycle-1')
+        forged = {
+            'kind': 'autonomy_effect_observation_receipt', 'schema_version': 1,
+            'parent': {'receipt_sha256': 'parent-release-sha', 'cycle_id': 'cycle-1',
+                       'issue_id': 'issue-1', 'world_id': 'shared:effect-world',
+                       'gm_id': 'gm-02', 'release_digest': 'release-abc'},
+            'outcome': 'resident_action_observed', 'adoption_claimed': True,
+            'observation_window': {'resident_id': 'shared:r1',
+                                   'capability_id': 'warm_food',
+                                   'baseline_life_seq': 4, 'observed_life_seq': 5,
+                                   'baseline_history_count': 0,
+                                   'observed_history_count': 1},
+            'matching_action_receipts': [{
+                'command_id': 'turn:foreign',
+                'command': {'command_id': 'turn:foreign', 'status': 'completed',
+                            'result': {'ok': True, 'actor_id': 'shared:r2',
+                                       'command_id': 'turn:foreign',
+                                       'capability_id': 'warm_food'}}}]}
+        self.assertFalse(gm_runner.consume_effect_review(
+            state['sessions']['gm-02'], forged, 'accept', 'feedback-forged'))
+        parent = state['sessions']['gm-02']['memory']['host_feedback'][0]
+        self.assertNotIn('effect_review_result', parent)
+        self.assertNotIn('effect_review_progress', parent)
+
+    def test_feedback_rejects_wrong_or_nonadvancing_observation_window(self):
+        state = gm_runner.load_state(self.state)
+        state['world_id'] = 'shared:effect-world'
+        release = {'kind': 'autonomy_release_receipt', 'cycle_id': 'cycle-1',
+                   'issue_id': 'issue-1', 'world_id': 'shared:effect-world',
+                   'gm_id': 'gm-02', 'release_digest': 'release-abc', 'published': True,
+                   'effect_review': {'status': 'pending', 'resident_id': 'shared:r1',
+                                     'capability_id': 'warm_food',
+                                     'baseline_life_seq': 4, 'baseline_history_count': 2}}
+        gm_runner.remember_host_feedback(state['sessions']['gm-02'], 'gm-02', release,
+                                         'parent-release-sha', 'cycle-1')
+        receipt = {
+            'kind': 'autonomy_effect_observation_receipt', 'schema_version': 1,
+            'parent': {'receipt_sha256': 'parent-release-sha', 'cycle_id': 'cycle-1',
+                       'issue_id': 'issue-1', 'world_id': 'shared:effect-world',
+                       'gm_id': 'gm-02', 'release_digest': 'release-abc'},
+            'outcome': 'no_adoption_observed', 'adoption_claimed': False,
+            'observation_window': {'resident_id': 'shared:r1',
+                                   'capability_id': 'warm_food',
+                                   'baseline_life_seq': 3, 'observed_life_seq': 5,
+                                   'baseline_history_count': 2,
+                                   'observed_history_count': 3},
+            'matching_action_receipts': []}
+        session = state['sessions']['gm-02']
+        self.assertFalse(gm_runner.consume_effect_review(
+            session, receipt, 'no_action', 'feedback-wrong-baseline'))
+        receipt['observation_window']['baseline_life_seq'] = 4
+        receipt['observation_window']['observed_history_count'] = 2
+        self.assertFalse(gm_runner.consume_effect_review(
+            session, receipt, 'no_action', 'feedback-no-history-advance'))
+        receipt['observation_window']['observed_history_count'] = 3
+        receipt['observation_window']['observed_life_seq'] = 4
+        self.assertFalse(gm_runner.consume_effect_review(
+            session, receipt, 'no_action', 'feedback-no-seq-advance'))
+        parent = session['memory']['host_feedback'][0]
+        self.assertNotIn('effect_review_result', parent)
+        self.assertNotIn('effect_review_progress', parent)
 
 
 class CoreObservationTests(RunnerTestBase):

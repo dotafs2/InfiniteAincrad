@@ -659,7 +659,7 @@ def pending_effect_observation(state: dict, save_path: Path | None) -> dict | No
             if not isinstance(history, list) or len(history) <= baseline_count:
                 continue
             observed = []
-            matching_pending = False
+            owner_pending = False
             for entry in history[baseline_count:]:
                 if not isinstance(entry, dict):
                     continue
@@ -667,22 +667,22 @@ def pending_effect_observation(state: dict, save_path: Path | None) -> dict | No
                 action = {'command_id': entry.get('command_id'), 'action': entry.get('action'),
                           'command': resolved}
                 observed.append(action)
-                submitted = entry.get('result')
-                submitted_capability = (submitted.get('capability_id')
-                                        if isinstance(submitted, dict) else None)
-                final = resolved.get('result') if isinstance(resolved.get('result'), dict) else {}
-                if (submitted_capability == capability_id
-                        and resolved.get('status') == 'pending'):
-                    matching_pending = True
-            # An accepted asynchronous action is not adoption.  Keep the release pending so its
-            # eventual terminal receipt can wake the original owner exactly once.
-            if matching_pending:
-                continue
+                if resolved.get('status') == 'pending':
+                    owner_pending = True
             matches = [entry for entry in observed
                        if entry['command'].get('status') == 'completed'
                        and entry['command'].get('result', {}).get('ok') is True
                        and entry['command']['result'].get('capability_id') == capability_id]
             adopted = bool(matches)
+            # Re-scan every post-release command before consulting the negative watermark.  This
+            # is what lets an old submitted history row wake the owner when its authoritative
+            # journal later becomes terminal without appending another resident decision.
+            if not adopted and owner_pending:
+                continue
+            progress = event.get('effect_review_progress')
+            if (not adopted and isinstance(progress, dict)
+                    and progress.get('negative_feedback_sent') is True):
+                continue
             parent = {'receipt_sha256': event.get('receipt_sha256'),
                       'cycle_id': release.get('cycle_id'), 'issue_id': release.get('issue_id'),
                       'world_id': release.get('world_id'), 'gm_id': release.get('gm_id'),
@@ -699,8 +699,14 @@ def pending_effect_observation(state: dict, save_path: Path | None) -> dict | No
                     'matching_action_receipts': matches,
                     'new_action_receipt_count': len(observed),
                     'adoption_claimed': adopted,
-                    'note': ('the original resident decision and life window open review; only a '
-                             'matching terminal command result is evidence of adoption')}
+                    'review_terminal': adopted,
+                    'effect_review_status': ('adopted_terminal' if adopted
+                                             else 'pending_after_observation'),
+                    'note': (('the matching terminal command is evidence of adoption and closes '
+                              'this effect review') if adopted else
+                             ('the original resident decision and life window opened one bounded '
+                              'negative observation; it does not close the release, and later '
+                              'matching terminal command result remains observable as adoption'))}
     return None
 
 
