@@ -89,3 +89,19 @@ Blender 5.2.1 导出：三件均无退化三角面。Godot 4.7.2 .NET 在独立�
 ![实际安装后 seq214 冻结副本近景](../../Art/Generated/Overnight20260918/captures/05-installed-seq214.png)
 
 此图证明已安装冻结状态可以在已集成街区中显示；居民保持暂停，**不证明居民已经发现、走到或采用烘焙能力**。这些生活采用事实仍需主协调的真实运行证据。
+
+## 烤炉 v2 与十 GM 面板：隔离审计副本短实渲
+
+2026-09-18 04:37–04:39，在15分钟范围内完成，只读使用 delivery 已集成的 `7882e55` / `587b397` 功能。输入是主协调给出的 `baking-replacement-run/replay-world.json` 的另一个副本：它从真实 life06 冻结档精确重放 v2 安装，当前 seq245；**属于隔离审计副本，不是居民采用证据**。外部 GM 完成快照同样复制后读取。未打开 canonical、修改 delivery 文件或更改资产，模型请求0。
+
+自有检查脚本 `Art/Generated/Overnight20260918/check_gm_panel.gd` 仅装载原产品 PackedScene、发送一次普通 G 键输入，并使用 Godot 原生 viewport PNG 保存方式记录街景及既有滚动控件的首/中/末段；没有新增产品输入 flag、改变 UI 布局或创建截图平台。产品原有 `--town-restore --town-focus-baking=public_bakery_oven_west_forecourt_v2 --town-hide-life-panel --town-gm-status=<copy> --town-capture=<own>` 完成证据导出和自动退出。
+
+结果：G 确实打开面板，10条 GM 记录载入；首/中/末三张原生截图共同核对 gm-01 至 gm-10 内容均可读。标题和说明明确为“已完成工作快照”“不代表当前实时运行”，状态均为“观察完成”或“方案评审完成”，没有虚假工作中标记。GM 源序列166/214/243与当下审计世界245同时保留，不把历史评审冒称实时世界状态。
+
+**显示限制必须保留：** 1400×900下，右侧面板为378×600、占屏宽27%，中央炉具及道路仍可见；文字内容高1085、滚动视区高488，因此10条需要滚动，不能声称一屏同时全部可见。主面板图如下，完整中/末段保留在同目录 `08-gm-panel-middle.png` / `09-gm-panel-bottom.png`。
+
+![十 GM 完成快照面板首段](../../Art/Generated/Overnight20260918/captures/07-gm-panel-top.png)
+
+![烤炉 v2 审计副本街景](../../Art/Generated/Overnight20260918/captures/06-v2-audit-street.png)
+
+炉具、四袋面粉与清空的工作区正常。两次短进程用于补齐滚动中段，PID63204、68428均exit0无驻留；两个capture均 `new_decisions=none_restore`、`validation_decisions_started=0`，无 ERROR，仍有前述导航警告。世界源/副本前后哈希均为 `d29323f619934fb6c7938da7fe42f72b4fc642ecc9a7296f950452d22dc04a55`；GM源/副本前后哈希均为 `2ab3651a9abced2f3e336e0c07bf648c856aca79b291b7106d8fd4a04dec2475`。完整精简收据在同目录 `v2-gm-render-receipt.json`，包括截图hash、面板尺寸、10条状态与只读边界；未公开完整世界存档。
