@@ -78,6 +78,11 @@ class BudgetLauncherTests(unittest.TestCase):
         with self.ledger.transaction() as (db, _meta):
             return {row['id']: encoded(dict(row)) for row in db.execute('SELECT * FROM requests ORDER BY id')}
 
+    @staticmethod
+    def rows_for(ledger):
+        with ledger.transaction() as (db, _meta):
+            return {row['id']: encoded(dict(row)) for row in db.execute('SELECT * FROM requests ORDER BY id')}
+
     def make_pin(self):
         return {'schema_version': 1, 'ledger_id': self.ledger.status()['ledger_id'],
                 'policy_sha256': self.ledger.policy_hash,
@@ -158,6 +163,19 @@ class BudgetLauncherTests(unittest.TestCase):
             CarriedLedgerGate(self.ledger)
         self.assertEqual(self.provider.calls, 0)
         self.assert_original_preserved()
+
+    def test_expired_ledger_is_rejected_before_any_run_attempt(self):
+        path = self.root / 'expired.sqlite3'
+        policy = replace(self.policy, deadline_utc=100)
+        ledger = Ledger(path, policy, clock=lambda: 100)
+        ledger.initialize()
+        guard_before = ledger.guard.read_bytes()
+        rows_before = self.rows_for(ledger)
+        with self.assertRaisesRegex(BudgetDenied, 'usage window has ended'):
+            CarriedLedgerGate(ledger)
+        self.assertEqual(ledger.guard.read_bytes(), guard_before)
+        self.assertEqual(self.rows_for(ledger), rows_before)
+        self.assertEqual(self.provider.calls, 0)
 
     def test_existing_clean_ledger_needs_no_uncertainty_waiver(self):
         ledger = Ledger(self.root / 'clean.sqlite3', replace(self.policy, concurrency=2))
