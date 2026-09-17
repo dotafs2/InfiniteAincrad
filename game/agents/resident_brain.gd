@@ -14,6 +14,7 @@ const SESSION_REQUEST_LIMIT_CODE := "brain_session_request_limit"
 ## neither one names a particular guard or cause.
 const PROVIDER_FAILURE_IDENTIFIERS := {
 	"The estimated model request exceeds the context window and no transcript compactor is configured.": "brain_context_window_exceeded",
+	"The system prompt, tools, and new input leave no context budget for the session transcript.": "brain_context_window_exceeded",
 	"The input payload is too large.": "brain_input_too_large",
 	"budget_gateway_rejected_or_uncertain": "brain_gateway_rejected_or_uncertain",
 	"gateway_validation_failed": "brain_gateway_validation_failed",
@@ -31,7 +32,12 @@ const INPUT_CHARACTER_CAP := 16000
 ## Dispatch target with a small headroom under the guard, so a bounded payload never
 ## rides its boundary. A payload already this small is dispatched exactly as the
 ## world composed it, so an ordinary resident turn keeps every character.
-const INPUT_CHARACTER_TARGET := 15800
+## RunJson embeds this serialized value as JsonContent. OpenGameAgent then estimates
+## the complete request, including the escaped JSON representation and its system
+## prompt, against the resident runtime's 8192-token window with 512 tokens held
+## for output. Keep enough headroom for that second representation as well as the
+## unchanged 24 KiB projected-prompt and 32 KiB wire guards in the gateway.
+const INPUT_CHARACTER_TARGET := 12000
 ## The verified identifier for an oversized decision input: the same string the
 ## provider mapping yields for the upstream cache's own text, so a receipt reads the
 ## same whether the runtime refused the payload or this adapter refused to send it.
