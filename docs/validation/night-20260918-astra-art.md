@@ -119,3 +119,17 @@ Blender 5.2.1 导出：三件均无退化三角面。Godot 4.7.2 .NET 在独立�
 ![同一 seq299 的炉位三袋面粉](../../Art/Generated/Overnight20260918/captures/11-oven-three-flour-seq299.png)
 
 炉位标签为公共面粉3，三袋实际显示、工作区继续清空。2026-09-18 05:38:09–05:38:37，两短进程PID67556/74748均exit0，无ERROR，原导航警告仍有。两份捕获均seq299、`none_restore`、0个新决策；本轮新增模型API为0。冻结源与两个副本前后SHA-256全部保持 `4b185131d0d02e2e0f976412879f4554cdf5de8a144cfe3b636b3c3a847f9f30`。精简收据 `captures/adopted-seq299-render-receipt.json` 保存上述命令/账本字段、哈希、截图指纹和显示限制，不公开完整私有存档。采用事实来自真实冻结命令与账本，截图是该已发生结果的零API回看。
+
+## 最终 seq335 展示：街区总览与织工回家后的近景
+
+2026-09-18 06:23，在主协调限定范围内，将 `delivery-live/movement-all10-seq335.json` 复制到自有 ignored 目录并运行两次原产品暂停恢复捕获。总览脚本 `Art/Generated/Overnight20260918/capture_overview.gd` 只加载原场景并发送现有 V 键切换；近景使用现有 `--town-focus-resident=shared:weaver`。没有修改玩法、产品源码、模型、灯光或图片，没有访问 canonical。
+
+![最新 seq335 街区总览，暂停恢复画面](../../Art/Generated/Overnight20260918/captures/12-final-overview-seq335.png)
+
+![织工细娘在住处休息，暂停恢复画面](../../Art/Generated/Overnight20260918/captures/13-weaver-home-seq335.png)
+
+总览保留“艾恩葛朗特第一层 · 原创生活街区”标题和真实暂停标记；近景中细娘位于有床和箱子的住处，标签为休息、口粮0。两图保留原产品标注为“历史对话 · 已保存”的对话框，它不是本次生成的新回应。沿用已有 GM public 完成状态副本，面板保持关闭，不能从截图声称十 GM 正在同时运行。
+
+**证据边界：** 图片仅展示 seq335 的暂停状态，不是移动过程或进食动画的证据。十居民实际身体位移证据在 root 的 `private/overnight-20260918/ten-resident-movement-acceptance.json`（SHA-256 `b731de74283e241d8e3787c919edd7b27f566ac558e2c0e5bb95fa48029ad6b7`）；本任务只读引用协调方已有验收，其中 physical_movers=10、织工最大已观察位移23.1861m，不另开移动审查。织工真实选择 eat_ration、seq333完成进食、后继turn32选择rest的运行说明由协调方提供，不由这两张静态图单独证明。
+
+两次进程 PID20348 / 31808 均正常exit0，无驻留；捕获均为 seq335、10个活动身份、`none_restore`、0个新决策，新增模型/生成API为0。冻结源与两份副本前后 SHA-256 均保持 `59b98070cbcdfc393e18f47924d99f7dc2f55c99dda662f493e6da241583d35c`；GM副本前后保持 `b3d1e3e076f53a2afa0d8da7ac9505b5f416e32ff078731b267a1ddf7b01d5fd`。无 ERROR / SCRIPT ERROR，仍有前述导航警告。精简收据 `captures/final-seq335-render-receipt.json` 收录进程、截图指纹及只读边界，不公开完整世界存档。

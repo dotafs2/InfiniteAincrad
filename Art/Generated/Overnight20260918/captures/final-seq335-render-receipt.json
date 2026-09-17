@@ -1,0 +1,65 @@
+{
+  "scope": "Two native paused Godot views of the final seq335 frozen source; no new movement test",
+  "source": "delivery-live/movement-all10-seq335.json",
+  "renders": [
+    {
+      "view": "overview",
+      "mode": "restore-only real seq335 frozen source copy",
+      "source_sha256_before": "59b98070cbcdfc393e18f47924d99f7dc2f55c99dda662f493e6da241583d35c",
+      "copy_sha256_before": "59b98070cbcdfc393e18f47924d99f7dc2f55c99dda662f493e6da241583d35c",
+      "gm_copy_sha256_before": "b3d1e3e076f53a2afa0d8da7ac9505b5f416e32ff078731b267a1ddf7b01d5fd",
+      "started_at": "2026-09-18T06:23:00.3461087+08:00",
+      "pid": 20348,
+      "exit_code": 0,
+      "finished_at": "2026-09-18T06:23:14.6711675+08:00",
+      "copy_sha256_after": "59b98070cbcdfc393e18f47924d99f7dc2f55c99dda662f493e6da241583d35c",
+      "source_sha256_after": "59b98070cbcdfc393e18f47924d99f7dc2f55c99dda662f493e6da241583d35c",
+      "gm_copy_sha256_after": "b3d1e3e076f53a2afa0d8da7ac9505b5f416e32ff078731b267a1ddf7b01d5fd",
+      "capture": "12-final-overview-seq335.png",
+      "capture_sha256": "8f51d6b85839e7d5e7cf1b8f65df0d23e0aebcc7d13b6534be83ca7a176c142d",
+      "life_seq": 335,
+      "active": 10,
+      "new_decisions": "none_restore",
+      "validation_decisions_started": 0
+    },
+    {
+      "view": "weaver",
+      "mode": "restore-only real seq335 frozen source copy",
+      "source_sha256_before": "59b98070cbcdfc393e18f47924d99f7dc2f55c99dda662f493e6da241583d35c",
+      "copy_sha256_before": "59b98070cbcdfc393e18f47924d99f7dc2f55c99dda662f493e6da241583d35c",
+      "gm_copy_sha256_before": "b3d1e3e076f53a2afa0d8da7ac9505b5f416e32ff078731b267a1ddf7b01d5fd",
+      "started_at": "2026-09-18T06:23:14.6964372+08:00",
+      "pid": 31808,
+      "exit_code": 0,
+      "finished_at": "2026-09-18T06:23:28.8268882+08:00",
+      "copy_sha256_after": "59b98070cbcdfc393e18f47924d99f7dc2f55c99dda662f493e6da241583d35c",
+      "source_sha256_after": "59b98070cbcdfc393e18f47924d99f7dc2f55c99dda662f493e6da241583d35c",
+      "gm_copy_sha256_after": "b3d1e3e076f53a2afa0d8da7ac9505b5f416e32ff078731b267a1ddf7b01d5fd",
+      "capture": "13-weaver-home-seq335.png",
+      "capture_sha256": "6eb81d0b7070c2b72e5ec0c88ceea73fed53879a803ea407671e15689b3cabf0",
+      "life_seq": 335,
+      "active": 10,
+      "new_decisions": "none_restore",
+      "validation_decisions_started": 0
+    }
+  ],
+  "movement_evidence": {
+    "path": "D:\\lucidgloves\\InfiniteAincrad\\private\\overnight-20260918\\ten-resident-movement-acceptance.json",
+    "sha256": "b731de74283e241d8e3787c919edd7b27f566ac558e2c0e5bb95fa48029ad6b7",
+    "attribution": "Existing coordinator acceptance report, read only; screenshots do not demonstrate movement",
+    "reported_physical_movers": 10,
+    "reported_weaver_maximum_observed_displacement_m": 23.1861
+  },
+  "new_model_or_generation_api_calls": 0,
+  "canonical_accessed": false,
+  "product_source_changed": false,
+  "images_modified": false,
+  "gm_status": "Existing public completed-work snapshot copied and loaded; panel closed; no simultaneous-running claim",
+  "historical_dialogue": "Existing saved history remains visible and labeled as history; no new dialogue generated",
+  "warnings": [
+    "Deprecated navigation bake API",
+    "agent_radius voxel precision",
+    "Navigation region synchronization 4 edge errors"
+  ],
+  "owned_processes_remaining": []
+}
