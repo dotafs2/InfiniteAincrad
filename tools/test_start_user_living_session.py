@@ -260,6 +260,8 @@ class UserLivingBootstrapTests(unittest.TestCase):
                 "engine_exit": 0,
                 "upstream_requests": 0,
                 "model_errors": {},
+                "recoverable_model_waits": {
+                    "fixture:herder": {"status": "recoverable_wait"}},
                 "budget_stop_reason": "",
                 "shutdown_incomplete": False,
                 "world_progress_observed": True,
