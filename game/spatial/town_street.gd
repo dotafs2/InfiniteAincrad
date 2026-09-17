@@ -45,6 +45,13 @@ var dialogue_scroll: ScrollContainer
 var life_roster: Label
 var life_feed: Label
 var life_panel: PanelContainer
+var gm_panel: PanelContainer
+var gm_status_header: Label
+var gm_status_label: Label
+var gm_status_path := ""
+var gm_status_rows: Array = []
+var gm_status_message := "未载入 GM 进展记录。"
+var _life_visible_before_gm := true
 var session_start_life_seq := -1
 var session_start_request_ids: Dictionary = {}
 var bread_scene: PackedScene
@@ -156,6 +163,12 @@ func _ready() -> void:
 				push_error("--town-gm-export requires a path")
 				get_tree().quit(2)
 				return
+		if arg.begins_with("--town-gm-status="):
+			gm_status_path = arg.trim_prefix("--town-gm-status=")
+			if gm_status_path.strip_edges().is_empty():
+				push_error("--town-gm-status requires a path")
+				get_tree().quit(2)
+				return
 	# The legacy Mac repair demo is an offline/local_rule_policy path only. It must
 	# never run in gateway_mode or restore_only, and incompatible startup is rejected
 	# before any world mutation.
@@ -244,6 +257,7 @@ func _ready() -> void:
 	# answers "can this resident read/see it"; the world grants and persists the knowledge.
 	_load_public_notice()
 	_build_town_hud()
+	_reload_gm_status()
 	_build_nameplates()
 	if gateway_mode:
 		model_turns = TownTurns.new()
@@ -774,10 +788,15 @@ func _run_model_turn(id: String) -> Dictionary:
 func _unhandled_input(event: InputEvent) -> void:
 	if _composing_dialogue():
 		return
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_G:
+		_toggle_gm_panel()
+		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_N:
 		_focus_next_resident()
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_M:
+		if is_instance_valid(gm_panel):
+			gm_panel.visible = false
 		if is_instance_valid(life_panel):
 			life_panel.visible = not life_panel.visible
 		return
@@ -898,6 +917,142 @@ func _build_town_hud() -> void:
 	life_feed.add_theme_font_size_override("font_size", 15)
 	feed_scroll.add_child(life_feed)
 
+	# Optional host-provided, public GM completion snapshot. It shares the same right-side
+	# footprint as the resident panel, is closed by default, and never enters world state,
+	# resident views or model context.
+	gm_panel = PanelContainer.new()
+	gm_panel.anchor_left = 1.0
+	gm_panel.anchor_right = 1.0
+	gm_panel.offset_left = -400
+	gm_panel.offset_right = -22
+	gm_panel.offset_top = 20
+	gm_panel.offset_bottom = 620
+	gm_panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	gm_panel.add_theme_stylebox_override("panel", style)
+	gm_panel.visible = false
+	layer.add_child(gm_panel)
+	var gm_column := VBoxContainer.new()
+	gm_panel.add_child(gm_column)
+	var gm_title := Label.new()
+	gm_title.text = "十位 GM · 已完成工作快照"
+	gm_title.add_theme_font_size_override("font_size", 20)
+	gm_title.add_theme_color_override("font_color", Color("f0cf88"))
+	gm_column.add_child(gm_title)
+	gm_status_header = Label.new()
+	gm_status_header.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	gm_status_header.add_theme_font_size_override("font_size", 14)
+	gm_column.add_child(gm_status_header)
+	var gm_separator := HSeparator.new()
+	gm_column.add_child(gm_separator)
+	var gm_scroll := ScrollContainer.new()
+	gm_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	gm_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	gm_column.add_child(gm_scroll)
+	gm_status_label = Label.new()
+	gm_status_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	gm_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	gm_status_label.add_theme_font_size_override("font_size", 14)
+	gm_scroll.add_child(gm_status_label)
+	_render_gm_status()
+
+func _toggle_gm_panel() -> void:
+	if not is_instance_valid(gm_panel):
+		return
+	if gm_panel.visible:
+		gm_panel.visible = false
+		if is_instance_valid(life_panel):
+			life_panel.visible = _life_visible_before_gm
+		return
+	_reload_gm_status()
+	_life_visible_before_gm = is_instance_valid(life_panel) and life_panel.visible
+	if is_instance_valid(life_panel):
+		life_panel.visible = false
+	gm_panel.visible = true
+
+func _reload_gm_status() -> void:
+	gm_status_rows.clear()
+	if gm_status_path.is_empty():
+		gm_status_message = "未载入 GM 进展记录。\n此面板只显示外部已完成工作快照，不推断实时状态。"
+		_render_gm_status()
+		return
+	var file := FileAccess.open(gm_status_path, FileAccess.READ)
+	if file == null or file.get_length() <= 0 or file.get_length() > 262144:
+		gm_status_message = "未载入 GM 进展记录（文件不可读）。"
+		_render_gm_status()
+		return
+	var parser := JSON.new()
+	if parser.parse(file.get_as_text()) != OK or not _valid_gm_status(parser.data):
+		gm_status_message = "未载入 GM 进展记录（格式无效或世界不匹配）。"
+		_render_gm_status()
+		return
+	var document: Dictionary = parser.data
+	gm_status_rows = document.rows.duplicate(true)
+	gm_status_message = "快照生成：%s\n只读完成记录 · 不代表当前实时运行" % _gm_short_text(str(document.generated_utc), 32)
+	_render_gm_status()
+
+func _valid_gm_status(value: Variant) -> bool:
+	if typeof(value) != TYPE_DICTIONARY:
+		return false
+	var document: Dictionary = value
+	if not _gm_exact_keys(document, ["schema_version", "world_id", "generated_utc", "rows"]):
+		return false
+	if document.schema_version != 1 or typeof(document.world_id) != TYPE_STRING \
+			or str(document.world_id) != str(town.snapshot().world_id):
+		return false
+	if typeof(document.generated_utc) != TYPE_STRING or str(document.generated_utc).strip_edges().is_empty():
+		return false
+	if typeof(document.rows) != TYPE_ARRAY or document.rows.size() != 10:
+		return false
+	var ids := {}
+	for value_row in document.rows:
+		if typeof(value_row) != TYPE_DICTIONARY:
+			return false
+		var row: Dictionary = value_row
+		if not _gm_exact_keys(row, ["id", "focus_label", "status", "last_completed_utc", "last_source_seq", "last_public_outcome"]):
+			return false
+		for key in ["id", "focus_label", "status", "last_completed_utc", "last_public_outcome"]:
+			if typeof(row[key]) != TYPE_STRING or str(row[key]).strip_edges().is_empty():
+				return false
+		if str(row.status) not in ["观察完成", "方案评审完成"]:
+			return false
+		var source_seq: Variant = row.last_source_seq
+		if typeof(source_seq) not in [TYPE_INT, TYPE_FLOAT] or float(source_seq) < 0.0 \
+				or not is_equal_approx(float(source_seq), floorf(float(source_seq))):
+			return false
+		var id := str(row.id)
+		if ids.has(id):
+			return false
+		ids[id] = true
+	return true
+
+func _gm_exact_keys(value: Dictionary, expected: Array) -> bool:
+	if value.size() != expected.size():
+		return false
+	for key in expected:
+		if not value.has(key):
+			return false
+	return true
+
+func _gm_short_text(value: String, limit: int) -> String:
+	var clean := value.replace("\r", " ").replace("\n", " ").strip_edges()
+	return clean if clean.length() <= limit else clean.left(limit - 1) + "…"
+
+func _render_gm_status() -> void:
+	if not is_instance_valid(gm_status_header) or not is_instance_valid(gm_status_label):
+		return
+	gm_status_header.text = gm_status_message
+	if gm_status_rows.is_empty():
+		gm_status_label.text = "按 G 返回生活画面。"
+		return
+	var lines: Array[String] = []
+	for row_value in gm_status_rows:
+		var row: Dictionary = row_value
+		lines.append("%s · %s · %s\n%s · 世界序列 %d · %s" % [
+			_gm_short_text(str(row.id), 12), _gm_short_text(str(row.focus_label), 24),
+			_gm_short_text(str(row.status), 16), _gm_short_text(str(row.last_completed_utc), 25),
+			int(row.last_source_seq), _gm_short_text(str(row.last_public_outcome), 44)])
+	gm_status_label.text = "\n\n".join(lines) + "\n\n按 G 返回生活画面。"
+
 func _build_nameplates() -> void:
 	var overlay := TownNameplates.new()
 	add_child(overlay)
@@ -914,6 +1069,8 @@ func _build_nameplates() -> void:
 			hud_controls.append(dialogue_panel as Control)
 	if is_instance_valid(life_panel):
 		hud_controls.append(life_panel)
+	if is_instance_valid(gm_panel):
+		hud_controls.append(gm_panel)
 	overlay.configure(town, actors, cards, _camera, _player, hud_controls)
 	if town_tools != null:
 		town_tools.facts_enabled = false
@@ -1189,7 +1346,7 @@ func _refresh() -> void:
 		var contract: Dictionary = snap.life.contracts[-1]
 		repair_text = " · 修理：%s · %s" % [_repair_part_label(contract.part), _repair_status_label(contract.status)]
 	var gm_text := "" if gm_export_status.is_empty() else "\n" + gm_export_status
-	var controls := "V 总览/返回 · N 跟随居民 · M 生活窗 · WASD 行走 · ESC 释放" if restore_only else "空格 暂停/继续 · WASD 行走 · H 询问 · N 跟随居民 · M 生活窗 · ESC 释放"
+	var controls := "V 总览/返回 · N 跟随居民 · M 生活窗 · G GM进展 · WASD 行走 · ESC 释放" if restore_only else "空格 暂停/继续 · WASD 行走 · H 询问 · N 跟随居民 · M 生活窗 · G GM进展 · ESC 释放"
 	status.text = "%s\n%d 个存档身份 · %d 人活动 · %s\n%s\n%s\n公共浆果 %d / %d · 生活事件 %d%s%s" % [title, snap.residents.size(), town.active_ids().size(), mode_label, controls, latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text, gm_text]
 	var axe: Dictionary = {}
 	for item in snap.life.get("items", []):

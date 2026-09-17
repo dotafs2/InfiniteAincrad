@@ -474,6 +474,7 @@ def main():
     parser.add_argument('--stop-on-decision-limit', action='store_true',
                         help='Keep advancing through idle time, then pause/capture after the decision cap and any in-flight model result; durable physical jobs remain pending.')
     parser.add_argument('--gm-export', type=Path, help='Optional .json file beneath the new --out directory for background-GM evidence from this same world.')
+    parser.add_argument('--gm-status', type=Path, help='Optional external read-only public GM completion snapshot shown by the town UI; never enters world or resident context.')
     args = parser.parse_args()
     if not 5 <= args.seconds <= 900 or not 1 <= args.max_requests <= 32:
         parser.error('Seconds 5..900; maximum requests 1..32.')
@@ -532,6 +533,8 @@ def main():
                 '--town-shutdown-wait=' + str(args.shutdown_wait)]
     if gm_export is not None:
         command += ['--town-gm-export=' + str(gm_export)]
+    if args.gm_status is not None:
+        command += ['--town-gm-status=' + str(args.gm_status.resolve())]
     if args.inquire_resident:
         command += ['--town-dialogue-fixture', '--town-inquire-resident=' + args.inquire_resident]
     if args.inquire_text is not None:
