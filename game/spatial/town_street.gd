@@ -24,6 +24,7 @@ const TownExpansion = preload("res://spatial/town_expansion.gd")
 const PlaceNotice = preload("res://spatial/town_place_notice.gd")
 const PlaceSteering = preload("res://spatial/town_place_steering.gd")
 const TownNavigation = preload("res://spatial/town_navigation.gd")
+const BREAD_SCENE_PATH := "res://assets/overnight20260918/bread_loaf.tscn"
 var town := Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
@@ -43,6 +44,13 @@ var life_feed: Label
 var life_panel: PanelContainer
 var session_start_life_seq := -1
 var session_start_request_ids: Dictionary = {}
+var bread_scene: PackedScene
+var resident_loaves: Dictionary = {}
+var resident_observer_camera: Camera3D
+var resident_focus_id := ""
+var startup_focus_resident_id := ""
+var startup_focus_baking_id := ""
+var start_life_panel_hidden := false
 var dialogue_target := ""
 var last_public_reply_seq := -1
 var last_inquiry_seconds := -10.0
@@ -133,6 +141,12 @@ func _ready() -> void:
 			_save_path = arg.trim_prefix("--town-save=")
 		if arg.begins_with("--town-capture="):
 			capture_dir = arg.trim_prefix("--town-capture=")
+		if arg.begins_with("--town-focus-resident="):
+			startup_focus_resident_id = arg.trim_prefix("--town-focus-resident=")
+		if arg.begins_with("--town-focus-baking="):
+			startup_focus_baking_id = arg.trim_prefix("--town-focus-baking=")
+		if arg == "--town-hide-life-panel":
+			start_life_panel_hidden = true
 		if arg.begins_with("--town-gm-export="):
 			gm_export_path = arg.trim_prefix("--town-gm-export=")
 			if gm_export_path.strip_edges().is_empty():
@@ -161,6 +175,8 @@ func _ready() -> void:
 		var startup_turn: Variant = startup_snapshot.godot.get("resident_turns", {}).get(startup_id, {})
 		if startup_turn is Dictionary:
 			session_start_request_ids[startup_id] = str(startup_turn.get("request_id", ""))
+	if ResourceLoader.exists(BREAD_SCENE_PATH):
+		bread_scene = load(BREAD_SCENE_PATH) as PackedScene
 	if not dialogue_resident_id.is_empty() and dialogue_resident_id not in town.active_ids():
 		push_error("Scripted inquiry target is not an active resident: " + dialogue_resident_id)
 		get_tree().quit(2)
@@ -257,6 +273,16 @@ func _ready() -> void:
 				_player.position = town.position_of(candidate.owner_id) + Vector3(0, 0.9, 1.5)
 				_camera.global_position = Vector3(0, 5.2, 13.0)
 				_camera.look_at(town.home_point(candidate.worker_id) + Vector3(0, 1.0, 0))
+	if start_life_panel_hidden and is_instance_valid(life_panel):
+		life_panel.visible = false
+	if not startup_focus_resident_id.is_empty():
+		if not _focus_resident(startup_focus_resident_id):
+			push_error("Startup focus target is not an active resident: " + startup_focus_resident_id)
+			get_tree().quit(2)
+	if not startup_focus_baking_id.is_empty():
+		if not _focus_baking_point(startup_focus_baking_id):
+			push_error("Startup focus target is not an installed baking point: " + startup_focus_baking_id)
+			get_tree().quit(2)
 
 func _configure_navigation() -> void:
 	pass
@@ -282,6 +308,13 @@ func _sync_residents() -> void:
 		actor.shirt_color = palette[index % palette.size()]
 		actor.hair_color = [Color("563827"), Color("302d2a"), Color("766953")][index % 3]
 		body.add_child(actor)
+		var loaf: Node3D = bread_scene.instantiate() as Node3D if bread_scene != null else _fallback_loaf_visual()
+		loaf.name = "HeldBakingLoaf"
+		loaf.position = Vector3(0.40, 0.82, -0.18)
+		loaf.rotation_degrees = Vector3(-8, 18, -12)
+		loaf.visible = false
+		actor.add_child(loaf)
+		resident_loaves[id] = loaf
 		actor.get_node("OriginalResidentBody/Torso").material_override = _simple_material(palette[index % palette.size()])
 		actors[id] = actor
 		bodies[id] = body
@@ -366,6 +399,11 @@ func _foraging_idle_exit(id: String, body: CharacterBody3D) -> Vector3:
 func _process(delta: float) -> void:
 	if status == null:
 		return
+	_update_resident_observer()
+	if nameplates != null:
+		# V overview, N resident follow and the player camera all share one overlay. Project
+		# against the camera that is actually current, never the camera used at startup.
+		nameplates.camera = get_viewport().get_camera_3d()
 	var capture_timeout := 150.0 if (repair_fixture and not gateway_mode and not restore_only) else (3.0 if paused else capture_seconds)
 	# The episode's own duration boundary is decided BEFORE any new resident is
 	# chosen, and on the same elapsed+delta value the capture below uses. A resident
@@ -732,6 +770,13 @@ func _run_model_turn(id: String) -> Dictionary:
 func _unhandled_input(event: InputEvent) -> void:
 	if _composing_dialogue():
 		return
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_N:
+		_focus_next_resident()
+		return
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_M:
+		if is_instance_valid(life_panel):
+			life_panel.visible = not life_panel.visible
+		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_SPACE:
 		paused = not paused
 		latest = "生活已暂停" if paused else "生活继续；时间只在运行时流逝"
@@ -867,6 +912,64 @@ func _build_nameplates() -> void:
 
 func _composing_dialogue() -> bool:
 	return is_instance_valid(dialogue_input) and dialogue_input.visible
+
+func _focus_next_resident() -> void:
+	# A spectator camera only: it follows the body's real transform but never moves the
+	# resident, the visitor, a job target, or any authoritative state.
+	var ids: Array = town.active_ids()
+	if ids.is_empty():
+		return
+	var current := ids.find(resident_focus_id)
+	_focus_resident(str(ids[(current + 1) % ids.size()]))
+
+func _focus_resident(id: String) -> bool:
+	if not bodies.has(id):
+		return false
+	resident_focus_id = id
+	if resident_observer_camera == null:
+		resident_observer_camera = Camera3D.new()
+		resident_observer_camera.name = "ResidentObserverCamera"
+		resident_observer_camera.fov = 64.0
+		resident_observer_camera.near = 0.05
+		add_child(resident_observer_camera)
+	_update_resident_observer()
+	resident_observer_camera.make_current()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	latest = "正在跟随 %s；再次按 N 查看下一位居民。" % town.resident(resident_focus_id).name
+	_refresh()
+	return true
+
+func _update_resident_observer() -> void:
+	if resident_observer_camera == null or not resident_observer_camera.current \
+			or resident_focus_id.is_empty() or not bodies.has(resident_focus_id):
+		return
+	var body: CharacterBody3D = bodies[resident_focus_id]
+	var actor: Node3D = actors.get(resident_focus_id)
+	var behind := Vector3(1.8, 1.45, 2.5)
+	if is_instance_valid(actor):
+		var facing_back: Vector3 = actor.global_basis.z
+		facing_back.y = 0.0
+		if facing_back.length_squared() > 0.01:
+			behind = facing_back.normalized() * 2.8 + Vector3.UP * 1.55
+	resident_observer_camera.global_position = body.global_position + behind
+	resident_observer_camera.look_at(body.global_position + Vector3.UP * 1.05)
+
+func _focus_baking_point(point_id: String) -> bool:
+	for point in town.baking_points():
+		if str(point.get("id", "")) != point_id:
+			continue
+		var raw: Array = point.get("position", [])
+		if raw.size() != 3:
+			return false
+		var centre := Vector3(float(raw[0]), float(raw[1]), float(raw[2]))
+		resident_focus_id = ""
+		_camera.make_current()
+		_camera.global_position = centre + Vector3(-3.4, 2.35, 4.2)
+		_camera.look_at(centre + Vector3.UP * 0.68)
+		latest = "正在查看 %s；这是存档中已安装工作点的只读画面。" % str(point.get("label", point_id))
+		_refresh()
+		return true
+	return false
 
 func _nearest_dialogue_resident() -> String:
 	var nearest := ""
@@ -1048,15 +1151,15 @@ func _refresh() -> void:
 		mode_label = "冷启动检查 · 暂停 · 无新增选择"
 	if repair_fixture and not gateway_mode and not restore_only:
 		mode_label = "离线自动修理演示（local_rule_policy）"
-	var title := "交易流程测试 · 非原镇存档" if str(snap.world_id).begins_with("fixture:") else "起始之城 · 生活移植验证"
+	var title := "交易流程测试 · 非原镇存档" if str(snap.world_id).begins_with("fixture:") else "艾恩葛朗特第一层 · 生活街区"
 	if not str(snap.world_id).begins_with("fixture:") and (bool(snap.godot.get("new_world_seed", false)) or str(snap.get("origin", {}).get("kind", "")) == "new_world_seed"):
-		title = "起始之城 · 独立新世界"
+		title = "艾恩葛朗特第一层 · 原创生活街区"
 	var repair_text := ""
 	if not snap.life.get("contracts", []).is_empty():
 		var contract: Dictionary = snap.life.contracts[-1]
 		repair_text = " · 修理：%s · %s" % [_repair_part_label(contract.part), _repair_status_label(contract.status)]
 	var gm_text := "" if gm_export_status.is_empty() else "\n" + gm_export_status
-	status.text = "%s\n%d 个存档身份 · %d 人活动 · %s\n空格 暂停/继续 · WASD 行走 · H 询问 · ESC 释放\n%s\n公共浆果 %d / %d · 生活事件 %d%s%s" % [title, snap.residents.size(), town.active_ids().size(), mode_label, latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text, gm_text]
+	status.text = "%s\n%d 个存档身份 · %d 人活动 · %s\n空格 暂停/继续 · WASD 行走 · H 询问 · N 跟随居民 · M 生活窗 · ESC 释放\n%s\n公共浆果 %d / %d · 生活事件 %d%s%s" % [title, snap.residents.size(), town.active_ids().size(), mode_label, latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text, gm_text]
 	var axe: Dictionary = {}
 	for item in snap.life.get("items", []):
 		if item.get("kind") == "axe":
@@ -1082,6 +1185,11 @@ func _refresh() -> void:
 		# also excludes gateway_mode, restore_only and scripted_trade.
 		var legacy_hand_axe := repair_fixture and not gateway_mode and not restore_only and not scripted_trade
 		actors[id].set_holds_axe(legacy_hand_axe and not axe.is_empty() and axe.get("custodian_id") == id, axe.get("edge", 0) == 100)
+		var held_loaf: Node3D = resident_loaves.get(id)
+		if is_instance_valid(held_loaf):
+			# Pure projection of the conserved baking ledger. The visual never grants food
+			# and disappears as soon as the resident really consumes its held loaf.
+			held_loaf.visible = int(town.baking_ledger(id).get("held", 0)) > 0
 	if town_tools != null:
 		var tools_axes: Dictionary = town_tools.axes
 		for item_id in tools_axes.keys():
@@ -1091,6 +1199,22 @@ func _refresh() -> void:
 	for index in berry_visuals.size():
 		berry_visuals[index].visible = index < snap.foraging.stock
 	_refresh_life_window(snap)
+
+func _fallback_loaf_visual() -> Node3D:
+	var root := Node3D.new()
+	root.name = "PrimitiveBreadLoafVisual"
+	var loaf := MeshInstance3D.new()
+	var mesh := CapsuleMesh.new()
+	mesh.radius = 0.09
+	mesh.height = 0.36
+	loaf.mesh = mesh
+	loaf.rotation_degrees.z = 90
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color("b8742f")
+	material.roughness = 0.92
+	loaf.material_override = material
+	root.add_child(loaf)
+	return root
 
 func _refresh_life_window(snap: Dictionary) -> void:
 	if not is_instance_valid(life_roster) or not is_instance_valid(life_feed):
