@@ -23,6 +23,7 @@ class UserLivingBootstrapTests(unittest.TestCase):
         self.save = self.root / "world.json"
         self.godot = self.root / "godot.exe"
         self.config = self.root / "config.json"
+        self.gm_status = self.root / "gm-public-status.json"
         self.sessions = self.root / "sessions"
         self.prior = self.root / "prior.sqlite3"
         self.save.write_text("{}", encoding="utf-8")
@@ -33,6 +34,7 @@ class UserLivingBootstrapTests(unittest.TestCase):
             "thinking_mode": "disabled",
             "api_key": "test-key",
         }), encoding="utf-8")
+        self.gm_status.write_text('{"fixture":"read-only-path"}', encoding="utf-8")
         self.prior_session = Ledger(self.prior, Policy())
         self.prior_session.initialize()
         self.profile = self.root / "profile.json"
@@ -40,6 +42,7 @@ class UserLivingBootstrapTests(unittest.TestCase):
             "save_path": str(self.save),
             "godot": str(self.godot),
             "config": str(self.config),
+            "gm_status": str(self.gm_status),
             "sessions_root": str(self.sessions),
             "prior_paid_session_records": [str(self.prior)],
         }), encoding="utf-8")
@@ -109,6 +112,7 @@ class UserLivingBootstrapTests(unittest.TestCase):
         self.assertEqual(command[command.index("--seconds") + 1], "900")
         self.assertEqual(command[command.index("--max-requests") + 1], "32")
         self.assertEqual(command[command.index("--concurrency") + 1], "1")
+        self.assertTrue(Path(command[command.index("--gm-status") + 1]).samefile(self.gm_status))
         records = list(self.sessions.rglob("kimi-user-session.sqlite3"))
         self.assertEqual(len(records), 1)
         guard = json.loads(records[0].with_suffix(".guard.json").read_text(encoding="utf-8"))
