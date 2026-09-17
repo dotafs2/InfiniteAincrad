@@ -418,6 +418,18 @@ class BudgetLauncherTests(unittest.TestCase):
         classification = launcher.classify_validation(0, capture, errors, '', False, 1)
         self.assertEqual(classification['validation_status'], 'passed')
 
+        flour = json.loads(json.dumps(turn))
+        flour.update(result={'ok': False, 'code': 'flour_unavailable'},
+                     action='baking:bake:fixture-oven')
+        fatal, recovered = launcher.classify_model_turns({'resident_turns': {'fixture:smith': flour}})
+        self.assertEqual(fatal, {})
+        self.assertEqual(recovered['fixture:smith']['code'], 'flour_unavailable')
+        for field, value in [('replan_policy', ''), ('action', 'life:rest')]:
+            invalid_flour = dict(flour, **{field: value})
+            fatal, recovered = launcher.classify_model_turns({'resident_turns': {'fixture:smith': invalid_flour}})
+            self.assertEqual(fatal, {'fixture:smith': 'rule_rejection'})
+            self.assertEqual(recovered, {})
+
         mutations = [
             lambda value: value.update(status='provider_error'),
             lambda value: value.update(result={'ok': False, 'code': 'invalid_choice'}),
