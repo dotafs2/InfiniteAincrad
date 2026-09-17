@@ -1,0 +1,141 @@
+{
+  "bodies": 10,
+  "checks": 58,
+  "cold_read": true,
+  "contact_tolerance_metres": 0.01,
+  "evidence_kind": "real_engine_scene_capsule_and_scenery_physics",
+  "failure_count": 0,
+  "failures": [],
+  "gravity_executed": false,
+  "model_calls": 0,
+  "negative_control_obstacle": false,
+  "penetrations": [],
+  "physics_frames": 45,
+  "process_id": 79464,
+  "provenance": "offline paused scene read",
+  "resident_rids": 10,
+  "residents": [
+    {
+      "capsule_height": 1.5,
+      "capsule_radius": 0.25,
+      "id": "shared:baker",
+      "on_floor": false,
+      "position": [
+        -20.3387603759766,
+        0.00083818071288988,
+        40.3780975341797
+      ],
+      "support": "/root/TownStreet/FirstFloorLivingQuarter/ContinuousValleyTerrain/@StaticBody3D@3"
+    },
+    {
+      "capsule_height": 1.5,
+      "capsule_radius": 0.25,
+      "id": "shared:carpenter",
+      "on_floor": false,
+      "position": [
+        -20.6746940612793,
+        0.000830510456580669,
+        38.8751106262207
+      ],
+      "support": "/root/TownStreet/FirstFloorLivingQuarter/ContinuousValleyTerrain/@StaticBody3D@3"
+    },
+    {
+      "capsule_height": 1.5,
+      "capsule_radius": 0.25,
+      "id": "shared:fisher",
+      "on_floor": false,
+      "position": [
+        33.8440246582031,
+        0.000935310265049338,
+        52.7963981628418
+      ],
+      "support": "/root/TownStreet/FirstFloorLivingQuarter/ContinuousValleyTerrain/@StaticBody3D@3"
+    },
+    {
+      "capsule_height": 1.5,
+      "capsule_radius": 0.25,
+      "id": "shared:gardener",
+      "on_floor": false,
+      "position": [
+        1.22635686397552,
+        0.00083396682748571,
+        54.1969947814941
+      ],
+      "support": "/root/TownStreet/FirstFloorLivingQuarter/ContinuousValleyTerrain/@StaticBody3D@3"
+    },
+    {
+      "capsule_height": 1.5,
+      "capsule_radius": 0.25,
+      "id": "shared:healer",
+      "on_floor": false,
+      "position": [
+        7.58949089050293,
+        0.000870883697643876,
+        54.391788482666
+      ],
+      "support": "/root/TownStreet/FirstFloorLivingQuarter/ContinuousValleyTerrain/@StaticBody3D@3"
+    },
+    {
+      "capsule_height": 1.5,
+      "capsule_radius": 0.25,
+      "id": "shared:herder",
+      "on_floor": false,
+      "position": [
+        35.4169120788574,
+        0.000935312709771097,
+        81.9908294677734
+      ],
+      "support": "/root/TownStreet/FirstFloorLivingQuarter/ContinuousValleyTerrain/@StaticBody3D@3"
+    },
+    {
+      "capsule_height": 1.5,
+      "capsule_radius": 0.25,
+      "id": "shared:innkeeper",
+      "on_floor": false,
+      "position": [
+        3.7813458442688,
+        0.000835918006487191,
+        40.7018814086914
+      ],
+      "support": "/root/TownStreet/FirstFloorLivingQuarter/ContinuousValleyTerrain/@StaticBody3D@3"
+    },
+    {
+      "capsule_height": 1.5,
+      "capsule_radius": 0.25,
+      "id": "shared:smith",
+      "on_floor": false,
+      "position": [
+        -21.056848526001,
+        0.00082658528117463,
+        39.6195869445801
+      ],
+      "support": "/root/TownStreet/FirstFloorLivingQuarter/ContinuousValleyTerrain/@StaticBody3D@3"
+    },
+    {
+      "capsule_height": 1.5,
+      "capsule_radius": 0.25,
+      "id": "shared:weaver",
+      "on_floor": false,
+      "position": [
+        6.91861724853516,
+        0.000827480107545853,
+        53.5483665466309
+      ],
+      "support": "/root/TownStreet/FirstFloorLivingQuarter/ContinuousValleyTerrain/@StaticBody3D@3"
+    },
+    {
+      "capsule_height": 1.5,
+      "capsule_radius": 0.25,
+      "id": "shared:well-keeper",
+      "on_floor": false,
+      "position": [
+        -11.8278703689575,
+        0.000935312244109809,
+        3.00054240226746
+      ],
+      "support": "/root/TownStreet/FirstFloorLivingQuarter/ContinuousValleyTerrain/@StaticBody3D@3"
+    }
+  ],
+  "scenario": "ten-world-street-physics",
+  "world_id": "research:gm-npc-20260917:living-quarter-01"
+}

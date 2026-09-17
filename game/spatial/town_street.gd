@@ -38,6 +38,9 @@ var berry_visuals: Array[Node3D] = []
 var latest := "世界已暂停。按空格继续；原事件与钱物已经载入。"
 var dialogue: Label
 var dialogue_input: LineEdit
+var life_roster: Label
+var life_feed: Label
+var life_panel: PanelContainer
 var dialogue_target := ""
 var last_public_reply_seq := -1
 var last_inquiry_seconds := -10.0
@@ -792,6 +795,46 @@ func _build_town_hud() -> void:
 			_close_dialogue()
 			get_viewport().set_input_as_handled())
 	conversation.add_child(dialogue_input)
+	# A read-only window onto the same authoritative state that drives the bodies.
+	# It creates no dialogue and chooses no action: every line comes from a current
+	# pending job, a durable resident-turn record, or a public world event.
+	life_panel = PanelContainer.new()
+	life_panel.anchor_left = 1.0
+	life_panel.anchor_right = 1.0
+	life_panel.offset_left = -400
+	life_panel.offset_right = -22
+	life_panel.offset_top = 20
+	life_panel.offset_bottom = 620
+	life_panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	life_panel.add_theme_stylebox_override("panel", style)
+	layer.add_child(life_panel)
+	var life_column := VBoxContainer.new()
+	life_panel.add_child(life_column)
+	var roster_title := Label.new()
+	roster_title.text = "十位居民 · 当前身体活动"
+	roster_title.add_theme_font_size_override("font_size", 20)
+	roster_title.add_theme_color_override("font_color", Color("f0cf88"))
+	life_column.add_child(roster_title)
+	life_roster = Label.new()
+	life_roster.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	life_roster.add_theme_font_size_override("font_size", 16)
+	life_column.add_child(life_roster)
+	var separator := HSeparator.new()
+	life_column.add_child(separator)
+	var feed_title := Label.new()
+	feed_title.text = "最近公开交流 / 生活结果"
+	feed_title.add_theme_font_size_override("font_size", 20)
+	feed_title.add_theme_color_override("font_color", Color("f0cf88"))
+	life_column.add_child(feed_title)
+	var feed_scroll := ScrollContainer.new()
+	feed_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	feed_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	life_column.add_child(feed_scroll)
+	life_feed = Label.new()
+	life_feed.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	life_feed.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	life_feed.add_theme_font_size_override("font_size", 15)
+	feed_scroll.add_child(life_feed)
 
 func _build_nameplates() -> void:
 	var overlay := TownNameplates.new()
@@ -807,6 +850,8 @@ func _build_nameplates() -> void:
 			dialogue_panel = dialogue_panel.get_parent()
 		if dialogue_panel is Control:
 			hud_controls.append(dialogue_panel as Control)
+	if is_instance_valid(life_panel):
+		hud_controls.append(life_panel)
 	overlay.configure(town, actors, cards, _camera, _player, hud_controls)
 	if town_tools != null:
 		town_tools.facts_enabled = false
@@ -1037,6 +1082,53 @@ func _refresh() -> void:
 				node.visible = not (repair_fixture and not gateway_mode and not restore_only and not scripted_trade and not axe.is_empty() and item_id == axe.get("id"))
 	for index in berry_visuals.size():
 		berry_visuals[index].visible = index < snap.foraging.stock
+	_refresh_life_window(snap)
+
+func _refresh_life_window(snap: Dictionary) -> void:
+	if not is_instance_valid(life_roster) or not is_instance_valid(life_feed):
+		return
+	var roster_lines: Array[String] = []
+	var resident_turns: Dictionary = snap.godot.get("resident_turns", {})
+	for id in town.active_ids():
+		var job: Dictionary = town.pending_job(id)
+		var activity := "休整" if job.is_empty() else _action_label(str(job.get("action", "")))
+		var moving := false
+		var body: CharacterBody3D = bodies.get(id)
+		if is_instance_valid(body):
+			moving = Vector2(body.velocity.x, body.velocity.z).length() > 0.05
+		if moving:
+			activity += " · 行走中"
+		var turn_note := ""
+		if gateway_mode or restore_only:
+			var turn: Variant = resident_turns.get(id, {})
+			var turn_status := str(turn.get("status", "尚无记录")) if turn is Dictionary else "尚无记录"
+			turn_note = " · " + {"pending": "正在独立决定", "settled": "决定已结算", "provider_error": "连接失败待后续"}.get(turn_status, turn_status)
+		roster_lines.append("%s  %s%s" % [str(town.resident(id).name), activity, turn_note])
+	life_roster.text = "\n".join(roster_lines)
+
+	var feed_lines: Array[String] = []
+	var events: Array = snap.life.get("events", [])
+	for offset in range(1, mini(events.size(), 24) + 1):
+		var event: Variant = events[events.size() - offset]
+		if not event is Dictionary:
+			continue
+		var row: Dictionary = event
+		var kind := str(row.get("type", ""))
+		var actor_id := str(row.get("actor_id", ""))
+		var actor_name := actor_id
+		if actor_id in town.active_ids():
+			actor_name = str(town.resident(actor_id).name)
+		var words := str(row.get("speech", row.get("text", ""))).strip_edges().replace("\n", " ")
+		var source := "AI" if row.get("source", "") == "opengameagent_live" else "世界"
+		if not words.is_empty():
+			if words.length() > 72:
+				words = words.left(72) + "…"
+			feed_lines.push_front("[%s · #%d] %s：%s" % [source, int(row.get("seq", -1)), actor_name, words])
+		elif kind in ["eat_ration", "harvest_ration", "rest", "bread_baked", "bread_eaten", "repair_completed", "resident_moved", "place_visited"]:
+			feed_lines.push_front("[%s · #%d] %s · %s" % [source, int(row.get("seq", -1)), actor_name, _action_label(kind)])
+		if feed_lines.size() >= 5:
+			break
+	life_feed.text = "\n\n".join(feed_lines) if not feed_lines.is_empty() else "还没有可公开展示的事件。"
 
 func _action_label(action: String) -> String:
 	return {"eat_ration": "进食", "rest": "休息", "harvest_ration": "采集", "approach": "走近交谈", "deliver": "交付工具", "work": "修理", "collect": "取回工具", "use_tool": "使用工具", "recover_material": "整理余料", "material_recovered": "已取得材料", "material_depleted": "余料已取完，本次未取得", "bake_bread": "烤面包", "bread_baked": "烤好一个自己的面包", "bread_eaten": "吃掉自己烤的面包", "baking_point_observed": "看到公共烤炉", "baking_route_installed": "公共烤炉已就位", "repair_edge": "修刃", "repair_handle": "修柄", "repair_completed": "修理完成", "resources_unavailable": "资源不足，未完成"}.get(action, action)
