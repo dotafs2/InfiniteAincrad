@@ -447,6 +447,46 @@ class BudgetLauncherTests(unittest.TestCase):
         self.assertEqual(fatal, {'fixture:old': 'rule_rejection', 'fixture:pending': 'pending'})
         self.assertEqual(recovered, {})
 
+    def test_only_exact_no_operation_session_limit_is_cold_recoverable(self):
+        request_id = 'turn:fixture:gardener:0:53'
+        turn = {
+            'status': 'provider_error',
+            'error': 'brain_session_request_limit',
+            'accepted_reply': {'ok': False, 'code': 'brain_session_request_limit'},
+            'request_id': request_id,
+            'command_id': request_id,
+            'provider_command_id': '',
+            'provenance': '',
+            'session_limit_recovery_spent': '',
+            'session_limit_recovery_attempt': False,
+        }
+        errors, waits = launcher.classify_model_turns(
+            {'resident_turns': {'fixture:gardener': turn}})
+        self.assertEqual(errors, {})
+        self.assertEqual(waits, {'fixture:gardener': {
+            'status': 'recoverable_wait', 'source_status': 'provider_error',
+            'code': 'brain_session_request_limit',
+            'recovery': 'cold_restart_fresh_turn',
+        }})
+
+        mutations = [
+            lambda value: value.update(error='brain_timeout'),
+            lambda value: value['accepted_reply'].update(command_id='unexpected-operation'),
+            lambda value: value.update(provider_command_id='provider-operation'),
+            lambda value: value.update(provenance='opengameagent_live'),
+            lambda value: value.update(session_limit_recovery_spent=request_id),
+            lambda value: value.update(session_limit_recovery_attempt=True),
+            lambda value: value.update(inflight=True),
+        ]
+        for index, mutate in enumerate(mutations):
+            with self.subTest(index=index):
+                changed = json.loads(json.dumps(turn))
+                mutate(changed)
+                fatal, recovered = launcher.classify_model_turns(
+                    {'resident_turns': {'fixture:gardener': changed}})
+                self.assertEqual(fatal, {'fixture:gardener': 'provider_error'})
+                self.assertEqual(recovered, {})
+
     def test_world_progress_uses_same_world_prelaunch_delta_not_absolute_history(self):
         world_id = 'fixture:restored-world'
         baseline = {'status': 'available', 'world_id': world_id, 'life_seq': 5,

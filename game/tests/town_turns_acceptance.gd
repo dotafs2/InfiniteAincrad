@@ -77,6 +77,37 @@ func run() -> void:
 	turns.town = after_crash
 	result = await turns.step("fixture:b")
 	check(not result.ok and turns.brains["fixture:b"].calls == 1, "cold load cannot convert error to wait or retry")
+	# The exact no-operation per-process limit is different: its saved receipt is
+	# deliberately eligible for one fresh turn after a cold start. It has neither a
+	# next_due nor a new own event, so admission itself must make that one turn due.
+	var limit_request := "turn:fixture:c:0:limit"
+	var limit_record: Dictionary = after_crash._state.godot.resident_turns["fixture:b"].duplicate(true)
+	limit_record.status = "provider_error"
+	limit_record.error = "brain_session_request_limit"
+	limit_record.accepted_reply = {"ok": false, "code": "brain_session_request_limit"}
+	limit_record.request_id = limit_request
+	limit_record.command_id = limit_request
+	limit_record.provider_command_id = ""
+	limit_record.provenance = ""
+	limit_record.seen_seq = turns._own_seq("fixture:c")
+	limit_record.session_limit_recovery_spent = ""
+	limit_record.session_limit_recovery_attempt = false
+	limit_record.erase("next_due")
+	after_crash._state.godot.resident_turns["fixture:a"].status = "disconnected"
+	after_crash._state.godot.resident_turns["fixture:c"] = limit_record
+	turns._local_limit_failures["fixture:c"] = limit_request
+	check(turns.ready_resident().is_empty(), "same-process session limit remains held")
+	turns._local_limit_failures.erase("fixture:c")
+	after_crash._state.godot.resident_turns["fixture:c"].session_limit_recovery_spent = limit_request
+	check(turns.ready_resident().is_empty(), "spent cold recovery remains held")
+	after_crash._state.godot.resident_turns["fixture:c"].session_limit_recovery_spent = ""
+	check(turns.ready_resident() == "fixture:c", "fresh cold session-limit recovery becomes due without invented evidence")
+	var calls_before: int = int(turns.brains["fixture:c"].calls)
+	result = await turns.step()
+	check(result.ok and result.code == "settled" and turns.brains["fixture:c"].calls == calls_before + 1,
+		"cold session-limit recovery consumes exactly one fresh turn")
+	after_crash._state.godot.resident_turns["fixture:c"].status = "ready"
+	after_crash._state.godot.resident_turns["fixture:c"].next_due = 0.0
 	# Simulate a crash after durable preparation, before any response is known.
 	after_crash._state.godot.resident_turns["fixture:b"].status = "pending"
 	check(after_crash.save_to(path).ok, "pending request snapshot saved")

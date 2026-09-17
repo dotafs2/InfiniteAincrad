@@ -271,7 +271,10 @@ func ready_resident() -> String:
 		# failure and may choose to continue waiting or to cancel that one trip.
 		if not town.pending_job(id).is_empty() and town.blocked_material_episode(id).is_empty():
 			continue
-		if record.is_empty() or _own_seq(id) > int(record.get("seen_seq", 0)) or town._state.godot.elapsed_seconds >= float(record.get("next_due", INF)):
+		# A cold-recovery class is itself the one bounded reason to become due. These
+		# receipts have no next_due and may have produced no event, so applying only
+		# the ordinary evidence/time gate would admit recovery above but never select it.
+		if _cold_recoverable(id, record) or record.is_empty() or _own_seq(id) > int(record.get("seen_seq", 0)) or town._state.godot.elapsed_seconds >= float(record.get("next_due", INF)):
 			return id
 	return ""
 
