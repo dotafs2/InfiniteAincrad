@@ -1,6 +1,8 @@
 import io
 import json
+import os
 from pathlib import Path
+import subprocess
 from types import SimpleNamespace
 import tempfile
 import unittest
@@ -114,10 +116,39 @@ class UserLivingBootstrapTests(unittest.TestCase):
         self.assertEqual(guard["policy"]["allocatable_nano"], 2_850_000_000)
         self.assertEqual(guard["policy"]["request_limit"], 32)
         self.assertEqual(guard["policy"]["deadline_utc"], int(now.timestamp()) + 1020)
+        self.assertEqual(
+            guard["policy"]["price_verified"],
+            "2026-09-18 https://platform.kimi.com/ K2.6 China")
         manifest = json.loads(next(self.sessions.rglob("session.json")).read_text(encoding="utf-8"))
         self.assertEqual(manifest["status"], "complete")
         self.assertEqual(manifest["cumulative_settled_before_cny"], 0.0)
         self.assertFalse((self.sessions / ".start-living-ai.lock").exists())
+        self.assertIn("本地费用估算：0.000000 元", output.getvalue())
+        self.assertIn("以供应商账单为准", output.getvalue())
+
+    @unittest.skipUnless(os.name == "nt" and Path(r"C:\Program Files\dotnet\dotnet.exe").is_file(),
+                         "Windows .NET host inheritance check")
+    def test_cmd_child_inherits_local_dotnet_runtime_settings(self):
+        shim_dir = self.root / "shim"
+        shim_dir.mkdir()
+        (shim_dir / "python.cmd").write_text(
+            "@echo off\n"
+            "echo DOTNET_ROOT=%DOTNET_ROOT%\n"
+            "echo DOTNET_ROOT_X64=%DOTNET_ROOT_X64%\n"
+            "echo DOTNET_ROLL_FORWARD=%DOTNET_ROLL_FORWARD%\n"
+            "exit /b 0\n", encoding="utf-8")
+        environment = dict(os.environ)
+        for key in ("DOTNET_ROOT", "DOTNET_ROOT_X64", "DOTNET_ROLL_FORWARD"):
+            environment.pop(key, None)
+        environment["PATH"] = str(shim_dir) + os.pathsep + environment["PATH"]
+        result = subprocess.run(
+            ["cmd.exe", "/d", "/c", str(bootstrap.ROOT / "StartLivingAI.cmd")],
+            cwd=bootstrap.ROOT, env=environment, capture_output=True, text=True,
+            encoding="utf-8", errors="replace", timeout=15)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn(r"DOTNET_ROOT=C:\Program Files\dotnet", result.stdout)
+        self.assertIn(r"DOTNET_ROOT_X64=C:\Program Files\dotnet", result.stdout)
+        self.assertIn("DOTNET_ROLL_FORWARD=LatestMajor", result.stdout)
 
     @staticmethod
     def _request():
