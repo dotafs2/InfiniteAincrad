@@ -283,7 +283,11 @@ def recoverable_stale_option_wait(turn):
     """
     if not isinstance(turn, dict) or turn.get('status') != 'rule_rejection':
         return False
-    if turn.get('result') != {'ok': False, 'code': 'option_unavailable'}:
+    result = turn.get('result')
+    if result not in ({'ok': False, 'code': 'option_unavailable'},
+                      {'ok': False, 'code': 'flour_unavailable'}):
+        return False
+    if result['code'] == 'flour_unavailable' and not str(turn.get('action', '')).startswith('baking:bake:'):
         return False
     if turn.get('replan_policy') != 'stale_option_v1':
         return False
@@ -337,7 +341,7 @@ def classify_model_turns(capture):
             waits[actor] = {
                 'status': 'recoverable_wait',
                 'source_status': 'rule_rejection',
-                'code': 'option_unavailable',
+                'code': turn['result']['code'],
                 'replan_policy': 'stale_option_v1',
                 'next_due': _finite_number(turn.get('next_due')),
             }
