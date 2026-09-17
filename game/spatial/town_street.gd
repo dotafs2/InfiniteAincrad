@@ -26,6 +26,7 @@ const PlaceSteering = preload("res://spatial/town_place_steering.gd")
 const TownNavigation = preload("res://spatial/town_navigation.gd")
 const BREAD_SCENE_PATH := "res://assets/overnight20260918/bread_loaf.tscn"
 const DIALOGUE_IDLE_HINT := "走近居民，按 H 输入你想说的话。"
+const RESTORE_DIALOGUE_IDLE_HINT := "只读游览；开启实时 AI 生活后可与居民交谈。"
 var town := Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
@@ -862,7 +863,7 @@ func _build_town_hud() -> void:
 	dialogue.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	dialogue.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	dialogue.add_theme_font_size_override("font_size", 20)
-	dialogue.text = DIALOGUE_IDLE_HINT
+	dialogue.text = RESTORE_DIALOGUE_IDLE_HINT if restore_only else DIALOGUE_IDLE_HINT
 	dialogue_scroll.add_child(dialogue)
 	dialogue_input = LineEdit.new()
 	dialogue_input.max_length = 512
@@ -1082,7 +1083,7 @@ func _composing_dialogue() -> bool:
 func _update_dialogue_panel_layout() -> void:
 	if not is_instance_valid(dialogue_panel) or not is_instance_valid(dialogue_scroll) or not is_instance_valid(dialogue):
 		return
-	var expanded := _composing_dialogue() or dialogue.text != DIALOGUE_IDLE_HINT
+	var expanded := _composing_dialogue() or dialogue.text not in [DIALOGUE_IDLE_HINT, RESTORE_DIALOGUE_IDLE_HINT]
 	dialogue_panel.offset_top = -250.0 if expanded else -92.0
 	dialogue_scroll.custom_minimum_size.y = 180.0 if expanded else 34.0
 
