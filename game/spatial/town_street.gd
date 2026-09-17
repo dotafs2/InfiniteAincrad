@@ -41,6 +41,8 @@ var dialogue_input: LineEdit
 var life_roster: Label
 var life_feed: Label
 var life_panel: PanelContainer
+var session_start_life_seq := -1
+var session_start_request_ids: Dictionary = {}
 var dialogue_target := ""
 var last_public_reply_seq := -1
 var last_inquiry_seconds := -10.0
@@ -153,6 +155,12 @@ func _ready() -> void:
 		push_error(JSON.stringify(loaded))
 		get_tree().quit(2)
 		return
+	var startup_snapshot: Dictionary = town.snapshot()
+	session_start_life_seq = int(startup_snapshot.life.get("seq", -1))
+	for startup_id in town.active_ids():
+		var startup_turn: Variant = startup_snapshot.godot.get("resident_turns", {}).get(startup_id, {})
+		if startup_turn is Dictionary:
+			session_start_request_ids[startup_id] = str(startup_turn.get("request_id", ""))
 	if not dialogue_resident_id.is_empty() and dialogue_resident_id not in town.active_ids():
 		push_error("Scripted inquiry target is not an active resident: " + dialogue_resident_id)
 		get_tree().quit(2)
@@ -1102,7 +1110,10 @@ func _refresh_life_window(snap: Dictionary) -> void:
 		if gateway_mode or restore_only:
 			var turn: Variant = resident_turns.get(id, {})
 			var turn_status := str(turn.get("status", "尚无记录")) if turn is Dictionary else "尚无记录"
-			turn_note = " · " + {"pending": "正在独立决定", "settled": "决定已结算", "provider_error": "连接失败待后续"}.get(turn_status, turn_status)
+			var request_id := str(turn.get("request_id", "")) if turn is Dictionary else ""
+			var current_run := not request_id.is_empty() and request_id != str(session_start_request_ids.get(id, ""))
+			var when := "本次" if current_run else "历史"
+			turn_note = " · " + {"pending": "%s正在独立决定" % when, "settled": "%s决定已结算" % when, "provider_error": "%s连接失败待后续" % when}.get(turn_status, "%s%s" % [when, turn_status])
 		roster_lines.append("%s  %s%s" % [str(town.resident(id).name), activity, turn_note])
 	life_roster.text = "\n".join(roster_lines)
 
@@ -1119,7 +1130,8 @@ func _refresh_life_window(snap: Dictionary) -> void:
 		if actor_id in town.active_ids():
 			actor_name = str(town.resident(actor_id).name)
 		var words := str(row.get("speech", row.get("text", ""))).strip_edges().replace("\n", " ")
-		var source := "AI" if row.get("source", "") == "opengameagent_live" else "世界"
+		var is_new := int(row.get("seq", -1)) > session_start_life_seq
+		var source := ("本次AI" if is_new else "历史AI") if row.get("source", "") == "opengameagent_live" else ("本次世界" if is_new else "历史世界")
 		if not words.is_empty():
 			if words.length() > 72:
 				words = words.left(72) + "…"
