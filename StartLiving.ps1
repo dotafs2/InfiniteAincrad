@@ -68,6 +68,12 @@ if (Test-Path -LiteralPath $localProfilePath -PathType Leaf) {
     if (-not $PSBoundParameters.ContainsKey('StopOnIdle') -and (Has-LocalSetting 'stop_on_idle')) { $StopOnIdle = [bool]$localProfile.stop_on_idle }
     if (-not $PSBoundParameters.ContainsKey('StopOnDecisionLimit') -and (Has-LocalSetting 'stop_on_decision_limit')) { $StopOnDecisionLimit = [bool]$localProfile.stop_on_decision_limit }
     if (-not $PSBoundParameters.ContainsKey('SkipBuild') -and (Has-LocalSetting 'skip_build')) { $SkipBuild = [bool]$localProfile.skip_build }
+    # An explicit observe request outranks live paths inherited from the local profile.
+    # An explicitly supplied gateway triple is deliberately left intact so the existing
+    # live+observe conflict check rejects that contradictory command line.
+    if ($explicitObserve -and -not $explicitGateway) {
+        $Ledger = $null; $Config = $null; $Out = $null; $GmExport = $null
+    }
 
     if (Has-LocalSetting 'mode') { $localMode = ([string]$localProfile.mode).ToLowerInvariant() }
     if ($localMode -notin @('', 'live', 'observe_only')) {
