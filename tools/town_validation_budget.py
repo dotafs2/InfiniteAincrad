@@ -39,6 +39,12 @@ class CarriedLedgerGate:
         self.owned_ids = set()
         self.sent = 0
         self.max_requests = max_requests
+        # Refuse before the provider, loopback server, output directory or engine
+        # starts. Ledger.reserve also enforces this, but discovering an expired
+        # carried policy only after a compiled adapter has durably marked its run
+        # attempt Unknown strands the world behind a misleading provider_error.
+        if ledger.deadline_reached():
+            raise BudgetDenied('Authorized usage window has ended')
         self.guard_sha256 = hashlib.sha256(ledger.guard.read_bytes()).hexdigest()
         meta, rows = self._snapshot()
         if any(row['state'] == 'reserved' for row in rows.values()):
