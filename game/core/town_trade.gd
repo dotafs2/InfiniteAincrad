@@ -29,6 +29,11 @@ const SKILL_ASK_NAMES := {
 	"metal_repair": "metalwork",
 }
 const TRADE_RANGE := 3.0
+const FOOD_HANDOFF_ACTION := "give_food"
+const FOOD_HANDOFF_EVENT := "food_handed_over"
+const FOOD_HANDOFF_PREFIX := "food:give:"
+const FOOD_HANDOFF_RANGE := 1.5
+const FOOD_CAPACITY := 2
 const REPAIR_SECONDS := 60.0
 const WALK_SECONDS := 1.0
 ## Voluntary, read-only observation of a neighbour's own running work (issue-194d1db6d25f, following
@@ -487,6 +492,32 @@ func _functioning_axe(id: String) -> bool:
 func _busy(id: String) -> bool:
 	return super.pending_job(id).is_empty() == false or _trade().get("jobs", {}).get(id, {}).is_empty() == false
 
+func _held_baked_food(id: String) -> int:
+	# A baked loaf is already attributed by the baking ledger. This narrow handoff moves only ordinary
+	# rations, so it never silently changes who baked or owns a loaf.
+	var baking: Variant = _state.godot.get("baking", {})
+	if not baking is Dictionary:
+		return 0
+	var ledgers: Variant = baking.get("ledgers", {})
+	if not ledgers is Dictionary:
+		return 0
+	var held := 0
+	for point_value in ledgers.values():
+		if not point_value is Dictionary:
+			continue
+		var ledger: Variant = point_value.get(id, {})
+		if ledger is Dictionary:
+			held += maxi(0, int(ledger.get("held", 0)))
+	return held
+
+func _ordinary_food(id: String) -> int:
+	return maxi(0, int(account(id).get("food", 0)) - _held_baked_food(id)) if id in active_ids() else 0
+
+func _food_handoff_available(id: String, recipient_id: String) -> bool:
+	return id in active_ids() and recipient_id in active_ids() and id != recipient_id \
+		and not _busy(id) and position_of(id).distance_to(position_of(recipient_id)) <= FOOD_HANDOFF_RANGE \
+		and _ordinary_food(id) >= 1 and int(account(recipient_id).get("food", 0)) < FOOD_CAPACITY
+
 func _repair_material_commitments(id: String, material: String) -> int:
 	# Accepted and delivered contracts still owe one future unit. Completed work has already consumed
 	# its unit, while cancelled/rejected/collected contracts owe none. Keep this derived from the
@@ -700,6 +731,12 @@ func trade_options(id: String) -> Array:
 				_option(result, {"id": "life:" + action, "label": action, "action": action})
 
 		for other in active_ids():
+			if _food_handoff_available(id, other):
+				_option(result, {"id": FOOD_HANDOFF_PREFIX + other,
+					"label": "把1份自己的普通口粮当面送给%s（自愿赠予，不是交易）" % resident(other).name,
+					"action": FOOD_HANDOFF_ACTION, "counterparty": other})
+
+		for other in active_ids():
 			if other == id:
 				continue
 			var target := _meeting_point(id, other)
@@ -908,6 +945,12 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 	if action == "wait":
 		commands[command_id] = {"payload": payload, "status": "completed"}
 		return {"ok": true, "code": "wait"}
+	if action == FOOD_HANDOFF_ACTION:
+		var handed_over := _apply_food_handoff(id, option, command_id, provenance)
+		if not handed_over.ok:
+			return handed_over
+		commands[command_id] = {"payload": payload, "status": "completed", "result": handed_over.duplicate(true)}
+		return handed_over
 	if action == OBSERVE_WORK:
 		# A verified, read-only sighting. Freeform speech is never accepted for it, so no observer's
 		# words can ever be presented as the observed fact.
@@ -978,6 +1021,24 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 		return result
 	commands[command_id] = {"payload": payload, "status": "pending" if result.get("pending", false) else "completed"}
 	return result
+
+func _apply_food_handoff(id: String, option: Dictionary, command_id: String, provenance: String) -> Dictionary:
+	var recipient_id := str(option.get("counterparty", ""))
+	# Re-derive every condition at submission. A moved resident, spent ration or newly full recipient
+	# is an ordinary stale option, never a forced or partial transfer.
+	if not _food_handoff_available(id, recipient_id):
+		return _failure("option_unavailable")
+	var donor_account := account(id)
+	var recipient_account := account(recipient_id)
+	donor_account.food = int(donor_account.food) - 1
+	recipient_account.food = int(recipient_account.food) + 1
+	var event := {"type": FOOD_HANDOFF_EVENT, "actor_id": id, "subject_id": recipient_id,
+		"recipient_ids": [id, recipient_id], "operation_id": command_id, "source": provenance,
+		"provenance": provenance, "quantity": 1, "contractual": false,
+		"text": "%s把1份自己的普通口粮当面送给了%s；这是赠予，不是交易。" % [resident(id).name, resident(recipient_id).name]}
+	_append_life_event(event)
+	return {"ok": true, "code": FOOD_HANDOFF_EVENT, "actor_id": id, "recipient_id": recipient_id,
+		"quantity": 1, "event_id": event.event_id}
 
 func _apply_share_skill(id: String, option: Dictionary, command_id: String, provenance: String, speech: String) -> Dictionary:
 	var recipient_id: String = str(option.get("counterparty", ""))
