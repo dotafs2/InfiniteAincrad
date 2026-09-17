@@ -50,6 +50,7 @@ func _initialize() -> void:
 		== "brain_context_window_exceeded", "actual OGA context branch is classified exactly")
 	check(brain.provider_failure_identifier("unrecognized provider detail") == "brain_provider_failed",
 		"unknown provider text remains sanitized")
+	brain.free()
 	print(JSON.stringify({"suite": "resident_brain_context_budget", "passed": failures.is_empty(),
 		"checks": checks, "failures": failures, "real_paid_calls": 0}))
 	quit(0 if failures.is_empty() else 1)
