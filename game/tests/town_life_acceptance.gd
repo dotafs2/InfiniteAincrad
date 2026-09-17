@@ -74,8 +74,74 @@ func run() -> void:
 	check(not restored.advance(INF).ok and not restored.advance(-1).ok, "invalid clock rejected")
 	for unused in range(15):
 		restored.advance(120)
-	check(restored.snapshot().foraging.stock == 1 and restored.snapshot().foraging.produced_total == 1, "one berry per 1800 seconds")
+	check(restored.snapshot().foraging.stock == 3 and restored.snapshot().foraging.produced_total == 3,
+		"one berry per 450 seconds refills only to unchanged capacity")
+	check(restored.snapshot().foraging.capacity == 3 and restored.snapshot().foraging.initial_stock == 1,
+		"faster maintenance changes neither capacity nor initial stock")
 	check(restored.account("fixture:c").energy == 35 and restored.resident("fixture:c").needs.hunger == 45, "survival drains on live time")
+
+	# A pre-change remainder remains valid and untouched by load or advance(0). The first positive
+	# tick keeps only its modulo-450 progress, so it never catches up missed production.
+	var legacy_path := "user://town-rules-legacy-growth-%d.json" % Time.get_ticks_usec()
+	var legacy_world := fixture()
+	legacy_world.foraging.stock = 0
+	legacy_world.foraging.capacity = 6
+	legacy_world.foraging.initial_stock = 6
+	legacy_world.foraging.harvested_total = 6
+	legacy_world.foraging.growth_remainder_seconds = 1799
+	var legacy_file := FileAccess.open(legacy_path, FileAccess.WRITE)
+	legacy_file.store_string(JSON.stringify(legacy_world, "", true, true))
+	legacy_file.close()
+	var legacy_bytes := FileAccess.get_file_as_bytes(legacy_path)
+	var legacy := Town.new()
+	check(legacy.load_from(legacy_path).ok, "legacy growth remainder below 1800 still loads")
+	check(FileAccess.get_file_as_bytes(legacy_path) == legacy_bytes
+		and legacy.snapshot().foraging.growth_remainder_seconds == 1799,
+		"legacy load preserves save bytes and timer value")
+	check(legacy.advance(0).ok and legacy.snapshot().foraging.growth_remainder_seconds == 1799,
+		"zero advance does not normalize legacy growth")
+	check(legacy.advance(1).ok, "first real legacy advance succeeds")
+	var normalized_legacy: Dictionary = legacy.snapshot().foraging
+	check(normalized_legacy.stock == 1 and normalized_legacy.produced_total == 1
+		and normalized_legacy.growth_remainder_seconds == 0,
+		"1799 legacy seconds normalize to 449 then one new second produces exactly one, never catch-up units")
+	check(normalized_legacy.capacity == 6 and normalized_legacy.initial_stock == 6,
+		"legacy normalization preserves the reviewed capacity six and initial stock six")
+
+	var legacy_exact_path := "user://town-rules-legacy-exact-%d.json" % Time.get_ticks_usec()
+	var legacy_exact_world := fixture()
+	legacy_exact_world.foraging.stock = 0
+	legacy_exact_world.foraging.harvested_total = 1
+	legacy_exact_world.foraging.growth_remainder_seconds = 900
+	var legacy_exact_file := FileAccess.open(legacy_exact_path, FileAccess.WRITE)
+	legacy_exact_file.store_string(JSON.stringify(legacy_exact_world, "", true, true))
+	legacy_exact_file.close()
+	var legacy_exact := Town.new()
+	check(legacy_exact.load_from(legacy_exact_path).ok and legacy_exact.advance(1).ok,
+		"legacy remainder on an old-period boundary advances normally")
+	check(legacy_exact.snapshot().foraging.stock == 0
+		and legacy_exact.snapshot().foraging.produced_total == 0
+		and legacy_exact.snapshot().foraging.growth_remainder_seconds == 1,
+		"900 legacy seconds discard two old cycles and add only the new second")
+
+	var boundary_path := "user://town-rules-growth-boundary-%d.json" % Time.get_ticks_usec()
+	var boundary_world := fixture()
+	boundary_world.foraging.stock = 0
+	boundary_world.foraging.harvested_total = 1
+	boundary_world.foraging.growth_remainder_seconds = 449
+	var boundary_file := FileAccess.open(boundary_path, FileAccess.WRITE)
+	boundary_file.store_string(JSON.stringify(boundary_world, "", true, true))
+	boundary_file.close()
+	var boundary := Town.new()
+	check(boundary.load_from(boundary_path).ok and boundary.advance(1).ok,
+		"449 plus one new second crosses the new boundary")
+	check(boundary.snapshot().foraging.stock == 1 and boundary.snapshot().foraging.produced_total == 1
+		and boundary.snapshot().foraging.growth_remainder_seconds == 0,
+		"new 450-second boundary produces exactly one unit")
+	check(boundary.advance(120).ok and boundary.advance(120).ok
+		and boundary.snapshot().foraging.growth_remainder_seconds == 240
+		and boundary.snapshot().foraging.produced_total == 1,
+		"repeated positive advances are new elapsed time, not idempotent retries")
 	var locked := Town.new()
 	check(locked.acquire_writer(path).ok, "another writer owns save")
 	var before := restored.snapshot()
@@ -97,6 +163,9 @@ func run() -> void:
 			check(source.load_from(arg.trim_prefix("--town-save=")).ok, "complete private migration loads")
 			check(source.snapshot().residents.size() == 13 and source.snapshot().life.seq == 37, "13 original identities and 37 events")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(legacy_path))
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(legacy_exact_path))
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(boundary_path))
 	print(JSON.stringify({"suite": "town_life", "checks": checks, "failures": failures, "paid_calls": 0}))
 	quit(0 if failures == 0 else 1)
 
