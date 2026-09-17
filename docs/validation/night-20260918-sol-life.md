@@ -1,0 +1,61 @@
+# 2026-09-18 十人生活现场首轮交付
+
+## 已接入的真实入口
+
+`StartLiving.cmd` 现在明确把用户带入 `res://scenes/town_street.tscn`，不再需要记住 `Run-Street.ps1 -Town`，也不会误入项目默认的单居民 `street_trial.tscn` 或 `StartDemo.cmd` 的暂停美术预览。
+
+无付费本地观察必须使用原档的**副本**。这个入口会写入传入的存档；不应把研究原档直接传给它：
+
+```powershell
+.\StartLiving.cmd `
+  -Godot D:\lucidgloves\InfiniteAincrad\tmp\toolchain\Godot_v4.7.2-stable_mono_win64\Godot_v4.7.2-stable_mono_win64.exe `
+  -SkipBuild `
+  -SavePath D:\path\to\disposable-world-copy.json
+```
+
+该命令是明确标注的 `local_rule_policy` 无模型观察，不应被描述为 AI 自主生活。真实模型共同世界仍由已有的有界启动器统一建立 loopback gateway、预算授权和退出排空，然后把同一 `town_street.tscn` 传入 `--town-gateway`：
+
+```powershell
+python -X utf8 tools/run_town_model_validation.py `
+  --godot D:\lucidgloves\InfiniteAincrad\tmp\toolchain\Godot_v4.7.2-stable_mono_win64\Godot_v4.7.2-stable_mono_win64.exe `
+  --ledger D:\path\to\existing-ledger.json `
+  --config D:\path\to\authorized-config.json `
+  --save D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery\private\night-delivery\delivery-live\world.json `
+  --out D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery\private\night-delivery\live-run-01 `
+  --seconds 300 --max-requests 12 --concurrency 1 `
+  --gm-export D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery\private\night-delivery\live-run-01\gm\world.json
+```
+
+这条真实路径的关键场景参数是 `res://scenes/town_street.tscn -- --town-save=<same-world> --town-gateway`。没有预算配置、既有账本和授权时，不启动模型；本次首轮验证产生 0 个模型调用。
+
+## 玩家实际能看到什么
+
+右侧新增一个只读生活窗口：
+
+- 十位居民全部具名列出，逐人显示当前世界工作；身体有水平速度时显示“行走中”。
+- gateway／恢复模式显示每个人自己的 durable resident-turn 状态，不把一个公共模型状态冒充十个人。
+- 最近五条公开交流或生活结果来自 `life.events`；只有 `source=opengameagent_live` 才标为 `AI`。界面不生成文本、不选择动作、不展示私有理由。
+- 原有近身姓名牌、真实身体动画、公开对话框、玩家 `H` 询问、门窗和俯瞰仍在同一个世界中。
+
+![生活现场 HUD：十人活动与公开交流](night-20260918-sol-life/living-world-hud.png)
+
+## 实机验证
+
+验证只读取原研究世界后复制到隔离路径；源档及冷读副本 SHA-256 都是 `5d4d848dc4048ec588c872b72a3511bfe23c796b31c3eca22aa315bc1cb719b6`，世界仍为 seq166。
+
+- 冷读十身体物理检查：58 项通过、0 失败；10 个 `CharacterBody3D`、10 个不同 RID、10 个启用胶囊、0 个超过 1 cm 的穿模，存档字节不变。原始结果见 [ten-body-cold-evidence.json](night-20260918-sol-life/ten-body-cold-evidence.json)。
+- 未暂停物理检查：10 人全部落地、0 穿模；旅店老板保留的真实 pending `eat_ration` 在 45 个物理帧内移动 0.848 米。旧探针仍要求每人距存档起点小于 0.75 米，因此该轮 67 项中 66 项通过，唯一失败正是这次真实移动，不把它伪称全绿。原始结果见 [ten-body-motion-evidence.json](night-20260918-sol-life/ten-body-motion-evidence.json)。
+- 16 栋生活街区检查：10 个居民、16 组门窗实体、40/40 条住所到公共地点路线可达、10/10 个采集工作点有空间、导航状态 `ready`。原始结果见 [living-quarter-report.json](night-20260918-sol-life/living-quarter-report.json)。
+- `town_dialogue_ui_acceptance.gd`：14 项通过，确认玩家输入仍走权威事件路径且界面不发明回复。
+- `town_merge_acceptance.gd`：200 项通过、0 失败，其中姓名牌／HUD 布局 145 项通过；1000×700 逻辑视口压力检查仍有可见姓名牌且不挡原 HUD。
+- C# 构建：0 警告、0 错误。
+
+![16 栋生活街区中的十位具名居民](night-20260918-sol-life/living-quarter-ten-residents.png)
+
+引擎仍报告既有的 NavigationServer3D deprecated、agent radius voxel rounding 和 4 个 edge merge warning；它们没有阻止本轮 40/40 路线与碰撞检查，但不能写成“日志无警告”。
+
+## 场景关系与限制
+
+`demo_town.gd` 与真实生活不是两套模拟：它继承 `pcg/town.gd → living_town.gd → town_street.gd`，只是把正式 `living_quarter` 换成较重的 PCG `DemoQuarter`。本轮入口选择正式 `town_street.tscn`，因为 seq166 存档已经声明 `first-floor-market-quarter-v1`，可直接得到 16 栋住所、室内碰撞、门窗和十个真实身体；无需把静止美术预览冒充生活交付。
+
+本轮没有执行新的付费居民决定，也没有证明治疗师已经回应 seq166 的求助、面包师已采用烤炉或十位 GM 已持续接力。公开生活窗口只是把这些真实缺口与已有成果放进可观察世界；后续 live run 和 GM 维护必须由协调任务在共同存档上继续。
