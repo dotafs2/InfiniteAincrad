@@ -1338,7 +1338,7 @@ func _refresh() -> void:
 	if restore_only:
 		mode_label = "暂停回看 · 不调用 AI · 正在查看已保存进展"
 	elif gateway_mode and not scripted_trade:
-		mode_label = ("实时生活已暂停 · 暂停期间不调用 AI · 进展自动保存" if paused
+		mode_label = ("实时生活已暂停 · 暂停发起新行动 · 进展自动保存" if paused
 			else "实时生活中 · 按需调用 AI · 进展自动保存")
 	if repair_fixture and not gateway_mode and not restore_only:
 		mode_label = "离线自动修理演示（local_rule_policy）"
