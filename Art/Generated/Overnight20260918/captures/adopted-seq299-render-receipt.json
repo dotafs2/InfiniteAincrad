@@ -1,0 +1,70 @@
+{
+  "source_kind": "Real life09 frozen world seq299; independent render copies",
+  "render_mode": "restore-only",
+  "new_model_api_calls": 0,
+  "canonical_opened": false,
+  "product_code_changed": false,
+  "resources_changed": false,
+  "renders": [
+    {
+      "view": "smith",
+      "mode": "restore-only real life09 frozen source copy",
+      "source_sha256_before": "4b185131d0d02e2e0f976412879f4554cdf5de8a144cfe3b636b3c3a847f9f30",
+      "copy_sha256_before": "4b185131d0d02e2e0f976412879f4554cdf5de8a144cfe3b636b3c3a847f9f30",
+      "started_at": "2026-09-18T05:38:09.4455827+08:00",
+      "pid": 67556,
+      "exit_code": 0,
+      "finished_at": "2026-09-18T05:38:23.8557564+08:00",
+      "copy_sha256_after": "4b185131d0d02e2e0f976412879f4554cdf5de8a144cfe3b636b3c3a847f9f30",
+      "source_sha256_after": "4b185131d0d02e2e0f976412879f4554cdf5de8a144cfe3b636b3c3a847f9f30",
+      "life_seq": 299,
+      "new_decisions": "none_restore",
+      "validation_decisions_started": 0
+    },
+    {
+      "view": "oven",
+      "mode": "restore-only real life09 frozen source copy",
+      "source_sha256_before": "4b185131d0d02e2e0f976412879f4554cdf5de8a144cfe3b636b3c3a847f9f30",
+      "copy_sha256_before": "4b185131d0d02e2e0f976412879f4554cdf5de8a144cfe3b636b3c3a847f9f30",
+      "started_at": "2026-09-18T05:38:23.8779216+08:00",
+      "pid": 74748,
+      "exit_code": 0,
+      "finished_at": "2026-09-18T05:38:37.7515440+08:00",
+      "copy_sha256_after": "4b185131d0d02e2e0f976412879f4554cdf5de8a144cfe3b636b3c3a847f9f30",
+      "source_sha256_after": "4b185131d0d02e2e0f976412879f4554cdf5de8a144cfe3b636b3c3a847f9f30",
+      "life_seq": 299,
+      "new_decisions": "none_restore",
+      "validation_decisions_started": 0
+    }
+  ],
+  "baking_state": {
+    "command_id": "turn:shared:smith:1:24",
+    "command_status": "completed",
+    "action": "bake_bread",
+    "actor_id": "shared:smith",
+    "provenance": "opengameagent_live",
+    "result_code": "bread_baked",
+    "held": 1,
+    "eaten": 0,
+    "public_flour": 3,
+    "active_baking_jobs": 0
+  },
+  "visual_observations": [
+    "Black round loaf visible at smith side; partially obscured by arm in dim room",
+    "No new grasp pose or eating animation inferred",
+    "Three visible flour sacks and label 3 at oven"
+  ],
+  "screenshot_sha256": {
+    "10-smith-held-bread-seq299.png": "6b549c9d5c2b0a65b80f2bd07bd4da8d85dcac41dc41f6d7eced92970236e93d",
+    "11-oven-three-flour-seq299.png": "722433b39f9432a8819848125d59fae366e1c3827f2e4596bb2d75725b2281c8"
+  },
+  "errors": [],
+  "warnings": [
+    "Deprecated navigation bake API",
+    "agent_radius voxel precision warning",
+    "Navigation region synchronization: 4 edge errors"
+  ],
+  "adoption_proven_by_frozen_command_and_ledger": true,
+  "smith_ate_bread": false,
+  "baker_adoption_claim": false
+}

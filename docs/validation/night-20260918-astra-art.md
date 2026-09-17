@@ -105,3 +105,17 @@ Blender 5.2.1 导出：三件均无退化三角面。Godot 4.7.2 .NET 在独立�
 ![烤炉 v2 审计副本街景](../../Art/Generated/Overnight20260918/captures/06-v2-audit-street.png)
 
 炉具、四袋面粉与清空的工作区正常。两次短进程用于补齐滚动中段，PID63204、68428均exit0无驻留；两个capture均 `new_decisions=none_restore`、`validation_decisions_started=0`，无 ERROR，仍有前述导航警告。世界源/副本前后哈希均为 `d29323f619934fb6c7938da7fe42f72b4fc642ecc9a7296f950452d22dc04a55`；GM源/副本前后哈希均为 `2ab3651a9abced2f3e336e0c07bf648c856aca79b291b7106d8fd4a04dec2475`。完整精简收据在同目录 `v2-gm-render-receipt.json`，包括截图hash、面板尺寸、10条状态与只读边界；未公开完整世界存档。
+
+## 真实采用后的 seq299：铁匠持有面包与三份面粉
+
+主协调提供真实 life09 结束后的冻结文件 `delivery-live/gm-source-seq299-after-life09.json`。本任务再次复制为两个独立渲染副本，只读使用 delivery 原场景，分别带现有 `--town-focus-resident=shared:smith` 和 `--town-focus-baking=public_bakery_oven_west_forecourt_v2`，均为 `--town-restore`。没有改动产品代码、资源、角色姿势、灯光或截图，没有打开 canonical world。
+
+已从副本独立核实：命令 `turn:shared:smith:1:24` 的 action 为 `bake_bread`，provenance 为 `opengameagent_live`，状态 `completed`、结果 `bread_baked`、数量1；v2账本中 `shared:smith` 为 **held=1 / eaten=0**，公共面粉3，baking jobs为空。这次存在真实完成命令与守恒账本，所以可以说**铁匠石青已实际采用烘焙能力并仍持有一份面包**；不能改说白枝采用，也不能把HUD的“进食”动作标签当成这份面包已经吃完。
+
+![铁匠石青身侧实际持有的黑圆面包](../../Art/Generated/Overnight20260918/captures/10-smith-held-bread-seq299.png)
+
+原产品聚焦镜头中，石青身侧可见黑圆面包，部分被手臂遮住且室内较暗；这是持有状态的附着显示，没有由本任务摆出新的手部抓握姿势，也不声称捕捉了烘焙过程或进食动画。颜色与圆形沿用已核对的原著参考。
+
+![同一 seq299 的炉位三袋面粉](../../Art/Generated/Overnight20260918/captures/11-oven-three-flour-seq299.png)
+
+炉位标签为公共面粉3，三袋实际显示、工作区继续清空。2026-09-18 05:38:09–05:38:37，两短进程PID67556/74748均exit0，无ERROR，原导航警告仍有。两份捕获均seq299、`none_restore`、0个新决策；本轮新增模型API为0。冻结源与两个副本前后SHA-256全部保持 `4b185131d0d02e2e0f976412879f4554cdf5de8a144cfe3b636b3c3a847f9f30`。精简收据 `captures/adopted-seq299-render-receipt.json` 保存上述命令/账本字段、哈希、截图指纹和显示限制，不公开完整私有存档。采用事实来自真实冻结命令与账本，截图是该已发生结果的零API回看。
