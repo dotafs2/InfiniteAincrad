@@ -7,9 +7,9 @@ param(
     [string]$Ledger,
     [string]$Config,
     [string]$Out,
-    [ValidateRange(3, 900)]
+    [ValidateRange(5, 900)]
     [int]$Seconds = 300,
-    [ValidateRange(0, 32)]
+    [ValidateRange(1, 32)]
     [int]$MaxRequests = 12,
     [ValidateRange(1, 3)]
     [int]$Concurrency = 1,
