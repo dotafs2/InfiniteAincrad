@@ -274,6 +274,60 @@ def read_world_baseline(save):
             'world_elapsed_seconds': _finite_number(world_elapsed)}
 
 
+def recoverable_stale_option_wait(turn):
+    """Recognize the runtime's exact nonfatal stale-choice cooldown receipt.
+
+    This is an export/classification rule only. It mirrors the narrow recovery marker
+    written by TownTurns after a valid model reply loses a race with world state; it
+    neither shortens the cooldown nor makes any other rejection recoverable.
+    """
+    if not isinstance(turn, dict) or turn.get('status') != 'rule_rejection':
+        return False
+    if turn.get('result') != {'ok': False, 'code': 'option_unavailable'}:
+        return False
+    if turn.get('replan_policy') != 'stale_option_v1':
+        return False
+    due = _finite_number(turn.get('replan_not_before'))
+    next_due = _finite_number(turn.get('next_due'))
+    if due is None or next_due is None or due < 0 or next_due != due:
+        return False
+    request_id = turn.get('request_id')
+    provider_command = turn.get('provider_command_id')
+    accepted = turn.get('accepted_reply')
+    return (isinstance(request_id, str) and bool(request_id)
+            and turn.get('command_id') == request_id
+            and isinstance(provider_command, str) and bool(provider_command)
+            and isinstance(accepted, dict) and accepted.get('ok') is True
+            and accepted.get('model_returned') is True
+            and accepted.get('command_id') == provider_command
+            and turn.get('inflight', False) is False)
+
+
+def classify_model_turns(capture):
+    """Split fatal turn states from exact, already-verified recoverable waits."""
+    turns = capture.get('resident_turns', {}) if isinstance(capture, dict) else {}
+    if not isinstance(turns, dict):
+        return {}, {}
+    errors, waits = {}, {}
+    for actor, turn in turns.items():
+        if not isinstance(turn, dict):
+            continue
+        status = turn.get('status')
+        if status not in ('pending', 'provider_error', 'rule_rejection'):
+            continue
+        if recoverable_stale_option_wait(turn):
+            waits[actor] = {
+                'status': 'recoverable_wait',
+                'source_status': 'rule_rejection',
+                'code': 'option_unavailable',
+                'replan_policy': 'stale_option_v1',
+                'next_due': _finite_number(turn.get('next_due')),
+            }
+        else:
+            errors[actor] = status
+    return errors, waits
+
+
 def classify_validation(engine_exit, capture, model_errors, budget_stop_reason,
                         shutdown_incomplete, upstream_requests):
     """Classify this formal model-validation launch, separately from engine health.
@@ -608,8 +662,7 @@ def main():
                                                      ledger_after=ledger.status(), gateway_shutdown=shutdown))
     capture_path = out / 'capture/evidence.json'
     capture = json.loads(capture_path.read_text(encoding='utf-8')) if capture_path.exists() else {}
-    errors = {actor: turn['status'] for actor, turn in capture.get('resident_turns', {}).items()
-              if turn.get('status') in ('pending', 'provider_error', 'rule_rejection')}
+    errors, recoverable_waits = classify_model_turns(capture)
     try:
         gate.check()
     except Exception:
@@ -638,7 +691,9 @@ def main():
                                              result.returncode, gate.sent)
     passed = classification['validation_status'] == 'passed'
     summary = {'engine_exit': result.returncode, 'validation_passed': passed,
-               **classification, 'model_errors': errors, 'ledger_before': before, 'ledger_after': after,
+               **classification, 'model_errors': errors,
+               'recoverable_model_waits': recoverable_waits,
+               'ledger_before': before, 'ledger_after': after,
                'capture_exists': (out / 'capture/evidence.json').exists(), 'original_world_promoted': False,
                'budget_stop_reason': gate.failure, 'upstream_requests': gate.sent, 'upstream_concurrency': 1,
                'carried_uncertainty_reviewed': gate.review is not None, 'gateway_shutdown': shutdown,

@@ -391,6 +391,62 @@ class BudgetLauncherTests(unittest.TestCase):
         self.assertEqual(failed['validation_status'], 'failed')
         self.assertEqual(failed['classification_reasons'], ['engine_exit_nonzero'])
 
+    def test_only_exact_stale_option_cooldown_is_a_recoverable_wait(self):
+        turn = {
+            'status': 'rule_rejection',
+            'result': {'ok': False, 'code': 'option_unavailable'},
+            'replan_policy': 'stale_option_v1',
+            'replan_not_before': 1900.5,
+            'next_due': 1900.5,
+            'request_id': 'turn:fixture:herder:0:31',
+            'command_id': 'turn:fixture:herder:0:31',
+            'provider_command_id': 'provider-operation-31',
+            'accepted_reply': {
+                'ok': True, 'model_returned': True,
+                'command_id': 'provider-operation-31',
+            },
+        }
+        capture = {'validation_decisions_started': 1,
+                   'resident_turns': {'fixture:herder': turn}}
+        errors, waits = launcher.classify_model_turns(capture)
+        self.assertEqual(errors, {})
+        self.assertEqual(waits, {'fixture:herder': {
+            'status': 'recoverable_wait', 'source_status': 'rule_rejection',
+            'code': 'option_unavailable', 'replan_policy': 'stale_option_v1',
+            'next_due': 1900.5,
+        }})
+        classification = launcher.classify_validation(0, capture, errors, '', False, 1)
+        self.assertEqual(classification['validation_status'], 'passed')
+
+        mutations = [
+            lambda value: value.update(status='provider_error'),
+            lambda value: value.update(result={'ok': False, 'code': 'invalid_choice'}),
+            lambda value: value['result'].update(extra='unreviewed'),
+            lambda value: value.update(replan_policy=''),
+            lambda value: value.update(replan_not_before=True),
+            lambda value: value.update(next_due=1901.0),
+            lambda value: value.update(provider_command_id='different-operation'),
+            lambda value: value.update(accepted_reply={'ok': False, 'model_returned': False,
+                                                       'command_id': 'provider-operation-31'}),
+            lambda value: value.update(inflight=True),
+        ]
+        for index, mutate in enumerate(mutations):
+            with self.subTest(index=index):
+                changed = json.loads(json.dumps(turn))
+                mutate(changed)
+                fatal, recovered = launcher.classify_model_turns(
+                    {'resident_turns': {'fixture:herder': changed}})
+                self.assertEqual(fatal, {'fixture:herder': changed['status']})
+                self.assertEqual(recovered, {})
+
+        fatal, recovered = launcher.classify_model_turns({'resident_turns': {
+            'fixture:old': {'status': 'rule_rejection',
+                            'result': {'ok': False, 'code': 'option_unavailable'}},
+            'fixture:pending': {'status': 'pending'},
+        }})
+        self.assertEqual(fatal, {'fixture:old': 'rule_rejection', 'fixture:pending': 'pending'})
+        self.assertEqual(recovered, {})
+
     def test_world_progress_uses_same_world_prelaunch_delta_not_absolute_history(self):
         world_id = 'fixture:restored-world'
         baseline = {'status': 'available', 'world_id': world_id, 'life_seq': 5,
