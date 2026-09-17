@@ -30,6 +30,8 @@
 
 这条真实路径的关键场景参数仍是 `res://scenes/town_street.tscn -- --town-save=<same-world> --town-gateway`。`Ledger / Config / Out` 缺任意一项都会报错且什么也不启动；也不会暗中退回脚本生活。既没有完整 live 三件套、也没有显式 `-ObserveOnly` 时同样拒绝启动。本次首轮验证产生 0 个模型调用。
 
+普通用户可把 [StartLiving.local.example.json](../../StartLiving.local.example.json) 复制为被 Git 忽略的 `private/night-delivery/start-living.local.json`，只填写现有存档、Godot、授权配置和账本的**路径**，之后直接双击 `StartLiving.cmd`。`mode=live` 会调用同一个有界真实 AI runner，并在 `out_root` 下逐次建立带时间戳的新目录；`mode=observe_only` 明确打开无新决定回看。可配置带时区的 `expires_at` 和 `on_expiry=observe_only`：到期时启动器会显示警告并只读回看，不创建、补充、重置或延长账本。该本机 JSON 不应写 token，也不会进入 Git。
+
 ## 玩家实际能看到什么
 
 右侧新增一个只读生活窗口：
@@ -37,7 +39,7 @@
 - 十位居民全部具名列出，逐人显示当前世界工作；身体有水平速度时显示“行走中”。
 - gateway／恢复模式显示每个人自己的 durable resident-turn 状态，并用启动时的 request id 区分“历史决定”和“本次决定”，不把一个公共模型状态冒充十个人。
 - 最近五条公开交流或生活结果来自 `life.events`；只有 `source=opengameagent_live` 才标为 AI，并按启动时的 life seq 明示“历史 AI”或“本次 AI”。界面不生成文本、不选择动作、不展示私有理由。
-- 原有近身姓名牌、真实身体动画、公开对话框、玩家 `H` 询问、门窗和俯瞰仍在同一个世界中。`N` 依次跟随十位真实身体，`M` 收起／展开生活窗；观察相机只读身体坐标，不移动居民、玩家或工作目标。
+- 原有近身姓名牌、真实身体动画、公开对话框、玩家 `H` 询问、门窗和俯瞰仍在同一个世界中。无对话时底部仅保留一行提示，按 `H` 输入或出现真实对话文本时恢复完整面板。`N` 依次跟随十位真实身体，`M` 收起／展开生活窗；观察相机只读身体坐标，不移动居民、玩家或工作目标。
 - HUD 将场景如实标为“艾恩葛朗特第一层 · 原创生活街区”，不把这组原创 16 栋布局冒充原著“起始之城”或托尔巴纳的精确地图。
 
 ![生活现场 HUD：十人活动与公开交流](night-20260918-sol-life/living-world-hud.png)
