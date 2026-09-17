@@ -349,6 +349,27 @@ func destination(id: String, action: String) -> Vector3:
 			return _vector(point.position) + BAKING_WORK_OFFSET
 	return super.destination(id, action)
 
+func _personal_attempt_found_no_flour(id: String, point_id: String) -> bool:
+	# Compatibility for saves written before failed bake attempts became observations. The resident's
+	# own durable turn receipt is still authoritative personal evidence, and public flour never
+	# replenishes, so it is sufficient to suppress this one stale option without changing the save.
+	var turns: Variant = _state.godot.get("resident_turns", {})
+	if not turns is Dictionary:
+		return false
+	var record: Variant = turns.get(id, {})
+	if not record is Dictionary:
+		return false
+	var option_id := BAKING_OPTION_PREFIX + point_id
+	var entries: Array = record.get("history", []).duplicate() if record.get("history", []) is Array else []
+	entries.append(record)
+	for entry in entries:
+		if not entry is Dictionary or str(entry.get("action", "")) != option_id:
+			continue
+		var receipt: Variant = entry.get("result", {})
+		if receipt is Dictionary and str(receipt.get("code", "")) == "flour_unavailable":
+			return true
+	return false
+
 func trade_options(id: String) -> Array:
 	var result := super.trade_options(id)
 	if id not in active_ids() or not _state.godot.has("baking") or _busy(id):
@@ -361,7 +382,8 @@ func trade_options(id: String) -> Array:
 	for point_id in known:
 		var point: Dictionary = _baking().get("points", {}).get(str(point_id), {})
 		var observation: Dictionary = known.get(point_id, {})
-		if point.is_empty() or int(observation.get("flour_remaining", 0)) < 1:
+		if point.is_empty() or int(observation.get("flour_remaining", 0)) < 1 \
+				or _personal_attempt_found_no_flour(id, str(point_id)):
 			continue
 		_option(result, {"id": BAKING_OPTION_PREFIX + str(point_id), "action": BAKING_ACTION,
 			"label": "用%s的1份公共面粉烤一个自己的面包：站到炉边烤%d秒（面粉有限，烤好就能自己吃）" % [str(point.label), int(BAKING_WORK_SECONDS)],
@@ -409,6 +431,14 @@ func _start_bake(id: String, point_id: String, command_id: String, provenance: S
 	var store := _ensure_baking()
 	var point: Dictionary = store.points[point_id]
 	if int(point.flour_remaining) < 1:
+		# The resident already knew this point and just attempted its offered action. Preserve the
+		# authoritative rejection as personal feedback: no remote discovery or broadcast occurs,
+		# but this resident no longer receives the same stale bake option on the next bounded turn.
+		_append_life_event({"type": "baking_point_observed", "actor_id": id, "recipient_ids": [id],
+			"operation_id": command_id, "source": "resident_bake_attempt_feedback", "point_id": point_id,
+			"flour_remaining": 0, "text": "%s：我这次尝试时得知公共面粉已经用完。" % str(point.label)})
+		store.known[id][point_id] = {"flour_remaining": 0,
+			"observed_elapsed": _state.godot.elapsed_seconds, "event_seq": _state.life.seq}
 		return _failure("flour_unavailable")
 	# The reservation is the world's own pending input: the flour leaves the public stock here and
 	# can only become a loaf, or return to the stock if the bake honestly cannot hand one over.
@@ -544,6 +574,8 @@ func _baking_knowledge_source_for(id: String, point_id: String, observation: Dic
 				return "personal_line_of_sight_observation"
 			if recorded == "host_proximity_observation":
 				return "personal_proximity_observation"
+			if recorded == "resident_bake_attempt_feedback":
+				return "personal_action_feedback"
 			return "historical_baking_observation"
 	return "historical_baking_observation"
 
