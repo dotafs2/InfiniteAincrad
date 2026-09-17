@@ -10,6 +10,7 @@ import bmesh
 import math
 import json
 import hashlib
+import sys
 from pathlib import Path
 from mathutils import Vector, Matrix
 
@@ -18,6 +19,8 @@ ROOT = HERE.parents[2]
 OUT = ROOT / 'game/assets/overnight20260918'
 OUT.mkdir(parents=True, exist_ok=True)
 records = []
+BREAD_ONLY = '--bread-only' in sys.argv
+previous_records = json.loads((HERE/'manifest.json').read_text(encoding='utf-8'))['assets'] if BREAD_ONLY else []
 
 
 def reset():
@@ -74,6 +77,9 @@ def bounds(objects):
 
 
 def export(asset_id, root_name, target, provenance):
+    if BREAD_ONLY and asset_id != 'bread_loaf':
+        records.append(next(r for r in previous_records if r['id'] == asset_id))
+        return
     objects = [o for o in bpy.context.scene.objects if o.type == 'MESH']
     bpy.context.view_layer.update()
     lo, hi = bounds(objects)
@@ -139,10 +145,28 @@ for node in tree.body:
         chosen.append(node)
 namespace = dict(bpy=bpy, math=math, Vector=Vector, Matrix=Matrix, TAU=math.tau, STYLE='overnight20260918')
 exec(compile(ast.Module(body=chosen,type_ignores=[]),str(recipe),'exec'), namespace)
+# Publisher-hosted Progressive 1, Aria section 4 explicitly describes the
+# inexpensive NPC bakery bread as dark brown and round. Keep one existing asset
+# id and all gameplay semantics; only its visual recipe is aligned here.
+namespace['PALETTE']['bread'] = ('59402D', .92, 0)
+namespace['PALETTE']['bread_score'] = ('35271C', .94, 0)
+namespace['PALETTE']['bread_light'] = ('98774F', .94, 0)
 g = namespace['Geo']()
-namespace['loaf'](g, (0,0,.07), (.18,.09,.07))
+# Adapt the existing sphere-and-scored-crust recipe to a round footprint.
+# Restrict each score to the loaf surface; the old oval recipe's outer scores
+# otherwise overhang the edge when switched to its four-score round variant.
+g.sphere((0,0,.07), (.13,.13,.07), 'bread', 28, 14)
+for x in (-.067,-.022,.022,.067):
+    span = math.sqrt(.13*.13-x*x)*.72
+    points=[]
+    for k in range(13):
+        y = -span + 2*span*k/12
+        z = .07 + .07*math.sqrt(1-(x/.13)**2-(y/.13)**2)
+        points.append((x,y,z+.0005))
+    g.tube(points,.0035,'bread_score',6)
+    g.tube([(x+.003,y,z+.001) for x,y,z in points],.002,'bread_light',6)
 g.finish('BreadLoaf', bpy.context.collection)
-export('bread_loaf', 'BreadLoaf', [.36,.15,.18], {'source':str(recipe.relative_to(ROOT)).replace('\\','/'), 'adaptation':'Existing project loaf geometry recipe exported as one independent ration. No food inventory or production logic.'})
+export('bread_loaf', 'BreadLoaf', [.26,.15,.26], {'source':str(recipe.relative_to(ROOT)).replace('\\','/'), 'adaptation':'Existing project loaf recipe, dark brown round bread aligned to Progressive 1 Aria section 4. No price, cream reward, food inventory or production logic encoded.', 'primary_reference':'https://dengekibunko.jp/novecomi/novel/16817330648099677277/16817330648100108071.html'})
 
 reset()
 linen = mat('ON_Linen', (.62,.54,.38))

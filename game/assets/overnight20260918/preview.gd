@@ -46,7 +46,7 @@ func _run() -> void:
 	stage.add_child(floor_node)
 	var ids := ["baking_oven", "flour_sack", "bread_loaf"]
 	var positions := [Vector3(-0.72,0,0), Vector3(0.5,0,0.08), Vector3(1.10,0,0.08)]
-	var expected := [Vector3(1,1,.76), Vector3(.24,.30,.24), Vector3(.36,.15,.18)]
+	var expected := [Vector3(1,1,.76), Vector3(.24,.30,.24), Vector3(.26,.15,.26)]
 	for index in ids.size():
 		var packed: PackedScene = load("res://assets/overnight20260918/%s.tscn" % ids[index])
 		if packed == null:
@@ -68,7 +68,7 @@ func _run() -> void:
 		report.assets.append(record)
 		visual.position = positions[index]
 		var label := Label3D.new()
-		label.text = ["REUSED HEARTH\n1.00 x 1.00 x 0.76 m", "FLOUR UNIT\n0.24 x 0.30 x 0.24 m", "ONE LOAF\n0.36 x 0.15 x 0.18 m"][index]
+		label.text = ["REUSED HEARTH\n1.00 x 1.00 x 0.76 m", "FLOUR UNIT\n0.24 x 0.30 x 0.24 m", "DARK BREAD\n0.26 x 0.15 x 0.26 m"][index]
 		label.position = positions[index] + Vector3(0,-.005,.70)
 		label.font_size = 30
 		label.pixel_size = .0015
@@ -98,6 +98,10 @@ func _run() -> void:
 	camera.position = Vector3(-.05,1.30,2.1)
 	camera.look_at(Vector3(-.72,.50,0))
 	await _capture("03-godot-oven-close.png")
+	camera.size = .70
+	camera.position = Vector3(1.48,.42,.9)
+	camera.look_at(Vector3(1.10,.06,.08))
+	await _capture("04-godot-bread-close.png")
 	var ok := true
 	for record in report.assets:
 		ok = ok and record.bounds_ok and record.pure_visual

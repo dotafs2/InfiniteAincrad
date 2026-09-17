@@ -36,12 +36,12 @@
       "id": "bread_loaf",
       "root": "BreadLoaf",
       "glb": "game/assets/overnight20260918/bread_loaf.glb",
-      "triangles": 1352,
+      "triangles": 1944,
       "degenerate_triangles": 0,
       "dimensions_godot_m": [
-        0.36,
+        0.26,
         0.15,
-        0.18
+        0.26
       ],
       "origin": "bottom center",
       "front": "+Z",
@@ -55,11 +55,12 @@
         "TC_bread_score",
         "TC_bread_light"
       ],
-      "bytes": 46280,
-      "sha256": "048b1dd942f8c1418889f9cf9468fdba7719046ee72189836c6d91f0be7480dc",
+      "bytes": 65580,
+      "sha256": "6ae0029df5576b854031f841c89e10c3ebcabe7780bf163d2a60ed0790ced936",
       "provenance": {
         "source": "Art/Generated/TravelCargo20260912/geometry.py",
-        "adaptation": "Existing project loaf geometry recipe exported as one independent ration. No food inventory or production logic."
+        "adaptation": "Existing project loaf recipe, dark brown round bread aligned to Progressive 1 Aria section 4. No price, cream reward, food inventory or production logic encoded.",
+        "primary_reference": "https://dengekibunko.jp/novecomi/novel/16817330648099677277/16817330648100108071.html"
       },
       "collision": "none; visual only"
     },
