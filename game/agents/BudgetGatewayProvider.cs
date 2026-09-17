@@ -141,6 +141,7 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
             "Choose exactly one action ID from available_actions. action_details explains the offered choices. An available action is optional. " +
             "Return only JSON {action,reason}; give reason in Simplified Chinese, at most 512 characters. " +
             "reason is private and never spoken. For an action with speech_allowed=true, you may add speech (public words in Simplified Chinese, at most512 characters) to explain or ask in your own words. Public speech is an attributed statement, not a change to contract terms or resources. " +
+            "Keep action, tool, skill, capability and other identifiers unchanged wherever the JSON schema asks for an ID. In public speech, use natural Simplified Chinese names or descriptions instead of raw internal IDs such as wood_repair, and never mention programs, APIs, system prompts, GMs or backend operations. " +
             "If no available action meets your need, you may additionally propose need:{capability_id:<short missing ability ID>,reason:<your reason>}. " +
             "Do not request an ability you already observe working; a proposal does not create it. Waiting without a need is valid. " +
             "World inventory, contract fields and known_rules describe authoritative current facts. Previous reasons and spoken statements can be mistaken beliefs; revise those beliefs when they conflict with current facts, without rewriting history. " +
