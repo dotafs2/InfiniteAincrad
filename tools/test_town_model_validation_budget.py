@@ -5,6 +5,7 @@ No user ledger/config is read, and no real provider object or model request is u
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import closing, contextmanager, redirect_stderr, redirect_stdout
 from dataclasses import replace
+from datetime import datetime, timedelta, timezone
 import hashlib
 import io
 import json
@@ -126,9 +127,9 @@ class BudgetLauncherTests(unittest.TestCase):
             thread.join(5)
             self.assertFalse(thread.is_alive())
 
-    def post(self, url, operation='fresh-1', resident='fixture-new-resident'):
+    def post(self, url, operation='fresh-1', resident='fixture-new-resident', token='fixture-local-token'):
         request = urllib.request.Request(url, data=json.dumps(request_body()).encode(), headers={
-            'Authorization': 'Bearer fixture-local-token', 'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json',
             'X-Hearth-Operation': operation, 'X-Hearth-Resident': resident})
         opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
         try:
@@ -506,6 +507,123 @@ class BudgetLauncherTests(unittest.TestCase):
                 launcher.validate_paths(out, save, path.resolve())
         with self.assertRaises(ValueError):
             launcher.validate_paths((launcher.ROOT / 'game' / 'private-test').resolve(), save)
+
+    def test_drain_names_workers_still_pending_at_engine_exit_without_claiming_a_settlement(self):
+        """A reply that lands after the engine exited is named, never inferred."""
+        started, release = threading.Event(), threading.Event()
+        provider = FakeProvider(started=started, release=release)
+        tracker = launcher.OperationTracker()
+        gateway = launcher.TrackingGateway(EvidenceGateway(self.ledger, provider, self.out, self.gate(
+            concurrency=1, max_requests=1)), tracker)
+        server = launcher.DrainBudgetServer(('127.0.0.1', 0), handler_type(gateway, 'fixture-local-token'),
+                                            grace_seconds=5.0)
+        thread = threading.Thread(target=server.serve_forever, kwargs={'poll_interval': 0.01}, daemon=True)
+        thread.start()
+        url = f'http://127.0.0.1:{server.server_port}/v1/chat/completions'
+        engine = threading.Thread(target=self.post, args=(url, 'late-turn'), daemon=True)
+        engine.start()
+        try:
+            self.assertTrue(started.wait(5), 'the fixture request never reached the provider')
+            # The engine is gone while this request is still upstream: the reply crosses
+            # the engine's own cutoff, so nothing here can have applied it.
+            timer = threading.Timer(0.4, release.set)
+            timer.start()
+            try:
+                shutdown = launcher.drain_gateway(server, thread, tracker)
+            finally:
+                timer.cancel()
+                release.set()
+        finally:
+            server.stop_intake()
+            server.shutdown()
+            server.server_close()
+            thread.join(5)
+            engine.join(5)
+        self.assertFalse(thread.is_alive())
+        self.assertTrue(shutdown['intake_closed'])
+        self.assertEqual(shutdown['workers_pending_at_engine_exit'], 1)
+        self.assertEqual(shutdown['operations_pending_at_engine_exit'], ['late-turn'])
+        self.assertTrue(shutdown['engine_exited_with_workers_pending'])
+        self.assertTrue(shutdown['drained_complete'])
+        self.assertEqual(shutdown['unresolved_workers'], 0)
+        # Worker lifetime is not a settlement claim: only the ledger receipt is.
+        self.assertNotIn('late_settled_operations', shutdown)
+        self.assertNotIn('late_reply_unapplied', shutdown)
+        self.assertEqual(json.loads(self.rows()['late-turn'])['state'], 'settled')
+        self.assertEqual(provider.calls, 1)
+        with self.assertRaises(OSError):
+            self.post(url, 'after-engine-exit')
+        self.assert_original_preserved()
+
+    def test_engine_budget_covers_the_shutdown_wait_and_an_owed_turn_is_never_a_pass(self):
+        """The engine may finish a reply after --seconds; a run that did not is honest."""
+        save = self.root / 'world.json'
+        save.write_text(json.dumps(self.world_save()), encoding='utf-8')
+        out = self.root / 'new-run'
+        config = self.root / 'fake-config.json'
+        config.write_text('{"api_key":"fixture-must-not-appear-in-output"}', encoding='utf-8')
+        pin_path = self.root / 'review.json'
+        pin_path.write_text(json.dumps(self.pin), encoding='utf-8')
+        started, release = threading.Event(), threading.Event()
+        provider = FakeProvider(started=started, release=release)
+        outcome, engine = {}, {}
+        args = ['launcher', '--godot', 'FAKE_GODOT', '--ledger', str(self.ledger.path),
+                '--save', str(save), '--config', str(config), '--out', str(out), '--seconds', '5',
+                '--max-requests', '1', '--shutdown-wait', '12',
+                '--carried-uncertainty-pin', str(pin_path)]
+        before = datetime.now(timezone.utc)
+
+        def fake_engine(command, **kwargs):
+            self.assertIn('--town-duration=5', command)
+            self.assertIn('--town-shutdown-wait=12.0', command)
+            self.assertEqual(command[command.index('--timeout') + 1], '62')
+            scope = json.loads(Path(kwargs['env']['AINCRAD_GATEWAY_RUN_CONFIG']).read_text())
+            deadline = datetime.fromisoformat(scope['deadline_utc'])
+            # The authorization window must hold both the episode and its shutdown wait.
+            self.assertGreaterEqual(deadline, before + timedelta(seconds=5 + 12 + 54))
+            self.assertLessEqual(deadline, datetime.now(timezone.utc) + timedelta(seconds=5 + 12 + 56))
+            endpoint_document = json.loads((out / 'endpoint.json').read_text())
+            endpoint = endpoint_document['base_url'] + '/chat/completions'
+
+            def engine_call():
+                try:
+                    outcome['response'] = self.post(endpoint, 'turn:shared:weaver:0:22', 'shared:weaver',
+                                                    endpoint_document['api_key'])
+                except Exception as exc:  # Named here instead of lost in a thread traceback.
+                    outcome['error'] = repr(exc)
+
+            engine['thread'] = threading.Thread(target=engine_call, daemon=True)
+            engine['thread'].start()
+            self.assertTrue(started.wait(5), 'the fixture request never reached the provider: ' + str(outcome))
+            threading.Timer(0.4, release.set).start()
+            (out / 'capture').mkdir()
+            capture = {'world_id': 'fixture:model-validation-world', 'source_seq': 0, 'life_seq': 0,
+                       'new_events': [], 'pending_count': 0, 'validation_decisions_started': 1,
+                       'resident_turns': {'shared:weaver': {'status': 'pending',
+                                                            'request_id': 'turn:shared:weaver:0:22'}}}
+            (out / 'capture' / 'evidence.json').write_text(json.dumps(capture), encoding='utf-8')
+            return subprocess.CompletedProcess(command, 3, 'Offline engine stub: unresolved shutdown', '')
+
+        with patch.object(sys, 'argv', args), patch.object(launcher, 'KimiProvider', return_value=provider), \
+                patch.object(launcher.subprocess, 'run', side_effect=fake_engine), redirect_stdout(io.StringIO()):
+            self.assertEqual(launcher.main(), 1)
+        engine['thread'].join(5)
+        self.assertFalse(engine['thread'].is_alive())
+        self.assertEqual(outcome['response'][0], 200, outcome)
+        result = json.loads((out / 'result.json').read_text())
+        self.assertEqual(result['shutdown_wait_seconds'], 12.0)
+        self.assertEqual(result['validation_status'], 'failed')
+        self.assertFalse(result['validation_passed'])
+        self.assertIn('engine_exit_nonzero', result['classification_reasons'])
+        self.assertEqual(result['model_errors'], {'shared:weaver': 'pending'})
+        self.assertEqual(result['upstream_requests'], 1)
+        shutdown = result['gateway_shutdown']
+        self.assertEqual(shutdown['operations_pending_at_engine_exit'], ['turn:shared:weaver:0:22'])
+        self.assertTrue(shutdown['engine_exited_with_workers_pending'])
+        self.assertTrue(shutdown['drained_complete'])
+        self.assertNotIn('late_settled_operations', shutdown)
+        self.assertEqual(json.loads(self.rows()['turn:shared:weaver:0:22'])['state'], 'settled')
+        self.assert_original_preserved()
 
 
 if __name__ == '__main__':
