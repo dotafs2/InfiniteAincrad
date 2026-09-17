@@ -77,3 +77,15 @@ Blender 5.2.1 导出：三件均无退化三角面。Godot 4.7.2 .NET 在独立�
 此图为原存档可丢弃副本安装后的街区截图；canonical源档未改的说明来自①交接，不以这张图证明正式存档已安装、居民已烘焙或手持面包已显示。
 
 **闭环复核：** ①提交 `e705146` 后重新提供同路径近景，最终图 SHA-256 为 `9469155833943ca7accc236183a73c4bf5220f32d03fa364626ab902d55733df`。已独立打开图像并只读检查袋子位置：五袋全部落在炉侧地面，炉口 +Z 正前工作区已清空，炉体朝向、尺度与材质保持正常；上述唯一视觉建议已解决，无需继续修改自有资源。①报告烘焙物理66/66、合并200/200通过，这两项是①的工程验证结果，本美术任务没有重复运行或将其改称独立复测。
+
+## seq214 已安装冻结快照的短实渲
+
+协调方随后提供 host-reviewed 安装后的冻结源 `delivery-live/gm-source-seq214-installed.json`，本任务将它复制到自身 ignored 私有渲染目录，再运行已集成的 `delivery/game/scenes/town_street.tscn`。参数为 `--town-restore --town-focus-baking=public_bakery_oven_west_forecourt_v1 --town-hide-life-panel --town-capture=<自身目录>`，只加载副本；没有打开 canonical world、修改 delivery 源码或新建模型请求。
+
+2026-09-18 03:59:33–03:59:47，自己创建的 Hidden Godot PID 57568 正常退出，exit 0；包含启动、场景加载与约3秒暂停模式捕获。实际证据报告 `life_seq=214`、10个活动身份、`new_decisions=none_restore`。炉体、标签公共面粉4、炉侧四袋与清空的 +Z 工作区均已目视核对。
+
+冻结源前/后、渲染副本前/后四次 SHA-256 完全相同：`7f96a3c5c81be38588bc85c110f67cd6fbab91bede19fbaddf0f108d9b41b4a2`。本次日志无 ERROR，但有导航旧 API、agent_radius体素精度和4条边合并警告，不能写成“全部无警告”。精简收据保存在 `Art/Generated/Overnight20260918/captures/installed-seq214-render-receipt.json`，未公开存档或完整世界事件。
+
+![实际安装后 seq214 冻结副本近景](../../Art/Generated/Overnight20260918/captures/05-installed-seq214.png)
+
+此图证明已安装冻结状态可以在已集成街区中显示；居民保持暂停，**不证明居民已经发现、走到或采用烘焙能力**。这些生活采用事实仍需主协调的真实运行证据。
