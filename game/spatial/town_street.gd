@@ -1336,7 +1336,10 @@ func _refresh() -> void:
 	if scripted_trade:
 		mode_label = "脚本化交易验收（无模型调用）"
 	if restore_only:
-		mode_label = "冷启动检查 · 暂停 · 无新增选择"
+		mode_label = "暂停回看 · 不调用 AI · 正在查看已保存进展"
+	elif gateway_mode and not scripted_trade:
+		mode_label = ("实时生活已暂停 · 暂停期间不调用 AI · 进展自动保存" if paused
+			else "实时生活中 · 按需调用 AI · 进展自动保存")
 	if repair_fixture and not gateway_mode and not restore_only:
 		mode_label = "离线自动修理演示（local_rule_policy）"
 	var title := "交易流程测试 · 非原镇存档" if str(snap.world_id).begins_with("fixture:") else "艾恩葛朗特第一层 · 生活街区"
@@ -1348,7 +1351,9 @@ func _refresh() -> void:
 		repair_text = " · 修理：%s · %s" % [_repair_part_label(contract.part), _repair_status_label(contract.status)]
 	var gm_text := "" if gm_export_status.is_empty() else "\n" + gm_export_status
 	var controls := "V 总览/返回 · N 跟随居民 · M 生活窗 · G GM进展 · WASD 行走 · ESC 释放" if restore_only else "空格 暂停/继续 · WASD 行走 · H 询问 · N 跟随居民 · M 生活窗 · G GM进展 · ESC 释放"
-	status.text = "%s\n%d 个存档身份 · %d 人活动 · %s\n%s\n%s\n公共浆果 %d / %d · 生活事件 %d%s%s" % [title, snap.residents.size(), town.active_ids().size(), mode_label, controls, latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text, gm_text]
+	var resident_line := "%d 位居民在场 · %s" % [town.active_ids().size(), mode_label] \
+		if (gateway_mode and not scripted_trade) or restore_only else "%d 个存档身份 · %d 人活动 · %s" % [snap.residents.size(), town.active_ids().size(), mode_label]
+	status.text = "%s\n%s\n%s\n%s\n公共浆果 %d / %d · 生活事件 %d%s%s" % [title, resident_line, controls, latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text, gm_text]
 	var axe: Dictionary = {}
 	for item in snap.life.get("items", []):
 		if item.get("kind") == "axe":
