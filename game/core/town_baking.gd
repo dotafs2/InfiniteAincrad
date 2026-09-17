@@ -42,7 +42,7 @@ const BAKING_OPTION_PREFIX := "baking:bake:"
 ## loaf occupies one of those units: the bake is offered and started only while the resident can
 ## really hold it.
 const BAKING_FOOD_CAPACITY := 2
-const BAKING_EVENT_TYPES := ["baking_route_installed", "baking_point_observed", "bread_baked", "bread_eaten", "baking_failed"]
+const BAKING_EVENT_TYPES := ["baking_route_installed", "baking_route_superseded", "baking_point_observed", "bread_baked", "bread_eaten", "baking_failed"]
 const BAKING_NEED_EVENT_TYPES := ["ask_help", "reply_help", "visitor_reply"]
 const BAKING_STATE_KEYS := ["schema_version", "points", "known", "jobs", "commands", "installs", "ledgers"]
 const BAKING_JOURNALS := ["trade", "materials", "places"]
@@ -209,6 +209,90 @@ func install_baking_route(spec: Dictionary, source_seq: int, command_id: String)
 		"text": "公共烤炉已就位。"})
 	return {"ok": true, "code": "baking_route_installed", "capability_id": BAKING_CAPABILITY_ID,
 		"route_id": BAKING_ROUTE_ID, "point_id": spec.id}
+
+func _baking_point_unused(point_id: String, point: Dictionary) -> bool:
+	# Replacement is deliberately narrower than removal: only a never-discovered, never-used
+	# installation with all of its original flour may move. Empty-looking historical containers
+	# still count as use so this operation can never erase ambiguous evidence.
+	if int(point.get("flour_remaining", -1)) != int(point.get("initial_flour", -2)):
+		return false
+	var baking := _baking()
+	for id in baking.get("known", {}):
+		var known: Variant = baking.known[id]
+		if known is Dictionary and known.has(point_id):
+			return false
+	for id in baking.get("jobs", {}):
+		var job: Variant = baking.jobs[id]
+		if job is Dictionary and str(job.get("point_id", "")) == point_id:
+			return false
+	for command_id in baking.get("commands", {}):
+		var command: Variant = baking.commands[command_id]
+		var payload: Variant = command.get("payload", {}) if command is Dictionary else {}
+		if payload is Dictionary and str(payload.get("point_id", "")) == point_id:
+			return false
+	if baking.get("ledgers", {}).has(point_id):
+		return false
+	for event in _state.life.events:
+		if event is Dictionary and str(event.get("point_id", "")) == point_id \
+				and str(event.get("type", "")) in ["baking_point_observed", "bread_baked", "bread_eaten", "baking_failed"]:
+			return false
+	return true
+
+func _matching_baking_supersession(command_id: String, old_point_id: String, new_point_id: String) -> bool:
+	var matches := 0
+	for event in _state.life.events:
+		if event is Dictionary and event.get("type") == "baking_route_superseded" \
+				and event.get("operation_id") == command_id and event.get("point_id") == old_point_id \
+				and event.get("replacement_point_id") == new_point_id:
+			matches += 1
+	return matches == 1
+
+func replace_unused_baking_route(old_point_id: String, spec: Dictionary, source_seq: int, command_id: String) -> Dictionary:
+	# One bounded correction for an unused reviewed placement. The old install record and install
+	# event remain immutable history; only its never-used active projection is superseded. The new
+	# reviewed point receives exactly the same finite flour and cites exactly the same public need.
+	if not command_id.begins_with(HOST_REVIEWER_PREFIX) or not _validate_decision_command_id(command_id).ok:
+		return _failure("development_gm_required")
+	if not _valid_baking_spec(spec) or old_point_id.is_empty() or str(spec.id) == old_point_id:
+		return _failure("invalid_baking_replacement")
+	var baking := _baking()
+	var prior_install: Dictionary = baking.get("installs", {}).get(command_id, {})
+	if not prior_install.is_empty():
+		var payload: Variant = prior_install.get("payload", {})
+		var replacement: Variant = baking.get("points", {}).get(str(spec.id), {})
+		var same: bool = payload is Dictionary and payload.get("source_seq") == source_seq \
+			and payload.get("route_id") == BAKING_ROUTE_ID and _same_baking_spec(payload.get("spec", {}), spec) \
+			and not baking.get("points", {}).has(old_point_id) and replacement is Dictionary \
+			and _same_baking_spec(_point_spec(replacement), spec) \
+			and _matching_baking_supersession(command_id, old_point_id, str(spec.id))
+		return {"ok": same, "duplicate": same, "code": "duplicate" if same else "command_conflict"}
+	if _journal_has_command(command_id):
+		return _failure("command_conflict")
+	var old: Variant = baking.get("points", {}).get(old_point_id, {})
+	if not old is Dictionary or old.is_empty():
+		return _failure("baking_point_missing")
+	if baking.points.has(str(spec.id)):
+		return _failure("baking_point_conflict")
+	if int(old.get("initial_flour", -1)) != int(spec.initial_flour) \
+			or int(old.get("flour_remaining", -1)) != int(spec.initial_flour):
+		return _failure("baking_replacement_flour_changed")
+	var old_need: Variant = old.get("source_need", {})
+	if not old_need is Dictionary or int(old_need.get("seq", -1)) != source_seq:
+		return _failure("baking_replacement_source_changed")
+	if not _baking_point_unused(old_point_id, old):
+		return _failure("baking_point_used")
+	var old_install_command := str(old.get("install_command", ""))
+	var installed := install_baking_route(spec, source_seq, command_id)
+	if not installed.ok:
+		return installed
+	_ensure_baking().points.erase(old_point_id)
+	_append_life_event({"type": "baking_route_superseded", "actor_id": "development_gm", "recipient_ids": [],
+		"operation_id": command_id, "source": "development_gm_review", "capability_id": BAKING_CAPABILITY_ID,
+		"route_id": BAKING_ROUTE_ID, "point_id": old_point_id, "replacement_point_id": str(spec.id),
+		"superseded_install_command": old_install_command, "source_seq": source_seq,
+		"initial_flour": int(spec.initial_flour), "text": "未使用的公共烤炉位置已由审查后的新位置替代。"})
+	return {"ok": true, "code": "baking_route_replaced", "capability_id": BAKING_CAPABILITY_ID,
+		"route_id": BAKING_ROUTE_ID, "point_id": str(spec.id), "superseded_point_id": old_point_id}
 
 func _known_baking(id: String) -> Dictionary:
 	var known: Variant = _baking().get("known", {}).get(id, {})
@@ -508,6 +592,7 @@ func _validate_baking(value: Dictionary) -> Dictionary:
 		var recorded: Variant = install.payload
 		if not recorded is Dictionary or not _exact_keys(recorded, ["spec", "source_seq", "route_id"]) or recorded.route_id != BAKING_ROUTE_ID or typeof(recorded.source_seq) != TYPE_INT or recorded.source_seq < 1 or not recorded.spec is Dictionary or not _valid_baking_spec(recorded.spec):
 			return _failure("invalid_baking_install")
+	var active_install_commands := {}
 	for point_id in baking.points:
 		var point: Variant = baking.points[point_id]
 		if not point is Dictionary or not _exact_keys(point, ["id", "label", "initial_flour", "position", "access", "flour_remaining", "install_command", "source_need"]):
@@ -526,6 +611,7 @@ func _validate_baking(value: Dictionary) -> Dictionary:
 		var recorded_install: Dictionary = install_record.payload
 		if int(recorded_install.source_seq) != int(need.seq) or not _same_baking_spec(recorded_install.spec, spec):
 			return _failure("baking_install_spec_changed")
+		active_install_commands[str(point.install_command)] = str(point_id)
 		var matching_need := false
 		var matching_install := false
 		for event in value.life.events:
@@ -537,6 +623,59 @@ func _validate_baking(value: Dictionary) -> Dictionary:
 				matching_install = true
 		if not matching_need or not matching_install:
 			return _failure("invalid_baking_evidence")
+	# Install journals are immutable. An install that is no longer active is legal only when one
+	# explicit host supersession binds it to the active replacement install, with the same need and
+	# the same finite flour. This closes the historical validator gap without adding a migration
+	# registry or allowing general removal.
+	var superseded_installs := {}
+	var replacement_commands := {}
+	for event in value.life.events:
+		if not event is Dictionary or event.get("type") != "baking_route_superseded":
+			continue
+		var operation_id := str(event.get("operation_id", ""))
+		var retired_id := str(event.get("point_id", ""))
+		var replacement_id := str(event.get("replacement_point_id", ""))
+		var retired_command := str(event.get("superseded_install_command", ""))
+		if event.get("actor_id") != "development_gm" or event.get("recipient_ids") != [] \
+				or event.get("source") != "development_gm_review" or event.get("capability_id") != BAKING_CAPABILITY_ID \
+				or event.get("route_id") != BAKING_ROUTE_ID or not operation_id.begins_with(HOST_REVIEWER_PREFIX) \
+				or not _validate_decision_command_id(operation_id).ok or retired_id.is_empty() or replacement_id.is_empty() \
+				or retired_id == replacement_id or typeof(event.get("source_seq")) != TYPE_INT \
+				or typeof(event.get("initial_flour")) != TYPE_INT:
+			return _failure("invalid_baking_supersession")
+		if superseded_installs.has(retired_command) or replacement_commands.has(operation_id) \
+				or active_install_commands.has(retired_command) or baking.points.has(retired_id) \
+				or not active_install_commands.has(operation_id) \
+				or active_install_commands[operation_id] != replacement_id:
+			return _failure("invalid_baking_supersession")
+		var retired_install: Variant = baking.installs.get(retired_command, {})
+		var replacement_install: Variant = baking.installs.get(operation_id, {})
+		if not retired_install is Dictionary or not retired_install.get("payload", null) is Dictionary \
+				or not replacement_install is Dictionary or not replacement_install.get("payload", null) is Dictionary:
+			return _failure("invalid_baking_supersession")
+		var retired_payload: Dictionary = retired_install.payload
+		var replacement_payload: Dictionary = replacement_install.payload
+		var retired_spec: Dictionary = retired_payload.get("spec", {})
+		var replacement_spec: Dictionary = replacement_payload.get("spec", {})
+		if str(retired_spec.get("id", "")) != retired_id or str(replacement_spec.get("id", "")) != replacement_id \
+				or int(retired_spec.get("initial_flour", -1)) != int(event.initial_flour) \
+				or int(replacement_spec.get("initial_flour", -1)) != int(event.initial_flour) \
+				or int(retired_payload.get("source_seq", -1)) != int(event.source_seq) \
+				or int(replacement_payload.get("source_seq", -1)) != int(event.source_seq):
+			return _failure("invalid_baking_supersession")
+		var retired_install_event := false
+		for historic in value.life.events:
+			if historic is Dictionary and historic.get("type") == "baking_route_installed" \
+					and historic.get("operation_id") == retired_command and historic.get("point_id") == retired_id \
+					and historic.get("source_seq") == event.source_seq and historic.get("initial_flour") == event.initial_flour:
+				retired_install_event = true
+		if not retired_install_event:
+			return _failure("invalid_baking_supersession")
+		superseded_installs[retired_command] = operation_id
+		replacement_commands[operation_id] = retired_command
+	for command_id in baking.installs:
+		if not active_install_commands.has(command_id) and not superseded_installs.has(command_id):
+			return _failure("baking_inactive_install_without_supersession")
 	for command_id in baking.commands:
 		var command: Variant = baking.commands[command_id]
 		if not command_id is String or not _validate_decision_command_id(command_id).ok or not command is Dictionary or not command.get("payload", null) is Dictionary:
