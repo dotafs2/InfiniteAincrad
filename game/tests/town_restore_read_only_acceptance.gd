@@ -45,6 +45,8 @@ func run() -> void:
 	scene._player = CharacterBody3D.new()
 	scene.add_child(scene._player)
 	scene._build_town_hud()
+	check(scene.dialogue.text == scene.RESTORE_DIALOGUE_IDLE_HINT and scene.dialogue_panel.offset_top == -92.0,
+		"restore-only starts with an accurate compact dialogue hint")
 	var quarter := FakeQuarter.new()
 	scene.add_child(quarter)
 	scene.quarter = quarter
