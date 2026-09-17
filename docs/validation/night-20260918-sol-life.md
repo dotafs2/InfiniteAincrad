@@ -4,37 +4,39 @@
 
 `StartLiving.cmd` 现在明确把用户带入 `res://scenes/town_street.tscn`，不再需要记住 `Run-Street.ps1 -Town`，也不会误入项目默认的单居民 `street_trial.tscn` 或 `StartDemo.cmd` 的暂停美术预览。
 
-无付费本地观察必须使用原档的**副本**。这个入口会写入传入的存档；不应把研究原档直接传给它：
+无付费本地观察必须使用原档的**副本**，并显式给 `-ObserveOnly`。此模式以 `--town-restore` 打开十个身体，模型暂停、不会接纳新决定；不应把研究原档直接传给它：
 
 ```powershell
 .\StartLiving.cmd `
+  -ObserveOnly `
   -Godot D:\lucidgloves\InfiniteAincrad\tmp\toolchain\Godot_v4.7.2-stable_mono_win64\Godot_v4.7.2-stable_mono_win64.exe `
   -SkipBuild `
   -SavePath D:\path\to\disposable-world-copy.json
 ```
 
-该命令是明确标注的 `local_rule_policy` 无模型观察，不应被描述为 AI 自主生活。真实模型共同世界仍由已有的有界启动器统一建立 loopback gateway、预算授权和退出排空，然后把同一 `town_street.tscn` 传入 `--town-gateway`：
+该命令是暂停模型的身体观察，不应被描述为 AI 自主生活。真实模型共同世界由同一个入口接受账本、授权配置、存档和输出目录，再调用已有的有界启动器建立 loopback gateway、预算授权和退出排空。它不带 `--headless`，现场窗口可见：
 
 ```powershell
-python -X utf8 tools/run_town_model_validation.py `
-  --godot D:\lucidgloves\InfiniteAincrad\tmp\toolchain\Godot_v4.7.2-stable_mono_win64\Godot_v4.7.2-stable_mono_win64.exe `
-  --ledger D:\path\to\existing-ledger.json `
-  --config D:\path\to\authorized-config.json `
-  --save D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery\private\night-delivery\delivery-live\world.json `
-  --out D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery\private\night-delivery\live-run-01 `
-  --seconds 300 --max-requests 12 --concurrency 1 `
-  --gm-export D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery\private\night-delivery\live-run-01\gm\world.json
+.\StartLiving.cmd `
+  -Godot D:\lucidgloves\InfiniteAincrad\tmp\toolchain\Godot_v4.7.2-stable_mono_win64\Godot_v4.7.2-stable_mono_win64.exe `
+  -SkipBuild `
+  -SavePath D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery\private\night-delivery\delivery-live\world.json `
+  -Ledger D:\path\to\existing-ledger.json `
+  -Config D:\path\to\authorized-config.json `
+  -Out D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery\private\night-delivery\live-run-01 `
+  -Seconds 300 -MaxRequests 12 -Concurrency 1 `
+  -GmExport D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery\private\night-delivery\live-run-01\gm\world.json
 ```
 
-这条真实路径的关键场景参数是 `res://scenes/town_street.tscn -- --town-save=<same-world> --town-gateway`。没有预算配置、既有账本和授权时，不启动模型；本次首轮验证产生 0 个模型调用。
+这条真实路径的关键场景参数仍是 `res://scenes/town_street.tscn -- --town-save=<same-world> --town-gateway`。`Ledger / Config / Out` 缺任意一项都会报错且什么也不启动；也不会暗中退回脚本生活。既没有完整 live 三件套、也没有显式 `-ObserveOnly` 时同样拒绝启动。本次首轮验证产生 0 个模型调用。
 
 ## 玩家实际能看到什么
 
 右侧新增一个只读生活窗口：
 
 - 十位居民全部具名列出，逐人显示当前世界工作；身体有水平速度时显示“行走中”。
-- gateway／恢复模式显示每个人自己的 durable resident-turn 状态，不把一个公共模型状态冒充十个人。
-- 最近五条公开交流或生活结果来自 `life.events`；只有 `source=opengameagent_live` 才标为 `AI`。界面不生成文本、不选择动作、不展示私有理由。
+- gateway／恢复模式显示每个人自己的 durable resident-turn 状态，并用启动时的 request id 区分“历史决定”和“本次决定”，不把一个公共模型状态冒充十个人。
+- 最近五条公开交流或生活结果来自 `life.events`；只有 `source=opengameagent_live` 才标为 AI，并按启动时的 life seq 明示“历史 AI”或“本次 AI”。界面不生成文本、不选择动作、不展示私有理由。
 - 原有近身姓名牌、真实身体动画、公开对话框、玩家 `H` 询问、门窗和俯瞰仍在同一个世界中。
 
 ![生活现场 HUD：十人活动与公开交流](night-20260918-sol-life/living-world-hud.png)
