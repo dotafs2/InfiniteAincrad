@@ -30,6 +30,10 @@ const CAPSULE_HEIGHT := 1.5
 const WALK_SPEED := 1.35
 const EYE_HEIGHT := 1.55
 const OVEN_AT := Vector3(0.0, 0.0, 0.0)
+const REVIEWED_OVEN_WORLD := Vector3(-18.5, 0.1, 37.4)
+const REVIEWED_BAKER_SLOT_WORLD := Vector3(-22.0, 0.1, 38.8)
+const REVIEWED_SLOT_OFFSET := REVIEWED_BAKER_SLOT_WORLD - REVIEWED_OVEN_WORLD
+const OUTSIDE_REVIEWED_RANGE := Vector3(-4.6, 0.0, 1.4)
 const POINT_ID := "fixture:physics-oven"
 const BACK_START := Vector3(0.0, 0.0, -0.7)
 const BACK_FRAMES := 20
@@ -244,6 +248,9 @@ func run() -> void:
 	var wall_observed := -1
 	var core_blocked_knowledge := -1
 	var core_clear_knowledge := -1
+	var reviewed_slot_distance := -1.0
+	var outside_slot_distance := -1.0
+	var outside_slot_clear := false
 
 	_runner = SightAcceptance.PhysicsRunner.new()
 	root.add_child(_runner)
@@ -408,14 +415,30 @@ func run() -> void:
 		"the real core-backed oven display carries the same solid body")
 	var baker := "fictional:forge"
 	var witness := "fictional:ember"
-	town.host_move(witness, Vector3(8, 0, 8))
+	reviewed_slot_distance = REVIEWED_BAKER_SLOT_WORLD.distance_to(REVIEWED_OVEN_WORLD)
+	outside_slot_distance = OUTSIDE_REVIEWED_RANGE.distance_to(OVEN_AT)
+	check(is_equal_approx(CoreBakingTown.BAKING_OBSERVATION_RANGE, 4.5),
+		"the reviewed baking observation range is exactly 4.5 metres")
+	check(is_equal_approx(reviewed_slot_distance, 3.769615),
+		"the reviewed baker forecourt slot is 3.769615 metres from the replacement oven")
+	check(reviewed_slot_distance < CoreBakingTown.BAKING_OBSERVATION_RANGE,
+		"the reviewed forecourt slot falls inside the reviewed observation range")
+	check(outside_slot_distance > CoreBakingTown.BAKING_OBSERVATION_RANGE,
+		"the outside fixture resident stands beyond the reviewed observation range")
+	town.host_move(witness, OUTSIDE_REVIEWED_RANGE)
 	town.host_move("fictional:birch", Vector3(-9, 0, 6))
-	town.host_move(baker, work_target)
-	worker_body.position = work_target
-	_sight.configure(town, {baker: worker_body}, core_visuals)
+	town.host_move(baker, OVEN_AT + REVIEWED_SLOT_OFFSET)
+	worker_body.position = OVEN_AT + REVIEWED_SLOT_OFFSET
+	var witness_body := _capsule(OUTSIDE_REVIEWED_RANGE)
+	_sight.configure(town, {baker: worker_body, witness: witness_body}, core_visuals)
 	town.require_baking_visibility(Callable(_sight, "can_observe"))
-	_wall = _occluding_wall(Vector3(1.6, 1.2, 0.06), Vector3(0.0, 1.35, 0.50))
+	_wall = _occluding_wall(Vector3(0.20, 1.2, 1.2), Vector3(-1.75, 1.35, 0.90))
 	await _wait_physics(2)
+	_los_body = worker_body
+	var reviewed_blocked_report := await _perception(baker, POINT_ID)
+	check(bool(reviewed_blocked_report.get("blocked", false))
+		and not bool(reviewed_blocked_report.get("observed", true)),
+		"a real occluder denies sight from the reviewed 3.769615 metre slot")
 	var blocked_before: Dictionary = town.snapshot()
 	check((await _tick(town, path, 0.0)).ok, "advance(0) with the wall present succeeds")
 	var blocked_after: Dictionary = town.snapshot()
@@ -429,6 +452,17 @@ func run() -> void:
 	_free_nodes([_wall])
 	_wall = null
 	await _wait_physics(2)
+	_los_body = worker_body
+	var reviewed_clear_report := await _perception(baker, POINT_ID)
+	check(not bool(reviewed_clear_report.get("blocked", true))
+		and bool(reviewed_clear_report.get("observed", false)),
+		"the real visibility component sees the oven from the reviewed 3.769615 metre slot")
+	_los_body = witness_body
+	var outside_clear_report := await _perception(witness, POINT_ID)
+	outside_slot_clear = not bool(outside_clear_report.get("blocked", true)) \
+		and bool(outside_clear_report.get("observed", false))
+	check(outside_slot_clear,
+		"the resident beyond 4.5 metres has physically clear line of sight")
 	check((await _tick(town, path, 0.0)).ok, "advance(0) after removing the wall succeeds")
 	var knowledge: Array = town.resident_view(baker).baking_points
 	core_clear_knowledge = knowledge.size()
@@ -437,7 +471,7 @@ func run() -> void:
 	check(str(knowledge[0].knowledge_source) == "personal_line_of_sight_observation",
 		"the knowledge is attributed to the resident's own line of sight")
 	check(town.resident_view(witness).baking_points.is_empty(),
-		"a distant resident inside the same fixture gains nothing")
+		"a physically clear resident beyond 4.5 metres gains nothing")
 	var observations: Array = town.snapshot().life.events.filter(func(event): return event.get("type") == "baking_point_observed")
 	check(observations.size() == 1 and observations[0].recipient_ids == [baker],
 		"exactly one, personal, baking observation exists")
@@ -467,7 +501,7 @@ func run() -> void:
 	check(town._validate_state(baked).ok, "the authoritative baking state still validates")
 
 	# 8. Cleanup and honest evidence.
-	_free_nodes([_wall, worker_body, core_visuals, _los_visuals, _sight, _runner])
+	_free_nodes([_wall, worker_body, witness_body, core_visuals, _los_visuals, _sight, _runner])
 	town.release_writer(path)
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	var payload := {"suite": "town_baking_physics", "checks": checks, "failures": failures,
@@ -483,12 +517,17 @@ func run() -> void:
 		"wall_blocked_observation": wall_observed == 0,
 		"core_knowledge_while_blocked": core_blocked_knowledge,
 		"core_knowledge_when_clear": core_clear_knowledge,
+		"reviewed_observation_range_m": CoreBakingTown.BAKING_OBSERVATION_RANGE,
+		"reviewed_slot_distance_m": reviewed_slot_distance,
+		"outside_slot_distance_m": outside_slot_distance,
+		"outside_slot_physically_clear": outside_slot_clear,
 		"scope": "standalone physics fixture over primitives with the real BakingPoints projection, the real sight component and one fixture-backed real core; the real 16-house town placement, its art and its navigation mesh bake are NOT measured here"}
 	var success: bool = failures == 0
 	success = success and bool(payload.legacy_mesh_only_walkthrough)
 	success = success and wall_is_occluder and bool(payload.wall_blocked_observation)
 	success = success and int(payload.core_knowledge_while_blocked) == 0
 	success = success and int(payload.core_knowledge_when_clear) == 1
+	success = success and bool(payload.outside_slot_physically_clear)
 	payload["success"] = success
 	print(JSON.stringify(payload))
 	quit(0 if success else 1)
