@@ -473,12 +473,16 @@ class BudgetLauncherTests(unittest.TestCase):
         config.write_text('{"api_key":"fixture-must-not-appear-in-output"}', encoding='utf-8')
         pin_path = self.root / 'review.json'
         pin_path.write_text(json.dumps(self.pin), encoding='utf-8')
+        gm_status = self.root / 'gm-public-status.json'
+        gm_status.write_text('{"fixture":"read-only-path"}', encoding='utf-8')
         args = ['launcher', '--godot', 'FAKE_GODOT', '--ledger', str(self.ledger.path),
                 '--save', str(save), '--config', str(config), '--out', str(out), '--seconds', '5',
                 '--max-requests', '1', '--stop-on-decision-limit',
-                '--carried-uncertainty-pin', str(pin_path), '--gm-export', str(gm)]
+                '--carried-uncertainty-pin', str(pin_path), '--gm-export', str(gm),
+                '--gm-status', str(gm_status)]
         def fake_engine(command, **kwargs):
             self.assertIn('--town-gm-export=' + str(gm), command)
+            self.assertIn('--town-gm-status=' + str(gm_status), command)
             self.assertIn('--town-stop-on-decision-limit', command)
             scope = json.loads(Path(kwargs['env']['AINCRAD_GATEWAY_RUN_CONFIG']).read_text())
             self.assertEqual(scope['concurrency'], 1)

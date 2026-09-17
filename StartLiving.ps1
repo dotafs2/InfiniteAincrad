@@ -15,6 +15,7 @@ param(
     [ValidateRange(0, 120)]
     [double]$ShutdownWait = 45,
     [string]$GmExport,
+    [string]$GmStatus,
     [switch]$ObserveOnly,
     [switch]$StopOnIdle,
     [switch]$StopOnDecisionLimit,
@@ -38,7 +39,7 @@ if (Test-Path -LiteralPath $localProfilePath -PathType Leaf) {
         throw "Invalid local launcher JSON: $localProfilePath`n$($_.Exception.Message)"
     }
     $allowed = @('mode', 'expires_at', 'on_expiry', 'save_path', 'godot', 'ledger', 'config',
-        'out', 'out_root', 'gm_export', 'seconds', 'max_requests', 'concurrency',
+        'out', 'out_root', 'gm_export', 'gm_status', 'seconds', 'max_requests', 'concurrency',
         'shutdown_wait', 'stop_on_idle', 'stop_on_decision_limit', 'skip_build')
     foreach ($property in $localProfile.PSObject.Properties.Name) {
         if ($property -notin $allowed) { throw "Unknown local launcher setting: $property" }
@@ -61,6 +62,7 @@ if (Test-Path -LiteralPath $localProfilePath -PathType Leaf) {
         $Out = Join-Path $outRoot ('run-' + (Get-Date).ToString('yyyyMMdd-HHmmss-fff'))
     }
     if (-not $PSBoundParameters.ContainsKey('GmExport') -and (Has-LocalSetting 'gm_export')) { $GmExport = Resolve-LocalPath ([string]$localProfile.gm_export) }
+    if (-not $PSBoundParameters.ContainsKey('GmStatus') -and (Has-LocalSetting 'gm_status')) { $GmStatus = Resolve-LocalPath ([string]$localProfile.gm_status) }
     if (-not $PSBoundParameters.ContainsKey('Seconds') -and (Has-LocalSetting 'seconds')) { $Seconds = [int]$localProfile.seconds }
     if (-not $PSBoundParameters.ContainsKey('MaxRequests') -and (Has-LocalSetting 'max_requests')) { $MaxRequests = [int]$localProfile.max_requests }
     if (-not $PSBoundParameters.ContainsKey('Concurrency') -and (Has-LocalSetting 'concurrency')) { $Concurrency = [int]$localProfile.concurrency }
@@ -172,6 +174,7 @@ try {
         Write-Host 'Opening ten physical residents in restore-only observation: models paused, no new decisions, no model calls.'
         $observe = @('--path', (Join-Path $root 'game'), 'res://scenes/town_street.tscn', '--',
             ('--town-save=' + $save), '--town-restore')
+        if ($GmStatus) { $observe += ('--town-gm-status=' + [IO.Path]::GetFullPath($GmStatus)) }
         & $Godot @observe
         $result = $LASTEXITCODE
     } else {
@@ -186,6 +189,7 @@ try {
             '--concurrency', $Concurrency,
             '--shutdown-wait', $ShutdownWait)
         if ($GmExport) { $liveArgs += @('--gm-export', [IO.Path]::GetFullPath($GmExport)) }
+        if ($GmStatus) { $liveArgs += @('--gm-status', [IO.Path]::GetFullPath($GmStatus)) }
         if ($StopOnIdle) { $liveArgs += '--stop-on-idle' }
         if ($StopOnDecisionLimit) { $liveArgs += '--stop-on-decision-limit' }
         Write-Host 'Opening the bounded live AI world. Historical events remain labelled separately from this run.'
