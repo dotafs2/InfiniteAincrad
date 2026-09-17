@@ -25,6 +25,7 @@ const PlaceNotice = preload("res://spatial/town_place_notice.gd")
 const PlaceSteering = preload("res://spatial/town_place_steering.gd")
 const TownNavigation = preload("res://spatial/town_navigation.gd")
 const BREAD_SCENE_PATH := "res://assets/overnight20260918/bread_loaf.tscn"
+const DIALOGUE_IDLE_HINT := "走近居民，按 H 输入你想说的话。"
 var town := Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
@@ -39,6 +40,8 @@ var berry_visuals: Array[Node3D] = []
 var latest := "世界已暂停。按空格继续；原事件与钱物已经载入。"
 var dialogue: Label
 var dialogue_input: LineEdit
+var dialogue_panel: PanelContainer
+var dialogue_scroll: ScrollContainer
 var life_roster: Label
 var life_feed: Label
 var life_panel: PanelContainer
@@ -400,6 +403,7 @@ func _process(delta: float) -> void:
 	if status == null:
 		return
 	_update_resident_observer()
+	_update_dialogue_panel_layout()
 	if nameplates != null:
 		# V overview, N resident follow and the player camera all share one overlay. Project
 		# against the camera that is actually current, never the camera used at startup.
@@ -815,7 +819,7 @@ func _build_town_hud() -> void:
 	status = Label.new()
 	status.add_theme_font_size_override("font_size", 19)
 	panel.add_child(status)
-	var dialogue_panel := PanelContainer.new()
+	dialogue_panel = PanelContainer.new()
 	dialogue_panel.anchor_top = 1.0
 	dialogue_panel.anchor_bottom = 1.0
 	dialogue_panel.offset_left = 22
@@ -827,16 +831,16 @@ func _build_town_hud() -> void:
 	layer.add_child(dialogue_panel)
 	var conversation := VBoxContainer.new()
 	dialogue_panel.add_child(conversation)
-	var scroll := ScrollContainer.new()
-	scroll.custom_minimum_size = Vector2(680, 180)
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	conversation.add_child(scroll)
+	dialogue_scroll = ScrollContainer.new()
+	dialogue_scroll.custom_minimum_size = Vector2(680, 180)
+	dialogue_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	conversation.add_child(dialogue_scroll)
 	dialogue = Label.new()
 	dialogue.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	dialogue.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	dialogue.add_theme_font_size_override("font_size", 20)
-	dialogue.text = "走近居民，按 H 输入你想说的话。"
-	scroll.add_child(dialogue)
+	dialogue.text = DIALOGUE_IDLE_HINT
+	dialogue_scroll.add_child(dialogue)
 	dialogue_input = LineEdit.new()
 	dialogue_input.max_length = 512
 	dialogue_input.placeholder_text = "Enter 发送 · Esc 取消（世界继续运行）"
@@ -848,6 +852,7 @@ func _build_town_hud() -> void:
 			_close_dialogue()
 			get_viewport().set_input_as_handled())
 	conversation.add_child(dialogue_input)
+	_update_dialogue_panel_layout()
 	# A read-only window onto the same authoritative state that drives the bodies.
 	# It creates no dialogue and chooses no action: every line comes from a current
 	# pending job, a durable resident-turn record, or a public world event.
@@ -912,6 +917,13 @@ func _build_nameplates() -> void:
 
 func _composing_dialogue() -> bool:
 	return is_instance_valid(dialogue_input) and dialogue_input.visible
+
+func _update_dialogue_panel_layout() -> void:
+	if not is_instance_valid(dialogue_panel) or not is_instance_valid(dialogue_scroll) or not is_instance_valid(dialogue):
+		return
+	var expanded := _composing_dialogue() or dialogue.text != DIALOGUE_IDLE_HINT
+	dialogue_panel.offset_top = -250.0 if expanded else -92.0
+	dialogue_scroll.custom_minimum_size.y = 180.0 if expanded else 34.0
 
 func _focus_next_resident() -> void:
 	# A spectator camera only: it follows the body's real transform but never moves the
@@ -988,6 +1000,7 @@ func _open_dialogue() -> void:
 		return
 	dialogue.text = "对 %s 说：" % town.resident(dialogue_target).name
 	dialogue_input.visible = true
+	_update_dialogue_panel_layout()
 	dialogue_input.grab_focus()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
@@ -995,6 +1008,9 @@ func _close_dialogue() -> void:
 	dialogue_input.visible = false
 	dialogue_input.release_focus()
 	dialogue_target = ""
+	if dialogue.text.begins_with("对 ") and dialogue.text.ends_with(" 说："):
+		dialogue.text = DIALOGUE_IDLE_HINT
+	_update_dialogue_panel_layout()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _submit_dialogue(text: String) -> void:
@@ -1204,13 +1220,12 @@ func _fallback_loaf_visual() -> Node3D:
 	var root := Node3D.new()
 	root.name = "PrimitiveBreadLoafVisual"
 	var loaf := MeshInstance3D.new()
-	var mesh := CapsuleMesh.new()
-	mesh.radius = 0.09
-	mesh.height = 0.36
+	var mesh := SphereMesh.new()
+	mesh.radius = 0.13
+	mesh.height = 0.15
 	loaf.mesh = mesh
-	loaf.rotation_degrees.z = 90
 	var material := StandardMaterial3D.new()
-	material.albedo_color = Color("b8742f")
+	material.albedo_color = Color("3b2418")
 	material.roughness = 0.92
 	loaf.material_override = material
 	root.add_child(loaf)

@@ -8,5 +8,10 @@ set "DOTNET_ROLL_FORWARD=LatestMajor"
 
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0StartLiving.ps1" %*
 set "living_exit=%ERRORLEVEL%"
+if not "%living_exit%"=="0" if "%~1"=="" (
+  echo.
+  echo StartLiving failed. Read the message above, then press any key to close.
+  pause ^>nul
+)
 popd
 exit /b %living_exit%

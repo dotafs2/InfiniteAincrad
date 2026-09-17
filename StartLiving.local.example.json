@@ -1,0 +1,17 @@
+{
+  "mode": "live",
+  "expires_at": "2026-09-18T09:00:00+08:00",
+  "on_expiry": "observe_only",
+  "save_path": "private/night-delivery/delivery-live/world.json",
+  "godot": "D:/path/to/Godot_v4.7.2-stable_mono_win64.exe",
+  "ledger": "private/path/to/existing-ledger.json",
+  "config": "private/path/to/authorized-config.json",
+  "out_root": "private/night-delivery/live-runs",
+  "seconds": 300,
+  "max_requests": 12,
+  "concurrency": 1,
+  "shutdown_wait": 45,
+  "stop_on_idle": false,
+  "stop_on_decision_limit": false,
+  "skip_build": true
+}
