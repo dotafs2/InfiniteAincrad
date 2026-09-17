@@ -1,4 +1,5 @@
 import io
+from dataclasses import asdict, replace
 import hashlib
 import json
 import os
@@ -9,7 +10,7 @@ import tempfile
 import unittest
 
 import start_user_living_session as bootstrap
-from kimi_budget import Ledger, Policy
+from kimi_budget import CityValidationPolicy, Ledger, Policy, fingerprint
 
 
 class TtyInput(io.StringIO):
@@ -146,6 +147,54 @@ class UserLivingBootstrapTests(unittest.TestCase):
         self._set_review_pins([pin])
         with self.prior_session.transaction() as (db, _meta):
             db.execute("UPDATE meta SET halted='arbitrary stop' WHERE id=1")
+
+        with self.assertRaises(bootstrap.LaunchBlocked):
+            bootstrap.launch(self.profile, TtyInput("START AI\n"), io.StringIO())
+        self.assertFalse(self.sessions.exists())
+
+    def test_exact_initialized_continuation_receipt_allows_only_reviewed_closure(self):
+        continuation = self._make_continuation()
+        output = io.StringIO()
+
+        result = bootstrap.launch(
+            self.profile, TtyInput("START AI\n"), output,
+            lambda *_args, **_kwargs: SimpleNamespace(returncode=0),
+            lambda: bootstrap.datetime(2026, 9, 18, 1, 0, 0,
+                                       tzinfo=bootstrap.timezone.utc))
+
+        self.assertEqual(result, 0)
+        manifest = json.loads(next(self.sessions.rglob("session.json")).read_text(encoding="utf-8"))
+        old_entry = next(item for item in manifest["prior_paid_sessions"]
+                         if item["id"] == continuation["old_id"])
+        self.assertEqual(old_entry["continuation_review"]["status"], "initialized")
+        self.assertEqual(old_entry["continuation_review"]["scope_tag"], "test-scope")
+        self.assertEqual(
+            manifest["cumulative_prior_liability_cny"],
+            continuation["old_liability_nano"] / 1_000_000_000)
+
+    def test_closed_not_initialized_continuation_is_rejected(self):
+        continuation = self._make_continuation()
+        receipt = json.loads(continuation["receipt"].read_text(encoding="utf-8"))
+        receipt["status"] = "closed_not_initialized"
+        continuation["receipt"].write_text(json.dumps(receipt), encoding="utf-8")
+
+        with self.assertRaises(bootstrap.LaunchBlocked):
+            bootstrap.launch(self.profile, TtyInput("START AI\n"), io.StringIO())
+        self.assertFalse(self.sessions.exists())
+
+    def test_continuation_receipt_rejects_changed_old_request_facts(self):
+        continuation = self._make_continuation()
+        with continuation["old"].transaction() as (db, _meta):
+            db.execute("UPDATE requests SET note='changed after receipt' WHERE id='old-unknown'")
+
+        with self.assertRaises(bootstrap.LaunchBlocked):
+            bootstrap.launch(self.profile, TtyInput("START AI\n"), io.StringIO())
+        self.assertFalse(self.sessions.exists())
+
+    def test_continuation_new_unknown_still_requires_its_own_exact_pin(self):
+        continuation = self._make_continuation()
+        continuation["new"].reserve("new-unknown", "other-resident", self._request())
+        continuation["new"].uncertain("new-unknown")
 
         with self.assertRaises(bootstrap.LaunchBlocked):
             bootstrap.launch(self.profile, TtyInput("START AI\n"), io.StringIO())
@@ -290,6 +339,70 @@ class UserLivingBootstrapTests(unittest.TestCase):
             "uncertain_requests": uncertain,
         }), encoding="utf-8")
         return pin
+
+    def _make_continuation(self):
+        old_path = self.root / "closed-old.sqlite3"
+        old_policy = CityValidationPolicy(request_limit=20, concurrency=3)
+        old = Ledger(old_path, old_policy)
+        old.initialize()
+        old.reserve("old-unknown", "resident", self._request())
+        old.uncertain("old-unknown")
+        pin = self._write_pin(old)
+        scope = "test-scope"
+        reason = "closed_for_continuation:" + scope
+        with old.transaction() as (db, meta):
+            rows = [dict(row) for row in db.execute("SELECT * FROM requests ORDER BY id")]
+            old_id = meta["ledger_id"]
+            old_liability = meta["liability"]
+            old_count = meta["request_count"]
+            db.execute("UPDATE meta SET halted=? WHERE id=1", (reason,))
+        new_policy = replace(
+            old_policy,
+            prior_unverified_nano=old_liability,
+            concurrency=old_policy.concurrency - 1,
+            request_limit=old_policy.request_limit - old_count,
+        )
+        new_path = self.root / "continuation.sqlite3"
+        new = Ledger(new_path, new_policy)
+        new_status = new.initialize()
+        receipt = self.root / "continuation-receipt.json"
+        receipt.write_text(json.dumps({
+            "schema_version": 1,
+            "kind": "reviewed_night_continuation",
+            "scope_tag": scope,
+            "status": "initialized",
+            "old": {
+                "path": str(old_path),
+                "ledger_id": old_id,
+                "guard_sha256": hashlib.sha256(old.guard.read_bytes()).hexdigest(),
+                "policy_sha256": old.policy_hash,
+                "halted_reason": reason,
+                "liability_nano": old_liability,
+                "request_count": old_count,
+                "requests_sha256": fingerprint(rows),
+                "uncertain_requests": [{
+                    "id": "old-unknown", "state": "uncertain",
+                    "reserve_nano": rows[0]["reserve"],
+                }],
+            },
+            "new": {
+                "path": str(new_path),
+                "ledger_id": new_status["ledger_id"],
+                "guard_sha256": hashlib.sha256(new.guard.read_bytes()).hexdigest(),
+                "policy_sha256": new.policy_hash,
+                "policy": asdict(new_policy),
+            },
+        }), encoding="utf-8")
+        profile = json.loads(self.profile.read_text(encoding="utf-8"))
+        profile["prior_paid_session_records"] = [str(old_path), str(new_path)]
+        profile["prior_uncertainty_review_pins"] = [str(pin)]
+        profile["reviewed_continuation_receipts"] = [
+            {"record": str(old_path), "receipt": str(receipt)}]
+        self.profile.write_text(json.dumps(profile), encoding="utf-8")
+        return {
+            "old": old, "new": new, "receipt": receipt, "old_id": old_id,
+            "old_liability_nano": old_liability,
+        }
 
 
 if __name__ == "__main__":
