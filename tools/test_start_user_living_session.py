@@ -1,4 +1,5 @@
 import io
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -78,6 +79,74 @@ class UserLivingBootstrapTests(unittest.TestCase):
     def test_uncertain_prior_request_is_rejected(self):
         self.prior_session.reserve("unknown-result", "resident", self._request())
         self.prior_session.uncertain("unknown-result")
+        with self.assertRaises(bootstrap.LaunchBlocked):
+            bootstrap.launch(self.profile, TtyInput("START AI\n"), io.StringIO())
+        self.assertFalse(self.sessions.exists())
+
+    def test_exact_reviewed_uncertainty_is_retained_and_reported(self):
+        reservation = self.prior_session.reserve("unknown-result", "resident", self._request())
+        self.prior_session.uncertain("unknown-result")
+        pin = self._write_pin(self.prior_session)
+        self._set_review_pins([pin])
+
+        output = io.StringIO()
+        result = bootstrap.launch(
+            self.profile, TtyInput("START AI\n"), output,
+            lambda *_args, **_kwargs: SimpleNamespace(returncode=0),
+            lambda: bootstrap.datetime(2026, 9, 18, 1, 0, 0,
+                                       tzinfo=bootstrap.timezone.utc))
+
+        self.assertEqual(result, 0)
+        retained = reservation["reserved_nano"] / 1_000_000_000
+        manifest = json.loads(next(self.sessions.rglob("session.json")).read_text(encoding="utf-8"))
+        self.assertEqual(manifest["retained_prior_uncertain_cny"], retained)
+        self.assertEqual(manifest["prior_paid_sessions"][0]["uncertain_requests"], 1)
+        self.assertEqual(
+            manifest["prior_paid_sessions"][0]["uncertainty_review"]["uncertain_requests"],
+            [{"id": "unknown-result", "state": "uncertain",
+              "reserve_nano": reservation["reserved_nano"]}])
+        self.assertIn("最大责任：%.6f 元" % retained, output.getvalue())
+        self.assertIn("不会清零或重试旧请求", output.getvalue())
+
+    def test_reviewed_expired_prior_record_is_audited_without_reopening_it(self):
+        expired = self.root / "expired.sqlite3"
+        expired_session = Ledger(expired, Policy(deadline_utc=1), clock=lambda: 0)
+        expired_session.initialize()
+        expired_session.reserve("expired-unknown", "resident", self._request())
+        expired_session.uncertain("expired-unknown")
+        pin = self._write_pin(expired_session)
+        profile = json.loads(self.profile.read_text(encoding="utf-8"))
+        profile["prior_paid_session_records"] = [str(expired)]
+        profile["prior_uncertainty_review_pins"] = [str(pin)]
+        self.profile.write_text(json.dumps(profile), encoding="utf-8")
+
+        result = bootstrap.launch(
+            self.profile, TtyInput("START AI\n"), io.StringIO(),
+            lambda *_args, **_kwargs: SimpleNamespace(returncode=0),
+            lambda: bootstrap.datetime(2026, 9, 18, 1, 0, 0,
+                                       tzinfo=bootstrap.timezone.utc))
+        self.assertEqual(result, 0)
+
+    def test_review_pin_mismatch_or_new_uncertainty_is_rejected(self):
+        self.prior_session.reserve("first-unknown", "resident-a", self._request())
+        self.prior_session.uncertain("first-unknown")
+        pin = self._write_pin(self.prior_session)
+        self.prior_session.reserve("later-unknown", "resident-b", self._request())
+        self.prior_session.uncertain("later-unknown")
+        self._set_review_pins([pin])
+
+        with self.assertRaises(bootstrap.LaunchBlocked):
+            bootstrap.launch(self.profile, TtyInput("START AI\n"), io.StringIO())
+        self.assertFalse(self.sessions.exists())
+
+    def test_exact_review_pin_never_waives_halted_prior_session(self):
+        self.prior_session.reserve("unknown-result", "resident", self._request())
+        self.prior_session.uncertain("unknown-result")
+        pin = self._write_pin(self.prior_session)
+        self._set_review_pins([pin])
+        with self.prior_session.transaction() as (db, _meta):
+            db.execute("UPDATE meta SET halted='arbitrary stop' WHERE id=1")
+
         with self.assertRaises(bootstrap.LaunchBlocked):
             bootstrap.launch(self.profile, TtyInput("START AI\n"), io.StringIO())
         self.assertFalse(self.sessions.exists())
@@ -198,6 +267,29 @@ class UserLivingBootstrapTests(unittest.TestCase):
             "thinking": {"type": "disabled"},
             "response_format": {"type": "json_object"},
         }
+
+    def _set_review_pins(self, pins):
+        profile = json.loads(self.profile.read_text(encoding="utf-8"))
+        profile["prior_uncertainty_review_pins"] = [str(path) for path in pins]
+        self.profile.write_text(json.dumps(profile), encoding="utf-8")
+
+    def _write_pin(self, session):
+        with session.transaction() as (db, meta):
+            uncertain = [
+                {"id": row["id"], "state": row["state"], "reserve_nano": row["reserve"]}
+                for row in db.execute(
+                    "SELECT id,state,reserve FROM requests WHERE state='uncertain' ORDER BY id")
+            ]
+            ledger_id = meta["ledger_id"]
+        pin = self.root / (session.path.stem + "-uncertainty-review.json")
+        pin.write_text(json.dumps({
+            "schema_version": 1,
+            "ledger_id": ledger_id,
+            "policy_sha256": session.policy_hash,
+            "guard_sha256": hashlib.sha256(session.guard.read_bytes()).hexdigest(),
+            "uncertain_requests": uncertain,
+        }), encoding="utf-8")
+        return pin
 
 
 if __name__ == "__main__":
