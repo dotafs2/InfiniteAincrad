@@ -8,6 +8,7 @@ writer boundary have been checked.
 
 from datetime import datetime, timedelta, timezone
 import argparse
+from dataclasses import asdict
 import hashlib
 import json
 import os
@@ -20,7 +21,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools/kimi"))
 from kimi_budget import (BudgetError, CityValidationPolicy, Ledger, NANO, Policy,
-                         fingerprint, usage_cost)
+                         encoded, fingerprint, usage_cost)
 from kimi_gateway import KimiProvider
 
 
@@ -38,10 +39,20 @@ CONFIRMATION = "START AI"
 REQUIRED_PROFILE_KEYS = {
     "save_path", "godot", "config", "sessions_root", "prior_paid_session_records"
 }
-OPTIONAL_PROFILE_KEYS = {"gm_status", "prior_uncertainty_review_pins"}
+OPTIONAL_PROFILE_KEYS = {
+    "gm_status", "prior_uncertainty_review_pins", "reviewed_continuation_receipts",
+}
 REVIEW_PIN_KEYS = {
     "schema_version", "ledger_id", "policy_sha256", "guard_sha256",
     "uncertain_requests",
+}
+CONTINUATION_KEYS = {"schema_version", "kind", "scope_tag", "status", "old", "new"}
+CONTINUATION_OLD_KEYS = {
+    "path", "ledger_id", "guard_sha256", "policy_sha256", "halted_reason",
+    "liability_nano", "request_count", "requests_sha256", "uncertain_requests",
+}
+CONTINUATION_NEW_KEYS = {
+    "path", "ledger_id", "guard_sha256", "policy_sha256", "policy",
 }
 
 
@@ -94,6 +105,53 @@ def _read_review_pin(path):
     return value
 
 
+def _read_continuation_receipt(path):
+    try:
+        value = json.loads(path.read_text(encoding="utf-8-sig"),
+                           object_pairs_hook=_unique_object)
+    except (OSError, UnicodeError, ValueError, TypeError) as exc:
+        raise LaunchBlocked("既有关闭账期复核文件无法严格读取；未创建新会话。") from exc
+    if (not isinstance(value, dict) or set(value) != CONTINUATION_KEYS
+            or value.get("schema_version") != 1
+            or type(value.get("schema_version")) is not int
+            or value.get("kind") != "reviewed_night_continuation"
+            or value.get("status") != "initialized"
+            or not isinstance(value.get("scope_tag"), str)
+            or not re.fullmatch(r"[A-Za-z0-9_.:-]{1,128}", value["scope_tag"])
+            or not isinstance(value.get("old"), dict)
+            or set(value["old"]) != CONTINUATION_OLD_KEYS
+            or not isinstance(value.get("new"), dict)
+            or set(value["new"]) != CONTINUATION_NEW_KEYS):
+        raise LaunchBlocked("既有关闭账期复核文件格式或状态不符；未创建新会话。")
+    old, new = value["old"], value["new"]
+    for side in (old, new):
+        if (not isinstance(side.get("path"), str) or not side["path"].strip()
+                or not isinstance(side.get("ledger_id"), str) or not side["ledger_id"]):
+            raise LaunchBlocked("既有关闭账期复核文件身份字段不符；未创建新会话。")
+        for key in ("guard_sha256", "policy_sha256"):
+            if not isinstance(side.get(key), str) or not re.fullmatch(r"[0-9a-f]{64}", side[key]):
+                raise LaunchBlocked("既有关闭账期复核文件哈希不符；未创建新会话。")
+    if (old.get("halted_reason") != "closed_for_continuation:" + value["scope_tag"]
+            or type(old.get("liability_nano")) is not int or old["liability_nano"] < 0
+            or type(old.get("request_count")) is not int or old["request_count"] < 0
+            or not isinstance(old.get("requests_sha256"), str)
+            or not re.fullmatch(r"[0-9a-f]{64}", old["requests_sha256"])
+            or not isinstance(old.get("uncertain_requests"), list)
+            or not isinstance(new.get("policy"), dict)):
+        raise LaunchBlocked("既有关闭账期复核文件账务字段不符；未创建新会话。")
+    ids = set()
+    for row in old["uncertain_requests"]:
+        if (not isinstance(row, dict) or set(row) != {"id", "state", "reserve_nano"}
+                or not isinstance(row.get("id"), str)
+                or not re.fullmatch(r"[A-Za-z0-9_.:-]{1,128}", row["id"])
+                or row["id"] in ids or row.get("state") != "uncertain"
+                or type(row.get("reserve_nano")) is not int
+                or row["reserve_nano"] <= 0):
+            raise LaunchBlocked("既有关闭账期复核文件未知请求字段不符；未创建新会话。")
+        ids.add(row["id"])
+    return value
+
+
 def _resolve(value):
     path = Path(value)
     return path.resolve() if path.is_absolute() else (ROOT / path).resolve()
@@ -118,6 +176,17 @@ def load_profile(path):
             or any(not isinstance(item, str) or not item.strip() for item in pins)):
         raise LaunchBlocked("prior_uncertainty_review_pins 必须是复核文件路径列表。")
     result["prior_uncertainty_review_pins"] = [_resolve(item) for item in pins]
+    receipts = data.get("reviewed_continuation_receipts", [])
+    if (not isinstance(receipts, list)
+            or any(not isinstance(item, dict) or set(item) != {"record", "receipt"}
+                   or not isinstance(item["record"], str) or not item["record"].strip()
+                   or not isinstance(item["receipt"], str) or not item["receipt"].strip()
+                   for item in receipts)):
+        raise LaunchBlocked("reviewed_continuation_receipts 必须是 record/receipt 路径列表。")
+    result["reviewed_continuation_receipts"] = [
+        {"record": _resolve(item["record"]), "receipt": _resolve(item["receipt"])}
+        for item in receipts
+    ]
     if "gm_status" in data:
         if not isinstance(data["gm_status"], str) or not data["gm_status"].strip():
             raise LaunchBlocked("本机配置 gm_status 必须是非空路径。")
@@ -131,11 +200,14 @@ def _policy_from_guard(record):
         raise LaunchBlocked("既有付费会话记录缺少配对文件；为避免重复计费，已拒绝启动。")
     guard = _read_json(guard_path)
     try:
-        values = guard["policy"]
-        policy_type = CityValidationPolicy if "request_limit" in values else Policy
-        return policy_type(**values)
+        return _policy_from_values(guard["policy"])
     except (KeyError, TypeError) as exc:
         raise LaunchBlocked("既有付费会话记录格式未知；为避免重复计费，已拒绝启动。") from exc
+
+
+def _policy_from_values(values):
+    policy_type = CityValidationPolicy if "request_limit" in values else Policy
+    return policy_type(**values)
 
 
 def _load_review_pins(paths):
@@ -149,12 +221,25 @@ def _load_review_pins(paths):
     return pins
 
 
+def _load_continuation_receipts(links):
+    receipts = {}
+    for link in links:
+        record = link["record"].resolve()
+        if record in receipts:
+            raise LaunchBlocked("同一既有付费会话出现多个关闭账期复核文件；未创建新会话。")
+        receipt = _read_continuation_receipt(link["receipt"])
+        old_path, new_path = Path(receipt["old"]["path"]), Path(receipt["new"]["path"])
+        if (not old_path.is_absolute() or not new_path.is_absolute()
+                or old_path.resolve() != record or new_path.resolve() == record):
+            raise LaunchBlocked("既有关闭账期复核文件路径绑定不符；未创建新会话。")
+        receipts[record] = receipt
+    return receipts
+
+
 def _reviewed_rows(session):
     with session.transaction() as (db, meta):
         rows = [dict(row) for row in db.execute("SELECT * FROM requests ORDER BY id")]
         meta = dict(meta)
-    if meta.get("halted"):
-        raise LaunchBlocked("既有付费会话处于停止状态；请先人工核对，未创建新会话。")
     if any(row["state"] == "reserved" for row in rows):
         raise LaunchBlocked("既有付费会话仍有进行中的请求；未创建新会话。")
     for row in rows:
@@ -185,12 +270,84 @@ def _reviewed_rows(session):
     return meta, rows
 
 
-def audit_paid_record(record, pins):
+def _validate_continuation_receipt(record, session, meta, rows, receipt, all_records):
+    uncertain = [{"id": row["id"], "state": "uncertain", "reserve_nano": row["reserve"]}
+                 for row in rows if row["state"] == "uncertain"]
+    old_guard_hash = hashlib.sha256(session.guard.read_bytes()).hexdigest()
+    old_expected = {
+        "path": receipt["old"]["path"],
+        "ledger_id": meta["ledger_id"],
+        "guard_sha256": old_guard_hash,
+        "policy_sha256": session.policy_hash,
+        "halted_reason": "closed_for_continuation:" + receipt["scope_tag"],
+        "liability_nano": meta["liability"],
+        "request_count": meta["request_count"],
+        "requests_sha256": hashlib.sha256(encoded(rows).encode("utf-8")).hexdigest(),
+        "uncertain_requests": uncertain,
+    }
+    if (Path(receipt["old"]["path"]).resolve() != record.resolve()
+            or receipt["old"] != old_expected
+            or meta.get("halted") != old_expected["halted_reason"]):
+        raise LaunchBlocked("既有关闭账期复核文件与旧账本事实不完全一致；未创建新会话。")
+    old_policy = asdict(session.policy)
+    if "request_limit" not in old_policy:
+        raise LaunchBlocked("旧账本没有可保守递减的请求上限；未创建新会话。")
+    remaining_concurrency = session.policy.concurrency - len(uncertain)
+    remaining_requests = session.policy.request_limit - meta["request_count"]
+    if remaining_concurrency <= 0 or remaining_requests <= 0:
+        raise LaunchBlocked("旧账本没有可结转的并发或请求额度；未创建新会话。")
+    expected_policy = dict(old_policy)
+    expected_policy.update(
+        prior_unverified_nano=meta["liability"],
+        concurrency=remaining_concurrency,
+        request_limit=remaining_requests,
+    )
+    new_path = Path(receipt["new"]["path"]).resolve()
+    if new_path not in all_records or not new_path.is_file():
+        raise LaunchBlocked("新账本未完整列入既有付费会话；未创建新会话。")
+    new_guard_path = new_path.with_suffix(".guard.json")
+    new_guard = _read_json(new_guard_path)
+    try:
+        new_policy = _policy_from_values(receipt["new"]["policy"])
+    except (KeyError, TypeError) as exc:
+        raise LaunchBlocked("新账本策略无法核对；未创建新会话。") from exc
+    new_session = Ledger(new_path, new_policy)
+    expected_new = {
+        "path": receipt["new"]["path"],
+        "ledger_id": new_guard.get("ledger_id"),
+        "guard_sha256": hashlib.sha256(new_guard_path.read_bytes()).hexdigest(),
+        "policy_sha256": new_session.policy_hash,
+        "policy": expected_policy,
+    }
+    if (Path(receipt["new"]["path"]).resolve() != new_path
+            or receipt["new"] != expected_new
+            or new_guard.get("policy") != expected_policy
+            or new_guard.get("policy_sha256") != new_session.policy_hash):
+        raise LaunchBlocked("关闭账期复核文件与新账本策略不完全一致；未创建新会话。")
+    try:
+        with new_session.transaction() as (_db, new_meta):
+            if new_meta["ledger_id"] != receipt["new"]["ledger_id"]:
+                raise LaunchBlocked("关闭账期复核文件与新账本身份不一致；未创建新会话。")
+    except BudgetError as exc:
+        raise LaunchBlocked("关闭账期复核文件对应的新账本无法核对；未创建新会话。") from exc
+    return receipt
+
+
+def audit_paid_record(record, pins, receipts, all_records):
     try:
         session = Ledger(record, _policy_from_guard(record))
         meta, rows = _reviewed_rows(session)
     except (BudgetError, OSError, ValueError, KeyError, TypeError) as exc:
         raise LaunchBlocked("既有付费会话记录无法完整核对；为避免重复计费，已拒绝启动。") from exc
+    continuation = None
+    receipt = receipts.pop(record.resolve(), None)
+    if meta.get("halted"):
+        if receipt is None:
+            raise LaunchBlocked("既有付费会话处于停止状态；请先人工核对，未创建新会话。")
+        continuation = _validate_continuation_receipt(
+            record, session, meta, rows, receipt, all_records)
+    elif receipt is not None:
+        raise LaunchBlocked("关闭账期复核文件对应的旧账本并未关闭；未创建新会话。")
     uncertain = [{"id": row["id"], "state": "uncertain", "reserve_nano": row["reserve"]}
                  for row in rows if row["state"] == "uncertain"]
     expected_review = {
@@ -218,6 +375,7 @@ def audit_paid_record(record, pins):
         "uncertain_requests": len(uncertain),
         "retained_uncertain_cny": uncertain_nano / NANO,
         "uncertainty_review": expected_review if pin is not None else None,
+        "continuation_review": continuation,
     }
 
 
@@ -250,10 +408,16 @@ def discover_session_records(sessions_root):
 def audit_all(profile):
     records = set(profile["prior_paid_session_records"])
     records.update(discover_session_records(profile["sessions_root"]))
+    records = {record.resolve() for record in records}
     pins = _load_review_pins(profile["prior_uncertainty_review_pins"])
-    result = [audit_paid_record(record, pins) for record in sorted(records)]
+    receipts = _load_continuation_receipts(profile["reviewed_continuation_receipts"])
+    if any(record not in records for record in receipts):
+        raise LaunchBlocked("关闭账期复核文件未对应任何已列出的既有付费会话；未创建新会话。")
+    result = [audit_paid_record(record, pins, receipts, records) for record in sorted(records)]
     if pins:
         raise LaunchBlocked("未知请求复核文件未对应任何已列出的既有付费会话；未创建新会话。")
+    if receipts:
+        raise LaunchBlocked("关闭账期复核文件未完成全部账本核对；未创建新会话。")
     return result
 
 
@@ -439,7 +603,11 @@ def launch(profile_path, input_stream=sys.stdin, output_stream=sys.stdout,
             },
             "prior_paid_sessions": prior,
             "cumulative_settled_before_cny": round(sum(item["settled_cny"] for item in prior), 9),
-            "cumulative_prior_liability_cny": round(sum(item["liability_cny"] for item in prior), 9),
+            # A reviewed continuation carries the old liability into its new ledger.
+            # Exclude the closed source here so the same liability is not reported twice.
+            "cumulative_prior_liability_cny": round(sum(
+                item["liability_cny"] for item in prior
+                if item["continuation_review"] is None), 9),
             "retained_prior_uncertain_cny": retained_uncertain_cny,
             "current": {"id": status["ledger_id"], "settled_cny": 0.0, "requests": 0},
         }
