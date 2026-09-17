@@ -32,6 +32,8 @@
 
 普通用户可把 [StartLiving.local.example.json](../../StartLiving.local.example.json) 复制为被 Git 忽略的 `private/night-delivery/start-living.local.json`，只填写现有存档、Godot、授权配置和账本的**路径**，之后直接双击 `StartLiving.cmd`。`mode=live` 会调用同一个有界真实 AI runner，并在 `out_root` 下逐次建立带时间戳的新目录；`mode=observe_only` 明确打开无新决定回看。可配置带时区的 `expires_at` 和 `on_expiry=observe_only`：到期时启动器会显示警告并只读回看，不创建、补充、重置或延长账本。该本机 JSON 不应写 token，也不会进入 Git。
 
+09:00 后若用户明确希望继续真实 AI 生活，使用独立的 `StartLivingAI.cmd`。把 `StartLivingAI.local.example.json` 复制为被 Git 忽略的 `private/night-delivery/start-living-ai.local.json` 并填写路径；启动器会先清楚显示 900 秒、最多 32 个新决定、并发 1、本次授权 3.00 元／可用 2.85 元，且只接受交互式窗口中准确输入 `START AI`。确认前零写入；确认后也会先核对所有已列出的旧付费会话、历次用户会话和世界写锁。任何进行中、结果未知、停止、损坏、缺少配对文件或已有世界写入者都会在创建新会话前失败关闭。通过后才以唯一时间戳创建一次性记录和累计摘要；该入口没有无人值守确认参数，也不属于夜间自动流程。
+
 ## 玩家实际能看到什么
 
 右侧新增一个只读生活窗口：
