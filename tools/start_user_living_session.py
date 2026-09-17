@@ -27,6 +27,9 @@ CONCURRENCY = 1
 AUTHORIZED_NANO = 3 * NANO
 ALLOCATABLE_NANO = 2_850_000_000
 WINDOW_SECONDS = 1020
+# The existing runner adds a fixed 55-second process/drain margin to its own runtime
+# authorization. 900 + 65 + 55 = the approved 1020-second window exactly. The 65
+# seconds admit no new decisions; they only let an already-started reply settle and save.
 SHUTDOWN_WAIT_SECONDS = 65
 CONFIRMATION = "START AI"
 PROFILE_KEYS = {
@@ -175,7 +178,7 @@ def new_policy(deadline_utc):
         max_context_utf8_bytes=24576,
         concurrency=CONCURRENCY,
         deadline_utc=deadline_utc,
-        price_verified="2026-09-06 https://platform.kimi.com/ K2.6 China",
+        price_verified="2026-09-18 https://platform.kimi.com/ K2.6 China",
         request_limit=MAX_NEW_DECISIONS,
     )
 
@@ -220,8 +223,10 @@ def launch(profile_path, input_stream=sys.stdin, output_stream=sys.stdout,
            run_process=subprocess.run, now_fn=None):
     profile = load_profile(profile_path)
     _say(output_stream, "启动真实 AI 生活（一次新会话）")
-    _say(output_stream, "时长：900 秒；最多 32 个新决定；同时处理 1 个请求。")
-    _say(output_stream, "本次授权上限：3.00 元；可用于请求：2.85 元。时间或费用先到即停止。")
+    _say(output_stream, "生活运行：900 秒；最多 32 个新决定；同时处理 1 个请求。")
+    _say(output_stream, "900 秒后停止接收新决定，并给已开始的回复最多 65 秒收尾和保存。")
+    _say(output_stream, "按当前公布单价控制的本次预算上限：3.00 元；可用于请求：2.85 元。时间或费用先到即停止。")
+    _say(output_stream, "运行后显示的是按回复用量计算的本地费用估算；最终费用以供应商账单为准。")
     _say(output_stream, "这不会补充、重置或延长任何既有会话。")
     _say(output_stream, f"若确认，请在交互式窗口准确输入：{CONFIRMATION}")
     if not input_stream.isatty():
@@ -297,6 +302,8 @@ def launch(profile_path, input_stream=sys.stdin, output_stream=sys.stdout,
             manifest["status"] = "bootstrap_error"
             _write_json(manifest_path, manifest)
             raise
+        _say(output_stream, "本次新请求：%d；本地费用估算：%.6f 元（以供应商账单为准）。" % (
+            manifest["current"]["requests"], manifest["current"]["settled_cny"]))
         if return_code == 0:
             _say(output_stream, "本次真实 AI 生活已正常结束，记录已保存。")
         else:
