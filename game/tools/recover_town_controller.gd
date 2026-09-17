@@ -39,6 +39,14 @@ static func recover(owner: Node, town_save: String, resident: String, expected_r
 	if town.has_method("pending_job") and not town.pending_job(resident).is_empty():
 		town.release_writer(town_save)
 		return {"ok": false, "code": "resident_working"}
+	if reviewed_rule_error and expected_rule_error == "flour_unavailable" \
+			and town.has_method("review_depleted_baking_attempt"):
+		# This settled rejection already has a controller and a normal next_due. Review its exact
+		# personal evidence in place; replacing the controller would incorrectly reset the cooldown.
+		var reviewed: Dictionary = town.transaction(town_save,
+			func(): return town.review_depleted_baking_attempt(resident, expected_request))
+		town.release_writer(town_save)
+		return reviewed
 	if not owner or not is_instance_valid(owner):
 		town.release_writer(town_save)
 		return {"ok": false, "code": "invalid_owner"}

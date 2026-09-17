@@ -349,27 +349,6 @@ func destination(id: String, action: String) -> Vector3:
 			return _vector(point.position) + BAKING_WORK_OFFSET
 	return super.destination(id, action)
 
-func _personal_attempt_found_no_flour(id: String, point_id: String) -> bool:
-	# Compatibility for saves written before failed bake attempts became observations. The resident's
-	# own durable turn receipt is still authoritative personal evidence, and public flour never
-	# replenishes, so it is sufficient to suppress this one stale option without changing the save.
-	var turns: Variant = _state.godot.get("resident_turns", {})
-	if not turns is Dictionary:
-		return false
-	var record: Variant = turns.get(id, {})
-	if not record is Dictionary:
-		return false
-	var option_id := BAKING_OPTION_PREFIX + point_id
-	var entries: Array = record.get("history", []).duplicate() if record.get("history", []) is Array else []
-	entries.append(record)
-	for entry in entries:
-		if not entry is Dictionary or str(entry.get("action", "")) != option_id:
-			continue
-		var receipt: Variant = entry.get("result", {})
-		if receipt is Dictionary and str(receipt.get("code", "")) == "flour_unavailable":
-			return true
-	return false
-
 func trade_options(id: String) -> Array:
 	var result := super.trade_options(id)
 	if id not in active_ids() or not _state.godot.has("baking") or _busy(id):
@@ -382,8 +361,7 @@ func trade_options(id: String) -> Array:
 	for point_id in known:
 		var point: Dictionary = _baking().get("points", {}).get(str(point_id), {})
 		var observation: Dictionary = known.get(point_id, {})
-		if point.is_empty() or int(observation.get("flour_remaining", 0)) < 1 \
-				or _personal_attempt_found_no_flour(id, str(point_id)):
+		if point.is_empty() or int(observation.get("flour_remaining", 0)) < 1:
 			continue
 		_option(result, {"id": BAKING_OPTION_PREFIX + str(point_id), "action": BAKING_ACTION,
 			"label": "用%s的1份公共面粉烤一个自己的面包：站到炉边烤%d秒（面粉有限，烤好就能自己吃）" % [str(point.label), int(BAKING_WORK_SECONDS)],
@@ -404,6 +382,63 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 	if not option_id.begins_with(BAKING_OPTION_PREFIX):
 		return _failure("option_unavailable")
 	return _start_bake(id, option_id.trim_prefix(BAKING_OPTION_PREFIX), command_id, provenance)
+
+func review_depleted_baking_attempt(id: String, request_id: String) -> Dictionary:
+	# Exact zero-provider compatibility repair for a rejection saved before bake attempts became
+	# personal observations. It does not replace the controller or alter its existing schedule.
+	var record_value: Variant = _state.godot.get("resident_turns", {}).get(id, {})
+	if not record_value is Dictionary:
+		return _failure("resident_turn_not_found")
+	var record: Dictionary = record_value
+	var result: Variant = record.get("result", {})
+	var offered: Variant = record.get("offered_actions", {})
+	var accepted: Variant = record.get("accepted_reply", {})
+	var action := str(record.get("action", ""))
+	if str(record.get("request_id", "")) != request_id or str(record.get("status", "")) != "rule_rejection" \
+			or not result is Dictionary or bool(result.get("ok", true)) or str(result.get("code", "")) != "flour_unavailable" \
+			or not offered is Dictionary or not accepted is Dictionary or not bool(accepted.get("ok", false)) \
+			or not action.begins_with(BAKING_OPTION_PREFIX):
+		return _failure("flour_feedback_receipt_mismatch")
+	var decision: Variant = accepted.get("decision", {})
+	if not decision is Dictionary or not decision.get("action") is String \
+			or str(offered.get(str(decision.action), "")) != action:
+		return _failure("flour_feedback_choice_mismatch")
+	var archive: Variant = _state.godot.get("resident_archive", {}).get("entries", {}).get(request_id, {})
+	var application: Variant = archive.get("application", {}) if archive is Dictionary else {}
+	if not archive is Dictionary or str(archive.get("world_id", "")) != str(_state.world_id) \
+			or str(archive.get("resident_id", "")) != id or archive.get("original_reply", null) != accepted \
+			or not application is Dictionary or str(application.get("status", "")) != "rule_rejection" \
+			or str(application.get("code", "")) != "flour_unavailable":
+		return _failure("flour_feedback_archive_mismatch")
+	var point_id := action.trim_prefix(BAKING_OPTION_PREFIX)
+	var baking := _baking()
+	var point: Variant = baking.get("points", {}).get(point_id, {})
+	var observation: Variant = baking.get("known", {}).get(id, {}).get(point_id, {})
+	var due: Variant = record.get("next_due")
+	if not point is Dictionary or int(point.get("flour_remaining", -1)) != 0 \
+			or not (due is int or due is float) or not is_finite(float(due)) or float(due) < 0.0 \
+			or not pending_job(id).is_empty():
+		return _failure("flour_feedback_world_mismatch")
+	if record.get("replan_policy", "") == "stale_option_v1" \
+			and record.get("replan_not_before") == due and observation is Dictionary \
+			and int(observation.get("flour_remaining", -1)) == 0:
+		return {"ok": true, "duplicate": true, "code": "host_flour_feedback_already_reviewed",
+			"request_id": request_id, "next_due": due, "epoch": int(record.get("controller_epoch", 0))}
+	if not observation is Dictionary or int(observation.get("flour_remaining", 0)) < 1:
+		return _failure("flour_feedback_world_mismatch")
+	_append_life_event({"type": "baking_point_observed", "actor_id": id, "recipient_ids": [id],
+		"operation_id": request_id, "source": "resident_bake_attempt_feedback", "point_id": point_id,
+		"flour_remaining": 0, "text": "%s：我这次尝试时得知公共面粉已经用完。" % str(point.label)})
+	baking.known[id][point_id] = {"flour_remaining": 0,
+		"observed_elapsed": _state.godot.elapsed_seconds, "event_seq": _state.life.seq}
+	var reviews: Array = record.get("reviews", []).duplicate(true) if record.get("reviews", []) is Array else []
+	reviews.append({"status": "rule_rejection", "error": "", "request_id": request_id,
+		"epoch": int(record.get("controller_epoch", 0)), "reason": "host_reviewed_flour_unavailable_feedback"})
+	record.reviews = reviews
+	record.replan_policy = "stale_option_v1"
+	record.replan_not_before = due
+	return {"ok": true, "code": "host_flour_feedback_reviewed", "request_id": request_id,
+		"next_due": due, "epoch": int(record.get("controller_epoch", 0))}
 
 func start_action(id: String, action: String, command_id: String, provenance: String = "local_rule_policy", target_position: Vector3 = Vector3.INF) -> Dictionary:
 	# Direct life commands are the other public decision entry. Together with submit_trade this

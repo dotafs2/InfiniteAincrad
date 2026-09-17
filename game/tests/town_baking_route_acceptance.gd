@@ -3,6 +3,7 @@ extends "res://tests/town_trade_acceptance.gd"
 const BakingTown = preload("res://core/town_baking.gd")
 const PlainRuntime = preload("res://core/town_runtime.gd")
 const TownTurns = preload("res://agents/town_turns.gd")
+const ControllerRecovery = preload("res://tools/recover_town_controller.gd")
 
 class BakingChoiceBrain extends Node:
 	var turns
@@ -141,16 +142,56 @@ func run() -> void:
 	check(int(feedback_view.last_observed_flour) == 0
 		and feedback_view.knowledge_source == "personal_action_feedback",
 		"the next personal context attributes zero flour to the failed action")
-	var personal_feedback: Dictionary = town._state.godot.baking.known[witness][point.id].duplicate(true)
-	town._state.godot.baking.known[witness][point.id] = stale_baking_before.known[witness][point.id].duplicate(true)
-	check(not town.trade_options(witness).any(func(entry): return entry.get("id") == option),
-		"a legacy save's own durable rejection also suppresses the depleted option")
-	town._state.godot.baking.known[witness][point.id] = personal_feedback
 	var stale_record: Dictionary = stale_turns._record(witness)
 	check(stale_record.get("replan_policy", "") == "stale_option_v1"
 		and stale_record.get("replan_not_before", -1) == stale_record.get("next_due", -2)
 		and not stale_turns._requires_review(stale_record) and stale_turns._replan_cooling(stale_record),
 		"flour depletion uses the existing bounded cooldown instead of permanent review or immediate retry")
+	# Recreate the exact shape written by the previous runtime: it retained the authoritative
+	# rejection and normal next_due, but did not yet record personal flour feedback or a replan marker.
+	var legacy_snapshot: Dictionary = stale_after.duplicate(true)
+	var feedback_event: Dictionary = feedback_events[0]
+	var legacy_events: Array = []
+	for event in legacy_snapshot.life.events:
+		if event.get("event_id", "") != feedback_event.get("event_id", ""):
+			legacy_events.append(event)
+	legacy_snapshot.life.events = legacy_events
+	legacy_snapshot.life.seq = int(feedback_event.seq) - 1
+	legacy_snapshot.godot.new_events.erase(feedback_event.event_id)
+	legacy_snapshot.godot.baking.known[witness][point.id] = stale_baking_before.known[witness][point.id].duplicate(true)
+	legacy_snapshot.godot.resident_turns[witness].erase("replan_policy")
+	legacy_snapshot.godot.resident_turns[witness].erase("replan_not_before")
+	var legacy_record_before: Dictionary = legacy_snapshot.godot.resident_turns[witness].duplicate(true)
+	var legacy_path := path + ".legacy-flour-review.json"
+	var legacy_file := FileAccess.open(legacy_path, FileAccess.WRITE)
+	legacy_file.store_string(JSON.stringify(legacy_snapshot, "", true, true))
+	legacy_file.close()
+	var reviewed: Dictionary = await ControllerRecovery.recover(root, legacy_path, witness,
+		str(legacy_record_before.request_id), "flour_unavailable")
+	check(reviewed.get("code", "") == "host_flour_feedback_reviewed",
+		"the exact old rejection receives a zero-provider personal-feedback review")
+	var repaired := BakingTown.new()
+	check(repaired.load_from(legacy_path).ok, "the reviewed old rejection remains a valid save")
+	var repaired_record: Dictionary = repaired._state.godot.resident_turns[witness]
+	check(repaired_record.status == "rule_rejection"
+		and repaired_record.request_id == legacy_record_before.request_id
+		and repaired_record.controller_epoch == legacy_record_before.controller_epoch
+		and repaired_record.controller_id == legacy_record_before.controller_id
+		and repaired_record.accepted_reply == legacy_record_before.accepted_reply
+		and repaired_record.next_due == legacy_record_before.next_due,
+		"review preserves the old reply, controller epoch and original cooldown")
+	check(repaired_record.replan_policy == "stale_option_v1"
+		and repaired_record.replan_not_before == legacy_record_before.next_due
+		and repaired.resident_view(witness).baking_points.filter(func(entry): return entry.get("id") == point.id)[0].last_observed_flour == 0
+		and not repaired.trade_options(witness).any(func(entry): return entry.get("id") == option),
+		"review records personal depletion and suppresses only the stale candidate")
+	var reviewed_bytes := FileAccess.get_file_as_bytes(legacy_path)
+	var reviewed_twice: Dictionary = await ControllerRecovery.recover(root, legacy_path, witness,
+		str(legacy_record_before.request_id), "flour_unavailable")
+	check(reviewed_twice.get("duplicate", false)
+		and FileAccess.get_file_as_bytes(legacy_path) == reviewed_bytes,
+		"the exact old-feedback review is byte-idempotent")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(legacy_path))
 	stale_turns.free()
 	var reverse_before := town.snapshot()
 	var reverse_life: Dictionary = town.start_action(witness, "rest", "fixture:bake-1", "opengameagent_fixture")
