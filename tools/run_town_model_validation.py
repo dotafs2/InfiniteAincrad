@@ -303,6 +303,24 @@ def recoverable_stale_option_wait(turn):
             and turn.get('inflight', False) is False)
 
 
+def recoverable_local_session_limit_wait(turn):
+    """Recognize the exact no-operation limit receipt that cold restore may reopen."""
+    if not isinstance(turn, dict) or turn.get('status') != 'provider_error':
+        return False
+    code = 'brain_session_request_limit'
+    request_id = turn.get('request_id')
+    spent = turn.get('session_limit_recovery_spent')
+    return (turn.get('error') == code
+            and turn.get('accepted_reply') == {'ok': False, 'code': code}
+            and isinstance(request_id, str) and bool(request_id)
+            and turn.get('command_id') == request_id
+            and turn.get('provider_command_id') == ''
+            and turn.get('provenance') == ''
+            and isinstance(spent, str) and spent != request_id
+            and turn.get('session_limit_recovery_attempt') is False
+            and turn.get('inflight', False) is False)
+
+
 def classify_model_turns(capture):
     """Split fatal turn states from exact, already-verified recoverable waits."""
     turns = capture.get('resident_turns', {}) if isinstance(capture, dict) else {}
@@ -322,6 +340,13 @@ def classify_model_turns(capture):
                 'code': 'option_unavailable',
                 'replan_policy': 'stale_option_v1',
                 'next_due': _finite_number(turn.get('next_due')),
+            }
+        elif recoverable_local_session_limit_wait(turn):
+            waits[actor] = {
+                'status': 'recoverable_wait',
+                'source_status': 'provider_error',
+                'code': 'brain_session_request_limit',
+                'recovery': 'cold_restart_fresh_turn',
             }
         else:
             errors[actor] = status
