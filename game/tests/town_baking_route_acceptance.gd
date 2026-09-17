@@ -4,6 +4,17 @@ const BakingTown = preload("res://core/town_baking.gd")
 const PlainRuntime = preload("res://core/town_runtime.gd")
 const TownTurns = preload("res://agents/town_turns.gd")
 
+class BakingChoiceBrain extends Node:
+	var turns
+	var option := ""
+	func propose(view: Dictionary, _seq: int) -> Dictionary:
+		var alias := "not-offered"
+		for key in turns._record(view.identity.id).offered_actions:
+			if turns._record(view.identity.id).offered_actions[key] == option:
+				alias = key
+		return {"ok": true, "decision": {"action": alias, "reason": "Explicit stale baking fixture"},
+			"command_id": "fixture-provider-stale-bake", "provenance": "opengameagent_fixture"}
+
 func baking_fixture() -> Dictionary:
 	var world := trade_fixture()
 	world.life.seq = 1
@@ -97,11 +108,50 @@ func run() -> void:
 	check(town.trade_options(witness).any(func(entry): return entry.get("id") == option)
 		and town.resident_view(witness).baking_points.filter(func(entry): return entry.get("id") == point.id)[0].last_observed_flour == 1,
 		"a stale personal observation offers only what that resident knows")
-	var stale_before := town.snapshot()
-	var stale_refused: Dictionary = town.submit_trade(witness, option, "fixture:stale-bake", "opengameagent_fixture")
-	check(not stale_refused.ok and stale_refused.get("code", "") == "flour_unavailable",
+	var stale_baking_before: Dictionary = town.snapshot().godot.baking.duplicate(true)
+	var stale_event_count: int = town.snapshot().life.events.size()
+	var stale_turns := TownTurns.new()
+	root.add_child(stale_turns)
+	stale_turns.town = town
+	stale_turns.save_path = path
+	var stale_brain := BakingChoiceBrain.new()
+	stale_brain.turns = stale_turns
+	stale_brain.option = option
+	check(stale_turns.connect_controller(witness, stale_brain, "fixture:stale-baking").ok,
+		"stale baking resident attaches to the ordinary turn controller")
+	var stale_refused: Dictionary = await stale_turns.step(witness)
+	check(stale_refused.code == "rule_rejection"
+		and stale_refused.record.result.get("code", "") == "flour_unavailable",
 		"the bake start rechecks real flour and honestly refuses stale knowledge")
-	check(town.snapshot() == stale_before, "a stale flour refusal changes no resource or journal")
+	var stale_after: Dictionary = town.snapshot()
+	var normalized_baking: Dictionary = stale_after.godot.baking.duplicate(true)
+	normalized_baking.known[witness][point.id] = stale_baking_before.known[witness][point.id].duplicate(true)
+	check(normalized_baking == stale_baking_before,
+		"stale flour feedback creates no flour, loaf, command or job")
+	var feedback_events: Array = []
+	for event in stale_after.life.events.slice(stale_event_count):
+		if event.get("type") == "baking_point_observed" and event.get("actor_id") == witness \
+				and event.get("recipient_ids") == [witness] and event.get("point_id") == point.id \
+				and event.get("flour_remaining") == 0 and event.get("source") == "resident_bake_attempt_feedback":
+			feedback_events.append(event)
+	check(feedback_events.size() == 1, "the failed attempt gives only that resident one zero-flour fact")
+	check(not town.trade_options(witness).any(func(entry): return entry.get("id") == option),
+		"personal zero-flour feedback removes the stale bake option")
+	var feedback_view: Dictionary = town.resident_view(witness).baking_points.filter(func(entry): return entry.get("id") == point.id)[0]
+	check(int(feedback_view.last_observed_flour) == 0
+		and feedback_view.knowledge_source == "personal_action_feedback",
+		"the next personal context attributes zero flour to the failed action")
+	var personal_feedback: Dictionary = town._state.godot.baking.known[witness][point.id].duplicate(true)
+	town._state.godot.baking.known[witness][point.id] = stale_baking_before.known[witness][point.id].duplicate(true)
+	check(not town.trade_options(witness).any(func(entry): return entry.get("id") == option),
+		"a legacy save's own durable rejection also suppresses the depleted option")
+	town._state.godot.baking.known[witness][point.id] = personal_feedback
+	var stale_record: Dictionary = stale_turns._record(witness)
+	check(stale_record.get("replan_policy", "") == "stale_option_v1"
+		and stale_record.get("replan_not_before", -1) == stale_record.get("next_due", -2)
+		and not stale_turns._requires_review(stale_record) and stale_turns._replan_cooling(stale_record),
+		"flour depletion uses the existing bounded cooldown instead of permanent review or immediate retry")
+	stale_turns.free()
 	var reverse_before := town.snapshot()
 	var reverse_life: Dictionary = town.start_action(witness, "rest", "fixture:bake-1", "opengameagent_fixture")
 	var reverse_trade: Dictionary = town.submit_trade(witness, "trade:unknown", "fixture:bake-1", "opengameagent_fixture")

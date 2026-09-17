@@ -118,7 +118,8 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
         // Explicit projection prevents incidental host fields from being sent.
         var personal = new Dictionary<string, JsonElement>();
         foreach (var key in new[] { "identity", "observations", "needs", "experiences", "memory", "inventory", "actions", "available_actions",
-            "nearby_residents", "items", "skills", "contracts", "life_account", "wallet", "nearby_skilled_roles", "action_details", "known_rules", "unavailable_actions" })
+            "nearby_residents", "items", "skills", "contracts", "life_account", "wallet", "nearby_skilled_roles", "action_details", "known_rules", "unavailable_actions",
+            "baking_points" })
             if (view.TryGetProperty(key, out var value)) personal[key] = value;
         Require(personal.ContainsKey("identity") && personal.ContainsKey("available_actions"));
         Require(S(personal["identity"], "id") == actor);

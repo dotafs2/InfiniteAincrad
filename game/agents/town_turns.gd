@@ -3,6 +3,7 @@ extends Node
 ## A pending/failed request isolates its resident; the rest of the world continues.
 const Brain = preload("res://agents/resident_brain.gd")
 const IDLE_COOLDOWN := 1800.0
+const STALE_OPTION_REJECTION_CODES := ["option_unavailable", "flour_unavailable"]
 ## Request ids this process failed with the brain's process-local request limit.
 ## Their cause is in force here, so they are never treated as cold-restored.
 var _local_limit_failures: Dictionary = {}
@@ -198,7 +199,7 @@ func _requires_review(record: Dictionary, id: String = "") -> bool:
 	# unknown failures retain their review boundary; no provider call is replayed.
 	var due: Variant = record.get("replan_not_before")
 	return not (record.get("replan_policy") == "stale_option_v1"
-		and record.get("result", {}).get("code") == "option_unavailable"
+		and record.get("result", {}).get("code") in STALE_OPTION_REJECTION_CODES
 		and (due is int or due is float) and is_finite(float(due)) and float(due) >= 0.0)
 
 func _replan_cooling(record: Dictionary) -> bool:
@@ -693,7 +694,7 @@ func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary, 
 		# get an immediate next turn rather than being swallowed by this watermark.
 		record.seen_seq = _own_seq(id)
 		record.next_due = town._state.godot.elapsed_seconds + (0.0 if arrived_while_thinking else IDLE_COOLDOWN)
-		if not effect.ok and aliases.has(decision.action) and effect.get("code") == "option_unavailable":
+		if not effect.ok and aliases.has(decision.action) and effect.get("code") in STALE_OPTION_REJECTION_CODES:
 			# The world changed while a valid choice was being considered. Observe
 			# afresh later, including the rejection. Messages cannot bypass this
 			# floor and turn repeated stale replies into an immediate paid loop.
