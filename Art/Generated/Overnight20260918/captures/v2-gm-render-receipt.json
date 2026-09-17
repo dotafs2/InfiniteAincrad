@@ -1,0 +1,109 @@
+{
+  "mode": "restore-only exact-replay audit copy; not adoption evidence",
+  "source_sha256_before": "d29323f619934fb6c7938da7fe42f72b4fc642ecc9a7296f950452d22dc04a55",
+  "copy_sha256_before": "d29323f619934fb6c7938da7fe42f72b4fc642ecc9a7296f950452d22dc04a55",
+  "gm_source_sha256_before": "2ab3651a9abced2f3e336e0c07bf648c856aca79b291b7106d8fd4a04dec2475",
+  "gm_copy_sha256_before": "2ab3651a9abced2f3e336e0c07bf648c856aca79b291b7106d8fd4a04dec2475",
+  "started_at": "2026-09-18T04:37:21.7256936+08:00",
+  "pid": 63204,
+  "exit_code": 0,
+  "finished_at": "2026-09-18T04:37:35.7457168+08:00",
+  "source_sha256_after": "d29323f619934fb6c7938da7fe42f72b4fc642ecc9a7296f950452d22dc04a55",
+  "copy_sha256_after": "d29323f619934fb6c7938da7fe42f72b4fc642ecc9a7296f950452d22dc04a55",
+  "gm_source_sha256_after": "2ab3651a9abced2f3e336e0c07bf648c856aca79b291b7106d8fd4a04dec2475",
+  "gm_copy_sha256_after": "2ab3651a9abced2f3e336e0c07bf648c856aca79b291b7106d8fd4a04dec2475",
+  "second_pid": 68428,
+  "second_exit_code": 0,
+  "panel_review": {
+    "adoption_proven": false,
+    "all_rows_fit_without_scrolling": false,
+    "content_height": 1085.0,
+    "g_key_opens_panel": true,
+    "header": "快照生成：2026-09-17T20:26:00.315Z\n只读完成记录 · 不代表当前实时运行",
+    "loaded_rows": 10,
+    "mode": "restore-only audit-copy review",
+    "panel_rect": [
+      1000.0,
+      20.0,
+      378.0,
+      600.0
+    ],
+    "scroll_view_height": 488.0,
+    "statuses": [
+      {
+        "id": "gm-01",
+        "source_seq": 166.0,
+        "status": "观察完成"
+      },
+      {
+        "id": "gm-02",
+        "source_seq": 166.0,
+        "status": "观察完成"
+      },
+      {
+        "id": "gm-03",
+        "source_seq": 166.0,
+        "status": "观察完成"
+      },
+      {
+        "id": "gm-04",
+        "source_seq": 166.0,
+        "status": "观察完成"
+      },
+      {
+        "id": "gm-05",
+        "source_seq": 243.0,
+        "status": "方案评审完成"
+      },
+      {
+        "id": "gm-06",
+        "source_seq": 166.0,
+        "status": "观察完成"
+      },
+      {
+        "id": "gm-07",
+        "source_seq": 214.0,
+        "status": "方案评审完成"
+      },
+      {
+        "id": "gm-08",
+        "source_seq": 166.0,
+        "status": "观察完成"
+      },
+      {
+        "id": "gm-09",
+        "source_seq": 166.0,
+        "status": "观察完成"
+      },
+      {
+        "id": "gm-10",
+        "source_seq": 166.0,
+        "status": "观察完成"
+      }
+    ],
+    "viewport_size": [
+      1400,
+      900
+    ]
+  },
+  "screenshot_sha256": {
+    "06-v2-audit-street.png": "30fe395323c4b271362db7f3d0b4ed21874ada7434594d2dae20036803f43a1a",
+    "07-gm-panel-top.png": "1a45ff19819248b570ed92bc2ff328fdae5e5b96bc0fb65a8589b0546c9db10f",
+    "08-gm-panel-middle.png": "3af5d001a7fc5629743adfdee5b72e2c49483710417bf6c557878667faed4dad",
+    "09-gm-panel-bottom.png": "df2ac44fc5765f1e4387749b1e118e71b103b265c44c74258fa16932fc06fe29"
+  },
+  "life_seq": 245,
+  "new_decisions": "none_restore",
+  "validation_decisions_started": 0,
+  "new_model_api_calls": 0,
+  "canonical_opened": false,
+  "delivery_source_modified": false,
+  "resources_modified": false,
+  "errors": [],
+  "warnings": [
+    "Deprecated navigation bake API",
+    "agent_radius voxel precision warning",
+    "Navigation region synchronization: 4 edge errors"
+  ],
+  "adoption_proven": false
+}
