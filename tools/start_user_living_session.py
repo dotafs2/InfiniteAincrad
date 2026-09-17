@@ -229,6 +229,36 @@ def _say(stream, message=""):
     print(message, file=stream, flush=True)
 
 
+def _read_runner_summary(output):
+    try:
+        value = json.loads((output / "result.json").read_text(encoding="utf-8"))
+        return value if isinstance(value, dict) else {}
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return {}
+
+
+def _is_healthy_idle_summary(value, runner_exit_code):
+    """Accept only the runner's strict, non-passing saved-idle classification."""
+    if (not isinstance(value, dict) or value.get("idle_completed") is not True
+            or value.get("validation_status") != "not_exercised"
+            or value.get("validation_passed") is not False
+            or value.get("validation_exercised") is not False
+            or value.get("engine_exit") != 0
+            or value.get("upstream_requests") != 0
+            or value.get("model_errors") != {}
+            or value.get("budget_stop_reason")
+            or value.get("shutdown_incomplete") is not False
+            or value.get("world_progress_observed") is not True
+            or runner_exit_code != 1):
+        return False
+    gateway = value.get("gateway_shutdown")
+    startup = value.get("startup_fault_export")
+    return (isinstance(gateway, dict) and gateway.get("drained_complete") is True
+            and gateway.get("unresolved_workers", 0) == 0
+            and isinstance(startup, dict) and startup.get("status") == "not_applicable"
+            and startup.get("reason") == "healthy_idle_progress")
+
+
 def launch(profile_path, input_stream=sys.stdin, output_stream=sys.stdout,
            run_process=subprocess.run, now_fn=None):
     profile = load_profile(profile_path)
@@ -292,11 +322,15 @@ def launch(profile_path, input_stream=sys.stdin, output_stream=sys.stdout,
         _write_json(manifest_path, manifest)
         _say(output_stream, "核对通过。正在打开十位居民的真实 AI 生活……")
         try:
-            result = run_process(_runner_command(profile, record, session_dir / "run"), cwd=ROOT)
+            run_output = session_dir / "run"
+            result = run_process(_runner_command(profile, record, run_output), cwd=ROOT)
             return_code = int(result.returncode)
+            runner_summary = _read_runner_summary(run_output)
+            idle_completed = _is_healthy_idle_summary(runner_summary, return_code)
             final = session.status()
-            manifest["status"] = "complete" if return_code == 0 else "runner_failed"
+            manifest["status"] = "complete" if return_code == 0 else "not_exercised" if idle_completed else "runner_failed"
             manifest["runner_exit_code"] = return_code
+            manifest["idle_completed"] = idle_completed
             manifest["current"] = {
                 "id": final["ledger_id"],
                 "settled_cny": final["settled_cny"],
@@ -314,11 +348,13 @@ def launch(profile_path, input_stream=sys.stdin, output_stream=sys.stdout,
             raise
         _say(output_stream, "本次新请求：%d；本地费用估算：%.6f 元（以供应商账单为准）。" % (
             manifest["current"]["requests"], manifest["current"]["settled_cny"]))
-        if return_code == 0:
+        if idle_completed:
+            _say(output_stream, "本段没有新的 AI 决定，世界已保存。模型验收仍为未执行，不记作通过。")
+        elif return_code == 0:
             _say(output_stream, "本次真实 AI 生活已正常结束，记录已保存。")
         else:
             _say(output_stream, "本次运行未正常结束；记录保留且不会自动重试。请先人工核对。")
-        return return_code
+        return 0 if idle_completed else return_code
     finally:
         bootstrap_lock.rmdir()
 

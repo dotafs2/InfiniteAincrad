@@ -130,6 +130,40 @@ class UserLivingBootstrapTests(unittest.TestCase):
         self.assertIn("本地费用估算：0.000000 元", output.getvalue())
         self.assertIn("以供应商账单为准", output.getvalue())
 
+    def test_healthy_idle_runner_is_saved_without_claiming_ai_passed(self):
+        def idle_no_op(command, **_kwargs):
+            run_output = Path(command[command.index("--out") + 1])
+            run_output.mkdir()
+            (run_output / "result.json").write_text(json.dumps({
+                "idle_completed": True,
+                "validation_status": "not_exercised",
+                "validation_passed": False,
+                "validation_exercised": False,
+                "engine_exit": 0,
+                "upstream_requests": 0,
+                "model_errors": {},
+                "budget_stop_reason": "",
+                "shutdown_incomplete": False,
+                "world_progress_observed": True,
+                "gateway_shutdown": {"drained_complete": True, "unresolved_workers": 0},
+                "startup_fault_export": {
+                    "status": "not_applicable", "reason": "healthy_idle_progress"},
+            }), encoding="utf-8")
+            return SimpleNamespace(returncode=1)
+
+        output = io.StringIO()
+        result = bootstrap.launch(
+            self.profile, TtyInput("START AI\n"), output, idle_no_op,
+            lambda: bootstrap.datetime(2026, 9, 18, 1, 0, 0, tzinfo=bootstrap.timezone.utc))
+        self.assertEqual(result, 0)
+        manifest = json.loads(next(self.sessions.rglob("session.json")).read_text(encoding="utf-8"))
+        self.assertEqual(manifest["runner_exit_code"], 1)
+        self.assertEqual(manifest["status"], "not_exercised")
+        self.assertTrue(manifest["idle_completed"])
+        self.assertIn("本段没有新的 AI 决定，世界已保存", output.getvalue())
+        self.assertIn("模型验收仍为未执行，不记作通过", output.getvalue())
+        self.assertNotIn("本次运行未正常结束", output.getvalue())
+
     @unittest.skipUnless(os.name == "nt" and Path(r"C:\Program Files\dotnet\dotnet.exe").is_file(),
                          "Windows .NET host inheritance check")
     def test_cmd_child_inherits_local_dotnet_runtime_settings(self):

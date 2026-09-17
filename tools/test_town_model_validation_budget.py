@@ -420,6 +420,40 @@ class BudgetLauncherTests(unittest.TestCase):
         self.assertFalse(unknown['observed'])
         self.assertEqual(unknown['delta'], {})
 
+    def test_time_advancing_clean_cooldown_is_idle_not_startup_failure(self):
+        world_id = 'fixture:model-validation-world'
+        capture = {'world_id': world_id, 'source_seq': 0, 'life_seq': 12,
+                   'new_events': [], 'validation_decisions_started': 0,
+                   'resident_turns': {'fixture:a': {'status': 'settled'}},
+                   'shutdown': {'resolved': True, 'timed_out': False, 'exit_code': 0,
+                                'in_flight': [], 'resident_requests_owed': []}}
+        classification = launcher.classify_validation(0, capture, {}, '', False, 0)
+        baseline = {'status': 'available', 'world_id': world_id, 'life_seq': 12,
+                    'godot_elapsed_seconds': 100.0, 'world_elapsed_seconds': 100.0}
+        progress = launcher.world_progress(
+            baseline, capture, self.gm_snapshot(world_id, 12, 700.0, 700.0))
+        shutdown = {'intake_closed': True, 'workers_accepted': 0,
+                    'workers_in_flight': False, 'drained_complete': True,
+                    'unresolved_workers': 0, 'engine_exited_with_workers_pending': False,
+                    'worker_start_failures': 0, 'drain_error': ''}
+        ledger_after = {'counts': {'settled': 84}, 'halted': ''}
+        args = (classification, 0, capture, {}, '', shutdown, progress, ledger_after, 0)
+        self.assertTrue(launcher.healthy_idle_segment(*args))
+        self.assertEqual(classification['validation_status'], 'not_exercised')
+        self.assertFalse(classification['validation_exercised'])
+        with self.subTest('no-time-progress'):
+            unchanged = launcher.world_progress(
+                baseline, capture, self.gm_snapshot(world_id, 12, 100.0, 100.0))
+            self.assertFalse(launcher.healthy_idle_segment(
+                classification, 0, capture, {}, '', shutdown, unchanged, ledger_after, 0))
+        with self.subTest('unresolved'):
+            unresolved = dict(ledger_after, counts={'settled': 84, 'reserved': 1})
+            self.assertFalse(launcher.healthy_idle_segment(
+                classification, 0, capture, {}, '', shutdown, progress, unresolved, 0))
+        with self.subTest('engine-error'):
+            self.assertFalse(launcher.healthy_idle_segment(
+                classification, 3, capture, {}, '', shutdown, progress, ledger_after, 0))
+
     def test_startup_fault_append_is_idempotent_and_refuses_wrong_world_or_schema(self):
         capture = {'world_id': 'fixture:model-validation-world', 'source_seq': 0,
                    'life_seq': 0, 'pending_count': 0, 'validation_decisions_started': 0}

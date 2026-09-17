@@ -370,6 +370,55 @@ def world_progress(baseline, capture, gm_document=None):
             'absolute': absolute, 'delta': delta}
 
 
+def healthy_idle_segment(classification, engine_exit, capture, model_errors,
+                         budget_stop_reason, shutdown, progress, ledger_after,
+                         upstream_requests):
+    """Recognize a saved simulation interval that legitimately made no AI decision.
+
+    This is deliberately narrower than ``not_exercised``. It does not make the model
+    validation pass and does not change its CLI exit code; it only prevents a clean,
+    time-advancing cooldown interval from being exported as a startup fault.
+    """
+    if (classification.get('validation_status') != 'not_exercised'
+            or classification.get('validation_decisions_started') != 0
+            or classification.get('classification_reasons') != [
+                'no_validation_decisions', 'no_upstream_requests']
+            or engine_exit != 0 or _nonnegative_int(upstream_requests) != 0
+            or not isinstance(capture, dict) or not capture or model_errors or budget_stop_reason):
+        return False
+    engine_shutdown = capture.get('shutdown')
+    if (not isinstance(engine_shutdown, dict) or engine_shutdown.get('resolved') is not True
+            or engine_shutdown.get('timed_out') is not False
+            or engine_shutdown.get('exit_code') != 0
+            or engine_shutdown.get('in_flight') != []
+            or engine_shutdown.get('resident_requests_owed') != []):
+        return False
+    if (not isinstance(shutdown, dict) or shutdown.get('drained_complete') is not True
+            or shutdown.get('intake_closed') is not True
+            or shutdown.get('unresolved_workers', 0) != 0
+            or shutdown.get('workers_in_flight') is not False
+            or shutdown.get('workers_accepted', 0) != 0
+            or shutdown.get('worker_start_failures', 0) != 0
+            or shutdown.get('drain_error', '')
+            or shutdown.get('engine_exited_with_workers_pending') is not False):
+        return False
+    if not isinstance(ledger_after, dict) or ledger_after.get('halted'):
+        return False
+    counts = ledger_after.get('counts')
+    if (not isinstance(counts, dict) or counts.get('reserved', 0) != 0
+            or counts.get('uncertain', 0) != 0):
+        return False
+    if (not isinstance(progress, dict) or progress.get('comparison_status') != 'comparable'
+            or progress.get('observed') is not True):
+        return False
+    delta = progress.get('delta')
+    if not isinstance(delta, dict):
+        return False
+    time_deltas = [delta.get('gm_godot_elapsed_seconds'), delta.get('gm_world_elapsed_seconds')]
+    return any(isinstance(value, (int, float)) and not isinstance(value, bool) and value > 0
+               for value in time_deltas)
+
+
 def _gm_snapshot_error(document, capture):
     if not isinstance(document, dict):
         return 'gm_export_root_invalid'
@@ -578,18 +627,24 @@ def main():
         except (OSError, UnicodeError, json.JSONDecodeError):
             pass
     progress = world_progress(baseline, capture, gm_document)
+    after = ledger.status()
+    idle_completed = healthy_idle_segment(classification, result.returncode, capture, errors,
+                                          gate.failure, shutdown, progress, after, gate.sent)
     startup_fault = {'status': 'not_applicable'}
-    if classification['validation_status'] == 'not_exercised':
+    if idle_completed:
+        startup_fault['reason'] = 'healthy_idle_progress'
+    elif classification['validation_status'] == 'not_exercised':
         startup_fault = append_startup_fault(gm_export, capture, classification,
                                              result.returncode, gate.sent)
     passed = classification['validation_status'] == 'passed'
     summary = {'engine_exit': result.returncode, 'validation_passed': passed,
-               **classification, 'model_errors': errors, 'ledger_before': before, 'ledger_after': ledger.status(),
+               **classification, 'model_errors': errors, 'ledger_before': before, 'ledger_after': after,
                'capture_exists': (out / 'capture/evidence.json').exists(), 'original_world_promoted': False,
                'budget_stop_reason': gate.failure, 'upstream_requests': gate.sent, 'upstream_concurrency': 1,
                'carried_uncertainty_reviewed': gate.review is not None, 'gateway_shutdown': shutdown,
                'shutdown_incomplete': bool(shutdown_incomplete),
                'shutdown_wait_seconds': args.shutdown_wait,
+               'idle_completed': bool(idle_completed),
                'world_progress_observed': progress['observed'], 'world_progress': progress,
                'startup_fault_export': startup_fault}
     (out / 'result.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
