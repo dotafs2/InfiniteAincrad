@@ -1,6 +1,6 @@
 extends SceneTree
 
-const Town := preload("res://core/town_runtime.gd")
+const Town := preload("res://core/town_baking.gd")
 const Turns := preload("res://agents/town_turns.gd")
 const Recovery := preload("res://tools/recover_town_controller.gd")
 const ValidFixture := preload("res://tests/town_life_acceptance.gd")
@@ -39,6 +39,8 @@ func write_save(path: String, pending: bool = false) -> void:
 	seed.life.accounts = [{"resident_id": "fixture:a", "wood": 2, "iron": 1, "kindling": 0, "reserved_col": 0}]
 	seed.life.events = [{"seq": 1, "type": "old_history", "actor_id": "fixture:a", "recipient_ids": ["fixture:a"], "operation_id": "old-event"}]
 	seed.life.seq = 1
+	seed.godot.baking = {"schema_version": 1, "points": {}, "known": {}, "jobs": {},
+		"commands": {}, "installs": {}, "ledgers": {}}
 	seed.godot.resident_turns = {"fixture:a": {"status": "pending" if pending else "ready", "seen_seq": 1, "history": [{"action": "old", "status": "settled"}],
 		"controller_epoch": 2, "controller_id": "old:controller", "request_number": 0, "request_id": "old-request", "reviews": []}}
 	var file := FileAccess.open(path, FileAccess.WRITE)
@@ -47,7 +49,8 @@ func write_save(path: String, pending: bool = false) -> void:
 
 func core_snapshot(town: RefCounted) -> Dictionary:
 	var state: Dictionary = town.snapshot()
-	return {"residents": state.residents, "life": state.life, "survival": state.survival, "foraging": state.foraging}
+	return {"residents": state.residents, "life": state.life, "survival": state.survival,
+		"foraging": state.foraging, "baking": state.godot.baking}
 
 func run() -> void:
 	var path := "user://town-controller-recovery-%d.json" % Time.get_ticks_usec()
@@ -55,6 +58,8 @@ func run() -> void:
 	var town := Town.new()
 	var loaded := town.load_from(path)
 	check(loaded.ok, "fixture loads")
+	check(town.snapshot().godot.get("baking", {}).get("schema_version", 0) == 1,
+		"recovery fixture carries the baking namespace rejected by the legacy runtime")
 	if not loaded.ok:
 		print(JSON.stringify({"suite": "town_controller_recovery", "checks": checks, "failures": failures, "load_error": loaded}))
 		quit(1)
@@ -95,11 +100,19 @@ func run() -> void:
 	var stale_turns := Turns.new()
 	stale_turns.town = cold
 	stale_turns.save_path = path
+	var recovered_record: Dictionary = cold._state.godot.resident_turns["fixture:a"].duplicate(true)
 	var stale := stale_turns.apply_reply("fixture:a", old_epoch, old_request, old_reply)
 	check(stale.code == "stale_controller_reply", "old reply is fenced")
-	check(FileAccess.get_file_as_bytes(path) == bytes, "fenced old reply leaves save unchanged")
+	check(cold._state.godot.resident_turns["fixture:a"] == recovered_record,
+		"fenced old reply does not change the recovered controller record")
+	var archived_replays: Array = cold._state.godot.resident_archive.entries[old_request].get("replays", [])
+	check(archived_replays.any(func(entry): return entry.get("application", {}).get("status", "") == "stale_controller_reply"),
+		"fenced old reply is retained only as an append-only archive replay")
+	var after_stale_bytes := FileAccess.get_file_as_bytes(path)
+	cold.release_writer(path)
 	var stale_request := await Recovery.recover(get_root(), path, "fixture:a", "old-request")
 	check(not stale_request.ok and stale_request.code == "stale_request", "stale request rejected")
+	check(FileAccess.get_file_as_bytes(path) == after_stale_bytes, "stale recovery request does not rewrite the save")
 	var pending_path := "user://town-controller-recovery-pending-%d.json" % Time.get_ticks_usec()
 	write_save(pending_path, true)
 	var pending_town := Town.new()
