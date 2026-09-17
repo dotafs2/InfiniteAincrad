@@ -8,16 +8,19 @@ writer boundary have been checked.
 
 from datetime import datetime, timedelta, timezone
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools/kimi"))
-from kimi_budget import BudgetError, CityValidationPolicy, Ledger, NANO, Policy
+from kimi_budget import (BudgetError, CityValidationPolicy, Ledger, NANO, Policy,
+                         fingerprint, usage_cost)
 from kimi_gateway import KimiProvider
 
 
@@ -35,7 +38,11 @@ CONFIRMATION = "START AI"
 REQUIRED_PROFILE_KEYS = {
     "save_path", "godot", "config", "sessions_root", "prior_paid_session_records"
 }
-OPTIONAL_PROFILE_KEYS = {"gm_status"}
+OPTIONAL_PROFILE_KEYS = {"gm_status", "prior_uncertainty_review_pins"}
+REVIEW_PIN_KEYS = {
+    "schema_version", "ledger_id", "policy_sha256", "guard_sha256",
+    "uncertain_requests",
+}
 
 
 class LaunchBlocked(RuntimeError):
@@ -47,6 +54,44 @@ def _read_json(path):
         return json.loads(path.read_text(encoding="utf-8-sig"))
     except (OSError, UnicodeError, json.JSONDecodeError) as exc:
         raise LaunchBlocked(f"配置无法读取：{path}") from exc
+
+
+def _unique_object(pairs):
+    value = {}
+    for key, item in pairs:
+        if key in value:
+            raise ValueError("duplicate JSON field")
+        value[key] = item
+    return value
+
+
+def _read_review_pin(path):
+    try:
+        value = json.loads(path.read_text(encoding="utf-8-sig"),
+                           object_pairs_hook=_unique_object)
+    except (OSError, UnicodeError, ValueError, TypeError) as exc:
+        raise LaunchBlocked("既有未知请求复核文件无法严格读取；未创建新会话。") from exc
+    if (not isinstance(value, dict) or set(value) != REVIEW_PIN_KEYS
+            or type(value.get("schema_version")) is not int
+            or value["schema_version"] != 1
+            or not isinstance(value.get("ledger_id"), str)
+            or not value["ledger_id"]
+            or not isinstance(value.get("uncertain_requests"), list)):
+        raise LaunchBlocked("既有未知请求复核文件格式不符；未创建新会话。")
+    for key in ("policy_sha256", "guard_sha256"):
+        if not isinstance(value.get(key), str) or not re.fullmatch(r"[0-9a-f]{64}", value[key]):
+            raise LaunchBlocked("既有未知请求复核文件格式不符；未创建新会话。")
+    ids = set()
+    for row in value["uncertain_requests"]:
+        if (not isinstance(row, dict) or set(row) != {"id", "state", "reserve_nano"}
+                or not isinstance(row.get("id"), str)
+                or not re.fullmatch(r"[A-Za-z0-9_.:-]{1,128}", row["id"])
+                or row["id"] in ids or row.get("state") != "uncertain"
+                or type(row.get("reserve_nano")) is not int
+                or row["reserve_nano"] <= 0):
+            raise LaunchBlocked("既有未知请求复核文件格式不符；未创建新会话。")
+        ids.add(row["id"])
+    return value
 
 
 def _resolve(value):
@@ -68,6 +113,11 @@ def load_profile(path):
             raise LaunchBlocked(f"本机配置 {key} 必须是非空路径。")
     result = {key: _resolve(data[key]) for key in ("save_path", "godot", "config", "sessions_root")}
     result["prior_paid_session_records"] = [_resolve(item) for item in records]
+    pins = data.get("prior_uncertainty_review_pins", [])
+    if (not isinstance(pins, list)
+            or any(not isinstance(item, str) or not item.strip() for item in pins)):
+        raise LaunchBlocked("prior_uncertainty_review_pins 必须是复核文件路径列表。")
+    result["prior_uncertainty_review_pins"] = [_resolve(item) for item in pins]
     if "gm_status" in data:
         if not isinstance(data["gm_status"], str) or not data["gm_status"].strip():
             raise LaunchBlocked("本机配置 gm_status 必须是非空路径。")
@@ -88,22 +138,86 @@ def _policy_from_guard(record):
         raise LaunchBlocked("既有付费会话记录格式未知；为避免重复计费，已拒绝启动。") from exc
 
 
-def audit_paid_record(record):
+def _load_review_pins(paths):
+    pins = {}
+    for path in paths:
+        pin = _read_review_pin(path)
+        ledger_id = pin["ledger_id"]
+        if ledger_id in pins:
+            raise LaunchBlocked("同一既有付费会话出现多个未知请求复核文件；未创建新会话。")
+        pins[ledger_id] = pin
+    return pins
+
+
+def _reviewed_rows(session):
+    with session.transaction() as (db, meta):
+        rows = [dict(row) for row in db.execute("SELECT * FROM requests ORDER BY id")]
+        meta = dict(meta)
+    if meta.get("halted"):
+        raise LaunchBlocked("既有付费会话处于停止状态；请先人工核对，未创建新会话。")
+    if any(row["state"] == "reserved" for row in rows):
+        raise LaunchBlocked("既有付费会话仍有进行中的请求；未创建新会话。")
+    for row in rows:
+        maximum = row["maximum"]
+        if type(maximum) is not int or not 1 <= maximum <= session.policy.max_output:
+            raise LaunchBlocked("既有付费会话请求上限无法核对；未创建新会话。")
+        expected_reserve = (session.policy.input_ceiling * session.policy.input_nano_per_token
+                            + maximum * session.policy.output_nano_per_token)
+        if row["reserve"] != expected_reserve:
+            raise LaunchBlocked("既有付费会话最大责任无法核对；未创建新会话。")
+        if row["state"] == "settled":
+            try:
+                response = json.loads(row["response"])
+                cost, prompt, output, cached = usage_cost(response, maximum, session.policy)
+            except (BudgetError, ValueError, TypeError) as exc:
+                raise LaunchBlocked("既有付费会话已结算回执无法核对；未创建新会话。") from exc
+            if (cost != row["charge"] or prompt != row["prompt_tokens"]
+                    or output != row["output_tokens"] or cached != row["cached_tokens"]
+                    or cost > row["reserve"] or fingerprint(response) != row["response_sha"]):
+                raise LaunchBlocked("既有付费会话已结算回执无法核对；未创建新会话。")
+        elif row["state"] == "uncertain":
+            if any(row[key] is not None for key in (
+                    "charge", "prompt_tokens", "output_tokens", "cached_tokens",
+                    "response", "response_sha", "finished")):
+                raise LaunchBlocked("既有未知请求包含无法核对的结算事实；未创建新会话。")
+        else:
+            raise LaunchBlocked("既有付费会话包含未知请求状态；未创建新会话。")
+    return meta, rows
+
+
+def audit_paid_record(record, pins):
     try:
         session = Ledger(record, _policy_from_guard(record))
-        status = session.status()
+        meta, rows = _reviewed_rows(session)
     except (BudgetError, OSError, ValueError, KeyError, TypeError) as exc:
         raise LaunchBlocked("既有付费会话记录无法完整核对；为避免重复计费，已拒绝启动。") from exc
-    counts = status.get("counts", {})
-    if status.get("halted"):
-        raise LaunchBlocked("既有付费会话处于停止状态；请先人工核对，未创建新会话。")
-    if counts.get("reserved", 0) or counts.get("uncertain", 0):
+    uncertain = [{"id": row["id"], "state": "uncertain", "reserve_nano": row["reserve"]}
+                 for row in rows if row["state"] == "uncertain"]
+    expected_review = {
+        "schema_version": 1,
+        "ledger_id": meta["ledger_id"],
+        "policy_sha256": session.policy_hash,
+        "guard_sha256": hashlib.sha256(session.guard.read_bytes()).hexdigest(),
+        "uncertain_requests": uncertain,
+    }
+    pin = pins.pop(meta["ledger_id"], None)
+    if uncertain and pin is None:
         raise LaunchBlocked("既有付费会话仍有进行中或结果未知的请求；未创建新会话。")
+    if pin is not None:
+        ordered = dict(pin, uncertain_requests=sorted(pin["uncertain_requests"], key=lambda row: row["id"]))
+        if ordered != expected_review:
+            raise LaunchBlocked("未知请求复核文件与既有付费会话不完全一致；未创建新会话。")
+    settled_nano = sum(row["charge"] for row in rows if row["state"] == "settled")
+    uncertain_nano = sum(row["reserve"] for row in rows if row["state"] == "uncertain")
     return {
         "record": str(record),
-        "id": status["ledger_id"],
-        "settled_cny": status["settled_cny"],
-        "requests": sum(counts.values()),
+        "id": meta["ledger_id"],
+        "settled_cny": settled_nano / NANO,
+        "liability_cny": meta["liability"] / NANO,
+        "requests": len(rows),
+        "uncertain_requests": len(uncertain),
+        "retained_uncertain_cny": uncertain_nano / NANO,
+        "uncertainty_review": expected_review if pin is not None else None,
     }
 
 
@@ -136,7 +250,11 @@ def discover_session_records(sessions_root):
 def audit_all(profile):
     records = set(profile["prior_paid_session_records"])
     records.update(discover_session_records(profile["sessions_root"]))
-    return [audit_paid_record(record) for record in sorted(records)]
+    pins = _load_review_pins(profile["prior_uncertainty_review_pins"])
+    result = [audit_paid_record(record, pins) for record in sorted(records)]
+    if pins:
+        raise LaunchBlocked("未知请求复核文件未对应任何已列出的既有付费会话；未创建新会话。")
+    return result
 
 
 def _require_file(path, label):
@@ -293,6 +411,10 @@ def launch(profile_path, input_stream=sys.stdin, output_stream=sys.stdout,
         # pass this point, and an already-running world is still rejected before first use.
         prior = audit_all(profile)
         ensure_world_idle(profile["save_path"])
+        retained_uncertain_cny = round(sum(
+            item["retained_uncertain_cny"] for item in prior), 9)
+        _say(output_stream, "既有结果未知请求保留的最大责任：%.6f 元；不会清零或重试旧请求。" % (
+            retained_uncertain_cny,))
         now = now_fn() if now_fn else datetime.now(timezone.utc)
         if now.tzinfo is None:
             now = now.replace(tzinfo=timezone.utc)
@@ -317,6 +439,8 @@ def launch(profile_path, input_stream=sys.stdin, output_stream=sys.stdout,
             },
             "prior_paid_sessions": prior,
             "cumulative_settled_before_cny": round(sum(item["settled_cny"] for item in prior), 9),
+            "cumulative_prior_liability_cny": round(sum(item["liability_cny"] for item in prior), 9),
+            "retained_prior_uncertain_cny": retained_uncertain_cny,
             "current": {"id": status["ledger_id"], "settled_cny": 0.0, "requests": 0},
         }
         _write_json(manifest_path, manifest)
