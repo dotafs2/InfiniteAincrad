@@ -657,4 +657,10 @@ func _validate_state(value: Variant) -> Dictionary:
 		for key in ["controller_epoch", "request_number"]:
 			if not _bounded(record.get(key, 0), 1000000000):
 				return _failure("invalid_controller_counter")
+	# A save carrying a bounded runtime extension must never be rewritten through an older base
+	# writer that cannot validate that extension. TownBaking supplies `_validate_baking` and then
+	# validates the namespace after this base check; controller/material maintenance tools that
+	# still instantiate TownRuntime fail closed before they can transact on a baking save.
+	if value.godot.has("baking") and not has_method("_validate_baking"):
+		return _failure("baking_runtime_required")
 	return base
