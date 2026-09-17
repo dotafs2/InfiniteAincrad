@@ -1,0 +1,102 @@
+{
+  "batch": "overnight20260918",
+  "assets": [
+    {
+      "id": "baking_oven",
+      "root": "BakingOven",
+      "glb": "game/assets/overnight20260918/baking_oven.glb",
+      "triangles": 13489,
+      "degenerate_triangles": 0,
+      "dimensions_godot_m": [
+        1.0,
+        1.0,
+        0.76
+      ],
+      "origin": "bottom center",
+      "front": "+Z",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "materials": [
+        "Material_0",
+        "ON_Coping_Limestone"
+      ],
+      "bytes": 12683196,
+      "sha256": "f15f76ab1eabd7bfcc5964817b03bb3a71ce9923c3d3dc5cac47d34a2fe07c8f",
+      "provenance": {
+        "source": "game/assets/floor1/living_props_20260916/hearth.glb",
+        "source_sha256": "1b8868ca2231854c393de974b24fe1730e656a542cfcf11e101c33e120e33a6d",
+        "adaptation": "Existing Meshy hearth lower 1.31m; chimney removed, limestone coping added, fitted to existing oven volume. Existing texture retained."
+      },
+      "collision": "none; visual only"
+    },
+    {
+      "id": "bread_loaf",
+      "root": "BreadLoaf",
+      "glb": "game/assets/overnight20260918/bread_loaf.glb",
+      "triangles": 1352,
+      "degenerate_triangles": 0,
+      "dimensions_godot_m": [
+        0.36,
+        0.15,
+        0.18
+      ],
+      "origin": "bottom center",
+      "front": "+Z",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "materials": [
+        "TC_bread",
+        "TC_bread_score",
+        "TC_bread_light"
+      ],
+      "bytes": 46280,
+      "sha256": "048b1dd942f8c1418889f9cf9468fdba7719046ee72189836c6d91f0be7480dc",
+      "provenance": {
+        "source": "Art/Generated/TravelCargo20260912/geometry.py",
+        "adaptation": "Existing project loaf geometry recipe exported as one independent ration. No food inventory or production logic."
+      },
+      "collision": "none; visual only"
+    },
+    {
+      "id": "flour_sack",
+      "root": "FlourSack",
+      "glb": "game/assets/overnight20260918/flour_sack.glb",
+      "triangles": 2636,
+      "degenerate_triangles": 0,
+      "dimensions_godot_m": [
+        0.24,
+        0.3,
+        0.24
+      ],
+      "origin": "bottom center",
+      "front": "+Z",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "materials": [
+        "ON_Linen",
+        "ON_Stitch",
+        "ON_HempTie"
+      ],
+      "bytes": 69344,
+      "sha256": "11f509555f165b79583fc4bd2b589071fce3674e33e7d0479d1cfc658ec254ae",
+      "provenance": {
+        "source": "Original offline Blender mesh; project linen/hemp palette",
+        "adaptation": "Tied cloth bag for one displayed flour unit. No stock value encoded in asset."
+      },
+      "collision": "none; visual only"
+    }
+  ],
+  "new_paid_calls": 0,
+  "actual_new_credits": 0,
+  "provider_task_ids": [],
+  "scope": "Three pure visual prefabs, no collision, scripts, stock mutations or main scene edits. Godot preview is an asset gallery, not a live-world adoption claim."
+}
