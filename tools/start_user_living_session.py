@@ -32,9 +32,10 @@ WINDOW_SECONDS = 1020
 # seconds admit no new decisions; they only let an already-started reply settle and save.
 SHUTDOWN_WAIT_SECONDS = 65
 CONFIRMATION = "START AI"
-PROFILE_KEYS = {
+REQUIRED_PROFILE_KEYS = {
     "save_path", "godot", "config", "sessions_root", "prior_paid_session_records"
 }
+OPTIONAL_PROFILE_KEYS = {"gm_status"}
 
 
 class LaunchBlocked(RuntimeError):
@@ -55,7 +56,9 @@ def _resolve(value):
 
 def load_profile(path):
     data = _read_json(path)
-    if not isinstance(data, dict) or set(data) != PROFILE_KEYS:
+    keys = set(data) if isinstance(data, dict) else set()
+    if (not isinstance(data, dict) or not REQUIRED_PROFILE_KEYS.issubset(keys)
+            or keys - REQUIRED_PROFILE_KEYS - OPTIONAL_PROFILE_KEYS):
         raise LaunchBlocked("本机配置字段不完整或包含未知字段；请重新从示例复制。")
     records = data["prior_paid_session_records"]
     if not isinstance(records, list) or not records or any(not isinstance(item, str) or not item.strip() for item in records):
@@ -65,6 +68,10 @@ def load_profile(path):
             raise LaunchBlocked(f"本机配置 {key} 必须是非空路径。")
     result = {key: _resolve(data[key]) for key in ("save_path", "godot", "config", "sessions_root")}
     result["prior_paid_session_records"] = [_resolve(item) for item in records]
+    if "gm_status" in data:
+        if not isinstance(data["gm_status"], str) or not data["gm_status"].strip():
+            raise LaunchBlocked("本机配置 gm_status 必须是非空路径。")
+        result["gm_status"] = _resolve(data["gm_status"])
     return result
 
 
@@ -201,7 +208,7 @@ def _session_directory(sessions_root, now):
 
 
 def _runner_command(profile, record, output):
-    return [
+    command = [
         sys.executable, "-X", "utf8", str(ROOT / "tools/run_town_model_validation.py"),
         "--godot", str(profile["godot"]),
         "--ledger", str(record),
@@ -213,6 +220,9 @@ def _runner_command(profile, record, output):
         "--concurrency", str(CONCURRENCY),
         "--shutdown-wait", str(SHUTDOWN_WAIT_SECONDS),
     ]
+    if "gm_status" in profile:
+        command += ["--gm-status", str(profile["gm_status"])]
+    return command
 
 
 def _say(stream, message=""):
