@@ -48,11 +48,11 @@ const BAKING_STATE_KEYS := ["schema_version", "points", "known", "jobs", "comman
 const BAKING_JOURNALS := ["trade", "materials", "places"]
 
 var _baking_visibility_probe: Callable = Callable()
-var _baking_visibility_required := false
+var _baking_visibility_required := true
 
 func require_baking_visibility(probe: Callable) -> void:
-	# Opt-in line-of-sight sensing for the actual town street. A legacy headless fixture keeps the
-	# explicitly labelled proximity sensing; this never claims standalone headless is line of sight.
+	# The host must explicitly bind a line-of-sight probe. Missing and invalid probes fail closed,
+	# including in headless fixtures; proximity by itself never grants knowledge.
 	_baking_visibility_required = true
 	_baking_visibility_probe = probe
 
@@ -216,7 +216,7 @@ func _known_baking(id: String) -> Dictionary:
 
 func _baking_point_visible(id: String, point_id: String) -> bool:
 	if not _baking_visibility_required:
-		return true
+		return false
 	if not _baking_visibility_probe.is_valid():
 		return false
 	var verdict: Variant = _baking_visibility_probe.call(id, point_id)
@@ -276,7 +276,8 @@ func trade_options(id: String) -> Array:
 	var known := _known_baking(id)
 	for point_id in known:
 		var point: Dictionary = _baking().get("points", {}).get(str(point_id), {})
-		if point.is_empty() or int(point.get("flour_remaining", 0)) < 1:
+		var observation: Dictionary = known.get(point_id, {})
+		if point.is_empty() or int(observation.get("flour_remaining", 0)) < 1:
 			continue
 		_option(result, {"id": BAKING_OPTION_PREFIX + str(point_id), "action": BAKING_ACTION,
 			"label": "用%s的1份公共面粉烤一个自己的面包：站到炉边烤%d秒（面粉有限，烤好就能自己吃）" % [str(point.label), int(BAKING_WORK_SECONDS)],
@@ -285,6 +286,10 @@ func trade_options(id: String) -> Array:
 
 func submit_trade(id: String, option_id: String, command_id: String, provenance: String = "local_rule_policy", speech: String = "") -> Dictionary:
 	if not option_id.begins_with("baking:"):
+		# All trade/material/place decisions enter through this public method. Reserve a baking
+		# command id before delegating so another journal cannot claim it in the reverse direction.
+		if _baking_command_reserved(command_id):
+			return _failure("command_conflict")
 		return super.submit_trade(id, option_id, command_id, provenance, speech)
 	if id not in active_ids() or not _validate_decision_command_id(command_id).ok or provenance not in ALLOWED_DECISION_PROVENANCE:
 		return _failure("invalid_actor_command_or_provenance")
@@ -293,6 +298,17 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 	if not option_id.begins_with(BAKING_OPTION_PREFIX):
 		return _failure("option_unavailable")
 	return _start_bake(id, option_id.trim_prefix(BAKING_OPTION_PREFIX), command_id, provenance)
+
+func start_action(id: String, action: String, command_id: String, provenance: String = "local_rule_policy", target_position: Vector3 = Vector3.INF) -> Dictionary:
+	# Direct life commands are the other public decision entry. Together with submit_trade this
+	# prevents a completed or pending baking command from being reused by any of the four journals.
+	if _baking_command_reserved(command_id):
+		return _failure("command_conflict")
+	return super.start_action(id, action, command_id, provenance, target_position)
+
+func _baking_command_reserved(command_id: String) -> bool:
+	var baking := _baking()
+	return baking.get("commands", {}).has(command_id) or baking.get("installs", {}).has(command_id)
 
 func _start_bake(id: String, point_id: String, command_id: String, provenance: String) -> Dictionary:
 	var payload := {"actor_id": id, "action": BAKING_ACTION, "point_id": point_id, "provenance": provenance}

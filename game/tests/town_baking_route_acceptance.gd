@@ -56,9 +56,16 @@ func run() -> void:
 		"an older base runtime fails closed on the baking namespace")
 	check(FileAccess.get_file_as_bytes(path) == installed_bytes,
 		"the rejected base-runtime load cannot rewrite the baking save")
-	town.require_baking_visibility(func(_id, _point_id): return false)
 	town.host_move(baker, Vector3(4, 0, 4))
 	town.host_move(witness, Vector3(4, 0, 4))
+	elapse(town, path, 0)
+	check(town.resident_view(baker).baking_points.is_empty(),
+		"an unbound visibility probe fails closed")
+	town.require_baking_visibility(Callable())
+	elapse(town, path, 0)
+	check(town.resident_view(baker).baking_points.is_empty(),
+		"an invalid visibility callback fails closed")
+	town.require_baking_visibility(func(_id, _point_id): return false)
 	elapse(town, path, 0)
 	check(town.resident_view(baker).baking_points.is_empty(),
 		"proximity without line of sight grants no baking knowledge")
@@ -87,9 +94,21 @@ func run() -> void:
 	check(start_result.ok, "resident voluntarily starts the bake")
 	check(town.snapshot().godot.baking.points[point.id].flour_remaining == 0, "starting reserves one finite flour")
 	check(town.pending_job(baker).get("action", "") == "bake_bread", "bake remains a physical pending journey")
-	check(not town.trade_options(witness).any(func(entry): return entry.get("id") == option)
+	check(town.trade_options(witness).any(func(entry): return entry.get("id") == option)
 		and town.resident_view(witness).baking_points.filter(func(entry): return entry.get("id") == point.id)[0].last_observed_flour == 1,
-		"a stale personal flour observation never offers already-reserved flour")
+		"a stale personal observation offers only what that resident knows")
+	var stale_before := town.snapshot()
+	var stale_refused: Dictionary = town.submit_trade(witness, option, "fixture:stale-bake", "opengameagent_fixture")
+	check(not stale_refused.ok and stale_refused.get("code", "") == "flour_unavailable",
+		"the bake start rechecks real flour and honestly refuses stale knowledge")
+	check(town.snapshot() == stale_before, "a stale flour refusal changes no resource or journal")
+	var reverse_before := town.snapshot()
+	var reverse_life: Dictionary = town.start_action(witness, "rest", "fixture:bake-1", "opengameagent_fixture")
+	var reverse_trade: Dictionary = town.submit_trade(witness, "trade:unknown", "fixture:bake-1", "opengameagent_fixture")
+	check(not reverse_life.ok and reverse_life.get("code", "") == "command_conflict"
+		and not reverse_trade.ok and reverse_trade.get("code", "") == "command_conflict",
+		"a baking command id cannot be reused through life or trade/material/place entry points")
+	check(town.snapshot() == reverse_before, "reverse journal collisions leave the state unchanged")
 	var station := town.destination(baker, "bake_bread")
 	check(is_equal_approx(station.distance_to(Vector3(4, 0, 4)), 0.85),
 		"the bake destination is the public apron in front of the oven, not its centre")
