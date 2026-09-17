@@ -15,6 +15,11 @@ const HANDOFF_RANGE := 2.2
 const FORAGING_SPOT_RANGE := 2.0
 const FORAGING_SPOT_HEIGHT_RANGE := 0.5
 const FORAGING_SPOT_SPACING := 0.55
+## Eight units per simulated hour covers the reviewed ten-resident demand of 7.5 units/hour.
+## Saves written before this rule may still carry a remainder below the old 1800-second period;
+## validation accepts that legacy range until the first positive advance normalizes it.
+const FORAGING_GROWTH_SECONDS := 450.0
+const LEGACY_FORAGING_GROWTH_SECONDS := 1800.0
 # A layout hash identifies the reviewed map revision in both a fresh world and a migration. Only
 # relocation bridge/provenance fields claim migration and therefore require before/after evidence.
 const SPATIAL_MIGRATION_KEYS := ["foraging_before", "foraging_after", "migration", "source_sha256"]
@@ -640,11 +645,15 @@ func advance(delta: float) -> Dictionary:
 		account(id).energy = maxf(0.0, account(id).energy - steps)
 		resident(id).needs.hunger = maxf(0.0, resident(id).needs.hunger - steps)
 	var berry: Dictionary = _state.foraging
-	var growth: float = berry.growth_remainder_seconds + delta
-	var count := mini(int(berry.capacity - berry.stock), floori(growth / 1800.0))
-	berry.stock += count
-	berry.produced_total += count
-	berry.growth_remainder_seconds = 0.0 if berry.stock >= berry.capacity else fmod(growth, 1800.0)
+	if delta > 0.0:
+		# Loading never rewrites a legacy timer and advance(0) remains observational. On the first
+		# real tick, retain only progress inside the new 450-second cycle before adding NEW time.
+		# This deliberately grants none of the one-to-three units that elapsed under the old rule.
+		var growth: float = fmod(float(berry.growth_remainder_seconds), FORAGING_GROWTH_SECONDS) + delta
+		var count := mini(int(berry.capacity - berry.stock), floori(growth / FORAGING_GROWTH_SECONDS))
+		berry.stock += count
+		berry.produced_total += count
+		berry.growth_remainder_seconds = 0.0 if berry.stock >= berry.capacity else fmod(growth, FORAGING_GROWTH_SECONDS)
 	var completed: Array = []
 	for id in _state.godot.pending.keys():
 		var pending: Dictionary = _state.godot.pending[id]
@@ -840,7 +849,7 @@ func _validate_state(value: Variant) -> Dictionary:
 			return _failure("invalid_berry_count")
 	if berry.stock > berry.capacity or berry.stock != berry.initial_stock + berry.produced_total - berry.harvested_total:
 		return _failure("berry_conservation_failed")
-	if not _bounded(value.survival.get("tick_remainder_seconds"), 120, false) or not _bounded(berry.get("growth_remainder_seconds"), 1800, false):
+	if not _bounded(value.survival.get("tick_remainder_seconds"), 120, false) or not _bounded(berry.get("growth_remainder_seconds"), LEGACY_FORAGING_GROWTH_SECONDS, false):
 		return _failure("invalid_clock")
 	var seq := 0
 	for event in value.life.events:
