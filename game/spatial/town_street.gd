@@ -7,13 +7,16 @@ extends "res://spatial/street_trial.gd"
 ## in clearly labelled offline/local_rule_policy mode and is never executed in
 ## gateway_mode or restore_only.
 
-const Town = preload("res://core/town_places.gd")
+# The playable world class: the public places runtime plus the bounded public baking route
+# (one reviewed finite-flour baking point, personal line-of-sight knowledge only).
+const Town = preload("res://core/town_baking.gd")
 const TownTurns = preload("res://agents/town_turns.gd")
 const TownTools = preload("res://spatial/town_tools.gd")
 const TownNameplates = preload("res://spatial/town_nameplates.gd")
 const MaterialSources = preload("res://spatial/town_material_sources.gd")
 const MaterialVisibility = preload("res://spatial/town_material_visibility.gd")
 const MaterialSteering = preload("res://spatial/town_material_steering.gd")
+const BakingPoints = preload("res://spatial/town_baking_points.gd")
 const ForagingLayout = preload("res://spatial/town_foraging_layout.gd")
 const ForagingSteering = preload("res://spatial/town_foraging_steering.gd")
 const SocialSteering = preload("res://spatial/town_social_steering.gd")
@@ -62,6 +65,7 @@ var repair_initial_iron := -1
 var nameplates: Node = null
 var material_visibility: Node3D = null
 var material_steering: RefCounted = null
+var baking_visibility: Node3D = null
 var town_expansion_evidence: Dictionary = {}
 var foraging_steering: RefCounted = null
 var social_steering: RefCounted = null
@@ -179,6 +183,17 @@ func _ready() -> void:
 	social_steering = SocialSteering.new()
 	place_steering = PlaceSteering.new()
 	town.require_material_visibility(Callable(material_visibility, "can_observe"))
+	# The public baking point's own oven/flour visual is the LOS target of the same reviewed
+	# physics component, bound BEFORE any tick or model decision in every mode, so a resident can
+	# only ever learn a point its own sight really reaches.
+	var baking_points := BakingPoints.new()
+	add_child(baking_points)
+	baking_points.configure(town)
+	baking_visibility = MaterialVisibility.new()
+	add_child(baking_visibility)
+	baking_visibility.configure(town, bodies, baking_points)
+	if town.has_method("require_baking_visibility"):
+		town.require_baking_visibility(Callable(baking_visibility, "can_observe"))
 	# The public wayfinding notice is one real prop with real line-of-sight sensing. It only
 	# answers "can this resident read/see it"; the world grants and persists the knowledge.
 	_load_public_notice()
@@ -400,6 +415,10 @@ func _physics_process(delta: float) -> void:
 				nav_reaches_target = town_navigation.enabled and not town_navigation.is_unreachable(id)
 			## A public-place trip (and its place-bound rest) keeps the accepted place steering.
 			var place_trip: bool = job.action == "travel" or (job.action == "rest" and job.has("place_id"))
+			## The public bake trip walks to its own baking point over the same verified road graph
+			## the place trips and home trips use; the destination, the world's own 0.45 m arrival
+			## gate and the job's timers stay exactly the world's.
+			var bake_trip: bool = job.action == "bake_bread"
 			## Basic-life travel to the resident's own fixed point: eat_ration, harvest_ration, and
 			## rest with no public place target. With the spaced-foraging layout installed those
 			## bodies walk the lower field, where the straight local push stops at the market
@@ -418,6 +437,8 @@ func _physics_process(delta: float) -> void:
 				direction = place_steering.direction_to_point(id, str(job.command_id), body, target)
 			elif job.action == "recover_material" and material_steering != null:
 				direction = material_steering.direction_for(id, str(job.command_id), body, target)
+			elif bake_trip and place_steering != null:
+				direction = place_steering.direction_to_point(id, str(job.command_id), body, target)
 			elif _spaced_foraging and job.action in ["harvest_ration", "eat_ration", "rest"] and foraging_steering != null:
 				direction = foraging_steering.direction_for(id, str(job.command_id), body, target)
 			elif job.action == "approach" and social_steering != null:
@@ -441,7 +462,7 @@ func _physics_process(delta: float) -> void:
 					latest = "%s 无法到达当前目的地，已停止移动。" % resident_name
 				else:
 					latest = "导航地图尚未就绪，暂不移动。"
-			if not place_trip and not home_trip:
+			if not place_trip and not home_trip and not bake_trip:
 				if place_steering != null:
 					place_steering.clear_route(id)
 			moving = direction.length() > 0.0
@@ -452,8 +473,8 @@ func _physics_process(delta: float) -> void:
 			else:
 				body.velocity.x = 0
 				body.velocity.z = 0
-			var material_blocked: bool = job.action in ["recover_material", "harvest_ration"] and not moving and direction.length() <= 0.0 and body.position.distance_to(target) > 0.45
-			actor.set_gesture("idle" if (moving or material_blocked) else {"eat_ration": "eat", "rest": "rest", "harvest_ration": "harvest", "repair_edge": "repair", "repair_handle": "repair", "work": "work", "use_tool": "work", "recover_material": "work"}.get(job.action, "idle"))
+			var worksite_blocked: bool = job.action in ["recover_material", "harvest_ration", "bake_bread"] and not moving and direction.length() <= 0.0 and body.position.distance_to(target) > 0.45
+			actor.set_gesture("idle" if (moving or worksite_blocked) else {"eat_ration": "eat", "rest": "rest", "harvest_ration": "harvest", "repair_edge": "repair", "repair_handle": "repair", "work": "work", "use_tool": "work", "recover_material": "work", "bake_bread": "work"}.get(job.action, "idle"))
 		else:
 			if town_navigation != null:
 				town_navigation.clear_route(id)
@@ -943,7 +964,7 @@ func _refresh() -> void:
 		berry_visuals[index].visible = index < snap.foraging.stock
 
 func _action_label(action: String) -> String:
-	return {"eat_ration": "进食", "rest": "休息", "harvest_ration": "采集", "approach": "走近交谈", "deliver": "交付工具", "work": "修理", "collect": "取回工具", "use_tool": "使用工具", "recover_material": "整理余料", "material_recovered": "已取得材料", "material_depleted": "余料已取完，本次未取得", "repair_edge": "修刃", "repair_handle": "修柄", "repair_completed": "修理完成", "resources_unavailable": "资源不足，未完成"}.get(action, action)
+	return {"eat_ration": "进食", "rest": "休息", "harvest_ration": "采集", "approach": "走近交谈", "deliver": "交付工具", "work": "修理", "collect": "取回工具", "use_tool": "使用工具", "recover_material": "整理余料", "material_recovered": "已取得材料", "material_depleted": "余料已取完，本次未取得", "bake_bread": "烤面包", "bread_baked": "烤好一个自己的面包", "bread_eaten": "吃掉自己烤的面包", "baking_point_observed": "看到公共烤炉", "baking_route_installed": "公共烤炉已就位", "repair_edge": "修刃", "repair_handle": "修柄", "repair_completed": "修理完成", "resources_unavailable": "资源不足，未完成"}.get(action, action)
 
 func _repair_part_label(part: String) -> String:
 	return "斧刃" if part == "edge" else "斧柄"
@@ -994,20 +1015,26 @@ func pending_breakdown(snap: Dictionary) -> Dictionary:
 	# Trade jobs live in godot.trade.jobs, so they are counted here and named
 	# separately, and a future report cannot silently drop a social job again.
 	# Place travel and place-bound rest live in godot.places, so they are counted too.
-	var zero := {"pending_life_count": 0, "pending_trade_count": 0, "pending_place_count": 0, "pending_count": 0}
+	# A public bake lives in godot.baking.jobs and is named separately in the same way, so an
+	# unfinished bake can never be reported as an idle world.
+	var zero := {"pending_life_count": 0, "pending_trade_count": 0, "pending_baking_count": 0, "pending_place_count": 0, "pending_count": 0}
 	var godot_state: Variant = snap.get("godot", {})
 	if not godot_state is Dictionary:
 		return zero
 	var life_jobs: Variant = godot_state.get("pending", {})
 	var trade: Variant = godot_state.get("trade", {})
 	var trade_jobs: Variant = trade.get("jobs", {}) if trade is Dictionary else {}
+	var baking: Variant = godot_state.get("baking", {})
+	var baking_jobs: Variant = baking.get("jobs", {}) if baking is Dictionary else {}
 	var places: Variant = godot_state.get("places", {})
 	var place_jobs: Variant = places.get("jobs", {}) if places is Dictionary else {}
 	var life_count: int = life_jobs.size() if life_jobs is Dictionary else 0
 	var trade_count: int = trade_jobs.size() if trade_jobs is Dictionary else 0
+	var baking_count: int = baking_jobs.size() if baking_jobs is Dictionary else 0
 	var place_count: int = place_jobs.size() if place_jobs is Dictionary else 0
 	return {"pending_life_count": life_count, "pending_trade_count": trade_count,
-		"pending_place_count": place_count, "pending_count": life_count + trade_count + place_count}
+		"pending_baking_count": baking_count, "pending_place_count": place_count,
+		"pending_count": life_count + trade_count + baking_count + place_count}
 
 func _capture_town() -> void:
 	paused = true

@@ -536,6 +536,11 @@ func _feedback_history(id: String, record: Dictionary) -> Array:
 	var trade_commands: Dictionary = town._state.godot.get("trade", {}).get("commands", {})
 	var life_commands: Dictionary = town._state.godot.get("commands", {})
 	var material_commands: Dictionary = town._state.godot.get("materials", {}).get("commands", {})
+	# The public baking route keeps its own journal, and it sits between the material and place
+	# journals in the fixed order (trade, life, materials, baking, places), first match only. The
+	# world rejects a bake command id that is already live in any of those journals, so a bake
+	# receipt can never be shadowed by - or shadow - another module's command.
+	var baking_commands: Dictionary = town._state.godot.get("baking", {}).get("commands", {})
 	# Voluntary place trips and place-bound rest keep their own journal; without it an accepted
 	# travel choice would still look like "no authoritative execution receipt" after arrival.
 	var place_commands: Dictionary = town._state.godot.get("places", {}).get("commands", {})
@@ -544,7 +549,7 @@ func _feedback_history(id: String, record: Dictionary) -> Array:
 			continue
 		var command_id := str(item.get("command_id", ""))
 		var command: Dictionary = trade_commands.get(command_id, life_commands.get(command_id,
-			material_commands.get(command_id, place_commands.get(command_id, {}))))
+			material_commands.get(command_id, baking_commands.get(command_id, place_commands.get(command_id, {})))))
 		var feedback := {"ok": false, "code": "unknown", "reason": "no authoritative execution receipt"}
 		if command.get("payload", {}).get("actor_id", "") == id:
 			# Older trade wrappers may still say pending while the life command settled.

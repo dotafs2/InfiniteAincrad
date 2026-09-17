@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "capability_id": "public_baking_route",
+  "version": "1.0.0",
+  "kind": "public_work_point",
+  "description": "One reviewed public baking point: a finite public flour stock plus a voluntary elapsed bake that turns exactly one flour into one loaf the resident really owns and can really eat.",
+  "route_id": "public_baking_route:v1",
+  "work_seconds_per_loaf": 60.0,
+  "inputs": {
+    "flour": 1
+  },
+  "outputs": {
+    "loaf": 1
+  },
+  "grants": {
+    "skill": false,
+    "inventory": false,
+    "coin": false
+  },
+  "conservation_terms": [
+    "remaining_flour",
+    "reserved_flour",
+    "held_loaves",
+    "eaten_loaves"
+  ]
+}
