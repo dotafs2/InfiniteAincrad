@@ -782,6 +782,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			life_panel.visible = not life_panel.visible
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_SPACE:
+		if restore_only:
+			latest = "当前为只读回看；居民生活保持暂停。开启实时 AI 生活后才能继续。"
+			_refresh()
+			return
 		paused = not paused
 		latest = "生活已暂停" if paused else "生活继续；时间只在运行时流逝"
 		_refresh()
@@ -994,6 +998,10 @@ func _nearest_dialogue_resident() -> String:
 	return nearest
 
 func _open_dialogue() -> void:
+	if restore_only:
+		dialogue.text = "当前为只读回看；开启实时 AI 生活后才能交谈。"
+		_update_dialogue_panel_layout()
+		return
 	dialogue_target = _nearest_dialogue_resident()
 	if dialogue_target.is_empty():
 		dialogue.text = "离得太远了。靠近居民再交谈。"
@@ -1021,6 +1029,12 @@ func _submit_dialogue(text: String) -> void:
 		_close_dialogue()
 
 func _inquire_nearby(fixture_input: bool = false, message: String = "这里有什么需要我帮忙的吗？", target: String = "") -> bool:
+	# Restore mode is a byte-preserving replay. This guard also protects direct callers
+	# and scripted capture flags; no visitor event or local-rule reply may be written.
+	if restore_only:
+		dialogue.text = "当前为只读回看；开启实时 AI 生活后才能交谈。"
+		_update_dialogue_panel_layout()
+		return false
 	var now := Time.get_ticks_msec() / 1000.0
 	if now - last_inquiry_seconds < 3.0:
 		dialogue.text = "请稍等片刻再说。"
@@ -1175,7 +1189,8 @@ func _refresh() -> void:
 		var contract: Dictionary = snap.life.contracts[-1]
 		repair_text = " · 修理：%s · %s" % [_repair_part_label(contract.part), _repair_status_label(contract.status)]
 	var gm_text := "" if gm_export_status.is_empty() else "\n" + gm_export_status
-	status.text = "%s\n%d 个存档身份 · %d 人活动 · %s\n空格 暂停/继续 · WASD 行走 · H 询问 · N 跟随居民 · M 生活窗 · ESC 释放\n%s\n公共浆果 %d / %d · 生活事件 %d%s%s" % [title, snap.residents.size(), town.active_ids().size(), mode_label, latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text, gm_text]
+	var controls := "V 总览/返回 · N 跟随居民 · M 生活窗 · WASD 行走 · ESC 释放" if restore_only else "空格 暂停/继续 · WASD 行走 · H 询问 · N 跟随居民 · M 生活窗 · ESC 释放"
+	status.text = "%s\n%d 个存档身份 · %d 人活动 · %s\n%s\n%s\n公共浆果 %d / %d · 生活事件 %d%s%s" % [title, snap.residents.size(), town.active_ids().size(), mode_label, controls, latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text, gm_text]
 	var axe: Dictionary = {}
 	for item in snap.life.get("items", []):
 		if item.get("kind") == "axe":

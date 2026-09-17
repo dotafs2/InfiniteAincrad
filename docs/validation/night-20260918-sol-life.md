@@ -4,7 +4,7 @@
 
 `StartLiving.cmd` 现在明确把用户带入 `res://scenes/town_street.tscn`，不再需要记住 `Run-Street.ps1 -Town`，也不会误入项目默认的单居民 `street_trial.tscn` 或 `StartDemo.cmd` 的暂停美术预览。
 
-无付费本地观察必须使用原档的**副本**，并显式给 `-ObserveOnly`。此模式以 `--town-restore` 打开十个身体，模型暂停、不会接纳新决定；不应把研究原档直接传给它：
+无付费本地观察必须使用原档的**副本**，并显式给 `-ObserveOnly`。此模式以 `--town-restore` 打开十个身体，模型暂停、不会接纳新决定。它是字节保持的只读回看：`Space`、`H`、`E`、`F` 不会恢复生活、写入询问／本地回复或改变门窗；`V` 总览／返回、`N` 跟随、`M` 生活窗和 `WASD` 游览仍可用。不应把研究原档直接传给它：
 
 ```powershell
 .\StartLiving.cmd `

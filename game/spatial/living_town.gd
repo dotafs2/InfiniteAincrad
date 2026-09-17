@@ -28,7 +28,7 @@ func _ready() -> void:
 		quarter.houses[id].set_door_open(saved.get("doors",{}).get(id,false))
 		quarter.houses[id].set_window_open(saved.get("windows",{}).get(id,false))
 	latest = "第一层生活街区 · 空格继续/暂停 · E 门 · F 窗 · V 45°总览"
-	if restore_only: latest = "第一层生活街区 · 游览模式，居民暂停 · E 门 · F 窗 · V 45°总览"
+	if restore_only: latest = "第一层生活街区 · 只读游览，居民暂停 · V 总览/返回"
 	_refresh()
 	if not report_dir.is_empty():
 		if not restore_only:
@@ -108,6 +108,10 @@ func _physics_process(delta: float) -> void:
 
 func _set_door(id: String, value: bool) -> void:
 	opening.erase(id)
+	if restore_only and report_dir.is_empty():
+		latest = "当前为只读回看；门窗和存档保持原样。开启实时 AI 生活后才能改变世界。"
+		_refresh()
+		return
 	if report_dir.is_empty():
 		var result := town.transaction(_save_path, func():
 			town._state.godot.spatial_layout.doors[id] = value
@@ -121,8 +125,8 @@ func _set_door(id: String, value: bool) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if quarter != null and event is InputEventKey and event.pressed and not event.echo and not _composing_dialogue():
-		if restore_only and event.keycode == KEY_SPACE:
-			latest = "当前为游览模式，居民生活暂停；使用原 AI 网关启动器继续模拟。E 门 · F 窗 · V 总览"
+		if restore_only and event.keycode in [KEY_SPACE, KEY_E, KEY_F]:
+			latest = "当前为只读回看；居民、门窗和存档保持原样。V 总览/返回"
 			_refresh()
 			return
 		if event.keycode == KEY_V:
