@@ -55,6 +55,15 @@ var stop_on_idle := false # Bounded validation only, never normal gameplay.
 var stop_on_decision_limit := false # Keep legitimate idle time; stop only after the cap's in-flight model turn returns.
 var validation_decision_limit := -1
 var validation_decisions_started := 0
+## Bounded gateway-episode shutdown. When the episode duration expires, admission
+## to NEW resident decisions closes, then the host awaits the already-started
+## replies and their authoritative application before it persists and exits. The
+## wait is finite: an owed reply is reported honestly instead of holding the
+## engine until the launcher's own timeout kills it. --town-shutdown-wait sets the
+## bound, and the launcher budgets the same single value for the engine.
+var shutdown_wait_limit := 45.0
+var capture_shutdown_reason := ""
+var shutdown_exit_code := 0
 # Legacy Mac repair demo state (offline/local_rule_policy only).
 var repair_fixture := false
 var town_tools: Node = null
@@ -96,6 +105,13 @@ func _ready() -> void:
 				get_tree().quit(2)
 				return
 			validation_decision_limit = int(count_text)
+		if arg.begins_with("--town-shutdown-wait="):
+			var wait_text := arg.trim_prefix("--town-shutdown-wait=")
+			if not wait_text.is_valid_float() or float(wait_text) < 0.0 or float(wait_text) > 120.0:
+				push_error("Invalid bounded episode shutdown wait")
+				get_tree().quit(2)
+				return
+			shutdown_wait_limit = float(wait_text)
 		if arg == "--town-dialogue-fixture":
 			dialogue_fixture = true
 		if arg.begins_with("--town-inquire-text="):
@@ -203,6 +219,7 @@ func _ready() -> void:
 		model_turns = TownTurns.new()
 		add_child(model_turns)
 		model_turns.configure(town, _save_path)
+		model_turns.shutdown_wait_limit = shutdown_wait_limit
 	# One explicit, bounded evidence snapshot for a separate GM process. No daemon and
 	# no loop; nothing from this export enters a resident model context. The startup
 	# result is not ignored: a failed configured export shows on the host status line.
@@ -338,7 +355,15 @@ func _foraging_idle_exit(id: String, body: CharacterBody3D) -> Vector3:
 func _process(delta: float) -> void:
 	if status == null:
 		return
-	if gateway_mode and not paused and not _validation_limit_reached():
+	var capture_timeout := 150.0 if (repair_fixture and not gateway_mode and not restore_only) else (3.0 if paused else capture_seconds)
+	# The episode's own duration boundary is decided BEFORE any new resident is
+	# chosen, and on the same elapsed+delta value the capture below uses. A resident
+	# that becomes ready exactly on the boundary frame is therefore never admitted
+	# into an episode that has already expired.
+	if not capture_dir.is_empty() and not capture_started and gateway_mode and model_turns != null \
+			and capture_age + delta > capture_timeout and _owns_shutdown_gate():
+		model_turns.close_admission("episode_duration_elapsed")
+	if gateway_mode and model_turns != null and not paused and not _validation_limit_reached() and not _model_admission_closed():
 		var ready: String = model_turns.ready_resident()
 		if not ready.is_empty():
 			_run_model_turn(ready)
@@ -358,20 +383,66 @@ func _process(delta: float) -> void:
 		# save and must cold-continue. Only the model coroutine may still own an
 		# unsettled provider/accounting/world transaction, so wait for busy=false.
 		if _decision_limit_capture_ready():
-			capture_started = true
-			_capture_town.call_deferred()
+			_close_admission_for_capture("validation_decision_limit")
+			_begin_capture("decision_limit")
 		if stop_on_idle and gateway_mode and not restore_only and capture_age > 8.0 and not capture_started and not model_turns.busy and (_validation_limit_reached() or model_turns.ready_resident().is_empty()):
 			var idle := true
 			for id in town.active_ids():
 				if not town.pending_job(id).is_empty():
 					idle = false
 			if idle:
-				capture_started = true
-				_capture_town.call_deferred()
-		var capture_timeout := 150.0 if (repair_fixture and not gateway_mode and not restore_only) else (3.0 if paused else capture_seconds)
-		if (capture_age > capture_timeout or (repair_fixture and not gateway_mode and not restore_only and repair_fixture_finished_at >= 0 and capture_age - repair_fixture_finished_at > 1.5)) and not capture_started and not (gateway_mode and model_turns.busy):
-			capture_started = true
-			_capture_town.call_deferred()
+				_close_admission_for_capture("idle_world")
+				_begin_capture("idle_world")
+		if not capture_started and repair_fixture and not gateway_mode and not restore_only and repair_fixture_finished_at >= 0 and capture_age - repair_fixture_finished_at > 1.5:
+			_begin_capture("repair_fixture_settled")
+		if not capture_started and capture_age > capture_timeout:
+			# The episode's own duration expired. In a gateway episode this is the
+			# ordered shutdown: stop admitting NEW resident decisions, await the
+			# already-started replies and their authoritative application within a
+			# finite bound, persist/capture, exit the engine - and only then does the
+			# launcher drain its gateway. A request this engine already accepted is
+			# never abandoned for the drain to settle into a save nobody owns.
+			if not gateway_mode or model_turns == null or not _owns_shutdown_gate():
+				# A lightweight host adapter that owns no shutdown gate keeps the
+				# unchanged bounded-episode behavior: it stops as soon as it reports
+				# no turn in flight.
+				if model_turns != null and model_turns.busy:
+					pass
+				else:
+					_begin_capture("duration_elapsed")
+			else:
+				model_turns.close_admission("episode_duration_elapsed")
+				var readiness: Dictionary = model_turns.shutdown_readiness(delta)
+				if readiness.ready:
+					_begin_capture("episode_duration_elapsed_unresolved" if readiness.timed_out else "episode_duration_elapsed")
+
+func _owns_shutdown_gate() -> bool:
+	## The bounded shutdown protocol lives on the turn module that owns the requests.
+	## A lighter host controller keeps its existing behavior instead of failing here.
+	return model_turns != null and model_turns.has_method("admission_closed") \
+		and model_turns.has_method("close_admission") and model_turns.has_method("shutdown_readiness") \
+		and model_turns.has_method("shutdown_evidence")
+
+func _model_admission_closed() -> bool:
+	return _owns_shutdown_gate() and model_turns.admission_closed()
+
+func _close_admission_for_capture(reason: String) -> void:
+	## Every bounded capture closes admission first, so the shutdown evidence states
+	## the truth for a decision-limit or idle stop too: nothing may be admitted after
+	## the episode decided to stop. Physical jobs are untouched.
+	if gateway_mode and _owns_shutdown_gate():
+		model_turns.close_admission(reason)
+
+func _begin_capture(reason: String) -> void:
+	if capture_started:
+		return
+	capture_started = true
+	capture_shutdown_reason = reason
+	# Honest engine status: an episode that ends with a reply still owed is not a
+	# clean stop. The record keeps the status it really has, so a later start can
+	# reconcile that request instead of reading a fabricated success.
+	shutdown_exit_code = 3 if (_owns_shutdown_gate() and model_turns.shutdown_wait_timed_out) else 0
+	_capture_town.call_deferred()
 
 func _physics_process(delta: float) -> void:
 	if status == null:
@@ -627,6 +698,10 @@ func _run_model_turn(id: String) -> Dictionary:
 	# The gateway ledger remains the independent fee authority.
 	if _validation_limit_reached():
 		return {"ok": false, "code": "validation_limit_reached", "actor_id": id}
+	# The episode's own cutoff stops admission before this call can prepare a new
+	# durable request or spend a decision from the bounded episode.
+	if _model_admission_closed():
+		return {"ok": false, "code": "admission_closed", "actor_id": id}
 	validation_decisions_started += 1
 	var result: Dictionary = await model_turns.step(id)
 	if not is_instance_valid(status):
@@ -1036,6 +1111,22 @@ func pending_breakdown(snap: Dictionary) -> Dictionary:
 		"pending_baking_count": baking_count, "pending_place_count": place_count,
 		"pending_count": life_count + trade_count + baking_count + place_count}
 
+func _shutdown_evidence() -> Dictionary:
+	## The engine's own stopping facts, so a host report never has to guess whether
+	## the episode closed admission, what it waited for, or what it left owed. A
+	## resident request whose reply was never applied is named here and keeps its
+	## pending status in the save; nothing in this path rewrites it as settled.
+	var owed: Array = []
+	for id in town.active_ids():
+		var record: Variant = town._state.godot.get("resident_turns", {}).get(id, {})
+		if record is Dictionary and record.get("status", "") == "pending":
+			owed.append({"actor_id": id, "request_id": str(record.get("request_id", ""))})
+	var reported := {"capture_reason": capture_shutdown_reason, "exit_code": shutdown_exit_code,
+		"wait_limit_seconds": shutdown_wait_limit, "resident_requests_owed": owed}
+	if _owns_shutdown_gate():
+		reported.merge(model_turns.shutdown_evidence(), true)
+	return reported
+
 func _capture_town() -> void:
 	paused = true
 	_refresh()
@@ -1059,6 +1150,7 @@ func _capture_town() -> void:
 	evidence["validation_decision_limit"] = validation_decision_limit
 	evidence["validation_limit_reached"] = _validation_limit_reached()
 	evidence["stop_on_decision_limit"] = stop_on_decision_limit
+	evidence["shutdown"] = _shutdown_evidence()
 	evidence["trade_items"] = snap.life.get("items", [])
 	evidence["trade_contracts"] = snap.life.get("contracts", [])
 	if dialogue_fixture:
@@ -1091,4 +1183,6 @@ func _capture_town() -> void:
 	file.close()
 	if not gm_export_path.is_empty():
 		_note_gm_export(town.write_background_gm_snapshot(gm_export_path))
-	get_tree().quit(0)
+	# A nonzero exit is the engine's own statement that this bounded episode ended
+	# with a reply still owed; the launcher reports it instead of a clean pass.
+	get_tree().quit(shutdown_exit_code)

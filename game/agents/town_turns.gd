@@ -21,6 +21,12 @@ const DECISION_TEXT_LIMIT := 512
 ## Structural detail of a received reply refused only for exceeding the unchanged
 ## text bound. The one locally recoverable invalid_decision class.
 const REASON_TOO_LONG_DETAIL := "reason_too_long"
+## Provider failures that never exposed a decision to this world. A reply already
+## paid for and settled at the fee ledger may replace exactly one of these receipts,
+## because nothing was ever chosen here; every other held state already has an
+## authoritative outcome or an unresolved attempt that must never be rewritten.
+const RECOVERABLE_PROVIDER_ERRORS := ["brain_run_failed", "brain_run_canceled", "brain_timeout",
+	"brain_gateway_rejected_or_uncertain", "brain_provider_failed"]
 var inflight: Dictionary = {}
 var busy: bool:
 	get:
@@ -28,6 +34,20 @@ var busy: bool:
 var max_parallel := 3
 var _next_resident_index := 0
 var last_result: Dictionary = {}
+## Episode shutdown. A bounded episode's duration expiry closes admission to NEW
+## resident decisions here; coroutines that were already started keep their own
+## request and apply their own authoritative result. Nothing in this path rewrites
+## a turn record, so a reply that is still owed stays pending for the next cold
+## start instead of being reported as a settled turn or a plausible local error.
+var _admission_closed := false
+var admission_closed_reason := ""
+## Finite bound on awaiting already-started replies. It sits above the brain's own
+## gateway deadline (38s) so the host never waits longer than the client can still
+## accept a reply, and it is finite so an unsettled provider request is reported
+## instead of holding the engine until the launcher's own timeout kills it.
+var shutdown_wait_limit := 45.0
+var shutdown_wait_seconds := 0.0
+var shutdown_wait_timed_out := false
 
 func configure(world, path: String) -> void:
 	town = world
@@ -184,7 +204,60 @@ func _requires_review(record: Dictionary, id: String = "") -> bool:
 func _replan_cooling(record: Dictionary) -> bool:
 	return record.get("status", "") == "rule_rejection" and town._state.godot.elapsed_seconds < float(record.get("replan_not_before", INF))
 
+func admission_closed() -> bool:
+	## Whether this episode admits NEW resident decisions. A closed episode still
+	## owns every coroutine that had already started.
+	return _admission_closed
+
+func close_admission(reason: String) -> bool:
+	## Close admission to NEW resident decisions exactly once. Only the call that
+	## really cut the episode off returns true, so a host reports the true cutoff.
+	if _admission_closed:
+		return false
+	_admission_closed = true
+	admission_closed_reason = reason
+	shutdown_wait_seconds = 0.0
+	shutdown_wait_timed_out = false
+	return true
+
+func in_flight_requests() -> Array:
+	var pending: Array = []
+	for id in inflight.keys():
+		var entry: Dictionary = inflight[id]
+		pending.append({"actor_id": id, "request_id": str(entry.get("request_id", "")), "epoch": int(entry.get("epoch", 0))})
+	pending.sort_custom(func(left, right): return str(left.actor_id) < str(right.actor_id))
+	return pending
+
+func shutdown_readiness(delta: float) -> Dictionary:
+	## One bounded step of the episode's shutdown wait, after admission closed.
+	## `ready` is the host's permission to persist and exit: true when nothing is
+	## in flight, or when the bound expired and the still-owed reply must be
+	## reported instead of waited for forever.
+	if not _admission_closed:
+		return {"ready": false, "reason": "", "waited_seconds": 0.0, "timed_out": false,
+			"in_flight": inflight.size(), "unresolved": []}
+	if busy:
+		shutdown_wait_seconds += maxf(delta, 0.0)
+		shutdown_wait_timed_out = shutdown_wait_seconds >= shutdown_wait_limit
+	return {"ready": not busy or shutdown_wait_timed_out, "reason": admission_closed_reason,
+		"waited_seconds": shutdown_wait_seconds, "timed_out": shutdown_wait_timed_out,
+		"in_flight": inflight.size(), "unresolved": in_flight_requests() if busy else []}
+
+func shutdown_evidence() -> Dictionary:
+	## The host's own stopping facts. `resolved` is true only when the episode ended
+	## with every already-started reply applied by its own coroutine; a distinct
+	## capture reason and a nonzero engine exit keep an unresolved one honest.
+	return {"admission_closed": _admission_closed, "admission_closed_reason": admission_closed_reason,
+		"wait_limit_seconds": shutdown_wait_limit,
+		"waited_seconds": roundf(shutdown_wait_seconds * 1000.0) / 1000.0,
+		"timed_out": shutdown_wait_timed_out,
+		"resolved": _admission_closed and not busy and not shutdown_wait_timed_out,
+		"in_flight": in_flight_requests()}
+
 func ready_resident() -> String:
+	# A closed episode admits no NEW resident decision, whatever the clock says.
+	if _admission_closed:
+		return ""
 	if inflight.size() >= max_parallel:
 		return ""
 	var residents: Array = town.active_ids()
@@ -203,6 +276,10 @@ func ready_resident() -> String:
 	return ""
 
 func step(requested_id: String = "") -> Dictionary:
+	if _admission_closed:
+		# Already-started coroutines keep their own request and settle it themselves;
+		# only a decision that has not begun is refused here.
+		return {"ok": false, "code": "admission_closed", "actor_id": requested_id}
 	var id := ready_resident() if requested_id.is_empty() else requested_id
 	if id.is_empty():
 		return {"ok": true, "code": "no_due_turn"}
@@ -368,12 +445,103 @@ func _speech_delivery(id: String, request_id: String, speech: String, effect: Di
 				"recipient_ids": event.get("recipient_ids", []).duplicate() if event.get("recipient_ids", []) is Array else []}
 	return {"attempted": false, "delivered": false, "code": "no_dialogue"}
 
-func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary) -> Dictionary:
+func _recovery_refusal(id: String, current: Dictionary, request_id: String, reply: Dictionary,
+		recovery: Dictionary) -> Dictionary:
+	## Exact bindings for one already-settled paid reply. This reads state only: every
+	## refusal returns before any transaction, so a rejected receipt changes nothing.
+	var refuse: Callable = func(code: String) -> Dictionary:
+		return {"ok": false, "duplicate": false, "code": code, "actor_id": id}
+	if save_path.is_empty():
+		return refuse.call("recovery_save_path_required")
+	if str(current.get("status", "")) != "provider_error":
+		return refuse.call("recovery_not_provider_error")
+	if not RECOVERABLE_PROVIDER_ERRORS.has(str(current.get("error", ""))):
+		return refuse.call("recovery_error_not_recoverable")
+	var failed_value: Variant = current.get("accepted_reply", null)
+	if not failed_value is Dictionary or bool(failed_value.get("ok", true)):
+		return refuse.call("recovery_no_failed_reply")
+	var failed: Dictionary = failed_value
+	if str(recovery.get("world_id", "")) != str(town._state.world_id):
+		return refuse.call("recovery_world_mismatch")
+	if str(recovery.get("resident_id", "")) != id:
+		return refuse.call("recovery_resident_mismatch")
+	## The receipt's request and the resident's recorded request must both be this request.
+	## Checked here, before any guard that could archive a late reply.
+	if str(recovery.get("request_id", "")) != request_id or str(current.get("request_id", "")) != request_id:
+		return refuse.call("recovery_request_mismatch")
+	if int(recovery.get("controller_epoch", -1)) != int(current.get("controller_epoch", -2)):
+		return refuse.call("recovery_epoch_mismatch")
+	var operation := str(recovery.get("provider_operation_id", ""))
+	if operation.is_empty() or str(current.get("provider_command_id", "")) != operation:
+		return refuse.call("recovery_operation_mismatch")
+	if str(reply.get("command_id", "")) != operation:
+		return refuse.call("recovery_reply_operation_mismatch")
+	if failed != recovery.get("original_failed_reply", null):
+		return refuse.call("recovery_failed_reply_mismatch")
+	var archive_refusal := _failure_archive_refusal(id, request_id, failed)
+	if not archive_refusal.is_empty():
+		return refuse.call(archive_refusal)
+	if not _save_source_matches(str(recovery.get("source_sha256", ""))):
+		return refuse.call("recovery_source_hash_mismatch")
+	if inflight.has(id) or not town.pending_job(id).is_empty():
+		return refuse.call("resident_working")
+	return {}
+
+func _failure_archive_refusal(id: String, request_id: String, failed: Dictionary) -> String:
+	## The original provider_error archive entry must still be the authoritative record of
+	## this request: its own failed reply intact, no reply recorded beside it. Read only.
+	var archive: Variant = town._state.godot.get("resident_archive", {})
+	if not archive is Dictionary or str(archive.get("world_id", "")) != str(town._state.world_id):
+		return "recovery_archive_missing"
+	var entries: Variant = archive.get("entries", null)
+	if not entries is Dictionary or not entries.has(request_id):
+		return "recovery_archive_missing"
+	var entry: Variant = entries[request_id]
+	if not entry is Dictionary:
+		return "recovery_archive_missing"
+	if str(entry.get("request_id", "")) != request_id or str(entry.get("resident_id", "")) != id \
+			or str(entry.get("world_id", "")) != str(town._state.world_id):
+		return "recovery_archive_identity_mismatch"
+	if entry.get("original_reply", null) != failed:
+		return "recovery_archive_reply_mismatch"
+	var application: Variant = entry.get("application", {})
+	if not application is Dictionary or str(application.get("status", "")) != "provider_error":
+		return "recovery_archive_not_provider_error"
+	var replays_value: Variant = entry.get("replays", [])
+	if not replays_value is Array:
+		return "recovery_archive_replays_invalid"
+	var replays: Array = replays_value
+	if not replays.is_empty():
+		return "recovery_previously_recorded_reply"
+	return ""
+
+func _save_source_matches(expected_sha256: String) -> bool:
+	## The receipt is bound to the exact source bytes it was extracted from. Re-read here
+	## under the caller's writer lock, so a newer save can never be reconciled against an
+	## older receipt.
+	if expected_sha256.is_empty() or save_path.is_empty():
+		return false
+	var actual := FileAccess.get_sha256(save_path)
+	return not actual.is_empty() and actual.to_lower() == expected_sha256.to_lower()
+
+func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary, recovery: Dictionary = {}) -> Dictionary:
+	## `recovery` is empty for every ordinary turn, so the normal path below is unchanged.
+	## When it carries a settled-reply receipt, its exact bindings are enforced BEFORE any
+	## existing guard, so a refused receipt can never archive, mutate or acknowledge anything.
+	## A fully validated recovery then enters the one existing transaction below, where the
+	## review metadata, the effect and the archive entry are written together. No controller
+	## is reset, no epoch changes and no decision is produced here.
 	var current := _record(id)
+	var recovering := false
+	if not recovery.is_empty():
+		var refused := _recovery_refusal(id, current, request_id, reply, recovery)
+		if not refused.is_empty():
+			return refused
+		recovering = true
 	if int(current.get("controller_epoch", -1)) != epoch or current.get("request_id", "") != request_id:
 		var archived_stale := _archive_reply(id, request_id, reply, "stale_controller_reply", "stale_controller_reply")
 		return {"ok": false, "code": "stale_controller_reply", "actor_id": id, "archive": archived_stale}
-	if current.get("status") != "pending":
+	if current.get("status") != "pending" and not recovering:
 		var duplicate: bool = current.get("accepted_reply", {}) == reply
 		if duplicate:
 			return {"ok": true, "duplicate": true, "code": "duplicate", "actor_id": id}
@@ -382,6 +550,15 @@ func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary) 
 	var aliases: Dictionary = current.offered_actions
 	var applied: Dictionary = town.transaction(save_path, func():
 		var record: Dictionary = town._state.godot.resident_turns[id]
+		if recovering:
+			# Review metadata, the recovered effect and its archive entry share this one
+			# transaction: the resident never passes through a persisted intermediate state.
+			record.reviews.append({"status": str(current.get("status", "")), "error": str(current.get("error", "")),
+				"error_detail": str(current.get("error_detail", "")), "request_id": request_id, "epoch": epoch,
+				"reason": "host_settled_reply_recovery",
+				"provider_operation_id": str(recovery.get("provider_operation_id", "")),
+				"source_sha256": str(recovery.get("source_sha256", "")),
+				"ledger_response_sha256": str(recovery.get("ledger_response_sha256", ""))})
 		record.accepted_reply = reply.duplicate(true)
 		record.command_id = request_id
 		record.provider_command_id = reply.get("command_id", "")

@@ -15,6 +15,10 @@ var sack_mesh: BoxMesh
 var oven_material: StandardMaterial3D
 var sack_material: StandardMaterial3D
 const SACK_LIMIT := 5
+## The drawn oven body, in the display's own local space. The visual mesh and its solid collider
+## share exactly one box, so the physical oven can never drift away from the visible oven.
+const OVEN_BODY_SIZE := Vector3(1.0, 1.0, 0.76)
+const OVEN_BODY_CENTER := Vector3(0.0, 0.5, 0.0)
 
 func configure(world) -> void:
 	town = world
@@ -22,7 +26,7 @@ func configure(world) -> void:
 	if point_list.is_empty():
 		return
 	oven_mesh = BoxMesh.new()
-	oven_mesh.size = Vector3(1.0, 1.0, 0.76)
+	oven_mesh.size = OVEN_BODY_SIZE
 	sack_mesh = BoxMesh.new()
 	sack_mesh.size = Vector3(0.24, 0.30, 0.24)
 	oven_material = StandardMaterial3D.new()
@@ -41,8 +45,9 @@ func configure(world) -> void:
 		var oven := MeshInstance3D.new()
 		oven.mesh = oven_mesh
 		oven.material_override = oven_material
-		oven.position = Vector3(0.0, 0.5, 0.0)
+		oven.position = OVEN_BODY_CENTER
 		display.add_child(oven)
+		_add_oven_collision(oven)
 		var mouth := MeshInstance3D.new()
 		var mouth_mesh := BoxMesh.new()
 		mouth_mesh.size = Vector3(0.5, 0.34, 0.06)
@@ -70,6 +75,24 @@ func configure(world) -> void:
 		var flour := _flour(point)
 		prior_flour[point_id] = flour
 		_update_point(point_id, str(point.get("label", point_id)), flour)
+
+func _add_oven_collision(oven: MeshInstance3D) -> void:
+	# One solid box that is exactly the drawn oven body: a resident capsule can no longer walk
+	# through the oven. It is deliberately restricted to the body, so it cannot reach into the
+	# authoritative working apron in front of the mouth (`town_baking.gd` BAKING_WORK_OFFSET with
+	# arrival radius 0.45), which stays walkable, and it cannot reach the line-of-sight target
+	# above the body top, which stays observable from that apron. The 6 cm decorative mouth plate
+	# is left exactly as drawn; it never carried collision.
+	var body := StaticBody3D.new()
+	body.name = "OvenCollision"
+	# Layer 1: the layer resident capsules scan and the layer the town navigation bake parses.
+	body.collision_layer = 1
+	var collider := CollisionShape3D.new()
+	var volume := BoxShape3D.new()
+	volume.size = OVEN_BODY_SIZE
+	collider.shape = volume
+	body.add_child(collider)
+	oven.add_child(body)
 
 func _process(_delta: float) -> void:
 	if town == null or points.is_empty():

@@ -33,6 +33,13 @@ from town_validation_budget import CarriedLedgerGate, EvidenceGateway, read_revi
 MAX_DRAIN_GRACE_SECONDS = 40.0
 DRAIN_GRACE_SECONDS = 40.0
 _DRAIN_POLL_SECONDS = 0.25
+# The engine's own bounded episode shutdown: after --seconds expires it stops admitting
+# NEW resident decisions, then awaits the already-started replies and their authoritative
+# application before it captures and exits. The launcher budgets this same single value
+# for the engine process and the authorization deadline, so it can never kill the engine
+# exactly while it is applying a reply this run already paid for.
+SHUTDOWN_WAIT_SECONDS = 45.0
+MAX_SHUTDOWN_WAIT_SECONDS = 120.0
 
 
 class OperationTracker:
@@ -174,7 +181,15 @@ def drain_gateway(server, thread, tracker, deadline=None):
     engine died still settles its own reservation exactly once and is never replayed.
     A worker that outlives the finite grace is reported as unresolved; nothing here
     writes to the ledger, so its durable reservation is left exactly as it is.
+
+    The operations whose workers were still running when the engine exited are named
+    first, so a drain that completes later is not reported as if nothing had been
+    outstanding at engine exit. This names only the observed worker facts: whether a
+    named operation ultimately settled, errored or was consumed is not inferable from
+    worker lifetime, and no settlement is claimed without its own ledger receipt.
     """
+    pending_at_engine_exit = server.pending_workers()
+    operations_at_engine_exit = tracker.operations_for(pending_at_engine_exit) if tracker else []
     server.stop_intake()
     try:
         server.shutdown()
@@ -191,6 +206,9 @@ def drain_gateway(server, thread, tracker, deadline=None):
             'workers_in_flight': bool(pending), 'drained_complete': not pending,
             'unresolved_workers': len(pending),
             'unresolved_operations': tracker.operations_for(pending) if tracker else [],
+            'workers_pending_at_engine_exit': len(pending_at_engine_exit),
+            'operations_pending_at_engine_exit': operations_at_engine_exit,
+            'engine_exited_with_workers_pending': bool(pending_at_engine_exit),
             'refused_connections': server.refused, 'worker_start_failures': server.start_failures,
             'drain_grace_seconds': round(server.grace_used, 3),
             'drain_error': error}
@@ -446,6 +464,8 @@ def main():
     parser.add_argument('--concurrency', type=int, default=1, help='Resident scheduler bound 1..3, within remaining ledger slots; this launcher serializes upstream completions.')
     parser.add_argument('--drain-grace', type=float, default=DRAIN_GRACE_SECONDS,
                         help='Finite seconds (0..40) to let requests already accepted by this gateway settle after the engine exits; never extends the run deadline.')
+    parser.add_argument('--shutdown-wait', type=float, default=SHUTDOWN_WAIT_SECONDS,
+                        help='Finite seconds (0..120) the engine may spend after --seconds closing admission and awaiting already-started replies; passed to the engine and added to this launcher\'s engine process and authorization budgets.')
     parser.add_argument('--carried-uncertainty-pin', type=Path, help='Explicit v1 JSON review pin binding ledger/guard/policy and the exact carried uncertain request IDs, states and nanoyuan reserves; never waives new uncertainty.')
     parser.add_argument('--inquire-resident', help='Send one scripted player inquiry to this active stable resident ID.')
     parser.add_argument('--inquire-text', help='Exact explicitly scripted player message; requires --inquire-resident.')
@@ -459,11 +479,15 @@ def main():
         parser.error('Seconds 5..900; maximum requests 1..32.')
     if not 0 <= args.drain_grace <= MAX_DRAIN_GRACE_SECONDS:
         parser.error('Drain grace must be within 0..40 seconds.')
+    if not 0 <= args.shutdown_wait <= MAX_SHUTDOWN_WAIT_SECONDS:
+        parser.error('Shutdown wait must be within 0..120 seconds.')
     if args.inquire_text is not None and (not args.inquire_resident or not args.inquire_text.strip() or len(args.inquire_text) > 512):
         parser.error('Scripted inquiry text requires a target and 1..512 characters.')
     out, save = args.out.resolve(), args.save.resolve()
     gm_export = args.gm_export.resolve() if args.gm_export else None
-    deadline = datetime.now(timezone.utc) + timedelta(seconds=args.seconds + 55)
+    # --seconds is the episode duration; the engine's own bounded shutdown wait runs
+    # after it, so the authorization deadline must cover both.
+    deadline = datetime.now(timezone.utc) + timedelta(seconds=args.seconds + args.shutdown_wait + 55)
     try:
         validate_paths(out, save, gm_export)
         baseline = read_world_baseline(save)
@@ -498,13 +522,14 @@ def main():
     (out / 'helper.json').write_text(json.dumps({'pid': os.getpid(), 'status': 'running', 'ledger_before': before}, indent=2))
     thread.start()
     command = [sys.executable, str(ROOT / 'tools/run_godot.py'), '--godot', args.godot, '--name', 'town-model',
-               '--timeout', str(args.seconds + 45), '--out', str(out), '--']
+               '--timeout', str(int(args.seconds + args.shutdown_wait) + 45), '--out', str(out), '--']
     if args.headless:
         command += ['--headless']
     command += ['--audio-driver', 'Dummy']
     command += ['res://scenes/town_street.tscn', '--', '--town-save=' + str(save), '--town-gateway',
                 '--town-capture=' + str(out / 'capture'), '--town-duration=' + str(args.seconds),
-                '--town-max-decisions=' + str(args.max_requests)]
+                '--town-max-decisions=' + str(args.max_requests),
+                '--town-shutdown-wait=' + str(args.shutdown_wait)]
     if gm_export is not None:
         command += ['--town-gm-export=' + str(gm_export)]
     if args.inquire_resident:
@@ -517,7 +542,8 @@ def main():
         command += ['--town-stop-on-decision-limit']
     try:
         result = subprocess.run(command, cwd=ROOT, env=dict(os.environ, AINCRAD_GATEWAY_RUN_CONFIG=str(run)),
-                                capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=args.seconds + 60)
+                                capture_output=True, text=True, encoding='utf-8', errors='replace',
+                                timeout=args.seconds + args.shutdown_wait + 60)
         (out / 'runner.log').write_text(result.stdout + result.stderr, encoding='utf-8')
     finally:
         # The engine is gone: stop new intake, then drain what this launcher already
@@ -560,6 +586,7 @@ def main():
                'budget_stop_reason': gate.failure, 'upstream_requests': gate.sent, 'upstream_concurrency': 1,
                'carried_uncertainty_reviewed': gate.review is not None, 'gateway_shutdown': shutdown,
                'shutdown_incomplete': bool(shutdown_incomplete),
+               'shutdown_wait_seconds': args.shutdown_wait,
                'world_progress_observed': progress['observed'], 'world_progress': progress,
                'startup_fault_export': startup_fault}
     (out / 'result.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
