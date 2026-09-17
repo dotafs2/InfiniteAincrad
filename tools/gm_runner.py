@@ -269,7 +269,12 @@ def canonical(value) -> str:
 
 
 def emit(payload, exit_code: int) -> int:
-    print(json.dumps(payload, ensure_ascii=False, sort_keys=True, default=str), flush=True)
+    # Console encodings are not under this runner's control.  In particular, a Windows task
+    # launched from a legacy code-page host can successfully settle a paid model turn and then
+    # raise UnicodeEncodeError while printing a Chinese summary.  Keep persisted prompts/results
+    # as UTF-8, but make the one-line machine-readable CLI envelope ASCII-safe so reporting can
+    # never mask the already-recorded provider outcome.
+    print(json.dumps(payload, ensure_ascii=True, sort_keys=True, default=str), flush=True)
     return exit_code
 
 

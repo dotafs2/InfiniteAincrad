@@ -10,6 +10,8 @@ model answer comes from the local fake transport below; none of it is real DeepS
 Kimi behaviour.
 """
 import copy
+import contextlib
+import io
 import json
 import re
 import os
@@ -594,6 +596,15 @@ class EffectFeedbackConsumptionTests(RunnerTestBase):
 
 
 class CoreObservationTests(RunnerTestBase):
+    def test_cli_emit_is_ascii_safe_on_legacy_windows_console(self):
+        raw = io.BytesIO()
+        console = io.TextIOWrapper(raw, encoding='cp1252', errors='strict')
+        with contextlib.redirect_stdout(console):
+            self.assertEqual(gm_runner.emit({'note': '生活继续'}, 0), 0)
+        console.flush()
+        payload = json.loads(raw.getvalue().decode('cp1252'))
+        self.assertEqual(payload['note'], '生活继续')
+
     @unittest.skipUnless(os.name == 'nt', 'Windows-only sandbox backend behavior')
     def test_windows_backend_is_forwarded_and_other_config_data_is_never_used(self):
         marker = 'fake-unrelated-config-value'
