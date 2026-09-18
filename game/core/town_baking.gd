@@ -206,7 +206,7 @@ func install_baking_route(spec: Dictionary, source_seq: int, command_id: String)
 		"recipient_ids": [], "operation_id": command_id, "source": "development_gm_review",
 		"capability_id": BAKING_CAPABILITY_ID, "route_id": BAKING_ROUTE_ID, "point_id": spec.id,
 		"source_seq": source_seq, "initial_flour": spec.initial_flour, "contractual": false,
-		"text": "公共烤炉已就位。"})
+		"text": "The public oven is ready."})
 	return {"ok": true, "code": "baking_route_installed", "capability_id": BAKING_CAPABILITY_ID,
 		"route_id": BAKING_ROUTE_ID, "point_id": spec.id}
 
@@ -290,7 +290,7 @@ func replace_unused_baking_route(old_point_id: String, spec: Dictionary, source_
 		"operation_id": command_id, "source": "development_gm_review", "capability_id": BAKING_CAPABILITY_ID,
 		"route_id": BAKING_ROUTE_ID, "point_id": old_point_id, "replacement_point_id": str(spec.id),
 		"superseded_install_command": old_install_command, "source_seq": source_seq,
-		"initial_flour": int(spec.initial_flour), "text": "未使用的公共烤炉位置已由审查后的新位置替代。"})
+		"initial_flour": int(spec.initial_flour), "text": "The unused public oven has been moved to its reviewed replacement site."})
 	return {"ok": true, "code": "baking_route_replaced", "capability_id": BAKING_CAPABILITY_ID,
 		"route_id": BAKING_ROUTE_ID, "point_id": str(spec.id), "superseded_point_id": old_point_id}
 
@@ -328,7 +328,7 @@ func _observe_baking() -> void:
 			_append_life_event({"type": "baking_point_observed", "actor_id": id, "recipient_ids": [id],
 				"operation_id": "baking-observation:%s:%s:%d" % [id, point_id, int(_state.life.seq) + 1],
 				"source": observation_source, "point_id": point_id, "flour_remaining": point.flour_remaining,
-				"text": "%s：公共面粉还剩%d份；烤一份要%d秒，烤好得到自己的一口粮。" % [str(point.label), int(point.flour_remaining), int(BAKING_WORK_SECONDS)]})
+				"text": "%s: %d portions of public flour remain; baking takes %d seconds and produces one ration of your own." % [str(point.label), int(point.flour_remaining), int(BAKING_WORK_SECONDS)]})
 			store.known[id][point_id] = {"flour_remaining": point.flour_remaining,
 				"observed_elapsed": _state.godot.elapsed_seconds, "event_seq": _state.life.seq}
 
@@ -364,7 +364,7 @@ func trade_options(id: String) -> Array:
 		if point.is_empty() or int(observation.get("flour_remaining", 0)) < 1:
 			continue
 		_option(result, {"id": BAKING_OPTION_PREFIX + str(point_id), "action": BAKING_ACTION,
-			"label": "用%s的1份公共面粉烤一个自己的面包：站到炉边烤%d秒（面粉有限，烤好就能自己吃）" % [str(point.label), int(BAKING_WORK_SECONDS)],
+			"label": "Use 1 portion of public flour at %s to bake your own bread: work beside the oven for %d seconds (flour is finite; you can eat the finished bread)." % [str(point.label), int(BAKING_WORK_SECONDS)],
 			"speech_allowed": false, "point_id": str(point_id)})
 	return result
 
@@ -428,7 +428,7 @@ func review_depleted_baking_attempt(id: String, request_id: String) -> Dictionar
 		return _failure("flour_feedback_world_mismatch")
 	_append_life_event({"type": "baking_point_observed", "actor_id": id, "recipient_ids": [id],
 		"operation_id": request_id, "source": "resident_bake_attempt_feedback", "point_id": point_id,
-		"flour_remaining": 0, "text": "%s：我这次尝试时得知公共面粉已经用完。" % str(point.label)})
+		"flour_remaining": 0, "text": "%s: On this attempt, I found that the public flour had run out." % str(point.label)})
 	baking.known[id][point_id] = {"flour_remaining": 0,
 		"observed_elapsed": _state.godot.elapsed_seconds, "event_seq": _state.life.seq}
 	var reviews: Array = record.get("reviews", []).duplicate(true) if record.get("reviews", []) is Array else []
@@ -471,7 +471,7 @@ func _start_bake(id: String, point_id: String, command_id: String, provenance: S
 		# but this resident no longer receives the same stale bake option on the next bounded turn.
 		_append_life_event({"type": "baking_point_observed", "actor_id": id, "recipient_ids": [id],
 			"operation_id": command_id, "source": "resident_bake_attempt_feedback", "point_id": point_id,
-			"flour_remaining": 0, "text": "%s：我这次尝试时得知公共面粉已经用完。" % str(point.label)})
+			"flour_remaining": 0, "text": "%s: On this attempt, I found that the public flour had run out." % str(point.label)})
 		store.known[id][point_id] = {"flour_remaining": 0,
 			"observed_elapsed": _state.godot.elapsed_seconds, "event_seq": _state.life.seq}
 		return _failure("flour_unavailable")
@@ -511,7 +511,7 @@ func _finish_bake(id: String, job: Dictionary, point: Dictionary) -> Dictionary:
 		_append_life_event({"type": "bread_baked", "actor_id": id, "subject_id": id, "recipient_ids": [id],
 			"operation_id": command_id, "source": str(job.get("provenance", "local_rule_policy")),
 			"capability_id": BAKING_CAPABILITY_ID, "route_id": BAKING_ROUTE_ID, "point_id": point_id, "quantity": 1,
-			"text": "我在%s用一份公共面粉烤好了一个面包，现在它是我自己的口粮。" % [str(point.get("label", point_id))]})
+			"text": "I baked a loaf at %s using one portion of public flour. It is now my own ration." % [str(point.get("label", point_id))]})
 	else:
 		# Honest fallback: no loaf could be handed over, so the reserved flour returns to the
 		# public stock instead of becoming an uneatable counter.
@@ -522,7 +522,7 @@ func _finish_bake(id: String, job: Dictionary, point: Dictionary) -> Dictionary:
 		_append_life_event({"type": "baking_failed", "actor_id": id, "subject_id": id, "recipient_ids": [id],
 			"operation_id": command_id, "source": str(job.get("provenance", "local_rule_policy")),
 			"capability_id": BAKING_CAPABILITY_ID, "route_id": BAKING_ROUTE_ID, "point_id": point_id, "quantity": 0,
-			"text": "%s这次没能烤成：我手上放不下新的口粮，公共面粉已经退回。" % [str(point.get("label", point_id))]})
+			"text": "Baking at %s failed: I cannot carry another ration. The public flour has been returned." % [str(point.get("label", point_id))]})
 	baking.commands[command_id].result = receipt.duplicate(true)
 	baking.jobs.erase(id)
 	return receipt
@@ -545,7 +545,7 @@ func _consume_held_loaf(id: String, command_id: String, provenance: String) -> v
 		_append_life_event({"type": "bread_eaten", "actor_id": id, "subject_id": id, "recipient_ids": [id],
 			"operation_id": command_id, "source": provenance, "capability_id": BAKING_CAPABILITY_ID,
 			"route_id": BAKING_ROUTE_ID, "point_id": str(point_id), "quantity": 1,
-			"text": "我吃掉了一个自己烤的面包。"})
+			"text": "I ate a loaf of bread I baked myself."})
 		return
 
 func _finish(id: String, pending: Dictionary) -> Dictionary:

@@ -27,8 +27,8 @@ func _ready() -> void:
 	for id in quarter.houses:
 		quarter.houses[id].set_door_open(saved.get("doors",{}).get(id,false))
 		quarter.houses[id].set_window_open(saved.get("windows",{}).get(id,false))
-	latest = "第一层生活街区 · 空格继续/暂停 · E 门 · F 窗 · V 45°总览"
-	if restore_only: latest = "第一层生活街区 · 只读游览，居民暂停 · V 总览/返回"
+	latest = "Floor One Living Quarter - Space pause/resume - E door - F window - V overview"
+	if restore_only: latest = "Floor One Living Quarter - Read-only visit, residents paused - V overview/return"
 	_refresh()
 	if not report_dir.is_empty():
 		if not restore_only:
@@ -109,7 +109,7 @@ func _physics_process(delta: float) -> void:
 func _set_door(id: String, value: bool) -> void:
 	opening.erase(id)
 	if restore_only and report_dir.is_empty():
-		latest = "当前为只读回看；门窗和存档保持原样。开启实时 AI 生活后才能改变世界。"
+		latest = "Read-only review: doors, windows and the save remain unchanged. Start live AI life to change the world."
 		_refresh()
 		return
 	if report_dir.is_empty():
@@ -118,7 +118,7 @@ func _set_door(id: String, value: bool) -> void:
 			return {"ok":true,"code":"spatial_door_changed"})
 		if not result.ok:
 			paused = true
-			latest = "门状态保存失败，世界已暂停。"
+			latest = "Could not save the door state. The world is paused."
 			_refresh()
 			return
 	quarter.houses[id].set_door_open(value)
@@ -126,7 +126,7 @@ func _set_door(id: String, value: bool) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if quarter != null and event is InputEventKey and event.pressed and not event.echo and not _composing_dialogue():
 		if restore_only and event.keycode in [KEY_SPACE, KEY_E, KEY_F]:
-			latest = "当前为只读回看；居民、门窗和存档保持原样。V 总览/返回"
+			latest = "Read-only review: residents, doors, windows and the save stay unchanged. V overview/return"
 			_refresh()
 			return
 		if event.keycode == KEY_V:
@@ -194,13 +194,13 @@ func _review() -> void:
 	for id in town.active_ids():
 		var point: Vector2 = review_camera.unproject_position(bodies[id].position+Vector3.UP*1.8)
 		var label := Label.new()
-		label.text = "%02d %s" % [index+1,town.resident(id).name]
+		label.text = "%02d %s" % [index+1,town.resident_name(id)]
 		label.position = point
 		label.add_theme_font_size_override("font_size",20)
 		label.add_theme_color_override("font_outline_color",Color("242b26"))
 		label.add_theme_constant_override("outline_size",8)
 		review_layer.add_child(label)
-		report.residents.append({"id":id,"name":town.resident(id).name,"position":_array(bodies[id].position),"home":_array(town.home_point(id)),"screen":[point.x,point.y]})
+		report.residents.append({"id":id,"name":town.resident_name(id),"position":_array(bodies[id].position),"home":_array(town.home_point(id)),"screen":[point.x,point.y]})
 		index += 1
 	await _image("02-aerial-residents.png")
 	review_layer.visible = false

@@ -1,448 +1,109 @@
-# 唯一流程图
+# Current Roadmap
 
-最新接续：2026-09-18，H106。已将本任务可见对话原文、覆盖时间与校验清单推送交付分支，并增加[固定接续入口](docs/history/conversations/README.md)。本机继续离线导航修复：替换废弃烘焙接口、显式保留原有效避障半径；完整179项流程复跑通过，图形阶段原两类警告消失。独立16栋街区40条导航路线及64项门窗检查通过，仍有导航边缘合并警告，不能写成全街区无警告。当前细节见[H106报告](docs/validation/navigation-and-history-2026-09-18.md)。
+Language policy: the game, resident names, dialogue, Kimi/GM instructions and this roadmap use English. Conversation with the user stays Chinese. Original archived evidence is retained without rewriting what was said.
 
-本轮流程演练完成：2026-09-18。已实际跑通独立十居民的需求→十个GM测试上下文→候选审阅→有限铁源安装→真实走路取料→劳动中退出→新进程续做→最终冷恢复；正常阶段179项检查通过，模型调用0。修复直接演练缺少导入、日志错误未计失败，以及证据解析的小数精度误报；两类导航警告保留。[运行结果与期望差距](docs/validation/local-flow-2026-09-18.md) · [可缩放完整图](docs/validation/local-flow-2026-09-18/flowchart.html)。
+Current milestone: a recoverable ten-resident / ten-GM loop. Bounded live participation and bread adoption were recorded upstream. Local offline workflow checks pass, but sustained unattended autonomy, long-term food supply and natural ration sharing remain unproven.
 
-最新接收与离线修复：2026-09-18。本机 `C:\InfiniteAincrad` 已切到远程 `codex/overnight-20260918-delivery` 的 `9fcd05c`（09:52）；远程 main 仍是 `13fd766`。上游最终交付为 seq450，十居民真实决策/位移、烘焙采用与最终冷恢复已有记录；最新 GM 回访为九位返回、一位结果未知。见 [09:00 交付](09_DELIVERY.md)。用户确认原存档、GM 状态及账本仍在另一台机器，本轮只做离线修复：预览入口现在每次执行增量构建和资源导入，避免更新代码后继续使用旧缓存；50 项 Python、306 项 Godot 检查及独立预览冷恢复通过，模型调用 0。见[本机证据](docs/validation/offline-continuation-2026-09-18.md)。
+The latest original world is seq450 on another computer, together with its GM memory and cost ledgers. Work on this machine remains offline. A fresh preview or test world never substitutes for that history.
 
-当前顺序：先接续原世界与账本 → 验证资源供需、拥挤和居民自然口粮转交 → 按实际需要扩展可持续生产与职业 → 再扩大长期无人维护。私有资料到位前可继续离线工程；不以测试档代替 seq450。以下日期更新保留各历史检查点的证据边界。
+## Current work
 
-## 当前完整流程图
+- **H103-H104:** received the morning delivery and fixed stale build/import caches. The original world remains separate.
+- **H105:** completed the whole offline loop, including physical travel, an interrupted job, restart and complete cold-restore comparison. 179 normal-stage checks passed.
+- **H106:** uploaded a verifiable conversation archive; replaced the deprecated navigation bake API and made the existing effective clearance explicit. The workflow passed again with no engine warnings. The sixteen-house layout passed 40 routes and 64 door/window checks, but still reports four overlapping navigation edges, also reproduced with the previous code.
+- **H107:** switch authored game text, names, prompts and the current flowchart to English. Known legacy names are displayed through aliases; stable identities and original save records remain intact. Validation and screenshots are recorded in the English rollout report.
 
-绿色：对应范围已有证据；橙色：已有机制或局部样本，持续目标未完成；灰色：后续阶段。上游真实记录、本机离线演练与长期目标分别标明，颜色不表示全仓无错误。
+[Conversation archive and handoff](docs/history/conversations/README.md) · [Offline workflow evidence](docs/validation/local-flow-2026-09-18.md) · [Navigation evidence](docs/validation/navigation-and-history-2026-09-18.md) · [English rollout](docs/validation/english-rollout-2026-09-18.md) · [Zoomable flowchart](docs/validation/local-flow-2026-09-18/flowchart.html)
+
+## Complete workflow
+
+Green means the stated bounded scope has evidence. Amber means a mechanism or local sample exists, but the continuing objective remains incomplete. Gray means future work. A successful test does not establish that the entire repository is error-free.
 
 ```mermaid
 flowchart TB
-    subgraph H83["一、世界的完整工作循环｜已有局部真实样本，持续自治仍在验证"]
-        A83Entry["启动／续接同一世界<br/>存档、身份、GM记忆、费用账本与配置"]
-        A83Scene["Godot权威世界<br/>真实身体、碰撞、位置、物品与时间"]
-        A83NPC["居民读取自己的见闻与历史<br/>模型自主选择已有动作、交流、求助或等待"]
-        A83Move["权威规则重验并执行<br/>真实走路、到场劳动、消耗与产出"]
-        A83Core["真实结果进入世界历史<br/>成功、拒绝、未完成都如实保存"]
-        A83Evidence["居民需要／维护问题形成证据<br/>按职责给GM读取，不让居民获得全知"]
-        A83GM["具名GM观察与认领<br/>可以判断不需要改动"]
-        A83Candidate["隔离候选中开发与自测<br/>保留作者、版本、失败和费用"]
-        A83Review{"主AI审阅具体候选"}
-        A83Release["有界发布与同档续跑<br/>单写者、版本追踪、保留财物与承诺"]
-        A83Use["居民自主使用、拒绝或暂不采用<br/>安装完成不等于实际采用"]
-        A83Feedback["原GM读取实际结果再复查<br/>接受、修复或提出下一步"]
-        A83Stop["停止接新决定→等在途回复→保存退出"]
-        A83Save["冷恢复完整状态与未完任务<br/>不重放已付费请求，不重建旧身份"]
-        A83Fault["故障按范围处理并保留证据<br/>未知费用不归零，局部失败不伪装成功"]
+    subgraph H83["1. The world's complete loop | Bounded live examples; sustained autonomy still under validation"]
+        A83Entry["Start or resume the same world<br/>Save, identities, GM memory, cost ledgers and configuration"]
+        A83Scene["Godot authoritative world<br/>Real bodies, collisions, positions, items and time"]
+        A83NPC["Each resident reads personal knowledge and history<br/>Chooses an available action, conversation, help or waiting"]
+        A83Move["Revalidate and execute under world rules<br/>Physical travel, on-site work, consumption and output"]
+        A83Core["Persist actual outcomes and history<br/>Success, refusal and unfinished work remain distinct"]
+        A83Evidence["Resident needs or maintenance evidence<br/>GM access follows responsibilities; residents are not omniscient"]
+        A83GM["A named GM observes and claims work<br/>Choosing no change is valid"]
+        A83Candidate["Develop and self-test an isolated candidate<br/>Preserve authorship, versions, failures and costs"]
+        A83Review{"Main AI reviews the concrete candidate"}
+        A83Release["Bounded release and same-save continuation<br/>Single writer, version tracking, belongings and commitments"]
+        A83Use["Residents may use, reject or defer the capability<br/>Installation is not adoption"]
+        A83Feedback["The original GM checks actual effects<br/>Accept, repair or propose the next step"]
+        A83Stop["Stop new decisions; settle in-flight replies<br/>Save and exit"]
+        A83Save["Cold-restore the full state and unfinished jobs<br/>Do not replay paid requests or recreate old identities"]
+        A83Fault["Handle each fault within its scope; retain evidence<br/>Unknown costs stay unknown; local failures stay visible"]
         A83Entry --> A83Scene --> A83NPC --> A83Move --> A83Core
-        A83Core -->|下一回合| A83NPC
+        A83Core -->|Next turn| A83NPC
         A83Core --> A83Evidence --> A83GM
-        A83GM -->|需要改进| A83Candidate --> A83Review
-        A83GM -->|无需改动，继续生活| A83NPC
-        A83Review -->|普通建议与明确审阅意见| A83Release --> A83Use
-        A83Review -->|具体重大问题，退回原作者| A83Candidate
+        A83GM -->|Improvement needed| A83Candidate --> A83Review
+        A83GM -->|No change needed| A83NPC
+        A83Review -->|Advice and explicit review| A83Release --> A83Use
+        A83Review -->|Concrete major issue; return to author| A83Candidate
         A83Use --> A83Feedback --> A83Evidence
         A83Use --> A83Core
         A83Core --> A83Stop --> A83Save --> A83Entry
-        A83NPC -.请求／规则失败.-> A83Fault
-        A83Move -.寻路／执行失败.-> A83Fault
+        A83NPC -.Request or rule failure.-> A83Fault
+        A83Move -.Navigation or execution failure.-> A83Fault
         A83Fault --> A83Evidence
         A83Fault --> A83Stop
     end
-
-    subgraph CURRENT["二、我们现在做到哪里"]
-        M20["M20 当前里程碑：可恢复的10居民＋10GM闭环<br/>有界真实样本已完成，长期无人维护未完成"]
-        H103["H103 最新远程交付已接收：9fcd05c<br/>上游seq450、真实烘焙采用、保存恢复通过<br/>原存档和账本仍在另一台电脑"]
-        H104["H104 已修复本机预览使用旧缓存<br/>50项Python＋306项Godot离线检查通过"]
-        H105["H105 本机离线完整演练已通过<br/>需求→10个GM测试会话→候选审阅→安装<br/>身体取料→中途重启→完成→最终冷恢复"]
-        H105A["本轮发现并修复：退出0仍可能有资源错误<br/>演练入口补构建／导入，日志错误纳入结论"]
-        H105B["本轮发现并修复：冷恢复比较误报<br/>证据改用正式存档编解码器，严格逐值核对<br/>不放宽库存／历史一致性"]
-        H106["H106 对话原文已归档并上传核验<br/>导航旧API／半径警告修复，179项复跑通过<br/>16栋街区40条路线通过，边缘合并警告保留"]
-        H103 --> H104 --> H105 --> H105A --> H105B --> H106
+    subgraph CURRENT["2. Where we are now"]
+        M20["M20 Recoverable 10-resident + 10-GM loop<br/>Bounded live examples exist; sustained unattended operation does not"]
+        H103["H103 Morning remote delivery received: 9fcd05c<br/>Upstream seq450, real bread adoption and cold restore<br/>Original save and ledgers remain on another computer"]
+        H104["H104 Stale preview cache fixed<br/>50 Python and 306 Godot offline checks passed"]
+        H105["H105 Complete local offline rehearsal passed<br/>Need, 10 fixture GM contexts, candidate review and installation<br/>Physical work, interrupted exit, resume and final cold restore"]
+        H105A["Resource-error false success fixed<br/>Build/import before rehearsal; inspect engine logs"]
+        H105B["Cold-restore comparison false alarm fixed<br/>Use the production JSON codec and exact value comparison<br/>Do not relax inventory or history consistency"]
+        H106["H106 Conversation archive uploaded and verified<br/>Navigation API/radius warnings fixed; 179 workflow checks passed<br/>40 quarter routes passed; overlapping-edge warning remains"]
+        H107["H107 English game text and model instructions<br/>English names, dialogue, UI and flowchart<br/>Stable IDs and original historical evidence preserved"]
+        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107
         H103 --> M20
     end
-    A83Save -.已有真实证据.-> M20
-    H105 -.离线验证此循环，非模型自治.-> A83Evidence
-
-    subgraph NEXT["三、当前差距与下一步顺序"]
-        M20C["先验证资源与生活可持续<br/>浆果长期供需、拥挤、自然口粮转交<br/>面粉可再生链、职业与交换"]
-        M20G["同步改善进入与观察体验<br/>导航、渲染退出、人物、动画与性能"]
-        H47["再减少逐阶段人工接力<br/>GM交付→同档生活→实际效果回访<br/>更长运行、故障隔离和可控成本"]
-        H82["参与者自主发展<br/>自己提出需要、选择建设、使用或放弃<br/>不把外部指定目标算成自主创新"]
-        H103 -->|接回私有资料后真实观察| M20C
-        H106 -->|继续导航边缘／渲染问题| M20G
+    A83Save -.Bounded live evidence.-> M20
+    H105 -.Offline rehearsal; not model autonomy.-> A83Evidence
+    subgraph NEXT["3. Gaps and next steps"]
+        M20C["Validate sustainable resources and daily life first<br/>Long-term berry supply, crowding and voluntary ration gifts<br/>Renewable flour, professions and exchange"]
+        M20G["Improve entering and observing the world<br/>Overlapping navigation edges, renderer exit, characters,<br/>animation and performance"]
+        H47["Reduce manual handoffs between stages<br/>GM delivery, same-save life and actual-effect follow-up<br/>Longer runs, fault isolation and controlled costs"]
+        H82["Participant-directed development<br/>Residents identify needs, choose construction, use or decline it<br/>Externally assigned goals are not autonomous invention"]
+        H103 -->|Observe live after private records arrive| M20C
+        H107 -->|Continue offline engineering| M20G
         M20C --> H47 --> H82
     end
-
-    subgraph FUTURE["四、最终要走到哪里｜后续阶段，尚未完成"]
-        N5["N5 可持续、可进入并可影响的首镇<br/>生活、关系、生产与建设留下持久后果"]
-        P["受控公开试玩<br/>玩得懂、可恢复、体验与资产可交付"]
-        N6["N6 城内外冒险循环<br/>准备→探索／战斗或避战→带回资源→改变生活"]
-        N7["N7 完整可玩第一层<br/>城镇、野外、迷宫、Boss与成长"]
-        N8["N8 有差异的第二层及后续楼层<br/>跨层身份、物品、关系和承诺连续"]
-        N9["N9 长期多人共建与运营<br/>真实采用、治理、恢复、负载与成本"]
-        XR["XR 普通VR早期样板<br/>尺度、输入、双眼帧时与舒适性"]
-        N10["N10 普通头显中的持久世界"]
-        R["独立愿景：神经全潜行<br/>无已知可交付工程路线与工期"]
+    subgraph FUTURE["4. Long-term destination | Future stages, not completed"]
+        N5["N5 Sustainable first town that people can enter and affect<br/>Life, relationships, production and construction have lasting consequences"]
+        P["Controlled public playtest<br/>Understandable, recoverable experience and distributable assets"]
+        N6["N6 Adventure inside and outside town<br/>Prepare, explore, fight or avoid conflict,<br/>bring back resources and change daily life"]
+        N7["N7 A complete playable first floor<br/>Town, wilderness, labyrinth, boss and progression"]
+        N8["N8 Distinct second and later floors<br/>Continuous identities, belongings, relationships and commitments"]
+        N9["N9 Long-term multiplayer creation and operation<br/>Real adoption, governance, recovery, load and costs"]
+        XR["XR Early conventional VR prototype<br/>Scale, input, stereo frame times and comfort"]
+        N10["N10 A persistent world in conventional VR headsets"]
+        R["Separate aspiration: neural full dive<br/>No known deliverable engineering plan or schedule"]
         H82 --> N5
         M20G --> N5
         N5 --> P --> N6 --> N7 --> N8 --> N9
-        P -.并行验证设备.-> XR --> N10
+        P -.Parallel device exploration.-> XR --> N10
         N7 --> N10
-        N10 -.独立研究，不作为工程承诺.-> R
+        N10 -.Independent research; no delivery commitment.-> R
     end
     classDef done fill:#dcfce7,stroke:#15803d,color:#14532d;
     classDef partial fill:#fff1d6,stroke:#b45309,color:#78350f;
     classDef future fill:#f1f5f9,stroke:#64748b,color:#0f172a;
-    class H103,H104,H105,H105A,H105B,H106 done;
+    class H103,H104,H105,H105A,H105B,H106,H107 done;
     class M20,M20C,M20G,H47,H82,A83Entry,A83Scene,A83NPC,A83Move,A83Core,A83Evidence,A83GM,A83Candidate,A83Review,A83Release,A83Use,A83Feedback,A83Stop,A83Save,A83Fault partial;
     class N5,P,N6,N7,N8,N9,XR,N10,R future;
 ```
 
-原H1—H104的逐次实验分支保留在[历史流程图](docs/validation/roadmap-history-through-h104.md)，各节点证据仍在本页后部；当前只有上图作为工作流程主图。
+## Evidence boundaries and continuity
 
-<details>
-<summary>展开历史检查点（各日期的状态，不是当前进度）</summary>
+The local workflow uses scripted resident and GM choices with actual Godot physics and persistence. It installs configuration for an existing finite resource source; it does not prove that a GM invented a new mechanic. Model requests in the offline work: zero.
 
-本地接续更新：2026-09-17 晚间。按用户分工由 DeepSeek Flash 编码、GPT-6 拆分与审查；Codex 5.3 当前不可调用。停机写回 44 项、炉体物理 66 项、旧回复恢复 110 项 Godot／15 个 Python 检查通过，相关回归结果见证据页。织工已付费旧回复已恢复到原研究存档，并完成副本重复执行拒绝及两次完整冷恢复；现为 seq166、9 settled／1 provider_error，新增 Kimi 调用 0。渔夫失败原因与真实连续生活回合待验证。无历史上下文的 GPT-6 独立审查多次遇到容量不足，未得出通过结论。见[H102 本地接续](HISTORY.md#2026-09-17--h102-deepseek-并行工程与本地接续)与[本轮证据](docs/validation/gm_npc_continuation_2026-09-17.md)。
+The first priority after the original records return is to observe resource demand, congestion and voluntary food handoffs in that same world. Expand sustainable production and professions based on actual needs, then reduce manual coordination. A complete first town precedes adventure, meaningful floor progression and long-term multiplayer operation.
 
-上轮截止记录：2026-09-17，北京时间 08:55。十位 Kimi 居民及十位独立 GM 均已有实际模型参与；GM10 有限铁源维护、居民自主取料、完整冷恢复和原 GM 回访已通过。面包师上下文故障已修复，并在 life-12 真实 Kimi 新请求中恢复行动；该轮另外两位居民在结束时失败，其中织工一笔已付费结果未写回，整轮不算成功。最终 seq165，累计 Kimi 163 条已结算、无预留／未知，完整冷恢复通过，停机接续成为下一优先项。烘焙代码已合入本地 main、53 项离线验收通过，真实炉位及炉体碰撞未完成，尚未安装；材料承诺修复 98 项验收通过，尚未部署研究档。现金合同仍 accepted。美术留到白天，本轮按 09:00 截止保存。见[H101 当前研究](HISTORY.md#2026-09-17--h101-新地图-gmnpc-闭环研究进行中)及[本轮验收](docs/validation/gm_npc_closure_2026-09-17.md)。持续无人接力的 10+10 仍未完成。
-
-本机接收更新：2026-09-17，已拉取 `4b958f3` 的 H89—H99 成果，404 个 LFS 文件齐全。换机检查发现 Terrain3D 动态库被 `bin/` 忽略规则漏掉，已按固定哈希在本机补齐；正式 seq129 私有世界与 GM 状态未随 Git 接续。当前先完成可重复启动及退出资源错误诊断，再衔接原世界生活闭环。详见[工作交接与本机检查](docs/validation/work_handoff_2026-09-17.md)。
-
-Demo交接更新：2026-09-16，H98修正后复查40路线／30实走／64门窗通过，145道具、116树、6.6万草。H99按用户要求归档今日代码、原始模型、离线对比页和错误日志；退出资源错误仍待修，回家继续。启动和交接见[H99历史](HISTORY.md)及[最新实渲](ART_STYLE.md#demo-town)。
-
-PCG首版更新：2026-09-16，H97在原街区试验副本接入SimpleGrassTextured和PBR方向EZ-Tree，经ProtonScatter投放50棵树／24,100丛草，40条路线和64项门窗检查通过；正式世界未改。7张实渲已出；东侧弯道6丛草进入70cm空带，已询问留空尺度，待用户评判。见[实渲与限制](ART_STYLE.md#native-pcg)。
-
-植被风格更新：2026-09-16，H96完成EZ-Tree同树前后实渲，采用现成MIT风格化着色器及CC0叶簇贴图；枝干保持，候选6,964三角面。当前更接近简洁二次元色块，近景面片感和场景阴影接收仍待完善，未投放正式小镇。见[前后对照](ART_STYLE.md#ez-tree-stylized)。
-
-植被试用更新：2026-09-16，H95已在独立Godot项目跑通EZ-Tree For Godot 0.2.0，保留插件原始材质并生成三种树形，五张实渲已保存。结构可作候选，默认仍偏写实；等待用户评判，未接入小镇或完成大规模PCG验证。见[实渲与判断](ART_STYLE.md#ez-tree-trial)。
-
-街区接入更新：2026-09-16，H94已将第一层生活街区接入原十居民正式测试存档：16栋模块房、10处室内住所，Meshy独立家具、开关门窗与连续坡地。迁移保留全部历史／身份／财物；30段真实行走、40条公共地点路线及保存重启检查通过，正式世界仍seq129暂停。见[总览、参考及十人位置](ART_STYLE.md#living-quarter)。
-
-流水线更新：2026-09-16，H93已完成Meshy账号池、批量生成／下载与断点续跑；首个账号网页登录和创建Key成功，API余额实测1100。21项离线测试通过，本次付费生成0；新流水线付费端到端尚未实测。普通带贴图模型约0.33元／件。见[使用方法与费用](ART_STYLE.md#meshy-account-pool)。
-
-原因核对更新：2026-09-16，H92记录用户本批小组件偏好Meshy；整屋样本差异涉及风格、文字／图片输入、重拓扑和随机性，尚不能归因或判断偶现概率。保留已有结果，未新增API生成。见[调查证据](ART_STYLE.md)。
-
-人工评判更新：2026-09-16，H91已列齐20组／40个对象，94张已有图像可切换；Codex按外观／用途／模块可用性独立评分，用户评分留空，等待用户选择。没有新增生成或自动采用。见[逐项评分与理由](ART_STYLE.md)。
-
-室内组件对照更新：2026-09-16，H90完成两家各18种首轮模型、各540积分；组装两间同布局可进入住宅，独立家具道具、开关门窗及碰撞通过108项检查。首轮基础家具倾向Meshy，但双柄剑、门窗附带石框、武器架夹带武器等缺陷仍保留，不能称整套商业成品。演示代码采用MIT；API模型的无条件MIT再许可未确认。见[组件与实机对照](ART_STYLE.md#interior-first-pass)。
-
-生成器对照更新：2026-09-16，H89已安装配置Tripo CLI 0.4.0，doctor全部通过；Tripo H3.1与Meshy 7同题各生成一栋，两家实际各30积分。原始面数72,970／77,478，GLB 4.97／30.96MB；完成四面实渲，本样本Tripo更接近卡通手绘方向。仅候选评估，未接入正式世界或验证可交互门窗；见[美术对照](ART_STYLE.md#tripo-meshy-comparison)。
-
-美术迭代更新：2026-09-16，🟢 三栋Meshy住宅重拓扑至3.8万—4.3万三角面，三档LOD与默认2K贴图通过202项检查，模型包约120→38MB；模块化住宅v6.1通过150项检查，完整门组、窗组可拆装，门窗可开合。🟢 样板含44栋住宅，12栋可开门、3间已布置室内；西北新增2.95万平方米连续坡地，实际非矩形地面总面积22.27万平方米。草地、铁笼吊灯、面包店招牌和十株共享轻量橡树林团已采用，门前雨棚柱修正并补碰撞，最终默认场景254项检查通过。v3的60秒实机漫游已保存，包含真实开门进屋及新林团；原v1/v2保留。🟡 近景住宅纹理、模块房立面与远处迷宫仍待完善；60K重烘房屋和灰泥候选经过实机对照后未采用。此次新增Meshy实际173积分，余额1414，原始三栋生成108积分另计。正式世界仍seq129暂停。见[持续迭代记录与视频](docs/validation/floor1_art_iteration_2026-09-16.md)和[原始模型对照](docs/validation/meshy_houses_2026-09-16.md)。
-
-R5续验更新：2026-09-15，H86补齐一个缺失能力的开发与采用：两档模型、8个前后配对分支；补功能前4次求助，补功能后4次实际加工、重启后继续食用。原实验DeepSeek GM复查accept。限定为被提供的目标与同一加工/居住点，正式世界仍seq129暂停，见[H86结果和当前建议](#r5-capability-results)。
-
-模型/接口实验更新：2026-09-15，H85完成四模型×两入口×三情境×两重复的48分支对照；46结束观察、2服务异常，48冷恢复保持。该轮的执行反馈和中断改计划问题仍待改进，见[H85实测结论](#model-interface-results)。
-
-模型增长评审更新：2026-09-15，H84在“模型持续变强”的条件假设下完成五位GPT-6独立提案及一轮互评。调整的是推荐验证顺序，不是现行运行权限；见下方[H84路线重审](#model-growth-review)。
-
-架构整理：2026-09-15，H83根据当前源码补齐[代码架构与修改入口](#current-architecture)，并在原全景图内补充运行架构；仅更新文档，运行状态仍为seq129暂停。
-
-路线评审更新：2026-09-15，H82完成五位GPT-6独立提案及交叉评分，推荐参与者掌握发展方向、GM提供受委托建设能力和公开维护职责。定额算力自治工坊P4与生活驱动扩张P5并列80.1/100（设计评分）；下一项是居民自行选择并接续建设的有界实验，尚未实施角色转型或启动运行。完整七案评分、分歧与原文见HISTORY.md的H82条目。
-
-更新：2026-09-14，H79最小闭环完成后，H81原GM01修复H80暴露的本轮行走受阻：导航图不完整时沿既有道路行走，原守井人任务已在同一canonical实际抵达种植公共地，原GM独立复查accept。当前seq129，累计84次Kimi；本轮新增居民模型调用0、GM调度4次（2次自动计量、2次原生累计恢复计量），旧GM04未知仍保留。53条档案及身份/历史/任务/位置冷恢复保持。编码长测超时、交接计量缺失和旧写锁阻塞均已如实记录并处理；底层网格断点仍在，未宣称全路线修复。当前保存暂停，无新定时任务。
-
-[历史全部流水](HISTORY.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
-
-</details>
-
-<a id="r5-capability-results"></a>
-
-## H86：缺失能力可按需补充，持续自治与成本仍待验证
-
-H85未开放缺能力时的GM开发；H86用同一原居民、原Godot场景和共同接口补了这一项。Luna与GPT-6各做两次前后配对实验，愿望由实验提供，允许执行、求助、停止或改目标。
-
-| 模型 | 补能力前 | 补能力后 | 后半轮决策次数 |
-| --- | --- | --- | --- |
-| Luna | 2次明确求助，0次加工 | 2/2实际加工、重启后食用 | 2、3 |
-| GPT-6 Astra | 2次明确求助，0次加工 | 2/2实际加工、重启后食用 | 3、3 |
-
-新实验DeepSeek GM独立制作能力，自测后提交主AI。首次编码超时；主AI发现“寻路失败记录会被存档校验拒绝”的重大问题，原GM同一会话修复，165项自测通过后交付。主AI意见评审完成，再用本机已有场景让居民实际选择和执行；最后原GM读真实结果并抽查一个存档，反馈accept。
-
-每组实际扣1份口粮、生成一个独立持有物；加工后重启，居民继续选择食用同一物品，持有物归零、饱腹54→100。8组冷恢复与4次中途重启都保持完整状态、原十个身份、事件和模型档案。GM选择加工点与家共用同一点，未证明异地携带、灶台/燃料、居民自发需要或长期并行自治。新能力仅由隔离实验探针加载，正式小镇与原十GM未变。
-
-**当前推荐：保留开放表达与真实工具，按需要补能力，继续缩小人工接力和上下文成本。** 本例两档模型都能请求并使用新能力，不能据此要求所有执行升级GPT-6。居民调用共15次订阅请求；GM三轮工具交互的原生累计输入约1219万（约1183万缓存）、输出约13万，不能把三轮误算成三次API请求，也不能宣称长期成本已经可承受。完整数字、超时与原GM措辞勘误见HISTORY的H86。
-
-下一项仍保持单居民、小范围：先压短重复观察和GM上下文、完善失败后改计划，再观察**不指定建设目标时居民会不会主动提出并采用改进**。异地加工/携带、放凉后使用按实际需要再验证；不先搭完整生活模块平台或扩成大规模并行施工。
-
-<a id="model-interface-results"></a>
-
-## H85：先改善执行和反馈，再逐步扩大工具
-
-已按H84建议完成隔离对照：Kimi K2.6、DeepSeek Flash、Codex订阅Luna与GPT-6 Astra，共48分支。两个入口拥有相同的已有动作；菜单逐次选择，委托一次安排1—5步。采用同一原居民、相同个人信息、同一快照及真实Godot碰撞；其余居民保留身体但暂停模型决策。没有开放居民编程、烹饪或建造，也没有接入正式居民入口。
-
-| 模型 | 吃饭后回家休息：菜单 → 委托 | 吃饱并留一份粮：菜单 → 委托 |
-| --- | --- | --- |
-| Kimi K2.6 | 1/2 → 1/2 | 0/2 → 1/2 |
-| DeepSeek Flash | 0/2 → 2/2 | 0/2 → 0/2 |
-| Codex Luna | 1/2* → 2/2 | 0/2 → 2/2 |
-| Codex GPT-6 Astra | 2/2 → 2/2 | 0/2 → 0/2 |
-
-每项预定2次，数字是实际目标完成数。*Luna菜单有1次服务容量中断，其余1次成功；另有1次DeepSeek自由片段HTTP 500，两者单独计服务异常，不当作规划失败。自由片段观察到休息、劳动、行走及回应既有求助，不设建设合格线。
-
-**支持继续试验短目标委托，暂不全面替换菜单或固定世界终局架构。** GPT-6的休息目标由每次2次调用降为1次，低成本模型也能完成；Kimi委托却因动作编号混淆增加调用。离线只修编号即可执行其原计划，说明先改善接口比一概换模型更有依据。多组直接采集在同一处受阻，正常速度也复现；先吃再采集则有真实成功，当前结果包含物理路线影响，不能据此给模型总体能力排名。
-
-**下一项推荐：让持续目标获得清楚的完成/失败反馈，并能中断受阻执行、改计划；同时由现有维护GM处理已复现的行走问题。** 先让一个居民在原世界中走完这条闭环，再扩大可调用工具和受托开发，不先铺完所有生活模块。建议尚未实施；原GM自测、主AI建议与明确重大问题阻断保持，没有新自动质量门禁。
-
-边界：每情境每模型/入口仅两次，都是被提示的目标；Codex带原生运行上下文，各provider总提示与推理配置并不相同。菜单与委托在相同调用上限下可执行的动作数不同，自由片段不能比较为等时长产量。21个分支停在待完成动作，达到180模拟秒观察上限后未再测试取消/改道。48冷载完整JSON保持、76条正式回复保留，但尚未证明重启后自主接续或长期并行发展。实验API已知估算约Kimi¥0.581、DeepSeek$0.0164，另有一笔API费用未知；Codex用订阅，实验原生调用用量不含本对话主AI。完整记录、限制与费用见HISTORY的H85。
-
-<a id="model-growth-review"></a>
-
-## H84：框架如何承接更强的模型（历史设计评审，实测见H85）
-
-用户质疑上一轮模块化、能力缺口分类及GM介入讨论可能整体偏离目标，要求假设模型持续进步，重新审查框架。五位GPT-6各自提案，再各读五案完成唯一一轮互评；完整十份原文、评分及分歧存HISTORY.md的H84。模型进步是条件假设，未预测时间表；H84当时未运行模型档位对照，后续实测见H85。
-
-**推荐原则：让更强模型承担更多表达、推理、组织、工具使用及创造；让框架明确共享世界如何记录和兑现后果。** 固定单动作菜单、固定十GM岗位、统一需要分类和强制目标树不应被设为终局必需。工程模块有助维护，但“先写完所有生活模块，再允许居民行动”没有被证实是正确路线。身份、共同历史、个人见闻和持续存在的成果仍是世界目标；这些目标的具体实现、规则解释器乃至某些世界规律可以演化，不等于永远冻结当前Godot代码。
-
-源码证明当前接口有明确限制：`OgaResidentNode.cs`使用`NoOptionalCapabilities`和单次回合上限，`town_turns.gd`要求从已提供动作中选一个。因此换更强模型不会自行开放工程工具；但限制存在，还不能证明它是当前生活质量的主要瓶颈。现有菜单和GM求助路径继续作为可能胜出的基线。
-
-| 冻结初稿 | 五人平均设计分 / 100 | 互评后的主要保留意见 |
-| --- | ---: | --- |
-| R1 可协商意图，明确世界承诺 | 81.3 | 表达可以更开放；先缩小为一个入口，避免预建解释器平台。 |
-| R2 可追溯的世界裁决 | 73.7 | 模型解释世界是候选路线；事件顺序一致不保证因果合理，判例维护与措辞套利未解决。 |
-| R3 生活先行，受托改变 | 82.4 | 尊重拒绝、闲暇、关系与改主意；也承认不能只凭模型自述测出“独立愿望”。 |
-| R4 按能力兑现的渐进委托 | 79.9 | 逐个居民、逐种活动迁移；更长计划无法自动产生缺失的底层能力。 |
-| R5 可替换行动解释层 | 81.8 | 用模型与接口交叉对照找瓶颈；不同时建设三种解释器，减少试验成本。 |
-
-分数是五位同模型对冻结初稿的主观判断，主AI没有第六票；最高平均分不等于选定一套终局实现。评审后的方向偏好分别是R1选R4、R2/R4选R5、R3选R1、R5选R3，并广泛采用R3的自主生活尺度。仍有实质分歧：R2保留强模型承担规则解释器的路线，其他评审对其长期因果一致性更谨慎。
-
-**下一项优先级调整：先做一个小范围模型/接口对照，再决定模块化迁移。** 建议同一快照、相同个人信息和明确费用上限下，用两档可用模型比较原菜单与一个可撤回的开放委托入口；两边保留相同GM求助和发布规则。观察已有能力组合，以及允许拒绝建设的生活片段；缺底层机制的任务单独核算开发、等待和费用，不能用不对等权限宣称开放入口胜出。记录实际自选活动、人工拆题、费用、状态一致及恢复。它是判别实验，不是新的游戏发布自动验收。若菜单随模型升级已经追平，或开放只增加空想、费用和错误，就保留或退回原路径。该段是H84当时的建议；H85已完成上述有界对照，结果和当前推荐以H85为准。
-
-现行GM自测、主AI意见与重大问题阻断保持；新规则不能借“模型裁决”名称绕开发布。能力尚未实现时允许居民改主意、求助或继续其他生活，抱怨不自动变工单，所有居民不必以建设产量证明价值。未来可扩大居民直接开发权限并改变固定GM分工，但本次没有实施角色重建、并发运行或规则权限放宽。
-
-研究依据的边界：Sutton的[The Bitter Lesson](https://www.cs.utexas.edu/~eunsol/courses/data/bitter_lesson.pdf)支持关注能随计算增长的通用方法，是历史论述；Anthropic的[工程经验](https://www.anthropic.com/engineering/building-effective-agents)区分预定流程与模型自主选择工具，不能代替本项目验证。[SwarmWorld](https://arxiv.org/html/2608.26081v1)与[Voyager](https://voyager.minedojo.org/)提供既定世界接口内的创造和复用证据，没有证明任意新世界规则的持续自治。这里的架构取舍是本轮评审推论。
-
-<a id="current-architecture"></a>
-
-## 当前代码架构与修改入口
-
-**当前实现是“Godot维护一个权威世界，Kimi为居民选择行动，外部Python工具组织GM开发与发布”。** GDScript负责玩法和空间表现，C#连接OpenGameAgent与模型网关，Python负责模型费用、GM会话和开发流程。这是当前代码的职责划分，尚未全部拆成独立模块。H83只整理已有实现；H82的参与者自主共建、SwarmWorld机制和持续并行施工都没有因此接入。
-
-### 1. 从哪里启动、从哪里读代码
-
-| 入口或目录 | 当前职责与阅读起点 |
-| --- | --- |
-| [Run-Street.ps1](Run-Street.ps1)、[game/project.godot](game/project.godot) | 默认启动`street_trial`预览。`-Town -SavePath <明确存档>`才进入持久小镇；`-TownGateway`还要求有效的`AINCRAD_GATEWAY_RUN_CONFIG`。Godot 4.7.2 .NET / .NET 8，不是打开默认场景就自动启动10+10。 |
-| [game/scenes/town_street.tscn](game/scenes/town_street.tscn) → [game/spatial/town_street.gd](game/spatial/town_street.gd) | 小镇现场入口：创建世界对象、居民身体、UI及模型调度器，推进生活和物理帧，保存、导出GM证据。当前仍集中承担多项职责。 |
-| `game/core/` | 世界规则和状态，见下方六层继承；是身份、事件、任务和实际结果的权威来源。 |
-| [game/agents/town_turns.gd](game/agents/town_turns.gd)、[resident_brain.gd](game/agents/resident_brain.gd) | 为居民组织个人输入、安排回合、保存请求状态、接收回复并提交合法动作。 |
-| [OgaResidentNode.cs](game/agents/OgaResidentNode.cs)、[BudgetGatewayProvider.cs](game/agents/BudgetGatewayProvider.cs) | OpenGameAgent适配与HTTP模型通道；依赖由[InfiniteAincrad.csproj](game/InfiniteAincrad.csproj)引用。适配器不拥有世界状态。 |
-| [game/spatial/town_navigation.gd](game/spatial/town_navigation.gd)及同目录`town_*_steering.gd` | 导航、避让、材料/场所/社交目标的真实移动；`town_*_layout.gd`负责空间布置。美术预览与正式生活入口分开。 |
-| [tools/run_town_model_validation.py](tools/run_town_model_validation.py)、[tools/kimi/kimi_gateway.py](tools/kimi/kimi_gateway.py) | 有界真实居民运行和本地Kimi预算网关；使用指定的现有账本及运行配置。文件名里的validation不代表居民都是脚本模拟。 |
-| [tools/run_production_gm_autonomy.py](tools/run_production_gm_autonomy.py)、[gm_autonomy.py](tools/gm_autonomy.py)、[gm_runner.py](tools/gm_runner.py) | 分别负责生活/开发阶段衔接、候选到发布的状态机、独立GM会话与实际模型调用。 |
-| [tools/model_interface_experiment.py](tools/model_interface_experiment.py)、`tools/r5_capability_experiment.py`、`tools/r5_gm_session.py`、`game/experiments/` | H85模型/接口对照与H86缺能力前后配对实验：复制明确存档、调用指定模型、独立GM交付和意见评审、实际采用与中途重启；汇总工具在`tools/`。不接管正式世界或GM发布。 |
-| `game/tests/`、`tools/test_*.py` | 引擎及编排的回归证据。旧fixture、迁移和演示入口仍保留，不等同于当前小镇运行链。 |
-
-### 2. 世界内核：一个状态对象，六层继承
-
-实际链条为`world_kernel → town_life → town_trade → town_materials → town_runtime → town_places`。现场实例化最后一层，继承链共同操作一个`_state`；这六个文件不是六份世界，也不是六个并行服务。
-
-| 文件 | 负责什么 |
-| --- | --- |
-| [world_kernel.gd](game/core/world_kernel.gd) | 基础命令边界、幂等处理、读写存档、目录写锁和中断替换恢复；还保留早期能力演示接口。 |
-| [town_life.gd](game/core/town_life.gd) | 原居民身份、个人见闻、生活事件、体力/饱腹、基础劳动及时间推进；[TownJsonCodec.cs](game/core/TownJsonCodec.cs)处理存档JSON数值精度。 |
-| [town_trade.gd](game/core/town_trade.gd) | 求助与回复、交换和合同、技能介绍/教学/观察工作，以及提供给居民选择的动作列表。 |
-| [town_materials.gd](game/core/town_materials.gd) | 有限材料源、发现和获取、可见性及材料出行受阻记录。 |
-| [town_runtime.gd](game/core/town_runtime.gd) | 宿主居民准入、完整居民回包档案、后台GM观察所需的世界证据导出；不在世界内调用GM开发模型。 |
-| [core/town_places.gd](game/core/town_places.gd) | 公共场所知识、前往/休息任务、旅途受阻记录与规则；引用[spatial/town_places.gd](game/spatial/town_places.gd)中的地点和道路目录。同名文件职责不同。 |
-
-### 3. 两条AI工作链
-
-**居民链：** 个人见闻与当前可选动作 → `town_turns`挑选可运行居民 → `resident_brain` / OpenGameAgent → C# Provider → 本地预算网关 → Kimi → 关联原请求并归档 → 提交动作 → 世界与身体执行 → 后果进入下一次个人观察。
-
-每次模型请求从当下动作别名`a0/a1/…`中选一个，可返回理由、发言和需要；NPC目前没有任意改规则、写宿主代码或安装新能力的工具。行动意图也不等于完成：前往目标仍需真实走路，劳动和合同按世界条件推进。`resident_id + controller_epoch + request_id`关联请求与回复，待处理回合进入存档，避免重启后把旧回复交给新回合。
-
-空间移动使用Godot导航网格、`NavigationAgent3D`路径和RVO避让；H81为不完整路径增加既有道路/局部转向回退。身体继续通过碰撞移动和实际到达判断执行。底层导航网格的断点仍存在，单条实际抵达证据不代表全部路线畅通。
-
-**GM链：** 世界证据与获准读取的居民档案 → `gm_runner`中的具名GM观察/选题 → 隔离候选目录开发并自测 → 主AI针对确切候选留评审意见 → `gm_autonomy`交付版本 → 后续同档生活 → 原GM读取效果并接受、修复或上报。GM会话、职责和记忆由稳定`gm_id`关联；当前真实执行使用DeepSeek，模型可换，身份不随模型重建。
-
-代码阶段名仍为`observe → candidate → validate → review → publish → verify → feedback`。其中`validate`核对修改范围、版本和宿主文件未被误改，固定宿主测试只是参考证据；`review`消费主AI的明确意见文件，缺少文件时保存为`waiting_review`，不是自动再叫一个评审模型。正常意见允许继续，具体重大问题才`major_block`。当前`verify`记录等待原GM在后续世界回合复查，不调用旧固定质量验收流程；源码中保留的`stage_verify_production_host_contract`不能据此当成现行发布步骤。
-
-### 4. 身份、记忆、费用分别存在哪里
-
-| 数据 | 权威位置与读取边界 |
-| --- | --- |
-| 世界与居民连续性 | 指定的canonical JSON：居民身份、生活事件、财物、任务和位置等；一个写入者维护。通过临时文件、备份及替换标记处理存档替换中断，不是多个进程随意共同写JSON。 |
-| 居民回合与完整回包 | 同一存档的`godot.resident_turns`和`godot.resident_archive`。保存实际返回的原文、理由、发言与交付结果；历史缺失明确标记，不补造。个人输入按本人经历检索，不能直接塞入全局档案。 |
-| GM的世界视图 | `godot.background_gm`及世界证据导出是观察投影，摘要有界；完整档案通过[gm_archive.py](tools/gm_archive.py)按世界和GM身份分页读取。当前`gm-02/gm-06`可读全体完整对话及模型返回文字，其余GM的对话读取受交付记录等权限限制。摘要裁剪不等于删除全局原文。 |
-| GM自身记忆 | 独立GM状态目录的`state.json`及关联会话/产物：稳定ID、职责、会话、`task_history`、`host_feedback`、开发和计量记录。主AI意见写回原GM记忆；十GM身份不等于十个永久同时运行的进程。 |
-| 请求与费用 | [kimi_budget.py](tools/kimi/kimi_budget.py)维护现有SQLite账本的预留/结算；GM调用在其状态与[deepseek_usage.py](tools/deepseek_usage.py)等计量记录中追踪。世界事件数、模型请求数和账单不能互相替代。 |
-| 代码、部署与证据 | Git工作区、GM候选、部署副本、运行报告各有用途。推送Git不会同时上传被忽略的私有世界、GM运行记忆、账本或密钥配置。 |
-
-### 5. 当前并发边界与后续修改建议
-
-十居民可以在同一场景中推进身体和任务；模型请求另受回合调度、预算和网关限制。当前有界居民启动器允许1—3的调度上限，但其上游完成请求仍串行化，不能把10名居民理解为10路模型同时调用。生产桥按生活阶段与GM开发阶段交替推进，保存并释放世界后衔接发布和续跑；这也没有证明持续在线并行施工或不停机更新。
-
-主要维护成本来自六层共享状态继承，以及`town_street.gd`、`town_trade.gd`、`gm_runner.py`和`gm_autonomy.py`中的职责集中。旧演示、历史校验路径和现行流程同时存在，部分注释仍描述旧宿主验收；判断现行行为应追调用路径。后续宜随真实需求逐步抽出回合调度、世界存储、开发交付接口，保持存档兼容，避免先重写整个引擎。
-
-| 想改的行为 | 先看哪里 |
-| --- | --- |
-| 居民能选择什么、交换/劳动产生什么结果 | 对应`core/`规则；动作列表从`town_trade.gd`继续沿继承查到`town_places.gd`。 |
-| 居民何时思考、输入什么、重复回复怎么处理 | `agents/town_turns.gd`；输入整理和通道生命周期再看`resident_brain.gd`。 |
-| 寻路受阻、抵达判断、场景碰撞 | `spatial/town_street.gd`、`town_navigation.gd`和对应steering；同时检查核心层任务目标，不能只改画面位置。 |
-| 全局留档或GM读取权限 | `core/town_runtime.gd`与`tools/gm_archive.py`；普通居民的知识仍走`resident_view`。 |
-| GM职责/记忆、候选开发、主AI意见、发布 | 分别看`gm_runner.py`、`gm_autonomy.py`；阶段接续看`run_production_gm_autonomy.py`。 |
-| 模型消费和并发 | C# Provider、居民启动器、本地Kimi网关及账本；GM费用走自身路由与记录。 |
-
-H85完成接口对照，H86进一步验证一个被提供目标中的GM补能力与原居民采用。当前先降低上下文成本、完善执行失败后改计划，再观察居民自选需要。H82的参与者自主共建仍是长期方向，不能把单个实验能力写成已完成的居民自主开发平台。
-
-## 更新规则
-
-每次实际进展、功能问题、修复、验收或方向变更，都要在同一次更新中追加 HISTORY.md 流水，并更新本文件的原流程图和对应证据行。沿用节点 ID；新问题挂到相关节点下，不另建流程图。只有相应范围的实际证据才能改变完成状态。
-
-项目介绍保持空白，等待用户重写。普通非定时任务出现实际阻塞，主AI必须立即报告具体原因、影响和可行下一步，不能等循环结束或定时复查才说；没有新的定时任务授权不创建定时运行。当前开发及GM模型可用GPT-5.3、Luna或DeepSeek，GM以稳定gm_id维持职责和记忆，模型不是身份。已有十GM继续保留原会话，不因允许换模型就重建；Kimi居民分工不变。历史运行期限不自动续期。
-
-本次用户明确替换旧规则：全部居民对话及模型实际输出的思想/动机全局留档；按GM职责开放读取，部分GM可读取全体对话和思想。完整原文与上下文摘要分开，历史缺失如实标明，不能补造未返回内容。NPC仍通过自己的见闻和实际收到的信息认识世界。GM独立开发并自行测试，交主AI评审；主AI通常给意见，只有具体重大问题才block要求修复后再行动。交付后原GM在下一轮自行核对实际效果。固定宿主测试全绿、旧issue格式、单文件模板或尚无居民采用，都不再自动否决交付。不会加载、毁坏存档、错误修改其他工作等实际重大问题仍须具体说明。
-
-历史已发布检查点：旧十人测试世界 seq291 / 9086.10 秒，多项原 GM 改动已真实采用；H58 的原生崩溃与新未解决请求仍保留。该记录不证明本机已同步旧私有主档，也不再要求找回它才能开始本轮。新试验独立标记来源，不能继承旧世界的采用结论；历史费用和未知不得清零。
-
-## 当前目标与 MVP 边界
-
-长期仍是一个能够进入、能够影响、能够持续积累的 SAO 式世界：人物的身份、经历、知识边界、财产与承诺跨暂停、重启、版本更新和模型更换保留。Godot 主线以及 N5—N10 的首镇、冒险、楼层、社区与普通 VR 方向不变。
-
-H82终局推荐：参与者在生活中发现需要，自主选择建设目标、实施方式、伙伴与资源投入，亲身使用、维修或放弃成果。居民/人类可以承担建设者角色，使用已有工具直接造物，缺少能力时委托具名工程agent；共同建设和共享公共成果不要求全员持续开发或思想一致。现有十GM的工程与记忆能力保留，后续可透明转成受托建设者及公开授权的底层维护者，人数不作为终局固定比例。参与者发展权、有限预算和生活用途是推荐路线，当前钱物规则、角色权限及运行机制尚未因此改变。
-
-H82原下一项建议（H84已调整验证顺序）：由原居民自己选择一个真实需要，经过认领/委托、建设、GM自测、主AI意见评审、发布、本人体验，再自主提出后续改进、维修或放弃。复用现有恢复和发布机制，减少逐阶段人工派单；以事件唤醒、轮转探索、配方复用和有限施工并发控制计算成本。网框可成为候选，但不强制选题/认领/使用；维护者仍可主动处理公开职责内的引擎故障。保留每次主AI意见评审，不增加自动质量门禁。H85已完成接口对照，H86在外部提供目标下补齐开发与采用；居民自己选择需要这一环仍待验证，当前优先项见H86。
-
-近期 M20 的目标是十名Kimi测试居民按自己的处境生活，十个有独立职责和记忆的后台GM根据获准读取的全局档案、居民需要和世界证据观察、开发、自测与交付；居民通过本人感知与实际使用体验变化。后台GM可使用GPT-5.3/Luna/DeepSeek。生活与开发按阶段交替，单个权威写入者维护本轮明确标记的测试世界；检验暂停、重启和版本交付后的续接，不要求找回或永久保存旧测试身份。
-
-| 阶段 | 当前判断 | 验收边界 |
-| --- | --- | --- |
-| 井边、三人验证与早期迁移 | 历史基础保留 | 不再把当前工程当作尚未开始的三人预览；S1 原镇恢复是另一条保留义务 |
-| 首轮真实 10+10 闭环 | **有界样本已通过** | H37 已有真实 GM 修复与同档继续；H48/H49 等又证明多项 GM 改动被原居民实际采用 |
-| 当前 M20 MVP：可重复、可恢复的自主闭环 | **有界真实样本已完成；持续自治待后续** | H79的GM改进采用和H103的seq450交付已有；十居民真实决策/位移、烘焙采用与冷恢复通过；最新GM回访9返回/1未知 |
-| 可玩首镇与更完整世界 | 后续 N5—N10 | 完整供需、住房、人物与动画、冒险、楼层和 VR 逐项交付；本轮不把它们全部提前为 MVP 门槛 |
-
-已有生活/GM交替入口可复用；旧`gm_autonomy.py`把固定宿主测试当交付门禁，且发布仅支持单文件，与用户新流程冲突。H76将其改成GM自测后的主AI意见评审及有界文件交付，原GM下一轮复查。单写者、版本/作者记录与防覆盖用于实际协作和恢复，不重新包装成自动质量审批。当前网框四文件候选仍未完成；取消旧门禁并不把部分补丁变成可运行成果。
-
-H79历史MVP已有实际证据：十名NPC真实Kimi决策、十个有独立职责/记忆的GM实际工作记录；GM06改善回复对象可辨性，四名原居民9次自愿使用，原GM在下一轮独立复查接受，暂停/冷恢复后本测试档连续。证据见H79及HISTORY.md对应流水；最新交付见H103；单项改进不证明所有对话或长期自治已经解决。新全局档案和权限不得混入普通NPC的全知输入。未采用可以是正常拒绝/等待，由GM观察后判断，不作为自动停生活理由。旧世界证据不冒充本轮，24小时运行、十GM全部编码和零错误均不是前置。
-
-## 本轮结果与后续衔接
-
-1. **最新接收为 H103 / seq450 交付。** 代码在本机，私有原世界、GM记忆、账本在另一台电脑；当前不把seq129/seq166或本机新测试档当成最新研究档。
-2. **本机工程沿 H104 / H105 推进。** 先修复旧缓存跳过准备，再实际演练需求、GM候选、审阅、有限资源安装、身体使用、保存与重启；运行结果和错误见本轮报告。
-3. **下一轮真实验证聚焦生活。** 原资料接回后，观察自然口粮赠予、资源拥挤和长期供需，再推进可再生生产、职业与GM持续反馈；避免把更多测试或资产数量等同于自主生活完成。
-4. **最终目标保持 N5—N10。** 可持续首镇、城内外冒险、完整第一层、有差异的后续楼层、长期共建和普通VR分阶段推进。居民自主选择建设目标仍待真实验证；神经全潜行独立研究，不承诺工期。
-
-此前seq129和H82—H86的阶段建议保留在[历史图快照](docs/validation/roadmap-history-through-h104.md)，不再作为今天的运行状态。
-
-## 本次发现的偏差与纠正
-
-- **计划过时已经会误导执行。** 原表还要求首次接入十名 Kimi、首次 GM 认领和首次多 GM 组合，但这些已有真实证据。本次更新 M20A—M20H，并把 N2、H30 等旧批次标为历史证据；H25 接上已实际采用的 H49，H36 接上后续真实 GM 消费与修复。
-- **局部失败与全局停止需要分开。** H60 来自源码统一停止分支，是待复现风险；本次没有把它当成 life10 的已知原因。真实新计费未知属于当前 H58 的停止理由，不能为追求连续运行直接放开。
-- **闭环不能长期只停留在工程修错。** 求助、恢复和寻路已经增加了真实选择与生活后果；每轮修复后应回到同档采用。新功能应逐步服务采集、劳动、交换、关系和游玩，不以更多测试、资产或模型调用本身作为交付。
-- **旧自动验收已偏离用户意图。** 主AI不再给每项功能预建固定宿主测试契约再决定放行；GM对实现、自测和下一轮效果验证负责，主AI做建议评审、处理明确重大问题。实际作者、版本、费用与失败证据继续保留。
-
-最强反对意见：把“可恢复”扩大成修完所有崩溃、所有错误和通用平台，会让 MVP 再次失去边界。反例是居民自愿拒绝、正常冷却或某个候选失败，这些可以是世界中的正常结果。最小验证仅覆盖本轮真实阻塞及一个明确局部失败场景，并接回一次有可观察结果的原世界生活；长期全场景稳定性继续留在 M20F 的后续范围。
-
-## 节点证据与验收边界
-
-| 节点 | 当前证据/验收 | 下一步与状态限制 |
-|---|---|---|
-| H105 / H105A / H105B | [本机流程演练](docs/validation/local-flow-2026-09-18.md)：8个正常阶段179项检查、14项Python及9项Godot精度专项通过；有限铁3→1，居民获得2，真实身体行走、中断续做和最终完整冷恢复通过。资源导入/日志漏判/证据精度已修。 | 全部居民和GM选择为显式脚本，模型调用0；既有有限资源配置而非新能力代码。两类导航警告保留，旧测试街几何不冒充新16栋街区的长期自治。 |
-| H103 | [夜间最终交付](09_DELIVERY.md)：seq450、十居民真实决策/位移、烘焙真实采用、最终完整冷恢复；交付分支 `9fcd05c` 已接收。 | 来自上游记录；本机未接收私有原档。GM01 最新回访结果未知；食物长期自给与口粮自然转交仍未验证。 |
-| H104 | [本机离线续接](docs/validation/offline-continuation-2026-09-18.md)：修复预览旧缓存跳过准备，4 项反例旧版全失败/修后全通过；合计50 Python、306 Godot检查及独立预览冷恢复通过。 | 0模型调用；不是原seq450冷恢复或图形长跑。Terrain3D依赖自动获取、图形退出和真实资源分配仍有待办。 |
-| N1 | [行动反馈报告](HISTORY.md#history-docs-validation-town-feedback-2026-09-11-md)，158项离线检查，2次真实Kimi，测试档冷恢复 | 已验证的是反馈/去重，不是完整自主生活。 |
-| N2 | [历史三人生活链](HISTORY.md#history-docs-validation-town-continuous-life-2026-09-11-md)：seq16→47，38次真实Kimi，修理、交付、付款与冷恢复已有证据。 | 是早期fixture基础，且包含玩家线索；当前维护对象是M20独立十人世界，不能把这条历史样本当成今天的人口或主档。 |
-| N3 | 同身份换控制器离线验收：[报告](HISTORY.md#history-docs-validation-town-model-continuity-2026-09-11-md)，92项专测及63在线/27反馈回归；模型pin进入run.json即journal scope，端点/请求/回复三处核验，model-mismatch零HTTP拒绝；测试档冷读前后world/ledger逐字节不改 | 仅fixture控制器与网关契约：真实第二模型、按其计价的门户与付费续接未验证，换模型仍未证明。 |
-| H1/H3 | [具体求助报告](HISTORY.md#history-docs-validation-town-specific-help-2026-09-11-md)：33项专测，合计176项回归；[后续真实观察](HISTORY.md#history-docs-validation-town-continuous-life-2026-09-11-md) | 传达改善不等于独立找到合适工人。 |
-| H2/P1 | 同档6次Kimi观察拒绝后等待；再由脚本玩家提供线索，实际走向铁匠报价2→5→8并遭拒 | [持续报告](HISTORY.md#history-docs-validation-town-continuous-life-2026-09-11-md)。没有完成修刃/使用，不强制成交。 |
-| H4 | 19项专测、合计207项相关回归；自身同步事件不立即重想，期间新来信仍触发 | 继续观察真实长时间费用；不是硬token限制。 |
-| H5 | 玩家线索有效；直接声明机制已由 H21 通过（95项专测）；自愿有来源的单跳转介 A→B→C 已由 H22 离线验证（121项专测＋27套件＋3校验器，0失败，0付费NPC调用） | 需要有来源的交流或观察渠道，不能注入全镇知识；自主使用与自主发现仍待验证，H5 仍为部分完成。 |
-| H6/H7/H8 | 真实请求含合同条款；17项公开发言专测；Kimi明确修正旧推测并说出实际顾虑 | 旧错误记忆保留，私人理由不当作公开发言。 |
-| H9 | [有限材料实机报告](HISTORY.md#history-docs-validation-town-materials-2026-09-11-md)：源需求seq42；同档安装3份公共余料；真实Kimi主动获取1份铁后自行等待，库存3→2、个人0→1，seq51冷恢复；58项专测及90项回归 | 本轮无玩家指令；观察来自3米距离感知，未做摄像头FOV/遮挡。新增有限源由开发GM审核定义，不是自主生产。 |
-| H10 | seq33实际提出结算顾虑；36→39真实双方选择新条款、交付、施工耗1铁，完工8Col转账 | 绿仅指此合同的付款机制已实际使用，旧合同不改条款。 |
-| H11 | 14项UI回调检查及Godot实际画面：自由输入、距离/接收者核验、失败保留草稿、私人理由不展示 | 冷启动显示真实历史对话，字节不改；尚非人工键鼠试玩。 |
-| H12/N4 | 实际顾虑→开发代理审核→57项结算专测及回归→副本验证→同档安装→真实双方采用并在完工收到8Col | 安装不改旧钱物和合同，后续交易产生合法变化。GM由本开发代理审核实现，未证明通用自动开发流水线。 |
-| H13 | 真实Kimi在报价和交付时因附带发言被拦；支持合同交流，其他合法动作与未送达发言分别记录；20项专测及148项相关检查 | 新条款已被双方真实选择、接受并交付施工；文字不改合同，不冒称未送达的话被听见；旧失败保留。 |
-| H14 | 17项专测及109项相关检查；标记玩家澄清后seq41接近、44取回、46/47实际使用，无二次付款 | 获得玩家解释，不冒称纯无提示规划。 |
-| H15 | 直接UTF-8传输中文，保持原请求/上下文限制，11个网关场景含4000字完整保留；原铁匠同档续接1次成功 | 真实旧失败保留。未来内容无限增长仍需记忆选择，开发token控制未彻底解决。 |
-| H16 | [两名GPT-6评审及修复报告](HISTORY.md#history-docs-validation-town-replan-2026-09-11-md)：先复现撤单使合法选择过期、超过冷却仍不再行动，再通过66项专测及131项相关回归；同seq47实机冷恢复字节不改 | 仅新分类的option_unavailable可在1800模拟秒后重新观察；接口/未知请求/非法选择仍需审核。此修复本轮0次Kimi，不冒充真实模型自主重规划；后续H9已交付有限补给，H5仍待完善。 |
-| H17 | 有限回收点初始3份，真实已取1份；竞争最后一份/耗尽不刷新已离线验证 | 尚无矿冶、持续采购或生产供给；需要实际世界规则与成本，不靠重置库存掩盖缺口。 |
-| F1/B1 | 控制器恢复按旧请求号核验、旧错误归档；次数24→600，独立金额额度明确2→3元，旧请求及负债全保留 | 最新补铁2次0.060629元；截至64次无未决预留，余0.4893816元。原100元主账本不在本机，未重建其余额。 |
-| H18 | Windows JSON 桥退出崩溃已修复；92 项专测两次独立正常退出＋完整回归 | [跨机器报告](HISTORY.md#history-docs-validation-cross-machine-2026-09-12-md) |
-| H19 | Windows 玩法与 Mac 美术整合；922 路径/97 LFS 保全；52 项场景验收，独立测试世界 | [跨机器报告](HISTORY.md#history-docs-validation-cross-machine-2026-09-12-md) |
-| H20 | 兼容渲染过曝与三人标签重叠已修复；双渲染后端＋无窗口各197项；遮挡/缩放/归属，测试档不变 | [可读性报告](HISTORY.md#history-docs-validation-town-visual-readability-2026-09-12-md) |
-| H21 | 自愿技能介绍与有来源的个人记忆已验证；95项离线专测＋26套件；[证据](HISTORY.md#history-docs-validation-town-skill-notice-2026-09-12-md) | 真实自主发现待验；第三方转介已由 H22 离线验证（[证据](HISTORY.md#history-docs-validation-town-skill-referral-2026-09-12-md)），H5 仍为部分完成。 |
-| H22 | 自愿有来源的单跳转介 A→B→C 已离线验证：121项专测＋27套件＋3校验器，0失败，0付费NPC调用；A 仅在原始告知处拥有技能，B 须直接收到告知，C 仅得带来源的历史知识；A/B 后续失活/远离/技能丧失不抹除历史；[证据](HISTORY.md#history-docs-validation-town-skill-referral-2026-09-12-md) | 仅离线 fixture；非当前技能或可用性证明，C 不能继续转介；运行时仍受当前接近/活跃门控，接活校验实际能力/资源；来源结构一致不等于防恶意改档。 |
-| H23 | 材料不再穿墙获知：95项物理专项检查0失败（含真实有限库存3→2），200项实际场景检查（197既有＋3真实绑定），28套件＋3资产校验器0错误；历史冷读逐字节一致；缺失/非法/隐藏/已释放/已脱离传感器不产生新知识；钱物合同守恒；[证据](HISTORY.md#history-docs-validation-town-material-visibility-2026-09-12-md) | 普通离线、网关与恢复的街道入口在推进前启用遮挡检查；独立旧测试仍采用明确标注的距离感知。只验证3米内单条碰撞射线，不含视角锥或图像识别；真实自主使用未验证，N5整体未完成。 |
-| S1 | 原镇seq37/44完整主档未在本机恢复 | 保留当前测试档，不借升级或演示重建原镇。 |
-| H24 | [绕障与原任务续接报告](HISTORY.md#history-docs-validation-town-material-travel-2026-09-12-md)：历史3782帧无穿透，库存2→1/铁2→3；封闭时保留待办和钱物；当前22项实际场景绕行回归通过 | 绿色仅限4米内有限左右两段绕行与同任务续接；不是全城导航。封闭后自主选择的运行能力由H26补齐，真实Kimi采用仍待验。 |
-| M20 | H79本轮十居民/十GM最小闭环完成，GM06改进被4名原居民使用9次并获原GM复查接受；H81又有原GM01修复被原守井人采用。 | 最小样本已完成；持续自治及参与者掌握建设选择仍待H47/H82实证。完整首镇和长期全场景稳定性另验。 |
-| M20A | 历史 `shared:aincrad-trial-1` / seq291 的证据保留。用户本次明确所有 NPC/GM 仍是测试，允许新试验，不再要求恢复旧身份。[当前纠正](HISTORY.md#mvp-goal-20260914)。 | 新测试档须明确 genesis 与十个实际居民、十 GM 状态；只在本次试验中验证暂停/交付后续接，不冒充旧世界恢复或永久保存验收。 |
-| M20B | life01—life10记录138次Kimi请求、137次结算；最后一笔新预留未解决。居民已有真实移动、采集、进食、休息与求助，原身份保存。[检查点](HISTORY.md#history-docs-validation-checkpoint-2026-09-14-0900-md)。 | **真实接入已有，持续性仍部分**：H49本地旧上限恢复首次已验；继续核对公平调度、各自知识与合法冷却，处理当前H58全局阻塞。正常等待、拒绝不等于居民失效；不直接放宽账本或并发上限。 |
-| M20C | H39公共地点、H54原进食/休息任务已真实采用；life09面包师与铁匠采集后进食，医生在自行选择的公共地点休息。H53仅真实请教，未发生skill_lesson。 | **生活行为已有，持续供需未完成**：先验H56原采集任务、H57面包师恢复及本人反馈；不注入免费材料或技能、不强制交易/授课。完整生产贸易和住房关系沿N5逐步完善，不做首轮接通的追加前置。 |
-| M20D | 本轮十GM实际观察，原会话和完整记忆保留；H79/H81均已走通GM自测→主AI建议评审→交付→原GM复查。 | 新流程已实际使用；持续衔接仍待H47，参与者自主选择建设任务待H82。模型不是身份，仅明确重大问题block，档案按职责读取。 |
-| M20E | H79回复标签及H81道路回退已有同档真实采用；观察工作仍未证明采用，网框候选未完成。 | 仅对应改进的采用成立；多项持续组合交付仍待验证。文件防覆盖、原档续接和作者记录用于协作恢复，不以固定宿主测试作自动质量门禁。 |
-| M20F | 多次受控更新与带未完任务冷恢复已有；最新seq291 / 9086.10秒暂停冷恢复字节一致。life10却发生原生0xC0000005并留下新预留，H58开放。[检查点](HISTORY.md#history-docs-validation-checkpoint-2026-09-14-0900-md)。 | **当前补可恢复的有界运行**：H58崩溃/请求核对、H59退出结算和H60局部GM失败范围分开验收。H34与H58不能凭同一错误码合并根因。长期负载、全面故障注入和长时稳定性为后续证据，不要求先修完所有未知。 |
-| M20G | 十人街道、实际身体、扩建与公共地点已有实机证据；H39本人读牌/感知后自愿出行已发生。[公共地点](HISTORY.md#history-docs-validation-town-places-2026-09-13-md)、[美术与Shader](ART_STYLE.md)。 | **空间/生活可见性部分已有**：后续逐项验证普通玩家能进入、辨认居民并看懂事件及后果。正式人物、室内、完整经济和统一美术归N5；Shader模板对照不代表居民使用新能力。 |
-| M20H | 原十GM已分批消费真实检查点；H50/H51有真实行程/模型错误认领，H55有基础动作投影实际导出、十GM读取与作者确认。[最新汇总](HISTORY.md#history-docs-validation-work-log-2026-09-13-14-md)。 | **观察与反馈已有，普遍/持续覆盖仍部分**：验收最新证据自动进入原GM会话及交付后的反馈，区分居民需求、GM提案、宿主诊断和正常pending。图像类异常仍未验，不按名单或进程数计成功。 |
-| H25 | 早期存在每适配器12次与单批1—32次限制。H49现已证明明确旧本地上限错误在原身份冷恢复后产生新的真实Kimi结果。 | **部分**：已有有界续接，不能继续概括为完全未实现；多轮调度与原预算、去重仍需实际验证。保留批次控制，不靠改身份、清账本或无条件重试延长生活。 |
-| H26 | [受阻反馈验收](HISTORY.md#history-docs-validation-town-material-blocked-2026-09-12-md)：五场景226项、状态专项254项及10套相关回归通过；含128字符指令、双回执、32条历史＋10个进行中任务并存与冷恢复 | 绿色仅限离线运行能力，NPC模型调用0；个人生活事实与GM诊断分离，原钱物/身份/历史保留。真实Kimi与GM消费接续由M20B/M20H/M20D验收。 |
-| H27 | [H27/H28验收](HISTORY.md#history-docs-validation-gpt6-sprint-2026-09-12-md)：26项本地网关用例通过；超过16条事件后，技能通知/转介/个人材料旧库存仍进入最终请求，冷恢复和有限材料采用已验 | 绿色限离线真实适配器/规则链；保留有界上下文及个人信息隔离，27次是假网关POST，真实模型调用0。 |
-| H28 | [先复现、后修复](HISTORY.md#history-docs-validation-gpt6-sprint-2026-09-12-md)：同配置双居民共享排他文件曾使一人报错；现同进程按日志路径异步等待，双成功/次数上限/未知结果停发/取消均通过 | 绿色限同进程串行等待；跨进程仍关闭式拒绝，慢请求可能耗尽后续居民原35秒等待窗口；不宣称并发上游或真实吞吐已验。 |
-| H29 | [桥接验收](HISTORY.md#history-docs-validation-town-gm-evidence-2026-09-12-md)：89项实际场景、278项状态、29项回合与27项反馈通过；NPC模型调用0 | 绿色仅限离线世界/需求文件通道：持续更新、来源与个人信息边界、失败可见、旧档和原始需求保留。真实GM消费另见H30，10+10仍待M20验收。 |
-| H30 | [真实GM观察验收](HISTORY.md#history-docs-validation-town-gm-observers-2026-09-12-md)：10个不同原生DeepSeek会话、65个完整响应，输入缓存命中93.4%；重复证据新增调用0，受保护档案不变 | 绿色仅限测试世界证据的真实观察与持久去重。无真实Kimi调用、代码认领或交付；未把10个会话等同于10+10生活闭环，M20D/M20E继续保持部分完成。 |
-| H31 | [有来源GM提议与候选验收](HISTORY.md#history-docs-validation-gpt6-sprint-2026-09-12-md)：41项组合测试后完成15项最终专项，含编号歧义、嵌套JSON假成功和重命名越界修复 | 绿色限脚本传输下证据绑定、独占认领、同GM修错、累计用量增量及未审核候选。调查由监督者提出、GM输出仅为假设；真实原生沙箱执行和模型交付未验。 |
-| H32 | [私有需求安装与同档采用](HISTORY.md#history-docs-validation-gpt6-sprint-2026-09-12-md)：49项新专项及58项既有材料回归通过；原始回合来源、篡改拒绝、非公开发言、未完劳动与冷恢复 | 绿色限工程/离线规则能力。真实场景另完成走向材料、领取和崩溃后的同任务续接；不把脚本决定或既有能力配置称为新GM模型开发。 |
-| H33 | [十人实测](HISTORY.md#history-docs-validation-gpt6-sprint-2026-09-12-md)与[默认后端物理对照](HISTORY.md#history-docs-validation-h34-deepseek-diagnosis-2026-09-12-md--6-renderer-comparison-the-desktop-default-passes-where-the-explicit-gl-path-faulted)：7个相同采集任务20秒工时不变，身体仅移动约1—15毫米并持续接触，食物库存始终大于0 | **仅在显式限定范围内可标绿**：项目默认`forward_plus`下的占用/待机/冷恢复物理对照42/41/38通过，且同一8个原任务结局为2份食物+6次真实库存耗尽、无丢任务或重复库存。首次真实Kimi运行未发生采集，不能作为采集行为证据；`gl_compatibility`障碍负例的H34崩溃仍未修复。 |
-| H34 | [原生崩溃、故障捕获与渲染后端对比](HISTORY.md#history-docs-validation-h34-deepseek-diagnosis-2026-09-12-md)：Godot访问冲突0xc0000005；原任务39.27秒检查点保留，受控恢复后完成。同一基准字节下，显式`gl_compatibility`普通入口45.657秒崩溃（偏移0x141377d，WER转储只读分析为`[0x0+0x10]`空基址读取），而项目默认`forward_plus`普通入口90秒与占用/待机/冷恢复检查均通过 | 原因未明，成功恢复与默认后端通过都不代表稳定性通过；两处故障偏移（0x14454ac与0x141377d）并存保留。默认后端仅就本次观测范围可用于真实模型试运行，长期稳定性未证；配置切换不构成源码修复。 |
-| H36 | H37已修同档物理绕行/计数，H41提供行程诊断通道；后续H50原GM01实际消费铁匠行程问题并交付，H51错误被GM06消费，H55基础动作被十GM读取。 | **部分**：不能再写成生产GM从未消费真实问题；普遍社会诊断、图像问题和持续覆盖仍未验。按出现的真实缺口补最小证据，不要求先建完通用监控才能继续世界。 |
-| H37 | [首条真实闭环：GM09修复发布与同档续接](HISTORY.md#history-docs-validation-real-ten-2026-09-12-report-md)：8个受审核路径按哈希安装；真实Kimi续接20次请求、engine 0、+0.3837923CNY、无新增未知；原命令只完成一次（1回执+1次resident_moved）、位置自然移动、冷恢复逐字节一致 | **有界绿**：同一世界内“真实观察→GM实现/测试/修错→独立复核→发布→居民自然完成→冷恢复”的物理绕行与真实待办计数。不是持续20 agent服务、不是自主发现、不是经济或自主生活证明；H36普遍可见性缺口仍开放。 |
-| H38 | [首条真实闭环](HISTORY.md#history-docs-validation-real-ten-2026-09-12-report-md)：旅店主完成原接近后，自己连续三次 `ask:shared:smith`（真实 `opengameagent_live` 回合）；食物7份、浆果存量6、事件类型 ask_help 12 | 未定因：重复求助可能是有理由的新对话，也可能是无进展重复；不得直接当作bug或抑制自愿重复。验收：区分“有来源的新进展/新信息”与“无进展重复”，且不禁止自愿重复、不强制NPC结果。 |
-| H39 | [公共地点与首次真实采用](HISTORY.md#history-docs-validation-town-places-2026-09-13-md)：首轮真实运行中10名居民形成本人来源知识（36条读牌+1条亲眼看到），20次决策含6次前往、2次公共点休息，6名居民实际到达；世界 seq 38→95，+0.5754353元，历史不确定行6→6，冷恢复副本逐字节一致。第二次有界续接在维护中的独立十人世界运行286.5秒：seq 95→115、20次真实Kimi请求、+0.6227808 CNY、不确定行6→6；6次到达、3次休息，其中首次实际到访商队休息区；身份、住宅、钱物、旧事件前缀与未决任务保全，暂停冷恢复副本逐字节一致。 | **有界绿仅限公共地点真实采用与续接**：首轮明确没有商队休息区到访，第二轮才补上一次；两轮都不是持续20-agent服务，也不是十人全部采用或完整经济/室内/拥挤证明。H34/H36/H38保持开放。 第三轮有界续接在同一维护世界运行：seq 115→131、20次真实Kimi请求、+0.6228154元、不确定行6→6；新增5次到达（含商队休息区）与4次approach完成；身份、住宅、钱物、旧115事件前缀与待办保全，暂停冷恢复副本逐字节一致。该轮 engine0 但 validator=false（旅店主过期选项 `option_unavailable`），故不称为整轮成功。 |
-| H40 | 两个脚本GM issue可保持独立身份、会话、历史、base hash与候选目录；已复现第二issue复用第一目录时覆盖同一文件并实际进入脚本传输，现按Windows规范化绝对路径在派发前拒绝。相关39项离线脚本测试通过；DeepSeek独立复跑其中2项新测＋3项候选续接专项并接受源码。 | **有界绿仅限离线候选隔离**：结果始终`unapproved`/`deployed=false`；不是两个生产GM贡献、组合审核、发布或居民采用，M20E保持开放。 |
-| H41 | 行程停滞离线通道：time_scale 6的脚本Godot物理fixture 48项、地点67项、材料278项均0失败；生成场景快照consumer 6项与净化合成fixture可移植6项通过。第二次真实续接记录6条行程诊断，其中1条在life seq97产生本人可见`journey_stall_noticed`，随后6条均随行程结束关闭；最终GM投影0问题/0提议、源seq97，最终世界seq115。 | **有界绿仅限离线导出/导入与本轮世界侧记录/关闭**：最终空投影与问题正常关闭相符，单凭seq97<115不能判定丢失；没有中间快照或生产GM消费证据。生产GM诊断、真实新问题发现与同档采用仍未验证，H36/M20H保持部分完成。第三轮有限watcher抓到2份不同但都为空的公共投影，9条新增诊断均reported=false/closed，没有实际open issue，故未派发真实GM消费；最初约36秒源文件尚未写出、首个有效快照在引擎启动后6.47秒，不能据此判定导出器缺陷。 |
-| H42 | **离线有界绿（仅限已测控制范围）**：`--stop-on-decision-limit` 转发 `--town-stop-on-decision-limit`。上限前合法空闲照常推进世界时间；到达决策上限后不再多发请求；在途模型结果及其账本/事务落定后立即暂停、capture并退出，不等长途或受阻的物理任务；同一未决命令的ID、目标、进度与历史原样保留，独立冷进程可续接并只完成一次。默认与`--town-stop-on-idle`、900秒/32次上限、1800秒冷却、调度、原账本/费用/未知与不重试语义均未改。作者与独立评审各19+99=118项断言0失败，5棵自有进程树全部退出。 | **限制（保留）**：task65实际带该开关运行，但仅2/32请求，下一段0请求；协调器写作`completed_cap`，实际是`no_new_decisions`，未触发上限。其启动门槛还晚了16秒，虽有条件完成且未越截止，仍不构成真实到上限退出证据。 |
-| H43 | 早期旅店主turn0:18与not_before=2733.6167保留。最新公布世界时间为9086.10，已超过这一旧阈值；检查点仍报告有居民处于冷却，但未提供足以关闭此特定问题的逐请求证据。 | **待原档核对，不标绿**：核实原身份的新请求、原拒绝反馈、最新冷却轮次及权威结果。不能仍以旧的“尚差556秒”安排工作，也不能仅凭世界时间跨阈值认定已恢复。 |
-| H44 | task41在同一维护世界触发Smith铁料0仍看到接受修理选项；离线修复发布后，task58 Smith `turn:shared:smith:1:16`的23个选项不含该不可能接受，仍提供合法拒绝，Smith自主选择后产生`contract_rejected`/事件140。 | **实际同档采用已验**：不送铁、不降价、不强制成交、不移除缺料或拒绝事实。原gm-02编码回合900秒超时、费用未知且候选含范围外元数据，仍不称完整第二GM交付。 |
-| H45 | 精确恢复副本经独立审核并采用，Fisher/Smith旧失败各归档一次、epoch提升且其余控制器与世界事实保全。task65 Fisher `turn:shared:fisher:2:16`得到`ask_help`，Smith `turn:shared:smith:1:17`得到`trade_started`，均未重放旧请求。 | **同档有界绿**：十人身份、住宅、财物、历史前缀与旧命令保全，1项交易任务继续保存；只证明这两个新epoch请求及结果，不代表持续稳定或自动恢复。 |
-| H46 | task58 Fisher回复的私有reason 657字超过宿主512上限而严格拒绝；逐请求`known_rules`强化经109项连续性与26例编译适配器假网关验收。task65实际请求结构含512边界，Fisher新turn随后得到权威`ask_help`结果。 | **首次实际采用已验**：这是一次合规结果，不是解析器修复或模型今后必然遵守；旧turn0:14与turn1:15失败仍按原历史归档。 |
-| H35 | Windows进程包装器超时实测留下仍运行的子/孙进程，原先只终止包装PID不足 | 11项Windows专项通过；任务独占进程树覆盖超时/中断/包装器先退，子进程失败不再被包装器0掩盖。实际引擎退出另见本轮报告；这是进程清理修复，不是H34原因修复。 |
-| H47 | 本地脚本自主循环已有验收，生产桥也已实现生活阶段与gm_autonomy cycle交替；原GM多项真实交付在监督派发/独立验收下被同档采用。[原记录](HISTORY.md#history-docs-validation-gm-autonomy-2026-09-13-md)、[检查点](HISTORY.md#history-docs-validation-checkpoint-2026-09-14-0900-md)。 | **部分**：下一证据是已限定范围内由程序推进的真实GM工作、验证、交付、反馈与同档下一生活阶段，不靠每阶段GPT手工传递。旧09:00期限与15分钟巡检为历史，不写成当前运行安排。H60先查普通失败是否越界停止居民。 |
-| H48 | **首次同档采用已验**：真实原GM02自主认领并开发，独立验收后发布；life02渔夫自主选择 `ask-skill:shared:carpenter:wood_repair`，新请求 `turn:shared:fisher:2:17` 获权威ask_help，事件180保存并冷恢复。[完整事实与失败记录](HISTORY.md#history-docs-validation-gm-skill-help-2026-09-14-md)。 | 已验的是提出具体木工求助，未宣称木匠已回复、修理或造船完成。首轮入口编译失败已由同一GM02修复，0请求失败历史与旧未知费用保留。持续功能开发和全部居民正常运行仍开放。 |
-| H49 | **首次同档采用已验**：原GM07实现后，牧羊人 `turn:shared:herder:0:17` 由真实Kimi主动向医生求助，事件170；旧0:16本地调用上限错误仍在reviews，seq180冷恢复后两者都保留。[事实与限制](HISTORY.md#history-docs-validation-gm-local-limit-2026-09-14-md)。 | 只恢复明确的旧进程本地次数限制；其他错误、在途、断线与冷却不被放开。即时恢复再次失败会保持隔离；后续另一独立错误可重新获得一次冷恢复。不是所有模型故障的通用自动重试。 |
-| H50 | 原GM01修复已在life04实际采用：旧铁匠turn1:17只产生一条approach_blocked/事件181，旧挂起任务结束，随后真实Kimi新turn1:18得到action_started；seq192冷恢复保留。[失败和修复](HISTORY.md#history-docs-validation-gm-approach-error-class-2026-09-14-md)。 | **绿色仅限首次同档有界失败、继续选择与保存**：life03保存失败及此前测试误报保留；不宣称穿模根因或所有拥堵已解决。 |
-| H51 | 原GM03实现准确净化分类，实际木匠新请求1:13记录brain_input_too_large，原GM06已消费并认领。既有16项分类、17项恢复通过；宿主自动传递白名单错误标识的23项测试通过。[事实](HISTORY.md#history-docs-validation-gm-approach-error-class-2026-09-14-md)。 | **绿色仅限首次新错误准确保存并被GM消费**：旧0:12通用错误原因仍未知，不改历史、不自动重试；新的自动宿主传递补丁尚待实际循环采用。 |
-| H52 | 原GM06输入修复安装后，原木匠新turn2:14真实回复渔夫/事件182，2:15继续行动，原0:12和1:13失败仍保留且冷恢复。27＋22项边界、16项分类与29项控制器检查通过。[事实](HISTORY.md#history-docs-validation-gm-approach-error-class-2026-09-14-md)。 | **绿色限首次新适配器同档请求成功及离线输入边界**：未单独记录实际请求压缩前后长度，不声称该请求一定触发了裁剪分支；必要内容仍超限时诚实拒绝，旧历史不删改。 |
-| H53 | 原GM05从真实渔夫需求认领并实现双方同意的教学，原31＋63及独立46＋41项通过；life06事件203中渔夫真实提出木工教学请求。[验收与纠正](HISTORY.md#history-docs-validation-gm-teaching-2026-09-14-md)。 | **部分：真实请求已发生，尚无skill_lesson**；木匠返家进食受阻，老师未完成自愿授课。无播种技能或代选，旧失败保留。 |
-| H54 | 原GM09两文件修复已进入life07，四个原进食/休息命令于事件232–235各完成一次；26次真实Kimi、无模型错误、无新增未知，seq257冷恢复一致，原GM09确认采用回执。[事实](HISTORY.md#history-docs-validation-gm-home-return-2026-09-14-md)。 | **此次同档采用已验**；之前45项完整场景验证与宿主错误均保留，不宣称所有拥堵或短途路径均已解决。 |
-| H55 | GM10单文件改动在life08捕获3个真实休息任务、12份哈希绑定快照；两原任务完成后条目消失。原10GM全部实际读取，GM06引用49.6/60秒进度，GM08识别正常休息，原作者确认采用；seq264冷恢复通过。[事实](HISTORY.md#history-docs-validation-gm-home-return-2026-09-14-md)。 | **本次真实导出、消费和同档恢复已验**；正常pending不是缺陷，GM07曾误把中间49.6秒称完成，已在回执中纠正；两次编码未知费用与首次冷加载失败保留。 |
-| H56 | 原GM01认领issue-fefb577df7e8，复用既有道路寻路处理原采集动作；原目标、碰撞、0.45米到达与20秒工作保持。私有完整场景验证见本机记录。 | **部分：离线验收已接受，待原Kimi世界实际完成原织工任务**；移动不等于完成，不声称所有碰撞已修复。 |
-| H57 | 原GM09认领issue-5e0154668121，仅对实际收到且因理由超过512字被拒的回执，冷启动准入一次新请求；155项既有测试及39项独立检查通过。 | **部分：离线已验，待原面包师实际恢复**；第二次连续过长保持阻塞，原调用上限通道独立，旧失败与未知费用保留。 |
-| H58 | life10原生0xC0000005后保留新请求pending与1笔未解决预留，seq291及十身份冷恢复字节一致。[检查点](HISTORY.md#history-docs-validation-checkpoint-2026-09-14-0900-md)。 | **开放**：无收到响应可真实结算，Kimi停止新派发；崩溃原因未知。 |
-| H59 | 原GM07已完成一文件有界关闭等待，独立离线假上游与私有账本验证通过，接受进本地main；尚无真实Kimi采用，也不能恢复已丢失的响应。[检查点](HISTORY.md#history-docs-validation-checkpoint-2026-09-14-0900-md)。 | **部分**：历史未知保留，不能宣称原生崩溃或本次费用已恢复。 |
-
-| H60 | **有界离线已接受**：[生产协调器](tools/run_production_gm_autonomy.py)及其[测试](tools/test_run_production_gm_autonomy.py)由 DeepSeek 实现并三轮复核；主代理标准 Python 3.12 独立运行 56 项通过，执行器另有 86 项内层回归通过。覆盖真实目录前缀/manifest 内容、精确作者回执、宿主测试进程、其他 GM 待办保留、累计额度和未知标记。[流水](HISTORY.md#mvp-goal-20260914)。 | 仅允许首次、明确未发布且作者 accept/no_action 的普通宿主测试失败局部结束；已发布未验证、超时/存活进程、内容冲突、陈旧回执与费用未知仍停。空 manifest 或带旧修复轮次的模糊记录继续停，不冒称通用恢复、真实 10+10 或 H58 原生崩溃修复。 |
-| H61 | **本机试验部署已验**：独立十人 genesis、完整隔离部署、本地 SDK 构建、实际 Godot 打开/恢复通过；247 项部署清单一致。候选原文解析、错误语法拒绝及不支持问题提前拒绝三向检查通过，首轮十 Kimi 真实运行已完成。[流水](HISTORY.md#mvp-goal-20260914)。 | 只证明运行接线与候选解析，不能替代真实 GM 交付/采用。首次 importer 越过 assets junction 改写源 sidecar，已恢复 Git 差异；junction 不强制只读，禁止在模型运行冻结窗口重导入。 |
-| H62 | **限定交接已修复**：DeepSeek区分权威主命令与后代退出，精确校验持久回执；主代理独立105项通过。原 auto-9ee570c24ad9c598 加法恢复为 auto-afad9ec90dc0f63f/no_action，新增模型调用0；原 outer、十GM run、世界SHA均未变。[流水](HISTORY.md#mvp-goal-20260914)。 | 幂等重复及现有owner锁、主命令非零、超时、当前未知、guard变动/陈旧证据仍拒绝；测试命令继续保留后代失败语义。只支持已证明无认领的观察续接，非通用恢复或所有后代均成功。发布中途原子恢复另未声明。 |
-| H63 | **投影已独立通过，GM已读取**：39项独立引擎检查；真实life_event37/45/47/48/53逐条与权威送达文本、说话者、请求和来源匹配；原世界SHA未变，schema解析通过。[流水](HISTORY.md#mvp-goal-20260914)。 | 仅投影最多8条/每条280字的实际发言，标记observed，不把普通答复都标为愿望；私有reason、未送达speech不进入，不生成能力/proposal。下一步让原十GM调查这些实际线索，再按所选任务补具体宿主验证，不能冒称已经交付或采用。 |
-| H64 | **本轮映射与引用已核对**：DeepSeek补公开来源白名单与当前快照指针；4项新增测试由主代理独立通过，实际七条证据在十份prompt均可引用、五个公开event身份准确。执行器全38项有6项候选创建因其权限受限失败；主代理全套在180秒边界结束，15项输出无失败但未完成，不能称全套通过。[流水](HISTORY.md#mvp-goal-20260914)。 | 公开issue关联当前快照精确JSON指针与原事件，保留8条引用上限及隐私边界；相同文本/不同说话者不可混淆。提议允许基于真实愿望与源码检查提出新功能假设，不能要求先有已证实bug；具体发布仍须独立宿主验收，不强迫GM制造贡献。 |
-| H65 | **纠正已独立通过**：新public-correction使用实际TownPlaces；两条既有行动与原引擎导出逐项匹配（浮点容差1e-6），五条发言匹配权威事件。新SHA bcc03a7e…、原世界SHA未变；旧public-final错误距离与全部付费回复保留，不作准确全景证据。[流水](HISTORY.md#mvp-goal-20260914)。 | 用实际TownPlaces生成新文件，核对全部原非公开发言条目、来源版本及5条送达事件；不覆盖旧投影，不将错误运动事实冒称原引擎事实，不能用重新付费观察抹去此错误。 |
-| H66 | **判断偏差仍保留**：第三轮多名GM把开发未来学习玩法混同凭空给居民技能，引用H63导出器不得自动生成proposal的测试来拒绝GM提案。GPT6复核认为该核心推论不成立；不能因只有修理课便称烘焙愿望已满足。 | 允许设计新规则、内容与自愿获取路径，禁止改存档送技能/财产/教师；超出单文件或缺少前提可据实no_action，不要求一定提案，不刷相同观察。 |
-| H67 | **真实候选已监督发布，采用待验**：gm04根据life_event45/47和town_trade源码提出单文件observe_work；其JSON acceptance数组少闭合括号，run-20260914T043454Z-1afbb7为9有效+1measured_failure，整批incomplete/observe_failed。原失败保留，已明确ack后仅原GM续接。 | 宿主证明附近居民确实处于工作阶段、提交重验当前真实任务（选项不锁定生成时job），事件进入观察者个人视图；未开始/移动/阻塞/换任务/远距离不可伪报。重复command不重复事件、不改资源技能合同。真实Kimi自选、宿主事件、后续本人模型输入实际收到事实才算采用。 |
-| H68 | **111项离线与真实指定GM04续接通过**：root误以为新周期可接住之前直接观察的认领；auto-b5351dc7f58337aa只做了一次有效GM01评议便no_action，0候选/发布。select_claim只接当前owner_run_id；原gm04认领仍在。 | 保持认领归属校验，cycle增加明确--gm选择并按实际人数预留；无效名单、重复或超限在调用前拒绝。仅让原作者在已完成宿主契约下续接，不重跑九位、不伪造旧回执或清零用量。 |
-| H69 | **旧门禁不再作为当前要求**：当时GM04新提案被旧宿主identity限定挡住，两次已计量code及整周期失败仍保留，不改写成成功。 | 用户已撤销自动验收，转H76主AI意见评审。无需继续修旧模板来取得交付许可；原作者、提案、来源与实际修改的追踪仍保留，不能把撤销门禁写成原失败已通过。 |
-| H70 | **真实回归修复已发布，后续实际接线待验**：life02虽20Kimi均结算，背景导出签名对缺physical_facts的公开发言反复报错；不采用runner的粗略成功作为全绿。 | 三行optional字段修复，不制造字段或丢发言；51项独立Godot检查验证实际签名和按变化导出，隐私白名单不变；旧错误/费用保留。 |
-| H71 | **真实认领，候选未完成**：GM04先提造斧方案，被具体反驳未满足渔夫73/77/79的网框用途；后在run-20260914T054909Z-8a2ada认领issue-c96d58e256f6。审核范围为trade/life/空间目录/真实场景四文件；现只有两文件部分修改，另有七个越界临时文件，独立宿主在Git门禁拒绝，未启动引擎。 | 独立报价/接受与既有资金预留，60秒真实制作消耗工人1木，委托者所有但制作人保管，近距离取回后才可使用。新有限试验水点只安装一次、库存3且不再生；60秒真实使用才减库存得1食物。先证明实际路径，再验守恒、重复命令、暂停/恢复与真实自选采用。不从角色名授技能，不将木框偷换成免费绳网。 |
-| H72 | **一条实际身体绕行已验证，功能接线仍待验**：旧v2的三个中点都在原直线上，七个净空点还含一个水槽顶部点，部分失败碰撞是铺路而非House07。root排除高点后检查24条明确绕行，12条预检可行；实际行走(0,53)→(0,46)→(6,46)→(10.5,47.8)，784物理帧抵达地面，0墙壁碰撞、无脚本错误，副本和canonical字节未变。 | 只证明暂停旧场景中一条固定路线的物理可行性，初始化身体属于离线fixture，未调用world host_move/模型/安装。GM部分候选另设水点(5.6,50.6)，其几何尚不存在，不能用此次旧水槽旁通路替代其安装后碰撞、抵达与使用验收。真实自选、库存/物品守恒和恢复仍属H71；不扩通用导航。 |
-| H73 | **历史未知已承接，数值仍未知**：code-20260914T055705Z-ee75fc于14:12:05被主代理配置的900秒宿主超时终止；0个completed turn、usage/cost未知，状态timeout_unknown，原GM04会话和部分候选保留。不是已结算局部失败。 | 保留原run/session/费用未知，不补零、不重放。进程job已全部退出，tracked/HEAD冻结与seq79世界基线守住，部署247摘要未改。用户继续指令下已recover/acknowledge并保留原记录；续跑无新未知，不将旧费用补零。 |
-| H74 | **已接入真实回包和GM读取**：旧档普通GM能读15条送达对话，GM02能读55条对话与决定；档案/CLI10项通过。 | TownRuntime存档副本probe正常原文及失败回包均可跨下一轮重新载入，legacy不重复、读档不改字节；原文解析及原回合29项通过。现有49条档案（含历史缺失标记），40次新真实Kimi原文已保留，冷加载档案一致，不补造旧缺失。 |
-| H75 | **记忆/分页及默认提示预算已收尾**：旧来源保留磁盘，提示使用摘要与准确引用；十GM默认24KB dry-run通过，实际23036—23836字节。 | 换session、超过12条、同run合并和原GM04续跑说明保留已检查；按UTF8字节分配预算。原十GM已在新轮次读取自己的记忆和按职责档案；新policy样本用两issue/32KB，非此前无policy的24KB样本。 |
-| H76 | **已实践一次GM自测及主AI意见交付，待原GM效果复查**：record-review CLI已核对，175项旧回归及最终22项定向通过；主AI意见持久返还原GM，partial resume失败恢复已修正。 | GM自测→主AI给意见，具体重大问题才block→交付继续生活→原GM下一轮复查；默认不执行固定宿主测试门禁，保留版本、作者和文件防覆盖。 |
-| H77 | **已安装，14项实碰撞检查通过**：市场/下方双向、西侧居民回市场、水槽附近均到达0.45m内，地图外目标停止；均是副本上的路线检查。 | NavigationMesh与NavigationAgent3D基于实际静态碰撞；RVO保留安全速度，部分路径不足以冒称可达，导航未就绪停止。真实续跑已完成并修clear_route停止分支错误，最新20次居民调用无脚本错误。参考[Godot官方导航文档](https://docs.godotengine.org/en/stable/tutorials/navigation/navigation_introduction_3d.html)。 |
-| H78 | **本机安装与有限对照已完成**：RTK正式0.49.0与官方摘要匹配；保留原资源安全指令，选择性压缩只读输出，遥测关闭。默认GPT6 medium、工具输出4000，独立review/worker profile可加载。 | 三组统一换行后的输出字符872→325、970→464、190→190，失败退出码129保留；不是模型token/账单比例。三GPT6用于请求的方向评审，单名Luna/Spark/DeepSeek执行；新任务读取配置，当前显式选择可能覆盖。 |
-| H79 | **原GM改进已被真实使用并复查接受**：GM06独立实现回复选项标明请求者，主AIadvisory发布；4名原居民9条真实reply_help，seq102→124。 | 原GM06同一观察会话已独立复查accept；冷恢复连续。不宣称全体对话或同行需求已经解决。 |
-| H80 | 46.57秒真实游戏录像已导出；录制批次超时，4次Kimi已结算并保存seq128，暴露实际起点寻路受阻。 | 录像可用不代表运行批次成功；阻塞后续处理见H81。 |
-| H81 | GM01发布现有道路回退，原守井人原任务实际抵达种植公共地，seq129；零新增Kimi，原GM复查accept、冷恢复连续。 | 底层网格断点仍在，未证明园丁实际采用或所有路线畅通。 |
-| H82 | 五位GPT-6各提一案并交叉评七案，P4/P5五人均分同为80.1/100；评分、分歧与完整原文存HISTORY.md的H82条目。 | 仅设计评审：推荐参与者掌握发展方向，以有限算力、真实生活用途和受托建设能力推进；下一项自主选题/建设/接续实验未运行。 |
-| H83 | 按现行源码整理启动入口、六层共享状态继承、居民/GM工作链、存储归属、并发边界与修改入口；补入本文件的唯一流程图。 | 文档整理，不是架构重构或新运行证据；seq129保持暂停，未接入SwarmWorld或居民自主编程。 |
-| H84 | 五位GPT-6各提一案并完成唯一一轮交叉评审，R3初稿平均82.4/100；原文、分歧及25组评分完整留存。 | 条件假设下的设计判断，推荐先做模型/接口小对照；未实现开放委托、模型裁决、新权限或持续并发，现行发布评审保持。 |
-| H85 | 四模型/两入口/三情境/两重复共48分支；46结束观察、2服务异常，实际结果与费用见上方及HISTORY；48完整冷恢复、76正式回复保留。 | 隔离实验，不代表所有目标通过。下一项推荐执行反馈、受阻中断/改计划；未实现居民自主编程、正式开放入口或重启后自主接续。 |
-| N5 | 可持续起始之城：食物/材料来源、劳动交换、住房关系、个人视觉和统一人物/美术。既有十人生活是基础。 | 多轮生活有可核算供需，玩家行为有可见且持久的后果。沿实际需求增加能力，M20首次通过不自动让完整首镇变绿。 |
-| N6 | 城内外冒险：准备、探索、战斗或避战、带回资源并影响城内生活。 | 伤害、死亡、掉落和成长的世界语义先明确，再验证一个有限区域循环；不预造整套无生活用途的战斗平台。 |
-| N7 | 完整可玩第一层：城镇、野外、迷宫、Boss、成长和返回后的持续后果。 | 有完整可复现的游玩过程，不以地图或资产数量验收。 |
-| N8 | 有实质差异的第二层，再逐层扩展。 | 新生态/玩法与跨层人物、钱物、关系和承诺连续；不以复制大量楼层代替差异。 |
-| N9 | 外部参与者长期共建与规模运营。 | 贡献确被采用，运行、恢复、治理和费用可持续；按实际负载决定扩容，不预设无限人口。 |
-| XR/N10 | 普通VR玩家进入同一持久世界，早期先做有限设备样板。 | 独立设备验证尺度、交互、双眼帧时与舒适性。普通VR可在第一层可玩后分批推进，不必等待全部楼层。 |
-| R | 神经全潜行是独立研究愿景。 | 不属于已知可交付工程路线，不给无依据工期。 |
-
-**维护规则：**每次有新证据只更新这个全景图和本表。新增问题沿发现它的节点分支，保留稳定ID、验收条件和证据；通过后原位变绿，不删掉问题来制造进度。复发改回问题状态并链接失败证据。范围扩大另开子节点，不能扩大已绿节点的含义。没有新证据不改变状态。流程图记录工作进度，不是后台运行器。
+Historical references remain available in the [previous full roadmap](docs/history/roadmap-before-english-20260918.md) and the [H1-H104 diagram archive](docs/validation/roadmap-history-through-h104.md). They are dated evidence, not competing current plans. [HISTORY.md](HISTORY.md) preserves the chronological record, including failures and user corrections.

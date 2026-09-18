@@ -263,7 +263,7 @@ func _capture() -> void:
 	_scene._refresh()
 	var hud: Label = _scene.status
 	if hud != null:
-		hud.text = "整合验收 · 测试世界 · 无模型调用\n" + hud.text
+		hud.text = "Integration check - Test world - No model calls\n" + hud.text
 	_scene._camera.global_position = Vector3(0, 5, 14)
 	_scene._camera.look_at(Vector3(0, 1, 4))
 	for i in 24:
@@ -356,7 +356,7 @@ func _verify_nameplates() -> void:
 		if is_instance_valid(innkeeper_label):
 			var innkeeper_name: String = str(_scene.town.resident(innkeeper).name)
 			check(innkeeper_label.text.begins_with(innkeeper_name), "innkeeper label begins with actual resident name")
-			check(innkeeper_label.text.contains("持有斧头"), "innkeeper label contains 持有斧头 (real custodian)")
+			check(innkeeper_label.text.contains("Holding a hatchet"), "innkeeper label contains Holding a hatchet (real custodian)")
 			var actual_axe: Dictionary = {}
 			for item in _snapshot().life.get("items", []):
 				if item.get("kind") == "axe":
@@ -365,8 +365,8 @@ func _verify_nameplates() -> void:
 			check(not actual_axe.is_empty(), "authoritative axe item present for condition check")
 			var actual_edge: int = int(actual_axe.get("edge", -1))
 			var actual_handle: int = int(actual_axe.get("handle", -1))
-			check(innkeeper_label.text.contains("刃 %d" % actual_edge), "innkeeper label contains actual 刃 %d" % actual_edge)
-			check(innkeeper_label.text.contains("柄 %d" % actual_handle), "innkeeper label contains actual 柄 %d" % actual_handle)
+			check(innkeeper_label.text.contains("Edge %d" % actual_edge), "innkeeper label contains actual Edge %d" % actual_edge)
+			check(innkeeper_label.text.contains("Handle %d" % actual_handle), "innkeeper label contains actual Handle %d" % actual_handle)
 	for id in _scene.town.active_ids():
 		if id == innkeeper:
 			continue
@@ -375,7 +375,7 @@ func _verify_nameplates() -> void:
 			continue
 		var other_label: Label = other_entry.get("label")
 		if is_instance_valid(other_label):
-			check(not other_label.text.contains("持有斧头"), "non-custodian %s label does not claim 持有斧头" % id)
+			check(not other_label.text.contains("Holding a hatchet"), "non-custodian %s label does not claim Holding a hatchet" % id)
 	# Legacy 3D cards and fallback facts must not be visible.
 	for id in _scene.town.active_ids():
 		var card: Label3D = _scene.cards.get(id)

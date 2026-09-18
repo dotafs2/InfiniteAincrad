@@ -23,8 +23,11 @@ const LEGACY_FORAGING_GROWTH_SECONDS := 1800.0
 # A layout hash identifies the reviewed map revision in both a fresh world and a migration. Only
 # relocation bridge/provenance fields claim migration and therefore require before/after evidence.
 const SPATIAL_MIGRATION_KEYS := ["foraging_before", "foraging_after", "migration", "source_sha256"]
-const PREVIEW_LAYOUT_SHA256 := "be6659494b9812df0ee41fd27db0ba652dcf32a97a44ac004e497b99d03445de"
+const PREVIEW_LAYOUT_SHA256 := "ce07c9b501db6259aa8c5c5865c30a96d633000bcd93d391e9bef6df194b5fae"
+# The previous reviewed layout differs only in two human-readable connection labels.
+const LEGACY_PREVIEW_LAYOUT_SHA256 := "be6659494b9812df0ee41fd27db0ba652dcf32a97a44ac004e497b99d03445de"
 const JsonCodec = preload("res://core/TownJsonCodec.cs")
+const English = preload("res://core/english_text.gd")
 var _visitor_position := Vector3.INF
 var _foraging_access_probe: Callable = Callable()
 var _foraging_access_required := false
@@ -65,6 +68,12 @@ func resident(id: String) -> Dictionary:
 			return value
 	return {}
 
+func resident_name(id: String) -> String:
+	return English.text(str(resident(id).get("name", id)))
+
+func resident_background(id: String, key: String) -> String:
+	return English.text(str(resident(id).get(key, "")))
+
 func account(id: String) -> Dictionary:
 	for value in _state.survival.accounts:
 		if value.resident_id == id:
@@ -79,7 +88,7 @@ func resident_view(resident_id: String = "") -> Dictionary:
 	for event in _state.life.events:
 		if event.get("recipient_ids", []).has(resident_id):
 			own_events.append(event.duplicate(true))
-	return {"identity": {"id": resident_id, "name": person.name, "role": person.role},
+	return {"identity": {"id": resident_id, "name": resident_name(resident_id), "role": person.role},
 		"needs": person.needs.duplicate(true), "inventory": account(resident_id).duplicate(true),
 		"experiences": own_events, "observations": _state.godot.observations[resident_id].duplicate(true),
 		"available_actions": available(resident_id), "pending": _state.godot.pending.get(resident_id, {}).duplicate(true),
@@ -107,7 +116,7 @@ func nearby(id: String) -> Array:
 	var result: Array = []
 	for other in active_ids():
 		if other != id and position_of(id).distance_to(position_of(other)) <= HEARING_RANGE:
-			result.append({"id": other, "name": resident(other).name})
+			result.append({"id": other, "name": resident_name(other)})
 	return result
 
 func host_visitor_position(value: Vector3) -> void:
@@ -283,7 +292,7 @@ func propose_repair(owner_id: String, item_id: String, worker_id: String, part: 
 	_state.life.contracts.append(contract)
 	var event := {"type": "repair_" + part, "actor_id": owner_id, "subject_id": worker_id,
 		"recipient_ids": [owner_id, worker_id], "operation_id": command_id, "source": provenance,
-		"text": "%s向%s提出修%s委托，报价%d Col。" % [resident(owner_id).name, resident(worker_id).name, "刃" if part == "edge" else "柄", price_col],
+		"text": "%s asked %s to repair the %s for %d Col." % [resident_name(owner_id), resident_name(worker_id), "edge" if part == "edge" else "handle", price_col],
 		"contract_id": contract_id, "item_id": item_id, "part": part, "price_col": price_col}
 	_append_life_event(event)
 	_complete_repair_command(command_id, payload)
@@ -321,8 +330,8 @@ func respond_repair(worker_id: String, contract_id: String, choice: String, comm
 		contract.status = "rejected"
 	var event := {"type": choice, "actor_id": worker_id, "subject_id": owner_id,
 		"recipient_ids": [worker_id, owner_id], "operation_id": command_id, "source": provenance,
-		"text": "%s%s了%s的修%s委托%s" % [resident(worker_id).name, "接受" if choice == "accept" else "拒绝", resident(owner_id).name,
-			"刃" if contract.part == "edge" else "柄", "，已预留%d Col。" % contract.price_col if choice == "accept" else "。"],
+		"text": "%s %s %s's %s repair request%s" % [resident_name(worker_id), "accepted" if choice == "accept" else "declined", resident_name(owner_id),
+			"edge" if contract.part == "edge" else "handle", ", reserving %d Col." % contract.price_col if choice == "accept" else "."],
 		"contract_id": contract_id, "item_id": contract.item_id}
 	_append_life_event(event)
 	_complete_repair_command(command_id, payload)
@@ -348,7 +357,7 @@ func deliver_repair(owner_id: String, contract_id: String, command_id: String,
 	contract.status = "delivered"
 	var event := {"type": "deliver", "actor_id": owner_id, "subject_id": worker_id,
 		"recipient_ids": [owner_id, worker_id], "operation_id": command_id, "source": provenance,
-		"text": "%s已把柴斧交到%s的岗位，等待实际修理。" % [resident(owner_id).name, resident(worker_id).name],
+		"text": "%s delivered the hatchet to %s's workstation, where it awaits repair." % [resident_name(owner_id), resident_name(worker_id)],
 		"contract_id": contract_id, "item_id": item.id}
 	_append_life_event(event)
 	_complete_repair_command(command_id, payload)
@@ -401,7 +410,7 @@ func collect_repair(owner_id: String, contract_id: String, command_id: String,
 	contract.status = "collected"
 	var event := {"type": "collect", "actor_id": owner_id, "subject_id": worker_id,
 		"recipient_ids": [owner_id, worker_id], "operation_id": command_id, "source": provenance,
-		"text": "%s取回柴斧，向%s结算%d Col。" % [resident(owner_id).name, resident(worker_id).name, contract.price_col],
+		"text": "%s collected the hatchet and paid %s %d Col." % [resident_name(owner_id), resident_name(worker_id), contract.price_col],
 		"contract_id": contract_id, "item_id": item.id}
 	_append_life_event(event)
 	_complete_repair_command(command_id, payload)
@@ -699,7 +708,7 @@ func _finish(id: String, pending: Dictionary) -> Dictionary:
 		var event := {"event_id": "life_event_%d" % _state.life.seq, "seq": _state.life.seq,
 			"type": action, "actor_id": id, "subject_id": id, "recipient_ids": [id],
 			"operation_id": pending.command_id, "source": pending.provenance,
-			"text": "%s: %s (Godot continuation, %s)" % [resident(id).name, action, pending.provenance]}
+			"text": "%s: %s (Godot continuation, %s)" % [resident_name(id), action, pending.provenance]}
 		_state.life.events.append(event)
 		_state.godot.new_events.append(event.event_id)
 	return receipt
@@ -721,7 +730,7 @@ func _finish_repair(worker_id: String, pending: Dictionary) -> Dictionary:
 	contract.status = "completed"
 	var event := {"type": "work", "actor_id": worker_id, "subject_id": contract.owner_id,
 		"recipient_ids": [contract.owner_id, worker_id], "operation_id": pending.command_id,
-		"source": pending.provenance, "text": "%s完成了柴斧的修%s。" % [resident(worker_id).name, "刃" if part == "edge" else "柄"],
+		"source": pending.provenance, "text": "%s finished repairing the hatchet's %s." % [resident_name(worker_id), "edge" if part == "edge" else "handle"],
 		"contract_id": contract.id, "item_id": item.id, "part": part}
 	_append_life_event(event)
 	return {"ok": true, "code": "repair_completed", "actor_id": worker_id,
@@ -760,7 +769,7 @@ func _declared_preview_genesis(value: Dictionary, spatial: Dictionary) -> bool:
 	var origin: Variant = value.get("origin")
 	var godot: Variant = value.get("godot")
 	return typeof(spatial.get("preview_genesis")) == TYPE_BOOL and spatial.preview_genesis == true \
-		and spatial.get("layout_sha256") == PREVIEW_LAYOUT_SHA256 \
+		and spatial.get("layout_sha256") in [PREVIEW_LAYOUT_SHA256, LEGACY_PREVIEW_LAYOUT_SHA256] \
 		and origin is Dictionary and origin.get("kind") == "new_world_seed" \
 		and typeof(origin.get("genesis")) == TYPE_BOOL and origin.genesis == true \
 		and origin.get("migrated_from") == null \

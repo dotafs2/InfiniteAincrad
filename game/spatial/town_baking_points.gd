@@ -147,7 +147,7 @@ func _process(_delta: float) -> void:
 func _update_point(point_id: String, label_text: String, flour: int) -> void:
 	var entry: Dictionary = points[point_id]
 	var label: Label3D = entry["label"]
-	label.text = "%s\n公共面粉：%d" % [label_text, flour]
+	label.text = "%s\nPublic flour: %d" % [label_text, flour]
 	var sack_count := mini(SACK_LIMIT, flour)
 	var sacks: Array = entry.get("sacks", [])
 	for index in sacks.size():

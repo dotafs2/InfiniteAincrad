@@ -1,8 +1,8 @@
 extends Node
 ## 50-second, 20-component real-engine reel; runtime art and normal wind strength.
 const KIT := preload("res://spatial/environment_v2.gd")
-const TITLES := ["古橡树", "白桦组三株", "柱形柏树", "石地松树", "果园苹果树", "幼枫树", "开花灌木", "浆果丛", "蕨类地被", "草甸草簇", "野花草簇", "常春藤墙面", "芦苇簇", "苔藓倒木", "香草种植箱", "苔石组", "道路里程碑", "藤蔓木栅栏", "石质水槽", "帆布休憩棚"]
-const NOTES := ["枝端与叶片微动 · 主干固定", "枝叶微动 · 树干固定", "叶簇微动 · 树干固定", "叶簇微动 · 树干固定", "叶片微动 · 果实与主枝固定", "叶片微动 · 主干固定", "叶片与花瓣摆动", "叶片摆动 · 浆果固定", "羽状叶与叶轴摆动", "根部固定 · 草叶摆动", "草叶、花瓣与花蕊微动", "附墙叶片轻摆", "茎叶与穗头摆动", "静态对照 · 枯木与苔藓固定", "香草摆动 · 木箱固定", "静态对照 · 岩石固定", "静态对照 · 石碑固定", "藤叶微动 · 木栅栏固定", "水面细微波纹 · 槽体固定", "静态对照 · 当前帆布未加风动"]
+const TITLES := ["Ancient Oak", "Birch Trio", "Columnar Cypress", "Rocky Ground Pine", "Orchard Apple Tree", "Young Maple", "Flowering Shrub", "Berry Bush", "Fern Ground Cover", "Meadow Grass", "Wildflower Clump", "Ivy Wall", "Reed Clump", "Mossy Log", "Herb Planter", "Mossy Rocks", "Road Milestone", "Vine Fence", "Stone Water Trough", "Canvas Rest Shelter"]
+const NOTES := ["Moving branch tips and leaves - fixed trunk", "Moving branches and leaves - fixed trunk", "Moving leaf clusters - fixed trunk", "Moving leaf clusters - fixed trunk", "Moving leaves - fixed fruit and main branches", "Moving leaves - fixed trunk", "Swaying leaves and petals", "Swaying leaves - fixed berries", "Swaying fronds and stems", "Fixed roots - swaying grass", "Moving grass, petals and stamens", "Gently swaying wall ivy", "Swaying stems, leaves and seed heads", "Static reference - fixed deadwood and moss", "Swaying herbs - fixed wooden planter", "Static reference - fixed rocks", "Static reference - fixed milestone", "Moving vine leaves - fixed wooden fence", "Subtle water ripples - fixed trough", "Static reference - canvas wind is not implemented"]
 var _panels: Array[Dictionary] = []
 var _frame := 0
 var _pair := -1
@@ -21,8 +21,8 @@ func _ready() -> void:
 	background.color = Color("121f25")
 	background.size = Vector2(1400,900)
 	add_child(background)
-	_title = _text(Vector2(34,25), 32, "第一层 · 20 件环境组件风动")
-	_mode = _text(Vector2(35,76), 18, "游戏引擎实录  /  正常风力  /  全貌与局部")
+	_title = _text(Vector2(34,25), 32, "Floor One - Wind Across 20 Environment Assets")
+	_mode = _text(Vector2(35,76), 18, "In-engine capture / Normal wind / Overview and close-ups")
 	_mode.modulate = Color("bdd2ce")
 	for index in range(2): _panels.append(_panel(index))
 	_progress = ColorRect.new()
@@ -131,7 +131,7 @@ func _pose(detail: bool) -> void:
 			elif index == 17: center.y = .85
 		panel.camera.position = center + direction*distance
 		panel.camera.look_at(center)
-	_mode.text = "游戏引擎实录  /  正常风力  /  %s  ·  %d / 10 组" % ["局部风动" if detail else "完整物件",_pair+1]
+	_mode.text = "In-engine capture / Normal wind / %s - Group %d / 10" % ["Wind detail" if detail else "Full asset",_pair+1]
 
 
 func _process(_delta: float) -> void:

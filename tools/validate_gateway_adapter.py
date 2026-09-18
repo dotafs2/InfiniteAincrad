@@ -16,6 +16,7 @@ import subprocess
 import sys
 import threading
 import time
+import traceback
 import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -95,6 +96,9 @@ def gateway(scenario, capture_folder=None):
                 assert body["thinking"] == {"type": "disabled"}
                 assert body["response_format"] == {"type": "json_object"}
                 assert len(body["messages"]) == 2
+                instructions = body["messages"][0]["content"]
+                assert "Use English for every natural-language output" in instructions
+                assert "Simplified Chinese" not in instructions
                 observation = body["messages"][-1]["content"]
                 assert "available_actions" in observation
                 assert all(key not in observation for key in ["gm_resources", "gm_budget", "command_payloads"])
@@ -120,7 +124,15 @@ def gateway(scenario, capture_folder=None):
                     assert "known_places is your own sourced knowledge" in body["messages"][0]["content"]
                     if expected_actor == "fictional:ember":
                         recent = personal["experiences"]
-                        assert len(recent) == 16 and all(event["type"] in ("ask_help", "cancel_help") for event in recent)
+                        # The unchanged input budget may compact longer English prose.
+                        # Verify the exact newest personal-history suffix, not a fixed
+                        # count that only happened to fit with the old Chinese rules.
+                        assert 1 <= len(recent) <= 16 and all(event["type"] in ("ask_help", "cancel_help") for event in recent)
+                        saved = json.loads((capture_folder / "world.json").read_text(encoding="utf-8"))
+                        own = [event for event in saved["life"]["events"] if expected_actor in event.get("recipient_ids", [])]
+                        immutable = ("event_id", "seq", "type", "actor_id", "recipient_ids", "operation_id")
+                        assert [{key: event.get(key) for key in immutable} for event in recent] == [
+                            {key: event.get(key) for key in immutable} for event in own[-len(recent):]]
                         notices = personal["known_skill_notices"]
                         referrals = personal["known_skill_referrals"]
                         materials = personal["material_sources"]
@@ -167,7 +179,7 @@ def gateway(scenario, capture_folder=None):
                     assert "hidden_neighbor_wallet" not in observation
                     assert "wait, draw_water, drink_water" not in body["messages"][0]["content"]
             except Exception as error:
-                calls["contract_errors"].append("POST contract: " + str(error))
+                calls["contract_errors"].append("POST contract at line %d: %s" % (traceback.extract_tb(error.__traceback__)[-1].lineno, error))
                 return self.reply(400, {"error": "fixture contract"})
             if scenario.startswith("concurrent-"):
                 if capture_folder and calls["post"] == 1:

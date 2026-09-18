@@ -161,7 +161,7 @@ func observe_journey_stall(id: String, kind: String, position_value: Vector3, el
 			record.opened_elapsed = float(_state.godot.elapsed_seconds)
 			_append_life_event({"type": "journey_stall_noticed", "actor_id": id, "subject_id": id,
 				"recipient_ids": [id], "operation_id": record.episode_id, "source": "host_physics_frame_position",
-				"kind": kind, "text": "我一直在往那个方向走，但这段路没有前进；我还没有到达。"})
+				"kind": kind, "text": "I kept trying to walk that way, but made no progress. I have not arrived."})
 	record.observed_position = [position_value.x, position_value.y, position_value.z]
 	var store := _ensure_journey_stalls()
 	store.records[record_key] = record
@@ -403,7 +403,7 @@ func _learn_place(id: String, place_id: String, source_kind: String, source_id: 
 		"operation_id": operation_id, "source": "public_notice_or_sight", "source_kind": source_kind,
 		"source_id": source_id, "place_id": place_id,
 		"source_position": [source_position.x, source_position.y, source_position.z],
-		"text": "我%s，知道%s是公共可以去的地方。" % ["读了出口的公共路牌" if source_kind == LEARN_NOTICE else "亲眼看到了那里", Catalog.place(place_id)["label"]]})
+		"text": "I %s and learned that %s is a public place I can visit." % ["read the public sign at the exit" if source_kind == LEARN_NOTICE else "saw the place myself", Catalog.place(place_id)["label"]]})
 	return true
 
 func observe_public_places(id: String, notice_visible: bool, visible_place_ids: Array) -> Dictionary:
@@ -498,13 +498,13 @@ func _close_place_job(id: String, job: Dictionary, ok: bool, code: String) -> Di
 		_append_life_event({"type": "place_visited", "actor_id": id, "subject_id": id, "recipient_ids": [id],
 			"operation_id": command_id, "source": str(job.get("provenance", "local_rule_policy")),
 			"place_id": place_id, "target_position": job.get("target_position", []).duplicate(),
-			"text": "我按自己知道的路走到了%s。" % Catalog.place(place_id)["label"]})
+			"text": "I followed the route I know and arrived at %s." % Catalog.place(place_id)["label"]})
 	else:
 		_append_life_event({"type": "travel_blocked", "actor_id": id, "subject_id": id, "recipient_ids": [id],
 			"operation_id": command_id, "source": str(job.get("provenance", "local_rule_policy")),
 			"place_id": place_id, "no_progress_seconds": float(job.get("no_progress_seconds", 0.0)),
 			"remaining_distance": position_of(id).distance_to(target) if target.is_finite() else -1.0,
-			"text": "这次去%s的路走不通，我停了下来，没有到达。" % Catalog.place(place_id)["label"]})
+			"text": "The route to %s was blocked. I stopped without arriving." % Catalog.place(place_id)["label"]})
 	return receipt
 
 func advance(delta: float) -> Dictionary:
@@ -599,12 +599,12 @@ func trade_options(id: String) -> Array:
 		if position_of(id).distance_to(target) <= Catalog.ARRIVAL_RADIUS:
 			if _can_rest_here(id):
 				_option(result, {"id": REST_PREFIX + place_id, "action": "rest",
-					"label": "在%s休息60秒，恢复精力" % entry["label"],
+					"label": "Rest at %s for 60 seconds to recover energy." % entry["label"],
 					"speech_allowed": false, "_place_id": place_id,
 					"target_position": [target.x, target.y, target.z]})
 			continue
 		_option(result, {"id": TRAVEL_PREFIX + place_id, "action": "travel",
-			"label": "走到%s并停在那里（公共地点，沿街步行）" % entry["label"],
+			"label": "Walk to %s and stay there (a public place reached along the street)." % entry["label"],
 			"speech_allowed": false, "_place_id": place_id,
 			"target_position": [target.x, target.y, target.z]})
 	return result
@@ -699,11 +699,11 @@ func resident_view(id: String = "") -> Dictionary:
 			"learned_event_id": knowledge[place_id].get("event_id", ""), "seq": knowledge[place_id].get("seq", 0)})
 	view["known_places"] = known
 	view["place_travel"] = {"arrival_radius_m": Catalog.ARRIVAL_RADIUS,
-		"note": "只有你本人读过公共路牌或亲眼见过的地点才会出现在可选动作里；步行沿已修好的街道，公共地点不产出食物、材料或存货。"}
+		"note": "Only places you have personally read about on the public sign or seen yourself appear as choices. Follow the built streets. Public places produce no food, materials or inventory."}
 	var blocked := place_travel_blocked(id)
 	if not blocked.is_empty():
 		view["unavailable_actions"].append({"action": "travel", "place_id": blocked.place_id,
-			"command_id": blocked.command_id, "reason": "这次出行已经%.1f秒没有前进，仍在等待真实到达；到达或确认走不通之前不会有到达回执。" % float(blocked.no_progress_seconds)})
+			"command_id": blocked.command_id, "reason": "This trip has made no progress for %.1f seconds and still awaits physical arrival. No arrival receipt is issued until arrival or a confirmed blocked route." % float(blocked.no_progress_seconds)})
 	return view
 
 func _validate_places(value: Dictionary) -> Dictionary:

@@ -25,8 +25,8 @@ const PlaceNotice = preload("res://spatial/town_place_notice.gd")
 const PlaceSteering = preload("res://spatial/town_place_steering.gd")
 const TownNavigation = preload("res://spatial/town_navigation.gd")
 const BREAD_SCENE_PATH := "res://assets/overnight20260918/bread_loaf.tscn"
-const DIALOGUE_IDLE_HINT := "走近居民，按 H 输入你想说的话。"
-const RESTORE_DIALOGUE_IDLE_HINT := "只读游览；开启实时 AI 生活后可与居民交谈。"
+const DIALOGUE_IDLE_HINT := "Approach a resident and press H to type what you want to say."
+const RESTORE_DIALOGUE_IDLE_HINT := "Read-only visit. Start live AI life to talk with residents."
 var town := Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
@@ -38,7 +38,7 @@ var capture_age := 0.0
 var capture_started := false
 var status: Label
 var berry_visuals: Array[Node3D] = []
-var latest := "世界已暂停。按空格继续；原事件与钱物已经载入。"
+var latest := "The world is paused. Press Space to continue; existing events and belongings are loaded."
 var dialogue: Label
 var dialogue_input: LineEdit
 var dialogue_panel: PanelContainer
@@ -51,7 +51,7 @@ var gm_status_header: Label
 var gm_status_label: Label
 var gm_status_path := ""
 var gm_status_rows: Array = []
-var gm_status_message := "未载入 GM 进展记录。"
+var gm_status_message := "No GM progress record is loaded."
 var _life_visible_before_gm := true
 var session_start_life_seq := -1
 var session_start_request_ids: Dictionary = {}
@@ -66,7 +66,7 @@ var dialogue_target := ""
 var last_public_reply_seq := -1
 var last_inquiry_seconds := -10.0
 var dialogue_fixture := false
-var fixture_inquiry_text := "这里有什么需要我帮忙的吗？"
+var fixture_inquiry_text := "Is there anything I can help with here?"
 var dialogue_fixture_done := false
 var dialogue_resident_id := ""
 var model_turns: Node
@@ -276,7 +276,7 @@ func _ready() -> void:
 		DirAccess.make_dir_recursive_absolute(capture_dir)
 		paused = restore_only
 		if not restore_only:
-			latest = "生活继续；时间只在运行时流逝"
+			latest = "Life continues; time passes only while running."
 		_refresh()
 		_camera.global_position = Vector3(0.0, 5.0, 14.0)
 		_camera.look_at(Vector3(0, 0.9, 4.0))
@@ -347,7 +347,7 @@ func _sync_residents() -> void:
 		body.add_child(title)
 		cards[id] = title
 		## Home/work marker only: the fixed saved home, never a resident's transient public rest.
-		_work_marker(town.home_point(id), str(town.resident(id).name) + " · 工作点")
+		_work_marker(town.home_point(id), str(town.resident_name(id)) + " - Workstation")
 		if gateway_mode and model_turns != null:
 			model_turns.ensure_brain(id)
 
@@ -385,7 +385,7 @@ func _ensure_foraging_layout() -> bool:
 			town.require_foraging_access(Callable(self, "_foraging_can_work"))
 	if not _spaced_foraging:
 		paused = true
-		latest = "采集工作点未通过物理检查，生活已暂停：" + str(foraging_layout_status.get("code", "invalid_layout"))
+		latest = "A foraging workstation failed its physical clearance check. Life is paused: " + str(foraging_layout_status.get("code", "invalid_layout"))
 		_refresh()
 	return _spaced_foraging
 
@@ -594,13 +594,13 @@ func _physics_process(delta: float) -> void:
 			if town_navigation != null and not nav_reaches_target:
 				## The status line stays honest: the street route is reported only when the body
 				## really has a steering direction to walk, otherwise the stop is still stated.
-				var resident_name: String = str(town.resident(id).name)
+				var resident_name: String = str(town.resident_name(id))
 				if direction.length() > 0.0:
-					latest = "%s 的导航路线到不了当前目的地，改沿街道前往。" % resident_name
+					latest = "%s cannot reach the current destination on that route; trying the street route." % resident_name
 				elif town_navigation.enabled:
-					latest = "%s 无法到达当前目的地，已停止移动。" % resident_name
+					latest = "%s cannot reach the current destination and has stopped moving." % resident_name
 				else:
-					latest = "导航地图尚未就绪，暂不移动。"
+					latest = "The navigation map is not ready. Movement is paused."
 			if not place_trip and not home_trip and not bake_trip:
 				if place_steering != null:
 					place_steering.clear_route(id)
@@ -697,16 +697,16 @@ func _physics_process(delta: float) -> void:
 		return advanced)
 	if not result.ok:
 		paused = true
-		latest = "保存失败，生活已暂停：" + str(result.code)
+		latest = "Saving failed. Life is paused: " + str(result.code)
 	else:
 		if not gm_export_path.is_empty():
 			_note_gm_export(town.maybe_write_background_gm_snapshot(gm_export_path))
 		for receipt in result.completed:
-			latest = str(town.resident(receipt.actor_id).name) + " · " + _action_label(receipt.code)
+			latest = str(town.resident_name(receipt.actor_id)) + " · " + _action_label(receipt.code)
 			actors[receipt.actor_id].set_gesture("idle")
 		if result.has("repair_step"):
 			latest = _repair_step_label(result.repair_step)
-			dialogue.text = latest + "\n（玩家促成 · 居民步骤为离线规则 · 已保存）"
+			dialogue.text = latest + "\n(Player-assisted - resident steps use offline rules - saved)"
 			if result.repair_step.code == "repair_collected" and repair_fixture:
 				paused = true
 	_refresh()
@@ -755,11 +755,11 @@ func _note_gm_export(result: Dictionary) -> void:
 	var code := str(result.get("code", "unknown"))
 	if result.get("ok", false):
 		if code == "gm_export_written":
-			gm_export_status = "GM证据已更新：%d个问题/%d个提议" % [int(result.get("issues", 0)), int(result.get("proposals", 0))]
+			gm_export_status = "GM evidence updated: %d issues / %d proposals" % [int(result.get("issues", 0)), int(result.get("proposals", 0))]
 	elif code == "gm_export_stale":
-		gm_export_status = "GM证据导出失败（沿用旧文件）：" + str(result.get("last_error", "unknown"))
+		gm_export_status = "GM evidence export failed (keeping the previous file): " + str(result.get("last_error", "unknown"))
 	else:
-		gm_export_status = "GM证据导出失败：" + code
+		gm_export_status = "GM evidence export failed: " + code
 
 func _run_model_turn(id: String) -> Dictionary:
 	# Validation cap stops BEFORE preparing another durable resident request.
@@ -777,10 +777,10 @@ func _run_model_turn(id: String) -> Dictionary:
 	if result.get("code") == "stale_controller_reply":
 		return result # An obsolete connection must not overwrite the replacement's UI.
 	if not result.ok:
-		latest = "%s 的连接待处理：%s；其他居民继续。" % [town.resident(id).name, result.code]
+		latest = "%s's connection needs attention: %s; other residents continue." % [town.resident_name(id), result.code]
 	elif result.has("actor_id"):
 		# A model's reason is private deliberation, not something it said aloud.
-		last_model_note = "%s 已作出选择。" % town.resident(result.actor_id).name
+		last_model_note = "%s has made a choice." % town.resident_name(result.actor_id)
 		if not gm_export_path.is_empty():
 			_note_gm_export(town.maybe_write_background_gm_snapshot(gm_export_path))
 	_refresh()
@@ -803,11 +803,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_SPACE:
 		if restore_only:
-			latest = "当前为只读回看；居民生活保持暂停。开启实时 AI 生活后才能继续。"
+			latest = "Read-only review: resident life stays paused. Start live AI life to continue."
 			_refresh()
 			return
 		paused = not paused
-		latest = "生活已暂停" if paused else "生活继续；时间只在运行时流逝"
+		latest = "Life is paused." if paused else "Life continues; time passes only while running."
 		_refresh()
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_H:
@@ -841,6 +841,8 @@ func _build_town_hud() -> void:
 	panel.add_theme_stylebox_override("panel", style)
 	layer.add_child(panel)
 	status = Label.new()
+	status.custom_minimum_size.x = 620
+	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	status.add_theme_font_size_override("font_size", 19)
 	panel.add_child(status)
 	dialogue_panel = PanelContainer.new()
@@ -867,7 +869,7 @@ func _build_town_hud() -> void:
 	dialogue_scroll.add_child(dialogue)
 	dialogue_input = LineEdit.new()
 	dialogue_input.max_length = 512
-	dialogue_input.placeholder_text = "Enter 发送 · Esc 取消（世界继续运行）"
+	dialogue_input.placeholder_text = "Enter to send - Esc to cancel (the world keeps running)"
 	dialogue_input.add_theme_font_size_override("font_size", 20)
 	dialogue_input.visible = false
 	dialogue_input.text_submitted.connect(_submit_dialogue)
@@ -893,7 +895,8 @@ func _build_town_hud() -> void:
 	var life_column := VBoxContainer.new()
 	life_panel.add_child(life_column)
 	var roster_title := Label.new()
-	roster_title.text = "十位居民 · 当前身体活动"
+	roster_title.text = "Ten Residents - Current Activity"
+	roster_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	roster_title.add_theme_font_size_override("font_size", 20)
 	roster_title.add_theme_color_override("font_color", Color("f0cf88"))
 	life_column.add_child(roster_title)
@@ -904,7 +907,8 @@ func _build_town_hud() -> void:
 	var separator := HSeparator.new()
 	life_column.add_child(separator)
 	var feed_title := Label.new()
-	feed_title.text = "最近公开交流 / 生活结果"
+	feed_title.text = "Recent Public Conversation / Life Events"
+	feed_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	feed_title.add_theme_font_size_override("font_size", 20)
 	feed_title.add_theme_color_override("font_color", Color("f0cf88"))
 	life_column.add_child(feed_title)
@@ -935,7 +939,7 @@ func _build_town_hud() -> void:
 	var gm_column := VBoxContainer.new()
 	gm_panel.add_child(gm_column)
 	var gm_title := Label.new()
-	gm_title.text = "十位 GM · 最近工作记录"
+	gm_title.text = "Ten GMs - Recent Work"
 	gm_title.add_theme_font_size_override("font_size", 20)
 	gm_title.add_theme_color_override("font_color", Color("f0cf88"))
 	gm_column.add_child(gm_title)
@@ -973,22 +977,22 @@ func _toggle_gm_panel() -> void:
 func _reload_gm_status() -> void:
 	gm_status_rows.clear()
 	if gm_status_path.is_empty():
-		gm_status_message = "未载入 GM 进展记录。\n此面板只显示已记录的工作结果，不推断实时状态。"
+		gm_status_message = "No GM progress record is loaded.\nThis panel shows recorded work results, not inferred live status."
 		_render_gm_status()
 		return
 	var file := FileAccess.open(gm_status_path, FileAccess.READ)
 	if file == null or file.get_length() <= 0 or file.get_length() > 262144:
-		gm_status_message = "未载入 GM 进展记录（文件不可读）。"
+		gm_status_message = "No GM progress record is loaded (file unreadable)."
 		_render_gm_status()
 		return
 	var parser := JSON.new()
 	if parser.parse(file.get_as_text()) != OK or not _valid_gm_status(parser.data):
-		gm_status_message = "未载入 GM 进展记录（格式无效或世界不匹配）。"
+		gm_status_message = "No GM progress record is loaded (invalid format or wrong world)."
 		_render_gm_status()
 		return
 	var document: Dictionary = parser.data
 	gm_status_rows = document.rows.duplicate(true)
-	gm_status_message = "快照生成：%s\n只读工作记录 · 未知结果单独标明" % _gm_short_text(str(document.generated_utc), 32)
+	gm_status_message = "Snapshot: %s\nRead-only work record - unknown results are marked separately" % _gm_short_text(str(document.generated_utc), 32)
 	_render_gm_status()
 
 func _valid_gm_status(value: Variant) -> bool:
@@ -1014,7 +1018,7 @@ func _valid_gm_status(value: Variant) -> bool:
 		for key in ["id", "focus_label", "status", "last_completed_utc", "last_public_outcome"]:
 			if typeof(row[key]) != TYPE_STRING or str(row[key]).strip_edges().is_empty():
 				return false
-		if str(row.status) not in ["观察完成", "方案评审完成", "结果未知"]:
+		if town.English.text(str(row.status)) not in ["Observation complete", "Proposal review complete", "Result unknown"]:
 			return false
 		var source_seq: Variant = row.last_source_seq
 		if typeof(source_seq) not in [TYPE_INT, TYPE_FLOAT] or float(source_seq) < 0.0 \
@@ -1035,7 +1039,7 @@ func _gm_exact_keys(value: Dictionary, expected: Array) -> bool:
 	return true
 
 func _gm_short_text(value: String, limit: int) -> String:
-	var clean := value.replace("\r", " ").replace("\n", " ").strip_edges()
+	var clean: String = town.English.text(value).replace("\r", " ").replace("\n", " ").strip_edges()
 	return clean if clean.length() <= limit else clean.left(limit - 1) + "…"
 
 func _render_gm_status() -> void:
@@ -1043,16 +1047,16 @@ func _render_gm_status() -> void:
 		return
 	gm_status_header.text = gm_status_message
 	if gm_status_rows.is_empty():
-		gm_status_label.text = "按 G 返回生活画面。"
+		gm_status_label.text = "Press G to return to the world."
 		return
 	var lines: Array[String] = []
 	for row_value in gm_status_rows:
 		var row: Dictionary = row_value
-		lines.append("%s · %s · %s\n%s · 世界序列 %d · %s" % [
+		lines.append("%s - %s - %s\n%s - World sequence %d - %s" % [
 			_gm_short_text(str(row.id), 12), _gm_short_text(str(row.focus_label), 24),
-			_gm_short_text(str(row.status), 16), _gm_short_text(str(row.last_completed_utc), 25),
+			_gm_short_text(str(row.status), 32), _gm_short_text(str(row.last_completed_utc), 25),
 			int(row.last_source_seq), _gm_short_text(str(row.last_public_outcome), 44)])
-	gm_status_label.text = "\n\n".join(lines) + "\n\n按 G 返回生活画面。"
+	gm_status_label.text = "\n\n".join(lines) + "\n\nPress G to return to the world."
 
 func _build_nameplates() -> void:
 	var overlay := TownNameplates.new()
@@ -1109,7 +1113,7 @@ func _focus_resident(id: String) -> bool:
 	_update_resident_observer()
 	resident_observer_camera.make_current()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	latest = "正在跟随 %s；再次按 N 查看下一位居民。" % town.resident(resident_focus_id).name
+	latest = "Following %s. Press N again for the next resident." % town.resident_name(resident_focus_id)
 	_refresh()
 	return true
 
@@ -1140,7 +1144,7 @@ func _focus_baking_point(point_id: String) -> bool:
 		_camera.make_current()
 		_camera.global_position = centre + Vector3(-3.4, 2.35, 4.2)
 		_camera.look_at(centre + Vector3.UP * 0.68)
-		latest = "正在查看 %s；这是存档中已安装工作点的只读画面。" % str(point.get("label", point_id))
+		latest = "Viewing %s: a read-only view of an installed workstation in the save." % str(point.get("label", point_id))
 		_refresh()
 		return true
 	return false
@@ -1157,14 +1161,14 @@ func _nearest_dialogue_resident() -> String:
 
 func _open_dialogue() -> void:
 	if restore_only:
-		dialogue.text = "当前为只读回看；开启实时 AI 生活后才能交谈。"
+		dialogue.text = "Read-only review. Start live AI life to talk."
 		_update_dialogue_panel_layout()
 		return
 	dialogue_target = _nearest_dialogue_resident()
 	if dialogue_target.is_empty():
-		dialogue.text = "离得太远了。靠近居民再交谈。"
+		dialogue.text = "Too far away. Approach a resident to talk."
 		return
-	dialogue.text = "对 %s 说：" % town.resident(dialogue_target).name
+	dialogue.text = "Say to %s: " % town.resident_name(dialogue_target)
 	dialogue_input.visible = true
 	_update_dialogue_panel_layout()
 	dialogue_input.grab_focus()
@@ -1174,7 +1178,7 @@ func _close_dialogue() -> void:
 	dialogue_input.visible = false
 	dialogue_input.release_focus()
 	dialogue_target = ""
-	if dialogue.text.begins_with("对 ") and dialogue.text.ends_with(" 说："):
+	if dialogue.text.begins_with("Say to ") and dialogue.text.ends_with(": "):
 		dialogue.text = DIALOGUE_IDLE_HINT
 	_update_dialogue_panel_layout()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -1186,46 +1190,46 @@ func _submit_dialogue(text: String) -> void:
 		dialogue_input.clear()
 		_close_dialogue()
 
-func _inquire_nearby(fixture_input: bool = false, message: String = "这里有什么需要我帮忙的吗？", target: String = "") -> bool:
+func _inquire_nearby(fixture_input: bool = false, message: String = "Is there anything I can help with here?", target: String = "") -> bool:
 	# Restore mode is a byte-preserving replay. This guard also protects direct callers
 	# and scripted capture flags; no visitor event or local-rule reply may be written.
 	if restore_only:
-		dialogue.text = "当前为只读回看；开启实时 AI 生活后才能交谈。"
+		dialogue.text = "Read-only review. Start live AI life to talk."
 		_update_dialogue_panel_layout()
 		return false
 	var now := Time.get_ticks_msec() / 1000.0
 	if now - last_inquiry_seconds < 3.0:
-		dialogue.text = "请稍等片刻再说。"
+		dialogue.text = "Please wait a moment before speaking again."
 		return false
 	var nearest := dialogue_resident_id if fixture_input else target
 	if nearest.is_empty():
 		nearest = _nearest_dialogue_resident()
 	if nearest.is_empty():
-		dialogue.text = "离得太远了。靠近居民再交谈。"
+		dialogue.text = "Too far away. Approach a resident to talk."
 		return false
 	var command := "visitor:%d" % town.command_count()
 	var result := town.transaction(_save_path, func():
 		return town.visitor_inquiry(nearest, fixture_inquiry_text if fixture_input else message, command, "scripted_player_fixture" if fixture_input else "human_player"))
 	if not result.ok:
-		dialogue.text = "交流未送达：" + str(result.code)
+		dialogue.text = "Message not delivered: " + str(result.code)
 		return false
 	last_inquiry_seconds = now
 	if gateway_mode:
-		dialogue.text = "询问已送达，居民会根据自己的处境决定是否回应。"
+		dialogue.text = "Your question was delivered. The resident will decide whether to respond."
 		return true
 	# This explicitly labelled local policy uses only the selected resident's view.
 	var view := town.resident_view(nearest)
 	var choice := "unsure"
-	var response := "暂时没有急事。我会留意工作点和口粮的情况。"
+	var response := "Nothing urgent for now. I will keep an eye on the workstation and my food."
 	if view.inventory.energy <= 50:
 		choice = "unavailable"
-		response = "我得先休息一下，等恢复精神再聊吧。"
+		response = "I need some rest first. Let's talk when I feel better."
 	elif view.inventory.food == 0:
 		choice = "willing"
-		response = "我的口粮用完了。如果你找到食物来源，我愿意一起商量。"
+		response = "I have run out of food. If you find a food source, I would like to discuss it."
 	var replied := town.transaction(_save_path, func():
 		return town.reply_to_visitor(nearest, result.request_id, choice, response, command + ":reply"))
-	dialogue.text = "%s\n%s\n（离线规则回应 · 交流已保存）" % [view.identity.name, response] if replied.ok else "回复未送达：" + str(replied.code)
+	dialogue.text = "%s\n%s\n(Offline rule response - conversation saved)" % [view.identity.name, response] if replied.ok else "Reply not delivered: " + str(replied.code)
 	_refresh()
 	return true
 
@@ -1234,10 +1238,10 @@ func _refresh_public_dialogue(events: Array, replay: bool = false) -> void:
 		if event.get("type") != "visitor_reply" or "visitor:local" not in event.get("recipient_ids", []) or int(event.get("seq", -1)) <= last_public_reply_seq:
 			continue
 		last_public_reply_seq = int(event.seq)
-		var source := "AI 居民回应" if event.get("source") == "opengameagent_live" else "离线回应"
+		var source := "AI resident reply" if event.get("source") == "opengameagent_live" else "Offline reply"
 		if replay:
-			source += " · 历史对话"
-		dialogue.text = "%s：\n%s\n（%s · 已保存）" % [town.resident(event.actor_id).name, event.get("text", ""), source]
+			source += " - Earlier conversation"
+		dialogue.text = "%s:\n%s\n(%s - saved)" % [town.resident_name(event.actor_id), event.get("text", ""), source]
 
 func _request_edge_repair(fixture_input: bool = false) -> void:
 	# Legacy Mac repair demo: offline/local_rule_policy only.
@@ -1245,10 +1249,10 @@ func _request_edge_repair(fixture_input: bool = false) -> void:
 		return
 	var candidate := town.repair_candidate("edge")
 	if candidate.is_empty():
-		dialogue.text = "当前没有材料、技能和余额都满足的待修斧刃。"
+		dialogue.text = "No pending axe-edge repair currently has the required material, skill and funds."
 		return
 	if _player.position.distance_to(town.position_of(candidate.owner_id)) > Town.HEARING_RANGE:
-		dialogue.text = "先靠近%s，再按 R 建议修理。" % town.resident(candidate.owner_id).name
+		dialogue.text = "Approach %s, then press R to suggest a repair." % town.resident_name(candidate.owner_id)
 		return
 	if fixture_input:
 		repair_initial_money = _money_total()
@@ -1258,12 +1262,12 @@ func _request_edge_repair(fixture_input: bool = false) -> void:
 		return town.propose_repair(candidate.owner_id, candidate.item_id, candidate.worker_id,
 			candidate.part, candidate.price_col, command))
 	if not result.ok:
-		dialogue.text = "修理建议未建立：" + str(result.code)
+		dialogue.text = "Could not create the repair suggestion: " + str(result.code)
 		return
 	paused = false
-	dialogue.text = "%s提出修刃委托；%s将按离线规则决定是否接下。\n（%s · 不是模型调用）" % [town.resident(candidate.owner_id).name,
-		town.resident(candidate.worker_id).name, "脚本玩家输入" if fixture_input else "玩家介入"]
-	latest = "玩家促成了一份待回应的修刃委托"
+	dialogue.text = "%s proposed an edge repair; %s will decide using offline rules.\n(%s - no model call)" % [town.resident_name(candidate.owner_id),
+		town.resident_name(candidate.worker_id), "Scripted player input" if fixture_input else "Player intervention"]
+	latest = "The player helped propose an edge repair; awaiting a reply."
 	_refresh()
 
 func _repair_route_target(id: String) -> Vector3:
@@ -1304,10 +1308,10 @@ func _progress_repair() -> Dictionary:
 	return {"ok": true, "code": "repair_waiting"}
 
 func _repair_step_label(result: Dictionary) -> String:
-	return {"repair_accept": "修理工接受委托，费用已预留",
-		"repair_delivered": "柴斧已当面交到修理岗位",
-		"repair_work_started": "修理工开始修刃（60 秒）",
-		"repair_collected": "修好的柴斧已归还，2 Col 已结算"}.get(result.code, str(result.code))
+	return {"repair_accept": "The worker accepted the request. Payment is reserved.",
+		"repair_delivered": "The hatchet was handed over at the repair station.",
+		"repair_work_started": "The worker started repairing the edge (60 seconds).",
+		"repair_collected": "The repaired hatchet was returned and 2 Col was paid."}.get(result.code, str(result.code))
 
 func _has_active_repair() -> bool:
 	for id in town.active_ids():
@@ -1332,28 +1336,28 @@ func _work_material_total(material: String) -> int:
 func _refresh() -> void:
 	var snap := town.snapshot()
 	_refresh_public_dialogue(snap.life.events)
-	var mode_label := "独立 AI 连接（每人单独等待）" if gateway_mode else "离线生活规则"
+	var mode_label := "Independent AI connections (each resident waits separately)" if gateway_mode else "Offline life rules"
 	if scripted_trade:
-		mode_label = "脚本化交易验收（无模型调用）"
+		mode_label = "Scripted trade validation (no model calls)"
 	if restore_only:
-		mode_label = "暂停回看 · 不调用 AI · 正在查看已保存进展"
+		mode_label = "Paused review - no AI calls - showing saved progress"
 	elif gateway_mode and not scripted_trade:
-		mode_label = ("实时生活已暂停 · 暂停发起新行动 · 进展自动保存" if paused
-			else "实时生活中 · 按需调用 AI · 进展自动保存")
+		mode_label = ("Live life paused - no new actions - progress saves automatically" if paused
+			else "Live life - AI calls as needed - progress saves automatically")
 	if repair_fixture and not gateway_mode and not restore_only:
-		mode_label = "离线自动修理演示（local_rule_policy）"
-	var title := "交易流程测试 · 非原镇存档" if str(snap.world_id).begins_with("fixture:") else "艾恩葛朗特第一层 · 生活街区"
+		mode_label = "Offline automatic repair demo (local_rule_policy)"
+	var title := "Trade workflow test - not the original town save" if str(snap.world_id).begins_with("fixture:") else "Aincrad Floor One - Living Quarter"
 	if not str(snap.world_id).begins_with("fixture:") and (bool(snap.godot.get("new_world_seed", false)) or str(snap.get("origin", {}).get("kind", "")) == "new_world_seed"):
-		title = "艾恩葛朗特第一层 · 原创生活街区"
+			title = "Aincrad Floor One - Living Quarter"
 	var repair_text := ""
 	if not snap.life.get("contracts", []).is_empty():
 		var contract: Dictionary = snap.life.contracts[-1]
-		repair_text = " · 修理：%s · %s" % [_repair_part_label(contract.part), _repair_status_label(contract.status)]
+		repair_text = " - Repair: %s - %s" % [_repair_part_label(contract.part), _repair_status_label(contract.status)]
 	var gm_text := "" if gm_export_status.is_empty() else "\n" + gm_export_status
-	var controls := "V 总览/返回 · N 跟随居民 · M 生活窗 · G GM进展 · WASD 行走 · ESC 释放" if restore_only else "空格 暂停/继续 · WASD 行走 · H 询问 · N 跟随居民 · M 生活窗 · G GM进展 · ESC 释放"
-	var resident_line := "%d 位居民在场 · %s" % [town.active_ids().size(), mode_label] \
-		if (gateway_mode and not scripted_trade) or restore_only else "%d 个存档身份 · %d 人活动 · %s" % [snap.residents.size(), town.active_ids().size(), mode_label]
-	status.text = "%s\n%s\n%s\n%s\n公共浆果 %d / %d · 生活事件 %d%s%s" % [title, resident_line, controls, latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text, gm_text]
+	var controls := "V overview/return - N follow - M life log - G GM progress - WASD move - Esc mouse" if restore_only else "Space pause/resume - WASD move - H talk - N follow - M life log - G GM progress - Esc mouse"
+	var resident_line := "%d residents present - %s" % [town.active_ids().size(), mode_label] \
+		if (gateway_mode and not scripted_trade) or restore_only else "%d saved identities - %d active - %s" % [snap.residents.size(), town.active_ids().size(), mode_label]
+	status.text = "%s\n%s\n%s\n%s\nPublic berries %d / %d - Life events %d%s%s" % [title, resident_line, controls, latest, snap.foraging.stock, snap.foraging.capacity, snap.life.seq, repair_text, gm_text]
 	var axe: Dictionary = {}
 	for item in snap.life.get("items", []):
 		if item.get("kind") == "axe":
@@ -1368,7 +1372,7 @@ func _refresh() -> void:
 		var a := town.account(id)
 		var job: Dictionary = town.pending_job(id)
 		var held: String = str(held_lines.get(id, ""))
-		var base := "%s\n%s · 口粮 %d" % [town.resident(id).name, "休整" if job.is_empty() else _action_label(job.action), a.food]
+		var base := "%s\n%s - Rations %d" % [town.resident_name(id), "Idle" if job.is_empty() else _action_label(job.action), a.food]
 		cards[id].text = base if held.is_empty() else base + "\n" + held
 		if nameplates != null and nameplates.has_method("set_card_hidden"):
 			nameplates.set_card_hidden(id, true)
@@ -1416,22 +1420,22 @@ func _refresh_life_window(snap: Dictionary) -> void:
 	var resident_turns: Dictionary = snap.godot.get("resident_turns", {})
 	for id in town.active_ids():
 		var job: Dictionary = town.pending_job(id)
-		var activity := "休整" if job.is_empty() else _action_label(str(job.get("action", "")))
+		var activity := "Idle" if job.is_empty() else _action_label(str(job.get("action", "")))
 		var moving := false
 		var body: CharacterBody3D = bodies.get(id)
 		if is_instance_valid(body):
 			moving = Vector2(body.velocity.x, body.velocity.z).length() > 0.05
 		if moving:
-			activity += " · 行走中"
+			activity += " - Walking"
 		var turn_note := ""
 		if gateway_mode or restore_only:
 			var turn: Variant = resident_turns.get(id, {})
-			var turn_status := str(turn.get("status", "尚无记录")) if turn is Dictionary else "尚无记录"
+			var turn_status := str(turn.get("status", "No records yet")) if turn is Dictionary else "No records yet"
 			var request_id := str(turn.get("request_id", "")) if turn is Dictionary else ""
 			var current_run := not request_id.is_empty() and request_id != str(session_start_request_ids.get(id, ""))
-			var when := "本次" if current_run else "历史"
-			turn_note = " · " + {"pending": "%s正在独立决定" % when, "settled": "%s决定已结算" % when, "provider_error": "%s连接失败待后续" % when}.get(turn_status, "%s%s" % [when, turn_status])
-		roster_lines.append("%s  %s%s" % [str(town.resident(id).name), activity, turn_note])
+			var when := "Current " if current_run else "Past "
+			turn_note = " · " + {"pending": "%sdecision in progress" % when, "settled": "%sdecision settled" % when, "provider_error": "%sconnection failed; follow-up needed" % when, "No records yet": "No decisions recorded"}.get(turn_status, "%s%s" % [when, turn_status])
+		roster_lines.append("%s  %s%s" % [str(town.resident_name(id)), activity, turn_note])
 	life_roster.text = "\n".join(roster_lines)
 
 	var feed_lines: Array[String] = []
@@ -1445,30 +1449,30 @@ func _refresh_life_window(snap: Dictionary) -> void:
 		var actor_id := str(row.get("actor_id", ""))
 		var actor_name := actor_id
 		if actor_id in town.active_ids():
-			actor_name = str(town.resident(actor_id).name)
-		var words := str(row.get("speech", row.get("text", ""))).strip_edges().replace("\n", " ")
+			actor_name = str(town.resident_name(actor_id))
+		var words: String = town.English.text(str(row.get("speech", row.get("text", "")))).strip_edges().replace("\n", " ")
 		var is_new := int(row.get("seq", -1)) > session_start_life_seq
-		var source := ("本次AI" if is_new else "历史AI") if row.get("source", "") == "opengameagent_live" else ("本次世界" if is_new else "历史世界")
+		var source := ("Current AI" if is_new else "Past AI") if row.get("source", "") == "opengameagent_live" else ("Current world" if is_new else "Past world")
 		if not words.is_empty():
 			if words.length() > 72:
 				words = words.left(72) + "…"
-			feed_lines.push_front("[%s · #%d] %s：%s" % [source, int(row.get("seq", -1)), actor_name, words])
+			feed_lines.push_front("[%s - #%d] %s: %s" % [source, int(row.get("seq", -1)), actor_name, words])
 		elif kind in ["eat_ration", "harvest_ration", "rest", "bread_baked", "bread_eaten", "repair_completed", "resident_moved", "place_visited"]:
 			feed_lines.push_front("[%s · #%d] %s · %s" % [source, int(row.get("seq", -1)), actor_name, _action_label(kind)])
 		if feed_lines.size() >= 5:
 			break
-	life_feed.text = "\n\n".join(feed_lines) if not feed_lines.is_empty() else "还没有可公开展示的事件。"
+	life_feed.text = "\n\n".join(feed_lines) if not feed_lines.is_empty() else "No public events to display yet."
 
 func _action_label(action: String) -> String:
-	return {"eat_ration": "进食", "rest": "休息", "harvest_ration": "采集", "approach": "走近交谈", "deliver": "交付工具", "work": "修理", "collect": "取回工具", "use_tool": "使用工具", "recover_material": "整理余料", "material_recovered": "已取得材料", "material_depleted": "余料已取完，本次未取得", "bake_bread": "烤面包", "bread_baked": "烤好一个自己的面包", "bread_eaten": "吃掉自己烤的面包", "baking_point_observed": "看到公共烤炉", "baking_route_installed": "公共烤炉已就位", "repair_edge": "修刃", "repair_handle": "修柄", "repair_completed": "修理完成", "resources_unavailable": "资源不足，未完成"}.get(action, action)
+	return {"eat_ration": "Eating", "rest": "Resting", "harvest_ration": "Foraging", "approach": "Approaching to talk", "deliver": "Delivering a tool", "work": "Repairing", "collect": "Collecting a tool", "use_tool": "Using a tool", "recover_material": "Sorting offcuts", "material_recovered": "Material collected", "material_depleted": "Stock exhausted; nothing collected", "bake_bread": "Baking bread", "bread_baked": "Baked a loaf of their own", "bread_eaten": "Ate their own bread", "baking_point_observed": "Saw the public oven", "baking_route_installed": "Public oven ready", "repair_edge": "Edge repair", "repair_handle": "Handle repair", "repair_completed": "Repair complete", "resources_unavailable": "Insufficient resources; unfinished"}.get(action, action)
 
 func _repair_part_label(part: String) -> String:
-	return "斧刃" if part == "edge" else "斧柄"
+	return "axe edge" if part == "edge" else "axe handle"
 
 func _repair_status_label(value: String) -> String:
-	return {"proposed": "待回应", "accepted": "已接单/费用预留", "delivered": "已交付/修理中",
-		"completed": "已完成/待取回", "collected": "已归还/已付款", "rejected": "已拒绝",
-		"cancelled": "已取消"}.get(value, value)
+	return {"proposed": "Awaiting reply", "accepted": "Accepted / payment reserved", "delivered": "Delivered / repair in progress",
+		"completed": "Completed / awaiting collection", "collected": "Returned / paid", "rejected": "Declined",
+		"cancelled": "Cancelled"}.get(value, value)
 
 func _work_marker(point: Vector3, title: String) -> void:
 	var marker := Label3D.new()
@@ -1482,7 +1486,7 @@ func _work_marker(point: Vector3, title: String) -> void:
 
 func _build_berry_patch() -> void:
 	var point := town.berry_center()
-	_work_marker(point, "公共浆果地")
+	_work_marker(point, "Public Berry Patch")
 	for i in 3:
 		var bush := MeshInstance3D.new()
 		var foliage := SphereMesh.new()

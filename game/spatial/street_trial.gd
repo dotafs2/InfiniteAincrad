@@ -102,7 +102,7 @@ func _ready() -> void:
 		_evidence["restored"] = true
 		_evidence["restored_without_repeat"] = _water_consumed() == 1
 		_smoke_stage = 99
-		_update_status("已恢复同一身份与经历；饮水没有重复转移。")
+		_update_status("Restored the same identity and experiences; drinking did not transfer water twice.")
 	if OS.get_cmdline_user_args().has("--visitor-encounter"):
 		var encounter: Node = load("res://spatial/visitor_encounter.gd").new()
 		add_child(encounter)
@@ -185,7 +185,7 @@ func _process_resident(delta: float) -> void:
 	elif _phase == ResidentPhase.DRINKING and not _waiting_after_decision and _side_decision_requested and _water_consumed() > 0 and _phase_elapsed > 1.1:
 		_phase = ResidentPhase.COMPLETE
 		_persist_world("complete")
-		_update_status("谢谢你的绳子和桶。喝过水，舒服多了。")
+		_update_status("Thank you for the rope and bucket. I feel much better after a drink.")
 		_evidence["completed"] = true
 
 func _move_resident_to(target: Vector3, delta: float) -> void:
@@ -214,9 +214,9 @@ func _submit_need_at_well() -> void:
 		_evidence["need_source"] = "fixture_resident_observation"
 		_evidence["decision_source"] = result.get("provenance", "unknown")
 		_persist_world("need")
-		_update_status(str(result.get("_decision_reason", "井水够不到，我需要帮忙。")) + "  走近按 E 帮忙。")
+		_update_status(str(result.get("_decision_reason", "I cannot reach the well water. I need help.")) + "  Approach and press E to help.")
 	elif not bool(result.get("ok", false)):
-		_show_error("记录 need 失败：" + str(result.get("code", "unknown")))
+		_show_error("Could not record the need: " + str(result.get("code", "unknown")))
 	elif result.get("code") == "resident_waited":
 		_enter_decision_wait(result, "initial_wait")
 
@@ -225,7 +225,7 @@ func _request_draw_after_install() -> void:
 		return
 	var result: Dictionary = await _ask_resident()
 	if not bool(result.get("ok", false)):
-		_show_error("安装后决策失败：" + str(result.get("code", "unknown")))
+		_show_error("Decision after installation failed: " + str(result.get("code", "unknown")))
 		return
 	var code := str(result.get("code", ""))
 	if code == "resident_waited":
@@ -235,9 +235,9 @@ func _request_draw_after_install() -> void:
 		_phase_elapsed = 0.0
 		_resident.set_gesture("carry")
 		_persist_world("draw")
-		_update_status("取到水了。我去旁边歇一会儿。")
+		_update_status("I have some water. I will rest nearby.")
 	else:
-		_show_error("安装后动作未完成：" + code)
+		_show_error("Action after installation did not finish: " + code)
 
 func _request_drink_at_side() -> void:
 	if _side_decision_requested:
@@ -245,7 +245,7 @@ func _request_drink_at_side() -> void:
 	_side_decision_requested = true
 	var result: Dictionary = await _ask_resident()
 	if not bool(result.get("ok", false)):
-		_show_error("饮水决策失败：" + str(result.get("code", "unknown")))
+		_show_error("Drinking decision failed: " + str(result.get("code", "unknown")))
 		return
 	var code := str(result.get("code", ""))
 	if code == "resident_waited":
@@ -253,9 +253,9 @@ func _request_drink_at_side() -> void:
 		_enter_decision_wait(result, "rest_wait")
 	elif code == "water_consumed" and str(result.get("action", "")) == "drink_water":
 		_resident.set_gesture("drink")
-		_update_status("水带到身边了，先喝一口。")
+		_update_status("I have the water with me. Time for a drink.")
 	else:
-		_show_error("休息处动作未完成：" + code)
+		_show_error("Action at the rest spot did not finish: " + code)
 
 func _enter_decision_wait(result: Dictionary, reason: String) -> void:
 	_waiting_after_decision = true
@@ -270,10 +270,10 @@ func _enter_decision_wait(result: Dictionary, reason: String) -> void:
 		_evidence["deferred_wait_started"] = _elapsed
 		_evidence["decision_requests_at_wait"] = _decision_requests
 		_persist_world("deferred_wait")
-		_update_status(str(result.get("_decision_reason", "水桶已经装好了，但我现在想先等一等。")))
+		_update_status(str(result.get("_decision_reason", "The bucket is installed, but I would rather wait for now.")))
 	else:
 		_persist_world(reason)
-		_update_status(str(result.get("_decision_reason", "我先歇一会儿。")))
+		_update_status(str(result.get("_decision_reason", "I will rest for a while.")))
 		if reason == "rest_wait":
 			_deferred_wait_started = _elapsed
 			_evidence["waited_with_water_started"] = _elapsed
@@ -300,34 +300,34 @@ func _try_player_help(automatic: bool) -> void:
 		return
 	var near_well: bool = _player.global_position.distance_to(WELL_POSITION + Vector3(0.0, 1.0, 0.0)) < 3.0
 	if not near_well:
-		_update_status("请走近井边再按 E。")
+		_update_status("Approach the well before pressing E.")
 		return
 	_help_attempted = true
-	var review: Dictionary = _kernel.gm_review_need("street-gm-review", "approve", "well_bucket", "玩家在井边提供绳与桶，满足已记录的取水需要。")
+	var review: Dictionary = _kernel.gm_review_need("street-gm-review", "approve", "well_bucket", "The player supplied a rope and bucket at the well, addressing the recorded need for water access.")
 	_evidence["need_approval"] = review.duplicate(true)
 	if not bool(review.get("ok", false)):
-		_show_error("GM 审查未通过：" + str(review.get("code", "unknown")))
+		_show_error("GM review did not pass: " + str(review.get("code", "unknown")))
 		return
 	var manifest: Dictionary = _load_manifest()
 	if manifest.is_empty():
-		_show_error("缺少市场能力清单，安装已停止。")
+		_show_error("The market capability manifest is missing. Installation stopped.")
 		return
 	var install: Dictionary = _kernel.gm_install(manifest, "street-gm-install", "street-gm-review")
 	_evidence["need_install"] = install.duplicate(true)
 	if bool(install.get("ok", false)):
 		_spawn_hanging_bucket()
 		_persist_world("install")
-		_update_status("绳子和桶装好了，现在可以安全取水了。")
+		_update_status("The rope and bucket are installed. Water can now be drawn safely.")
 		_request_draw_after_install()
 	else:
-		_show_error("安装未完成：" + str(install.get("code", "unknown")))
+		_show_error("Installation did not finish: " + str(install.get("code", "unknown")))
 
 func _load_or_create_world() -> void:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_save_path).get_base_dir())
 	var locked: Dictionary = _kernel.acquire_writer(_save_path)
 	if not locked.get("ok", false):
 		_persistence_writable = false
-		_show_error("这个测试存档已被另一个窗口占用。")
+		_show_error("Another window is already using this test save.")
 		return
 	_owns_writer = true
 	var load_result: Dictionary
@@ -336,14 +336,14 @@ func _load_or_create_world() -> void:
 		load_result = _kernel.load_from(_save_path)
 		if not bool(load_result.get("ok", false)):
 			_persistence_writable = false
-			_world_error = "存档损坏或不受支持，已禁止写入：" + str(load_result.get("code", "unknown"))
+			_world_error = "The save is corrupt or unsupported. Writes are disabled: " + str(load_result.get("code", "unknown"))
 			_show_error(_world_error)
 			return
 	else:
 		var created: Dictionary = _kernel.create_fixture()
 		if not bool(created.get("ok", false)):
 			_persistence_writable = false
-			_show_error("fixture 创建失败。")
+			_show_error("Could not create the fixture.")
 			return
 		_persist_world("fixture")
 
@@ -353,7 +353,7 @@ func _persist_world(reason: String) -> void:
 	var saved: Dictionary = _kernel.save_to(_save_path)
 	if not bool(saved.get("ok", false)):
 		_persistence_writable = false
-		_show_error("世界保存失败，后续写入已停止：" + str(saved.get("code", "unknown")))
+		_show_error("Could not save the world. Further writes have stopped: " + str(saved.get("code", "unknown")))
 	else:
 		_evidence["last_save_reason"] = reason
 
@@ -482,17 +482,17 @@ func _load_market_runtime() -> void:
 	_market_root.name = "MarketGLTFRuntime"
 	add_child(_market_root)
 	if not ResourceLoader.exists(MARKET_GLB):
-		_show_error("找不到市场 GLB：" + MARKET_GLB)
+		_show_error("Market GLB not found: " + MARKET_GLB)
 		_evidence["market_import_error"] = "asset_missing"
 		return
 	var scene_resource: PackedScene = load(MARKET_GLB) as PackedScene
 	if scene_resource == null:
-		_show_error("市场导入资源无法读取。")
+		_show_error("Cannot read the imported market resource.")
 		_evidence["market_import_error"] = "imported_scene_missing"
 		return
 	var instance: Node = scene_resource.instantiate()
 	if instance == null:
-		_show_error("市场导入资源未生成场景。")
+		_show_error("The imported market resource did not produce a scene.")
 		_evidence["market_import_error"] = "generate_failed"
 		return
 	instance.name = "StartingTownMarketCraftV5"
@@ -503,7 +503,7 @@ func _load_market_runtime() -> void:
 
 func _hide_proxy_visuals_and_build_collision(node: Node, inherited_hidden: bool) -> void:
 	var lower_name: String = str(node.name).to_lower()
-	var is_proxy: bool = lower_name.contains("col_") or lower_name.contains("collision") or lower_name.contains("代理")
+	var is_proxy: bool = lower_name.contains("col_") or lower_name.contains("collision") or lower_name.contains("Agent")
 	var is_static_person: bool = lower_name.contains("visual_person")
 	var hidden_visual: bool = inherited_hidden or is_proxy or is_static_person
 	if hidden_visual:
@@ -687,7 +687,7 @@ func _build_hud() -> void:
 	_status_label.add_theme_constant_override("shadow_offset_x", 2)
 	_status_label.add_theme_constant_override("shadow_offset_y", 2)
 	var label := Label.new()
-	label.text = "起始之城 · 街角的井    |    " + ("预算网关决策 · 独立测试世界" if _brain_mode == "gateway" else "离线行为演示")
+	label.text = "Town of Beginnings - The Corner Well | " + ("Budget gateway decisions - independent test world" if _brain_mode == "gateway" else "Offline behavior demo")
 	label.position = Vector2(24, 112)
 	label.add_theme_font_size_override("font_size", 16)
 	label.add_theme_color_override("font_shadow_color", Color.BLACK)
@@ -698,7 +698,7 @@ func _build_hud() -> void:
 	_debug_label.add_theme_color_override("font_color", Color("#b9e2d0"))
 	_debug_label.visible = false
 	layer.add_child(_debug_label)
-	_update_status("WASD 移动 · 点击后鼠标观察 · ESC 释放 · 井边 E 帮忙")
+	_update_status("WASD move - Click to look - Esc release mouse - E help at the well")
 
 func _update_status(message: String) -> void:
 	if _status_label != null:
@@ -707,7 +707,7 @@ func _update_status(message: String) -> void:
 func _show_error(message: String) -> void:
 	_world_error = message
 	if _status_label != null:
-		_status_label.text = "错误：" + message
+		_status_label.text = "Error: " + message
 		_status_label.add_theme_color_override("font_color", Color("#ff9d8e"))
 	if _smoke_mode:
 		var errors: Array = _evidence.get("errors", [])

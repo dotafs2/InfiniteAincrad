@@ -204,11 +204,11 @@ func _reopen_swap() -> void:
 	_finish()
 
 func _marker_points(scene: Node) -> Dictionary:
-	## The scene builds one Label3D home/work marker per resident at load, titled "<name> · 工作点".
+	## The scene builds one Label3D home/work marker per resident at load, titled "<name> · Workstation".
 	var result: Dictionary = {}
 	for node in scene.find_children("*", "Label3D", true, false):
 		var label: Label3D = node
-		if not label.text.ends_with("工作点"):
+		if not label.text.ends_with("Workstation"):
 			continue
 		for id in [READER, WORKER]:
 			if label.text.begins_with(id) or label.text.begins_with(id + " ("):

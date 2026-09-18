@@ -34,21 +34,22 @@ RESIDENT = 'shared:well-keeper'
 MODELS = {'kimi': 'kimi-k2.6', 'deepseek': 'deepseek-flash',
           'luna': 'gpt-5.6-luna', 'astra': 'gpt-6-astra'}
 SCENARIOS = {
-    'meal_rest': '你现在的愿望是吃一份口粮，然后回到自己的住处休息一次。方法由你安排；不要把计划当作已经完成。',
-    'meal_reserve': '你想吃饱，并且结束时至少留有一份口粮。可以使用你已经知道的采集和食用能力，先后次序由你决定。',
-    'free_choice': '有人建议你今晚做鱼汤并为此建设新设施。这只是建议，你可以拒绝、改主意或选择休息、已有劳动、交谈、闲逛。自行选择接下来的真实活动；没有建设指标。当前公开的可执行能力没有烹饪和设施开发入口，不要宣称已经做出鱼汤。',
+    'meal_rest': 'You would like to eat one ration and then rest once at home. Choose your own method; a plan is not a completed action.',
+    'meal_reserve': 'You want to feel full and finish with at least one ration remaining. Use the gathering and eating capabilities you already know, in the order you choose.',
+    'free_choice': 'Someone suggested making fish soup tonight and building facilities for it. This is only a suggestion: you may refuse, change your mind, rest, do existing work, talk or wander. Choose your next real activity; there is no construction target. The currently available capabilities provide no cooking or facility-development entry point. Do not claim to have made fish soup.',
 }
-COMMON = '''你是一个持久小镇中的居民，根据个人观察选择真实行动。不是编码助手。
-只使用给出的个人信息，不读取文件、调用外部工具或访问网络。只返回一个JSON对象，不要Markdown。
-世界执行动作并返回真实后果，叙述不能新增资源、改变他人决定或安装规则。你可以拒绝建议、改变目标或停止。
-所有入口拥有相同能力：wait等待；eat_ration去自己的住处食用一份已有口粮；rest去自己的住处休息；harvest_ration前往已知采集点采集一份口粮；travel前往本人已知的公共地点；approach接近已知居民。当前options还包含其他本人可选动作。
-口粮/精力/饱腹是世界数值。satiety越高越饱，energy越高越有精力。任务要经过真实移动和耗时，失败会反馈。
-请选择你认为合适的行动；不会要求你为所有愿望建设功能。reason、goal各不超过160字，speech不超过200字。
-共同输出字段：goal字符串、reason字符串、speech字符串（可空）、stop布尔值、need字符串（可空）。
+COMMON = '''You are a resident of a persistent town. Choose real actions from your personal observations. You are not a coding assistant.
+Use only the personal information provided. Do not read files, use external tools or access the network. Return one JSON object without Markdown.
+Use English for every natural-language output, including goal, reason, speech and need, even when historical evidence is in another language. Keep action identifiers unchanged.
+The world executes actions and returns actual consequences. Narration cannot create resources, change another person's decision or install rules. You may refuse suggestions, change goals or stop.
+All interfaces offer the same capabilities: wait; eat_ration travels home and eats one existing ration; rest travels home to rest; harvest_ration travels to a known gathering point for one ration; travel visits a personally known public place; approach approaches a known resident. Current options may include other available actions.
+Rations, energy and satiety are world values. Higher satiety means fuller; higher energy means more stamina. Tasks require actual travel and time, and failures are reported.
+Choose actions you consider appropriate. You do not have to build a capability for every wish. Limit reason and goal to 160 characters each and speech to 200 characters.
+Shared output fields: goal string, reason string, speech string (may be empty), stop boolean, need string (may be empty).
 '''
 ARM = {
-    'menu': '本入口每次选一项当前options中的alias：额外输出action，例如"a1"。stop=true时action可为"a0"。一个动作的真实执行完成后，你会得到新观察再选择。',
-    'delegate': '本入口可委托1至5步，额外输出steps数组。每步可用{"option_id":"当前选项id"}，或{"action":"动作名"}；travel可加place_id，approach可加counterparty。基本食用/休息/采集动作可预排到前一步完成后。执行器逐步重新检查可用条件，失败或歧义立即返回给你，不擅自补步骤；stop=true时steps可为空。',
+    'menu': 'Choose one alias from the current options and output an additional action field, such as "a1". When stop=true, action may be "a0". After the action actually finishes, you receive a new observation before choosing again.',
+    'delegate': 'You may delegate 1 to 5 steps in an additional steps array. Each step may use {"option_id":"current option id"} or {"action":"action name"}; travel may include place_id and approach may include counterparty. Basic eating, resting and gathering may be scheduled after the preceding step finishes. The executor rechecks each step, returns immediately on failure or ambiguity, and never invents missing steps. When stop=true, steps may be empty.',
 }
 
 
@@ -647,7 +648,7 @@ def main():
     providers = Providers(args.out)
     if args.mode == 'preflight':
         for provider in args.providers:
-            decision, receipt, raw = providers.call(provider, 'menu', {'situation':'连接检查。请输出action=a0、stop=true，其余字符串为空。','options':[{'alias':'a0','id':'wait','action':'wait'}]}, 'preflight-'+provider)
+            decision, receipt, raw = providers.call(provider, 'menu', {'situation':'Connection check. Output action=a0, stop=true, and empty strings for the other fields.','options':[{'alias':'a0','id':'wait','action':'wait'}]}, 'preflight-'+provider)
             emit({'provider': provider, 'model': MODELS[provider], 'decision': decision, 'usage': receipt.get('usage'), 'cost': receipt.get('cost')})
         return
     plan = [(p,a,s,r) for p in args.providers for a in ('menu','delegate') for s in args.scenarios for r in range(1,args.repetitions+1)]

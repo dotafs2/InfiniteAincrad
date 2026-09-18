@@ -71,7 +71,7 @@ func _update_source(source_id: String, label_text: String, stock: int) -> void:
 	var entry: Dictionary = sources[source_id]
 	var display: Node3D = entry["display"]
 	var label: Label3D = entry["label"]
-	label.text = "%s\n剩余：%d" % [label_text, stock]
+	label.text = "%s\nRemaining: %d" % [label_text, stock]
 	var bundle_count := mini(5, stock)
 	for index in 5:
 		display.get_child(index + 1).visible = index < bundle_count

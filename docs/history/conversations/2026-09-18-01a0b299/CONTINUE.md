@@ -1,15 +1,18 @@
-# 本机任务接续（2026-09-18）
+# Continue this local task (2026-09-18)
 
-- 目录：`C:\InfiniteAincrad`；交付分支：`codex/overnight-20260918-delivery`；接收基线：`9fcd05c`。
-- 用户要求继续工作、确保上传对话历史、遇到卡点及时告知。原 seq450 世界、GM 状态和费用账本仍在另一台电脑，已明确要求先离线修复；不新开付费运行，不用测试世界冒充原世界。
-- H104：预览每次增量构建和资源导入；50 项 Python、306 项 Godot 验证及独立预览恢复通过。
-- H105：完整路线图、179 项本机流程检查、实际身体行走／劳动中退出／重启续做／完整冷恢复通过。居民与 GM 决策为脚本；上游真实 10+10 证据与本机演练分开。完整报告在 `docs/validation/local-flow-2026-09-18.md`，图在同名子目录 `flowchart.html`。
-- H106：导航旧API与半径取整警告已修复；179项完整流程复跑、10项几何等价、14项身体实走通过；16栋街区40条导航路线和64项门窗检查通过。新对比测试的异步地图时序失败保留，显式同步后两次通过。详见 `docs/validation/navigation-and-history-2026-09-18.md`。
-- 对话：首次42条原文快照提交 `a269842` 并从GitHub下载校验，结束前继续增量刷新；最新范围以同目录 `manifest.json` 为准，不能只看首次条数。下一轮的消息、未写出的最终答复不在已上传快照里。
-- 当前具体待办：16栋街区仍报4处导航边缘合并重合，原9fcd05c同档对照同样出现，路径与门窗回执逐项相同；继续定位重合边和贡献碰撞体，不能关闭警告掩盖问题。GPU退出／粒子故障仍未关闭。
-- 历史限制：长期供需／拥挤、居民自然口粮转交、面粉再生、持续自主 GM 开发、GPU 退出／粒子问题均未证明完成。原 GM01 最近回访超时未知不可清零或重放。
-- 后续顺序：离线导航／启动稳定性 → 原资料到位后真实供需和自愿互助 → 可持续生产与职业 → 减少人工阶段接力 → 首镇体验、冒险、楼层与普通 VR 样板。
-- 保护已有 `.dsh-home/`、`.dsh-runtime/`、`deepseek-harness/`、插件探针、原 stash 和私有资料；这些不属于本轮上传。已生成且运行所需的 Godot 导入文件不能为了状态好看直接删掉。
-- 搜索限定目录和结果；除用户明确授权外不派子代理；测试/辅助进程记录 PID 并清理自己的进程，保留用户要求打开的浏览器。
+- Workspace: `C:/InfiniteAincrad`; branch: `codex/overnight-20260918-delivery`; morning intake: `9fcd05c`; last upload before English work: `4678180`.
+- The user requests continued work, reliable upload of visible conversation history, and notification of blockers. The original seq450 world, GM memory and ledgers remain on another computer. The user explicitly chose offline fixes. Do not start a new paid run or substitute a test world for the original.
+- Language: game names, dialogue, UI, authored model inputs, Kimi/GM natural-language outputs, new project documents and the current flowchart use English. Our conversation stays Chinese. Preserve original archives/historical evidence. Known legacy names use English aliases without changing stable IDs or canonical saves. Unknown historical free text remains verbatim.
+- H104: incremental build/import on every preview preparation; 50 Python and 306 Godot checks passed at that milestone.
+- H105: complete workflow diagram and offline physical rehearsal, interrupted exit, restart and exact cold restore; 179 normal-stage checks. Resident/GM choices were scripted fixtures. See `docs/validation/local-flow-2026-09-18.md`.
+- H106: deprecated navigation bake API and radius-rounding warnings fixed; geometry equivalence, body walking and full workflow checked. Sixteen-house navigation passed 40 routes and 64 door/window checks, retaining four overlapping-edge warnings. See `docs/validation/navigation-and-history-2026-09-18.md`.
+- H107: English runtime/UI/names/prompts and roadmap. 43 Python tests, 512 focused Godot checks, 40 real-quarter UI checks, 6 loopback cases and 179 full-workflow checks passed. Limits unchanged. Longer English triggers existing compaction sooner; the fixture retains the exact latest 4 informed-personal events, with full canonical history preserved. See `docs/validation/english-rollout-2026-09-18.md` and its `checks.json`.
+- Current diagram: `docs/validation/local-flow-2026-09-18/flowchart.html` (English, 36 nodes, standalone zoomable HTML; SVG/PNG alongside). The previous full roadmap is archived byte-for-byte in `docs/history/roadmap-before-english-20260918.md`.
+- Next offline work: locate the four overlapping navigation edges and contributing collision geometry; keep the warning visible. Earlier GPU-exit/particle faults remain open. Do not silently begin timed jobs or retry loops.
+- After original records return: observe demand, congestion and voluntary food gifts in that same world; then sustainable production/professions, less manual stage coordination, first-town experience, adventure/floors and conventional VR. Sustained autonomy remains unproven. The original GM01 timeout/cost uncertainty must not be cleared or replayed without its evidence.
+- Preserve unrelated `.dsh-home/`, `.dsh-runtime/`, `deepseek-harness/`, plugin probes, existing stash and private data. Do not delete required generated Godot imports merely to clean Git status.
+- Bound searches; no subagents unless explicitly requested. Record and clean only owned helper/engine processes. Retain browser windows the user requested.
 
-每次接续先读本文件、ROADMAP.md 顶部、HISTORY.md 最新条目及本目录 manifest.json，再按需读取对话原文。当前快照只覆盖 manifest 中明确列出的时间范围，不能声称恢复了其他任务的全部对话。
+Read this file, current ROADMAP.md, the newest HISTORY.md entry and this directory's manifest before continuing. Retrieve only relevant messages. The archive covers this task and the manifest's exact time range, not every local task or the other computer's conversations.
+
+Before each authorized push, refresh the existing visible-message archive from the exact session, inspect staged paths, and verify the remote commit plus downloaded archive hashes. Messages are append-only. Exclude raw logs, internal reasoning, system/tool output, credentials and private world/GM/billing state. A final answer written after an export enters the next incremental refresh.

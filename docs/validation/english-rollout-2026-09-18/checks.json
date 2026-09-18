@@ -1,0 +1,362 @@
+{
+  "language": "English",
+  "real_paid_model_calls": 0,
+  "subagents": 0,
+  "python_tests": 43,
+  "python_status": "passed",
+  "godot_suites": [
+    {
+      "suite": "town_english",
+      "checks": 20,
+      "failures": 0,
+      "stdout_sha256": "749a6742102a8c0a0c8ecdf30becd0e38d8e0d0b70d6a1089835c53881ec67d3",
+      "local_log": "C:\\InfiniteAincrad\\private\\english-20260918\\godot-passing\\town_english_acceptance.stdout.log"
+    },
+    {
+      "suite": "town_gm_status_ui",
+      "checks": 16,
+      "failures": 0,
+      "stdout_sha256": "f2ad708359fcca888eacb90ad700cdda44dca8685a087ea6de66e892fb52fc72",
+      "local_log": "C:\\InfiniteAincrad\\private\\english-20260918\\godot-passing\\gm-status-final.stdout.log"
+    },
+    {
+      "suite": "town_basic_needs_rule",
+      "checks": 3,
+      "failures": 0,
+      "stdout_sha256": "38bc8f928718dc7411d713a378752f65673fafe45f76f6a144103582fad6f892",
+      "local_log": "C:\\InfiniteAincrad\\private\\english-20260918\\godot-passing\\town_basic_needs_rule_acceptance.stdout.log"
+    },
+    {
+      "suite": "town_food_handoff",
+      "checks": 12,
+      "failures": 0,
+      "stdout_sha256": "4b2be07ffb781a74dcf002a3a33b052a87cc53d5f468a4b38377593b3749955d",
+      "local_log": "C:\\InfiniteAincrad\\private\\english-20260918\\godot-passing\\town_food_handoff_acceptance.stdout.log"
+    },
+    {
+      "suite": "town_restore_read_only",
+      "checks": 11,
+      "failures": 0,
+      "stdout_sha256": "8b0bede526ce84c399e20e4c8f6cba49f17eb2385c3fef63175cc1691d184e70",
+      "local_log": "C:\\InfiniteAincrad\\private\\english-20260918\\godot-passing\\town_restore_read_only_acceptance.stdout.log"
+    },
+    {
+      "suite": "town_places_rules_acceptance",
+      "checks": 67,
+      "failures": 0,
+      "stdout_sha256": "6c1cc66eef1931d99f89bbb3f919d5b28a698ca7a4377dfa3e18c88ec19f50c4",
+      "local_log": "C:\\InfiniteAincrad\\private\\english-20260918\\godot-passing\\town_places_rules_acceptance.stdout.log"
+    },
+    {
+      "suite": "town_turns",
+      "checks": 36,
+      "failures": 0,
+      "stdout_sha256": "f9a8fe29b1ed54930553143d705e7668f10b4e4ac82cf3df397124d9f182cc25",
+      "local_log": "C:\\InfiniteAincrad\\private\\english-20260918\\godot-passing\\town_turns_acceptance.stdout.log"
+    },
+    {
+      "suite": "town_baking_route",
+      "checks": 63,
+      "failures": 0,
+      "stdout_sha256": "3275af6a75d53f14a698d6d9d2100b9d29b71b16798aa04f9d538bab5dfc3674",
+      "local_log": "C:\\InfiniteAincrad\\private\\english-20260918\\godot-passing\\town_baking_route_acceptance.stdout.log"
+    },
+    {
+      "suite": "resident_brain_context_budget",
+      "checks": 8,
+      "failures": 0,
+      "stdout_sha256": "94b3bcacfb187928f12943c0911fb31bbd6ee8ef9addb61084e2b39b40d29248",
+      "local_log": "C:\\InfiniteAincrad\\private\\english-20260918\\godot-passing\\context-budget.stdout.log"
+    },
+    {
+      "suite": "home-lookup-final",
+      "checks": 13,
+      "failures": 0,
+      "stdout_sha256": "e476d910198a5390dedf89cff0c32f34991c2bdcb18408de19391f340e95edd1",
+      "local_log": "C:\\InfiniteAincrad\\private\\english-20260918\\home\\home-lookup-final.stdout.log"
+    },
+    {
+      "suite": "town_merge_acceptance",
+      "checks": 200,
+      "failures": 0,
+      "stdout_sha256": "fa9ecb419cbebea55a118e9da0bb47f481b9b7b56288e89864e2dc5607122625",
+      "local_log": "C:\\InfiniteAincrad\\private\\english-20260918\\merge\\merge-final.stdout.log"
+    },
+    {
+      "suite": "town_trade",
+      "checks": 63,
+      "failures": 0,
+      "stdout_sha256": "8714015900b3121bb48e75a93005bac85a0f5275c15eb5328d98acbe9af9c8a2",
+      "local_log": "C:\\InfiniteAincrad\\private\\english-20260918\\godot-passing\\trade-text-final.stdout.log"
+    }
+  ],
+  "godot_checks": 512,
+  "ui": {
+    "checks": 40,
+    "failures": [],
+    "names": [
+      "Ari",
+      "Wren",
+      "Flint",
+      "Rowan",
+      "Mara",
+      "Heath",
+      "Fern",
+      "Iris",
+      "Reed",
+      "Sage"
+    ],
+    "paid_calls": 0,
+    "screenshots": [
+      "town-english-1280x800.png",
+      "town-english-1600x900.png"
+    ],
+    "suite": "town_english_ui",
+    "world_save_byte_equal": true
+  },
+  "screenshots": [
+    {
+      "file": "town-english-1280x800.png",
+      "rendered_size": [
+        1244,
+        800
+      ],
+      "sha256": "9ecd26a8b268fa206fe9835662dab33ce347ace21629541f20e7887941a50aa2"
+    },
+    {
+      "file": "town-english-1600x900.png",
+      "rendered_size": [
+        1400,
+        900
+      ],
+      "sha256": "9ae3ba608d6929e5f14c2d53719dac126d3a576d04f81862b910756face3ce82"
+    }
+  ],
+  "offline_chain": {
+    "stages": [
+      {
+        "stage": "prepare",
+        "checks": 59,
+        "failure_count": 0,
+        "receipt_sha256": "b2198c4d76a8cf5df4acf023cfa4a8035fa86f79da99407895d5a44d86edc1d6"
+      },
+      {
+        "stage": "release",
+        "checks": 20,
+        "failure_count": 0,
+        "receipt_sha256": "aaf334a708f39e002820d8332223d1c2f7146b2ace81ce73f425e5d5a5578c97"
+      },
+      {
+        "stage": "continue",
+        "checks": 14,
+        "failure_count": 0,
+        "receipt_sha256": "9893173c47fe58fade884bc90ac38a49587d9cad9c300ca200aef3c9e823ca47"
+      },
+      {
+        "stage": "cold",
+        "checks": 21,
+        "failure_count": 0,
+        "receipt_sha256": "4e64c856502f2ecf6db8d92e72ec81c8fcd2a4ddec0940dcc29e533f39056263"
+      },
+      {
+        "stage": "inspect",
+        "checks": 4,
+        "failure_count": 0,
+        "receipt_sha256": "90dd9cb262820856d1960bb246351788cffff3fa6278b3f160833f84186073ba"
+      },
+      {
+        "stage": "street-start",
+        "checks": 32,
+        "failure_count": 0,
+        "receipt_sha256": "e85a5719e2834c70979c3cf3071b43499e7cbdfe41be01fc080a8d103e567da2"
+      },
+      {
+        "stage": "street-finish",
+        "checks": 25,
+        "failure_count": 0,
+        "receipt_sha256": "44ab24a5e281386c3d51612a9f508e8ac529a26ea9c3852b0102de72b7851571"
+      },
+      {
+        "stage": "final-inspect",
+        "checks": 4,
+        "failure_count": 0,
+        "receipt_sha256": "5806b5a28b86729ec6701414c6aba481d684583d24925715e82f9ee69664bd9e"
+      }
+    ],
+    "checks": 179,
+    "real_model_calls": 0,
+    "body_count": 10,
+    "sample_count": 128,
+    "pending_labor_survived_new_process": true,
+    "final_cold_restore_equal": true,
+    "final_save_sha256": "17025d629e6c0ca12c021d5ea4908c5e5215ae5c690e9536054353a8f1857dbf",
+    "source_stock_after": 1,
+    "source_recovered_total": 2,
+    "native_engine_crash_observed": false,
+    "local_evidence": "C:\\InfiniteAincrad\\tmp\\gpt6-sprint\\integration\\english-20260918"
+  },
+  "loopback_gateway": {
+    "cases": [
+      {
+        "case": "success-0",
+        "passed": true,
+        "get": 1,
+        "post": 1,
+        "contract_errors": []
+      },
+      {
+        "case": "success-1",
+        "passed": true,
+        "get": 1,
+        "post": 1,
+        "contract_errors": []
+      },
+      {
+        "case": "town-0",
+        "passed": true,
+        "get": 1,
+        "post": 1,
+        "contract_errors": []
+      },
+      {
+        "case": "unicode-context-0",
+        "passed": true,
+        "get": 1,
+        "post": 1,
+        "contract_errors": []
+      },
+      {
+        "case": "town-history-0",
+        "passed": true,
+        "get": 1,
+        "post": 1,
+        "contract_errors": [],
+        "world_sha256": "3967f40c21f76b03aba938727f9e84e7626391b011d5b6769e47a6930caccfe6"
+      },
+      {
+        "case": "town-history-1",
+        "passed": true,
+        "get": 3,
+        "post": 3,
+        "contract_errors": [],
+        "world_sha256": "0c7e3c4943bd624bd5be8b4407e44c0bbaf95138b9b3b9a5df1ac227a1e35e57"
+      }
+    ],
+    "historical_context_counts": [
+      {
+        "file": "wire-1.json",
+        "resident_id": "fictional:ember",
+        "recent_event_count": 4
+      },
+      {
+        "file": "wire-2.json",
+        "resident_id": "fictional:ember",
+        "recent_event_count": 4
+      },
+      {
+        "file": "wire-3.json",
+        "resident_id": "fictional:forge",
+        "recent_event_count": 2
+      }
+    ],
+    "real_upstream_requests": 0
+  },
+  "source_audit": {
+    "seed_checks": [
+      {
+        "function": "fixture",
+        "changed_paths": [
+          "/residents/0/name",
+          "/residents/0/story",
+          "/residents/0/personality",
+          "/residents/1/name",
+          "/residents/1/story",
+          "/residents/1/personality",
+          "/residents/2/name",
+          "/residents/2/story",
+          "/residents/2/personality"
+        ],
+        "all_other_values_equal": true,
+        "creation_timestamp_normalized_for_comparison": false
+      },
+      {
+        "function": "shared_world_seed",
+        "changed_paths": [
+          "/residents/0/name",
+          "/residents/0/story",
+          "/residents/0/personality",
+          "/residents/0/runtime/capability_note",
+          "/residents/1/name",
+          "/residents/1/story",
+          "/residents/1/personality",
+          "/residents/1/runtime/capability_note",
+          "/residents/2/name",
+          "/residents/2/story",
+          "/residents/2/personality",
+          "/residents/2/runtime/capability_note",
+          "/residents/3/name",
+          "/residents/3/story",
+          "/residents/3/personality",
+          "/residents/3/runtime/capability_note",
+          "/residents/4/name",
+          "/residents/4/story",
+          "/residents/4/personality",
+          "/residents/4/runtime/capability_note",
+          "/residents/5/name",
+          "/residents/5/story",
+          "/residents/5/personality",
+          "/residents/5/runtime/capability_note",
+          "/residents/6/name",
+          "/residents/6/story",
+          "/residents/6/personality",
+          "/residents/6/runtime/capability_note",
+          "/residents/7/name",
+          "/residents/7/story",
+          "/residents/7/personality",
+          "/residents/7/runtime/capability_note",
+          "/residents/8/name",
+          "/residents/8/story",
+          "/residents/8/personality",
+          "/residents/8/runtime/capability_note",
+          "/residents/9/name",
+          "/residents/9/story",
+          "/residents/9/personality",
+          "/residents/9/runtime/capability_note"
+        ],
+        "all_other_values_equal": true,
+        "creation_timestamp_normalized_for_comparison": true
+      }
+    ],
+    "layout_changed_paths": [
+      "/connections/0/name",
+      "/connections/1/name"
+    ],
+    "layout_sha256": "ce07c9b501db6259aa8c5c5865c30a96d633000bcd93d391e9bef6df194b5fae",
+    "runtime_files_checked": 74,
+    "noncomment_han_lines": [],
+    "scope": [
+      "game/core",
+      "game/agents",
+      "game/spatial",
+      "game/ui",
+      "game/experiments",
+      "game/capabilities",
+      "game/scenes"
+    ],
+    "historical_translation_keys_excluded": true
+  },
+  "roadmap": {
+    "nodes": 36,
+    "previous_full_document_sha256": "c39c7dbdc9705575b993642a93469a1e749e72d2230c3611453e35854bd9fe40",
+    "previous_full_document_byte_equal": true,
+    "current_html_sha256": "1c0603f2bbd26c816901b3f62f186e49893e41330086f807b23e4c1f6b4e6a38"
+  },
+  "known_limitations": [
+    "Original seq450, GM memory and cost ledgers remain on another computer.",
+    "Known legacy aliases only; arbitrary historical free text remains verbatim.",
+    "Mock transport proves request contract, not actual model output compliance.",
+    "Four existing navigation edge-overlap errors are still reported as a warning in the quarter.",
+    "Offline scripted world choices do not establish autonomous NPC/GM activity.",
+    "Earlier renderer exit/particle issues are not closed."
+  ]
+}

@@ -56,7 +56,7 @@ func capture_street(scene: Node, label: String) -> void:
 	camera.global_position = Vector3(0, 7, 15)
 	camera.look_at(Vector3(0, 1, 6))
 	var hud: Label = scene.get("status")
-	hud.text = "同一十人世界 · 离线脚本选择 / 实际物理与存档\n石青走向余铁并整理；灯姐休息\n%s · 铁料库存 %d · 石青铁 %d\n无模型调用；不是自主10+10" % [label, source_stock(), town._trade_account(SMITH).iron]
+	hud.text = "Same ten-resident world - Scripted choices / Real physics and saves\nFlint walks to the iron offcuts and works; Mara rests\n%s - Iron stock %d - Flint's iron %d\nNo model calls; not autonomous 10+10" % [label, source_stock(), town._trade_account(SMITH).iron]
 	await RenderingServer.frame_post_draw
 	var path: String = args.out.get_base_dir().path_join(label + ".png")
 	check(root.get_texture().get_image().save_png(path) == OK, "actual rendered frame saved: " + label)

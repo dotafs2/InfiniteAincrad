@@ -189,7 +189,7 @@ func run() -> void:
 	# 6. Options now appear only for the learner's own knowledge, with no other resident's data.
 	var option := travel_option(A, "caravan_rest")
 	check(not option.is_empty(), "a known place becomes a travel option")
-	check(str(option.get("label", "")).contains("商队休息区") and str(option.get("label", "")).contains("步行"),
+	check(str(option.get("label", "")).contains("Caravan Rest Ground") and str(option.get("label", "")).contains("Walk"),
 		"the option label states the public place and that it is a walk")
 	var view := _town.resident_view(A)
 	check(view.get("known_places", []).size() == Catalog.place_ids().size(), "the resident view lists its own known places")
