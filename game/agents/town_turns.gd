@@ -50,12 +50,13 @@ var shutdown_wait_limit := 45.0
 var shutdown_wait_seconds := 0.0
 var shutdown_wait_timed_out := false
 
-func configure(world, path: String) -> void:
+func configure(world, path: String, enable_brains: bool = true) -> void:
 	town = world
 	save_path = path
 	max_parallel = _configured_gateway_concurrency()
-	for id in town.active_ids():
-		ensure_brain(id)
+	if enable_brains:
+		for id in town.active_ids():
+			ensure_brain(id)
 
 func _configured_gateway_concurrency() -> int:
 	var config_path := OS.get_environment("AINCRAD_GATEWAY_RUN_CONFIG")

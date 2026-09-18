@@ -1,0 +1,85 @@
+{
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 0,
+  "end_seq": 43,
+  "resident_count": 10,
+  "returned_model_decisions": 32,
+  "full_profiles_preserved": true,
+  "first_episode": {
+    "start_utc": "2026-09-18T08:26:35.808950+00:00",
+    "end_utc": "2026-09-18T08:31:18.469651+00:00",
+    "process_seconds": 282.664,
+    "world_seconds": 269.700000000003,
+    "original_tool_status": "passed",
+    "audited_duration_status": "incomplete: live pause selected the old three-second timeout; original passed result is insufficient",
+    "decisions": 32,
+    "engine_exit": 0,
+    "all_requests_settled": true,
+    "recoverable_waits": {
+      "shared:baker": {
+        "status": "recoverable_wait",
+        "source_status": "rule_rejection",
+        "code": "option_unavailable",
+        "replan_policy": "stale_option_v1",
+        "next_due": 1920.9
+      }
+    },
+    "checkpoint_seq": 42
+  },
+  "continuous_followup": {
+    "start_utc": "2026-09-18T08:37:57.959024+00:00",
+    "end_utc": "2026-09-18T08:48:11.026997+00:00",
+    "process_seconds": 613.075,
+    "shutdown": {
+      "admission_closed": true,
+      "admission_closed_reason": "episode_duration_elapsed",
+      "capture_reason": "episode_duration_elapsed",
+      "capture_seconds": 600.006798666418,
+      "duration_fulfilled": true,
+      "exit_code": 0,
+      "in_flight": [],
+      "paused_at_capture": false,
+      "paused_seconds": 0.0,
+      "requested_seconds": 600.0,
+      "resident_requests_owed": [],
+      "resolved": true,
+      "running_seconds": 600.006798666418,
+      "timed_out": false,
+      "wait_limit_seconds": 45.0,
+      "waited_seconds": 0.0
+    },
+    "new_model_requests": 0,
+    "pending_tasks_at_end": 0,
+    "meaning": "Ten continuous minutes of existing actions and physiology; model admission remains disabled after the 32-request cap."
+  },
+  "cost": {
+    "accounting": "Existing cumulative ledger tariff; not a live account invoice.",
+    "episode_cap_cny": 3,
+    "new_charge_cny": 0.5280753,
+    "prior_charge_cny": 3.7226209,
+    "cumulative_charge_cny": 4.2506962,
+    "original_rows": 186,
+    "original_rows_unchanged": true,
+    "guard_unchanged": true,
+    "new_requests": 32,
+    "states": {
+      "settled": 218
+    },
+    "unknown_or_reserved_requests": 0
+  },
+  "verification": {
+    "python_checks": 50,
+    "godot_shutdown_checks": 50,
+    "godot_read_only_checks": 11,
+    "initial_genesis_restore": true,
+    "final_exact_cold_restore": "See cold-restore.json",
+    "navigation_overlap_warning_count": 4,
+    "paid_calls_in_followup_or_tests": 0,
+    "owned_engine_and_gateway_processes_remaining": 0
+  },
+  "limitations": [
+    "No GM agent was run; exported issues are evidence, not implemented capabilities.",
+    "Original seq450 and its GM state are still on another computer.",
+    "No independent free-chat action, executable shared plan or long-term relationship reducer was established."
+  ]
+}

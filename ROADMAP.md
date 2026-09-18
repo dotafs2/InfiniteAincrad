@@ -4,7 +4,7 @@ Language policy: the game, resident names, dialogue, Kimi/GM instructions and th
 
 Current milestone: a recoverable ten-resident / ten-GM loop. Bounded live participation and bread adoption were recorded upstream. Local offline workflow checks pass, but sustained unattended autonomy, long-term food supply and natural ration sharing remain unproven.
 
-The latest original world is seq450 on another computer, together with its GM memory and cost ledgers. Work on this machine remains offline. A fresh preview or test world never substitutes for that history.
+The user explicitly restarted the active simulation at seq0 in `shared:restart-20260918-01`. Its full checkpoints and decision evidence live under [worlds/](worlds/README.md); the original seq450 world and GM memory remain a separate lineage on another computer. The existing cumulative Kimi ledger was recovered locally and continues without reset. API credentials stay local.
 
 ## Current work
 
@@ -13,6 +13,8 @@ The latest original world is seq450 on another computer, together with its GM me
 - **H106:** uploaded a verifiable conversation archive; replaced the deprecated navigation bake API and made the existing effective clearance explicit. The workflow passed again with no engine warnings. The sixteen-house layout passed 40 routes and 64 door/window checks, but still reports four overlapping navigation edges, also reproduced with the previous code.
 - **H107:** switch authored game text, names, prompts and the current flowchart to English. Known legacy names are displayed through aliases; stable identities and original save records remain intact. Validation and screenshots are recorded in the English rollout report.
 - **H108:** enrich all ten original seed residents with complete, distinct character dossiers: 21 sections, 12 descriptive dimensions, six core fields and eight situational facets each. Their own bounded profile reaches decisions; full dormant details persist. Original seq450 migration, independent conversation and evidence-backed relationship growth remain pending.
+
+- **H109:** user-authorized fresh world, 32 real Kimi decisions, a pause/early-success fix, and a continuous ten-minute follow-up of existing actions without further model calls. Per-resident decisions and full sequence migration are retained. Read the [Chinese observation report](worlds/restart-20260918-01/report.zh-CN.md) and [run evidence](docs/validation/resident-observation-2026-09-18.md).
 
 [Character-depth review](docs/design/character-depth-review-2026-09-18.md) · [All ten complete dossiers](docs/design/resident-dossiers.md) · [Character validation](docs/validation/character-depth-2026-09-18.md)
 
@@ -57,7 +59,7 @@ flowchart TB
     end
     subgraph CURRENT["2. Where we are now"]
         M20["M20 Recoverable 10-resident + 10-GM loop<br/>Bounded live examples exist; sustained unattended operation does not"]
-        H103["H103 Morning remote delivery received: 9fcd05c<br/>Upstream seq450, real bread adoption and cold restore<br/>Original save and ledgers remain on another computer"]
+        H103["H103 Morning remote delivery received: 9fcd05c<br/>Upstream seq450, real bread adoption and cold restore<br/>Original world remains on another computer"]
         H104["H104 Stale preview cache fixed<br/>50 Python and 306 Godot offline checks passed"]
         H105["H105 Complete local offline rehearsal passed<br/>Need, 10 fixture GM contexts, candidate review and installation<br/>Physical work, interrupted exit, resume and final cold restore"]
         H105A["Resource-error false success fixed<br/>Build/import before rehearsal; inspect engine logs"]
@@ -65,7 +67,8 @@ flowchart TB
         H106["H106 Conversation archive uploaded and verified<br/>Navigation API/radius warnings fixed; 179 workflow checks passed<br/>40 quarter routes passed; overlapping-edge warning remains"]
         H107["H107 English game text and model instructions<br/>English names, dialogue, UI and flowchart<br/>Stable IDs and original historical evidence preserved"]
         H108["H108 Rich original character dossiers for ten seed residents<br/>21 stored sections; bounded self profile reaches decisions<br/>Existing-world migration and social growth remain pending"]
-        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108
+        H109["H109 User-requested fresh seq0 world<br/>32 live decisions; interrupted first window<br/>Ten-minute continuation; full checkpoints and Chinese report"]
+        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109
         H103 --> M20
     end
     A83Save -.Bounded live evidence.-> M20
@@ -76,9 +79,9 @@ flowchart TB
         M20G["Improve entering and observing the world<br/>Overlapping navigation edges, renderer exit, characters,<br/>animation and performance"]
         H47["Reduce manual handoffs between stages<br/>GM delivery, same-save life and actual-effect follow-up<br/>Longer runs, fault isolation and controlled costs"]
         H82["Participant-directed development<br/>Residents identify needs, choose construction, use or decline it<br/>Externally assigned goals are not autonomous invention"]
-        H103 -->|Observe live after private records arrive| M20C
-        H108 -->|Next character and social increment| M20S
-        H108 -->|Continue offline engineering| M20G
+        H109 -->|Continue the new world with full history| M20C
+        H109 -->|Turn actual conversation into executable cooperation| M20S
+        H109 -->|Fix observed world constraints| M20G
         M20S --> H82
         M20C --> H47 --> H82
     end
@@ -102,7 +105,7 @@ flowchart TB
     classDef done fill:#dcfce7,stroke:#15803d,color:#14532d;
     classDef partial fill:#fff1d6,stroke:#b45309,color:#78350f;
     classDef future fill:#f1f5f9,stroke:#64748b,color:#0f172a;
-    class H103,H104,H105,H105A,H105B,H106,H107,H108 done;
+    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109 done;
     class M20,M20C,M20G,H47,H82,A83Entry,A83Scene,A83NPC,A83Move,A83Core,A83Evidence,A83GM,A83Candidate,A83Review,A83Release,A83Use,A83Feedback,A83Stop,A83Save,A83Fault partial;
     class M20S,N5,P,N6,N7,N8,N9,XR,N10,R future;
 ```
@@ -111,6 +114,6 @@ flowchart TB
 
 The local workflow uses scripted resident and GM choices with actual Godot physics and persistence. It installs configuration for an existing finite resource source; it does not prove that a GM invented a new mechanic. Model requests in the offline work: zero.
 
-The first priority after the original records return is to observe resource demand, congestion and voluntary food handoffs in that same world. Expand sustainable production and professions based on actual needs, then reduce manual coordination. A complete first town precedes adventure, meaningful floor progression and long-term multiplayer operation.
+The active new world already exposes specific gaps: iron supply for a requested repair, weaving/animal-care/cultivation opportunities, executable joint plans, and stale target handling. The first priority is to connect these observed desires to valid world actions and evidence-backed social continuity. The paid window reached 32 requests and then paused early. A separate ten-minute continuation observes existing work without new decisions; it is not proof of unlimited conversation or long-term autonomy. Keep every sequence and model reply when continuing this same world. The separate original seq450 lineage can be migrated when its actual records return. Expand sustainable production and professions based on actual needs, then reduce manual coordination. A complete first town precedes adventure, meaningful floor progression and long-term multiplayer operation.
 
 Historical references remain available in the [previous full roadmap](docs/history/roadmap-before-english-20260918.md) and the [H1-H104 diagram archive](docs/validation/roadmap-history-through-h104.md). They are dated evidence, not competing current plans. [HISTORY.md](HISTORY.md) preserves the chronological record, including failures and user corrections.

@@ -1,0 +1,254 @@
+{
+  "boundaries": {
+    "consumed_by_npc_model": false,
+    "contains_other_resident_memories": false,
+    "contains_private_reply_reason": false,
+    "image_analysis": false,
+    "note": "world-scoped evidence for a separate GM process only"
+  },
+  "counts": {
+    "issues": 8,
+    "proposals": 0
+  },
+  "evidence": [
+    {
+      "delivered_text": "Thank you, Mara. I'd like that—looking around together, I mean. I haven't asked at the stalls yet; I wasn't sure who might be the right person to approach. Your eye for who comes and goes would help me spot the right patterns.",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_25",
+      "event_provenance": "",
+      "event_source": "opengameagent_live",
+      "event_type": "ask_help",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_25",
+      "operation_id": "turn:shared:weaver:0:3",
+      "recipient_ids": [
+        "shared:weaver",
+        "shared:innkeeper"
+      ],
+      "request_ref": "godot_help:turn:shared:weaver:0:3",
+      "seq": 25,
+      "speaker_id": "shared:weaver",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "I can do the work. Need to be straight with you though—I'm out of iron at the moment. If you've got a bar or know where to get one, we can settle terms. Otherwise I'll have to source it first.",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_27",
+      "event_provenance": "",
+      "event_source": "opengameagent_live",
+      "event_type": "reply_help",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_27",
+      "operation_id": "turn:shared:smith:0:4",
+      "recipient_ids": [
+        "shared:smith",
+        "shared:carpenter"
+      ],
+      "request_ref": "godot_help:turn:shared:carpenter:0:3",
+      "seq": 27,
+      "speaker_id": "shared:smith",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "I'm willing. Let's talk terms—my axe edge is down to twenty, and I need it back to full. What's your price, and when can you deliver?",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_29",
+      "event_provenance": "",
+      "event_source": "opengameagent_live",
+      "event_type": "reply_help",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_29",
+      "operation_id": "turn:shared:carpenter:0:4",
+      "recipient_ids": [
+        "shared:carpenter",
+        "shared:smith"
+      ],
+      "request_ref": "godot_help:turn:shared:smith:0:3",
+      "seq": 29,
+      "speaker_id": "shared:carpenter",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "Iris, since we're looking together—could you tell me what I'd actually be watching for? I know faces and comings and goings, but I wouldn't spot a loom or a spool if it walked past me. What should my eyes be hunting for?",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_30",
+      "event_provenance": "",
+      "event_source": "opengameagent_live",
+      "event_type": "ask_help",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_30",
+      "operation_id": "turn:shared:innkeeper:0:4",
+      "recipient_ids": [
+        "shared:innkeeper",
+        "shared:weaver"
+      ],
+      "request_ref": "godot_help:turn:shared:innkeeper:0:4",
+      "seq": 30,
+      "speaker_id": "shared:innkeeper",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "A loom has a frame with threads stretched in rows—warp, they call it—and a shuttle that moves back and forth through them. You might also look for someone carrying spindles, or bobbins, or baskets of dyed wool. Even a wooden frame with threads hanging from it would be worth a clo",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_31",
+      "event_provenance": "",
+      "event_source": "opengameagent_live",
+      "event_type": "reply_help",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_31",
+      "operation_id": "turn:shared:weaver:0:4",
+      "recipient_ids": [
+        "shared:weaver",
+        "shared:innkeeper"
+      ],
+      "request_ref": "godot_help:turn:shared:innkeeper:0:4",
+      "seq": 31,
+      "speaker_id": "shared:weaver",
+      "status": "observed",
+      "text_truncated": true,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "Rowan. My turn to be straight—I need iron to repair that edge, and I need to eat. One Col for the work, plus you cover the iron cost or we find another trade. What say you?",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_35",
+      "event_provenance": "",
+      "event_source": "opengameagent_live",
+      "event_type": "ask_help",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_35",
+      "operation_id": "turn:shared:smith:0:5",
+      "recipient_ids": [
+        "shared:smith",
+        "shared:carpenter"
+      ],
+      "request_ref": "godot_help:turn:shared:smith:0:5",
+      "seq": 35,
+      "speaker_id": "shared:smith",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "Flint, my axe edge is down to twenty. Can you repair it? I have eight Col and can pay on collection.",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_36",
+      "event_provenance": "",
+      "event_source": "opengameagent_live",
+      "event_type": "ask_help",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_36",
+      "operation_id": "turn:shared:carpenter:0:5",
+      "recipient_ids": [
+        "shared:carpenter",
+        "shared:smith"
+      ],
+      "request_ref": "godot_help:turn:shared:carpenter:0:5",
+      "seq": 36,
+      "speaker_id": "shared:carpenter",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "Thank you, Iris—that's clearer now. Shall we walk through the stalls together? I'll keep an eye out for that frame-and-shuttle motion you described.",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_38",
+      "event_provenance": "",
+      "event_source": "opengameagent_live",
+      "event_type": "reply_help",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_38",
+      "operation_id": "turn:shared:innkeeper:0:5",
+      "recipient_ids": [
+        "shared:innkeeper",
+        "shared:weaver"
+      ],
+      "request_ref": "godot_help:turn:shared:weaver:0:3",
+      "seq": 38,
+      "speaker_id": "shared:innkeeper",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    }
+  ],
+  "kind": "background_gm_evidence_snapshot",
+  "limits": {
+    "evidence_limit": 64,
+    "proposal_limit": 32
+  },
+  "projection_note": "bounded GM-visible projection; the canonical accepted-need record stays in the world's private turn journal",
+  "proposals": [],
+  "schema_version": 1,
+  "source_revision": {
+    "godot_elapsed_seconds": 869.549999999985,
+    "life_seq": 43,
+    "proposal_sequence": 0,
+    "world_elapsed_seconds": 869.549999999985
+  },
+  "world_id": "shared:restart-20260918-01"
+}

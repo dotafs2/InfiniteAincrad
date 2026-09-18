@@ -2,6 +2,16 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-18 · H109 Fresh world, real resident decisions and complete sequence transfer
+
+The user explicitly restarted all ten villagers at seq0, chose ten minutes of observation, required every decision summarized in Chinese, and permitted transfer of non-secret records while keeping the API key local. The active world is now `shared:restart-20260918-01`; original seq450 and GM history remain a separate lineage on another machine. The local Kimi configuration and existing 186-row cumulative ledger were recovered from the old UE project, verified and backed up without reset.
+
+A bounded real Kimi run produced 32 decisions by all ten residents, seq42 and CNY 0.5280753 in new ledger charges (218 settled rows total; no uncertainty). It stopped after 282.664 wall seconds, because the live pause path reused the three-second restore timeout; the old tool's passed result was insufficient. Fixed that branch, active/paused duration evidence and success classification. Continued the same saved world for a separate uninterrupted ten-minute headless interval with zero new model admission, retaining the 32-request cap. Iris's remaining rest completed at seq43. This is not ten minutes of uninterrupted new model conversation.
+
+Added exact full-history checkpoint migration and per-resident evidence reporting, separate proposed/delivered speech and accepted/completed actions, cumulative-ledger episode caps, a Chinese report of all 32 choices, an active-world pointer and 39-node English roadmap. Verification includes 50 Python checks, 50 Godot shutdown checks, genesis and final production cold restore, complete profile/event/reply continuity and unchanged original fee rows. The full sequence lineage and safe receipts may be published; secrets and raw ledgers remain local.
+
+Observed gaps are iron supply and repair contracting, real weaving/cultivation/animal/fishing opportunities, executable shared plans, independent conversation and stale-choice recovery. No GM agent developed anything in this run. Existing four navigation overlap warnings persist. Details, the first interruption and evidence boundaries are preserved in [H109 validation](docs/validation/resident-observation-2026-09-18.md) and the [Chinese resident report](worlds/restart-20260918-01/report.zh-CN.md).
+
 ## 2026-09-18 · H108 Rich original NPC dossiers and bounded decision integration
 
 The user asked for a review of very rich SAO-inspired NPCs, borrowing D&D-like character depth even when many traits are not yet used, and authorized continuing if reasonable. Review approved extensible complete dossiers with a clear distinction between original characterization, authoritative mechanics, recorded knowledge and latent future systems. Official SAO and D&D sources and the reasoning are linked in the [design review](docs/design/character-depth-review-2026-09-18.md).

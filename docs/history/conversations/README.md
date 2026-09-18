@@ -4,9 +4,9 @@ Use [HISTORY.md](../../../HISTORY.md) for project findings and [ROADMAP.md](../.
 
 | Task | Original conversation | Verification | Continue |
 | --- | --- | --- | --- |
-| 2026-09-18: local intake, offline fixes, workflow rehearsal, English rollout and rich NPC dossiers | [Chronological Markdown](2026-09-18-01a0b299/conversation.md) · [Structured messages](2026-09-18-01a0b299/conversation.json) | [Scope, counts and SHA-256](2026-09-18-01a0b299/manifest.json) | [Current handoff](2026-09-18-01a0b299/CONTINUE.md) |
+| 2026-09-18: local intake, offline fixes, workflow rehearsal, English rollout, rich NPC dossiers and the fresh resident world | [Chronological Markdown](2026-09-18-01a0b299/conversation.md) · [Structured messages](2026-09-18-01a0b299/conversation.json) | [Scope, counts and SHA-256](2026-09-18-01a0b299/manifest.json) | [Current handoff](2026-09-18-01a0b299/CONTINUE.md) |
 
-This snapshot covers one task. It is not every local task, the other computer's original conversation or game GM/NPC memory. Missing messages cannot be reconstructed from summaries. Internal reasoning, system messages, tool output, credentials and private world state are excluded. Original Chinese conversation remains Chinese; metadata and new project documents use English.
+This snapshot covers one task. It is not every local task, the other computer's original conversation or game GM/NPC memory. Missing messages cannot be reconstructed from summaries. Internal reasoning, system messages, tool output, credentials and private world state are excluded from the conversation archive. User-authorized new-world checkpoints and safe cost summaries are published separately under worlds/. Original Chinese conversation remains Chinese; metadata and new project documents use English.
 
 ## Each delivery
 

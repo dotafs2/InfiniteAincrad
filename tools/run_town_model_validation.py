@@ -381,6 +381,10 @@ def classify_validation(engine_exit, capture, model_errors, budget_stop_reason,
         reasons.append('budget_stop')
     if shutdown_incomplete:
         reasons.append('gateway_shutdown_incomplete')
+    shutdown_facts = capture.get('shutdown', {}) if isinstance(capture, dict) else {}
+    if (shutdown_facts.get('capture_reason') in ('duration_elapsed', 'episode_duration_elapsed')
+            and shutdown_facts.get('duration_fulfilled') is False):
+        reasons.append('requested_observation_duration_incomplete')
     if reasons:
         status = 'failed'
     elif not exercised:
@@ -593,6 +597,8 @@ def main():
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--seconds', type=int, default=300)
     parser.add_argument('--max-requests', type=int, default=12)
+    parser.add_argument('--max-cost-cny', type=int, help='Optional whole-yuan episode cap, checked conservatively before reserving; existing cumulative ledger remains authoritative.')
+    parser.add_argument('--checkpoint-dir', type=Path, help='Optional credential-free exact world checkpoint lineage; preserves every earlier life event and resident reply after shutdown.')
     parser.add_argument('--concurrency', type=int, default=1, help='Resident scheduler bound 1..3, within remaining ledger slots; this launcher serializes upstream completions.')
     parser.add_argument('--drain-grace', type=float, default=DRAIN_GRACE_SECONDS,
                         help='Finite seconds (0..40) to let requests already accepted by this gateway settle after the engine exits; never extends the run deadline.')
@@ -610,6 +616,8 @@ def main():
     args = parser.parse_args()
     if not 5 <= args.seconds <= 900 or not 1 <= args.max_requests <= 32:
         parser.error('Seconds 5..900; maximum requests 1..32.')
+    if args.max_cost_cny is not None and not 1 <= args.max_cost_cny <= 100:
+        parser.error('Episode cost cap must be 1..100 whole CNY.')
     if not 0 <= args.drain_grace <= MAX_DRAIN_GRACE_SECONDS:
         parser.error('Drain grace must be within 0..40 seconds.')
     if not 0 <= args.shutdown_wait <= MAX_SHUTDOWN_WAIT_SECONDS:
@@ -628,7 +636,8 @@ def main():
         policy = (CityValidationPolicy if 'request_limit' in guard['policy'] else Policy)(**guard['policy'])
         ledger = Ledger(args.ledger, policy, runtime_deadline_utc=int(deadline.timestamp()))
         pin = read_review_pin(args.carried_uncertainty_pin) if args.carried_uncertainty_pin else None
-        gate = CarriedLedgerGate(ledger, pin, args.concurrency, args.max_requests)
+        gate = CarriedLedgerGate(ledger, pin, args.concurrency, args.max_requests,
+                                max_spend_nano=args.max_cost_cny * 1_000_000_000 if args.max_cost_cny is not None else None)
         before = ledger.status()
     except (BudgetError, OSError, ValueError, KeyError, TypeError) as exc:
         parser.error(str(exc))
@@ -719,7 +728,17 @@ def main():
         startup_fault = append_startup_fault(gm_export, capture, classification,
                                              result.returncode, gate.sent)
     passed = classification['validation_status'] == 'passed'
+    checkpoint_export = {'status': 'not_requested'}
+    if args.checkpoint_dir is not None:
+        from world_observation import checkpoint
+        try:
+            exported = checkpoint(save, args.checkpoint_dir)
+            checkpoint_export = {'status': 'exported', **exported['checkpoints'][-1]}
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            checkpoint_export = {'status': 'failed', 'error_type': type(exc).__name__}
     summary = {'engine_exit': result.returncode, 'validation_passed': passed,
+               'session_cost_cap_cny': args.max_cost_cny,
+               'checkpoint_export': checkpoint_export,
                **classification, 'model_errors': errors,
                'recoverable_model_waits': recoverable_waits,
                'ledger_before': before, 'ledger_after': after,
@@ -733,7 +752,7 @@ def main():
                'startup_fault_export': startup_fault}
     (out / 'result.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
     print(json.dumps(summary))
-    return 0 if passed else 1
+    return 0 if passed and checkpoint_export['status'] != 'failed' else 1
 
 
 if __name__ == '__main__':

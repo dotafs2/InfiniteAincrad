@@ -1,0 +1,2 @@
+# Canonical checkpoints are byte-exact artifacts; keep their original newlines.
+**/*.world.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
