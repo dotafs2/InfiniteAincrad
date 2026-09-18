@@ -2,6 +2,12 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-18 · H115 Physical discovery of the installed iron source
+
+Continued from the latest received delivery and H114. The installed finite iron was still unknown to every resident, so added a real public route notice beside the berry commons. Actual visibility and range grant only personal location knowledge with unknown stock. Existing collection remains optional; direct arrival sight, physical work and finite conservation decide the outcome. The notice reveals no private need or remote stock and cannot erase an observed depletion. Old saves and complete histories restore unchanged.
+
+571 focused checks passed with no paid calls. A controlled seq148 copy proved real obstruction, a 44.36-metre walk at normal speed, exact mid-walk scene restart and recovery of one iron from the original three-unit heap. A separate real-controller input fixture retained the rich profile and honest source information in 12,164 UTF-16 units and chose wait without collecting. Forward+ rendering was inspected and the notice lettering enlarged. Active seq148, original seq450 and existing local seq452 remain separate and untouched. Four existing navigation-edge warnings remain. This is coordinator-authored maintenance; model adoption, information sharing and sustainable resources remain unproven. See [evidence and reproduction](docs/validation/material-notice-2026-09-18.md).
+
 ## 2026-09-18 · H114 Latest-code intake and own-tool repair
 
 Pulled ten upstream commits through `d2c0227` into the existing delivery worktree, then continued on `codex/continuation-20260918-self-repair`. The original main checkout and unrelated work remain intact. Both the received active seq148 lineage and local historical seq450 remain byte-identical and separate.

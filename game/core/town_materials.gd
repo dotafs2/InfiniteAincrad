@@ -2,6 +2,10 @@ extends "res://core/town_trade.gd"
 ## Optional finite, public material recovery. No stock regeneration or auto-install.
 const MATERIAL_WORK_SECONDS := 60.0
 const MATERIAL_OBSERVATION_RANGE := 3.0
+const MATERIAL_NOTICE_ID := "public_notice:material_routes:v1"
+const MATERIAL_NOTICE_EVENT := "material_notice_read"
+const MATERIAL_NOTICE_RANGE := 4.0
+const MATERIAL_NOTICE_OFFSET := Vector3(-4.5, 0.0, -3.0)
 # Bounded physical-travel observation. The host scene supplies the
 # collision-resolved position and the unpaused seconds; the world derives
 # stagnation, never a model or a rule guessing that a wall exists.
@@ -161,6 +165,50 @@ func _install_material_source(spec: Dictionary, source_seq: int, command_id: Str
 
 func _known_materials(id: String) -> Dictionary:
 	return _materials().get("known", {}).get(id, {})
+
+func material_notice_position() -> Vector3:
+	return berry_center() + MATERIAL_NOTICE_OFFSET
+
+func material_notice_entries() -> Array:
+	# The public prop lists locations and access, never live or historical stock.
+	var result: Array = []
+	for source in material_sources():
+		result.append({"id": source.id, "label": source.label, "material": source.material,
+			"position": source.position.duplicate(), "text": _material_notice_text(source, material_notice_position())})
+	return result
+
+func _material_notice_text(source: Dictionary, notice: Vector3) -> String:
+	var offset := _vector(source.position) - notice
+	var directions: Array = []
+	if absf(offset.z) >= 1: directions.append("%d m %s" % [roundi(absf(offset.z)), "north" if offset.z < 0 else "south"])
+	if absf(offset.x) >= 1: directions.append("%d m %s" % [roundi(absf(offset.x)), "west" if offset.x < 0 else "east"])
+	var route := ", ".join(directions) if not directions.is_empty() else "beside this notice"
+	return "%s: public %s, %s. Follow the streets; sort for 60 seconds per unit. Finite supply; current stock unknown and not promised." % [source.label, source.material, route]
+
+func _material_notice_command(id: String, source_id: String) -> String:
+	return "material-notice:" + (id + "\n" + source_id).sha256_text().substr(0, 32)
+
+func observe_material_notice(id: String, visible: bool) -> Dictionary:
+	# Host-only perception inside the existing world transaction. The scene supplies
+	# a real ray result; the world independently checks range and published sources.
+	if id not in active_ids(): return _failure("invalid_material_observer")
+	var learned: Array = []
+	var notice := material_notice_position()
+	if not visible or position_of(id).distance_to(notice) > MATERIAL_NOTICE_RANGE:
+		return {"ok": true, "learned": learned}
+	for source in material_sources():
+		# A sign cannot refresh stale stock, erase a depletion sighting or grant units.
+		if _known_materials(id).has(source.id): continue
+		var m := _ensure_materials()
+		if not m.known.has(id): m.known[id] = {}
+		_append_life_event({"type": MATERIAL_NOTICE_EVENT, "actor_id": id, "recipient_ids": [id],
+			"operation_id": _material_notice_command(id, source.id), "source": "host_line_of_sight_notice_read",
+			"notice_id": MATERIAL_NOTICE_ID, "notice_position": [notice.x, notice.y, notice.z],
+			"observer_position": _state.godot.positions[id].duplicate(), "source_id": source.id,
+			"stock": null, "text": "I read the public material notice. " + _material_notice_text(source, notice)})
+		m.known[id][source.id] = {"stock": null, "observed_elapsed": _state.godot.elapsed_seconds, "event_seq": _state.life.seq}
+		learned.append(source.id)
+	return {"ok": true, "learned": learned}
 
 func _material_source_visible(id: String, source_id: String) -> bool:
 	if not _material_visibility_required:
@@ -362,7 +410,8 @@ func trade_options(id: String) -> Array:
 				"label": "Abandon this collection trip (the task is unfinished; abandoning it grants no material).", "speech_allowed": false, "source_id": stuck.source_id})
 		return result
 	for source_id in _known_materials(id):
-		if _known_materials(id)[source_id].stock <= 0:
+		var known_stock: Variant = _known_materials(id)[source_id].stock
+		if known_stock != null and known_stock <= 0:
 			continue
 		var source: Dictionary = _materials().sources[source_id]
 		result.append({"id": "material:recover:" + source_id, "action": "recover_material", "label": "Go to %s and sort for 60 seconds to collect 1 unit of %s if available; public, free and finite, with no stock guarantee." % [source.label, "iron" if source.material == "iron" else "wood"], "speech_allowed": false})
@@ -489,6 +538,8 @@ func _knowledge_source_for(id: String, source_id: String, observation: Dictionar
 	# Derive the personal knowledge source from the exact observation event that
 	# produced it. Old proximity observations are never relabelled as new LOS.
 	for event in _state.life.events:
+		if observation.stock == null and event.get("seq") == observation.get("event_seq") and event.get("type") == MATERIAL_NOTICE_EVENT and event.get("actor_id") == id and event.get("source_id") == source_id:
+			return "personally_read_public_material_notice_stock_unknown"
 		if event.get("seq") == observation.get("event_seq") and event.get("type") == "material_source_observed" and event.get("actor_id") == id and event.get("source_id") == source_id and event.get("stock") == observation.get("stock"):
 			var recorded := str(event.get("source", ""))
 			if recorded == "host_line_of_sight_observation":
@@ -500,7 +551,11 @@ func _knowledge_source_for(id: String, source_id: String, observation: Dictionar
 
 func _validate_state(value: Variant) -> Dictionary:
 	var base := super._validate_state(value)
-	if not base.ok or not value.godot.has("materials"):
+	if not base.ok:
+		return base
+	if not value.godot.has("materials"):
+		for event in value.life.events:
+			if event.get("type") == MATERIAL_NOTICE_EVENT: return _failure("material_notice_source_missing")
 		return base
 	var m: Variant = value.godot.materials
 	# Older saves have no blocked-travel projection; both shapes stay loadable.
@@ -593,19 +648,43 @@ func _validate_state(value: Variant) -> Dictionary:
 			return _failure("invalid_material_observer")
 		for source_id in m.known[id]:
 			var known: Variant = m.known[id][source_id]
-			if not m.sources.has(source_id) or not known is Dictionary or not _exact_keys(known, ["stock", "observed_elapsed", "event_seq"]) or not _bounded(known.stock, m.sources[source_id].initial_stock) or not _bounded(known.observed_elapsed, value.godot.elapsed_seconds, false):
+			if not m.sources.has(source_id) or not known is Dictionary or not _exact_keys(known, ["stock", "observed_elapsed", "event_seq"]) or (known.stock != null and not _bounded(known.stock, m.sources[source_id].initial_stock)) or not _bounded(known.observed_elapsed, value.godot.elapsed_seconds, false):
 				return _failure("invalid_material_observation")
 			var found := false
 			for event in value.life.events:
-				if event.get("seq") == known.event_seq and event.get("type") == "material_source_observed" and event.get("actor_id") == id and id in event.get("recipient_ids", []) and event.get("source_id") == source_id and event.get("stock") == known.stock:
+				var expected_type := MATERIAL_NOTICE_EVENT if known.stock == null else "material_source_observed"
+				if event.get("seq") == known.event_seq and event.get("type") == expected_type and event.get("actor_id") == id and id in event.get("recipient_ids", []) and event.get("source_id") == source_id and event.get("stock") == known.stock:
 					found = true
 			if not found:
 				return _failure("invalid_material_observation_evidence")
+	var notices := _validate_material_notices(value, m)
+	if not notices.ok: return notices
 	if m.has("blocked"):
 		var blocked_valid := _validate_material_blocked(value, m)
 		if not blocked_valid.ok:
 			return blocked_valid
 	return base
+
+func _validate_material_notices(value: Dictionary, materials: Dictionary) -> Dictionary:
+	var commands := {}
+	var notice := _vector(value.godot.berry_position) + MATERIAL_NOTICE_OFFSET
+	for event in value.life.events:
+		if event.get("type") != MATERIAL_NOTICE_EVENT: continue
+		if not _exact_keys(event, ["type", "actor_id", "recipient_ids", "operation_id", "source", "notice_id", "notice_position", "observer_position", "source_id", "stock", "text", "seq", "event_id"]):
+			return _failure("invalid_material_notice_event")
+		if not value.godot.positions.has(event.actor_id) or not materials.sources.has(event.source_id) or event.recipient_ids != [event.actor_id] or event.stock != null or event.source != "host_line_of_sight_notice_read" or event.notice_id != MATERIAL_NOTICE_ID:
+			return _failure("invalid_material_notice_attribution")
+		if event.operation_id != _material_notice_command(event.actor_id, event.source_id) or commands.has(event.operation_id):
+			return _failure("duplicate_material_notice")
+		commands[event.operation_id] = true
+		if not _valid_position(event.notice_position) or not _valid_position(event.observer_position) or _vector(event.notice_position) != notice or _vector(event.observer_position).distance_to(notice) > MATERIAL_NOTICE_RANGE:
+			return _failure("invalid_material_notice_range")
+		if event.text != "I read the public material notice. " + _material_notice_text(materials.sources[event.source_id], notice):
+			return _failure("invalid_material_notice_content")
+		var known: Dictionary = materials.known.get(event.actor_id, {}).get(event.source_id, {})
+		if known.is_empty() or known.get("event_seq", -1) < event.seq:
+			return _failure("material_notice_knowledge_missing")
+	return {"ok": true}
 
 func _validate_material_blocked(value: Dictionary, m: Dictionary) -> Dictionary:
 	var blocked: Variant = m.blocked

@@ -28,9 +28,12 @@ func configure(world, bodies: Dictionary) -> void:
 	town = world
 	resident_bodies = bodies
 
+func notice_spec() -> Dictionary:
+	return Catalog.NOTICE
+
 func build() -> void:
 	name = "TownPlaceNotice"
-	var notice: Dictionary = Catalog.NOTICE
+	var notice: Dictionary = notice_spec()
 	var packed := load(str(notice["asset"])) as PackedScene
 	if packed == null:
 		load_failure = str(notice["asset"])
@@ -90,7 +93,7 @@ func _add_collision(node: Node3D) -> void:
 	model_bottom = bottom
 
 func notice_point() -> Vector3:
-	var point: Array = Catalog.NOTICE["point"]
+	var point: Array = notice_spec()["point"]
 	return Vector3(point[0], point[1], point[2])
 
 func _has_line_of_sight(from: Vector3, to: Vector3, allow_self: bool) -> bool:

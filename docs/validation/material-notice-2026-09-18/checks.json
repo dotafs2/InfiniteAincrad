@@ -1,0 +1,185 @@
+{
+  "milestone": "H115",
+  "created_at_utc": "2026-09-18T14:27:43.149440+00:00",
+  "online_base": "d2c02270b99795a200f13a41baf5e0ba00ca6920",
+  "parent_commit": "84bc35a7013a6adf4bc93cb1e68cb4327acbfc94",
+  "branch": "codex/continuation-20260918-self-repair",
+  "controlled_offline_only": true,
+  "paid_calls": 0,
+  "total_checks": 571,
+  "suites": [
+    {
+      "name": "town_material_notice",
+      "checks": 34,
+      "failures": 0,
+      "exit_code": 0,
+      "stdout_sha256": "1f5d8204e80047a79bc6bc1695c53f81ee4ad2b86c93f22a162c4bcc3dc4bc5d"
+    },
+    {
+      "name": "town_material_visibility",
+      "checks": 95,
+      "failures": 0,
+      "exit_code": 0,
+      "stdout_sha256": "629b4e9a085dbb87d83abff7e5513d23398bfc05fdd7578c8ae1f5036c9a0c47"
+    },
+    {
+      "name": "town_material_need",
+      "checks": 49,
+      "failures": 0,
+      "exit_code": 0,
+      "stdout_sha256": "0e6a74593173c7a8e8ce22279b5951174d1b9703c3c72d13bbf42f51f4f2231b"
+    },
+    {
+      "name": "town_material_blocked_state",
+      "checks": 278,
+      "failures": 0,
+      "exit_code": 0,
+      "stdout_sha256": "23c55b0feea5c102d5a779d4922a635ce4ec8fb5136cc015cbfc7c9b3200f2b6"
+    },
+    {
+      "name": "town_places_rules",
+      "checks": 67,
+      "failures": 0,
+      "exit_code": 0,
+      "stdout_sha256": "6c1cc66eef1931d99f89bbb3f919d5b28a698ca7a4377dfa3e18c88ec19f50c4"
+    },
+    {
+      "name": "town_restore_read_only",
+      "checks": 11,
+      "failures": 0,
+      "exit_code": 0,
+      "stdout_sha256": "8b0bede526ce84c399e20e4c8f6cba49f17eb2385c3fef63175cc1691d184e70"
+    },
+    {
+      "name": "town_material_notice_scene",
+      "checks": 27,
+      "failures": 0,
+      "exit_code": 0,
+      "result_sha256": "2d74ae422ebf22fe0a8a2f1cad31da1b7c76d493b014c7d6109104cd39369883",
+      "all_owned_processes_exited": true,
+      "final_line_of_sight_targets_rendered_text": true
+    },
+    {
+      "name": "town_material_notice_input",
+      "checks": 10,
+      "failures": 0,
+      "exit_code": 0,
+      "input_utf16_units": 12164,
+      "stdout_sha256": "a4a58d639ecc9e410d0750a732304bc0a541c35e9bcd5d5996e4f206821d5fce"
+    }
+  ],
+  "physical": {
+    "checks": 27,
+    "controlled_copy": true,
+    "directly_observed": true,
+    "failures": [],
+    "final_seq": 154,
+    "max_sample_step_m": 0.09002315998077393,
+    "max_speed_mps": 1.350000023841858,
+    "notice": {
+      "collision": true,
+      "notice": {
+        "asset": "res://assets/generated/travel_cargo_20260912/carved_route_waystone.glb",
+        "id": "public_notice:material_routes:v1",
+        "label": "Public Material Routes",
+        "point": [
+          2.5,
+          1.5950000017881394,
+          50.0
+        ],
+        "position": [
+          2.5,
+          0.04500000178813934,
+          50.0
+        ],
+        "read_range_m": 4.0,
+        "yaw": 200.0
+      },
+      "placed": true,
+      "published_entries": [
+        {
+          "id": "street:iron-salvage-20260918",
+          "label": "Street salvage iron heap",
+          "material": "iron",
+          "position": [
+            0,
+            0.22,
+            7.7
+          ],
+          "text": "Street salvage iron heap: public iron, 42 m north, 3 m west. Follow the streets; sort for 60 seconds per unit. Finite supply; current stock unknown and not promised."
+        }
+      ],
+      "stock_disclosed": false
+    },
+    "paid_calls": 0,
+    "read_proof": {
+      "access": "public",
+      "id": "street:iron-salvage-20260918",
+      "knowledge_source": "personally_read_public_material_notice_stock_unknown",
+      "label": "Street salvage iron heap",
+      "last_observed_stock": null,
+      "material": "iron",
+      "observation_event_seq": 149,
+      "observed_elapsed": 5390.383333333518,
+      "position": [
+        0,
+        0.22,
+        7.7
+      ],
+      "stock_may_have_changed": true,
+      "work_seconds_per_unit": 60.0
+    },
+    "receipt": {
+      "command_id": "fixture:notice-collection",
+      "records": [
+        {
+          "payload": {
+            "action": "recover_material",
+            "actor_id": "shared:well-keeper",
+            "provenance": "opengameagent_fixture",
+            "source_id": "street:iron-salvage-20260918"
+          },
+          "result": {
+            "actor_id": "shared:well-keeper",
+            "code": "material_recovered",
+            "command_id": "fixture:notice-collection",
+            "material": "iron",
+            "ok": true,
+            "quantity": 1,
+            "source_id": "street:iron-salvage-20260918"
+          },
+          "status": "completed"
+        }
+      ],
+      "status": "completed"
+    },
+    "resumed": true,
+    "source_seq": 148,
+    "suite": "town_material_notice_scene",
+    "walked_metres": 44.36075156927109
+  },
+  "cold_restores": {
+    "active_seq148": "exact full state, ten identities",
+    "original_seq450": "exact full state, ten identities",
+    "physical_seq154": "exact full state, in physical suite"
+  },
+  "unchanged_worlds": {
+    "active_seq148": "cdfe0136856980281f671c14721815ac1bf5484cb77e930485edb9c435dc380a",
+    "original_final_seq450": "a06a43ed7c5ca5e55aef3e7b2e51ecf54faf8d5cc2133c15c789ccbe754f600c",
+    "preexisting_local_seq452": "e04c86112ac7afcf405d5832e1860340d00b19f997e97b31babeee951b24f4c1"
+  },
+  "render": {
+    "method": "Forward+ Vulkan",
+    "image": "notice.png",
+    "sha256": "7b25a1e286880a8f5e7a377c21101595e8fd8fbfc10b2fbac4da60596e88f97b",
+    "read_only_copy_unchanged": true,
+    "inspected": true
+  },
+  "remaining": [
+    "Natural resident adoption not observed",
+    "Three finite iron units are not a sustainable supply",
+    "Information transfer to Flint and productive use remain open",
+    "Four preexisting overlapping navigation edges",
+    "GM06 unknown result and old GM05 unknown tail preserved"
+  ]
+}
