@@ -1547,6 +1547,7 @@ func resident_view(id: String = "") -> Dictionary:
 	view["wallet"] = {"coins_col": resident(id).get("coins_col", 0)}
 	view["trade_settlement_terms"] = {"legacy_default": "collection", "completion_escrow": "completion" if _completion_escrow_enabled() else "unavailable"}
 	view["known_rules"] = {"axe_use": "柴斧必须斧刃和斧柄都达到100，本人持有，并在自己的工作点消耗1木料才能加工1柴火。修好其中一部分还不能使用。",
+		"basic_needs": "satiety=0或energy=0本身不会禁止移动，也不会禁止当前列出的rest、harvest_ration等动作。只能从available_actions选择；提交和到达时仍会按当前位置、是否正忙和真实资源重验。harvest_ration只表示可以尝试前往公共采集点，不保证到达时仍有库存或一定成功取得口粮。",
 		"communication": "你的reason是私人选择理由，不会自动说给别人听。泛化help只询问是否有空；标明工具和部位的repair求助才会传达具体问题。willing只是愿意交谈，不是接受收费委托。wood_repair修木柄，metal_repair修金属斧刃；是否帮忙由本人选择。",
 		"repair": "price_col是该笔修理的固定总报酬（Col），不是单价或估算，无其他费率。旧合同和普通报价的settlement是collection：接受后该金额从物主钱包转入预留资金，交付后施工60秒，修好不立即付款，物主取回工具时预留金额全额转入工人钱包。如果可选报价标明completion，表示完工结算：同样先预留、交付和60秒施工，只有成功消耗材料并把部位修到100后才转移这笔既有预留金额，collect只返还工具且不再次付款。修斧刃消耗工人的1铁，修斧柄消耗1木。可因时间、材料或物主不来取回的风险拒绝，愿意交谈不等于接受合同。"}
 
