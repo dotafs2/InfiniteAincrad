@@ -23,6 +23,7 @@ const ForagingSteering = preload("res://spatial/town_foraging_steering.gd")
 const SocialSteering = preload("res://spatial/town_social_steering.gd")
 const TownExpansion = preload("res://spatial/town_expansion.gd")
 const PlaceNotice = preload("res://spatial/town_place_notice.gd")
+const MaterialNotice = preload("res://spatial/town_material_notice.gd")
 const PlaceSteering = preload("res://spatial/town_place_steering.gd")
 const TownNavigation = preload("res://spatial/town_navigation.gd")
 const BREAD_SCENE_PATH := "res://assets/overnight20260918/bread_loaf.tscn"
@@ -107,6 +108,7 @@ var town_expansion_evidence: Dictionary = {}
 var foraging_steering: RefCounted = null
 var social_steering: RefCounted = null
 var place_notice: Node3D = null
+var material_notice: Node3D = null
 var place_steering: RefCounted = null
 var town_navigation: Node3D = null
 var place_notice_evidence: Dictionary = {}
@@ -261,6 +263,10 @@ func _ready() -> void:
 	# The public wayfinding notice is one real prop with real line-of-sight sensing. It only
 	# answers "can this resident read/see it"; the world grants and persists the knowledge.
 	_load_public_notice()
+	material_notice = MaterialNotice.new()
+	add_child(material_notice)
+	material_notice.configure(town, bodies)
+	material_notice.build()
 	_build_town_hud()
 	_reload_gm_status()
 	_build_nameplates()
@@ -693,6 +699,9 @@ func _physics_process(delta: float) -> void:
 			var observed: Variant = place_notice.observe()
 			if observed is Dictionary and not (observed as Dictionary).get("ok", false):
 				place_notice_evidence = place_notice.evidence()
+		if material_notice != null:
+			var material_notice_result: Dictionary = material_notice.observe()
+			if not material_notice_result.ok and material_notice_result.code != "material_notice_unavailable": return material_notice_result
 		# Legacy Mac repair progression is offline/local_rule_policy only.
 		if not gateway_mode and not restore_only:
 			var repair_step := _progress_repair()
