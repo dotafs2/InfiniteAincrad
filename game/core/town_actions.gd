@@ -5,8 +5,9 @@ const CapabilityRegistry = preload("res://core/actions/capability_registry.gd")
 const LegacyCapabilities = preload("res://core/actions/legacy_capabilities.gd")
 const SocialCapabilities = preload("res://core/actions/social_capabilities.gd")
 const CooperationCapabilities = preload("res://core/actions/cooperation_capabilities.gd")
+const SelfRepairCapability = preload("res://core/actions/self_repair_capability.gd")
 var _capability_registry = CapabilityRegistry.new()
-var _capability_modules: Dictionary = {"social": SocialCapabilities.new(), "cooperation": CooperationCapabilities.new()}
+var _capability_modules: Dictionary = {"social": SocialCapabilities.new(), "cooperation": CooperationCapabilities.new(), "self_repair": SelfRepairCapability.new()}
 
 func _init() -> void:
 	for definition in LegacyCapabilities.definitions():
@@ -148,9 +149,30 @@ func capability_event(type: String, actor: String, recipients: Array, command: S
 	return {"type": type, "actor_id": actor, "subject_id": actor, "recipient_ids": recipients.duplicate(),
 		"operation_id": command, "source": provenance, "provenance": provenance, "text": text, "contractual": false}
 
+func _native_pending_job(id: String) -> Dictionary:
+	for module in _capability_modules.values():
+		if module.has_method("pending_job"):
+			var job: Dictionary = module.pending_job(self, id)
+			if not job.is_empty(): return job
+	return {}
+
+func _busy(id: String) -> bool:
+	return super._busy(id) or not _native_pending_job(id).is_empty()
+
+func pending_job(id: String) -> Dictionary:
+	var job := _native_pending_job(id)
+	return super.pending_job(id) if job.is_empty() else job
+
+func destination(id: String, action: String) -> Vector3:
+	var job := _native_pending_job(id)
+	if not job.is_empty() and job.action == action: return _vector(job.target_position)
+	return super.destination(id, action)
+
 func advance(delta: float) -> Dictionary:
 	var result := super.advance(delta)
 	if result.ok:
+		for module in _capability_modules.values():
+			if module.has_method("advance"): result.completed.append_array(module.advance(self, delta))
 		for module in _capability_modules.values():
 			if module.has_method("reconcile"): module.reconcile(self)
 	return result
@@ -171,7 +193,7 @@ func _validate_state(value: Variant) -> Dictionary:
 	if not value.godot.has("capabilities"):
 		for event in value.life.events:
 			var type: String = str(event.get("type", ""))
-			if type in ["resident_said", "surroundings_observed"] or type.begins_with("joint_visit_"):
+			if type in ["resident_said", "surroundings_observed"] or type.begins_with("joint_visit_") or type in SelfRepairCapability.EVENTS:
 				return _failure("capability_state_missing")
 		return base
 	var store: Variant = value.godot.capabilities

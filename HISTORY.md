@@ -2,6 +2,14 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-18 · H114 Latest-code intake and own-tool repair
+
+Pulled ten upstream commits through `d2c0227` into the existing delivery worktree, then continued on `codex/continuation-20260918-self-repair`. The original main checkout and unrelated work remain intact. Both the received active seq148 lineage and local historical seq450 remain byte-identical and separate.
+
+Addressed Rowan's actual missing action: he owns a damaged axe, has wood-repair skill and a wood unit, but previously could only ask others to repair it. Added a versioned own-property repair capability with physical travel, 60 seconds of on-site labor, material/skill/ownership/contract checks, body exclusion, durable outcomes and bounded failed travel. Existing native action composition and restoration remain authoritative. This is coordinator-authored implementation, not autonomous GM invention or resident adoption.
+
+In a controlled seq148 copy, Rowan walked 18.45 metres at the original speed, resumed the exact job in a new scene, consumed one wood and repaired only the handle. All 1,916 focused Godot checks, three complete cold restores, nine design-contract Python tests and the zero-warning/error .NET build passed. Initial fixture-test corrections, editor-import diagnostics and the pre-existing navigation-edge warning are documented. No paid calls, live simulation, cost reset or monitoring restart. Natural self-repair adoption and finite-iron discovery remain next. See [evidence and handoff](docs/validation/self-repair-2026-09-18.md).
+
 ## 2026-09-18 · H113 Bounded GM recovery, reviewed content and preserved live decisions
 
 The previous GM observation over-read source without a final answer. Complete pinned evidence packets and disabled shell/wait tools produced real observations, same-session resume and exact delta accounting. A small-JSON artifact path reduced one real coding continuation from 839,976 tokens / 108.4 seconds to 54,102 / 9.4 seconds. GM05 authored finite iron after a host-directed follow-up; the reviewed configuration passed 38 controlled physical checks and 58 material rules, was installed at seq62, and received the original GM's receipt acknowledgement. Controlled copy actions do not establish voluntary adoption.

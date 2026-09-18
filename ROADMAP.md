@@ -4,9 +4,11 @@ Language policy: the game, resident names, dialogue, Kimi/GM instructions and th
 
 Current milestone: a recoverable ten-resident / ten-GM loop. Bounded live participation and bread adoption were recorded upstream. Local offline workflow checks pass, but sustained unattended autonomy, long-term food supply and natural ration sharing remain unproven.
 
-The user explicitly restarted the active simulation at seq0 in `shared:restart-20260918-01`. Its full checkpoints and decision evidence live under [worlds/](worlds/README.md); the original seq450 world and GM memory remain a separate lineage on another computer. The existing cumulative Kimi ledger was recovered locally and continues without reset. API credentials stay local.
+The user explicitly restarted the active simulation at seq0 in `shared:restart-20260918-01`. Its full checkpoints and decision evidence live under [worlds/](worlds/README.md); the original seq450 snapshot and GM memory remain a separate lineage; H114 received the new-world code and checkpoints back on the original computer. The existing cumulative Kimi ledger was recovered locally and continues without reset. API credentials stay local.
 
 ## Current work
+
+- **H114:** received the latest stopped seq148 work on the original machine and added own-tool repair (34 total capabilities). A controlled copy proved Rowan can walk 18.45 metres, resume the job in a fresh scene, work for 60 seconds and consume his existing wood to repair only his axe handle. Active seq148 and separate overnight seq450 remain unchanged; no model calls or monitoring restart. Natural adoption and iron discovery remain pending. [Evidence](docs/validation/self-repair-2026-09-18.md).
 
 - **H103-H104:** received the morning delivery and fixed stale build/import caches. The original world remains separate.
 - **H105:** completed the whole offline loop, including physical travel, an interrupted job, restart and complete cold-restore comparison. 179 normal-stage checks passed.
@@ -81,7 +83,8 @@ flowchart TB
         H111["H111 Aincrad design pins and fixed navigation<br/>Cached A*, physical detour and joint restart verified<br/>10 GM identities initialized; current status follows in H112"]
         H112["H112 Permanent developer usage per NPC and GM<br/>32 NPC calls: 83,274 tokens; exact full-history transfer<br/>One real GM observation timed out; known tokens retained"]
         H113["H113 Stopped by user at seq148; 99 new NPC decisions<br/>Iron installed but undiscovered; 131 lifetime replies preserved<br/>5 GM observations succeeded; GM06 timed out, usage unknown"]
-        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110 --> H111 --> H112 --> H113
+        H114["H114 Own-tool repair executable; 34 capabilities<br/>Controlled seq148 copy: real 18.45 m walk, restart and material use<br/>Active saves unchanged; natural adoption remains open"]
+        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110 --> H111 --> H112 --> H113 --> H114
         H113 -.Bounded reviewed content loop.-> A83Release
         H111 -.Verified navigation and design gates.-> A83Move
         H110 -.Implemented common boundary.-> A83Action
@@ -93,7 +96,7 @@ flowchart TB
         M20S["Free conversation observed; joint-visit adoption still open<br/>Fix target and conversation attribution; distinguish talk from consent<br/>Add sourced introductions and evidence-backed relationships"]
         M20C["Validate sustainable resources and daily life first<br/>Long-term berry supply, crowding and voluntary ration gifts<br/>Renewable flour, professions and exchange"]
         M20G["Improve entering and observing the world<br/>Overlapping navigation edges, renderer exit, characters,<br/>animation and performance"]
-        H47["Next: discoverable resources and valid self-repair actions<br/>Preserve GM06 timeout and old unknown usage<br/>Arbitrary modules still need deployment contracts<br/>Verify productive adoption and sustainable daily life"]
+        H47["Next: discoverable resources and natural self-repair adoption<br/>Preserve GM06 timeout and old unknown usage<br/>Arbitrary modules still need deployment contracts<br/>Verify productive adoption and sustainable daily life"]
         H82["Participant-directed development<br/>Residents identify needs, choose construction, use or decline it<br/>Externally assigned goals are not autonomous invention"]
         H110 -->|Continue the new world with full history| M20C
         H110 -->|Observe voluntary use and extend tested capabilities| M20S
@@ -121,7 +124,7 @@ flowchart TB
     classDef done fill:#dcfce7,stroke:#15803d,color:#14532d;
     classDef partial fill:#fff1d6,stroke:#b45309,color:#78350f;
     classDef future fill:#f1f5f9,stroke:#64748b,color:#0f172a;
-    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109,H110,H111,H112,H113 done;
+    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109,H110,H111,H112,H113,H114 done;
     class M20,M20S,M20C,M20G,H47,H82,A83Entry,A83Scene,A83NPC,A83Action,A83Move,A83Core,A83Evidence,A83GM,A83Candidate,A83Review,A83Release,A83Use,A83Feedback,A83Stop,A83Save,A83Fault partial;
     class N5,P,N6,N7,N8,N9,XR,N10,R future;
 ```
@@ -130,6 +133,6 @@ flowchart TB
 
 The local workflow uses scripted resident and GM choices with actual Godot physics and persistence. It installs configuration for an existing finite resource source; it does not prove that a GM invented a new mechanic. Model requests in the offline work: zero.
 
-The stopped active world is seq148 with 131 complete lifetime replies. H113 added 99 real NPC decisions, including voluntary free conversation, but no joint visit, iron discovery, iron collection or repair production was established. Residents exposed missing self-repair and learning actions, misunderstood conversational intent, chose a mismatched target and sometimes exceeded output bounds. The next work is to connect actual demand to discoverable resources and valid capabilities, then verify decisions and consequences without forced choices or hidden knowledge. GM06 has an unresolved timeout; preserve it alongside the old GM05 tail. Automatic monitoring is paused and no simulation writer remains. The original seq450 lineage stays separate until its actual records return. Sustainable town life precedes adventure, floor progression and long-term multiplayer operation.
+The stopped active world is seq148 with 131 complete lifetime replies. H113 added 99 real NPC decisions, including voluntary free conversation, but no joint visit, iron discovery, iron collection or repair production was established. Residents exposed missing self-repair and learning actions, misunderstood conversational intent, chose a mismatched target and sometimes exceeded output bounds. The next work is to connect actual demand to discoverable resources and valid capabilities, then verify decisions and consequences without forced choices or hidden knowledge. GM06 has an unresolved timeout; preserve it alongside the old GM05 tail. Automatic monitoring is paused and no simulation writer remains. H114 now has the original seq450 snapshot, its existing local seq452 continuation and transferred seq148 records on one computer; their lineages stay separate. Own-tool repair is executable and physically verified in a controlled copy, with natural adoption still open. Sustainable town life precedes adventure, floor progression and long-term multiplayer operation.
 
 Historical references remain available in the [previous full roadmap](docs/history/roadmap-before-english-20260918.md) and the [H1-H104 diagram archive](docs/validation/roadmap-history-through-h104.md). They are dated evidence, not competing current plans. [HISTORY.md](HISTORY.md) preserves the chronological record, including failures and user corrections.

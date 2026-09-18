@@ -1,6 +1,6 @@
 # Resident action capability standard
 
-H110 introduces one resident-action boundary with 33 versioned definitions: 27 adapters over established rules and six native entry points. This is a foundation for adding behavior, not a claim that every possible profession or social system exists.
+H110 introduced one resident-action boundary with 33 versioned definitions: 27 adapters over established rules and six native entry points. H114 adds `production.self_repair`, bringing the current registry to 34. This is a foundation for adding behavior, not a claim that every possible profession or social system exists.
 
 The production world is `game/core/town_actions.gd`. It composes reviewed modules under `game/core/actions/`; new modules do not extend the world's inheritance chain. Existing reducers, command identities, inventory rules, save histories and physical movement remain authoritative.
 
@@ -31,10 +31,18 @@ Definitions describe resource constraints; their strings are not a generic lock 
 | Social | Ask/reply/cancel help, reply to the visitor; independently speak to a nearby resident. |
 | Inventory | Voluntary food gift, deliver a contracted item, collect a repaired item. |
 | Contracts | Offer, accept, decline or cancel an existing repair contract. |
-| Production | Forage, repair, use a functional tool, collect/cancel material recovery, bake using finite flour. |
+| Production | Forage, contracted repair, repair an owned axe part, use a functional tool, collect/cancel material recovery, bake using finite flour. |
 | Cooperation | Invite, accept, decline or withdraw a joint visit; accepted visits compose two existing physical journeys. |
 
-The complete IDs and machine-readable contracts live in the registry definitions, not a second manually maintained runtime list. `social.talk`, `perception.observe_surroundings` and the four `cooperation.*` entry points are new; the other 27 reuse established mechanics.
+The complete IDs and machine-readable contracts live in the registry definitions, not a second manually maintained runtime list. `social.talk`, `perception.observe_surroundings`, the four `cooperation.*` entry points and `production.self_repair` are native modules; the other 27 reuse established mechanics.
+
+## Own-property repair
+
+`production.self_repair` offers only an actor's own damaged axe part in their own custody, with the matching real repair skill, one uncommitted material unit and no active contract on that item. A profession name grants no skill. The resident chooses the action; admission starts a physical trip to their existing work point. Only time within the existing 0.45-metre arrival gate counts toward 60 seconds of work. The same body cannot start another job or speaking turn while repairing.
+
+Completion rechecks ownership, custody, skill, damage, contracts and uncommitted material. It consumes exactly one wood for a handle or one iron for an edge and restores only that part to 100, following existing prototype repair rules. It creates no currency, contract, lesson, material or speech. These costs and thresholds are compatible project extensions, not claims about exact novel formulas. Missing prerequisites yield an explicit failed receipt with no consumption. A trip making no progress for 90 seconds closes as unfinished. Material is not consumed or guaranteed on admission.
+
+The module keeps its job in its versioned command receipt, with immutable admission evidence and a separate terminal event. The common boundary exposes native jobs to physics and body-conflict checks. Work progress, command identity and completed/failed outcomes survive cold restore. Old saves acquire no new namespace merely by loading. A controlled seq148 copy verified actual movement and restart; natural model adoption remains unobserved.
 
 ## Conversation, privacy and consent
 

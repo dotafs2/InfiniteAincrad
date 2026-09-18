@@ -626,8 +626,8 @@ func _physics_process(delta: float) -> void:
 			else:
 				body.velocity.x = 0
 				body.velocity.z = 0
-			var worksite_blocked: bool = job.action in ["recover_material", "harvest_ration", "bake_bread"] and not moving and direction.length() <= 0.0 and body.position.distance_to(target) > 0.45
-			actor.set_gesture("idle" if (moving or worksite_blocked) else {"eat_ration": "eat", "rest": "rest", "harvest_ration": "harvest", "repair_edge": "repair", "repair_handle": "repair", "work": "work", "use_tool": "work", "recover_material": "work", "bake_bread": "work"}.get(job.action, "idle"))
+			var worksite_blocked: bool = job.action in ["recover_material", "harvest_ration", "bake_bread", "self_repair"] and not moving and direction.length() <= 0.0 and body.position.distance_to(target) > 0.45
+			actor.set_gesture("idle" if (moving or worksite_blocked) else {"eat_ration": "eat", "rest": "rest", "harvest_ration": "harvest", "repair_edge": "repair", "repair_handle": "repair", "self_repair": "repair", "work": "work", "use_tool": "work", "recover_material": "work", "bake_bread": "work"}.get(job.action, "idle"))
 		else:
 			if town_navigation != null:
 				town_navigation.clear_route(id)
@@ -1478,7 +1478,7 @@ func _refresh_life_window(snap: Dictionary) -> void:
 	life_feed.text = "\n\n".join(feed_lines) if not feed_lines.is_empty() else "No public events to display yet."
 
 func _action_label(action: String) -> String:
-	return {"eat_ration": "Eating", "rest": "Resting", "harvest_ration": "Foraging", "approach": "Approaching to talk", "deliver": "Delivering a tool", "work": "Repairing", "collect": "Collecting a tool", "use_tool": "Using a tool", "recover_material": "Sorting offcuts", "material_recovered": "Material collected", "material_depleted": "Stock exhausted; nothing collected", "bake_bread": "Baking bread", "bread_baked": "Baked a loaf of their own", "bread_eaten": "Ate their own bread", "baking_point_observed": "Saw the public oven", "baking_route_installed": "Public oven ready", "repair_edge": "Edge repair", "repair_handle": "Handle repair", "repair_completed": "Repair complete", "resources_unavailable": "Insufficient resources; unfinished"}.get(action, action)
+	return {"eat_ration": "Eating", "rest": "Resting", "harvest_ration": "Foraging", "approach": "Approaching to talk", "deliver": "Delivering a tool", "work": "Repairing", "self_repair": "Repairing own tool", "collect": "Collecting a tool", "use_tool": "Using a tool", "recover_material": "Sorting offcuts", "material_recovered": "Material collected", "material_depleted": "Stock exhausted; nothing collected", "bake_bread": "Baking bread", "bread_baked": "Baked a loaf of their own", "bread_eaten": "Ate their own bread", "baking_point_observed": "Saw the public oven", "baking_route_installed": "Public oven ready", "repair_edge": "Edge repair", "repair_handle": "Handle repair", "repair_completed": "Repair complete", "resources_unavailable": "Insufficient resources; unfinished"}.get(action, action)
 
 func _repair_part_label(part: String) -> String:
 	return "axe edge" if part == "edge" else "axe handle"
