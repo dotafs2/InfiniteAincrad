@@ -166,6 +166,22 @@ func _install_material_source(spec: Dictionary, source_seq: int, command_id: Str
 func _known_materials(id: String) -> Dictionary:
 	return _materials().get("known", {}).get(id, {})
 
+func _first_material_knowledge_seq(value: Dictionary, id: String, source_id: String) -> int:
+	for event in value.life.events:
+		if event.get("source_id") != source_id or id not in event.get("recipient_ids", []): continue
+		if event.get("type") in ["material_source_observed", MATERIAL_NOTICE_EVENT] and event.get("actor_id") == id: return int(event.seq)
+		if event.get("type") == "material_location_shared" and event.get("subject_id") == id: return int(event.seq)
+	return 0
+
+func _material_knowledge_event(value: Dictionary, id: String, source_id: String, seq: Variant) -> Dictionary:
+	if not _bounded(seq, value.life.events.size()) or seq < 1: return {}
+	var event: Dictionary = value.life.events[int(seq) - 1]
+	if event.get("seq") != seq or event.get("source_id") != source_id or id not in event.get("recipient_ids", []): return {}
+	if event.get("type") in ["material_source_observed", MATERIAL_NOTICE_EVENT] and event.get("actor_id") == id: return event
+	# A redundant disclosure cannot replace earlier personal stock observations.
+	if event.get("type") == "material_location_shared" and event.get("subject_id") == id and _first_material_knowledge_seq(value, id, source_id) == seq: return event
+	return {}
+
 func material_notice_position() -> Vector3:
 	return berry_center() + MATERIAL_NOTICE_OFFSET
 
@@ -532,12 +548,18 @@ func resident_view(id: String = "") -> Dictionary:
 		var source: Dictionary = _materials().sources[source_id]
 		var observation: Dictionary = _known_materials(id)[source_id]
 		view.material_sources.append({"id": source.id, "label": source.label, "material": source.material, "access": source.access, "position": source.position.duplicate(), "last_observed_stock": observation.stock, "observed_elapsed": observation.observed_elapsed, "observation_event_seq": observation.event_seq, "knowledge_source": _knowledge_source_for(id, source_id, observation), "work_seconds_per_unit": MATERIAL_WORK_SECONDS, "stock_may_have_changed": true})
+		var proof := _material_knowledge_event(_state, id, source_id, observation.event_seq)
+		if proof.get("type") == "material_location_shared":
+			view.material_sources[-1]["reported_by_id"] = proof.actor_id
+			view.material_sources[-1]["reported_by_name"] = resident_name(proof.actor_id)
 	return view
 
 func _knowledge_source_for(id: String, source_id: String, observation: Dictionary) -> String:
 	# Derive the personal knowledge source from the exact observation event that
 	# produced it. Old proximity observations are never relabelled as new LOS.
 	for event in _state.life.events:
+		if observation.stock == null and event.get("seq") == observation.get("event_seq") and event.get("type") == "material_location_shared" and event.get("subject_id") == id and event.get("source_id") == source_id:
+			return "reported_location_current_stock_unverified"
 		if observation.stock == null and event.get("seq") == observation.get("event_seq") and event.get("type") == MATERIAL_NOTICE_EVENT and event.get("actor_id") == id and event.get("source_id") == source_id:
 			return "personally_read_public_material_notice_stock_unknown"
 		if event.get("seq") == observation.get("event_seq") and event.get("type") == "material_source_observed" and event.get("actor_id") == id and event.get("source_id") == source_id and event.get("stock") == observation.get("stock"):
@@ -555,7 +577,7 @@ func _validate_state(value: Variant) -> Dictionary:
 		return base
 	if not value.godot.has("materials"):
 		for event in value.life.events:
-			if event.get("type") == MATERIAL_NOTICE_EVENT: return _failure("material_notice_source_missing")
+			if event.get("type") in [MATERIAL_NOTICE_EVENT, "material_location_shared"]: return _failure("material_notice_source_missing")
 		return base
 	var m: Variant = value.godot.materials
 	# Older saves have no blocked-travel projection; both shapes stay loadable.
@@ -650,12 +672,9 @@ func _validate_state(value: Variant) -> Dictionary:
 			var known: Variant = m.known[id][source_id]
 			if not m.sources.has(source_id) or not known is Dictionary or not _exact_keys(known, ["stock", "observed_elapsed", "event_seq"]) or (known.stock != null and not _bounded(known.stock, m.sources[source_id].initial_stock)) or not _bounded(known.observed_elapsed, value.godot.elapsed_seconds, false):
 				return _failure("invalid_material_observation")
-			var found := false
-			for event in value.life.events:
-				var expected_type := MATERIAL_NOTICE_EVENT if known.stock == null else "material_source_observed"
-				if event.get("seq") == known.event_seq and event.get("type") == expected_type and event.get("actor_id") == id and id in event.get("recipient_ids", []) and event.get("source_id") == source_id and event.get("stock") == known.stock:
-					found = true
-			if not found:
+			var proof := _material_knowledge_event(value, id, source_id, known.event_seq)
+			var types := [MATERIAL_NOTICE_EVENT, "material_location_shared"] if known.stock == null else ["material_source_observed"]
+			if proof.is_empty() or proof.get("type") not in types or proof.get("stock") != known.stock:
 				return _failure("invalid_material_observation_evidence")
 	var notices := _validate_material_notices(value, m)
 	if not notices.ok: return notices

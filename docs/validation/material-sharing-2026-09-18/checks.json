@@ -1,0 +1,233 @@
+{
+  "milestone": "H116",
+  "at_utc": "2026-09-18T15:39:28.527218+00:00",
+  "code_parent": "12fbf60816aa9ad44f465f17cfc6fb9a2f7a877d",
+  "world_id": "shared:restart-20260918-01",
+  "paid_calls": 0,
+  "capabilities": 35,
+  "final_checks": 414,
+  "suites": [
+    {
+      "suite": "town_material_sharing",
+      "checks": 50,
+      "failures": 0,
+      "all_owned_processes_exited": true,
+      "stdout_sha256": "8617137f80e8c9fa1d19a58892cfa8861f5de2cc810f9ad00dd9ed7a2ac6317a"
+    },
+    {
+      "suite": "town_material_sharing_input",
+      "checks": 12,
+      "failures": 0,
+      "all_owned_processes_exited": true,
+      "stdout_sha256": "a09d517b1773e28a077d6eab784af5bc7b30ddfd63c62ec3a8a33c2ca811b6d8"
+    },
+    {
+      "suite": "town_material_sharing_scene",
+      "checks": 32,
+      "failures": 0,
+      "all_owned_processes_exited": true,
+      "stdout_sha256": "ae458f7ae76b1448b1dda9cf5af0a413d193993861068a72ddfc47f18f1c2a31"
+    },
+    {
+      "suite": "town_materials",
+      "checks": 58,
+      "failures": 0,
+      "all_owned_processes_exited": true,
+      "stdout_sha256": "954fe6b0143c41996810d6c8457d4b78ab2885d91354b2dec035de2ba42bc17b"
+    },
+    {
+      "suite": "town_material_notice",
+      "checks": 34,
+      "failures": 0,
+      "all_owned_processes_exited": true,
+      "stdout_sha256": "1f5d8204e80047a79bc6bc1695c53f81ee4ad2b86c93f22a162c4bcc3dc4bc5d"
+    },
+    {
+      "suite": "town_public_life_evidence",
+      "checks": 51,
+      "failures": 0,
+      "all_owned_processes_exited": true,
+      "stdout_sha256": "06f178555d0a62be80912e8443b44f01fd341920c7ee3521ea3e2fe96a7ecf14"
+    },
+    {
+      "suite": "town_capabilities",
+      "checks": 166,
+      "failures": 0,
+      "all_owned_processes_exited": true,
+      "stdout_sha256": "e6dc807408527b53753f716b89f64b4169bce5d3638e6a076d69c267100541f8"
+    },
+    {
+      "suite": "town_restore_read_only",
+      "checks": 11,
+      "failures": 0,
+      "all_owned_processes_exited": true,
+      "stdout_sha256": "8b0bede526ce84c399e20e4c8f6cba49f17eb2385c3fef63175cc1691d184e70"
+    }
+  ],
+  "physical": {
+    "checks": 32,
+    "collector": "shared:baker",
+    "controlled_copy": true,
+    "directly_observed": true,
+    "disclosure": {
+      "code": "material_location_shared",
+      "event_id": "life_event_151",
+      "ok": true,
+      "speech_delivery": {
+        "attempted": true,
+        "code": "speech_delivered",
+        "delivered": true,
+        "event_id": "life_event_151",
+        "event_seq": 151,
+        "recipient_ids": [
+          "shared:well-keeper",
+          "shared:baker"
+        ],
+        "text": "I can tell you this route: Street salvage iron heap: public iron, 44 m north, 6 m west. Follow the streets; sort for 60 seconds per unit. Finite supply; current stock unknown and not promised."
+      }
+    },
+    "failures": [],
+    "final_seq": 157,
+    "listener_proof": {
+      "access": "public",
+      "id": "street:iron-salvage-20260918",
+      "knowledge_source": "reported_location_current_stock_unverified",
+      "label": "Street salvage iron heap",
+      "last_observed_stock": null,
+      "material": "iron",
+      "observation_event_seq": 151,
+      "observed_elapsed": 5390.383333333518,
+      "position": [
+        0,
+        0.22,
+        7.7
+      ],
+      "reported_by_id": "shared:well-keeper",
+      "reported_by_name": "Ari",
+      "stock_may_have_changed": true,
+      "work_seconds_per_unit": 60.0
+    },
+    "max_sample_step_m": 0.09003405272960663,
+    "max_speed_mps": 1.350000023841858,
+    "notice": {
+      "collision": true,
+      "notice": {
+        "asset": "res://assets/generated/travel_cargo_20260912/carved_route_waystone.glb",
+        "id": "public_notice:material_routes:v1",
+        "label": "Public Material Routes",
+        "point": [
+          2.5,
+          1.5950000017881394,
+          50.0
+        ],
+        "position": [
+          2.5,
+          0.04500000178813934,
+          50.0
+        ],
+        "read_range_m": 4.0,
+        "yaw": 200.0
+      },
+      "placed": true,
+      "published_entries": [
+        {
+          "id": "street:iron-salvage-20260918",
+          "label": "Street salvage iron heap",
+          "material": "iron",
+          "position": [
+            0,
+            0.22,
+            7.7
+          ],
+          "text": "Street salvage iron heap: public iron, 42 m north, 3 m west. Follow the streets; sort for 60 seconds per unit. Finite supply; current stock unknown and not promised."
+        }
+      ],
+      "stock_disclosed": false
+    },
+    "paid_calls": 0,
+    "read_proof": {
+      "access": "public",
+      "id": "street:iron-salvage-20260918",
+      "knowledge_source": "personally_read_public_material_notice_stock_unknown",
+      "label": "Street salvage iron heap",
+      "last_observed_stock": null,
+      "material": "iron",
+      "observation_event_seq": 149,
+      "observed_elapsed": 5390.383333333518,
+      "position": [
+        0,
+        0.22,
+        7.7
+      ],
+      "stock_may_have_changed": true,
+      "work_seconds_per_unit": 60.0
+    },
+    "reader": "shared:well-keeper",
+    "receipt": {
+      "command_id": "fixture:notice-collection",
+      "records": [
+        {
+          "payload": {
+            "action": "recover_material",
+            "actor_id": "shared:baker",
+            "provenance": "opengameagent_fixture",
+            "source_id": "street:iron-salvage-20260918"
+          },
+          "result": {
+            "actor_id": "shared:baker",
+            "code": "material_recovered",
+            "command_id": "fixture:notice-collection",
+            "material": "iron",
+            "ok": true,
+            "quantity": 1,
+            "source_id": "street:iron-salvage-20260918"
+          },
+          "status": "completed"
+        }
+      ],
+      "status": "completed"
+    },
+    "resumed": true,
+    "source_seq": 148,
+    "suite": "town_material_sharing_scene",
+    "walked_metres": 44.72991768270731
+  },
+  "input_units": {
+    "shared:well-keeper": 12435,
+    "shared:baker": 11378
+  },
+  "cold_restore": {
+    "active148": {
+      "residents": 10,
+      "exact_fields": true
+    },
+    "original450": {
+      "residents": 10,
+      "exact_fields": true
+    },
+    "physical157": {
+      "exact_fields": true
+    }
+  },
+  "design_contract_python_tests": 9,
+  "readonly_entry_headless_smoke": "passed",
+  "preserved_sha256": {
+    "published148": "cdfe0136856980281f671c14721815ac1bf5484cb77e930485edb9c435dc380a",
+    "restored148": "cdfe0136856980281f671c14721815ac1bf5484cb77e930485edb9c435dc380a",
+    "original450": "a06a43ed7c5ca5e55aef3e7b2e51ecf54faf8d5cc2133c15c789ccbe754f600c",
+    "original_local452": "e04c86112ac7afcf405d5832e1860340d00b19f997e97b31babeee951b24f4c1",
+    "restored_gm": "c6945a6b26aa8733ddee604e807abf7a23724e5d3df10731d24ca217210e74a1"
+  },
+  "complete_developer_usage_equal": true,
+  "developer_usage_actors": 20,
+  "developer_usage_calls": 144,
+  "limitations": [
+    "Controlled fixture choices; natural model adoption unobserved",
+    "Existing provider ledger and guard not located here; no paid continuation",
+    "Native GM sessions not recovered",
+    "Four existing overlapping navigation edges",
+    "Finite source; resource sustainability unproven"
+  ],
+  "provider_ledger_reset": false,
+  "heartbeat_restarted": false
+}

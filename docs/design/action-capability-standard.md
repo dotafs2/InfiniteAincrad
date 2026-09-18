@@ -1,6 +1,6 @@
 # Resident action capability standard
 
-H110 introduced one resident-action boundary with 33 versioned definitions: 27 adapters over established rules and six native entry points. H114 adds `production.self_repair`, bringing the current registry to 34. This is a foundation for adding behavior, not a claim that every possible profession or social system exists.
+H110 introduced one resident-action boundary with 33 versioned definitions: 27 adapters over established rules and six native entry points. H114 adds `production.self_repair`; H116 adds `knowledge.share_material_location`, bringing the current registry to 35. This is a foundation for adding behavior, not a claim that every possible profession or social system exists.
 
 The production world is `game/core/town_actions.gd`. It composes reviewed modules under `game/core/actions/`; new modules do not extend the world's inheritance chain. Existing reducers, command identities, inventory rules, save histories and physical movement remain authoritative.
 
@@ -27,14 +27,22 @@ Definitions describe resource constraints; their strings are not a generic lock 
 | Life | Wait, eat a held ration, rest. |
 | Movement | Approach someone, walk to a workstation, visit a personally known public place. |
 | Perception | Observe actual nearby work; privately record current surroundings. |
-| Knowledge and learning | Announce a real skill, relay an attributed skill notice, request an existing consensual repair lesson. |
+| Knowledge and learning | Announce a real skill, relay an attributed skill notice, request an existing consensual repair lesson; explicitly tell a nearby resident a personally known material route. |
 | Social | Ask/reply/cancel help, reply to the visitor; independently speak to a nearby resident. |
 | Inventory | Voluntary food gift, deliver a contracted item, collect a repaired item. |
 | Contracts | Offer, accept, decline or cancel an existing repair contract. |
 | Production | Forage, contracted repair, repair an owned axe part, use a functional tool, collect/cancel material recovery, bake using finite flour. |
 | Cooperation | Invite, accept, decline or withdraw a joint visit; accepted visits compose two existing physical journeys. |
 
-The complete IDs and machine-readable contracts live in the registry definitions, not a second manually maintained runtime list. `social.talk`, `perception.observe_surroundings`, the four `cooperation.*` entry points and `production.self_repair` are native modules; the other 27 reuse established mechanics.
+The complete IDs and machine-readable contracts live in the registry definitions, not a second manually maintained runtime list. `social.talk`, `perception.observe_surroundings`, the four `cooperation.*` entry points, `production.self_repair` and `knowledge.share_material_location` are native modules; the other 27 reuse established mechanics.
+
+## Sharing a material route
+
+`knowledge.share_material_location` is an explicit optional speaking action. The speaker must personally know the installed source, be available and have an active recipient within the existing three-metre hearing range. An attributed route statement names the source, direction and labor requirements while declaring current stock unknown. The action generates these actual words from the source evidence; arbitrary model speech cannot replace them. The model's private reason remains separate from the delivered utterance.
+
+Only a previously uninformed recipient gains location knowledge, linked to the actual disclosure and immediate speaker. Existing observations, including known depletion, remain intact. Discovery and feedback never reveal whether the recipient already knew the source. A ten-second cooldown and the speaker's own disclosure history prevent repeatedly telling the same person the same route. Recipients may independently relay, collect or do something else. Knowing a route grants no material, skill, contract or completed work.
+
+Cold restore validates the command, exact utterance, recipients, hearing distance and earlier personal evidence chain. A redundant report cannot replace a direct stock observation with unknown stock. GM public-life evidence includes actual spoken words, without exposing private source history or treating the utterance as an achievement. This reviewed knowledge action does not turn arbitrary free conversation into verified beliefs.
 
 ## Own-property repair
 
