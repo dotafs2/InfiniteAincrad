@@ -35,6 +35,9 @@ var paused := true
 var tick := 0.0
 var capture_dir := ""
 var capture_age := 0.0
+var capture_running_seconds := 0.0
+var capture_paused_seconds := 0.0
+var capture_was_paused := false
 var capture_started := false
 var status: Label
 var berry_visuals: Array[Node3D] = []
@@ -263,7 +266,7 @@ func _ready() -> void:
 	if gateway_mode:
 		model_turns = TownTurns.new()
 		add_child(model_turns)
-		model_turns.configure(town, _save_path)
+		model_turns.configure(town, _save_path, validation_decision_limit != 0)
 		model_turns.shutdown_wait_limit = shutdown_wait_limit
 	# One explicit, bounded evidence snapshot for a separate GM process. No daemon and
 	# no loop; nothing from this export enters a resident model context. The startup
@@ -423,7 +426,10 @@ func _process(delta: float) -> void:
 		# V overview, N resident follow and the player camera all share one overlay. Project
 		# against the camera that is actually current, never the camera used at startup.
 		nameplates.camera = get_viewport().get_camera_3d()
-	var capture_timeout := 150.0 if (repair_fixture and not gateway_mode and not restore_only) else (3.0 if paused else capture_seconds)
+	# A paused live episode still has its requested duration. Only an explicitly
+	# read-only restore uses the short capture; pausing cannot turn 600 seconds
+	# into a three-second timeout and then report a successful observation.
+	var capture_timeout := 150.0 if (repair_fixture and not gateway_mode and not restore_only) else (3.0 if restore_only else capture_seconds)
 	# The episode's own duration boundary is decided BEFORE any new resident is
 	# chosen, and on the same elapsed+delta value the capture below uses. A resident
 	# that becomes ready exactly on the boundary frame is therefore never admitted
@@ -437,6 +443,10 @@ func _process(delta: float) -> void:
 			_run_model_turn(ready)
 	if not capture_dir.is_empty():
 		capture_age += delta
+		if paused:
+			capture_paused_seconds += delta
+		else:
+			capture_running_seconds += delta
 		if dialogue_fixture and capture_age > 1.0 and not dialogue_fixture_done:
 			dialogue_fixture_done = true
 			_inquire_nearby(true)
@@ -506,10 +516,13 @@ func _begin_capture(reason: String) -> void:
 		return
 	capture_started = true
 	capture_shutdown_reason = reason
+	capture_was_paused = paused
 	# Honest engine status: an episode that ends with a reply still owed is not a
 	# clean stop. The record keeps the status it really has, so a later start can
 	# reconcile that request instead of reading a fabricated success.
 	shutdown_exit_code = 3 if (_owns_shutdown_gate() and model_turns.shutdown_wait_timed_out) else 0
+	if not restore_only and reason in ["duration_elapsed", "episode_duration_elapsed"] and capture_running_seconds + 0.05 < capture_seconds:
+		shutdown_exit_code = 4
 	_capture_town.call_deferred()
 
 func _physics_process(delta: float) -> void:
@@ -1547,7 +1560,11 @@ func _shutdown_evidence() -> Dictionary:
 		if record is Dictionary and record.get("status", "") == "pending":
 			owed.append({"actor_id": id, "request_id": str(record.get("request_id", ""))})
 	var reported := {"capture_reason": capture_shutdown_reason, "exit_code": shutdown_exit_code,
-		"wait_limit_seconds": shutdown_wait_limit, "resident_requests_owed": owed}
+		"wait_limit_seconds": shutdown_wait_limit, "resident_requests_owed": owed,
+		"requested_seconds": capture_seconds, "capture_seconds": capture_age,
+		"running_seconds": capture_running_seconds, "paused_seconds": capture_paused_seconds,
+		"paused_at_capture": capture_was_paused,
+		"duration_fulfilled": capture_running_seconds + 0.05 >= capture_seconds}
 	if _owns_shutdown_gate():
 		reported.merge(model_turns.shutdown_evidence(), true)
 	return reported

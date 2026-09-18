@@ -26,6 +26,15 @@ from kimi_gateway import BudgetServer, UpstreamUnknown, handler_type
 from town_validation_budget import CarriedLedgerGate, EvidenceGateway, read_review_pin
 
 
+class DurationEvidenceTests(unittest.TestCase):
+    def test_engine_zero_does_not_hide_incomplete_observation(self):
+        capture = {'validation_decisions_started': 32,
+                   'shutdown': {'capture_reason': 'episode_duration_elapsed', 'duration_fulfilled': False}}
+        result = launcher.classify_validation(0, capture, {}, '', False, 32)
+        self.assertEqual(result['validation_status'], 'failed')
+        self.assertIn('requested_observation_duration_incomplete', result['classification_reasons'])
+
+
 def request_body():
     return {'model': 'kimi-k2.6', 'messages': [{'role': 'user', 'content': 'Offline fixture: choose wait.'}],
             'max_tokens': 512, 'stream': False}
@@ -98,6 +107,30 @@ class BudgetLauncherTests(unittest.TestCase):
 
     def gate(self, **kwargs):
         return CarriedLedgerGate(self.ledger, self.pin, **kwargs)
+
+    def test_episode_cap_denies_before_reservation_or_provider(self):
+        gate = self.gate(max_spend_nano=1)
+        before = self.rows()
+        gateway = EvidenceGateway(self.ledger, self.provider, self.root, gate)
+        with self.assertRaises(BudgetDenied):
+            gateway.complete('episode-over-cap', 'fixture:resident', request_body())
+        self.assertEqual(self.rows(), before)
+        self.assertEqual(self.provider.calls, 0)
+        self.assert_original_preserved()
+
+    def test_episode_cap_counts_new_charges_and_keeps_old_liability_separate(self):
+        reserve = self.policy.input_ceiling * self.policy.input_nano_per_token + 512 * self.policy.output_nano_per_token
+        gate = self.gate(max_spend_nano=reserve)
+        gateway = EvidenceGateway(self.ledger, self.provider, self.root, gate)
+        gateway.complete('episode-first', 'fixture:resident', request_body())
+        # A cached receipt requires no new reservation, even when the new-request cap is tight.
+        gateway.complete('episode-first', 'fixture:resident', request_body())
+        before = self.rows()
+        with self.assertRaises(BudgetDenied):
+            gateway.complete('episode-second', 'fixture:resident', request_body())
+        self.assertEqual(self.rows(), before)
+        self.assertEqual(self.provider.calls, 1)
+        self.assert_original_preserved()
 
     def gm_snapshot(self, world_id='fixture:model-validation-world', life_seq=0,
                     godot_elapsed=0.0, world_elapsed=0.0):

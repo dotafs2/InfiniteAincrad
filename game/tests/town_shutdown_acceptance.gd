@@ -334,6 +334,28 @@ func _scenario_boundary_frame() -> Dictionary:
 	town = null
 	return summary
 
+func _scenario_paused_live_duration() -> Dictionary:
+	var stage := _stage("paused_duration", 5.0)
+	if stage.is_empty(): return {}
+	var scene = stage.scene
+	scene.capture_seconds = 5.0
+	scene.paused = true
+	stage.turns.configure(stage.town, stage.path, false)
+	check(stage.turns.brains.is_empty(), "zero-decision observation creates no provider brains")
+	scene._process(4.0)
+	check(scene.captures == 0, "paused live episode does not switch to the three-second restore timeout")
+	scene._process(1.1)
+	await process_frame
+	check(scene.captures == 1 and scene.capture_exit_code == 4, "paused episode reports incomplete duration rather than passing")
+	check(scene.capture_evidence.running_seconds == 0.0 and scene.capture_evidence.paused_seconds > 5.0,
+		"paused and running observation times are reported separately")
+	check(scene.capture_evidence.duration_fulfilled == false, "paused time is not resident life")
+	stage.town.release_writer(stage.path)
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(stage.path))
+	var summary := {"scenario": "paused_live_duration", "exit_code": scene.capture_exit_code}
+	_release(stage)
+	return summary
+
 func run() -> void:
 	var delayed := await _scenario_delayed_reply()
 	if _blocked:
@@ -342,6 +364,7 @@ func run() -> void:
 	if _blocked:
 		return
 	var boundary := await _scenario_boundary_frame()
+	var paused_duration := await _scenario_paused_live_duration()
 	print(JSON.stringify({"suite": "town_shutdown", "checks": checks, "failures": failures, "paid_calls": 0,
-		"scenarios": [delayed, unresolved, boundary]}))
+		"scenarios": [delayed, unresolved, boundary, paused_duration]}))
 	quit(0 if failures == 0 else 1)

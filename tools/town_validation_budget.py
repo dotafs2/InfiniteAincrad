@@ -11,7 +11,7 @@ import re
 import secrets
 import threading
 
-from kimi_budget import BudgetDenied, InvalidRequest, encoded, fingerprint, usage_cost
+from kimi_budget import BudgetDenied, InvalidRequest, encoded, fingerprint, usage_cost, normalize_request
 from kimi_gateway import Gateway, write_private_json
 
 
@@ -32,13 +32,16 @@ def read_review_pin(path):
 
 
 class CarriedLedgerGate:
-    def __init__(self, ledger, pin=None, concurrency=1, max_requests=12):
+    def __init__(self, ledger, pin=None, concurrency=1, max_requests=12, max_spend_nano=None):
         self.ledger = ledger
         self.lock = threading.RLock()
         self.failure = ''
         self.owned_ids = set()
         self.sent = 0
         self.max_requests = max_requests
+        if max_spend_nano is not None and (type(max_spend_nano) is not int or max_spend_nano <= 0):
+            raise BudgetDenied('Session spending cap must be a positive integer in nanoyuan')
+        self.max_spend_nano = max_spend_nano
         # Refuse before the provider, loopback server, output directory or engine
         # starts. Ledger.reserve also enforces this, but discovering an expired
         # carried policy only after a compiled adapter has durably marked its run
@@ -138,6 +141,19 @@ class CarriedLedgerGate:
             self.failure = 'Ledger changed or a new request is unresolved; validation stopped'
             raise
 
+    def admit_cost(self, rows, body):
+        """Reserve against this episode's cap BEFORE creating any new ledger row."""
+        if self.max_spend_nano is None:
+            return
+        clean = normalize_request(body, self.ledger.policy)
+        policy = self.ledger.policy
+        reservation = policy.input_ceiling * policy.input_nano_per_token + clean['max_tokens'] * policy.output_nano_per_token
+        liability = sum(row['charge'] if row['state'] == 'settled' else row['reserve']
+                        for key, row in rows.items() if key not in self.baseline_rows)
+        if liability + reservation > self.max_spend_nano:
+            self.failure = 'Session spending cap reached; no new request reserved or sent'
+            raise BudgetDenied(self.failure)
+
 
 class EvidenceGateway(Gateway):
     """One upstream request at a time, exact carried rows, private evidence."""
@@ -159,6 +175,8 @@ class EvidenceGateway(Gateway):
                 raise InvalidRequest('Bounded operation identifier required')
             if request_id not in rows and self.gate.sent >= self.gate.max_requests:
                 raise BudgetDenied('Validation request limit reached')
+            if request_id not in rows:
+                self.gate.admit_cost(rows, body)
             request_dir = self.out / 'request-bodies'
             request_dir.mkdir(exist_ok=True)
             write_private_json(request_dir / (secrets.token_hex(12) + '.json'),
