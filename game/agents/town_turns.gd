@@ -313,12 +313,13 @@ func step(requested_id: String = "") -> Dictionary:
 	for key in ["story", "personality", "faction"]:
 		if town.resident(id).has(key):
 			view.identity[key] = town.resident_background(id, key)
-	var options: Array = town.trade_options(id)
+	var options: Array = town.action_options(id) if town.has_method("action_options") else town.trade_options(id)
 	var character: Dictionary = town.CharacterProfile.project(town.resident(id), view, options)
 	if not character.is_empty():
 		view.identity["character"] = character
 	view.available_actions = []
 	view.action_details = []
+	var action_groups := {}
 	var aliases: Dictionary = {}
 	var speech_actions: Array = []
 	for option in options:
@@ -327,7 +328,23 @@ func step(requested_id: String = "") -> Dictionary:
 		view.available_actions.append(alias)
 		if option.get("speech_allowed", false):
 			speech_actions.append(alias)
-		view.action_details.append({"id": alias, "label": option.label, "speech_allowed": option.get("speech_allowed", false)})
+		var presentation: Dictionary = option.get("presentation", {})
+		# Lossless menu factoring: only use a reviewed template when expanding it
+		# reproduces the exact option label. All aliases and speech gates remain.
+		var grouped := false
+		if presentation.get("template") is String and presentation.get("arguments") is Array and presentation.template.format(presentation.arguments) == option.label:
+			var group_id: String = option.get("capability_id", "")
+			if not group_id.is_empty(): group_id += ":" + presentation.template.sha256_text().substr(0, 12)
+			if not group_id.is_empty():
+				if not action_groups.has(group_id):
+					action_groups[group_id] = {"template": presentation.template, "speech_allowed": option.get("speech_allowed", false), "choices": {}}
+				var group: Dictionary = action_groups[group_id]
+				if group.template == presentation.template and group.speech_allowed == option.get("speech_allowed", false):
+					group.choices[alias] = presentation.arguments.duplicate(true)
+					grouped = true
+		if not grouped:
+			view.action_details.append({"id": alias, "label": option.label, "speech_allowed": option.get("speech_allowed", false)})
+	if not action_groups.is_empty(): view["action_groups"] = action_groups
 	# Model-facing decision contract for THIS request: reply shape, required field
 	# types, the provided aliases and the exact text bounds. Disclosure only - the
 	# authoritative check in apply_reply is unchanged, still fail-closed, and never
@@ -338,9 +355,11 @@ func step(requested_id: String = "") -> Dictionary:
 		"reply": "one JSON object following this field contract",
 		"action": "string naming exactly one id from available_actions",
 		"reason": "string, required, at most %d characters" % DECISION_TEXT_LIMIT,
-		"speech": "string, optional, only for actions whose action_details entry has speech_allowed true, at most %d characters" % DECISION_TEXT_LIMIT,
+		"speech": "string, optional, only when the action_details entry or action_groups group has speech_allowed true, at most %d characters" % DECISION_TEXT_LIMIT,
 		"need": "optional object with capability_id and reason, only when no available action meets the need",
 	}
+	if not action_groups.is_empty():
+		request_rules.decision_format["action_groups"] = "Each group has one template and choices mapping action IDs to arguments. Replace {0}, {1}, etc. with that choice's arguments to read its full description; choose the listed action ID."
 	view["known_rules"] = request_rules
 	# Context is bounded; canonical full history remains in the world save.
 	view.experiences = view.get("experiences", []).slice(-16)
@@ -436,9 +455,17 @@ func _record_archive_entry(entry: Dictionary) -> Dictionary:
 		return {"ok": true, "code": "resident_archive_unsupported_runtime"}
 	return town.record_resident_reply(entry)
 
+func _execute_world_action(id: String, action: String, command: String, provenance: String, speech: String = "") -> Dictionary:
+	if town.has_method("execute_action"):
+		return town.execute_action(id, action, command, provenance, speech)
+	if speech.is_empty(): return town.submit_trade(id, action, command, provenance)
+	return town.submit_trade(id, action, command, provenance, speech)
+
 func _speech_delivery(id: String, request_id: String, speech: String, effect: Dictionary) -> Dictionary:
 	if not effect.get("ok", false):
 		return {"attempted": not speech.is_empty(), "delivered": false, "code": effect.get("code", "speech_rejected")}
+	if effect.get("speech_delivery") is Dictionary:
+		return effect.speech_delivery.duplicate(true)
 	for event in town._state.life.get("events", []):
 		if event is Dictionary and event.get("operation_id", "") == request_id and event.get("actor_id", "") == id and event.get("text", "") == speech:
 			return {"attempted": true, "delivered": true, "code": "speech_delivered",
@@ -652,16 +679,19 @@ func apply_reply(id: String, epoch: int, request_id: String, reply: Dictionary, 
 		var speech_delivery := {}
 		if aliases.has(decision.action):
 			if str(decision.get("speech", "")).is_empty():
-				effect = town.submit_trade(id, record.action, request_id, record.provenance)
+				effect = _execute_world_action(id, record.action, request_id, record.provenance)
 			elif decision.action in record.get("speech_actions", []):
-				effect = town.submit_trade(id, record.action, request_id, record.provenance, decision.speech)
+				effect = _execute_world_action(id, record.action, request_id, record.provenance, decision.speech)
 			else:
 				# Optional public words do not invalidate an independently legal
 				# action. Keep the unsent words in the private accepted reply and
 				# report non-delivery; never claim the counterparty heard them.
-				effect = town.submit_trade(id, record.action, request_id, record.provenance)
+				effect = _execute_world_action(id, record.action, request_id, record.provenance)
 				speech_delivery = {"ok": false, "code": "speech_not_supported_for_action", "delivered": false}
 				effect["speech_delivery"] = speech_delivery.duplicate(true)
+		# Atomic capability composition may roll back an in-memory snapshot while
+		# this outer transaction retains the rejected reply. Rebind its owned turn.
+		town._state.godot.resident_turns[id] = record
 		record.status = "settled" if effect.ok else "rule_rejection"
 		record.result = effect.duplicate(true)
 		# A validated capability proposal becomes a bounded, deduplicated world-scoped
@@ -737,6 +767,9 @@ func _feedback_history(id: String, record: Dictionary) -> Array:
 		var command_id := str(item.get("command_id", ""))
 		var command: Dictionary = trade_commands.get(command_id, life_commands.get(command_id,
 			material_commands.get(command_id, baking_commands.get(command_id, place_commands.get(command_id, {})))))
+		# Native capabilities retain the same actor-bound receipt contract.
+		if command.is_empty():
+			command = town._state.godot.get("capabilities", {}).get("commands", {}).get(command_id, {})
 		var feedback := {"ok": false, "code": "unknown", "reason": "no authoritative execution receipt"}
 		if command.get("payload", {}).get("actor_id", "") == id:
 			# Older trade wrappers may still say pending while the life command settled.

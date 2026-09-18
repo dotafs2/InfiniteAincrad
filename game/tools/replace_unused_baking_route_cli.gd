@@ -6,7 +6,7 @@ extends SceneTree
 ##   --town-save=<absolute path> --old-point-id=<active id> --source-seq=<same need seq> \
 ##   --command-id=development_gm:<review id> --spec-file=<new reviewed point spec>
 
-const Town = preload("res://core/town_baking.gd")
+const Town = preload("res://core/town_actions.gd")
 
 func _initialize() -> void:
 	run.call_deferred()

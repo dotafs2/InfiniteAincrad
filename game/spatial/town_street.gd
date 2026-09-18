@@ -7,9 +7,10 @@ extends "res://spatial/street_trial.gd"
 ## in clearly labelled offline/local_rule_policy mode and is never executed in
 ## gateway_mode or restore_only.
 
-# The playable world class: the public places runtime plus the bounded public baking route
-# (one reviewed finite-flour baking point, personal line-of-sight knowledge only).
-const Town = preload("res://core/town_baking.gd")
+# The playable world enters all resident behavior through the common capability boundary.
+# Keep the established base type for fixture hosts that override individual reducers.
+const Town = preload("res://core/town_actions.gd")
+const BaseTown = preload("res://core/town_baking.gd")
 const TownTurns = preload("res://agents/town_turns.gd")
 const TownTools = preload("res://spatial/town_tools.gd")
 const TownNameplates = preload("res://spatial/town_nameplates.gd")
@@ -27,7 +28,7 @@ const TownNavigation = preload("res://spatial/town_navigation.gd")
 const BREAD_SCENE_PATH := "res://assets/overnight20260918/bread_loaf.tscn"
 const DIALOGUE_IDLE_HINT := "Approach a resident and press H to type what you want to say."
 const RESTORE_DIALOGUE_IDLE_HINT := "Read-only visit. Start live AI life to talk with residents."
-var town := Town.new()
+var town: BaseTown = Town.new()
 var actors: Dictionary = {}
 var bodies: Dictionary = {}
 var cards: Dictionary = {}
@@ -706,7 +707,7 @@ func _physics_process(delta: float) -> void:
 				var choice := town.choose_local(id)
 				if choice != "wait":
 					var command := "godot-life:%s:%d" % [id, town.command_count()]
-					town.start_action(id, choice, command)
+					town.submit_trade(id, "life:" + choice, command)
 		return advanced)
 	if not result.ok:
 		paused = true

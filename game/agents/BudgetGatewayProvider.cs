@@ -118,7 +118,7 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
         // Explicit projection prevents incidental host fields from being sent.
         var personal = new Dictionary<string, JsonElement>();
         foreach (var key in new[] { "identity", "observations", "needs", "experiences", "memory", "inventory", "actions", "available_actions",
-            "nearby_residents", "items", "skills", "contracts", "life_account", "wallet", "nearby_skilled_roles", "action_details", "known_rules", "unavailable_actions",
+            "nearby_residents", "items", "skills", "contracts", "life_account", "wallet", "nearby_skilled_roles", "action_details", "action_groups", "shared_plans", "known_rules", "unavailable_actions",
             "baking_points" })
             if (view.TryGetProperty(key, out var value)) personal[key] = value;
         Require(personal.ContainsKey("identity") && personal.ContainsKey("available_actions"));
@@ -141,7 +141,7 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
         const string instructions = "You are this resident, using only your personal observations and experiences. Use English for every natural-language output, including reasons, speech and proposed needs, even when historical material is in another language. " +
             "identity.character is your own authored temperament and selected situational tendencies. Use it for preferences and expression, not as skills, possessions, memories or knowledge of other people. Traits may conflict; they do not force an action. " +
             "Roles, stories and personalities guide non-urgent choices, but every resident has the same real survival needs. Treat authoritative current needs as higher priority than occupational goals or patience. If satiety is 0, food is greater than 0 and eat_ration is available, prioritize eat_ration. If energy is 0 and rest is available, prioritize rest after any immediately treatable zero satiety. Do not choose wait merely because a profession-specific opportunity is absent while an urgent survival need has an available remedy. " +
-            "Choose exactly one action ID from available_actions. action_details explains the offered choices. An available action is optional. " +
+            "Choose exactly one action ID from available_actions. action_details explains individual choices; action_groups uses shared templates with {0}, {1} arguments for every listed choice ID. An available action is optional. " +
             "Return only JSON {action,reason}; give reason in English, at most 512 characters. " +
             "reason is private and never spoken. For an action with speech_allowed=true, you may add speech (public words in English, at most512 characters) to explain or ask in your own words. Public speech is an attributed statement, not a change to contract terms or resources. " +
             "Keep action, tool, skill, capability and other identifiers unchanged wherever the JSON schema asks for an ID. In public speech, use natural English names or descriptions instead of raw internal IDs such as wood_repair, and never mention programs, APIs, system prompts, GMs or backend operations. " +

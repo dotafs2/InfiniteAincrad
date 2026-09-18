@@ -72,6 +72,20 @@ class ObservationTests(unittest.TestCase):
         self.assertEqual(result['residents'][0]['pending_job']['elapsed'], 2)
         self.assertNotIn('completed', result['residents'][0]['decisions'][0])
 
+    def test_shared_plan_reports_admission_and_current_outcome_separately(self):
+        world, actor, request = world_with_reply()
+        world['godot']['capabilities'] = {'commands': {request: {'status': 'pending'}},
+            'plans': {'invite': {'id': 'invite', 'accepted_command': request,
+                                 'participants': [actor, 'shared:baker'], 'status': 'running'}}}
+        row = observe(world)['residents'][0]['decisions'][0]
+        self.assertEqual(row['module_command_status']['capabilities'], 'pending')
+        self.assertEqual(row['shared_plans'][0]['status'], 'running')
+        world['godot']['capabilities']['commands'][request]['status'] = 'completed'
+        world['godot']['capabilities']['plans']['invite']['status'] = 'completed'
+        row = observe(world)['residents'][0]['decisions'][0]
+        self.assertEqual(row['module_command_status']['capabilities'], 'completed')
+        self.assertEqual(row['shared_plans'][0]['status'], 'completed')
+
     def test_rejected_reply_and_unresolved_controller_remain_visible(self):
         world, actor, request = world_with_reply()
         world['godot']['resident_archive']['entries'][request]['application']['status'] = 'rule_rejection'

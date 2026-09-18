@@ -11,7 +11,7 @@ extends SceneTree
 ## The install grants no skill, item, material or coin, its command id is idempotent, and the
 ## finite public flour can only ever decrease.
 
-const Town = preload("res://core/town_baking.gd")
+const Town = preload("res://core/town_actions.gd")
 
 func _initialize() -> void:
 	run.call_deferred()

@@ -207,7 +207,10 @@ def observe(world, baseline=None):
                'current_command_status': command.get('status'),
                'current_trade_command_status': trade_command.get('status'),
                'module_command_status': {module: world['godot'].get(module, {}).get('commands', {}).get(key, {}).get('status')
-                                         for module in ('materials', 'baking')},
+                                         for module in ('materials', 'baking', 'places', 'capabilities')},
+               'shared_plans': [deepcopy(plan) for plan in world['godot'].get('capabilities', {}).get('plans', {}).values()
+                                if resident_id in plan.get('participants', [])
+                                and key in (plan.get('id'), plan.get('accepted_command'))],
                'replay_count': len(entry.get('replays', [])),
                'complete_archive': entry.get('complete', True),
                'interpretation': 'Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion.'}

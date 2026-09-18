@@ -16,6 +16,8 @@ The user explicitly restarted the active simulation at seq0 in `shared:restart-2
 
 - **H109:** user-authorized fresh world, 32 real Kimi decisions, a pause/early-success fix, and a continuous ten-minute follow-up of existing actions without further model calls. Per-resident decisions and full sequence migration are retained. Read the [Chinese observation report](worlds/restart-20260918-01/report.zh-CN.md) and [run evidence](docs/validation/resident-observation-2026-09-18.md).
 
+- **H110:** one reusable action boundary with 33 capability contracts: 27 existing adapters plus free conversation, private observation and four consent-based joint-visit operations. Atomic composition, durable receipts and full restore checks are implemented. Two real bodies completed a shared journey across restart. Crowded menus retain every choice through lossless description factoring. Read the [capability standard](docs/design/action-capability-standard.md) and [validation](docs/validation/action-capabilities-2026-09-18.md). The active live world remains seq43; adoption awaits a separate live continuation.
+
 [Character-depth review](docs/design/character-depth-review-2026-09-18.md) · [All ten complete dossiers](docs/design/resident-dossiers.md) · [Character validation](docs/validation/character-depth-2026-09-18.md)
 
 [Conversation archive and handoff](docs/history/conversations/README.md) · [Offline workflow evidence](docs/validation/local-flow-2026-09-18.md) · [Navigation evidence](docs/validation/navigation-and-history-2026-09-18.md) · [English rollout](docs/validation/english-rollout-2026-09-18.md) · [Zoomable flowchart](docs/validation/local-flow-2026-09-18/flowchart.html)
@@ -30,6 +32,7 @@ flowchart TB
         A83Entry["Start or resume the same world<br/>Save, identities, GM memory, cost ledgers and configuration"]
         A83Scene["Godot authoritative world<br/>Real bodies, collisions, positions, items and time"]
         A83NPC["Each resident reads own character, knowledge and history<br/>Chooses an available action and any permitted speech"]
+        A83Action["Unified versioned capability boundary<br/>Personal options, current resource and consent checks<br/>Atomic composition; independent body jobs may run together"]
         A83Move["Revalidate and execute under world rules<br/>Physical travel, on-site work, consumption and output"]
         A83Core["Persist actual outcomes and history<br/>Success, refusal and unfinished work remain distinct"]
         A83Evidence["Resident needs or maintenance evidence<br/>GM access follows responsibilities; residents are not omniscient"]
@@ -42,7 +45,7 @@ flowchart TB
         A83Stop["Stop new decisions; settle in-flight replies<br/>Save and exit"]
         A83Save["Cold-restore the full state and unfinished jobs<br/>Do not replay paid requests or recreate old identities"]
         A83Fault["Handle each fault within its scope; retain evidence<br/>Unknown costs stay unknown; local failures stay visible"]
-        A83Entry --> A83Scene --> A83NPC --> A83Move --> A83Core
+        A83Entry --> A83Scene --> A83NPC --> A83Action --> A83Move --> A83Core
         A83Core -->|Next turn| A83NPC
         A83Core --> A83Evidence --> A83GM
         A83GM -->|Improvement needed| A83Candidate --> A83Review
@@ -68,20 +71,22 @@ flowchart TB
         H107["H107 English game text and model instructions<br/>English names, dialogue, UI and flowchart<br/>Stable IDs and original historical evidence preserved"]
         H108["H108 Rich original character dossiers for ten seed residents<br/>21 stored sections; bounded self profile reaches decisions<br/>Existing-world migration and social growth remain pending"]
         H109["H109 User-requested fresh seq0 world<br/>32 live decisions; interrupted first window<br/>Ten-minute continuation; full checkpoints and Chinese report"]
-        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109
+        H110["H110 Reusable action layer: 33 capability contracts<br/>Free speech, private observation, consented joint travel<br/>Physical restart verified; live adoption not yet observed"]
+        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110
+        H110 -.Implemented common boundary.-> A83Action
         H103 --> M20
     end
     A83Save -.Bounded live evidence.-> M20
     H105 -.Offline rehearsal; not model autonomy.-> A83Evidence
     subgraph NEXT["3. Gaps and next steps"]
-        M20S["Connect identity to a social life<br/>Independent conversation, sourced introductions and disclosures<br/>Shared memories by person; relationships change through actual events"]
+        M20S["Observe adoption of conversation and joint visits<br/>Add sourced introductions and voluntary disclosures<br/>Shared memories by person; relationships change through actual events"]
         M20C["Validate sustainable resources and daily life first<br/>Long-term berry supply, crowding and voluntary ration gifts<br/>Renewable flour, professions and exchange"]
         M20G["Improve entering and observing the world<br/>Overlapping navigation edges, renderer exit, characters,<br/>animation and performance"]
         H47["Reduce manual handoffs between stages<br/>GM delivery, same-save life and actual-effect follow-up<br/>Longer runs, fault isolation and controlled costs"]
         H82["Participant-directed development<br/>Residents identify needs, choose construction, use or decline it<br/>Externally assigned goals are not autonomous invention"]
-        H109 -->|Continue the new world with full history| M20C
-        H109 -->|Turn actual conversation into executable cooperation| M20S
-        H109 -->|Fix observed world constraints| M20G
+        H110 -->|Continue the new world with full history| M20C
+        H110 -->|Observe voluntary use and extend tested capabilities| M20S
+        H110 -->|Fix observed world constraints| M20G
         M20S --> H82
         M20C --> H47 --> H82
     end
@@ -105,15 +110,15 @@ flowchart TB
     classDef done fill:#dcfce7,stroke:#15803d,color:#14532d;
     classDef partial fill:#fff1d6,stroke:#b45309,color:#78350f;
     classDef future fill:#f1f5f9,stroke:#64748b,color:#0f172a;
-    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109 done;
-    class M20,M20C,M20G,H47,H82,A83Entry,A83Scene,A83NPC,A83Move,A83Core,A83Evidence,A83GM,A83Candidate,A83Review,A83Release,A83Use,A83Feedback,A83Stop,A83Save,A83Fault partial;
-    class M20S,N5,P,N6,N7,N8,N9,XR,N10,R future;
+    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109,H110 done;
+    class M20,M20S,M20C,M20G,H47,H82,A83Entry,A83Scene,A83NPC,A83Action,A83Move,A83Core,A83Evidence,A83GM,A83Candidate,A83Review,A83Release,A83Use,A83Feedback,A83Stop,A83Save,A83Fault partial;
+    class N5,P,N6,N7,N8,N9,XR,N10,R future;
 ```
 
 ## Evidence boundaries and continuity
 
 The local workflow uses scripted resident and GM choices with actual Godot physics and persistence. It installs configuration for an existing finite resource source; it does not prove that a GM invented a new mechanic. Model requests in the offline work: zero.
 
-The active new world already exposes specific gaps: iron supply for a requested repair, weaving/animal-care/cultivation opportunities, executable joint plans, and stale target handling. The first priority is to connect these observed desires to valid world actions and evidence-backed social continuity. The paid window reached 32 requests and then paused early. A separate ten-minute continuation observes existing work without new decisions; it is not proof of unlimited conversation or long-term autonomy. Keep every sequence and model reply when continuing this same world. The separate original seq450 lineage can be migrated when its actual records return. Expand sustainable production and professions based on actual needs, then reduce manual coordination. A complete first town precedes adventure, meaningful floor progression and long-term multiplayer operation.
+The active new world already exposes specific gaps: iron supply for a requested repair, weaving/animal-care/cultivation opportunities, and stale target handling. H110 implements bounded independent conversation and shared visits through reusable capabilities; live voluntary adoption remains unobserved. The first priority is to connect these observed desires to valid world actions and evidence-backed social continuity. The paid window reached 32 requests and then paused early. A separate ten-minute continuation observes existing work without new decisions; it is not proof of unlimited conversation or long-term autonomy. Keep every sequence and model reply when continuing this same world. The separate original seq450 lineage can be migrated when its actual records return. Expand sustainable production and professions based on actual needs, then reduce manual coordination. A complete first town precedes adventure, meaningful floor progression and long-term multiplayer operation.
 
 Historical references remain available in the [previous full roadmap](docs/history/roadmap-before-english-20260918.md) and the [H1-H104 diagram archive](docs/validation/roadmap-history-through-h104.md). They are dated evidence, not competing current plans. [HISTORY.md](HISTORY.md) preserves the chronological record, including failures and user corrections.
