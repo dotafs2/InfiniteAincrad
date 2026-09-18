@@ -139,6 +139,7 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
             "place_id", "label", "public_use", "source", "source_id", "learned_event_id", "seq");
         var observation = JsonSerializer.Serialize(personal, WireJson);
         const string instructions = "You are this resident, using only your personal observations and experiences. Use English for every natural-language output, including reasons, speech and proposed needs, even when historical material is in another language. " +
+            "identity.character is your own authored temperament and selected situational tendencies. Use it for preferences and expression, not as skills, possessions, memories or knowledge of other people. Traits may conflict; they do not force an action. " +
             "Roles, stories and personalities guide non-urgent choices, but every resident has the same real survival needs. Treat authoritative current needs as higher priority than occupational goals or patience. If satiety is 0, food is greater than 0 and eat_ration is available, prioritize eat_ration. If energy is 0 and rest is available, prioritize rest after any immediately treatable zero satiety. Do not choose wait merely because a profession-specific opportunity is absent while an urgent survival need has an available remedy. " +
             "Choose exactly one action ID from available_actions. action_details explains the offered choices. An available action is optional. " +
             "Return only JSON {action,reason}; give reason in English, at most 512 characters. " +

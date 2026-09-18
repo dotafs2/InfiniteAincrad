@@ -16,6 +16,7 @@ import datetime as dt
 import hashlib
 import json
 from pathlib import Path
+from character_profiles import profile_for_new_resident
 
 
 def fixture():
@@ -93,8 +94,11 @@ def shared_world_seed(world_id: str, label: str = '') -> dict:
     survival_accounts = []
     life_accounts = []
     for index, (stable_id, name, role, story) in enumerate(people):
+        profile = profile_for_new_resident(stable_id)
         residents.append(dict(stable_id=stable_id, name=name, role=role, story=story,
-                              interests=[role], personality='Cautious and independent', coins_col=5 + index,
+                              interests=profile['sections']['preferences']['interests'],
+                              personality=profile['core']['temperament'], character_profile=profile,
+                              coins_col=5 + index,
                               needs={'hunger': 60.0},
                               runtime={'fixture_only': False,
                                        'genesis': 'declared starting resident of a new world seed',

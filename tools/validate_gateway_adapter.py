@@ -119,6 +119,14 @@ def gateway(scenario, capture_folder=None):
                     assert len((body["messages"][0]["content"] + observation).encode("utf-8")) <= 24576
                 if scenario == "town-history":
                     assert personal["identity"]["id"] == expected_actor
+                    source_id = 'shared:smith' if expected_actor == 'fictional:forge' else 'shared:well-keeper'
+                    catalogue = json.loads((ROOT / 'game/data/character_dossiers.json').read_text(encoding='utf-8'))
+                    character = personal['identity']['character']
+                    assert character['core'] == catalogue['profiles'][source_id]['core']
+                    assert len(json.dumps(character, ensure_ascii=False, separators=(',', ':')).encode('utf-8')) <= 2600
+                    assert set(character) == {'schema_version', 'authority', 'core', 'facets'}
+                    assert all(s not in observation for s in ('private_character_sentinel', 'author_character_sentinel', 'dormant_character_sentinel'))
+                    assert 'Traits may conflict; they do not force an action.' in instructions
                     assert all(secret not in observation for secret in ["gm_install_secret", "neighbor_private_secret", "nested_gm_secret", "nested_neighbor_secret", "gm_internal", "other_resident_private", "development_gm:"])
                     assert "not proof of current skills, availability or stock" in body["messages"][0]["content"]
                     assert "known_places is your own sourced knowledge" in body["messages"][0]["content"]

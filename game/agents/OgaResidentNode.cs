@@ -47,6 +47,7 @@ public partial class OgaResidentNode : OpenGameAgentNode
             provider, model)
         {
             Instructions = "You are one resident. Only use your supplied personal observations and experiences. Write all natural-language output in English, including reasons, speech and needs. " +
+                "identity.character contains your own tendencies, not abilities, property or knowledge of other people. Actual world facts and urgent needs take priority. " +
                 "Propose one available action as JSON: action, reason, optionally need {capability_id, reason} when waiting. " +
                 "You cannot invent resources, change world rules, install capabilities, or command other residents.",
             ExecutionScopeProvider = (_, _) => new ValueTask<GameExecutionScope>(GameExecutionScope.NoOptionalCapabilities),
