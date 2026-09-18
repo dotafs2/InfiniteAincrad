@@ -935,7 +935,7 @@ func _build_town_hud() -> void:
 	var gm_column := VBoxContainer.new()
 	gm_panel.add_child(gm_column)
 	var gm_title := Label.new()
-	gm_title.text = "十位 GM · 已完成工作快照"
+	gm_title.text = "十位 GM · 最近工作记录"
 	gm_title.add_theme_font_size_override("font_size", 20)
 	gm_title.add_theme_color_override("font_color", Color("f0cf88"))
 	gm_column.add_child(gm_title)
@@ -973,7 +973,7 @@ func _toggle_gm_panel() -> void:
 func _reload_gm_status() -> void:
 	gm_status_rows.clear()
 	if gm_status_path.is_empty():
-		gm_status_message = "未载入 GM 进展记录。\n此面板只显示外部已完成工作快照，不推断实时状态。"
+		gm_status_message = "未载入 GM 进展记录。\n此面板只显示已记录的工作结果，不推断实时状态。"
 		_render_gm_status()
 		return
 	var file := FileAccess.open(gm_status_path, FileAccess.READ)
@@ -988,7 +988,7 @@ func _reload_gm_status() -> void:
 		return
 	var document: Dictionary = parser.data
 	gm_status_rows = document.rows.duplicate(true)
-	gm_status_message = "快照生成：%s\n只读完成记录 · 不代表当前实时运行" % _gm_short_text(str(document.generated_utc), 32)
+	gm_status_message = "快照生成：%s\n只读工作记录 · 未知结果单独标明" % _gm_short_text(str(document.generated_utc), 32)
 	_render_gm_status()
 
 func _valid_gm_status(value: Variant) -> bool:
@@ -1014,7 +1014,7 @@ func _valid_gm_status(value: Variant) -> bool:
 		for key in ["id", "focus_label", "status", "last_completed_utc", "last_public_outcome"]:
 			if typeof(row[key]) != TYPE_STRING or str(row[key]).strip_edges().is_empty():
 				return false
-		if str(row.status) not in ["观察完成", "方案评审完成"]:
+		if str(row.status) not in ["观察完成", "方案评审完成", "结果未知"]:
 			return false
 		var source_seq: Variant = row.last_source_seq
 		if typeof(source_seq) not in [TYPE_INT, TYPE_FLOAT] or float(source_seq) < 0.0 \

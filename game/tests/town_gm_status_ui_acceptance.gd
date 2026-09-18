@@ -60,6 +60,12 @@ func run() -> void:
 	check(scene.gm_status_rows.size() == 10, "exactly ten real completion rows are rendered")
 	check(scene.gm_status_label.text.contains("gm-07 · 职责 07 · 方案评审完成"), "review-complete status is displayed without inventing running state")
 	check(not scene.gm_status_label.text.contains("很长的公开结果".repeat(12)), "long public outcome is truncated")
+	valid.rows[0].status = "结果未知"
+	valid.rows[0].last_public_outcome = "已发送后超时；未重试，费用未知。"
+	_write_text(status_path, JSON.stringify(valid))
+	scene._reload_gm_status()
+	check(scene.gm_status_rows.size() == 10 and scene.gm_status_label.text.contains("gm-01 · 职责 01 · 结果未知"),
+		"an unknown provider outcome stays visible without being labelled complete")
 	scene._unhandled_input(_key(KEY_G))
 	check(not scene.gm_panel.visible and scene.life_panel.visible, "G returns to the prior life panel")
 
