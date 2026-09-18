@@ -1,0 +1,212 @@
+{
+  "milestone": "H110",
+  "date": "2026-09-18",
+  "scope": "Offline disposable worlds and local HTTP fixtures only; no live adoption claim",
+  "capabilities": {
+    "total": 33,
+    "adapted": 27,
+    "new_entry_points": 6
+  },
+  "build": {
+    "passed": true,
+    "warnings": 0,
+    "errors": 0,
+    "evidence_directory": "private/capabilities-20260918/build-fixed"
+  },
+  "engine_checks": 2013,
+  "focused_suites": [
+    {
+      "suite": "town_capabilities_acceptance",
+      "checks": 164,
+      "failures": 0,
+      "pid": 374704,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/capabilities-20260918/journal-reviewed"
+    },
+    {
+      "suite": "town_capabilities_turns_acceptance",
+      "checks": 1547,
+      "failures": 0,
+      "pid": 385436,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/capabilities-20260918/final/town_capabilities_turns_acceptance"
+    },
+    {
+      "suite": "town_actions_legacy_acceptance",
+      "checks": 63,
+      "failures": 0,
+      "pid": 385376,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/capabilities-20260918/final/town_actions_legacy_acceptance"
+    },
+    {
+      "suite": "town_turns_acceptance",
+      "checks": 36,
+      "failures": 0,
+      "pid": 379440,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/capabilities-20260918/final/town_turns_acceptance"
+    },
+    {
+      "suite": "town_shutdown_acceptance",
+      "checks": 50,
+      "failures": 0,
+      "pid": 384292,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/capabilities-20260918/final/town_shutdown_acceptance"
+    },
+    {
+      "suite": "town_restore_read_only_acceptance",
+      "checks": 11,
+      "failures": 0,
+      "pid": 341200,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/capabilities-20260918/final/town_restore_read_only_acceptance"
+    },
+    {
+      "suite": "resident_brain_context_budget_acceptance",
+      "checks": 8,
+      "failures": 0,
+      "pid": 385852,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/capabilities-20260918/final/resident_brain_context_budget_acceptance"
+    },
+    {
+      "suite": "town_settled_reply_acceptance",
+      "checks": 110,
+      "failures": 0,
+      "pid": 380964,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/capabilities-20260918/final/town_settled_reply_acceptance"
+    }
+  ],
+  "physical_scene": {
+    "checks": 24,
+    "failures": [],
+    "metrics": {
+      "fixture:innkeeper": {
+        "max_sample_step_m": 0.09039444476366043,
+        "max_speed_mps": 1.3500001430511475,
+        "walked_metres": 74.6750848442316
+      },
+      "fixture:smith": {
+        "max_sample_step_m": 0.09030697494745255,
+        "max_speed_mps": 1.3500001430511475,
+        "walked_metres": 78.38050532341003
+      }
+    },
+    "paid_calls": 0,
+    "resumed": true,
+    "suite": "town_capabilities_scene",
+    "time_scale": 4.0,
+    "world_seconds": 60.26666666666798
+  },
+  "rich_crowd_input": {
+    "shared:baker": {
+      "input_units": 12471,
+      "options": 74
+    },
+    "shared:carpenter": {
+      "input_units": 14274,
+      "options": 105
+    },
+    "shared:fisher": {
+      "input_units": 12648,
+      "options": 75
+    },
+    "shared:gardener": {
+      "input_units": 12547,
+      "options": 74
+    },
+    "shared:healer": {
+      "input_units": 12668,
+      "options": 75
+    },
+    "shared:herder": {
+      "input_units": 12481,
+      "options": 74
+    },
+    "shared:innkeeper": {
+      "input_units": 12688,
+      "options": 75
+    },
+    "shared:smith": {
+      "input_units": 12706,
+      "options": 83
+    },
+    "shared:weaver": {
+      "input_units": 12671,
+      "options": 75
+    },
+    "shared:well-keeper": {
+      "input_units": 12763,
+      "options": 75
+    }
+  },
+  "python_checks": 19,
+  "python_command": "python -X utf8 -m unittest test_world_observation test_archive_conversation (cwd: tools)",
+  "loopback": [
+    {
+      "case": "action-groups-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "success-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "success-1",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "town-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "town-history-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": [],
+      "world_sha256": "3186f74dddb42974fbfd5a617fad22fbca441bbe08eb093482d9b10c5e3eadeb"
+    },
+    {
+      "case": "town-history-1",
+      "passed": true,
+      "get": 3,
+      "post": 3,
+      "contract_errors": [],
+      "world_sha256": "7566894407f9d6798493abcb4f67e9731eb2a80bc72f2cbe7b7d3a95e6581309"
+    }
+  ],
+  "flowchart": {
+    "nodes": 41,
+    "errors": []
+  },
+  "active_world": {
+    "seq": 43,
+    "unchanged": true,
+    "sha256": "a0228906f6b417db2e9b3faae335fae6cc81d2a11810f109efd93f53a55ccd2a",
+    "full_cold_restore": true
+  },
+  "paid_calls": 0,
+  "subagents": 0,
+  "remaining_limits": [
+    "Live voluntary adoption unobserved",
+    "General shared work and cancellation of a running joint visit are not implemented",
+    "Stored resource descriptions are not a generic lock scheduler",
+    "Unrelated pre-existing navigation overlap warnings and renderer issues remain open"
+  ]
+}

@@ -32,6 +32,11 @@ func _run() -> void:
 	brain.configure("gateway")
 	var original: Dictionary = world.snapshot()
 	var view: Dictionary = world.resident_view()
+	if mode == "action-groups":
+		view.available_actions = ["wait", "say-hello"]
+		view.action_details = [{"id": "wait", "label": "Wait", "speech_allowed": false}]
+		view.action_groups = {"social.talk": {"template": "Talk to {0} (speech required; no contract).", "speech_allowed": true, "choices": {"say-hello": ["Iris"]}}}
+		view.shared_plans = [{"id": "fixture:invitation", "participants": ["fixture:luna", "fixture:iris"], "place_id": "west_forecourt", "status": "invited"}]
 	if scenario.begins_with("knowledge-"):
 		view.known_skill_notices = []
 		view.known_skill_referrals = []
@@ -81,7 +86,7 @@ func _run() -> void:
 		view.erase("actions")
 	var proposal: Dictionary = await brain.propose(view, 0)
 	check(world.snapshot() == original, "gateway cannot change world directly")
-	if mode in ["success", "town", "unicode-context", "knowledge-bounds"]:
+	if mode in ["success", "town", "action-groups", "unicode-context", "knowledge-bounds"]:
 		check(proposal.get("ok", false), "gateway returned proposal: " + str(proposal.get("code", "")))
 		if proposal.get("ok", false):
 			check(proposal.provenance == "opengameagent_fixture", "test HTTP is never live Kimi")

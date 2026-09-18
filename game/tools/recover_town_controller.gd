@@ -1,7 +1,7 @@
 extends RefCounted
 class_name TownControllerRecovery
 
-const Runtime := preload("res://core/town_baking.gd")
+const Runtime := preload("res://core/town_actions.gd")
 const Turns := preload("res://agents/town_turns.gd")
 const Brain := preload("res://agents/resident_brain.gd")
 

@@ -26,6 +26,7 @@ PROJECTED = {"identity", "observations", "needs", "experiences", "memory", "inve
              "available_actions", "nearby_residents", "items", "skills", "contracts", "life_account",
              "wallet", "nearby_skilled_roles", "action_details", "known_rules", "unavailable_actions"}
 PROJECTED |= {"known_skill_notices", "known_skill_referrals", "material_sources", "known_places"}
+PROJECTED |= {"action_groups", "shared_plans"}
 
 
 @contextmanager
@@ -107,6 +108,13 @@ def gateway(scenario, capture_folder=None):
                 assert isinstance(personal["identity"], dict), "identity must survive projection"
                 assert "hidden_neighbor_wallet" not in observation
                 action = "wait"
+                if scenario == "action-groups":
+                    group = personal['action_groups']['social.talk']
+                    assert group['choices'] == {'say-hello': ['Iris']}
+                    assert group['template'].format(*group['choices']['say-hello']) == 'Talk to Iris (speech required; no contract).'
+                    assert group['speech_allowed'] is True
+                    assert personal['shared_plans'][0]['status'] == 'invited'
+                    assert 'action_groups' in instructions
                 if scenario.startswith("concurrent-"):
                     assert personal["identity"]["id"] == self.headers["X-Hearth-Resident"]
                     action = next(entry["id"] for entry in personal["action_details"] if entry["label"] == "Wait")
@@ -220,10 +228,10 @@ def main():
     args.out.mkdir(parents=True, exist_ok=True)
     cases = []
     # Expected POST count per scenario; an absent scenario must never reach the gateway.
-    posts = {"continuation": 12, "success": 1, "town": 1, "unicode-context": 1, "uncertain": 1,
+    posts = {"continuation": 12, "success": 1, "town": 1, "action-groups": 1, "unicode-context": 1, "uncertain": 1,
              "pinned-model": 1, "reply-model-mismatch": 1, "town-history": 3, "knowledge-bounds": 1,
              "concurrent-reproduce": 1, "concurrent-success": 2, "concurrent-limit": 1, "concurrent-uncertain": 1, "concurrent-cancel": 1}
-    scenarios = ["success", "town", "unicode-context", "continuation", "pinned-model", "model-mismatch",
+    scenarios = ["success", "town", "action-groups", "unicode-context", "continuation", "pinned-model", "model-mismatch",
                  "reply-model-mismatch", "insufficient", "wrong-ledger", "expired", "unsafe-endpoint", "uncertain", "town-history",
                  "knowledge-bounds", "knowledge-oversize", "knowledge-nested", "knowledge-missing-source", "knowledge-context-limit",
                  "concurrent-success", "concurrent-limit", "concurrent-uncertain", "concurrent-cancel"]
@@ -262,7 +270,7 @@ def main():
             prior_history = None
             for index in range(repeats):
                 label = f"{scenario}-{index}"
-                expect = "rejected" if index else {"success": "success", "town": "town", "unicode-context": "unicode-context",
+                expect = "rejected" if index else {"success": "success", "town": "town", "action-groups": "action-groups", "unicode-context": "unicode-context",
                                                    "continuation": "continuation", "pinned-model": "success", "knowledge-bounds": "knowledge-bounds"}.get(scenario, "rejected")
                 env = dict(os.environ, AINCRAD_GATEWAY_RUN_CONFIG=str(config.resolve()), AINCRAD_GATEWAY_TEST_EXPECT=expect,
                            AINCRAD_GATEWAY_TEST_SCENARIO=scenario)

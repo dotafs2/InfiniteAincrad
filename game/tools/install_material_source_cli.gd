@@ -1,6 +1,6 @@
 extends SceneTree
 
-const Town = preload("res://core/town_runtime.gd")
+const Town = preload("res://core/town_actions.gd")
 
 func _initialize() -> void:
 	run.call_deferred()

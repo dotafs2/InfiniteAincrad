@@ -13,7 +13,7 @@ extends SceneTree
 ## receipt leaves the save bytes untouched. The raw model text and the resident's private
 ## reason are never printed.
 class Reconciliation:
-	const Town = preload("res://core/town_baking.gd")
+	const Town = preload("res://core/town_actions.gd")
 	const Turns = preload("res://agents/town_turns.gd")
 	const KernelRef = preload("res://core/world_kernel.gd")
 

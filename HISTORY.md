@@ -2,6 +2,18 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-18 · H110 Reusable resident action capabilities
+
+The user requested batch expansion of foundational abilities through one reusable, extensible action layer. Added `town_actions.gd` with a versioned registry, adapters for 27 established capabilities and six new entry points: free conversation, private observation, and invitation/acceptance/decline/withdrawal for a shared visit. New modules own their options, execution, persistence validation and protocol reconciliation. Existing reducers retain physical, ownership, finite-resource and contract authority; one writer serializes commits while independent body jobs progress together.
+
+Atomic composition rolls all children back when a later child fails, including inside a resident-turn transaction that retains the rejected model reply. Native commands persist exact payloads and lifecycle receipts; validation binds consent and terminal states to actual events and child outcomes. Old saves load without an implicit capability migration. Production scene, ordinary offline life, resident turns, maintenance writers, personal feedback and observation reporting use the common boundary.
+
+The first ten-resident crowd test exposed an actual blocker: 74–105 offered choices per person overflowed the unchanged input cap. Lossless shared-template descriptions preserve every alias, expanded label and speech gate. Final rich requests use 12,471–14,274 UTF-16 units; the C# provider also forwards grouped choices and personal active plans. No budget guard was relaxed.
+
+Verification: 2,013 Godot checks, 19 Python tests and six local HTTP adapter cases passed; .NET build has zero warnings/errors. Two actual bodies walked 74.68 and 78.38 metres at 1.35 m/s, resumed the same mid-walk save in a new scene, and each arrived once. The complete seq43 checkpoint cold-restored and the active live save is byte-identical. Paid calls, ledger changes and subagents: zero. The English workflow now has 41 nodes. All owned test/build/server/renderer processes exited.
+
+Live voluntary adoption remains unobserved. General shared production, running-plan cancellation, renewable profession resources and relationship growth remain future work. Initial parse, fixture, input-overflow, compatibility and invocation failures are retained. See the [capability standard](docs/design/action-capability-standard.md), [validation](docs/validation/action-capabilities-2026-09-18.md) and its machine-readable checks.
+
 ## 2026-09-18 · H109 Fresh world, real resident decisions and complete sequence transfer
 
 The user explicitly restarted all ten villagers at seq0, chose ten minutes of observation, required every decision summarized in Chinese, and permitted transfer of non-secret records while keeping the API key local. The active world is now `shared:restart-20260918-01`; original seq450 and GM history remain a separate lineage on another machine. The local Kimi configuration and existing 186-row cumulative ledger were recovered from the old UE project, verified and backed up without reset.

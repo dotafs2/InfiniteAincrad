@@ -1,5 +1,5 @@
 extends SceneTree
-const World = preload("res://core/town_places.gd")
+const World = preload("res://core/town_actions.gd")
 
 func _initialize() -> void:
 	var source := ""

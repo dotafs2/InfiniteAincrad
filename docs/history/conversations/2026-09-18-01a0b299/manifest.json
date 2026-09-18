@@ -1,31 +1,31 @@
 {
   "schema_version": 1,
   "thread_id": "01a0b299-f938-75a3-a9d0-9566d7918641",
-  "exported_at_utc": "2026-09-18T08:50:53.188338+00:00",
+  "exported_at_utc": "2026-09-18T09:39:20.459627+00:00",
   "source_basename": "rollout-2026-09-18T11-40-30-01a0b299-f938-75a3-a9d0-9566d7918641.jsonl",
-  "source_snapshot_bytes": 30789449,
-  "source_snapshot_sha256": "6352a5a2c0cb7391c8cae56bc9ca71d8f7922c0d80ac70139c6dabb45b78a682",
+  "source_snapshot_bytes": 34764229,
+  "source_snapshot_sha256": "a6d161d2409a20ee80acbf7b6ec35ea160a14975cf45f06e61b3de3299e42beb",
   "first_message_at": "2026-09-18T03:40:33.058Z",
-  "last_message_at": "2026-09-18T08:50:46.315Z",
-  "message_count": 97,
+  "last_message_at": "2026-09-18T09:39:09.240Z",
+  "message_count": 111,
   "role_counts": {
-    "user": 18,
-    "assistant": 79
+    "user": 20,
+    "assistant": 91
   },
   "excluded_record_counts": {
     "session_meta": 1,
-    "event_msg": 1540,
+    "event_msg": 1831,
     "non_conversation_role": 10,
     "injected_workspace_context": 2,
-    "world_state": 9,
-    "turn_context": 22,
-    "response_item": 1157,
-    "token_usage_record": 392,
-    "compacted": 5
+    "world_state": 10,
+    "turn_context": 25,
+    "response_item": 1382,
+    "token_usage_record": 468,
+    "compacted": 6
   },
   "coverage": "visible text messages in this task only; no other tasks, tool logs, internal reasoning, or future messages",
   "files": {
-    "conversation.json": "92a78b0f8c7af0b07453d1caf34dfaed58ca06ddc3d7d7bf48b46142c43a31d2",
-    "conversation.md": "a9c7f177ed2d776ee2600872849c316dec1d6da3c06b624b9caaa94ca51a9885"
+    "conversation.json": "b2c2d5bcaad953ac6699f98655dc565ba47d51beebfb6a27174c8cc42b8e615a",
+    "conversation.md": "ffd1aa1c12ebf77632bc7edd0c8bc21e1b8f6a3ce9d22e9463acae27cbb647e3"
   }
 }
