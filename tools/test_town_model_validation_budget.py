@@ -24,6 +24,7 @@ import run_town_model_validation as launcher
 from kimi_budget import BudgetDenied, BudgetError, Ledger, Policy, encoded
 from kimi_gateway import BudgetServer, UpstreamUnknown, handler_type
 from town_validation_budget import CarriedLedgerGate, EvidenceGateway, read_review_pin
+from actor_usage import UsageBook
 
 
 class DurationEvidenceTests(unittest.TestCase):
@@ -132,6 +133,22 @@ class BudgetLauncherTests(unittest.TestCase):
         self.assertEqual(self.provider.calls, 1)
         self.assert_original_preserved()
 
+    def test_gateway_records_new_world_usage_once_and_preserves_uncertainty(self):
+        book = UsageBook(self.root / 'developer.sqlite3', 'new-world',
+                         [dict(id='fixture:resident', name='Ari', role='NPC')])
+        gateway = EvidenceGateway(self.ledger, self.provider, self.out, self.gate(), book)
+        gateway.complete('world-first', 'fixture:resident', request_body())
+        gateway.complete('world-first', 'fixture:resident', request_body())
+        self.assertEqual(self.provider.calls, 1)
+        self.assertEqual(book.snapshot()['actors'][0]['tokens']['total_tokens'], 25)
+        self.provider.unknown = True
+        with self.assertRaises(UpstreamUnknown):
+            gateway.complete('world-unknown', 'fixture:resident', request_body())
+        actor = book.snapshot()['actors'][0]
+        self.assertEqual((actor['measured_calls'], actor['unresolved_calls']), (1, 1))
+        self.assertEqual(len(book.snapshot()['calls']), 2)
+        self.assert_original_preserved()
+
     def gm_snapshot(self, world_id='fixture:model-validation-world', life_seq=0,
                     godot_elapsed=0.0, world_elapsed=0.0):
         return {'kind': 'background_gm_evidence_snapshot', 'schema_version': 1,
@@ -147,6 +164,8 @@ class BudgetLauncherTests(unittest.TestCase):
     def world_save(self, world_id='fixture:model-validation-world', life_seq=0,
                    godot_elapsed=0.0, world_elapsed=0.0):
         return {'world_id': world_id, 'life': {'seq': life_seq},
+                'residents': [{'stable_id': 'fixture:resident', 'name': 'Ari'},
+                              {'stable_id': 'shared:weaver', 'name': 'Flint'}],
                 'godot': {'elapsed_seconds': godot_elapsed},
                 'elapsed_seconds': world_elapsed}
 

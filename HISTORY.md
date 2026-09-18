@@ -2,6 +2,14 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-18 · H112 World-scoped permanent developer usage
+
+The user corrected the mistaken requirement to recover another world's GM accounting before starting this fresh world. Developer usage now belongs to each stable NPC/GM identity from this world's genesis; provider billing history remains separate and unchanged. Added persistent per-call receipts, append-only revisions, exact Kimi backfill, idempotent replay, native session delta attribution, confirmed partial usage, safe full-history export and validated restore. Continued worlds refuse a missing usage book instead of silently resetting to zero. Usage stays outside NPC observations and model input.
+
+All 32 existing resident calls total 83,274 tokens. One real GM05 observation read source but reached a 90-second host deadline without a final answer. Twenty native response receipts confirm 792,826 tokens (721,664 cached input); the final tail and currency charge remain unknown. These tokens are retained as a lower bound, not zero and not a completed observation. No paid retry, new resident call, candidate installation or active-world mutation occurred. Seq43 remains byte-identical. The separate access_programs error reported by the user appeared in this Codex conversation, not the GM run log; its exact client feature remains unconfirmed.
+
+Final verification: 115 focused offline tests passed, complete usage-history restore and wrong-world/tampering rejection passed, and the updated 43-node English diagram rendered without script errors. Earlier fixture failures were fixed; an expanded native runner suite timed out at 55 seconds and is not counted as passed. All owned processes exited. The full safe usage and latest GM checkpoints, corrected roadmap, conversation archive and handoff are included. See [validation and real limits](docs/validation/actor-usage-2026-09-18.md) and [per-actor developer table](worlds/restart-20260918-01/usage/latest.md).
+
 ## 2026-09-18 · H111 Aincrad design governance and cached physical navigation
 
 The user authorized continuing GM/NPC integration under SAO Aincrad rules and requested established fixed navigation. Added a sourced world charter that distinguishes original setting references, our original resident-life extensions and unimplemented systems. Production autonomy pins both design documents; proposals retain a compatibility rationale and six invariants. Main-AI review must explicitly assess setting compatibility. Host validation and the actual publication path reject changed pins; GM candidates cannot edit protected design/host files. Observation, coding, feedback and NPC instructions reflect these rules. Semantic correctness still requires concrete review; text declarations are not proof of canon compliance.

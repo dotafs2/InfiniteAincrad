@@ -53,6 +53,7 @@ import sys
 import time
 from pathlib import Path
 import world_design_contract
+from actor_usage import gm_book
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = ROOT / 'secrets' / 'deepseek.local.json'
@@ -2359,9 +2360,14 @@ def observe(args) -> int:
                 intent['status'] = 'running'
                 store_state(state_dir, state)
 
+            book = gm_book(state)
+            if book:
+                book.begin_gm(run_id, gm_id, 'observe')
             attempt = run_codex_once(route, ROOT, run_dir, gm_id, prompt, instructions, catalog,
                                      resume_id, args.timeout, on_process=on_process)
             account_native_usage(state, attempt, resume_id)
+            if book:
+                book.settle_gm(run_id, gm_id, 'observe', attempt, route.sessions_root())
             verdict = classify_attempt(attempt, resume_id)
             status, cost = verdict['status'], verdict['cost']
             record['in_flight'] = None
@@ -2736,9 +2742,14 @@ def code(args) -> int:
             owner_record['coding']['last_status'] = 'running'
             store_state(state_dir, state)
 
+        book = gm_book(state)
+        if book:
+            book.begin_gm(run_id, owner, 'code')
         attempt = run_codex_once(route, candidate, run_dir, 'coding', prompt, instructions, catalog,
                                  resume_id, args.timeout, on_process=on_process)
         account_native_usage(state, attempt, resume_id)
+        if book:
+            book.settle_gm(run_id, owner, 'code', attempt, route.sessions_root())
         verdict = classify_attempt(attempt, resume_id)
         status, cost = verdict['status'], verdict['cost']
         measured = usage_is_measured(attempt.get('usage'))
@@ -3159,9 +3170,14 @@ def feedback(args) -> int:
             intent['status'] = 'running'
             store_state(state_dir, state)
 
+        book = gm_book(state)
+        if book:
+            book.begin_gm(run_id, args.gm, 'feedback')
         attempt = run_codex_once(route, ROOT, run_dir, 'feedback', prompt, instructions, catalog,
                                  resume_id, args.timeout, on_process=on_process)
         account_native_usage(state, attempt, resume_id)
+        if book:
+            book.settle_gm(run_id, args.gm, 'feedback', attempt, route.sessions_root())
         verdict = classify_attempt(attempt, resume_id)
         status, cost = verdict['status'], verdict['cost']
         record['in_flight'] = None

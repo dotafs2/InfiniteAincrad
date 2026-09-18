@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCUMENTS = ('docs/design/aincrad-world-charter.md', 'docs/design/action-capability-standard.md')
-PROTECTED = DOCUMENTS + ('tools/world_design_contract.py', 'tools/gm_runner.py',
+PROTECTED = DOCUMENTS + ('tools/world_design_contract.py', 'tools/actor_usage.py', 'tools/gm_runner.py',
                          'tools/gm_autonomy.py', 'tools/validate_gm_autonomy.py')
 INVARIANTS = ('setting', 'capabilities', 'agency', 'knowledge', 'continuity', 'execution')
 BASES = ('setting_adaptation', 'original_extension', 'engine_maintenance')

@@ -157,8 +157,9 @@ class CarriedLedgerGate:
 
 class EvidenceGateway(Gateway):
     """One upstream request at a time, exact carried rows, private evidence."""
-    def __init__(self, ledger, provider, out, gate):
+    def __init__(self, ledger, provider, out, gate, usage_book=None):
         self.gate = gate
+        self.usage_book = usage_book
         self.out = Path(out)
         self.operation = None
         class CheckedProvider:
@@ -184,6 +185,8 @@ class EvidenceGateway(Gateway):
             if request_id not in rows:
                 self.gate.owned_ids.add(request_id)
             self.operation = request_id
+            if self.usage_book is not None:
+                self.usage_book.begin_npc(request_id, resident, body['model'])
             try:
                 response = super().complete(request_id, resident, body)
             except Exception:
@@ -196,5 +199,8 @@ class EvidenceGateway(Gateway):
                 raise
             finally:
                 self.operation = None
+                if self.usage_book is not None:
+                    self.usage_book.sync_kimi_call(self.ledger.path, request_id, resident, body['model'])
+                    self.usage_book.export()
             self.gate.check()
             return response

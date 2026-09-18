@@ -2,10 +2,12 @@
 
 The user authorized a fresh world starting at seq0 on 2026-09-18 and publication of its state and decisions. [active.json](active.json) identifies the current lineage. The original seq450 world is still on another computer; it was not overwritten, recovered or combined with this restart.
 
+H112 adds [permanent developer usage tags](restart-20260918-01/usage/latest.md) for every NPC and GM, with [complete portable history and the current GM checkpoint](restart-20260918-01/usage/manifest.json). The 32 resident calls total 83,274 tokens. One real GM observation timed out; 792,826 tokens are confirmed and the final tail remains unresolved. Follow the [usage transfer instructions](../docs/validation/actor-usage-2026-09-18.md) when moving this world. Old-world GM accounting is not a prerequisite for fresh-world operation. Provider billing continuity and world-scoped developer tags are separate records.
+
 H111 also binds ten empty persistent GM identities to this fresh world. Their complete
 [bootstrap checkpoint](restart-20260918-01/gm/bootstrap.gm-state.json) and
 [manifest](restart-20260918-01/gm/manifest.json) are retained byte-exactly. These records
-contain no native GM session or decision yet. Do not overwrite a later local GM
+contained no native GM session or decision at bootstrap. H112's latest checkpoint now carries the interrupted observation. Do not overwrite a later local GM
 continuation with this initial checkpoint. Current readiness and its limitations are
 reported in [H111 validation](../docs/validation/aincrad-gm-navigation-2026-09-18.md).
 

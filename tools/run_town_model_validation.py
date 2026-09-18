@@ -639,6 +639,8 @@ def main():
         gate = CarriedLedgerGate(ledger, pin, args.concurrency, args.max_requests,
                                 max_spend_nano=args.max_cost_cny * 1_000_000_000 if args.max_cost_cny is not None else None)
         before = ledger.status()
+        from actor_usage import for_world
+        usage_book = for_world(save)
     except (BudgetError, OSError, ValueError, KeyError, TypeError) as exc:
         parser.error(str(exc))
     provider = KimiProvider(json.loads(args.config.read_text(encoding='utf-8-sig')))
@@ -649,7 +651,7 @@ def main():
         write_private_json(out / 'carried-uncertainty-review.json', gate.review)
     token = secrets.token_urlsafe(32)
     tracker = OperationTracker()
-    gateway = TrackingGateway(EvidenceGateway(ledger, provider, out, gate), tracker)
+    gateway = TrackingGateway(EvidenceGateway(ledger, provider, out, gate, usage_book), tracker)
     server = DrainBudgetServer(('127.0.0.1', 0), handler_type(gateway, token), grace_seconds=args.drain_grace)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     endpoint, run = out / 'endpoint.json', out / 'scope.json'

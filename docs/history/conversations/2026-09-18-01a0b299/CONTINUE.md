@@ -1,3 +1,21 @@
+# Continue this local task — H112 (2026-09-18)
+
+Read `C:/InfiniteAincrad/docs/validation/actor-usage-2026-09-18.md` first. H112 supersedes H111's mistaken old-world accounting prerequisite. The user explicitly wants fresh-world lifetime developer token tags, and old GM uncertainty must not block independent NPC life. Keep Chinese conversation and English game/docs/prompts.
+
+- Active world remains `shared:restart-20260918-01`, seq43, exact SHA `a0228906f6b417db2e9b3faae335fae6cc81d2a11810f109efd93f53a55ccd2a`. No new NPC decision or game mutation this delivery.
+- Permanent accounting: `C:/InfiniteAincrad/private/worlds/restart-20260918-01/developer-usage.sqlite3`, adjacent JSON and Markdown. It retains 32 prior NPC calls / 83,274 tokens and one partial GM05 observation / at least 792,826 tokens. All 20 stable identities exist. Provider ledger is unchanged. Do not reset either ledger; usage tags are developer-only.
+- Current GM state: `C:/InfiniteAincrad/private/worlds/restart-20260918-01/gm/state.json`. Run `run-20260918T103506Z-2a9dc9` hit a 90-second host timeout after reading code, without a final observation. Native session `01a0b415-8ef6-7331-b7bd-2598316360ac` contains 20 response receipts. Partial usage is recorded, but the final tail is unresolved. No paid retry. The original empty GM bootstrap is historical only; `worlds/active.json` now names the latest full checkpoint and usage manifest.
+- Next: narrow GM observation to relevant evidence/interfaces and a bounded final result, recover this attempt's final usage if authoritative evidence permits, then continue a bounded same-world cycle. Do not pretend old-world accounts are the blocker. Complete/review the H110 arbitrary-module deployment contract before installing new capabilities. Existing NPC life can continue independently with full sequence checkpoints and its established Kimi ledger.
+- The user reported access_programs not enabled in the current Codex conversation. It was absent from the GM log; do not confuse client/service feature availability with Kimi spending or game mechanics. No client configuration was modified. Current conversation/tool access works; exact feature cause is unconfirmed.
+- Safe migration: `C:/InfiniteAincrad/worlds/restart-20260918-01/usage/manifest.json` pins complete usage revisions and the latest complete GM state. `tools/actor_usage.py --restore-snapshot` validates and creates only a missing usage book, then binds the copied GM state locally. Private native rollouts and credentials are not published. Missing-book continuation is refused.
+- Verification: 115 focused Python tests; 43-node diagram without script errors; world unchanged; owned processes exited. Initial fixture failures and a 55-second expanded-runner timeout are retained under `C:/InfiniteAincrad/private/usage-20260918/`. Do not rerun broad native/worktree fixtures just to repeat established coverage.
+- H112 code paths: `C:/InfiniteAincrad/tools/actor_usage.py`, `tools/test_actor_usage.py`, `tools/town_validation_budget.py`, `tools/run_town_model_validation.py`, `tools/test_town_model_validation_budget.py`, `tools/gm_runner.py`, `tools/world_design_contract.py`, and `C:/InfiniteAincrad/AGENTS.md`. Paths beginning tools/ are relative to `C:/InfiniteAincrad/`.
+- Before another delivery, refresh this task's exact visible conversation archive, preserve previous messages, update current findings, commit/push only reviewed files and verify remote hashes. Keys stay local. No subagents unless explicitly requested; bound searches and clean only owned processes.
+
+## Earlier H111 handoff, retained as dated context
+
+The H111 lines below about waiting for another world's accounting and having no real GM attempt are superseded above. Other implementation paths and original evidence remain useful.
+
 # Continue this local task (2026-09-18)
 
 Current delivery is **H111**, after H110 commit `6af33f2`. Read
