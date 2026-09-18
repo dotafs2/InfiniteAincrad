@@ -52,6 +52,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+import world_design_contract
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = ROOT / 'secrets' / 'deepseek.local.json'
@@ -102,7 +103,7 @@ SECRET_ENV_KEYS = ('DEEPSEEK_API_KEY', 'OPENAI_API_KEY', 'KIMI_API_KEY', 'MOONSH
 USAGE_FIELDS = ('input_tokens', 'cached_input_tokens', 'cache_write_input_tokens',
                 'output_tokens', 'reasoning_output_tokens', 'total_tokens')
 
-STABLE_INSTRUCTIONS = """Use English for all names, dialogue, summaries, proposals, code comments and other natural-language output. Keep machine identifiers and quoted historical evidence unchanged.
+STABLE_INSTRUCTIONS = world_design_contract.INSTRUCTIONS + """Use English for all names, dialogue, summaries, proposals, code comments and other natural-language output. Keep machine identifiers and quoted historical evidence unchanged.
 
 You are one of ten independent BACKGROUND GM processes of the InfiniteAincrad persistent world.
 You inspect world-scoped evidence and decide whether one bounded issue needs work from you.
@@ -174,7 +175,7 @@ Rules for results:
   resident demand, but a concrete evidence-backed proposal may introduce new mechanics or content.
 """
 
-STABLE_CODE_INSTRUCTIONS = """Use English for all names, dialogue, summaries, proposals, code comments and other natural-language output. Keep machine identifiers and quoted historical evidence unchanged.
+STABLE_CODE_INSTRUCTIONS = world_design_contract.INSTRUCTIONS + """Use English for all names, dialogue, summaries, proposals, code comments and other natural-language output. Keep machine identifiers and quoted historical evidence unchanged.
 
 You are the active coding worker of one of the ten BACKGROUND GMs of the InfiniteAincrad
 persistent world. You keep that GM's identity and history. You work inside an isolated candidate
@@ -204,7 +205,7 @@ OUTPUT CONTRACT: end your turn with exactly one fenced ```json block and nothing
 """
 
 FEEDBACK_DECISIONS = ('accept', 'repair', 'no_action', 'escalate')
-STABLE_FEEDBACK_INSTRUCTIONS = """Use English for all names, dialogue, summaries, proposals, code comments and other natural-language output. Keep machine identifiers and quoted historical evidence unchanged.
+STABLE_FEEDBACK_INSTRUCTIONS = world_design_contract.INSTRUCTIONS + """Use English for all names, dialogue, summaries, proposals, code comments and other natural-language output. Keep machine identifiers and quoted historical evidence unchanged.
 
 You are one of the ten independent BACKGROUND GMs of the InfiniteAincrad persistent world.
 You are receiving the host's factual receipt for a proposal or work associated with your GM
@@ -1441,6 +1442,9 @@ def read_autonomy_policy(path: Path) -> dict:
         raise ValueError('autonomy policy policy_id must be a stable 1..100 character key')
     if not 12 <= len(policy['objective'].strip()) <= 800:
         raise ValueError('autonomy policy objective must be a 12..800 character sentence')
+    errors = world_design_contract.policy_errors(policy)
+    if errors:
+        raise ValueError('; '.join(errors))
     return policy
 
 
@@ -1479,6 +1483,7 @@ def autonomy_policy_block(policy: dict) -> str:
     constants = autonomy_scope_constraints(policy)
     block = {'policy_id': policy['policy_id'], 'mode': policy['mode'],
              'world_id': policy['world_id'], 'objective': policy['objective'],
+             'design_contract': policy.get('design_contract'),
              'origin': AUTONOMY_ORIGIN, 'constraints': constants,
              'contract_extension': (
                  'You may propose your own bounded coding scope. Put it in a "scope" object on the '

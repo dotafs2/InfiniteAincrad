@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "world_id": "shared:restart-20260918-01",
+  "kind": "complete_empty_gm_bootstrap",
+  "file": "bootstrap.gm-state.json",
+  "sha256": "df5273a4c8394f05488b6cd5a092d5905bba04a86aa9c53366c6adb9c80be9ca",
+  "gm_ids": [
+    "gm-01",
+    "gm-02",
+    "gm-03",
+    "gm-04",
+    "gm-05",
+    "gm-06",
+    "gm-07",
+    "gm-08",
+    "gm-09",
+    "gm-10"
+  ],
+  "native_sessions": 0,
+  "paid_calls": 0,
+  "world_bootstrap": {
+    "created_utc": "2026-09-18T10:06:01.062233+00:00",
+    "resident_ids": [
+      "shared:well-keeper",
+      "shared:baker",
+      "shared:smith",
+      "shared:carpenter",
+      "shared:innkeeper",
+      "shared:herder",
+      "shared:gardener",
+      "shared:weaver",
+      "shared:fisher",
+      "shared:healer"
+    ],
+    "schema_version": 1,
+    "source": "explicit_new_world_bootstrap",
+    "world_id": "shared:restart-20260918-01",
+    "world_save_sha256": "a0228906f6b417db2e9b3faae335fae6cc81d2a11810f109efd93f53a55ccd2a"
+  },
+  "restore_rule": "Only restore to an absent GM state for this exact world; never overwrite a later continuation."
+}

@@ -286,7 +286,11 @@ def command_validate_candidate(args) -> int:
         smoke_timeout = min(int(runtime.get('timeout_seconds') or 120), 180)
     except (TypeError, ValueError):
         smoke_timeout = 120
-    errors = []
+    # This runs in the candidate too: changing a pinned document cannot bless itself.
+    import world_design_contract
+    errors = world_design_contract.policy_errors(policy, candidate)
+    if isinstance(scope, dict):
+        errors.extend(world_design_contract.scope_errors(scope, policy))
     smoke = []
     files = scope.get('files') if isinstance(scope, dict) else None
     if not isinstance(files, list) or not files:

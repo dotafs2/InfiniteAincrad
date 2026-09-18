@@ -18,6 +18,8 @@ The user explicitly restarted the active simulation at seq0 in `shared:restart-2
 
 - **H110:** one reusable action boundary with 33 capability contracts: 27 existing adapters plus free conversation, private observation and four consent-based joint-visit operations. Atomic composition, durable receipts and full restore checks are implemented. Two real bodies completed a shared journey across restart. Crowded menus retain every choice through lossless description factoring. Read the [capability standard](docs/design/action-capability-standard.md) and [validation](docs/validation/action-capabilities-2026-09-18.md). The active live world remains seq43; adoption awaits a separate live continuation.
 
+- **H111:** pin the [Aincrad charter](docs/design/aincrad-world-charter.md) and capability standard in production GM policy, require explicit setting review, and recheck design pins before release. NPC prompts also retain the Aincrad setting. Ordinary movement now uses Godot's cached A* path following with existing RVO avoidance and collision. Real wall detours, two-person travel across restart, offline GM/NPC continuation and seq43 full restore pass. Ten fresh-world GM records are initialized; paid GM continuation is held for current carried accounting and a concrete H110 production deployment contract. [Evidence and remaining gaps](docs/validation/aincrad-gm-navigation-2026-09-18.md).
+
 [Character-depth review](docs/design/character-depth-review-2026-09-18.md) · [All ten complete dossiers](docs/design/resident-dossiers.md) · [Character validation](docs/validation/character-depth-2026-09-18.md)
 
 [Conversation archive and handoff](docs/history/conversations/README.md) · [Offline workflow evidence](docs/validation/local-flow-2026-09-18.md) · [Navigation evidence](docs/validation/navigation-and-history-2026-09-18.md) · [English rollout](docs/validation/english-rollout-2026-09-18.md) · [Zoomable flowchart](docs/validation/local-flow-2026-09-18/flowchart.html)
@@ -33,12 +35,12 @@ flowchart TB
         A83Scene["Godot authoritative world<br/>Real bodies, collisions, positions, items and time"]
         A83NPC["Each resident reads own character, knowledge and history<br/>Chooses an available action and any permitted speech"]
         A83Action["Unified versioned capability boundary<br/>Personal options, current resource and consent checks<br/>Atomic composition; independent body jobs may run together"]
-        A83Move["Revalidate and execute under world rules<br/>Physical travel, on-site work, consumption and output"]
+        A83Move["Revalidate and execute under world rules<br/>Godot cached A*, RVO and real collision<br/>Physical travel, on-site work, consumption and output"]
         A83Core["Persist actual outcomes and history<br/>Success, refusal and unfinished work remain distinct"]
         A83Evidence["Resident needs or maintenance evidence<br/>GM access follows responsibilities; residents are not omniscient"]
-        A83GM["A named GM observes and claims work<br/>Choosing no change is valid"]
+        A83GM["A named GM observes and claims work<br/>Pinned Aincrad charter and capability standard<br/>Choosing no change is valid"]
         A83Candidate["Develop and self-test an isolated candidate<br/>Preserve authorship, versions, failures and costs"]
-        A83Review{"Main AI reviews the concrete candidate"}
+        A83Review{"Main AI reviews behavior and Aincrad compatibility<br/>Concrete setting violations block release"}
         A83Release["Bounded release and same-save continuation<br/>Single writer, version tracking, belongings and commitments"]
         A83Use["Residents may use, reject or defer the capability<br/>Installation is not adoption"]
         A83Feedback["The original GM checks actual effects<br/>Accept, repair or propose the next step"]
@@ -72,7 +74,9 @@ flowchart TB
         H108["H108 Rich original character dossiers for ten seed residents<br/>21 stored sections; bounded self profile reaches decisions<br/>Existing-world migration and social growth remain pending"]
         H109["H109 User-requested fresh seq0 world<br/>32 live decisions; interrupted first window<br/>Ten-minute continuation; full checkpoints and Chinese report"]
         H110["H110 Reusable action layer: 33 capability contracts<br/>Free speech, private observation, consented joint travel<br/>Physical restart verified; live adoption not yet observed"]
-        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110
+        H111["H111 Aincrad design pins and fixed navigation<br/>Cached A*, physical detour and joint restart verified<br/>10 GM identities initialized; paid continuation held"]
+        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110 --> H111
+        H111 -.Verified navigation and design gates.-> A83Move
         H110 -.Implemented common boundary.-> A83Action
         H103 --> M20
     end
@@ -82,7 +86,7 @@ flowchart TB
         M20S["Observe adoption of conversation and joint visits<br/>Add sourced introductions and voluntary disclosures<br/>Shared memories by person; relationships change through actual events"]
         M20C["Validate sustainable resources and daily life first<br/>Long-term berry supply, crowding and voluntary ration gifts<br/>Renewable flour, professions and exchange"]
         M20G["Improve entering and observing the world<br/>Overlapping navigation edges, renderer exit, characters,<br/>animation and performance"]
-        H47["Reduce manual handoffs between stages<br/>GM delivery, same-save life and actual-effect follow-up<br/>Longer runs, fault isolation and controlled costs"]
+        H47["Complete the fresh-world production handoff<br/>Current GM accounting and H110 deployment/runtime contract<br/>Same-save life, original-GM follow-up and bounded repeat cycles"]
         H82["Participant-directed development<br/>Residents identify needs, choose construction, use or decline it<br/>Externally assigned goals are not autonomous invention"]
         H110 -->|Continue the new world with full history| M20C
         H110 -->|Observe voluntary use and extend tested capabilities| M20S
@@ -110,7 +114,7 @@ flowchart TB
     classDef done fill:#dcfce7,stroke:#15803d,color:#14532d;
     classDef partial fill:#fff1d6,stroke:#b45309,color:#78350f;
     classDef future fill:#f1f5f9,stroke:#64748b,color:#0f172a;
-    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109,H110 done;
+    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109,H110,H111 done;
     class M20,M20S,M20C,M20G,H47,H82,A83Entry,A83Scene,A83NPC,A83Action,A83Move,A83Core,A83Evidence,A83GM,A83Candidate,A83Review,A83Release,A83Use,A83Feedback,A83Stop,A83Save,A83Fault partial;
     class N5,P,N6,N7,N8,N9,XR,N10,R future;
 ```

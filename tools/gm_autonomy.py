@@ -49,6 +49,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
 import gm_runner  # noqa: E402
+import world_design_contract  # noqa: E402
 import owned_windows_job  # noqa: E402
 
 CYCLE_SCHEMA = 2
@@ -191,7 +192,7 @@ def path_matches(rel: str, pattern: str) -> bool:
     return rel == pattern
 
 def policy_errors(policy: dict) -> list[str]:
-    errors = []
+    errors = world_design_contract.policy_errors(policy)
     constraints = policy.get('scope_constraints') or {}
     allowed = constraints.get('allowed_source_paths')
     if not isinstance(allowed, list) or not allowed or not all(isinstance(v, str) for v in allowed):
@@ -330,6 +331,7 @@ def validate_proposed_scope(scope, policy: dict) -> tuple:
     errors = []
     if not isinstance(scope, dict):
         return None, ['no usable scope object was proposed']
+    errors.extend(world_design_contract.scope_errors(scope, policy))
     objective = scope.get('objective')
     if not isinstance(objective, str) or not 12 <= len(objective.strip()) <= 400:
         errors.append('scope.objective must be one concrete 12..400 character sentence')
@@ -342,6 +344,9 @@ def validate_proposed_scope(scope, policy: dict) -> tuple:
     else:
         for entry in files:
             rel = str(entry).replace('\\', '/')
+            if world_design_contract.required(policy) and Path(rel).as_posix().casefold() in (
+                    value.casefold() for value in world_design_contract.PROTECTED):
+                errors.append(f'scope file {entry!r} is protected by the Aincrad contract')
             if Path(rel).is_absolute() or ':' in rel or '..' in Path(rel).parts:
                 errors.append(f'scope file {entry!r} is not repo-relative')
                 continue
@@ -358,8 +363,11 @@ def validate_proposed_scope(scope, policy: dict) -> tuple:
         errors.append('scope.acceptance must be 1..8 non-empty observable checks')
     if errors:
         return None, errors
-    return {'objective': objective.strip(), 'files': [str(v).replace('\\', '/') for v in files],
-            'acceptance': [str(v).strip() for v in acceptance]}, []
+    result = {'objective': objective.strip(), 'files': [str(v).replace('\\', '/') for v in files],
+              'acceptance': [str(v).strip() for v in acceptance]}
+    if world_design_contract.required(policy):
+        result['design_review'] = world_design_contract.normalized_review(scope)
+    return result, []
 
 
 def resolve_command(command: list, values: dict) -> tuple:
@@ -1141,6 +1149,15 @@ class Cycle:
                 errors.append('a major_block review must name a concrete problem')
         else:
             errors.append('review.decision must be advisory or major_block')
+        if world_design_contract.required(self.policy):
+            contract = self.policy.get('design_contract') or {}
+            if review.get('design_contract_sha256') != contract.get('sha256'):
+                errors.append('main-AI review must cite design_contract_sha256')
+            setting = review.get('setting_review')
+            if not isinstance(setting, str) or not 20 <= len(setting.strip()) <= 2000:
+                errors.append('main-AI review must explain the candidate setting compatibility')
+            if decision == 'advisory' and review.get('setting_compatible') is not True:
+                errors.append('an incompatible or unreviewed setting cannot be released')
         if errors:
             return None, errors
         normalized = dict(review)
@@ -1555,6 +1572,9 @@ class Cycle:
                           'acceptance': scope['acceptance'], 'test_commands': commands,
                           'review_state': 'unapproved', 'source': 'gm_proposed_host_derived',
                           'gm_self_test_required': True}
+        if 'design_review' in scope:
+            scope_document['design_review'] = scope['design_review']
+            scope_document['design_contract'] = self.policy['design_contract']
         gm_runner.save_json(scope_file, scope_document)
         isolation = str((self.policy.get('deployment') or {}).get('candidate_isolation')
                         or 'git_worktree')
@@ -1653,8 +1673,11 @@ class Cycle:
             return self.block(cycle, 'coding_' + str(status), RUNTIME)
 
     def host_owned_hashes(self) -> dict:
+        paths = list(self.policy.get('host_owned_paths') or [])
+        if world_design_contract.required(self.policy):
+            paths = sorted(set(paths) | set(world_design_contract.PROTECTED))
         return {path: sha256_file(ROOT / path)
-                for path in (self.policy.get('host_owned_paths') or [])}
+                for path in paths}
 
     def provision_sparse_candidate(self, candidate: Path, base_revision: str) -> str | None:
         """Opt-in candidate isolation for hosts whose development .git is read-only.
@@ -1682,6 +1705,9 @@ class Cycle:
         alternates.write_text(str((ROOT / '.git' / 'objects').resolve()).replace('\\', '/'),
                               encoding='utf-8')
         directories = []
+        if world_design_contract.required(self.policy):
+            directories.extend(sorted({str(Path(rel).parent).replace('\\', '/')
+                                       for rel in world_design_contract.DOCUMENTS}))
         for pattern in (self.policy.get('scope_constraints') or {}).get('allowed_source_paths', []):
             directory = pattern[:-3].strip('/') if pattern.endswith('/**') else pattern.strip('/')
             if directory and directory not in directories:
@@ -1710,6 +1736,12 @@ class Cycle:
         base = candidate_record['base_revision']
         scope_files = candidate_record['derived_scope']['files']
         checks = []
+        if world_design_contract.required(self.policy):
+            design_errors = world_design_contract.policy_errors(self.policy, candidate)
+            design_errors.extend(world_design_contract.scope_errors(
+                candidate_record['derived_scope'], self.policy))
+            checks.append({'check': 'aincrad_design_contract', 'ok': not design_errors,
+                           'detail': design_errors})
         head = gm_runner.git(['rev-parse', 'HEAD'], cwd=candidate)
         checks.append({'check': 'candidate_head_is_base', 'ok': head.stdout.strip() == base,
                        'detail': head.stdout.strip()})
@@ -1863,8 +1895,18 @@ class Cycle:
 
     def stage_publish(self, cycle: dict) -> int:
         record = self.stage_record(cycle, 'publish')
-        if record['status'] == 'done':
+        if record.get('status') == 'done':
             return OK
+        if world_design_contract.required(self.policy):
+            candidate_record = cycle.get('stages', {}).get('candidate') or {}
+            candidate = Path(candidate_record.get('candidate_abs') or ROOT)
+            design_errors = world_design_contract.policy_errors(self.policy, candidate)
+            design_errors.extend(world_design_contract.scope_errors(
+                candidate_record.get('derived_scope') or {}, self.policy))
+            if design_errors:
+                record.update({'status': 'refused', 'design_errors': design_errors})
+                self.save_cycle(cycle)
+                return self.block(cycle, 'aincrad_design_contract_changed', PRECONDITION)
         validate = cycle['stages'].get('validate') or {}
         review = cycle['stages'].get('review') or {}
         if review.get('status') != 'done':
