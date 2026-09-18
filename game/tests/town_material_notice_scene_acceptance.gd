@@ -25,6 +25,18 @@ var initial: Dictionary = {}
 var read_proof: Dictionary = {}
 var arrived_observed := false
 
+func _collector() -> String:
+	return READER
+
+func _prepare_read() -> void:
+	pass
+
+func _start_collection(world) -> Dictionary:
+	return world.perform_action(path, _collector(), "material:recover:" + SOURCE, COMMAND, "opengameagent_fixture")
+
+func _extra_evidence() -> Dictionary:
+	return {}
+
 func check(ok: bool, text: String) -> void:
 	checks += 1
 	if not ok:
@@ -51,11 +63,11 @@ func _open() -> void:
 	scene.paused = true
 	root.add_child(scene)
 	scene.paused = phase != "swap"
-	last = scene.town.position_of(READER)
+	last = scene.town.position_of(_collector())
 	if phase == "swap":
 		check(_same(saved, scene.town.snapshot()), "cold scene retains every field before advancing")
-		check(scene.town.pending_job(READER).command_id == COMMAND, "same collection command survives restart")
-		check(scene.town._known_materials(READER)[SOURCE].stock == null, "mid-walk restore preserves unknown stock")
+		check(scene.town.pending_job(_collector()).command_id == COMMAND, "same collection command survives restart")
+		check(scene.town._known_materials(_collector())[SOURCE].stock == null, "mid-walk restore preserves unknown stock")
 		restored = true
 		phase = "walk"
 
@@ -91,6 +103,7 @@ func _physics_process(delta: float) -> bool:
 		check(not scene.material_notice.visible_from(READER), "real opaque collider blocks notice ray")
 		check(world.transaction(path, func(): return world.observe_material_notice(READER, scene.material_notice.visible_from(READER))).ok and world._known_materials(READER).is_empty(), "occluded reader gains nothing")
 		wall.queue_free()
+		_prepare_read()
 		phase = "read"
 		frames = 0
 		return false
@@ -105,7 +118,7 @@ func _physics_process(delta: float) -> bool:
 		check(read_proof.last_observed_stock == null, "notice records stock as unknown")
 		check(world._known_materials(DISTANT).is_empty(), "distant smith receives no broadcast")
 		check(world.snapshot().life.accounts == initial.life.accounts and world.material_sources()[0].stock == 3, "notice changes no material or inventory")
-		var result: Dictionary = world.perform_action(path, READER, "material:recover:" + SOURCE, COMMAND, "opengameagent_fixture")
+		var result: Dictionary = _start_collection(world)
 		check(result.ok, "earned notice knowledge admits existing collection action")
 		if not result.ok:
 			_finish()
@@ -114,22 +127,22 @@ func _physics_process(delta: float) -> bool:
 		phase = "walk"
 		return false
 	if phase != "walk": return false
-	var position: Vector3 = world.position_of(READER)
+	var position: Vector3 = world.position_of(_collector())
 	var step := Vector2(position.x - last.x, position.z - last.z).length()
 	walked += step
 	max_step = maxf(max_step, step)
 	last = position
-	var body: CharacterBody3D = scene.bodies[READER]
+	var body: CharacterBody3D = scene.bodies[_collector()]
 	max_speed = maxf(max_speed, Vector2(body.velocity.x, body.velocity.z).length())
-	var known: Dictionary = world._known_materials(READER)[SOURCE]
+	var known: Dictionary = world._known_materials(_collector())[SOURCE]
 	if known.stock != null: arrived_observed = true
 	var receipt: Dictionary = world.action_receipt(COMMAND)
 	if receipt.status != "pending":
 		check(receipt.status == "completed", "actual route and sorting complete")
 		check(restored and arrived_observed, "trip resumed and later observed actual source")
 		check(walked > 40 and max_step < .6 and max_speed <= 1.37, "ordinary physical walk without teleport or speed change")
-		check(world.material_sources()[0].stock == 2 and world.material_sources()[0].recovered == 1 and world._trade_account(READER).iron == 1, "one conserved iron recovered after work")
-		check(world.resident_view(READER).material_sources[0].knowledge_source == "personal_line_of_sight_observation", "arrival replaces notice uncertainty with actual sight")
+		check(world.material_sources()[0].stock == 2 and world.material_sources()[0].recovered == 1 and world._trade_account(_collector()).iron == 1, "one conserved iron recovered after work")
+		check(world.resident_view(_collector()).material_sources[0].knowledge_source == "personal_line_of_sight_observation", "arrival replaces route uncertainty with actual sight")
 		check(world.save_to(path).ok, "physical outcome durably saved")
 		var cold := World.new()
 		check(cold.load_from(path).ok and _same(cold.snapshot(), world.snapshot()), "complete final state cold-restores")
@@ -162,6 +175,7 @@ func _finish() -> void:
 		"walked_metres": walked, "max_speed_mps": max_speed, "max_sample_step_m": max_step,
 		"resumed": restored, "directly_observed": arrived_observed, "read_proof": read_proof,
 		"receipt": scene.town.action_receipt(COMMAND), "notice": scene.material_notice.evidence()}
+	result.merge(_extra_evidence(), true)
 	var file := FileAccess.open(output, FileAccess.WRITE)
 	file.store_string(JSON.stringify(result, "  ", true, true))
 	file.close()

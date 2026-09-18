@@ -4,9 +4,11 @@ Language policy: the game, resident names, dialogue, Kimi/GM instructions and th
 
 Current milestone: a recoverable ten-resident / ten-GM loop. Bounded live participation and bread adoption were recorded upstream. Local offline workflow checks pass, but sustained unattended autonomy, long-term food supply and natural ration sharing remain unproven.
 
-The user explicitly restarted the active simulation at seq0 in `shared:restart-20260918-01`. Its full checkpoints and decision evidence live under [worlds/](worlds/README.md); the original seq450 snapshot and GM memory remain a separate lineage; H114 received the new-world code and checkpoints back on the original computer. The existing cumulative Kimi ledger was recovered locally and continues without reset. API credentials stay local.
+The user explicitly restarted the active simulation at seq0 in `shared:restart-20260918-01`. Its full checkpoints and decision evidence live under [worlds/](worlds/README.md); the original seq450 snapshot and GM memory remain a separate lineage; H114 received the new-world code and checkpoints back on the original computer. H116 restored the complete seq148 world, world-scoped developer usage and GM checkpoint locally. The cumulative provider ledger used by the previous machine has not been located here; an available older ledger has unsettled requests and was not substituted. Paid continuation is pending that original ledger and guard file. API credentials stay local.
 
 ## Current work
+
+- **H116:** residents can explicitly tell nearby listeners a known material route, with attribution and unknown stock. The listener's private prior knowledge is not exposed. A controlled seq148 copy proved Ari-to-Wren disclosure, a 44.73-metre walk, mid-trip restart and one conserved iron recovery; 414 final focused checks passed. Complete seq148 and world-scoped usage were restored unchanged. Natural model adoption remains pending the missing existing provider ledger. [Evidence](docs/validation/material-sharing-2026-09-18.md).
 
 - **H115:** connected installed finite sources to a physical public route notice. Only an actual in-range reader learns the location; stock remains unknown until direct sight. A controlled seq148 copy walked 44.36 metres, resumed mid-trip and recovered one conserved iron. 571 checks passed, model input and Forward+ rendering were verified, and active saves remain unchanged. Voluntary reading, sharing, collection and productive adoption remain open. [Evidence](docs/validation/material-notice-2026-09-18.md).
 
@@ -87,7 +89,8 @@ flowchart TB
         H113["H113 Stopped by user at seq148; 99 new NPC decisions<br/>Iron installed but undiscovered; 131 lifetime replies preserved<br/>5 GM observations succeeded; GM06 timed out, usage unknown"]
         H114["H114 Own-tool repair executable; 34 capabilities<br/>Controlled seq148 copy: real 18.45 m walk, restart and material use<br/>Active saves unchanged; natural adoption remains open"]
         H115["H115 Physical notice teaches only source location<br/>Controlled 44.36 m trip, restart and finite iron recovery<br/>571 checks; model input and real rendering verified"]
-        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110 --> H111 --> H112 --> H113 --> H114 --> H115
+        H116["H116 Explicit attributed material-route sharing<br/>Controlled Ari-to-Wren disclosure and 44.73 m physical collection<br/>414 checks; paid adoption pending the original provider ledger"]
+        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110 --> H111 --> H112 --> H113 --> H114 --> H115 --> H116
         H113 -.Bounded reviewed content loop.-> A83Release
         H111 -.Verified navigation and design gates.-> A83Move
         H110 -.Implemented common boundary.-> A83Action
@@ -99,7 +102,7 @@ flowchart TB
         M20S["Free conversation observed; joint-visit adoption still open<br/>Fix target and conversation attribution; distinguish talk from consent<br/>Add sourced introductions and evidence-backed relationships"]
         M20C["Validate sustainable resources and daily life first<br/>Long-term berry supply, crowding and voluntary ration gifts<br/>Renewable flour, professions and exchange"]
         M20G["Improve entering and observing the world<br/>Overlapping navigation edges, renderer exit, characters,<br/>animation and performance"]
-        H47["Next: voluntary resource discovery and self-repair adoption<br/>Observe sharing, collection and actual productive use<br/>Preserve GM06 timeout and old unknown usage<br/>Verify sustainable daily life and arbitrary-module deployment"]
+        H47["Next: locate the existing provider ledger and guard<br/>Observe voluntary discovery, sharing and self-repair adoption<br/>Preserve GM06 timeout and old unknown usage<br/>Verify sustainable daily life and arbitrary-module deployment"]
         H82["Participant-directed development<br/>Residents identify needs, choose construction, use or decline it<br/>Externally assigned goals are not autonomous invention"]
         H110 -->|Continue the new world with full history| M20C
         H110 -->|Observe voluntary use and extend tested capabilities| M20S

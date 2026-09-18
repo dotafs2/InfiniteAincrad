@@ -6,8 +6,9 @@ const LegacyCapabilities = preload("res://core/actions/legacy_capabilities.gd")
 const SocialCapabilities = preload("res://core/actions/social_capabilities.gd")
 const CooperationCapabilities = preload("res://core/actions/cooperation_capabilities.gd")
 const SelfRepairCapability = preload("res://core/actions/self_repair_capability.gd")
+const MaterialKnowledgeCapability = preload("res://core/actions/material_knowledge_capability.gd")
 var _capability_registry = CapabilityRegistry.new()
-var _capability_modules: Dictionary = {"social": SocialCapabilities.new(), "cooperation": CooperationCapabilities.new(), "self_repair": SelfRepairCapability.new()}
+var _capability_modules: Dictionary = {"social": SocialCapabilities.new(), "cooperation": CooperationCapabilities.new(), "self_repair": SelfRepairCapability.new(), "material_knowledge": MaterialKnowledgeCapability.new()}
 
 func _init() -> void:
 	for definition in LegacyCapabilities.definitions():
@@ -193,7 +194,7 @@ func _validate_state(value: Variant) -> Dictionary:
 	if not value.godot.has("capabilities"):
 		for event in value.life.events:
 			var type: String = str(event.get("type", ""))
-			if type in ["resident_said", "surroundings_observed"] or type.begins_with("joint_visit_") or type in SelfRepairCapability.EVENTS:
+			if type in ["resident_said", "surroundings_observed", MaterialKnowledgeCapability.EVENT] or type.begins_with("joint_visit_") or type in SelfRepairCapability.EVENTS:
 				return _failure("capability_state_missing")
 		return base
 	var store: Variant = value.godot.capabilities

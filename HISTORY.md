@@ -2,6 +2,14 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-18 · H116 Explicit material-route sharing and local world recovery
+
+Added an optional attributed route-sharing capability, bringing the registry to 35. A resident can tell a nearby listener a personally known material location; the listener receives unknown-stock knowledge and may choose to collect or relay it. Sharing neither grants goods nor forces action. The menu and result do not disclose the listener's private prior knowledge, and redundant reports preserve observed depletion. Actual words, source chains and command receipts survive restart; GM evidence contains only the public statement.
+
+414 final focused checks passed with zero paid calls. A controlled copy of seq148 proved Ari could tell Wren, who stood outside notice-reading range, and Wren could physically walk 44.73 metres, resume mid-trip and recover one of the three iron units. Actual-controller fixtures preserved attribution and optional choices within the unchanged input cap. These are scripted test choices, not voluntary model adoption. Four existing overlapping navigation edges remain.
+
+Restored the unchanged active world, complete developer-usage history (20 actors, 144 calls) and GM checkpoint locally. The separate cumulative provider ledger used for this world was not found in the relevant local project directories; the available older ledger has unsettled requests and was not reused. No paid requests, billing reset, native GM recovery or heartbeat restart occurred. Original seq450, local seq452 and active seq148 remain separate. See [evidence, recovery and next work](docs/validation/material-sharing-2026-09-18.md).
+
 ## 2026-09-18 · H115 Physical discovery of the installed iron source
 
 Continued from the latest received delivery and H114. The installed finite iron was still unknown to every resident, so added a real public route notice beside the berry commons. Actual visibility and range grant only personal location knowledge with unknown stock. Existing collection remains optional; direct arrival sight, physical work and finite conservation decide the outcome. The notice reveals no private need or remote stock and cannot erase an observed depletion. Old saves and complete histories restore unchanged.

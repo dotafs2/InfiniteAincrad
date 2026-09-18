@@ -30,7 +30,7 @@ const BACKGROUND_GM_LIFE_EVENT_TEXT_LIMIT := 280
 ## life.events only after the world accepted the turn and the words were delivered to the
 ## stated recipients. Optional speech that was never sent (speech_not_supported_for_action)
 ## and the reply's private deliberation reason are never in this set.
-const BACKGROUND_GM_PUBLIC_LIFE_EVENT_TYPES := ["ask_help", "reply_help", "resident_said", "joint_visit_invite_visit", "joint_visit_accept_visit", "joint_visit_decline_visit", "joint_visit_cancel_invitation"]
+const BACKGROUND_GM_PUBLIC_LIFE_EVENT_TYPES := ["ask_help", "reply_help", "resident_said", "material_location_shared", "joint_visit_invite_visit", "joint_visit_accept_visit", "joint_visit_decline_visit", "joint_visit_cancel_invitation"]
 ## Complete resident-model reply archive. Unlike the bounded NPC/GM projections this is
 ## append-only world state: raw Assistant text is retained for the explicit GM archive route.
 const RESIDENT_ARCHIVE_SCHEMA_VERSION := 1
