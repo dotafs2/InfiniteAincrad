@@ -2,6 +2,14 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-18 · H113 GM recovery and a bounded live continuation
+
+The user authorized autonomous diagnosis, validation and same-world simulation until two hours after the request: 2026-09-18 13:00:08 UTC. Observation previously wandered through 37 shell inspections and missed its final-output deadline. It now receives full pinned design documents and bounded evidence with shell/wait tools disabled. Real GM05 observation, native-session resume and delta accounting succeeded. The old incomplete usage tail is preserved rather than erased.
+
+GM05 authored a three-unit finite iron configuration after a host-directed follow-up to its evidence-backed proposal. A small-JSON artifact mode reduced a real coding continuation to 9.4 seconds / 54,102 tokens, versus 108.4 seconds / 839,976 tokens for the shell coding turn. Candidate scope and host tests passed. A controlled exact-world copy passed 38 physical/perception/labor/depletion/cold-load checks; 58 material rules also passed. The reviewed source was installed at seq62 and the original GM acknowledged its exact receipt, while explicitly leaving voluntary adoption unproven. A first ten-minute live episode completed 18 NPC decisions, including smith/carpenter free conversation. Same-world observation is still running at this interim delivery.
+
+124 focused Python tests passed; five observation/artifact checks passed again after destination-alias validation. The initial supervisor field error, pre-dispatch candidate-path refusal and incorrect trial metric remain recorded. The deadline, cumulative provider ledger, CNY 10 NPC-spend ceiling, complete checkpoints, owned-process containment and visible conversation archive are retained. See [evidence and limits](docs/validation/gm-recovery-2026-09-18.md). This bounded, reviewed content installation does not prove perpetual unattended development or spontaneous invention.
+
 ## 2026-09-18 · H112 World-scoped permanent developer usage
 
 The user corrected the mistaken requirement to recover another world's GM accounting before starting this fresh world. Developer usage now belongs to each stable NPC/GM identity from this world's genesis; provider billing history remains separate and unchanged. Added persistent per-call receipts, append-only revisions, exact Kimi backfill, idempotent replay, native session delta attribution, confirmed partial usage, safe full-history export and validated restore. Continued worlds refuse a missing usage book instead of silently resetting to zero. Usage stays outside NPC observations and model input.

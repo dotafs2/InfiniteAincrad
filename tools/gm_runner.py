@@ -104,7 +104,9 @@ SECRET_ENV_KEYS = ('DEEPSEEK_API_KEY', 'OPENAI_API_KEY', 'KIMI_API_KEY', 'MOONSH
 USAGE_FIELDS = ('input_tokens', 'cached_input_tokens', 'cache_write_input_tokens',
                 'output_tokens', 'reasoning_output_tokens', 'total_tokens')
 
-STABLE_INSTRUCTIONS = world_design_contract.INSTRUCTIONS + """Use English for all names, dialogue, summaries, proposals, code comments and other natural-language output. Keep machine identifiers and quoted historical evidence unchanged.
+STABLE_INSTRUCTIONS = world_design_contract.INSTRUCTIONS + """For this observation, read the design documents from the complete OBSERVATION_DESIGN_DOCUMENTS
+packet in the request, not from the filesystem. The host already loaded both pinned sources.
+Use English for all names, dialogue, summaries, proposals, code comments and other natural-language output. Keep machine identifiers and quoted historical evidence unchanged.
 
 You are one of ten independent BACKGROUND GM processes of the InfiniteAincrad persistent world.
 You inspect world-scoped evidence and decide whether one bounded issue needs work from you.
@@ -133,7 +135,13 @@ do not require a particular design merely because the need is new. Do not invent
 without evidence, but do not treat absence of an existing mechanic as a ban on addressing an
 evidence-backed need.
 
-In an observation turn you may read repository files for context. You must not modify the
+An observation turn is a self-contained decision, not a coding investigation. The host supplies
+the pinned design documents, public evidence, your own memory and allowed scope in this request.
+Shell tools are disabled for this stage. Do not request tools, browse the repository, or plan
+an implementation before replying. If the supplied evidence is insufficient, return observe or
+no_action with the exact missing evidence. Propose at most one bounded next step; repository
+inspection and implementation belong to a later, separately authorized coding turn.
+You must not modify the
 repository, the world save or configuration, must not run paid or NPC model calls, must not read
 secrets or private saves, and must not commit or push.
 
@@ -207,6 +215,9 @@ OUTPUT CONTRACT: end your turn with exactly one fenced ```json block and nothing
 
 FEEDBACK_DECISIONS = ('accept', 'repair', 'no_action', 'escalate')
 STABLE_FEEDBACK_INSTRUCTIONS = world_design_contract.INSTRUCTIONS + """Use English for all names, dialogue, summaries, proposals, code comments and other natural-language output. Keep machine identifiers and quoted historical evidence unchanged.
+
+Read the complete design documents from the inline packet. Shell tools are disabled.
+Assess only the supplied receipt and memory; report missing evidence without inspecting files.
 
 You are one of the ten independent BACKGROUND GMs of the InfiniteAincrad persistent world.
 You are receiving the host's factual receipt for a proposal or work associated with your GM
@@ -553,7 +564,7 @@ def codex_catalog(instructions: str) -> dict:
 
 def codex_command(route: Route, workdir: Path, result_path: Path, instructions_path: Path,
                   catalog_path: Path, resume_id: str | None,
-                  sandbox: str = 'read-only') -> list[str]:
+                  sandbox: str = 'read-only', allow_tools: bool = True) -> list[str]:
     command = [*route.codex_argv, 'exec', '--ignore-user-config', '-C', str(workdir),
                '-s', sandbox, '--json', '--color', 'never', '-o', str(result_path)]
     values = {'model': 'deepseek-flash', 'model_provider': 'chain_deepseek',
@@ -572,6 +583,9 @@ def codex_command(route: Route, workdir: Path, result_path: Path, instructions_p
               'sandbox_workspace_write.exclude_slash_tmp': True,
               'shell_environment_policy.exclude': list(SECRET_ENV_KEYS),
               'web_search': 'disabled'}
+    if not allow_tools:
+        values.update({'features.shell_tool': False, 'features.unified_exec': False,
+                       'features.sleep_tool': False, 'features.tool_suggest': False})
     if route.windows_sandbox:
         # Carry the host's already-configured Windows sandbox backend into this invocation,
         # preserving the requested -s policy above unchanged. This forwards a setting only;
@@ -1490,9 +1504,14 @@ def autonomy_policy_block(policy: dict) -> str:
                  'You may propose your own bounded coding scope. Put it in a "scope" object on the '
                  'single new_issues entry and/or on a results entry: '
                  '{"objective": "<one concrete sentence>", "files": ["<repo-relative path>"], '
-                 '"acceptance": ["<observable check>"], "test_commands": [["<argv>"]]}. The GM '
-                 'owns the implementation and self-testing and should list commands it actually '
-                 'ran. The host validates every path against constraints.allowed_source_paths and '
+                 '"acceptance": ["<observable check>"], "test_commands": [["<argv>"]], '
+                 '"design_review": {"contract_sha256": "<pinned digest>", '
+                 '"setting_basis": "original_extension", "rationale": "<setting review>", '
+                 '"preserves": ["setting", "capabilities", "agency", "knowledge", "continuity", "execution"]}}. '
+                 'Put design_review INSIDE scope. The GM '
+                 'owns later implementation and self-testing. This observation only proposes a '
+                 'scope: do not investigate source, run commands, implement or self-test now. '
+                 'The host validates every path against constraints.allowed_source_paths and '
                  'excluded_paths, rejects more than max_changed_files paths, and keeps '
                  'host_owned_paths byte-identical. Any fixed host test commands are advisory '
                  'evidence, not an automatic acceptance gate. Main-AI review is normally advice and '
@@ -1504,6 +1523,25 @@ def autonomy_policy_block(policy: dict) -> str:
     return ('[AUTONOMY_POLICY]\n'
             + json.dumps(block, ensure_ascii=False, sort_keys=True, indent=2)
             + '\n[END_AUTONOMY_POLICY]\n')
+
+
+def proposed_scope(entry: dict):
+    """Retain an explicit author review even when returned beside the scope.
+
+    Only structural placement is normalized. Missing reviews remain missing and
+    contradictory declarations are rejected; the production design gate is unchanged.
+    """
+    scope = entry.get('scope')
+    if scope is None:
+        return None
+    if not isinstance(scope, dict):
+        raise ValueError('scope must be an object when present')
+    scope = copy.deepcopy(scope)
+    if 'design_review' in entry:
+        if 'design_review' in scope and scope['design_review'] != entry['design_review']:
+            raise ValueError('conflicting nested and sibling design_review declarations')
+        scope['design_review'] = copy.deepcopy(entry['design_review'])
+    return scope
 
 
 def validate_new_issues(answer, investigation: dict | None) -> tuple[list[dict], list[str]]:
@@ -1528,9 +1566,10 @@ def validate_new_issues(answer, investigation: dict | None) -> tuple[list[dict],
         return [], ['new_issues[0].evidence_refs must copy selected investigation pointers']
     if not isinstance(entry.get('claim_coding'), bool):
         return [], ['new_issues[0].claim_coding must be boolean']
-    scope = entry.get('scope')
-    if scope is not None and not isinstance(scope, dict):
-        return [], ['new_issues[0].scope must be an object when present']
+    try:
+        scope = proposed_scope(entry)
+    except ValueError as error:
+        return [], ['new_issues[0].' + str(error)]
     resident_present, capability_present = 'resident_id' in entry, 'capability_id' in entry
     if resident_present != capability_present:
         return [], ['new_issues[0].resident_id and capability_id must be provided together']
@@ -1769,14 +1808,27 @@ def build_prompt(document, evidence_path, digest, report, state, item, run_id, b
                               public_snapshot_index(document))
     policy_block = autonomy_policy_block(item['autonomy_policy']) \
         if item.get('autonomy_policy') else ''
-    tail_bytes = len((gm_block + policy_block).encode('utf-8'))
+    design_block = observation_design_block()
+    tail_bytes = len((gm_block + policy_block + design_block).encode('utf-8'))
     if tail_bytes >= budget:
         raise ValueError(f'GM state/policy for {item["gm_id"]} exceeds --max-prompt-bytes {budget}')
     common = common_evidence_block(document, evidence_path, digest, report, budget - tail_bytes)
-    prompt = common + gm_block + policy_block
+    prompt = design_block + common + gm_block + policy_block
     if len(prompt.encode('utf-8')) > budget:
         raise ValueError(f'prompt for {item["gm_id"]} exceeds --max-prompt-bytes {budget}')
     return prompt
+
+
+def observation_design_block() -> str:
+    """Preload the exact design sources so observation needs no repository tools."""
+    documents = []
+    for relative_path in world_design_contract.DOCUMENTS:
+        source = ROOT / relative_path
+        if source.stat().st_size > 32_000:
+            raise ValueError('Observation design document exceeds the bounded packet size')
+        content = source.read_text(encoding='utf-8')
+        documents.append({'path': relative_path, 'sha256': sha256_file(source), 'content': content})
+    return '[OBSERVATION_DESIGN_DOCUMENTS]\n' + canonical(documents) + '\n[END_OBSERVATION_DESIGN_DOCUMENTS]\n'
 
 
 # --------------------------------------------------------------------------- dispatch
@@ -1870,9 +1922,10 @@ def validate_gm_output(document, gm_id: str, slice_ids: list[str]) -> tuple[list
         if disposition == 'no_action' and claim:
             errors.append(f'results[{index}] claims coding while declaring no_action')
             continue
-        scope = item.get('scope')
-        if scope is not None and not isinstance(scope, dict):
-            errors.append(f'results[{index}].scope must be an object when present')
+        try:
+            scope = proposed_scope(item)
+        except ValueError as error:
+            errors.append(f'results[{index}].' + str(error))
             continue
         seen.add(issue_id)
         accepted.append({'issue_id': issue_id, 'disposition': disposition, 'claim_coding': claim,
@@ -1884,14 +1937,16 @@ def validate_gm_output(document, gm_id: str, slice_ids: list[str]) -> tuple[list
 
 def run_codex_once(route: Route, workdir: Path, run_dir: Path, tag: str, prompt: str,
                    instructions_path: Path, catalog_path: Path, resume_id: str | None,
-                   timeout: int, on_process=None) -> dict:
+                   timeout: int, on_process=None, allow_tools: bool | None = None) -> dict:
     route.assert_no_credential(prompt, 'prompt')
     events_path = run_dir / f'{tag}.events.jsonl'
     stderr_path = run_dir / f'{tag}.stderr.log'
     result_path = run_dir / f'{tag}.result.md'
     (run_dir / f'{tag}.prompt.txt').write_text(prompt, encoding='utf-8')
+    tools_enabled = tag == 'coding' if allow_tools is None else allow_tools
     command = codex_command(route, workdir, result_path, instructions_path, catalog_path, resume_id,
-                            sandbox='workspace-write' if tag == 'coding' else 'read-only')
+                            sandbox='workspace-write' if tag == 'coding' and tools_enabled else 'read-only',
+                            allow_tools=tools_enabled)
     record = {'tag': tag, 'workdir': str(workdir), 'resume_requested': resume_id, 'command': command,
               'prompt_sha256': sha256_bytes(prompt.encode()), 'prompt_bytes': len(prompt.encode()),
               'started_utc': utc_iso(), 'pid': None, 'exit_code': None, 'timed_out': False,
@@ -2378,7 +2433,7 @@ def observe(args) -> int:
                            'usage_measured': usage_is_measured(attempt.get('usage')),
                            'session_returned': attempt.get('thread_returned'),
                            **usage_evidence(attempt)})
-            outcome = {'gm_id': gm_id, 'status': status, 'cost': cost,
+            outcome = {'gm_id': gm_id, 'run_id': run_id, 'status': status, 'cost': cost,
                        **usage_evidence(attempt),
                        'exit_code': attempt.get('exit_code'), 'pid': attempt.get('pid'),
                        'resume_requested': resume_id,
@@ -2527,6 +2582,35 @@ def validate_coding_output(answer, issue_id: str) -> list[str]:
     if not isinstance(answer.get('test_results'), str):
         errors.append('coding answer test_results must be a string')
     return errors
+
+
+def json_artifact_plan(answer, scope, candidate: Path) -> dict[Path, object]:
+    """Validate every destination and JSON value before writing any model-authored file."""
+    files = scope.get('files', [])
+    if not 1 <= len(files) <= 4 or len(set(files)) != len(files):
+        raise ValueError('JSON artifact scope needs one to four distinct files')
+    artifacts = answer.get('artifacts')
+    if not isinstance(artifacts, dict) or set(artifacts) != set(files):
+        raise ValueError('JSON artifacts must match the approved file set exactly')
+    root = candidate.resolve()
+    plan = {}
+    for name, value in artifacts.items():
+        path = Path(name)
+        if (path.is_absolute() or '\\' in name or ':' in name or '..' in path.parts
+                or path.suffix != '.json' or any(p in ('.git', 'private') for p in path.parts)):
+            raise ValueError('Invalid JSON artifact path')
+        destination = (root / path).resolve()
+        if root not in destination.parents or not destination.parent.is_dir():
+            raise ValueError('Artifact destination escapes candidate or has no parent')
+        if destination in plan:
+            raise ValueError('JSON artifact paths alias the same destination')
+        if not isinstance(value, dict):
+            raise ValueError('Each JSON artifact must be an object')
+        encoded = json.dumps(value, ensure_ascii=False, allow_nan=False).encode('utf-8')
+        if len(encoded) > 32768:
+            raise ValueError('JSON artifact exceeds 32 KiB')
+        plan[destination] = value
+    return plan
 
 
 def candidate_path_key(value) -> str:
@@ -2700,13 +2784,38 @@ def code(args) -> int:
             return refusal('scope_path_mismatch',
                            f'parent directories missing in the candidate: {missing}', 6)
 
+        artifact_mode = getattr(args, 'json_artifacts', False)
+        current_artifacts = {}
+        if artifact_mode:
+            try:
+                planned = json_artifact_plan({'artifacts': {name: {} for name in scope['files']}}, scope, candidate)
+                for destination in planned:
+                    if destination.exists():
+                        if destination.stat().st_size > 32768:
+                            raise ValueError('Existing JSON artifact exceeds 32 KiB')
+                        current_artifacts[destination.relative_to(candidate).as_posix()] = json.loads(destination.read_text(encoding='utf-8'))
+            except (ValueError, TypeError, OSError) as error:
+                return refusal('artifact_scope_preflight', str(error), 6)
+
         run_id = 'code-' + utc_stamp() + '-' + os.urandom(3).hex()
         run_dir = state_dir / 'runs' / run_id
         run_dir.mkdir(parents=True, exist_ok=False)
         instructions = run_dir / 'instructions.md'
-        instructions.write_text(STABLE_CODE_INSTRUCTIONS, encoding='utf-8')
+        code_instructions = STABLE_CODE_INSTRUCTIONS
+        if artifact_mode:
+            code_instructions = (world_design_contract.INSTRUCTIONS +
+                '\nRead the complete pinned documents from the inline packet. Shell tools are disabled. '
+                'Author only the requested JSON configuration objects in English. Do not inspect files, '
+                'run commands or claim tests passed. The host writes your exact objects into the isolated '
+                'candidate and runs the scope tests. Return exactly one JSON object with issue_id, '
+                'status (implemented or blocked), changed_files, test_commands: [], '
+                'test_results: "Not run; host validation required", and artifacts: '
+                '{"approved/relative/path.json": {the complete JSON object}}. '
+                'Preserve a provided current object when it already satisfies the scope. '
+                'An artifact is a candidate, never a deployment or evidence of NPC adoption.')
+        instructions.write_text(code_instructions, encoding='utf-8')
         catalog = run_dir / 'models.json'
-        save_json(catalog, codex_catalog(STABLE_CODE_INSTRUCTIONS))
+        save_json(catalog, codex_catalog(code_instructions))
         protected = [Path(path).resolve() for path in (args.protect or [])]
         guards_before = guard_snapshot(protected)
         coding_state = {'gm_id': owner, 'role': 'coding_worker',
@@ -2725,6 +2834,13 @@ def code(args) -> int:
         prompt = ('[CODING_SCOPE]\n'
                   + json.dumps(coding_state, ensure_ascii=False, sort_keys=True, indent=2)
                   + '\n[END_CODING_SCOPE]\n')
+        if artifact_mode:
+            # No implementation discovery is delegated for a fully specified data artifact.
+            prompt = (observation_design_block() + '\n[JSON_ARTIFACT_SCOPE]\n' +
+                      json.dumps({'gm_id': owner, 'world_id': state.get('world_id'),
+                                  'scope': scope, 'current_artifacts': current_artifacts,
+                                  'deployment_authorized': False},
+                                 ensure_ascii=False, indent=2))
         route.assert_no_credential(prompt, 'coding prompt')
         intent = {'kind': 'gm_code', 'run_id': run_id, 'gm_id': owner, 'issue_id': args.issue,
                   'status': 'in_flight', 'pid': None, 'started_utc': utc_iso(),
@@ -2746,7 +2862,8 @@ def code(args) -> int:
         if book:
             book.begin_gm(run_id, owner, 'code')
         attempt = run_codex_once(route, candidate, run_dir, 'coding', prompt, instructions, catalog,
-                                 resume_id, args.timeout, on_process=on_process)
+                                 resume_id, args.timeout, on_process=on_process,
+                                 allow_tools=not artifact_mode)
         account_native_usage(state, attempt, resume_id)
         if book:
             book.settle_gm(run_id, owner, 'code', attempt, route.sessions_root())
@@ -2790,6 +2907,14 @@ def code(args) -> int:
             status = 'invalid_output'
         elif status == 'ok' and answer['status'] == 'blocked':
             status = 'worker_blocked'
+        if status == 'ok' and artifact_mode:
+            try:
+                planned = json_artifact_plan(answer, scope, candidate)
+                for destination, value in planned.items():
+                    save_json(destination, value)
+            except (ValueError, TypeError, OSError) as error:
+                validation_errors.append('JSON artifact rejected: ' + str(error))
+                status = 'invalid_output'
         scope_tests = []
         if status == 'ok' and args.run_scope_tests and scope['test_commands']:
             scope_timeout = min(args.timeout, 900)
@@ -3061,7 +3186,7 @@ def build_feedback_prompt(state: dict, gm_id: str, receipt: dict, receipt_sha: s
              'memory_paging': gm_memory_prompt_access(gm_id, state_dir or state.get('state_dir')),
              'archive_access': gm_archive_prompt_access(gm_id, state.get('archive_source')),
              'owned_or_open_issues': owned[:8]}
-    return ('[FEEDBACK_RECEIPT]\n'
+    return (observation_design_block() + '\n[FEEDBACK_RECEIPT]\n'
             + json.dumps(receipt, ensure_ascii=False, sort_keys=True, indent=2)
             + '\n[END_FEEDBACK_RECEIPT]\n[GM_STATE]\n'
             + json.dumps(block, ensure_ascii=False, sort_keys=True, indent=2)
@@ -3319,6 +3444,8 @@ def build_parser() -> argparse.ArgumentParser:
     code_parser.add_argument('--candidate', type=Path)
     code_parser.add_argument('--dry-run', action='store_true')
     code_parser.add_argument('--run-scope-tests', action='store_true')
+    code_parser.add_argument('--json-artifacts', action='store_true',
+                             help='Return bounded JSON objects without shell tools; host writes scoped files')
     code_parser.set_defaults(func=code)
 
     feedback_parser = subparsers.add_parser(

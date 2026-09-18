@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "milestone": "H113",
+  "world_id": "shared:restart-20260918-01",
+  "phase": "validated_content_installed_live_window_running",
+  "window": {
+    "started_utc": "2026-09-18T11:00:08Z",
+    "deadline_utc": "2026-09-18T13:00:08Z",
+    "npc_call_cap": 256,
+    "npc_new_cost_cap_cny": 10
+  },
+  "python_tests": 124,
+  "artifact_tests_after_alias_guard": 5,
+  "material_rule_checks": 58,
+  "physical_copy_trial": {
+    "checks": 38,
+    "collected": 3,
+    "controlled_copy_trial": true,
+    "copy": "C:/InfiniteAincrad/private/gm-recovery-20260918/iron-trial-02/world.json",
+    "elapsed_game_seconds": 189.1166666667093,
+    "failures": [],
+    "labor_seconds": [
+      60.44999999999823,
+      60.44999999999823,
+      60.44999999999823
+    ],
+    "max_step_metres": 0.022520197555422783,
+    "paid_calls": 0,
+    "suite": "live_material_source_copy_trial",
+    "time_scale": 3.0,
+    "voluntary_adoption": false,
+    "walked_metres": 7.717523971572518,
+    "world_source": "C:/InfiniteAincrad/private/worlds/restart-20260918-01/world.json"
+  },
+  "coding_shell": {
+    "status": "ok",
+    "run_id": "code-20260918T112729Z-b495cc",
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 788480,
+      "input_tokens": 828380,
+      "output_tokens": 11596,
+      "reasoning_output_tokens": 5098
+    },
+    "session_requested": null,
+    "session_returned": "01a0b445-82bc-7043-ac33-5fb21926bb9b",
+    "observed_changed_files": [
+      "game/data/iron_source_20260918.json"
+    ]
+  },
+  "coding_artifact": {
+    "status": "ok",
+    "run_id": "code-20260918T113503Z-7579ba",
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 128,
+      "input_tokens": 52954,
+      "output_tokens": 1148,
+      "reasoning_output_tokens": 739
+    },
+    "session_requested": "01a0b445-82bc-7043-ac33-5fb21926bb9b",
+    "session_returned": "01a0b445-82bc-7043-ac33-5fb21926bb9b",
+    "observed_changed_files": [
+      "game/data/iron_source_20260918.json"
+    ]
+  },
+  "original_gm_feedback": {
+    "status": "ok",
+    "run_id": "feedback-20260918T113808Z-76d2ed",
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 128,
+      "input_tokens": 70502,
+      "output_tokens": 5955,
+      "reasoning_output_tokens": 4745
+    },
+    "decision": "accept",
+    "acknowledged": true,
+    "receipt_sha256": "ec3ed81101f7aeaa4f2590c410871b704ec19777723e2156fbb6c147cec37db6",
+    "next_work": "No defect found in the host copy trial, so the next evidence I need is live-world: the post-install world hash, an action receipt showing a resident perceiving and physically collecting real units, stock reaching zero with no further yield, depletion surviving save/load, explicit restore to three, and any unprompted use, which is still unobserved."
+  },
+  "observations": [
+    {
+      "run_id": "run-20260918T110537Z-9e8918",
+      "status": "ok",
+      "results": [
+        {
+          "gm_id": "gm-05",
+          "status": "ok",
+          "usage": {
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 128,
+            "input_tokens": 16690,
+            "output_tokens": 6839,
+            "reasoning_output_tokens": 6266
+          },
+          "session_requested": null,
+          "session_returned": "01a0b431-7dc1-7b23-85cc-e86e5277e3a3"
+        }
+      ]
+    },
+    {
+      "run_id": "run-20260918T111237Z-a19745",
+      "status": "ok",
+      "results": [
+        {
+          "gm_id": "gm-05",
+          "status": "ok",
+          "usage": {
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 23424,
+            "input_tokens": 32444,
+            "output_tokens": 1861,
+            "reasoning_output_tokens": 1457
+          },
+          "session_requested": null,
+          "session_returned": "01a0b431-7dc1-7b23-85cc-e86e5277e3a3"
+        }
+      ]
+    },
+    {
+      "run_id": "run-20260918T111757Z-b665ef",
+      "status": "ok",
+      "results": [
+        {
+          "gm_id": "gm-05",
+          "status": "ok",
+          "usage": {
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 34304,
+            "input_tokens": 46410,
+            "output_tokens": 3150,
+            "reasoning_output_tokens": 2090
+          },
+          "session_requested": null,
+          "session_returned": "01a0b431-7dc1-7b23-85cc-e86e5277e3a3"
+        }
+      ]
+    }
+  ],
+  "installation": {
+    "status": "installed",
+    "source_id": "street:iron-salvage-20260918",
+    "command_id": "development_gm:gm05-iron-20260918",
+    "life_seq": 62,
+    "initial_stock": 3,
+    "process_exit": 0
+  },
+  "old_usage_tail": "Unknown; confirmed lower bound 792826 remains retained; explicit recovery acknowledged uncertainty.",
+  "limitations": [
+    "Host-directed follow-up, not spontaneous invention",
+    "Controlled copy trial, not voluntary adoption",
+    "Sustained unattended development is unproven",
+    "Four pre-existing navigation edge overlaps remain"
+  ],
+  "earlier_failures": [
+    "Supervisor read active instead of active_processes; no model calls",
+    "Candidate outside GM state directory; refused before dispatch",
+    "Trial sampled delayed projection instead of actual body; corrected metric and fresh-copy rerun"
+  ],
+  "first_live_episode": {
+    "started_utc": "2026-09-18T11:13:58.549379+00:00",
+    "npc_calls": 18,
+    "gm_calls": 1,
+    "initial_ledger": {
+      "counts": {
+        "settled": 218
+      },
+      "charge_nano": 4250696200
+    },
+    "reason": "requested_stop",
+    "finished_utc": "2026-09-18T11:24:33.099476+00:00",
+    "final_ledger": {
+      "counts": {
+        "settled": 236
+      },
+      "charge_nano": 4613369700
+    },
+    "final_checkpoint": {
+      "seq": 61,
+      "file": "seq000061-8ad67398d9bae6ba.world.json",
+      "sha256": "8ad67398d9bae6bad4d972508f6f017c03054d1a28a2dc81fd6504bbe6187f3f",
+      "created_utc": "2026-09-18T11:24:09.771527+00:00",
+      "resident_count": 10,
+      "archive_count": 50,
+      "full_history_preserved": true
+    }
+  },
+  "spec_sha256": "d552808bf6c2f3d0e96071e0abc20bb529f0b281bd93900764ed16b924906d9b"
+}
