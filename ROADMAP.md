@@ -18,7 +18,9 @@ The user explicitly restarted the active simulation at seq0 in `shared:restart-2
 
 - **H110:** one reusable action boundary with 33 capability contracts: 27 existing adapters plus free conversation, private observation and four consent-based joint-visit operations. Atomic composition, durable receipts and full restore checks are implemented. Two real bodies completed a shared journey across restart. Crowded menus retain every choice through lossless description factoring. Read the [capability standard](docs/design/action-capability-standard.md) and [validation](docs/validation/action-capabilities-2026-09-18.md). The active live world remains seq43; adoption awaits a separate live continuation.
 
-- **H111:** pin the [Aincrad charter](docs/design/aincrad-world-charter.md) and capability standard in production GM policy, require explicit setting review, and recheck design pins before release. NPC prompts also retain the Aincrad setting. Ordinary movement now uses Godot's cached A* path following with existing RVO avoidance and collision. Real wall detours, two-person travel across restart, offline GM/NPC continuation and seq43 full restore pass. Ten fresh-world GM records are initialized; paid GM continuation is held for current carried accounting and a concrete H110 production deployment contract. [Evidence and remaining gaps](docs/validation/aincrad-gm-navigation-2026-09-18.md).
+- **H111:** pin the [Aincrad charter](docs/design/aincrad-world-charter.md) and capability standard in production GM policy, require explicit setting review, and recheck design pins before release. NPC prompts also retain the Aincrad setting. Ordinary movement now uses Godot's cached A* path following with existing RVO avoidance and collision. Real wall detours, two-person travel across restart, offline GM/NPC continuation and seq43 full restore pass. Ten fresh-world GM records are initialized. The old accounting prerequisite was corrected in H112; arbitrary new-module production deployment remains incomplete. [Evidence and remaining gaps](docs/validation/aincrad-gm-navigation-2026-09-18.md).
+
+- **H112:** permanent developer usage tags for all ten NPCs and ten GMs, exact active-world backfill, idempotent receipts, partial native usage and full-history transfer. The 32 NPC calls total 83,274 tokens. One real GM observation hit its 90-second host deadline after code inspection; 792,826 tokens are confirmed and its final tail remains unresolved. Older-world accounting is not a prerequisite. [Usage and actual limits](docs/validation/actor-usage-2026-09-18.md).
 
 [Character-depth review](docs/design/character-depth-review-2026-09-18.md) · [All ten complete dossiers](docs/design/resident-dossiers.md) · [Character validation](docs/validation/character-depth-2026-09-18.md)
 
@@ -74,8 +76,9 @@ flowchart TB
         H108["H108 Rich original character dossiers for ten seed residents<br/>21 stored sections; bounded self profile reaches decisions<br/>Existing-world migration and social growth remain pending"]
         H109["H109 User-requested fresh seq0 world<br/>32 live decisions; interrupted first window<br/>Ten-minute continuation; full checkpoints and Chinese report"]
         H110["H110 Reusable action layer: 33 capability contracts<br/>Free speech, private observation, consented joint travel<br/>Physical restart verified; live adoption not yet observed"]
-        H111["H111 Aincrad design pins and fixed navigation<br/>Cached A*, physical detour and joint restart verified<br/>10 GM identities initialized; paid continuation held"]
-        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110 --> H111
+        H111["H111 Aincrad design pins and fixed navigation<br/>Cached A*, physical detour and joint restart verified<br/>10 GM identities initialized; current status follows in H112"]
+        H112["H112 Permanent developer usage per NPC and GM<br/>32 NPC calls: 83,274 tokens; exact full-history transfer<br/>One real GM observation timed out; known tokens retained"]
+        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110 --> H111 --> H112
         H111 -.Verified navigation and design gates.-> A83Move
         H110 -.Implemented common boundary.-> A83Action
         H103 --> M20
@@ -86,7 +89,7 @@ flowchart TB
         M20S["Observe adoption of conversation and joint visits<br/>Add sourced introductions and voluntary disclosures<br/>Shared memories by person; relationships change through actual events"]
         M20C["Validate sustainable resources and daily life first<br/>Long-term berry supply, crowding and voluntary ration gifts<br/>Renewable flour, professions and exchange"]
         M20G["Improve entering and observing the world<br/>Overlapping navigation edges, renderer exit, characters,<br/>animation and performance"]
-        H47["Complete the fresh-world production handoff<br/>Current GM accounting and H110 deployment/runtime contract<br/>Same-save life, original-GM follow-up and bounded repeat cycles"]
+        H47["Complete the fresh-world production handoff<br/>Resolve this GM observation timeout and missing final usage<br/>Review the H110 deployment/runtime contract<br/>Same-save life, original-GM follow-up and bounded repeat cycles"]
         H82["Participant-directed development<br/>Residents identify needs, choose construction, use or decline it<br/>Externally assigned goals are not autonomous invention"]
         H110 -->|Continue the new world with full history| M20C
         H110 -->|Observe voluntary use and extend tested capabilities| M20S
@@ -114,7 +117,7 @@ flowchart TB
     classDef done fill:#dcfce7,stroke:#15803d,color:#14532d;
     classDef partial fill:#fff1d6,stroke:#b45309,color:#78350f;
     classDef future fill:#f1f5f9,stroke:#64748b,color:#0f172a;
-    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109,H110,H111 done;
+    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109,H110,H111,H112 done;
     class M20,M20S,M20C,M20G,H47,H82,A83Entry,A83Scene,A83NPC,A83Action,A83Move,A83Core,A83Evidence,A83GM,A83Candidate,A83Review,A83Release,A83Use,A83Feedback,A83Stop,A83Save,A83Fault partial;
     class N5,P,N6,N7,N8,N9,XR,N10,R future;
 ```
