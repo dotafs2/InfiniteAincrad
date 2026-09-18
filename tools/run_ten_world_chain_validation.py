@@ -66,15 +66,11 @@ def require(condition, message):
 
 
 def same_saved_values(first, second):
-    """Old probe JSON rounded doubles; allow only sub-nanosecond/unit roundoff.
-
-    New evidence writes full precision. This is not used to validate source hashes,
-    candidate authorization, resident identity, material counts or byte retention.
-    """
+    """Full-precision evidence must match exactly, including small numeric changes."""
     if isinstance(first, bool) or isinstance(second, bool):
         return type(first) is type(second) and first == second
     if isinstance(first, (int, float)) and isinstance(second, (int, float)):
-        return abs(first - second) <= 1e-9
+        return first == second
     if isinstance(first, dict) and isinstance(second, dict):
         return first.keys() == second.keys() and all(same_saved_values(first[key], second[key]) for key in first)
     if isinstance(first, list) and isinstance(second, list):
@@ -234,6 +230,30 @@ def call_gm(gm, out, label, argv):
     return result
 
 
+def engine_diagnostics(out, name):
+    """Exit zero is insufficient: Godot can retain a broken resource and keep running."""
+    errors, warnings = [], []
+    for suffix in ('stdout.log', 'stderr.log'):
+        path = Path(out) / (name + '.' + suffix)
+        with path.open(encoding='utf-8', errors='replace') as stream:
+            for number, line in enumerate(stream, 1):
+                message = line.strip()
+                if message.startswith(('ERROR:', 'SCRIPT ERROR:')):
+                    errors.append({'file': path.name, 'line': number, 'message': message})
+                elif message.startswith('WARNING:'):
+                    warnings.append({'file': path.name, 'line': number, 'message': message})
+    return {'error_count': len(errors), 'warning_count': len(warnings),
+            'errors': errors, 'warnings': warnings}
+
+
+def require_clean_engine(out, name):
+    diagnostics = engine_diagnostics(out, name)
+    write(Path(out) / (name + '.diagnostics.json'), diagnostics)
+    require(diagnostics['error_count'] == 0,
+            f'engine {name}: {diagnostics["error_count"]} logged errors even if exit was zero; see diagnostics and retained logs')
+    return diagnostics
+
+
 def engine(args, stage, expected_exit=0, approval=None):
     out = args.out
     require(args.godot, '--godot is required for engine phases')
@@ -269,6 +289,8 @@ def engine(args, stage, expected_exit=0, approval=None):
     (out / (stage + ('-refused' if expected_exit else '') + '.runner.log')).write_text(run.stdout + run.stderr, encoding='utf-8')
     require(run.returncode == expected_exit, f'engine {stage}: expected exit {expected_exit}, got {run.returncode}; see retained logs')
     require(runtime_hashes == {name: sha(ROOT / name) for name in RUNTIME_FILES}, 'runtime source changed during probe; results require review')
+    if not expected_exit:
+        require_clean_engine(out, 'chain-' + stage)
     result = read(output)
     if not expected_exit:
         require(result['failure_count'] == 0, f'engine {stage} runtime assertions failed')
@@ -519,6 +541,10 @@ def street(args):
         engine(args, 'street-finish')
     first = snapshot_from(out, 'street-start')
     last = snapshot_from(out, 'street-finish')
+    final_digest = sha(out / 'world.json')
+    inspected = engine(args, 'final-inspect')['evidence']['snapshot']
+    require(sha(out / 'world.json') == final_digest and inspected == last,
+            'final physical world changed during separate-process read-only cold restore')
     require(first['world_id'] == last['world_id'], 'graphical world changed')
     source = last['godot']['materials']['sources']['offline-chain:iron-offcuts']
     require(source['stock'] == 1 and source['recovered'] == 2 and source['stock'] + source['recovered'] == 3,
@@ -536,6 +562,7 @@ def street(args):
         'real_model_calls': 0, 'provenance': PROVENANCE, 'scripted_trade_flag_is_test_control_not_trade_proof': True,
         'actual_body_count': 10, 'sample_count': len(samples), 'source_stock_after': source['stock'],
         'source_recovered_total': source['recovered'], 'pending_labor_survived_new_graphical_process': True,
+        'final_cold_restore_equal': True, 'final_cold_restore_source_unchanged': True,
         'authoritative_line_of_sight_event_sequences': [event['seq'] for event in los_events],
         'legacy_sampler_limit': 'Original sample.line_of_sight queried outside a physics callback and is not usable visibility evidence; canonical actual-physics events above are the proof.',
         'native_engine_crash_observed': (out / 'owned-engine-recovery.json').exists(),
@@ -569,6 +596,14 @@ def main(argv=None):
     args.out = args.out.resolve()
     require(ALLOWED_ROOT.resolve() in args.out.parents, '--out must be a child of tmp/gpt6-sprint/integration')
     try:
+        if args.phase in ['all', 'prepare', 'street']:
+            # These direct probe entries used to bypass the normal launcher's imports.
+            # Keep preparation logs beside the fresh world directory: prepare() owns
+            # creating that directory and must still refuse an accidental reset.
+            from play_pcg_trial import find_godot, prepare_runtime
+            runtime = find_godot(args.godot)
+            args.godot = str(runtime)
+            prepare_runtime(runtime, args.out.parent / (args.out.name + '-runtime'))
         if args.phase in ['all', 'prepare']:
             prepare(args)
         if args.phase in ['all', 'gm']:

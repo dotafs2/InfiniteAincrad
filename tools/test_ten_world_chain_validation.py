@@ -1,6 +1,7 @@
 """Offline adversarial checks for the integration verifier; no engines/providers."""
 import copy
 import json
+import math
 from pathlib import Path
 import tempfile
 from types import SimpleNamespace
@@ -8,6 +9,53 @@ import unittest
 
 import run_ten_world_chain_validation as chain
 from create_trade_fixture import shared_world_seed
+
+
+class SavedValueTests(unittest.TestCase):
+    def test_adjacent_doubles_are_different_even_below_old_tolerance(self):
+        self.assertFalse(chain.same_saved_values({'position': [0.25]},
+                                                {'position': [math.nextafter(0.25, 1.0)]}))
+
+    def test_large_integer_identity_is_not_rounded_into_equal_float(self):
+        self.assertFalse(chain.same_saved_values(9007199254740993, 9007199254740992.0))
+
+    def test_schema_equivalent_numbers_still_match_but_booleans_do_not(self):
+        self.assertTrue(chain.same_saved_values({'stock': [2]}, {'stock': [2.0]}))
+        self.assertFalse(chain.same_saved_values({'stock': [True]}, {'stock': [1]}))
+
+
+class EngineDiagnosticsTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.out = Path(self.tmp.name)
+        for stream in ('stdout', 'stderr'):
+            (self.out / f'chain-street-start.{stream}.log').write_text('', encoding='utf-8')
+
+    def test_logged_resource_or_script_error_cannot_pass_on_exit_zero(self):
+        for stream, message in [('stdout', 'SCRIPT ERROR: broken scene'),
+                                ('stderr', 'ERROR: No loader found for resource: bread_loaf.glb')]:
+            with self.subTest(stream=stream):
+                log = self.out / f'chain-street-start.{stream}.log'
+                log.write_text(message + '\n', encoding='utf-8')
+                with self.assertRaisesRegex(ValueError, 'logged errors'):
+                    chain.require_clean_engine(self.out, 'chain-street-start')
+                receipt = chain.read(self.out / 'chain-street-start.diagnostics.json')
+                self.assertEqual(receipt['error_count'], 1)
+                self.assertEqual(receipt['errors'][0]['message'], message)
+                log.write_text('', encoding='utf-8')
+
+    def test_warnings_remain_visible_without_claiming_runtime_failure(self):
+        (self.out / 'chain-street-start.stderr.log').write_text(
+            'WARNING: agent radius is rounded\n   at: navigation\n', encoding='utf-8')
+        report = chain.require_clean_engine(self.out, 'chain-street-start')
+        self.assertEqual(report['error_count'], 0)
+        self.assertEqual(report['warning_count'], 1)
+
+    def test_missing_log_is_not_clean_evidence(self):
+        (self.out / 'chain-street-start.stderr.log').unlink()
+        with self.assertRaises(FileNotFoundError):
+            chain.require_clean_engine(self.out, 'chain-street-start')
 
 
 class CandidateEvidenceTests(unittest.TestCase):

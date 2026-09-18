@@ -1,0 +1,125 @@
+{
+  "status": "offline_complete_flow_passed",
+  "date": "2026-09-18",
+  "source_base_commit": "9fcd05cdbb16f8ed4695e36d92f0b880537ebd9a",
+  "world_id": "shared:offline-chain-local-flow-20260918-final",
+  "final_life_seq": 59,
+  "provenance": "scripted resident and GM choices; real Godot physics and persistence; existing finite-source configuration",
+  "model_calls": 0,
+  "resident_count": 10,
+  "distinct_gm_contexts": 10,
+  "successful_stage_checks": 179,
+  "stages": [
+    {
+      "stage": "prepare",
+      "checks": 59,
+      "failure_count": 0,
+      "life_seq": 2,
+      "pid": 319596,
+      "exit_code": 0,
+      "owned_active_processes": 0,
+      "warning_count": 0
+    },
+    {
+      "stage": "release",
+      "checks": 20,
+      "failure_count": 0,
+      "life_seq": 3,
+      "pid": 323780,
+      "exit_code": 0,
+      "owned_active_processes": 0,
+      "warning_count": 0
+    },
+    {
+      "stage": "continue",
+      "checks": 14,
+      "failure_count": 0,
+      "life_seq": 9,
+      "pid": 324008,
+      "exit_code": 0,
+      "owned_active_processes": 0,
+      "warning_count": 0
+    },
+    {
+      "stage": "cold",
+      "checks": 21,
+      "failure_count": 0,
+      "life_seq": 17,
+      "pid": 324240,
+      "exit_code": 0,
+      "owned_active_processes": 0,
+      "warning_count": 0
+    },
+    {
+      "stage": "inspect",
+      "checks": 4,
+      "failure_count": 0,
+      "life_seq": 17,
+      "pid": 323956,
+      "exit_code": 0,
+      "owned_active_processes": 0,
+      "warning_count": 0
+    },
+    {
+      "stage": "street-start",
+      "checks": 32,
+      "failure_count": 0,
+      "life_seq": 52,
+      "pid": 318192,
+      "exit_code": 0,
+      "owned_active_processes": 0,
+      "warning_count": 2
+    },
+    {
+      "stage": "street-finish",
+      "checks": 25,
+      "failure_count": 0,
+      "life_seq": 59,
+      "pid": 324620,
+      "exit_code": 0,
+      "owned_active_processes": 0,
+      "warning_count": 2
+    },
+    {
+      "stage": "final-inspect",
+      "checks": 4,
+      "failure_count": 0,
+      "life_seq": 59,
+      "pid": 320732,
+      "exit_code": 0,
+      "owned_active_processes": 0,
+      "warning_count": 0
+    }
+  ],
+  "source_stock_initial": 3,
+  "source_stock_final": 1,
+  "resident_iron_gained": 2,
+  "body_positions_assigned_by_probe": false,
+  "time_scale": 1,
+  "pending_labor_resumed": true,
+  "full_final_cold_restore_equal": true,
+  "source_bytes_unchanged_by_final_cold_restore": true,
+  "final_world_sha256": "235f1b50cf7dbd781a404da3af525cb21b71ed5326e2ded4ff16d94be548ab37",
+  "negative_control": "unreviewed installation rejected with exit 1 and unchanged world; excluded from success counts",
+  "separate_regressions": {
+    "python": 14,
+    "godot_evidence_codec": 9
+  },
+  "warnings_remaining": [
+    "deprecated NavigationServer3D region bake API",
+    "agent_radius voxel rounding"
+  ],
+  "earlier_attempts_preserved": [
+    "local-flow-20260918: two resource errors in each graphical phase; old passed receipt retained with explicit failed log audit",
+    "local-flow-20260918-verified: false cold-state mismatch from evidence JSON parser precision",
+    "final-inspect initial unknown-stage refusal retained; registered stage then read-only retry passed without replaying labor"
+  ],
+  "not_proven": [
+    "real-model autonomy in this offline run",
+    "new capability code authored by GM",
+    "latest seq450 continuity on this computer",
+    "latest sixteen-house map long-run navigation",
+    "natural ration gifting, long-term supply or unattended operation"
+  ],
+  "roadmap_sha256": "5ad086ef0bc80820b5e6b069ba5f186e3fa38c615c26522235d4be368de9f6e1"
+}

@@ -42,7 +42,9 @@ func build() -> Dictionary:
 	navigation_mesh.set_parsed_geometry_type(NavigationMesh.PARSED_GEOMETRY_STATIC_COLLIDERS)
 	navigation_mesh.set_collision_mask(1)
 	navigation_mesh.agent_height = BODY_HEIGHT
-	navigation_mesh.agent_radius = BODY_RADIUS
+	# Recast already rounds clearance up to whole horizontal voxels. Make that
+	# existing effective radius explicit without changing bodies or voxel resolution.
+	navigation_mesh.agent_radius = ceilf(BODY_RADIUS / bake_cell_size) * bake_cell_size
 	# The authored market/field join is a shallow ramp; a capsule must use it rather than step
 	# across a vertical lip. Keep climb below the old lip while allowing the measured ramp.
 	navigation_mesh.agent_max_climb = bake_max_climb
@@ -60,7 +62,9 @@ func build() -> Dictionary:
 	bake_status = "baking_static_colliders"
 	# The region is a child of TownStreet; pass that scene root so the bake sees the market,
 	# expansion, fallback floor, and their actual StaticBody3D collision shapes as siblings.
-	NavigationServer3D.region_bake_navigation_mesh(navigation_mesh, get_parent())
+	var source_geometry := NavigationMeshSourceGeometryData3D.new()
+	NavigationServer3D.parse_source_geometry_data(navigation_mesh, source_geometry, get_parent())
+	NavigationServer3D.bake_from_source_geometry_data(navigation_mesh, source_geometry)
 	return {"ok": true, "code": bake_status, "aabb": walkable_bounds}
 
 func _process(_delta: float) -> void:

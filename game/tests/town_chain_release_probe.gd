@@ -5,6 +5,7 @@ extends SceneTree
 
 const Runtime = preload("res://core/town_runtime.gd")
 const Turns = preload("res://agents/town_turns.gd")
+const EvidenceJson = preload("res://core/TownJsonCodec.cs")
 const SMITH := "shared:smith"
 const PENDING := "shared:gardener"
 const SOURCE := "offline-chain:iron-offcuts"
@@ -157,19 +158,38 @@ func check(value: bool, label: String) -> void:
 		failures.append(label)
 
 func json_file(path: String) -> Dictionary:
-	var value: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	# Read evidence with the same round-trip codec as authoritative saves. Godot's
+	# decimal parser can change the last bit of a coordinate or pending-job timer.
+	var codec = EvidenceJson.new()
+	var value: Variant = codec.Decode(FileAccess.get_file_as_string(path))
+	codec.Release()
 	return value if value is Dictionary else {}
 
 func same_saved_value(first: Variant, second: Variant) -> bool:
-	# JSON numbers load as floats; authoritative schema normalization uses ints.
-	# Compare saved values consistently; byte retention is checked separately.
-	return JSON.parse_string(JSON.stringify(first)) == JSON.parse_string(JSON.stringify(second))
+	# No rounding or tolerance: only allow the schema's equivalent int/float leaves.
+	if (first is int or first is float) and (second is int or second is float):
+		return first == second
+	if typeof(first) != typeof(second):
+		return false
+	if first is Dictionary:
+		if first.size() != second.size(): return false
+		for key in first:
+			if not second.has(key) or not same_saved_value(first[key], second[key]): return false
+		return true
+	if first is Array:
+		if first.size() != second.size(): return false
+		for index in first.size():
+			if not same_saved_value(first[index], second[index]): return false
+		return true
+	return first == second
 
 func write_json(path: String, value: Dictionary) -> void:
 	DirAccess.make_dir_recursive_absolute(path.get_base_dir())
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file:
-		file.store_string(JSON.stringify(value, "  ", true, true))
+		var codec = EvidenceJson.new()
+		file.store_string(codec.Encode(value))
+		codec.Release()
 		file.close()
 	else:
 		check(false, "write evidence " + path)
@@ -358,7 +378,7 @@ func run() -> void:
 			"release": release()
 			"continue": await continue_life()
 			"cold": cold_finish()
-			"inspect": pass
+			"inspect", "final-inspect": pass
 			_: check(false, "known stage required")
 		evidence["world_id"] = town.snapshot().world_id
 		evidence["snapshot"] = town.snapshot()
