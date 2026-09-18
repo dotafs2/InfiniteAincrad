@@ -133,3 +133,19 @@ Blender 5.2.1 导出：三件均无退化三角面。Godot 4.7.2 .NET 在独立�
 **证据边界：** 图片仅展示 seq335 的暂停状态，不是移动过程或进食动画的证据。十居民实际身体位移证据在 root 的 `private/overnight-20260918/ten-resident-movement-acceptance.json`（SHA-256 `b731de74283e241d8e3787c919edd7b27f566ac558e2c0e5bb95fa48029ad6b7`）；本任务只读引用协调方已有验收，其中 physical_movers=10、织工最大已观察位移23.1861m，不另开移动审查。织工真实选择 eat_ration、seq333完成进食、后继turn32选择rest的运行说明由协调方提供，不由这两张静态图单独证明。
 
 两次进程 PID20348 / 31808 均正常exit0，无驻留；捕获均为 seq335、10个活动身份、`none_restore`、0个新决策，新增模型/生成API为0。冻结源与两份副本前后 SHA-256 均保持 `59b98070cbcdfc393e18f47924d99f7dc2f55c99dda662f493e6da241583d35c`；GM副本前后保持 `b3d1e3e076f53a2afa0d8da7ac9505b5f416e32ff078731b267a1ddf7b01d5fd`。无 ERROR / SCRIPT ERROR，仍有前述导航警告。精简收据 `captures/final-seq335-render-receipt.json` 收录进程、截图指纹及只读边界，不公开完整世界存档。
+
+## 最终 seq434 展示：最近工作记录与 GM01 未知结果
+
+2026-09-18 08:11，在自身隔离工作树临时载入 delivery 提交 `a12c464` 的20个差异 game 文件，原工作树字节先备份、捕获后恢复；包含普通口粮赠予集成与诚实 GM 状态 UI。未修改 delivery 或 canonical，也未更改玩法/资产。补齐本地 NuGet 构建缓存后，dotnet build 0 warning / 0 error。headless编辑器导入exit0，但退出时报告renderer/object/resource泄漏；这不是“全流程日志干净”。
+
+输入是指定的 `delivery-live/gm-source-seq434-after-life17.json` 和 `sol-gm/private/night-delivery/gm-public-status.json` 的自有私有副本。自有 `capture_final_status.gd` 只加载原产品场景、发送现有 V/G/N 键，保存未经修改的原生 viewport PNG；由产品原有暂停捕获流程保存证据并退出。
+
+![最终 seq434 街区总览，暂停回看](../../Art/Generated/Overnight20260918/captures/14-final-overview-seq434.png)
+
+![最近工作记录顶部：GM01结果未知](../../Art/Generated/Overnight20260918/captures/15-gm-unknown-result-seq434.png)
+
+已独立目视核对：标题为“十位 GM · 最近工作记录”，说明为“只读工作记录 · 未知结果单独标明”；首条 **gm-01 · 碰撞与路径 · 结果未知** 清楚可读，正文保留120秒硬超时、未重试、未推断新结论和调用/用量未知的含义。GM记录来源seq417，当前世界seq434，不能混成同一轮实时工作。面板加载10条，顶部仅显示其中一部分，其余需滚动；不声称十GM同时运行。
+
+现有 N 键实际逐一切换至10个不同居民，各自身体节点存在且观察相机为current。总览不是十人同时近距离可见的证明。HUD明确“10位居民在场 · 暂停回看 · 不调用AI · 正在查看已保存进展”，画面保留已保存历史对话。两张照片仅展示冻结状态，不证明本次产生新调用、新事件或居民已采用新口粮赠予功能。没有新增严重可读性问题；日期和其他GM长摘要仍按原面板规则截断，GM01未知结果及其解释完整可辨。
+
+Hidden Godot PID67332于08:11:20–08:11:35运行，exit0，无驻留；运行日志无 ERROR/SCRIPT ERROR，仍有原导航旧API、半径体素精度与4条边警告。捕获seq434、10活动身份、`none_restore`、`validation_decisions_started=0`，本轮新增模型/生成API为0。世界源/副本前后均保持SHA-256 `1d76ee342d5d4d845b48aed6d4079074adaae83b146ce0b35884b101cf9eeaf5`，GM源/副本前后均保持 `f13d13f45fcaccf33fa5f2f4e7ea271afcc79354aec4e062ae88d42b465e4b96`。精简收据 `captures/final-seq434-render-receipt.json` 含截图指纹、UI实际文本、10次镜头切换及source-byte-equal证明，未公开完整世界存档。

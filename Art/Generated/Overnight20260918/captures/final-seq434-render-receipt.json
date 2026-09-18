@@ -1,0 +1,172 @@
+{
+  "scope": "Final native paused screenshots of a12c464 with seq434 frozen save; not a new live run",
+  "code_commit": "a12c464d7e490ce17f05dc3a8dba6e44d54e89af",
+  "code_integration": "20 changed game files temporarily loaded from exact commit bytes in own isolated worktree; previous bytes backed up and restored after capture",
+  "process": {
+    "started_at": "2026-09-18T08:11:20.3909535+08:00",
+    "gm_source_sha256_before": "f13d13f45fcaccf33fa5f2f4e7ea271afcc79354aec4e062ae88d42b465e4b96",
+    "pid": 67332,
+    "exit_code": 0,
+    "gm_copy_sha256_before": "f13d13f45fcaccf33fa5f2f4e7ea271afcc79354aec4e062ae88d42b465e4b96",
+    "source_sha256_before": "1d76ee342d5d4d845b48aed6d4079074adaae83b146ce0b35884b101cf9eeaf5",
+    "finished_at": "2026-09-18T08:11:35.6891036+08:00",
+    "copy_sha256_after": "1d76ee342d5d4d845b48aed6d4079074adaae83b146ce0b35884b101cf9eeaf5",
+    "copy_sha256_before": "1d76ee342d5d4d845b48aed6d4079074adaae83b146ce0b35884b101cf9eeaf5",
+    "source_sha256_after": "1d76ee342d5d4d845b48aed6d4079074adaae83b146ce0b35884b101cf9eeaf5",
+    "gm_source_sha256_after": "f13d13f45fcaccf33fa5f2f4e7ea271afcc79354aec4e062ae88d42b465e4b96",
+    "gm_copy_sha256_after": "f13d13f45fcaccf33fa5f2f4e7ea271afcc79354aec4e062ae88d42b465e4b96"
+  },
+  "captures": [
+    {
+      "path": "14-final-overview-seq434.png",
+      "sha256": "f172638daecbc10ffa1ae7022f5aebe604f75674e127c323864d2ef4935ad0b2"
+    },
+    {
+      "path": "15-gm-unknown-result-seq434.png",
+      "sha256": "85388de3ffa1222b450530175eade07d8ab2c4dbcf84fd4eb641a515203bbdba"
+    }
+  ],
+  "ui": {
+    "g_key_opens_panel": true,
+    "header": "快照生成：2026-09-18T00:02:01.9605387Z\n只读工作记录 · 未知结果单独标明",
+    "loaded_rows": 10,
+    "mode": "paused restore-only presentation",
+    "panel_rect": [
+      1000.0,
+      20.0,
+      378.0,
+      600.0
+    ],
+    "paused": true,
+    "rendered_text": "gm-01 · 碰撞与路径 · 结果未知\n2026-09-17T23:37:25.9530… · 世界序列 417 · 本轮回访在120秒硬超时后结果未知；未重试、未推断新结论，调用与用量保持未知留档。\n\ngm-02 · 能力缺口 · 方案评审完成\n2026-09-17T23:38:59.0091… · 世界序列 417 · 确认相邻居民之间没有食物交接动作；草见饱食度仍为0，409—416轮对话只有请求与答复…\n\ngm-03 · 交易与结算 · 方案评审完成\n2026-09-17T23:40:00.3240… · 世界序列 417 · 确认409—416轮没有交付、付款或收据；提出带命令幂等与守恒回执的一份口粮交接假设，…\n\ngm-04 · 工具与物品 · 方案评审完成\n2026-09-17T23:41:09.4081… · 世界序列 417 · 确认个人持有的口粮目前不能转交给相邻居民；提出由持有人自愿执行、总量守恒且受容量上限约…\n\ngm-05 · 资源与采集 · 观察完成\n2026-09-17T23:42:11.5341… · 世界序列 417 · 资源较早期改善至总饱食度591、居民持有食物4、采集库存1、累计产出18、采收23，但…\n\ngm-06 · 感知与归因 · 方案评审完成\n2026-09-17T23:44:03.2848… · 世界序列 417 · 409—416轮发言的双方归因清楚，但世界不能记录或执行居民账户间的口粮移动；提出可归…\n\ngm-07 · 持久化与冷恢复 · 方案评审完成\n2026-09-17T23:44:45.9449… · 世界序列 417 · 冻结快照确认409—416轮八次已送达发言没有产生食物转移；提出单次、自愿、近距且不铸…\n\ngm-08 · 时间与轮次顺序 · 方案评审完成\n2026-09-17T23:46:00.0378… · 世界序列 417 · 409—416轮编号单调、命令互异，未见乱序或重复扣账；循环来自缺少交接效果而非时序错…\n\ngm-09 · 阻塞反馈 · 方案评审完成\n2026-09-17T23:47:18.5093… · 世界序列 417 · 接近受阻会以终止反馈显式收束，但同一路径仍可再次选择；相邻口粮请求则因没有执行动作反复…\n\ngm-10 · 财产与承诺 · 观察完成\n2026-09-17T23:48:15.7950… · 世界序列 417 · 确认口头保留与请求不构成交付、所有权或保管关系变化；任何未来交接都需恰好扣减持有人一份…\n\n按 G 返回生活画面。",
+    "resident_switches": [
+      {
+        "body_present": true,
+        "camera_current": true,
+        "id": "shared:well-keeper"
+      },
+      {
+        "body_present": true,
+        "camera_current": true,
+        "id": "shared:baker"
+      },
+      {
+        "body_present": true,
+        "camera_current": true,
+        "id": "shared:smith"
+      },
+      {
+        "body_present": true,
+        "camera_current": true,
+        "id": "shared:carpenter"
+      },
+      {
+        "body_present": true,
+        "camera_current": true,
+        "id": "shared:innkeeper"
+      },
+      {
+        "body_present": true,
+        "camera_current": true,
+        "id": "shared:herder"
+      },
+      {
+        "body_present": true,
+        "camera_current": true,
+        "id": "shared:gardener"
+      },
+      {
+        "body_present": true,
+        "camera_current": true,
+        "id": "shared:weaver"
+      },
+      {
+        "body_present": true,
+        "camera_current": true,
+        "id": "shared:fisher"
+      },
+      {
+        "body_present": true,
+        "camera_current": true,
+        "id": "shared:healer"
+      }
+    ],
+    "restore_only": true,
+    "statuses": [
+      {
+        "id": "gm-01",
+        "source_seq": 417.0,
+        "status": "结果未知"
+      },
+      {
+        "id": "gm-02",
+        "source_seq": 417.0,
+        "status": "方案评审完成"
+      },
+      {
+        "id": "gm-03",
+        "source_seq": 417.0,
+        "status": "方案评审完成"
+      },
+      {
+        "id": "gm-04",
+        "source_seq": 417.0,
+        "status": "方案评审完成"
+      },
+      {
+        "id": "gm-05",
+        "source_seq": 417.0,
+        "status": "观察完成"
+      },
+      {
+        "id": "gm-06",
+        "source_seq": 417.0,
+        "status": "方案评审完成"
+      },
+      {
+        "id": "gm-07",
+        "source_seq": 417.0,
+        "status": "方案评审完成"
+      },
+      {
+        "id": "gm-08",
+        "source_seq": 417.0,
+        "status": "方案评审完成"
+      },
+      {
+        "id": "gm-09",
+        "source_seq": 417.0,
+        "status": "方案评审完成"
+      },
+      {
+        "id": "gm-10",
+        "source_seq": 417.0,
+        "status": "观察完成"
+      }
+    ],
+    "title": "十位 GM · 最近工作记录"
+  },
+  "evidence": {
+    "life_seq": 434,
+    "identity_count": 10,
+    "active": 10,
+    "new_decisions": "none_restore",
+    "validation_decisions_started": 0
+  },
+  "new_model_or_generation_api_calls": 0,
+  "world_source_byte_equal": true,
+  "gm_source_byte_equal": true,
+  "canonical_accessed": false,
+  "delivery_source_changed": false,
+  "images_modified": false,
+  "owned_processes_remaining": [],
+  "limitations": [
+    "Screenshots only show saved paused state and historical dialogue; no new AI call or world event",
+    "N-key cycle verified all 10 distinct resident bodies and current observer camera; overview does not show all ten close up",
+    "GM records refer to seq417, while displayed world is seq434; records are not simultaneous live GM activity",
+    "GM entries below the top viewport require scrolling"
+  ],
+  "build": "dotnet build succeeded with 0 warnings and 0 errors after restoring missing NuGet assets",
+  "import": "headless editor import exited 0 but reported renderer/object/resource leaks during shutdown; not a clean-log claim",
+  "render": "exit 0, no ERROR or SCRIPT ERROR; existing deprecated navigation bake, agent radius precision and four navigation-edge warnings remain"
+}
