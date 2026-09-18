@@ -1,0 +1,161 @@
+{
+  "upstream_commit": "d2c0227",
+  "branch": "codex/continuation-20260918-self-repair",
+  "paid_calls": 0,
+  "live_worlds_written_by_this_task": false,
+  "suites": [
+    {
+      "checks": 114,
+      "failures": 0,
+      "paid_calls": 0,
+      "suite": "town_self_repair"
+    },
+    {
+      "checks": 1548,
+      "failures": 0,
+      "paid_calls": 0,
+      "suite": "town_capabilities_turns"
+    },
+    {
+      "checks": 63,
+      "failures": 0,
+      "paid_calls": 0,
+      "suite": "town_trade"
+    },
+    {
+      "checks": 11,
+      "failures": 0,
+      "inputs": [
+        "Space",
+        "H",
+        "E",
+        "F"
+      ],
+      "paid_calls": 0,
+      "suite": "town_restore_read_only",
+      "world_save_byte_equal": true
+    },
+    {
+      "suite": "town_capabilities",
+      "checks": 165,
+      "failures": 0,
+      "paid_calls": 0,
+      "source": "captured command result in current task"
+    }
+  ],
+  "physical": {
+    "checks": 15,
+    "controlled_copy": true,
+    "failures": [],
+    "final_seq": 151,
+    "max_sample_step_m": 0.09001463651657104,
+    "max_speed_mps": 1.3500001430511475,
+    "paid_calls": 0,
+    "receipt": {
+      "capability_id": "production.self_repair",
+      "command_id": "fixture:self-repair-seq148",
+      "created_elapsed": 5390.383333333518,
+      "event_seq": 149,
+      "payload": {
+        "actor_id": "shared:carpenter",
+        "option_id": "ability:self_repair:seed:axe:handle",
+        "provenance": "opengameagent_fixture",
+        "speech": ""
+      },
+      "result": {
+        "code": "self_repair_completed",
+        "event_id": "life_event_149",
+        "job": {
+          "action": "self_repair",
+          "actor_id": "shared:carpenter",
+          "best_remaining": 0.22207249701023102,
+          "command_id": "fixture:self-repair-seq148",
+          "duration_seconds": 60,
+          "elapsed": 60.0,
+          "item_id": "seed:axe",
+          "material": "wood",
+          "no_progress_seconds": 0.0,
+          "part": "handle",
+          "provenance": "opengameagent_fixture",
+          "target_position": [
+            -33.157351112569124,
+            0.045,
+            51.29293362934481
+          ]
+        },
+        "ok": true,
+        "pending": false,
+        "speech_delivery": {
+          "attempted": false,
+          "code": "physical_work_not_speech",
+          "delivered": false
+        },
+        "terminal_seq": 151
+      },
+      "status": "completed",
+      "version": 1
+    },
+    "resumed": true,
+    "source_seq": 148,
+    "suite": "town_self_repair_scene",
+    "walked_metres": 18.44998224824667,
+    "world_seconds": 74.13333333333425
+  },
+  "cold_restores": [
+    {
+      "name": "seq148",
+      "exit": 0,
+      "stdout": "Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org\r\n\r\nWORLD_CHECKPOINT_RESTORE_OK residents=10 seq=148 exact_fields=true",
+      "stderr": ""
+    },
+    {
+      "name": "seq450",
+      "exit": 0,
+      "stdout": "Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org\r\n\r\nWORLD_CHECKPOINT_RESTORE_OK residents=10 seq=450 exact_fields=true",
+      "stderr": ""
+    },
+    {
+      "name": "physical151",
+      "exit": 0,
+      "stdout": "Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org\r\n\r\nWORLD_CHECKPOINT_RESTORE_OK residents=10 seq=151 exact_fields=true",
+      "stderr": ""
+    },
+    {
+      "source": "seq148",
+      "sha256": "cdfe0136856980281f671c14721815ac1bf5484cb77e930485edb9c435dc380a"
+    },
+    {
+      "source": "seq450",
+      "sha256": "a06a43ed7c5ca5e55aef3e7b2e51ecf54faf8d5cc2133c15c789ccbe754f600c"
+    },
+    {
+      "source": "physical151",
+      "sha256": "1acb06804c0071577109a4d67b5e73c021bbff0021f9276f3dbcf0adde1b0dd6"
+    }
+  ],
+  "python_design_contract_tests": {
+    "passed": 9,
+    "failed": 0
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "original_final_snapshot_sha256": "a06a43ed7c5ca5e55aef3e7b2e51ecf54faf8d5cc2133c15c789ccbe754f600c",
+  "active_checkpoint_sha256": "cdfe0136856980281f671c14721815ac1bf5484cb77e930485edb9c435dc380a",
+  "existing_local_old_lineage": {
+    "seq": 452,
+    "sha256": "e04c86112ac7afcf405d5832e1860340d00b19f997e97b31babeee951b24f4c1",
+    "modified_at_utc": "2026-09-18T01:48:11.657875+00:00",
+    "note": "Existing seq452 continuation predates this task; untouched. It is separate from the archived seq450 and active restart seq148."
+  },
+  "known_diagnostics": [
+    "Four overlapping navigation edges during physical scene startup; existing issue.",
+    "Editor import: addon UID fallbacks and renderer resource-exit diagnostics."
+  ],
+  "initial_test_failures": [
+    "Zero-time tick test assumed no legacy proximity observations.",
+    "Tamper test initially reused the fixture original target [0,0,0]."
+  ],
+  "scope": "Controlled execution of a copied world; no natural model adoption claim."
+}
