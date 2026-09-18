@@ -36,7 +36,7 @@ GM 原生调用保留各自回执及实测 token 计数；超时调用的用量�
 
 ## 代码、存档与证据
 
-- 交付分支：`codex/overnight-20260918-delivery`；目录：`D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery`。代码已提交到本地分支，**尚未推送 GitHub**。
+- 交付分支：[codex/overnight-20260918-delivery](https://github.com/dotafs2/InfiniteAincrad/tree/codex/overnight-20260918-delivery)；本地目录：`D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery`。GitHub 上传范围为已提交的源码、资产与公开验收证据；私有存档、模型会话和 API 配置仅保留在本地。
 - 正式存档：`D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery-live\world.json`。
 - 最终快照：`D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\delivery-live\final-world-seq450.json`；SHA-256：`a06a43ed7c5ca5e55aef3e7b2e51ecf54faf8d5cc2133c15c789ccbe754f600c`。
 - 最终验收收据：`D:\lucidgloves\InfiniteAincrad\private\overnight-20260918\final-acceptance-receipt.json`。
