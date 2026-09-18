@@ -25,6 +25,10 @@
 
 公共烤炉闭环：事件 293 铁匠亲自发现 → 297 首次烤好 → 304 食用 → 314 再次烤好。seq321 的四份初始面粉对应剩余二份、持有一个面包、已吃一个。收据：`D:\lucidgloves\InfiniteAincrad\private\overnight-20260918\baking-full-lifecycle-seq321.json`。
 
-十位 GM 的真实观察和维护记录显示在游戏 G 面板；它是已完成记录快照，不表示十位 GM 正在同时调用模型。07:30 最新回访尚待进行。
+十位 GM 的真实观察和维护记录显示在游戏 G 面板；它是最近工作记录，不表示十位 GM 正在同时调用模型。07:30 使用当时重新冻结的 seq417 回访原十个持久会话，九位成功返回，一位 GM01 已发送后超时，结果/费用未知且未重试。此前十位各有成功参与证据；不能把最新一轮写成十位全部成功。
+
+07:30 源快照 SHA-256：`962159a93b73dfa5ec8e16e0d631b828ba5c6b346289f0a0d46ac89bfb74bcef`。原回执：`D:\lucidgloves\InfiniteAincrad\tmp\overnight-20260918\sol-gm\private\night-delivery\evidence\seq417-refresh\receipts.json`，SHA-256：`3413432fead33ea1456a935c627d57544ff31f91006fd48fc1d6398ec79bf55f`。九位成功调用的实测 usage delta 为 input 6,077,606、cached input 5,423,104、output 100,914，其中 reasoning output 83,086；这些是 token 计数，不是供应商费用账单。
+
+七个 GM 问题来源归并为一个口粮交接能力。原生建议中的 2.2 米范围及面包归因转移由主协调缩小为 1.5 米、仅普通口粮，不能声称完整实现原 GM 设计。交付提交 `8c023ac`，未知状态界面修正 `a12c464`；离线守恒/冷恢复通过，正式自然采用仍待后续证据。
 
 这些证据证明本轮参与、走动和一次扩展能力采用；长期稳定、无限扩展、所有职业能力和所有交易承诺履约均未据此证明。
