@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "max_profile_bytes": 1048576,
+  "core_text_limit": 180,
+  "facet_text_limit": 260,
+  "projection_byte_limit": 2600,
+  "core_fields": ["temperament", "ideal", "bond", "flaw", "long_term_goal", "voice"],
+  "facet_contexts": ["daily", "social", "work", "survival", "rest", "exploration", "conflict", "learning"],
+  "required_sections": ["identity", "appearance", "biography", "personality", "values", "bonds", "flaws_and_fears", "motivations", "social_style", "communication", "preferences", "routines", "work_and_learning", "conflict", "private_self", "aincrad", "body_and_abilities", "knowledge", "relationships", "growth", "author_notes"],
+  "authority": "Original project characterization. Preferences guide choices; world rules, recorded skills, possessions and witnessed history determine what is true or possible. Missing facts remain unknown."
+}

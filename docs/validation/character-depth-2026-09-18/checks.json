@@ -1,0 +1,269 @@
+{
+  "milestone": "H108",
+  "date": "2026-09-18",
+  "world_scope": "new offline fixture only; original seq450 unavailable",
+  "build": {
+    "passed": true,
+    "warnings": 0,
+    "errors": 0,
+    "evidence": "private/characters-20260918/build"
+  },
+  "python": {
+    "passed": 27,
+    "command": "python -X utf8 -m unittest test_character_profiles test_archive_conversation test_ten_world_chain_validation"
+  },
+  "focused_runtime": [
+    {
+      "suite": "character_profile",
+      "checks": 42,
+      "failures": 0,
+      "owned_process_pid": 364480,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/characters-20260918/profile-reviewed"
+    },
+    {
+      "suite": "town_life",
+      "checks": 43,
+      "failures": 0,
+      "owned_process_pid": 218784,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/characters-20260918/regression"
+    },
+    {
+      "suite": "town_turns",
+      "checks": 36,
+      "failures": 0,
+      "owned_process_pid": 344964,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/characters-20260918/regression"
+    },
+    {
+      "suite": "town_english",
+      "checks": 20,
+      "failures": 0,
+      "owned_process_pid": 366112,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/characters-20260918/regression"
+    },
+    {
+      "suite": "resident_brain_context_budget",
+      "checks": 8,
+      "failures": 0,
+      "owned_process_pid": 362980,
+      "owned_processes_exited": true,
+      "evidence_directory": "private/characters-20260918/regression"
+    }
+  ],
+  "focused_checks": 149,
+  "loopback_cases": [
+    {
+      "case": "success-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "success-1",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "town-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "unicode-context-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "town-history-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": [],
+      "world_sha256": "8ac4ce7abaaaabdf6f3d3f218568056999de4ba407373110dbbfda5e34ccc4ba"
+    },
+    {
+      "case": "town-history-1",
+      "passed": true,
+      "get": 3,
+      "post": 3,
+      "contract_errors": [],
+      "world_sha256": "a7228be728b9beb8fcd77c8cfec6180bf7ab37b41b4fdcb4958714d460820056"
+    }
+  ],
+  "history_cases_after_selector_review": [
+    {
+      "case": "town-history-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": [],
+      "world_sha256": "ab907f664d4ec869c1d7b449aa742a3a3f3d2e54b878e9def7d8e261b0760f70"
+    },
+    {
+      "case": "town-history-1",
+      "passed": true,
+      "get": 3,
+      "post": 3,
+      "contract_errors": [],
+      "world_sha256": "5b100af3a6291681f37b426ff25797de49866733e750790230ebbdf505cdb826"
+    }
+  ],
+  "wire_measurements": [
+    {
+      "request": 1,
+      "actor": "fictional:ember",
+      "profile_bytes": 1017,
+      "facets": [
+        "daily",
+        "work"
+      ],
+      "recent_events": 4,
+      "prompt_utf8_bytes": 12782
+    },
+    {
+      "request": 2,
+      "actor": "fictional:ember",
+      "profile_bytes": 1017,
+      "facets": [
+        "daily",
+        "work"
+      ],
+      "recent_events": 4,
+      "prompt_utf8_bytes": 13010
+    },
+    {
+      "request": 3,
+      "actor": "fictional:forge",
+      "profile_bytes": 961,
+      "facets": [
+        "daily",
+        "exploration"
+      ],
+      "recent_events": 2,
+      "prompt_utf8_bytes": 8506
+    }
+  ],
+  "workflow_stages": [
+    {
+      "stage": "prepare",
+      "checks": 59,
+      "failures": 0,
+      "errors": 0,
+      "warnings": 0,
+      "owned_process_pid": 253660,
+      "owned_processes_exited": true
+    },
+    {
+      "stage": "release",
+      "checks": 20,
+      "failures": 0,
+      "errors": 0,
+      "warnings": 0,
+      "owned_process_pid": 327700,
+      "owned_processes_exited": true
+    },
+    {
+      "stage": "continue",
+      "checks": 14,
+      "failures": 0,
+      "errors": 0,
+      "warnings": 0,
+      "owned_process_pid": 301096,
+      "owned_processes_exited": true
+    },
+    {
+      "stage": "cold",
+      "checks": 21,
+      "failures": 0,
+      "errors": 0,
+      "warnings": 0,
+      "owned_process_pid": 364008,
+      "owned_processes_exited": true
+    },
+    {
+      "stage": "inspect",
+      "checks": 4,
+      "failures": 0,
+      "errors": 0,
+      "warnings": 0,
+      "owned_process_pid": 365604,
+      "owned_processes_exited": true
+    },
+    {
+      "stage": "street-start",
+      "checks": 32,
+      "failures": 0,
+      "errors": 0,
+      "warnings": 0,
+      "owned_process_pid": 364208,
+      "owned_processes_exited": true
+    },
+    {
+      "stage": "street-finish",
+      "checks": 25,
+      "failures": 0,
+      "errors": 0,
+      "warnings": 0,
+      "owned_process_pid": 363112,
+      "owned_processes_exited": true
+    },
+    {
+      "stage": "final-inspect",
+      "checks": 4,
+      "failures": 0,
+      "errors": 0,
+      "warnings": 0,
+      "owned_process_pid": 360024,
+      "owned_processes_exited": true
+    }
+  ],
+  "workflow_checks": 179,
+  "full_workflow_profile_preservation": {
+    "residents": 10,
+    "complete_profiles_exactly_equal": true
+  },
+  "physical_continuation": {
+    "status": "offline_physical_continuation_passed",
+    "actual_body_count": 10,
+    "pending_labor_survived_new_graphical_process": true,
+    "final_cold_restore_equal": true,
+    "final_cold_restore_source_unchanged": true,
+    "native_engine_crash_observed": false,
+    "source_stock_after": 1,
+    "source_recovered_total": 2
+  },
+  "workflow_evidence": "tmp/gpt6-sprint/integration/characters-20260918",
+  "diagram": {
+    "nodes": 38,
+    "browser_errors": 0,
+    "evidence": "private/characters-20260918/diagram/tool.log"
+  },
+  "source_hashes": {
+    "game/data/character_dossiers.json": "f26a401eb05e98779519e4d8bac79e4c7f280c2b242276d43be70a04dfc1ef6c",
+    "game/data/character_profile_contract.json": "578de1b7d984b4f2576cebd759bfdf66101a092da90b73dcc700d591cf9be152",
+    "game/core/character_profile.gd": "2950a89b12cf98b6c3c540ff2f86b8d49f2bbb7bc922546cc63f02ab792cf6c4"
+  },
+  "initial_failures_retained": [
+    "private/characters-20260918/profile",
+    "private/characters-20260918/profile-corrected",
+    "private/characters-20260918/profile-diagnose"
+  ],
+  "real_paid_model_calls": 0,
+  "subagents": 0,
+  "limitations": [
+    "Scripted model choices do not demonstrate believable autonomous life.",
+    "Legacy seq450 has not been migrated.",
+    "Detailed sections are stored; independent conversation and relationship/growth reducers remain future work."
+  ]
+}

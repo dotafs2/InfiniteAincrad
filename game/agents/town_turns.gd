@@ -313,6 +313,9 @@ func step(requested_id: String = "") -> Dictionary:
 		if town.resident(id).has(key):
 			view.identity[key] = town.resident_background(id, key)
 	var options: Array = town.trade_options(id)
+	var character: Dictionary = town.CharacterProfile.project(town.resident(id), view, options)
+	if not character.is_empty():
+		view.identity["character"] = character
 	view.available_actions = []
 	view.action_details = []
 	var aliases: Dictionary = {}

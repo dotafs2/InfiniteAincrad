@@ -100,6 +100,14 @@ func run() -> void:
 			quit(1)
 			return
 		var initial := material_fixture()
+		var dossiers: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/character_dossiers.json"))
+		for person in initial.residents:
+			var source_id := "shared:smith" if person.stable_id == SMITH else "shared:well-keeper" if person.stable_id == OWNER else "shared:carpenter"
+			person.character_profile = dossiers.profiles[source_id].duplicate(true)
+			person.character_profile.resident_id = person.stable_id
+			person.character_profile.sections.private_self["transport_sentinel"] = "private_character_sentinel"
+			person.character_profile.sections.author_notes["transport_sentinel"] = "author_character_sentinel"
+			person.character_profile.extensions["dormant"] = "dormant_character_sentinel".repeat(1000)
 		initial.godot.positions[OWNER] = [50, 0, 0]
 		_write_fixture(path, initial)
 	var before_bytes := FileAccess.get_file_as_bytes(path)

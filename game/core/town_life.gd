@@ -28,6 +28,7 @@ const PREVIEW_LAYOUT_SHA256 := "ce07c9b501db6259aa8c5c5865c30a96d633000bcd93d391
 const LEGACY_PREVIEW_LAYOUT_SHA256 := "be6659494b9812df0ee41fd27db0ba652dcf32a97a44ac004e497b99d03445de"
 const JsonCodec = preload("res://core/TownJsonCodec.cs")
 const English = preload("res://core/english_text.gd")
+const CharacterProfile = preload("res://core/character_profile.gd")
 var _visitor_position := Vector3.INF
 var _foraging_access_probe: Callable = Callable()
 var _foraging_access_required := false
@@ -800,6 +801,8 @@ func _validate_state(value: Variant) -> Dictionary:
 			return _failure("invalid_resident")
 		if not r.get("name") is String or not r.get("role") is String or not _bounded(r.get("coins_col"), 1000000000):
 			return _failure("invalid_identity_or_wallet")
+		if r.has("character_profile") and not CharacterProfile.validate(r.character_profile, r.stable_id):
+			return _failure("invalid_character_profile")
 		ids.append(r.stable_id)
 	var active: Array = []
 	for a in value.survival.accounts:
