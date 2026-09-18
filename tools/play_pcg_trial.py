@@ -20,19 +20,17 @@ def find_godot(explicit=None):
 
 
 def prepare_runtime(godot, output):
-    # A fresh checkout has neither Godot imports nor the C# bridge. Build once locally.
-    dll = ROOT / 'game/.godot/mono/temp/bin/Debug/InfiniteAincrad.dll'
-    if not dll.exists():
-        dotnet = shutil.which('dotnet')
-        if not dotnet: raise FileNotFoundError('.NET 8 SDK is required to build the Godot C# bridge')
-        code = subprocess.call([sys.executable, str(ROOT / 'tools/run_pcg_tool.py'),
-            '--out', str(output / 'build'), '--timeout', '180', '--', dotnet, 'build',
-            str(ROOT / 'game/InfiniteAincrad.csproj')], cwd=ROOT)
-        if code: raise RuntimeError('C# build failed; see the private launch build log')
-    if not (ROOT / 'game/.godot/imported').exists():
-        code = subprocess.call([sys.executable, str(ROOT / 'tools/import_pcg_project.py'),
-            '--godot', str(godot), '--out', str(output / 'import')], cwd=ROOT)
-        if code: raise RuntimeError('Godot import failed; see the private launch import log')
+    # Existing outputs may belong to an older checkout. Let MSBuild and Godot
+    # refresh their incremental caches, including changed project dependencies.
+    dotnet = shutil.which('dotnet')
+    if not dotnet: raise FileNotFoundError('.NET 8 SDK is required to build the Godot C# bridge')
+    code = subprocess.call([sys.executable, str(ROOT / 'tools/run_pcg_tool.py'),
+        '--out', str(output / 'build'), '--timeout', '180', '--', dotnet, 'build',
+        str(ROOT / 'game/InfiniteAincrad.csproj'), '--disable-build-servers', '-v', 'minimal'], cwd=ROOT)
+    if code: raise RuntimeError('C# build failed; see the private launch build log')
+    code = subprocess.call([sys.executable, str(ROOT / 'tools/import_pcg_project.py'),
+        '--godot', str(godot), '--out', str(output / 'import')], cwd=ROOT)
+    if code: raise RuntimeError('Godot import failed; see the private launch import log')
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)

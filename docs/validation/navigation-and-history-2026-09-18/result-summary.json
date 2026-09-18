@@ -1,0 +1,234 @@
+{
+  "status": "offline_navigation_fix_verified_with_remaining_layout_warning",
+  "model_calls": 0,
+  "workflow": {
+    "world_id": "shared:offline-chain-navigation-20260918",
+    "successful_checks": 179,
+    "stages": [
+      {
+        "stage": "prepare",
+        "checks": 59,
+        "errors": 0,
+        "warnings": 0,
+        "owned_active_processes": 0
+      },
+      {
+        "stage": "release",
+        "checks": 20,
+        "errors": 0,
+        "warnings": 0,
+        "owned_active_processes": 0
+      },
+      {
+        "stage": "continue",
+        "checks": 14,
+        "errors": 0,
+        "warnings": 0,
+        "owned_active_processes": 0
+      },
+      {
+        "stage": "cold",
+        "checks": 21,
+        "errors": 0,
+        "warnings": 0,
+        "owned_active_processes": 0
+      },
+      {
+        "stage": "inspect",
+        "checks": 4,
+        "errors": 0,
+        "warnings": 0,
+        "owned_active_processes": 0
+      },
+      {
+        "stage": "street-start",
+        "checks": 32,
+        "errors": 0,
+        "warnings": 0,
+        "owned_active_processes": 0
+      },
+      {
+        "stage": "street-finish",
+        "checks": 25,
+        "errors": 0,
+        "warnings": 0,
+        "owned_active_processes": 0
+      },
+      {
+        "stage": "final-inspect",
+        "checks": 4,
+        "errors": 0,
+        "warnings": 0,
+        "owned_active_processes": 0
+      }
+    ],
+    "result": {
+      "status": "offline_physical_continuation_passed",
+      "world_id": "shared:offline-chain-navigation-20260918",
+      "real_model_calls": 0,
+      "provenance": "offline_scripted_transport_no_model_api",
+      "scripted_trade_flag_is_test_control_not_trade_proof": true,
+      "actual_body_count": 10,
+      "sample_count": 128,
+      "source_stock_after": 1,
+      "source_recovered_total": 2,
+      "pending_labor_survived_new_graphical_process": true,
+      "final_cold_restore_equal": true,
+      "final_cold_restore_source_unchanged": true,
+      "authoritative_line_of_sight_event_sequences": [
+        55
+      ],
+      "legacy_sampler_limit": "Original sample.line_of_sight queried outside a physics callback and is not usable visibility evidence; canonical actual-physics events above are the proof.",
+      "native_engine_crash_observed": false,
+      "native_engine_crash_cause": "unknown; successful same-save recovery does not close stability issue",
+      "original_fixture_failures_preserved": true,
+      "body_positions_assigned_by_probe": false,
+      "time_scale": 1,
+      "world_sha256_after": "915d70fb1a4a35ca0ebf29c88839cd508b5b5b6989376e299b734dc28d1cc991",
+      "screenshots": [
+        "street-before-travel.png",
+        "street-paused-labor.png",
+        "street-cold-resume.png",
+        "street-completed-labor.png"
+      ],
+      "limits": [
+        "Scripted resident choices and GM proposal, no real models.",
+        "Existing finite-source configuration and actual private-need installation API.",
+        "One bounded approach/return route and finite recovery, not townwide navigation or autonomous living."
+      ]
+    },
+    "strict_python_restore_comparison": true
+  },
+  "navigation_bake_equivalence": {
+    "checks": 10,
+    "failures": [],
+    "model_calls": 0,
+    "reference_radius_warnings_expected": 2,
+    "results": [
+      {
+        "cell_size": 0.1,
+        "explicit_radius": 0.300000011920929,
+        "path_points": 15,
+        "polygons": 32,
+        "polygons_equal": true,
+        "vertices": 36,
+        "vertices_equal": true
+      },
+      {
+        "cell_size": 0.15,
+        "explicit_radius": 0.300000011920929,
+        "path_points": 9,
+        "polygons": 24,
+        "polygons_equal": true,
+        "vertices": 28,
+        "vertices_equal": true
+      }
+    ]
+  },
+  "navigation_bake_repeat": {
+    "checks": 10,
+    "failures": [],
+    "model_calls": 0,
+    "reference_radius_warnings_expected": 2,
+    "results": [
+      {
+        "cell_size": 0.1,
+        "explicit_radius": 0.300000011920929,
+        "path_points": 15,
+        "polygons": 32,
+        "polygons_equal": true,
+        "vertices": 36,
+        "vertices_equal": true
+      },
+      {
+        "cell_size": 0.15,
+        "explicit_radius": 0.300000011920929,
+        "path_points": 9,
+        "polygons": 24,
+        "polygons_equal": true,
+        "vertices": 28,
+        "vertices_equal": true
+      }
+    ]
+  },
+  "physical_route_acceptance": {
+    "bake_status": "ready",
+    "checks": 14,
+    "failures": 0,
+    "off_center": {
+      "arrived": true,
+      "end": "(-0.415814, 0.150826, 30.15254)",
+      "first_direction": "(0.0, 0.0, 0.0)",
+      "frames": 1226,
+      "saw_direction": true,
+      "start": "(-22.0, 0.1, 39.0)",
+      "status": "following"
+    },
+    "ok": true,
+    "ramp": {
+      "arrived": true,
+      "end": "(0.134528, 0.100935, 52.57643)",
+      "first_direction": "(0.0, 0.0, 0.0)",
+      "frames": 1036,
+      "saw_direction": true,
+      "start": "(0.0, 0.22, 30.0)",
+      "status": "following"
+    },
+    "reverse": {
+      "arrived": true,
+      "end": "(0.004575, 0.15084, 30.42778)",
+      "first_direction": "(0.0, 0.0, 0.0)",
+      "frames": 1005,
+      "saw_direction": true,
+      "start": "(0.0, 0.1, 53.0)",
+      "status": "following"
+    },
+    "save_path": "C:\\InfiniteAincrad\\private\\navigation-20260918\\walk\\world.json",
+    "trough": {
+      "arrived": true,
+      "end": "(10.07225, 0.060838, 47.81141)",
+      "first_direction": "(0.0, 0.0, 0.0)",
+      "frames": 533,
+      "saw_direction": true,
+      "start": "(0.0, 0.1, 53.0)",
+      "status": "following"
+    },
+    "unreachable_status": "unreachable"
+  },
+  "quarter": {
+    "world_id": "shared:offline-navigation-quarter-20260918",
+    "layout": "first-floor-market-quarter-v1",
+    "routes_passed": 40,
+    "routes_total": 40,
+    "door_window_checks_passed": 64,
+    "old_new_route_receipts_equal": true,
+    "old_new_fixture_receipts_equal": true,
+    "baseline_warnings": [
+      "WARNING: NavigationServer3D::region_bake_navigation_mesh() is deprecated due to core threading changes. To upgrade existing code, first create a NavigationMeshSourceGeometryData3D resource. Use this resource with method parse_source_geometry_data() to parse the SceneTree for nodes that should contribute to the navigation mesh baking. The SceneTree parsing needs to happen on the main thread. After the parsing is finished use the resource with method bake_from_source_geometry_data() to bake a navigation mesh..",
+      "WARNING: Property agent_radius is ceiled to cell_size voxel units and loses precision.",
+      "WARNING: Navigation region synchronization had 4 edge error(s)."
+    ],
+    "current_warnings": [
+      "WARNING: Navigation region synchronization had 4 edge error(s)."
+    ],
+    "original_seq450": false
+  },
+  "separate_python_tests": {
+    "archive": 4,
+    "workflow_verifier": 17,
+    "preview_launcher": 4
+  },
+  "retained_failed_checks": [
+    "bake-equivalence",
+    "bake-equivalence-verified",
+    "bake-diagnostic"
+  ],
+  "failure_resolution": "Second test map queried before async synchronization; explicit map_force_update before path check, two clean assertion runs. Reference radius bakes intentionally warn.",
+  "source_sha256": {
+    "game/spatial/town_navigation.gd": "9ee32e907cc1c203ec52e8c1e544bc4bc6208c8a8389b8e46ad6341c90955af6",
+    "game/tests/town_navigation_bake_acceptance.gd": "726c46d3391f84c88bc3d8a7c3d254454d48158698b42792054e7c9dc1708d05",
+    "tools/run_ten_world_chain_validation.py": "4718e986db155dd95a459118d6a5de6dd1edcfd6f93b451263d22b16138a97a3",
+    "tools/archive_conversation.py": "c266edbaeb72c612a782cba39ce21114715f898244533eafba832c94a789a7ef"
+  },
+  "roadmap_sha256_current": "c39c7dbdc9705575b993642a93469a1e749e72d2230c3611453e35854bd9fe40"
+}
