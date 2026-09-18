@@ -55,6 +55,12 @@ def extract(data, expected_thread):
         if role == 'user' and body.lstrip().startswith(CONTEXT_PREFIXES):
             excluded['injected_workspace_context'] += 1
             continue
+        # Quiet heartbeat turns can finish with no visible text. Record that
+        # omission explicitly; attachment checks still run before this branch.
+        # Empty user messages remain unsupported, and whitespace is preserved.
+        if role == 'assistant' and body == '':
+            excluded['empty_assistant_text'] += 1
+            continue
         if not isinstance(body, str) or not body:
             raise ValueError(f'Empty visible message at source line {number}')
         if any(re.search(pattern, body) for pattern in SECRET_PATTERNS):

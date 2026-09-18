@@ -354,7 +354,8 @@ func step(requested_id: String = "") -> Dictionary:
 		"language": "English for all natural-language values, including reason, speech and need.reason; keep action IDs unchanged",
 		"reply": "one JSON object following this field contract",
 		"action": "string naming exactly one id from available_actions",
-		"reason": "string, required, at most %d characters" % DECISION_TEXT_LIMIT,
+		"target_consistency": "Resolve the chosen ID from this request's action_details or action_groups. IDs may change between requests: do not copy an ID from memory. Check that its person, place or item matches your reason and any speech. If your intended target is unavailable, choose an available action consistent with your actual intent.",
+		"reason": "string, required: one brief sentence explaining the chosen action, aim below 200 characters, hard limit %d characters; omit deliberation, alternatives and self-correction" % DECISION_TEXT_LIMIT,
 		"speech": "string, optional, only when the action_details entry or action_groups group has speech_allowed true, at most %d characters" % DECISION_TEXT_LIMIT,
 		"need": "optional object with capability_id and reason, only when no available action meets the need",
 	}

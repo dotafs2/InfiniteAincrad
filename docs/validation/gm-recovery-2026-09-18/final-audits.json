@@ -1,0 +1,166 @@
+{
+  "target-consistency-review": {
+    "recorded_utc": "2026-09-18T12:28:59.840662+00:00",
+    "kind": "observed_decision_target_mismatch",
+    "world_id": "shared:restart-20260918-01",
+    "request_id": "turn:shared:weaver:0:14",
+    "input_sha256": "4e4b5f211664837da884222a0ad295885ebb3105e112e14f167cdc4748111318",
+    "input_file": "private\\gm-recovery-20260918\\window-03\\cycle-05\\life\\request-bodies\\93612de1f5d3bc0ff1cb1a0d.json",
+    "current_talk_choices": {
+      "a19": [
+        "Wren"
+      ],
+      "a20": [
+        "Reed"
+      ]
+    },
+    "selected_action": "a20",
+    "stated_reason": "Wren the baker just spoke to me about fibers and how they change after washing. This touches on my interest in texture and pattern, and I want to respond to continue the conversation. My satiety is 67 and energy is 95, so no urgent survival needs.",
+    "actual_recipient_ids": [
+      "shared:weaver",
+      "shared:fisher"
+    ],
+    "confirmed": "The host obeyed the frozen action map. The returned reason named Wren while the selected action targeted Reed.",
+    "inference": "Reusing an earlier action alias is a plausible contributor, not proven internal reasoning.",
+    "change": "Added an English current-menu target consistency reminder; no retargeting, forced choice, new charge or replay of the old decision.",
+    "code_file": "game/agents/town_turns.gd",
+    "checks": 1547,
+    "failures": 0,
+    "paid_test_calls": 0,
+    "effective_from": "Next newly loaded life process (expected window-03 cycle-06); verify the actual provider request body.",
+    "behavioral_effect": "Not yet established; historical mismatch remains unchanged."
+  },
+  "target-consistency-uptake": {
+    "checked_utc": "2026-09-18T12:34:33.420744+00:00",
+    "cycle": 6,
+    "request_files_checked": 6,
+    "files_with_current_menu_reminder": [
+      {
+        "path": "private\\gm-recovery-20260918\\window-03\\cycle-06\\life\\request-bodies\\00dcff2a1bbe0e4b5935faf3.json",
+        "sha256": "ad0a1c808ee7e438aeb17e204bf279a9905e0dc1994984459cdad2211f2ea373"
+      },
+      {
+        "path": "private\\gm-recovery-20260918\\window-03\\cycle-06\\life\\request-bodies\\39161dfe52b236e77f1e2fd8.json",
+        "sha256": "77b09f8c0ea75fa541cbcbf31f0ca58fb13c68533ff4a492359b87d5b14a1a9f"
+      },
+      {
+        "path": "private\\gm-recovery-20260918\\window-03\\cycle-06\\life\\request-bodies\\765d4e58aa042da47636ff44.json",
+        "sha256": "f44c4ddf34772c966c449c96580c430c74f57bef0f84d95a947cabe4378b6e76"
+      },
+      {
+        "path": "private\\gm-recovery-20260918\\window-03\\cycle-06\\life\\request-bodies\\b527473d49d4df2bbbf8d4e1.json",
+        "sha256": "f030c6b426c2b3a026ebb59eeae8481db7e98f662bfc1f51bc9f1803ced1c426"
+      },
+      {
+        "path": "private\\gm-recovery-20260918\\window-03\\cycle-06\\life\\request-bodies\\e69f250b709101936b77068f.json",
+        "sha256": "f08897290489a7d51d040867170f8992bb2be49ab316647d412f8ec941e31141"
+      },
+      {
+        "path": "private\\gm-recovery-20260918\\window-03\\cycle-06\\life\\request-bodies\\fce84480ba0d1b471af1dd5a.json",
+        "sha256": "8b0a666212ef14ab961b79497b527eaf316c25485e0cd5d8360dea539bda2507"
+      }
+    ],
+    "interpretation": "The revised English reminder reached actual provider requests. This establishes prompt uptake only, not reliable target choice or conversation comprehension."
+  },
+  "reason-brevity-review": {
+    "recorded_utc": "2026-09-18T12:40:45.948325+00:00",
+    "request_id": "turn:shared:carpenter:0:14",
+    "reason_characters": 810,
+    "hard_limit": 512,
+    "application": {
+      "status": "provider_error",
+      "code": "reason_too_long",
+      "effect": {},
+      "speech_delivery": {
+        "attempted": false,
+        "delivered": false,
+        "code": "no_world_action"
+      }
+    },
+    "model_returned": true,
+    "action_applied": false,
+    "change": "The current-menu reason contract asks for one brief sentence, aiming below 200 characters while retaining the existing 512-character hard rejection boundary. No truncation, forced action or manual paid replay.",
+    "behavioral_effect": "Unproven; verify actual next-cycle request uptake.",
+    "code_file": "game/agents/town_turns.gd",
+    "checks": 1547,
+    "failures": 0,
+    "paid_test_calls": 0,
+    "test_process_pid": 424660,
+    "all_test_processes_exited": true,
+    "test_log": "private/gm-recovery-20260918/reason-menu-checks/reason-menu.stdout.log",
+    "effective_from": "Next newly loaded life process, expected window-03 cycle07; verify a real request body.",
+    "resumed_window": "window-04",
+    "resumed_utc": "2026-09-18T12:45:38.5563314Z",
+    "prompt_uptake_receipt": "reason-brevity-uptake.json",
+    "bounded_recovery_evidence": {
+      "old_request": "turn:shared:carpenter:0:14",
+      "old_result": "reason_too_long",
+      "new_request": "turn:shared:carpenter:0:15",
+      "new_result": "resident_said",
+      "subsequent_requests": [
+        "turn:shared:carpenter:0:16",
+        "turn:shared:carpenter:0:17"
+      ],
+      "interpretation": "The existing one-time cold-restored recovery made a new successful decision after the prompt change. This is one observed recovery, not proof that all future replies meet the limit."
+    }
+  },
+  "reason-brevity-uptake": {
+    "checked_utc": "2026-09-18T12:46:19.692597+00:00",
+    "window": "window-04",
+    "cycle": 1,
+    "requests_checked": 5,
+    "matching": [
+      {
+        "path": "private\\gm-recovery-20260918\\window-04\\cycle-01\\life\\request-bodies\\06da61be2e5246996e795c25.json",
+        "sha256": "9a0c6551a7de5974e21f6b3b2f72cbc2deafcfa23599fbfccb6a491df23cb7c1"
+      },
+      {
+        "path": "private\\gm-recovery-20260918\\window-04\\cycle-01\\life\\request-bodies\\0b4cb702c8b679e1c37c3b8d.json",
+        "sha256": "3a03d60545f39a0a3834ddb6d15a6b7acb88caea967b09864c9cff9228355ae6"
+      },
+      {
+        "path": "private\\gm-recovery-20260918\\window-04\\cycle-01\\life\\request-bodies\\8e356dce4cd354f8c8b22755.json",
+        "sha256": "cb1287658c3ca6d89d4709051449cd70354f54fd9e09e3f7c621308e460d8a1b"
+      },
+      {
+        "path": "private\\gm-recovery-20260918\\window-04\\cycle-01\\life\\request-bodies\\cec0b0c24df187c2db160611.json",
+        "sha256": "004fe087754f0ab7103fe97e9c8fd7e9943a6ce592c6498865347853ba40a70c"
+      },
+      {
+        "path": "private\\gm-recovery-20260918\\window-04\\cycle-01\\life\\request-bodies\\db5fe36a743581ecf96c9f32.json",
+        "sha256": "7e274f51a89b51d4be580c4eb255079713435809530623ff51324255daa88be3"
+      }
+    ],
+    "interpretation": "Prompt uptake only; behavioral improvement requires returned replies."
+  },
+  "gm06-timeout-review": {
+    "checked_utc": "2026-09-18T12:48:39.958709+00:00",
+    "run_id": "run-20260918T123100Z-44fcba",
+    "session_id": "01a0b47f-abb9-7ae2-a5f3-d2c52b72bbb2",
+    "event_types": {
+      "session_meta": 1,
+      "event_msg": 2,
+      "response_item": 3,
+      "world_state": 1,
+      "turn_context": 1
+    },
+    "item_types": {
+      "('session_meta', '')": 1,
+      "('event_msg', 'task_started')": 1,
+      "('response_item', 'message')": 3,
+      "('world_state', '')": 1,
+      "('turn_context', '')": 1,
+      "('event_msg', 'item_completed')": 1
+    },
+    "token_usage": null,
+    "first_timestamp": "2026-09-18T12:31:01.372Z",
+    "last_timestamp": "2026-09-18T12:31:05.837Z",
+    "interpretation": "No new dispatch or paid retry. Missing usage remains unknown, not zero. Native contents remain private.",
+    "response_message_roles": {
+      "developer": 1,
+      "user": 2
+    },
+    "native_tool_calls": 0,
+    "diagnosis": "Only start events and supplied context were recorded before the 60-second host timeout. No assistant response, tool call, or usage receipt was found. The upstream cause is unconfirmed; this differs from the earlier shell-overreading timeout."
+  }
+}

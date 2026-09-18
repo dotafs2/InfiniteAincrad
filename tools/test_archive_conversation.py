@@ -16,6 +16,19 @@ def log(messages):
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_empty_heartbeat_does_not_hide_messages_or_attachments(self):
+        data = log([('user', None, 'keep me'), ('assistant', 'final', ''),
+                    ('assistant', 'commentary', ' '), ('user', None, 'keep me')])
+        messages, excluded = extract(data, 'test-thread')
+        self.assertEqual([row['text'] for row in messages], ['keep me', ' ', 'keep me'])
+        self.assertEqual(excluded['empty_assistant_text'], 1)
+        with self.assertRaisesRegex(ValueError, 'Empty visible'):
+            extract(log([('user', None, '')]), 'test-thread')
+        rows = [json.loads(line) for line in data.splitlines()]
+        rows[2]['payload']['content'].append({'type': 'input_image', 'image_url': 'data:private'})
+        with self.assertRaisesRegex(ValueError, 'attachment'):
+            extract('\n'.join(json.dumps(row) for row in rows).encode(), 'test-thread')
+
     def test_visible_messages_preserve_repeats_and_exclude_internal_context(self):
         data = log([('user', None, '继续'), ('assistant', 'analysis', 'INTERNAL'),
                     ('developer', None, 'INSTRUCTIONS'), ('user', None, '<environment_context>INJECTED'),
@@ -44,9 +57,11 @@ class ArchiveTests(unittest.TestCase):
             root = Path(tmp); source = root / 'source.jsonl'; output = root / 'archive'
             source.write_bytes(log([('user', None, 'first')]))
             archive(source, output, 'test-thread')
-            source.write_bytes(log([('user', None, 'first'), ('assistant', 'final', 'done')]))
+            source.write_bytes(log([('user', None, 'first'), ('assistant', 'final', ''),
+                                    ('assistant', 'final', 'done')]))
             manifest = archive(source, output, 'test-thread')
             self.assertEqual(manifest['message_count'], 2)
+            self.assertEqual(manifest['excluded_record_counts']['empty_assistant_text'], 1)
             for name, expected in manifest['files'].items():
                 self.assertEqual(digest((output / name).read_bytes()), expected)
             before = (output / 'conversation.json').read_bytes()

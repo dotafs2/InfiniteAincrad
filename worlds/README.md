@@ -2,12 +2,14 @@
 
 The user authorized a fresh world starting at seq0 on 2026-09-18 and publication of its state and decisions. [active.json](active.json) identifies the current lineage. The original seq450 world is still on another computer; it was not overwritten, recovered or combined with this restart.
 
-H112 adds [permanent developer usage tags](restart-20260918-01/usage/latest.md) for every NPC and GM, with [complete portable history and the current GM checkpoint](restart-20260918-01/usage/manifest.json). The 32 resident calls total 83,274 tokens. One real GM observation timed out; 792,826 tokens are confirmed and the final tail remains unresolved. Follow the [usage transfer instructions](../docs/validation/actor-usage-2026-09-18.md) when moving this world. Old-world GM accounting is not a prerequisite for fresh-world operation. Provider billing continuity and world-scoped developer tags are separate records.
+H113 stopped at the user's request at **seq148**, preserving **131 lifetime NPC replies** and all ten identities. The [latest Chinese report](restart-20260918-01/observations/two-hour-20260918/report.zh-CN.md) covers all 99 new decisions; [English evidence](restart-20260918-01/observations/two-hour-20260918/observation.json) and [run summary](restart-20260918-01/observations/two-hour-20260918/run-summary.json) include rejected and unfinished outcomes. New NPC charges were CNY 2.0172514; all settled. Iron is installed but undiscovered. Monitoring is paused.
+
+[Permanent developer usage tags](restart-20260918-01/usage/latest.md) now retain 403,009 lifetime NPC tokens and at least 2,066,704 GM tokens, with [complete portable history and the current GM checkpoint](restart-20260918-01/usage/manifest.json). The old GM05 usage tail and the new GM06 timeout remain unresolved; native GM currency is unknown. Follow the [usage transfer instructions](../docs/validation/actor-usage-2026-09-18.md) when moving this world. Old-world GM accounting is not a prerequisite for fresh-world operation. Provider billing continuity and world-scoped developer tags are separate records.
 
 H111 also binds ten empty persistent GM identities to this fresh world. Their complete
 [bootstrap checkpoint](restart-20260918-01/gm/bootstrap.gm-state.json) and
 [manifest](restart-20260918-01/gm/manifest.json) are retained byte-exactly. These records
-contained no native GM session or decision at bootstrap. H112's latest checkpoint now carries the interrupted observation. Do not overwrite a later local GM
+contained no native GM session or decision at bootstrap. The current usage manifest pins the full later GM state, including proposals, coding, feedback and interrupted observations. Do not overwrite a later local GM
 continuation with this initial checkpoint. Current readiness and its limitations are
 reported in [H111 validation](../docs/validation/aincrad-gm-navigation-2026-09-18.md).
 
@@ -25,4 +27,4 @@ On another computer, first verify the latest manifest hash and world identity. C
 
 API keys, loopback authentication, raw account ledgers and backup files remain ignored local files. Public checkpoints reject credential fields rather than silently removing fields and claiming an exact copy. Safe cost receipts and the complete new world are published separately from the visible conversation archive.
 
-The [Chinese report](restart-20260918-01/report.zh-CN.md) translates explicit model reasons and observed actions. It does not claim access to hidden thoughts. Proposed dialogue is distinct from authoritative delivered speech; accepting an action is distinct from finishing its work. [observation.json](restart-20260918-01/observation.json) retains the English evidence for every returned decision, including rejected ones.
+The [first Chinese report](restart-20260918-01/report.zh-CN.md) and its [first observation](restart-20260918-01/observation.json) remain historical evidence for the initial 32 decisions. The latest report above continues that history. Reports summarize explicitly returned reasons, not hidden thoughts. Proposed dialogue is distinct from authoritative delivered speech; accepting an action is distinct from finishing its work.
