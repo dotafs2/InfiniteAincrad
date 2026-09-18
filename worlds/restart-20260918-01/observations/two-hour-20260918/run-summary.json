@@ -1,0 +1,1926 @@
+{
+  "schema_version": 1,
+  "world_id": "shared:restart-20260918-01",
+  "requested_start_utc": "2026-09-18T11:00:08Z",
+  "deadline_utc": "2026-09-18T13:00:08Z",
+  "finalized_utc": "2026-09-18T12:53:20.030985+00:00",
+  "start_seq": 43,
+  "end_seq": 148,
+  "additional_decisions": 99,
+  "windows": [
+    {
+      "schema_version": 1,
+      "world_id": "shared:restart-20260918-01",
+      "status": "stopped",
+      "pid": 411888,
+      "started_utc": "2026-09-18T11:13:58.549379+00:00",
+      "deadline_utc": "2026-09-18T13:00:08+00:00",
+      "npc_calls": 18,
+      "gm_calls": 1,
+      "cycles": [
+        {
+          "index": 1,
+          "status": "closed",
+          "starting_seq": 43,
+          "life_process": {
+            "exit_code": 0,
+            "timed_out": false,
+            "seconds": 611.246,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 362076,
+              "observed_members": [
+                {
+                  "pid": 362076,
+                  "creation_time_windows_100ns": 134342036385677390,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 339324,
+                  "creation_time_windows_100ns": 134342036386870157,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 410600,
+                  "creation_time_windows_100ns": 134342036390222812,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 412192,
+                  "creation_time_windows_100ns": 134342036391552546,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 4,
+              "active_processes": 0,
+              "member_identity_list_complete": true,
+              "observed_nonzero_exits": [],
+              "all_member_exit_codes_known": true,
+              "all_members_exited": true
+            }
+          },
+          "life_outcome": "decisions_completed",
+          "npc_calls": 18,
+          "gm_process": {
+            "exit_code": 0,
+            "timed_out": false,
+            "seconds": 23.245,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 402436,
+              "observed_members": [
+                {
+                  "pid": 402436,
+                  "creation_time_windows_100ns": 134342042498497002,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 412196,
+                  "creation_time_windows_100ns": 134342042499935096,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 412240,
+                  "creation_time_windows_100ns": 134342042502313772,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 411028,
+                  "creation_time_windows_100ns": 134342042502446642,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 388112,
+                  "creation_time_windows_100ns": 134342042503002946,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 408980,
+                  "creation_time_windows_100ns": 134342042503624158,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 329156,
+                  "creation_time_windows_100ns": 134342042503951033,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 404208,
+                  "creation_time_windows_100ns": 134342042505185310,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 410796,
+                  "creation_time_windows_100ns": 134342042505305534,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 362408,
+                  "creation_time_windows_100ns": 134342042505641719,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 411824,
+                  "creation_time_windows_100ns": 134342042505697056,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 410572,
+                  "creation_time_windows_100ns": 134342042505801601,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 410644,
+                  "creation_time_windows_100ns": 134342042505752695,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 408736,
+                  "creation_time_windows_100ns": 134342042505853686,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 401000,
+                  "creation_time_windows_100ns": 134342042507203336,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 412400,
+                  "creation_time_windows_100ns": 134342042507241850,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 407884,
+                  "creation_time_windows_100ns": 134342042507333633,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 411808,
+                  "creation_time_windows_100ns": 134342042507291199,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 409804,
+                  "creation_time_windows_100ns": 134342042507394715,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 411236,
+                  "creation_time_windows_100ns": 134342042507686474,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 407548,
+                  "creation_time_windows_100ns": 134342042507737799,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 409864,
+                  "creation_time_windows_100ns": 134342042507835459,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 412136,
+                  "creation_time_windows_100ns": 134342042729064390,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 401792,
+                  "creation_time_windows_100ns": 134342042729190971,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 411120,
+                  "creation_time_windows_100ns": 134342042729742456,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 400312,
+                  "creation_time_windows_100ns": 134342042729852255,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 36,
+              "active_processes": 0,
+              "member_identity_list_complete": false,
+              "observed_nonzero_exits": [
+                {
+                  "pid": 411808,
+                  "creation_time_windows_100ns": 134342042507291199,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 409804,
+                  "creation_time_windows_100ns": 134342042507394715,
+                  "running": false,
+                  "exit_code": 1
+                }
+              ],
+              "all_member_exit_codes_known": false,
+              "all_members_exited": true
+            }
+          },
+          "gm_status": "ok",
+          "gm_run_id": "run-20260918T112410Z-5b8bf8",
+          "gm_id": "gm-01",
+          "ending_seq": 61
+        }
+      ],
+      "initial_ledger": {
+        "counts": {
+          "settled": 218
+        },
+        "charge_nano": 4250696200
+      },
+      "active_processes": 0,
+      "reason": "requested_stop",
+      "installations": 0,
+      "updated_utc": "2026-09-18T11:24:33.127466+00:00",
+      "finished_utc": "2026-09-18T11:24:33.099476+00:00",
+      "final_ledger": {
+        "counts": {
+          "settled": 236
+        },
+        "charge_nano": 4613369700
+      },
+      "final_checkpoint": {
+        "seq": 61,
+        "file": "seq000061-8ad67398d9bae6ba.world.json",
+        "sha256": "8ad67398d9bae6bad4d972508f6f017c03054d1a28a2dc81fd6504bbe6187f3f",
+        "created_utc": "2026-09-18T11:24:09.771527+00:00",
+        "resident_count": 10,
+        "archive_count": 50,
+        "full_history_preserved": true
+      }
+    },
+    {
+      "schema_version": 1,
+      "world_id": "shared:restart-20260918-01",
+      "status": "stopped",
+      "pid": 413976,
+      "started_utc": "2026-09-18T11:37:13.845066+00:00",
+      "deadline_utc": "2026-09-18T13:00:08+00:00",
+      "npc_calls": 59,
+      "gm_calls": 5,
+      "cycles": [
+        {
+          "index": 1,
+          "status": "closed",
+          "starting_seq": 62,
+          "life_process": {
+            "exit_code": 0,
+            "timed_out": false,
+            "seconds": 612.237,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 406548,
+              "observed_members": [
+                {
+                  "pid": 406548,
+                  "creation_time_windows_100ns": 134342050338664813,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 412836,
+                  "creation_time_windows_100ns": 134342050339877667,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 412980,
+                  "creation_time_windows_100ns": 134342050342872532,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 410472,
+                  "creation_time_windows_100ns": 134342050345254137,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 4,
+              "active_processes": 0,
+              "member_identity_list_complete": true,
+              "observed_nonzero_exits": [],
+              "all_member_exit_codes_known": true,
+              "all_members_exited": true
+            }
+          },
+          "life_outcome": "decisions_completed",
+          "npc_calls": 7,
+          "gm_process": {
+            "exit_code": 0,
+            "timed_out": false,
+            "seconds": 48.629,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 413204,
+              "observed_members": [
+                {
+                  "pid": 413204,
+                  "creation_time_windows_100ns": 134342056461401975,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 409392,
+                  "creation_time_windows_100ns": 134342056462933235,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 354968,
+                  "creation_time_windows_100ns": 134342056465383249,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 414616,
+                  "creation_time_windows_100ns": 134342056465560893,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417772,
+                  "creation_time_windows_100ns": 134342056466146802,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 388572,
+                  "creation_time_windows_100ns": 134342056466262541,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 415924,
+                  "creation_time_windows_100ns": 134342056466787132,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416976,
+                  "creation_time_windows_100ns": 134342056467260749,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 415204,
+                  "creation_time_windows_100ns": 134342056468464347,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 414176,
+                  "creation_time_windows_100ns": 134342056468976832,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416808,
+                  "creation_time_windows_100ns": 134342056468922908,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416528,
+                  "creation_time_windows_100ns": 134342056470650621,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417260,
+                  "creation_time_windows_100ns": 134342056470743905,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 415908,
+                  "creation_time_windows_100ns": 134342056470689143,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 316316,
+                  "creation_time_windows_100ns": 134342056470781917,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417220,
+                  "creation_time_windows_100ns": 134342056470727738,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416812,
+                  "creation_time_windows_100ns": 134342056470820213,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417380,
+                  "creation_time_windows_100ns": 134342056470789547,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 409784,
+                  "creation_time_windows_100ns": 134342056470884023,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 415772,
+                  "creation_time_windows_100ns": 134342056471118575,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416780,
+                  "creation_time_windows_100ns": 134342056471156454,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416564,
+                  "creation_time_windows_100ns": 134342056471243312,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 368984,
+                  "creation_time_windows_100ns": 134342056471190638,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416652,
+                  "creation_time_windows_100ns": 134342056471284452,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416228,
+                  "creation_time_windows_100ns": 134342056471233072,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 413188,
+                  "creation_time_windows_100ns": 134342056471341877,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 413180,
+                  "creation_time_windows_100ns": 134342056946189655,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 411216,
+                  "creation_time_windows_100ns": 134342056946322445,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 406080,
+                  "creation_time_windows_100ns": 134342056946851888,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417752,
+                  "creation_time_windows_100ns": 134342056946969944,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 36,
+              "active_processes": 0,
+              "member_identity_list_complete": false,
+              "observed_nonzero_exits": [
+                {
+                  "pid": 417380,
+                  "creation_time_windows_100ns": 134342056470789547,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 409784,
+                  "creation_time_windows_100ns": 134342056470884023,
+                  "running": false,
+                  "exit_code": 1
+                }
+              ],
+              "all_member_exit_codes_known": false,
+              "all_members_exited": true
+            }
+          },
+          "gm_status": "ok",
+          "gm_run_id": "run-20260918T114726Z-7c4678",
+          "gm_id": "gm-02",
+          "ending_seq": 66
+        },
+        {
+          "index": 2,
+          "status": "closed",
+          "starting_seq": 66,
+          "life_process": {
+            "exit_code": 0,
+            "timed_out": false,
+            "seconds": 611.514,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 415396,
+              "observed_members": [
+                {
+                  "pid": 415396,
+                  "creation_time_windows_100ns": 134342056947910167,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 410836,
+                  "creation_time_windows_100ns": 134342056949362721,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417552,
+                  "creation_time_windows_100ns": 134342056952379426,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416784,
+                  "creation_time_windows_100ns": 134342056953814536,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 4,
+              "active_processes": 0,
+              "member_identity_list_complete": true,
+              "observed_nonzero_exits": [],
+              "all_member_exit_codes_known": true,
+              "all_members_exited": true
+            }
+          },
+          "life_outcome": "decisions_completed",
+          "npc_calls": 10,
+          "gm_process": {
+            "exit_code": 0,
+            "timed_out": false,
+            "seconds": 56.374,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 418712,
+              "observed_members": [
+                {
+                  "pid": 418712,
+                  "creation_time_windows_100ns": 134342063063395365,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418744,
+                  "creation_time_windows_100ns": 134342063065107400,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417844,
+                  "creation_time_windows_100ns": 134342063068673751,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418088,
+                  "creation_time_windows_100ns": 134342063068826367,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418236,
+                  "creation_time_windows_100ns": 134342063069385580,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417948,
+                  "creation_time_windows_100ns": 134342063069502459,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417928,
+                  "creation_time_windows_100ns": 134342063070044239,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417912,
+                  "creation_time_windows_100ns": 134342063070622001,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 414096,
+                  "creation_time_windows_100ns": 134342063072015732,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 415900,
+                  "creation_time_windows_100ns": 134342063072121518,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418184,
+                  "creation_time_windows_100ns": 134342063072479598,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418100,
+                  "creation_time_windows_100ns": 134342063072573928,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418108,
+                  "creation_time_windows_100ns": 134342063072537178,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418452,
+                  "creation_time_windows_100ns": 134342063072633265,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417876,
+                  "creation_time_windows_100ns": 134342063072595294,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418432,
+                  "creation_time_windows_100ns": 134342063072688032,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418468,
+                  "creation_time_windows_100ns": 134342063074037207,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417624,
+                  "creation_time_windows_100ns": 134342063074125743,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418344,
+                  "creation_time_windows_100ns": 134342063074070468,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 415088,
+                  "creation_time_windows_100ns": 134342063074155857,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 415928,
+                  "creation_time_windows_100ns": 134342063074113966,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 414860,
+                  "creation_time_windows_100ns": 134342063074208391,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 401488,
+                  "creation_time_windows_100ns": 134342063074174969,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 418608,
+                  "creation_time_windows_100ns": 134342063074271494,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 417840,
+                  "creation_time_windows_100ns": 134342063074442995,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417892,
+                  "creation_time_windows_100ns": 134342063074547057,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417832,
+                  "creation_time_windows_100ns": 134342063074486924,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 408756,
+                  "creation_time_windows_100ns": 134342063074580405,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417916,
+                  "creation_time_windows_100ns": 134342063074523891,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416224,
+                  "creation_time_windows_100ns": 134342063074618843,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 412764,
+                  "creation_time_windows_100ns": 134342063074587324,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 414648,
+                  "creation_time_windows_100ns": 134342063074683696,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417860,
+                  "creation_time_windows_100ns": 134342063625167880,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 409404,
+                  "creation_time_windows_100ns": 134342063625313231,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 411900,
+                  "creation_time_windows_100ns": 134342063625844843,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 406760,
+                  "creation_time_windows_100ns": 134342063625957815,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 36,
+              "active_processes": 0,
+              "member_identity_list_complete": true,
+              "observed_nonzero_exits": [
+                {
+                  "pid": 401488,
+                  "creation_time_windows_100ns": 134342063074174969,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 418608,
+                  "creation_time_windows_100ns": 134342063074271494,
+                  "running": false,
+                  "exit_code": 1
+                }
+              ],
+              "all_member_exit_codes_known": true,
+              "all_members_exited": true
+            }
+          },
+          "gm_status": "ok",
+          "gm_run_id": "run-20260918T115826Z-1795d7",
+          "gm_id": "gm-03",
+          "ending_seq": 81
+        },
+        {
+          "index": 3,
+          "status": "closed",
+          "starting_seq": 81,
+          "life_process": {
+            "exit_code": 0,
+            "timed_out": false,
+            "seconds": 611.544,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 416300,
+              "observed_members": [
+                {
+                  "pid": 416300,
+                  "creation_time_windows_100ns": 134342063627374092,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418552,
+                  "creation_time_windows_100ns": 134342063629179894,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418556,
+                  "creation_time_windows_100ns": 134342063632513531,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 400772,
+                  "creation_time_windows_100ns": 134342063633924154,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 4,
+              "active_processes": 0,
+              "member_identity_list_complete": true,
+              "observed_nonzero_exits": [],
+              "all_member_exit_codes_known": true,
+              "all_members_exited": true
+            }
+          },
+          "life_outcome": "decisions_completed",
+          "npc_calls": 7,
+          "gm_process": {
+            "exit_code": 0,
+            "timed_out": false,
+            "seconds": 39.9,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 417540,
+              "observed_members": [
+                {
+                  "pid": 417540,
+                  "creation_time_windows_100ns": 134342069743217473,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 420860,
+                  "creation_time_windows_100ns": 134342069744840246,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419040,
+                  "creation_time_windows_100ns": 134342069747407522,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418796,
+                  "creation_time_windows_100ns": 134342069747540791,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 327800,
+                  "creation_time_windows_100ns": 134342069748074992,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418288,
+                  "creation_time_windows_100ns": 134342069748194473,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418548,
+                  "creation_time_windows_100ns": 134342069748732719,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 415764,
+                  "creation_time_windows_100ns": 134342069749215408,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416036,
+                  "creation_time_windows_100ns": 134342069750646425,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418128,
+                  "creation_time_windows_100ns": 134342069750755076,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419268,
+                  "creation_time_windows_100ns": 134342069751089512,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418376,
+                  "creation_time_windows_100ns": 134342069751198162,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419524,
+                  "creation_time_windows_100ns": 134342069751148814,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419884,
+                  "creation_time_windows_100ns": 134342069751261426,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418840,
+                  "creation_time_windows_100ns": 134342069751208741,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 415080,
+                  "creation_time_windows_100ns": 134342069751315299,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419112,
+                  "creation_time_windows_100ns": 134342069752702875,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 420604,
+                  "creation_time_windows_100ns": 134342069752799320,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418004,
+                  "creation_time_windows_100ns": 134342069752731257,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416548,
+                  "creation_time_windows_100ns": 134342069752819469,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 420624,
+                  "creation_time_windows_100ns": 134342069752773273,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419184,
+                  "creation_time_windows_100ns": 134342069752861420,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418624,
+                  "creation_time_windows_100ns": 134342069752825113,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 419452,
+                  "creation_time_windows_100ns": 134342069752914889,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 361552,
+                  "creation_time_windows_100ns": 134342069753152145,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419664,
+                  "creation_time_windows_100ns": 134342069753249075,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418144,
+                  "creation_time_windows_100ns": 134342069753194402,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 416328,
+                  "creation_time_windows_100ns": 134342069753282678,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418388,
+                  "creation_time_windows_100ns": 134342069753230604,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 420584,
+                  "creation_time_windows_100ns": 134342069753325363,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 410828,
+                  "creation_time_windows_100ns": 134342069753276638,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 357316,
+                  "creation_time_windows_100ns": 134342069753375103,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417704,
+                  "creation_time_windows_100ns": 134342070140573148,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418856,
+                  "creation_time_windows_100ns": 134342070140828119,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418760,
+                  "creation_time_windows_100ns": 134342070141399863,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419972,
+                  "creation_time_windows_100ns": 134342070141511508,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 36,
+              "active_processes": 0,
+              "member_identity_list_complete": true,
+              "observed_nonzero_exits": [
+                {
+                  "pid": 418624,
+                  "creation_time_windows_100ns": 134342069752825113,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 419452,
+                  "creation_time_windows_100ns": 134342069752914889,
+                  "running": false,
+                  "exit_code": 1
+                }
+              ],
+              "all_member_exit_codes_known": true,
+              "all_members_exited": true
+            }
+          },
+          "gm_status": "ok",
+          "gm_run_id": "run-20260918T120934Z-4f0516",
+          "gm_id": "gm-04",
+          "ending_seq": 86
+        },
+        {
+          "index": 4,
+          "status": "closed",
+          "starting_seq": 86,
+          "life_process": {
+            "exit_code": 0,
+            "timed_out": false,
+            "seconds": 611.776,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 420308,
+              "observed_members": [
+                {
+                  "pid": 420308,
+                  "creation_time_windows_100ns": 134342070142459149,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418908,
+                  "creation_time_windows_100ns": 134342070144023548,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419688,
+                  "creation_time_windows_100ns": 134342070147129842,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 420248,
+                  "creation_time_windows_100ns": 134342070148484410,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 4,
+              "active_processes": 0,
+              "member_identity_list_complete": true,
+              "observed_nonzero_exits": [],
+              "all_member_exit_codes_known": true,
+              "all_members_exited": true
+            }
+          },
+          "life_outcome": "decisions_completed",
+          "npc_calls": 9,
+          "gm_process": {
+            "exit_code": 0,
+            "timed_out": false,
+            "seconds": 22.667,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 416884,
+              "observed_members": [
+                {
+                  "pid": 416884,
+                  "creation_time_windows_100ns": 134342076260648391,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 376412,
+                  "creation_time_windows_100ns": 134342076261920746,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419136,
+                  "creation_time_windows_100ns": 134342076264347469,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 413208,
+                  "creation_time_windows_100ns": 134342076264484684,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 417568,
+                  "creation_time_windows_100ns": 134342076265027417,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418752,
+                  "creation_time_windows_100ns": 134342076265830367,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418820,
+                  "creation_time_windows_100ns": 134342076266317484,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419080,
+                  "creation_time_windows_100ns": 134342076268171046,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418696,
+                  "creation_time_windows_100ns": 134342076268275779,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 421844,
+                  "creation_time_windows_100ns": 134342076268214875,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419376,
+                  "creation_time_windows_100ns": 134342076268299728,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 419344,
+                  "creation_time_windows_100ns": 134342076268269009,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 421212,
+                  "creation_time_windows_100ns": 134342076268366619,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 419992,
+                  "creation_time_windows_100ns": 134342076268672643,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 418104,
+                  "creation_time_windows_100ns": 134342076268764094,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 422192,
+                  "creation_time_windows_100ns": 134342076485600902,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 422220,
+                  "creation_time_windows_100ns": 134342076485738253,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 22,
+              "active_processes": 0,
+              "member_identity_list_complete": false,
+              "observed_nonzero_exits": [
+                {
+                  "pid": 419344,
+                  "creation_time_windows_100ns": 134342076268269009,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 421212,
+                  "creation_time_windows_100ns": 134342076268366619,
+                  "running": false,
+                  "exit_code": 1
+                }
+              ],
+              "all_member_exit_codes_known": false,
+              "all_members_exited": true
+            }
+          },
+          "gm_status": "ok",
+          "gm_run_id": "run-20260918T122026Z-db5333",
+          "gm_id": "gm-05",
+          "ending_seq": 96
+        },
+        {
+          "index": 5,
+          "status": "closed",
+          "starting_seq": 96,
+          "life_process": {
+            "exit_code": 0,
+            "timed_out": false,
+            "seconds": 611.543,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 422324,
+              "observed_members": [
+                {
+                  "pid": 422324,
+                  "creation_time_windows_100ns": 134342076487587977,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 422336,
+                  "creation_time_windows_100ns": 134342076488795547,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 422424,
+                  "creation_time_windows_100ns": 134342076491845583,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 422484,
+                  "creation_time_windows_100ns": 134342076493163393,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 4,
+              "active_processes": 0,
+              "member_identity_list_complete": true,
+              "observed_nonzero_exits": [],
+              "all_member_exit_codes_known": true,
+              "all_members_exited": true
+            }
+          },
+          "life_outcome": "decisions_completed",
+          "npc_calls": 16,
+          "gm_process": {
+            "exit_code": 1,
+            "timed_out": false,
+            "seconds": 60.789,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 419132,
+              "observed_members": [
+                {
+                  "pid": 419132,
+                  "creation_time_windows_100ns": 134342082603462183,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 423264,
+                  "creation_time_windows_100ns": 134342082604650182,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423180,
+                  "creation_time_windows_100ns": 134342082607177704,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423152,
+                  "creation_time_windows_100ns": 134342082607311020,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423104,
+                  "creation_time_windows_100ns": 134342082607890591,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423092,
+                  "creation_time_windows_100ns": 134342082608016825,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423040,
+                  "creation_time_windows_100ns": 134342082608579044,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 423056,
+                  "creation_time_windows_100ns": 134342082609085812,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423772,
+                  "creation_time_windows_100ns": 134342082610539228,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423764,
+                  "creation_time_windows_100ns": 134342082610648714,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423752,
+                  "creation_time_windows_100ns": 134342082610985982,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423692,
+                  "creation_time_windows_100ns": 134342082611088031,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423708,
+                  "creation_time_windows_100ns": 134342082611041066,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423676,
+                  "creation_time_windows_100ns": 134342082611136192,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423704,
+                  "creation_time_windows_100ns": 134342082611097335,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423688,
+                  "creation_time_windows_100ns": 134342082611193588,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423492,
+                  "creation_time_windows_100ns": 134342082612665569,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423468,
+                  "creation_time_windows_100ns": 134342082612700090,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423436,
+                  "creation_time_windows_100ns": 134342082612741791,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423276,
+                  "creation_time_windows_100ns": 134342082613314737,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423308,
+                  "creation_time_windows_100ns": 134342082613246477,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 423316,
+                  "creation_time_windows_100ns": 134342082613281191,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 413848,
+                  "creation_time_windows_100ns": 134342082613357539,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 415452,
+                  "creation_time_windows_100ns": 134342082613463593,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 412320,
+                  "creation_time_windows_100ns": 134342083209734749,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 424848,
+                  "creation_time_windows_100ns": 134342083209862311,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 422332,
+                  "creation_time_windows_100ns": 134342083210404084,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 422376,
+                  "creation_time_windows_100ns": 134342083210524101,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 36,
+              "active_processes": 0,
+              "member_identity_list_complete": false,
+              "observed_nonzero_exits": [
+                {
+                  "pid": 419132,
+                  "creation_time_windows_100ns": 134342082603462183,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 423040,
+                  "creation_time_windows_100ns": 134342082608579044,
+                  "running": false,
+                  "exit_code": 1
+                }
+              ],
+              "all_member_exit_codes_known": false,
+              "all_members_exited": true
+            }
+          },
+          "gm_status": "incomplete",
+          "gm_run_id": "run-20260918T123100Z-44fcba",
+          "gm_id": "gm-06",
+          "ending_seq": 111
+        },
+        {
+          "index": 6,
+          "status": "life_closed",
+          "starting_seq": 111,
+          "life_process": {
+            "exit_code": 1,
+            "timed_out": false,
+            "seconds": 611.718,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 420944,
+              "observed_members": [
+                {
+                  "pid": 420944,
+                  "creation_time_windows_100ns": 134342083211624334,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 412956,
+                  "creation_time_windows_100ns": 134342083212828299,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 422620,
+                  "creation_time_windows_100ns": 134342083215883374,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 424728,
+                  "creation_time_windows_100ns": 134342083217254778,
+                  "running": false,
+                  "exit_code": 0
+                }
+              ],
+              "total_assigned_processes": 4,
+              "active_processes": 0,
+              "member_identity_list_complete": true,
+              "observed_nonzero_exits": [
+                {
+                  "pid": 420944,
+                  "creation_time_windows_100ns": 134342083211624334,
+                  "running": false,
+                  "exit_code": 1
+                }
+              ],
+              "all_member_exit_codes_known": true,
+              "all_members_exited": true
+            }
+          },
+          "life_outcome": "blocked",
+          "npc_calls": 10
+        }
+      ],
+      "initial_ledger": {
+        "counts": {
+          "settled": 236
+        },
+        "charge_nano": 4613369700
+      },
+      "active_processes": 0,
+      "reason": "life_result_requires_review",
+      "installations": 0,
+      "updated_utc": "2026-09-18T12:42:12.954735+00:00",
+      "finished_utc": "2026-09-18T12:42:12.914030+00:00",
+      "final_ledger": {
+        "counts": {
+          "settled": 295
+        },
+        "charge_nano": 5820038100
+      },
+      "final_checkpoint": {
+        "seq": 126,
+        "file": "seq000126-99cc18e982802aa7.world.json",
+        "sha256": "99cc18e982802aa787a3139f9f4d97b6f1dd97ed00b26327dce51e4fbbcf88e8",
+        "created_utc": "2026-09-18T12:42:12.804212+00:00",
+        "resident_count": 10,
+        "archive_count": 109,
+        "full_history_preserved": true
+      }
+    },
+    {
+      "schema_version": 1,
+      "world_id": "shared:restart-20260918-01",
+      "status": "stopped",
+      "pid": 427772,
+      "started_utc": "2026-09-18T12:45:38.972776+00:00",
+      "deadline_utc": "2026-09-18T13:00:08+00:00",
+      "npc_calls": 22,
+      "gm_calls": 0,
+      "cycles": [
+        {
+          "index": 1,
+          "status": "life_closed",
+          "starting_seq": 126,
+          "life_process": {
+            "exit_code": 1,
+            "timed_out": false,
+            "seconds": 334.894,
+            "owned": {
+              "containment": "windows_kill_on_close_job",
+              "wrapper_pid": 420968,
+              "observed_members": [
+                {
+                  "pid": 420968,
+                  "creation_time_windows_100ns": 134342091389943256,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 376944,
+                  "creation_time_windows_100ns": 134342091391431157,
+                  "running": false,
+                  "exit_code": 0
+                },
+                {
+                  "pid": 376860,
+                  "creation_time_windows_100ns": 134342091395576656,
+                  "running": false,
+                  "exit_code": 4294967295
+                },
+                {
+                  "pid": 425696,
+                  "creation_time_windows_100ns": 134342091396953326,
+                  "running": false,
+                  "exit_code": 4294967295
+                }
+              ],
+              "total_assigned_processes": 4,
+              "active_processes": 0,
+              "member_identity_list_complete": true,
+              "observed_nonzero_exits": [
+                {
+                  "pid": 420968,
+                  "creation_time_windows_100ns": 134342091389943256,
+                  "running": false,
+                  "exit_code": 1
+                },
+                {
+                  "pid": 376860,
+                  "creation_time_windows_100ns": 134342091395576656,
+                  "running": false,
+                  "exit_code": 4294967295
+                },
+                {
+                  "pid": 425696,
+                  "creation_time_windows_100ns": 134342091396953326,
+                  "running": false,
+                  "exit_code": 4294967295
+                }
+              ],
+              "all_member_exit_codes_known": true,
+              "all_members_exited": true
+            }
+          },
+          "life_outcome": "blocked",
+          "npc_calls": 22
+        }
+      ],
+      "initial_ledger": {
+        "counts": {
+          "settled": 295
+        },
+        "charge_nano": 5820038100
+      },
+      "active_processes": 0,
+      "reason": "life_result_requires_review",
+      "installations": 0,
+      "updated_utc": "2026-09-18T12:51:13.964884+00:00",
+      "finished_utc": "2026-09-18T12:51:13.919884+00:00",
+      "final_ledger": {
+        "counts": {
+          "settled": 317
+        },
+        "charge_nano": 6267947600
+      },
+      "final_checkpoint": {
+        "seq": 148,
+        "file": "seq000148-cdfe013685698028.world.json",
+        "sha256": "cdfe0136856980281f671c14721815ac1bf5484cb77e930485edb9c435dc380a",
+        "created_utc": "2026-09-18T12:51:13.807471+00:00",
+        "resident_count": 10,
+        "archive_count": 131,
+        "full_history_preserved": true
+      }
+    }
+  ],
+  "new_npc_calls": 99,
+  "supervisor_gm_calls": 6,
+  "new_npc_cost_cny": 2.0172514,
+  "life_process_wall_seconds": 4616.472,
+  "world_elapsed_delta": 4520.833333333533,
+  "material_sources": {
+    "schema_version": 1,
+    "sources": {
+      "street:iron-salvage-20260918": {
+        "access": "public",
+        "id": "street:iron-salvage-20260918",
+        "initial_stock": 3,
+        "label": "Street salvage iron heap",
+        "material": "iron",
+        "position": [
+          0,
+          0.22,
+          7.7
+        ],
+        "stock": 3,
+        "recovered": 0,
+        "source_need": {
+          "seq": 27,
+          "actor_id": "shared:smith",
+          "text": "I can do the work. Need to be straight with you though—I'm out of iron at the moment. If you've got a bar or know where to get one, we can settle terms. Otherwise I'll have to source it first."
+        },
+        "install_command": "development_gm:gm05-iron-20260918"
+      }
+    },
+    "jobs": {},
+    "commands": {},
+    "known": {},
+    "installs": {
+      "development_gm:gm05-iron-20260918": {
+        "payload": {
+          "spec": {
+            "access": "public",
+            "id": "street:iron-salvage-20260918",
+            "initial_stock": 3,
+            "label": "Street salvage iron heap",
+            "material": "iron",
+            "position": [
+              0,
+              0.22,
+              7.7
+            ]
+          },
+          "source_seq": 27
+        }
+      }
+    },
+    "blocked": {},
+    "blocked_seq": 0
+  },
+  "old_usage_tail_unresolved": true,
+  "usage_manifest": {
+    "schema_version": 1,
+    "world_id": "shared:restart-20260918-01",
+    "world_seq": 148,
+    "world_sha256": "cdfe0136856980281f671c14721815ac1bf5484cb77e930485edb9c435dc380a",
+    "usage_file": "seq000148-1f4fda1945524533.usage.json",
+    "usage_sha256": "1f4fda1945524533da7f3732a4b1e8163e33b52d140e1d987e70523939619289",
+    "gm_file": "../gm/two-hour-c6945a6b26aa8733.gm-state.json",
+    "gm_sha256": "c6945a6b26aa8733ddee604e807abf7a23724e5d3df10731d24ca217210e74a1",
+    "actors": 20,
+    "completed_npc_calls": 131,
+    "npc_tokens": 403009,
+    "gm_attempts": 13,
+    "gm_known_tokens": 2066704,
+    "gm_usage_complete": false,
+    "native_transcript_published": false,
+    "restore": "Verify hashes; restore full history only into a missing local usage book. Never replace a later continuation. Native sessions and credentials stay local."
+  },
+  "interpretation": "Wall deadline includes diagnosis, tests, maintenance and life. Stated NPC reasons are returned text; acceptance is not completion. Controlled trials do not establish voluntary adoption.",
+  "stop_reason": "explicit_user_stop_before_original_deadline",
+  "stopped_utc": "2026-09-18T12:51:13.919884+00:00",
+  "wall_window_seconds": 6665.919884,
+  "non_life_wall_seconds": 2049.447884,
+  "user_stop": {
+    "requested_utc": "2026-09-18T12:51:13.2148791Z",
+    "ledger_before_stop": {
+      "reserved": 0,
+      "uncertain": 0,
+      "settled": 317
+    },
+    "reason": "User requested immediate stop and publication",
+    "creation_time_windows_100ns": 134342091396953326,
+    "method": "Stop the verified owned headless engine; keep gateway and supervisor alive to drain and checkpoint",
+    "engine_pid": 425696,
+    "original_deadline_utc": "2026-09-18T13:00:08Z"
+  },
+  "shutdown_verification": {
+    "matching_world_writers": 0,
+    "world_sha256": "cdfe0136856980281f671c14721815ac1bf5484cb77e930485edb9c435dc380a",
+    "note": "Automatic approval review rejected removal of the empty stale lock directory as blocked by policy. Preserve it; export a read-only snapshot after independent process and hash verification.",
+    "all_recorded_owned_processes_exited": true,
+    "verified_utc": "2026-09-18T12:53:19.1783528Z",
+    "stale_empty_writer_lock_preserved": true
+  },
+  "supervisor_gm_results": [
+    {
+      "gm_id": "gm-01",
+      "run_id": "run-20260918T112410Z-5b8bf8",
+      "status": "ok"
+    },
+    {
+      "gm_id": "gm-02",
+      "run_id": "run-20260918T114726Z-7c4678",
+      "status": "ok"
+    },
+    {
+      "gm_id": "gm-03",
+      "run_id": "run-20260918T115826Z-1795d7",
+      "status": "ok"
+    },
+    {
+      "gm_id": "gm-04",
+      "run_id": "run-20260918T120934Z-4f0516",
+      "status": "ok"
+    },
+    {
+      "gm_id": "gm-05",
+      "run_id": "run-20260918T122026Z-db5333",
+      "status": "ok"
+    },
+    {
+      "gm_id": "gm-06",
+      "run_id": "run-20260918T123100Z-44fcba",
+      "status": "incomplete"
+    }
+  ],
+  "supervisor_gm_successes": 5,
+  "supervisor_gm_incomplete": 1,
+  "npc_new_tokens": 319735,
+  "gm_new_known_tokens_lower_bound": 1273878,
+  "final_world_restore": {
+    "residents": 10,
+    "seq": 148,
+    "exact_fields": true,
+    "owned_test_process_exited": true
+  },
+  "voluntary_iron_adoption": {
+    "discovered_by": [],
+    "collected": 0,
+    "productive_use": 0
+  },
+  "native_gm_currency_cost": "unknown; not derived from token counts",
+  "shutdown_interpretation": "The user requested an early stop. The verified owned headless engine was stopped; the gateway drained with zero pending operations and exported seq148. The ordinary duration-validation result is correctly non-passing because its final capture was interrupted. The durable world passed exact cold restore; one accepted eating job remains pending."
+}
