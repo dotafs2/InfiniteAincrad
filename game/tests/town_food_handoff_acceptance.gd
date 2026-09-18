@@ -23,8 +23,8 @@ func run() -> void:
 		if candidate.get("id") == option_id:
 			option = candidate
 	check(not option.is_empty() and option.get("action") == "give_food"
-		and str(option.get("label", "")).contains("普通口粮")
-		and str(option.get("label", "")).contains("不是交易"),
+		and str(option.get("label", "")).contains("ordinary rations")
+		and str(option.get("label", "")).contains("not a trade"),
 		"a nearby resident receives one explicit voluntary ordinary-ration option")
 	check(not town.trade_options(donor).any(func(candidate): return candidate.get("id") == "food:give:" + donor)
 		and not town.trade_options(donor).any(func(candidate): return candidate.get("id") == "food:give:" + distant),

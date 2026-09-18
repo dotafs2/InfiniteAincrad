@@ -1,5 +1,7 @@
 # Repository handoff and conversation continuity
 
+- Language policy (2026-09-18): all game names, dialogue, UI, authored model inputs, Kimi/GM natural-language outputs, new project documents, and the current roadmap/flowchart use English. Only conversation with the user stays Chinese. Preserve original conversation archives and canonical historical evidence; use English presentation aliases for known legacy names without changing resident IDs or rewriting saves.
+
 - Read the current section of `ROADMAP.md`, the latest entries in `HISTORY.md`, and `docs/history/conversations/README.md` before continuing work. Historical checkpoints are not current world state.
 - The user requests that authorized Git uploads include visible conversation history, not just a project summary. Export the current task with `tools/archive_conversation.py` using its exact local session path and task ID. Refresh its existing archive; preserve previous messages, user corrections, and explicit scope.
 - Before an authorized push, refresh the conversation snapshot, update its `CONTINUE.md`, and inspect the staged file list. After pushing, verify the remote commit and archive hashes. Report the actual cutoff; future messages and inaccessible tasks are not yet archived. Do not claim a full history when only a summary or one task is available.

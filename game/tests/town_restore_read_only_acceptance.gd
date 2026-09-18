@@ -63,7 +63,7 @@ func run() -> void:
 	check(scene.paused, "Space cannot unpause restore-only life")
 	scene._unhandled_input(_key(KEY_H))
 	check(not scene._composing_dialogue(), "H cannot open a restore-only composer")
-	check(scene.dialogue.text.contains("只读回看"), "H explains how to enable real AI conversation")
+	check(scene.dialogue.text.contains("Read-only review"), "H explains how to enable real AI conversation")
 	check(not scene._inquire_nearby(false, "不应写入", "fixture:innkeeper"), "direct inquiry also fails closed in restore-only")
 	scene._unhandled_input(_key(KEY_E))
 	scene._unhandled_input(_key(KEY_F))

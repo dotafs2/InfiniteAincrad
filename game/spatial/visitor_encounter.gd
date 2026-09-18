@@ -61,9 +61,9 @@ func _ready() -> void:
 		_done = true
 		_settled_at = 0.0
 		_evidence["restored"] = true
-		_street._update_status("Mira：" + str(view.actions[-1].get("reason", "保留上次自己的决定。")))
+		_street._update_status("Mira: " + str(view.actions[-1].get("reason", "Keep my previous decision.")))
 	else:
-		_street._update_status("Mira 走向井边；她还不知道这里发生过什么。")
+		_street._update_status("Mira approaches the well. She does not yet know what happened here.")
 
 func _process(delta: float) -> void:
 	_elapsed += delta
@@ -107,7 +107,7 @@ func _process(delta: float) -> void:
 	_evidence["decision"] = proposal.decision.duplicate(true)
 	_evidence["provenance"] = proposal.provenance
 	_street._persist_world("visitor_decided")
-	_street._update_status("Mira：" + str(proposal.decision.get("reason", "我先等一等。")))
+	_street._update_status("Mira: " + str(proposal.decision.get("reason", "I will wait for now.")))
 	_done = true
 	_busy = false
 	_settled_at = _elapsed

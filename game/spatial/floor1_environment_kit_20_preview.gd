@@ -207,12 +207,12 @@ func _setup_ui() -> void:
 	layer.add_child(panel)
 	var title := Label.new()
 	title.position = Vector2(24, 12)
-	title.text = "第一层 · 环境组件基础包 01–20"
+	title.text = "Floor One - Environment Kit 01-20"
 	title.add_theme_font_size_override("font_size", 27)
 	panel.add_child(title)
 	var subtitle := Label.new()
 	subtitle.position = Vector2(25, 52)
-	subtitle.text = "6 类植物生态位 · 13 个动态样本 · 按类别基础风摆"
+	subtitle.text = "6 plant habitats - 13 animated samples - basic wind by category"
 	subtitle.modulate = Color("b9d9e7")
 	subtitle.add_theme_font_size_override("font_size", 17)
 	panel.add_child(subtitle)

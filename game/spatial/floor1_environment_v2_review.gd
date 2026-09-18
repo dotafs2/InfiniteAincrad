@@ -37,8 +37,8 @@ func _ready() -> void:
 	_label.add_theme_color_override("font_shadow_color", Color(0.05, 0.09, 0.08, 0.95))
 	_label.add_theme_constant_override("shadow_offset_x", 1)
 	_label.add_theme_constant_override("shadow_offset_y", 2)
-	_label.text = "起始之镇 · 庭园组件 V2\n20 件重制 / 6 类植物 / 枝叶风动"
-	if _wind_demo: _label.text = "起始之镇 · 草叶与蕨类风动"
+	_label.text = "Starting Town - Garden Kit V2\n20 rebuilt assets / 6 plant categories / Foliage wind"
+	if _wind_demo: _label.text = "Starting Town - Grass and Fern Wind"
 	layer.add_child(_label)
 	if not _capture_dir.is_empty():
 		call_deferred("_capture_review")
@@ -193,7 +193,7 @@ func _capture_review() -> void:
 	var saved: Array[String] = []
 	for shot in shots:
 		_pose(shot[1],shot[2])
-		_label.text = "起始之镇 · 庭园组件 V2"
+		_label.text = "Starting Town - Garden Kit V2"
 		for i in range(8): await get_tree().process_frame
 		await RenderingServer.frame_post_draw
 		var err := get_viewport().get_texture().get_image().save_png(_capture_dir.path_join(shot[0]+".png"))

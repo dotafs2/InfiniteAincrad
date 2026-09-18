@@ -572,12 +572,12 @@ func _accept_explanation(contract: Dictionary, blocker: String) -> Dictionary:
 		"part": part, "price_col": contract.get("price_col", 0), "code": blocker}
 	match blocker:
 		"funds_unavailable":
-			entry["reason"] = "接受修理前必须先从委托方钱包预留这笔报酬，委托方目前无法预留，因此这一步不可执行。你可以拒绝，或等对方备好钱再谈。"
+			entry["reason"] = "Accepting a repair requires reserving its payment from the owner's wallet first. The owner cannot reserve it now, so acceptance is unavailable. You may decline or discuss it once they have enough money."
 		"skill_unavailable":
-			entry["reason"] = "这项委托需要对应的修理技能（斧刃要metal_repair，斧柄要wood_repair），你的技能列表里没有该技能，因此不能接受。"
+			entry["reason"] = "This request needs the matching repair skill: metal_repair for the axe edge or wood_repair for the handle. You do not have that skill, so you cannot accept."
 		_:
 			var material := "iron" if part == "edge" else "wood"
-			entry["reason"] = "每份已接受或已交付的修理都要为施工留出1" + ("铁" if part == "edge" else "木") + "；扣除你尚未完成的承诺后，本委托可用材料不足1，因此不能接受。先取得材料或等已有承诺结束再谈。"
+			entry["reason"] = "Each accepted or delivered repair reserves 1 unit of " + ("iron" if part == "edge" else "wood") + ". After your unfinished commitments, less than 1 unit remains for this request, so you cannot accept. Obtain material or finish an existing commitment first."
 			entry["required_material"] = material
 			entry["required_quantity"] = 1
 			entry["committed_quantity"] = _repair_material_commitments(str(contract.get("worker_id", "")), material)
@@ -698,7 +698,7 @@ func _repair_work_ready(id: String, job: Dictionary) -> bool:
 func _observe_work_text(worker_id: String, action: String) -> String:
 	# The world's own verified fact, not the observer's words: it names the resident actually seen
 	# and the action it was really executing. The worker's private reason, inventory and job stay out.
-	return "我看见了%s在附近干活：%s。" % [resident(worker_id).name, action]
+	return "I saw %s working nearby: %s." % [resident_name(worker_id), action]
 
 func _apply_work_observation(id: String, option: Dictionary, command_id: String, provenance: String) -> Dictionary:
 	# The whole precondition is re-derived on submit. If the job finished, the neighbour walked away
@@ -733,7 +733,7 @@ func trade_options(id: String) -> Array:
 		for other in active_ids():
 			if _food_handoff_available(id, other):
 				_option(result, {"id": FOOD_HANDOFF_PREFIX + other,
-					"label": "把1份自己的普通口粮当面送给%s（自愿赠予，不是交易）" % resident(other).name,
+					"label": "Give 1 of your ordinary rations to %s in person (a voluntary gift, not a trade)." % resident_name(other),
 					"action": FOOD_HANDOFF_ACTION, "counterparty": other})
 
 		for other in active_ids():
@@ -741,7 +741,7 @@ func trade_options(id: String) -> Array:
 				continue
 			var target := _meeting_point(id, other)
 			if position_of(id).distance_to(target) > APPROACH_ARRIVAL_RADIUS:
-				_option(result, {"id": "approach:" + other, "label": "Approach " + resident(other).name, "action": "approach", "counterparty": other, "target_position": [target.x, target.y, target.z], "duration_seconds": WALK_SECONDS, "_target": other})
+				_option(result, {"id": "approach:" + other, "label": "Approach " + resident_name(other), "action": "approach", "counterparty": other, "target_position": [target.x, target.y, target.z], "duration_seconds": WALK_SECONDS, "_target": other})
 
 		# Voluntary work observation. Listing is pure derivation and grants nothing; the option is
 		# re-derived on submit, so a job that ended or a neighbour that moved away stays unavailable.
@@ -750,7 +750,7 @@ func trade_options(id: String) -> Array:
 				continue
 			if _work_observed_here(other).is_empty():
 				continue
-			_option(result, {"id": "observe-work:" + other, "label": "Watch " + resident(other).name + " work", "action": OBSERVE_WORK, "counterparty": other, "_worker_id": other})
+			_option(result, {"id": "observe-work:" + other, "label": "Watch " + resident_name(other) + " work", "action": OBSERVE_WORK, "counterparty": other, "_worker_id": other})
 
 		for other in active_ids():
 			if other == id or not _near(id, other):
@@ -758,7 +758,7 @@ func trade_options(id: String) -> Array:
 			for skill_id in SHAREABLE_SKILLS:
 				if not _has_skill(id, skill_id) or _already_shared_skill(id, other, skill_id):
 					continue
-				_option(result, {"id": "share-skill:" + other + ":" + skill_id, "label": "Tell " + resident(other).name + " I can repair " + ("wooden handles" if skill_id == "wood_repair" else "metal edges"), "action": "share_skill", "counterparty": other, "_skill_id": skill_id, "_decision": {"action": "share_skill", "recipient_id": other, "skill_id": skill_id, "text": _skill_notice_text(skill_id)}})
+				_option(result, {"id": "share-skill:" + other + ":" + skill_id, "label": "Tell " + resident_name(other) + " I can repair " + ("wooden handles" if skill_id == "wood_repair" else "metal edges"), "action": "share_skill", "counterparty": other, "_skill_id": skill_id, "_decision": {"action": "share_skill", "recipient_id": other, "skill_id": skill_id, "text": _skill_notice_text(skill_id)}})
 
 		# H22: voluntary one-hop sourced skill referral. Read-only option generation; no mutation.
 		# Iterate every valid DIRECT source notice the speaker received, not just the first per skill,
@@ -773,13 +773,13 @@ func trade_options(id: String) -> Array:
 				var source_seq: int = int(source_notice.get("seq", 0))
 				if referred_id == other or _already_referred(id, other, referred_id, skill_id):
 					continue
-				_option(result, {"id": "refer-skill:" + other + ":" + referred_id + ":" + skill_id + ":" + source_event_id, "label": "Tell " + resident(other).name + " that " + resident(referred_id).name + " told me they can repair " + ("wooden handles" if skill_id == "wood_repair" else "metal edges"), "action": "refer_skill", "counterparty": other, "_skill_id": skill_id, "_referred_id": referred_id, "_source_event_id": source_event_id, "_source_seq": source_seq, "_decision": {"action": "refer_skill", "recipient_id": other, "referred_resident_id": referred_id, "skill_id": skill_id, "source_event_id": source_event_id, "source_seq": source_seq}})
+				_option(result, {"id": "refer-skill:" + other + ":" + referred_id + ":" + skill_id + ":" + source_event_id, "label": "Tell " + resident_name(other) + " that " + resident_name(referred_id) + " told me they can repair " + ("wooden handles" if skill_id == "wood_repair" else "metal edges"), "action": "refer_skill", "counterparty": other, "_skill_id": skill_id, "_referred_id": referred_id, "_source_event_id": source_event_id, "_source_seq": source_seq, "_decision": {"action": "refer_skill", "recipient_id": other, "referred_resident_id": referred_id, "skill_id": skill_id, "source_event_id": source_event_id, "source_seq": source_seq}})
 
 		for other in active_ids():
 			if other == id or position_of(id).distance_to(position_of(other)) > HEARING_RANGE:
 				continue
 			if not has_open_help_request(id, other):
-				_option(result, {"id": "ask:" + other, "label": "Ask " + resident(other).name + " for help", "action": "ask_help", "counterparty": other, "_decision": {"action": "ask_help", "recipient_id": other, "text": "Can you help me?"}})
+				_option(result, {"id": "ask:" + other, "label": "Ask " + resident_name(other) + " for help", "action": "ask_help", "counterparty": other, "_decision": {"action": "ask_help", "recipient_id": other, "text": "Can you help me?"}})
 			# Structured repair-skill ask. The asker may name a skill that the world already shows as
 			# public knowledge of this nearby resident; the ask itself grants no skill, no work and no
 			# resource, and it never discloses the asker's private inventory or a damaged part. A skill
@@ -790,7 +790,7 @@ func trade_options(id: String) -> Array:
 					continue
 				var need := {"kind": "skill", "skill_id": skill_id}
 				_option(result, {"id": "ask-skill:" + other + ":" + skill_id,
-					"label": "Ask " + resident(other).name + " for help with " + _skill_name(skill_id),
+					"label": "Ask " + resident_name(other) + " for help with " + _skill_name(skill_id),
 					"action": "ask_help", "counterparty": other, "_skill_id": skill_id,
 					"_decision": {"action": "ask_help", "recipient_id": other, "skill_id": skill_id, "need": need,
 						"text": _skill_ask_text(skill_id)}})
@@ -804,7 +804,7 @@ func trade_options(id: String) -> Array:
 					if has_open_help_request(id, other, need):
 						continue
 					_option(result, {"id": "ask-repair:" + other + ":" + str(item_value.get("id")) + ":" + part,
-						"label": "Ask " + resident(other).name + " to repair " + part + " of my axe",
+						"label": "Ask " + resident_name(other) + " to repair " + part + " of my axe",
 						"action": "ask_help", "counterparty": other,
 						"_decision": {"action": "ask_help", "recipient_id": other,
 							"text": "Can you repair the " + part + " of my axe?", "need": need}})
@@ -821,7 +821,7 @@ func trade_options(id: String) -> Array:
 				if not _lesson_blocker(id, other, skill_id).is_empty():
 					continue
 				_option(result, {"id": "ask-teach:" + other + ":" + skill_id,
-					"label": "Ask " + resident(other).name + " to teach me " + _skill_name(skill_id),
+					"label": "Ask " + resident_name(other) + " to teach me " + _skill_name(skill_id),
 					"action": "ask_help", "counterparty": other, "_skill_id": skill_id, "_lesson": true,
 					"_decision": {"action": "ask_help", "recipient_id": other, "skill_id": skill_id,
 						"need": {"kind": LESSON_NEED_KIND, "skill_id": skill_id},
@@ -830,7 +830,7 @@ func trade_options(id: String) -> Array:
 		for event in _state.life.events:
 			if event.get("type") == "visitor_inquiry" and event.get("subject_id") == id and not _request_closed(str(event.request_id)) and _visitor_position.is_finite() and _visitor_position.distance_to(position_of(id)) <= HEARING_RANGE:
 				for choice in ["willing", "unavailable", "unsure"]:
-					_option(result, {"id": "visitor-reply:" + str(event.request_id) + ":" + choice, "label": "回应附近玩家：" + choice, "action": "visitor_reply", "_request_id": event.request_id, "_choice": choice})
+					_option(result, {"id": "visitor-reply:" + str(event.request_id) + ":" + choice, "label": "Reply to the nearby player: " + choice, "action": "visitor_reply", "_request_id": event.request_id, "_choice": choice})
 			if event.get("type") == "ask_help" and event.get("subject_id") == id and event.get("actor_id") in active_ids() and not _request_closed(event.request_id):
 				var other: String = event.actor_id
 				if position_of(id).distance_to(position_of(other)) <= HEARING_RANGE:
@@ -845,7 +845,7 @@ func trade_options(id: String) -> Array:
 						# asker. The label still carries the exact public text the choice would send,
 						# and the alias, decision fields and recipient binding are unchanged.
 						var reply_text := _help_reply_text(id, event, choice)
-						_option(result, {"id": "reply:" + event.request_id + ":" + choice, "label": "Reply to " + resident(other).name + ": " + reply_text, "action": "reply_help", "counterparty": other, "_decision": {"action": "reply_help", "recipient_id": other, "request_id": event.request_id, "choice": choice, "text": reply_text}})
+						_option(result, {"id": "reply:" + event.request_id + ":" + choice, "label": "Reply to " + resident_name(other) + ": " + reply_text, "action": "reply_help", "counterparty": other, "_decision": {"action": "reply_help", "recipient_id": other, "request_id": event.request_id, "choice": choice, "text": reply_text}})
 			if event.get("type") == "ask_help" and event.get("actor_id") == id and not _request_closed(event.request_id):
 				var target_id: String = event.subject_id
 				if target_id in active_ids() and position_of(id).distance_to(position_of(target_id)) <= HEARING_RANGE:
@@ -863,9 +863,9 @@ func trade_options(id: String) -> Array:
 						for price in [2, 5, 8]:
 							if resident(id).coins_col < price:
 								continue
-							_option(result, {"id": "contract:offer:" + str(item_value.get("id")) + ":" + part + ":" + worker + ":" + str(price), "label": "Ask " + resident(worker).name + " to repair " + part + " for " + str(price) + " Col; pay on collection", "action": "offer_repair", "counterparty": worker, "_item_id": item_value.get("id"), "_part": part, "_worker_id": worker, "_price": price, "_settlement": "collection"})
+							_option(result, {"id": "contract:offer:" + str(item_value.get("id")) + ":" + part + ":" + worker + ":" + str(price), "label": "Ask " + resident_name(worker) + " to repair " + part + " for " + str(price) + " Col; pay on collection", "action": "offer_repair", "counterparty": worker, "_item_id": item_value.get("id"), "_part": part, "_worker_id": worker, "_price": price, "_settlement": "collection"})
 							if _completion_escrow_enabled():
-								_option(result, {"id": "contract:completion-offer:" + str(item_value.get("id")) + ":" + part + ":" + worker + ":" + str(price), "label": "Ask " + resident(worker).name + " to repair " + part + " for " + str(price) + " Col; pay on validated completion", "action": "offer_repair", "counterparty": worker, "_item_id": item_value.get("id"), "_part": part, "_worker_id": worker, "_price": price, "_settlement": "completion"})
+								_option(result, {"id": "contract:completion-offer:" + str(item_value.get("id")) + ":" + part + ":" + worker + ":" + str(price), "label": "Ask " + resident_name(worker) + " to repair " + part + " for " + str(price) + " Col; pay on validated completion", "action": "offer_repair", "counterparty": worker, "_item_id": item_value.get("id"), "_part": part, "_worker_id": worker, "_price": price, "_settlement": "completion"})
 
 		for contract in _legacy_array("contracts"):
 			if not contract is Dictionary:
@@ -880,13 +880,13 @@ func trade_options(id: String) -> Array:
 				_option(result, {"id": "contract:collect:" + contract_id, "label": "Collect repaired axe " + contract.item_id, "action": "collect", "counterparty": contract.worker_id, "target_position": _position_array(contract.worker_id), "duration_seconds": WALK_SECONDS, "_contract_id": contract_id})
 			if contract.get("worker_id") == id and contract.get("status") == "proposed" and position_of(id).distance_to(position_of(contract.owner_id)) <= HEARING_RANGE:
 				var settlement := _contract_settlement(contract)
-				var settlement_label := "完成施工并验证后结算" if settlement == "completion" else "物主取回时结算"
+				var settlement_label := "payment follows completed and verified work" if settlement == "completion" else "payment follows collection by the owner"
 				# An acceptance is listed as an executable choice only while the authoritative submit
 				# path would accept it under the current real prerequisites; otherwise the worker is
 				# told the actual missing prerequisite in resident_view instead of a silent omission.
 				if _accept_blocker(id, contract).is_empty():
-					_option(result, {"id": "contract:accept:" + contract_id, "label": "接受修理" + str(contract.get("part", "")) + "：报酬" + str(contract.get("price_col", 0)) + " Col；先预留报酬，交付后施工60秒，" + settlement_label, "action": "accept", "counterparty": contract.owner_id, "_contract_id": contract_id})
-				_option(result, {"id": "contract:reject:" + contract_id, "label": "拒绝修理" + str(contract.get("part", "")) + "，本次报价" + str(contract.get("price_col", 0)) + " Col", "action": "reject", "counterparty": contract.owner_id, "_contract_id": contract_id})
+					_option(result, {"id": "contract:accept:" + contract_id, "label": "Accept repair " + str(contract.get("part", "")) + ": payment " + str(contract.get("price_col", 0)) + " Col; reserve payment first, then work for 60 seconds after delivery; " + settlement_label, "action": "accept", "counterparty": contract.owner_id, "_contract_id": contract_id})
+				_option(result, {"id": "contract:reject:" + contract_id, "label": "Decline repair " + str(contract.get("part", "")) + ", offered payment " + str(contract.get("price_col", 0)) + " Col", "action": "reject", "counterparty": contract.owner_id, "_contract_id": contract_id})
 			if contract.get("worker_id") == id and contract.get("status") == "delivered" and item.get("custodian_id") == id:
 				for part in ["edge", "handle"]:
 					if part == contract.get("part") and _part_damaged(item, part) and _has_skill(id, _required_skill(part)) and _trade_account(id).get("iron" if part == "edge" else "wood", 0) > 0:
@@ -960,7 +960,7 @@ func submit_trade(id: String, option_id: String, command_id: String, provenance:
 		commands[command_id] = {"payload": payload, "status": "completed"}
 		return sighted
 	if action == "visitor_reply":
-		var response := {"willing": "我愿意谈谈需要的帮助。", "unavailable": "现在不方便，我想先处理自己的事。", "unsure": "我还没想好，稍后再说。"}
+		var response := {"willing": "I am willing to discuss the help you need.", "unavailable": "This is not a good time. I want to handle my own matters first.", "unsure": "I have not decided yet. Let's talk later."}
 		var answered := reply_to_visitor(id, option._request_id, option._choice, speech if not speech.is_empty() else response[option._choice], command_id, provenance)
 		if answered.ok:
 			commands[command_id] = {"payload": payload, "status": "completed"}
@@ -1035,7 +1035,7 @@ func _apply_food_handoff(id: String, option: Dictionary, command_id: String, pro
 	var event := {"type": FOOD_HANDOFF_EVENT, "actor_id": id, "subject_id": recipient_id,
 		"recipient_ids": [id, recipient_id], "operation_id": command_id, "source": provenance,
 		"provenance": provenance, "quantity": 1, "contractual": false,
-		"text": "%s把1份自己的普通口粮当面送给了%s；这是赠予，不是交易。" % [resident(id).name, resident(recipient_id).name]}
+		"text": "%s gave 1 of their ordinary rations to %s in person. This was a gift, not a trade." % [resident_name(id), resident_name(recipient_id)]}
 	_append_life_event(event)
 	return {"ok": true, "code": FOOD_HANDOFF_EVENT, "actor_id": id, "recipient_id": recipient_id,
 		"quantity": 1, "event_id": event.event_id}
@@ -1404,9 +1404,9 @@ func _close_blocked_approach(id: String, job: Dictionary) -> Dictionary:
 	if trade.commands.has(command_id):
 		trade.commands[command_id].status = "rejected"
 		trade.commands[command_id].result = receipt.duplicate(true)
-	var text := "这次走近没有走通，我停了下来，没有到达。"
+	var text := "I could not complete the approach. I stopped without arriving."
 	if target_id in active_ids():
-		text = "这次走近%s没有走通，我停了下来，没有到达。" % resident(target_id).name
+		text = "I could not reach %s. I stopped without arriving." % resident_name(target_id)
 	_append_life_event({"type": APPROACH_BLOCKED_EVENT, "actor_id": id, "subject_id": id, "recipient_ids": [id],
 		"operation_id": command_id, "command_id": command_id, "source": provenance, "provenance": provenance,
 		"contractual": false, "target_id": target_id, "text": text})
@@ -1546,27 +1546,27 @@ func resident_view(id: String = "") -> Dictionary:
 	view["life_account"] = _trade_account(id).duplicate(true)
 	view["wallet"] = {"coins_col": resident(id).get("coins_col", 0)}
 	view["trade_settlement_terms"] = {"legacy_default": "collection", "completion_escrow": "completion" if _completion_escrow_enabled() else "unavailable"}
-	view["known_rules"] = {"axe_use": "柴斧必须斧刃和斧柄都达到100，本人持有，并在自己的工作点消耗1木料才能加工1柴火。修好其中一部分还不能使用。",
-		"basic_needs": "satiety=0或energy=0本身不会禁止移动，也不会禁止当前列出的rest、harvest_ration等动作。只能从available_actions选择；提交和到达时仍会按当前位置、是否正忙和真实资源重验。harvest_ration只表示可以尝试前往公共采集点，不保证到达时仍有库存或一定成功取得口粮。",
-		"communication": "你的reason是私人选择理由，不会自动说给别人听。泛化help只询问是否有空；标明工具和部位的repair求助才会传达具体问题。willing只是愿意交谈，不是接受收费委托。wood_repair修木柄，metal_repair修金属斧刃；是否帮忙由本人选择。",
-		"repair": "price_col是该笔修理的固定总报酬（Col），不是单价或估算，无其他费率。旧合同和普通报价的settlement是collection：接受后该金额从物主钱包转入预留资金，交付后施工60秒，修好不立即付款，物主取回工具时预留金额全额转入工人钱包。如果可选报价标明completion，表示完工结算：同样先预留、交付和60秒施工，只有成功消耗材料并把部位修到100后才转移这笔既有预留金额，collect只返还工具且不再次付款。修斧刃消耗工人的1铁，修斧柄消耗1木。可因时间、材料或物主不来取回的风险拒绝，愿意交谈不等于接受合同。"}
+	view["known_rules"] = {"axe_use": "To make 1 kindling, you must hold your own hatchet with both edge and handle at 100, stand at your own workstation and consume 1 wood. Repairing only one part is not enough.",
+		"basic_needs": "satiety=0 or energy=0 does not itself prevent movement or listed actions such as rest and harvest_ration. Choose only from available_actions. Position, busy state and real resources are checked again on submission and arrival. harvest_ration permits an attempt to reach the public foraging point; it does not guarantee remaining stock or a successful harvest.",
+		"communication": "Your reason is private and is not automatically spoken. General help only asks whether someone is available; a repair request naming the tool and part conveys the specific problem. willing means willingness to talk, not acceptance of a paid job. wood_repair repairs wooden handles and metal_repair repairs metal axe edges. Each person chooses whether to help.",
+		"repair": "price_col is the fixed total payment in Col for this repair, not a unit price or estimate; there are no other rates. Legacy contracts and ordinary offers use settlement=collection: acceptance moves that amount from the owner's wallet into reserved funds, delivery permits 60 seconds of work, and payment transfers to the worker only when the owner collects the repaired tool. If an offered contract says completion, the same reservation, delivery and 60 seconds of work apply, but payment transfers only after consuming material and restoring the part to 100; collection returns the tool without paying again. Edge repair consumes 1 of the worker's iron, handle repair 1 wood. You may decline because of time, materials or the risk of delayed collection. Willingness to talk is not contract acceptance."}
 
 	view["unavailable_actions"] = []
 	for item in own_items:
 		if item.get("kind") == "axe" and item.get("owner_id") == id:
 			if item.edge < 100 or item.handle < 100:
 				view.unavailable_actions.append({"action": "use_tool", "item_id": item.id,
-					"reason": "工具仍需修理", "edge": item.edge, "handle": item.handle, "required_each": 100})
+					"reason": "The tool still needs repair.", "edge": item.edge, "handle": item.handle, "required_each": 100})
 			if item.get("custodian_id") != id:
 				view.unavailable_actions.append({"action": "use_tool", "item_id": item.id,
-					"reason": "工具属于你，但当前不由你持有。实际取回后才能使用。", "custodian_id": item.get("custodian_id")})
+					"reason": "You own the tool but do not currently hold it. Collect it before using it.", "custodian_id": item.get("custodian_id")})
 	for contract in own_contracts:
 		if contract.get("owner_id") != id or contract.get("worker_id") not in active_ids():
 			continue
 		if contract.get("status") in ["accepted", "completed"] and not _near(id, contract.worker_id):
 			var action := "collect" if contract.status == "completed" else "deliver"
 			view.unavailable_actions.append({"action": action, "contract_id": contract.id, "counterparty": contract.worker_id,
-				"reason": "交付和取回都需要双方在3米交接范围内。你目前不在工人身边；先接近该工人后才能交接，这不是系统还在处理。"})
+				"reason": "Delivery and collection require both people to be within 3 meters. You are not near the worker; approach them first. The handoff is unavailable, not still processing."})
 	for contract in own_contracts:
 		if contract.get("worker_id") != id or contract.get("status") != "proposed":
 			continue
@@ -1587,7 +1587,7 @@ func resident_view(id: String = "") -> Dictionary:
 		if item.get("custodian_id") == id and _part_damaged(item, part) and _has_skill(id, _required_skill(part)) and _trade_account(id).get(material, -1) < 1:
 			view.unavailable_actions.append({"action": "work", "contract_id": contract.id,
 				"counterparty": contract.owner_id, "part": part, "code": "material_unavailable",
-				"reason": "工具已交给你，但施工必须消耗你自己的1" + ("铁" if part == "edge" else "木") + "；你目前不足1，因此现在不能施工。先取得材料后再继续。",
+				"reason": "The tool has been delivered, but work requires 1 unit of your own " + ("iron" if part == "edge" else "wood") + ". You have less than 1, so work cannot begin. Obtain the material first.",
 				"required_material": material, "required_quantity": 1})
 	var public_roles: Array = []
 	for other in active_ids():
@@ -1595,7 +1595,7 @@ func resident_view(id: String = "") -> Dictionary:
 			continue
 		var skills := _public_skills(id, other)
 		if not skills.is_empty():
-			public_roles.append({"id": other, "name": resident(other).name, "role": resident(other).role, "skills": skills})
+			public_roles.append({"id": other, "name": resident_name(other), "role": resident(other).role, "skills": skills})
 	view["nearby_skilled_roles"] = public_roles
 	return view
 

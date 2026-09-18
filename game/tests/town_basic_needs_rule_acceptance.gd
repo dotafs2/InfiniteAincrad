@@ -20,8 +20,8 @@ func run() -> void:
 		"zero energy and satiety do not remove the authoritative rest or harvest choices")
 	var rule := str(town.resident_view(id).get("known_rules", {}).get("basic_needs", ""))
 	check(rule.contains("satiety=0") and rule.contains("energy=0")
-		and rule.contains("不会禁止移动") and rule.contains("available_actions")
-		and rule.contains("不保证") and rule.contains("库存"),
+		and rule.contains("does not itself prevent movement") and rule.contains("available_actions")
+		and rule.contains("does not guarantee") and rule.contains("stock"),
 		"the personal view states the zero-needs, revalidation and no-stock-guarantee boundaries")
 	town.release_writer(path)
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))

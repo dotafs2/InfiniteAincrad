@@ -50,11 +50,11 @@ func _projection_text_from(state: Dictionary, custodian_id: String) -> String:
 		return ""
 	if held.size() == 1:
 		var only: Dictionary = held[0]
-		return "持有斧头 · 刃 %d · 柄 %d" % [int(only.get("edge", 0)), int(only.get("handle", 0))]
+		return "Holding a hatchet - Edge %d - Handle %d" % [int(only.get("edge", 0)), int(only.get("handle", 0))]
 	var parts: Array[String] = []
 	for index in held.size():
 		var item: Dictionary = held[index]
-		parts.append("斧%d · 刃 %d · 柄 %d" % [index + 1, int(item.get("edge", 0)), int(item.get("handle", 0))])
+		parts.append("Axe %d - Edge %d - Handle %d" % [index + 1, int(item.get("edge", 0)), int(item.get("handle", 0))])
 	return "\n".join(parts)
 
 ## Pure read-only projection lines for every custodian, keyed by resident id.
@@ -79,7 +79,7 @@ func _process(_delta: float) -> void:
 		var actor: Node3D = actors[item.custodian_id]
 		axes[item.id].global_transform = actor.global_transform
 		axes[item.id].global_position = actor.to_global(Vector3(0.32, 0.75, -0.12))
-		lines.append("斧刃 %d · 斧柄 %d\n持有人：%s" % [item.edge, item.handle, town.resident(item.custodian_id).name])
+		lines.append("Axe edge %d - Handle %d\nHeld by: %s" % [item.edge, item.handle, town.resident_name(item.custodian_id)])
 		facts.global_position = actor.global_position + Vector3(0, 2.7, 0)
 	for account in state.life.get("accounts", []):
 		if materials.has(account.resident_id):

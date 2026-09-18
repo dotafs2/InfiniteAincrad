@@ -2,7 +2,7 @@ extends Node3D
 ## Isolated art street. No resident simulation, save writer or model calls.
 const HOUSE := preload("res://spatial/residence_component.gd")
 const PLANTS := preload("res://spatial/environment_v2.gd")
-const LABELS := ["菩提庭院宅", "铜檐窄街宅", "蔷薇花院宅", "鼠尾草长廊宅", "青瓷转角宅"]
+const LABELS := ["Linden Courtyard House", "Copper-Eave Townhouse", "Rose Garden House", "Sage Gallery House", "Celadon Corner House"]
 var _houses: Array[Node3D] = []
 var _camera: Camera3D
 var _label: Label
@@ -48,7 +48,7 @@ func _ready() -> void:
 	_label.add_theme_color_override("font_shadow_color",Color("25322c"))
 	_label.add_theme_constant_override("shadow_offset_x",2)
 	_label.add_theme_constant_override("shadow_offset_y",2)
-	_label.text = "起始之镇 · 五种居民住宅\n原创外观 / 2K PBR / 三档 LOD"
+	_label.text = "Starting Town - Five Resident Houses\nOriginal exteriors / 2K PBR / Three LOD levels"
 	layer.add_child(_label)
 	if not _capture_dir.is_empty(): call_deferred("_capture")
 
@@ -148,7 +148,7 @@ func _capture() -> void:
 			mesh.visibility_range_begin = 0.0
 			mesh.visibility_range_end = 0.0
 			mesh.visible = int(mesh.get_meta("lod")) == 0
-		_label.text = "%02d  %s\n起始之镇 · 住宅外观" % [i+1,LABELS[i]]
+		_label.text = "%02d  %s\nStarting Town - House Exterior" % [i+1,LABELS[i]]
 		var bounds: AABB = house.get_meta("bounds")
 		var target := bounds.get_center()
 		var distance := maxf(bounds.size.y*1.48,bounds.size.x*1.4)
@@ -165,7 +165,7 @@ func _capture() -> void:
 			checker_shader.code = "shader_type spatial; void fragment(){vec2 p=UV*8.0;float c=mod(floor(p.x)+floor(p.y),2.0);ALBEDO=mix(vec3(.08,.19,.23),vec3(.75,.83,.75),c);ROUGHNESS=.85;}"
 			var checker := ShaderMaterial.new()
 			checker.shader = checker_shader
-			_label.text = "UV0 检查 · 每格 25 cm\n按米铺展 / 木构跟随轴向 / 重复 UV 用于平铺材质"
+			_label.text = "UV0 Check - 25 cm grid\nMeter-based scale / Timber follows its axis / Repeated UVs for tiled materials"
 			for mesh: MeshInstance3D in house.find_children("*","MeshInstance3D",true,false): mesh.material_override = checker
 			await _shot("uv0_checker")
 			for mesh: MeshInstance3D in house.find_children("*","MeshInstance3D",true,false): mesh.material_override = null
@@ -263,7 +263,7 @@ func _catalogue() -> void:
 	note.position = Vector2(12+2*(card_size.x+12)+28,12+(card_size.y+12)+65)
 	note.add_theme_font_size_override("font_size",27)
 	note.add_theme_color_override("font_color",Color("43594f"))
-	note.text = "起始之镇\nRESIDENCES 01–05\n\n石灰岩 · 木构 · 瓦顶\n2K PBR / 双 UV / 三档 LOD\n\nGodot 实时渲染\n原创住宅外观 · 非室内成品"
+	note.text = "Starting Town\nRESIDENCES 01-05\n\nLimestone - Timber - Tile Roofs\n2K PBR / Dual UV / Three LOD levels\n\nGodot real-time rendering\nOriginal exteriors - interiors not finished"
 	layer.add_child(note)
 	await _shot("catalogue")
 	layer.queue_free()

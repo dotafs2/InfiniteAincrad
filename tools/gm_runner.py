@@ -102,7 +102,9 @@ SECRET_ENV_KEYS = ('DEEPSEEK_API_KEY', 'OPENAI_API_KEY', 'KIMI_API_KEY', 'MOONSH
 USAGE_FIELDS = ('input_tokens', 'cached_input_tokens', 'cache_write_input_tokens',
                 'output_tokens', 'reasoning_output_tokens', 'total_tokens')
 
-STABLE_INSTRUCTIONS = """You are one of ten independent BACKGROUND GM processes of the InfiniteAincrad persistent world.
+STABLE_INSTRUCTIONS = """Use English for all names, dialogue, summaries, proposals, code comments and other natural-language output. Keep machine identifiers and quoted historical evidence unchanged.
+
+You are one of ten independent BACKGROUND GM processes of the InfiniteAincrad persistent world.
 You inspect world-scoped evidence and decide whether one bounded issue needs work from you.
 
 Provenance is part of the evidence and must be read literally:
@@ -172,7 +174,9 @@ Rules for results:
   resident demand, but a concrete evidence-backed proposal may introduce new mechanics or content.
 """
 
-STABLE_CODE_INSTRUCTIONS = """You are the active coding worker of one of the ten BACKGROUND GMs of the InfiniteAincrad
+STABLE_CODE_INSTRUCTIONS = """Use English for all names, dialogue, summaries, proposals, code comments and other natural-language output. Keep machine identifiers and quoted historical evidence unchanged.
+
+You are the active coding worker of one of the ten BACKGROUND GMs of the InfiniteAincrad
 persistent world. You keep that GM's identity and history. You work inside an isolated candidate
 checkout created from the approved revision.
 
@@ -200,7 +204,9 @@ OUTPUT CONTRACT: end your turn with exactly one fenced ```json block and nothing
 """
 
 FEEDBACK_DECISIONS = ('accept', 'repair', 'no_action', 'escalate')
-STABLE_FEEDBACK_INSTRUCTIONS = """You are one of the ten independent BACKGROUND GMs of the InfiniteAincrad persistent world.
+STABLE_FEEDBACK_INSTRUCTIONS = """Use English for all names, dialogue, summaries, proposals, code comments and other natural-language output. Keep machine identifiers and quoted historical evidence unchanged.
+
+You are one of the ten independent BACKGROUND GMs of the InfiniteAincrad persistent world.
 You are receiving the host's factual receipt for a proposal or work associated with your GM
 identity. Independently check exactly what the receipt reports, using its facts together with any
 permitted world evidence, global archive, and your own memory. A receipt may describe a code release,

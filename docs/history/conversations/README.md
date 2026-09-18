@@ -1,23 +1,23 @@
-# 对话历史与接续入口
+# Conversation history and continuity
 
-项目结论看 [HISTORY.md](../../../HISTORY.md)，当前方向看 [ROADMAP.md](../../../ROADMAP.md)。这里另外保存用户与助手的可见消息原文，避免只有结论、丢失纠正和授权背景。
+Use [HISTORY.md](../../../HISTORY.md) for project findings and [ROADMAP.md](../../../ROADMAP.md) for the current direction. This directory preserves original visible user/assistant messages, including corrections and authorization context.
 
-| 任务 | 对话原文 | 核验 | 当前接续 |
+| Task | Original conversation | Verification | Continue |
 | --- | --- | --- | --- |
-| 2026-09-18，本机接收、离线修复与完整流程演练 | [按时间阅读](2026-09-18-01a0b299/conversation.md) · [结构化原文](2026-09-18-01a0b299/conversation.json) | [时间范围、数量与 SHA-256](2026-09-18-01a0b299/manifest.json) | [接续说明](2026-09-18-01a0b299/CONTINUE.md) |
+| 2026-09-18: local intake, offline fixes, workflow rehearsal and English rollout | [Chronological Markdown](2026-09-18-01a0b299/conversation.md) · [Structured messages](2026-09-18-01a0b299/conversation.json) | [Scope, counts and SHA-256](2026-09-18-01a0b299/manifest.json) | [Current handoff](2026-09-18-01a0b299/CONTINUE.md) |
 
-这是单个任务的消息快照，不等于本机全部任务、另一台电脑的原始对话或游戏 GM/NPC 记忆。未保存的旧消息不能从流水摘要反向编造。内部推理、系统消息、工具输出、凭证和私有世界状态不属于这里的上传内容。
+This snapshot covers one task. It is not every local task, the other computer's original conversation or game GM/NPC memory. Missing messages cannot be reconstructed from summaries. Internal reasoning, system messages, tool output, credentials and private world state are excluded. Original Chinese conversation remains Chinese; metadata and new project documents use English.
 
-## 每次交付的步骤
+## Each delivery
 
-1. 用当前任务 ID 精确定位本机日志，不扫描全部任务，不复制原始日志。
-2. 导出到本任务的固定目录。工具拒绝覆盖成更短的历史、身份不匹配、截断记录、未处理附件或疑似凭证。
-3. 更新接续说明和 HISTORY.md：做了什么、测试结论、具体限制、下一步。
-4. 只暂存本轮明确文件；得到上传授权后提交、推送，核验远程分支 SHA 和远程归档文件。
-5. 向用户报告上传的提交及消息截止时间。答复之后的消息不可能已经包含在之前的快照里；下轮按原目录增量补齐。
+1. Identify the exact local log by task ID; do not scan all tasks or copy a raw log.
+2. Export to this task's existing directory. The tool rejects shortened/replaced history, identity mismatch, truncated records, unhandled attachments and suspected credentials.
+3. Update CONTINUE.md and HISTORY.md with results, verification, limitations and next steps.
+4. Stage only reviewed files. For an authorized upload, commit, push and verify the remote branch SHA plus downloaded archive hashes.
+5. Report the actual cutoff. Later messages, including a subsequent final answer, enter the next incremental refresh.
 
 ```powershell
-python -X utf8 tools/archive_conversation.py --session '本任务的完整 JSONL 路径' --thread-id '本任务 ID' --out 'docs/history/conversations/本任务目录'
+python -X utf8 tools/archive_conversation.py --session 'exact task JSONL path' --thread-id 'exact task ID' --out 'docs/history/conversations/task-directory'
 ```
 
-`manifest.json` 中的原文文件哈希可在另一台机器拉取后核对；源日志哈希对应导出时读取的字节范围，后续本机日志增长不改变既有消息。
+The manifest hashes let another computer verify the message files. The source-log hash covers bytes read at export time; later additions do not replace earlier messages.

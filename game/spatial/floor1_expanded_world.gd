@@ -1524,8 +1524,8 @@ func _make_small_label() -> void:
 	plate.size = Vector2(222, 35) if short_tour_label else Vector2(735, 35)
 	layer.add_child(plate)
 	var label := Label.new()
-	label.text = ("第一层 · 美术样板" if short_tour_label else
-		"第一层 · 原创美术样板   |   WASD WALK · E DOOR · F WINDOW · ESC MOUSE")
+	label.text = ("Floor One - Art Preview" if short_tour_label else
+		"Floor One - Original Art Preview | WASD WALK - E DOOR - F WINDOW - ESC MOUSE")
 	label.position = Vector2(22, 17)
 	label.add_theme_font_size_override("font_size", 16)
 	label.modulate = Color("e5e8de")

@@ -20,14 +20,14 @@ from pathlib import Path
 
 def fixture():
     people = [
-        ('fixture:innkeeper', '测试旅店主', 'innkeeper', [-2, .22, 7],
-         '我经营一间测试旅店，想用自己已有的木料准备引火柴。我珍惜自己的柴斧，会权衡修理费用，也可以拒绝或等待。'),
-        ('fixture:smith', '测试铁匠', 'smith', [0, .22, 7],
-         '我是测试铁匠，靠金属修理谋生。我希望得到合理报酬，先了解委托再决定接不接，不替别人作决定。'),
-        ('fixture:carpenter', '测试木匠', 'carpenter', [-2, .22, 5],
-         '我是测试木匠，能修木柄。我重视踏实的工作和明确的交付，也有权拒绝不合适的委托。'),
+        ('fixture:innkeeper', 'Test Innkeeper', 'innkeeper', [-2, .22, 7],
+         'I run a test inn and want to make kindling from wood I already own. I value my hatchet, weigh repair costs and may decline or wait.'),
+        ('fixture:smith', 'Test Smith', 'smith', [0, .22, 7],
+         'I am a test smith earning a living by repairing metal. I want fair payment and will learn about a job before accepting. I do not decide for others.'),
+        ('fixture:carpenter', 'Test Carpenter', 'carpenter', [-2, .22, 5],
+         'I am a test carpenter who can repair wooden handles. I value careful work and clear delivery terms, and may decline unsuitable jobs.'),
     ]
-    residents = [dict(stable_id=i, name=n, role=r, story=s, personality='谨慎、独立',
+    residents = [dict(stable_id=i, name=n, role=r, story=s, personality='Cautious and independent',
                       coins_col=20 if index == 0 else 5, needs={'hunger': 95},
                       runtime={'fixture_only': True}) for index, (i, n, r, p, s) in enumerate(people)]
     life = dict(seq=0, events=[], contracts=[], applied=[], relations=[], inboxes=[],
@@ -67,26 +67,26 @@ def shared_world_seed(world_id: str, label: str = '') -> dict:
     an already achieved life history.
     """
     people = [
-        ('shared:well-keeper', '阿岚', 'interest_water',
-         '我总在街口水槽边停留，喜欢看水怎么被人分走；我还没学会怎么把水变成生计。'),
-        ('shared:baker', '白枝', 'interest_baking',
-         '我常闻面包铺的味道，想有一天学会烤面包；现在只是自己找吃的。'),
-        ('shared:smith', '石青', 'repair_metal',
-         '我会修铁器，希望靠这份手艺换口粮；接不接委托由我自己决定。'),
-        ('shared:carpenter', '木生', 'repair_wood',
-         '我会修木柄，看重明确的交付和报酬；我可以拒绝不合适的活。'),
-        ('shared:innkeeper', '灯姐', 'interest_hospitality',
-         '我喜欢看街上人来人往，想以后守着住处招呼客人；现在住处只是我自己住。'),
-        ('shared:herder', '草见', 'interest_herding',
-         '我对牲畜有兴趣，喜欢看它们被人照顾；我还没有自己的牲畜。'),
-        ('shared:gardener', '叶禾', 'interest_gardening',
-         '我留意街边的植物，想学着照料一小片地；现在只是观察。'),
-        ('shared:weaver', '细娘', 'interest_weaving',
-         '我喜欢摸布料，想以后学会织东西；现在只是有耐心。'),
-        ('shared:fisher', '渡白', 'interest_fishing',
-         '我喜欢待在近水的地方，想着以后能靠水吃饭；我还没有网或船。'),
-        ('shared:healer', '枚青', 'interest_herbs',
-         '我留意药草的样子，想以后能帮人处理小伤；我还没有行医的能力。'),
+        ('shared:well-keeper', 'Ari', 'interest_water',
+         'I often stop by the street\'s water trough and watch people share the water. I have not learned how to make a living from it.'),
+        ('shared:baker', 'Wren', 'interest_baking',
+         'I often notice the smell from the bakery and hope to learn to bake one day. For now, I find food for myself.'),
+        ('shared:smith', 'Flint', 'repair_metal',
+         'I can repair metal tools and hope to exchange that skill for food. I decide for myself whether to accept a job.'),
+        ('shared:carpenter', 'Rowan', 'repair_wood',
+         'I can repair wooden handles. I value clear delivery terms and fair payment, and may decline unsuitable work.'),
+        ('shared:innkeeper', 'Mara', 'interest_hospitality',
+         'I enjoy watching people come and go and hope to welcome guests at my home someday. For now, it is only my own home.'),
+        ('shared:herder', 'Heath', 'interest_herding',
+         'I am interested in livestock and enjoy watching people care for animals. I do not have any animals of my own.'),
+        ('shared:gardener', 'Fern', 'interest_gardening',
+         'I notice the plants along the street and hope to learn to tend a small plot. For now, I only observe.'),
+        ('shared:weaver', 'Iris', 'interest_weaving',
+         'I enjoy feeling different fabrics and hope to learn weaving someday. For now, patience is what I have.'),
+        ('shared:fisher', 'Reed', 'interest_fishing',
+         'I like spending time near water and hope to make a living from it someday. I do not have a net or a boat.'),
+        ('shared:healer', 'Sage', 'interest_herbs',
+         'I study the appearance of herbs and hope to help with small injuries someday. I do not yet have the skills to practice medicine.'),
     ]
     positions = _grid_positions(len(people))
     residents = []
@@ -94,12 +94,12 @@ def shared_world_seed(world_id: str, label: str = '') -> dict:
     life_accounts = []
     for index, (stable_id, name, role, story) in enumerate(people):
         residents.append(dict(stable_id=stable_id, name=name, role=role, story=story,
-                              interests=[role], personality='谨慎、独立', coins_col=5 + index,
+                              interests=[role], personality='Cautious and independent', coins_col=5 + index,
                               needs={'hunger': 60.0},
                               runtime={'fixture_only': False,
                                        'genesis': 'declared starting resident of a new world seed',
-                                       'capability_note': ('role 只是兴趣或背景；实际能做什么由世界规则'
-                                                           '决定，本种子不授予职业能力')}))
+                                       'capability_note': ('A role is only an interest or background; world rules '
+                                                           'determine actual abilities. This seed grants no occupational capabilities.')}))
         survival_accounts.append(dict(resident_id=stable_id, food=1, energy=60.0))
         # Explicit allocations preserve the first ten-world seed's actual genesis.
         # Background labels never grant inventory or an achieved occupation.

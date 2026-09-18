@@ -11,7 +11,7 @@ var well_water := 0
 var carried_water := 0
 var consumed_water := 0
 var enabled := false
-var activity := "井水够不到，先想想办法。"
+var activity := "I cannot reach the well water. I need to think of a way."
 var motion := true
 var pulse := 0.0
 var font: Font
@@ -71,7 +71,7 @@ func _draw() -> void:
 			var x := col * 86 - (40 if row % 2 == 0 else 0)
 			draw_line(Vector2(x, 281 + row * 20), Vector2(x + 68, 281 + row * 20), Color("acb5ab"), 1)
 	draw_rect(Rect2(0, 335, 720, 115), Color("344b58"))
-	_text(Vector2(27, 362), "井下剖面 / 有限的水", 15, Color("d2e3e6"))
+	_text(Vector2(27, 362), "Well cross-section / Finite water", 15, Color("d2e3e6"))
 	# Well stonework, opening and the gated bucket rig.
 	draw_rect(Rect2(295, 267, 130, 125), Color("788c92"))
 	draw_rect(Rect2(308, 287, 104, 111), Color("263f4e"))
@@ -113,9 +113,9 @@ func _draw() -> void:
 		draw_line(Vector2(pot_x + 11, 293), Vector2(pot_x + 11, 259), LEAF, 4)
 		draw_circle(Vector2(pot_x + 4, 274), 10, LEAF)
 		draw_circle(Vector2(pot_x + 20, 266), 10, LEAF)
-	_text(Vector2(30, 40), "独立试验庭院", 19)
-	_text(Vector2(30, 64), "测试居民 · 并非原档迁移", 14, Color("526975"))
-	_text(Vector2(28, 390), "井内 %d  +  随身 %d  +  已饮用 %d" % [well_water, carried_water, consumed_water], 17, Color("e4eff0"))
+	_text(Vector2(30, 40), "Independent Test Courtyard", 19)
+	_text(Vector2(30, 64), "Test resident - not migrated from the original save", 14, Color("526975"))
+	_text(Vector2(28, 390), "Well %d + Carried %d + Drunk %d" % [well_water, carried_water, consumed_water], 17, Color("e4eff0"))
 	_text(Vector2(28, 419), activity, 15, Color("c4d5d9"))
 
 func draw_ellipse_shadow() -> void:

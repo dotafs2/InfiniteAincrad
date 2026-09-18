@@ -17,7 +17,7 @@ extends RefCounted
 ## stock, interiors or another resident.
 const NOTICE := {
 	"id": "public_notice:market_exit",
-	"label": "旧市场出口的公共路牌",
+	"label": "Public Sign at the Old Market Exit",
 	"asset": "res://assets/generated/travel_cargo_20260912/carved_route_waystone.glb",
 	## Measured site at the market/street exit: the floor is 0.22 m, no other collider occupies the
 	## spot, and 142 of the 144 measured clear standing positions within 8 m can see it (the two
@@ -28,7 +28,7 @@ const NOTICE := {
 	"yaw": 200.0,
 	"point": [-3.0, 1.32, 12.0],
 	"read_range_m": 8.0,
-	"text": "路牌上写着：沿街向南可以走到西边的空地、街口的公共花园，再往东南是商队歇脚的空场；这些地方都可以走过去，也能站一会儿歇脚。牌子上没有写别的事。",
+	"text": "The sign reads: Follow the street south to the western forecourt and the public garden at the crossroads, then southeast to the caravan rest ground. You may walk to these places and pause there. The sign provides no other information.",
 }
 const DIRECT_SIGHT_RANGE := 20.0
 
@@ -99,29 +99,29 @@ const PLACE_CAPACITY := 10
 const PLACES := [
 	{
 		"id": "market_plaza",
-		"label": "旧市场广场",
-		"public_use": "旧市场外面的公共铺石广场，沿街走过来站一会儿就行。",
+		"label": "Old Market Plaza",
+		"public_use": "A public paved plaza outside the old market. You can walk here along the street and stay for a while.",
 		"point": [2.5, 0.22, 14.5],
 		"node": "plaza",
 	},
 	{
 		"id": "west_forecourt",
-		"label": "西侧工匠前庭",
-		"public_use": "西边街尾的一块公共空地，沿街走过去就能站下来。",
+		"label": "Western Artisans' Forecourt",
+		"public_use": "A public open space at the western end of the street. You can walk there and stop.",
 		"point": [-20.8, 0.10, 40.0],
 		"node": "west_end",
 	},
 	{
 		"id": "planted_commons",
-		"label": "种植公共地",
-		"public_use": "街口十字路边的公共绿地，可以走过去站一会儿。",
+		"label": "Planted Commons",
+		"public_use": "Public greenery at the crossroads. You can walk there and stay for a while.",
 		"point": [0.0, 0.10, 53.0],
 		"node": "commons",
 	},
 	{
 		"id": "caravan_rest",
-		"label": "商队休息区",
-		"public_use": "东南边街尾的空场，商队在那里歇脚，路人也可以走过去站着。",
+		"label": "Caravan Rest Ground",
+		"public_use": "Open ground at the southeastern end of the street where caravans rest. Passersby may also walk there and stop.",
 		"point": [25.9, 0.06, 72.9],
 		"node": "se_arm_end",
 	},

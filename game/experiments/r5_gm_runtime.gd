@@ -132,8 +132,8 @@ func _meal_report(meal: Dictionary, now: float) -> Dictionary:
 func _warm_option_label(meal: Dictionary, now: float) -> String:
 	var report := _meal_report(meal, now)
 	if bool(report.cooled):
-		return "在自己的工作点用%.0f秒吃掉这份温热食物（已放凉，恢复饱腹约%.0f，消耗该成品一次）" % [WARM_EAT_SECONDS, WARM_SATIETY_COOLED]
-	return "在自己的工作点用%.0f秒吃掉这份温热食物（还剩约%.0f分钟温热，恢复饱腹约%.0f，消耗该成品一次）" % [WARM_EAT_SECONDS, float(report.fresh_remaining_seconds) / 60.0, WARM_SATIETY_FRESH]
+		return "At your own workstation, spend %.0f seconds eating this prepared meal (now cold; restores about %.0f satiety and consumes the meal once)." % [WARM_EAT_SECONDS, WARM_SATIETY_COOLED]
+	return "At your own workstation, spend %.0f seconds eating this warm meal (warm for about %.0f more minutes; restores about %.0f satiety and consumes the meal once)." % [WARM_EAT_SECONDS, float(report.fresh_remaining_seconds) / 60.0, WARM_SATIETY_FRESH]
 
 ## ---------------------------------------------------------------------------
 ## Option surface (model-facing choices, re-derived on submit)
@@ -148,7 +148,7 @@ func trade_options(id: String) -> Array:
 	var now := float(_state.godot.elapsed_seconds)
 	if int(foods.get("food", 0)) >= 1 and held.size() < WARM_HELD_LIMIT:
 		_option(result, {"id": WARM_PREPARE_OPTION, "action": WARM_PREPARE_ACTION, "speech_allowed": false,
-			"label": "在自己的工作点工作%.0f秒，把1份口粮加工成1份温热食物（扣1份口粮，成品先带着不马上吃；约%.0f分钟后变凉）" % [WARM_PREPARE_SECONDS, WARM_FRESH_SECONDS / 60.0]})
+			"label": "Work at your own workstation for %.0f seconds to turn 1 ration into 1 warm meal (consumes 1 ration; carry the meal without eating it immediately; cools in about %.0f minutes)." % [WARM_PREPARE_SECONDS, WARM_FRESH_SECONDS / 60.0]})
 	if float(resident(id).needs.get("hunger", 0.0)) <= WARM_EAT_MAX_HUNGER:
 		for meal in held:
 			_option(result, {"id": WARM_EAT_OPTION_PREFIX + str(meal.meal_id), "action": WARM_EAT_ACTION,
@@ -327,14 +327,14 @@ func _abandon_warm_job(id: String, job: Dictionary) -> Dictionary:
 
 func _warm_blocked_text(id: String, action: String, reason: String) -> String:
 	if reason == "work_point_unreachable":
-		return "我一直在往自己的工作点走，但这段路没有前进，所以这次%s没能完成；我没有消耗口粮，也没有得到温热食物。" % ("加工" if action == WARM_PREPARE_ACTION else "进食")
+		return "I kept walking toward my workstation but made no progress, so this attempt at %s did not finish. I consumed no ration and received no warm meal." % ("preparing food" if action == WARM_PREPARE_ACTION else "Eating")
 	if reason == "ration_unavailable":
-		return "我到了自己的工作点，但手上已经没有口粮了，这次加工没有完成，也没有产生温热食物。"
+		return "I reached my workstation, but I no longer had a ration. Preparation did not finish and produced no warm meal."
 	if reason == "held_limit_reached":
-		return "我手上的温热食物已经到了携带上限，这次加工没有开始，也没有消耗口粮。"
+		return "I am carrying the maximum number of warm meals. Preparation did not start and consumed no ration."
 	if reason == "meal_unavailable":
-		return "我要吃的那份温热食物已经不在手上，这次进食没有完成，也没有恢复饱腹。"
-	return "这次温热食物动作没有完成。"
+		return "I no longer have the warm meal I meant to eat. Eating did not finish and restored no satiety."
+	return "This warm-meal action did not finish."
 
 func _complete_prepare(id: String, job: Dictionary) -> Dictionary:
 	var foods: Dictionary = account(id)
@@ -360,7 +360,7 @@ func _complete_prepare(id: String, job: Dictionary) -> Dictionary:
 		"operation_id": str(job.get("command_id", "")), "source": str(job.get("provenance", "local_rule_policy")),
 		"meal_id": meal_id, "prepared_elapsed": now, "fresh_until_elapsed": fresh_until,
 		"work_seconds": WARM_PREPARE_SECONDS, "work_point": job.get("target_position", []).duplicate(),
-		"text": "我在自己的工作点工作了%.0f秒，把1份口粮加工成了1份温热食物；它由我自己带着，没有马上吃掉，大约%.0f分钟内还热。" % [WARM_PREPARE_SECONDS, WARM_FRESH_SECONDS / 60.0]})
+		"text": "I worked at my workstation for %.0f seconds to turn 1 ration into 1 warm meal. I carry it myself and have not eaten it; it should stay warm for about %.0f minutes." % [WARM_PREPARE_SECONDS, WARM_FRESH_SECONDS / 60.0]})
 	return receipt
 
 func _complete_eat(id: String, job: Dictionary) -> Dictionary:
@@ -388,7 +388,7 @@ func _complete_eat(id: String, job: Dictionary) -> Dictionary:
 		"meal_id": meal_id, "prepare_command_id": str(item.get("prepare_command_id", "")),
 		"prepared_elapsed": float(item.get("prepared_elapsed", 0.0)), "eaten_elapsed": now, "cooled": cooled,
 		"satiety_gained": float(needs.hunger) - before,
-		"text": "我把带在身上的那份温热食物%s吃掉了，饱腹从%.0f变成%.0f；成品已经不在手上。" % ["（已经放凉）" if cooled else "", before, float(needs.hunger)]})
+		"text": "I ate the prepared meal I was carrying%s. My satiety changed from %.0f to %.0f; I no longer carry that meal." % [" (now cold)" if cooled else "", before, float(needs.hunger)]})
 	return receipt
 
 func _reject_warm_job(id: String, job: Dictionary, code: String, reason: String) -> Dictionary:
@@ -429,7 +429,7 @@ func resident_view(id: String = "") -> Dictionary:
 		"fresh_seconds": WARM_FRESH_SECONDS, "satiety_fresh": WARM_SATIETY_FRESH,
 		"satiety_cooled": WARM_SATIETY_COOLED, "held_limit": WARM_HELD_LIMIT,
 		"held_meals": report,
-		"abstraction": "加工与进食都要求你本人在自己的工作点（保存里你固定的家/工作点）%.1f米内；加工扣掉1份口粮并产出1份可以带走的新成品，进食时才消耗这份成品，成品只在运行时按世界时间变凉。" % WARM_WORK_POINT_RANGE}
+		"abstraction": "Preparing and eating require you to be within %.1f meters of your own fixed home/workstation in the save. Preparation consumes 1 ration and creates 1 portable meal; only eating consumes that meal. Meals cool according to world time while the world runs." % WARM_WORK_POINT_RANGE}
 	if not job.is_empty():
 		var job_target := _vector(job.get("target_position", [0, 0, 0]))
 		view["pending"] = {"action": str(job.get("action", "")), "command_id": str(job.get("command_id", "")),
@@ -439,19 +439,19 @@ func resident_view(id: String = "") -> Dictionary:
 			"target_position": job.get("target_position", []).duplicate(),
 			"at_work_point": position_of(id).distance_to(job_target) <= WARM_WORK_POINT_RANGE,
 			"meal_id": str(job.get("meal_id", "")),
-			"note": "进行中：时间只在你真的站在自己的工作点时累计。"}
-	view["known_rules"]["warm_food"] = "温热食物：在自己的工作点花%.0f秒把1份口粮加工成1份温热食物（扣1份口粮，产出的是新成品，不会自动吃掉），成品最多同时带%d份；之后在自己的工作点花%.0f秒吃掉其中一份成品，恢复饱腹约%.0f（放凉后约%.0f）；成品放%.0f分钟变凉，都是世界时间。" % [WARM_PREPARE_SECONDS, WARM_HELD_LIMIT, WARM_EAT_SECONDS, WARM_SATIETY_FRESH, WARM_SATIETY_COOLED, WARM_FRESH_SECONDS / 60.0]
+			"note": "In progress: time counts only while you stand at your own workstation."}
+	view["known_rules"]["warm_food"] = "Warm meals: work at your workstation for %.0f seconds to turn 1 ration into 1 warm meal (a new product, not eaten automatically). Carry at most %d meals. Later, spend %.0f seconds at your workstation eating one meal to restore about %.0f satiety (about %.0f if cold). Meals cool after %.0f minutes of world time." % [WARM_PREPARE_SECONDS, WARM_HELD_LIMIT, WARM_EAT_SECONDS, WARM_SATIETY_FRESH, WARM_SATIETY_COOLED, WARM_FRESH_SECONDS / 60.0]
 	var unavailable: Array = view.get("unavailable_actions", [])
 	if job.is_empty() and not _busy(id):
 		if int(foods.get("food", 0)) < 1:
 			unavailable.append({"action": WARM_PREPARE_ACTION, "rations_held": 0,
-				"reason": "你现在没有口粮，加工需要先有1份口粮（先采集或留着口粮）。"})
+				"reason": "You have no ration. Preparation requires 1 ration first; forage or keep a ration."})
 		if held.size() >= WARM_HELD_LIMIT:
 			unavailable.append({"action": WARM_PREPARE_ACTION, "held_meals": held.size(),
-				"reason": "你身上已有%d份温热食物，先吃掉一份，再加工新的。" % held.size()})
+				"reason": "You already carry %d warm meals. Eat one before preparing another." % held.size()})
 		if held.size() > 0 and float(resident(id).needs.get("hunger", 0.0)) > WARM_EAT_MAX_HUNGER:
 			unavailable.append({"action": WARM_EAT_ACTION, "held_meals": held.size(),
-				"reason": "你现在饱腹%.0f，接近吃饱；这时吃掉会浪费，先留着成品，等更饿再吃。" % float(resident(id).needs.get("hunger", 0.0))})
+				"reason": "Your satiety is %.0f, nearly full. Eating now would waste food; keep the meal until you are hungrier." % float(resident(id).needs.get("hunger", 0.0))})
 	view["unavailable_actions"] = unavailable
 	return view
 

@@ -2,6 +2,14 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-18 · H107 English game, model instructions and current flowchart
+
+The user requested English for game names, dialogue, Kimi/GM interaction and the flowchart, retaining Chinese only for our conversation. Authored runtime text, the ten seed names/backgrounds, UI, launch messages, all three GM instruction phases and older model/interface experiment prompts now use English. Known legacy names/text receive presentation aliases; canonical IDs and saved historical records remain unchanged. The layout changes only two connection labels, with both reviewed language-revision hashes accepted under existing provenance rules. The previous full roadmap was archived byte-for-byte, and the current English chart has 36 nodes.
+
+Validation: 43 Python tests, 512 focused Godot checks, 40 actual-quarter UI checks, 6 actual-wire loopback cases and 179 checks across the complete eight-stage offline workflow passed. The graphical continuation used real bodies, interrupted labor, a new process and exact final cold restore; paid game-model calls and subagents were zero. Longer English activates existing context compaction sooner: the historical fixture retains the latest 4 informed personal events with sourced knowledge and current commitments unchanged. Its test now verifies the exact newest event suffix instead of assuming exactly 16 events always fit. No request/context/cost cap was raised.
+
+Initial invocation/test-assumption failures remain in local evidence, including the logical-versus-physical viewport mismatch; corrected reruns passed. Four pre-existing navigation edge overlaps remain visible in the sixteen-house scene. Original seq450, GM memory and ledgers are still on the other computer; unknown historical free dialogue has not been translated, and sustained autonomy, sustainable resources and earlier renderer/particle faults remain open. The visible conversation archive is refreshed before the authorized upload; its manifest gives the actual cutoff. See [English rollout, screenshots and evidence](docs/validation/english-rollout-2026-09-18.md).
+
 ## 2026-09-18 · H106 对话原文上传与导航离线修复
 
 用户要求继续工作、确保上传对话历史、卡点及时报告。本任务可见用户／助手消息从精确本机日志单独导出，保留时间、角色、逐条原文和文件校验；首份42条快照提交a269842并已从GitHub下载核验。后续增量刷新不允许缩短或替换旧消息，根目录AGENTS.md与固定接续说明记录上传时刷新／远程核验要求。范围仅当前任务，不上传内部推理、系统指令、原始会话工具日志和私有资料，不假称其他电脑对话已齐全。原文、最新覆盖时间与接续入口见[对话历史](docs/history/conversations/README.md)。

@@ -57,7 +57,7 @@ class UserLivingBootstrapTests(unittest.TestCase):
         result = bootstrap.launch(self.profile, TtyInput("no\n"), output)
         self.assertEqual(result, 0)
         self.assertFalse(self.sessions.exists())
-        self.assertIn("没有创建", output.getvalue())
+        self.assertIn("No new paid session was created", output.getvalue())
         self.assertNotIn("ledger", output.getvalue().lower())
 
     def test_noninteractive_confirmation_is_rejected(self):
@@ -106,8 +106,8 @@ class UserLivingBootstrapTests(unittest.TestCase):
             manifest["prior_paid_sessions"][0]["uncertainty_review"]["uncertain_requests"],
             [{"id": "unknown-result", "state": "uncertain",
               "reserve_nano": reservation["reserved_nano"]}])
-        self.assertIn("最大责任：%.6f 元" % retained, output.getvalue())
-        self.assertIn("不会清零或重试旧请求", output.getvalue())
+        self.assertIn("Maximum liability retained for prior unknown requests: CNY %.6f" % retained, output.getvalue())
+        self.assertIn("old requests will not be cleared or retried", output.getvalue())
 
     def test_reviewed_expired_prior_record_is_audited_without_reopening_it(self):
         expired = self.root / "expired.sqlite3"
@@ -245,8 +245,8 @@ class UserLivingBootstrapTests(unittest.TestCase):
         self.assertEqual(manifest["status"], "complete")
         self.assertEqual(manifest["cumulative_settled_before_cny"], 0.0)
         self.assertFalse((self.sessions / ".start-living-ai.lock").exists())
-        self.assertIn("本地费用估算：0.000000 元", output.getvalue())
-        self.assertIn("以供应商账单为准", output.getvalue())
+        self.assertIn("local cost estimate: CNY 0.000000", output.getvalue())
+        self.assertIn("subject to the provider's invoice", output.getvalue())
 
     def test_healthy_idle_runner_is_saved_without_claiming_ai_passed(self):
         def idle_no_op(command, **_kwargs):
@@ -280,9 +280,9 @@ class UserLivingBootstrapTests(unittest.TestCase):
         self.assertEqual(manifest["runner_exit_code"], 1)
         self.assertEqual(manifest["status"], "not_exercised")
         self.assertTrue(manifest["idle_completed"])
-        self.assertIn("本段没有新的 AI 决定，世界已保存", output.getvalue())
-        self.assertIn("模型验收仍为未执行，不记作通过", output.getvalue())
-        self.assertNotIn("本次运行未正常结束", output.getvalue())
+        self.assertIn("No new AI decisions occurred in this run. The world is saved", output.getvalue())
+        self.assertIn("Model validation remains not exercised, not passed", output.getvalue())
+        self.assertNotIn("The run did not end normally", output.getvalue())
 
     @unittest.skipUnless(os.name == "nt" and Path(r"C:\Program Files\dotnet\dotnet.exe").is_file(),
                          "Windows .NET host inheritance check")

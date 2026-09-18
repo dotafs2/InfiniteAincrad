@@ -189,7 +189,7 @@ func _observe_materials() -> void:
 			# otherwise the legacy explicitly labelled proximity sensing. Neither
 			# is a camera/FOV claim.
 			var observation_source := "host_line_of_sight_observation" if _material_visibility_required else "host_proximity_observation"
-			_append_life_event({"type": "material_source_observed", "actor_id": id, "recipient_ids": [id], "operation_id": "material-observation:%s:%s:%d" % [id, source.id, int(_state.life.seq) + 1], "source": observation_source, "source_id": source.id, "stock": source.stock, "text": "%s：公共%s料，看到剩余%d份；每次整理60秒可取得1份，现场库存为准。" % [source.label, "铁" if source.material == "iron" else "木", source.stock]})
+			_append_life_event({"type": "material_source_observed", "actor_id": id, "recipient_ids": [id], "operation_id": "material-observation:%s:%s:%d" % [id, source.id, int(_state.life.seq) + 1], "source": observation_source, "source_id": source.id, "stock": source.stock, "text": "%s: public %s material, %d units observed; sorting for 60 seconds yields 1 unit if stock remains on arrival." % [source.label, "iron" if source.material == "iron" else "wood", source.stock]})
 			m.known[id][source.id] = {"stock": source.stock, "observed_elapsed": _state.godot.elapsed_seconds, "event_seq": _state.life.seq}
 
 func _busy(id: String) -> bool:
@@ -261,7 +261,7 @@ func _open_blocked(record: Dictionary, key: String, observed_position: Vector3, 
 	# attributes this fact to one episode of the still-pending trip.
 	_append_life_event({"type": MATERIAL_BLOCKED_EVENT, "actor_id": record.resident_id, "recipient_ids": [record.resident_id],
 		"operation_id": record.command_id, "source": job.get("provenance", "local_rule_policy"), "source_id": record.source_id,
-		"material": source.material, "episode_id": record.episode_id, "text": "我没能到达那个材料点；这次取材任务还没有完成。"})
+		"material": source.material, "episode_id": record.episode_id, "text": "I could not reach that material source. This collection trip is still unfinished."})
 
 func observe_material_travel(id: String, observed_position: Vector3, elapsed: float) -> Dictionary:
 	# Host-supplied physical observation. Paused time never reaches this method
@@ -359,13 +359,13 @@ func trade_options(id: String) -> Array:
 		var stuck := blocked_material_episode(id)
 		if not stuck.is_empty():
 			_option(result, {"id": "material:cancel:" + str(stuck.command_id), "action": "cancel_material",
-				"label": "放弃这次取材出行（任务仍未完成，放弃后不获得材料）", "speech_allowed": false, "source_id": stuck.source_id})
+				"label": "Abandon this collection trip (the task is unfinished; abandoning it grants no material).", "speech_allowed": false, "source_id": stuck.source_id})
 		return result
 	for source_id in _known_materials(id):
 		if _known_materials(id)[source_id].stock <= 0:
 			continue
 		var source: Dictionary = _materials().sources[source_id]
-		result.append({"id": "material:recover:" + source_id, "action": "recover_material", "label": "到%s整理60秒，现场有余料则取得1份%s；公共、免费、有限，不保证库存" % [source.label, "铁" if source.material == "iron" else "木"], "speech_allowed": false})
+		result.append({"id": "material:recover:" + source_id, "action": "recover_material", "label": "Go to %s and sort for 60 seconds to collect 1 unit of %s if available; public, free and finite, with no stock guarantee." % [source.label, "iron" if source.material == "iron" else "wood"], "speech_allowed": false})
 	return result
 
 func submit_trade(id: String, option_id: String, command_id: String, provenance: String = "local_rule_policy", speech: String = "") -> Dictionary:
@@ -442,7 +442,7 @@ func _cancel_material_travel(id: String, option_id: String, command_id: String, 
 	trade.commands[command_id] = {"payload": payload, "status": "completed", "result": cancel_receipt}
 	_append_life_event({"type": MATERIAL_CANCELLED_EVENT, "actor_id": id, "recipient_ids": [id], "operation_id": command_id,
 		"source": provenance, "source_id": source.id, "material": source.material,
-		"text": "我决定放弃这次取材出行，任务就此结束；我没有取得材料。"})
+		"text": "I chose to abandon this collection trip. The task has ended; I received no material."})
 	return {"ok": true, "code": "material_cancelled", "command_id": target_command}
 
 func advance(delta: float) -> Dictionary:
@@ -468,7 +468,7 @@ func advance(delta: float) -> Dictionary:
 		m.commands[job.command_id].status = "completed" if available else "rejected"
 		m.commands[job.command_id].result = receipt.duplicate(true)
 		_close_blocked_for_command(id, str(job.command_id), "job_completed")
-		_append_life_event({"type": receipt.code, "actor_id": id, "recipient_ids": [id], "operation_id": job.command_id, "source": job.provenance, "source_id": source.id, "material": source.material, "quantity": receipt.quantity, "text": "整理完成，取得1份材料。" if available else "整理时发现余料已被取完，没有取得材料。"})
+		_append_life_event({"type": receipt.code, "actor_id": id, "recipient_ids": [id], "operation_id": job.command_id, "source": job.provenance, "source_id": source.id, "material": source.material, "quantity": receipt.quantity, "text": "Sorting finished; collected 1 unit of material." if available else "The remaining material had already been taken. I collected nothing."})
 		m.jobs.erase(id)
 		result.completed.append(receipt)
 	_observe_materials()

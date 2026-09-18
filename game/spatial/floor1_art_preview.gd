@@ -104,12 +104,12 @@ func _setup_ui() -> void:
 	layer.add_child(panel)
 	var title := Label.new()
 	title.position = Vector2(24, 13)
-	title.text = "第一层 · 起始城镇英雄街角"
+	title.text = "Floor One - Starting Town Street Corner"
 	title.add_theme_font_size_override("font_size", 27)
 	panel.add_child(title)
 	var subtitle := Label.new()
 	subtitle.position = Vector2(25, 50)
-	subtitle.text = "原创模块化美术样板 · Blender 5.2 LTS → Godot 4.7.2"
+	subtitle.text = "Original modular art sample - Blender 5.2 LTS to Godot 4.7.2"
 	subtitle.modulate = Color("b9d9e7")
 	subtitle.add_theme_font_size_override("font_size", 17)
 	panel.add_child(subtitle)

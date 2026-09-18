@@ -47,7 +47,7 @@ func _ready() -> void:
 	var lock_result: Dictionary = world.acquire_writer(save_path)
 	if not lock_result.get("ok", false):
 		writable = false
-		_feedback("该测试存档已有写入者，无法打开：" + _result_text(lock_result), true)
+		_feedback("This test save already has a writer and cannot be opened: " + _result_text(lock_result), true)
 		_refresh()
 		return
 	var parsed = JSON.parse_string(FileAccess.get_file_as_string("res://capabilities/well_bucket.v1.json"))
@@ -66,9 +66,9 @@ func _ready() -> void:
 		DirAccess.make_dir_recursive_absolute(request_path.get_base_dir())
 		world.export_resident_decision_request(request_path)
 	if writable:
-		_feedback("独立测试世界已就绪。让居民先观察井边。")
+		_feedback("The independent test world is ready. Let the resident observe the well.")
 	else:
-		_feedback("无法打开测试存档：%s。未重置已有世界。" % _result_text(result), true)
+		_feedback("Cannot open the test save: %s. The existing world was not reset." % _result_text(result), true)
 	_refresh()
 	get_tree().auto_accept_quit = false
 	if not smoke_directory.is_empty():
@@ -115,10 +115,10 @@ func _build_ui() -> void:
 	header.add_child(title_group)
 	var eyebrow := _label("INFINITE AINCRAD  /  CAPABILITY TRIAL", 13, MUTED)
 	title_group.add_child(eyebrow)
-	var title := _label("井边的一天", 34)
+	var title := _label("A Day by the Well", 34)
 	title.add_theme_font_override("font", display_font)
 	title_group.add_child(title)
-	var badge := _label("独立人工场景\n离线规则决策 · 零付费模型调用", 15, MUTED)
+	var badge := _label("Independent authored scene\nOffline rule decisions - zero paid model calls", 15, MUTED)
 	badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	badge.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	header.add_child(badge)
@@ -133,28 +133,28 @@ func _build_ui() -> void:
 	left.size_flags_stretch_ratio = 1.3
 	left.add_theme_constant_override("separation", 12)
 	body.add_child(left)
-	phase_label = _label("观察需要 → 验证能力 → 自行使用 → 保存延续", 17)
+	phase_label = _label("Observe a need > Review a capability > Voluntary use > Save and continue", 17)
 	left.add_child(phase_label)
 	courtyard = Courtyard.new()
 	courtyard.motion = not reduced_motion
 	courtyard.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	courtyard.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	left.add_child(courtyard)
-	var caption := _label("一个居民，一口井。已经发生的事，不随能力停用消失。", 16, MUTED)
+	var caption := _label("One resident, one well. Disabling a capability does not erase what happened.", 16, MUTED)
 	caption.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	left.add_child(caption)
 	var controls := HBoxContainer.new()
 	controls.add_theme_constant_override("separation", 10)
 	left.add_child(controls)
-	next_button = _button("居民行动一次", _step)
+	next_button = _button("Take one resident action", _step)
 	next_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	next_button.add_theme_stylebox_override("normal", _box(ACCENT, 8))
 	next_button.add_theme_color_override("font_color", Color.WHITE)
 	controls.add_child(next_button)
-	auto_button = _button("连续观察", _toggle_auto)
+	auto_button = _button("Observe continuously", _toggle_auto)
 	controls.add_child(auto_button)
 	var motion_toggle := CheckButton.new()
-	motion_toggle.text = "减少动态"
+	motion_toggle.text = "Reduce motion"
 	motion_toggle.button_pressed = reduced_motion
 	motion_toggle.toggled.connect(func(value: bool):
 		courtyard.motion = not value
@@ -168,30 +168,30 @@ func _build_ui() -> void:
 	tabs.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	tabs.add_theme_stylebox_override("panel", _box(SURFACE, 10))
 	body.add_child(tabs)
-	var resident_panel := _tab("居民所见")
+	var resident_panel := _tab("Resident's view")
 	resident_text = _rich()
 	resident_panel.add_child(resident_text)
-	var operator_panel := _tab("开发者 GM")
+	var operator_panel := _tab("Developer GM")
 	operator_text = _rich()
 	operator_panel.add_child(operator_text)
-	validate_button = _button("检查需求与能力包", _validate)
+	validate_button = _button("Check need and capability package", _validate)
 	operator_panel.add_child(validate_button)
-	install_button = _button("安装吊桶取水 v1", _install)
+	install_button = _button("Install well bucket v1", _install)
 	operator_panel.add_child(install_button)
-	disable_button = _button("停用取水能力", _disable)
+	disable_button = _button("Disable water-drawing capability", _disable)
 	operator_panel.add_child(disable_button)
-	var deny := _button("验收：拒绝居民安装请求", _reject_install)
+	var deny := _button("Check: reject resident installation request", _reject_install)
 	operator_panel.add_child(deny)
-	save_button = _button("保存并重读测试存档", _save_reload)
+	save_button = _button("Save and reload the test world", _save_reload)
 	operator_panel.add_child(save_button)
-	var history_panel := _tab("事实记录")
+	var history_panel := _tab("Recorded facts")
 	history_text = _rich()
 	history_panel.add_child(history_text)
 	feedback = _label("", 16)
 	feedback.custom_minimum_size.y = 48
 	feedback.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	root.add_child(feedback)
-	root.add_child(_label("测试身份未迁移原档。这里没有 Kimi 决策、旧回复回放或无人监督开发。", 13, MUTED))
+	root.add_child(_label("This test identity was not migrated from the original save. No Kimi decisions, old reply replay or unattended development occur here.", 13, MUTED))
 	timer = Timer.new()
 	timer.wait_time = 1.6
 	timer.timeout.connect(_step)
@@ -257,7 +257,7 @@ func _persist() -> bool:
 	if not result.get("ok", false):
 		writable = false
 		_stop_auto()
-		_feedback("保存失败，已停止继续操作：" + _result_text(result), true)
+		_feedback("Saving failed; further actions stopped: " + _result_text(result), true)
 	return result.get("ok", false)
 
 func _step() -> void:
@@ -265,7 +265,7 @@ func _step() -> void:
 		return
 	var result: Dictionary = world.resident_step()
 	if _persist():
-		_feedback("居民按自己的观察作出规则选择：" + _result_text(result))
+		_feedback("The resident chose from personal observations using offline rules: " + _result_text(result))
 	steps_left -= 1
 	if steps_left <= 0 or not result.get("ok", false):
 		_stop_auto()
@@ -277,14 +277,14 @@ func _toggle_auto() -> void:
 	else:
 		running = true
 		steps_left = 4
-		auto_button.text = "暂停观察"
+		auto_button.text = "Pause observation"
 		timer.start()
 		_step()
 
 func _stop_auto() -> void:
 	running = false
 	timer.stop()
-	auto_button.text = "连续观察"
+	auto_button.text = "Observe continuously"
 
 func _validate() -> void:
 	var result: Dictionary = world.validate_manifest(manifest)
@@ -299,7 +299,7 @@ func _validate() -> void:
 		else:
 			verified = false
 			result = {"ok": false, "code": "gm_need_missing"}
-	_feedback("能力包与需求检查：" + _result_text(result), not verified)
+	_feedback("Capability and need check: " + _result_text(result), not verified)
 	_refresh()
 
 func _install() -> void:
@@ -307,7 +307,7 @@ func _install() -> void:
 	var result: Dictionary = world.gm_install(manifest, _command_id("install"), approval_id)
 	if result.get("ok", false):
 		_persist()
-	_feedback("安装结果：" + _result_text(result), not result.get("ok", false))
+	_feedback("Installation result: " + _result_text(result), not result.get("ok", false))
 	_refresh()
 
 func _disable() -> void:
@@ -315,13 +315,13 @@ func _disable() -> void:
 	var result: Dictionary = world.gm_disable(_command_id("disable"))
 	if result.get("ok", false):
 		_persist()
-	_feedback("停用结果：" + _result_text(result), not result.get("ok", false))
+	_feedback("Disable result: " + _result_text(result), not result.get("ok", false))
 	_refresh()
 
 func _reject_install() -> void:
 	var before: Dictionary = world.snapshot()
 	var result: Dictionary = world.resident_command({"action": "install_plugin", "command_id": _command_id("resident-denial"), "actor": "gm"})
-	_feedback("居民安装请求：%s。世界未变化：%s" % [_result_text(result), str(before == world.snapshot())])
+	_feedback("Resident installation request: %s. World unchanged: %s" % [_result_text(result), str(before == world.snapshot())])
 	_refresh()
 
 func _save_reload() -> void:
@@ -331,16 +331,16 @@ func _save_reload() -> void:
 		return
 	var result: Dictionary = world.load_from(save_path)
 	writable = result.get("ok", false)
-	_feedback("保存并重读：%s。真正冷恢复请关闭后重新启动。" % _result_text(result), not writable)
+	_feedback("Save and reload: %s. Close and restart for a true cold restore." % _result_text(result), not writable)
 	_refresh()
 
 func _refresh() -> void:
 	# Field formatting is kept here; the NPC policy receives resident_view only.
 	var state: Dictionary = world.snapshot()
 	var view: Dictionary = world.resident_view()
-	resident_text.text = "[b]Luna · 测试居民[/b]\n\n" + _display_view(view)
-	history_text.text = "[b]稳定核心记录的事实[/b]\n\n" + JSON.stringify(state.get("events", []), "  ")
-	operator_text.text = "[b]开发者承担 GM[/b]\n\n人工设置的井边障碍，仅验证技术闭环。先让居民表达需要，再检查并安装有限的能力包。\n\n包：well_bucket / v1\n只启用已审核的取水规则；不加载任意代码。\n\n居民请求 JSON：\n%s\n\n测试存档：\n%s\n\n[b]核心状态[/b]\n%s" % [ProjectSettings.globalize_path("user://capability-trial/resident-decision-request.json"), ProjectSettings.globalize_path(save_path), JSON.stringify(state.get("capability", state.get("plugins", {})), "  ")]
+	resident_text.text = "[b]Luna - Test Resident[/b]\n\n" + _display_view(view)
+	history_text.text = "[b]Facts recorded by the stable core[/b]\n\n" + JSON.stringify(state.get("events", []), "  ")
+	operator_text.text = "[b]Developer acting as GM[/b]\n\nAn authored obstacle at the well tests the technical loop. Let the resident express a need, then review and install a bounded capability package.\n\nPackage: well_bucket / v1\nEnables only the reviewed water-drawing rule; loads no arbitrary code.\n\nResident request JSON:\n%s\n\nTest save:\n%s\n\n[b]Core state[/b]\n%s" % [ProjectSettings.globalize_path("user://capability-trial/resident-decision-request.json"), ProjectSettings.globalize_path(save_path), JSON.stringify(state.get("capability", state.get("plugins", {})), "  ")]
 	_update_courtyard(state, view)
 	next_button.disabled = not writable
 	auto_button.disabled = not writable
@@ -352,7 +352,7 @@ func _refresh() -> void:
 func _display_view(view: Dictionary) -> String:
 	var text := ""
 	for key in view:
-		var names := {"identity": "我是谁", "needs": "我的需要", "observations": "我看见", "memories": "我的经历", "actions": "我可以做", "available_actions": "我可以做", "inventory": "我随身带着"}
+		var names := {"identity": "Who I am", "needs": "My needs", "observations": "What I see", "memories": "My experiences", "actions": "What I can do", "available_actions": "What I can do", "inventory": "What I carry"}
 		text += "[b]%s[/b]\n%s\n\n" % [names.get(key, key), JSON.stringify(view[key], "  ")]
 	return text
 
@@ -361,7 +361,7 @@ func _update_courtyard(state: Dictionary, _view: Dictionary) -> void:
 	var resident: Dictionary = state.get("residents", {}).get("fixture:luna", {})
 	var inventory: Dictionary = resident.get("inventory", {})
 	var capability: Dictionary = state.get("plugins", {}).get("well_bucket", {})
-	courtyard.update_world(int(well.get("well_water", 0)), int(inventory.get("water", 0)), int(resident.get("consumed", {}).get("water", 0)), capability.get("status", "") == "enabled", "每次变化都来自已验证的行动回执。")
+	courtyard.update_world(int(well.get("well_water", 0)), int(inventory.get("water", 0)), int(resident.get("consumed", {}).get("water", 0)), capability.get("status", "") == "enabled", "Every change comes from a validated action receipt.")
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:

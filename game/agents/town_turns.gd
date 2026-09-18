@@ -306,12 +306,12 @@ func step(requested_id: String = "") -> Dictionary:
 	if view.needs.has("hunger"):
 		view.needs.satiety = view.needs.hunger
 		view.needs.erase("hunger")
-		view.needs.scale_explanation = "satiety 是饱食程度：0 为空腹，100 为饱。energy 越高精力越充足。"
+		view.needs.scale_explanation = "satiety measures fullness: 0 means an empty stomach and 100 means full. Higher energy means more stamina."
 	view.needs.energy = view.inventory.get("energy", 0)
 	view.memory = {"previous_decisions": _feedback_history(id, previous).slice(-6)}
 	for key in ["story", "personality", "faction"]:
 		if town.resident(id).has(key):
-			view.identity[key] = town.resident(id)[key]
+			view.identity[key] = town.resident_background(id, key)
 	var options: Array = town.trade_options(id)
 	view.available_actions = []
 	view.action_details = []
@@ -330,6 +330,7 @@ func step(requested_id: String = "") -> Dictionary:
 	# truncates text, invents a choice or relaxes the bound.
 	var request_rules: Dictionary = view.get("known_rules", {}).duplicate(true)
 	request_rules["decision_format"] = {
+		"language": "English for all natural-language values, including reason, speech and need.reason; keep action IDs unchanged",
 		"reply": "one JSON object following this field contract",
 		"action": "string naming exactly one id from available_actions",
 		"reason": "string, required, at most %d characters" % DECISION_TEXT_LIMIT,
@@ -339,6 +340,7 @@ func step(requested_id: String = "") -> Dictionary:
 	view["known_rules"] = request_rules
 	# Context is bounded; canonical full history remains in the world save.
 	view.experiences = view.get("experiences", []).slice(-16)
+	view = town.English.project(view)
 	var seen := _own_seq(id)
 	var recovery_class := _cold_recovery_class(id, previous)
 	var recovering := not recovery_class.is_empty()

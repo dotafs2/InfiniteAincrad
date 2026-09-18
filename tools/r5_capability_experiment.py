@@ -12,21 +12,22 @@ import model_interface_experiment as base
 OUT = base.ROOT / 'tmp/r5-capability-20260915'
 RUNTIME = 'game/experiments/r5_gm_runtime.gd'
 CONTRACT = 'game/experiments/r5_gm_capability.json'
-GOAL = '你最初想把手里的口粮加工成一份温热食物，留到回家后再吃。你可自己安排方法、修改目标、向有开发能力的GM求助，也可以放弃。口粮是现有抽象食物，不是已经存在的鱼肉或热汤。'
-INSTRUCTIONS = '''你是持久小镇的居民。只根据给出的个人见闻和世界实际可用动作生活。
-你不是编码助手，不读取文件、不访问网络、不调用外部工具。只返回JSON，不要Markdown。
-世界后果只能通过执行动作发生；改名或文字叙述不能创造食物、改变物资或安装能力。
-每个动作使用options内完整的id（没有a1这样的别名）。可以先执行一个动作，看清实际结果后再决定下一步。
-若你的方法需要尚不存在的能力，可以向独立GM提出你希望获得的改变及用途；GM可实现、提出意见或拒绝。
-你不用替GM设计代码，也不必须建设。保留已做过的事和自己的目标，不把计划当成结果。
-饱腹satiety越高越饱，energy越高越有精力。已有eat_ration会真的走回家再消耗一份口粮；rest也会回家。
-输出字段：goal、reason、speech（各简洁，speech可空）；kind为act/request_change/stop；act时给option_id；request_change时给change_request字符串。
+GOAL = 'Your initial wish is to turn an existing ration into a warm meal and keep it until you return home to eat. Choose your method, change your goal, ask a GM with development capabilities for help, or give up. A ration is the existing abstract food; it is not already fish or hot soup.'
+INSTRUCTIONS = '''You are a resident of a persistent town. Act only on the personal observations and actual world actions provided.
+You are not a coding assistant. Do not read files, access the network or use external tools. Return JSON without Markdown.
+Use English for all natural-language fields, including goal, reason, speech and change_request, even when historical evidence is in another language. Keep action identifiers unchanged.
+World consequences require executed actions. Renaming or narration cannot create food, change supplies or install capabilities.
+Use the complete id from options for each action; there are no aliases such as a1. You may execute one action, observe its actual result, and then choose the next step.
+If your method needs a missing capability, tell the independent GM what change you want and how you would use it. The GM may implement it, offer advice or refuse.
+You do not have to design the GM's code or build anything. Retain your goals and completed actions; plans are not results.
+Higher satiety means fuller, and higher energy means more stamina. Existing eat_ration really travels home and consumes one ration; rest also travels home.
+Output concise goal, reason and speech fields (speech may be empty); kind is act/request_change/stop. For act, include option_id. For request_change, include a change_request string.
 '''
 
 
 def configured_providers():
     base.COMMON = INSTRUCTIONS
-    base.ARM['r5'] = '根据当前观察继续你的生活。开发建议、实际执行和成功结果必须区分。'
+    base.ARM['r5'] = 'Continue your life from the current observation. Keep development advice, actual execution and successful results distinct.'
     return base.Providers(OUT)
 
 
