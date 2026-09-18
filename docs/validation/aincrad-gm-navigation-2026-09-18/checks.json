@@ -1,0 +1,293 @@
+{
+  "milestone": "H111",
+  "world_id": "shared:restart-20260918-01",
+  "paid_calls": 0,
+  "python": {
+    "passed": 231,
+    "focused": 169,
+    "production_bridge": 62,
+    "evidence": [
+      "private/aincrad-20260918/focused-final/tool.log",
+      "private/aincrad-20260918/bridge/tool.log"
+    ]
+  },
+  "navigation": {
+    "checks": 12,
+    "failures": [],
+    "frames": 136,
+    "furthest_z": 3.299973487854,
+    "maximum_speed": 1.35000002384186,
+    "model_calls": 0,
+    "path_updates": 1,
+    "time_scale": 4,
+    "walked": 12.1596323158592
+  },
+  "physical_joint_visit": {
+    "checks": 24,
+    "failures": [],
+    "metrics": {
+      "fixture:innkeeper": {
+        "max_sample_step_m": 0.0903244912624359,
+        "max_speed_mps": 1.35000014305115,
+        "walked_metres": 72.6146427020431
+      },
+      "fixture:smith": {
+        "max_sample_step_m": 0.0904189273715019,
+        "max_speed_mps": 1.35000014305115,
+        "walked_metres": 77.3849579915404
+      }
+    },
+    "paid_calls": 0,
+    "resumed": true,
+    "suite": "town_capabilities_scene",
+    "time_scale": 4.0,
+    "world_seconds": 59.7333333333346
+  },
+  "offline_chain": {
+    "world_id": "shared:offline-chain-aincrad-20260918",
+    "resident_count": 10,
+    "stock_before": 3,
+    "stock_after": 2,
+    "resident_iron_gained": 1,
+    "history_before": 2,
+    "history_after": 17,
+    "status": "offline_integration_passed",
+    "real_model_calls": 0,
+    "provenance": "offline_scripted_transport_no_model_api",
+    "gm": {
+      "real_model_calls": 0,
+      "provenance": "offline_scripted_transport_no_model_api",
+      "distinct_gm_contexts": 10,
+      "owner_gm": "gm-05",
+      "issue_id": "issue-01cb64e68fd0",
+      "candidate": "C:\\InfiniteAincrad\\tmp\\gpt6-sprint\\integration\\aincrad-20260918\\gm-state\\candidates\\issue-01cb64e68fd0",
+      "candidate_changed_files": [
+        "tools/offline_chain_material_release.json"
+      ],
+      "base_sha": "6af33f2e022eb6f33d95e81aa44ef22e36f34c24",
+      "first_repeat_dispatches": 9,
+      "settled_repeat_dispatches": 0,
+      "world_unchanged_by_gm": true,
+      "limitations": [
+        "Resident decisions and GM proposals/candidate are scripted, not model-generated.",
+        "This releases configuration of an existing finite-source rule, not new GM code.",
+        "Godot assertions prove runtime effects and save continuation; no rendered scene or body travel is tested.",
+        "Material sensing is explicitly existing proximity sensing, not line of sight.",
+        "GM runner usage fields are synthetic zero fixture counters; provider_request_started means only a local fixture subprocess was started.",
+        "No real Kimi/DeepSeek request, paid run, accounting reset or original town restoration."
+      ]
+    },
+    "approval_rejection_world_unchanged": true,
+    "final_save_sha256": "20eb58ec50194ea4ede3e4bf7dc4f435afad14ac7ca25823b835938d0497019b",
+    "limitations": [
+      "Resident decisions and GM proposals/candidate are scripted, not model-generated.",
+      "This releases configuration of an existing finite-source rule, not new GM code.",
+      "Godot assertions prove runtime effects and save continuation; no rendered scene or body travel is tested.",
+      "Material sensing is explicitly existing proximity sensing, not line of sight.",
+      "GM runner usage fields are synthetic zero fixture counters; provider_request_started means only a local fixture subprocess was started.",
+      "No real Kimi/DeepSeek request, paid run, accounting reset or original town restoration."
+    ]
+  },
+  "normal_chain_engine_checks": 118,
+  "unreviewed_installation_refused": true,
+  "loopback": [
+    {
+      "case": "action-groups-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "success-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "success-1",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    },
+    {
+      "case": "town-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": []
+    }
+  ],
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "cold_restore": {
+    "world_seq": 43,
+    "all_nested_fields_equal": true,
+    "original_unchanged": true
+  },
+  "readiness": {
+    "world_id": "shared:restart-20260918-01",
+    "life_seq": 43,
+    "world_sha256": "a0228906f6b417db2e9b3faae335fae6cc81d2a11810f109efd93f53a55ccd2a",
+    "design_contract": {
+      "schema_version": 1,
+      "id": "aincrad-v1",
+      "sha256": "8b16aa8c5b3bcb6d7d1af541028639bd75d3df2d140aeebd043572cebd9b8429",
+      "documents": {
+        "docs/design/aincrad-world-charter.md": "d36cbf2127505f42c5f7aa7f7224d6c18c84933aedcb1dba5b841dd3c9ef55eb",
+        "docs/design/action-capability-standard.md": "f402bc0ecc1d97f283156717d87b1a974d258c755394c3f3dc15a2946be45cb4"
+      }
+    },
+    "gm_state_path": "C:\\InfiniteAincrad\\private\\worlds\\restart-20260918-01\\gm\\state.json",
+    "gm_state_sha256": "df5273a4c8394f05488b6cd5a092d5905bba04a86aa9c53366c6adb9c80be9ca",
+    "gm_ids": [
+      "gm-01",
+      "gm-02",
+      "gm-03",
+      "gm-04",
+      "gm-05",
+      "gm-06",
+      "gm-07",
+      "gm-08",
+      "gm-09",
+      "gm-10"
+    ],
+    "sessions_started": 0,
+    "paid_calls": 0,
+    "route_preflight_exit": 0,
+    "route_preflight_status": "dry_run",
+    "planned_gms": [
+      "gm-01",
+      "gm-02",
+      "gm-03",
+      "gm-04",
+      "gm-05",
+      "gm-06",
+      "gm-07",
+      "gm-08",
+      "gm-09",
+      "gm-10"
+    ],
+    "ready_for_paid_continuation": false,
+    "blockers": [
+      {
+        "kind": "latest_gm_accounting_not_reconciled",
+        "historical_reference": "C:\\InfiniteAincrad\\tmp\\mvp-autonomy-20260914\\prepared\\real\\gm-prior-ledger.json",
+        "detail": "A September 14 reference exists, but explicitly preserves unknown GM attempts and a missing other-machine tail. It does not establish the latest September 18 accounting. No zero ledger, reset or paid retry was created.",
+        "preserved_tail": {
+          "status": "unknown",
+          "preserved": true,
+          "entries": [
+            "six older unknown-cost GM attempts stay unresolved and are never settled or zeroed",
+            "the H58 extra 1.717760 reserve stays unresolved",
+            "the latest ledger from the other machine was never received; its costs stay unknown"
+          ],
+          "note": "these figures are historical references only; nothing here calls an unknown or missing-ledger figure settled, zero or reconciled"
+        }
+      },
+      {
+        "kind": "production_deployment_not_prepared",
+        "detail": "The fresh world has no reviewed deployment manifest/runtime contract for releasing H110 action modules. Do not spend GM coding calls until this concrete release target is prepared."
+      }
+    ],
+    "original_world_lineage_merged": false,
+    "credentials_uploaded": false
+  },
+  "owned_processes": [
+    {
+      "file": "navigation-passed/cache.process.json",
+      "wrapper_pid": 390112,
+      "active_processes": 0,
+      "all_members_exited": true,
+      "timed_suite_not_passing": false
+    },
+    {
+      "file": "joint-fixed/joint.process.json",
+      "wrapper_pid": 386636,
+      "active_processes": 0,
+      "all_members_exited": true,
+      "timed_suite_not_passing": false
+    },
+    {
+      "file": "restore/restore.process.json",
+      "wrapper_pid": 246980,
+      "active_processes": 0,
+      "all_members_exited": true,
+      "timed_suite_not_passing": false
+    },
+    {
+      "file": "focused-final/process.json",
+      "wrapper_pid": 393328,
+      "active_processes": 0,
+      "all_members_exited": true,
+      "timed_suite_not_passing": false
+    },
+    {
+      "file": "chain-run/process.json",
+      "wrapper_pid": 392708,
+      "active_processes": 0,
+      "all_members_exited": true,
+      "timed_suite_not_passing": false
+    },
+    {
+      "file": "build/process.json",
+      "wrapper_pid": 390396,
+      "active_processes": 0,
+      "all_members_exited": true,
+      "timed_suite_not_passing": false
+    },
+    {
+      "file": "adapter-run/process.json",
+      "wrapper_pid": 397224,
+      "active_processes": 0,
+      "all_members_exited": true,
+      "timed_suite_not_passing": false
+    },
+    {
+      "file": "python-final/process.json",
+      "wrapper_pid": 390728,
+      "active_processes": 0,
+      "all_members_exited": true,
+      "timed_suite_not_passing": true
+    },
+    {
+      "file": "runner-final/process.json",
+      "wrapper_pid": 393852,
+      "active_processes": 0,
+      "all_members_exited": true,
+      "timed_suite_not_passing": true
+    },
+    {
+      "file": "focused-runner/process.json",
+      "wrapper_pid": 391080,
+      "active_processes": 0,
+      "all_members_exited": true,
+      "timed_suite_not_passing": false
+    },
+    {
+      "file": "bridge/process.json",
+      "wrapper_pid": 395900,
+      "active_processes": 0,
+      "all_members_exited": true,
+      "timed_suite_not_passing": false
+    },
+    {
+      "file": "diagram/process.json",
+      "wrapper_pid": 398176,
+      "active_processes": 0,
+      "all_members_exited": true,
+      "timed_suite_not_passing": false
+    }
+  ],
+  "timed_out_worktrees_removed": 3,
+  "other_failures_preserved": [
+    "initial missing town-save CLI flag",
+    "initial asynchronous map readiness assumptions",
+    "initial misplaced Python test assertion"
+  ],
+  "no_background_job_left_running": true
+}

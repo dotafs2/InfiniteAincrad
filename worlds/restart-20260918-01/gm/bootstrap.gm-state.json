@@ -1,0 +1,178 @@
+{
+  "issues": {},
+  "lock_incidents": [],
+  "schema_version": 2,
+  "sessions": {
+    "gm-01": {
+      "attempts": [],
+      "focus": "collisions and travel: blocked, stuck, clipping or unreachable goals in world evidence",
+      "gm_id": "gm-01",
+      "last_status": "never_dispatched",
+      "memory": {
+        "host_feedback": [],
+        "responsibility": "collisions and travel: blocked, stuck, clipping or unreachable goals in world evidence",
+        "task_history": []
+      },
+      "outcomes": [],
+      "resident_body": null,
+      "session_id": null,
+      "unresolved": null
+    },
+    "gm-02": {
+      "attempts": [],
+      "focus": "capability gaps: accepted resident proposals the world cannot satisfy yet",
+      "gm_id": "gm-02",
+      "last_status": "never_dispatched",
+      "memory": {
+        "host_feedback": [],
+        "responsibility": "capability gaps: accepted resident proposals the world cannot satisfy yet",
+        "task_history": []
+      },
+      "outcomes": [],
+      "resident_body": null,
+      "session_id": null,
+      "unresolved": null
+    },
+    "gm-03": {
+      "attempts": [],
+      "focus": "trade and payment: prices, deferred payment, receipts and accounting mismatch",
+      "gm_id": "gm-03",
+      "last_status": "never_dispatched",
+      "memory": {
+        "host_feedback": [],
+        "responsibility": "trade and payment: prices, deferred payment, receipts and accounting mismatch",
+        "task_history": []
+      },
+      "outcomes": [],
+      "resident_body": null,
+      "session_id": null,
+      "unresolved": null
+    },
+    "gm-04": {
+      "attempts": [],
+      "focus": "tools and inventory: ownership, availability, consumption and loss of items",
+      "gm_id": "gm-04",
+      "last_status": "never_dispatched",
+      "memory": {
+        "host_feedback": [],
+        "responsibility": "tools and inventory: ownership, availability, consumption and loss of items",
+        "task_history": []
+      },
+      "outcomes": [],
+      "resident_body": null,
+      "session_id": null,
+      "unresolved": null
+    },
+    "gm-05": {
+      "attempts": [],
+      "focus": "resources and foraging: stock, capacity, production and consumption balance",
+      "gm_id": "gm-05",
+      "last_status": "never_dispatched",
+      "memory": {
+        "host_feedback": [],
+        "responsibility": "resources and foraging: stock, capacity, production and consumption balance",
+        "task_history": []
+      },
+      "outcomes": [],
+      "resident_body": null,
+      "session_id": null,
+      "unresolved": null
+    },
+    "gm-06": {
+      "attempts": [],
+      "focus": "perception and attribution: whether the right resident can learn a world change",
+      "gm_id": "gm-06",
+      "last_status": "never_dispatched",
+      "memory": {
+        "host_feedback": [],
+        "responsibility": "perception and attribution: whether the right resident can learn a world change",
+        "task_history": []
+      },
+      "outcomes": [],
+      "resident_body": null,
+      "session_id": null,
+      "unresolved": null
+    },
+    "gm-07": {
+      "attempts": [],
+      "focus": "persistence: cold restart, save fidelity and continued facts after reload",
+      "gm_id": "gm-07",
+      "last_status": "never_dispatched",
+      "memory": {
+        "host_feedback": [],
+        "responsibility": "persistence: cold restart, save fidelity and continued facts after reload",
+        "task_history": []
+      },
+      "outcomes": [],
+      "resident_body": null,
+      "session_id": null,
+      "unresolved": null
+    },
+    "gm-08": {
+      "attempts": [],
+      "focus": "time and turn ordering: schedules, sequence gaps and out-of-order turns",
+      "gm_id": "gm-08",
+      "last_status": "never_dispatched",
+      "memory": {
+        "host_feedback": [],
+        "responsibility": "time and turn ordering: schedules, sequence gaps and out-of-order turns",
+        "task_history": []
+      },
+      "outcomes": [],
+      "resident_body": null,
+      "session_id": null,
+      "unresolved": null
+    },
+    "gm-09": {
+      "attempts": [],
+      "focus": "blocked feedback: how a resident learns of an obstruction and reacts to it",
+      "gm_id": "gm-09",
+      "last_status": "never_dispatched",
+      "memory": {
+        "host_feedback": [],
+        "responsibility": "blocked feedback: how a resident learns of an obstruction and reacts to it",
+        "task_history": []
+      },
+      "outcomes": [],
+      "resident_body": null,
+      "session_id": null,
+      "unresolved": null
+    },
+    "gm-10": {
+      "attempts": [],
+      "focus": "property and commitments: ownership, contracts, cancellation and accepted work",
+      "gm_id": "gm-10",
+      "last_status": "never_dispatched",
+      "memory": {
+        "host_feedback": [],
+        "responsibility": "property and commitments: ownership, contracts, cancellation and accepted work",
+        "task_history": []
+      },
+      "outcomes": [],
+      "resident_body": null,
+      "session_id": null,
+      "unresolved": null
+    }
+  },
+  "sources": [],
+  "world_bootstrap": {
+    "created_utc": "2026-09-18T10:06:01.062233+00:00",
+    "resident_ids": [
+      "shared:well-keeper",
+      "shared:baker",
+      "shared:smith",
+      "shared:carpenter",
+      "shared:innkeeper",
+      "shared:herder",
+      "shared:gardener",
+      "shared:weaver",
+      "shared:fisher",
+      "shared:healer"
+    ],
+    "schema_version": 1,
+    "source": "explicit_new_world_bootstrap",
+    "world_id": "shared:restart-20260918-01",
+    "world_save_sha256": "a0228906f6b417db2e9b3faae335fae6cc81d2a11810f109efd93f53a55ccd2a"
+  },
+  "world_id": "shared:restart-20260918-01"
+}

@@ -179,6 +179,7 @@ class ProductionRuntimePolicyTests(unittest.TestCase):
     def test_production_host_contract_is_explicit_and_inference_free(self):
         policy = example_policy()
         policy['mode'] = 'production'
+        policy['design_contract'] = gm_autonomy.world_design_contract.reference()
         policy['runtime'] = {
             'kind': 'production_host_contract', 'godot': 'C:/godot.exe',
             'save_path': 'tmp/world.json', 'timeout_seconds': 120,

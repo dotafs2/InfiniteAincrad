@@ -2,6 +2,16 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-18 · H111 Aincrad design governance and cached physical navigation
+
+The user authorized continuing GM/NPC integration under SAO Aincrad rules and requested established fixed navigation. Added a sourced world charter that distinguishes original setting references, our original resident-life extensions and unimplemented systems. Production autonomy pins both design documents; proposals retain a compatibility rationale and six invariants. Main-AI review must explicitly assess setting compatibility. Host validation and the actual publication path reject changed pins; GM candidates cannot edit protected design/host files. Observation, coding, feedback and NPC instructions reflect these rules. Semantic correctness still requires concrete review; text declarations are not proof of canon compliance.
+
+The project already used Godot navigation. Replaced per-frame full route queries with the existing NavigationAgent3D A* cache while preserving RVO speeds, portal approach, world targets, real collision and arrival authority. Invalidation covers a changed command/target, navigation-map revision and a repositioned/restored body. A real wall journey used one path update across 136 physics frames and walked 12.16 metres at at most 1.35 m/s. Two residents walked 72.61/77.38 metres through a cold scene restart with exactly one arrival each.
+
+Verification: 169 focused Python checks plus 62 production-bridge checks, 12 navigation checks, 24 joint-journey checks, four local HTTP adapter cases, zero-warning/error .NET build, full seq43 cold restore, and a scripted ten-GM/ten-resident offline chain with 118 normal-stage Godot checks plus expected rejection of an unreviewed installation. No real model calls or live-world mutation. Two broader suites hit resource/time limits while checking out large candidate worktrees; their owned processes and three test worktrees were cleaned. Initial fixture-argument, map-synchronization and test-edit failures remain recorded rather than counted as passed.
+
+Ten empty persistent GM records are bound to the fresh world and copied as a complete bootstrap checkpoint. Local no-dispatch route preflight plans all ten. An older September 14 accounting reference was found after the default path was absent; it explicitly preserves unknown attempts and missing other-machine history. It is not current September 18 reconciliation. Paid continuation and the reviewed H110 deployment/runtime contract remain open. See [validation](docs/validation/aincrad-gm-navigation-2026-09-18.md). The English workflow, visible conversation archive and handoff are refreshed with this delivery.
+
 ## 2026-09-18 · H110 Reusable resident action capabilities
 
 The user requested batch expansion of foundational abilities through one reusable, extensible action layer. Added `town_actions.gd` with a versioned registry, adapters for 27 established capabilities and six new entry points: free conversation, private observation, and invitation/acceptance/decline/withdrawal for a shared visit. New modules own their options, execution, persistence validation and protocol reconciliation. Existing reducers retain physical, ownership, finite-resource and contract authority; one writer serializes commits while independent body jobs progress together.

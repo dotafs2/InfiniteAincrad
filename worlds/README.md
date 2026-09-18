@@ -2,6 +2,13 @@
 
 The user authorized a fresh world starting at seq0 on 2026-09-18 and publication of its state and decisions. [active.json](active.json) identifies the current lineage. The original seq450 world is still on another computer; it was not overwritten, recovered or combined with this restart.
 
+H111 also binds ten empty persistent GM identities to this fresh world. Their complete
+[bootstrap checkpoint](restart-20260918-01/gm/bootstrap.gm-state.json) and
+[manifest](restart-20260918-01/gm/manifest.json) are retained byte-exactly. These records
+contain no native GM session or decision yet. Do not overwrite a later local GM
+continuation with this initial checkpoint. Current readiness and its limitations are
+reported in [H111 validation](../docs/validation/aincrad-gm-navigation-2026-09-18.md).
+
 Each checkpoint is an exact copy of the saved schema-2 world, including every life event from seq1 to its stated sequence, all ten complete character dossiers, resident knowledge, decisions, replies, belongings and unfinished work. Git newline conversion is disabled for these canonical files so transfer preserves their hashes. Sequence numbers are world-local event counters, not model-call counts. Waiting or receiving a rejected model reply can change state without creating a life event, so filenames contain both sequence and content hash.
 
 The checkpoint manifest retains earlier copies and advances only after validating the prior SHA-256, the unchanged event prefix, resident identities and the unchanged reply archive. Conflicting replay evidence may only append. Different worlds cannot share a lineage. Concurrent checkpoint writers are rejected. After a crash, inspect the lock/pending manifest and hashes before removing a stale publisher lock; never silently replace history.

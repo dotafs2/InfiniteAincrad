@@ -29,6 +29,7 @@ var crowd_detour_count := 0
 var crowd_detour_attempts := 0
 var door_portals: Array = []
 var door_crossings := 0
+var path_updates := 0
 
 func build() -> Dictionary:
 	if region != null:
@@ -89,6 +90,7 @@ func register_body(id: String, body: CharacterBody3D) -> void:
 	agent.path_desired_distance = 0.22
 	agent.target_desired_distance = 0.32
 	agent.path_max_distance = 6.0
+	agent.pathfinding_algorithm = NavigationPathQueryParameters3D.PATHFINDING_ALGORITHM_ASTAR
 	agent.neighbor_distance = 1.5
 	agent.max_neighbors = 8
 	agent.avoidance_enabled = true
@@ -96,8 +98,12 @@ func register_body(id: String, body: CharacterBody3D) -> void:
 	agent.set_meta("resident_id", id)
 	body.add_child(agent)
 	agent.velocity_computed.connect(_on_velocity_computed.bind(id))
+	agent.path_changed.connect(_on_path_changed)
 	agents[id] = agent
 	routes.erase(id)
+
+func _on_path_changed() -> void:
+	path_updates += 1
 
 func _on_velocity_computed(velocity: Vector3, id: String) -> void:
 	safe_velocities[id] = velocity
@@ -152,7 +158,29 @@ func direction_for(id: String, command_id: String, body: CharacterBody3D, target
 	var map := agent.get_navigation_map()
 	if not map.is_valid():
 		return _mark_unreachable(id, route)
-	var path: PackedVector3Array = NavigationServer3D.map_get_path(map, body.global_position, target, true)
+	if NavigationServer3D.map_get_iteration_id(map) == 0:
+		route.status = "map_pending"
+		routes[id] = route
+		return Vector3.ZERO
+	# Stock Godot A* owns the corridor cache and repaths when the map or target changes,
+	# or the body leaves that corridor. A restored/repositioned body also invalidates it.
+	var previous: Vector3 = route.get("last_position", body.global_position)
+	if previous.distance_to(body.global_position) > maxf(0.5, WALK_SPEED * get_physics_process_delta_time() * 2.0):
+		agent.target_position = target
+		route.erase("doorway_points")
+		route.erase("detour")
+		safe_velocities.erase(id)
+		safe_velocity_ready.erase(id)
+	route.last_position = body.global_position
+	var next: Vector3 = target
+	var iteration := NavigationServer3D.map_get_iteration_id(map)
+	if route.get("map_iteration", -1) != iteration:
+		agent.target_position = target
+		route.erase("doorway_points")
+		route.map_iteration = iteration
+	if not agent.is_navigation_finished():
+		next = agent.get_next_path_position()
+	var path: PackedVector3Array = agent.get_current_navigation_path()
 	if path.is_empty():
 		return _mark_unreachable(id, route)
 	# A non-empty path may terminate at the closest reachable point when a target is
@@ -163,7 +191,9 @@ func direction_for(id: String, command_id: String, body: CharacterBody3D, target
 	route.status = "following"
 	route.path = path
 	if not door_portals.is_empty():
-		path = _doorway_path(route,path,body.global_position)
+		var remaining := PackedVector3Array([body.global_position])
+		remaining.append_array(path.slice(agent.get_current_navigation_path_index()))
+		path = _doorway_path(route,remaining,body.global_position)
 	if dynamic_detours and not route.has("doorway_points"):
 		var now := Time.get_ticks_msec()
 		var distance := body.global_position.distance_to(target)
@@ -185,16 +215,15 @@ func direction_for(id: String, command_id: String, body: CharacterBody3D, target
 				path = around
 			else: route.erase("detour")
 	routes[id] = route
-	# The server path is authoritative for this physics frame. Agent path caches update on the
-	# navigation tick, so selecting the first waypoint beyond the body's current position also
-	# handles a legitimate body reposition (for example a restored pending job) without following
-	# a stale previous command path.
-	var next: Vector3 = route.doorway_points[0] if route.has("doorway_points") else target
-	for waypoint in path:
-		var candidate: Vector3 = waypoint
-		if body.global_position.distance_to(candidate) > (0.10 if route.has("doorway_points") else 0.42):
-			next = candidate
-			break
+	# Portal and optional crowd legs refine the same physical journey. Do not iterate the
+	# complete cached corridor here: points behind the body would cause backtracking.
+	if route.has("doorway_points"):
+		next = route.doorway_points[0]
+	elif route.has("detour"):
+		for waypoint in path:
+			if body.global_position.distance_to(waypoint) > 0.42:
+				next = waypoint
+				break
 	var offset := next - body.global_position
 	offset.y = 0.0
 	if offset.length() <= 0.08:
