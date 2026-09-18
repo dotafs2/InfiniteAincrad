@@ -20,7 +20,9 @@ The user explicitly restarted the active simulation at seq0 in `shared:restart-2
 
 - **H111:** pin the [Aincrad charter](docs/design/aincrad-world-charter.md) and capability standard in production GM policy, require explicit setting review, and recheck design pins before release. NPC prompts also retain the Aincrad setting. Ordinary movement now uses Godot's cached A* path following with existing RVO avoidance and collision. Real wall detours, two-person travel across restart, offline GM/NPC continuation and seq43 full restore pass. Ten fresh-world GM records are initialized. The old accounting prerequisite was corrected in H112; arbitrary new-module production deployment remains incomplete. [Evidence and remaining gaps](docs/validation/aincrad-gm-navigation-2026-09-18.md).
 
-- **H112:** permanent developer usage tags for all ten NPCs and ten GMs, exact active-world backfill, idempotent receipts, partial native usage and full-history transfer. The 32 NPC calls total 83,274 tokens. One real GM observation hit its 90-second host deadline after code inspection; 792,826 tokens are confirmed and its final tail remains unresolved. Older-world accounting is not a prerequisite. [Usage and actual limits](docs/validation/actor-usage-2026-09-18.md).
+- **H112:** permanent developer usage tags for all ten NPCs and ten GMs, exact active-world backfill, idempotent receipts, partial native usage and full-history transfer. The initial 32 NPC calls total 83,274 tokens. The first GM observation timed out; 792,826 tokens and its unresolved tail remain historical evidence. [Usage and actual limits](docs/validation/actor-usage-2026-09-18.md).
+
+- **H113:** real GM observation and resume now return bounded results from complete evidence packets. JSON configuration coding has a tool-free artifact path. GM05 authored a finite iron source, the primary assistant verified physical work/depletion/cold restore on a copy and installed it at seq62, and the original GM reviewed the receipt. The first live episode added 18 NPC decisions including free conversation. Same-world simulation continues until the fixed 21:00:08 China-time deadline; voluntary source adoption and sustained autonomy remain under observation. [Recovery and evidence](docs/validation/gm-recovery-2026-09-18.md).
 
 [Character-depth review](docs/design/character-depth-review-2026-09-18.md) · [All ten complete dossiers](docs/design/resident-dossiers.md) · [Character validation](docs/validation/character-depth-2026-09-18.md)
 
@@ -40,8 +42,8 @@ flowchart TB
         A83Move["Revalidate and execute under world rules<br/>Godot cached A*, RVO and real collision<br/>Physical travel, on-site work, consumption and output"]
         A83Core["Persist actual outcomes and history<br/>Success, refusal and unfinished work remain distinct"]
         A83Evidence["Resident needs or maintenance evidence<br/>GM access follows responsibilities; residents are not omniscient"]
-        A83GM["A named GM observes and claims work<br/>Pinned Aincrad charter and capability standard<br/>Choosing no change is valid"]
-        A83Candidate["Develop and self-test an isolated candidate<br/>Preserve authorship, versions, failures and costs"]
+        A83GM["A named GM observes a bounded evidence packet<br/>Full pinned design documents; no shell exploration<br/>Claim work, request evidence or choose no change"]
+        A83Candidate["Develop an isolated candidate<br/>Small JSON: model artifacts plus host tests<br/>Engine changes: scoped coding and self-tests<br/>Preserve authorship, failures and costs"]
         A83Review{"Main AI reviews behavior and Aincrad compatibility<br/>Concrete setting violations block release"}
         A83Release["Bounded release and same-save continuation<br/>Single writer, version tracking, belongings and commitments"]
         A83Use["Residents may use, reject or defer the capability<br/>Installation is not adoption"]
@@ -78,7 +80,9 @@ flowchart TB
         H110["H110 Reusable action layer: 33 capability contracts<br/>Free speech, private observation, consented joint travel<br/>Physical restart verified; live adoption not yet observed"]
         H111["H111 Aincrad design pins and fixed navigation<br/>Cached A*, physical detour and joint restart verified<br/>10 GM identities initialized; current status follows in H112"]
         H112["H112 Permanent developer usage per NPC and GM<br/>32 NPC calls: 83,274 tokens; exact full-history transfer<br/>One real GM observation timed out; known tokens retained"]
-        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110 --> H111 --> H112
+        H113["H113 Real GM results and session reuse verified<br/>Finite iron configuration: reviewed, installed, receipt acknowledged<br/>Physical copy trial passed; live voluntary adoption pending"]
+        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110 --> H111 --> H112 --> H113
+        H113 -.Bounded reviewed content loop.-> A83Release
         H111 -.Verified navigation and design gates.-> A83Move
         H110 -.Implemented common boundary.-> A83Action
         H103 --> M20
@@ -89,7 +93,7 @@ flowchart TB
         M20S["Observe adoption of conversation and joint visits<br/>Add sourced introductions and voluntary disclosures<br/>Shared memories by person; relationships change through actual events"]
         M20C["Validate sustainable resources and daily life first<br/>Long-term berry supply, crowding and voluntary ration gifts<br/>Renewable flour, professions and exchange"]
         M20G["Improve entering and observing the world<br/>Overlapping navigation edges, renderer exit, characters,<br/>animation and performance"]
-        H47["Complete the fresh-world production handoff<br/>Resolve this GM observation timeout and missing final usage<br/>Review the H110 deployment/runtime contract<br/>Same-save life, original-GM follow-up and bounded repeat cycles"]
+        H47["Complete the fresh-world production handoff<br/>Retain old unknown usage; observe new bounded cycles<br/>Arbitrary new modules still need deployment contracts<br/>Verify voluntary adoption and sustainable daily life"]
         H82["Participant-directed development<br/>Residents identify needs, choose construction, use or decline it<br/>Externally assigned goals are not autonomous invention"]
         H110 -->|Continue the new world with full history| M20C
         H110 -->|Observe voluntary use and extend tested capabilities| M20S
@@ -117,7 +121,7 @@ flowchart TB
     classDef done fill:#dcfce7,stroke:#15803d,color:#14532d;
     classDef partial fill:#fff1d6,stroke:#b45309,color:#78350f;
     classDef future fill:#f1f5f9,stroke:#64748b,color:#0f172a;
-    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109,H110,H111,H112 done;
+    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109,H110,H111,H112,H113 done;
     class M20,M20S,M20C,M20G,H47,H82,A83Entry,A83Scene,A83NPC,A83Action,A83Move,A83Core,A83Evidence,A83GM,A83Candidate,A83Review,A83Release,A83Use,A83Feedback,A83Stop,A83Save,A83Fault partial;
     class N5,P,N6,N7,N8,N9,XR,N10,R future;
 ```
