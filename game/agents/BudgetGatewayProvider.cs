@@ -237,6 +237,13 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
                     foreach (var coordinate in value.EnumerateArray())
                         Require(coordinate.ValueKind == JsonValueKind.Number && double.IsFinite(coordinate.GetDouble()));
                 }
+                else if (key == "material_sources" && field == "last_observed_stock"
+                    && value.ValueKind == JsonValueKind.Null)
+                {
+                    // A route learned from a notice or another resident names a real
+                    // source while its current stock remains unknown until the resident
+                    // sees it. Preserve that one explicit unknown value.
+                }
                 else
                 {
                     Require(value.ValueKind is JsonValueKind.String or JsonValueKind.Number or JsonValueKind.True or JsonValueKind.False);

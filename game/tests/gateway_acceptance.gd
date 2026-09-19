@@ -50,6 +50,11 @@ func _run() -> void:
 			view.material_sources.append({"id": "fixture:source-" + str(index), "label": "Offcuts", "material": "iron", "access": "public", "position": [0, 0, 4],
 				"last_observed_stock": 3, "observed_elapsed": index, "observation_event_seq": index, "knowledge_source": "personal_proximity_observation", "work_seconds_per_unit": 60,
 				"stock_may_have_changed": true, "gm_resources": {"secret": "nested_gm_secret"}})
+		if scenario == "knowledge-unknown-stock":
+			view.material_sources[0].last_observed_stock = null
+			view.material_sources[0].knowledge_source = "personally_read_public_material_notice_stock_unknown"
+		elif scenario == "knowledge-adjacent-null":
+			view.material_sources[0].knowledge_source = null
 		if scenario == "knowledge-oversize":
 			view.known_skill_notices[0].text = "x".repeat(513)
 		if scenario == "knowledge-nested":
@@ -86,7 +91,7 @@ func _run() -> void:
 		view.erase("actions")
 	var proposal: Dictionary = await brain.propose(view, 0)
 	check(world.snapshot() == original, "gateway cannot change world directly")
-	if mode in ["success", "town", "action-groups", "unicode-context", "knowledge-bounds"]:
+	if mode in ["success", "town", "action-groups", "unicode-context", "knowledge-bounds", "knowledge-unknown-stock"]:
 		check(proposal.get("ok", false), "gateway returned proposal: " + str(proposal.get("code", "")))
 		if proposal.get("ok", false):
 			check(proposal.provenance == "opengameagent_fixture", "test HTTP is never live Kimi")
