@@ -119,6 +119,28 @@ class ActorUsageTests(unittest.TestCase):
         self.assertEqual(gm['measured_calls'], 3)
         self.assertEqual(gm['unpriced_measured_calls'], 3)
 
+    def test_gm_start_failure_is_not_sent_but_provider_unknown_and_measured_stay_distinct(self):
+        self.book.settle_gm(
+            'run-start-failed', 'gm-01', 'feedback',
+            {'spawn_error': 'codex executable unavailable', 'provider_request_started': False,
+             'usage_measured': False})
+        self.book.settle_gm(
+            'run-provider-unknown', 'gm-01', 'feedback',
+            {'provider_request_started': True, 'usage_measured': False})
+        self.book.settle_gm(
+            'run-measured', 'gm-01', 'feedback',
+            {'provider_request_started': True, 'usage_measured': True,
+             'usage': {'input_tokens': 12, 'output_tokens': 3, 'cached_input_tokens': 4,
+                       'reasoning_output_tokens': 0}})
+        calls = {row['id']: row for row in self.book.snapshot()['calls']}
+        self.assertEqual(calls['gm:feedback:run-start-failed:gm-01']['status'], 'not_sent')
+        self.assertIsNone(calls['gm:feedback:run-start-failed:gm-01']['usage'])
+        self.assertEqual(calls['gm:feedback:run-provider-unknown:gm-01']['status'], 'unknown')
+        self.assertEqual(calls['gm:feedback:run-measured:gm-01']['status'], 'measured')
+        gm = next(actor for actor in self.book.snapshot()['actors'] if actor['id'] == 'gm-01')
+        self.assertEqual((gm['not_sent_calls'], gm['unresolved_calls'], gm['measured_calls']),
+                         (1, 1, 1))
+
     def test_kimi_cached_reply_attribution_does_not_charge_twice(self):
         ledger = self.root / 'ledger.sqlite3'
         with closing(sqlite3.connect(ledger)) as db, db:
