@@ -304,7 +304,8 @@ func background_gm_snapshot() -> Dictionary:
 	## Audited terminal receipts are appended after existing movement and pending-job facts, so
 	## the bounded channel never evicts a physical block that was already visible. Each entry is
 	## emitted only after its authoritative command journal and life event/turn receipt agree.
-	for terminal in _audited_terminal_evidence():
+	var audited_slots := maxi(0, BACKGROUND_GM_EVIDENCE_LIMIT - issues.size())
+	for terminal in _audited_terminal_evidence(audited_slots):
 		if issues.size() >= BACKGROUND_GM_EVIDENCE_LIMIT:
 			break
 		issues.append(terminal)
@@ -380,15 +381,33 @@ func _basic_action_pending_entry(id: String, job: Dictionary, action: String) ->
 		"discriminators": {"movement_blocked": false, "collision_proved": false, "stall_proved": false,
 			"note": "pending basic-action facts only; an ordinary pending action is not a stall, a defect or a blocked body"}}
 
-func _audited_terminal_evidence() -> Array:
+func _audited_terminal_evidence(limit: int = -1) -> Array:
 	## The raw command/event journals stay private. This helper copies a deliberately small
 	## allowlist only after the two authoritative sides agree, so a stray or edited event cannot
 	## become a GM fact merely by having a familiar type name.
-	var result: Array = []
-	result.append_array(_self_repair_terminal_evidence())
-	result.append_array(_material_handoff_terminal_evidence())
-	result.append_array(_basic_action_terminal_evidence())
-	return result
+	var current: Array = _basic_action_terminal_evidence()
+	var historical: Array = []
+	historical.append_array(_self_repair_terminal_evidence())
+	historical.append_array(_material_handoff_terminal_evidence())
+	historical.sort_custom(func(left, right):
+		var left_seq := int(left.get("event_seq", 0))
+		var right_seq := int(right.get("event_seq", 0))
+		if left_seq != right_seq:
+			return left_seq < right_seq
+		return str(left.get("issue_id", "")) < str(right.get("issue_id", "")))
+	if limit < 0:
+		current.append_array(historical)
+		return current
+	if current.size() > limit:
+		return current.slice(0, limit)
+	var history_slots := maxi(0, limit - current.size())
+	if historical.size() > history_slots:
+		# Select the newest terminal facts first, then restore chronological order for the
+		# selected window. This keeps current failures visible without making the feed jump
+		# backwards when several recent physical outcomes are retained.
+		historical = historical.slice(historical.size() - history_slots) if history_slots > 0 else []
+	current.append_array(historical)
+	return current
 
 func _self_repair_terminal_evidence() -> Array:
 	var result: Array = []
@@ -548,7 +567,8 @@ func _basic_action_terminal_evidence() -> Array:
 		var terminal: Variant = command.get("result", {})
 		var action := str(payload.get("action", "")) if payload is Dictionary else ""
 		if not payload is Dictionary or not terminal is Dictionary or payload.get("actor_id", "") != id \
-				or action not in BACKGROUND_GM_BASIC_ACTIONS or command.get("status", "") != "rejected":
+				or action not in BACKGROUND_GM_BASIC_ACTIONS or accepted.get("action", "") != "life:" + action \
+				or command.get("status", "") != "rejected":
 			continue
 		if terminal.get("ok", true) != false or terminal.get("code", "") != BACKGROUND_GM_BASIC_TERMINAL_CODE \
 				or terminal.get("actor_id", "") != id or terminal.get("command_id", "") != command_id:
