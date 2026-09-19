@@ -1,5 +1,11 @@
 # 历史全部流水
 
+## 2026-09-19 · H121 Edge-repair follow-up and second natural iron recovery
+
+A bounded twelve-call resident window advanced the active world seq194→209. All calls settled for CNY 0.2612845 and the gateway drained cleanly; lifetime history now contains 184 archived attempts and 198 usage records. Smith kept his recovered iron, revisited the finite source and moved between the market and artisans' forecourt, but no new edge-repair contract was formed because Rowan received no new model turn in this window. Rowan's axe remains edge 20 / handle 100 and the earlier rejected contract remains rejected.
+
+Iris naturally used her earlier personal source knowledge to recover one more iron. The public source now has stock1 and recovered2, preserving the finite total of three. A disposable TownTrade probe passed 30/30 edge-repair assertions across approach, fresh offer, escrow, delivery, 60-second work and collection; this is implementation evidence only, not autonomous adoption. No code change was necessary. The next live condition is a fresh Rowan decision after his due boundary. The known navigation merge warning remains; this run produced no `ERROR:` renderer lines. [Evidence](docs/validation/material-repair-2026-09-19.md).
+
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
 ## 2026-09-19 · H120 Natural iron discovery and recovery

@@ -68,3 +68,14 @@ Innkeeper 的一次材料移动在现场被阻塞，随后居民自主取消；�
   - 明确理由：My energy is low at 37.0, and I have no urgent survival needs requiring immediate action. Resting at the Western Artisans' Forecourt will let me recover stamina safely. I was just here and it's a known public space.
 - `turn:shared:healer:0:14`：`life:harvest_ration`；动作状态 `rejected`；事件：没有新增完成事件。
   - 明确理由：I have 1 food in inventory and satiety at 81, but harvest_ration is available and I should secure food while I can. Stock observations show foraging points had stock 4 recently, so it's worth attempting to gather a ration now rather than waiting until satiety drops to urgent levels.
+
+
+# 居民观察（seq194→seq209，2026-09-19）
+
+本轮 12 次 Kimi 调用全部结算，新增费用 0.2612845 元，世界从 seq194 到 seq209；没有未知费用或未释放请求。
+
+Smith 已经持有铁并真实走访市场与工匠广场，也再次看到铁源库存为 2，但本轮没有形成修理合同。Carpenter 的斧刃仍为 20，且本轮没有新的 Carpenter 模型决定；因此不能把离线修理探针当作居民采用。
+
+Weaver 在已有个人知识基础上自然回到铁源并回收 1 铁，公共铁源从 2 降到 1，来源总量仍守恒。这个新回合增加了材料流通证据，但没有产生 edge repair 的完成事件。
+
+本轮继续保留渲染器内部告警；没有找到可证实的生产修复。下一步是让已到期的 Carpenter 先获得真实观察机会，验证其是否靠近 Smith 并重新提出新合同；旧 rejected 合同不会复活。
