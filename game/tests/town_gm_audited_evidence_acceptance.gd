@@ -30,7 +30,7 @@ func run() -> void:
 	check(basic.ok and basic.code == "action_started", "fixture accepts a basic-life action before terminal depletion")
 	world.host_move(A, world.destination(A, "harvest_ration"))
 	world.advance(60.0)
-	check(world.action_receipt("gm:basic-failure").result.code == "resources_unavailable", "fixture records terminal basic-life resource failure")
+	check(world.snapshot().godot.commands["gm:basic-failure"].result.code == "resources_unavailable", "fixture records terminal basic-life resource failure")
 	world._state.godot.resident_turns[A] = {"status": "settled", "history": [{"status": "settled", "command_id": "gm:basic-failure",
 		"result": {"ok": true, "code": "action_started"}}]}
 
@@ -62,9 +62,42 @@ func run() -> void:
 		check(not entry.has("delivered_text") and not entry.has("speech_delivery") and entry.get("discriminators", {}).get("public_utterance", true) == false,
 			"terminal evidence is independent physical evidence, never speech")
 
+	# More than one bounded feed's worth of historical handoffs must retain the current basic
+	# failure and choose the newest historical window. The selected historical window itself stays
+	# chronological, so a consumer never sees an older receipt after a newer one.
+	var saved_state: Dictionary = world._state.duplicate(true)
+	for index in 70:
+		var command_id := "gm:old-gift-%02d" % index
+		var sequence := int(world._state.life.events.size()) + 1
+		var event_id := "life_event_old_gift_%02d" % index
+		var donor_position: Vector3 = world.position_of(C)
+		var recipient_position: Vector3 = world.position_of(B)
+		world._state.life.events.append({"seq": sequence, "event_id": event_id, "type": "material_handed_over",
+			"actor_id": C, "subject_id": B, "recipient_ids": [C, B], "operation_id": command_id,
+			"material": "iron", "quantity": 1, "donor_delta": -1, "recipient_delta": 1, "contractual": false,
+			"donor_position": [donor_position.x, donor_position.y, donor_position.z],
+			"recipient_position": [recipient_position.x, recipient_position.y, recipient_position.z]})
+		world._state.godot.capabilities.commands[command_id] = {"capability_id": "inventory.give_material", "version": 1,
+			"payload": {"actor_id": C, "option_id": "ability:give_material:old-%02d" % index, "provenance": "fixture", "speech": ""},
+			"created_elapsed": 0.0, "status": "completed", "event_seq": sequence,
+			"result": {"ok": true, "code": "material_handed_over", "event_id": event_id,
+				"actor_id": C, "recipient_id": B, "material": "iron", "quantity": 1}}
+	var overflow: Dictionary = world.background_gm_snapshot()
+	var overflow_gifts := _entries(overflow, "material_handoff_completed")
+	check(overflow.get("counts", {}).get("issues", 65) <= 64 and _entries(overflow, "basic_life_resources_unavailable").size() == 1,
+		"current resource failure survives a historical evidence overflow")
+	check(overflow_gifts.any(func(entry): return entry.get("command_id", "") == "gm:old-gift-69")
+		and not overflow_gifts.any(func(entry): return entry.get("command_id", "") == "gm:old-gift-00"),
+		"newest historical handoffs are retained while the oldest falls outside the bound")
+	var overflow_sequences: Array = overflow_gifts.map(func(entry): return int(entry.get("event_seq", 0)))
+	var sorted_overflow := overflow_sequences.duplicate()
+	sorted_overflow.sort()
+	check(overflow_sequences == sorted_overflow, "retained historical terminal facts remain chronological")
+	world._state = saved_state
+
 	# Altering the terminal event or receipt breaks the command/event cross-check and removes the
 	# forged item from the projection. Restore the in-memory fixture after each probe.
-	var saved_state: Dictionary = world._state.duplicate(true)
+	saved_state = world._state.duplicate(true)
 	var terminal_event: Dictionary = world._state.life.events[-2]
 	terminal_event.text = SECRET
 	terminal_event.consumed = 0
@@ -76,6 +109,9 @@ func run() -> void:
 	world._state = saved_state.duplicate(true)
 	world._state.godot.commands["gm:basic-failure"].result.code = "made_up_success"
 	check(_entries(world.background_gm_snapshot(), "basic_life_resources_unavailable").is_empty(), "tampered basic terminal receipt is not projected")
+	world._state = saved_state
+	world._state.godot.resident_turns[A].history[-1].action = "life:rest"
+	check(_entries(world.background_gm_snapshot(), "basic_life_resources_unavailable").is_empty(), "mismatched accepted basic action is not projected")
 	world._state = saved_state
 	_close_stage(stage)
 
