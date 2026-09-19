@@ -2503,13 +2503,13 @@ class SelectedGmObserveTests(CorrectionBase):
         seen = self._dispatch(cycle)
         self.assertEqual(self._flags(seen['command'], '--max-prompt-bytes'), ['64000'])
 
-    def test_cycle_prompt_limit_default_stays_24000(self):
+    def test_cycle_prompt_limit_default_keeps_room_for_complete_design_sources(self):
         args = gm_autonomy.build_parser().parse_args([
             'cycle', '--policy', str(self.policy_path)])
-        self.assertEqual(args.max_prompt_bytes, 24000)
+        self.assertEqual(args.max_prompt_bytes, 32768)
         cycle = self._cycle(['gm-04'], {'max_prompt_bytes': args.max_prompt_bytes})
         seen = self._dispatch(cycle)
-        self.assertEqual(self._flags(seen['command'], '--max-prompt-bytes'), ['24000'])
+        self.assertEqual(self._flags(seen['command'], '--max-prompt-bytes'), ['32768'])
 
     def test_prompt_limit_is_forwarded_only_to_observe(self):
         runner = {'max_prompt_bytes': 64000}

@@ -71,7 +71,7 @@ OBSERVE_CLEANUP_SECONDS_PER_GM = 30
 # Keep the cycle default identical to gm_runner.observe while allowing a reviewed run to
 # raise the bound for a larger, still finite state projection. The upper bound prevents a
 # typo from turning a bounded observation into an effectively unbounded prompt.
-DEFAULT_MAX_PROMPT_BYTES = 24000
+DEFAULT_MAX_PROMPT_BYTES = 32768
 MIN_MAX_PROMPT_BYTES = 1024
 MAX_MAX_PROMPT_BYTES = 1048576
 # A semantic repair may only be justified by fresh, exactly bound evidence from processes that
@@ -4085,7 +4085,7 @@ def build_parser() -> argparse.ArgumentParser:
     cycle_parser.add_argument('--timeout', type=int, default=900)
     cycle_parser.add_argument('--max-prompt-bytes', type=int,
                               default=DEFAULT_MAX_PROMPT_BYTES,
-                              help='forwarded only to gm_runner observe; default 24000, '
+                              help='forwarded only to gm_runner observe; default 32768, '
                                    'valid range 1024..1048576')
     cycle_parser.add_argument('--gm', action='append', default=[],
                               help='observe only these gm_runner roster GMs (repeatable); the '

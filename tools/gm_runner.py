@@ -3756,7 +3756,9 @@ def build_parser() -> argparse.ArgumentParser:
     observe_parser.add_argument('--max-issues-per-gm', type=int, default=4)
     observe_parser.add_argument('--gm', action='append', default=[])
     observe_parser.add_argument('--prior-ledger', type=Path, default=DEFAULT_PRIOR_LEDGER)
-    observe_parser.add_argument('--max-prompt-bytes', type=int, default=24000)
+    # Complete pinned design sources now occupy over 18 KB. Retain them verbatim
+    # and leave bounded room for the observation and durable GM state.
+    observe_parser.add_argument('--max-prompt-bytes', type=int, default=32768)
     observe_parser.set_defaults(func=observe)
 
     code_parser = subparsers.add_parser('code', parents=[shared],
