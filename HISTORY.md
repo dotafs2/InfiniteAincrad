@@ -2,6 +2,16 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-19 · H119 Actual terminal feedback, GM effect review and food accounting
+
+Two bounded serial resident windows advanced the same world seq162→174 with sixteen settled Kimi calls costing CNY 0.3289711 and no new unknown charge. Nine residents made new decisions. Iris explicitly recognized her prior resource refusal, harvested one ration, then encountered scarcity again; speech, a meal, movement and rest also completed. Every previous archive entry and usage revision remains intact: 160 lifetime attempts, 174 world usage calls and ten residents. Exact cold restore passed.
+
+GM04 consumed a frozen host effect receipt in one genuinely new epoch2 native conversation, retained its durable memory and acknowledged the observed effects. The run measured 47,012 input and 4,064 output tokens; currency cost remains unavailable. It requested concrete stock/allocation and iron-ownership evidence. This was host-directed feedback, not autonomous invention or a restored original native session. Old GM06/GM05 unknowns and no-repeat safeguards remain untouched.
+
+Integrated separately typed audited self-repair, handoff and terminal-failure evidence, prioritizing current failures over bounded newest historical outcomes. Root runtime verification corrected fixture errors and the real start-event versus terminal-sequence binding; 37 final assertions and the actual seq174 projection passed. A focused accounting regression distinguishes proven local not-sent GM startup failure from unknown usage. Five food-report tests pass; exact resource conservation is reported without treating sparse endpoint matches as continuous durations or inferred satiety residuals as proved clipping.
+
+Live04 also exposed six house-loading errors and eight null-particle errors. Isolated headless and Forward+ loads subsequently instantiated the unchanged house/cache successfully; no source/cache edits or stability claim followed. Natural full material/production uptake, sustained resources and an unattended ten-GM loop remain open. All code is local, no push. [Evidence](docs/validation/life-feedback-2026-09-19.md) · [Resident report](worlds/restart-20260918-01/observations/feedback-20260919/report.zh-CN.md).
+
 ## 2026-09-19 · H118 Timely failure feedback and audited GM session epochs
 
 Iris had reached the harvest point but received `resources_unavailable`; the missing life event left her waiting nearly 30 minutes before another model observation. A narrowly bound latest-terminal-failure predicate now delivers that result once through existing feedback, retaining all admission/review/provider gates and free choice. The root passed 59 new assertions plus 42 first-offer regressions; the actual seq162 save is now eligible with the exact receipt and no byte changes. No new resident reply is claimed yet.

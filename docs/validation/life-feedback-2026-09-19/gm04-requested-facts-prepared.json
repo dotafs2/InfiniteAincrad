@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "kind": "gm04_requested_facts",
+  "purpose": "Read-only facts for the next meaningful GM04 feedback; this file is not a dispatch request.",
+  "world_id": "shared:restart-20260918-01",
+  "world_seq": 174,
+  "world_sha256": "55dad1ad02bf20734bd71bf9c89583011a2f1787fd6fa12cd2ce9586de2bc7db",
+  "gm_feedback_run_id": "feedback-20260919T033016Z-250094",
+  "gm_feedback_result_sha256": "5990271b7ff2f1b689deaf012fab51c3ad10a0b347578b4a868be94674a52952",
+  "evidence_paths": {
+    "canonical_world": "private/worlds/restart-20260918-01/world.json",
+    "gm_visible_projection": "private/iteration-20260919/live-04/gm-evidence.json",
+    "gm_visible_projection_sha256": "c1f3b65941379f56dc43c4cbd58b0bd99dedf50ddea7c26482e97f34bb2a1c30",
+    "rule_source": "game/core/town_life.gd"
+  },
+  "harvest_ration": {
+    "terminal_rule": {
+      "source_lines": "game/core/town_life.gd:516,672,697-698",
+      "arrival_observation": "When harvest_ration reaches its destination, the host records a host_arrival observation with the current public ration stock before evaluating the terminal result.",
+      "validity": "The terminal action is valid only when the resident food count is below 2 and public foraging stock is at least 1.",
+      "access_gate": "If the physical foraging-access probe is false, advance leaves the pending harvest in flight; it does not produce the resources_unavailable terminal result."
+    },
+    "ordered_arrival_evidence": {
+      "mapping_basis": "Each harvest command has one ordered host_arrival observation for that resident; command status/result comes from godot.commands and successful event sequence from life.events.",
+      "weaver": [
+        {
+          "command_id": "turn:shared:weaver:0:12",
+          "arrival_elapsed_seconds": 3415.683333333846,
+          "stock_at_arrival": 2,
+          "terminal_code": "harvest_ration",
+          "terminal_status": "completed",
+          "event_seq": 93
+        },
+        {
+          "command_id": "turn:shared:weaver:0:23",
+          "arrival_elapsed_seconds": 5463.75000000015,
+          "stock_at_arrival": 0,
+          "terminal_code": "resources_unavailable",
+          "terminal_status": "rejected",
+          "event_seq": null
+        },
+        {
+          "command_id": "turn:shared:weaver:0:24",
+          "arrival_elapsed_seconds": 6513.0999999996575,
+          "stock_at_arrival": 2,
+          "terminal_code": "harvest_ration",
+          "terminal_status": "completed",
+          "event_seq": 170
+        },
+        {
+          "command_id": "turn:shared:weaver:0:25",
+          "arrival_elapsed_seconds": 6535.83333333298,
+          "stock_at_arrival": 0,
+          "terminal_code": "resources_unavailable",
+          "terminal_status": "rejected",
+          "event_seq": null
+        }
+      ],
+      "innkeeper": [
+        {
+          "command_id": "turn:shared:innkeeper:0:7",
+          "arrival_elapsed_seconds": 2169.483333333334,
+          "stock_at_arrival": 3,
+          "terminal_code": "harvest_ration",
+          "terminal_status": "completed",
+          "event_seq": 75
+        },
+        {
+          "command_id": "turn:shared:innkeeper:1:17",
+          "arrival_elapsed_seconds": 6530.1499999996495,
+          "stock_at_arrival": 0,
+          "terminal_code": "resources_unavailable",
+          "terminal_status": "rejected",
+          "event_seq": null
+        },
+        {
+          "command_id": "turn:shared:innkeeper:1:18",
+          "arrival_elapsed_seconds": 6554.433333332971,
+          "stock_at_arrival": 0,
+          "terminal_code": "resources_unavailable",
+          "terminal_status": "rejected",
+          "event_seq": null
+        }
+      ],
+      "fisher": [
+        {
+          "command_id": "turn:shared:fisher:0:1",
+          "arrival_elapsed_seconds": 87.83333333333319,
+          "stock_at_arrival": 6,
+          "terminal_code": "harvest_ration",
+          "terminal_status": "completed",
+          "event_seq": 26
+        },
+        {
+          "command_id": "turn:shared:fisher:0:6",
+          "arrival_elapsed_seconds": 3412.5833333338446,
+          "stock_at_arrival": 3,
+          "terminal_code": "harvest_ration",
+          "terminal_status": "completed",
+          "event_seq": 92
+        },
+        {
+          "command_id": "turn:shared:fisher:0:12",
+          "arrival_elapsed_seconds": 6535.316666666314,
+          "stock_at_arrival": 0,
+          "terminal_code": "resources_unavailable",
+          "terminal_status": "rejected",
+          "event_seq": null
+        }
+      ]
+    },
+    "interpretation": {
+      "proved": "Every listed refusal reached a terminal resources_unavailable result and had a host_arrival observation of public stock 0. The refusal therefore occurred at an instant when the public ration source was empty.",
+      "not_proved": "The public packet has no per-attempt food inventory snapshot. Because the same rule also requires food < 2, it cannot exclude a simultaneous resident food-cap condition. The terminal record does not support an admission or allocation block: an access block would leave the harvest pending before terminal evaluation.",
+      "current_vs_historical": "At seq174 the canonical public ration state is stock 1, capacity 6, initial_stock 6, produced_total 15, and harvested_total 20. That current stock is a later state and does not revise the historical stock-0 arrival observations."
+    }
+  },
+  "axe_and_iron": {
+    "axe": {
+      "item_id": "seed:axe",
+      "owner_id": "shared:carpenter",
+      "custodian_id": "shared:carpenter",
+      "edge": 20,
+      "handle": 100,
+      "source": "explicit_genesis_fact_not_earned_not_migrated",
+      "handle_repair_event": {
+        "event_seq": 158,
+        "type": "self_repair_completed",
+        "part": "handle",
+        "material": "wood",
+        "consumed": 1,
+        "work_seconds": 60
+      },
+      "edge_contract": {
+        "item_id": "seed:axe",
+        "owner_id": "shared:carpenter",
+        "worker_id": "shared:smith",
+        "part": "edge",
+        "status": "rejected",
+        "reserved_col": 0
+      },
+      "reading": "The handle repair did not repair the edge. The canonical item snapshot remains edge 20 and handle 100; no iron movement or completed edge repair is recorded."
+    },
+    "installed_public_iron_source": {
+      "source_id": "street:iron-salvage-20260918",
+      "label": "Street salvage iron heap",
+      "material": "iron",
+      "access": "public",
+      "initial_stock": 3,
+      "current_stock": 3,
+      "recovered": 0,
+      "position": [0, 0.22, 7.7],
+      "install_command": "development_gm:gm05-iron-20260918",
+      "source_need_seq": 27,
+      "owner_id": null,
+      "reading": "A finite public source is installed in the canonical world, but it is not resident-owned and no unit is currently in the smith's account. The smith's canonical iron account is 0."
+    },
+    "personal_knowledge": {
+      "structured_known_entries": [
+        {
+          "resident_id": "shared:well-keeper",
+          "source_id": "street:iron-salvage-20260918",
+          "observed_elapsed_seconds": 5390.900000000184,
+          "event_seq": 149,
+          "stock_known": null
+        },
+        {
+          "resident_id": "shared:innkeeper",
+          "source_id": "street:iron-salvage-20260918",
+          "observed_elapsed_seconds": 5390.900000000184,
+          "event_seq": 150,
+          "stock_known": null
+        }
+      ],
+      "smith_entry": null,
+      "reading": "World installation and public accessibility do not establish that the smith has personally discovered, remembered, or adopted the source. The current structured knowledge map has no smith entry; that remains unknown rather than a negative claim about every possible perception."
+    }
+  },
+  "projection_boundary": {
+    "canonical_history_present": [
+      {
+        "seq": 153,
+        "type": "self_repair_started",
+        "recipient_ids": ["shared:carpenter"]
+      },
+      {
+        "seq": 163,
+        "type": "surroundings_observed",
+        "recipient_ids": ["shared:carpenter"]
+      },
+      {
+        "seq": 169,
+        "type": "surroundings_observed",
+        "recipient_ids": ["shared:herder"]
+      }
+    ],
+    "explanation": "The compact GM evidence file is a bounded public-life projection. These self-recipient/private observation events are intentionally outside that projection; they are present in canonical life.events and were not lost or omitted from world history. No private observation text is copied here."
+  },
+  "continuity": {
+    "gm04_epoch": 2,
+    "native_session_restored": false,
+    "old_unknown_task_retried": false,
+    "use": "Root may attach this packet to a later meaningful GM04 feedback after review; do not dispatch from this file alone."
+  }
+}

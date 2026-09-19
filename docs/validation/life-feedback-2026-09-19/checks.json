@@ -1,0 +1,31 @@
+{
+  "gm_audited_assertions": 37,
+  "root_accounting_regressions": 1,
+  "cold_restore": {
+    "residents": 10,
+    "seq": 174,
+    "exact_fields": true,
+    "sha256": "55dad1ad02bf20734bd71bf9c89583011a2f1787fd6fa12cd2ce9586de2bc7db"
+  },
+  "actual_gm_projection": {
+    "entries": 12,
+    "source_unchanged": true,
+    "runner_contract_valid": true,
+    "rowan_repair_seq": 158,
+    "iris_terminal_command": "turn:shared:weaver:0:25"
+  },
+  "earlier_failed_runs_preserved": {
+    "gm-audited-01": "test used wrong command receipt access; owned timeout",
+    "gm-audited-02": "test missing resident_turns fixture; owned timeout",
+    "gm-audited-03": "35 checks, 2 failed: wrong start-vs-terminal event binding"
+  },
+  "new_paid_calls_during_checks": 0,
+  "food_report_tests": 5,
+  "house_probe": {
+    "headless_loaded_children": 21,
+    "forward_plus_loaded_children": 21,
+    "source_or_cache_modified": false,
+    "full_scene_startup_issue_resolved": false,
+    "first_probe_script_parse_error_retained": true
+  }
+}

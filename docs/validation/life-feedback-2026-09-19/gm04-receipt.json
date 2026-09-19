@@ -1,0 +1,224 @@
+{
+  "kind": "coordinator_life_effect_review",
+  "world_id": "shared:restart-20260918-01",
+  "authorship": "Host-directed implementation and effect review; not autonomous GM invention.",
+  "baseline": {
+    "life_seq": 148,
+    "world_sha256": "cdfe0136856980281f671c14721815ac1bf5484cb77e930485edb9c435dc380a"
+  },
+  "observed": {
+    "life_seq": 174,
+    "world_sha256": "55dad1ad02bf20734bd71bf9c89583011a2f1787fd6fa12cd2ce9586de2bc7db",
+    "gm_projection_sha256": "c1f3b65941379f56dc43c4cbd58b0bd99dedf50ddea7c26482e97f34bb2a1c30"
+  },
+  "purpose": "Review new physical outcomes within GM04 responsibilities and name the next concrete obstacle. Old dialogue may be stale. Do not repeat unknown work or claim installation is adoption.",
+  "new_life_events": [
+    {
+      "event_id": "life_event_151",
+      "seq": 151,
+      "type": "eat_ration",
+      "actor_id": "shared:weaver",
+      "operation_id": "turn:shared:weaver:0:22"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:well-keeper",
+      "operation_id": "turn:shared:well-keeper:1:10",
+      "seq": 152,
+      "event_id": "life_event_152"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:gardener",
+      "operation_id": "turn:shared:gardener:0:9",
+      "seq": 154,
+      "event_id": "life_event_154"
+    },
+    {
+      "event_id": "life_event_155",
+      "seq": 155,
+      "type": "eat_ration",
+      "actor_id": "shared:herder",
+      "operation_id": "turn:shared:herder:0:8"
+    },
+    {
+      "event_id": "life_event_156",
+      "seq": 156,
+      "type": "eat_ration",
+      "actor_id": "shared:fisher",
+      "operation_id": "turn:shared:fisher:0:10"
+    },
+    {
+      "event_id": "life_event_157",
+      "seq": 157,
+      "type": "rest",
+      "actor_id": "shared:innkeeper",
+      "operation_id": "turn:shared:innkeeper:1:14"
+    },
+    {
+      "type": "self_repair_completed",
+      "actor_id": "shared:carpenter",
+      "operation_id": "turn:shared:carpenter:0:27",
+      "item_id": "seed:axe",
+      "part": "handle",
+      "material": "wood",
+      "consumed": 1,
+      "work_seconds": 60,
+      "seq": 158,
+      "event_id": "life_event_158"
+    },
+    {
+      "event_id": "life_event_159",
+      "seq": 159,
+      "type": "eat_ration",
+      "actor_id": "shared:well-keeper",
+      "operation_id": "turn:shared:well-keeper:1:11"
+    },
+    {
+      "event_id": "life_event_160",
+      "seq": 160,
+      "type": "rest",
+      "actor_id": "shared:herder",
+      "operation_id": "turn:shared:herder:0:9"
+    },
+    {
+      "event_id": "life_event_161",
+      "seq": 161,
+      "type": "rest",
+      "actor_id": "shared:fisher",
+      "operation_id": "turn:shared:fisher:0:11"
+    },
+    {
+      "event_id": "life_event_162",
+      "seq": 162,
+      "type": "eat_ration",
+      "actor_id": "shared:innkeeper",
+      "operation_id": "turn:shared:innkeeper:1:15"
+    },
+    {
+      "type": "place_visited",
+      "actor_id": "shared:innkeeper",
+      "operation_id": "turn:shared:innkeeper:1:16",
+      "seq": 164,
+      "event_id": "life_event_164"
+    },
+    {
+      "event_id": "life_event_165",
+      "seq": 165,
+      "type": "harvest_ration",
+      "actor_id": "shared:herder",
+      "operation_id": "turn:shared:herder:0:10"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:herder",
+      "operation_id": "turn:shared:herder:0:11",
+      "seq": 166,
+      "event_id": "life_event_166"
+    },
+    {
+      "type": "place_visited",
+      "actor_id": "shared:smith",
+      "operation_id": "turn:shared:smith:0:17",
+      "seq": 167,
+      "event_id": "life_event_167"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:gardener",
+      "operation_id": "turn:shared:gardener:0:10",
+      "seq": 168,
+      "event_id": "life_event_168"
+    },
+    {
+      "event_id": "life_event_170",
+      "seq": 170,
+      "type": "harvest_ration",
+      "actor_id": "shared:weaver",
+      "operation_id": "turn:shared:weaver:0:24"
+    },
+    {
+      "event_id": "life_event_171",
+      "seq": 171,
+      "type": "harvest_ration",
+      "actor_id": "shared:well-keeper",
+      "operation_id": "turn:shared:well-keeper:1:12"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:well-keeper",
+      "operation_id": "turn:shared:well-keeper:1:13",
+      "seq": 172,
+      "event_id": "life_event_172"
+    },
+    {
+      "event_id": "life_event_173",
+      "seq": 173,
+      "type": "eat_ration",
+      "actor_id": "shared:baker",
+      "operation_id": "turn:shared:baker:0:12"
+    },
+    {
+      "event_id": "life_event_174",
+      "seq": 174,
+      "type": "rest",
+      "actor_id": "shared:smith",
+      "operation_id": "turn:shared:smith:0:18"
+    }
+  ],
+  "event_boundary": "These are compact authoritative event references. Speech content is omitted. Completion facts are not utterances. No private observations or model reasons are supplied; full world/source hashes retain provenance.",
+  "iris_terminal_feedback": [
+    {
+      "command_id": "turn:shared:weaver:0:23",
+      "status": "rejected",
+      "result": {
+        "ok": false,
+        "code": "resources_unavailable",
+        "actor_id": "shared:weaver",
+        "command_id": "turn:shared:weaver:0:23"
+      },
+      "completion_event_seqs": []
+    },
+    {
+      "command_id": "turn:shared:weaver:0:24",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "code": "harvest_ration",
+        "actor_id": "shared:weaver",
+        "command_id": "turn:shared:weaver:0:24"
+      },
+      "completion_event_seqs": [
+        170
+      ]
+    },
+    {
+      "command_id": "turn:shared:weaver:0:25",
+      "status": "rejected",
+      "result": {
+        "ok": false,
+        "code": "resources_unavailable",
+        "actor_id": "shared:weaver",
+        "command_id": "turn:shared:weaver:0:25"
+      },
+      "completion_event_seqs": []
+    }
+  ],
+  "host_changes": {
+    "terminal_failure_wake": "H118 exposes the exact latest settled resource refusal on the next ordinary model decision, retaining all admission guards and free choice.",
+    "session_continuity": "This is explicitly GM04 epoch2 with retained durable GM memory; the missing original native conversation is not restored."
+  },
+  "resource_envelope": {
+    "basis": "Code inspection: ten residents each lose one satiety per120 world seconds; one ration restores at most40; one public ration grows per450 world seconds, capacity6.",
+    "ideal_demand_rations_per_world_hour": 7.5,
+    "theoretical_supply_rations_per_world_hour": 8,
+    "limits": "Finite short observation, clipping and allocation can erase the small surplus. This is not proof of long-term sustainability."
+  },
+  "limits": {
+    "full_natural_material_and_negotiation_chain_observed": false,
+    "ten_gm_unattended_loop_proved": false,
+    "long_term_resource_sustainability_proved": false,
+    "renderer_root_cause_resolved": false
+  },
+  "delivery_status": "frozen_for_one_new_feedback_attempt"
+}
