@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from food_supply_envelope import CheckpointError, build_report  # noqa: E402
+from food_supply_envelope import CheckpointError, build_report, write_fresh_report  # noqa: E402
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -71,16 +71,43 @@ class FoodSupplyEnvelopeTests(unittest.TestCase):
             self.assertEqual(report["time_window"]["ticks"], 5)
             self.assertEqual(report["conservation"]["conserved_total_values"], [5, 5, 5, 5])
             self.assertEqual([interval["ticks"] for interval in report["intervals"]], [0, 1, 4])
-            self.assertEqual(report["meal_truncation"]["provable_interval_points"], [20.0, 0.0, 0.0])
+            self.assertEqual(report["meal_truncation"]["provable_interval_points"], [None, None, None])
+            self.assertEqual(report["meal_truncation"]["net_accounting_residual_points"], [20.0, 0.0, 0.0])
+            self.assertEqual(report["meal_truncation"]["provable_interval_flags"], [False, False, False])
             self.assertEqual(report["failed_harvest"]["latest_by_code"], {"resources_unavailable": 1})
             self.assertEqual(report["failed_harvest"]["interval_deltas"], [0, 1, 0])
             spans = report["sampled_spans"]
-            self.assertEqual(spans["empty_inventory_seconds_by_resident"]["shared:a"], 570.0)
-            self.assertEqual(spans["source_full_seconds"], 600.0)
+            self.assertEqual(spans["empty_inventory_endpoint_match_seconds_by_resident"]["shared:a"], 570.0)
+            self.assertEqual(spans["source_full_endpoint_match_seconds"], 600.0)
+            self.assertEqual(spans["continuous_duration_lower_bound_seconds_by_resident"]["shared:a"], 0.0)
             self.assertFalse(spans["continuous_proof"])
             envelope = report["projected_envelope"]
             self.assertEqual(envelope["base_demand_rations_per_hour"], 1.5)
             self.assertEqual(envelope["theoretical_supply_rations_per_hour"], 8.0)
+
+            # Endpoint equality does not prove that a resident stayed empty between
+            # checkpoints: insert a middle sample with a ration, then empty again.
+            middle = fixture(90.0, [100.0, 80.0], [1, 0], 3, 3, 0, 0,
+                             events=[meal], remainder=90.0, life_seq=1, initial_stock=3)
+            middle_path = write_fixture(directory, "middle.json", middle)
+            outer = build_report([paths[1], paths[2]])["sampled_spans"]
+            sampled = build_report([paths[1], middle_path, paths[2]])["sampled_spans"]
+            self.assertEqual(outer["empty_inventory_endpoint_match_seconds_by_resident"]["shared:a"], 120.0)
+            self.assertEqual(sampled["empty_inventory_endpoint_match_seconds_by_resident"]["shared:a"], 0.0)
+            self.assertEqual(outer["continuous_duration_lower_bound_seconds_by_resident"]["shared:a"], 0.0)
+
+    def test_output_must_be_fresh_and_never_replace_a_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = write_fixture(directory, "source.json", fixture(0.0, [60, 60], [1, 1], 2, 3, 0, 0))
+            before = source.read_bytes()
+            with self.assertRaises(CheckpointError):
+                write_fresh_report(source, "{}\n", [source])
+            self.assertEqual(source.read_bytes(), before)
+            output = Path(directory) / "report.json"
+            write_fresh_report(output, "{\"ok\": true}\n", [source])
+            with self.assertRaises(CheckpointError):
+                write_fresh_report(output, "{\"overwritten\": true}\n", [source])
+            self.assertEqual(output.read_text(encoding="utf-8"), "{\"ok\": true}\n")
 
     def test_same_time_variants_are_reported_without_zero_length_interval(self):
         with tempfile.TemporaryDirectory() as directory:

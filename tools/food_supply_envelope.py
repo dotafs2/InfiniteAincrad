@@ -257,10 +257,15 @@ def _interval(previous: dict[str, Any], current: dict[str, Any]) -> dict[str, An
     result["food_conservation_ok"] = result["food_conservation_delta"] == 0
     satiety_change = previous["satiety_total"] + result["meal_delta"] * MEAL_SATIETY \
         - ticks * len(current["active_ids"]) - current["satiety_total"]
-    result["meal_truncation_points"] = round(max(0.0, satiety_change), 6) if satiety_change >= -EPSILON else None
-    result["meal_truncation_provable"] = satiety_change >= -EPSILON and clock_consistent
-    if not result["meal_truncation_provable"]:
-        result["meal_truncation_reason"] = "unknown hunger mutation or inconsistent checkpoint clock"
+    result["satiety_net_residual_points"] = round(max(0.0, satiety_change), 6) if satiety_change >= -EPSILON else None
+    # Sparse checkpoints cannot prove that hunger never touched zero between samples,
+    # nor exclude an unrelated food effect. Keep this as an accounting residual only.
+    result["meal_truncation_points"] = None
+    result["meal_truncation_provable"] = False
+    result["meal_truncation_reason"] = (
+        "net accounting residual only; sparse checkpoints do not prove no hunger floor "
+        "or unrelated satiety effect"
+    )
     result["empty_ids_at_both_endpoints"] = sorted(set(previous["empty_ids"]) & set(current["empty_ids"]))
     result["source_full_at_both_endpoints"] = previous["source_full"] and current["source_full"]
     return result
@@ -297,8 +302,6 @@ def build_report(paths: Iterable[Path]) -> dict[str, Any]:
     comparable_intervals = [interval for interval in intervals if interval.get("comparable")]
     total_ticks = sum(interval.get("ticks", 0) for interval in comparable_intervals
                       if interval.get("clock_consistent", False))
-    provable_truncation = [interval.get("meal_truncation_points") for interval in intervals
-                           if interval.get("meal_truncation_provable", False)]
     return {
         "kind": "food_supply_envelope",
         "schema_version": 1,
@@ -325,8 +328,10 @@ def build_report(paths: Iterable[Path]) -> dict[str, Any]:
         "meal_truncation": {
             "provable_interval_points": [interval.get("meal_truncation_points") for interval in intervals],
             "provable_interval_flags": [interval.get("meal_truncation_provable", False) for interval in intervals],
-            "total_provable_points": round(sum(provable_truncation), 6),
+            "net_accounting_residual_points": [interval.get("satiety_net_residual_points") for interval in intervals],
+            "total_provable_points": 0.0,
             "basis": "satiety_before + 40*meals - 1*ticks_per_resident - satiety_after",
+            "proof_limitation": "every interval is a net residual; no sparse checkpoint interval proves meal clipping",
         },
         "failed_harvest": {
             "latest_total": selected[-1]["failed_harvest"]["total"],
@@ -334,10 +339,12 @@ def build_report(paths: Iterable[Path]) -> dict[str, Any]:
             "interval_deltas": [interval.get("failed_harvest_delta") for interval in intervals],
         },
         "sampled_spans": {
-            "empty_inventory_seconds_by_resident": {key: round(value, 6) for key, value in empty_span.items()},
-            "source_full_seconds": round(full_span, 6),
-            "definition": "sum of checkpoint intervals whose endpoints both show the condition",
-            "lower_bound_label": "sampled lower bound only; no continuous-state proof between checkpoints",
+            "empty_inventory_endpoint_match_seconds_by_resident": {key: round(value, 6) for key, value in empty_span.items()},
+            "source_full_endpoint_match_seconds": round(full_span, 6),
+            "definition": "elapsed between checkpoints whose endpoints both show the condition",
+            "continuous_duration_lower_bound_seconds_by_resident": {key: 0.0 for key in empty_span},
+            "source_full_continuous_duration_lower_bound_seconds": 0.0,
+            "lower_bound_label": "continuous duration is unknown; reported endpoint matches are not continuous proof",
             "continuous_proof": False,
         },
         "projected_envelope": {
@@ -375,6 +382,20 @@ def _paths_from_args(args: argparse.Namespace) -> list[Path]:
     return unique
 
 
+def write_fresh_report(output: Path, payload: str, source_paths: Iterable[Path]) -> None:
+    """Write a new report without ever replacing a source or prior report."""
+    destination = output.resolve()
+    sources = {Path(path).resolve().as_posix().lower() for path in source_paths}
+    if destination.as_posix().lower() in sources:
+        raise CheckpointError("--output must not point at an input checkpoint")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with destination.open("x", encoding="utf-8") as handle:
+            handle.write(payload)
+    except FileExistsError as exc:
+        raise CheckpointError("--output must name a fresh report file") from exc
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--checkpoint", action="append", help="explicit checkpoint JSON; repeat for a series")
@@ -383,13 +404,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output", type=Path, help="write a new report JSON at this path")
     args = parser.parse_args(argv)
     try:
-        report = build_report(_paths_from_args(args))
+        source_paths = _paths_from_args(args)
+        report = build_report(source_paths)
     except CheckpointError as exc:
         parser.error(str(exc))
     payload = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
     if args.output is not None:
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(payload, encoding="utf-8")
+        try:
+            write_fresh_report(args.output, payload, source_paths)
+        except CheckpointError as exc:
+            parser.error(str(exc))
     print(json.dumps({"kind": report["kind"], "world_id": report["world_id"],
                       "source_count": report["source_count"],
                       "selected_snapshot_count": report["selected_snapshot_count"],
