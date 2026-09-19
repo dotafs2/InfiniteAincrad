@@ -88,6 +88,10 @@ def inspect_existing_book(path, world_id):
     try:
         with closing(sqlite3.connect(path.as_uri() + '?mode=ro', uri=True)) as db:
             db.row_factory = sqlite3.Row
+            # Pin every table read below to one portable-history snapshot.  The
+            # read-only connection may coexist with a WAL writer, so relying on
+            # separate implicit SELECT transactions could mix revisions.
+            db.execute('BEGIN')
             row = db.execute('SELECT world_id FROM meta WHERE id=1').fetchone()
             if row is None:
                 raise ValueError('Existing usage book has no world identity')
