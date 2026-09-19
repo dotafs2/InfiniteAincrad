@@ -52,7 +52,7 @@ func run() -> void:
 	var world = stage.world
 	var before: Dictionary = world.snapshot()
 	var definitions: Array = world.capability_definitions()
-	check(definitions.size() == 35, "27 adapted capabilities plus eight native entry points")
+	check(definitions.size() == 36, "27 adapted capabilities plus nine native entry points")
 	var registry := Registry.new()
 	for definition in definitions:
 		check(registry.register(definition).ok, "complete versioned contract: " + definition.id)
