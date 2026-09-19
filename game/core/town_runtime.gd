@@ -20,6 +20,13 @@ const BACKGROUND_GM_BASIC_ACTIONS := ["eat_ration", "rest", "harvest_ration"]
 ## remaining distance can be read; this module never uses it to decide anything.
 const BASIC_ACTION_ARRIVAL_RADIUS := 0.45
 const BASIC_ACTION_PENDING_PREFIX := "basic_action_pending:"
+## Read-only terminal receipts that are useful to a world-scoped GM projection. These
+## are deliberately separate evidence kinds: they are physical command outcomes, not
+## public speech and not resident reasoning.
+const BACKGROUND_GM_SELF_REPAIR_CAPABILITY := "production.self_repair"
+const BACKGROUND_GM_MATERIAL_HANDOFF_CAPABILITY := "inventory.give_material"
+const BACKGROUND_GM_SELF_REPAIR_TERMINALS := ["self_repair_completed", "self_repair_blocked", "self_repair_unavailable"]
+const BACKGROUND_GM_BASIC_TERMINAL_CODE := "resources_unavailable"
 const CAPABILITY_ID_MAX_LENGTH := 48
 const NEED_REASON_MAX_LENGTH := 512
 ## Bounded PUBLIC LIFE EVENT projection for the separate GM process: the words residents
@@ -294,6 +301,13 @@ func background_gm_snapshot() -> Dictionary:
 		if issues.size() >= BACKGROUND_GM_EVIDENCE_LIMIT:
 			break
 		issues.append(pending)
+	## Audited terminal receipts are appended after existing movement and pending-job facts, so
+	## the bounded channel never evicts a physical block that was already visible. Each entry is
+	## emitted only after its authoritative command journal and life event/turn receipt agree.
+	for terminal in _audited_terminal_evidence():
+		if issues.size() >= BACKGROUND_GM_EVIDENCE_LIMIT:
+			break
+		issues.append(terminal)
 	## Delivered public life events share this same bounded channel, appended last: a resident's
 	## delivered public words are observational evidence of what they actually said, never a
 	## stall, a defect or an automatic capability.
@@ -365,6 +379,189 @@ func _basic_action_pending_entry(id: String, job: Dictionary, action: String) ->
 			"observation_source": "authoritative_current_job"},
 		"discriminators": {"movement_blocked": false, "collision_proved": false, "stall_proved": false,
 			"note": "pending basic-action facts only; an ordinary pending action is not a stall, a defect or a blocked body"}}
+
+func _audited_terminal_evidence() -> Array:
+	## The raw command/event journals stay private. This helper copies a deliberately small
+	## allowlist only after the two authoritative sides agree, so a stray or edited event cannot
+	## become a GM fact merely by having a familiar type name.
+	var result: Array = []
+	result.append_array(_self_repair_terminal_evidence())
+	result.append_array(_material_handoff_terminal_evidence())
+	result.append_array(_basic_action_terminal_evidence())
+	return result
+
+func _self_repair_terminal_evidence() -> Array:
+	var result: Array = []
+	var events: Variant = _state.life.get("events", [])
+	var capability_value: Variant = _state.godot.get("capabilities", {})
+	if not capability_value is Dictionary:
+		return result
+	var commands: Variant = capability_value.get("commands", {})
+	if not events is Array or not commands is Dictionary:
+		return result
+	for raw_event in events:
+		if not raw_event is Dictionary:
+			continue
+		var event: Dictionary = raw_event
+		var event_type := str(event.get("type", ""))
+		if event_type not in BACKGROUND_GM_SELF_REPAIR_TERMINALS:
+			continue
+		var command_id := str(event.get("operation_id", ""))
+		var row: Variant = commands.get(command_id, {})
+		if not row is Dictionary:
+			continue
+		var payload: Variant = row.get("payload", {})
+		var receipt: Variant = row.get("result", {})
+		var job: Variant = receipt.get("job", {}) if receipt is Dictionary else {}
+		if not payload is Dictionary or not receipt is Dictionary or not job is Dictionary:
+			continue
+		var resident_id := str(event.get("actor_id", ""))
+		if typeof(event.get("seq", null)) != TYPE_INT or typeof(row.get("event_seq", null)) != TYPE_INT \
+				or typeof(receipt.get("terminal_seq", null)) != TYPE_INT:
+			continue
+		var terminal_seq := int(receipt.get("terminal_seq", -1))
+		var start_seq := int(row.get("event_seq", -1))
+		if resident_id.is_empty() or command_id.is_empty() or event.get("event_id", "") == "":
+			continue
+		if row.get("capability_id", "") != BACKGROUND_GM_SELF_REPAIR_CAPABILITY or payload.get("actor_id", "") != resident_id:
+			continue
+		if row.get("status", "") not in ["completed", "rejected"] or receipt.get("pending", true) != false:
+			continue
+		if receipt.get("ok", false) != (event_type == "self_repair_completed") or receipt.get("code", "") != event_type:
+			continue
+		if receipt.get("event_id", "") != event.get("event_id", "") or terminal_seq != int(event.get("seq", -2)):
+			continue
+		if (row.get("status", "") == "completed") != (event_type == "self_repair_completed"):
+			continue
+		if start_seq < 1 or start_seq > events.size() or terminal_seq < 1 or terminal_seq > events.size():
+			continue
+		var started: Variant = events[start_seq - 1]
+		if not started is Dictionary or started.get("type", "") != "self_repair_started" or started.get("operation_id", "") != command_id \
+				or started.get("actor_id", "") != resident_id or started.get("recipient_ids", []) != [resident_id]:
+			continue
+		if event.get("recipient_ids", []) != [resident_id] or event.get("operation_id", "") != command_id:
+			continue
+		if event.get("item_id", "") != job.get("item_id", "") or event.get("part", "") != job.get("part", "") \
+				or event.get("material", "") != job.get("material", "") or event.get("work_seconds", -1) != job.get("elapsed", -2):
+			continue
+		var consumed: Variant = event.get("consumed", null)
+		if consumed not in [0, 1] or consumed != (1 if event_type == "self_repair_completed" else 0):
+			continue
+		if not _valid_position(event.get("position", null)):
+			continue
+		var position: Array = event.position.duplicate()
+		result.append({"evidence_kind": "self_repair_completed" if event_type == "self_repair_completed" else "self_repair_failed",
+			"issue_id": "self_repair:" + command_id, "world_id": _state.world_id,
+			"resident_id": resident_id, "command_id": command_id, "event_id": str(event.event_id),
+			"event_seq": int(event.seq), "status": "completed" if event_type == "self_repair_completed" else "failed",
+			"command_status": str(row.status),
+			"result_code": event_type, "item_id": str(event.item_id), "part": str(event.part),
+			"material": str(event.material), "physical_facts": {"consumed": int(consumed),
+				"work_seconds": float(event.work_seconds), "position": position,
+				"observation_source": "authoritative_self_repair_command_and_event"},
+			"discriminators": {"physical_work": true, "public_utterance": false,
+				"private_reason": false}})
+	return result
+
+func _material_handoff_terminal_evidence() -> Array:
+	var result: Array = []
+	var events: Variant = _state.life.get("events", [])
+	var capability_value: Variant = _state.godot.get("capabilities", {})
+	if not capability_value is Dictionary:
+		return result
+	var commands: Variant = capability_value.get("commands", {})
+	if not events is Array or not commands is Dictionary:
+		return result
+	for raw_event in events:
+		if not raw_event is Dictionary or raw_event.get("type", "") != "material_handed_over":
+			continue
+		var event: Dictionary = raw_event
+		var command_id := str(event.get("operation_id", ""))
+		var row: Variant = commands.get(command_id, {})
+		if not row is Dictionary:
+			continue
+		var payload: Variant = row.get("payload", {})
+		var receipt: Variant = row.get("result", {})
+		if not payload is Dictionary or not receipt is Dictionary:
+			continue
+		var donor_id := str(event.get("actor_id", ""))
+		var recipient_id := str(event.get("subject_id", ""))
+		var event_seq := int(event.get("seq", -2))
+		if donor_id.is_empty() or recipient_id.is_empty() or command_id.is_empty() or event.get("event_id", "") == "":
+			continue
+		if typeof(event.get("seq", null)) != TYPE_INT or typeof(row.get("event_seq", null)) != TYPE_INT:
+			continue
+		if row.get("capability_id", "") != BACKGROUND_GM_MATERIAL_HANDOFF_CAPABILITY or row.get("status", "") != "completed":
+			continue
+		if row.get("event_seq", -1) != event_seq or payload.get("actor_id", "") != donor_id:
+			continue
+		if receipt.get("ok", false) != true or receipt.get("code", "") != "material_handed_over" \
+				or receipt.get("event_id", "") != event.get("event_id", ""):
+			continue
+		if receipt.get("actor_id", "") != donor_id or receipt.get("recipient_id", "") != recipient_id \
+				or receipt.get("material", "") != event.get("material", "") or receipt.get("quantity", 0) != 1:
+			continue
+		if event.get("operation_id", "") != command_id or event.get("recipient_ids", []) != [donor_id, recipient_id] \
+				or event.get("quantity", 0) != 1 or event.get("donor_delta", 0) != -1 or event.get("recipient_delta", 0) != 1 \
+				or event.get("contractual", true) != false:
+			continue
+		if event.get("material", "") not in ["iron", "wood"]:
+			continue
+		if not _valid_position(event.get("donor_position", null)) or not _valid_position(event.get("recipient_position", null)):
+			continue
+		result.append({"evidence_kind": "material_handoff_completed", "issue_id": "material_handoff:" + command_id,
+			"world_id": _state.world_id, "donor_id": donor_id, "recipient_id": recipient_id,
+			"command_id": command_id, "event_id": str(event.event_id), "event_seq": event_seq,
+			"status": "completed", "command_status": "completed", "material": str(event.material), "quantity": 1,
+			"physical_facts": {"donor_delta": -1, "recipient_delta": 1, "contractual": false,
+				"donor_position": event.donor_position.duplicate(), "recipient_position": event.recipient_position.duplicate(),
+				"observation_source": "authoritative_material_handoff_command_and_event"},
+			"discriminators": {"physical_handoff": true, "public_utterance": false,
+				"private_reason": false}})
+	return result
+
+func _basic_action_terminal_evidence() -> Array:
+	var result: Array = []
+	var turns: Variant = _state.godot.get("resident_turns", {})
+	var commands: Variant = _state.godot.get("commands", {})
+	if not turns is Dictionary or not commands is Dictionary:
+		return result
+	for id in active_ids():
+		var record: Variant = turns.get(id, {})
+		if not record is Dictionary or record.get("status", "") != "settled" or not pending_job(id).is_empty():
+			continue
+		var history: Variant = record.get("history", [])
+		if not history is Array or history.is_empty() or not history[-1] is Dictionary:
+			continue
+		var accepted: Dictionary = history[-1]
+		if accepted.get("status", "") != "settled":
+			continue
+		var accepted_result: Variant = accepted.get("result", {})
+		var command_id := str(accepted.get("command_id", ""))
+		if not accepted_result is Dictionary or accepted_result.get("ok", false) != true or accepted_result.get("code", "") != "action_started" \
+				or command_id.is_empty():
+			continue
+		var command: Variant = commands.get(command_id, {})
+		if not command is Dictionary:
+			continue
+		var payload: Variant = command.get("payload", {})
+		var terminal: Variant = command.get("result", {})
+		var action := str(payload.get("action", "")) if payload is Dictionary else ""
+		if not payload is Dictionary or not terminal is Dictionary or payload.get("actor_id", "") != id \
+				or action not in BACKGROUND_GM_BASIC_ACTIONS or command.get("status", "") != "rejected":
+			continue
+		if terminal.get("ok", true) != false or terminal.get("code", "") != BACKGROUND_GM_BASIC_TERMINAL_CODE \
+				or terminal.get("actor_id", "") != id or terminal.get("command_id", "") != command_id:
+			continue
+		var position := position_of(id)
+		result.append({"evidence_kind": "basic_life_resources_unavailable", "issue_id": "basic_action_terminal:" + command_id,
+			"world_id": _state.world_id, "resident_id": id, "command_id": command_id, "action": action,
+			"status": "failed", "command_status": "rejected", "result_code": BACKGROUND_GM_BASIC_TERMINAL_CODE,
+			"physical_facts": {"consumed": 0, "position": [position.x, position.y, position.z],
+				"observation_source": "authoritative_basic_action_command_and_turn"},
+			"discriminators": {"resource_failure": true, "public_utterance": false,
+				"private_reason": false}})
+	return result
 
 func _public_life_event_evidence() -> Array:
 	# Read-only. Publishes, as bounded neutral utterance evidence for the separate GM process, the words
