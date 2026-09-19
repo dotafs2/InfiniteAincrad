@@ -574,6 +574,18 @@ func _physics_process(delta: float) -> void:
 			if town_navigation != null:
 				direction = town_navigation.direction_for(id, str(job.command_id), body, target)
 				nav_reaches_target = town_navigation.enabled and not town_navigation.is_unreachable(id)
+			## A* owns the long route. Inside the social helper's bounded four-metre domain,
+			## refine an approach with a real capsule-swept direct leg or detour. This closes
+			## the gap where the navmesh path reaches a meeting point but RVO repeatedly loops
+			## at a doorway/crowded final slot. A zero result keeps the valid A* direction; the
+			## accepted target, 0.45 m arrival gate, speed and every collider remain unchanged.
+			var local_approach_route := false
+			if job.action == "approach" and social_steering != null:
+				var local_direction: Vector3 = social_steering.bounded_direction_for(
+					id, str(job.command_id), body, target)
+				if local_direction.length() > 0.0:
+					direction = local_direction
+					local_approach_route = true
 			## A public-place trip (and its place-bound rest) keeps the accepted place steering.
 			var place_trip: bool = job.action == "travel" or (job.action == "rest" and job.has("place_id"))
 			## The public bake trip walks to its own baking point over the same verified road graph
@@ -590,7 +602,9 @@ func _physics_process(delta: float) -> void:
 			## collisions and its 20 s work; only the walking route changes, and when the road
 			## method yields no direction the pre-existing bounded local push still applies.
 			var home_trip: bool = _spaced_foraging and (job.action in ["eat_ration", "harvest_ration"] or (job.action == "rest" and not job.has("place_id")))
-			if nav_reaches_target:
+			if local_approach_route:
+				pass
+			elif nav_reaches_target:
 				pass
 			elif place_trip and place_steering != null:
 				direction = place_steering.direction_for(id, str(job.command_id), body, target)

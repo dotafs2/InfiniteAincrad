@@ -38,8 +38,21 @@ extends "res://spatial/town_foraging_steering.gd"
 ##    pending; there is still no resident-perceptible obstruction report, and that
 ##    general gap stays open.
 
+func bounded_direction_for(id: String, command_id: String, body: CharacterBody3D, target: Vector3) -> Vector3:
+	## The production scene may use this only as a near-target refinement of its A* route.
+	## Unlike direction_for(), it never falls back to an unchecked straight push: every
+	## returned direction has the mover's real capsule sweep behind it, including the
+	## direct corridor and every cached/two-leg/rectangle detour inherited below.
+	if body == null or not is_instance_valid(body) or not target.is_finite():
+		return Vector3.ZERO
+	var offset := target - body.global_position
+	offset.y = 0.0
+	if offset.length() > MAX_GOAL_DISTANCE:
+		return Vector3.ZERO
+	return super.direction_for(id, command_id, body, target)
+
 func direction_for(id: String, command_id: String, body: CharacterBody3D, target: Vector3) -> Vector3:
-	var bounded := super.direction_for(id, command_id, body, target)
+	var bounded := bounded_direction_for(id, command_id, body, target)
 	if bounded.length() > 0.0:
 		return bounded
 	if id.is_empty() or command_id.is_empty():
