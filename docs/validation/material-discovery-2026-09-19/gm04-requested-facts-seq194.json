@@ -1,0 +1,54 @@
+{
+  "kind": "gm04_requested_facts",
+  "purpose": "Prepared read-only facts after one real resident window; not a dispatch request.",
+  "world_id": "shared:restart-20260918-01",
+  "world_seq": 194,
+  "world_sha256": "055ee4e8f8f7a6d99919aa5cdfbb39461915a0dd593198f32f6798a04cd84332",
+  "previous_feedback_run": "feedback-20260919T033016Z-250094",
+  "smith_events": [
+    {
+      "seq": 178,
+      "type": "material_notice_read",
+      "operation_id": "material-notice:75a8e13ab58a1f889fdd639e243bdeba",
+      "source_id": "street:iron-salvage-20260918",
+      "material": null,
+      "quantity": null
+    },
+    {
+      "seq": 188,
+      "type": "material_source_observed",
+      "operation_id": "material-observation:shared:smith:street:iron-salvage-20260918:188",
+      "source_id": "street:iron-salvage-20260918",
+      "material": null,
+      "quantity": null
+    },
+    {
+      "seq": 193,
+      "type": "material_recovered",
+      "operation_id": "turn:shared:smith:0:20",
+      "source_id": "street:iron-salvage-20260918",
+      "material": "iron",
+      "quantity": 1
+    }
+  ],
+  "source_state": {
+    "source_id": "street:iron-salvage-20260918",
+    "initial_stock": 3,
+    "current_stock": 2,
+    "recovered": 1,
+    "owner_id": null
+  },
+  "smith_account": {
+    "resident_id": "shared:smith",
+    "iron": 1,
+    "wood": 1,
+    "reserved_col": 0
+  },
+  "smith_personal_knowledge": {
+    "stock": 3,
+    "observed_elapsed": 7041.133333332743,
+    "event_seq": 188
+  },
+  "interpretation": "Smith voluntarily read the public notice, observed the finite source in person, then chose recovery. One iron unit moved into his account; no contract or forced choice was used. The notice did not disclose stock; source observation recorded stock 3 before recovery.",
+  "limits": "This proves one natural discovery and recovery, not edge repair, negotiated production, long-term supply, or ten-GM unattended operation."
+}

@@ -2,6 +2,14 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-19 · H120 Natural iron discovery and recovery
+
+A six-hundred-second bounded resident window advanced the active world seq174→194. Twelve Kimi calls settled for CNY 0.2481223 with no new unknown charge. Smith voluntarily read the public material notice, reached the public finite source, observed three iron units and chose recovery. The real job completed at seq193, moving one iron into his account and reducing the source to two. This is the first natural information-to-physical-recovery example in this continuation; no contract, payment or forced choice was used. Innkeeper’s separate material trip blocked physically and was then cancelled, retaining honest failure evidence.
+
+The home-eating route fix is covered by a disposable seq151 replay with 40 assertions: two accepted meals reach their unchanged homes, work for 30 seconds and consume exactly one ration each. H120 preserves ten residents, 172 archived attempts, 186 usage calls and every earlier revision. The finite production chain, edge repair, negotiated production, sustained resource balance and unattended ten-GM loop remain open.
+
+Live05 emitted 30 null-particle and four null-MultiMesh errors. Isolated unchanged house source/cache loads still pass in headless and Forward+; no cache deletion, asset modification or renderer suppression was attempted. [Evidence](docs/validation/material-discovery-2026-09-19.md).
+
 ## 2026-09-19 · H119 Actual terminal feedback, GM effect review and food accounting
 
 Two bounded serial resident windows advanced the same world seq162→174 with sixteen settled Kimi calls costing CNY 0.3289711 and no new unknown charge. Nine residents made new decisions. Iris explicitly recognized her prior resource refusal, harvested one ration, then encountered scarcity again; speech, a meal, movement and rest also completed. Every previous archive entry and usage revision remains intact: 160 lifetime attempts, 174 world usage calls and ten residents. Exact cold restore passed.
