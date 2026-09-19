@@ -1,5 +1,13 @@
 # 历史全部流水
 
+## 2026-09-19 · H122 Finite iron depletion and handoff pivot
+
+A bounded twelve-call resident window advanced the active lineage `shared:restart-20260918-01` from seq209 to seq229. Every call settled for CNY 0.2425896; the gateway drained, the checkpoint contains all ten residents and 196 archived attempts, and no new provider result or charge is unknown.
+
+Carpenter received a real due turn, read the public material notice, travelled to the installed source and observed stock zero. Smith then revisited the source with one iron already held; the authoritative job returned `material_depleted` and awarded nothing. The finite source now satisfies initial3 = recovered3 + stock0. Weaver holds two iron and Smith holds one; Carpenter's axe remains edge20 / handle100 and the old rejected edge-repair contract remains rejected. No live edge-repair offer or completion occurred.
+
+The next implementation target is a bounded depletion-feedback wake or voluntary handoff between residents. Empty-source retries must not be reopened. The renderer produced no `ERROR:` lines in this window; the known four-edge navigation merge warning remains. [Evidence](docs/validation/material-depletion-2026-09-19.md).
+
 ## 2026-09-19 · H121 Edge-repair follow-up and second natural iron recovery
 
 A bounded twelve-call resident window advanced the active world seq194→209. All calls settled for CNY 0.2612845 and the gateway drained cleanly; lifetime history now contains 184 archived attempts and 198 usage records. Smith kept his recovered iron, revisited the finite source and moved between the market and artisans' forecourt, but no new edge-repair contract was formed because Rowan received no new model turn in this window. Rowan's axe remains edge 20 / handle 100 and the earlier rejected contract remains rejected.
