@@ -1,0 +1,76 @@
+{
+  "actors": {
+    "shared:fisher": {
+      "arrival_world_seconds": 1.46666666666667,
+      "command": {
+        "payload": {
+          "action": "eat_ration",
+          "actor_id": "shared:fisher",
+          "provenance": "opengameagent_live"
+        },
+        "result": {
+          "actor_id": "shared:fisher",
+          "code": "eat_ration",
+          "command_id": "turn:shared:fisher:0:10",
+          "ok": true
+        },
+        "status": "completed"
+      },
+      "completion_world_seconds": 31.5333333333332,
+      "final_position": [
+        33.7751998901367,
+        0.000935404561460018,
+        52.7843284606934
+      ],
+      "first_work_world_seconds": 1.66666666666667,
+      "max_sample_step_m": 0.0900084674358368,
+      "max_speed_mps": 1.35000014305115,
+      "target": [
+        33.9167098999023,
+        0.0450000017881393,
+        52.8089866638184
+      ],
+      "walked_metres": 2.16001982241869
+    },
+    "shared:herder": {
+      "arrival_world_seconds": 1.06666666666667,
+      "command": {
+        "payload": {
+          "action": "eat_ration",
+          "actor_id": "shared:herder",
+          "provenance": "opengameagent_live"
+        },
+        "result": {
+          "actor_id": "shared:herder",
+          "code": "eat_ration",
+          "command_id": "turn:shared:herder:0:8",
+          "ok": true
+        },
+        "status": "completed"
+      },
+      "completion_world_seconds": 30.9999999999999,
+      "final_position": [
+        35.3755645751953,
+        0.000935422896873206,
+        81.9195556640625
+      ],
+      "first_work_world_seconds": 1.13333333333333,
+      "max_sample_step_m": 0.0900027975440025,
+      "max_speed_mps": 1.35000002384186,
+      "target": [
+        35.4500007629395,
+        0.0450000017881393,
+        82.0473709106445
+      ],
+      "walked_metres": 1.61999549716711
+    }
+  },
+  "checks": 40,
+  "controlled_copy": true,
+  "failures": [],
+  "final_seq": 153,
+  "paid_calls": 0,
+  "source_seq": 151,
+  "suite": "town_home_eating_failed_world_replay",
+  "world_seconds": 31.5333333333332
+}
