@@ -230,6 +230,39 @@ func _new_self_repair_offer_due(id: String, record: Dictionary) -> bool:
 				return true
 	return false
 
+func _terminal_basic_failure_due(id: String, record: Dictionary) -> bool:
+	## An accepted basic-life job returns `action_started` before physical travel and
+	## work finish. If its authoritative command later rejects for unavailable
+	## resources, that private consequence produced no life event and would otherwise
+	## stay hidden until the ordinary 30-minute turn. Let the owner observe the newest
+	## such receipt once. The next ordinary decision appends a newer history entry and
+	## therefore acknowledges it without changing next_due or rewriting old history.
+	if record.get("status", "") != "settled" or not town.pending_job(id).is_empty():
+		return false
+	var history: Variant = record.get("history")
+	if not history is Array or history.is_empty():
+		return false
+	var latest: Variant = history[-1]
+	if not latest is Dictionary or latest.get("status", "") != "settled":
+		return false
+	var admitted: Variant = latest.get("result")
+	if not admitted is Dictionary or admitted.get("ok") != true or admitted.get("code", "") != "action_started":
+		return false
+	var command_id := str(latest.get("command_id", ""))
+	if command_id.is_empty():
+		return false
+	var command: Variant = town._state.godot.get("commands", {}).get(command_id)
+	if not command is Dictionary or command.get("status", "") != "rejected":
+		return false
+	var payload: Variant = command.get("payload")
+	if not payload is Dictionary or payload.get("actor_id", "") != id \
+			or payload.get("action", "") not in ["eat_ration", "rest", "harvest_ration"]:
+		return false
+	var result: Variant = command.get("result")
+	return result is Dictionary and result.get("ok") == false \
+		and result.get("code", "") == "resources_unavailable" \
+		and result.get("actor_id", "") == id and result.get("command_id", "") == command_id
+
 func admission_closed() -> bool:
 	## Whether this episode admits NEW resident decisions. A closed episode still
 	## owns every coroutine that had already started.
@@ -300,7 +333,7 @@ func ready_resident() -> String:
 		# A cold-recovery class is itself the one bounded reason to become due. These
 		# receipts have no next_due and may have produced no event, so applying only
 		# the ordinary evidence/time gate would admit recovery above but never select it.
-		if _cold_recoverable(id, record) or record.is_empty() or _own_seq(id) > int(record.get("seen_seq", 0)) or town._state.godot.elapsed_seconds >= float(record.get("next_due", INF)) or _new_self_repair_offer_due(id, record):
+		if _cold_recoverable(id, record) or record.is_empty() or _own_seq(id) > int(record.get("seen_seq", 0)) or town._state.godot.elapsed_seconds >= float(record.get("next_due", INF)) or _new_self_repair_offer_due(id, record) or _terminal_basic_failure_due(id, record):
 			return id
 	return ""
 
