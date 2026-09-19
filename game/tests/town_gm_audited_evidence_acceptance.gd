@@ -31,8 +31,8 @@ func run() -> void:
 	world.host_move(A, world.destination(A, "harvest_ration"))
 	world.advance(60.0)
 	check(world.snapshot().godot.commands["gm:basic-failure"].result.code == "resources_unavailable", "fixture records terminal basic-life resource failure")
-	world._state.godot.resident_turns[A] = {"status": "settled", "history": [{"status": "settled", "command_id": "gm:basic-failure",
-		"result": {"ok": true, "code": "action_started"}}]}
+	world._state.godot.resident_turns = {A: {"status": "settled", "history": [{"status": "settled", "command_id": "gm:basic-failure",
+		"action": "life:harvest_ration", "result": {"ok": true, "code": "action_started"}}]}}
 
 	var snapshot: Dictionary = world.background_gm_snapshot()
 	var completed := _entries(snapshot, "self_repair_completed")

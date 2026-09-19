@@ -448,7 +448,7 @@ func _self_repair_terminal_evidence() -> Array:
 			continue
 		if receipt.get("ok", false) != (event_type == "self_repair_completed") or receipt.get("code", "") != event_type:
 			continue
-		if receipt.get("event_id", "") != event.get("event_id", "") or terminal_seq != int(event.get("seq", -2)):
+		if terminal_seq != int(event.get("seq", -2)):
 			continue
 		if (row.get("status", "") == "completed") != (event_type == "self_repair_completed"):
 			continue
@@ -457,6 +457,10 @@ func _self_repair_terminal_evidence() -> Array:
 		var started: Variant = events[start_seq - 1]
 		if not started is Dictionary or started.get("type", "") != "self_repair_started" or started.get("operation_id", "") != command_id \
 				or started.get("actor_id", "") != resident_id or started.get("recipient_ids", []) != [resident_id]:
+			continue
+		## The durable receipt retains its START event id; terminal_seq binds the later result.
+		if receipt.get("event_id", "") != started.get("event_id", "") or terminal_seq <= start_seq \
+				or events[terminal_seq - 1] != event:
 			continue
 		if event.get("recipient_ids", []) != [resident_id] or event.get("operation_id", "") != command_id:
 			continue
