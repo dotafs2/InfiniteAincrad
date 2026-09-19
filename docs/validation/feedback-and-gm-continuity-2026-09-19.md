@@ -1,0 +1,31 @@
+# H118 — Prompt failure feedback and explicit GM continuity
+
+This follows H117's actual seq162 save. It makes no new model call and changes no resident, item, world event or provider bill. The root integrated two existing Sol agents' focused patches and applied the GM migration as the only canonical GM-state writer.
+
+## Resident feedback
+
+Iris's latest harvest was accepted, reached the real work point, and finished its existing 20-second work interval with `resources_unavailable`. There was no stock to take. The authoritative command rejected the action without emitting a life event. The controller therefore did not deliver the failure to another model turn until its original 30-minute due time. At seq162 this still meant another 936.133 seconds of waiting. It was a feedback scheduling problem, not a failed journey.
+
+The owner is now eligible once when its latest settled `action_started` record matches a terminal basic-life `resources_unavailable` receipt and it has no pending body job. Actor, command and action bindings must agree. The next ordinary decision acknowledges the receipt by appending newer history. The model sees the exact authoritative failure through the existing feedback projection. Choosing wait is valid; harvest remains an available choice. No action is forced, no remote stock knowledge is supplied, and resources, movement, durations and stored due times are unchanged. Closed admission, review, in-flight, provider-error and pending-work gates remain authoritative. A genuinely new failed attempt can produce new feedback; episode request and fee bounds still apply.
+
+The root passed 59 new acceptance assertions and 42 existing first-offer assertions in the imported delivery project. A separate read-only check against the actual seq162 save found Iris immediately eligible with the exact refusal and all canonical fields/bytes unchanged. [Actual-save evidence](feedback-and-gm-continuity-2026-09-19/terminal-feedback.json). This demonstrates readiness and correct input; a new model response to this failure has not yet been observed.
+
+## GM state migration
+
+The old native rollouts for GM01–05 are absent on this host. `new-session-epoch` requires the exact existing UUID, an explicit existing Codex sessions root, no matching rollout and no in-flight/unresolved work. Under the state lock it appends the prior binding and absence check to session history, opens epoch 2 and labels the next native transport `new_epoch`. A later successful transport will be recorded as `created_new_epoch`. It does not claim restoration of the original native conversations or clear separate coding sessions.
+
+The GM06 unknown observation had two exact issue/content pairs. Recovery retained its unknown classification; acknowledgement released only the dispatch block and saved a durable no-repeat record. Neither issue was marked settled. The planner excludes the same pairs, including an explicitly renamed investigation that cites the frozen evidence. New observation intents also retain investigation evidence fingerprints: investigation-only unknown calls and mixed issue/investigation calls can be conservatively acknowledged without resending their task. Missing legacy fingerprints fail closed. Unknown charges remain unknown.
+
+The root applied the migration after backing up the complete state. Every original GM memory, attempt, outcome and coding record remained equal. World and usage SQLite hashes remained equal. GM01–05 now have explicit epoch 2 with no native session yet; GM06–10 remain epoch 1 with no bound session. No new GM was dispatched. [Migration receipt](feedback-and-gm-continuity-2026-09-19/gm-migration.json) and the [current full GM checkpoint](../../worlds/restart-20260918-01/usage/manifest.json) preserve the result.
+
+Six root epoch/unknown-task tests and four prompt-budget forwarding/refusal tests pass. Review caught and fixed an initial omission for investigation-only unknown calls. Integration also caught that the complete pinned design documents now occupy 18,642 UTF-8 bytes, exceeding the former 24,000-byte total prompt budget once state and evidence were added. Both runner and autonomy wrapper now default to 32,768 bytes while preserving full pins and pre-dispatch refusal. The richer current GM05 history needs an explicit larger bounded episode: a no-call dry run of all ten GMs with a 65,536-byte limit produced prompts from 34,169 to 53,675 bytes. The default-limit dry run correctly refused before any dispatch. No history was discarded to force a fit.
+
+Default GM evidence at seq162 contains eight public speech records; it does not yet include Rowan's completed repair or Iris's terminal refusal. A separate hash-bound host receipt has been prepared from the canonical save and immutable baseline, including the new events, the same axe's before/after condition and the exact failed command. It is **prepared, not consumed**. The next real GM turn must review new effects or a concrete new question; repeating older dialogue review would not prove observation of the latest life cycle.
+
+## Resource and renderer boundaries
+
+Across H117's seq148→162, food balances exactly: `13 held + 2 produced - 5 eaten = 8 held + 2 source`. Aggregate satiety is 709→829 and energy 613→638. Wood is 10→9 for Rowan's handle repair; total iron remains three, with no iron harvested. This short improvement is not a sustainability result.
+
+One subsequent visible Forward+ read-only inventory ran for 20.047 seconds and sampled the actual production tree 62 times over 18.069 seconds. No GPU/CPU particle or MultiMeshInstance3D node entered, existed or exited in that window. The earlier renderer errors did not recur; only the known four-edge navigation warning appeared. Canonical and disposable-save hashes remained equal and all owned processes exited zero. This single non-reproduction identifies neither the earlier errors' trigger nor their cause, and does not invalidate H117's five particle and one MultiMesh errors.
+
+The saved world remains seq162, SHA-256 `ac14a883804ba1ca94b5256ee9e7a1f0bd381fd87bf6f7674a2a5b0a06384b60`. The next bounded work is to observe the resident's response to failed work and a GM's response to the new physical outcomes. Ten-GM unattended operation, natural material exchange/production, sustainable resources and renderer stability remain open.
