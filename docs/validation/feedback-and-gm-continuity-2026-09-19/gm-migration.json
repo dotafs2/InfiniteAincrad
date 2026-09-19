@@ -1,0 +1,37 @@
+{
+  "kind": "offline_gm_host_migration",
+  "utc": "2026-09-19T02:48:13.254800+00:00",
+  "provider_calls": 0,
+  "world_id": "shared:restart-20260918-01",
+  "source_seq": 162,
+  "before_sha256": "58370308892c8f79fa36bb0852cdc646e4a2d9415582d0ea38c13015162cdd49",
+  "after_sha256": "a9a3e4ee80dfdf9a6ca1cd09a57336384eef71d1385dc7e0ef444805bf73d011",
+  "world_and_usage_book_unchanged": true,
+  "original_memories_attempts_outcomes_and_coding_equal": true,
+  "original_unknown_preserved": true,
+  "gm06_frozen_pairs": [
+    {
+      "content_digest": "b59012112a6bee042f4af7cfd57c8bc4",
+      "issue_id": "issue-02e6207c570c"
+    },
+    {
+      "content_digest": "b4b4d228518e0bf6f18408e9a726176c",
+      "issue_id": "issue-06ff4b70771f"
+    }
+  ],
+  "gm06_pairs_not_settled": true,
+  "session_epochs": {
+    "gm-01": 2,
+    "gm-02": 2,
+    "gm-03": 2,
+    "gm-04": 2,
+    "gm-05": 2,
+    "gm-06": 1,
+    "gm-07": 1,
+    "gm-08": 1,
+    "gm-09": 1,
+    "gm-10": 1
+  },
+  "native_sessions_restored": false,
+  "new_native_sessions_created": 0
+}

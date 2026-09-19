@@ -2,6 +2,14 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-19 · H118 Timely failure feedback and audited GM session epochs
+
+Iris had reached the harvest point but received `resources_unavailable`; the missing life event left her waiting nearly 30 minutes before another model observation. A narrowly bound latest-terminal-failure predicate now delivers that result once through existing feedback, retaining all admission/review/provider gates and free choice. The root passed 59 new assertions plus 42 first-offer regressions; the actual seq162 save is now eligible with the exact receipt and no byte changes. No new resident reply is claimed yet.
+
+Added explicit missing-native-session epoch migration and exact unknown-task no-repeat records. GM01–05 were migrated offline to epoch 2, with their original UUIDs/history retained; no new native session was created. GM06's old timeout remains unknown and its two issue/content pairs remain unsettled and forbidden to redispatch. Root review also fixed investigation-only and mixed unknown-task handling. All original GM memories, attempts, outcomes, coding state, world and usage book remain intact. Six focused runner tests and four prompt-limit checks passed. Complete design pins required a bounded default increase to 32,768 bytes; current full GM history dry-runs need an explicit 65,536-byte cap (largest measured prompt 53,675 bytes), with no provider calls.
+
+A hash-bound host receipt is prepared for new physical-effect review because the current default GM projection still contains only public dialogue. One short read-only renderer inventory found no particle/MultiMesh nodes and did not reproduce the previous errors; root cause remains open. Seq162 and H117's CNY 0.2373084 charge total are unchanged. The existing heartbeat will continue bounded observation and integration. [Evidence and next work](docs/validation/feedback-and-gm-continuity-2026-09-19.md).
+
 ## 2026-09-19 · H117 Physical material exchange and real self-repair adoption
 
 Three user-requested Sol agents implemented bounded material exchange, honest Life events, navigation fixes and GM accounting recovery in isolated trees. The root reviewed and integrated them and remained the only canonical writer. The 36th capability transfers one uncommitted wood or iron unit in person with an atomic receipt. A controlled seq148 copy physically completed discovery, sharing, finite collection, material gifts, own-handle repair, contracted edge repair, payment and productive tool use across cold restarts. This full chain is fixture evidence, not autonomous adoption.
