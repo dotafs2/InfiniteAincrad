@@ -22,7 +22,7 @@ const ForagingLayout = preload("res://spatial/town_foraging_layout.gd")
 const ForagingSteering = preload("res://spatial/town_foraging_steering.gd")
 const SocialSteering = preload("res://spatial/town_social_steering.gd")
 const TownExpansion = preload("res://spatial/town_expansion.gd")
-const LOCAL_FINAL_ROUTE_ACTIONS := ["approach", "use_tool"]
+const LOCAL_FINAL_ROUTE_ACTIONS := ["approach", "use_tool", "eat_ration"]
 const PlaceNotice = preload("res://spatial/town_place_notice.gd")
 const MaterialNotice = preload("res://spatial/town_material_notice.gd")
 const PlaceSteering = preload("res://spatial/town_place_steering.gd")
@@ -576,7 +576,7 @@ func _physics_process(delta: float) -> void:
 				direction = town_navigation.direction_for(id, str(job.command_id), body, target)
 				nav_reaches_target = town_navigation.enabled and not town_navigation.is_unreachable(id)
 			## A* owns the long route. Inside the social helper's bounded four-metre domain,
-			## refine the final leg of a social approach or own-home tool use with a real
+			## refine the final leg of a social approach, own-home tool use or own-home meal with a real
 			## capsule-swept direct leg or detour. This closes the gap where the navmesh path
 			## reaches the accepted target but RVO repeatedly loops at a doorway/crowded final
 			## slot. A zero result keeps the valid A* direction; the accepted target, 0.45 m
