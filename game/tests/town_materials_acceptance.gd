@@ -88,6 +88,10 @@ func run() -> void:
 	var turns := Turns.new(); turns.town = town
 	var feedback: Array = turns._feedback_history(smith, {"history": [{"command_id": "fixture:smith-recover", "status": "settled"}]})
 	check(feedback[0].result.code == "material_depleted" and not feedback[0].result.ok, "model receives authoritative failed labor receipt")
+	var depletion_record := {"status": "settled", "history": [{"command_id": "fixture:smith-recover", "status": "settled", "result": {"ok": true, "code": "material_started"}}]}
+	check(turns._terminal_material_depletion_due(smith, depletion_record), "depleted material receipt wakes one bounded observation")
+	depletion_record.history.append({"command_id": "fixture:newer", "status": "settled", "result": {"ok": true, "code": "wait_started"}})
+	check(not turns._terminal_material_depletion_due(smith, depletion_record), "newer resident history acknowledges depletion wake")
 	turns.free()
 	var completed: Dictionary = town.snapshot()
 	check(town.submit_trade(owner, action, "fixture:owner-recover", "opengameagent_fixture").duplicate and town.snapshot() == completed, "duplicate completed command never pays material twice")
