@@ -243,12 +243,20 @@ class UsageBook:
         self.record('npc:' + request_id, actor_id, 'kimi_ledger', model, 'decision', 'pending')
 
     def settle_gm(self, run_id, actor_id, phase, attempt, sessions_root=None):
-        usage = attempt.get('usage') if attempt.get('usage_measured') else None
-        status = 'measured' if usage is not None else 'unknown'
-        if usage is None:
-            usage = native_usage_lower_bound(attempt, sessions_root)
-            if usage is not None:
-                status = 'partial'
+        # `run_codex_once` sets provider_request_started only after Popen succeeds. A local
+        # executable-start failure therefore has no provider request to account for; preserve it
+        # as an auditable not_sent receipt instead of poisoning the world with unknown usage.
+        not_sent = bool(attempt.get('spawn_error')) \
+            and attempt.get('provider_request_started') is False
+        if not_sent:
+            usage, status = None, 'not_sent'
+        else:
+            usage = attempt.get('usage') if attempt.get('usage_measured') else None
+            status = 'measured' if usage is not None else 'unknown'
+            if usage is None:
+                usage = native_usage_lower_bound(attempt, sessions_root)
+                if usage is not None:
+                    status = 'partial'
         self.record('gm:' + phase + ':' + run_id + ':' + actor_id, actor_id, 'native_gm',
                     'deepseek-flash', phase, status, usage)
         self.export()
