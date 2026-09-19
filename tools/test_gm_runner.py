@@ -1191,6 +1191,16 @@ class SessionEpochAndUnknownTaskTests(RunnerTestBase):
                         '--note', 'offline fixture: the exact saved rollout is absent on this host',
                         *extra, route=False)
 
+    def investigation(self, name, investigation_id, evidence_ref, objective):
+        document = self.accepted_document()
+        request = {
+            'investigation_id': investigation_id, 'world_id': document['world_id'],
+            'source_sha256': gm_runner.sha256_bytes(self.evidence.read_bytes()),
+            'objective': objective, 'evidence_refs': [evidence_ref]}
+        path = self.root / name
+        path.write_text(json.dumps(request), encoding='utf-8')
+        return path
+
     def test_missing_native_session_opens_audited_new_epoch_and_next_transport_is_labelled(self):
         code, payload, _ = self.observe('--max-gms', '1', '--gm', 'gm-01')
         self.assertEqual(code, 0, payload)
@@ -1350,6 +1360,94 @@ class SessionEpochAndUnknownTaskTests(RunnerTestBase):
         self.assertEqual(code, 5, payload)
         self.assertEqual(payload['kind'], 'unknown_task_content_unavailable')
         self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), before)
+
+    def test_investigation_only_unknown_freezes_evidence_and_old_empty_history_fails_closed(self):
+        budget = ('--max-prompt-bytes', '50000')
+        code, payload, _ = self.observe('--max-gms', '1', '--gm', 'gm-06', *budget)
+        self.assertEqual(code, 0, payload)
+        first = self.investigation(
+            'investigation-only-a.json', 'fixture-investigation-a', '/proposals/0',
+            'Inspect the first fixture proposal as a separate bounded question.')
+        code, payload, _ = self.observe('--max-gms', '1', '--gm', 'gm-06',
+                                        '--investigation-file', str(first), *budget,
+                                        mode='no_usage')
+        self.assertEqual(code, 1, payload)
+        state = self.state_json()
+        record = state['sessions']['gm-06']
+        task = record['memory']['task_history'][-1]
+        self.assertEqual(task['issue_ids'], [])
+        self.assertRegex(task['investigation_evidence_sha256'], r'^[0-9a-f]{64}$')
+
+        legacy = copy.deepcopy(record)
+        legacy['attempts'][-1].pop('investigation_evidence_sha256')
+        legacy['memory']['task_history'][-1].pop('investigation_evidence_sha256')
+        with self.assertRaisesRegex(ValueError, 'neither issue/content nor investigation'):
+            gm_runner.freeze_unknown_observation_task(state, legacy, legacy['unresolved'])
+
+        code, payload, _ = self.cli(
+            'recover', '--state-dir', str(self.state), '--gm', 'gm-06', '--usage', 'unknown',
+            '--note', 'offline fixture: freeze the investigation evidence', route=False)
+        self.assertEqual(code, 0, payload)
+        code, payload, _ = self.cli(
+            'acknowledge', '--state-dir', str(self.state), '--gm', 'gm-06',
+            '--note', 'offline fixture: release only the accounting gate', route=False)
+        self.assertEqual(code, 0, payload)
+        tombstone = self.sessions()['gm-06']['unknown_observation_tombstones'][-1]
+        self.assertEqual(tombstone['issue_contents'], [])
+        self.assertEqual(tombstone['investigation_evidence_sha256'],
+                         task['investigation_evidence_sha256'])
+
+        relabelled = self.investigation(
+            'investigation-only-b.json', 'different-id-same-evidence', '/proposals/0',
+            'Different wording must not resend the same unknown evidence task.')
+        code, same, _ = self.observe('--max-gms', '1', '--gm', 'gm-06', '--dry-run',
+                                     '--investigation-file', str(relabelled), *budget)
+        self.assertEqual(code, 0, same)
+        self.assertFalse(same['plan'][0]['can_dispatch'])
+        self.assertTrue(same['plan'][0]['withheld_unknown_investigation_evidence'])
+        different = self.investigation(
+            'investigation-only-c.json', 'different-evidence', '/proposals/1',
+            'Inspect the second fixture proposal as a genuinely different question.')
+        code, fresh, _ = self.observe('--max-gms', '1', '--gm', 'gm-06', '--dry-run',
+                                      '--investigation-file', str(different), *budget)
+        self.assertEqual(code, 0, fresh)
+        self.assertTrue(fresh['plan'][0]['can_dispatch'])
+        self.assertIsNotNone(fresh['plan'][0]['investigation'])
+
+    def test_mixed_unknown_freezes_slice_and_investigation_evidence(self):
+        budget = ('--max-prompt-bytes', '50000')
+        first = self.investigation(
+            'mixed-a.json', 'mixed-investigation-a', '/proposals/0',
+            'Inspect one proposal while the ordinary issue slice is also open.')
+        code, payload, _ = self.observe('--max-gms', '1', '--gm', 'gm-06',
+                                        '--investigation-file', str(first), *budget,
+                                        mode='no_usage')
+        self.assertEqual(code, 1, payload)
+        task = self.sessions()['gm-06']['memory']['task_history'][-1]
+        self.assertGreater(len(task['issue_contents']), 0)
+        self.assertRegex(task['investigation_evidence_sha256'], r'^[0-9a-f]{64}$')
+        code, payload, _ = self.cli(
+            'recover', '--state-dir', str(self.state), '--gm', 'gm-06', '--usage', 'unknown',
+            '--note', 'offline fixture: freeze both portions of the mixed task', route=False)
+        self.assertEqual(code, 0, payload)
+        code, payload, _ = self.cli(
+            'acknowledge', '--state-dir', str(self.state), '--gm', 'gm-06',
+            '--note', 'offline fixture: release only the accounting gate', route=False)
+        self.assertEqual(code, 0, payload)
+        tombstone = self.sessions()['gm-06']['unknown_observation_tombstones'][-1]
+        self.assertEqual(tombstone['issue_contents'], task['issue_contents'])
+        self.assertEqual(tombstone['investigation_evidence_sha256'],
+                         task['investigation_evidence_sha256'])
+        relabelled = self.investigation(
+            'mixed-b.json', 'mixed-investigation-b', '/proposals/0',
+            'Changing the request form must not repeat the same mixed unknown task.')
+        code, dry, _ = self.observe('--max-gms', '1', '--gm', 'gm-06', '--dry-run',
+                                    '--investigation-file', str(relabelled), *budget)
+        self.assertEqual(code, 0, dry)
+        plan = dry['plan'][0]
+        self.assertFalse(plan['can_dispatch'])
+        self.assertEqual(set(plan['withheld_unknown_issue_ids']), set(task['issue_ids']))
+        self.assertTrue(plan['withheld_unknown_investigation_evidence'])
 
 
 class PaidBoundaryTests(RunnerTestBase):

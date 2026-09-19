@@ -1498,6 +1498,19 @@ def read_investigation(path: Path | None, document: dict, digest: str) -> dict |
     return investigation
 
 
+def investigation_evidence_fingerprint(investigation: dict | None) -> str | None:
+    """Identify selected evidence content, independent of request ids, prose and pointers."""
+    if not isinstance(investigation, dict) or not isinstance(investigation.get('evidence'), dict):
+        return None
+    evidence = investigation['evidence']
+    if not evidence:
+        return None
+    item_hashes = sorted(sha256_bytes(canonical(value).encode()) for value in evidence.values())
+    return sha256_bytes(canonical({
+        'world_id': investigation.get('world_id'),
+        'evidence_item_sha256': item_hashes}).encode())
+
+
 def read_autonomy_policy(path: Path) -> dict:
     """Load the standing preauthorization that lets one bounded cycle run without a step-per-stage
     supervisor dispatch. Defaults stay unchanged: without this file nothing autonomous happens."""
@@ -1815,6 +1828,15 @@ def frozen_issues_in_investigation(record: dict, investigation: dict | None) -> 
     return sorted(repeated)
 
 
+def investigation_frozen_after_unknown(record: dict, investigation: dict | None) -> bool:
+    fingerprint = investigation_evidence_fingerprint(investigation)
+    if fingerprint is None:
+        return False
+    return any(isinstance(tombstone, dict)
+               and tombstone.get('investigation_evidence_sha256') == fingerprint
+               for tombstone in record.get('unknown_observation_tombstones', []))
+
+
 def plan_observation(state: dict, selected: list[str], max_issues: int,
                      investigation: dict | None = None) -> list[dict]:
     plan = []
@@ -1831,6 +1853,7 @@ def plan_observation(state: dict, selected: list[str], max_issues: int,
         slice_records = eligible[:max_issues]
         repeated_investigation = frozen_issues_in_investigation(record, investigation)
         investigate = investigation if investigation and not repeated_investigation \
+            and not investigation_frozen_after_unknown(record, investigation) \
             and investigation['content_digest'] not in record.get('investigations', {}) else None
         plan.append({'gm_id': gm_id, 'session_id': record.get('session_id'),
                      'session_mode': session_transport_mode(record),
@@ -1839,6 +1862,9 @@ def plan_observation(state: dict, selected: list[str], max_issues: int,
                      'investigation': investigate,
                      'withheld_unknown_issue_ids': sorted(issue['issue_id'] for issue in frozen),
                      'withheld_unknown_investigation_issue_ids': repeated_investigation,
+                     'withheld_unknown_investigation_evidence': bool(
+                         investigation and investigation_frozen_after_unknown(
+                             record, investigation)),
                      'settled_issue_ids': sorted(issue_id for issue_id, issue in
                                                  state['issues'].items()
                                                  if issue['world_id'] == state['world_id']
@@ -2200,10 +2226,18 @@ def freeze_unknown_observation_task(state: dict, record: dict, unresolved: dict)
         raise ValueError('unknown observation has no unique dispatch history to freeze')
     task = tasks[0] if tasks else attempts[0]
     issue_ids = task.get('issue_ids')
-    if (not isinstance(issue_ids, list) or not issue_ids
+    investigation_fingerprint = task.get('investigation_evidence_sha256')
+    if (investigation_fingerprint is not None
+            and (not isinstance(investigation_fingerprint, str)
+                 or not re.fullmatch(r'[0-9a-f]{64}', investigation_fingerprint))):
+        raise ValueError('unknown observation task has malformed investigation evidence history')
+    if (not isinstance(issue_ids, list)
             or any(not isinstance(issue_id, str) for issue_id in issue_ids)
             or len(set(issue_ids)) != len(issue_ids)):
         raise ValueError('unknown observation task has no exact unique issue id list')
+    if not issue_ids and investigation_fingerprint is None:
+        raise ValueError('unknown observation has neither issue/content nor investigation '
+                         'evidence history to freeze')
     stored = task.get('issue_contents')
     if stored is not None:
         if not isinstance(stored, list):
@@ -2240,7 +2274,8 @@ def freeze_unknown_observation_task(state: dict, record: dict, unresolved: dict)
             'session_requested': unresolved.get('resume_requested'),
             'session_returned': unresolved.get('session_returned'),
             'attempt_status': unresolved.get('status'), 'issue_contents': pairs,
-            'content_source': content_source}
+            'content_source': content_source,
+            'investigation_evidence_sha256': investigation_fingerprint}
 
 
 # --------------------------------------------------------------------------- recovery
@@ -2495,6 +2530,8 @@ def observe(args) -> int:
                                    'withheld_unknown_issue_ids'],
                                'withheld_unknown_investigation_issue_ids': item[
                                    'withheld_unknown_investigation_issue_ids'],
+                               'withheld_unknown_investigation_evidence': item[
+                                   'withheld_unknown_investigation_evidence'],
                                'settled_issue_ids': item['settled_issue_ids'],
                                'blocked_by_owner': item['blocked_by_owner']} for item in plan],
                      'prompt_bytes': {item['gm_id']: len(build_prompt(
@@ -2591,6 +2628,8 @@ def observe(args) -> int:
                       'session_mode': transport_mode,
                       'session_epoch': record.get('session_epoch', 1),
                       'snapshot_sha256': digest, 'issue_ids': list(item['slice']),
+                      'investigation_evidence_sha256': investigation_evidence_fingerprint(
+                          item.get('investigation')),
                       'issue_contents': [
                           {'issue_id': issue['issue_id'],
                            'content_digest': issue['content_digest']}
@@ -2688,6 +2727,8 @@ def observe(args) -> int:
                 'issue_contents': [
                     {'issue_id': issue['issue_id'], 'content_digest': issue['content_digest']}
                     for issue in item['_records']],
+                'investigation_evidence_sha256': investigation_evidence_fingerprint(
+                    item.get('investigation')),
                 'dispositions': [entry['disposition'] for entry in outcome.get('results', [])],
                 'results': copy.deepcopy(outcome.get('results', [])),
                 'new_issue_ids': list(outcome.get('new_issue_ids', [])),
