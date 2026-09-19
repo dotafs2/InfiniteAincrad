@@ -2,6 +2,16 @@
 
 [唯一流程图](ROADMAP.md) · [项目介绍](README.md) · [美术风格与 Shader 对比](ART_STYLE.md)
 
+## 2026-09-19 · H117 Physical material exchange and real self-repair adoption
+
+Three user-requested Sol agents implemented bounded material exchange, honest Life events, navigation fixes and GM accounting recovery in isolated trees. The root reviewed and integrated them and remained the only canonical writer. The 36th capability transfers one uncommitted wood or iron unit in person with an atomic receipt. A controlled seq148 copy physically completed discovery, sharing, finite collection, material gifts, own-handle repair, contracted edge repair, payment and productive tool use across cold restarts. This full chain is fixture evidence, not autonomous adoption.
+
+Actual failed replays exposed final-contact navigation loops; a four-metre capsule-swept refinement now covers approach, tool work and home meals while preserving normal speed, collision and work/resource gates. The root passed 2,324 Godot assertions, 27 Python checks, two compiled wire cases and a clean .NET build. A one-time first-offer check lets an eligible idle resident reconsider newly available self-repair without choosing for them.
+
+The user authorized API spending without repeated questions. Two bounded same-world runs advanced seq148→162 with 11 settled Kimi calls costing CNY 0.2373084. The first failed on two local pre-HTTP null-stock rejections; the narrow projection fix, proven not-sent accounting and existing controller recovery preserve both failures. The second passed: Rowan autonomously repaired his axe handle, Ari and Fern spoke, and previously blocked meals completed. Seven residents made new measured decisions; all ten identities and every prior record survive. Final cold restore matches every nested field. There are 144 lifetime archive records and 157 world usage calls; no new unknown provider charge. Older unknown liabilities and GM histories remain untouched.
+
+The GM usage pointer was rebound after exact history verification; native GM conversations still require explicit new epochs and the old GM06 unknown task must never be reissued. The active heartbeat continues small batches. Visible Forward+ rendering still reports five null-particle and one null-MultiMesh errors plus four overlapping navigation edges, despite normal completion; renderer stability is not claimed. Long-term resources, natural full production-chain adoption and an unattended ten-GM loop remain open. [Evidence](docs/validation/resource-chain-2026-09-19.md) · [Actual resident report](worlds/restart-20260918-01/observations/iteration-20260919/report.zh-CN.md).
+
 ## 2026-09-18 · H116 Explicit material-route sharing and local world recovery
 
 Added an optional attributed route-sharing capability, bringing the registry to 35. A resident can tell a nearby listener a personally known material location; the listener receives unknown-stock knowledge and may choose to collect or relay it. Sharing neither grants goods nor forces action. The menu and result do not disclose the listener's private prior knowledge, and redundant reports preserve observed depletion. Actual words, source chains and command receipts survive restart; GM evidence contains only the public statement.

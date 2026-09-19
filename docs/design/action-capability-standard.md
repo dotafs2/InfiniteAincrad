@@ -1,6 +1,6 @@
 # Resident action capability standard
 
-H110 introduced one resident-action boundary with 33 versioned definitions: 27 adapters over established rules and six native entry points. H114 adds `production.self_repair`; H116 adds `knowledge.share_material_location`, bringing the current registry to 35. This is a foundation for adding behavior, not a claim that every possible profession or social system exists.
+H110 introduced one resident-action boundary with 33 versioned definitions: 27 adapters over established rules and six native entry points. H114 adds `production.self_repair`, H116 adds `knowledge.share_material_location`, and H117 adds `inventory.give_material`, bringing the current registry to 36. This is a foundation for adding behavior, not a claim that every possible profession or social system exists.
 
 The production world is `game/core/town_actions.gd`. It composes reviewed modules under `game/core/actions/`; new modules do not extend the world's inheritance chain. Existing reducers, command identities, inventory rules, save histories and physical movement remain authoritative.
 
@@ -29,12 +29,18 @@ Definitions describe resource constraints; their strings are not a generic lock 
 | Perception | Observe actual nearby work; privately record current surroundings. |
 | Knowledge and learning | Announce a real skill, relay an attributed skill notice, request an existing consensual repair lesson; explicitly tell a nearby resident a personally known material route. |
 | Social | Ask/reply/cancel help, reply to the visitor; independently speak to a nearby resident. |
-| Inventory | Voluntary food gift, deliver a contracted item, collect a repaired item. |
+| Inventory | Voluntary food or one-unit material gift, deliver a contracted item, collect a repaired item. |
 | Contracts | Offer, accept, decline or cancel an existing repair contract. |
 | Production | Forage, contracted repair, repair an owned axe part, use a functional tool, collect/cancel material recovery, bake using finite flour. |
 | Cooperation | Invite, accept, decline or withdraw a joint visit; accepted visits compose two existing physical journeys. |
 
-The complete IDs and machine-readable contracts live in the registry definitions, not a second manually maintained runtime list. `social.talk`, `perception.observe_surroundings`, the four `cooperation.*` entry points, `production.self_repair` and `knowledge.share_material_location` are native modules; the other 27 reuse established mechanics.
+The complete IDs and machine-readable contracts live in the registry definitions, not a second manually maintained runtime list. `social.talk`, `perception.observe_surroundings`, the four `cooperation.*` entry points, `production.self_repair`, `knowledge.share_material_location` and `inventory.give_material` are native modules; the other 27 reuse established mechanics.
+
+## Physical material gifts
+
+`inventory.give_material` transfers exactly one uncommitted iron or wood unit to an active resident within the existing 1.5-metre handoff range. The donor must be available and own the material. Discovery does not reveal the recipient's inventory. Admission rechecks the current distance and available balance; it deducts and credits atomically under the common transaction boundary. A committed material unit cannot also fund a gift.
+
+The receipt records the actual participants, material, opposite one-unit deltas and physical positions. It creates no payment, debt, contract, skill, instruction or spoken words. The event describes a completed physical handoff; it is not displayed as dialogue. Exact replay has no second transfer, changed payloads fail, and cold restore validates the saved command against its attributed event. This is an optional gift, not a generic barter or transfer protocol.
 
 ## Sharing a material route
 
@@ -50,7 +56,7 @@ Cold restore validates the command, exact utterance, recipients, hearing distanc
 
 Completion rechecks ownership, custody, skill, damage, contracts and uncommitted material. It consumes exactly one wood for a handle or one iron for an edge and restores only that part to 100, following existing prototype repair rules. It creates no currency, contract, lesson, material or speech. These costs and thresholds are compatible project extensions, not claims about exact novel formulas. Missing prerequisites yield an explicit failed receipt with no consumption. A trip making no progress for 90 seconds closes as unfinished. Material is not consumed or guaranteed on admission.
 
-The module keeps its job in its versioned command receipt, with immutable admission evidence and a separate terminal event. The common boundary exposes native jobs to physics and body-conflict checks. Work progress, command identity and completed/failed outcomes survive cold restore. Old saves acquire no new namespace merely by loading. A controlled seq148 copy verified actual movement and restart; natural model adoption remains unobserved.
+The module keeps its job in its versioned command receipt, with immutable admission evidence and a separate terminal event. The common boundary exposes native jobs to physics and body-conflict checks. Work progress, command identity and completed/failed outcomes survive cold restore. Old saves acquire no new namespace merely by loading. A controlled seq148 copy verified actual movement and restart. H117 subsequently observed Rowan voluntarily complete handle repair in the active world at seq158; broader repair and exchange adoption remains open.
 
 ## Conversation, privacy and consent
 

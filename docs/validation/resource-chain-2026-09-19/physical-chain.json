@@ -1,0 +1,597 @@
+{
+  "checks": 60,
+  "collector": "shared:baker",
+  "contract_id": "trade_contract_fixture:resource-chain:offer_edge",
+  "controlled_copy": true,
+  "directly_observed": true,
+  "disclosure": {
+    "code": "material_location_shared",
+    "event_id": "life_event_151",
+    "ok": true,
+    "speech_delivery": {
+      "attempted": true,
+      "code": "speech_delivered",
+      "delivered": true,
+      "event_id": "life_event_151",
+      "event_seq": 151,
+      "recipient_ids": [
+        "shared:well-keeper",
+        "shared:baker"
+      ],
+      "text": "I can tell you this route: Street salvage iron heap: public iron, 44 m north, 6 m west. Follow the streets; sort for 60 seconds per unit. Finite supply; current stock unknown and not promised."
+    }
+  },
+  "failures": [],
+  "final_effects": {
+    "item": {
+      "custodian_id": "shared:carpenter",
+      "edge": 100,
+      "handle": 100,
+      "id": "seed:axe",
+      "kind": "axe",
+      "owner_id": "shared:carpenter",
+      "source": "explicit_genesis_fact_not_earned_not_migrated"
+    },
+    "owner_account": {
+      "iron": 0,
+      "kindling": 1,
+      "reserved_col": 0,
+      "resident_id": "shared:carpenter",
+      "wood": 0
+    },
+    "smith_account": {
+      "iron": 0,
+      "kindling": 0,
+      "reserved_col": 0,
+      "resident_id": "shared:smith",
+      "wood": 1
+    },
+    "source": {
+      "access": "public",
+      "id": "street:iron-salvage-20260918",
+      "initial_stock": 3,
+      "install_command": "development_gm:gm05-iron-20260918",
+      "label": "Street salvage iron heap",
+      "material": "iron",
+      "position": [
+        0,
+        0.22,
+        7.7
+      ],
+      "recovered": 1,
+      "source_need": {
+        "actor_id": "shared:smith",
+        "seq": 27,
+        "text": "I can do the work. Need to be straight with you though—I'm out of iron at the moment. If you've got a bar or know where to get one, we can settle terms. Otherwise I'll have to source it first."
+      },
+      "stock": 2
+    },
+    "supplier_account": {
+      "iron": 0,
+      "kindling": 0,
+      "reserved_col": 0,
+      "resident_id": "shared:baker",
+      "wood": 0
+    }
+  },
+  "final_seq": 169,
+  "fixture_decisions_not_model_adoption": true,
+  "listener_proof": {
+    "access": "public",
+    "id": "street:iron-salvage-20260918",
+    "knowledge_source": "reported_location_current_stock_unverified",
+    "label": "Street salvage iron heap",
+    "last_observed_stock": null,
+    "material": "iron",
+    "observation_event_seq": 151,
+    "observed_elapsed": 5390.383333333518,
+    "position": [
+      0,
+      0.22,
+      7.7
+    ],
+    "reported_by_id": "shared:well-keeper",
+    "reported_by_name": "Ari",
+    "stock_may_have_changed": true,
+    "work_seconds_per_unit": 60.0
+  },
+  "max_sample_step_m": 0.09005048871040344,
+  "max_speed_mps": 1.3500001430511475,
+  "notice": {
+    "collision": true,
+    "notice": {
+      "asset": "res://assets/generated/travel_cargo_20260912/carved_route_waystone.glb",
+      "id": "public_notice:material_routes:v1",
+      "label": "Public Material Routes",
+      "point": [
+        2.5,
+        1.5950000017881394,
+        50.0
+      ],
+      "position": [
+        2.5,
+        0.04500000178813934,
+        50.0
+      ],
+      "read_range_m": 4.0,
+      "yaw": 200.0
+    },
+    "placed": true,
+    "published_entries": [
+      {
+        "id": "street:iron-salvage-20260918",
+        "label": "Street salvage iron heap",
+        "material": "iron",
+        "position": [
+          0,
+          0.22,
+          7.7
+        ],
+        "text": "Street salvage iron heap: public iron, 42 m north, 3 m west. Follow the streets; sort for 60 seconds per unit. Finite supply; current stock unknown and not promised."
+      }
+    ],
+    "stock_disclosed": false
+  },
+  "paid_calls": 0,
+  "production_chain_seconds": 229.3999999999921,
+  "production_receipts": {
+    "accept_edge": {
+      "actor": "shared:smith",
+      "admission": {
+        "code": "contract_accepted",
+        "ok": true
+      },
+      "command": "fixture:resource-chain:accept_edge",
+      "final": {
+        "command_id": "fixture:resource-chain:accept_edge",
+        "records": [
+          {
+            "payload": {
+              "action": "trade_option",
+              "actor_id": "shared:smith",
+              "option_id": "contract:accept:trade_contract_fixture:resource-chain:offer_edge",
+              "provenance": "opengameagent_fixture"
+            },
+            "status": "completed"
+          }
+        ],
+        "status": "completed"
+      },
+      "option": "contract:accept:trade_contract_fixture:resource-chain:offer_edge"
+    },
+    "bring_iron": {
+      "actor": "shared:baker",
+      "admission": {
+        "code": "trade_started",
+        "ok": true,
+        "pending": true
+      },
+      "command": "fixture:resource-chain:bring_iron",
+      "final": {
+        "command_id": "fixture:resource-chain:bring_iron",
+        "records": [
+          {
+            "payload": {
+              "action": "trade_option",
+              "actor_id": "shared:baker",
+              "option_id": "approach:shared:smith",
+              "provenance": "opengameagent_fixture"
+            },
+            "result": {
+              "actor_id": "shared:baker",
+              "code": "approach",
+              "command_id": "fixture:resource-chain:bring_iron",
+              "ok": true
+            },
+            "status": "completed"
+          }
+        ],
+        "status": "completed"
+      },
+      "option": "approach:shared:smith"
+    },
+    "collect_axe": {
+      "actor": "shared:carpenter",
+      "admission": {
+        "code": "trade_started",
+        "ok": true,
+        "pending": true
+      },
+      "command": "fixture:resource-chain:collect_axe",
+      "final": {
+        "command_id": "fixture:resource-chain:collect_axe",
+        "records": [
+          {
+            "payload": {
+              "action": "trade_option",
+              "actor_id": "shared:carpenter",
+              "option_id": "contract:collect:trade_contract_fixture:resource-chain:offer_edge",
+              "provenance": "opengameagent_fixture"
+            },
+            "result": {
+              "actor_id": "shared:carpenter",
+              "code": "collect",
+              "command_id": "fixture:resource-chain:collect_axe",
+              "ok": true
+            },
+            "status": "completed"
+          }
+        ],
+        "status": "completed"
+      },
+      "option": "contract:collect:trade_contract_fixture:resource-chain:offer_edge"
+    },
+    "deliver_axe": {
+      "actor": "shared:carpenter",
+      "admission": {
+        "code": "trade_started",
+        "ok": true,
+        "pending": true
+      },
+      "command": "fixture:resource-chain:deliver_axe",
+      "final": {
+        "command_id": "fixture:resource-chain:deliver_axe",
+        "records": [
+          {
+            "payload": {
+              "action": "trade_option",
+              "actor_id": "shared:carpenter",
+              "option_id": "contract:deliver:trade_contract_fixture:resource-chain:offer_edge",
+              "provenance": "opengameagent_fixture"
+            },
+            "result": {
+              "actor_id": "shared:carpenter",
+              "code": "deliver",
+              "command_id": "fixture:resource-chain:deliver_axe",
+              "ok": true
+            },
+            "status": "completed"
+          }
+        ],
+        "status": "completed"
+      },
+      "option": "contract:deliver:trade_contract_fixture:resource-chain:offer_edge"
+    },
+    "give_iron": {
+      "actor": "shared:baker",
+      "admission": {
+        "actor_id": "shared:baker",
+        "code": "material_handed_over",
+        "event_id": "life_event_161",
+        "material": "iron",
+        "ok": true,
+        "quantity": 1,
+        "recipient_id": "shared:smith",
+        "speech_delivery": {
+          "attempted": false,
+          "code": "physical_handoff_not_speech",
+          "delivered": false
+        }
+      },
+      "command": "fixture:resource-chain:give_iron",
+      "final": {
+        "capability_id": "inventory.give_material",
+        "command_id": "fixture:resource-chain:give_iron",
+        "created_elapsed": 5556.78333333365,
+        "event_seq": 161,
+        "payload": {
+          "actor_id": "shared:baker",
+          "option_id": "ability:give_material:85713e7eb238e5cd1627c572717f229d",
+          "provenance": "opengameagent_fixture",
+          "speech": ""
+        },
+        "result": {
+          "actor_id": "shared:baker",
+          "code": "material_handed_over",
+          "event_id": "life_event_161",
+          "material": "iron",
+          "ok": true,
+          "quantity": 1,
+          "recipient_id": "shared:smith",
+          "speech_delivery": {
+            "attempted": false,
+            "code": "physical_handoff_not_speech",
+            "delivered": false
+          }
+        },
+        "status": "completed",
+        "version": 1
+      },
+      "option": "ability:give_material:85713e7eb238e5cd1627c572717f229d"
+    },
+    "give_wood": {
+      "actor": "shared:baker",
+      "admission": {
+        "actor_id": "shared:baker",
+        "code": "material_handed_over",
+        "event_id": "life_event_168",
+        "material": "wood",
+        "ok": true,
+        "quantity": 1,
+        "recipient_id": "shared:carpenter",
+        "speech_delivery": {
+          "attempted": false,
+          "code": "physical_handoff_not_speech",
+          "delivered": false
+        }
+      },
+      "command": "fixture:resource-chain:give_wood",
+      "final": {
+        "capability_id": "inventory.give_material",
+        "command_id": "fixture:resource-chain:give_wood",
+        "created_elapsed": 5636.25000000038,
+        "event_seq": 168,
+        "payload": {
+          "actor_id": "shared:baker",
+          "option_id": "ability:give_material:8872f3f55b1215730a53556b8eb4f5f0",
+          "provenance": "opengameagent_fixture",
+          "speech": ""
+        },
+        "result": {
+          "actor_id": "shared:baker",
+          "code": "material_handed_over",
+          "event_id": "life_event_168",
+          "material": "wood",
+          "ok": true,
+          "quantity": 1,
+          "recipient_id": "shared:carpenter",
+          "speech_delivery": {
+            "attempted": false,
+            "code": "physical_handoff_not_speech",
+            "delivered": false
+          }
+        },
+        "status": "completed",
+        "version": 1
+      },
+      "option": "ability:give_material:8872f3f55b1215730a53556b8eb4f5f0"
+    },
+    "meet_smith": {
+      "actor": "shared:carpenter",
+      "admission": {
+        "code": "trade_started",
+        "ok": true,
+        "pending": true
+      },
+      "command": "fixture:resource-chain:meet_smith",
+      "final": {
+        "command_id": "fixture:resource-chain:meet_smith",
+        "records": [
+          {
+            "payload": {
+              "action": "trade_option",
+              "actor_id": "shared:carpenter",
+              "option_id": "approach:shared:smith",
+              "provenance": "opengameagent_fixture"
+            },
+            "result": {
+              "actor_id": "shared:carpenter",
+              "code": "approach",
+              "command_id": "fixture:resource-chain:meet_smith",
+              "ok": true
+            },
+            "status": "completed"
+          }
+        ],
+        "status": "completed"
+      },
+      "option": "approach:shared:smith"
+    },
+    "offer_edge": {
+      "actor": "shared:carpenter",
+      "admission": {
+        "code": "contract_proposed",
+        "ok": true
+      },
+      "command": "fixture:resource-chain:offer_edge",
+      "final": {
+        "command_id": "fixture:resource-chain:offer_edge",
+        "records": [
+          {
+            "payload": {
+              "action": "trade_option",
+              "actor_id": "shared:carpenter",
+              "option_id": "contract:offer:seed:axe:edge:shared:smith:2",
+              "provenance": "opengameagent_fixture"
+            },
+            "status": "completed"
+          }
+        ],
+        "status": "completed"
+      },
+      "option": "contract:offer:seed:axe:edge:shared:smith:2"
+    },
+    "own_handle": {
+      "actor": "shared:carpenter",
+      "admission": {
+        "code": "self_repair_started",
+        "event_id": "life_event_158",
+        "job": {
+          "action": "self_repair",
+          "actor_id": "shared:carpenter",
+          "best_remaining": 18.6558895111084,
+          "command_id": "fixture:resource-chain:own_handle",
+          "duration_seconds": 60.0,
+          "elapsed": 0.0,
+          "item_id": "seed:axe",
+          "material": "wood",
+          "no_progress_seconds": 0.0,
+          "part": "handle",
+          "provenance": "opengameagent_fixture",
+          "target_position": [
+            -33.157351112569124,
+            0.045,
+            51.29293362934481
+          ]
+        },
+        "ok": true,
+        "pending": true,
+        "speech_delivery": {
+          "attempted": false,
+          "code": "physical_work_not_speech",
+          "delivered": false
+        }
+      },
+      "command": "fixture:resource-chain:own_handle",
+      "final": {
+        "capability_id": "production.self_repair",
+        "command_id": "fixture:resource-chain:own_handle",
+        "created_elapsed": 5483.183333333592,
+        "event_seq": 158,
+        "payload": {
+          "actor_id": "shared:carpenter",
+          "option_id": "ability:self_repair:seed:axe:handle",
+          "provenance": "opengameagent_fixture",
+          "speech": ""
+        },
+        "result": {
+          "code": "self_repair_completed",
+          "event_id": "life_event_158",
+          "job": {
+            "action": "self_repair",
+            "actor_id": "shared:carpenter",
+            "best_remaining": 0.22207488119602203,
+            "command_id": "fixture:resource-chain:own_handle",
+            "duration_seconds": 60,
+            "elapsed": 60,
+            "item_id": "seed:axe",
+            "material": "wood",
+            "no_progress_seconds": 0,
+            "part": "handle",
+            "provenance": "opengameagent_fixture",
+            "target_position": [
+              -33.157351112569124,
+              0.045,
+              51.29293362934481
+            ]
+          },
+          "ok": true,
+          "pending": false,
+          "speech_delivery": {
+            "attempted": false,
+            "code": "physical_work_not_speech",
+            "delivered": false
+          },
+          "terminal_seq": 160
+        },
+        "status": "completed",
+        "version": 1
+      },
+      "option": "ability:self_repair:seed:axe:handle"
+    },
+    "repair_edge": {
+      "actor": "shared:smith",
+      "admission": {
+        "code": "trade_started",
+        "ok": true,
+        "pending": true
+      },
+      "command": "fixture:resource-chain:repair_edge",
+      "final": {
+        "command_id": "fixture:resource-chain:repair_edge",
+        "records": [
+          {
+            "payload": {
+              "action": "trade_option",
+              "actor_id": "shared:smith",
+              "option_id": "contract:work:trade_contract_fixture:resource-chain:offer_edge:edge",
+              "provenance": "opengameagent_fixture"
+            },
+            "result": {
+              "actor_id": "shared:smith",
+              "code": "work",
+              "command_id": "fixture:resource-chain:repair_edge",
+              "ok": true
+            },
+            "status": "completed"
+          }
+        ],
+        "status": "completed"
+      },
+      "option": "contract:work:trade_contract_fixture:resource-chain:offer_edge:edge"
+    },
+    "use_repaired_axe": {
+      "actor": "shared:carpenter",
+      "admission": {
+        "code": "trade_started",
+        "ok": true,
+        "pending": true
+      },
+      "command": "fixture:resource-chain:use_repaired_axe",
+      "final": {
+        "command_id": "fixture:resource-chain:use_repaired_axe",
+        "records": [
+          {
+            "payload": {
+              "action": "trade_option",
+              "actor_id": "shared:carpenter",
+              "option_id": "tool:use",
+              "provenance": "opengameagent_fixture"
+            },
+            "result": {
+              "actor_id": "shared:carpenter",
+              "code": "use_tool",
+              "command_id": "fixture:resource-chain:use_repaired_axe",
+              "ok": true
+            },
+            "status": "completed"
+          }
+        ],
+        "status": "completed"
+      },
+      "option": "tool:use"
+    }
+  },
+  "production_travel_metres": {
+    "shared:baker": 46.979905635118484,
+    "shared:carpenter": 62.91005673259497,
+    "shared:smith": 0.0
+  },
+  "read_proof": {
+    "access": "public",
+    "id": "street:iron-salvage-20260918",
+    "knowledge_source": "personally_read_public_material_notice_stock_unknown",
+    "label": "Street salvage iron heap",
+    "last_observed_stock": null,
+    "material": "iron",
+    "observation_event_seq": 149,
+    "observed_elapsed": 5390.383333333518,
+    "position": [
+      0,
+      0.22,
+      7.7
+    ],
+    "stock_may_have_changed": true,
+    "work_seconds_per_unit": 60.0
+  },
+  "reader": "shared:well-keeper",
+  "receipt": {
+    "command_id": "fixture:notice-collection",
+    "records": [
+      {
+        "payload": {
+          "action": "recover_material",
+          "actor_id": "shared:baker",
+          "provenance": "opengameagent_fixture",
+          "source_id": "street:iron-salvage-20260918"
+        },
+        "result": {
+          "actor_id": "shared:baker",
+          "code": "material_recovered",
+          "command_id": "fixture:notice-collection",
+          "material": "iron",
+          "ok": true,
+          "quantity": 1,
+          "source_id": "street:iron-salvage-20260918"
+        },
+        "status": "completed"
+      }
+    ],
+    "status": "completed"
+  },
+  "repair_restarted": true,
+  "resumed": true,
+  "source_seq": 148,
+  "suite": "town_resource_chain_scene",
+  "walked_metres": 44.72991768270731
+}

@@ -1,0 +1,80 @@
+{
+  "suites": [
+    {
+      "suite": "town_capabilities",
+      "checks": 168,
+      "failures": []
+    },
+    {
+      "suite": "town_food_handoff",
+      "checks": 12,
+      "failures": []
+    },
+    {
+      "suite": "town_material_handoff",
+      "checks": 51,
+      "failures": []
+    },
+    {
+      "suite": "town_material_handoff_turns",
+      "checks": 10,
+      "failures": []
+    },
+    {
+      "suite": "town_material_sharing",
+      "checks": 50,
+      "failures": []
+    },
+    {
+      "suite": "town_self_repair",
+      "checks": 114,
+      "failures": []
+    },
+    {
+      "suite": "town_capabilities_turns",
+      "checks": 1712,
+      "failures": []
+    },
+    {
+      "suite": "town_life_presentation",
+      "checks": 19,
+      "failures": []
+    },
+    {
+      "suite": "town_social_near_target_steering",
+      "checks": 5,
+      "failures": []
+    },
+    {
+      "suite": "town_social_failed_world_replay",
+      "checks": 18,
+      "failures": []
+    },
+    {
+      "suite": "town_tool_use_failed_world_replay",
+      "checks": 23,
+      "failures": []
+    },
+    {
+      "suite": "town_resource_chain_scene",
+      "checks": 60,
+      "failures": []
+    },
+    {
+      "suite": "town_self_repair_first_offer_wake",
+      "checks": 42,
+      "failures": []
+    },
+    {
+      "suite": "town_home_eating_failed_world_replay",
+      "checks": 40,
+      "failures": []
+    }
+  ],
+  "total": 2324,
+  "python_design_tests": 9,
+  "root_python_tests": 27,
+  "root_gateway_loopback_cases": 2,
+  "worker_full_gateway_cases": 29,
+  "worker_full_actor_usage_and_gm_runner_tests": 72
+}
