@@ -1,0 +1,77 @@
+{
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 162,
+  "end_seq": 174,
+  "source_sha256": "55dad1ad02bf20734bd71bf9c89583011a2f1787fd6fa12cd2ce9586de2bc7db",
+  "resident_calls": 16,
+  "resident_cost_cny": 0.3289711,
+  "new_resident_unknowns": 0,
+  "archive_records": 160,
+  "usage_calls": 174,
+  "old_calls_and_revisions_preserved": true,
+  "gm_new_attempts": 1,
+  "gm_outcome": {
+    "acknowledged": true,
+    "cost": "measured",
+    "decision": "accept",
+    "errors": [],
+    "evidence_refs": [
+      "baseline.life_seq=148 / observed.life_seq=174",
+      "new_life_events life_event_158 (self_repair_completed, seed:axe handle, consumed 1 wood, 60 work_seconds)",
+      "iris_terminal_feedback turn:shared:weaver:0:23 rejected resources_unavailable; 0:24 completed -> seq 170; 0:25 rejected resources_unavailable",
+      "limits.long_term_resource_sustainability_proved=false",
+      "resource_envelope.basis (host code-inspection claim, unverified by me)"
+    ],
+    "exit_code": 0,
+    "gm_id": "gm-04",
+    "kind": "autonomy_feedback_ack",
+    "next_work": "Verify in-lane availability: check whether a refused harvest_ration means empty public ration stock or an admission/allocation block, and whether any implemented finite, owned iron source exists for the smith. I will not re-open the gm-05/gm-03 owned hypotheses.",
+    "note": "Noted gap: seqs 153, 163, 169 absent from new_life_events; no inventory snapshot, so axe edge state unconfirmed.",
+    "pid": 4076,
+    "protected_paths_changed": [],
+    "receipt_sha256": "faba5e301f7b0d77deb0e74f47b13ed3846692148d1773f40a0214519ac225d3",
+    "run_id": "feedback-20260919T033016Z-250094",
+    "session_epoch": 2,
+    "session_mode": "new_epoch",
+    "status": "ok",
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 896,
+      "input_tokens": 47012,
+      "output_tokens": 4064,
+      "reasoning_output_tokens": 3092
+    },
+    "usage_accounting": {
+      "baseline": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0
+      },
+      "basis": "native_session_cumulative_highwater",
+      "coverage": "since last measured session highwater",
+      "session_id": "01a0b7b6-fb4f-70e1-b7c2-15314262d7d2",
+      "status": "measured_delta",
+      "unknown_detail_fields": [
+        "total_tokens"
+      ]
+    },
+    "usage_cumulative": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 896,
+      "input_tokens": 47012,
+      "output_tokens": 4064,
+      "reasoning_output_tokens": 3092
+    },
+    "usage_measured": true,
+    "utc": "2026-09-19T03:30:45.295996+00:00",
+    "validation_errors": []
+  },
+  "gm_currency_cost": null,
+  "gm_currency_note": "No verified route currency receipt; token usage is separate from Kimi CNY.",
+  "renderer_errors": {
+    "03": 0,
+    "04": 14
+  }
+}

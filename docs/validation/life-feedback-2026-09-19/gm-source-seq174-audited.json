@@ -1,0 +1,359 @@
+{
+	"boundaries": {
+		"consumed_by_npc_model": false,
+		"contains_other_resident_memories": false,
+		"contains_private_reply_reason": false,
+		"image_analysis": false,
+		"note": "world-scoped evidence for a separate GM process only"
+	},
+	"counts": {
+		"issues": 12,
+		"proposals": 0
+	},
+	"evidence": [
+		{
+			"action": "harvest_ration",
+			"command_id": "turn:shared:innkeeper:1:18",
+			"command_status": "rejected",
+			"discriminators": {
+				"private_reason": false,
+				"public_utterance": false,
+				"resource_failure": true
+			},
+			"evidence_kind": "basic_life_resources_unavailable",
+			"issue_id": "basic_action_terminal:turn:shared:innkeeper:1:18",
+			"physical_facts": {
+				"consumed": 0,
+				"observation_source": "authoritative_basic_action_command_and_turn",
+				"position": [
+					7.47550106048584,
+					0.000831803248729557,
+					51.1827430725098
+				]
+			},
+			"resident_id": "shared:innkeeper",
+			"result_code": "resources_unavailable",
+			"status": "failed",
+			"world_id": "shared:restart-20260918-01"
+		},
+		{
+			"action": "harvest_ration",
+			"command_id": "turn:shared:weaver:0:25",
+			"command_status": "rejected",
+			"discriminators": {
+				"private_reason": false,
+				"public_utterance": false,
+				"resource_failure": true
+			},
+			"evidence_kind": "basic_life_resources_unavailable",
+			"issue_id": "basic_action_terminal:turn:shared:weaver:0:25",
+			"physical_facts": {
+				"consumed": 0,
+				"observation_source": "authoritative_basic_action_command_and_turn",
+				"position": [
+					6.53933763504028,
+					0.000824502436444163,
+					51.2016105651855
+				]
+			},
+			"resident_id": "shared:weaver",
+			"result_code": "resources_unavailable",
+			"status": "failed",
+			"world_id": "shared:restart-20260918-01"
+		},
+		{
+			"action": "harvest_ration",
+			"command_id": "turn:shared:fisher:0:12",
+			"command_status": "rejected",
+			"discriminators": {
+				"private_reason": false,
+				"public_utterance": false,
+				"resource_failure": true
+			},
+			"evidence_kind": "basic_life_resources_unavailable",
+			"issue_id": "basic_action_terminal:turn:shared:fisher:0:12",
+			"physical_facts": {
+				"consumed": 0,
+				"observation_source": "authoritative_basic_action_command_and_turn",
+				"position": [
+					8.88994312286377,
+					0.00082157546421513,
+					52.9949340820313
+				]
+			},
+			"resident_id": "shared:fisher",
+			"result_code": "resources_unavailable",
+			"status": "failed",
+			"world_id": "shared:restart-20260918-01"
+		},
+		{
+			"command_id": "turn:shared:carpenter:0:27",
+			"command_status": "completed",
+			"discriminators": {
+				"physical_work": true,
+				"private_reason": false,
+				"public_utterance": false
+			},
+			"event_id": "life_event_158",
+			"event_seq": 158,
+			"evidence_kind": "self_repair_completed",
+			"issue_id": "self_repair:turn:shared:carpenter:0:27",
+			"item_id": "seed:axe",
+			"material": "wood",
+			"part": "handle",
+			"physical_facts": {
+				"consumed": 1,
+				"observation_source": "authoritative_self_repair_command_and_event",
+				"position": [
+					-32.9351692199707,
+					0.000935206597205251,
+					51.1120681762695
+				],
+				"work_seconds": 60.0
+			},
+			"resident_id": "shared:carpenter",
+			"result_code": "self_repair_completed",
+			"status": "completed",
+			"world_id": "shared:restart-20260918-01"
+		},
+		{
+			"delivered_text": "Iris, my axe handle is worn down to twenty. Can you repair it? I have eight Col ready, and I know the price is two Col for a handle repair.",
+			"discriminators": {
+				"achieved_capability": false,
+				"delivered": true,
+				"invented_need": false,
+				"missing_mechanism_proved": false,
+				"note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+				"public_utterance": true
+			},
+			"event_id": "life_event_146",
+			"event_provenance": "",
+			"event_source": "opengameagent_live",
+			"event_type": "ask_help",
+			"evidence_kind": "public_life_event",
+			"issue_id": "public_life_event:life_event_146",
+			"operation_id": "turn:shared:carpenter:0:25",
+			"recipient_ids": [
+				"shared:carpenter",
+				"shared:weaver"
+			],
+			"request_ref": "godot_help:turn:shared:carpenter:0:25",
+			"seq": 146,
+			"speaker_id": "shared:carpenter",
+			"status": "observed",
+			"text_truncated": false,
+			"world_id": "shared:restart-20260918-01"
+		},
+		{
+			"delivered_text": "Rowan, I appreciate you thinking of me, but I don't actually know wood repair. I was willing to talk it through, but I can't do the work itself—you'd need someone with the proper skill.",
+			"discriminators": {
+				"achieved_capability": false,
+				"delivered": true,
+				"invented_need": false,
+				"missing_mechanism_proved": false,
+				"note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+				"public_utterance": true
+			},
+			"event_id": "life_event_147",
+			"event_provenance": "",
+			"event_source": "opengameagent_live",
+			"event_type": "reply_help",
+			"evidence_kind": "public_life_event",
+			"issue_id": "public_life_event:life_event_147",
+			"operation_id": "turn:shared:weaver:0:21",
+			"recipient_ids": [
+				"shared:weaver",
+				"shared:carpenter"
+			],
+			"request_ref": "godot_help:turn:shared:carpenter:0:25",
+			"seq": 147,
+			"speaker_id": "shared:weaver",
+			"status": "observed",
+			"text_truncated": false,
+			"world_id": "shared:restart-20260918-01"
+		},
+		{
+			"delivered_text": "Iris, you can't help with the handle—that's fair enough. Do you know anyone around here who does wooden repairs? My axe handle's worn to twenty and I'd like to get it sorted before it snaps on me.",
+			"discriminators": {
+				"achieved_capability": false,
+				"delivered": true,
+				"invented_need": false,
+				"missing_mechanism_proved": false,
+				"note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+				"public_utterance": true
+			},
+			"event_id": "life_event_148",
+			"event_provenance": "opengameagent_live",
+			"event_source": "opengameagent_live",
+			"event_type": "resident_said",
+			"evidence_kind": "public_life_event",
+			"issue_id": "public_life_event:life_event_148",
+			"operation_id": "turn:shared:carpenter:0:26",
+			"recipient_ids": [
+				"shared:carpenter",
+				"shared:weaver"
+			],
+			"request_ref": "",
+			"seq": 148,
+			"speaker_id": "shared:carpenter",
+			"status": "observed",
+			"text_truncated": false,
+			"world_id": "shared:restart-20260918-01"
+		},
+		{
+			"delivered_text": "Fern. You work with growing plants. Do you draw water from the street trough, or is there another source people use?",
+			"discriminators": {
+				"achieved_capability": false,
+				"delivered": true,
+				"invented_need": false,
+				"missing_mechanism_proved": false,
+				"note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+				"public_utterance": true
+			},
+			"event_id": "life_event_152",
+			"event_provenance": "opengameagent_live",
+			"event_source": "opengameagent_live",
+			"event_type": "resident_said",
+			"evidence_kind": "public_life_event",
+			"issue_id": "public_life_event:life_event_152",
+			"operation_id": "turn:shared:well-keeper:1:10",
+			"recipient_ids": [
+				"shared:well-keeper",
+				"shared:gardener"
+			],
+			"request_ref": "",
+			"seq": 152,
+			"speaker_id": "shared:well-keeper",
+			"status": "observed",
+			"text_truncated": false,
+			"world_id": "shared:restart-20260918-01"
+		},
+		{
+			"delivered_text": "No, I don't draw water for them. I only watch and try to notice what changes. Have you seen how these plantings are kept? I'd rather hear what you've observed than guess.",
+			"discriminators": {
+				"achieved_capability": false,
+				"delivered": true,
+				"invented_need": false,
+				"missing_mechanism_proved": false,
+				"note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+				"public_utterance": true
+			},
+			"event_id": "life_event_154",
+			"event_provenance": "opengameagent_live",
+			"event_source": "opengameagent_live",
+			"event_type": "resident_said",
+			"evidence_kind": "public_life_event",
+			"issue_id": "public_life_event:life_event_154",
+			"operation_id": "turn:shared:gardener:0:9",
+			"recipient_ids": [
+				"shared:gardener",
+				"shared:well-keeper"
+			],
+			"request_ref": "",
+			"seq": 154,
+			"speaker_id": "shared:gardener",
+			"status": "observed",
+			"text_truncated": false,
+			"world_id": "shared:restart-20260918-01"
+		},
+		{
+			"delivered_text": "Fern, do you know if there are any animals kept near here? I'm hoping to learn how to care for them properly.",
+			"discriminators": {
+				"achieved_capability": false,
+				"delivered": true,
+				"invented_need": false,
+				"missing_mechanism_proved": false,
+				"note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+				"public_utterance": true
+			},
+			"event_id": "life_event_166",
+			"event_provenance": "opengameagent_live",
+			"event_source": "opengameagent_live",
+			"event_type": "resident_said",
+			"evidence_kind": "public_life_event",
+			"issue_id": "public_life_event:life_event_166",
+			"operation_id": "turn:shared:herder:0:11",
+			"recipient_ids": [
+				"shared:herder",
+				"shared:gardener"
+			],
+			"request_ref": "",
+			"seq": 166,
+			"speaker_id": "shared:herder",
+			"status": "observed",
+			"text_truncated": false,
+			"world_id": "shared:restart-20260918-01"
+		},
+		{
+			"delivered_text": "I haven't seen any animals kept at the Planted Commons itself. I only watch the plantings there, so I might miss what's nearby. Have you noticed tracks or heard anything from that direction?",
+			"discriminators": {
+				"achieved_capability": false,
+				"delivered": true,
+				"invented_need": false,
+				"missing_mechanism_proved": false,
+				"note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+				"public_utterance": true
+			},
+			"event_id": "life_event_168",
+			"event_provenance": "opengameagent_live",
+			"event_source": "opengameagent_live",
+			"event_type": "resident_said",
+			"evidence_kind": "public_life_event",
+			"issue_id": "public_life_event:life_event_168",
+			"operation_id": "turn:shared:gardener:0:10",
+			"recipient_ids": [
+				"shared:gardener",
+				"shared:herder"
+			],
+			"request_ref": "",
+			"seq": 168,
+			"speaker_id": "shared:gardener",
+			"status": "observed",
+			"text_truncated": false,
+			"world_id": "shared:restart-20260918-01"
+		},
+		{
+			"delivered_text": "Fern, you said you don't draw water for your plants—you only watch. What do you watch for? I'm trying to understand how water moves around here.",
+			"discriminators": {
+				"achieved_capability": false,
+				"delivered": true,
+				"invented_need": false,
+				"missing_mechanism_proved": false,
+				"note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+				"public_utterance": true
+			},
+			"event_id": "life_event_172",
+			"event_provenance": "opengameagent_live",
+			"event_source": "opengameagent_live",
+			"event_type": "resident_said",
+			"evidence_kind": "public_life_event",
+			"issue_id": "public_life_event:life_event_172",
+			"operation_id": "turn:shared:well-keeper:1:13",
+			"recipient_ids": [
+				"shared:well-keeper",
+				"shared:gardener"
+			],
+			"request_ref": "",
+			"seq": 172,
+			"speaker_id": "shared:well-keeper",
+			"status": "observed",
+			"text_truncated": false,
+			"world_id": "shared:restart-20260918-01"
+		}
+	],
+	"kind": "background_gm_evidence_snapshot",
+	"limits": {
+		"evidence_limit": 64,
+		"proposal_limit": 32
+	},
+	"projection_note": "bounded GM-visible projection; the canonical accepted-need record stays in the world's private turn journal",
+	"proposals": [],
+	"schema_version": 1,
+	"source_revision": {
+		"godot_elapsed_seconds": 6949.68333333279,
+		"life_seq": 174,
+		"proposal_sequence": 0,
+		"world_elapsed_seconds": 6949.68333333279
+	},
+	"world_id": "shared:restart-20260918-01"
+}
