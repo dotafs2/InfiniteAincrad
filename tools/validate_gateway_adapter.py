@@ -125,6 +125,11 @@ def gateway(scenario, capture_folder=None):
                     assert [entry["observation_event_seq"] for entry in personal["material_sources"]] == list(range(1, 9))
                     assert "nested_gm_secret" not in observation
                     assert len((body["messages"][0]["content"] + observation).encode("utf-8")) <= 24576
+                if scenario == "knowledge-unknown-stock":
+                    materials = personal["material_sources"]
+                    assert len(materials) == 1 and materials[0]["last_observed_stock"] is None
+                    assert materials[0]["knowledge_source"] == "personally_read_public_material_notice_stock_unknown"
+                    assert "gm_resources" not in materials[0] and "nested_gm_secret" not in observation
                 if scenario == "town-history":
                     assert personal["identity"]["id"] == expected_actor
                     source_id = 'shared:smith' if expected_actor == 'fictional:forge' else 'shared:well-keeper'
@@ -230,10 +235,12 @@ def main():
     # Expected POST count per scenario; an absent scenario must never reach the gateway.
     posts = {"continuation": 12, "success": 1, "town": 1, "action-groups": 1, "unicode-context": 1, "uncertain": 1,
              "pinned-model": 1, "reply-model-mismatch": 1, "town-history": 3, "knowledge-bounds": 1,
+             "knowledge-unknown-stock": 1,
              "concurrent-reproduce": 1, "concurrent-success": 2, "concurrent-limit": 1, "concurrent-uncertain": 1, "concurrent-cancel": 1}
     scenarios = ["success", "town", "action-groups", "unicode-context", "continuation", "pinned-model", "model-mismatch",
                  "reply-model-mismatch", "insufficient", "wrong-ledger", "expired", "unsafe-endpoint", "uncertain", "town-history",
                  "knowledge-bounds", "knowledge-oversize", "knowledge-nested", "knowledge-missing-source", "knowledge-context-limit",
+                 "knowledge-unknown-stock", "knowledge-adjacent-null",
                  "concurrent-success", "concurrent-limit", "concurrent-uncertain", "concurrent-cancel"]
     if args.scenario and not set(args.scenario) <= set(scenarios + ["concurrent-reproduce"]):
         parser.error("Unknown scenario")
@@ -271,7 +278,8 @@ def main():
             for index in range(repeats):
                 label = f"{scenario}-{index}"
                 expect = "rejected" if index else {"success": "success", "town": "town", "action-groups": "action-groups", "unicode-context": "unicode-context",
-                                                   "continuation": "continuation", "pinned-model": "success", "knowledge-bounds": "knowledge-bounds"}.get(scenario, "rejected")
+                                                   "continuation": "continuation", "pinned-model": "success", "knowledge-bounds": "knowledge-bounds",
+                                                   "knowledge-unknown-stock": "knowledge-unknown-stock"}.get(scenario, "rejected")
                 env = dict(os.environ, AINCRAD_GATEWAY_RUN_CONFIG=str(config.resolve()), AINCRAD_GATEWAY_TEST_EXPECT=expect,
                            AINCRAD_GATEWAY_TEST_SCENARIO=scenario)
                 script = "res://tests/gateway_acceptance.gd"
