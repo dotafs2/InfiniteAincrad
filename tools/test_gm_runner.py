@@ -1163,8 +1163,12 @@ class OwnershipTests(RunnerTestBase):
 
         code, payload, _ = self.observe('--max-gms', '1', '--gm', 'gm-01', mode='ok')
         self.assertEqual(code, 0, payload)
-        self.assertEqual(payload['dispatched'], 1)
-        self.assertEqual(len(self.sessions()['gm-01']['attempts']), attempts_kept + 1)
+        self.assertEqual(payload['dispatched'], 0)
+        self.assertEqual(payload['results'][0]['status'], 'skipped_no_open_issue')
+        record = self.sessions()['gm-01']
+        self.assertEqual(len(record['attempts']), attempts_kept)
+        self.assertEqual(record['unknown_observation_tombstones'][-1]['content_source'],
+                         'dispatch_intent')
 
     def test_state_is_one_atomic_file_and_legacy_layout_refused(self):
         code, payload, _ = self.observe('--max-gms', '1')
@@ -1178,6 +1182,174 @@ class OwnershipTests(RunnerTestBase):
         code, payload, _ = self.observe('--max-gms', '1', state_dir=legacy)
         self.assertEqual(code, 2, payload)
         self.assertEqual(payload['kind'], 'preflight')
+
+
+class SessionEpochAndUnknownTaskTests(RunnerTestBase):
+    def epoch(self, gm_id, expected, *extra):
+        return self.cli('new-session-epoch', '--state-dir', str(self.state), '--gm', gm_id,
+                        '--expected-session', expected, '--codex-home', str(self.codex_home),
+                        '--note', 'offline fixture: the exact saved rollout is absent on this host',
+                        *extra, route=False)
+
+    def test_missing_native_session_opens_audited_new_epoch_and_next_transport_is_labelled(self):
+        code, payload, _ = self.observe('--max-gms', '1', '--gm', 'gm-01')
+        self.assertEqual(code, 0, payload)
+        before = self.sessions()['gm-01']
+        old_session = before['session_id']
+        rollout = list((self.codex_home / 'sessions').glob(
+            f'*/*/*/rollout-*-{old_session}.jsonl'))
+        self.assertEqual(len(rollout), 1)
+        rollout[0].unlink()
+        calls = len(self.fake_calls())
+
+        code, payload, _ = self.epoch('gm-01', old_session)
+        self.assertEqual(code, 0, payload)
+        self.assertEqual(payload['session_mode'], 'new_epoch')
+        self.assertTrue(payload['native_rollout_absent'])
+        pending = self.sessions()['gm-01']
+        self.assertIsNone(pending['session_id'])
+        self.assertEqual(pending['session_epoch'], 2)
+        self.assertEqual(pending['session_source'], 'new_epoch_pending')
+        self.assertEqual(pending['session_history'][-1]['session_id'], old_session)
+        self.assertEqual(pending['session_history'][-1]['epoch'], 1)
+        self.assertEqual(pending['session_history'][-1]['absence_check']['match_count'], 0)
+        self.assertEqual(pending['attempts'], before['attempts'])
+        self.assertEqual(pending['outcomes'], before['outcomes'])
+        self.assertEqual(pending['memory'], before['memory'])
+        self.assertEqual(len(self.fake_calls()), calls)
+
+        state_before_dry_run = (self.state / gm_runner.STATE_FILE).read_bytes()
+        code, dry_run, _ = self.observe('--max-gms', '1', '--gm', 'gm-01', '--dry-run')
+        self.assertEqual(code, 0, dry_run)
+        self.assertEqual(dry_run['plan'][0]['session_mode'], 'new_epoch')
+        self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), state_before_dry_run)
+        changed = self.write_evidence(
+            'new-epoch-change.json', self.derived_document(8, 3, touch='NEW_EPOCH_WORK'))
+        code, resumed, _ = self.observe('--max-gms', '1', '--gm', 'gm-01', evidence=changed)
+        self.assertEqual(code, 0, resumed)
+        outcome = resumed['results'][0]
+        self.assertEqual(outcome['session_mode'], 'new_epoch')
+        self.assertIsNone(outcome['resume_requested'])
+        after = self.sessions()['gm-01']
+        self.assertNotEqual(after['session_id'], old_session)
+        self.assertEqual(after['session_source'], 'created_new_epoch')
+        self.assertEqual(after['session_epoch'], 2)
+        self.assertEqual(after['session_history'], pending['session_history'])
+
+    def test_epoch_refuses_present_rollout_wrong_binding_and_unresolved_state(self):
+        code, payload, _ = self.observe('--max-gms', '1', '--gm', 'gm-01')
+        self.assertEqual(code, 0, payload)
+        session = self.sessions()['gm-01']['session_id']
+        before = (self.state / gm_runner.STATE_FILE).read_bytes()
+        code, payload, _ = self.epoch('gm-01', session)
+        self.assertEqual(code, 5, payload)
+        self.assertEqual(payload['kind'], 'native_session_still_present')
+        self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), before)
+        wrong = '11111111-2222-3333-4444-555555555555'
+        code, payload, _ = self.epoch('gm-01', wrong)
+        self.assertEqual(code, 5, payload)
+        self.assertEqual(payload['kind'], 'session_binding_mismatch')
+        self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), before)
+
+        rollout = list((self.codex_home / 'sessions').glob(f'*/*/*/rollout-*-{session}.jsonl'))
+        self.assertEqual(len(rollout), 1)
+        rollout[0].unlink()
+        state = self.state_json()
+        state['sessions']['gm-01']['unresolved'] = {
+            'kind': 'measured_failure', 'cost': 'measured', 'run_id': 'fixture-unresolved'}
+        gm_runner.store_state(self.state, state)
+        unresolved_before = (self.state / gm_runner.STATE_FILE).read_bytes()
+        code, payload, _ = self.epoch('gm-01', session)
+        self.assertEqual(code, 5, payload)
+        self.assertEqual(payload['kind'], 'session_epoch_unresolved')
+        self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), unresolved_before)
+
+    def test_acknowledged_unknown_observation_freezes_exact_pairs_but_changed_content_is_new(self):
+        code, payload, _ = self.observe('--max-gms', '1', '--gm', 'gm-06', mode='no_usage')
+        self.assertEqual(code, 1, payload)
+        self.assertEqual(payload['aborted_by'], 'gm-06:usage_incomplete')
+        task = self.sessions()['gm-06']['memory']['task_history'][-1]
+        original_pairs = task['issue_contents']
+        self.assertEqual({pair['issue_id'] for pair in original_pairs}, set(task['issue_ids']))
+
+        code, payload, _ = self.cli(
+            'recover', '--state-dir', str(self.state), '--gm', 'gm-06',
+            '--note', 'offline fixture: usage remains unknown and this task must not repeat',
+            '--usage', 'unknown', route=False)
+        self.assertEqual(code, 0, payload)
+        code, payload, _ = self.cli(
+            'acknowledge', '--state-dir', str(self.state), '--gm', 'gm-06',
+            '--note', 'offline fixture: release only the global gate', route=False)
+        self.assertEqual(code, 0, payload)
+        tombstone = self.sessions()['gm-06']['unknown_observation_tombstones'][-1]
+        self.assertEqual(tombstone['issue_contents'], original_pairs)
+        self.assertEqual(tombstone['content_source'], 'task_history')
+        for pair in original_pairs:
+            self.assertNotIn('gm-06', self.issues()[pair['issue_id']]['settled'])
+
+        calls = len(self.fake_calls())
+        code, same, _ = self.observe('--max-gms', '1', '--gm', 'gm-06', '--dry-run')
+        self.assertEqual(code, 0, same)
+        same_plan = same['plan'][0]
+        self.assertFalse(same_plan['can_dispatch'])
+        self.assertEqual(set(same_plan['withheld_unknown_issue_ids']),
+                         {pair['issue_id'] for pair in original_pairs})
+        self.assertEqual(len(self.fake_calls()), calls)
+
+        changed = self.write_evidence(
+            'unknown-task-changed.json', self.derived_document(8, 3, touch='CHANGED_CONTENT'))
+        code, changed_plan, _ = self.observe('--max-gms', '1', '--gm', 'gm-06', '--dry-run',
+                                             evidence=changed)
+        self.assertEqual(code, 0, changed_plan)
+        self.assertTrue(changed_plan['plan'][0]['can_dispatch'])
+        self.assertEqual(len(changed_plan['plan'][0]['slice']), 1)
+        self.assertEqual(len(changed_plan['plan'][0]['withheld_unknown_issue_ids']), 1)
+
+        state = gm_runner.load_state(self.state)
+        different_entry = self.world_issue(issue_id='collision:different-problem')
+        investigation = {'content_digest': 'explicitly-different-investigation',
+                         'world_id': state['world_id'],
+                         'evidence': {'/evidence/new': different_entry}}
+        plan = gm_runner.plan_observation(state, ['gm-06'], 4, investigation)[0]
+        self.assertTrue(plan['can_dispatch'])
+        self.assertIs(plan['investigation'], investigation)
+        frozen_issue = original_pairs[0]['issue_id']
+        relabelled_same_task = {
+            'content_digest': 'changed-id-and-objective-only', 'world_id': state['world_id'],
+            'evidence': {'/evidence/relabelled': state['issues'][frozen_issue]['entry']}}
+        blocked = gm_runner.plan_observation(
+            state, ['gm-06'], 4, relabelled_same_task)[0]
+        self.assertIsNone(blocked['investigation'])
+        self.assertEqual(blocked['withheld_unknown_investigation_issue_ids'], [frozen_issue])
+
+    def test_legacy_unknown_task_requires_matching_snapshot_to_derive_exact_pairs(self):
+        code, payload, _ = self.observe('--max-gms', '1', '--gm', 'gm-06', mode='no_usage')
+        self.assertEqual(code, 1, payload)
+        state = self.state_json()
+        task = state['sessions']['gm-06']['memory']['task_history'][-1]
+        task.pop('issue_contents')
+        gm_runner.store_state(self.state, state)
+        code, payload, _ = self.cli(
+            'recover', '--state-dir', str(self.state), '--gm', 'gm-06',
+            '--note', 'offline fixture: derive old pairs only from the matching snapshot',
+            '--usage', 'unknown', route=False)
+        self.assertEqual(code, 0, payload)
+        frozen = self.sessions()['gm-06']['unresolved']['do_not_repeat_observation']
+        self.assertEqual(frozen['content_source'], 'matching_authoritative_snapshot')
+
+        state = self.state_json()
+        state['sessions']['gm-06']['unresolved']['reconciled'] = None
+        state['sessions']['gm-06']['unresolved'].pop('do_not_repeat_observation')
+        state['source_sha256'] = 'newer-source-cannot-prove-old-contents'
+        gm_runner.store_state(self.state, state)
+        before = (self.state / gm_runner.STATE_FILE).read_bytes()
+        code, payload, _ = self.cli(
+            'recover', '--state-dir', str(self.state), '--gm', 'gm-06',
+            '--note', 'offline fixture: mismatched source must be refused', '--usage', 'unknown',
+            route=False)
+        self.assertEqual(code, 5, payload)
+        self.assertEqual(payload['kind'], 'unknown_task_content_unavailable')
+        self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), before)
 
 
 class PaidBoundaryTests(RunnerTestBase):

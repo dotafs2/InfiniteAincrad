@@ -30,6 +30,8 @@ Commands (repository-relative):
   python tools/gm_runner.py status --state-dir <out>
   python tools/gm_runner.py recover --state-dir <out> --gm gm-01 --note "..." --usage unknown
   python tools/gm_runner.py acknowledge --state-dir <out> --gm gm-01 --note "..."
+  python tools/gm_runner.py new-session-epoch --state-dir <out> --gm gm-01
+      --expected-session <uuid> --codex-home <existing-home> --note "..."
 
 Exit codes: 0 ok, 1 runtime failure, 2 usage or route preflight, 3 stale source,
 4 unacceptable source (malformed or wrong world binding), 5 unresolved accounting or
@@ -434,6 +436,22 @@ def codex_home_path(codex_home: Path | None) -> Path:
         else Path(os.environ.get('CODEX_HOME', str(Path.home() / '.codex')))
 
 
+def native_session_rollouts(codex_home: Path, session_id: str,
+                            require_sessions_root: bool = False) -> tuple[Path, list[Path]]:
+    """Return exact native rollout matches under one explicitly selected Codex home."""
+    if not SESSION_UUID.fullmatch(session_id):
+        raise ValueError(f'session id {session_id!r} is not a canonical session UUID')
+    home = Path(codex_home).resolve()
+    if require_sessions_root and not home.is_dir():
+        raise ValueError(f'Codex home does not exist: {home}')
+    sessions = home / 'sessions'
+    if require_sessions_root and not sessions.is_dir():
+        raise ValueError(f'Codex sessions directory does not exist: {sessions}')
+    matches = sorted(sessions.glob(f'*/*/*/rollout-*-{session_id}.jsonl')) \
+        if sessions.is_dir() else []
+    return sessions, matches
+
+
 def read_windows_sandbox_backend(codex_home: Path, is_windows: bool | None = None) -> str:
     """Return ONLY the configured `windows.sandbox` backend, or '' off Windows.
 
@@ -548,10 +566,13 @@ class Route:
 
     def preflight_resume(self, session_id: str) -> str | None:
         """Return a refusal reason when a resume id cannot be proven to exist."""
-        if not SESSION_UUID.fullmatch(session_id):
+        try:
+            _sessions, matches = native_session_rollouts(codex_home_path(self.codex_home),
+                                                          session_id)
+        except ValueError:
             return (f'resume id {session_id!r} is not a canonical session UUID; refusing the CLI '
                     'fallback to a new session')
-        if not any(self.sessions_root().glob(f'*/*/*/rollout-*-{session_id}.jsonl')):
+        if not matches:
             return (f'no saved rollout for resume id {session_id}; refusing the CLI fallback to a '
                     'new session')
         return None
@@ -1099,6 +1120,28 @@ def load_state(state_dir: Path) -> dict:
         record.setdefault('last_status', 'never_dispatched')
         ensure_gm_memory(record, gm_id)
     return state
+
+
+def session_transport_mode(record: dict) -> str:
+    """Describe the next native transport without implying a missing session was restored."""
+    if record.get('session_id'):
+        return 'resume'
+    if record.get('session_source') == 'new_epoch_pending':
+        return 'new_epoch'
+    return 'new'
+
+
+def bind_created_session(record: dict, session_id: str) -> None:
+    """Bind a newly returned UUID while retaining the explicit epoch provenance."""
+    mode = session_transport_mode(record)
+    record['session_id'] = session_id
+    if mode == 'new_epoch':
+        record['session_source'] = 'created_new_epoch'
+        record['session_epoch_started'] = {
+            'epoch': record.get('session_epoch'), 'session_id': session_id,
+            'source': 'new_native_session_after_missing_rollout', 'created_utc': utc_iso()}
+    else:
+        record['session_source'] = 'created'
 
 
 def store_state(state_dir: Path, state: dict) -> None:
@@ -1734,19 +1777,68 @@ def issue_eligible(record: dict, gm_id: str) -> bool:
     return not settled or settled.get('content_digest') != record['content_digest']
 
 
+def issue_frozen_after_unknown(record: dict, issue: dict) -> bool:
+    """True only for an exact issue/content pair from an acknowledged unknown task."""
+    for tombstone in record.get('unknown_observation_tombstones', []):
+        if not isinstance(tombstone, dict):
+            continue
+        for pair in tombstone.get('issue_contents', []):
+            if (isinstance(pair, dict)
+                    and pair.get('issue_id') == issue.get('issue_id')
+                    and pair.get('content_digest') == issue.get('content_digest')):
+                return True
+    return False
+
+
+def frozen_issues_in_investigation(record: dict, investigation: dict | None) -> list[str]:
+    """Find exact frozen issue/content pairs cited by an explicit investigation.
+
+    Changing only an investigation id or objective cannot bypass a no-repeat tombstone.  A
+    supervisor can still submit a genuinely different investigation whose evidence entries do
+    not reproduce the frozen pair.
+    """
+    if not isinstance(investigation, dict) or not isinstance(investigation.get('evidence'), dict):
+        return []
+    frozen = {(pair.get('issue_id'), pair.get('content_digest'))
+              for tombstone in record.get('unknown_observation_tombstones', [])
+              if isinstance(tombstone, dict)
+              for pair in tombstone.get('issue_contents', []) if isinstance(pair, dict)}
+    repeated = set()
+    for entry in investigation['evidence'].values():
+        if not isinstance(entry, dict) or not isinstance(entry.get('evidence_kind'), str):
+            continue
+        kind, key, _field = issue_identity(entry, 'world_evidence')
+        issue_id = issue_id_for(investigation.get('world_id', ''), kind, key)
+        content = issue_content_digest(entry, str(entry.get('status', 'open')))
+        if (issue_id, content) in frozen:
+            repeated.add(issue_id)
+    return sorted(repeated)
+
+
 def plan_observation(state: dict, selected: list[str], max_issues: int,
                      investigation: dict | None = None) -> list[dict]:
     plan = []
     for gm_id in selected:
-        eligible = [issue for issue in state['issues'].values() if issue_eligible(issue, gm_id)]
+        record = state['sessions'][gm_id]
+        eligible_before_freeze = [issue for issue in state['issues'].values()
+                                  if issue_eligible(issue, gm_id)]
+        frozen = [issue for issue in eligible_before_freeze
+                  if issue_frozen_after_unknown(record, issue)]
+        frozen_ids = {issue['issue_id'] for issue in frozen}
+        eligible = [issue for issue in eligible_before_freeze
+                    if issue['issue_id'] not in frozen_ids]
         eligible.sort(key=lambda issue: issue['issue_id'])
         slice_records = eligible[:max_issues]
-        investigate = investigation if investigation and investigation['content_digest'] not in \
-            state['sessions'][gm_id].get('investigations', {}) else None
-        plan.append({'gm_id': gm_id, 'session_id': state['sessions'][gm_id].get('session_id'),
+        repeated_investigation = frozen_issues_in_investigation(record, investigation)
+        investigate = investigation if investigation and not repeated_investigation \
+            and investigation['content_digest'] not in record.get('investigations', {}) else None
+        plan.append({'gm_id': gm_id, 'session_id': record.get('session_id'),
+                     'session_mode': session_transport_mode(record),
                      'slice': [issue['issue_id'] for issue in slice_records],
                      'can_dispatch': bool(slice_records or investigate), '_records': slice_records,
                      'investigation': investigate,
+                     'withheld_unknown_issue_ids': sorted(issue['issue_id'] for issue in frozen),
+                     'withheld_unknown_investigation_issue_ids': repeated_investigation,
                      'settled_issue_ids': sorted(issue_id for issue_id, issue in
                                                  state['issues'].items()
                                                  if issue['world_id'] == state['world_id']
@@ -1797,10 +1889,13 @@ def common_evidence_block(document: dict, path: Path, digest: str, report: dict,
 def gm_state_block(state: dict, item: dict, previous: list[dict], run_id: str, digest: str,
                    public_index: dict | None = None) -> str:
     gm_id = item['gm_id']
+    record = state['sessions'][gm_id]
     block = {'gm_id': gm_id, 'focus': GM_FOCUS[gm_id], 'resident_body': None,
              'world_id': state['world_id'],
-             'session': {'mode': 'resume' if item['session_id'] else 'new',
-                         'session_id': item['session_id']},
+             'session': {'mode': item.get('session_mode', session_transport_mode(record)),
+                         'session_id': item['session_id'],
+                         'epoch': record.get('session_epoch', 1),
+                         'source': record.get('session_source')},
              'memory': gm_memory_projection(state, gm_id),
              'memory_paging': gm_memory_prompt_access(gm_id, item.get('memory_state_dir')),
              'archive_access': gm_archive_prompt_access(gm_id, item.get('archive_source')),
@@ -2085,6 +2180,69 @@ def prior_ledger_reference(prior: Path) -> dict:
     return reference
 
 
+def freeze_unknown_observation_task(state: dict, record: dict, unresolved: dict) -> dict | None:
+    """Capture the exact issue/content pairs of one unknown observation without settling them.
+
+    Current runners store the pairs on the task event.  For an older task, the current issue
+    records are usable only while the state's authoritative source hash is still the task's
+    snapshot hash; otherwise the old content cannot be reconstructed safely.
+    """
+    run_id = unresolved.get('run_id')
+    attempts = [attempt for attempt in record.get('attempts', [])
+                if isinstance(attempt, dict) and attempt.get('run_id') == run_id
+                and attempt.get('kind') == 'gm_observe']
+    if not attempts:
+        return None
+    tasks = [event for event in (record.get('memory') or {}).get('task_history', [])
+             if isinstance(event, dict) and event.get('run_id') == run_id
+             and event.get('kind') == 'observation_task']
+    if len(tasks) > 1 or len(attempts) != 1:
+        raise ValueError('unknown observation has no unique dispatch history to freeze')
+    task = tasks[0] if tasks else attempts[0]
+    issue_ids = task.get('issue_ids')
+    if (not isinstance(issue_ids, list) or not issue_ids
+            or any(not isinstance(issue_id, str) for issue_id in issue_ids)
+            or len(set(issue_ids)) != len(issue_ids)):
+        raise ValueError('unknown observation task has no exact unique issue id list')
+    stored = task.get('issue_contents')
+    if stored is not None:
+        if not isinstance(stored, list):
+            raise ValueError('unknown observation task has malformed issue/content history')
+        by_id = {}
+        for pair in stored:
+            if (not isinstance(pair, dict) or pair.get('issue_id') in by_id
+                    or not isinstance(pair.get('issue_id'), str)
+                    or not isinstance(pair.get('content_digest'), str)
+                    or not pair['content_digest']):
+                raise ValueError('unknown observation task has malformed issue/content history')
+            by_id[pair['issue_id']] = pair['content_digest']
+        if set(by_id) != set(issue_ids):
+            raise ValueError('unknown observation task issue/content history is incomplete')
+        pairs = [{'issue_id': issue_id, 'content_digest': by_id[issue_id]}
+                 for issue_id in issue_ids]
+        content_source = 'task_history' if tasks else 'dispatch_intent'
+    else:
+        if task.get('snapshot_sha256') != state.get('source_sha256'):
+            raise ValueError('legacy unknown observation snapshot is no longer current; exact '
+                             'issue contents cannot be frozen')
+        missing = [issue_id for issue_id in issue_ids
+                   if not isinstance(state['issues'].get(issue_id), dict)
+                   or not isinstance(state['issues'][issue_id].get('content_digest'), str)]
+        if missing:
+            raise ValueError(f'legacy unknown observation issues are unavailable: {missing}')
+        pairs = [{'issue_id': issue_id,
+                  'content_digest': state['issues'][issue_id]['content_digest']}
+                 for issue_id in issue_ids]
+        content_source = 'matching_authoritative_snapshot'
+    return {'kind': 'acknowledged_unknown_observation_do_not_repeat',
+            'run_id': run_id, 'snapshot_sha256': task.get('snapshot_sha256'),
+            'prompt_sha256': unresolved.get('prompt_sha256'),
+            'session_requested': unresolved.get('resume_requested'),
+            'session_returned': unresolved.get('session_returned'),
+            'attempt_status': unresolved.get('status'), 'issue_contents': pairs,
+            'content_source': content_source}
+
+
 # --------------------------------------------------------------------------- recovery
 
 def roll_in_flight_recovery(state: dict) -> list[str]:
@@ -2330,9 +2488,13 @@ def observe(args) -> int:
                                 'duplicates': report['duplicates'], 'absent': report['absent'],
                                 'issue_total': len(state['issues'])},
                      'plan': [{'gm_id': item['gm_id'], 'session_id': item['session_id'],
-                               'session_mode': 'resume' if item['session_id'] else 'new',
+                               'session_mode': item['session_mode'],
                                'can_dispatch': item['can_dispatch'], 'slice': item['slice'],
                                'investigation': item['investigation'],
+                               'withheld_unknown_issue_ids': item[
+                                   'withheld_unknown_issue_ids'],
+                               'withheld_unknown_investigation_issue_ids': item[
+                                   'withheld_unknown_investigation_issue_ids'],
                                'settled_issue_ids': item['settled_issue_ids'],
                                'blocked_by_owner': item['blocked_by_owner']} for item in plan],
                      'prompt_bytes': {item['gm_id']: len(build_prompt(
@@ -2408,6 +2570,7 @@ def observe(args) -> int:
                 continue
             record = state['sessions'][gm_id]
             resume_id = record.get('session_id') or None
+            transport_mode = session_transport_mode(record)
             if resume_id:
                 reason = route.preflight_resume(resume_id)
                 if reason:
@@ -2424,7 +2587,14 @@ def observe(args) -> int:
                                   args.max_prompt_bytes)
             intent = {'kind': 'gm_observe', 'run_id': run_id, 'gm_id': gm_id, 'status': 'in_flight',
                       'pid': None, 'started_utc': utc_iso(), 'finished_utc': None,
-                      'prompt_sha256': sha256_bytes(prompt.encode()), 'resume_requested': resume_id}
+                      'prompt_sha256': sha256_bytes(prompt.encode()), 'resume_requested': resume_id,
+                      'session_mode': transport_mode,
+                      'session_epoch': record.get('session_epoch', 1),
+                      'snapshot_sha256': digest, 'issue_ids': list(item['slice']),
+                      'issue_contents': [
+                          {'issue_id': issue['issue_id'],
+                           'content_digest': issue['content_digest']}
+                          for issue in item['_records']]}
             record['attempts'].append(intent)
             record['in_flight'] = intent
             record['last_status'] = 'in_flight'
@@ -2456,6 +2626,8 @@ def observe(args) -> int:
                        **usage_evidence(attempt),
                        'exit_code': attempt.get('exit_code'), 'pid': attempt.get('pid'),
                        'resume_requested': resume_id,
+                       'session_mode': transport_mode,
+                       'session_epoch': record.get('session_epoch', 1),
                        'session_returned': attempt.get('thread_returned'),
                        'usage': attempt.get('usage') if usage_is_measured(attempt.get('usage'))
                        else None,
@@ -2465,8 +2637,7 @@ def observe(args) -> int:
                        'prompt_bytes': attempt.get('prompt_bytes'), 'dispatched': True,
                        'results': [], 'validation_errors': []}
             if status == 'ok' and not resume_id and attempt.get('thread_returned'):
-                record['session_id'] = attempt['thread_returned']
-                record['session_source'] = 'created'
+                bind_created_session(record, attempt['thread_returned'])
             if status == 'ok':
                 answer = extract_json_object(attempt['result_text'])
                 accepted, validation_errors = validate_gm_output(answer, gm_id, item['slice'])
@@ -2514,6 +2685,9 @@ def observe(args) -> int:
             remember_gm_task(record, gm_id, {
                 'kind': 'observation_task', 'run_id': run_id, 'status': status,
                 'issue_ids': list(item['slice']),
+                'issue_contents': [
+                    {'issue_id': issue['issue_id'], 'content_digest': issue['content_digest']}
+                    for issue in item['_records']],
                 'dispositions': [entry['disposition'] for entry in outcome.get('results', [])],
                 'results': copy.deepcopy(outcome.get('results', [])),
                 'new_issue_ids': list(outcome.get('new_issue_ids', [])),
@@ -3076,6 +3250,97 @@ def code(args) -> int:
 
 # --------------------------------------------------------------------------- small commands
 
+def new_session_epoch(args) -> int:
+    """Retire one absent native observation session without rewriting its saved history."""
+    state_dir = Path(args.state_dir).resolve()
+    note = args.note.strip()
+    if not note:
+        return refusal('usage', '--note must explain why a new session epoch is required', 2)
+    if not SESSION_UUID.fullmatch(args.expected_session):
+        return refusal('usage', '--expected-session must be one canonical session UUID', 2)
+    with StateLock(state_dir, args.break_lock):
+        state_path = state_dir / STATE_FILE
+        state = load_state(state_dir)
+        if args.gm not in state['sessions']:
+            return refusal('unknown_gm', args.gm, 2)
+        record = state['sessions'][args.gm]
+        if record.get('session_id') != args.expected_session:
+            return refusal('session_binding_mismatch',
+                           'the saved observation session does not equal --expected-session', 5,
+                           gm_id=args.gm, saved_session=record.get('session_id'),
+                           expected_session=args.expected_session)
+        if record.get('in_flight'):
+            return refusal('session_epoch_in_flight',
+                           'the GM has an in-flight observation/feedback attempt', 5,
+                           gm_id=args.gm)
+        if record.get('unresolved'):
+            return refusal('session_epoch_unresolved',
+                           'the GM has an unresolved attempt; recover and acknowledge it first', 5,
+                           gm_id=args.gm)
+        coding_blocks = []
+        for issue in state['issues'].values():
+            owner = issue.get('coding_owner_gm') or issue.get('owner_gm')
+            attempt = issue.get('coding_attempt') or {}
+            if owner == args.gm and (attempt.get('status') in ('in_flight', 'running')
+                                     or issue.get('coding_unresolved')):
+                coding_blocks.append(issue.get('issue_id'))
+        if coding_blocks:
+            return refusal('session_epoch_coding_blocked',
+                           'the GM has an in-flight or unresolved coding attempt', 5,
+                           gm_id=args.gm, issue_ids=sorted(coding_blocks))
+        try:
+            sessions_root, matches = native_session_rollouts(
+                Path(args.codex_home), args.expected_session, require_sessions_root=True)
+        except ValueError as error:
+            return refusal('session_epoch_preflight', str(error), 2, gm_id=args.gm)
+        if matches:
+            return refusal('native_session_still_present',
+                           'the expected native rollout exists; use normal resume', 5,
+                           gm_id=args.gm, expected_session=args.expected_session,
+                           match_count=len(matches))
+        history = record.setdefault('session_history', [])
+        if not isinstance(history, list):
+            return refusal('session_epoch_history_invalid',
+                           'saved session_history must be a list', 4, gm_id=args.gm)
+        epoch = record.get('session_epoch', 1)
+        if isinstance(epoch, bool) or not isinstance(epoch, int) or epoch < 1:
+            return refusal('session_epoch_invalid',
+                           'saved session_epoch must be a positive integer', 4, gm_id=args.gm)
+        state_sha_before = sha256_file(state_path)
+        audit = {
+            'epoch': epoch, 'session_id': args.expected_session,
+            'session_source': record.get('session_source'),
+            'status': 'native_rollout_absent_epoch_closed',
+            'note': note, 'closed_utc': utc_iso(), 'world_id': state.get('world_id'),
+            'state_sha256_before': state_sha_before,
+            'absence_check': {'codex_home': str(Path(args.codex_home).resolve()),
+                              'sessions_root': str(sessions_root),
+                              'layout': '*/*/*/rollout-*-<session-id>.jsonl',
+                              'match_count': 0},
+            'saved_history': {
+                'attempts': len(record.get('attempts', [])),
+                'outcomes': len(record.get('outcomes', [])),
+                'task_history': len((record.get('memory') or {}).get('task_history', [])),
+                'host_feedback': len((record.get('memory') or {}).get('host_feedback', []))}}
+        history.append(audit)
+        record['session_epoch'] = epoch + 1
+        record['session_id'] = None
+        record['session_source'] = 'new_epoch_pending'
+        record['session_epoch_pending'] = {
+            'epoch': epoch + 1, 'source': 'explicit_missing_native_rollout_migration',
+            'previous_session_id': args.expected_session, 'opened_utc': audit['closed_utc'],
+            'note': note}
+        record['last_status'] = 'new_session_epoch_pending'
+        store_state(state_dir, state)
+        return emit({'status': 'ok', 'kind': 'gm_new_session_epoch', 'gm_id': args.gm,
+                     'world_id': state.get('world_id'), 'previous_epoch': epoch,
+                     'session_epoch': epoch + 1, 'previous_session': args.expected_session,
+                     'session_id': None, 'session_mode': 'new_epoch',
+                     'native_rollout_absent': True, 'history_preserved': True,
+                     'state_sha256_before': state_sha_before,
+                     'state_sha256_after': sha256_file(state_path)}, 0)
+
+
 def status(args) -> int:
     state_dir = Path(args.state_dir).resolve()
     state = load_state(state_dir)
@@ -3099,6 +3364,12 @@ def status(args) -> int:
                             for issue in sorted(state['issues'].values(),
                                                 key=lambda item: item['issue_id'])],
                  'sessions': [{'gm_id': gm_id, 'session_id': record.get('session_id'),
+                               'session_epoch': record.get('session_epoch', 1),
+                               'session_source': record.get('session_source'),
+                               'session_mode': session_transport_mode(record),
+                               'session_history_count': len(record.get('session_history', [])),
+                               'unknown_observation_tombstones': len(
+                                   record.get('unknown_observation_tombstones', [])),
                                'last_status': record.get('last_status'),
                                'attempts': len(record['attempts']),
                                'unresolved': record.get('unresolved'),
@@ -3126,6 +3397,13 @@ def recover(args) -> int:
         if unresolved.get('cost') != 'unknown':
             return refusal('recovery_not_required',
                            'this attempt has measured usage; acknowledge it directly', 2)
+        try:
+            frozen_task = freeze_unknown_observation_task(state, record, unresolved)
+        except ValueError as error:
+            return refusal('unknown_task_content_unavailable', str(error), 5,
+                           gm_id=args.gm, run_id=unresolved.get('run_id'))
+        if frozen_task is not None:
+            unresolved['do_not_repeat_observation'] = frozen_task
         reconciliation = {'note': args.note.strip(), 'observed_usage': args.usage,
                           'operator': 'explicit recovery', 'utc': utc_iso(),
                           'attempt': {'run_id': unresolved.get('run_id'),
@@ -3167,6 +3445,18 @@ def acknowledge(args) -> int:
             return refusal('recovery_required',
                            'an interrupted or unmeasured paid attempt must be explicitly recovered '
                            'before it can be acknowledged', 5, gms={args.gm: unresolved})
+        frozen_task = unresolved.get('do_not_repeat_observation')
+        if unresolved.get('cost') == 'unknown' and frozen_task is None:
+            try:
+                frozen_task = freeze_unknown_observation_task(state, record, unresolved)
+            except ValueError as error:
+                return refusal('unknown_task_content_unavailable', str(error), 5,
+                               gm_id=args.gm, run_id=unresolved.get('run_id'))
+        if frozen_task is not None:
+            tombstone = copy.deepcopy(frozen_task)
+            tombstone.update({'acknowledged_note': args.note.strip(),
+                              'acknowledged_utc': utc_iso()})
+            record.setdefault('unknown_observation_tombstones', []).append(tombstone)
         record.setdefault('acknowledged', []).append(
             {'unresolved': unresolved, 'note': args.note.strip(), 'utc': utc_iso(),
              'usage_kept_unknown': unresolved.get('usage') is None})
@@ -3194,6 +3484,7 @@ def acknowledge(args) -> int:
                                       'usage_measured': unresolved.get('usage_measured'),
                                       'usage': unresolved.get('usage')},
                      'released_issues': released_issues,
+                     'do_not_repeat_observation': tombstone if frozen_task is not None else None,
                      'note': 'the uncertain record is preserved in history, not zeroed'}, 0)
 
 
@@ -3204,6 +3495,11 @@ def build_feedback_prompt(state: dict, gm_id: str, receipt: dict, receipt_sha: s
     block = {'gm_id': gm_id, 'focus': GM_FOCUS[gm_id],
              'run_id': run_id, 'receipt_sha256': receipt_sha,
              'session_id': state['sessions'][gm_id].get('session_id'),
+             'session': {
+                 'mode': session_transport_mode(state['sessions'][gm_id]),
+                 'session_id': state['sessions'][gm_id].get('session_id'),
+                 'epoch': state['sessions'][gm_id].get('session_epoch', 1),
+                 'source': state['sessions'][gm_id].get('session_source')},
              'memory': gm_memory_projection(state, gm_id),
              'memory_paging': gm_memory_prompt_access(gm_id, state_dir or state.get('state_dir')),
              'archive_access': gm_archive_prompt_access(gm_id, state.get('archive_source')),
@@ -3304,6 +3600,7 @@ def feedback(args) -> int:
         protected = [receipt_path] + [Path(path).resolve() for path in (args.protect or [])]
         guards_before = guard_snapshot(protected)
         resume_id = record.get('session_id') or None
+        transport_mode = session_transport_mode(record)
         if resume_id:
             reason = route.preflight_resume(resume_id)
             if reason:
@@ -3312,7 +3609,8 @@ def feedback(args) -> int:
                 return refusal('resume_preflight_failed', reason, 2)
         intent = {'run_id': run_id, 'gm_id': args.gm, 'kind': 'feedback',
                   'receipt_sha256': receipt_sha, 'pid': None, 'status': 'waiting',
-                  'started_utc': utc_iso()}
+                  'started_utc': utc_iso(), 'session_mode': transport_mode,
+                  'session_epoch': record.get('session_epoch', 1)}
         record['in_flight'] = intent
         store_state(state_dir, state)
 
@@ -3335,6 +3633,8 @@ def feedback(args) -> int:
         outcome = {'run_id': run_id, 'gm_id': args.gm, 'kind': 'autonomy_feedback_ack',
                    'receipt_sha256': receipt_sha, 'cost': cost,
                    'acknowledged': False, 'decision': None, 'next_work': None,
+                   'session_mode': transport_mode,
+                   'session_epoch': record.get('session_epoch', 1),
                    'usage': attempt.get('usage') if usage_is_measured(attempt.get('usage'))
                    else None,
                    'usage_measured': usage_is_measured(attempt.get('usage')),
@@ -3343,8 +3643,7 @@ def feedback(args) -> int:
                    'errors': attempt.get('events', {}).get('errors', [])[:5],
                    'utc': utc_iso(), **usage_evidence(attempt)}
         if status == 'ok' and not resume_id and attempt.get('thread_returned'):
-            record['session_id'] = attempt['thread_returned']
-            record['session_source'] = 'created'
+            bind_created_session(record, attempt['thread_returned'])
         if status == 'ok':
             ack, errors = validate_feedback_output(extract_json_object(attempt['result_text']),
                                                    args.gm, receipt_sha)
@@ -3486,6 +3785,17 @@ def build_parser() -> argparse.ArgumentParser:
     status_parser = subparsers.add_parser('status', help='read-only state summary')
     status_parser.add_argument('--state-dir', required=True, type=Path)
     status_parser.set_defaults(func=status)
+
+    epoch_parser = subparsers.add_parser(
+        'new-session-epoch',
+        help='retire one provably absent native observation session and open a new epoch')
+    epoch_parser.add_argument('--state-dir', required=True, type=Path)
+    epoch_parser.add_argument('--gm', required=True)
+    epoch_parser.add_argument('--expected-session', required=True)
+    epoch_parser.add_argument('--codex-home', required=True, type=Path)
+    epoch_parser.add_argument('--note', required=True)
+    epoch_parser.add_argument('--break-lock', action='store_true')
+    epoch_parser.set_defaults(func=new_session_epoch)
 
     recover_parser = subparsers.add_parser('recover',
                                            help='explicitly reconcile an interrupted/unknown attempt')
