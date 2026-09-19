@@ -4,9 +4,11 @@ Language policy: the game, resident names, dialogue, Kimi/GM instructions and th
 
 Current milestone: a recoverable ten-resident / ten-GM loop. Bounded live participation and bread adoption were recorded upstream. Local offline workflow checks pass, but sustained unattended autonomy, long-term food supply and natural ration sharing remain unproven.
 
-The active lineage is `shared:restart-20260918-01`, now saved at seq174 with 160 archived attempts and 174 world usage records under [worlds/](worlds/README.md). Original seq450 and its separate local seq452 continuation remain unchanged. H117 and H119 resumed real resident calls under authorized supplemental accounting, conservatively retaining every old liability and unknown. The missing provider ledger is not claimed recovered. On September 19, 27 new Kimi calls settled for CNY 0.5662795; Rowan adopted self-repair and Iris acted on terminal resource feedback. GM04 also completed one measured new-epoch effect review, with separate unpriced token usage. The 15-minute engineering heartbeat remains active; live episodes stay bounded and credentials remain local.
+The active lineage is `shared:restart-20260918-01`, now saved at seq194 with 172 archived attempts and 186 world usage records under [worlds/](worlds/README.md). Original seq450 and its separate local seq452 continuation remain unchanged. H117, H119 and H120 resumed real resident calls under authorized supplemental accounting, conservatively retaining every old liability and unknown. The missing provider ledger is not claimed recovered. On September 19, 39 additional Kimi calls settled for CNY 0.8144018 after the earlier baseline; Rowan adopted self-repair, Iris acted on terminal resource feedback, and Smith naturally discovered and recovered one finite iron unit. GM04 completed one measured new-epoch effect review, with separate unpriced token usage. The 15-minute engineering heartbeat remains active; live episodes stay bounded and credentials remain local.
 
 ## Current work
+
+- **H120:** seq174→194, twelve settled calls for CNY 0.2481223. Smith voluntarily read the public material notice, observed the installed iron source in person, and recovered one unit into his own account; the public source fell from 3 to 2. Innkeeper’s blocked material trip stayed a truthful cancellation. The home-eating route replay passes 40 focused assertions. Natural information-to-recovery now has one real example; production, edge repair, sustained resources and ten-GM unattended operation remain open. [Evidence](docs/validation/material-discovery-2026-09-19.md).
 
 - **H119:** seq162→174, sixteen settled resident calls for CNY 0.3289711. Iris acknowledged the previous refusal, harvested once and then met scarcity again; nine residents made new decisions. GM04 consumed the frozen effects in an explicitly new epoch2 session (51,076 measured tokens) and requested concrete stock/iron evidence. Audited terminal GM facts pass 37 assertions and an unchanged actual-save export. Full cold restore passes; the read-only food report preserves conservation and labels sparse-sampling limits. Full-scene house-loading and particle errors remain unresolved despite successful isolated asset loads. Next: answer the GM's specific factual questions and advance natural material/production behavior. [Evidence](docs/validation/life-feedback-2026-09-19.md).
 
@@ -99,7 +101,8 @@ flowchart TB
         H117["H117 Material gifts and full physical chain verified offline<br/>Live seq162: Rowan adopted self-repair; dialogue and meals completed<br/>11 settled calls / CNY 0.2373; exact full cold restore"]
         H118["H118 Failed work reaches the resident without a 30-minute wait<br/>Explicit GM session epochs; unknown tasks forbidden to repeat<br/>Offline checks passed; no new model call in this phase"]
         H119["H119 Real failed-work response and one GM04 effect review<br/>Live seq174; 16 settled NPC calls and exact cold restore<br/>Audited physical evidence; food conservation report"]
-        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110 --> H111 --> H112 --> H113 --> H114 --> H115 --> H116 --> H117 --> H118 --> H119
+        H120["H120 Smith naturally reads, observes and recovers finite iron<br/>Live seq194; 12 settled calls / CNY 0.2481<br/>40 home-eating replay assertions"]
+        H103 --> H104 --> H105 --> H105A --> H105B --> H106 --> H107 --> H108 --> H109 --> H110 --> H111 --> H112 --> H113 --> H114 --> H115 --> H116 --> H117 --> H118 --> H119 --> H120
         H117 -.Actual self-repair adoption.-> A83Use
         H113 -.Bounded reviewed content loop.-> A83Release
         H111 -.Verified navigation and design gates.-> A83Move
@@ -140,7 +143,7 @@ flowchart TB
     classDef done fill:#dcfce7,stroke:#15803d,color:#14532d;
     classDef partial fill:#fff1d6,stroke:#b45309,color:#78350f;
     classDef future fill:#f1f5f9,stroke:#64748b,color:#0f172a;
-    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109,H110,H111,H112,H113,H114,H115,H116,H117,H118,H119 done;
+    class H103,H104,H105,H105A,H105B,H106,H107,H108,H109,H110,H111,H112,H113,H114,H115,H116,H117,H118,H119,H120 done;
     class M20,M20S,M20C,M20G,H47,H82,A83Entry,A83Scene,A83NPC,A83Action,A83Move,A83Core,A83Evidence,A83GM,A83Candidate,A83Review,A83Release,A83Use,A83Feedback,A83Stop,A83Save,A83Fault partial;
     class N5,P,N6,N7,N8,N9,XR,N10,R future;
 ```
@@ -149,4 +152,4 @@ flowchart TB
 
 The local workflow uses scripted resident and GM choices with actual Godot physics and persistence. It installs configuration for an existing finite resource source; it does not prove that a GM invented a new mechanic. Model requests in the offline work: zero.
 
-H119 saved the active world at seq174, preserving 158 measured lifetime NPC replies, two proven local not-sent failures and all ten identities. Self-repair adoption, delivered conversation and the real response to terminal scarcity have been observed, but natural iron collection, material gifts, contracted production and joint visits remain unproven. The complete physical production chain is controlled test evidence. GM06's timeout and the older GM05 tail remain unknown. GM04 alone has now created a new epoch2 native conversation, preserving durable memory and acknowledging exact physical effects; the old native sessions are not claimed restored. Automatic engineering monitoring is active; no live writer remains after each bounded episode. Separate original seq450 and local seq452 remain untouched. Sustainable town life precedes adventure, floor progression and long-term multiplayer operation.
+H120 saved the active world at seq194, preserving 172 archived attempts, 186 world usage calls, two proven local not-sent failures and all ten identities. Self-repair adoption, delivered conversation, the real response to terminal scarcity and one natural iron discovery/recovery have been observed, but edge repair, negotiated production and joint visits remain unproven. The complete physical production chain is controlled test evidence. GM06's timeout and the older GM05 tail remain unknown. GM04 alone has now created a new epoch2 native conversation, preserving durable memory and acknowledging exact physical effects; the old native sessions are not claimed restored. Automatic engineering monitoring is active; no live writer remains after each bounded episode. Separate original seq450 and local seq452 remain untouched. Sustainable town life precedes adventure, floor progression and long-term multiplayer operation.

@@ -1,72 +1,70 @@
-# 本轮居民观察（2026-09-19）
+# 居民观察（seq174→seq194，2026-09-19）
 
-同一世界从 seq148 接续到 seq162。两轮新增 11 次已结算 Kimi 调用，费用 0.2373084 元；2 次已证实的本地未发送失败保留。没有重试未知请求。
+本轮 12 次 Kimi 调用全部结算，新增费用 0.2481223 元，世界从 seq174 到 seq194。没有新增未知费用或未释放请求。
 
-Rowan 自主选择并完成斧柄自修；Ari 与 Fern 有实际送达的对话；Heath 与 Reed 原来卡住的进食完成。完整采铁、赠送、合同修理和生产链条目前仍是受控测试证明，不能当作居民自主完成。
+Smith 自主读取公共材料路线告示，随后在铁源处观察到库存并选择回收，实际获得 1 单位铁；铁匠账户铁从 0 变为 1，公共铁源从 3 变为 2。告示本身没有公开库存；观察和回收都是模型选择。
 
-第一轮因合法的未知库存值被网关拒绝而未通过；修复后的第二轮结果见相邻摘要。已有导航边缘警告及可见运行的粒子渲染错误仍保留。尚未证明长期资源可持续、全员持续活跃或十 GM 自动闭环。
+Innkeeper 的一次材料移动在现场被阻塞，随后居民自主取消；未伪造完成。Healer、Weaver、Baker 等完成观察、休息或食物行动。
 
-以下逐条保留模型明确返回的理由和实际动作。理由是模型输出，不是隐藏思维；接受工作与实际完成分开记录。
+本轮证明一次自然的“信息→现场观察→有限材料回收”链条，尚未证明刃口修理、谈判生产、长期供需或十 GM 无人值守闭环。
 
 ## Ari
 
-- `turn:shared:well-keeper:0:9`：`brain_run_failed`；接受状态 `provider_error`；当前动作状态 `无动作回执`；事件：没有新增完成事件。
-  - 明确理由：无模型回复。
-- `turn:shared:well-keeper:1:10`：`ability:talk:shared:gardener`；接受状态 `settled`；当前动作状态 `无动作回执`；事件：resident_said。
-  - 明确理由：Energy 81, satiety 51, no urgent survival need. I noticed Fern the gardener nearby; shared water and planted commons connect to my interest. I want to learn how water reaches growing things, and whether access is fair.
-  - 实际发言：Fern. You work with growing plants. Do you draw water from the street trough, or is there another source people use?
-- `turn:shared:well-keeper:1:11`：`life:eat_ration`；接受状态 `settled`；当前动作状态 `completed`；事件：eat_ration。
-  - 明确理由：Satiety is 50, not yet urgent, but I have 1 food and eat_ration is available. My energy is 80 so no rest needed. Eating now prevents future urgency and keeps me steady for watching the water trough. No immediate social or movement priority overrides this bodily maintenance.
+本轮无新增决定。
+
 
 ## Wren
 
-本轮没有新增决定；原历史和身份保留。
+- `turn:shared:baker:0:13`：`life:rest`；动作状态 `completed`；事件：rest。
+  - 明确理由：My energy is at 38, which is low but not zero, and my satiety is 97. Rest will help me recover stamina so I can keep exploring and learning about baking tomorrow.
+- `turn:shared:baker:0:14`：`life:harvest_ration`；动作状态 `rejected`；事件：没有新增完成事件。
+  - 明确理由：My satiety is 96 and energy is 72, so no urgent survival need. I have 1 food remaining and want to build stock. Harvesting ration gathers more food for future meals and practice toward my baking goal.
 
 ## Flint
 
-本轮没有新增决定；原历史和身份保留。
+- `turn:shared:smith:0:19`：`life:harvest_ration`；动作状态 `completed`；事件：harvest_ration。
+  - 明确理由：I have 1 food and satiety is 81, but I need to build buffer. harvest_ration attempts to gather more food while stock may remain, securing my position before seeking repair work.
+- `turn:shared:smith:0:20`：`material:recover:street:iron-salvage-20260918`；动作状态 `无动作回执`；事件：material_recovered。
+  - 明确理由：I need iron to perform metal repairs, and the Street salvage iron heap is a known public source. My satiety is 80 and energy is 72, so I can work. Collecting iron now builds stock for future repair jobs.
 
 ## Rowan
 
-- `turn:shared:carpenter:0:27`：`ability:self_repair:seed:axe:handle`；接受状态 `settled`；当前动作状态 `无动作回执`；事件：self_repair_started,self_repair_completed。
-  - 明确理由：My axe handle is at 20, which prevents using the tool. I have 1 wood in my life account, so I can repair the handle myself at my work point. This restores the handle to 100 and removes the dependency on others.
+本轮无新增决定。
+
 
 ## Mara
 
-- `turn:shared:innkeeper:0:13`：`brain_run_failed`；接受状态 `provider_error`；当前动作状态 `无动作回执`；事件：没有新增完成事件。
-  - 明确理由：无模型回复。
-- `turn:shared:innkeeper:1:14`：`place:rest:planted_commons`；接受状态 `settled`；当前动作状态 `completed`；事件：rest。
-  - 明确理由：Energy is at 46, which is not urgent, but I have no immediate hospitality tasks, no nearby residents to approach, and no pressing needs. Resting at Planted Commons is a calm, productive use of time while I remain in a public space where people might pass by.
-- `turn:shared:innkeeper:1:15`：`life:eat_ration`；接受状态 `settled`；当前动作状态 `completed`；事件：eat_ration。
-  - 明确理由：Satiety is at 50, not yet urgent, but I have food in inventory and no immediate social or work opportunity nearby. Eating now keeps me prepared for travel or company later, and avoids letting satiety drop to 0 when I might be occupied.
+- `turn:shared:innkeeper:1:19`：`material:recover:street:iron-salvage-20260918`；动作状态 `无动作回执`；事件：material_travel_blocked。
+  - 明确理由：I have 0 food and two failed harvest attempts. The iron heap is public, free, and might still have stock. Collecting iron could let me trade or commission food, or at least build resources while I figure out how to eat.
+- `turn:shared:innkeeper:1:20`：`material:cancel:turn:shared:innkeeper:1:19`；动作状态 `无动作回执`；事件：material_travel_cancelled。
+  - 明确理由：I have 0 food and two failed attempts to gather resources. This iron collection trip is blocked and cannot complete. Abandoning it lets me try a different approach to find food rather than staying stuck on an impossible task.
+  - 实际发言：I chose to abandon this collection trip. The task has ended; I received no material.
 
 ## Heath
 
-- `turn:shared:herder:0:8`：`life:eat_ration`；接受状态 `settled`；当前动作状态 `completed`；事件：eat_ration。
-  - 明确理由：Satiety is 52 and food is 1, so eating a ration is a sensible step to stay well-fed while I consider how to pursue my goal of learning animal care. No urgent survival need demands priority, but maintaining satiety supports future activity.
-- `turn:shared:herder:0:9`：`life:rest`；接受状态 `settled`；当前动作状态 `completed`；事件：rest。
-  - 明确理由：Energy is 45, which is not zero, but it is low enough that resting will help me recover stamina for future activities. Satiety is comfortable at 90, so no urgent hunger. Rest is the sensible recovery step.
+本轮无新增决定。
+
 
 ## Fern
 
-- `turn:shared:gardener:0:9`：`ability:talk:shared:well-keeper`；接受状态 `settled`；当前动作状态 `无动作回执`；事件：resident_said。
-  - 明确理由：Ari asked whether I draw water for the plantings. I want to answer honestly that I only observe, and perhaps ask what they have noticed about how the plants here are actually sustained.
-  - 实际发言：No, I don't draw water for them. I only watch and try to notice what changes. Have you seen how these plantings are kept? I'd rather hear what you've observed than guess.
+- `turn:shared:gardener:0:11`：`ability:observe`；动作状态 `无动作回执`；事件：surroundings_observed。
+  - 明确理由：Ari asked a follow-up question I haven't answered yet. Before responding, I want to observe my surroundings privately to note any visible water sources or irrigation near the Planted Commons, so my reply can distinguish what I've actually seen from what I'm guessing.
 
 ## Iris
 
-- `turn:shared:weaver:0:23`：`life:harvest_ration`；接受状态 `settled`；当前动作状态 `rejected`；事件：没有新增完成事件。
-  - 明确理由：I have no food remaining in inventory, and while my current satiety is comfortable at 95, replenishing my stores before they deplete is prudent. The foraging point may have stock available.
-
-Iris 到达了采集点，但库存为零，动作以 `resources_unavailable` 拒绝，未产出食物；这不是一次成功采集。
+- `turn:shared:weaver:0:26`：`place:travel:market_plaza`；动作状态 `无动作回执`；事件：place_visited。
+  - 明确理由：I have 1 food and satiety at 82, so no urgent survival need. Old Market Plaza is a public place I saw directly; walking there lets me observe patterns of trade and craft, which feeds my quiet attention to texture and repetition. Perhaps I'll encounter someone who knows about weaving.
+- `turn:shared:weaver:0:27`：`place:rest:market_plaza`；动作状态 `completed`；事件：rest。
+  - 明确理由：Energy is at 70 and satiety at 82, so no urgent survival needs. I'm already at Old Market Plaza, so resting here for 60 seconds is the simplest way to recover some stamina before deciding what to do next. I have 1 food and 12 Col, but no immediate weaving prospects, so gathering strength seems wise.
 
 ## Reed
 
-- `turn:shared:fisher:0:10`：`life:eat_ration`；接受状态 `settled`；当前动作状态 `completed`；事件：eat_ration。
-  - 明确理由：Satiety is 52 and energy is 47—both manageable but neither comfortable. I have 2 food and eat_ration is available, so I'll top up while I can. No urgent zero needs, but maintaining reserves beats waiting.
-- `turn:shared:fisher:0:11`：`life:rest`；接受状态 `settled`；当前动作状态 `completed`；事件：rest。
-  - 明确理由：Energy is 45, which is low but not zero. Satiety is comfortable at 90. Rest will recover stamina without any resource cost, a sensible pause before deciding on further activity.
+- `turn:shared:fisher:0:13`：`ability:observe`；动作状态 `无动作回执`；事件：surroundings_observed。
+  - 明确理由：Energy 72 and satiety 82 are comfortable. I just rested and failed a ration harvest due to stock depletion. Before acting further, I want to observe my surroundings to see what's actually around me—especially whether the foraging stock has changed or if there's water nearby worth noting.
 
 ## Sage
 
-本轮没有新增决定；原历史和身份保留。
+- `turn:shared:healer:0:13`：`place:rest:west_forecourt`；动作状态 `completed`；事件：rest。
+  - 明确理由：My energy is low at 37.0, and I have no urgent survival needs requiring immediate action. Resting at the Western Artisans' Forecourt will let me recover stamina safely. I was just here and it's a known public space.
+- `turn:shared:healer:0:14`：`life:harvest_ration`；动作状态 `rejected`；事件：没有新增完成事件。
+  - 明确理由：I have 1 food in inventory and satiety at 81, but harvest_ration is available and I should secure food while I can. Stock observations show foraging points had stock 4 recently, so it's worth attempting to gather a ration now rather than waiting until satiety drops to urgent levels.
