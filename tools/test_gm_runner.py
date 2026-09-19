@@ -1186,6 +1186,40 @@ class PaidBoundaryTests(RunnerTestBase):
         self.assertEqual(code, 0, payload)
         return sorted(self.issues())[0]
 
+    def test_missing_usage_book_refuses_before_observation_intent_or_provider(self):
+        state = gm_runner.load_state(self.state)
+        state['developer_usage_book'] = str(self.root / 'absent-usage.sqlite3')
+        gm_runner.store_state(self.state, state)
+        before = (self.state / gm_runner.STATE_FILE).read_bytes()
+        code, payload, _ = self.observe('--max-gms', '1', '--gm', 'gm-01')
+        self.assertEqual(code, 2, payload)
+        self.assertEqual(payload['kind'], 'developer_usage_book_preflight')
+        self.assertEqual(payload['dispatched'], 0)
+        self.assertFalse(payload['state_written'])
+        self.assertEqual(self.fake_calls(), [])
+        self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), before)
+        self.assertFalse((self.state / 'runs').exists())
+        self.assertIsNone(self.sessions()['gm-01'].get('in_flight'))
+
+    def test_missing_usage_book_refuses_before_feedback_memory_or_intent(self):
+        state = gm_runner.load_state(self.state)
+        state['world_id'] = 'fixture:feedback-preflight'
+        state['developer_usage_book'] = str(self.root / 'absent-usage.sqlite3')
+        gm_runner.store_state(self.state, state)
+        receipt = self.root / 'receipt.json'
+        receipt.write_text(json.dumps({'kind': 'host_receipt'}), encoding='utf-8')
+        before = (self.state / gm_runner.STATE_FILE).read_bytes()
+        code, payload, _ = self.cli('feedback', '--state-dir', str(self.state),
+                                    '--gm', 'gm-01', '--receipt-file', str(receipt))
+        self.assertEqual(code, 2, payload)
+        self.assertEqual(payload['kind'], 'developer_usage_book_preflight')
+        self.assertEqual(payload['dispatched'], 0)
+        self.assertFalse(payload['state_written'])
+        self.assertEqual(self.fake_calls(), [])
+        self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), before)
+        self.assertFalse((self.state / 'runs').exists())
+        self.assertEqual(self.sessions()['gm-01']['memory']['host_feedback'], [])
+
     def test_unknown_cost_stops_further_paid_dispatch(self):
         issue_id = self.claim_an_issue()
         calls = len(self.fake_calls())
@@ -1280,6 +1314,26 @@ class CodingTests(RunnerTestBase):
         code, payload, _ = self.observe('--max-gms', '1', '--gm', 'gm-01', mode=mode)
         self.assertEqual(code, 0, payload)
         return sorted(self.issues())
+
+    def test_missing_usage_book_refuses_before_candidate_intent_or_provider(self):
+        issue_id = self.prepare()[0]
+        state = self.state_json()
+        state['developer_usage_book'] = str(self.root / 'absent-usage.sqlite3')
+        gm_runner.store_state(self.state, state)
+        before = (self.state / gm_runner.STATE_FILE).read_bytes()
+        calls = len(self.fake_calls())
+        head = self.head_sha()
+        scope = self.write_scope(issue_id, head)
+        code, payload, _ = self.cli('code', '--state-dir', str(self.state), '--issue', issue_id,
+                                    '--scope-file', str(scope), '--base-revision', head)
+        self.assertEqual(code, 2, payload)
+        self.assertEqual(payload['kind'], 'developer_usage_book_preflight')
+        self.assertEqual(payload['dispatched'], 0)
+        self.assertFalse(payload['state_written'])
+        self.assertEqual(len(self.fake_calls()), calls)
+        self.assertEqual((self.state / gm_runner.STATE_FILE).read_bytes(), before)
+        self.assertFalse((self.state / 'candidates').exists())
+        self.assertIsNone(self.issues()[issue_id].get('coding_attempt'))
 
     def test_unclaimed_or_unknown_issue_cannot_code(self):
         issue_ids = self.prepare(mode='ok')

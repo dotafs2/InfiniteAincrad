@@ -14,7 +14,7 @@ import re
 import sqlite3
 import tempfile
 from contextlib import contextmanager, closing
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 FIELDS = ('input_tokens', 'output_tokens', 'cached_input_tokens', 'reasoning_output_tokens')
@@ -32,6 +32,70 @@ def atomic_text(target, text):
         temporary.replace(target)
     finally:
         temporary.unlink(missing_ok=True)
+
+
+def file_sha256(path):
+    digest = hashlib.sha256()
+    with Path(path).open('rb') as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b''):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def snapshot_history_sha256(snapshot):
+    """Hash the complete portable history, excluding descriptive/report-only fields."""
+    history = {key: snapshot.get(key) for key in ('actors', 'calls', 'revisions')}
+    if any(not isinstance(history[key], list) for key in history):
+        raise ValueError('Usage checkpoint needs actors, calls and revisions lists')
+    return hashlib.sha256(encoded(history).encode('utf-8')).hexdigest()
+
+
+def _snapshot_from_connection(db, world_id):
+    actors = [dict(row) for row in db.execute('SELECT * FROM actors ORDER BY role,id')]
+    calls = [dict(row) for row in db.execute('SELECT * FROM calls ORDER BY id')]
+    revisions = [json.loads(row['receipt'])
+                 for row in db.execute('SELECT receipt FROM revisions ORDER BY seq')]
+    for row in calls:
+        row['usage'] = json.loads(row['usage']) if row['usage'] else None
+    for actor in actors:
+        own = [row for row in calls if row['actor_id'] == actor['id']]
+        measured = [row for row in own if row['status'] in ('measured', 'partial')]
+        actor['usage_tag'] = world_id + '/' + actor['id']
+        actor['measured_calls'] = sum(row['status'] == 'measured' for row in own)
+        actor['partial_calls'] = sum(row['status'] == 'partial' for row in own)
+        actor['unresolved_calls'] = sum(
+            row['status'] in ('unknown', 'pending', 'partial') for row in own)
+        actor['not_sent_calls'] = sum(row['status'] == 'not_sent' for row in own)
+        actor['tokens'] = {
+            key: sum(row['usage'].get(key) or 0 for row in measured)
+            for key in FIELDS + ('total_tokens',)}
+        actor['unknown_detail_calls'] = {
+            key: sum(row['usage'].get(key) is None for row in measured) for key in FIELDS}
+        actor['measured_charge_nano'] = sum(row['charge_nano'] or 0 for row in measured)
+        actor['unpriced_measured_calls'] = sum(
+            row['charge_nano'] is None for row in measured)
+    return {'schema_version': 1, 'world_id': world_id, 'visibility': 'developer_only',
+            'scope': 'From this world genesis; other worlds remain separate. Known subtotals include confirmed partial usage; unresolved remainders stay unknown.',
+            'cached_tokens_are_part_of_input': True, 'actors': actors, 'calls': calls,
+            'revisions': revisions}
+
+
+def inspect_existing_book(path, world_id):
+    """Read a bound UsageBook without running schema creation or another write statement."""
+    path = Path(path).resolve()
+    if not path.is_file():
+        raise ValueError(f'Existing usage book not found: {path}')
+    try:
+        with closing(sqlite3.connect(path.as_uri() + '?mode=ro', uri=True)) as db:
+            db.row_factory = sqlite3.Row
+            row = db.execute('SELECT world_id FROM meta WHERE id=1').fetchone()
+            if row is None:
+                raise ValueError('Existing usage book has no world identity')
+            if row['world_id'] != world_id:
+                raise ValueError('Existing usage book belongs to a different world')
+            return _snapshot_from_connection(db, world_id)
+    except sqlite3.Error as error:
+        raise ValueError(f'Existing usage book is unreadable: {type(error).__name__}') from error
 
 
 def native_usage_lower_bound(attempt, sessions_root):
@@ -206,26 +270,7 @@ class UsageBook:
     def snapshot(self):
         with self.connect() as db:
             db.execute('BEGIN')
-            actors = [dict(r) for r in db.execute('SELECT * FROM actors ORDER BY role,id')]
-            calls = [dict(r) for r in db.execute('SELECT * FROM calls ORDER BY id')]
-            revisions = [json.loads(r['receipt']) for r in db.execute('SELECT receipt FROM revisions ORDER BY seq')]
-        for row in calls:
-            row['usage'] = json.loads(row['usage']) if row['usage'] else None
-        for actor in actors:
-            own = [r for r in calls if r['actor_id'] == actor['id']]
-            measured = [r for r in own if r['status'] in ('measured', 'partial')]
-            actor['usage_tag'] = self.world_id + '/' + actor['id']
-            actor['measured_calls'] = sum(r['status'] == 'measured' for r in own)
-            actor['partial_calls'] = sum(r['status'] == 'partial' for r in own)
-            actor['unresolved_calls'] = sum(r['status'] in ('unknown', 'pending', 'partial') for r in own)
-            actor['not_sent_calls'] = sum(r['status'] == 'not_sent' for r in own)
-            actor['tokens'] = {k: sum(r['usage'].get(k) or 0 for r in measured) for k in FIELDS + ('total_tokens',)}
-            actor['unknown_detail_calls'] = {k: sum(r['usage'].get(k) is None for r in measured) for k in FIELDS}
-            actor['measured_charge_nano'] = sum(r['charge_nano'] or 0 for r in measured)
-            actor['unpriced_measured_calls'] = sum(r['charge_nano'] is None for r in measured)
-        return {'schema_version': 1, 'world_id': self.world_id, 'visibility': 'developer_only',
-                'scope': 'From this world genesis; other worlds remain separate. Known subtotals include confirmed partial usage; unresolved remainders stay unknown.',
-                'cached_tokens_are_part_of_input': True, 'actors': actors, 'calls': calls, 'revisions': revisions}
+            return _snapshot_from_connection(db, self.world_id)
 
     @classmethod
     def restore(cls, path, world_id, snapshot):
@@ -285,6 +330,99 @@ def gm_book(state):
     return UsageBook(path, state['world_id']) if path else None
 
 
+def rebind_existing_book(world_path, gm_state_path, snapshot_path):
+    """Move only a stale GM-state pointer to an already restored, identical UsageBook.
+
+    The old book must be absent. The destination and portable snapshot are inspected read-only,
+    and the authoritative GM state changes under its normal lock in one atomic replacement.
+    """
+    world_path = Path(world_path).resolve()
+    gm_state_path = Path(gm_state_path).resolve()
+    snapshot_path = Path(snapshot_path).resolve()
+    if not world_path.is_file():
+        raise ValueError(f'World save not found: {world_path}')
+    if not gm_state_path.is_file():
+        raise ValueError(f'GM state not found: {gm_state_path}')
+    if not snapshot_path.is_file():
+        raise ValueError(f'Usage rebind snapshot not found: {snapshot_path}')
+    try:
+        world = json.loads(world_path.read_text(encoding='utf-8-sig'))
+    except (json.JSONDecodeError, UnicodeDecodeError) as error:
+        raise ValueError(f'World save is unreadable: {type(error).__name__}') from error
+    world_id = world.get('world_id') if isinstance(world, dict) else None
+    if not isinstance(world_id, str) or not world_id:
+        raise ValueError('World save has no world identity')
+    try:
+        snapshot_bytes = snapshot_path.read_bytes()
+        portable = json.loads(snapshot_bytes.decode('utf-8-sig'))
+    except (json.JSONDecodeError, UnicodeDecodeError) as error:
+        raise ValueError(f'Usage rebind snapshot is unreadable: {type(error).__name__}') from error
+    if not isinstance(portable, dict) or portable.get('schema_version') != 1:
+        raise ValueError('Usage rebind snapshot has an unsupported schema')
+    if portable.get('world_id') != world_id:
+        raise ValueError('Usage rebind snapshot belongs to a different world')
+    portable_history_sha = snapshot_history_sha256(portable)
+    target = world_path.parent / 'developer-usage.sqlite3'
+    target = target.resolve()
+
+    # Imported lazily because gm_runner imports gm_book from this module.
+    from gm_runner import StateLock
+    with StateLock(gm_state_path.parent, break_lock=False):
+        try:
+            state = json.loads(gm_state_path.read_text(encoding='utf-8-sig'))
+        except (json.JSONDecodeError, UnicodeDecodeError) as error:
+            raise ValueError(f'GM state is unreadable: {type(error).__name__}') from error
+        if not isinstance(state, dict) or state.get('world_id') != world_id:
+            raise ValueError('GM state and current world identity do not match')
+        prior_text = state.get('developer_usage_book')
+        if not isinstance(prior_text, str) or not prior_text.strip():
+            raise ValueError('GM state has no prior developer usage book binding')
+        prior = Path(prior_text)
+        if not prior.is_absolute():
+            prior = gm_state_path.parent / prior
+        prior = prior.resolve()
+        if prior != target and prior.exists():
+            raise ValueError(f'Prior developer usage book still exists: {prior}')
+
+        existing = inspect_existing_book(target, world_id)
+        existing_history_sha = snapshot_history_sha256(existing)
+        if existing_history_sha != portable_history_sha or any(
+                existing[key] != portable[key] for key in ('actors', 'calls', 'revisions')):
+            raise ValueError('Existing usage book history does not match the portable snapshot')
+        book_sha = file_sha256(target)
+        snapshot_sha = hashlib.sha256(snapshot_bytes).hexdigest()
+        counts = {key: len(existing[key]) for key in ('actors', 'calls', 'revisions')}
+        audits = state.get('developer_usage_book_rebindings', [])
+        if not isinstance(audits, list) or any(not isinstance(item, dict) for item in audits):
+            raise ValueError('GM state usage rebind audit is malformed')
+
+        if prior == target:
+            matching = [item for item in audits
+                        if item.get('new_path') == str(target)
+                        and item.get('book_sha256') == book_sha
+                        and item.get('snapshot_sha256') == snapshot_sha
+                        and item.get('history_sha256') == existing_history_sha]
+            if not matching:
+                raise ValueError('GM state already points to this book without a matching immutable rebind audit')
+            return {'world_id': world_id, 'old_path': matching[-1].get('old_path'),
+                    'new_path': str(target), 'rebound': False, 'idempotent': True,
+                    'book_sha256': book_sha, 'snapshot_sha256': snapshot_sha,
+                    'history_sha256': existing_history_sha, **counts}
+        audit = {'kind': 'developer_usage_book_rebind', 'world_id': world_id,
+                 'old_path': str(prior), 'old_path_absent': True, 'new_path': str(target),
+                 'book_sha256': book_sha, 'snapshot_path': str(snapshot_path),
+                 'snapshot_sha256': snapshot_sha, 'history_sha256': existing_history_sha,
+                 **counts, 'rebound_utc': datetime.now(timezone.utc).isoformat()}
+        # Existing entries are copied unchanged and the new fact is appended once.
+        state['developer_usage_book_rebindings'] = [*audits, audit]
+        state['developer_usage_book'] = str(target)
+        atomic_text(gm_state_path, json.dumps(state, ensure_ascii=False, indent=2) + '\n')
+        return {'world_id': world_id, 'old_path': str(prior), 'new_path': str(target),
+                'rebound': True, 'idempotent': False, 'book_sha256': book_sha,
+                'snapshot_sha256': snapshot_sha, 'history_sha256': existing_history_sha,
+                **counts}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--world', type=Path, required=True)
@@ -292,9 +430,21 @@ def main():
     parser.add_argument('--ledger', type=Path)
     parser.add_argument('--restore-snapshot', type=Path,
                         help='Portable developer usage JSON; only restores a missing local book')
+    parser.add_argument('--rebind-existing-book-from-snapshot', type=Path,
+                        help='Offline: rebind a stale absent GM-state pointer to the existing '
+                             'same-world book after exact portable-history verification')
     parser.add_argument('--request-evidence-dir', type=Path,
                         help='Explicit prior episode request-bodies directory for exact call-ID attribution')
     args = parser.parse_args()
+    if args.rebind_existing_book_from_snapshot:
+        if not args.gm_state:
+            parser.error('--rebind-existing-book-from-snapshot requires --gm-state')
+        if args.restore_snapshot or args.request_evidence_dir or args.ledger:
+            parser.error('usage-book rebind cannot be combined with restore or ledger backfill')
+        result = rebind_existing_book(args.world, args.gm_state,
+                                      args.rebind_existing_book_from_snapshot)
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True))
+        return
     if args.restore_snapshot:
         world = json.loads(args.world.read_text(encoding='utf-8'))
         UsageBook.restore(args.world.resolve().parent / 'developer-usage.sqlite3', world['world_id'],

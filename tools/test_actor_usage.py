@@ -1,12 +1,14 @@
 import json
 import sqlite3
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
 import sys
 from contextlib import closing
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from actor_usage import UsageBook, for_world, native_usage_lower_bound
+from actor_usage import (UsageBook, for_world, native_usage_lower_bound,
+                         rebind_existing_book)
 import gm_runner
 
 
@@ -24,6 +26,32 @@ class ActorUsageTests(unittest.TestCase):
     def measured(self, call='npc:1', actor='ari', model='model-a'):
         self.book.record(call, actor, 'provider', model, 'decision', 'measured',
                          dict(input_tokens=100, output_tokens=10, cached_input_tokens=40))
+
+    def rebind_fixture(self, name='rebind'):
+        root = self.root / name
+        gm_dir = root / 'gm'
+        gm_dir.mkdir(parents=True)
+        world = root / 'world.json'
+        world.write_text(json.dumps({'world_id': 'world-a', 'life': {'seq': 43},
+                                     'residents': [{'stable_id': 'ari', 'name': 'Ari'}]}),
+                         encoding='utf-8')
+        target = root / 'developer-usage.sqlite3'
+        book = UsageBook(target, 'world-a', self.actors)
+        book.record('npc:kept', 'ari', 'provider', 'model-a', 'decision', 'pending')
+        book.record('npc:kept', 'ari', 'provider', 'model-a', 'decision', 'measured',
+                    dict(input_tokens=100, output_tokens=10, cached_input_tokens=40))
+        snapshot = root / 'portable.json'
+        snapshot.write_text(json.dumps(book.snapshot(), ensure_ascii=False, indent=2) + '\n',
+                            encoding='utf-8')
+        old = root / 'absent-old-book.sqlite3'
+        state = gm_dir / gm_runner.STATE_FILE
+        state.write_text(json.dumps({
+            'schema_version': gm_runner.STATE_SCHEMA, 'world_id': 'world-a',
+            'sessions': {}, 'issues': {}, 'sources': [],
+            'developer_usage_book': str(old),
+            'developer_usage_book_rebindings': [{'kind': 'older-audit', 'kept': True}],
+        }, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        return world, state, snapshot, target, old
 
     def test_zero_start_and_permanent_identity_after_reopen(self):
         self.assertTrue(all(a['tokens']['total_tokens'] == 0 for a in self.book.snapshot()['actors']))
@@ -172,6 +200,70 @@ class ActorUsageTests(unittest.TestCase):
         self.measured()
         UsageBook.restore(self.root / 'developer-usage.sqlite3', 'world-a', self.book.snapshot())
         self.assertEqual(next(a for a in for_world(save).snapshot()['actors'] if a['id']=='ari')['tokens']['total_tokens'],110)
+
+    def test_existing_book_rebind_is_exact_audited_and_idempotent(self):
+        world, state, snapshot, target, old = self.rebind_fixture()
+        protected = {path: path.read_bytes() for path in (world, snapshot, target)}
+        finished = subprocess.run([
+            sys.executable, str(Path(__file__).with_name('actor_usage.py')),
+            '--world', str(world), '--gm-state', str(state),
+            '--rebind-existing-book-from-snapshot', str(snapshot),
+        ], capture_output=True, text=True, encoding='utf-8')
+        self.assertEqual(finished.returncode, 0, finished.stderr)
+        result = json.loads(finished.stdout)
+        self.assertTrue(result['rebound'])
+        self.assertFalse(result['idempotent'])
+        self.assertEqual((result['actors'], result['calls'], result['revisions']), (2, 1, 2))
+        saved = json.loads(state.read_text(encoding='utf-8'))
+        self.assertEqual(Path(saved['developer_usage_book']), target.resolve())
+        self.assertEqual(saved['developer_usage_book_rebindings'][0],
+                         {'kind': 'older-audit', 'kept': True})
+        audit = saved['developer_usage_book_rebindings'][1]
+        self.assertEqual(audit['old_path'], str(old.resolve()))
+        self.assertTrue(audit['old_path_absent'])
+        self.assertEqual(audit['new_path'], str(target.resolve()))
+        self.assertEqual(audit['history_sha256'], result['history_sha256'])
+        self.assertEqual(audit['book_sha256'], result['book_sha256'])
+        self.assertEqual(audit['snapshot_sha256'], result['snapshot_sha256'])
+        for path, before in protected.items():
+            self.assertEqual(path.read_bytes(), before, path)
+        state_after = state.read_bytes()
+        replay = rebind_existing_book(world, state, snapshot)
+        self.assertFalse(replay['rebound'])
+        self.assertTrue(replay['idempotent'])
+        self.assertEqual(state.read_bytes(), state_after)
+        self.assertEqual(json.loads(state.read_text())['developer_usage_book_rebindings'][1], audit)
+
+    def test_existing_book_rebind_refuses_live_old_book_and_history_mismatch(self):
+        world, state, snapshot, target, old = self.rebind_fixture('refusals')
+        before = state.read_bytes()
+        old.write_bytes(b'old book still exists')
+        with self.assertRaisesRegex(ValueError, 'Prior developer usage book still exists'):
+            rebind_existing_book(world, state, snapshot)
+        self.assertEqual(state.read_bytes(), before)
+        old.unlink()
+        portable = json.loads(snapshot.read_text(encoding='utf-8'))
+        portable['calls'][0]['status'] = 'unknown'
+        snapshot.write_text(json.dumps(portable), encoding='utf-8')
+        with self.assertRaisesRegex(ValueError, 'history does not match'):
+            rebind_existing_book(world, state, snapshot)
+        self.assertEqual(state.read_bytes(), before)
+        self.assertEqual(UsageBook(target, 'world-a').snapshot()['calls'][0]['status'], 'measured')
+
+    def test_existing_book_rebind_honors_state_lock_and_world_identity(self):
+        world, state, snapshot, _, _ = self.rebind_fixture('lock')
+        before = state.read_bytes()
+        with gm_runner.StateLock(state.parent, break_lock=False):
+            with self.assertRaisesRegex(RuntimeError, 'a live run holds'):
+                rebind_existing_book(world, state, snapshot)
+        self.assertEqual(state.read_bytes(), before)
+        document = json.loads(state.read_text(encoding='utf-8'))
+        document['world_id'] = 'world-b'
+        state.write_text(json.dumps(document), encoding='utf-8')
+        mismatch = state.read_bytes()
+        with self.assertRaisesRegex(ValueError, 'state and current world identity do not match'):
+            rebind_existing_book(world, state, snapshot)
+        self.assertEqual(state.read_bytes(), mismatch)
 
 
 if __name__ == '__main__': unittest.main()

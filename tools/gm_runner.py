@@ -48,6 +48,7 @@ import os
 import re
 import shlex
 import shutil
+import sqlite3
 import subprocess
 import sys
 import time
@@ -406,6 +407,21 @@ def account_native_usage(state: dict, attempt: dict, resume_id: str | None) -> N
 
 def usage_evidence(attempt: dict) -> dict:
     return {key: attempt.get(key) for key in ('usage_cumulative', 'usage_accounting')}
+
+
+def preflight_usage_book(state: dict, gm_ids: list[str]) -> tuple[object | None, str | None]:
+    """Open and inspect the durable usage book before any paid intent is persisted."""
+    try:
+        book = gm_book(state)
+        if book is None:
+            return None, None
+        registered = {actor['id']: actor.get('role') for actor in book.snapshot()['actors']}
+    except (OSError, ValueError, sqlite3.Error) as error:
+        return None, f'{type(error).__name__}: {error}'
+    missing = sorted(gm_id for gm_id in gm_ids if registered.get(gm_id) != 'GM')
+    if missing:
+        return None, f'Usage book is missing registered GM identities: {missing}'
+    return book, None
 
 
 # --------------------------------------------------------------------------- route
@@ -2353,6 +2369,10 @@ def observe(args) -> int:
             return refusal('unresolved_prior_attempt',
                            'acknowledge the recorded failed attempt before re-dispatching this GM',
                            5, gms={gm: state['sessions'][gm]['unresolved'] for gm in blocked})
+        book, book_error = preflight_usage_book(state, selected)
+        if book_error:
+            return refusal('developer_usage_book_preflight', book_error, 2,
+                           state_written=False, dispatched=0)
         plan = plan_observation(state, selected, args.max_issues_per_gm, investigation)
         run_id = 'run-' + utc_stamp() + '-' + os.urandom(3).hex()
         run_dir = state_dir / 'runs' / run_id
@@ -2415,7 +2435,6 @@ def observe(args) -> int:
                 intent['status'] = 'running'
                 store_state(state_dir, state)
 
-            book = gm_book(state)
             if book:
                 book.begin_gm(run_id, gm_id, 'observe')
             attempt = run_codex_once(route, ROOT, run_dir, gm_id, prompt, instructions, catalog,
@@ -2761,6 +2780,10 @@ def code(args) -> int:
             reason = route.preflight_resume(resume_id)
             if reason:
                 return refusal('resume_preflight_failed', reason, 2, resume_requested=resume_id)
+        book, book_error = preflight_usage_book(state, [owner])
+        if book_error:
+            return refusal('developer_usage_book_preflight', book_error, 2,
+                           issue_id=args.issue, state_written=False, dispatched=0)
         candidate.parent.mkdir(parents=True, exist_ok=True)
         if candidate.exists():
             top = git(['rev-parse', '--show-toplevel'], cwd=candidate)
@@ -2858,7 +2881,6 @@ def code(args) -> int:
             owner_record['coding']['last_status'] = 'running'
             store_state(state_dir, state)
 
-        book = gm_book(state)
         if book:
             book.begin_gm(run_id, owner, 'code')
         attempt = run_codex_once(route, candidate, run_dir, 'coding', prompt, instructions, catalog,
@@ -3262,6 +3284,10 @@ def feedback(args) -> int:
             return refusal('unresolved_prior_attempt',
                            'acknowledge the recorded failed attempt before a new dispatch', 5,
                            gms={args.gm: record['unresolved']})
+        book, book_error = preflight_usage_book(state, [args.gm])
+        if book_error:
+            return refusal('developer_usage_book_preflight', book_error, 2,
+                           state_written=False, dispatched=0)
         run_id = 'feedback-' + utc_stamp() + '-' + os.urandom(3).hex()
         run_dir = state_dir / 'runs' / run_id
         run_dir.mkdir(parents=True, exist_ok=False)
@@ -3295,7 +3321,6 @@ def feedback(args) -> int:
             intent['status'] = 'running'
             store_state(state_dir, state)
 
-        book = gm_book(state)
         if book:
             book.begin_gm(run_id, args.gm, 'feedback')
         attempt = run_codex_once(route, ROOT, run_dir, 'feedback', prompt, instructions, catalog,
