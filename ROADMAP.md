@@ -4,9 +4,11 @@ Language policy: the game, resident names, dialogue, Kimi/GM instructions and th
 
 Current milestone: a recoverable ten-resident / ten-GM loop. Bounded live participation and bread adoption were recorded upstream. Local offline workflow checks pass, but sustained unattended autonomy, long-term food supply and natural ration sharing remain unproven.
 
-The active lineage is `shared:restart-20260918-01`, now saved at seq194 with 172 archived attempts and 186 world usage records under [worlds/](worlds/README.md). Original seq450 and its separate local seq452 continuation remain unchanged. H117, H119 and H120 resumed real resident calls under authorized supplemental accounting, conservatively retaining every old liability and unknown. The missing provider ledger is not claimed recovered. On September 19, 39 additional Kimi calls settled for CNY 0.8144018 after the earlier baseline; Rowan adopted self-repair, Iris acted on terminal resource feedback, and Smith naturally discovered and recovered one finite iron unit. GM04 completed one measured new-epoch effect review, with separate unpriced token usage. The 15-minute engineering heartbeat remains active; live episodes stay bounded and credentials remain local.
+The active lineage is `shared:restart-20260918-01`, now saved at seq209 with 184 archived attempts and 198 world usage records under [worlds/](worlds/README.md). Original seq450 and its separate local seq452 continuation remain unchanged. H117, H119, H120 and H121 resumed real resident calls under authorized supplemental accounting, conservatively retaining every old liability and unknown. The missing provider ledger is not claimed recovered. On September 19, 51 additional Kimi calls settled for CNY 1.0756863 after the earlier baseline; Rowan adopted self-repair, Iris acted on terminal resource feedback and later recovered finite iron, Smith discovered and recovered iron then sought work, and the natural edge-repair contract remains uncompleted. GM04 completed one measured new-epoch effect review, with separate unpriced token usage. The 15-minute engineering heartbeat remains active; live episodes stay bounded and credentials remain local.
 
 ## Current work
+
+- **H121:** seq194→209, twelve settled calls for CNY 0.2612845. Smith retained his iron and revisited the source and work locations; Carpenter had no new model turn before this window ended, so no fresh edge-repair contract was formed. Weaver naturally recovered one more iron from her prior knowledge, taking the finite source to stock1/recovered2. The existing edge-repair route passes a disposable 30-check probe, but live adoption remains open. [Evidence](docs/validation/material-repair-2026-09-19.md).
 
 - **H120:** seq174→194, twelve settled calls for CNY 0.2481223. Smith voluntarily read the public material notice, observed the installed iron source in person, and recovered one unit into his own account; the public source fell from 3 to 2. Innkeeper’s blocked material trip stayed a truthful cancellation. The home-eating route replay passes 40 focused assertions. Natural information-to-recovery now has one real example; production, edge repair, sustained resources and ten-GM unattended operation remain open. [Evidence](docs/validation/material-discovery-2026-09-19.md).
 
@@ -82,6 +84,7 @@ flowchart TB
     end
     subgraph CURRENT["2. Where we are now"]
         M20["M20 Recoverable 10-resident + 10-GM loop<br/>Bounded live examples exist; sustained unattended operation does not"]
+        H121["H121 H121 live edge-repair follow-up<br/>Smith revisited iron; Weaver recovered one; fresh repair contract still open"]
         H103["H103 Morning remote delivery received: 9fcd05c<br/>Upstream seq450, real bread adoption and cold restore<br/>Separate original lineage; later recovered locally"]
         H104["H104 Stale preview cache fixed<br/>50 Python and 306 Godot offline checks passed"]
         H105["H105 Complete local offline rehearsal passed<br/>Need, 10 fixture GM contexts, candidate review and installation<br/>Physical work, interrupted exit, resume and final cold restore"]

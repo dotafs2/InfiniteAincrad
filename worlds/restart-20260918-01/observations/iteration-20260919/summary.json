@@ -1,21 +1,22 @@
 {
   "world_id": "shared:restart-20260918-01",
-  "start_seq": 174,
-  "end_seq": 194,
-  "source_sha256": "055ee4e8f8f7a6d99919aa5cdfbb39461915a0dd593198f32f6798a04cd84332",
+  "start_seq": 194,
+  "end_seq": 209,
+  "source_sha256": "34feaca504817a22fdaa33efcc423a8a5aaab8a48f46a64a82ad5916131d4ad9",
   "resident_calls": 12,
-  "resident_cost_cny": 0.2481223,
+  "resident_cost_cny": 0.2612845,
   "new_resident_unknowns": 0,
-  "archive_records": 172,
-  "usage_calls": 186,
-  "old_calls_and_revisions_preserved": true,
-  "smith_natural_material_chain": {
-    "notice_read": true,
-    "source_observed": true,
-    "iron_recovered": 1,
-    "account_iron": 1,
-    "source_stock": 2
-  },
-  "material_travel_blocked_and_cancelled": true,
-  "renderer_errors": 34
+  "archive_records": 184,
+  "usage_calls": 198,
+  "smith_iron": 1,
+  "carpenter_edge": 20,
+  "carpenter_next_due": 8097.133333333092,
+  "smith_material_route_observed": true,
+  "weaver_natural_iron_recovered": 1,
+  "source_stock": 1,
+  "source_recovered": 2,
+  "edge_repair_events": [],
+  "edge_repair_completed": false,
+  "renderer_errors": 0,
+  "limitation": "Smith reached known work locations and Weaver naturally recovered one iron, but Rowan had no new model turn in this window; no fresh edge-repair contract or completion occurred."
 }

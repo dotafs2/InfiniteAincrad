@@ -1,0 +1,56 @@
+{
+  "world_id": "shared:restart-20260918-01",
+  "baseline_seq": 194,
+  "baseline_sha256": "055ee4e8f8f7a6d99919aa5cdfbb39461915a0dd593198f32f6798a04cd84332",
+  "axe": {
+    "id": "seed:axe",
+    "owner_id": "shared:carpenter",
+    "custodian_id": "shared:carpenter",
+    "edge": 20,
+    "handle": 100
+  },
+  "worker": {
+    "id": "shared:smith",
+    "skill": "metal_repair",
+    "iron_before": 1,
+    "reserved_col": 0
+  },
+  "owner": {
+    "id": "shared:carpenter",
+    "coins_col": 8,
+    "reserved_col": 0
+  },
+  "old_contract": {
+    "id": "trade_contract_turn:shared:carpenter:0:6",
+    "status": "rejected",
+    "reserved_col": 0
+  },
+  "offline_probe": {
+    "checks": 30,
+    "path": [
+      "approach_within_3m",
+      "fresh_offer",
+      "accept_escrow",
+      "deliver",
+      "work_60_seconds",
+      "collect_and_pay"
+    ],
+    "canonical_written": false,
+    "provider_calls": 0,
+    "result": "passed"
+  },
+  "live_h121": {
+    "end_seq": 209,
+    "checkpoint_sha256": "34feaca504817a22fdaa33efcc423a8a5aaab8a48f46a64a82ad5916131d4ad9",
+    "smith_iron": 1,
+    "carpenter_edge": 20,
+    "edge_repair_events": [],
+    "weaver_iron_recovered": 1,
+    "source": {
+      "initial_stock": 3,
+      "stock": 1,
+      "recovered": 2
+    }
+  },
+  "next_condition": "A fresh Carpenter model turn must choose physical approach/offer; do not revive the rejected contract."
+}

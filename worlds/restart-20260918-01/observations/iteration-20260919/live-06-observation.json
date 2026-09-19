@@ -1,0 +1,1254 @@
+{
+  "schema_version": 1,
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 194,
+  "end_seq": 209,
+  "elapsed_seconds": 8149.383333332223,
+  "decision_count": 12,
+  "residents": [
+    {
+      "resident_id": "shared:well-keeper",
+      "name": "Ari",
+      "decisions": [
+        {
+          "request_id": "turn:shared:well-keeper:1:14",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a21",
+            "reason": "Wren the baker greeted me about the water. I should respond, since my satiety and energy are comfortable and this connects to my interest in shared water access.",
+            "speech": "Still clear, last I looked. No one was cutting ahead today, which is what I watch for."
+          },
+          "resolved_action": "ability:talk:shared:baker",
+          "stated_reason": "Wren the baker greeted me about the water. I should respond, since my satiety and energy are comfortable and this connects to my interest in shared water access.",
+          "proposed_speech": "Still clear, last I looked. No one was cutting ahead today, which is what I watch for.",
+          "actually_spoken": "Still clear, last I looked. No one was cutting ahead today, which is what I watch for.",
+          "speech_event_seq": 199,
+          "recipients": [
+            "shared:well-keeper",
+            "shared:baker"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "resident_said",
+            "effect": {
+              "ok": true,
+              "code": "resident_said",
+              "event_id": "life_event_199"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "Still clear, last I looked. No one was cutting ahead today, which is what I watch for.",
+              "event_id": "life_event_199",
+              "event_seq": 199,
+              "recipient_ids": [
+                "shared:well-keeper",
+                "shared:baker"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "resident_said",
+              "actor_id": "shared:well-keeper",
+              "subject_id": "shared:baker",
+              "recipient_ids": [
+                "shared:well-keeper",
+                "shared:baker"
+              ],
+              "operation_id": "turn:shared:well-keeper:1:14",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "Still clear, last I looked. No one was cutting ahead today, which is what I watch for.",
+              "contractual": false,
+              "epistemic_status": "speaker_statement_not_verified_world_fact",
+              "seq": 199,
+              "event_id": "life_event_199"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:well-keeper:1:15",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a20",
+            "reason": "My satiety is 77 and energy is 67, so no urgent survival need. I've just exchanged greetings with Wren about the water. Before deciding on further social action, I should observe my surroundings privately to notice who is present, what the queue at the trough looks like, and whether anyone is waiting who I might advocate for—this aligns with my methodical temperament and my ideal of keeping shared necessities accessible."
+          },
+          "resolved_action": "ability:observe",
+          "stated_reason": "My satiety is 77 and energy is 67, so no urgent survival need. I've just exchanged greetings with Wren about the water. Before deciding on further social action, I should observe my surroundings privately to notice who is present, what the queue at the trough looks like, and whether anyone is waiting who I might advocate for—this aligns with my methodical temperament and my ideal of keeping shared necessities accessible.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "surroundings_observed",
+            "effect": {
+              "ok": true,
+              "code": "surroundings_observed",
+              "event_id": "life_event_201",
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "private_observation"
+              }
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "private_observation"
+            }
+          },
+          "later_events": [
+            {
+              "type": "surroundings_observed",
+              "actor_id": "shared:well-keeper",
+              "subject_id": "shared:well-keeper",
+              "recipient_ids": [
+                "shared:well-keeper"
+              ],
+              "operation_id": "turn:shared:well-keeper:1:15",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "I paused to observe my current surroundings.",
+              "contractual": false,
+              "observed": {
+                "position": [
+                  5.634607791900635,
+                  0.0008196444832719862,
+                  51.78282165527344
+                ],
+                "needs": {
+                  "hunger": 77
+                },
+                "nearby_residents": [
+                  {
+                    "id": "shared:baker",
+                    "name": "Wren"
+                  },
+                  {
+                    "id": "shared:gardener",
+                    "name": "Fern"
+                  }
+                ],
+                "known_places": [
+                  "caravan_rest",
+                  "market_plaza",
+                  "planted_commons",
+                  "west_forecourt"
+                ]
+              },
+              "private_observation": true,
+              "seq": 201,
+              "event_id": "life_event_201"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:baker",
+      "name": "Wren",
+      "decisions": [
+        {
+          "request_id": "turn:shared:baker:0:15",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a20",
+            "reason": "I want to keep learning about this world and the people in it. Ari was kind enough to talk with me before, and I'm curious how the well is doing. No urgent needs right now—satiety 92, energy 68—so this is a good moment to be social and maybe hear something useful about baking or food.",
+            "speech": "Ari! How's the water today? Still clear, I hope—I'm always sniffing for what might change the taste of dough."
+          },
+          "resolved_action": "ability:talk:shared:well-keeper",
+          "stated_reason": "I want to keep learning about this world and the people in it. Ari was kind enough to talk with me before, and I'm curious how the well is doing. No urgent needs right now—satiety 92, energy 68—so this is a good moment to be social and maybe hear something useful about baking or food.",
+          "proposed_speech": "Ari! How's the water today? Still clear, I hope—I'm always sniffing for what might change the taste of dough.",
+          "actually_spoken": "Ari! How's the water today? Still clear, I hope—I'm always sniffing for what might change the taste of dough.",
+          "speech_event_seq": 195,
+          "recipients": [
+            "shared:baker",
+            "shared:well-keeper"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "resident_said",
+            "effect": {
+              "ok": true,
+              "code": "resident_said",
+              "event_id": "life_event_195"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "Ari! How's the water today? Still clear, I hope—I'm always sniffing for what might change the taste of dough.",
+              "event_id": "life_event_195",
+              "event_seq": 195,
+              "recipient_ids": [
+                "shared:baker",
+                "shared:well-keeper"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "resident_said",
+              "actor_id": "shared:baker",
+              "subject_id": "shared:well-keeper",
+              "recipient_ids": [
+                "shared:baker",
+                "shared:well-keeper"
+              ],
+              "operation_id": "turn:shared:baker:0:15",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "Ari! How's the water today? Still clear, I hope—I'm always sniffing for what might change the taste of dough.",
+              "contractual": false,
+              "epistemic_status": "speaker_statement_not_verified_world_fact",
+              "seq": 195,
+              "event_id": "life_event_195"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:baker:0:16",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a20",
+            "reason": "I want to keep learning about this world and the people in it. Talking to Ari feels natural after our last exchange about the water, and I'm curious if there's anything I can help with or learn from them today.",
+            "speech": "Ari! How's the water today? Still clear, I hope—I'm always glad when the well's doing well."
+          },
+          "resolved_action": "ability:talk:shared:well-keeper",
+          "stated_reason": "I want to keep learning about this world and the people in it. Talking to Ari feels natural after our last exchange about the water, and I'm curious if there's anything I can help with or learn from them today.",
+          "proposed_speech": "Ari! How's the water today? Still clear, I hope—I'm always glad when the well's doing well.",
+          "actually_spoken": "Ari! How's the water today? Still clear, I hope—I'm always glad when the well's doing well.",
+          "speech_event_seq": 200,
+          "recipients": [
+            "shared:baker",
+            "shared:well-keeper"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "resident_said",
+            "effect": {
+              "ok": true,
+              "code": "resident_said",
+              "event_id": "life_event_200"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "Ari! How's the water today? Still clear, I hope—I'm always glad when the well's doing well.",
+              "event_id": "life_event_200",
+              "event_seq": 200,
+              "recipient_ids": [
+                "shared:baker",
+                "shared:well-keeper"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "resident_said",
+              "actor_id": "shared:baker",
+              "subject_id": "shared:well-keeper",
+              "recipient_ids": [
+                "shared:baker",
+                "shared:well-keeper"
+              ],
+              "operation_id": "turn:shared:baker:0:16",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "Ari! How's the water today? Still clear, I hope—I'm always glad when the well's doing well.",
+              "contractual": false,
+              "epistemic_status": "speaker_statement_not_verified_world_fact",
+              "seq": 200,
+              "event_id": "life_event_200"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:smith",
+      "name": "Flint",
+      "decisions": [
+        {
+          "request_id": "turn:shared:smith:0:21",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a16",
+            "reason": "I have iron and a repair skill, but no active contract. The Old Market Plaza is a public gathering place where I might find someone with a broken tool or learn of work. Better than standing idle."
+          },
+          "resolved_action": "place:travel:market_plaza",
+          "stated_reason": "I have iron and a repair skill, but no active contract. The Old Market Plaza is a public gathering place where I might find someone with a broken tool or learn of work. Better than standing idle.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "place_travel_started",
+            "effect": {
+              "ok": true,
+              "code": "place_travel_started",
+              "pending": true,
+              "place_id": "market_plaza"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "type": "place_visited",
+              "actor_id": "shared:smith",
+              "subject_id": "shared:smith",
+              "recipient_ids": [
+                "shared:smith"
+              ],
+              "operation_id": "turn:shared:smith:0:21",
+              "source": "opengameagent_live",
+              "place_id": "market_plaza",
+              "target_position": [
+                3.700000047683716,
+                0.2199999988079071,
+                13.300000190734863
+              ],
+              "text": "I followed the route I know and arrived at Old Market Plaza.",
+              "seq": 197,
+              "event_id": "life_event_197"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": "completed",
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:smith:0:22",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a16",
+            "reason": "I am at Old Market Plaza with iron in hand and metal_repair skill, but no nearby residents to offer work. Western Artisans' Forecourt is where craftsmen gather; better odds of finding someone with a damaged tool who needs an edge repaired.",
+            "speech": "Heading to the Forecourt. If anyone there has a hatchet edge gone dull, I'll be working."
+          },
+          "resolved_action": "place:travel:west_forecourt",
+          "stated_reason": "I am at Old Market Plaza with iron in hand and metal_repair skill, but no nearby residents to offer work. Western Artisans' Forecourt is where craftsmen gather; better odds of finding someone with a damaged tool who needs an edge repaired.",
+          "proposed_speech": "Heading to the Forecourt. If anyone there has a hatchet edge gone dull, I'll be working.",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "place_travel_started",
+            "effect": {
+              "ok": true,
+              "code": "place_travel_started",
+              "pending": true,
+              "place_id": "west_forecourt",
+              "speech_delivery": {
+                "ok": false,
+                "code": "speech_not_supported_for_action",
+                "delivered": false
+              }
+            },
+            "speech_delivery": {
+              "ok": false,
+              "code": "speech_not_supported_for_action",
+              "delivered": false
+            }
+          },
+          "later_events": [
+            {
+              "type": "place_visited",
+              "actor_id": "shared:smith",
+              "subject_id": "shared:smith",
+              "recipient_ids": [
+                "shared:smith"
+              ],
+              "operation_id": "turn:shared:smith:0:22",
+              "source": "opengameagent_live",
+              "place_id": "west_forecourt",
+              "target_position": [
+                -19.600000381469727,
+                0.10000000149011612,
+                38.79999923706055
+              ],
+              "text": "I followed the route I know and arrived at Western Artisans' Forecourt.",
+              "seq": 203,
+              "event_id": "life_event_203"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": "completed",
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:smith:0:23",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a14",
+            "reason": "I'm at the Western Artisans' Forecourt with iron and metal_repair skill. Old Market Plaza is where traders and workers gather; better odds of finding someone with a broken tool who needs an edge fixed. No urgent survival needs—satiety 75, energy 67, food 2 in inventory."
+          },
+          "resolved_action": "place:travel:market_plaza",
+          "stated_reason": "I'm at the Western Artisans' Forecourt with iron and metal_repair skill. Old Market Plaza is where traders and workers gather; better odds of finding someone with a broken tool who needs an edge fixed. No urgent survival needs—satiety 75, energy 67, food 2 in inventory.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "place_travel_started",
+            "effect": {
+              "ok": true,
+              "code": "place_travel_started",
+              "pending": true,
+              "place_id": "market_plaza"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "type": "place_visited",
+              "actor_id": "shared:smith",
+              "subject_id": "shared:smith",
+              "recipient_ids": [
+                "shared:smith"
+              ],
+              "operation_id": "turn:shared:smith:0:23",
+              "source": "opengameagent_live",
+              "place_id": "market_plaza",
+              "target_position": [
+                3.700000047683716,
+                0.2199999988079071,
+                13.300000190734863
+              ],
+              "text": "I followed the route I know and arrived at Old Market Plaza.",
+              "seq": 206,
+              "event_id": "life_event_206"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": "completed",
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:carpenter",
+      "name": "Rowan",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:innkeeper",
+      "name": "Mara",
+      "decisions": [
+        {
+          "request_id": "turn:shared:innkeeper:1:21",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a2",
+            "reason": "I have 0 food and satiety at 78, which will drop. harvest_ration is available and may yield food before I face crisis. Previous iron gathering failed due to travel blocks, so foraging is a better immediate attempt than repeating what failed."
+          },
+          "resolved_action": "life:harvest_ration",
+          "stated_reason": "I have 0 food and satiety at 78, which will drop. harvest_ration is available and may yield food before I face crisis. Previous iron gathering failed due to travel blocks, so foraging is a better immediate attempt than repeating what failed.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_204",
+              "seq": 204,
+              "type": "harvest_ration",
+              "actor_id": "shared:innkeeper",
+              "subject_id": "shared:innkeeper",
+              "recipient_ids": [
+                "shared:innkeeper"
+              ],
+              "operation_id": "turn:shared:innkeeper:1:21",
+              "source": "opengameagent_live",
+              "text": "Mara: harvest_ration (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:innkeeper:1:22",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "My satiety is 77 and I have 1 food in inventory. While not urgent, eating now prevents future risk and uses a resource I have. I previously harvested this ration when food was 0; consuming it maintains my stability."
+          },
+          "resolved_action": "life:eat_ration",
+          "stated_reason": "My satiety is 77 and I have 1 food in inventory. While not urgent, eating now prevents future risk and uses a resource I have. I previously harvested this ration when food was 0; consuming it maintains my stability.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_207",
+              "seq": 207,
+              "type": "eat_ration",
+              "actor_id": "shared:innkeeper",
+              "subject_id": "shared:innkeeper",
+              "recipient_ids": [
+                "shared:innkeeper"
+              ],
+              "operation_id": "turn:shared:innkeeper:1:22",
+              "source": "opengameagent_live",
+              "text": "Mara: eat_ration (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:herder",
+      "name": "Heath",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:gardener",
+      "name": "Fern",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:weaver",
+      "name": "Iris",
+      "decisions": [
+        {
+          "request_id": "turn:shared:weaver:0:28",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a15",
+            "reason": "Energy is 95 and satiety is 77, so no urgent survival need. Western Artisans' Forecourt is a public space where craftspeople gather; walking there lets me observe whether any weaving activity or related work is happening, moving closer to my goal of learning weaving."
+          },
+          "resolved_action": "place:travel:west_forecourt",
+          "stated_reason": "Energy is 95 and satiety is 77, so no urgent survival need. Western Artisans' Forecourt is a public space where craftspeople gather; walking there lets me observe whether any weaving activity or related work is happening, moving closer to my goal of learning weaving.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "place_travel_started",
+            "effect": {
+              "ok": true,
+              "code": "place_travel_started",
+              "pending": true,
+              "place_id": "west_forecourt"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "type": "place_visited",
+              "actor_id": "shared:weaver",
+              "subject_id": "shared:weaver",
+              "recipient_ids": [
+                "shared:weaver"
+              ],
+              "operation_id": "turn:shared:weaver:0:28",
+              "source": "opengameagent_live",
+              "place_id": "west_forecourt",
+              "target_position": [
+                -18.399999618530273,
+                0.10000000149011612,
+                41.20000076293945
+              ],
+              "text": "I followed the route I know and arrived at Western Artisans' Forecourt.",
+              "seq": 202,
+              "event_id": "life_event_202"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": "completed",
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:weaver:0:29",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a12",
+            "reason": "I have energy and satiety both well above zero, so no urgent survival need. I know iron is used in repairs and I have none in my life account. The street salvage heap offers a chance to collect iron with only time as cost, and I personally read the public notice about this source. Gathering material now is practical preparation, even if I do not yet have a skill to use it."
+          },
+          "resolved_action": "material:recover:street:iron-salvage-20260918",
+          "stated_reason": "I have energy and satiety both well above zero, so no urgent survival need. I know iron is used in repairs and I have none in my life account. The street salvage heap offers a chance to collect iron with only time as cost, and I personally read the public notice about this source. Gathering material now is practical preparation, even if I do not yet have a skill to use it.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "material_started",
+            "effect": {
+              "ok": true,
+              "code": "material_started",
+              "pending": true
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "type": "material_recovered",
+              "actor_id": "shared:weaver",
+              "recipient_ids": [
+                "shared:weaver"
+              ],
+              "operation_id": "turn:shared:weaver:0:29",
+              "source": "opengameagent_live",
+              "source_id": "street:iron-salvage-20260918",
+              "material": "iron",
+              "quantity": 1,
+              "text": "Sorting finished; collected 1 unit of material.",
+              "seq": 208,
+              "event_id": "life_event_208"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": "completed",
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:fisher",
+      "name": "Reed",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:healer",
+      "name": "Sage",
+      "decisions": [
+        {
+          "request_id": "turn:shared:healer:0:15",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a20",
+            "reason": "I have adequate satiety (76) and energy (67), with no urgent survival needs. My previous harvest attempt failed due to unavailable resources. I will observe my surroundings to gather information about current conditions and opportunities before deciding on further action."
+          },
+          "resolved_action": "ability:observe",
+          "stated_reason": "I have adequate satiety (76) and energy (67), with no urgent survival needs. My previous harvest attempt failed due to unavailable resources. I will observe my surroundings to gather information about current conditions and opportunities before deciding on further action.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "surroundings_observed",
+            "effect": {
+              "ok": true,
+              "code": "surroundings_observed",
+              "event_id": "life_event_198",
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "private_observation"
+              }
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "private_observation"
+            }
+          },
+          "later_events": [
+            {
+              "type": "surroundings_observed",
+              "actor_id": "shared:healer",
+              "subject_id": "shared:healer",
+              "recipient_ids": [
+                "shared:healer"
+              ],
+              "operation_id": "turn:shared:healer:0:15",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "I paused to observe my current surroundings.",
+              "contractual": false,
+              "observed": {
+                "position": [
+                  7.237015247344971,
+                  0.0008274835417978466,
+                  54.402225494384766
+                ],
+                "needs": {
+                  "hunger": 76
+                },
+                "nearby_residents": [
+                  {
+                    "id": "shared:baker",
+                    "name": "Wren"
+                  },
+                  {
+                    "id": "shared:herder",
+                    "name": "Heath"
+                  },
+                  {
+                    "id": "shared:gardener",
+                    "name": "Fern"
+                  },
+                  {
+                    "id": "shared:fisher",
+                    "name": "Reed"
+                  }
+                ],
+                "known_places": [
+                  "planted_commons",
+                  "west_forecourt"
+                ]
+              },
+              "private_observation": true,
+              "seq": 198,
+              "event_id": "life_event_198"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    }
+  ],
+  "new_world_events": [
+    {
+      "type": "resident_said",
+      "actor_id": "shared:baker",
+      "subject_id": "shared:well-keeper",
+      "recipient_ids": [
+        "shared:baker",
+        "shared:well-keeper"
+      ],
+      "operation_id": "turn:shared:baker:0:15",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "Ari! How's the water today? Still clear, I hope—I'm always sniffing for what might change the taste of dough.",
+      "contractual": false,
+      "epistemic_status": "speaker_statement_not_verified_world_fact",
+      "seq": 195,
+      "event_id": "life_event_195"
+    },
+    {
+      "type": "material_source_observed",
+      "actor_id": "shared:smith",
+      "recipient_ids": [
+        "shared:smith"
+      ],
+      "operation_id": "material-observation:shared:smith:street:iron-salvage-20260918:196",
+      "source": "host_line_of_sight_observation",
+      "source_id": "street:iron-salvage-20260918",
+      "stock": 2,
+      "text": "Street salvage iron heap: public iron material, 2 units observed; sorting for 60 seconds yields 1 unit if stock remains on arrival.",
+      "seq": 196,
+      "event_id": "life_event_196"
+    },
+    {
+      "type": "place_visited",
+      "actor_id": "shared:smith",
+      "subject_id": "shared:smith",
+      "recipient_ids": [
+        "shared:smith"
+      ],
+      "operation_id": "turn:shared:smith:0:21",
+      "source": "opengameagent_live",
+      "place_id": "market_plaza",
+      "target_position": [
+        3.700000047683716,
+        0.2199999988079071,
+        13.300000190734863
+      ],
+      "text": "I followed the route I know and arrived at Old Market Plaza.",
+      "seq": 197,
+      "event_id": "life_event_197"
+    },
+    {
+      "type": "surroundings_observed",
+      "actor_id": "shared:healer",
+      "subject_id": "shared:healer",
+      "recipient_ids": [
+        "shared:healer"
+      ],
+      "operation_id": "turn:shared:healer:0:15",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "I paused to observe my current surroundings.",
+      "contractual": false,
+      "observed": {
+        "position": [
+          7.237015247344971,
+          0.0008274835417978466,
+          54.402225494384766
+        ],
+        "needs": {
+          "hunger": 76
+        },
+        "nearby_residents": [
+          {
+            "id": "shared:baker",
+            "name": "Wren"
+          },
+          {
+            "id": "shared:herder",
+            "name": "Heath"
+          },
+          {
+            "id": "shared:gardener",
+            "name": "Fern"
+          },
+          {
+            "id": "shared:fisher",
+            "name": "Reed"
+          }
+        ],
+        "known_places": [
+          "planted_commons",
+          "west_forecourt"
+        ]
+      },
+      "private_observation": true,
+      "seq": 198,
+      "event_id": "life_event_198"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:well-keeper",
+      "subject_id": "shared:baker",
+      "recipient_ids": [
+        "shared:well-keeper",
+        "shared:baker"
+      ],
+      "operation_id": "turn:shared:well-keeper:1:14",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "Still clear, last I looked. No one was cutting ahead today, which is what I watch for.",
+      "contractual": false,
+      "epistemic_status": "speaker_statement_not_verified_world_fact",
+      "seq": 199,
+      "event_id": "life_event_199"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:baker",
+      "subject_id": "shared:well-keeper",
+      "recipient_ids": [
+        "shared:baker",
+        "shared:well-keeper"
+      ],
+      "operation_id": "turn:shared:baker:0:16",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "Ari! How's the water today? Still clear, I hope—I'm always glad when the well's doing well.",
+      "contractual": false,
+      "epistemic_status": "speaker_statement_not_verified_world_fact",
+      "seq": 200,
+      "event_id": "life_event_200"
+    },
+    {
+      "type": "surroundings_observed",
+      "actor_id": "shared:well-keeper",
+      "subject_id": "shared:well-keeper",
+      "recipient_ids": [
+        "shared:well-keeper"
+      ],
+      "operation_id": "turn:shared:well-keeper:1:15",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "I paused to observe my current surroundings.",
+      "contractual": false,
+      "observed": {
+        "position": [
+          5.634607791900635,
+          0.0008196444832719862,
+          51.78282165527344
+        ],
+        "needs": {
+          "hunger": 77
+        },
+        "nearby_residents": [
+          {
+            "id": "shared:baker",
+            "name": "Wren"
+          },
+          {
+            "id": "shared:gardener",
+            "name": "Fern"
+          }
+        ],
+        "known_places": [
+          "caravan_rest",
+          "market_plaza",
+          "planted_commons",
+          "west_forecourt"
+        ]
+      },
+      "private_observation": true,
+      "seq": 201,
+      "event_id": "life_event_201"
+    },
+    {
+      "type": "place_visited",
+      "actor_id": "shared:weaver",
+      "subject_id": "shared:weaver",
+      "recipient_ids": [
+        "shared:weaver"
+      ],
+      "operation_id": "turn:shared:weaver:0:28",
+      "source": "opengameagent_live",
+      "place_id": "west_forecourt",
+      "target_position": [
+        -18.399999618530273,
+        0.10000000149011612,
+        41.20000076293945
+      ],
+      "text": "I followed the route I know and arrived at Western Artisans' Forecourt.",
+      "seq": 202,
+      "event_id": "life_event_202"
+    },
+    {
+      "type": "place_visited",
+      "actor_id": "shared:smith",
+      "subject_id": "shared:smith",
+      "recipient_ids": [
+        "shared:smith"
+      ],
+      "operation_id": "turn:shared:smith:0:22",
+      "source": "opengameagent_live",
+      "place_id": "west_forecourt",
+      "target_position": [
+        -19.600000381469727,
+        0.10000000149011612,
+        38.79999923706055
+      ],
+      "text": "I followed the route I know and arrived at Western Artisans' Forecourt.",
+      "seq": 203,
+      "event_id": "life_event_203"
+    },
+    {
+      "event_id": "life_event_204",
+      "seq": 204,
+      "type": "harvest_ration",
+      "actor_id": "shared:innkeeper",
+      "subject_id": "shared:innkeeper",
+      "recipient_ids": [
+        "shared:innkeeper"
+      ],
+      "operation_id": "turn:shared:innkeeper:1:21",
+      "source": "opengameagent_live",
+      "text": "Mara: harvest_ration (Godot continuation, opengameagent_live)"
+    },
+    {
+      "type": "material_source_observed",
+      "actor_id": "shared:weaver",
+      "recipient_ids": [
+        "shared:weaver"
+      ],
+      "operation_id": "material-observation:shared:weaver:street:iron-salvage-20260918:205",
+      "source": "host_line_of_sight_observation",
+      "source_id": "street:iron-salvage-20260918",
+      "stock": 2,
+      "text": "Street salvage iron heap: public iron material, 2 units observed; sorting for 60 seconds yields 1 unit if stock remains on arrival.",
+      "seq": 205,
+      "event_id": "life_event_205"
+    },
+    {
+      "type": "place_visited",
+      "actor_id": "shared:smith",
+      "subject_id": "shared:smith",
+      "recipient_ids": [
+        "shared:smith"
+      ],
+      "operation_id": "turn:shared:smith:0:23",
+      "source": "opengameagent_live",
+      "place_id": "market_plaza",
+      "target_position": [
+        3.700000047683716,
+        0.2199999988079071,
+        13.300000190734863
+      ],
+      "text": "I followed the route I know and arrived at Old Market Plaza.",
+      "seq": 206,
+      "event_id": "life_event_206"
+    },
+    {
+      "event_id": "life_event_207",
+      "seq": 207,
+      "type": "eat_ration",
+      "actor_id": "shared:innkeeper",
+      "subject_id": "shared:innkeeper",
+      "recipient_ids": [
+        "shared:innkeeper"
+      ],
+      "operation_id": "turn:shared:innkeeper:1:22",
+      "source": "opengameagent_live",
+      "text": "Mara: eat_ration (Godot continuation, opengameagent_live)"
+    },
+    {
+      "type": "material_recovered",
+      "actor_id": "shared:weaver",
+      "recipient_ids": [
+        "shared:weaver"
+      ],
+      "operation_id": "turn:shared:weaver:0:29",
+      "source": "opengameagent_live",
+      "source_id": "street:iron-salvage-20260918",
+      "material": "iron",
+      "quantity": 1,
+      "text": "Sorting finished; collected 1 unit of material.",
+      "seq": 208,
+      "event_id": "life_event_208"
+    },
+    {
+      "type": "material_source_observed",
+      "actor_id": "shared:weaver",
+      "recipient_ids": [
+        "shared:weaver"
+      ],
+      "operation_id": "material-observation:shared:weaver:street:iron-salvage-20260918:209",
+      "source": "host_line_of_sight_observation",
+      "source_id": "street:iron-salvage-20260918",
+      "stock": 1,
+      "text": "Street salvage iron heap: public iron material, 1 units observed; sorting for 60 seconds yields 1 unit if stock remains on arrival.",
+      "seq": 209,
+      "event_id": "life_event_209"
+    }
+  ],
+  "limitation": "No decisions or speech are inferred from a personality profile. A pending provider request has no known decision."
+}
