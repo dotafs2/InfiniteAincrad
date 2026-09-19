@@ -26,6 +26,7 @@ const PlaceNotice = preload("res://spatial/town_place_notice.gd")
 const MaterialNotice = preload("res://spatial/town_material_notice.gd")
 const PlaceSteering = preload("res://spatial/town_place_steering.gd")
 const TownNavigation = preload("res://spatial/town_navigation.gd")
+const LifePresentation = preload("res://spatial/town_life_presentation.gd")
 const BREAD_SCENE_PATH := "res://assets/overnight20260918/bread_loaf.tscn"
 const DIALOGUE_IDLE_HINT := "Approach a resident and press H to type what you want to say."
 const RESTORE_DIALOGUE_IDLE_HINT := "Read-only visit. Start live AI life to talk with residents."
@@ -51,6 +52,7 @@ var dialogue_scroll: ScrollContainer
 var life_roster: Label
 var life_feed: Label
 var life_panel: PanelContainer
+var life_presentation := LifePresentation.new()
 var gm_panel: PanelContainer
 var gm_status_header: Label
 var gm_status_label: Label
@@ -1441,15 +1443,26 @@ func _refresh_life_window(snap: Dictionary) -> void:
 		return
 	var roster_lines: Array[String] = []
 	var resident_turns: Dictionary = snap.godot.get("resident_turns", {})
-	for id in town.active_ids():
+	var active_ids: Array = town.active_ids()
+	var resident_names := {}
+	for id in active_ids:
+		resident_names[id] = str(town.resident_name(id))
+	var events: Array = snap.life.get("events", [])
+	for id in active_ids:
 		var job: Dictionary = town.pending_job(id)
 		var activity := "Idle" if job.is_empty() else _action_label(str(job.get("action", "")))
 		var moving := false
 		var body: CharacterBody3D = bodies.get(id)
 		if is_instance_valid(body):
 			moving = Vector2(body.velocity.x, body.velocity.z).length() > 0.05
-		if moving:
+		var self_repair_activity: String = life_presentation.self_repair_activity(job, moving)
+		if not self_repair_activity.is_empty():
+			activity = self_repair_activity
+		elif moving:
 			activity += " - Walking"
+		if job.is_empty():
+			for event_note in life_presentation.resident_event_notes(events, str(id), resident_names):
+				activity += " - " + str(event_note)
 		var turn_note := ""
 		if gateway_mode or restore_only:
 			var turn: Variant = resident_turns.get(id, {})
@@ -1462,7 +1475,7 @@ func _refresh_life_window(snap: Dictionary) -> void:
 	life_roster.text = "\n".join(roster_lines)
 
 	var feed_lines: Array[String] = []
-	var events: Array = snap.life.get("events", [])
+	var ordinary_lines := 0
 	for offset in range(1, mini(events.size(), 24) + 1):
 		var event: Variant = events[events.size() - offset]
 		if not event is Dictionary:
@@ -1470,20 +1483,21 @@ func _refresh_life_window(snap: Dictionary) -> void:
 		var row: Dictionary = event
 		var kind := str(row.get("type", ""))
 		var actor_id := str(row.get("actor_id", ""))
-		var actor_name := actor_id
-		if actor_id in town.active_ids():
-			actor_name = str(town.resident_name(actor_id))
+		var actor_name := str(resident_names.get(actor_id, actor_id))
 		var words: String = town.English.text(str(row.get("speech", row.get("text", "")))).strip_edges().replace("\n", " ")
 		var is_new := int(row.get("seq", -1)) > session_start_life_seq
 		var source := ("Current AI" if is_new else "Past AI") if row.get("source", "") == "opengameagent_live" else ("Current world" if is_new else "Past world")
-		if not words.is_empty():
+		var explicit_line: String = life_presentation.event_feed_line(row, source, resident_names)
+		if not explicit_line.is_empty():
+			feed_lines.push_front(explicit_line)
+		elif ordinary_lines < 5 and not words.is_empty():
 			if words.length() > 72:
 				words = words.left(72) + "…"
 			feed_lines.push_front("[%s - #%d] %s: %s" % [source, int(row.get("seq", -1)), actor_name, words])
-		elif kind in ["eat_ration", "harvest_ration", "rest", "bread_baked", "bread_eaten", "repair_completed", "resident_moved", "place_visited"]:
+			ordinary_lines += 1
+		elif ordinary_lines < 5 and kind in ["eat_ration", "harvest_ration", "rest", "bread_baked", "bread_eaten", "repair_completed", "resident_moved", "place_visited"]:
 			feed_lines.push_front("[%s · #%d] %s · %s" % [source, int(row.get("seq", -1)), actor_name, _action_label(kind)])
-		if feed_lines.size() >= 5:
-			break
+			ordinary_lines += 1
 	life_feed.text = "\n\n".join(feed_lines) if not feed_lines.is_empty() else "No public events to display yet."
 
 func _action_label(action: String) -> String:
