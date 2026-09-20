@@ -1,5 +1,11 @@
 # 历史全部流水
 
+## 2026-09-20 · H126 Live route remains blocked after bounded capture
+
+A bounded twelve-call window advanced `shared:restart-20260918-01` from seq250 to seq263. All 12 calls settled for CNY 0.250603 with no unknown charge. The internal scene capture ran for 600 seconds, resolved its shutdown and drained the gateway; the outer validation wrapper then timed out while closing and was terminated with exit 124, so this is not reported as a clean end-to-end validation pass.
+
+The canonical save is now seq263. Carpenter is still 0.715 m from the exhausted iron source with only 5.6833/60 work seconds on the existing `turn:shared:carpenter:0:31` command. No material depletion receipt, transfer, edge-repair contract or repair completion occurred. The H125 fixture route remains proven, but the real scene path still needs a non-paid diagnosis. The eight known Forward+ `particles is null` errors and navigation edge warning remain separate evidence. [Evidence](docs/validation/material-live-2026-09-20.md)
+
 ## 2026-09-20 · H125 Material trip approach-point fix
 
 The H124 checkpoint left Carpenter 0.86 m from the finite source with only 3.6167/60 work seconds recorded. Code inspection narrowed the stall to a mismatch between the physical capsule sweep and the world's accepted 0.45 m work radius: the steering helper asked the body to occupy the exact source center, so a final terrain or display collision could leave a reachable trip stationary.
