@@ -23,12 +23,15 @@ waypoint arrival is evaluated in XZ; the last leg uses the world's existing
 python -X utf8 tools/run_godot.py --godot `"D:/lucidgloves/InfiniteAincrad/tmp/toolchain/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64_console.exe`" --name formal-graph-resident-route --timeout 90 --out private/iteration-20260919/formal-graph-resident-route -- --headless --script res://tests/town_graph_resident_route_acceptance.gd
 ```
 
-Last runtime result: `23` checks, `0` failures. The disposable formal resident
-reached all 10 authored home regions. After adding stable target IDs, the
-acceptance now has 33 checks (10 additional binding assertions) but has not
-been rerun because the Godot 4.7 runtime is unavailable in the current local
-checkout. The full-map graph fixture's last runtime result remains 189 regions,
-193 connectors, 762 representative executions and 15,217 checks.
+Runtime result after the stable target-ID change: `33` checks, `0` failures.
+The disposable formal resident reached all 10 authored home regions and all 10
+stable `home:<resident>` bindings remained exact. The full-map graph fixture
+also passes with 189 regions, 193 connectors, 762 representative executions and
+15,217 checks.
+
+The first playable street smoke now passes `24` checks with two fixture
+residents, including a mid-walk save and fresh-scene resume. It records about
+72.6 m and 77.2 m walked at the configured 1.35 m/s, with no paid calls.
 
 This is the first-stage route integration only. It deliberately does not claim
 physical collision correctness or dynamic obstacle handling. A Godot 4.7 scene
