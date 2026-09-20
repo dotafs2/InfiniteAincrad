@@ -146,3 +146,7 @@ Carpenter Rowan 的既有 `turn:shared:carpenter:0:31` 采集任务在已验证�
 Rowan（Carpenter）真实选择了 `contract:offer:seed:axe:edge:shared:smith:2`，理由是斧刃为 20、自己有 8 Col，并明确提出 Flint 以 2 Col、收取时付款来修理边缘。权威世界记录了 `contract_proposed`，但尚未接受，因此没有托管金币、铁材消耗、60 秒实体工作或收款。
 
 本轮还修复了 `town_material_steering.gd` 中重复声明 `ARRIVAL_RADIUS` 导致完整场景无法解析的问题；材料回归 60/0，完整场景冷启动退出 0。已知 4 条导航边缘警告和一个 Forward+ 粒子空引用仍保留。
+
+# 离线合同生命周期核对（H134，2026-09-20）
+
+未调用居民模型，也没有写入正式存档。现有 `town_trade` 夹具完成了从提案、接受与 Col 托管，到实体交付、工作点 60 秒修理、消耗 1 铁、斧刃恢复到 100，再到取回时一次性付款的完整路径；63 项检查全部通过。它证明 Rowan 的真实提案在 Flint 接受后有完整权威执行路径，但不代表 Flint 已在正式世界接受。
