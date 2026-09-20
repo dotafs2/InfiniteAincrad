@@ -1,0 +1,78 @@
+{
+  "kind": "offline_contract_affordance_probe",
+  "world_id": "shared:restart-20260918-01",
+  "canonical_seq": 265,
+  "canonical_sha256": "acac3ad539d3ee0f0d18bc05373e5b7c002e7fedb1a5a2469f71660a76415775",
+  "model_calls": 0,
+  "paid_calls": 0,
+  "provider_started": false,
+  "canonical_world_changed": false,
+  "question": "After Smith replied willing, can Rowan lawfully propose and Flint accept an edge-repair contract on the current save copy?",
+  "current_options": {
+    "resident": "shared:carpenter",
+    "offer_count": 3,
+    "prices": [
+      2,
+      5,
+      8
+    ],
+    "worker": "shared:smith",
+    "smith_iron": 1,
+    "carpenter_coins": 8,
+    "axe_edge": 20
+  },
+  "scripted_copy": {
+    "offer_result": {
+      "code": "contract_proposed",
+      "ok": true
+    },
+    "contract_after_offer": {
+      "id": "trade_contract_h132-offer",
+      "item_id": "seed:axe",
+      "owner_id": "shared:carpenter",
+      "part": "edge",
+      "price_col": 2,
+      "reserved_col": 0,
+      "status": "proposed",
+      "worker_id": "shared:smith"
+    },
+    "smith_accept_count": 1,
+    "accept_result": {
+      "code": "contract_accepted",
+      "ok": true
+    },
+    "contract_after_accept": {
+      "id": "trade_contract_h132-offer",
+      "item_id": "seed:axe",
+      "owner_id": "shared:carpenter",
+      "part": "edge",
+      "price_col": 2,
+      "reserved_col": 2,
+      "status": "accepted",
+      "worker_id": "shared:smith"
+    },
+    "material_consumed": false,
+    "canonical_unchanged_sha256": "acac3ad539d3ee0f0d18bc05373e5b7c002e7fedb1a5a2469f71660a76415775"
+  },
+  "checks": {
+    "three_price_options": true,
+    "offer_is_authoritative": true,
+    "accept_is_authoritative": true,
+    "escrow_reserved": true,
+    "smith_iron_preserved": true,
+    "no_canonical_write": true
+  },
+  "limitations": [
+    "This is a scripted disposable-copy probe, not model adoption.",
+    "Delivery, physical work and collection were not started.",
+    "No provider or GM call occurred."
+  ],
+  "created_utc": "2026-09-20T12:55:09.787500+00:00",
+  "offline_regression": {
+    "suite": "town_contract_affordance",
+    "checks": 98,
+    "failures": 0,
+    "paid_calls": 0,
+    "exit_code": 0
+  }
+}
