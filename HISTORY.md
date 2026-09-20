@@ -1,5 +1,13 @@
 # 历史全部流水
 
+## 2026-09-20 · H123 Depletion feedback becomes live work dialogue
+
+A bounded nine-call resident window advanced `shared:restart-20260918-01` from seq229 to seq238. All calls settled for CNY 0.1833087; the gateway drained, the checkpoint contains ten residents and 205 archived attempts, and no new provider result or charge is unknown.
+
+Smith's next real decision after his authoritative `material_depleted` receipt was a direct conversation with Carpenter at the artisans' forecourt. He explained that he repairs metal edges and asked whether Carpenter had tools needing an edge or knew someone who did. This is a delivered, non-contractual resident statement: no material transfer, fresh edge-repair contract or repair completion followed. The finite iron source remains initial3/recovered3/stock0, with Weaver holding two iron and Smith one; Carpenter's axe remains edge20/handle100.
+
+The run produced one known Forward+ `particles is null` renderer error and the existing four-edge navigation merge warning. Those diagnostics remain separate from the successful life event. The next question is whether Carpenter voluntarily responds and forms a new contract; the exhausted source must not be retried. [Evidence](docs/validation/material-handoff-2026-09-20.md).
+
 ## 2026-09-19 · H122 Finite iron depletion and handoff pivot
 
 A bounded twelve-call resident window advanced the active lineage `shared:restart-20260918-01` from seq209 to seq229. Every call settled for CNY 0.2425896; the gateway drained, the checkpoint contains all ten residents and 196 archived attempts, and no new provider result or charge is unknown.
