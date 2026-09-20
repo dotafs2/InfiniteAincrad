@@ -1,0 +1,886 @@
+{
+  "schema_version": 1,
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 229,
+  "end_seq": 238,
+  "elapsed_seconds": 9349.08333333166,
+  "decision_count": 9,
+  "residents": [
+    {
+      "resident_id": "shared:well-keeper",
+      "name": "Ari",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:baker",
+      "name": "Wren",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:smith",
+      "name": "Flint",
+      "decisions": [
+        {
+          "request_id": "turn:shared:smith:0:27",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a23",
+            "reason": "I'm at the Western Artisans' Forecourt with Rowan nearby. I need work to sustain myself, and Rowan is a carpenter who may need metal edge repairs or know who does. I'll speak plainly to see if there's business to discuss.",
+            "speech": "Rowan. You repair wood, I repair metal edges. If you've got tools needing an edge, or know someone who does, I'm listening."
+          },
+          "resolved_action": "ability:talk:shared:carpenter",
+          "stated_reason": "I'm at the Western Artisans' Forecourt with Rowan nearby. I need work to sustain myself, and Rowan is a carpenter who may need metal edge repairs or know who does. I'll speak plainly to see if there's business to discuss.",
+          "proposed_speech": "Rowan. You repair wood, I repair metal edges. If you've got tools needing an edge, or know someone who does, I'm listening.",
+          "actually_spoken": "Rowan. You repair wood, I repair metal edges. If you've got tools needing an edge, or know someone who does, I'm listening.",
+          "speech_event_seq": 230,
+          "recipients": [
+            "shared:smith",
+            "shared:carpenter"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "resident_said",
+            "effect": {
+              "ok": true,
+              "code": "resident_said",
+              "event_id": "life_event_230"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "Rowan. You repair wood, I repair metal edges. If you've got tools needing an edge, or know someone who does, I'm listening.",
+              "event_id": "life_event_230",
+              "event_seq": 230,
+              "recipient_ids": [
+                "shared:smith",
+                "shared:carpenter"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "resident_said",
+              "actor_id": "shared:smith",
+              "subject_id": "shared:carpenter",
+              "recipient_ids": [
+                "shared:smith",
+                "shared:carpenter"
+              ],
+              "operation_id": "turn:shared:smith:0:27",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "Rowan. You repair wood, I repair metal edges. If you've got tools needing an edge, or know someone who does, I'm listening.",
+              "contractual": false,
+              "epistemic_status": "speaker_statement_not_verified_world_fact",
+              "seq": 230,
+              "event_id": "life_event_230"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:carpenter",
+      "name": "Rowan",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {
+          "action": "recover_material",
+          "command_id": "turn:shared:carpenter:0:31",
+          "source_id": "street:iron-salvage-20260918",
+          "provenance": "opengameagent_live",
+          "elapsed": 2.0666666666666664,
+          "duration_seconds": 60
+        },
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:innkeeper",
+      "name": "Mara",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:herder",
+      "name": "Heath",
+      "decisions": [
+        {
+          "request_id": "turn:shared:herder:0:14",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a20",
+            "reason": "Reed the fisher just spoke to me, and I want to respond. Their question about stopping and watching feels like an opening to learn from someone who observes for a living.",
+            "speech": "Reed. I stop often, but I don't always know what I'm seeing. You watch the water. Do you think it's patience, or just... learning the pattern?"
+          },
+          "resolved_action": "ability:talk:shared:fisher",
+          "stated_reason": "Reed the fisher just spoke to me, and I want to respond. Their question about stopping and watching feels like an opening to learn from someone who observes for a living.",
+          "proposed_speech": "Reed. I stop often, but I don't always know what I'm seeing. You watch the water. Do you think it's patience, or just... learning the pattern?",
+          "actually_spoken": "Reed. I stop often, but I don't always know what I'm seeing. You watch the water. Do you think it's patience, or just... learning the pattern?",
+          "speech_event_seq": 232,
+          "recipients": [
+            "shared:herder",
+            "shared:fisher"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "resident_said",
+            "effect": {
+              "ok": true,
+              "code": "resident_said",
+              "event_id": "life_event_232"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "Reed. I stop often, but I don't always know what I'm seeing. You watch the water. Do you think it's patience, or just... learning the pattern?",
+              "event_id": "life_event_232",
+              "event_seq": 232,
+              "recipient_ids": [
+                "shared:herder",
+                "shared:fisher"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "resident_said",
+              "actor_id": "shared:herder",
+              "subject_id": "shared:fisher",
+              "recipient_ids": [
+                "shared:herder",
+                "shared:fisher"
+              ],
+              "operation_id": "turn:shared:herder:0:14",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "Reed. I stop often, but I don't always know what I'm seeing. You watch the water. Do you think it's patience, or just... learning the pattern?",
+              "contractual": false,
+              "epistemic_status": "speaker_statement_not_verified_world_fact",
+              "seq": 232,
+              "event_id": "life_event_232"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:gardener",
+      "name": "Fern",
+      "decisions": [
+        {
+          "request_id": "turn:shared:gardener:0:12",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "Satiety is at 28, below half, and I have 1 ration available. Eating now prevents it from dropping to urgent levels while I consider next steps."
+          },
+          "resolved_action": "life:eat_ration",
+          "stated_reason": "Satiety is at 28, below half, and I have 1 ration available. Eating now prevents it from dropping to urgent levels while I consider next steps.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_233",
+              "seq": 233,
+              "type": "eat_ration",
+              "actor_id": "shared:gardener",
+              "subject_id": "shared:gardener",
+              "recipient_ids": [
+                "shared:gardener"
+              ],
+              "operation_id": "turn:shared:gardener:0:12",
+              "source": "opengameagent_live",
+              "text": "Fern: eat_ration (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:gardener:0:13",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "Energy is at 22, which is low but not zero, and satiety is at 67. However, I have no food left (food: 0) and cannot harvest_ration without energy or guaranteed stock. Rest will recover energy so I can pursue foraging or other needs later."
+          },
+          "resolved_action": "life:rest",
+          "stated_reason": "Energy is at 22, which is low but not zero, and satiety is at 67. However, I have no food left (food: 0) and cannot harvest_ration without energy or guaranteed stock. Rest will recover energy so I can pursue foraging or other needs later.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_235",
+              "seq": 235,
+              "type": "rest",
+              "actor_id": "shared:gardener",
+              "subject_id": "shared:gardener",
+              "recipient_ids": [
+                "shared:gardener"
+              ],
+              "operation_id": "turn:shared:gardener:0:13",
+              "source": "opengameagent_live",
+              "text": "Fern: rest (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:gardener:0:14",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a13",
+            "reason": "Energy is 57 and satiety is 67, so no urgent survival need requires immediate remedy. I have no food to eat and no pressing reason to rest. Observing my surroundings privately lets me continue my habit of noticing small changes in visible plants, which serves my long-term goal of learning cultivation through careful observation."
+          },
+          "resolved_action": "ability:observe",
+          "stated_reason": "Energy is 57 and satiety is 67, so no urgent survival need requires immediate remedy. I have no food to eat and no pressing reason to rest. Observing my surroundings privately lets me continue my habit of noticing small changes in visible plants, which serves my long-term goal of learning cultivation through careful observation.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "surroundings_observed",
+            "effect": {
+              "ok": true,
+              "code": "surroundings_observed",
+              "event_id": "life_event_236",
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "private_observation"
+              }
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "private_observation"
+            }
+          },
+          "later_events": [
+            {
+              "type": "surroundings_observed",
+              "actor_id": "shared:gardener",
+              "subject_id": "shared:gardener",
+              "recipient_ids": [
+                "shared:gardener"
+              ],
+              "operation_id": "turn:shared:gardener:0:14",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "I paused to observe my current surroundings.",
+              "contractual": false,
+              "observed": {
+                "position": [
+                  -13.49186897277832,
+                  0.0009352118358947337,
+                  62.71385192871094
+                ],
+                "needs": {
+                  "hunger": 67
+                },
+                "nearby_residents": [],
+                "known_places": [
+                  "planted_commons"
+                ]
+              },
+              "private_observation": true,
+              "seq": 236,
+              "event_id": "life_event_236"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:weaver",
+      "name": "Iris",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:fisher",
+      "name": "Reed",
+      "decisions": [
+        {
+          "request_id": "turn:shared:fisher:0:14",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a20",
+            "reason": "Energy at 57 and satiety at 67 are manageable but slipping. I noticed Heath the herder nearby and haven't spoken with him yet. Curious what he knows about making a living without chasing every competition.",
+            "speech": "Hey Heath. You ever tried just... stopping? Watching the water, letting the day go where it wants? I'm wondering if there's a living in that, or if I'm dreaming."
+          },
+          "resolved_action": "ability:talk:shared:herder",
+          "stated_reason": "Energy at 57 and satiety at 67 are manageable but slipping. I noticed Heath the herder nearby and haven't spoken with him yet. Curious what he knows about making a living without chasing every competition.",
+          "proposed_speech": "Hey Heath. You ever tried just... stopping? Watching the water, letting the day go where it wants? I'm wondering if there's a living in that, or if I'm dreaming.",
+          "actually_spoken": "Hey Heath. You ever tried just... stopping? Watching the water, letting the day go where it wants? I'm wondering if there's a living in that, or if I'm dreaming.",
+          "speech_event_seq": 231,
+          "recipients": [
+            "shared:fisher",
+            "shared:herder"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "resident_said",
+            "effect": {
+              "ok": true,
+              "code": "resident_said",
+              "event_id": "life_event_231"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "Hey Heath. You ever tried just... stopping? Watching the water, letting the day go where it wants? I'm wondering if there's a living in that, or if I'm dreaming.",
+              "event_id": "life_event_231",
+              "event_seq": 231,
+              "recipient_ids": [
+                "shared:fisher",
+                "shared:herder"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "resident_said",
+              "actor_id": "shared:fisher",
+              "subject_id": "shared:herder",
+              "recipient_ids": [
+                "shared:fisher",
+                "shared:herder"
+              ],
+              "operation_id": "turn:shared:fisher:0:14",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "Hey Heath. You ever tried just... stopping? Watching the water, letting the day go where it wants? I'm wondering if there's a living in that, or if I'm dreaming.",
+              "contractual": false,
+              "epistemic_status": "speaker_statement_not_verified_world_fact",
+              "seq": 231,
+              "event_id": "life_event_231"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:fisher:0:15",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "Satiety is 67, which is not urgent, but I have food in inventory and no pressing need to conserve it. Better to stay comfortable while I figure out my next step toward fishing."
+          },
+          "resolved_action": "life:eat_ration",
+          "stated_reason": "Satiety is 67, which is not urgent, but I have food in inventory and no pressing need to conserve it. Better to stay comfortable while I figure out my next step toward fishing.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_234",
+              "seq": 234,
+              "type": "eat_ration",
+              "actor_id": "shared:fisher",
+              "subject_id": "shared:fisher",
+              "recipient_ids": [
+                "shared:fisher"
+              ],
+              "operation_id": "turn:shared:fisher:0:15",
+              "source": "opengameagent_live",
+              "text": "Reed: eat_ration (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:fisher:0:16",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "Energy is at 57, which is manageable but not ideal. I have no food left, so I cannot eat. Resting is the best way to recover stamina when supplies are low and no urgent hunger threatens."
+          },
+          "resolved_action": "life:rest",
+          "stated_reason": "Energy is at 57, which is manageable but not ideal. I have no food left, so I cannot eat. Resting is the best way to recover stamina when supplies are low and no urgent hunger threatens.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_237",
+              "seq": 237,
+              "type": "rest",
+              "actor_id": "shared:fisher",
+              "subject_id": "shared:fisher",
+              "recipient_ids": [
+                "shared:fisher"
+              ],
+              "operation_id": "turn:shared:fisher:0:16",
+              "source": "opengameagent_live",
+              "text": "Reed: rest (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:fisher:0:17",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a12",
+            "reason": "I'm at 91 energy and 99 satiety—comfortable for now. I want to look around, see what's near the water, and figure out if there's any fishable spot or someone with gear I might learn from. No rush, just curious."
+          },
+          "resolved_action": "ability:observe",
+          "stated_reason": "I'm at 91 energy and 99 satiety—comfortable for now. I want to look around, see what's near the water, and figure out if there's any fishable spot or someone with gear I might learn from. No rush, just curious.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "surroundings_observed",
+            "effect": {
+              "ok": true,
+              "code": "surroundings_observed",
+              "event_id": "life_event_238",
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "private_observation"
+              }
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "private_observation"
+            }
+          },
+          "later_events": [
+            {
+              "type": "surroundings_observed",
+              "actor_id": "shared:fisher",
+              "subject_id": "shared:fisher",
+              "recipient_ids": [
+                "shared:fisher"
+              ],
+              "operation_id": "turn:shared:fisher:0:17",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "I paused to observe my current surroundings.",
+              "contractual": false,
+              "observed": {
+                "position": [
+                  33.62025833129883,
+                  0.0009353028144687414,
+                  52.77687454223633
+                ],
+                "needs": {
+                  "hunger": 99
+                },
+                "nearby_residents": [],
+                "known_places": [
+                  "planted_commons"
+                ]
+              },
+              "private_observation": true,
+              "seq": 238,
+              "event_id": "life_event_238"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:healer",
+      "name": "Sage",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    }
+  ],
+  "new_world_events": [
+    {
+      "type": "resident_said",
+      "actor_id": "shared:smith",
+      "subject_id": "shared:carpenter",
+      "recipient_ids": [
+        "shared:smith",
+        "shared:carpenter"
+      ],
+      "operation_id": "turn:shared:smith:0:27",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "Rowan. You repair wood, I repair metal edges. If you've got tools needing an edge, or know someone who does, I'm listening.",
+      "contractual": false,
+      "epistemic_status": "speaker_statement_not_verified_world_fact",
+      "seq": 230,
+      "event_id": "life_event_230"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:fisher",
+      "subject_id": "shared:herder",
+      "recipient_ids": [
+        "shared:fisher",
+        "shared:herder"
+      ],
+      "operation_id": "turn:shared:fisher:0:14",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "Hey Heath. You ever tried just... stopping? Watching the water, letting the day go where it wants? I'm wondering if there's a living in that, or if I'm dreaming.",
+      "contractual": false,
+      "epistemic_status": "speaker_statement_not_verified_world_fact",
+      "seq": 231,
+      "event_id": "life_event_231"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:herder",
+      "subject_id": "shared:fisher",
+      "recipient_ids": [
+        "shared:herder",
+        "shared:fisher"
+      ],
+      "operation_id": "turn:shared:herder:0:14",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "Reed. I stop often, but I don't always know what I'm seeing. You watch the water. Do you think it's patience, or just... learning the pattern?",
+      "contractual": false,
+      "epistemic_status": "speaker_statement_not_verified_world_fact",
+      "seq": 232,
+      "event_id": "life_event_232"
+    },
+    {
+      "event_id": "life_event_233",
+      "seq": 233,
+      "type": "eat_ration",
+      "actor_id": "shared:gardener",
+      "subject_id": "shared:gardener",
+      "recipient_ids": [
+        "shared:gardener"
+      ],
+      "operation_id": "turn:shared:gardener:0:12",
+      "source": "opengameagent_live",
+      "text": "Fern: eat_ration (Godot continuation, opengameagent_live)"
+    },
+    {
+      "event_id": "life_event_234",
+      "seq": 234,
+      "type": "eat_ration",
+      "actor_id": "shared:fisher",
+      "subject_id": "shared:fisher",
+      "recipient_ids": [
+        "shared:fisher"
+      ],
+      "operation_id": "turn:shared:fisher:0:15",
+      "source": "opengameagent_live",
+      "text": "Reed: eat_ration (Godot continuation, opengameagent_live)"
+    },
+    {
+      "event_id": "life_event_235",
+      "seq": 235,
+      "type": "rest",
+      "actor_id": "shared:gardener",
+      "subject_id": "shared:gardener",
+      "recipient_ids": [
+        "shared:gardener"
+      ],
+      "operation_id": "turn:shared:gardener:0:13",
+      "source": "opengameagent_live",
+      "text": "Fern: rest (Godot continuation, opengameagent_live)"
+    },
+    {
+      "type": "surroundings_observed",
+      "actor_id": "shared:gardener",
+      "subject_id": "shared:gardener",
+      "recipient_ids": [
+        "shared:gardener"
+      ],
+      "operation_id": "turn:shared:gardener:0:14",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "I paused to observe my current surroundings.",
+      "contractual": false,
+      "observed": {
+        "position": [
+          -13.49186897277832,
+          0.0009352118358947337,
+          62.71385192871094
+        ],
+        "needs": {
+          "hunger": 67
+        },
+        "nearby_residents": [],
+        "known_places": [
+          "planted_commons"
+        ]
+      },
+      "private_observation": true,
+      "seq": 236,
+      "event_id": "life_event_236"
+    },
+    {
+      "event_id": "life_event_237",
+      "seq": 237,
+      "type": "rest",
+      "actor_id": "shared:fisher",
+      "subject_id": "shared:fisher",
+      "recipient_ids": [
+        "shared:fisher"
+      ],
+      "operation_id": "turn:shared:fisher:0:16",
+      "source": "opengameagent_live",
+      "text": "Reed: rest (Godot continuation, opengameagent_live)"
+    },
+    {
+      "type": "surroundings_observed",
+      "actor_id": "shared:fisher",
+      "subject_id": "shared:fisher",
+      "recipient_ids": [
+        "shared:fisher"
+      ],
+      "operation_id": "turn:shared:fisher:0:17",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "I paused to observe my current surroundings.",
+      "contractual": false,
+      "observed": {
+        "position": [
+          33.62025833129883,
+          0.0009353028144687414,
+          52.77687454223633
+        ],
+        "needs": {
+          "hunger": 99
+        },
+        "nearby_residents": [],
+        "known_places": [
+          "planted_commons"
+        ]
+      },
+      "private_observation": true,
+      "seq": 238,
+      "event_id": "life_event_238"
+    }
+  ],
+  "limitation": "No decisions or speech are inferred from a personality profile. A pending provider request has no known decision."
+}
