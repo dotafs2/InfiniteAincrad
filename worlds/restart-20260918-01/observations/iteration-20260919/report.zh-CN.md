@@ -130,3 +130,10 @@ Carpenter Rowan 的既有 `turn:shared:carpenter:0:31` 采集任务在已验证�
 探针先确认 Flint（Smith）持有 1 单位铁、Rowan（Carpenter）在 0.53 米内，`material:share` 选项可用。真实模型本轮选择回复 Rowan 之前的协作请求（`turn:shared:smith:0:28`），理由是愿意先把合作条款说清楚；这是一条真实对话进展，但仍没有选择材料转交，因此没有新增铁转移、维修契约或斧刃修理。
 
 本轮冷恢复输出 `WORLD_CHECKPOINT_RESTORE_OK residents=10 seq=265 exact_fields=true`；已知导航边缘警告仍存在，本轮没有修改资产或重试任何旧请求。
+
+
+# 非付费契约验证（seq265，2026-09-20）
+
+在正式存档的只读副本上，Rowan 当前有 8 Col、斧刃耐久 20，Flint 在可交易距离内且持有 1 铁。世界列出 2、5、8 Col 三个边缘修理报价；用脚本副本选择 2 Col 后，权威路径生成提案，再由 Flint 接受并准确冻结 2 Col，铁没有被提前消耗。正式存档哈希保持不变。
+
+这是规则与托管验证，不是居民自主采用；还需要真实居民回合提出/接受、交付斧头、60 秒实体工作和收取报酬。
