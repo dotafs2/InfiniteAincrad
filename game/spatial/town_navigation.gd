@@ -30,6 +30,11 @@ var bake_cell_size := 0.10
 var bake_cell_height := 0.01
 var bake_max_climb := 0.04
 var dynamic_detours := false
+## First-stage PCG routing mode. When enabled, the loaded-world graph owns the
+## long route and the resident loop may ignore physics/collision resolution.
+## It is opt-in so the older navmesh path remains available for legacy worlds.
+var graph_only_routes := false
+const GRAPH_WAYPOINT_RADIUS := 0.20
 var crowd_detour_count := 0
 var crowd_detour_attempts := 0
 var door_portals: Array = []
@@ -42,6 +47,7 @@ var path_updates := 0
 var global_route_graph = TownRouteGraph.new()
 var route_regions_by_resident: Dictionary = {}
 var route_graph_build_report: Dictionary = {}
+var graph_routes: Dictionary = {}
 
 
 func register_route_region(region_id: String, world_position: Vector3 = Vector3.ZERO) -> bool:
@@ -315,6 +321,7 @@ func _mark_unreachable(id: String, route: Dictionary) -> Vector3:
 
 func clear_route(id: String) -> void:
 	routes.erase(id)
+	graph_routes.erase(id)
 	safe_velocities.erase(id)
 	safe_velocity_ready.erase(id)
 	var agent: NavigationAgent3D = agents.get(id)
@@ -328,11 +335,93 @@ func is_unreachable(id: String) -> bool:
 	return str(routes.get(id, {}).get("status", "")) == "unreachable"
 
 func route_status(id: String) -> String:
+	if graph_routes.has(id):
+		return str(graph_routes[id].get("status", "inactive"))
 	return str(routes.get(id, {}).get("status", "inactive"))
 
 func route_path(id: String) -> PackedVector3Array:
 	var value: Variant = routes.get(id, {}).get("path", PackedVector3Array())
 	return value if value is PackedVector3Array else PackedVector3Array()
+
+
+func graph_route_is_unreachable(id: String) -> bool:
+	return str(graph_routes.get(id, {}).get("status", "")) == "unreachable"
+
+
+func _nearest_graph_region(position: Vector3) -> String:
+	var best_id := ""
+	var best_distance := INF
+	for raw_id in global_route_graph.regions.keys():
+		var region_id := String(raw_id)
+		var point: Vector3 = global_route_graph.regions[region_id].get("position", Vector3.INF)
+		if not point.is_finite(): continue
+		var distance := Vector2(position.x, position.z).distance_to(Vector2(point.x, point.z))
+		if distance < best_distance:
+			best_distance = distance
+			best_id = region_id
+	return best_id
+
+
+func graph_direction_for(id: String, command_id: String, body: CharacterBody3D, target: Vector3) -> Vector3:
+	if not graph_only_routes or not is_instance_valid(body) or global_route_graph.regions.is_empty():
+		return Vector3.ZERO
+	var source_region := _nearest_graph_region(body.global_position)
+	var target_region := _nearest_graph_region(target)
+	if source_region.is_empty() or target_region.is_empty():
+		graph_routes[id] = {"status": "unreachable", "command_id": command_id, "target": target}
+		return Vector3.ZERO
+	var route: Dictionary = graph_routes.get(id, {})
+	# Keep the source region captured when this command starts. Re-selecting the
+	# nearest node every physics tick makes two close PCG samples alternate as the
+	# body crosses their midpoint, which reverses the route. The command/target
+	# pair is the stable identity of this first-stage journey.
+	var route_key := "%s|%s" % [command_id, target_region]
+	if str(route.get("key", "")) != route_key:
+		route = global_route_graph.find_route(source_region, target_region)
+		route["key"] = route_key
+		route["command_id"] = command_id
+		route["target"] = target
+		route["source_region"] = source_region
+		route["target_region"] = target_region
+		route["waypoint_index"] = 0
+		if not bool(route.get("ok", false)):
+			route["status"] = "unreachable"
+			graph_routes[id] = route
+			return Vector3.ZERO
+	# A resident target may move within the same graph region. Keep the final
+	# approach pointed at its current position without rebuilding the long route.
+	route["target"] = target
+	graph_routes[id] = route
+	var region_path: Array = route.get("regions", [])
+	var waypoint_index := int(route.get("waypoint_index", 0))
+	while waypoint_index + 1 < region_path.size():
+		var waypoint_region := String(region_path[waypoint_index + 1])
+		var waypoint: Vector3 = global_route_graph.regions[waypoint_region].get("position", Vector3.INF)
+		var waypoint_distance := Vector2(body.global_position.x, body.global_position.z).distance_to(
+			Vector2(waypoint.x, waypoint.z))
+		if waypoint_distance > GRAPH_WAYPOINT_RADIUS:
+			break
+		waypoint_index += 1
+	route["waypoint_index"] = waypoint_index
+	var final_leg := waypoint_index + 1 >= region_path.size()
+	var next := target
+	if waypoint_index + 1 < region_path.size():
+		var next_region := String(region_path[waypoint_index + 1])
+		next = global_route_graph.regions[next_region].get("position", target)
+	var offset := next - body.global_position
+	if not final_leg:
+		offset.y = 0.0
+	var arrival_radius := 0.45 if final_leg else 0.08
+	if offset.length() <= arrival_radius:
+		offset = target - body.global_position
+		if not final_leg:
+			offset.y = 0.0
+	if offset.length() <= 0.08:
+		route["status"] = "arrived"
+	else:
+		route["status"] = "following"
+	graph_routes[id] = route
+	return offset.normalized() if offset.length() > 0.0 else Vector3.ZERO
 
 func direction_for(id: String, command_id: String, body: CharacterBody3D, target: Vector3) -> Vector3:
 	var agent: NavigationAgent3D = agents.get(id)

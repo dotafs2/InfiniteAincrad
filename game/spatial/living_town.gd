@@ -82,9 +82,10 @@ func _configure_navigation() -> void:
 		var center: Vector3 = quarter.entrances[id]+Vector3.UP*.05
 		town_navigation.door_portals.append({"center":center,"normal":house.global_basis*door.outward})
 	# The PCG road builder and the route graph consume the same authored road points.
-	# This is a static world-snapshot registration; it does not change the existing
-	# collision-aware navmesh movement loop.
+	# Stage one explicitly selects the graph-only resident route contract. It allows
+	# overlap/penetration and owns the long route before physical navigation is added.
 	town_navigation.register_layout_route_graph(quarter.layout, quarter, quarter.houses)
+	town_navigation.graph_only_routes = true
 
 func _work_marker(point: Vector3, title: String) -> void:
 	if quarter == null: super._work_marker(point,title)
