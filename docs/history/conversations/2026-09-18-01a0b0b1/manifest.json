@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "thread_id": "01a0b0b1-a7d8-7903-a762-62d15b7105a9",
+  "exported_at_utc": "2026-09-20T00:21:40.247305+00:00",
+  "source_basename": "rollout-2026-09-18T02-47-08-01a0b0b1-a7d8-7903-a762-62d15b7105a9.jsonl",
+  "source_snapshot_bytes": 67332351,
+  "source_snapshot_sha256": "2b4741988e4fba64ca53b233003fee44d788f2cb29892323098aed06616843a6",
+  "first_message_at": "2026-09-17T18:47:11.426Z",
+  "last_message_at": "2026-09-20T00:21:00.137Z",
+  "message_count": 213,
+  "role_counts": {
+    "user": 25,
+    "assistant": 188
+  },
+  "excluded_record_counts": {
+    "session_meta": 1,
+    "event_msg": 4487,
+    "non_conversation_role": 9,
+    "world_state": 26,
+    "turn_context": 44,
+    "response_item": 3932,
+    "token_usage_record": 1246,
+    "compacted": 12,
+    "injected_workspace_context": 7,
+    "inter_agent_communication_metadata": 92
+  },
+  "coverage": "visible text messages in this task only; no other tasks, tool logs, internal reasoning, or future messages",
+  "files": {
+    "conversation.json": "cc2fc10854320e3b3f08853ecf90a61bcb4ac94dca6b9d164e35c59ed195cfb2",
+    "conversation.md": "4e9fa56dcda5488f807934fe8a16c0279dc949836555e380f455ed3573d94e47"
+  }
+}
