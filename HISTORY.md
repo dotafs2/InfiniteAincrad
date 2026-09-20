@@ -1,5 +1,11 @@
 # 历史全部流水
 
+## 2026-09-20 · H130 Formalize the verified zero-material continuation
+
+The already accepted Carpenter command `turn:shared:carpenter:0:31` was promoted from the verified physics-only seq263 copy to the canonical world as seq264. The finite iron source was already exhausted, so the authoritative terminal receipt is `material_depleted` with quantity zero; the job closed without an inventory change, transfer or edge repair. This was a single-writer continuation of an existing model-selected command: zero new NPC/GM calls, zero new cost and no retry of an unknown request.
+
+The public seq264 checkpoint and observation record preserve all ten residents and 264 life events. Production cold restore passed with exact nested fields. The exhausted-source limitation and existing navigation warnings remain open. [Evidence](docs/validation/material-formal-continuation-2026-09-20.json)
+
 ## 2026-09-20 · H129 Zero-request gateway preflight is clean
 
 The production town entry point was launched against a byte-identical disposable copy of the seq263 checkpoint with `--town-gateway --town-max-decisions=0 --town-stop-on-decision-limit`. It exited 0, closed admission immediately, resolved shutdown, started zero provider work and left the copy at seq263 with the existing Carpenter material command unchanged. The canonical save hash stayed `e6bfd0c3…b16541`; no model call, ledger write or canonical-world write occurred. The one existing navigation edge warning remains. This validates the no-new-request engine path, not a new resident observation. [Evidence](docs/validation/material-zero-request-engine-2026-09-20.json)

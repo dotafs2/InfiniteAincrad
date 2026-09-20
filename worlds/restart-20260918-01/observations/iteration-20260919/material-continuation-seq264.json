@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "formal_free_material_continuation",
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 263,
+  "end_seq": 264,
+  "canonical_before_sha256": "e6bfd0c39d4c3c70841cbda3e59906ee76d56b83ffd07b933d2c5e9af7b16541",
+  "canonical_after_sha256": "42248743bd003f37d204c0a3f881d11b3e4f39535c084dfec81d1e4cc01f8740",
+  "checkpoint": "restart-20260918-01/checkpoints/seq000264-42248743bd003f37.world.json",
+  "checkpoint_sha256": "42248743bd003f37d204c0a3f881d11b3e4f39535c084dfec81d1e4cc01f8740",
+  "actor_id": "shared:carpenter",
+  "resident_name": "Rowan",
+  "command_id": "turn:shared:carpenter:0:31",
+  "source_id": "street:iron-salvage-20260918",
+  "material": "iron",
+  "receipt": {
+    "actor_id": "shared:carpenter",
+    "code": "material_depleted",
+    "command_id": "turn:shared:carpenter:0:31",
+    "material": "iron",
+    "ok": false,
+    "quantity": 0,
+    "source_id": "street:iron-salvage-20260918"
+  },
+  "model_calls": 0,
+  "paid_calls": 0,
+  "provider_started": false,
+  "basis": "verified physics-only continuation of an already accepted model-selected command",
+  "checks": {
+    "finite_sources_unchanged": true,
+    "history_prefix_retained": true,
+    "job_closed": true,
+    "material_accounts_unchanged": true,
+    "material_command_count_unchanged": true,
+    "no_model_controller": true,
+    "original_command_completed": true
+  },
+  "source_stock": 0,
+  "source_recovered": 3,
+  "carpenter_edge": 20,
+  "limitations": [
+    "No new model decision or GM call occurred.",
+    "The finite iron source remains exhausted; no iron was transferred and no edge repair was completed.",
+    "This closes the pre-existing collection job with a truthful material_depleted receipt."
+  ]
+}
