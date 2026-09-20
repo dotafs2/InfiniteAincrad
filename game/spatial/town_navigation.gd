@@ -1,4 +1,6 @@
 extends Node3D
+const TownRouteGraph = preload("res://spatial/town_route_graph.gd")
+const TownRouteConnector = preload("res://spatial/town_route_connector.gd")
 ## One world navigation map for the real town colliders.
 ##
 ## The region is baked once after market/expansion construction. Resident jobs keep their
@@ -14,6 +16,9 @@ const WALK_SPEED := 1.35
 var region: NavigationRegion3D
 var navigation_mesh: NavigationMesh
 var agents: Dictionary = {}
+## Current loaded-world resident lookup. The MVP intentionally has no knowledge
+## filtering: callers may resolve any registered resident ID.
+var resident_directory: Dictionary = {}
 var routes: Dictionary = {}
 var safe_velocities: Dictionary = {}
 var safe_velocity_ready: Dictionary = {}
@@ -30,6 +35,177 @@ var crowd_detour_attempts := 0
 var door_portals: Array = []
 var door_crossings := 0
 var path_updates := 0
+## Static world-snapshot route graph used by the MVP connector flow. The existing
+## baked navmesh remains the local surface planner; this graph adds authored
+## doors, ladders, and other straight-line transitions without changing current
+## town movement until a caller opts into it.
+var global_route_graph = TownRouteGraph.new()
+var route_regions_by_resident: Dictionary = {}
+var route_graph_build_report: Dictionary = {}
+
+
+func register_route_region(region_id: String, world_position: Vector3 = Vector3.ZERO) -> bool:
+	return global_route_graph.add_region(region_id, world_position)
+
+
+func register_route_connector(
+	connector_id: String,
+	from_region: String,
+	to_region: String,
+	start_position: Vector3,
+	end_position: Vector3,
+	kind: String = "generic",
+	action: String = "none",
+	cost: float = 1.0,
+	bidirectional: bool = true,
+	connector_object: Object = null
+) -> bool:
+	return global_route_graph.add_connector(connector_id, from_region, to_region,
+		start_position, end_position, kind, action, cost, bidirectional, connector_object)
+
+
+func route_between_regions(from_region: String, to_region: String) -> Dictionary:
+	return global_route_graph.find_route(from_region, to_region)
+
+
+func route_region_for_resident(resident_id: String) -> String:
+	return String(route_regions_by_resident.get(resident_id, ""))
+
+
+func route_between_residents(from_resident_id: String, to_resident_id: String) -> Dictionary:
+	var from_region := route_region_for_resident(from_resident_id)
+	var to_region := route_region_for_resident(to_resident_id)
+	if from_region.is_empty() or to_region.is_empty():
+		return {"ok": false, "code": "unknown_resident_route_region", "regions": [], "connectors": []}
+	var route := route_between_regions(from_region, to_region)
+	route["target_id"] = to_resident_id
+	var target := target_position_for(to_resident_id)
+	if target.is_finite(): route["target_position"] = target
+	return route
+
+
+func register_layout_route_graph(layout: Dictionary, quarter: Node3D = null, resident_houses: Dictionary = {}) -> Dictionary:
+	## Build the static MVP graph from the same layout that drives PCG roads.
+	## Road samples are abstract graph points; baked NavigationServer geometry remains
+	## responsible for ordinary local movement. This method is called once per loaded world.
+	global_route_graph.clear()
+	route_regions_by_resident.clear()
+	var road_nodes_by_key: Dictionary = {}
+	var road_nodes: Array[Dictionary] = []
+	var road_samples: Array[Array] = []
+	var roads: Array = layout.get("roads", [])
+	var region_count := 0
+	var edge_count := 0
+	for road_index in roads.size():
+		var description: Dictionary = roads[road_index]
+		var points: Array = description.get("points", [])
+		var width := float(description.get("width", 4.0))
+		var samples: Array[Dictionary] = []
+		for point_index in range(maxi(0, points.size()-1)):
+			var a := Vector2(float(points[point_index][0]), float(points[point_index][1]))
+			var b := Vector2(float(points[point_index+1][0]), float(points[point_index+1][1]))
+			var count := maxi(1, ceili(a.distance_to(b) / 4.0))
+			for sample_index in count:
+				var p := a.lerp(b, float(sample_index) / float(count))
+				samples.append(_register_route_road_node(road_nodes_by_key, road_nodes, p, quarter, width, road_index))
+		if not points.is_empty():
+			var last: Array = points[points.size()-1]
+			var last_point := Vector2(float(last[0]), float(last[1]))
+			samples.append(_register_route_road_node(road_nodes_by_key, road_nodes, last_point, quarter, width, road_index))
+		road_samples.append(samples)
+		for sample_index in range(1, samples.size()):
+			var previous: Dictionary = samples[sample_index-1]
+			var current: Dictionary = samples[sample_index]
+			if previous["id"] == current["id"]: continue
+			if register_route_connector("pcg:road:%d:%d" % [road_index, sample_index-1], previous["id"], current["id"],
+				previous["position"], current["position"], "road", "none", maxf(.1, previous["position"].distance_to(current["position"])), true):
+				edge_count += 1
+	# Join sampled points where the authored road widths overlap. This handles a
+	# cross-street endpoint landing between two samples on the main road.
+	for left_index in road_nodes.size():
+		var left: Dictionary = road_nodes[left_index]
+		for right_index in range(left_index+1, road_nodes.size()):
+			var right: Dictionary = road_nodes[right_index]
+			if left["road_index"] == right["road_index"]: continue
+			var distance := Vector2(left["position"].x, left["position"].z).distance_to(Vector2(right["position"].x, right["position"].z))
+			var threshold := clampf((float(left["width"]) + float(right["width"])) * .35, 1.25, 2.75)
+			if distance > threshold: continue
+			if register_route_connector("pcg:junction:%d:%d" % [left_index, right_index], left["id"], right["id"],
+				left["position"], right["position"], "road_junction", "none", maxf(.1, distance), true):
+				edge_count += 1
+	# A resident house is a graph region reached through the nearest road point.
+	# The connector is parented to the real house so its action can open that door.
+	var houses: Array = layout.get("houses", [])
+	for entry: Dictionary in houses:
+		var resident_id := String(entry.get("resident", ""))
+		if resident_id.is_empty(): continue
+		var entrance := Vector3(float(entry["at"][0]), float(entry["at"][1]), float(entry["at"][2]))
+		var house: Node3D = resident_houses.get(resident_id) as Node3D
+		if resident_houses.has(resident_id) and is_instance_valid(house) and quarter != null:
+			entrance = quarter.entrances.get(resident_id, entrance)
+		var nearest := _nearest_route_node(road_nodes, entrance)
+		if nearest.is_empty(): continue
+		var home_region := "pcg:home:" + resident_id
+		var home_position := entrance + Vector3.UP
+		if is_instance_valid(house): home_position = house.global_position + Vector3.UP
+		register_route_region(home_region, home_position)
+		var connector_object: TownRouteConnector = null
+		if is_instance_valid(house):
+			connector_object = TownRouteConnector.new()
+			connector_object.name = "RouteDoor_" + resident_id.replace(":", "_")
+			connector_object.connector_id = "pcg:door:" + resident_id
+			connector_object.connector_kind = "door"
+			connector_object.action_name = "open_door"
+			house.add_child(connector_object)
+			connector_object.start_position = house.to_local(nearest["position"])
+			connector_object.end_position = house.to_local(home_position)
+		var door_start: Vector3 = nearest["position"]
+		var door_end: Vector3 = home_position
+		if is_instance_valid(connector_object):
+			door_start = connector_object.route_start_position()
+			door_end = connector_object.route_end_position()
+		if register_route_connector("pcg:door:" + resident_id, nearest["id"], home_region, door_start, door_end,
+			"door", "open_door", maxf(.1, door_start.distance_to(door_end)), true, connector_object):
+			edge_count += 1
+			route_regions_by_resident[resident_id] = home_region
+	var report := {
+		"ok": edge_count > 0 and region_count >= 0,
+		"source": "living_quarter_layout.json",
+		"road_count": roads.size(),
+		"road_node_count": road_nodes.size(),
+		"region_count": global_route_graph.regions.size(),
+		"connector_count": global_route_graph.connectors.size(),
+		"resident_region_count": route_regions_by_resident.size(),
+		"revision": global_route_graph.revision,
+	}
+	route_graph_build_report = report
+	return report
+
+
+func _register_route_road_node(nodes_by_key: Dictionary, nodes: Array[Dictionary], point: Vector2,
+		quarter: Node3D, width: float, road_index: int) -> Dictionary:
+	var key := "%d:%d" % [int(round(point.x * 2.0)), int(round(point.y * 2.0))]
+	if nodes_by_key.has(key): return nodes_by_key[key]
+	var position := Vector3(point.x, 0.0, point.y)
+	if quarter != null and quarter.has_method("height_at"):
+		position.y = float(quarter.call("height_at", point.x, point.y)) + .03
+	var region_id := "pcg:road:" + key
+	register_route_region(region_id, position)
+	var node := {"id": region_id, "position": position, "road_index": road_index, "width": width}
+	nodes_by_key[key] = node
+	nodes.append(node)
+	return node
+
+
+func _nearest_route_node(nodes: Array[Dictionary], position: Vector3) -> Dictionary:
+	var best: Dictionary = {}
+	var best_distance := INF
+	for node: Dictionary in nodes:
+		var distance := Vector2(node["position"].x, node["position"].z).distance_to(Vector2(position.x, position.z))
+		if distance < best_distance:
+			best_distance = distance
+			best = node
+	return best
 
 func build() -> Dictionary:
 	if region != null:
@@ -81,7 +257,10 @@ func _process(_delta: float) -> void:
 		NavigationServer3D.map_force_update(region.get_navigation_map())
 
 func register_body(id: String, body: CharacterBody3D) -> void:
-	if agents.has(id) or not is_instance_valid(body):
+	if not is_instance_valid(body):
+		return
+	resident_directory[id] = body
+	if agents.has(id):
 		return
 	var agent := NavigationAgent3D.new()
 	agent.name = "NavigationAgent"
@@ -101,6 +280,20 @@ func register_body(id: String, body: CharacterBody3D) -> void:
 	agent.path_changed.connect(_on_path_changed)
 	agents[id] = agent
 	routes.erase(id)
+
+
+func loaded_resident_ids() -> Array[String]:
+	var ids: Array[String] = []
+	for id in resident_directory.keys():
+		var body: CharacterBody3D = resident_directory[id]
+		if is_instance_valid(body):
+			ids.append(String(id))
+	return ids
+
+
+func target_position_for(resident_id: String) -> Vector3:
+	var body: CharacterBody3D = resident_directory.get(resident_id)
+	return body.global_position if is_instance_valid(body) else Vector3.INF
 
 func _on_path_changed() -> void:
 	path_updates += 1

@@ -17,6 +17,9 @@ const MAX_GOAL_DISTANCE := 4.0
 # source.  A source display or the final terrain lip can make its exact center
 # fail a capsule sweep even though this valid work radius is reachable.
 const WORLD_ARRIVAL_RADIUS := 0.45
+# Keep the inherited name used by the foraging, place and social steering
+# subclasses.  The world gate above remains the single authoritative value.
+const ARRIVAL_RADIUS := WORLD_ARRIVAL_RADIUS
 const APPROACH_CLEARANCE := 0.40
 const WAYPOINT_REACHED := 0.15
 const TARGET_TOLERANCE := 0.05
