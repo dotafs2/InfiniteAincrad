@@ -106,3 +106,12 @@ Smith 在收到 material_depleted 终端结果后的下一次真实回合中，�
 Carpenter 在本轮末尾仍保留一次进行中的铁源采集任务，工作计时尚未达到 60 秒，因此没有产生 material_depleted 终端回执，也没有对 Smith 的询问作出回应。Sage 自主把 1 份普通口粮送给 Heath，这是独立的非契约性食物赠与。
 
 铁源仍守恒耗尽：stock0、recovered3、initial3。下一步应先让 Carpenter 的 pending 工作完成，再观察其是否回应 Smith；不把这次等待当作材料交接。
+
+
+# 居民观察（seq250→seq263，2026-09-20）
+
+本轮 12 次 Kimi 调用结算 0.2506030 元，正式存档从 seq250 到 seq263；网关已排空，没有未知费用。600 秒世界捕获已完成，但外层验证器在收尾时超时退出（runner exit 124），因此不把本轮称为完整验证通过。
+
+Carpenter 继续执行原有的 `turn:shared:carpenter:0:31`，仍在距铁源约 0.715 米处，累计 5.6833/60 秒；没有 material_depleted 终端回执，也没有材料转移、边缘修理契约或完成。H125 的 fixture 路线修复在真实场景仍未解决这段路线，下一步先做不付费的路径诊断。
+
+本轮保留 renderer 的已知 `particles is null` 错误及导航边缘警告；seq250 正式存档未被回滚。

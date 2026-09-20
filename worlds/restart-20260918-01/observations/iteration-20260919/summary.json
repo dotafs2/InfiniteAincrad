@@ -1,13 +1,13 @@
 {
   "world_id": "shared:restart-20260918-01",
-  "start_seq": 238,
-  "end_seq": 250,
-  "source_sha256": "26c68cf3e24208be3cd5bb69ff255e287e249c143c39244770505b216d996d24",
+  "start_seq": 250,
+  "end_seq": 263,
+  "source_sha256": "e6bfd0c39d4c3c70841cbda3e59906ee76d56b83ffd07b933d2c5e9af7b16541",
   "resident_calls": 12,
-  "resident_cost_cny": 0.2570856,
+  "resident_cost_cny": 0.250603,
   "new_resident_unknowns": 0,
-  "archive_records": 217,
-  "usage_calls": 231,
+  "archive_records": 229,
+  "usage_calls": 243,
   "smith_iron": 1,
   "weaver_iron": 2,
   "carpenter_edge": 20,
@@ -18,6 +18,9 @@
   "carpenter_source_observed_zero": false,
   "edge_repair_events": [],
   "edge_repair_completed": false,
-  "renderer_errors": 1,
-  "limitation": "Carpenter pending material trip remained active at the saved episode boundary and had not yet reached its 60-second completion point. Sage voluntarily gave Heath one ration; this was a separate, non-contractual life event. No material transfer, fresh edge-repair contract, or repair completion occurred in this window."
+  "carpenter_distance_m": 0.7154157496949185,
+  "carpenter_job_elapsed": 5.683333333333333,
+  "runner_exit": 124,
+  "renderer_errors": 8,
+  "limitation": "The 600-second capture resolved 12 resident decisions and drained the gateway with no unknowns, but the outer validation runner timed out while closing. Carpenter remains on the existing pending collection command at 0.715 m with 5.6833/60 work seconds; no material_depleted receipt, transfer, edge-repair contract or completion occurred. The H125 fixture route passed, but this live route still needs a non-paid physical diagnosis."
 }

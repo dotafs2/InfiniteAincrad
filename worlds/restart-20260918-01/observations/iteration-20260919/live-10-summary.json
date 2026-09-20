@@ -1,0 +1,113 @@
+{
+  "engine_exit": 124,
+  "runner_exit": 124,
+  "runner_timeout": true,
+  "validation_passed": false,
+  "validation_status": "capture_completed_but_outer_runner_timeout",
+  "session_cost_cap_cny": 1,
+  "checkpoint_export": {
+    "status": "not_exported_outer_runner_timeout",
+    "seq": 263,
+    "source_sha256": "e6bfd0c39d4c3c70841cbda3e59906ee76d56b83ffd07b933d2c5e9af7b16541"
+  },
+  "validation_exercised": true,
+  "validation_decisions_started": 12,
+  "classification_reasons": [
+    "outer_runner_timeout_after_capture"
+  ],
+  "model_errors": {},
+  "recoverable_model_waits": {},
+  "ledger_before": {
+    "ledger_id": "40b9f9ee-0e13-43af-a121-a047be25c74b",
+    "model": "kimi-k2.6",
+    "authorized_cny": 45.0106803,
+    "allocation_cap_cny": 44.9606803,
+    "settled_cny": 0.0,
+    "prior_unverified_cny": 44.0106803,
+    "reserved_cny": 0.0,
+    "liability_cny": 44.0106803,
+    "remaining_allocatable_cny": 0.95,
+    "counts": {},
+    "halted": "",
+    "deadline_utc": 1789883757
+  },
+  "ledger_after": {
+    "allocation_cap_cny": 44.9606803,
+    "authorized_cny": 45.0106803,
+    "counts": {
+      "settled": 12
+    },
+    "deadline_utc": 1789883737,
+    "halted": "",
+    "ledger_id": "40b9f9ee-0e13-43af-a121-a047be25c74b",
+    "liability_cny": 44.2612833,
+    "model": "kimi-k2.6",
+    "prior_unverified_cny": 44.0106803,
+    "remaining_allocatable_cny": 0.699397,
+    "reserved_cny": 0.0,
+    "settled_cny": 0.250603
+  },
+  "capture_exists": true,
+  "original_world_promoted": true,
+  "budget_stop_reason": "outer_runner_timeout_after_capture",
+  "upstream_requests": 12,
+  "upstream_concurrency": 1,
+  "carried_uncertainty_reviewed": false,
+  "gateway_shutdown": {
+    "drain_error": "",
+    "drain_grace_seconds": 0.0,
+    "drained_complete": true,
+    "engine_exited_with_workers_pending": false,
+    "intake_closed": true,
+    "operations_pending_at_engine_exit": [],
+    "refused_connections": 0,
+    "unresolved_operations": [],
+    "unresolved_workers": 0,
+    "worker_start_failures": 0,
+    "workers_accepted": 24,
+    "workers_in_flight": false,
+    "workers_pending_at_engine_exit": 0
+  },
+  "shutdown_incomplete": false,
+  "shutdown_wait_seconds": 0.0,
+  "idle_completed": false,
+  "world_progress_observed": true,
+  "world_progress": {
+    "comparison_status": "comparable",
+    "observed": true,
+    "absolute": {
+      "baseline": {
+        "world_id": "shared:restart-20260918-01",
+        "life_seq": 250,
+        "godot_elapsed_seconds": 9948.933333331379,
+        "world_elapsed_seconds": 9948.933333331379
+      },
+      "capture": {
+        "world_id": "shared:restart-20260918-01",
+        "source_seq": 0,
+        "life_seq": 263,
+        "new_event_count": 263
+      },
+      "gm_export": {
+        "world_id": "shared:restart-20260918-01",
+        "source_revision": {
+          "godot_elapsed_seconds": 10548.7833333311,
+          "life_seq": 263,
+          "proposal_sequence": 0,
+          "world_elapsed_seconds": 10548.7833333311
+        },
+        "godot_elapsed_seconds": 10548.783333331097,
+        "world_elapsed_seconds": 10548.783333331097
+      }
+    },
+    "delta": {
+      "capture_life_seq": 13,
+      "gm_life_seq": 13,
+      "gm_godot_elapsed_seconds": 599.8499999997184,
+      "gm_world_elapsed_seconds": 599.8499999997184
+    }
+  },
+  "startup_fault_export": {
+    "status": "not_applicable"
+  }
+}
