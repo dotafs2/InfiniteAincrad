@@ -1,0 +1,31 @@
+{
+  "kind": "zero_request_gateway_engine_preflight",
+  "canonical_seq": 263,
+  "canonical_sha256": "e6bfd0c39d4c3c70841cbda3e59906ee76d56b83ffd07b933d2c5e9af7b16541",
+  "disposable_copy_sha256": "e6bfd0c39d4c3c70841cbda3e59906ee76d56b83ffd07b933d2c5e9af7b16541",
+  "engine_exit": 0,
+  "validation_decision_limit": 0,
+  "validation_decisions_started": 0,
+  "capture_shutdown_reason": "decision_limit",
+  "shutdown_resolved": true,
+  "shutdown_exit_code": 0,
+  "capture_seconds": 0.133333333333335,
+  "life_seq": 263,
+  "pending_count": 0,
+  "pending_job_after": {
+    "action": "recover_material",
+    "command_id": "turn:shared:carpenter:0:31",
+    "source_id": "street:iron-salvage-20260918",
+    "provenance": "opengameagent_live",
+    "elapsed": 5.683333333333333,
+    "duration_seconds": 60
+  },
+  "edge_warning_count": 1,
+  "paid_calls": 0,
+  "provider_started": false,
+  "canonical_unchanged": true,
+  "limitations": [
+    "This is a gateway admission/engine preflight with zero new decisions, not a new model observation.",
+    "The disposable copy remains at seq263; it was not promoted."
+  ]
+}

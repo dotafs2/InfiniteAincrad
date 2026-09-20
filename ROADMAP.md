@@ -10,6 +10,8 @@ The active lineage has since advanced to seq263 with 243 world usage records and
 
 ## Current work
 
+- **H129:** the production town gateway was preflighted on a byte-identical seq263 copy with a zero decision cap. The engine exited 0, closed admission and drained cleanly without starting a provider or changing the pending Carpenter command. This proves the no-new-request continuation entry point; it is not a new model observation. [Evidence](docs/validation/material-zero-request-engine-2026-09-20.json)
+
 - **H128:** actual checkpoint-copy replay exposed a reachable A* route moving an arrived worker outside the work gate. Material jobs now hold horizontal position inside the same 3D 0.45 m radius, and their street-route cache persists. The unchanged pending command completed in 54.7833 seconds with zero material awarded; seven preservation assertions and exact ten-resident cold restore passed. This is controlled physics evidence at copy seq264; the canonical world remains seq263 and no provider call occurred. [Evidence](docs/validation/material-arrival-hold-2026-09-20.json)
 
 - **H127 engineering pivot:** material recovery now prefers PlaceSteering.direction_to_point, the same measured road graph already used by accepted place journeys, and clears the bounded material route before doing so. The source center, 0.45 m work gate, collision checks, timer and finite accounting are unchanged. Focused Godot checks pass: materials 60, blocked-state 278, baking-route 63 and place-route 18. The historical material fixture replay could not be rerun from its current submit precondition; H125 remains the accepted physical recovery replay. No paid call or canonical save write was made. [Code](game/spatial/town_street.gd)
