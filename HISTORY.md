@@ -1,5 +1,11 @@
 # 历史全部流水
 
+## 2026-09-20 · H132 Current save exposes a lawful edge-contract path
+
+A read-only Godot probe loaded a disposable copy of canonical seq265. Rowan has 8 Col, a damaged axe edge20 and Flint is near enough for three lawful edge-repair offers at 2, 5 or 8 Col. The copy's authoritative trade path accepted the 2 Col offer, reserved exactly 2 Col and preserved Flint's one iron. The canonical save stayed byte-identical; no provider or GM call occurred.
+
+This proves contract affordance and escrow on the current save, not resident adoption or physical completion. Delivery, 60-second work and collection remain the next live conditions. [Evidence](docs/validation/material-contract-affordance-2026-09-20.json)
+
 ## 2026-09-20 · H131 Live Smith response opens the repair conversation
 
 A fresh one-request Kimi window continued the verified seq264 world. The gateway settled one measured call for CNY 0.0253665, drained cleanly and produced no unknown request. Flint (Smith) had one iron and Rowan (Carpenter) was within 0.53 m; the live menu exposed the material-share option. Smith's real model decision selected `reply:godot_help:turn:shared:carpenter:0:5:willing`, saying he wanted clear terms before committing. The response is real social progress, but no iron transfer, fresh repair contract or edge repair occurred.
