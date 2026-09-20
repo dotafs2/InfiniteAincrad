@@ -565,9 +565,9 @@ func _physics_process(delta: float) -> void:
 			var graph_route_active := false
 			var graph_target_id := ""
 			if job.has("target_id") and not str(job.get("target_id", "")).is_empty():
-				graph_target_id = "resident:" + str(job.get("target_id", ""))
+				graph_target_id = "resident:" + str(job.get("target_id", "")) + "|" + str(job.get("command_id", ""))
 			elif job.has("place_id") and not str(job.get("place_id", "")).is_empty():
-				graph_target_id = "place:" + str(job.get("place_id", ""))
+				graph_target_id = "place:" + str(job.get("place_id", "")) + "|" + str(job.get("command_id", ""))
 			elif job.action in ["eat_ration", "harvest_ration"] or (job.action == "rest" and not job.has("place_id")):
 				graph_target_id = "home:" + id
 			## The navmesh route is authoritative only while it really reaches THIS journey's target.

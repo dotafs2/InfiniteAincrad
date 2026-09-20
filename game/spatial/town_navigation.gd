@@ -198,7 +198,6 @@ func register_layout_route_graph(layout: Dictionary, quarter: Node3D = null, res
 			"door", "open_door", maxf(.1, door_start.distance_to(door_end)), true, connector_object):
 			edge_count += 1
 			route_regions_by_resident[resident_id] = home_region
-			route_regions_by_target["resident:" + resident_id] = home_region
 			route_regions_by_target["home:" + resident_id] = home_region
 	var report := {
 		"ok": edge_count > 0 and region_count >= 0,
