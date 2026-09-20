@@ -582,6 +582,14 @@ func _physics_process(delta: float) -> void:
 			## slot. A zero result keeps the valid A* direction; the accepted target, 0.45 m
 			## arrival gate, speed, work duration, resources and every collider remain unchanged.
 			var local_final_route := false
+			## A material job must remain at its accepted worksite for the full timer.
+			## RVO/crowd detours can otherwise move an already-arrived body out again.
+			## Use the same three-dimensional gate as TownMaterials, not a flat radius.
+			if job.action == "recover_material" and body.position.distance_to(target) <= 0.45:
+				direction = Vector3.ZERO
+				local_final_route = true
+				if town_navigation != null:
+					town_navigation.clear_route(id)
 			if job.action in LOCAL_FINAL_ROUTE_ACTIONS and social_steering != null:
 				var local_direction: Vector3 = social_steering.bounded_direction_for(
 					id, str(job.command_id), body, target)
@@ -648,7 +656,7 @@ func _physics_process(delta: float) -> void:
 					latest = "%s cannot reach the current destination and has stopped moving." % resident_name
 				else:
 					latest = "The navigation map is not ready. Movement is paused."
-			if not place_trip and not home_trip and not bake_trip:
+			if not place_trip and not home_trip and not bake_trip and job.action != "recover_material":
 				if place_steering != null:
 					place_steering.clear_route(id)
 			moving = direction.length() > 0.0

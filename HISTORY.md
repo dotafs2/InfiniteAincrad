@@ -1,5 +1,12 @@
 # 历史全部流水
 
+## 2026-09-20 · H128 Keep arrived material workers at the worksite
+
+The actual seq263 checkpoint copy disproved the assumption that H127's road fallback resolved Carpenter's stall. A* marked the target reachable, bypassing that fallback. During 15 seconds of unchanged production physics, the body entered the 0.45 m work gate (0.3724 m at the first sample), then crowd avoidance moved it outside again (0.6055 m at the last sample). Only 1.55 work seconds accrued. This was a navigation/work timer interaction, not proven source geometry blockage.
+
+Material work now stops horizontal steering while the body is inside the same three-dimensional 0.45 m gate used by the world. Gravity, collisions, source destination and the 60-second timer remain authoritative. The H127 material road-route cache is also retained instead of being cleared immediately every frame. From the identical seq263 copy, the existing command finished after 54.7833 physics seconds with `material_depleted`, quantity zero. Seven assertions passed, including unchanged finite sources/accounts, preserved history and no new material command. Exact cold restore passed for all ten residents at copy seq264. Canonical seq263 and all provider records stayed unchanged; no model call occurred. The four existing navigation edge warnings remain. [Evidence](docs/validation/material-arrival-hold-2026-09-20.json)
+
+
 ## 2026-09-20 · H127 Live route gets a measured street-graph fallback
 
 The real H126 Carpenter trip remained physically short of the exhausted source, so the next change stayed non-paid and preserved the existing command. `town_street.gd` now routes `recover_material` through the measured public-road graph used by place travel, clearing the old bounded material route first; the source center remains authoritative and the world still owns the 0.45 m work gate, collision checks, 60-second timer and finite accounting. This addresses the observed street/terrain route failure without inventing a material unit or retrying a provider request.
