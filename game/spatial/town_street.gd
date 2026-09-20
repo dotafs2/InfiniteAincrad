@@ -562,6 +562,7 @@ func _physics_process(delta: float) -> void:
 			_foraging_exit_targets.erase(id)
 			var target := town.destination(id, job.action)
 			var direction := Vector3.ZERO
+			var graph_route_active := false
 			## The navmesh route is authoritative only while it really reaches THIS journey's target.
 			## The bake has a measured gap across the market/field junction (cell_size 0.10 with
 			## agent_max_climb 0.04): from the market floor the server returns a partial path, the
@@ -573,8 +574,13 @@ func _physics_process(delta: float) -> void:
 			## timers and every collider stay exactly the world's own.
 			var nav_reaches_target := false
 			if town_navigation != null:
-				direction = town_navigation.direction_for(id, str(job.command_id), body, target)
-				nav_reaches_target = town_navigation.enabled and not town_navigation.is_unreachable(id)
+				graph_route_active = town_navigation.graph_only_routes
+				if graph_route_active:
+					direction = town_navigation.graph_direction_for(id, str(job.command_id), body, target)
+					nav_reaches_target = not town_navigation.graph_route_is_unreachable(id)
+				else:
+					direction = town_navigation.direction_for(id, str(job.command_id), body, target)
+					nav_reaches_target = town_navigation.enabled and not town_navigation.is_unreachable(id)
 			## A* owns the long route. Inside the social helper's bounded four-metre domain,
 			## refine the final leg of a social approach, own-home tool use or own-home meal with a real
 			## capsule-swept direct leg or detour. This closes the gap where the navmesh path
@@ -590,7 +596,8 @@ func _physics_process(delta: float) -> void:
 				local_final_route = true
 				if town_navigation != null:
 					town_navigation.clear_route(id)
-			if job.action in LOCAL_FINAL_ROUTE_ACTIONS and social_steering != null:
+			if job.action in LOCAL_FINAL_ROUTE_ACTIONS and social_steering != null and \
+				(not graph_route_active or body.global_position.distance_to(target) <= social_steering.MAX_GOAL_DISTANCE):
 				var local_direction: Vector3 = social_steering.bounded_direction_for(
 					id, str(job.command_id), body, target)
 				if local_direction.length() > 0.0:
@@ -613,6 +620,8 @@ func _physics_process(delta: float) -> void:
 			## method yields no direction the pre-existing bounded local push still applies.
 			var home_trip: bool = _spaced_foraging and (job.action in ["eat_ration", "harvest_ration"] or (job.action == "rest" and not job.has("place_id")))
 			if local_final_route:
+				pass
+			elif graph_route_active:
 				pass
 			elif nav_reaches_target:
 				pass
@@ -650,7 +659,11 @@ func _physics_process(delta: float) -> void:
 				## The status line stays honest: the street route is reported only when the body
 				## really has a steering direction to walk, otherwise the stop is still stated.
 				var resident_name: String = str(town.resident_name(id))
-				if direction.length() > 0.0:
+				if graph_route_active and direction.length() > 0.0:
+					latest = "%s cannot reach the current destination on the PCG route." % resident_name
+				elif graph_route_active:
+					latest = "%s has no connected PCG route to the current destination." % resident_name
+				elif direction.length() > 0.0:
 					latest = "%s cannot reach the current destination on that route; trying the street route." % resident_name
 				elif town_navigation.enabled:
 					latest = "%s cannot reach the current destination and has stopped moving." % resident_name
@@ -698,7 +711,14 @@ func _physics_process(delta: float) -> void:
 			actor.set_gesture("carry" if moving and route_target.is_finite() else "idle")
 		actor.set_walking(moving)
 		body.velocity.y = -0.2 if body.is_on_floor() else body.velocity.y - 18 * delta
-		body.move_and_slide()
+		if town_navigation != null and town_navigation.graph_only_routes and moving:
+			# Stage-one PCG navigation deliberately ignores collision and penetration.
+			# The full-map graph acceptance proves the route contract; physical motion
+			# remains a later mode with the same destinations and job gates.
+			body.position += direction * 1.35 * delta
+			body.velocity = Vector3.ZERO
+		else:
+			body.move_and_slide()
 		town.host_move(id, body.position)
 	tick += delta
 	if tick < 0.5:
