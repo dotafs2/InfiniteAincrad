@@ -46,6 +46,10 @@ var path_updates := 0
 ## town movement until a caller opts into it.
 var global_route_graph = TownRouteGraph.new()
 var route_regions_by_resident: Dictionary = {}
+## Stable semantic target -> graph region bindings. A moving resident or a public
+## point may change its exact position, but its long route must not change merely
+## because the nearest sampled road node changed at a boundary.
+var route_regions_by_target: Dictionary = {}
 var route_graph_build_report: Dictionary = {}
 var graph_routes: Dictionary = {}
 
@@ -78,6 +82,25 @@ func route_region_for_resident(resident_id: String) -> String:
 	return String(route_regions_by_resident.get(resident_id, ""))
 
 
+func register_route_target(target_id: String, world_position: Vector3, region_id: String = "") -> String:
+	## Bind a semantic target once. If the caller has no authored region, choose the
+	## nearest graph sample now and keep that choice stable for the target's lifetime.
+	if target_id.is_empty(): return ""
+	if route_regions_by_target.has(target_id):
+		return String(route_regions_by_target[target_id])
+	var resolved := region_id if not region_id.is_empty() else _nearest_graph_region(world_position)
+	if resolved.is_empty(): return ""
+	route_regions_by_target[target_id] = resolved
+	return resolved
+
+
+func route_region_for_target(target_id: String, world_position: Vector3 = Vector3.INF) -> String:
+	if target_id.is_empty(): return ""
+	if route_regions_by_target.has(target_id):
+		return String(route_regions_by_target[target_id])
+	return register_route_target(target_id, world_position)
+
+
 func route_between_residents(from_resident_id: String, to_resident_id: String) -> Dictionary:
 	var from_region := route_region_for_resident(from_resident_id)
 	var to_region := route_region_for_resident(to_resident_id)
@@ -96,6 +119,7 @@ func register_layout_route_graph(layout: Dictionary, quarter: Node3D = null, res
 	## responsible for ordinary local movement. This method is called once per loaded world.
 	global_route_graph.clear()
 	route_regions_by_resident.clear()
+	route_regions_by_target.clear()
 	var road_nodes_by_key: Dictionary = {}
 	var road_nodes: Array[Dictionary] = []
 	var road_samples: Array[Array] = []
@@ -174,6 +198,8 @@ func register_layout_route_graph(layout: Dictionary, quarter: Node3D = null, res
 			"door", "open_door", maxf(.1, door_start.distance_to(door_end)), true, connector_object):
 			edge_count += 1
 			route_regions_by_resident[resident_id] = home_region
+			route_regions_by_target["resident:" + resident_id] = home_region
+			route_regions_by_target["home:" + resident_id] = home_region
 	var report := {
 		"ok": edge_count > 0 and region_count >= 0,
 		"source": "living_quarter_layout.json",
@@ -182,6 +208,7 @@ func register_layout_route_graph(layout: Dictionary, quarter: Node3D = null, res
 		"region_count": global_route_graph.regions.size(),
 		"connector_count": global_route_graph.connectors.size(),
 		"resident_region_count": route_regions_by_resident.size(),
+		"target_region_count": route_regions_by_target.size(),
 		"revision": global_route_graph.revision,
 	}
 	route_graph_build_report = report
@@ -363,10 +390,22 @@ func _nearest_graph_region(position: Vector3) -> String:
 
 
 func graph_direction_for(id: String, command_id: String, body: CharacterBody3D, target: Vector3) -> Vector3:
+	return _graph_direction_for(id, command_id, body, target, "")
+
+
+func graph_direction_for_target(id: String, command_id: String, body: CharacterBody3D,
+		target_id: String, target: Vector3) -> Vector3:
+	## Use a stable semantic target region while retaining the target's current exact
+	## position for the final arrival leg.
+	return _graph_direction_for(id, command_id, body, target, target_id)
+
+
+func _graph_direction_for(id: String, command_id: String, body: CharacterBody3D,
+		target: Vector3, target_id: String) -> Vector3:
 	if not graph_only_routes or not is_instance_valid(body) or global_route_graph.regions.is_empty():
 		return Vector3.ZERO
 	var source_region := _nearest_graph_region(body.global_position)
-	var target_region := _nearest_graph_region(target)
+	var target_region := route_region_for_target(target_id, target) if not target_id.is_empty() else _nearest_graph_region(target)
 	if source_region.is_empty() or target_region.is_empty():
 		graph_routes[id] = {"status": "unreachable", "command_id": command_id, "target": target}
 		return Vector3.ZERO

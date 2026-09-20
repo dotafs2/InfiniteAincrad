@@ -563,6 +563,13 @@ func _physics_process(delta: float) -> void:
 			var target := town.destination(id, job.action)
 			var direction := Vector3.ZERO
 			var graph_route_active := false
+			var graph_target_id := ""
+			if job.has("target_id") and not str(job.get("target_id", "")).is_empty():
+				graph_target_id = "resident:" + str(job.get("target_id", ""))
+			elif job.has("place_id") and not str(job.get("place_id", "")).is_empty():
+				graph_target_id = "place:" + str(job.get("place_id", ""))
+			elif job.action in ["eat_ration", "harvest_ration"] or (job.action == "rest" and not job.has("place_id")):
+				graph_target_id = "home:" + id
 			## The navmesh route is authoritative only while it really reaches THIS journey's target.
 			## The bake has a measured gap across the market/field junction (cell_size 0.10 with
 			## agent_max_climb 0.04): from the market floor the server returns a partial path, the
@@ -576,7 +583,11 @@ func _physics_process(delta: float) -> void:
 			if town_navigation != null:
 				graph_route_active = town_navigation.graph_only_routes
 				if graph_route_active:
-					direction = town_navigation.graph_direction_for(id, str(job.command_id), body, target)
+					if graph_target_id.is_empty():
+						direction = town_navigation.graph_direction_for(id, str(job.command_id), body, target)
+					else:
+						direction = town_navigation.graph_direction_for_target(
+							id, str(job.command_id), body, graph_target_id, target)
 					nav_reaches_target = not town_navigation.graph_route_is_unreachable(id)
 				else:
 					direction = town_navigation.direction_for(id, str(job.command_id), body, target)
