@@ -1,0 +1,31 @@
+{
+  "kind": "offline_contract_lifecycle_fixture",
+  "world_id": "shared:restart-20260918-01",
+  "canonical_seq": 266,
+  "canonical_sha256": "48845c0c15b46f7ef86c740ce1804a38e40553455c1a6f114771e2d745694cbd",
+  "suite": "town_trade",
+  "checks": 63,
+  "failures": 0,
+  "paid_calls": 0,
+  "canonical_world_changed": false,
+  "lifecycle": [
+    "propose edge-repair contract",
+    "worker accepts and escrow reserves owner Col",
+    "owner delivers the physical axe",
+    "worker reaches the worksite and works for 60 seconds",
+    "one iron is consumed and the edge reaches 100",
+    "owner collects the repaired axe and payment settles once"
+  ],
+  "preservation": [
+    "mid-repair save and cold reload preserve the contract",
+    "duplicate collection cannot repay",
+    "handle damage remains separate from edge repair",
+    "total Col and material conservation pass"
+  ],
+  "limitations": [
+    "Synthetic fixture only; no resident model decision occurred.",
+    "This proves the authoritative path after a future real acceptance, not Flint's live acceptance or unattended execution.",
+    "The canonical seq266 contract remains proposed and unchanged."
+  ],
+  "created_utc": "2026-09-20T14:00:18.576382+00:00"
+}
