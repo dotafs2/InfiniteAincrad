@@ -18,7 +18,7 @@ Unknown usage stays unresolved. This report is never an NPC observation or model
 | GM 09 | GM | 0 / 0 | 0 | 0 | 0 | 0 | 0 |
 | GM 10 | GM | 0 / 0 | 0 | 0 | 0 | 0 | 0 |
 | Wren | NPC | 18 / 0 | 54,958 | 1,459 | 6,144 | 56,417 | 0 |
-| Rowan | NPC | 31 / 0 | 96,853 | 3,104 | 16,384 | 99,957 | 0 |
+| Rowan | NPC | 32 / 0 | 100,680 | 3,204 | 16,384 | 103,884 | 0 |
 | Reed | NPC | 17 / 0 | 50,275 | 1,300 | 7,168 | 51,575 | 0 |
 | Fern | NPC | 14 / 0 | 41,180 | 1,237 | 6,656 | 42,417 | 0 |
 | Sage | NPC | 23 / 0 | 72,028 | 2,008 | 9,728 | 74,036 | 0 |
