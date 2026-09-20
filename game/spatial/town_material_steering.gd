@@ -13,6 +13,10 @@ extends RefCounted
 ## unsolved path case.
 
 const MAX_GOAL_DISTANCE := 4.0
+# Retained for the existing foraging/place/social steering subclasses, which
+# inherit this helper's bounded geometry constants. Material work itself uses
+# WORLD_ARRIVAL_RADIUS below because the world accepts a wider work gate.
+const ARRIVAL_RADIUS := 0.30
 # The world accepts material work once the body is within 0.45 m of the
 # source.  A source display or the final terrain lip can make its exact center
 # fail a capsule sweep even though this valid work radius is reachable.
