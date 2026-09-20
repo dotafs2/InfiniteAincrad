@@ -612,8 +612,17 @@ func _physics_process(delta: float) -> void:
 				direction = place_steering.direction_for(id, str(job.command_id), body, target)
 			elif home_trip and place_steering != null:
 				direction = place_steering.direction_to_point(id, str(job.command_id), body, target)
-			elif job.action == "recover_material" and material_steering != null:
-				direction = material_steering.direction_for(id, str(job.command_id), body, target)
+			elif job.action == "recover_material":
+				## Material sources live on the same measured street graph as public places.  Prefer
+				## that graph for the real trip: the bounded material helper is still the final local
+				## fallback, but a blocked navmesh/terrain lip must not make a valid street route look
+				## like an enclosed source.  The accepted source and 0.45 m work gate remain unchanged.
+				if place_steering != null:
+					if material_steering != null:
+						material_steering.clear_route(id)
+					direction = place_steering.direction_to_point(id, str(job.command_id), body, target)
+				elif material_steering != null:
+					direction = material_steering.direction_for(id, str(job.command_id), body, target)
 			elif bake_trip and place_steering != null:
 				direction = place_steering.direction_to_point(id, str(job.command_id), body, target)
 			elif _spaced_foraging and job.action in ["harvest_ration", "eat_ration", "rest"] and foraging_steering != null:

@@ -1,5 +1,12 @@
 # 历史全部流水
 
+## 2026-09-20 · H127 Live route gets a measured street-graph fallback
+
+The real H126 Carpenter trip remained physically short of the exhausted source, so the next change stayed non-paid and preserved the existing command. `town_street.gd` now routes `recover_material` through the measured public-road graph used by place travel, clearing the old bounded material route first; the source center remains authoritative and the world still owns the 0.45 m work gate, collision checks, 60-second timer and finite accounting. This addresses the observed street/terrain route failure without inventing a material unit or retrying a provider request.
+
+Godot 4.7.2 checks pass for material accounting (60), blocked-state persistence (278), baking route compatibility (63), and public-place route/restart behavior (18). The historical standalone material fixture replay could not be rerun from the current fixture because its submit precondition no longer matches the present code state; H125 remains the accepted physical material replay. No paid calls or canonical-world writes were made in H127. [Code](game/spatial/town_street.gd)
+
+
 ## 2026-09-20 · H126 Live route remains blocked after bounded capture
 
 A bounded twelve-call window advanced `shared:restart-20260918-01` from seq250 to seq263. All 12 calls settled for CNY 0.250603 with no unknown charge. The internal scene capture ran for 600 seconds, resolved its shutdown and drained the gateway; the outer validation wrapper then timed out while closing and was terminated with exit 124, so this is not reported as a clean end-to-end validation pass.
