@@ -4,7 +4,7 @@
 
 The H124 checkpoint left Carpenter 0.86 m from the finite source with only 3.6167/60 work seconds recorded. Code inspection narrowed the stall to a mismatch between the physical capsule sweep and the world's accepted 0.45 m work radius: the steering helper asked the body to occupy the exact source center, so a final terrain or display collision could leave a reachable trip stationary.
 
-Material steering now keeps the exact source as the authoritative destination but, when that center is not sweep-clear, walks to a collision-cleared point 0.40 m away. The world still decides arrival, elapsed work, depletion, inventory and history. No source retry, material grant or save mutation was made. A valid Godot binary was unavailable in this checkout for a scene replay; `git diff --check` and Python compile checks pass, so the next owned run must verify the physical continuation before any new paid observation.
+Material steering now keeps the exact source as the authoritative destination but, when that center is not sweep-clear, walks to a collision-cleared point 0.40 m away. An owned Godot 4.7.2 fixture replay reached 0.29 m, accumulated all 60 seconds and completed `material_recovered` (stock3→2, worker iron1→2). The world still decides arrival, elapsed work, depletion, inventory and history; no source retry or paid call was used. The replay also caught and fixed a compatibility regression by retaining the inherited `ARRIVAL_RADIUS` constant required by the other steering subclasses.
 
 [Code](game/spatial/town_material_steering.gd) · [H124 evidence](docs/validation/material-pending-2026-09-20.md)
 
