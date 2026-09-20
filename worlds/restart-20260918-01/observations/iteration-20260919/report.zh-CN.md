@@ -97,3 +97,12 @@ Carpenter 重新获得模型回合，先到西部工匠前庭，再读公共材�
 Smith 在收到 material_depleted 终端结果后的下一次真实回合中，主动向 Carpenter 说明自己修理金属刃口、询问是否有需要修理的工具。这是一次真实的材料/工作沟通，但仍是非契约性发言；没有发生材料转交、新 edge-repair 合同或修理完成。
 
 铁源仍守恒耗尽：stock0、recovered3、initial3。Weaver 持有 2 铁，Smith 持有 1 铁；下一步应观察 Carpenter 是否回应并自愿形成新合同，不能把这次主动发言当作交接或采用证明。
+
+
+# 居民观察（seq238→seq250，2026-09-20）
+
+本轮 12 次 Kimi 调用全部结算，新增费用 0.2570856 元，世界从 seq238 到 seq250；没有未知费用或未释放请求。
+
+Carpenter 在本轮末尾仍保留一次进行中的铁源采集任务，工作计时尚未达到 60 秒，因此没有产生 material_depleted 终端回执，也没有对 Smith 的询问作出回应。Sage 自主把 1 份普通口粮送给 Heath，这是独立的非契约性食物赠与。
+
+铁源仍守恒耗尽：stock0、recovered3、initial3。下一步应先让 Carpenter 的 pending 工作完成，再观察其是否回应 Smith；不把这次等待当作材料交接。

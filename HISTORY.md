@@ -1,5 +1,13 @@
 # 历史全部流水
 
+## 2026-09-20 · H124 Pending material job at the episode boundary
+
+A bounded twelve-call resident window advanced `shared:restart-20260918-01` from seq238 to seq250. All calls settled for CNY 0.2570856; the gateway drained, the checkpoint contains ten residents and 217 archived attempts, and no new provider result or charge is unknown.
+
+Carpenter's existing iron collection job remained pending at the saved boundary. The body was near the finite source, but only 3.6167 of the required 60 work seconds had elapsed, so no authoritative `material_depleted` receipt or response to Smith's earlier work inquiry existed yet. The source remains initial3/recovered3/stock0, with Weaver holding two iron and Smith one; Carpenter's axe remains edge20/handle100. No material transfer, fresh edge-repair contract or completion occurred. Sage independently gave Heath one ordinary ration as a non-contractual gift.
+
+The next step is physical continuation or diagnosis of this pending job, without retrying the exhausted source. One known Forward+ `particles is null` renderer error and the existing navigation merge warning remain separate evidence. [Evidence](docs/validation/material-pending-2026-09-20.md).
+
 ## 2026-09-20 · H123 Depletion feedback becomes live work dialogue
 
 A bounded nine-call resident window advanced `shared:restart-20260918-01` from seq229 to seq238. All calls settled for CNY 0.1833087; the gateway drained, the checkpoint contains ten residents and 205 archived attempts, and no new provider result or charge is unknown.
