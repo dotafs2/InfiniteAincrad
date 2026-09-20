@@ -1,13 +1,13 @@
 {
   "world_id": "shared:restart-20260918-01",
-  "start_seq": 229,
-  "end_seq": 238,
-  "source_sha256": "d232ad5b4e72906f6477055a35fbf103de2b8cb22a5473ff47e58e8f9ca10bd0",
-  "resident_calls": 9,
-  "resident_cost_cny": 0.1833087,
+  "start_seq": 238,
+  "end_seq": 250,
+  "source_sha256": "26c68cf3e24208be3cd5bb69ff255e287e249c143c39244770505b216d996d24",
+  "resident_calls": 12,
+  "resident_cost_cny": 0.2570856,
   "new_resident_unknowns": 0,
-  "archive_records": 205,
-  "usage_calls": 219,
+  "archive_records": 217,
+  "usage_calls": 231,
   "smith_iron": 1,
   "weaver_iron": 2,
   "carpenter_edge": 20,
@@ -19,5 +19,5 @@
   "edge_repair_events": [],
   "edge_repair_completed": false,
   "renderer_errors": 1,
-  "limitation": "Smith used the bounded depletion wake to speak directly with Carpenter about edge-repair work. No material transfer, fresh contract, or edge-repair completion occurred in this window."
+  "limitation": "Carpenter pending material trip remained active at the saved episode boundary and had not yet reached its 60-second completion point. Sage voluntarily gave Heath one ration; this was a separate, non-contractual life event. No material transfer, fresh edge-repair contract, or repair completion occurred in this window."
 }

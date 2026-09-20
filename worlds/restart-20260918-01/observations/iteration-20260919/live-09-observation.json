@@ -1,0 +1,1067 @@
+{
+  "schema_version": 1,
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 238,
+  "end_seq": 250,
+  "elapsed_seconds": 9948.933333331379,
+  "decision_count": 12,
+  "residents": [
+    {
+      "resident_id": "shared:well-keeper",
+      "name": "Ari",
+      "decisions": [
+        {
+          "request_id": "turn:shared:well-keeper:1:16",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "My satiety is 62 and energy is 52, so no urgent survival need demands immediate action. I have 1 food and eat_ration is available. However, satiety is not at 0, so I should not prioritize eating. I will eat now to maintain my reserves before they drop further, as a methodical keeper of shared resources should stay prepared."
+          },
+          "resolved_action": "life:eat_ration",
+          "stated_reason": "My satiety is 62 and energy is 52, so no urgent survival need demands immediate action. I have 1 food and eat_ration is available. However, satiety is not at 0, so I should not prioritize eating. I will eat now to maintain my reserves before they drop further, as a methodical keeper of shared resources should stay prepared.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_243",
+              "seq": 243,
+              "type": "eat_ration",
+              "actor_id": "shared:well-keeper",
+              "subject_id": "shared:well-keeper",
+              "recipient_ids": [
+                "shared:well-keeper"
+              ],
+              "operation_id": "turn:shared:well-keeper:1:16",
+              "source": "opengameagent_live",
+              "text": "Ari: eat_ration (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:well-keeper:1:17",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "Energy is at 52, which is not zero, and satiety is 100, so no urgent survival need exists. However, my energy is low enough that resting now is prudent before it drops further. I have no food left to eat, and no immediate water-keeping duties require action. Resting is the most sensible recovery step available."
+          },
+          "resolved_action": "life:rest",
+          "stated_reason": "Energy is at 52, which is not zero, and satiety is 100, so no urgent survival need exists. However, my energy is low enough that resting now is prudent before it drops further. I have no food left to eat, and no immediate water-keeping duties require action. Resting is the most sensible recovery step available.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_245",
+              "seq": 245,
+              "type": "rest",
+              "actor_id": "shared:well-keeper",
+              "subject_id": "shared:well-keeper",
+              "recipient_ids": [
+                "shared:well-keeper"
+              ],
+              "operation_id": "turn:shared:well-keeper:1:17",
+              "source": "opengameagent_live",
+              "text": "Ari: rest (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:well-keeper:1:18",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "Satiety is 99 and energy is 86, so no urgent survival need. Food is 0 in inventory, so I should attempt to harvest a ration to rebuild my stock. This aligns with my methodical nature of maintaining dependable access to necessities."
+          },
+          "resolved_action": "life:harvest_ration",
+          "stated_reason": "Satiety is 99 and energy is 86, so no urgent survival need. Food is 0 in inventory, so I should attempt to harvest a ration to rebuild my stock. This aligns with my methodical nature of maintaining dependable access to necessities.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [],
+          "current_command_status": "pending",
+          "current_trade_command_status": "pending",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {
+        "action": "harvest_ration",
+        "command_id": "turn:shared:well-keeper:1:18",
+        "elapsed": 0,
+        "provenance": "opengameagent_live"
+      },
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:baker",
+      "name": "Wren",
+      "decisions": [
+        {
+          "request_id": "turn:shared:baker:0:17",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a16",
+            "reason": "I want to visit the Planted Commons—public greenery sounds like a calm place to observe and maybe meet someone new. My satiety and energy are fine, so no urgent needs."
+          },
+          "resolved_action": "place:travel:planted_commons",
+          "stated_reason": "I want to visit the Planted Commons—public greenery sounds like a calm place to observe and maybe meet someone new. My satiety and energy are fine, so no urgent needs.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "place_travel_started",
+            "effect": {
+              "ok": true,
+              "code": "place_travel_started",
+              "pending": true,
+              "place_id": "planted_commons"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "type": "place_visited",
+              "actor_id": "shared:baker",
+              "subject_id": "shared:baker",
+              "recipient_ids": [
+                "shared:baker"
+              ],
+              "operation_id": "turn:shared:baker:0:17",
+              "source": "opengameagent_live",
+              "place_id": "planted_commons",
+              "target_position": [
+                -1.2000000476837158,
+                0.10000000149011612,
+                51.79999923706055
+              ],
+              "text": "I followed the route I know and arrived at Planted Commons.",
+              "seq": 240,
+              "event_id": "life_event_240"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": "completed",
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:baker:0:18",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a16",
+            "reason": "I'm at the Planted Commons now and want to look around carefully. I can smell things, notice textures, and see if there's anything food-related here—maybe plants I recognize, or someone working with ingredients. My satiety and energy are fine, so I have space to be curious and gather impressions for my baking dream without rushing."
+          },
+          "resolved_action": "ability:observe",
+          "stated_reason": "I'm at the Planted Commons now and want to look around carefully. I can smell things, notice textures, and see if there's anything food-related here—maybe plants I recognize, or someone working with ingredients. My satiety and energy are fine, so I have space to be curious and gather impressions for my baking dream without rushing.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "surroundings_observed",
+            "effect": {
+              "ok": true,
+              "code": "surroundings_observed",
+              "event_id": "life_event_241",
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "private_observation"
+              }
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "private_observation"
+            }
+          },
+          "later_events": [
+            {
+              "type": "surroundings_observed",
+              "actor_id": "shared:baker",
+              "subject_id": "shared:baker",
+              "recipient_ids": [
+                "shared:baker"
+              ],
+              "operation_id": "turn:shared:baker:0:18",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "I paused to observe my current surroundings.",
+              "contractual": false,
+              "observed": {
+                "position": [
+                  -0.7975111603736877,
+                  0.0008127404726110399,
+                  51.659610748291016
+                ],
+                "needs": {
+                  "hunger": 76
+                },
+                "nearby_residents": [],
+                "known_places": [
+                  "market_plaza",
+                  "planted_commons"
+                ]
+              },
+              "private_observation": true,
+              "seq": 241,
+              "event_id": "life_event_241"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:smith",
+      "name": "Flint",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:carpenter",
+      "name": "Rowan",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {
+          "action": "recover_material",
+          "command_id": "turn:shared:carpenter:0:31",
+          "source_id": "street:iron-salvage-20260918",
+          "provenance": "opengameagent_live",
+          "elapsed": 3.6166666666666663,
+          "duration_seconds": 60
+        },
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:innkeeper",
+      "name": "Mara",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:herder",
+      "name": "Heath",
+      "decisions": [
+        {
+          "request_id": "turn:shared:herder:0:15",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a17",
+            "reason": "Sage the healer greeted me and asked how the day has been. I want to respond warmly and ask if they know of any animals or animal-care opportunities nearby, since my goal is to learn animal care through real chances.",
+            "speech": "Sage, thank you, the day has been quiet. I'm looking for any chance to learn about caring for animals—do you know if anyone keeps livestock nearby, or where I might find such work?"
+          },
+          "resolved_action": "ability:talk:shared:healer",
+          "stated_reason": "Sage the healer greeted me and asked how the day has been. I want to respond warmly and ask if they know of any animals or animal-care opportunities nearby, since my goal is to learn animal care through real chances.",
+          "proposed_speech": "Sage, thank you, the day has been quiet. I'm looking for any chance to learn about caring for animals—do you know if anyone keeps livestock nearby, or where I might find such work?",
+          "actually_spoken": "Sage, thank you, the day has been quiet. I'm looking for any chance to learn about caring for animals—do you know if anyone keeps livestock nearby, or where I might find such work?",
+          "speech_event_seq": 249,
+          "recipients": [
+            "shared:herder",
+            "shared:healer"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "resident_said",
+            "effect": {
+              "ok": true,
+              "code": "resident_said",
+              "event_id": "life_event_249"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "Sage, thank you, the day has been quiet. I'm looking for any chance to learn about caring for animals—do you know if anyone keeps livestock nearby, or where I might find such work?",
+              "event_id": "life_event_249",
+              "event_seq": 249,
+              "recipient_ids": [
+                "shared:herder",
+                "shared:healer"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "resident_said",
+              "actor_id": "shared:herder",
+              "subject_id": "shared:healer",
+              "recipient_ids": [
+                "shared:herder",
+                "shared:healer"
+              ],
+              "operation_id": "turn:shared:herder:0:15",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "Sage, thank you, the day has been quiet. I'm looking for any chance to learn about caring for animals—do you know if anyone keeps livestock nearby, or where I might find such work?",
+              "contractual": false,
+              "epistemic_status": "speaker_statement_not_verified_world_fact",
+              "seq": 249,
+              "event_id": "life_event_249"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:gardener",
+      "name": "Fern",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:weaver",
+      "name": "Iris",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:fisher",
+      "name": "Reed",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:healer",
+      "name": "Sage",
+      "decisions": [
+        {
+          "request_id": "turn:shared:healer:0:16",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "I have 1 food in inventory and satiety is at 61, which is not urgent, but my energy is 52 and declining. Eating now will stabilize my needs before they become critical, and I have the ration available."
+          },
+          "resolved_action": "life:eat_ration",
+          "stated_reason": "I have 1 food in inventory and satiety is at 61, which is not urgent, but my energy is 52 and declining. Eating now will stabilize my needs before they become critical, and I have the ration available.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_242",
+              "seq": 242,
+              "type": "eat_ration",
+              "actor_id": "shared:healer",
+              "subject_id": "shared:healer",
+              "recipient_ids": [
+                "shared:healer"
+              ],
+              "operation_id": "turn:shared:healer:0:16",
+              "source": "opengameagent_live",
+              "text": "Sage: eat_ration (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:healer:0:17",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "Energy is at 52, which is not critically low, but I have no food remaining and no immediate way to acquire more. Resting will help preserve my energy while I consider how to obtain food or resources tomorrow. With 14 Col, I may need to find work or forage when stock returns."
+          },
+          "resolved_action": "life:rest",
+          "stated_reason": "Energy is at 52, which is not critically low, but I have no food remaining and no immediate way to acquire more. Resting will help preserve my energy while I consider how to obtain food or resources tomorrow. With 14 Col, I may need to find work or forage when stock returns.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_244",
+              "seq": 244,
+              "type": "rest",
+              "actor_id": "shared:healer",
+              "subject_id": "shared:healer",
+              "recipient_ids": [
+                "shared:healer"
+              ],
+              "operation_id": "turn:shared:healer:0:17",
+              "source": "opengameagent_live",
+              "text": "Sage: rest (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:healer:0:18",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "I have 0 food in inventory and satiety will eventually deplete. Harvesting a ration now builds a small buffer against future need while I still have energy to travel. I cannot help others if my own basic needs become urgent."
+          },
+          "resolved_action": "life:harvest_ration",
+          "stated_reason": "I have 0 food in inventory and satiety will eventually deplete. Harvesting a ration now builds a small buffer against future need while I still have energy to travel. I cannot help others if my own basic needs become urgent.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_246",
+              "seq": 246,
+              "type": "harvest_ration",
+              "actor_id": "shared:healer",
+              "subject_id": "shared:healer",
+              "recipient_ids": [
+                "shared:healer"
+              ],
+              "operation_id": "turn:shared:healer:0:18",
+              "source": "opengameagent_live",
+              "text": "Sage: harvest_ration (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:healer:0:19",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "I have 1 food and 86 energy, both adequate, but I just harvested once and stock may be finite. Building a small buffer of rations is prudent while foraging is available, since I have no other food source recorded."
+          },
+          "resolved_action": "life:harvest_ration",
+          "stated_reason": "I have 1 food and 86 energy, both adequate, but I just harvested once and stock may be finite. Building a small buffer of rations is prudent while foraging is available, since I have no other food source recorded.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_247",
+              "seq": 247,
+              "type": "harvest_ration",
+              "actor_id": "shared:healer",
+              "subject_id": "shared:healer",
+              "recipient_ids": [
+                "shared:healer"
+              ],
+              "operation_id": "turn:shared:healer:0:19",
+              "source": "opengameagent_live",
+              "text": "Sage: harvest_ration (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:healer:0:20",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a16",
+            "reason": "I have adequate food and energy. Heath is nearby and I have not spoken with anyone recently. I would like to check whether they are well and whether anyone has need of simple assistance I might honestly offer.",
+            "speech": "Heath? I hope the day has been kind to you. I am only an herb-student still, but if there is any small thing I might do, or if you simply wished for quiet company, I am here."
+          },
+          "resolved_action": "ability:talk:shared:herder",
+          "stated_reason": "I have adequate food and energy. Heath is nearby and I have not spoken with anyone recently. I would like to check whether they are well and whether anyone has need of simple assistance I might honestly offer.",
+          "proposed_speech": "Heath? I hope the day has been kind to you. I am only an herb-student still, but if there is any small thing I might do, or if you simply wished for quiet company, I am here.",
+          "actually_spoken": "Heath? I hope the day has been kind to you. I am only an herb-student still, but if there is any small thing I might do, or if you simply wished for quiet company, I am here.",
+          "speech_event_seq": 248,
+          "recipients": [
+            "shared:healer",
+            "shared:herder"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "resident_said",
+            "effect": {
+              "ok": true,
+              "code": "resident_said",
+              "event_id": "life_event_248"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "Heath? I hope the day has been kind to you. I am only an herb-student still, but if there is any small thing I might do, or if you simply wished for quiet company, I am here.",
+              "event_id": "life_event_248",
+              "event_seq": 248,
+              "recipient_ids": [
+                "shared:healer",
+                "shared:herder"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "resident_said",
+              "actor_id": "shared:healer",
+              "subject_id": "shared:herder",
+              "recipient_ids": [
+                "shared:healer",
+                "shared:herder"
+              ],
+              "operation_id": "turn:shared:healer:0:20",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "Heath? I hope the day has been kind to you. I am only an herb-student still, but if there is any small thing I might do, or if you simply wished for quiet company, I am here.",
+              "contractual": false,
+              "epistemic_status": "speaker_statement_not_verified_world_fact",
+              "seq": 248,
+              "event_id": "life_event_248"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:healer:0:21",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "I have 2 food and adequate energy. Heath is nearby and may need support; offering a ration aligns with my bond of letting people ask without humiliation, though I will not press if refused.",
+            "speech": "Heath, I have a spare ration if it would help. No obligation—just say the word."
+          },
+          "resolved_action": "food:give:shared:herder",
+          "stated_reason": "I have 2 food and adequate energy. Heath is nearby and may need support; offering a ration aligns with my bond of letting people ask without humiliation, though I will not press if refused.",
+          "proposed_speech": "Heath, I have a spare ration if it would help. No obligation—just say the word.",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "food_handed_over",
+            "effect": {
+              "ok": true,
+              "code": "food_handed_over",
+              "actor_id": "shared:healer",
+              "recipient_id": "shared:herder",
+              "quantity": 1,
+              "event_id": "life_event_250",
+              "speech_delivery": {
+                "ok": false,
+                "code": "speech_not_supported_for_action",
+                "delivered": false
+              }
+            },
+            "speech_delivery": {
+              "ok": false,
+              "code": "speech_not_supported_for_action",
+              "delivered": false
+            }
+          },
+          "later_events": [
+            {
+              "type": "food_handed_over",
+              "actor_id": "shared:healer",
+              "subject_id": "shared:herder",
+              "recipient_ids": [
+                "shared:healer",
+                "shared:herder"
+              ],
+              "operation_id": "turn:shared:healer:0:21",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "quantity": 1,
+              "contractual": false,
+              "text": "Sage gave 1 of their ordinary rations to Heath in person. This was a gift, not a trade.",
+              "seq": 250,
+              "event_id": "life_event_250"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    }
+  ],
+  "new_world_events": [
+    {
+      "type": "material_notice_read",
+      "actor_id": "shared:baker",
+      "recipient_ids": [
+        "shared:baker"
+      ],
+      "operation_id": "material-notice:585347cf72a664e9d3e65dffe2eb05a2",
+      "source": "host_line_of_sight_notice_read",
+      "notice_id": "public_notice:material_routes:v1",
+      "notice_position": [
+        2.5,
+        0.04500000178813934,
+        50
+      ],
+      "observer_position": [
+        6.00984001159668,
+        0.0008660179446451366,
+        51.319026947021484
+      ],
+      "source_id": "street:iron-salvage-20260918",
+      "stock": null,
+      "text": "I read the public material notice. Street salvage iron heap: public iron, 42 m north, 3 m west. Follow the streets; sort for 60 seconds per unit. Finite supply; current stock unknown and not promised.",
+      "seq": 239,
+      "event_id": "life_event_239"
+    },
+    {
+      "type": "place_visited",
+      "actor_id": "shared:baker",
+      "subject_id": "shared:baker",
+      "recipient_ids": [
+        "shared:baker"
+      ],
+      "operation_id": "turn:shared:baker:0:17",
+      "source": "opengameagent_live",
+      "place_id": "planted_commons",
+      "target_position": [
+        -1.2000000476837158,
+        0.10000000149011612,
+        51.79999923706055
+      ],
+      "text": "I followed the route I know and arrived at Planted Commons.",
+      "seq": 240,
+      "event_id": "life_event_240"
+    },
+    {
+      "type": "surroundings_observed",
+      "actor_id": "shared:baker",
+      "subject_id": "shared:baker",
+      "recipient_ids": [
+        "shared:baker"
+      ],
+      "operation_id": "turn:shared:baker:0:18",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "I paused to observe my current surroundings.",
+      "contractual": false,
+      "observed": {
+        "position": [
+          -0.7975111603736877,
+          0.0008127404726110399,
+          51.659610748291016
+        ],
+        "needs": {
+          "hunger": 76
+        },
+        "nearby_residents": [],
+        "known_places": [
+          "market_plaza",
+          "planted_commons"
+        ]
+      },
+      "private_observation": true,
+      "seq": 241,
+      "event_id": "life_event_241"
+    },
+    {
+      "event_id": "life_event_242",
+      "seq": 242,
+      "type": "eat_ration",
+      "actor_id": "shared:healer",
+      "subject_id": "shared:healer",
+      "recipient_ids": [
+        "shared:healer"
+      ],
+      "operation_id": "turn:shared:healer:0:16",
+      "source": "opengameagent_live",
+      "text": "Sage: eat_ration (Godot continuation, opengameagent_live)"
+    },
+    {
+      "event_id": "life_event_243",
+      "seq": 243,
+      "type": "eat_ration",
+      "actor_id": "shared:well-keeper",
+      "subject_id": "shared:well-keeper",
+      "recipient_ids": [
+        "shared:well-keeper"
+      ],
+      "operation_id": "turn:shared:well-keeper:1:16",
+      "source": "opengameagent_live",
+      "text": "Ari: eat_ration (Godot continuation, opengameagent_live)"
+    },
+    {
+      "event_id": "life_event_244",
+      "seq": 244,
+      "type": "rest",
+      "actor_id": "shared:healer",
+      "subject_id": "shared:healer",
+      "recipient_ids": [
+        "shared:healer"
+      ],
+      "operation_id": "turn:shared:healer:0:17",
+      "source": "opengameagent_live",
+      "text": "Sage: rest (Godot continuation, opengameagent_live)"
+    },
+    {
+      "event_id": "life_event_245",
+      "seq": 245,
+      "type": "rest",
+      "actor_id": "shared:well-keeper",
+      "subject_id": "shared:well-keeper",
+      "recipient_ids": [
+        "shared:well-keeper"
+      ],
+      "operation_id": "turn:shared:well-keeper:1:17",
+      "source": "opengameagent_live",
+      "text": "Ari: rest (Godot continuation, opengameagent_live)"
+    },
+    {
+      "event_id": "life_event_246",
+      "seq": 246,
+      "type": "harvest_ration",
+      "actor_id": "shared:healer",
+      "subject_id": "shared:healer",
+      "recipient_ids": [
+        "shared:healer"
+      ],
+      "operation_id": "turn:shared:healer:0:18",
+      "source": "opengameagent_live",
+      "text": "Sage: harvest_ration (Godot continuation, opengameagent_live)"
+    },
+    {
+      "event_id": "life_event_247",
+      "seq": 247,
+      "type": "harvest_ration",
+      "actor_id": "shared:healer",
+      "subject_id": "shared:healer",
+      "recipient_ids": [
+        "shared:healer"
+      ],
+      "operation_id": "turn:shared:healer:0:19",
+      "source": "opengameagent_live",
+      "text": "Sage: harvest_ration (Godot continuation, opengameagent_live)"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:healer",
+      "subject_id": "shared:herder",
+      "recipient_ids": [
+        "shared:healer",
+        "shared:herder"
+      ],
+      "operation_id": "turn:shared:healer:0:20",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "Heath? I hope the day has been kind to you. I am only an herb-student still, but if there is any small thing I might do, or if you simply wished for quiet company, I am here.",
+      "contractual": false,
+      "epistemic_status": "speaker_statement_not_verified_world_fact",
+      "seq": 248,
+      "event_id": "life_event_248"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:herder",
+      "subject_id": "shared:healer",
+      "recipient_ids": [
+        "shared:herder",
+        "shared:healer"
+      ],
+      "operation_id": "turn:shared:herder:0:15",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "Sage, thank you, the day has been quiet. I'm looking for any chance to learn about caring for animals—do you know if anyone keeps livestock nearby, or where I might find such work?",
+      "contractual": false,
+      "epistemic_status": "speaker_statement_not_verified_world_fact",
+      "seq": 249,
+      "event_id": "life_event_249"
+    },
+    {
+      "type": "food_handed_over",
+      "actor_id": "shared:healer",
+      "subject_id": "shared:herder",
+      "recipient_ids": [
+        "shared:healer",
+        "shared:herder"
+      ],
+      "operation_id": "turn:shared:healer:0:21",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "quantity": 1,
+      "contractual": false,
+      "text": "Sage gave 1 of their ordinary rations to Heath in person. This was a gift, not a trade.",
+      "seq": 250,
+      "event_id": "life_event_250"
+    }
+  ],
+  "limitation": "No decisions or speech are inferred from a personality profile. A pending provider request has no known decision."
+}
