@@ -2281,6 +2281,22 @@
       "phase": "commentary",
       "text": "我先核对 H128 提交、正式存档和当前归档状态；这轮优先把已验证修复上传并核验远端，然后再安排零模型续跑，不会重复付费请求。",
       "text_sha256": "fad7763b391eaf3406c8db631d23b5f4863c38aa75bedabbd0801edb2560dbf9"
+    },
+    {
+      "source_line": 13034,
+      "timestamp": "2026-09-20T09:24:03.512Z",
+      "role": "assistant",
+      "phase": "commentary",
+      "text": "我已把 H128 代码和归档上传前置完成。现在做一次“零模型、零付费”的正式引擎入口试跑：复制 seq263 存档，让原有 Carpenter 任务继续完成，确认生产启动链不会因为没有新模型回合而报错。",
+      "text_sha256": "bbb8212476089d714cd9cdc7fe98cae7b8300166bd2942cab5901e646d5d4ab8"
+    },
+    {
+      "source_line": 13132,
+      "timestamp": "2026-09-20T09:30:20.889Z",
+      "role": "assistant",
+      "phase": "commentary",
+      "text": "零请求正式入口也验证通过：引擎退出码 0、决策数 0、provider 未启动、存档副本仍是 seq263。现在把 H129 证据提交并刷新可见对话归档后上传。",
+      "text_sha256": "086d64ff8d927aed94d34b76c20fc7f90a38e345a2d3b6db682dd21e6a2877b4"
     }
   ]
 }
