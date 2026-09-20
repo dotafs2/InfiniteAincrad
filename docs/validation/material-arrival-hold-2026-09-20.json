@@ -1,0 +1,53 @@
+{
+  "kind": "offline_physics_copy_of_live_checkpoint",
+  "canonical_seq": 263,
+  "canonical_unchanged_sha256": "e6bfd0c39d4c3c70841cbda3e59906ee76d56b83ffd07b933d2c5e9af7b16541",
+  "paid_calls": 0,
+  "baseline_commit": "dc096955e88bf6702171cd2d61c460bb952515f8",
+  "baseline": {
+    "seconds": 15.0000000000003,
+    "work_before": 5.68333333333333,
+    "work_after": 7.23333333333333,
+    "first_distance_m": 0.372416168451309,
+    "last_distance_m": 0.605534374713898,
+    "receipt": {},
+    "navigation": "following"
+  },
+  "fixed": {
+    "seconds": 54.7833333333315,
+    "copy_seq": 264,
+    "receipt": {
+      "actor_id": "shared:carpenter",
+      "code": "material_depleted",
+      "command_id": "turn:shared:carpenter:0:31",
+      "material": "iron",
+      "ok": false,
+      "quantity": 0,
+      "source_id": "street:iron-salvage-20260918"
+    },
+    "checks": {
+      "finite_sources_unchanged": true,
+      "history_prefix_retained": true,
+      "job_closed": true,
+      "material_accounts_unchanged": true,
+      "material_command_count_unchanged": true,
+      "no_model_controller": true,
+      "original_command_completed": true
+    },
+    "distance_range_m": [
+      0.445857137441635,
+      0.445857137441635
+    ],
+    "cold_restore": "ten residents, seq264, all nested fields equal"
+  },
+  "limitations": [
+    "Controlled continuation of an existing model-selected command; no new model choice.",
+    "Canonical world stays seq263; the copy seq264 is not promoted into live history.",
+    "Four existing navigation edge warnings remain.",
+    "Delegated read-only review failed with model capacity; root inspected and verified the change."
+  ],
+  "evidence_sha256": {
+    "baseline-result.json": "e945f87676636099fb06e74974dde5691d1c281d508780fea492c5812df2dc68",
+    "verified-result.json": "22f47aeda5a48c25d6593cab2fa3ce38f71fe81f0f46ebf8b807959e72248e3b"
+  }
+}

@@ -9,4 +9,15 @@ The inspected runtime has two separate rules:
 
 The helper now tries a collision-cleared point 0.40 m from the source when the exact center is blocked. The destination remains the source center for world accounting, and the world still owns the 0.45 m arrival gate, 60-second timer, finite stock and receipt. The change cannot create a unit or bypass a collider.
 
-This checkout did not contain a valid Godot executable for a scene replay; the discovered `godot.exe` was a test fixture and Windows rejected it as incompatible. `git diff --check` and Python compile checks pass. The next owned scene run must verify that Carpenter reaches the work gate and either completes the truthful depleted receipt or remains visibly blocked before another paid window is considered.
+## Owned replay
+
+The repository toolchain supplied `Godot_v4.7.2-stable_mono_win64.exe`. Using a disposable `fixture:town-trade-validation` save and no provider calls, `town_material_travel_probe.gd` completed with exit code 0 and `open_path_passed: true`:
+
+- final distance: 0.2900 m (inside the world's 0.45 m work gate);
+- full 60-second physical work completed;
+- receipt: `material_recovered`, quantity 1;
+- source stock: 3 → 2;
+- worker iron: 1 → 2;
+- no stderr errors and no paid calls.
+
+The first compile attempt also exposed that the other steering subclasses inherit `ARRIVAL_RADIUS`. That compatibility constant is retained in the fix; the material helper uses its separate 0.45 m work gate. The live seq250 save was not rewritten by this fixture replay, and its exhausted source remains untouched. The next live observation can continue the existing Carpenter command only after the normal preflight; it must not retry the old command as a new request.
