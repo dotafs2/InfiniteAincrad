@@ -1,5 +1,13 @@
 # 历史全部流水
 
+## 2026-09-20 · H125 Material trip approach-point fix
+
+The H124 checkpoint left Carpenter 0.86 m from the finite source with only 3.6167/60 work seconds recorded. Code inspection narrowed the stall to a mismatch between the physical capsule sweep and the world's accepted 0.45 m work radius: the steering helper asked the body to occupy the exact source center, so a final terrain or display collision could leave a reachable trip stationary.
+
+Material steering now keeps the exact source as the authoritative destination but, when that center is not sweep-clear, walks to a collision-cleared point 0.40 m away. The world still decides arrival, elapsed work, depletion, inventory and history. No source retry, material grant or save mutation was made. A valid Godot binary was unavailable in this checkout for a scene replay; `git diff --check` and Python compile checks pass, so the next owned run must verify the physical continuation before any new paid observation.
+
+[Code](game/spatial/town_material_steering.gd) · [H124 evidence](docs/validation/material-pending-2026-09-20.md)
+
 ## 2026-09-20 · H124 Pending material job at the episode boundary
 
 A bounded twelve-call resident window advanced `shared:restart-20260918-01` from seq238 to seq250. All calls settled for CNY 0.2570856; the gateway drained, the checkpoint contains ten residents and 217 archived attempts, and no new provider result or charge is unknown.

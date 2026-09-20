@@ -13,7 +13,11 @@ extends RefCounted
 ## unsolved path case.
 
 const MAX_GOAL_DISTANCE := 4.0
-const ARRIVAL_RADIUS := 0.30
+# The world accepts material work once the body is within 0.45 m of the
+# source.  A source display or the final terrain lip can make its exact center
+# fail a capsule sweep even though this valid work radius is reachable.
+const WORLD_ARRIVAL_RADIUS := 0.45
+const APPROACH_CLEARANCE := 0.40
 const WAYPOINT_REACHED := 0.15
 const TARGET_TOLERANCE := 0.05
 const CANDIDATE_DISTANCES := [0.8, 1.2, 1.8, 2.4]
@@ -47,7 +51,7 @@ func direction_for(id: String, command_id: String, body: CharacterBody3D, target
 	goal.y = body.global_position.y
 	var to_goal := goal - body.global_position
 	to_goal.y = 0.0
-	if to_goal.length() <= ARRIVAL_RADIUS:
+	if to_goal.length() <= WORLD_ARRIVAL_RADIUS:
 		_routes.erase(id)
 		return Vector3.ZERO
 	if to_goal.length() > MAX_GOAL_DISTANCE:
@@ -56,6 +60,16 @@ func direction_for(id: String, command_id: String, body: CharacterBody3D, target
 	if _corridor_clear(body, body.global_position, to_goal):
 		_routes.erase(id)
 		return to_goal.normalized()
+	# The exact source center is a logical work target, not a point the capsule
+	# must occupy.  If only the last few centimetres are blocked, walk to the
+	# nearest point inside the world's 0.45 m arrival gate and let the world
+	# advance the job there.  This preserves the destination, collision checks,
+	# and material accounting while preventing a reachable trip from stalling at
+	# a source prop or terrain edge.
+	var approach := _reachable_approach(body, goal)
+	if approach.length() > 0.0:
+		_routes.erase(id)
+		return approach.normalized()
 	var cached: Dictionary = _routes.get(id, {})
 	if not cached.is_empty() and _route_still_valid(cached, command_id, goal, body):
 		var waypoint: Vector3 = cached.waypoint
@@ -80,6 +94,21 @@ func direction_for(id: String, command_id: String, body: CharacterBody3D, target
 	if first_leg.length() <= WAYPOINT_REACHED:
 		return to_goal.normalized()
 	return first_leg.normalized()
+
+func _reachable_approach(body: CharacterBody3D, goal: Vector3) -> Vector3:
+	var to_goal := goal - body.global_position
+	to_goal.y = 0.0
+	var distance := to_goal.length()
+	if distance <= WORLD_ARRIVAL_RADIUS:
+		return Vector3.ZERO
+	var point := goal - to_goal.normalized() * APPROACH_CLEARANCE
+
+	point.y = body.global_position.y
+	var motion := point - body.global_position
+	motion.y = 0.0
+	if motion.length() <= 0.001 or not _corridor_clear(body, body.global_position, motion):
+		return Vector3.ZERO
+	return motion
 
 func _route_still_valid(cached: Dictionary, command_id: String, goal: Vector3, body: CharacterBody3D) -> bool:
 	if str(cached.get("command_id", "")) != command_id:
