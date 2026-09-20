@@ -558,6 +558,7 @@ func _physics_process(delta: float) -> void:
 		var body: CharacterBody3D = bodies[id]
 		var actor: Node3D = actors[id]
 		var moving := false
+		var movement_direction := Vector3.ZERO
 		if not job.is_empty():
 			_foraging_exit_targets.erase(id)
 			var target := town.destination(id, job.action)
@@ -688,6 +689,7 @@ func _physics_process(delta: float) -> void:
 				body.velocity.x = direction.x * 1.35
 				body.velocity.z = direction.z * 1.35
 				actor.look_at(actor.global_position + direction)
+				movement_direction = direction
 			else:
 				body.velocity.x = 0
 				body.velocity.z = 0
@@ -715,6 +717,7 @@ func _physics_process(delta: float) -> void:
 				if exit_target.is_finite():
 					home_offset = foraging_steering.direction_for(id, "foraging-clearance:" + id, body, exit_target)
 			moving = home_offset.length() > 0.30
+			movement_direction = home_offset.normalized() if moving else Vector3.ZERO
 			body.velocity.x = home_offset.normalized().x * 1.35 if moving else 0.0
 			body.velocity.z = home_offset.normalized().z * 1.35 if moving else 0.0
 			if moving:
@@ -726,7 +729,7 @@ func _physics_process(delta: float) -> void:
 			# Stage-one PCG navigation deliberately ignores collision and penetration.
 			# The full-map graph acceptance proves the route contract; physical motion
 			# remains a later mode with the same destinations and job gates.
-			body.position += direction * 1.35 * delta
+			body.position += movement_direction * 1.35 * delta
 			body.velocity = Vector3.ZERO
 		else:
 			body.move_and_slide()
