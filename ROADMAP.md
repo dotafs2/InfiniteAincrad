@@ -10,6 +10,8 @@ The active lineage has since advanced to seq265 with 244 world usage records and
 
 ## Current work
 
+- **H132:** a zero-call Godot probe on canonical seq265 found three lawful Rowan→Flint edge-repair offers (2/5/8 Col). On a disposable copy, the unchanged authoritative path proposed and accepted the 2 Col contract, reserved exactly 2 Col and preserved Flint's one iron. The canonical save stayed byte-identical; this is scripted affordance evidence, not model adoption. Delivery, physical work and collection remain open. [Evidence](docs/validation/material-contract-affordance-2026-09-20.json)
+
 - **H131:** one fresh serial Kimi call settled for CNY 0.0253665 with no unknowns. Flint held one iron and Rowan was 0.53 m away; the model selected a real `willing` reply to Rowan's earlier help request rather than the available material-share option. The canonical world advanced seq264→265, preserving ten residents and full history; no transfer, new repair contract or edge repair completed. [Evidence](docs/validation/material-handoff-live-2026-09-20.json)
 
 - **H130:** a verified continuation of the already accepted Carpenter command now closes at canonical seq264 with a truthful zero-quantity `material_depleted` receipt. The public finite source remains initial3/recovered3/stock0; no iron moved and the axe edge remains unrepaired. No new resident or GM call was admitted, and no fee or unknown request was retried. The public checkpoint and exact ten-resident cold restore pass. [Evidence](docs/validation/material-formal-continuation-2026-09-20.json)
