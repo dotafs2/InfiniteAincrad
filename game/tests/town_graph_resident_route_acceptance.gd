@@ -45,6 +45,7 @@ func run() -> void:
 	var reached := 0
 	for home_id in home_ids:
 		var target: Vector3 = graph.regions[home_id]["position"]
+		var target_id := "home:" + home_id.trim_prefix("pcg:home:")
 		npc.global_position = graph.regions[root_id]["position"]
 		var command := "formal-route:" + home_id
 		var arrived := false
@@ -52,7 +53,8 @@ func run() -> void:
 			if npc.global_position.distance_to(target) <= 0.45:
 				arrived = true
 				break
-			var direction: Vector3 = navigation.graph_direction_for("formal-resident", command, npc, target)
+			var direction: Vector3 = navigation.graph_direction_for_target(
+				"formal-resident", command, npc, target_id, target)
 			if navigation.graph_route_is_unreachable("formal-resident"):
 				break
 			if direction.length() <= 0.0:
@@ -72,6 +74,8 @@ func run() -> void:
 				npc.position += direction * minf(0.10, distance)
 		check(not navigation.graph_route_is_unreachable("formal-resident"), "formal route remains connected to %s" % home_id)
 		check(arrived, "formal resident reaches %s" % home_id)
+		check(navigation.route_region_for_target(target_id) == home_id,
+			"stable target ID remains bound to %s" % home_id)
 		if arrived: reached += 1
 	check(reached == home_ids.size(), "formal resident reaches every authored home")
 	print(JSON.stringify({"ok": failures.is_empty(), "checks": checks, "failures": failures,
