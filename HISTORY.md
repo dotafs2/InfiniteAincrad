@@ -1,5 +1,9 @@
 # 历史全部流水
 
+## 2026-09-20 · H134 Offline contract lifecycle is complete
+
+With no resident or provider call, the existing `town_trade` fixture ran the full authoritative edge-repair lifecycle in a disposable save: proposal, acceptance and Col escrow, physical delivery, 60 seconds at the worksite consuming one iron, edge restoration to 100, and one-time collection payment. All 63 checks passed and the canonical seq266 save remained byte-identical. This confirms the code path needed after Flint accepts Rowan's live proposal; it is not live acceptance or unattended execution. [Evidence](docs/validation/material-contract-lifecycle-2026-09-20.json)
+
 ## 2026-09-20 · H133 Rowan makes a real edge-repair offer
 
 After a full-scene parse preflight exposed a duplicate `ARRIVAL_RADIUS` declaration in `town_material_steering.gd`, the duplicate legacy declaration was removed. The material regression passed 60/0 and a read-only full-scene restore exited 0, with only the known navigation and Forward+ warnings.

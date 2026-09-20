@@ -10,6 +10,8 @@ The active lineage has since advanced to seq266 with 245 world usage records and
 
 ## Current work
 
+- **H134:** the existing offline `town_trade` fixture provides a complete 63-check proof of the edge-repair lifecycle after acceptance: escrow, physical delivery, 60 seconds of work, one iron consumed, edge restored to 100 and one-time collection payment. Canonical seq266 stayed byte-identical and no provider call occurred. This closes the code-path uncertainty; Flint's live acceptance and unattended execution remain open. [Evidence](docs/validation/material-contract-lifecycle-2026-09-20.json)
+
 - **H133:** after removing a duplicate `ARRIVAL_RADIUS` declaration that blocked full-scene parsing, material regression passed 60/0 and a full-scene restore exited 0. One fresh serial Kimi call then produced Rowan's real `contract:offer:seed:axe:edge:shared:smith:2` decision and speech. The canonical world advanced seq265→266 with a proposed 2 Col contract, no escrow, no iron consumption and no physical work; the call settled for CNY 0.0275755 with no unknown request. Exact ten-resident cold restore passes. Flint's acceptance and delivery remain open. [Evidence](docs/validation/material-contract-live-2026-09-20.json)
 
 - **H132:** a zero-call Godot probe on canonical seq265 found three lawful Rowan→Flint edge-repair offers (2/5/8 Col). On a disposable copy, the unchanged authoritative path proposed and accepted the 2 Col contract, reserved exactly 2 Col and preserved Flint's one iron. The canonical save stayed byte-identical; this is scripted affordance evidence, not model adoption. Delivery, physical work and collection remain open. [Evidence](docs/validation/material-contract-affordance-2026-09-20.json)
