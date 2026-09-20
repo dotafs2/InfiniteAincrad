@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 266,
+  "end_seq": 266,
+  "canonical_sha256": "48845c0c15b46f7ef86c740ce1804a38e40553455c1a6f114771e2d745694cbd",
+  "kind": "offline_contract_lifecycle_fixture",
+  "decision_count": 0,
+  "checks": 63,
+  "failures": 0,
+  "paid_calls": 0,
+  "canonical_world_changed": false,
+  "lifecycle": {
+    "proposed": true,
+    "accepted": true,
+    "escrow_reserved": true,
+    "physical_delivery": true,
+    "work_seconds": 60,
+    "iron_consumed": 1,
+    "edge_restored": true,
+    "collection_paid_once": true
+  },
+  "limitation": "Scripted disposable fixture; the live world still needs Flint to accept Rowan's seq266 proposal.",
+  "test_artifact": "private/iteration-20260919/h134-contract-lifecycle/h134-contract-lifecycle.stdout.log",
+  "created_utc": "2026-09-20T14:00:18.576382+00:00"
+}
