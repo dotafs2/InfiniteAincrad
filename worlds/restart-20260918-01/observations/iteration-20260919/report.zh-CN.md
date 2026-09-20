@@ -115,3 +115,9 @@ Carpenter 在本轮末尾仍保留一次进行中的铁源采集任务，工作�
 Carpenter 继续执行原有的 `turn:shared:carpenter:0:31`，仍在距铁源约 0.715 米处，累计 5.6833/60 秒；没有 material_depleted 终端回执，也没有材料转移、边缘修理契约或完成。H125 的 fixture 路线修复在真实场景仍未解决这段路线，下一步先做不付费的路径诊断。
 
 本轮保留 renderer 的已知 `particles is null` 错误及导航边缘警告；seq250 正式存档未被回滚。
+
+# 物理续接（seq263→seq264，2026-09-20）
+
+Carpenter Rowan 的既有 `turn:shared:carpenter:0:31` 采集任务在已验证的无模型物理副本中完成了终端结算。铁源此前已守恒耗尽，因此系统真实记录 `material_depleted`，数量为 0；任务关闭，没有新增铁、材料转交或刃口修理。
+
+这次正式提升只写入已经接受的旧命令：没有新 Kimi/GM 调用、没有费用、没有重试未知请求。seq264 冷恢复验证通过，十位居民和完整 264 条事件保留；公开 checkpoint 与哈希见 `material-continuation-seq264.json`。
