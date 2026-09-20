@@ -1,0 +1,89 @@
+{
+  "kind": "live_model_handoff_followup",
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 264,
+  "end_seq": 265,
+  "canonical_before_sha256": "42248743bd003f37d204c0a3f881d11b3e4f39535c084dfec81d1e4cc01f8740",
+  "canonical_after_sha256": "acac3ad539d3ee0f0d18bc05373e5b7c002e7fedb1a5a2469f71660a76415775",
+  "public_checkpoint": "restart-20260918-01/checkpoints/seq000265-acac3ad539d3ee0f.world.json",
+  "checkpoint_sha256": "acac3ad539d3ee0f0d18bc05373e5b7c002e7fedb1a5a2469f71660a76415775",
+  "model_calls": 1,
+  "paid_calls": 1,
+  "new_resident_unknowns": 0,
+  "new_call": {
+    "id": "npc:72bb0d38-1c2d-4e9b-8998-76809cbeafd7",
+    "actor_id": "shared:smith",
+    "source": "kimi_ledger",
+    "model": "kimi-k2.6",
+    "phase": "decision",
+    "status": "measured",
+    "usage": {
+      "cached_input_tokens": 0,
+      "input_tokens": 3591,
+      "output_tokens": 75,
+      "reasoning_output_tokens": null,
+      "total_tokens": 3666
+    },
+    "charge_nano": 25366500
+  },
+  "resident": "shared:smith",
+  "resident_name": "Flint",
+  "command_id": "turn:shared:smith:0:28",
+  "action": "reply:godot_help:turn:shared:carpenter:0:5:willing",
+  "model_choice": "a13",
+  "reason": "Rowan spoke to me about working together; replying 'willing' opens the door to clear terms without committing to a contract I haven't seen. I have 1 iron, enough for edge repair if a job follows.",
+  "result": {
+    "ok": true,
+    "code": "reply_help",
+    "request_id": "godot_help:turn:shared:carpenter:0:5",
+    "event_id": "life_event_265"
+  },
+  "offered_handoff": "ability:invite:shared:carpenter:market_plaza",
+  "iron_held_after": 1,
+  "carpenter_edge_after": 20,
+  "carpenter_handle_after": 100,
+  "source_stock": 0,
+  "source_recovered": 3,
+  "gateway_drained": true,
+  "engine_exit": 0,
+  "renderer_errors": 0,
+  "limitation": "Smith made a real model decision and replied willing to Rowan's earlier help request, but did not select the available iron handoff in this one-call window; no transfer, fresh repair contract, or edge repair completed.",
+  "ledger_before": {
+    "ledger_id": "f28322da-ca06-4a93-96f2-440805f6cc33",
+    "model": "kimi-k2.6",
+    "authorized_cny": 45.2612833,
+    "allocation_cap_cny": 45.2112833,
+    "settled_cny": 0.0,
+    "prior_unverified_cny": 44.2612833,
+    "reserved_cny": 0.0,
+    "liability_cny": 44.2612833,
+    "remaining_allocatable_cny": 0.95,
+    "counts": {},
+    "halted": "",
+    "deadline_utc": 1789904450
+  },
+  "ledger_after": {
+    "ledger_id": "f28322da-ca06-4a93-96f2-440805f6cc33",
+    "model": "kimi-k2.6",
+    "authorized_cny": 45.2612833,
+    "allocation_cap_cny": 45.2112833,
+    "settled_cny": 0.0253665,
+    "prior_unverified_cny": 44.2612833,
+    "reserved_cny": 0.0,
+    "liability_cny": 44.2866498,
+    "remaining_allocatable_cny": 0.9246335,
+    "counts": {
+      "settled": 1
+    },
+    "halted": "",
+    "deadline_utc": 1789904235
+  },
+  "created_utc": "2026-09-20T11:39:44.332223+00:00",
+  "verification": {
+    "cold_restore": "WORLD_CHECKPOINT_RESTORE_OK residents=10 seq=265 exact_fields=true",
+    "cold_restore_exit_code": 0,
+    "cold_restore_output_sha256": "41a9a584ab4e1b439f8056e01a0437ec2ffc2a75bd10cff669b1ef3babe7fe23",
+    "restored_world_sha256": "acac3ad539d3ee0f0d18bc05373e5b7c002e7fedb1a5a2469f71660a76415775",
+    "all_nested_fields_equal": true
+  }
+}

@@ -1,5 +1,11 @@
 # 历史全部流水
 
+## 2026-09-20 · H131 Live Smith response opens the repair conversation
+
+A fresh one-request Kimi window continued the verified seq264 world. The gateway settled one measured call for CNY 0.0253665, drained cleanly and produced no unknown request. Flint (Smith) had one iron and Rowan (Carpenter) was within 0.53 m; the live menu exposed the material-share option. Smith's real model decision selected `reply:godot_help:turn:shared:carpenter:0:5:willing`, saying he wanted clear terms before committing. The response is real social progress, but no iron transfer, fresh repair contract or edge repair occurred.
+
+The canonical world is now seq265 with ten residents and the complete prior history. Exact checkpoint and usage hashes are recorded in [handoff evidence](docs/validation/material-handoff-live-2026-09-20.json). The finite source remains exhausted and the known navigation warning remains open.
+
 ## 2026-09-20 · H130 Formalize the verified zero-material continuation
 
 The already accepted Carpenter command `turn:shared:carpenter:0:31` was promoted from the verified physics-only seq263 copy to the canonical world as seq264. The finite iron source was already exhausted, so the authoritative terminal receipt is `material_depleted` with quantity zero; the job closed without an inventory change, transfer or edge repair. This was a single-writer continuation of an existing model-selected command: zero new NPC/GM calls, zero new cost and no retry of an unknown request.
