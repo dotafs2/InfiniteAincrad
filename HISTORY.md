@@ -1,5 +1,9 @@
 # 历史全部流水
 
+## 2026-09-20 · H129 Zero-request gateway preflight is clean
+
+The production town entry point was launched against a byte-identical disposable copy of the seq263 checkpoint with `--town-gateway --town-max-decisions=0 --town-stop-on-decision-limit`. It exited 0, closed admission immediately, resolved shutdown, started zero provider work and left the copy at seq263 with the existing Carpenter material command unchanged. The canonical save hash stayed `e6bfd0c3…b16541`; no model call, ledger write or canonical-world write occurred. The one existing navigation edge warning remains. This validates the no-new-request engine path, not a new resident observation. [Evidence](docs/validation/material-zero-request-engine-2026-09-20.json)
+
 ## 2026-09-20 · H128 Keep arrived material workers at the worksite
 
 The actual seq263 checkpoint copy disproved the assumption that H127's road fallback resolved Carpenter's stall. A* marked the target reachable, bypassing that fallback. During 15 seconds of unchanged production physics, the body entered the 0.45 m work gate (0.3724 m at the first sample), then crowd avoidance moved it outside again (0.6055 m at the last sample). Only 1.55 work seconds accrued. This was a navigation/work timer interaction, not proven source geometry blockage.
