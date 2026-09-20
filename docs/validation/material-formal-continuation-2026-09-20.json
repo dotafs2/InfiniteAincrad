@@ -1,0 +1,50 @@
+{
+  "kind": "formal_free_material_continuation",
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 263,
+  "end_seq": 264,
+  "canonical_sha256": "42248743bd003f37d204c0a3f881d11b3e4f39535c084dfec81d1e4cc01f8740",
+  "public_checkpoint": "restart-20260918-01/checkpoints/seq000264-42248743bd003f37.world.json",
+  "public_checkpoint_sha256": "42248743bd003f37d204c0a3f881d11b3e4f39535c084dfec81d1e4cc01f8740",
+  "actor_id": "shared:carpenter",
+  "command_id": "turn:shared:carpenter:0:31",
+  "source_id": "street:iron-salvage-20260918",
+  "receipt": {
+    "actor_id": "shared:carpenter",
+    "code": "material_depleted",
+    "command_id": "turn:shared:carpenter:0:31",
+    "material": "iron",
+    "ok": false,
+    "quantity": 0,
+    "source_id": "street:iron-salvage-20260918"
+  },
+  "source_stock_before": 0,
+  "source_stock_after": 0,
+  "source_recovered": 3,
+  "resident_count": 10,
+  "life_event_count": 264,
+  "model_calls": 0,
+  "paid_calls": 0,
+  "provider_started": false,
+  "verification": {
+    "cold_restore": "WORLD_CHECKPOINT_RESTORE_OK residents=10 seq=264 exact_fields=true",
+    "cold_restore_exit_code": 0,
+    "cold_restore_output_sha256": "42248743bd003f37d204c0a3f881d11b3e4f39535c084dfec81d1e4cc01f8740",
+    "all_nested_fields_equal": true,
+    "checks": {
+      "finite_sources_unchanged": true,
+      "history_prefix_retained": true,
+      "job_closed": true,
+      "material_accounts_unchanged": true,
+      "material_command_count_unchanged": true,
+      "no_model_controller": true,
+      "original_command_completed": true
+    }
+  },
+  "limitations": [
+    "No new model decision or GM call occurred.",
+    "The finite iron source remains exhausted; no iron was transferred and no edge repair was completed.",
+    "This closes the pre-existing collection job with a truthful material_depleted receipt."
+  ],
+  "created_utc": "2026-09-20T11:03:26.091189+00:00"
+}

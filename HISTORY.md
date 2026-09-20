@@ -1,10 +1,40 @@
 # 历史全部流水
 
+## 2026-09-20 · H130 Formalize the verified zero-material continuation
+
+The already accepted Carpenter command `turn:shared:carpenter:0:31` was promoted from the verified physics-only seq263 copy to the canonical world as seq264. The finite iron source was already exhausted, so the authoritative terminal receipt is `material_depleted` with quantity zero; the job closed without an inventory change, transfer or edge repair. This was a single-writer continuation of an existing model-selected command: zero new NPC/GM calls, zero new cost and no retry of an unknown request.
+
+The public seq264 checkpoint and observation record preserve all ten residents and 264 life events. Production cold restore passed with exact nested fields. The exhausted-source limitation and existing navigation warnings remain open. [Evidence](docs/validation/material-formal-continuation-2026-09-20.json)
+
+## 2026-09-20 · H129 Zero-request gateway preflight is clean
+
+The production town entry point was launched against a byte-identical disposable copy of the seq263 checkpoint with `--town-gateway --town-max-decisions=0 --town-stop-on-decision-limit`. It exited 0, closed admission immediately, resolved shutdown, started zero provider work and left the copy at seq263 with the existing Carpenter material command unchanged. The canonical save hash stayed `e6bfd0c3…b16541`; no model call, ledger write or canonical-world write occurred. The one existing navigation edge warning remains. This validates the no-new-request engine path, not a new resident observation. [Evidence](docs/validation/material-zero-request-engine-2026-09-20.json)
+
+## 2026-09-20 · H128 Keep arrived material workers at the worksite
+
+The actual seq263 checkpoint copy disproved the assumption that H127's road fallback resolved Carpenter's stall. A* marked the target reachable, bypassing that fallback. During 15 seconds of unchanged production physics, the body entered the 0.45 m work gate (0.3724 m at the first sample), then crowd avoidance moved it outside again (0.6055 m at the last sample). Only 1.55 work seconds accrued. This was a navigation/work timer interaction, not proven source geometry blockage.
+
+Material work now stops horizontal steering while the body is inside the same three-dimensional 0.45 m gate used by the world. Gravity, collisions, source destination and the 60-second timer remain authoritative. The H127 material road-route cache is also retained instead of being cleared immediately every frame. From the identical seq263 copy, the existing command finished after 54.7833 physics seconds with `material_depleted`, quantity zero. Seven assertions passed, including unchanged finite sources/accounts, preserved history and no new material command. Exact cold restore passed for all ten residents at copy seq264. Canonical seq263 and all provider records stayed unchanged; no model call occurred. The four existing navigation edge warnings remain. [Evidence](docs/validation/material-arrival-hold-2026-09-20.json)
+
+
+## 2026-09-20 · H127 Live route gets a measured street-graph fallback
+
+The real H126 Carpenter trip remained physically short of the exhausted source, so the next change stayed non-paid and preserved the existing command. `town_street.gd` now routes `recover_material` through the measured public-road graph used by place travel, clearing the old bounded material route first; the source center remains authoritative and the world still owns the 0.45 m work gate, collision checks, 60-second timer and finite accounting. This addresses the observed street/terrain route failure without inventing a material unit or retrying a provider request.
+
+Godot 4.7.2 checks pass for material accounting (60), blocked-state persistence (278), baking route compatibility (63), and public-place route/restart behavior (18). The historical standalone material fixture replay could not be rerun from the current fixture because its submit precondition no longer matches the present code state; H125 remains the accepted physical material replay. No paid calls or canonical-world writes were made in H127. [Code](game/spatial/town_street.gd)
+
+
+## 2026-09-20 · H126 Live route remains blocked after bounded capture
+
+A bounded twelve-call window advanced `shared:restart-20260918-01` from seq250 to seq263. All 12 calls settled for CNY 0.250603 with no unknown charge. The internal scene capture ran for 600 seconds, resolved its shutdown and drained the gateway; the outer validation wrapper then timed out while closing and was terminated with exit 124, so this is not reported as a clean end-to-end validation pass.
+
+The canonical save is now seq263. Carpenter is still 0.715 m from the exhausted iron source with only 5.6833/60 work seconds on the existing `turn:shared:carpenter:0:31` command. No material depletion receipt, transfer, edge-repair contract or repair completion occurred. The H125 fixture route remains proven, but the real scene path still needs a non-paid diagnosis. The eight known Forward+ `particles is null` errors and navigation edge warning remain separate evidence. [Evidence](docs/validation/material-live-2026-09-20.md)
+
 ## 2026-09-20 · H125 Material trip approach-point fix
 
 The H124 checkpoint left Carpenter 0.86 m from the finite source with only 3.6167/60 work seconds recorded. Code inspection narrowed the stall to a mismatch between the physical capsule sweep and the world's accepted 0.45 m work radius: the steering helper asked the body to occupy the exact source center, so a final terrain or display collision could leave a reachable trip stationary.
 
-Material steering now keeps the exact source as the authoritative destination but, when that center is not sweep-clear, walks to a collision-cleared point 0.40 m away. The world still decides arrival, elapsed work, depletion, inventory and history. No source retry, material grant or save mutation was made. A valid Godot binary was unavailable in this checkout for a scene replay; `git diff --check` and Python compile checks pass, so the next owned run must verify the physical continuation before any new paid observation.
+Material steering now keeps the exact source as the authoritative destination but, when that center is not sweep-clear, walks to a collision-cleared point 0.40 m away. An owned Godot 4.7.2 fixture replay reached 0.29 m, accumulated all 60 seconds and completed `material_recovered` (stock3→2, worker iron1→2). The world still decides arrival, elapsed work, depletion, inventory and history; no source retry or paid call was used. The replay also caught and fixed a compatibility regression by retaining the inherited `ARRIVAL_RADIUS` constant required by the other steering subclasses.
 
 [Code](game/spatial/town_material_steering.gd) · [H124 evidence](docs/validation/material-pending-2026-09-20.md)
 

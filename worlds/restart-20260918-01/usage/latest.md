@@ -21,12 +21,12 @@ Unknown usage stays unresolved. This report is never an NPC observation or model
 | Rowan | NPC | 31 / 0 | 96,853 | 3,104 | 16,384 | 99,957 | 0 |
 | Reed | NPC | 17 / 0 | 50,275 | 1,300 | 7,168 | 51,575 | 0 |
 | Fern | NPC | 14 / 0 | 41,180 | 1,237 | 6,656 | 42,417 | 0 |
-| Sage | NPC | 21 / 0 | 65,677 | 1,881 | 9,216 | 67,558 | 0 |
-| Heath | NPC | 15 / 0 | 44,878 | 1,243 | 5,632 | 46,121 | 0 |
-| Mara | NPC | 23 / 0 | 73,205 | 1,973 | 10,752 | 75,178 | 0 |
+| Sage | NPC | 23 / 0 | 72,028 | 2,008 | 9,728 | 74,036 | 0 |
+| Heath | NPC | 17 / 0 | 51,191 | 1,385 | 6,144 | 52,576 | 0 |
+| Mara | NPC | 28 / 0 | 90,042 | 2,355 | 13,312 | 92,397 | 0 |
 | Flint | NPC | 27 / 0 | 85,454 | 2,342 | 11,776 | 87,796 | 0 |
-| Iris | NPC | 32 / 0 | 100,299 | 2,843 | 16,384 | 103,142 | 0 |
-| Ari | NPC | 17 / 0 | 50,790 | 1,426 | 5,632 | 52,216 | 0 |
+| Iris | NPC | 33 / 0 | 103,458 | 2,916 | 16,896 | 106,374 | 0 |
+| Ari | NPC | 19 / 0 | 57,270 | 1,585 | 6,656 | 58,855 | 0 |
 
 Stable identity tags and exact per-call receipts are in the adjacent JSON file.
 Tokens do not by themselves establish a currency charge. Missing detailed counters stay marked unknown in JSON.

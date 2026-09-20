@@ -582,6 +582,14 @@ func _physics_process(delta: float) -> void:
 			## slot. A zero result keeps the valid A* direction; the accepted target, 0.45 m
 			## arrival gate, speed, work duration, resources and every collider remain unchanged.
 			var local_final_route := false
+			## A material job must remain at its accepted worksite for the full timer.
+			## RVO/crowd detours can otherwise move an already-arrived body out again.
+			## Use the same three-dimensional gate as TownMaterials, not a flat radius.
+			if job.action == "recover_material" and body.position.distance_to(target) <= 0.45:
+				direction = Vector3.ZERO
+				local_final_route = true
+				if town_navigation != null:
+					town_navigation.clear_route(id)
 			if job.action in LOCAL_FINAL_ROUTE_ACTIONS and social_steering != null:
 				var local_direction: Vector3 = social_steering.bounded_direction_for(
 					id, str(job.command_id), body, target)
@@ -612,8 +620,17 @@ func _physics_process(delta: float) -> void:
 				direction = place_steering.direction_for(id, str(job.command_id), body, target)
 			elif home_trip and place_steering != null:
 				direction = place_steering.direction_to_point(id, str(job.command_id), body, target)
-			elif job.action == "recover_material" and material_steering != null:
-				direction = material_steering.direction_for(id, str(job.command_id), body, target)
+			elif job.action == "recover_material":
+				## Material sources live on the same measured street graph as public places.  Prefer
+				## that graph for the real trip: the bounded material helper is still the final local
+				## fallback, but a blocked navmesh/terrain lip must not make a valid street route look
+				## like an enclosed source.  The accepted source and 0.45 m work gate remain unchanged.
+				if place_steering != null:
+					if material_steering != null:
+						material_steering.clear_route(id)
+					direction = place_steering.direction_to_point(id, str(job.command_id), body, target)
+				elif material_steering != null:
+					direction = material_steering.direction_for(id, str(job.command_id), body, target)
 			elif bake_trip and place_steering != null:
 				direction = place_steering.direction_to_point(id, str(job.command_id), body, target)
 			elif _spaced_foraging and job.action in ["harvest_ration", "eat_ration", "rest"] and foraging_steering != null:
@@ -639,7 +656,7 @@ func _physics_process(delta: float) -> void:
 					latest = "%s cannot reach the current destination and has stopped moving." % resident_name
 				else:
 					latest = "The navigation map is not ready. Movement is paused."
-			if not place_trip and not home_trip and not bake_trip:
+			if not place_trip and not home_trip and not bake_trip and job.action != "recover_material":
 				if place_steering != null:
 					place_steering.clear_route(id)
 			moving = direction.length() > 0.0
