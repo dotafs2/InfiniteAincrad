@@ -121,3 +121,12 @@ Carpenter 继续执行原有的 `turn:shared:carpenter:0:31`，仍在距铁源�
 Carpenter Rowan 的既有 `turn:shared:carpenter:0:31` 采集任务在已验证的无模型物理副本中完成了终端结算。铁源此前已守恒耗尽，因此系统真实记录 `material_depleted`，数量为 0；任务关闭，没有新增铁、材料转交或刃口修理。
 
 这次正式提升只写入已经接受的旧命令：没有新 Kimi/GM 调用、没有费用、没有重试未知请求。seq264 冷恢复验证通过，十位居民和完整 264 条事件保留；公开 checkpoint 与哈希见 `material-continuation-seq264.json`。
+
+
+# 居民观察（seq264→seq265，2026-09-20）
+
+本轮只开 1 次串行 Kimi 决策，结算 0.0253665 元，没有未知请求；网关排空，正式存档已提升到 seq265。
+
+探针先确认 Flint（Smith）持有 1 单位铁、Rowan（Carpenter）在 0.53 米内，`material:share` 选项可用。真实模型本轮选择回复 Rowan 之前的协作请求（`turn:shared:smith:0:28`），理由是愿意先把合作条款说清楚；这是一条真实对话进展，但仍没有选择材料转交，因此没有新增铁转移、维修契约或斧刃修理。
+
+本轮冷恢复输出 `WORLD_CHECKPOINT_RESTORE_OK residents=10 seq=265 exact_fields=true`；已知导航边缘警告仍存在，本轮没有修改资产或重试任何旧请求。
