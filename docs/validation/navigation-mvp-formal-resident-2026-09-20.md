@@ -11,9 +11,11 @@ long trips cannot silently fall back to a straight push.
 
 The route cache keeps the source region captured when a command starts. It does
 not re-select the nearest sample every frame, which avoids oscillating between
-two close PCG samples. Intermediate waypoint arrival is evaluated in XZ; the
-last leg uses the world's existing 0.45 m target gate and preserves the target's
-current height.
+two close PCG samples. Resident homes, resident social targets, and public-place
+jobs now bind a stable semantic target ID to one graph region; their exact
+position can still move within that region for the final leg. Intermediate
+waypoint arrival is evaluated in XZ; the last leg uses the world's existing
+0.45 m target gate and preserves the target's current height.
 
 ## Acceptance
 
@@ -21,10 +23,14 @@ current height.
 python -X utf8 tools/run_godot.py --godot `"D:/lucidgloves/InfiniteAincrad/tmp/toolchain/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64_console.exe`" --name formal-graph-resident-route --timeout 90 --out private/iteration-20260919/formal-graph-resident-route -- --headless --script res://tests/town_graph_resident_route_acceptance.gd
 ```
 
-Result: `23` checks, `0` failures. The disposable formal resident reached all
-10 authored home regions. The full-map graph fixture still passes with 189
-regions, 193 connectors, 762 representative executions and 15,217 checks.
+Last runtime result: `23` checks, `0` failures. The disposable formal resident
+reached all 10 authored home regions. After adding stable target IDs, the
+acceptance now has 33 checks (10 additional binding assertions) but has not
+been rerun because the Godot 4.7 runtime is unavailable in the current local
+checkout. The full-map graph fixture's last runtime result remains 189 regions,
+193 connectors, 762 representative executions and 15,217 checks.
 
-This is the first-stage route integration only. It does not claim physical
-collision correctness, dynamic obstacle handling, or stable target identity for
-arbitrary overlapping social targets; those require a later route-target API.
+This is the first-stage route integration only. It deliberately does not claim
+physical collision correctness or dynamic obstacle handling. A Godot 4.7 scene
+smoke is still required before publication; the graph-only contract continues
+to allow overlap and penetration in this first step.
