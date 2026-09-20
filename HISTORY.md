@@ -1,5 +1,11 @@
 # 历史全部流水
 
+## 2026-09-20 · H133 Rowan makes a real edge-repair offer
+
+After a full-scene parse preflight exposed a duplicate `ARRIVAL_RADIUS` declaration in `town_material_steering.gd`, the duplicate legacy declaration was removed. The material regression passed 60/0 and a read-only full-scene restore exited 0, with only the known navigation and Forward+ warnings.
+
+A fresh one-request Kimi window then continued canonical seq265. Rowan independently selected `contract:offer:seed:axe:edge:shared:smith:2` and spoke the concrete terms: repair the axe edge for 2 Col, paid on collection. The authoritative result is `contract_proposed` at seq266. No Col was escrowed, Flint's one iron was preserved, and no delivery, 60-second work or collection payment occurred. The call settled for CNY 0.0275755 with no unknown request; exact ten-resident cold restore passed. [Evidence](docs/validation/material-contract-live-2026-09-20.json)
+
 ## 2026-09-20 · H132 Current save exposes a lawful edge-contract path
 
 A read-only Godot probe loaded a disposable copy of canonical seq265. Rowan has 8 Col, a damaged axe edge20 and Flint is near enough for three lawful edge-repair offers at 2, 5 or 8 Col. The copy's authoritative trade path accepted the 2 Col offer, reserved exactly 2 Col and preserved Flint's one iron. The canonical save stayed byte-identical; no provider or GM call occurred.

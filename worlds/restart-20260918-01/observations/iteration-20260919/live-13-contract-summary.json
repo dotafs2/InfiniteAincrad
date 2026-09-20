@@ -1,0 +1,90 @@
+{
+  "kind": "live_model_contract_offer",
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 265,
+  "end_seq": 266,
+  "canonical_before_sha256": "acac3ad539d3ee0f0d18bc05373e5b7c002e7fedb1a5a2469f71660a76415775",
+  "canonical_after_sha256": "48845c0c15b46f7ef86c740ce1804a38e40553455c1a6f114771e2d745694cbd",
+  "public_checkpoint": "restart-20260918-01/checkpoints/seq000266-48845c0c15b46f7e.world.json",
+  "checkpoint_sha256": "48845c0c15b46f7ef86c740ce1804a38e40553455c1a6f114771e2d745694cbd",
+  "model_calls": 1,
+  "paid_calls": 1,
+  "new_resident_unknowns": 0,
+  "new_call": {
+    "id": "npc:7ad347da-a03c-4f14-95ec-250bf1c1fb32",
+    "actor_id": "shared:carpenter",
+    "source": "kimi_ledger",
+    "model": "kimi-k2.6",
+    "phase": "decision",
+    "status": "measured",
+    "usage": {
+      "cached_input_tokens": 0,
+      "input_tokens": 3827,
+      "output_tokens": 100,
+      "reasoning_output_tokens": null,
+      "total_tokens": 3927
+    },
+    "charge_nano": 27575500
+  },
+  "resident": "shared:carpenter",
+  "resident_name": "Rowan",
+  "command_id": "turn:shared:carpenter:0:32",
+  "action": "contract:offer:seed:axe:edge:shared:smith:2",
+  "model_choice": "a18",
+  "reason": "My axe edge is at 20, so I cannot make kindling or work. I have 8 Col and need the edge repaired. I will ask Flint for a repair at 2 Col, pay on collection, which matches my prior rejected contract terms and is affordable.",
+  "result": {
+    "ok": true,
+    "code": "contract_proposed"
+  },
+  "speech": "Flint, my axe edge is down to 20. Would you repair it for 2 Col, payment on collection? Same terms as before.",
+  "contract": {
+    "id": "trade_contract_turn:shared:carpenter:0:32",
+    "part": "edge",
+    "item_id": "seed:axe",
+    "owner_id": "shared:carpenter",
+    "worker_id": "shared:smith",
+    "status": "proposed",
+    "price_col": 2,
+    "reserved_col": 0
+  },
+  "smith_iron_after": 1,
+  "carpenter_coins_after": 8,
+  "carpenter_edge_after": 20,
+  "carpenter_handle_after": 100,
+  "source_stock": 0,
+  "gateway_drained": true,
+  "engine_exit": 0,
+  "renderer_errors": 1,
+  "limitation": "Rowan independently proposed the 2 Col edge-repair contract, but Flint has not accepted it; no escrow, delivery, 60-second work or collection payment occurred in this one-call window.",
+  "ledger_before": {
+    "ledger_id": "c6c3541c-1235-4de2-af7b-da2228323bb5",
+    "model": "kimi-k2.6",
+    "authorized_cny": 45.2866498,
+    "allocation_cap_cny": 45.2366498,
+    "settled_cny": 0.0,
+    "prior_unverified_cny": 44.2866498,
+    "reserved_cny": 0.0,
+    "liability_cny": 44.2866498,
+    "remaining_allocatable_cny": 0.95,
+    "counts": {},
+    "halted": "",
+    "deadline_utc": 1789911407
+  },
+  "ledger_after": {
+    "ledger_id": "c6c3541c-1235-4de2-af7b-da2228323bb5",
+    "model": "kimi-k2.6",
+    "authorized_cny": 45.2866498,
+    "allocation_cap_cny": 45.2366498,
+    "settled_cny": 0.0275755,
+    "prior_unverified_cny": 44.2866498,
+    "reserved_cny": 0.0,
+    "liability_cny": 44.3142253,
+    "remaining_allocatable_cny": 0.9224245,
+    "counts": {
+      "settled": 1
+    },
+    "halted": "",
+    "deadline_utc": 1789911193
+  },
+  "created_utc": "2026-09-20T13:32:48.396991+00:00"
+}
