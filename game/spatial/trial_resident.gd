@@ -1,7 +1,7 @@
 extends Node3D
 
-## A small original resident assembled from primitive meshes.  The body is deliberately
-## independent of the market asset and keeps its own movement/gesture state.
+## A small original resident assembled from primitive meshes. The body is deliberately
+## independent of the market asset and keeps its own movement, gesture and hand sockets.
 
 var _body: Node3D
 var _torso: MeshInstance3D
@@ -12,9 +12,10 @@ var _left_arm: Node3D
 var _right_arm: Node3D
 var _bucket: Node3D
 var _ration: MeshInstance3D
+var _left_hand: MeshInstance3D
 var _right_hand: MeshInstance3D
-var _axe: Node3D
-var _axe_head: MeshInstance3D
+var _equipment: Dictionary = {"right": "", "left": ""}
+var _repaired_axe := false
 @export var shirt_color := Color("31506b")
 @export var hair_color := Color("4b3629")
 var _walking: bool = false
@@ -58,8 +59,6 @@ func _process(delta: float) -> void:
 		_bucket.rotation.x = -0.45 if _gesture == "drink" else 0.0
 	if _ration != null:
 		_ration.visible = _gesture == "eat"
-	if _axe != null:
-		_axe.visible = _holds_axe
 
 func set_walking(value: bool) -> void:
 	_walking = value
@@ -69,11 +68,44 @@ func set_gesture(value: String) -> void:
 
 func set_holds_axe(value: bool, repaired: bool = false) -> void:
 	_holds_axe = value
-	if _axe_head != null:
-		_axe_head.material_override = _material(Color("b7c2c4") if repaired else Color("756d65"))
+	_repaired_axe = repaired
+	equip_item("axe" if value else "", "right")
 
 func bucket_visible() -> bool:
 	return _bucket != null and _bucket.visible
+
+## Attach a stylized prop to a hand socket. The meshes are intentionally generated
+## from primitives so art previews can exercise carry poses without a rigged export.
+func equip_item(item_id: String, hand := "right") -> bool:
+	if hand not in ["right", "left"]:
+		return false
+	var socket: Node3D = _right_hand if hand == "right" else _left_hand
+	if socket == null:
+		return false
+	var old := socket.get_node_or_null("EquippedItem")
+	if old != null:
+		old.free()
+	_equipment[hand] = ""
+	if item_id.is_empty():
+		return true
+	var item := _make_equipment(item_id)
+	if item == null:
+		return false
+	item.name = "EquippedItem"
+	item.position = Vector3(0.0, -0.22, -0.06)
+	socket.add_child(item)
+	_equipment[hand] = item_id
+	return true
+
+func set_loadout(right_item := "", left_item := "") -> void:
+	equip_item(right_item, "right")
+	equip_item(left_item, "left")
+
+func equipped_item(hand := "right") -> String:
+	return str(_equipment.get(hand, ""))
+
+func equipped_items() -> Dictionary:
+	return _equipment.duplicate()
 
 func _build_body() -> void:
 	_body = Node3D.new()
@@ -104,7 +136,7 @@ func _build_body() -> void:
 	head_mesh.height = 0.38
 	_head.mesh = head_mesh
 	_head.position = Vector3(0.0, 1.78, 0.0)
-	_head.material_override = _material(Color("#d69b72"))
+	_head.material_override = _material(Color("d69b72"))
 	_body.add_child(_head)
 	var hair := MeshInstance3D.new()
 	var hair_shape := SphereMesh.new()
@@ -126,24 +158,16 @@ func _build_body() -> void:
 		eye.material_override = _material(Color("25333a"))
 		_body.add_child(eye)
 
-	_left_leg = _limb("LeftLeg", Vector3(-0.11, 0.58, 0.0), Color("#263746"))
-	_right_leg = _limb("RightLeg", Vector3(0.11, 0.58, 0.0), Color("#263746"))
+	_left_leg = _limb("LeftLeg", Vector3(-0.11, 0.58, 0.0), Color("263746"))
+	_right_leg = _limb("RightLeg", Vector3(0.11, 0.58, 0.0), Color("263746"))
 	_left_arm = _limb("LeftArm", Vector3(-0.32, 1.2, 0.0), shirt_color)
 	_right_arm = _limb("RightArm", Vector3(0.32, 1.2, 0.0), shirt_color)
 	for leg in [_left_leg, _right_leg]:
 		_box(leg, "Boot", Vector3(0, -0.52, -0.045), Vector3(0.19, 0.17, 0.27), Color("553c2d"))
-	_box(_left_arm, "Hand", Vector3(0, -0.59, 0), Vector3(0.15, 0.16, 0.15), Color("d69b72"))
+	_left_hand = _box(_left_arm, "Hand", Vector3(0, -0.59, 0), Vector3(0.15, 0.16, 0.15), Color("d69b72"))
 	_right_hand = _box(_right_arm, "Hand", Vector3(0, -0.59, 0), Vector3(0.15, 0.16, 0.15), Color("d69b72"))
 	_ration = _box(_right_hand, "Ration", Vector3(0, -0.03, -0.07), Vector3(0.16, 0.09, 0.12), Color("c99245"))
 	_ration.visible = false
-	_axe = Node3D.new()
-	_axe.name = "HandAxe"
-	_axe.position = Vector3(0, -0.2, -0.04)
-	_axe.rotation.z = -0.25
-	_right_hand.add_child(_axe)
-	_box(_axe, "AxeHandle", Vector3(0, -0.18, 0), Vector3(0.055, 0.48, 0.055), Color("704c2d"))
-	_axe_head = _box(_axe, "AxeHead", Vector3(0.10, 0.04, 0), Vector3(0.25, 0.13, 0.07), Color("756d65"))
-	_axe.visible = false
 
 	_bucket = Node3D.new()
 	_bucket.name = "HandBucket"
@@ -154,7 +178,7 @@ func _build_body() -> void:
 	bucket_shape.bottom_radius = 0.1
 	bucket_shape.height = 0.22
 	bucket_mesh.mesh = bucket_shape
-	bucket_mesh.material_override = _material(Color("#b87735"))
+	bucket_mesh.material_override = _material(Color("b87735"))
 	_bucket.add_child(bucket_mesh)
 	var handle: MeshInstance3D = MeshInstance3D.new()
 	var handle_mesh: TorusMesh = TorusMesh.new()
@@ -165,9 +189,83 @@ func _build_body() -> void:
 	handle.mesh = handle_mesh
 	handle.position.y = 0.12
 	handle.rotation.x = PI / 2.0
-	handle.material_override = _material(Color("#65431f"))
+	handle.material_override = _material(Color("65431f"))
 	_bucket.add_child(handle)
 	_body.add_child(_bucket)
+
+func _make_equipment(item_id: String) -> Node3D:
+	var root := Node3D.new()
+	root.rotation.z = -0.18 if item_id in ["axe", "hammer", "sword", "dagger"] else 0.0
+	var metal := Color("b7c2c4")
+	var dark_metal := Color("5a6670")
+	var wood := Color("704c2d")
+	match item_id:
+		"axe":
+			_box(root, "AxeHandle", Vector3(0, -0.18, 0), Vector3(0.055, 0.48, 0.055), wood)
+			_box(root, "AxeHead", Vector3(0.10, 0.04, 0), Vector3(0.25, 0.13, 0.07), metal if _repaired_axe else Color("756d65"))
+		"sword", "dagger":
+			var length := 0.58 if item_id == "sword" else 0.34
+			_box(root, "Grip", Vector3(0, -0.16, 0), Vector3(0.055, 0.22, 0.055), wood)
+			_box(root, "Guard", Vector3(0, -0.02, 0), Vector3(0.22, 0.045, 0.06), dark_metal)
+			_box(root, "Blade", Vector3(0, length * 0.5, 0), Vector3(0.07, length, 0.025), metal)
+		"spear":
+			_box(root, "Shaft", Vector3(0, 0.02, 0), Vector3(0.045, 0.78, 0.045), wood)
+			_box(root, "SpearTip", Vector3(0, 0.44, 0), Vector3(0.10, 0.22, 0.035), metal)
+		"hammer":
+			_box(root, "HammerHandle", Vector3(0, -0.18, 0), Vector3(0.06, 0.48, 0.06), wood)
+			_box(root, "HammerHead", Vector3(0, 0.10, 0), Vector3(0.30, 0.13, 0.13), dark_metal)
+		"shield":
+			var disc := MeshInstance3D.new()
+			var disc_mesh := CylinderMesh.new()
+			disc_mesh.top_radius = 0.24
+			disc_mesh.bottom_radius = 0.24
+			disc_mesh.height = 0.065
+			disc.mesh = disc_mesh
+			disc.rotation.x = PI / 2.0
+			disc.material_override = _material(Color("6d82a0"))
+			root.add_child(disc)
+			_box(root, "ShieldBoss", Vector3(0, 0, -0.06), Vector3(0.08, 0.08, 0.08), metal)
+		"lantern":
+			var body := MeshInstance3D.new()
+			var cylinder := CylinderMesh.new()
+			cylinder.top_radius = 0.10
+			cylinder.bottom_radius = 0.12
+			cylinder.height = 0.20
+			body.mesh = cylinder
+			body.material_override = _material(Color("d08b42"))
+			root.add_child(body)
+			var glow := OmniLight3D.new()
+			glow.light_color = Color("ffd18a")
+			glow.light_energy = 0.55
+			glow.omni_range = 1.8
+			root.add_child(glow)
+		"potion":
+			var bottle := MeshInstance3D.new()
+			var bottle_mesh := SphereMesh.new()
+			bottle_mesh.radius = 0.10
+			bottle_mesh.height = 0.16
+			bottle.mesh = bottle_mesh
+			bottle.material_override = _material(Color("7ac6bb"))
+			root.add_child(bottle)
+			_box(root, "PotionNeck", Vector3(0, 0.12, 0), Vector3(0.06, 0.08, 0.06), wood)
+		"book":
+			_box(root, "BookCover", Vector3(0, 0, 0), Vector3(0.22, 0.04, 0.16), Color("8e4b4b"))
+			_box(root, "BookPages", Vector3(0, 0.035, 0), Vector3(0.18, 0.025, 0.13), Color("e8d6ab"))
+		"bow":
+			_box(root, "BowUpper", Vector3(0.11, 0.18, 0), Vector3(0.045, 0.34, 0.045), wood)
+			_box(root, "BowLower", Vector3(-0.11, -0.18, 0), Vector3(0.045, 0.34, 0.045), wood)
+			_box(root, "BowString", Vector3(0, 0, 0), Vector3(0.025, 0.66, 0.012), Color("d8d0bb"))
+		"bag":
+			var sack := MeshInstance3D.new()
+			var sack_mesh := SphereMesh.new()
+			sack_mesh.radius = 0.14
+			sack_mesh.height = 0.20
+			sack.mesh = sack_mesh
+			sack.material_override = _material(Color("a4774a"))
+			root.add_child(sack)
+		_:
+			return null
+	return root
 
 func _limb(limb_name: String, limb_position: Vector3, color: Color) -> Node3D:
 	var limb: Node3D = Node3D.new()
