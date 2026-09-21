@@ -2,10 +2,12 @@
 
 Uses the existing bounded Godot runner; mock server lifetime is this process.
 Scenarios cover the default kimi-k2.6 run, an explicit `expected_model` pin,
-endpoint/response model mismatch, request-journal replay and view projection.
+endpoint/response model mismatch, request-journal replay, view projection and
+the optional LocalJev-first multiplexer. LocalJev cases use a loopback fixture;
+they do not require Ollama and never call a paid provider.
 """
 import argparse
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from datetime import datetime, timedelta, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
@@ -108,7 +110,7 @@ def gateway(scenario, capture_folder=None):
                 assert isinstance(personal["identity"], dict), "identity must survive projection"
                 assert "hidden_neighbor_wallet" not in observation
                 action = "wait"
-                if scenario == "action-groups":
+                if scenario in ("action-groups", "local-social"):
                     group = personal['action_groups']['social.talk']
                     assert group['choices'] == {'say-hello': ['Iris']}
                     assert group['template'].format(*group['choices']['say-hello']) == 'Talk to Iris (speech required; no contract).'
@@ -224,6 +226,66 @@ def gateway(scenario, capture_folder=None):
         thread.join(timeout=2)
 
 
+@contextmanager
+def localjev(scenario):
+    calls = {"route": 0, "systemone": 0, "contract_errors": []}
+
+    class Handler(BaseHTTPRequestHandler):
+        def log_message(self, *_args):
+            pass
+
+        def reply(self, status, value):
+            payload = json.dumps(value).encode()
+            self.send_response(status)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(payload)))
+            self.end_headers()
+            self.wfile.write(payload)
+
+        def do_POST(self):
+            try:
+                assert self.headers.get("Authorization") == "Bearer localjev-fixture-token"
+                size = int(self.headers["Content-Length"])
+                assert 0 < size <= 131072
+                body = json.loads(self.rfile.read(size))
+                if self.path == "/v1/route":
+                    calls["route"] += 1
+                    assert body["task_type"] == "resident_turn"
+                    assert body["candidates"][0] == {"model": "qwen3:8b", "route_class": "local_routine"}
+                    if scenario == "local-social":
+                        assert body["requires_dialogue"] is True
+                        return self.reply(200, {"selected_model": "kimi-k2.6", "selected_route": "cloud_social",
+                            "route_confidence": 1, "fallback": True, "fallback_reason": "policy_forced_cloud_social",
+                            "router_model": "qwen3:8b"})
+                    assert all(body[key] is False for key in ("requires_dialogue", "irreversible", "scarce_resource", "story_critical", "multi_party"))
+                    return self.reply(200, {"selected_model": "qwen3:8b", "selected_route": "local_routine",
+                        "route_confidence": 0.93, "fallback": False, "fallback_reason": None,
+                        "router_model": "qwen3:8b"})
+                if self.path == "/v1/systemone":
+                    calls["systemone"] += 1
+                    assert scenario == "local-routine"
+                    criteria = body["questions"]["action"]["criteria"]
+                    assert "wait" in criteria and len(criteria) >= 2
+                    return self.reply(200, {"model": "localjev-latest", "answers": {"action": {
+                        "type": "choice", "choice": "wait", "probabilities": {key: 1 if key == "wait" else 0 for key in criteria},
+                        "confidence": 0.94}}, "usage": {"input_tokens": 0, "output_tokens": 0}})
+                raise AssertionError("unexpected LocalJev route")
+            except Exception as error:
+                calls["contract_errors"].append("LocalJev contract at line %d: %s" % (
+                    traceback.extract_tb(error.__traceback__)[-1].lineno, error))
+                return self.reply(400, {"error": "fixture contract"})
+
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        yield server.server_port, calls
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=2)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot", required=True)
@@ -236,11 +298,12 @@ def main():
     posts = {"continuation": 12, "success": 1, "town": 1, "action-groups": 1, "unicode-context": 1, "uncertain": 1,
              "pinned-model": 1, "reply-model-mismatch": 1, "town-history": 3, "knowledge-bounds": 1,
              "knowledge-unknown-stock": 1,
+             "local-routine": 0, "local-social": 1,
              "concurrent-reproduce": 1, "concurrent-success": 2, "concurrent-limit": 1, "concurrent-uncertain": 1, "concurrent-cancel": 1}
     scenarios = ["success", "town", "action-groups", "unicode-context", "continuation", "pinned-model", "model-mismatch",
                  "reply-model-mismatch", "insufficient", "wrong-ledger", "expired", "unsafe-endpoint", "uncertain", "town-history",
                  "knowledge-bounds", "knowledge-oversize", "knowledge-nested", "knowledge-missing-source", "knowledge-context-limit",
-                 "knowledge-unknown-stock", "knowledge-adjacent-null",
+                 "knowledge-unknown-stock", "knowledge-adjacent-null", "local-routine", "local-social",
                  "concurrent-success", "concurrent-limit", "concurrent-uncertain", "concurrent-cancel"]
     if args.scenario and not set(args.scenario) <= set(scenarios + ["concurrent-reproduce"]):
         parser.error("Unknown scenario")
@@ -279,7 +342,8 @@ def main():
                 label = f"{scenario}-{index}"
                 expect = "rejected" if index else {"success": "success", "town": "town", "action-groups": "action-groups", "unicode-context": "unicode-context",
                                                    "continuation": "continuation", "pinned-model": "success", "knowledge-bounds": "knowledge-bounds",
-                                                   "knowledge-unknown-stock": "knowledge-unknown-stock"}.get(scenario, "rejected")
+                                                   "knowledge-unknown-stock": "knowledge-unknown-stock",
+                                                   "local-routine": "local-routine", "local-social": "local-social"}.get(scenario, "rejected")
                 env = dict(os.environ, AINCRAD_GATEWAY_RUN_CONFIG=str(config.resolve()), AINCRAD_GATEWAY_TEST_EXPECT=expect,
                            AINCRAD_GATEWAY_TEST_SCENARIO=scenario)
                 script = "res://tests/gateway_acceptance.gd"
@@ -293,16 +357,28 @@ def main():
                                AINCRAD_GATEWAY_HISTORY_PHASE="cold" if index else "seed")
                     if index:
                         assert hashlib.sha256((folder / "world.json").read_bytes()).hexdigest() == prior_history
-                command = [sys.executable, str(ROOT / "tools/run_godot.py"), "--godot", args.godot, "--name", label,
-                           "--timeout", "42", "--out", str(args.out / "runs"), "--", "--headless", "--script", script]
-                result = subprocess.run(command, cwd=ROOT, env=env, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=50)
+                local_context = localjev(scenario) if scenario.startswith("local-") else nullcontext()
+                with local_context as local_fixture:
+                    if local_fixture:
+                        local_port, local_calls = local_fixture
+                        env.update(AINCRAD_LOCALJEV_ENABLED="1", AINCRAD_LOCALJEV_URL=f"http://127.0.0.1:{local_port}",
+                                   AINCRAD_LOCALJEV_API_KEY="localjev-fixture-token", AINCRAD_LOCALJEV_MODEL="qwen3:8b")
+                    else:
+                        local_calls = {"route": 0, "systemone": 0, "contract_errors": []}
+                    command = [sys.executable, str(ROOT / "tools/run_godot.py"), "--godot", args.godot, "--name", label,
+                               "--timeout", "42", "--out", str(args.out / "runs"), "--", "--headless", "--script", script]
+                    result = subprocess.run(command, cwd=ROOT, env=env, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=50)
                 (folder / f"{index}.runner.log").write_text(result.stdout + result.stderr, encoding="utf-8")
                 expected_posts = 1 if scenario == "town-history" and index == 0 else posts.get(scenario, 0)
                 passed = result.returncode == 0 and calls["post"] == expected_posts and not calls["contract_errors"]
+                if scenario == "local-routine":
+                    passed = passed and local_calls["route"] == 1 and local_calls["systemone"] == 1 and not local_calls["contract_errors"]
+                elif scenario == "local-social":
+                    passed = passed and local_calls["route"] == 1 and local_calls["systemone"] == 0 and not local_calls["contract_errors"]
                 if scenario.startswith("concurrent-"):
                     state = json.loads((folder / "state.json").read_text())
                     passed = passed and state["Count"] == expected_posts and state["Unknown"] is (scenario == "concurrent-uncertain")
-                row = {"case": label, "passed": passed, **calls}
+                row = {"case": label, "passed": passed, **calls, "localjev": local_calls}
                 if scenario == "town-history" and (folder / "world.json").exists():
                     prior_history = hashlib.sha256((folder / "world.json").read_bytes()).hexdigest()
                     row["world_sha256"] = prior_history
