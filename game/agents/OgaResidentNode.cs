@@ -11,6 +11,7 @@ public partial class OgaResidentNode : OpenGameAgentNode
 {
     private GameAgentRuntime? _ownedRuntime;
     private BudgetGatewayProvider? _gatewayProvider;
+    private LocalFirstProvider? _localFirstProvider;
     private string _provenance = "opengameagent_fixture";
 
     public string NewOperationId() => Guid.NewGuid().ToString();
@@ -23,13 +24,19 @@ public partial class OgaResidentNode : OpenGameAgentNode
             if (_ownedRuntime != null) return "already_configured";
             _gatewayProvider = new BudgetGatewayProvider(configPath);
             _provenance = _gatewayProvider.Provenance;
+            // The optional loopback optimizer owns this cloud provider and delegates
+            // to it for every uncertain or policy-forced turn. Its explicit env flag
+            // keeps existing offline and paid validation runs byte-for-byte stable.
+            _localFirstProvider = new LocalFirstProvider(_gatewayProvider);
             // Request the exact model the run config pinned; no host default here.
-            SetupRuntime(_gatewayProvider, _gatewayProvider.ModelId);
+            SetupRuntime(_localFirstProvider, _gatewayProvider.ModelId);
             return "";
         }
         catch
         {
-            _gatewayProvider?.Dispose();
+            _localFirstProvider?.Dispose();
+            if (_localFirstProvider == null) _gatewayProvider?.Dispose();
+            _localFirstProvider = null;
             _gatewayProvider = null;
             return "gateway_configuration_rejected";
         }
@@ -65,7 +72,9 @@ public partial class OgaResidentNode : OpenGameAgentNode
         base._ExitTree();
         _ownedRuntime?.Dispose();
         _ownedRuntime = null;
-        _gatewayProvider?.Dispose();
+        _localFirstProvider?.Dispose();
+        if (_localFirstProvider == null) _gatewayProvider?.Dispose();
+        _localFirstProvider = null;
         _gatewayProvider = null;
     }
 

@@ -306,6 +306,13 @@ func _on_completed(input_id: String, result_json: String) -> void:
 				return
 			var decision: Variant = parser.data
 			if decision is Dictionary:
+				var routing := _routing_metadata(message)
+				if not routing.is_empty():
+					# The provider multiplexer authored this bounded receipt metadata;
+					# it is not part of the resident decision and never reaches an action.
+					received["routing"] = routing
+					received["provider_id"] = str(message.get("provider", _source))
+					received["response_model"] = str(message.get("responseModel", ""))
 				received["ok"] = true
 				received["decision"] = decision
 				_result = received
@@ -313,6 +320,39 @@ func _on_completed(input_id: String, result_json: String) -> void:
 	received["ok"] = false
 	received["code"] = "brain_response_invalid"
 	_result = received
+
+func _routing_metadata(message: Dictionary) -> Dictionary:
+	## LocalFirstProvider places routing facts in the model response id because the
+	## upstream wire already carries that bounded field. Validate the exact shape
+	## before it becomes archive evidence; arbitrary provider text is discarded.
+	var raw: Variant = message.get("responseId", "")
+	if not raw is String or raw.is_empty() or raw.length() > 2048:
+		return {}
+	var parsed: Variant = JSON.parse_string(raw)
+	var keys := ["source", "router_model", "route", "route_confidence", "router_fallback",
+		"router_fallback_reason", "decision_confidence", "cloud_fallback", "fallback_reason",
+		"selected_model", "final_model"]
+	if not parsed is Dictionary or parsed.keys().size() != keys.size():
+		return {}
+	for key in keys:
+		if not parsed.has(key):
+			return {}
+	if parsed.source != "localjev" or parsed.route not in ["local_routine", "cloud_social", "cloud_story_critical", "gm_review"]:
+		return {}
+	for key in ["router_model", "selected_model", "final_model"]:
+		if not parsed[key] is String or parsed[key].is_empty() or parsed[key].length() > 128:
+			return {}
+	for key in ["route_confidence", "decision_confidence"]:
+		var value: Variant = parsed[key]
+		if value != null and (not (value is int or value is float) or not is_finite(float(value)) or float(value) < 0.0 or float(value) > 1.0):
+			return {}
+	for key in ["router_fallback", "cloud_fallback"]:
+		if not parsed[key] is bool:
+			return {}
+	for key in ["router_fallback_reason", "fallback_reason"]:
+		if parsed[key] != null and (not parsed[key] is String or parsed[key].length() > 128):
+			return {}
+	return parsed.duplicate(true)
 
 func _on_failed(input_id: String, error: String) -> void:
 	if input_id == _pending:

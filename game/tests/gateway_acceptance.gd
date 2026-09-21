@@ -32,7 +32,14 @@ func _run() -> void:
 	brain.configure("gateway")
 	var original: Dictionary = world.snapshot()
 	var view: Dictionary = world.resident_view()
-	if mode == "action-groups":
+	if mode == "local-routine":
+		# Give the local choice endpoint at least two bounded routine options.
+		view.available_actions = ["wait", "walk"]
+		view.action_details = [
+			{"id": "wait", "label": "Wait", "speech_allowed": false},
+			{"id": "walk", "label": "Walk to the well", "speech_allowed": false},
+		]
+	elif mode in ["action-groups", "local-social"]:
 		view.available_actions = ["wait", "say-hello"]
 		view.action_details = [{"id": "wait", "label": "Wait", "speech_allowed": false}]
 		view.action_groups = {"social.talk": {"template": "Talk to {0} (speech required; no contract).", "speech_allowed": true, "choices": {"say-hello": ["Iris"]}}}
@@ -91,16 +98,24 @@ func _run() -> void:
 		view.erase("actions")
 	var proposal: Dictionary = await brain.propose(view, 0)
 	check(world.snapshot() == original, "gateway cannot change world directly")
-	if mode in ["success", "town", "action-groups", "unicode-context", "knowledge-bounds", "knowledge-unknown-stock"]:
+	if mode in ["success", "town", "action-groups", "unicode-context", "knowledge-bounds", "knowledge-unknown-stock", "local-routine", "local-social"]:
 		check(proposal.get("ok", false), "gateway returned proposal: " + str(proposal.get("code", "")))
 		if proposal.get("ok", false):
 			check(proposal.provenance == "opengameagent_fixture", "test HTTP is never live Kimi")
-			var applied: Dictionary = world.submit_resident_decision(proposal.decision, proposal.command_id, proposal.provenance)
-			check(applied.get("ok", false), "world accepts proposal")
-			check(world.snapshot().world == original.world, "chosen wait consumes no resources")
-			var once: Dictionary = world.snapshot()
-			var repeated: Dictionary = world.submit_resident_decision(proposal.decision, proposal.command_id, proposal.provenance)
-			check(repeated.get("duplicate", false) and world.snapshot() == once, "command replay cannot repeat effects")
+			check((proposal.has("routing") if scenario.begins_with("local-") else true), "LocalJev routing receipt is preserved")
+			if scenario == "local-routine":
+				check(proposal.routing.route == "local_routine" and proposal.routing.cloud_fallback == false, "routine turn stayed local")
+				check(proposal.routing.decision_confidence >= 0.75 and proposal.provider_id == "localjev", "local decision metadata is bounded")
+			if scenario == "local-social":
+				check(proposal.routing.route == "cloud_social" and proposal.routing.cloud_fallback == true, "social turn bypassed local decision")
+				check(proposal.provider_id == "budget-gateway", "social turn used the cloud fallback")
+			if scenario not in ["local-social"]:
+				var applied: Dictionary = world.submit_resident_decision(proposal.decision, proposal.command_id, proposal.provenance)
+				check(applied.get("ok", false), "world accepts proposal")
+				check(world.snapshot().world == original.world, "chosen wait consumes no resources")
+				var once: Dictionary = world.snapshot()
+				var repeated: Dictionary = world.submit_resident_decision(proposal.decision, proposal.command_id, proposal.provenance)
+				check(repeated.get("duplicate", false) and world.snapshot() == once, "command replay cannot repeat effects")
 	else:
 		check(not proposal.get("ok", true), "gate must reject: " + mode)
 		check(world.snapshot() == original, "rejected request leaves world unchanged")
