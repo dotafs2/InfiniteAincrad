@@ -1,0 +1,26 @@
+{
+  "id": "sao-town-of-beginnings-quarter-v1",
+  "display_name": "Town of Beginnings — South Gate Quarter",
+  "reference_scope": "Original procedural interpretation of a first-floor starting-city quarter. It is a layout study, not a copied game asset or map texture.",
+  "outer_radius": 32.0,
+  "plaza_radius": 9.0,
+  "roads": [
+    {"id": "south_gate_to_plaza", "from": [0.0, -31.0], "to": [0.0, 0.0], "width": 5.0},
+    {"id": "plaza_to_palace", "from": [0.0, 0.0], "to": [0.0, 18.0], "width": 4.0},
+    {"id": "plaza_to_market", "from": [0.0, 0.0], "to": [-18.0, 6.0], "width": 4.0},
+    {"id": "plaza_to_guild", "from": [0.0, 0.0], "to": [18.0, 6.0], "width": 4.0},
+    {"id": "plaza_to_church", "from": [0.0, 0.0], "to": [-12.0, -19.0], "width": 4.0},
+    {"id": "plaza_to_smithy", "from": [0.0, 0.0], "to": [13.0, -18.0], "width": 4.0},
+    {"id": "market_cross_street", "from": [-18.0, 6.0], "to": [-27.0, 14.0], "width": 3.0},
+    {"id": "smithy_cross_street", "from": [13.0, -18.0], "to": [26.0, -12.0], "width": 3.0}
+  ],
+  "landmarks": [
+    {"id": "teleport_plaza", "kind": "teleport_plaza", "position": [0.0, 0.0]},
+    {"id": "black_iron_palace", "kind": "palace", "position": [0.0, 18.0]},
+    {"id": "central_market", "kind": "market", "position": [-18.0, 6.0]},
+    {"id": "guild_hall", "kind": "guild", "position": [18.0, 6.0]},
+    {"id": "church", "kind": "church", "position": [-12.0, -19.0]},
+    {"id": "smithy", "kind": "smithy", "position": [13.0, -18.0]},
+    {"id": "south_gate", "kind": "gate", "position": [0.0, -31.0]}
+  ]
+}

@@ -1,5 +1,11 @@
 # 历史全部流水
 
+## 2026-09-21 · SAO-inspired Town of Beginnings quarter study
+
+The first standalone town-study slice is now authored from public high-level references to Aincrad's Town of Beginnings: a fortified edge, southern gate, circular arrival plaza, radial streets and readable service landmarks. The implementation is original procedural Godot geometry with no copied map image, texture or third-party model. `sao_town_quarter_layout.json` records the layout, `sao_town_quarter.gd` builds the scene and collisions, and the dedicated scene can be launched with `Run-SaoTownQuarter.ps1`.
+
+The offline Godot 4.7.2 acceptance passed 23/23 checks. An OpenGL Movie Maker preview recorded 120 frames (4 seconds) at 1400×900 with no renderer or process failure. The study remains separate from the active resident save and production layout; graph registration and a real resident route are the next integration step after visual proportion review. [Evidence](docs/validation/sao-town-quarter-2026-09-21.md)
+
 ## 2026-09-21 · Git attribution and main publication
 
 GitHub's API resolves both current author emails (`qdotafs@gmail.com` and `148285081+dotafs2@users.noreply.github.com`) to `dotafs2`. The latest continuation branch at `e3511b28` has 132 commits beyond default branch `main` at `13fd766e`; all 132 use those associated emails. Their absence from the default branch explains the missing recent profile contributions. The local global fallback was still `dotafs <dotafs@work>`; global and repository defaults are now the verified `dotafs2` noreply identity, and the repository instructions pin this identity for subsequent authorized commits.
