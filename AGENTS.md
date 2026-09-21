@@ -1,5 +1,7 @@
 # Repository handoff and conversation continuity
 
+- Git publication identity: use `dotafs2 <148285081+dotafs2@users.noreply.github.com>` for new user-authorized commits. Check the effective author and committer before committing and verify GitHub resolves them to `dotafs2` after publication. Do not use the obsolete `dotafs@work` identity. Profile contributions require eligible commits to reach the default branch; only merge/push `main` when the user authorizes it. Preserve published historical commit hashes unless history rewriting is explicitly authorized.
+
 - Language policy (2026-09-18): all game names, dialogue, UI, authored model inputs, Kimi/GM natural-language outputs, new project documents, and the current roadmap/flowchart use English. Conversation with the user stays Chinese. The explicitly requested resident observation report is also Chinese; game/runtime evidence and project documentation remain English. Preserve original conversation archives and canonical historical evidence; use English presentation aliases for known legacy names without changing resident IDs or rewriting saves.
 
 - Read the current section of `ROADMAP.md`, the latest entries in `HISTORY.md`, and `docs/history/conversations/README.md` before continuing work. Historical checkpoints are not current world state.
