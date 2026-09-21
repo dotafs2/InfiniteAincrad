@@ -1,5 +1,29 @@
 # 历史全部流水
 
+## 2026-09-22 · Starting City art pass and DND dialogue measurement plan
+
+The first-floor art preview now composes 46 imported asset instances and 53 procedural instances:
+modular houses, a procedural Black Iron Palace, central fountain, market stalls, smithy props, gate,
+lantern posts, plaza trees and four original primitive residents. The residents expose explicit left
+and right hand sockets for sword, dagger, spear, axe, hammer, shield, bow, lantern, potion, book and
+bag loadouts. The isolated acceptance suite passed with five preview collision bodies, zero model
+calls, zero world mutations and no production-world load. The art commit is local at `04f494ac`; the
+unrelated user worktree changes remain uncommitted.
+
+The DND-style dialogue plan defines a bounded speech envelope with intent, stance, evidence claim
+ids, stakes, next action and confidence. It separates deterministic grounding and world legality
+from language evaluation, and proposes a golden conversation set plus measurements for voice,
+agency, consequence, readability, repetition, cost and fallback rate. The next implementation step
+is the receipt/schema and 30–50 offline conversations across all ten resident voice cards.
+
+The layout study follows broad published motifs—southern Town of Beginnings, central plaza and
+Black Iron Palace, western forest, northeastern lake/wetland, eastern ruins and a northern labyrinth
+approach—but remains an authored proportional preview, not an exact canon map. A 30-minute heartbeat
+automation is active for bounded overnight art batches and stops on quota, provenance, renderer or
+verification blockers. [Art validation](docs/validation/starting-city-art-pass-2026-09-22.md) ·
+[Dialogue plan](docs/design/dnd-dialogue-and-measurement-plan.md) ·
+[Conversation archive](docs/history/conversations/2026-09-22-01a0c41a/CONTINUE.md)
+
 ## 2026-09-21 · Git attribution and main publication
 
 GitHub's API resolves both current author emails (`qdotafs@gmail.com` and `148285081+dotafs2@users.noreply.github.com`) to `dotafs2`. The latest continuation branch at `e3511b28` has 132 commits beyond default branch `main` at `13fd766e`; all 132 use those associated emails. Their absence from the default branch explains the missing recent profile contributions. The local global fallback was still `dotafs <dotafs@work>`; global and repository defaults are now the verified `dotafs2` noreply identity, and the repository instructions pin this identity for subsequent authorized commits.
