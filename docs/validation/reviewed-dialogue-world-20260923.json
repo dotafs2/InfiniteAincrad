@@ -1,0 +1,30 @@
+{
+  "accept_code": "contract_accepted",
+  "checks": 22,
+  "cold_memory_acceptance": true,
+  "escrow_col": 2,
+  "failures": [],
+  "fixture_only": true,
+  "formal_ids": [
+    "shared:carpenter",
+    "shared:smith"
+  ],
+  "offer_code": "contract_proposed",
+  "paid_calls": 0,
+  "raw_rejections": [
+    {
+      "case_id": "owner_repair_offer",
+      "rejected": true
+    },
+    {
+      "case_id": "smith_accept_or_wait",
+      "rejected": true
+    },
+    {
+      "case_id": "smith_missing_iron",
+      "rejected": true
+    }
+  ],
+  "source_unchanged": true,
+  "suite": "reviewed_dialogue_world"
+}

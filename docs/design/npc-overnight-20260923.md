@@ -99,6 +99,45 @@ NPC activity has been started. The existing canonical repair remains unmodified.
 
 ## Next heartbeat priorities
 
+### Fifth batch complete (02:47 China time)
+
+The optional `reviewed_dialogue_fixture_adapter.gd` now connects declared-intent
+review to the existing alias adapter. It revalidates the original raw string,
+current target/claim sets and exact alias-to-canonical binding immediately before
+returning a caller-authorized fixture decision. Editable preparation flags cannot
+bypass review. Public results exclude private thought; the internal raw string
+retains it for revalidation. This is not production integration or semantic truth
+verification. The wrapper does not execute actions.
+
+Final parent Mono verification passes 11 adapter checks and 22 formal-world
+checks. All three saved local mismatches are rejected in their original exported
+contexts before any turn call, with the disposable snapshot, command count and
+file bytes unchanged. Separately authored consistent proposals through actual
+Turns produce `contract_proposed`, then `contract_accepted`, using Rowan/Flint's
+formal identities. Owner wallet becomes 8 Col, 2 Col is reserved, smith wallet
+stays 10 and iron stays 1. Cold reload retains the contract and escrow; read-only
+Flint feedback contains that exact acceptance as `axe_contract_accepted`.
+No new NPC inference, delivery, physical work or live autonomy is claimed.
+
+The initial fictional-role test was replaced, and the mistaken non-Mono test
+invocation is not counted. Final logs are `private/iteration-20260923/reviewed-world-parent/`
+and `reviewed-adapter-parent/`; both exited 0 with empty stderr and all owned
+processes stopped. The small actual report is
+`docs/validation/reviewed-dialogue-world-20260923.json`. Six canonical/user-file
+hashes and the saved raw evidence remain unchanged. No push occurred.
+
+**Next bounded task:** try one actual local-model smith reply on a disposable
+formal world with an explicitly scripted proposed contract. Supply current
+options with their expected declared intents; keep the existing speech/receipt
+limits. Preserve raw output, recheck the same world's fresh alias binding through
+the reviewed wrapper, and record the real acceptance/refusal receipt or honest
+rejection. The model must choose its own option: never rewrite a response or
+force an acceptance. Offline transport/runner checks first; at most one fresh
+local Ollama request for this trial, no retries/cloud fallback/model downloads.
+Persist token/latency/result evidence and prove canonical saves unchanged. If the
+single proposal fails review, record that outcome and stop the trial. Production
+adoption remains deferred; stop all new work by 09:00 China time.
+
 ### Fourth batch complete (02:27 China time)
 
 Luna implemented `game/agents/dialogue_proposal_review.gd` and a saved-output
