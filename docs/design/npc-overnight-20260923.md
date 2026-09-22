@@ -99,6 +99,31 @@ NPC activity has been started. The existing canonical repair remains unmodified.
 
 ## Next heartbeat priorities
 
+### Seventh batch complete (03:23 China time)
+
+The saved actual Smith failure now has a read-only Godot replay at
+`game/scenes/local_smith_reply_replay.tscn`. It displays public raw speech,
+declared `ask`, canonical `next_action`, required alias `a16`, expected
+`agree`, the actual structural rejection, Turns `provider_error`, and the last
+trade event `offer_repair`. It never delivers the speech or runs a world/model
+action. Review cross-checks the raw SHA, single formal Smith case, independently
+exported aliases, fresh receipt parsing, and the saved result before display.
+
+Focused Mono acceptance passed 11 checks, including altered-raw rejection and
+visible text/private-thought checks. A 1400×900 graphical capture was visually
+inspected; all result rows are visible. Final render exited 0 and all managed
+processes stopped. Invalid-renderer and headless-stall capture attempts are
+recorded as failed attempts, not passing visual evidence. Full run/capture links:
+`docs/validation/local-smith-reply-replay-20260923.md`.
+
+**Next bounded task:** address the observed alias confusion without hiding it.
+Make `next_action`'s alias requirement explicit in the isolated prompt and add
+offline checks that canonical IDs, aliases and declared intents remain distinct.
+Replay all saved failures. Do not rerun local inference merely to chase a pass.
+Only after the format contract and counterexamples are clear should another
+single local resident proposal be considered. Keep the 09:00 China cutoff and
+do not adopt the fixture in the authoritative world yet.
+
 ### Sixth batch complete (03:10 China time)
 
 Luna implemented a single-request local Smith client; Terra repaired the

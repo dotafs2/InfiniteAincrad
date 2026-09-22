@@ -1,0 +1,22 @@
+{
+  "evidence_ok": true,
+  "expected_intents": [
+    "agree"
+  ],
+  "fixture_only": true,
+  "last_event": "offer_repair",
+  "model": "qwen3:8b",
+  "model_returned": true,
+  "outcome": "review_rejected",
+  "provider_id": "local:ollama",
+  "public_proposal_only": "proposal only; no speech delivered or action executed by replay",
+  "raw_intent": "ask",
+  "raw_next_action": "contract:accept:trade_contract_fixture:offer",
+  "raw_speech": "I can repair the edge for 2 Col. Do you want me to accept the contract?",
+  "reason": "unsupported_next_action",
+  "required_alias": "a16",
+  "result_code": "provider_error",
+  "screenshot_saved": true,
+  "speech_delivery": "proposal_not_delivered",
+  "structural_result": "rejected"
+}
