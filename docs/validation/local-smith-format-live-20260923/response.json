@@ -1,0 +1,24 @@
+{
+  "fixture_only": true,
+  "model": "qwen3:8b",
+  "endpoint": "http://127.0.0.1:11434/api/chat",
+  "status": "complete",
+  "cases": [
+    {
+      "case_id": "smith_reply",
+      "model": "qwen3:8b",
+      "raw_content": "{\"speech\":\"I'll repair the edge for 2 Col, but I need to be sure the payment is reserved first.\",\"intent\":\"agree\",\"stance\":\"guarded\",\"target_id\":\"shared:carpenter\",\"claim_ids\":[],\"stakes\":\"Clear terms are important for trust.\",\"next_action\":\"a16\",\"confidence\":0.9}",
+      "parse": {
+        "ok": null,
+        "code": "json_object_ready_for_godot",
+        "godot_validator": "DialogueReceipt.parse"
+      },
+      "http_status": 200,
+      "input_tokens": 1853,
+      "output_tokens": 69,
+      "latency_ms": 3443.865
+    }
+  ],
+  "paid_calls": 0,
+  "world_writes": 0
+}

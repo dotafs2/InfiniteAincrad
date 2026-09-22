@@ -1,0 +1,50 @@
+{
+  "accepted": true,
+  "actual_event": "axe_contract_accepted",
+  "checks": 6,
+  "cold_restart": {
+    "acceptance_feedback": true,
+    "owner_reserved": 2,
+    "owner_wallet": 8
+  },
+  "failures": [],
+  "fixture_only": true,
+  "mode": "live",
+  "model_returned": true,
+  "ok": true,
+  "outcome": "accepted",
+  "paid_calls": 0,
+  "proposal_not_delivered": true,
+  "proposal_review": {
+    "action_id": "contract:accept:trade_contract_fixture:offer",
+    "alias": "a16",
+    "declared_intent": "agree",
+    "execution": "not_attempted",
+    "execution_authorized": false,
+    "expected_intents": [
+      "agree"
+    ],
+    "ok": true,
+    "reason": "intent_compatible",
+    "review_required": false,
+    "semantic_truth_verification": false,
+    "speech": "I'll repair the edge for 2 Col, but I need to be sure the payment is reserved first.",
+    "structural_accepted": true
+  },
+  "provider_id": "local:ollama",
+  "raw_sha256": "ca7e7a215e0bb1263e6d6646b387b74cbae0c5186be2856fe3d3f4ae68d0de3e",
+  "response_metrics": {
+    "http_status": 200.0,
+    "input_tokens": 1853.0,
+    "latency_ms": 3443.865,
+    "model": "qwen3:8b",
+    "output_tokens": 69.0
+  },
+  "result_code": "contract_accepted",
+  "review_authorized": true,
+  "source_sha256": "22fe742384341a2b92c9a9079432f55e3d1f726d1dfc602581a45399fdc652c4",
+  "source_unchanged": true,
+  "speech_delivery": "proposal_not_delivered",
+  "stored_alias_count": 18,
+  "suite": "local_smith_reply_trial"
+}

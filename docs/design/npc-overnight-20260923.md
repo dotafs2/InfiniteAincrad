@@ -99,6 +99,35 @@ NPC activity has been started. The existing canonical repair remains unmodified.
 
 ## Next heartbeat priorities
 
+### Ninth batch complete (03:57 China time)
+
+One corrected local Smith proposal was run through the disposable formal-ID
+world. The prompt exposed no canonical action IDs. `qwen3:8b` returned the
+allowed alias `a16`, intent `agree`, and a spoken offer to repair for 2 Col
+while seeking assurance that payment is reserved. Receipt and declared-intent
+review passed; the normal Turns gate actually accepted the supplied contract.
+The owner spent 2 Col into escrow (wallet 8, reserved 2), and Flint's exact
+acceptance feedback survived cold restart. Six harness checks passed, all
+managed processes exited cleanly, source and user files stayed unchanged.
+The raw reply is preserved with its SHA; 1,853 input / 69 output tokens and
+3,443.865 ms were reported for this one local request. Speech was proposed,
+not delivered, and delivery/repair/collection were not run. The model's 0.9
+confidence is not a quality measurement. See
+`docs/validation/local-smith-format-live-20260923.md`.
+
+One first preflight failed before any model call because the wrong non-Mono
+Godot binary and exchange path were used. The corrected managed Mono run is
+the sole model trial. This is a success in one disposable world, not sustained
+autonomy or proof of a causal prompt improvement.
+
+**Next bounded task:** connect the accepted real proposal to the existing
+isolated axe-day lifecycle only through saved evidence and normal authority
+gates: delivery, timed edge repair, iron use and collection/payment. Keep the
+model choice fixed to its recorded `a16` raw response; do not issue further
+inference merely to complete the script. Show every real result and cold
+restart boundary, while keeping production lineage untouched. Stop by 09:00
+China time.
+
 ### Eighth batch complete (03:38 China time)
 
 The isolated Smith client now exposes alias, description, and expected intent
