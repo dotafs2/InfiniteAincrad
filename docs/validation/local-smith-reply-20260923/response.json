@@ -1,0 +1,24 @@
+{
+  "fixture_only": true,
+  "model": "qwen3:8b",
+  "endpoint": "http://127.0.0.1:11434/api/chat",
+  "status": "complete",
+  "cases": [
+    {
+      "case_id": "smith_reply",
+      "model": "qwen3:8b",
+      "raw_content": "{\n  \"speech\": \"I can repair the edge for 2 Col. Do you want me to accept the contract?\",\n  \"intent\": \"ask\",\n  \"stance\": \"guarded\",\n  \"target_id\": \"shared:carpenter\",\n  \"claim_ids\": [],\n  \"stakes\": \"Accepting the contract means reserving the payment and working for 60 seconds after delivery.\",\n  \"next_action\": \"contract:accept:trade_contract_fixture:offer\",\n  \"confidence\": 0.8,\n  \"private_thought\": \"The carpenter has offered a clear contract, and I need to decide whether to accept it based on my skills and terms.\"\n}",
+      "parse": {
+        "ok": null,
+        "code": "json_object_ready_for_godot",
+        "godot_validator": "DialogueReceipt.parse"
+      },
+      "http_status": 200,
+      "input_tokens": 1882,
+      "output_tokens": 140,
+      "latency_ms": 3969.252
+    }
+  ],
+  "paid_calls": 0,
+  "world_writes": 0
+}

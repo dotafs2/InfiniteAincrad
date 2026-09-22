@@ -1,0 +1,48 @@
+{
+  "accepted": true,
+  "actual_event": "axe_contract_accepted",
+  "checks": 6,
+  "cold_restart": {
+    "acceptance_feedback": true,
+    "owner_reserved": 2,
+    "owner_wallet": 8
+  },
+  "failures": [],
+  "fixture_only": true,
+  "mode": "mock_accept",
+  "model_returned": false,
+  "ok": true,
+  "outcome": "accepted",
+  "paid_calls": 0,
+  "proposal_not_delivered": true,
+  "proposal_review": {
+    "action_id": "contract:accept:trade_contract_fixture:offer",
+    "alias": "a16",
+    "declared_intent": "agree",
+    "execution": "not_attempted",
+    "execution_authorized": false,
+    "expected_intents": [
+      "agree"
+    ],
+    "ok": true,
+    "reason": "intent_compatible",
+    "review_required": false,
+    "semantic_truth_verification": false,
+    "speech": "I respond to the supplied repair terms.",
+    "structural_accepted": true
+  },
+  "provider_id": "mock:scripted",
+  "raw_sha256": "c95d4a55989f1190e79f14d1193507c29260a3c981f87e27f42bb39f5cbbd035",
+  "response_metrics": {
+    "mode": "mock_accept",
+    "provider": "mock",
+    "raw_bytes": 212.0
+  },
+  "result_code": "contract_accepted",
+  "review_authorized": true,
+  "source_sha256": "22fe742384341a2b92c9a9079432f55e3d1f726d1dfc602581a45399fdc652c4",
+  "source_unchanged": true,
+  "speech_delivery": "proposal_not_delivered",
+  "stored_alias_count": 18,
+  "suite": "local_smith_reply_trial"
+}

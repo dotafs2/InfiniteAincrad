@@ -1,0 +1,262 @@
+{
+  "cases": [
+    {
+      "case_id": "smith_reply",
+      "context": {
+        "action_ids": [
+          "a0",
+          "a1",
+          "a2",
+          "a3",
+          "a4",
+          "a5",
+          "a6",
+          "a7",
+          "a8",
+          "a9",
+          "a10",
+          "a11",
+          "a12",
+          "a13",
+          "a14",
+          "a15",
+          "a16",
+          "a17"
+        ],
+        "claim_ids": [],
+        "target_ids": [
+          "shared:carpenter",
+          "shared:smith"
+        ]
+      },
+      "observation": {
+        "contracts": [
+          {
+            "id": "trade_contract_fixture:offer",
+            "item_id": "seed:axe",
+            "owner_id": "shared:carpenter",
+            "part": "edge",
+            "price_col": 2,
+            "reserved_col": 0,
+            "settled": false,
+            "settlement": "collection",
+            "status": "proposed",
+            "worker_id": "shared:smith"
+          }
+        ],
+        "experiences": [
+          {
+            "actor_id": "shared:smith",
+            "contractual": false,
+            "event_id": "life_event_1",
+            "operation_id": "fixture:notice",
+            "provenance": "opengameagent_fixture",
+            "recipient_ids": [
+              "shared:smith",
+              "shared:carpenter"
+            ],
+            "seq": 1.0,
+            "skill_id": "metal_repair",
+            "source": "opengameagent_fixture",
+            "subject_id": "shared:carpenter",
+            "text": "I can repair metal edges.",
+            "type": "skill_notice"
+          },
+          {
+            "actor_id": "shared:carpenter",
+            "contract_id": "trade_contract_fixture:offer",
+            "contractual": true,
+            "event_id": "life_event_2",
+            "item_id": "seed:axe",
+            "operation_id": "fixture:offer",
+            "part": "edge",
+            "price_col": 2,
+            "provenance": "opengameagent_fixture",
+            "recipient_ids": [
+              "shared:carpenter",
+              "shared:smith"
+            ],
+            "seq": 2.0,
+            "settlement": "collection",
+            "source": "opengameagent_fixture",
+            "subject_id": "shared:smith",
+            "type": "offer_repair"
+          }
+        ],
+        "identity": {
+          "character": {
+            "authority": "Original project characterization. Preferences guide choices; world rules, recorded skills, possessions and witnessed history determine what is true or possible. Missing facts remain unknown.",
+            "core": {
+              "bond": "I care about being someone whose repairs can be trusted.",
+              "flaw": "I hear casual criticism as doubt about my competence and withdraw too quickly.",
+              "ideal": "Useful work deserves clear terms and fair compensation.",
+              "long_term_goal": "Sustain a modest livelihood through dependable metal repair.",
+              "temperament": "Blunt, patient with materials and guarded with people; respects honest effort.",
+              "voice": "Brief, exact phrases; dry humor appears after trust, with no routine insults."
+            },
+            "facets": {
+              "daily": "I inspect practical details before giving an opinion; silence usually means I am thinking.",
+              "work": "Metal repair is recorded for me; any job still needs actual tools, materials and acceptable terms. I may refuse."
+            },
+            "schema_version": 1
+          },
+          "id": "shared:smith",
+          "name": "Flint",
+          "personality": "Blunt, patient with materials and guarded with people; respects honest effort.",
+          "role": "repair_metal",
+          "story": "I can repair metal tools and hope to exchange that skill for food. I decide for myself whether to accept a job."
+        },
+        "inventory": {
+          "energy": 60.0,
+          "food": 1.0,
+          "resident_id": "shared:smith"
+        },
+        "items": [],
+        "known_rules": {
+          "axe_use": "To make 1 kindling, you must hold your own hatchet with both edge and handle at 100, stand at your own workstation and consume 1 wood. Repairing only one part is not enough.",
+          "basic_needs": "satiety=0 or energy=0 does not itself prevent movement or listed actions such as rest and harvest_ration. Choose only from available_actions. Position, busy state and real resources are checked again on submission and arrival. harvest_ration permits an attempt to reach the public foraging point; it does not guarantee remaining stock or a successful harvest.",
+          "communication": "Your reason is private and is not automatically spoken. General help only asks whether someone is available; a repair request naming the tool and part conveys the specific problem. willing means willingness to talk, not acceptance of a paid job. wood_repair repairs wooden handles and metal_repair repairs metal axe edges. Each person chooses whether to help.",
+          "repair": "price_col is the fixed total payment in Col for this repair, not a unit price or estimate; there are no other rates. Legacy contracts and ordinary offers use settlement=collection: acceptance moves that amount from the owner's wallet into reserved funds, delivery permits 60 seconds of work, and payment transfers to the worker only when the owner collects the repaired tool. If an offered contract says completion, the same reservation, delivery and 60 seconds of work apply, but payment transfers only after consuming material and restoring the part to 100; collection returns the tool without paying again. Edge repair consumes 1 of the worker's iron, handle repair 1 wood. You may decline because of time, materials or the risk of delayed collection. Willingness to talk is not contract acceptance."
+        },
+        "life_account": {
+          "iron": 1,
+          "kindling": 0.0,
+          "reserved_col": 0,
+          "resident_id": "shared:smith",
+          "wood": 1.0
+        },
+        "memory": {
+          "previous_decisions": []
+        },
+        "needs": {
+          "energy": 60.0,
+          "satiety": 60.0,
+          "scale_explanation": "satiety measures fullness: 0 means an empty stomach and 100 means full. Higher energy means more stamina."
+        },
+        "skills": [
+          "metal_repair"
+        ],
+        "unavailable_actions": [],
+        "wallet": {
+          "coins_col": 10
+        }
+      },
+      "options": [
+        {
+          "action_id": "wait",
+          "alias": "a0",
+          "description": "Wait",
+          "expected_intents": []
+        },
+        {
+          "action_id": "life:eat_ration",
+          "alias": "a1",
+          "description": "eat_ration",
+          "expected_intents": []
+        },
+        {
+          "action_id": "life:rest",
+          "alias": "a2",
+          "description": "rest",
+          "expected_intents": []
+        },
+        {
+          "action_id": "life:harvest_ration",
+          "alias": "a3",
+          "description": "harvest_ration",
+          "expected_intents": []
+        },
+        {
+          "action_id": "food:give:shared:carpenter",
+          "alias": "a4",
+          "description": "Give 1 of your ordinary rations to Rowan in person (a voluntary gift, not a trade).",
+          "expected_intents": []
+        },
+        {
+          "action_id": "approach:shared:well-keeper",
+          "alias": "a5",
+          "description": "Approach Ari",
+          "expected_intents": []
+        },
+        {
+          "action_id": "approach:shared:baker",
+          "alias": "a6",
+          "description": "Approach Wren",
+          "expected_intents": []
+        },
+        {
+          "action_id": "approach:shared:carpenter",
+          "alias": "a7",
+          "description": "Approach Rowan",
+          "expected_intents": []
+        },
+        {
+          "action_id": "approach:shared:innkeeper",
+          "alias": "a8",
+          "description": "Approach Mara",
+          "expected_intents": []
+        },
+        {
+          "action_id": "approach:shared:herder",
+          "alias": "a9",
+          "description": "Approach Heath",
+          "expected_intents": []
+        },
+        {
+          "action_id": "approach:shared:gardener",
+          "alias": "a10",
+          "description": "Approach Fern",
+          "expected_intents": []
+        },
+        {
+          "action_id": "approach:shared:weaver",
+          "alias": "a11",
+          "description": "Approach Iris",
+          "expected_intents": []
+        },
+        {
+          "action_id": "approach:shared:fisher",
+          "alias": "a12",
+          "description": "Approach Reed",
+          "expected_intents": []
+        },
+        {
+          "action_id": "approach:shared:healer",
+          "alias": "a13",
+          "description": "Approach Sage",
+          "expected_intents": []
+        },
+        {
+          "action_id": "ask:shared:carpenter",
+          "alias": "a14",
+          "description": "Ask Rowan for help",
+          "expected_intents": []
+        },
+        {
+          "action_id": "ask-skill:shared:carpenter:wood_repair",
+          "alias": "a15",
+          "description": "Ask Rowan for help with carpentry",
+          "expected_intents": []
+        },
+        {
+          "action_id": "contract:accept:trade_contract_fixture:offer",
+          "alias": "a16",
+          "description": "Accept repair edge: payment 2 Col; reserve payment first, then work for 60 seconds after delivery; payment follows collection by the owner",
+          "expected_intents": [
+            "agree"
+          ]
+        },
+        {
+          "action_id": "contract:reject:trade_contract_fixture:offer",
+          "alias": "a17",
+          "description": "Decline repair edge, offered payment 2 Col",
+          "expected_intents": [
+            "refuse"
+          ]
+        }
+      ],
+      "resident_id": "shared:smith"
+    }
+  ],
+  "fixture_only": true
+}

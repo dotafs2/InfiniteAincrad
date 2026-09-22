@@ -99,6 +99,44 @@ NPC activity has been started. The existing canonical repair remains unmodified.
 
 ## Next heartbeat priorities
 
+### Sixth batch complete (03:10 China time)
+
+Luna implemented a single-request local Smith client; Terra repaired the
+disposable-world runner, and GPT-6 reviewed the exchange and ran exactly one
+fresh local request. No paid/cloud API was used. The formal Smith saw 18 current
+Turns aliases, his actual characterization, one iron, and the supplied 2 Col
+offer. Expected intent metadata was included without forcing acceptance.
+
+The actual Qwen3 8B response failed: it returned the canonical contract-accept
+ID instead of allowed alias `a16`, and its declared intent was `ask`. Godot
+rejected `unsupported_next_action`; no acceptance was executed and no retry
+was made. The spoken proposal asks whether to accept rather than deciding.
+Latency 3969.252 ms; reported input/output tokens 1882/140. This is a useful
+failure sample, not autonomous adoption or evidence of cost savings.
+
+The reusable harness passes deterministic acceptance (6 checks: actual 2 Col
+escrow, wallet 8, exact cold acceptance feedback) and mismatch rejection (6
+checks). The Python client passes 5 offline tests. Actual inference completed
+the 3 setup checks but failed proposal validation; harness `ok` must never be
+presented as a passing model response. All managed processes exited cleanly.
+World source hashes and the two pre-existing user edits retain their six
+pre-batch hashes. Only disposable fixture files were used; no publication.
+
+Evidence and reproduction: `docs/validation/local-smith-reply-trial-20260923.md`.
+The actual raw response is preserved unaltered under
+`docs/validation/local-smith-reply-20260923/`.
+
+**Next bounded task:** improve the isolated user-visible dialogue preview using
+this saved failure and earlier samples: show spoken proposal, chosen field,
+allowed alias/canonical binding, exact rejection, and absence of world action.
+Keep private thought out of public presentation. A small offline prompt/context
+clarification may remove the alias ambiguity (explicit allowed aliases and
+field example), but do not convert stored canonical IDs into accepted aliases
+or spend further calls chasing success. Preserve the distinction between
+structural validity, declared intent compatibility, sentence meaning, and
+authoritative result. Production integration and physical autonomy remain
+deferred. Stop at 09:00 China time; do not extend the deadline.
+
 ### Fifth batch complete (02:47 China time)
 
 The optional `reviewed_dialogue_fixture_adapter.gd` now connects declared-intent
