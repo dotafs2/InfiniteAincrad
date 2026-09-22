@@ -99,6 +99,37 @@ NPC activity has been started. The existing canonical repair remains unmodified.
 
 ## Next heartbeat priorities
 
+### Fourth batch complete (02:27 China time)
+
+Luna implemented `game/agents/dialogue_proposal_review.gd` and a saved-output
+review screen at `game/scenes/dialogue_proposal_review_preview.tscn`. Terra and
+parent reviewed the authority boundary; parent completed capture evidence and
+visually inspected the rendered third case. All three original local proposals
+remain structurally valid but now explicitly require review because their
+declared intent mismatches skill disclosure, acceptance, or refusal. The raw
+outputs remain untouched. No new NPC inference or world execution occurred.
+
+The gate passes 22 offline checks, including all three real samples, synthetic
+compatible counterparts, alias remapping, and a deliberately contradictory spoken
+line that demonstrates the check cannot certify semantics. `ok` means processing
+success only; `execution_authorized` is always false. Unknown action families
+require review. The preview suite passed; invalid capture indices exit 2.
+Actual graphical capture exited cleanly and shows the third case's `ask` versus
+`refuse` mismatch without private thought. Screenshot and evidence are linked in
+`docs/validation/dialogue-proposal-review-preview-20260923.md`. Six preserved
+world/user-file hashes match. No push occurred.
+
+**Next bounded task:** connect this optional review step to the existing
+disposable-world dialogue adapter, with explicit fixture authorization and a
+fresh current alias mapping check before any action. Reuse saved mismatches to
+prove they cannot submit a decision or mutate the fixture; use a separately
+labelled consistent counterpart to verify an actual acceptance/refusal receipt.
+Do not redefine intent compatibility as sentence truth or edit the saved raw
+outputs. First close this offline integration gap; further local generation is
+useful only after action expectations can be supplied clearly and actual results
+can be recorded. Production turns, canonical histories and navigation remain
+unchanged. Stop by 09:00 China time as authorized.
+
 ### Third batch complete (02:08 China time)
 
 Luna implemented the bounded local client and strict Godot batch validator; Terra

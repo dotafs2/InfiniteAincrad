@@ -1,0 +1,23 @@
+{
+  "capture_valid_case": true,
+  "case_id": "smith_missing_iron",
+  "case_index": 2,
+  "review": {
+    "action_id": "contract:reject:trade_contract_fixture:offer",
+    "alias": "a16",
+    "declared_intent": "ask",
+    "execution": "not_attempted",
+    "execution_authorized": false,
+    "expected_intents": [
+      "refuse"
+    ],
+    "ok": true,
+    "reason": "intent_mismatch",
+    "review_required": true,
+    "semantic_truth_verification": false,
+    "speech": "I can repair the edge, but I need iron. Will you provide it?",
+    "structural_accepted": true
+  },
+  "screenshot_saved": true,
+  "status": "Loaded 3 saved local proposals; NOT EXECUTED."
+}
