@@ -1,0 +1,82 @@
+{
+  "capture_step": 4,
+  "failures": [],
+  "mode": "missing_iron_refusal",
+  "ok": true,
+  "paid_calls": 0,
+  "screenshot_saved": true,
+  "scripted": true,
+  "source_unchanged": true,
+  "steps": [
+    {
+      "custodian_id": "shared:carpenter",
+      "edge": 20,
+      "iron": 1,
+      "owner_col": 10,
+      "phase": "skill_notice",
+      "proposed_action": "share-skill:shared:carpenter:metal_repair",
+      "reserved_col": 0,
+      "result_code": "skill_notice",
+      "resumed": false,
+      "smith_col": 10,
+      "speaker_id": "shared:smith",
+      "speech": "I can repair metal edges."
+    },
+    {
+      "custodian_id": "shared:carpenter",
+      "edge": 20,
+      "iron": 1,
+      "owner_col": 10,
+      "phase": "need",
+      "proposed_action": "ask-repair:shared:smith:seed:axe:edge",
+      "reserved_col": 0,
+      "result_code": "ask_help",
+      "resumed": false,
+      "smith_col": 10,
+      "speaker_id": "shared:carpenter",
+      "speech": "Can you repair the edge of my axe?"
+    },
+    {
+      "custodian_id": "shared:carpenter",
+      "edge": 20,
+      "iron": 1,
+      "owner_col": 10,
+      "phase": "negotiation",
+      "proposed_action": "reply:godot_help:turn:shared:carpenter:0:1:willing",
+      "reserved_col": 0,
+      "result_code": "reply_help",
+      "resumed": false,
+      "smith_col": 10,
+      "speaker_id": "shared:smith",
+      "speech": "I am willing to discuss the repair."
+    },
+    {
+      "custodian_id": "shared:carpenter",
+      "edge": 20,
+      "iron": 1,
+      "owner_col": 10,
+      "phase": "offer",
+      "proposed_action": "contract:offer:seed:axe:edge:shared:smith:2",
+      "reserved_col": 0,
+      "result_code": "contract_proposed",
+      "resumed": false,
+      "smith_col": 10,
+      "speaker_id": "shared:carpenter",
+      "speech": "I can offer two Col for an edge repair."
+    },
+    {
+      "custodian_id": "shared:carpenter",
+      "edge": 20,
+      "iron": 0,
+      "owner_col": 10,
+      "phase": "refusal",
+      "proposed_action": "",
+      "reserved_col": 0,
+      "result_code": "option_unavailable",
+      "resumed": false,
+      "smith_col": 10,
+      "speaker_id": "shared:smith",
+      "speech": "I cannot accept without iron."
+    }
+  ]
+}

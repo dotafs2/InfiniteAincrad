@@ -99,6 +99,33 @@ NPC activity has been started. The existing canonical repair remains unmodified.
 
 ## Next heartbeat priorities
 
+### Second batch complete (01:46 China time)
+
+The first two priorities below now have a bounded implementation in
+`game/scenes/axe_day_dialogue_preview.tscn`. Luna built the primitive yard, actors,
+manual replay UI and custody display; Terra built the reusable formal-ID runner;
+GPT-6 reviewed outcomes and actual rendered frames. The runner uses existing
+dialogue validation and actual Turns/TownRuntime execution on disposable genesis
+copies. Success includes a mid-work cold reload, actual repair and collection
+events; missing iron ends in a lawful refusal. No live model choice is claimed.
+
+Review corrected unchecked phase failures, fabricated completion labels, wrong
+visual custody, missing capture-step selection and misleading failure flags. The
+final runner suite passes 7 checks (including injected arrival failure); the final
+preview passes 26. Three off-screen images and actual result reports are saved in
+`docs/validation/axe-day-preview-20260923/{work,collection,refusal}/`; all three
+images were visually inspected. Details: `docs/validation/axe-day-dialogue-preview-20260923.md`.
+Final durable test logs live under `private/iteration-20260923/axe-day-demo-runner-final/`,
+`axe-preview-final/` and `axe-render-final/`. All owned processes exited. Six
+pre/post hashes (source worlds, private current world, existing user edits) match.
+
+Next priority is **3 below**: inspect local LocalJev service and conduct a bounded
+local-only dialogue/action proposal experiment, with raw model outputs validated
+against independently supplied current options and honest failure reporting.
+Do not spend the next batch adding more scripted happy-path checks. If local
+inference is unavailable, improve the existing preview's transcript/interaction
+only when it exposes a real missing behavior. Do not enable cloud fallback.
+
 1. Integrate the adapter and formal-ID fixture into ONE optional, observable
    two-resident dialogue/repair demo. Reuse existing actions and produce a readable
    transcript that separately shows spoken line, proposed action and real result.
