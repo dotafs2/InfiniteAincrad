@@ -1,0 +1,16 @@
+{
+  "trial_id": "tripo-nav-houses-20260922",
+  "purpose": "One original fantasy town house appearance candidate for the model-nav test scene; not a playable interior or deployed world asset.",
+  "model": "v3.1-20260211",
+  "base_url": "https://openapi.tripo3d.ai/v3",
+  "expected_credits_per_house": 30,
+  "maximum_creations": 1,
+  "settings": {"texture": true, "pbr": true, "texture_quality": "detailed", "geometry_quality": "standard", "face_limit": 80000},
+  "negative_prompt": "people, characters, vehicles, text, logos, watermarks, floating parts, dollhouse cutaway, missing rear walls, large ground base, whole village, photorealistic grime, extreme perspective",
+  "houses": [
+    {
+      "id": "01_market_street_house",
+      "prompt": "One complete standalone two-storey market street house for a charming anime fantasy town, a 3D game environment asset with all four exterior walls and a complete roof. Ground floor pale limestone with a wide recessed shopfront, wooden shop window and a small fabric awning; upper floor cream plaster with warm dark oak timber framing; muted terracotta clay roof tiles with a broad gable and one dormer; sage green shutters, a small stone chimney and an arched wooden front door beside the shopfront. Compact merchant silhouette, readable large forms, restrained hand-painted PBR textures and soft color transitions. Matching cohesive stylized medieval European architecture. Clean daylight material colors without baked strong shadows. Only the building, no landscape, goods, people or display pedestal. Exterior appearance study, not a cutaway. Intended full-size proportions, about 7 metres wide. Complete and attractive from the front, sides and back."
+    }
+  ]
+}
