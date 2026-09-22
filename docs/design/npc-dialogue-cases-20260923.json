@@ -1,0 +1,1598 @@
+{
+  "schema": "fixture.npc_dialogue_cases.v1",
+  "title": "Bounded offline NPC dialogue case pack",
+  "fixture_status": "synthetic_fixture_only",
+  "canonical_history": false,
+  "production_input": false,
+  "language": "English",
+  "purpose": "Offline structural acceptance and rejection cases for the bounded DND-style dialogue envelope.",
+  "contract_fields": [
+    "speech",
+    "intent",
+    "stance",
+    "target_id",
+    "claim_ids",
+    "stakes",
+    "next_action",
+    "private_thought",
+    "confidence"
+  ],
+  "formal_resident_ids": [
+    "shared:well-keeper",
+    "shared:baker",
+    "shared:smith",
+    "shared:carpenter",
+    "shared:innkeeper",
+    "shared:herder",
+    "shared:gardener",
+    "shared:weaver",
+    "shared:fisher",
+    "shared:healer"
+  ],
+  "id_semantics_note": "The allowlist records formal resident IDs only. It does not infer skills, relationships, history, ownership, or authority from an ID or role label.",
+  "evaluation_policy": {
+    "structural": "Validate required fields, enum values, target/action allowlists, claim reference membership and bounded speech. Referenced IDs do not establish the semantic truth of the spoken sentence.",
+    "voice": "Separate human or language evaluator only; no numeric voice score is included in this pack.",
+    "quality_scores": "omitted",
+    "paid_model": "not_used"
+  },
+  "cases": [
+    {
+      "case_id": "case-001",
+      "resident_id": "shared:well-keeper",
+      "scenario": "help",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c001.queue",
+            "text": "Two people are waiting at the public trough."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "offer:show_queue_end",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "Two people are still waiting. I can show you where the line ends, if you want.",
+        "intent": "offer",
+        "stance": "firm",
+        "target_id": "player",
+        "claim_ids": [
+          "c001.queue"
+        ],
+        "stakes": "Fair access depends on keeping the waiting order visible.",
+        "next_action": "offer:show_queue_end",
+        "private_thought": "",
+        "confidence": 0.95
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c001.queue"
+        ],
+        "action_ids": [
+          "offer:show_queue_end",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-002",
+      "resident_id": "shared:well-keeper",
+      "scenario": "negotiation",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c002.empty-cup",
+            "text": "The player's cup is empty."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "ask:wait_for_turn",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "You may take one filling after the person ahead of you. Will you wait for that order?",
+        "intent": "ask",
+        "stance": "guarded",
+        "target_id": "player",
+        "claim_ids": [
+          "c002.empty-cup"
+        ],
+        "stakes": "A request for water must not displace someone already waiting.",
+        "next_action": "ask:wait_for_turn",
+        "private_thought": "",
+        "confidence": 0.91
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c002.empty-cup"
+        ],
+        "action_ids": [
+          "ask:wait_for_turn",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-003",
+      "resident_id": "shared:well-keeper",
+      "scenario": "failure",
+      "example_kind": "negative",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c003.no-service",
+            "text": "No water service contract is visible."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "refuse"
+        ]
+      },
+      "candidate": {
+        "speech": "I have filled your private barrel and can guarantee more water tomorrow.",
+        "intent": "offer",
+        "stance": "warm",
+        "target_id": "player",
+        "claim_ids": [
+          "c003.no-service"
+        ],
+        "stakes": "The proposed private supply has no visible authority or resource.",
+        "next_action": "create:water_service",
+        "private_thought": "",
+        "confidence": 0.99
+      },
+      "expected_structural": "reject",
+      "rejection_reasons": [
+        "action_not_allowed",
+        "unsupported_resource_or_contract"
+      ],
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c003.no-service"
+        ],
+        "action_ids": [
+          "refuse"
+        ]
+      },
+      "expected_accept": false,
+      "expected_code": "unsupported_next_action",
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-004",
+      "resident_id": "shared:baker",
+      "scenario": "help",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c004.oven",
+            "text": "The public oven is visible and unoccupied."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "offer:explain_first_step",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "The oven is open. If you gather the visible flour, I can explain the first step.",
+        "intent": "offer",
+        "stance": "curious",
+        "target_id": "player",
+        "claim_ids": [
+          "c004.oven"
+        ],
+        "stakes": "Practice is possible only while the shared oven and visible material remain available.",
+        "next_action": "offer:explain_first_step",
+        "private_thought": "",
+        "confidence": 0.88
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c004.oven"
+        ],
+        "action_ids": [
+          "offer:explain_first_step",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-005",
+      "resident_id": "shared:baker",
+      "scenario": "refusal",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c005.no-flour",
+            "text": "No flour is visible at the oven."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "ask:check_store",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "I cannot start without flour in sight. We can check the store together, or leave it for later.",
+        "intent": "refuse",
+        "stance": "uncertain",
+        "target_id": "player",
+        "claim_ids": [
+          "c005.no-flour"
+        ],
+        "stakes": "Starting without the required visible material would promise a result that is not available.",
+        "next_action": "ask:check_store",
+        "private_thought": "",
+        "confidence": 0.94
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c005.no-flour"
+        ],
+        "action_ids": [
+          "ask:check_store",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-006",
+      "resident_id": "shared:baker",
+      "scenario": "revisit",
+      "example_kind": "negative",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c006.same-oven",
+            "text": "The same public oven is visible."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "refuse"
+        ]
+      },
+      "candidate": {
+        "speech": "Welcome back, my oldest friend. I remember our feast and the bread you owe me.",
+        "intent": "greet",
+        "stance": "warm",
+        "target_id": "player",
+        "claim_ids": [
+          "c006.same-oven"
+        ],
+        "stakes": "The fixture contains no prior feast, debt, or relationship evidence.",
+        "next_action": "remember:feast_and_debt",
+        "private_thought": "",
+        "confidence": 0.96
+      },
+      "expected_structural": "reject",
+      "rejection_reasons": [
+        "invented_history",
+        "invented_relationship",
+        "action_not_allowed"
+      ],
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c006.same-oven"
+        ],
+        "action_ids": [
+          "refuse"
+        ]
+      },
+      "expected_accept": false,
+      "expected_code": "unsupported_next_action",
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-007",
+      "resident_id": "shared:smith",
+      "scenario": "help",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c007.dull-edge",
+            "text": "A tool with a visibly dull edge is on the bench."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "offer:inspect_edge",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "That edge is visibly dull. I can inspect it with you; I cannot promise a repair until the material is checked.",
+        "intent": "offer",
+        "stance": "guarded",
+        "target_id": "player",
+        "claim_ids": [
+          "c007.dull-edge"
+        ],
+        "stakes": "Inspection may clarify a repair, while material and completion remain unresolved.",
+        "next_action": "offer:inspect_edge",
+        "private_thought": "",
+        "confidence": 0.93
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c007.dull-edge"
+        ],
+        "action_ids": [
+          "offer:inspect_edge",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-008",
+      "resident_id": "shared:smith",
+      "scenario": "negotiation",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c008.owner-choice",
+            "text": "The player is holding the tool and may choose whether to request inspection."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "ask:place_tool_for_inspection",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "If you want the edge checked, set the tool here and tell me what you need it to do.",
+        "intent": "ask",
+        "stance": "firm",
+        "target_id": "player",
+        "claim_ids": [
+          "c008.owner-choice"
+        ],
+        "stakes": "The owner chooses whether to hand over the tool and define the request.",
+        "next_action": "ask:place_tool_for_inspection",
+        "private_thought": "",
+        "confidence": 0.86
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c008.owner-choice"
+        ],
+        "action_ids": [
+          "ask:place_tool_for_inspection",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-009",
+      "resident_id": "shared:smith",
+      "scenario": "failure",
+      "example_kind": "negative",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c009.no-ore",
+            "text": "No ore or repair material is visible."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "refuse"
+        ]
+      },
+      "candidate": {
+        "speech": "Give me a moment; I forged the missing ore from the air and the tool is perfect now.",
+        "intent": "agree",
+        "stance": "firm",
+        "target_id": "player",
+        "claim_ids": [
+          "c009.no-ore"
+        ],
+        "stakes": "A completed repair cannot be claimed without material or an authoritative result.",
+        "next_action": "complete:repair",
+        "private_thought": "",
+        "confidence": 1
+      },
+      "expected_structural": "reject",
+      "rejection_reasons": [
+        "action_not_allowed",
+        "unsupported_material",
+        "unsupported_completion"
+      ],
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c009.no-ore"
+        ],
+        "action_ids": [
+          "refuse"
+        ]
+      },
+      "expected_accept": false,
+      "expected_code": "unsupported_next_action",
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-010",
+      "resident_id": "shared:carpenter",
+      "scenario": "help",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c010.loose-board",
+            "text": "A public walkway board is visibly loose."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "offer:mark_loose_spot",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "That board moves under your foot. I can mark the loose spot while we decide whether a repair is available.",
+        "intent": "warn",
+        "stance": "firm",
+        "target_id": "player",
+        "claim_ids": [
+          "c010.loose-board"
+        ],
+        "stakes": "People could avoid the visible hazard while repair authority remains undecided.",
+        "next_action": "offer:mark_loose_spot",
+        "private_thought": "",
+        "confidence": 0.92
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c010.loose-board"
+        ],
+        "action_ids": [
+          "offer:mark_loose_spot",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-011",
+      "resident_id": "shared:carpenter",
+      "scenario": "refusal",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c011.no-owner",
+            "text": "No owner or repair contract is visible for the board."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "ask:identify_owner",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "I can describe the loose board, but I will not claim the repair is mine without an owner or a reviewed job.",
+        "intent": "refuse",
+        "stance": "guarded",
+        "target_id": "player",
+        "claim_ids": [
+          "c011.no-owner"
+        ],
+        "stakes": "The repair needs an accountable owner before work can be promised.",
+        "next_action": "ask:identify_owner",
+        "private_thought": "",
+        "confidence": 0.95
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c011.no-owner"
+        ],
+        "action_ids": [
+          "ask:identify_owner",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-012",
+      "resident_id": "shared:carpenter",
+      "scenario": "revisit",
+      "example_kind": "negative",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c012.board-status",
+            "text": "The board is still visibly loose; no repair completion event is visible."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "refuse"
+        ]
+      },
+      "candidate": {
+        "speech": "It is fixed now, and the town has paid me for the finished job.",
+        "intent": "agree",
+        "stance": "warm",
+        "target_id": "player",
+        "claim_ids": [
+          "c012.board-status"
+        ],
+        "stakes": "Completion and payment require authoritative evidence absent from this revisit.",
+        "next_action": "complete:board_repair",
+        "private_thought": "",
+        "confidence": 0.98
+      },
+      "expected_structural": "reject",
+      "rejection_reasons": [
+        "contradicts_visible_claim",
+        "unsupported_completion",
+        "unsupported_payment"
+      ],
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c012.board-status"
+        ],
+        "action_ids": [
+          "refuse"
+        ]
+      },
+      "expected_accept": false,
+      "expected_code": "unsupported_next_action",
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-013",
+      "resident_id": "shared:innkeeper",
+      "scenario": "help",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c013.empty-seat",
+            "text": "One public table has an empty seat."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "ask:table_consent",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "There is one empty seat at that table. You may use it if the others agree.",
+        "intent": "offer",
+        "stance": "warm",
+        "target_id": "player",
+        "claim_ids": [
+          "c013.empty-seat"
+        ],
+        "stakes": "A seat is available only with the table's consent.",
+        "next_action": "ask:table_consent",
+        "private_thought": "",
+        "confidence": 0.9
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c013.empty-seat"
+        ],
+        "action_ids": [
+          "ask:table_consent",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-014",
+      "resident_id": "shared:innkeeper",
+      "scenario": "negotiation",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c014.visible-price",
+            "text": "A posted meal price is visible: 2 coins."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "ask:kitchen_about_small_portion",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "The posted meal is two coins. I can ask the kitchen whether a smaller portion is possible; I cannot change the price myself.",
+        "intent": "offer",
+        "stance": "guarded",
+        "target_id": "player",
+        "claim_ids": [
+          "c014.visible-price"
+        ],
+        "stakes": "The player's choice is between the posted meal and a request for a smaller portion.",
+        "next_action": "ask:kitchen_about_small_portion",
+        "private_thought": "",
+        "confidence": 0.87
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c014.visible-price"
+        ],
+        "action_ids": [
+          "ask:kitchen_about_small_portion",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-015",
+      "resident_id": "shared:innkeeper",
+      "scenario": "failure",
+      "example_kind": "negative",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c015.closed-kitchen",
+            "text": "The kitchen is visibly closed."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "refuse"
+        ]
+      },
+      "candidate": {
+        "speech": "The kitchen is closed, but I have served you a hot meal and charged nothing.",
+        "intent": "agree",
+        "stance": "warm",
+        "target_id": "player",
+        "claim_ids": [
+          "c015.closed-kitchen"
+        ],
+        "stakes": "A served meal and free charge are not supported by the visible scene.",
+        "next_action": "create:meal_and_payment",
+        "private_thought": "",
+        "confidence": 0.99
+      },
+      "expected_structural": "reject",
+      "rejection_reasons": [
+        "contradicts_visible_claim",
+        "unsupported_item",
+        "unsupported_payment"
+      ],
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c015.closed-kitchen"
+        ],
+        "action_ids": [
+          "refuse"
+        ]
+      },
+      "expected_accept": false,
+      "expected_code": "unsupported_next_action",
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-016",
+      "resident_id": "shared:herder",
+      "scenario": "help",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c016.animal-visible",
+            "text": "A calm animal is visible behind the public fence."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "offer:observe_from_outside",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "The animal is behind the fence and looks calm from here. We can watch without opening the gate.",
+        "intent": "offer",
+        "stance": "warm",
+        "target_id": "player",
+        "claim_ids": [
+          "c016.animal-visible"
+        ],
+        "stakes": "Observation can happen while the animal's safety and the gate remain protected.",
+        "next_action": "offer:observe_from_outside",
+        "private_thought": "",
+        "confidence": 0.9
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c016.animal-visible"
+        ],
+        "action_ids": [
+          "offer:observe_from_outside",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-017",
+      "resident_id": "shared:herder",
+      "scenario": "refusal",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c017.no-consent",
+            "text": "No owner consent to handle the animal is visible."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "ask:find_owner_consent",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "Please do not handle it yet. We have no visible consent, so I can help you watch for a safer, approved next step.",
+        "intent": "refuse",
+        "stance": "firm",
+        "target_id": "player",
+        "claim_ids": [
+          "c017.no-consent"
+        ],
+        "stakes": "The animal's handling must wait for consent and a responsible action.",
+        "next_action": "ask:find_owner_consent",
+        "private_thought": "",
+        "confidence": 0.96
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c017.no-consent"
+        ],
+        "action_ids": [
+          "ask:find_owner_consent",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-018",
+      "resident_id": "shared:herder",
+      "scenario": "revisit",
+      "example_kind": "negative",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c018.no-medical",
+            "text": "The animal is visible; no injury, treatment, or veterinary record is visible."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "refuse"
+        ]
+      },
+      "candidate": {
+        "speech": "I diagnosed its illness yesterday and healed it with my remedy.",
+        "intent": "disclose",
+        "stance": "warm",
+        "target_id": "player",
+        "claim_ids": [
+          "c018.no-medical"
+        ],
+        "stakes": "The fixture does not establish a diagnosis, remedy, or prior event.",
+        "next_action": "create:diagnosis_and_heal",
+        "private_thought": "",
+        "confidence": 0.97
+      },
+      "expected_structural": "reject",
+      "rejection_reasons": [
+        "invented_history",
+        "unsupported_medical_action"
+      ],
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c018.no-medical"
+        ],
+        "action_ids": [
+          "refuse"
+        ]
+      },
+      "expected_accept": false,
+      "expected_code": "unsupported_next_action",
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-019",
+      "resident_id": "shared:gardener",
+      "scenario": "help",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c019.seedbed",
+            "text": "A marked public seedbed and one visible seed packet are present."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "offer:record_planting",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "The marked bed and one packet are visible. We can record where a seed goes before we plant it.",
+        "intent": "offer",
+        "stance": "curious",
+        "target_id": "player",
+        "claim_ids": [
+          "c019.seedbed"
+        ],
+        "stakes": "A recorded planting gives us an observable attempt without claiming a future harvest.",
+        "next_action": "offer:record_planting",
+        "private_thought": "",
+        "confidence": 0.92
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c019.seedbed"
+        ],
+        "action_ids": [
+          "offer:record_planting",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-020",
+      "resident_id": "shared:gardener",
+      "scenario": "negotiation",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c020.dry-bed",
+            "text": "The bed surface is visibly dry; no water source is visible."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "ask:look_for_permitted_water",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "The soil is dry, and I do not see water here. Shall we look for a permitted source before choosing to plant?",
+        "intent": "ask",
+        "stance": "uncertain",
+        "target_id": "player",
+        "claim_ids": [
+          "c020.dry-bed"
+        ],
+        "stakes": "Planting now may fail, while a water search is only a proposed next step.",
+        "next_action": "ask:look_for_permitted_water",
+        "private_thought": "",
+        "confidence": 0.9
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c020.dry-bed"
+        ],
+        "action_ids": [
+          "ask:look_for_permitted_water",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-021",
+      "resident_id": "shared:gardener",
+      "scenario": "failure",
+      "example_kind": "negative",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c021.unknown-plant",
+            "text": "An unfamiliar plant is visible; its species and use are unknown."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "refuse"
+        ]
+      },
+      "candidate": {
+        "speech": "That plant is definitely medicinal and safe to eat.",
+        "intent": "disclose",
+        "stance": "firm",
+        "target_id": "player",
+        "claim_ids": [
+          "c021.unknown-plant"
+        ],
+        "stakes": "The visible plant does not support identity, safety, or medicinal claims.",
+        "next_action": "eat:unknown_plant",
+        "private_thought": "",
+        "confidence": 0.99
+      },
+      "expected_structural": "reject",
+      "rejection_reasons": [
+        "unsupported_claim",
+        "unsupported_action"
+      ],
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c021.unknown-plant"
+        ],
+        "action_ids": [
+          "refuse"
+        ]
+      },
+      "expected_accept": false,
+      "expected_code": "unsupported_next_action",
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-022",
+      "resident_id": "shared:weaver",
+      "scenario": "help",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c022.thread",
+            "text": "A spool of thread and a simple loom are visible."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "offer:show_one_pass",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "The thread and loom are here. I can show one pass, then you can decide whether to try it.",
+        "intent": "offer",
+        "stance": "curious",
+        "target_id": "player",
+        "claim_ids": [
+          "c022.thread"
+        ],
+        "stakes": "The player can choose whether to practice after a bounded demonstration.",
+        "next_action": "offer:show_one_pass",
+        "private_thought": "",
+        "confidence": 0.9
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c022.thread"
+        ],
+        "action_ids": [
+          "offer:show_one_pass",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-023",
+      "resident_id": "shared:weaver",
+      "scenario": "refusal",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c023.no-thread",
+            "text": "No thread is visible at the loom."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "leave:loom_ready",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "There is no thread to use, so I cannot begin this pattern. We can leave the loom ready for another time.",
+        "intent": "refuse",
+        "stance": "guarded",
+        "target_id": "player",
+        "claim_ids": [
+          "c023.no-thread"
+        ],
+        "stakes": "The pattern is deferred until its visible material exists.",
+        "next_action": "leave:loom_ready",
+        "private_thought": "",
+        "confidence": 0.94
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c023.no-thread"
+        ],
+        "action_ids": [
+          "leave:loom_ready",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-024",
+      "resident_id": "shared:weaver",
+      "scenario": "revisit",
+      "example_kind": "negative",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c024.pattern",
+            "text": "A partial pattern is visible; no completed garment is recorded."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "refuse"
+        ]
+      },
+      "candidate": {
+        "speech": "This is the finished cloak I promised you last week.",
+        "intent": "disclose",
+        "stance": "warm",
+        "target_id": "player",
+        "claim_ids": [
+          "c024.pattern"
+        ],
+        "stakes": "The fixture records neither a promise nor completion.",
+        "next_action": "give:finished_cloak",
+        "private_thought": "",
+        "confidence": 0.98
+      },
+      "expected_structural": "reject",
+      "rejection_reasons": [
+        "invented_history",
+        "unsupported_completion",
+        "unsupported_item"
+      ],
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c024.pattern"
+        ],
+        "action_ids": [
+          "refuse"
+        ]
+      },
+      "expected_accept": false,
+      "expected_code": "unsupported_next_action",
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-025",
+      "resident_id": "shared:fisher",
+      "scenario": "help",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c025.lake",
+            "text": "A quiet lake edge and one visible unused line are present."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "offer:inspect_lake_edge",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "The line is unused and the water is visible. We can check the edge together, but I cannot promise a catch.",
+        "intent": "offer",
+        "stance": "curious",
+        "target_id": "player",
+        "claim_ids": [
+          "c025.lake"
+        ],
+        "stakes": "The player may inspect or try the line; a catch remains uncertain.",
+        "next_action": "offer:inspect_lake_edge",
+        "private_thought": "",
+        "confidence": 0.91
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c025.lake"
+        ],
+        "action_ids": [
+          "offer:inspect_lake_edge",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-026",
+      "resident_id": "shared:fisher",
+      "scenario": "negotiation",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c026.shared-line",
+            "text": "The line is visible and no ownership marker is visible."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "ask:confirm_line_owner",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "Before either of us uses it, shall we ask who owns the line? A missing marker is not permission.",
+        "intent": "ask",
+        "stance": "guarded",
+        "target_id": "player",
+        "claim_ids": [
+          "c026.shared-line"
+        ],
+        "stakes": "Use should wait for ownership or consent.",
+        "next_action": "ask:confirm_line_owner",
+        "private_thought": "",
+        "confidence": 0.93
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c026.shared-line"
+        ],
+        "action_ids": [
+          "ask:confirm_line_owner",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-027",
+      "resident_id": "shared:fisher",
+      "scenario": "failure",
+      "example_kind": "negative",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c027.empty-hook",
+            "text": "The hook is visible and empty; no fish or catch record is present."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "refuse"
+        ]
+      },
+      "candidate": {
+        "speech": "I caught three fish here yesterday, and I have stored them for you.",
+        "intent": "disclose",
+        "stance": "warm",
+        "target_id": "player",
+        "claim_ids": [
+          "c027.empty-hook"
+        ],
+        "stakes": "The fixture cannot support past catches or stored items.",
+        "next_action": "give:stored_fish",
+        "private_thought": "",
+        "confidence": 0.99
+      },
+      "expected_structural": "reject",
+      "rejection_reasons": [
+        "invented_history",
+        "unsupported_item"
+      ],
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c027.empty-hook"
+        ],
+        "action_ids": [
+          "refuse"
+        ]
+      },
+      "expected_accept": false,
+      "expected_code": "unsupported_next_action",
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-028",
+      "resident_id": "shared:healer",
+      "scenario": "help",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c028.visible-splinter",
+            "text": "A small splinter is visibly present in the player's glove; no injury severity is established."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "ask:request_consent_to_inspect",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "I can see a splinter in the glove, but I cannot judge the injury from here. Would you like to show me, or leave it alone?",
+        "intent": "ask",
+        "stance": "uncertain",
+        "target_id": "player",
+        "claim_ids": [
+          "c028.visible-splinter"
+        ],
+        "stakes": "The player chooses whether to share more evidence; no treatment is promised.",
+        "next_action": "ask:request_consent_to_inspect",
+        "private_thought": "",
+        "confidence": 0.95
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c028.visible-splinter"
+        ],
+        "action_ids": [
+          "ask:request_consent_to_inspect",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-029",
+      "resident_id": "shared:healer",
+      "scenario": "refusal",
+      "example_kind": "positive",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c029.unknown-herb",
+            "text": "An unfamiliar herb is visible; identity and safety are unknown."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "offer:record_herb_observation",
+          "leave"
+        ]
+      },
+      "candidate": {
+        "speech": "I do not know what that herb is, so I will not call it a remedy. We can record where it was found and seek a verified answer.",
+        "intent": "refuse",
+        "stance": "uncertain",
+        "target_id": "player",
+        "claim_ids": [
+          "c029.unknown-herb"
+        ],
+        "stakes": "Avoiding an unsupported treatment claim protects the player's choice while evidence is sought.",
+        "next_action": "offer:record_herb_observation",
+        "private_thought": "",
+        "confidence": 0.97
+      },
+      "expected_structural": "accept",
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c029.unknown-herb"
+        ],
+        "action_ids": [
+          "offer:record_herb_observation",
+          "leave"
+        ]
+      },
+      "expected_accept": true,
+      "expected_code": null,
+      "semantic_review_required": false
+    },
+    {
+      "case_id": "case-030",
+      "resident_id": "shared:healer",
+      "scenario": "revisit",
+      "example_kind": "negative",
+      "context": {
+        "visible_claims": [
+          {
+            "id": "c030.same-herb",
+            "text": "The same unidentified herb remains visible; no verified lesson or medical skill is recorded."
+          }
+        ],
+        "allowed_targets": [
+          "player"
+        ],
+        "allowed_actions": [
+          "refuse"
+        ]
+      },
+      "candidate": {
+        "speech": "Welcome back. I am now a trained healer, and this herb will cure whatever ails you.",
+        "intent": "offer",
+        "stance": "firm",
+        "target_id": "player",
+        "claim_ids": [
+          "c030.same-herb"
+        ],
+        "stakes": "The revisit contains no training event, skill grant, herb identity, or diagnosis.",
+        "next_action": "create:medical_treatment",
+        "private_thought": "",
+        "confidence": 1
+      },
+      "expected_structural": "reject",
+      "rejection_reasons": [
+        "invented_history",
+        "unsupported_skill",
+        "unsupported_diagnosis",
+        "unsupported_action"
+      ],
+      "voice_evaluation": "separate",
+      "parse_context": {
+        "target_ids": [
+          "player"
+        ],
+        "claim_ids": [
+          "c030.same-herb"
+        ],
+        "action_ids": [
+          "refuse"
+        ]
+      },
+      "expected_accept": false,
+      "expected_code": "unsupported_next_action",
+      "semantic_review_required": false
+    }
+  ]
+}

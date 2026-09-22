@@ -78,3 +78,39 @@ NPC activity has been started. The existing canonical repair remains unmodified.
   from its candidate or expected result; context must be independently authored.
 - Terra is implementing an opt-in fixture adapter to connect validated dialogue
   proposals to the existing Turns alias gate; production integration is deferred.
+
+### First batch complete (01:24 China time)
+
+- Reviewed schema and formal-ID fixture saved in local commit `3079924`.
+- Corpus corrected after independent review: 30 synthetic cases / 10 resident IDs,
+  20 structural accepts and 10 explicit unlisted-action rejects. Each case owns an
+  independent parser context; the test cannot authorize its own candidate using
+  the expected result. Includes altered-action rejection probes. **104 checks
+  pass**; parent wrapper evidence `private/iteration-20260923/npc-dialogue-cases/`.
+- Test-only `game/agents/dialogue_fixture_adapter.gd` passes **9 checks** using
+  existing Turns and TownTrade, with a real `contract_proposed` effect, alias
+  binding changes rejected and explicit caller authorization required. Parent
+  wrapper evidence `private/iteration-20260923/dialogue-fixture-adapter/`.
+  This fixture uses synthetic IDs; the separate axe-day fixture uses formal IDs.
+  They are not yet one integrated resident dialogue demo.
+- Total current verification: trade baseline 63 + schema 29 + formal axe day 35 +
+  adapter 9 + corpus 104 = **240 checks**. No paid provider calls or production
+  world changes. These counts do not measure dialogue quality or autonomy.
+
+## Next heartbeat priorities
+
+1. Integrate the adapter and formal-ID fixture into ONE optional, observable
+   two-resident dialogue/repair demo. Reuse existing actions and produce a readable
+   transcript that separately shows spoken line, proposed action and real result.
+   Keep scripted choices clearly labelled; demonstrate refusal and one interruption
+   alongside success. Give the user a runnable preview, not only more test counts.
+2. Attach existing hand props to this isolated preview when useful for custody:
+   an axe changing hands should reflect the authoritative fixture custody event.
+   Do not imply the navigation fixture already controls formal residents.
+3. Only after the deterministic bridge passes, inspect the existing local LocalJev
+   health/configuration and consider bounded local inference on copied contexts.
+   Report actual local outputs, parse failures, latency and limitations. Never
+   describe synthetic examples or model self-confidence as measured truth/quality.
+4. Save owned changes and concise handoff after each batch; do not overwrite user
+   files or automatically publish. Before the cutoff leave the best reproducible
+   preview and its limitations, instead of starting a last-minute broad refactor.
