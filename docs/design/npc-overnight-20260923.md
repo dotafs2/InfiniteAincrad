@@ -99,6 +99,31 @@ NPC activity has been started. The existing canonical repair remains unmodified.
 
 ## Next heartbeat priorities
 
+### Eighth batch complete (03:38 China time)
+
+The isolated Smith client now exposes alias, description, and expected intent
+to the local model, while retaining canonical action IDs only in independently
+validated fixture metadata. Its prompt says `next_action` must be an exported
+alias; the format-only JSON example has a matching spoken line and declared
+intent. It omits the example when all option families are unmapped. This
+directly addresses the `unsupported_next_action` failure observed in batch 6,
+but effectiveness has not yet been measured with a new response.
+
+Six focused offline Python tests pass. The saved Smith prompt is 107 characters
+shorter (7,959→7,852); no token or cost reduction is claimed. The refusal
+example may influence choice despite its format-only label, so a later live
+trial must report choice honestly rather than treating a correct alias as a
+quality win. No new inference or world mutation. See
+`docs/validation/local-smith-prompt-format-20260923.md`.
+
+**Next bounded task:** if the current local endpoint remains available, run
+exactly one new disposable Smith proposal using the clarified format, preserving
+raw output and the current alias table. Do not retry a failed call or rewrite a
+model choice. Compare structure, declared intent, sentence meaning, and actual
+authorized outcome separately; acceptance is not required. A valid refusal is
+also a useful result. Recheck the six preserved source/user hashes and keep
+the 09:00 China cutoff.
+
 ### Seventh batch complete (03:23 China time)
 
 The saved actual Smith failure now has a read-only Godot replay at

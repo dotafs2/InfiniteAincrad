@@ -25,12 +25,33 @@ class SmithProbeTests(unittest.TestCase):
             self.assertEqual(timeout, 45)
             self.assertFalse(body["think"])
             self.assertEqual(body["options"]["num_predict"], 384)
-            self.assertIn('"expected_intents":["agree"]', body["messages"][0]["content"])
+            prompt = body["messages"][0]["content"]
+            self.assertIn('"expected_intents":["agree"]', prompt)
+            self.assertIn('"next_action":"a17"', prompt)
+            self.assertIn('"speech":"I decline the repair offer.","intent":"refuse"', prompt)
+            self.assertNotIn('"next_action":"contract:reject:trade_contract_fixture:offer"', prompt)
+            self.assertNotIn("contract:accept:", prompt)
+            self.assertNotIn("contract:reject:", prompt)
+            self.assertIn("Format-only example (not a recommendation", prompt)
             return 200, json.dumps({"message": {"content": raw}, "prompt_eval_count": 4, "eval_count": 9}).encode(), {}
         row = probe.probe_case(case(), call)
         self.assertEqual(len(calls), 1)
         self.assertEqual(row["raw_content"], raw)
 
+    def test_prompt_uses_dynamic_aliases_and_omits_unmapped_example(self):
+        fixture = case()
+        fixture["context"]["action_ids"] = ["z9", "z10"]
+        fixture["options"][0]["alias"] = "z9"
+        fixture["options"][1]["alias"] = "z10"
+        prompt = probe._prompt(probe._validate_input({"fixture_only": True, "cases": [fixture]})[0])
+        self.assertIn('["z9","z10"]', prompt)
+        self.assertNotIn("a16", prompt)
+        self.assertNotIn("a17", prompt)
+        empty = case()
+        for option in empty["options"]:
+            option["expected_intents"] = []
+        empty_prompt = probe._prompt(probe._validate_input({"fixture_only": True, "cases": [empty]})[0])
+        self.assertIn("No format example is supplied because no option has mapped expected_intents.", empty_prompt)
     def test_malformed_is_preserved_without_retry(self):
         calls = []
         def call(_body, _timeout):

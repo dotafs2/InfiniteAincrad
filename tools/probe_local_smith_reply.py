@@ -67,11 +67,24 @@ def _validate_input(doc: Any) -> list[dict[str, Any]]:
 
 def _prompt(case: dict[str, Any]) -> str:
     context = case["context"]
-    options = [{"alias": item["alias"], "action_id": item["action_id"], "description": item.get("description", ""), "expected_intents": item["expected_intents"]} for item in case["options"]]
+    options = [{"alias": item["alias"], "description": item.get("description", ""), "expected_intents": item["expected_intents"]} for item in case["options"]]
+    example_option = next((item for item in options if item["expected_intents"]), None)
+    for item in options:
+        if item["alias"] == "a17" and "refuse" in item["expected_intents"]:
+            if item["expected_intents"]:
+                example_option = item
+            break
+    format_example = "No format example is supplied because no option has mapped expected_intents."
+    if example_option is not None:
+        example_intent = example_option["expected_intents"][0]
+        sample_speech = {"refuse": "I decline the repair offer.", "agree": "I accept the repair terms.", "offer": "I offer to repair the edge.", "ask": "Can you clarify the repair terms?", "warn": "I warn that the edge may fail.", "disclose": "I can disclose the repair method.", "greet": "Welcome to my forge.", "leave": "I will leave the forge."}[example_intent]
+        format_example = json.dumps({"speech": sample_speech, "intent": example_intent, "stance": "guarded", "target_id": context["target_ids"][0] if context["target_ids"] else "", "claim_ids": [], "stakes": "The terms should remain clear.", "next_action": example_option["alias"], "confidence": 0.5}, separators=(",", ":"))
+    aliases_text = json.dumps(context["action_ids"], separators=(",", ":"))
     return (
         "You are Flint, a fictional smith replying in first person in a bounded offline fixture. "
         "Choose exactly one currently available option and describe that chosen action in your spoken line. "
         "Do not force acceptance: offer, ask, agree, refuse, or another listed intent may be correct for the chosen option. "
+        f"The next_action value MUST be one exact alias from the listed context.action_ids {aliases_text}; never place a canonical action ID in next_action. Canonical IDs are not model-facing and are used only for later review binding. "
         "For an option with nonempty expected_intents, your declared intent MUST be one listed value. An empty expected_intents list means the current review policy has no mapping: you may propose the option without inventing a mapping, but it will require review and must not be treated as accepted. "
         "Do not invent history, claims, items, payment, or results. "
         "Return only one JSON object with exactly the DialogueReceipt fields speech,intent,stance,target_id,claim_ids,stakes,next_action,confidence and optional private_thought. "
@@ -80,7 +93,8 @@ def _prompt(case: dict[str, Any]) -> str:
         f"Visible observation: {json.dumps(case.get('observation', {}), ensure_ascii=False, separators=(',', ':'))}\n"
         f"Allowed targets: {json.dumps(context['target_ids'], separators=(',', ':'))}\n"
         f"Visible claim IDs: {json.dumps(context['claim_ids'], separators=(',', ':'))}\n"
-        f"Currently available options and authoritative expected intents: {json.dumps(options, ensure_ascii=False, separators=(',', ':'))}"
+        f"Currently available options and authoritative expected intents: {json.dumps(options, ensure_ascii=False, separators=(',', ':'))}\n"
+        f"Format-only example (not a recommendation; choose your own available option): {format_example}"
     )
 
 
