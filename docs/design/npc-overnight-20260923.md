@@ -99,6 +99,41 @@ NPC activity has been started. The existing canonical repair remains unmodified.
 
 ## Next heartbeat priorities
 
+### Third batch complete (02:08 China time)
+
+Luna implemented the bounded local client and strict Godot batch validator; Terra
+exported three current Turns contexts from disposable formal-resident copies.
+Parent reviewed and corrected conflicting prompt formats, missing visible
+resources, unchecked setup results, case-set matching and output cleanup. LocalJev
+port 8080 was unavailable; existing Ollama 0.34.2 on loopback 11434 was available.
+No server was started and no model was downloaded.
+
+Exactly three local `qwen3:8b` requests ran, once each, with no retry/cloud
+fallback: 6960.762 / 1364.013 / 1113.388 ms, 4531 input and 354 output tokens
+reported by Ollama in total. All three raw outputs pass `DialogueReceipt.parse`.
+They were NOT executed. The owner chose skill sharing instead of a repair offer;
+the funded smith selected acceptance but spoke as if offering a choice; the
+no-iron smith selected rejection but asked for iron. Thus schema success does not
+solve speech/action consistency. Self-reported confidence 0.8–0.9 is not measured
+quality. There is no cloud-savings comparison or autonomous-lifecycle proof.
+
+Reviewable contexts/raw/results and the case-by-case analysis are linked from
+`docs/validation/local-npc-dialogue-20260923.md`. Python mocks pass 7 checks;
+the Godot validator suite passes 8. The actual three-output validation used Mono
+and exited cleanly. Exporter output-failure cleanup was also checked separately
+(expected exit 2, no new temporary context save). Canonical and pre-existing user
+files retain their six pre-batch hashes. No publication occurred.
+
+**Next bounded task:** reuse these saved raw outputs to build an optional
+proposal-review gate for declared intent versus the selected current action.
+Acceptance, refusal and skill disclosure need distinguishable intent; expose
+`review_required` honestly and never silently rewrite a generated line to make
+it pass. Add a replay view showing the mismatches if useful. This gate would only
+check declared intent/action compatibility, not certify sentence truth. Test it
+offline first with the observed cases plus a consistent counterpart; do not make
+more model requests merely to chase three passing examples. Production adoption
+and live navigation remain deferred. Keep the hard 09:00 China cutoff.
+
 ### Second batch complete (01:46 China time)
 
 The first two priorities below now have a bounded implementation in

@@ -1,0 +1,52 @@
+{
+  "fixture_only": true,
+  "model": "qwen3:8b",
+  "endpoint": "http://127.0.0.1:11434/api/chat",
+  "cases": [
+    {
+      "case_id": "owner_repair_offer",
+      "model": "qwen3:8b",
+      "raw_content": "{\n  \"speech\": \"I can repair wooden handles, but I need to know the terms first.\",\n  \"intent\": \"ask\",\n  \"stance\": \"guarded\",\n  \"target_id\": \"shared:smith\",\n  \"claim_ids\": [],\n  \"stakes\": \"Clear payment and delivery terms are necessary for a fair repair.\",\n  \"next_action\": \"a14\",\n  \"confidence\": 0.8,\n  \"private_thought\": \"Flint might not know the exact process, so I should explain clearly.\"\n}",
+      "parse": {
+        "ok": null,
+        "code": "json_object_ready_for_godot",
+        "godot_validator": "DialogueReceipt.parse"
+      },
+      "http_status": 200,
+      "input_tokens": 1474,
+      "output_tokens": 111,
+      "latency_ms": 6960.762
+    },
+    {
+      "case_id": "smith_accept_or_wait",
+      "model": "qwen3:8b",
+      "raw_content": "{\n  \"speech\": \"I can repair the edge. Accept the job, or decline.\",\n  \"intent\": \"offer\",\n  \"stance\": \"guarded\",\n  \"target_id\": \"shared:carpenter\",\n  \"claim_ids\": [],\n  \"stakes\": \"The repair requires 2 Col and 1 iron. I need to be sure I can complete it.\",\n  \"next_action\": \"a16\",\n  \"confidence\": 0.9,\n  \"private_thought\": \"I should make sure the payment is reserved before starting the repair. If the owner collects the tool, I will get paid.\"\n}",
+      "parse": {
+        "ok": null,
+        "code": "json_object_ready_for_godot",
+        "godot_validator": "DialogueReceipt.parse"
+      },
+      "http_status": 200,
+      "input_tokens": 1499,
+      "output_tokens": 130,
+      "latency_ms": 1364.013
+    },
+    {
+      "case_id": "smith_missing_iron",
+      "model": "qwen3:8b",
+      "raw_content": "{\n  \"speech\": \"I can repair the edge, but I need iron. Will you provide it?\",\n  \"intent\": \"ask\",\n  \"stance\": \"guarded\",\n  \"target_id\": \"shared:carpenter\",\n  \"claim_ids\": [],\n  \"stakes\": \"The repair requires iron, which I currently lack.\",\n  \"next_action\": \"a16\",\n  \"confidence\": 0.8,\n  \"private_thought\": \"I need to clarify if the carpenter can supply the iron for the repair.\"\n}",
+      "parse": {
+        "ok": null,
+        "code": "json_object_ready_for_godot",
+        "godot_validator": "DialogueReceipt.parse"
+      },
+      "http_status": 200,
+      "input_tokens": 1558,
+      "output_tokens": 113,
+      "latency_ms": 1113.388
+    }
+  ],
+  "paid_calls": 0,
+  "world_writes": 0,
+  "status": "complete"
+}
