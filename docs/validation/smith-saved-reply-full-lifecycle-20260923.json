@@ -1,0 +1,59 @@
+{
+  "after_acceptance_cold": {
+    "feedback_code": "axe_contract_accepted",
+    "feedback_present": true,
+    "owner_reserved": 2,
+    "owner_wallet": 8,
+    "smith_iron": 1
+  },
+  "after_collection": {
+    "custodian_id": "shared:carpenter",
+    "duration_seconds": 1,
+    "edge": 100,
+    "event": "axe_repair_paid",
+    "host_move": "scripted_host_move_surrogate",
+    "owner_reserved": 0,
+    "owner_wallet": 8,
+    "smith_wallet": 12
+  },
+  "after_delivery": {
+    "custodian_id": "shared:smith",
+    "duration_seconds": 1,
+    "event": "axe_delivered",
+    "host_move": "scripted_host_move_surrogate"
+  },
+  "after_work": {
+    "duration_seconds": 60,
+    "edge": 100,
+    "event": "axe_repaired",
+    "host_move": "scripted_host_move_surrogate",
+    "smith_iron": 0
+  },
+  "checks": 15,
+  "failures": [],
+  "final_cold_feedback": {
+    "feedback_code": "axe_contract_accepted",
+    "feedback_present": true
+  },
+  "fixture_only": true,
+  "model_replay_acceptance": {
+    "actual_code": "contract_accepted",
+    "actual_event": "axe_contract_accepted",
+    "new_model_returned": false,
+    "raw_sha256": "ca7e7a215e0bb1263e6d6646b387b74cbae0c5186be2856fe3d3f4ae68d0de3e",
+    "saved_alias": "a16"
+  },
+  "new_model_calls": 0,
+  "ok": true,
+  "paid_calls": 0,
+  "saved_model_reply_replayed": true,
+  "scripted_continuation": {
+    "collection": "axe_repair_paid",
+    "delivery": "axe_delivered",
+    "duplicate_collection": true,
+    "label": "scripted_host_continuation",
+    "work": "axe_repaired"
+  },
+  "suite": "smith_saved_reply_full_lifecycle",
+  "verified_input_hashes_unchanged": true
+}

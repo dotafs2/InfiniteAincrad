@@ -10,6 +10,17 @@ The active lineage has since advanced to seq266 with 245 world usage records and
 
 ## Current work
 
+- **Overnight NPC dialogue and axe-day boundary (2026-09-23):** formal resident
+  dialogue proposals now pass a bounded receipt, declared-intent and fresh-alias
+  review before the normal action gate. A saved local Smith reply accepted a
+  2 Col contract in a disposable world; replay plus scripted host continuation
+  completed repair and payment across cold restarts. The authoritative seq266
+  world has not adopted this response. Next, verify resident speech delivery
+  and unscripted physical delivery/work in a separate authorized run. The
+  09:00 China iteration deadline passed and its heartbeat was paused.
+  [Handoff](docs/design/npc-overnight-20260923.md) ·
+  [Evidence](docs/validation/smith-saved-reply-full-lifecycle-20260923.md)
+
 - **H134:** the existing offline `town_trade` fixture provides a complete 63-check proof of the edge-repair lifecycle after acceptance: escrow, physical delivery, 60 seconds of work, one iron consumed, edge restored to 100 and one-time collection payment. Canonical seq266 stayed byte-identical and no provider call occurred. This closes the code-path uncertainty; Flint's live acceptance and unattended execution remain open. [Evidence](docs/validation/material-contract-lifecycle-2026-09-20.json)
 
 - **H133:** after removing a duplicate `ARRIVAL_RADIUS` declaration that blocked full-scene parsing, material regression passed 60/0 and a full-scene restore exited 0. One fresh serial Kimi call then produced Rowan's real `contract:offer:seed:axe:edge:shared:smith:2` decision and speech. The canonical world advanced seq265→266 with a proposed 2 Col contract, no escrow, no iron consumption and no physical work; the call settled for CNY 0.0275755 with no unknown request. Exact ten-resident cold restore passes. Flint's acceptance and delivery remain open. [Evidence](docs/validation/material-contract-live-2026-09-20.json)

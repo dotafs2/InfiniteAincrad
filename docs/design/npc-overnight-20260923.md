@@ -6,6 +6,8 @@ The user authorized bounded autonomous iteration until **2026-09-23 09:00 Asia/S
 (2026-09-23 01:00 UTC)**, with fast smaller models implementing and GPT-6 supervising.
 Do not extend the cutoff. Automation `infiniteaincrad-8` has a 20-minute heartbeat and
 an RRULE end at that UTC deadline; its prompt also requires a clock check and shutdown.
+The deadline has passed and the automation was set to `PAUSED` at 10:30 China
+time. No new NPC engineering or model requests were started after the cutoff.
 
 Work in `D:/lucidgloves/InfiniteAincrad/tmp/overnight-20260918/delivery`, branch
 `codex/localjev-first-20260921`, initially at `52e0ed3`. Preserve the existing user
@@ -98,6 +100,30 @@ NPC activity has been started. The existing canonical repair remains unmodified.
   world changes. These counts do not measure dialogue quality or autonomy.
 
 ## Next heartbeat priorities
+
+### Tenth batch and cutoff handoff (04:21 China time)
+
+The saved real Smith `a16` proposal was replayed byte-for-byte through a new
+disposable formal-ID fixture and the existing review/Turns gate. The actual
+acceptance again produced `contract_accepted` and `axe_contract_accepted`, 2 Col
+escrow, and feedback surviving a cold restart. An explicitly scripted host
+continuation then delivered the axe, simulated arrival, advanced 60 seconds of
+edge repair, consumed one iron, restored the edge to 100, and collected the
+tool/payment exactly once. The final cold feedback survived. This replay used
+zero new model calls; it does not demonstrate autonomous delivery, movement,
+work selection or dialogue delivery.
+
+The final Mono harness passed 15 checks with empty stderr and all owned
+processes exited. Reviewable phase values and a note about one leftover
+disposable timeout artifact are in
+`docs/validation/smith-saved-reply-full-lifecycle-20260923.md`.
+
+At the 09:00 China hard cutoff, stop new NPC engineering/model requests. The
+heartbeat is paused. Remaining gaps are actual resident speech delivery,
+semantic checks beyond declared intent, unscripted physical delivery/work,
+long-run behavior, and production-world adoption. The currently published
+canonical world is still seq266 with Flint's acceptance open there. This
+fixture result must not be mistaken for that live world advancing.
 
 ### Ninth batch complete (03:57 China time)
 

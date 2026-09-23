@@ -1,5 +1,23 @@
 # 历史全部流水
 
+## 2026-09-23 · Offline NPC dialogue, authority and axe lifecycle
+
+The overnight fixture added a bounded dialogue receipt, 30-case/ten-resident
+offline corpus, declared-intent review, fresh alias authorization, and an
+isolated axe-day scene. Five local `qwen3:8b` proposals were recorded across
+three bounded trials: three earlier lines passed structure but mismatched the
+selected action's intent; a later Smith response first failed by using a
+canonical action ID instead of an alias. After the isolated prompt was revised,
+one further Smith response chose the valid `a16` acceptance alias. It actually
+reserved 2 Col in a disposable formal-resident world and retained acceptance
+feedback after restart. The saved raw reply was then replayed with zero new
+model calls into another disposable world; scripted host continuation reached
+delivery, 60-second repair, one iron consumed, collection and one-time payment.
+The active seq266 world and its histories were not advanced. Speech delivery,
+unscripted movement/work and sustained resident autonomy remain open. The
+09:00 China iteration cutoff passed; its heartbeat was paused. [Handoff](docs/design/npc-overnight-20260923.md)
+and [full-lifecycle evidence](docs/validation/smith-saved-reply-full-lifecycle-20260923.md).
+
 ## 2026-09-22 · Starting City art pass and DND dialogue measurement plan
 
 The first-floor art preview now composes 46 imported asset instances and 53 procedural instances:
