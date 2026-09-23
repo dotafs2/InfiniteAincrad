@@ -1588,9 +1588,17 @@ def autonomy_investigation(document: dict, digest: str, policy: dict) -> dict:
     hypothesis until the host validates a scope and a real runtime observation exists.
     """
     entries = public_snapshot_entries(document)
+    proposals = [pointer for kind, _key, pointer in entries if kind == 'capability_proposed']
     speech = [pointer for kind, _key, pointer in entries if kind == PUBLIC_SPEECH_KIND]
-    others = [pointer for kind, _key, pointer in entries if kind != PUBLIC_SPEECH_KIND]
-    refs = (speech + others)[:INVESTIGATION_POINTER_LIMIT - 1]
+    others = [pointer for kind, _key, pointer in entries
+              if kind not in (PUBLIC_SPEECH_KIND, 'capability_proposed')]
+    # Formal capability proposals are the direct resident-authored evidence GM02
+    # needs to cite when considering an implementable need. Keep the historical
+    # speech-first ordering when there are no proposals; otherwise put proposals
+    # first and retain the existing ordering of all other evidence kinds within
+    # the remaining bounded budget.
+    ordered = proposals + speech + others if proposals else speech + others
+    refs = ordered[:INVESTIGATION_POINTER_LIMIT - 1]
     refs.append('/counts')
     investigation = {'investigation_id': 'autonomy:' + policy['policy_id'],
                      'world_id': document['world_id'], 'source_sha256': digest,

@@ -2130,6 +2130,43 @@ class PublicEventLinkageTests(RunnerTestBase):
                     investigation)
                 self.assertTrue(errors, foreign)
 
+    def test_authoritative_capability_proposal_remains_citable_when_speech_fills_pointer_budget(self):
+        resident_id = 'shared:gardener'
+        capability_id = 'herb_care_training'
+        proposal = {'evidence_kind': 'capability_proposed', 'proposal_id': 'gm_proposal:1',
+                    'resident_id': resident_id, 'capability_id': capability_id,
+                    'status': 'proposed', 'summary': 'Gardener requested herb-care training',
+                    'first': {'reason': 'I cannot learn proper care skills here.'},
+                    'latest': {'reason': 'I still lack a way to learn proper care skills.'}}
+        speech = [self.speech_entry(seq) for seq in range(40, 48)]
+        document = self.document_with(speech, proposals=[proposal])
+        _state, document, _digest, investigation, _item, _prompt = self.observe_chain(document)
+
+        proposal_ref = '/proposals/0'
+        self.assertIn(proposal_ref, investigation['evidence_refs'])
+        self.assertLessEqual(len(investigation['evidence_refs']), gm_runner.INVESTIGATION_POINTER_LIMIT)
+        self.assertEqual(investigation['evidence_refs'][-1], '/counts')
+        self.assertEqual(gm_runner.evidence_pointer(document, proposal_ref)['resident_id'], resident_id)
+        self.assertEqual(gm_runner.evidence_pointer(document, proposal_ref)['capability_id'], capability_id)
+
+        entries, errors = gm_runner.validate_new_issues(
+            self.typed_answer(resident_id, capability_id, ref=proposal_ref,
+                              key='typed-herb-care-proposal'), investigation)
+        self.assertEqual(errors, [])
+        self.assertEqual(entries[0]['resident_id'], resident_id)
+        self.assertEqual(entries[0]['capability_id'], capability_id)
+        self.assertEqual(entries[0]['resident_evidence_refs'], [proposal_ref])
+
+        # The proposal gets priority only when present; the remaining budget still
+        # admits other evidence kinds instead of globally filtering them out.
+        mixed = self.document_with(
+            [self.speech_entry(50), {'evidence_kind': 'movement_blocked',
+                                     'issue_id': 'movement:one', 'status': 'open'}],
+            proposals=[proposal])
+        _state, _document, _digest, mixed_investigation, _item, _prompt = self.observe_chain(mixed)
+        self.assertIn('/proposals/0', mixed_investigation['evidence_refs'])
+        self.assertIn('/evidence/1', mixed_investigation['evidence_refs'])
+
     def typed_answer(self, resident_id, capability_id, ref='/evidence/0',
                      key='typed-water-work', claim=True):
         return {'new_issues': [{
