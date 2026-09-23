@@ -96,6 +96,9 @@ var validation_decisions_started := 0
 ## engine until the launcher's own timeout kills it. --town-shutdown-wait sets the
 ## bound, and the launcher budgets the same single value for the engine.
 var shutdown_wait_limit := 45.0
+var wall_limit_seconds := -1.0
+var wall_started_usec := 0
+var last_wall_sample_usec := 0
 var capture_shutdown_reason := ""
 var shutdown_exit_code := 0
 # Legacy Mac repair demo state (offline/local_rule_policy only).
@@ -152,6 +155,13 @@ func _ready() -> void:
 			gateway_mode = true
 		if arg.begins_with("--town-duration="):
 			capture_seconds = clampf(float(arg.trim_prefix("--town-duration=")), 3, 900)
+		if arg.begins_with("--town-wall-limit="):
+			var wall_text := arg.trim_prefix("--town-wall-limit=")
+			if not wall_text.is_valid_float() or float(wall_text) < 3.0 or float(wall_text) > 1800.0:
+				push_error("Invalid bounded episode wall limit")
+				get_tree().quit(2)
+				return
+			wall_limit_seconds = float(wall_text)
 		if arg.begins_with("--town-max-decisions="):
 			var count_text := arg.trim_prefix("--town-max-decisions=")
 			if not count_text.is_valid_int() or int(count_text) < 0 or int(count_text) > 32:
@@ -326,6 +336,8 @@ func _ready() -> void:
 	_refresh()
 	if not capture_dir.is_empty():
 		DirAccess.make_dir_recursive_absolute(capture_dir)
+		wall_started_usec = Time.get_ticks_usec()
+		last_wall_sample_usec = wall_started_usec
 		paused = restore_only
 		if not restore_only:
 			latest = "Life continues; time passes only while running."
@@ -383,7 +395,7 @@ func _prepare_adventure_gate_route(resident_id: String) -> Dictionary:
 		body.global_position = adventure_route_start
 		town.host_move(resident_id, adventure_route_start)
 		await get_tree().physics_frame
-	var target := Vector3(0.0, 0.10, 53.0)
+	var target: Vector3 = AdventureResidentTown.GATE_TARGET
 	var start := body.global_position
 	var max_step := 0.0
 	var frames_used := 0
@@ -416,6 +428,7 @@ func _prepare_adventure_gate_route(resident_id: String) -> Dictionary:
 	town.host_move(resident_id, body.global_position)
 	adventure_route_receipt = {"ok": true, "route_kind": "collision_aware_town_route",
 		"route_id": "adventure-live-gate-route", "target": "wilderness_gate", "resident_id": resident_id,
+		"target_position": [target.x, target.y, target.z],
 		"status": route_status, "frames": frames_used,
 		"metres": start.distance_to(body.global_position), "max_step_m": max_step, "saw_floor_collision": saw_floor}
 	var marked: Dictionary = town.mark_physical_arrival(_save_path, resident_id, adventure_route_receipt)
@@ -535,7 +548,22 @@ func _foraging_idle_exit(id: String, body: CharacterBody3D) -> Vector3:
 func _process(delta: float) -> void:
 	if status == null:
 		return
+	var wall_now_usec := Time.get_ticks_usec()
+	# Fixture hosts can call _process without _ready; their first sample starts at
+	# zero elapsed wall time instead of treating the OS uptime as one giant delta.
+	var wall_delta := maxf(float(wall_now_usec - last_wall_sample_usec) / 1000000.0, 0.0) if last_wall_sample_usec > 0 else 0.0
+	last_wall_sample_usec = wall_now_usec
+	if wall_started_usec <= 0:
+		wall_started_usec = wall_now_usec
+	var wall_elapsed := float(wall_now_usec - wall_started_usec) / 1000000.0
+	var wall_limit_reached := gateway_mode and not restore_only and not capture_dir.is_empty() and wall_limit_seconds > 0.0 and wall_elapsed >= wall_limit_seconds
 	if adventure_live_install and not adventure_route_ready:
+		# Route preparation may span frames. Close admission and spend the same
+		# bounded shutdown window at the wall cutoff even while it is pending; once
+		# the route receipt is ready, the ordinary capture path persists it.
+		if wall_limit_reached and model_turns != null and _owns_shutdown_gate():
+			model_turns.close_admission("wall_limit_elapsed")
+			model_turns.shutdown_readiness(wall_delta)
 		return
 	_update_resident_observer()
 	_update_dialogue_panel_layout()
@@ -547,13 +575,15 @@ func _process(delta: float) -> void:
 	# read-only restore uses the short capture; pausing cannot turn 600 seconds
 	# into a three-second timeout and then report a successful observation.
 	var capture_timeout := 150.0 if (repair_fixture and not gateway_mode and not restore_only) else (3.0 if restore_only else capture_seconds)
+	var duration_boundary := capture_age + delta > capture_timeout
+	var boundary_reason := "wall_limit_elapsed" if wall_limit_reached and not duration_boundary else "episode_duration_elapsed"
 	# The episode's own duration boundary is decided BEFORE any new resident is
 	# chosen, and on the same elapsed+delta value the capture below uses. A resident
 	# that becomes ready exactly on the boundary frame is therefore never admitted
 	# into an episode that has already expired.
 	if not capture_dir.is_empty() and not capture_started and gateway_mode and model_turns != null \
-			and capture_age + delta > capture_timeout and _owns_shutdown_gate():
-		model_turns.close_admission("episode_duration_elapsed")
+			and (duration_boundary or wall_limit_reached) and _owns_shutdown_gate():
+		model_turns.close_admission(boundary_reason)
 	if gateway_mode and model_turns != null and not paused and not _validation_limit_reached() and not _model_admission_closed():
 		var ready: String = model_turns.ready_resident()
 		if not ready.is_empty():
@@ -590,7 +620,7 @@ func _process(delta: float) -> void:
 				_begin_capture("idle_world")
 		if not capture_started and repair_fixture and not gateway_mode and not restore_only and repair_fixture_finished_at >= 0 and capture_age - repair_fixture_finished_at > 1.5:
 			_begin_capture("repair_fixture_settled")
-		if not capture_started and capture_age > capture_timeout:
+		if not capture_started and (capture_age > capture_timeout or wall_limit_reached):
 			# The episode's own duration expired. In a gateway episode this is the
 			# ordered shutdown: stop admitting NEW resident decisions, await the
 			# already-started replies and their authoritative application within a
@@ -604,12 +634,15 @@ func _process(delta: float) -> void:
 				if model_turns != null and model_turns.busy:
 					pass
 				else:
-					_begin_capture("duration_elapsed")
+					_begin_capture("wall_limit_elapsed" if wall_limit_reached else "duration_elapsed")
 			else:
-				model_turns.close_admission("episode_duration_elapsed")
-				var readiness: Dictionary = model_turns.shutdown_readiness(delta)
+				model_turns.close_admission(boundary_reason)
+				# Bound shutdown in real time so slow or paused frames cannot stretch
+				# the wait past the launcher's reserved process budget.
+				var readiness: Dictionary = model_turns.shutdown_readiness(wall_delta)
 				if readiness.ready:
-					_begin_capture("episode_duration_elapsed_unresolved" if readiness.timed_out else "episode_duration_elapsed")
+					var reason_prefix := "wall_limit_elapsed" if wall_limit_reached else "episode_duration_elapsed"
+					_begin_capture(reason_prefix + "_unresolved" if readiness.timed_out else reason_prefix)
 
 func _owns_shutdown_gate() -> bool:
 	## The bounded shutdown protocol lives on the turn module that owns the requests.
@@ -638,7 +671,7 @@ func _begin_capture(reason: String) -> void:
 	# clean stop. The record keeps the status it really has, so a later start can
 	# reconcile that request instead of reading a fabricated success.
 	shutdown_exit_code = 3 if (_owns_shutdown_gate() and model_turns.shutdown_wait_timed_out) else 0
-	if not restore_only and reason in ["duration_elapsed", "episode_duration_elapsed"] and capture_running_seconds + 0.05 < capture_seconds:
+	if shutdown_exit_code != 3 and not restore_only and (reason in ["duration_elapsed", "episode_duration_elapsed", "wall_limit_elapsed"] or reason.begins_with("episode_duration_elapsed_") or reason.begins_with("wall_limit_elapsed_")) and capture_running_seconds + 0.05 < capture_seconds:
 		shutdown_exit_code = 4
 	_capture_town.call_deferred()
 
@@ -1761,6 +1794,8 @@ func _shutdown_evidence() -> Dictionary:
 			owed.append({"actor_id": id, "request_id": str(record.get("request_id", ""))})
 	var reported := {"capture_reason": capture_shutdown_reason, "exit_code": shutdown_exit_code,
 		"wait_limit_seconds": shutdown_wait_limit, "resident_requests_owed": owed,
+		"wall_limit_seconds": wall_limit_seconds,
+		"wall_elapsed_seconds": float(Time.get_ticks_usec() - wall_started_usec) / 1000000.0 if wall_started_usec > 0 else 0.0,
 		"requested_seconds": capture_seconds, "capture_seconds": capture_age,
 		"running_seconds": capture_running_seconds, "paused_seconds": capture_paused_seconds,
 		"paused_at_capture": capture_was_paused,

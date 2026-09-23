@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Bounded local runner for ten independent DeepSeek BACKGROUND GM sessions.
+"""Bounded local runner for ten independent BACKGROUND GM sessions.
 
 `observe` imports one reviewed world-evidence snapshot exported by the game
 (kind=background_gm_evidence_snapshot), registers ten stable GM ids (no resident
 bodies), keeps one authoritative local state file, deduplicates issues by their
 authoritative source identity and per-issue content, and dispatches one bounded
-native `codex exec` turn per GM (DeepSeek Flash, Responses wire API) with a stable
-prompt prefix and a persistent per-GM session.
+  native `codex exec` turn per GM with a stable prompt prefix and a persistent per-GM
+  session. DeepSeek Flash (Responses wire API) remains the default; `--route native-codex`
+  selects the fixed gpt-6-luna model using the user's existing Codex authentication.
 
 `code` dispatches the single active coding worker of the GM that currently owns an
 issue into an isolated candidate checkout based on an explicitly approved revision.
@@ -62,6 +63,9 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = ROOT / 'secrets' / 'deepseek.local.json'
 DEFAULT_KEY_FILE = ROOT / 'secrets' / 'deepseek-key.txt'
 DEFAULT_PRIOR_LEDGER = ROOT / 'tmp' / 'overnight-20260912' / 'ledger.json'
+ROUTE_DEEPSEEK = 'deepseek'
+ROUTE_NATIVE_CODEX = 'native-codex'
+NATIVE_CODEX_MODEL = 'gpt-6-luna'
 STATE_FILE = 'state.json'
 LEGACY_STATE_FILES = ('registry.json', 'sessions.json')
 
@@ -508,40 +512,64 @@ def codex_argv_from(value: str) -> list[str]:
 class Route:
     """Everything a native codex dispatch needs, loaded from ignored user files."""
 
-    def __init__(self, config_path: Path, key_path: Path, codex: str, codex_home: Path | None):
-        self.config_path, self.key_path = Path(config_path).resolve(), Path(key_path).resolve()
-        if not self.config_path.is_file():
-            raise ValueError(f'route config not found: {self.config_path}')
-        if not self.key_path.is_file():
-            raise ValueError(f'key file not found: {self.key_path}')
-        settings = load_json(self.config_path)
-        if settings.get('model') != 'deepseek-flash':
-            raise ValueError('route config model must be deepseek-flash')
-        if str(settings.get('base_url', '')).rstrip('/') != 'https://api.deepseek.com':
-            raise ValueError('route config base_url must be https://api.deepseek.com')
-        self.key = self.key_path.read_text(encoding='utf-8-sig').strip()
-        if not KEY_PATTERN.fullmatch(self.key):
-            raise ValueError('key file does not hold a single API key')
+    def __init__(self, config_path: Path, key_path: Path, codex: str, codex_home: Path | None,
+                 route_kind: str = ROUTE_DEEPSEEK):
+        if route_kind not in (ROUTE_DEEPSEEK, ROUTE_NATIVE_CODEX):
+            raise ValueError(f'unsupported route: {route_kind}')
+        self.route_kind = route_kind
+        self.model = NATIVE_CODEX_MODEL if route_kind == ROUTE_NATIVE_CODEX else 'deepseek-flash'
+        if route_kind == ROUTE_DEEPSEEK:
+            self.config_path, self.key_path = Path(config_path).resolve(), Path(key_path).resolve()
+            if not self.config_path.is_file():
+                raise ValueError(f'route config not found: {self.config_path}')
+            if not self.key_path.is_file():
+                raise ValueError(f'key file not found: {self.key_path}')
+            settings = load_json(self.config_path)
+            if settings.get('model') != 'deepseek-flash':
+                raise ValueError('route config model must be deepseek-flash')
+            if str(settings.get('base_url', '')).rstrip('/') != 'https://api.deepseek.com':
+                raise ValueError('route config base_url must be https://api.deepseek.com')
+            self.key = self.key_path.read_text(encoding='utf-8-sig').strip()
+            if not KEY_PATTERN.fullmatch(self.key):
+                raise ValueError('key file does not hold a single API key')
+            self.config_sha256 = sha256_file(self.config_path)
+            self.key_sha256 = sha256_bytes(self.key.encode())
+        else:
+            # The native Codex route uses the user's existing Codex login, but ignores
+            # model/provider choices from config.toml. Keep only the already-configured
+            # Windows sandbox backend after reading that one allowlisted setting.
+            self.config_path = self.key_path = None
+            self.key = None
+            self.config_sha256 = self.key_sha256 = None
         self.codex_argv = codex_argv_from(codex)
         self.codex_home = Path(codex_home).resolve() if codex_home else None
         # Only the configured Windows backend is forwarded, and only as the existing choice;
         # a missing/unsupported backend fails here, before any paid dispatch.
         self.windows_sandbox = read_windows_sandbox_backend(codex_home_path(codex_home))
-        self.config_sha256 = sha256_file(self.config_path)
-        self.key_sha256 = sha256_bytes(self.key.encode())
 
     def reference(self) -> dict:
         """Non-secret description; never contains the key or another credential value."""
-        return {'config_path': relative(self.config_path), 'config_sha256': self.config_sha256,
+        if self.route_kind == ROUTE_NATIVE_CODEX:
+            return {'route': self.route_kind, 'model': self.model,
+                    'authentication': 'codex_native', 'codex_argv': self.codex_argv,
+                    'codex_home': str(self.codex_home) if self.codex_home else None,
+                    'windows_sandbox': self.windows_sandbox or None}
+        return {'route': self.route_kind,
+                'config_path': relative(self.config_path), 'config_sha256': self.config_sha256,
                 'key_path': relative(self.key_path), 'key_sha256': self.key_sha256,
-                'model': 'deepseek-flash', 'wire_api': 'responses',
+                'model': self.model, 'wire_api': 'responses',
                 'codex_argv': self.codex_argv,
                 'codex_home': str(self.codex_home) if self.codex_home else None,
                 'windows_sandbox': self.windows_sandbox or None}
 
     def environment(self) -> dict:
         env = dict(os.environ)
-        env['DEEPSEEK_API_KEY'] = self.key
+        if self.route_kind == ROUTE_DEEPSEEK:
+            env['DEEPSEEK_API_KEY'] = self.key
+        else:
+            # Do not let an unrelated provider key silently replace Codex native auth.
+            for name in SECRET_ENV_KEYS:
+                env.pop(name, None)
         env['PYTHONUTF8'] = '1'
         for name in PROXY_KEYS:
             env.pop(name, None)
@@ -557,7 +585,7 @@ class Route:
         return env
 
     def assert_no_credential(self, text: str, where: str) -> None:
-        if self.key in text:
+        if self.key and self.key in text:
             raise ValueError(f'credential leak refused in {where}')
 
     def sessions_root(self) -> Path:
@@ -600,26 +628,34 @@ def codex_catalog(instructions: str) -> dict:
 
 
 def codex_command(route: Route, workdir: Path, result_path: Path, instructions_path: Path,
-                  catalog_path: Path, resume_id: str | None,
+                  catalog_path: Path | None, resume_id: str | None,
                   sandbox: str = 'read-only', allow_tools: bool = True) -> list[str]:
     command = [*route.codex_argv, 'exec', '--ignore-user-config', '-C', str(workdir),
                '-s', sandbox, '--json', '--color', 'never', '-o', str(result_path)]
-    values = {'model': 'deepseek-flash', 'model_provider': 'chain_deepseek',
-              'model_reasoning_effort': 'low', 'model_catalog_json': str(catalog_path),
+    values = {'model_reasoning_effort': 'medium' if route.route_kind == ROUTE_NATIVE_CODEX else 'low',
               'model_instructions_file': str(instructions_path), 'approval_policy': 'never',
-              'model_providers.chain_deepseek.name': 'DeepSeek',
-              'model_providers.chain_deepseek.base_url': 'https://api.deepseek.com',
-              'model_providers.chain_deepseek.env_key': 'DEEPSEEK_API_KEY',
-              'model_providers.chain_deepseek.wire_api': 'responses',
-              'model_providers.chain_deepseek.request_max_retries': 0,
-              'model_providers.chain_deepseek.stream_max_retries': 0,
-              'model_providers.chain_deepseek.supports_websockets': False,
               'features.multi_agent': False,
               'sandbox_workspace_write.network_access': False,
               'sandbox_workspace_write.exclude_tmpdir_env_var': True,
               'sandbox_workspace_write.exclude_slash_tmp': True,
               'shell_environment_policy.exclude': list(SECRET_ENV_KEYS),
               'web_search': 'disabled'}
+    if route.route_kind == ROUTE_NATIVE_CODEX:
+        # Pin only the user-requested model. Let Codex resolve its native provider and
+        # account-backed model availability; do not inject the DeepSeek catalog/provider.
+        command += ['--model', NATIVE_CODEX_MODEL]
+    else:
+        if catalog_path is None:
+            raise ValueError('DeepSeek route requires its generated model catalog')
+        values.update({'model': route.model, 'model_provider': 'chain_deepseek',
+                       'model_catalog_json': str(catalog_path),
+                       'model_providers.chain_deepseek.name': 'DeepSeek',
+                       'model_providers.chain_deepseek.base_url': 'https://api.deepseek.com',
+                       'model_providers.chain_deepseek.env_key': 'DEEPSEEK_API_KEY',
+                       'model_providers.chain_deepseek.wire_api': 'responses',
+                       'model_providers.chain_deepseek.request_max_retries': 0,
+                       'model_providers.chain_deepseek.stream_max_retries': 0,
+                       'model_providers.chain_deepseek.supports_websockets': False})
     if not allow_tools:
         values.update({'features.shell_tool': False, 'features.unified_exec': False,
                        'features.sleep_tool': False, 'features.tool_suggest': False})
@@ -2084,7 +2120,8 @@ def run_codex_once(route: Route, workdir: Path, run_dir: Path, tag: str, prompt:
     command = codex_command(route, workdir, result_path, instructions_path, catalog_path, resume_id,
                             sandbox='workspace-write' if tag == 'coding' and tools_enabled else 'read-only',
                             allow_tools=tools_enabled)
-    record = {'tag': tag, 'workdir': str(workdir), 'resume_requested': resume_id, 'command': command,
+    record = {'tag': tag, 'workdir': str(workdir), 'resume_requested': resume_id,
+              'route': route.route_kind, 'model': route.model, 'command': command,
               'prompt_sha256': sha256_bytes(prompt.encode()), 'prompt_bytes': len(prompt.encode()),
               'started_utc': utc_iso(), 'pid': None, 'exit_code': None, 'timed_out': False,
               'status': 'starting', 'spawn_error': None, 'provider_request_started': False,
@@ -2414,6 +2451,10 @@ def apply_gm_outcomes(state: dict, gm_id: str, results: list[dict], digest: str,
 
 
 def scan_for_credential(route: Route, directory: Path) -> list[str]:
+    if not route.key:
+        # The native Codex route has no API-key value to scan for; its credential
+        # remains in CODEX_HOME and is never copied into the runner's files.
+        return []
     hits = []
     for path in sorted(Path(directory).rglob('*')):
         if not path.is_file():
@@ -2428,7 +2469,7 @@ def scan_for_credential(route: Route, directory: Path) -> list[str]:
 
 def observe(args) -> int:
     try:
-        route = Route(args.config, args.key_file, args.codex, args.codex_home)
+        route = Route(args.config, args.key_file, args.codex, args.codex_home, args.route)
     except (ValueError, OSError) as error:
         return refusal('route_preflight', str(error), 2)
     evidence_path = Path(args.evidence).resolve()
@@ -2588,7 +2629,10 @@ def observe(args) -> int:
         instructions = run_dir / 'instructions.md'
         instructions.write_text(STABLE_INSTRUCTIONS, encoding='utf-8')
         catalog = run_dir / 'models.json'
-        save_json(catalog, codex_catalog(STABLE_INSTRUCTIONS))
+        if route.route_kind == ROUTE_DEEPSEEK:
+            save_json(catalog, codex_catalog(STABLE_INSTRUCTIONS))
+        else:
+            catalog = None
         protected = [evidence_path] + ([args.investigation_file.resolve()]
                                       if args.investigation_file else []) + \
                     ([policy_path] if policy_path else []) + \
@@ -2624,6 +2668,7 @@ def observe(args) -> int:
                                   args.max_prompt_bytes)
             intent = {'kind': 'gm_observe', 'run_id': run_id, 'gm_id': gm_id, 'status': 'in_flight',
                       'pid': None, 'started_utc': utc_iso(), 'finished_utc': None,
+                      'route': route.route_kind, 'model': route.model,
                       'prompt_sha256': sha256_bytes(prompt.encode()), 'resume_requested': resume_id,
                       'session_mode': transport_mode,
                       'session_epoch': record.get('session_epoch', 1),
@@ -2645,12 +2690,13 @@ def observe(args) -> int:
                 store_state(state_dir, state)
 
             if book:
-                book.begin_gm(run_id, gm_id, 'observe')
+                book.begin_gm(run_id, gm_id, 'observe', route.model)
             attempt = run_codex_once(route, ROOT, run_dir, gm_id, prompt, instructions, catalog,
                                      resume_id, args.timeout, on_process=on_process)
             account_native_usage(state, attempt, resume_id)
             if book:
-                book.settle_gm(run_id, gm_id, 'observe', attempt, route.sessions_root())
+                book.settle_gm(run_id, gm_id, 'observe', attempt, route.sessions_root(),
+                               model=route.model)
             verdict = classify_attempt(attempt, resume_id)
             status, cost = verdict['status'], verdict['cost']
             record['in_flight'] = None
@@ -2662,6 +2708,7 @@ def observe(args) -> int:
                            'session_returned': attempt.get('thread_returned'),
                            **usage_evidence(attempt)})
             outcome = {'gm_id': gm_id, 'run_id': run_id, 'status': status, 'cost': cost,
+                       'route': route.route_kind, 'model': route.model,
                        **usage_evidence(attempt),
                        'exit_code': attempt.get('exit_code'), 'pid': attempt.get('pid'),
                        'resume_requested': resume_id,
@@ -2957,7 +3004,7 @@ def code(args) -> int:
     if candidate == state_dir or state_dir not in candidate.parents or candidate == ROOT.resolve():
         return refusal('candidate_outside_state_dir', str(candidate), 6)
     try:
-        route = Route(args.config, args.key_file, args.codex, args.codex_home)
+        route = Route(args.config, args.key_file, args.codex, args.codex_home, args.route)
     except (ValueError, OSError) as error:
         return refusal('route_preflight', str(error), 2)
     allowed_files = sorted(entry.replace('\\', '/') for entry in scope['files'])
@@ -3053,7 +3100,10 @@ def code(args) -> int:
                 'An artifact is a candidate, never a deployment or evidence of NPC adoption.')
         instructions.write_text(code_instructions, encoding='utf-8')
         catalog = run_dir / 'models.json'
-        save_json(catalog, codex_catalog(code_instructions))
+        if route.route_kind == ROUTE_DEEPSEEK:
+            save_json(catalog, codex_catalog(code_instructions))
+        else:
+            catalog = None
         protected = [Path(path).resolve() for path in (args.protect or [])]
         guards_before = guard_snapshot(protected)
         coding_state = {'gm_id': owner, 'role': 'coding_worker',
@@ -3082,6 +3132,7 @@ def code(args) -> int:
         route.assert_no_credential(prompt, 'coding prompt')
         intent = {'kind': 'gm_code', 'run_id': run_id, 'gm_id': owner, 'issue_id': args.issue,
                   'status': 'in_flight', 'pid': None, 'started_utc': utc_iso(),
+                  'route': route.route_kind, 'model': route.model,
                   'prompt_sha256': sha256_bytes(prompt.encode()), 'resume_requested': resume_id}
         issue['coding_attempt'] = intent
         owner_record.setdefault('coding', {'issue_id': args.issue, 'session_id': resume_id,
@@ -3097,13 +3148,14 @@ def code(args) -> int:
             store_state(state_dir, state)
 
         if book:
-            book.begin_gm(run_id, owner, 'code')
+            book.begin_gm(run_id, owner, 'code', route.model)
         attempt = run_codex_once(route, candidate, run_dir, 'coding', prompt, instructions, catalog,
                                  resume_id, args.timeout, on_process=on_process,
                                  allow_tools=not artifact_mode)
         account_native_usage(state, attempt, resume_id)
         if book:
-            book.settle_gm(run_id, owner, 'code', attempt, route.sessions_root())
+            book.settle_gm(run_id, owner, 'code', attempt, route.sessions_root(),
+                           model=route.model)
         verdict = classify_attempt(attempt, resume_id)
         status, cost = verdict['status'], verdict['cost']
         measured = usage_is_measured(attempt.get('usage'))
@@ -3590,7 +3642,7 @@ def feedback(args) -> int:
     structured acknowledgement bound to that receipt. This is a model-consumed delivery, not a
     queued JSON item."""
     try:
-        route = Route(args.config, args.key_file, args.codex, args.codex_home)
+        route = Route(args.config, args.key_file, args.codex, args.codex_home, args.route)
     except (ValueError, OSError) as error:
         return refusal('route_preflight', str(error), 2)
     receipt_path = Path(args.receipt_file).resolve()
@@ -3631,7 +3683,10 @@ def feedback(args) -> int:
         instructions = run_dir / 'instructions.md'
         instructions.write_text(STABLE_FEEDBACK_INSTRUCTIONS, encoding='utf-8')
         catalog = run_dir / 'models.json'
-        save_json(catalog, codex_catalog(STABLE_FEEDBACK_INSTRUCTIONS))
+        if route.route_kind == ROUTE_DEEPSEEK:
+            save_json(catalog, codex_catalog(STABLE_FEEDBACK_INSTRUCTIONS))
+        else:
+            catalog = None
         receipt_sha = sha256_bytes(receipt_bytes)
         # The host receipt is authoritative feedback.  Persist it before dispatch so a transport
         # or validation failure still leaves the GM with the feedback on its next turn.
@@ -3650,6 +3705,7 @@ def feedback(args) -> int:
                 return refusal('resume_preflight_failed', reason, 2)
         intent = {'run_id': run_id, 'gm_id': args.gm, 'kind': 'feedback',
                   'receipt_sha256': receipt_sha, 'pid': None, 'status': 'waiting',
+                  'route': route.route_kind, 'model': route.model,
                   'started_utc': utc_iso(), 'session_mode': transport_mode,
                   'session_epoch': record.get('session_epoch', 1)}
         record['in_flight'] = intent
@@ -3661,18 +3717,20 @@ def feedback(args) -> int:
             store_state(state_dir, state)
 
         if book:
-            book.begin_gm(run_id, args.gm, 'feedback')
+            book.begin_gm(run_id, args.gm, 'feedback', route.model)
         attempt = run_codex_once(route, ROOT, run_dir, 'feedback', prompt, instructions, catalog,
                                  resume_id, args.timeout, on_process=on_process)
         account_native_usage(state, attempt, resume_id)
         if book:
-            book.settle_gm(run_id, args.gm, 'feedback', attempt, route.sessions_root())
+            book.settle_gm(run_id, args.gm, 'feedback', attempt, route.sessions_root(),
+                           model=route.model)
         verdict = classify_attempt(attempt, resume_id)
         status, cost = verdict['status'], verdict['cost']
         record['in_flight'] = None
         changed = guard_diff(guards_before, guard_snapshot(protected))
         outcome = {'run_id': run_id, 'gm_id': args.gm, 'kind': 'autonomy_feedback_ack',
                    'receipt_sha256': receipt_sha, 'cost': cost,
+                   'route': route.route_kind, 'model': route.model,
                    'acknowledged': False, 'decision': None, 'next_work': None,
                    'session_mode': transport_mode,
                    'session_epoch': record.get('session_epoch', 1),
@@ -3719,7 +3777,8 @@ def feedback(args) -> int:
             'next_work': outcome.get('next_work'),
             'validation_errors': outcome.get('validation_errors', [])[:5], 'utc': utc_iso()})
         record.setdefault('feedback_attempts', []).append(
-            {key: outcome[key] for key in ('run_id', 'status', 'cost', 'acknowledged', 'decision',
+            {key: outcome[key] for key in ('run_id', 'route', 'model', 'status', 'cost',
+                                           'acknowledged', 'decision',
                                            'next_work', 'usage_measured', 'utc', 'receipt_sha256')})
         record['feedback_attempts'] = record['feedback_attempts'][-10:]
         if status != 'ok':
@@ -3728,11 +3787,13 @@ def feedback(args) -> int:
                     outcome, status, cost, attempt, note='feedback turn with unknown usage')
                 store_state(state_dir, state)
                 return emit({'status': status, 'kind': 'unresolved_unknown_cost', 'cost': cost,
-                             'gm_id': args.gm, 'receipt_sha256': receipt_sha,
+                             'gm_id': args.gm, 'route': route.route_kind, 'model': route.model,
+                             'receipt_sha256': receipt_sha,
                              **usage_evidence(attempt)}, 5)
             record['last_status'] = status
             store_state(state_dir, state)
             return emit({'status': status, 'cost': cost, 'gm_id': args.gm, 'run_id': run_id,
+                         'route': route.route_kind, 'model': route.model,
                          'acknowledged': False,
                          'validation_errors': outcome.get('validation_errors') or [],
                          'protected_paths_changed': changed,
@@ -3740,6 +3801,7 @@ def feedback(args) -> int:
                          'usage': outcome['usage']}, 1)
         store_state(state_dir, state)
         return emit({'status': 'ok', 'gm_id': args.gm, 'run_id': run_id,
+                     'route': route.route_kind, 'model': route.model,
                      'acknowledged': True, 'decision': outcome['decision'],
                      'next_work': outcome['next_work'],
                      'effect_review_consumed': outcome.get('effect_review_consumed'),
@@ -3758,6 +3820,9 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers = parser.add_subparsers(dest='command', required=True)
 
     shared = argparse.ArgumentParser(add_help=False)
+    shared.add_argument('--route', choices=(ROUTE_DEEPSEEK, ROUTE_NATIVE_CODEX),
+                        default=ROUTE_DEEPSEEK,
+                        help='dispatch via the configured DeepSeek API (default) or native Codex gpt-6-luna')
     shared.add_argument('--config', type=Path, default=DEFAULT_CONFIG)
     shared.add_argument('--key-file', type=Path, default=DEFAULT_KEY_FILE)
     shared.add_argument('--codex', default=shutil.which('codex') or 'codex',

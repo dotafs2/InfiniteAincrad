@@ -51,10 +51,14 @@ func run() -> void:
 	check(town.load_from(town_path).ok, "resident bridge loads the disposable town copy")
 	check(town.attach_adventure(bridge).ok, "resident bridge attaches the sidecar")
 	var resident_id := "shared:baker"
+	# This fixture tests the controller boundary only. Position is explicitly
+	# staged; the separate rendered scene probe is the physical travel evidence.
+	town.host_move(resident_id, ResidentTown.GATE_TARGET)
 	var route_receipt := {"ok": true, "route_kind": "collision_aware_town_route", "route_id": "market-to-wilderness-gate",
-		"target": "wilderness_gate", "frames": 1005, "metres": 22.5680503845215}
+		"resident_id": resident_id, "target": "wilderness_gate", "target_position": [0.0, 0.10, 53.0],
+		"fixture_origin": "scripted_controller_boundary", "frames": 1005, "metres": 22.5680503845215}
 	check(town.mark_physical_arrival(town_path, resident_id, route_receipt).ok,
-		"host records a measured collision-aware gate arrival")
+		"host validates the explicitly staged gate fixture")
 	var options: Array = town.action_options(resident_id)
 	var offered := options.any(func(option): return option.get("id", "") == ResidentTown.ADVENTURE_OPTION)
 	check(offered, "resident receives the gate-gated wilderness choice")
@@ -86,6 +90,8 @@ func run() -> void:
 		"cold restore preserves the adopted wilderness zone")
 	check(cold_town._state.life.events[-1].get("operation_id", "") == outcome.record.request_id,
 		"cold restore preserves the resident command lineage")
+	check(town.release_writer(town_path).get("ok", false),
+		"fixture releases its owned disposable-town writer lock")
 	print(JSON.stringify({"suite":"adventure_resident_adoption_probe","checks":checks,"failures":failures,
 		"resident_id":resident_id,"choice":ResidentTown.ADVENTURE_OPTION,
 		"route_receipt":route_receipt,"canonical_mutation_allowed":false,

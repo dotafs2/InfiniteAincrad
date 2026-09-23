@@ -785,19 +785,21 @@ class BudgetLauncherTests(unittest.TestCase):
         outcome, engine = {}, {}
         args = ['launcher', '--godot', 'FAKE_GODOT', '--ledger', str(self.ledger.path),
                 '--save', str(save), '--config', str(config), '--out', str(out), '--seconds', '5',
+                '--wall-limit', '6',
                 '--max-requests', '1', '--shutdown-wait', '12',
                 '--carried-uncertainty-pin', str(pin_path)]
         before = datetime.now(timezone.utc)
 
         def fake_engine(command, **kwargs):
             self.assertIn('--town-duration=5', command)
+            self.assertIn('--town-wall-limit=6.0', command)
             self.assertIn('--town-shutdown-wait=12.0', command)
-            self.assertEqual(command[command.index('--timeout') + 1], '62')
+            self.assertEqual(command[command.index('--timeout') + 1], '63')
             scope = json.loads(Path(kwargs['env']['AINCRAD_GATEWAY_RUN_CONFIG']).read_text())
             deadline = datetime.fromisoformat(scope['deadline_utc'])
-            # The authorization window must hold both the episode and its shutdown wait.
-            self.assertGreaterEqual(deadline, before + timedelta(seconds=5 + 12 + 54))
-            self.assertLessEqual(deadline, datetime.now(timezone.utc) + timedelta(seconds=5 + 12 + 56))
+            # The authorization window must hold wall allowance, shutdown and capture.
+            self.assertGreaterEqual(deadline, before + timedelta(seconds=6 + 12 + 54))
+            self.assertLessEqual(deadline, datetime.now(timezone.utc) + timedelta(seconds=6 + 12 + 56))
             endpoint_document = json.loads((out / 'endpoint.json').read_text())
             endpoint = endpoint_document['base_url'] + '/chat/completions'
 
@@ -813,8 +815,13 @@ class BudgetLauncherTests(unittest.TestCase):
             self.assertTrue(started.wait(5), 'the fixture request never reached the provider: ' + str(outcome))
             threading.Timer(0.4, release.set).start()
             (out / 'capture').mkdir()
+            # Slow/pause-clock fixture: wall bound reached with only 4.2 simulated
+            # seconds. The partial capture must remain explicit and cannot pass.
             capture = {'world_id': 'fixture:model-validation-world', 'source_seq': 0, 'life_seq': 0,
                        'new_events': [], 'pending_count': 0, 'validation_decisions_started': 1,
+                       'shutdown': {'capture_reason': 'wall_limit_elapsed', 'exit_code': 4,
+                                    'requested_seconds': 5, 'running_seconds': 4.2,
+                                    'wall_limit_seconds': 6.0, 'duration_fulfilled': False},
                        'resident_turns': {'shared:weaver': {'status': 'pending',
                                                             'request_id': 'turn:shared:weaver:0:22'}}}
             (out / 'capture' / 'evidence.json').write_text(json.dumps(capture), encoding='utf-8')
@@ -831,6 +838,7 @@ class BudgetLauncherTests(unittest.TestCase):
         self.assertEqual(result['validation_status'], 'failed')
         self.assertFalse(result['validation_passed'])
         self.assertIn('engine_exit_nonzero', result['classification_reasons'])
+        self.assertIn('requested_observation_duration_incomplete', result['classification_reasons'])
         self.assertEqual(result['model_errors'], {'shared:weaver': 'pending'})
         self.assertEqual(result['upstream_requests'], 1)
         shutdown = result['gateway_shutdown']

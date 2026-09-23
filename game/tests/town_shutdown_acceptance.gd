@@ -113,6 +113,10 @@ func _stage(name: String, wait_limit: float) -> Dictionary:
 	scene.capture_seconds = 0.05
 	scene.town = town
 	scene.model_turns = turns
+	# The fixture skips the scene's _ready; initialize its monotonic origin so
+	# the first shutdown step is a real short delta, never OS uptime from zero.
+	scene.wall_started_usec = Time.get_ticks_usec()
+	scene.last_wall_sample_usec = scene.wall_started_usec
 	root.add_child(turns)
 	return {"path": path, "town": town, "turns": turns, "scene": scene}
 
@@ -154,6 +158,18 @@ func _drive(stage: Dictionary, limit: int) -> int:
 		used += 1
 		if scene.captures == 0:
 			await process_frame
+	return used
+
+func _drive_wall(stage: Dictionary, limit: int, sim_delta: float = 0.001) -> int:
+	## Advance scene frames while ensuring real wall time passes; sim_delta remains
+	## deliberately tiny so the wall watchdog can win under a slow/pause clock.
+	var scene = stage.scene
+	var used := 0
+	while scene.captures == 0 and used < limit:
+		scene._process(sim_delta)
+		used += 1
+		if scene.captures == 0:
+			await create_timer(0.01).timeout
 	return used
 
 func _append_notice(town, id: String) -> void:
@@ -356,6 +372,126 @@ func _scenario_paused_live_duration() -> Dictionary:
 	_release(stage)
 	return summary
 
+func _scenario_wall_limit_settles_reply() -> Dictionary:
+	var stage := _stage("wall_settled", 0.5)
+	if stage.is_empty(): return {}
+	var town = stage.town
+	var turns = stage.turns
+	var scene = stage.scene
+	scene.capture_seconds = 20.0
+	scene.wall_limit_seconds = 0.05
+	var ember_brain := _attach_brain(stage, EMBER, 9)
+	# The first frame starts the one already-authorized fixture request; pause after
+	# admission so only monotonic wall time advances toward cutoff.
+	scene._process(0.001)
+	await process_frame
+	check(turns.busy and turns._record(EMBER).get("status", "") == "pending",
+		"wall settled: one request is durable before the wall cutoff")
+	scene.paused = true
+	var used := await _drive_wall(stage, 80)
+	check(scene.captures == 1 and used < 80, "wall settled: the watchdog captures within a short bound")
+	check(turns.admission_closed_reason == "wall_limit_elapsed" and scene.capture_reason == "wall_limit_elapsed",
+		"wall settled: wall cutoff closes admission and is named")
+	check(scene.capture_exit_code == 4 and not scene.capture_evidence.duration_fulfilled,
+		"wall settled: short simulated observation exits incomplete")
+	check(scene.capture_evidence.running_seconds < 0.05 and scene.capture_evidence.wall_elapsed_seconds >= 0.05,
+		"wall settled: wall time advances while simulated life is paused")
+	check(scene.capture_status.get(EMBER, "") == "settled" and not turns.shutdown_wait_timed_out,
+		"wall settled: pre-cutoff accepted reply settles inside the grace")
+	check(ember_brain.calls == 1 and scene.validation_decisions_started == 1,
+		"wall settled: no second decision is admitted at the boundary")
+	var refused: Dictionary = await turns.step(BIRCH)
+	check(refused.get("code", "") == "admission_closed",
+		"wall settled: explicit next decision is refused")
+	var saved_hash := FileAccess.get_sha256(stage.path)
+	var cold := WaitTown.new()
+	check(cold.load_from(stage.path).ok and cold._state.godot.resident_turns[EMBER].status == "settled",
+		"wall settled: the exact captured world is cold-loadable with the applied reply")
+	cold.release_writer(stage.path)
+	check(FileAccess.get_sha256(stage.path) == saved_hash, "wall settled: capture and cold read preserve saved bytes")
+	var summary := {"scenario": "wall_limit_settles_reply", "frames": used,
+		"wall_elapsed_seconds": scene.capture_evidence.wall_elapsed_seconds,
+		"running_seconds": scene.capture_evidence.running_seconds,
+		"capture_reason": scene.capture_reason, "exit_code": scene.capture_exit_code}
+	_release(stage)
+	return summary
+
+func _scenario_wall_limit_unresolved_reply() -> Dictionary:
+	var stage := _stage("wall_unresolved", 0.05)
+	if stage.is_empty(): return {}
+	var town = stage.town
+	var turns = stage.turns
+	var scene = stage.scene
+	scene.capture_seconds = 20.0
+	scene.wall_limit_seconds = 0.04
+	var ember_brain := _attach_brain(stage, EMBER, 1073741824)
+	scene._process(0.001)
+	await process_frame
+	check(turns.busy and turns._record(EMBER).get("status", "") == "pending",
+		"wall unresolved: request is durably pending before the cutoff")
+	scene.paused = true
+	var used := await _drive_wall(stage, 80)
+	check(scene.captures == 1 and used < 80, "wall unresolved: bounded shutdown captures promptly")
+	check(scene.capture_reason == "wall_limit_elapsed_unresolved" and scene.capture_exit_code == 3,
+		"wall unresolved: accepted call remains an honest nonzero unresolved result")
+	check(turns.shutdown_wait_timed_out and scene.capture_owed.size() == 1 and scene.capture_status.get(EMBER, "") == "pending",
+		"wall unresolved: the still-owed request remains pending and identified")
+	check(scene.capture_evidence.duration_fulfilled == false and scene.capture_evidence.running_seconds < 0.05,
+		"wall unresolved: partial simulated duration stays explicitly incomplete")
+	var save_hash := FileAccess.get_sha256(stage.path)
+	town.release_writer(stage.path)
+	var cold := WaitTown.new()
+	check(cold.load_from(stage.path).ok and cold._state.godot.resident_turns[EMBER].status == "pending",
+		"wall unresolved: checkpoint restores the exact pending receipt")
+	cold.release_writer(stage.path)
+	check(FileAccess.get_sha256(stage.path) == save_hash,
+		"wall unresolved: inspection does not modify the captured save")
+	# Finish the artificial brain only after refusing writes, then verify that its
+	# late coroutine cannot rewrite or settle the captured checkpoint.
+	town.fixture_refuses_writes = true
+	ember_brain.frames_until_reply = 0
+	await process_frame
+	await process_frame
+	check(FileAccess.get_sha256(stage.path) == save_hash,
+		"wall unresolved: late reply after capture cannot mutate the saved bytes")
+	var summary := {"scenario": "wall_limit_unresolved_reply", "frames": used,
+		"wall_elapsed_seconds": scene.capture_evidence.wall_elapsed_seconds,
+		"running_seconds": scene.capture_evidence.running_seconds,
+		"capture_reason": scene.capture_reason, "exit_code": scene.capture_exit_code}
+	_release(stage)
+	return summary
+
+func _scenario_wall_limit_during_route_wait() -> Dictionary:
+	var stage := _stage("wall_route_wait", 0.2)
+	if stage.is_empty(): return {}
+	var turns = stage.turns
+	var scene = stage.scene
+	scene.capture_seconds = 20.0
+	scene.wall_limit_seconds = 0.01
+	scene.adventure_live_install = true
+	scene.adventure_route_ready = false
+	var ember_brain := _attach_brain(stage, EMBER, 1)
+	scene._process(0.001)
+	await create_timer(0.02).timeout
+	scene._process(0.001)
+	check(turns.admission_closed() and turns.admission_closed_reason == "wall_limit_elapsed",
+		"route wait: wall cutoff closes admission before deferred route readiness")
+	check(scene.captures == 0 and ember_brain.calls == 0 and scene.validation_decisions_started == 0,
+		"route wait: no resident decision starts while route preparation is pending")
+	scene.adventure_route_ready = true
+	scene._process(0.001)
+	await process_frame
+	check(scene.captures == 1 and scene.capture_reason == "wall_limit_elapsed",
+		"route wait: route completion proceeds into the already-pending capture")
+	check(scene.capture_exit_code == 4 and scene.capture_evidence.duration_fulfilled == false,
+		"route wait: route delay does not disguise the incomplete observation")
+	var summary := {"scenario": "wall_limit_during_route_wait", "wall_elapsed_seconds": scene.capture_evidence.wall_elapsed_seconds,
+		"capture_reason": scene.capture_reason, "exit_code": scene.capture_exit_code}
+	turns.town.release_writer(stage.path)
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(stage.path))
+	_release(stage)
+	return summary
+
 func run() -> void:
 	var delayed := await _scenario_delayed_reply()
 	if _blocked:
@@ -365,6 +501,9 @@ func run() -> void:
 		return
 	var boundary := await _scenario_boundary_frame()
 	var paused_duration := await _scenario_paused_live_duration()
+	var wall_settled := await _scenario_wall_limit_settles_reply()
+	var wall_unresolved := await _scenario_wall_limit_unresolved_reply()
+	var wall_route_wait := await _scenario_wall_limit_during_route_wait()
 	print(JSON.stringify({"suite": "town_shutdown", "checks": checks, "failures": failures, "paid_calls": 0,
-		"scenarios": [delayed, unresolved, boundary, paused_duration]}))
+		"scenarios": [delayed, unresolved, boundary, paused_duration, wall_settled, wall_unresolved, wall_route_wait]}))
 	quit(0 if failures == 0 else 1)

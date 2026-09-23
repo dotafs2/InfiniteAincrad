@@ -40,6 +40,8 @@ _DRAIN_POLL_SECONDS = 0.25
 # exactly while it is applying a reply this run already paid for.
 SHUTDOWN_WAIT_SECONDS = 45.0
 MAX_SHUTDOWN_WAIT_SECONDS = 120.0
+# The engine's wall watchdog fires at the requested episode length. Its normal
+# process timeout reserves the complete shutdown wait plus 45 seconds to capture.
 
 
 class OperationTracker:
@@ -382,7 +384,8 @@ def classify_validation(engine_exit, capture, model_errors, budget_stop_reason,
     if shutdown_incomplete:
         reasons.append('gateway_shutdown_incomplete')
     shutdown_facts = capture.get('shutdown', {}) if isinstance(capture, dict) else {}
-    if (shutdown_facts.get('capture_reason') in ('duration_elapsed', 'episode_duration_elapsed')
+    if ((shutdown_facts.get('capture_reason') in ('duration_elapsed', 'episode_duration_elapsed', 'wall_limit_elapsed')
+            or str(shutdown_facts.get('capture_reason', '')).startswith(('episode_duration_elapsed_', 'wall_limit_elapsed_')))
             and shutdown_facts.get('duration_fulfilled') is False):
         reasons.append('requested_observation_duration_incomplete')
     if reasons:
@@ -596,6 +599,8 @@ def main():
     parser.add_argument('--save', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--seconds', type=int, default=300)
+    parser.add_argument('--wall-limit', type=float,
+                        help='Wall-clock episode bound (default: 1.25x --seconds, up to 1800s); reserves shutdown and capture time before the hard process timeout.')
     parser.add_argument('--max-requests', type=int, default=12)
     parser.add_argument('--max-cost-cny', type=int, help='Optional whole-yuan episode cap, checked conservatively before reserving; existing cumulative ledger remains authoritative.')
     parser.add_argument('--checkpoint-dir', type=Path, help='Optional credential-free exact world checkpoint lineage; preserves every earlier life event and resident reply after shutdown.')
@@ -625,6 +630,9 @@ def main():
         parser.error('Drain grace must be within 0..40 seconds.')
     if not 0 <= args.shutdown_wait <= MAX_SHUTDOWN_WAIT_SECONDS:
         parser.error('Shutdown wait must be within 0..120 seconds.')
+    wall_limit = args.wall_limit if args.wall_limit is not None else min(1800.0, args.seconds * 1.25)
+    if not args.seconds <= wall_limit <= 1800.0:
+        parser.error('Wall limit must be at least --seconds and at most 1800 seconds.')
     if args.inquire_text is not None and (not args.inquire_resident or not args.inquire_text.strip() or len(args.inquire_text) > 512):
         parser.error('Scripted inquiry text requires a target and 1..512 characters.')
     out, save = args.out.resolve(), args.save.resolve()
@@ -635,9 +643,9 @@ def main():
         parser.error('--adventure-sidecar and --adventure-manifest must be supplied together')
     if adventure_sidecar is not None and not adventure_sidecar.is_file():
         parser.error('Adventure sidecar does not exist; disposable install refuses to invent one')
-    # --seconds is the episode duration; the engine's own bounded shutdown wait runs
-    # after it, so the authorization deadline must cover both.
-    deadline = datetime.now(timezone.utc) + timedelta(seconds=args.seconds + args.shutdown_wait + 55)
+    # Simulated duration may run slower than wall time. The scene receives a
+    # monotonic watchdog, with shutdown + capture reserved after it.
+    deadline = datetime.now(timezone.utc) + timedelta(seconds=wall_limit + args.shutdown_wait + 55)
     try:
         validate_paths(out, save, gm_export)
         baseline = read_world_baseline(save)
@@ -675,12 +683,13 @@ def main():
     (out / 'helper.json').write_text(json.dumps({'pid': os.getpid(), 'status': 'running', 'ledger_before': before}, indent=2))
     thread.start()
     command = [sys.executable, str(ROOT / 'tools/run_godot.py'), '--godot', args.godot, '--name', 'town-model',
-               '--timeout', str(int(args.seconds + args.shutdown_wait) + 45), '--out', str(out), '--']
+               '--timeout', str(int(wall_limit + args.shutdown_wait) + 45), '--out', str(out), '--']
     if args.headless:
         command += ['--headless']
     command += ['--audio-driver', 'Dummy']
     command += ['res://scenes/town_street.tscn', '--', '--town-save=' + str(save), '--town-gateway',
                 '--town-capture=' + str(out / 'capture'), '--town-duration=' + str(args.seconds),
+                '--town-wall-limit=' + str(wall_limit),
                 '--town-max-decisions=' + str(args.max_requests),
                 '--town-shutdown-wait=' + str(args.shutdown_wait)]
     if gm_export is not None:
@@ -703,7 +712,7 @@ def main():
     try:
         result = subprocess.run(command, cwd=ROOT, env=dict(os.environ, AINCRAD_GATEWAY_RUN_CONFIG=str(run)),
                                 capture_output=True, text=True, encoding='utf-8', errors='replace',
-                                timeout=args.seconds + args.shutdown_wait + 60)
+                                timeout=wall_limit + args.shutdown_wait + 60)
         (out / 'runner.log').write_text(result.stdout + result.stderr, encoding='utf-8')
     finally:
         # The engine is gone: stop new intake, then drain what this launcher already
@@ -763,6 +772,7 @@ def main():
                'carried_uncertainty_reviewed': gate.review is not None, 'gateway_shutdown': shutdown,
                'shutdown_incomplete': bool(shutdown_incomplete),
                'shutdown_wait_seconds': args.shutdown_wait,
+               'wall_limit_seconds': wall_limit,
                'idle_completed': bool(idle_completed),
                'world_progress_observed': progress['observed'], 'world_progress': progress,
                'startup_fault_export': startup_fault}

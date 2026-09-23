@@ -4,6 +4,7 @@ extends Node
 const Brain = preload("res://agents/resident_brain.gd")
 const IDLE_COOLDOWN := 1800.0
 const FIRST_OFFER_WAKE_CAPABILITY := "production.self_repair"
+const FIRST_EAT_OFFER_ACTION := "eat_ration"
 const STALE_OPTION_REJECTION_CODES := ["option_unavailable", "flour_unavailable"]
 ## Request ids this process failed with the brain's process-local request limit.
 ## Their cause is in force here, so they are never treated as cold-restored.
@@ -251,6 +252,27 @@ func _new_trade_collection_offer_due(id: String, record: Dictionary) -> bool:
 				return true
 	return false
 
+func _new_eat_offer_due(id: String, record: Dictionary) -> bool:
+	## A newly available ration choice invites one decision, never an automatic meal.
+	## Only a valid prior menu proves the resident has not already seen it.
+	if record.get("status", "") != "settled" or not town.has_method("action_options"):
+		return false
+	var offered: Variant = record.get("offered_actions")
+	if not offered is Dictionary or offered.is_empty():
+		return false
+	var previous_ids := {}
+	for alias in offered:
+		var option_id: Variant = offered[alias]
+		if not alias is String or alias.is_empty() or not option_id is String or option_id.is_empty():
+			return false
+		previous_ids[option_id] = true
+	for option in town.action_options(id):
+		if option is Dictionary and option.get("action", "") == FIRST_EAT_OFFER_ACTION:
+			var option_id: Variant = option.get("id")
+			if option_id is String and not option_id.is_empty() and not previous_ids.has(option_id):
+				return true
+	return false
+
 func _terminal_basic_failure_due(id: String, record: Dictionary) -> bool:
 	## An accepted basic-life job returns `action_started` before physical travel and
 	## work finish. If its authoritative command later rejects for unavailable
@@ -386,7 +408,7 @@ func ready_resident() -> String:
 		# A cold-recovery class is itself the one bounded reason to become due. These
 		# receipts have no next_due and may have produced no event, so applying only
 		# the ordinary evidence/time gate would admit recovery above but never select it.
-		if _cold_recoverable(id, record) or record.is_empty() or _own_seq(id) > int(record.get("seen_seq", 0)) or town._state.godot.elapsed_seconds >= float(record.get("next_due", INF)) or _new_self_repair_offer_due(id, record) or _new_trade_collection_offer_due(id, record) or _terminal_basic_failure_due(id, record) or _terminal_material_depletion_due(id, record):
+		if _cold_recoverable(id, record) or record.is_empty() or _own_seq(id) > int(record.get("seen_seq", 0)) or town._state.godot.elapsed_seconds >= float(record.get("next_due", INF)) or _new_self_repair_offer_due(id, record) or _new_trade_collection_offer_due(id, record) or _new_eat_offer_due(id, record) or _terminal_basic_failure_due(id, record) or _terminal_material_depletion_due(id, record):
 			return id
 	return ""
 

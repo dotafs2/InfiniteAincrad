@@ -11,6 +11,55 @@ var adventure
 var registry
 var manifest: Dictionary = {}
 
+static func validate_adventure_snapshot(snapshot: Variant, town_state: Dictionary = {}) -> Dictionary:
+	var shape_check: Dictionary = Adventure.validate_snapshot(snapshot)
+	if not shape_check.get("ok", false): return shape_check
+	var expected_ids: Array = []
+	if not town_state.is_empty():
+		var positions: Variant = town_state.get("godot", {}).get("positions", {})
+		if not positions is Dictionary:
+			return {"ok": false, "code": "adventure_snapshot_town_positions_invalid"}
+		for person in town_state.get("residents", []):
+			var id := str(person.get("stable_id", ""))
+			if positions.has(id): expected_ids.append(id)
+		if snapshot.residents.size() != expected_ids.size():
+			return {"ok": false, "code": "adventure_snapshot_resident_count_mismatch"}
+	for id in snapshot.residents:
+		var resident: Variant = snapshot.residents[id]
+		if not id is String or not resident is Dictionary or resident.get("id") != id \
+				or resident.get("zone") not in ["town", "wilderness", "labyrinth", "floor_one_boss_arena"] \
+				or resident.get("last_safe_zone") not in ["town", "wilderness", "labyrinth", "floor_one_boss_arena"] \
+				or resident.get("status") not in ["ready", "defeated"]:
+			return {"ok": false, "code": "adventure_snapshot_resident_invalid"}
+	for id in expected_ids:
+		if not snapshot.residents.has(id):
+			return {"ok": false, "code": "adventure_snapshot_resident_missing", "resident_id": id}
+	return {"ok": true}
+
+func restore_adventure_snapshot(snapshot: Dictionary) -> Dictionary:
+	var checked := validate_adventure_snapshot(snapshot)
+	if not checked.get("ok", false): return checked
+	if adventure == null: adventure = Adventure.new()
+	var loaded: Dictionary = adventure.load_snapshot(snapshot)
+	if not loaded.get("ok", false): return loaded
+	if not manifest.is_empty(): manifest["adventure_state"] = snapshot.duplicate(true)
+	return {"ok": true, "code": "adventure_snapshot_restored"}
+
+func hydrate_from_town_state(town_state: Dictionary) -> Dictionary:
+	var godot_value: Variant = town_state.get("godot", {})
+	if not godot_value is Dictionary: return {"ok": false, "code": "town_godot_state_invalid"}
+	if godot_value.has("adventure_state"):
+		var stored: Variant = godot_value.get("adventure_state")
+		if not stored is Dictionary:
+			return {"ok": false, "code": "adventure_snapshot_shape_invalid"}
+		var checked := validate_adventure_snapshot(stored, town_state)
+		if not checked.get("ok", false): return checked
+		return restore_adventure_snapshot(stored)
+	if adventure == null:
+		adventure = Adventure.new()
+		adventure.create_from_town_snapshot(town_state)
+	return {"ok": true, "code": "adventure_attached_from_town"}
+
 func install(town_save: String, adventure_save: String) -> Dictionary:
 	town = TownActions.new()
 	var town_result: Dictionary = town.load_from(town_save)

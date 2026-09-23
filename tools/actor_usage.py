@@ -229,9 +229,9 @@ class UsageBook:
                        (call_id, actor_id, source, model, phase, status,
                         encoded(usage) if usage else None, charge_nano))
 
-    def begin_gm(self, run_id, actor_id, phase):
+    def begin_gm(self, run_id, actor_id, phase, model='deepseek-flash'):
         self.record('gm:' + phase + ':' + run_id + ':' + actor_id, actor_id, 'native_gm',
-                    'deepseek-flash', phase, 'pending')
+                    model, phase, 'pending')
 
     def begin_npc(self, request_id, actor_id, model):
         with self.connect() as db:
@@ -242,7 +242,8 @@ class UsageBook:
             return
         self.record('npc:' + request_id, actor_id, 'kimi_ledger', model, 'decision', 'pending')
 
-    def settle_gm(self, run_id, actor_id, phase, attempt, sessions_root=None):
+    def settle_gm(self, run_id, actor_id, phase, attempt, sessions_root=None,
+                  model='deepseek-flash'):
         # `run_codex_once` sets provider_request_started only after Popen succeeds. A local
         # executable-start failure therefore has no provider request to account for; preserve it
         # as an auditable not_sent receipt instead of poisoning the world with unknown usage.
@@ -258,7 +259,7 @@ class UsageBook:
                 if usage is not None:
                     status = 'partial'
         self.record('gm:' + phase + ':' + run_id + ':' + actor_id, actor_id, 'native_gm',
-                    'deepseek-flash', phase, status, usage)
+                    model, phase, status, usage)
         self.export()
 
     def sync_kimi_call(self, ledger_path, request_id, actor_id=None, model='kimi-k2.6'):
