@@ -441,6 +441,16 @@ func step(requested_id: String = "") -> Dictionary:
 		view.needs.erase("hunger")
 		view.needs.scale_explanation = "satiety measures fullness: 0 means an empty stomach and 100 means full. Higher energy means more stamina."
 	view.needs.energy = view.inventory.get("energy", 0)
+	# Disclose only the resident's own existing meal rule. This is information,
+	# not a recommendation or a change to eligibility/effects.
+	var known_rules: Dictionary = view.get("known_rules", {}).duplicate(true)
+	var nutrition_value: Variant = known_rules.get("nutrition", [])
+	var nutrition: Array = nutrition_value.duplicate(true) if nutrition_value is Array else []
+	var nutrition_disclosure := "Eating consumes one of your rations only when the action completes successfully; it adds 40 fullness, capped at 100, after 30 seconds of actual work. It is available only when you have at least one ration and fullness is 80 or below."
+	if nutrition_disclosure not in nutrition:
+		nutrition.append(nutrition_disclosure)
+	known_rules["nutrition"] = nutrition
+	view["known_rules"] = known_rules
 	view.memory = {"previous_decisions": _feedback_history(id, previous).slice(-6)}
 	for key in ["story", "personality", "faction"]:
 		if town.resident(id).has(key):
