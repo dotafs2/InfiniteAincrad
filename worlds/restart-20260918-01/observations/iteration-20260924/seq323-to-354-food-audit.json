@@ -1,0 +1,1270 @@
+{
+  "kind": "town_resource_continuity_audit",
+  "schema_version": 1,
+  "read_only": true,
+  "lineage_validated_by": "world_observation.assert_continuation",
+  "world_id": "shared:restart-20260918-01",
+  "full_history_validated": true,
+  "checkpoint_count": 4,
+  "snapshots": [
+    {
+      "path": "worlds/restart-20260918-01/checkpoints/seq000323-2d80c92778c34dc7.world.json",
+      "sha256": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+      "world_id": "shared:restart-20260918-01",
+      "life_seq": 323,
+      "elapsed_seconds": 13201.349999996519,
+      "residents": {
+        "shared:well-keeper": {
+          "name": "Ari",
+          "food": 1,
+          "fullness": 68.0,
+          "energy": 55.0
+        },
+        "shared:baker": {
+          "name": "Wren",
+          "food": 0,
+          "fullness": 84.0,
+          "energy": 55.0
+        },
+        "shared:smith": {
+          "name": "Flint",
+          "food": 2,
+          "fullness": 68.0,
+          "energy": 55.0
+        },
+        "shared:carpenter": {
+          "name": "Rowan",
+          "food": 2,
+          "fullness": 70.0,
+          "energy": 55.0
+        },
+        "shared:innkeeper": {
+          "name": "Mara",
+          "food": 1,
+          "fullness": 54.0,
+          "energy": 55.0
+        },
+        "shared:herder": {
+          "name": "Heath",
+          "food": 1,
+          "fullness": 70.0,
+          "energy": 55.0
+        },
+        "shared:gardener": {
+          "name": "Fern",
+          "food": 1,
+          "fullness": 70.0,
+          "energy": 55.0
+        },
+        "shared:weaver": {
+          "name": "Iris",
+          "food": 1,
+          "fullness": 70.0,
+          "energy": 79.0
+        },
+        "shared:fisher": {
+          "name": "Reed",
+          "food": 1,
+          "fullness": 63.0,
+          "energy": 90.0
+        },
+        "shared:healer": {
+          "name": "Sage",
+          "food": 2,
+          "fullness": 68.0,
+          "energy": 55.0
+        }
+      },
+      "held_food": 12,
+      "foraging": {
+        "stock": 2,
+        "capacity": 6,
+        "initial_stock": 6,
+        "produced_total": 29,
+        "harvested_total": 33
+      },
+      "food_events": {
+        "eaten": 31,
+        "baked": 0,
+        "given": 1
+      },
+      "per_resident_food_flows": {
+        "shared:well-keeper": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:baker": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 4,
+          "given": 0,
+          "received": 0
+        },
+        "shared:smith": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:carpenter": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:innkeeper": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:herder": {
+          "harvested": 2,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 1
+        },
+        "shared:gardener": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:weaver": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:fisher": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:healer": {
+          "harvested": 5,
+          "baked": 0,
+          "eaten": 3,
+          "given": 1,
+          "received": 0
+        }
+      },
+      "food_conservation_total": 16,
+      "food_conservation_equation": "held food + foraging stock + eaten - foraging produced - bread baked",
+      "foraging_conservation_ok": true,
+      "baking_loaf_carry": {},
+      "pending_food_jobs": []
+    },
+    {
+      "path": "worlds/restart-20260918-01/checkpoints/seq000340-ec40bbbcb064f854.world.json",
+      "sha256": "ec40bbbcb064f854b4a0d957f8baefe93ec09b16942f7f7d2265bf0e4b476951",
+      "world_id": "shared:restart-20260918-01",
+      "life_seq": 340,
+      "elapsed_seconds": 14032.666666662795,
+      "residents": {
+        "shared:well-keeper": {
+          "name": "Ari",
+          "food": 1,
+          "fullness": 62.0,
+          "energy": 49.0
+        },
+        "shared:baker": {
+          "name": "Wren",
+          "food": 0,
+          "fullness": 78.0,
+          "energy": 49.0
+        },
+        "shared:smith": {
+          "name": "Flint",
+          "food": 2,
+          "fullness": 62.0,
+          "energy": 49.0
+        },
+        "shared:carpenter": {
+          "name": "Rowan",
+          "food": 2,
+          "fullness": 64.0,
+          "energy": 49.0
+        },
+        "shared:innkeeper": {
+          "name": "Mara",
+          "food": 0,
+          "fullness": 88.0,
+          "energy": 49.0
+        },
+        "shared:herder": {
+          "name": "Heath",
+          "food": 1,
+          "fullness": 64.0,
+          "energy": 49.0
+        },
+        "shared:gardener": {
+          "name": "Fern",
+          "food": 1,
+          "fullness": 64.0,
+          "energy": 49.0
+        },
+        "shared:weaver": {
+          "name": "Iris",
+          "food": 1,
+          "fullness": 64.0,
+          "energy": 73.0
+        },
+        "shared:fisher": {
+          "name": "Reed",
+          "food": 1,
+          "fullness": 94.0,
+          "energy": 84.0
+        },
+        "shared:healer": {
+          "name": "Sage",
+          "food": 2,
+          "fullness": 98.0,
+          "energy": 49.0
+        }
+      },
+      "held_food": 11,
+      "foraging": {
+        "stock": 1,
+        "capacity": 6,
+        "initial_stock": 6,
+        "produced_total": 30,
+        "harvested_total": 35
+      },
+      "food_events": {
+        "eaten": 34,
+        "baked": 0,
+        "given": 1
+      },
+      "per_resident_food_flows": {
+        "shared:well-keeper": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:baker": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 4,
+          "given": 0,
+          "received": 0
+        },
+        "shared:smith": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:carpenter": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:innkeeper": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 4,
+          "given": 0,
+          "received": 0
+        },
+        "shared:herder": {
+          "harvested": 2,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 1
+        },
+        "shared:gardener": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:weaver": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:fisher": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 4,
+          "given": 0,
+          "received": 0
+        },
+        "shared:healer": {
+          "harvested": 6,
+          "baked": 0,
+          "eaten": 4,
+          "given": 1,
+          "received": 0
+        }
+      },
+      "food_conservation_total": 16,
+      "food_conservation_equation": "held food + foraging stock + eaten - foraging produced - bread baked",
+      "foraging_conservation_ok": true,
+      "baking_loaf_carry": {},
+      "pending_food_jobs": []
+    },
+    {
+      "path": "worlds/restart-20260918-01/checkpoints/seq000344-0e13bfddcb4918ba.world.json",
+      "sha256": "0e13bfddcb4918baf1e9f49d3177791092bb55871cf3f064947414e78bbce3e8",
+      "world_id": "shared:restart-20260918-01",
+      "life_seq": 344,
+      "elapsed_seconds": 14152.533333329406,
+      "residents": {
+        "shared:well-keeper": {
+          "name": "Ari",
+          "food": 1,
+          "fullness": 61.0,
+          "energy": 48.0
+        },
+        "shared:baker": {
+          "name": "Wren",
+          "food": 1,
+          "fullness": 77.0,
+          "energy": 48.0
+        },
+        "shared:smith": {
+          "name": "Flint",
+          "food": 2,
+          "fullness": 61.0,
+          "energy": 48.0
+        },
+        "shared:carpenter": {
+          "name": "Rowan",
+          "food": 2,
+          "fullness": 63.0,
+          "energy": 48.0
+        },
+        "shared:innkeeper": {
+          "name": "Mara",
+          "food": 0,
+          "fullness": 87.0,
+          "energy": 83.0
+        },
+        "shared:herder": {
+          "name": "Heath",
+          "food": 1,
+          "fullness": 63.0,
+          "energy": 48.0
+        },
+        "shared:gardener": {
+          "name": "Fern",
+          "food": 1,
+          "fullness": 63.0,
+          "energy": 48.0
+        },
+        "shared:weaver": {
+          "name": "Iris",
+          "food": 1,
+          "fullness": 63.0,
+          "energy": 72.0
+        },
+        "shared:fisher": {
+          "name": "Reed",
+          "food": 1,
+          "fullness": 93.0,
+          "energy": 83.0
+        },
+        "shared:healer": {
+          "name": "Sage",
+          "food": 2,
+          "fullness": 97.0,
+          "energy": 48.0
+        }
+      },
+      "held_food": 12,
+      "foraging": {
+        "stock": 1,
+        "capacity": 6,
+        "initial_stock": 6,
+        "produced_total": 31,
+        "harvested_total": 36
+      },
+      "food_events": {
+        "eaten": 34,
+        "baked": 0,
+        "given": 1
+      },
+      "per_resident_food_flows": {
+        "shared:well-keeper": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:baker": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 4,
+          "given": 0,
+          "received": 0
+        },
+        "shared:smith": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:carpenter": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:innkeeper": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 4,
+          "given": 0,
+          "received": 0
+        },
+        "shared:herder": {
+          "harvested": 2,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 1
+        },
+        "shared:gardener": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:weaver": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:fisher": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 4,
+          "given": 0,
+          "received": 0
+        },
+        "shared:healer": {
+          "harvested": 6,
+          "baked": 0,
+          "eaten": 4,
+          "given": 1,
+          "received": 0
+        }
+      },
+      "food_conservation_total": 16,
+      "food_conservation_equation": "held food + foraging stock + eaten - foraging produced - bread baked",
+      "foraging_conservation_ok": true,
+      "baking_loaf_carry": {},
+      "pending_food_jobs": []
+    },
+    {
+      "path": "worlds/restart-20260918-01/checkpoints/seq000354-2cb7ce5a0ee0e700.world.json",
+      "sha256": "2cb7ce5a0ee0e700ea6bb5918cf11b69e3840059ef50095aff1b29baa076fc3d",
+      "world_id": "shared:restart-20260918-01",
+      "life_seq": 354,
+      "elapsed_seconds": 15052.04999999565,
+      "residents": {
+        "shared:well-keeper": {
+          "name": "Ari",
+          "food": 1,
+          "fullness": 53.0,
+          "energy": 40.0
+        },
+        "shared:baker": {
+          "name": "Wren",
+          "food": 0,
+          "fullness": 94.0,
+          "energy": 75.0
+        },
+        "shared:smith": {
+          "name": "Flint",
+          "food": 1,
+          "fullness": 93.0,
+          "energy": 40.0
+        },
+        "shared:carpenter": {
+          "name": "Rowan",
+          "food": 2,
+          "fullness": 55.0,
+          "energy": 40.0
+        },
+        "shared:innkeeper": {
+          "name": "Mara",
+          "food": 1,
+          "fullness": 79.0,
+          "energy": 75.0
+        },
+        "shared:herder": {
+          "name": "Heath",
+          "food": 0,
+          "fullness": 94.0,
+          "energy": 40.0
+        },
+        "shared:gardener": {
+          "name": "Fern",
+          "food": 1,
+          "fullness": 55.0,
+          "energy": 40.0
+        },
+        "shared:weaver": {
+          "name": "Iris",
+          "food": 1,
+          "fullness": 55.0,
+          "energy": 64.0
+        },
+        "shared:fisher": {
+          "name": "Reed",
+          "food": 1,
+          "fullness": 85.0,
+          "energy": 75.0
+        },
+        "shared:healer": {
+          "name": "Sage",
+          "food": 2,
+          "fullness": 89.0,
+          "energy": 75.0
+        }
+      },
+      "held_food": 10,
+      "foraging": {
+        "stock": 2,
+        "capacity": 6,
+        "initial_stock": 6,
+        "produced_total": 33,
+        "harvested_total": 37
+      },
+      "food_events": {
+        "eaten": 37,
+        "baked": 0,
+        "given": 1
+      },
+      "per_resident_food_flows": {
+        "shared:well-keeper": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:baker": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 5,
+          "given": 0,
+          "received": 0
+        },
+        "shared:smith": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 4,
+          "given": 0,
+          "received": 0
+        },
+        "shared:carpenter": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:innkeeper": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 4,
+          "given": 0,
+          "received": 0
+        },
+        "shared:herder": {
+          "harvested": 2,
+          "baked": 0,
+          "eaten": 4,
+          "given": 0,
+          "received": 1
+        },
+        "shared:gardener": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:weaver": {
+          "harvested": 3,
+          "baked": 0,
+          "eaten": 3,
+          "given": 0,
+          "received": 0
+        },
+        "shared:fisher": {
+          "harvested": 4,
+          "baked": 0,
+          "eaten": 4,
+          "given": 0,
+          "received": 0
+        },
+        "shared:healer": {
+          "harvested": 6,
+          "baked": 0,
+          "eaten": 4,
+          "given": 1,
+          "received": 0
+        }
+      },
+      "food_conservation_total": 16,
+      "food_conservation_equation": "held food + foraging stock + eaten - foraging produced - bread baked",
+      "foraging_conservation_ok": true,
+      "baking_loaf_carry": {},
+      "pending_food_jobs": []
+    }
+  ],
+  "intervals": [
+    {
+      "from_seq": 323,
+      "to_seq": 340,
+      "elapsed_seconds": 831.3166666662764,
+      "foraging_produced_delta": 1,
+      "foraging_harvested_delta": 2,
+      "harvest_events": 2,
+      "bread_baked_delta": 0,
+      "eaten_delta": 3,
+      "given_delta": 0,
+      "food_held_delta": -1,
+      "source_stock_delta": -1,
+      "food_conservation_delta": 0,
+      "food_conservation_ok": true,
+      "per_resident_food_balances_match": true,
+      "harvest_counter_matches_events": true,
+      "per_resident": {
+        "shared:baker": {
+          "food_before": 0,
+          "food_after": 0,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 84.0,
+          "fullness_after": 78.0,
+          "energy_before": 55.0,
+          "energy_after": 49.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:carpenter": {
+          "food_before": 2,
+          "food_after": 2,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 70.0,
+          "fullness_after": 64.0,
+          "energy_before": 55.0,
+          "energy_after": 49.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:fisher": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 63.0,
+          "fullness_after": 94.0,
+          "energy_before": 90.0,
+          "energy_after": 84.0,
+          "harvested": 1,
+          "baked": 0,
+          "eaten": 1,
+          "given": 0,
+          "received": 0
+        },
+        "shared:gardener": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 70.0,
+          "fullness_after": 64.0,
+          "energy_before": 55.0,
+          "energy_after": 49.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:healer": {
+          "food_before": 2,
+          "food_after": 2,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 68.0,
+          "fullness_after": 98.0,
+          "energy_before": 55.0,
+          "energy_after": 49.0,
+          "harvested": 1,
+          "baked": 0,
+          "eaten": 1,
+          "given": 0,
+          "received": 0
+        },
+        "shared:herder": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 70.0,
+          "fullness_after": 64.0,
+          "energy_before": 55.0,
+          "energy_after": 49.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:innkeeper": {
+          "food_before": 1,
+          "food_after": 0,
+          "food_delta": -1,
+          "expected_food_delta": -1,
+          "food_balance_residual": 0,
+          "fullness_before": 54.0,
+          "fullness_after": 88.0,
+          "energy_before": 55.0,
+          "energy_after": 49.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 1,
+          "given": 0,
+          "received": 0
+        },
+        "shared:smith": {
+          "food_before": 2,
+          "food_after": 2,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 68.0,
+          "fullness_after": 62.0,
+          "energy_before": 55.0,
+          "energy_after": 49.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:weaver": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 70.0,
+          "fullness_after": 64.0,
+          "energy_before": 79.0,
+          "energy_after": 73.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:well-keeper": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 68.0,
+          "fullness_after": 62.0,
+          "energy_before": 55.0,
+          "energy_after": 49.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        }
+      },
+      "sparse_endpoint_limitation": "endpoint matches do not establish continuous empty inventory or continuous zero fullness"
+    },
+    {
+      "from_seq": 340,
+      "to_seq": 344,
+      "elapsed_seconds": 119.8666666666104,
+      "foraging_produced_delta": 1,
+      "foraging_harvested_delta": 1,
+      "harvest_events": 1,
+      "bread_baked_delta": 0,
+      "eaten_delta": 0,
+      "given_delta": 0,
+      "food_held_delta": 1,
+      "source_stock_delta": 0,
+      "food_conservation_delta": 0,
+      "food_conservation_ok": true,
+      "per_resident_food_balances_match": true,
+      "harvest_counter_matches_events": true,
+      "per_resident": {
+        "shared:baker": {
+          "food_before": 0,
+          "food_after": 1,
+          "food_delta": 1,
+          "expected_food_delta": 1,
+          "food_balance_residual": 0,
+          "fullness_before": 78.0,
+          "fullness_after": 77.0,
+          "energy_before": 49.0,
+          "energy_after": 48.0,
+          "harvested": 1,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:carpenter": {
+          "food_before": 2,
+          "food_after": 2,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 64.0,
+          "fullness_after": 63.0,
+          "energy_before": 49.0,
+          "energy_after": 48.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:fisher": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 94.0,
+          "fullness_after": 93.0,
+          "energy_before": 84.0,
+          "energy_after": 83.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:gardener": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 64.0,
+          "fullness_after": 63.0,
+          "energy_before": 49.0,
+          "energy_after": 48.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:healer": {
+          "food_before": 2,
+          "food_after": 2,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 98.0,
+          "fullness_after": 97.0,
+          "energy_before": 49.0,
+          "energy_after": 48.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:herder": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 64.0,
+          "fullness_after": 63.0,
+          "energy_before": 49.0,
+          "energy_after": 48.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:innkeeper": {
+          "food_before": 0,
+          "food_after": 0,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 88.0,
+          "fullness_after": 87.0,
+          "energy_before": 49.0,
+          "energy_after": 83.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:smith": {
+          "food_before": 2,
+          "food_after": 2,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 62.0,
+          "fullness_after": 61.0,
+          "energy_before": 49.0,
+          "energy_after": 48.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:weaver": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 64.0,
+          "fullness_after": 63.0,
+          "energy_before": 73.0,
+          "energy_after": 72.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:well-keeper": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 62.0,
+          "fullness_after": 61.0,
+          "energy_before": 49.0,
+          "energy_after": 48.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        }
+      },
+      "sparse_endpoint_limitation": "endpoint matches do not establish continuous empty inventory or continuous zero fullness"
+    },
+    {
+      "from_seq": 344,
+      "to_seq": 354,
+      "elapsed_seconds": 899.5166666662444,
+      "foraging_produced_delta": 2,
+      "foraging_harvested_delta": 1,
+      "harvest_events": 1,
+      "bread_baked_delta": 0,
+      "eaten_delta": 3,
+      "given_delta": 0,
+      "food_held_delta": -2,
+      "source_stock_delta": 1,
+      "food_conservation_delta": 0,
+      "food_conservation_ok": true,
+      "per_resident_food_balances_match": true,
+      "harvest_counter_matches_events": true,
+      "per_resident": {
+        "shared:baker": {
+          "food_before": 1,
+          "food_after": 0,
+          "food_delta": -1,
+          "expected_food_delta": -1,
+          "food_balance_residual": 0,
+          "fullness_before": 77.0,
+          "fullness_after": 94.0,
+          "energy_before": 48.0,
+          "energy_after": 75.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 1,
+          "given": 0,
+          "received": 0
+        },
+        "shared:carpenter": {
+          "food_before": 2,
+          "food_after": 2,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 63.0,
+          "fullness_after": 55.0,
+          "energy_before": 48.0,
+          "energy_after": 40.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:fisher": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 93.0,
+          "fullness_after": 85.0,
+          "energy_before": 83.0,
+          "energy_after": 75.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:gardener": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 63.0,
+          "fullness_after": 55.0,
+          "energy_before": 48.0,
+          "energy_after": 40.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:healer": {
+          "food_before": 2,
+          "food_after": 2,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 97.0,
+          "fullness_after": 89.0,
+          "energy_before": 48.0,
+          "energy_after": 75.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:herder": {
+          "food_before": 1,
+          "food_after": 0,
+          "food_delta": -1,
+          "expected_food_delta": -1,
+          "food_balance_residual": 0,
+          "fullness_before": 63.0,
+          "fullness_after": 94.0,
+          "energy_before": 48.0,
+          "energy_after": 40.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 1,
+          "given": 0,
+          "received": 0
+        },
+        "shared:innkeeper": {
+          "food_before": 0,
+          "food_after": 1,
+          "food_delta": 1,
+          "expected_food_delta": 1,
+          "food_balance_residual": 0,
+          "fullness_before": 87.0,
+          "fullness_after": 79.0,
+          "energy_before": 83.0,
+          "energy_after": 75.0,
+          "harvested": 1,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:smith": {
+          "food_before": 2,
+          "food_after": 1,
+          "food_delta": -1,
+          "expected_food_delta": -1,
+          "food_balance_residual": 0,
+          "fullness_before": 61.0,
+          "fullness_after": 93.0,
+          "energy_before": 48.0,
+          "energy_after": 40.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 1,
+          "given": 0,
+          "received": 0
+        },
+        "shared:weaver": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 63.0,
+          "fullness_after": 55.0,
+          "energy_before": 72.0,
+          "energy_after": 64.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        },
+        "shared:well-keeper": {
+          "food_before": 1,
+          "food_after": 1,
+          "food_delta": 0,
+          "expected_food_delta": 0,
+          "food_balance_residual": 0,
+          "fullness_before": 61.0,
+          "fullness_after": 53.0,
+          "energy_before": 48.0,
+          "energy_after": 40.0,
+          "harvested": 0,
+          "baked": 0,
+          "eaten": 0,
+          "given": 0,
+          "received": 0
+        }
+      },
+      "sparse_endpoint_limitation": "endpoint matches do not establish continuous empty inventory or continuous zero fullness"
+    }
+  ],
+  "totals": {
+    "food_conserved_across_snapshots": true,
+    "per_resident_food_balances_match_each_interval": true,
+    "food_conservation_values": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "foraging_conserved_at_each_snapshot": true,
+    "equation": "held food + foraging stock + eaten - foraging produced - bread baked",
+    "produced_by_source": {
+      "foraging": 33,
+      "bread": 0
+    },
+    "harvested": 37,
+    "eaten": 37,
+    "given": 1
+  },
+  "sparse_observation": {
+    "zero_food_endpoint_match_seconds_by_resident": {
+      "shared:well-keeper": 0.0,
+      "shared:baker": 831.3166666662764,
+      "shared:smith": 0.0,
+      "shared:carpenter": 0.0,
+      "shared:innkeeper": 119.8666666666104,
+      "shared:herder": 0.0,
+      "shared:gardener": 0.0,
+      "shared:weaver": 0.0,
+      "shared:fisher": 0.0,
+      "shared:healer": 0.0
+    },
+    "zero_fullness_endpoint_match_seconds_by_resident": {
+      "shared:well-keeper": 0.0,
+      "shared:baker": 0.0,
+      "shared:smith": 0.0,
+      "shared:carpenter": 0.0,
+      "shared:innkeeper": 0.0,
+      "shared:herder": 0.0,
+      "shared:gardener": 0.0,
+      "shared:weaver": 0.0,
+      "shared:fisher": 0.0,
+      "shared:healer": 0.0
+    },
+    "continuous_starvation_proven": false,
+    "continuous_starvation_lower_bound_seconds_by_resident": {
+      "shared:well-keeper": 0.0,
+      "shared:baker": 0.0,
+      "shared:smith": 0.0,
+      "shared:carpenter": 0.0,
+      "shared:innkeeper": 0.0,
+      "shared:herder": 0.0,
+      "shared:gardener": 0.0,
+      "shared:weaver": 0.0,
+      "shared:fisher": 0.0,
+      "shared:healer": 0.0
+    },
+    "fullness_field": "needs.hunger (legacy name; 0 empty, 100 full)",
+    "limitation": "sparse checkpoint endpoints cannot prove continuous starvation or meal clipping"
+  },
+  "theoretical_envelope": {
+    "assumptions": {
+      "active_residents": 10,
+      "satiety_decay_per_resident_tick": 1,
+      "tick_seconds": 120.0,
+      "satiety_per_meal_before_cap": 40.0,
+      "foraging_seconds_per_unit_below_capacity": 450.0,
+      "ignores_meal_clipping": true,
+      "ignores_navigation_decision_latency_and_voluntary_allocation": true
+    },
+    "base_demand_rations_per_hour": 7.5,
+    "theoretical_supply_rations_per_hour": 8.0,
+    "theoretical_margin_rations_per_hour": 0.5,
+    "demand_fraction_of_theoretical_supply": 0.9375
+  },
+  "runtime_observation_limit": {
+    "max_decisions": 12,
+    "decisions_started": 12,
+    "limit_reached": true,
+    "scope": "This is a full-duration, capped-decision continuation. It is not evidence of 900 seconds of unrestricted model admission or a sustainable equilibrium."
+  }
+}
