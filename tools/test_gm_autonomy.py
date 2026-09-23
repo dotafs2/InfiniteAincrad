@@ -326,6 +326,41 @@ class AcknowledgementTests(unittest.TestCase):
             self.assertNotIn(flag, command)
 
 
+class NativeCodexRouteForwardingTests(unittest.TestCase):
+    def test_native_route_is_forwarded_only_to_model_dispatch_commands(self):
+        for subcommand in ('observe', 'code', 'feedback'):
+            with self.subTest(subcommand=subcommand):
+                command = gm_autonomy.runner_command(
+                    {'route': gm_runner.ROUTE_NATIVE_CODEX}, subcommand, '--state-dir', 'state')
+                self.assertEqual(
+                    [command[index + 1] for index, token in enumerate(command)
+                     if token == '--route'], [gm_runner.ROUTE_NATIVE_CODEX])
+        ack = gm_autonomy.runner_command(
+            {'route': gm_runner.ROUTE_NATIVE_CODEX}, 'acknowledge', '--state-dir', 'state')
+        self.assertNotIn('--route', ack)
+
+    def test_default_route_keeps_existing_deepseek_command_shape(self):
+        for route in (None, gm_runner.ROUTE_DEEPSEEK):
+            runner = {} if route is None else {'route': route}
+            for subcommand in ('observe', 'code', 'feedback'):
+                with self.subTest(route=route, subcommand=subcommand):
+                    command = gm_autonomy.runner_command(runner, subcommand, '--state-dir', 'state')
+                    self.assertNotIn('--route', command)
+
+    def test_cycle_watch_and_observe_recovery_accept_route_with_deepseek_default(self):
+        parser = gm_autonomy.build_parser()
+        for subcommand in ('cycle', 'watch', 'recover-observe'):
+            with self.subTest(subcommand=subcommand):
+                required = ['--policy', 'policy.json']
+                if subcommand == 'recover-observe':
+                    required += ['--cycle', 'cycle-01']
+                default = parser.parse_args([subcommand, *required])
+                native = parser.parse_args([subcommand, *required,
+                                            '--route', gm_runner.ROUTE_NATIVE_CODEX])
+                self.assertEqual(default.route, gm_runner.ROUTE_DEEPSEEK)
+                self.assertEqual(native.route, gm_runner.ROUTE_NATIVE_CODEX)
+
+
 class ObserveCliTests(unittest.TestCase):
     def test_autonomy_policy_and_investigation_file_are_mutually_exclusive(self):
         if not ACCEPTED_EVIDENCE.is_file():
@@ -2497,6 +2532,14 @@ class SelectedGmObserveTests(CorrectionBase):
         self.assertTrue(seen, 'the default observe dispatch still runs')
         self.assertEqual(self._flags(seen['command'], '--gm'), [])
         self.assertEqual(self._flags(seen['command'], '--max-gms'), [maximum])
+
+    def test_native_route_reaches_the_nested_observe_dispatch_without_deepseek_config(self):
+        cycle = self._cycle(['gm-04'], {'route': gm_runner.ROUTE_NATIVE_CODEX})
+        seen = self._dispatch(cycle)
+        self.assertEqual(self._flags(seen['command'], '--route'),
+                         [gm_runner.ROUTE_NATIVE_CODEX])
+        for flag in ('--config', '--key-file'):
+            self.assertNotIn(flag, seen['command'])
 
     def test_cycle_prompt_limit_reaches_the_actual_nested_observe_command(self):
         cycle = self._cycle(['gm-04'], {'max_prompt_bytes': 64000})

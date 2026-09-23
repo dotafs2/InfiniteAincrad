@@ -515,6 +515,9 @@ def last_json_line(text: str):
 def runner_command(runner: dict, subcommand: str, *args) -> list:
     command = [sys.executable, str(ROOT / 'tools' / 'gm_runner.py'), subcommand]
     if subcommand in ('observe', 'code', 'feedback'):
+        route = runner.get('route', gm_runner.ROUTE_DEEPSEEK)
+        if route != gm_runner.ROUTE_DEEPSEEK:
+            command += ['--route', str(route)]
         for name in ('config', 'key_file', 'codex', 'codex_home'):
             if runner.get(name):
                 command += ['--' + name.replace('_', '-'), str(runner[name])]
@@ -2949,6 +2952,7 @@ def command_cycle(args) -> int:
     runner = {key: value for key, value in
               {'config': args.config, 'key_file': args.key_file, 'codex': args.codex,
                'codex_home': args.codex_home, 'timeout': args.timeout,
+               'route': getattr(args, 'route', gm_runner.ROUTE_DEEPSEEK),
                'max_prompt_bytes': max_prompt_bytes}.items() if value is not None}
     cycle = Cycle(policy_path, policy, runner, args.stop_after, selected_gms=selected,
                   review_path=getattr(args, 'review_file', None),
@@ -3367,7 +3371,8 @@ def command_watch(args) -> int:
                                  'bound instead of guessing one', USAGE)
     runner = {key: value for key, value in
               {'config': args.config, 'key_file': args.key_file, 'codex': args.codex,
-               'codex_home': args.codex_home, 'timeout': args.timeout}.items() if value}
+               'codex_home': args.codex_home, 'timeout': args.timeout,
+               'route': getattr(args, 'route', gm_runner.ROUTE_DEEPSEEK)}.items() if value}
     probe = Cycle(policy_path, policy, runner, None, allow_deferred_advance=True)
     state_dir = probe.state_dir
     declared = resolve_path((policy_values(policy)['paths'] or {}).get('state_dir'))
@@ -3559,7 +3564,8 @@ def command_recover_observe(args) -> int:
         return gm_runner.refusal('autonomy_policy_invalid', str(error), USAGE)
     runner = {key: value for key, value in
               {'config': args.config, 'key_file': args.key_file, 'codex': args.codex,
-               'codex_home': args.codex_home, 'timeout': args.timeout}.items() if value}
+               'codex_home': args.codex_home, 'timeout': args.timeout,
+               'route': getattr(args, 'route', gm_runner.ROUTE_DEEPSEEK)}.items() if value}
     cycle = Cycle(policy_path, policy, runner, None)
     try:
         result = recover_observe_cycle(cycle, args.cycle)
@@ -4079,6 +4085,11 @@ def build_parser() -> argparse.ArgumentParser:
     cycle_parser.add_argument('--reopen-major-block', action='store_true',
                               help='start a new GM candidate after a concrete main-AI major block')
     cycle_parser.add_argument('--config', type=Path, help='passed through to gm_runner')
+    cycle_parser.add_argument('--route', choices=(gm_runner.ROUTE_DEEPSEEK,
+                                                  gm_runner.ROUTE_NATIVE_CODEX),
+                              default=gm_runner.ROUTE_DEEPSEEK,
+                              help='GM model route passed through to observe, code and feedback; '
+                                   'DeepSeek remains the default')
     cycle_parser.add_argument('--key-file', type=Path)
     cycle_parser.add_argument('--codex', help='passed through to gm_runner (tests inject a fake)')
     cycle_parser.add_argument('--codex-home', type=Path)
@@ -4105,6 +4116,11 @@ def build_parser() -> argparse.ArgumentParser:
     watch_parser.add_argument('--interval', type=float, default=5.0)
     watch_parser.add_argument('--reset-watch-budget', action='store_true')
     watch_parser.add_argument('--config', type=Path)
+    watch_parser.add_argument('--route', choices=(gm_runner.ROUTE_DEEPSEEK,
+                                                 gm_runner.ROUTE_NATIVE_CODEX),
+                              default=gm_runner.ROUTE_DEEPSEEK,
+                              help='GM model route passed through to observe, code and feedback; '
+                                   'DeepSeek remains the default')
     watch_parser.add_argument('--key-file', type=Path)
     watch_parser.add_argument('--codex')
     watch_parser.add_argument('--codex-home', type=Path)
@@ -4130,6 +4146,11 @@ def build_parser() -> argparse.ArgumentParser:
     recover_parser.add_argument('--cycle', required=True,
                                 help='the blocked autonomy cycle directory name to recover')
     recover_parser.add_argument('--config', type=Path)
+    recover_parser.add_argument('--route', choices=(gm_runner.ROUTE_DEEPSEEK,
+                                                   gm_runner.ROUTE_NATIVE_CODEX),
+                                default=gm_runner.ROUTE_DEEPSEEK,
+                                help='GM model route for any resumed model stage; '
+                                     'DeepSeek remains the default')
     recover_parser.add_argument('--key-file', type=Path)
     recover_parser.add_argument('--codex')
     recover_parser.add_argument('--codex-home', type=Path)
