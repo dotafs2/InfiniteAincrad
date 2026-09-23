@@ -1,0 +1,392 @@
+{
+  "schema_version": 1,
+  "kind": "host_implementation_and_live_observation_receipt",
+  "created_at_utc": "2026-09-23T17:52:52.024338+00:00",
+  "world_id": "shared:restart-20260918-01",
+  "gm_id": "gm-08",
+  "issue_id": "issue-d71da0931f5a",
+  "investigation_origin": "supervisor_specified_reproducible_scheduling_gap",
+  "candidate_run_id": "code-20260923T173538Z-058b99",
+  "host_review": {
+    "issue_id": "issue-d71da0931f5a",
+    "owner_gm": "gm-08",
+    "world_id": "shared:restart-20260918-01",
+    "source_checkpoint_sha256": "ec40bbbcb064f854b4a0d957f8baefe93ec09b16942f7f7d2265bf0e4b476951",
+    "candidate_run": "code-20260923T173538Z-058b99",
+    "files": [
+      {
+        "path": "game/agents/town_turns.gd",
+        "before_sha256": "34c1f3bde3b3cca289a957bb536d8f3715f3ae450e3851a15e3e4cfa91fa4fbf",
+        "after_sha256": "d9d4952aadeb4584492b73120c38c1513e795004ac5b1c2f8dd5640ed7a8ae11",
+        "candidate_sha256": "d9d4952aadeb4584492b73120c38c1513e795004ac5b1c2f8dd5640ed7a8ae11"
+      },
+      {
+        "path": "game/tests/town_need_transition_wake_acceptance.gd",
+        "before_sha256": "5d3904b96cb5aae399231c1e824268b68ae9e0250a14f0115c258e10bd79171c",
+        "after_sha256": "d2253d3bc030fde5411012405837fd232a79968dfbd0e8e46bf57bb37df04757",
+        "candidate_sha256": "d2253d3bc030fde5411012405837fd232a79968dfbd0e8e46bf57bb37df04757"
+      }
+    ],
+    "status": "host_reviewed_accepted_and_integrated",
+    "reviewed_at_utc": "2026-09-23T17:42:56.812098+00:00",
+    "reviewer": "main_agent",
+    "source_diff_review": "Only the existing eat-ration option newly appearing against a valid previously offered menu adds a voluntary due reason; earlier admission/review/concurrency/pending gates are unchanged.",
+    "runtime_tests": [
+      {
+        "suite": "town_need_transition_wake_acceptance",
+        "checks": 16,
+        "failures": 0,
+        "paid_calls": 0
+      },
+      {
+        "suite": "town_self_repair_first_offer_wake_acceptance",
+        "checks": 42,
+        "failures": 0,
+        "paid_calls": 0
+      },
+      {
+        "suite": "town_shutdown_acceptance",
+        "checks": 75,
+        "failures": 0,
+        "paid_calls": 0
+      }
+    ],
+    "live_effect_status": "not_yet_observed",
+    "limitation": "Controlled runtime acceptance passes; a natural live needs-transition wake is not yet observed. No starvation or automatic eating claim.",
+    "independent_review": {
+      "agent": "adventure_audit",
+      "model": "gpt-6-luna",
+      "correctness_blockers": 0,
+      "note": "Acknowledgement and guard order reviewed; incremental per-frame menu cost is unmeasured, not a blocker. Pending world-job/max-parallel gates remain unchanged."
+    },
+    "host_adjustments": [
+      {
+        "path": "game/tests/town_need_transition_wake_acceptance.gd",
+        "change": "Correct only the stale diagnostic status label after the regression passes.",
+        "sha256": "1265a8cddd10458ef9ba18fdcfc8eccee86a9da620c97c6e18085670db7889cb"
+      }
+    ]
+  },
+  "installed_files": [
+    {
+      "path": "game/agents/town_turns.gd",
+      "sha256": "d9d4952aadeb4584492b73120c38c1513e795004ac5b1c2f8dd5640ed7a8ae11"
+    },
+    {
+      "path": "game/tests/town_need_transition_wake_acceptance.gd",
+      "sha256": "1265a8cddd10458ef9ba18fdcfc8eccee86a9da620c97c6e18085670db7889cb"
+    }
+  ],
+  "live_observation": {
+    "from_seq": 340,
+    "to_seq": 344,
+    "checkpoint_sha256": "0e13bfddcb4918baf1e9f49d3177791092bb55871cf3f064947414e78bbce3e8",
+    "source_and_test_integrated_before_real_world_run": true,
+    "validation_passed": true,
+    "engine_exit": 0,
+    "requested_simulated_seconds": 120,
+    "world_elapsed_delta": 119.86666666660494,
+    "new_settled_calls": 4,
+    "new_cost_cny": 0.0882086,
+    "gateway_shutdown": {
+      "intake_closed": true,
+      "workers_accepted": 8,
+      "workers_in_flight": false,
+      "drained_complete": true,
+      "unresolved_workers": 0,
+      "unresolved_operations": [],
+      "workers_pending_at_engine_exit": 0,
+      "operations_pending_at_engine_exit": [],
+      "engine_exited_with_workers_pending": false,
+      "refused_connections": 0,
+      "worker_start_failures": 0,
+      "drain_grace_seconds": 40.0,
+      "drain_error": ""
+    },
+    "pending_world_jobs": 0,
+    "resident_controllers": "all_ten_settled",
+    "exact_nested_cold_restore": "passed",
+    "resident_decisions": [
+      {
+        "resident_id": "shared:baker",
+        "name": "Wren",
+        "decisions": [
+          {
+            "request_id": "turn:shared:baker:0:24",
+            "provider": "opengameagent_live",
+            "model_returned": true,
+            "decision": {
+              "action": "a2",
+              "reason": "My food is 0 and satiety is 78, which will drop. I need to secure food before it becomes urgent. harvest_ration lets me attempt to reach the public foraging point to gather sustenance."
+            },
+            "resolved_action": "life:harvest_ration",
+            "stated_reason": "My food is 0 and satiety is 78, which will drop. I need to secure food before it becomes urgent. harvest_ration lets me attempt to reach the public foraging point to gather sustenance.",
+            "proposed_speech": "",
+            "actually_spoken": null,
+            "speech_event_seq": null,
+            "recipients": [],
+            "application": {
+              "status": "settled",
+              "code": "action_started",
+              "effect": {
+                "ok": true,
+                "code": "action_started"
+              },
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "no_dialogue"
+              }
+            },
+            "later_events": [
+              {
+                "event_id": "life_event_343",
+                "seq": 343,
+                "type": "harvest_ration",
+                "actor_id": "shared:baker",
+                "subject_id": "shared:baker",
+                "recipient_ids": [
+                  "shared:baker"
+                ],
+                "operation_id": "turn:shared:baker:0:24",
+                "source": "opengameagent_live",
+                "text": "Wren: harvest_ration (Godot continuation, opengameagent_live)"
+              }
+            ],
+            "current_command_status": "completed",
+            "current_trade_command_status": "completed",
+            "module_command_status": {
+              "materials": null,
+              "baking": null,
+              "places": null,
+              "capabilities": null
+            },
+            "shared_plans": [],
+            "replay_count": 0,
+            "complete_archive": true,
+            "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+          }
+        ]
+      },
+      {
+        "resident_id": "shared:smith",
+        "name": "Flint",
+        "decisions": [
+          {
+            "request_id": "turn:shared:smith:0:42",
+            "provider": "opengameagent_live",
+            "model_returned": true,
+            "decision": {
+              "action": "a20",
+              "reason": "Rowan and I have been circling the same topic. I need to hear clearly what tool and part needs repair, and whether he wants to make a contract. Direct talk is the fastest way to settle terms or end the confusion.",
+              "speech": "Rowan. You said other edges. I'm still waiting: name the tool, name the part, and say if you're offering a contract. Without that, I can't do anything."
+            },
+            "resolved_action": "ability:talk:shared:carpenter",
+            "stated_reason": "Rowan and I have been circling the same topic. I need to hear clearly what tool and part needs repair, and whether he wants to make a contract. Direct talk is the fastest way to settle terms or end the confusion.",
+            "proposed_speech": "Rowan. You said other edges. I'm still waiting: name the tool, name the part, and say if you're offering a contract. Without that, I can't do anything.",
+            "actually_spoken": "Rowan. You said other edges. I'm still waiting: name the tool, name the part, and say if you're offering a contract. Without that, I can't do anything.",
+            "speech_event_seq": 341,
+            "recipients": [
+              "shared:smith",
+              "shared:carpenter"
+            ],
+            "application": {
+              "status": "settled",
+              "code": "resident_said",
+              "effect": {
+                "ok": true,
+                "code": "resident_said",
+                "event_id": "life_event_341"
+              },
+              "speech_delivery": {
+                "attempted": true,
+                "delivered": true,
+                "code": "speech_delivered",
+                "text": "Rowan. You said other edges. I'm still waiting: name the tool, name the part, and say if you're offering a contract. Without that, I can't do anything.",
+                "event_id": "life_event_341",
+                "event_seq": 341,
+                "recipient_ids": [
+                  "shared:smith",
+                  "shared:carpenter"
+                ]
+              }
+            },
+            "later_events": [
+              {
+                "type": "resident_said",
+                "actor_id": "shared:smith",
+                "subject_id": "shared:carpenter",
+                "recipient_ids": [
+                  "shared:smith",
+                  "shared:carpenter"
+                ],
+                "operation_id": "turn:shared:smith:0:42",
+                "source": "opengameagent_live",
+                "provenance": "opengameagent_live",
+                "text": "Rowan. You said other edges. I'm still waiting: name the tool, name the part, and say if you're offering a contract. Without that, I can't do anything.",
+                "contractual": false,
+                "epistemic_status": "speaker_statement_not_verified_world_fact",
+                "seq": 341,
+                "event_id": "life_event_341"
+              }
+            ],
+            "current_command_status": null,
+            "current_trade_command_status": null,
+            "module_command_status": {
+              "materials": null,
+              "baking": null,
+              "places": null,
+              "capabilities": "completed"
+            },
+            "shared_plans": [],
+            "replay_count": 0,
+            "complete_archive": true,
+            "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+          }
+        ]
+      },
+      {
+        "resident_id": "shared:carpenter",
+        "name": "Rowan",
+        "decisions": [
+          {
+            "request_id": "turn:shared:carpenter:0:46",
+            "provider": "opengameagent_live",
+            "model_returned": true,
+            "decision": {
+              "action": "a23",
+              "reason": "Flint has twice asked about other dull edges and I once invited him to discuss specifics. He still hasn't named the tool or part. I want to hear the details before agreeing to any repair, and talking is the direct way to get that clarity.",
+              "speech": "Flint, you keep asking about edges, but I still don't know which tool or which part. If you name it, I can tell you whether it's work I can take on and what the terms would be."
+            },
+            "resolved_action": "ability:talk:shared:smith",
+            "stated_reason": "Flint has twice asked about other dull edges and I once invited him to discuss specifics. He still hasn't named the tool or part. I want to hear the details before agreeing to any repair, and talking is the direct way to get that clarity.",
+            "proposed_speech": "Flint, you keep asking about edges, but I still don't know which tool or which part. If you name it, I can tell you whether it's work I can take on and what the terms would be.",
+            "actually_spoken": "Flint, you keep asking about edges, but I still don't know which tool or which part. If you name it, I can tell you whether it's work I can take on and what the terms would be.",
+            "speech_event_seq": 342,
+            "recipients": [
+              "shared:carpenter",
+              "shared:smith"
+            ],
+            "application": {
+              "status": "settled",
+              "code": "resident_said",
+              "effect": {
+                "ok": true,
+                "code": "resident_said",
+                "event_id": "life_event_342"
+              },
+              "speech_delivery": {
+                "attempted": true,
+                "delivered": true,
+                "code": "speech_delivered",
+                "text": "Flint, you keep asking about edges, but I still don't know which tool or which part. If you name it, I can tell you whether it's work I can take on and what the terms would be.",
+                "event_id": "life_event_342",
+                "event_seq": 342,
+                "recipient_ids": [
+                  "shared:carpenter",
+                  "shared:smith"
+                ]
+              }
+            },
+            "later_events": [
+              {
+                "type": "resident_said",
+                "actor_id": "shared:carpenter",
+                "subject_id": "shared:smith",
+                "recipient_ids": [
+                  "shared:carpenter",
+                  "shared:smith"
+                ],
+                "operation_id": "turn:shared:carpenter:0:46",
+                "source": "opengameagent_live",
+                "provenance": "opengameagent_live",
+                "text": "Flint, you keep asking about edges, but I still don't know which tool or which part. If you name it, I can tell you whether it's work I can take on and what the terms would be.",
+                "contractual": false,
+                "epistemic_status": "speaker_statement_not_verified_world_fact",
+                "seq": 342,
+                "event_id": "life_event_342"
+              }
+            ],
+            "current_command_status": null,
+            "current_trade_command_status": null,
+            "module_command_status": {
+              "materials": null,
+              "baking": null,
+              "places": null,
+              "capabilities": "completed"
+            },
+            "shared_plans": [],
+            "replay_count": 0,
+            "complete_archive": true,
+            "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+          }
+        ]
+      },
+      {
+        "resident_id": "shared:innkeeper",
+        "name": "Mara",
+        "decisions": [
+          {
+            "request_id": "turn:shared:innkeeper:1:32",
+            "provider": "opengameagent_live",
+            "model_returned": true,
+            "decision": {
+              "action": "a1",
+              "reason": "My energy is at 48, which is not zero, but it is low enough that resting now will let me recover stamina before I seek company or work. I have no food to eat, and no urgent survival need demands immediate action. Rest is the prudent step."
+            },
+            "resolved_action": "life:rest",
+            "stated_reason": "My energy is at 48, which is not zero, but it is low enough that resting now will let me recover stamina before I seek company or work. I have no food to eat, and no urgent survival need demands immediate action. Rest is the prudent step.",
+            "proposed_speech": "",
+            "actually_spoken": null,
+            "speech_event_seq": null,
+            "recipients": [],
+            "application": {
+              "status": "settled",
+              "code": "action_started",
+              "effect": {
+                "ok": true,
+                "code": "action_started"
+              },
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "no_dialogue"
+              }
+            },
+            "later_events": [
+              {
+                "event_id": "life_event_344",
+                "seq": 344,
+                "type": "rest",
+                "actor_id": "shared:innkeeper",
+                "subject_id": "shared:innkeeper",
+                "recipient_ids": [
+                  "shared:innkeeper"
+                ],
+                "operation_id": "turn:shared:innkeeper:1:32",
+                "source": "opengameagent_live",
+                "text": "Mara: rest (Godot continuation, opengameagent_live)"
+              }
+            ],
+            "current_command_status": "completed",
+            "current_trade_command_status": "completed",
+            "module_command_status": {
+              "materials": null,
+              "baking": null,
+              "places": null,
+              "capabilities": null
+            },
+            "shared_plans": [],
+            "replay_count": 0,
+            "complete_archive": true,
+            "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+          }
+        ]
+      }
+    ],
+    "targeted_natural_new_eat_offer_wake": "not_yet_observed"
+  },
+  "honest_scope": "The candidate was independently reviewed, integrated, passed focused host runtime tests, and ran in the same maintained world during a clean normal continuation. The new eat-offer wake itself is demonstrated by the controlled regression, not yet by a causally isolated natural resident turn. Residents remain free to wait or choose another action. This is a host-specified scheduling issue, not a spontaneous resident request or a starvation claim.",
+  "prior_failed_episode_retained": "The earlier 900-second requested episode ended externally after 831.3167 world seconds, before final capture. Its saved progress and failed outcome remain; the clean later 120-second run does not retroactively pass it.",
+  "requested_feedback": "Acknowledge this exact receipt; assess the accepted implementation and bounded actual evidence. Keep sustainable food supply and natural resident effects open. Do not claim adoption, spontaneous demand, whole-project completion, or zero unknown historical fees."
+}

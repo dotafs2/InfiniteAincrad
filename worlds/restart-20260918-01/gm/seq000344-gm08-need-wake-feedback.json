@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "world_id": "shared:restart-20260918-01",
+  "issue_id": "issue-d71da0931f5a",
+  "host_receipt_file": "seq000344-gm08-need-wake-host-receipt.json",
+  "host_receipt_sha256": "8c90dcca08523b66941d0fc8048bbe03fb42c7ff65152a2b9b474a109eb9ada7",
+  "feedback": {
+    "acknowledged": true,
+    "cost": "measured",
+    "decision": "accept",
+    "effect_review_consumed": null,
+    "gm_id": "gm-08",
+    "model": "gpt-6-luna",
+    "next_work": "Keep the eat-offer wake implementation accepted; continue observing for a causally isolated natural wake and sustainable food supply without treating the current run as proof of either.",
+    "protected_paths_changed": [],
+    "receipt_sha256": "8c90dcca08523b66941d0fc8048bbe03fb42c7ff65152a2b9b474a109eb9ada7",
+    "repair_requested_issue": null,
+    "route": "native-codex",
+    "run_id": "feedback-20260923T175305Z-665cb1",
+    "status": "ok",
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 3840,
+      "input_tokens": 55601,
+      "output_tokens": 159,
+      "reasoning_output_tokens": 0
+    },
+    "usage_measured": true
+  },
+  "currency_charge": null,
+  "currency_charge_status": "unpriced_not_zero",
+  "scope": "Host-specified scheduling issue; source reviewed and integrated; controlled wake and ordinary live continuation passed; natural targeted effect remains open."
+}

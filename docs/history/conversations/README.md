@@ -4,6 +4,7 @@ Use [HISTORY.md](../../../HISTORY.md) for project findings and [ROADMAP.md](../.
 
 | Task | Original conversation | Verification | Continue |
 | --- | --- | --- | --- |
+| 2026-09-24: latest-code continuation, Luna implementation and hourly direction reviews | [Chronological Markdown](2026-09-24-01a0cf13/conversation.md) · [Structured messages](2026-09-24-01a0cf13/conversation.json) | [Scope, counts and SHA-256](2026-09-24-01a0cf13/manifest.json) | [Current handoff](2026-09-24-01a0cf13/CONTINUE.md) |
 | 2026-09-18: local intake, offline fixes, workflow rehearsal, English rollout, rich NPC dossiers, the fresh resident world and reusable capabilities | [Chronological Markdown](2026-09-18-01a0b299/conversation.md) · [Structured messages](2026-09-18-01a0b299/conversation.json) | [Scope, counts and SHA-256](2026-09-18-01a0b299/manifest.json) | [Current handoff](2026-09-18-01a0b299/CONTINUE.md) |
 | 2026-09-18 onward: current continuation, H120–H122 live work and publication | [Chronological Markdown](2026-09-18-01a0b0b1/conversation.md) · [Structured messages](2026-09-18-01a0b0b1/conversation.json) | [Scope, counts and SHA-256](2026-09-18-01a0b0b1/manifest.json) | [Current handoff](2026-09-18-01a0b0b1/CONTINUE.md) |
 | 2026-09-20: navigation MVP, third-person route preview and video capture | [Chronological Markdown](2026-09-20-01a0bdf9/conversation.md) · [Structured messages](2026-09-20-01a0bdf9/conversation.json) | [Scope, counts and SHA-256](2026-09-20-01a0bdf9/manifest.json) | [Current handoff](2026-09-20-01a0bdf9/CONTINUE.md) |
