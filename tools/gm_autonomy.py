@@ -491,6 +491,15 @@ def run_process(command: list, timeout: int, cwd: Path = ROOT, deadline=None) ->
     outcome.setdefault('observed_nonzero_member_exits',
                        [{'pid': item.get('pid'), 'exit_code': item.get('exit_code')}
                         for item in nested])
+    # Job accounting knows the cumulative assigned count, but an exited short-lived
+    # process can disappear before its PID/exit code is observed. Never certify the
+    # aggregate host command as green in that ambiguous case; keep the wrapper result
+    # authoritative for runner receipts and report the aggregate as unknown.
+    if (outcome.get('wrapper_exit_code') == 0 and not nested
+            and (outcome.get('owned') or {}).get('member_identity_list_complete') is False):
+        outcome['exit_code'] = None
+        outcome['ownership_incomplete'] = True
+        outcome['ownership_incomplete_reason'] = 'assigned_process_identity_not_observed'
     outcome['seconds'] = round(time.time() - started, 3)
     return outcome
 
@@ -2511,10 +2520,18 @@ class Cycle:
             return self.block(cycle, 'feedback_unknown_usage_stops_dispatch', ACCOUNTING)
         # Transport, guard, receipt binding and measured usage must all pass before an
         # acknowledgement, decision or next_work is accepted as a real owner response.
-        if result['exit_code'] != 0 or (summary or {}).get('status') != 'ok':
+        owned = result.get('owned') or {}
+        # The command's wrapper owns the GM feedback receipt. A nested probe's nonzero exit is
+        # retained as evidence but cannot invalidate an acknowledged, measured runner result.
+        # Windows job containment must also confirm the entire job has drained.
+        members_drained = (owned.get('all_members_exited') is True
+                           if owned.get('containment') == 'windows_kill_on_close_job' else True)
+        if (result.get('wrapper_exit_code', result['exit_code']) != 0 or not members_drained
+                or (summary or {}).get('status') != 'ok'):
             record['status'] = 'failed'
             record['reason'] = ('the feedback transport exited with code '
-                                + str(result['exit_code']) + ' and status '
+                                + str(result.get('wrapper_exit_code', result['exit_code']))
+                                + ' and status '
                                 + str((summary or {}).get('status'))
                                 + '; its acknowledgement is not accepted')
             self.save_cycle(cycle)

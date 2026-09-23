@@ -908,6 +908,33 @@ class ScopeSelectionTests(CorrectionBase):
 
 
 class OwnedProcessTests(unittest.TestCase):
+    def test_incomplete_short_lived_member_is_unknown_not_green(self):
+        class FakeTree:
+            def __init__(self, *args, **kwargs):
+                self.process = SimpleNamespace(pid=4242, stdout=io.StringIO(''),
+                                               stderr=io.StringIO(''))
+
+            def wait(self, timeout):
+                return 0
+
+            def snapshot(self):
+                return {'containment': 'windows_kill_on_close_job', 'wrapper_pid': 4242,
+                        'observed_members': [{'pid': 4242, 'running': False, 'exit_code': 0}],
+                        'total_assigned_processes': 2, 'active_processes': 0,
+                        'all_members_exited': True, 'member_identity_list_complete': False}
+
+            def close(self):
+                pass
+
+        with mock.patch.object(gm_autonomy, 'os', SimpleNamespace(name='nt')):
+            with mock.patch.object(gm_autonomy.owned_windows_job, 'WindowsProcessTree', FakeTree):
+                outcome = gm_autonomy.run_process(['stub'], 5)
+        self.assertEqual(outcome['wrapper_exit_code'], 0)
+        self.assertIsNone(outcome['exit_code'])
+        self.assertTrue(outcome['ownership_incomplete'])
+        self.assertEqual(outcome['observed_nonzero_member_exits'], [])
+        self.assertTrue(outcome['owned']['all_members_exited'])
+
     def test_child_and_grandchild_are_cleaned_up_on_timeout(self):
         if os.name != 'nt':
             self.skipTest('windows job containment')
@@ -1096,9 +1123,14 @@ class ObserveExitProvenanceTests(CorrectionBase):
                           'print("wrapper ok", flush=True)\n', encoding='utf-8')
         outcome = gm_autonomy.run_process([sys.executable, str(script)], 60)
         self.assertEqual(outcome['wrapper_exit_code'], 0, outcome['owned'])
-        self.assertNotEqual(outcome['exit_code'], 0,
-                            'a host test command still fails on its own hidden child failure')
-        self.assertTrue(outcome['observed_nonzero_member_exits'], outcome['owned'])
+        if outcome['observed_nonzero_member_exits']:
+            self.assertNotEqual(outcome['exit_code'], 0,
+                                'an observed hidden child failure must fail host acceptance')
+        elif not outcome['owned']['member_identity_list_complete']:
+            self.assertIsNone(outcome['exit_code'], outcome['owned'])
+            self.assertTrue(outcome['ownership_incomplete'], outcome['owned'])
+        else:
+            self.fail('the hidden child exited nonzero but no nonzero identity was observed')
         self.assertTrue(outcome['owned']['all_members_exited'])
 
 
@@ -2038,7 +2070,8 @@ class RepairLoopTests(CorrectionBase):
         self.assertEqual(resumed['repair_history'][0]['previous_stages']['verify']['status'],
                          'failed')
 
-    def stage_feedback_with(self, cycle, mutate=None, exit_code=0, timeout=False):
+    def stage_feedback_with(self, cycle, mutate=None, exit_code=0, timeout=False,
+                            wrapper_exit_code=None, owned=None):
         # These cases test the host's evaluation of one transport answer, so the feedback stage
         # starts pending even when the caller built a cycle that already carries an acknowledgement.
         cycle['stages']['feedback'] = {'status': 'pending'}
@@ -2051,8 +2084,12 @@ class RepairLoopTests(CorrectionBase):
                        'receipt_sha256': gm_runner.sha256_file(Path(command[index + 1]))}
             if mutate:
                 mutate(summary)
-            return {'exit_code': exit_code, 'timed_out': timeout, 'seconds': 0.01,
-                    'owned': {'all_members_exited': True}, 'stdout': json.dumps(summary) + '\n',
+            return {'exit_code': exit_code,
+                    'wrapper_exit_code': (exit_code if wrapper_exit_code is None
+                                          else wrapper_exit_code),
+                    'timed_out': timeout, 'seconds': 0.01,
+                    'owned': (owned if owned is not None else {'all_members_exited': True}),
+                    'stdout': json.dumps(summary) + '\n',
                     'stderr': ''}
         original = gm_autonomy.run_process
         gm_autonomy.run_process = fake
@@ -2100,6 +2137,26 @@ class RepairLoopTests(CorrectionBase):
         self.assertEqual(cycle['feedback_attempts_total'], 1)
         self.assertTrue(self.cycle.advance_repair(cycle))
         self.assertEqual(cycle['repair_rounds'], 1)
+
+    def test_feedback_uses_runner_receipt_not_nested_probe_exit(self):
+        windows_drained = {'containment': 'windows_kill_on_close_job',
+                           'all_members_exited': True, 'active_processes': 0}
+        cycle = self.repair_ready_cycle()
+        self.assertEqual(self.stage_feedback_with(
+            cycle, exit_code=1, wrapper_exit_code=0, owned=windows_drained), gm_autonomy.OK)
+        self.assertEqual(cycle['stages']['feedback']['status'], 'done')
+
+        cycle = self.repair_ready_cycle()
+        windows_live = dict(windows_drained, all_members_exited=False, active_processes=1)
+        self.assertEqual(self.stage_feedback_with(
+            cycle, exit_code=0, wrapper_exit_code=0, owned=windows_live), gm_autonomy.RUNTIME)
+
+        # POSIX cannot report a Windows-job member census. Keep that field unknown while using
+        # the completed wrapper's structured receipt, as before.
+        cycle = self.repair_ready_cycle()
+        posix_unknown = {'containment': 'not_windows_job', 'all_members_exited': None}
+        self.assertEqual(self.stage_feedback_with(
+            cycle, wrapper_exit_code=0, owned=posix_unknown), gm_autonomy.OK)
 
     def test_the_feedback_attempt_bound_is_cumulative_not_per_round(self):
         self.cycle.limits['max_feedback_attempts'] = 1
