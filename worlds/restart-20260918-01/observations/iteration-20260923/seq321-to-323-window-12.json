@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 321,
+  "end_seq": 323,
+  "elapsed_seconds": 13201.349999996519,
+  "decision_count": 1,
+  "residents": [
+    {
+      "resident_id": "shared:well-keeper",
+      "name": "Ari",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:baker",
+      "name": "Wren",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:smith",
+      "name": "Flint",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:carpenter",
+      "name": "Rowan",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:innkeeper",
+      "name": "Mara",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:herder",
+      "name": "Heath",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:gardener",
+      "name": "Fern",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:weaver",
+      "name": "Iris",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:fisher",
+      "name": "Reed",
+      "decisions": [
+        {
+          "request_id": "turn:shared:fisher:0:22",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "Satiety is 64 and food is 0, so I need to forage. harvest_ration lets me try the public foraging point. Energy at 91 is fine."
+          },
+          "resolved_action": "life:harvest_ration",
+          "stated_reason": "Satiety is 64 and food is 0, so I need to forage. harvest_ration lets me try the public foraging point. Energy at 91 is fine.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_323",
+              "seq": 323,
+              "type": "harvest_ration",
+              "actor_id": "shared:fisher",
+              "subject_id": "shared:fisher",
+              "recipient_ids": [
+                "shared:fisher"
+              ],
+              "operation_id": "turn:shared:fisher:0:22",
+              "source": "opengameagent_live",
+              "text": "Reed: harvest_ration (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:healer",
+      "name": "Sage",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    }
+  ],
+  "new_world_events": [
+    {
+      "event_id": "life_event_322",
+      "seq": 322,
+      "type": "rest",
+      "actor_id": "shared:fisher",
+      "subject_id": "shared:fisher",
+      "recipient_ids": [
+        "shared:fisher"
+      ],
+      "operation_id": "turn:shared:fisher:0:21",
+      "source": "opengameagent_live",
+      "text": "Reed: rest (Godot continuation, opengameagent_live)"
+    },
+    {
+      "event_id": "life_event_323",
+      "seq": 323,
+      "type": "harvest_ration",
+      "actor_id": "shared:fisher",
+      "subject_id": "shared:fisher",
+      "recipient_ids": [
+        "shared:fisher"
+      ],
+      "operation_id": "turn:shared:fisher:0:22",
+      "source": "opengameagent_live",
+      "text": "Reed: harvest_ration (Godot continuation, opengameagent_live)"
+    }
+  ],
+  "limitation": "No decisions or speech are inferred from a personality profile. A pending provider request has no known decision."
+}

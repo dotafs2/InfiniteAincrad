@@ -1,0 +1,21 @@
+{
+  "kind": "adventure_workstation_route_probe",
+  "probe_date": "2026-09-23",
+  "world_id": "shared:restart-20260918-01",
+  "source_seq": 323,
+  "disposable_copy_sha256_before": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "disposable_copy_sha256_after": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "checks": 14,
+  "failures": 0,
+  "navigation_bake_status": "ready",
+  "routes": {
+    "market_to_gate": {"arrived": true, "frames": 1005, "metres": 22.57},
+    "gate_to_market": {"arrived": true, "frames": 1006, "metres": 22.61},
+    "field_to_market": {"arrived": true, "frames": 1047, "metres": 23.03},
+    "field_to_trough": {"arrived": true, "frames": 537, "metres": 11.17},
+    "outside_target": {"status": "unreachable"}
+  },
+  "known_warning": "four navigation edge-merge warnings remain from the existing town bake",
+  "canonical_world_touched": false,
+  "status": "workstation_routes_passed_pending_gm_effect_feedback"
+}

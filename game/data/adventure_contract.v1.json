@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "contract_id": "adventure_contract.v1",
+  "status": "ready_for_disposable_live_install",
+  "setting_basis": "compatible_original_extension",
+  "setting_note": "An original bounded first-floor adventure layer for the project's Aincrad-inspired world. It does not claim an official formula for damage, death, skills or floor access.",
+  "zones": {
+    "town": {
+      "kind": "safe_zone",
+      "combat": false,
+      "entry": "resident_or_party_may_return",
+      "recovery": "explicit_recover_action_only"
+    },
+    "wilderness": {
+      "kind": "danger_zone",
+      "combat": true,
+      "entry": "explicit_enter_wilderness_action_and_physical_arrival",
+      "exit": "physical_return_to_town_or_flee_receipt"
+    },
+    "labyrinth": {
+      "kind": "danger_zone",
+      "combat": true,
+      "entry": "floor_one_wilderness_gate_and_explicit_enter_action",
+      "exit": "physical_return_to_town_or_defeat_retreat"
+    },
+    "floor_one_boss_arena": {
+      "kind": "boss_zone",
+      "combat": true,
+      "entry": "labyrinth_clearance_receipt_and_explicit_challenge_action",
+      "exit": "victory_receipt_or_defeat_retreat"
+    }
+  },
+  "actions": {
+    "enter_wilderness": {
+      "requires": [
+        "resident_is_in_town",
+        "resident_is_not_defeated",
+        "physical_arrival",
+        "no_committed_job"
+      ],
+      "effect": "set_zone_wilderness"
+    },
+    "enter_labyrinth": {
+      "requires": [
+        "resident_is_in_wilderness",
+        "floor_one_gate_open",
+        "physical_arrival",
+        "no_committed_job"
+      ],
+      "effect": "set_zone_labyrinth"
+    },
+    "enter_floor_one_boss_arena": {
+      "requires": [
+        "resident_is_in_labyrinth",
+        "labyrinth_clearance_receipt",
+        "physical_arrival",
+        "no_committed_job"
+      ],
+      "effect": "set_zone_floor_one_boss_arena"
+    },
+    "attack": {
+      "requires": [
+        "attacker_and_encounter_in_same_danger_zone",
+        "target_is_visible",
+        "attacker_has_equipped_weapon",
+        "target_is_hostile_encounter"
+      ],
+      "effect": "apply_one_authoritative_damage_receipt"
+    },
+    "guard": {
+      "requires": [
+        "resident_is_in_danger_zone"
+      ],
+      "effect": "set_guard_until_next_authoritative_round"
+    },
+    "flee": {
+      "requires": [
+        "resident_is_in_danger_zone",
+        "flee_route_is_physically_reachable"
+      ],
+      "effect": "create_flee_receipt_and_require_physical_return_to_last_safe_zone"
+    },
+    "recover": {
+      "requires": [
+        "resident_is_in_town",
+        "resident_is_defeated"
+      ],
+      "effect": "clear_defeated_status_and_restore_minimum_hp"
+    },
+    "challenge_floor_one_boss": {
+      "requires": [
+        "resident_is_in_floor_one_boss_arena",
+        "labyrinth_clearance_receipt",
+        "explicit_consent_for_party"
+      ],
+      "effect": "create_boss_encounter_without_unlocking_a_floor"
+    },
+    "unlock_floor_two": {
+      "requires": [
+        "authoritative_floor_one_boss_victory_receipt",
+        "all_required_party_members_present"
+      ],
+      "effect": "append_floor_unlock_receipt_and_set_next_floor_two"
+    },
+    "retreat_after_defeat": {
+      "requires": [
+        "resident_is_defeated_in_danger_zone",
+        "retreat_route_is_physically_reachable"
+      ],
+      "effect": "create_retreat_receipt_and_return_to_last_safe_zone"
+    }
+  },
+  "combat": {
+    "round_model": "single_authoritative_world_round",
+    "damage_formula": "max(1, attack_power - defense_power)",
+    "damage_formula_status": "host_approved_original_extension_v1_not_official_canon",
+    "unknown_values": "refuse action when attack, defense, equipment, encounter or loot data is not authoritatively defined",
+    "defeat_policy": "set_defeated_in_place; require_physical_retreat_action; no_permanent_death",
+    "loot_policy": "v1 keeps finite loot world-owned; resident or party assignment is out of scope until a consent-bound capability is reviewed",
+    "duplicate_command_policy": "same_command_id_is_idempotent",
+    "model_boundary": "model_selects_only_an_offered_action; world_navigation_physics_and_damage_decide_effects",
+    "retreat_action": "retreat_after_defeat",
+    "target_policy": "v1 permits hostile encounter targets only; resident-versus-resident damage is out of scope and refused",
+    "committed_job_policy": "danger-zone entry, defeat and cold restore never consume or duplicate a committed material; active jobs are preserved or explicitly rejected by the host reducer"
+  },
+  "progression": {
+    "current_floor": 1,
+    "next_floor": 2,
+    "unlock_is_not_implicit": true,
+    "boss_victory_is_not_floor_unlock": true,
+    "floor_state_is_persistent": true
+  },
+  "hard_invariants": [
+    "town_never_allows_combat",
+    "no_teleport_or_model_steering",
+    "no_free_item_or_material",
+    "no_skill_from_a_profession_title",
+    "no_permanent_death_or_revival_system_in_v1",
+    "no_floor_unlock_without_a_durable_boss_receipt",
+    "save_load_preserves_zone_hp_equipment_loot_encounters_and_floor_state",
+    "unknown_provider_cost_or_unknown_world_effect_stops_progression",
+    "danger_zone_entry_requires_physical_arrival",
+    "defeat_does_not_teleport;retreat_is_a_physical_action",
+    "resident_versus_resident_damage_is_out_of_scope_in_v1",
+    "world_owns_loot_until_a_future_consent_bound_assignment",
+    "committed_material_is_preserved_or_explicitly_rejected;never_lost_or_duplicated",
+    "unreachable_flee_or_retreat_leaves_resident_in_current_zone",
+    "undefined_equipment_encounter_or_loot_data_rejects_closed"
+  ],
+  "review_requirements": [
+    "aincrad_charter_pin",
+    "action_capability_standard_pin",
+    "host_reducer_acceptance",
+    "same_save_cold_restore_acceptance",
+    "real_gm_proposal_and_effect_feedback_before_live_install",
+    "primary_source_combat_review",
+    "explicit_loot_assignment_decision_or_v1_exclusion",
+    "capability_registry_registration"
+  ],
+  "capability_ids": {
+    "enter_wilderness": {
+      "id": "adventure.enter_wilderness",
+      "version": 1
+    },
+    "enter_labyrinth": {
+      "id": "adventure.enter_labyrinth",
+      "version": 1
+    },
+    "enter_floor_one_boss_arena": {
+      "id": "adventure.enter_boss_arena",
+      "version": 1
+    },
+    "attack": {
+      "id": "adventure.attack_encounter",
+      "version": 1
+    },
+    "guard": {
+      "id": "adventure.guard",
+      "version": 1
+    },
+    "flee": {
+      "id": "adventure.flee",
+      "version": 1
+    },
+    "recover": {
+      "id": "adventure.recover",
+      "version": 1
+    },
+    "challenge_floor_one_boss": {
+      "id": "adventure.challenge_boss",
+      "version": 1
+    },
+    "unlock_floor_two": {
+      "id": "adventure.unlock_floor",
+      "version": 1
+    },
+    "retreat_after_defeat": {
+      "id": "adventure.retreat_after_defeat",
+      "version": 1
+    }
+  },
+  "primary_source_review": {
+    "status": "reviewed_boundaries_only",
+    "basis": [
+      "docs/design/aincrad-world-charter.md",
+      "official anime episode 2 reference in that charter",
+      "official anime episode 5 reference in that charter",
+      "official anime episode 7 reference in that charter"
+    ],
+    "decision_required": "The host selected the bounded original-extension damage expression for v1; it remains closed when attack, defense or equipment authority is unknown.",
+    "artifact": "docs/validation/adventure-primary-source-review-2026-09-23.md",
+    "artifact_json": "docs/validation/adventure-primary-source-review-2026-09-23.json",
+    "artifact_pair_sha256": "0e06800ea25047ed55937cc5fcc4f345ea7b18259f62c933673bd719a1763921",
+    "artifact_pair_digest_algorithm": "sha256(markdown_sha256 + newline + sha256(canonical_json_without_contract_sha256_after_review_and_artifact_pair_sha256))"
+  },
+  "authorities": {
+    "floor_one_gate_open": "host_reviewed_floor_one_gate_receipt",
+    "labyrinth_clearance_receipt": "durable_host_clearance_receipt",
+    "non_boss_encounters": "world_seeded_encounter_registry",
+    "loot_receipts": "world_owned_receipt_registry"
+  }
+}

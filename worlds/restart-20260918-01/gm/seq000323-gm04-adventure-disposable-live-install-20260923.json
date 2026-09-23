@@ -1,0 +1,41 @@
+{
+  "kind": "adventure_disposable_live_install_gm_feedback",
+  "world_id": "shared:restart-20260918-01",
+  "world_seq": 323,
+  "world_sha256": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "gm_id": "gm-04",
+  "run_id": "feedback-20260923T111114Z-a6b9e1",
+  "decision": "accept",
+  "acknowledged": true,
+  "receipt_sha256": "ea62c5c8b5a0f4157b2d13c36a1d85bde6d2e2dec074bdf9aa12a40f036e26f4",
+  "receipt_file": "private/worlds/restart-20260918-01/gm/receipts/adventure-disposable-live-install-receipt-20260923.json",
+  "feedback_file": "private/worlds/restart-20260918-01/gm/receipts/adventure-disposable-live-install-feedback-20260923.json",
+  "effect": {
+    "checks": 14,
+    "failures": 0,
+    "host_capabilities": 36,
+    "adventure_capabilities": 10,
+    "combined_capabilities": 46,
+    "cold_manifest_restore": true,
+    "town_copy_byte_identical": true,
+    "adventure_source_byte_identical": true,
+    "canonical_mutation_allowed": false,
+    "canonical_world_touched": false,
+    "loot_or_combat_data_invented": false,
+    "resident_adoption": false
+  },
+  "usage": {
+    "usage_file": "../usage/seq000323-dbd9abe68b19eedb.usage.json",
+    "usage_sha256": "dbd9abe68b19eedb8944b2b2cd2bf4589ac04fbe70a8f25a16acc41141f2932f",
+    "gm_measured_calls": 29,
+    "gm_partial_calls": 1,
+    "gm_unknown_calls": 1,
+    "gm_known_tokens": 6926778,
+    "gm_usage_complete": false
+  },
+  "state": {
+    "file": "adventure-disposable-live-install-seq323-f865092a36471155.gm-state.json",
+    "sha256": "f865092a364711557357db8a08620d77a2f1e2dc2c9d66e62d86576952efe9e9"
+  },
+  "status": "accepted_disposable_only_resident_adoption_pending"
+}

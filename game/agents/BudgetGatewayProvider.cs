@@ -97,6 +97,13 @@ public sealed class BudgetGatewayProvider : IModelProvider, IDisposable
             bounded.CancelAfter(TimeSpan.FromSeconds(35));
             response = await Complete(request, bounded.Token).ConfigureAwait(false);
         }
+        catch (InvalidOperationException error) when (error.Message == "gateway_validation_failed")
+        {
+            // Keep the already verified local guard name.  The resident adapter maps
+            // this constant to a sanitized receipt; no provider text, URL or secret
+            // crosses the boundary.  Other failures remain intentionally ambiguous.
+            throw;
+        }
         catch
         {
             // Keep credentials, URLs, response bodies and filesystem paths out of logs.

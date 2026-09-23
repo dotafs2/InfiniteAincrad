@@ -1,0 +1,27 @@
+{
+  "kind": "real_gm_adventure_contract_review",
+  "world_id": "shared:restart-20260918-01",
+  "world_seq": 323,
+  "world_sha256": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "gm_id": "gm-04",
+  "review_receipt_sha256": "1c14289faef9c3c4c6b2f3e989c937557842298cfb8bf49ad68a90d5713e0e6e",
+  "review_run_id": "feedback-20260923T102900Z-5e014d",
+  "decision": "accept",
+  "acknowledged": true,
+  "contract_id": "adventure_contract.v1",
+  "contract_sha256": "178d6f246bb58a07c9090af9d0ebda1e13194a2a2c30fec49b86377c673e16d8",
+  "status": "design_pending_primary_source_review",
+  "residual_next_work": "Complete primary-source combat review before wiring; no canonical installation is authorized by this acknowledgement.",
+  "canonical_world_changed": false,
+  "historical_invalid_output_preserved": true,
+  "state_checkpoint": "../gm/adventure-contract-review-seq323-d4d1f28b5a44fc24.gm-state.json",
+  "state_sha256": "d4d1f28b5a44fc24a0017698dd090b193bafb18fc255d0d72d3b72803750c2e2",
+  "usage_checkpoint": "../usage/seq000323-916bbc17260d8dd8.usage.json",
+  "usage_sha256": "916bbc17260d8dd80baab35b384c3300e39493e597002ce81c8b3fc70cfa0cba",
+  "gm_attempts": 19,
+  "gm_known_tokens": 2576259,
+  "limitations": [
+    "This is a design review acknowledgement, not a production installation or live resident adoption.",
+    "Primary-source combat review remains pending."
+  ]
+}

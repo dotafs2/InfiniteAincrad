@@ -1,0 +1,60 @@
+{
+  "kind": "adventure_disposable_live_install",
+  "install_date": "2026-09-23",
+  "world_id": "shared:restart-20260918-01",
+  "source_seq": 323,
+  "source_world_sha256": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "disposable_town_copy_sha256_before": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "disposable_town_copy_sha256_after": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "adventure_source_sha256_before": "959fe46b07ab4243615e81ffb8cea20b7fac022d43b0f42d21b1ca634da4cfbc",
+  "adventure_source_sha256_after": "959fe46b07ab4243615e81ffb8cea20b7fac022d43b0f42d21b1ca634da4cfbc",
+  "install_manifest_sha256": "5a164cdf4244f6b93afb362e8dcb144bbdc34e318eb5431f518aad60b3e732f8",
+  "checks": 14,
+  "failures": 0,
+  "host_capabilities": 36,
+  "adventure_capabilities": 10,
+  "combined_capabilities": 46,
+  "canonical_mutation_allowed": false,
+  "actions": {
+    "entry": {
+      "resident_id": "shared:baker",
+      "command_id": "live-entry",
+      "code": "entered_wilderness",
+      "ok": true
+    },
+    "unknown_attack": {
+      "resident_id": "shared:baker",
+      "encounter_id": "missing:encounter",
+      "command_id": "live-unknown-attack",
+      "code": "encounter_missing",
+      "ok": false
+    },
+    "flee": {
+      "resident_id": "shared:baker",
+      "command_id": "live-flee",
+      "code": "fled_to_safe_zone",
+      "ok": true
+    }
+  },
+  "cold_manifest_restore": true,
+  "town_copy_byte_identical": true,
+  "adventure_source_byte_identical": true,
+  "canonical_world_touched": false,
+  "resident_adoption": false,
+  "loot_or_combat_data_invented": false,
+  "gm_feedback": {
+    "gm_id": "gm-04",
+    "run_id": "feedback-20260923T111114Z-a6b9e1",
+    "decision": "accept",
+    "acknowledged": true,
+    "receipt_sha256": "ea62c5c8b5a0f4157b2d13c36a1d85bde6d2e2dec074bdf9aa12a40f036e26f4",
+    "resident_adoption": false,
+    "next_work": "Disposable live install accepted; no canonical integration or resident adoption claim."
+  },
+  "status": "disposable_live_install_accepted_by_gm",
+  "limitations": [
+    "The bridge is a disposable sidecar and is not wired into TownActions or the maintained scene.",
+    "The reviewed damage rule is a host-approved project extension and is not official canon.",
+    "No resident combat authority, equipment, encounter, loot, or floor unlock was adopted from this install."
+  ]
+}

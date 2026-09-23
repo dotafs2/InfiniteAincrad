@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-23",
+  "milestone": "H149-H151 adventure resident boundary",
+  "world_id": "shared:restart-20260918-01",
+  "canonical_seq": 323,
+  "canonical_world_sha256": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "canonical_checkpoint_sha256": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "canonical_mutation_allowed": false,
+  "offline_fixture": {
+    "suite": "adventure_resident_adoption_probe",
+    "checks": 15,
+    "failures": 0,
+    "resident_id": "shared:baker",
+    "choice": "ability:adventure.enter_wilderness",
+    "resident_adoption": true,
+    "status": "offline_resident_adoption_probe_passed_pending_real_model_feedback",
+    "route_receipt": {
+      "route_kind": "collision_aware_town_route",
+      "route_id": "market-to-wilderness-gate",
+      "frames": 1005,
+      "metres": 22.5680503845215,
+      "target": "wilderness_gate"
+    },
+    "canonical_mutation_allowed": false,
+    "town_copy_sha256": "f6894697cdc0d9b79132555437d0c213fa02dd5c848f3dc7a5a7f75d13e46bfe",
+    "adventure_source_sha256": "959fe46b07ab4243615e81ffb8cea20b7fac022d43b0f42d21b1ca634da4cfbc",
+    "manifest_sha256": "b7f70b98a6ff972f48d1a080411f94883553e781e41857b3777362784cce6de6"
+  },
+  "live_model_visibility": {
+    "provider": "kimi-k2.6",
+    "real_model_call": true,
+    "request_count": 2,
+    "validation_status": "passed",
+    "model_errors": {},
+    "ledger_before_settled": 376,
+    "ledger_after_settled": 378,
+    "ledger_before_cny": 7.6118814,
+    "ledger_after_cny": 7.6599309,
+    "request_charge_cny": 0.0480495,
+    "resident_id": "shared:baker",
+    "route_receipt": {
+      "frames": 1005,
+      "max_step_m": 0.0225000003973643,
+      "metres": 22.5680503845215,
+      "ok": true,
+      "resident_id": "shared:baker",
+      "route_id": "adventure-live-gate-route",
+      "route_kind": "collision_aware_town_route",
+      "saw_floor_collision": true,
+      "status": "following",
+      "target": "wilderness_gate"
+    },
+    "offered_adventure_alias": "a31",
+    "offered_adventure_option": "ability:adventure.enter_wilderness",
+    "model_choice": "a2",
+    "model_action": "life:harvest_ration",
+    "model_result": {
+      "code": "action_started",
+      "ok": true
+    },
+    "resident_adoption": false,
+    "canonical_world_promoted": false,
+    "run_world_copy_sha256": "5f4adb1e8abfb193ad7b9d35d032c5d9b153aec53b11ecc7e4511f182e3c6f42",
+    "sidecar_sha256": "959fe46b07ab4243615e81ffb8cea20b7fac022d43b0f42d21b1ca634da4cfbc",
+    "manifest_sha256": "37be2b5ad37369019a42d8e443d212b5eb36ca986c0fd7c15ec6425c627cbb3a",
+    "evidence_sha256": "88d21251825011dc04156aac8d2331138305c5706b6ffbd602752db4b999385a",
+    "result_sha256": "ab422ffb46a21b0e692041b232d47b46ea3f2393a7f74d8685697099353c298e",
+    "additional_disposable_charge_cny": 0.02435,
+    "samples": [
+      {
+        "run": "adventure-resident-real-model2-20260923",
+        "resident_id": "shared:baker",
+        "offered_adventure_alias": "a31",
+        "offered_adventure_option": "ability:adventure.enter_wilderness",
+        "model_choice": "a2",
+        "model_action": "life:harvest_ration",
+        "model_result": {
+          "code": "action_started",
+          "ok": true
+        },
+        "resident_adoption": false,
+        "run_result": "passed",
+        "run_world_sha256": "5f4adb1e8abfb193ad7b9d35d032c5d9b153aec53b11ecc7e4511f182e3c6f42",
+        "evidence_sha256": "88d21251825011dc04156aac8d2331138305c5706b6ffbd602752db4b999385a"
+      },
+      {
+        "run": "adventure-resident-real-model3-20260923",
+        "resident_id": "shared:baker",
+        "offered_adventure_alias": "a29",
+        "offered_adventure_option": "ability:adventure.enter_wilderness",
+        "model_choice": "a17",
+        "model_action": "ability:talk:shared:innkeeper",
+        "model_result": {
+          "code": "resident_said",
+          "event_id": "life_event_324",
+          "ok": true
+        },
+        "resident_adoption": false,
+        "run_result": "passed",
+        "capture_life_seq": 324,
+        "run_world_sha256": "ebd2326e02d5deeb4fd09abe22f8eb7cdbe0e2ed297b6ba93ccdd0bcf8807171",
+        "evidence_sha256": "31ba4427f17afe8def021452d8f9c5207c0582559e1f1c9a26a1f21e30afc2df",
+        "manifest_sha256": "37be2b5ad37369019a42d8e443d212b5eb36ca986c0fd7c15ec6425c627cbb3a"
+      }
+    ]
+  },
+  "scene_route_smoke": {
+    "status": "passed_route_only",
+    "resident_adoption": false,
+    "route_receipt": {
+      "frames": 1005,
+      "max_step_m": 0.0225000003973643,
+      "metres": 22.5680503845215,
+      "ok": true,
+      "resident_id": "shared:baker",
+      "route_id": "adventure-live-gate-route",
+      "route_kind": "collision_aware_town_route",
+      "saw_floor_collision": true,
+      "status": "following",
+      "target": "wilderness_gate"
+    },
+    "known_navigation_edge_warnings": 4,
+    "provider_calls": 0,
+    "copy_world_sha256": "4c4eb47738609a5fd1f48985cfef844a20da6dfe15e609f48a4fbeee85568261",
+    "manifest_sha256": "37be2b5ad37369019a42d8e443d212b5eb36ca986c0fd7c15ec6425c627cbb3a"
+  },
+  "conclusion": "The host-gated option is now exposed by the real scene and one real Kimi resident turn. The resident chose the valid legacy harvest action, so no adventure adoption or canonical integration is claimed. The offline fixture proves the action boundary and cold restore; the next gate is a deliberate real-model adoption sample or a host-approved progression policy, followed by GM effect feedback.",
+  "limitations": [
+    "The real model was not forced to choose the adventure option.",
+    "The disposable run was not promoted into the canonical world or usage book.",
+    "Combat stats and floor authority remain undefined until a separate host decision."
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "boundaries": {
+    "consumed_by_npc_model": false,
+    "contains_other_resident_memories": false,
+    "contains_private_reply_reason": false,
+    "image_analysis": false,
+    "note": "world-scoped evidence for a separate GM process only"
+  },
+  "counts": {
+    "issues": 9,
+    "proposals": 0
+  },
+  "evidence": [
+    {
+      "command_id": "turn:shared:carpenter:0:27",
+      "command_status": "completed",
+      "discriminators": {
+        "physical_work": true,
+        "private_reason": false,
+        "public_utterance": false
+      },
+      "event_id": "life_event_158",
+      "event_seq": 158,
+      "evidence_kind": "self_repair_completed",
+      "issue_id": "self_repair:turn:shared:carpenter:0:27",
+      "item_id": "seed:axe",
+      "material": "wood",
+      "part": "handle",
+      "physical_facts": {
+        "consumed": 1,
+        "observation_source": "authoritative_self_repair_command_and_event",
+        "position": [
+          -32.9351692199707,
+          0.000935206597205251,
+          51.1120681762695
+        ],
+        "work_seconds": 60.0
+      },
+      "resident_id": "shared:carpenter",
+      "result_code": "self_repair_completed",
+      "status": "completed",
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "I haven't spotted any herbs right here, but I was just looking around. Have you found any good patches elsewhere? I'd be glad to walk with you if you're searching, or happy to hear what you know.",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_306",
+      "event_provenance": "opengameagent_live",
+      "event_source": "opengameagent_live",
+      "event_type": "resident_said",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_306",
+      "operation_id": "turn:shared:innkeeper:1:30",
+      "recipient_ids": [
+        "shared:innkeeper",
+        "shared:gardener"
+      ],
+      "request_ref": "",
+      "seq": 306,
+      "speaker_id": "shared:innkeeper",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "Flint. My axe edge is still sound, but I wanted to follow up—if I do need metalwork later, are you keeping the same terms we used before? I like knowing the fit before I agree.",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_309",
+      "event_provenance": "opengameagent_live",
+      "event_source": "opengameagent_live",
+      "event_type": "resident_said",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_309",
+      "operation_id": "turn:shared:carpenter:0:43",
+      "recipient_ids": [
+        "shared:carpenter",
+        "shared:smith"
+      ],
+      "request_ref": "",
+      "seq": 309,
+      "speaker_id": "shared:carpenter",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "Rowan. Any other edges gone dull, or word of someone who needs one?",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_310",
+      "event_provenance": "opengameagent_live",
+      "event_source": "opengameagent_live",
+      "event_type": "resident_said",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_310",
+      "operation_id": "turn:shared:smith:0:37",
+      "recipient_ids": [
+        "shared:smith",
+        "shared:carpenter"
+      ],
+      "request_ref": "",
+      "seq": 310,
+      "speaker_id": "shared:smith",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "Flint, I'll be at Old Market Plaza if you want to talk edges, handles, or referrals. Fair warning: I prefer terms we can both check before either of us commits iron or wood.",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_311",
+      "event_provenance": "opengameagent_live",
+      "event_source": "opengameagent_live",
+      "event_type": "joint_visit_invite_visit",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_311",
+      "operation_id": "turn:shared:carpenter:0:44",
+      "recipient_ids": [
+        "shared:carpenter",
+        "shared:smith"
+      ],
+      "request_ref": "",
+      "seq": 311,
+      "speaker_id": "shared:carpenter",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "On my way, Rowan.",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_312",
+      "event_provenance": "opengameagent_live",
+      "event_source": "opengameagent_live",
+      "event_type": "joint_visit_accept_visit",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_312",
+      "operation_id": "turn:shared:smith:0:38",
+      "recipient_ids": [
+        "shared:carpenter",
+        "shared:smith"
+      ],
+      "request_ref": "",
+      "seq": 312,
+      "speaker_id": "shared:smith",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "Rowan. You mentioned other edges gone dull—need a proper look at anything, or is there word of work elsewhere?",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_316",
+      "event_provenance": "opengameagent_live",
+      "event_source": "opengameagent_live",
+      "event_type": "resident_said",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_316",
+      "operation_id": "turn:shared:smith:0:39",
+      "recipient_ids": [
+        "shared:smith",
+        "shared:carpenter"
+      ],
+      "request_ref": "",
+      "seq": 316,
+      "speaker_id": "shared:smith",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "You said other edges. Name the tool and part, and we'll set a price.",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_318",
+      "event_provenance": "opengameagent_live",
+      "event_source": "opengameagent_live",
+      "event_type": "resident_said",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_318",
+      "operation_id": "turn:shared:smith:0:40",
+      "recipient_ids": [
+        "shared:smith",
+        "shared:carpenter"
+      ],
+      "request_ref": "",
+      "seq": 318,
+      "speaker_id": "shared:smith",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    },
+    {
+      "delivered_text": "Flint, you mentioned other edges gone dull. I'm listening—what tool and which part? I like to know the shape of a job before I say yes.",
+      "discriminators": {
+        "achieved_capability": false,
+        "delivered": true,
+        "invented_need": false,
+        "missing_mechanism_proved": false,
+        "note": "delivered public words only; no wish, need, defect or capability is asserted here - the GM decides whether the words warrant investigation",
+        "public_utterance": true
+      },
+      "event_id": "life_event_319",
+      "event_provenance": "opengameagent_live",
+      "event_source": "opengameagent_live",
+      "event_type": "resident_said",
+      "evidence_kind": "public_life_event",
+      "issue_id": "public_life_event:life_event_319",
+      "operation_id": "turn:shared:carpenter:0:45",
+      "recipient_ids": [
+        "shared:carpenter",
+        "shared:smith"
+      ],
+      "request_ref": "",
+      "seq": 319,
+      "speaker_id": "shared:carpenter",
+      "status": "observed",
+      "text_truncated": false,
+      "world_id": "shared:restart-20260918-01"
+    }
+  ],
+  "kind": "background_gm_evidence_snapshot",
+  "limits": {
+    "evidence_limit": 64,
+    "proposal_limit": 32
+  },
+  "projection_note": "bounded GM-visible projection; the canonical accepted-need record stays in the world's private turn journal",
+  "proposals": [],
+  "schema_version": 1,
+  "source_revision": {
+    "godot_elapsed_seconds": 13201.3499999965,
+    "life_seq": 323,
+    "proposal_sequence": 0,
+    "world_elapsed_seconds": 13201.3499999965
+  },
+  "world_id": "shared:restart-20260918-01"
+}

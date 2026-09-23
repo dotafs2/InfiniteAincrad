@@ -1,0 +1,55 @@
+{
+  "kind": "real_gm_observation",
+  "world_id": "shared:restart-20260918-01",
+  "world_seq": 323,
+  "world_sha256": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "evidence_sha256": "d89d9bf9a964b54082e2db16cddb0c5ab0cee05ade0c24702d5acc36c4a0e971",
+  "gm_id": "gm-04",
+  "run_id": "run-20260923T095112Z-687063",
+  "status": "ok",
+  "dispatched": 1,
+  "cost": "measured_tokens_currency_unpriced",
+  "usage": {
+    "cache_write_input_tokens": 0,
+    "cached_input_tokens": 25216,
+    "input_tokens": 34918,
+    "output_tokens": 4989,
+    "reasoning_output_tokens": 4265
+  },
+  "outcomes": [
+    {
+      "issue_id": "issue-1117ed009cad",
+      "disposition": "observe",
+      "claim_coding": false,
+      "reason": "GM saw a truncated packet and requested current evidence rather than claiming a defect."
+    },
+    {
+      "issue_id": "issue-193e189c20db",
+      "disposition": "observe",
+      "claim_coding": false,
+      "reason": "GM declined to judge an event outside its visible packet."
+    }
+  ],
+  "candidate_created": false,
+  "world_guard_unchanged": true,
+  "historical_gm06_unknown_preserved": true,
+  "historical_gm06_unknown_acknowledged": true,
+  "gm_state_migration": {
+    "backup_path": "private\\worlds\\restart-20260918-01\\gm\\backups\\state-before-gm06-ack-20260923T094752Z.json",
+    "kind": "gm06_acknowledged_checkpoint_merge",
+    "merged_utc": "2026-09-23T09:47:52.112192+00:00",
+    "prior_private_sha256": "e422af07f5c7a42d7c15266a646ec2f583092b5f8a55867954a106a9e8997cd8",
+    "run_id": "run-20260918T123100Z-44fcba",
+    "source_checkpoint": "worlds\\restart-20260918-01\\gm\\feedback-1e532b62c6a8f44e.gm-state.json",
+    "source_sha256": "1e532b62c6a8f44e83a0587bcef19aca7190ed832a71b0a5a910fff238c9f2a4",
+    "unknown_preserved": true
+  },
+  "gm_state_file": "../gm/observe-seq323-1e41568416c29f01.gm-state.json",
+  "gm_state_sha256": "1e41568416c29f01e16ad5a9738ac1c576bb9d0ae26a771469aa9faf2c12ec1a",
+  "usage_file": "../usage/seq000323-691dec2e5fa7ac31.usage.json",
+  "usage_sha256": "691dec2e5fa7ac31d1da1bbd83dbeb3d06aab57a274b39a47b1362daa01868f4",
+  "limitations": [
+    "Observation succeeded; no new coding claim, candidate, release or feedback resulted.",
+    "GM-05 and GM-06 historical unknown charges remain unknown in developer usage."
+  ]
+}

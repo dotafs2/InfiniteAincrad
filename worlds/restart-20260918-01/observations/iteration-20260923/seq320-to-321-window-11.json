@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 320,
+  "end_seq": 321,
+  "elapsed_seconds": 13081.483333329908,
+  "decision_count": 2,
+  "residents": [
+    {
+      "resident_id": "shared:well-keeper",
+      "name": "Ari",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:baker",
+      "name": "Wren",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:smith",
+      "name": "Flint",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:carpenter",
+      "name": "Rowan",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:innkeeper",
+      "name": "Mara",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:herder",
+      "name": "Heath",
+      "decisions": [
+        {
+          "request_id": "turn:shared:herder:0:20",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a15",
+            "reason": "I just rested and ate, so my needs are stable. I want to observe my surroundings again to see if any animals, caretakers, or signs of herding work have appeared nearby. Quiet watching is how I learn."
+          },
+          "resolved_action": "ability:observe",
+          "stated_reason": "I just rested and ate, so my needs are stable. I want to observe my surroundings again to see if any animals, caretakers, or signs of herding work have appeared nearby. Quiet watching is how I learn.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "surroundings_observed",
+            "effect": {
+              "ok": true,
+              "code": "surroundings_observed",
+              "event_id": "life_event_321",
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "private_observation"
+              }
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "private_observation"
+            }
+          },
+          "later_events": [
+            {
+              "type": "surroundings_observed",
+              "actor_id": "shared:herder",
+              "subject_id": "shared:herder",
+              "recipient_ids": [
+                "shared:herder"
+              ],
+              "operation_id": "turn:shared:herder:0:20",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "I paused to observe my current surroundings.",
+              "contractual": false,
+              "observed": {
+                "position": [
+                  35.45392608642578,
+                  0.000322878360748291,
+                  82.04969024658203
+                ],
+                "needs": {
+                  "hunger": 76
+                },
+                "nearby_residents": [],
+                "known_places": [
+                  "caravan_rest",
+                  "planted_commons"
+                ]
+              },
+              "private_observation": true,
+              "seq": 321,
+              "event_id": "life_event_321"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:gardener",
+      "name": "Fern",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:weaver",
+      "name": "Iris",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:fisher",
+      "name": "Reed",
+      "decisions": [
+        {
+          "request_id": "turn:shared:fisher:0:21",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "Energy is 57, which is not critically low, but satiety is 65 and food is 0 with no harvest success earlier. Rest will conserve energy while I figure out food options. No urgent zero needs, but I should recover before they drop further."
+          },
+          "resolved_action": "life:rest",
+          "stated_reason": "Energy is 57, which is not critically low, but satiety is 65 and food is 0 with no harvest success earlier. Rest will conserve energy while I figure out food options. No urgent zero needs, but I should recover before they drop further.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [],
+          "current_command_status": "pending",
+          "current_trade_command_status": "pending",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {
+        "action": "rest",
+        "command_id": "turn:shared:fisher:0:21",
+        "elapsed": 50.11666666666659,
+        "provenance": "opengameagent_live"
+      },
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:healer",
+      "name": "Sage",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    }
+  ],
+  "new_world_events": [
+    {
+      "type": "surroundings_observed",
+      "actor_id": "shared:herder",
+      "subject_id": "shared:herder",
+      "recipient_ids": [
+        "shared:herder"
+      ],
+      "operation_id": "turn:shared:herder:0:20",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "I paused to observe my current surroundings.",
+      "contractual": false,
+      "observed": {
+        "position": [
+          35.45392608642578,
+          0.000322878360748291,
+          82.04969024658203
+        ],
+        "needs": {
+          "hunger": 76
+        },
+        "nearby_residents": [],
+        "known_places": [
+          "caravan_rest",
+          "planted_commons"
+        ]
+      },
+      "private_observation": true,
+      "seq": 321,
+      "event_id": "life_event_321"
+    }
+  ],
+  "limitation": "No decisions or speech are inferred from a personality profile. A pending provider request has no known decision."
+}

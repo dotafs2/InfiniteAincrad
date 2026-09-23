@@ -1,0 +1,76 @@
+{
+  "kind": "adventure_primary_source_boundary_review",
+  "review_date": "2026-09-23",
+  "contract_id": "adventure_contract.v1",
+  "contract_sha256_before_status_update": "178d6f246bb58a07c9090af9d0ebda1e13194a2a2c30fec49b86377c673e16d8",
+  "contract_sha256_after_review": "d9899643de0fabea0fe0eeb1b155f0c24b6caa2450ddd945a2d57c58c1d56209",
+  "status": "reviewed_boundaries_only",
+  "canonical_world_touched": false,
+  "sources": [
+    {
+      "id": "official_episode_02",
+      "url": "https://www.swordart-onlineusa.com/aincrad/story/?no=02",
+      "supports": [
+        "first_floor_progression_boundary",
+        "boss_room",
+        "coordinated_boss_raid"
+      ],
+      "does_not_establish": [
+        "damage_formula",
+        "automatic_floor_unlock"
+      ]
+    },
+    {
+      "id": "official_episode_05",
+      "url": "https://www.swordart-onlineusa.com/aincrad/story/?no=05",
+      "supports": [
+        "monster_exclusion_area",
+        "ordinary_player_combat_is_a_separate_boundary"
+      ],
+      "does_not_establish": [
+        "complete_safe_zone_or_crime_system",
+        "resident_damage_permission"
+      ]
+    },
+    {
+      "id": "official_episode_07",
+      "url": "https://www.swordart-online.net/sp/aincrad/story/story07.html",
+      "supports": [
+        "blacksmithing",
+        "weapon_durability",
+        "scarce_crafting_material"
+      ],
+      "does_not_establish": [
+        "numeric_durability_or_damage_formula",
+        "profession_grants_skill"
+      ]
+    },
+    {
+      "id": "official_episode_09",
+      "url": "https://www.swordart-onlineusa.com/aincrad/story/?no=09",
+      "supports": [
+        "boss_room_discovery",
+        "withdrawal_after_danger_assessment",
+        "safe_area_retreat"
+      ],
+      "does_not_establish": [
+        "teleportation",
+        "automatic_defeat_teleport"
+      ]
+    }
+  ],
+  "decisions": {
+    "damage_formula": "unresolved_original_extension_placeholder",
+    "resident_vs_resident_damage": "refused_in_v1",
+    "loot": "world_owned_until_future_consent_bound_assignment",
+    "permanent_death": "excluded_from_v1",
+    "floor_unlock": "requires_durable_authoritative_receipt"
+  },
+  "next_gate": "disposable_migration_and_effect_feedback",
+  "artifact_pair": {
+    "markdown": "docs/validation/adventure-primary-source-review-2026-09-23.md",
+    "json": "docs/validation/adventure-primary-source-review-2026-09-23.json"
+  },
+  "artifact_pair_digest_algorithm": "sha256(markdown_sha256 + newline + sha256(canonical_json_without_contract_sha256_after_review_and_artifact_pair_sha256))",
+  "artifact_pair_sha256": "0e06800ea25047ed55937cc5fcc4f345ea7b18259f62c933673bd719a1763921"
+}

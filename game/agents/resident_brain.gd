@@ -259,8 +259,9 @@ func _on_completed(input_id: String, result_json: String) -> void:
 	var parsed: Variant = JSON.parse_string(result_json)
 	var assistant_text_parts: Array = []
 	var messages: Array = []
-	if parsed is Dictionary and parsed.get("agent", {}) is Dictionary:
-		var received_messages: Variant = parsed.agent.get("newMessages", [])
+	var parsed_agent: Variant = parsed.get("agent", {}) if parsed is Dictionary else {}
+	if parsed_agent is Dictionary:
+		var received_messages: Variant = parsed_agent.get("newMessages", [])
 		if received_messages is Array:
 			messages = received_messages
 	for message in messages:
@@ -281,7 +282,11 @@ func _on_completed(input_id: String, result_json: String) -> void:
 		"fixture": _source != "opengameagent_live"}
 	if not parsed is Dictionary or parsed.get("status") != "Completed":
 		received["ok"] = false
-		received["code"] = "brain_run_failed"
+		var runtime_error := str(parsed.get("error", "")) if parsed is Dictionary else ""
+		var agent: Variant = parsed.get("agent", {}) if parsed is Dictionary else {}
+		if runtime_error.is_empty() and agent is Dictionary:
+			runtime_error = str(agent.get("error", ""))
+		received["code"] = provider_failure_identifier(runtime_error)
 		_result = received
 		return
 	# Preserve the historical selection semantics: newest Assistant message first, then

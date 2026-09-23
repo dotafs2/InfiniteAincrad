@@ -1,0 +1,227 @@
+{
+  "kind": "seq323_persistence_audit",
+  "world_id": "shared:restart-20260918-01",
+  "source_checkpoint": "worlds/restart-20260918-01/checkpoints/seq000323-2d80c92778c34dc7.world.json",
+  "cold_restore": "continuity-gate-20260923/seq323-cold-restore.json",
+  "restore_check": "WORLD_CHECKPOINT_RESTORE_OK residents=10 seq=323 exact_fields=true",
+  "comparison": {
+    "source_sha256": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+    "cold_sha256": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+    "byte_equal": true,
+    "semantic_equal": true
+  },
+  "summary": {
+    "world_id": "shared:restart-20260918-01",
+    "seq": 323,
+    "resident_count": 10,
+    "resident_ids": [
+      "shared:well-keeper",
+      "shared:baker",
+      "shared:smith",
+      "shared:carpenter",
+      "shared:innkeeper",
+      "shared:herder",
+      "shared:gardener",
+      "shared:weaver",
+      "shared:fisher",
+      "shared:healer"
+    ],
+    "life_event_count": 323,
+    "archived_attempt_count": 292,
+    "accounts_count": 10,
+    "item_count": 1,
+    "contract_count": 2,
+    "material_source_count": 1,
+    "material_sources": {
+      "street:iron-salvage-20260918": {
+        "access": "public",
+        "id": "street:iron-salvage-20260918",
+        "initial_stock": 3,
+        "label": "Street salvage iron heap",
+        "material": "iron",
+        "position": [
+          0,
+          0.22,
+          7.7
+        ],
+        "stock": 0,
+        "recovered": 3,
+        "source_need": {
+          "seq": 27,
+          "actor_id": "shared:smith",
+          "text": "I can do the work. Need to be straight with you though—I'm out of iron at the moment. If you've got a bar or know where to get one, we can settle terms. Otherwise I'll have to source it first."
+        },
+        "install_command": "development_gm:gm05-iron-20260918"
+      }
+    },
+    "knowledge_counts": {
+      "shared:well-keeper": {
+        "knowledge": 0,
+        "experiences": 0
+      },
+      "shared:baker": {
+        "knowledge": 0,
+        "experiences": 0
+      },
+      "shared:smith": {
+        "knowledge": 0,
+        "experiences": 0
+      },
+      "shared:carpenter": {
+        "knowledge": 0,
+        "experiences": 0
+      },
+      "shared:innkeeper": {
+        "knowledge": 0,
+        "experiences": 0
+      },
+      "shared:herder": {
+        "knowledge": 0,
+        "experiences": 0
+      },
+      "shared:gardener": {
+        "knowledge": 0,
+        "experiences": 0
+      },
+      "shared:weaver": {
+        "knowledge": 0,
+        "experiences": 0
+      },
+      "shared:fisher": {
+        "knowledge": 0,
+        "experiences": 0
+      },
+      "shared:healer": {
+        "knowledge": 0,
+        "experiences": 0
+      }
+    },
+    "resident_turns_status": {
+      "shared:well-keeper": "settled",
+      "shared:baker": "settled",
+      "shared:smith": "settled",
+      "shared:carpenter": "settled",
+      "shared:innkeeper": "settled",
+      "shared:herder": "settled",
+      "shared:gardener": "settled",
+      "shared:weaver": "settled",
+      "shared:fisher": "settled",
+      "shared:healer": "settled"
+    },
+    "pending_physical_jobs": 0,
+    "pending_provider_requests": 0,
+    "provider_error_count": 0,
+    "economic_accounts_excerpt": [
+      {
+        "resident_id": "shared:well-keeper",
+        "wood": 1,
+        "iron": 0,
+        "kindling": 0,
+        "reserved_col": 0
+      },
+      {
+        "resident_id": "shared:baker",
+        "wood": 1,
+        "iron": 0,
+        "kindling": 0,
+        "reserved_col": 0
+      },
+      {
+        "resident_id": "shared:smith",
+        "wood": 1,
+        "iron": 0,
+        "kindling": 0,
+        "reserved_col": 0
+      },
+      {
+        "resident_id": "shared:carpenter",
+        "wood": 0,
+        "iron": 0,
+        "kindling": 0,
+        "reserved_col": 0
+      },
+      {
+        "resident_id": "shared:innkeeper",
+        "wood": 1,
+        "iron": 0,
+        "kindling": 0,
+        "reserved_col": 0
+      },
+      {
+        "resident_id": "shared:herder",
+        "wood": 1,
+        "iron": 0,
+        "kindling": 0,
+        "reserved_col": 0
+      },
+      {
+        "resident_id": "shared:gardener",
+        "wood": 1,
+        "iron": 0,
+        "kindling": 0,
+        "reserved_col": 0
+      },
+      {
+        "resident_id": "shared:weaver",
+        "wood": 1,
+        "iron": 2,
+        "kindling": 0,
+        "reserved_col": 0
+      },
+      {
+        "resident_id": "shared:fisher",
+        "wood": 1,
+        "iron": 0,
+        "kindling": 0,
+        "reserved_col": 0
+      },
+      {
+        "resident_id": "shared:healer",
+        "wood": 1,
+        "iron": 0,
+        "kindling": 0,
+        "reserved_col": 0
+      }
+    ],
+    "contracts_excerpt": [
+      {
+        "id": "trade_contract_turn:shared:carpenter:0:6",
+        "part": "edge",
+        "item_id": "seed:axe",
+        "owner_id": "shared:carpenter",
+        "worker_id": "shared:smith",
+        "status": "rejected",
+        "price_col": 2,
+        "reserved_col": 0
+      },
+      {
+        "id": "trade_contract_turn:shared:carpenter:0:32",
+        "part": "edge",
+        "item_id": "seed:axe",
+        "owner_id": "shared:carpenter",
+        "worker_id": "shared:smith",
+        "status": "collected",
+        "price_col": 2,
+        "reserved_col": 0
+      }
+    ],
+    "material_command_count": 7,
+    "material_job_count": 0,
+    "known_material_record_count": 7,
+    "trade_command_count": 145,
+    "trade_job_count": 0
+  },
+  "scope": [
+    "navigation acceptance on separately copied seq323 world",
+    "finite material accounting and production acceptance",
+    "contract and economy acceptance",
+    "resident knowledge and controller replacement continuity acceptance",
+    "gateway history fixture with seed/cold reload",
+    "exact seq323 cold restore"
+  ],
+  "limitations": [
+    "The gateway history and model-continuity suites use explicitly labelled local fixtures; they do not prove a new live model decision.",
+    "This audit does not claim wilderness, combat or floor progression."
+  ],
+  "visibility": "public_sanitized_evidence"
+}

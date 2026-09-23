@@ -1,0 +1,338 @@
+{
+  "kind": "offline_continuity_regression_matrix",
+  "world_id": "shared:restart-20260918-01",
+  "base_seq": 323,
+  "tests": [
+    {
+      "test": "resident_knowledge.gd",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.435,
+      "summary": {
+        "checks": 21,
+        "failures": 0,
+        "paid_calls": 0,
+        "suite": "resident_knowledge"
+      }
+    },
+    {
+      "test": "town_materials_acceptance.gd",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.894,
+      "summary": {
+        "checks": 60,
+        "failures": 0,
+        "paid_calls": 0,
+        "suite": "town_materials"
+      }
+    },
+    {
+      "test": "town_trade_acceptance.gd",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.021,
+      "summary": {
+        "checks": 63,
+        "failures": 0,
+        "paid_calls": 0,
+        "suite": "town_trade"
+      }
+    },
+    {
+      "test": "town_gateway_knowledge_acceptance.gd",
+      "exit_code": 1,
+      "timed_out": false,
+      "elapsed_seconds": 0.907,
+      "summary": null
+    },
+    {
+      "test": "town_model_continuity_acceptance.gd",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.478,
+      "summary": {
+        "checks": 109,
+        "failures": 0,
+        "model_claim": "fixture_controllers_only",
+        "paid_calls": 0,
+        "provenance": "scripted_fixture_controllers",
+        "suite": "town_model_continuity"
+      }
+    },
+    {
+      "test": "town_restore_read_only_acceptance.gd",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.481,
+      "summary": {
+        "checks": 11,
+        "failures": 0,
+        "inputs": [
+          "Space",
+          "H",
+          "E",
+          "F"
+        ],
+        "paid_calls": 0,
+        "suite": "town_restore_read_only",
+        "world_save_byte_equal": true
+      }
+    },
+    {
+      "test": "town_navigation_acceptance.gd",
+      "exit_code": 2,
+      "timed_out": false,
+      "elapsed_seconds": 1.466,
+      "summary": null
+    },
+    {
+      "test": "town_route_graph_full_map_acceptance.gd",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.761,
+      "summary": {
+        "checks": 15217,
+        "expected_routes": 762,
+        "failed_routes": 0,
+        "failures": [],
+        "max_connector_hops": 67,
+        "ok": true,
+        "region_count": 189,
+        "report": {
+          "connector_count": 193,
+          "ok": true,
+          "region_count": 189,
+          "resident_region_count": 10,
+          "revision": 383,
+          "road_count": 4,
+          "road_node_count": 179,
+          "source": "living_quarter_layout.json",
+          "target_region_count": 10
+        },
+        "successful_routes": 762
+      }
+    }
+  ],
+  "all_exit_zero": false,
+  "parameterized_followups": [
+    {
+      "test": "town_navigation_acceptance.gd",
+      "args": [
+        "--save=continuity-gate-20260923/nav-probe-save.json"
+      ],
+      "exit_code": 2,
+      "timed_out": false,
+      "elapsed_seconds": 1.367,
+      "summary": {
+        "code": "save_required",
+        "ok": false
+      }
+    },
+    {
+      "test": "town_navigation_acceptance.gd",
+      "args": [
+        "--save=continuity-gate-20260923/nav-probe-save.json",
+        "--stop-check"
+      ],
+      "exit_code": 2,
+      "timed_out": false,
+      "elapsed_seconds": 1.355,
+      "summary": {
+        "code": "save_required",
+        "ok": false
+      }
+    },
+    {
+      "test": "town_gateway_knowledge_acceptance.gd",
+      "args": [],
+      "exit_code": 1,
+      "timed_out": false,
+      "elapsed_seconds": 1.361,
+      "summary": {
+        "checks": 50,
+        "decision_source": "fake_local_transport",
+        "failures": 2,
+        "life_sequence": 33,
+        "passed": false,
+        "phase": "seed",
+        "real_paid_calls": 0,
+        "suite": "town_gateway_knowledge"
+      }
+    },
+    {
+      "test": "town_gateway_knowledge_acceptance.gd",
+      "args": [],
+      "exit_code": 1,
+      "timed_out": false,
+      "elapsed_seconds": 0.901,
+      "summary": {
+        "checks": 12,
+        "decision_source": "fake_local_transport",
+        "failures": 2,
+        "life_sequence": 33,
+        "passed": false,
+        "phase": "cold",
+        "real_paid_calls": 0,
+        "suite": "town_gateway_knowledge"
+      }
+    }
+  ],
+  "all_parameterized_exit_zero": false,
+  "corrected_parameterized_followups": [
+    {
+      "test": "town_navigation_acceptance.gd",
+      "args": [
+        "--",
+        "--save=continuity-gate-20260923/nav-probe-save.json"
+      ],
+      "elapsed_seconds": 1.359,
+      "returncode": 2,
+      "summary": null,
+      "tail": [
+        "Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org",
+        "ERROR: Town mode requires an explicit separately migrated --town-save path",
+        "   at: push_error (core/variant/variant_utility.cpp:1023)",
+        "   GDScript backtrace (most recent call first):",
+        "       [0] _ready (res://spatial/town_street.gd:190)",
+        "       [1] _ready (res://spatial/living_town.gd:22)",
+        "       [2] run (res://tests/town_navigation_acceptance.gd:81)"
+      ]
+    },
+    {
+      "test": "town_navigation_acceptance.gd",
+      "args": [
+        "--",
+        "--save=continuity-gate-20260923/nav-probe-save.json",
+        "--stop-check"
+      ],
+      "elapsed_seconds": 1.365,
+      "returncode": 2,
+      "summary": null,
+      "tail": [
+        "Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org",
+        "ERROR: Town mode requires an explicit separately migrated --town-save path",
+        "   at: push_error (core/variant/variant_utility.cpp:1023)",
+        "   GDScript backtrace (most recent call first):",
+        "       [0] _ready (res://spatial/town_street.gd:190)",
+        "       [1] _ready (res://spatial/living_town.gd:22)",
+        "       [2] run (res://tests/town_navigation_acceptance.gd:81)"
+      ]
+    },
+    {
+      "test": "validate_gateway_adapter.py:town-history",
+      "elapsed_seconds": null,
+      "returncode": 0,
+      "summary": {
+        "case": "town-history-1",
+        "passed": true,
+        "get": 3,
+        "post": 3,
+        "contract_errors": [],
+        "world_sha256": "c537d68401cc8ff8958d4ed08a3690a917a992750d8efd9df18134eed7cfe402"
+      },
+      "tail": [
+        "{\"case\": \"town-history-0\", \"passed\": true, \"get\": 1, \"post\": 1, \"contract_errors\": [], \"world_sha256\": \"3ded931b2d4db66315dcf7d0d280b0011f53862b12b07788b87523c99a860ca7\"}",
+        "{\"case\": \"town-history-1\", \"passed\": true, \"get\": 3, \"post\": 3, \"contract_errors\": [], \"world_sha256\": \"c537d68401cc8ff8958d4ed08a3690a917a992750d8efd9df18134eed7cfe402\"}"
+      ]
+    }
+  ],
+  "all_corrected_followups_passed": false,
+  "navigation_corrected_followups": [
+    {
+      "test": "town_navigation_acceptance.gd",
+      "args": [
+        "--",
+        "--town-save=continuity-gate-20260923/nav-world-copy.json",
+        "--save=continuity-gate-20260923/nav-probe-save.json"
+      ],
+      "elapsed_seconds": 71.876,
+      "returncode": 0,
+      "summary": {
+        "bake_status": "ready",
+        "checks": 14,
+        "failures": 0,
+        "off_center": {
+          "arrived": true,
+          "end": "(-0.376644, 0.000865, 30.05736)",
+          "first_direction": "(0.0, 0.0, 0.0)",
+          "frames": 1049,
+          "saw_direction": true,
+          "start": "(-22.0, 0.1, 39.0)",
+          "status": "following"
+        },
+        "ok": true,
+        "ramp": {
+          "arrived": true,
+          "end": "(0.000002, 0.000936, 52.56699)",
+          "first_direction": "(0.0, 0.0, 0.0)",
+          "frames": 1005,
+          "saw_direction": true,
+          "start": "(0.0, 0.22, 30.0)",
+          "status": "following"
+        },
+        "reverse": {
+          "arrived": true,
+          "end": "(-0.000001, 0.000936, 30.38818)",
+          "first_direction": "(0.0, 0.0, 0.0)",
+          "frames": 1006,
+          "saw_direction": true,
+          "start": "(0.0, 0.1, 53.0)",
+          "status": "following"
+        },
+        "save_path": "continuity-gate-20260923/nav-probe-save.json",
+        "trough": {
+          "arrived": true,
+          "end": "(10.109, 0.000931, 47.99702)",
+          "first_direction": "(0.0, 0.0, 0.0)",
+          "frames": 537,
+          "saw_direction": true,
+          "start": "(0.0, 0.1, 53.0)",
+          "status": "following"
+        },
+        "unreachable_status": "unreachable"
+      },
+      "tail": [
+        "{\"bake_status\":\"ready\",\"checks\":14,\"failures\":0,\"off_center\":{\"arrived\":true,\"end\":\"(-0.376644, 0.000865, 30.05736)\",\"first_direction\":\"(0.0, 0.0, 0.0)\",\"frames\":1049,\"saw_direction\":true,\"start\":\"(-22.0, 0.1, 39.0)\",\"status\":\"following\"},\"ok\":true,\"ramp\":{\"arrived\":true,\"end\":\"(0.000002, 0.000936, 52.56699)\",\"first_direction\":\"(0.0, 0.0, 0.0)\",\"frames\":1005,\"saw_direction\":true,\"start\":\"(0.0, 0.22, 30.0)\",\"status\":\"following\"},\"reverse\":{\"arrived\":true,\"end\":\"(-0.000001, 0.000936, 30.38818)\",\"first_direction\":\"(0.0, 0.0, 0.0)\",\"frames\":1006,\"saw_direction\":true,\"start\":\"(0.0, 0.1, 53.0)\",\"status\":\"following\"},\"save_path\":\"private\\\\worlds\\\\restart-20260918-01\\\\continuity-gate-20260923\\\\nav-probe-save.json\",\"trough\":{\"arrived\":true,\"end\":\"(10.109, 0.000931, 47.99702)\",\"first_direction\":\"(0.0, 0.0, 0.0)\",\"frames\":537,\"saw_direction\":true,\"start\":\"(0.0, 0.1, 53.0)\",\"status\":\"following\"},\"unreachable_status\":\"unreachable\"}",
+        "WARNING: Navigation region synchronization had 4 edge error(s).",
+        "More than 2 edges tried to occupy the same map rasterization space.",
+        "This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.",
+        "Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.",
+        "Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.",
+        "This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.",
+        "   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)"
+      ]
+    },
+    {
+      "test": "town_navigation_acceptance.gd",
+      "args": [
+        "--",
+        "--town-save=continuity-gate-20260923/nav-world-copy.json",
+        "--save=continuity-gate-20260923/nav-probe-save.json",
+        "--stop-check"
+      ],
+      "elapsed_seconds": 10.603,
+      "returncode": 0,
+      "summary": {
+        "checks": 6,
+        "failures": 0,
+        "ok": true,
+        "restart_direction": "(0.0, 0.0, 0.0)",
+        "save_path": "continuity-gate-20260923/nav-probe-save.json",
+        "stop_check": true
+      },
+      "tail": [
+        "{\"checks\":6,\"failures\":0,\"ok\":true,\"restart_direction\":\"(0.0, 0.0, 0.0)\",\"save_path\":\"private\\\\worlds\\\\restart-20260918-01\\\\continuity-gate-20260923\\\\nav-probe-save.json\",\"stop_check\":true}",
+        "WARNING: Navigation region synchronization had 4 edge error(s).",
+        "More than 2 edges tried to occupy the same map rasterization space.",
+        "This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.",
+        "Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.",
+        "Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.",
+        "This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.",
+        "   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)"
+      ]
+    }
+  ],
+  "navigation_corrected_passed": true,
+  "visibility": "public_sanitized_evidence"
+}

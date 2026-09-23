@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 317,
+  "end_seq": 320,
+  "elapsed_seconds": 12481.63333333019,
+  "decision_count": 3,
+  "residents": [
+    {
+      "resident_id": "shared:well-keeper",
+      "name": "Ari",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:baker",
+      "name": "Wren",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:smith",
+      "name": "Flint",
+      "decisions": [
+        {
+          "request_id": "turn:shared:smith:0:40",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a20",
+            "reason": "Rowan just mentioned other dull edges. I'm a metal repairer with 9 Col and 2 food, satiety 77 energy 64—stable. Talking to Rowan could lead to a clear repair request with fair terms.",
+            "speech": "You said other edges. Name the tool and part, and we'll set a price."
+          },
+          "resolved_action": "ability:talk:shared:carpenter",
+          "stated_reason": "Rowan just mentioned other dull edges. I'm a metal repairer with 9 Col and 2 food, satiety 77 energy 64—stable. Talking to Rowan could lead to a clear repair request with fair terms.",
+          "proposed_speech": "You said other edges. Name the tool and part, and we'll set a price.",
+          "actually_spoken": "You said other edges. Name the tool and part, and we'll set a price.",
+          "speech_event_seq": 318,
+          "recipients": [
+            "shared:smith",
+            "shared:carpenter"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "resident_said",
+            "effect": {
+              "ok": true,
+              "code": "resident_said",
+              "event_id": "life_event_318"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "You said other edges. Name the tool and part, and we'll set a price.",
+              "event_id": "life_event_318",
+              "event_seq": 318,
+              "recipient_ids": [
+                "shared:smith",
+                "shared:carpenter"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "resident_said",
+              "actor_id": "shared:smith",
+              "subject_id": "shared:carpenter",
+              "recipient_ids": [
+                "shared:smith",
+                "shared:carpenter"
+              ],
+              "operation_id": "turn:shared:smith:0:40",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "You said other edges. Name the tool and part, and we'll set a price.",
+              "contractual": false,
+              "epistemic_status": "speaker_statement_not_verified_world_fact",
+              "seq": 318,
+              "event_id": "life_event_318"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:smith:0:41",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a19",
+            "reason": "Rowan and I have been talking past each other about dull edges. I need to step back, observe my surroundings, and think clearly before saying more. My satiety and energy are adequate, so no urgent survival need. I'll take a moment to look around and assess what's actually here."
+          },
+          "resolved_action": "ability:observe",
+          "stated_reason": "Rowan and I have been talking past each other about dull edges. I need to step back, observe my surroundings, and think clearly before saying more. My satiety and energy are adequate, so no urgent survival need. I'll take a moment to look around and assess what's actually here.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "surroundings_observed",
+            "effect": {
+              "ok": true,
+              "code": "surroundings_observed",
+              "event_id": "life_event_320",
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "private_observation"
+              }
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "private_observation"
+            }
+          },
+          "later_events": [
+            {
+              "type": "surroundings_observed",
+              "actor_id": "shared:smith",
+              "subject_id": "shared:smith",
+              "recipient_ids": [
+                "shared:smith"
+              ],
+              "operation_id": "turn:shared:smith:0:41",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "I paused to observe my current surroundings.",
+              "contractual": false,
+              "observed": {
+                "position": [
+                  3.4007720947265625,
+                  9.728223085403442e-05,
+                  13.397780418395996
+                ],
+                "needs": {
+                  "hunger": 77
+                },
+                "nearby_residents": [
+                  {
+                    "id": "shared:carpenter",
+                    "name": "Rowan"
+                  }
+                ],
+                "known_places": [
+                  "caravan_rest",
+                  "market_plaza",
+                  "planted_commons",
+                  "west_forecourt"
+                ]
+              },
+              "private_observation": true,
+              "seq": 320,
+              "event_id": "life_event_320"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:carpenter",
+      "name": "Rowan",
+      "decisions": [
+        {
+          "request_id": "turn:shared:carpenter:0:45",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a23",
+            "reason": "Flint asked about other dull edges twice, and I already invited him to meet. We're now at the plaza after a joint visit, and he said something about other edges. I should talk to him directly to clarify what tool and part needs repair, since I need explicit terms before agreeing to any work.",
+            "speech": "Flint, you mentioned other edges gone dull. I'm listening—what tool and which part? I like to know the shape of a job before I say yes."
+          },
+          "resolved_action": "ability:talk:shared:smith",
+          "stated_reason": "Flint asked about other dull edges twice, and I already invited him to meet. We're now at the plaza after a joint visit, and he said something about other edges. I should talk to him directly to clarify what tool and part needs repair, since I need explicit terms before agreeing to any work.",
+          "proposed_speech": "Flint, you mentioned other edges gone dull. I'm listening—what tool and which part? I like to know the shape of a job before I say yes.",
+          "actually_spoken": "Flint, you mentioned other edges gone dull. I'm listening—what tool and which part? I like to know the shape of a job before I say yes.",
+          "speech_event_seq": 319,
+          "recipients": [
+            "shared:carpenter",
+            "shared:smith"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "resident_said",
+            "effect": {
+              "ok": true,
+              "code": "resident_said",
+              "event_id": "life_event_319"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "Flint, you mentioned other edges gone dull. I'm listening—what tool and which part? I like to know the shape of a job before I say yes.",
+              "event_id": "life_event_319",
+              "event_seq": 319,
+              "recipient_ids": [
+                "shared:carpenter",
+                "shared:smith"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "resident_said",
+              "actor_id": "shared:carpenter",
+              "subject_id": "shared:smith",
+              "recipient_ids": [
+                "shared:carpenter",
+                "shared:smith"
+              ],
+              "operation_id": "turn:shared:carpenter:0:45",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "Flint, you mentioned other edges gone dull. I'm listening—what tool and which part? I like to know the shape of a job before I say yes.",
+              "contractual": false,
+              "epistemic_status": "speaker_statement_not_verified_world_fact",
+              "seq": 319,
+              "event_id": "life_event_319"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:innkeeper",
+      "name": "Mara",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:herder",
+      "name": "Heath",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:gardener",
+      "name": "Fern",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:weaver",
+      "name": "Iris",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:fisher",
+      "name": "Reed",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:healer",
+      "name": "Sage",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    }
+  ],
+  "new_world_events": [
+    {
+      "type": "resident_said",
+      "actor_id": "shared:smith",
+      "subject_id": "shared:carpenter",
+      "recipient_ids": [
+        "shared:smith",
+        "shared:carpenter"
+      ],
+      "operation_id": "turn:shared:smith:0:40",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "You said other edges. Name the tool and part, and we'll set a price.",
+      "contractual": false,
+      "epistemic_status": "speaker_statement_not_verified_world_fact",
+      "seq": 318,
+      "event_id": "life_event_318"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:carpenter",
+      "subject_id": "shared:smith",
+      "recipient_ids": [
+        "shared:carpenter",
+        "shared:smith"
+      ],
+      "operation_id": "turn:shared:carpenter:0:45",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "Flint, you mentioned other edges gone dull. I'm listening—what tool and which part? I like to know the shape of a job before I say yes.",
+      "contractual": false,
+      "epistemic_status": "speaker_statement_not_verified_world_fact",
+      "seq": 319,
+      "event_id": "life_event_319"
+    },
+    {
+      "type": "surroundings_observed",
+      "actor_id": "shared:smith",
+      "subject_id": "shared:smith",
+      "recipient_ids": [
+        "shared:smith"
+      ],
+      "operation_id": "turn:shared:smith:0:41",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "I paused to observe my current surroundings.",
+      "contractual": false,
+      "observed": {
+        "position": [
+          3.4007720947265625,
+          9.728223085403442e-05,
+          13.397780418395996
+        ],
+        "needs": {
+          "hunger": 77
+        },
+        "nearby_residents": [
+          {
+            "id": "shared:carpenter",
+            "name": "Rowan"
+          }
+        ],
+        "known_places": [
+          "caravan_rest",
+          "market_plaza",
+          "planted_commons",
+          "west_forecourt"
+        ]
+      },
+      "private_observation": true,
+      "seq": 320,
+      "event_id": "life_event_320"
+    }
+  ],
+  "limitation": "No decisions or speech are inferred from a personality profile. A pending provider request has no known decision."
+}

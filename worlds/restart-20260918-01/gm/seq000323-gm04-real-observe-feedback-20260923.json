@@ -1,0 +1,31 @@
+{
+  "kind": "real_gm_observation_feedback",
+  "world_id": "shared:restart-20260918-01",
+  "world_seq": 323,
+  "world_sha256": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "evidence_sha256": "d89d9bf9a964b54082e2db16cddb0c5ab0cee05ade0c24702d5acc36c4a0e971",
+  "gm_id": "gm-04",
+  "observation_run_id": "run-20260923T095112Z-687063",
+  "feedback_run_id": "feedback-20260923T095842Z-8722ff",
+  "receipt_sha256": "20ae53a3678306a43f04a234ad6017bc242e765c5f8f0bd252056ada45164954",
+  "observation_status": "ok",
+  "feedback_status": "ok",
+  "feedback_decision": "accept",
+  "candidate_created": false,
+  "release_attempted": false,
+  "world_changed": false,
+  "protected_paths_changed": [],
+  "next_work": "Collect a fuller bounded projection and inspect existing capabilities before deciding on any coding scope.",
+  "historical_unknowns_preserved": {
+    "gm05_partial": true,
+    "gm06_unknown_acknowledged": true
+  },
+  "state_checkpoint": "../gm/observe-feedback-seq323-660f53814f49f545.gm-state.json",
+  "state_sha256": "660f53814f49f54501f30510b5162125bde9bd290e21875645668b8f76dab80a",
+  "usage_checkpoint": "../usage/seq000323-46a220ec86811a78.usage.json",
+  "usage_sha256": "46a220ec86811a78ae3d8f3ac19487de4287adf028bacf24548a1e50877386f8",
+  "limitations": [
+    "This real cycle proves observation and feedback acknowledgement with no code candidate.",
+    "The historical GM-05 partial and GM-06 unknown usage remain marked unknown in developer records."
+  ]
+}

@@ -10,6 +10,8 @@ extends "res://spatial/street_trial.gd"
 # The playable world enters all resident behavior through the common capability boundary.
 # Keep the established base type for fixture hosts that override individual reducers.
 const Town = preload("res://core/town_actions.gd")
+const AdventureResidentTown = preload("res://core/adventure_resident_town.gd")
+const AdventureLiveBridge = preload("res://core/adventure_live_bridge.gd")
 const BaseTown = preload("res://core/town_baking.gd")
 const TownTurns = preload("res://agents/town_turns.gd")
 const TownTools = preload("res://spatial/town_tools.gd")
@@ -121,12 +123,31 @@ var _spaced_foraging := false
 var _foraging_exit_targets: Dictionary = {}
 var gm_export_path := ""
 var gm_export_status := ""
+## Optional disposable adventure sidecar. This branch is deliberately opt-in and
+## never changes the maintained TownActions instance or canonical save path.
+var adventure_live_install := false
+var adventure_sidecar_path := ""
+var adventure_manifest_path := ""
+var adventure_bridge = null
+var adventure_route_receipt: Dictionary = {}
+var adventure_route_ready := false
+var adventure_route_start := Vector3.INF
 
 func _ready() -> void:
 	restore_only = OS.get_cmdline_user_args().has("--town-restore")
 	stop_on_idle = OS.get_cmdline_user_args().has("--town-stop-on-idle")
 	stop_on_decision_limit = OS.get_cmdline_user_args().has("--town-stop-on-decision-limit")
 	for arg in OS.get_cmdline_user_args():
+		if arg == "--adventure-live-install":
+			adventure_live_install = true
+		if arg.begins_with("--adventure-sidecar="):
+			adventure_sidecar_path = arg.trim_prefix("--adventure-sidecar=")
+		if arg.begins_with("--adventure-manifest="):
+			adventure_manifest_path = arg.trim_prefix("--adventure-manifest=")
+		if arg.begins_with("--adventure-route-start="):
+			var parts := arg.trim_prefix("--adventure-route-start=").split(",")
+			if parts.size() == 3 and parts[0].is_valid_float() and parts[1].is_valid_float() and parts[2].is_valid_float():
+				adventure_route_start = Vector3(float(parts[0]), float(parts[1]), float(parts[2]))
 		if arg == "--town-gateway":
 			gateway_mode = true
 		if arg.begins_with("--town-duration="):
@@ -190,11 +211,29 @@ func _ready() -> void:
 		push_error("Town mode requires an explicit separately migrated --town-save path")
 		get_tree().quit(2)
 		return
+	if adventure_live_install and (adventure_sidecar_path.is_empty() or adventure_manifest_path.is_empty()):
+		push_error("Adventure live install requires --adventure-sidecar and --adventure-manifest")
+		get_tree().quit(2)
+		return
+	if adventure_live_install:
+		town = AdventureResidentTown.new()
 	var loaded := town.load_from(_save_path)
 	if not loaded.ok:
 		push_error(JSON.stringify(loaded))
 		get_tree().quit(2)
 		return
+	if adventure_live_install:
+		adventure_bridge = AdventureLiveBridge.new()
+		var installed: Dictionary = adventure_bridge.install(_save_path, adventure_sidecar_path)
+		if not installed.ok:
+			push_error("Adventure live install failed: " + JSON.stringify(installed))
+			get_tree().quit(2)
+			return
+		var attached: Dictionary = town.attach_adventure(adventure_bridge)
+		if not attached.ok:
+			push_error("Adventure resident bridge failed: " + JSON.stringify(attached))
+			get_tree().quit(2)
+			return
 	var startup_snapshot: Dictionary = town.snapshot()
 	session_start_life_seq = int(startup_snapshot.life.get("seq", -1))
 	for startup_id in town.active_ids():
@@ -314,9 +353,75 @@ func _ready() -> void:
 		if not _focus_baking_point(startup_focus_baking_id):
 			push_error("Startup focus target is not an installed baking point: " + startup_focus_baking_id)
 			get_tree().quit(2)
+	if adventure_live_install:
+		call_deferred("_prepare_adventure_gate_route_deferred")
+
+func _prepare_adventure_gate_route_deferred() -> void:
+	var prepared: Dictionary = await _prepare_adventure_gate_route("shared:baker")
+	if not prepared.ok:
+		push_error("Adventure gate route failed: " + JSON.stringify(prepared))
+		get_tree().quit(2)
+		return
+	adventure_route_ready = true
 
 func _configure_navigation() -> void:
 	pass
+
+func _prepare_adventure_gate_route(resident_id: String) -> Dictionary:
+	if resident_id not in town.active_ids() or not bodies.has(resident_id):
+		return {"ok": false, "code": "adventure_route_resident_missing"}
+	for _frame in 240:
+		if town_navigation != null and town_navigation.enabled and not town_navigation.baking:
+			break
+		await get_tree().process_frame
+	if town_navigation == null or not town_navigation.enabled:
+		return {"ok": false, "code": "adventure_navigation_unavailable"}
+	var body: CharacterBody3D = bodies[resident_id]
+	if adventure_route_start.is_finite() and resident_id == "shared:baker":
+		# Apply a disposable route fixture only after the real navmesh is ready, matching
+		# the rendered probe's physical-start boundary.
+		body.global_position = adventure_route_start
+		town.host_move(resident_id, adventure_route_start)
+		await get_tree().physics_frame
+	var target := Vector3(0.0, 0.10, 53.0)
+	var start := body.global_position
+	var max_step := 0.0
+	var frames_used := 0
+	var saw_floor := false
+	var route_status := ""
+	var prior_graph_only: bool = bool(town_navigation.graph_only_routes)
+	# The maintained quarter selects its authored graph for resident jobs. This
+	# disposable gate probe has a reviewed collision target, so it asks the same
+	# baked navmesh for the measured approach and restores the production choice.
+	town_navigation.graph_only_routes = false
+	for frame in 4000:
+		frames_used = frame + 1
+		var direction: Vector3 = town_navigation.direction_for(resident_id, "adventure-live-gate-route", body, target)
+		route_status = town_navigation.route_status(resident_id)
+		body.velocity.x = direction.x * 1.35
+		body.velocity.z = direction.z * 1.35
+		body.velocity.y = -0.2 if body.is_on_floor() else body.velocity.y - 18.0 / 60.0
+		body.move_and_slide()
+		if body.is_on_floor(): saw_floor = true
+		max_step = maxf(max_step, Vector2(body.velocity.x, body.velocity.z).length() / 60.0)
+		if body.global_position.distance_to(target) <= 0.45:
+			break
+		await get_tree().physics_frame
+	var arrived := body.global_position.distance_to(target) <= 0.45
+	if not arrived:
+		town_navigation.graph_only_routes = prior_graph_only
+		return {"ok": false, "code": "adventure_gate_unreachable", "status": route_status,
+			"frames": 4000, "metres": start.distance_to(body.global_position)}
+	town_navigation.graph_only_routes = prior_graph_only
+	town.host_move(resident_id, body.global_position)
+	adventure_route_receipt = {"ok": true, "route_kind": "collision_aware_town_route",
+		"route_id": "adventure-live-gate-route", "target": "wilderness_gate", "resident_id": resident_id,
+		"status": route_status, "frames": frames_used,
+		"metres": start.distance_to(body.global_position), "max_step_m": max_step, "saw_floor_collision": saw_floor}
+	var marked: Dictionary = town.mark_physical_arrival(_save_path, resident_id, adventure_route_receipt)
+	if not marked.ok:
+		return marked
+	return {"ok": true, "code": "adventure_gate_route_ready", "receipt": adventure_route_receipt}
 
 func _sync_residents() -> void:
 	var palette := [Color("954f42"), Color("345f79"), Color("657448")]
@@ -430,6 +535,8 @@ func _foraging_idle_exit(id: String, body: CharacterBody3D) -> Vector3:
 func _process(delta: float) -> void:
 	if status == null:
 		return
+	if adventure_live_install and not adventure_route_ready:
+		return
 	_update_resident_observer()
 	_update_dialogue_panel_layout()
 	if nameplates != null:
@@ -537,6 +644,8 @@ func _begin_capture(reason: String) -> void:
 
 func _physics_process(delta: float) -> void:
 	if status == null:
+		return
+	if adventure_live_install and not adventure_route_ready:
 		return
 	if capture_dir.is_empty() and not _composing_dialogue():
 		super._physics_process(delta)
@@ -1679,6 +1788,12 @@ func _capture_town() -> void:
 	evidence["identity_count"] = snap.residents.size()
 	evidence["world_origin"] = "fixture" if is_fixture else "independent_new_world" if is_new_world else "migration_validation"
 	evidence["scripted_trade"] = scripted_trade
+	if adventure_live_install:
+		evidence["adventure_live_install"] = {
+			"canonical_mutation_allowed": false,
+			"route_receipt": adventure_route_receipt,
+			"manifest_path": adventure_manifest_path,
+			"resident_adoption": town.adventure_resident_adopted() if town.has_method("adventure_resident_adopted") else false}
 	evidence["validation_decisions_started"] = validation_decisions_started
 	evidence["validation_decision_limit"] = validation_decision_limit
 	evidence["validation_limit_reached"] = _validation_limit_reached()
@@ -1716,6 +1831,13 @@ func _capture_town() -> void:
 	file.close()
 	if not gm_export_path.is_empty():
 		_note_gm_export(town.write_background_gm_snapshot(gm_export_path))
+	if adventure_live_install and adventure_bridge != null:
+		var sidecar_saved: Dictionary = adventure_bridge.save_manifest(adventure_manifest_path)
+		evidence["adventure_live_install"]["manifest_saved"] = sidecar_saved
+		# The evidence file is written again below so the save result is bound to the capture.
+		file = FileAccess.open(capture_dir.path_join("evidence.json"), FileAccess.WRITE)
+		file.store_string(JSON.stringify(evidence, "  "))
+		file.close()
 	# A nonzero exit is the engine's own statement that this bounded episode ended
 	# with a reply still owed; the launcher reports it instead of a clean pass.
 	get_tree().quit(shutdown_exit_code)

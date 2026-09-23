@@ -50,6 +50,15 @@ func _initialize() -> void:
 		== "brain_context_window_exceeded", "actual OGA context branch is classified exactly")
 	check(brain.provider_failure_identifier("unrecognized provider detail") == "brain_provider_failed",
 		"unknown provider text remains sanitized")
+	brain._pending = "fixture-failed"
+	brain._on_completed("fixture-failed", JSON.stringify({"status": "Failed", "error": "gateway_validation_failed"}))
+	check(brain._result.get("code") == "brain_gateway_validation_failed",
+		"compiled runtime failure keeps its verified gateway identifier")
+	brain._pending = "fixture-failed-agent"
+	brain._on_completed("fixture-failed-agent", JSON.stringify({"status": "Failed",
+		"agent": {"error": "budget_gateway_rejected_or_uncertain"}}))
+	check(brain._result.get("code") == "brain_gateway_rejected_or_uncertain",
+		"nested runtime failure keeps its sanitized provider identifier")
 	brain.free()
 	print(JSON.stringify({"suite": "resident_brain_context_budget", "passed": failures.is_empty(),
 		"checks": checks, "failures": failures, "real_paid_calls": 0}))

@@ -1,0 +1,33 @@
+{
+  "kind": "adventure_host_effect_decision",
+  "decision_date": "2026-09-23",
+  "contract_id": "adventure_contract.v1",
+  "contract_status": "ready_for_disposable_live_install",
+  "damage_formula": "max(1, attack_power - defense_power)",
+  "damage_formula_status": "host_approved_original_extension_v1_not_official_canon",
+  "damage_formula_guards": [
+    "requires authoritative attack power",
+    "requires authoritative defense power",
+    "requires authoritative equipped weapon",
+    "unknown values reject the action",
+    "resident-versus-resident damage remains refused"
+  ],
+  "evidence": {
+    "reducer_checks": 29,
+    "capability_registration_checks": 91,
+    "disposable_migration_checks": 16,
+    "rendered_probe_checks": 13,
+    "workstation_route_checks": 14,
+    "cold_restore_exact": true,
+    "canonical_world_touched": false,
+    "canonical_world_sha256": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e"
+  },
+  "scope": "disposable_live_install_decision_only",
+  "not_authorized": [
+    "canonical seq323 mutation",
+    "resident adoption claim",
+    "official combat formula claim",
+    "permanent death or resident-versus-resident damage"
+  ],
+  "next_gate": "real_gm_acknowledgement_then_disposable_live_install"
+}

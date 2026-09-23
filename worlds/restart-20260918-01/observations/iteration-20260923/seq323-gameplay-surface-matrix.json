@@ -1,0 +1,101 @@
+{
+  "kind": "gameplay_surface_matrix",
+  "tests": [
+    {
+      "test": "floor1_expanded_world_test.gd",
+      "returncode": 2,
+      "elapsed_seconds": 4.332,
+      "summary": null,
+      "tail": [
+        "Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org",
+        "ERROR: Expanded world test output required",
+        "   at: push_error (core/variant/variant_utility.cpp:1023)",
+        "   GDScript backtrace (most recent call first):",
+        "       [0] _finish (res://tests/floor1_expanded_world_test.gd:917)",
+        "       [1] _run (res://tests/floor1_expanded_world_test.gd:908)"
+      ]
+    },
+    {
+      "test": "floor1_modular_interior_test.gd",
+      "returncode": 0,
+      "elapsed_seconds": 22.269,
+      "summary": {
+        "checks": 36,
+        "failure_labels": [],
+        "failures": 0,
+        "paid_calls": 0,
+        "rooms": [
+          {
+            "closed_signed_m": 0.365,
+            "kind": "home",
+            "props": 57,
+            "proxies": 4,
+            "route_half_clearance_m": 0.485,
+            "useful_goal_miss_m": 0.151,
+            "variant": "01_hearth_cottage",
+            "workshop_assets": []
+          },
+          {
+            "closed_signed_m": 0.365,
+            "kind": "bakery",
+            "props": 57,
+            "proxies": 6,
+            "route_half_clearance_m": 0.465,
+            "useful_goal_miss_m": 0.144,
+            "variant": "02_market_house",
+            "workshop_assets": [
+              "bakers_oven_peel_rack",
+              "grain_hand_quern"
+            ]
+          },
+          {
+            "closed_signed_m": 0.365,
+            "kind": "artisan",
+            "props": 47,
+            "proxies": 4,
+            "route_half_clearance_m": 0.52,
+            "useful_goal_miss_m": 0.167,
+            "variant": "03_corner_turret",
+            "workshop_assets": [
+              "forge_with_bellows",
+              "horn_anvil_stump"
+            ]
+          }
+        ]
+      },
+      "tail": [
+        "Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org",
+        "{\"checks\":36,\"failure_labels\":[],\"failures\":0,\"paid_calls\":0,\"rooms\":[{\"closed_signed_m\":0.365,\"kind\":\"home\",\"props\":57,\"proxies\":4,\"route_half_clearance_m\":0.485,\"useful_goal_miss_m\":0.151,\"variant\":\"01_hearth_cottage\",\"workshop_assets\":[]},{\"closed_signed_m\":0.365,\"kind\":\"bakery\",\"props\":57,\"proxies\":6,\"route_half_clearance_m\":0.465,\"useful_goal_miss_m\":0.144,\"variant\":\"02_market_house\",\"workshop_assets\":[\"bakers_oven_peel_rack\",\"grain_hand_quern\"]},{\"closed_signed_m\":0.365,\"kind\":\"artisan\",\"props\":47,\"proxies\":4,\"route_half_clearance_m\":0.52,\"useful_goal_miss_m\":0.167,\"variant\":\"03_corner_turret\",\"workshop_assets\":[\"forge_with_bellows\",\"horn_anvil_stump\"]}]}"
+      ]
+    },
+    {
+      "test": "sao_town_quarter_acceptance.gd",
+      "returncode": 0,
+      "elapsed_seconds": 0.432,
+      "summary": {
+        "buildings": 81,
+        "checks": 21,
+        "failures": [],
+        "gardens": 12,
+        "ok": true,
+        "water": 3
+      },
+      "tail": [
+        "Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org",
+        "{\"buildings\":81,\"checks\":21,\"failures\":[],\"gardens\":12,\"ok\":true,\"water\":3}"
+      ]
+    }
+  ],
+  "all_passed": false,
+  "corrected_floor1_expanded": {
+    "test": "floor1_expanded_world_test.gd",
+    "returncode": 0,
+    "check_count": 254,
+    "failure_count": 0,
+    "world_state_mutations": 0,
+    "model_calls": 0,
+    "report": "floor1-expanded-report.json"
+  },
+  "all_corrected_passed": true,
+  "visibility": "public_sanitized_evidence"
+}

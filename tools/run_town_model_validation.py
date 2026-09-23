@@ -613,6 +613,9 @@ def main():
                         help='Keep advancing through idle time, then pause/capture after the decision cap and any in-flight model result; durable physical jobs remain pending.')
     parser.add_argument('--gm-export', type=Path, help='Optional .json file beneath the new --out directory for background-GM evidence from this same world.')
     parser.add_argument('--gm-status', type=Path, help='Optional external read-only public GM completion snapshot shown by the town UI; never enters world or resident context.')
+    parser.add_argument('--adventure-sidecar', type=Path, help='Optional reviewed adventure sidecar for a disposable resident-adoption probe.')
+    parser.add_argument('--adventure-manifest', type=Path, help='Manifest path for the disposable adventure resident-adoption probe; requires --adventure-sidecar.')
+    parser.add_argument('--adventure-route-start', help='Optional disposable-only x,y,z road start for the reviewed physical gate probe.')
     args = parser.parse_args()
     if not 5 <= args.seconds <= 900 or not 1 <= args.max_requests <= 32:
         parser.error('Seconds 5..900; maximum requests 1..32.')
@@ -626,6 +629,12 @@ def main():
         parser.error('Scripted inquiry text requires a target and 1..512 characters.')
     out, save = args.out.resolve(), args.save.resolve()
     gm_export = args.gm_export.resolve() if args.gm_export else None
+    adventure_sidecar = args.adventure_sidecar.resolve() if args.adventure_sidecar else None
+    adventure_manifest = args.adventure_manifest.resolve() if args.adventure_manifest else None
+    if (adventure_sidecar is None) != (adventure_manifest is None):
+        parser.error('--adventure-sidecar and --adventure-manifest must be supplied together')
+    if adventure_sidecar is not None and not adventure_sidecar.is_file():
+        parser.error('Adventure sidecar does not exist; disposable install refuses to invent one')
     # --seconds is the episode duration; the engine's own bounded shutdown wait runs
     # after it, so the authorization deadline must cover both.
     deadline = datetime.now(timezone.utc) + timedelta(seconds=args.seconds + args.shutdown_wait + 55)
@@ -678,6 +687,11 @@ def main():
         command += ['--town-gm-export=' + str(gm_export)]
     if args.gm_status is not None:
         command += ['--town-gm-status=' + str(args.gm_status.resolve())]
+    if adventure_sidecar is not None:
+        command += ['--adventure-live-install', '--adventure-sidecar=' + str(adventure_sidecar),
+                    '--adventure-manifest=' + str(adventure_manifest)]
+        if args.adventure_route_start:
+            command += ['--adventure-route-start=' + args.adventure_route_start]
     if args.inquire_resident:
         command += ['--town-dialogue-fixture', '--town-inquire-resident=' + args.inquire_resident]
     if args.inquire_text is not None:

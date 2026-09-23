@@ -1,0 +1,38 @@
+{
+  "kind": "adventure_contract_fixture",
+  "contract_id": "adventure_contract.v1",
+  "contract_sha256": "b888c591160f7e432e9a66e562a7138471e98dc252186b7da677e09cc93eb4b3",
+  "acceptance_source_sha256": "e00697a6a0ba89b054c3c7a69fa9f0ce04eaa0635f661a612fc0691fd6950f33",
+  "checks": 29,
+  "failures": 0,
+  "paid_calls": 0,
+  "status": "ready_for_disposable_live_install",
+  "canonical_world_touched": false,
+  "canonical_seq": 323,
+  "covered": [
+    "town_safe_zone",
+    "physical_wilderness_and_labyrinth_transitions",
+    "idempotent_combat",
+    "reachable_flee",
+    "defeat_and_recovery",
+    "explicit_boss_victory",
+    "no_implicit_floor_unlock",
+    "finite_loot",
+    "exact_save_load",
+    "resident-versus-resident-refusal",
+    "physical-defeat-retreat",
+    "minimum-HP-recovery",
+    "committed-job-entry-rejection",
+    "authority-producer-declarations",
+    "unreachable-retreat-stays-in-zone",
+    "closed-unknown-equipment-encounter-loot",
+    "primary-source-boundary-review"
+  ],
+  "not_proven": [
+    "resident adoption",
+    "canonical live installation",
+    "official combat formula",
+    "wilderness rendering and full labyrinth scene",
+    "resident-led combat and floor progression"
+  ]
+}

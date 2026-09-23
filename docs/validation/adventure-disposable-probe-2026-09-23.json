@@ -1,0 +1,28 @@
+{
+  "kind": "adventure_disposable_migration_probe",
+  "probe_date": "2026-09-23",
+  "world_id": "shared:restart-20260918-01",
+  "source_seq": 323,
+  "source_world_sha256": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "source_world_sha256_after_probe": "2d80c92778c34dc7de1434d48a6203faa1bd3638aef5830cf63936e68656774e",
+  "source_world_byte_identical": true,
+  "sidecar_sha256": "959fe46b07ab4243615e81ffb8cea20b7fac022d43b0f42d21b1ca634da4cfbc",
+  "contract_id": "adventure_contract.v1",
+  "checks": 16,
+  "failures": 0,
+  "resident_count": 10,
+  "migrated_resident_ids_are_stable": true,
+  "combat_authority": "undefined_until_host_seed",
+  "loot_authority": "world_owned_only",
+  "closed_unknown_encounter_refusal": "encounter_missing",
+  "committed_job_entry_refusal": "committed_job_must_finish_or_reject",
+  "physical_return_receipt": "fled_to_safe_zone",
+  "cold_restore_exact": true,
+  "canonical_world_touched": false,
+  "status": "disposable_probe_passed_pending_gm_effect_feedback",
+  "limitations": [
+    "The probe used an isolated sidecar and did not install adventure state into TownActions.",
+    "No combat stats, weapon, encounter or loot were invented for migrated residents.",
+    "Physical-arrival booleans were exercised by the reducer fixture; a rendered wilderness scene remains a later gate."
+  ]
+}
