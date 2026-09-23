@@ -15,6 +15,7 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
 import unittest
 from unittest import mock
 from pathlib import Path
@@ -189,6 +190,53 @@ class ProductionRuntimePolicyTests(unittest.TestCase):
         self.assertEqual(gm_autonomy.policy_errors(policy), [])
         policy['mode'] = 'offline_fixture'
         self.assertEqual(gm_autonomy.policy_errors(policy), [])
+
+
+class SparseAlternateWorktreeTests(unittest.TestCase):
+    def test_sparse_candidate_uses_the_linked_worktrees_common_object_store(self):
+        """A linked worktree has a .git file; its object store is not ROOT/.git/objects."""
+        temporary = tempfile.TemporaryDirectory(prefix='gm sparse alternates ')
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        main = root / 'main repository'
+        source_worktree = root / 'source worktree'
+        candidate = root / 'candidate checkout'
+        main.mkdir()
+
+        def git(*args, cwd=None):
+            return subprocess.run(['git', *args], cwd=str(cwd or main), check=True,
+                                  capture_output=True, text=True, encoding='utf-8')
+
+        git('init', '--quiet', str(main))
+        git('config', 'user.name', 'Autonomy test')
+        git('config', 'user.email', 'autonomy-test@example.invalid')
+        source = main / 'game' / 'agents' / 'probe.txt'
+        source.parent.mkdir(parents=True)
+        source.write_text('linked worktree fixture\n', encoding='utf-8')
+        git('add', 'game/agents/probe.txt')
+        git('commit', '--quiet', '-m', 'fixture')
+        revision = git('rev-parse', 'HEAD').stdout.strip()
+        git('worktree', 'add', '--quiet', '--detach', str(source_worktree), revision)
+        self.assertTrue((source_worktree / '.git').is_file(),
+                        'the regression fixture must use a linked worktree gitfile')
+
+        cycle = object.__new__(gm_autonomy.Cycle)
+        cycle.policy = {'mode': 'local_trial',
+                        'scope_constraints': {'allowed_source_paths': ['game/agents/**']}}
+        with mock.patch.object(gm_autonomy, 'ROOT', source_worktree):
+            error = cycle.provision_sparse_candidate(candidate, revision)
+
+        self.assertIsNone(error, error)
+        self.assertEqual(git('-C', str(candidate), 'rev-parse', 'HEAD').stdout.strip(), revision)
+        self.assertEqual((candidate / 'game' / 'agents' / 'probe.txt').read_text(encoding='utf-8'),
+                         'linked worktree fixture\n')
+        recorded = (candidate / '.git' / 'objects' / 'info' / 'alternates').read_text(
+            encoding='utf-8').strip()
+        expected = git('-C', str(source_worktree), 'rev-parse', '--git-path', 'objects').stdout.strip()
+        expected_path = Path(expected)
+        if not expected_path.is_absolute():
+            expected_path = source_worktree / expected_path
+        self.assertEqual(recorded, str(expected_path.resolve(strict=True)).replace('\\', '/'))
 
 
 class MappingTests(unittest.TestCase):

@@ -1703,10 +1703,24 @@ class Cycle:
         initialized = invoke(['git', 'init', '--quiet', str(candidate)])
         if initialized.returncode != 0:
             return 'candidate_init_failed: ' + initialized.stderr.strip()[-300:]
+        object_store_result = invoke(['git', '-C', str(ROOT), 'rev-parse', '--git-path', 'objects'])
+        if object_store_result.returncode != 0:
+            return 'candidate_object_store_failed: ' + object_store_result.stderr.strip()[-300:]
+        object_store_text = object_store_result.stdout.strip()
+        if not object_store_text:
+            return 'candidate_object_store_failed: git returned an empty object-store path'
+        object_store = Path(object_store_text)
+        if not object_store.is_absolute():
+            object_store = ROOT / object_store
+        try:
+            object_store = object_store.resolve(strict=True)
+        except OSError as error:
+            return 'candidate_object_store_unavailable: ' + str(error)[-300:]
+        if not object_store.is_dir():
+            return 'candidate_object_store_unavailable: resolved path is not a directory'
         alternates = candidate / '.git' / 'objects' / 'info' / 'alternates'
         alternates.parent.mkdir(parents=True, exist_ok=True)
-        alternates.write_text(str((ROOT / '.git' / 'objects').resolve()).replace('\\', '/'),
-                              encoding='utf-8')
+        alternates.write_text(str(object_store).replace('\\', '/'), encoding='utf-8')
         directories = []
         if world_design_contract.required(self.policy):
             directories.extend(sorted({str(Path(rel).parent).replace('\\', '/')
