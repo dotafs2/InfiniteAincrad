@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "thread_id": "01a0d15b-3771-7f23-9729-e3aedd514d8a",
+  "exported_at_utc": "2026-09-24T10:48:15.374307+00:00",
+  "source_basename": "archive-01a0d15b-visible.jsonl",
+  "source_snapshot_bytes": 206109,
+  "source_snapshot_sha256": "87b6d58f7e8e0f944ac76535c1de30c4ff2a8d99452edb1bc559d07be3e48810",
+  "first_message_at": "2026-09-24T03:00:14.719Z",
+  "last_message_at": "2026-09-24T10:18:39.273Z",
+  "message_count": 111,
+  "role_counts": {
+    "user": 26,
+    "assistant": 85
+  },
+  "excluded_record_counts": {
+    "session_meta": 1,
+    "non_conversation_role": 25,
+    "injected_workspace_context": 4
+  },
+  "coverage": "visible text messages in this task only; no other tasks, tool logs, internal reasoning, or future messages",
+  "files": {
+    "conversation.json": "7a124b48dcf9e7af90c4bf57a6f70a61ad0c9f8410773385cdf7b726362040be",
+    "conversation.md": "ccddec5372f4c26785d22760963a695550d4994389e67a891ba02d9ffd12406f"
+  }
+}

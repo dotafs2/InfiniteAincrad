@@ -1,5 +1,9 @@
 # 历史全部流水
 
+## 2026-09-24 · City Sample Houdini cache recovery
+
+The City Sample Houdini investigation identified that running the Houdini 21 City Processor had overwritten the extracted `Small_City/CACHES` outputs. The original 56 cache files were restored from `CitySample_HoudiniFiles.zip`; the preview now reads the restored `BUILDING_VOLUME`, `ROAD_GEOM` and `GROUND_PC` data through attribute-clean preview nodes. The recovered merge contains 1,942,232 points and 1,606,257 primitives, and the stretched faces visible in the regenerated cache are gone. `CitySample_CachePreview_Original.hip` is the cache-only continuation file; `CitySample_CombinedDemo_OriginalCache.hip` retains the original processor graph with the restored cache paths. A portable copy with `$HIP/CACHES` paths, the patched Python 3 HDA and the three reference caches is published under `docs/validation/citysample-houdini-2026-09-24/`. The source City Sample installation under `C:\CitySample` was not modified.
+
 ## 2026-09-21 · SAO-inspired Town of Beginnings quarter study
 
 The first standalone town-study slice is now authored from public high-level references to Aincrad's Town of Beginnings: a fortified edge, southern gate, circular arrival plaza, radial streets and readable service landmarks. The implementation is original procedural Godot geometry with no copied map image, texture or third-party model. `sao_town_quarter_layout.json` records the layout, `sao_town_quarter.gd` builds the scene and collisions, and the dedicated scene can be launched with `Run-SaoTownQuarter.ps1`.

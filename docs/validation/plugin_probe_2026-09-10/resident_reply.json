@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "world_kind": "authored_test_fixture_not_main_world",
+  "provider": "gpt-5.6-luna",
+  "agent_id": "01a08a86-0264-7e52-b0bf-056d11647030",
+  "agent_closed": true,
+  "observation": {
+    "resident_id": "mira",
+    "background": "Cares for a child, cautious, frugal, dislikes taking others' possessions.",
+    "inventory": {"empty_bottle": 1, "bread": 1},
+    "location": "public_well",
+    "public_water_units": 3,
+    "nearby_resident": "carpenter_arlo",
+    "available_actions": ["walk", "observe", "eat", "rest", "wait"],
+    "authored_obstacle": "An attempt to fill the bottle did not succeed; its cause is unknown to the resident."
+  },
+  "reply": {
+    "resident_id": "mira",
+    "thought": "孩子今天还没有水喝，我得先弄清楚为什么空瓶装不进井水。井里有三份，不能拿得太多，也不能指望白拿别人的东西。阿洛在附近，也许观察他或井边情况能发现办法。",
+    "need": "弄清水瓶无法装水的原因",
+    "desired_outcome": "找到不影响邻居取水的取水办法",
+    "chosen_action": "observe"
+  },
+  "limitations": [
+    "The obstacle was supplied in the fixture; this is not an independently discovered need from a running game.",
+    "No GM implementation, plugin installation, world action, persistence or return visit has been tested.",
+    "No Kimi request or main-world write occurred."
+  ]
+}
