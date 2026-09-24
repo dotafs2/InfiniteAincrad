@@ -1,7 +1,7 @@
 @echo off
 setlocal
-if exist "%~dp0build\windows\SinkCity.exe" (
-    start "" "%~dp0build\windows\SinkCity.exe"
+if exist "%~dp0build\reference-windows\SinkCity.exe" (
+    start "" "%~dp0build\reference-windows\SinkCity.exe"
     exit /b
 )
 if defined GODOT_BIN (

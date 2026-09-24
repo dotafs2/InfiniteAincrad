@@ -16,7 +16,7 @@ def main():
     parser.add_argument("--out", type=Path)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
-    destination = (args.out or root / "build/windows").resolve()
+    destination = (args.out or root / "build/reference-windows").resolve()
     destination.mkdir(parents=True, exist_ok=True)
     cache = root / ".build"
     cache.mkdir(exist_ok=True)
@@ -51,7 +51,7 @@ def main():
          "--license-out=" + str(destination / "GODOT_LICENSES.txt")], "licenses.log")
     executable = destination / "SinkCity.exe"
     run(["--path", str(root), "--export-release", "Windows Desktop", str(executable)], "export.log")
-    for name in ("README.md", "LICENSE", "THIRD_PARTY.md"):
+    for name in ("README.md", "LICENSE", "THIRD_PARTY.md", "LEGACY_PROTOTYPE.md"):
         shutil.copyfile(root / name, destination / name)
     # Exercise the actual embedded pack with a dummy renderer and no game window.
     original_engine = engine
@@ -61,7 +61,7 @@ def main():
     finally:
         engine = original_engine
     manifest = {
-        "game": "Sink City", "version": "0.1.0", "engine": version,
+        "game": "Sink City", "version": "0.2.0-reference-step-1", "engine": version,
         "template_version": template_version,
         "template_sha256": hashlib.sha256(data).hexdigest(),
         "headless_export_smoke": "passed",

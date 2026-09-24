@@ -1,79 +1,85 @@
-# Sink City
+# Sink City — Poki reference reconstruction, step 1
 
-A standalone Godot arcade game: steer a hole through a colorful city, swallow
-small props, grow into cars and buildings, then eat the whole district.
+This Godot project now opens the first reconstruction stage of the game inside
+[Poki's Hole.io page](https://poki.com/en/g/hole-io). The reference was actually
+played in a separate headless browser on September 24, 2026. The previous
+independently styled prototype remains available as `res://main.tscn`; the new
+default is `res://fidelity/main.tscn`.
 
-## Play
+**This is a first-level reconstruction, not a completed full-game replica.**
+All current city models, cars, people, interface graphics and sounds are authored
+locally. The original game's models, textures, scripts and audio were not copied.
 
-In the Windows download, extract the entire `SinkCity` folder and run
-`SinkCity.exe`. No editor or account is required. The source project also runs
-from `project.godot` in Godot 4 (tested with 4.7.2, Compatibility renderer).
-`Play.cmd` uses a local Windows build, `GODOT_BIN`, or `godot` on PATH.
+## Play this stage
 
-| Control | Action |
-| --- | --- |
-| WASD / arrow keys | Move |
-| Hold left mouse button | Follow the pointer |
-| Touch and drag | Virtual movement stick |
-| Escape | Pause / resume |
-| R | Restart the current mode |
-| F11 | Toggle full screen |
+Extract the Windows package and run `SinkCity.exe`, or open `project.godot` in
+Godot 4.7.2. `Play.cmd` prefers the current `build/reference-windows` package;
+otherwise it uses `GODOT_BIN` or `godot` on PATH.
 
-- **Two-minute round:** score against three explicitly labelled CPU rivals.
-  After a ten-second opening grace period, substantially bigger holes can eat
-  smaller rivals. Being swallowed ends your round.
-- **Free roam:** no timer or rivals. Clear all 316 edible objects, including
-  towers and the two garden platforms. Roads, borders and water remain scenery.
-- A complete object must fit before it starts falling. Points arrive only after
-  its roof has passed below the floor. The hole grows continuously with score.
-- Bright dots on the minimap are objects you can currently swallow. The best
-  score is stored locally at `user://sink-city.cfg`.
+- Click **PLAY**, then drag or press WASD / an arrow key to start the tutorial.
+- Hold and drag the mouse relative to its starting position to steer. Touch drag
+  uses the same relative movement control. Desktop keyboard/mouse are validated;
+  no physical mobile-device test is claimed.
+- Reach **500 points within four minutes**. Eat small objects and grow through
+  levels; bigger holes can swallow smaller opponents.
+- Escape pauses and resumes. **Give Up** on the EATEN screen returns home.
+- The 336-object city and seven CPU rivals are this stage's authored setup.
+  Exact original object counts, rival counts and post-level-1 growth numbers
+  have not been established from the reference.
 
-This is a complete small offline game with one procedural district. Opponents
-are local CPU logic; there is no online multiplayer, account, shop or ad system.
-Desktop keyboard behavior is tested; touch-device behavior has not been tested
-on physical mobile hardware.
+## What is aligned so far
 
-## Template and source
+The first menu has the purple/blue tiled battle motif, top level badge, a rotating
+city miniature, orange PLAY action and lower navigation strip. The first level
+uses a parking court, older city facades, cars, pedestrians and street props.
+The observed drag tutorial, top timer and 500-point target, player level/name/
+progress tags, joystick and EATEN-to-home flow are implemented.
 
-Based on [mbMayer/Godot-Hole.io](https://github.com/mbMayer/Godot-Hole.io), MIT,
-commit `cf75504a150c3cf179bb8e80b93309fb62a7a729`.
-The original subtraction scene is copied in `Scenes/hole.tscn`; the movement and
-CSG synchronization in `scripts/hole.gd` adapt its controller. Exact source
-snapshots and SHA-256 provenance are in `third_party/mbmayer/`.
+The shop and hole-library screens were inspected but are **not implemented** in
+this stage; the side tabs retain their initial locked presentation. There is no
+ad provider, real purchase flow or working revive purchase. Revive controls report
+unavailable video/insufficient gems. Other levels, all skins, rewards, final
+win/timeout styling, exact map geometry and exact growth/balance remain pending.
+The first-stage win/timeout panels are temporary authored summaries, not claims
+about unseen reference screens.
 
-The city geometry, street/window shaders, interface, CPU behavior, round rules,
-footprint checks, growth curve, collection logic and synthesized sounds were
-authored for this game. No commercial Hole.io source, maps, models, textures or
-branding are included. See [THIRD_PARTY.md](THIRD_PARTY.md).
-
-## Validate without opening a window
+## Verification
 
 ```powershell
-godot --headless --path . --script res://tests/acceptance.gd -- --test
+godot --headless --path . --script res://tests/fidelity_acceptance.gd -- --test
 ```
 
-The acceptance suite exercises real input events, CSG collision, falling bodies,
-growth, duplicate collection, bounds, pause/resume, restart, rivals, timeout and
-an automated full-city run. The whole-city driver uses normal movement and
-collection, without granting score, teleporting objects or bypassing size gates.
-`--test` prevents reading or writing the player's best score.
+This checks the actual scene, PLAY action, tutorial gate, four-minute clock,
+input-driven movement, size gates, rigid-body collection, first level threshold,
+pause/resume, reset, timeout, defeat, return home and target completion. A live
+seven-rival automated round verifies earned growth and a valid terminal result;
+winning is not forced. A separate reachability fixture retires rivals and checks
+that normal movement and falling objects can reach 500 without score grants.
+`--test` isolates local saved settings. The earlier prototype has its separate
+`tests/acceptance.gd` suite and [archived notes](LEGACY_PROTOTYPE.md).
 
-## Package Windows without opening a window
-
-Install Python 3 and supply a Godot editor executable plus its matching export
-templates archive. The build uses only `--headless` processes and never launches
-a graphical game or editor. The exported executable is smoke-tested headlessly.
+## Package without opening windows
 
 ```powershell
-python tools/package_windows.py --godot C:/Tools/Godot/godot.exe --templates C:/Tools/Godot/templates.tpz
+python tools/package_windows.py --godot C:/Tools/Godot/godot.exe --templates C:/Tools/Godot/templates.tpz --out build/reference-windows
 ```
 
-Outputs: `build/windows/SinkCity.exe`, full engine/license notices, a SHA-256
-manifest and `build/SinkCity-Windows-x64.zip`. The pack is embedded in the EXE.
-Generated templates and logs stay in ignored `.build/`. For a conventional
-editor export, clear the custom release template field and install the matching
-Godot export templates through your normal setup.
+Supply an editor and its matching export templates. The helper performs only
+headless import, notices extraction, export and exported-binary startup. It does
+not open the game. Output includes the EXE with an embedded pack, full engine and
+dependency notices, the MIT game/template license and a SHA-256 manifest.
 
-This project does not access the InfiniteAincrad resident world, model providers
-or cost ledgers. Building or playing it does not resume the paused town project.
+For graphical QA without opening a desktop window, the `Web Review` preset uses
+`res://.build/web_release.zip` extracted from the matching **standard** Godot
+export-templates archive. Export with the non-.NET editor, serve `build/web` with
+COOP/COEP headers, and load it in a separate headless WebGL browser. The stage was
+reviewed this way at 1280 by 720. This is a QA export, not a public web deployment.
+
+## Reused foundation
+
+The CSG hole/controller foundation comes from
+[mbMayer/Godot-Hole.io](https://github.com/mbMayer/Godot-Hole.io), MIT,
+commit `cf75504a150c3cf179bb8e80b93309fb62a7a729`. Exact source snapshots, hashes
+and notices remain in `third_party/mbmayer`. See `THIRD_PARTY.md` and `LICENSE`.
+The game never accesses the maintained resident world, model providers or cost
+ledgers. The paused InfiniteAincrad project and its hourly automation stay paused.

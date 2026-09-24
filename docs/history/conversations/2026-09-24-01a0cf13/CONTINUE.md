@@ -1,5 +1,48 @@
 # September 24 continuation
 
+## Current game request: exact Poki reference, self-authored art
+
+The user clarified that the target is the game inside
+`https://poki.com/en/g/hole-io`, and requested full reconstruction with art made
+locally. The first reconstruction stage is implemented on
+`codex/hole-city-fidelity-20260924`, in the same dedicated worktree
+`D:/lucidgloves/InfiniteAincrad/tmp/hole-city-20260924`. It is **not a completed
+full-game replica**. Read [the reference ledger](../../../../experiments/hole-city/fidelity/REFERENCE.md)
+and [H161 evidence](../../../validation/hole-city-fidelity-20260924/README.md)
+before continuing; they distinguish observed behavior from provisional values.
+
+The new default is `res://fidelity/main.tscn`: observed menu composition with an
+original city miniature, parking-district scene, drag tutorial, four-minute/
+500-point round, growth, CPU holes and EATEN-to-home flow. Twenty-four checks pass;
+headless WebGL render and actual keyboard pause/resume checks pass. The live-rival
+fixture ended by being eaten at 113 points; the separate reachability fixture,
+with rivals retired, reached 513 through ordinary movement and collection. Do
+not misreport this as a clean contested victory. The Windows embedded-pack build
+passed headless startup. The old prototype scene and Windows EXE are preserved.
+
+The new portable package is
+`C:/Users/Chenxi Qu/Documents/ChatGPT/InfiniteAincrad/HoleCity-Step1-Windows-x64.zip`;
+the user-controlled entry is `PlayHoleCityStep1.cmd` in that directory. It points
+to `experiments/hole-city/build/reference-windows/SinkCity.exe`. No desktop game
+window was opened. Owned headless browsers, review server and test/export
+processes are closed. Respect the no-window/no-focus/no-physical-pointer rule.
+
+Remaining reconstruction work includes the observed store and 27-classic/
+17-special hole library, other levels, accurate map and model silhouettes,
+original growth/balance, rewards and revive behavior, and final result artwork.
+The current side tabs are locked stage boundaries; revive controls are offline
+unavailable, and win/timeout cards are temporary. Close rival labels can overlap.
+Do not claim these are already faithfully reproduced.
+
+The visible archive now contains **102 messages through
+`2026-09-24T14:05:08.638Z`**, preserving all 89 previously published messages.
+This milestone follows the earlier instruction to upload code at checkpoints;
+verify branch SHA and downloaded archive hashes after pushing. Later messages,
+the final delivery response and other tasks are excluded. The unrelated resident
+goal, town work and hourly automation remain paused; no reset is authorized.
+
+## Previous independent prototype milestone
+
 Latest separately authorized task: **Sink City is implemented and packaged**, on
 `codex/hole-city-20260924` in `D:/lucidgloves/InfiniteAincrad/tmp/hole-city-20260924`.
 Read [the game README](../../../../experiments/hole-city/README.md) and
