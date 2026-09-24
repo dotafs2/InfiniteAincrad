@@ -44,3 +44,4 @@ docs/validation/citysample-houdini-2026-09-24/CACHES/*.bgeo.sc filter=lfs diff=l
 # Source-preservation manifests bind the exact local bytes.
 docs/history/source-snapshots/2026-09-24/files/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol,-blank-at-eof
 integrations/localjev/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
+experiments/hole-city/third_party/mbmayer/** -text -whitespace

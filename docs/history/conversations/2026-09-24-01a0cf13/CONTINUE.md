@@ -1,5 +1,34 @@
 # September 24 continuation
 
+Latest separately authorized task: **Sink City is implemented and packaged**, on
+`codex/hole-city-20260924` in `D:/lucidgloves/InfiniteAincrad/tmp/hole-city-20260924`.
+Read [the game README](../../../../experiments/hole-city/README.md) and
+[H160 validation](../../../validation/hole-city-20260924/README.md). All 27
+headless gameplay checks passed, including all 316 objects consumed for 2,442
+points; the embedded-pack Windows executable also passed headless startup.
+The source reuses a pinned MIT template with licenses and original city/UI.
+The portable ZIP is in the ignored game `build/` directory and copied to
+`C:/Users/Chenxi Qu/Documents/ChatGPT/InfiniteAincrad/SinkCity-Windows-x64.zip`.
+`PlaySinkCity.cmd` in that local entry directory launches the prepared EXE only
+when the user chooses to run it. No game/editor process remains running.
+
+**Active desktop restriction:** the user is gaming on two screens. Do not open
+game, editor or browser windows, move the cursor, switch focus, or presume an
+off-screen window is acceptable. All subsequent testing and packaging must be
+headless. The existing gameplay image predates this instruction; the final
+export's graphical window has not been launched.
+
+The current visible archive contains **89 messages through
+`2026-09-24T12:47:21.118Z`**, preserving the earlier 69-message prefix. Future
+messages, this eventual delivery response and other tasks are excluded. The
+milestone source, validation and refreshed visible archive are being published
+to the feature branch under the user's earlier checkpoint-upload instruction;
+verify remote SHA and archive hashes after pushing. Main remains unchanged.
+Town iteration, paid provider work, the previous goal and hourly automation
+remain paused. No quota reset was used or is authorized.
+
+## Earlier complete-code upload and paused town handoff
+
 Latest authorized action: all project source is prepared on `codex/all-code-20260924`, combining the published seq378 milestone with current remote engineering resources. Read [the full publication scope](../../../validation/all-code-upload-20260924.md). Source-only candidates are archived; LocalJev source is included without enabling a provider. Development and hourly work remain paused. The latest visible archive contains 69 messages through `2026-09-24T11:15:07.315Z`. Prior cutoff statements below describe the earlier milestone.
 
 Task `01a0cf13-d0a4-70c0-ab37-e75871fbfad5` is paused at the user's explicit request after quota exhaustion. The earlier completion mandate and hourly direction checks are suspended. Do not resume or consume any reset credit without a new user request. Work in `D:/lucidgloves/InfiniteAincrad/tmp/iteration-20260924`, branch `codex/iteration-20260924`; preserve the old dirty checkout. Read [the current continuation](../../../iteration-20260924.md), current ROADMAP, H158 and private `private/iteration-20260924/state.json` first. Root alone writes the maintained world.

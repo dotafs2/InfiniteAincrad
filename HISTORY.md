@@ -1,5 +1,9 @@
 # 历史全部流水
 
+## 2026-09-24 · H160 Sink City playable Godot delivery
+
+The user requested a city-swallowing arcade game and reuse of an existing Godot template. Sink City adapts mbMayer's MIT Godot-Hole.io template at pinned commit `cf75504a150c3cf179bb8e80b93309fb62a7a729`, retaining exact upstream snapshots, byte hashes and licenses. Original procedural geometry supplies 316 edible objects, and the game adds size-gated rigid-body falls, continuous growth, three CPU rivals, two-minute rounds, unlimited free roam, minimap, pause/restart, sound and local best score. All 27 headless gameplay checks passed; normal automated movement cleared all 316 objects for 2,442 points in 67.883 simulated seconds. The Windows export with an embedded pack passed a separate headless startup check. The user's later no-window/no-focus instruction is binding: existing preview images were inspected, and all subsequent tests and packaging ran headlessly. No game or editor was opened after that instruction. The maintained town and provider operations remain paused. [Source, controls and build](experiments/hole-city/README.md) · [Validation and delivery evidence](docs/validation/hole-city-20260924/README.md).
+
 ## 2026-09-24 · H159 Complete source publication after the requested pause
 
 The user requested all project code uploaded. The complete-source branch combines the seq378 milestone and the newer engineering/resource publication, adds the 28-file local LocalJev source tree with its MIT license, and inventories 142 historical/local source records with 26 exact-byte unpublished variants. Unfinished contact-memory work and historical candidates remain clearly labelled source snapshots. No model or world operation resumed. The archive exporter now excludes automatic goal-wakeup context; six archive tests pass and the previously published conversation prefix is preserved. [Publication scope and verification](docs/validation/all-code-upload-20260924.md).
