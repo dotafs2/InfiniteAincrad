@@ -11,6 +11,7 @@ replayed from here, and a worker that outlives the grace is only reported: this 
 never rewrites, refunds or fabricates a ledger row.
 """
 import argparse
+from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
 import json
 import os
@@ -42,6 +43,46 @@ SHUTDOWN_WAIT_SECONDS = 45.0
 MAX_SHUTDOWN_WAIT_SECONDS = 120.0
 # The engine's wall watchdog fires at the requested episode length. Its normal
 # process timeout reserves the complete shutdown wait plus 45 seconds to capture.
+
+# ES_SYSTEM_REQUIRED prevents Windows from idling into sleep while this bounded launcher
+# owns a live observation. It does not request display power and explicit user sleep remains
+# available. The request is thread-scoped and is restored immediately after engine + gateway
+# drain; process/thread exit is the final OS-level release.
+ES_CONTINUOUS = 0x80000000
+ES_SYSTEM_REQUIRED = 0x00000001
+
+
+@contextmanager
+def keep_system_awake(set_thread_execution_state=None, platform=None):
+    """Keep Windows awake on this thread for one bounded operation; no-op elsewhere."""
+    current_platform = sys.platform if platform is None else platform
+    if current_platform != 'win32':
+        yield
+        return
+    kernel32 = None
+    if set_thread_execution_state is None:
+        import ctypes
+        kernel32 = ctypes.WinDLL('kernel32', use_last_error=True)
+        set_thread_execution_state = kernel32.SetThreadExecutionState
+        set_thread_execution_state.argtypes = [ctypes.c_uint32]
+        set_thread_execution_state.restype = ctypes.c_uint32
+    previous_state = set_thread_execution_state(ES_CONTINUOUS | ES_SYSTEM_REQUIRED)
+    if not previous_state:
+        if kernel32 is not None:
+            import ctypes
+            raise ctypes.WinError(ctypes.get_last_error())
+        raise OSError('SetThreadExecutionState failed before engine dispatch')
+    try:
+        yield
+    finally:
+        # Ensure our ES_CONTINUOUS request is cleared even on an older state snapshot that
+        # does not report that bit; preserve every prior requirement bit returned by Windows.
+        restored = set_thread_execution_state(previous_state | ES_CONTINUOUS)
+        if not restored:
+            if kernel32 is not None:
+                import ctypes
+                raise ctypes.WinError(ctypes.get_last_error())
+            raise OSError('SetThreadExecutionState failed while restoring prior thread state')
 
 
 class OperationTracker:
@@ -710,17 +751,30 @@ def main():
     if args.stop_on_decision_limit:
         command += ['--town-stop-on-decision-limit']
     try:
-        result = subprocess.run(command, cwd=ROOT, env=dict(os.environ, AINCRAD_GATEWAY_RUN_CONFIG=str(run)),
-                                capture_output=True, text=True, encoding='utf-8', errors='replace',
-                                timeout=wall_limit + args.shutdown_wait + 60)
-        (out / 'runner.log').write_text(result.stdout + result.stderr, encoding='utf-8')
+        # Activation is before engine dispatch, so a Windows API failure cannot start a paid
+        # resident turn. Keep protection through shutdown/drain so admitted calls can settle.
+        with keep_system_awake():
+            try:
+                result = subprocess.run(command, cwd=ROOT,
+                                        env=dict(os.environ, AINCRAD_GATEWAY_RUN_CONFIG=str(run)),
+                                        capture_output=True, text=True, encoding='utf-8', errors='replace',
+                                        timeout=wall_limit + args.shutdown_wait + 60)
+                (out / 'runner.log').write_text(result.stdout + result.stderr, encoding='utf-8')
+            finally:
+                # The engine is gone: stop new intake, then drain what this launcher already
+                # accepted so an in-flight upstream response still settles exactly once.
+                try:
+                    shutdown = drain_gateway(server, thread, tracker, gateway_deadline(deadline))
+                except Exception as exc:
+                    shutdown = {'drained_complete': False, 'drain_error': type(exc).__name__}
     finally:
-        # The engine is gone: stop new intake, then drain what this launcher already
-        # accepted so an in-flight upstream response still settles exactly once.
-        try:
-            shutdown = drain_gateway(server, thread, tracker, gateway_deadline(deadline))
-        except Exception as exc:
-            shutdown = {'drained_complete': False, 'drain_error': type(exc).__name__}
+        # If Windows refused the awake request, the engine was never dispatched. Close the
+        # already-started but idle local gateway and record the unchanged ledger state.
+        if 'shutdown' not in locals():
+            try:
+                shutdown = drain_gateway(server, thread, tracker, gateway_deadline(deadline))
+            except Exception as exc:
+                shutdown = {'drained_complete': False, 'drain_error': type(exc).__name__}
         write_private_json(out / 'helper.json', dict(pid=os.getpid(), status='closed',
                                                      ledger_after=ledger.status(), gateway_shutdown=shutdown))
     capture_path = out / 'capture/evidence.json'

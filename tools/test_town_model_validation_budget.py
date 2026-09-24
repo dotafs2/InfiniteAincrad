@@ -3,7 +3,7 @@
 No user ledger/config is read, and no real provider object or model request is used.
 """
 from concurrent.futures import ThreadPoolExecutor
-from contextlib import closing, contextmanager, redirect_stderr, redirect_stdout
+from contextlib import closing, contextmanager, nullcontext, redirect_stderr, redirect_stdout
 from dataclasses import replace
 from datetime import datetime, timedelta, timezone
 import hashlib
@@ -34,6 +34,43 @@ class DurationEvidenceTests(unittest.TestCase):
         result = launcher.classify_validation(0, capture, {}, '', False, 32)
         self.assertEqual(result['validation_status'], 'failed')
         self.assertIn('requested_observation_duration_incomplete', result['classification_reasons'])
+
+
+class SystemAwakeTests(unittest.TestCase):
+    def test_windows_request_uses_system_only_and_restores_prior_state_on_exception(self):
+        calls = []
+        prior = 0x00000002  # A pre-existing flag is preserved; continuous is added to clear ours.
+
+        def set_state(flags):
+            calls.append(flags)
+            return prior if len(calls) == 1 else flags
+
+        with self.assertRaisesRegex(RuntimeError, 'fixture engine failure'):
+            with launcher.keep_system_awake(set_state, platform='win32'):
+                raise RuntimeError('fixture engine failure')
+        self.assertEqual(calls, [launcher.ES_CONTINUOUS | launcher.ES_SYSTEM_REQUIRED,
+                                 prior | launcher.ES_CONTINUOUS])
+        self.assertFalse(calls[0] & 0x00000002, 'the launcher must not request display power')
+
+    def test_windows_activation_failure_prevents_dispatch(self):
+        calls, dispatches = [], []
+
+        def rejected(flags):
+            calls.append(flags)
+            return 0
+
+        with self.assertRaisesRegex(OSError, 'before engine dispatch'):
+            with launcher.keep_system_awake(rejected, platform='win32'):
+                dispatches.append('engine')
+        self.assertEqual(calls, [launcher.ES_CONTINUOUS | launcher.ES_SYSTEM_REQUIRED])
+        self.assertEqual(dispatches, [])
+
+    def test_non_windows_is_a_noop(self):
+        def must_not_call(_flags):
+            self.fail('non-Windows execution must not call the Windows API')
+
+        with launcher.keep_system_awake(must_not_call, platform='linux'):
+            pass
 
 
 def request_body():
@@ -689,6 +726,7 @@ class BudgetLauncherTests(unittest.TestCase):
             gm.write_text(json.dumps(self.gm_snapshot()), encoding='utf-8')
             return subprocess.CompletedProcess(command, 0, 'Offline engine stub', '')
         with patch.object(sys, 'argv', args), patch.object(launcher, 'KimiProvider', return_value=self.provider), \
+                patch.object(launcher, 'keep_system_awake', return_value=nullcontext()), \
                 patch.object(launcher.subprocess, 'run', side_effect=fake_engine), redirect_stdout(io.StringIO()):
             self.assertEqual(launcher.main(), 1)
         self.assertTrue(gm.is_file())
@@ -828,6 +866,7 @@ class BudgetLauncherTests(unittest.TestCase):
             return subprocess.CompletedProcess(command, 3, 'Offline engine stub: unresolved shutdown', '')
 
         with patch.object(sys, 'argv', args), patch.object(launcher, 'KimiProvider', return_value=provider), \
+                patch.object(launcher, 'keep_system_awake', return_value=nullcontext()), \
                 patch.object(launcher.subprocess, 'run', side_effect=fake_engine), redirect_stdout(io.StringIO()):
             self.assertEqual(launcher.main(), 1)
         engine['thread'].join(5)
