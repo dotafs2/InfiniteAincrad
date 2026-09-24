@@ -1,0 +1,18 @@
+{
+  "seed": 20260918,
+  "samplesPerTask": 40,
+  "models": [
+    "gemma-4-E2B-it-UD-MLX-4bit",
+    "gemma-4-E4B-it-UD-MLX-4bit",
+    "gemma-4-26b-a4b-it-UD-MLX-4bit",
+    "qwen3.6-35b-a3b-ud-mlx-4bit",
+    "diffusiongemma-26B-A4B-it-4bit"
+  ],
+  "backgroundWords": [0, 2048],
+  "temperature": 0,
+  "maxOutputTokens": 256,
+  "malformedRetries": 2,
+  "timeoutSeconds": 90,
+  "warmupRequests": 2,
+  "cacheMode": "bust-prefix"
+}

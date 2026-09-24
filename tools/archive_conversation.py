@@ -13,7 +13,7 @@ import re
 
 
 VISIBLE_PHASES = {'commentary', 'final', 'final_answer'}
-CONTEXT_PREFIXES = ('# AGENTS.md instructions', '<environment_context>')
+CONTEXT_PREFIXES = ('# AGENTS.md instructions', '<environment_context>', '<codex_internal_context ')
 SECRET_PATTERNS = (
     r'\bsk-[A-Za-z0-9_-]{20,}',
     r'\b(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})',

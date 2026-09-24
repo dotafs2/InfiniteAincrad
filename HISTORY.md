@@ -1,5 +1,9 @@
 # 历史全部流水
 
+## 2026-09-24 · H159 Complete source publication after the requested pause
+
+The user requested all project code uploaded. The complete-source branch combines the seq378 milestone and the newer engineering/resource publication, adds the 28-file local LocalJev source tree with its MIT license, and inventories 142 historical/local source records with 26 exact-byte unpublished variants. Unfinished contact-memory work and historical candidates remain clearly labelled source snapshots. No model or world operation resumed. The archive exporter now excludes automatic goal-wakeup context; six archive tests pass and the previously published conversation prefix is preserved. [Publication scope and verification](docs/validation/all-code-upload-20260924.md).
+
 ## 2026-09-24 · H158 User-requested pause and milestone publication
 
 The user reported exhausted quota and explicitly requested a stop, milestone uploads, and no reset. The project goal and hourly heartbeat `infiniteaincrad-gm-npc-09` are paused; the old `codex-reset` heartbeat was already paused. No reset was used. No runtime or GM operation remains running. Resume development or model calls only after a new user request. Preserve the seq378 checkpoint, pending Wren harvest, recoverable Flint wait, original ledgers and unknown costs. The authorized closing action is publication of the completed milestone on `codex/iteration-20260924`; the overall project remains incomplete. The completed batch retains eleven implementation/evidence commits before this handoff update, with dotafs2 author and committer identity. The visible conversation archive now contains 61 messages through `2026-09-24T03:13:06.063Z`, including the stop/upload/no-reset instruction; later messages and other tasks are excluded. Remote publication and byte-hash verification are the remaining delivery operations, not further iteration.

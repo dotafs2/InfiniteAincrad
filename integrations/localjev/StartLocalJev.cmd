@@ -1,0 +1,21 @@
+@echo off
+setlocal
+set "BUN_EXE=%USERPROFILE%\.bun\bin\bun.exe"
+if not exist "%BUN_EXE%" (
+  echo Bun not found: %BUN_EXE%
+  exit /b 1
+)
+set "LOCALJEV_UPSTREAM=http://127.0.0.1:11434"
+set "LOCALJEV_UPSTREAM_API_KEY="
+set "LOCALJEV_UPSTREAM_MODEL=qwen3:0.6b"
+set "LOCALJEV_API_KEY=local-dev-key"
+set "LOCALJEV_HOST=127.0.0.1"
+set "LOCALJEV_PORT=8080"
+set "LOCALJEV_TIMEOUT=180"
+set "LOCALJEV_MAX_INFLIGHT=1"
+set "LOCALJEV_MAX_QUEUE=16"
+set "LOCALJEV_MALFORMED_RETRIES=2"
+set "LOCALJEV_MAX_OUTPUT_TOKENS=512"
+set "LOCALJEV_TEMPERATURE=0"
+cd /d "%~dp0localjev"
+"%BUN_EXE%" run start

@@ -16,6 +16,17 @@ def log(messages):
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_goal_wakeup_is_not_published_as_a_user_message(self):
+        data = log([('user', None, 'Upload all code'),
+                    ('user', None, '  <codex_internal_context source="goal">PRIVATE SCHEDULER DATA</codex_internal_context>'),
+                    ('assistant', 'final', 'Upload complete'),
+                    ('user', None, 'Please explain <codex_internal_context source="goal">')])
+        messages, excluded = extract(data, 'test-thread')
+        self.assertEqual([row['text'] for row in messages],
+                         ['Upload all code', 'Upload complete',
+                          'Please explain <codex_internal_context source="goal">'])
+        self.assertEqual(excluded['injected_workspace_context'], 1)
+
     def test_empty_heartbeat_does_not_hide_messages_or_attachments(self):
         data = log([('user', None, 'keep me'), ('assistant', 'final', ''),
                     ('assistant', 'commentary', ' '), ('user', None, 'keep me')])

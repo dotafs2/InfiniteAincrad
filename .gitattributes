@@ -40,3 +40,7 @@ worlds/restart-20260918-01/gm/seq000378-gm05-harvest-terminal-receipt.json -text
 worlds/restart-20260918-01/observations/iteration-20260924/seq354-to-368-food-audit.json -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
 worlds/restart-20260918-01/observations/iteration-20260924/seq354-to-378-food-audit.json -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
 docs/validation/citysample-houdini-2026-09-24/CACHES/*.bgeo.sc filter=lfs diff=lfs merge=lfs -text
+
+# Source-preservation manifests bind the exact local bytes.
+docs/history/source-snapshots/2026-09-24/files/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol,-blank-at-eof
+integrations/localjev/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol

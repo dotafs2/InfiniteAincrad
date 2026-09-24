@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "provenance": "Existing local LocalJev source tree; local deployment notes identify githubnext/localjev upstream. No upstream revision was recorded locally, so none is invented.",
+  "license": "MIT; original LICENSE retained",
+  "status": "Source preservation only; the canonical town provider has not been changed or invoked.",
+  "excluded": "Installed node_modules, ignored credentials/caches, and generated eval/reports outputs are excluded.",
+  "files": [
+    {
+      "path": "integrations/localjev/.env.example",
+      "sha256": "3e90d84cfce578af8b42dd1158d2b75bf4c441f21caedae4f76aa565003bfe04",
+      "bytes": 494
+    },
+    {
+      "path": "integrations/localjev/.gitignore",
+      "sha256": "95bd9ed2d9c4f7b71b569ecd5ce1609782b6ae635a2cb5c27d2e61bb9fe2467b",
+      "bytes": 90
+    },
+    {
+      "path": "integrations/localjev/LICENSE",
+      "sha256": "3ad9ef7c07e396242f438a66b061a777bf2ab0d82e32f0f1863cb298744850ce",
+      "bytes": 1078
+    },
+    {
+      "path": "integrations/localjev/LOCAL_DEPLOYMENT.md",
+      "sha256": "0a3f930742251f0834637635725f817438a43caac546a1e699a0e4f8ed430da9",
+      "bytes": 2870
+    },
+    {
+      "path": "integrations/localjev/Makefile",
+      "sha256": "867092943b7d6837abc45f9ec80e3ec9d40f0aadc1014a5b7abaa05010deaba7",
+      "bytes": 148
+    },
+    {
+      "path": "integrations/localjev/README.md",
+      "sha256": "663df59626f935bef8beb51e4100751fbd46d9868d0cf45bd53340f409bc13de",
+      "bytes": 8703
+    },
+    {
+      "path": "integrations/localjev/StartLocalJev.cmd",
+      "sha256": "d483849abcb4c7fee3bf1c13a7558c8def49dc8af7122d761a3b467914c04aaa",
+      "bytes": 581
+    },
+    {
+      "path": "integrations/localjev/bun.lock",
+      "sha256": "450b2b5349f3046dd62bf8fda65d6b68abf093f79d09927c848350de14e47840",
+      "bytes": 1898
+    },
+    {
+      "path": "integrations/localjev/docs/evaluation-results-2026-09-18.md",
+      "sha256": "837bf991b1b4f2c635f3d771b469949789d16b623df20f0a8d60bf89c602c9cf",
+      "bytes": 7189
+    },
+    {
+      "path": "integrations/localjev/docs/evaluation.md",
+      "sha256": "fa8d9f5d289bd3a86e9f8e372f33856b314a6d94b4cd345c7846aa7da4d233f7",
+      "bytes": 14731
+    },
+    {
+      "path": "integrations/localjev/eval/default.json",
+      "sha256": "3f0730f0d6aa7f71fb3908fe52ef333e2525b02b9bf4e8e243103ae79367c80f",
+      "bytes": 424
+    },
+    {
+      "path": "integrations/localjev/package.json",
+      "sha256": "e81119a3fb768054108a7d25f73c20da8b2588cfcb35f50f6b2f44dac514052f",
+      "bytes": 628
+    },
+    {
+      "path": "integrations/localjev/scripts/eval/common.ts",
+      "sha256": "049f6edb9b105b671ec76851ade44422b99685810a3f65e388928f62f3a98bfe",
+      "bytes": 4634
+    },
+    {
+      "path": "integrations/localjev/scripts/eval/data.ts",
+      "sha256": "14b40736b2dfdd8ee7a9ec6ea1bda81369606a6c3672ce16dfaa3f0fb6a7783a",
+      "bytes": 7876
+    },
+    {
+      "path": "integrations/localjev/scripts/eval/metrics.ts",
+      "sha256": "09095558d28eda30e9a1e6aafc9be191ca6680a676991ae0132b8d08024eb914",
+      "bytes": 4158
+    },
+    {
+      "path": "integrations/localjev/scripts/eval/report.ts",
+      "sha256": "4b39d6e5a2e916af968da40f18d8ab9aa04213a499814d12083daef89b87a5dc",
+      "bytes": 10611
+    },
+    {
+      "path": "integrations/localjev/scripts/eval/run.ts",
+      "sha256": "58195ae1cd7a3c4b1556052abcc0c71a1f15872a47a04b3b3fa2e2001cc9d044",
+      "bytes": 13267
+    },
+    {
+      "path": "integrations/localjev/scripts/live-smoke.ts",
+      "sha256": "b239e5be18f983258eacb22e5c4c749e08efaaa0f75823d0c86d699cbf0c9015",
+      "bytes": 1141
+    },
+    {
+      "path": "integrations/localjev/src/config.ts",
+      "sha256": "6338dc551151112ea7a7036e02a7b9b1ce36580ff987681380783dd4d72e5dd6",
+      "bytes": 2776
+    },
+    {
+      "path": "integrations/localjev/src/engine.ts",
+      "sha256": "581d76e148f096bf8728800b0ab2b72038ff940af5a676bf33b7b20e9308235a",
+      "bytes": 17297
+    },
+    {
+      "path": "integrations/localjev/src/index.ts",
+      "sha256": "72ab2ac837f7a1b8a3db81b5d8e80a9683c3c5bf9bfe2bd3b108fa457bd233ca",
+      "bytes": 838
+    },
+    {
+      "path": "integrations/localjev/src/router.ts",
+      "sha256": "6a081a46eceea18ec5b53c19bc5bee4d2efef9a5705660c7e7d961cede8719f0",
+      "bytes": 4820
+    },
+    {
+      "path": "integrations/localjev/src/server.ts",
+      "sha256": "186ffe941b161af7bac2c569a406e402ee882ef6f3b028d999e3f7e15f921adb",
+      "bytes": 9381
+    },
+    {
+      "path": "integrations/localjev/src/types.ts",
+      "sha256": "850eb1603808ae92c3db2d43dee77e2b62b5de8860edb34196c5a9107f69b8bc",
+      "bytes": 5546
+    },
+    {
+      "path": "integrations/localjev/test/engine.test.ts",
+      "sha256": "bea4d7b047b8d3e6388ad4c8994614a0a2194ca27084fc32421bce457cf1a036",
+      "bytes": 4294
+    },
+    {
+      "path": "integrations/localjev/test/eval.test.ts",
+      "sha256": "13f69345c3b876abdf73c3f7e017351cf5534d0cc994b63b81f468533de3f092",
+      "bytes": 7360
+    },
+    {
+      "path": "integrations/localjev/test/server.test.ts",
+      "sha256": "d171da9faaad47d30a7afc8f67735fd52094eab4c5298cea53b1d8d7ce1efa65",
+      "bytes": 5490
+    },
+    {
+      "path": "integrations/localjev/tsconfig.json",
+      "sha256": "9ea4bf5ae29af39817e4ec9933667163a2282c06364f018d2d3bbd80de4bce6a",
+      "bytes": 392
+    }
+  ]
+}

@@ -1,0 +1,1422 @@
+{
+  "schema_version": 1,
+  "purpose": "User-authorized upload of all project source; preserve unpublished historical variants without promoting unverified candidates into runtime code.",
+  "active_code_base": "694c378a1a4c0883cb7ef6adee8a695e13cd6045",
+  "additional_published_base": "cff957eada31a8f0b9689db53d2b39bd65191718",
+  "source_heads": [
+    "13fd766ed7d2031a8e0de16c100942fc9819d2be",
+    "cc5048cf0ff158d6270ef1bb518e51c96e8e146f",
+    "d1de7f67456142d190b91579abea2bc672f96854",
+    "7212362fcbab46043a88558f0fc66a20e87787fa",
+    "2986d0954aae8a39287e274dd6fbe340323b9561",
+    "6e543bb29d620714ebab77f783ffdca1be1d8aa4",
+    "4b958f345a3fbd3309cdd60936f46ab59184709a",
+    "687b96b045aa50581180cdafed8912639fd61aa4",
+    "b951668a565c9d31d8bd68777dd5ee7cdb9eb104",
+    "daaa8293be12671db5fb551cfc45a00aee343a3a",
+    "71f7640fdcfb4c9b0f1eed97d23accb665764bff",
+    "fca96b48ff45949296911307237030dfd5dad032",
+    "4e561bbbad896849917f138ab2fd40b9d873a195",
+    "79826a1b9d986d49ceb7d11aa448369fe221519d",
+    "df56611f23414a0c37aa1d93493aa24c5f8a3919",
+    "90606b37097f26befe3c320a44b160200ff9dd4c",
+    "694c378a1a4c0883cb7ef6adee8a695e13cd6045",
+    "a7878325f4790b737e73597414373b653101cfd1",
+    "451c0dbbd7ab8e780522412d57404cb64868b592",
+    "3eeca5f42978ccc76c1bce5d59367107ab7e4c6d",
+    "07558a23a56b3da8ebdcde3271ecd3a30882a997",
+    "2a229e88fe72f34e17927c6fadca640484280b7d",
+    "eaea50a36d477f11f24ae45857d68a11dbeebe79",
+    "933ea8c52293b9974c496a382341863e358bda8c",
+    "307198ee8db7bef7cf273bcbd76d27d4586ced3c",
+    "f00b33bce36b0e2fe8fd50aceb1bd0483da210a6",
+    "1cc27c63c206f24d886d49f3cfcb4e42f4599a2c",
+    "d26ac09efe765d2354313f2a7c4a881056cb2461",
+    "d2c02270b99795a200f13a41baf5e0ba00ca6920",
+    "4b3ce34ed3560fdf634c296e20358fc040cf0fab"
+  ],
+  "sources": [
+    {
+      "source_id": "worktree-00",
+      "relative_location": "project-root",
+      "head": "13fd766ed7d2031a8e0de16c100942fc9819d2be",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-04",
+      "relative_location": "private/gm-npc-evening-20260917/oven-worktree",
+      "head": "13fd766ed7d2031a8e0de16c100942fc9819d2be",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-05",
+      "relative_location": "private/gm-npc-evening-20260917/reconcile-worktree",
+      "head": "13fd766ed7d2031a8e0de16c100942fc9819d2be",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-06",
+      "relative_location": "private/gm-npc-evening-20260917/shutdown-worktree",
+      "head": "13fd766ed7d2031a8e0de16c100942fc9819d2be",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-07",
+      "relative_location": "private/gm-npc-research-20260917/baking-host-journal-worktree",
+      "head": "cc5048cf0ff158d6270ef1bb518e51c96e8e146f",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-08",
+      "relative_location": "private/gm-npc-research-20260917/code-timeout-recovery-worktree",
+      "head": "d1de7f67456142d190b91579abea2bc672f96854",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-09",
+      "relative_location": "private/gm-npc-research-20260917/effect-review-fix-worktree",
+      "head": "7212362fcbab46043a88558f0fc66a20e87787fa",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-10",
+      "relative_location": "private/gm-npc-research-20260917/feedback-neutral-worktree",
+      "head": "2986d0954aae8a39287e274dd6fbe340323b9561",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-11",
+      "relative_location": "private/gm-npc-research-20260917/gm-state/candidates/issue-0c4cf70dd336",
+      "head": "6e543bb29d620714ebab77f783ffdca1be1d8aa4",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-12",
+      "relative_location": "private/gm-npc-research-20260917/gm-state/candidates/issue-2c0a2d93ac56",
+      "head": "4b958f345a3fbd3309cdd60936f46ab59184709a",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-13",
+      "relative_location": "private/gm-npc-research-20260917/material-commitment-worktree",
+      "head": "687b96b045aa50581180cdafed8912639fd61aa4",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-14",
+      "relative_location": "private/gm-npc-research-20260917/provider-error-verifier-worktree",
+      "head": "b951668a565c9d31d8bd68777dd5ee7cdb9eb104",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-15",
+      "relative_location": "private/gm-npc-research-20260917/scope-feedback-recovery-worktree",
+      "head": "daaa8293be12671db5fb551cfc45a00aee343a3a",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-16",
+      "relative_location": "tmp/gpt6-sprint/integration/run-20260912-0625/gm-state/candidates/issue-940b2f914753",
+      "head": "71f7640fdcfb4c9b0f1eed97d23accb665764bff",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-17",
+      "relative_location": "tmp/iterate-20260913-10/gm-review-54/checkout",
+      "head": "fca96b48ff45949296911307237030dfd5dad032",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-18",
+      "relative_location": "tmp/iteration-20260919/gm-rebind",
+      "head": "4e561bbbad896849917f138ab2fd40b9d873a195",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-19",
+      "relative_location": "tmp/iteration-20260919/home-life",
+      "head": "79826a1b9d986d49ceb7d11aa448369fe221519d",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-20",
+      "relative_location": "tmp/iteration-20260919/material-exchange",
+      "head": "df56611f23414a0c37aa1d93493aa24c5f8a3919",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-21",
+      "relative_location": "tmp/iteration-20260919/observer",
+      "head": "90606b37097f26befe3c320a44b160200ff9dd4c",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-22",
+      "relative_location": "tmp/iteration-20260924",
+      "head": "694c378a1a4c0883cb7ef6adee8a695e13cd6045",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-23",
+      "relative_location": "tmp/iteration-20260924/private/worlds/restart-20260918-01/gm/candidates/issue-d71da0931f5a-native-luna",
+      "head": "a7878325f4790b737e73597414373b653101cfd1",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-24",
+      "relative_location": "tmp/latest-ds-test-20260923",
+      "head": "a7878325f4790b737e73597414373b653101cfd1",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-25",
+      "relative_location": "tmp/overnight-20260918/astra-art",
+      "head": "451c0dbbd7ab8e780522412d57404cb64868b592",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-26",
+      "relative_location": "tmp/overnight-20260918/delivery",
+      "head": "3eeca5f42978ccc76c1bce5d59367107ab7e4c6d",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-27",
+      "relative_location": "tmp/overnight-20260918/sol-gm",
+      "head": "07558a23a56b3da8ebdcde3271ecd3a30882a997",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-28",
+      "relative_location": "tmp/overnight-20260918/sol-gm/private/night-delivery/gm-state/c05",
+      "head": "07558a23a56b3da8ebdcde3271ecd3a30882a997",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-29",
+      "relative_location": "tmp/overnight-20260918/sol-life",
+      "head": "2a229e88fe72f34e17927c6fadca640484280b7d",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-30",
+      "relative_location": "tmp/overnight-20260918/sol-runtime",
+      "head": "eaea50a36d477f11f24ae45857d68a11dbeebe79",
+      "head_published": false
+    },
+    {
+      "source_id": "worktree-31",
+      "relative_location": "tmp/real-ten-20260912/gm-state/candidates/issue-30c86464ae28",
+      "head": "fca96b48ff45949296911307237030dfd5dad032",
+      "head_published": true
+    },
+    {
+      "source_id": "worktree-32",
+      "relative_location": "tmp/real-ten-20260912/gm-state/candidates/issue-42d582f14294",
+      "head": "933ea8c52293b9974c496a382341863e358bda8c",
+      "head_published": true
+    }
+  ],
+  "scope": "Project Git branches and registered project worktrees, plus six project entry launchers. Excludes unrelated applications, ephemeral tool test repositories, credential/configuration stores, raw sessions, private worlds and ledgers, generated caches and process output.",
+  "records": [
+    {
+      "path": "tools/food_supply_envelope.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "a32cb4859ddaeb9027112307908920aee7876ec7",
+      "sha256": "6d87607fa6710abc258d54f53f79c5cc59a8640e4e7f0999e74593932fbbbe23",
+      "bytes": 20488,
+      "remote_git_blob": "a32cb4859ddaeb9027112307908920aee7876ec7"
+    },
+    {
+      "path": "tools/test_food_supply_envelope.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "f385166153c2b6140face4619da42a51efe33003",
+      "sha256": "8362ec736a60284507fe9b266670d93e87bde631e19522fb0230e2a2b25b8f91",
+      "bytes": 7889,
+      "remote_git_blob": "f385166153c2b6140face4619da42a51efe33003"
+    },
+    {
+      "path": "game/core/town_runtime.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "ff20c881c318d4ee3f583e5a01b3e203371dae89",
+      "sha256": "8111b92bfa957d7197f39694b7f64df27a69b2dd1cff12c41c93e0094f6d73c8",
+      "bytes": 53009,
+      "remote_git_blob": "ff20c881c318d4ee3f583e5a01b3e203371dae89"
+    },
+    {
+      "path": "game/tests/town_gm_audited_evidence_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "76be76fd25b0f46f5a900b5436515e86b25df2a9",
+      "sha256": "bd4833caf216264806ccbecf376e689f23d6156edde624aad29ace48b73fa1ce",
+      "bytes": 8978,
+      "remote_git_blob": "76be76fd25b0f46f5a900b5436515e86b25df2a9"
+    },
+    {
+      "path": "game/core/town_runtime.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "b900a573fcf9f0ba3ee74dff5a667f354f174ecb",
+      "sha256": "598dd51169301345e0eae3b68ee9fbcaad10424cf0de568f2b2a5dc438ed5ba6",
+      "bytes": 51975,
+      "remote_git_blob": "b900a573fcf9f0ba3ee74dff5a667f354f174ecb"
+    },
+    {
+      "path": "game/tests/town_gm_audited_evidence_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "08055e44f432a9f2f99d52fe9fb75e35bb6efe05",
+      "sha256": "15edd9922ff58e34ec56c4d21c2bcc657efddd38bcff21549dfac2f8d4775d8e",
+      "bytes": 6260,
+      "remote_git_blob": "08055e44f432a9f2f99d52fe9fb75e35bb6efe05"
+    },
+    {
+      "path": "game/agents/town_turns.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "c83d30700bfc0440746e844d89560915248e39bf",
+      "sha256": "0238fe44e4092e8c602705755bd68426364e0ff90155c48c789bd21e1ca25fd3",
+      "bytes": 48528,
+      "remote_git_blob": "c83d30700bfc0440746e844d89560915248e39bf"
+    },
+    {
+      "path": "game/agents/BudgetGatewayProvider.cs",
+      "kind": "unpublished_git_source",
+      "git_blob": "e0872bf5ef34cbfb6c7c9dd5b633a0dd7a4140c3",
+      "sha256": "de0d3f456f81f3e70a003017bdba511472cafa248521677502cdd2deeda313bd",
+      "bytes": 18340,
+      "remote_git_blob": "e0872bf5ef34cbfb6c7c9dd5b633a0dd7a4140c3"
+    },
+    {
+      "path": "game/agents/town_turns.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "5c3e178440d32d6c1f36970e64db3a6d459bc4a4",
+      "sha256": "b699b99093b8b6d8b07abf88a19bd3796bcce86635fc438b0573ddf7f82ec3a5",
+      "bytes": 43919,
+      "remote_git_blob": "5c3e178440d32d6c1f36970e64db3a6d459bc4a4"
+    },
+    {
+      "path": "game/core/town_baking.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "e6f64fcd63aad9ee85ba70e2fcaaea2c5bd506d5",
+      "sha256": "4a548132711711a35b2eaea29044602bd9c75eeb907a73b8a28350747c5205eb",
+      "bytes": 47139,
+      "remote_git_blob": "e6f64fcd63aad9ee85ba70e2fcaaea2c5bd506d5"
+    },
+    {
+      "path": "game/core/town_life.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "7176429eba0092ee7dbbf0c97a2045c48ec582bd",
+      "sha256": "29bb3613269cb0fc2c57ff782c07ce3b46c9c36bf88152aebf62027c2e0b659c",
+      "bytes": 49313,
+      "remote_git_blob": "7176429eba0092ee7dbbf0c97a2045c48ec582bd"
+    },
+    {
+      "path": "game/core/town_trade.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "90d904b807b52e631d984030e0d3f525084b9c03",
+      "sha256": "d1dfea21951007d4e8cff70d1b443a24be75326c3c963ab06bd10f03709ed764",
+      "bytes": 103263,
+      "snapshot": "files/d1dfea21951007d4e8cff70d1b443a24be75326c3c963ab06bd10f03709ed764.gd"
+    },
+    {
+      "path": "game/tests/town_baking_replacement_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "e81e069535d4cf402a32d8d0ff6df55d16053a2d",
+      "sha256": "fd0940a97723b398ec6b0246fec5128419691b1bcacfa4a8ede1fcb9b0f9d8aa",
+      "bytes": 6225,
+      "remote_git_blob": "e81e069535d4cf402a32d8d0ff6df55d16053a2d"
+    },
+    {
+      "path": "game/tests/town_basic_needs_rule_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "db510bb13bb36d427fd126d554b3d47bb5a79750",
+      "sha256": "616c0a4158c64b0b22da6180d90877ec622f7678e85978a24a1e7c35a9e28c98",
+      "bytes": 1456,
+      "remote_git_blob": "db510bb13bb36d427fd126d554b3d47bb5a79750"
+    },
+    {
+      "path": "game/tests/town_turns_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "02494c0deb8df0b232ab91247534e0ab90adb7e2",
+      "sha256": "87010df5c94a37c42d48336f0055a61df67a904a7f417b4b6027267e058c6465",
+      "bytes": 7245,
+      "remote_git_blob": "02494c0deb8df0b232ab91247534e0ab90adb7e2"
+    },
+    {
+      "path": "game/tools/replace_unused_baking_route_cli.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "abeedb1b70bb30765cb818b5318f6a403280ee23",
+      "sha256": "d618779d4b3949a46b8914878a9a341f379b174181be8358f6040e060cf2ee8b",
+      "bytes": 1902,
+      "remote_git_blob": "abeedb1b70bb30765cb818b5318f6a403280ee23"
+    },
+    {
+      "path": "tools/run_town_model_validation.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "86d0a566b90650a6ea76aed231d206fafb486e72",
+      "sha256": "38130ce21e1f4d2417942956234811a7611498a2d875e3aa2a875b021d27d57c",
+      "bytes": 38425,
+      "snapshot": "files/38130ce21e1f4d2417942956234811a7611498a2d875e3aa2a875b021d27d57c.py"
+    },
+    {
+      "path": "tools/start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "59cae3eff33ae09b029d82e56e14148866599dc0",
+      "sha256": "45023cecb8320cc014c92c5248edcbf01a548f641a5b6e68a2da3d0f7e593bf8",
+      "bytes": 32885,
+      "remote_git_blob": "59cae3eff33ae09b029d82e56e14148866599dc0"
+    },
+    {
+      "path": "tools/test_start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "9c8efbd921a4ac1a922ddd9a92fb2e20e91e15de",
+      "sha256": "325bcd6e6a68b170fcb10a9e7b29639f95c1d342986eb40e602eae93ee79fca2",
+      "bytes": 19939,
+      "remote_git_blob": "9c8efbd921a4ac1a922ddd9a92fb2e20e91e15de"
+    },
+    {
+      "path": "tools/test_town_model_validation_budget.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "d3c0488a3fe4d7471d36ad04e3bb2003b521cda8",
+      "sha256": "efbdbfbb1b316cf1515133beed52052b2263bc1e54d8ad7fbfeccdfb3810c53f",
+      "bytes": 43361,
+      "snapshot": "files/efbdbfbb1b316cf1515133beed52052b2263bc1e54d8ad7fbfeccdfb3810c53f.py"
+    },
+    {
+      "path": "tools/town_validation_budget.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "0c1673c9f378dfe93b521cb3cd388b7b7991a1a4",
+      "sha256": "040480b66f300086acbd2f887981fbb4c33c3e63c51d7c9a196213a55d3e89b9",
+      "bytes": 9685,
+      "remote_git_blob": "0c1673c9f378dfe93b521cb3cd388b7b7991a1a4"
+    },
+    {
+      "path": "game/agents/BudgetGatewayProvider.cs",
+      "kind": "unpublished_git_source",
+      "git_blob": "ee976a1d60accca2e5ac89277f30c45b00f288d8",
+      "sha256": "aae7398fb1aa28876893764bf38093342adc72e1624841aed623d1dbffa8045a",
+      "bytes": 18756,
+      "snapshot": "files/aae7398fb1aa28876893764bf38093342adc72e1624841aed623d1dbffa8045a.cs"
+    },
+    {
+      "path": "game/agents/town_turns.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "3b768d0042ce26d94a5dc130ef1fa065211116f2",
+      "sha256": "53a9593645ff245e3514b7de1f67ccf53d54cb8ff3ad2af7c9d3b7fde99f357c",
+      "bytes": 43741,
+      "snapshot": "files/53a9593645ff245e3514b7de1f67ccf53d54cb8ff3ad2af7c9d3b7fde99f357c.gd"
+    },
+    {
+      "path": "game/core/town_baking.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "d1765724105c28da82aeb629b4f21fa76d17b152",
+      "sha256": "fed8916fad7447b16a673e48db060f9c7dcc5e02d876846b703045d21e29c9b2",
+      "bytes": 51934,
+      "remote_git_blob": "d1765724105c28da82aeb629b4f21fa76d17b152"
+    },
+    {
+      "path": "game/core/town_trade.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "fe777ff671205bb4e6205d116068f5e650308c77",
+      "sha256": "e4a4514b313abe95a5154b350c15475f73bf9f36b797e4f0bf9567b92a9e8c81",
+      "bytes": 105978,
+      "remote_git_blob": "fe777ff671205bb4e6205d116068f5e650308c77"
+    },
+    {
+      "path": "game/spatial/living_town.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "8e2d89172856add6a55f2a0abe0d1dbf906a5008",
+      "sha256": "b752f2da9b826d0a7b5b91fd3b952ca6891afed710afdb97f5c759fb0a572bc7",
+      "bytes": 13203,
+      "remote_git_blob": "8e2d89172856add6a55f2a0abe0d1dbf906a5008"
+    },
+    {
+      "path": "game/spatial/town_baking_points.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "691859620552eb483a217a06b15f3b6016c270f8",
+      "sha256": "1c6b4164060d9db82dd5ce706382f7688176ed3e316d4dc8038c5f6ca1754e26",
+      "bytes": 7163,
+      "remote_git_blob": "691859620552eb483a217a06b15f3b6016c270f8"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "1d7f642b5082a5c967604cc0f516b0677a5858eb",
+      "sha256": "aa224121339cd8de7cdd0407c9180437f5b0ada51e27f0e3d034dbee9d06af07",
+      "bytes": 77993,
+      "remote_git_blob": "1d7f642b5082a5c967604cc0f516b0677a5858eb"
+    },
+    {
+      "path": "game/tests/town_food_handoff_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "374ba9d341c5d4b8e4c0c1ca2c8e9e5676e759c4",
+      "sha256": "f27c0ddee0ecabdf7b7b842a9fcb67a03ab44e7f65dc8cf53b560d3b1a53336f",
+      "bytes": 4917,
+      "remote_git_blob": "374ba9d341c5d4b8e4c0c1ca2c8e9e5676e759c4"
+    },
+    {
+      "path": "game/tests/town_gm_status_ui_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "722ae1260ae49529049795b87669b0acf2517755",
+      "sha256": "9b642e71be7e474cb15ff1fb2dd735d8f142c2ed40377587ca6b197f82bc09ec",
+      "bytes": 4216,
+      "remote_git_blob": "722ae1260ae49529049795b87669b0acf2517755"
+    },
+    {
+      "path": "game/tests/town_restore_read_only_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "366a6e21a4f90a12afab08ea789c1642affe3755",
+      "sha256": "ffe07d9e07dd2da3a630650ab782c19e2475db9e38f1136a7f936b06e1c93117",
+      "bytes": 3566,
+      "remote_git_blob": "366a6e21a4f90a12afab08ea789c1642affe3755"
+    },
+    {
+      "path": "game/tools/recover_town_controller.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "b541319a6b5451814e1d096b7cae91a5329e0c2b",
+      "sha256": "e4b78b8fd77849efc2d91ffd63e92e06c116bae5d8bc377b49d9e3ca93500251",
+      "bytes": 3400,
+      "remote_git_blob": "b541319a6b5451814e1d096b7cae91a5329e0c2b"
+    },
+    {
+      "path": "tools/run_town_model_validation.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "0247bcfc5b13601fc6b4ab3735e7331da6ebec0d",
+      "sha256": "aaf4d71a6a014bbc0a39d0683780accf99c383d65274b0562a184d4f1c40a87c",
+      "bytes": 35207,
+      "remote_git_blob": "0247bcfc5b13601fc6b4ab3735e7331da6ebec0d"
+    },
+    {
+      "path": "tools/start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "1609541286c3e8b139085233d71b3a9139625e53",
+      "sha256": "03442b37eeedab075bf69add76044635d99da2d8aca65afbbd4412d4d730f774",
+      "bytes": 16783,
+      "remote_git_blob": "1609541286c3e8b139085233d71b3a9139625e53"
+    },
+    {
+      "path": "tools/test_start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "4e81500d5d09ca8c698bd2afa09784043e302ed6",
+      "sha256": "5749b507b75c5eeacb70e1b0e3600c6a289e352a1d549d9bccbbdf2f1e1ee2f3",
+      "bytes": 9573,
+      "remote_git_blob": "4e81500d5d09ca8c698bd2afa09784043e302ed6"
+    },
+    {
+      "path": "tools/test_town_model_validation_budget.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "b7c0746f9520d1d44266e0f058f2a4b033fa507f",
+      "sha256": "42f684e3584f6f28cf2a5aed0aa4023a4898ecedd1f538b63d1b55abe6504688",
+      "bytes": 37879,
+      "snapshot": "files/42f684e3584f6f28cf2a5aed0aa4023a4898ecedd1f538b63d1b55abe6504688.py"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "f88ec6c8a92422c797fdf42b685c6ea96060f805",
+      "sha256": "495453474d152bd5377ccce65839f7ae95c9fdd53712cf47cbd6206eaea6f479",
+      "bytes": 77996,
+      "remote_git_blob": "f88ec6c8a92422c797fdf42b685c6ea96060f805"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "ab1a9782b8ae86486088d7f383bb4ed4c31c9248",
+      "sha256": "20097cba2bc9881a8e17ed3e0df98087781485ed70223884e80d36ed4d8f0f5a",
+      "bytes": 77591,
+      "remote_git_blob": "ab1a9782b8ae86486088d7f383bb4ed4c31c9248"
+    },
+    {
+      "path": "game/core/town_baking.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "d150b08c299adbfad809c0fcc37be41bdd775ab9",
+      "sha256": "979612319d61b80602c0d61fd50c8ea149d07678f6094ecedd0eb6c90bee54c3",
+      "bytes": 49018,
+      "remote_git_blob": "d150b08c299adbfad809c0fcc37be41bdd775ab9"
+    },
+    {
+      "path": "game/tests/town_baking_route_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "953f6c130d0c337bd3bd52e2ccfca24d05bdc597",
+      "sha256": "f41e42a253ce42b01964cf7cca2eade571bded883055a9d3f2664a4d97409c0a",
+      "bytes": 13699,
+      "remote_git_blob": "953f6c130d0c337bd3bd52e2ccfca24d05bdc597"
+    },
+    {
+      "path": "game/tools/recover_town_controller.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "73d43c6cf2a1ea27b1c1d465cd039304980055d4",
+      "sha256": "26905f2eaf82d6c50e6accbd5cfab161ee411823884182ee70b497b811883a7c",
+      "bytes": 2891,
+      "remote_git_blob": "73d43c6cf2a1ea27b1c1d465cd039304980055d4"
+    },
+    {
+      "path": "tools/run_town_model_validation.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "c1112603e193f363aca427155c17c518990c20be",
+      "sha256": "d8f4afbe81d9385787843be5261df680ec788d3b445cab487c9ccf9646c2c94b",
+      "bytes": 37235,
+      "snapshot": "files/d8f4afbe81d9385787843be5261df680ec788d3b445cab487c9ccf9646c2c94b.py"
+    },
+    {
+      "path": "tools/test_town_model_validation_budget.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "b390cf7c4b27c8a40e97c55c56c65f49cd485e4d",
+      "sha256": "a25c3a62078cb27e5a113330335efdae2d1f966c149fe314520a1a670ba2881b",
+      "bytes": 41381,
+      "snapshot": "files/a25c3a62078cb27e5a113330335efdae2d1f966c149fe314520a1a670ba2881b.py"
+    },
+    {
+      "path": "tools/run_town_model_validation.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "281a5c3e2226aed0587220798520999544da409c",
+      "sha256": "052a93dd209d9ccf27efafe4cd214875898b135d25fc1219176431fe9acfb40b",
+      "bytes": 34921,
+      "snapshot": "files/052a93dd209d9ccf27efafe4cd214875898b135d25fc1219176431fe9acfb40b.py"
+    },
+    {
+      "path": "tools/test_start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "e9628ee78d466f6ccb43e6f375bca3e34254a6d8",
+      "sha256": "83b6e7a62d01891e82c904a52d63648db2021d7c77f04b662ef907125f49b0e0",
+      "bytes": 19823,
+      "remote_git_blob": "e9628ee78d466f6ccb43e6f375bca3e34254a6d8"
+    },
+    {
+      "path": "tools/test_town_model_validation_budget.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "48cd47069029a72ff81a7ae0e5012eb3acc7ec15",
+      "sha256": "50738ed6e21a00e9798e61f1465ebb91fbca93eecc281301966518d850ec7df6",
+      "bytes": 38471,
+      "snapshot": "files/50738ed6e21a00e9798e61f1465ebb91fbca93eecc281301966518d850ec7df6.py"
+    },
+    {
+      "path": "game/agents/BudgetGatewayProvider.cs",
+      "kind": "unpublished_git_source",
+      "git_blob": "51772d84dc00fbe2e674f50c637759621b022990",
+      "sha256": "a43978c57fd3b2b0842e348c19080a2299a8a19e7eb91a3a4f02512cdf5ed3f5",
+      "bytes": 18727,
+      "snapshot": "files/a43978c57fd3b2b0842e348c19080a2299a8a19e7eb91a3a4f02512cdf5ed3f5.cs"
+    },
+    {
+      "path": "game/core/town_baking.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "5d3cd94270dc88288699899db9a6473ca7f3b32f",
+      "sha256": "c6ad9e546d51fceaa7b0450bab84950cc837f71e0041da970e96bd99ed7226b8",
+      "bytes": 47139,
+      "remote_git_blob": "5d3cd94270dc88288699899db9a6473ca7f3b32f"
+    },
+    {
+      "path": "tools/start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "48788d3e6db7a0b71e1130532e483d22ed9cc5ff",
+      "sha256": "9181e0a8c89f288413aaca6186d3b41a66e238f39a039670b50bc5f87043864e",
+      "bytes": 23441,
+      "remote_git_blob": "48788d3e6db7a0b71e1130532e483d22ed9cc5ff"
+    },
+    {
+      "path": "tools/test_start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "5a6cf28c186bc0e4da497d2fa26918a696c567fb",
+      "sha256": "865b87cd9c2a25f8778598d484cfb6009c2fa063e248b50f10a42ea0a934933f",
+      "bytes": 14328,
+      "remote_git_blob": "5a6cf28c186bc0e4da497d2fa26918a696c567fb"
+    },
+    {
+      "path": "tools/start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "25120443d3c898beedd2dfa37984f939fa281c95",
+      "sha256": "118d9edd4ead16ee5a335a6d771c3805d4f0627a36e75b43f8d8a4dceedebbf4",
+      "bytes": 14897,
+      "remote_git_blob": "25120443d3c898beedd2dfa37984f939fa281c95"
+    },
+    {
+      "path": "tools/test_start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "a982af8c36d274ba511889f1e8924f35094e6a9f",
+      "sha256": "ccff437f2fa39e398073870ab5d367ab479d17ce0d199f1c443599b1be317c54",
+      "bytes": 7764,
+      "remote_git_blob": "a982af8c36d274ba511889f1e8924f35094e6a9f"
+    },
+    {
+      "path": "tools/test_town_model_validation_budget.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "ba3f867e9b975574e43a6a0d52f900af48edb515",
+      "sha256": "209d216bca00393b9f85db93d64910567a070f5c21d6c557d5c31aed5c02d0ab",
+      "bytes": 36133,
+      "remote_git_blob": "ba3f867e9b975574e43a6a0d52f900af48edb515"
+    },
+    {
+      "path": "tools/start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "7a7b07772c374b46ed000afe103779ddb38a6361",
+      "sha256": "fa02351afed2836d93d05583ffc02b270cb0be576af1204b40fe04707fa1b410",
+      "bytes": 14339,
+      "remote_git_blob": "7a7b07772c374b46ed000afe103779ddb38a6361"
+    },
+    {
+      "path": "tools/test_start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "b69ecdcef65a84668e40ea78f3fc90e86058949f",
+      "sha256": "c3ebc3d4beb58545bcd63eaa5ccc4ed76277a5ce4755a06944b541332547cb4e",
+      "bytes": 7475,
+      "remote_git_blob": "b69ecdcef65a84668e40ea78f3fc90e86058949f"
+    },
+    {
+      "path": "StartLivingAI.cmd",
+      "kind": "unpublished_git_source",
+      "git_blob": "3da5711462b3818ca19f86b83815d41d3fa41d2e",
+      "sha256": "4d9cb5de1e0c6857d0c35d8a49e7e7a986af3a24d37de219969116c8ca5393ec",
+      "bytes": 296,
+      "remote_git_blob": "3da5711462b3818ca19f86b83815d41d3fa41d2e"
+    },
+    {
+      "path": "tools/start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "4a9b9abb3b26d6965398047f4afb328e954ee86c",
+      "sha256": "a16c2b3fed099c14b9af99c3a98080a2162885c296b5463b913346868c1958dc",
+      "bytes": 13595,
+      "remote_git_blob": "4a9b9abb3b26d6965398047f4afb328e954ee86c"
+    },
+    {
+      "path": "tools/test_start_user_living_session.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "2a260f0b7e45326521ffbc0f57bda06a2dc1e821",
+      "sha256": "35604b580bf7807be97aa17c2d5deaa1e83ffd03a6e63deb8ff21f135dcfeed3",
+      "bytes": 5787,
+      "remote_git_blob": "2a260f0b7e45326521ffbc0f57bda06a2dc1e821"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "68d472b0f1e09dedea64ab7d80b1db4e5c3a0bab",
+      "sha256": "06780d793e93bcb4edb5db42af9c8bce7c5d567b33064e25b49fb54b542c9e6b",
+      "bytes": 77409,
+      "remote_git_blob": "68d472b0f1e09dedea64ab7d80b1db4e5c3a0bab"
+    },
+    {
+      "path": "game/tests/town_restore_read_only_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "a72fa25fc38d1f68732d2060d480d74daa5e1183",
+      "sha256": "5f8989fe1bcb7f5ba14b59bf10e98bbcd08ce22300e385b4e658021f36c716b2",
+      "bytes": 3393,
+      "remote_git_blob": "a72fa25fc38d1f68732d2060d480d74daa5e1183"
+    },
+    {
+      "path": "tools/run_town_model_validation.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "b38a60aea286c2207a3aefa9ba4edef536865cd2",
+      "sha256": "31c4b470837ecace9168be6063e62e17aeffc0d830c74415a735fcdebcda774f",
+      "bytes": 32162,
+      "remote_git_blob": "b38a60aea286c2207a3aefa9ba4edef536865cd2"
+    },
+    {
+      "path": "tools/test_town_model_validation_budget.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "78cfa9cc68be7557f8d306aa9175891150974476",
+      "sha256": "63ffda76b43acf827d406310eb624413be72af5a3c26dbb99bdd39c0f3a5d4c9",
+      "bytes": 35541,
+      "snapshot": "files/63ffda76b43acf827d406310eb624413be72af5a3c26dbb99bdd39c0f3a5d4c9.py"
+    },
+    {
+      "path": "StartLiving.ps1",
+      "kind": "unpublished_git_source",
+      "git_blob": "e69f2e537e776a00e5d158d6bd3ae463283661b7",
+      "sha256": "ac286848bab5e3c14522f09490556911a0affc5c51c3e44c74a048f96a4e796e",
+      "bytes": 11212,
+      "remote_git_blob": "e69f2e537e776a00e5d158d6bd3ae463283661b7"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "5f259918e60db8afdd5be2e609d0d6c6f5254572",
+      "sha256": "fce45e0db300a342eb1414b8e1dbaeaf1f67b8adb4168a3d1b6648627cb5f21f",
+      "bytes": 70991,
+      "remote_git_blob": "5f259918e60db8afdd5be2e609d0d6c6f5254572"
+    },
+    {
+      "path": "tools/gm_runner.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "d01d221646166d385e1ee0567e9838d968ee4df4",
+      "sha256": "6d09e269a4a5d53627693c4e8b9c8562475dc47a6492f91048c5969e83957e51",
+      "bytes": 187510,
+      "remote_git_blob": "d01d221646166d385e1ee0567e9838d968ee4df4"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "1be1f3cfe5ddf076318c664ca2233888b8906761",
+      "sha256": "8abc9c79486230bb8f0069b2e0a107b13e6ba08031d41bd59ee46efe9a1ee342",
+      "bytes": 70242,
+      "remote_git_blob": "1be1f3cfe5ddf076318c664ca2233888b8906761"
+    },
+    {
+      "path": "StartLiving.ps1",
+      "kind": "unpublished_git_source",
+      "git_blob": "8bb06e04ce1e9ee2aaaaac847e60090b9994ad95",
+      "sha256": "6d6d3a3e27ed202c6994bfbb30ed852cdd56a4c54a1fafb6283e995e6ef5c917",
+      "bytes": 10826,
+      "remote_git_blob": "8bb06e04ce1e9ee2aaaaac847e60090b9994ad95"
+    },
+    {
+      "path": "StartLiving.cmd",
+      "kind": "unpublished_git_source",
+      "git_blob": "ed47bbf8e0c2625177d9a9a4db85fb930b060bd8",
+      "sha256": "f564ccf1d0a64e23eed60e55d7ef4d7516186a927cdbb522b662aa7cadcf5d50",
+      "bytes": 387,
+      "remote_git_blob": "ed47bbf8e0c2625177d9a9a4db85fb930b060bd8"
+    },
+    {
+      "path": "StartLiving.ps1",
+      "kind": "unpublished_git_source",
+      "git_blob": "bfddd3da14eee803c055432b982a802a4229624c",
+      "sha256": "b54382960c1989b60a0ab78eb533805d967e48c97bbe69cce9353aee2d939fe5",
+      "bytes": 4105,
+      "remote_git_blob": "bfddd3da14eee803c055432b982a802a4229624c"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "b4328252b79f289b425fb88d491e7aac0037a0ad",
+      "sha256": "6c844736bd195ff4e428bfa1df97ac9f42f2486f0d53f259e51529f746b8612a",
+      "bytes": 69490,
+      "remote_git_blob": "b4328252b79f289b425fb88d491e7aac0037a0ad"
+    },
+    {
+      "path": "StartLiving.ps1",
+      "kind": "unpublished_git_source",
+      "git_blob": "7a896ce1eee7e8e8714f75153a44a2bce9bf39c8",
+      "sha256": "1946c64472d4a8e71c73bfa88505d3f5597026232c10c93939b5bf40791a1c5c",
+      "bytes": 4105,
+      "remote_git_blob": "7a896ce1eee7e8e8714f75153a44a2bce9bf39c8"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "0f32339077f24bae95653c6032264c110e0037a0",
+      "sha256": "1f011672f2b04bdf65556eb7f4631cb14e26eba590b22a961de0e5b750b9eecc",
+      "bytes": 64257,
+      "remote_git_blob": "0f32339077f24bae95653c6032264c110e0037a0"
+    },
+    {
+      "path": "Art/Generated/Overnight20260918/prepare_assets.py",
+      "kind": "unpublished_git_source",
+      "git_blob": "d2f9ce2d3088ad056fd41354aadeff157d390f83",
+      "sha256": "889961be6fa20c1331703865e86c6fa77fdc6be53deafb62c4c64d862f75aad0",
+      "bytes": 9185,
+      "remote_git_blob": "d2f9ce2d3088ad056fd41354aadeff157d390f83"
+    },
+    {
+      "path": "game/assets/overnight20260918/preview.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "f3be565beca53ddc16f56efdf59dabd6375b6094",
+      "sha256": "90ab3e941632758302f97be29bb21e8cbf4d4f748dbc729d1c48f5bd53f4b7d1",
+      "bytes": 5478,
+      "remote_git_blob": "f3be565beca53ddc16f56efdf59dabd6375b6094"
+    },
+    {
+      "path": "StartLiving.cmd",
+      "kind": "unpublished_git_source",
+      "git_blob": "92dbff8cc7d9ec77ff17d46b4cec7ad1f2ac507c",
+      "sha256": "a04b16632b44a74fb1c52a828053cdef556e2c5165bc886bdc35b6176fea7d6b",
+      "bytes": 392,
+      "remote_git_blob": "92dbff8cc7d9ec77ff17d46b4cec7ad1f2ac507c"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "8fa7c4d5a837b0aceb9825a87b082c04495fb1c5",
+      "sha256": "c0940b7f6acb211dde8f2f40dcc60f60cad57e86cf80f400bab2a66e8916b055",
+      "bytes": 63378,
+      "remote_git_blob": "8fa7c4d5a837b0aceb9825a87b082c04495fb1c5"
+    },
+    {
+      "path": "game/agents/town_turns.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "134fcae1f64418e2a95eda08bbd31fbe43cfc4cb",
+      "sha256": "af54bfd59f4ce1ff6fa42a9b1129c277274878a36fbb898c575a2204eb9d2307",
+      "bytes": 33678,
+      "remote_git_blob": "134fcae1f64418e2a95eda08bbd31fbe43cfc4cb"
+    },
+    {
+      "path": "game/spatial/town_baking_points.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "d20b835113b82bf06709e0af69efd314ef7e9859",
+      "sha256": "d1bb6461ebe87db176e6e75b35464dd5e47af3571d84623e9cae8bd9d63106d7",
+      "bytes": 4410,
+      "remote_git_blob": "d20b835113b82bf06709e0af69efd314ef7e9859"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "a940c4a8b438a7d52672de5e4865d6529fd2899e",
+      "sha256": "d6858611210d2adc742f5a118d8349be304644996d35b158d956c19d6edcb1ac",
+      "bytes": 53573,
+      "remote_git_blob": "a940c4a8b438a7d52672de5e4865d6529fd2899e"
+    },
+    {
+      "path": "game/tests/resident_brain_context_budget_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "0bc17711a220b85c5907f710887a68717556652b",
+      "sha256": "f56df9c93a0880a5be0709991d2d06b40d6696d9553473c809a9aca97d0b20d7",
+      "bytes": 3083,
+      "remote_git_blob": "0bc17711a220b85c5907f710887a68717556652b"
+    },
+    {
+      "path": "game/core/town_baking.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "bb435cbb9f7ab0b530376f9bd5a2f237c2476006",
+      "sha256": "f90e3761ca61b697f53943d8685950e60be155c2751bf1af6e9228684fbb713f",
+      "bytes": 37400,
+      "remote_git_blob": "bb435cbb9f7ab0b530376f9bd5a2f237c2476006"
+    },
+    {
+      "path": "game/tests/town_baking_route_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "e5df7f747a7c86d9b9a6b69bf901a6a9855c2ff4",
+      "sha256": "a56a45d0c92d05fc67382264e82e169330524370bb4e85e4c6b6f6332ad340ce",
+      "bytes": 9268,
+      "remote_git_blob": "e5df7f747a7c86d9b9a6b69bf901a6a9855c2ff4"
+    },
+    {
+      "path": "game/core/town_trade.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "97b4625e859ddb01b88aa17a657a1b0ac7ce9358",
+      "sha256": "bc982242f77e28dd1ab33dbcca21c02b0d59979074601bae8be8da31410918b3",
+      "bytes": 102736,
+      "remote_git_blob": "97b4625e859ddb01b88aa17a657a1b0ac7ce9358"
+    },
+    {
+      "path": "game/tests/town_contract_affordance_acceptance.gd",
+      "kind": "unpublished_git_source",
+      "git_blob": "770faccf24b5da5a9c3aafc1d31be05c551d4a71",
+      "sha256": "41299cd9579735850899306a1c00970c435989c4fb8d9a4ee7c2bdde32188494",
+      "bytes": 22938,
+      "remote_git_blob": "770faccf24b5da5a9c3aafc1d31be05c551d4a71"
+    },
+    {
+      "path": "HISTORY.md",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": " M",
+      "sha256": "6adcd23432d47f2ab5197a7dc023a50b224a9a715e9783b5d19200aa944ff16b",
+      "bytes": 1244282,
+      "remote_git_blob": "acbe864b183394c1ada24c45f299963e585c42fc",
+      "line_endings": "working copy CRLF; published LF content is equivalent"
+    },
+    {
+      "path": "ROADMAP.md",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": " M",
+      "sha256": "c9d2a205b59390debf23dbcc43f4b300f26d6caf77f006eba4289bf5930b82ea",
+      "bytes": 112668,
+      "remote_git_blob": "ddf613f87146cd0d996cd05ea192df3be1c82b78",
+      "line_endings": "working copy CRLF; published LF content is equivalent"
+    },
+    {
+      "path": "game/agents/town_turns.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": " M",
+      "sha256": "f11618a7ae22b7c4de5dd541e8830d1e94863fb541fb67eb644a94e8b917c0ec",
+      "bytes": 43643,
+      "remote_git_blob": "ab90bdc1051442720c4d1d79ba6b088ec65316d5"
+    },
+    {
+      "path": "game/spatial/town_baking_points.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": " M",
+      "sha256": "b65a42cd490546f7482f779e5ef95d5e105e88d1ab0edaba41e170d824f30bfc",
+      "bytes": 5642,
+      "remote_git_blob": "28c9cf782c0a21c030b9e9fd7fc8cc2c7889063c"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": " M",
+      "sha256": "d19aad20462c98793feaf619358ab2dd3a7431c466a3189f7529c7c47e0965da",
+      "bytes": 58955,
+      "remote_git_blob": "dabf44929cd94d17ec168d3aefb406ca0e5e3ddf"
+    },
+    {
+      "path": "tools/run_town_model_validation.py",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": " M",
+      "sha256": "a14b06d74aba94edd36c64f6ff98adde8b2666e9d10e2073c05e603242b5cfd3",
+      "bytes": 31876,
+      "remote_git_blob": "996d6796d25db8a97a82502ce2fe8082dd34bfcc"
+    },
+    {
+      "path": "tools/test_town_model_validation_budget.py",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": " M",
+      "sha256": "0aa5af121f5b84c03470941bd218b5e1b29b73d214e2d56f5f5472f976e42e6d",
+      "bytes": 35286,
+      "remote_git_blob": "687fe406e49512d385d66619c5dc7e35e1d31fb9"
+    },
+    {
+      "path": "docs/validation/gm_npc_continuation_2026-09-17.md",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": "??",
+      "sha256": "1a39def6b89a57f814696fda1447f7b65dc8a36f10a5afa157655d65e09e2110",
+      "bytes": 8892,
+      "remote_git_blob": "57943304fbf4122c904c6fbc83d1f74fea43d689",
+      "line_endings": "working copy CRLF; published LF content is equivalent"
+    },
+    {
+      "path": "game/tests/town_baking_physics_acceptance.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": "??",
+      "sha256": "50250602ea6b7865b70ca5318e4443f0ef063d3774b1ebd4e2be4d415d396923",
+      "bytes": 24955,
+      "remote_git_blob": "206e9bbad5bba64e0bee45d1f5bd4d54f9cadc6b"
+    },
+    {
+      "path": "game/tests/town_settled_reply_acceptance.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": "??",
+      "sha256": "3b4b41aedb3039ac9b25a3483ffb6cdc71c69786896210204ef0c6f7b3c3825f",
+      "bytes": 21598,
+      "remote_git_blob": "7e7525bca4b1e298323465356592ab1992979a80"
+    },
+    {
+      "path": "game/tests/town_shutdown_acceptance.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": "??",
+      "sha256": "4ca80f76e48e260cad49f96757202e16abf5eb3e89478bb1ae4ac6856d3c1404",
+      "bytes": 17063,
+      "remote_git_blob": "299b23fb01d767f9934d2bf183ecf59464be539c"
+    },
+    {
+      "path": "game/tools/reconcile_settled_town_reply_cli.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": "??",
+      "sha256": "1220f7f82ffa3f4a8c17d83ade4bb598bb54df3de84fb774ae4ea2f7f9f80327",
+      "bytes": 9640,
+      "remote_git_blob": "eca33a80e9d7014c6a92f3ca16669bbe297c36f1"
+    },
+    {
+      "path": "tools/reconcile_settled_town_reply.py",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": "??",
+      "sha256": "e01195aa4a503c39b9fdcef80665893d5e0ff9bce839ffcc6354facd76f73168",
+      "bytes": 16780,
+      "remote_git_blob": "15c275bbbbdae3a987c35748b2ca4f90d1dd9b53"
+    },
+    {
+      "path": "tools/test_reconcile_settled_town_reply.py",
+      "kind": "working_copy",
+      "source_id": "worktree-00",
+      "status": "??",
+      "sha256": "05c2d0c088d2f46f01f425c503e847717c2a1feef2db3f37705f4249a8f6fc9e",
+      "bytes": 18338,
+      "remote_git_blob": "5daff5c9de6f916817a21d09fae11996414a8e72"
+    },
+    {
+      "path": "game/spatial/town_baking_points.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-04",
+      "status": " M",
+      "sha256": "b65a42cd490546f7482f779e5ef95d5e105e88d1ab0edaba41e170d824f30bfc",
+      "bytes": 5642,
+      "remote_git_blob": "28c9cf782c0a21c030b9e9fd7fc8cc2c7889063c"
+    },
+    {
+      "path": "game/tests/town_baking_physics_acceptance.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-04",
+      "status": "??",
+      "sha256": "50250602ea6b7865b70ca5318e4443f0ef063d3774b1ebd4e2be4d415d396923",
+      "bytes": 24955,
+      "remote_git_blob": "206e9bbad5bba64e0bee45d1f5bd4d54f9cadc6b"
+    },
+    {
+      "path": "game/agents/town_turns.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-05",
+      "status": " M",
+      "sha256": "4b832cadceb804f4e8e317c44fa3efe5bb1c774c7a298844fedf029a550aff0f",
+      "bytes": 39959,
+      "snapshot": "files/4b832cadceb804f4e8e317c44fa3efe5bb1c774c7a298844fedf029a550aff0f.gd"
+    },
+    {
+      "path": "game/tests/town_settled_reply_acceptance.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-05",
+      "status": "??",
+      "sha256": "3b4b41aedb3039ac9b25a3483ffb6cdc71c69786896210204ef0c6f7b3c3825f",
+      "bytes": 21598,
+      "remote_git_blob": "7e7525bca4b1e298323465356592ab1992979a80"
+    },
+    {
+      "path": "game/tools/reconcile_settled_town_reply_cli.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-05",
+      "status": "??",
+      "sha256": "1220f7f82ffa3f4a8c17d83ade4bb598bb54df3de84fb774ae4ea2f7f9f80327",
+      "bytes": 9640,
+      "remote_git_blob": "eca33a80e9d7014c6a92f3ca16669bbe297c36f1"
+    },
+    {
+      "path": "tools/reconcile_settled_town_reply.py",
+      "kind": "working_copy",
+      "source_id": "worktree-05",
+      "status": "??",
+      "sha256": "e01195aa4a503c39b9fdcef80665893d5e0ff9bce839ffcc6354facd76f73168",
+      "bytes": 16780,
+      "remote_git_blob": "15c275bbbbdae3a987c35748b2ca4f90d1dd9b53"
+    },
+    {
+      "path": "tools/test_reconcile_settled_town_reply.py",
+      "kind": "working_copy",
+      "source_id": "worktree-05",
+      "status": "??",
+      "sha256": "05c2d0c088d2f46f01f425c503e847717c2a1feef2db3f37705f4249a8f6fc9e",
+      "bytes": 18338,
+      "remote_git_blob": "5daff5c9de6f916817a21d09fae11996414a8e72"
+    },
+    {
+      "path": "game/agents/town_turns.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-06",
+      "status": " M",
+      "sha256": "6de5f1b392b86604cb3029825ffea47719efb58066543360075374da25174df4",
+      "bytes": 37362,
+      "snapshot": "files/6de5f1b392b86604cb3029825ffea47719efb58066543360075374da25174df4.gd"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-06",
+      "status": " M",
+      "sha256": "d19aad20462c98793feaf619358ab2dd3a7431c466a3189f7529c7c47e0965da",
+      "bytes": 58955,
+      "remote_git_blob": "dabf44929cd94d17ec168d3aefb406ca0e5e3ddf"
+    },
+    {
+      "path": "tools/run_town_model_validation.py",
+      "kind": "working_copy",
+      "source_id": "worktree-06",
+      "status": " M",
+      "sha256": "a14b06d74aba94edd36c64f6ff98adde8b2666e9d10e2073c05e603242b5cfd3",
+      "bytes": 31876,
+      "remote_git_blob": "996d6796d25db8a97a82502ce2fe8082dd34bfcc"
+    },
+    {
+      "path": "tools/test_town_model_validation_budget.py",
+      "kind": "working_copy",
+      "source_id": "worktree-06",
+      "status": " M",
+      "sha256": "0aa5af121f5b84c03470941bd218b5e1b29b73d214e2d56f5f5472f976e42e6d",
+      "bytes": 35286,
+      "remote_git_blob": "687fe406e49512d385d66619c5dc7e35e1d31fb9"
+    },
+    {
+      "path": "game/tests/town_shutdown_acceptance.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-06",
+      "status": "??",
+      "sha256": "4ca80f76e48e260cad49f96757202e16abf5eb3e89478bb1ae4ac6856d3c1404",
+      "bytes": 17063,
+      "remote_git_blob": "299b23fb01d767f9934d2bf183ecf59464be539c"
+    },
+    {
+      "path": "tools/gm_autonomy.py",
+      "kind": "working_copy",
+      "source_id": "worktree-09",
+      "status": " M",
+      "sha256": "cb85f7c7de38b590e8a7772d4a121fe257b83c5d624d211f8c79255d04e5dce5",
+      "bytes": 205492,
+      "remote_git_blob": "f182cac18c8820e4d9c16855cf05d49b46813724"
+    },
+    {
+      "path": "tools/gm_runner.py",
+      "kind": "working_copy",
+      "source_id": "worktree-09",
+      "status": " M",
+      "sha256": "90ed1e8f3ab14d86222d7b8be1fca3ba729e7ddd8dec1a0dd10668b11ca2c0cd",
+      "bytes": 186876,
+      "remote_git_blob": "7a183e84723b8386de268a4b50601a1457fafb4f"
+    },
+    {
+      "path": "tools/test_gm_autonomy.py",
+      "kind": "working_copy",
+      "source_id": "worktree-09",
+      "status": " M",
+      "sha256": "d1b986c6abc6adf1eb386a214242b26d2ee86e97932fc6f4d2b00c849730081a",
+      "bytes": 150223,
+      "remote_git_blob": "8120948e24a6d90e04aab520fb93ef524408b8d8"
+    },
+    {
+      "path": "tools/test_gm_runner.py",
+      "kind": "working_copy",
+      "source_id": "worktree-09",
+      "status": " M",
+      "sha256": "0f570e38d45d28b59c9597466249b7aea09996e462a78d1a28d2dc2fdcea5b70",
+      "bytes": 115476,
+      "remote_git_blob": "16ec3f96a6e91df632504e468f938fdc72b1f251"
+    },
+    {
+      "path": "tools/gm_runner.py",
+      "kind": "working_copy",
+      "source_id": "worktree-10",
+      "status": " M",
+      "sha256": "075a69b365c5c44daf0e6fb0c1a0e192ab4a686cd369f53c9241d0cf1718ad69",
+      "bytes": 187075,
+      "remote_git_blob": "80e236f7a457c645d07dc5c306d4120b29aedaea"
+    },
+    {
+      "path": "game/core/town_life.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-12",
+      "status": " M",
+      "sha256": "646fb0d1514806d4b0e2dfd6bed5f4cfcd3e0607c30a837c41cdf6ef4ccfdd74",
+      "bytes": 48552,
+      "remote_git_blob": "06a6aaf1700fdc825ae0cdc862d50eefc0af4ce1"
+    },
+    {
+      "path": "game/tests/town_foraging_spots_acceptance.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-12",
+      "status": " M",
+      "sha256": "d4132c154d0385c318bff87f5710e64678216b0b998f917f610a8d3636c8053e",
+      "bytes": 26990,
+      "remote_git_blob": "bf0f9ebeb2fa37774d7a31c78ec5d9253bc06043"
+    },
+    {
+      "path": "game/tests/private_baker_provider_probe.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-14",
+      "status": "??",
+      "sha256": "41ccade5bdbabee03a259b7b2ef2fb622ac2040709544ba69afcd487d46a1468",
+      "bytes": 1472,
+      "snapshot": "files/41ccade5bdbabee03a259b7b2ef2fb622ac2040709544ba69afcd487d46a1468.gd"
+    },
+    {
+      "path": "game/core/town_trade.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-17",
+      "status": " M",
+      "sha256": "658bb079dde52db914e2b59058a93e2b6ad824baa3a50f88cc5a476a3e2cffa9",
+      "bytes": 68036,
+      "remote_git_blob": "5e3a1f87ecb80751bc5c72199423daae7fdb9b3f"
+    },
+    {
+      "path": "game/tests/town_contract_affordance_acceptance.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-17",
+      "status": "??",
+      "sha256": "b2973b63d04ea00efd1c55b57692889654b61ed3527095ccd0c8c3d2845643ab",
+      "bytes": 14141,
+      "remote_git_blob": "efe522f7a22e57e32db105191cc2a3acf3efc328"
+    },
+    {
+      "path": "docs/design/resident-contact-memory-v1.md",
+      "kind": "working_copy",
+      "source_id": "worktree-22",
+      "status": "??",
+      "sha256": "b9138172dfdc6fa3c55b71259479139aebe94922dd41b3d2104ec03f9170de0b",
+      "bytes": 4858,
+      "snapshot": "files/b9138172dfdc6fa3c55b71259479139aebe94922dd41b3d2104ec03f9170de0b.md"
+    },
+    {
+      "path": "game/tests/town_contact_memory_acceptance.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-22",
+      "status": "??",
+      "sha256": "43a8320afd8617dd1ae97fd9a5a26888fcdb7a25cd26e846dd1ecace077b448f",
+      "bytes": 16699,
+      "snapshot": "files/43a8320afd8617dd1ae97fd9a5a26888fcdb7a25cd26e846dd1ecace077b448f.gd"
+    },
+    {
+      "path": "game/agents/town_turns.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-23",
+      "status": " M",
+      "sha256": "d9d4952aadeb4584492b73120c38c1513e795004ac5b1c2f8dd5640ed7a8ae11",
+      "bytes": 54112,
+      "remote_git_blob": "9f854f316b95696369453a7506aa5f6303e501f4"
+    },
+    {
+      "path": "game/tests/town_need_transition_wake_acceptance.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-23",
+      "status": "??",
+      "sha256": "d2253d3bc030fde5411012405837fd232a79968dfbd0e8e46bf57bb37df04757",
+      "bytes": 5269,
+      "snapshot": "files/d2253d3bc030fde5411012405837fd232a79968dfbd0e8e46bf57bb37df04757.gd"
+    },
+    {
+      "path": "game/addons/simplegrasstextured/default_mesh.tres",
+      "kind": "working_copy",
+      "source_id": "worktree-25",
+      "status": " M",
+      "sha256": "68cc01607878876f03ab199916ab79588067fe3376449eba47050cf5c290a776",
+      "bytes": 778,
+      "remote_git_blob": "f0482c7733370f889b3cd5d49f4ca32b3c69e13d"
+    },
+    {
+      "path": "docs/validation/navigation-mvp-formal-resident-2026-09-20.md",
+      "kind": "working_copy",
+      "source_id": "worktree-26",
+      "status": " M",
+      "sha256": "ef4fc3af8caf230e19f7cb17cad7f1d41ac603a2bf646a53a14a436c1468b298",
+      "bytes": 2331,
+      "snapshot": "files/ef4fc3af8caf230e19f7cb17cad7f1d41ac603a2bf646a53a14a436c1468b298.md"
+    },
+    {
+      "path": "game/addons/simplegrasstextured/default_mesh.tres",
+      "kind": "working_copy",
+      "source_id": "worktree-26",
+      "status": " M",
+      "sha256": "68cc01607878876f03ab199916ab79588067fe3376449eba47050cf5c290a776",
+      "bytes": 778,
+      "remote_git_blob": "f0482c7733370f889b3cd5d49f4ca32b3c69e13d"
+    },
+    {
+      "path": "game/addons/simplegrasstextured/default_mesh.tres",
+      "kind": "working_copy",
+      "source_id": "worktree-29",
+      "status": " M",
+      "sha256": "68cc01607878876f03ab199916ab79588067fe3376449eba47050cf5c290a776",
+      "bytes": 778,
+      "remote_git_blob": "f0482c7733370f889b3cd5d49f4ca32b3c69e13d"
+    },
+    {
+      "path": "game/addons/simplegrasstextured/default_mesh.tres",
+      "kind": "working_copy",
+      "source_id": "worktree-30",
+      "status": " M",
+      "sha256": "68cc01607878876f03ab199916ab79588067fe3376449eba47050cf5c290a776",
+      "bytes": 778,
+      "remote_git_blob": "f0482c7733370f889b3cd5d49f4ca32b3c69e13d"
+    },
+    {
+      "path": "game/core/town_trade.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-31",
+      "status": " M",
+      "sha256": "658bb079dde52db914e2b59058a93e2b6ad824baa3a50f88cc5a476a3e2cffa9",
+      "bytes": 68036,
+      "remote_git_blob": "5e3a1f87ecb80751bc5c72199423daae7fdb9b3f"
+    },
+    {
+      "path": "game/tests/town_contract_affordance_acceptance.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-31",
+      "status": "??",
+      "sha256": "6027661145d784911a681717bf6026b9097fc34fcc384c365a5fa7bd0dc18365",
+      "bytes": 14144,
+      "snapshot": "files/6027661145d784911a681717bf6026b9097fc34fcc384c365a5fa7bd0dc18365.gd"
+    },
+    {
+      "path": "game/spatial/town_street.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-32",
+      "status": " M",
+      "sha256": "4719758efc45ea94d0546289bbdfd81d07b0007bcb4efbee8c3015813f22f816",
+      "bytes": 43548,
+      "remote_git_blob": "a829fb837a277228188148a5d14041304041fb23"
+    },
+    {
+      "path": "game/spatial/town_social_steering.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-32",
+      "status": "??",
+      "sha256": "7034ce9d1b95bd8f1bf04bda4740184a633bf09d4050459669b9b7b83bf619cd",
+      "bytes": 3160,
+      "remote_git_blob": "f2219f6bcfd65ec1b0684301c4753d0aec0ba75b"
+    },
+    {
+      "path": "game/tests/town_social_approach_acceptance.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-32",
+      "status": "??",
+      "sha256": "3dadaa9662c657d5cfaaabb4f31caa15fb7ffdf56cb37496652f6ad0236f96c5",
+      "bytes": 18087,
+      "remote_git_blob": "e66ee4d803a2f83feede29c7dead2b2319089ddb"
+    },
+    {
+      "path": "game/tests/town_social_approach_scene.gd",
+      "kind": "working_copy",
+      "source_id": "worktree-32",
+      "status": "??",
+      "sha256": "567f7e524da1f0efe96665e478cf266cca13ee1669ef7970e939df86fc799fad",
+      "bytes": 10707,
+      "remote_git_blob": "56240fe11cdf414d292bfce1494208ee0f97674c"
+    },
+    {
+      "path": "tools/test_town_social_approach.py",
+      "kind": "working_copy",
+      "source_id": "worktree-32",
+      "status": "??",
+      "sha256": "f99c9779b4b0b7e0998a4ba49596c674873efe1d28b67b8027e719e1a88732dc",
+      "bytes": 24970,
+      "remote_git_blob": "07cbf4df515cc5f0aabe65e53cac54cafc1bdd8c"
+    },
+    {
+      "path": "OpenLatestWorld.cmd",
+      "kind": "local_entry_launcher",
+      "source_id": "entry-launchers",
+      "note": "Machine-specific historical launcher; archived unchanged, not the current portable entry.",
+      "sha256": "0c624d19f4fdbb74423045e5cba85878320d028c9fb8316acbaf09f38adc4bb7",
+      "bytes": 588,
+      "snapshot": "files/0c624d19f4fdbb74423045e5cba85878320d028c9fb8316acbaf09f38adc4bb7.cmd"
+    },
+    {
+      "path": "OpenLivingWorld.cmd",
+      "kind": "local_entry_launcher",
+      "source_id": "entry-launchers",
+      "note": "Machine-specific historical launcher; archived unchanged, not the current portable entry.",
+      "sha256": "7281dad5b9c6f6bb5d03e04625dfade07163249a984ad8a78640c24e888219e1",
+      "bytes": 114,
+      "snapshot": "files/7281dad5b9c6f6bb5d03e04625dfade07163249a984ad8a78640c24e888219e1.cmd"
+    },
+    {
+      "path": "StartLivingAI.cmd",
+      "kind": "local_entry_launcher",
+      "source_id": "entry-launchers",
+      "note": "Machine-specific historical launcher; archived unchanged, not the current portable entry.",
+      "sha256": "aaaba5f86b82d032b280be073dc59c477e02e7177a9c43d4f71ea2b72eef3aa1",
+      "bytes": 103,
+      "snapshot": "files/aaaba5f86b82d032b280be073dc59c477e02e7177a9c43d4f71ea2b72eef3aa1.cmd"
+    },
+    {
+      "path": "PullJevModel.cmd",
+      "kind": "local_entry_launcher",
+      "source_id": "entry-launchers",
+      "note": "Machine-specific historical launcher; archived unchanged, not the current portable entry.",
+      "sha256": "7f2111f2282314ca4f5309d167760c17a2cc8eb2cb9a27e17cd0b1ab70d0e29f",
+      "bytes": 356,
+      "snapshot": "files/7f2111f2282314ca4f5309d167760c17a2cc8eb2cb9a27e17cd0b1ab70d0e29f.cmd"
+    },
+    {
+      "path": "StartLocalJev.cmd",
+      "kind": "local_entry_launcher",
+      "source_id": "entry-launchers",
+      "note": "Machine-specific historical launcher; archived unchanged, not the current portable entry.",
+      "sha256": "89e6780dc7c7c1ff245f8c5f7926b9298abf8d8e89b75443ea2fc283697f0382",
+      "bytes": 653,
+      "snapshot": "files/89e6780dc7c7c1ff245f8c5f7926b9298abf8d8e89b75443ea2fc283697f0382.cmd"
+    },
+    {
+      "path": "StartOllama.cmd",
+      "kind": "local_entry_launcher",
+      "source_id": "entry-launchers",
+      "note": "Machine-specific historical launcher; archived unchanged, not the current portable entry.",
+      "sha256": "d44ecf8a582d69fd822e1503d36269fb0d5c8cea194feb7b738ed194f4a0f8ae",
+      "bytes": 349,
+      "snapshot": "files/d44ecf8a582d69fd822e1503d36269fb0d5c8cea194feb7b738ed194f4a0f8ae.cmd"
+    }
+  ],
+  "snapshot_files": 26,
+  "snapshot_bytes": 615958
+}
