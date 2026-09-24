@@ -12195,3 +12195,16 @@ Pending implementation remains one capability package: a versioned manifest, a v
 GPT-5.3-Codex-Spark was not listed by this session's subagent dispatch interface. It was not used or counted as a separate free quota. Official documentation distinguishes Spark from ordinary GPT-5.3-Codex, and client availability depends on account and rollout: [model documentation](https://learn.chatgpt.com/docs/models).
 
 </details>
+## 2026-09-25 · H164 role characters and action library
+
+- Added sixteen visible role characters to the 208-model portrait city kit:
+  police/Chase, thief/Sneak, mech/Patrol, fat fries/Eat Fries,
+  firefighter/Hose, chef/Flip, skateboarder/Skate, photographer/Shoot,
+  jogger/Jog, musician/Strum, construction/Hammer, nurse/Care, cyclist/Pedal,
+  superhero/Hero Pose, delivery/Carry and dancer/Dance.
+- Each role has Idle, Walk, Run and a dedicated imported action clip. Police and
+  thief receive chase/escape behavior in the city simulation.
+- Rebuilt the 208 GLB catalog and Windows package. Validation passes: portrait
+  28, rim 25, fidelity 24, legacy 27; all failures are empty.
+- Reviewed CC0 Quaternius and Kenney options plus Mixamo's hosted license terms;
+  no external model bytes were copied into the repository.

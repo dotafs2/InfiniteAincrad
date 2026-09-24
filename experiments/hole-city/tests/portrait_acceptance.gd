@@ -23,10 +23,17 @@ func run() -> void:
 	for entry in game.city.catalog:geometries[entry.geometry_sha256]=true
 	check(geometries.size()==208,"no geometry-identical recolors count toward 208")
 	var animated:=0
+	var specials:={}
 	for c in game.city.citizens:
-		if c.anim and c.anim.has_animation("Idle") and c.anim.has_animation("Walk") and c.anim.has_animation("Run"):animated+=1
-	check(animated==64,"all 64 citizens have imported idle, walk and run clips")
-	var citizen:Dictionary=game.city.citizens[17]
+		if c.anim and c.anim.has_animation("Idle") and c.anim.has_animation("Walk") and c.anim.has_animation("Run") and c.anim.has_animation(c.special):animated+=1
+		specials[c.special]=true
+	check(animated==64,"all 64 citizens have imported idle, walk, run and role clips")
+	check(specials.size()==16,"sixteen distinct visible roles expose sixteen distinct action clips")
+	check(game.city.citizens.any(func(c:Dictionary):return c.kind=="police" and c.special=="Chase"),"police role has a dedicated chase action")
+	check(game.city.citizens.any(func(c:Dictionary):return c.kind=="thief" and c.special=="Sneak"),"thief role has a dedicated sneak action")
+	check(game.city.citizens.any(func(c:Dictionary):return c.kind=="mech" and c.special=="Patrol"),"mech role has a dedicated patrol action")
+	check(game.city.citizens.any(func(c:Dictionary):return c.kind=="fat_fries" and c.special=="Eat_Fries"),"fat fries role has a dedicated eating action")
+	var citizen:Dictionary=game.city.citizens.filter(func(c:Dictionary):return c.kind=="jogger")[0]
 	var skeleton:Skeleton3D=citizen.body.find_child("Skeleton3D",true,false)
 	check(skeleton!=null and skeleton.get_bone_count()>=10,"stick character has a real articulated skeleton")
 	var animator:AnimationPlayer=citizen.anim
@@ -36,6 +43,8 @@ func run() -> void:
 		# Godot removes constant tracks during import; the idle only needs its
 		# breathing/root track, while locomotion must retain articulated limbs.
 		check(anim.get_track_count()>=(1 if clip=="Idle" else 8) and anim.length>.4 and anim.loop_mode==Animation.LOOP_LINEAR,"imported %s contains looping bone animation"%clip)
+	var role_animation:=animator.get_animation(citizen.special)
+	check(role_animation.get_track_count()>=8 and role_animation.loop_mode==Animation.LOOP_LINEAR,"role-specific animation contains articulated looping tracks")
 	animator.play("Walk");animator.seek(.1,true)
 	var bone:int=skeleton.find_bone("thighL")
 	var pose:=skeleton.get_bone_pose_rotation(bone)
@@ -64,7 +73,7 @@ func run() -> void:
 	game.player.position=Vector3(45,0,45)
 	game.elapsed=2.0-float(citizen.phase)
 	await frames(40)
-	check(citizen.clip=="Walk" and citizen.body.position.distance_to(origin)>.03,"pedestrian walks with displacement and the walk clip")
+	check(citizen.clip==citizen.special and citizen.body.position.distance_to(origin)>.03,"pedestrian performs its role action with displacement")
 	game.player.position=Vector3(citizen.body.position.x+1.8,0,citizen.body.position.z)
 	await frames(3)
 	check(citizen.clip=="Run","nearby hole triggers the run clip")

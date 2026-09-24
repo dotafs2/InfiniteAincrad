@@ -19,15 +19,21 @@ pixel-identical reconstruction of the entire Poki game.
 Every GLB has a different geometry hash. Counts include related structural and
 proportion variants within 48 model families, not 208 unrelated object themes.
 Recolors and repeated scene instances are not counted. All 208 assets are used
-in the 443-object city. Sixteen figures have 48 imported animation clips: Idle,
-Walk and Run. Sixty-four pedestrians move, rest and flee in ordinary gameplay.
-The kit totals 162,888 authored triangles and roughly 13.7 MB of GLB data.
+in the 443-object city. Sixteen figures have Idle, Walk, Run, and one dedicated
+role action each (64 imported clips total). The visible roles are Police/Chase,
+Thief/Sneak, Mech/Patrol, Fat Fries/Eat Fries, Firefighter/Hose, Chef/Flip,
+Skateboarder/Skate, Photographer/Shoot, Jogger/Jog, Musician/Strum,
+Construction/Hammer, Nurse/Care, Cyclist/Pedal, Superhero/Hero Pose,
+Delivery/Carry, and Dancer/Dance. Sixty-four pedestrians move, rest and flee
+in ordinary gameplay; police pursue the thief and the thief escapes the player.
+The kit totals 164,156 authored triangles and roughly 14.0 MB of GLB data.
 
 - [Visual catalog and searchable inventory](catalog.html)
 - [Asset audit](asset-audit.json)
 - [208 successful Blender MCP authoring command receipts](mcp-batch.json)
 - [Godot gameplay excerpt, 540 × 960](portrait-gameplay.mp4)
-- [Isolated character animation preview](character-animation.mp4)
+- [16-role action preview, 540 × 720](role-actions.mp4)
+- [Open-source character options reviewed](open-source-options.md)
 - [Capture scope and hashes](capture.json)
 
 The Blender source is `experiments/hole-city/art_source/city_catalog.blend`;
@@ -43,17 +49,19 @@ was used. The local bridge and all owned browser/helper processes were closed.
 
 ## Verification
 
-- [22 portrait checks](portrait_acceptance.json): all 208 assets instantiated,
-  actual bone motion, three looping clips, moving/fleeing/resting pedestrians,
+- [28 portrait checks](portrait_acceptance.json): all 208 assets instantiated,
+  actual bone motion, four clips per role, moving/fleeing/resting pedestrians,
+  police/thief role behavior,
   one-finger screen-relative movement, second-finger isolation, release-to-stop,
   and on-screen pause/resume.
 - [25 rim checks](rim_fall_acceptance.json): real gravity/contact tipping and
   exactly-once collection, including a symmetric straight-fall control.
 - [24 first-level checks](fidelity_acceptance.json): normal gameplay at 60 Hz,
   tutorial, input, scoring, growth, results and restart. The final ordinary
-  seven-rival regression ended EATEN at 60 points after 89.617 simulated seconds.
-  A separate explicitly rivals-retired fixture earned 510 points and completed
-  after 63.767 seconds. Neither is misrepresented as a guaranteed ordinary win.
+  seven-rival regression ended EATEN at 58 points after 42.817 simulated seconds.
+  A separate explicitly rivals-retired fixture earned 507 points and completed
+  after about 71.9 seconds. Neither is misrepresented as a guaranteed ordinary
+  win.
 - [27 legacy checks](acceptance.json): the preserved original prototype passes.
 - [Windows pack manifest](windows-manifest.json): version 0.3.0, embedded pack,
   actual packaged executable tested with the headless renderer.
@@ -64,7 +72,7 @@ was used. The local bridge and all owned browser/helper processes were closed.
 The 42.5-second silent gameplay excerpt is a real automated touch-input match,
 not a scripted success animation. Browser capture has variable cadence, with
 visible early startup/capture stalls; encoding it at 30 fps is not a claim of
-constant 30 fps rendering. The separate 10-second character preview is an
+constant 30 fps rendering. The separate 10-second 16-role preview is an
 explicit isolated animation fixture, not gameplay.
 
 During implementation, validation found and fixed duplicate geometry variants,

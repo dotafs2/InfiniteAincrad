@@ -4036,403 +4036,419 @@
       "animations": []
     },
     {
-      "id": "193_slim_01",
+      "id": "193_police_01",
       "group": "person",
-      "kind": "slim",
+      "kind": "police",
       "variant": 1,
-      "path": "res://assets/city_kit/193_slim_01.glb",
+      "path": "res://assets/city_kit/193_police_01.glb",
       "size": [
-        0.502,
-        1.3975,
+        0.59384,
+        1.5834000000000001,
+        0.3016
+      ],
+      "center": [
+        0.03588000000000002,
+        0.8099000000000001,
+        0.005199999999999996
+      ],
+      "triangles": 1064,
+      "geometry_sha256": "e318191aa4877ebd499d2ebfe5e38843b6127167c32f08427ae9e69550a72c04",
+      "file_sha256": "9559ab715d357a7d962e9e20a80566cb97eb8c2d2a9c8d0d3d56471d611afc5e",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run",
+        "Chase"
+      ]
+    },
+    {
+      "id": "194_thief_01",
+      "group": "person",
+      "kind": "thief",
+      "variant": 1,
+      "path": "res://assets/city_kit/194_thief_01.glb",
+      "size": [
+        0.63308,
+        1.45285,
+        0.30135
+      ],
+      "center": [
+        -0.07056,
+        0.743575,
+        0.0036750000000000116
+      ],
+      "triangles": 1196,
+      "geometry_sha256": "f5832c5cb343286c735c3f50c80e7fc37e83b22a314577acd3cc1ab300aae527",
+      "file_sha256": "68e5472dc2f1d591d2bb1f9faaa971de8951969abe9bdeeebd20afe97fb8fa40",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run",
+        "Sneak"
+      ]
+    },
+    {
+      "id": "195_mech_01",
+      "group": "person",
+      "kind": "mech",
+      "variant": 1,
+      "path": "res://assets/city_kit/195_mech_01.glb",
+      "size": [
+        0.8495999999999999,
+        2.00305,
+        0.3422
+      ],
+      "center": [
+        0.0,
+        1.0221749999999998,
+        0.005899999999999989
+      ],
+      "triangles": 1100,
+      "geometry_sha256": "77fbc01618abfe149944ce2f06e9b893fd55d83d811c2e6721fac783f33f8dee",
+      "file_sha256": "4079a8529f4dd15ac55fc48559f7a3d6b24eb4e1bc3fcf4e60912d4d01371bf3",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run",
+        "Patrol"
+      ]
+    },
+    {
+      "id": "196_fat_fries_01",
+      "group": "person",
+      "kind": "fat_fries",
+      "variant": 1,
+      "path": "res://assets/city_kit/196_fat_fries_01.glb",
+      "size": [
+        0.7344000072956085,
+        1.42545,
+        0.44880000000000003
+      ],
+      "center": [
+        0.05609999635219573,
+        0.730575,
+        -0.0
+      ],
+      "triangles": 1208,
+      "geometry_sha256": "48751f066c241cfcadf5dedce631f5e02e4f61336a8f3c0bdbc4b051e4415480",
+      "file_sha256": "7ec44d96b2f8a4da196f9ba46917f7a1ad673eab840dd9a35afc74f16823afa5",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run",
+        "Eat_Fries"
+      ]
+    },
+    {
+      "id": "197_firefighter_01",
+      "group": "person",
+      "kind": "firefighter",
+      "variant": 1,
+      "path": "res://assets/city_kit/197_firefighter_01.glb",
+      "size": [
+        0.806289041042328,
+        1.61385,
+        0.4602316708579973
+      ],
+      "center": [
+        0.13086348772048953,
+        0.8254750000000001,
+        0.018410654901697465
+      ],
+      "triangles": 1120,
+      "geometry_sha256": "952acf4e2eb2179c48287a048e182d9dd9f66d2a87e142e11c46339b30564f7d",
+      "file_sha256": "b1b78a9ed33fac4b85129e7d7c70653ce6da7b911656ea212e272da2ab3a998f",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run",
+        "Hose"
+      ]
+    },
+    {
+      "id": "198_chef_01",
+      "group": "person",
+      "kind": "chef",
+      "variant": 1,
+      "path": "res://assets/city_kit/198_chef_01.glb",
+      "size": [
+        0.681,
+        1.5525,
+        0.28500000000000003
+      ],
+      "center": [
+        0.08950000000000002,
+        0.7937500000000001,
+        0.007499999999999993
+      ],
+      "triangles": 1472,
+      "geometry_sha256": "9d2b7ef17e388b1ddacfe6a498232a03801818f20578cc5b4fee83ad6d541ef5",
+      "file_sha256": "1fa44a3a06a0b3c2f7e23ea2bfee3853d0e33f3e5ba40d7ab15ebc9a971ccdc3",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run",
+        "Flip"
+      ]
+    },
+    {
+      "id": "199_skateboarder_01",
+      "group": "person",
+      "kind": "skateboarder",
+      "variant": 1,
+      "path": "res://assets/city_kit/199_skateboarder_01.glb",
+      "size": [
+        0.8245,
+        1.44045,
+        0.3492
+      ],
+      "center": [
+        0.0,
+        0.6523249999999999,
+        -0.029100000000000015
+      ],
+      "triangles": 1112,
+      "geometry_sha256": "436d94a82008617304b1a92b4eeacd77df6cd31cecdec419e9434a126f52a247",
+      "file_sha256": "43e2a4fbd67c42d2af339035bd34e156e4ef6f9a0eaf7f199353635aae3115ed",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run",
+        "Skate"
+      ]
+    },
+    {
+      "id": "200_photographer_01",
+      "group": "person",
+      "kind": "photographer",
+      "variant": 1,
+      "path": "res://assets/city_kit/200_photographer_01.glb",
+      "size": [
+        0.50702,
+        1.4720749999999998,
+        0.5166896957020674
+      ],
+      "center": [
+        0.0,
+        0.7537125,
+        0.12199484785103369
+      ],
+      "triangles": 1088,
+      "geometry_sha256": "b8178e39da884cd9b12003b947aa1195a6e71f6c5cc0ba0d4d37c2160a7e65bf",
+      "file_sha256": "6e281fa27f727c2c034810795ec931e363b86b73030e2ab202d8d821c458e43c",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run",
+        "Shoot"
+      ]
+    },
+    {
+      "id": "201_jogger_01",
+      "group": "person",
+      "kind": "jogger",
+      "variant": 1,
+      "path": "res://assets/city_kit/201_jogger_01.glb",
+      "size": [
+        0.63,
+        1.4525,
         0.28500000000000003
       ],
       "center": [
         0.0,
-        0.71625,
+        0.74375,
         0.007499999999999993
       ],
-      "triangles": 1016,
-      "geometry_sha256": "e5ad986d1784f9c303d849d027cd8378355cc5c57cdaf8dd92c84c2267ee8f69",
-      "file_sha256": "3822996f8d5061a67659375c9599f18769022b7cb7bc9a1011928f13b667c0a5",
+      "triangles": 1052,
+      "geometry_sha256": "83dbaaa4ef5b9b6959ea9ad3a52777c03da0845f48f16080c8bf5d4224710db1",
+      "file_sha256": "381223a7b064b7ae97018c33aa6f96c51c97732010c55fcf6ac0053d97a71e07",
       "animations": [
         "Idle",
         "Walk",
-        "Run"
+        "Run",
+        "Jog"
       ]
     },
     {
-      "id": "194_slim_02",
+      "id": "202_musician_01",
       "group": "person",
-      "kind": "slim",
-      "variant": 2,
-      "path": "res://assets/city_kit/194_slim_02.glb",
-      "size": [
-        0.502,
-        1.415,
-        0.3521690426072246
-      ],
-      "center": [
-        0.0,
-        0.7250000000000001,
-        0.023915478696387715
-      ],
-      "triangles": 1064,
-      "geometry_sha256": "d0ef32897b687c291ba38603c2a66e7705a5785179bcaf6f561d1d7f2c54a197",
-      "file_sha256": "8b1ced70f01679a2181b5640290f32260da380e0f07206b517561fb7cf8245e2",
-      "animations": [
-        "Idle",
-        "Walk",
-        "Run"
-      ]
-    },
-    {
-      "id": "195_slim_03",
-      "group": "person",
-      "kind": "slim",
-      "variant": 3,
-      "path": "res://assets/city_kit/195_slim_03.glb",
-      "size": [
-        0.502,
-        1.3975,
-        0.355
-      ],
-      "center": [
-        0.0,
-        0.71625,
-        -0.02750000000000001
-      ],
-      "triangles": 1028,
-      "geometry_sha256": "014a26afa154e7aa34bec3ef6c60f0933098324dac780fe0bad2dc589bbd1242",
-      "file_sha256": "e5987fa1cf4de30da35f77c47ec71addc9d8ef9746cdca441e60d316b7ea689c",
-      "animations": [
-        "Idle",
-        "Walk",
-        "Run"
-      ]
-    },
-    {
-      "id": "196_slim_04",
-      "group": "person",
-      "kind": "slim",
-      "variant": 4,
-      "path": "res://assets/city_kit/196_slim_04.glb",
-      "size": [
-        0.502,
-        1.4525000000000001,
-        0.293
-      ],
-      "center": [
-        0.0,
-        0.7437500000000001,
-        0.003500000000000003
-      ],
-      "triangles": 1160,
-      "geometry_sha256": "d7226024ac264bbb758a1556e8a64401d57af4bae86bf8bbb2d1f4f73ff452dc",
-      "file_sha256": "666f7c20b9d8501f3a8471d6d9a114da81a6fab6456c478f8d431344552346f3",
-      "animations": [
-        "Idle",
-        "Walk",
-        "Run"
-      ]
-    },
-    {
-      "id": "197_short_01",
-      "group": "person",
-      "kind": "short",
+      "kind": "musician",
       "variant": 1,
-      "path": "res://assets/city_kit/197_short_01.glb",
+      "path": "res://assets/city_kit/202_musician_01.glb",
       "size": [
-        0.42168,
-        1.1739,
-        0.2394
+        0.75705,
+        1.498875,
+        0.45675
       ],
       "center": [
-        0.0,
-        0.6016499999999999,
-        0.0063
+        0.114975,
+        0.7678125,
+        0.086625
       ],
-      "triangles": 1016,
-      "geometry_sha256": "d9febb076fd417dc42c7e772daa73ba04e6620e3f42588c3b40a93ade0b12fd9",
-      "file_sha256": "3d50c31af4d570389beefa225dd5b05d3b40431137e105e2b1b0442d3b9eee94",
+      "triangles": 1228,
+      "geometry_sha256": "3e824a577196c30d930241327399476b2fe9c793ae8afe492b773031fbaa1b48",
+      "file_sha256": "4518c6e4a5ccb1ab771f130b5395b9dd7d207dad4436602394c17181d726d66b",
       "animations": [
         "Idle",
         "Walk",
-        "Run"
+        "Run",
+        "Strum"
       ]
     },
     {
-      "id": "198_short_02",
+      "id": "203_construction_01",
       "group": "person",
-      "kind": "short",
-      "variant": 2,
-      "path": "res://assets/city_kit/198_short_02.glb",
-      "size": [
-        0.42168,
-        1.1886,
-        0.2958219957900686
-      ],
-      "center": [
-        0.0,
-        0.609,
-        0.020089002104965684
-      ],
-      "triangles": 1064,
-      "geometry_sha256": "21247e6830d893c8f9fef9d7d88f46985ede03173f82f86391c2ebdd8a4f6c3f",
-      "file_sha256": "aaae792ceb55b210d0feb3ae57dfa1add0c89b8e29e744a2006af6ca334240bf",
-      "animations": [
-        "Idle",
-        "Walk",
-        "Run"
-      ]
-    },
-    {
-      "id": "199_short_03",
-      "group": "person",
-      "kind": "short",
-      "variant": 3,
-      "path": "res://assets/city_kit/199_short_03.glb",
-      "size": [
-        0.42168,
-        1.1739,
-        0.2982
-      ],
-      "center": [
-        0.0,
-        0.6016499999999999,
-        -0.02310000000000001
-      ],
-      "triangles": 1028,
-      "geometry_sha256": "b0bb495f44a26edcbcf146d0bc1940fd52338f4ab4b721b7e4a2912e36f1d86a",
-      "file_sha256": "2ba275d6419c469c3964d6a2d79e713a30bcee2f20b14afa25cf5f5970e9d2e6",
-      "animations": [
-        "Idle",
-        "Walk",
-        "Run"
-      ]
-    },
-    {
-      "id": "200_short_04",
-      "group": "person",
-      "kind": "short",
-      "variant": 4,
-      "path": "res://assets/city_kit/200_short_04.glb",
-      "size": [
-        0.42168,
-        1.2201000000000002,
-        0.24612
-      ],
-      "center": [
-        0.0,
-        0.62475,
-        0.002940000000000005
-      ],
-      "triangles": 1160,
-      "geometry_sha256": "538151a5932c95906c3c1180b1d08329d79087bcb0c33e7dfb7cf45306fe1ba5",
-      "file_sha256": "57daa24b99ca219b5edab11e4b3cc4a7230c54f170863f848257968798da3c71",
-      "animations": [
-        "Idle",
-        "Walk",
-        "Run"
-      ]
-    },
-    {
-      "id": "201_tall_01",
-      "group": "person",
-      "kind": "tall",
+      "kind": "construction",
       "variant": 1,
-      "path": "res://assets/city_kit/201_tall_01.glb",
+      "path": "res://assets/city_kit/203_construction_01.glb",
       "size": [
-        0.5772999999999999,
-        1.607125,
-        0.32775
+        0.7937999987125397,
+        1.6389,
+        0.39927492012977606
       ],
       "center": [
-        0.0,
-        0.8236874999999999,
-        0.008624999999999994
+        0.11069999935626984,
+        0.8383499999999999,
+        0.03223746006488799
       ],
-      "triangles": 1016,
-      "geometry_sha256": "5b2eeab97c4abe8dca86b7748dd59bf24997db78c8ec5c4d79a0d283b5b8a3a7",
-      "file_sha256": "4ab8a598ba80ffdb830fc1eb0d4a78c56e94102ac2248d5eb66430468ecec187",
+      "triangles": 1096,
+      "geometry_sha256": "25182ca25d0f996c85944e8225790893fc14ca9ca4a264835d8e68f7893d9476",
+      "file_sha256": "955b58af2c40294e137163780428c6addf90844de9d7f2b8a0eb91a0bbd6e481",
       "animations": [
         "Idle",
         "Walk",
-        "Run"
+        "Run",
+        "Hammer"
       ]
     },
     {
-      "id": "202_tall_02",
+      "id": "204_nurse_01",
       "group": "person",
-      "kind": "tall",
-      "variant": 2,
-      "path": "res://assets/city_kit/202_tall_02.glb",
-      "size": [
-        0.5772999999999999,
-        1.62725,
-        0.40499439899830825
-      ],
-      "center": [
-        0.0,
-        0.83375,
-        0.02750280050084586
-      ],
-      "triangles": 1064,
-      "geometry_sha256": "1f2531460a5d029b04e4369c3378bc108519b831b5a322d47b4f42b7d8851dbd",
-      "file_sha256": "d05b90ea188ffdea8c4cf4913fdc5c865badfac715bf0769a15bab2de928d696",
-      "animations": [
-        "Idle",
-        "Walk",
-        "Run"
-      ]
-    },
-    {
-      "id": "203_tall_03",
-      "group": "person",
-      "kind": "tall",
-      "variant": 3,
-      "path": "res://assets/city_kit/203_tall_03.glb",
-      "size": [
-        0.5772999999999999,
-        1.607125,
-        0.40825
-      ],
-      "center": [
-        0.0,
-        0.8236874999999999,
-        -0.031625
-      ],
-      "triangles": 1028,
-      "geometry_sha256": "b17a445db1e481b4c27dd86f4cbcde0d40af8bba7cb421c2ac09e4280cb065b3",
-      "file_sha256": "657fc43289db694937ff52855f4ce811a4f340c5b3b531aa41f8833fe142adfb",
-      "animations": [
-        "Idle",
-        "Walk",
-        "Run"
-      ]
-    },
-    {
-      "id": "204_tall_04",
-      "group": "person",
-      "kind": "tall",
-      "variant": 4,
-      "path": "res://assets/city_kit/204_tall_04.glb",
-      "size": [
-        0.5772999999999999,
-        1.6703750000000002,
-        0.33694999999999997
-      ],
-      "center": [
-        0.0,
-        0.8553125,
-        0.004025000000000001
-      ],
-      "triangles": 1160,
-      "geometry_sha256": "5ad6fb3fa2743bb53b5fd57f6379d904b05fc1271ad2cb2ada6b2d344437426d",
-      "file_sha256": "65eac16a654cdea795e586bac56ab1f8677d859559af7a0ce9efdb53e8f77dca",
-      "animations": [
-        "Idle",
-        "Walk",
-        "Run"
-      ]
-    },
-    {
-      "id": "205_broad_01",
-      "group": "person",
-      "kind": "broad",
+      "kind": "nurse",
       "variant": 1,
-      "path": "res://assets/city_kit/205_broad_01.glb",
+      "path": "res://assets/city_kit/204_nurse_01.glb",
       "size": [
-        0.5562,
-        1.4394250000000002,
-        0.29355
+        0.641,
+        1.4925,
+        0.28500000000000003
       ],
       "center": [
-        0.0,
-        0.7377375,
-        0.007724999999999996
-      ],
-      "triangles": 1016,
-      "geometry_sha256": "e0f3b64e32e28760e828df424931feab89ad8fde4cbc5121161f73b17033fe9a",
-      "file_sha256": "3aa55d6d09ebf4db750be7b0b60dc25d40a1557b297766f303e478a2271f8a9c",
-      "animations": [
-        "Idle",
-        "Walk",
-        "Run"
-      ]
-    },
-    {
-      "id": "206_broad_02",
-      "group": "person",
-      "kind": "broad",
-      "variant": 2,
-      "path": "res://assets/city_kit/206_broad_02.glb",
-      "size": [
-        0.5562,
-        1.4574500000000001,
-        0.3627341138854413
-      ],
-      "center": [
-        0.0,
-        0.74675,
-        0.024632943057279352
+        -0.0695,
+        0.76375,
+        0.007499999999999993
       ],
       "triangles": 1064,
-      "geometry_sha256": "3c8599b7425671b6e45fd26d070120e7da5179fa8b543e8b52c041ef2198ac2d",
-      "file_sha256": "cc102dc0306f197f7140a04313598312f66598240dc2133263d023cdfa2d37ce",
+      "geometry_sha256": "b6c5ff5ff5bfa357d4ba6088e68947fa5a11ff3d7306636205847fd19ce22778",
+      "file_sha256": "bf8ab3806b4db32cda233d8d12173585966ad843b7946428f2aa1b39b2a159d6",
       "animations": [
         "Idle",
         "Walk",
-        "Run"
+        "Run",
+        "Care"
       ]
     },
     {
-      "id": "207_broad_03",
+      "id": "205_cyclist_01",
       "group": "person",
-      "kind": "broad",
-      "variant": 3,
-      "path": "res://assets/city_kit/207_broad_03.glb",
+      "kind": "cyclist",
+      "variant": 1,
+      "path": "res://assets/city_kit/205_cyclist_01.glb",
       "size": [
-        0.5562,
-        1.4394250000000002,
-        0.36565000000000003
+        0.5616000000000001,
+        1.3944,
+        0.45066598737020597
       ],
       "center": [
         0.0,
-        0.7377375,
-        -0.028325000000000017
+        0.714,
+        0.060990427669300434
       ],
-      "triangles": 1028,
-      "geometry_sha256": "dbede74e4259bf592501acd912ad1981e4c04e673bac2213fa976bfa60114834",
-      "file_sha256": "0f4113093e0ed7e5678f440db4ca344ca34dbbb8b27242479eabf0171eb638dd",
+      "triangles": 1152,
+      "geometry_sha256": "c1282eba6c92534bee05f0e5f48e41f5175cafca966ff4abb32215d5f9476cc0",
+      "file_sha256": "ddfd67f09fd07bc5e9ee54a2a4ec249cbd7fe8974e2a9d6a17f46e385c6029ab",
       "animations": [
         "Idle",
         "Walk",
-        "Run"
+        "Run",
+        "Pedal"
       ]
     },
     {
-      "id": "208_broad_04",
+      "id": "206_superhero_01",
       "group": "person",
-      "kind": "broad",
-      "variant": 4,
-      "path": "res://assets/city_kit/208_broad_04.glb",
+      "kind": "superhero",
+      "variant": 1,
+      "path": "res://assets/city_kit/206_superhero_01.glb",
       "size": [
-        0.5562,
-        1.4960750000000003,
-        0.30179
+        0.8512000000000001,
+        1.7164,
+        0.37520000000000003
       ],
       "center": [
         0.0,
-        0.7660625000000001,
-        0.003604999999999997
+        0.8778,
+        0.019600000000000006
       ],
-      "triangles": 1160,
-      "geometry_sha256": "f60e20ca050332a4a3ff7291355ec3d7a53a794c57918ad6351950ce763862cc",
-      "file_sha256": "53b003dcaf41307b8ff8d9cf324d1eb820079a540817030316636eb95c716787",
+      "triangles": 1174,
+      "geometry_sha256": "39a9630d0bf7404201a4765f28f56daf07fb83c92ba95e19b2840d5188da80f4",
+      "file_sha256": "80d02ee9aa3c6e66e112dd6e4eafdda187bed3de910310d21a4a24e08e457000",
       "animations": [
         "Idle",
         "Walk",
-        "Run"
+        "Run",
+        "Hero_Pose"
+      ]
+    },
+    {
+      "id": "207_delivery_01",
+      "group": "person",
+      "kind": "delivery",
+      "variant": 1,
+      "path": "res://assets/city_kit/207_delivery_01.glb",
+      "size": [
+        0.71688,
+        1.4909249999999998,
+        0.40685000000000004
+      ],
+      "center": [
+        -0.09991000000000003,
+        0.7634874999999999,
+        0.06437500000000002
+      ],
+      "triangles": 1052,
+      "geometry_sha256": "32d9043f164ef9c4ff399a5870f0999c19988e817507ccecd66007d464b82e49",
+      "file_sha256": "fe3d0ff5d1dc410ce19a13c883e1859d49fbb16d08d5e0cd0c679ba303274a4d",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run",
+        "Carry"
+      ]
+    },
+    {
+      "id": "208_dancer_01",
+      "group": "person",
+      "kind": "dancer",
+      "variant": 1,
+      "path": "res://assets/city_kit/208_dancer_01.glb",
+      "size": [
+        0.64,
+        1.5025,
+        0.29000000000000004
+      ],
+      "center": [
+        0.0,
+        0.76875,
+        0.0049999999999999906
+      ],
+      "triangles": 1162,
+      "geometry_sha256": "7bc7f8aef8e7b08212ea4a337fd13df66ca13d11574d044edf539f2b0c014d20",
+      "file_sha256": "70d79697d48d42edae9bce38abfc808efc71fbd731c1dd4c360627fabdb56256",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run",
+        "Dance"
       ]
     }
   ]

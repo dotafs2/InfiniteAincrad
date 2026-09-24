@@ -46,11 +46,12 @@ func place(entry:Dictionary, at:Vector2, angle:float=0.0) -> RigidBody3D:
 		building_visuals.append({"body":body,"mat":mat,"half":Vector2(extent.x,extent.z)*.5})
 	if category=="person":
 		var anim:AnimationPlayer=visual.find_child("AnimationPlayer",true,false)
+		var special:String=entry.animations[3] if entry.animations.size()>3 else "Walk"
 		if anim:
 			for clip in anim.get_animation_list():
 				if clip!="RESET":anim.get_animation(clip).loop_mode=Animation.LOOP_LINEAR
 			anim.play("Idle")
-		citizens.append({"body":body,"anim":anim,"origin":body.position,"phase":rng.randf_range(0,TAU),"clip":"Idle"})
+		citizens.append({"body":body,"anim":anim,"origin":body.position,"phase":rng.randf_range(0,TAU),"clip":"Idle","special":special,"kind":entry.kind})
 	return body
 
 func build(owner_game:Node) -> void:
@@ -115,6 +116,9 @@ func _process(delta:float) -> void:
 		preview.rotation.y+=delta*.10
 		return
 	if not is_instance_valid(game):return
+	var thief:Dictionary={}
+	for c in citizens:
+		if c.kind=="thief" and is_instance_valid(c.body):thief=c;break
 	for citizen in citizens:
 		if not is_instance_valid(citizen.body):continue
 		var body:RigidBody3D=citizen.body
@@ -125,13 +129,19 @@ func _process(delta:float) -> void:
 			continue
 		var origin:Vector3=citizen.origin
 		var panic:bool=body.position.distance_to(game.player.position)<game.player.radius+4.0
+		var police_chase:bool=citizen.kind=="police" and not thief.is_empty() and body.position.distance_to(thief.body.position)<14.0
+		var thief_escape:bool=citizen.kind=="thief" and not thief.is_empty() and body.position.distance_to(game.player.position)>0.0 and body.position.distance_to(game.player.position)<6.0
 		var time:float=game.elapsed+citizen.phase
 		var resting:bool=fmod(time,12.0)>9.0 and not panic
-		var clip:String="Idle" if resting else "Run" if panic else "Walk"
+		var clip:String="Idle" if resting else "Run" if panic else citizen.special
+		if police_chase:clip="Chase"
+		if thief_escape:clip="Sneak"
 		if citizen.clip!=clip or not anim.is_playing():anim.play(clip,.18);citizen.clip=clip
 		if not resting:
 			var destination:float=origin.x+sin(time*.38)*1.15
-			if panic:destination=origin.x+(-1.65 if body.position.x<game.player.position.x else 1.65)
+			if police_chase:destination=thief.body.position.x
+			elif thief_escape:destination=origin.x+(-2.4 if body.position.x<game.player.position.x else 2.4)
+			elif panic:destination=origin.x+(-1.65 if body.position.x<game.player.position.x else 1.65)
 			var step:float=clampf(destination-body.position.x,-delta*(2.1 if panic else .58),delta*(2.1 if panic else .58))
 			body.position.x+=step
 			if absf(step)>.0001:body.rotation.y=lerp_angle(body.rotation.y,PI/2 if step>0 else -PI/2,1-exp(-delta*10))

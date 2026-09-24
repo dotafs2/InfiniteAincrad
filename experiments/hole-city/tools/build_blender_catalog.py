@@ -19,12 +19,24 @@ BUILDINGS=['row_house','corner_shop','brick_apartment','office','warehouse','tow
 VEHICLES=['sedan','hatchback','pickup','police','school_bus','delivery_van','taxi','fire_truck']
 PROPS=['bin','cone','lamp','bench','bollard','hydrant','mailbox','bus_stop','kiosk','barrier','planter','bike_rack','traffic_light','sign','dumpster','fence']
 PLANTS=['round_tree','pine','cypress','palm','birch','maple','oak','shrub','hedge','flowerbed','sapling','topiary']
-PEOPLE=['slim','short','tall','broad']
+PEOPLE=['police','thief','mech','fat_fries','firefighter','chef','skateboarder','photographer','jogger','musician','construction','nurse','cyclist','superhero','delivery','dancer']
+PERSON_ACTIONS={
+    'police':'Chase','thief':'Sneak','mech':'Patrol','fat_fries':'Eat_Fries',
+    'firefighter':'Hose','chef':'Flip','skateboarder':'Skate','photographer':'Shoot',
+    'jogger':'Jog','musician':'Strum','construction':'Hammer','nurse':'Care',
+    'cyclist':'Pedal','superhero':'Hero_Pose','delivery':'Carry','dancer':'Dance',
+}
+PERSON_COLORS={
+    'police':(.06,.16,.38),'thief':(.16,.08,.12),'mech':(.20,.28,.31),'fat_fries':(.80,.26,.06),
+    'firefighter':(.72,.06,.03),'chef':(.88,.87,.78),'skateboarder':(.08,.36,.52),'photographer':(.20,.13,.08),
+    'jogger':(.10,.49,.25),'musician':(.34,.10,.43),'construction':(.86,.47,.05),'nurse':(.82,.94,.91),
+    'cyclist':(.05,.33,.56),'superhero':(.28,.06,.65),'delivery':(.78,.31,.07),'dancer':(.73,.16,.44),
+}
 RECORDS=[]
 
 def catalog():
     rows=[]
-    for group,names,variants in [('building',BUILDINGS,6),('vehicle',VEHICLES,4),('prop',PROPS,4),('plant',PLANTS,4),('person',PEOPLE,4)]:
+    for group,names,variants in [('building',BUILDINGS,6),('vehicle',VEHICLES,4),('prop',PROPS,4),('plant',PLANTS,4),('person',PEOPLE,1)]:
         for kind in names:
             for v in range(variants):rows.append((group,kind,v))
     return rows
@@ -278,8 +290,9 @@ def plant(m,k,v):
             m.beam((0,0,ht*.51),(x,y,z),.047,WOOD);m.ball((x,y,z),(r,r,r*(1.08 if k!='birch' else 1.45)),green,n=10+v*2)
 
 def person(m,k,v):
-    scale={'slim':1,'short':.84,'tall':1.15,'broad':1.03}[k];th=.046 if k!='broad' else .065
-    c=[(.07,.12,.16),(.18,.34,.44),(.58,.20,.12),(.38,.20,.49)][v]
+    scale={'police':1.04,'thief':.98,'mech':1.18,'fat_fries':1.02,'firefighter':1.06,'chef':1.0,'skateboarder':.97,'photographer':1.01,'jogger':1.0,'musician':1.05,'construction':1.08,'nurse':1.0,'cyclist':.96,'superhero':1.12,'delivery':1.03,'dancer':1.0}[k]
+    th={'mech':.072,'fat_fries':.10,'construction':.060,'superhero':.058}.get(k,.046)
+    c=PERSON_COLORS[k]
     bones={'root':((0,0,.71),(0,0,1.09),None),'head':((0,0,1.09),(0,0,1.36),'root')}
     m.beam((0,0,.68),(0,0,1.09),th*1.55,c,'root');m.ball((0,0,1.26),(.145,.135,.155),c,'head')
     m.beam((-.16,0,1.03),(.16,0,1.03),th,c,'root')
@@ -292,15 +305,60 @@ def person(m,k,v):
         for part in ['thigh','shin','arm','forearm']:
             a,b,_=bones[part+side];m.beam(a,b,th,c,part+side);m.ball(a,(th,th,th),c,part+side,n=8,rings=4)
         m.box((x,-.055,.055),(.10,.19,.075),c,'shin'+side)
-    if v==1:
-        m.cyl((0,0,1.405),.16,.055,(.78,.40,.09),bone='head');m.box((0,-.11,1.39),(.20,.18,.035),(.78,.40,.09),'head')
-    elif v==2:m.box((0,.12,.94),(.23,.17,.30),(.31,.42,.20),'root')
-    elif v==3:m.ball((0,0,1.37),(.163,.143,.10),(.91,.66,.06),'head')
+    # Every citizen carries a recognisable silhouette cue. These are authored
+    # primitives, so the roles remain readable at the game's distant camera.
+    if k=='police':
+        m.box((0,0,1.43),(.34,.28,.07),(.04,.07,.18),'head');m.box((0,0,1.49),(.24,.20,.10),(.04,.07,.18),'head')
+        m.box((.27,-.02,.66),(.06,.06,.42),(.78,.66,.18),'armR');m.box((.27,-.02,.46),(.10,.10,.11),(.78,.66,.18),'armR')
+    elif k=='thief':
+        m.ball((0,0,1.38),(.17,.15,.12),(.05,.04,.07),'head');m.box((0,-.14,1.25),(.27,.035,.08),(.03,.03,.04),'head')
+        m.box((-.27,-.02,.65),(.25,.16,.23),(.33,.18,.08),'armL');m.box((-.27,-.02,.47),(.22,.18,.28),(.33,.18,.08),'armL')
+    elif k=='mech':
+        m.box((0,0,.92),(.43,.28,.42),(.42,.47,.50),'root');m.box((0,0,1.42),(.33,.25,.25),(.28,.36,.40),'head')
+        for side in [-1,1]:m.box((side*.31,0,.77),(.10,.21,.30),(.42,.47,.50),'armL' if side<0 else 'armR')
+        m.cyl((0,0,1.60),.045,.23,(.84,.12,.04),bone='head')
+    elif k=='fat_fries':
+        m.ball((0,0,.86),(.28,.22,.32),(.91,.42,.04),'root');m.box((.29,-.03,.70),(.25,.22,.28),(.92,.86,.08),'armR')
+        for x in [-.09,0,.09]:m.box((.29+x,-.03,.91),(.035,.035,.27),(.96,.76,.10),'armR')
+    elif k=='firefighter':
+        m.cyl((0,0,1.46),.21,.09,(.85,.08,.02),.18,bone='head');m.box((0,0,1.50),(.38,.32,.08),(.85,.08,.02),'head')
+        m.beam((-.24,-.10,.62),(.30,-.18,.45),.055,(.15,.18,.18),'armL');m.beam((.30,-.18,.45),(.50,-.18,.47),.038,(.15,.18,.18),'armL')
+    elif k=='chef':
+        for x in [-.12,0,.12]:m.ball((x,0,1.46),(.13,.11,.11),WHITE,'head')
+        m.box((0,-.08,.71),(.40,.12,.18),(.92,.92,.86),'root');m.box((.28,-.08,.65),(.30,.08,.08),METAL,'armR')
+    elif k=='skateboarder':
+        m.box((0,0,.045),(.85,.16,.06),(.86,.12,.05));
+        for x in [-.28,.28]:m.cyl((x,0,.0),.07,.18,DARK,axis='X')
+        m.box((0,.05,1.35),(.12,.32,.06),(.92,.20,.08),'head')
+    elif k=='photographer':
+        m.box((0,-.16,.86),(.28,.16,.22),(.13,.13,.10),'armL');m.box((0,-.25,.92),(.20,.10,.14),DARK,'armL');m.cyl((0,-.31,.92),.07,.04,WHITE,axis='Y')
+        m.box((0,0,1.44),(.33,.23,.07),(.12,.08,.04),'head')
+    elif k=='jogger':
+        m.box((0,0,1.43),(.35,.05,.08),(.90,.90,.08),'head');m.box((.27,-.02,.66),(.09,.12,.22),(.90,.90,.08),'armR')
+        m.box((-.27,-.02,.66),(.09,.12,.22),(.90,.90,.08),'armL')
+    elif k=='musician':
+        m.beam((-.22,-.08,.96),(.23,-.20,.63),.045,WOOD,'armL');m.ball((.29,-.22,.62),(.18,.08,.24),WOOD,'armL');m.beam((.20,-.2,.78),(.43,-.2,.43),.025,WOOD,'armL')
+        m.box((0,0,1.42),(.32,.25,.05),(.22,.05,.26),'head')
+    elif k=='construction':
+        m.box((0,0,1.45),(.38,.31,.09),(.95,.54,.04),'head');m.box((0,0,1.51),(.25,.20,.05),(.95,.54,.04),'head')
+        m.beam((.18,-.12,.95),(.43,-.17,.60),.045,(.92,.57,.08),'armR');m.beam((.43,-.17,.60),(.43,-.17,.30),.04,METAL,'armR')
+    elif k=='nurse':
+        m.box((0,-.08,1.42),(.24,.04,.18),WHITE,'head');m.box((0,-.11,1.42),(.06,.02,.12),(.85,.05,.08),'head');m.box((-.11,-.12,1.42),(.20,.02,.05),(.85,.05,.08),'head')
+        m.box((-.28,-.05,.72),(.22,.12,.18),WHITE,'armL')
+    elif k=='cyclist':
+        m.cyl((0,0,1.43),.18,.08,(.03,.10,.24),.14,bone='head');m.beam((-.28,-.07,.34),(.28,-.07,.34),.035,METAL);m.cyl((-.28,-.07,.34),.24,.025,METAL,axis='X');m.cyl((.28,-.07,.34),.24,.025,METAL,axis='X')
+    elif k=='superhero':
+        m.poly([(-.20,.10,1.24),(.20,.10,1.24),(.38,.13,.42),(-.38,.13,.42)],[(0,1,2,3)],(.85,.05,.10),'root');m.box((0,-.17,.98),(.08,.03,.11),(.98,.80,.12),'root')
+        m.ball((0,0,1.41),(.17,.15,.14),(.98,.80,.12),'head')
+    elif k=='delivery':
+        m.box((-.27,-.12,.76),(.35,.28,.30),(.83,.48,.08),'armL');m.box((-.27,-.12,.84),(.28,.20,.07),TRIM,'armL');m.box((0,0,1.43),(.34,.25,.07),(.83,.48,.08),'head')
+    elif k=='dancer':
+        m.poly([(-.20,.0,.96),(.20,.0,.96),(.32,.0,.45),(-.32,.0,.45)],[(0,1,2,3)],(.94,.16,.45),'root');m.ball((0,0,1.38),(.15,.14,.14),(.94,.16,.45),'head')
     m.v=[tuple(scale*c for c in p) for p in m.v]
     bones={name:(tuple(scale*x for x in a),tuple(scale*x for x in b),parent) for name,(a,b,parent) in bones.items()}
     return bones
 
-def rig(obj,bones,name):
+def rig(obj,bones,name,special):
     data=bpy.data.armatures.new(name+'_Rig'); arm=bpy.data.objects.new(name+'_Rig',data);bpy.context.collection.objects.link(arm)
     bpy.context.view_layer.objects.active=arm;arm.select_set(True);obj.select_set(False);bpy.ops.object.mode_set(mode='EDIT')
     for name,(a,b,parent) in bones.items():
@@ -308,19 +366,37 @@ def rig(obj,bones,name):
         if parent:bone.parent=data.edit_bones[parent]
     bpy.ops.object.mode_set(mode='OBJECT');obj.parent=arm;mod=obj.modifiers.new('Stick_Rig','ARMATURE');mod.object=arm
     arm.animation_data_create()
-    for clip,amplitude,frames in [('Idle',.04,49),('Walk',.52,33),('Run',.95,21)]:
+    clips=[('Idle',.04,49),('Walk',.52,33),('Run',.95,21),(special,.32,37)]
+    for clip,amplitude,frames in clips:
         action=bpy.data.actions.new(clip);action.use_fake_user=True;arm.animation_data.action=action
         for frame in range(1,frames+1,2):
             phase=(frame-1)/(frames-1)*math.tau
             for bone in arm.pose.bones:
                 bone.rotation_mode='XYZ';angle=0
-                if bone.name.startswith(('thigh','arm')):
+                if clip==special and clip not in ['Walk','Run','Idle']:
+                    angle=0.0
+                    if clip in ['Chase','Jog','Pedal']:angle=math.sin(phase)*amplitude*(-.8 if bone.name.startswith('arm') else 1)
+                    elif clip=='Sneak':angle=(-.55 if bone.name.startswith('thigh') else .35 if bone.name.startswith('shin') else 0)
+                    elif clip=='Patrol':angle=math.sin(phase*.5)*.22 if bone.name.startswith(('arm','head')) else 0
+                    elif clip=='Eat_Fries':angle=(-1.1 if bone.name=='forearmR' else .35 if bone.name=='forearmL' else 0)
+                    elif clip=='Hose':angle=(-.8 if bone.name.startswith('arm') else 0)
+                    elif clip=='Flip':angle=(math.sin(phase)*.85 if bone.name.startswith('arm') else 0)
+                    elif clip=='Skate':angle=(math.sin(phase)*.35 if bone.name.startswith(('arm','thigh')) else 0)
+                    elif clip=='Shoot':angle=(-.75 if bone.name.startswith('arm') else 0)
+                    elif clip=='Strum':angle=(math.sin(phase*2)*.55 if bone.name.startswith('forearm') else 0)
+                    elif clip=='Hammer':angle=(math.sin(phase*2)*.90 if bone.name=='forearmR' else 0)
+                    elif clip=='Care':angle=(math.sin(phase)*.42 if bone.name.startswith('arm') else 0)
+                    elif clip=='Hero_Pose':angle=(-.95 if bone.name.startswith('arm') else 0)
+                    elif clip=='Carry':angle=(.45 if bone.name.startswith('arm') else 0)
+                    elif clip=='Dance':angle=(math.sin(phase*2)*.75 if bone.name.startswith(('arm','thigh')) else 0)
+                    if bone.name=='root':bone.rotation_euler[2]=math.sin(phase)*.10
+                elif bone.name.startswith(('thigh','arm')):
                     sign=-1 if bone.name.endswith('L') else 1
                     angle=math.sin(phase)*amplitude*sign*(-.72 if bone.name.startswith('arm') else 1)
                 elif bone.name.startswith('shin'):angle=max(0,math.sin(phase+(0 if bone.name.endswith('L') else math.pi)))*amplitude*1.2
                 elif bone.name.startswith('forearm'):angle=-.28 if clip!='Run' else -1.05
                 bone.rotation_euler=(angle,0,0);bone.keyframe_insert('rotation_euler',frame=frame,group=bone.name)
-            root=arm.pose.bones['root'];root.location=(0,0,abs(math.sin(phase))*(.025 if clip=='Walk' else .055 if clip=='Run' else .007));root.keyframe_insert('location',frame=frame)
+            root=arm.pose.bones['root'];root.location=(0,0,abs(math.sin(phase))*(.025 if clip=='Walk' else .055 if clip=='Run' else .018 if clip==special else .007));root.keyframe_insert('location',frame=frame)
         track=arm.animation_data.nla_tracks.new();track.name=clip;track.strips.new(clip,1,action)
     arm.animation_data.action=None
     for t in arm.animation_data.nla_tracks:t.mute=True
@@ -334,7 +410,7 @@ def build_one(index):
     elif group=='prop':prop(m,kind,v)
     elif group=='plant':plant(m,kind,v)
     else:bones=person(m,kind,v)
-    obj=m.object(name,mat);arm=rig(obj,bones,name) if bones else None
+    obj=m.object(name,mat);arm=rig(obj,bones,name,PERSON_ACTIONS[kind]) if bones else None
     bpy.ops.object.select_all(action='DESELECT');obj.select_set(True)
     if arm:arm.select_set(True)
     bpy.context.view_layer.objects.active=obj
@@ -342,7 +418,7 @@ def build_one(index):
     bpy.ops.export_scene.gltf(filepath=str(path),export_format='GLB',use_selection=True,export_animations=bool(arm),export_animation_mode='NLA_TRACKS',export_materials='EXPORT',export_yup=True)
     coords=m.v;lo=[min(p[i] for p in coords) for i in range(3)];hi=[max(p[i] for p in coords) for i in range(3)]
     size=[hi[i]-lo[i] for i in range(3)];center=[(lo[i]+hi[i])/2 for i in range(3)]
-    rec={'id':name,'group':group,'kind':kind,'variant':v+1,'path':'res://assets/city_kit/'+path.name,'size':[size[0],size[2],size[1]],'center':[center[0],center[2],-center[1]],'triangles':sum(len(f)-2 for f in m.f),'geometry_sha256':hashlib.sha256(json.dumps([m.v,m.f],separators=(',',':')).encode()).hexdigest(),'file_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'animations':['Idle','Walk','Run'] if arm else []}
+    rec={'id':name,'group':group,'kind':kind,'variant':v+1,'path':'res://assets/city_kit/'+path.name,'size':[size[0],size[2],size[1]],'center':[center[0],center[2],-center[1]],'triangles':sum(len(f)-2 for f in m.f),'geometry_sha256':hashlib.sha256(json.dumps([m.v,m.f],separators=(',',':')).encode()).hexdigest(),'file_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'animations':['Idle','Walk','Run',PERSON_ACTIONS[kind]] if arm else []}
     RECORDS.append(rec)
     # Source scene is a labelled catalog; each exported GLB retains local origin.
     root=arm or obj;root.location=((index%16)*11,(index//16)*13,0)

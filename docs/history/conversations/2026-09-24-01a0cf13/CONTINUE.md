@@ -1,22 +1,27 @@
 # September 24 continuation
 
-## Latest milestone: portrait city kit (September 25)
+## Latest milestone: role action library (September 25)
 
-The visible snapshot now contains 132 messages (15 user, 117 assistant) through
-`2026-09-24T16:20:46.048Z` / September 25 at 00:20:46 Beijing time. The previous
-116-message prefix is retained. Subsequent messages and other tasks are excluded.
+The visible snapshot now contains 139 messages (16 user, 123 assistant) through
+`2026-09-24T16:56:24.058Z` / September 25 at 00:56:24 Beijing time. The previous
+132-message prefix is retained. Subsequent messages and other tasks are excluded.
 
 The user chose locally authored Blender MCP models, at least 200, stick figures
 with basic movement animations, and portrait controls. The dedicated worktree
 remains `D:/lucidgloves/InfiniteAincrad/tmp/hole-city-20260924` on
 `codex/hole-city-fidelity-20260924`; the entry Documents folder is not the repo.
 
-H163 delivers 208 geometry-distinct original GLBs (including related structural
+H164 delivers 208 geometry-distinct original GLBs (including related structural
 variants), one editable Blender source catalog, and deterministic source scripts.
 There are 48 buildings, 32 vehicles, 64 street props, 48 plants and 16 stick rigs;
-all are placed in the 443-object city. The rigs have Idle/Walk/Run clips. Sixty-four
-pedestrians actually move, rest and flee nearby holes. A fixed 540×960 portrait
-viewport has a floating touch joystick, release-to-stop and a pause button.
+all are placed in the 443-object city. Each rig has Idle/Walk/Run plus one unique
+role action: Police/Chase, Thief/Sneak, Mech/Patrol, Fat Fries/Eat Fries,
+Firefighter/Hose, Chef/Flip, Skateboarder/Skate, Photographer/Shoot, Jogger/Jog,
+Musician/Strum, Construction/Hammer, Nurse/Care, Cyclist/Pedal,
+Superhero/Hero Pose, Delivery/Carry and Dancer/Dance. Sixty-four pedestrians
+actually move, rest and flee nearby holes; police pursue the thief and the thief
+escapes the player. A fixed 540×960 portrait viewport has a floating touch
+joystick, release-to-stop and a pause button.
 
 Blender 5.2.2 LTS ran headlessly. No direct Codex Blender MCP tool was exposed;
 the official addon's command handlers were called through our own synchronous
@@ -24,19 +29,19 @@ loopback/main-thread adapter, because its normal GUI server rejects background
 mode. Two hundred eight successful asset commands and the upstream hash are
 recorded. No existing Blender scene/preferences were modified.
 
-All 98 checks pass (22 portrait, 25 rim, 24 first-level, 27 legacy). The final
-ordinary regression ended EATEN at 60 points; the separate rivals-retired fixture
-reached 510 points without score grants. An earlier in-turn geometry revision
-won at 521; that is not substituted for the final revision's result. Final WebGL
+All 104 checks pass (28 portrait, 25 rim, 24 first-level, 27 legacy). The final
+ordinary regression ended EATEN at 58 points; the separate rivals-retired fixture
+reached 507 points without score grants. Final WebGL
 render and real browser touch checks are clean; no physical phone test is claimed.
 The packaged Windows executable passes headless startup. The 42.5-second silent
-gameplay video shows ordinary touch input, and the separate 10-second character
+gameplay video shows ordinary touch input, and the separate 10-second 16-role
 video is labelled as an isolated animation preview. Variable browser recording
 cadence is documented; normalizing the file to 30 fps is not a rendering benchmark.
 
 Documents-folder outputs: `PlayHoleCityPortrait.cmd`,
 `HoleCity-Portrait-208Models-Windows-x64.zip`, `HoleCity-208Models.zip`,
-`HoleCity-Portrait-Gameplay.mp4`, and `HoleCity-Stickman-Animations.mp4`.
+`HoleCity-Portrait-Gameplay.mp4`, `HoleCity-16-Roles-Actions.mp4`, and
+`HoleCity-Stickman-Animations.mp4`.
 The previous `PlayHoleCityStep1.cmd` also points to the current reference build.
 Evidence and visual inventory: `docs/validation/hole-city-portrait-20260925/`.
 

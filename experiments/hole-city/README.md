@@ -3,7 +3,11 @@
 The September 25 build adds **208 original Blender model assets** (including
 structural variants): 48 buildings, 32 vehicles, 64 street props, 48 plants and
 16 rigged stick figures. All 208 appear in the playable city. Each figure has
-Idle, Walk and Run clips; 64 pedestrians walk, rest and flee nearby holes.
+Idle/Walk/Run plus one role clip: police/Chase, thief/Sneak, mech/Patrol, fat
+person/Eat Fries, firefighter/Hose, chef/Flip, skateboarder/Skate,
+photographer/Shoot, jogger/Jog, musician/Strum, construction/Hammer, nurse/Care,
+cyclist/Pedal, superhero/Hero Pose, delivery/Carry and dancer/Dance. Sixty-four
+pedestrians walk, rest and flee nearby holes; police and thief also chase/escape.
 The default viewport is **540 × 960, portrait 9:16**, with a floating one-finger
 joystick, release-to-stop and an on-screen pause button.
 
