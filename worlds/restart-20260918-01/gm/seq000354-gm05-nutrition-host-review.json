@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-23T19:29:01.644236+00:00",
+  "decision": "accepted_for_same_world_continuation",
+  "runtime_acceptance_passed": true,
+  "gateway_projection_passed": true,
+  "world_id": "shared:restart-20260918-01",
+  "before_seq": 354,
+  "before_world_sha256": "2cb7ce5a0ee0e700ea6bb5918cf11b69e3840059ef50095aff1b29baa076fc3d",
+  "issue_id": "issue-8c2771c2c745",
+  "owner_gm": "gm-05",
+  "initial_rejected_run": "code-20260923T190443Z-3ab4e3",
+  "repair_run": "code-20260923T192147Z-733cbb",
+  "coding_session": "01a0cfa7-ed79-7c21-bfa4-cd8ad7b0f30d",
+  "native_model": "gpt-6-luna",
+  "scope_guard_changed": [],
+  "out_of_scope_changes": [],
+  "worker_runtime_claim": "pending_not_run",
+  "host_actual_checks": {
+    "nutrition-accepted": {
+      "result": {
+        "automatic_consumption": false,
+        "checks": 36,
+        "failures": 0,
+        "food_zero_offered": false,
+        "fullness_80_offered": true,
+        "fullness_81_offered": false,
+        "paid_calls": 0,
+        "prepared_requests": 2,
+        "status": "nutrition_rule_acceptance_passed",
+        "suite": "town_nutrition_rule_acceptance"
+      },
+      "process_sha256": "31027b801fae49dd3d75e7662c4b48f24cfe837f39b2970d9de7d2ef6b53217b"
+    },
+    "nutrition-turns-regression": {
+      "result": {
+        "checks": 36,
+        "failures": 0,
+        "paid_calls": 0,
+        "suite": "town_turns"
+      },
+      "process_sha256": "6bf60f9ac7897cf85f317ef48b4b8c72c405d79f0ae0acb141d0a98a6ab9ff1b"
+    },
+    "nutrition-wake-regression": {
+      "result": {
+        "actor_id": "fixture:a",
+        "actual_due": "fixture:a",
+        "automatic_action": false,
+        "checks": 16,
+        "current_gap_reproduced": false,
+        "expected_due": "fixture:a",
+        "failures": 0,
+        "food_after": 1,
+        "food_before": 1,
+        "fullness_after": 80.0,
+        "fullness_before": 81.0,
+        "newly_offered_action": "eat_ration",
+        "paid_calls": 0,
+        "status": "need_transition_wake_passed",
+        "suite": "town_need_transition_wake_acceptance"
+      },
+      "process_sha256": "4b41fa1399e728d1913103e6683fb3baae70ec3c305fa0707217be672e112284"
+    }
+  },
+  "gateway_cases": [
+    {
+      "case": "town-history-0",
+      "passed": true,
+      "get": 1,
+      "post": 1,
+      "contract_errors": [],
+      "world_sha256": "1c40a271c348f908c835bb84889a5bb14479e562ee3cab1b0300f1bd7c587fe1"
+    },
+    {
+      "case": "town-history-1",
+      "passed": true,
+      "get": 3,
+      "post": 3,
+      "contract_errors": [],
+      "world_sha256": "3db5b3aef34b5b8c898d793580203a3cb42386109cc53162e532ff72cd0801cb"
+    }
+  ],
+  "gateway_wire_checks": [
+    {
+      "path": "tmp/iteration-20260924/gateway-nutrition/town-history/wire-1.json",
+      "sha256": "91515f499321343b59f8607f4994e0b2a4a1a76a5c16e7ff154488a5dab480f4",
+      "resident_id": "fictional:ember",
+      "nutrition": [
+        "Eating consumes one of your rations only when the action completes successfully; it adds 40 fullness, capped at 100, after 30 seconds of actual work. It is available only when you have at least one ration and fullness is 80 or below."
+      ]
+    },
+    {
+      "path": "tmp/iteration-20260924/gateway-nutrition/town-history/wire-2.json",
+      "sha256": "3a38ea907ae93a69acc99e20e1561eec5124e6912e09b9ab98832186ac335e4a",
+      "resident_id": "fictional:ember",
+      "nutrition": [
+        "Eating consumes one of your rations only when the action completes successfully; it adds 40 fullness, capped at 100, after 30 seconds of actual work. It is available only when you have at least one ration and fullness is 80 or below."
+      ]
+    },
+    {
+      "path": "tmp/iteration-20260924/gateway-nutrition/town-history/wire-3.json",
+      "sha256": "368d3680c5d69a2fa3efda251c5055727fe1de24a92a5020d7d20f2aff1653ea",
+      "resident_id": "fictional:forge",
+      "nutrition": [
+        "Eating consumes one of your rations only when the action completes successfully; it adds 40 fullness, capped at 100, after 30 seconds of actual work. It is available only when you have at least one ration and fullness is 80 or below."
+      ]
+    }
+  ],
+  "independent_luna_review": {
+    "verdict": "no_blocking_findings",
+    "reviewer": "direction_review",
+    "note": "Existing non-Array nutrition would be replaced; no current producer of that key exists. Other known rules preserved."
+  },
+  "integrated_files": {
+    "game/agents/town_turns.gd": "c10769800f1a0209f90df00a666f75923c7f2e53cce2ab8a3a02b2324744349e",
+    "game/tests/town_nutrition_rule_acceptance.gd": "eb5086b30997a0e2803a9944cce2f540b12e63a249816cd3047c1bceaaf991c7"
+  },
+  "baseline": {
+    "checks": 32,
+    "failures": 2,
+    "reason": "nutrition_disclosure_missing"
+  },
+  "change": "Neutral disclosure of existing meal eligibility, duration and effects; resident may still wait or choose another action.",
+  "live_resident_effects": "not_yet_observed",
+  "sustainable_food_equilibrium_proven": false,
+  "original_failed_cycle_preserved": true,
+  "original_rejected_revision_preserved": true
+}

@@ -1,0 +1,735 @@
+{
+  "schema_version": 1,
+  "kind": "host_implementation_and_live_observation_receipt",
+  "created_at_utc": "2026-09-24T02:40:38.537402+00:00",
+  "world_id": "shared:restart-20260918-01",
+  "gm_id": "gm-05",
+  "issue_id": "issue-8c2771c2c745",
+  "investigation_origin": "explicit_host_selected_food_information_gap_with_actual_resource_failure_evidence",
+  "candidate_run_id": "code-20260923T192147Z-733cbb",
+  "host_review": {
+    "schema_version": 1,
+    "created_at_utc": "2026-09-23T19:29:01.644236+00:00",
+    "decision": "accepted_for_same_world_continuation",
+    "runtime_acceptance_passed": true,
+    "gateway_projection_passed": true,
+    "world_id": "shared:restart-20260918-01",
+    "before_seq": 354,
+    "before_world_sha256": "2cb7ce5a0ee0e700ea6bb5918cf11b69e3840059ef50095aff1b29baa076fc3d",
+    "issue_id": "issue-8c2771c2c745",
+    "owner_gm": "gm-05",
+    "initial_rejected_run": "code-20260923T190443Z-3ab4e3",
+    "repair_run": "code-20260923T192147Z-733cbb",
+    "coding_session": "01a0cfa7-ed79-7c21-bfa4-cd8ad7b0f30d",
+    "native_model": "gpt-6-luna",
+    "scope_guard_changed": [],
+    "out_of_scope_changes": [],
+    "worker_runtime_claim": "pending_not_run",
+    "host_actual_checks": {
+      "nutrition-accepted": {
+        "result": {
+          "automatic_consumption": false,
+          "checks": 36,
+          "failures": 0,
+          "food_zero_offered": false,
+          "fullness_80_offered": true,
+          "fullness_81_offered": false,
+          "paid_calls": 0,
+          "prepared_requests": 2,
+          "status": "nutrition_rule_acceptance_passed",
+          "suite": "town_nutrition_rule_acceptance"
+        },
+        "process_sha256": "31027b801fae49dd3d75e7662c4b48f24cfe837f39b2970d9de7d2ef6b53217b"
+      },
+      "nutrition-turns-regression": {
+        "result": {
+          "checks": 36,
+          "failures": 0,
+          "paid_calls": 0,
+          "suite": "town_turns"
+        },
+        "process_sha256": "6bf60f9ac7897cf85f317ef48b4b8c72c405d79f0ae0acb141d0a98a6ab9ff1b"
+      },
+      "nutrition-wake-regression": {
+        "result": {
+          "actor_id": "fixture:a",
+          "actual_due": "fixture:a",
+          "automatic_action": false,
+          "checks": 16,
+          "current_gap_reproduced": false,
+          "expected_due": "fixture:a",
+          "failures": 0,
+          "food_after": 1,
+          "food_before": 1,
+          "fullness_after": 80.0,
+          "fullness_before": 81.0,
+          "newly_offered_action": "eat_ration",
+          "paid_calls": 0,
+          "status": "need_transition_wake_passed",
+          "suite": "town_need_transition_wake_acceptance"
+        },
+        "process_sha256": "4b41fa1399e728d1913103e6683fb3baae70ec3c305fa0707217be672e112284"
+      }
+    },
+    "gateway_cases": [
+      {
+        "case": "town-history-0",
+        "passed": true,
+        "get": 1,
+        "post": 1,
+        "contract_errors": [],
+        "world_sha256": "1c40a271c348f908c835bb84889a5bb14479e562ee3cab1b0300f1bd7c587fe1"
+      },
+      {
+        "case": "town-history-1",
+        "passed": true,
+        "get": 3,
+        "post": 3,
+        "contract_errors": [],
+        "world_sha256": "3db5b3aef34b5b8c898d793580203a3cb42386109cc53162e532ff72cd0801cb"
+      }
+    ],
+    "gateway_wire_checks": [
+      {
+        "path": "tmp/iteration-20260924/gateway-nutrition/town-history/wire-1.json",
+        "sha256": "91515f499321343b59f8607f4994e0b2a4a1a76a5c16e7ff154488a5dab480f4",
+        "resident_id": "fictional:ember",
+        "nutrition": [
+          "Eating consumes one of your rations only when the action completes successfully; it adds 40 fullness, capped at 100, after 30 seconds of actual work. It is available only when you have at least one ration and fullness is 80 or below."
+        ]
+      },
+      {
+        "path": "tmp/iteration-20260924/gateway-nutrition/town-history/wire-2.json",
+        "sha256": "3a38ea907ae93a69acc99e20e1561eec5124e6912e09b9ab98832186ac335e4a",
+        "resident_id": "fictional:ember",
+        "nutrition": [
+          "Eating consumes one of your rations only when the action completes successfully; it adds 40 fullness, capped at 100, after 30 seconds of actual work. It is available only when you have at least one ration and fullness is 80 or below."
+        ]
+      },
+      {
+        "path": "tmp/iteration-20260924/gateway-nutrition/town-history/wire-3.json",
+        "sha256": "368d3680c5d69a2fa3efda251c5055727fe1de24a92a5020d7d20f2aff1653ea",
+        "resident_id": "fictional:forge",
+        "nutrition": [
+          "Eating consumes one of your rations only when the action completes successfully; it adds 40 fullness, capped at 100, after 30 seconds of actual work. It is available only when you have at least one ration and fullness is 80 or below."
+        ]
+      }
+    ],
+    "independent_luna_review": {
+      "verdict": "no_blocking_findings",
+      "reviewer": "direction_review",
+      "note": "Existing non-Array nutrition would be replaced; no current producer of that key exists. Other known rules preserved."
+    },
+    "integrated_files": {
+      "game/agents/town_turns.gd": "c10769800f1a0209f90df00a666f75923c7f2e53cce2ab8a3a02b2324744349e",
+      "game/tests/town_nutrition_rule_acceptance.gd": "eb5086b30997a0e2803a9944cce2f540b12e63a249816cd3047c1bceaaf991c7"
+    },
+    "baseline": {
+      "checks": 32,
+      "failures": 2,
+      "reason": "nutrition_disclosure_missing"
+    },
+    "change": "Neutral disclosure of existing meal eligibility, duration and effects; resident may still wait or choose another action.",
+    "live_resident_effects": "not_yet_observed",
+    "sustainable_food_equilibrium_proven": false,
+    "original_failed_cycle_preserved": true,
+    "original_rejected_revision_preserved": true
+  },
+  "installed_source_commit": "a508cfc",
+  "installed_files": [
+    {
+      "path": "game/agents/town_turns.gd",
+      "sha256": "c10769800f1a0209f90df00a666f75923c7f2e53cce2ab8a3a02b2324744349e"
+    },
+    {
+      "path": "game/tests/town_nutrition_rule_acceptance.gd",
+      "sha256": "eb5086b30997a0e2803a9944cce2f540b12e63a249816cd3047c1bceaaf991c7"
+    }
+  ],
+  "failed_live_episode": {
+    "schema_version": 1,
+    "status": "failed_external_timeout_no_final_capture",
+    "from_seq": 354,
+    "to_seq": 360,
+    "requested_seconds": 900,
+    "world_elapsed_delta": 121.9333333332761,
+    "world_sha256": "f0f5882fc5bbffc393ef206ade28a370f4a6a2632c2fddd219907cc635463522",
+    "actual_wrapper_wall_seconds": 3771.594,
+    "nominal_wrapper_timeout_seconds": 1260,
+    "all_owned_processes_exited": true,
+    "gateway_shutdown": {
+      "drain_error": "",
+      "drain_grace_seconds": 0.0,
+      "drained_complete": true,
+      "engine_exited_with_workers_pending": false,
+      "intake_closed": true,
+      "operations_pending_at_engine_exit": [],
+      "refused_connections": 0,
+      "unresolved_operations": [],
+      "unresolved_workers": 0,
+      "worker_start_failures": 0,
+      "workers_accepted": 18,
+      "workers_in_flight": false,
+      "workers_pending_at_engine_exit": 0
+    },
+    "new_settled_calls": 9,
+    "new_cost_cny": 0.1900441,
+    "ledger_after": {
+      "allocation_cap_cny": 53.9,
+      "authorized_cny": 54.0,
+      "counts": {
+        "settled": 9
+      },
+      "deadline_utc": 1790193033,
+      "halted": "",
+      "ledger_id": "3b364000-9759-4514-93e9-8549d20340e7",
+      "liability_cny": 52.8583012,
+      "model": "kimi-k2.6",
+      "prior_unverified_cny": 52.6682571,
+      "remaining_allocatable_cny": 1.0416988,
+      "reserved_cny": 0.0,
+      "settled_cny": 0.1900441
+    },
+    "pending_physical_jobs": {
+      "shared:baker": {
+        "action": "harvest_ration",
+        "command_id": "turn:shared:baker:0:29",
+        "elapsed": 0,
+        "provenance": "opengameagent_live"
+      },
+      "shared:herder": {
+        "action": "rest",
+        "command_id": "turn:shared:herder:0:23",
+        "elapsed": 10.333333333333329,
+        "provenance": "opengameagent_live"
+      },
+      "shared:smith": {
+        "action": "harvest_ration",
+        "command_id": "turn:shared:smith:0:45",
+        "elapsed": 19.63333333333331,
+        "provenance": "opengameagent_live"
+      },
+      "shared:well-keeper": {
+        "action": "rest",
+        "command_id": "turn:shared:well-keeper:3:27",
+        "elapsed": 9.299999999999997,
+        "provenance": "opengameagent_live"
+      }
+    },
+    "host_execution_gap_observed": true,
+    "gap_cause": "unknown",
+    "original_failure_preserved": true,
+    "no_provider_request_replayed": true
+  },
+  "recovery_episode": {
+    "from_seq": 360,
+    "to_seq": 368,
+    "world_sha256": "18a48808f1dfeaa1f09a0174c362035e044a3d83c679d37ae954483aca530359",
+    "validation_passed": true,
+    "world_elapsed_delta": 119.8666666666104,
+    "scene_shutdown": {
+      "admission_closed": true,
+      "admission_closed_reason": "episode_duration_elapsed",
+      "capture_reason": "episode_duration_elapsed",
+      "capture_seconds": 120.016666666679,
+      "duration_fulfilled": true,
+      "exit_code": 0,
+      "in_flight": [],
+      "paused_at_capture": false,
+      "paused_seconds": 0.0,
+      "requested_seconds": 120.0,
+      "resident_requests_owed": [],
+      "resolved": true,
+      "running_seconds": 120.016666666679,
+      "timed_out": false,
+      "wait_limit_seconds": 45.0,
+      "waited_seconds": 0.0,
+      "wall_elapsed_seconds": 121.634656,
+      "wall_limit_seconds": 200.0
+    },
+    "wrapper_wall_seconds": 132.875,
+    "all_owned_processes_exited": true,
+    "gateway_shutdown": {
+      "intake_closed": true,
+      "workers_accepted": 12,
+      "workers_in_flight": false,
+      "drained_complete": true,
+      "unresolved_workers": 0,
+      "unresolved_operations": [],
+      "workers_pending_at_engine_exit": 0,
+      "operations_pending_at_engine_exit": [],
+      "engine_exited_with_workers_pending": false,
+      "refused_connections": 0,
+      "worker_start_failures": 0,
+      "drain_grace_seconds": 40.0,
+      "drain_error": ""
+    },
+    "new_settled_calls": 6,
+    "new_cost_cny": 0.1195115,
+    "all_ten_controllers_settled": true,
+    "pending_jobs": 1,
+    "resumed_jobs": {
+      "shared:baker": {
+        "command_id": "turn:shared:baker:0:29",
+        "status": "pending",
+        "pending": {
+          "action": "harvest_ration",
+          "command_id": "turn:shared:baker:0:29",
+          "elapsed": 13.949999999999989,
+          "provenance": "opengameagent_live"
+        },
+        "later_events": []
+      },
+      "shared:herder": {
+        "command_id": "turn:shared:herder:0:23",
+        "status": "completed",
+        "pending": null,
+        "later_events": [
+          {
+            "seq": 362,
+            "type": "rest"
+          }
+        ]
+      },
+      "shared:smith": {
+        "command_id": "turn:shared:smith:0:45",
+        "status": "completed",
+        "pending": null,
+        "later_events": [
+          {
+            "seq": 366,
+            "type": "harvest_ration"
+          }
+        ]
+      },
+      "shared:well-keeper": {
+        "command_id": "turn:shared:well-keeper:3:27",
+        "status": "completed",
+        "pending": null,
+        "later_events": [
+          {
+            "seq": 363,
+            "type": "rest"
+          }
+        ]
+      }
+    },
+    "exact_nested_cold_restore": "passed",
+    "admission_limit_reached": true,
+    "sustainability_proven": false
+  },
+  "measured_effect": {
+    "rule_present_in_all_nine_failed_episode_requests": true,
+    "resident_id": "shared:well-keeper",
+    "name": "Ari",
+    "request_id": "turn:shared:well-keeper:3:26",
+    "stated_reason": "I have food and my satiety is 53, well below the 80 cap for eating. A ration will add 40 fullness, bringing me to 93 and securing my basic need before I attend to anything else around the trough.",
+    "resolved_action": "life:eat_ration",
+    "completed_event_seq": 360,
+    "command_status": "completed",
+    "interpretation": "One voluntary completed meal and explicit rationale citing the disclosed facts; no controlled causal attribution or equilibrium claim."
+  },
+  "resource_audit": {
+    "path": "private/iteration-20260924/life-window-05/food-audit.json",
+    "sha256": "bad06a983ca15b29f284b44261ac54fe7be994ccd19a39d98e369dce15dfe2bc",
+    "totals": {
+      "food_conserved_across_snapshots": true,
+      "per_resident_food_balances_match_each_interval": true,
+      "food_conservation_values": [
+        16,
+        16,
+        16
+      ],
+      "foraging_conserved_at_each_snapshot": true,
+      "equation": "held food + foraging stock + eaten - foraging produced - bread baked",
+      "produced_by_source": {
+        "foraging": 33,
+        "bread": 0
+      },
+      "harvested": 39,
+      "eaten": 38,
+      "given": 1
+    },
+    "intervals": [
+      {
+        "from_seq": 354,
+        "to_seq": 360,
+        "elapsed_seconds": 121.9333333332761,
+        "foraging_produced_delta": 0,
+        "foraging_harvested_delta": 1,
+        "harvest_events": 1,
+        "bread_baked_delta": 0,
+        "eaten_delta": 1,
+        "given_delta": 0,
+        "food_held_delta": 0,
+        "source_stock_delta": -1,
+        "food_conservation_delta": 0,
+        "food_conservation_ok": true,
+        "per_resident_food_balances_match": true,
+        "harvest_counter_matches_events": true,
+        "per_resident": {
+          "shared:baker": {
+            "food_before": 0,
+            "food_after": 0,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 94.0,
+            "fullness_after": 93.0,
+            "energy_before": 75.0,
+            "energy_after": 74.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:carpenter": {
+            "food_before": 2,
+            "food_after": 2,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 55.0,
+            "fullness_after": 54.0,
+            "energy_before": 40.0,
+            "energy_after": 39.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:fisher": {
+            "food_before": 1,
+            "food_after": 1,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 85.0,
+            "fullness_after": 84.0,
+            "energy_before": 75.0,
+            "energy_after": 74.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:gardener": {
+            "food_before": 1,
+            "food_after": 1,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 55.0,
+            "fullness_after": 54.0,
+            "energy_before": 40.0,
+            "energy_after": 39.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:healer": {
+            "food_before": 2,
+            "food_after": 2,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 89.0,
+            "fullness_after": 88.0,
+            "energy_before": 75.0,
+            "energy_after": 74.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:herder": {
+            "food_before": 0,
+            "food_after": 1,
+            "food_delta": 1,
+            "expected_food_delta": 1,
+            "food_balance_residual": 0,
+            "fullness_before": 94.0,
+            "fullness_after": 93.0,
+            "energy_before": 40.0,
+            "energy_after": 39.0,
+            "harvested": 1,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:innkeeper": {
+            "food_before": 1,
+            "food_after": 1,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 79.0,
+            "fullness_after": 78.0,
+            "energy_before": 75.0,
+            "energy_after": 74.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:smith": {
+            "food_before": 1,
+            "food_after": 1,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 93.0,
+            "fullness_after": 92.0,
+            "energy_before": 40.0,
+            "energy_after": 74.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:weaver": {
+            "food_before": 1,
+            "food_after": 1,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 55.0,
+            "fullness_after": 54.0,
+            "energy_before": 64.0,
+            "energy_after": 63.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:well-keeper": {
+            "food_before": 1,
+            "food_after": 0,
+            "food_delta": -1,
+            "expected_food_delta": -1,
+            "food_balance_residual": 0,
+            "fullness_before": 53.0,
+            "fullness_after": 92.0,
+            "energy_before": 40.0,
+            "energy_after": 39.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 1,
+            "given": 0,
+            "received": 0
+          }
+        },
+        "sparse_endpoint_limitation": "endpoint matches do not establish continuous empty inventory or continuous zero fullness"
+      },
+      {
+        "from_seq": 360,
+        "to_seq": 368,
+        "elapsed_seconds": 119.8666666666104,
+        "foraging_produced_delta": 0,
+        "foraging_harvested_delta": 1,
+        "harvest_events": 1,
+        "bread_baked_delta": 0,
+        "eaten_delta": 0,
+        "given_delta": 0,
+        "food_held_delta": 1,
+        "source_stock_delta": -1,
+        "food_conservation_delta": 0,
+        "food_conservation_ok": true,
+        "per_resident_food_balances_match": true,
+        "harvest_counter_matches_events": true,
+        "per_resident": {
+          "shared:baker": {
+            "food_before": 0,
+            "food_after": 0,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 93.0,
+            "fullness_after": 92.0,
+            "energy_before": 74.0,
+            "energy_after": 73.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:carpenter": {
+            "food_before": 2,
+            "food_after": 2,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 54.0,
+            "fullness_after": 53.0,
+            "energy_before": 39.0,
+            "energy_after": 38.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:fisher": {
+            "food_before": 1,
+            "food_after": 1,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 84.0,
+            "fullness_after": 83.0,
+            "energy_before": 74.0,
+            "energy_after": 73.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:gardener": {
+            "food_before": 1,
+            "food_after": 1,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 54.0,
+            "fullness_after": 53.0,
+            "energy_before": 39.0,
+            "energy_after": 73.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:healer": {
+            "food_before": 2,
+            "food_after": 2,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 88.0,
+            "fullness_after": 87.0,
+            "energy_before": 74.0,
+            "energy_after": 73.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:herder": {
+            "food_before": 1,
+            "food_after": 1,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 93.0,
+            "fullness_after": 92.0,
+            "energy_before": 39.0,
+            "energy_after": 73.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:innkeeper": {
+            "food_before": 1,
+            "food_after": 1,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 78.0,
+            "fullness_after": 77.0,
+            "energy_before": 74.0,
+            "energy_after": 73.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:smith": {
+            "food_before": 1,
+            "food_after": 2,
+            "food_delta": 1,
+            "expected_food_delta": 1,
+            "food_balance_residual": 0,
+            "fullness_before": 92.0,
+            "fullness_after": 91.0,
+            "energy_before": 74.0,
+            "energy_after": 73.0,
+            "harvested": 1,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:weaver": {
+            "food_before": 1,
+            "food_after": 1,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 54.0,
+            "fullness_after": 53.0,
+            "energy_before": 63.0,
+            "energy_after": 62.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          },
+          "shared:well-keeper": {
+            "food_before": 0,
+            "food_after": 0,
+            "food_delta": 0,
+            "expected_food_delta": 0,
+            "food_balance_residual": 0,
+            "fullness_before": 92.0,
+            "fullness_after": 91.0,
+            "energy_before": 39.0,
+            "energy_after": 73.0,
+            "harvested": 0,
+            "baked": 0,
+            "eaten": 0,
+            "given": 0,
+            "received": 0
+          }
+        },
+        "sparse_endpoint_limitation": "endpoint matches do not establish continuous empty inventory or continuous zero fullness"
+      }
+    ]
+  },
+  "limitations": [
+    "Original automatic cycle and first coding revision remain failed/rejected; their measured usage is retained.",
+    "The900-second observation timed out; a later120-second recovery passed but one Wren harvest job remains pending.",
+    "Native Codex tokens are measured; currency cost is unpriced, and historical unknown fees remain unknown.",
+    "Sustainable food supply, spontaneous resident-origin GM loop and natural ration sharing remain open."
+  ],
+  "host_decision": "accept_nutrition_information_change_and_continue_bounded_food_observation",
+  "next_observation": "Continue the exact pending Wren harvest; preserve actual resource failure/production facts and voluntary choices. Current stock information must remain grounded in resident observations, not omniscient knowledge.",
+  "receipt_revision": 2,
+  "supersedes_pre_dispatch_receipt_sha256": "19d92e27ab8ab8e0b14d43eb3e2655d458a7f9536ee3348cd73c8a0d3994fe8b",
+  "host_execution_gap_diagnosis": {
+    "power_event_summary_sha256": "4e816d79cbdb4c5ee276e8bf909774e1382362e30b0cc058342f40b591890613",
+    "facts": [
+      "Windows Kernel-Power42 recorded System Idle sleep at2026-09-23T19:31:39Z.",
+      "Power-Troubleshooter1 recorded return from low power at20:32:16Z."
+    ],
+    "interpretation": "Independent event evidence supports host suspension; exact paused duration is not established. Original unknown-cause timeout receipt remains preserved.",
+    "followup": "Process-scoped system-awake protection added to the bounded launcher; it restores prior thread state after drain and does not change global power settings."
+  }
+}

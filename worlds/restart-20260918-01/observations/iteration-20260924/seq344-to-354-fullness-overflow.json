@@ -1,0 +1,249 @@
+{
+  "artifact": "food_overflow_inference",
+  "artifact_version": 1,
+  "classification": "inference_from_immutable_endpoints_and_audited_transition_path",
+  "scope": {
+    "world_id": "restart-20260918-01",
+    "from_checkpoint": {
+      "sequence": 344,
+      "path": "worlds/restart-20260918-01/checkpoints/seq000344-0e13bfddcb4918ba.world.json",
+      "sha256": "0e13bfddcb4918baf1e9f49d3177791092bb55871cf3f064947414e78bbce3e8"
+    },
+    "to_checkpoint": {
+      "sequence": 354,
+      "path": "worlds/restart-20260918-01/checkpoints/seq000354-2cb7ce5a0ee0e700.world.json",
+      "sha256": "2cb7ce5a0ee0e700ea6bb5918cf11b69e3840059ef50095aff1b29baa076fc3d"
+    },
+    "elapsed_seconds_start": 14152.533333329406,
+    "elapsed_seconds_end": 15052.04999999565,
+    "elapsed_seconds_delta": 899.5166666662444
+  },
+  "audited_source_files": [
+    {
+      "path": "game/core/town_life.gd",
+      "sha256": "d8dbf5eea777cebfec97ae220f4836d5b2a98b22e3d45c4fa60b19401f94d68e"
+    },
+    {
+      "path": "game/core/town_baking.gd",
+      "sha256": "09c9efc33ea9f059d664971b5d7ac9a2f5fc5aea3b6ad45ed77c1cefa9df989e"
+    },
+    {
+      "path": "game/core/town_places.gd",
+      "sha256": "573ac86fa275d840e170d3f660fd28b607f789e3b5fdb5829a5d1c5960178fc0"
+    },
+    {
+      "path": "game/core/town_trade.gd",
+      "sha256": "c7f0182297a119a2e5d7bacb5b478908a69e72b5449f4933774645eca5977990"
+    },
+    {
+      "path": "game/core/town_materials.gd",
+      "sha256": "bab736dedb16ce0a3a8853d66c44d68d822b76a839086f9ed4b2b5da17199fdf"
+    },
+    {
+      "path": "game/core/town_runtime.gd",
+      "sha256": "c532fc7fdc2a53f012cb171f3180a894d3b96a2b7eeb5b1bbe44ecff2cbd78bd"
+    }
+  ],
+  "transition_model": {
+    "hunger_decay": "TownLife.advance subtracts floor((start_tick_remainder + elapsed_delta)/120) from each resident hunger, clamped at zero, and stores the modulo-120 remainder.",
+    "meal": "TownLife._finish(eat_ration) rechecks hunger <= 80 and food >= 1; on success consumes one food and sets hunger=min(100,hunger+40).",
+    "audited_capability_path": [
+      "town_runtime",
+      "town_materials",
+      "town_trade",
+      "town_baking",
+      "town_places",
+      "town_life"
+    ],
+    "other_hunger_mutators_found_in_installed_path": false,
+    "baking_wrapper_effect": "TownBaking delegates eat_ration completion to super and consumes held-loaf attribution only after successful completion; it does not mutate hunger."
+  },
+  "checks": {
+    "resident_stable_ids_equal": true,
+    "resident_count_start": 10,
+    "resident_count_end": 10,
+    "decay_steps": 8,
+    "expected_end_remainder_seconds": 52.049999999553506,
+    "actual_end_remainder_seconds": 52.04999999997419,
+    "remainder_absolute_error_seconds": 4.206821494079008e-10,
+    "remainder_tolerance_seconds": 1e-08,
+    "remainder_matches_within_tolerance": true,
+    "minimum_start_hunger_after_decay": 53,
+    "lower_clamp_loss_possible": false,
+    "new_successful_meal_command_count": 3,
+    "new_meal_event_count": 3,
+    "meal_receipts_match_events": true,
+    "new_failed_or_rejected_meal_command_count": 0,
+    "all_signed_overflow_residuals_nonnegative": true
+  },
+  "resident_accounting": [
+    {
+      "resident_id": "shared:well-keeper",
+      "start_hunger": 61,
+      "decay_points": 8,
+      "completed_meals": 0,
+      "final_hunger": 53,
+      "uncapped_expected_hunger": 53,
+      "inferred_upper_cap_overflow": 0,
+      "meal_event_refs": [],
+      "meal_command_refs": []
+    },
+    {
+      "resident_id": "shared:baker",
+      "start_hunger": 77,
+      "decay_points": 8,
+      "completed_meals": 1,
+      "final_hunger": 94,
+      "uncapped_expected_hunger": 109,
+      "inferred_upper_cap_overflow": 15,
+      "meal_event_refs": [
+        {
+          "seq": 351,
+          "event_id": "life_event_351",
+          "operation_id": "turn:shared:baker:0:26"
+        }
+      ],
+      "meal_command_refs": [
+        {
+          "command_id": "turn:shared:baker:0:26",
+          "status": "completed",
+          "result_code": "eat_ration"
+        }
+      ]
+    },
+    {
+      "resident_id": "shared:smith",
+      "start_hunger": 61,
+      "decay_points": 8,
+      "completed_meals": 1,
+      "final_hunger": 93,
+      "uncapped_expected_hunger": 93,
+      "inferred_upper_cap_overflow": 0,
+      "meal_event_refs": [
+        {
+          "seq": 354,
+          "event_id": "life_event_354",
+          "operation_id": "turn:shared:smith:0:43"
+        }
+      ],
+      "meal_command_refs": [
+        {
+          "command_id": "turn:shared:smith:0:43",
+          "status": "completed",
+          "result_code": "eat_ration"
+        }
+      ]
+    },
+    {
+      "resident_id": "shared:carpenter",
+      "start_hunger": 63,
+      "decay_points": 8,
+      "completed_meals": 0,
+      "final_hunger": 55,
+      "uncapped_expected_hunger": 55,
+      "inferred_upper_cap_overflow": 0,
+      "meal_event_refs": [],
+      "meal_command_refs": []
+    },
+    {
+      "resident_id": "shared:innkeeper",
+      "start_hunger": 87,
+      "decay_points": 8,
+      "completed_meals": 0,
+      "final_hunger": 79,
+      "uncapped_expected_hunger": 79,
+      "inferred_upper_cap_overflow": 0,
+      "meal_event_refs": [],
+      "meal_command_refs": []
+    },
+    {
+      "resident_id": "shared:herder",
+      "start_hunger": 63,
+      "decay_points": 8,
+      "completed_meals": 1,
+      "final_hunger": 94,
+      "uncapped_expected_hunger": 95,
+      "inferred_upper_cap_overflow": 1,
+      "meal_event_refs": [
+        {
+          "seq": 353,
+          "event_id": "life_event_353",
+          "operation_id": "turn:shared:herder:0:21"
+        }
+      ],
+      "meal_command_refs": [
+        {
+          "command_id": "turn:shared:herder:0:21",
+          "status": "completed",
+          "result_code": "eat_ration"
+        }
+      ]
+    },
+    {
+      "resident_id": "shared:gardener",
+      "start_hunger": 63,
+      "decay_points": 8,
+      "completed_meals": 0,
+      "final_hunger": 55,
+      "uncapped_expected_hunger": 55,
+      "inferred_upper_cap_overflow": 0,
+      "meal_event_refs": [],
+      "meal_command_refs": []
+    },
+    {
+      "resident_id": "shared:weaver",
+      "start_hunger": 63,
+      "decay_points": 8,
+      "completed_meals": 0,
+      "final_hunger": 55,
+      "uncapped_expected_hunger": 55,
+      "inferred_upper_cap_overflow": 0,
+      "meal_event_refs": [],
+      "meal_command_refs": []
+    },
+    {
+      "resident_id": "shared:fisher",
+      "start_hunger": 93,
+      "decay_points": 8,
+      "completed_meals": 0,
+      "final_hunger": 85,
+      "uncapped_expected_hunger": 85,
+      "inferred_upper_cap_overflow": 0,
+      "meal_event_refs": [],
+      "meal_command_refs": []
+    },
+    {
+      "resident_id": "shared:healer",
+      "start_hunger": 97,
+      "decay_points": 8,
+      "completed_meals": 0,
+      "final_hunger": 89,
+      "uncapped_expected_hunger": 89,
+      "inferred_upper_cap_overflow": 0,
+      "meal_event_refs": [],
+      "meal_command_refs": []
+    }
+  ],
+  "calculation": {
+    "per_resident_formula": "start_hunger - decay_points + 40 * completed_meals - final_hunger",
+    "aggregate_formula": "sum(start_hunger) + 40 * total_completed_meals - resident_count * decay_points - sum(final_hunger)",
+    "start_hunger_sum": 728,
+    "total_completed_meals": 3,
+    "total_decay_points": 80,
+    "final_hunger_sum": 752,
+    "aggregate_inferred_upper_cap_overflow": 16,
+    "sum_per_resident_inferred_overflow": 16
+  },
+  "limitations_and_assumptions": [
+    "Inference assumes the immutable endpoints were reached only through the audited reducer and installed capability path, with no external direct state mutation or checkpoint rewriting between them.",
+    "Exact meal timestamps and the ordering of individual decay ticks relative to each meal are not recorded here; this artifact infers cumulative overflow, not exact per-meal clipping moments.",
+    "This accounting does not prove sustainable food production, supply adequacy over longer windows, or future behavior."
+  ],
+  "host_independent_recomputation": {
+    "initial_fullness_sum": 728,
+    "final_fullness_sum": 752,
+    "decay_points_total": 80,
+    "meal_return_before_cap": 120,
+    "inferred_overflow": 16
+  }
+}

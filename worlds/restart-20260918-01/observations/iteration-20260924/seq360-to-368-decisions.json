@@ -1,0 +1,638 @@
+{
+  "schema_version": 1,
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 360,
+  "end_seq": 368,
+  "elapsed_seconds": 15293.849999995537,
+  "decision_count": 6,
+  "residents": [
+    {
+      "resident_id": "shared:well-keeper",
+      "name": "Ari",
+      "decisions": [
+        {
+          "request_id": "turn:shared:well-keeper:3:28",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "My food is 0 and satiety is 92, but I need to build a buffer. harvest_ration lets me attempt to forage at the public point. I have no rations in inventory, so this is my only way to secure food before satiety drops further."
+          },
+          "resolved_action": "life:harvest_ration",
+          "stated_reason": "My food is 0 and satiety is 92, but I need to build a buffer. harvest_ration lets me attempt to forage at the public point. I have no rations in inventory, so this is my only way to secure food before satiety drops further.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [],
+          "current_command_status": "rejected",
+          "current_trade_command_status": "rejected",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:baker",
+      "name": "Wren",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {
+        "action": "harvest_ration",
+        "command_id": "turn:shared:baker:0:29",
+        "elapsed": 13.949999999999989,
+        "provenance": "opengameagent_live"
+      },
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:smith",
+      "name": "Flint",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:carpenter",
+      "name": "Rowan",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:innkeeper",
+      "name": "Mara",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:herder",
+      "name": "Heath",
+      "decisions": [
+        {
+          "request_id": "turn:shared:herder:0:24",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a11",
+            "reason": "I know Caravan Rest Ground from direct sight and it is a place where caravans rest. I am interested in livestock and animal care, so walking there lets me observe whether any animals or handlers are present. My satiety is 93 and energy is 74, so no urgent survival need takes priority."
+          },
+          "resolved_action": "place:travel:caravan_rest",
+          "stated_reason": "I know Caravan Rest Ground from direct sight and it is a place where caravans rest. I am interested in livestock and animal care, so walking there lets me observe whether any animals or handlers are present. My satiety is 93 and energy is 74, so no urgent survival need takes priority.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "place_travel_started",
+            "effect": {
+              "ok": true,
+              "code": "place_travel_started",
+              "pending": true,
+              "place_id": "caravan_rest"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "type": "place_visited",
+              "actor_id": "shared:herder",
+              "subject_id": "shared:herder",
+              "recipient_ids": [
+                "shared:herder"
+              ],
+              "operation_id": "turn:shared:herder:0:24",
+              "source": "opengameagent_live",
+              "place_id": "caravan_rest",
+              "target_position": [
+                24.700000762939453,
+                0.05999999865889549,
+                74.0999984741211
+              ],
+              "text": "I followed the route I know and arrived at Caravan Rest Ground.",
+              "seq": 364,
+              "event_id": "life_event_364"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": "completed",
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:herder:0:25",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a12",
+            "reason": "I am at Caravan Rest Ground, a place I know. I want to observe my surroundings to see if there are any animals, caretakers, or signs of herding work nearby before deciding my next move. My needs are comfortable, so I can take time to watch and listen."
+          },
+          "resolved_action": "ability:observe",
+          "stated_reason": "I am at Caravan Rest Ground, a place I know. I want to observe my surroundings to see if there are any animals, caretakers, or signs of herding work nearby before deciding my next move. My needs are comfortable, so I can take time to watch and listen.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "surroundings_observed",
+            "effect": {
+              "ok": true,
+              "code": "surroundings_observed",
+              "event_id": "life_event_365",
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "private_observation"
+              }
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "private_observation"
+            }
+          },
+          "later_events": [
+            {
+              "type": "surroundings_observed",
+              "actor_id": "shared:herder",
+              "subject_id": "shared:herder",
+              "recipient_ids": [
+                "shared:herder"
+              ],
+              "operation_id": "turn:shared:herder:0:25",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "I paused to observe my current surroundings.",
+              "contractual": false,
+              "observed": {
+                "position": [
+                  24.713361740112305,
+                  0.0002260655164718628,
+                  74.0888671875
+                ],
+                "needs": {
+                  "hunger": 92
+                },
+                "nearby_residents": [],
+                "known_places": [
+                  "caravan_rest",
+                  "planted_commons"
+                ]
+              },
+              "private_observation": true,
+              "seq": 365,
+              "event_id": "life_event_365"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:gardener",
+      "name": "Fern",
+      "decisions": [
+        {
+          "request_id": "turn:shared:gardener:0:28",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a14",
+            "reason": "I have adequate satiety and energy, no urgent survival needs. My long-term goal is to learn cultivation, and Planted Commons is a public greenery I can observe directly. Walking there lets me study plants in a place maintained for growing things, which advances my observational learning better than waiting here."
+          },
+          "resolved_action": "place:travel:planted_commons",
+          "stated_reason": "I have adequate satiety and energy, no urgent survival needs. My long-term goal is to learn cultivation, and Planted Commons is a public greenery I can observe directly. Walking there lets me study plants in a place maintained for growing things, which advances my observational learning better than waiting here.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "place_travel_started",
+            "effect": {
+              "ok": true,
+              "code": "place_travel_started",
+              "pending": true,
+              "place_id": "planted_commons"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "type": "place_visited",
+              "actor_id": "shared:gardener",
+              "subject_id": "shared:gardener",
+              "recipient_ids": [
+                "shared:gardener"
+              ],
+              "operation_id": "turn:shared:gardener:0:28",
+              "source": "opengameagent_live",
+              "place_id": "planted_commons",
+              "target_position": [
+                1.2000000476837158,
+                0.10000000149011612,
+                54.20000076293945
+              ],
+              "text": "I followed the route I know and arrived at Planted Commons.",
+              "seq": 361,
+              "event_id": "life_event_361"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": "completed",
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:gardener:0:29",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a14",
+            "reason": "I am at Planted Commons with energy at 39, which is not urgent but below half. Resting here lets me recover stamina while staying near the greenery I want to observe. No survival need demands immediate action, and I have no cultivation tools or skills yet to do more than watch."
+          },
+          "resolved_action": "place:rest:planted_commons",
+          "stated_reason": "I am at Planted Commons with energy at 39, which is not urgent but below half. Resting here lets me recover stamina while staying near the greenery I want to observe. No survival need demands immediate action, and I have no cultivation tools or skills yet to do more than watch.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "place_rest_started",
+            "effect": {
+              "ok": true,
+              "code": "place_rest_started",
+              "pending": true,
+              "place_id": "planted_commons"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_368",
+              "seq": 368,
+              "type": "rest",
+              "actor_id": "shared:gardener",
+              "subject_id": "shared:gardener",
+              "recipient_ids": [
+                "shared:gardener"
+              ],
+              "operation_id": "turn:shared:gardener:0:29",
+              "source": "opengameagent_live",
+              "text": "Fern: rest (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": "completed",
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:weaver",
+      "name": "Iris",
+      "decisions": [
+        {
+          "request_id": "turn:shared:weaver:0:44",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a15",
+            "reason": "I am at the Western Artisans' Forecourt with no nearby residents to speak with. My satiety and energy are comfortable, so no urgent survival need presses. I will walk to the Planted Commons, a public crossroads where I might encounter others and observe any textiles or patterns in passing—quiet attention is often my way of participating."
+          },
+          "resolved_action": "place:travel:planted_commons",
+          "stated_reason": "I am at the Western Artisans' Forecourt with no nearby residents to speak with. My satiety and energy are comfortable, so no urgent survival need presses. I will walk to the Planted Commons, a public crossroads where I might encounter others and observe any textiles or patterns in passing—quiet attention is often my way of participating.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "place_travel_started",
+            "effect": {
+              "ok": true,
+              "code": "place_travel_started",
+              "pending": true,
+              "place_id": "planted_commons"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "type": "place_visited",
+              "actor_id": "shared:weaver",
+              "subject_id": "shared:weaver",
+              "recipient_ids": [
+                "shared:weaver"
+              ],
+              "operation_id": "turn:shared:weaver:0:44",
+              "source": "opengameagent_live",
+              "place_id": "planted_commons",
+              "target_position": [
+                2.4000000953674316,
+                0.10000000149011612,
+                54.20000076293945
+              ],
+              "text": "I followed the route I know and arrived at Planted Commons.",
+              "seq": 367,
+              "event_id": "life_event_367"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": "completed",
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:fisher",
+      "name": "Reed",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:healer",
+      "name": "Sage",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    }
+  ],
+  "new_world_events": [
+    {
+      "type": "place_visited",
+      "actor_id": "shared:gardener",
+      "subject_id": "shared:gardener",
+      "recipient_ids": [
+        "shared:gardener"
+      ],
+      "operation_id": "turn:shared:gardener:0:28",
+      "source": "opengameagent_live",
+      "place_id": "planted_commons",
+      "target_position": [
+        1.2000000476837158,
+        0.10000000149011612,
+        54.20000076293945
+      ],
+      "text": "I followed the route I know and arrived at Planted Commons.",
+      "seq": 361,
+      "event_id": "life_event_361"
+    },
+    {
+      "event_id": "life_event_362",
+      "seq": 362,
+      "type": "rest",
+      "actor_id": "shared:herder",
+      "subject_id": "shared:herder",
+      "recipient_ids": [
+        "shared:herder"
+      ],
+      "operation_id": "turn:shared:herder:0:23",
+      "source": "opengameagent_live",
+      "text": "Heath: rest (Godot continuation, opengameagent_live)"
+    },
+    {
+      "event_id": "life_event_363",
+      "seq": 363,
+      "type": "rest",
+      "actor_id": "shared:well-keeper",
+      "subject_id": "shared:well-keeper",
+      "recipient_ids": [
+        "shared:well-keeper"
+      ],
+      "operation_id": "turn:shared:well-keeper:3:27",
+      "source": "opengameagent_live",
+      "text": "Ari: rest (Godot continuation, opengameagent_live)"
+    },
+    {
+      "type": "place_visited",
+      "actor_id": "shared:herder",
+      "subject_id": "shared:herder",
+      "recipient_ids": [
+        "shared:herder"
+      ],
+      "operation_id": "turn:shared:herder:0:24",
+      "source": "opengameagent_live",
+      "place_id": "caravan_rest",
+      "target_position": [
+        24.700000762939453,
+        0.05999999865889549,
+        74.0999984741211
+      ],
+      "text": "I followed the route I know and arrived at Caravan Rest Ground.",
+      "seq": 364,
+      "event_id": "life_event_364"
+    },
+    {
+      "type": "surroundings_observed",
+      "actor_id": "shared:herder",
+      "subject_id": "shared:herder",
+      "recipient_ids": [
+        "shared:herder"
+      ],
+      "operation_id": "turn:shared:herder:0:25",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "I paused to observe my current surroundings.",
+      "contractual": false,
+      "observed": {
+        "position": [
+          24.713361740112305,
+          0.0002260655164718628,
+          74.0888671875
+        ],
+        "needs": {
+          "hunger": 92
+        },
+        "nearby_residents": [],
+        "known_places": [
+          "caravan_rest",
+          "planted_commons"
+        ]
+      },
+      "private_observation": true,
+      "seq": 365,
+      "event_id": "life_event_365"
+    },
+    {
+      "event_id": "life_event_366",
+      "seq": 366,
+      "type": "harvest_ration",
+      "actor_id": "shared:smith",
+      "subject_id": "shared:smith",
+      "recipient_ids": [
+        "shared:smith"
+      ],
+      "operation_id": "turn:shared:smith:0:45",
+      "source": "opengameagent_live",
+      "text": "Flint: harvest_ration (Godot continuation, opengameagent_live)"
+    },
+    {
+      "type": "place_visited",
+      "actor_id": "shared:weaver",
+      "subject_id": "shared:weaver",
+      "recipient_ids": [
+        "shared:weaver"
+      ],
+      "operation_id": "turn:shared:weaver:0:44",
+      "source": "opengameagent_live",
+      "place_id": "planted_commons",
+      "target_position": [
+        2.4000000953674316,
+        0.10000000149011612,
+        54.20000076293945
+      ],
+      "text": "I followed the route I know and arrived at Planted Commons.",
+      "seq": 367,
+      "event_id": "life_event_367"
+    },
+    {
+      "event_id": "life_event_368",
+      "seq": 368,
+      "type": "rest",
+      "actor_id": "shared:gardener",
+      "subject_id": "shared:gardener",
+      "recipient_ids": [
+        "shared:gardener"
+      ],
+      "operation_id": "turn:shared:gardener:0:29",
+      "source": "opengameagent_live",
+      "text": "Fern: rest (Godot continuation, opengameagent_live)"
+    }
+  ],
+  "limitation": "No decisions or speech are inferred from a personality profile. A pending provider request has no known decision."
+}

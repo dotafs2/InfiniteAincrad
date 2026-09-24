@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "status": "failed_external_timeout_no_final_capture",
+  "from_seq": 354,
+  "to_seq": 360,
+  "requested_seconds": 900,
+  "world_elapsed_delta": 121.9333333332761,
+  "world_sha256": "f0f5882fc5bbffc393ef206ade28a370f4a6a2632c2fddd219907cc635463522",
+  "actual_wrapper_wall_seconds": 3771.594,
+  "nominal_wrapper_timeout_seconds": 1260,
+  "all_owned_processes_exited": true,
+  "gateway_shutdown": {
+    "drain_error": "",
+    "drain_grace_seconds": 0.0,
+    "drained_complete": true,
+    "engine_exited_with_workers_pending": false,
+    "intake_closed": true,
+    "operations_pending_at_engine_exit": [],
+    "refused_connections": 0,
+    "unresolved_operations": [],
+    "unresolved_workers": 0,
+    "worker_start_failures": 0,
+    "workers_accepted": 18,
+    "workers_in_flight": false,
+    "workers_pending_at_engine_exit": 0
+  },
+  "new_settled_calls": 9,
+  "new_cost_cny": 0.1900441,
+  "ledger_after": {
+    "allocation_cap_cny": 53.9,
+    "authorized_cny": 54.0,
+    "counts": {
+      "settled": 9
+    },
+    "deadline_utc": 1790193033,
+    "halted": "",
+    "ledger_id": "3b364000-9759-4514-93e9-8549d20340e7",
+    "liability_cny": 52.8583012,
+    "model": "kimi-k2.6",
+    "prior_unverified_cny": 52.6682571,
+    "remaining_allocatable_cny": 1.0416988,
+    "reserved_cny": 0.0,
+    "settled_cny": 0.1900441
+  },
+  "pending_physical_jobs": {
+    "shared:baker": {
+      "action": "harvest_ration",
+      "command_id": "turn:shared:baker:0:29",
+      "elapsed": 0,
+      "provenance": "opengameagent_live"
+    },
+    "shared:herder": {
+      "action": "rest",
+      "command_id": "turn:shared:herder:0:23",
+      "elapsed": 10.333333333333329,
+      "provenance": "opengameagent_live"
+    },
+    "shared:smith": {
+      "action": "harvest_ration",
+      "command_id": "turn:shared:smith:0:45",
+      "elapsed": 19.63333333333331,
+      "provenance": "opengameagent_live"
+    },
+    "shared:well-keeper": {
+      "action": "rest",
+      "command_id": "turn:shared:well-keeper:3:27",
+      "elapsed": 9.299999999999997,
+      "provenance": "opengameagent_live"
+    }
+  },
+  "host_execution_gap_observed": true,
+  "gap_cause": "unknown",
+  "original_failure_preserved": true,
+  "no_provider_request_replayed": true
+}

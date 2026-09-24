@@ -1,0 +1,1060 @@
+{
+  "schema_version": 1,
+  "world_id": "shared:restart-20260918-01",
+  "start_seq": 368,
+  "end_seq": 375,
+  "elapsed_seconds": 15593.516666662063,
+  "decision_count": 12,
+  "residents": [
+    {
+      "resident_id": "shared:well-keeper",
+      "name": "Ari",
+      "decisions": [
+        {
+          "request_id": "turn:shared:well-keeper:3:29",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "My food is 0 and satiety is 91, which is above 80 so I cannot eat a ration I don't have. I need to attempt harvest_ration to forage for food while I still have energy. This is urgent because without food stock I cannot recover satiety later."
+          },
+          "resolved_action": "life:harvest_ration",
+          "stated_reason": "My food is 0 and satiety is 91, which is above 80 so I cannot eat a ration I don't have. I need to attempt harvest_ration to forage for food while I still have energy. This is urgent because without food stock I cannot recover satiety later.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [
+            {
+              "event_id": "life_event_373",
+              "seq": 373,
+              "type": "harvest_ration",
+              "actor_id": "shared:well-keeper",
+              "subject_id": "shared:well-keeper",
+              "recipient_ids": [
+                "shared:well-keeper"
+              ],
+              "operation_id": "turn:shared:well-keeper:3:29",
+              "source": "opengameagent_live",
+              "text": "Ari: harvest_ration (Godot continuation, opengameagent_live)"
+            }
+          ],
+          "current_command_status": "completed",
+          "current_trade_command_status": "completed",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:well-keeper:3:30",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "I have food 1 and satiety 90, which is above 80 so I cannot eat. I have no urgent survival need. My last harvest succeeded, and I want to maintain my food buffer. I will attempt harvest_ration again to keep my supply dependable."
+          },
+          "resolved_action": "life:harvest_ration",
+          "stated_reason": "I have food 1 and satiety 90, which is above 80 so I cannot eat. I have no urgent survival need. My last harvest succeeded, and I want to maintain my food buffer. I will attempt harvest_ration again to keep my supply dependable.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [],
+          "current_command_status": "rejected",
+          "current_trade_command_status": "rejected",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:well-keeper:3:31",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a17",
+            "reason": "My satiety is 89 and energy is 71, so no urgent survival need exists. I have 1 food and 1 wood. I want to understand who is near the water trough and how access is flowing before making any social move. Observing privately lets me gather current facts about the space I care about without committing to interaction."
+          },
+          "resolved_action": "ability:observe",
+          "stated_reason": "My satiety is 89 and energy is 71, so no urgent survival need exists. I have 1 food and 1 wood. I want to understand who is near the water trough and how access is flowing before making any social move. Observing privately lets me gather current facts about the space I care about without committing to interaction.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "surroundings_observed",
+            "effect": {
+              "ok": true,
+              "code": "surroundings_observed",
+              "event_id": "life_event_374",
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "private_observation"
+              }
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "private_observation"
+            }
+          },
+          "later_events": [
+            {
+              "type": "surroundings_observed",
+              "actor_id": "shared:well-keeper",
+              "subject_id": "shared:well-keeper",
+              "recipient_ids": [
+                "shared:well-keeper"
+              ],
+              "operation_id": "turn:shared:well-keeper:3:31",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "I paused to observe my current surroundings.",
+              "contractual": false,
+              "observed": {
+                "position": [
+                  5.709714412689209,
+                  0.00010526145342737436,
+                  52.07051086425781
+                ],
+                "needs": {
+                  "hunger": 89
+                },
+                "nearby_residents": [
+                  {
+                    "id": "shared:smith",
+                    "name": "Flint"
+                  },
+                  {
+                    "id": "shared:innkeeper",
+                    "name": "Mara"
+                  }
+                ],
+                "known_places": [
+                  "caravan_rest",
+                  "market_plaza",
+                  "planted_commons",
+                  "west_forecourt"
+                ]
+              },
+              "private_observation": true,
+              "seq": 374,
+              "event_id": "life_event_374"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:baker",
+      "name": "Wren",
+      "decisions": [
+        {
+          "request_id": "turn:shared:baker:0:30",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "My food is 0 and satiety will gradually drop; I need to try harvesting a ration while I still have energy. The last attempt may have failed due to stock, but stock changes and I should try again."
+          },
+          "resolved_action": "life:harvest_ration",
+          "stated_reason": "My food is 0 and satiety will gradually drop; I need to try harvesting a ration while I still have energy. The last attempt may have failed due to stock, but stock changes and I should try again.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [],
+          "current_command_status": "rejected",
+          "current_trade_command_status": "rejected",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:smith",
+      "name": "Flint",
+      "decisions": [
+        {
+          "request_id": "turn:shared:smith:0:46",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a10",
+            "reason": "I have metal_repair skill, satiety 91 and energy 73 are comfortable, and I need work to sustain my livelihood. Announcing my skill to Ari the well-keeper may lead to repair contracts.",
+            "speech": "I repair metal edges. If you have a tool that needs it, we can talk terms."
+          },
+          "resolved_action": "share-skill:shared:well-keeper:metal_repair",
+          "stated_reason": "I have metal_repair skill, satiety 91 and energy 73 are comfortable, and I need work to sustain my livelihood. Announcing my skill to Ari the well-keeper may lead to repair contracts.",
+          "proposed_speech": "I repair metal edges. If you have a tool that needs it, we can talk terms.",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "rule_rejection",
+            "code": "option_unavailable",
+            "effect": {
+              "ok": false,
+              "code": "option_unavailable"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": false,
+              "code": "option_unavailable"
+            }
+          },
+          "later_events": [],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "rule_rejection",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:carpenter",
+      "name": "Rowan",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:innkeeper",
+      "name": "Mara",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:herder",
+      "name": "Heath",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:gardener",
+      "name": "Fern",
+      "decisions": [
+        {
+          "request_id": "turn:shared:gardener:0:30",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a14",
+            "reason": "I have adequate satiety and energy, no urgent survival needs, and I am already at Planted Commons where I can observe plants. Observing privately lets me continue my habit of noticing small changes in visible plants without exhausting resources or imposing on anyone."
+          },
+          "resolved_action": "ability:observe",
+          "stated_reason": "I have adequate satiety and energy, no urgent survival needs, and I am already at Planted Commons where I can observe plants. Observing privately lets me continue my habit of noticing small changes in visible plants without exhausting resources or imposing on anyone.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "surroundings_observed",
+            "effect": {
+              "ok": true,
+              "code": "surroundings_observed",
+              "event_id": "life_event_369",
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "private_observation"
+              }
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "private_observation"
+            }
+          },
+          "later_events": [
+            {
+              "type": "surroundings_observed",
+              "actor_id": "shared:gardener",
+              "subject_id": "shared:gardener",
+              "recipient_ids": [
+                "shared:gardener"
+              ],
+              "operation_id": "turn:shared:gardener:0:30",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "I paused to observe my current surroundings.",
+              "contractual": false,
+              "observed": {
+                "position": [
+                  1.1847437620162964,
+                  0.0005239173769950867,
+                  54.2089729309082
+                ],
+                "needs": {
+                  "hunger": 53
+                },
+                "nearby_residents": [
+                  {
+                    "id": "shared:weaver",
+                    "name": "Iris"
+                  }
+                ],
+                "known_places": [
+                  "planted_commons"
+                ]
+              },
+              "private_observation": true,
+              "seq": 369,
+              "event_id": "life_event_369"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:gardener:0:31",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a14",
+            "reason": "Iris is nearby and just mentioned my work with plants. I want to respond to that, hear what she has in mind, and see if there's something observable we can discuss. My satiety and energy are adequate, so conversation is appropriate now.",
+            "speech": "You mentioned my plant work—I'm still just watching, really. Noting what changes and what doesn't. What did you have in mind?"
+          },
+          "resolved_action": "ability:talk:shared:weaver",
+          "stated_reason": "Iris is nearby and just mentioned my work with plants. I want to respond to that, hear what she has in mind, and see if there's something observable we can discuss. My satiety and energy are adequate, so conversation is appropriate now.",
+          "proposed_speech": "You mentioned my plant work—I'm still just watching, really. Noting what changes and what doesn't. What did you have in mind?",
+          "actually_spoken": "You mentioned my plant work—I'm still just watching, really. Noting what changes and what doesn't. What did you have in mind?",
+          "speech_event_seq": 371,
+          "recipients": [
+            "shared:gardener",
+            "shared:weaver"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "resident_said",
+            "effect": {
+              "ok": true,
+              "code": "resident_said",
+              "event_id": "life_event_371"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "You mentioned my plant work—I'm still just watching, really. Noting what changes and what doesn't. What did you have in mind?",
+              "event_id": "life_event_371",
+              "event_seq": 371,
+              "recipient_ids": [
+                "shared:gardener",
+                "shared:weaver"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "resident_said",
+              "actor_id": "shared:gardener",
+              "subject_id": "shared:weaver",
+              "recipient_ids": [
+                "shared:gardener",
+                "shared:weaver"
+              ],
+              "operation_id": "turn:shared:gardener:0:31",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "You mentioned my plant work—I'm still just watching, really. Noting what changes and what doesn't. What did you have in mind?",
+              "contractual": false,
+              "epistemic_status": "speaker_statement_not_verified_world_fact",
+              "seq": 371,
+              "event_id": "life_event_371"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:gardener:0:32",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a4",
+            "reason": "Iris invited me to walk to Caravan Rest, but I don't see that destination in my available movement actions. The closest match is approaching Ari, but that doesn't align with my intent. Since I can't directly choose the joint visit and my satiety and energy are adequate, I'll wait for now—though I notice a14 lets me decline the visit explicitly. Actually, let me re-read: a14 is 'Decline this joint visit.' Since I can't accept the visit to Caravan Rest through any available movement action, and I don't want to leave Iris hanging without response, I'll decline clearly."
+          },
+          "resolved_action": null,
+          "stated_reason": "Iris invited me to walk to Caravan Rest, but I don't see that destination in my available movement actions. The closest match is approaching Ari, but that doesn't align with my intent. Since I can't directly choose the joint visit and my satiety and energy are adequate, I'll wait for now—though I notice a14 lets me decline the visit explicitly. Actually, let me re-read: a14 is 'Decline this joint visit.' Since I can't accept the visit to Caravan Rest through any available movement action, and I don't want to leave Iris hanging without response, I'll decline clearly.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "provider_error",
+            "code": "reason_too_long",
+            "effect": {},
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_world_action"
+            }
+          },
+          "later_events": [],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "provider_error",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:weaver",
+      "name": "Iris",
+      "decisions": [
+        {
+          "request_id": "turn:shared:weaver:0:45",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a20",
+            "reason": "Fern is nearby at the Planted Commons. I want to ask whether any plants here yield fibers I could practice with, or if they know who might teach weaving.",
+            "speech": "Fern, you mentioned your work with plants before. Do any of the greenery here give fibers worth working with? Or do you know who might let me watch them weave sometime?"
+          },
+          "resolved_action": "ability:talk:shared:gardener",
+          "stated_reason": "Fern is nearby at the Planted Commons. I want to ask whether any plants here yield fibers I could practice with, or if they know who might teach weaving.",
+          "proposed_speech": "Fern, you mentioned your work with plants before. Do any of the greenery here give fibers worth working with? Or do you know who might let me watch them weave sometime?",
+          "actually_spoken": "Fern, you mentioned your work with plants before. Do any of the greenery here give fibers worth working with? Or do you know who might let me watch them weave sometime?",
+          "speech_event_seq": 370,
+          "recipients": [
+            "shared:weaver",
+            "shared:gardener"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "resident_said",
+            "effect": {
+              "ok": true,
+              "code": "resident_said",
+              "event_id": "life_event_370"
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "Fern, you mentioned your work with plants before. Do any of the greenery here give fibers worth working with? Or do you know who might let me watch them weave sometime?",
+              "event_id": "life_event_370",
+              "event_seq": 370,
+              "recipient_ids": [
+                "shared:weaver",
+                "shared:gardener"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "resident_said",
+              "actor_id": "shared:weaver",
+              "subject_id": "shared:gardener",
+              "recipient_ids": [
+                "shared:weaver",
+                "shared:gardener"
+              ],
+              "operation_id": "turn:shared:weaver:0:45",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "Fern, you mentioned your work with plants before. Do any of the greenery here give fibers worth working with? Or do you know who might let me watch them weave sometime?",
+              "contractual": false,
+              "epistemic_status": "speaker_statement_not_verified_world_fact",
+              "seq": 370,
+              "event_id": "life_event_370"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:weaver:0:46",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a20",
+            "reason": "Fern is here at the Planted Commons and we were just speaking. I'd like to continue our conversation and perhaps share a quiet moment in a different setting where I might observe new textures and patterns.",
+            "speech": "Fern, would you walk with me to the Caravan Rest Ground? I'd like to keep talking, and the open ground there might have a different sort of quiet than here among the planted rows."
+          },
+          "resolved_action": "ability:invite:shared:gardener:caravan_rest",
+          "stated_reason": "Fern is here at the Planted Commons and we were just speaking. I'd like to continue our conversation and perhaps share a quiet moment in a different setting where I might observe new textures and patterns.",
+          "proposed_speech": "Fern, would you walk with me to the Caravan Rest Ground? I'd like to keep talking, and the open ground there might have a different sort of quiet than here among the planted rows.",
+          "actually_spoken": "Fern, would you walk with me to the Caravan Rest Ground? I'd like to keep talking, and the open ground there might have a different sort of quiet than here among the planted rows.",
+          "speech_event_seq": 372,
+          "recipients": [
+            "shared:weaver",
+            "shared:gardener"
+          ],
+          "application": {
+            "status": "settled",
+            "code": "joint_visit_invite_visit",
+            "effect": {
+              "ok": true,
+              "code": "joint_visit_invite_visit",
+              "plan_id": "turn:shared:weaver:0:46",
+              "event_id": "life_event_372",
+              "pending": false
+            },
+            "speech_delivery": {
+              "attempted": true,
+              "delivered": true,
+              "code": "speech_delivered",
+              "text": "Fern, would you walk with me to the Caravan Rest Ground? I'd like to keep talking, and the open ground there might have a different sort of quiet than here among the planted rows.",
+              "event_id": "life_event_372",
+              "event_seq": 372,
+              "recipient_ids": [
+                "shared:weaver",
+                "shared:gardener"
+              ]
+            }
+          },
+          "later_events": [
+            {
+              "type": "joint_visit_invite_visit",
+              "actor_id": "shared:weaver",
+              "subject_id": "shared:weaver",
+              "recipient_ids": [
+                "shared:weaver",
+                "shared:gardener"
+              ],
+              "operation_id": "turn:shared:weaver:0:46",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "Fern, would you walk with me to the Caravan Rest Ground? I'd like to keep talking, and the open ground there might have a different sort of quiet than here among the planted rows.",
+              "contractual": false,
+              "plan_id": "turn:shared:weaver:0:46",
+              "place_id": "caravan_rest",
+              "seq": 372,
+              "event_id": "life_event_372"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [
+            {
+              "id": "turn:shared:weaver:0:46",
+              "participants": [
+                "shared:weaver",
+                "shared:gardener"
+              ],
+              "place_id": "caravan_rest",
+              "status": "invited",
+              "expires_at": 15617.616666662192,
+              "children": [],
+              "accepted_command": "",
+              "created_seq": 372
+            }
+          ],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:fisher",
+      "name": "Reed",
+      "decisions": [
+        {
+          "request_id": "turn:shared:fisher:0:27",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a1",
+            "reason": "I have 1 food and satiety is 82, so I don't need to eat yet. Energy is fine at 72. I should gather another ration while stock is available—last time it was 2, and I've seen it run out before. Better to stock up when I can."
+          },
+          "resolved_action": "life:harvest_ration",
+          "stated_reason": "I have 1 food and satiety is 82, so I don't need to eat yet. Energy is fine at 72. I should gather another ration while stock is available—last time it was 2, and I've seen it run out before. Better to stock up when I can.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "action_started",
+            "effect": {
+              "ok": true,
+              "code": "action_started"
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "no_dialogue"
+            }
+          },
+          "later_events": [],
+          "current_command_status": "rejected",
+          "current_trade_command_status": "rejected",
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": null
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        },
+        {
+          "request_id": "turn:shared:fisher:0:28",
+          "provider": "opengameagent_live",
+          "model_returned": true,
+          "decision": {
+            "action": "a15",
+            "reason": "I have 1 food, satiety is 81, energy is 71—no urgent survival need. My last harvest attempt failed due to no stock. I want to observe my surroundings quietly, look for water or anything related to fishing, and think about whether I can find a modest living without rushing into another commitment."
+          },
+          "resolved_action": "ability:observe",
+          "stated_reason": "I have 1 food, satiety is 81, energy is 71—no urgent survival need. My last harvest attempt failed due to no stock. I want to observe my surroundings quietly, look for water or anything related to fishing, and think about whether I can find a modest living without rushing into another commitment.",
+          "proposed_speech": "",
+          "actually_spoken": null,
+          "speech_event_seq": null,
+          "recipients": [],
+          "application": {
+            "status": "settled",
+            "code": "surroundings_observed",
+            "effect": {
+              "ok": true,
+              "code": "surroundings_observed",
+              "event_id": "life_event_375",
+              "speech_delivery": {
+                "attempted": false,
+                "delivered": false,
+                "code": "private_observation"
+              }
+            },
+            "speech_delivery": {
+              "attempted": false,
+              "delivered": false,
+              "code": "private_observation"
+            }
+          },
+          "later_events": [
+            {
+              "type": "surroundings_observed",
+              "actor_id": "shared:fisher",
+              "subject_id": "shared:fisher",
+              "recipient_ids": [
+                "shared:fisher"
+              ],
+              "operation_id": "turn:shared:fisher:0:28",
+              "source": "opengameagent_live",
+              "provenance": "opengameagent_live",
+              "text": "I paused to observe my current surroundings.",
+              "contractual": false,
+              "observed": {
+                "position": [
+                  8.59037971496582,
+                  0.00010596273932605982,
+                  52.999996185302734
+                ],
+                "needs": {
+                  "hunger": 81
+                },
+                "nearby_residents": [
+                  {
+                    "id": "shared:baker",
+                    "name": "Wren"
+                  },
+                  {
+                    "id": "shared:innkeeper",
+                    "name": "Mara"
+                  }
+                ],
+                "known_places": [
+                  "caravan_rest",
+                  "planted_commons"
+                ]
+              },
+              "private_observation": true,
+              "seq": 375,
+              "event_id": "life_event_375"
+            }
+          ],
+          "current_command_status": null,
+          "current_trade_command_status": null,
+          "module_command_status": {
+            "materials": null,
+            "baking": null,
+            "places": null,
+            "capabilities": "completed"
+          },
+          "shared_plans": [],
+          "replay_count": 0,
+          "complete_archive": true,
+          "interpretation": "Stated reason is model output, not access to hidden thought; action acceptance is not proof of job completion."
+        }
+      ],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    },
+    {
+      "resident_id": "shared:healer",
+      "name": "Sage",
+      "decisions": [],
+      "controller_status": "settled",
+      "pending_job": {},
+      "module_jobs": {
+        "materials": {},
+        "baking": {}
+      }
+    }
+  ],
+  "new_world_events": [
+    {
+      "type": "surroundings_observed",
+      "actor_id": "shared:gardener",
+      "subject_id": "shared:gardener",
+      "recipient_ids": [
+        "shared:gardener"
+      ],
+      "operation_id": "turn:shared:gardener:0:30",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "I paused to observe my current surroundings.",
+      "contractual": false,
+      "observed": {
+        "position": [
+          1.1847437620162964,
+          0.0005239173769950867,
+          54.2089729309082
+        ],
+        "needs": {
+          "hunger": 53
+        },
+        "nearby_residents": [
+          {
+            "id": "shared:weaver",
+            "name": "Iris"
+          }
+        ],
+        "known_places": [
+          "planted_commons"
+        ]
+      },
+      "private_observation": true,
+      "seq": 369,
+      "event_id": "life_event_369"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:weaver",
+      "subject_id": "shared:gardener",
+      "recipient_ids": [
+        "shared:weaver",
+        "shared:gardener"
+      ],
+      "operation_id": "turn:shared:weaver:0:45",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "Fern, you mentioned your work with plants before. Do any of the greenery here give fibers worth working with? Or do you know who might let me watch them weave sometime?",
+      "contractual": false,
+      "epistemic_status": "speaker_statement_not_verified_world_fact",
+      "seq": 370,
+      "event_id": "life_event_370"
+    },
+    {
+      "type": "resident_said",
+      "actor_id": "shared:gardener",
+      "subject_id": "shared:weaver",
+      "recipient_ids": [
+        "shared:gardener",
+        "shared:weaver"
+      ],
+      "operation_id": "turn:shared:gardener:0:31",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "You mentioned my plant work—I'm still just watching, really. Noting what changes and what doesn't. What did you have in mind?",
+      "contractual": false,
+      "epistemic_status": "speaker_statement_not_verified_world_fact",
+      "seq": 371,
+      "event_id": "life_event_371"
+    },
+    {
+      "type": "joint_visit_invite_visit",
+      "actor_id": "shared:weaver",
+      "subject_id": "shared:weaver",
+      "recipient_ids": [
+        "shared:weaver",
+        "shared:gardener"
+      ],
+      "operation_id": "turn:shared:weaver:0:46",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "Fern, would you walk with me to the Caravan Rest Ground? I'd like to keep talking, and the open ground there might have a different sort of quiet than here among the planted rows.",
+      "contractual": false,
+      "plan_id": "turn:shared:weaver:0:46",
+      "place_id": "caravan_rest",
+      "seq": 372,
+      "event_id": "life_event_372"
+    },
+    {
+      "event_id": "life_event_373",
+      "seq": 373,
+      "type": "harvest_ration",
+      "actor_id": "shared:well-keeper",
+      "subject_id": "shared:well-keeper",
+      "recipient_ids": [
+        "shared:well-keeper"
+      ],
+      "operation_id": "turn:shared:well-keeper:3:29",
+      "source": "opengameagent_live",
+      "text": "Ari: harvest_ration (Godot continuation, opengameagent_live)"
+    },
+    {
+      "type": "surroundings_observed",
+      "actor_id": "shared:well-keeper",
+      "subject_id": "shared:well-keeper",
+      "recipient_ids": [
+        "shared:well-keeper"
+      ],
+      "operation_id": "turn:shared:well-keeper:3:31",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "I paused to observe my current surroundings.",
+      "contractual": false,
+      "observed": {
+        "position": [
+          5.709714412689209,
+          0.00010526145342737436,
+          52.07051086425781
+        ],
+        "needs": {
+          "hunger": 89
+        },
+        "nearby_residents": [
+          {
+            "id": "shared:smith",
+            "name": "Flint"
+          },
+          {
+            "id": "shared:innkeeper",
+            "name": "Mara"
+          }
+        ],
+        "known_places": [
+          "caravan_rest",
+          "market_plaza",
+          "planted_commons",
+          "west_forecourt"
+        ]
+      },
+      "private_observation": true,
+      "seq": 374,
+      "event_id": "life_event_374"
+    },
+    {
+      "type": "surroundings_observed",
+      "actor_id": "shared:fisher",
+      "subject_id": "shared:fisher",
+      "recipient_ids": [
+        "shared:fisher"
+      ],
+      "operation_id": "turn:shared:fisher:0:28",
+      "source": "opengameagent_live",
+      "provenance": "opengameagent_live",
+      "text": "I paused to observe my current surroundings.",
+      "contractual": false,
+      "observed": {
+        "position": [
+          8.59037971496582,
+          0.00010596273932605982,
+          52.999996185302734
+        ],
+        "needs": {
+          "hunger": 81
+        },
+        "nearby_residents": [
+          {
+            "id": "shared:baker",
+            "name": "Wren"
+          },
+          {
+            "id": "shared:innkeeper",
+            "name": "Mara"
+          }
+        ],
+        "known_places": [
+          "caravan_rest",
+          "planted_commons"
+        ]
+      },
+      "private_observation": true,
+      "seq": 375,
+      "event_id": "life_event_375"
+    }
+  ],
+  "limitation": "No decisions or speech are inferred from a personality profile. A pending provider request has no known decision."
+}

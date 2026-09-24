@@ -1,0 +1,130 @@
+{
+  "engine_exit": 0,
+  "validation_passed": false,
+  "session_cost_cap_cny": 1,
+  "checkpoint_export": {
+    "status": "exported",
+    "seq": 375,
+    "file": "seq000375-aefd2e6fb43e68a4.world.json",
+    "sha256": "aefd2e6fb43e68a4314b6052dd848bf6dd9b8e38254234691999be69f15e3f98",
+    "created_utc": "2026-09-24T02:49:36.905537+00:00",
+    "resident_count": 10,
+    "archive_count": 351,
+    "full_history_preserved": true
+  },
+  "validation_status": "failed",
+  "validation_exercised": true,
+  "validation_decisions_started": 12,
+  "classification_reasons": [
+    "model_errors"
+  ],
+  "model_errors": {
+    "shared:gardener": "provider_error"
+  },
+  "recoverable_model_waits": {
+    "shared:smith": {
+      "status": "recoverable_wait",
+      "source_status": "rule_rejection",
+      "code": "option_unavailable",
+      "replan_policy": "stale_option_v1",
+      "next_due": 17101.0833333289
+    }
+  },
+  "ledger_before": {
+    "ledger_id": "7bdc5a4c-0fe5-4372-8aee-dc2b398e0bc7",
+    "model": "kimi-k2.6",
+    "authorized_cny": 54.0,
+    "allocation_cap_cny": 53.9,
+    "settled_cny": 0.1195115,
+    "prior_unverified_cny": 52.8583012,
+    "reserved_cny": 0.0,
+    "liability_cny": 52.9778127,
+    "remaining_allocatable_cny": 0.9221873,
+    "counts": {
+      "settled": 6
+    },
+    "halted": "",
+    "deadline_utc": 1790218358
+  },
+  "ledger_after": {
+    "ledger_id": "7bdc5a4c-0fe5-4372-8aee-dc2b398e0bc7",
+    "model": "kimi-k2.6",
+    "authorized_cny": 54.0,
+    "allocation_cap_cny": 53.9,
+    "settled_cny": 0.3797089,
+    "prior_unverified_cny": 52.8583012,
+    "reserved_cny": 0.0,
+    "liability_cny": 53.2380101,
+    "remaining_allocatable_cny": 0.6619899,
+    "counts": {
+      "settled": 18
+    },
+    "halted": "",
+    "deadline_utc": 1790218358
+  },
+  "capture_exists": true,
+  "original_world_promoted": false,
+  "budget_stop_reason": "",
+  "upstream_requests": 12,
+  "upstream_concurrency": 1,
+  "carried_uncertainty_reviewed": false,
+  "gateway_shutdown": {
+    "intake_closed": true,
+    "workers_accepted": 24,
+    "workers_in_flight": false,
+    "drained_complete": true,
+    "unresolved_workers": 0,
+    "unresolved_operations": [],
+    "workers_pending_at_engine_exit": 0,
+    "operations_pending_at_engine_exit": [],
+    "engine_exited_with_workers_pending": false,
+    "refused_connections": 0,
+    "worker_start_failures": 0,
+    "drain_grace_seconds": 40.0,
+    "drain_error": ""
+  },
+  "shutdown_incomplete": false,
+  "shutdown_wait_seconds": 45.0,
+  "wall_limit_seconds": 400.0,
+  "idle_completed": false,
+  "world_progress_observed": true,
+  "world_progress": {
+    "comparison_status": "comparable",
+    "observed": true,
+    "absolute": {
+      "baseline": {
+        "status": "available",
+        "world_id": "shared:restart-20260918-01",
+        "life_seq": 368,
+        "godot_elapsed_seconds": 15293.849999995537,
+        "world_elapsed_seconds": 15293.849999995537
+      },
+      "capture": {
+        "world_id": "shared:restart-20260918-01",
+        "source_seq": 0,
+        "life_seq": 375,
+        "new_event_count": 375
+      },
+      "gm_export": {
+        "world_id": "shared:restart-20260918-01",
+        "source_revision": {
+          "godot_elapsed_seconds": 15593.5166666621,
+          "life_seq": 375,
+          "proposal_sequence": 0,
+          "world_elapsed_seconds": 15593.5166666621
+        },
+        "godot_elapsed_seconds": 15593.5166666621,
+        "world_elapsed_seconds": 15593.5166666621
+      }
+    },
+    "delta": {
+      "capture_life_seq": 7,
+      "gm_life_seq": 7,
+      "gm_godot_elapsed_seconds": 299.6666666665642,
+      "gm_world_elapsed_seconds": 299.6666666665642
+    }
+  },
+  "startup_fault_export": {
+    "status": "not_applicable"
+  }
+}

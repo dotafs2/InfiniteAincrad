@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "kind": "host_followup_terminal_job_observation",
+  "created_at_utc": "2026-09-24T02:56:58.937931+00:00",
+  "world_id": "shared:restart-20260918-01",
+  "gm_id": "gm-05",
+  "issue_id": "issue-8c2771c2c745",
+  "follows_acknowledged_receipt_sha256": "106a297e56f02a520c661b345a629e57c6c2d1b295c4058cac8937452620bd7a",
+  "world_seq": 378,
+  "world_sha256": "44a6f38a1964f37bef3e8e5765b3a1b06413c11ec0b09294e73846c97b9327ba",
+  "request": "Acknowledge the terminal results you asked to verify. Decide whether these facts justify any future bounded investigation; do not change the current world or infer a requested feature from a profession.",
+  "wren_terminal_commands": {
+    "turn:shared:baker:0:29": {
+      "payload": {
+        "actor_id": "shared:baker",
+        "action": "harvest_ration",
+        "provenance": "opengameagent_live"
+      },
+      "status": "rejected",
+      "result": {
+        "ok": false,
+        "code": "resources_unavailable",
+        "actor_id": "shared:baker",
+        "command_id": "turn:shared:baker:0:29"
+      }
+    },
+    "turn:shared:baker:0:30": {
+      "payload": {
+        "actor_id": "shared:baker",
+        "action": "harvest_ration",
+        "provenance": "opengameagent_live"
+      },
+      "status": "rejected",
+      "result": {
+        "ok": false,
+        "code": "resources_unavailable",
+        "actor_id": "shared:baker",
+        "command_id": "turn:shared:baker:0:30"
+      }
+    }
+  },
+  "new_wren_pending_job": {
+    "action": "harvest_ration",
+    "command_id": "turn:shared:baker:0:31",
+    "elapsed": 0.5166666666666666,
+    "provenance": "opengameagent_live"
+  },
+  "window06": {
+    "from_seq": 368,
+    "to_seq": 375,
+    "engine_exit": 0,
+    "requested_duration_fulfilled": true,
+    "shutdown": {
+      "admission_closed": true,
+      "admission_closed_reason": "episode_duration_elapsed",
+      "capture_reason": "episode_duration_elapsed",
+      "capture_seconds": 300.001414333305,
+      "duration_fulfilled": true,
+      "exit_code": 0,
+      "in_flight": [],
+      "paused_at_capture": false,
+      "paused_seconds": 0.0,
+      "requested_seconds": 300.0,
+      "resident_requests_owed": [],
+      "resolved": true,
+      "running_seconds": 300.001414333305,
+      "timed_out": false,
+      "wait_limit_seconds": 45.0,
+      "waited_seconds": 0.0,
+      "wall_elapsed_seconds": 305.948405,
+      "wall_limit_seconds": 400.0
+    },
+    "validation_passed": false,
+    "reason": "Fern known reply reason_too_long; not an unknown paid call",
+    "new_settled_calls": 12,
+    "new_cost_cny": 0.2601974,
+    "all_gateway_workers_drained": true,
+    "actual_harvest_event": {
+      "seq": 373,
+      "type": "harvest_ration",
+      "actor_id": "shared:well-keeper"
+    },
+    "wren_food_gained": 0
+  },
+  "window07_startup_failure": {
+    "no_engine_started": true,
+    "error": "WinError2 executable path lookup failed",
+    "paid_calls": 0,
+    "world_unchanged": true,
+    "separate_verified_binary_path_retry": "life-window-08"
+  },
+  "window08": {
+    "from_seq": 375,
+    "to_seq": 378,
+    "world_sha256": "44a6f38a1964f37bef3e8e5765b3a1b06413c11ec0b09294e73846c97b9327ba",
+    "validation_passed": true,
+    "world_elapsed_delta": 59.93333333333794,
+    "shutdown": {
+      "admission_closed": true,
+      "admission_closed_reason": "episode_duration_elapsed",
+      "capture_reason": "episode_duration_elapsed",
+      "capture_seconds": 60.0333333333326,
+      "duration_fulfilled": true,
+      "exit_code": 0,
+      "in_flight": [],
+      "paused_at_capture": false,
+      "paused_seconds": 0.0,
+      "requested_seconds": 60.0,
+      "resident_requests_owed": [],
+      "resolved": true,
+      "running_seconds": 60.0333333333326,
+      "timed_out": false,
+      "wait_limit_seconds": 45.0,
+      "waited_seconds": 0.0,
+      "wall_elapsed_seconds": 60.381259,
+      "wall_limit_seconds": 100.0
+    },
+    "all_owned_processes_exited": true,
+    "gateway_shutdown": {
+      "intake_closed": true,
+      "workers_accepted": 6,
+      "workers_in_flight": false,
+      "drained_complete": true,
+      "unresolved_workers": 0,
+      "unresolved_operations": [],
+      "workers_pending_at_engine_exit": 0,
+      "operations_pending_at_engine_exit": [],
+      "engine_exited_with_workers_pending": false,
+      "refused_connections": 0,
+      "worker_start_failures": 0,
+      "drain_grace_seconds": 40.0,
+      "drain_error": ""
+    },
+    "new_settled_calls": 3,
+    "new_cost_cny": 0.0636441,
+    "pending_jobs": {
+      "shared:baker": {
+        "action": "harvest_ration",
+        "command_id": "turn:shared:baker:0:31",
+        "elapsed": 0.5166666666666666,
+        "provenance": "opengameagent_live"
+      }
+    },
+    "controllers": {
+      "shared:well-keeper": "settled",
+      "shared:baker": "settled",
+      "shared:smith": "rule_rejection",
+      "shared:carpenter": "settled",
+      "shared:innkeeper": "settled",
+      "shared:herder": "settled",
+      "shared:gardener": "settled",
+      "shared:weaver": "settled",
+      "shared:fisher": "settled",
+      "shared:healer": "settled"
+    },
+    "fern_length_recovery": "valid_new_decision_settled_original_invalid_reply_preserved",
+    "flint_recoverable_wait": {
+      "status": "recoverable_wait",
+      "source_status": "rule_rejection",
+      "code": "option_unavailable",
+      "replan_policy": "stale_option_v1",
+      "next_due": 17101.0833333289
+    },
+    "exact_nested_cold_restore": "passed"
+  },
+  "resource_audit": {
+    "sha256": "1c62cb191fc8a925a4f02a2671449ed5145c1ea5707a466119cb1d4d0d3c37b9",
+    "totals": {
+      "food_conserved_across_snapshots": true,
+      "per_resident_food_balances_match_each_interval": true,
+      "food_conservation_values": [
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "foraging_conserved_at_each_snapshot": true,
+      "equation": "held food + foraging stock + eaten - foraging produced - bread baked",
+      "produced_by_source": {
+        "foraging": 34,
+        "bread": 0
+      },
+      "harvested": 40,
+      "eaten": 38,
+      "given": 1
+    },
+    "intervals": [
+      {
+        "from_seq": 354,
+        "to_seq": 360,
+        "elapsed_seconds": 121.9333333332761,
+        "foraging_produced_delta": 0,
+        "foraging_harvested_delta": 1,
+        "harvest_events": 1,
+        "bread_baked_delta": 0,
+        "eaten_delta": 1,
+        "given_delta": 0,
+        "food_held_delta": 0,
+        "source_stock_delta": -1,
+        "food_conservation_delta": 0,
+        "food_conservation_ok": true,
+        "per_resident_food_balances_match": true,
+        "harvest_counter_matches_events": true,
+        "sparse_endpoint_limitation": "endpoint matches do not establish continuous empty inventory or continuous zero fullness"
+      },
+      {
+        "from_seq": 360,
+        "to_seq": 368,
+        "elapsed_seconds": 119.8666666666104,
+        "foraging_produced_delta": 0,
+        "foraging_harvested_delta": 1,
+        "harvest_events": 1,
+        "bread_baked_delta": 0,
+        "eaten_delta": 0,
+        "given_delta": 0,
+        "food_held_delta": 1,
+        "source_stock_delta": -1,
+        "food_conservation_delta": 0,
+        "food_conservation_ok": true,
+        "per_resident_food_balances_match": true,
+        "harvest_counter_matches_events": true,
+        "sparse_endpoint_limitation": "endpoint matches do not establish continuous empty inventory or continuous zero fullness"
+      },
+      {
+        "from_seq": 368,
+        "to_seq": 375,
+        "elapsed_seconds": 299.666666666526,
+        "foraging_produced_delta": 1,
+        "foraging_harvested_delta": 1,
+        "harvest_events": 1,
+        "bread_baked_delta": 0,
+        "eaten_delta": 0,
+        "given_delta": 0,
+        "food_held_delta": 1,
+        "source_stock_delta": 0,
+        "food_conservation_delta": 0,
+        "food_conservation_ok": true,
+        "per_resident_food_balances_match": true,
+        "harvest_counter_matches_events": true,
+        "sparse_endpoint_limitation": "endpoint matches do not establish continuous empty inventory or continuous zero fullness"
+      },
+      {
+        "from_seq": 375,
+        "to_seq": 378,
+        "elapsed_seconds": 59.9333333333052,
+        "foraging_produced_delta": 0,
+        "foraging_harvested_delta": 0,
+        "harvest_events": 0,
+        "bread_baked_delta": 0,
+        "eaten_delta": 0,
+        "given_delta": 0,
+        "food_held_delta": 0,
+        "source_stock_delta": 0,
+        "food_conservation_delta": 0,
+        "food_conservation_ok": true,
+        "per_resident_food_balances_match": true,
+        "harvest_counter_matches_events": true,
+        "sparse_endpoint_limitation": "endpoint matches do not establish continuous empty inventory or continuous zero fullness"
+      }
+    ]
+  },
+  "boundaries": [
+    "Wren original29 and retry30 both failed; original progress was neither lost nor fabricated.",
+    "Natural production/harvesting conservation passes; source stock remains0 and one newer Wren harvest31 is pending.",
+    "One valid resumed meal explanation and limited observations do not demonstrate sustainable supply or omniscient resource knowledge.",
+    "The new awake-guard300-second run met its duration with clean process/drain, but its separate model-validation failure remains failed.",
+    "Budget ledgers and earlier failures are retained; no stock or rates changed."
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "from_seq": 360,
+  "to_seq": 368,
+  "world_sha256": "18a48808f1dfeaa1f09a0174c362035e044a3d83c679d37ae954483aca530359",
+  "validation_passed": true,
+  "world_elapsed_delta": 119.8666666666104,
+  "scene_shutdown": {
+    "admission_closed": true,
+    "admission_closed_reason": "episode_duration_elapsed",
+    "capture_reason": "episode_duration_elapsed",
+    "capture_seconds": 120.016666666679,
+    "duration_fulfilled": true,
+    "exit_code": 0,
+    "in_flight": [],
+    "paused_at_capture": false,
+    "paused_seconds": 0.0,
+    "requested_seconds": 120.0,
+    "resident_requests_owed": [],
+    "resolved": true,
+    "running_seconds": 120.016666666679,
+    "timed_out": false,
+    "wait_limit_seconds": 45.0,
+    "waited_seconds": 0.0,
+    "wall_elapsed_seconds": 121.634656,
+    "wall_limit_seconds": 200.0
+  },
+  "wrapper_wall_seconds": 132.875,
+  "all_owned_processes_exited": true,
+  "gateway_shutdown": {
+    "intake_closed": true,
+    "workers_accepted": 12,
+    "workers_in_flight": false,
+    "drained_complete": true,
+    "unresolved_workers": 0,
+    "unresolved_operations": [],
+    "workers_pending_at_engine_exit": 0,
+    "operations_pending_at_engine_exit": [],
+    "engine_exited_with_workers_pending": false,
+    "refused_connections": 0,
+    "worker_start_failures": 0,
+    "drain_grace_seconds": 40.0,
+    "drain_error": ""
+  },
+  "new_settled_calls": 6,
+  "new_cost_cny": 0.1195115,
+  "all_ten_controllers_settled": true,
+  "pending_jobs": 1,
+  "resumed_jobs": {
+    "shared:baker": {
+      "command_id": "turn:shared:baker:0:29",
+      "status": "pending",
+      "pending": {
+        "action": "harvest_ration",
+        "command_id": "turn:shared:baker:0:29",
+        "elapsed": 13.949999999999989,
+        "provenance": "opengameagent_live"
+      },
+      "later_events": []
+    },
+    "shared:herder": {
+      "command_id": "turn:shared:herder:0:23",
+      "status": "completed",
+      "pending": null,
+      "later_events": [
+        {
+          "seq": 362,
+          "type": "rest"
+        }
+      ]
+    },
+    "shared:smith": {
+      "command_id": "turn:shared:smith:0:45",
+      "status": "completed",
+      "pending": null,
+      "later_events": [
+        {
+          "seq": 366,
+          "type": "harvest_ration"
+        }
+      ]
+    },
+    "shared:well-keeper": {
+      "command_id": "turn:shared:well-keeper:3:27",
+      "status": "completed",
+      "pending": null,
+      "later_events": [
+        {
+          "seq": 363,
+          "type": "rest"
+        }
+      ]
+    }
+  },
+  "exact_nested_cold_restore": "passed",
+  "admission_limit_reached": true,
+  "sustainability_proven": false
+}
