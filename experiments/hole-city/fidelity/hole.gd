@@ -96,7 +96,7 @@ func _player_direction() -> Vector2:
 	if d.length_squared()>0:return game.screen_direction(d.normalized())
 	if touch_index>=0:return game.screen_direction(joystick.limit_length())
 	if dragged:
-		d=(get_viewport().get_mouse_position()-mouse_origin)/100.0
+		d=(get_viewport().get_mouse_position()-mouse_origin)/80.0
 		return game.screen_direction(d.limit_length())
 	return Vector2.ZERO
 

@@ -1,0 +1,4439 @@
+{
+  "schema": 1,
+  "authoring": "Original Blender geometry via Blender MCP command handlers",
+  "count": 208,
+  "assets": [
+    {
+      "id": "001_row_house_01",
+      "group": "building",
+      "kind": "row_house",
+      "variant": 1,
+      "path": "res://assets/city_kit/001_row_house_01.glb",
+      "size": [
+        4.6,
+        6.6000000000000005,
+        6.35
+      ],
+      "center": [
+        0.0,
+        3.3000000000000003,
+        -0.0
+      ],
+      "triangles": 870,
+      "geometry_sha256": "a75a5496e8493aeb08c5632dce4503b9f92a39922797d6694459bc6545680b57",
+      "file_sha256": "b4a7927db2e673e83dfa9ee6e1ea13e370fa07e8ab6237db0f7b8a8832b3ace4",
+      "animations": []
+    },
+    {
+      "id": "002_row_house_02",
+      "group": "building",
+      "kind": "row_house",
+      "variant": 2,
+      "path": "res://assets/city_kit/002_row_house_02.glb",
+      "size": [
+        4.81,
+        7.73,
+        7.195
+      ],
+      "center": [
+        0.0,
+        3.865,
+        0.3025
+      ],
+      "triangles": 1554,
+      "geometry_sha256": "8c59be3602e1536e2021a703325ce2f692ef080284457f76888594420051318c",
+      "file_sha256": "29fa769fd9d20b2efc3b356f524539d2d7217ee8c64206a8cb77de39192545a9",
+      "animations": []
+    },
+    {
+      "id": "003_row_house_03",
+      "group": "building",
+      "kind": "row_house",
+      "variant": 3,
+      "path": "res://assets/city_kit/003_row_house_03.glb",
+      "size": [
+        5.02,
+        8.86,
+        6.83
+      ],
+      "center": [
+        0.0,
+        4.43,
+        -0.0
+      ],
+      "triangles": 1638,
+      "geometry_sha256": "d385a8073f70161b2ecfe9758b1f591466c09dd8475758329f651a10ba277407",
+      "file_sha256": "8c03c4468f198339346043ddce8999381fc12a8f2b5925c26efad0f2f02128f8",
+      "animations": []
+    },
+    {
+      "id": "004_row_house_04",
+      "group": "building",
+      "kind": "row_house",
+      "variant": 4,
+      "path": "res://assets/city_kit/004_row_house_04.glb",
+      "size": [
+        5.2299999999999995,
+        10.05,
+        6.955
+      ],
+      "center": [
+        0.0,
+        5.025,
+        0.3025
+      ],
+      "triangles": 2034,
+      "geometry_sha256": "ae395c29c5fcc5548077e010c1e8bd7f00d32b12c25ca9cc9e3deb53015993b4",
+      "file_sha256": "68247edec76bccaae78082f143e10fb971ceb5f01d74c1d4e8f7e894264afdb9",
+      "animations": []
+    },
+    {
+      "id": "005_row_house_05",
+      "group": "building",
+      "kind": "row_house",
+      "variant": 5,
+      "path": "res://assets/city_kit/005_row_house_05.glb",
+      "size": [
+        5.4399999999999995,
+        11.299999999999999,
+        6.59
+      ],
+      "center": [
+        0.0,
+        5.6499999999999995,
+        -0.0
+      ],
+      "triangles": 2022,
+      "geometry_sha256": "ce75ad70c6b68ae12651669419ebaf55988f02fa4f9261615b20c9e533279415",
+      "file_sha256": "ecaca30736cde2d051ede631fbd4e78274c98b7cf20024275a66c8e9a55df891",
+      "animations": []
+    },
+    {
+      "id": "006_row_house_06",
+      "group": "building",
+      "kind": "row_house",
+      "variant": 6,
+      "path": "res://assets/city_kit/006_row_house_06.glb",
+      "size": [
+        5.6499999999999995,
+        12.55,
+        7.435
+      ],
+      "center": [
+        0.0,
+        6.275,
+        0.30249999999999977
+      ],
+      "triangles": 2994,
+      "geometry_sha256": "02fcdadd9ff7b1a3d7a8262efa203033c7f05aef97a64a2f874a8027c3e0b511",
+      "file_sha256": "20bd50182109a7043bd2a99d7b07606b4c0783bb74dafaaac8054d2c443bd676",
+      "animations": []
+    },
+    {
+      "id": "007_corner_shop_01",
+      "group": "building",
+      "kind": "corner_shop",
+      "variant": 1,
+      "path": "res://assets/city_kit/007_corner_shop_01.glb",
+      "size": [
+        4.325,
+        5.87,
+        6.85
+      ],
+      "center": [
+        0.0,
+        2.935,
+        0.25
+      ],
+      "triangles": 996,
+      "geometry_sha256": "6520ed5cfff859bdf923d5e1fc2b9736951f32db66b72ff9b609b34a97e9b85a",
+      "file_sha256": "9931d3a6fcf51f7aae86d877b4aeb61e4f7c223e98cebb0e2bdc4dd1b30f3a58",
+      "animations": []
+    },
+    {
+      "id": "008_corner_shop_02",
+      "group": "building",
+      "kind": "corner_shop",
+      "variant": 2,
+      "path": "res://assets/city_kit/008_corner_shop_02.glb",
+      "size": [
+        4.535,
+        7.0,
+        7.09
+      ],
+      "center": [
+        0.0,
+        3.5,
+        0.25
+      ],
+      "triangles": 1716,
+      "geometry_sha256": "41907c5e9333dc4c1f4b0785b498f7e8ccba654caff1302e9abae366ac94d03e",
+      "file_sha256": "94a55ed7f407ab975701fadc568023b99cf40c3ab9d63f84ba454652c20c59ff",
+      "animations": []
+    },
+    {
+      "id": "009_corner_shop_03",
+      "group": "building",
+      "kind": "corner_shop",
+      "variant": 3,
+      "path": "res://assets/city_kit/009_corner_shop_03.glb",
+      "size": [
+        4.745,
+        8.129999999999999,
+        7.33
+      ],
+      "center": [
+        0.0,
+        4.0649999999999995,
+        0.24999999999999978
+      ],
+      "triangles": 1860,
+      "geometry_sha256": "ceeb32aa6ad120cc3e473086c33e53d33406a5d435012cf1ebcae714e9dd0a26",
+      "file_sha256": "26dfcaac0d6bbdd051b82e0e5ae8d05f3c2715da71010adf6a4b7e3b94dffb00",
+      "animations": []
+    },
+    {
+      "id": "010_corner_shop_04",
+      "group": "building",
+      "kind": "corner_shop",
+      "variant": 4,
+      "path": "res://assets/city_kit/010_corner_shop_04.glb",
+      "size": [
+        4.955,
+        9.26,
+        6.85
+      ],
+      "center": [
+        0.0,
+        4.63,
+        0.25
+      ],
+      "triangles": 2148,
+      "geometry_sha256": "1d2fb5547a3c51024fc8cb1be1a09e22ef726eb4c426fe30236f514984da711d",
+      "file_sha256": "fc9d23817fa0f85236305c8846197bec2c5e7e08d81bdb2ea041d4aab39d981a",
+      "animations": []
+    },
+    {
+      "id": "011_corner_shop_05",
+      "group": "building",
+      "kind": "corner_shop",
+      "variant": 5,
+      "path": "res://assets/city_kit/011_corner_shop_05.glb",
+      "size": [
+        5.165,
+        10.389999999999999,
+        7.09
+      ],
+      "center": [
+        0.0,
+        5.194999999999999,
+        0.25
+      ],
+      "triangles": 2196,
+      "geometry_sha256": "8589816f989450a7e95ffb473942e7f61c4d95da31e2cd851a173a3194d772aa",
+      "file_sha256": "51dc396d07a3817d3447c734f6424a2e9153728ecaf696f52f6f2b862bf45ee3",
+      "animations": []
+    },
+    {
+      "id": "012_corner_shop_06",
+      "group": "building",
+      "kind": "corner_shop",
+      "variant": 6,
+      "path": "res://assets/city_kit/012_corner_shop_06.glb",
+      "size": [
+        5.375,
+        11.52,
+        7.33
+      ],
+      "center": [
+        0.0,
+        5.76,
+        0.24999999999999978
+      ],
+      "triangles": 3204,
+      "geometry_sha256": "09df12fa0b723aa2c014279f59de397324446e7c718a7c1df6c235215a812720",
+      "file_sha256": "782a1a319234e67d5819ef195f019c55f19ca6e1ac93dd074e4996006462a882",
+      "animations": []
+    },
+    {
+      "id": "013_brick_apartment_01",
+      "group": "building",
+      "kind": "brick_apartment",
+      "variant": 1,
+      "path": "res://assets/city_kit/013_brick_apartment_01.glb",
+      "size": [
+        4.325,
+        5.87,
+        6.865
+      ],
+      "center": [
+        0.0,
+        2.935,
+        0.25750000000000006
+      ],
+      "triangles": 1032,
+      "geometry_sha256": "660c432b216e0d5784827e3d11940e92ac3295d99f4552e2b049e1b14bd52629",
+      "file_sha256": "5c56a2bb83e48c86405b7f0be9e2c646f62ae70f03bb99c068ab70d3648f6899",
+      "animations": []
+    },
+    {
+      "id": "014_brick_apartment_02",
+      "group": "building",
+      "kind": "brick_apartment",
+      "variant": 2,
+      "path": "res://assets/city_kit/014_brick_apartment_02.glb",
+      "size": [
+        4.535,
+        7.0,
+        7.105
+      ],
+      "center": [
+        0.0,
+        3.5,
+        0.25750000000000006
+      ],
+      "triangles": 1752,
+      "geometry_sha256": "992ea0cb4a0fdb4135a2d8286887c97f9f848700c68efcaadb486c1e9fb126a4",
+      "file_sha256": "f3ad468f625088fe27c1fe8c0848146fa3efbc048380df1a51a60e35cfe43575",
+      "animations": []
+    },
+    {
+      "id": "015_brick_apartment_03",
+      "group": "building",
+      "kind": "brick_apartment",
+      "variant": 3,
+      "path": "res://assets/city_kit/015_brick_apartment_03.glb",
+      "size": [
+        4.745,
+        8.129999999999999,
+        7.344999999999999
+      ],
+      "center": [
+        0.0,
+        4.0649999999999995,
+        0.2574999999999996
+      ],
+      "triangles": 1896,
+      "geometry_sha256": "c3c71441130bad04f063e42edde182de1189c5ac3b4dbc969715c515b18bc78f",
+      "file_sha256": "500628b7ef940f5a1c1bed027f9034b73aaf846a1f33321a709c4f43f42a6dda",
+      "animations": []
+    },
+    {
+      "id": "016_brick_apartment_04",
+      "group": "building",
+      "kind": "brick_apartment",
+      "variant": 4,
+      "path": "res://assets/city_kit/016_brick_apartment_04.glb",
+      "size": [
+        4.955,
+        9.26,
+        6.865
+      ],
+      "center": [
+        0.0,
+        4.63,
+        0.25750000000000006
+      ],
+      "triangles": 2184,
+      "geometry_sha256": "968d53dccc7ee8f03929466190c33b251ac8d017dbd42e4b9a50e16bdadac42c",
+      "file_sha256": "a9569b8a903b464777d815ab6a674d332fe54b5065c0539855b74dfb7b5cd5ae",
+      "animations": []
+    },
+    {
+      "id": "017_brick_apartment_05",
+      "group": "building",
+      "kind": "brick_apartment",
+      "variant": 5,
+      "path": "res://assets/city_kit/017_brick_apartment_05.glb",
+      "size": [
+        5.165,
+        10.389999999999999,
+        7.105
+      ],
+      "center": [
+        0.0,
+        5.194999999999999,
+        0.25750000000000006
+      ],
+      "triangles": 2232,
+      "geometry_sha256": "9e6a5badaa89f49830b9c9faae007ce831a01a2c5d90ed995978603dd4a53140",
+      "file_sha256": "060e2b962b5037fc5cf3f7880b28a5b336c8fd788e15ab200586efd0d1d3d61d",
+      "animations": []
+    },
+    {
+      "id": "018_brick_apartment_06",
+      "group": "building",
+      "kind": "brick_apartment",
+      "variant": 6,
+      "path": "res://assets/city_kit/018_brick_apartment_06.glb",
+      "size": [
+        5.375,
+        11.52,
+        7.344999999999999
+      ],
+      "center": [
+        0.0,
+        5.76,
+        0.2574999999999996
+      ],
+      "triangles": 3240,
+      "geometry_sha256": "0ce366cd0471c3f57eca4d4c7c96078b4dd41d281b99bf8a7631db4f155cbffd",
+      "file_sha256": "59089e2fab6c18404e6de233194a69645ae9c429c9722125e04da16e27aec4f6",
+      "animations": []
+    },
+    {
+      "id": "019_office_01",
+      "group": "building",
+      "kind": "office",
+      "variant": 1,
+      "path": "res://assets/city_kit/019_office_01.glb",
+      "size": [
+        4.325,
+        8.67,
+        6.35
+      ],
+      "center": [
+        0.0,
+        4.335,
+        -0.0
+      ],
+      "triangles": 1704,
+      "geometry_sha256": "a9f676e189d71baab1501737c7eb376bf6d4db0776bd1e9b7d007182bc227e43",
+      "file_sha256": "253d927f1038028040f1779948249d4a96a00535bd41cf1be603bde570c9cff6",
+      "animations": []
+    },
+    {
+      "id": "020_office_02",
+      "group": "building",
+      "kind": "office",
+      "variant": 2,
+      "path": "res://assets/city_kit/020_office_02.glb",
+      "size": [
+        4.535,
+        9.77,
+        6.59
+      ],
+      "center": [
+        0.0,
+        4.885,
+        -0.0
+      ],
+      "triangles": 2616,
+      "geometry_sha256": "274bc7987d9777c03c1c9cb622a9ff725b90fe61cc73dea7af094e35e0e8a9e5",
+      "file_sha256": "8c0054380d37b10b10b87dd96f5e78017758e55d85f86a99049961cc0e9eadfa",
+      "animations": []
+    },
+    {
+      "id": "021_office_03",
+      "group": "building",
+      "kind": "office",
+      "variant": 3,
+      "path": "res://assets/city_kit/021_office_03.glb",
+      "size": [
+        4.745,
+        10.87,
+        6.83
+      ],
+      "center": [
+        0.0,
+        5.435,
+        -0.0
+      ],
+      "triangles": 2568,
+      "geometry_sha256": "2409d9e7ee03b1b61976fd4bd5d6dbf91a60f3f3f241505453b0d109374ccb94",
+      "file_sha256": "0deaf07422e833358d2d16584e744b02de8cfae5338aee5d833668e6ad94a6fc",
+      "animations": []
+    },
+    {
+      "id": "022_office_04",
+      "group": "building",
+      "kind": "office",
+      "variant": 4,
+      "path": "res://assets/city_kit/022_office_04.glb",
+      "size": [
+        4.955,
+        11.97,
+        6.35
+      ],
+      "center": [
+        0.0,
+        5.985,
+        -0.0
+      ],
+      "triangles": 3528,
+      "geometry_sha256": "58d48956175e550f4a20af3c4e751cd9643a9c91ea7d8712ace0fd5123248a84",
+      "file_sha256": "05079a04312eb5c8ab275ebbdf24ff609b2530e2700544d57069e5a98ba011e2",
+      "animations": []
+    },
+    {
+      "id": "023_office_05",
+      "group": "building",
+      "kind": "office",
+      "variant": 5,
+      "path": "res://assets/city_kit/023_office_05.glb",
+      "size": [
+        5.165,
+        13.07,
+        6.59
+      ],
+      "center": [
+        0.0,
+        6.535,
+        -0.0
+      ],
+      "triangles": 2904,
+      "geometry_sha256": "6df2196622f6f9b569dbc3412392c2c545c72f91a20233895bfdd6f79a98fca6",
+      "file_sha256": "82fff38233713cabee21f9d819cb021791a1d37273f64de5baa76fa2ee08af6c",
+      "animations": []
+    },
+    {
+      "id": "024_office_06",
+      "group": "building",
+      "kind": "office",
+      "variant": 6,
+      "path": "res://assets/city_kit/024_office_06.glb",
+      "size": [
+        5.375,
+        14.17,
+        6.83
+      ],
+      "center": [
+        0.0,
+        7.085,
+        -0.0
+      ],
+      "triangles": 4104,
+      "geometry_sha256": "588f2ef88996d0bbc5c7258deeaf5c1f67eb1c0ec281a9906f68e528ccf9f4cc",
+      "file_sha256": "d56aeef4d752d2477720b58fe1f3b421a6d02955f4ee9f7a2e4cd426e7ffa729",
+      "animations": []
+    },
+    {
+      "id": "025_warehouse_01",
+      "group": "building",
+      "kind": "warehouse",
+      "variant": 1,
+      "path": "res://assets/city_kit/025_warehouse_01.glb",
+      "size": [
+        6.2250000000000005,
+        4.47,
+        8.35
+      ],
+      "center": [
+        0.0,
+        2.235,
+        0.25
+      ],
+      "triangles": 612,
+      "geometry_sha256": "385a9eeeef322ce21027a9a169043e2cd42051b83062d9c7b3e4645bf808e8af",
+      "file_sha256": "99b35895a290d07202d865f957702d22793be476e83e8f56893df7d1c2abbd4d",
+      "animations": []
+    },
+    {
+      "id": "026_warehouse_02",
+      "group": "building",
+      "kind": "warehouse",
+      "variant": 2,
+      "path": "res://assets/city_kit/026_warehouse_02.glb",
+      "size": [
+        6.465000000000001,
+        4.71,
+        8.35
+      ],
+      "center": [
+        0.0,
+        2.355,
+        0.25
+      ],
+      "triangles": 756,
+      "geometry_sha256": "69c510d0df3ac6c51305d1eacda792acfb2bad1f56ec0758346d6aa305fa5676",
+      "file_sha256": "9d8db3f92badbdcb309131c0fd744265d355be03d5cd1b28a6a27aecbdddf764",
+      "animations": []
+    },
+    {
+      "id": "027_warehouse_03",
+      "group": "building",
+      "kind": "warehouse",
+      "variant": 3,
+      "path": "res://assets/city_kit/027_warehouse_03.glb",
+      "size": [
+        6.705000000000001,
+        4.949999999999999,
+        8.35
+      ],
+      "center": [
+        0.0,
+        2.4749999999999996,
+        0.25
+      ],
+      "triangles": 708,
+      "geometry_sha256": "7ea8a5230e436d05dc3f49cfc1d174686be3e6f2cda8a5e10de076c166cf5c9c",
+      "file_sha256": "36e0d5df7ab78438b45308954db03c7f3215ce859e51426baacb4b0d35956f2b",
+      "animations": []
+    },
+    {
+      "id": "028_warehouse_04",
+      "group": "building",
+      "kind": "warehouse",
+      "variant": 4,
+      "path": "res://assets/city_kit/028_warehouse_04.glb",
+      "size": [
+        6.945,
+        5.1899999999999995,
+        8.35
+      ],
+      "center": [
+        0.0,
+        2.5949999999999998,
+        0.25
+      ],
+      "triangles": 708,
+      "geometry_sha256": "988fe7050044a5750d00e2f579d9a7cc107b8b28cdbcc8e6a51d46225d068f34",
+      "file_sha256": "9d68b89f595e036c458505984d170c85c80783f893fa5204e723155e582acb51",
+      "animations": []
+    },
+    {
+      "id": "029_warehouse_05",
+      "group": "building",
+      "kind": "warehouse",
+      "variant": 5,
+      "path": "res://assets/city_kit/029_warehouse_05.glb",
+      "size": [
+        7.1850000000000005,
+        5.43,
+        8.35
+      ],
+      "center": [
+        0.0,
+        2.715,
+        0.25
+      ],
+      "triangles": 660,
+      "geometry_sha256": "16a7109a85bf6228516b2f3b3c2e1c62b3c07e1b1077e240be0a7a4d8d9d0c01",
+      "file_sha256": "8001ab5567b93002f3c8dd09b5d8a65b8806ce33fe063efe06a75b78a344b6ec",
+      "animations": []
+    },
+    {
+      "id": "030_warehouse_06",
+      "group": "building",
+      "kind": "warehouse",
+      "variant": 6,
+      "path": "res://assets/city_kit/030_warehouse_06.glb",
+      "size": [
+        7.425000000000001,
+        5.67,
+        8.35
+      ],
+      "center": [
+        0.0,
+        2.835,
+        0.25
+      ],
+      "triangles": 1284,
+      "geometry_sha256": "1ae4e905f9335bbba9358fac98bd67d837ae71b4fd4bd36f8907b7f91f41536b",
+      "file_sha256": "eddf8df70262db174d4ea5c14d203024b8581eaefced7c2b8ee0a265e4807a48",
+      "animations": []
+    },
+    {
+      "id": "031_townhouse_01",
+      "group": "building",
+      "kind": "townhouse",
+      "variant": 1,
+      "path": "res://assets/city_kit/031_townhouse_01.glb",
+      "size": [
+        4.6,
+        6.6000000000000005,
+        6.925
+      ],
+      "center": [
+        0.0,
+        3.3000000000000003,
+        0.2875000000000001
+      ],
+      "triangles": 930,
+      "geometry_sha256": "9d27834908143aa4d7a284d371b3e5b5fffdba2b418f3f4d8c970b81a98f485a",
+      "file_sha256": "69fc9442e398e1501fcf810f5d7f764309d3aa61cb2310501c808cb34e0f75e4",
+      "animations": []
+    },
+    {
+      "id": "032_townhouse_02",
+      "group": "building",
+      "kind": "townhouse",
+      "variant": 2,
+      "path": "res://assets/city_kit/032_townhouse_02.glb",
+      "size": [
+        4.81,
+        7.73,
+        7.195
+      ],
+      "center": [
+        0.0,
+        3.865,
+        0.3025
+      ],
+      "triangles": 1614,
+      "geometry_sha256": "cd4cdbb365f297b6372fac28a01e08b32a12376257c5124523d3ab355c126e9a",
+      "file_sha256": "1c7d2694d71fa14f855c6b012536b08be25b72f9d19f8ba730fae20d73a47685",
+      "animations": []
+    },
+    {
+      "id": "033_townhouse_03",
+      "group": "building",
+      "kind": "townhouse",
+      "variant": 3,
+      "path": "res://assets/city_kit/033_townhouse_03.glb",
+      "size": [
+        5.02,
+        8.86,
+        7.404999999999999
+      ],
+      "center": [
+        0.0,
+        4.43,
+        0.28749999999999987
+      ],
+      "triangles": 1698,
+      "geometry_sha256": "628322f1f4380fc6a41ba8974837301f82abcdcb2ac5a3d7c8aa0357e3c9bd7e",
+      "file_sha256": "b2e9e83b551d166c205707fc809529b78c1000ab9a944efea03887ee4d8f9d9b",
+      "animations": []
+    },
+    {
+      "id": "034_townhouse_04",
+      "group": "building",
+      "kind": "townhouse",
+      "variant": 4,
+      "path": "res://assets/city_kit/034_townhouse_04.glb",
+      "size": [
+        5.2299999999999995,
+        10.05,
+        6.955
+      ],
+      "center": [
+        0.0,
+        5.025,
+        0.3025
+      ],
+      "triangles": 2094,
+      "geometry_sha256": "50d5fff061ef37185186bef2f3a3a47d854b52243d4641ac31386ee12b16f48f",
+      "file_sha256": "a823830a5f40efd975a7f7ebda5abd3b92122ae4d96e3b52fae17b8c37090fd2",
+      "animations": []
+    },
+    {
+      "id": "035_townhouse_05",
+      "group": "building",
+      "kind": "townhouse",
+      "variant": 5,
+      "path": "res://assets/city_kit/035_townhouse_05.glb",
+      "size": [
+        5.4399999999999995,
+        11.299999999999999,
+        7.165
+      ],
+      "center": [
+        0.0,
+        5.6499999999999995,
+        0.2875000000000001
+      ],
+      "triangles": 2082,
+      "geometry_sha256": "59afbd2a1733cfc71b7de59b502c03c5c650501dbe69766e306ad7a0957c37b9",
+      "file_sha256": "e2a8e074c214be6a0c8d214e01c951458e563ba3f3233daa88456940e4cea330",
+      "animations": []
+    },
+    {
+      "id": "036_townhouse_06",
+      "group": "building",
+      "kind": "townhouse",
+      "variant": 6,
+      "path": "res://assets/city_kit/036_townhouse_06.glb",
+      "size": [
+        5.6499999999999995,
+        12.55,
+        7.435
+      ],
+      "center": [
+        0.0,
+        6.275,
+        0.30249999999999977
+      ],
+      "triangles": 3054,
+      "geometry_sha256": "2ec9f43927c9895abd414e6eb5a1db9e905133fe8b4e1977c1635fde7eec5579",
+      "file_sha256": "badfd1e6d285b32587fbe75b399e8003d29b0c316129a50a9307100c481cb581",
+      "animations": []
+    },
+    {
+      "id": "037_hotel_01",
+      "group": "building",
+      "kind": "hotel",
+      "variant": 1,
+      "path": "res://assets/city_kit/037_hotel_01.glb",
+      "size": [
+        4.325,
+        5.87,
+        7.425
+      ],
+      "center": [
+        0.0,
+        2.935,
+        0.5375000000000001
+      ],
+      "triangles": 1068,
+      "geometry_sha256": "1972023f497be6344a8fbcb3580b760a8d4bb75e6e4b85cef6ed68461d481b14",
+      "file_sha256": "87c831400ca053e0b1ef396124241f62cf65a3926d2d0f4e856160a82a267d42",
+      "animations": []
+    },
+    {
+      "id": "038_hotel_02",
+      "group": "building",
+      "kind": "hotel",
+      "variant": 2,
+      "path": "res://assets/city_kit/038_hotel_02.glb",
+      "size": [
+        4.535,
+        7.0,
+        7.665
+      ],
+      "center": [
+        0.0,
+        3.5,
+        0.5375000000000001
+      ],
+      "triangles": 1788,
+      "geometry_sha256": "c9bdd119fc26f9c445df7cec9b86f5ea4a8b6350bf968b2cc1184c6263308c1f",
+      "file_sha256": "63cfebf028e69e778e14a13bb1eb46659dfc0fa71edef6784cdd2ed722c34a29",
+      "animations": []
+    },
+    {
+      "id": "039_hotel_03",
+      "group": "building",
+      "kind": "hotel",
+      "variant": 3,
+      "path": "res://assets/city_kit/039_hotel_03.glb",
+      "size": [
+        4.745,
+        8.129999999999999,
+        7.904999999999999
+      ],
+      "center": [
+        0.0,
+        4.0649999999999995,
+        0.5374999999999996
+      ],
+      "triangles": 1932,
+      "geometry_sha256": "8213022b0a84e449a0bb6039ed0d9a0930b8e45e9c5c53d02d6ebcc7c4c4684b",
+      "file_sha256": "4d69e9e2dd03f65e157e0c1282e99436e66b472619692c79678c0bcf6699d14b",
+      "animations": []
+    },
+    {
+      "id": "040_hotel_04",
+      "group": "building",
+      "kind": "hotel",
+      "variant": 4,
+      "path": "res://assets/city_kit/040_hotel_04.glb",
+      "size": [
+        4.955,
+        9.26,
+        7.425
+      ],
+      "center": [
+        0.0,
+        4.63,
+        0.5375000000000001
+      ],
+      "triangles": 2220,
+      "geometry_sha256": "731e724deee9f0da3546d2b69cfc5ff6985e13030a11152e71d15858374298ac",
+      "file_sha256": "455d3b3f6462bc2f864f152c7a66702fe806243726db695cccd82dcd891937c9",
+      "animations": []
+    },
+    {
+      "id": "041_hotel_05",
+      "group": "building",
+      "kind": "hotel",
+      "variant": 5,
+      "path": "res://assets/city_kit/041_hotel_05.glb",
+      "size": [
+        5.165,
+        10.389999999999999,
+        7.665
+      ],
+      "center": [
+        0.0,
+        5.194999999999999,
+        0.5375000000000001
+      ],
+      "triangles": 2268,
+      "geometry_sha256": "f266188fb70d0443da36ed1906ff9a4c58e9ebb7adfbbcb6f0f9fcde28b873de",
+      "file_sha256": "80d3e40e5df1d647f9cacedfdb2e74bf95476cb1806a6c4e0a1cc86888eea87a",
+      "animations": []
+    },
+    {
+      "id": "042_hotel_06",
+      "group": "building",
+      "kind": "hotel",
+      "variant": 6,
+      "path": "res://assets/city_kit/042_hotel_06.glb",
+      "size": [
+        5.375,
+        11.52,
+        7.904999999999999
+      ],
+      "center": [
+        0.0,
+        5.76,
+        0.5374999999999996
+      ],
+      "triangles": 3276,
+      "geometry_sha256": "a4de15b4535522a55519c3e7bbcd5454088d6cc8ff8f9197754da3fd889b3524",
+      "file_sha256": "dcea897ffd6d1bab96864eb5ef18f2e4ee1349a050a5090ae72fcf1c2b918825",
+      "animations": []
+    },
+    {
+      "id": "043_civic_hall_01",
+      "group": "building",
+      "kind": "civic_hall",
+      "variant": 1,
+      "path": "res://assets/city_kit/043_civic_hall_01.glb",
+      "size": [
+        4.6,
+        6.6000000000000005,
+        6.577169042607224
+      ],
+      "center": [
+        0.0,
+        3.3000000000000003,
+        0.1135845213036124
+      ],
+      "triangles": 942,
+      "geometry_sha256": "c99c45684d8bebd5bc27a593d0bc4942b0e62fed1c18386cd4911a5eca64e21c",
+      "file_sha256": "cf58188a7908d63a8fc55d5569dff894de55f1edfd92eb0299ec3ffe93f7112a",
+      "animations": []
+    },
+    {
+      "id": "044_civic_hall_02",
+      "group": "building",
+      "kind": "civic_hall",
+      "variant": 2,
+      "path": "res://assets/city_kit/044_civic_hall_02.glb",
+      "size": [
+        4.81,
+        7.73,
+        7.195
+      ],
+      "center": [
+        0.0,
+        3.865,
+        0.3025
+      ],
+      "triangles": 1626,
+      "geometry_sha256": "a27164ad127263659d838157e08e7e10297d52bd9b6b960608fadfeab36d9bbc",
+      "file_sha256": "f1406f53c1ae05b6740eb375f16f162cf1fe737186272ce9946401a807399246",
+      "animations": []
+    },
+    {
+      "id": "045_civic_hall_03",
+      "group": "building",
+      "kind": "civic_hall",
+      "variant": 3,
+      "path": "res://assets/city_kit/045_civic_hall_03.glb",
+      "size": [
+        5.02,
+        8.86,
+        7.057169042607224
+      ],
+      "center": [
+        0.0,
+        4.43,
+        0.11358452130361218
+      ],
+      "triangles": 1710,
+      "geometry_sha256": "541e0ba11e1724e2d3576ac1d13d4637b67cf624ceff323092321f9d7dfbdc3e",
+      "file_sha256": "3e87328e78c4b28d4cd9af2e176b4d6fb28039c9803d26e75a12a3dad7664fc0",
+      "animations": []
+    },
+    {
+      "id": "046_civic_hall_04",
+      "group": "building",
+      "kind": "civic_hall",
+      "variant": 4,
+      "path": "res://assets/city_kit/046_civic_hall_04.glb",
+      "size": [
+        5.2299999999999995,
+        10.05,
+        6.955
+      ],
+      "center": [
+        0.0,
+        5.025,
+        0.3025
+      ],
+      "triangles": 2106,
+      "geometry_sha256": "d9890eebb95a051bbbc2b9e3143f416dd5d721c98d5253c3b60950ed6f4514ac",
+      "file_sha256": "e5d11f1a153429a45cb37a947661e10021e48cf5f18d171b3f8b6858c3b6857d",
+      "animations": []
+    },
+    {
+      "id": "047_civic_hall_05",
+      "group": "building",
+      "kind": "civic_hall",
+      "variant": 5,
+      "path": "res://assets/city_kit/047_civic_hall_05.glb",
+      "size": [
+        5.4399999999999995,
+        11.299999999999999,
+        6.817169042607224
+      ],
+      "center": [
+        0.0,
+        5.6499999999999995,
+        0.1135845213036124
+      ],
+      "triangles": 2094,
+      "geometry_sha256": "f10e873b12cc4cc50b1487eb690f3cb6f2176a314efd1c435647931a52850c3c",
+      "file_sha256": "b532b4322fa98539512c9d21c3ee7991a71830cdad9cc9f1bd87d7fccab9817f",
+      "animations": []
+    },
+    {
+      "id": "048_civic_hall_06",
+      "group": "building",
+      "kind": "civic_hall",
+      "variant": 6,
+      "path": "res://assets/city_kit/048_civic_hall_06.glb",
+      "size": [
+        5.6499999999999995,
+        12.55,
+        7.435
+      ],
+      "center": [
+        0.0,
+        6.275,
+        0.30249999999999977
+      ],
+      "triangles": 3066,
+      "geometry_sha256": "0492d3a4813b3cbb9ff49aa81ac3901c7e1aa2a4a0a33a74622f19da09c25a06",
+      "file_sha256": "c4c684f9b14c4ab157bad9dcaf834741aede33f02339da33618c305c7810e063",
+      "animations": []
+    },
+    {
+      "id": "049_sedan_01",
+      "group": "vehicle",
+      "kind": "sedan",
+      "variant": 1,
+      "path": "res://assets/city_kit/049_sedan_01.glb",
+      "size": [
+        1.8136,
+        1.16,
+        3.376125
+      ],
+      "center": [
+        0.0,
+        0.59,
+        -0.011937500000000045
+      ],
+      "triangles": 642,
+      "geometry_sha256": "ac2bcdcf6e3c2faceeb1d5dfe4bbda3c19c8b63cfa5522a6c5420c404c069c35",
+      "file_sha256": "5a73883af7e12583385e621dd84fc9f2078637256226dafc23f7589586b93b5c",
+      "animations": []
+    },
+    {
+      "id": "050_sedan_02",
+      "group": "vehicle",
+      "kind": "sedan",
+      "variant": 2,
+      "path": "res://assets/city_kit/050_sedan_02.glb",
+      "size": [
+        1.8885,
+        1.1849999999999998,
+        3.5405300000000004
+      ],
+      "center": [
+        0.0,
+        0.6024999999999999,
+        -0.01293500000000003
+      ],
+      "triangles": 642,
+      "geometry_sha256": "8b84e41450045b02edc7bd3955284f0d96aff244d60b41b9cbd6e98aa35720b8",
+      "file_sha256": "a98f342c07e01779e132bb07c51b2d7fa2a82c14db9a966fdf5a986f38267103",
+      "animations": []
+    },
+    {
+      "id": "051_sedan_03",
+      "group": "vehicle",
+      "kind": "sedan",
+      "variant": 3,
+      "path": "res://assets/city_kit/051_sedan_03.glb",
+      "size": [
+        1.9634000000000003,
+        1.21,
+        3.70581
+      ],
+      "center": [
+        0.0,
+        0.615,
+        -0.013495000000000035
+      ],
+      "triangles": 642,
+      "geometry_sha256": "8edfab5d00082123ae78827f7ce739df7c34accf8ec6fb33d8c61f6de380acbd",
+      "file_sha256": "8865ddc4eb50b39e2f613676159cd53c355a7da7d6a973c884091bfb5ad33bde",
+      "animations": []
+    },
+    {
+      "id": "052_sedan_04",
+      "group": "vehicle",
+      "kind": "sedan",
+      "variant": 4,
+      "path": "res://assets/city_kit/052_sedan_04.glb",
+      "size": [
+        2.0383,
+        1.2349999999999999,
+        3.87109
+      ],
+      "center": [
+        0.0,
+        0.6275,
+        -0.014054999999999929
+      ],
+      "triangles": 642,
+      "geometry_sha256": "337517eddb0f9d998a8986cb27698d28de23549d05f2d4c82514abd1c2a29525",
+      "file_sha256": "c879882fac71809615c42d0c1e08a8e49fa12860422eb08a864f47bbdbd2256b",
+      "animations": []
+    },
+    {
+      "id": "053_hatchback_01",
+      "group": "vehicle",
+      "kind": "hatchback",
+      "variant": 1,
+      "path": "res://assets/city_kit/053_hatchback_01.glb",
+      "size": [
+        1.8136,
+        1.16,
+        2.7783
+      ],
+      "center": [
+        0.0,
+        0.59,
+        -0.006650000000000045
+      ],
+      "triangles": 642,
+      "geometry_sha256": "8c973bb4a3e58a02214e49d55e68d148078b8bc46d7dbe795081e9018f9164c2",
+      "file_sha256": "0f5bbc721046d69547db989fdb6118b9165d15be8e21f8c65670299875738f1c",
+      "animations": []
+    },
+    {
+      "id": "054_hatchback_02",
+      "group": "vehicle",
+      "kind": "hatchback",
+      "variant": 2,
+      "path": "res://assets/city_kit/054_hatchback_02.glb",
+      "size": [
+        1.8885,
+        1.1849999999999998,
+        2.912124
+      ],
+      "center": [
+        0.0,
+        0.6024999999999999,
+        -0.007962000000000025
+      ],
+      "triangles": 642,
+      "geometry_sha256": "f1f063650a7ab737f8c0f8b0df60bace7f1aa9efb755b656e5d01cbe6753e578",
+      "file_sha256": "96a8b55bef7352858ecad6ade41be6b5af0e118fc941b161f62a892604afb8b5",
+      "animations": []
+    },
+    {
+      "id": "055_hatchback_03",
+      "group": "vehicle",
+      "kind": "hatchback",
+      "variant": 3,
+      "path": "res://assets/city_kit/055_hatchback_03.glb",
+      "size": [
+        1.9634000000000003,
+        1.21,
+        3.0459479999999997
+      ],
+      "center": [
+        0.0,
+        0.615,
+        -0.009274000000000004
+      ],
+      "triangles": 642,
+      "geometry_sha256": "473b8534f1fc616fdc3160ec41171749e18e265773055d93f29d9f57e789841d",
+      "file_sha256": "b06b1e20db89cf099b2549cc352371bcd401e245a5c3638d9133a0f3a5e8b7be",
+      "animations": []
+    },
+    {
+      "id": "056_hatchback_04",
+      "group": "vehicle",
+      "kind": "hatchback",
+      "variant": 4,
+      "path": "res://assets/city_kit/056_hatchback_04.glb",
+      "size": [
+        2.0383,
+        1.2349999999999999,
+        3.179772
+      ],
+      "center": [
+        0.0,
+        0.6275,
+        -0.010585999999999984
+      ],
+      "triangles": 642,
+      "geometry_sha256": "c8b0afda5a70d3715dda96dcc8a4dfffc06724471700ed664778199a57b9ba0f",
+      "file_sha256": "351ee2bc03729d5410961d140b5ebf8f43f95cf64efdd1913a53e49ec18105f7",
+      "animations": []
+    },
+    {
+      "id": "057_pickup_01",
+      "group": "vehicle",
+      "kind": "pickup",
+      "variant": 1,
+      "path": "res://assets/city_kit/057_pickup_01.glb",
+      "size": [
+        1.8136,
+        1.3299999999999998,
+        3.376125
+      ],
+      "center": [
+        0.0,
+        0.6749999999999999,
+        -0.011937500000000045
+      ],
+      "triangles": 608,
+      "geometry_sha256": "af22ec145679c0e3fe49470a31c58955d1e0dcc3c79e205c25495a5a6aa8deaf",
+      "file_sha256": "ba1bfca3c2c4a83ab49e2bf01b0aa2826e947e56d6b8465e6434ec6f3502208d",
+      "animations": []
+    },
+    {
+      "id": "058_pickup_02",
+      "group": "vehicle",
+      "kind": "pickup",
+      "variant": 2,
+      "path": "res://assets/city_kit/058_pickup_02.glb",
+      "size": [
+        1.8885,
+        1.3299999999999998,
+        3.5405300000000004
+      ],
+      "center": [
+        0.0,
+        0.6749999999999999,
+        -0.01293500000000003
+      ],
+      "triangles": 608,
+      "geometry_sha256": "6e2acbefc226a759c0e274c01b6d90600f7757293b5aba560468aeae5bbb11d3",
+      "file_sha256": "89c1100b5f2c4a05f2a55d1dbb89275acf0c649e908ec0104ac33a84b698258b",
+      "animations": []
+    },
+    {
+      "id": "059_pickup_03",
+      "group": "vehicle",
+      "kind": "pickup",
+      "variant": 3,
+      "path": "res://assets/city_kit/059_pickup_03.glb",
+      "size": [
+        1.9634000000000003,
+        1.3299999999999998,
+        3.70581
+      ],
+      "center": [
+        0.0,
+        0.6749999999999999,
+        -0.013495000000000035
+      ],
+      "triangles": 608,
+      "geometry_sha256": "24f8577b59900f230107623e1c5ac6e19dd9a0554ba1549630a912fb562bb160",
+      "file_sha256": "620cb01e4f8c760b1eb46ea0d4bbe5109df91286e77b9e6f1030e6405f355ed6",
+      "animations": []
+    },
+    {
+      "id": "060_pickup_04",
+      "group": "vehicle",
+      "kind": "pickup",
+      "variant": 4,
+      "path": "res://assets/city_kit/060_pickup_04.glb",
+      "size": [
+        2.0383,
+        1.3299999999999998,
+        3.87109
+      ],
+      "center": [
+        0.0,
+        0.6749999999999999,
+        -0.014054999999999929
+      ],
+      "triangles": 608,
+      "geometry_sha256": "bf2ce7646da21a33cbc16f112bf477aaea8ba6df72c72593d8a233898dd1f090",
+      "file_sha256": "000872c1a9e615403e0a4b48cd50b90163ecf86f521a3502b11470ba71828897",
+      "animations": []
+    },
+    {
+      "id": "061_police_01",
+      "group": "vehicle",
+      "kind": "police",
+      "variant": 1,
+      "path": "res://assets/city_kit/061_police_01.glb",
+      "size": [
+        1.8136,
+        1.45,
+        3.376125
+      ],
+      "center": [
+        0.0,
+        0.735,
+        -0.011937500000000045
+      ],
+      "triangles": 678,
+      "geometry_sha256": "7b1941166832ad0e30c555e0c58c76b58a7857b8a7ad6a237736fdd0391fa028",
+      "file_sha256": "af8a723ba57e19505de6b850b7707449b19a54d9afee9e84a23f2a2fb7d1f4ff",
+      "animations": []
+    },
+    {
+      "id": "062_police_02",
+      "group": "vehicle",
+      "kind": "police",
+      "variant": 2,
+      "path": "res://assets/city_kit/062_police_02.glb",
+      "size": [
+        1.8885,
+        1.45,
+        3.5405300000000004
+      ],
+      "center": [
+        0.0,
+        0.735,
+        -0.01293500000000003
+      ],
+      "triangles": 678,
+      "geometry_sha256": "50733bdb4e2c70066eb9a5723096496462cac1352fafcd7bbe629b10fbb56be6",
+      "file_sha256": "c3112b28d35c2f4b093a828afe0762e42df05446bef47981fbe17e62bdd27fb4",
+      "animations": []
+    },
+    {
+      "id": "063_police_03",
+      "group": "vehicle",
+      "kind": "police",
+      "variant": 3,
+      "path": "res://assets/city_kit/063_police_03.glb",
+      "size": [
+        1.9634000000000003,
+        1.45,
+        3.70581
+      ],
+      "center": [
+        0.0,
+        0.735,
+        -0.013495000000000035
+      ],
+      "triangles": 678,
+      "geometry_sha256": "92280ac60816ce92346768ba777554ca173320595db42df683b623f60b2180a0",
+      "file_sha256": "2a108cc323ba9a4e094e990988f35d043f5363c99611dabac10bb34b8862dc74",
+      "animations": []
+    },
+    {
+      "id": "064_police_04",
+      "group": "vehicle",
+      "kind": "police",
+      "variant": 4,
+      "path": "res://assets/city_kit/064_police_04.glb",
+      "size": [
+        2.0383,
+        1.45,
+        3.87109
+      ],
+      "center": [
+        0.0,
+        0.735,
+        -0.014054999999999929
+      ],
+      "triangles": 678,
+      "geometry_sha256": "09f991fa24e17064b954a4e49f438d7b55b6f43a49a4e778f44fdd0512d6f5a2",
+      "file_sha256": "00fa78138055eaff353df95639d7f368193ad36e94a1d01a6cc88b0f95da9233",
+      "animations": []
+    },
+    {
+      "id": "065_school_bus_01",
+      "group": "vehicle",
+      "kind": "school_bus",
+      "variant": 1,
+      "path": "res://assets/city_kit/065_school_bus_01.glb",
+      "size": [
+        2.2416,
+        2.3500000000000005,
+        4.666499999999999
+      ],
+      "center": [
+        0.0,
+        1.185,
+        -0.01674999999999982
+      ],
+      "triangles": 668,
+      "geometry_sha256": "bf5cf6bb2fe331d5343015b66c333f9b6018a703c484f67b516b2c53c365c62c",
+      "file_sha256": "a787d00ae2dba2670da2917522f9780d98214114af3eca13339a43b58c5da270",
+      "animations": []
+    },
+    {
+      "id": "066_school_bus_02",
+      "group": "vehicle",
+      "kind": "school_bus",
+      "variant": 2,
+      "path": "res://assets/city_kit/066_school_bus_02.glb",
+      "size": [
+        2.2416,
+        2.3500000000000005,
+        4.85244
+      ],
+      "center": [
+        0.0,
+        1.185,
+        -0.01737999999999973
+      ],
+      "triangles": 692,
+      "geometry_sha256": "50f6cbbd438e3b01ccb29f3a40de354cb3047ea4db91693bd78a1da6a10e8c17",
+      "file_sha256": "4c303454c14d04e958fe9f27798342047e3cd20a51c6626d49f8bf3403c8f63f",
+      "animations": []
+    },
+    {
+      "id": "067_school_bus_03",
+      "group": "vehicle",
+      "kind": "school_bus",
+      "variant": 3,
+      "path": "res://assets/city_kit/067_school_bus_03.glb",
+      "size": [
+        2.2416,
+        2.3500000000000005,
+        5.03838
+      ],
+      "center": [
+        0.0,
+        1.185,
+        -0.01800999999999986
+      ],
+      "triangles": 668,
+      "geometry_sha256": "f62ddbaea9989b75a8fb14672378a87b1471959cd62142d8f73bca26f86224d0",
+      "file_sha256": "66e3aaef6462fad28e65f315a193b06b8cf035f6fcb0d0e3e9169e27b6489082",
+      "animations": []
+    },
+    {
+      "id": "068_school_bus_04",
+      "group": "vehicle",
+      "kind": "school_bus",
+      "variant": 4,
+      "path": "res://assets/city_kit/068_school_bus_04.glb",
+      "size": [
+        2.2416,
+        2.3500000000000005,
+        5.2243200000000005
+      ],
+      "center": [
+        0.0,
+        1.185,
+        -0.018639999999999768
+      ],
+      "triangles": 692,
+      "geometry_sha256": "213a55a5aed02d4db5fc2fde01eabd2a0c702782aac79d1abfae57948c3ab504",
+      "file_sha256": "9734041f988d17375ec99d86d700a0cfab955b5c3e138e0fa77a0bfb58f0395a",
+      "animations": []
+    },
+    {
+      "id": "069_delivery_van_01",
+      "group": "vehicle",
+      "kind": "delivery_van",
+      "variant": 1,
+      "path": "res://assets/city_kit/069_delivery_van_01.glb",
+      "size": [
+        1.8136,
+        2.1500000000000004,
+        3.376125
+      ],
+      "center": [
+        0.0,
+        1.085,
+        -0.011937500000000045
+      ],
+      "triangles": 668,
+      "geometry_sha256": "e87883230dccc8fc623c3565fbc27cc63bb0a9ad7b08b445d1fc3aa90ac05568",
+      "file_sha256": "922abee07ac5b90c7dc80961faa9767e2f794f468a3e163ff40377cc18ae16e9",
+      "animations": []
+    },
+    {
+      "id": "070_delivery_van_02",
+      "group": "vehicle",
+      "kind": "delivery_van",
+      "variant": 2,
+      "path": "res://assets/city_kit/070_delivery_van_02.glb",
+      "size": [
+        1.8885,
+        2.1500000000000004,
+        3.5405300000000004
+      ],
+      "center": [
+        0.0,
+        1.085,
+        -0.01293500000000003
+      ],
+      "triangles": 692,
+      "geometry_sha256": "3c0b76131058eeb00974634297f1f3e75cd1238873b92762ca2ebf2a07a13f6f",
+      "file_sha256": "7009a56afedaadf7d4f42b0ec247b84cb7684b5c1b4e4273dc62e1a314df4ab1",
+      "animations": []
+    },
+    {
+      "id": "071_delivery_van_03",
+      "group": "vehicle",
+      "kind": "delivery_van",
+      "variant": 3,
+      "path": "res://assets/city_kit/071_delivery_van_03.glb",
+      "size": [
+        1.9634000000000003,
+        2.1500000000000004,
+        3.70581
+      ],
+      "center": [
+        0.0,
+        1.085,
+        -0.013495000000000035
+      ],
+      "triangles": 668,
+      "geometry_sha256": "b4a3856d5b0a6c10f3c2072aedebffdadcda63f5af5abbfbd93534e813ed9b61",
+      "file_sha256": "dae2ace1651e63fcb42f16c5e31ae0e48ae41ed58f7a006d509f2883b60822e9",
+      "animations": []
+    },
+    {
+      "id": "072_delivery_van_04",
+      "group": "vehicle",
+      "kind": "delivery_van",
+      "variant": 4,
+      "path": "res://assets/city_kit/072_delivery_van_04.glb",
+      "size": [
+        2.0383,
+        2.1500000000000004,
+        3.87109
+      ],
+      "center": [
+        0.0,
+        1.085,
+        -0.014054999999999929
+      ],
+      "triangles": 692,
+      "geometry_sha256": "fcbf7e1095ac8676dfe425ded3566dd6e4935bdda7040add448c02a93f2d7ba5",
+      "file_sha256": "fd3456ea62067bb6aa892bc26ad7c2be8173e829e92ee32200861034f75252e8",
+      "animations": []
+    },
+    {
+      "id": "073_taxi_01",
+      "group": "vehicle",
+      "kind": "taxi",
+      "variant": 1,
+      "path": "res://assets/city_kit/073_taxi_01.glb",
+      "size": [
+        1.8136,
+        1.405,
+        3.376125
+      ],
+      "center": [
+        0.0,
+        0.7125,
+        -0.011937500000000045
+      ],
+      "triangles": 654,
+      "geometry_sha256": "f5b96256dd924fca8883ac1b9b14b96f4b74a17f6da38cea29d98d59d3b5ad6e",
+      "file_sha256": "57283326bf833258679d4050b82e18a9bafc89a23c50af352d3d09515a948efc",
+      "animations": []
+    },
+    {
+      "id": "074_taxi_02",
+      "group": "vehicle",
+      "kind": "taxi",
+      "variant": 2,
+      "path": "res://assets/city_kit/074_taxi_02.glb",
+      "size": [
+        1.8885,
+        1.405,
+        3.5405300000000004
+      ],
+      "center": [
+        0.0,
+        0.7125,
+        -0.01293500000000003
+      ],
+      "triangles": 654,
+      "geometry_sha256": "4ebeda39bc441460cd9292ba758fa687fa5fc696cf9178d85f946d162ac10b21",
+      "file_sha256": "19648299e220906a56da3ac28105f334b3b184ab5f787306d30e91d8d6ce7d72",
+      "animations": []
+    },
+    {
+      "id": "075_taxi_03",
+      "group": "vehicle",
+      "kind": "taxi",
+      "variant": 3,
+      "path": "res://assets/city_kit/075_taxi_03.glb",
+      "size": [
+        1.9634000000000003,
+        1.405,
+        3.70581
+      ],
+      "center": [
+        0.0,
+        0.7125,
+        -0.013495000000000035
+      ],
+      "triangles": 654,
+      "geometry_sha256": "75c20d849dc5b795e3b158730d4140056a11b8b46273da349c5b82b61e201ef3",
+      "file_sha256": "19a65e4461a922635b330e34c016d9eec404a981bb6cf5e992e485076d578f65",
+      "animations": []
+    },
+    {
+      "id": "076_taxi_04",
+      "group": "vehicle",
+      "kind": "taxi",
+      "variant": 4,
+      "path": "res://assets/city_kit/076_taxi_04.glb",
+      "size": [
+        2.0383,
+        1.405,
+        3.87109
+      ],
+      "center": [
+        0.0,
+        0.7125,
+        -0.014054999999999929
+      ],
+      "triangles": 654,
+      "geometry_sha256": "4b381220c1b92b270e7247f4f29dd8e0193a995c63b7e96a61650dc962d1349d",
+      "file_sha256": "85a83a5a541be668e96eab1274a439b78931f0c4b554d9e83162de0c9708d01b",
+      "animations": []
+    },
+    {
+      "id": "077_fire_truck_01",
+      "group": "vehicle",
+      "kind": "fire_truck",
+      "variant": 1,
+      "path": "res://assets/city_kit/077_fire_truck_01.glb",
+      "size": [
+        2.2416,
+        2.45,
+        4.666499999999999
+      ],
+      "center": [
+        0.0,
+        1.2349999999999999,
+        -0.01674999999999982
+      ],
+      "triangles": 800,
+      "geometry_sha256": "f725984cbbbba4aa276365bc4575cdd1e429083b71c01eafd3e80a66adbc515b",
+      "file_sha256": "33053735fc0a64ea665df97210cce731923be41fe0696c6ff54fa355618e92ca",
+      "animations": []
+    },
+    {
+      "id": "078_fire_truck_02",
+      "group": "vehicle",
+      "kind": "fire_truck",
+      "variant": 2,
+      "path": "res://assets/city_kit/078_fire_truck_02.glb",
+      "size": [
+        2.2416,
+        2.45,
+        4.85244
+      ],
+      "center": [
+        0.0,
+        1.2349999999999999,
+        -0.01737999999999973
+      ],
+      "triangles": 824,
+      "geometry_sha256": "889d7471efc1f5ae736466a5b31a2aa44f9d2ad6431a08d8237ce710d30c8a78",
+      "file_sha256": "3c57d2b3584519d8b9c14d071423c713c11269e84dbd87c0daf40787b5ab15c6",
+      "animations": []
+    },
+    {
+      "id": "079_fire_truck_03",
+      "group": "vehicle",
+      "kind": "fire_truck",
+      "variant": 3,
+      "path": "res://assets/city_kit/079_fire_truck_03.glb",
+      "size": [
+        2.2416,
+        2.45,
+        5.03838
+      ],
+      "center": [
+        0.0,
+        1.2349999999999999,
+        -0.01800999999999986
+      ],
+      "triangles": 800,
+      "geometry_sha256": "2276a22b2218adb63ce207159c146ba6d75c999b685b53d95477599096867dcc",
+      "file_sha256": "22d93ce6b4ee82a90a0e60e0daf7600e16fdfd2bb3173e66ffc7f2e6f77a8a81",
+      "animations": []
+    },
+    {
+      "id": "080_fire_truck_04",
+      "group": "vehicle",
+      "kind": "fire_truck",
+      "variant": 4,
+      "path": "res://assets/city_kit/080_fire_truck_04.glb",
+      "size": [
+        2.2416,
+        2.45,
+        5.2243200000000005
+      ],
+      "center": [
+        0.0,
+        1.2349999999999999,
+        -0.018639999999999768
+      ],
+      "triangles": 824,
+      "geometry_sha256": "9ae0e08f45e9a2fb2c7af7bf34e57df654aa08ad99754fba9075cd509d3ac97b",
+      "file_sha256": "628de4fe1cb2ba278b6a023edc071b39773bb51482f11dee038f9f799225e4c8",
+      "animations": []
+    },
+    {
+      "id": "081_bin_01",
+      "group": "prop",
+      "kind": "bin",
+      "variant": 1,
+      "path": "res://assets/city_kit/081_bin_01.glb",
+      "size": [
+        0.56,
+        0.8350000000000001,
+        0.5325916491252861
+      ],
+      "center": [
+        0.0,
+        0.41750000000000004,
+        -0.0
+      ],
+      "triangles": 160,
+      "geometry_sha256": "66d1eb69089ebf5ecf6067a0c0045f51e8b7d0e788aca32adc44d2335d6ab911",
+      "file_sha256": "34758321a5575c5bacab29ddc9fa7738e2f2e84ebbbb1a5966ce7d4966a8519b",
+      "animations": []
+    },
+    {
+      "id": "082_bin_02",
+      "group": "prop",
+      "kind": "bin",
+      "variant": 2,
+      "path": "res://assets/city_kit/082_bin_02.glb",
+      "size": [
+        0.6104,
+        0.8350000000000001,
+        0.5805248975465618
+      ],
+      "center": [
+        0.0,
+        0.41750000000000004,
+        -0.0
+      ],
+      "triangles": 168,
+      "geometry_sha256": "dd4baeeae11d5e50f88e673f19e257ddc01bf7d3357f8dfc289cda379d37bc3c",
+      "file_sha256": "787b03f5a130ff9a6d2a3c9f101b33ae8cc5f39c0ee84138bedf7762ca1f81ff",
+      "animations": []
+    },
+    {
+      "id": "083_bin_03",
+      "group": "prop",
+      "kind": "bin",
+      "variant": 3,
+      "path": "res://assets/city_kit/083_bin_03.glb",
+      "size": [
+        0.6608,
+        0.8350000000000001,
+        0.6284581459678376
+      ],
+      "center": [
+        0.0,
+        0.41750000000000004,
+        -0.0
+      ],
+      "triangles": 176,
+      "geometry_sha256": "3046a4b0c3fb3e39861d184efb9dc63c3d62c65c3e7cc4fe28b864311912bb21",
+      "file_sha256": "95ae498a550795f3fc75b40f1e14eb0070a6c85dee3b1573de2f2289651cdee0",
+      "animations": []
+    },
+    {
+      "id": "084_bin_04",
+      "group": "prop",
+      "kind": "bin",
+      "variant": 4,
+      "path": "res://assets/city_kit/084_bin_04.glb",
+      "size": [
+        0.7112,
+        0.8350000000000001,
+        0.6763913943891133
+      ],
+      "center": [
+        0.0,
+        0.41750000000000004,
+        -0.0
+      ],
+      "triangles": 184,
+      "geometry_sha256": "a6b594ef3109549f65f82da4f44063c4e27dc498cb78e4cd4d3dea66f6723280",
+      "file_sha256": "3102f7db92e245d1d3ef51fa52da9c735f5afff169829799abf517b31e284d0e",
+      "animations": []
+    },
+    {
+      "id": "085_cone_01",
+      "group": "prop",
+      "kind": "cone",
+      "variant": 1,
+      "path": "res://assets/city_kit/085_cone_01.glb",
+      "size": [
+        0.39,
+        0.635,
+        0.39
+      ],
+      "center": [
+        0.0,
+        0.3175,
+        -0.0
+      ],
+      "triangles": 76,
+      "geometry_sha256": "48d4922fbb1997cf4edb94506f542f9f1bbb69396ca307b69e7b9e9c6c14d8f1",
+      "file_sha256": "24ff883865e96a95ab715c0480b4fca015d258f06975e71092e03b3d47e184c7",
+      "animations": []
+    },
+    {
+      "id": "086_cone_02",
+      "group": "prop",
+      "kind": "cone",
+      "variant": 2,
+      "path": "res://assets/city_kit/086_cone_02.glb",
+      "size": [
+        0.42510000000000003,
+        0.635,
+        0.42510000000000003
+      ],
+      "center": [
+        0.0,
+        0.3175,
+        -0.0
+      ],
+      "triangles": 84,
+      "geometry_sha256": "9c2d1f7b94fd8fe0c41c6b780faaf33535f5891f9a3033264699b2dc1350ca0d",
+      "file_sha256": "183b46a8db1b2ef73926c75fa09798c0e5acbd004483c062321e13f83246ded9",
+      "animations": []
+    },
+    {
+      "id": "087_cone_03",
+      "group": "prop",
+      "kind": "cone",
+      "variant": 3,
+      "path": "res://assets/city_kit/087_cone_03.glb",
+      "size": [
+        0.4602,
+        0.635,
+        0.4602
+      ],
+      "center": [
+        0.0,
+        0.3175,
+        -0.0
+      ],
+      "triangles": 92,
+      "geometry_sha256": "b492fcf83c909ee1f3612c3513d3b4bc402640a3f16ac59921e2edbadf86d7f7",
+      "file_sha256": "aa9199a80ec138e863f21d6f3156350acea16e4dae43e9447079bdbf5d2dc9c5",
+      "animations": []
+    },
+    {
+      "id": "088_cone_04",
+      "group": "prop",
+      "kind": "cone",
+      "variant": 4,
+      "path": "res://assets/city_kit/088_cone_04.glb",
+      "size": [
+        0.4953,
+        0.635,
+        0.4953
+      ],
+      "center": [
+        0.0,
+        0.3175,
+        -0.0
+      ],
+      "triangles": 100,
+      "geometry_sha256": "59fc8122e381fb484d4b5015556bae4d6a4c9927f399d8926554d206d5ae67ef",
+      "file_sha256": "9d4e6f7cdcce7433aa61a853f47ac2a60b3a8100fc0e4c8fe082cc416c0e0cf6",
+      "animations": []
+    },
+    {
+      "id": "089_lamp_01",
+      "group": "prop",
+      "kind": "lamp",
+      "variant": 1,
+      "path": "res://assets/city_kit/089_lamp_01.glb",
+      "size": [
+        0.99,
+        3.2683730125427246,
+        0.24727469423673995
+      ],
+      "center": [
+        0.365,
+        1.6341865062713623,
+        -0.0
+      ],
+      "triangles": 124,
+      "geometry_sha256": "a9a434719698e8d67cc10f945ee8789a06be5f74e2aecdfc4807fb106338711c",
+      "file_sha256": "1778d3b929229882cf95bc6c6954d39f1123bb45ccb959a20b2c5a5e64c89287",
+      "animations": []
+    },
+    {
+      "id": "090_lamp_02",
+      "group": "prop",
+      "kind": "lamp",
+      "variant": 2,
+      "path": "res://assets/city_kit/090_lamp_02.glb",
+      "size": [
+        1.72,
+        3.4783730506896973,
+        0.24727469423673995
+      ],
+      "center": [
+        0.0,
+        1.7391865253448486,
+        -0.0
+      ],
+      "triangles": 176,
+      "geometry_sha256": "cb87569784de834526ee60f43a14abb12d49abda3c31ed3098253bf2272dad59",
+      "file_sha256": "89a1738470a57a2736c68745bf11a41969397c61517b47bec889541173d80cb5",
+      "animations": []
+    },
+    {
+      "id": "091_lamp_03",
+      "group": "prop",
+      "kind": "lamp",
+      "variant": 3,
+      "path": "res://assets/city_kit/091_lamp_03.glb",
+      "size": [
+        0.99,
+        3.68837308883667,
+        0.24727469423673995
+      ],
+      "center": [
+        0.365,
+        1.844186544418335,
+        -0.0
+      ],
+      "triangles": 124,
+      "geometry_sha256": "a8691edbd897aeb8264f844de78383953edaccc79d928e63b8f920b3af7f5a21",
+      "file_sha256": "e5431efc47e029c9a613c46530c4a8f0fb10b4c385a12f5837100a297952603d",
+      "animations": []
+    },
+    {
+      "id": "092_lamp_04",
+      "group": "prop",
+      "kind": "lamp",
+      "variant": 4,
+      "path": "res://assets/city_kit/092_lamp_04.glb",
+      "size": [
+        1.72,
+        3.8983728885650635,
+        0.24727469423673995
+      ],
+      "center": [
+        0.0,
+        1.9491864442825317,
+        -0.0
+      ],
+      "triangles": 176,
+      "geometry_sha256": "c5a55eacadec7308d9c430b3925a5fdb0fd5b3468892f27b7048b1cd91d0f8b2",
+      "file_sha256": "9782524ef08a89f97ffa93764fb91c9d1ee45ff270eb74da15eaddefb64c0db9",
+      "animations": []
+    },
+    {
+      "id": "093_bench_01",
+      "group": "prop",
+      "kind": "bench",
+      "variant": 1,
+      "path": "res://assets/city_kit/093_bench_01.glb",
+      "size": [
+        1.5,
+        0.9550000000000001,
+        0.5800000000000001
+      ],
+      "center": [
+        0.0,
+        0.47750000000000004,
+        -0.020000000000000018
+      ],
+      "triangles": 132,
+      "geometry_sha256": "27a2ec34256b9262f941027a8b73858c1d65d43755906bd3eff8d589826801aa",
+      "file_sha256": "72ba09e477ad56a8eb3073fc2492686f9b0ff35d1960bddadb3edb00c5c55380",
+      "animations": []
+    },
+    {
+      "id": "094_bench_02",
+      "group": "prop",
+      "kind": "bench",
+      "variant": 2,
+      "path": "res://assets/city_kit/094_bench_02.glb",
+      "size": [
+        1.6350000000000002,
+        0.9550000000000001,
+        0.5800000000000001
+      ],
+      "center": [
+        0.0,
+        0.47750000000000004,
+        -0.020000000000000018
+      ],
+      "triangles": 132,
+      "geometry_sha256": "8f187900cfeed78dcff4cd67c0db4c46715d1bae78585f5ad7729298ebc74898",
+      "file_sha256": "021c07777eafbcb5515c0fbbd349caeab222951dba6842dc0fccddd656a5ca94",
+      "animations": []
+    },
+    {
+      "id": "095_bench_03",
+      "group": "prop",
+      "kind": "bench",
+      "variant": 3,
+      "path": "res://assets/city_kit/095_bench_03.glb",
+      "size": [
+        1.77,
+        0.9550000000000001,
+        0.5800000000000001
+      ],
+      "center": [
+        0.0,
+        0.47750000000000004,
+        -0.020000000000000018
+      ],
+      "triangles": 132,
+      "geometry_sha256": "98f5390716d00e28baf56ffbd6830c0d86980bc4403ab62da2106af22e7115c6",
+      "file_sha256": "fc9fa5966e12124d712d086ccde64a4f05204db9e6e8f53e70c81306616017c2",
+      "animations": []
+    },
+    {
+      "id": "096_bench_04",
+      "group": "prop",
+      "kind": "bench",
+      "variant": 4,
+      "path": "res://assets/city_kit/096_bench_04.glb",
+      "size": [
+        1.905,
+        0.9550000000000001,
+        0.5800000000000001
+      ],
+      "center": [
+        0.0,
+        0.47750000000000004,
+        -0.020000000000000018
+      ],
+      "triangles": 132,
+      "geometry_sha256": "1cc5b5f11cf4d6a680ded89ee2e63c6b8a16ef6c02efc5d0cf5d1dde6814e5c2",
+      "file_sha256": "69dddaa490392015dde8257ca026b0d5114cb26d1b19f78f8b6865b616069836",
+      "animations": []
+    },
+    {
+      "id": "097_bollard_01",
+      "group": "prop",
+      "kind": "bollard",
+      "variant": 1,
+      "path": "res://assets/city_kit/097_bollard_01.glb",
+      "size": [
+        0.22,
+        0.97,
+        0.22
+      ],
+      "center": [
+        0.0,
+        0.485,
+        -0.0
+      ],
+      "triangles": 216,
+      "geometry_sha256": "2e42a972679b22d171d83c9d070f015f275bdd6bbb3655d1ae1163bf3abe8dd8",
+      "file_sha256": "f9f47a3c29c83d7f196f0482420062ca24448da28dc020278705f430d62fbf5a",
+      "animations": []
+    },
+    {
+      "id": "098_bollard_02",
+      "group": "prop",
+      "kind": "bollard",
+      "variant": 2,
+      "path": "res://assets/city_kit/098_bollard_02.glb",
+      "size": [
+        0.22,
+        1.0483,
+        0.22
+      ],
+      "center": [
+        0.0,
+        0.52415,
+        -0.0
+      ],
+      "triangles": 216,
+      "geometry_sha256": "898b2685845f43c9db6f4d8dcee0c085a5e6f2957186414821f0da57e4cf7ae1",
+      "file_sha256": "3149f49c2a164c52922beb71d78cd96aef06b5390c2fe35e13443747bf0c2654",
+      "animations": []
+    },
+    {
+      "id": "099_bollard_03",
+      "group": "prop",
+      "kind": "bollard",
+      "variant": 3,
+      "path": "res://assets/city_kit/099_bollard_03.glb",
+      "size": [
+        0.22,
+        1.1266,
+        0.22
+      ],
+      "center": [
+        0.0,
+        0.5633,
+        -0.0
+      ],
+      "triangles": 216,
+      "geometry_sha256": "3c5607f8aece41b1860c60afb5650a8559b823f55da8da62b14d5f16f6f83792",
+      "file_sha256": "c281614d71bff977be32c5cbf6f87f1f844986859db0223a6906817497690bf3",
+      "animations": []
+    },
+    {
+      "id": "100_bollard_04",
+      "group": "prop",
+      "kind": "bollard",
+      "variant": 4,
+      "path": "res://assets/city_kit/100_bollard_04.glb",
+      "size": [
+        0.22,
+        1.2049,
+        0.22
+      ],
+      "center": [
+        0.0,
+        0.60245,
+        -0.0
+      ],
+      "triangles": 216,
+      "geometry_sha256": "5a4c31dd6e2c7312c099d42c665b8b12032763f62040c9be898d0890e8e0ced7",
+      "file_sha256": "19eee1a2073a3142eee55e1d2e13d392650d981296b08f4c83ae8ec655bbcf09",
+      "animations": []
+    },
+    {
+      "id": "101_hydrant_01",
+      "group": "prop",
+      "kind": "hydrant",
+      "variant": 1,
+      "path": "res://assets/city_kit/101_hydrant_01.glb",
+      "size": [
+        0.54,
+        0.85,
+        0.4184648671698676
+      ],
+      "center": [
+        0.0,
+        0.445,
+        -0.0
+      ],
+      "triangles": 252,
+      "geometry_sha256": "14cc5c91b4218241083d3e63b5b79801668ecca3da67eb2c0aff726bea8a7e13",
+      "file_sha256": "32946f5c132b6476ec8fc21d0764dc0decc49e3f8b63543be15952325d5e5c04",
+      "animations": []
+    },
+    {
+      "id": "102_hydrant_02",
+      "group": "prop",
+      "kind": "hydrant",
+      "variant": 2,
+      "path": "res://assets/city_kit/102_hydrant_02.glb",
+      "size": [
+        0.5886000000000001,
+        0.85,
+        0.4184648671698676
+      ],
+      "center": [
+        0.0,
+        0.445,
+        -0.0
+      ],
+      "triangles": 252,
+      "geometry_sha256": "f4394de086ee951f4f9796bd665339fc4756b21e0cedaa52a725b23e066883b5",
+      "file_sha256": "00e082640ddedaff5ffaf1e56f298fa562b5a10605428c8891a17cf8c1146480",
+      "animations": []
+    },
+    {
+      "id": "103_hydrant_03",
+      "group": "prop",
+      "kind": "hydrant",
+      "variant": 3,
+      "path": "res://assets/city_kit/103_hydrant_03.glb",
+      "size": [
+        0.6372,
+        0.85,
+        0.4184648671698676
+      ],
+      "center": [
+        0.0,
+        0.445,
+        -0.0
+      ],
+      "triangles": 252,
+      "geometry_sha256": "06f2c3d269a081c335cdec6ef7154cd2e06fe1cc44af3208eb65d5daf0a308b8",
+      "file_sha256": "0a52bf91c995ba6917d362583b563f3d2581aba0654e7d232ded8435065b8125",
+      "animations": []
+    },
+    {
+      "id": "104_hydrant_04",
+      "group": "prop",
+      "kind": "hydrant",
+      "variant": 4,
+      "path": "res://assets/city_kit/104_hydrant_04.glb",
+      "size": [
+        0.6858000000000001,
+        0.85,
+        0.4318
+      ],
+      "center": [
+        0.0,
+        0.445,
+        -0.0
+      ],
+      "triangles": 252,
+      "geometry_sha256": "6927cdc7903b36e815f90c821cef50f4d96a71dacb9c07b3edfb8a1e65c284ae",
+      "file_sha256": "cdfb06f0c490a87320910995a547f42fa4bd3775b5027e2055d8e040a2524282",
+      "animations": []
+    },
+    {
+      "id": "105_mailbox_01",
+      "group": "prop",
+      "kind": "mailbox",
+      "variant": 1,
+      "path": "res://assets/city_kit/105_mailbox_01.glb",
+      "size": [
+        0.5,
+        1.1350000000000002,
+        0.4505
+      ],
+      "center": [
+        0.0,
+        0.5725,
+        0.010250000000000009
+      ],
+      "triangles": 36,
+      "geometry_sha256": "daedc2fc0ab3087be4887087ac1346a8c5d6a63ac008fcd8c31624f9b67f32b1",
+      "file_sha256": "32fa1a71a8450fed0b6e2b3c391a464bb0836948e4b5eab2a338cfdda26c780c",
+      "animations": []
+    },
+    {
+      "id": "106_mailbox_02",
+      "group": "prop",
+      "kind": "mailbox",
+      "variant": 2,
+      "path": "res://assets/city_kit/106_mailbox_02.glb",
+      "size": [
+        0.545,
+        1.1350000000000002,
+        0.4505
+      ],
+      "center": [
+        0.0,
+        0.5725,
+        0.010250000000000009
+      ],
+      "triangles": 36,
+      "geometry_sha256": "02f8930232fb2fb5e47e7bbe141161fc4cb7b5f656761a5b866111dbf8052669",
+      "file_sha256": "c7b38e12fd4aa6990c1a0a7af9d31400760d3639481cd2bc254f00e8d947fbd6",
+      "animations": []
+    },
+    {
+      "id": "107_mailbox_03",
+      "group": "prop",
+      "kind": "mailbox",
+      "variant": 3,
+      "path": "res://assets/city_kit/107_mailbox_03.glb",
+      "size": [
+        0.59,
+        1.1350000000000002,
+        0.4505
+      ],
+      "center": [
+        0.0,
+        0.5725,
+        0.010250000000000009
+      ],
+      "triangles": 36,
+      "geometry_sha256": "1558d4537974dc3c6f0cdf98a2a16835d49b130f20f00d7d0660d0667f9f1585",
+      "file_sha256": "a95f70c0d43c2fa347ab9dbf5bf3a11ecd9a5cda4593ee239b501a8cdfb814f2",
+      "animations": []
+    },
+    {
+      "id": "108_mailbox_04",
+      "group": "prop",
+      "kind": "mailbox",
+      "variant": 4,
+      "path": "res://assets/city_kit/108_mailbox_04.glb",
+      "size": [
+        0.635,
+        1.1350000000000002,
+        0.4505
+      ],
+      "center": [
+        0.0,
+        0.5725,
+        0.010250000000000009
+      ],
+      "triangles": 36,
+      "geometry_sha256": "82716e356c7a5b59c1626b8364887630573819770efd5e6560085321f042caf0",
+      "file_sha256": "c4136062ef17039742bc34c184cb43d0b3f79347ae0d4fd3664ad09c2aefd8a9",
+      "animations": []
+    },
+    {
+      "id": "109_bus_stop_01",
+      "group": "prop",
+      "kind": "bus_stop",
+      "variant": 1,
+      "path": "res://assets/city_kit/109_bus_stop_01.glb",
+      "size": [
+        2.2,
+        2.4250000000000003,
+        1.1
+      ],
+      "center": [
+        0.0,
+        1.2125000000000001,
+        -0.0
+      ],
+      "triangles": 60,
+      "geometry_sha256": "a48145063877c23d92760942b691874e1b69a72e8ce07442791b2a3bbc32b979",
+      "file_sha256": "85403c05ef6b7f85af644a2490a2b84a61be65f95d519f1746d3744fa9f1b980",
+      "animations": []
+    },
+    {
+      "id": "110_bus_stop_02",
+      "group": "prop",
+      "kind": "bus_stop",
+      "variant": 2,
+      "path": "res://assets/city_kit/110_bus_stop_02.glb",
+      "size": [
+        2.3980000000000006,
+        2.4250000000000003,
+        1.1
+      ],
+      "center": [
+        0.0,
+        1.2125000000000001,
+        -0.0
+      ],
+      "triangles": 60,
+      "geometry_sha256": "790adeafe06c54d85e86a02eb2d6f4541fe68202ba3558d7e9f782313b2128de",
+      "file_sha256": "f4cdbf96c54958fe5fea81c64df1aa73c50084b2488e3bf4339637787cd265f3",
+      "animations": []
+    },
+    {
+      "id": "111_bus_stop_03",
+      "group": "prop",
+      "kind": "bus_stop",
+      "variant": 3,
+      "path": "res://assets/city_kit/111_bus_stop_03.glb",
+      "size": [
+        2.596,
+        2.4250000000000003,
+        1.1
+      ],
+      "center": [
+        0.0,
+        1.2125000000000001,
+        -0.0
+      ],
+      "triangles": 60,
+      "geometry_sha256": "4f1fcf9a40b43738e1f4b4fb116b7126085a27b902d44b00ccf91418caef9abb",
+      "file_sha256": "72abbc545dba9495f87679919b90d1d141977540af4200e6c24ec6a7f833ba6b",
+      "animations": []
+    },
+    {
+      "id": "112_bus_stop_04",
+      "group": "prop",
+      "kind": "bus_stop",
+      "variant": 4,
+      "path": "res://assets/city_kit/112_bus_stop_04.glb",
+      "size": [
+        2.7940000000000005,
+        2.4250000000000003,
+        1.1
+      ],
+      "center": [
+        0.0,
+        1.2125000000000001,
+        -0.0
+      ],
+      "triangles": 60,
+      "geometry_sha256": "ebec3891daeaf7e72df91f96e87eccfc9ead0ada0e4b2bf59762d04f7601c0b1",
+      "file_sha256": "87c8c79c127abf0f1b9301a5c82d547bcb601fb0ff54c4636d7da81a5fcd1ad3",
+      "animations": []
+    },
+    {
+      "id": "113_kiosk_01",
+      "group": "prop",
+      "kind": "kiosk",
+      "variant": 1,
+      "path": "res://assets/city_kit/113_kiosk_01.glb",
+      "size": [
+        2.0,
+        2.035,
+        2.0
+      ],
+      "center": [
+        0.0,
+        1.0225,
+        0.07499999999999996
+      ],
+      "triangles": 48,
+      "geometry_sha256": "ffd13f5a7ebdd2c8fe4e468f6abbd597d4936a200ca611e73cf573a63be12e39",
+      "file_sha256": "84307a20ce32638cda9efca9715c37cac64daa52a2c50caae8da50cea0db066d",
+      "animations": []
+    },
+    {
+      "id": "114_kiosk_02",
+      "group": "prop",
+      "kind": "kiosk",
+      "variant": 2,
+      "path": "res://assets/city_kit/114_kiosk_02.glb",
+      "size": [
+        2.18,
+        2.035,
+        2.0
+      ],
+      "center": [
+        0.0,
+        1.0225,
+        0.07499999999999996
+      ],
+      "triangles": 48,
+      "geometry_sha256": "ec9a3beef469cfd1bee0eda80ff54bc35392cc36bf0441ba5e3fb2d0e9a244d0",
+      "file_sha256": "5eb17cf5b26aeae7d7478f8bd39de0f3867bde601f67a3105c012b04b8840313",
+      "animations": []
+    },
+    {
+      "id": "115_kiosk_03",
+      "group": "prop",
+      "kind": "kiosk",
+      "variant": 3,
+      "path": "res://assets/city_kit/115_kiosk_03.glb",
+      "size": [
+        2.36,
+        2.035,
+        2.0
+      ],
+      "center": [
+        0.0,
+        1.0225,
+        0.07499999999999996
+      ],
+      "triangles": 48,
+      "geometry_sha256": "05dd15ba92a84ce0268981745b6ec60cefc5ea60d09112ec438497adb2da70c3",
+      "file_sha256": "f7663800cbb3638c262a4308b7398e5de2961b3f471fde34e230c3d17b67f662",
+      "animations": []
+    },
+    {
+      "id": "116_kiosk_04",
+      "group": "prop",
+      "kind": "kiosk",
+      "variant": 4,
+      "path": "res://assets/city_kit/116_kiosk_04.glb",
+      "size": [
+        2.54,
+        2.035,
+        2.0
+      ],
+      "center": [
+        0.0,
+        1.0225,
+        0.07499999999999996
+      ],
+      "triangles": 48,
+      "geometry_sha256": "7fe8249901cbb4d90dc2c7bc1cc60b0f5d17bf5f4454f83cc292d9b522120ca5",
+      "file_sha256": "6a299a5e197cda825a1c20c4b365d2dd8fe6ee6906b67eeda4a2376e9c9c7f01",
+      "animations": []
+    },
+    {
+      "id": "117_barrier_01",
+      "group": "prop",
+      "kind": "barrier",
+      "variant": 1,
+      "path": "res://assets/city_kit/117_barrier_01.glb",
+      "size": [
+        1.5,
+        0.805,
+        0.55
+      ],
+      "center": [
+        0.0,
+        0.4025,
+        -0.0
+      ],
+      "triangles": 96,
+      "geometry_sha256": "44613bfb2469bd7c002c9ac99a3cd354074b3981ee232a3ab8f1938a9c223b91",
+      "file_sha256": "33fa5c131430b9f077988f9ac7f34a895a9e0580515d5cb93ea2c6f32683c238",
+      "animations": []
+    },
+    {
+      "id": "118_barrier_02",
+      "group": "prop",
+      "kind": "barrier",
+      "variant": 2,
+      "path": "res://assets/city_kit/118_barrier_02.glb",
+      "size": [
+        1.6350000000000002,
+        0.805,
+        0.55
+      ],
+      "center": [
+        0.0,
+        0.4025,
+        -0.0
+      ],
+      "triangles": 96,
+      "geometry_sha256": "c768d27e0f26f5e4c84dc3e4448d4d23f8e1e2dd74c7924caf271f45d572253b",
+      "file_sha256": "ed6596428d1940ea68e5b36a1449ff46d1e3f883ea956cf40ad1b35066ea7471",
+      "animations": []
+    },
+    {
+      "id": "119_barrier_03",
+      "group": "prop",
+      "kind": "barrier",
+      "variant": 3,
+      "path": "res://assets/city_kit/119_barrier_03.glb",
+      "size": [
+        1.77,
+        0.805,
+        0.55
+      ],
+      "center": [
+        0.0,
+        0.4025,
+        -0.0
+      ],
+      "triangles": 96,
+      "geometry_sha256": "0b6e4255434751322a396e4c90a93b3dd5e49e8605d86dbd65150a2f83cb1538",
+      "file_sha256": "dfb4995b168f96a5adb5fbc619e3d80ec040ce4422768cb1ee0d2c796291b71b",
+      "animations": []
+    },
+    {
+      "id": "120_barrier_04",
+      "group": "prop",
+      "kind": "barrier",
+      "variant": 4,
+      "path": "res://assets/city_kit/120_barrier_04.glb",
+      "size": [
+        1.905,
+        0.805,
+        0.55
+      ],
+      "center": [
+        0.0,
+        0.4025,
+        -0.0
+      ],
+      "triangles": 96,
+      "geometry_sha256": "ba0b2f6e0da380087e457a07a036ded189ed2d4e82765e860d466673ba531c1e",
+      "file_sha256": "c44b388886de99186e3c120d84e50796d15a578394430b81ab2ae5ec2ee95325",
+      "animations": []
+    },
+    {
+      "id": "121_planter_01",
+      "group": "prop",
+      "kind": "planter",
+      "variant": 1,
+      "path": "res://assets/city_kit/121_planter_01.glb",
+      "size": [
+        0.8,
+        0.8200000000000001,
+        0.8
+      ],
+      "center": [
+        0.0,
+        0.41000000000000003,
+        -0.0
+      ],
+      "triangles": 172,
+      "geometry_sha256": "81d1930764040a0fed230ac2eb1c3db8d034c83a37115c5de2b21a1b1fbf2e22",
+      "file_sha256": "27650034d3ffb5500906e30d761005df90a4a201e0783abede95402a75a06549",
+      "animations": []
+    },
+    {
+      "id": "122_planter_02",
+      "group": "prop",
+      "kind": "planter",
+      "variant": 2,
+      "path": "res://assets/city_kit/122_planter_02.glb",
+      "size": [
+        0.8720000000000001,
+        0.8200000000000001,
+        0.8720000000000001
+      ],
+      "center": [
+        0.0,
+        0.41000000000000003,
+        -0.0
+      ],
+      "triangles": 180,
+      "geometry_sha256": "57ad936fc0e14d8c120ccd7f6de336bb56bc9c13639827e594a17631e76e3d39",
+      "file_sha256": "f442e3537b34ef31a7b49d90b733a64c39ed5b0f285f8391efef43732a69a5d5",
+      "animations": []
+    },
+    {
+      "id": "123_planter_03",
+      "group": "prop",
+      "kind": "planter",
+      "variant": 3,
+      "path": "res://assets/city_kit/123_planter_03.glb",
+      "size": [
+        0.944,
+        0.8200000000000001,
+        0.944
+      ],
+      "center": [
+        0.0,
+        0.41000000000000003,
+        -0.0
+      ],
+      "triangles": 188,
+      "geometry_sha256": "cad0489ec2f6606dec141bd25e688c7c904135ae0e5b932383059c1fac758164",
+      "file_sha256": "f7dd7459010c6a699ab068d0ba534fb9387ef03f97991ad564d5c5bdecbe5517",
+      "animations": []
+    },
+    {
+      "id": "124_planter_04",
+      "group": "prop",
+      "kind": "planter",
+      "variant": 4,
+      "path": "res://assets/city_kit/124_planter_04.glb",
+      "size": [
+        1.016,
+        0.8200000000000001,
+        1.016
+      ],
+      "center": [
+        0.0,
+        0.41000000000000003,
+        -0.0
+      ],
+      "triangles": 196,
+      "geometry_sha256": "17b4b38a28f3fef40f3ead6169564c15d838da4542fce5b54aa4a8f34b292d9e",
+      "file_sha256": "d4bd481da9b8c6239ebbd938ba1bea5f5912e7d2f6987c0544213d72c79ba554",
+      "animations": []
+    },
+    {
+      "id": "125_bike_rack_01",
+      "group": "prop",
+      "kind": "bike_rack",
+      "variant": 1,
+      "path": "res://assets/city_kit/125_bike_rack_01.glb",
+      "size": [
+        1.45,
+        0.7239999771118164,
+        0.55
+      ],
+      "center": [
+        0.0,
+        0.3619999885559082,
+        -0.0
+      ],
+      "triangles": 264,
+      "geometry_sha256": "e462bcff39596e295740b5adc0b8b36abab439aee69542e590f3870a92f5c12e",
+      "file_sha256": "a61aa533227d6e6c8e8267a2ace7fb89ddfac10f7d492404b266ed6876730607",
+      "animations": []
+    },
+    {
+      "id": "126_bike_rack_02",
+      "group": "prop",
+      "kind": "bike_rack",
+      "variant": 2,
+      "path": "res://assets/city_kit/126_bike_rack_02.glb",
+      "size": [
+        1.5805,
+        0.7239999771118164,
+        0.55
+      ],
+      "center": [
+        0.0,
+        0.3619999885559082,
+        -0.0
+      ],
+      "triangles": 348,
+      "geometry_sha256": "e453d77d8087cfc2615c5a97026892de907e5b60f0a702608b550d6fa0a569be",
+      "file_sha256": "d03e835607cde0f07fcb6e43dc3151ffd770c4d85f565289b412fd2bfb347841",
+      "animations": []
+    },
+    {
+      "id": "127_bike_rack_03",
+      "group": "prop",
+      "kind": "bike_rack",
+      "variant": 3,
+      "path": "res://assets/city_kit/127_bike_rack_03.glb",
+      "size": [
+        1.7109999999999999,
+        0.7239999771118164,
+        0.55
+      ],
+      "center": [
+        0.0,
+        0.3619999885559082,
+        -0.0
+      ],
+      "triangles": 432,
+      "geometry_sha256": "9acc90fdc09b764635b51484398be3193eda3cc3c71387b183858135acc12a73",
+      "file_sha256": "343367b012f0788972b47c3dd58dd03d26bcb389d697c9a4ebbfde2da8209776",
+      "animations": []
+    },
+    {
+      "id": "128_bike_rack_04",
+      "group": "prop",
+      "kind": "bike_rack",
+      "variant": 4,
+      "path": "res://assets/city_kit/128_bike_rack_04.glb",
+      "size": [
+        1.8415,
+        0.7239999771118164,
+        0.55
+      ],
+      "center": [
+        0.0,
+        0.3619999885559082,
+        -0.0
+      ],
+      "triangles": 516,
+      "geometry_sha256": "ad51500d99576224e96e748410c1ebc3fbe34a146744d5d865650ffd0b6ee820",
+      "file_sha256": "76d38385f88be1906f88a703bbf43fd00fae331625cc4124d2d5fa5ed1391418",
+      "animations": []
+    },
+    {
+      "id": "129_traffic_light_01",
+      "group": "prop",
+      "kind": "traffic_light",
+      "variant": 1,
+      "path": "res://assets/city_kit/129_traffic_light_01.glb",
+      "size": [
+        0.33,
+        3.21,
+        0.33
+      ],
+      "center": [
+        0.0,
+        1.605,
+        0.10500000000000001
+      ],
+      "triangles": 480,
+      "geometry_sha256": "8b0ebc2f05fdba913c1f3b9f144b50fcb70b5740c473ae2f0aa8c585b39c55a4",
+      "file_sha256": "22ea50b5a35b70e93e1e277274158b7466f844a87ca760fb025b1db12666aeb3",
+      "animations": []
+    },
+    {
+      "id": "130_traffic_light_02",
+      "group": "prop",
+      "kind": "traffic_light",
+      "variant": 2,
+      "path": "res://assets/city_kit/130_traffic_light_02.glb",
+      "size": [
+        0.595,
+        3.21,
+        0.395
+      ],
+      "center": [
+        0.1325,
+        1.605,
+        0.07250000000000001
+      ],
+      "triangles": 492,
+      "geometry_sha256": "1f858a894da540350321e581bbd6f454eb1d9a01f64253d9052f03dd6884d510",
+      "file_sha256": "8402b89e73fa78a14858943eb505a18d6f0ca991269b74e7c2cc6023efda7886",
+      "animations": []
+    },
+    {
+      "id": "131_traffic_light_03",
+      "group": "prop",
+      "kind": "traffic_light",
+      "variant": 3,
+      "path": "res://assets/city_kit/131_traffic_light_03.glb",
+      "size": [
+        1.5150000000000001,
+        3.21,
+        0.395
+      ],
+      "center": [
+        0.5925,
+        1.605,
+        0.07250000000000001
+      ],
+      "triangles": 532,
+      "geometry_sha256": "955b66b020584158a39215f44e72c0c594e23c908d1c688cc2f12da663e80d16",
+      "file_sha256": "e537d4488fee02c34d6e5152b25f71bd5d97ad80979be9af10ac2540210db1b3",
+      "animations": []
+    },
+    {
+      "id": "132_traffic_light_04",
+      "group": "prop",
+      "kind": "traffic_light",
+      "variant": 4,
+      "path": "res://assets/city_kit/132_traffic_light_04.glb",
+      "size": [
+        1.715,
+        3.21,
+        0.395
+      ],
+      "center": [
+        0.6925,
+        1.605,
+        0.07250000000000001
+      ],
+      "triangles": 532,
+      "geometry_sha256": "db23368afe3aaffb2480056dff84901a5f7ce1a49483e81e2c13ab5ca40c6d8b",
+      "file_sha256": "f105231a68caead12bdf18f461123d1733402b40ee201713f22a4f92be514176",
+      "animations": []
+    },
+    {
+      "id": "133_sign_01",
+      "group": "prop",
+      "kind": "sign",
+      "variant": 1,
+      "path": "res://assets/city_kit/133_sign_01.glb",
+      "size": [
+        0.63,
+        2.075,
+        0.0865
+      ],
+      "center": [
+        0.0,
+        1.0375,
+        0.008249999999999997
+      ],
+      "triangles": 60,
+      "geometry_sha256": "ee78d1b8c2ccf715f43221b9e4749e10915b5211491fd1ca7f2732eb8b71b14c",
+      "file_sha256": "d6a2adc8f33bcfd6449077d21f1d6e8b12e1d8ad185fe7201a3f07b596769fc0",
+      "animations": []
+    },
+    {
+      "id": "134_sign_02",
+      "group": "prop",
+      "kind": "sign",
+      "variant": 2,
+      "path": "res://assets/city_kit/134_sign_02.glb",
+      "size": [
+        0.73,
+        2.075,
+        0.0865
+      ],
+      "center": [
+        0.0,
+        1.0375,
+        0.008249999999999997
+      ],
+      "triangles": 60,
+      "geometry_sha256": "bcfbf22d08512c8ae28aa87c04d991651a94aaee5c1009b218cf14707244ec08",
+      "file_sha256": "bf99bc60535f384536f05631d568313085679cafb99d6cd376e2f9ddc2b69837",
+      "animations": []
+    },
+    {
+      "id": "135_sign_03",
+      "group": "prop",
+      "kind": "sign",
+      "variant": 3,
+      "path": "res://assets/city_kit/135_sign_03.glb",
+      "size": [
+        0.8300000000000001,
+        2.075,
+        0.0865
+      ],
+      "center": [
+        0.0,
+        1.0375,
+        0.008249999999999997
+      ],
+      "triangles": 60,
+      "geometry_sha256": "511c44df613a2feea15c5048d5aa5e07e3344727cafc1416009530e44ce232ec",
+      "file_sha256": "763df79afeb302dd219fbddcad3b56be5098025616ec1360545c99b34290ff8b",
+      "animations": []
+    },
+    {
+      "id": "136_sign_04",
+      "group": "prop",
+      "kind": "sign",
+      "variant": 4,
+      "path": "res://assets/city_kit/136_sign_04.glb",
+      "size": [
+        0.93,
+        2.075,
+        0.0865
+      ],
+      "center": [
+        0.0,
+        1.0375,
+        0.008249999999999997
+      ],
+      "triangles": 60,
+      "geometry_sha256": "e1735cb7df270154c9c98f332676fd3c7c16352123ab9b94c65163c27a085f33",
+      "file_sha256": "df82652cf08b3a86e1a992139be19e33cf993d9ab766203da401ed747a149176",
+      "animations": []
+    },
+    {
+      "id": "137_dumpster_01",
+      "group": "prop",
+      "kind": "dumpster",
+      "variant": 1,
+      "path": "res://assets/city_kit/137_dumpster_01.glb",
+      "size": [
+        1.6,
+        1.2,
+        0.97
+      ],
+      "center": [
+        0.0,
+        0.61,
+        -0.0
+      ],
+      "triangles": 168,
+      "geometry_sha256": "da47545ffce7eab2f4b88e95f3f2564314b25c7abe3245f5255705a8fd4007c9",
+      "file_sha256": "d710c494590e26ba46178134c3cc77e9b633ee82041cfe23cb0bc282cb0cd523",
+      "animations": []
+    },
+    {
+      "id": "138_dumpster_02",
+      "group": "prop",
+      "kind": "dumpster",
+      "variant": 2,
+      "path": "res://assets/city_kit/138_dumpster_02.glb",
+      "size": [
+        1.7440000000000002,
+        1.2,
+        0.97
+      ],
+      "center": [
+        0.0,
+        0.61,
+        -0.0
+      ],
+      "triangles": 168,
+      "geometry_sha256": "034ae82ff9dc4239138d91a49a6490e7f4fcc75e30df1a452b1207aa08622c7e",
+      "file_sha256": "81c4e2e61841da905f6631bb7971765e13d200788d01f64344a98cc693e9d5df",
+      "animations": []
+    },
+    {
+      "id": "139_dumpster_03",
+      "group": "prop",
+      "kind": "dumpster",
+      "variant": 3,
+      "path": "res://assets/city_kit/139_dumpster_03.glb",
+      "size": [
+        1.888,
+        1.2,
+        0.97
+      ],
+      "center": [
+        0.0,
+        0.61,
+        -0.0
+      ],
+      "triangles": 168,
+      "geometry_sha256": "e7cd30a0327b15881ed7e49a0349fc2de844385d72bf151dd9d5ef738c6ebd18",
+      "file_sha256": "a72da324fe9703c203fe9a559c5d7a521bfb9ea02e3c2dc2eefa47362a5dda09",
+      "animations": []
+    },
+    {
+      "id": "140_dumpster_04",
+      "group": "prop",
+      "kind": "dumpster",
+      "variant": 4,
+      "path": "res://assets/city_kit/140_dumpster_04.glb",
+      "size": [
+        2.032,
+        1.2,
+        0.97
+      ],
+      "center": [
+        0.0,
+        0.61,
+        -0.0
+      ],
+      "triangles": 168,
+      "geometry_sha256": "6cc94d965675eff1c56ffa8e09df974da89d6373c48f5ebfef9771743da975be",
+      "file_sha256": "afbbad0ae6b10b0b7fd96b3fcffa8c2eadbf0386edbd44f674fba99a6c45110a",
+      "animations": []
+    },
+    {
+      "id": "141_fence_01",
+      "group": "prop",
+      "kind": "fence",
+      "variant": 1,
+      "path": "res://assets/city_kit/141_fence_01.glb",
+      "size": [
+        1.0,
+        0.92,
+        0.07
+      ],
+      "center": [
+        0.0,
+        0.46,
+        -0.0
+      ],
+      "triangles": 96,
+      "geometry_sha256": "cf2a80573041cde2a36fb8bd01184164e649ae719fe01577db0505dd15e1c1ec",
+      "file_sha256": "a156ee29d7b1a4f0622d51f92f313bcc750881c8191c68685208a00846269f3d",
+      "animations": []
+    },
+    {
+      "id": "142_fence_02",
+      "group": "prop",
+      "kind": "fence",
+      "variant": 2,
+      "path": "res://assets/city_kit/142_fence_02.glb",
+      "size": [
+        1.09,
+        0.92,
+        0.07
+      ],
+      "center": [
+        0.0,
+        0.46,
+        -0.0
+      ],
+      "triangles": 108,
+      "geometry_sha256": "97a858e4993720243034e17aa2f7f2985bfbee44235a3aaa27e03e02ce98710f",
+      "file_sha256": "432dbf388b0951c0aa179a01f8c82bb53390e2bbdf9b497c1b836214f2b87f43",
+      "animations": []
+    },
+    {
+      "id": "143_fence_03",
+      "group": "prop",
+      "kind": "fence",
+      "variant": 3,
+      "path": "res://assets/city_kit/143_fence_03.glb",
+      "size": [
+        1.18,
+        0.92,
+        0.07
+      ],
+      "center": [
+        0.0,
+        0.46,
+        -0.0
+      ],
+      "triangles": 120,
+      "geometry_sha256": "bf4ce6a96a73d2bd43ef4a60287351277713a8d5b90311ddd5d625dccd6df014",
+      "file_sha256": "bf08751f50363b2557292eb774e44d352c2ab559f687d2f31868e2e4cfec55f9",
+      "animations": []
+    },
+    {
+      "id": "144_fence_04",
+      "group": "prop",
+      "kind": "fence",
+      "variant": 4,
+      "path": "res://assets/city_kit/144_fence_04.glb",
+      "size": [
+        1.27,
+        0.92,
+        0.07
+      ],
+      "center": [
+        0.0,
+        0.46,
+        -0.0
+      ],
+      "triangles": 132,
+      "geometry_sha256": "3d5af1375af2483e7c83c0d5655ede4e81b1d34f6f163fd154d5981c4b1c999b",
+      "file_sha256": "e07d551b195f6c4656f3b64b46a4619e089c195106eb1ee459eea67455d6a866",
+      "animations": []
+    },
+    {
+      "id": "145_round_tree_01",
+      "group": "plant",
+      "kind": "round_tree",
+      "variant": 1,
+      "path": "res://assets/city_kit/145_round_tree_01.glb",
+      "size": [
+        1.34,
+        2.5331,
+        1.274415731835506
+      ],
+      "center": [
+        0.0,
+        1.26655,
+        -0.0
+      ],
+      "triangles": 184,
+      "geometry_sha256": "3ec9efacd658841959184a172b3cd42d9e624c81b2529f4d4d08da90aebd5baf",
+      "file_sha256": "7321b7d0925984df717d004d038cf9818536bb2b6450077ff0e6a144b5717267",
+      "animations": []
+    },
+    {
+      "id": "146_round_tree_02",
+      "group": "plant",
+      "kind": "round_tree",
+      "variant": 2,
+      "path": "res://assets/city_kit/146_round_tree_02.glb",
+      "size": [
+        1.4700000000000002,
+        2.7804,
+        1.4700000000000002
+      ],
+      "center": [
+        0.0,
+        1.3902,
+        -0.0
+      ],
+      "triangles": 208,
+      "geometry_sha256": "1fb2881edbdbcdb0e76f2a4bec7387ba5f032ab9331d54efc78044167a052ad9",
+      "file_sha256": "b21e1b8d8034233af07152906ccd12aaee142543fbabb2f695958343a5a7196a",
+      "animations": []
+    },
+    {
+      "id": "147_round_tree_03",
+      "group": "plant",
+      "kind": "round_tree",
+      "variant": 3,
+      "path": "res://assets/city_kit/147_round_tree_03.glb",
+      "size": [
+        1.6,
+        3.0277000000000003,
+        1.5598846594909181
+      ],
+      "center": [
+        0.0,
+        1.5138500000000001,
+        5.551115123125783e-17
+      ],
+      "triangles": 232,
+      "geometry_sha256": "a0c4530de9ea0399df499a9587c2957160960eb6bd2874b9f54a44ab9524177d",
+      "file_sha256": "5c77cf9c67f584ffd82d14e0bb4f4c7cdf9521bfca5e885a991cc6c2fe2dfeaa",
+      "animations": []
+    },
+    {
+      "id": "148_round_tree_04",
+      "group": "plant",
+      "kind": "round_tree",
+      "variant": 4,
+      "path": "res://assets/city_kit/148_round_tree_04.glb",
+      "size": [
+        1.73,
+        3.2750000000000004,
+        1.73
+      ],
+      "center": [
+        0.0,
+        1.6375000000000002,
+        -0.0
+      ],
+      "triangles": 256,
+      "geometry_sha256": "2957531c07f38b7f987943f6509fb71d4008f18c538fc37916d3fc5423afcd21",
+      "file_sha256": "f63fa859f4b08ea58fbda6a0e76701620e8daf3d42e302e2aefee6725da00ace",
+      "animations": []
+    },
+    {
+      "id": "149_pine_01",
+      "group": "plant",
+      "kind": "pine",
+      "variant": 1,
+      "path": "res://assets/city_kit/149_pine_01.glb",
+      "size": [
+        1.34,
+        2.3655,
+        1.274415731835506
+      ],
+      "center": [
+        0.0,
+        1.18275,
+        -0.0
+      ],
+      "triangles": 144,
+      "geometry_sha256": "d5ac883c5a87eca1e1a74227c228ec0fc8ef7880a189c621c16419a8dba8d632",
+      "file_sha256": "17d99209dc44950672a8bc8d9de9cd37a76be1b5ea3ecc5aa46f2c26fc460af7",
+      "animations": []
+    },
+    {
+      "id": "150_pine_02",
+      "group": "plant",
+      "kind": "pine",
+      "variant": 2,
+      "path": "res://assets/city_kit/150_pine_02.glb",
+      "size": [
+        1.4700000000000002,
+        2.8544,
+        1.398053078953876
+      ],
+      "center": [
+        0.0,
+        1.4272,
+        -0.0
+      ],
+      "triangles": 180,
+      "geometry_sha256": "e5f3b23a5cc79ad76db1a60dff48c1d4cd09d7a30e06c34283a19045478e7dc7",
+      "file_sha256": "044c9f7a8a373cb05f7d25bb0b502d474ac5e88344c05ef1f53b39d12d6cafa9",
+      "animations": []
+    },
+    {
+      "id": "151_pine_03",
+      "group": "plant",
+      "kind": "pine",
+      "variant": 3,
+      "path": "res://assets/city_kit/151_pine_03.glb",
+      "size": [
+        1.6,
+        2.5633,
+        1.521690426072246
+      ],
+      "center": [
+        0.0,
+        1.28165,
+        -0.0
+      ],
+      "triangles": 144,
+      "geometry_sha256": "cf6db859f7bb520ac6f0da1b38c53cd51c53745a639988dabda206d99f9386c9",
+      "file_sha256": "993a139be43c4b683e81f0942d745618094534252a174684ab1ff4e23c5bc7ad",
+      "animations": []
+    },
+    {
+      "id": "152_pine_04",
+      "group": "plant",
+      "kind": "pine",
+      "variant": 4,
+      "path": "res://assets/city_kit/152_pine_04.glb",
+      "size": [
+        1.73,
+        3.0522,
+        1.6453277731906157
+      ],
+      "center": [
+        0.0,
+        1.5261,
+        -0.0
+      ],
+      "triangles": 180,
+      "geometry_sha256": "8c0388ba48c34dd40099e4a95d39d890a79405fc34ba126bf3ccd8b60bd3764f",
+      "file_sha256": "66e96b2a5373c16ea68a18c68008b0cf562e3062051c450575caee2cea9a6e9a",
+      "animations": []
+    },
+    {
+      "id": "153_cypress_01",
+      "group": "plant",
+      "kind": "cypress",
+      "variant": 1,
+      "path": "res://assets/city_kit/153_cypress_01.glb",
+      "size": [
+        0.6432,
+        2.6686500000000004,
+        0.6117195512810428
+      ],
+      "center": [
+        0.0,
+        1.3343250000000002,
+        -0.0
+      ],
+      "triangles": 144,
+      "geometry_sha256": "b87c202ee0bb88bebcda97483c2ebdc0799e34372ec1c9e2a768ea38802787cc",
+      "file_sha256": "3a9412ea7dc141039fd75e9ff102d9533121233078c68d54e2ea8d8b9a4f9406",
+      "animations": []
+    },
+    {
+      "id": "154_cypress_02",
+      "group": "plant",
+      "kind": "cypress",
+      "variant": 2,
+      "path": "res://assets/city_kit/154_cypress_02.glb",
+      "size": [
+        0.7056000000000001,
+        3.18722,
+        0.6710654778978605
+      ],
+      "center": [
+        0.0,
+        1.59361,
+        -0.0
+      ],
+      "triangles": 180,
+      "geometry_sha256": "444be1f840fefe4afda0ccb7ce09d2591cce0d9cb8565956612686f5021e8d5e",
+      "file_sha256": "bab031ab605eb7dbd1e57b2f9113313c35527a1c5d825a2ffe86d170ebbda6e1",
+      "animations": []
+    },
+    {
+      "id": "155_cypress_03",
+      "group": "plant",
+      "kind": "cypress",
+      "variant": 3,
+      "path": "res://assets/city_kit/155_cypress_03.glb",
+      "size": [
+        0.768,
+        3.14158,
+        0.730411404514678
+      ],
+      "center": [
+        0.0,
+        1.57079,
+        -0.0
+      ],
+      "triangles": 144,
+      "geometry_sha256": "20b16bd7cd5ff964090c05d5629955a0b561baa3053fcb6712f79708fefb4ea4",
+      "file_sha256": "d94a1a4ad6b00ecba1bffb96a75c60bca6a5f91ef42bf7bb817c70541d7b1c3c",
+      "animations": []
+    },
+    {
+      "id": "156_cypress_04",
+      "group": "plant",
+      "kind": "cypress",
+      "variant": 4,
+      "path": "res://assets/city_kit/156_cypress_04.glb",
+      "size": [
+        0.8303999999999999,
+        3.4443600000000005,
+        0.7897573311314955
+      ],
+      "center": [
+        0.0,
+        1.7221800000000003,
+        -0.0
+      ],
+      "triangles": 180,
+      "geometry_sha256": "b4aeb0854fb3a696772acc3a8e2b4b031742e402ee5608aee369c5f13f8aeb00",
+      "file_sha256": "bdad48714e7a6928c27be7af51022960dc8b3cf1ad718f469e68f5e415a38657",
+      "animations": []
+    },
+    {
+      "id": "157_palm_01",
+      "group": "plant",
+      "kind": "palm",
+      "variant": 1,
+      "path": "res://assets/city_kit/157_palm_01.glb",
+      "size": [
+        2.4,
+        2.5500000000000003,
+        2.238460969082653
+      ],
+      "center": [
+        0.0,
+        1.2750000000000001,
+        -1.1102230246251565e-16
+      ],
+      "triangles": 48,
+      "geometry_sha256": "131474eb9e4fa8183a47242926264b9d522b2aab2accb1cf4700be6b08bd080a",
+      "file_sha256": "ebe3ba5410b3423e95f4cc90520f158389b9ff4bcd4e0cb2b1e854bb9a831240",
+      "animations": []
+    },
+    {
+      "id": "158_palm_02",
+      "group": "plant",
+      "kind": "palm",
+      "variant": 2,
+      "path": "res://assets/city_kit/158_palm_02.glb",
+      "size": [
+        2.350584039741712,
+        2.7800000000000002,
+        2.4110336881023975
+      ],
+      "center": [
+        0.02470798012914388,
+        1.3900000000000001,
+        -0.0
+      ],
+      "triangles": 50,
+      "geometry_sha256": "af5d7bf07c9dfe3c8be6eacb08738f9009c5a75b6a8f9320d4b56c380d10d2c7",
+      "file_sha256": "d8da247cefe10a9e3feeed6828602352677eaeeafeb32a6cadd1e0e83b916be3",
+      "animations": []
+    },
+    {
+      "id": "159_palm_03",
+      "group": "plant",
+      "kind": "palm",
+      "variant": 3,
+      "path": "res://assets/city_kit/159_palm_03.glb",
+      "size": [
+        2.4,
+        3.0100000000000002,
+        2.4
+      ],
+      "center": [
+        0.0,
+        1.5050000000000001,
+        -0.0
+      ],
+      "triangles": 52,
+      "geometry_sha256": "7b54459897510943878460755ac3f5078bdce41e82252956b2ed9a3039eec4fc",
+      "file_sha256": "f49993f4b7592f604b207feb622c492ce887e3445fd9ed99e835073463e7b472",
+      "animations": []
+    },
+    {
+      "id": "160_palm_04",
+      "group": "plant",
+      "kind": "palm",
+      "variant": 4,
+      "path": "res://assets/city_kit/160_palm_04.glb",
+      "size": [
+        2.3823543678751973,
+        3.24,
+        2.419106024082717
+      ],
+      "center": [
+        0.008822816062401428,
+        1.62,
+        -0.0
+      ],
+      "triangles": 54,
+      "geometry_sha256": "56946f10f239f12b57842f89f163f4a07f99f27658e1f93135e37ab9ca7fce9a",
+      "file_sha256": "137d1fba6c10cb870aa1436146557fb799b9337f9db66b6e9bd8113fe6dc15bc",
+      "animations": []
+    },
+    {
+      "id": "161_birch_01",
+      "group": "plant",
+      "kind": "birch",
+      "variant": 1,
+      "path": "res://assets/city_kit/161_birch_01.glb",
+      "size": [
+        2.0175835490610856,
+        3.091,
+        1.926350569696433
+      ],
+      "center": [
+        0.051208225469457136,
+        1.5455,
+        0.06253677851551448
+      ],
+      "triangles": 480,
+      "geometry_sha256": "b99cb5be8b0e38c5e2262eeba7e89fc0cb912d5783e7556f240f6ceafcaaebd5",
+      "file_sha256": "a7cd38636b881eaa2bd9c08f96feaffe80153343a6d03b0b02a64e83f69e9d1a",
+      "animations": []
+    },
+    {
+      "id": "162_birch_02",
+      "group": "plant",
+      "kind": "birch",
+      "variant": 2,
+      "path": "res://assets/city_kit/162_birch_02.glb",
+      "size": [
+        2.147583549061086,
+        3.36235,
+        2.121934837860927
+      ],
+      "center": [
+        0.051208225469457025,
+        1.681175,
+        0.06253677851551442
+      ],
+      "triangles": 552,
+      "geometry_sha256": "11f53a2c355cf22c3bc32b5f166cadfc892e2ffb17f5bcb60039cc1936c2946d",
+      "file_sha256": "e7d66f98a102f83da588dc0ee00ab1dbed6dbb4320c799cc55a8ce998700776b",
+      "animations": []
+    },
+    {
+      "id": "163_birch_03",
+      "group": "plant",
+      "kind": "birch",
+      "variant": 3,
+      "path": "res://assets/city_kit/163_birch_03.glb",
+      "size": [
+        2.277583549061086,
+        3.6337,
+        2.211819497351845
+      ],
+      "center": [
+        0.051208225469457025,
+        1.81685,
+        0.06253677851551465
+      ],
+      "triangles": 624,
+      "geometry_sha256": "8bf9c8b36cc5a09b87316c8bfde0c819ac6d87cd48f761d72918b714552b0997",
+      "file_sha256": "4702d944310275d3d870fa982bfeacacedb946d9b0f782069ac2c50d58dca1e7",
+      "animations": []
+    },
+    {
+      "id": "164_birch_04",
+      "group": "plant",
+      "kind": "birch",
+      "variant": 4,
+      "path": "res://assets/city_kit/164_birch_04.glb",
+      "size": [
+        2.4075835490610857,
+        3.90505,
+        2.3819348378609266
+      ],
+      "center": [
+        0.051208225469457025,
+        1.952525,
+        0.06253677851551442
+      ],
+      "triangles": 696,
+      "geometry_sha256": "2e34750a526cb0b9ca68f969728fc44ef5cb96be0ae29d6d9585b354062222a9",
+      "file_sha256": "363967c54fa11618a4524c13747590074b59746da92c6a70b32540d6425b3d47",
+      "animations": []
+    },
+    {
+      "id": "165_maple_01",
+      "group": "plant",
+      "kind": "maple",
+      "variant": 1,
+      "path": "res://assets/city_kit/165_maple_01.glb",
+      "size": [
+        2.1140282637597094,
+        2.8431,
+        1.9724503961826534
+      ],
+      "center": [
+        0.0029858681201452297,
+        1.42155,
+        0.03948686527240419
+      ],
+      "triangles": 776,
+      "geometry_sha256": "db8a42d1f067076fc3796cbc559c916b3f505923c2bf6eccff0faf6bf2c41014",
+      "file_sha256": "83bd84b0cef113d22691f3c30a34999a761f1ba6c0c2a6784dca77d5ae1a2d10",
+      "animations": []
+    },
+    {
+      "id": "166_maple_02",
+      "group": "plant",
+      "kind": "maple",
+      "variant": 2,
+      "path": "res://assets/city_kit/166_maple_02.glb",
+      "size": [
+        2.2440282637597098,
+        3.0904000000000003,
+        2.1680346643471475
+      ],
+      "center": [
+        0.0029858681201451187,
+        1.5452000000000001,
+        0.03948686527240408
+      ],
+      "triangles": 896,
+      "geometry_sha256": "602722b882e2ab794a0bae2d165ff61ba44e12d9b3b799a671d067e12696fa0e",
+      "file_sha256": "9622ecfec530eef37f4626a71126c79d0e0a0212e04c4913ab9f59fcae94b51e",
+      "animations": []
+    },
+    {
+      "id": "167_maple_03",
+      "group": "plant",
+      "kind": "maple",
+      "variant": 3,
+      "path": "res://assets/city_kit/167_maple_03.glb",
+      "size": [
+        2.3740282637597097,
+        3.3377,
+        2.2579193238380655
+      ],
+      "center": [
+        0.0029858681201451187,
+        1.66885,
+        0.0394868652724043
+      ],
+      "triangles": 1016,
+      "geometry_sha256": "40e92ff75ad7ed5d124927798c32c261cd6483fd40fd75c11c241b19b3878f51",
+      "file_sha256": "5ac4abb4c3fed7536b7c3cbccb323901b2aa984c468756a498d81fa7f50d49a7",
+      "animations": []
+    },
+    {
+      "id": "168_maple_04",
+      "group": "plant",
+      "kind": "maple",
+      "variant": 4,
+      "path": "res://assets/city_kit/168_maple_04.glb",
+      "size": [
+        2.5040282637597095,
+        3.5850000000000004,
+        2.4280346643471473
+      ],
+      "center": [
+        0.0029858681201451187,
+        1.7925000000000002,
+        0.03948686527240408
+      ],
+      "triangles": 1136,
+      "geometry_sha256": "92b59677a25522493746b2d31673070adf2445a2271802d439a44b8be824082e",
+      "file_sha256": "9ab56bb041231e2d6fa08c994e326de862d95a370a54954a3ea43e4bb0ab86ca",
+      "animations": []
+    },
+    {
+      "id": "169_oak_01",
+      "group": "plant",
+      "kind": "oak",
+      "variant": 1,
+      "path": "res://assets/city_kit/169_oak_01.glb",
+      "size": [
+        2.0175835490610856,
+        2.8431,
+        1.9724503961826534
+      ],
+      "center": [
+        0.051208225469457136,
+        1.42155,
+        0.03948686527240419
+      ],
+      "triangles": 628,
+      "geometry_sha256": "95f81dde751108884ac9df2fa9e5613c1fa8d75d92b062f97c09c27c25cf5599",
+      "file_sha256": "205ac90361a5cc1242129fbcc4e1eecf74f10a90a0c348031c2e1035c6bf170f",
+      "animations": []
+    },
+    {
+      "id": "170_oak_02",
+      "group": "plant",
+      "kind": "oak",
+      "variant": 2,
+      "path": "res://assets/city_kit/170_oak_02.glb",
+      "size": [
+        2.147583549061086,
+        3.0904000000000003,
+        2.1680346643471475
+      ],
+      "center": [
+        0.051208225469457025,
+        1.5452000000000001,
+        0.03948686527240408
+      ],
+      "triangles": 724,
+      "geometry_sha256": "8899eb6c8be1cd9889228e6a8e6847e66333140f8e7a14f319d40cd6ad838b73",
+      "file_sha256": "f7940a77abb31f9194fe59d2b8f2f3306136335dbab3d0eba702faf7c46761f9",
+      "animations": []
+    },
+    {
+      "id": "171_oak_03",
+      "group": "plant",
+      "kind": "oak",
+      "variant": 3,
+      "path": "res://assets/city_kit/171_oak_03.glb",
+      "size": [
+        2.277583549061086,
+        3.3377,
+        2.2579193238380655
+      ],
+      "center": [
+        0.051208225469457025,
+        1.66885,
+        0.0394868652724043
+      ],
+      "triangles": 820,
+      "geometry_sha256": "73e1899f3de0bba47966c71f8ea1b3a2d2982c0558546838ff00805f91a8272b",
+      "file_sha256": "2b51c424eacbf0e4d5de9856f26895664aedef33fc4a30579323befb1814bebb",
+      "animations": []
+    },
+    {
+      "id": "172_oak_04",
+      "group": "plant",
+      "kind": "oak",
+      "variant": 4,
+      "path": "res://assets/city_kit/172_oak_04.glb",
+      "size": [
+        2.4075835490610857,
+        3.5850000000000004,
+        2.4280346643471473
+      ],
+      "center": [
+        0.051208225469457025,
+        1.7925000000000002,
+        0.03948686527240408
+      ],
+      "triangles": 916,
+      "geometry_sha256": "4d93f22f83114e9976338e1ecf64a76b3b4145b854e1ea844bb8e19296dacd21",
+      "file_sha256": "91bdd89a8a22dd9efd2a120679c9dae820d06a20a12b949064e58caa7b585d89",
+      "animations": []
+    },
+    {
+      "id": "173_shrub_01",
+      "group": "plant",
+      "kind": "shrub",
+      "variant": 1,
+      "path": "res://assets/city_kit/173_shrub_01.glb",
+      "size": [
+        1.4,
+        0.8400000000000001,
+        0.72
+      ],
+      "center": [
+        0.0,
+        0.38,
+        -0.0
+      ],
+      "triangles": 432,
+      "geometry_sha256": "c3a8f90cce205446013cb6529453de460fab3fcfec63bbd90854b113c8ee835b",
+      "file_sha256": "755e145dfc7b24a2306e3b9051d8b4e2bcea2bc58dd2309e197b97b6d888213a",
+      "animations": []
+    },
+    {
+      "id": "174_shrub_02",
+      "group": "plant",
+      "kind": "shrub",
+      "variant": 2,
+      "path": "res://assets/city_kit/174_shrub_02.glb",
+      "size": [
+        1.4,
+        0.8999999999999999,
+        0.72
+      ],
+      "center": [
+        0.0,
+        0.38,
+        -0.0
+      ],
+      "triangles": 432,
+      "geometry_sha256": "bd27abd6e89e753b4cee29422286a5fe1c4f50b0a5bae305dea654d7b8a6d542",
+      "file_sha256": "e1d1ea613626b06cd40ec6f5e46c02f62d61f67017f7083341c8f1cdddd511b9",
+      "animations": []
+    },
+    {
+      "id": "175_shrub_03",
+      "group": "plant",
+      "kind": "shrub",
+      "variant": 3,
+      "path": "res://assets/city_kit/175_shrub_03.glb",
+      "size": [
+        1.4,
+        0.96,
+        0.72
+      ],
+      "center": [
+        0.0,
+        0.38,
+        -0.0
+      ],
+      "triangles": 432,
+      "geometry_sha256": "314ba6f872742bae05e6d086fbcfcfb8e1e7b12d3844448da48e876b0f355388",
+      "file_sha256": "ee2612d29df967b1a823621976209d3bc84375247a7582adce15809cbe77207c",
+      "animations": []
+    },
+    {
+      "id": "176_shrub_04",
+      "group": "plant",
+      "kind": "shrub",
+      "variant": 4,
+      "path": "res://assets/city_kit/176_shrub_04.glb",
+      "size": [
+        1.4,
+        1.02,
+        0.72
+      ],
+      "center": [
+        0.0,
+        0.38,
+        -0.0
+      ],
+      "triangles": 432,
+      "geometry_sha256": "144134615224cde2b541e6df699313b90f13997f42e0604a777d59f876143619",
+      "file_sha256": "2c3f874763a7adac87bef1805e76361fa3e5f3158347348bb26ea3423984c274",
+      "animations": []
+    },
+    {
+      "id": "177_hedge_01",
+      "group": "plant",
+      "kind": "hedge",
+      "variant": 1,
+      "path": "res://assets/city_kit/177_hedge_01.glb",
+      "size": [
+        0.95,
+        0.96,
+        0.68
+      ],
+      "center": [
+        0.0,
+        0.48,
+        -0.0
+      ],
+      "triangles": 12,
+      "geometry_sha256": "af4b5f819d07db3fe34485f92498f4f881ddb75140d17a89a3f576b3c74f6450",
+      "file_sha256": "d892ae5c4bdcd8fc44f7555b5e560fa8a4d01626e53c494cb546b6c2e42666e2",
+      "animations": []
+    },
+    {
+      "id": "178_hedge_02",
+      "group": "plant",
+      "kind": "hedge",
+      "variant": 2,
+      "path": "res://assets/city_kit/178_hedge_02.glb",
+      "size": [
+        1.26,
+        0.96,
+        0.68
+      ],
+      "center": [
+        0.0,
+        0.48,
+        -0.0
+      ],
+      "triangles": 12,
+      "geometry_sha256": "c188ed50fe6a0defc895a308764e9566281316ce5457c7cf7f294f791de0efe5",
+      "file_sha256": "e6a6bff18db3033b2511ab8cc2d9cae040c53bca8a419f69c972aaca837067bc",
+      "animations": []
+    },
+    {
+      "id": "179_hedge_03",
+      "group": "plant",
+      "kind": "hedge",
+      "variant": 3,
+      "path": "res://assets/city_kit/179_hedge_03.glb",
+      "size": [
+        1.5699999999999998,
+        0.96,
+        0.68
+      ],
+      "center": [
+        0.0,
+        0.48,
+        -0.0
+      ],
+      "triangles": 12,
+      "geometry_sha256": "89e49fa74ddb5e688be98dcfd691c3d4297b921a99fde116f78724acf31fd20d",
+      "file_sha256": "0662186ebb4faeb78c4195935a1e35adaf801e896d0d638bdd7cb5f87c16826d",
+      "animations": []
+    },
+    {
+      "id": "180_hedge_04",
+      "group": "plant",
+      "kind": "hedge",
+      "variant": 4,
+      "path": "res://assets/city_kit/180_hedge_04.glb",
+      "size": [
+        1.88,
+        0.96,
+        0.68
+      ],
+      "center": [
+        0.0,
+        0.48,
+        -0.0
+      ],
+      "triangles": 12,
+      "geometry_sha256": "646ed3e71ed64abcd1b21b9cfe5e196afabc154db2662ec853cc8b5b40455b11",
+      "file_sha256": "81b290e96917c2464127e6b6c36025110dffe185db372afc755ae55649a56019",
+      "animations": []
+    },
+    {
+      "id": "181_flowerbed_01",
+      "group": "plant",
+      "kind": "flowerbed",
+      "variant": 1,
+      "path": "res://assets/city_kit/181_flowerbed_01.glb",
+      "size": [
+        1.0665,
+        0.6799999999999999,
+        0.73
+      ],
+      "center": [
+        0.0,
+        0.33999999999999997,
+        -0.0
+      ],
+      "triangles": 872,
+      "geometry_sha256": "4c61e49add0180e2321060a0b5f98f9d40cfe61082bc2cdfdd332a977c873362",
+      "file_sha256": "508d5b7da131dd314dbf21bb15b0e1bbedc12c1a10e261bbed156cdae314d448",
+      "animations": []
+    },
+    {
+      "id": "182_flowerbed_02",
+      "group": "plant",
+      "kind": "flowerbed",
+      "variant": 2,
+      "path": "res://assets/city_kit/182_flowerbed_02.glb",
+      "size": [
+        1.3362,
+        0.6799999999999999,
+        0.73
+      ],
+      "center": [
+        0.0,
+        0.33999999999999997,
+        -0.0
+      ],
+      "triangles": 1044,
+      "geometry_sha256": "e30db5e127ae85ea307405ca9b1082c369fa8f1bad66c4e8c5ad3f2250d811ed",
+      "file_sha256": "ea64519da320f618b3eaa348ffd10b55c2207899b94c33e6b6c4b40cb412b435",
+      "animations": []
+    },
+    {
+      "id": "183_flowerbed_03",
+      "group": "plant",
+      "kind": "flowerbed",
+      "variant": 3,
+      "path": "res://assets/city_kit/183_flowerbed_03.glb",
+      "size": [
+        1.6058999999999999,
+        0.6799999999999999,
+        0.73
+      ],
+      "center": [
+        0.0,
+        0.33999999999999997,
+        -0.0
+      ],
+      "triangles": 1216,
+      "geometry_sha256": "4a29a38c03604626e6deaec5bfb4f8a366425e311ff482e78d57b10d31f46aa8",
+      "file_sha256": "41fd4c2286c173dcc4969b19b7cd41f98eb6de1a4bc55bc55b702f429040625e",
+      "animations": []
+    },
+    {
+      "id": "184_flowerbed_04",
+      "group": "plant",
+      "kind": "flowerbed",
+      "variant": 4,
+      "path": "res://assets/city_kit/184_flowerbed_04.glb",
+      "size": [
+        1.88,
+        0.6799999999999999,
+        0.73
+      ],
+      "center": [
+        0.0,
+        0.33999999999999997,
+        -0.0
+      ],
+      "triangles": 1388,
+      "geometry_sha256": "100a64f8c5f2c2a3b4ccf29c52acf2943fe4b945f6ec6f210c7d4b01a74a12a2",
+      "file_sha256": "35aeb89fad0f54b886d48ba32089bc7e7e097596db50e4bb9c945b853d13358c",
+      "animations": []
+    },
+    {
+      "id": "185_sapling_01",
+      "group": "plant",
+      "kind": "sapling",
+      "variant": 1,
+      "path": "res://assets/city_kit/185_sapling_01.glb",
+      "size": [
+        0.804,
+        2.632,
+        0.804
+      ],
+      "center": [
+        0.0,
+        1.316,
+        -0.0
+      ],
+      "triangles": 180,
+      "geometry_sha256": "62d503175bff0d8f8324b12082067a880102e897ad59c63bf0619fc96edc6ce7",
+      "file_sha256": "0adc693225017eb7926fb4a1cba431bc938b2677616db082c7c0024302f10651",
+      "animations": []
+    },
+    {
+      "id": "186_sapling_02",
+      "group": "plant",
+      "kind": "sapling",
+      "variant": 2,
+      "path": "res://assets/city_kit/186_sapling_02.glb",
+      "size": [
+        0.8820000000000001,
+        2.8896,
+        0.8820000000000001
+      ],
+      "center": [
+        0.0,
+        1.4448,
+        -0.0
+      ],
+      "triangles": 180,
+      "geometry_sha256": "dabfcc40a8e993db05a4a2a2ebf81370438d28608916e71a826ac9eccfd5db37",
+      "file_sha256": "a82ea800d091a63506ec2e6bb36cb2b45d8d364d546e5cc9a0fa110f19acf3bd",
+      "animations": []
+    },
+    {
+      "id": "187_sapling_03",
+      "group": "plant",
+      "kind": "sapling",
+      "variant": 3,
+      "path": "res://assets/city_kit/187_sapling_03.glb",
+      "size": [
+        0.96,
+        3.1472,
+        0.96
+      ],
+      "center": [
+        0.0,
+        1.5736,
+        -0.0
+      ],
+      "triangles": 180,
+      "geometry_sha256": "d0f39b1837afb340eaba4fcb913878e9311eefd676dc5eb3582efd5b27daa2ed",
+      "file_sha256": "9f2e0744fba50d823436472768aced867bc093757cf8e7775e533bc37c031a24",
+      "animations": []
+    },
+    {
+      "id": "188_sapling_04",
+      "group": "plant",
+      "kind": "sapling",
+      "variant": 4,
+      "path": "res://assets/city_kit/188_sapling_04.glb",
+      "size": [
+        1.038,
+        3.4048,
+        1.038
+      ],
+      "center": [
+        0.0,
+        1.7024,
+        -0.0
+      ],
+      "triangles": 180,
+      "geometry_sha256": "67ad4bb41934228fc5d178d57ed8ff6f6b5282b17a3a6fbd2996f26de4cc616b",
+      "file_sha256": "9410212bd01c201c8a6a387798c0f2ed406e765072ac3ff721757be3dfd20efa",
+      "animations": []
+    },
+    {
+      "id": "189_topiary_01",
+      "group": "plant",
+      "kind": "topiary",
+      "variant": 1,
+      "path": "res://assets/city_kit/189_topiary_01.glb",
+      "size": [
+        1.34,
+        2.06,
+        1.34
+      ],
+      "center": [
+        0.0,
+        1.03,
+        -0.0
+      ],
+      "triangles": 324,
+      "geometry_sha256": "b858d407a31355dfaa8062433bd35baa1282555bed81e37bb3bc6887a5f4c347",
+      "file_sha256": "584e28ff43e35c8ca8be5f723697a77f6f2c66c7f33596b4a54804c0d9ee6361",
+      "animations": []
+    },
+    {
+      "id": "190_topiary_02",
+      "group": "plant",
+      "kind": "topiary",
+      "variant": 2,
+      "path": "res://assets/city_kit/190_topiary_02.glb",
+      "size": [
+        1.4700000000000002,
+        2.69,
+        1.4700000000000002
+      ],
+      "center": [
+        0.0,
+        1.345,
+        -0.0
+      ],
+      "triangles": 468,
+      "geometry_sha256": "2971207283a03ebb8f77e1f1c6f29c993003bde2ff6ce32c99910d87adce305c",
+      "file_sha256": "5046ea5c59b9ca370f432bd1d0a6da1da468946a59e4fc731cc73a3997fd975c",
+      "animations": []
+    },
+    {
+      "id": "191_topiary_03",
+      "group": "plant",
+      "kind": "topiary",
+      "variant": 3,
+      "path": "res://assets/city_kit/191_topiary_03.glb",
+      "size": [
+        1.6,
+        2.4166,
+        1.6
+      ],
+      "center": [
+        0.0,
+        1.2083,
+        -0.0
+      ],
+      "triangles": 324,
+      "geometry_sha256": "b9cdb228bef886516c895560227389d4ac3d51db0c7b1eac4d35f7636b184645",
+      "file_sha256": "9a62c4304e2206919d4865143b752860ae9901dc559104675a44cb75a60301b3",
+      "animations": []
+    },
+    {
+      "id": "192_topiary_04",
+      "group": "plant",
+      "kind": "topiary",
+      "variant": 4,
+      "path": "res://assets/city_kit/192_topiary_04.glb",
+      "size": [
+        1.73,
+        2.69,
+        1.73
+      ],
+      "center": [
+        0.0,
+        1.345,
+        -0.0
+      ],
+      "triangles": 468,
+      "geometry_sha256": "5ed47f4405e13905bcadbd3802341e02d2f58f21847732ef89639182fc3aa928",
+      "file_sha256": "364adbab87bd789c41175acf2b6839934cebd2c85fd58034bac380a23eee0475",
+      "animations": []
+    },
+    {
+      "id": "193_slim_01",
+      "group": "person",
+      "kind": "slim",
+      "variant": 1,
+      "path": "res://assets/city_kit/193_slim_01.glb",
+      "size": [
+        0.502,
+        1.3975,
+        0.28500000000000003
+      ],
+      "center": [
+        0.0,
+        0.71625,
+        0.007499999999999993
+      ],
+      "triangles": 1016,
+      "geometry_sha256": "e5ad986d1784f9c303d849d027cd8378355cc5c57cdaf8dd92c84c2267ee8f69",
+      "file_sha256": "3822996f8d5061a67659375c9599f18769022b7cb7bc9a1011928f13b667c0a5",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "194_slim_02",
+      "group": "person",
+      "kind": "slim",
+      "variant": 2,
+      "path": "res://assets/city_kit/194_slim_02.glb",
+      "size": [
+        0.502,
+        1.415,
+        0.3521690426072246
+      ],
+      "center": [
+        0.0,
+        0.7250000000000001,
+        0.023915478696387715
+      ],
+      "triangles": 1064,
+      "geometry_sha256": "d0ef32897b687c291ba38603c2a66e7705a5785179bcaf6f561d1d7f2c54a197",
+      "file_sha256": "8b1ced70f01679a2181b5640290f32260da380e0f07206b517561fb7cf8245e2",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "195_slim_03",
+      "group": "person",
+      "kind": "slim",
+      "variant": 3,
+      "path": "res://assets/city_kit/195_slim_03.glb",
+      "size": [
+        0.502,
+        1.3975,
+        0.355
+      ],
+      "center": [
+        0.0,
+        0.71625,
+        -0.02750000000000001
+      ],
+      "triangles": 1028,
+      "geometry_sha256": "014a26afa154e7aa34bec3ef6c60f0933098324dac780fe0bad2dc589bbd1242",
+      "file_sha256": "e5987fa1cf4de30da35f77c47ec71addc9d8ef9746cdca441e60d316b7ea689c",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "196_slim_04",
+      "group": "person",
+      "kind": "slim",
+      "variant": 4,
+      "path": "res://assets/city_kit/196_slim_04.glb",
+      "size": [
+        0.502,
+        1.4525000000000001,
+        0.293
+      ],
+      "center": [
+        0.0,
+        0.7437500000000001,
+        0.003500000000000003
+      ],
+      "triangles": 1160,
+      "geometry_sha256": "d7226024ac264bbb758a1556e8a64401d57af4bae86bf8bbb2d1f4f73ff452dc",
+      "file_sha256": "666f7c20b9d8501f3a8471d6d9a114da81a6fab6456c478f8d431344552346f3",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "197_short_01",
+      "group": "person",
+      "kind": "short",
+      "variant": 1,
+      "path": "res://assets/city_kit/197_short_01.glb",
+      "size": [
+        0.42168,
+        1.1739,
+        0.2394
+      ],
+      "center": [
+        0.0,
+        0.6016499999999999,
+        0.0063
+      ],
+      "triangles": 1016,
+      "geometry_sha256": "d9febb076fd417dc42c7e772daa73ba04e6620e3f42588c3b40a93ade0b12fd9",
+      "file_sha256": "3d50c31af4d570389beefa225dd5b05d3b40431137e105e2b1b0442d3b9eee94",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "198_short_02",
+      "group": "person",
+      "kind": "short",
+      "variant": 2,
+      "path": "res://assets/city_kit/198_short_02.glb",
+      "size": [
+        0.42168,
+        1.1886,
+        0.2958219957900686
+      ],
+      "center": [
+        0.0,
+        0.609,
+        0.020089002104965684
+      ],
+      "triangles": 1064,
+      "geometry_sha256": "21247e6830d893c8f9fef9d7d88f46985ede03173f82f86391c2ebdd8a4f6c3f",
+      "file_sha256": "aaae792ceb55b210d0feb3ae57dfa1add0c89b8e29e744a2006af6ca334240bf",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "199_short_03",
+      "group": "person",
+      "kind": "short",
+      "variant": 3,
+      "path": "res://assets/city_kit/199_short_03.glb",
+      "size": [
+        0.42168,
+        1.1739,
+        0.2982
+      ],
+      "center": [
+        0.0,
+        0.6016499999999999,
+        -0.02310000000000001
+      ],
+      "triangles": 1028,
+      "geometry_sha256": "b0bb495f44a26edcbcf146d0bc1940fd52338f4ab4b721b7e4a2912e36f1d86a",
+      "file_sha256": "2ba275d6419c469c3964d6a2d79e713a30bcee2f20b14afa25cf5f5970e9d2e6",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "200_short_04",
+      "group": "person",
+      "kind": "short",
+      "variant": 4,
+      "path": "res://assets/city_kit/200_short_04.glb",
+      "size": [
+        0.42168,
+        1.2201000000000002,
+        0.24612
+      ],
+      "center": [
+        0.0,
+        0.62475,
+        0.002940000000000005
+      ],
+      "triangles": 1160,
+      "geometry_sha256": "538151a5932c95906c3c1180b1d08329d79087bcb0c33e7dfb7cf45306fe1ba5",
+      "file_sha256": "57daa24b99ca219b5edab11e4b3cc4a7230c54f170863f848257968798da3c71",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "201_tall_01",
+      "group": "person",
+      "kind": "tall",
+      "variant": 1,
+      "path": "res://assets/city_kit/201_tall_01.glb",
+      "size": [
+        0.5772999999999999,
+        1.607125,
+        0.32775
+      ],
+      "center": [
+        0.0,
+        0.8236874999999999,
+        0.008624999999999994
+      ],
+      "triangles": 1016,
+      "geometry_sha256": "5b2eeab97c4abe8dca86b7748dd59bf24997db78c8ec5c4d79a0d283b5b8a3a7",
+      "file_sha256": "4ab8a598ba80ffdb830fc1eb0d4a78c56e94102ac2248d5eb66430468ecec187",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "202_tall_02",
+      "group": "person",
+      "kind": "tall",
+      "variant": 2,
+      "path": "res://assets/city_kit/202_tall_02.glb",
+      "size": [
+        0.5772999999999999,
+        1.62725,
+        0.40499439899830825
+      ],
+      "center": [
+        0.0,
+        0.83375,
+        0.02750280050084586
+      ],
+      "triangles": 1064,
+      "geometry_sha256": "1f2531460a5d029b04e4369c3378bc108519b831b5a322d47b4f42b7d8851dbd",
+      "file_sha256": "d05b90ea188ffdea8c4cf4913fdc5c865badfac715bf0769a15bab2de928d696",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "203_tall_03",
+      "group": "person",
+      "kind": "tall",
+      "variant": 3,
+      "path": "res://assets/city_kit/203_tall_03.glb",
+      "size": [
+        0.5772999999999999,
+        1.607125,
+        0.40825
+      ],
+      "center": [
+        0.0,
+        0.8236874999999999,
+        -0.031625
+      ],
+      "triangles": 1028,
+      "geometry_sha256": "b17a445db1e481b4c27dd86f4cbcde0d40af8bba7cb421c2ac09e4280cb065b3",
+      "file_sha256": "657fc43289db694937ff52855f4ce811a4f340c5b3b531aa41f8833fe142adfb",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "204_tall_04",
+      "group": "person",
+      "kind": "tall",
+      "variant": 4,
+      "path": "res://assets/city_kit/204_tall_04.glb",
+      "size": [
+        0.5772999999999999,
+        1.6703750000000002,
+        0.33694999999999997
+      ],
+      "center": [
+        0.0,
+        0.8553125,
+        0.004025000000000001
+      ],
+      "triangles": 1160,
+      "geometry_sha256": "5ad6fb3fa2743bb53b5fd57f6379d904b05fc1271ad2cb2ada6b2d344437426d",
+      "file_sha256": "65eac16a654cdea795e586bac56ab1f8677d859559af7a0ce9efdb53e8f77dca",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "205_broad_01",
+      "group": "person",
+      "kind": "broad",
+      "variant": 1,
+      "path": "res://assets/city_kit/205_broad_01.glb",
+      "size": [
+        0.5562,
+        1.4394250000000002,
+        0.29355
+      ],
+      "center": [
+        0.0,
+        0.7377375,
+        0.007724999999999996
+      ],
+      "triangles": 1016,
+      "geometry_sha256": "e0f3b64e32e28760e828df424931feab89ad8fde4cbc5121161f73b17033fe9a",
+      "file_sha256": "3aa55d6d09ebf4db750be7b0b60dc25d40a1557b297766f303e478a2271f8a9c",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "206_broad_02",
+      "group": "person",
+      "kind": "broad",
+      "variant": 2,
+      "path": "res://assets/city_kit/206_broad_02.glb",
+      "size": [
+        0.5562,
+        1.4574500000000001,
+        0.3627341138854413
+      ],
+      "center": [
+        0.0,
+        0.74675,
+        0.024632943057279352
+      ],
+      "triangles": 1064,
+      "geometry_sha256": "3c8599b7425671b6e45fd26d070120e7da5179fa8b543e8b52c041ef2198ac2d",
+      "file_sha256": "cc102dc0306f197f7140a04313598312f66598240dc2133263d023cdfa2d37ce",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "207_broad_03",
+      "group": "person",
+      "kind": "broad",
+      "variant": 3,
+      "path": "res://assets/city_kit/207_broad_03.glb",
+      "size": [
+        0.5562,
+        1.4394250000000002,
+        0.36565000000000003
+      ],
+      "center": [
+        0.0,
+        0.7377375,
+        -0.028325000000000017
+      ],
+      "triangles": 1028,
+      "geometry_sha256": "dbede74e4259bf592501acd912ad1981e4c04e673bac2213fa976bfa60114834",
+      "file_sha256": "0f4113093e0ed7e5678f440db4ca344ca34dbbb8b27242479eabf0171eb638dd",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    },
+    {
+      "id": "208_broad_04",
+      "group": "person",
+      "kind": "broad",
+      "variant": 4,
+      "path": "res://assets/city_kit/208_broad_04.glb",
+      "size": [
+        0.5562,
+        1.4960750000000003,
+        0.30179
+      ],
+      "center": [
+        0.0,
+        0.7660625000000001,
+        0.003604999999999997
+      ],
+      "triangles": 1160,
+      "geometry_sha256": "f60e20ca050332a4a3ff7291355ec3d7a53a794c57918ad6351950ce763862cc",
+      "file_sha256": "53b003dcaf41307b8ff8d9cf324d1eb820079a540817030316636eb95c716787",
+      "animations": [
+        "Idle",
+        "Walk",
+        "Run"
+      ]
+    }
+  ]
+}

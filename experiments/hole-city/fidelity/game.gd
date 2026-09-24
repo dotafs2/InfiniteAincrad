@@ -1,5 +1,5 @@
 extends Node3D
-const Art=preload("res://fidelity/art.gd")
+const Art=preload("res://fidelity/catalog_city.gd")
 const Hole=preload("res://fidelity/hole.gd")
 const UI=preload("res://fidelity/ui.gd")
 const Asphalt=preload("res://fidelity/asphalt.gdshader")
@@ -52,7 +52,8 @@ func _ready() -> void:
 	add_child(sun)
 	camera=Camera3D.new()
 	camera.projection=Camera3D.PROJECTION_PERSPECTIVE
-	camera.fov=48
+	camera.fov=58
+	camera.keep_aspect=Camera3D.KEEP_HEIGHT
 	camera.far=220
 	add_child(camera)
 	camera.current=true
@@ -151,7 +152,7 @@ func _process(delta:float) -> void:
 func update_camera(delta:float, instant:=false) -> void:
 	var distance:float=1.0+(player.radius-0.85)*0.12
 	var target:Vector3=player.position
-	var offset:=Vector3(11,15.5,17)*distance
+	var offset:=Vector3(10,18,14)*distance
 	camera.position=target+offset if instant else camera.position.lerp(target+offset,1-exp(-delta*6))
 	camera.look_at(target)
 

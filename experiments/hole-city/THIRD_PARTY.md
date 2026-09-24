@@ -30,6 +30,15 @@ Retain these notices when redistributing a build.
 
 ## Sink City additions
 
+The portrait city kit is original mesh authoring in Blender 5.2.2 LTS, exported
+as GLB. No external model-library or reference-game asset was incorporated.
+The local authoring process used the official
+[Blender MCP addon command handlers](https://github.com/ahujasid/blender-mcp/blob/a9769e413da276ef3e0867404aaa4b941a32202d/addon.py)
+through the project's synchronous background adapter. Upstream's GUI server
+rejects background Blender, so its GUI timer/socket startup was not used. The
+upstream addon is a local tool dependency and is not embedded in the game.
+Its exact SHA-256 is recorded in the portrait validation asset audit.
+
 Copyright 2026 InfiniteAincrad contributors. MIT; see `LICENSE`.
 The city, UI, icon, street/window shaders and generated audio are original.
 Hole.io is referenced only to identify the gameplay/template inspiration; this

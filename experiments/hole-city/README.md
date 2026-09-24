@@ -1,4 +1,18 @@
-# Sink City — Poki reference reconstruction, step 1
+# Sink City — portrait city kit
+
+The September 25 build adds **208 original Blender model assets** (including
+structural variants): 48 buildings, 32 vehicles, 64 street props, 48 plants and
+16 rigged stick figures. All 208 appear in the playable city. Each figure has
+Idle, Walk and Run clips; 64 pedestrians walk, rest and flee nearby holes.
+The default viewport is **540 × 960, portrait 9:16**, with a floating one-finger
+joystick, release-to-stop and an on-screen pause button.
+
+Source meshes: `art_source/city_catalog.blend`. Runtime assets and exact geometry
+and file hashes: `assets/city_kit/manifest.json`. Reproducible Blender authoring:
+`tools/build_blender_catalog.py`; MCP background adapter and batch client:
+`tools/headless_blender_bridge.py` and `tools/run_blender_catalog.py`.
+The catalog has 208 different geometry hashes, not 208 instances of one mesh.
+It contains related variations within asset families, not 208 unrelated themes.
 
 This Godot project now opens the first reconstruction stage of the game inside
 [Poki's Hole.io page](https://poki.com/en/g/hole-io). The reference was actually
@@ -22,8 +36,8 @@ otherwise it uses `GODOT_BIN` or `godot` on PATH.
   no physical mobile-device test is claimed.
 - Reach **500 points within four minutes**. Eat small objects and grow through
   levels; bigger holes can swallow smaller opponents.
-- Escape pauses and resumes. **Give Up** on the EATEN screen returns home.
-- The 336-object city and seven CPU rivals are this stage's authored setup.
+- The top-right pause button or Escape pauses and resumes. **Give Up** on the EATEN screen returns home.
+- The 443-object city and seven CPU rivals are this stage's authored setup.
   Exact original object counts, rival counts and post-level-1 growth numbers
   have not been established from the reference.
 
@@ -59,6 +73,7 @@ an assertion of an exact match to the original game.
 ```powershell
 godot --headless --path . --script res://tests/fidelity_acceptance.gd -- --test
 godot --headless --path . --fixed-fps 60 --script res://tests/rim_fall_acceptance.gd -- --test
+godot --headless --path . --fixed-fps 60 --script res://tests/portrait_acceptance.gd -- --test
 ```
 
 This checks the actual scene, PLAY action, tutorial gate, four-minute clock,

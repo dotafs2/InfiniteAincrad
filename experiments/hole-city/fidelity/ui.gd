@@ -1,5 +1,5 @@
 extends Control
-## Screen composition measured from the live Poki game at 836 x 470.
+## Portrait adaptation of the observed Poki menu and one-finger controls.
 ## Every graphic here is drawn locally; the miniature is original Godot geometry.
 const Art=preload("res://fidelity/art.gd")
 var game:Node3D
@@ -56,8 +56,8 @@ func make_hero() -> void:
 	hero.texture=hero_view.get_texture()
 	hero.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
 	hero.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	hero.position=Vector2(360,136)
-	hero.size=Vector2(560,425)
+	hero.position=Vector2(10,193)
+	hero.size=Vector2(520,515)
 	hero.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	add_child(hero)
 
@@ -104,37 +104,19 @@ func refresh() -> void:
 	hero.visible=game.phase=="title"
 	hero_view.render_target_update_mode=SubViewport.UPDATE_ALWAYS if hero.visible else SubViewport.UPDATE_DISABLED
 	if game.phase=="title":
-		button(Rect2(529,578,222,44),"PLAY",game.start_level)
-		# The observed initial menu shows locked side tabs. They remain locked in
-		# this first-level slice; the separately observed shop pages are phase two.
+		button(Rect2(90,740,360,70),"PLAY",game.start_level)
 	elif game.phase=="eaten":
-		var gem:=button(Rect2(525,486,111,46),"  100",show_no_gems,Color("16d222"))
-		gem.tooltip_text="100 gems required"
-		var gem_art:=Control.new()
-		gem_art.mouse_filter=Control.MOUSE_FILTER_IGNORE
-		gem.add_child(gem_art)
-		gem_art.draw.connect(func():
-			gem_art.draw_colored_polygon(PackedVector2Array([Vector2(16,18),Vector2(23,13),Vector2(30,18),Vector2(30,27),Vector2(23,32),Vector2(16,27)]),Color("db43ee"))
-			gem_art.draw_line(Vector2(17,18),Vector2(23,22),Color("f6adff"),2)
-			gem_art.draw_line(Vector2(23,22),Vector2(29,18),Color("f6adff"),2)
-			gem_art.draw_line(Vector2(23,22),Vector2(23,30),Color("9d2dcb"),2))
-		var video:=button(Rect2(653,486,111,46),"",show_no_video)
-		video.tooltip_text="No video available offline"
-		var film:=Control.new()
-		film.mouse_filter=Control.MOUSE_FILTER_IGNORE
-		video.add_child(film)
-		film.draw.connect(func():
-			film.draw_rect(Rect2(43,13,26,21),Color.WHITE,false,2)
-			film.draw_colored_polygon(PackedVector2Array([Vector2(51,18),Vector2(51,29),Vector2(61,23)]),Color.WHITE)
-			for y in [16,22,28]:film.draw_rect(Rect2(44,y,3,3),Color.WHITE))
-		var giveup:=button(Rect2(565,559,150,38),"Give Up",game.back_home,Color(0,0,0,0))
-		giveup.add_theme_font_size_override("font_size",18)
+		button(Rect2(90,630,172,60),"100 GEMS",show_no_gems,Color("16c72d"))
+		button(Rect2(278,630,172,60),"VIDEO",show_no_video)
+		button(Rect2(160,730,220,54),"Give Up",game.back_home,Color(0,0,0,0))
 	elif game.phase in ["timeout","complete"]:
-		button(Rect2(529,485,222,48),"PLAY AGAIN",game.start_level)
-		button(Rect2(529,550,222,42),"HOME",game.back_home,Color("b2a8e2"))
+		button(Rect2(90,620,360,68),"PLAY AGAIN",game.start_level)
+		button(Rect2(140,710,260,58),"HOME",game.back_home,Color("b2a8e2"))
 	elif get_tree().paused:
-		button(Rect2(529,350,222,50),"RESUME",game.toggle_pause)
-		button(Rect2(529,414,222,45),"HOME",game.back_home,Color("b2a8e2"))
+		button(Rect2(90,430,360,70),"RESUME",game.toggle_pause)
+		button(Rect2(140,530,260,60),"HOME",game.back_home,Color("b2a8e2"))
+	elif game.phase=="playing":
+		button(Rect2(466,22,54,50),"II",game.toggle_pause,Color(.10,.14,.22,.76))
 	queue_redraw()
 
 func show_no_gems() -> void:
@@ -190,88 +172,81 @@ func star(at:Vector2,radius:float,tint:Color) -> void:
 func _draw() -> void:
 	if font==null:return
 	if game.phase=="title":
-		var background:=Color("4825c9").lerp(Color("247ce2"),(sin(animation*0.21)+1)*0.23)
-		draw_rect(Rect2(Vector2.ZERO,Vector2(1280,720)),background)
-		for y in 9:
-			for x in 14:crossed_axes(Vector2(x*104-30+(y%2)*52,y*91-30+fmod(animation*4,91)))
-		draw_circle(Vector2(640,79),42,Color("a1e5f8"))
-		draw_circle(Vector2(640,79),34,Color("272487"))
-		draw_arc(Vector2(640,79),41,-PI/2,-PI/2+TAU*0.04,16,Color("28bcef"),7,true)
-		text_center(str(game.stage),Vector2(640,95),43)
-		text_center("level",Vector2(640,122),13)
-		draw_rect(Rect2(0,642,1280,78),Color("e5e2fa"))
-		draw_rect(Rect2(427,642,426,78),Color("aaa4dd"))
-		text_center("STORE",Vector2(213,659),11,Color("383d76"),false)
-		text_center("HOLES",Vector2(1067,659),11,Color("383d76"),false)
-		lock_icon(Vector2(213,685))
-		lock_icon(Vector2(1067,685))
-		home_icon(Vector2(640,666))
+		var background:=Color("4825c9").lerp(Color("247ce2"),(sin(animation*.21)+1)*.23)
+		draw_rect(Rect2(0,0,540,960),background)
+		for y in 12:
+			for x in 7:crossed_axes(Vector2(x*104-30+(y%2)*52,y*91-30+fmod(animation*4,91)))
+		draw_circle(Vector2(270,100),49,Color("a1e5f8"))
+		draw_circle(Vector2(270,100),40,Color("272487"))
+		draw_arc(Vector2(270,100),48,-PI/2,-PI/2+TAU*.04,16,Color("28bcef"),7,true)
+		text_center(str(game.stage),Vector2(270,117),47)
+		text_center("level",Vector2(270,151),18)
+		draw_rect(Rect2(0,850,540,110),Color("e5e2fa"))
+		draw_rect(Rect2(180,850,180,110),Color("aaa4dd"))
+		text_center("STORE",Vector2(90,878),16,Color("383d76"),false)
+		text_center("HOLES",Vector2(450,878),16,Color("383d76"),false)
+		lock_icon(Vector2(90,920));lock_icon(Vector2(450,920));home_icon(Vector2(270,900))
 		return
 	if game.phase in ["intro","playing"]:
 		if game.phase=="playing":draw_game_hud()
 		else:
-			draw_rect(Rect2(0,0,1280,720),Color(0,0,0,0.54))
+			draw_rect(Rect2(0,0,540,960),Color(0,0,0,.48))
 			var points:=PackedVector2Array()
 			for i in 65:
 				var t:float=float(i)/64*TAU
-				points.append(Vector2(640+47*cos(t),423+23*sin(2*t)))
+				points.append(Vector2(270+63*cos(t),695+30*sin(2*t)))
 			draw_polyline(points,Color.WHITE,7,true)
-			draw_circle(Vector2(650,454),13,Color("bce9f1"))
-			text_center("DRAG TO MOVE",Vector2(640,479),17)
+			draw_circle(Vector2(283,738),17,Color("bce9f1"))
+			text_center("DRAG TO MOVE",Vector2(270,792),27)
+			text_center("Eat small objects. Grow bigger.",Vector2(270,829),19)
 	elif game.phase=="eaten":
-		draw_rect(Rect2(0,0,1280,720),Color(0.9,0.53,0.95,0.28))
-		for i in range(18,0,-1):draw_circle(Vector2(640,341),float(i)*12,Color(0.9,0.1,0.8,0.014))
-		text_center("EATEN!",Vector2(640,165),44)
-		var stone:=PackedVector2Array([Vector2(572,389),Vector2(583,224),Vector2(615,197),Vector2(693,211),Vector2(705,239),Vector2(681,393)])
-		draw_colored_polygon(stone,Color("484352"))
-		var inside:=PackedVector2Array([Vector2(588,378),Vector2(597,232),Vector2(619,217),Vector2(678,225),Vector2(687,246),Vector2(667,378)])
-		draw_colored_polygon(inside,Color("7b7a8c"))
-		draw_circle(Vector2(641,282),31,Color("aaa3b5"))
-		for x in [628,654]:
-			draw_line(Vector2(x-6,274),Vector2(x+6,288),Color("2b313b"),6)
-			draw_line(Vector2(x+6,274),Vector2(x-6,288),Color("2b313b"),6)
-		box(Rect2(623,301,34,19),Color("aba3b8"),4,Color("716d82"),2)
-		box(Rect2(556,379,161,45),Color("626073"),8,Color("394150"),3)
-		text_center("HOLE",Vector2(639,410),26,Color("beb6c6"))
-		text_center("REVIVE",Vector2(640,474),21)
+		draw_rect(Rect2(0,0,540,960),Color(.21,.10,.28,.58))
+		text_center("EATEN!",Vector2(270,235),50)
+		box(Rect2(193,320,154,206),Color("74717f"),36,Color("444152"),8)
+		draw_circle(Vector2(270,397),39,Color("beb5c7"))
+		for x in [253,287]:
+			draw_line(Vector2(x-8,387),Vector2(x+8,405),Color("30303b"),6)
+			draw_line(Vector2(x+8,387),Vector2(x-8,405),Color("30303b"),6)
+		box(Rect2(246,421,48,24),Color("beb5c7"),4,Color("74717f"),2)
+		box(Rect2(172,510,196,45),Color("626073"),8,Color("394150"),3)
+		text_center("HOLE",Vector2(270,544),30,Color("beb6c6"))
+		text_center("REVIVE",Vector2(270,603),25)
 	elif game.phase in ["complete","timeout"]:
-		draw_rect(Rect2(0,0,1280,720),Color(0.12,0.17,0.3,0.7))
-		text_center("TARGET REACHED!" if game.phase=="complete" else "TIME'S UP!",Vector2(640,235),42)
-		star(Vector2(640,329),55,Color("ffbf2c"))
-		text_center("%d / 500 PTS"%game.player.score,Vector2(640,421),28)
+		draw_rect(Rect2(0,0,540,960),Color(.12,.17,.3,.76))
+		text_center("TARGET REACHED!" if game.phase=="complete" else "TIME'S UP!",Vector2(270,275),34)
+		star(Vector2(270,394),68,Color("ffbf2c"))
+		text_center("%d / 500 PTS"%game.player.score,Vector2(270,533),30)
 	if get_tree().paused:
-		draw_rect(Rect2(0,0,1280,720),Color(0.09,0.08,0.19,0.76))
-		text_center("PAUSED",Vector2(640,292),43)
+		draw_rect(Rect2(0,0,540,960),Color(.09,.08,.19,.80))
+		text_center("PAUSED",Vector2(270,341),45)
 	if toast_time>0:
-		box(Rect2(470,619,340,45),Color(0.09,0.12,0.19,0.9),8,Color.TRANSPARENT,0)
-		text_center(toast,Vector2(640,649),20)
+		box(Rect2(55,835,430,54),Color(.09,.12,.19,.94),8,Color.TRANSPARENT,0)
+		text_center(toast,Vector2(270,871),23)
 
 func draw_game_hud() -> void:
-	box(Rect2(590,12,100,32),Color(0.08,0.08,0.11,0.85),5,Color.TRANSPARENT,0)
-	draw_circle(Vector2(604,28),13,Color("ec8a2b"))
-	draw_circle(Vector2(604,28),10,Color("eaf3f2"))
-	draw_line(Vector2(604,28),Vector2(604,20),Color("326fae"),2)
-	draw_line(Vector2(604,28),Vector2(611,28),Color("326fae"),2)
+	box(Rect2(200,22,140,50),Color(.08,.08,.11,.85),9,Color.TRANSPARENT,0)
+	draw_circle(Vector2(224,47),16,Color("ec8a2b"))
+	draw_circle(Vector2(224,47),12,Color("eaf3f2"))
+	draw_line(Vector2(224,47),Vector2(224,37),Color("326fae"),2)
+	draw_line(Vector2(224,47),Vector2(232,47),Color("326fae"),2)
 	var seconds:=int(ceil(game.remaining))
-	text_center("%02d:%02d"%[seconds/60,seconds%60],Vector2(651,37),21)
-	box(Rect2(617,66,46,62),Color("eef0fe"),6,Color("4b4555"),2)
-	star(Vector2(640,81),11,Color("ffb100"))
-	text_center("500 PTS",Vector2(640,104),8,Color("141e2f"),false)
-	box(Rect2(622,109,36,13),Color("232934"),5,Color("232934"),0)
+	text_center("%02d:%02d"%[seconds/60,seconds%60],Vector2(287,57),27)
+	box(Rect2(182,90,176,74),Color("eef0fe"),9,Color("4b4555"),2)
+	star(Vector2(203,117),13,Color("ffb100"))
+	text_center("%d / 500"%game.player.score,Vector2(280,125),21,Color("141e2f"),false)
+	box(Rect2(197,138,146,13),Color("232934"),5,Color("232934"),0)
 	var ratio:float=clampf(float(game.player.score)/500,0,1)
-	if ratio>0:box(Rect2(623,110,34*ratio,11),Color("24baed"),4,Color("24baed"),0)
-	box(Rect2(1216,13,59,28),Color(0.06,0.06,0.10,0.82),5,Color.TRANSPARENT,0)
-	draw_circle(Vector2(1234,24),6,Color("f1f1f5"))
-	draw_rect(Rect2(1230,27,8,6),Color("f1f1f5"))
-	for x in [1231,1237]:draw_circle(Vector2(x,24),1.6,Color("41434d"))
-	text_center(str(game.kills),Vector2(1258,33),16)
-	if game.elapsed<5:
-		box(Rect2(573,151,134,72),Color("eeecff"),5,Color("6d6774"),1)
-		text_center("Eat everything",Vector2(640,176),15,Color("ffe321"))
-		text_center("to reach the",Vector2(640,194),14)
-		text_center("score target!",Vector2(640,213),14)
-	draw_arc(Vector2(640,540),69,0,TAU,64,Color(1,1,1,0.22),3,true)
+	if ratio>0:box(Rect2(198,139,144*ratio,11),Color("24baed"),4,Color("24baed"),0)
+	box(Rect2(20,22,75,50),Color(.06,.06,.10,.82),8,Color.TRANSPARENT,0)
+	text_center("%d K.O."%game.kills,Vector2(58,55),18)
+	var origin:=Vector2(270,801)
 	var knob:=Vector2.ZERO
-	if game.player.dragged:knob=((get_viewport().get_mouse_position()-game.player.mouse_origin)/100.0).limit_length()*37
-	draw_circle(Vector2(640,540)+knob,28,Color.WHITE)
-	if game.notice_time>0:text_center(game.notice,Vector2(640,211),36,Color("ffd541"))
+	if game.player.touch_index>=0:
+		origin=game.player.touch_origin
+		knob=game.player.joystick.limit_length()*43
+	elif game.player.dragged:
+		origin=game.player.mouse_origin
+		knob=((get_viewport().get_mouse_position()-origin)/80).limit_length()*43
+	draw_arc(origin,64,0,TAU,64,Color(1,1,1,.30),3,true)
+	draw_circle(origin+knob,25,Color(1,1,1,.76))
+	if game.notice_time>0:text_center(game.notice,Vector2(270,218),32,Color("ffd541"))

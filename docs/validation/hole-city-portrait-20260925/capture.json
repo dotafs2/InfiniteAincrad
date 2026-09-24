@@ -1,0 +1,38 @@
+{
+  "capture": "Actual headless Edge WebGL canvas, ordinary InputEventScreenTouch/Drag bot, seven CPU rivals. No score, radius, clock or world grants.",
+  "file": "portrait-gameplay.mp4",
+  "dimensions": [
+    540,
+    960
+  ],
+  "duration_seconds": 42.5,
+  "container_fps": 30,
+  "note": "Variable-cadence browser capture normalized to 30 fps; this is not a constant-30-render-fps benchmark. Early CSG/recording stalls remain visible. Silent clip.",
+  "sha256": "76c5214e1bde7aba62af6f5a63e0c030f450b5eba4dd2ddb7438e2d23d0ea8e1",
+  "bytes": 10309800,
+  "browser_errors": [],
+  "mobile_input_check": {
+    "viewport": [
+      390,
+      844
+    ],
+    "has_touch": true,
+    "play_tap": true,
+    "touch_drag": true,
+    "release": true,
+    "browser_errors": []
+  },
+  "physical_mobile_tested": false,
+  "animation_preview": {
+    "file": "character-animation.mp4",
+    "seconds": 10,
+    "dimensions": [
+      540,
+      720
+    ],
+    "scope": "Isolated real Godot playback of the imported Idle, Walk and Run clips; not gameplay",
+    "sha256": "62a457603a2243d9b516da0c0be3d431815aa0bfe445a992225d025268fd01dc",
+    "bytes": 256092,
+    "browser_errors": []
+  }
+}
