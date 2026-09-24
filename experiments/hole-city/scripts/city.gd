@@ -75,8 +75,11 @@ func cylinder(parent: Node3D, at: Vector3, radius: float, height: float, color: 
 	visual.position = at
 	return visual
 
+func _new_food() -> RigidBody3D:
+	return Food.new()
+
 func _food(at: Vector2, size: Vector3, category: String, points: int) -> RigidBody3D:
-	var body := Food.new()
+	var body := _new_food()
 	body.game = game
 	body.height = size.y
 	body.footprint = Vector2(size.x,size.z).length() * 0.5

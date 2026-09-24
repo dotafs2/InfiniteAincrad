@@ -41,10 +41,14 @@ locked after play.
 Seven CPU opponents, 336 edible objects, the exact procedural map coordinates,
 post-level-1 thresholds/radii and CPU strategy are authored provisional choices.
 They are not reverse-engineered original values. Cars and buildings still need
-further silhouette/material/layout matching. Physics uses conservative complete
-footprint gates and a fully-below-ground collection rule from the earlier MIT
-foundation; partially tipping a long object into a smaller opening is not yet
-an exact reference-physics reproduction.
+further silhouette/material/layout matching. Physics retains the conservative
+footprint-to-hole size gate, but releases bodies before their complete footprint
+is inside the opening. Rim contact and gravity now produce initial tipping.
+A bounded central attraction follows moving holes; long objects can receive a
+lower-end pull after tilting so they do not remain bridged across the mouth.
+Collisions stay active through the ground, and collection uses the rotated
+body's vertical bounds. This arcade assistance is authored, and the result is
+not an exact reference-physics reproduction.
 
 ## Direction review
 

@@ -99,9 +99,10 @@ func run() -> void:
 	# Ordinary movement and scoring, with all seven rivals participating.
 	game.demo_mode=true
 	game.start_level();game.begin_play()
-	Engine.time_scale=3.0
+	# Rim contact must be validated at the shipped 60 Hz physics step.
+	Engine.time_scale=1.0
 	var ticks:=0
-	while game.phase=="playing" and ticks<5200:
+	while game.phase=="playing" and ticks<15600:
 		await physics_frame
 		ticks+=1
 		if ticks%600==0:print("FIDELITY_RUN "+JSON.stringify({"seconds":game.elapsed,"score":game.player.score,"level":game.player.level,"eaten":game.eaten}))
@@ -113,9 +114,9 @@ func run() -> void:
 	game.start_level();game.begin_play()
 	for h in game.holes:
 		if h!=game.player:h.retire()
-	Engine.time_scale=3.0
+	Engine.time_scale=1.0
 	ticks=0
-	while game.phase=="playing" and ticks<5200:
+	while game.phase=="playing" and ticks<15600:
 		await physics_frame
 		ticks+=1
 	Engine.time_scale=1.0

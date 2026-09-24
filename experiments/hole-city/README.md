@@ -43,10 +43,22 @@ win/timeout styling, exact map geometry and exact growth/balance remain pending.
 The first-stage win/timeout panels are temporary authored summaries, not claims
 about unseen reference screens.
 
+## Falling and tipping
+
+Objects now wake when their center enters the opening, while their outer edge
+can still touch the rim. Ground contact and gravity produce the initial tip;
+collisions remain active until the rotated body clears the ground's underside.
+There is no scripted initial spin or forced downward velocity. A bounded inward
+force follows a moving hole. Tall objects that start to bridge the opening get
+an additional pull at their lower end, producing physical torque instead of
+rotating or shrinking the mesh directly. This is an arcade physics model, not
+an assertion of an exact match to the original game.
+
 ## Verification
 
 ```powershell
 godot --headless --path . --script res://tests/fidelity_acceptance.gd -- --test
+godot --headless --path . --fixed-fps 60 --script res://tests/rim_fall_acceptance.gd -- --test
 ```
 
 This checks the actual scene, PLAY action, tutorial gate, four-minute clock,
@@ -57,6 +69,9 @@ winning is not forced. A separate reachability fixture retires rivals and checks
 that normal movement and falling objects can reach 500 without score grants.
 `--test` isolates local saved settings. The earlier prototype has its separate
 `tests/acceptance.gd` suite and [archived notes](LEGACY_PROTOTYPE.md).
+The rim suite checks visible tipping and eventual collection for cars in two
+orientations, a street light and a building; it also checks that a perfectly
+centered symmetric object falls straight without an artificial spin.
 
 ## Package without opening windows
 

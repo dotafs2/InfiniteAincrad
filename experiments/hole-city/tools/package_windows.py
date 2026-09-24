@@ -61,7 +61,7 @@ def main():
     finally:
         engine = original_engine
     manifest = {
-        "game": "Sink City", "version": "0.2.0-reference-step-1", "engine": version,
+        "game": "Sink City", "version": "0.2.1-rim-physics", "engine": version,
         "template_version": template_version,
         "template_sha256": hashlib.sha256(data).hexdigest(),
         "headless_export_smoke": "passed",

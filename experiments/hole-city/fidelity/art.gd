@@ -1,9 +1,13 @@
 extends "res://scripts/city.gd"
 ## All models below are authored from primitives and meshes, not extracted assets.
 const Facade = preload("res://fidelity/facade.gdshader")
+const FallingBody = preload("res://fidelity/swallowable.gd")
 var fading: Array[Dictionary] = []
 var people: Array[Node3D] = []
 var preview: Node3D
+
+func _new_food() -> RigidBody3D:
+	return FallingBody.new()
 
 func sphere(parent: Node3D, at: Vector3, radius: float, tint: Color, scale_y:=1.0) -> MeshInstance3D:
 	var m := SphereMesh.new()

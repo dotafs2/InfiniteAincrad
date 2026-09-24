@@ -1,5 +1,40 @@
 # September 24 continuation
 
+## Latest correction: physical rim tipping
+
+The current visible-message snapshot contains 116 messages through
+`2026-09-24T14:58:07.158Z` (22:58:07 Beijing time). The prior 102-message prefix
+is preserved. Later messages and other tasks are not covered by this snapshot.
+
+The user requested an actual automatic-player video, then pointed out that
+objects mostly fell vertically. The first video is a 69-second ordinary-input
+bot match that earned 518 points/level 9 under the previous physics. It remains
+at `C:/Users/Chenxi Qu/Documents/ChatGPT/InfiniteAincrad/HoleCity-AutoPlayer-Gameplay.mp4`.
+
+The current scene now uses `fidelity/swallowable.gd`: it releases at the rim,
+retains ground collision, starts with zero imposed spin, and lets asymmetric
+support and gravity tip the body. Bounded inward force follows moving holes;
+a lower-end force helps long objects avoid bridging after they tilt. This is
+authored arcade assistance. The complete rotated body must clear the ground
+before collection. The legacy prototype keeps its earlier implementation.
+
+Current checks: 25 rim, 24 first-level at normal 60 Hz physics and 27 legacy,
+all passing. The current ordinary-rival run earned 501 points in 72.317 simulated
+seconds; the separate rivals-retired fixture earned 512. The updated Windows
+export startup passes. The existing `PlayHoleCityStep1.cmd` now starts this build.
+The new portable copy is `HoleCity-RimPhysics-Windows-x64.zip` beside that launcher.
+
+`HoleCity-Rim-Physics.mp4` in the entry workspace is a 38-second **controlled
+close-up**, labelled 0.5x slow motion, showing the actual authored car, street
+light and building using the new physics body. It is not a contested match.
+The same video and screenshots are in [H162 evidence](../../../validation/hole-city-rim-20260924/README.md).
+All browser/server helpers have been closed. No visible app, mouse movement,
+focus switch, paid provider, town/save/ledger change or quota reset occurred.
+The full reference reconstruction remains unfinished.
+
+The following H161 section records the previous milestone; its test results and
+package hashes are historical and are superseded by H162 for the current build.
+
 ## Current game request: exact Poki reference, self-authored art
 
 The user clarified that the target is the game inside

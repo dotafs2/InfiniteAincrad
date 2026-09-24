@@ -170,7 +170,9 @@ func scan_food() -> void:
 		for h in holes:
 			if not h.active or not item.can_fit(h):continue
 			var d:=Vector2(item.position.x-h.position.x,item.position.z-h.position.z).length()
-			if d+item.footprint<h.radius*0.99:item.begin_swallow(h);break
+			# Wake while part of the base is still supported by the rim, so
+			# asymmetric contact and gravity can tip the rigid body into the cut.
+			if d<h.radius*0.90:item.begin_swallow(h);break
 
 func collect(item:Node3D, h:Node3D) -> void:
 	if phase!="playing":return
