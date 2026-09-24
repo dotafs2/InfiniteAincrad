@@ -1,5 +1,11 @@
 # September 24 continuation
 
+## User-requested pause and milestone delivery
+
+The user reported exhausted quota and explicitly requested a stop, milestone uploads, and no reset. The project goal and hourly heartbeat `infiniteaincrad-gm-npc-09` are paused; the old `codex-reset` heartbeat was already paused. No reset was used. No runtime or GM operation remains running. Resume development or model calls only after a new user request. Preserve the seq378 checkpoint, pending Wren harvest, recoverable Flint wait, original ledgers and unknown costs. The authorized closing action is publication of the completed milestone on `codex/iteration-20260924`; the overall project remains incomplete.
+
+The visible conversation snapshot contains 61 messages through `2026-09-24T03:13:06.063Z`; later delivery verification and this turn's eventual final response are outside that snapshot. This current pause supersedes historical active-work and next-review statements below.
+
 ## Mandate and ownership
 
 The user requested continued implementation toward the complete InfiniteAincrad project, explicitly authorized GPT-6 Luna delegation, and requested a direction review every hour. The main agent owns integration and any canonical world writes. Luna tasks own bounded, non-overlapping implementation or review scopes. Existing unrelated work and old world lineages remain intact.

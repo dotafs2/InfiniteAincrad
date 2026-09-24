@@ -1,5 +1,7 @@
 # Current Roadmap
 
+Current execution status (2026-09-24): **paused at the user's request after quota exhaustion**. Completed milestone code, seq378 evidence and visible conversation are prepared for the authorized branch upload. No quota reset or automatic resumption is authorized. The priorities below apply only after the user resumes work.
+
 Language policy: the game, resident names, dialogue, Kimi/GM instructions and this roadmap use English. Conversation with the user stays Chinese. Original archived evidence is retained without rewriting what was said.
 
 Current priority: complete N5 by proving sustainable town life, while closing the real same-lineage loop from a resident need through GM improvement to observed resident effects. The world must remain voluntary, persistent and recoverable; a refusal is a valid outcome, not a reason to force adoption. Long-term food supply, natural ration sharing and a spontaneously resident-originated improvement remain unproven. A host-selected nutrition-information correction has now completed GM coding, review, real resident effect and receipt feedback. Adventure implementation follows this priority and must satisfy physical authority, atomicity and continuity before it can affect the active world. See [the September 24 continuation](docs/iteration-20260924.md).
