@@ -6,6 +6,16 @@ var level:=1
 var meter:Label3D
 var name_tag:Label3D
 var mouse_origin:=Vector2.ZERO
+var pulse_charge:=0.0
+var pulse_cooldown:=0.0
+var pulse_time:=0.0
+const PULSE_MAX:=100.0
+const SkinVisual=preload("res://fidelity/skin_visual.gd")
+var skin_id:=""
+var skin_cooldown:=0.0
+var speed_boost_time:=0.0
+var skin_ring:MeshInstance3D
+var skin_visual:Node3D
 
 func _ready() -> void:
 	radius=RADII[0]
@@ -37,6 +47,13 @@ func _ready() -> void:
 	meter.billboard=BaseMaterial3D.BILLBOARD_ENABLED
 	meter.no_depth_test=true
 	add_child(meter)
+	if is_player and is_instance_valid(game) and skin_id!="":
+		var skin:Dictionary=game.skin_definition(skin_id)
+		skin_visual=SkinVisual.new()
+		add_child(skin_visual)
+		skin_visual.build(skin)
+		skin_ring=skin_visual.main_ring
+		rim.visible=false
 	_update_badge()
 
 func _sync_shape() -> void:
@@ -44,26 +61,46 @@ func _sync_shape() -> void:
 	if is_instance_valid(label):label.position=Vector3(0,3.0+radius*0.1,0)
 	if is_instance_valid(name_tag):name_tag.position=Vector3(0,2.05+radius*0.1,0)
 	if is_instance_valid(meter):meter.position=Vector3(0,1.2+radius*0.1,0)
+	if is_instance_valid(skin_visual):skin_visual.scale=Vector3(radius,radius,radius)
 
 func _update_badge() -> void:
-	label.text="LVL %d"%level
+	label.text="SECTOR %02d"%level
 	name_tag.text=display_name
 	label.line_spacing=-6
 	if is_instance_valid(meter):
 		var next:int=LEVEL_STARTS[mini(level,LEVEL_STARTS.size()-1)]
-		meter.text="●  %d/%d"%[score-LEVEL_STARTS[level-1],maxi(1,next-LEVEL_STARTS[level-1])]
+		meter.text="SYNC  %d / %d"%[score-LEVEL_STARTS[level-1],maxi(1,next-LEVEL_STARTS[level-1])]
 	_sync_shape()
 
 func award(value:int) -> void:
 	score+=value
 	collected+=1
+	if is_player and is_instance_valid(game):game.note_skin_progress(score)
+	if is_player:pulse_charge=minf(PULSE_MAX,pulse_charge+clampf(float(value)*2.5+8.0,0.0,24.0))
 	var previous:=level
 	while level<LEVEL_STARTS.size() and score>=LEVEL_STARTS[level]:level+=1
 	radius=RADII[level-1]
 	_update_badge()
 	if is_player and level>previous:game.level_up()
 
+func trigger_pulse() -> bool:
+	if not is_player or not active or not enabled or pulse_charge<PULSE_MAX or pulse_cooldown>0.0:return false
+	if not is_instance_valid(game) or game.phase!="playing" or game.get_tree().paused:return false
+	if not game.activate_resonance(self):return false
+	pulse_charge=0.0
+	pulse_cooldown=7.0
+	pulse_time=0.72
+	return true
+
+func trigger_skin_skill() -> bool:
+	if not is_player or not is_instance_valid(game):return false
+	return game.activate_skin_skill(self)
+
 func _physics_process(delta:float) -> void:
+	pulse_cooldown=maxf(0.0,pulse_cooldown-delta)
+	pulse_time=maxf(0.0,pulse_time-delta)
+	skin_cooldown=maxf(0.0,skin_cooldown-delta)
+	speed_boost_time=maxf(0.0,speed_boost_time-delta)
 	if not active:return
 	if not enabled:
 		_sync_shape()
@@ -79,10 +116,11 @@ func _physics_process(delta:float) -> void:
 		if is_instance_valid(target):
 			var gap:=target.global_position-global_position
 			d=Vector2(gap.x,gap.z).normalized()*clampf(gap.length()/0.5,0,1)
-	velocity=Vector3(d.x,0,d.y)*(7.8 if is_player else 4.6)/(1+radius*0.05)
+	var speed_boost:=1.55 if speed_boost_time>0.0 else 1.0
+	velocity=Vector3(d.x,0,d.y)*(7.8 if is_player else 4.6)*speed_boost/(1+radius*0.05)
 	move_and_slide()
-	position.x=clampf(position.x,-47.0,47.0)
-	position.z=clampf(position.z,-47.0,47.0)
+	position.x=clampf(position.x,-game.WORLD_LIMIT,game.WORLD_LIMIT)
+	position.z=clampf(position.z,-game.WORLD_LIMIT,game.WORLD_LIMIT)
 	position.y=0
 	_sync_shape()
 

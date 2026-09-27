@@ -24,10 +24,10 @@ func run() -> void:
 	root.add_child(game)
 	await frames(4)
 	check(game.phase=="title" and game.ui.hero.visible,"initial screen presents authored city miniature")
-	check(game.ui.buttons.size()==1 and game.ui.buttons[0].text=="PLAY","first menu has the observed primary PLAY action")
+	check(game.ui.buttons.size()>=2 and game.ui.buttons[0].text=="ENTER THE RIFT" and game.ui.buttons[1].name=="holes-nav","first menu exposes the authored deployment action and Rift Forms navigation target")
 	game.ui.buttons[0].pressed.emit()
 	await frames(5)
-	check(game.phase=="intro" and game.remaining==240,"PLAY opens a frozen drag tutorial with four minutes")
+	check(game.phase=="intro" and game.remaining==210,"ENTER THE RIFT opens a frozen drag tutorial with the authored 210-second window")
 	check(not game.ui.hero.visible,"title miniature stops rendering during the level")
 	check(game.holes.size()==8,"first slice has player plus seven local rivals")
 	check(game.player.level==1 and game.player.score==0,"initial player has LVL 1 and 0/10 progress")
@@ -38,7 +38,7 @@ func run() -> void:
 	await frames(15)
 	key(KEY_W,false)
 	check(game.phase=="playing" and game.player.position.distance_to(start)>0.3,"real W input starts the timer and moves the player")
-	check(game.remaining<240,"four-minute countdown advances after movement starts")
+	check(game.remaining<210,"authored countdown advances after movement starts")
 	var large:Node3D
 	var small:Node3D
 	for item in game.city.foods:
@@ -93,9 +93,9 @@ func run() -> void:
 	check(game.phase=="title" and game.ui.hero.visible,"Give Up returns to the miniature menu")
 	game.start_level();game.begin_play()
 	await frames(4)
-	game.player.award(500)
+	game.player.award(game.SCORE_TARGET)
 	await frames(3)
-	check(game.phase=="complete","500-point goal completes the first slice")
+	check(game.phase=="complete","authored sync target completes the first slice")
 	# Ordinary movement and scoring, with all seven rivals participating.
 	game.demo_mode=true
 	game.start_level();game.begin_play()
@@ -107,7 +107,9 @@ func run() -> void:
 		ticks+=1
 		if ticks%600==0:print("FIDELITY_RUN "+JSON.stringify({"seconds":game.elapsed,"score":game.player.score,"level":game.player.level,"eaten":game.eaten}))
 	Engine.time_scale=1.0
-	check(game.phase in ["complete","eaten","timeout"] and game.player.score>0 and game.player.level>1,"live-rival automated play grows through earned points and terminates normally")
+	# With the moving-hole tether removed, a contested run is allowed to end at
+	# level 1; the invariant is real physics scoring and a terminal result.
+	check(game.phase in ["complete","eaten","timeout"] and game.player.score>0,"live-rival automated play scores through physics and terminates normally")
 	var live_run:={"phase":game.phase,"score":game.player.score,"level":game.player.level,"seconds":game.elapsed,"ticks":ticks}
 	# Separate level reachability from contested AI outcomes. Retire rivals in this
 	# fixture, but keep every footprint, movement, fall and score rule unchanged.
@@ -120,7 +122,7 @@ func run() -> void:
 		await physics_frame
 		ticks+=1
 	Engine.time_scale=1.0
-	check(game.phase=="complete" and game.player.score>=500,"the first-city layout reaches 500 points by movement and falling objects without score grants")
+	check(game.phase=="complete" and game.player.score>=game.SCORE_TARGET,"the first-city layout reaches the authored sync target by movement and falling objects without score grants")
 	var result:={"checks":checks,"failures":failures,"objects":game.total,"live_rival_run":live_run,"city_reachability":{"rivals_retired_for_fixture":true,"phase":game.phase,"score":game.player.score,"level":game.player.level,"seconds":game.elapsed,"ticks":ticks}}
 	print("FIDELITY_ACCEPTANCE "+JSON.stringify(result))
 	for arg in OS.get_cmdline_user_args():

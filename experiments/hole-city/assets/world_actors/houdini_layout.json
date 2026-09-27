@@ -1,0 +1,1209 @@
+{
+  "schema": "hole-city-houdini-actor-layout-v1",
+  "generator": "Houdini HOM / hython",
+  "seed": 20260926,
+  "district_count": 10,
+  "actor_count": 100,
+  "actors": [
+    {
+      "id": "espresso_cart",
+      "type": "Espresso Cart",
+      "district": "night_market",
+      "position": [
+        37.7,
+        -1.7
+      ],
+      "recipe_sha256": "1456bde4ff741a5db5cf22e8c085369337a9d9a32c20290e60b1593ea06f9c64",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "bread_oven",
+      "type": "Bread Oven",
+      "district": "night_market",
+      "position": [
+        39.85,
+        1.7
+      ],
+      "recipe_sha256": "f67d4475fbd9d9670a10f5938d9b531abb11275b0f64290bc934c957e9cefd86",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "fish_counter",
+      "type": "Fish Counter",
+      "district": "night_market",
+      "position": [
+        42.0,
+        -1.7
+      ],
+      "recipe_sha256": "cd541c3346414d3715812a079860fb5a195eb72faefcaf15e6cdc8ef38e8041c",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "fruit_stand",
+      "type": "Fruit Stand",
+      "district": "night_market",
+      "position": [
+        44.15,
+        1.7
+      ],
+      "recipe_sha256": "ebd5492ceac3871c609c8e1b72a42670e22db39067c055c53b60f22f9dfc0e7e",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "flower_bar",
+      "type": "Flower Bar",
+      "district": "night_market",
+      "position": [
+        46.3,
+        -1.7
+      ],
+      "recipe_sha256": "8ca87ae322fbc177cc98d8994a878c0576a8ec3932245620eafa2b5e1dbf5823",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "noodle_booth",
+      "type": "Noodle Booth",
+      "district": "night_market",
+      "position": [
+        37.7,
+        1.7
+      ],
+      "recipe_sha256": "06efb59636329e669bf2194e8c60009dbb56aed42cc6f4e7fc81b5390cb142d6",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "market_balance",
+      "type": "Market Balance",
+      "district": "night_market",
+      "position": [
+        39.85,
+        -1.7
+      ],
+      "recipe_sha256": "c41e54e407281f1f8e9705f7dc70d1f8358d349f3122c57f6d8a5bbb3f89fc5e",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "juice_press",
+      "type": "Juice Press",
+      "district": "night_market",
+      "position": [
+        42.0,
+        1.7
+      ],
+      "recipe_sha256": "f7601b2445d28ec2f58eb745c6ab2cfe2ffda6573f65b4b163fa3092bd7e6198",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "pretzel_rack",
+      "type": "Pretzel Rack",
+      "district": "night_market",
+      "position": [
+        44.15,
+        -1.7
+      ],
+      "recipe_sha256": "7a41ff5a3348fdae97bf1d97710896fbaa92e2e0f5ff6753b0798b744474f67c",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "street_grill",
+      "type": "Street Grill",
+      "district": "night_market",
+      "position": [
+        46.3,
+        1.7
+      ],
+      "recipe_sha256": "3de5e0c92424826c4216d79e092603230272dc67008f78c2f3de0d30875a62fe",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "laser_cutter",
+      "type": "Laser Cutter",
+      "district": "maker_yard",
+      "position": [
+        34.3307,
+        22.8414
+      ],
+      "recipe_sha256": "ad57683ce60f0868edea4365b8858d167ef50c87de703b25f9449fcb100a92f2",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "print_farm",
+      "type": "Print Farm",
+      "district": "maker_yard",
+      "position": [
+        34.0717,
+        26.8558
+      ],
+      "recipe_sha256": "37b295093774c38efecc4c642eba0c1996a3c21767e6ce7f8f829f36cce857fb",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "precision_lathe",
+      "type": "Precision Lathe",
+      "district": "maker_yard",
+      "position": [
+        37.8095,
+        25.3689
+      ],
+      "recipe_sha256": "180417063b325ad9133bc11d7b86fc9530741314df5967c0fc7cd51275e00493",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "drill_press",
+      "type": "Drill Press",
+      "district": "maker_yard",
+      "position": [
+        37.5504,
+        29.3833
+      ],
+      "recipe_sha256": "a90238238d36af5d26cd53d8671a31b967bd75f244f22248f386955c0a30177f",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "welding_bench",
+      "type": "Welding Bench",
+      "district": "maker_yard",
+      "position": [
+        41.2883,
+        27.8964
+      ],
+      "recipe_sha256": "441f7243afacc94d54c49f85115394054b90182a0a9c740b5a4b766daf5864e5",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "assembly_arm",
+      "type": "Assembly Arm",
+      "district": "maker_yard",
+      "position": [
+        32.3323,
+        25.5921
+      ],
+      "recipe_sha256": "46c3708af9535540e0a83777f0e1bc9ee76709488a4cc0ac4bb302c1d6a59dd2",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "roller_conveyor",
+      "type": "Roller Conveyor",
+      "district": "maker_yard",
+      "position": [
+        36.0701,
+        24.1052
+      ],
+      "recipe_sha256": "b607c6f386403a0741d170f47f1cfdfdc16030977a64015faaa1011dde618041",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "solder_station",
+      "type": "Solder Station",
+      "district": "maker_yard",
+      "position": [
+        35.811,
+        28.1196
+      ],
+      "recipe_sha256": "dd336af8f19bb08e54de163ab93292ae5f0e48d78652b9eacb9e1c374781a3c8",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "tool_chest",
+      "type": "Tool Chest",
+      "district": "maker_yard",
+      "position": [
+        39.5489,
+        26.6326
+      ],
+      "recipe_sha256": "e3c6566724f30023e4ac97c80b4a9c5bcd9ad0f2944e6d43282483e6dd82a5d7",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "workshop_gantry",
+      "type": "Workshop Gantry",
+      "district": "maker_yard",
+      "position": [
+        39.2898,
+        30.647
+      ],
+      "recipe_sha256": "50c89f26d0ca13ff10a1b86a6158260edfbdcf31876b9f97b7ca9db8566270b1",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "lock_wheel",
+      "type": "Lock Wheel",
+      "district": "canal_works",
+      "position": [
+        15.4299,
+        41.9869
+      ],
+      "recipe_sha256": "60df5af0903bf15c74f1831d0e6631a438cd615748bb6c5fc80e0c1b7e3fb967",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "mooring_bollard",
+      "type": "Mooring Bollard",
+      "district": "canal_works",
+      "position": [
+        12.8607,
+        45.0823
+      ],
+      "recipe_sha256": "a9c0b0cb5e3b663d1d777137c7c22354beb72281f36b16525de46046ca244397",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "canal_lift_bridge",
+      "type": "Canal Lift Bridge",
+      "district": "canal_works",
+      "position": [
+        16.7586,
+        46.0764
+      ],
+      "recipe_sha256": "d7eb0f0068b3780f175e479509218413c17ee251497a7eb1946d9166575ec5ea",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "waterwheel",
+      "type": "Waterwheel",
+      "district": "canal_works",
+      "position": [
+        14.1894,
+        49.1719
+      ],
+      "recipe_sha256": "5f3a1fe26af1645ff6721549ab10cffe3c45673742848d0300d5f71de906f818",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "canal_pump",
+      "type": "Canal Pump",
+      "district": "canal_works",
+      "position": [
+        18.0874,
+        50.166
+      ],
+      "recipe_sha256": "697a82eb7763b0fc7db7477073f43c19b3f46f8ad878a7389849e7f2139b4c4f",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "navigation_buoy",
+      "type": "Navigation Buoy",
+      "district": "canal_works",
+      "position": [
+        12.1963,
+        43.0376
+      ],
+      "recipe_sha256": "7c37460cc5d03df9408e4e9525beb368ac75fef56b1fa5de16964887a476209c",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "sluice_gate",
+      "type": "Sluice Gate",
+      "district": "canal_works",
+      "position": [
+        16.0942,
+        44.0317
+      ],
+      "recipe_sha256": "c4dabe5f6c044dded63406e4835ac9a3d4e9c1af9fa54e58ea42708a429e2736",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "cargo_crane",
+      "type": "Cargo Crane",
+      "district": "canal_works",
+      "position": [
+        13.525,
+        47.1271
+      ],
+      "recipe_sha256": "563deded8cb1acd32f34dd6e428969a0e682a4447e5b6046ae824493515a4503",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "survey_skiff",
+      "type": "Survey Skiff",
+      "district": "canal_works",
+      "position": [
+        17.423,
+        48.1212
+      ],
+      "recipe_sha256": "c494d6114ed23027f1722fadd61370fc836626a5ae6a0c2ecbc1cbade96afccc",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "tow_winch",
+      "type": "Tow Winch",
+      "district": "canal_works",
+      "position": [
+        14.8538,
+        51.2166
+      ],
+      "recipe_sha256": "73c7a1331a92816c764bf3d2fbd4364ba8a15a94a6995aac20ddc639be6a5556",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "reflector_telescope",
+      "type": "Reflector Telescope",
+      "district": "observatory",
+      "position": [
+        -10.0331,
+        36.3802
+      ],
+      "recipe_sha256": "6ae75da7194712c8a6ce2f6e2b50ccf9f3a2ac11672ec446839ec73dc199fe6d",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "radio_dish",
+      "type": "Radio Dish",
+      "district": "observatory",
+      "position": [
+        -13.9311,
+        37.3743
+      ],
+      "recipe_sha256": "93f44335ac7f5bbdfc4219d80ffd157286c66084e46e664fad7db9b1cceb5686",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "solar_orrery",
+      "type": "Solar Orrery",
+      "district": "observatory",
+      "position": [
+        -11.3619,
+        40.4697
+      ],
+      "recipe_sha256": "6c4c440e2cd2a4779d21d4daf19310254b7a66d6728851c9103d830031f3bb77",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "gyroscope",
+      "type": "Gyroscope",
+      "district": "observatory",
+      "position": [
+        -15.2599,
+        41.4638
+      ],
+      "recipe_sha256": "198585842f32b4ac766fd8fbe59297d473d81696504c08eac1e33aeac5b9f29c",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "meteor_cabinet",
+      "type": "Meteor Cabinet",
+      "district": "observatory",
+      "position": [
+        -12.6907,
+        44.5592
+      ],
+      "recipe_sha256": "2fa939db6ed76a189062ded793cf6a4e193063522fe799c170f96ed3870b6abf",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "telemetry_mast",
+      "type": "Telemetry Mast",
+      "district": "observatory",
+      "position": [
+        -13.2667,
+        35.3295
+      ],
+      "recipe_sha256": "8c63024eced91b6bb57c9ea297b161a5ddd284a406ed3281f4d22fa5382b211d",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "prism_tower",
+      "type": "Prism Tower",
+      "district": "observatory",
+      "position": [
+        -10.6975,
+        38.4249
+      ],
+      "recipe_sha256": "b1f2940a29198093b415a15123ba2ffbcd66073a794e6dcf6ff3d463901ad9fe",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "weather_balloon",
+      "type": "Weather Balloon",
+      "district": "observatory",
+      "position": [
+        -14.5955,
+        39.419
+      ],
+      "recipe_sha256": "17bbb9209fc7143f792a7c1c8d5eb5d29a57b10b8e2f605deed684006dc6a804",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "interferometer",
+      "type": "Interferometer",
+      "district": "observatory",
+      "position": [
+        -12.0263,
+        42.5145
+      ],
+      "recipe_sha256": "bb6a89562bb99f0fb7783920a0a1401a41bb90c69f8be0c9b3cd251852c6e9f4",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "star_projector",
+      "type": "Star Projector",
+      "district": "observatory",
+      "position": [
+        -15.9243,
+        43.5086
+      ],
+      "recipe_sha256": "dc55b0785a8dd8dace6ad43f4b1ac8729ba8bb2e9594cdecba56e7e1afef2c03",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "hydroponic_rack",
+      "type": "Hydroponic Rack",
+      "district": "greenhouse",
+      "position": [
+        -32.3323,
+        25.5921
+      ],
+      "recipe_sha256": "dbd00df31d1405594bf84e6c38f19c6a34db923ace237f996029be44424031c2",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "seed_sorter",
+      "type": "Seed Sorter",
+      "district": "greenhouse",
+      "position": [
+        -36.0701,
+        24.1052
+      ],
+      "recipe_sha256": "9a396982f396082b8cf312bc9ca4dceedc37d2e06efe7eccfada6c92b0c3c43b",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "compost_tumbler",
+      "type": "Compost Tumbler",
+      "district": "greenhouse",
+      "position": [
+        -35.811,
+        28.1196
+      ],
+      "recipe_sha256": "29ce2d3f0f555083b96fd81c3940dac0c557e2c0c60b077a9fa5a5b32ba7b8c6",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "irrigation_fan",
+      "type": "Irrigation Fan",
+      "district": "greenhouse",
+      "position": [
+        -39.5489,
+        26.6326
+      ],
+      "recipe_sha256": "e4e6445cfd59e8df40566b1a96ce20a951274c40f57ab9d23fcfef0f897e06a9",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "sprout_bed",
+      "type": "Sprout Bed",
+      "district": "greenhouse",
+      "position": [
+        -39.2898,
+        30.647
+      ],
+      "recipe_sha256": "02873e969afeaa48962d4266a83c5acb1687588eb5dfd75064862aae7df54c98",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "rain_collector",
+      "type": "Rain Collector",
+      "district": "greenhouse",
+      "position": [
+        -34.3307,
+        22.8414
+      ],
+      "recipe_sha256": "0677a28ad196e45069eac09fc695f35fd6615c30b4e7debdddf7bc6e00cb4b2c",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "mushroom_log",
+      "type": "Mushroom Log",
+      "district": "greenhouse",
+      "position": [
+        -34.0717,
+        26.8558
+      ],
+      "recipe_sha256": "78b66d948e5b4ea88bd683f55f53b3e00adadc4426869ead0c266332b7c854b2",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "soil_scanner",
+      "type": "Soil Scanner",
+      "district": "greenhouse",
+      "position": [
+        -37.8095,
+        25.3689
+      ],
+      "recipe_sha256": "e3aef9f5f4a0f5b26792f11a0b929d0d6e5ab5055b7de7462d86d9366e32ea97",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "grow_lamp",
+      "type": "Grow Lamp",
+      "district": "greenhouse",
+      "position": [
+        -37.5504,
+        29.3833
+      ],
+      "recipe_sha256": "9a9598a32c0bbefebe2508b3e320f42333d36a33cfea184106606fcf274346ae",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "pollinator_hive",
+      "type": "Pollinator Hive",
+      "district": "greenhouse",
+      "position": [
+        -41.2883,
+        27.8964
+      ],
+      "recipe_sha256": "dda58b6e99c7057297547d01bcb85b7b94579464f9f18edc3644f8b2cd931bdc",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "ticket_machine",
+      "type": "Ticket Machine",
+      "district": "transit",
+      "position": [
+        -44.7,
+        1.7
+      ],
+      "recipe_sha256": "b15ec57850292f82ef494054403fd220f78ca4fcbc1f5dd30899d7575a7e992d",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "turnstile",
+      "type": "Turnstile",
+      "district": "transit",
+      "position": [
+        -46.85,
+        -1.7
+      ],
+      "recipe_sha256": "c549ea14a8610a1375f094325d020b623589afb96337758ec0210e49bb6a585e",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "curb_charger",
+      "type": "Curb Charger",
+      "district": "transit",
+      "position": [
+        -49.0,
+        1.7
+      ],
+      "recipe_sha256": "b0cc8335edd9bda699dd797365a21623f7c277ea952084cd745cea2d7c0135c2",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "bicycle_dock",
+      "type": "Bicycle Dock",
+      "district": "transit",
+      "position": [
+        -51.15,
+        -1.7
+      ],
+      "recipe_sha256": "c9312a8a6f542f89c3d1c0c07175fb408848a26fa6a8fe3d6363704a882e57a0",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "rail_buffer",
+      "type": "Rail Buffer",
+      "district": "transit",
+      "position": [
+        -53.3,
+        1.7
+      ],
+      "recipe_sha256": "d1fa25ad77a19e6d187cd3dc8e02b813473fa3c81dceb4e614a29d2d7bf26c4c",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "rain_shelter",
+      "type": "Rain Shelter",
+      "district": "transit",
+      "position": [
+        -44.7,
+        -1.7
+      ],
+      "recipe_sha256": "0039690ac6468540a17eada0d06a9d1bb681626c265fe240fa721f75b6c62e42",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "luggage_carousel",
+      "type": "Luggage Carousel",
+      "district": "transit",
+      "position": [
+        -46.85,
+        1.7
+      ],
+      "recipe_sha256": "9e76005b3f1daf069d2836d0d3c2754244f27b84df005d7c3c0b4c802d0fca3d",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "crossing_semaphore",
+      "type": "Crossing Semaphore",
+      "district": "transit",
+      "position": [
+        -49.0,
+        -1.7
+      ],
+      "recipe_sha256": "dd68c5da6dbf0edf1b35b48772d5ceb741a8b463602717114c19823cb710a1c9",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "tram_stop",
+      "type": "Tram Stop",
+      "district": "transit",
+      "position": [
+        -51.15,
+        1.7
+      ],
+      "recipe_sha256": "1928651e523dbf5da9e7aa461c8877a403667718a5d06d67c7f43a3d8f590d1b",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "route_globe",
+      "type": "Route Globe",
+      "district": "transit",
+      "position": [
+        -53.3,
+        -1.7
+      ],
+      "recipe_sha256": "cd5f4377707511bae4ed024ccdf876c8a53a91a69fe98e84a729896bf505c698",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "pocket_ferris_wheel",
+      "type": "Pocket Ferris Wheel",
+      "district": "festival",
+      "position": [
+        -31.4992,
+        -20.7842
+      ],
+      "recipe_sha256": "6d89389e06375ae7c8dca9f97ec72fa925e0b1552b77dbb1bc461d481e9abd6e",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "carousel",
+      "type": "Carousel",
+      "district": "festival",
+      "position": [
+        -31.2401,
+        -24.7986
+      ],
+      "recipe_sha256": "80d73007bae53fdf59e5c3f27b98387d51946801e283a08124b7cb1f76e99bea",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "drum_stage",
+      "type": "Drum Stage",
+      "district": "festival",
+      "position": [
+        -34.9779,
+        -23.3117
+      ],
+      "recipe_sha256": "bbc184ba9503fb25c5e05fedbf21b042d8dc5e5b896a649d823d82974cce0325",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "speaker_stack",
+      "type": "Speaker Stack",
+      "district": "festival",
+      "position": [
+        -34.7189,
+        -27.326
+      ],
+      "recipe_sha256": "eabbbefbebfd3db3ae2548b0b11b6be2dd6e23922fbdece75b5629cef41777b7",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "pipe_organ",
+      "type": "Pipe Organ",
+      "district": "festival",
+      "position": [
+        -38.4567,
+        -25.8391
+      ],
+      "recipe_sha256": "cd9512409e25d258348c9e567aa149a06fc560227fcaeac6c6d00dc0726593c7",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "lantern_mobile",
+      "type": "Lantern Mobile",
+      "district": "festival",
+      "position": [
+        -29.5007,
+        -23.5348
+      ],
+      "recipe_sha256": "f1f996ac309130cbca404e4307b63ec51f124784cfe48d670ee9fb8f6ceefc98",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "popcorn_machine",
+      "type": "Popcorn Machine",
+      "district": "festival",
+      "position": [
+        -33.2386,
+        -22.0479
+      ],
+      "recipe_sha256": "8b82196bb996bcb63fa2d3f87f14fc1940b572c5fb0109df82420be72bada200",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "swing_spinner",
+      "type": "Swing Spinner",
+      "district": "festival",
+      "position": [
+        -32.9795,
+        -26.0623
+      ],
+      "recipe_sha256": "0359f644c8b3edc338f35ff3839d66a0834de0be0ddafba86ef5601d4aa61687",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "balloon_cart",
+      "type": "Balloon Cart",
+      "district": "festival",
+      "position": [
+        -36.7173,
+        -24.5754
+      ],
+      "recipe_sha256": "844595314ee6a2faa4fac9b324bd9cb697ea63f6a4d086b9b75a15973e89a459",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "puppet_booth",
+      "type": "Puppet Booth",
+      "district": "festival",
+      "position": [
+        -36.4583,
+        -28.5898
+      ],
+      "recipe_sha256": "1a00d20ca8300cdf273c66352318823dfd277041a651e124dfa26dd8926ef5a6",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "wind_turbine",
+      "type": "Wind Turbine",
+      "district": "energy",
+      "position": [
+        -14.3483,
+        -38.6582
+      ],
+      "recipe_sha256": "1703ac821280ede8a722c46b4e17c59e206eaf32b9da9fb014ebb9e52e82c81e",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "transformer",
+      "type": "Transformer",
+      "district": "energy",
+      "position": [
+        -11.7791,
+        -41.7536
+      ],
+      "recipe_sha256": "de8c0722bf654a80feb5d64c27ea354de5f82310c8f97b3a3d70a9377b27a73b",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "flywheel_generator",
+      "type": "Flywheel Generator",
+      "district": "energy",
+      "position": [
+        -15.6771,
+        -42.7477
+      ],
+      "recipe_sha256": "12bd36d7f2c294cd9fd2cb82032d272076d6ddd95a9c4821f72d2da510005c03",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "cooling_tower",
+      "type": "Cooling Tower",
+      "district": "energy",
+      "position": [
+        -13.1079,
+        -45.8432
+      ],
+      "recipe_sha256": "10203179a7080681805ff776deacfba09c9794721aaa061231e4b7d0651e42a8",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "battery_stack",
+      "type": "Battery Stack",
+      "district": "energy",
+      "position": [
+        -17.0058,
+        -46.8373
+      ],
+      "recipe_sha256": "a3a74eea564fd16121380f0ba0846c4d3fefa381e254c78ec3b6035da050c4c9",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "solar_tracker",
+      "type": "Solar Tracker",
+      "district": "energy",
+      "position": [
+        -11.1147,
+        -39.7089
+      ],
+      "recipe_sha256": "10c6bc0339b4d33e7f0a6e5a0235ff0cf71da7fcdb663b1944c9ee43a84d980e",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "street_sweeper",
+      "type": "Street Sweeper",
+      "district": "energy",
+      "position": [
+        -15.0127,
+        -40.703
+      ],
+      "recipe_sha256": "1b19cc3768ac700a107e055be87198eff0aebdfc3c819083d45114dfd82182fa",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "water_purifier",
+      "type": "Water Purifier",
+      "district": "energy",
+      "position": [
+        -12.4435,
+        -43.7984
+      ],
+      "recipe_sha256": "9c22b72daaea5fc38811913fb2309b14724e1401ea0b97ea9ed2d7c6296a3c06",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "heat_exchanger",
+      "type": "Heat Exchanger",
+      "district": "energy",
+      "position": [
+        -16.3415,
+        -44.7925
+      ],
+      "recipe_sha256": "771ae4ca4c0e0425c2dd1f3428e800a5a3f2a0cb5db861a1723947bae84857b8",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "cable_spool",
+      "type": "Cable Spool",
+      "district": "energy",
+      "position": [
+        -13.7723,
+        -47.8879
+      ],
+      "recipe_sha256": "f0e4582d1c50fe93197b597ad7e786642d6b702c206b151b30869cb67b40dd65",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "parcel_quadcopter",
+      "type": "Parcel Quadcopter",
+      "district": "skyport",
+      "position": [
+        12.1963,
+        -43.0376
+      ],
+      "recipe_sha256": "cefec3c13fa15288328c5612e1d2eb41d9cd7fd85d6ef4db69b3127f49350280",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "parcel_locker",
+      "type": "Parcel Locker",
+      "district": "skyport",
+      "position": [
+        16.0942,
+        -44.0317
+      ],
+      "recipe_sha256": "0b187ad96f3af49a31fd80ac2be78527e8773a0fe406c778bb2934121af07cd6",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "landing_beacon",
+      "type": "Landing Beacon",
+      "district": "skyport",
+      "position": [
+        13.525,
+        -47.1271
+      ],
+      "recipe_sha256": "a6deb5bd1625f96de5ed9b27f1a0ab5f93c98dd44a7b500a86a38ab6349901c7",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "fuel_cart",
+      "type": "Fuel Cart",
+      "district": "skyport",
+      "position": [
+        17.423,
+        -48.1212
+      ],
+      "recipe_sha256": "5b06dfc6e8a67caabcd7c064bde7d97cde9d989ac7dfcdef6510d1f0abddf19d",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "baggage_tug",
+      "type": "Baggage Tug",
+      "district": "skyport",
+      "position": [
+        14.8538,
+        -51.2166
+      ],
+      "recipe_sha256": "0cdc84944d8ae2a0cbe75e7b834bcc0a4e554b20437cf0ec8ac0190436db5232",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "luggage_scanner",
+      "type": "Luggage Scanner",
+      "district": "skyport",
+      "position": [
+        15.4299,
+        -41.9869
+      ],
+      "recipe_sha256": "57287f6a2e2ad45e4e5cb0a8ecb3151d3c0b98fa4ed3876dda0be2dd2f37afd6",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "cargo_pod",
+      "type": "Cargo Pod",
+      "district": "skyport",
+      "position": [
+        12.8607,
+        -45.0823
+      ],
+      "recipe_sha256": "5ed0583097fcad7454d1cf7603b00ebd4b924d32ce68cf41b3d1b97704463385",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "windsock",
+      "type": "Windsock",
+      "district": "skyport",
+      "position": [
+        16.7586,
+        -46.0764
+      ],
+      "recipe_sha256": "a0d0121157a852eacebada7e309900280d74c3afe872a267de4ff4de17335150",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "control_tower",
+      "type": "Control Tower",
+      "district": "skyport",
+      "position": [
+        14.1894,
+        -49.1719
+      ],
+      "recipe_sha256": "b4cc3687bf027eaa2a736b0652deed548af6826cf91d7e8338cd96ed6600c514",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "radar_pedestal",
+      "type": "Radar Pedestal",
+      "district": "skyport",
+      "position": [
+        18.0874,
+        -50.166
+      ],
+      "recipe_sha256": "5d480562c04d5de64ce64d312ce5395c27c308d82659063fe817bd5fc6381048",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "kinetic_arch",
+      "type": "Kinetic Arch",
+      "district": "sculpture",
+      "position": [
+        29.5007,
+        -23.5348
+      ],
+      "recipe_sha256": "e5ae64f26344425656088851e9dbb64436d15db328eabfa6d00376c75d3bfcf6",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "spiral_totem",
+      "type": "Spiral Totem",
+      "district": "sculpture",
+      "position": [
+        33.2386,
+        -22.0479
+      ],
+      "recipe_sha256": "88261ee1093c4bba39931def35ecca9208bfcd03c03161401e0c253d2fd35b18",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "balance_stones",
+      "type": "Balance Stones",
+      "district": "sculpture",
+      "position": [
+        32.9795,
+        -26.0623
+      ],
+      "recipe_sha256": "9bb4578d4a78428e2caf56e18901f3adb4b86ba8681f0c4c34ddc9d828aa8454",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "chime_frame",
+      "type": "Chime Frame",
+      "district": "sculpture",
+      "position": [
+        36.7173,
+        -24.5754
+      ],
+      "recipe_sha256": "0899cd5615db2921eed76726f0fa2cd7c258c65a73d9e357ebd00f5811f8236c",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "pendulum_clock",
+      "type": "Pendulum Clock",
+      "district": "sculpture",
+      "position": [
+        36.4583,
+        -28.5898
+      ],
+      "recipe_sha256": "7836a38295ce41b53e26385abdf0ef102573928a66a4c722f888d7622e9182c1",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "sundial",
+      "type": "Sundial",
+      "district": "sculpture",
+      "position": [
+        31.4992,
+        -20.7842
+      ],
+      "recipe_sha256": "3e759d8b9287c19f0a4e95ec8a1aea0e91aa1ac5c928ecd92859baa3d6358f4a",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "mirror_fan",
+      "type": "Mirror Fan",
+      "district": "sculpture",
+      "position": [
+        31.2401,
+        -24.7986
+      ],
+      "recipe_sha256": "dbb8ce84576720c765571e21adcf69bfcdfb1f89a7cca296c9ff8ab6baa3fdda",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "ribbon_gate",
+      "type": "Ribbon Gate",
+      "district": "sculpture",
+      "position": [
+        34.9779,
+        -23.3117
+      ],
+      "recipe_sha256": "fe8502496cb72c1f74dcb70ab3db7688a35058b6699df2de7efb1a7e1dabf52e",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "fractal_tree",
+      "type": "Fractal Tree",
+      "district": "sculpture",
+      "position": [
+        34.7189,
+        -27.326
+      ],
+      "recipe_sha256": "a4ce5f825e4fe934bc9269960c0e8824bfa5c5cbf1b52096be6e8b9c46b20aa6",
+      "pcg_class": "actor",
+      "seed": 20260926
+    },
+    {
+      "id": "mist_fountain",
+      "type": "Mist Fountain",
+      "district": "sculpture",
+      "position": [
+        38.4567,
+        -25.8391
+      ],
+      "recipe_sha256": "56463c31af216e2ef567cf8843d7928e19e1feebe6a3d9bde9fb04a531ab025d",
+      "pcg_class": "actor",
+      "seed": 20260926
+    }
+  ]
+}

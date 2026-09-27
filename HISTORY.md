@@ -1,5 +1,16 @@
 # 历史全部流水
 
+## 2026-09-26 · H165 Building collapse and living street traffic
+
+Added six distinct authored facade treatments over the imported building
+silhouettes. When a building fits the hole, it fractures into sixteen colored
+rigid blocks that retain gravity, tipping and local mouth attraction before
+scoring individually. Added eight bounded road cars that move, pause near the
+player and wrap at the city edge while parked vehicles remain edible. The new
+destruction/traffic acceptance passes 8/8; portrait 28/28, rim 25/25,
+resonance 13/13 and full fidelity 24/24 also pass. A clean 60-second 540×960
+portrait gameplay recording is available in `tmp/mobile-preview`.
+
 ## 2026-09-25 · H163 Portrait city kit, 208 Blender assets and animated stick figures
 
 Implemented the user's next reference-game milestone with 208 original geometry-distinct Blender assets: 48 buildings, 32 vehicles, 64 street props, 48 plants and 16 rigged stick figures, including related structural variants. All are instantiated in the 443-object playable city. Sixty-four pedestrians play imported Idle/Walk/Run clips while resting, walking and fleeing. A 540×960 portrait interface has one-finger movement, release-to-stop and on-screen pause; rim tipping remains intact. Blender MCP's official command handlers were used through a local main-thread background transport, because upstream's GUI timer server rejects headless Blender. No desktop window or focus change occurred. All 98 checks pass (22 portrait, 25 rim, 24 first-level, 27 legacy); the final ordinary regression was eaten at 60 points, while the separate rivals-retired reachability fixture earned 510. Actual headless WebGL touch checks, Windows packaged startup, a 42.5-second ordinary-input gameplay excerpt and a separate 10-second animation preview are delivered. Exact map/art matching, shops, skins, later levels and balancing remain incomplete. The town, provider ledgers, project goal and hourly automation remain paused. [Evidence, model catalog and videos](docs/validation/hole-city-portrait-20260925/README.md).
@@ -12208,3 +12219,20 @@ GPT-5.3-Codex-Spark was not listed by this session's subagent dispatch interface
   28, rim 25, fidelity 24, legacy 27; all failures are empty.
 - Reviewed CC0 Quaternius and Kenney options plus Mixamo's hosted license terms;
   no external model bytes were copied into the repository.
+
+## 2026-09-27 · Sink//Field ten-skin visual and interaction pass
+
+- Added shared `fidelity/skin_visual.gd` presentation geometry for ten original skins,
+  with explicit shader profiles, a Cinder flame crown, crystal facets, orbital glints
+  and readable CPU particle accents in the library and live player.
+- Enlarged the portrait selection preview, added wrapped English skill/play copy,
+  score unlock state and a gameplay cooldown strip, and kept functional abilities
+  guarded by cooldown and selection rules.
+- Broke up sidewalk crowds with deterministic clusters, varied facing and independent
+  rest windows. Buildings still use the authored local city recipe and existing
+  collision/traffic behavior.
+- Verified the short acceptance suites and an isolated four-profile persistence
+  harness. The latest H.264 capture covers all ten forms and decodes successfully.
+- Full fidelity, real-player cold restore, real-device validation and release
+  trademark/licensing review remain open; this milestone does not claim Apple
+  Guideline 4.1 clearance.

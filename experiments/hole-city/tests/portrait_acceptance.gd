@@ -29,6 +29,14 @@ func run() -> void:
 		specials[c.special]=true
 	check(animated==64,"all 64 citizens have imported idle, walk, run and role clips")
 	check(specials.size()==16,"sixteen distinct visible roles expose sixteen distinct action clips")
+	var occupied_cells:={}
+	var rest_cycles:={}
+	for c in game.city.citizens:
+		var p:Vector3=c.body.position
+		occupied_cells["%d:%d"%[int(round(p.x*.5)),int(round(p.z*.5))]]=true
+		rest_cycles["%.1f"%float(c.get("rest_cycle",12.0))]=true
+	check(occupied_cells.size()>=40,"pedestrians begin in varied sidewalk cells instead of a repeated line")
+	check(rest_cycles.size()>=4,"pedestrians use independent rest cycles")
 	check(game.city.citizens.any(func(c:Dictionary):return c.kind=="police" and c.special=="Chase"),"police role has a dedicated chase action")
 	check(game.city.citizens.any(func(c:Dictionary):return c.kind=="thief" and c.special=="Sneak"),"thief role has a dedicated sneak action")
 	check(game.city.citizens.any(func(c:Dictionary):return c.kind=="mech" and c.special=="Patrol"),"mech role has a dedicated patrol action")
@@ -65,7 +73,7 @@ func run() -> void:
 	touch(0,false,Vector2(350,800));await frames(3)
 	check(game.player.touch_index==-1 and game.player.velocity.length()<.01,"release stops movement")
 	game.ui.buttons[0].pressed.emit();await frames(3)
-	check(paused and game.ui.buttons[0].text=="RESUME","on-screen pause works without a keyboard")
+	check(paused and game.ui.buttons[0].text=="RESUME SIGNAL","on-screen pause works without a keyboard")
 	game.ui.buttons[0].pressed.emit();await frames(3)
 	check(not paused,"on-screen resume restores play")
 	# Observe ordinary world-driven walking and fleeing, with actual imported clips.
@@ -77,7 +85,10 @@ func run() -> void:
 	game.player.position=Vector3(citizen.body.position.x+1.8,0,citizen.body.position.z)
 	await frames(3)
 	check(citizen.clip=="Run","nearby hole triggers the run clip")
-	game.player.position=Vector3(45,0,45);game.elapsed=10.0-float(citizen.phase)
+	var rest_cycle:float=float(citizen.get("rest_cycle",12.0))
+	var rest_window:float=float(citizen.get("rest_window",3.0))
+	var rest_offset:float=float(citizen.get("rest_offset",0.0))
+	game.player.position=Vector3(45,0,45);game.elapsed=rest_cycle-rest_window-rest_offset-float(citizen.phase)+rest_cycle
 	await frames(3)
 	check(citizen.clip=="Idle","resting pedestrian returns to idle")
 	var result:={"checks":checks,"failures":failures,"unique_models":game.city.used_assets.size(),"citizens":animated,"edible_objects":game.total}

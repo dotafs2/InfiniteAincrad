@@ -9,14 +9,19 @@ varying vec3 local_normal;
 void vertex(){local_normal=NORMAL;}
 void fragment(){
     vec2 cell=fract(UV*vec2(columns,floors));
+    vec2 id=floor(UV*vec2(columns,floors));
+    float window_hash=fract(sin(dot(id,vec2(12.9898,78.233)))*43758.5453);
     float side=1.0-step(0.7,abs(local_normal.y));
     vec2 edge=abs(cell-0.5);
     float opening=(1.0-step(glass_tower?0.47:0.27,edge.x))*(1.0-step(glass_tower?0.48:0.34,edge.y))*side;
     float frame=(1.0-step(glass_tower?0.49:0.31,edge.x))*(1.0-step(glass_tower?0.50:0.38,edge.y))*side;
     vec3 pane=mix(glass_color.rgb,glass_color.rgb*0.64,step(0.48,cell.x));
     pane=mix(pane,glass_color.rgb*1.25,step(0.66,cell.y)*0.4);
+    float window_pulse=0.72+0.28*sin(TIME*(0.25+window_hash*0.18)+window_hash*6.28318);
+    vec3 neon=mix(vec3(0.18,0.72,0.95),vec3(1.0,0.36,0.12),step(0.57,window_hash));
+    pane+=neon*0.10*window_pulse*opening;
     float cross=1.0-step(0.018,min(abs(cell.x-0.5),abs(cell.y-0.5)));
     vec3 color=mix(wall_color.rgb,vec3(0.68,0.64,0.54),frame);
     color=mix(color,mix(pane,vec3(0.61,0.62,0.57),cross*0.65),opening);
-    ALBEDO=color; ROUGHNESS=mix(0.88,0.3,opening); ALPHA=visibility;
+    ALBEDO=color; ROUGHNESS=mix(0.88,0.3,opening); EMISSION=neon*0.07*window_pulse*opening; ALPHA=visibility;
 }

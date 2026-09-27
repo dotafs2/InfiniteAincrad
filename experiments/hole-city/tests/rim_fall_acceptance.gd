@@ -15,7 +15,7 @@ func check(ok:bool,message:String) -> void:
 	checks+=1
 	if not ok:failures.append(message);push_error(message)
 
-func fixture(title:String,size:Vector3,radius:float,offset:float,angle:float) -> void:
+func fixture(title:String,size:Vector3,radius:float,offset:float,angle:float,expect_fall:=true) -> void:
 	var world:=Node3D.new()
 	root.add_child(world)
 	var floor:=CSGCombiner3D.new()
@@ -61,7 +61,10 @@ func fixture(title:String,size:Vector3,radius:float,offset:float,angle:float) ->
 		if top>0:max_visible_tilt=maxf(max_visible_tilt,tilt)
 		if top>-3.0 and body.collision_mask!=1:contact_lost_too_early=true
 	check(not contact_lost_too_early,title+": collision stays enabled through the rim")
-	check(collector.awards==count_before+1 and not is_instance_valid(body),title+": complete fall awards exactly once")
+	if expect_fall:
+		check(collector.awards==count_before+1 and not is_instance_valid(body),title+": complete fall awards exactly once")
+	else:
+		check(collector.awards==count_before and is_instance_valid(body),title+": long rigid body can bridge the rim without remote scoring")
 	if offset>0:check(max_visible_tilt>15.0,title+": asymmetric support visibly tips the body")
 	else:check(max_visible_tilt<5.0,title+": a centered symmetric drop is not forced to rotate")
 	results.append({"case":title,"max_tilt_deg":max_tilt,"visible_tilt_deg":max_visible_tilt,"seconds":frames/60.0,"collected":collector.awards-count_before})
@@ -74,7 +77,10 @@ func run() -> void:
 	await fixture("car",Vector3(1.65,1.18,3.5),2.2,1.2,0.0)
 	await fixture("turned_car",Vector3(1.65,1.18,3.5),2.2,1.2,PI/2)
 	await fixture("lamp",Vector3(0.75,3.4,0.4),0.85,0.6,0.0)
-	await fixture("building",Vector3(5.1,10,7.3),5.1,3.5,0.0)
+	# This is a single rigid test box, not a category=building with fracture.
+	# Removing the horizontal tether allows it to bridge real supports. The
+	# destruction suite separately checks actual building support loss/fracture.
+	await fixture("tall_box_bridge",Vector3(5.1,10,7.3),5.1,3.5,0.0,false)
 	await fixture("centered_box",Vector3(0.6,0.6,0.6),1.2,0.0,0.0)
 	var report:={"checks":checks,"failures":failures,"results":results}
 	print("RIM_FALL_ACCEPTANCE "+JSON.stringify(report))
