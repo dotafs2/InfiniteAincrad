@@ -1,0 +1,22 @@
+{
+  "checks": 92,
+  "failures": [],
+  "metrics": {
+    "coins": 229,
+    "completed_best_scores": {
+      "city": 1,
+      "food": 200,
+      "frost": 0,
+      "toys": 300
+    },
+    "completed_runs": 4,
+    "receipts_after_pruning": 32,
+    "unlocked": [
+      "city",
+      "food",
+      "toys",
+      "frost"
+    ]
+  },
+  "scope": "Actual progression/selection/settlement API and isolated legacy/cold-save fixtures. Scores are explicit threshold fixtures, not normal-play pacing evidence. No real user save, advertising or purchase."
+}

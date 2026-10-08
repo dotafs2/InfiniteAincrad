@@ -1,0 +1,1470 @@
+{
+  "schema": 2,
+  "contexts": {
+    "city": {
+      "title": "Hometown",
+      "author": "Juhani Junkala",
+      "license": "CC0-1.0",
+      "source_url": "https://opengameart.org/content/jrpg-pack-2-towns",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_archive_sha256": "b56785b248ad0faf629a5981eed7ec507b738abf87230e19ae0dba2f4eb466f8",
+      "source_member": "Town1 - Home Town.ogg",
+      "source_member_sha256": "21dfdcc43e1f097020c2c8b5fce5e47790a3fd9b496d903f37304cc5440a6be4",
+      "asset": "worlds/city.ogg",
+      "sha256": "bfe0df235f477ce5c97ceffdd64285f4dd5b751d7a6323cccce2ef5c9a7cc274",
+      "bytes": 1174924,
+      "processing": {
+        "constant_gain_db": -8.3,
+        "filters": "highpass=f=35",
+        "duration_or_tempo_changed": false,
+        "seam_guard_seconds": 0.003,
+        "note": "Full composition, no rearrangement or time stretching."
+      },
+      "measurements": {
+        "seconds": 90.0,
+        "frames": 3969000,
+        "sample_rate": 44100,
+        "channels": 2,
+        "lufs": -22.0,
+        "true_peak_dbfs": -7.7,
+        "sample_peak": 0.4140669107437134,
+        "rms_dbfs": -24.214231491088867,
+        "boundary_sample_jump": 0.0004964310210198164,
+        "high_band_energy_fraction": 0.002762890886515379,
+        "dc": 5.2529136155499145e-05,
+        "finite": true,
+        "clipped_samples": 0
+      }
+    },
+    "food": {
+      "title": "Sunshine Coast",
+      "author": "Juhani Junkala",
+      "license": "CC0-1.0",
+      "source_url": "https://opengameart.org/content/jrpg-pack-2-towns",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_archive_sha256": "b56785b248ad0faf629a5981eed7ec507b738abf87230e19ae0dba2f4eb466f8",
+      "source_member": "Town3 - Sunshine Coast.ogg",
+      "source_member_sha256": "5d45d84b53677fd72d0bb99c38db239f843401c001193bfad222af7647935f8f",
+      "asset": "worlds/food.ogg",
+      "sha256": "e468b9dc8bc3ca27534425ceec68df4c7c4d1c4149f46fba1a5b00c926120244",
+      "bytes": 1646780,
+      "processing": {
+        "constant_gain_db": -10.7,
+        "filters": "highpass=f=35,highshelf=f=2800:g=-3:width_type=q:width=0.7",
+        "duration_or_tempo_changed": false,
+        "seam_guard_seconds": 0.003,
+        "note": "Full composition, no rearrangement or time stretching."
+      },
+      "measurements": {
+        "seconds": 112.34043083900227,
+        "frames": 4954213,
+        "sample_rate": 44100,
+        "channels": 2,
+        "lufs": -22.0,
+        "true_peak_dbfs": -8.5,
+        "sample_peak": 0.37176305055618286,
+        "rms_dbfs": -24.30252456665039,
+        "boundary_sample_jump": 0.0011685100616887212,
+        "high_band_energy_fraction": 0.030722836032509804,
+        "dc": 1.0669205948943272e-05,
+        "finite": true,
+        "clipped_samples": 0
+      }
+    },
+    "toys": {
+      "title": "Children's March Theme",
+      "author": "Cleyton Kauffman",
+      "license": "CC0-1.0",
+      "source_url": "https://opengameart.org/content/childrens-march-theme",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_archive_sha256": "feea4abc34d3ba19a742603bedc2619b75820e1bef423773ccaae03538f7f02a",
+      "source_member": "Children's March Theme.wav",
+      "source_member_sha256": "d00e4f68256ceb8f13420a1b2d9e5572ae96e01aa41e61ff6199326b9f4b9b94",
+      "asset": "worlds/toys.ogg",
+      "sha256": "b3fd61f486d4e0197158fa04ac195ace6495d32db80cbefe6cd345b285a392d0",
+      "bytes": 821467,
+      "processing": {
+        "constant_gain_db": -4.3,
+        "filters": "highpass=f=35,highshelf=f=2800:g=-2:width_type=q:width=0.7",
+        "duration_or_tempo_changed": false,
+        "seam_guard_seconds": 0.003,
+        "note": "Full composition, no rearrangement or time stretching."
+      },
+      "measurements": {
+        "seconds": 64.0,
+        "frames": 2822400,
+        "sample_rate": 44100,
+        "channels": 2,
+        "lufs": -22.3,
+        "true_peak_dbfs": -6.1,
+        "sample_peak": 0.49413639307022095,
+        "rms_dbfs": -24.585073471069336,
+        "boundary_sample_jump": 0.0011427020654082298,
+        "high_band_energy_fraction": 0.003323471639305353,
+        "dc": 1.7324193322565407e-05,
+        "finite": true,
+        "clipped_samples": 0
+      }
+    },
+    "frost": {
+      "title": "Through the Snow (author slowed loop)",
+      "author": "Cleyton Kauffman",
+      "license": "CC0-1.0",
+      "source_url": "https://opengameart.org/content/snow-theme",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_archive_sha256": "10fe7758311e7b7e724abbad56fbee0d86e0131e1fa66512f4188a5ee6a0c05c",
+      "source_member": "Snow Theme/BGM_Snow_Theme_Slowed_Loop.wav",
+      "source_member_sha256": "6477f9b27efdbd9132c1c1a9339f0a1b1b276b5d143a47efc1ac8e3c434d7c5f",
+      "asset": "worlds/frost.ogg",
+      "sha256": "970aacccfa6e57200451245d72768a0ed2447a34005cb0c23d38272c38a4bf15",
+      "bytes": 478133,
+      "processing": {
+        "constant_gain_db": 12.0,
+        "filters": "highpass=f=35,highshelf=f=2800:g=-2:width_type=q:width=0.7",
+        "duration_or_tempo_changed": false,
+        "seam_guard_seconds": 0.003,
+        "note": "Source author slowed alternative is used as supplied for Frost; no time stretching here."
+      },
+      "measurements": {
+        "seconds": 34.285714285714285,
+        "frames": 1512000,
+        "sample_rate": 44100,
+        "channels": 2,
+        "lufs": -22.6,
+        "true_peak_dbfs": -6.4,
+        "sample_peak": 0.4782789647579193,
+        "rms_dbfs": -25.02855682373047,
+        "boundary_sample_jump": 0.0034384990576654673,
+        "high_band_energy_fraction": 0.005699672736227512,
+        "dc": 4.031262506032363e-06,
+        "finite": true,
+        "clipped_samples": 0
+      }
+    },
+    "case": {
+      "title": "A Little Wonder",
+      "author": "Hole Feast original composition",
+      "license": "Project original",
+      "bpm": 96,
+      "bars": 16,
+      "key": "D major",
+      "events": [
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 0.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 0.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 73,
+          "beat": 0.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 78,
+          "beat": 0.22499999999999998,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 50,
+          "beat": 0,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 0,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 61,
+          "beat": 0,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 38,
+          "beat": 0,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "bass",
+          "midi": 45,
+          "beat": 2.5,
+          "seconds": 0.5,
+          "gain": 0.035
+        },
+        {
+          "voice": "keys",
+          "midi": 66,
+          "beat": 0.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 64,
+          "beat": 2.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 3.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 59,
+          "beat": 4.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 66,
+          "beat": 4.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 4.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 74,
+          "beat": 4.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 47,
+          "beat": 4,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 54,
+          "beat": 4,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 4,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 35,
+          "beat": 4,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "bass",
+          "midi": 42,
+          "beat": 6.5,
+          "seconds": 0.5,
+          "gain": 0.035
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 4.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 61,
+          "beat": 6.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 55,
+          "beat": 8.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 8.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 8.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 71,
+          "beat": 8.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 43,
+          "beat": 8,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 50,
+          "beat": 8,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 8,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 31,
+          "beat": 8,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "bass",
+          "midi": 38,
+          "beat": 10.5,
+          "seconds": 0.5,
+          "gain": 0.035
+        },
+        {
+          "voice": "keys",
+          "midi": 59,
+          "beat": 8.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 10.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 66,
+          "beat": 11.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 57,
+          "beat": 12.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 64,
+          "beat": 12.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 12.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 73,
+          "beat": 12.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 45,
+          "beat": 12,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 52,
+          "beat": 12,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 12,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 33,
+          "beat": 12,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "keys",
+          "midi": 64,
+          "beat": 12.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 61,
+          "beat": 14.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 16.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 16.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 73,
+          "beat": 16.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 78,
+          "beat": 16.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 50,
+          "beat": 16,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 16,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 61,
+          "beat": 16,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 38,
+          "beat": 16,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "bass",
+          "midi": 45,
+          "beat": 18.5,
+          "seconds": 0.5,
+          "gain": 0.035
+        },
+        {
+          "voice": "keys",
+          "midi": 66,
+          "beat": 16.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 18.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 59,
+          "beat": 20.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 66,
+          "beat": 20.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 20.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 74,
+          "beat": 20.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 47,
+          "beat": 20,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 54,
+          "beat": 20,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 20,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 35,
+          "beat": 20,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "bass",
+          "midi": 42,
+          "beat": 22.5,
+          "seconds": 0.5,
+          "gain": 0.035
+        },
+        {
+          "voice": "keys",
+          "midi": 66,
+          "beat": 20.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 64,
+          "beat": 21.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 22.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 55,
+          "beat": 24.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 24.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 24.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 71,
+          "beat": 24.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 43,
+          "beat": 24,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 50,
+          "beat": 24,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 24,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 31,
+          "beat": 24,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "bass",
+          "midi": 38,
+          "beat": 26.5,
+          "seconds": 0.5,
+          "gain": 0.035
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 24.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 59,
+          "beat": 26.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 57,
+          "beat": 28.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 64,
+          "beat": 28.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 28.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 73,
+          "beat": 28.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 45,
+          "beat": 28,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 52,
+          "beat": 28,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 28,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 33,
+          "beat": 28,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "keys",
+          "midi": 61,
+          "beat": 28.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 64,
+          "beat": 30.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 32.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 32.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 73,
+          "beat": 32.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 78,
+          "beat": 32.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 50,
+          "beat": 32,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 32,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 61,
+          "beat": 32,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 38,
+          "beat": 32,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "bass",
+          "midi": 45,
+          "beat": 34.5,
+          "seconds": 0.5,
+          "gain": 0.035
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 32.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 66,
+          "beat": 34.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 64,
+          "beat": 35.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 59,
+          "beat": 36.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 66,
+          "beat": 36.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 36.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 74,
+          "beat": 36.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 47,
+          "beat": 36,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 54,
+          "beat": 36,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 36,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 35,
+          "beat": 36,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "bass",
+          "midi": 42,
+          "beat": 38.5,
+          "seconds": 0.5,
+          "gain": 0.035
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 36.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 66,
+          "beat": 38.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 55,
+          "beat": 40.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 40.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 40.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 71,
+          "beat": 40.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 43,
+          "beat": 40,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 50,
+          "beat": 40,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 40,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 31,
+          "beat": 40,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "bass",
+          "midi": 38,
+          "beat": 42.5,
+          "seconds": 0.5,
+          "gain": 0.035
+        },
+        {
+          "voice": "keys",
+          "midi": 67,
+          "beat": 40.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 66,
+          "beat": 42.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 43.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 57,
+          "beat": 44.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 64,
+          "beat": 44.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 44.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 73,
+          "beat": 44.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 45,
+          "beat": 44,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 52,
+          "beat": 44,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 44,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 33,
+          "beat": 44,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "keys",
+          "midi": 64,
+          "beat": 44.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 61,
+          "beat": 46.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 48.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 48.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 73,
+          "beat": 48.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 78,
+          "beat": 48.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 50,
+          "beat": 48,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 48,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 61,
+          "beat": 48,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 38,
+          "beat": 48,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "bass",
+          "midi": 45,
+          "beat": 50.5,
+          "seconds": 0.5,
+          "gain": 0.035
+        },
+        {
+          "voice": "keys",
+          "midi": 66,
+          "beat": 48.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 64,
+          "beat": 50.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 51.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 59,
+          "beat": 52.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 66,
+          "beat": 52.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 52.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 74,
+          "beat": 52.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 47,
+          "beat": 52,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 54,
+          "beat": 52,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 52,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 35,
+          "beat": 52,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "bass",
+          "midi": 42,
+          "beat": 54.5,
+          "seconds": 0.5,
+          "gain": 0.035
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 52.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 61,
+          "beat": 54.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 55,
+          "beat": 56.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 56.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 56.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 71,
+          "beat": 56.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 43,
+          "beat": 56,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 50,
+          "beat": 56,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 56,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 31,
+          "beat": 56,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "bass",
+          "midi": 38,
+          "beat": 58.5,
+          "seconds": 0.5,
+          "gain": 0.035
+        },
+        {
+          "voice": "keys",
+          "midi": 59,
+          "beat": 56.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 62,
+          "beat": 58.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        },
+        {
+          "voice": "keys",
+          "midi": 57,
+          "beat": 60.0,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 64,
+          "beat": 60.075,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 69,
+          "beat": 60.15,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "keys",
+          "midi": 73,
+          "beat": 60.225,
+          "seconds": 1.35,
+          "gain": 0.026
+        },
+        {
+          "voice": "pad",
+          "midi": 45,
+          "beat": 60,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 52,
+          "beat": 60,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "pad",
+          "midi": 57,
+          "beat": 60,
+          "seconds": 2.5,
+          "gain": 0.008
+        },
+        {
+          "voice": "bass",
+          "midi": 33,
+          "beat": 60,
+          "seconds": 0.9,
+          "gain": 0.085
+        },
+        {
+          "voice": "keys",
+          "midi": 61,
+          "beat": 60.45,
+          "seconds": 0.72,
+          "gain": 0.046
+        }
+      ],
+      "source_kind": "Original deterministic synthesis; no third-party samples",
+      "asset": "worlds/case.ogg",
+      "sha256": "1b597b1fa54d14e9f4a20b34c5fc440ca52bcf41b3c8173d539372c4416cd814",
+      "bytes": 216408,
+      "processing": {
+        "constant_gain_db": -4.399999999999999,
+        "filters": "highpass=f=35",
+        "duration_or_tempo_changed": false,
+        "seam_guard_seconds": 0.003,
+        "note": "Full composition, no rearrangement or time stretching."
+      },
+      "measurements": {
+        "seconds": 40.0,
+        "frames": 1764000,
+        "sample_rate": 44100,
+        "channels": 2,
+        "lufs": -22.1,
+        "true_peak_dbfs": -9.9,
+        "sample_peak": 0.3182837665081024,
+        "rms_dbfs": -24.01418685913086,
+        "boundary_sample_jump": 0.00017036923964042217,
+        "high_band_energy_fraction": 1.93367610812345e-09,
+        "dc": 7.909441592346411e-06,
+        "finite": true,
+        "clipped_samples": 0
+      },
+      "original_pcm_sha256": "419aedb45f38d4939995748eface29975d2ea05d92ee6ce33d27b3928424d814"
+    },
+    "menu": {
+      "title": "Shop Theme",
+      "recording_title": "Buy Something!",
+      "author": "Cleyton Kauffman",
+      "source_url": "https://opengameart.org/content/shop-theme",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_archive_sha256": "127e5556a7ef9d944e5a44b012ffc6f833fa673c4c2091b71909159b9965c836",
+      "source_member": "shop_theme/Buy Something!.ogg",
+      "source_member_sha256": "fa023f1d2e3d3194136bb8f877925d5547e5489439b24658698fbbb458de5b21",
+      "original_metadata_artist": "Cleyton R. Xavier",
+      "processing": {
+        "constant_gain_db": -7.1,
+        "codec": "libvorbis",
+        "quality": 3,
+        "trimmed": false,
+        "edge_fades": false,
+        "tempo_changed": false,
+        "note": "Full normal version; no added instruments or arrangement changes."
+      },
+      "asset": "shop_theme_loop.ogg",
+      "bytes": 1194690,
+      "sha256": "0e5af2a8c1ea6969bfcadbd727e33a4c7f87379aa211b465322f98f026538b02",
+      "measurements": {
+        "seconds": 88.0,
+        "frames": 3880800,
+        "sample_rate": 44100,
+        "channels": 2,
+        "lufs": -22.0,
+        "true_peak_dbfs": -7.4,
+        "sample_peak": 0.42631033062934875,
+        "rms_dbfs": -23.723621368408203,
+        "boundary_sample_jump": 0.019624754786491394,
+        "high_band_energy_fraction": 0.008053496479988098,
+        "dc": 3.1103154469747096e-05,
+        "finite": true,
+        "clipped_samples": 0
+      },
+      "ffmpeg_version": "ffmpeg version 7.1.1 Copyright (c) 2000-2025 the FFmpeg developers",
+      "limits": "Numerical measurements and decoder checks do not establish listening quality on a phone."
+    }
+  },
+  "limits": "Objective waveform and decoder checks do not prove subjective listening quality or physical-device performance.",
+  "generator": {
+    "path": "tools/prepare_world_music.py",
+    "sha256": "d78e5b30fb010ce8cf6ef9c7979e3168a37d278fc024c55753d3f6ec3d184831",
+    "numpy_version": "2.3.5",
+    "ffmpeg_version": "ffmpeg version 7.1.1 Copyright (c) 2000-2025 the FFmpeg developers"
+  },
+  "total_bytes": 5532402
+}

@@ -1,0 +1,27 @@
+{
+  "command": [
+    ".build/godot-standard/Godot.app/Contents/MacOS/Godot",
+    "--path",
+    ".",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "build/fairytale-city-20261004/visual-review.gd",
+    "--",
+    "--test",
+    "--capture-dir=res://artifacts/fairytale-city-20261004/visual-02/images"
+  ],
+  "cwd": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city",
+  "started_at": "2026-10-04T02:22:35.023601+00:00",
+  "timeout_seconds": 80.0,
+  "status": "completed",
+  "runtime_input_count": 723,
+  "runtime_inputs_before_sha256": "eadb8e02de88dfda64715db35fb970366a11383cf6d28814574b5e54666bdfdf",
+  "pid": 43694,
+  "exit_code": 0,
+  "finished_at": "2026-10-04T02:22:41.104192+00:00",
+  "log_sha256": "9ccbff2e64d7d85da015437270595be9909f1666f9dcfbdbd8930ef477d89e50",
+  "engine_errors": [],
+  "runtime_inputs_unchanged": true,
+  "runtime_inputs_after_sha256": "eadb8e02de88dfda64715db35fb970366a11383cf6d28814574b5e54666bdfdf"
+}

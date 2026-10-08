@@ -1,0 +1,27 @@
+{
+  "checks": {
+    "connected_graph": true,
+    "no_road_blockers": true,
+    "no_walk_blockers": true,
+    "all_walks_clear_traffic": true,
+    "traffic_paths_unchanged": true,
+    "old_buildings_preserved": true,
+    "deterministic_plan": true,
+    "food_additional_budget": true
+  },
+  "counts": {
+    "nodes": 20,
+    "roads": 27,
+    "routes": 60,
+    "plots": 160,
+    "heaps": 14,
+    "snacks": 1080,
+    "districts": 11
+  },
+  "predicted_additional_food_bodies": 334,
+  "relocated_old_snacks": 34,
+  "road_blockers": [],
+  "walk_blockers": [],
+  "unsafe_walks": [],
+  "plan_sha256": "fe423b06124614186db021691322b43f3765e9f399c285016ffca631d0d1c9b7"
+}

@@ -1,0 +1,34 @@
+{
+  "scope": "Local draft character limits only; no search-ranking or Apple-save claim",
+  "fields": {
+    "Name": {
+      "characters": 28,
+      "limit": 30,
+      "passed": true
+    },
+    "Subtitle": {
+      "characters": 28,
+      "limit": 30,
+      "passed": true
+    },
+    "Keywords": {
+      "characters": 99,
+      "ascii_bytes": 99,
+      "limit": 100,
+      "passed": true
+    },
+    "Promotional text": {
+      "characters": 138,
+      "limit": 170,
+      "passed": true
+    },
+    "Description": {
+      "characters": 1877,
+      "limit": 4000,
+      "passed": true
+    }
+  },
+  "uploaded": false,
+  "copy_sha256": "931a487182c978e8c41fb30e8d2be22e56ffc488fe0c97e99d7fb53585253af9",
+  "preserved_pre_edit": "build/toy-city-20261003/store-draft-history-01/manifest.json"
+}

@@ -1,0 +1,1100 @@
+{
+  "status": "complete_verified",
+  "at_utc": "2026-10-03T05:36:56.609497+00:00",
+  "version": "0.13.0",
+  "source_reused_suites": 0,
+  "source_fresh_suites": 90,
+  "package_reused_suites": 0,
+  "package_fresh_suites": 90,
+  "current_engine_sha256": "c7cccbf8fb143e34e02fd6521e09be2c2b974f0d5db080b19071c9c570718ccf",
+  "source_fresh_names": [
+    "release_info",
+    "toy_geometry",
+    "toy_guard_geometry",
+    "toy_city",
+    "toy_map_integration",
+    "toy_court",
+    "native_polish",
+    "viewport_layout",
+    "application_lifecycle",
+    "scene_qa",
+    "street_prop_qa",
+    "claim_recovery",
+    "full_city_qa",
+    "skin_collection",
+    "skin_fx",
+    "title_navigation",
+    "ui_redesign",
+    "map_preview",
+    "food_preview",
+    "map_preview_review",
+    "coin_skins",
+    "skin_skill",
+    "snack_city",
+    "food_city_density",
+    "food_round",
+    "food_finish",
+    "food_neighborhoods",
+    "mobile_maps",
+    "performance",
+    "portrait",
+    "progression",
+    "store",
+    "city_motion",
+    "city_districts",
+    "skin_catalog",
+    "food_rain_continuity",
+    "food_city_revision",
+    "food_impact",
+    "ui_collection_review",
+    "food_goals_review",
+    "progression_review",
+    "rain_review",
+    "crowd_review",
+    "district_review",
+    "food_revision_review",
+    "skin_catalog_review",
+    "mobile_thumbnail",
+    "procedural_filtering",
+    "selective_reveal",
+    "selective_reveal_review",
+    "building_only_reveal_review",
+    "building_surface_artifacts",
+    "growth_extension",
+    "rival_combat",
+    "large_growth_world",
+    "pedestrian_swallow_review",
+    "growth_rivals_review",
+    "growth_integration_review",
+    "food_collision",
+    "food_collision_review",
+    "music",
+    "music_review",
+    "shop_theme_review",
+    "food_color",
+    "food_color_review",
+    "skin_rarity",
+    "skin_rarity_review",
+    "world_expansion",
+    "world_expansion_review",
+    "monetization_bridges",
+    "economy_continuation",
+    "diamond_boundary_review",
+    "retention",
+    "retention_review",
+    "retention_ui_review",
+    "perimeter_frontage",
+    "food_extension_collision_review",
+    "train",
+    "train_surface",
+    "train_review",
+    "train_surface_review",
+    "boost",
+    "boost_review",
+    "skin_polish",
+    "skin_polish_review",
+    "food_growth",
+    "food_growth_review",
+    "rain_admission",
+    "rain_admission_review",
+    "rain_support"
+  ],
+  "package_fresh_names": [
+    "release_info",
+    "toy_geometry",
+    "toy_guard_geometry",
+    "toy_city",
+    "toy_map_integration",
+    "toy_court",
+    "native_polish",
+    "viewport_layout",
+    "application_lifecycle",
+    "scene_qa",
+    "street_prop_qa",
+    "claim_recovery",
+    "full_city_qa",
+    "skin_collection",
+    "skin_fx",
+    "title_navigation",
+    "ui_redesign",
+    "map_preview",
+    "food_preview",
+    "map_preview_review",
+    "coin_skins",
+    "skin_skill",
+    "snack_city",
+    "food_city_density",
+    "food_round",
+    "food_finish",
+    "food_neighborhoods",
+    "mobile_maps",
+    "performance",
+    "portrait",
+    "progression",
+    "store",
+    "city_motion",
+    "city_districts",
+    "skin_catalog",
+    "food_rain_continuity",
+    "food_city_revision",
+    "food_impact",
+    "ui_collection_review",
+    "food_goals_review",
+    "progression_review",
+    "rain_review",
+    "crowd_review",
+    "district_review",
+    "food_revision_review",
+    "skin_catalog_review",
+    "mobile_thumbnail",
+    "procedural_filtering",
+    "selective_reveal",
+    "selective_reveal_review",
+    "building_only_reveal_review",
+    "building_surface_artifacts",
+    "growth_extension",
+    "rival_combat",
+    "large_growth_world",
+    "pedestrian_swallow_review",
+    "growth_rivals_review",
+    "growth_integration_review",
+    "food_collision",
+    "food_collision_review",
+    "music",
+    "music_review",
+    "shop_theme_review",
+    "food_color",
+    "food_color_review",
+    "skin_rarity",
+    "skin_rarity_review",
+    "world_expansion",
+    "world_expansion_review",
+    "monetization_bridges",
+    "economy_continuation",
+    "diamond_boundary_review",
+    "retention",
+    "retention_review",
+    "retention_ui_review",
+    "perimeter_frontage",
+    "food_extension_collision_review",
+    "train",
+    "train_surface",
+    "train_review",
+    "train_surface_review",
+    "boost",
+    "boost_review",
+    "skin_polish",
+    "skin_polish_review",
+    "food_growth",
+    "food_growth_review",
+    "rain_admission",
+    "rain_admission_review",
+    "rain_support"
+  ],
+  "scope": "All current source and exact Web-PCK suites execute freshly; no source report reuse.",
+  "historical_baseline_gate": "artifacts/collapse-surface-20261002/web-gate-02/release.json",
+  "fresh_executions": [
+    {
+      "phase": "source",
+      "suite": "release_info",
+      "checks": 37
+    },
+    {
+      "phase": "source",
+      "suite": "toy_geometry",
+      "checks": 131
+    },
+    {
+      "phase": "source",
+      "suite": "toy_guard_geometry",
+      "checks": 191
+    },
+    {
+      "phase": "source",
+      "suite": "toy_city",
+      "checks": 2946
+    },
+    {
+      "phase": "source",
+      "suite": "toy_map_integration",
+      "checks": 76
+    },
+    {
+      "phase": "source",
+      "suite": "toy_court",
+      "checks": 639
+    },
+    {
+      "phase": "source",
+      "suite": "native_polish",
+      "checks": 267
+    },
+    {
+      "phase": "source",
+      "suite": "viewport_layout",
+      "checks": 41
+    },
+    {
+      "phase": "source",
+      "suite": "application_lifecycle",
+      "checks": 70
+    },
+    {
+      "phase": "source",
+      "suite": "scene_qa",
+      "checks": 765
+    },
+    {
+      "phase": "source",
+      "suite": "street_prop_qa",
+      "checks": 835
+    },
+    {
+      "phase": "source",
+      "suite": "claim_recovery",
+      "checks": 10
+    },
+    {
+      "phase": "source",
+      "suite": "full_city_qa",
+      "checks": 1539
+    },
+    {
+      "phase": "source",
+      "suite": "skin_collection",
+      "checks": 374
+    },
+    {
+      "phase": "source",
+      "suite": "skin_fx",
+      "checks": 414
+    },
+    {
+      "phase": "source",
+      "suite": "title_navigation",
+      "checks": 37
+    },
+    {
+      "phase": "source",
+      "suite": "ui_redesign",
+      "checks": 1854
+    },
+    {
+      "phase": "source",
+      "suite": "map_preview",
+      "checks": 79
+    },
+    {
+      "phase": "source",
+      "suite": "food_preview",
+      "checks": 483
+    },
+    {
+      "phase": "source",
+      "suite": "map_preview_review",
+      "checks": 716
+    },
+    {
+      "phase": "source",
+      "suite": "coin_skins",
+      "checks": 412
+    },
+    {
+      "phase": "source",
+      "suite": "skin_skill",
+      "checks": 130
+    },
+    {
+      "phase": "source",
+      "suite": "snack_city",
+      "checks": 80
+    },
+    {
+      "phase": "source",
+      "suite": "food_city_density",
+      "checks": 1667
+    },
+    {
+      "phase": "source",
+      "suite": "food_round",
+      "checks": 2
+    },
+    {
+      "phase": "source",
+      "suite": "food_finish",
+      "checks": 136
+    },
+    {
+      "phase": "source",
+      "suite": "food_neighborhoods",
+      "checks": 323
+    },
+    {
+      "phase": "source",
+      "suite": "mobile_maps",
+      "checks": 29
+    },
+    {
+      "phase": "source",
+      "suite": "performance",
+      "checks": 271
+    },
+    {
+      "phase": "source",
+      "suite": "portrait",
+      "checks": 30
+    },
+    {
+      "phase": "source",
+      "suite": "progression",
+      "checks": 15
+    },
+    {
+      "phase": "source",
+      "suite": "store",
+      "checks": 17
+    },
+    {
+      "phase": "source",
+      "suite": "city_motion",
+      "checks": 22
+    },
+    {
+      "phase": "source",
+      "suite": "city_districts",
+      "checks": 2718
+    },
+    {
+      "phase": "source",
+      "suite": "skin_catalog",
+      "checks": 897
+    },
+    {
+      "phase": "source",
+      "suite": "food_rain_continuity",
+      "checks": 38
+    },
+    {
+      "phase": "source",
+      "suite": "food_city_revision",
+      "checks": 135
+    },
+    {
+      "phase": "source",
+      "suite": "food_impact",
+      "checks": 256
+    },
+    {
+      "phase": "source",
+      "suite": "ui_collection_review",
+      "checks": 1905
+    },
+    {
+      "phase": "source",
+      "suite": "food_goals_review",
+      "checks": 37
+    },
+    {
+      "phase": "source",
+      "suite": "progression_review",
+      "checks": 10
+    },
+    {
+      "phase": "source",
+      "suite": "rain_review",
+      "checks": 9
+    },
+    {
+      "phase": "source",
+      "suite": "crowd_review",
+      "checks": 17
+    },
+    {
+      "phase": "source",
+      "suite": "district_review",
+      "checks": 4
+    },
+    {
+      "phase": "source",
+      "suite": "food_revision_review",
+      "checks": 11
+    },
+    {
+      "phase": "source",
+      "suite": "skin_catalog_review",
+      "checks": 206
+    },
+    {
+      "phase": "source",
+      "suite": "mobile_thumbnail",
+      "checks": 3847
+    },
+    {
+      "phase": "source",
+      "suite": "procedural_filtering",
+      "checks": 27
+    },
+    {
+      "phase": "source",
+      "suite": "selective_reveal",
+      "checks": 75
+    },
+    {
+      "phase": "source",
+      "suite": "selective_reveal_review",
+      "checks": 491
+    },
+    {
+      "phase": "source",
+      "suite": "building_only_reveal_review",
+      "checks": 213
+    },
+    {
+      "phase": "source",
+      "suite": "building_surface_artifacts",
+      "checks": 1438
+    },
+    {
+      "phase": "source",
+      "suite": "growth_extension",
+      "checks": 1978
+    },
+    {
+      "phase": "source",
+      "suite": "rival_combat",
+      "checks": 58
+    },
+    {
+      "phase": "source",
+      "suite": "large_growth_world",
+      "checks": 258
+    },
+    {
+      "phase": "source",
+      "suite": "pedestrian_swallow_review",
+      "checks": 120
+    },
+    {
+      "phase": "source",
+      "suite": "growth_rivals_review",
+      "checks": 291
+    },
+    {
+      "phase": "source",
+      "suite": "growth_integration_review",
+      "checks": 1606
+    },
+    {
+      "phase": "source",
+      "suite": "food_collision",
+      "checks": 156
+    },
+    {
+      "phase": "source",
+      "suite": "food_collision_review",
+      "checks": 18386
+    },
+    {
+      "phase": "source",
+      "suite": "music",
+      "checks": 129
+    },
+    {
+      "phase": "source",
+      "suite": "music_review",
+      "checks": 120
+    },
+    {
+      "phase": "source",
+      "suite": "shop_theme_review",
+      "checks": 55
+    },
+    {
+      "phase": "source",
+      "suite": "food_color",
+      "checks": 55
+    },
+    {
+      "phase": "source",
+      "suite": "food_color_review",
+      "checks": 1351
+    },
+    {
+      "phase": "source",
+      "suite": "skin_rarity",
+      "checks": 556
+    },
+    {
+      "phase": "source",
+      "suite": "skin_rarity_review",
+      "checks": 1555
+    },
+    {
+      "phase": "source",
+      "suite": "world_expansion",
+      "checks": 57
+    },
+    {
+      "phase": "source",
+      "suite": "world_expansion_review",
+      "checks": 284
+    },
+    {
+      "phase": "source",
+      "suite": "monetization_bridges",
+      "checks": 116
+    },
+    {
+      "phase": "source",
+      "suite": "economy_continuation",
+      "checks": 120
+    },
+    {
+      "phase": "source",
+      "suite": "diamond_boundary_review",
+      "checks": 25
+    },
+    {
+      "phase": "source",
+      "suite": "retention",
+      "checks": 67
+    },
+    {
+      "phase": "source",
+      "suite": "retention_review",
+      "checks": 590
+    },
+    {
+      "phase": "source",
+      "suite": "retention_ui_review",
+      "checks": 8226
+    },
+    {
+      "phase": "source",
+      "suite": "perimeter_frontage",
+      "checks": 631
+    },
+    {
+      "phase": "source",
+      "suite": "food_extension_collision_review",
+      "checks": 199
+    },
+    {
+      "phase": "source",
+      "suite": "train",
+      "checks": 220
+    },
+    {
+      "phase": "source",
+      "suite": "train_surface",
+      "checks": 161
+    },
+    {
+      "phase": "source",
+      "suite": "train_review",
+      "checks": 388
+    },
+    {
+      "phase": "source",
+      "suite": "train_surface_review",
+      "checks": 1121
+    },
+    {
+      "phase": "source",
+      "suite": "boost",
+      "checks": 55
+    },
+    {
+      "phase": "source",
+      "suite": "boost_review",
+      "checks": 98
+    },
+    {
+      "phase": "source",
+      "suite": "skin_polish",
+      "checks": 486
+    },
+    {
+      "phase": "source",
+      "suite": "skin_polish_review",
+      "checks": 760
+    },
+    {
+      "phase": "source",
+      "suite": "food_growth",
+      "checks": 2202
+    },
+    {
+      "phase": "source",
+      "suite": "food_growth_review",
+      "checks": 1476
+    },
+    {
+      "phase": "source",
+      "suite": "rain_admission",
+      "checks": 71
+    },
+    {
+      "phase": "source",
+      "suite": "rain_admission_review",
+      "checks": 101
+    },
+    {
+      "phase": "source",
+      "suite": "rain_support",
+      "checks": 102
+    },
+    {
+      "phase": "package",
+      "suite": "release_info",
+      "checks": 37
+    },
+    {
+      "phase": "package",
+      "suite": "toy_geometry",
+      "checks": 131
+    },
+    {
+      "phase": "package",
+      "suite": "toy_guard_geometry",
+      "checks": 191
+    },
+    {
+      "phase": "package",
+      "suite": "toy_city",
+      "checks": 2946
+    },
+    {
+      "phase": "package",
+      "suite": "toy_map_integration",
+      "checks": 76
+    },
+    {
+      "phase": "package",
+      "suite": "toy_court",
+      "checks": 639
+    },
+    {
+      "phase": "package",
+      "suite": "native_polish",
+      "checks": 267
+    },
+    {
+      "phase": "package",
+      "suite": "viewport_layout",
+      "checks": 41
+    },
+    {
+      "phase": "package",
+      "suite": "application_lifecycle",
+      "checks": 70
+    },
+    {
+      "phase": "package",
+      "suite": "scene_qa",
+      "checks": 765
+    },
+    {
+      "phase": "package",
+      "suite": "street_prop_qa",
+      "checks": 835
+    },
+    {
+      "phase": "package",
+      "suite": "claim_recovery",
+      "checks": 10
+    },
+    {
+      "phase": "package",
+      "suite": "full_city_qa",
+      "checks": 1539
+    },
+    {
+      "phase": "package",
+      "suite": "skin_collection",
+      "checks": 374
+    },
+    {
+      "phase": "package",
+      "suite": "skin_fx",
+      "checks": 414
+    },
+    {
+      "phase": "package",
+      "suite": "title_navigation",
+      "checks": 37
+    },
+    {
+      "phase": "package",
+      "suite": "ui_redesign",
+      "checks": 1854
+    },
+    {
+      "phase": "package",
+      "suite": "map_preview",
+      "checks": 79
+    },
+    {
+      "phase": "package",
+      "suite": "food_preview",
+      "checks": 483
+    },
+    {
+      "phase": "package",
+      "suite": "map_preview_review",
+      "checks": 716
+    },
+    {
+      "phase": "package",
+      "suite": "coin_skins",
+      "checks": 412
+    },
+    {
+      "phase": "package",
+      "suite": "skin_skill",
+      "checks": 130
+    },
+    {
+      "phase": "package",
+      "suite": "snack_city",
+      "checks": 80
+    },
+    {
+      "phase": "package",
+      "suite": "food_city_density",
+      "checks": 1667
+    },
+    {
+      "phase": "package",
+      "suite": "food_round",
+      "checks": 2
+    },
+    {
+      "phase": "package",
+      "suite": "food_finish",
+      "checks": 136
+    },
+    {
+      "phase": "package",
+      "suite": "food_neighborhoods",
+      "checks": 323
+    },
+    {
+      "phase": "package",
+      "suite": "mobile_maps",
+      "checks": 29
+    },
+    {
+      "phase": "package",
+      "suite": "performance",
+      "checks": 271
+    },
+    {
+      "phase": "package",
+      "suite": "portrait",
+      "checks": 30
+    },
+    {
+      "phase": "package",
+      "suite": "progression",
+      "checks": 15
+    },
+    {
+      "phase": "package",
+      "suite": "store",
+      "checks": 17
+    },
+    {
+      "phase": "package",
+      "suite": "city_motion",
+      "checks": 22
+    },
+    {
+      "phase": "package",
+      "suite": "city_districts",
+      "checks": 2718
+    },
+    {
+      "phase": "package",
+      "suite": "skin_catalog",
+      "checks": 897
+    },
+    {
+      "phase": "package",
+      "suite": "food_rain_continuity",
+      "checks": 38
+    },
+    {
+      "phase": "package",
+      "suite": "food_city_revision",
+      "checks": 135
+    },
+    {
+      "phase": "package",
+      "suite": "food_impact",
+      "checks": 256
+    },
+    {
+      "phase": "package",
+      "suite": "ui_collection_review",
+      "checks": 1905
+    },
+    {
+      "phase": "package",
+      "suite": "food_goals_review",
+      "checks": 37
+    },
+    {
+      "phase": "package",
+      "suite": "progression_review",
+      "checks": 10
+    },
+    {
+      "phase": "package",
+      "suite": "rain_review",
+      "checks": 9
+    },
+    {
+      "phase": "package",
+      "suite": "crowd_review",
+      "checks": 17
+    },
+    {
+      "phase": "package",
+      "suite": "district_review",
+      "checks": 4
+    },
+    {
+      "phase": "package",
+      "suite": "food_revision_review",
+      "checks": 11
+    },
+    {
+      "phase": "package",
+      "suite": "skin_catalog_review",
+      "checks": 206
+    },
+    {
+      "phase": "package",
+      "suite": "mobile_thumbnail",
+      "checks": 3847
+    },
+    {
+      "phase": "package",
+      "suite": "procedural_filtering",
+      "checks": 27
+    },
+    {
+      "phase": "package",
+      "suite": "selective_reveal",
+      "checks": 75
+    },
+    {
+      "phase": "package",
+      "suite": "selective_reveal_review",
+      "checks": 491
+    },
+    {
+      "phase": "package",
+      "suite": "building_only_reveal_review",
+      "checks": 213
+    },
+    {
+      "phase": "package",
+      "suite": "building_surface_artifacts",
+      "checks": 1438
+    },
+    {
+      "phase": "package",
+      "suite": "growth_extension",
+      "checks": 1978
+    },
+    {
+      "phase": "package",
+      "suite": "rival_combat",
+      "checks": 58
+    },
+    {
+      "phase": "package",
+      "suite": "large_growth_world",
+      "checks": 258
+    },
+    {
+      "phase": "package",
+      "suite": "pedestrian_swallow_review",
+      "checks": 120
+    },
+    {
+      "phase": "package",
+      "suite": "growth_rivals_review",
+      "checks": 291
+    },
+    {
+      "phase": "package",
+      "suite": "growth_integration_review",
+      "checks": 1606
+    },
+    {
+      "phase": "package",
+      "suite": "food_collision",
+      "checks": 156
+    },
+    {
+      "phase": "package",
+      "suite": "food_collision_review",
+      "checks": 18386
+    },
+    {
+      "phase": "package",
+      "suite": "music",
+      "checks": 129
+    },
+    {
+      "phase": "package",
+      "suite": "music_review",
+      "checks": 120
+    },
+    {
+      "phase": "package",
+      "suite": "shop_theme_review",
+      "checks": 55
+    },
+    {
+      "phase": "package",
+      "suite": "food_color",
+      "checks": 55
+    },
+    {
+      "phase": "package",
+      "suite": "food_color_review",
+      "checks": 1351
+    },
+    {
+      "phase": "package",
+      "suite": "skin_rarity",
+      "checks": 556
+    },
+    {
+      "phase": "package",
+      "suite": "skin_rarity_review",
+      "checks": 1555
+    },
+    {
+      "phase": "package",
+      "suite": "world_expansion",
+      "checks": 57
+    },
+    {
+      "phase": "package",
+      "suite": "world_expansion_review",
+      "checks": 284
+    },
+    {
+      "phase": "package",
+      "suite": "monetization_bridges",
+      "checks": 116
+    },
+    {
+      "phase": "package",
+      "suite": "economy_continuation",
+      "checks": 120
+    },
+    {
+      "phase": "package",
+      "suite": "diamond_boundary_review",
+      "checks": 25
+    },
+    {
+      "phase": "package",
+      "suite": "retention",
+      "checks": 67
+    },
+    {
+      "phase": "package",
+      "suite": "retention_review",
+      "checks": 590
+    },
+    {
+      "phase": "package",
+      "suite": "retention_ui_review",
+      "checks": 8226
+    },
+    {
+      "phase": "package",
+      "suite": "perimeter_frontage",
+      "checks": 631
+    },
+    {
+      "phase": "package",
+      "suite": "food_extension_collision_review",
+      "checks": 199
+    },
+    {
+      "phase": "package",
+      "suite": "train",
+      "checks": 220
+    },
+    {
+      "phase": "package",
+      "suite": "train_surface",
+      "checks": 161
+    },
+    {
+      "phase": "package",
+      "suite": "train_review",
+      "checks": 388
+    },
+    {
+      "phase": "package",
+      "suite": "train_surface_review",
+      "checks": 1121
+    },
+    {
+      "phase": "package",
+      "suite": "boost",
+      "checks": 55
+    },
+    {
+      "phase": "package",
+      "suite": "boost_review",
+      "checks": 98
+    },
+    {
+      "phase": "package",
+      "suite": "skin_polish",
+      "checks": 486
+    },
+    {
+      "phase": "package",
+      "suite": "skin_polish_review",
+      "checks": 760
+    },
+    {
+      "phase": "package",
+      "suite": "food_growth",
+      "checks": 2202
+    },
+    {
+      "phase": "package",
+      "suite": "food_growth_review",
+      "checks": 1476
+    },
+    {
+      "phase": "package",
+      "suite": "rain_admission",
+      "checks": 71
+    },
+    {
+      "phase": "package",
+      "suite": "rain_admission_review",
+      "checks": 101
+    },
+    {
+      "phase": "package",
+      "suite": "rain_support",
+      "checks": 102
+    }
+  ],
+  "source_fresh_checks": 71202,
+  "package_fresh_checks": 71202
+}

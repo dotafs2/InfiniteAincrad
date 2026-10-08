@@ -1,0 +1,244 @@
+{
+  "reviewed_utc": "2026-09-28T18:34:16.132598+00:00",
+  "scope": "Independent recalculation from full actual position arrays, no Godot process or runtime edits.",
+  "traces": {
+    "first_clear": {
+      "path": "artifacts/collection-20260929/collision-fixture-maintenance/original-clear-site-trace.json",
+      "sha256": "0980c6105fb4dc1fc740120c9871fc86a813dc5f6f8772cdcf061790093097b3",
+      "records": [
+        {
+          "body": "food_burger_2994",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.08237883861070311,
+          "actual_3d_path_mps": 0.08243659329682516,
+          "displacement_m": 0.02433022543629099,
+          "vertical_range_m": 9.74237918849874e-05,
+          "native_endpoint_mps": 0.14397805929184
+        },
+        {
+          "body": "food_burger_2996",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 6.107644661815004e-05,
+          "actual_3d_path_mps": 6.876397512985607e-05,
+          "displacement_m": 3.9997559090342467e-05,
+          "vertical_range_m": 1.0192394256924864e-05,
+          "native_endpoint_mps": 3.49727270076983e-05
+        },
+        {
+          "body": "food_burger_2998",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.00038042171666280124,
+          "actual_3d_path_mps": 0.0003948434810333178,
+          "displacement_m": 0.0002699675906987196,
+          "vertical_range_m": 6.955862045299188e-05,
+          "native_endpoint_mps": 0.000147696322528645
+        },
+        {
+          "body": "food_cookie_2993",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.061755060392236556,
+          "actual_3d_path_mps": 0.2802266191856372,
+          "displacement_m": 0.031122207558325465,
+          "vertical_range_m": 0.038713231682777,
+          "native_endpoint_mps": 0.39220342040062
+        },
+        {
+          "body": "food_cookie_2995",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.07197384322194417,
+          "actual_3d_path_mps": 0.14339585190958923,
+          "displacement_m": 0.017292985210874294,
+          "vertical_range_m": 0.014913022518158,
+          "native_endpoint_mps": 0.331337690353394
+        },
+        {
+          "body": "food_cookie_2997",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.08675158908296182,
+          "actual_3d_path_mps": 0.3076556593948949,
+          "displacement_m": 0.1176928189812823,
+          "vertical_range_m": 0.02648207545280501,
+          "native_endpoint_mps": 0.380475372076035
+        }
+      ],
+      "reported_rotation_max_degrees": 4.21584333829705,
+      "original_failures_retained": [
+        "Tilted round-food pile remains within a bounded three-second contact envelope",
+        "Tilted round-food pile remains within a bounded three-second contact envelope",
+        "Tilted round-food pile remains within a bounded three-second contact envelope",
+        "Engine process failed; inspect the engine log"
+      ]
+    },
+    "prior_same_site": {
+      "path": "artifacts/collection-20260929/collision-fixture-maintenance/same-site/prior-v0.8.7.json",
+      "sha256": "8767b7828f327aeb13d41c910f6dae8b7c0a615a2b52b0bec7a0f31b7dc8f3fa",
+      "records": [
+        {
+          "body": "food_burger_2660",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.0823811669934438,
+          "actual_3d_path_mps": 0.08243891958371047,
+          "displacement_m": 0.024336033477006556,
+          "vertical_range_m": 9.745359420698652e-05,
+          "native_endpoint_mps": 0.143977925181389
+        },
+        {
+          "body": "food_burger_2662",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 8.168952498613379e-05,
+          "actual_3d_path_mps": 9.412804205143257e-05,
+          "displacement_m": 4.234669864342162e-05,
+          "vertical_range_m": 1.3649463653009342e-05,
+          "native_endpoint_mps": 5.05540228914469e-05
+        },
+        {
+          "body": "food_burger_2664",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 8.631018945328954e-05,
+          "actual_3d_path_mps": 9.527440136525415e-05,
+          "displacement_m": 7.443341074487557e-05,
+          "vertical_range_m": 2.4855136872004024e-05,
+          "native_endpoint_mps": 7.81730559538119e-05
+        },
+        {
+          "body": "food_cookie_2659",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.06132477146598713,
+          "actual_3d_path_mps": 0.25724552628794056,
+          "displacement_m": 0.030656367839673914,
+          "vertical_range_m": 0.037091769278049,
+          "native_endpoint_mps": 0.358967632055283
+        },
+        {
+          "body": "food_cookie_2661",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.07228398586372314,
+          "actual_3d_path_mps": 0.1554616962319563,
+          "displacement_m": 0.012897636690927045,
+          "vertical_range_m": 0.014728844165802002,
+          "native_endpoint_mps": 0.344727903604507
+        },
+        {
+          "body": "food_cookie_2663",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.0930701942280316,
+          "actual_3d_path_mps": 0.3261491591896232,
+          "displacement_m": 0.15103500982324755,
+          "vertical_range_m": 0.027378439903259,
+          "native_endpoint_mps": 0.418474644422531
+        }
+      ],
+      "reported_rotation_max_degrees": 5.05632885151838,
+      "original_failures_retained": [
+        "Tilted round-food pile remains within a bounded three-second contact envelope",
+        "Tilted round-food pile remains within a bounded three-second contact envelope",
+        "Tilted round-food pile remains within a bounded three-second contact envelope",
+        "Engine process failed; inspect the engine log"
+      ]
+    },
+    "current_same_site": {
+      "path": "artifacts/collection-20260929/collision-fixture-maintenance/same-site/current.json",
+      "sha256": "542622fa444711b1702fcf4b045061de0d8d9611bc7234d4e9f561043accfcc0",
+      "records": [
+        {
+          "body": "food_burger_2994",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.08237739674766495,
+          "actual_3d_path_mps": 0.08243516263787647,
+          "displacement_m": 0.024323493425799425,
+          "vertical_range_m": 9.754300117498227e-05,
+          "native_endpoint_mps": 0.143977984786034
+        },
+        {
+          "body": "food_burger_2996",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 4.5543692731650865e-05,
+          "actual_3d_path_mps": 6.348945877389317e-05,
+          "displacement_m": 3.1807274634031203e-05,
+          "vertical_range_m": 1.3351440428910344e-05,
+          "native_endpoint_mps": 0.000132018045405857
+        },
+        {
+          "body": "food_burger_2998",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 9.383688502756262e-05,
+          "actual_3d_path_mps": 0.00010431487309113455,
+          "displacement_m": 3.6393455921886584e-05,
+          "vertical_range_m": 1.5676021575039556e-05,
+          "native_endpoint_mps": 0.000101186451502144
+        },
+        {
+          "body": "food_cookie_2993",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.061966877988481,
+          "actual_3d_path_mps": 0.31496017454540776,
+          "displacement_m": 0.033632379234917326,
+          "vertical_range_m": 0.03851515799760802,
+          "native_endpoint_mps": 0.310277938842773
+        },
+        {
+          "body": "food_cookie_2995",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.07182233842688725,
+          "actual_3d_path_mps": 0.14240353206227907,
+          "displacement_m": 0.018181096404666777,
+          "vertical_range_m": 0.013241313397883994,
+          "native_endpoint_mps": 0.328907608985901
+        },
+        {
+          "body": "food_cookie_2997",
+          "samples": 180,
+          "intervals": 179,
+          "seconds": 2.9833333333333334,
+          "actual_horizontal_path_mps": 0.0893598203572276,
+          "actual_3d_path_mps": 0.2824009701407069,
+          "displacement_m": 0.038556127501623676,
+          "vertical_range_m": 0.026371300220489002,
+          "native_endpoint_mps": 0.452658295631409
+        }
+      ],
+      "reported_rotation_max_degrees": 4.88912283242871,
+      "original_failures_retained": [
+        "Tilted round-food pile remains within a bounded three-second contact envelope",
+        "Tilted round-food pile remains within a bounded three-second contact envelope",
+        "Tilted round-food pile remains within a bounded three-second contact envelope",
+        "Engine process failed; inspect the engine log"
+      ]
+    }
+  },
+  "assessment": "The new resting oracle is an explicit semantic change, not preservation of every previous assertion. Retain 0.2m/5deg/0.05m position envelopes and existing 180 samples. Use mean actual horizontal path below 0.3m/s to constrain sustained surface motion. Keep native endpoint and full 3D path diagnostics. This certifies bounded contacts, not full sleep or zero oscillation. The old same-site package also exceeds the 5deg rotation limit; neither all old guards nor all 3D-path thresholds passed."
+}

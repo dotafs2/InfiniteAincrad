@@ -1,0 +1,42 @@
+{
+  "source_before": {
+    "fidelity/ui.gd": "f2cee1d72640d5cdadd596e23c7efb0920cb829292ed3119a03d2832e551ad8f",
+    "fidelity/game.gd": "a62c354d94b4dd0d27a5b590c4a7d2fd649d22e6814df2603cfab6245446c9ef",
+    "fidelity/food_preview.gd": "ffeb9e939e03de4b0aaeb1ea11a7f2a3fc645c4b6bc66fa022b14bad7f69df9b",
+    "fidelity/food_city.gd": "4d9523a275990adbbbaa8cd2f2efccfebe747bda119003276a89b06af4a1e84b",
+    "fidelity/food_shapes.gd": "83808ada67a6dca18fe0597f16d8923912aab9a82aa34e98af3e3199f08fa496",
+    "fidelity/food_surface.gd": "86fecdfb022611d5a03d9b7938abca41e55083498aa5d703ebb898a878fb2a5b",
+    "fidelity/food_glaze.gdshader": "75d79551d9715bf8796490fcb5bfe63cb508622074bcc12b57fc7491893526b2",
+    "tests/map_preview_review.gd": "1426053dcfaf35fae23b9f8fc5038c9fe750ef98e3403d318209d3a6f3d6a5b9",
+    "tests/map_preview_acceptance.gd": "a92793b8a6dd023bfaaad882bae5bde1f1eddce6dfe50617d54e78b59aeeea24",
+    "tests/mobile_maps_acceptance.gd": "27df7f87c762cd0b177425f4d1c1463ed290a0871ba27046ea10f244cf74096b"
+  },
+  "source_after": {
+    "fidelity/ui.gd": "f2cee1d72640d5cdadd596e23c7efb0920cb829292ed3119a03d2832e551ad8f",
+    "fidelity/game.gd": "a62c354d94b4dd0d27a5b590c4a7d2fd649d22e6814df2603cfab6245446c9ef",
+    "fidelity/food_preview.gd": "ffeb9e939e03de4b0aaeb1ea11a7f2a3fc645c4b6bc66fa022b14bad7f69df9b",
+    "fidelity/food_city.gd": "4d9523a275990adbbbaa8cd2f2efccfebe747bda119003276a89b06af4a1e84b",
+    "fidelity/food_shapes.gd": "83808ada67a6dca18fe0597f16d8923912aab9a82aa34e98af3e3199f08fa496",
+    "fidelity/food_surface.gd": "86fecdfb022611d5a03d9b7938abca41e55083498aa5d703ebb898a878fb2a5b",
+    "fidelity/food_glaze.gdshader": "75d79551d9715bf8796490fcb5bfe63cb508622074bcc12b57fc7491893526b2",
+    "tests/map_preview_review.gd": "1426053dcfaf35fae23b9f8fc5038c9fe750ef98e3403d318209d3a6f3d6a5b9",
+    "tests/map_preview_acceptance.gd": "a92793b8a6dd023bfaaad882bae5bde1f1eddce6dfe50617d54e78b59aeeea24",
+    "tests/mobile_maps_acceptance.gd": "27df7f87c762cd0b177425f4d1c1463ed290a0871ba27046ea10f244cf74096b"
+  },
+  "stable": true,
+  "engine_sha256": "c7cccbf8fb143e34e02fd6521e09be2c2b974f0d5db080b19071c9c570718ccf",
+  "command": [
+    "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/.build/godot-standard/Godot.app/Contents/MacOS/Godot",
+    "--headless",
+    "--path",
+    "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city",
+    "--fixed-fps",
+    "60",
+    "--script",
+    "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/tests/map_preview_review.gd",
+    "--",
+    "--test"
+  ],
+  "runner": "tools/release_web.py acceptance with in-memory MAP_PREVIEW_REVIEW marker mapping",
+  "helper_state": "Owned Godot subprocess exited and was waited on."
+}

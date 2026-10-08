@@ -1,0 +1,96 @@
+{
+  "samples": [
+    {
+      "counts": {
+        "collision_shape_nodes": 0,
+        "expanded_mesh_instance_count": 64,
+        "mesh_instance_nodes": 64,
+        "multimesh_instance_nodes": 0,
+        "rigid_body_nodes": 0
+      },
+      "hero_visible": true,
+      "map": "city",
+      "menu_screen": "home",
+      "model_script": "res://fidelity/art.gd",
+      "natural_process_frames": 30,
+      "phase": "title",
+      "pivot_node_valid": false,
+      "pivot_property_exists": false,
+      "pivot_rotation_after": null,
+      "pivot_rotation_before": null,
+      "pivot_y_delta": null,
+      "preview_node_valid": true,
+      "preview_property_exists": true,
+      "preview_rotation_after": [
+        0.0,
+        0.0483333207666874,
+        0.0
+      ],
+      "preview_rotation_before": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "preview_y_delta": 0.0483333207666874,
+      "processing_after": true,
+      "processing_before": true,
+      "root_rotation_after": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "root_rotation_before": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "root_y_delta": 0.0
+    },
+    {
+      "counts": {
+        "collision_shape_nodes": 25,
+        "expanded_mesh_instance_count": 26,
+        "mesh_instance_nodes": 26,
+        "multimesh_instance_nodes": 0,
+        "rigid_body_nodes": 25
+      },
+      "hero_visible": true,
+      "map": "food",
+      "menu_screen": "home",
+      "model_script": "res://fidelity/food_city.gd",
+      "natural_process_frames": 30,
+      "phase": "title",
+      "pivot_node_valid": false,
+      "pivot_property_exists": false,
+      "pivot_rotation_after": null,
+      "pivot_rotation_before": null,
+      "pivot_y_delta": null,
+      "preview_node_valid": false,
+      "preview_property_exists": true,
+      "preview_rotation_after": null,
+      "preview_rotation_before": null,
+      "preview_y_delta": null,
+      "processing_after": false,
+      "processing_before": false,
+      "root_rotation_after": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "root_rotation_before": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "root_y_delta": 0.0
+    }
+  ],
+  "scope": "Read-only old-package home-menu process and scene structure; no rendering, screenshot, browser access, CPU timing or save mutation. Expected non-rotation is an observed baseline, not an engine error.",
+  "version": "0.8.3",
+  "pck_sha256_before": "8d7146294219af06ad467873181533d52ccb2e4ee3031588a60071f4550ad847",
+  "pck_sha256_after": "8d7146294219af06ad467873181533d52ccb2e4ee3031588a60071f4550ad847",
+  "helper_sha256": "ab3d18cb08bcdb220a0fe4df65a280b7b42e8eef1a8cb624ec8e20cad8e68a6b",
+  "engine_sha256": "c7cccbf8fb143e34e02fd6521e09be2c2b974f0d5db080b19071c9c570718ccf",
+  "cwd": "/private/tmp",
+  "unexpected_engine_errors": []
+}

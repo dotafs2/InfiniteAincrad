@@ -1,0 +1,30 @@
+{
+  "at_utc": "2026-10-01T08:59:15.939663+00:00",
+  "version": "0.12.3",
+  "build": "6",
+  "test_ads": true,
+  "uses_production_ad_identifiers": false,
+  "compiled_and_linked": true,
+  "strict_signature_valid": true,
+  "development_team_verified": true,
+  "exact_signed_app_entitlement_verified": true,
+  "wildcard_provisioning_profile_validated": true,
+  "provisioned_phone_verified": true,
+  "native_pck_sha256": "a1f03985ee891eed6dce60fc4a29b9d57fc7290cc5f0cb17d271d7e6aa1b0552",
+  "native_pck_bytes": 10680792,
+  "pck_equals_verified_build_5": false,
+  "reused_native_pck_checks": 0,
+  "new_native_pck_checks": 8547,
+  "vendor_privacy_manifest_sha256": {
+    "GoogleMobileAds": "69fb112582fc23fc06c635c961d262a3f7b4b5654d284787491de3000dadf9d2",
+    "UserMessagingPlatform": "45b7adb99fcd2d962a1c800fbfcc1325b57a7fa4165f416182323bb5ffe9c900"
+  },
+  "frozen_web_inputs": 804,
+  "installed": false,
+  "launched": false,
+  "uploaded": false,
+  "production_release": false,
+  "previous_verification_failure": "An exact application-identifier expectation did not support the existing legitimate wildcard provisioning profile. Original failure is preserved; signed entitlement is now separately checked exactly.",
+  "prior_candidate_receipt": "artifacts/skin-collection-20261001/native-05/production-candidate.json",
+  "strict_signature_log_sha256": "ae9a559695be66b4112a88071f0d2052d5875b9165a70157238e710f663cb237"
+}

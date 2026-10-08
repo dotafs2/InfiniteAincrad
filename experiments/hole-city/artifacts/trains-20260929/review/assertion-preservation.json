@@ -1,0 +1,16 @@
+{
+  "original_static_assertions": 45,
+  "retained_original_static_assertions": 45,
+  "removed": [],
+  "added": [
+    "check(actual_material.albedo_color.is_equal_approx(original_material.albedo_color) and is_equal_approx(actual_material.roughness,original_material.roughness) and is_equal_approx(actual_material.metallic,original_material.metallic),\"Vertex palette opt-in preserves the original imported PBR finish\")",
+    "check(original_visual.mesh.surface_get_arrays(0)[Mesh.ARRAY_COLOR]==mesh_nodes(body)[0].mesh.surface_get_arrays(0)[Mesh.ARRAY_COLOR],\"Live car retains the exact original imported ingredient-color buffer\")",
+    "check(degenerate==0 and wrong_winding==0,\"Actual Godot buffers retain nondegenerate clockwise faces matching their normals\")",
+    "check(not target.begin_swallow(game.player) and controller.attached_count==before_rejected and target.attached,\"Rejected small-mouth admission cannot detach or move any car\")",
+    "check(Assets.palette_materials.size()==material_cache_before,\"Restart reuses train palette materials without growing the cache\")",
+    "check(second.attached_count==middle and second.detach_events.size()==1,\"A cut after two complete laps preserves the same independent coupling rules\")",
+    "check(game.coins==wallet_before,\"Train admission and collection do not directly mutate the persistent coin wallet\")"
+  ],
+  "original_sha256": "a35ec1808fad12d9fc16eaf37af04fa12d0401cc4e4fd64981a00122d222981e",
+  "final_sha256": "1ced8edf2774c5d25dc76dd161ee317ed687eddcb1ba2a81d80eb90649640470"
+}

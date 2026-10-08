@@ -1,0 +1,585 @@
+{
+  "checks": 1,
+  "failures": [],
+  "level": 7,
+  "levels": [
+    {
+      "at": [
+        1.0,
+        23.0
+      ],
+      "level": 1,
+      "nearest_next_size": 5.0,
+      "next_size_within20": 1,
+      "score": 0,
+      "time": 0.0
+    },
+    {
+      "at": [
+        3.7509331703186,
+        21.9727096557617
+      ],
+      "level": 2,
+      "nearest_next_size": 3.55297255516052,
+      "next_size_within20": 3,
+      "score": 10,
+      "time": 6.34999999999998
+    },
+    {
+      "at": [
+        -1.84506738185883,
+        22.2711715698242
+      ],
+      "level": 3,
+      "nearest_next_size": 14.4532871246338,
+      "next_size_within20": 4,
+      "score": 35,
+      "time": 10.4666666666668
+    },
+    {
+      "at": [
+        2.13804268836975,
+        19.1855487823486
+      ],
+      "level": 4,
+      "nearest_next_size": 16.7106647491455,
+      "next_size_within20": 1,
+      "score": 61,
+      "time": 13.1333333333336
+    },
+    {
+      "at": [
+        -6.76895141601562,
+        12.1323308944702
+      ],
+      "level": 5,
+      "nearest_next_size": 65.0885009765625,
+      "next_size_within20": 0,
+      "score": 102,
+      "time": 18.8166666666669
+    },
+    {
+      "at": [
+        -16.9079551696777,
+        15.1220798492432
+      ],
+      "level": 6,
+      "nearest_next_size": 90.0854797363281,
+      "next_size_within20": 0,
+      "score": 173,
+      "time": 27.983333333333
+    },
+    {
+      "at": [
+        -21.8505802154541,
+        18.2008838653564
+      ],
+      "level": 7,
+      "nearest_next_size": 1e99999,
+      "next_size_within20": 0,
+      "score": 243,
+      "time": 32.0166666666661
+    }
+  ],
+  "policy": "Actual movement, scan, gravity and receipts; guided target choices, solo, authored food only, no awards/score/radius writes.",
+  "receipts": [
+    {
+      "food": true,
+      "id": 238723017843,
+      "minimum_level": 1,
+      "name": "food_cookie_1770",
+      "points": 1,
+      "time": 1.05,
+      "top": -3.57423994267691
+    },
+    {
+      "food": true,
+      "id": 238051929171,
+      "minimum_level": 1,
+      "name": "food_donut_1762",
+      "points": 1,
+      "time": 1.08333333333333,
+      "top": -3.65015253458088
+    },
+    {
+      "food": true,
+      "id": 238303587423,
+      "minimum_level": 1,
+      "name": "food_donut_1765",
+      "points": 1,
+      "time": 1.88333333333333,
+      "top": -3.63477388769388
+    },
+    {
+      "food": true,
+      "id": 238387473507,
+      "minimum_level": 1,
+      "name": "food_donut_1766",
+      "points": 1,
+      "time": 2.66666666666666,
+      "top": -3.53963872084897
+    },
+    {
+      "food": true,
+      "id": 238135815255,
+      "minimum_level": 1,
+      "name": "food_donut_1763",
+      "points": 1,
+      "time": 3.53333333333333,
+      "top": -3.67384244751924
+    },
+    {
+      "food": true,
+      "id": 238806903927,
+      "minimum_level": 1,
+      "name": "food_cookie_1771",
+      "points": 1,
+      "time": 3.54999999999999,
+      "top": -3.6812840133751
+    },
+    {
+      "food": true,
+      "id": 238471359591,
+      "minimum_level": 1,
+      "name": "food_donut_1767",
+      "points": 1,
+      "time": 4.36666666666666,
+      "top": -3.64321212284872
+    },
+    {
+      "food": true,
+      "id": 238219701339,
+      "minimum_level": 1,
+      "name": "food_donut_1764",
+      "points": 1,
+      "time": 5.08333333333332,
+      "top": -3.63477388769388
+    },
+    {
+      "food": true,
+      "id": 237968043087,
+      "minimum_level": 1,
+      "name": "food_donut_1761",
+      "points": 1,
+      "time": 5.88333333333332,
+      "top": -3.63477388769388
+    },
+    {
+      "food": true,
+      "id": 238639131759,
+      "minimum_level": 1,
+      "name": "food_cookie_1769",
+      "points": 1,
+      "time": 6.34999999999998,
+      "top": -3.60411687144257
+    },
+    {
+      "food": true,
+      "id": 237884157003,
+      "minimum_level": 1,
+      "name": "food_donut_1760",
+      "points": 1,
+      "time": 6.39999999999998,
+      "top": -3.55471859335605
+    },
+    {
+      "food": true,
+      "id": 237800270919,
+      "minimum_level": 1,
+      "name": "food_donut_1759",
+      "points": 1,
+      "time": 6.76666666666665,
+      "top": -3.662423808386
+    },
+    {
+      "food": true,
+      "id": 238555245675,
+      "minimum_level": 1,
+      "name": "food_cookie_1768",
+      "points": 1,
+      "time": 6.83333333333331,
+      "top": -3.62350342159836
+    },
+    {
+      "food": true,
+      "id": 238890790011,
+      "minimum_level": 1,
+      "name": "food_pancake_1772",
+      "points": 1,
+      "time": 6.89999999999998,
+      "top": -3.6321070724001
+    },
+    {
+      "food": true,
+      "id": 317827595241,
+      "minimum_level": 1,
+      "name": "food_egg_2676",
+      "points": 1,
+      "time": 8.08333333333331,
+      "top": -3.54263155159507
+    },
+    {
+      "food": true,
+      "id": 59911440514,
+      "minimum_level": 2,
+      "name": "food_burger_004",
+      "points": 12,
+      "time": 10.2666666666668,
+      "top": -3.51659025432979
+    },
+    {
+      "food": true,
+      "id": 60867741858,
+      "minimum_level": 2,
+      "name": "food_burger_005",
+      "points": 8,
+      "time": 10.4666666666668,
+      "top": -3.55448139499549
+    },
+    {
+      "food": true,
+      "id": 61538830548,
+      "minimum_level": 1,
+      "name": "food_donut_006",
+      "points": 3,
+      "time": 11.0666666666668,
+      "top": -3.66094522772431
+    },
+    {
+      "food": true,
+      "id": 59223574617,
+      "minimum_level": 1,
+      "name": "food_berry_003",
+      "points": 3,
+      "time": 13.0833333333336,
+      "top": -3.6300157549595
+    },
+    {
+      "food": true,
+      "id": 56941873117,
+      "minimum_level": 3,
+      "name": "food_cake_001",
+      "points": 12,
+      "time": 13.1333333333336,
+      "top": -3.59435754347061
+    },
+    {
+      "food": true,
+      "id": 58485377029,
+      "minimum_level": 3,
+      "name": "food_cake_002",
+      "points": 8,
+      "time": 13.1333333333336,
+      "top": -3.69388052506003
+    },
+    {
+      "food": true,
+      "id": 302224783577,
+      "minimum_level": 1,
+      "name": "food_burger_2490",
+      "points": 1,
+      "time": 14.0166666666669,
+      "top": -3.52052372694016
+    },
+    {
+      "food": true,
+      "id": 266405425625,
+      "minimum_level": 1,
+      "name": "food_bacon_2063",
+      "points": 1,
+      "time": 14.766666666667,
+      "top": -3.50351172685623
+    },
+    {
+      "food": true,
+      "id": 247078071829,
+      "minimum_level": 1,
+      "name": "food_burger_1833",
+      "points": 1,
+      "time": 15.216666666667,
+      "top": -3.52052372694016
+    },
+    {
+      "food": true,
+      "id": 298449909789,
+      "minimum_level": 1,
+      "name": "food_donut_2445",
+      "points": 2,
+      "time": 15.4833333333337,
+      "top": -3.51531852083573
+    },
+    {
+      "food": true,
+      "id": 119638332777,
+      "minimum_level": 4,
+      "name": "food_pancake_473",
+      "points": 8,
+      "time": 17.8000000000003,
+      "top": -3.71195757632293
+    },
+    {
+      "food": true,
+      "id": 119722218862,
+      "minimum_level": 4,
+      "name": "food_pancake_474",
+      "points": 8,
+      "time": 17.8000000000003,
+      "top": -3.68287004697103
+    },
+    {
+      "food": true,
+      "id": 119554446692,
+      "minimum_level": 4,
+      "name": "food_pancake_472",
+      "points": 12,
+      "time": 17.8500000000003,
+      "top": -3.63607313451583
+    },
+    {
+      "food": true,
+      "id": 119806104947,
+      "minimum_level": 4,
+      "name": "food_pancake_475",
+      "points": 8,
+      "time": 18.8166666666669,
+      "top": -3.58581068501435
+    },
+    {
+      "food": true,
+      "id": 119889991032,
+      "minimum_level": 4,
+      "name": "food_pancake_476",
+      "points": 8,
+      "time": 19.4500000000002,
+      "top": -3.53182330653395
+    },
+    {
+      "food": true,
+      "id": 119973877117,
+      "minimum_level": 4,
+      "name": "food_pancake_477",
+      "points": 8,
+      "time": 19.6500000000002,
+      "top": -3.66593137182304
+    },
+    {
+      "food": true,
+      "id": 304741366100,
+      "minimum_level": 1,
+      "name": "food_bacon_2520",
+      "points": 1,
+      "time": 20.1666666666668,
+      "top": -3.50351172685623
+    },
+    {
+      "food": true,
+      "id": 312123341513,
+      "minimum_level": 1,
+      "name": "food_cake_2608",
+      "points": 1,
+      "time": 20.4500000000001,
+      "top": -3.66401222348213
+    },
+    {
+      "food": true,
+      "id": 308348467726,
+      "minimum_level": 1,
+      "name": "food_cookie_2563",
+      "points": 2,
+      "time": 20.4833333333335,
+      "top": -3.61248409748077
+    },
+    {
+      "food": true,
+      "id": 310110075494,
+      "minimum_level": 1,
+      "name": "food_bacon_2584",
+      "points": 1,
+      "time": 20.6666666666668,
+      "top": -3.52288043498993
+    },
+    {
+      "food": true,
+      "id": 275632894889,
+      "minimum_level": 1,
+      "name": "food_sushi_2173",
+      "points": 1,
+      "time": 21.4833333333334,
+      "top": -3.57226062983255
+    },
+    {
+      "food": true,
+      "id": 76738989108,
+      "minimum_level": 1,
+      "name": "food_berry_067",
+      "points": 3,
+      "time": 22.4333333333333,
+      "top": -3.53348212805766
+    },
+    {
+      "food": true,
+      "id": 76655103023,
+      "minimum_level": 4,
+      "name": "food_cake_066",
+      "points": 8,
+      "time": 22.5333333333333,
+      "top": -3.71127902519863
+    },
+    {
+      "food": true,
+      "id": 76571216938,
+      "minimum_level": 5,
+      "name": "food_cake_065",
+      "points": 12,
+      "time": 22.55,
+      "top": -3.62425722704802
+    },
+    {
+      "food": true,
+      "id": 301721467071,
+      "minimum_level": 1,
+      "name": "food_pancake_2484",
+      "points": 1,
+      "time": 23.3,
+      "top": -3.56545183062553
+    },
+    {
+      "food": true,
+      "id": 247749160503,
+      "minimum_level": 1,
+      "name": "food_pancake_1841",
+      "points": 1,
+      "time": 23.4999999999999,
+      "top": -3.56545183062553
+    },
+    {
+      "food": true,
+      "id": 252731993900,
+      "minimum_level": 1,
+      "name": "food_sushi_1900",
+      "points": 1,
+      "time": 23.5999999999999,
+      "top": -3.67290160059929
+    },
+    {
+      "food": true,
+      "id": 66152565230,
+      "minimum_level": 1,
+      "name": "food_berry_023",
+      "points": 3,
+      "time": 27.883333333333,
+      "top": -3.68159245818438
+    },
+    {
+      "food": true,
+      "id": 65984793060,
+      "minimum_level": 5,
+      "name": "food_cake_021",
+      "points": 12,
+      "time": 27.983333333333,
+      "top": -3.64308353275142
+    },
+    {
+      "food": true,
+      "id": 66068679145,
+      "minimum_level": 5,
+      "name": "food_cake_022",
+      "points": 8,
+      "time": 27.983333333333,
+      "top": -3.54059532092936
+    },
+    {
+      "food": true,
+      "id": 276975072236,
+      "minimum_level": 1,
+      "name": "food_bacon_2189",
+      "points": 1,
+      "time": 28.9666666666663,
+      "top": -3.52288043498993
+    },
+    {
+      "food": true,
+      "id": 126147892930,
+      "minimum_level": 1,
+      "name": "food_berry_542",
+      "points": 3,
+      "time": 29.7833333333329,
+      "top": -3.69573222056015
+    },
+    {
+      "food": true,
+      "id": 125980120760,
+      "minimum_level": 4,
+      "name": "food_cake_540",
+      "points": 12,
+      "time": 29.8166666666663,
+      "top": -3.66131613290763
+    },
+    {
+      "food": true,
+      "id": 126064006845,
+      "minimum_level": 4,
+      "name": "food_cake_541",
+      "points": 8,
+      "time": 29.8333333333329,
+      "top": -3.56828617151216
+    },
+    {
+      "food": true,
+      "id": 320847494271,
+      "minimum_level": 1,
+      "name": "food_pancake_2712",
+      "points": 2,
+      "time": 30.7999999999995,
+      "top": -3.50210151076317
+    },
+    {
+      "food": true,
+      "id": 78248938583,
+      "minimum_level": 4,
+      "name": "food_donut_074",
+      "points": 12,
+      "time": 31.7999999999995,
+      "top": -3.72629495894229
+    },
+    {
+      "food": true,
+      "id": 78349601929,
+      "minimum_level": 4,
+      "name": "food_donut_075",
+      "points": 8,
+      "time": 31.7999999999995,
+      "top": -3.62473974093713
+    },
+    {
+      "food": true,
+      "id": 78450265230,
+      "minimum_level": 3,
+      "name": "food_donut_076",
+      "points": 8,
+      "time": 31.8666666666661,
+      "top": -3.58824010782274
+    },
+    {
+      "food": true,
+      "id": 78550928531,
+      "minimum_level": 3,
+      "name": "food_donut_077",
+      "points": 8,
+      "time": 31.9333333333328,
+      "top": -3.67042064360411
+    },
+    {
+      "food": true,
+      "id": 78651591832,
+      "minimum_level": 3,
+      "name": "food_donut_078",
+      "points": 8,
+      "time": 32.0166666666661,
+      "top": -3.60925614915455
+    }
+  ],
+  "score": 243,
+  "seconds": 32.0166666666661,
+  "travelled": 54.7169879078865
+}

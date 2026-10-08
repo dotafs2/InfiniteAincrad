@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "suite": "release_info",
+      "checks": 37,
+      "minimum": 32,
+      "report_sha256": "b7873e24b4f5b451444d6c8617f3e5b0ea6c8fd0ce83bc3cd7eea4bafa0cb681"
+    },
+    {
+      "suite": "ui_redesign",
+      "checks": 1843,
+      "minimum": 150,
+      "report_sha256": "65d25671b94dcc67e8f88c9db116c3beb837d93dc83389045dbbe545cd7a442c"
+    },
+    {
+      "suite": "ui_collection_review",
+      "checks": 1905,
+      "minimum": 150,
+      "report_sha256": "b679a3a0a304dadc364f65783438ba7dce4e7910241ccb8bffa46bbcef7719f1"
+    },
+    {
+      "suite": "retention_ui_review",
+      "checks": 7246,
+      "minimum": 2443,
+      "report_sha256": "31ea7d43862b05b3f75aa2d62da4b7a91bb4bb261b869a52591cf2525ad917b4"
+    },
+    {
+      "suite": "monetization_bridges",
+      "checks": 116,
+      "minimum": 116,
+      "report_sha256": "b30d336d9774722ea0ccc91bcf0a04a0911d4ce49703093059bf68051a374391"
+    },
+    {
+      "suite": "diamond_boundary_review",
+      "checks": 25,
+      "minimum": 25,
+      "report_sha256": "924aacda3fc831c29f91377bfec5dc8c6ea8cee73311a9799c54f63ebce7deb7"
+    },
+    {
+      "suite": "selective_reveal_review",
+      "checks": 482,
+      "minimum": 434,
+      "report_sha256": "e6411b92670ab2afec35025b2642437373ae3c297ea9eb9c235f2664d4504d6d"
+    }
+  ],
+  "checks": 11654,
+  "unchanged_inputs": true,
+  "guarded_inputs": 810,
+  "elapsed_seconds": 15.598,
+  "scope": "Serial source-only focused headless acceptance; no full gate, GPU, native build or phone action"
+}

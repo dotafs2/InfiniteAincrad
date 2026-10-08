@@ -1,0 +1,29 @@
+{
+  "reviewer": "Independent city/combat agent",
+  "original_roads_15_identical": true,
+  "original_two_traffic_routes_all_points_identical": true,
+  "original_136_building_physical_fields_identical": true,
+  "building_review_only_count_updates": true,
+  "root_boundary_tests": [
+    {
+      "file": "large_growth_world_acceptance.gd",
+      "before_sha256": "a906b421974e1ce62c2f9e68df0106fb9ddd4d7b685c0f5a40c1db443d0fcd4f",
+      "after_sha256": "9e78c7e14ed8c315e9d71b04685d5c4f956edded191adb5a2096fde94491cb17",
+      "review": "Only extent-domain expectations/camera fixture coordinates change. Existing shape radii, geometric oracles and bounds remain."
+    },
+    {
+      "file": "growth_integration_review.gd",
+      "before_sha256": "524b1075a81c0c6d083ec561155cda29c6a656edb2fa9612836a5b0b4d912f88",
+      "after_sha256": "c572be5f5285fac3f8b92366dc29aed58ae7a34834e685f1fe4fae2720984f05",
+      "review": "Only extent-domain expectations/camera fixture coordinates change. Existing shape radii, geometric oracles and bounds remain."
+    },
+    {
+      "file": "performance_acceptance.gd",
+      "before_sha256": "0c2495d6b47540572302471446b2f3685f6500c64ade360e4360081a2bd903e7",
+      "after_sha256": "2097e9495f39b7cd18b9cf492384fb79b0f50a5a73679d09245f34577734ccc4",
+      "review": "Only extent-domain expectations/camera fixture coordinates change. Existing shape radii, geometric oracles and bounds remain."
+    }
+  ],
+  "preserved_comparison_fixture_sha256": "250cdbe3591b4b80fdd23d0a966cd0ad083abe21208de614dc27bb733b8eb58a",
+  "performance_fixture_rule": "Read-only original fixture; only one in-memory const HALF scalar replaced 80\u2192100, precondition count and compile assertions added; collision-generation algorithm unchanged."
+}

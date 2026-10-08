@@ -1,0 +1,308 @@
+{
+  "coverage_solver": false,
+  "display": "headless",
+  "dt": 0.0166666666666667,
+  "engine": {
+    "build": "official",
+    "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "hex": 263938,
+    "major": 4,
+    "minor": 7,
+    "patch": 2,
+    "status": "stable",
+    "string": "4.7.2-stable (official)",
+    "timestamp": 0
+  },
+  "label": "physical-d543c6",
+  "notes": "Accelerated fixed-step CPU timing only. All modes use 36 members, 544 high-HP troops, mixed high-HP elites and a high-HP dragon boss in wave 8. Actual normal physics is timed; no rendering or phone FPS claim. Damage values may differ between reviewed combat contracts. Setup and deferred deletion are outside timed calls.",
+  "processor": "Apple M1 Pro",
+  "repeats": 3,
+  "requested_simulation_seconds": 20.0,
+  "results": [
+    {
+      "damage": 20636595.6000005,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rifle",
+      "peak_cosmetics_or_legacy_packets": 124,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2988.0,
+        "mean": 1492.82833333333,
+        "min": 316.0,
+        "p50": 1480.0,
+        "p95": 2212.0,
+        "samples": 1200
+      },
+      "repeat": 0,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 20636595.6000005,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rifle",
+      "peak_cosmetics_or_legacy_packets": 124,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 3109.0,
+        "mean": 1503.98666666667,
+        "min": 304.0,
+        "p50": 1492.0,
+        "p95": 2224.0,
+        "samples": 1200
+      },
+      "repeat": 1,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 20636595.6000005,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rifle",
+      "peak_cosmetics_or_legacy_packets": 124,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 26757.0,
+        "mean": 1552.54166666667,
+        "min": 305.0,
+        "p50": 1487.0,
+        "p95": 2309.0,
+        "samples": 1200
+      },
+      "repeat": 2,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 21635021.160003,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "scatter",
+      "peak_cosmetics_or_legacy_packets": 200,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 3421.0,
+        "mean": 1587.04833333333,
+        "min": 253.0,
+        "p50": 1553.0,
+        "p95": 2618.0,
+        "samples": 1200
+      },
+      "repeat": 0,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 21635021.160003,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "scatter",
+      "peak_cosmetics_or_legacy_packets": 200,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 3174.0,
+        "mean": 1569.42916666667,
+        "min": 248.0,
+        "p50": 1521.0,
+        "p95": 2631.0,
+        "samples": 1200
+      },
+      "repeat": 1,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 21635021.160003,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "scatter",
+      "peak_cosmetics_or_legacy_packets": 200,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 3491.0,
+        "mean": 1579.90166666667,
+        "min": 244.0,
+        "p50": 1529.0,
+        "p95": 2597.0,
+        "samples": 1200
+      },
+      "repeat": 2,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 456718387.200022,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rail",
+      "peak_cosmetics_or_legacy_packets": 36,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2413.0,
+        "mean": 660.765,
+        "min": 228.0,
+        "p50": 630.0,
+        "p95": 1340.0,
+        "samples": 1200
+      },
+      "repeat": 0,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 456718387.200022,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rail",
+      "peak_cosmetics_or_legacy_packets": 36,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2281.0,
+        "mean": 654.2375,
+        "min": 224.0,
+        "p50": 627.0,
+        "p95": 1313.0,
+        "samples": 1200
+      },
+      "repeat": 1,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 456718387.200022,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rail",
+      "peak_cosmetics_or_legacy_packets": 36,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2428.0,
+        "mean": 655.106666666667,
+        "min": 226.0,
+        "p50": 614.0,
+        "p95": 1339.0,
+        "samples": 1200
+      },
+      "repeat": 2,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 87695445.599975,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rocket",
+      "peak_cosmetics_or_legacy_packets": 36,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 1924.0,
+        "mean": 658.695833333333,
+        "min": 234.0,
+        "p50": 611.0,
+        "p95": 1253.0,
+        "samples": 1200
+      },
+      "repeat": 0,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 87695445.599975,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rocket",
+      "peak_cosmetics_or_legacy_packets": 36,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 1850.0,
+        "mean": 660.549166666667,
+        "min": 233.0,
+        "p50": 608.0,
+        "p95": 1271.0,
+        "samples": 1200
+      },
+      "repeat": 1,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 87695445.599975,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rocket",
+      "peak_cosmetics_or_legacy_packets": 36,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2326.0,
+        "mean": 657.345,
+        "min": 232.0,
+        "p50": 616.0,
+        "p95": 1268.0,
+        "samples": 1200
+      },
+      "repeat": 2,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 119449032.825406,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "arc",
+      "peak_cosmetics_or_legacy_packets": 38,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 5398.0,
+        "mean": 1562.41333333333,
+        "min": 264.0,
+        "p50": 1415.0,
+        "p95": 3280.0,
+        "samples": 1200
+      },
+      "repeat": 0,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 119449032.825406,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "arc",
+      "peak_cosmetics_or_legacy_packets": 38,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 5658.0,
+        "mean": 1562.59916666667,
+        "min": 265.0,
+        "p50": 1382.0,
+        "p95": 3381.0,
+        "samples": 1200
+      },
+      "repeat": 1,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "damage": 119449032.825406,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "arc",
+      "peak_cosmetics_or_legacy_packets": 38,
+      "peak_coverage_fields": 0,
+      "phase": "playing",
+      "physics_us": {
+        "max": 5522.0,
+        "mean": 1555.6075,
+        "min": 265.0,
+        "p50": 1412.0,
+        "p95": 3274.0,
+        "samples": 1200
+      },
+      "repeat": 2,
+      "simulation_seconds": 20.0000000000001
+    }
+  ]
+}

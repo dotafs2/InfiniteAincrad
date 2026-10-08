@@ -1,0 +1,205 @@
+{
+	"building_centers_within_10m_of_spawn": 0,
+	"building_recipes": {
+		"burger": 33,
+		"cake": 37,
+		"donut": 35,
+		"pancake": 31
+	},
+	"buildings": 136,
+	"heaps": 15,
+	"initial_available_points": 9333,
+	"initial_edibles": 2594,
+	"rain_samples": [
+		{
+			"alive": 18,
+			"awake": 18,
+			"nearly_stationary": 6,
+			"seconds": 5.0,
+			"spawned": 18,
+			"waves": 3
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 18,
+			"seconds": 10.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 15.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 20.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 25.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 30.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 35.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 40.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 45.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 50.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 55.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 60.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 65.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 70.0,
+			"spawned": 24,
+			"waves": 4
+		},
+		{
+			"alive": 24,
+			"awake": 24,
+			"nearly_stationary": 24,
+			"seconds": 75.0,
+			"spawned": 24,
+			"waves": 4
+		}
+	],
+	"scope": "Headless simulation; no visual or GPU acceptance",
+	"solo_round": {
+		"buildings_consumed": 3,
+		"buildings_intact": 133,
+		"buildings_partly_consumed": 0,
+		"food_receipts": {
+			"bacon": 7,
+			"berry": 9,
+			"burger": 7,
+			"cake": 14,
+			"cookie": 29,
+			"donut": 70,
+			"egg": 6,
+			"pancake": 16,
+			"pizza": 10,
+			"sushi": 3
+		},
+		"level": 8,
+		"moving_food_frozen_on_result": [
+			{
+				"kind": "sushi",
+				"speed_before_finish": 2.65014481544495,
+				"y": 0.0137772783637047
+			},
+			{
+				"kind": "bacon",
+				"speed_before_finish": 0.895806550979614,
+				"y": 0.0681995153427124
+			},
+			{
+				"kind": "egg",
+				"speed_before_finish": 10.7198810577393,
+				"y": -3.5282130241394
+			},
+			{
+				"kind": "sushi",
+				"speed_before_finish": 5.5,
+				"y": -1.68276083469391
+			},
+			{
+				"kind": "pizza",
+				"speed_before_finish": 2.06360530853271,
+				"y": 0.0724300593137741
+			},
+			{
+				"kind": "cookie",
+				"speed_before_finish": 5.5,
+				"y": 6.5093822479248
+			},
+			{
+				"kind": "berry",
+				"speed_before_finish": 5.5,
+				"y": 8.50937461853027
+			},
+			{
+				"kind": "sushi",
+				"speed_before_finish": 5.5,
+				"y": 10.5093746185303
+			},
+			{
+				"kind": "pancake",
+				"speed_before_finish": 5.5,
+				"y": 6.5093822479248
+			}
+		],
+		"phase": "complete",
+		"radius": 7.2,
+		"score": 420,
+		"seconds": 45.6666666666654
+	}
+}

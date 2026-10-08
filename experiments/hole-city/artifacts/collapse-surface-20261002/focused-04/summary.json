@@ -1,0 +1,16 @@
+{
+  "ok": false,
+  "failed_suite": "no_tether",
+  "error": "Scene QA failed; previous preview preserved. See /Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/collapse-surface-20261002/focused-04/no_tether.json",
+  "results": [
+    {
+      "suite": "rim_fall",
+      "checks": 25,
+      "minimum": 24,
+      "report_sha256": "f85117ea45a15a5c21c61675d2cdf9e1894d5cc4e651134c91226cd24eba312d"
+    }
+  ],
+  "unchanged_inputs": true,
+  "elapsed_seconds": 1.438,
+  "scope": "Serial source-only focused headless acceptance; no full gate, GPU, native build or phone action"
+}

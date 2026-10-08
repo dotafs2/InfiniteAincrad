@@ -1,0 +1,214 @@
+{
+  "generator": "tools/build_case_audio.py",
+  "algorithm_version": 2,
+  "seed": 20261008,
+  "provenance": "Original additive and filtered-noise synthesis. No copied melodies, recordings or third-party samples.",
+  "format": {
+    "sample_rate_hz": 32000,
+    "channels": 1,
+    "bits_per_sample": 16,
+    "loop": false
+  },
+  "runtime": {
+    "max_voices": 2,
+    "tick_interval_ms": 40,
+    "tick_volume_db": -9,
+    "accent_volume_db": -5
+  },
+  "files": {
+    "open.wav": {
+      "role": "Warm latch with original4.25-second D-major anticipation phrase",
+      "seed": 20261008,
+      "sha256": "5d5ea6c7b87d8ad400d4da712902f150caccd87dc56528d635878de4f36764b5",
+      "bytes": 272044,
+      "frames": 136000,
+      "duration_seconds": 4.25,
+      "peak_linear": 0.2200079,
+      "peak_dbfs": -13.151,
+      "rms_dbfs": -33.756,
+      "dc_offset": -1.62e-06,
+      "clipped_samples": 0,
+      "first_sample": 0,
+      "last_sample": 0
+    },
+    "tick.wav": {
+      "role": "Short felt card tick",
+      "seed": 20261012,
+      "fundamental_hz": 330.0,
+      "sha256": "36e45073c8282843614106d9a88570b3382fc464ba64201e56854e764d5f7afb",
+      "bytes": 1836,
+      "frames": 896,
+      "duration_seconds": 0.028,
+      "peak_linear": 0.1199988,
+      "peak_dbfs": -18.416,
+      "rms_dbfs": -29.286,
+      "dc_offset": -1.7e-07,
+      "clipped_samples": 0,
+      "first_sample": 0,
+      "last_sample": 0
+    },
+    "reveal_common.wav": {
+      "role": "common reveal",
+      "notes_midi": [
+        50,
+        57
+      ],
+      "onsets_seconds": [
+        0.0,
+        0.075
+      ],
+      "highest_fundamental_hz": 220.0,
+      "seed_base": 20261028,
+      "sha256": "10f8634b6def9c5e0270d238a2d21d48b543c3139e2ab843809abcc9a13a5b26",
+      "bytes": 29484,
+      "frames": 14720,
+      "duration_seconds": 0.46,
+      "peak_linear": 0.2399976,
+      "peak_dbfs": -12.396,
+      "rms_dbfs": -23.834,
+      "dc_offset": 1.23e-06,
+      "clipped_samples": 0,
+      "first_sample": 0,
+      "last_sample": 0
+    },
+    "reveal_uncommon.wav": {
+      "role": "uncommon reveal",
+      "notes_midi": [
+        50,
+        57,
+        62
+      ],
+      "onsets_seconds": [
+        0.0,
+        0.075,
+        0.16
+      ],
+      "highest_fundamental_hz": 293.665,
+      "seed_base": 20261038,
+      "sha256": "767d3da6c44733275692ef73b72c10461380ad7423e6b76caae6cf2d574e96e3",
+      "bytes": 38444,
+      "frames": 19200,
+      "duration_seconds": 0.6,
+      "peak_linear": 0.2399976,
+      "peak_dbfs": -12.396,
+      "rms_dbfs": -23.637,
+      "dc_offset": -5.1e-07,
+      "clipped_samples": 0,
+      "first_sample": 0,
+      "last_sample": 0
+    },
+    "reveal_rare.wav": {
+      "role": "rare reveal",
+      "notes_midi": [
+        50,
+        57,
+        66
+      ],
+      "onsets_seconds": [
+        0.0,
+        0.085,
+        0.18
+      ],
+      "highest_fundamental_hz": 369.994,
+      "seed_base": 20261048,
+      "sha256": "24b243635f59cdd77720d45055a13501dac3648c3a5bfbb9141cae1fa0ac41b1",
+      "bytes": 47404,
+      "frames": 23680,
+      "duration_seconds": 0.74,
+      "peak_linear": 0.2399976,
+      "peak_dbfs": -12.396,
+      "rms_dbfs": -24.082,
+      "dc_offset": -2.61e-06,
+      "clipped_samples": 0,
+      "first_sample": 0,
+      "last_sample": 0
+    },
+    "reveal_epic.wav": {
+      "role": "epic reveal",
+      "notes_midi": [
+        50,
+        59,
+        64,
+        69
+      ],
+      "onsets_seconds": [
+        0.0,
+        0.09,
+        0.19,
+        0.29
+      ],
+      "highest_fundamental_hz": 440.0,
+      "seed_base": 20261058,
+      "sha256": "2aa55aea38b6ba97db7b6a07e1694472bb50caeb8c968ff9f0bc7a93000a32b6",
+      "bytes": 57644,
+      "frames": 28800,
+      "duration_seconds": 0.9,
+      "peak_linear": 0.2399976,
+      "peak_dbfs": -12.396,
+      "rms_dbfs": -23.646,
+      "dc_offset": 2.31e-06,
+      "clipped_samples": 0,
+      "first_sample": 0,
+      "last_sample": 0
+    },
+    "reveal_legendary.wav": {
+      "role": "legendary reveal",
+      "notes_midi": [
+        50,
+        57,
+        62,
+        66
+      ],
+      "onsets_seconds": [
+        0.0,
+        0.105,
+        0.22,
+        0.34
+      ],
+      "highest_fundamental_hz": 369.994,
+      "seed_base": 20261068,
+      "sha256": "5903fa52ff04e0d90dc4df596d6b055b7a4a1d30caf26006cc2b5c60f98f8230",
+      "bytes": 69164,
+      "frames": 34560,
+      "duration_seconds": 1.08,
+      "peak_linear": 0.2399976,
+      "peak_dbfs": -12.396,
+      "rms_dbfs": -23.695,
+      "dc_offset": -6.5e-07,
+      "clipped_samples": 0,
+      "first_sample": 0,
+      "last_sample": 0
+    },
+    "reveal_prismatic.wav": {
+      "role": "prismatic reveal",
+      "notes_midi": [
+        50,
+        57,
+        62,
+        66,
+        69
+      ],
+      "onsets_seconds": [
+        0.0,
+        0.11,
+        0.23,
+        0.36,
+        0.5
+      ],
+      "highest_fundamental_hz": 440.0,
+      "seed_base": 20261078,
+      "sha256": "1829e46dfe764c29ae8dcac9026ee80ee235df3cef6d944cc7fc85ebb3a68b4d",
+      "bytes": 79404,
+      "frames": 39680,
+      "duration_seconds": 1.24,
+      "peak_linear": 0.2399976,
+      "peak_dbfs": -12.396,
+      "rms_dbfs": -24.003,
+      "dc_offset": -1e-08,
+      "clipped_samples": 0,
+      "first_sample": 0,
+      "last_sample": 0
+    }
+  },
+  "total_wav_bytes": 595424
+}

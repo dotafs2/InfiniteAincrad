@@ -1,0 +1,32 @@
+{
+  "identical_output_helper_in_all_four": true,
+  "explicit_report_matches_stdout": true,
+  "explicit_checks": 212,
+  "negative_cases": [
+    {
+      "case": "absent-parent",
+      "failed_closed": true,
+      "unexpected_errors": [
+        "ERROR: Could not write review report: /tmp/hole-package-review-a5c9ce6ec55b4e768cac29780b5952f2/no/report.json (error 7)"
+      ],
+      "uncaught_script_error": false
+    },
+    {
+      "case": "relative",
+      "failed_closed": true,
+      "unexpected_errors": [
+        "ERROR: Review report requires an absolute filesystem path: relative-report.json"
+      ],
+      "uncaught_script_error": false
+    },
+    {
+      "case": "resource-uri",
+      "failed_closed": true,
+      "unexpected_errors": [
+        "ERROR: Review report requires an absolute filesystem path: res://review-report.json"
+      ],
+      "uncaught_script_error": false
+    }
+  ],
+  "scope": "Output failures intentionally produce errors and nonzero process status, never a release pass"
+}

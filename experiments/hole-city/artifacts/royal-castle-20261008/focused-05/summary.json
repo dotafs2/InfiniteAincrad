@@ -1,0 +1,3431 @@
+{
+  "fairytale_city": {
+    "checks": 169,
+    "failures": [],
+    "metrics": {
+      "arch_opening": {
+        "from": "(0.0, 0.25, -0.8)",
+        "passage_hit": false,
+        "roof_hit": true,
+        "to": "(0.0, 0.25, 0.8)"
+      },
+      "density": {
+        "fairytale": {
+          "cells": {
+            "(0, 1)": 1,
+            "(0, 2)": 1,
+            "(0, 3)": 1,
+            "(0, 6)": 1,
+            "(1, 0)": 1,
+            "(1, 1)": 1,
+            "(1, 2)": 1,
+            "(1, 3)": 2,
+            "(1, 4)": 1,
+            "(1, 5)": 2,
+            "(1, 7)": 2,
+            "(2, 2)": 2,
+            "(2, 3)": 1,
+            "(2, 4)": 2,
+            "(2, 5)": 3,
+            "(3, 0)": 1,
+            "(3, 1)": 1,
+            "(3, 2)": 4,
+            "(3, 3)": 2,
+            "(3, 4)": 2,
+            "(3, 5)": 4,
+            "(3, 6)": 1,
+            "(3, 7)": 2,
+            "(4, 0)": 1,
+            "(4, 1)": 1,
+            "(4, 2)": 4,
+            "(4, 3)": 2,
+            "(4, 4)": 2,
+            "(4, 5)": 5,
+            "(4, 7)": 2,
+            "(5, 2)": 2,
+            "(5, 3)": 1,
+            "(5, 4)": 2,
+            "(5, 5)": 2,
+            "(5, 6)": 1,
+            "(6, 0)": 1,
+            "(6, 1)": 1,
+            "(6, 2)": 1,
+            "(6, 3)": 1,
+            "(6, 4)": 1,
+            "(6, 5)": 2,
+            "(6, 7)": 2,
+            "(7, 1)": 1,
+            "(7, 2)": 1,
+            "(7, 3)": 2,
+            "(7, 6)": 1
+          },
+          "count": 78,
+          "heights": [
+            5.0,
+            5.0,
+            5.0,
+            5.0,
+            5.0,
+            5.5,
+            5.5,
+            5.5,
+            5.59999990463257,
+            5.59999990463257,
+            5.59999990463257,
+            5.59999990463257,
+            5.59999990463257,
+            5.59999990463257,
+            5.80000019073486,
+            5.80000019073486,
+            6.5,
+            6.5,
+            6.5,
+            7.0,
+            7.0,
+            7.0,
+            7.0,
+            7.0,
+            7.0,
+            7.0,
+            7.0,
+            8.0,
+            8.0,
+            8.0,
+            8.0,
+            8.0,
+            8.0,
+            8.0,
+            8.0,
+            8.0,
+            9.0,
+            9.0,
+            9.0,
+            9.0,
+            9.0,
+            9.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.5,
+            10.5,
+            10.5,
+            10.5,
+            10.5,
+            10.5,
+            11.3999996185303,
+            12.0,
+            12.0,
+            12.0,
+            12.0,
+            14.1999998092651,
+            15.0,
+            15.0,
+            15.6000003814697,
+            16.0,
+            16.0,
+            18.0,
+            18.0,
+            21.0,
+            21.0,
+            22.0,
+            24.0,
+            24.0,
+            27.0,
+            27.0,
+            30.0,
+            33.0,
+            33.0,
+            38.0,
+            38.0
+          ],
+          "maximum_height": 38.0,
+          "median_nearest_distance": 12.806248664856,
+          "minimum_height": 5.0,
+          "occupied_cells": 46,
+          "scope": "Actual habitable bodies in the common 192-metre square; 24-metre cells; NPCs, arches and turrets excluded"
+        },
+        "high": 14,
+        "low": 16,
+        "middle": 48,
+        "sunny_city": {
+          "cells": {
+            "(0, 1)": 1,
+            "(0, 2)": 1,
+            "(0, 3)": 1,
+            "(0, 4)": 1,
+            "(0, 6)": 2,
+            "(1, 0)": 1,
+            "(1, 7)": 1,
+            "(2, 0)": 1,
+            "(2, 1)": 1,
+            "(2, 2)": 1,
+            "(2, 3)": 1,
+            "(2, 4)": 1,
+            "(2, 5)": 2,
+            "(2, 7)": 1,
+            "(3, 0)": 1,
+            "(3, 1)": 3,
+            "(3, 2)": 2,
+            "(3, 3)": 3,
+            "(3, 4)": 3,
+            "(3, 5)": 2,
+            "(3, 6)": 3,
+            "(3, 7)": 1,
+            "(4, 0)": 1,
+            "(4, 1)": 4,
+            "(4, 2)": 3,
+            "(4, 3)": 3,
+            "(4, 4)": 3,
+            "(4, 5)": 3,
+            "(4, 6)": 4,
+            "(4, 7)": 1,
+            "(5, 2)": 1,
+            "(5, 3)": 1,
+            "(5, 4)": 1,
+            "(5, 5)": 2,
+            "(5, 6)": 1,
+            "(6, 0)": 2,
+            "(6, 7)": 2,
+            "(7, 1)": 1,
+            "(7, 2)": 1,
+            "(7, 3)": 1,
+            "(7, 4)": 1,
+            "(7, 6)": 2
+          },
+          "count": 72,
+          "heights": [
+            4.46999979019165,
+            4.71000003814697,
+            4.94999980926514,
+            5.19000005722046,
+            5.42999982833862,
+            5.67000007629395,
+            5.86999988555908,
+            5.86999988555908,
+            5.86999988555908,
+            5.86999988555908,
+            5.86999988555908,
+            6.59999990463257,
+            6.59999990463257,
+            6.59999990463257,
+            6.59999990463257,
+            6.59999990463257,
+            7.0,
+            7.0,
+            7.0,
+            7.0,
+            7.0,
+            7.73000001907349,
+            7.73000001907349,
+            7.73000001907349,
+            7.73000001907349,
+            7.73000001907349,
+            7.73000001907349,
+            8.13000011444092,
+            8.13000011444092,
+            8.13000011444092,
+            8.67000007629395,
+            8.85999965667725,
+            8.85999965667725,
+            8.85999965667725,
+            8.85999965667725,
+            8.85999965667725,
+            9.26000022888184,
+            9.26000022888184,
+            9.26000022888184,
+            9.26000022888184,
+            9.26000022888184,
+            9.77000045776367,
+            9.77000045776367,
+            10.0500001907349,
+            10.0500001907349,
+            10.0500001907349,
+            10.0500001907349,
+            10.0500001907349,
+            10.0500001907349,
+            10.3900003433228,
+            10.3900003433228,
+            10.3900003433228,
+            10.3900003433228,
+            10.8699998855591,
+            10.8699998855591,
+            11.3000001907349,
+            11.3000001907349,
+            11.3000001907349,
+            11.3000001907349,
+            11.3000001907349,
+            11.3000001907349,
+            11.5200004577637,
+            11.5200004577637,
+            11.5200004577637,
+            11.9700002670288,
+            11.9700002670288,
+            12.5500001907349,
+            12.5500001907349,
+            12.5500001907349,
+            13.0699996948242,
+            13.0699996948242,
+            14.1700000762939
+          ],
+          "maximum_height": 14.1700000762939,
+          "median_nearest_distance": 14.0,
+          "minimum_height": 4.46999979019165,
+          "occupied_cells": 42,
+          "scope": "Actual habitable bodies in the common 192-metre square; 24-metre cells; NPCs, arches and turrets excluded"
+        }
+      },
+      "environment": {
+        "ambient_energy": 0.340000003576279,
+        "reflected_light_source": 2,
+        "scope": "Configuration only; no rendered highlight verdict",
+        "shadows": true,
+        "sky_assigned": true,
+        "sun_energy": 0.920000016689301
+      },
+      "geometry": {
+        "block_tower": {
+          "assembly": {
+            "components": 142,
+            "coral_plastic_vertex_samples": 3144,
+            "course_bands": 4,
+            "course_surfaces": [
+              {
+                "bands": 4,
+                "courses": 4,
+                "surface": "front"
+              },
+              {
+                "bands": 4,
+                "courses": 4,
+                "surface": "back"
+              },
+              {
+                "bands": 4,
+                "courses": 4,
+                "surface": "east"
+              },
+              {
+                "bands": 4,
+                "courses": 4,
+                "surface": "west"
+              }
+            ],
+            "four_segment_towers": 0,
+            "max_coral_color_delta": 0.0,
+            "mounted_studs": 12,
+            "real_brick_joints": 32,
+            "roles": {
+              "block_course": 48,
+              "detail": 66,
+              "gable_panel": 8,
+              "plastic_frame": 8,
+              "stud": 12
+            },
+            "staggered_pairs": 12,
+            "stud_contacts": [
+              {
+                "base": 0.0475879013538361,
+                "gap": 6.93889390390723e-18,
+                "name": "Gingerbeam Townhouse foundation stud-1-0",
+                "support_height": 0.0475879013538361,
+                "top": 0.0733648017048836
+              },
+              {
+                "base": 0.0475879013538361,
+                "gap": 0.0,
+                "name": "Gingerbeam Townhouse foundation stud-1-1",
+                "support_height": 0.0475879013538361,
+                "top": 0.0733648017048836
+              },
+              {
+                "base": 0.0475879013538361,
+                "gap": 0.0,
+                "name": "Gingerbeam Townhouse foundation stud-1-2",
+                "support_height": 0.0475879013538361,
+                "top": 0.0733648017048836
+              },
+              {
+                "base": 0.0475879013538361,
+                "gap": 0.0,
+                "name": "Gingerbeam Townhouse foundation stud-1-3",
+                "support_height": 0.0475879013538361,
+                "top": 0.0733648017048836
+              },
+              {
+                "base": 0.0475879013538361,
+                "gap": 0.0,
+                "name": "Gingerbeam Townhouse foundation stud-1-4",
+                "support_height": 0.0475879013538361,
+                "top": 0.0733648017048836
+              },
+              {
+                "base": 0.0475879013538361,
+                "gap": 0.0,
+                "name": "Gingerbeam Townhouse foundation stud-1-5",
+                "support_height": 0.0475879013538361,
+                "top": 0.0733648017048836
+              },
+              {
+                "base": 0.0475879013538361,
+                "gap": 0.0,
+                "name": "Gingerbeam Townhouse foundation stud1-0",
+                "support_height": 0.0475879013538361,
+                "top": 0.0733648017048836
+              },
+              {
+                "base": 0.0475879013538361,
+                "gap": 0.0,
+                "name": "Gingerbeam Townhouse foundation stud1-1",
+                "support_height": 0.0475879013538361,
+                "top": 0.0733648017048836
+              },
+              {
+                "base": 0.0475879013538361,
+                "gap": 0.0,
+                "name": "Gingerbeam Townhouse foundation stud1-2",
+                "support_height": 0.0475879013538361,
+                "top": 0.0733648017048836
+              },
+              {
+                "base": 0.0475879013538361,
+                "gap": 0.0,
+                "name": "Gingerbeam Townhouse foundation stud1-3",
+                "support_height": 0.0475879013538361,
+                "top": 0.0733648017048836
+              },
+              {
+                "base": 0.0475879013538361,
+                "gap": 0.0,
+                "name": "Gingerbeam Townhouse foundation stud1-4",
+                "support_height": 0.0475879013538361,
+                "top": 0.0733648017048836
+              },
+              {
+                "base": 0.0475879013538361,
+                "gap": 0.0,
+                "name": "Gingerbeam Townhouse foundation stud1-5",
+                "support_height": 0.0475879013538361,
+                "top": 0.0733648017048836
+              }
+            ],
+            "studs": 12
+          },
+          "collision_parts": 1,
+          "max_source_normal_delta": 0.000117053888970986,
+          "max_source_vertex_delta": 0.0,
+          "mesh_signature": "9a142f2400585cd53c681903a2babc514c52eb5811b4f8286c8ae4d410477c61",
+          "min_source_normal_alignment": 0.999999821186066,
+          "natural_size": "(2.78, 5.068, 2.37)",
+          "source_geometry_sha256": "acd0a6a693c65bfcd1503f0250b1a6363a6dcaae977cce858763bce49b84302e",
+          "triangles": 5120,
+          "vertices": 9564
+        },
+        "bubble_turret": {
+          "assembly": {
+            "components": 43,
+            "coral_plastic_vertex_samples": 288,
+            "course_bands": 0,
+            "course_surfaces": [],
+            "four_segment_towers": 1,
+            "max_coral_color_delta": 0.0,
+            "mounted_studs": 4,
+            "real_brick_joints": 0,
+            "roles": {
+              "detail": 34,
+              "plastic_frame": 1,
+              "stud": 4,
+              "tower_segment": 4
+            },
+            "staggered_pairs": 0,
+            "stud_contacts": [
+              {
+                "base": 0.0311661008745432,
+                "gap": 0.0,
+                "name": "Starlight Watchtower foot stud0",
+                "support_height": 0.0311661008745432,
+                "top": 0.0519436001777649
+              },
+              {
+                "base": 0.0311661008745432,
+                "gap": 0.0,
+                "name": "Starlight Watchtower foot stud1",
+                "support_height": 0.0311661008745432,
+                "top": 0.0519436001777649
+              },
+              {
+                "base": 0.0311661008745432,
+                "gap": 0.0,
+                "name": "Starlight Watchtower foot stud2",
+                "support_height": 0.0311661008745432,
+                "top": 0.0519436001777649
+              },
+              {
+                "base": 0.0311661008745432,
+                "gap": 0.0,
+                "name": "Starlight Watchtower foot stud3",
+                "support_height": 0.0311661008745432,
+                "top": 0.0519436001777649
+              }
+            ],
+            "studs": 4
+          },
+          "collision_parts": 1,
+          "max_source_normal_delta": 0.000107233630842529,
+          "max_source_vertex_delta": 0.0,
+          "mesh_signature": "d03befe193720577f691edf9ffe75376de41ee193ce0e76241cdd30f1f699716",
+          "min_source_normal_alignment": 0.99999988079071,
+          "natural_size": "(2.3232, 6.0835, 2.3232)",
+          "source_geometry_sha256": "5e9b646c91045a217746892ce7cfb43e5f419a4c5e2ec2cec1ff3200fb6c7d8b",
+          "triangles": 1660,
+          "vertices": 1748
+        },
+        "grand_castle": {
+          "assembly": {
+            "components": 291,
+            "coral_plastic_vertex_samples": 3420,
+            "course_bands": 4,
+            "course_surfaces": [
+              {
+                "bands": 4,
+                "courses": 4,
+                "surface": "front"
+              },
+              {
+                "bands": 4,
+                "courses": 4,
+                "surface": "back"
+              },
+              {
+                "bands": 4,
+                "courses": 4,
+                "surface": "east"
+              },
+              {
+                "bands": 4,
+                "courses": 4,
+                "surface": "west"
+              }
+            ],
+            "four_segment_towers": 5,
+            "max_coral_color_delta": 0.0,
+            "mounted_studs": 28,
+            "real_brick_joints": 32,
+            "roles": {
+              "block_course": 48,
+              "detail": 179,
+              "gable_panel": 6,
+              "plastic_frame": 10,
+              "stud": 28,
+              "tower_segment": 20
+            },
+            "staggered_pairs": 12,
+            "stud_contacts": [
+              {
+                "base": 0.0291971005499363,
+                "gap": 0.0,
+                "name": "Sunspell Palace terrace connector-1-0",
+                "support_height": 0.0291971005499363,
+                "top": 0.0437956005334854
+              },
+              {
+                "base": 0.0291971005499363,
+                "gap": 0.0,
+                "name": "Sunspell Palace terrace connector-1-1",
+                "support_height": 0.0291971005499363,
+                "top": 0.0437956005334854
+              },
+              {
+                "base": 0.0291971005499363,
+                "gap": 0.0,
+                "name": "Sunspell Palace terrace connector-1-2",
+                "support_height": 0.0291971005499363,
+                "top": 0.0437956005334854
+              },
+              {
+                "base": 0.0291971005499363,
+                "gap": 0.0,
+                "name": "Sunspell Palace terrace connector-1-3",
+                "support_height": 0.0291971005499363,
+                "top": 0.0437956005334854
+              },
+              {
+                "base": 0.0291971005499363,
+                "gap": 0.0,
+                "name": "Sunspell Palace terrace connector-1-4",
+                "support_height": 0.0291971005499363,
+                "top": 0.0437956005334854
+              },
+              {
+                "base": 0.0291971005499363,
+                "gap": 0.0,
+                "name": "Sunspell Palace terrace connector-1-5",
+                "support_height": 0.0291971005499363,
+                "top": 0.0437956005334854
+              },
+              {
+                "base": 0.0291971005499363,
+                "gap": 0.0,
+                "name": "Sunspell Palace terrace connector1-0",
+                "support_height": 0.0291971005499363,
+                "top": 0.0437956005334854
+              },
+              {
+                "base": 0.0291971005499363,
+                "gap": 3.46944695195361e-18,
+                "name": "Sunspell Palace terrace connector1-1",
+                "support_height": 0.0291971005499363,
+                "top": 0.0437956005334854
+              },
+              {
+                "base": 0.0291971005499363,
+                "gap": 0.0,
+                "name": "Sunspell Palace terrace connector1-2",
+                "support_height": 0.0291971005499363,
+                "top": 0.0437956005334854
+              },
+              {
+                "base": 0.0291971005499363,
+                "gap": -3.46944695195361e-18,
+                "name": "Sunspell Palace terrace connector1-3",
+                "support_height": 0.0291971005499363,
+                "top": 0.0437956005334854
+              },
+              {
+                "base": 0.0291971005499363,
+                "gap": 0.0,
+                "name": "Sunspell Palace terrace connector1-4",
+                "support_height": 0.0291971005499363,
+                "top": 0.0437956005334854
+              },
+              {
+                "base": 0.0291971005499363,
+                "gap": -3.46944695195361e-18,
+                "name": "Sunspell Palace terrace connector1-5",
+                "support_height": 0.0291971005499363,
+                "top": 0.0437956005334854
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner0 foot stud0",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner0 foot stud1",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner0 foot stud2",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner0 foot stud3",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner1 foot stud0",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner1 foot stud1",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner1 foot stud2",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner1 foot stud3",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner2 foot stud0",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner2 foot stud1",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner2 foot stud2",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner2 foot stud3",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner3 foot stud0",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner3 foot stud1",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 0.0,
+                "name": "Sunspell Palace corner3 foot stud2",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              },
+              {
+                "base": 0.0218978002667427,
+                "gap": 3.46944695195361e-18,
+                "name": "Sunspell Palace corner3 foot stud3",
+                "support_height": 0.0218978002667427,
+                "top": 0.0364963002502918
+              }
+            ],
+            "studs": 28
+          },
+          "collision_parts": 6,
+          "max_source_normal_delta": 0.000115236558485776,
+          "max_source_vertex_delta": 0.0,
+          "mesh_signature": "4eb29a71787b2b0b7f7a624a1edfe396994b9d92cf0ebbc9304b4fb9dc3a4cbf",
+          "min_source_normal_alignment": 0.999999821186066,
+          "natural_size": "(6.5472, 7.79, 4.4756)",
+          "source_geometry_sha256": "22330d85128f6295165009c765aab77972bc2d28f712ceb968ad859231e1f5de",
+          "triangles": 11756,
+          "vertices": 15108
+        },
+        "toy_arch": {
+          "assembly": {
+            "components": 38,
+            "coral_plastic_vertex_samples": 264,
+            "course_bands": 0,
+            "course_surfaces": [],
+            "four_segment_towers": 0,
+            "max_coral_color_delta": 0.0,
+            "mounted_studs": 8,
+            "real_brick_joints": 0,
+            "roles": {
+              "detail": 22,
+              "gable_panel": 2,
+              "stud": 8,
+              "tower_segment": 6
+            },
+            "staggered_pairs": 0,
+            "stud_contacts": [
+              {
+                "base": 0.0577777996659279,
+                "gap": 0.0,
+                "name": "Moonbridge base stud",
+                "support_height": 0.0577777996659279,
+                "top": 0.0811111032962799
+              },
+              {
+                "base": 0.0577777996659279,
+                "gap": 0.0,
+                "name": "Moonbridge base stud.001",
+                "support_height": 0.0577777996659279,
+                "top": 0.0811111032962799
+              },
+              {
+                "base": 0.0577777996659279,
+                "gap": 0.0,
+                "name": "Moonbridge base stud.002",
+                "support_height": 0.0577777996659279,
+                "top": 0.0811111032962799
+              },
+              {
+                "base": 0.0577777996659279,
+                "gap": 6.93889390390723e-18,
+                "name": "Moonbridge base stud.003",
+                "support_height": 0.0577777996659279,
+                "top": 0.0811111032962799
+              },
+              {
+                "base": 0.0577777996659279,
+                "gap": 0.0,
+                "name": "Moonbridge base stud.004",
+                "support_height": 0.0577777996659279,
+                "top": 0.0811111032962799
+              },
+              {
+                "base": 0.0577777996659279,
+                "gap": 0.0,
+                "name": "Moonbridge base stud.005",
+                "support_height": 0.0577777996659279,
+                "top": 0.0811111032962799
+              },
+              {
+                "base": 0.0577777996659279,
+                "gap": 0.0,
+                "name": "Moonbridge base stud.006",
+                "support_height": 0.0577777996659279,
+                "top": 0.0811111032962799
+              },
+              {
+                "base": 0.0577777996659279,
+                "gap": 6.93889390390723e-18,
+                "name": "Moonbridge base stud.007",
+                "support_height": 0.0577777996659279,
+                "top": 0.0811111032962799
+              }
+            ],
+            "studs": 8
+          },
+          "collision_parts": 3,
+          "max_source_normal_delta": 0.000109701795736328,
+          "max_source_vertex_delta": 0.0,
+          "mesh_signature": "d66cabf9868c851c957c13d9395f74eb731a4bdbfe48f834ac8fab4f5f5d766a",
+          "min_source_normal_alignment": 0.99999988079071,
+          "natural_size": "(3.15, 4.5, 1.17)",
+          "source_geometry_sha256": "0924ba3fa2eacd08c9c64e9c82b208c1a2329e861ba6316710f5127a42b635a3",
+          "triangles": 1892,
+          "vertices": 2282
+        },
+        "toy_castle": {
+          "assembly": {
+            "components": 291,
+            "coral_plastic_vertex_samples": 3420,
+            "course_bands": 4,
+            "course_surfaces": [
+              {
+                "bands": 4,
+                "courses": 4,
+                "surface": "front"
+              },
+              {
+                "bands": 4,
+                "courses": 4,
+                "surface": "back"
+              },
+              {
+                "bands": 4,
+                "courses": 4,
+                "surface": "east"
+              },
+              {
+                "bands": 4,
+                "courses": 4,
+                "surface": "west"
+              }
+            ],
+            "four_segment_towers": 5,
+            "max_coral_color_delta": 0.0,
+            "mounted_studs": 28,
+            "real_brick_joints": 32,
+            "roles": {
+              "block_course": 48,
+              "detail": 179,
+              "gable_panel": 6,
+              "plastic_frame": 10,
+              "stud": 28,
+              "tower_segment": 20
+            },
+            "staggered_pairs": 12,
+            "stud_contacts": [
+              {
+                "base": 0.0380349010229111,
+                "gap": 0.0,
+                "name": "Rosewater Keep terrace connector-1-0",
+                "support_height": 0.0380349010229111,
+                "top": 0.0570522993803024
+              },
+              {
+                "base": 0.0380349010229111,
+                "gap": 0.0,
+                "name": "Rosewater Keep terrace connector-1-1",
+                "support_height": 0.0380349010229111,
+                "top": 0.0570522993803024
+              },
+              {
+                "base": 0.0380349010229111,
+                "gap": 0.0,
+                "name": "Rosewater Keep terrace connector-1-2",
+                "support_height": 0.0380349010229111,
+                "top": 0.0570522993803024
+              },
+              {
+                "base": 0.0380349010229111,
+                "gap": 0.0,
+                "name": "Rosewater Keep terrace connector-1-3",
+                "support_height": 0.0380349010229111,
+                "top": 0.0570522993803024
+              },
+              {
+                "base": 0.0380349010229111,
+                "gap": 0.0,
+                "name": "Rosewater Keep terrace connector-1-4",
+                "support_height": 0.0380349010229111,
+                "top": 0.0570522993803024
+              },
+              {
+                "base": 0.0380349010229111,
+                "gap": 6.93889390390723e-18,
+                "name": "Rosewater Keep terrace connector-1-5",
+                "support_height": 0.0380349010229111,
+                "top": 0.0570522993803024
+              },
+              {
+                "base": 0.0380349010229111,
+                "gap": 0.0,
+                "name": "Rosewater Keep terrace connector1-0",
+                "support_height": 0.0380349010229111,
+                "top": 0.0570522993803024
+              },
+              {
+                "base": 0.0380349010229111,
+                "gap": 0.0,
+                "name": "Rosewater Keep terrace connector1-1",
+                "support_height": 0.0380349010229111,
+                "top": 0.0570522993803024
+              },
+              {
+                "base": 0.0380349010229111,
+                "gap": 0.0,
+                "name": "Rosewater Keep terrace connector1-2",
+                "support_height": 0.0380349010229111,
+                "top": 0.0570522993803024
+              },
+              {
+                "base": 0.0380349010229111,
+                "gap": 0.0,
+                "name": "Rosewater Keep terrace connector1-3",
+                "support_height": 0.0380349010229111,
+                "top": 0.0570522993803024
+              },
+              {
+                "base": 0.0380349010229111,
+                "gap": 0.0,
+                "name": "Rosewater Keep terrace connector1-4",
+                "support_height": 0.0380349010229111,
+                "top": 0.0570522993803024
+              },
+              {
+                "base": 0.0380349010229111,
+                "gap": 0.0,
+                "name": "Rosewater Keep terrace connector1-5",
+                "support_height": 0.0380349010229111,
+                "top": 0.0570522993803024
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner0 foot stud0",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner0 foot stud1",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner0 foot stud2",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner0 foot stud3",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner1 foot stud0",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner1 foot stud1",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner1 foot stud2",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner1 foot stud3",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner2 foot stud0",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner2 foot stud1",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner2 foot stud2",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner2 foot stud3",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner3 foot stud0",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner3 foot stud1",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 0.0,
+                "name": "Rosewater Keep corner3 foot stud2",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              },
+              {
+                "base": 0.0285261999815702,
+                "gap": 3.46944695195361e-18,
+                "name": "Rosewater Keep corner3 foot stud3",
+                "support_height": 0.0285261999815702,
+                "top": 0.0475436002016068
+              }
+            ],
+            "studs": 28
+          },
+          "collision_parts": 6,
+          "max_source_normal_delta": 0.000122215016745031,
+          "max_source_vertex_delta": 0.0,
+          "mesh_signature": "7011675420be709d29e4e4ada084dc4c49b0b5fd8c5bc2bcd8ea9a3849f79b63",
+          "min_source_normal_alignment": 0.99999988079071,
+          "natural_size": "(5.0952, 5.9174, 3.7676)",
+          "source_geometry_sha256": "64ec2338b797caf3457af2d951734cf2d5fd57e7f6304cf15b65792225c7a75c",
+          "triangles": 11756,
+          "vertices": 15108
+        }
+      },
+      "physical": {
+        "all_player_points": 22,
+        "expected_points": 22,
+        "palace_id": 406176414665,
+        "receipts": [
+          {
+            "mesh_authored": true,
+            "player": true,
+            "points": 22,
+            "top": -3.70047473907471
+          }
+        ],
+        "scope": "Explicitly positioned level-five fixture; not ordinary 90-second pacing"
+      },
+      "provenance": {
+        "assets": {
+          "block_tower": {
+            "arch_opening_probe": null,
+            "collision_parts": 1.0,
+            "component_objects": 142.0,
+            "natural_size": [
+              2.78,
+              5.0679998,
+              2.3699999
+            ],
+            "path": "res://assets/fairytale_castles/block_tower.json",
+            "sha256": "37d07c00b6c9a17aa1b7decbddaf9543df10fcf48577072147c132ee66e82b1c",
+            "source_geometry_sha256": "acd0a6a693c65bfcd1503f0250b1a6363a6dcaae977cce858763bce49b84302e",
+            "structural_counts": {
+              "block_course": 48.0,
+              "detail": 66.0,
+              "gable_panel": 8.0,
+              "plastic_frame": 8.0,
+              "stud": 12.0
+            },
+            "triangle_budget": 6000.0,
+            "triangles": 5120.0,
+            "vertices": 9564.0
+          },
+          "bubble_turret": {
+            "arch_opening_probe": null,
+            "collision_parts": 1.0,
+            "component_objects": 43.0,
+            "natural_size": [
+              2.3232,
+              6.0834999,
+              2.3232
+            ],
+            "path": "res://assets/fairytale_castles/bubble_turret.json",
+            "sha256": "ef1a29c8a1c83746b85cc32ddcb3fab2e10739df75d512d9b8dd1b26a7335c90",
+            "source_geometry_sha256": "5e9b646c91045a217746892ce7cfb43e5f419a4c5e2ec2cec1ff3200fb6c7d8b",
+            "structural_counts": {
+              "detail": 34.0,
+              "plastic_frame": 1.0,
+              "stud": 4.0,
+              "tower_segment": 4.0
+            },
+            "triangle_budget": 6000.0,
+            "triangles": 1660.0,
+            "vertices": 1748.0
+          },
+          "grand_castle": {
+            "arch_opening_probe": null,
+            "collision_parts": 6.0,
+            "component_objects": 291.0,
+            "natural_size": [
+              6.5471997,
+              7.79,
+              4.4756002
+            ],
+            "path": "res://assets/fairytale_castles/grand_castle.json",
+            "sha256": "574b2ed3b033fd6649f102b0b13f8220b73ed720f7817c05907579b10a9f6cec",
+            "source_geometry_sha256": "22330d85128f6295165009c765aab77972bc2d28f712ceb968ad859231e1f5de",
+            "structural_counts": {
+              "block_course": 48.0,
+              "detail": 179.0,
+              "gable_panel": 6.0,
+              "plastic_frame": 10.0,
+              "stud": 28.0,
+              "tower_segment": 20.0
+            },
+            "triangle_budget": 12000.0,
+            "triangles": 11756.0,
+            "vertices": 15108.0
+          },
+          "toy_arch": {
+            "arch_opening_probe": {
+              "expected_clear": true,
+              "from": [
+                0.0,
+                0.25,
+                -0.8
+              ],
+              "to": [
+                0.0,
+                0.25,
+                0.8
+              ]
+            },
+            "collision_parts": 3.0,
+            "component_objects": 38.0,
+            "natural_size": [
+              3.1500001,
+              4.5,
+              1.17
+            ],
+            "path": "res://assets/fairytale_castles/toy_arch.json",
+            "sha256": "870993d797da0ee54d3bc288f9744e293cffe7d6f88c98e1432bdc8f2c7994ae",
+            "source_geometry_sha256": "0924ba3fa2eacd08c9c64e9c82b208c1a2329e861ba6316710f5127a42b635a3",
+            "structural_counts": {
+              "detail": 22.0,
+              "gable_panel": 2.0,
+              "stud": 8.0,
+              "tower_segment": 6.0
+            },
+            "triangle_budget": 2500.0,
+            "triangles": 1892.0,
+            "vertices": 2282.0
+          },
+          "toy_castle": {
+            "arch_opening_probe": null,
+            "collision_parts": 6.0,
+            "component_objects": 291.0,
+            "natural_size": [
+              5.0952001,
+              5.9173999,
+              3.7676001
+            ],
+            "path": "res://assets/fairytale_castles/toy_castle.json",
+            "sha256": "8fd54ae898626812e68bc00d805b44b5f79bcde17b098a60b0cf8fcb40fe15c9",
+            "source_geometry_sha256": "64ec2338b797caf3457af2d951734cf2d5fd57e7f6304cf15b65792225c7a75c",
+            "structural_counts": {
+              "block_course": 48.0,
+              "detail": 179.0,
+              "gable_panel": 6.0,
+              "plastic_frame": 10.0,
+              "stud": 28.0,
+              "tower_segment": 20.0
+            },
+            "triangle_budget": 12000.0,
+            "triangles": 11756.0,
+            "vertices": 15108.0
+          }
+        },
+        "authoring_tool": "Blender",
+        "blender_binary_sha256": "beaa57b8b1b6d46af53bf8a51944519cd7b439faee1dccd53a2476c8f105071f",
+        "blender_version": "4.2.13 LTS",
+        "generator": "tools/build_fairytale_castles.py",
+        "generator_sha256": "020d213386d20e22c0a2dca51301f172784ab27f264fadd9ec275a4611de5631",
+        "kinds": [
+          "toy_castle",
+          "grand_castle",
+          "bubble_turret",
+          "toy_arch",
+          "block_tower"
+        ],
+        "license": "Original project-authored geometry; no third-party models or textures",
+        "name": "Original Sunspell Royal Snap-Together Castle Kit",
+        "rendered_or_gameplay_verified": false,
+        "runtime_format": "Indexed normalized unit mesh, real corner normals, opaque RGBA vertex colors, role IDs, major compound hull points",
+        "schema": 1.0,
+        "source_blend": "source/fairytale_castles.blend",
+        "source_blend_sha256": "f174e03bbbd5c18e4532e817fc125a29fc27e6a30eee361e89774b40a7e09766"
+      },
+      "scene": {
+        "admission_levels": {
+          "1": 221,
+          "2": 118,
+          "3": 24,
+          "4": 14,
+          "5": 64,
+          "6": 8,
+          "7": 4,
+          "8": 4,
+          "9": 2,
+          "10": 4,
+          "12": 8
+        },
+        "authored_kinds": {
+          "block_tower": 48,
+          "bubble_turret": 14,
+          "grand_castle": 10,
+          "toy_arch": 6,
+          "toy_castle": 24
+        },
+        "bodies": 815,
+        "bridge_palaces": 8,
+        "colliders": 1077,
+        "late_castles": 14,
+        "meshes": 876,
+        "nodes": 2769,
+        "opening_targets": 68
+      }
+    },
+    "scope": "Actual authored mesh arrays, colliders, same-area density and explicit whole-body physics; no user save, production SDK, rendered gloss, ordinary-round pacing or phone performance claim"
+  },
+  "toy_geometry": {
+    "checks": 131,
+    "failures": [],
+    "metrics": {
+      "geometry": {
+        "block_tower": {
+          "natural_size": "(2.78, 5.068, 2.37)",
+          "signature": "2781044763",
+          "triangles": 5120,
+          "vertices": 9564,
+          "welded_edges": 7680
+        },
+        "bubble_turret": {
+          "natural_size": "(2.3232, 6.0835, 2.3232)",
+          "signature": "131340874",
+          "triangles": 1660,
+          "vertices": 1748,
+          "welded_edges": 2490
+        },
+        "grand_castle": {
+          "natural_size": "(6.5472, 7.79, 4.4756)",
+          "signature": "2344028912",
+          "triangles": 11756,
+          "vertices": 15108,
+          "welded_edges": 17634
+        },
+        "toy_arch": {
+          "natural_size": "(3.15, 4.5, 1.17)",
+          "signature": "1472476126",
+          "triangles": 1892,
+          "vertices": 2282,
+          "welded_edges": 2838
+        },
+        "toy_ball": {
+          "natural_size": "(0.98, 0.96, 0.964127)",
+          "signature": "3319071549",
+          "triangles": 580,
+          "vertices": 298,
+          "welded_edges": 870
+        },
+        "toy_block": {
+          "natural_size": "(0.88, 0.8, 0.914364)",
+          "signature": "1569789598",
+          "triangles": 500,
+          "vertices": 320,
+          "welded_edges": 750
+        },
+        "toy_car": {
+          "natural_size": "(1.182, 0.975, 1.398042)",
+          "signature": "1805751142",
+          "triangles": 1612,
+          "vertices": 1136,
+          "welded_edges": 2418
+        },
+        "toy_castle": {
+          "natural_size": "(5.0952, 5.9174, 3.7676)",
+          "signature": "127473345",
+          "triangles": 11756,
+          "vertices": 15108,
+          "welded_edges": 17634
+        },
+        "toy_duck": {
+          "natural_size": "(0.96, 0.96, 1.289232)",
+          "signature": "3474304410",
+          "triangles": 1360,
+          "vertices": 760,
+          "welded_edges": 2040
+        },
+        "toy_train": {
+          "natural_size": "(1.182, 1.285, 1.762063)",
+          "signature": "797550469",
+          "triangles": 2272,
+          "vertices": 1588,
+          "welded_edges": 3408
+        }
+      },
+      "preview": {
+        "court_roles": [
+          "guard",
+          "sentry",
+          "king",
+          "courier",
+          "jester",
+          "royal_drone"
+        ],
+        "kinds": [
+          "grand_castle",
+          "toy_castle",
+          "bubble_turret",
+          "block_tower",
+          "toy_arch",
+          "toy_train",
+          "toy_car",
+          "toy_duck",
+          "toy_block",
+          "toy_ball"
+        ],
+        "meshes": 37,
+        "nodes": 38,
+        "unique_materials": 2,
+        "unique_meshes": 33
+      }
+    },
+    "scope": "Actual generated arrays, cache reuse, bounds/topology and visual-only ownership; no GPU pixels or phone performance claimed."
+  },
+  "frostlight_city": {
+    "checks": 11,
+    "failures": [],
+    "metrics": {
+      "remaining": 89.9666666666667,
+      "scope": "Focused desktop scene construction; no phone FPS, App Store upload or production SDK claim",
+      "snow_nodes": 40,
+      "summary": {
+        "actor_mesh_cache_entries": 17,
+        "arctic_dominant": true,
+        "arctic_ice_structures": 180,
+        "blender_assets": {
+          "glacier_iceberg": 180,
+          "ice_chip": 401,
+          "ice_rock": 28
+        },
+        "bodies": 872,
+        "castle_visuals_removed": 180,
+        "collision_parts": 1110,
+        "court": {
+          "active_assemblies": 244,
+          "activity_receipts": 255,
+          "ambient": 48,
+          "assemblies": 244,
+          "beacons": 8,
+          "distinct_recipes": 10,
+          "gate_beacons": [
+            {
+              "at": "(-13.0, 51.43)",
+              "beacon": "Toy_588_bubble_turret",
+              "beacon_radius": 0.310000002384186,
+              "district": "rose_courtyard",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43000000238419,
+              "nearest_actor_route_distance": 8.56999958479,
+              "nearest_other_toy_clearance": 2.03311571478844,
+              "palace": "Toy_021_toy_castle",
+              "palace_at": "(-13.0, 49.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.09304953575134
+            },
+            {
+              "at": "(33.0, 51.43)",
+              "beacon": "Toy_589_bubble_turret",
+              "beacon_radius": 0.310000002384186,
+              "district": "mint_playground",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43000000238419,
+              "nearest_actor_route_distance": 8.56999958479,
+              "nearest_other_toy_clearance": 1.59299969673157,
+              "palace": "Toy_030_toy_castle",
+              "palace_at": "(33.0, 49.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.09304953575134
+            },
+            {
+              "at": "(-13.0, 0.43)",
+              "beacon": "Toy_590_bubble_turret",
+              "beacon_radius": 0.310000002384186,
+              "district": "sky_block_quarter",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43000000238419,
+              "nearest_actor_route_distance": 13.0,
+              "nearest_other_toy_clearance": 0.989277780056,
+              "palace": "Toy_039_toy_castle",
+              "palace_at": "(-13.0, -2.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.09304953575134
+            },
+            {
+              "at": "(33.0, 0.43)",
+              "beacon": "Toy_591_bubble_turret",
+              "beacon_radius": 0.310000002384186,
+              "district": "apricot_garden",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43000000238419,
+              "nearest_actor_route_distance": 11.0,
+              "nearest_other_toy_clearance": 0.989278733730316,
+              "palace": "Toy_048_toy_castle",
+              "palace_at": "(33.0, -2.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.09304953575134
+            }
+          ],
+          "installations": 100,
+          "living": 80,
+          "living_roles": {
+            "balloon_vendor": 4,
+            "captain": 4,
+            "courier": 4,
+            "courtier": 8,
+            "drummer": 4,
+            "guard": 16,
+            "herald": 4,
+            "jester": 4,
+            "king": 4,
+            "knight": 4,
+            "page": 4,
+            "princess": 4,
+            "queen": 4,
+            "sentry": 4,
+            "steward": 4,
+            "toymaker": 4
+          },
+          "parade": 8,
+          "released": 0,
+          "routes": {
+            "formation_columns": 2,
+            "formation_spacing": 1.05,
+            "guards_change_every": 18.0,
+            "half_width": 2.8,
+            "paths": [
+              [
+                "(-44.0, 18.0)",
+                "(0.0, 18.0)",
+                "(0.0, 60.0)",
+                "(-44.0, 60.0)"
+              ],
+              [
+                "(0.0, 18.0)",
+                "(44.0, 18.0)",
+                "(44.0, 60.0)",
+                "(0.0, 60.0)"
+              ],
+              [
+                "(-44.0, -36.0)",
+                "(0.0, -36.0)",
+                "(0.0, 18.0)",
+                "(-44.0, 18.0)"
+              ],
+              [
+                "(0.0, -36.0)",
+                "(44.0, -36.0)",
+                "(44.0, 18.0)",
+                "(0.0, 18.0)"
+              ],
+              [
+                "(-84.0, -84.0)",
+                "(84.0, -84.0)",
+                "(84.0, 84.0)",
+                "(-84.0, 84.0)"
+              ],
+              [
+                "(-44.0, -36.0)",
+                "(44.0, -36.0)",
+                "(44.0, 60.0)",
+                "(-44.0, 60.0)"
+              ]
+            ],
+            "world_limit": 94.0
+          },
+          "separation_passes": 3,
+          "source_city_benchmark": {
+            "ambient": 48,
+            "beacons": 5,
+            "installations": 100,
+            "living": 64,
+            "traffic": 8,
+            "world_actors": 217
+          },
+          "world_actors": 236
+        },
+        "frost_species": {
+          "aurora_drone": 3,
+          "cargo_sled": 4,
+          "glacier_crystal": 5,
+          "ice_rock": 12,
+          "icebreaker": 1,
+          "igloo_observatory": 2,
+          "penguin": 8,
+          "polar_bear": 2,
+          "research_station": 2,
+          "scientist": 4,
+          "seal": 5,
+          "snow_fox": 3,
+          "snowmobile": 4,
+          "walrus": 2
+        },
+        "frost_system_count": 14,
+        "frozen_ponds": 3,
+        "ice_family_count": 6,
+        "ice_material_roughness": 0.0700000002980232,
+        "ice_spires": 9,
+        "kind_counts": {
+          "block_tower": 48,
+          "bubble_turret": 14,
+          "grand_castle": 10,
+          "toy_arch": 6,
+          "toy_ball": 82,
+          "toy_block": 182,
+          "toy_car": 59,
+          "toy_castle": 24,
+          "toy_duck": 100,
+          "toy_train": 3
+        },
+        "largest_height": 38.0400009155273,
+        "largest_required_radius": 12.2559301757813,
+        "legacy_models_loaded": 0,
+        "map_id": "frost",
+        "mesh_cache_entries": 10,
+        "name": "Frostlight Village",
+        "neighborhood_counts": {
+          "apricot_garden": 86,
+          "calving_basin": 16,
+          "crown_heights": 10,
+          "east_bubble_walk": 23,
+          "frost_ecology": 57,
+          "mint_playground": 117,
+          "rose_courtyard": 110,
+          "sky_block_quarter": 78,
+          "sunset_castles": 8,
+          "west_bubble_walk": 23
+        },
+        "physical_towers": 5,
+        "polar_visuals_converted": 619,
+        "shape_cache_entries": 102,
+        "site_prop_receipts": [],
+        "site_props": 0,
+        "snow_decorations": 40,
+        "snow_material_roughness": 0.239999994635582,
+        "static_batches": {
+          "batches": 79,
+          "meshes": 414
+        },
+        "static_bodies": 455,
+        "tier_counts": {
+          "1": 221,
+          "2": 111,
+          "3": 50,
+          "4": 19,
+          "5": 53,
+          "6": 47,
+          "7": 8,
+          "8": 11,
+          "9": 8
+        },
+        "total_points": 5071,
+        "whole_castles": 0
+      }
+    }
+  },
+  "frost_legacy_physics": {
+    "checks": 57,
+    "failures": [],
+    "metrics": {
+      "historical_payloads_recomputed": 5,
+      "kinds": {
+        "block_tower": 58,
+        "bubble_turret": 42,
+        "grand_castle": 10,
+        "toy_arch": 46,
+        "toy_castle": 24
+      },
+      "owners": 180,
+      "supported_owners": 24,
+      "world_issues": {
+        "admission": [],
+        "colliders": [],
+        "extent": [],
+        "rim": [],
+        "support": [],
+        "visual": []
+      }
+    },
+    "scope": "Exact legacy physics inputs and frozen real Frost owners; no ordinary-play, phone-performance, save or native-release claim"
+  },
+  "glacier_frozen_review": {
+    "checks": 2487,
+    "failures": [],
+    "metrics": {
+      "imported": {
+        "batched_candidates": {
+          "glacier_iceberg": 32,
+          "ice_chip": 282,
+          "ice_rock": 12
+        },
+        "floating_caps": 0,
+        "instances": 609,
+        "unique_meshes": [
+          {
+            "boundary_edges": 0,
+            "degenerate_triangles": 0,
+            "node": "glacier_serac",
+            "overused_edges": 0,
+            "triangles": 1722
+          },
+          {
+            "boundary_edges": 0,
+            "degenerate_triangles": 0,
+            "node": "glacier_shelf",
+            "overused_edges": 0,
+            "triangles": 2384
+          },
+          {
+            "boundary_edges": 0,
+            "degenerate_triangles": 0,
+            "node": "glacier",
+            "overused_edges": 0,
+            "triangles": 2790
+          },
+          {
+            "boundary_edges": 0,
+            "degenerate_triangles": 0,
+            "node": "glacier_ridge",
+            "overused_edges": 0,
+            "triangles": 2696
+          },
+          {
+            "boundary_edges": 0,
+            "degenerate_triangles": 0,
+            "node": "ice_rock",
+            "overused_edges": 0,
+            "triangles": 1064
+          },
+          {
+            "boundary_edges": 0,
+            "degenerate_triangles": 0,
+            "node": "ice_floe",
+            "overused_edges": 0,
+            "triangles": 1098
+          }
+        ],
+        "variants": [
+          "split_serac",
+          "terraced_shelf",
+          "calving_cliff",
+          "windcut_ridge",
+          "ice_boulder",
+          "pancake_floe"
+        ],
+        "worst_floor_error": 2.38418579101562e-07,
+        "worst_visible_width_ratio": 0.950000149011606
+      },
+      "initial_render": {
+        "draw_calls": 0.0,
+        "gpu_available": false,
+        "node_count": 4727.0,
+        "objects": 0.0,
+        "primitives": 0.0
+      },
+      "lifecycle": [
+        {
+          "admitted": true,
+          "body": "Frost_001_ice_rock",
+          "consumed": true,
+          "eaten_delta": 1,
+          "owned_visuals": 1,
+          "points": 6,
+          "remaining_owned_visuals": 0,
+          "retired_batch_handles": 1,
+          "score_delta": 6
+        },
+        {
+          "admitted": true,
+          "body": "Toy_007_grand_castle",
+          "consumed": true,
+          "eaten_delta": 1,
+          "owned_visuals": 1,
+          "points": 96,
+          "remaining_owned_visuals": 0,
+          "retired_batch_handles": 1,
+          "score_delta": 96
+        },
+        {
+          "admitted": true,
+          "body": "Toy_102_toy_ball",
+          "consumed": true,
+          "eaten_delta": 1,
+          "owned_visuals": 1,
+          "points": 1,
+          "remaining_owned_visuals": 0,
+          "retired_batch_handles": 1,
+          "score_delta": 1
+        }
+      ],
+      "population": {
+        "actor_mesh_cache_entries": 17,
+        "arctic_dominant": true,
+        "arctic_ice_structures": 180,
+        "blender_assets": {
+          "glacier_iceberg": 180,
+          "ice_chip": 401,
+          "ice_rock": 28
+        },
+        "bodies": 872,
+        "castle_visuals_removed": 180,
+        "collision_parts": 1110,
+        "court": {
+          "active_assemblies": 244,
+          "activity_receipts": 255,
+          "ambient": 48,
+          "assemblies": 244,
+          "beacons": 8,
+          "distinct_recipes": 10,
+          "gate_beacons": [
+            {
+              "at": "(-13.0, 51.43)",
+              "beacon": "Toy_588_bubble_turret",
+              "beacon_radius": 0.310000002384186,
+              "district": "rose_courtyard",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43000000238419,
+              "nearest_actor_route_distance": 8.56999958479,
+              "nearest_other_toy_clearance": 2.03311571478844,
+              "palace": "Toy_021_toy_castle",
+              "palace_at": "(-13.0, 49.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.09304953575134
+            },
+            {
+              "at": "(33.0, 51.43)",
+              "beacon": "Toy_589_bubble_turret",
+              "beacon_radius": 0.310000002384186,
+              "district": "mint_playground",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43000000238419,
+              "nearest_actor_route_distance": 8.56999958479,
+              "nearest_other_toy_clearance": 1.59299969673157,
+              "palace": "Toy_030_toy_castle",
+              "palace_at": "(33.0, 49.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.09304953575134
+            },
+            {
+              "at": "(-13.0, 0.43)",
+              "beacon": "Toy_590_bubble_turret",
+              "beacon_radius": 0.310000002384186,
+              "district": "sky_block_quarter",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43000000238419,
+              "nearest_actor_route_distance": 13.0,
+              "nearest_other_toy_clearance": 0.989277780056,
+              "palace": "Toy_039_toy_castle",
+              "palace_at": "(-13.0, -2.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.09304953575134
+            },
+            {
+              "at": "(33.0, 0.43)",
+              "beacon": "Toy_591_bubble_turret",
+              "beacon_radius": 0.310000002384186,
+              "district": "apricot_garden",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43000000238419,
+              "nearest_actor_route_distance": 11.0,
+              "nearest_other_toy_clearance": 0.989278733730316,
+              "palace": "Toy_048_toy_castle",
+              "palace_at": "(33.0, -2.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.09304953575134
+            }
+          ],
+          "installations": 100,
+          "living": 80,
+          "living_roles": {
+            "balloon_vendor": 4,
+            "captain": 4,
+            "courier": 4,
+            "courtier": 8,
+            "drummer": 4,
+            "guard": 16,
+            "herald": 4,
+            "jester": 4,
+            "king": 4,
+            "knight": 4,
+            "page": 4,
+            "princess": 4,
+            "queen": 4,
+            "sentry": 4,
+            "steward": 4,
+            "toymaker": 4
+          },
+          "parade": 8,
+          "released": 0,
+          "routes": {
+            "formation_columns": 2,
+            "formation_spacing": 1.05,
+            "guards_change_every": 18.0,
+            "half_width": 2.8,
+            "paths": [
+              [
+                "(-44.0, 18.0)",
+                "(0.0, 18.0)",
+                "(0.0, 60.0)",
+                "(-44.0, 60.0)"
+              ],
+              [
+                "(0.0, 18.0)",
+                "(44.0, 18.0)",
+                "(44.0, 60.0)",
+                "(0.0, 60.0)"
+              ],
+              [
+                "(-44.0, -36.0)",
+                "(0.0, -36.0)",
+                "(0.0, 18.0)",
+                "(-44.0, 18.0)"
+              ],
+              [
+                "(0.0, -36.0)",
+                "(44.0, -36.0)",
+                "(44.0, 18.0)",
+                "(0.0, 18.0)"
+              ],
+              [
+                "(-84.0, -84.0)",
+                "(84.0, -84.0)",
+                "(84.0, 84.0)",
+                "(-84.0, 84.0)"
+              ],
+              [
+                "(-44.0, -36.0)",
+                "(44.0, -36.0)",
+                "(44.0, 60.0)",
+                "(-44.0, 60.0)"
+              ]
+            ],
+            "world_limit": 94.0
+          },
+          "separation_passes": 4,
+          "source_city_benchmark": {
+            "ambient": 48,
+            "beacons": 5,
+            "installations": 100,
+            "living": 64,
+            "traffic": 8,
+            "world_actors": 217
+          },
+          "world_actors": 236
+        },
+        "frost_species": {
+          "aurora_drone": 3,
+          "cargo_sled": 4,
+          "glacier_crystal": 5,
+          "ice_rock": 12,
+          "icebreaker": 1,
+          "igloo_observatory": 2,
+          "penguin": 8,
+          "polar_bear": 2,
+          "research_station": 2,
+          "scientist": 4,
+          "seal": 5,
+          "snow_fox": 3,
+          "snowmobile": 4,
+          "walrus": 2
+        },
+        "frost_system_count": 14,
+        "frozen_ponds": 3,
+        "ice_family_count": 6,
+        "ice_material_roughness": 0.0700000002980232,
+        "ice_spires": 9,
+        "kind_counts": {
+          "block_tower": 48,
+          "bubble_turret": 14,
+          "grand_castle": 10,
+          "toy_arch": 6,
+          "toy_ball": 82,
+          "toy_block": 182,
+          "toy_car": 59,
+          "toy_castle": 24,
+          "toy_duck": 100,
+          "toy_train": 3
+        },
+        "largest_height": 38.0400009155273,
+        "largest_required_radius": 12.2559301757813,
+        "legacy_models_loaded": 0,
+        "map_id": "frost",
+        "mesh_cache_entries": 10,
+        "name": "Frostlight Village",
+        "neighborhood_counts": {
+          "apricot_garden": 86,
+          "calving_basin": 16,
+          "crown_heights": 10,
+          "east_bubble_walk": 23,
+          "frost_ecology": 57,
+          "mint_playground": 117,
+          "rose_courtyard": 110,
+          "sky_block_quarter": 78,
+          "sunset_castles": 8,
+          "west_bubble_walk": 23
+        },
+        "physical_towers": 5,
+        "polar_visuals_converted": 619,
+        "shape_cache_entries": 102,
+        "site_prop_receipts": [],
+        "site_props": 0,
+        "snow_decorations": 40,
+        "snow_material_roughness": 0.239999994635582,
+        "static_batches": {
+          "batches": 79,
+          "meshes": 414
+        },
+        "static_bodies": 455,
+        "tier_counts": {
+          "1": 221,
+          "2": 111,
+          "3": 50,
+          "4": 19,
+          "5": 53,
+          "6": 47,
+          "7": 8,
+          "8": 11,
+          "9": 8
+        },
+        "total_points": 5071,
+        "whole_castles": 0
+      }
+    },
+    "scope": "Dynamic source-mesh bounds/topology and explicitly isolated real physics lifecycle. Probe growth/position are staged. Ordinary 90-second progression is separate. No phone, production save or SDK claim."
+  },
+  "toy_city": {
+    "checks": 2947,
+    "failures": [],
+    "metrics": {
+      "admission_levels": {
+        "1": 221,
+        "2": 118,
+        "3": 24,
+        "4": 14,
+        "5": 64,
+        "6": 8,
+        "7": 4,
+        "8": 4,
+        "9": 2,
+        "10": 4,
+        "12": 8
+      },
+      "admission_targets": [
+        {
+          "count": 2,
+          "kind": "grand_castle",
+          "minimum_level": 12,
+          "required_radius": 12.147469367981,
+          "size": "(18.0, 24.0, 17.0)",
+          "supported": 0,
+          "tier": 9
+        },
+        {
+          "count": 2,
+          "kind": "grand_castle",
+          "minimum_level": 12,
+          "required_radius": 12.147469367981,
+          "size": "(18.0, 38.0, 17.0)",
+          "supported": 0,
+          "tier": 9
+        },
+        {
+          "count": 2,
+          "kind": "grand_castle",
+          "minimum_level": 12,
+          "required_radius": 12.147469367981,
+          "size": "(18.0, 33.0, 17.0)",
+          "supported": 0,
+          "tier": 9
+        },
+        {
+          "count": 1,
+          "kind": "grand_castle",
+          "minimum_level": 12,
+          "required_radius": 12.147469367981,
+          "size": "(18.0, 27.0, 17.0)",
+          "supported": 0,
+          "tier": 9
+        },
+        {
+          "count": 1,
+          "kind": "grand_castle",
+          "minimum_level": 12,
+          "required_radius": 12.147469367981,
+          "size": "(18.0, 30.0, 17.0)",
+          "supported": 0,
+          "tier": 9
+        },
+        {
+          "count": 1,
+          "kind": "grand_castle",
+          "minimum_level": 10,
+          "required_radius": 9.36695262908936,
+          "size": "(14.0, 22.0, 13.0)",
+          "supported": 0,
+          "tier": 8
+        },
+        {
+          "count": 1,
+          "kind": "grand_castle",
+          "minimum_level": 10,
+          "required_radius": 9.36695262908936,
+          "size": "(14.0, 27.0, 13.0)",
+          "supported": 0,
+          "tier": 8
+        },
+        {
+          "count": 2,
+          "kind": "toy_castle",
+          "minimum_level": 9,
+          "required_radius": 7.77999092102051,
+          "size": "(12.0, 18.0, 10.4)",
+          "supported": 0,
+          "tier": 8
+        },
+        {
+          "count": 2,
+          "kind": "toy_castle",
+          "minimum_level": 8,
+          "required_radius": 6.80878131866455,
+          "size": "(10.4, 16.0, 9.2)",
+          "supported": 0,
+          "tier": 8
+        },
+        {
+          "count": 2,
+          "kind": "toy_castle",
+          "minimum_level": 8,
+          "required_radius": 6.80878131866455,
+          "size": "(10.4, 15.0, 9.2)",
+          "supported": 0,
+          "tier": 8
+        },
+        {
+          "count": 2,
+          "kind": "toy_castle",
+          "minimum_level": 10,
+          "required_radius": 9.02981826782227,
+          "size": "(14.0, 21.0, 12.0)",
+          "supported": 0,
+          "tier": 8
+        },
+        {
+          "count": 1,
+          "kind": "toy_castle",
+          "minimum_level": 7,
+          "required_radius": 5.69594078063965,
+          "size": "(8.800001, 11.4, 7.6)",
+          "supported": 0,
+          "tier": 7
+        },
+        {
+          "count": 4,
+          "kind": "toy_castle",
+          "minimum_level": 5,
+          "required_radius": 3.06215023040772,
+          "size": "(4.8, 9.0, 4.0)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 2,
+          "kind": "toy_castle",
+          "minimum_level": 5,
+          "required_radius": 3.06215023040772,
+          "size": "(4.8, 10.0, 4.0)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 4,
+          "kind": "block_tower",
+          "minimum_level": 6,
+          "required_radius": 3.95864284515381,
+          "size": "(5.4, 4.0, 5.0)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 4,
+          "kind": "toy_block",
+          "minimum_level": 5,
+          "required_radius": 2.67394000053406,
+          "size": "(4.2, 4.0, 3.9)",
+          "supported": 4,
+          "tier": 5
+        },
+        {
+          "count": 4,
+          "kind": "bubble_turret",
+          "minimum_level": 3,
+          "required_radius": 1.62220863819122,
+          "size": "(3.0, 4.6, 2.8)",
+          "supported": 4,
+          "tier": 4
+        },
+        {
+          "count": 4,
+          "kind": "toy_arch",
+          "minimum_level": 4,
+          "required_radius": 2.06333696365356,
+          "size": "(2.8, 3.5, 2.6)",
+          "supported": 0,
+          "tier": 4
+        },
+        {
+          "count": 1,
+          "kind": "bubble_turret",
+          "minimum_level": 5,
+          "required_radius": 2.30993711471558,
+          "size": "(4.2, 7.0, 4.0)",
+          "supported": 0,
+          "tier": 5
+        },
+        {
+          "count": 4,
+          "kind": "bubble_turret",
+          "minimum_level": 5,
+          "required_radius": 2.30993711471558,
+          "size": "(4.2, 5.5, 4.0)",
+          "supported": 0,
+          "tier": 5
+        },
+        {
+          "count": 1,
+          "kind": "toy_castle",
+          "minimum_level": 7,
+          "required_radius": 5.69594078063965,
+          "size": "(8.800001, 10.0, 7.6)",
+          "supported": 0,
+          "tier": 7
+        },
+        {
+          "count": 2,
+          "kind": "toy_castle",
+          "minimum_level": 5,
+          "required_radius": 3.06215023040772,
+          "size": "(4.8, 7.0, 4.0)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 1,
+          "kind": "bubble_turret",
+          "minimum_level": 5,
+          "required_radius": 2.30993711471558,
+          "size": "(4.2, 6.0, 4.0)",
+          "supported": 0,
+          "tier": 5
+        },
+        {
+          "count": 1,
+          "kind": "toy_castle",
+          "minimum_level": 7,
+          "required_radius": 5.69594078063965,
+          "size": "(8.800001, 15.6, 7.6)",
+          "supported": 0,
+          "tier": 7
+        },
+        {
+          "count": 1,
+          "kind": "bubble_turret",
+          "minimum_level": 5,
+          "required_radius": 2.30993711471558,
+          "size": "(4.2, 10.0, 4.0)",
+          "supported": 0,
+          "tier": 5
+        },
+        {
+          "count": 1,
+          "kind": "toy_castle",
+          "minimum_level": 7,
+          "required_radius": 5.69594078063965,
+          "size": "(8.800001, 14.2, 7.6)",
+          "supported": 0,
+          "tier": 7
+        },
+        {
+          "count": 1,
+          "kind": "bubble_turret",
+          "minimum_level": 5,
+          "required_radius": 2.30993711471558,
+          "size": "(4.2, 9.0, 4.0)",
+          "supported": 0,
+          "tier": 5
+        },
+        {
+          "count": 5,
+          "kind": "block_tower",
+          "minimum_level": 5,
+          "required_radius": 2.94102828025818,
+          "size": "(4.2, 8.0, 3.5)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 6,
+          "kind": "block_tower",
+          "minimum_level": 5,
+          "required_radius": 2.94102828025818,
+          "size": "(4.2, 5.6, 3.5)",
+          "supported": 0,
+          "tier": 5
+        },
+        {
+          "count": 6,
+          "kind": "block_tower",
+          "minimum_level": 5,
+          "required_radius": 2.94102828025818,
+          "size": "(4.2, 10.5, 3.5)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 6,
+          "kind": "block_tower",
+          "minimum_level": 5,
+          "required_radius": 2.94102828025818,
+          "size": "(4.2, 7.0, 3.5)",
+          "supported": 0,
+          "tier": 5
+        },
+        {
+          "count": 5,
+          "kind": "block_tower",
+          "minimum_level": 5,
+          "required_radius": 2.94102828025818,
+          "size": "(4.2, 5.0, 3.5)",
+          "supported": 0,
+          "tier": 5
+        },
+        {
+          "count": 3,
+          "kind": "block_tower",
+          "minimum_level": 5,
+          "required_radius": 3.43028457641602,
+          "size": "(4.8, 5.5, 4.2)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 2,
+          "kind": "block_tower",
+          "minimum_level": 5,
+          "required_radius": 3.43028457641602,
+          "size": "(4.8, 5.8, 4.2)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 4,
+          "kind": "block_tower",
+          "minimum_level": 5,
+          "required_radius": 3.43028457641602,
+          "size": "(4.8, 12.0, 4.2)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 2,
+          "kind": "block_tower",
+          "minimum_level": 5,
+          "required_radius": 3.43028457641602,
+          "size": "(4.8, 10.0, 4.2)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 2,
+          "kind": "block_tower",
+          "minimum_level": 5,
+          "required_radius": 3.43028457641602,
+          "size": "(4.8, 9.0, 4.2)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 3,
+          "kind": "block_tower",
+          "minimum_level": 5,
+          "required_radius": 3.43028457641602,
+          "size": "(4.8, 6.5, 4.2)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 1,
+          "kind": "toy_block",
+          "minimum_level": 3,
+          "required_radius": 1.31801806926727,
+          "size": "(2.05, 1.2, 1.95)",
+          "supported": 0,
+          "tier": 3
+        },
+        {
+          "count": 46,
+          "kind": "toy_car",
+          "minimum_level": 2,
+          "required_radius": 0.928228769302368,
+          "size": "(1.45, 0.9, 1.12)",
+          "supported": 1,
+          "tier": 2
+        },
+        {
+          "count": 37,
+          "kind": "toy_duck",
+          "minimum_level": 1,
+          "required_radius": 0.388812085390091,
+          "size": "(0.72, 0.65, 0.68)",
+          "supported": 1,
+          "tier": 1
+        },
+        {
+          "count": 44,
+          "kind": "toy_ball",
+          "minimum_level": 1,
+          "required_radius": 0.24666539311409,
+          "size": "(0.4, 0.38, 0.38)",
+          "supported": 0,
+          "tier": 1
+        },
+        {
+          "count": 44,
+          "kind": "toy_block",
+          "minimum_level": 1,
+          "required_radius": 0.257037994265556,
+          "size": "(0.4, 0.38, 0.38)",
+          "supported": 0,
+          "tier": 1
+        },
+        {
+          "count": 44,
+          "kind": "toy_duck",
+          "minimum_level": 1,
+          "required_radius": 0.216006810665131,
+          "size": "(0.4, 0.38, 0.38)",
+          "supported": 0,
+          "tier": 1
+        },
+        {
+          "count": 38,
+          "kind": "toy_ball",
+          "minimum_level": 1,
+          "required_radius": 0.443060481548309,
+          "size": "(0.72, 0.65, 0.68)",
+          "supported": 0,
+          "tier": 1
+        },
+        {
+          "count": 4,
+          "kind": "toy_block",
+          "minimum_level": 1,
+          "required_radius": 0.46155356168747,
+          "size": "(0.72, 0.65, 0.68)",
+          "supported": 0,
+          "tier": 1
+        },
+        {
+          "count": 3,
+          "kind": "toy_car",
+          "minimum_level": 2,
+          "required_radius": 0.928228769302368,
+          "size": "(1.45, 0.82, 1.12)",
+          "supported": 0,
+          "tier": 2
+        },
+        {
+          "count": 3,
+          "kind": "toy_train",
+          "minimum_level": 2,
+          "required_radius": 0.905852901935577,
+          "size": "(1.45, 0.82, 1.12)",
+          "supported": 0,
+          "tier": 2
+        },
+        {
+          "count": 39,
+          "kind": "toy_block",
+          "minimum_level": 2,
+          "required_radius": 0.864136869907379,
+          "size": "(1.45, 0.9, 1.12)",
+          "supported": 0,
+          "tier": 2
+        },
+        {
+          "count": 19,
+          "kind": "toy_duck",
+          "minimum_level": 2,
+          "required_radius": 1.10703486442566,
+          "size": "(2.05, 1.7, 1.95)",
+          "supported": 0,
+          "tier": 3
+        },
+        {
+          "count": 17,
+          "kind": "toy_block",
+          "minimum_level": 3,
+          "required_radius": 1.31801806926727,
+          "size": "(2.05, 1.7, 1.95)",
+          "supported": 0,
+          "tier": 3
+        },
+        {
+          "count": 4,
+          "kind": "toy_castle",
+          "minimum_level": 6,
+          "required_radius": 3.82768778800964,
+          "size": "(6.0, 8.0, 5.0)",
+          "supported": 0,
+          "tier": 6
+        },
+        {
+          "count": 2,
+          "kind": "bubble_turret",
+          "minimum_level": 3,
+          "required_radius": 1.51199997425079,
+          "size": "(2.8, 3.2, 2.6)",
+          "supported": 0,
+          "tier": 4
+        },
+        {
+          "count": 10,
+          "kind": "toy_car",
+          "minimum_level": 1,
+          "required_radius": 0.497994868755341,
+          "size": "(0.72, 0.65, 0.68)",
+          "supported": 0,
+          "tier": 1
+        },
+        {
+          "count": 2,
+          "kind": "toy_arch",
+          "minimum_level": 4,
+          "required_radius": 2.06333696365356,
+          "size": "(2.8, 3.2, 2.6)",
+          "supported": 0,
+          "tier": 4
+        },
+        {
+          "count": 8,
+          "kind": "royal_flowerbed",
+          "minimum_level": 4,
+          "required_radius": 1.9111838722229,
+          "size": "(3.2, 1.1, 1.512)",
+          "supported": 0,
+          "tier": 3
+        },
+        {
+          "count": 8,
+          "kind": "royal_topiary",
+          "minimum_level": 2,
+          "required_radius": 1.00027601480484,
+          "size": "(1.852363, 3.1, 1.852363)",
+          "supported": 0,
+          "tier": 3
+        }
+      ],
+      "gardens": {
+        "added_available_points": 64,
+        "counts": {
+          "royal_flowerbed": 8,
+          "royal_topiary": 8
+        },
+        "scope": "Actual explicit physical swallow fixtures, not organic travel"
+      },
+      "opening_targets": 68,
+      "physical": {
+        "completed_stack_points": 7,
+        "expected_stack_points": 7,
+        "receipts": {
+          "91486161612": [
+            {
+              "name": "Toy_099_toy_block",
+              "player": true,
+              "points": 4,
+              "score": 34,
+              "top": -3.59789454936981
+            }
+          ],
+          "91620379347": [
+            {
+              "name": "Toy_100_toy_car",
+              "player": true,
+              "points": 2,
+              "score": 36,
+              "top": -3.52670389413834
+            }
+          ],
+          "91855260381": [
+            {
+              "name": "Toy_101_toy_duck",
+              "player": true,
+              "points": 1,
+              "score": 37,
+              "top": -3.53688269853592
+            }
+          ],
+          "145139701511": [
+            {
+              "name": "Toy_800_royal_flowerbed",
+              "player": true,
+              "points": 4,
+              "score": 64,
+              "top": -3.6978947520256
+            }
+          ],
+          "145424914194": [
+            {
+              "name": "Toy_802_royal_topiary",
+              "player": true,
+              "points": 4,
+              "score": 14,
+              "top": -3.70828604698181
+            }
+          ]
+        },
+        "remote_tower_id": "toy_tower_11",
+        "scope": "Explicit small-stack and remote-pull fixtures; real gravity and callbacks, not a timed growth soak",
+        "starter_tower_id": "toy_tower_21"
+      },
+      "planning": {
+        "blocked_landmarks": 0,
+        "reachable": 471,
+        "scope": "One-body admission graph only; no travel-time or ordinary 90-second pacing claim",
+        "score": 3545,
+        "thresholds": [
+          {
+            "admitted": 0,
+            "level": 1,
+            "radius": 0.85,
+            "score": 0
+          },
+          {
+            "admitted": 10,
+            "level": 2,
+            "radius": 1.2,
+            "score": 10
+          },
+          {
+            "admitted": 30,
+            "level": 3,
+            "radius": 1.65,
+            "score": 30
+          },
+          {
+            "admitted": 60,
+            "level": 4,
+            "radius": 2.2,
+            "score": 60
+          },
+          {
+            "admitted": 100,
+            "level": 5,
+            "radius": 3.5,
+            "score": 100
+          },
+          {
+            "admitted": 160,
+            "level": 6,
+            "radius": 5.1,
+            "score": 160
+          },
+          {
+            "admitted": 230,
+            "level": 7,
+            "radius": 6.0,
+            "score": 240
+          },
+          {
+            "admitted": 285,
+            "level": 8,
+            "radius": 7.2,
+            "score": 350
+          },
+          {
+            "admitted": 335,
+            "level": 9,
+            "radius": 8.7,
+            "score": 500
+          },
+          {
+            "admitted": 376,
+            "level": 10,
+            "radius": 10.2,
+            "score": 707
+          },
+          {
+            "admitted": 394,
+            "level": 11,
+            "radius": 12.0,
+            "score": 963
+          },
+          {
+            "admitted": 411,
+            "level": 12,
+            "radius": 14.0,
+            "score": 1257
+          },
+          {
+            "admitted": 427,
+            "level": 13,
+            "radius": 15.8888888888889,
+            "score": 1609
+          },
+          {
+            "admitted": 450,
+            "level": 14,
+            "radius": 17.5789473684211,
+            "score": 2029
+          },
+          {
+            "admitted": 458,
+            "level": 15,
+            "radius": 19.1,
+            "score": 2457
+          },
+          {
+            "admitted": 465,
+            "level": 16,
+            "radius": 20.4761904761905,
+            "score": 2969
+          },
+          {
+            "admitted": 471,
+            "level": 17,
+            "radius": 21.7272727272727,
+            "score": 3545
+          }
+        ]
+      },
+      "population": {
+        "actor_mesh_cache_entries": 17,
+        "bodies": 815,
+        "collision_parts": 1077,
+        "court": {
+          "active_assemblies": 244,
+          "activity_receipts": 0,
+          "ambient": 48,
+          "assemblies": 244,
+          "beacons": 8,
+          "distinct_recipes": 10,
+          "gate_beacons": [
+            {
+              "at": "(-13.0, 51.43102)",
+              "beacon": "Toy_588_bubble_turret",
+              "beacon_radius": 0.311021208763123,
+              "district": "rose_courtyard",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43102120876312,
+              "nearest_actor_route_distance": 8.56897752322044,
+              "nearest_other_toy_clearance": 2.03119829297066,
+              "palace": "Toy_021_toy_castle",
+              "palace_at": "(-13.0, 49.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.06215023040772
+            },
+            {
+              "at": "(33.0, 51.43102)",
+              "beacon": "Toy_589_bubble_turret",
+              "beacon_radius": 0.311021208763123,
+              "district": "mint_playground",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43102120876312,
+              "nearest_actor_route_distance": 8.56897752322044,
+              "nearest_other_toy_clearance": 1.59108227491379,
+              "palace": "Toy_030_toy_castle",
+              "palace_at": "(33.0, 49.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.06215023040772
+            },
+            {
+              "at": "(-13.0, 0.431021)",
+              "beacon": "Toy_590_bubble_turret",
+              "beacon_radius": 0.311021208763123,
+              "district": "sky_block_quarter",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43102120876312,
+              "nearest_actor_route_distance": 13.0,
+              "nearest_other_toy_clearance": 0.986400961875916,
+              "palace": "Toy_039_toy_castle",
+              "palace_at": "(-13.0, -2.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.06215023040772
+            },
+            {
+              "at": "(33.0, 0.431021)",
+              "beacon": "Toy_591_bubble_turret",
+              "beacon_radius": 0.311021208763123,
+              "district": "apricot_garden",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43102120876312,
+              "nearest_actor_route_distance": 11.0,
+              "nearest_other_toy_clearance": 0.986401915550232,
+              "palace": "Toy_048_toy_castle",
+              "palace_at": "(33.0, -2.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.06215023040772
+            }
+          ],
+          "installations": 100,
+          "living": 80,
+          "living_roles": {
+            "balloon_vendor": 4,
+            "captain": 4,
+            "courier": 4,
+            "courtier": 8,
+            "drummer": 4,
+            "guard": 16,
+            "herald": 4,
+            "jester": 4,
+            "king": 4,
+            "knight": 4,
+            "page": 4,
+            "princess": 4,
+            "queen": 4,
+            "sentry": 4,
+            "steward": 4,
+            "toymaker": 4
+          },
+          "parade": 8,
+          "released": 0,
+          "routes": {
+            "formation_columns": 2,
+            "formation_spacing": 1.05,
+            "guards_change_every": 18.0,
+            "half_width": 2.8,
+            "paths": [
+              [
+                "(-44.0, 18.0)",
+                "(0.0, 18.0)",
+                "(0.0, 60.0)",
+                "(-44.0, 60.0)"
+              ],
+              [
+                "(0.0, 18.0)",
+                "(44.0, 18.0)",
+                "(44.0, 60.0)",
+                "(0.0, 60.0)"
+              ],
+              [
+                "(-44.0, -36.0)",
+                "(0.0, -36.0)",
+                "(0.0, 18.0)",
+                "(-44.0, 18.0)"
+              ],
+              [
+                "(0.0, -36.0)",
+                "(44.0, -36.0)",
+                "(44.0, 18.0)",
+                "(0.0, 18.0)"
+              ],
+              [
+                "(-84.0, -84.0)",
+                "(84.0, -84.0)",
+                "(84.0, 84.0)",
+                "(-84.0, 84.0)"
+              ],
+              [
+                "(-44.0, -36.0)",
+                "(44.0, -36.0)",
+                "(44.0, 60.0)",
+                "(-44.0, 60.0)"
+              ]
+            ],
+            "world_limit": 94.0
+          },
+          "separation_passes": 0,
+          "source_city_benchmark": {
+            "ambient": 48,
+            "beacons": 5,
+            "installations": 100,
+            "living": 64,
+            "traffic": 8,
+            "world_actors": 217
+          },
+          "world_actors": 236
+        },
+        "kind_counts": {
+          "block_tower": 48,
+          "bubble_turret": 14,
+          "grand_castle": 10,
+          "royal_flowerbed": 8,
+          "royal_topiary": 8,
+          "toy_arch": 6,
+          "toy_ball": 82,
+          "toy_block": 109,
+          "toy_car": 59,
+          "toy_castle": 24,
+          "toy_duck": 100,
+          "toy_train": 3
+        },
+        "largest_height": 38.0400009155273,
+        "largest_required_radius": 12.147469367981,
+        "legacy_models_loaded": 0,
+        "map_id": "toys",
+        "mesh_cache_entries": 12,
+        "name": "Bubble Toy Town",
+        "neighborhood_counts": {
+          "apricot_garden": 86,
+          "crown_heights": 26,
+          "east_bubble_walk": 23,
+          "mint_playground": 117,
+          "rose_courtyard": 110,
+          "sky_block_quarter": 78,
+          "sunset_castles": 8,
+          "west_bubble_walk": 23
+        },
+        "physical_towers": 5,
+        "shape_cache_entries": 87,
+        "site_prop_receipts": [
+          {
+            "body": "Toy_800_royal_flowerbed",
+            "kind": "royal_flowerbed",
+            "points": 4,
+            "position": "(-29.0, 0.59, -52.7)",
+            "required_radius": 1.9111838722229
+          },
+          {
+            "body": "Toy_801_royal_flowerbed",
+            "kind": "royal_flowerbed",
+            "points": 4,
+            "position": "(-15.0, 0.59, -52.7)",
+            "required_radius": 1.9111838722229
+          },
+          {
+            "body": "Toy_802_royal_topiary",
+            "kind": "royal_topiary",
+            "points": 4,
+            "position": "(-33.7, 1.59, -57.0)",
+            "required_radius": 1.00027601480484
+          },
+          {
+            "body": "Toy_803_royal_topiary",
+            "kind": "royal_topiary",
+            "points": 4,
+            "position": "(-10.3, 1.59, -57.0)",
+            "required_radius": 1.00027601480484
+          },
+          {
+            "body": "Toy_804_royal_topiary",
+            "kind": "royal_topiary",
+            "points": 4,
+            "position": "(-33.7, 1.59, -62.0)",
+            "required_radius": 1.00027601480484
+          },
+          {
+            "body": "Toy_805_royal_topiary",
+            "kind": "royal_topiary",
+            "points": 4,
+            "position": "(-10.3, 1.59, -62.0)",
+            "required_radius": 1.00027601480484
+          },
+          {
+            "body": "Toy_806_royal_flowerbed",
+            "kind": "royal_flowerbed",
+            "points": 4,
+            "position": "(-29.0, 0.59, -75.0)",
+            "required_radius": 1.9111838722229
+          },
+          {
+            "body": "Toy_807_royal_flowerbed",
+            "kind": "royal_flowerbed",
+            "points": 4,
+            "position": "(-15.0, 0.59, -75.0)",
+            "required_radius": 1.9111838722229
+          },
+          {
+            "body": "Toy_808_royal_flowerbed",
+            "kind": "royal_flowerbed",
+            "points": 4,
+            "position": "(15.0, 0.59, -52.7)",
+            "required_radius": 1.9111838722229
+          },
+          {
+            "body": "Toy_809_royal_flowerbed",
+            "kind": "royal_flowerbed",
+            "points": 4,
+            "position": "(29.0, 0.59, -52.7)",
+            "required_radius": 1.9111838722229
+          },
+          {
+            "body": "Toy_810_royal_topiary",
+            "kind": "royal_topiary",
+            "points": 4,
+            "position": "(10.3, 1.59, -57.0)",
+            "required_radius": 1.00027601480484
+          },
+          {
+            "body": "Toy_811_royal_topiary",
+            "kind": "royal_topiary",
+            "points": 4,
+            "position": "(33.7, 1.59, -57.0)",
+            "required_radius": 1.00027601480484
+          },
+          {
+            "body": "Toy_812_royal_topiary",
+            "kind": "royal_topiary",
+            "points": 4,
+            "position": "(10.3, 1.59, -62.0)",
+            "required_radius": 1.00027601480484
+          },
+          {
+            "body": "Toy_813_royal_topiary",
+            "kind": "royal_topiary",
+            "points": 4,
+            "position": "(33.7, 1.59, -62.0)",
+            "required_radius": 1.00027601480484
+          },
+          {
+            "body": "Toy_814_royal_flowerbed",
+            "kind": "royal_flowerbed",
+            "points": 4,
+            "position": "(15.0, 0.59, -75.0)",
+            "required_radius": 1.9111838722229
+          },
+          {
+            "body": "Toy_815_royal_flowerbed",
+            "kind": "royal_flowerbed",
+            "points": 4,
+            "position": "(29.0, 0.59, -75.0)",
+            "required_radius": 1.9111838722229
+          }
+        ],
+        "site_props": 16,
+        "static_batches": {
+          "batches": 59,
+          "meshes": 328
+        },
+        "static_bodies": 471,
+        "tier_counts": {
+          "1": 221,
+          "2": 91,
+          "3": 53,
+          "4": 12,
+          "5": 29,
+          "6": 43,
+          "7": 4,
+          "8": 10,
+          "9": 8
+        },
+        "total_points": 4233,
+        "whole_castles": 78
+      },
+      "scene": {
+        "collision_parts": 1077,
+        "fragments": 0,
+        "mesh_instances": 876
+      },
+      "supports": [
+        {
+          "actual_contact_gap": 0.0249996185302734,
+          "body": "Toy_023_toy_block",
+          "global_aabb_gap_diagnostic": 0.0250000953674316,
+          "parent": "Toy_022_block_tower",
+          "support_ray_hits": 3
+        },
+        {
+          "actual_contact_gap": 0.0249996185302734,
+          "body": "Toy_024_bubble_turret",
+          "global_aabb_gap_diagnostic": 0.0250003337860107,
+          "parent": "Toy_023_toy_block",
+          "support_ray_hits": 12
+        },
+        {
+          "actual_contact_gap": 0.0249996185302734,
+          "body": "Toy_032_toy_block",
+          "global_aabb_gap_diagnostic": 0.0250000953674316,
+          "parent": "Toy_031_block_tower",
+          "support_ray_hits": 3
+        },
+        {
+          "actual_contact_gap": 0.0249996185302734,
+          "body": "Toy_033_bubble_turret",
+          "global_aabb_gap_diagnostic": 0.0250003337860107,
+          "parent": "Toy_032_toy_block",
+          "support_ray_hits": 12
+        },
+        {
+          "actual_contact_gap": 0.0249996185302734,
+          "body": "Toy_041_toy_block",
+          "global_aabb_gap_diagnostic": 0.0250000953674316,
+          "parent": "Toy_040_block_tower",
+          "support_ray_hits": 3
+        },
+        {
+          "actual_contact_gap": 0.0249996185302734,
+          "body": "Toy_042_bubble_turret",
+          "global_aabb_gap_diagnostic": 0.0250003337860107,
+          "parent": "Toy_041_toy_block",
+          "support_ray_hits": 12
+        },
+        {
+          "actual_contact_gap": 0.0249996185302734,
+          "body": "Toy_050_toy_block",
+          "global_aabb_gap_diagnostic": 0.0250000953674316,
+          "parent": "Toy_049_block_tower",
+          "support_ray_hits": 3
+        },
+        {
+          "actual_contact_gap": 0.0249996185302734,
+          "body": "Toy_051_bubble_turret",
+          "global_aabb_gap_diagnostic": 0.0250003337860107,
+          "parent": "Toy_050_toy_block",
+          "support_ray_hits": 12
+        },
+        {
+          "actual_contact_gap": 0.0250002145767212,
+          "body": "Toy_100_toy_car",
+          "global_aabb_gap_diagnostic": 0.0249999761581421,
+          "parent": "Toy_099_toy_block",
+          "support_ray_hits": 20
+        },
+        {
+          "actual_contact_gap": 0.0250003337860107,
+          "body": "Toy_101_toy_duck",
+          "global_aabb_gap_diagnostic": 0.0219910144805908,
+          "parent": "Toy_100_toy_car",
+          "support_ray_hits": 7
+        }
+      ]
+    },
+    "scope": "Actual toy geometry, collision, support and explicit physics fixtures; no real save, production SDK, phone FPS or 90-second pacing claim"
+  },
+  "toy_map_integration": {
+    "checks": 86,
+    "failures": [],
+    "metrics": {
+      "home": {
+        "available_maps": [
+          "city",
+          "food",
+          "toys",
+          "frost"
+        ],
+        "cards": 4,
+        "scope": "Real screenshot resources and engine stream ownership only; no audible speaker or browser autoplay claim",
+        "stream_preserved": true
+      },
+      "timing": {
+        "base_seconds": 90,
+        "extension_seconds": 30,
+        "scope": "Explicit timer/score fixture, separate from normal real-time play"
+      },
+      "video": {
+        "provider": "Local controlled protocol fixture; no SDK traffic or ad-duration claim",
+        "requests": 2
+      }
+    },
+    "scope": "Cold launch and actual pointer controls, isolated saves, explicit same-world timing/video fixtures; no live ads, purchases, phone or ordinary gameplay pacing claim"
+  },
+  "toy_court": {
+    "checks": 639,
+    "failures": [],
+    "metrics": {
+      "court": {
+        "comparison_scope": "Built population and behavior review; sixteen City appearances and one hundred original City recipes remain separately reported",
+        "distinct_living_geometry": 16,
+        "living_costumes": [
+          "guard",
+          "sentry",
+          "captain",
+          "knight",
+          "king",
+          "queen",
+          "princess",
+          "steward",
+          "courier",
+          "page",
+          "herald",
+          "courtier",
+          "jester",
+          "drummer",
+          "toymaker",
+          "balloon_vendor"
+        ],
+        "physics_owners": 344,
+        "query_members": 244,
+        "scene": {
+          "bodies": 815,
+          "colliders": 1077,
+          "meshes": 876,
+          "nodes": 2769
+        },
+        "summary": {
+          "active_assemblies": 244,
+          "activity_receipts": 0,
+          "ambient": 48,
+          "assemblies": 244,
+          "beacons": 8,
+          "distinct_recipes": 10,
+          "gate_beacons": [
+            {
+              "at": "(-13.0, 51.43102)",
+              "beacon": "Toy_588_bubble_turret",
+              "beacon_radius": 0.311021208763123,
+              "district": "rose_courtyard",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43102120876312,
+              "nearest_actor_route_distance": 8.56897752322044,
+              "nearest_other_toy_clearance": 2.03119829297066,
+              "palace": "Toy_021_toy_castle",
+              "palace_at": "(-13.0, 49.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.06215023040772
+            },
+            {
+              "at": "(33.0, 51.43102)",
+              "beacon": "Toy_589_bubble_turret",
+              "beacon_radius": 0.311021208763123,
+              "district": "mint_playground",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43102120876312,
+              "nearest_actor_route_distance": 8.56897752322044,
+              "nearest_other_toy_clearance": 1.59108227491379,
+              "palace": "Toy_030_toy_castle",
+              "palace_at": "(33.0, 49.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.06215023040772
+            },
+            {
+              "at": "(-13.0, 0.431021)",
+              "beacon": "Toy_590_bubble_turret",
+              "beacon_radius": 0.311021208763123,
+              "district": "sky_block_quarter",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43102120876312,
+              "nearest_actor_route_distance": 13.0,
+              "nearest_other_toy_clearance": 0.986400961875916,
+              "palace": "Toy_039_toy_castle",
+              "palace_at": "(-13.0, -2.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.06215023040772
+            },
+            {
+              "at": "(33.0, 0.431021)",
+              "beacon": "Toy_591_bubble_turret",
+              "beacon_radius": 0.311021208763123,
+              "district": "apricot_garden",
+              "facade_half_depth": 2.0,
+              "front_clearance": 0.12,
+              "front_offset": 2.43102120876312,
+              "nearest_actor_route_distance": 11.0,
+              "nearest_other_toy_clearance": 0.986401915550232,
+              "palace": "Toy_048_toy_castle",
+              "palace_at": "(33.0, -2.0)",
+              "palace_minimum_level": 5,
+              "palace_required_radius": 3.06215023040772
+            }
+          ],
+          "installations": 100,
+          "living": 80,
+          "living_roles": {
+            "balloon_vendor": 4,
+            "captain": 4,
+            "courier": 4,
+            "courtier": 8,
+            "drummer": 4,
+            "guard": 16,
+            "herald": 4,
+            "jester": 4,
+            "king": 4,
+            "knight": 4,
+            "page": 4,
+            "princess": 4,
+            "queen": 4,
+            "sentry": 4,
+            "steward": 4,
+            "toymaker": 4
+          },
+          "parade": 8,
+          "released": 0,
+          "routes": {
+            "formation_columns": 2,
+            "formation_spacing": 1.05,
+            "guards_change_every": 18.0,
+            "half_width": 2.8,
+            "paths": [
+              [
+                "(-44.0, 18.0)",
+                "(0.0, 18.0)",
+                "(0.0, 60.0)",
+                "(-44.0, 60.0)"
+              ],
+              [
+                "(0.0, 18.0)",
+                "(44.0, 18.0)",
+                "(44.0, 60.0)",
+                "(0.0, 60.0)"
+              ],
+              [
+                "(-44.0, -36.0)",
+                "(0.0, -36.0)",
+                "(0.0, 18.0)",
+                "(-44.0, 18.0)"
+              ],
+              [
+                "(0.0, -36.0)",
+                "(44.0, -36.0)",
+                "(44.0, 18.0)",
+                "(0.0, 18.0)"
+              ],
+              [
+                "(-84.0, -84.0)",
+                "(84.0, -84.0)",
+                "(84.0, 84.0)",
+                "(-84.0, 84.0)"
+              ],
+              [
+                "(-44.0, -36.0)",
+                "(44.0, -36.0)",
+                "(44.0, 60.0)",
+                "(-44.0, 60.0)"
+              ]
+            ],
+            "world_limit": 94.0
+          },
+          "separation_passes": 0,
+          "source_city_benchmark": {
+            "ambient": 48,
+            "beacons": 5,
+            "installations": 100,
+            "living": 64,
+            "traffic": 8,
+            "world_actors": 217
+          },
+          "world_actors": 236
+        }
+      },
+      "formation": {
+        "largest_column_error": 1.52587890633882e-06,
+        "largest_rank_error": 3.05175781245559e-06,
+        "members": 6,
+        "moving": 6,
+        "samples": 1080,
+        "scope": "Isolated real six-body marching controller; other residents excluded from this local formation fixture"
+      },
+      "handoff": {
+        "downward_velocity_observed": true,
+        "no_script_motion": true,
+        "original_geometry": true,
+        "receipts": [
+          {
+            "consumed": true,
+            "player": true,
+            "points": 3,
+            "top": -3.56677371263504
+          }
+        ]
+      },
+      "heading": [
+        {
+          "escaped_samples": 0,
+          "hz": 30,
+          "largest_error_degrees": 15.0000060038281,
+          "minimum_clearance": 0.0399894118309021,
+          "overlap_samples": 0,
+          "samples": 4238,
+          "wrong_heading": 0
+        },
+        {
+          "escaped_samples": 0,
+          "hz": 60,
+          "largest_error_degrees": 15.0000090386904,
+          "minimum_clearance": 0.0399875044822693,
+          "overlap_samples": 0,
+          "samples": 8496,
+          "wrong_heading": 0
+        },
+        {
+          "escaped_samples": 0,
+          "hz": 120,
+          "largest_error_degrees": 15.0000092648137,
+          "minimum_clearance": 0.0399895906448364,
+          "overlap_samples": 0,
+          "samples": 17008,
+          "wrong_heading": 0
+        }
+      ],
+      "interactions": {
+        "alarm": true,
+        "flee": true,
+        "guard_change": true,
+        "pursuit": true,
+        "scope": "Explicit local positions and controller clocks; no reward, save or normal travel injected"
+      },
+      "natural": {
+        "actual_corner_deliveries": 8,
+        "events": [
+          "guard_change",
+          "state_changed",
+          "delivery"
+        ],
+        "hz": 60,
+        "invalid_deliveries": 0,
+        "motion_measure": "Accumulated horizontal distance; idle vertical breathing excluded",
+        "moving_installations": 100,
+        "moving_living": 60,
+        "scope": "Simulated controller clock, not a real-time or FPS measurement",
+        "seconds": 22,
+        "states": {
+          "courier_delivery": 12496,
+          "courier_dropoff": 576,
+          "courtyard_walk": 9056,
+          "craft_display": 5352,
+          "guard_change": 1022,
+          "guard_evade": 1551,
+          "march": 18381,
+          "market_walk": 4248,
+          "mischief": 7761,
+          "pursuit": 8013,
+          "rest": 10744,
+          "royal_idle": 21120,
+          "sentry": 5280
+        }
+      },
+      "removed_upper": {
+        "base_retained": true,
+        "recipe": "crown_spinner",
+        "scope": "Explicit test-owned removal and actual controller updates; no physical-fall or reward claim"
+      },
+      "sunny_city": {
+        "ambient": 48,
+        "assemblies": 217,
+        "beacons": 5,
+        "distinct_authored_recipes": 100,
+        "edibles": 812,
+        "installations": 100,
+        "living": 64,
+        "living_appearance_role_kinds": [
+          "police",
+          "thief",
+          "mech",
+          "fat_fries",
+          "firefighter",
+          "chef",
+          "skateboarder",
+          "photographer",
+          "jogger",
+          "musician",
+          "construction",
+          "nurse",
+          "cyclist",
+          "superhero",
+          "delivery",
+          "dancer"
+        ],
+        "living_query_members": 64,
+        "scene": {
+          "bodies": 812,
+          "colliders": 2804,
+          "meshes": 1141,
+          "nodes": 5828
+        },
+        "traffic": 8
+      }
+    },
+    "scope": "Actual sequential City/Toy scenes, simulated real controllers and physical guard fall; no real saves, SDK traffic, GPU pixels, ordinary pacing or phone FPS claim"
+  }
+}

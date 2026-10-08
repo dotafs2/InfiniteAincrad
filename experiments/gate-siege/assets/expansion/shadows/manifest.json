@@ -1,0 +1,207 @@
+{
+  "builder": "art_source/bake_player_shadows.py",
+  "kind": "Directional triangle-union shadows, static grounded hero pose",
+  "sun_rotation_degrees": [
+    -53.0,
+    -32.0,
+    0.0
+  ],
+  "godot_euler_order": "YXZ",
+  "sun_ray_direction": [
+    0.3189133742732226,
+    -0.7986355100472928,
+    -0.51036808462243
+  ],
+  "projection_xz_per_height": [
+    0.3993228077904243,
+    -0.6390500775406387
+  ],
+  "projection_equation": "ground_xz = vertex_xz + projection_xz_per_height * vertex_y",
+  "coordinates": "Godot Y-up, model faces -Z, native model feet at (0,0,0)",
+  "uv_convention": "PlaneMesh horizontal: U=0 at min X, V=0 at min Z; PNG top row is V=0",
+  "rgba": "RGB white, alpha 0..1 silhouette coverage; runtime shader supplies tint and opacity",
+  "placement": "Unrotated horizontal PlaneMesh. Size = size * uniform_model_scale. Center XZ = actor_ground_xz + center * uniform_model_scale. Ground Y + a small offset. Do not inherit animated tilt or height.",
+  "limitations": "Static grounded pose, fixed sun and -Z hero orientation; flying rotating heroes require their separate projected oval.",
+  "models": {
+    "infantry": {
+      "texture": "res://assets/expansion/shadows/infantry.png",
+      "source": "res://assets/expansion/infantry.glb",
+      "source_sha256": "8397f76c2b8a787070cd3ebd31aced391475e81c5f8b593c13bc437b3e139528",
+      "texture_sha256": "c0cc438bf4b63adc7ee85dc5783bb0c544bff81f315f7d2e322d9ea486fd0bce",
+      "source_triangles": 3800,
+      "source_bounds": {
+        "min": [
+          -0.22356832027435303,
+          0.00014038855442777276,
+          -0.5107888579368591
+        ],
+        "max": [
+          0.22356830537319183,
+          1.0,
+          0.15017388761043549
+        ]
+      },
+      "projected_bounds_xz": {
+        "min": [
+          -0.12725088052150818,
+          -0.8884759610151469
+        ],
+        "max": [
+          0.5151330357335062,
+          0.029246267634794446
+        ]
+      },
+      "plane_bounds_xz": {
+        "min": [
+          -0.18242058543283585,
+          -0.9436456659264746
+        ],
+        "max": [
+          0.5703027406448339,
+          0.08441597254612211
+        ]
+      },
+      "size": [
+        0.7527233260776698,
+        1.0280616384725967
+      ],
+      "center": [
+        0.19394107760599902,
+        -0.42961484669017624
+      ],
+      "blur_sigma_native_units": 0.012,
+      "padding_native_units": 0.055169704911327666,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "border_alpha_max": 0,
+      "texture_size": [
+        256,
+        256
+      ],
+      "opaque_coverage_fraction": 0.3587646484375,
+      "current_player_uniform_scale": "Runtime-dependent squad scale; see scripts/squad.gd"
+    },
+    "gunner": {
+      "texture": "res://assets/expansion/shadows/gunner.png",
+      "source": "res://assets/expansion/gunner.glb",
+      "source_sha256": "68791434d76e55643cdca7da9cdc35d5dd7d4ab0aba4a782141cc3035b6841c0",
+      "texture_sha256": "4fbc0cafa8166fe822daa352b938b4b8fdc17f0c628ad87c2e035e29d7ce88f6",
+      "source_triangles": 7392,
+      "source_bounds": {
+        "min": [
+          -0.6074209213256836,
+          7.3627625170047395e-06,
+          -1.016844630241394
+        ],
+        "max": [
+          0.6074209213256836,
+          1.7999999523162842,
+          0.43623489141464233
+        ]
+      },
+      "projected_bounds_xz": {
+        "min": [
+          -0.29185349999017474,
+          -1.6407774110954882
+        ],
+        "max": [
+          1.073031621842265,
+          0.029217115455151058
+        ]
+      },
+      "plane_bounds_xz": {
+        "min": [
+          -0.3913003299400333,
+          -1.7402242410453468
+        ],
+        "max": [
+          1.1724784517921236,
+          0.12866394540500958
+        ]
+      },
+      "size": [
+        1.563778781732157,
+        1.8688881864503564
+      ],
+      "center": [
+        0.3905890609260452,
+        -0.8057801478201686
+      ],
+      "blur_sigma_native_units": 0.021599999427795412,
+      "padding_native_units": 0.09944682994985851,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "border_alpha_max": 0,
+      "texture_size": [
+        256,
+        256
+      ],
+      "opaque_coverage_fraction": 0.4713287353515625,
+      "current_player_uniform_scale": "Runtime-dependent squad scale; see scripts/squad.gd"
+    },
+    "mech": {
+      "texture": "res://assets/expansion/shadows/mech.png",
+      "source": "res://assets/expansion/mech.glb",
+      "source_sha256": "0835dccac4e09d9ca7a120e1b456d21518450c5cca2173c678aaa2e88633ff33",
+      "texture_sha256": "379324a1d3e40a6c7fd259537faeec95f282fafed146a3775d58c53637bd8937",
+      "source_triangles": 7264,
+      "source_bounds": {
+        "min": [
+          -1.0194977521896362,
+          0.0,
+          -0.5863448977470398
+        ],
+        "max": [
+          1.0194977521896362,
+          3.4000000953674316,
+          0.9096568822860718
+        ]
+      },
+      "projected_bounds_xz": {
+        "min": [
+          -0.5739353307828552,
+          -2.1493805392434124
+        ],
+        "max": [
+          2.0240574789115007,
+          0.2752324590519278
+        ]
+      },
+      "plane_bounds_xz": {
+        "min": [
+          -0.757432154186229,
+          -2.3328773626467862
+        ],
+        "max": [
+          2.2075543023148745,
+          0.45872928245530165
+        ]
+      },
+      "size": [
+        2.9649864565011033,
+        2.791606645102088
+      ],
+      "center": [
+        0.7250610740643227,
+        -0.9370740400957422
+      ],
+      "blur_sigma_native_units": 0.04080000114440918,
+      "padding_native_units": 0.18349682340337387,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "border_alpha_max": 0,
+      "texture_size": [
+        256,
+        256
+      ],
+      "opaque_coverage_fraction": 0.4686737060546875,
+      "current_player_uniform_scale": "Runtime-dependent squad scale; see scripts/squad.gd"
+    }
+  }
+}

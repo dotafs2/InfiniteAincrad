@@ -1,0 +1,122 @@
+{
+  "scope": "Actual isolated PCK and current external review scripts; no source-resource fallback directory",
+  "cwd": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/package-isolation-review",
+  "pck_sha256": "ee7d292a754c36270ced0a6285f415f4fd25fd83dfb45e87ef1ee858aed0b7b9",
+  "results": {
+    "progression_review": {
+      "checks": 10,
+      "failures": [],
+      "unexpected_errors": [],
+      "source_hashes": {
+        "game_sha256": null
+      },
+      "source_hash_note": "Null means source text is unavailable in this runtime; package identity is recorded by the release gate."
+    },
+    "skin_catalog_review": {
+      "checks": 212,
+      "failures": [],
+      "unexpected_errors": [],
+      "source_hashes": {
+        "fidelity/shaders/accretion.gdshader": "1284055f6b342308a8bb30b7e65d98d7d5f64049b8fa1285ddcb15735042146a",
+        "fidelity/skin_catalog.gd": null,
+        "fidelity/skin_motifs.gd": null,
+        "fidelity/skin_visual.gd": null
+      },
+      "source_hash_note": "Null means source text is unavailable in this runtime; package identity is recorded by the release gate."
+    },
+    "rain_review": {
+      "checks": 9,
+      "failures": [],
+      "unexpected_errors": [],
+      "source_hashes": {
+        "food_body_sha256": null,
+        "food_city_sha256": null
+      },
+      "source_hash_note": "Null means source text is unavailable in this runtime; package identity is recorded by the release gate."
+    },
+    "food_revision_review": {
+      "checks": 11,
+      "failures": [],
+      "unexpected_errors": [],
+      "source_hashes": {
+        "fidelity/food_body.gd": null,
+        "fidelity/food_city.gd": null,
+        "fidelity/food_neighborhoods.gd": null,
+        "fidelity/food_shapes.gd": null
+      },
+      "source_hash_note": "Null means source text is unavailable in this runtime; package identity is recorded by the release gate."
+    },
+    "crowd_review": {
+      "checks": 17,
+      "failures": [],
+      "unexpected_errors": []
+    },
+    "district_review": {
+      "checks": 4,
+      "failures": [],
+      "unexpected_errors": []
+    }
+  },
+  "assertion_preservation": {
+    "progression_review": {
+      "check_statements_identical": true,
+      "check_statements": 10,
+      "before_sha256": "48b2f69e4f0049f67e9d13a3c54d9cfb40a63a9442a9a3f36d6c5e587e546233",
+      "after_sha256": "f0cff4b298267e62e380008eafa4fbe80ba23582d2efa4e33f68fa4cf081e16d"
+    },
+    "skin_catalog_review": {
+      "check_statements_identical": true,
+      "check_statements": 6,
+      "before_sha256": "8d6cdd2ab6f4aee019abb57c7dd89d1c07a584ee27d598e32ca094379c65dc55",
+      "after_sha256": "fe43f99ce68ca48f4905725d49a30ed8dfde1b5aaa37b225e85461061cc4659b"
+    },
+    "rain_review": {
+      "check_statements_identical": true,
+      "check_statements": 9,
+      "before_sha256": "64066139120243a9ce20b85ee1e86ec319eceef827a056e56f0f436e5d6876f9",
+      "after_sha256": "3291450e5cd016eeeb935f064faefe378224b8a3ebc8d82a0b443115a5986647"
+    },
+    "food_revision_review": {
+      "check_statements_identical": true,
+      "check_statements": 7,
+      "before_sha256": "600496e60968eadf741d9b4d229ae7a6e2207c4475867e8c8047a40a70b35d64",
+      "after_sha256": "73918bd2a3509cd23843a89f8b2f107f316b624264aa03bd9e26f47308fda5f3"
+    }
+  },
+  "pck_unchanged": true,
+  "isolated_file_inventory_unchanged": true,
+  "total_positive_checks": 263,
+  "output_path_checks": {
+    "identical_output_helper_in_all_four": true,
+    "explicit_report_matches_stdout": true,
+    "explicit_checks": 212,
+    "negative_cases": [
+      {
+        "case": "absent-parent",
+        "failed_closed": true,
+        "unexpected_errors": [
+          "ERROR: Could not write review report: /tmp/hole-package-review-a5c9ce6ec55b4e768cac29780b5952f2/no/report.json (error 7)"
+        ],
+        "uncaught_script_error": false
+      },
+      {
+        "case": "relative",
+        "failed_closed": true,
+        "unexpected_errors": [
+          "ERROR: Review report requires an absolute filesystem path: relative-report.json"
+        ],
+        "uncaught_script_error": false
+      },
+      {
+        "case": "resource-uri",
+        "failed_closed": true,
+        "unexpected_errors": [
+          "ERROR: Review report requires an absolute filesystem path: res://review-report.json"
+        ],
+        "uncaught_script_error": false
+      }
+    ],
+    "scope": "Output failures intentionally produce errors and nonzero process status, never a release pass"
+  },
+  "release_gate_sha256": "5d4ffb3422c191076063c29b60dde1a9593bb90219fbe056f628e3406da7bb05"
+}

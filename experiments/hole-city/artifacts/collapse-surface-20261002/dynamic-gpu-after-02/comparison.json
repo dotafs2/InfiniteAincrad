@@ -1,0 +1,270 @@
+{
+  "after_cases_verified": 4,
+  "completed_matched_pairs": [
+    {
+      "asset": "001_row_house_01",
+      "angle": "isometric",
+      "completed_original_baseline": "artifacts/collapse-surface-20261002/dynamic-gpu-01/before-001_row_house_01-isometric/capture.json",
+      "baseline_report_sha256": "a3e93377a0b2e1eac740f6eedf38bcbf5108b3c6c7cce52c9f11f999a85de8bc",
+      "after": "after-001_row_house_01-isometric",
+      "matched_initial_geometry_camera_intact_reveal_inputs": true,
+      "matched_postrelease_player_controls": false,
+      "matched_physical_trajectory": false
+    },
+    {
+      "asset": "001_row_house_01",
+      "angle": "upper",
+      "completed_original_baseline": "artifacts/collapse-surface-20261002/dynamic-gpu-01/before-001_row_house_01-upper/capture.json",
+      "baseline_report_sha256": "89198a0e74a0ac5b28f18f9073c6b904aad2e74caf2289f28d2fb4ed2efcb0d4",
+      "after": "after-001_row_house_01-upper",
+      "matched_initial_geometry_camera_intact_reveal_inputs": true,
+      "matched_postrelease_player_controls": false,
+      "matched_physical_trajectory": false
+    }
+  ],
+  "after_only_townhouse_cases": [
+    "after-031_townhouse_01-isometric",
+    "after-031_townhouse_01-upper"
+  ],
+  "old_townhouse_baseline": {
+    "status": "failed_partial_timeout_not_matched_inconsistent_radius_fixture",
+    "owned_process": {
+      "pid": 44904,
+      "parent_pid": 42993,
+      "command": [
+        "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/.build/godot-standard/Godot.app/Contents/MacOS/Godot",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/collapse-surface-20261002/dynamic-gpu-01/before-project",
+        "--write-movie",
+        "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/collapse-surface-20261002/dynamic-gpu-01/before-031_townhouse_01-isometric.avi",
+        "--fixed-fps",
+        "30",
+        "--script",
+        "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/collapse-surface-20261002/dynamic-gpu-01/before-project/qa/capture-building-fall.gd",
+        "--",
+        "--test",
+        "--variant=before",
+        "--asset=031_townhouse_01",
+        "--angle=isometric",
+        "--capture-dir=/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/collapse-surface-20261002/dynamic-gpu-01/before-031_townhouse_01-isometric"
+      ],
+      "log": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/collapse-surface-20261002/dynamic-gpu-01/before-031_townhouse_01-isometric.log",
+      "status": "ended",
+      "exit_code": -15,
+      "elapsed_seconds": 180.042
+    },
+    "owned_process_sha256": "a8a76b1712d9a7868eafb03448a1d4006f4fc9161c527ff6e8343486da249e20",
+    "log_path": "build/collapse-surface-20261002/dynamic-gpu-01/before-031_townhouse_01-isometric.log",
+    "log_sha256": "724f75204b7b2da932d2e74503ffe8a59e422b1a11404d021f54f11ad4940229",
+    "last_saved_frame": 247,
+    "partial_images": 23,
+    "completed_report": false,
+    "causal_limit": "Old diagnostic enlarged radius without matching level/score. Authentic earned updates shrank the mouth; timeout is not proof of a production gameplay defect."
+  },
+  "candidate_diagnostic": true,
+  "current_48_point_whole_collections": {
+    "after-001_row_house_01-isometric": [
+      {
+        "asset_id": "001_row_house_01",
+        "category": "building",
+        "fracture_parent": "",
+        "movie_frame": 111,
+        "name": "building_001",
+        "points": 48,
+        "pose": {
+          "origin": [
+            -15.1587438583374,
+            -8.39346885681152,
+            48.2045822143555
+          ],
+          "x": [
+            0.0753745585680008,
+            0.370331019163132,
+            -0.925836741924286
+          ],
+          "y": [
+            0.400069147348404,
+            0.839241504669189,
+            0.368263870477676
+          ],
+          "z": [
+            0.913380205631256,
+            -0.398156493902206,
+            -0.0849005654454231
+          ]
+        },
+        "seconds": 3.7
+      }
+    ],
+    "after-001_row_house_01-upper": [
+      {
+        "asset_id": "001_row_house_01",
+        "category": "building",
+        "fracture_parent": "",
+        "movie_frame": 112,
+        "name": "building_001",
+        "points": 48,
+        "pose": {
+          "origin": [
+            -15.1242523193359,
+            -8.71339130401611,
+            48.2138977050781
+          ],
+          "x": [
+            0.0811110734939575,
+            0.391567140817642,
+            -0.916567623615265
+          ],
+          "y": [
+            0.423785179853439,
+            0.818784594535828,
+            0.387295842170715
+          ],
+          "z": [
+            0.902123749256134,
+            -0.419841706752777,
+            -0.0995278507471085
+          ]
+        },
+        "seconds": 3.73333333333333
+      }
+    ],
+    "after-031_townhouse_01-isometric": [
+      {
+        "asset_id": "031_townhouse_01",
+        "category": "building",
+        "fracture_parent": "",
+        "movie_frame": 110,
+        "name": "building_031",
+        "points": 48,
+        "pose": {
+          "origin": [
+            17.3014698028564,
+            -7.19210290908813,
+            47.7561988830566
+          ],
+          "x": [
+            0.043015293776989,
+            0.0740262791514397,
+            0.996328175067902
+          ],
+          "y": [
+            -0.0433272793889046,
+            0.996451199054718,
+            -0.0721648260951042
+          ],
+          "z": [
+            -0.99813449382782,
+            -0.0400639958679676,
+            0.0460699982941151
+          ]
+        },
+        "seconds": 3.66666666666667
+      }
+    ],
+    "after-031_townhouse_01-upper": [
+      {
+        "asset_id": "031_townhouse_01",
+        "category": "building",
+        "fracture_parent": "",
+        "movie_frame": 110,
+        "name": "building_031",
+        "points": 48,
+        "pose": {
+          "origin": [
+            17.2748317718506,
+            -7.05205297470093,
+            47.7180442810059
+          ],
+          "x": [
+            0.0540807992219925,
+            0.0636916905641556,
+            0.996503233909607
+          ],
+          "y": [
+            -0.0264879148453474,
+            0.997704029083252,
+            -0.0623309276998043
+          ],
+          "z": [
+            -0.998185217380524,
+            -0.0230243876576424,
+            0.0556436888873577
+          ]
+        },
+        "seconds": 3.66666666666667
+      }
+    ]
+  },
+  "current_fragment_count_every_frame": 0,
+  "actual_game_camera_globals_verified": true,
+  "current_explicit_level_score_radius_fixture": {
+    "after-001_row_house_01-isometric": {
+      "explicit_diagnostic_injection": true,
+      "level": 7,
+      "never_commercial_media": true,
+      "position": [
+        -13.6377468109131,
+        0.0,
+        51.2933807373047
+      ],
+      "radius": 6.0,
+      "required_radius": 5.28305746078491,
+      "rule": "level_for_radius(required), minimum level_start_for(level), radius_for_level(level); earned contents cannot shrink the opening",
+      "score": 240
+    },
+    "after-001_row_house_01-upper": {
+      "explicit_diagnostic_injection": true,
+      "level": 7,
+      "never_commercial_media": true,
+      "position": [
+        -13.939923286438,
+        0.0,
+        51.4801330566406
+      ],
+      "radius": 6.0,
+      "required_radius": 5.28305746078491,
+      "rule": "level_for_radius(required), minimum level_start_for(level), radius_for_level(level); earned contents cannot shrink the opening",
+      "score": 240
+    },
+    "after-031_townhouse_01-isometric": {
+      "explicit_diagnostic_injection": true,
+      "level": 7,
+      "never_commercial_media": true,
+      "position": [
+        19.3622531890869,
+        0.0,
+        51.2933807373047
+      ],
+      "radius": 6.0,
+      "required_radius": 5.57128469467163,
+      "rule": "level_for_radius(required), minimum level_start_for(level), radius_for_level(level); earned contents cannot shrink the opening",
+      "score": 240
+    },
+    "after-031_townhouse_01-upper": {
+      "explicit_diagnostic_injection": true,
+      "level": 7,
+      "never_commercial_media": true,
+      "position": [
+        19.0600776672363,
+        0.0,
+        51.4801330566406
+      ],
+      "radius": 6.0,
+      "required_radius": 5.57128469467163,
+      "rule": "level_for_radius(required), minimum level_start_for(level), radius_for_level(level); earned contents cannot shrink the opening",
+      "score": 240
+    }
+  },
+  "old_baseline_postrelease_player_controls_match": false,
+  "matched_physical_trajectory": false,
+  "baseline_plan_sha256": "c15cf8a69d20c0a9ec876bb1a4206f24db1892b55792aa32bc73c4da43695de4",
+  "helper_sha256": "691357096f97c63645842c07c0b4d1fb2086c511ebaaf4f19b77a1e5df4e76d5",
+  "driver_sha256": "c9ea767e6691fc1928d2f0565d15a60b93968cb3ab0a6926a03a6b7512935685",
+  "source_unchanged": true,
+  "store_media": false,
+  "visual_review_required": true,
+  "scope": "Four new after diagnostics with consistent explicit level/score/radius injection; old001 matched only for initial original mesh/pose/camera/intact-reveal inputs. Old031 inconsistent-radius timeout preserved and not attributed to a production bug. No matched physical trajectory, repeated old baseline, extended timeout, commercial footage or device acceptance."
+}

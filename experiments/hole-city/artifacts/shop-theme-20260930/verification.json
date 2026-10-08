@@ -1,0 +1,129 @@
+{
+  "release_manifest_sha256": "0144e340e33c089c088ad5c36e5951d0b29286ea52c072e58b7a05b376911c10",
+  "verifier_sha256": "b81b61defd106f1326caca22c2bd2a61351faab51a185cad0bd0065958f742e7",
+  "version": "0.11.1",
+  "verified_utc": "2026-09-30T02:18:38.649021+00:00",
+  "suites_per_phase": 77,
+  "checks": {
+    "source": 53843,
+    "package": 53843
+  },
+  "tested_input_count": 791,
+  "inputs_unchanged": true,
+  "train_asset_checks": 246,
+  "notice_files_verified": 7,
+  "served_artifacts": [
+    {
+      "file": "credits.html",
+      "sha256": "c3f28e6842688410ffff8f96ce7214630152f3172ab737065c85088462fce3d0",
+      "bytes": 1557,
+      "http_status": 200
+    },
+    {
+      "file": "device-qa.js",
+      "sha256": "128c4d196a0da5952514a96c6c91a89756a5d1196f29f99ac395208ada06059e",
+      "bytes": 5755,
+      "http_status": 200
+    },
+    {
+      "file": "index.apple-touch-icon.png",
+      "sha256": "1706a7bd4a44e619bee9149b9bad4be7635910e0ea24ac17d4d8b0569a2c56f3",
+      "bytes": 10367,
+      "http_status": 200
+    },
+    {
+      "file": "index.audio.position.worklet.js",
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+      "bytes": 2973,
+      "http_status": 200
+    },
+    {
+      "file": "index.audio.worklet.js",
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+      "bytes": 7298,
+      "http_status": 200
+    },
+    {
+      "file": "index.html",
+      "sha256": "20e36c81fd0d2554a5b398e797c4316e0c3b9a0e6e65d68670959b13dcdf6925",
+      "bytes": 6438,
+      "http_status": 200
+    },
+    {
+      "file": "index.icon.png",
+      "sha256": "921c12a6e542b19617674e285a52e839bc0f5fc7dbe7407e802dd8428dd81768",
+      "bytes": 4636,
+      "http_status": 200
+    },
+    {
+      "file": "index.js",
+      "sha256": "1e5437ee16d35bf6f8a3b28e6f70f310ee5da12acab3222a06e8c223cb61757c",
+      "bytes": 314653,
+      "http_status": 200
+    },
+    {
+      "file": "index.pck",
+      "sha256": "31f638ff480f368d9bdb32462aa279285cf388972277ed2b32ecaf46a212be7e",
+      "bytes": 10553736,
+      "http_status": 200
+    },
+    {
+      "file": "index.png",
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e",
+      "bytes": 21443,
+      "http_status": 200
+    },
+    {
+      "file": "index.wasm",
+      "sha256": "f6090f055e16765bcef5dc3a031f68ab40c151d9e7f0541d9d7eb61e92dc5051",
+      "bytes": 38820072,
+      "http_status": 200
+    },
+    {
+      "file": "notices/FREDOKA_OFL.txt",
+      "sha256": "5c9e7eee5c6b25f4b05b8d53b2e470ea4962f9ced742d044a98f7d95d1375bab",
+      "bytes": 4388,
+      "http_status": 200
+    },
+    {
+      "file": "notices/GODOT_LICENSES.txt",
+      "sha256": "24ac8071d1ce7dedd595c3195fb65553f2407cd1f402f55fead968a5edead014",
+      "bytes": 94795,
+      "http_status": 200
+    },
+    {
+      "file": "notices/LICENSE.txt",
+      "sha256": "63fcfd62d5011aed4b992dba98fe3c2bfd79cafb63fd82780bd86b5a6f0c1f47",
+      "bytes": 1112,
+      "http_status": 200
+    },
+    {
+      "file": "notices/MBMAYER_LICENSE.txt",
+      "sha256": "2fb5455ce9e79572a4e1828b180c6e579478e1f7b980e60371fbf56266016b11",
+      "bytes": 1085,
+      "http_status": 200
+    },
+    {
+      "file": "notices/MUSIC_CREDITS.txt",
+      "sha256": "eabdbe1a5c7039c71617452183dd3ffe721ed472dc80d77aec7698ad7f39e012",
+      "bytes": 1007,
+      "http_status": 200
+    },
+    {
+      "file": "notices/THIRD_PARTY.md",
+      "sha256": "06add3a507528c6d2789d4b85766d95bf7fd389e6d015b4333761c5a2df72211",
+      "bytes": 4050,
+      "http_status": 200
+    },
+    {
+      "file": "notices/manifest.json",
+      "sha256": "bad68acc0eab31edf41f0e96e3d0c35cacd7144791bb9aa8ab658d0f48ba6378",
+      "bytes": 1593,
+      "http_status": 200
+    }
+  ],
+  "limitations": [
+    "Static HTTP artifact bytes only; no browser capture or runtime inspection.",
+    "Headless physics, Blender asset renders and desktop controller timings do not establish iPhone GPU FPS."
+  ]
+}

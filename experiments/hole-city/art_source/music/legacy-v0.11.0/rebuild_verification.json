@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "date": "2026-09-30",
+  "method": "Rebuilt with the same recorded local Python/NumPy/FFmpeg toolchain in a TemporaryDirectory and compared each encoded Ogg plus the full manifest byte-for-byte. Temporary copy removed.",
+  "result": "pass",
+  "files": {
+    "sunny_city_loop.ogg": {
+      "byte_identical": true,
+      "sha256": "bcf2e7af8fa53a568b287a03e6034ae6631f0694b6e2d17692b9c47943868c25"
+    },
+    "snack_garden_loop.ogg": {
+      "byte_identical": true,
+      "sha256": "a12e247ad82b7098b7cbc0c1dff191661c92e1d88d4660510091567e935ae92e"
+    },
+    "music_manifest.json": {
+      "byte_identical": true,
+      "sha256": "2596187b19adfc675ee87babdb3e947650b943fa2958cad10f652778f4bf65f1"
+    }
+  },
+  "limitations": "No speaker playback, browser audition or listening acceptance. Cross-codec-version byte identity is not claimed."
+}

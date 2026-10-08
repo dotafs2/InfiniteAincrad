@@ -1,0 +1,28 @@
+--- artifacts/retention-20260929/test-maintenance-before/progression_acceptance.gd
++++ tests/progression_acceptance.gd
+@@ -11,7 +11,7 @@
+ 	var game:Node3D=load("res://fidelity/main.tscn").instantiate();root.add_child(game)
+ 	game.test_progress_path=path
+ 	game.stage=4;game.start_level();game.begin_play()
+-	check(game.remaining==240 and game.SCORE_TARGET==500,"Opening matches observed 240-second / 500-point reference")
++	check(game.remaining==240 and game.SCORE_TARGET==500,"Opening retains four-minute timer and the legacy 500-point progress milestone")
+ 	game.player.score=500
+ 	var moving:RigidBody3D=game.city.foods.filter(func(b):return not is_instance_valid(b.support_parent) and b.category!="building")[0]
+ 	moving.freeze=false;moving.position=Vector3(65,9,65);moving.linear_velocity=Vector3.DOWN
+@@ -32,12 +32,12 @@
+ 	fresh.free()
+ 	for result in ["timeout","eaten"]:
+ 		game.start_level();game.begin_play();game.player.score=40;game.finish(result)
+-		check(game.stage==5,"Unsuccessful result does not advance stage: "+result)
+-		check(game.round_score_coins==4 and game.round_win_coins==0,"Unsuccessful result shows score-only reward")
++		check(game.stage==6,"Timed completion advances stage once; legacy eaten settlement does not: "+result)
++		check(game.round_score_coins==4 and game.round_win_coins==(20 if result=="timeout" else 0),"Timed completion receives finish bonus; legacy eaten result receives score only")
+ 	game.start_level();game.begin_play();game.back_home()
+-	check(game.stage==5,"Abandoning a round does not advance rank")
++	check(game.stage==6,"Abandoning a round does not advance rank")
+ 	game.start_level();game.begin_play();game.player.score=0;game.finish("complete")
+-	check(game.stage==5 and game.round_coins==0,"Empty synthetic completion grants neither rank nor coins")
++	check(game.stage==6 and game.round_coins==0,"Empty synthetic completion grants neither rank nor coins")
+ 	game.free();await process_frame
+ 	for suffix in ["",".tmp",".pre-coins.cfg"]:
+ 		if FileAccess.file_exists(path+suffix):DirAccess.remove_absolute(path+suffix)

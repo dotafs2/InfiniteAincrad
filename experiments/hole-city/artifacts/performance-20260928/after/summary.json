@@ -1,0 +1,82 @@
+{
+  "scope": "Mac headless CPU wall times, median of independent runs; not browser or phone FPS",
+  "repeats": 3,
+  "summary": {
+    "city-opening": {
+      "p50_ms": 4.866,
+      "p95_ms": 6.473,
+      "p99_ms": 6.935,
+      "worst_ms": 7.484,
+      "nodes": 4397.0,
+      "samples": 1800,
+      "over_16_67_ms": 0,
+      "native_contact_diagnostics": 0
+    },
+    "city-grown": {
+      "p50_ms": 4.573,
+      "p95_ms": 6.489,
+      "p99_ms": 7.623,
+      "worst_ms": 8.609,
+      "nodes": 2522.0,
+      "samples": 1800,
+      "over_16_67_ms": 0,
+      "native_contact_diagnostics": 0
+    },
+    "food-opening": {
+      "p50_ms": 3.298,
+      "p95_ms": 3.882,
+      "p99_ms": 4.196,
+      "worst_ms": 4.55,
+      "nodes": 8592.0,
+      "samples": 1800,
+      "over_16_67_ms": 0,
+      "native_contact_diagnostics": 0
+    },
+    "food-grown": {
+      "p50_ms": 4.513,
+      "p95_ms": 5.91,
+      "p99_ms": 6.971,
+      "worst_ms": 8.057,
+      "nodes": 6089.0,
+      "samples": 1800,
+      "over_16_67_ms": 0,
+      "native_contact_diagnostics": 0
+    }
+  },
+  "source_sha256": {
+    "fidelity/ads_bridge.gd": "43cc95c71bd60b7eb1db196ea7794337de7e6683414adaf6dfd94d541ee1eef1",
+    "fidelity/art.gd": "3d20f4b3e320d8f701c807165570111fa2ff34eaa63954b3d8f0e1f361f61a16",
+    "fidelity/catalog_city.gd": "cb5dcc5d6d217b7050783a1f202b3382c8c4a1c96243764fbdcbe75f4f1715ec",
+    "fidelity/cut_ground.gd": "d6130898639fe621e2776c4e3cea84c1332381684e239d3a93134502e19e1b69",
+    "fidelity/food_body.gd": "0bc63cb0f738abdacb66d3f511a1aa4ec95164ab7c8e6680540f71dd3945b879",
+    "fidelity/food_city.gd": "d12979806cded2d023a2824eaecf21dfbe93c6c1f314ab5abfe0473ace34da9e",
+    "fidelity/food_neighborhoods.gd": "a936dcf6a3c4575eb66af27c9f014b9cd2d36557923eccc63b5856d1e65e75a0",
+    "fidelity/food_query.gd": "74940e06712db9f83e9926395f5fbbe2751125e4b57918729c7a376ac1a50f22",
+    "fidelity/food_shapes.gd": "5940bad1d247e760d47f1239e5831c864e730bc618b4ecf6871b2a8e33679ec0",
+    "fidelity/food_surface.gd": "86fecdfb022611d5a03d9b7938abca41e55083498aa5d703ebb898a878fb2a5b",
+    "fidelity/fracture_cache.gd": "f7425ec6bf09b3434ddab7a3d34879109800038fda07802f7ff36de66ab79785",
+    "fidelity/game.gd": "ae9c8cfe5c0714b2c49a1914b9fc477e5dcad49c0e6db920e6422c9dd5b85576",
+    "fidelity/hole.gd": "8111aa2d6d3c55ed506c7d12882da56189559cf8f585e0dc90aa3707552b7ee7",
+    "fidelity/mesh_batch.gd": "ee226d2766047943300b3626e6a7fa9d86fce91ef815c3bdc44b3602ec821f26",
+    "fidelity/placement_grid.gd": "d009f5cc75030c20b39c010803593dcbcbb96dbc9c0a456804241701bfda5ffc",
+    "fidelity/prop_collision_cache.gd": "7ba4d609904430c3be902a6497a3cba6ac435e67c1aa51af62933b6f08f63164",
+    "fidelity/rim_body.gd": "9089dfaa7c890977e69f604d58c721fce1961ef4b7e104d9c5ba1d0162706c5f",
+    "fidelity/scene_audit.gd": "d2473972545e4785f62ba0b5875a835f5d060ee301027c33071b2346a208f8f5",
+    "fidelity/skin_visual.gd": "8a0bb71b4505be3469d31957e822d9354324b8981becf65fdadd6dd480c437e6",
+    "fidelity/static_batch.gd": "5a81f7177ee0ff8d473a52abd5741e56dd20e2e84fbcfd4c3740b91d2f3b1ae3",
+    "fidelity/street_layout.gd": "469f29bb690f2d49c7f2517eddcf966443d7d69f7637d6817e547b1d0199904a",
+    "fidelity/swallowable.gd": "1438b7b2ef3bad532578e58023a6e631f778fc2adb52c79a5ea24f3c877c3b96",
+    "fidelity/ui.gd": "d4f5c1c3729872bc72eb9154b3de4916b01fdc0dc9578c3c186099b65bc34240",
+    "fidelity/asphalt.gdshader": "b0c1d47690a2a780f6f1e730801ae05f0ebf91bac99eb1ad02df35e724624cd2",
+    "fidelity/cinder_flame.gdshader": "ecf6a514855efc1e93684e4e91b51e13b04faf12870627fb8e1c02ffe3c43907",
+    "fidelity/facade.gdshader": "cb0124fa77535788e65ac35bc4e7b5ce0d36338fe83e1948da7bc11570588159",
+    "fidelity/food_glaze.gdshader": "24359cbb82e77823f6ea5e6f3410a29dc11c685188d424c23d4111d9b45bba36",
+    "fidelity/palette.gdshader": "fc44a1e85aeda3711220e8102150b49e5ad9a0e070172ffd011fd97f593ab4a8",
+    "fidelity/shaders/accretion.gdshader": "73f110a8e0a1b8eadeb8426dba79bc36727909d4f865fa6f7ca43737ea14e8f6",
+    "fidelity/shaders/aurora.gdshader": "38f339f6ab05cce1afd9ed18b52bf00e360f15dfed283fcdc11467271df23800",
+    "fidelity/shaders/solid_skin.gdshader": "2e008f85c1c60fe3582a1cad9571f55c6c04eb0cbb0dd24e6336b67e8a297843",
+    "fidelity/shaders/tide.gdshader": "e2a3ad7347f8049c5ee0814ba51e40eaf69a1f1d34a574a892d4689b6e62f1d1",
+    "tests/mobile_profile.gd": "0408023a596c2fbffff3a9ed85b42efc6ce10aa1e1696b901c06b946228af5a3",
+    "project.godot": "c6bfa57343a212d74c8b2bac88c8790237a5e2570429d36bf19e044bb84400ba"
+  }
+}

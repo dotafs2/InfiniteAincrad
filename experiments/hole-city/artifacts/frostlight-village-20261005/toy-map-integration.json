@@ -1,0 +1,27 @@
+{
+	"checks": 76,
+	"failures": [],
+	"metrics": {
+		"home": {
+			"available_maps": [
+				"city",
+				"food",
+				"toys",
+				"frost"
+			],
+			"cards": 3,
+			"scope": "Engine stream ownership only; no audible speaker or browser autoplay claim",
+			"stream_preserved": true
+		},
+		"timing": {
+			"base_seconds": 90,
+			"extension_seconds": 30,
+			"scope": "Explicit timer/score fixture, separate from normal real-time play"
+		},
+		"video": {
+			"provider": "Local controlled protocol fixture; no SDK traffic or ad-duration claim",
+			"requests": 2
+		}
+	},
+	"scope": "Cold launch and actual pointer controls, isolated saves, explicit same-world timing/video fixtures; no live ads, purchases, phone or ordinary gameplay pacing claim"
+}

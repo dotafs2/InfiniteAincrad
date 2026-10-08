@@ -1,0 +1,148 @@
+{
+  "version": "0.8.1",
+  "failures": [],
+  "source_checks": 13092,
+  "packaged_checks": 13092,
+  "shader_programs": 7,
+  "shader_cases": 31,
+  "cpu_samples": 7200,
+  "traces": [
+    {
+      "file": "cpu/city-opening-1.json",
+      "sha256": "02bcf8c5db44178b4bdf2827cbb02091d178002985ea154cd9e25d2cb9985d61"
+    },
+    {
+      "file": "cpu/city-opening-2.json",
+      "sha256": "4cbde6c09aa35cebdb4f44e7eef0a87acf12db59caf212ff1495208755dba2a5"
+    },
+    {
+      "file": "cpu/city-opening-3.json",
+      "sha256": "43b1fa7c066e6cdf391927a6315c52868166afe78f1abef57699c1d9d24814e5"
+    },
+    {
+      "file": "cpu/city-grown-1.json",
+      "sha256": "6b832528b72080337f7a7f7a4b44ec9db1d1172cff3f210454c3c641f56982b7"
+    },
+    {
+      "file": "cpu/city-grown-2.json",
+      "sha256": "4cf5e77cab2f183abb391d1f7864176b0436517cd23f7de38e387891706614ff"
+    },
+    {
+      "file": "cpu/city-grown-3.json",
+      "sha256": "23a0eadb976d510b24b7561355cd474d85c4c7a0e87a904ac2e56877d03b3d86"
+    },
+    {
+      "file": "cpu/food-opening-1.json",
+      "sha256": "7e32dcc354c841d9bc097dd7e0fe06a249dc43da88e6469daaf6c8249ab0f763"
+    },
+    {
+      "file": "cpu/food-opening-2.json",
+      "sha256": "8b0fba2eca06015344a6f96c4022094de8dd3fbf7f54363bea4ddf82211db8c3"
+    },
+    {
+      "file": "cpu/food-opening-3.json",
+      "sha256": "ff2e77ea6bcab6634a70a4271cdea40a1efdc40ab3c04d0938b8956b05a94dd0"
+    },
+    {
+      "file": "cpu/food-grown-1.json",
+      "sha256": "8de08e0edc6f0b7a4378c339c78cd7871671382cb8893fe9e34a7475c5b0c0b2"
+    },
+    {
+      "file": "cpu/food-grown-2.json",
+      "sha256": "8ee49e425b34a7c76e205debaa2c9da142330aea269f550741e32382992dd374"
+    },
+    {
+      "file": "cpu/food-grown-3.json",
+      "sha256": "b331ee3d7d6cbcfa581380d6fd8fe4da741080cd332f1bd8407c9e2b18237d62"
+    }
+  ],
+  "http_artifacts": {
+    "index.apple-touch-icon.png": {
+      "sha256": "1706a7bd4a44e619bee9149b9bad4be7635910e0ea24ac17d4d8b0569a2c56f3",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.wasm": {
+      "sha256": "f6090f055e16765bcef5dc3a031f68ab40c151d9e7f0541d9d7eb61e92dc5051",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.icon.png": {
+      "sha256": "921c12a6e542b19617674e285a52e839bc0f5fc7dbe7407e802dd8428dd81768",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "device-qa.js": {
+      "sha256": "128c4d196a0da5952514a96c6c91a89756a5d1196f29f99ac395208ada06059e",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.html": {
+      "sha256": "f0f1425c30c9cdec5b70f2ef32559d671ed87922f283c722aa0a2daf693aa2a5",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.png": {
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.audio.worklet.js": {
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.js": {
+      "sha256": "1e5437ee16d35bf6f8a3b28e6f70f310ee5da12acab3222a06e8c223cb61757c",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.audio.position.worklet.js": {
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.pck": {
+      "sha256": "092cd4abc2f1e653b5fc76a799fbf9fed5cfa08fa7ce4a28a7ce1563d1f37f38",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    }
+  },
+  "receipt_sha256": {
+    "release/release.json": "fb3333bd9d3fe298ec75fe870351f3fdfd55eac0a6189fa16f783484de5b4291",
+    "shader-probe-final/result.json": "19310b4123b154e002d4306375e2dfd0c8738b98746d1b116aa2236506e58410",
+    "cpu/summary.json": "5a6e1d6d38aa26576282d33f2d2c8fdec1900a1950b0b3684b3f1dd83ef1c468"
+  },
+  "verification_tool_sha256": "4cf8e446a7762a25759f8fe4c52c6dff545cb974d3b0cfca78ac262d1260a89b",
+  "limitation": "Static HTTP delivery, headless scene/CPU checks and isolated shader equations; no browser/game capture or iPhone certification"
+}

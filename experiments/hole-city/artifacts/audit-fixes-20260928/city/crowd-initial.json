@@ -1,0 +1,35 @@
+{
+	"checks": 11,
+	"failures": [],
+	"metrics": {
+		"crowd": {
+			"hz": 60,
+			"minimum_center_spacing_m": 0.479850113391876,
+			"off_sidewalk_samples": 0,
+			"overlap_samples": 0,
+			"seconds": 60
+		},
+		"dense_minimum_spacing_m": 0.48177370429039,
+		"heading": [
+			{
+				"hz": 30,
+				"largest_error_degrees": 15.0000092217192,
+				"samples": 19477,
+				"wrong_heading_samples": 0
+			},
+			{
+				"hz": 60,
+				"largest_error_degrees": 15.0000081045289,
+				"samples": 38954,
+				"wrong_heading_samples": 0
+			},
+			{
+				"hz": 120,
+				"largest_error_degrees": 15.0000080166439,
+				"samples": 77968,
+				"wrong_heading_samples": 0
+			}
+		]
+	},
+	"scope": "Headless controller evidence; no browser or device FPS claim"
+}

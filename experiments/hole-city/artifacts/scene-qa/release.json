@@ -1,0 +1,41 @@
+{
+  "source_checks": 756,
+  "packaged_checks": 756,
+  "failures": [],
+  "artifacts": {
+    "index.apple-touch-icon.png": "1706a7bd4a44e619bee9149b9bad4be7635910e0ea24ac17d4d8b0569a2c56f3",
+    "index.wasm": "f6090f055e16765bcef5dc3a031f68ab40c151d9e7f0541d9d7eb61e92dc5051",
+    "index.icon.png": "921c12a6e542b19617674e285a52e839bc0f5fc7dbe7407e802dd8428dd81768",
+    "index.html": "7b1b48053c05fae42d22e1ae4593e717dc533c54ff2628bfa0bf6473166f84b2",
+    "index.png": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e",
+    "index.audio.worklet.js": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+    "index.js": "1e5437ee16d35bf6f8a3b28e6f70f310ee5da12acab3222a06e8c223cb61757c",
+    "index.audio.position.worklet.js": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+    "index.pck": "f92aabf044105cb4bdee286147885eb1592204be76f1b3f2cbd593533a813364"
+  },
+  "source_sha256": {
+    "fidelity/ads_bridge.gd": "43cc95c71bd60b7eb1db196ea7794337de7e6683414adaf6dfd94d541ee1eef1",
+    "fidelity/art.gd": "3d20f4b3e320d8f701c807165570111fa2ff34eaa63954b3d8f0e1f361f61a16",
+    "fidelity/catalog_city.gd": "19d104551551bd99f81a76ea29818dd8539027700d73f06efad17d4ce6a2d9de",
+    "fidelity/cut_ground.gd": "da7850dd2e4acb4a737dd5017db19090606199a53fc66dbcc4b0bc9632a54a09",
+    "fidelity/food_body.gd": "914a9828fb9b47016829bbc74390fbebd0f0e0690487944839eced5049b8dae7",
+    "fidelity/food_city.gd": "e2e211ff9c25eb86bc831385e41fe64d56330e64616d96e8bf8fd56e2336813f",
+    "fidelity/food_shapes.gd": "51b24216c27486f9305fff0d579b3d3dbee13b45c06c99763be9847f4563e2f8",
+    "fidelity/fracture_cache.gd": "f7425ec6bf09b3434ddab7a3d34879109800038fda07802f7ff36de66ab79785",
+    "fidelity/game.gd": "b65d71dc7a6cc935eaab865a4172a9568ed083150e771f2978d2e5f9da4e5cf2",
+    "fidelity/hole.gd": "b027e19247260e238d413db8c3b2f7e5e50db6927b370630a3d0c5ca68e42dc4",
+    "fidelity/mesh_batch.gd": "4978cb979977998fbe18ef83d7f1ceb73e6a966552c1673686250ca3ebb66237",
+    "fidelity/placement_grid.gd": "d009f5cc75030c20b39c010803593dcbcbb96dbc9c0a456804241701bfda5ffc",
+    "fidelity/rim_body.gd": "2a98895cb9daef66b431a2161a8257b0d35ce4ed21c0fa737b91a2dc82115e9d",
+    "fidelity/scene_audit.gd": "d2473972545e4785f62ba0b5875a835f5d060ee301027c33071b2346a208f8f5",
+    "fidelity/skin_visual.gd": "612a70c697febbf26b8de5567a7e577273ace39dda4ba6fc4ae4372638f27acf",
+    "fidelity/street_layout.gd": "469f29bb690f2d49c7f2517eddcf966443d7d69f7637d6817e547b1d0199904a",
+    "fidelity/swallowable.gd": "1438b7b2ef3bad532578e58023a6e631f778fc2adb52c79a5ea24f3c877c3b96",
+    "fidelity/ui.gd": "aff59c4ca9bea6277b4662c95da6220cd47c076e01676330a2ff8829e29f6c2d",
+    "assets/world_actors/recipes.json": "0a72e6fb67af29317a5ab03d1c630f189a1fa6893f8f145f13e8f50102b309b9",
+    "assets/world_actors/houdini_layout.json": "5acad25a39aa2b2d1c7078d6e9579403c8adc7cd7c02410090278c2bf0138f70",
+    "tools/build_actor_recipes.py": "c6bac69d05cef78ac6558fdcc3aeb6bb4b9487848f34ee1c221d8d69fc67eb29",
+    "tests/scene_qa_acceptance.gd": "db3c296d19b034abb1e9468e91caa8f3853119834fb05bfe84704f2a98cd49d5"
+  },
+  "limitation": "Headless physics and asset checks; browser rendering and iPhone GPU performance are not covered."
+}

@@ -1,0 +1,87 @@
+--- artifacts/retention-20260929/test-maintenance-before/coin_skins_acceptance.gd
++++ tests/coin_skins_acceptance.gd
+@@ -44,14 +44,14 @@
+ 	await frames(4)
+ 	game.set_process(false)
+ 	game.test_progress_path=path("live")
+-	check(game.coins==50 and game.owned_skin_ids==["core_shell"],"New player starts with 50 coins and one owned skin")
++	check(game.coins==50 and game.owned_skin_ids==["cocoa_square"],"New player starts with 50 coins and one owned skin")
+ 	game.note_skin_progress(420)
+ 	check(not game.skin_unlocked("prism_vale"),"High scores do not bypass coin ownership")
+ 	await click("holes-nav")
+ 	check(target("unlock-random")!=null and game.skin_unlock_price("foundation")==50,"Classic collection has the initial 50-coin action")
+ 	await click("unlock-random")
+ 	check(game.coins==0 and game.unlocked_skin_count("foundation")==2,"Actual pointer buys exactly one new Classic skin")
+-	check(game.selected_skin_id!="core_shell" and game.skin_unlocked(game.selected_skin_id),"New skin is automatically selected")
++	check(game.selected_skin_id!="cocoa_square" and game.skin_unlocked(game.selected_skin_id),"New skin is automatically selected")
+ 	check(game.ui.preview_skin_id==game.selected_skin_id and game.ui.toast.contains("UNLOCKED"),"Purchase highlights the new card and announces it")
+ 	check(target("unlock-random").disabled,"Reveal blocks queued repeat pointer taps")
+ 	var chosen:String=game.selected_skin_id
+@@ -61,7 +61,7 @@
+ 	await click("unlock-random")
+ 	check(game.coins==0 and game.unlocked_skin_count("foundation")==2,"Insufficient funds leave ownership and balance unchanged")
+ 	check(game.ui.toast=="Need 70 more coins","Insufficient toast shows exact next Classic purchase deficit")
+-	check(game.ui.COIN_EARNING_RULE=="Coins: score / 10 (round down) +20 for a win","Persistent earning rule states rounding and actual completion bonus")
++	check(game.ui.COIN_EARNING_RULE=="10 points = 1 coin · Finish with points: +20","Persistent earning rule states rounding and actual completion bonus")
+ 	check(game.ui.font.get_string_size(game.ui.COIN_EARNING_RULE,HORIZONTAL_ALIGNMENT_LEFT,-1,16).x<=400,"Earning rule fits the narrowest result panel")
+ 	var deficit:Dictionary=game.unlock_random_skin("foundation")
+ 	check(deficit.get("missing_coins")==70 and deficit.get("price")==70,"Unaffordable receipt contains exact current price and shortage")
+@@ -75,30 +75,30 @@
+ 	check(game.phase=="intro" and game.player.skin_id==chosen,"Library PLAY equips the purchased model in the actual round")
+ 	game.begin_play();game.player.score=125
+ 	game.finish("timeout")
+-	check(game.round_coins==12 and game.coins==462,"City settlement pays one coin per ten actual points")
++	check(game.round_coins==32 and game.coins==482,"Timed city settlement floors score coins and adds the disclosed 20-coin finish bonus")
+ 	game.finish("timeout")
+-	check(game.coins==462,"Repeated finish does not pay twice")
++	check(game.coins==482,"Repeated finish does not pay twice")
+ 	game.back_home();game.selected_map="food";game.start_level();game.begin_play()
+ 	game.player.score=500;game.finish("complete")
+-	check(game.round_coins==70 and game.coins==532,"Food completion pays score coins plus the 20-coin win bonus")
++	check(game.round_coins==70 and game.coins==552,"Food completion pays score coins plus the 20-coin win bonus")
+ 	var after_round:=restored(game.test_progress_path)
+-	check(after_round.coins==532 and after_round.selected_skin_id==chosen,"Round earnings and purchased equipment survive a cold restore")
++	check(after_round.coins==552 and after_round.selected_skin_id==chosen,"Round earnings and purchased equipment survive a cold restore")
+ 	after_round.free()
+ 	game.start_level();game.begin_play();game.player.score=0;game.finish("eaten")
+-	check(game.round_coins==0 and game.coins==532,"Empty defeats do not mint coins")
++	check(game.round_coins==0 and game.coins==552,"Empty defeats do not mint coins")
+ 	game.start_level();game.begin_play();game.player.score=100;game.back_home()
+-	check(game.coins==532,"Leaving a round does not award a completion")
+-	check(not game.unlock_random_skin("unknown").ok and game.coins==532,"Unknown categories cannot spend coins")
++	check(game.coins==552,"Leaving a round does not award a completion")
++	check(not game.unlock_random_skin("unknown").ok and game.coins==552,"Unknown categories cannot spend coins")
+ 	# Recheck shortage after a real settlement and a subsequent successful purchase.
+ 	game.coins=0
+ 	for group in ["foundation","resonance"]:
+ 		deficit=game.unlock_random_skin(group)
+ 		check(deficit.get("missing_coins")==70 and deficit.message=="Need 70 more coins","Independent group price yields precise shortage: "+group)
+ 	game.start_level();game.begin_play();game.player.score=95;game.finish("timeout");game.back_home()
+-	check(game.coins==9,"Nonmultiple score settlement floors before updating shortage")
++	check(game.coins==29,"Nonmultiple timed score floors before adding the finish bonus and updating shortage")
+ 	deficit=game.unlock_random_skin("foundation")
+-	check(deficit.get("missing_coins")==61 and deficit.message=="Need 61 more coins","Exact shortage refreshes after actual round earnings")
+-	game.coins+=61 # Fund exactly this fixture's next deliberate purchase.
++	check(deficit.get("missing_coins")==41 and deficit.message=="Need 41 more coins","Exact shortage refreshes after actual round earnings")
++	game.coins+=41 # Fund exactly this fixture's next deliberate purchase.
+ 	game.last_unlock_msec=-1000
+ 	check(game.unlock_random_skin("foundation").ok and game.coins==0,"Exact balance can buy the next skin")
+ 	deficit=game.unlock_random_skin("foundation")
+@@ -151,7 +151,7 @@
+ 	check(cfg.save(file)==OK,"Legacy fixture is written")
+ 	var original:=FileAccess.get_sha256(file)
+ 	owner=restored(file)
+-	check(owner.owned_skin_ids.size()==6 and owner.skin_unlocked("shard") and not owner.skin_unlocked("cinder"),"Migration retains every previously earned skin")
++	check(owner.owned_skin_ids.size()==7 and owner.skin_unlocked("shard") and not owner.skin_unlocked("cinder"),"Migration retains every previously earned skin")
+ 	check(owner.coins==137 and owner.gems==9 and owner.stage==4 and owner.selected_map=="food" and owner.selected_skin_id=="shard","Migration preserves wallet, map and equipment")
+ 	check(FileAccess.get_sha256(file+".pre-coins.cfg")==original,"Original legacy save is retained byte-for-byte")
+ 	owner.note_skin_progress(420);owner.save_player_progress();owner.free()
+@@ -164,7 +164,7 @@
+ 	cfg.set_value("progress","owned_skin_ids",["tide","tide","missing_skin"])
+ 	cfg.set_value("progress","selected_skin_id","missing_skin");cfg.save(file)
+ 	owner=restored(file)
+-	check(owner.owned_skin_ids==["core_shell","tide"] and owner.selected_skin_id=="core_shell","Restore normalizes duplicate/unknown skin IDs and invalid equipment")
++	check(owner.owned_skin_ids==["cocoa_square","tide"] and owner.selected_skin_id=="cocoa_square","Restore normalizes duplicate/unknown skin IDs and invalid equipment")
+ 	owner.free()
+ 	file=path("broken");FileAccess.open(file,FileAccess.WRITE).store_string("[invalid")
+ 	owner=Game.new();owner.test_progress_path=file

@@ -1,0 +1,154 @@
+{
+  "checks": 292,
+  "failures": [
+    "Imported train materials actually use the authored vertex palette",
+    "Imported train materials actually use the authored vertex palette",
+    "Imported train materials actually use the authored vertex palette",
+    "Imported train materials actually use the authored vertex palette",
+    "Surviving head completes the required physical return distance",
+    "Imported train materials actually use the authored vertex palette",
+    "Imported train materials actually use the authored vertex palette",
+    "Imported train materials actually use the authored vertex palette",
+    "Imported train materials actually use the authored vertex palette",
+    "Imported train materials actually use the authored vertex palette",
+    "Imported train materials actually use the authored vertex palette",
+    "Imported train materials actually use the authored vertex palette",
+    "Imported train materials actually use the authored vertex palette",
+    "Engine process failed; inspect the engine log"
+  ],
+  "metrics": {
+    "city": {
+      "assets": 2,
+      "cars": 4,
+      "cut_return": {
+        "blocked_frames": 709,
+        "collider_overlaps": 0,
+        "head_distance": 1334.552811702,
+        "max_car_step": 1.08010864257812,
+        "max_history_samples": 33,
+        "parked_pose_changes": 0,
+        "requested_distance": 768.562041687965,
+        "ticks": 1312
+      },
+      "detachment_events": 2,
+      "max_car_triangles": 956,
+      "receipts": {
+        "363562285759": {
+          "count": 1,
+          "player": true,
+          "points": 15,
+          "top": -3.6671701669693
+        },
+        "363646171843": {
+          "count": 1,
+          "player": true,
+          "points": 15,
+          "top": -3.6671701669693
+        },
+        "363730057928": {
+          "count": 1,
+          "player": true,
+          "points": 15,
+          "top": -3.6671701669693
+        },
+        "363813944013": {
+          "count": 1,
+          "player": true,
+          "points": 15,
+          "top": -3.6671701669693
+        }
+      },
+      "surfaces": 4,
+      "triangles": 3672,
+      "unbroken_loop": {
+        "blocked_frames": 0,
+        "collider_overlaps": 0,
+        "head_distance": 677.057163344071,
+        "max_car_step": 1.08010864257812,
+        "max_history_samples": 82,
+        "parked_pose_changes": 0,
+        "requested_distance": 672.3148188591,
+        "ticks": 623
+      }
+    },
+    "food": {
+      "assets": 8,
+      "cars": 8,
+      "cut_return": {
+        "blocked_frames": 0,
+        "collider_overlaps": 0,
+        "head_distance": 1323.53782337478,
+        "max_car_step": 0.960633218288422,
+        "max_history_samples": 68,
+        "parked_pose_changes": 0,
+        "requested_distance": 700.722766977549,
+        "ticks": 732
+      },
+      "detachment_events": 2,
+      "max_car_triangles": 1228,
+      "receipts": {
+        "1679449671313": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.58252316713333
+        },
+        "1679533557397": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.5818487405777
+        },
+        "1679617443482": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.57184863090515
+        },
+        "1679701329567": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.57712370157242
+        },
+        "1679785215652": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.57834875583649
+        },
+        "1679869101737": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.50384873151779
+        },
+        "1679952987822": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.68765085935593
+        },
+        "1680036873907": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.58884871006012
+        }
+      },
+      "surfaces": 8,
+      "triangles": 8084,
+      "unbroken_loop": {
+        "blocked_frames": 0,
+        "collider_overlaps": 0,
+        "head_distance": 617.174144990042,
+        "max_car_step": 0.960084497928619,
+        "max_history_samples": 138,
+        "parked_pose_changes": 0,
+        "requested_distance": 613.324145197868,
+        "ticks": 639
+      }
+    }
+  },
+  "scope": "Independent actual-map/imported-model/physics/coupling checks, no browser, save or performance claim."
+}

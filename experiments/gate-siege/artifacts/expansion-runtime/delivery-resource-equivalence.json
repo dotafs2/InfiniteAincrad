@@ -1,0 +1,19 @@
+{
+  "previous_pck_sha256": "db19601884767d054281242cd7ae58a038ad3d3164d7b2c75a3b3ae37d79c686",
+  "delivery_pck_sha256": "5894686cc8a52f96df33874a72a83478e7056acadd07baafa97857f5aab54469",
+  "resource_count_each": 81,
+  "identical_resources": 80,
+  "added_resources": [],
+  "removed_resources": [],
+  "changed_resources": {
+    "res://assets/expansion/shadows/manifest.json": {
+      "before": "9a0d3cc45d4aa7e2fb763f6589005c227fa2450562bc8345f1abd0e7a47a8a10",
+      "after": "0fe0e3e59155e0d1a6dcb35dd1705ec9923626c7e04ac004c0537c73b2f4b9f1"
+    }
+  },
+  "manifests": [
+    "resources-final-candidate.pck.json",
+    "resources-delivery-589468.pck.json"
+  ],
+  "method": "Enumerate and SHA256 every readable packed resource with Godot DirAccess/FileAccess from the same empty cwd and absolute --main-pack. Includes remapped compiled/imported resources; all81 hashes are nonempty."
+}

@@ -1,0 +1,78 @@
+{
+  "checks": 184,
+  "cosmetic_forms": 39,
+  "failures": [],
+  "lessons": [
+    {
+      "effect_lines": 1,
+      "map": "city",
+      "rect": "[P: (36.0, 372.0), S: (468.0, 146.0)]",
+      "skin": "copper_ring",
+      "trigger": "TAP DRAW \u00b7 8s cooldown"
+    },
+    {
+      "effect_lines": 1,
+      "map": "food",
+      "rect": "[P: (36.0, 372.0), S: (468.0, 146.0)]",
+      "skin": "copper_ring",
+      "trigger": "TAP DRAW \u00b7 8s cooldown"
+    },
+    {
+      "effect_lines": 2,
+      "map": "city",
+      "rect": "[P: (36.0, 372.0), S: (468.0, 146.0)]",
+      "skin": "moss_bloom",
+      "trigger": "AUTO \u00b7 12s cooldown"
+    },
+    {
+      "effect_lines": 2,
+      "map": "food",
+      "rect": "[P: (36.0, 372.0), S: (468.0, 146.0)]",
+      "skin": "moss_bloom",
+      "trigger": "AUTO \u00b7 12s cooldown"
+    },
+    {
+      "effect_lines": 2,
+      "map": "city",
+      "rect": "[P: (36.0, 372.0), S: (468.0, 146.0)]",
+      "skin": "gravitas",
+      "trigger": "TAP THRUM \u00b7 12s cooldown"
+    },
+    {
+      "effect_lines": 2,
+      "map": "food",
+      "rect": "[P: (36.0, 372.0), S: (468.0, 146.0)]",
+      "skin": "gravitas",
+      "trigger": "TAP THRUM \u00b7 12s cooldown"
+    },
+    {
+      "effect_lines": 2,
+      "map": "city",
+      "rect": "[P: (36.0, 372.0), S: (468.0, 146.0)]",
+      "skin": "lantern",
+      "trigger": "TAP STEP \u00b7 9s cooldown"
+    },
+    {
+      "effect_lines": 2,
+      "map": "food",
+      "rect": "[P: (36.0, 372.0), S: (468.0, 146.0)]",
+      "skin": "lantern",
+      "trigger": "TAP STEP \u00b7 9s cooldown"
+    },
+    {
+      "effect_lines": 2,
+      "map": "city",
+      "rect": "[P: (36.0, 372.0), S: (468.0, 146.0)]",
+      "skin": "shard",
+      "trigger": "TAP SWEEP \u00b7 11s cooldown"
+    },
+    {
+      "effect_lines": 2,
+      "map": "food",
+      "rect": "[P: (36.0, 372.0), S: (468.0, 146.0)]",
+      "skin": "shard",
+      "trigger": "TAP SWEEP \u00b7 11s cooldown"
+    }
+  ],
+  "scope": "Independent headless UI/font geometry, real touch and isolated save review; no browser pixels or device FPS"
+}

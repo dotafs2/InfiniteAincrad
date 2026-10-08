@@ -1,0 +1,170 @@
+{
+  "checks": 198,
+  "failures": [
+    "Imported train material uses the actual vertex palette",
+    "Imported train material uses the actual vertex palette",
+    "Imported train material uses the actual vertex palette",
+    "Imported train material uses the actual vertex palette",
+    "Imported train material uses the actual vertex palette",
+    "Imported train material uses the actual vertex palette",
+    "Imported train material uses the actual vertex palette",
+    "Imported train material uses the actual vertex palette",
+    "Imported train material uses the actual vertex palette",
+    "Imported train material uses the actual vertex palette",
+    "Engine process failed; inspect the engine log"
+  ],
+  "metrics": {
+    "actual_city": {
+      "attached": 2,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 4,
+      "detachments": 1,
+      "detours": [
+        {
+          "end": 2016.72800063413,
+          "lateral": 1.6,
+          "start": 1997.72800092023
+        }
+      ],
+      "head_distance": 1440.52290441848,
+      "history_samples": 33,
+      "parked": 1,
+      "planning_count": 3,
+      "route_length": 668.3148188591,
+      "traveled": 1446.33353431523
+    },
+    "actual_food": {
+      "attached": 2,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 8,
+      "detachments": 1,
+      "detours": [
+        {
+          "end": 1840.08942899113,
+          "lateral": 1.35,
+          "start": 1813.71217710525
+        }
+      ],
+      "head_distance": 1317.36349003497,
+      "history_samples": 31,
+      "parked": 5,
+      "planning_count": 3,
+      "route_length": 609.324145197868,
+      "traveled": 1319.41385219991
+    },
+    "cut_0_false": {
+      "attached": 0,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 8,
+      "detachments": 1,
+      "detours": [],
+      "head_distance": 9.60007512278832,
+      "history_samples": 145,
+      "parked": 7,
+      "planning_count": 0,
+      "route_length": 87.9623856544495,
+      "traveled": 9.59993094950914
+    },
+    "cut_4_false": {
+      "attached": 4,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 8,
+      "detachments": 1,
+      "detours": [
+        {
+          "end": 271.749588234723,
+          "lateral": 1.35,
+          "start": 249.69458847791
+        }
+      ],
+      "head_distance": 207.661440047574,
+      "history_samples": 71,
+      "parked": 3,
+      "planning_count": 3,
+      "route_length": 87.9623856544495,
+      "traveled": 211.150679647923
+    },
+    "cut_7_true": {
+      "attached": 7,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 8,
+      "detachments": 1,
+      "detours": [],
+      "head_distance": 212.054879819476,
+      "history_samples": 131,
+      "parked": 0,
+      "planning_count": 1,
+      "route_length": 87.9623856544495,
+      "traveled": 212.051527269185
+    },
+    "imported_assets": {
+      "attached": 10,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 10,
+      "detachments": 0,
+      "detours": [],
+      "head_distance": 0.0,
+      "history_samples": 179,
+      "parked": 0,
+      "planning_count": 0,
+      "route_length": 113.094495773315,
+      "traveled": 0.0
+    },
+    "loop": {
+      "attached": 8,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 8,
+      "detachments": 0,
+      "detours": [],
+      "head_distance": 200.534837247304,
+      "history_samples": 150,
+      "parked": 0,
+      "planning_count": 0,
+      "route_length": 87.9623856544495,
+      "traveled": 200.531764261425
+    },
+    "world_wide_false": {
+      "attached": 4,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 4,
+      "detachments": 0,
+      "detours": [
+        {
+          "end": 203.632866524579,
+          "lateral": 1.35,
+          "ramp_in": 7.0,
+          "start": 186.216676186444
+        }
+      ],
+      "head_distance": 146.116895508612,
+      "history_samples": 71,
+      "parked": 0,
+      "planning_count": 3,
+      "route_length": 87.9623856544495,
+      "traveled": 148.712465673685
+    },
+    "world_wide_true": {
+      "attached": 4,
+      "blocked": false,
+      "blocked_steps": 618,
+      "cars": 4,
+      "detachments": 0,
+      "detours": [],
+      "head_distance": 36.6935837831897,
+      "history_samples": 71,
+      "parked": 0,
+      "planning_count": 1,
+      "route_length": 87.9623856544495,
+      "traveled": 36.6930040121078
+    }
+  },
+  "scope": "Real headless physics and controller geometry; not rendered or phone performance evidence"
+}

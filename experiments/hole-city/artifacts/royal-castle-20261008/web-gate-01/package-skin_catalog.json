@@ -1,0 +1,1411 @@
+{
+  "checks": 3614,
+  "failures": [],
+  "groups": {
+    "foundation": 154,
+    "resonance": 46
+  },
+  "scope": "Actual geometry and definitions; no GPU/image claim",
+  "skins": [
+    {
+      "bounds": "[P: (16.60645, 19.66237), S: (110.7871, 69.60161)]",
+      "draw_meshes_player": 4,
+      "family": "accretion",
+      "id": "core_shell",
+      "triangles_preview": 2976
+    },
+    {
+      "bounds": "[P: (29.6, 25.41061), S: (84.8, 56.24289)]",
+      "draw_meshes_player": 9,
+      "family": "mechanical",
+      "id": "copper_ring",
+      "triangles_preview": 2376
+    },
+    {
+      "bounds": "[P: (17.68677, 19.755), S: (108.6113, 67.93342)]",
+      "draw_meshes_player": 14,
+      "family": "leaves",
+      "id": "moss_bloom",
+      "triangles_preview": 1600
+    },
+    {
+      "bounds": "[P: (29.86641, 18.80251), S: (84.26718, 65.64081)]",
+      "draw_meshes_player": 8,
+      "family": "stone",
+      "id": "gravitas",
+      "triangles_preview": 1608
+    },
+    {
+      "bounds": "[P: (27.89033, 11.63538), S: (88.21935, 69.01519)]",
+      "draw_meshes_player": 15,
+      "family": "lanterns",
+      "id": "lantern",
+      "triangles_preview": 1626
+    },
+    {
+      "bounds": "[P: (28.49102, 18.32868), S: (87.11344, 66.35349)]",
+      "draw_meshes_player": 11,
+      "family": "crystals",
+      "id": "shard",
+      "triangles_preview": 1608
+    },
+    {
+      "bounds": "[P: (30.96774, 7.688306), S: (82.06451, 71.31552)]",
+      "draw_meshes_player": 14,
+      "family": "flame",
+      "id": "cinder",
+      "triangles_preview": 1844
+    },
+    {
+      "bounds": "[P: (20.70968, 21.84116), S: (102.5807, 64.44595)]",
+      "draw_meshes_player": 5,
+      "family": "water",
+      "id": "tide",
+      "triangles_preview": 1632
+    },
+    {
+      "bounds": "[P: (16.60645, 19.66237), S: (110.7871, 69.60161)]",
+      "draw_meshes_player": 4,
+      "family": "lensed_vortex",
+      "id": "orbit",
+      "triangles_preview": 2976
+    },
+    {
+      "bounds": "[P: (29.94194, 16.68216), S: (84.11612, 65.33978)]",
+      "draw_meshes_player": 10,
+      "family": "aurora",
+      "id": "prism_vale",
+      "triangles_preview": 1872
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "sunny_side",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "sugar_glaze",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "berry_crown",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.63092, 26.40516), S: (78.73816, 53.72343)]",
+      "draw_meshes_player": 2,
+      "family": "citrus_slice",
+      "id": "citrus_slice",
+      "triangles_preview": 3388
+    },
+    {
+      "bounds": "[P: (32.38948, 27.406), S: (79.22105, 52.67204)]",
+      "draw_meshes_player": 2,
+      "family": "melon_munch",
+      "id": "melon_munch",
+      "triangles_preview": 3244
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "pretzel_twist",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (30.0182, 21.12634), S: (83.96362, 60.39414)]",
+      "draw_meshes_player": 13,
+      "family": "popcorn_pot",
+      "id": "popcorn_pot",
+      "triangles_preview": 3048
+    },
+    {
+      "bounds": "[P: (28.91613, 21.29244), S: (86.16775, 60.4941)]",
+      "draw_meshes_player": 12,
+      "family": "pizza_party",
+      "id": "pizza_party",
+      "triangles_preview": 3044
+    },
+    {
+      "bounds": "[P: (33.05895, 25.85906), S: (78.66315, 54.12419)]",
+      "draw_meshes_player": 2,
+      "family": "cookie_bite",
+      "id": "cookie_bite",
+      "triangles_preview": 3432
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "waffle_stack",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (33.00316, 24.30111), S: (77.13457, 55.49525)]",
+      "draw_meshes_player": 2,
+      "family": "pancake_stack",
+      "id": "pancake_stack",
+      "triangles_preview": 3220
+    },
+    {
+      "bounds": "[P: (32.09845, 26.8825), S: (79.8031, 52.73951)]",
+      "draw_meshes_player": 2,
+      "family": "bacon_curl",
+      "id": "bacon_curl",
+      "triangles_preview": 3264
+    },
+    {
+      "bounds": "[P: (32.76163, 26.91439), S: (78.48479, 52.98271)]",
+      "draw_meshes_player": 2,
+      "family": "cocoa_square",
+      "id": "cocoa_square",
+      "triangles_preview": 1660
+    },
+    {
+      "bounds": "[P: (29.0871, 11.65005), S: (85.82581, 69.27719)]",
+      "draw_meshes_player": 11,
+      "family": "frosted_cake",
+      "id": "frosted_cake",
+      "triangles_preview": 3132
+    },
+    {
+      "bounds": "[P: (33.59077, 9.363814), S: (76.81845, 72.41374)]",
+      "draw_meshes_player": 13,
+      "family": "pineapple_top",
+      "id": "pineapple_top",
+      "triangles_preview": 1648
+    },
+    {
+      "bounds": "[P: (24.59255, 16.78178), S: (94.81491, 61.4958)]",
+      "draw_meshes_player": 14,
+      "family": "crab_cove",
+      "id": "crab_cove",
+      "triangles_preview": 2232
+    },
+    {
+      "bounds": "[P: (30.28387, 11.36803), S: (83.43226, 69.55921)]",
+      "draw_meshes_player": 12,
+      "family": "fox_den",
+      "id": "fox_den",
+      "triangles_preview": 2668
+    },
+    {
+      "bounds": "[P: (30.96774, 7.248567), S: (82.06451, 73.24904)]",
+      "draw_meshes_player": 12,
+      "family": "bunny_burrow",
+      "id": "bunny_burrow",
+      "triangles_preview": 2768
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "frog_pond",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (34.72903, 16.34429), S: (74.54193, 61.93328)]",
+      "draw_meshes_player": 9,
+      "family": "owl_hollow",
+      "id": "owl_hollow",
+      "triangles_preview": 2136
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "turtle_shell",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (34.72903, 12.77348), S: (74.54193, 65.50409)]",
+      "draw_meshes_player": 10,
+      "family": "snail_trail",
+      "id": "snail_trail",
+      "triangles_preview": 2904
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "clockwork_key",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (30.4151, 16.13057), S: (83.16978, 62.68837)]",
+      "draw_meshes_player": 13,
+      "family": "royal_gate",
+      "id": "royal_gate",
+      "triangles_preview": 3300
+    },
+    {
+      "bounds": "[P: (26.18065, 9.853122), S: (91.6387, 68.42445)]",
+      "draw_meshes_player": 11,
+      "family": "satellite_dish",
+      "id": "satellite_dish",
+      "triangles_preview": 1776
+    },
+    {
+      "bounds": "[P: (32.50645, 6.696015), S: (78.98709, 71.58156)]",
+      "draw_meshes_player": 12,
+      "family": "carnival_tent",
+      "id": "carnival_tent",
+      "triangles_preview": 1620
+    },
+    {
+      "bounds": "[P: (30.28387, 5.154385), S: (83.43226, 75.77286)]",
+      "draw_meshes_player": 12,
+      "family": "rocket_port",
+      "id": "rocket_port",
+      "triangles_preview": 2928
+    },
+    {
+      "bounds": "[P: (34.72903, 10.06199), S: (74.54193, 68.21559)]",
+      "draw_meshes_player": 7,
+      "family": "rainbow_bridge",
+      "id": "rainbow_bridge",
+      "triangles_preview": 2508
+    },
+    {
+      "bounds": "[P: (34.72903, 12.70053), S: (74.54193, 65.57704)]",
+      "draw_meshes_player": 8,
+      "family": "storm_cloud",
+      "id": "storm_cloud",
+      "triangles_preview": 3000
+    },
+    {
+      "bounds": "[P: (29.34355, 13.64156), S: (85.3129, 67.07086)]",
+      "draw_meshes_player": 13,
+      "family": "dragon_roost",
+      "id": "dragon_roost",
+      "triangles_preview": 2880
+    },
+    {
+      "bounds": "[P: (28.23226, 14.38558), S: (87.53548, 65.23711)]",
+      "draw_meshes_player": 9,
+      "family": "jelly_veil",
+      "id": "jelly_veil",
+      "triangles_preview": 2088
+    },
+    {
+      "bounds": "[P: (34.72903, 10.31804), S: (74.54193, 67.95953)]",
+      "draw_meshes_player": 6,
+      "family": "moon_dream",
+      "id": "moon_dream",
+      "triangles_preview": 1684
+    },
+    {
+      "bounds": "[P: (32.33548, 10.52287), S: (79.32904, 67.7547)]",
+      "draw_meshes_player": 6,
+      "family": "coral_reef",
+      "id": "coral_reef",
+      "triangles_preview": 1776
+    },
+    {
+      "bounds": "[P: (29.77097, 11.66066), S: (84.45807, 66.61691)]",
+      "draw_meshes_player": 13,
+      "family": "music_stage",
+      "id": "music_stage",
+      "triangles_preview": 2460
+    },
+    {
+      "bounds": "[P: (29.70276, 10.40136), S: (84.87488, 77.91001)]",
+      "draw_meshes_player": 5,
+      "family": "tornado",
+      "id": "tempest",
+      "triangles_preview": 896
+    },
+    {
+      "bounds": "[P: (36.76217, 49.13236), S: (70.47568, 41.36693)]",
+      "draw_meshes_player": 9,
+      "family": "rainfall",
+      "id": "rainfall",
+      "triangles_preview": 960
+    },
+    {
+      "bounds": "[P: (33.92369, 13.72049), S: (76.15262, 70.52406)]",
+      "draw_meshes_player": 2,
+      "family": "paper_boat",
+      "id": "paper_boat",
+      "triangles_preview": 1316
+    },
+    {
+      "bounds": "[P: (31.59526, 24.83371), S: (80.80948, 54.41533)]",
+      "draw_meshes_player": 2,
+      "family": "toy_tire",
+      "id": "toy_tire",
+      "triangles_preview": 3328
+    },
+    {
+      "bounds": "[P: (31.83158, 22.46877), S: (77.54736, 55.6917)]",
+      "draw_meshes_player": 2,
+      "family": "leaf_cup",
+      "id": "leaf_cup",
+      "triangles_preview": 3192
+    },
+    {
+      "bounds": "[P: (34.06316, 24.86704), S: (75.87369, 54.00898)]",
+      "draw_meshes_player": 2,
+      "family": "wooden_tub",
+      "id": "wooden_tub",
+      "triangles_preview": 3456
+    },
+    {
+      "bounds": "[P: (34.03527, 24.3549), S: (75.92947, 59.52711)]",
+      "draw_meshes_player": 2,
+      "family": "rope_coil",
+      "id": "rope_coil",
+      "triangles_preview": 3210
+    },
+    {
+      "bounds": "[P: (26.69895, 25.05351), S: (90.6021, 53.58404)]",
+      "draw_meshes_player": 2,
+      "family": "clay_pot",
+      "id": "clay_pot",
+      "triangles_preview": 3424
+    },
+    {
+      "bounds": "[P: (32.27995, 24.72102), S: (80.58752, 54.93947)]",
+      "draw_meshes_player": 2,
+      "family": "shell_cup",
+      "id": "shell_cup",
+      "triangles_preview": 3374
+    },
+    {
+      "bounds": "[P: (32.6805, 26.03783), S: (78.6907, 53.56615)]",
+      "draw_meshes_player": 2,
+      "family": "woven_nest",
+      "id": "woven_nest",
+      "triangles_preview": 2420
+    },
+    {
+      "bounds": "[P: (33.84351, 20.58783), S: (76.31299, 58.35468)]",
+      "draw_meshes_player": 2,
+      "family": "paint_tin",
+      "id": "paint_tin",
+      "triangles_preview": 3304
+    },
+    {
+      "bounds": "[P: (29.77754, 25.11929), S: (83.95131, 51.72256)]",
+      "draw_meshes_player": 2,
+      "family": "denim_pocket",
+      "id": "denim_pocket",
+      "triangles_preview": 2366
+    },
+    {
+      "bounds": "[P: (30.73698, 20.13359), S: (80.50847, 59.04852)]",
+      "draw_meshes_player": 2,
+      "family": "catchers_mitt",
+      "id": "catchers_mitt",
+      "triangles_preview": 2116
+    },
+    {
+      "bounds": "[P: (29.06261, 27.71529), S: (85.87479, 50.55197)]",
+      "draw_meshes_player": 2,
+      "family": "enamel_basin",
+      "id": "enamel_basin",
+      "triangles_preview": 2752
+    },
+    {
+      "bounds": "[P: (31.35532, 19.89835), S: (81.28937, 61.23237)]",
+      "draw_meshes_player": 2,
+      "family": "acorn_cup",
+      "id": "acorn_cup",
+      "triangles_preview": 2720
+    },
+    {
+      "bounds": "[P: (31.60511, 24.62678), S: (85.74377, 55.62035)]",
+      "draw_meshes_player": 2,
+      "family": "knit_cap",
+      "id": "knit_cap",
+      "triangles_preview": 3472
+    },
+    {
+      "bounds": "[P: (37.21026, 33.98827), S: (69.57949, 44.45401)]",
+      "draw_meshes_player": 2,
+      "family": "plain_loop",
+      "id": "plain_loop",
+      "triangles_preview": 1476
+    },
+    {
+      "bounds": "[P: (33.54103, 28.79549), S: (76.91794, 51.24653)]",
+      "draw_meshes_player": 2,
+      "family": "button_wheel",
+      "id": "button_wheel",
+      "triangles_preview": 2080
+    },
+    {
+      "bounds": "[P: (32.86154, 14.9276), S: (78.27693, 66.5211)]",
+      "draw_meshes_player": 2,
+      "family": "pocket_arcade",
+      "id": "pocket_arcade",
+      "triangles_preview": 2568
+    },
+    {
+      "bounds": "[P: (27.08137, 11.6786), S: (89.83725, 69.37016)]",
+      "draw_meshes_player": 2,
+      "family": "sakura_pavilion",
+      "id": "sakura_pavilion",
+      "triangles_preview": 4412
+    },
+    {
+      "bounds": "[P: (30.72057, 19.66688), S: (82.34763, 61.88833)]",
+      "draw_meshes_player": 3,
+      "family": "clockwork_orbit",
+      "id": "clockwork_orbit",
+      "triangles_preview": 3920
+    },
+    {
+      "bounds": "[P: (33.67693, 13.50986), S: (76.64615, 66.06192)]",
+      "draw_meshes_player": 4,
+      "family": "phoenix_nest",
+      "id": "phoenix_nest",
+      "triangles_preview": 1876
+    },
+    {
+      "bounds": "[P: (33.94872, 8.444516), S: (76.94316, 72.60425)]",
+      "draw_meshes_player": 2,
+      "family": "crystal_crown",
+      "id": "crystal_crown",
+      "triangles_preview": 2484
+    },
+    {
+      "bounds": "[P: (33.00073, 8.08924), S: (77.99854, 73.54838)]",
+      "draw_meshes_player": 4,
+      "family": "aurora_rift",
+      "id": "aurora_rift",
+      "triangles_preview": 3480
+    },
+    {
+      "bounds": "[P: (16.60645, 19.66237), S: (110.7871, 69.60161)]",
+      "draw_meshes_player": 4,
+      "family": "accretion",
+      "id": "core_shell__solar_core",
+      "triangles_preview": 2976
+    },
+    {
+      "bounds": "[P: (29.6, 25.41061), S: (84.8, 56.24289)]",
+      "draw_meshes_player": 9,
+      "family": "mechanical",
+      "id": "copper_ring__verdigris",
+      "triangles_preview": 2376
+    },
+    {
+      "bounds": "[P: (17.68677, 19.755), S: (108.6113, 67.93342)]",
+      "draw_meshes_player": 14,
+      "family": "leaves",
+      "id": "moss_bloom__autumn_bloom",
+      "triangles_preview": 1600
+    },
+    {
+      "bounds": "[P: (29.86641, 18.80251), S: (84.26718, 65.64081)]",
+      "draw_meshes_player": 8,
+      "family": "stone",
+      "id": "gravitas__marble_gold",
+      "triangles_preview": 1608
+    },
+    {
+      "bounds": "[P: (27.89033, 11.63538), S: (88.21935, 69.01519)]",
+      "draw_meshes_player": 15,
+      "family": "lanterns",
+      "id": "lantern__festival_rose",
+      "triangles_preview": 1626
+    },
+    {
+      "bounds": "[P: (28.49102, 18.32868), S: (87.11344, 66.35349)]",
+      "draw_meshes_player": 11,
+      "family": "crystals",
+      "id": "shard__amethyst_shards",
+      "triangles_preview": 1608
+    },
+    {
+      "bounds": "[P: (30.96774, 7.688306), S: (82.06451, 71.31552)]",
+      "draw_meshes_player": 14,
+      "family": "flame",
+      "id": "cinder__azure_flame",
+      "triangles_preview": 1844
+    },
+    {
+      "bounds": "[P: (20.70968, 21.84116), S: (102.5807, 64.44595)]",
+      "draw_meshes_player": 5,
+      "family": "water",
+      "id": "tide__rosewater",
+      "triangles_preview": 1632
+    },
+    {
+      "bounds": "[P: (16.60645, 19.66237), S: (110.7871, 69.60161)]",
+      "draw_meshes_player": 4,
+      "family": "lensed_vortex",
+      "id": "orbit__golden_nebula",
+      "triangles_preview": 2976
+    },
+    {
+      "bounds": "[P: (29.94194, 16.68216), S: (84.11612, 65.33978)]",
+      "draw_meshes_player": 10,
+      "family": "aurora",
+      "id": "prism_vale__dawn_veil",
+      "triangles_preview": 1872
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "sunny_side__moonlight",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "sunny_side__mint_cream",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "sunny_side__peach_glow",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "sugar_glaze__blueberry",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "sugar_glaze__pistachio",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "sugar_glaze__cocoa_icing",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "berry_crown__blackcurrant",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "berry_crown__strawberry_cream",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "berry_crown__golden_berry",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.63092, 26.40516), S: (78.73816, 53.72343)]",
+      "draw_meshes_player": 2,
+      "family": "citrus_slice",
+      "id": "citrus_slice__ruby_orange",
+      "triangles_preview": 3388
+    },
+    {
+      "bounds": "[P: (32.63092, 26.40516), S: (78.73816, 53.72343)]",
+      "draw_meshes_player": 2,
+      "family": "citrus_slice",
+      "id": "citrus_slice__lime_slice",
+      "triangles_preview": 3388
+    },
+    {
+      "bounds": "[P: (32.38948, 27.406), S: (79.22105, 52.67204)]",
+      "draw_meshes_player": 2,
+      "family": "melon_munch",
+      "id": "melon_munch__golden_melon",
+      "triangles_preview": 3244
+    },
+    {
+      "bounds": "[P: (32.38948, 27.406), S: (79.22105, 52.67204)]",
+      "draw_meshes_player": 2,
+      "family": "melon_munch",
+      "id": "melon_munch__honeydew",
+      "triangles_preview": 3244
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "pretzel_twist__dark_rye",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "pretzel_twist__sea_salt",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "pretzel_twist__cinnamon",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (30.0182, 21.12634), S: (83.96362, 60.39414)]",
+      "draw_meshes_player": 13,
+      "family": "popcorn_pot",
+      "id": "popcorn_pot__caramel_cinema",
+      "triangles_preview": 3048
+    },
+    {
+      "bounds": "[P: (30.0182, 21.12634), S: (83.96362, 60.39414)]",
+      "draw_meshes_player": 13,
+      "family": "popcorn_pot",
+      "id": "popcorn_pot__blue_matinee",
+      "triangles_preview": 3048
+    },
+    {
+      "bounds": "[P: (30.0182, 21.12634), S: (83.96362, 60.39414)]",
+      "draw_meshes_player": 13,
+      "family": "popcorn_pot",
+      "id": "popcorn_pot__plum_premiere",
+      "triangles_preview": 3048
+    },
+    {
+      "bounds": "[P: (28.91613, 21.29244), S: (86.16775, 60.4941)]",
+      "draw_meshes_player": 12,
+      "family": "pizza_party",
+      "id": "pizza_party__pesto_party",
+      "triangles_preview": 3044
+    },
+    {
+      "bounds": "[P: (28.91613, 21.29244), S: (86.16775, 60.4941)]",
+      "draw_meshes_player": 12,
+      "family": "pizza_party",
+      "id": "pizza_party__spicy_fiesta",
+      "triangles_preview": 3044
+    },
+    {
+      "bounds": "[P: (28.91613, 21.29244), S: (86.16775, 60.4941)]",
+      "draw_meshes_player": 12,
+      "family": "pizza_party",
+      "id": "pizza_party__truffle_night",
+      "triangles_preview": 3044
+    },
+    {
+      "bounds": "[P: (33.05895, 25.85906), S: (78.66315, 54.12419)]",
+      "draw_meshes_player": 2,
+      "family": "cookie_bite",
+      "id": "cookie_bite__double_cocoa",
+      "triangles_preview": 3432
+    },
+    {
+      "bounds": "[P: (33.05895, 25.85906), S: (78.66315, 54.12419)]",
+      "draw_meshes_player": 2,
+      "family": "cookie_bite",
+      "id": "cookie_bite__red_velvet",
+      "triangles_preview": 3432
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "waffle_stack__cocoa_waffle",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "waffle_stack__berry_syrup",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "waffle_stack__matcha_waffle",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (33.00316, 24.30111), S: (77.13457, 55.49525)]",
+      "draw_meshes_player": 2,
+      "family": "pancake_stack",
+      "id": "pancake_stack__blueberry_stack",
+      "triangles_preview": 3220
+    },
+    {
+      "bounds": "[P: (33.00316, 24.30111), S: (77.13457, 55.49525)]",
+      "draw_meshes_player": 2,
+      "family": "pancake_stack",
+      "id": "pancake_stack__cocoa_stack",
+      "triangles_preview": 3220
+    },
+    {
+      "bounds": "[P: (32.09845, 26.8825), S: (79.8031, 52.73951)]",
+      "draw_meshes_player": 2,
+      "family": "bacon_curl",
+      "id": "bacon_curl__maple_crisp",
+      "triangles_preview": 3264
+    },
+    {
+      "bounds": "[P: (32.09845, 26.8825), S: (79.8031, 52.73951)]",
+      "draw_meshes_player": 2,
+      "family": "bacon_curl",
+      "id": "bacon_curl__pepper_crisp",
+      "triangles_preview": 3264
+    },
+    {
+      "bounds": "[P: (32.76163, 26.91439), S: (78.48479, 52.98271)]",
+      "draw_meshes_player": 2,
+      "family": "cocoa_square",
+      "id": "cocoa_square__basalt",
+      "triangles_preview": 1660
+    },
+    {
+      "bounds": "[P: (32.76163, 26.91439), S: (78.48479, 52.98271)]",
+      "draw_meshes_player": 2,
+      "family": "cocoa_square",
+      "id": "cocoa_square__sandstone",
+      "triangles_preview": 1660
+    },
+    {
+      "bounds": "[P: (32.76163, 26.91439), S: (78.48479, 52.98271)]",
+      "draw_meshes_player": 2,
+      "family": "cocoa_square",
+      "id": "cocoa_square__rose_quartz",
+      "triangles_preview": 1660
+    },
+    {
+      "bounds": "[P: (29.0871, 11.65005), S: (85.82581, 69.27719)]",
+      "draw_meshes_player": 11,
+      "family": "frosted_cake",
+      "id": "frosted_cake__blueberry_cake",
+      "triangles_preview": 3132
+    },
+    {
+      "bounds": "[P: (29.0871, 11.65005), S: (85.82581, 69.27719)]",
+      "draw_meshes_player": 11,
+      "family": "frosted_cake",
+      "id": "frosted_cake__lemon_cake",
+      "triangles_preview": 3132
+    },
+    {
+      "bounds": "[P: (29.0871, 11.65005), S: (85.82581, 69.27719)]",
+      "draw_meshes_player": 11,
+      "family": "frosted_cake",
+      "id": "frosted_cake__matcha_cake",
+      "triangles_preview": 3132
+    },
+    {
+      "bounds": "[P: (33.59077, 9.363814), S: (76.81845, 72.41374)]",
+      "draw_meshes_player": 13,
+      "family": "pineapple_top",
+      "id": "pineapple_top__sunset_pineapple",
+      "triangles_preview": 1648
+    },
+    {
+      "bounds": "[P: (33.59077, 9.363814), S: (76.81845, 72.41374)]",
+      "draw_meshes_player": 13,
+      "family": "pineapple_top",
+      "id": "pineapple_top__silver_pineapple",
+      "triangles_preview": 1648
+    },
+    {
+      "bounds": "[P: (33.59077, 9.363814), S: (76.81845, 72.41374)]",
+      "draw_meshes_player": 13,
+      "family": "pineapple_top",
+      "id": "pineapple_top__ruby_pineapple",
+      "triangles_preview": 1648
+    },
+    {
+      "bounds": "[P: (24.59255, 16.78178), S: (94.81491, 61.4958)]",
+      "draw_meshes_player": 14,
+      "family": "crab_cove",
+      "id": "crab_cove__blue_crab",
+      "triangles_preview": 2232
+    },
+    {
+      "bounds": "[P: (24.59255, 16.78178), S: (94.81491, 61.4958)]",
+      "draw_meshes_player": 14,
+      "family": "crab_cove",
+      "id": "crab_cove__golden_crab",
+      "triangles_preview": 2232
+    },
+    {
+      "bounds": "[P: (24.59255, 16.78178), S: (94.81491, 61.4958)]",
+      "draw_meshes_player": 14,
+      "family": "crab_cove",
+      "id": "crab_cove__rose_crab",
+      "triangles_preview": 2232
+    },
+    {
+      "bounds": "[P: (30.28387, 11.36803), S: (83.43226, 69.55921)]",
+      "draw_meshes_player": 12,
+      "family": "fox_den",
+      "id": "fox_den__arctic_fox",
+      "triangles_preview": 2668
+    },
+    {
+      "bounds": "[P: (30.28387, 11.36803), S: (83.43226, 69.55921)]",
+      "draw_meshes_player": 12,
+      "family": "fox_den",
+      "id": "fox_den__dusky_fox",
+      "triangles_preview": 2668
+    },
+    {
+      "bounds": "[P: (30.28387, 11.36803), S: (83.43226, 69.55921)]",
+      "draw_meshes_player": 12,
+      "family": "fox_den",
+      "id": "fox_den__fennec_fox",
+      "triangles_preview": 2668
+    },
+    {
+      "bounds": "[P: (30.96774, 7.248567), S: (82.06451, 73.24904)]",
+      "draw_meshes_player": 12,
+      "family": "bunny_burrow",
+      "id": "bunny_burrow__honey_bunny",
+      "triangles_preview": 2768
+    },
+    {
+      "bounds": "[P: (30.96774, 7.248567), S: (82.06451, 73.24904)]",
+      "draw_meshes_player": 12,
+      "family": "bunny_burrow",
+      "id": "bunny_burrow__blue_bunny",
+      "triangles_preview": 2768
+    },
+    {
+      "bounds": "[P: (30.96774, 7.248567), S: (82.06451, 73.24904)]",
+      "draw_meshes_player": 12,
+      "family": "bunny_burrow",
+      "id": "bunny_burrow__cocoa_bunny",
+      "triangles_preview": 2768
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "frog_pond__blue_pond",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "frog_pond__golden_reed",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "frog_pond__lilac_pond",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (34.72903, 16.34429), S: (74.54193, 61.93328)]",
+      "draw_meshes_player": 9,
+      "family": "owl_hollow",
+      "id": "owl_hollow__snow_owl",
+      "triangles_preview": 2136
+    },
+    {
+      "bounds": "[P: (34.72903, 16.34429), S: (74.54193, 61.93328)]",
+      "draw_meshes_player": 9,
+      "family": "owl_hollow",
+      "id": "owl_hollow__copper_owl",
+      "triangles_preview": 2136
+    },
+    {
+      "bounds": "[P: (34.72903, 16.34429), S: (74.54193, 61.93328)]",
+      "draw_meshes_player": 9,
+      "family": "owl_hollow",
+      "id": "owl_hollow__moss_owl",
+      "triangles_preview": 2136
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "turtle_shell__lagoon",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "turtle_shell__amber_shell",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "turtle_shell__midnight_shell",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (34.72903, 12.77348), S: (74.54193, 65.50409)]",
+      "draw_meshes_player": 10,
+      "family": "snail_trail",
+      "id": "snail_trail__coral_snail",
+      "triangles_preview": 2904
+    },
+    {
+      "bounds": "[P: (34.72903, 12.77348), S: (74.54193, 65.50409)]",
+      "draw_meshes_player": 10,
+      "family": "snail_trail",
+      "id": "snail_trail__lavender_snail",
+      "triangles_preview": 2904
+    },
+    {
+      "bounds": "[P: (34.72903, 12.77348), S: (74.54193, 65.50409)]",
+      "draw_meshes_player": 10,
+      "family": "snail_trail",
+      "id": "snail_trail__lemon_snail",
+      "triangles_preview": 2904
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "clockwork_key__rose_brass",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "clockwork_key__steel_blue",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (32.67742, 30.15795), S: (78.64516, 49.40855)]",
+      "draw_meshes_player": 3,
+      "family": "simple_trim",
+      "id": "clockwork_key__black_nickel",
+      "triangles_preview": 1536
+    },
+    {
+      "bounds": "[P: (30.4151, 16.13057), S: (83.16978, 62.68837)]",
+      "draw_meshes_player": 13,
+      "family": "royal_gate",
+      "id": "royal_gate__rose_palace",
+      "triangles_preview": 3300
+    },
+    {
+      "bounds": "[P: (26.18065, 9.853122), S: (91.6387, 68.42445)]",
+      "draw_meshes_player": 11,
+      "family": "satellite_dish",
+      "id": "satellite_dish__copper_signal",
+      "triangles_preview": 1776
+    },
+    {
+      "bounds": "[P: (32.50645, 6.696015), S: (78.98709, 71.58156)]",
+      "draw_meshes_player": 12,
+      "family": "carnival_tent",
+      "id": "carnival_tent__midnight_circus",
+      "triangles_preview": 1620
+    },
+    {
+      "bounds": "[P: (30.28387, 5.154385), S: (83.43226, 75.77286)]",
+      "draw_meshes_player": 12,
+      "family": "rocket_port",
+      "id": "rocket_port__solar_rocket",
+      "triangles_preview": 2928
+    },
+    {
+      "bounds": "[P: (34.72903, 10.06199), S: (74.54193, 68.21559)]",
+      "draw_meshes_player": 7,
+      "family": "rainbow_bridge",
+      "id": "rainbow_bridge__opal_bridge",
+      "triangles_preview": 2508
+    },
+    {
+      "bounds": "[P: (34.72903, 12.70053), S: (74.54193, 65.57704)]",
+      "draw_meshes_player": 8,
+      "family": "storm_cloud",
+      "id": "storm_cloud__sunset_storm",
+      "triangles_preview": 3000
+    },
+    {
+      "bounds": "[P: (29.34355, 13.64156), S: (85.3129, 67.07086)]",
+      "draw_meshes_player": 13,
+      "family": "dragon_roost",
+      "id": "dragon_roost__jade_dragon",
+      "triangles_preview": 2880
+    },
+    {
+      "bounds": "[P: (28.23226, 14.38558), S: (87.53548, 65.23711)]",
+      "draw_meshes_player": 9,
+      "family": "jelly_veil",
+      "id": "jelly_veil__golden_jelly",
+      "triangles_preview": 2088
+    },
+    {
+      "bounds": "[P: (34.72903, 10.31804), S: (74.54193, 67.95953)]",
+      "draw_meshes_player": 6,
+      "family": "moon_dream",
+      "id": "moon_dream__rose_moon",
+      "triangles_preview": 1684
+    },
+    {
+      "bounds": "[P: (34.72903, 10.31804), S: (74.54193, 67.95953)]",
+      "draw_meshes_player": 6,
+      "family": "moon_dream",
+      "id": "moon_dream__golden_moon",
+      "triangles_preview": 1684
+    },
+    {
+      "bounds": "[P: (34.72903, 10.31804), S: (74.54193, 67.95953)]",
+      "draw_meshes_player": 6,
+      "family": "moon_dream",
+      "id": "moon_dream__ice_moon",
+      "triangles_preview": 1684
+    },
+    {
+      "bounds": "[P: (32.33548, 10.52287), S: (79.32904, 67.7547)]",
+      "draw_meshes_player": 6,
+      "family": "coral_reef",
+      "id": "coral_reef__lavender_reef",
+      "triangles_preview": 1776
+    },
+    {
+      "bounds": "[P: (32.33548, 10.52287), S: (79.32904, 67.7547)]",
+      "draw_meshes_player": 6,
+      "family": "coral_reef",
+      "id": "coral_reef__lagoon_reef",
+      "triangles_preview": 1776
+    },
+    {
+      "bounds": "[P: (32.33548, 10.52287), S: (79.32904, 67.7547)]",
+      "draw_meshes_player": 6,
+      "family": "coral_reef",
+      "id": "coral_reef__sunrise_reef",
+      "triangles_preview": 1776
+    },
+    {
+      "bounds": "[P: (29.77097, 11.66066), S: (84.45807, 66.61691)]",
+      "draw_meshes_player": 13,
+      "family": "music_stage",
+      "id": "music_stage__jazz_night",
+      "triangles_preview": 2460
+    },
+    {
+      "bounds": "[P: (29.77097, 11.66066), S: (84.45807, 66.61691)]",
+      "draw_meshes_player": 13,
+      "family": "music_stage",
+      "id": "music_stage__pop_neon",
+      "triangles_preview": 2460
+    },
+    {
+      "bounds": "[P: (29.77097, 11.66066), S: (84.45807, 66.61691)]",
+      "draw_meshes_player": 13,
+      "family": "music_stage",
+      "id": "music_stage__blue_session",
+      "triangles_preview": 2460
+    },
+    {
+      "bounds": "[P: (29.70276, 10.40136), S: (84.87488, 77.91001)]",
+      "draw_meshes_player": 5,
+      "family": "tornado",
+      "id": "tempest__cobalt_storm",
+      "triangles_preview": 896
+    },
+    {
+      "bounds": "[P: (36.76217, 49.13236), S: (70.47568, 41.36693)]",
+      "draw_meshes_player": 9,
+      "family": "rainfall",
+      "id": "rainfall__rose_rain",
+      "triangles_preview": 960
+    },
+    {
+      "bounds": "[P: (33.92369, 13.72049), S: (76.15262, 70.52406)]",
+      "draw_meshes_player": 2,
+      "family": "paper_boat",
+      "id": "paper_boat__blue_print",
+      "triangles_preview": 1316
+    },
+    {
+      "bounds": "[P: (33.92369, 13.72049), S: (76.15262, 70.52406)]",
+      "draw_meshes_player": 2,
+      "family": "paper_boat",
+      "id": "paper_boat__rose_letter",
+      "triangles_preview": 1316
+    },
+    {
+      "bounds": "[P: (31.59526, 24.83371), S: (80.80948, 54.41533)]",
+      "draw_meshes_player": 2,
+      "family": "toy_tire",
+      "id": "toy_tire__rally_red",
+      "triangles_preview": 3328
+    },
+    {
+      "bounds": "[P: (31.59526, 24.83371), S: (80.80948, 54.41533)]",
+      "draw_meshes_player": 2,
+      "family": "toy_tire",
+      "id": "toy_tire__ice_track",
+      "triangles_preview": 3328
+    },
+    {
+      "bounds": "[P: (31.83158, 22.46877), S: (77.54736, 55.6917)]",
+      "draw_meshes_player": 2,
+      "family": "leaf_cup",
+      "id": "leaf_cup__autumn_leaf",
+      "triangles_preview": 3192
+    },
+    {
+      "bounds": "[P: (31.83158, 22.46877), S: (77.54736, 55.6917)]",
+      "draw_meshes_player": 2,
+      "family": "leaf_cup",
+      "id": "leaf_cup__frost_leaf",
+      "triangles_preview": 3192
+    },
+    {
+      "bounds": "[P: (34.06316, 24.86704), S: (75.87369, 54.00898)]",
+      "draw_meshes_player": 2,
+      "family": "wooden_tub",
+      "id": "wooden_tub__cedar",
+      "triangles_preview": 3456
+    },
+    {
+      "bounds": "[P: (34.06316, 24.86704), S: (75.87369, 54.00898)]",
+      "draw_meshes_player": 2,
+      "family": "wooden_tub",
+      "id": "wooden_tub__white_oak",
+      "triangles_preview": 3456
+    },
+    {
+      "bounds": "[P: (34.03527, 24.3549), S: (75.92947, 59.52711)]",
+      "draw_meshes_player": 2,
+      "family": "rope_coil",
+      "id": "rope_coil__blue_mariner",
+      "triangles_preview": 3210
+    },
+    {
+      "bounds": "[P: (34.03527, 24.3549), S: (75.92947, 59.52711)]",
+      "draw_meshes_player": 2,
+      "family": "rope_coil",
+      "id": "rope_coil__terracotta_cord",
+      "triangles_preview": 3210
+    },
+    {
+      "bounds": "[P: (26.69895, 25.05351), S: (90.6021, 53.58404)]",
+      "draw_meshes_player": 2,
+      "family": "clay_pot",
+      "id": "clay_pot__olive_glaze",
+      "triangles_preview": 3424
+    },
+    {
+      "bounds": "[P: (26.69895, 25.05351), S: (90.6021, 53.58404)]",
+      "draw_meshes_player": 2,
+      "family": "clay_pot",
+      "id": "clay_pot__azure_glaze",
+      "triangles_preview": 3424
+    },
+    {
+      "bounds": "[P: (32.27995, 24.72102), S: (80.58752, 54.93947)]",
+      "draw_meshes_player": 2,
+      "family": "shell_cup",
+      "id": "shell_cup__rose_shell",
+      "triangles_preview": 3374
+    },
+    {
+      "bounds": "[P: (32.27995, 24.72102), S: (80.58752, 54.93947)]",
+      "draw_meshes_player": 2,
+      "family": "shell_cup",
+      "id": "shell_cup__pearl_tide",
+      "triangles_preview": 3374
+    },
+    {
+      "bounds": "[P: (32.6805, 26.03783), S: (78.6907, 53.56615)]",
+      "draw_meshes_player": 2,
+      "family": "woven_nest",
+      "id": "woven_nest__willow_nest",
+      "triangles_preview": 2420
+    },
+    {
+      "bounds": "[P: (32.6805, 26.03783), S: (78.6907, 53.56615)]",
+      "draw_meshes_player": 2,
+      "family": "woven_nest",
+      "id": "woven_nest__rose_willow",
+      "triangles_preview": 2420
+    },
+    {
+      "bounds": "[P: (33.84351, 20.58783), S: (76.31299, 58.35468)]",
+      "draw_meshes_player": 2,
+      "family": "paint_tin",
+      "id": "paint_tin__sunflower_paint",
+      "triangles_preview": 3304
+    },
+    {
+      "bounds": "[P: (33.84351, 20.58783), S: (76.31299, 58.35468)]",
+      "draw_meshes_player": 2,
+      "family": "paint_tin",
+      "id": "paint_tin__berry_paint",
+      "triangles_preview": 3304
+    },
+    {
+      "bounds": "[P: (29.77754, 25.11929), S: (83.95131, 51.72256)]",
+      "draw_meshes_player": 2,
+      "family": "denim_pocket",
+      "id": "denim_pocket__indigo_denim",
+      "triangles_preview": 2366
+    },
+    {
+      "bounds": "[P: (29.77754, 25.11929), S: (83.95131, 51.72256)]",
+      "draw_meshes_player": 2,
+      "family": "denim_pocket",
+      "id": "denim_pocket__washed_rose",
+      "triangles_preview": 2366
+    },
+    {
+      "bounds": "[P: (30.73698, 20.13359), S: (80.50847, 59.04852)]",
+      "draw_meshes_player": 2,
+      "family": "catchers_mitt",
+      "id": "catchers_mitt__chocolate_leather",
+      "triangles_preview": 2116
+    },
+    {
+      "bounds": "[P: (30.73698, 20.13359), S: (80.50847, 59.04852)]",
+      "draw_meshes_player": 2,
+      "family": "catchers_mitt",
+      "id": "catchers_mitt__navy_leather",
+      "triangles_preview": 2116
+    },
+    {
+      "bounds": "[P: (29.06261, 27.71529), S: (85.87479, 50.55197)]",
+      "draw_meshes_player": 2,
+      "family": "enamel_basin",
+      "id": "enamel_basin__mint_enamel",
+      "triangles_preview": 2752
+    },
+    {
+      "bounds": "[P: (29.06261, 27.71529), S: (85.87479, 50.55197)]",
+      "draw_meshes_player": 2,
+      "family": "enamel_basin",
+      "id": "enamel_basin__apricot_enamel",
+      "triangles_preview": 2752
+    },
+    {
+      "bounds": "[P: (31.35532, 19.89835), S: (81.28937, 61.23237)]",
+      "draw_meshes_player": 2,
+      "family": "acorn_cup",
+      "id": "acorn_cup__chestnut",
+      "triangles_preview": 2720
+    },
+    {
+      "bounds": "[P: (31.35532, 19.89835), S: (81.28937, 61.23237)]",
+      "draw_meshes_player": 2,
+      "family": "acorn_cup",
+      "id": "acorn_cup__forest_acorn",
+      "triangles_preview": 2720
+    },
+    {
+      "bounds": "[P: (31.60511, 24.62678), S: (85.74377, 55.62035)]",
+      "draw_meshes_player": 2,
+      "family": "knit_cap",
+      "id": "knit_cap__seaside_knit",
+      "triangles_preview": 3472
+    },
+    {
+      "bounds": "[P: (31.60511, 24.62678), S: (85.74377, 55.62035)]",
+      "draw_meshes_player": 2,
+      "family": "knit_cap",
+      "id": "knit_cap__mustard_knit",
+      "triangles_preview": 3472
+    },
+    {
+      "bounds": "[P: (37.21026, 33.98827), S: (69.57949, 44.45401)]",
+      "draw_meshes_player": 2,
+      "family": "plain_loop",
+      "id": "plain_loop__coral",
+      "triangles_preview": 1476
+    },
+    {
+      "bounds": "[P: (37.21026, 33.98827), S: (69.57949, 44.45401)]",
+      "draw_meshes_player": 2,
+      "family": "plain_loop",
+      "id": "plain_loop__sea_glass",
+      "triangles_preview": 1476
+    },
+    {
+      "bounds": "[P: (37.21026, 33.98827), S: (69.57949, 44.45401)]",
+      "draw_meshes_player": 2,
+      "family": "plain_loop",
+      "id": "plain_loop__night_ink",
+      "triangles_preview": 1476
+    },
+    {
+      "bounds": "[P: (33.54103, 28.79549), S: (76.91794, 51.24653)]",
+      "draw_meshes_player": 2,
+      "family": "button_wheel",
+      "id": "button_wheel__teal_button",
+      "triangles_preview": 2080
+    },
+    {
+      "bounds": "[P: (33.54103, 28.79549), S: (76.91794, 51.24653)]",
+      "draw_meshes_player": 2,
+      "family": "button_wheel",
+      "id": "button_wheel__lilac_button",
+      "triangles_preview": 2080
+    },
+    {
+      "bounds": "[P: (32.86154, 14.9276), S: (78.27693, 66.5211)]",
+      "draw_meshes_player": 2,
+      "family": "pocket_arcade",
+      "id": "pocket_arcade__berry_arcade",
+      "triangles_preview": 2568
+    },
+    {
+      "bounds": "[P: (27.08137, 11.6786), S: (89.83725, 69.37016)]",
+      "draw_meshes_player": 2,
+      "family": "sakura_pavilion",
+      "id": "sakura_pavilion__moon_pavilion",
+      "triangles_preview": 4412
+    },
+    {
+      "bounds": "[P: (30.72057, 19.66688), S: (82.34763, 61.88833)]",
+      "draw_meshes_player": 3,
+      "family": "clockwork_orbit",
+      "id": "clockwork_orbit__silver_mechanism",
+      "triangles_preview": 3920
+    },
+    {
+      "bounds": "[P: (33.67693, 13.50986), S: (76.64615, 66.06192)]",
+      "draw_meshes_player": 4,
+      "family": "phoenix_nest",
+      "id": "phoenix_nest__frost_phoenix",
+      "triangles_preview": 1876
+    },
+    {
+      "bounds": "[P: (33.94872, 8.444516), S: (76.94316, 72.60425)]",
+      "draw_meshes_player": 2,
+      "family": "crystal_crown",
+      "id": "crystal_crown__emerald_crown",
+      "triangles_preview": 2484
+    },
+    {
+      "bounds": "[P: (33.00073, 8.08924), S: (77.99854, 73.54838)]",
+      "draw_meshes_player": 4,
+      "family": "aurora_rift",
+      "id": "aurora_rift__solar_rift",
+      "triangles_preview": 3480
+    }
+  ]
+}

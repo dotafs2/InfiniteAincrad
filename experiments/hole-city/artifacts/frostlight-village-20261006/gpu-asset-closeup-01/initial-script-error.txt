@@ -1,0 +1,3 @@
+The first close-up capture attempt failed before rendering because the helper used
+Camera3D.PROJECTION_ORTHOGRAPHIC. Godot 4 uses
+Camera3D.PROJECTION_ORTHOGONAL; the helper was corrected before the successful run.

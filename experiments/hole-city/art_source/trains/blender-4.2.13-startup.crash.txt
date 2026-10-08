@@ -1,0 +1,16 @@
+# Blender 4.2.13, Commit date: 2025-08-19 15:26, Hash 5c8e6e057559
+
+# backtrace
+0   Blender                             0x000000010109fe38 BLI_system_backtrace + 56
+1   Blender                             0x00000001007d5a84 _ZL16sig_handle_crashi + 364
+2   libsystem_platform.dylib            0x0000000190f2b584 _sigtramp + 56
+3   libsystem_platform.dylib            0x0000000190f293d8 _platform_strstr + 48
+4   Blender                             0x0000000104e63358 _ZN7blender3gpu30supports_barycentric_whitelistEPU19objcproto9MTLDevice11objc_object + 64
+5   Blender                             0x0000000104e63544 _ZN7blender3gpu10MTLBackend18metal_is_supportedEv + 372
+6   Blender                             0x0000000104d880d8 _Z33GPU_backend_type_selection_detectv + 132
+7   Blender                             0x0000000101107868 _Z19wm_homefile_read_exP8bContextPK21wmHomeFileRead_ParamsP10ReportListPP21wmFileReadPost_Params + 1992
+8   Blender                             0x0000000101112448 _Z7WM_initP8bContextiPPKc + 308
+9   Blender                             0x00000001007d0db4 main + 820
+10  dyld                                0x0000000190b720e0 start + 2360
+
+# Python backtrace

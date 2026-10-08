@@ -1,0 +1,23 @@
+{
+  "checks": 284,
+  "failures": [],
+  "metrics": {
+    "city": {
+      "all_edibles": 812,
+      "maximum_scale_error": 0.0,
+      "outer_edibles": 156,
+      "outside": [],
+      "queryable_small_food": 97,
+      "scale_tolerance": 1e-06
+    },
+    "food": {
+      "all_edibles": 2930,
+      "maximum_scale_error": 8.42936955791629e-08,
+      "outer_edibles": 238,
+      "outside": [],
+      "queryable_small_food": 29,
+      "scale_tolerance": 1e-06
+    }
+  },
+  "scope": "Independent real geometry, movement, physics rays, food atlas and original traffic; no GPU image or frame-rate claim."
+}

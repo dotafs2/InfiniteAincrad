@@ -1,0 +1,20 @@
+--- artifacts/shop-theme-20260930/before/music_acceptance.gd	2026-09-30 09:47:07
++++ tests/music_acceptance.gd	2026-09-30 09:48:34
+@@ -76,7 +76,7 @@
+ 		var digest:=hash.finish().hex_encode();hashes.append(digest)
+ 		tracks.append({"map":map_id,"length_seconds":stream.get_length(),"encoded_packet_sha256":digest,"loop":stream.loop})
+ 		check(not game.audio.unlocked and not game.audio.music.playing,map_id+": track selection cannot bypass the initial gesture gate")
+-	check(hashes.size()==2 and hashes[0]!=hashes[1],"Both maps contain different encoded music, not renamed copies")
++	check(hashes.size()==2 and hashes[0]==hashes[1] and tracks.all(func(track):return absf(track.length_seconds-88.0)<0.02),"Both maps use the selected complete 88-second Shop Theme")
+ 	game.select_map("city")
+ 	evidence["tracks"]=tracks
+ func gesture_and_home()->void:
+@@ -147,7 +147,7 @@
+ 	game.back_home();await frames()
+ 	check(music.get_instance_id()==id and music.stream==stream and music.get_stream_playback()==playback and music.get_playback_position()>2.5,"Returning home preserves the same ongoing music instead of replaying its intro")
+ 	game.select_map("food");await frames()
+-	check(game.audio.current_map=="food" and music.stream!=stream and music.get_instance_id()==id and bgm_players().size()==1,"Switching maps changes the song in the same sole player")
++	check(game.audio.current_map=="food" and music.stream==stream and music.get_stream_playback()==playback and music.get_playback_position()>2.5 and music.get_instance_id()==id and bgm_players().size()==1,"Switching maps preserves the shared Shop Theme decoder and bookmark in the sole player")
+ 	var food_stream:AudioStream=music.stream
+ 	music.seek(4.0);await frames(6)
+ 	var food_playback:AudioStreamPlayback=music.get_stream_playback()

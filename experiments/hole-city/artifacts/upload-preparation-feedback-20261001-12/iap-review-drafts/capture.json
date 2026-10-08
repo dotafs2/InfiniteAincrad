@@ -1,0 +1,48 @@
+{
+  "physical_iphone_capture": false,
+  "production_pck_sha256": "36705945b3f1d244279ef809dbcf30776f10dd78554ee77e89a97fbe82a05413",
+  "records": [
+    {
+      "file": "store-entry.png",
+      "menu": "store",
+      "phase": "title",
+      "sdk_available": false,
+      "wallet": 50
+    },
+    {
+      "file": "coin-shop-unavailable.png",
+      "menu": "purchases",
+      "phase": "title",
+      "sdk_available": false,
+      "wallet": 50
+    },
+    {
+      "file": "current-unlock-odds.png",
+      "menu": "rates",
+      "phase": "title",
+      "sdk_available": false,
+      "wallet": 50
+    }
+  ],
+  "scope": "Actual macOS GPU-rendered shipped production-PCK menus in isolated test mode. No fake product prices, transactions, rewards or SDK readiness. Shows unavailable StoreKit on this platform; draft evidence only, not final native sandbox review screenshot.",
+  "viewport": [
+    640,
+    1388
+  ],
+  "at_utc": "2026-10-01T13:11:35.062694+00:00",
+  "hash_provenance": "External host check of the exact --main-pack input after capture; res://SinkCity.pck is not an embedded file. Original missing-path receipt retained privately.",
+  "images": {
+    "coin-shop-unavailable.png": {
+      "bytes": 171930,
+      "sha256": "74e2f7d7b65c40f6a6e0157ffd83aa26f027ed3bfa6a3894a10b34e067a1bac1"
+    },
+    "current-unlock-odds.png": {
+      "bytes": 230601,
+      "sha256": "30e8d82b9422f6ff0bbbd6d9dab39c6c47b73a5b436de44c23877517a098b949"
+    },
+    "store-entry.png": {
+      "bytes": 183809,
+      "sha256": "9d21218b8d100dab12f336b319ca8d920c88116a03362d2b506e3a3ead6c99e8"
+    }
+  }
+}

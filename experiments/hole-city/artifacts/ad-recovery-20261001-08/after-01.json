@@ -1,0 +1,143 @@
+{
+  "at_utc": "2026-10-01T09:45:47.942523+00:00",
+  "scope": "Actual extracted native Swift ad methods, controlled SDK/UI boundaries, accelerated timer clock; no live Google/Apple request. Not physical SDK callback acceptance.",
+  "source_sha256": "54d636d4dbaeb374af03616aa1c31246c25a8a6998dde62af24d4ef8a5cf9b9a",
+  "extracted_sha256": "237d25370a583719da6c72ce64534bd28a6aa412b8d0efcdfbdfa30c41f89706",
+  "fixtures_sha256": {
+    "tests/native_ads_recovery_stubs.swift": "f10f5fd85a49308a4e09ae275599fcabf3fdf27d4f86deac124e4fbcc7d8b4a5",
+    "tests/native_ads_recovery_harness.swift": "a309e999a26e162c95d58f3f2f9e403fbc0575b65c8367f8e26bf52317f7f347"
+  },
+  "timer_scale": 1000,
+  "timer_expression_substitutions": 2,
+  "checks": 28,
+  "failures": [
+    {
+      "scenario": "suspend-update",
+      "failure": "Foreground retries the abandoned presentation path"
+    },
+    {
+      "scenario": "cached",
+      "failure": "A failed refresh can use only actual SDK-granted prior consent"
+    },
+    {
+      "scenario": "privacy-race",
+      "failure": "Preload waits for its real callback"
+    },
+    {
+      "scenario": "privacy-closes-first",
+      "failure": "Privacy choices start while an older preload awaits completion"
+    },
+    {
+      "scenario": "privacy-closes-first",
+      "failure": "A late old callback reloads even when the form already closed"
+    },
+    {
+      "scenario": "reward",
+      "failure": "SDK-ready video accepts its original request ID"
+    },
+    {
+      "scenario": "reward",
+      "failure": "Presentation reserves availability"
+    },
+    {
+      "scenario": "reward",
+      "failure": "Only SDK earned callback carries the original reward identity"
+    }
+  ],
+  "scenarios": [
+    {
+      "checks": 5,
+      "failures": [],
+      "load_calls": 1,
+      "scenario": "network",
+      "sdk_starts": 1,
+      "update_calls": 2,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 1,
+      "scenario": "background",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 3,
+      "failures": [
+        "Foreground retries the abandoned presentation path"
+      ],
+      "load_calls": 0,
+      "scenario": "suspend-update",
+      "sdk_starts": 1,
+      "update_calls": 2,
+      "exit_code": 1
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 0,
+      "scenario": "denied",
+      "sdk_starts": 0,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [
+        "A failed refresh can use only actual SDK-granted prior consent"
+      ],
+      "load_calls": 1,
+      "scenario": "cached",
+      "sdk_starts": 1,
+      "update_calls": 2,
+      "exit_code": 1
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 1,
+      "scenario": "form-failure",
+      "sdk_starts": 1,
+      "update_calls": 2,
+      "exit_code": 0
+    },
+    {
+      "checks": 5,
+      "failures": [
+        "Preload waits for its real callback"
+      ],
+      "load_calls": 2,
+      "scenario": "privacy-race",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 1
+    },
+    {
+      "checks": 2,
+      "failures": [
+        "Privacy choices start while an older preload awaits completion",
+        "A late old callback reloads even when the form already closed"
+      ],
+      "load_calls": 1,
+      "scenario": "privacy-closes-first",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 1
+    },
+    {
+      "checks": 5,
+      "failures": [
+        "SDK-ready video accepts its original request ID",
+        "Presentation reserves availability",
+        "Only SDK earned callback carries the original reward identity"
+      ],
+      "load_calls": 2,
+      "scenario": "reward",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 1
+    }
+  ]
+}

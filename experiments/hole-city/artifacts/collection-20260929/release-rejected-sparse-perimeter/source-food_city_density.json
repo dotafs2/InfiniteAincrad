@@ -1,0 +1,126 @@
+{
+  "buildings": 160,
+  "cascades": [
+    {
+      "case": "59-piece pyramid",
+      "collected_once": 59,
+      "pieces": 59,
+      "tilted": true
+    },
+    {
+      "case": "cake building",
+      "collected_once": 3,
+      "pieces": 3,
+      "tilted": true
+    },
+    {
+      "case": "burger building",
+      "collected_once": 3,
+      "pieces": 3,
+      "tilted": true
+    },
+    {
+      "case": "pancake building",
+      "collected_once": 5,
+      "pieces": 5,
+      "tilted": true
+    },
+    {
+      "case": "donut building",
+      "collected_once": 8,
+      "pieces": 8,
+      "tilted": true
+    }
+  ],
+  "checks": 1331,
+  "district_coverage": [
+    {
+      "occupied_ratio": 0.161600810536981,
+      "origin": [
+        -70.0,
+        -68.0
+      ]
+    },
+    {
+      "occupied_ratio": 0.175682913765399,
+      "origin": [
+        -31.2893295288086,
+        -68.0
+      ]
+    },
+    {
+      "occupied_ratio": 0.157094594594595,
+      "origin": [
+        16.2340431213379,
+        -68.0
+      ]
+    },
+    {
+      "occupied_ratio": 0.181016949152542,
+      "origin": [
+        -70.0,
+        -16.3043785095215
+      ]
+    },
+    {
+      "occupied_ratio": 0.147058823529412,
+      "origin": [
+        -24.3990821838379,
+        -4.84371519088745
+      ]
+    },
+    {
+      "occupied_ratio": 0.155195681511471,
+      "origin": [
+        18.7826080322266,
+        -2.93181824684143
+      ]
+    },
+    {
+      "occupied_ratio": 0.181818181818182,
+      "origin": [
+        -70.0,
+        27.1972484588623
+      ]
+    },
+    {
+      "occupied_ratio": 0.0252080274106706,
+      "origin": [
+        -98.0,
+        -98.0
+      ]
+    },
+    {
+      "occupied_ratio": 0.0154135338345865,
+      "origin": [
+        70.0,
+        -70.0
+      ]
+    },
+    {
+      "occupied_ratio": 0.0248235580433195,
+      "origin": [
+        -98.0,
+        70.0
+      ]
+    },
+    {
+      "occupied_ratio": 0.0183864915572233,
+      "origin": [
+        -98.0,
+        -70.0
+      ]
+    }
+  ],
+  "failures": [
+    "Every district has edible ground coverage, including map edges: (-98.0, -98.0)",
+    "Every district has edible ground coverage, including map edges: (70.0, -70.0)",
+    "Every district has edible ground coverage, including map edges: (-98.0, 70.0)",
+    "Every district has edible ground coverage, including map edges: (-98.0, -70.0)",
+    "Engine process failed; inspect the engine log"
+  ],
+  "initial_objects": 2922,
+  "piles": 17,
+  "starter_collections": 3,
+  "supported_pieces": 1239
+}

@@ -1,0 +1,25 @@
+{
+  "version": "0.5.3",
+  "files": {
+    "fidelity/food_city.gd": "a0d71d1050a9b47f9394e845411cb9d0260be2d92f6ff3fe1228a1c8b4fe7a2a",
+    "fidelity/food_neighborhoods.gd": "c4d5a77308be87e9f9ef2c52c35c3ba8d008becfa6368419dc290e840757d831",
+    "fidelity/food_glaze.gdshader": "24359cbb82e77823f6ea5e6f3410a29dc11c685188d424c23d4111d9b45bba36",
+    "fidelity/asphalt.gdshader": "b0c1d47690a2a780f6f1e730801ae05f0ebf91bac99eb1ad02df35e724624cd2",
+    "tools/build_food_neighborhoods.py": "0df5d630185a4b17fcb0a3632757204e0781254177ba011255949b592a5db378",
+    "tools/food_scene_offscreen.m": "9b4ef81a84b7f1253436083996389176f3e0c0317f9db5424334a1b3e828d880",
+    "tools/export_food_render_fixture.gd": "52667fd459475a0baa5ccd331d256522f717021c5c1004b9146fb0a9ef299aa1",
+    "tools/prepare_food_shader.py": "a4c883c0f2f6f7aa23386538224902fcc7302da947daa413ab18d9b310670ab3",
+    "assets/food_city/neighborhoods.json": "00c2a62d342ea57ec497947581274390fb584c7ef9449a0289a5d92741499ffa",
+    "assets/food_city/streets.png": "7c8250fc480d5d761c9fa8faef77dad673248de05f1ea3b115e3d90befa2d49e",
+    "artifacts/food-neighborhoods/opening.png": "5e6126854abcad1a6a0f7c8794dc386fdc6213a8945fdb7f2b21d2e740aa1243",
+    "artifacts/food-neighborhoods/districts.png": "026133d6283bef08c804bba219cedbddd6ffeb7465f3a544b5e0ae3f7dc8bb27",
+    "artifacts/food-neighborhoods/opening.json": "8e307103f270059ab24976c556582df04c55923ad3f7d233d90957a90f21dda9",
+    "artifacts/food-neighborhoods/districts.json": "b3a566943355456e7afd9e06d7123f5b4adf40a16681f0772b4e8c505c5bbc2e",
+    "artifacts/food-neighborhoods/render-meshes.json": "f7879bdd7972c1e534017c29b742dfb108a1c6293ab4d9d0faa5ba71353581bb",
+    "artifacts/food-neighborhoods/streets.ppm": "74114332a50405832a2ad919b6b0b90c7719bde300710c45f399ba6f8bcf1a35",
+    "artifacts/food-neighborhoods/food-finish.vert": "02e36df867feeaa7b28e1b29c21bb98dfc22f30123f015a7d246050f94a346ee",
+    "artifacts/food-neighborhoods/food-finish.frag": "929fa64db413019325325de555e616332f4495412a5f407db2d33a679171e594",
+    "artifacts/food-neighborhoods/offscreen-render.log": "eb01ca76a4eaff7d4cb35a93656cea3611ec3a3e17908ec117cb7c62aafdcaa1"
+  },
+  "scope": "Real cached food meshes, transforms, street atlas and shipped food reflection functions rendered in windowless CGL. Approximate final scene lighting, without NPC/UI/contact shadows. Not a Godot/browser/device screenshot."
+}

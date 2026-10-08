@@ -1,0 +1,218 @@
+{
+  "before_pck_sha256": "f62eecd2a3f5deb45afca81b948086a5c853048fd40b08e057e35df9b45f364f",
+  "before_levels": [
+    {
+      "at": [
+        1.0,
+        23.0
+      ],
+      "level": 1,
+      "nearest_next_size": 5.0,
+      "next_size_within20": 1,
+      "score": 0,
+      "time": 0.0
+    },
+    {
+      "at": [
+        4.00001049041748,
+        21.9156017303467
+      ],
+      "level": 2,
+      "nearest_next_size": 3.55898237228394,
+      "next_size_within20": 3,
+      "score": 10,
+      "time": 5.88333333333332
+    },
+    {
+      "at": [
+        -3.71535921096802,
+        21.5560722351074
+      ],
+      "level": 3,
+      "nearest_next_size": 12.9236669540405,
+      "next_size_within20": 2,
+      "score": 33,
+      "time": 7.83333333333331
+    },
+    {
+      "at": [
+        3.97093605995178,
+        17.9559364318848
+      ],
+      "level": 4,
+      "nearest_next_size": 18.60671043396,
+      "next_size_within20": 1,
+      "score": 66,
+      "time": 10.3000000000001
+    },
+    {
+      "at": [
+        15.7483215332031,
+        10.7110328674316
+      ],
+      "level": 5,
+      "nearest_next_size": 59.2940864562988,
+      "next_size_within20": 0,
+      "score": 103,
+      "time": 13.0000000000002
+    },
+    {
+      "at": [
+        18.0436992645264,
+        2.34971046447754
+      ],
+      "level": 6,
+      "nearest_next_size": 56.6587142944336,
+      "next_size_within20": 0,
+      "score": 164,
+      "time": 14.8333333333337
+    },
+    {
+      "at": [
+        16.4744682312012,
+        -4.91942834854126
+      ],
+      "level": 7,
+      "nearest_next_size": Infinity,
+      "next_size_within20": 0,
+      "score": 240,
+      "time": 16.366666666667
+    }
+  ],
+  "after_levels": [
+    {
+      "at": [
+        1.0,
+        23.0
+      ],
+      "level": 1,
+      "nearest_next_size": 2.95152258872986,
+      "next_size_within25": 19,
+      "score": 0,
+      "time": 0.0
+    },
+    {
+      "at": [
+        4.00001049041748,
+        21.9156017303467
+      ],
+      "level": 2,
+      "nearest_next_size": 3.55898237228394,
+      "next_size_within25": 12,
+      "score": 10,
+      "time": 5.88333333333332
+    },
+    {
+      "at": [
+        -5.06791543960571,
+        24.0126457214355
+      ],
+      "level": 3,
+      "nearest_next_size": 7.98968029022217,
+      "next_size_within25": 11,
+      "score": 34,
+      "time": 10.7333333333334
+    },
+    {
+      "at": [
+        3.01140332221985,
+        18.3129787445068
+      ],
+      "level": 4,
+      "nearest_next_size": 17.6225509643555,
+      "next_size_within25": 3,
+      "score": 68,
+      "time": 22.85
+    },
+    {
+      "at": [
+        16.4084129333496,
+        26.0790672302246
+      ],
+      "level": 5,
+      "nearest_next_size": 22.5172290802002,
+      "next_size_within25": 2,
+      "score": 103,
+      "time": 27.1333333333331
+    },
+    {
+      "at": [
+        17.3697299957275,
+        26.118350982666
+      ],
+      "level": 6,
+      "nearest_next_size": 65.1566696166992,
+      "next_size_within25": 0,
+      "score": 162,
+      "time": 28.7166666666663
+    },
+    {
+      "at": [
+        21.4400978088379,
+        40.4655418395996
+      ],
+      "level": 7,
+      "nearest_next_size": Infinity,
+      "next_size_within25": 0,
+      "score": 244,
+      "time": 31.7166666666661
+    }
+  ],
+  "after_receipt_grades": {
+    "1": 36,
+    "2": 6,
+    "3": 10,
+    "4": 11,
+    "5": 4
+  },
+  "after_platter_falls": [
+    {
+      "heap": 2,
+      "independent_receipts": 59,
+      "platter_receipt": [
+        {
+          "id": 1311273658158,
+          "minimum_level": 6,
+          "points": 10,
+          "time": 0.0,
+          "top": -3.59242951869965
+        }
+      ]
+    },
+    {
+      "heap": 4,
+      "independent_receipts": 59,
+      "platter_receipt": [
+        {
+          "id": 1323000932674,
+          "minimum_level": 6,
+          "points": 10,
+          "time": 0.0,
+          "top": -3.59242951869965
+        }
+      ]
+    },
+    {
+      "heap": 6,
+      "independent_receipts": 59,
+      "platter_receipt": [
+        {
+          "id": 1332899490570,
+          "minimum_level": 6,
+          "points": 10,
+          "time": 0.0,
+          "top": -3.59242951869965
+        }
+      ]
+    }
+  ],
+  "body_counts": {
+    "total": 2930,
+    "existing_nontrain": 2922,
+    "trains": 8,
+    "towers": 160,
+    "heaps": 17,
+    "loose": 1080
+  },
+  "source_scope": "Guided normal movement, actual gravity and receipts; no browser/phone or unassisted human-play claim."
+}

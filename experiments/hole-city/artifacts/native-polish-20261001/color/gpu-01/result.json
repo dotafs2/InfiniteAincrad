@@ -1,0 +1,44 @@
+{
+	"checks": 6,
+	"failures": [],
+	"renderer": "gl_compatibility",
+	"results": [
+		{
+			"food": "(1.0, 0.2196, 0.549, 1.0)",
+			"maximum_channel_error": 0.0,
+			"source": "ff398c",
+			"standard": "(1.0, 0.2196, 0.549, 1.0)"
+		},
+		{
+			"food": "(0.2863, 0.8392, 0.9804, 1.0)",
+			"maximum_channel_error": 0.0,
+			"source": "49d6fa",
+			"standard": "(0.2863, 0.8392, 0.9804, 1.0)"
+		},
+		{
+			"food": "(0.5961, 0.3294, 0.9294, 1.0)",
+			"maximum_channel_error": 0.0,
+			"source": "9854ed",
+			"standard": "(0.5961, 0.3294, 0.9294, 1.0)"
+		},
+		{
+			"food": "(1.0, 0.6706, 0.0549, 1.0)",
+			"maximum_channel_error": 0.0,
+			"source": "ffab12",
+			"standard": "(1.0, 0.6706, 0.0549, 1.0)"
+		},
+		{
+			"food": "(0.4706, 0.1882, 0.0941, 1.0)",
+			"maximum_channel_error": 0.0,
+			"source": "78311b",
+			"standard": "(0.4706, 0.1882, 0.0941, 1.0)"
+		},
+		{
+			"food": "(1.0, 0.9529, 0.8078, 1.0)",
+			"maximum_channel_error": 0.0,
+			"source": "fff3ce",
+			"standard": "(1.0, 0.9529, 0.8078, 1.0)"
+		}
+	],
+	"scope": "Real GPU framebuffer against StandardMaterial; not a headless algebra-only check."
+}

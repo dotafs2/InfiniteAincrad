@@ -1,0 +1,1805 @@
+{
+  "pass": true,
+  "checks": 258,
+  "gpu_cases": 256,
+  "ingredients": 32,
+  "renderer": "Apple Software Renderer",
+  "comparisons": [
+    {
+      "program": "albedo_roughness",
+      "name": "19dbe366",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        2,
+        181,
+        196,
+        102
+      ],
+      "fixed_custom": [
+        2,
+        181,
+        196,
+        102
+      ],
+      "standalone": [
+        2,
+        181,
+        196,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "214d2666",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        4,
+        19,
+        5,
+        102
+      ],
+      "fixed_custom": [
+        4,
+        19,
+        5,
+        102
+      ],
+      "standalone": [
+        4,
+        19,
+        5,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "35cfec66",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        9,
+        159,
+        214,
+        102
+      ],
+      "fixed_custom": [
+        9,
+        159,
+        214,
+        102
+      ],
+      "standalone": [
+        9,
+        159,
+        214,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "49d6fa33",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        17,
+        171,
+        244,
+        51
+      ],
+      "fixed_custom": [
+        17,
+        171,
+        244,
+        51
+      ],
+      "standalone": [
+        17,
+        171,
+        244,
+        51
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "65df4633",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        33,
+        188,
+        16,
+        51
+      ],
+      "fixed_custom": [
+        33,
+        188,
+        16,
+        51
+      ],
+      "standalone": [
+        33,
+        188,
+        16,
+        51
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "68deed66",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        35,
+        186,
+        216,
+        102
+      ],
+      "fixed_custom": [
+        35,
+        186,
+        216,
+        102
+      ],
+      "standalone": [
+        35,
+        186,
+        216,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "6ddd1766",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        39,
+        184,
+        2,
+        102
+      ],
+      "fixed_custom": [
+        39,
+        184,
+        2,
+        102
+      ],
+      "standalone": [
+        39,
+        184,
+        2,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "78311b66",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        48,
+        8,
+        3,
+        102
+      ],
+      "fixed_custom": [
+        48,
+        8,
+        3,
+        102
+      ],
+      "standalone": [
+        48,
+        8,
+        3,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "9854ed33",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        80,
+        23,
+        216,
+        51
+      ],
+      "fixed_custom": [
+        80,
+        23,
+        216,
+        51
+      ],
+      "standalone": [
+        80,
+        23,
+        216,
+        51
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "a340ff66",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        93,
+        13,
+        255,
+        102
+      ],
+      "fixed_custom": [
+        93,
+        13,
+        255,
+        102
+      ],
+      "standalone": [
+        93,
+        13,
+        255,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "c2732666",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        138,
+        44,
+        5,
+        102
+      ],
+      "fixed_custom": [
+        138,
+        44,
+        5,
+        102
+      ],
+      "standalone": [
+        138,
+        44,
+        5,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "c76b1633",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        146,
+        37,
+        2,
+        51
+      ],
+      "fixed_custom": [
+        146,
+        37,
+        2,
+        51
+      ],
+      "standalone": [
+        146,
+        37,
+        2,
+        51
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "e33c1a66",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        196,
+        12,
+        3,
+        102
+      ],
+      "fixed_custom": [
+        196,
+        12,
+        3,
+        102
+      ],
+      "standalone": [
+        196,
+        12,
+        3,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "f72f3544",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        237,
+        7,
+        9,
+        68
+      ],
+      "fixed_custom": [
+        237,
+        7,
+        9,
+        68
+      ],
+      "standalone": [
+        237,
+        7,
+        9,
+        68
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "f7a32d93",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        237,
+        93,
+        7,
+        147
+      ],
+      "fixed_custom": [
+        237,
+        93,
+        7,
+        147
+      ],
+      "standalone": [
+        237,
+        93,
+        7,
+        147
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ff398c33",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        10,
+        67,
+        51
+      ],
+      "fixed_custom": [
+        255,
+        10,
+        67,
+        51
+      ],
+      "standalone": [
+        255,
+        10,
+        67,
+        51
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ff633e44",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        32,
+        12,
+        68
+      ],
+      "fixed_custom": [
+        255,
+        32,
+        12,
+        68
+      ],
+      "standalone": [
+        255,
+        32,
+        12,
+        68
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffab1293",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        104,
+        2,
+        147
+      ],
+      "fixed_custom": [
+        255,
+        104,
+        2,
+        147
+      ],
+      "standalone": [
+        255,
+        104,
+        2,
+        147
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffae2193",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        108,
+        4,
+        147
+      ],
+      "fixed_custom": [
+        255,
+        108,
+        4,
+        147
+      ],
+      "standalone": [
+        255,
+        108,
+        4,
+        147
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffbf0033",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        133,
+        0,
+        51
+      ],
+      "fixed_custom": [
+        255,
+        133,
+        0,
+        51
+      ],
+      "standalone": [
+        255,
+        133,
+        0,
+        51
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffc04593",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        134,
+        15,
+        147
+      ],
+      "fixed_custom": [
+        255,
+        134,
+        15,
+        147
+      ],
+      "standalone": [
+        255,
+        134,
+        15,
+        147
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffc24d93",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        138,
+        19,
+        147
+      ],
+      "fixed_custom": [
+        255,
+        138,
+        19,
+        147
+      ],
+      "standalone": [
+        255,
+        138,
+        19,
+        147
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffc67d66",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        144,
+        52,
+        102
+      ],
+      "fixed_custom": [
+        255,
+        144,
+        52,
+        102
+      ],
+      "standalone": [
+        255,
+        144,
+        52,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffcf0444",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        159,
+        0,
+        68
+      ],
+      "fixed_custom": [
+        255,
+        159,
+        0,
+        68
+      ],
+      "standalone": [
+        255,
+        159,
+        0,
+        68
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffcf9366",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        159,
+        74,
+        102
+      ],
+      "fixed_custom": [
+        255,
+        159,
+        74,
+        102
+      ],
+      "standalone": [
+        255,
+        159,
+        74,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffd56666",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        170,
+        34,
+        102
+      ],
+      "fixed_custom": [
+        255,
+        170,
+        34,
+        102
+      ],
+      "standalone": [
+        255,
+        170,
+        34,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffd82a44",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        175,
+        6,
+        68
+      ],
+      "fixed_custom": [
+        255,
+        175,
+        6,
+        68
+      ],
+      "standalone": [
+        255,
+        175,
+        6,
+        68
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffdc5893",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        183,
+        25,
+        147
+      ],
+      "fixed_custom": [
+        255,
+        183,
+        25,
+        147
+      ],
+      "standalone": [
+        255,
+        183,
+        25,
+        147
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffe25866",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        194,
+        25,
+        102
+      ],
+      "fixed_custom": [
+        255,
+        194,
+        25,
+        102
+      ],
+      "standalone": [
+        255,
+        194,
+        25,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "ffe73b66",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        204,
+        11,
+        102
+      ],
+      "fixed_custom": [
+        255,
+        204,
+        11,
+        102
+      ],
+      "standalone": [
+        255,
+        204,
+        11,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "fff09a66",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        222,
+        82,
+        102
+      ],
+      "fixed_custom": [
+        255,
+        222,
+        82,
+        102
+      ],
+      "standalone": [
+        255,
+        222,
+        82,
+        102
+      ]
+    },
+    {
+      "program": "albedo_roughness",
+      "name": "fff3ce66",
+      "old": [
+        0,
+        0,
+        0,
+        46
+      ],
+      "fixed": [
+        255,
+        229,
+        157,
+        102
+      ],
+      "fixed_custom": [
+        255,
+        229,
+        157,
+        102
+      ],
+      "standalone": [
+        255,
+        229,
+        157,
+        102
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "19dbe366",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "214d2666",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "35cfec66",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "49d6fa33",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "65df4633",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "68deed66",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "6ddd1766",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "78311b66",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "9854ed33",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "a340ff66",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "c2732666",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "c76b1633",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "e33c1a66",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "f72f3544",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "f7a32d93",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ff398c33",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ff633e44",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffab1293",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffae2193",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffbf0033",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffc04593",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffc24d93",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffc67d66",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffcf0444",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffcf9366",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffd56666",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffd82a44",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffdc5893",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffe25866",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "ffe73b66",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "fff09a66",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    },
+    {
+      "program": "glaze_specular",
+      "name": "fff3ce66",
+      "old": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "fixed_custom": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "standalone": [
+        0,
+        0,
+        0,
+        128
+      ]
+    }
+  ],
+  "shader_sha256": "54a890cdf065e4613a203e7fc9834d4440dd73d27ab6a47e3179aa27f721e2cc",
+  "old_capture_sha256": "096e0627c56cea9933391b46bfee7f5ce2be93411c52c9729548880eb853f775",
+  "new_capture_sha256": "1559f0ac00025f6bc81c5d5eb06f209e78a88b56d2bbe00935d889acfa47069a",
+  "scope": "Actual windowless CGL integer attribute input, pinned instance color multiplication and shipped material functions. Headless captures establish real scene resources/flags; this does not invoke the full Godot renderer or capture browser pixels. Alpha stores roughness in one diagnostic program, not visibility."
+}

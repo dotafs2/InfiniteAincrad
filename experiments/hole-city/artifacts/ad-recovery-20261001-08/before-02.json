@@ -1,0 +1,220 @@
+{
+  "at_utc": "2026-10-01T09:49:32.672627+00:00",
+  "scope": "Actual extracted native Swift ad methods, controlled SDK/UI boundaries and manually released timer clock; no live Google/Apple request. Not physical SDK callback acceptance.",
+  "source_sha256": "180855c325a37eef73556877550124c0f89a019b0f52974d9fb1359392b85924",
+  "extracted_sha256": "964010f99e386dc6c6256390cad942071749de1094ad2a4833862f50ec214faf",
+  "fixtures_sha256": {
+    "tests/native_ads_recovery_stubs.swift": "a2d4063959dc32daba58ffce61e58778f162546936b097228a3d8060d8284ea3",
+    "tests/native_ads_recovery_harness.swift": "067cb39217c2da28f983d34bf757793eed24bdb53b1c47061bf240cb2a17640c"
+  },
+  "timer_clock": "Manual boundary, actual computed seconds retained",
+  "timer_expression_substitutions": 1,
+  "checks": 36,
+  "failures": [
+    {
+      "scenario": "network",
+      "failure": "Automatic retry recovers a failed first-session update"
+    },
+    {
+      "scenario": "network",
+      "failure": "Recovered consent starts one SDK and loads one ad"
+    },
+    {
+      "scenario": "network",
+      "failure": "Repeat initialization and foreground do not duplicate a ready ad"
+    },
+    {
+      "scenario": "background",
+      "failure": "Background launch performs no consent form or ad request"
+    },
+    {
+      "scenario": "suspend-update",
+      "failure": "Returning update does not present from a suspended controller"
+    },
+    {
+      "scenario": "suspend-update",
+      "failure": "Foreground retries the abandoned presentation path"
+    },
+    {
+      "scenario": "cached",
+      "failure": "Privacy refresh recovers without duplicate initialization or preloads"
+    },
+    {
+      "scenario": "form-failure",
+      "failure": "Failed required form retries through a fresh consent update"
+    },
+    {
+      "scenario": "form-failure",
+      "failure": "Only the successful form enables first-session loading"
+    },
+    {
+      "scenario": "privacy-race",
+      "failure": "Old preload callback cannot become ready while privacy choices are open"
+    },
+    {
+      "scenario": "privacy-race",
+      "failure": "Closing choices reloads using the latest permission generation"
+    },
+    {
+      "scenario": "privacy-closes-first",
+      "failure": "A late old callback reloads even when the form already closed"
+    },
+    {
+      "scenario": "backoff",
+      "failure": "Consent retry uses bounded computed delay: 15"
+    },
+    {
+      "scenario": "backoff",
+      "failure": "Consent retry uses bounded computed delay: 30"
+    },
+    {
+      "scenario": "backoff",
+      "failure": "Consent retry uses bounded computed delay: 60"
+    },
+    {
+      "scenario": "backoff",
+      "failure": "Consent retry uses bounded computed delay: 120"
+    },
+    {
+      "scenario": "backoff",
+      "failure": "Consent retry uses bounded computed delay: 240"
+    },
+    {
+      "scenario": "backoff",
+      "failure": "Consent retry uses bounded computed delay: 300"
+    },
+    {
+      "scenario": "backoff",
+      "failure": "Consent retry uses bounded computed delay: 300"
+    }
+  ],
+  "scenarios": [
+    {
+      "checks": 5,
+      "failures": [
+        "Automatic retry recovers a failed first-session update",
+        "Recovered consent starts one SDK and loads one ad",
+        "Repeat initialization and foreground do not duplicate a ready ad"
+      ],
+      "load_calls": 0,
+      "retry_delays": [],
+      "scenario": "network",
+      "sdk_starts": 0,
+      "update_calls": 1,
+      "exit_code": 1
+    },
+    {
+      "checks": 2,
+      "failures": [
+        "Background launch performs no consent form or ad request"
+      ],
+      "load_calls": 1,
+      "retry_delays": [],
+      "scenario": "background",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 1
+    },
+    {
+      "checks": 3,
+      "failures": [
+        "Returning update does not present from a suspended controller",
+        "Foreground retries the abandoned presentation path"
+      ],
+      "load_calls": 1,
+      "retry_delays": [],
+      "scenario": "suspend-update",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 1
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 0,
+      "retry_delays": [],
+      "scenario": "denied",
+      "sdk_starts": 0,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [
+        "Privacy refresh recovers without duplicate initialization or preloads"
+      ],
+      "load_calls": 1,
+      "retry_delays": [],
+      "scenario": "cached",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 1
+    },
+    {
+      "checks": 2,
+      "failures": [
+        "Failed required form retries through a fresh consent update",
+        "Only the successful form enables first-session loading"
+      ],
+      "load_calls": 0,
+      "retry_delays": [],
+      "scenario": "form-failure",
+      "sdk_starts": 0,
+      "update_calls": 1,
+      "exit_code": 1
+    },
+    {
+      "checks": 5,
+      "failures": [
+        "Old preload callback cannot become ready while privacy choices are open",
+        "Closing choices reloads using the latest permission generation"
+      ],
+      "load_calls": 1,
+      "retry_delays": [],
+      "scenario": "privacy-race",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 1
+    },
+    {
+      "checks": 2,
+      "failures": [
+        "A late old callback reloads even when the form already closed"
+      ],
+      "load_calls": 1,
+      "retry_delays": [],
+      "scenario": "privacy-closes-first",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 1
+    },
+    {
+      "checks": 5,
+      "failures": [],
+      "load_calls": 2,
+      "retry_delays": [],
+      "scenario": "reward",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 8,
+      "failures": [
+        "Consent retry uses bounded computed delay: 15",
+        "Consent retry uses bounded computed delay: 30",
+        "Consent retry uses bounded computed delay: 60",
+        "Consent retry uses bounded computed delay: 120",
+        "Consent retry uses bounded computed delay: 240",
+        "Consent retry uses bounded computed delay: 300",
+        "Consent retry uses bounded computed delay: 300"
+      ],
+      "load_calls": 0,
+      "retry_delays": [],
+      "scenario": "backoff",
+      "sdk_starts": 0,
+      "update_calls": 1,
+      "exit_code": 1
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "version": "0.12.2",
+  "build": "2",
+  "architecture": "arm64",
+  "native_compilation_and_link_passed": true,
+  "signed": false,
+  "installed": false,
+  "uploaded": false,
+  "native_pck_checks": 413,
+  "native_pck_sha256": "5a00a4c11ec6f9d195afb2ded758ea20b94712e10c3c9877ac62ebc3607ac10a",
+  "native_pck_bytes": 10678456,
+  "vendor_privacy_manifests_unchanged": {
+    "GoogleMobileAds": "69fb112582fc23fc06c635c961d262a3f7b4b5654d284787491de3000dadf9d2",
+    "UserMessagingPlatform": "45b7adb99fcd2d962a1c800fbfcc1325b57a7fa4165f416182323bb5ffe9c900"
+  },
+  "test_ad_identifiers_only": true,
+  "production_ready": false,
+  "limitation": "Native PCK checks run in the desktop engine. Local keychain authorization and physical iPhone acceptance remain outstanding."
+}

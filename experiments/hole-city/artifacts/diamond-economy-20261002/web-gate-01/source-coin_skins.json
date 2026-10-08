@@ -1,0 +1,21 @@
+{
+  "checks": 402,
+  "failures": [
+    "Persistent earning rule states rounding and actual completion bonus",
+    "Timed city settlement floors score coins and adds the disclosed 20-coin finish bonus",
+    "Repeated finish does not pay twice",
+    "Food completion pays score coins plus the 20-coin win bonus",
+    "Round earnings and purchased equipment survive a cold restore",
+    "Empty defeats do not mint coins",
+    "Leaving a round does not award a completion",
+    "Unknown categories cannot spend coins",
+    "Nonmultiple timed score floors before adding the finish bonus and updating shortage",
+    "Exact shortage refreshes after actual round earnings",
+    "Exact balance can buy the next skin",
+    "Shortage uses increased next price after a successful unlock",
+    "Actual UI reflects the updated post-purchase shortage",
+    "Engine process failed; inspect the engine log"
+  ],
+  "input": "actual viewport pointer routing",
+  "save_scope": "isolated process-owned /tmp files"
+}

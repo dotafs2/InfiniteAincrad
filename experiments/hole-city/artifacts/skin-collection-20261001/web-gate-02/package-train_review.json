@@ -1,0 +1,191 @@
+{
+  "checks": 388,
+  "failures": [],
+  "metrics": {
+    "city": {
+      "assets": 2,
+      "cars": 4,
+      "cut_return": {
+        "blocked_frames": 0,
+        "collider_overlaps": 0,
+        "head_distance": 1451.57575269263,
+        "max_car_step": 1.08051538467407,
+        "max_history_samples": 36,
+        "parked_pose_changes": 0,
+        "requested_distance": 768.562041687965,
+        "ticks": 715
+      },
+      "detachment_events": 2,
+      "max_car_triangles": 956,
+      "owner_lifecycle": {
+        "active_game_ticks": 2,
+        "other_actor_unchanged": true,
+        "prior_cars_freed": true,
+        "replaced_owner_pose_changes": 0
+      },
+      "receipts": {
+        "352506100432": {
+          "count": 1,
+          "player": true,
+          "points": 15,
+          "top": -3.6671701669693
+        },
+        "352589986515": {
+          "count": 1,
+          "player": true,
+          "points": 15,
+          "top": -3.6671701669693
+        },
+        "352673872600": {
+          "count": 1,
+          "player": true,
+          "points": 15,
+          "top": -3.6671701669693
+        },
+        "352757758685": {
+          "count": 1,
+          "player": true,
+          "points": 15,
+          "top": -3.6671701669693
+        }
+      },
+      "surfaces": 4,
+      "triangles": 3672,
+      "two_lap_cut_return": {
+        "blocked_frames": 0,
+        "collider_overlaps": 0,
+        "head_distance": 2049.59478855751,
+        "max_car_step": 1.08034157752991,
+        "max_history_samples": 35,
+        "parked_pose_changes": 0,
+        "requested_distance": 701.730559802055,
+        "ticks": 652
+      },
+      "two_laps_before_cut": {
+        "blocked_frames": 0,
+        "collider_overlaps": 0,
+        "head_distance": 1341.39324162232,
+        "max_car_step": 1.08012390136719,
+        "max_history_samples": 82,
+        "parked_pose_changes": 0,
+        "requested_distance": 1340.6296377182,
+        "ticks": 1242
+      },
+      "unbroken_loop": {
+        "blocked_frames": 0,
+        "collider_overlaps": 0,
+        "head_distance": 677.057163344071,
+        "max_car_step": 1.08010864257812,
+        "max_history_samples": 82,
+        "parked_pose_changes": 0,
+        "requested_distance": 672.3148188591,
+        "ticks": 623
+      }
+    },
+    "food": {
+      "assets": 8,
+      "cars": 8,
+      "cut_return": {
+        "blocked_frames": 0,
+        "collider_overlaps": 0,
+        "head_distance": 1323.53782337478,
+        "max_car_step": 0.960633218288422,
+        "max_history_samples": 68,
+        "parked_pose_changes": 0,
+        "requested_distance": 700.722766977549,
+        "ticks": 732
+      },
+      "detachment_events": 2,
+      "max_car_triangles": 1228,
+      "owner_lifecycle": {
+        "active_game_ticks": 2,
+        "other_actor_unchanged": true,
+        "prior_cars_freed": true,
+        "replaced_owner_pose_changes": 0
+      },
+      "receipts": {
+        "2735038547661": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.58252316713333
+        },
+        "2735122433744": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.5818487405777
+        },
+        "2735206319829": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.57184863090515
+        },
+        "2735290205914": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.57712370157242
+        },
+        "2735374091999": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.57834875583649
+        },
+        "2735457978084": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.50384873151779
+        },
+        "2735541864169": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.68765085935593
+        },
+        "2735625750254": {
+          "count": 1,
+          "player": true,
+          "points": 10,
+          "top": -3.58884871006012
+        }
+      },
+      "surfaces": 8,
+      "triangles": 8084,
+      "two_lap_cut_return": {
+        "blocked_frames": 0,
+        "collider_overlaps": 0,
+        "head_distance": 1868.06227351473,
+        "max_car_step": 0.960483133792877,
+        "max_history_samples": 68,
+        "parked_pose_changes": 0,
+        "requested_distance": 639.790352457762,
+        "ticks": 668
+      },
+      "two_laps_before_cut": {
+        "blocked_frames": 0,
+        "collider_overlaps": 0,
+        "head_distance": 1223.04192997241,
+        "max_car_step": 0.960084915161133,
+        "max_history_samples": 135,
+        "parked_pose_changes": 0,
+        "requested_distance": 1222.64829039574,
+        "ticks": 1274
+      },
+      "unbroken_loop": {
+        "blocked_frames": 0,
+        "collider_overlaps": 0,
+        "head_distance": 617.174144990042,
+        "max_car_step": 0.960084497928619,
+        "max_history_samples": 138,
+        "parked_pose_changes": 0,
+        "requested_distance": 613.324145197868,
+        "ticks": 639
+      }
+    }
+  },
+  "scope": "Independent actual-map/imported-model/physics/coupling checks, no browser, save or performance claim."
+}

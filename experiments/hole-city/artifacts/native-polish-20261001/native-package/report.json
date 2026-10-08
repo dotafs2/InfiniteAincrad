@@ -1,0 +1,37 @@
+{
+  "native_pck_sha256": "d60ca036a0d873975f8a728d14f3650708fbdb8d3edbe23a4b90c26ce0e44144",
+  "native_pck_tests_on_desktop": {
+    "native_polish_acceptance": {
+      "checks": 45,
+      "failures": [],
+      "log_sha256": "94187871d124f0815dbd5a5787e5de9ab045a91282fff6da31f89371c469e3f8"
+    },
+    "music_acceptance": {
+      "checks": 125,
+      "failures": [],
+      "log_sha256": "103fb41310e97943fb4e81753956fd518f4b5d9aa2af0a9560839dfcdf7f6a41"
+    },
+    "music_review": {
+      "checks": 118,
+      "failures": [],
+      "log_sha256": "d40e1e420ff8a97ee86dbf2a4dadb85cb638364d53b30a1a798f0473d98a59e1"
+    },
+    "shop_theme_review": {
+      "checks": 55,
+      "failures": [],
+      "log_sha256": "789ae108e441d90fb2017be9107b241a7034db1e00cfd0c9c586f390b732c1a6"
+    },
+    "haptic-preference-review": {
+      "checks": 14,
+      "failures": [],
+      "log_sha256": "309868ef2b3d7d0aed3ccb2e7e3c7f3f8dc9bc08edff30e915d2c150043a87c8"
+    }
+  },
+  "checks": 357,
+  "actual_phone_save_compatibility_checks": 27,
+  "phone_backup_unchanged": true,
+  "web_inputs_unchanged": 802,
+  "scope": "Tests execute the exported iOS resource PCK in the desktop engine. This verifies packaged audio/code/layout/receipt behavior, not physical iOS sound, touch, GPU or SDK callbacks.",
+  "signed": false,
+  "installed": false
+}

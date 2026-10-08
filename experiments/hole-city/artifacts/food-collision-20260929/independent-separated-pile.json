@@ -1,0 +1,140 @@
+{
+  "checks": 13522,
+  "failures": [
+    "Tilted non-rain round food contacts remain finite and supported",
+    "Tilted round-food pile settles without persistent rocking",
+    "Engine process failed; inspect the engine log"
+  ],
+  "metrics": {
+    "box_bodies": 616,
+    "collection_receipts": 24,
+    "landed_rain": 10,
+    "max_radial_inset_fraction": 0.0192148113360766,
+    "pile_rest": [
+      {
+        "angular_speed": 0.115428097546101,
+        "kind": "cookie",
+        "position": "(70.23358, -341.8431, 22.47104)",
+        "speed": 58.4499473571777
+      },
+      {
+        "angular_speed": 0.193137347698212,
+        "kind": "burger",
+        "position": "(69.72264, 0.471865, 23.31686)",
+        "speed": 0.138367772102356
+      },
+      {
+        "angular_speed": 0.455730259418488,
+        "kind": "cookie",
+        "position": "(70.23568, 0.114914, 24.65794)",
+        "speed": 0.242495164275169
+      },
+      {
+        "angular_speed": 0.124673746526241,
+        "kind": "burger",
+        "position": "(70.20023, 0.923515, 24.48511)",
+        "speed": 0.226571500301361
+      },
+      {
+        "angular_speed": 0.300616174936295,
+        "kind": "cookie",
+        "position": "(70.89139, 0.276664, 25.39167)",
+        "speed": 0.180005669593811
+      },
+      {
+        "angular_speed": 0.000209001897019334,
+        "kind": "burger",
+        "position": "(68.45469, 0.674412, 21.3264)",
+        "speed": 0.000161980424309149
+      }
+    ],
+    "rain_rest": [
+      {
+        "angular_speed": 0.0283799059689045,
+        "kind": "bacon",
+        "landed": true,
+        "position": "(62.0, 0.227743, 40.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0307769868522882,
+        "kind": "egg",
+        "landed": true,
+        "position": "(69.0, 0.481608, 40.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0371873155236244,
+        "kind": "cake",
+        "landed": true,
+        "position": "(76.0, 1.131976, 40.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0299562681466341,
+        "kind": "donut",
+        "landed": true,
+        "position": "(62.0, 0.35789, 48.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0333765372633934,
+        "kind": "burger",
+        "landed": true,
+        "position": "(69.0, 0.741022, 48.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0316201932728291,
+        "kind": "cookie",
+        "landed": true,
+        "position": "(76.0, 0.586654, 48.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0307769868522882,
+        "kind": "berry",
+        "landed": true,
+        "position": "(62.0, 0.4585, 56.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0307769868522882,
+        "kind": "sushi",
+        "landed": true,
+        "position": "(69.0, 0.496332, 56.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0333765372633934,
+        "kind": "pancake",
+        "landed": true,
+        "position": "(76.0, 0.73218, 56.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0291574355214834,
+        "kind": "pizza",
+        "landed": true,
+        "position": "(62.0, 0.242089, 64.0)",
+        "sleeping": true,
+        "speed": 0.0
+      }
+    ],
+    "round_bodies": 1984,
+    "settled_batch_count": 10,
+    "structural_box_bodies": 401,
+    "structural_round_bodies": 287,
+    "unique_dimensions": 467
+  },
+  "scope": "Non-author real food creation, resource identity, prism support, contact/drop and collection evidence; no renderer or CPU timing claim."
+}

@@ -1,0 +1,23 @@
+{
+  "empty_receipts_accepted": true,
+  "verification": {
+    "version": "0.8.1",
+    "failures": [],
+    "source_checks": 1,
+    "packaged_checks": 1,
+    "shader_programs": 0,
+    "shader_cases": 0,
+    "cpu_samples": 999999,
+    "traces": [],
+    "http_artifacts": {},
+    "receipt_sha256": {
+      "release/release.json": "79a4015e73ffc3a2321120c6176ea25ebe6c5c61929e17195cc921455a1426fb",
+      "shader-probe-final/result.json": "d5ae8c95d27054ba9a2743030caaf05f0888963ea5cd8b4162b7414c052b400f",
+      "cpu/summary.json": "ef376341830e7a175392b94e8588b554c26ce772f79d866d170c2ea503634395"
+    },
+    "verification_tool_sha256": "13a7a6b714714f3a82baa564ed6c5dc14cf1b5250666bec36aedc560a07bfcdf",
+    "limitation": "Static HTTP delivery, headless scene/CPU checks and isolated shader equations; no browser/game capture or iPhone certification"
+  },
+  "sha256": "13a7a6b714714f3a82baa564ed6c5dc14cf1b5250666bec36aedc560a07bfcdf",
+  "scope": "Temporary synthetic receipts, mocked fingerprint functions and prohibited HTTP; no runtime/source edits"
+}

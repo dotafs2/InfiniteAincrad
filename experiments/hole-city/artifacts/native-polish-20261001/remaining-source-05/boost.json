@@ -1,0 +1,61 @@
+{
+  "checks": 55,
+  "failures": [
+    "Existing portrait BOOST touch target remains reachable",
+    "Insufficient charge explains why a touch cannot activate",
+    "One physical tap spends charge exactly once and retains the bounded pull",
+    "BOOST grants the advertised duration and starts its cooldown",
+    "HUD distinguishes an active boost from an empty charge",
+    "Real movement travels 55 percent farther over equal physics steps at radius 0.85",
+    "Active duration counts down in simulation time",
+    "Repeated touches cannot double-spend, extend or retrigger an active boost",
+    "Repeated touch explains the active state",
+    "Expired boost exposes cooldown even if food has fully recharged it",
+    "Cooldown rejection reports remaining time without spending charge",
+    "One physical tap spends charge exactly once and retains the bounded pull",
+    "BOOST grants the advertised duration and starts its cooldown",
+    "HUD distinguishes an active boost from an empty charge",
+    "Real movement travels 55 percent farther over equal physics steps at radius 6.0",
+    "Active duration counts down in simulation time",
+    "Repeated touches cannot double-spend, extend or retrigger an active boost",
+    "Repeated touch explains the active state",
+    "Expired boost exposes cooldown even if food has fully recharged it",
+    "Cooldown rejection reports remaining time without spending charge",
+    "One physical tap spends charge exactly once and retains the bounded pull",
+    "BOOST grants the advertised duration and starts its cooldown",
+    "HUD distinguishes an active boost from an empty charge",
+    "Real movement travels 55 percent farther over equal physics steps at radius 14.0",
+    "Active duration counts down in simulation time",
+    "Repeated touches cannot double-spend, extend or retrigger an active boost",
+    "Repeated touch explains the active state",
+    "Expired boost exposes cooldown even if food has fully recharged it",
+    "Cooldown rejection reports remaining time without spending charge",
+    "Beacon Step neither shortens BOOST nor multiplies speed twice",
+    "Charged boost continues after the independent skin timer expires",
+    "Engine process failed; inspect the engine log"
+  ],
+  "measurements": [
+    {
+      "boost_distance": 3.74100780487061,
+      "normal_distance": 3.74100780487061,
+      "radius": 0.85,
+      "ratio": 1.0,
+      "restored_distance": 3.74100780487061
+    },
+    {
+      "boost_distance": 3.00000071525574,
+      "normal_distance": 3.00000071525574,
+      "radius": 6.0,
+      "ratio": 1.0,
+      "restored_distance": 3.00000071525574
+    },
+    {
+      "boost_distance": 2.29411721229553,
+      "normal_distance": 2.29411721229553,
+      "radius": 14.0,
+      "ratio": 1.0,
+      "restored_distance": 2.29411721229553
+    }
+  ],
+  "scope": "Real portrait touch events, controller travel and pause lifecycle; headless CPU physics, not device FPS or browser visuals"
+}

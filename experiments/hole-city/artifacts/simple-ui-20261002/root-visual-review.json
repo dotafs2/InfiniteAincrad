@@ -1,0 +1,63 @@
+{
+  "at_utc": "2026-10-02T03:17:21.501791+00:00",
+  "version": "0.12.5",
+  "passed": true,
+  "reviewed_images": [
+    {
+      "image": "ui-gpu-06/home.png",
+      "sha256": "3e51c913cedf8f6d2ca48dbb8520247e0be4ec054d0fa5baf7ac2e37a8f1760a"
+    },
+    {
+      "image": "ui-gpu-06/timeout-two-offers.png",
+      "sha256": "b8b9e67b2bf5c1ec85a5466f7a4680e3eb6b1c409eb1cc85fd11abcec80cbde6"
+    },
+    {
+      "image": "ui-gpu-06/timeout-boost-used.png",
+      "sha256": "f8c1bf2a5c27a111a86c26457b6ff28d3e641d258c05969420f8d3a7aeededbb"
+    },
+    {
+      "image": "ui-gpu-06/settings.png",
+      "sha256": "c6234f4d811dbdda0097116f925714b45a2471ba91c601f71908a5507da929d4"
+    },
+    {
+      "image": "ui-gpu-06/sunny-city-playing.png",
+      "sha256": "573ece5b091b17742a32c6a1660106da6952a6cdc9acf77083bc3723044db499"
+    },
+    {
+      "image": "ui-gpu-06/snack-garden-intro.png",
+      "sha256": "540e45c2a0843744497bee14650306aed962b83422c00b9e5d92bba23ddb8d61"
+    },
+    {
+      "image": "fracture-gpu-01/before/001_row_house_01-upper-cut.png",
+      "sha256": "9c9f1a57b6b14b696f5a0ba9d85f9929166b4bd61ddfec1a0f5f5229409026c2"
+    },
+    {
+      "image": "fracture-gpu-01/after/001_row_house_01-upper-cut.png",
+      "sha256": "e231f4c0948ebddca31086cbb278b28df2cadefac59a0edde474e3146c975849"
+    },
+    {
+      "image": "fracture-gpu-01/before/031_townhouse_01-isometric.png",
+      "sha256": "53f73f3b4a0d8fcfe94756b1d1a1347c5df78f1f68d7489cfe2715aa99462bec"
+    },
+    {
+      "image": "fracture-gpu-01/after/031_townhouse_01-isometric.png",
+      "sha256": "1dbeef272ac30d68fa424fb7c419fc974444d126536107537c218f9db87ed31c"
+    },
+    {
+      "image": "ui-gpu-06/store.png",
+      "sha256": "90e023f309c8f5d9a41091cdc3d570ea1046057494122040260f7b960142d685"
+    }
+  ],
+  "findings": [
+    "Added rectangular caps are visible in the before frames and absent in the after frames; original roofs, windows and facades remain.",
+    "Home uses the full safe height with wallets at the top and the dock at the bottom. Its background continues under the emulated home indicator.",
+    "Results show only the 1.5x coin and independent 30-second offers. The actual one-diamond QA path changes 17 to 25 reward coins; unavailable SDK video is labeled truthfully.",
+    "Playing shows a 90-second city clock at the top and Boost at the bottom; the food introduction shows 60 seconds. The world fills all backing pixels.",
+    "Store exchange cards and the optional diamond-video entry are separated and readable, with unavailable or unaffordable actions disabled."
+  ],
+  "limitations": [
+    "Actual Mac GPU QA with recorded 16 Pro Max insets emulated; not physical-phone rendering or input evidence.",
+    "Result score 1234 is an explicit layout fixture, not ordinary gameplay or store media.",
+    "Building poses are frozen exploded QA fixtures, not natural collapse pacing or performance evidence."
+  ]
+}

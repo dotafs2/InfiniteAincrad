@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "prepared_only": false,
+  "scope": "Explicit frozen exploded QA fixtures; actual catalog and actual emitted fragment meshes. Not natural gameplay or App Store media.",
+  "baseline_source": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/diamond-economy-20261002/store-review-v2/capture-project",
+  "current_source": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city",
+  "before_version": "0.12.4",
+  "after_version": "0.12.5",
+  "helper_sha256": "2d6fa7b987ba07211de826d59613d5a6cfc21905972d5f83757a10babc4759d1",
+  "assets": [
+    "001_row_house_01",
+    "031_townhouse_01"
+  ],
+  "capture_resolution": [
+    1000,
+    900
+  ],
+  "captures_per_variant": 4,
+  "common_dependencies": {
+    "fidelity/catalog_city.gd": {
+      "before": "e84e91de200a5293cc780b59366fbb224ccc46140b756e0e17801d2b9efc1bbb",
+      "after": "e84e91de200a5293cc780b59366fbb224ccc46140b756e0e17801d2b9efc1bbb"
+    },
+    "fidelity/art.gd": {
+      "before": "3d20f4b3e320d8f701c807165570111fa2ff34eaa63954b3d8f0e1f361f61a16",
+      "after": "3d20f4b3e320d8f701c807165570111fa2ff34eaa63954b3d8f0e1f361f61a16"
+    },
+    "fidelity/rim_body.gd": {
+      "before": "9089dfaa7c890977e69f604d58c721fce1961ef4b7e104d9c5ba1d0162706c5f",
+      "after": "9089dfaa7c890977e69f604d58c721fce1961ef4b7e104d9c5ba1d0162706c5f"
+    },
+    "fidelity/mesh_batch.gd": {
+      "before": "ee226d2766047943300b3626e6a7fa9d86fce91ef815c3bdc44b3602ec821f26",
+      "after": "ee226d2766047943300b3626e6a7fa9d86fce91ef815c3bdc44b3602ec821f26"
+    },
+    "fidelity/palette.gdshader": {
+      "before": "c5897f00cc44319c25bc69ce994a0e6864e60a88944294565f9e2fcc34558e91",
+      "after": "c5897f00cc44319c25bc69ce994a0e6864e60a88944294565f9e2fcc34558e91"
+    },
+    "fidelity/hole_reveal.gdshaderinc": {
+      "before": "a86c6fc622da74cd412967ea1e16ce26c33da074e0f6ac0ee67ca69113816997",
+      "after": "a86c6fc622da74cd412967ea1e16ce26c33da074e0f6ac0ee67ca69113816997"
+    },
+    "scripts/city.gd": {
+      "before": "eac0d75ace6d0c7dea51429ba38dbed4b32b4d4ae33eecb3400cd07b1ec230ab",
+      "after": "eac0d75ace6d0c7dea51429ba38dbed4b32b4d4ae33eecb3400cd07b1ec230ab"
+    },
+    "scripts/swallowable.gd": {
+      "before": "590e00fc0a73a9a7bf67358219e010a99254e8c659879652fddb3279be3e5392",
+      "after": "590e00fc0a73a9a7bf67358219e010a99254e8c659879652fddb3279be3e5392"
+    },
+    "assets/city_kit/manifest.json": {
+      "before": "5e63b98e3d996f13785b48d14bd17c32a959dddf9065a126c62db1eefbeffc70",
+      "after": "5e63b98e3d996f13785b48d14bd17c32a959dddf9065a126c62db1eefbeffc70"
+    },
+    "assets/city_kit/001_row_house_01.glb": {
+      "before": "b4a7927db2e673e83dfa9ee6e1ea13e370fa07e8ab6237db0f7b8a8832b3ace4",
+      "after": "b4a7927db2e673e83dfa9ee6e1ea13e370fa07e8ab6237db0f7b8a8832b3ace4"
+    },
+    "assets/city_kit/031_townhouse_01.glb": {
+      "before": "69fc9442e398e1501fcf810f5d7f764309d3aa61cb2310501c808cb34e0f75e4",
+      "after": "69fc9442e398e1501fcf810f5d7f764309d3aa61cb2310501c808cb34e0f75e4"
+    },
+    "assets/fractures/001_row_house_01.res": {
+      "before": "a86e9475222ae2b1c957f36e14aa22af322495e6d73c3cd0e952fbc8f958e506",
+      "after": "a86e9475222ae2b1c957f36e14aa22af322495e6d73c3cd0e952fbc8f958e506"
+    },
+    "assets/fractures/031_townhouse_01.res": {
+      "before": "7810f771c7799ce0d2e33e6d35cd49750f08ecdbeb1807d5293e323026c7c550",
+      "after": "7810f771c7799ce0d2e33e6d35cd49750f08ecdbeb1807d5293e323026c7c550"
+    }
+  },
+  "baseline_missing_icon": true,
+  "private_icon_supplement_sha256": "c4190fc8a21f79e364115377db542e921ca9e8de165ec81e04e1ec5704b8884e",
+  "mutation_policy": "Only fresh build/simple-ui-20261002/<run-id> copies and fresh artifacts/simple-ui-20261002/<run-id> directories. No source, baseline, save, SDK or account writes.",
+  "slot_policy": "Require parent GO; one nice15 owned Godot job at a time, before then after, each bounded to 120 seconds."
+}

@@ -1,0 +1,104 @@
+{
+  "checks": 116,
+  "failures": [],
+  "metrics": {
+    "cut_0_false": {
+      "attached": 0,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 8,
+      "detachments": 1,
+      "detours": [],
+      "head_distance": 9.60007512278832,
+      "history_samples": 145,
+      "parked": 7,
+      "planning_count": 0,
+      "route_length": 87.9623856544495,
+      "traveled": 9.59993094950914
+    },
+    "cut_4_false": {
+      "attached": 4,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 8,
+      "detachments": 1,
+      "detours": [
+        {
+          "end": 271.749588234723,
+          "lateral": 1.35,
+          "start": 249.69458847791
+        }
+      ],
+      "head_distance": 207.661440047574,
+      "history_samples": 71,
+      "parked": 3,
+      "planning_count": 3,
+      "route_length": 87.9623856544495,
+      "traveled": 211.150679647923
+    },
+    "cut_7_true": {
+      "attached": 7,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 8,
+      "detachments": 1,
+      "detours": [],
+      "head_distance": 212.054879819476,
+      "history_samples": 131,
+      "parked": 0,
+      "planning_count": 1,
+      "route_length": 87.9623856544495,
+      "traveled": 212.051527269185
+    },
+    "loop": {
+      "attached": 8,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 8,
+      "detachments": 0,
+      "detours": [],
+      "head_distance": 200.534837247304,
+      "history_samples": 150,
+      "parked": 0,
+      "planning_count": 0,
+      "route_length": 87.9623856544495,
+      "traveled": 200.531764261425
+    },
+    "world_wide_false": {
+      "attached": 4,
+      "blocked": false,
+      "blocked_steps": 0,
+      "cars": 4,
+      "detachments": 0,
+      "detours": [
+        {
+          "end": 203.632866524579,
+          "lateral": 1.35,
+          "ramp_in": 7.0,
+          "start": 186.216676186444
+        }
+      ],
+      "head_distance": 146.116895508612,
+      "history_samples": 71,
+      "parked": 0,
+      "planning_count": 3,
+      "route_length": 87.9623856544495,
+      "traveled": 148.712465673685
+    },
+    "world_wide_true": {
+      "attached": 4,
+      "blocked": false,
+      "blocked_steps": 618,
+      "cars": 4,
+      "detachments": 0,
+      "detours": [],
+      "head_distance": 36.6935837831897,
+      "history_samples": 71,
+      "parked": 0,
+      "planning_count": 1,
+      "route_length": 87.9623856544495,
+      "traveled": 36.6930040121078
+    }
+  },
+  "scope": "Real headless physics and controller geometry; not rendered or phone performance evidence"
+}

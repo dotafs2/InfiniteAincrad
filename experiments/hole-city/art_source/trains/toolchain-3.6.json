@@ -1,0 +1,10 @@
+{
+  "source": "https://download.blender.org/release/Blender3.6/blender-3.6.23-macos-arm64.dmg",
+  "checksum_source": "https://download.blender.org/release/Blender3.6/blender-3.6.23.sha256",
+  "sha256": "ecbeaef4abbeb045de8465e78b3f97aec9b67faf2fc71b20e5eca37bf1caf874",
+  "official_checksum_match": true,
+  "reason": "Installed5.2/private4.2 macOS builds are Metal-only and crash in device detection before Python. Official3.6LTS retains OpenGL for CPU background asset authoring.",
+  "extractor": "Official7-Zip23.01 https://www.7-zip.org/a/7z2301-mac.tar.xz",
+  "extractor_sha256": "343eae9ccbbd8f68320adaaa3c87e0244cf39fad0fbec6b9d2cd3e5b0f8a5fbf",
+  "extraction": "7zz DMG/HFS file extraction; no mounted device; Applications shortcut skipped"
+}

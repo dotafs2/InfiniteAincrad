@@ -1,0 +1,39 @@
+{
+  "scope": "Local character checks only; upcoming gate02/native28 not asserted complete",
+  "fields": {
+    "Name": {
+      "characters": 28,
+      "limit": 30,
+      "passed": true
+    },
+    "Subtitle": {
+      "characters": 28,
+      "limit": 30,
+      "passed": true
+    },
+    "Keywords": {
+      "characters": 99,
+      "limit": 100,
+      "passed": true
+    },
+    "Promotional text": {
+      "characters": 138,
+      "limit": 170,
+      "passed": true
+    },
+    "Description": {
+      "characters": 1877,
+      "limit": 4000,
+      "passed": true
+    }
+  },
+  "public_field_text_unchanged": true,
+  "prior_copy_sha256": "2c7a85aa2f2a8e87ea3d71f84b25cbc383f4d1e06f8a049a6dad8a0aebf84426",
+  "copy_sha256": "b116f648bcefef052ef38278cd02268c54c13d6ae74b34df2c47c3e0db37612f",
+  "keyword_ascii_bytes": 99,
+  "target_gate": "artifacts/toy-city-20261003/web-gate-02/release.json",
+  "target_native_build": "28",
+  "source_acceptance_pending": true,
+  "saved_to_app_store_connect": false,
+  "uploaded": false
+}

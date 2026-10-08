@@ -1,0 +1,39 @@
+{
+  "before_sha256": {
+    "fidelity/skin_rarity.gd": "dc532376060506100c2eb9fa22da7addb43cf696826c271cc54ec8a34a7fc3a7",
+    "fidelity/skin_catalog.gd": "b32ac45522b7924eb2173a75d5f055a5f5c297cf6bfa99f933fd2b5fd63d8b8b",
+    "fidelity/skin_visual.gd": "32e0ca8f804402ea0e29bba61357f429156869b63af827b6e1743e2502b8b3ef",
+    "fidelity/skin_draw.gd": "d652e572d417a9f3e3f926576b568f4157a84b9234eea82781c062dee520a2e6",
+    "tests/skin_rarity_review.gd": "e98bcfc57160f41f694c3cb3607a83e0ab068de9de207b4d34f40af7bcacce7e",
+    "tests/skin_rarity_acceptance.gd": "15ef8679e31ca263bab21ef73e4e22a8d0f2c6b99d0448ccf2238f3a91d854bc",
+    "tests/skin_catalog_acceptance.gd": "51a8cfb369ababc39463e63f42c8a142531caf51002948c6e5a064f1836349a6",
+    "tests/skin_fx_acceptance.gd": "7d18f380ac0d1389696e0c42533318646c408883ccc28bcd62b5a9c97b3ddd63",
+    "tests/city_review_skin_catalog.gd": "fe43f99ce68ca48f4905725d49a30ed8dfde1b5aaa37b225e85461061cc4659b"
+  },
+  "after_sha256": {
+    "fidelity/skin_rarity.gd": "dc532376060506100c2eb9fa22da7addb43cf696826c271cc54ec8a34a7fc3a7",
+    "fidelity/skin_catalog.gd": "b32ac45522b7924eb2173a75d5f055a5f5c297cf6bfa99f933fd2b5fd63d8b8b",
+    "fidelity/skin_visual.gd": "32e0ca8f804402ea0e29bba61357f429156869b63af827b6e1743e2502b8b3ef",
+    "fidelity/skin_draw.gd": "d652e572d417a9f3e3f926576b568f4157a84b9234eea82781c062dee520a2e6",
+    "tests/skin_rarity_review.gd": "e98bcfc57160f41f694c3cb3607a83e0ab068de9de207b4d34f40af7bcacce7e",
+    "tests/skin_rarity_acceptance.gd": "15ef8679e31ca263bab21ef73e4e22a8d0f2c6b99d0448ccf2238f3a91d854bc",
+    "tests/skin_catalog_acceptance.gd": "51a8cfb369ababc39463e63f42c8a142531caf51002948c6e5a064f1836349a6",
+    "tests/skin_fx_acceptance.gd": "7d18f380ac0d1389696e0c42533318646c408883ccc28bcd62b5a9c97b3ddd63",
+    "tests/city_review_skin_catalog.gd": "fe43f99ce68ca48f4905725d49a30ed8dfde1b5aaa37b225e85461061cc4659b"
+  },
+  "stable": true,
+  "tests": {
+    "skin_rarity_review": {
+      "checks": 1555,
+      "failures": []
+    },
+    "skin_catalog_review": {
+      "checks": 202,
+      "failures": []
+    }
+  },
+  "old_geometry_probe_sha256": "6f391acf1233a787b9184e92f6994e0a1b3b91bd5fcb0aa891fd4e9f2127ec75",
+  "old_geometry_receipt_sha256": "d2909097b83b7779d6b2af37c844e230eb68946be6d2f4d4d7c6e6b6089b7984",
+  "helpers": "All owned helpers exited after these short pure-module tests.",
+  "scope": "No game.gd preload, user save, browser or GPU access."
+}

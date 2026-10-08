@@ -1,0 +1,909 @@
+{
+  "programs": [
+    {
+      "name": "asphalt",
+      "vertex": "probe.vert",
+      "fragment": "asphalt.frag",
+      "cases": []
+    },
+    {
+      "name": "facade",
+      "vertex": "probe.vert",
+      "fragment": "facade.frag",
+      "cases": []
+    },
+    {
+      "name": "palette",
+      "vertex": "probe.vert",
+      "fragment": "palette.frag",
+      "cases": []
+    },
+    {
+      "name": "food_glaze",
+      "vertex": "probe.vert",
+      "fragment": "food_glaze.frag",
+      "cases": []
+    },
+    {
+      "name": "reveal-coverage",
+      "vertex": "probe.vert",
+      "fragment": "reveal-coverage.frag",
+      "cases": [
+        {
+          "name": "central_ray_height_0.05",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              9.5,
+              17.099999999999998,
+              13.299999999999999
+            ]
+          },
+          "expected": "cut"
+        },
+        {
+          "name": "central_ray_height_0.25",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              7.5,
+              13.5,
+              10.5
+            ]
+          },
+          "expected": "cut"
+        },
+        {
+          "name": "central_ray_height_0.5",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              5.0,
+              9.0,
+              7.0
+            ]
+          },
+          "expected": "cut"
+        },
+        {
+          "name": "central_ray_height_0.8",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              1.9999999999999996,
+              3.599999999999999,
+              2.7999999999999994
+            ]
+          },
+          "expected": "cut"
+        },
+        {
+          "name": "central_ray_height_0.98",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              0.20000000000000018,
+              0.3600000000000003,
+              0.28000000000000025
+            ]
+          },
+          "expected": "cut"
+        },
+        {
+          "name": "beyond_small_hole_side_margin",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              4.0,
+              7.2,
+              6.800000000000001
+            ]
+          },
+          "expected": "cut"
+        },
+        {
+          "name": "movement_lookahead",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              6.4,
+              7.2,
+              5.6000000000000005
+            ]
+          },
+          "expected": "cut"
+        },
+        {
+          "name": "outside_expanded_region",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              4.0,
+              7.2,
+              9.2
+            ]
+          },
+          "expected": "solid"
+        },
+        {
+          "name": "background",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              -8,
+              2,
+              -10
+            ]
+          },
+          "expected": "solid"
+        },
+        {
+          "name": "ground_at_hole",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              0,
+              0,
+              0
+            ]
+          },
+          "expected": "solid"
+        },
+        {
+          "name": "below_ground",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              0,
+              -1,
+              0
+            ]
+          },
+          "expected": "solid"
+        },
+        {
+          "name": "above_camera",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              8,
+              19,
+              6
+            ]
+          },
+          "expected": "solid"
+        },
+        {
+          "name": "shadow_pass",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": true,
+            "probe_world": [
+              4.0,
+              7.2,
+              5.6000000000000005
+            ]
+          },
+          "expected": "solid"
+        },
+        {
+          "name": "home_preview_camera",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              19,
+              24,
+              26
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              4.0,
+              7.2,
+              5.6000000000000005
+            ]
+          },
+          "expected": "solid"
+        },
+        {
+          "name": "other_camera_direction",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              1,
+              0,
+              0
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              4.0,
+              7.2,
+              5.6000000000000005
+            ]
+          },
+          "expected": "solid"
+        },
+        {
+          "name": "disabled_on_title",
+          "uniforms": {
+            "hole_reveal_target": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3.0,
+              0.7,
+              2.0,
+              0.0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              4.0,
+              7.2,
+              5.6000000000000005
+            ]
+          },
+          "expected": "solid"
+        },
+        {
+          "name": "above_large_hole",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              10,
+              1,
+              0,
+              0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              0,
+              3,
+              0
+            ]
+          },
+          "expected": "cut"
+        },
+        {
+          "name": "away_from_camera_lookahead",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              3,
+              0.7,
+              0,
+              -7
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              1.9999999999999996,
+              3.599999999999999,
+              -2.800000000000001
+            ]
+          },
+          "expected": "cut"
+        },
+        {
+          "name": "large_hole_margin",
+          "uniforms": {
+            "hole_reveal_target": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "hole_reveal_camera": [
+              10.0,
+              18.0,
+              14.0,
+              0.0
+            ],
+            "hole_reveal_aperture": [
+              20,
+              2,
+              0,
+              0
+            ],
+            "hole_reveal_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492,
+              0.0
+            ],
+            "probe_camera": [
+              10.0,
+              18.0,
+              14.0
+            ],
+            "probe_back": [
+              0.4016096644512494,
+              0.722897396012249,
+              0.5622535302317492
+            ],
+            "probe_bool_shadow": false,
+            "probe_world": [
+              4.0,
+              7.2,
+              15.2
+            ]
+          },
+          "expected": "cut"
+        }
+      ]
+    }
+  ]
+}

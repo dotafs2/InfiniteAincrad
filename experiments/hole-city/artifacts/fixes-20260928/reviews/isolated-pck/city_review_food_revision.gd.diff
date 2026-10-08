@@ -1,0 +1,47 @@
+--- city_review_food_revision.gd before
++++ city_review_food_revision.gd after
+@@ -6,6 +6,30 @@
+ func check(ok:bool,label:String)->void:
+ 	checks+=1
+ 	if not ok:failures.append(label);push_error(label)
++func review_source_hash(path:String)->Variant:
++	# Exported packages can contain compiled scripts without original source text.
++	if not FileAccess.file_exists(path):return null
++	var digest:=FileAccess.get_sha256(path)
++	return null if digest.is_empty() else digest
++func write_optional_report(result:Dictionary)->bool:
++	var output:=""
++	for arg in OS.get_cmdline_user_args():
++		if arg.begins_with("--report="):output=arg.trim_prefix("--report=")
++		elif arg.begins_with("--output="):output=arg.trim_prefix("--output=")
++	if output.is_empty():return true
++	if not output.is_absolute_path() or "://" in output:
++		push_error("Review report requires an absolute filesystem path: "+output)
++		return false
++	var file:=FileAccess.open(output,FileAccess.WRITE)
++	if file==null:
++		push_error("Could not write review report: %s (error %d)"%[output,FileAccess.get_open_error()])
++		return false
++	file.store_string(JSON.stringify(result,"\t")+"\n");file.flush()
++	var error:=file.get_error();file.close()
++	if error!=OK:
++		push_error("Could not finish review report: %s (error %d)"%[output,error])
++		return false
++	return true
+ func run()->void:
+ 	if not OS.get_cmdline_user_args().has("--test"):quit(2);return
+ 	var game:Node3D=load("res://fidelity/main.tscn").instantiate();root.add_child(game)
+@@ -69,8 +93,10 @@
+ 	check(city.impacts.is_empty(),"Structural contact effects expire after settling")
+ 	metrics["structural_contacts"]=city.food_impact_events
+ 	var hashes:={}
+-	for path in ["fidelity/food_city.gd","fidelity/food_body.gd","fidelity/food_neighborhoods.gd","fidelity/food_shapes.gd"]:hashes[path]=FileAccess.get_sha256("res://"+path)
++	for path in ["fidelity/food_city.gd","fidelity/food_body.gd","fidelity/food_neighborhoods.gd","fidelity/food_shapes.gd"]:hashes[path]=review_source_hash("res://"+path)
+ 	var result:={"checks":checks,"failures":failures,"source_hashes":hashes,"metrics":metrics}
++	game.free();await process_frame
++	result["source_hash_note"]="Null means source text is unavailable in this runtime; package identity is recorded by the release gate."
++	var report_ok:=write_optional_report(result)
+ 	print("CITY_REVIEW_FOOD_REVISION "+JSON.stringify(result))
+-	FileAccess.open("res://artifacts/audit-fixes-20260928/food-revision-independent.json",FileAccess.WRITE).store_string(JSON.stringify(result,"\t"))
+-	game.free();await process_frame;quit(0 if failures.is_empty() else 1)
++	quit(0 if failures.is_empty() and report_ok else 1)

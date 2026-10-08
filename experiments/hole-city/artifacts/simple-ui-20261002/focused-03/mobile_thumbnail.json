@@ -1,0 +1,60 @@
+{
+  "checks": 3847,
+  "failures": [
+    "375-point phone at DPR1: logical footprint uses the current responsive card origin",
+    "375-point phone at DPR1: logical footprint uses the current responsive card origin",
+    "375-point phone at DPR1: logical footprint uses the current responsive card origin",
+    "375-point phone at DPR2: logical footprint uses the current responsive card origin",
+    "375-point phone at DPR2: logical footprint uses the current responsive card origin",
+    "375-point phone at DPR2: logical footprint uses the current responsive card origin",
+    "390-point phone at DPR3: logical footprint uses the current responsive card origin",
+    "390-point phone at DPR3: logical footprint uses the current responsive card origin",
+    "390-point phone at DPR3: logical footprint uses the current responsive card origin",
+    "Engine process failed; inspect the engine log"
+  ],
+  "profiles": [
+    {
+      "backing_size": "(540, 960)",
+      "name": "design size",
+      "stretch": "[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 0.0)]",
+      "target": "(144, 106)"
+    },
+    {
+      "backing_size": "(270, 480)",
+      "name": "narrow phone",
+      "stretch": "[X: (0.5, 0.0), Y: (0.0, 0.5), O: (0.0, 0.0)]",
+      "target": "(144, 106)"
+    },
+    {
+      "backing_size": "(375, 812)",
+      "name": "375-point phone at DPR1",
+      "stretch": "[X: (0.694444, 0.0), Y: (0.0, 0.694611), O: (0.0, 0.0)]",
+      "target": "(144, 106)"
+    },
+    {
+      "backing_size": "(750, 1624)",
+      "name": "375-point phone at DPR2",
+      "stretch": "[X: (1.388889, 0.0), Y: (0.0, 1.389222), O: (0.0, 0.0)]",
+      "target": "(201, 148)"
+    },
+    {
+      "backing_size": "(1170, 2532)",
+      "name": "390-point phone at DPR3",
+      "stretch": "[X: (2.166667, 0.0), Y: (0.0, 2.167808), O: (0.0, 0.0)]",
+      "target": "(313, 230)"
+    },
+    {
+      "backing_size": "(4320, 7680)",
+      "name": "large display capped",
+      "stretch": "[X: (8.0, 0.0), Y: (0.0, 8.0), O: (0.0, 0.0)]",
+      "target": "(432, 318)"
+    },
+    {
+      "backing_size": "(1200, 600)",
+      "name": "expanded landscape",
+      "stretch": "[X: (0.625, 0.0), Y: (0.0, 0.625), O: (0.0, 0.0)]",
+      "target": "(144, 106)"
+    }
+  ],
+  "scope": "Headless backing-size, AA configuration, layout and lifecycle; no GPU image or phone FPS claim"
+}

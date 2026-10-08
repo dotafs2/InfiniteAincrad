@@ -1,0 +1,49 @@
+{
+  "at_utc": "2026-10-03T05:12:21.345252+00:00",
+  "review_kind": "Authoring review of actual rendered contact sheet plus full first/toy boards, not independent root or user approval",
+  "text_layout": "All five captions fit, no clipped headlines or benefit badges, consistent frame and spacing",
+  "gameplay_pixels": "Complete original source viewports; HUD/player state untouched",
+  "source_preservation": "All five input hashes unchanged; three V5 captures match immutable V5 receipt",
+  "claims": "Three-world HOME choice, food fall/Sushi Express/toy castle/city fall correctly illustrated; no competitor comparison, in-round teleport or native proof claimed",
+  "continuation_boundary": "Toy castle frame at105.0667s follows actual paid30s continuation; ordinary90castle claim is absent",
+  "remaining": [
+    "Root/user visual approval",
+    "Fresh accepted candidate captures for formal new-release media",
+    "Two new preview masters/exports",
+    "Separate current-OS physical-device2.1 recording"
+  ],
+  "checks": [
+    {
+      "card": "01-three-worlds",
+      "source_hash_unchanged": true,
+      "draft_png_sha256": "b53ae099a1933fa4fb031eb5d234881b02ece3873cab01b24c1127acd272828c",
+      "opaque_dimensions_passed": true
+    },
+    {
+      "card": "02-food-stacks",
+      "source_hash_unchanged": true,
+      "draft_png_sha256": "813b9e8d1b43d25e07f1b861f149ae3a112014047a86e8abbc21b73dddf43c38",
+      "opaque_dimensions_passed": true
+    },
+    {
+      "card": "03-sushi-express",
+      "source_hash_unchanged": true,
+      "draft_png_sha256": "ffa76ea4c8f27bd203251cb60b02cba0f61cb08bf9b83fd1b6d269e42b45436f",
+      "opaque_dimensions_passed": true
+    },
+    {
+      "card": "04-toy-castles",
+      "source_hash_unchanged": true,
+      "draft_png_sha256": "e7590598d49c6d0b8b122f71c20a55dcdb7a5f6aa405ec8e2deaee759ad65b72",
+      "opaque_dimensions_passed": true
+    },
+    {
+      "card": "05-sunny-city",
+      "source_hash_unchanged": true,
+      "draft_png_sha256": "5b0471fbf553527c25f9549c50046439634d1695a6aa1e65b7208f40d51ce952",
+      "opaque_dimensions_passed": true
+    }
+  ],
+  "ready_for_upload": false,
+  "uploaded": false
+}

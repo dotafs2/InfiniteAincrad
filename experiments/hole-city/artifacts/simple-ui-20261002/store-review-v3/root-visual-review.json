@@ -1,0 +1,55 @@
+{
+  "version": "0.12.6",
+  "gate_sha256": "675fad23ac44a90a13a0ee37c4e03a92b2ae338480282db61ca238051fa68a96",
+  "guarded_inputs_unchanged": 810,
+  "root_reviewed_all_five_actual_pngs": true,
+  "screenshots_sha256": {
+    "01-black-hole-food-city": "4a63f7cf9aaeb0f187c19283f65e8b3daa14f9515f4f065c0c96220537869a9b",
+    "02-eat-grow": "3bd8e58d4e44140333fc70fa2fc2f5680a0e2e76759acd831859d7cf8d985429",
+    "03-sushi-express": "e491cebaebb52fb7522953757c9e9e3a3d03e3e588e30058cc71c7c9d425c9ce",
+    "04-swallow-city": "91e7e2253c3a483bffc074ef31f1fe5373dfb9e436aac38d65b87a7c4f082c70",
+    "05-original-skins": "42cb127169981c44a036abdf86b2ff36f9fab18ad1e43cb39b4e6e17e6499762"
+  },
+  "videos": {
+    "food": {
+      "output_sha256": "4e8a153b30faefcf0163d0b2c6b28c6cdf7a13245f74929ae434f96b6718addd",
+      "seconds": 20.0,
+      "width": 886,
+      "height": 1920,
+      "fps": 30,
+      "audio": {
+        "mean_db": -33.3,
+        "peak_db": -17.2
+      },
+      "selected_building_fragment_count": 0
+    },
+    "city": {
+      "output_sha256": "4d10630df581d10ed796fda6e9cc29d067f701465e8de52500e37059278c478f",
+      "seconds": 20.0,
+      "width": 886,
+      "height": 1920,
+      "fps": 30,
+      "audio": {
+        "mean_db": -33.6,
+        "peak_db": -16.0
+      },
+      "selected_building_fragment_count": 27
+    }
+  },
+  "root_reviewed_contact_sheets": true,
+  "natural_city_frame_2550_reviewed": true,
+  "natural_city_frame_2550_sha256": "90d307cd88e6d4ea459a3366577bfd89c244451d6cc08073b184348c562a9beb",
+  "browser_muted_playback_to_end_verified": true,
+  "browser_review_sha256": "f943bdfc9a815d2d9c04f5b8ed0117cc3ab3bc609474e75849f765cc23748be6",
+  "user_review_pending": true,
+  "actual_iphone_capture": false,
+  "uploaded": false,
+  "app_review_submitted": false,
+  "findings": [
+    "Clear original captions surround actual current gameplay; full video HUD remains visible",
+    "Food capture has actual edible tier progression and large stack swallowing; sushi is an actual moving train",
+    "Home-first dock and wrapped selected-skin description are visible in collection screenshot",
+    "Fresh city capture records natural fragments; static exterior checks prove no added cap geometry. Existing translucent swallow fade remains visible",
+    "Both complete twenty-second videos decode and reach ended with muted=true/error=null in actual browser"
+  ]
+}

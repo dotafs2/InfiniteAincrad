@@ -1,0 +1,104 @@
+[
+  {
+    "suite": "destruction_traffic",
+    "passed": true,
+    "report": {
+      "checks": 10,
+      "failures": [],
+      "fragments": 32,
+      "styles": 6,
+      "traffic": 8
+    }
+  },
+  {
+    "suite": "no_tether",
+    "passed": true,
+    "report": {
+      "checks": 10,
+      "failures": []
+    }
+  },
+  {
+    "suite": "resonance_action",
+    "passed": true,
+    "report": {
+      "checks": 13,
+      "failures": [],
+      "pulls": 2,
+      "pylons": 5
+    }
+  },
+  {
+    "suite": "mobile_maps",
+    "passed": true,
+    "report": {
+      "checks": 27,
+      "failures": []
+    }
+  },
+  {
+    "suite": "rim_fall",
+    "passed": true,
+    "report": {
+      "checks": 25,
+      "failures": [],
+      "results": [
+        {
+          "case": "car",
+          "collected": 1,
+          "max_tilt_deg": 164.219400962865,
+          "seconds": 1.2,
+          "visible_tilt_deg": 102.00674598804
+        },
+        {
+          "case": "turned_car",
+          "collected": 1,
+          "max_tilt_deg": 128.63534842968,
+          "seconds": 1.06666666666667,
+          "visible_tilt_deg": 82.3198991675988
+        },
+        {
+          "case": "lamp",
+          "collected": 1,
+          "max_tilt_deg": 63.927843226139,
+          "seconds": 2.48333333333333,
+          "visible_tilt_deg": 63.927843226139
+        },
+        {
+          "case": "tall_box_bridge",
+          "collected": 0,
+          "max_tilt_deg": 60.0951779328967,
+          "seconds": 15.0,
+          "visible_tilt_deg": 60.0951779328967
+        },
+        {
+          "case": "centered_box",
+          "collected": 1,
+          "max_tilt_deg": 0.0,
+          "seconds": 0.716666666666667,
+          "visible_tilt_deg": 0.0
+        }
+      ]
+    }
+  },
+  {
+    "suite": "actor_fall",
+    "passed": true,
+    "report": {
+      "checks": 32,
+      "failures": []
+    }
+  },
+  {
+    "suite": "snack_city",
+    "passed": true,
+    "report": {
+      "buildings": 38,
+      "checks": 39,
+      "failures": [],
+      "initial_edibles": 1096,
+      "npc_count": 48,
+      "types": 10
+    }
+  }
+]

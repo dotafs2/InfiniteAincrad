@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "scope": "Independent exact diff review only; no repeated engine test",
+  "before_sha256": "cd6c09da462d9fd10196b0c409e705bfce2eb3280c6eaeb93868a23a392c52c6",
+  "after_sha256": "b87588fdeeaa8b7bbf217dfbd6f6ee95465007f5cb7ee932373135628e1998e8",
+  "allowed_changes": [
+    "Extract identical opening predicate into pure helper",
+    "Two fixed opening ceilings for measured intentional new content",
+    "Four one-triangle/one-cell overrun counterexamples",
+    "Accurate content/measurement comment and assertion label"
+  ],
+  "old_caps": [
+    [
+      0.85,
+      721252,
+      67
+    ],
+    [
+      7.2,
+      1144048,
+      119
+    ]
+  ],
+  "new_caps": [
+    [
+      0.85,
+      744252,
+      69
+    ],
+    [
+      7.2,
+      1149552,
+      124
+    ]
+  ],
+  "preserved": "All geometry/finish checks, all global original/extension/total ceilings, all eight outer-frustum ceilings and remaining test statements are unchanged."
+}

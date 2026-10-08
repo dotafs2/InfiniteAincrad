@@ -1,0 +1,91 @@
+{
+  "checks": 191,
+  "failures": [],
+  "metrics": {
+    "city": {
+      "batches": 29,
+      "categories": {
+        "ambient_actor": 48,
+        "authored_actor": 152,
+        "barrier": 4,
+        "bench": 4,
+        "bike_rack": 4,
+        "bin": 54,
+        "bollard": 4,
+        "building": 48,
+        "bus_stop": 4,
+        "cone": 26,
+        "cover": 2,
+        "dumpster": 4,
+        "fence": 44,
+        "hydrant": 4,
+        "kiosk": 4,
+        "lamp": 32,
+        "mailbox": 4,
+        "person": 64,
+        "planter": 4,
+        "railing": 36,
+        "sign": 4,
+        "signal_pylon": 5,
+        "traffic_light": 4,
+        "tree": 48,
+        "vehicle": 49
+      },
+      "diagnostics": {
+        "adapted_materials": 172,
+        "aperture": "(1.85, 0.55, 0.0, 0.0)",
+        "bound_batches": 29,
+        "bound_meshes": 935,
+        "camera": "(11.0, 18.0, 37.0, 0.0)",
+        "camera_back": "(0.40161, 0.722897, 0.562254, 0.0)",
+        "per_frame_scene_scans": 0,
+        "preserved_shader_bindings": 48,
+        "skipped_cosmetics": 0,
+        "target": "(1.0, 0.0, 23.0, 0.0)",
+        "unsupported": [],
+        "updates": 1
+      },
+      "emissive_sources": 29,
+      "hidden_originals": 92,
+      "materials": 935,
+      "skinned_meshes": 64,
+      "source_materials": 172
+    },
+    "food": {
+      "batches": 527,
+      "categories": {
+        "food_bacon": 87,
+        "food_berry": 153,
+        "food_burger": 240,
+        "food_cake": 273,
+        "food_cookie": 303,
+        "food_donut": 705,
+        "food_egg": 89,
+        "food_pancake": 471,
+        "food_pizza": 109,
+        "food_sushi": 110,
+        "person": 48
+      },
+      "diagnostics": {
+        "adapted_materials": 1,
+        "aperture": "(1.85, 0.55, 0.0, 0.0)",
+        "bound_batches": 527,
+        "bound_meshes": 2588,
+        "camera": "(11.0, 18.0, 37.0, 0.0)",
+        "camera_back": "(0.40161, 0.722897, 0.562254, 0.0)",
+        "per_frame_scene_scans": 0,
+        "preserved_shader_bindings": 3067,
+        "skipped_cosmetics": 0,
+        "target": "(1.0, 0.0, 23.0, 0.0)",
+        "unsupported": [],
+        "updates": 1
+      },
+      "emissive_sources": 0,
+      "hidden_originals": 2532,
+      "materials": 2588,
+      "skinned_meshes": 48,
+      "source_materials": 1
+    }
+  },
+  "scope": "Headless actual-scene material/lifecycle tests plus CPU geometry mirror; no GPU/browser/iPhone performance claim"
+}

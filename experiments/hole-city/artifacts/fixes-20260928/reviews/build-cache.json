@@ -1,0 +1,88 @@
+{
+  "scope": "Read-only bounded review of private build cache; not a full historical player-save comparison",
+  "contained_paths": [
+    {
+      "path": ".build/godot-standard/_sc_",
+      "resolved": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/.build/godot-standard/_sc_",
+      "within_project": true,
+      "leaf_symlink": false,
+      "bytes": 68
+    },
+    {
+      "path": ".build/godot-standard/Godot.app/Contents/MacOS/Godot",
+      "resolved": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/.build/godot-standard/Godot.app/Contents/MacOS/Godot",
+      "within_project": true,
+      "leaf_symlink": false,
+      "bytes": 351312912
+    },
+    {
+      "path": ".build/godot-standard/editor_data/cache/editor_doc_cache-4.7.res",
+      "resolved": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/.build/godot-standard/editor_data/cache/editor_doc_cache-4.7.res",
+      "within_project": true,
+      "leaf_symlink": false,
+      "bytes": 3269648
+    },
+    {
+      "path": ".build/godot-standard/editor_data/editor_settings-4.7.tres",
+      "resolved": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/.build/godot-standard/editor_data/editor_settings-4.7.tres",
+      "within_project": true,
+      "leaf_symlink": false,
+      "bytes": 17774
+    }
+  ],
+  "prior_runtime_manifest": "artifacts/audit-fixes-20260928/cpu/summary.json",
+  "matching_prior_files": 38,
+  "compared_prior_files": 38,
+  "mismatches": [],
+  "unexpected_import_errors": [],
+  "strict_error_probes": {
+    "ERROR: Cannot create editor cache directory": true,
+    "ERROR: Cannot save editor settings": true,
+    "SCRIPT ERROR: Parse Error: Invalid token": true,
+    "ERROR: Failed to open global editor cache": true,
+    "ERROR: Permission denied": true
+  },
+  "marker_sha256": "f88dc0656d074e876bea613932fd320585357ea07d3e47981a01da3bdb2dfbea",
+  "import_log_sha256": "59593fe44c8fc662c8bd54f66bb9ee674be8fc3b24b726c73b78218ffd764490",
+  "release_gate_sha256": "0734792d033bda7678f659e394d11549b8f80cd47095861e92f5cc0d9b1f7249",
+  "current_compared_source_sha256": {
+    "fidelity/ads_bridge.gd": "43cc95c71bd60b7eb1db196ea7794337de7e6683414adaf6dfd94d541ee1eef1",
+    "fidelity/art.gd": "3d20f4b3e320d8f701c807165570111fa2ff34eaa63954b3d8f0e1f361f61a16",
+    "fidelity/catalog_city.gd": "c88210d3661ed24b856ddd408983930ceb6fb0b6eba9a576f5f8d359c52b7d0a",
+    "fidelity/city_districts.gd": "34b3532b21001108089178d02886adf62123310668014bff1a152c59364871f4",
+    "fidelity/cut_ground.gd": "d6130898639fe621e2776c4e3cea84c1332381684e239d3a93134502e19e1b69",
+    "fidelity/device_qa.gd": "b9246ba88c85a499515cab0368bd28a1e0b58429fd593c4e7ee209d24abab429",
+    "fidelity/food_body.gd": "f1efeff87c1526f3e03466e35366f7f9ecacf3cd22343a45b7eae12cc74adc9c",
+    "fidelity/food_city.gd": "8c17ec4f719f1943f39c8e3131131b255e3bc4112cd2bad74bb8dc8c595edc25",
+    "fidelity/food_neighborhoods.gd": "0be501f102e34a9a8fc7707ec133de783885148908aa35be6ae42600c9cf0d8a",
+    "fidelity/food_query.gd": "74940e06712db9f83e9926395f5fbbe2751125e4b57918729c7a376ac1a50f22",
+    "fidelity/food_shapes.gd": "83808ada67a6dca18fe0597f16d8923912aab9a82aa34e98af3e3199f08fa496",
+    "fidelity/food_surface.gd": "86fecdfb022611d5a03d9b7938abca41e55083498aa5d703ebb898a878fb2a5b",
+    "fidelity/fracture_cache.gd": "f7425ec6bf09b3434ddab7a3d34879109800038fda07802f7ff36de66ab79785",
+    "fidelity/game.gd": "b408061e409281654bd10497cb36e492621f369ec282600aa3f298e02bb3cff7",
+    "fidelity/hole.gd": "8111aa2d6d3c55ed506c7d12882da56189559cf8f585e0dc90aa3707552b7ee7",
+    "fidelity/mesh_batch.gd": "ee226d2766047943300b3626e6a7fa9d86fce91ef815c3bdc44b3602ec821f26",
+    "fidelity/placement_grid.gd": "d009f5cc75030c20b39c010803593dcbcbb96dbc9c0a456804241701bfda5ffc",
+    "fidelity/prop_collision_cache.gd": "7ba4d609904430c3be902a6497a3cba6ac435e67c1aa51af62933b6f08f63164",
+    "fidelity/rim_body.gd": "9089dfaa7c890977e69f604d58c721fce1961ef4b7e104d9c5ba1d0162706c5f",
+    "fidelity/scene_audit.gd": "d2473972545e4785f62ba0b5875a835f5d060ee301027c33071b2346a208f8f5",
+    "fidelity/skin_catalog.gd": "8fd8df7f1590ab635e5ce2a5b4b21757d3f938f493d9135a65fcc3bc867ec2be",
+    "fidelity/skin_motifs.gd": "0db569773783e174b088ecf716bf10592b448c432b7508a173af58665f7a637e",
+    "fidelity/skin_visual.gd": "06a90d95ad2364d63cc206525c3a5556cc0947471d1439d46627236103a2163c",
+    "fidelity/static_batch.gd": "5a81f7177ee0ff8d473a52abd5741e56dd20e2e84fbcfd4c3740b91d2f3b1ae3",
+    "fidelity/street_layout.gd": "ecbbce49eabc95a8a59835407e07a0e470f79a09a025bfd5e441fd2b0fcf220c",
+    "fidelity/swallowable.gd": "1438b7b2ef3bad532578e58023a6e631f778fc2adb52c79a5ea24f3c877c3b96",
+    "fidelity/ui.gd": "d53281e5ab2513300b4da3bfdf0483d625e29fc1f965043693ab76baf57234b8",
+    "fidelity/asphalt.gdshader": "8d0f5a10604165908dda7f68d6f0d602ea065d987f70f4f670f2f3396db964a3",
+    "fidelity/cinder_flame.gdshader": "ecf6a514855efc1e93684e4e91b51e13b04faf12870627fb8e1c02ffe3c43907",
+    "fidelity/facade.gdshader": "cb0124fa77535788e65ac35bc4e7b5ce0d36338fe83e1948da7bc11570588159",
+    "fidelity/food_glaze.gdshader": "24359cbb82e77823f6ea5e6f3410a29dc11c685188d424c23d4111d9b45bba36",
+    "fidelity/palette.gdshader": "fc44a1e85aeda3711220e8102150b49e5ad9a0e070172ffd011fd97f593ab4a8",
+    "fidelity/shaders/accretion.gdshader": "1284055f6b342308a8bb30b7e65d98d7d5f64049b8fa1285ddcb15735042146a",
+    "fidelity/shaders/aurora.gdshader": "38f339f6ab05cce1afd9ed18b52bf00e360f15dfed283fcdc11467271df23800",
+    "fidelity/shaders/solid_skin.gdshader": "2e008f85c1c60fe3582a1cad9571f55c6c04eb0cbb0dd24e6336b67e8a297843",
+    "fidelity/shaders/tide.gdshader": "e2a3ad7347f8049c5ee0814ba51e40eaf69a1f1d34a574a892d4689b6e62f1d1",
+    "tests/mobile_profile.gd": "8f1d7bdc714e6d0ba01bfcbfe00ac63d5f2cf9c40404f480d51a1d1aeb62ff1c",
+    "project.godot": "3631c0759174bfb002e6761d75653476007023ce99803f9129f4d022f7d4b1ea"
+  }
+}

@@ -1,0 +1,471 @@
+{
+  "device": "Apple M1 Pro",
+  "models": [
+    {
+      "aabb_max": [
+        0.159730106592178,
+        0.649999976158142,
+        0.127414777874947
+      ],
+      "aabb_min": [
+        -0.159730106592178,
+        0.0,
+        -0.202201709151268
+      ],
+      "key": "models/zombie",
+      "materials": [
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.100000001490116,
+          "roughness": 0.430000007152557,
+          "surface": 0
+        }
+      ],
+      "surfaces": 1,
+      "triangles": 1948
+    },
+    {
+      "aabb_max": [
+        0.159730106592178,
+        0.649999976158142,
+        0.127414777874947
+      ],
+      "aabb_min": [
+        -0.159730106592178,
+        0.0,
+        -0.202201709151268
+      ],
+      "key": "mobile/zombie_near",
+      "materials": [
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.0799999982118607,
+          "roughness": 0.550000011920929,
+          "surface": 0
+        }
+      ],
+      "surfaces": 1,
+      "triangles": 320
+    },
+    {
+      "aabb_max": [
+        0.159730106592178,
+        0.649999976158142,
+        0.127414777874947
+      ],
+      "aabb_min": [
+        -0.159730106592178,
+        0.0,
+        -0.202201709151268
+      ],
+      "key": "mobile/zombie_mid",
+      "materials": [
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.0799999982118607,
+          "roughness": 0.550000011920929,
+          "surface": 0
+        }
+      ],
+      "surfaces": 1,
+      "triangles": 144
+    },
+    {
+      "aabb_max": [
+        0.159730106592178,
+        0.649999976158142,
+        0.127414777874947
+      ],
+      "aabb_min": [
+        -0.159730106592178,
+        0.0,
+        -0.202201709151268
+      ],
+      "key": "mobile/zombie_far",
+      "materials": [
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.0799999982118607,
+          "roughness": 0.550000011920929,
+          "surface": 0
+        }
+      ],
+      "surfaces": 1,
+      "triangles": 66
+    },
+    {
+      "aabb_max": [
+        0.222087398171425,
+        1.0,
+        0.150173902511597
+      ],
+      "aabb_min": [
+        -0.222087398171425,
+        0.0,
+        -0.510788798332214
+      ],
+      "key": "models/infantry",
+      "materials": [
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.100000001490116,
+          "roughness": 0.430000007152557,
+          "surface": 0
+        }
+      ],
+      "surfaces": 1,
+      "triangles": 3410
+    },
+    {
+      "aabb_max": [
+        0.222087398171425,
+        1.0,
+        0.150173902511597
+      ],
+      "aabb_min": [
+        -0.222087398171425,
+        0.0,
+        -0.510788798332214
+      ],
+      "key": "mobile/infantry",
+      "materials": [
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.0799999982118607,
+          "roughness": 0.550000011920929,
+          "surface": 0
+        }
+      ],
+      "surfaces": 1,
+      "triangles": 2199
+    },
+    {
+      "aabb_max": [
+        0.606935679912567,
+        1.79999995231628,
+        0.436234951019287
+      ],
+      "aabb_min": [
+        -0.606935560703278,
+        0.0,
+        -1.01684463024139
+      ],
+      "key": "models/gunner",
+      "materials": [
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.0700000002980232,
+          "roughness": 0.46000000834465,
+          "surface": 0
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.649999976158142,
+          "roughness": 0.270000010728836,
+          "surface": 1
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.100000001490116,
+          "roughness": 0.360000014305115,
+          "surface": 2
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.75,
+          "roughness": 0.230000004172325,
+          "surface": 3
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.140000000596046,
+          "roughness": 0.28999999165535,
+          "surface": 4
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.119999997317791,
+          "roughness": 0.280000001192093,
+          "surface": 5
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.0,
+          "roughness": 0.550000011920929,
+          "surface": 6
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.0,
+          "roughness": 0.660000026226044,
+          "surface": 7
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.0,
+          "roughness": 0.529999971389771,
+          "surface": 8
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.100000001490116,
+          "roughness": 0.400000005960464,
+          "surface": 9
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.699999988079071,
+          "roughness": 0.239999994635582,
+          "surface": 10
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.600000023841858,
+          "roughness": 0.230000004172325,
+          "surface": 11
+        }
+      ],
+      "surfaces": 12,
+      "triangles": 14308
+    },
+    {
+      "aabb_max": [
+        0.606935679912567,
+        1.79999995231628,
+        0.436234951019287
+      ],
+      "aabb_min": [
+        -0.606935560703278,
+        0.0,
+        -1.01684463024139
+      ],
+      "key": "mobile/gunner",
+      "materials": [
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.0799999982118607,
+          "roughness": 0.550000011920929,
+          "surface": 0
+        },
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.680000007152557,
+          "roughness": 0.280000001192093,
+          "surface": 1
+        }
+      ],
+      "surfaces": 2,
+      "triangles": 3599
+    },
+    {
+      "aabb_max": [
+        1.01447558403015,
+        3.40000009536743,
+        0.459527313709259
+      ],
+      "aabb_min": [
+        -1.01447558403015,
+        0.0,
+        -0.587592303752899
+      ],
+      "key": "models/mech",
+      "materials": [
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.649999976158142,
+          "roughness": 0.270000010728836,
+          "surface": 0
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.699999988079071,
+          "roughness": 0.239999994635582,
+          "surface": 1
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.600000023841858,
+          "roughness": 0.230000004172325,
+          "surface": 2
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.140000000596046,
+          "roughness": 0.28999999165535,
+          "surface": 3
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.300000011920929,
+          "roughness": 0.189999997615814,
+          "surface": 4
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.75,
+          "roughness": 0.230000004172325,
+          "surface": 5
+        },
+        {
+          "has_colors": false,
+          "import_srgb": false,
+          "import_vertex_albedo": false,
+          "metallic": 0.0700000002980232,
+          "roughness": 0.46000000834465,
+          "surface": 6
+        }
+      ],
+      "surfaces": 7,
+      "triangles": 14256
+    },
+    {
+      "aabb_max": [
+        1.01447558403015,
+        3.40000009536743,
+        0.459527313709259
+      ],
+      "aabb_min": [
+        -1.01447558403015,
+        0.0,
+        -0.587592303752899
+      ],
+      "key": "mobile/mech",
+      "materials": [
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.680000007152557,
+          "roughness": 0.280000001192093,
+          "surface": 0
+        },
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.0799999982118607,
+          "roughness": 0.550000011920929,
+          "surface": 1
+        },
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.0799999982118607,
+          "roughness": 0.550000011920929,
+          "surface": 2
+        }
+      ],
+      "surfaces": 3,
+      "triangles": 3700
+    },
+    {
+      "aabb_max": [
+        0.159730106592178,
+        0.649999976158142,
+        0.127414777874947
+      ],
+      "aabb_min": [
+        -0.159730106592178,
+        0.0,
+        -0.202201709151268
+      ],
+      "key": "mobile/zombie_near",
+      "materials": [
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.0799999982118607,
+          "roughness": 0.550000011920929,
+          "surface": 0
+        }
+      ],
+      "surfaces": 1,
+      "triangles": 320
+    },
+    {
+      "aabb_max": [
+        0.159730106592178,
+        0.649999976158142,
+        0.127414777874947
+      ],
+      "aabb_min": [
+        -0.159730106592178,
+        0.0,
+        -0.202201709151268
+      ],
+      "key": "mobile/zombie_far",
+      "materials": [
+        {
+          "has_colors": true,
+          "import_srgb": false,
+          "import_vertex_albedo": true,
+          "metallic": 0.0799999982118607,
+          "roughness": 0.550000011920929,
+          "surface": 0
+        }
+      ],
+      "surfaces": 1,
+      "triangles": 66
+    }
+  ],
+  "renderer": "gl_compatibility",
+  "scope": "GPU art import/contact only; no phone FPS claim.",
+  "viewport": [
+    1536,
+    1050
+  ]
+}

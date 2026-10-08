@@ -1,0 +1,100 @@
+{
+  "checks": 38,
+  "failures": [],
+  "sessions": [
+    {
+      "admission_checks": 100,
+      "batch_draws": 52,
+      "batched": 511,
+      "farthest_new_spawn": 15.9981212615967,
+      "max_airborne": 30,
+      "retirements": 0,
+      "samples": [
+        {
+          "alive": 77,
+          "landed": 65,
+          "seconds": 30.0,
+          "spawned": 78
+        },
+        {
+          "alive": 149,
+          "landed": 138,
+          "seconds": 60.0,
+          "spawned": 150
+        },
+        {
+          "alive": 227,
+          "landed": 209,
+          "seconds": 90.0,
+          "spawned": 228
+        },
+        {
+          "alive": 299,
+          "landed": 282,
+          "seconds": 120.0,
+          "spawned": 300
+        },
+        {
+          "alive": 374,
+          "landed": 353,
+          "seconds": 150.0,
+          "spawned": 375
+        },
+        {
+          "alive": 445,
+          "landed": 425,
+          "seconds": 180.0,
+          "spawned": 447
+        },
+        {
+          "alive": 516,
+          "landed": 499,
+          "seconds": 210.0,
+          "spawned": 518
+        },
+        {
+          "alive": 581,
+          "landed": 558,
+          "seconds": 240.0,
+          "spawned": 583
+        }
+      ],
+      "traveling": false
+    },
+    {
+      "admission_checks": 50,
+      "batch_draws": 161,
+      "batched": 31,
+      "farthest_new_spawn": 15.9981212615967,
+      "max_airborne": 21,
+      "retirements": 128,
+      "samples": [
+        {
+          "alive": 42,
+          "landed": 28,
+          "seconds": 30.0,
+          "spawned": 78
+        },
+        {
+          "alive": 47,
+          "landed": 36,
+          "seconds": 60.0,
+          "spawned": 150
+        },
+        {
+          "alive": 45,
+          "landed": 27,
+          "seconds": 90.0,
+          "spawned": 228
+        },
+        {
+          "alive": 57,
+          "landed": 42,
+          "seconds": 120.0,
+          "spawned": 300
+        }
+      ],
+      "traveling": true
+    }
+  ]
+}

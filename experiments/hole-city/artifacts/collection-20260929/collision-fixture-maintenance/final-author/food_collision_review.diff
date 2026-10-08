@@ -1,0 +1,89 @@
+--- before/food_collision_review.gd
++++ tests/food_collision_review.gd
+@@ -2,6 +2,7 @@
+ ## Non-author collision/resource regression. Authoring visuals are compared with
+ ## independently extracted hashes from the preserved pre-fix exported package.
+ const KINDS:=["bacon","egg","cake","donut","burger","cookie","berry","sushi","pancake","pizza"]
++const CONTACT_PILE_AT:=Vector2(0,88)
+ const EXPECTED_VISUALS:Dictionary={
+   "bacon": "0efadf7468027a0e325281b5b5a6c934a1c6d010f765e0c87ae52b1663beed77",
+   "bacon_tower": "fc48aa0e463d998284744c4588d4f9220f0cd815b4a9029467dc84c457fc8940",
+@@ -191,9 +192,19 @@
+ 	check(batched>0,"Settled replacement colliders still enter rain batching")
+ 	# Contact-rich non-rain floors use the same replacement and may tumble
+ 	# against another ingredient before reaching the real ground.
++	# The former (70,24) location now adjoins a genuine perimeter building.
++	# Keep the six-piece setup intact, but first prove its drop volume is empty.
++	var pile_volume:=BoxShape3D.new();pile_volume.size=Vector3(10,14,10)
++	var pile_air:=PhysicsShapeQueryParameters3D.new();pile_air.shape=pile_volume;pile_air.collision_mask=3;pile_air.exclude=[game.ground.body.get_rid()]
++	pile_air.transform=Transform3D(Basis.IDENTITY,Vector3(CONTACT_PILE_AT.x,7.015,CONTACT_PILE_AT.y))
++	var pile_clear:=game.get_world_3d().direct_space_state.intersect_shape(pile_air,1).is_empty()
++	var pile_ground:=PhysicsRayQueryParameters3D.create(Vector3(CONTACT_PILE_AT.x,.06,CONTACT_PILE_AT.y),Vector3(CONTACT_PILE_AT.x,-.08,CONTACT_PILE_AT.y),1)
++	var pile_hit:=game.get_world_3d().direct_space_state.intersect_ray(pile_ground)
++	check(pile_clear,"Entire tilted pile drop and rest volume clears unrelated scene bodies")
++	check(not pile_hit.is_empty() and pile_hit.rid==game.ground.body.get_rid(),"Translated pile fixture has actual uncut terrain")
+ 	var contact_bodies:Array[Node3D]=[];var next_floor:=.6
+ 	for i in 6:
+-		var body:Node3D=city.food("cookie" if i%2==0 else "burger",Vector2(70,24),.7,2)
++		var body:Node3D=city.food("cookie" if i%2==0 else "burger",CONTACT_PILE_AT,.7,2)
+ 		body.rotation=Vector3(.12*i,.17*i,.2)
+ 		var low:=INF;var high:=-INF
+ 		for point in collision(body).points:
+@@ -211,8 +222,14 @@
+ 		if tick<360:continue
+ 		for body in contact_bodies:
+ 			var id:=body.get_instance_id()
+-			if not contact_motion.has(id):contact_motion[id]={"at":body.position,"rotation":body.quaternion,"max_displacement":0.0,"max_angle":0.0,"min_y":body.position.y,"max_y":body.position.y}
++			if not contact_motion.has(id):contact_motion[id]={"at":body.position,"rotation":body.quaternion,"max_displacement":0.0,"max_angle":0.0,"min_y":body.position.y,"max_y":body.position.y,"previous":body.global_position,"horizontal_path":0.0,"path_3d":0.0,"samples":0,"intervals":0,"vertical_profile":[]}
+ 			var sample:Dictionary=contact_motion[id]
++			if sample.samples>0:
++				var traveled:Vector3=body.global_position-sample.previous
++				sample.horizontal_path+=Vector2(traveled.x,traveled.z).length()
++				sample.path_3d+=traveled.length();sample.intervals+=1
++			sample.previous=body.global_position;sample.samples+=1
++			sample.vertical_profile.append(body.global_position.y)
+ 			sample.max_displacement=maxf(sample.max_displacement,body.position.distance_to(sample.at))
+ 			sample.max_angle=maxf(sample.max_angle,body.quaternion.angle_to(sample.rotation))
+ 			sample.min_y=minf(sample.min_y,body.position.y);sample.max_y=maxf(sample.max_y,body.position.y)
+@@ -220,10 +237,17 @@
+ 	for body in contact_bodies:
+ 		check(body.position.is_finite() and body.linear_velocity.is_finite() and body.position.y>-.1 and body.position.y<5.0,"Tilted non-rain round food contacts remain finite and supported")
+ 		var window:Dictionary=contact_motion[body.get_instance_id()]
+-		# Contact solvers alternate small angular velocities; measure the actual
+-		# final three-second pose envelope instead of calling one such sample spin.
+-		check(body.linear_velocity.length()<.3 and window.max_displacement<.2 and window.max_angle<deg_to_rad(5.0) and window.max_y-window.min_y<.05,"Tilted round-food pile remains within a bounded three-second contact envelope")
+-		contact_rest.append({"kind":body.get_meta("food_kind"),"speed":body.linear_velocity.length(),"angular_speed":body.angular_velocity.length(),"position":str(body.position),"max_displacement_3s":contact_motion[body.get_instance_id()].max_displacement,"max_rotation_degrees_3s":rad_to_deg(contact_motion[body.get_instance_id()].max_angle),"vertical_range_3s":contact_motion[body.get_instance_id()].max_y-contact_motion[body.get_instance_id()].min_y})
++		# Prior/current same-site traces both show native gravity/contact velocity
++		# phases above .3 while actual motion stays in a small resting envelope.
++		# Measure sustained XZ travel over the same final 180 samples instead;
++		# keep all original pose limits, including the .05 m vertical envelope.
++		# This asserts bounded contact motion, not complete sleep or zero motion.
++		check(window.samples==180 and window.intervals==179,"Contact motion uses the complete original 180-sample observation window")
++		var measured_seconds:float=float(window.intervals)/float(Engine.physics_ticks_per_second)
++		var horizontal_speed:float=window.horizontal_path/measured_seconds
++		var path_speed_3d:float=window.path_3d/measured_seconds
++		check(horizontal_speed<.3 and window.max_displacement<.2 and window.max_angle<deg_to_rad(5.0) and window.max_y-window.min_y<.05,"Tilted round-food pile remains within a bounded three-second contact envelope")
++		contact_rest.append({"kind":body.get_meta("food_kind"),"speed":body.linear_velocity.length(),"angular_speed":body.angular_velocity.length(),"position":str(body.position),"max_displacement_3s":window.max_displacement,"max_rotation_degrees_3s":rad_to_deg(window.max_angle),"vertical_range_3s":window.max_y-window.min_y,"samples":window.samples,"intervals":window.intervals,"measured_seconds":measured_seconds,"actual_horizontal_path_speed":horizontal_speed,"actual_path_speed_3d":path_speed_3d,"vertical_profile":window.vertical_profile})
+ 	var ready_receipts:=receipts.size()
+ 	for start in [0,8]:
+ 		for h in game.holes:h.active=false
+@@ -247,9 +271,9 @@
+ 	# actual ground is removed; each piece still needs its own complete fall.
+ 	for hole in game.holes:hole.active=false
+ 	game.player.active=true;game.player.enabled=false;game.player.score=0;game.player.award(240)
+-	game.player.position=Vector3(70,0,24);game.ground.sync()
++	game.player.position=Vector3(CONTACT_PILE_AT.x,0,CONTACT_PILE_AT.y);game.ground.sync()
+ 	await physics_frame
+-	var ground_query:=PhysicsRayQueryParameters3D.create(Vector3(70,2,24),Vector3(70,-2,24),1)
++	var ground_query:=PhysicsRayQueryParameters3D.create(Vector3(CONTACT_PILE_AT.x,2,CONTACT_PILE_AT.y),Vector3(CONTACT_PILE_AT.x,-2,CONTACT_PILE_AT.y),1)
+ 	check(game.get_world_3d().direct_space_state.intersect_ray(ground_query).is_empty(),"Pile opening removes the actual collision floor")
+ 	var pile_ids:Array[int]=[]
+ 	for body in contact_bodies:
+@@ -306,6 +330,7 @@
+ 	check(rim_low<rim_start-1.0,"Removing partial rim support produces a real downward trajectory")
+ 	check(receipts.has(rim_id) and receipts[rim_id].count==1 and receipts[rim_id].top< -3.5,"Thin rim-supported piece is never held across a fully open mouth")
+ 	metrics["pile_receipts"]=pile_receipts
++	metrics["pile_fixture"]={"at":str(CONTACT_PILE_AT),"empty_drop_volume":pile_clear}
+ 	metrics["target_rain_receipts"]=target_receipts;metrics["rain_rest"]=rain_rest;metrics["pile_rest"]=contact_rest;metrics["landed_rain"]=landed;metrics["settled_batch_count"]=batched;metrics["collection_receipts"]=receipts.size()-ready_receipts
+ func run()->void:
+ 	if not OS.get_cmdline_user_args().has("--test"):quit(2);return

@@ -1,0 +1,17 @@
+{
+  "checks": 34,
+  "failures": [
+    "Crossing the sixty-percent threshold increments the building count once",
+    "Later receipts from the same building do not increment it again",
+    "Eleven ordinary structures do not substitute for the landmark objective",
+    "Large heap advances on its threshold receipt",
+    "Repeated heap receipt stays deduplicated",
+    "Partially collapsed landmark has not been counted as eaten",
+    "Landmark completion satisfies both the twelfth building and distinct landmark goal",
+    "Guide stops requesting city objects after all city objectives are met",
+    "HUD guide clears on the next scheduled update once goals complete",
+    "All exact thresholds settle once through the real game tick",
+    "Engine process failed; inspect the engine log"
+  ],
+  "scope": "Independent actual receipt path and gate/guide review; physical playability is a separate test"
+}

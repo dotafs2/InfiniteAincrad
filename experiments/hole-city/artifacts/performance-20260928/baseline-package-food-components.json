@@ -1,0 +1,66 @@
+{
+	"grown_city_update": {
+		"p50_ms": 0.903,
+		"p95_ms": 1.013,
+		"samples": 120
+	},
+	"grown_geometry": {
+		"camera_batch_triangles": 818774,
+		"camera_surface_submissions": 98,
+		"multimeshes": 529,
+		"override_materials": 70,
+		"scene_surface_submissions": 607,
+		"scene_triangles": 4668726,
+		"scope": "Conservative geometry inventory; excludes UI, shadow passes and GPU timings",
+		"unique_meshes": 55
+	},
+	"grown_ground": {
+		"p50_ms": 1.4,
+		"p95_ms": 1.523,
+		"samples": 120
+	},
+	"grown_nearest_eight": {
+		"p50_ms": 1.125,
+		"p95_ms": 1.359,
+		"samples": 40
+	},
+	"grown_scan": {
+		"p50_ms": 0.972,
+		"p95_ms": 1.312,
+		"samples": 40
+	},
+	"loaded_catalog_models": 208,
+	"map": "food",
+	"opening_city_update": {
+		"p50_ms": 1.019,
+		"p95_ms": 1.181,
+		"samples": 120
+	},
+	"opening_geometry": {
+		"camera_batch_triangles": 785914,
+		"camera_surface_submissions": 81,
+		"multimeshes": 529,
+		"override_materials": 70,
+		"scene_surface_submissions": 606,
+		"scene_triangles": 4665114,
+		"scope": "Conservative geometry inventory; excludes UI, shadow passes and GPU timings",
+		"unique_meshes": 55
+	},
+	"opening_ground": {
+		"p50_ms": 1.556,
+		"p95_ms": 1.682,
+		"samples": 120
+	},
+	"opening_nearest_eight": {
+		"p50_ms": 1.09,
+		"p95_ms": 1.402,
+		"samples": 40
+	},
+	"opening_scan": {
+		"p50_ms": 0.237,
+		"p95_ms": 0.307,
+		"samples": 40
+	},
+	"static_memory_bytes": 205653154,
+	"version": "0.5.4"
+}

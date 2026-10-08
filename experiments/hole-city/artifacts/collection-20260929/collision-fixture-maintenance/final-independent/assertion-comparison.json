@@ -1,0 +1,29 @@
+{
+  "food_collision_acceptance.gd": {
+    "original_sha256": "fb31dded75e03c9f978ca78dc23ef1950963f1df7c83eca0fbb6f93e1f187f9f",
+    "current_sha256": "7a65c9ba4e320280167155300f98b3efda14f4ecef158625b883c634795a3a20",
+    "original_static_check_statements": 19,
+    "retained_static_check_statements": 19,
+    "replaced": [],
+    "added": [
+      "for j in range(i):check(CONTACT_CENTERS[i].distance_to(CONTACT_CENTERS[j])>=16.0,\"Separate contact pairs retain their original minimum spacing\")",
+      "check(clear,\"Full tilted-drop air volume clears unrelated scene bodies: \"+str(at))",
+      "check(terrain,\"Isolated contact probe has real uncut ground: \"+str(at))"
+    ]
+  },
+  "food_collision_review.gd": {
+    "original_sha256": "26bae1f0490f2eb12de8a5f1629ecb52788b81e427cfdf6eef88aa67a563944a",
+    "current_sha256": "37b0bd69f6c5e6219137bd674151371844c9fa42a2f6854194c3ddf77164acd2",
+    "original_static_check_statements": 44,
+    "retained_static_check_statements": 43,
+    "replaced": [
+      "check(body.linear_velocity.length()<.3 and window.max_displacement<.2 and window.max_angle<deg_to_rad(5.0) and window.max_y-window.min_y<.05,\"Tilted round-food pile remains within a bounded three-second contact envelope\")"
+    ],
+    "added": [
+      "check(pile_clear,\"Entire tilted pile drop and rest volume clears unrelated scene bodies\")",
+      "check(not pile_hit.is_empty() and pile_hit.rid==game.ground.body.get_rid(),\"Translated pile fixture has actual uncut terrain\")",
+      "check(window.samples==180 and window.intervals==179,\"Contact motion uses the complete original 180-sample observation window\")",
+      "check(horizontal_speed<.3 and window.max_displacement<.2 and window.max_angle<deg_to_rad(5.0) and window.max_y-window.min_y<.05,\"Tilted round-food pile remains within a bounded three-second contact envelope\")"
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "checks": 33,
+  "failures": [
+    "Only actually airborne food uses the 24-body budget",
+    "Engine process failed; inspect the engine log"
+  ],
+  "sessions": [
+    {
+      "batch_draws": 52,
+      "batched": 462,
+      "farthest_new_spawn": 15.9981212615967,
+      "max_airborne": 26,
+      "retirements": 0,
+      "samples": [
+        {
+          "alive": 77,
+          "landed": 65,
+          "seconds": 30.0,
+          "spawned": 78
+        },
+        {
+          "alive": 149,
+          "landed": 138,
+          "seconds": 60.0,
+          "spawned": 150
+        },
+        {
+          "alive": 227,
+          "landed": 210,
+          "seconds": 90.0,
+          "spawned": 228
+        },
+        {
+          "alive": 299,
+          "landed": 287,
+          "seconds": 120.0,
+          "spawned": 300
+        },
+        {
+          "alive": 376,
+          "landed": 356,
+          "seconds": 150.0,
+          "spawned": 378
+        },
+        {
+          "alive": 448,
+          "landed": 426,
+          "seconds": 180.0,
+          "spawned": 450
+        },
+        {
+          "alive": 520,
+          "landed": 504,
+          "seconds": 210.0,
+          "spawned": 522
+        },
+        {
+          "alive": 596,
+          "landed": 570,
+          "seconds": 240.0,
+          "spawned": 598
+        }
+      ],
+      "traveling": false
+    },
+    {
+      "batch_draws": 161,
+      "batched": 31,
+      "farthest_new_spawn": 15.9981212615967,
+      "max_airborne": 20,
+      "retirements": 128,
+      "samples": [
+        {
+          "alive": 42,
+          "landed": 28,
+          "seconds": 30.0,
+          "spawned": 78
+        },
+        {
+          "alive": 47,
+          "landed": 36,
+          "seconds": 60.0,
+          "spawned": 150
+        },
+        {
+          "alive": 45,
+          "landed": 27,
+          "seconds": 90.0,
+          "spawned": 228
+        },
+        {
+          "alive": 57,
+          "landed": 42,
+          "seconds": 120.0,
+          "spawned": 300
+        }
+      ],
+      "traveling": true
+    }
+  ]
+}

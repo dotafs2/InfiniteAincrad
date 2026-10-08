@@ -1,0 +1,88 @@
+{
+  "coins": 300,
+  "frames": 2719,
+  "limitation": "Host output uses Dummy; no physical-device or subjective-listening claim",
+  "music_contexts": [
+    "menu",
+    "city",
+    "food",
+    "toys",
+    "frost",
+    "case"
+  ],
+  "scope": "Actual Mac engine render and audio mixer; isolated500-coin fixture, two100-coin draws; no player save, real ad or purchase",
+  "timeline": [
+    {
+      "frame": 3,
+      "label": "Menu · Buy Something!",
+      "music_db": 0.0,
+      "route": "menu",
+      "seconds": 0.05,
+      "target": "menu"
+    },
+    {
+      "frame": 243,
+      "label": "City · Hometown",
+      "music_db": 0.0,
+      "route": "menu",
+      "seconds": 4.05,
+      "target": "city"
+    },
+    {
+      "frame": 639,
+      "label": "Food · Sunshine Coast",
+      "music_db": 0.0,
+      "route": "menu",
+      "seconds": 10.65,
+      "target": "food"
+    },
+    {
+      "frame": 1035,
+      "label": "Toys · Children's March",
+      "music_db": 0.0,
+      "route": "menu",
+      "seconds": 17.25,
+      "target": "toys"
+    },
+    {
+      "frame": 1431,
+      "label": "Frost · Through the Snow",
+      "music_db": 0.0,
+      "route": "menu",
+      "seconds": 23.85,
+      "target": "frost"
+    },
+    {
+      "frame": 1827,
+      "label": "Case · A Little Wonder",
+      "music_db": 0.0,
+      "route": "menu",
+      "seconds": 30.45,
+      "target": "case"
+    },
+    {
+      "frame": 2007,
+      "label": "Full opening · timed phrase + ticks",
+      "music_db": 0.0,
+      "route": "case",
+      "seconds": 33.45,
+      "target": "case"
+    },
+    {
+      "frame": 2449,
+      "label": "Early skip · same committed award",
+      "music_db": 0.0,
+      "route": "case",
+      "seconds": 40.8166666666667,
+      "target": "case"
+    },
+    {
+      "frame": 2539,
+      "label": "SKIP · opening voice replaced by reveal",
+      "music_db": -7.0,
+      "route": "case",
+      "seconds": 42.3166666666667,
+      "target": "case"
+    }
+  ]
+}

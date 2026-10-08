@@ -1,0 +1,128 @@
+{
+  "completed": "2026-09-28",
+  "suites": [
+    {
+      "suite": "portrait",
+      "passed": true,
+      "checks": 30,
+      "evidence": "Final full attempt PASS, before food-round watchdog interruption"
+    },
+    {
+      "suite": "destruction_traffic",
+      "passed": true,
+      "checks": 10,
+      "evidence": "Final full attempt PASS, before food-round watchdog interruption"
+    },
+    {
+      "suite": "skin_skill",
+      "passed": true,
+      "checks": 22,
+      "evidence": "Final full attempt PASS, before food-round watchdog interruption"
+    },
+    {
+      "suite": "skin_fx",
+      "passed": true,
+      "checks": 31,
+      "evidence": "Final full attempt PASS, before food-round watchdog interruption"
+    },
+    {
+      "suite": "title_navigation",
+      "passed": true,
+      "checks": 17,
+      "evidence": "Final full attempt PASS, before food-round watchdog interruption"
+    },
+    {
+      "suite": "no_tether",
+      "passed": true,
+      "checks": 10,
+      "evidence": "Final full attempt PASS, before food-round watchdog interruption"
+    },
+    {
+      "suite": "resonance_action",
+      "passed": true,
+      "checks": 13,
+      "evidence": "Final full attempt PASS, before food-round watchdog interruption"
+    },
+    {
+      "suite": "ads_bridge",
+      "passed": true,
+      "checks": 5,
+      "evidence": "Final full attempt PASS, before food-round watchdog interruption"
+    },
+    {
+      "suite": "mobile_maps",
+      "passed": true,
+      "checks": 27,
+      "evidence": "Final full attempt PASS, before food-round watchdog interruption"
+    },
+    {
+      "suite": "rim_fall",
+      "passed": true,
+      "checks": 25,
+      "evidence": "Final full attempt PASS, before food-round watchdog interruption"
+    },
+    {
+      "suite": "fidelity",
+      "passed": true,
+      "checks": 24,
+      "evidence": "Final full attempt PASS, before food-round watchdog interruption"
+    },
+    {
+      "suite": "food_round",
+      "passed": true,
+      "checks": 0,
+      "evidence": "final-food-round.json",
+      "rounds": [
+        {
+          "contested": true,
+          "food": {
+            "berry": 10,
+            "burger": 8,
+            "cake": 7,
+            "cookie": 9,
+            "donut": 8,
+            "person": 3,
+            "signal_pylon": 1,
+            "sushi": 3
+          },
+          "phase": "complete",
+          "score": 426,
+          "seconds": 106.349999999995
+        },
+        {
+          "contested": false,
+          "food": {
+            "berry": 72,
+            "burger": 9,
+            "cake": 1,
+            "cookie": 68,
+            "donut": 38,
+            "person": 30,
+            "signal_pylon": 5,
+            "sushi": 3
+          },
+          "phase": "complete",
+          "score": 488,
+          "seconds": 160.633333333353
+        }
+      ]
+    },
+    {
+      "suite": "actor_fall",
+      "passed": true,
+      "checks": 32,
+      "evidence": "export-actor-fall.json"
+    },
+    {
+      "suite": "rig_fracture",
+      "passed": true,
+      "checks": 992,
+      "evidence": "export-rig-fracture.json"
+    }
+  ],
+  "suite_count": 14,
+  "assertions": 1238,
+  "browser_visual_review": "Blocked by a saved browser denial after explicit user authorization",
+  "iphone14_device_review": "Not performed",
+  "web_pack_sha256": "2695c8ac61fa91f158fa5edf9f197d3641d57b307f62983b89187b4f0065c62b"
+}

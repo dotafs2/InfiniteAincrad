@@ -1,0 +1,52 @@
+{
+  "at_utc": "2026-10-01T08:52:29.469208+00:00",
+  "scope": "User-submitted payment setup, authenticated visible console verification and local privacy preparation",
+  "payment_profile_complete": true,
+  "payment_country_display": "China",
+  "incomplete_payment_banner_present": false,
+  "agent_entered_or_submitted_payment_fields": false,
+  "account_verification": "in_progress",
+  "application_approval": "requires_published_store_link_and_review",
+  "store_listing_linked": false,
+  "production_ad_serving_verified": false,
+  "new_legal_terms_accepted": false,
+  "new_signature": false,
+  "new_phone_installation": false,
+  "new_upload": false,
+  "app_review_submitted": false,
+  "public_policy_changed": false,
+  "apple_privacy_published": false,
+  "us_privacy_message_published": false,
+  "version": "0.12.3",
+  "build": "5",
+  "native_candidate_receipt": "artifacts/skin-collection-20261001/native-05/production-candidate.json",
+  "privacy_review": "docs/monetization-20261001/privacy-release-review.md",
+  "policy_draft": "docs/monetization-20261001/privacy-policy-draft.md",
+  "native_policy_preloading_clarification_to_sync": true,
+  "vendor_privacy_hashes": {
+    "GoogleMobileAds": "69fb112582fc23fc06c635c961d262a3f7b4b5654d284787491de3000dadf9d2",
+    "UserMessagingPlatform": "45b7adb99fcd2d962a1c800fbfcc1325b57a7fa4165f416182323bb5ffe9c900"
+  },
+  "full_game_gate_rerun": false,
+  "browser_recovery": {
+    "stale_overview_timeouts": 3,
+    "working_tab_navigation_recovered": true
+  },
+  "private_evidence": [
+    {
+      "path": "build/monetization-20261001/payment-complete/account-verification.png",
+      "sha256": "8447ac67e9ed4d6fda4b6e8be6fee169f4db19651ff9cf2e56942687e1114556"
+    },
+    {
+      "path": "build/monetization-20261001/payment-complete/payments-overview.png",
+      "sha256": "fc15ab705a90fed81c83ec76ac4fb6f32fb7d0e09a98096e856a97a93d6cd11a"
+    }
+  ],
+  "physical_device_check": {
+    "at_utc": "2026-10-01T08:53:44.020239+00:00",
+    "model": "iPhone 16 Pro Max",
+    "state": "unavailable",
+    "connection_or_launch_verified": false
+  },
+  "required_user_action": "Reconnect and unlock the iPhone for save backup and current native acceptance."
+}

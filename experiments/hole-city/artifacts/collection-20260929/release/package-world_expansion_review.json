@@ -1,0 +1,19 @@
+{
+  "checks": 284,
+  "failures": [],
+  "metrics": {
+    "city": {
+      "all_edibles": 808,
+      "outer_edibles": 152,
+      "outside": [],
+      "queryable_small_food": 97
+    },
+    "food": {
+      "all_edibles": 2922,
+      "outer_edibles": 237,
+      "outside": [],
+      "queryable_small_food": 29
+    }
+  },
+  "scope": "Independent real geometry, movement, physics rays, food atlas and original traffic; no GPU image or frame-rate claim."
+}

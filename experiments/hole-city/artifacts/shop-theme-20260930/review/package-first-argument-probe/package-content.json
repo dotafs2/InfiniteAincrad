@@ -1,0 +1,14 @@
+{
+  "checks": 12,
+  "failures": [
+    "Probe explicitly loads an exported package",
+    "Engine process failed; inspect the engine log"
+  ],
+  "metadata_hashes": {
+    "res://assets/audio/MUSIC_CREDITS.txt": "eabdbe1a5c7039c71617452183dd3ffe721ed472dc80d77aec7698ad7f39e012",
+    "res://assets/audio/README.md": "354dc09d2405623758e3a696f7e3f5c86847884c625c9684fab0d52856ea2680",
+    "res://assets/audio/music_manifest.json": "21cd9b52c6835674db60c2304744b314cd14e8556e31e5e2cda86d04317ac087"
+  },
+  "packet_sha256": "5d0053ae1d9ee3c8627fe9f6cfecd9f0126fc6c9eaae65ad47b01c7049f71fe0",
+  "scope": "Isolated actual exported-package resources; no browser, audible output or screenshot."
+}

@@ -1,0 +1,565 @@
+{
+  "food_extension_collision_review": {
+    "checks": 199,
+    "failures": [],
+    "metrics": {
+      "inventory": {
+        "extension_bodies": 334,
+        "extension_loose": 120,
+        "maximum_scale": 4.19999980926514,
+        "overlap_pairs": []
+      },
+      "perimeter_rain": {
+        "former_clamp_min_distance": 29.0006561279297,
+        "landed_recipes": 10,
+        "max_spawn_distance": 15.9446430206299,
+        "maximum_airborne": 19,
+        "maximum_retained": 78,
+        "waves_spawned": 78
+      },
+      "plaza": {
+        "at": "(-73.69755, 2.727264, -41.94333)",
+        "grown_radius": 6.0,
+        "maximum_fall_speed": 8.6785364151001,
+        "minimum_bottom_during_contact": -0.0309879779815674,
+        "receipt": {
+          "count": 1,
+          "player": true,
+          "points": 2,
+          "top": -3.51483184490907
+        },
+        "scale": 2.8301887512207
+      },
+      "rain_collection": [
+        {
+          "claimed": false,
+          "final": "freed",
+          "hole_radius": 6.0,
+          "initial": "(86.37527, 13.25137, 86.13053)",
+          "kind": "bacon",
+          "receipt": {
+            "count": 1,
+            "player": true,
+            "points": 2,
+            "top": -3.54190715307944
+          },
+          "support": {
+            "food": "cookie",
+            "footprint": 0.260999977588654,
+            "name": "food_cookie_1740",
+            "position": "(86.34027, 13.06718, 86.34736)",
+            "required_radius": 4.31863423347473,
+            "root": "food_cookie_1686"
+          },
+          "velocity": "freed"
+        },
+        {
+          "claimed": false,
+          "final": "freed",
+          "hole_radius": 6.0,
+          "initial": "(88.58587, 0.439669, 93.00434)",
+          "kind": "egg",
+          "receipt": {
+            "count": 1,
+            "player": true,
+            "points": 2,
+            "top": -3.5671139624661
+          },
+          "support": {
+            "food": "none",
+            "footprint": null,
+            "name": "@StaticBody3D@7468",
+            "position": "(0.0, 0.0, 0.0)"
+          },
+          "velocity": "freed"
+        },
+        {
+          "claimed": false,
+          "final": "freed",
+          "hole_radius": 7.2,
+          "initial": "(97.36789, 0.931346, 95.96541)",
+          "kind": "cake",
+          "receipt": {
+            "count": 1,
+            "player": true,
+            "points": 2,
+            "top": -3.5795462160185
+          },
+          "support": {
+            "food": "none",
+            "footprint": null,
+            "name": "@StaticBody3D@7468",
+            "position": "(0.0, 0.0, 0.0)"
+          },
+          "velocity": "freed"
+        },
+        {
+          "collected_with_neighbor": true,
+          "kind": "donut",
+          "receipt": {
+            "count": 1,
+            "player": true,
+            "points": 2,
+            "top": -3.52171511440179
+          }
+        },
+        {
+          "collected_with_neighbor": true,
+          "kind": "burger",
+          "receipt": {
+            "count": 1,
+            "player": true,
+            "points": 2,
+            "top": -3.52282999535161
+          }
+        },
+        {
+          "collected_with_neighbor": true,
+          "kind": "cookie",
+          "receipt": {
+            "count": 1,
+            "player": true,
+            "points": 2,
+            "top": -3.5348286997926
+          }
+        },
+        {
+          "collected_with_neighbor": true,
+          "kind": "berry",
+          "receipt": {
+            "count": 1,
+            "player": true,
+            "points": 2,
+            "top": -3.56812247661122
+          }
+        },
+        {
+          "collected_with_neighbor": true,
+          "kind": "sushi",
+          "receipt": {
+            "count": 1,
+            "player": true,
+            "points": 2,
+            "top": -3.5050110493983
+          }
+        },
+        {
+          "claimed": false,
+          "final": "freed",
+          "hole_radius": 7.2,
+          "initial": "(81.02892, 0.470774, 93.0)",
+          "kind": "pancake",
+          "receipt": {
+            "count": 1,
+            "player": true,
+            "points": 2,
+            "top": -3.53625618569318
+          },
+          "support": {
+            "food": "none",
+            "footprint": null,
+            "name": "@StaticBody3D@7468",
+            "position": "(0.0, 0.0, 0.0)"
+          },
+          "velocity": "freed"
+        },
+        {
+          "collected_with_neighbor": true,
+          "kind": "pizza",
+          "receipt": {
+            "count": 1,
+            "player": true,
+            "points": 2,
+            "top": -3.56767663322363
+          }
+        }
+      ],
+      "towers": [
+        {
+          "kind": "burger",
+          "pieces": 4,
+          "radius": 6.0,
+          "tilted": true
+        },
+        {
+          "kind": "cake",
+          "pieces": 3,
+          "radius": 6.0,
+          "tilted": true
+        }
+      ]
+    },
+    "scope": "Independent actual enlarged food collider/support/contact/collection; no renderer or performance claim"
+  },
+  "train": {
+    "checks": 220,
+    "failures": [],
+    "metrics": {
+      "actual_city": {
+        "attached": 2,
+        "blocked": false,
+        "blocked_steps": 0,
+        "cars": 4,
+        "detachments": 1,
+        "detours": [
+          {
+            "end": 2683.10390042765,
+            "lateral": 1.6,
+            "start": 2664.10390071375
+          }
+        ],
+        "head_distance": 2113.22026590804,
+        "history_samples": 33,
+        "parked": 1,
+        "planning_count": 3,
+        "route_length": 668.3148188591,
+        "traveled": 2118.54448657483
+      },
+      "actual_food": {
+        "attached": 2,
+        "blocked": false,
+        "blocked_steps": 0,
+        "cars": 8,
+        "detachments": 1,
+        "detours": [
+          {
+            "end": 2448.6236302727,
+            "lateral": 1.35,
+            "start": 2422.24630897966
+          }
+        ],
+        "head_distance": 1930.63452229445,
+        "history_samples": 31,
+        "parked": 5,
+        "planning_count": 3,
+        "route_length": 609.324145197868,
+        "traveled": 1932.67380869389
+      },
+      "cut_0_false": {
+        "attached": 0,
+        "blocked": false,
+        "blocked_steps": 0,
+        "cars": 8,
+        "detachments": 1,
+        "detours": [],
+        "head_distance": 9.60007512278832,
+        "history_samples": 145,
+        "parked": 7,
+        "planning_count": 0,
+        "route_length": 87.9623856544495,
+        "traveled": 9.59993094950914
+      },
+      "cut_4_false": {
+        "attached": 4,
+        "blocked": false,
+        "blocked_steps": 0,
+        "cars": 8,
+        "detachments": 1,
+        "detours": [
+          {
+            "end": 271.749588234723,
+            "lateral": 1.35,
+            "start": 249.69458847791
+          }
+        ],
+        "head_distance": 207.661440047574,
+        "history_samples": 71,
+        "parked": 3,
+        "planning_count": 3,
+        "route_length": 87.9623856544495,
+        "traveled": 211.150679647923
+      },
+      "cut_7_true": {
+        "attached": 7,
+        "blocked": false,
+        "blocked_steps": 0,
+        "cars": 8,
+        "detachments": 1,
+        "detours": [],
+        "head_distance": 212.054879819476,
+        "history_samples": 131,
+        "parked": 0,
+        "planning_count": 1,
+        "route_length": 87.9623856544495,
+        "traveled": 212.051527269185
+      },
+      "imported_assets": {
+        "attached": 10,
+        "blocked": false,
+        "blocked_steps": 0,
+        "cars": 10,
+        "detachments": 0,
+        "detours": [],
+        "head_distance": 0.0,
+        "history_samples": 179,
+        "parked": 0,
+        "planning_count": 0,
+        "route_length": 113.094495773315,
+        "traveled": 0.0
+      },
+      "loop": {
+        "attached": 8,
+        "blocked": false,
+        "blocked_steps": 0,
+        "cars": 8,
+        "detachments": 0,
+        "detours": [],
+        "head_distance": 200.534837247304,
+        "history_samples": 150,
+        "parked": 0,
+        "planning_count": 0,
+        "route_length": 87.9623856544495,
+        "traveled": 200.531764261425
+      },
+      "world_wide_false": {
+        "attached": 4,
+        "blocked": false,
+        "blocked_steps": 0,
+        "cars": 4,
+        "detachments": 0,
+        "detours": [
+          {
+            "end": 203.632866524579,
+            "lateral": 1.35,
+            "ramp_in": 7.0,
+            "start": 186.216676186444
+          }
+        ],
+        "head_distance": 146.116895508612,
+        "history_samples": 71,
+        "parked": 0,
+        "planning_count": 3,
+        "route_length": 87.9623856544495,
+        "traveled": 148.712465673685
+      },
+      "world_wide_true": {
+        "attached": 4,
+        "blocked": false,
+        "blocked_steps": 618,
+        "cars": 4,
+        "detachments": 0,
+        "detours": [],
+        "head_distance": 36.6935837831897,
+        "history_samples": 71,
+        "parked": 0,
+        "planning_count": 44,
+        "route_length": 87.9623856544495,
+        "traveled": 36.6930040121078
+      }
+    },
+    "scope": "Real headless physics and controller geometry; not rendered or phone performance evidence"
+  },
+  "train_surface": {
+    "checks": 161,
+    "failures": [],
+    "metrics": {
+      "city_build_ms": 590.044,
+      "food_build_ms": 1644.885
+    },
+    "scope": "Real scene/ground/CanvasItem assertions; no browser or mobile FPS claim"
+  },
+  "train_review": {
+    "checks": 388,
+    "failures": [],
+    "metrics": {
+      "city": {
+        "assets": 2,
+        "cars": 4,
+        "cut_return": {
+          "blocked_frames": 0,
+          "collider_overlaps": 0,
+          "head_distance": 1451.57575269263,
+          "max_car_step": 1.08051538467407,
+          "max_history_samples": 36,
+          "parked_pose_changes": 0,
+          "requested_distance": 768.562041687965,
+          "ticks": 715
+        },
+        "detachment_events": 2,
+        "max_car_triangles": 956,
+        "owner_lifecycle": {
+          "active_game_ticks": 2,
+          "other_actor_unchanged": true,
+          "prior_cars_freed": true,
+          "replaced_owner_pose_changes": 0
+        },
+        "receipts": {
+          "362991860429": {
+            "count": 1,
+            "player": true,
+            "points": 15,
+            "top": -3.6671701669693
+          },
+          "363075746513": {
+            "count": 1,
+            "player": true,
+            "points": 15,
+            "top": -3.6671701669693
+          },
+          "363159632598": {
+            "count": 1,
+            "player": true,
+            "points": 15,
+            "top": -3.6671701669693
+          },
+          "363243518683": {
+            "count": 1,
+            "player": true,
+            "points": 15,
+            "top": -3.6671701669693
+          }
+        },
+        "surfaces": 4,
+        "triangles": 3672,
+        "two_lap_cut_return": {
+          "blocked_frames": 0,
+          "collider_overlaps": 0,
+          "head_distance": 2049.59478855751,
+          "max_car_step": 1.08034157752991,
+          "max_history_samples": 35,
+          "parked_pose_changes": 0,
+          "requested_distance": 701.730559802055,
+          "ticks": 652
+        },
+        "two_laps_before_cut": {
+          "blocked_frames": 0,
+          "collider_overlaps": 0,
+          "head_distance": 1341.39324162232,
+          "max_car_step": 1.08012390136719,
+          "max_history_samples": 82,
+          "parked_pose_changes": 0,
+          "requested_distance": 1340.6296377182,
+          "ticks": 1242
+        },
+        "unbroken_loop": {
+          "blocked_frames": 0,
+          "collider_overlaps": 0,
+          "head_distance": 677.057163344071,
+          "max_car_step": 1.08010864257812,
+          "max_history_samples": 82,
+          "parked_pose_changes": 0,
+          "requested_distance": 672.3148188591,
+          "ticks": 623
+        }
+      },
+      "food": {
+        "assets": 8,
+        "cars": 8,
+        "cut_return": {
+          "blocked_frames": 0,
+          "collider_overlaps": 0,
+          "head_distance": 1323.53782337478,
+          "max_car_step": 0.960633218288422,
+          "max_history_samples": 68,
+          "parked_pose_changes": 0,
+          "requested_distance": 700.722766977549,
+          "ticks": 732
+        },
+        "detachment_events": 2,
+        "max_car_triangles": 1228,
+        "owner_lifecycle": {
+          "active_game_ticks": 2,
+          "other_actor_unchanged": true,
+          "prior_cars_freed": true,
+          "replaced_owner_pose_changes": 0
+        },
+        "receipts": {
+          "2753845806794": {
+            "count": 1,
+            "player": true,
+            "points": 10,
+            "top": -3.58252316713333
+          },
+          "2753929692878": {
+            "count": 1,
+            "player": true,
+            "points": 10,
+            "top": -3.5818487405777
+          },
+          "2754013578963": {
+            "count": 1,
+            "player": true,
+            "points": 10,
+            "top": -3.57184863090515
+          },
+          "2754097465048": {
+            "count": 1,
+            "player": true,
+            "points": 10,
+            "top": -3.57712370157242
+          },
+          "2754181351133": {
+            "count": 1,
+            "player": true,
+            "points": 10,
+            "top": -3.57834875583649
+          },
+          "2754265237218": {
+            "count": 1,
+            "player": true,
+            "points": 10,
+            "top": -3.50384873151779
+          },
+          "2754349123303": {
+            "count": 1,
+            "player": true,
+            "points": 10,
+            "top": -3.68765085935593
+          },
+          "2754433009388": {
+            "count": 1,
+            "player": true,
+            "points": 10,
+            "top": -3.58884871006012
+          }
+        },
+        "surfaces": 8,
+        "triangles": 8084,
+        "two_lap_cut_return": {
+          "blocked_frames": 0,
+          "collider_overlaps": 0,
+          "head_distance": 1868.06227351473,
+          "max_car_step": 0.960483133792877,
+          "max_history_samples": 68,
+          "parked_pose_changes": 0,
+          "requested_distance": 639.790352457762,
+          "ticks": 668
+        },
+        "two_laps_before_cut": {
+          "blocked_frames": 0,
+          "collider_overlaps": 0,
+          "head_distance": 1223.04192997241,
+          "max_car_step": 0.960084915161133,
+          "max_history_samples": 135,
+          "parked_pose_changes": 0,
+          "requested_distance": 1222.64829039574,
+          "ticks": 1274
+        },
+        "unbroken_loop": {
+          "blocked_frames": 0,
+          "collider_overlaps": 0,
+          "head_distance": 617.174144990042,
+          "max_car_step": 0.960084497928619,
+          "max_history_samples": 138,
+          "parked_pose_changes": 0,
+          "requested_distance": 613.324145197868,
+          "ticks": 639
+        }
+      }
+    },
+    "scope": "Independent actual-map/imported-model/physics/coupling checks, no browser, save or performance claim."
+  },
+  "train_surface_review": {
+    "checks": 1121,
+    "failures": [],
+    "metrics": {
+      "palette_cache_sizes_after_city_food_city_food": [
+        2,
+        10,
+        10,
+        10
+      ]
+    },
+    "scope": "Independent native scene/actual touch/mask/lifetime evidence, not browser screenshots or phone performance"
+  }
+}

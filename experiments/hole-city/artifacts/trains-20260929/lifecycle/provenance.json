@@ -1,0 +1,30 @@
+{
+  "before": {
+    "fidelity/edible_train.gd": "2886758208c9eb7fb5e0d89d448c561bd404f182f4c8e516d0ef706a7a014d3f",
+    "fidelity/train_car.gd": "28a0de04cb3222c1c9e15df60ab8313defc8bbbe2572ad82115120282155ce86",
+    "fidelity/train_assets.gd": "1d95b9acece92c32ec9e75c43e3db617d8a0bb4a525fc640204d503eb43159da",
+    "tests/train_acceptance.gd": "b52fc2b059f3a6bfdacb60eb24dc3981dd627e566f40b9607075194697a9f178",
+    "tests/rival_combat_acceptance.gd": "2335724850ab9a6b267c3ba9121045082bfedd4b73732bb7d4ec673c069a0b1c"
+  },
+  "after": {
+    "fidelity/edible_train.gd": "2886758208c9eb7fb5e0d89d448c561bd404f182f4c8e516d0ef706a7a014d3f",
+    "fidelity/train_car.gd": "28a0de04cb3222c1c9e15df60ab8313defc8bbbe2572ad82115120282155ce86",
+    "fidelity/train_assets.gd": "1d95b9acece92c32ec9e75c43e3db617d8a0bb4a525fc640204d503eb43159da",
+    "tests/train_acceptance.gd": "b52fc2b059f3a6bfdacb60eb24dc3981dd627e566f40b9607075194697a9f178",
+    "tests/rival_combat_acceptance.gd": "2335724850ab9a6b267c3ba9121045082bfedd4b73732bb7d4ec673c069a0b1c"
+  },
+  "stable": true,
+  "summary": [
+    {
+      "suite": "train",
+      "checks": 220,
+      "failures": []
+    },
+    {
+      "suite": "rival_combat",
+      "checks": 58,
+      "failures": []
+    }
+  ],
+  "helpers_running": false
+}

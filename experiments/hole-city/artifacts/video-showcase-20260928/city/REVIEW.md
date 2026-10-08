@@ -1,0 +1,11 @@
+# City offline preview review
+
+Five final PNGs are ready for the explicitly labeled offline showcase. The three city stills use current scene geometry and poses, with 949 visible instances each and 64 CPU-skinned NPC mesh parts. The exporter includes visible static MultiMesh instances and actual cut-ground geometry. Ground uniforms cover all four sidewalk loops, four district parks and the courtyard.
+
+`opening.png`, `overview.png` and `street-close.png` contain their own offline-preview caption. Matching `*-raw.png` files omit that caption only for composition under the video-wide watermark. `home-city-miniature.png` and `home-food-miniature.png` are transparent 640 × 560 renders of the actual home miniature roots and cameras, ready for the UI compositor. The city miniature retains its current procedural facade window equations and UVs.
+
+All five outputs were visually inspected. An offline CGL long-triangle artifact was found and corrected by subdividing only the exported ground triangles; large road/sidewalk gaps were removed. Faint raster seams remain on the opening view's very thin cut-ground scan bands; they are offline software-renderer artifacts, not runtime bug evidence. A generic-material omission in the city miniature was corrected by adapting its actual facade shader. These were artifact helper corrections, not runtime game changes. Final exports have no script errors; only the existing macOS certificate diagnostic is present. All owned processes exited.
+
+`manifest.json` records PNG, geometry, helper and complete source hashes. Its 446 source inputs match the last release manifest. The four city source hashes recorded by the exporter still match at finalization. No runtime, shared tool, test, player save or foreground application was modified.
+
+Limits: this is separate windowless CGL rendering with approximate lighting and no Godot cast shadows/PBR match. Gameplay HUD, 3D labels and procedural hole skin surfaces are omitted from the city stills. Physical dark openings remain. The food miniature uses its real geometry/colors with an approximate surface finish. These are stills, not recorded gameplay or a device performance result. The transparent miniatures must remain under the showcase-wide offline-preview watermark.

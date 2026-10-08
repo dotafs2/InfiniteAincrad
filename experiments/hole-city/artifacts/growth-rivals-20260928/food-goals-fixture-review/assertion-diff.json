@@ -1,0 +1,8 @@
+{
+  "old_sha256": "8064043be49d6e4c0e50ab3ebf1eb1241c0a33030ac845f6ea5711db60362109",
+  "new_sha256": "104efa04422cbc6dfbd2fef92b8740e133e6d2ced443f25a0174e26a50caaf43",
+  "old_check_calls": 30,
+  "new_check_calls": 32,
+  "missing_or_changed_original_assertions": [],
+  "diff": "--- \n+++ \n@@ -20,6 +20,13 @@\n \tgame.selected_map=\"food\";game.start_level();game.begin_play()\n \tgame.set_process(false);game.set_physics_process(false);game.city.set_process(false);game.city.rain_enabled=false\n \tfor h in game.holes:h.enabled=false;h.active=false;h.set_physics_process(false)\n+\t# Receipt accounting requires living owners. Movement remains disabled;\n+\t# the rival stays far away so manual goal ticks cannot start a combat event.\n+\tgame.player.active=true\n+\tgame.holes[1].active=true;game.holes[1].position=Vector3(-65,0,-65)\n+\tgame.reset_rival_state()\n+\tcheck(game.player.active and game.active_rival_owner(game.player)==game.player,\"Player receipt fixture has a living authoritative owner\")\n+\tcheck(game.holes[1].active and game.active_rival_owner(game.holes[1])==game.holes[1],\"Enemy receipt fixture has a living authoritative owner\")\n \tgame.player.radius=8.0\n \tvar city=game.city\n \tcheck(game.ui.font.get_string_size(\"CITY 12/12 \u00b7 LANDMARK 1/1 \u00b7 HEAP 1/1\",HORIZONTAL_ALIGNMENT_LEFT,-1,17).x<=476,\"Actual maximum goal receipt text fits the food HUD panel\")\n"
+}

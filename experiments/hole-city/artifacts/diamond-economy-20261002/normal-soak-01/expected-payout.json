@@ -1,0 +1,40 @@
+{
+  "scope": "Computed expectation from the frozen accepted source formula, not an additional observed wallet reading. The normal soak validates one completion receipt but does not print coin amounts. Focused economy checks independently validate wallet increments.",
+  "normal_round_report_sha256": "247c9a7c748568287ebfeb9bb4e0e9f27f78da466026ba64d8f1ae0170271586",
+  "source_game_sha256": "a2b1b384f18a24970229754072f0a8205ab6fa1e328a161b7d08b5bf04b074ba",
+  "rule": "min(30,floor(score/100)) +5 for a nonempty timed completion",
+  "rounds": [
+    {
+      "map": "food",
+      "seed": 1501,
+      "actual_score": 151,
+      "expected_score_coins": 1,
+      "expected_finish_coins": 5,
+      "expected_total_coins": 6
+    },
+    {
+      "map": "city",
+      "seed": 1502,
+      "actual_score": 137,
+      "expected_score_coins": 1,
+      "expected_finish_coins": 5,
+      "expected_total_coins": 6
+    },
+    {
+      "map": "food",
+      "seed": 1503,
+      "actual_score": 151,
+      "expected_score_coins": 1,
+      "expected_finish_coins": 5,
+      "expected_total_coins": 6
+    },
+    {
+      "map": "city",
+      "seed": 1504,
+      "actual_score": 137,
+      "expected_score_coins": 1,
+      "expected_finish_coins": 5,
+      "expected_total_coins": 6
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+--- food_finish_before
++++ food_finish_after
+@@ -41,6 +41,8 @@
+ 		if box_visible(view.global_transform*mm.custom_aabb,camera):
+ 			count+=triangles(mm.mesh)*mm.visible_instance_count;cells+=1
+ 	return {"triangles":count,"cells":cells}
++func opening_within_budget(submitted:Dictionary,entry:Array)->bool:
++	return submitted.triangles<=entry[1] and submitted.cells<=entry[2] and submitted.triangles>500000
+ func run()->void:
+ 	if not OS.get_cmdline_user_args().has("--test"):quit(2);return
+ 	var box:=Surface.rounded_box(Vector3(2.04,.16,2.04));geometry(box,"Icing slab")
+@@ -100,10 +102,16 @@
+ 	await process_frame
+ 	check(game.camera.get_viewport().get_visible_rect().size==Vector2(390,844),"Visibility budget uses an actual portrait viewport rather than the headless 64px default")
+ 	var visibility:Array=[]
+-	for entry in [[.85,721252,67],[7.2,1144048,119]]:
++	# The 182 resized/repositioned meals and three cookie platters intentionally
++	# change opening content. Independent old-PCK/current-source review preserves
++	# all 34 mesh arrays and the global/outer ceilings; these are fixed measured
++	# new-content bounds, not a percentage allowance or renderer/FPS claim.
++	for entry in [[.85,744252,69],[7.2,1149552,124]]:
+ 		game.player.radius=entry[0];game.player.position=Vector3(1,0,23);game.update_camera(1.0,true)
+ 		var submitted:=visible_static_geometry(city,game.camera);visibility.append(submitted)
+-		check(submitted.triangles<=entry[1] and submitted.cells<=entry[2] and submitted.triangles>500000,"Opening-view batch submission does not increase over the original package at radius "+str(entry[0]))
++		check(opening_within_budget(submitted,entry),"Opening-view batch submission respects the reviewed growth-content budget at radius "+str(entry[0]))
++		check(not opening_within_budget({"triangles":entry[1]+1,"cells":entry[2]},entry),"One triangle over the fixed opening cap is rejected")
++		check(not opening_within_budget({"triangles":entry[1],"cells":entry[2]+1},entry),"One batch over the fixed opening cap is rejected")
+ 	game.player.radius=14.0
+ 	for at in [Vector2(-84,-60),Vector2(-88,0),Vector2(-84,60),Vector2(0,88),Vector2(84,60),Vector2(88,0),Vector2(84,-60),Vector2(0,-88)]:
+ 		game.player.position=Vector3(at.x,0,at.y);game.update_camera(1.0,true)

@@ -1,0 +1,24 @@
+{
+  "status": "PASS, source/tests frozen; external maintenance diff review is owned by root/Sagan",
+  "passed": {
+    "music": 125,
+    "ui_redesign": 1673,
+    "coin_skins": 403,
+    "skin_skill": 130,
+    "portrait": 30,
+    "ui_collection_review": 156
+  },
+  "parse_only_pass": [
+    "food_review_skill_economy.gd",
+    "fidelity_acceptance.gd",
+    "city_review_portrait_probe.gd",
+    "skin_library_capture.gd"
+  ],
+  "portrait_final": "portrait-semantic-final.json/log",
+  "portrait_change": "Stable name/text targets for PLAY, pause-action and KEEP PLAYING replace positional references. Presence is captured before each emitted action because refresh frees the old buttons. All original 30 checks and natural world animation observations remain.",
+  "failure_evidence": [
+    "portrait-audio-teardown.json/log",
+    "portrait-named-actions.json/log"
+  ],
+  "helpers": "All owned native helpers have exited; no further engine invocation is pending."
+}

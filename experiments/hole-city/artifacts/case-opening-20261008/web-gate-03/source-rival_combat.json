@@ -1,0 +1,69 @@
+{
+  "checks": 58,
+  "failures": [],
+  "metrics": {
+    "pursuit": [
+      {
+        "events": [
+          {
+            "elapsed": 1.66666666666667,
+            "hunter": "Rowan",
+            "reward_base": 5,
+            "victim": "Lumen",
+            "victim_score": 0
+          }
+        ],
+        "hunter_distance": 5.28098583221436,
+        "hunter_score": 33,
+        "hunter_start": "(0.0, 0.0, 0.0)",
+        "hz": 30,
+        "physics_frames": 51,
+        "prey_distance": 1.99996709823608,
+        "prey_start": "(0.0, 0.0, 4.0)",
+        "pursuit_frames": 49,
+        "seconds": 1.7
+      },
+      {
+        "events": [
+          {
+            "elapsed": 1.63333333333333,
+            "hunter": "Rowan",
+            "reward_base": 5,
+            "victim": "Lumen",
+            "victim_score": 0
+          }
+        ],
+        "hunter_distance": 5.2271032333374,
+        "hunter_score": 33,
+        "hunter_start": "(0.0, 0.0, 0.0)",
+        "hz": 60,
+        "physics_frames": 97,
+        "prey_distance": 1.99992990493774,
+        "prey_start": "(0.0, 0.0, 4.0)",
+        "pursuit_frames": 96,
+        "seconds": 1.61666666666667
+      },
+      {
+        "events": [
+          {
+            "elapsed": 1.61666666666666,
+            "hunter": "Rowan",
+            "reward_base": 5,
+            "victim": "Lumen",
+            "victim_score": 0
+          }
+        ],
+        "hunter_distance": 5.2001576423645,
+        "hunter_score": 33,
+        "hunter_start": "(0.0, 0.0, 0.0)",
+        "hz": 120,
+        "physics_frames": 193,
+        "prey_distance": 1.99986028671265,
+        "prey_start": "(0.0, 0.0, 4.0)",
+        "pursuit_frames": 192,
+        "seconds": 1.60833333333333
+      }
+    ]
+  },
+  "scope": "Headless real controllers/physical pursuit plus geometric and lifecycle regressions; no browser or phone FPS claim."
+}

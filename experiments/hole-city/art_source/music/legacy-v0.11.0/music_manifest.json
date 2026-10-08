@@ -1,0 +1,2328 @@
+{
+  "schema": 2,
+  "generator": "tools/build_music.py",
+  "generator_sha256": "ade0fd3054367acb9955effd05c2f1397f6e685677ba490d88bcb0bae1299a79",
+  "numpy_version": "2.3.5",
+  "ffmpeg_version": "ffmpeg version 7.1.1 Copyright (c) 2000-2025 the FFmpeg developers",
+  "provenance": "Original authored melody, arrangement and additive/percussive synthesis. No downloaded music, samples, external recordings or model audio generation.",
+  "license": "CC0-1.0; see README.md",
+  "tracks": [
+    {
+      "file": "sunny_city_loop.ogg",
+      "title": "A Little Sunny Walk",
+      "bytes": 149917,
+      "sha256": "bcf2e7af8fa53a568b287a03e6034ae6631f0694b6e2d17692b9c47943868c25",
+      "source_pcm_sha256": "19c95d57d5bb8f010e519568b281ad067ef9d5172970982b9985c98d20dfe0f5",
+      "source_pcm": {
+        "samples_per_channel": 1628308,
+        "duration_seconds": 36.92308390022676,
+        "sample_rate": 44100,
+        "channels": 2,
+        "peak_linear": 0.29169371724128723,
+        "peak_dbfs": -10.70145849996679,
+        "rms_dbfs": -24.500016383049218,
+        "dc_max_absolute": 1.3394995335147541e-07,
+        "clipped_samples": 0,
+        "seam_jump_per_channel": [
+          0.0,
+          0.0
+        ],
+        "seam_jump_max": 0.0,
+        "interior_step_p99": 0.01165442168712616,
+        "interior_step_max": 0.024327371269464493,
+        "boundary_20ms_rms_dbfs": -33.429106938362466,
+        "stereo_correlation": 0.9854599377389391
+      },
+      "decoded_vorbis": {
+        "samples_per_channel": 1628308,
+        "duration_seconds": 36.92308390022676,
+        "sample_rate": 44100,
+        "channels": 2,
+        "peak_linear": 0.2970443665981293,
+        "peak_dbfs": -10.543573590778433,
+        "rms_dbfs": -24.482458218465858,
+        "dc_max_absolute": 6.308425327006262e-06,
+        "clipped_samples": 0,
+        "seam_jump_per_channel": [
+          0.00039485562592744827,
+          0.0002490833285264671
+        ],
+        "seam_jump_max": 0.00039485562592744827,
+        "interior_step_p99": 0.011695630848407745,
+        "interior_step_max": 0.024486202746629715,
+        "boundary_20ms_rms_dbfs": -33.45363540771438,
+        "stereo_correlation": 0.9845470996096656,
+        "integrated_lufs": -21.9,
+        "true_peak_dbtp": -10.5
+      },
+      "checks": {
+        "exact_sample_count": true,
+        "vorbis_stereo_44100": true,
+        "duration_20_to_40_seconds": true,
+        "under_500_kib": true,
+        "no_clipping": true,
+        "soft_dynamic_level": true,
+        "gentle_integrated_loudness": true,
+        "transient_headroom": true,
+        "small_boundary_step": true,
+        "no_dc_offset": true,
+        "no_silent_loop_gap": true,
+        "finite_samples": true
+      },
+      "encoding": "Ogg Vorbis, libvorbis quality 3, bitexact container flags",
+      "arrangement": {
+        "bars": 16,
+        "meter": "4/4",
+        "bpm": 104,
+        "key": "C major",
+        "seed": 30092026,
+        "chord_progression": [
+          "C",
+          "Am",
+          "F",
+          "G",
+          "C",
+          "Am",
+          "Dm",
+          "G",
+          "F",
+          "C",
+          "Dm",
+          "G",
+          "F",
+          "G",
+          "C",
+          "G"
+        ],
+        "progression_repeats": 1,
+        "authored_melody_bars": 16,
+        "event_counts": {
+          "nylon": 48,
+          "bass": 24,
+          "wood": 31,
+          "brush": 28
+        },
+        "events_per_second": 3.547915996236584,
+        "lead_midi_range": [
+          67,
+          76
+        ],
+        "written_lead_rest_fraction": 0.55078125,
+        "chord_voices": 3,
+        "chord_strikes_per_bar": 1,
+        "master_gain": 1.257035814794274,
+        "master_rms_target_dbfs": -24.5,
+        "events": [
+          {
+            "instrument": "nylon",
+            "beat": 0.0,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 0.032,
+            "midi": 64,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 0.064,
+            "midi": 67,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 0.0,
+            "midi": 48,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 0.5,
+            "midi": 72,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 2.0,
+            "midi": 76,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 1.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 3.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 4.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 4.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 4.064,
+            "midi": 64,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 4.0,
+            "midi": 45,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 6.5,
+            "midi": 52,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 4.5,
+            "midi": 76,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 6.0,
+            "midi": 72,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 5.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 7.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 8.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 8.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 8.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 8.0,
+            "midi": 41,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 8.5,
+            "midi": 69,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 10.0,
+            "midi": 72,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 9.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 11.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 12.0,
+            "midi": 55,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 12.032,
+            "midi": 59,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 12.064,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 12.0,
+            "midi": 43,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 14.5,
+            "midi": 50,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 12.5,
+            "midi": 71,
+            "written_beats": 1.5,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 13.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 16.0,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 16.032,
+            "midi": 64,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 16.064,
+            "midi": 67,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 16.0,
+            "midi": 48,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 16.5,
+            "midi": 72,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 17.75,
+            "midi": 74,
+            "written_beats": 0.5,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 18.75,
+            "midi": 76,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 17.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 19.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 20.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 20.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 20.064,
+            "midi": 64,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 20.0,
+            "midi": 45,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 22.5,
+            "midi": 52,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 20.5,
+            "midi": 76,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 22.0,
+            "midi": 72,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 21.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 23.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 24.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 24.032,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 24.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 24.0,
+            "midi": 38,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 24.5,
+            "midi": 69,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 26.0,
+            "midi": 74,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 25.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 27.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 28.0,
+            "midi": 55,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 28.032,
+            "midi": 59,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 28.064,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 28.0,
+            "midi": 43,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 30.5,
+            "midi": 50,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 28.5,
+            "midi": 71,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 30.0,
+            "midi": 67,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 29.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 32.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 32.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 32.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 32.0,
+            "midi": 41,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 32.5,
+            "midi": 69,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 34.0,
+            "midi": 72,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 33.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 35.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 36.0,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 36.032,
+            "midi": 64,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 36.064,
+            "midi": 67,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 36.0,
+            "midi": 48,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 38.5,
+            "midi": 55,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 36.5,
+            "midi": 76,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 38.0,
+            "midi": 72,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 37.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 39.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 40.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 40.032,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 40.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 40.0,
+            "midi": 38,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 40.5,
+            "midi": 74,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 42.0,
+            "midi": 69,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 41.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 43.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 44.0,
+            "midi": 55,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 44.032,
+            "midi": 59,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 44.064,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 44.0,
+            "midi": 43,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 46.5,
+            "midi": 50,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 44.5,
+            "midi": 74,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 46.0,
+            "midi": 71,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 45.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 48.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 48.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 48.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 48.0,
+            "midi": 41,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 48.5,
+            "midi": 72,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 50.0,
+            "midi": 69,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 49.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 51.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 52.0,
+            "midi": 55,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 52.032,
+            "midi": 59,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 52.064,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 52.0,
+            "midi": 43,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 54.5,
+            "midi": 50,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 52.5,
+            "midi": 71,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 54.0,
+            "midi": 74,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 53.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 55.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 56.0,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 56.032,
+            "midi": 64,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 56.064,
+            "midi": 67,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 56.0,
+            "midi": 48,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 56.5,
+            "midi": 72,
+            "written_beats": 1.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 57.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 59.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 60.0,
+            "midi": 55,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 60.032,
+            "midi": 59,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 60.064,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 60.0,
+            "midi": 43,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 62.5,
+            "midi": 50,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "wood",
+            "beat": 60.5,
+            "midi": 71,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "wood",
+            "beat": 62.5,
+            "midi": 67,
+            "written_beats": 1.5,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 61.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          }
+        ],
+        "loop_strategy": "Circular note tails, short quiet room reflections and periodic filtering, with a 2.5 ms cosine edge guard; no musical fade-out gap."
+      }
+    },
+    {
+      "file": "snack_garden_loop.ogg",
+      "title": "Picnic in the Garden",
+      "bytes": 145005,
+      "sha256": "a12e247ad82b7098b7cbc0c1dff191661c92e1d88d4660510091567e935ae92e",
+      "source_pcm_sha256": "5b857aa113c51a5cfc9cfa1873636c4d90159e69ca3627d193d7ea098b5be5e4",
+      "source_pcm": {
+        "samples_per_channel": 1568000,
+        "duration_seconds": 35.55555555555556,
+        "sample_rate": 44100,
+        "channels": 2,
+        "peak_linear": 0.2733204662799835,
+        "peak_dbfs": -11.266556940997024,
+        "rms_dbfs": -24.50004620470199,
+        "dc_max_absolute": 2.7578533234873248e-08,
+        "clipped_samples": 0,
+        "seam_jump_per_channel": [
+          0.0,
+          0.0
+        ],
+        "seam_jump_max": 0.0,
+        "interior_step_p99": 0.010227277874946594,
+        "interior_step_max": 0.01940115913748741,
+        "boundary_20ms_rms_dbfs": -33.239960195085786,
+        "stereo_correlation": 0.9855903185946459
+      },
+      "decoded_vorbis": {
+        "samples_per_channel": 1568000,
+        "duration_seconds": 35.55555555555556,
+        "sample_rate": 44100,
+        "channels": 2,
+        "peak_linear": 0.2776522934436798,
+        "peak_dbfs": -11.129974696965624,
+        "rms_dbfs": -24.48673119897798,
+        "dc_max_absolute": 9.338864401797764e-06,
+        "clipped_samples": 0,
+        "seam_jump_per_channel": [
+          0.0009461687295697629,
+          0.001910671591758728
+        ],
+        "seam_jump_max": 0.001910671591758728,
+        "interior_step_p99": 0.010255523025989532,
+        "interior_step_max": 0.019320987164974213,
+        "boundary_20ms_rms_dbfs": -33.30031468598601,
+        "stereo_correlation": 0.9845164843009595,
+        "integrated_lufs": -22.0,
+        "true_peak_dbtp": -11.1
+      },
+      "checks": {
+        "exact_sample_count": true,
+        "vorbis_stereo_44100": true,
+        "duration_20_to_40_seconds": true,
+        "under_500_kib": true,
+        "no_clipping": true,
+        "soft_dynamic_level": true,
+        "gentle_integrated_loudness": true,
+        "transient_headroom": true,
+        "small_boundary_step": true,
+        "no_dc_offset": true,
+        "no_silent_loop_gap": true,
+        "finite_samples": true
+      },
+      "encoding": "Ogg Vorbis, libvorbis quality 3, bitexact container flags",
+      "arrangement": {
+        "bars": 16,
+        "meter": "4/4",
+        "bpm": 108,
+        "key": "F major",
+        "seed": 30092027,
+        "chord_progression": [
+          "F",
+          "Dm",
+          "Bb",
+          "C",
+          "F",
+          "Dm",
+          "Gm",
+          "C",
+          "Bb",
+          "F",
+          "Gm",
+          "C",
+          "Bb",
+          "C",
+          "F",
+          "C"
+        ],
+        "progression_repeats": 1,
+        "authored_melody_bars": 16,
+        "event_counts": {
+          "nylon": 48,
+          "bass": 24,
+          "thumb_piano": 31,
+          "brush": 28
+        },
+        "events_per_second": 3.6843749999999997,
+        "lead_midi_range": [
+          65,
+          74
+        ],
+        "written_lead_rest_fraction": 0.55078125,
+        "chord_voices": 3,
+        "chord_strikes_per_bar": 1,
+        "master_gain": 1.2003981550990734,
+        "master_rms_target_dbfs": -24.5,
+        "events": [
+          {
+            "instrument": "nylon",
+            "beat": 0.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 0.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 0.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 0.0,
+            "midi": 41,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 0.5,
+            "midi": 69,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 2.0,
+            "midi": 72,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 1.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 3.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 4.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 4.032,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 4.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 4.0,
+            "midi": 38,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 6.5,
+            "midi": 45,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 4.5,
+            "midi": 74,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 6.0,
+            "midi": 69,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 5.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 7.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 8.0,
+            "midi": 58,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 8.032,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 8.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 8.0,
+            "midi": 46,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 8.5,
+            "midi": 70,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 10.0,
+            "midi": 74,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 9.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 11.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 12.0,
+            "midi": 55,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 12.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 12.064,
+            "midi": 64,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 12.0,
+            "midi": 48,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 14.5,
+            "midi": 55,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 12.5,
+            "midi": 67,
+            "written_beats": 1.5,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 13.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 16.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 16.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 16.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 16.0,
+            "midi": 41,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 16.5,
+            "midi": 69,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 17.75,
+            "midi": 67,
+            "written_beats": 0.5,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 18.75,
+            "midi": 65,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 17.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 19.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 20.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 20.032,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 20.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 20.0,
+            "midi": 38,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 22.5,
+            "midi": 45,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 20.5,
+            "midi": 69,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 22.0,
+            "midi": 74,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 21.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 23.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 24.0,
+            "midi": 55,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 24.032,
+            "midi": 58,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 24.064,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 24.0,
+            "midi": 43,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 24.5,
+            "midi": 70,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 26.0,
+            "midi": 67,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 25.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 27.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 28.0,
+            "midi": 55,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 28.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 28.064,
+            "midi": 64,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 28.0,
+            "midi": 48,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 30.5,
+            "midi": 55,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 28.5,
+            "midi": 72,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 30.0,
+            "midi": 67,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 29.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 32.0,
+            "midi": 58,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 32.032,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 32.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 32.0,
+            "midi": 46,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 32.5,
+            "midi": 70,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 34.0,
+            "midi": 74,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 33.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 35.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 36.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 36.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 36.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 36.0,
+            "midi": 41,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 38.5,
+            "midi": 48,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 36.5,
+            "midi": 72,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 38.0,
+            "midi": 69,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 37.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 39.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 40.0,
+            "midi": 55,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 40.032,
+            "midi": 58,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 40.064,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 40.0,
+            "midi": 43,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 40.5,
+            "midi": 70,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 42.0,
+            "midi": 67,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 41.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 43.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 44.0,
+            "midi": 55,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 44.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 44.064,
+            "midi": 64,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 44.0,
+            "midi": 48,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 46.5,
+            "midi": 55,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 44.5,
+            "midi": 67,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 46.0,
+            "midi": 72,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 45.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 48.0,
+            "midi": 58,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 48.032,
+            "midi": 62,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 48.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 48.0,
+            "midi": 46,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 48.5,
+            "midi": 74,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 50.0,
+            "midi": 70,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 49.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 51.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 52.0,
+            "midi": 55,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 52.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 52.064,
+            "midi": 64,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 52.0,
+            "midi": 48,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 54.5,
+            "midi": 55,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 52.5,
+            "midi": 72,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 54.0,
+            "midi": 67,
+            "written_beats": 1,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 53.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 55.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 56.0,
+            "midi": 57,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 56.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 56.064,
+            "midi": 65,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 56.0,
+            "midi": 41,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 56.5,
+            "midi": 65,
+            "written_beats": 1.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 57.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 59.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          },
+          {
+            "instrument": "nylon",
+            "beat": 60.0,
+            "midi": 55,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.25
+          },
+          {
+            "instrument": "nylon",
+            "beat": 60.032,
+            "midi": 60,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.16
+          },
+          {
+            "instrument": "nylon",
+            "beat": 60.064,
+            "midi": 64,
+            "written_beats": 2.8,
+            "gain": 0.09,
+            "pan": -0.07
+          },
+          {
+            "instrument": "bass",
+            "beat": 60.0,
+            "midi": 48,
+            "written_beats": 1.6,
+            "gain": 0.15,
+            "pan": 0
+          },
+          {
+            "instrument": "bass",
+            "beat": 62.5,
+            "midi": 55,
+            "written_beats": 0.85,
+            "gain": 0.077,
+            "pan": 0
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 60.5,
+            "midi": 72,
+            "written_beats": 0.75,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "thumb_piano",
+            "beat": 62.5,
+            "midi": 67,
+            "written_beats": 1.5,
+            "gain": 0.18,
+            "pan": 0.1
+          },
+          {
+            "instrument": "brush",
+            "beat": 61.0,
+            "midi": null,
+            "written_beats": null,
+            "gain": 0.045,
+            "pan": -0.1
+          }
+        ],
+        "loop_strategy": "Circular note tails, short quiet room reflections and periodic filtering, with a 2.5 ms cosine edge guard; no musical fade-out gap."
+      }
+    }
+  ],
+  "limitations": "Objective file, amplitude and loop-boundary checks only. No native playback, browser audition or subjective listening acceptance was performed."
+}

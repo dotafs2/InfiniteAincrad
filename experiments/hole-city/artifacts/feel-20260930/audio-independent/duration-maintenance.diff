@@ -1,0 +1,11 @@
+--- before/music_review.gd
++++ tests/music_review.gd
+@@ -138,7 +138,7 @@
+ 	check(game.sound.bus==&"SFX","Actual collection sound is routed to SFX")
+ 	check(game.audio.music.bus==&"Music" and game.audio.music.playback_type==AudioServer.PLAYBACK_TYPE_STREAM,"Background Ogg uses dedicated Music bus and explicit stream playback")
+ 	check(game.audio.music.stream.loop and game.audio.music.stream.loop_offset==0.0,"Actual loaded Vorbis resource loops from the beginning")
+-	check(game.audio.TRACKS.city.resource_path!=game.audio.TRACKS.food.resource_path and absf(game.audio.TRACKS.city.get_length()-32)<.01 and game.audio.TRACKS.food.get_length()>34,"Both distinct imported Vorbis resources decode to expected duration")
++	check(game.audio.TRACKS.city.resource_path!=game.audio.TRACKS.food.resource_path and absf(game.audio.TRACKS.city.get_length()-(16.0*4.0*60.0/104.0))<.01 and absf(game.audio.TRACKS.food.get_length()-(16.0*4.0*60.0/108.0))<.01,"Both distinct imported Vorbis resources decode to expected duration")
+ 	game.start_level();game.begin_play();game.set_physics_process(false)
+ 	game.world.process_mode=Node.PROCESS_MODE_DISABLED
+ 	for body in game.city.foods:

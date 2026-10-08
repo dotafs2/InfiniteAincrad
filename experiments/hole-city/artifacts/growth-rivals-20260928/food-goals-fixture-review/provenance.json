@@ -1,0 +1,34 @@
+{
+  "source_before": {
+    "fidelity/game.gd": "b4aaaff3146f320cef2fedeaa262d71a51625635bda45894fb8121c8c6dfb68c",
+    "fidelity/hole.gd": "6633da90a596026bcadd87e404235e16c0f6f9d6bb7527f56d92a2965403f117",
+    "fidelity/food_city.gd": "4d9523a275990adbbbaa8cd2f2efccfebe747bda119003276a89b06af4a1e84b",
+    "fidelity/food_body.gd": "32ecd84b84f782d522b6de58286409b4f81e4a5e7dab7a3772dab47712edc029",
+    "tests/review_food_goals.gd": "104efa04422cbc6dfbd2fef92b8740e133e6d2ced443f25a0174e26a50caaf43",
+    "tests/growth_rivals_review.gd": "3238a53b8d25520b93c633f9650e22c3489babea8a931263190c2ca281fa256f",
+    "artifacts/growth-rivals-20260928/food-goals-fixture-review/owner_receipt_review.gd": "6094255350fc8014326605ff2219d44b0fa9b4e7d451a671e0fd64ab9acade36"
+  },
+  "source_after": {
+    "fidelity/game.gd": "b4aaaff3146f320cef2fedeaa262d71a51625635bda45894fb8121c8c6dfb68c",
+    "fidelity/hole.gd": "6633da90a596026bcadd87e404235e16c0f6f9d6bb7527f56d92a2965403f117",
+    "fidelity/food_city.gd": "4d9523a275990adbbbaa8cd2f2efccfebe747bda119003276a89b06af4a1e84b",
+    "fidelity/food_body.gd": "32ecd84b84f782d522b6de58286409b4f81e4a5e7dab7a3772dab47712edc029",
+    "tests/review_food_goals.gd": "104efa04422cbc6dfbd2fef92b8740e133e6d2ced443f25a0174e26a50caaf43",
+    "tests/growth_rivals_review.gd": "3238a53b8d25520b93c633f9650e22c3489babea8a931263190c2ca281fa256f",
+    "artifacts/growth-rivals-20260928/food-goals-fixture-review/owner_receipt_review.gd": "6094255350fc8014326605ff2219d44b0fa9b4e7d451a671e0fd64ab9acade36"
+  },
+  "stable": true,
+  "results": {
+    "food_goals_review": {
+      "checks": 36,
+      "failures": [],
+      "scope": "Independent actual receipt path and gate/guide review; physical playability is a separate test"
+    },
+    "owner_receipt_review": {
+      "checks": 34,
+      "failures": [],
+      "scope": "Controlled actual completion and ownership accounting on both maps, reusing the existing growth/rivals ownership-chain review. Physical fall geometry is separately covered; no save, browser or performance claim."
+    }
+  },
+  "helper_state": "All sequential subprocesses exited and were waited on."
+}

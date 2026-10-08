@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "recorded_at_utc": "2026-10-03T02:28:31.699182+00:00",
+  "scope": "Successful submission confirmed by root in live Apple UI; documentation worker does not operate browser/accounts. No raw account screenshots or personal financial data are public.",
+  "app_apple_id": "6817826588",
+  "bundle_id": "io.github.dotafs2.sinkcity",
+  "submission_id": "09f163eb-1c42-49cf-9643-366c13bb8680",
+  "submission_details_url": "https://appstoreconnect.apple.com/apps/6817826588/distribution/reviewsubmissions/details/09f163eb-1c42-49cf-9643-366c13bb8680",
+  "confirmation_heading": "4 Items Submitted",
+  "submission_status": "Waiting for Review",
+  "date_submitted_apple_display": "October 3, 2026 at10:25AM",
+  "display_timezone": "Asia/Shanghai",
+  "submitted_at_local_minute": "2026-10-03T10:25+08:00",
+  "items": [
+    {
+      "type": "Consumable IAP",
+      "name": "60 Diamonds",
+      "apple_id": "6818371007",
+      "product_id": "sink_city.diamonds_60",
+      "us_price_usd": 0.99,
+      "status": "Waiting for Review"
+    },
+    {
+      "type": "Consumable IAP",
+      "name": "360 Diamonds",
+      "apple_id": "6818406986",
+      "product_id": "sink_city.diamonds_360",
+      "us_price_usd": 4.99,
+      "status": "Waiting for Review"
+    },
+    {
+      "type": "Consumable IAP",
+      "name": "1800 Diamonds",
+      "apple_id": "6818407795",
+      "product_id": "sink_city.diamonds_1800",
+      "us_price_usd": 19.99,
+      "status": "Waiting for Review"
+    },
+    {
+      "type": "iOS App",
+      "version": "0.12.7",
+      "build": "26",
+      "status": "Waiting for Review"
+    }
+  ],
+  "item_count": 4,
+  "final_submission_confirmed": true,
+  "app_review_submitted": true,
+  "approved": false,
+  "released": false,
+  "public_availability_verified": false,
+  "release_mode": "Manual release after approval",
+  "submission_authorization": "Existing explicit user authorization for App Review submission; no new legal modal reported by root.",
+  "completed_prerequisites": {
+    "paid_apps_agreement": "Active",
+    "bank_account": "Active",
+    "us_certificate_of_foreign_status_of_beneficial_owner": "Active",
+    "us_form_w8ben": "Active",
+    "seven_category_privacy_labels": "Published after explicit user accuracy approval",
+    "build26_processing": "Complete and selected/saved into iOS version0.12.7",
+    "store_media": "Five ordered V5 screenshots and two previews uploaded; gameplay preview thumbnails visible without red errors",
+    "iap_metadata": "All three existing diamond products have US-only availability, English US localization, actual US prices, RGB review screenshot and saved review notes; future territories are not automatically enabled"
+  },
+  "package_evidence": {
+    "path": "artifacts/release-completion-20261003/phase-02-package-upload-evidence.json",
+    "sha256": "84e085df2518fe20fc24de14a656af6c64f6497db3ef26d55f5c7bb4242e36d3",
+    "scope": "Immutable exact local package/upload evidence at its original cutoff; later account state is superseded by this receipt."
+  },
+  "previous_account_progress": {
+    "path": "artifacts/release-completion-20261003/phase-02-account-progress-02.json",
+    "sha256": "8c31e0b41b3a8b557be0e3bf239173e3108704ed52b03ea8cd807a921b2ac909"
+  },
+  "remaining": [
+    "Apple App Review outcome",
+    "Respond to actual Apple review requests if any",
+    "Manual release after approval"
+  ],
+  "limitations": {
+    "real_sandbox_purchase_verified": false,
+    "current_phone_connection": "Unavailable at last root check",
+    "new_phone_installation_verified": false,
+    "last_verified_phone_installation": "0.12.4/build16",
+    "current_distribution_package_physical_acceptance": false
+  },
+  "root_git_publication": false
+}

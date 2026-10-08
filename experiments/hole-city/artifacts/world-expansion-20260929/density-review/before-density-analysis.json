@@ -1,0 +1,49 @@
+{
+  "rows": [
+    {
+      "name": "Marshmallow Reach",
+      "eligible_ground_samples": 4086,
+      "occupied": 103,
+      "ratio": 0.025208027410670582,
+      "oriented_rectangle_ratio": 0.024473813020068527,
+      "minimum_target_samples": 491,
+      "additional_occupied_samples_needed": 388,
+      "ground_bodies_considered": 85,
+      "new_tower_bases": 6
+    },
+    {
+      "name": "Syrup Waterfront",
+      "eligible_ground_samples": 2660,
+      "occupied": 41,
+      "ratio": 0.015413533834586466,
+      "oriented_rectangle_ratio": 0.019548872180451128,
+      "minimum_target_samples": 320,
+      "additional_occupied_samples_needed": 279,
+      "ground_bodies_considered": 71,
+      "new_tower_bases": 5
+    },
+    {
+      "name": "Custard Commons",
+      "eligible_ground_samples": 4109,
+      "occupied": 102,
+      "ratio": 0.02482355804331954,
+      "oriented_rectangle_ratio": 0.024580189827208568,
+      "minimum_target_samples": 494,
+      "additional_occupied_samples_needed": 392,
+      "ground_bodies_considered": 102,
+      "new_tower_bases": 7
+    },
+    {
+      "name": "Cookie End",
+      "eligible_ground_samples": 2665,
+      "occupied": 49,
+      "ratio": 0.018386491557223265,
+      "oriented_rectangle_ratio": 0.01726078799249531,
+      "minimum_target_samples": 320,
+      "additional_occupied_samples_needed": 271,
+      "ground_bodies_considered": 45,
+      "new_tower_bases": 6
+    }
+  ],
+  "method": "Independent sampled rectangles and point-segment road distances using actual unsupported food dimensions; axis metric reproduces gate; rotated rectangle estimate separately reported."
+}

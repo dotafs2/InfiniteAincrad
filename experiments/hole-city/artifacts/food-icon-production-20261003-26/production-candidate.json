@@ -1,0 +1,258 @@
+{
+  "at_utc": "2026-10-03T01:24:06.435598+00:00",
+  "version": "0.12.7",
+  "build": "26",
+  "production_ad_identifiers_verified": true,
+  "official_test_ads": false,
+  "compiled_linked_archived": true,
+  "native_adapter_sha256": "4796be1bac3627e4bed3f548fa11ab3bc298938756cb8b0091447f397ab5eb08",
+  "native_plugin_sha256": "3ca5ba322ef70d60853fa9d2e6e636af030c35920ef82b60fbf6a7d8e13c9a07",
+  "native_preparer_sha256": "71083ad56052c8e3b529dc582c9f32944f4f96a6f706da23068efd9ac7edfbe1",
+  "packaging_input_sha256": {
+    "tools/prepare_ios_project.py": "71083ad56052c8e3b529dc582c9f32944f4f96a6f706da23068efd9ac7edfbe1",
+    "tools/configure_ios_services.py": "466814448b28e7bdb3cd32e604de8921da6acba809e39161ee7436228f106e16",
+    "branding/app-icon.png": "2f59bdc2392bbb654d66b4b18e71ae227104f63bde4ed0cf359c89d33bf30a02",
+    "branding/manifest.json": "6a3a4c581e8468a6015548fc6db0f590fd32c2130bab740ef4befdfa3d46fa59",
+    "icon.svg": "c4190fc8a21f79e364115377db542e921ca9e8de165ec81e04e1ec5704b8884e",
+    "native/ios/HoleFeastServices.swift": "4796be1bac3627e4bed3f548fa11ab3bc298938756cb8b0091447f397ab5eb08",
+    "native/ios/HoleFeastPlugin.mm": "3ca5ba322ef70d60853fa9d2e6e636af030c35920ef82b60fbf6a7d8e13c9a07",
+    "artifacts/app-icon-food-20261002/native-icon-export-check.json": "4e2cd3603857c989fef145c7f6e82ca40655a7c2759323a3deffbb72a3395d5a",
+    "build/ios-app-icon-food-20261002-24/preparation.json": "27736ad6148fb489355b8476910ed41b4944eb4814db7230da3771cd58380f40",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Contents.json": "1b577eabff68aafb3019179eb7607e537fec35c2d76633d324156fbd26cc3040",
+    "artifacts/ad-recovery-20261001-08/native-09/production-candidate.json": "1b756f7f47bb79adb218c92c7dfde4d499c36881dff44aa40b9c52cb1dd1b5f2",
+    ".build/godot-standard/Godot.app/Contents/MacOS/Godot": "c7cccbf8fb143e34e02fd6521e09be2c2b974f0d5db080b19071c9c570718ccf",
+    ".build/ios-4.7.2/ios.zip": "fd3280d10dc75356dded006f6f8813f40a5aebd32d128592b781256d8ffbdff4",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-58.png": "7c91d3d29d2aa28cc02eea930399804bc0f57837bca3dbb3b06770cf335d9de2",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-87.png": "c61d20b25f5adcd959dc1ad5c3fcf46bf0b8eab5c4660c33806d3b3c8323d31b",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-40.png": "f3f329d83cf8e3d7fbdfb6129cc63ffb55790af7d006a3e52ca3fd7da3381b56",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-60.png": "cc767e3aa2eb2ad9ee7a45c2cd100ba8d184b12906aac553aad0c7245a1a17a1",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-76.png": "70f227e1d0a7a6c812c87d3df2b86bdd916a42e490454af96ca44b0cab0d6b2d",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-114.png": "9435284ab7e76fa3ab5b02595932b568d8eeaf39dcbc250790da6eb6af323497",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-80.png": "9ae25fb279db9046d780c9c141898d82732014120824a888dd1ca5246372965b",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-120.png": "00b6018145c00cfb2c4e4b386cb99273e355ebd6dfebf0e1a2118a2011faf181",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-120-1.png": "00b6018145c00cfb2c4e4b386cb99273e355ebd6dfebf0e1a2118a2011faf181",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-180.png": "fe472b1c96622829bfe5f0d9584b113c792ea12a4e2e4e7d15f1a2c247bc7066",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-167.png": "e404d7e08bf78bb6a46f07fa202063ba93a91ccdf32f51758eeda3433e0dc3ee",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-152.png": "d3981f192af225c287219ef18a90e5a7e941092adf2372f21cd571de1b99476a",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-128.png": "f4bf41a8fd630dc5e2a482a3ca9b0a318805ed5de36e3a89f90c79cff4f00362",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-192.png": "294ee1b5ed4dd53226ea1e61764469b782a2860abd8712b36820e2f75dc9b778",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-136.png": "83fbd963af43d94a942a920ceac3946e5825baf0b972d6b8d32c9c084b9709fa",
+    "build/ios-app-icon-food-20261002-24/xcode/SinkCity/Images.xcassets/AppIcon.appiconset/Icon-1024.png": "2f59bdc2392bbb654d66b4b18e71ae227104f63bde4ed0cf359c89d33bf30a02",
+    "build/food-icon-production-20261003-25/prepare.py": "2b7ba1873d9c9ca195c209fec510eae809199fb6dda260e5b1f72162d912eafc",
+    "build/food-icon-production-20261003-25/completion-status.json": "df576eb2e4cf1be4d2a6e88a8a22c62062740c6c1cfda49123bf298f1b8424f1"
+  },
+  "orchestration_helper_sha256": "83375f69a254d1c54bcec955b39d0ae63e3f55b0cb3a2474ae2c18aed4e28954",
+  "native_executable_sha256": "3235117bb230b7bfa53b09c74c372e50c31bedbcce78dbe112f2c3e52832a588",
+  "native_pck_sha256": "3239ed166a46ebd0559d3d7e6a4c178ce80800f0abf64daa9226af9a2aaf0c46",
+  "native_pck_bytes": 11597424,
+  "reused_native_pck_checks": 0,
+  "new_native_pck_checks": 19012,
+  "native_acceptance_suites": [
+    "release_info",
+    "monetization_bridges",
+    "economy_continuation",
+    "diamond_boundary_review",
+    "native_polish",
+    "application_lifecycle",
+    "skin_collection",
+    "ui_collection_review",
+    "ui_redesign",
+    "mobile_thumbnail",
+    "viewport_layout",
+    "building_surface_artifacts",
+    "selective_reveal_review",
+    "building_only_reveal_review",
+    "title_navigation",
+    "retention_ui_review"
+  ],
+  "web_gate_suites_per_phase": 85,
+  "web_gate_source_fresh_suites": 34,
+  "web_gate_source_reused_suites": 51,
+  "web_gate_package_fresh_suites": 85,
+  "accepted_web_receipt_sha256": "b4d732ed91a3ebff35c36d2f4a99a4c27152adddfc7bb4c6af7afdde1f45a90a",
+  "vendor_privacy_manifest_sha256": {
+    "GoogleMobileAds": "69fb112582fc23fc06c635c961d262a3f7b4b5654d284787491de3000dadf9d2",
+    "UserMessagingPlatform": "45b7adb99fcd2d962a1c800fbfcc1325b57a7fa4165f416182323bb5ffe9c900"
+  },
+  "skadnetwork_identifier_count": 50,
+  "guarded_inputs_unchanged": 810,
+  "separate_native_icon": {
+    "source": "branding/app-icon.png",
+    "source_sha256": "2f59bdc2392bbb654d66b4b18e71ae227104f63bde4ed0cf359c89d33bf30a02",
+    "input_sha256": {
+      "icon.svg": "c4190fc8a21f79e364115377db542e921ca9e8de165ec81e04e1ec5704b8884e",
+      "branding/app-icon.png": "2f59bdc2392bbb654d66b4b18e71ae227104f63bde4ed0cf359c89d33bf30a02",
+      "branding/manifest.json": "6a3a4c581e8468a6015548fc6db0f590fd32c2130bab740ef4befdfa3d46fa59"
+    },
+    "prepared_png_sha256": "2f59bdc2392bbb654d66b4b18e71ae227104f63bde4ed0cf359c89d33bf30a02",
+    "gameplay_receipt_separate": true
+  },
+  "app_icon_source_catalog": {
+    "catalog_contents_sha256": "1b577eabff68aafb3019179eb7607e537fec35c2d76633d324156fbd26cc3040",
+    "master_sha256": "2f59bdc2392bbb654d66b4b18e71ae227104f63bde4ed0cf359c89d33bf30a02",
+    "app_icon_catalog_count": 16,
+    "icons": [
+      {
+        "filename": "Icon-58.png",
+        "width": 58,
+        "height": 58,
+        "has_alpha": false,
+        "sha256": "7c91d3d29d2aa28cc02eea930399804bc0f57837bca3dbb3b06770cf335d9de2"
+      },
+      {
+        "filename": "Icon-87.png",
+        "width": 87,
+        "height": 87,
+        "has_alpha": false,
+        "sha256": "c61d20b25f5adcd959dc1ad5c3fcf46bf0b8eab5c4660c33806d3b3c8323d31b"
+      },
+      {
+        "filename": "Icon-40.png",
+        "width": 40,
+        "height": 40,
+        "has_alpha": false,
+        "sha256": "f3f329d83cf8e3d7fbdfb6129cc63ffb55790af7d006a3e52ca3fd7da3381b56"
+      },
+      {
+        "filename": "Icon-60.png",
+        "width": 60,
+        "height": 60,
+        "has_alpha": false,
+        "sha256": "cc767e3aa2eb2ad9ee7a45c2cd100ba8d184b12906aac553aad0c7245a1a17a1"
+      },
+      {
+        "filename": "Icon-76.png",
+        "width": 76,
+        "height": 76,
+        "has_alpha": false,
+        "sha256": "70f227e1d0a7a6c812c87d3df2b86bdd916a42e490454af96ca44b0cab0d6b2d"
+      },
+      {
+        "filename": "Icon-114.png",
+        "width": 114,
+        "height": 114,
+        "has_alpha": false,
+        "sha256": "9435284ab7e76fa3ab5b02595932b568d8eeaf39dcbc250790da6eb6af323497"
+      },
+      {
+        "filename": "Icon-80.png",
+        "width": 80,
+        "height": 80,
+        "has_alpha": false,
+        "sha256": "9ae25fb279db9046d780c9c141898d82732014120824a888dd1ca5246372965b"
+      },
+      {
+        "filename": "Icon-120.png",
+        "width": 120,
+        "height": 120,
+        "has_alpha": false,
+        "sha256": "00b6018145c00cfb2c4e4b386cb99273e355ebd6dfebf0e1a2118a2011faf181"
+      },
+      {
+        "filename": "Icon-120-1.png",
+        "width": 120,
+        "height": 120,
+        "has_alpha": false,
+        "sha256": "00b6018145c00cfb2c4e4b386cb99273e355ebd6dfebf0e1a2118a2011faf181"
+      },
+      {
+        "filename": "Icon-180.png",
+        "width": 180,
+        "height": 180,
+        "has_alpha": false,
+        "sha256": "fe472b1c96622829bfe5f0d9584b113c792ea12a4e2e4e7d15f1a2c247bc7066"
+      },
+      {
+        "filename": "Icon-167.png",
+        "width": 167,
+        "height": 167,
+        "has_alpha": false,
+        "sha256": "e404d7e08bf78bb6a46f07fa202063ba93a91ccdf32f51758eeda3433e0dc3ee"
+      },
+      {
+        "filename": "Icon-152.png",
+        "width": 152,
+        "height": 152,
+        "has_alpha": false,
+        "sha256": "d3981f192af225c287219ef18a90e5a7e941092adf2372f21cd571de1b99476a"
+      },
+      {
+        "filename": "Icon-128.png",
+        "width": 128,
+        "height": 128,
+        "has_alpha": false,
+        "sha256": "f4bf41a8fd630dc5e2a482a3ca9b0a318805ed5de36e3a89f90c79cff4f00362"
+      },
+      {
+        "filename": "Icon-192.png",
+        "width": 192,
+        "height": 192,
+        "has_alpha": false,
+        "sha256": "294ee1b5ed4dd53226ea1e61764469b782a2860abd8712b36820e2f75dc9b778"
+      },
+      {
+        "filename": "Icon-136.png",
+        "width": 136,
+        "height": 136,
+        "has_alpha": false,
+        "sha256": "83fbd963af43d94a942a920ceac3946e5825baf0b972d6b8d32c9c084b9709fa"
+      },
+      {
+        "filename": "Icon-1024.png",
+        "width": 1024,
+        "height": 1024,
+        "has_alpha": false,
+        "sha256": "2f59bdc2392bbb654d66b4b18e71ae227104f63bde4ed0cf359c89d33bf30a02"
+      }
+    ],
+    "native24_verification_sha256": "4e2cd3603857c989fef145c7f6e82ca40655a7c2759323a3deffbb72a3395d5a",
+    "scope": "Exact fresh exported AppIcon source images; not a decoded compiled Assets.car."
+  },
+  "archive_icon_binding": {
+    "assets_car_sha256": "a266ae574fb71b27c9b645cd5dc0b9788d94d172c41c8b0879cb66df7db3bc1c",
+    "assets_car_bytes": 2638200,
+    "loose_app_icon_sha256": {
+      "AppIcon60x60@2x.png": "dd257b6dbed8573877c343199b869c1e8778f9a840ec8d49901b9b866149b3fc",
+      "AppIcon76x76@2x~ipad.png": "1d00f1617a5d3d9e78e43889b0a661b6d6a170e2acc44a221d128bac85904624"
+    },
+    "primary_icon_metadata": {
+      "CFBundleIconFiles": [
+        "AppIcon60x60"
+      ],
+      "CFBundleIconName": "AppIcon"
+    },
+    "assets_car_decoded": false,
+    "scope": "Source-catalog/master binding plus actual actool build provenance and compiled archive/IPA byte comparison. No Assets.car image extraction or launcher/device acceptance claimed."
+  },
+  "distribution_icon_binding": {
+    "assets_car_sha256": "a266ae574fb71b27c9b645cd5dc0b9788d94d172c41c8b0879cb66df7db3bc1c",
+    "assets_car_bytes": 2638200,
+    "loose_app_icon_sha256": {
+      "AppIcon60x60@2x.png": "dd257b6dbed8573877c343199b869c1e8778f9a840ec8d49901b9b866149b3fc",
+      "AppIcon76x76@2x~ipad.png": "1d00f1617a5d3d9e78e43889b0a661b6d6a170e2acc44a221d128bac85904624"
+    },
+    "primary_icon_metadata": {
+      "CFBundleIconFiles": [
+        "AppIcon60x60"
+      ],
+      "CFBundleIconName": "AppIcon"
+    },
+    "assets_car_decoded": false,
+    "scope": "Source-catalog/master binding plus actual actool build provenance and compiled archive/IPA byte comparison. No Assets.car image extraction or launcher/device acceptance claimed."
+  },
+  "archive_assets_car_sha256": "a266ae574fb71b27c9b645cd5dc0b9788d94d172c41c8b0879cb66df7db3bc1c",
+  "ipa_assets_car_sha256": "a266ae574fb71b27c9b645cd5dc0b9788d94d172c41c8b0879cb66df7db3bc1c",
+  "assets_car_decoded": false,
+  "actual_actool_archive_log_sha256": "d88b76744ffc2f7a0a945c586a052632d0c2d364907d7c0ac4ee0129bbbccab6",
+  "native_preparation_sha256": "4e89d9918d74a8d4378ecfa5e6674d6d7b565aa4612051c75d6e4ef8981986e2",
+  "strict_distribution_signature_valid": true,
+  "valid_app_store_distribution_profile": true,
+  "ipa_sha256": "2967510bbf18715dc899f5a4a1e2ade699617f859194d7593a6bcc41ac56ec93",
+  "ipa_bytes": 40010014,
+  "ipa_path": "build/food-icon-production-20261003-26/distribution/SinkCity.ipa",
+  "uploaded": false,
+  "app_review_submitted": false,
+  "installed": false,
+  "device_tested": false,
+  "scope": "Fresh production26 compile/archive/sign/export and sixteen actual native-PCK suites. Exact master/source icon binding plus compiled archive/IPA asset bytes; no Assets.car decoding, phone, sandbox, upload, account or App Review actions."
+}

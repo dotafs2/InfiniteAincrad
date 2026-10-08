@@ -1,0 +1,17 @@
+DRAFT FOR SUCCESSOR BUILD 31 — NOT UPLOADED OR SAVED ONLINE.
+Version 0.13.0 (30). Response to Guideline 2.1, submission 09f163eb-1c42-49cf-9643-366c13bb8680.
+
+1. Device demonstration: [REQUIRED: verified current-iOS physical recording URL/attachment, exact device/OS/build and launch/gameplay/paid-feature timestamps.]
+
+2. Purpose/audience: A single-player casual arcade game about collecting and growing a black hole, with computer-controlled rivals. Players freely select Sunny City, Snack Garden or Bubble Toy Town from HOME between rounds. All three worlds are available without a world-unlock purchase. Snack Garden includes the Sushi Express train. Skins and progress are saved locally.
+
+3. Setup/features: No app account, credentials or sample files are required. HOME > select world > PLAY. Drag to move; BOOST gives a short speed increase when charged. City and Toy Town start at 90 seconds; Snack Garden at 60. HOLES opens the skin collection. SETTINGS > PRIVACY & SUPPORT opens support, privacy and credits.
+
+4. Services: Core gameplay runs locally without a developer-operated game backend, cloud saves or AI service. Optional rewarded ads use Google AdMob and applicable privacy forms use Google UMP. Purchases use Apple StoreKit 2. Ads request non-personalized delivery; publisher first-party ID/personalization are disabled. SDK data processing is disclosed in the privacy policy and App Privacy information. Network/provider availability affects ads and purchases.
+
+5. Regions: The intended initial release is United States only. [CONFIRM actual app/product availability.] Worlds and core gameplay have no country-specific branches. Prices come from Apple's catalog; ads and privacy forms depend on provider/region.
+
+6. Material/licenses: Casual entertainment; no regulated service. Game models, UI and skins are original, including Blender-authored block castles. No proprietary reference-game assets are included. Retained notices cover Godot/template code (MIT), Fredoka (SIL OFL) and Shop Theme by Cleyton Kauffman (CC0). Credits appear in PRIVACY & SUPPORT.
+
+7. IAP: HOME > STORE > DIAMOND SHOP offers consumable packs of 100, 360 and 1,800 diamonds, using real StoreKit prices and Apple's purchase sheet. Verified transactions credit the local wallet. [CONFIRM the new 100-diamond SKU and actual Sandbox fulfillment.]
+STORE exchanges: 100 diamonds > 250 coins; 250 > 625; 1,000 > 2,500. HOLES > UNLOCK RANDOM costs 50 coins; RATES displays probabilities and guarantees before spending. Round earnings are floor(points / 10), with no minimum or finish bonus; 1,000 points earn 100 coins. On eligible results, 10 diamonds provide one 1.5x coin reward or one 30-second continuation. Continuing pays only the new point-derived difference, including any earned multiplier. Optional earned videos are alternatives; STORE also offers a video for 3 diamonds. Video controls are disabled until ready; the provider controls video duration. Currency is non-transferable, has no cash value and is saved locally, without a cross-device wallet restore feature. Core play requires no purchase.

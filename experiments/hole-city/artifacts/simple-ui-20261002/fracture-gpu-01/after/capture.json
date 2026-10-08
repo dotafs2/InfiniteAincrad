@@ -1,0 +1,2189 @@
+{
+	"failures": [],
+	"helper_sha256": "2d6fa7b987ba07211de826d59613d5a6cfc21905972d5f83757a10babc4759d1",
+	"inputs": {
+		"res://assets/city_kit/manifest.json": "5e63b98e3d996f13785b48d14bd17c32a959dddf9065a126c62db1eefbeffc70",
+		"res://fidelity/catalog_city.gd": "e84e91de200a5293cc780b59366fbb224ccc46140b756e0e17801d2b9efc1bbb",
+		"res://fidelity/fracture_cache.gd": "cdfbcb294bf2f2090a4c3205d9958a03950ee1b3761641ef41d73e6b83581abd",
+		"res://fidelity/palette.gdshader": "c5897f00cc44319c25bc69ce994a0e6864e60a88944294565f9e2fcc34558e91",
+		"res://fidelity/rim_body.gd": "9089dfaa7c890977e69f604d58c721fce1961ef4b7e104d9c5ba1d0162706c5f",
+		"res://fidelity/swallowable.gd": "b704b3b2988195e2c2b04cbcffa357b56f62af7466faa6cf461b1e18b6f5081d",
+		"res://project.godot": "92095d393530308434bbae4d9c8bddc187fe069cc43ba6d58788fea94596578a"
+	},
+	"native_device_capture": false,
+	"ordinary_gameplay": false,
+	"pixels": [
+		1000,
+		900
+	],
+	"pose_policy": {
+		"rotations": "No authored rotation; preserve original building basis",
+		"vertical_course_gap_metres": 1.1,
+		"vertical_lift_metres": 2.0,
+		"x_outward_metres": 1.55,
+		"z_outward_metres": 1.75
+	},
+	"records": [
+		{
+			"asset": "001_row_house_01",
+			"cache_path": "res://assets/fractures/001_row_house_01.res",
+			"cache_sha256": "a86e9475222ae2b1c957f36e14aa22af322495e6d73c3cd0e952fbc8f958e506",
+			"images": [
+				{
+					"angle": "isometric",
+					"camera": {
+						"origin": [
+							15.0,
+							18.2999992370605,
+							20.0
+						],
+						"x": [
+							0.800000011920929,
+							0.0,
+							-0.600000083446503
+						],
+						"y": [
+							-0.276811629533768,
+							0.887216806411743,
+							-0.369082152843475
+						],
+						"z": [
+							0.53233015537262,
+							0.461352705955505,
+							0.709773480892181
+						]
+					},
+					"file": "001_row_house_01-isometric.png",
+					"orthographic_size": 17.5,
+					"projection": "orthographic",
+					"sha256": "6892478ee4cf2817482666d94da8b209214b80f79efbbd603dbc1485bdac8be5",
+					"target": [
+						0.0,
+						5.30000019073486,
+						0.0
+					]
+				},
+				{
+					"angle": "upper-cut",
+					"camera": {
+						"origin": [
+							7.0,
+							29.2999992370605,
+							11.0
+						],
+						"x": [
+							0.843661487102509,
+							0.0,
+							-0.536875486373901
+						],
+						"y": [
+							-0.471753835678101,
+							0.477369874715805,
+							-0.741327464580536
+						],
+						"z": [
+							0.256288170814514,
+							0.878702461719513,
+							0.40273854136467
+						]
+					},
+					"file": "001_row_house_01-upper-cut.png",
+					"orthographic_size": 17.5,
+					"projection": "orthographic",
+					"sha256": "e231f4c0948ebddca31086cbb278b28df2cadefac59a0edde474e3146c975849",
+					"target": [
+						0.0,
+						5.30000019073486,
+						0.0
+					]
+				}
+			],
+			"kind": "row_house",
+			"model_path": "res://assets/city_kit/001_row_house_01.glb",
+			"model_sha256": "b4a7927db2e673e83dfa9ee6e1ea13e370fa07e8ab6237db0f7b8a8832b3ace4",
+			"original_body_pose": {
+				"origin": [
+					0.0,
+					3.33999991416931,
+					0.0
+				],
+				"x": [
+					1.0,
+					0.0,
+					0.0
+				],
+				"y": [
+					0.0,
+					1.0,
+					0.0
+				],
+				"z": [
+					0.0,
+					0.0,
+					1.0
+				]
+			},
+			"pieces": [
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							-3.29999995231628,
+							-3.17499995231628
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 0,
+					"index": 0,
+					"original_clipped_vertices": 69,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							1.32499980926514,
+							-3.28749990463257
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 0,
+					"raw_mesh": {
+						"color_sha256": "70ab85aface553799b6c5ff296dc21d227b1f9a8d67341227b694b06401ac7ed",
+						"logical_arrays_sha256": "09598b57d874c29c74725b483cab07ec0bc7a9ed542922053b954d8ab611678b",
+						"normal_sha256": "c367d4085fe50fb518c502e3b04773d6b42f504476d73f9ce659fca17dd83c91",
+						"position_sha256": "3cde0eb96c39f87bb13130b7b2e8254c87a6692c89929a00d49f4250437ee889",
+						"surface_count": 1,
+						"triangle_area": 47.9888665408362,
+						"uv_sha256": "06a442ce5bedeb3b62d7cc073cf6e1feac058d5af0671c24f1be219e98044113",
+						"vertices": 87
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "d53e80a4148da9aae40bc829f552015f3591870c22e0c1fc500623cd5b20573b",
+						"logical_arrays_sha256": "7df90907d2fff10f9574d7447d9786ac418163e06d6b6be31e172edfa69dd5ad",
+						"normal_sha256": "fcfbd35af4bb1c293e491e6d5a6448b1b284c5cb562730d711c86df8244b8a02",
+						"position_sha256": "5710c212e7303a69a748de44abe0e7ca584c2cb82056ce3560766855af5895f3",
+						"surface_count": 1,
+						"triangle_area": 30.0311166972388,
+						"uv_sha256": "0bf44eda44d0839906d3de4516d5f5246d790b3f475421f42e1e3285cce6b3f2",
+						"vertices": 69
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							-3.29999995231628,
+							-3.17499995231628
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 0,
+					"index": 1,
+					"original_clipped_vertices": 60,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							1.32499980926514,
+							-3.28749990463257
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 1,
+					"raw_mesh": {
+						"color_sha256": "e507a4f83a1c3a879e806151f11d3e2bbbe7c08a2077771fdd4f23176463ac10",
+						"logical_arrays_sha256": "cbdaa7906a032c043b3c44e587f7df11be36976928eeade52528844bc195e9b1",
+						"normal_sha256": "9450bbf1c6d1be7c944c64a8b998f12215b758adbfd6f170a9e033fbda7cf506",
+						"position_sha256": "29322fbda81a31ae73ed96a4bb39dadf4345195b9087a5d423928998944edda4",
+						"surface_count": 1,
+						"triangle_area": 47.988074362278,
+						"uv_sha256": "7e78e1d2b83d954ee50b1ad56cd7dbb10f15431ad2faf71899b3352c1109d16c",
+						"vertices": 78
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "93cd79b8b852ec08ba97ec96914f17fdc2f9682d9fbc42dd685fb0fe7b145306",
+						"logical_arrays_sha256": "12e425a98b054aa486b5d976fec3333ac631511b48de7d03f84255d8c155c741",
+						"normal_sha256": "d728d92894dc0f6ff0157a1834f645ed1def84c8493a20d2a54eadc9d2348a1f",
+						"position_sha256": "c6ea948c43df2b49fdd3c26464f332658299cacf605613c54f0e3f1a00ded7cf",
+						"surface_count": 1,
+						"triangle_area": 30.0303245186806,
+						"uv_sha256": "c8ea4937c329bee6e60aa1669fdcb43496fa889cce352feec65b11a82f03cc2e",
+						"vertices": 60
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							-3.29999995231628,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 0,
+					"index": 2,
+					"original_clipped_vertices": 183,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							1.32499980926514,
+							3.48750019073486
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 2,
+					"raw_mesh": {
+						"color_sha256": "b9256b2ba45abdc79e9f8a08ee2fff02fc7bc66c85319caf2ee7b7b9114811b7",
+						"logical_arrays_sha256": "f7b382b7ca36a6b7fd991b27f8477c2e7d1c1bdc469f708ec36e04fa52654271",
+						"normal_sha256": "4399ed8c457c297693333ce0b8aa1694df678dd0e3d294c86156e69f94890053",
+						"position_sha256": "e0b358f15107d1aa0024d1343cddb413713770f49c5883db1b050c020376abf5",
+						"surface_count": 1,
+						"triangle_area": 50.4981595315039,
+						"uv_sha256": "ec9a1849e4761f9e15d4ae2d7aa2d612cad15cca18605717bc70033beb5f1551",
+						"vertices": 201
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "1d297cf05cd9c0543dff8f2ed72fcf5311dd1002387b18f1c3fc6c7776672054",
+						"logical_arrays_sha256": "b00ab5ec63185b08bb1f2eb746c2390cd9f24539fbaead401607f8b1c9739164",
+						"normal_sha256": "4020f1c405d3eeff7b0f8925c4890275b66ff3516e7c6070a5de7d141530c935",
+						"position_sha256": "2ac3b8e7ffd41aec3b458358fd8d71e86a059d29fafb3eeee0cdde99b3f68723",
+						"surface_count": 1,
+						"triangle_area": 32.5404096879065,
+						"uv_sha256": "60caec81009df5ea0ada6bab1d064891494c4058afb670450e3dfb95f35dc976",
+						"vertices": 183
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							-3.29999995231628,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 0,
+					"index": 3,
+					"original_clipped_vertices": 210,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							1.32499980926514,
+							3.48750019073486
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 3,
+					"raw_mesh": {
+						"color_sha256": "57d73d9d439b674d84f12ed7478d0f9b728b9372150d13359ca38fb3da26eca4",
+						"logical_arrays_sha256": "c6e89b255d927ffd6a704a09244aa8c5d429e4cfaf489e70e12b4ca74f5f00af",
+						"normal_sha256": "a0bb7fbe360be52f3368ee76c65162835c9be34f6c059d8b13bd98dd669231e7",
+						"position_sha256": "9fce7e06ea5b15937e4e8a6027c55df741ce7741fcf4ed279540c265f43b8c3e",
+						"surface_count": 1,
+						"triangle_area": 50.5652118548751,
+						"uv_sha256": "d5ced0e97a8ed252a259b5bb1d8142678ed82bc1f3b162852017d1c8bb7f9e9e",
+						"vertices": 228
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "3bec23a25cb3125c28089da7e8b8f98aad122375a18dcaff1146e0b9f6fa89c1",
+						"logical_arrays_sha256": "c9411b8bd34de6a9ce03e8ebcb90ad9e2c2f939dbf3ba36f998860f0cab2afd4",
+						"normal_sha256": "585c7eadcdc758514caed36214cbddeb2e7a39adbc5ce3761ccc0aaf48f91deb",
+						"position_sha256": "0bcf37a4fd074a8aa0ee17efbe6f5c21004eef33560be6ed32440be0db83fdbb",
+						"surface_count": 1,
+						"triangle_area": 32.6074620112777,
+						"uv_sha256": "22a5e223a02e6fecd9c9c7e14fe5b34853b20f962cb9f72eb7625decb77e292d",
+						"vertices": 210
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							-1.4300000667572,
+							-3.17499995231628
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 1,
+					"index": 4,
+					"original_clipped_vertices": 645,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							4.29500007629395,
+							-3.28749990463257
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 0,
+					"raw_mesh": {
+						"color_sha256": "4df22fdf37f5ba0911d5aa7e913a79b355e5c329f0e461116e83ae7a79d66fbc",
+						"logical_arrays_sha256": "702034b4a53a05ca2f8a8c8b1c341667e51cf1dc55134008195f9a8bac2d5b67",
+						"normal_sha256": "06d044fdbf3ac813e9cb78be6dd3178106a0eedf21c4aa3eb7143a181574bb36",
+						"position_sha256": "d46d830ea6ba11595cb1e20f39c5ebc72f2d713219503b46bfa444779789f4f4",
+						"surface_count": 1,
+						"triangle_area": 59.347320829489,
+						"uv_sha256": "f33a07d9b460ad1411d93d5c797bc415700401e9044681212e2933976ddf8807",
+						"vertices": 669
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "fafd0e83a136e3399d41d94a4a6c7995d76996fc25513aea01a00b58f6a9cad0",
+						"logical_arrays_sha256": "4322d234c277283367d16770194e390575a50756a4db90ff260a6c0ac07f47ff",
+						"normal_sha256": "69bd8b6bed4b2f276944775d3b16a5d98a04e0ee91233602e329fd7c7f8ad251",
+						"position_sha256": "1b407eb3481332dc047f14ff19b5146f60d549e3bd5984cd5f7b3cbaf10d13ec",
+						"surface_count": 1,
+						"triangle_area": 33.8570707188628,
+						"uv_sha256": "ae31737686ee0127cc10f3f7b67eafebb53f56a931d697e64e94b1f3684829b3",
+						"vertices": 645
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							-1.4300000667572,
+							-3.17499995231628
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 1,
+					"index": 5,
+					"original_clipped_vertices": 639,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							4.29500007629395,
+							-3.28749990463257
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 1,
+					"raw_mesh": {
+						"color_sha256": "05560e5099fb9aafb93d931698c25b7b5d597ecfa7a91102e119c8ab5fe2bcd7",
+						"logical_arrays_sha256": "a2d516a39bb35ada237929788f84a0952a20cce4999d5f100aa92eeb5b224ea9",
+						"normal_sha256": "1c4a243e7efb5c83fc7a0ef136dcea2fe838500c4d015f181cbd02fecc5ea679",
+						"position_sha256": "b510945c0a8cbd5e11f31830c85a33cacbada57de44bb657daa6f5fba5b47c2f",
+						"surface_count": 1,
+						"triangle_area": 59.3462282717664,
+						"uv_sha256": "f28385737510308462de4b9e6704b90a0481b5277b1cba1be4aca085c1798c8b",
+						"vertices": 663
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "15adb844d124b1c70193faa79533593d0bed5d8c2234f7458ad375b2a2d15a51",
+						"logical_arrays_sha256": "4abca0310724e7d1feb2a2b50d7b6cd6fa61ebbe83a1fb5ad3bf666e3143d455",
+						"normal_sha256": "6cf660f9a006a4d4eb0ded19ddd3543315a43b329571d2f213f764ef3ac3f20d",
+						"position_sha256": "5bdb6e87fdded3219a6ecbb1ae5bcae4fe53b1e351de6cc248111328b1d68b08",
+						"surface_count": 1,
+						"triangle_area": 33.8559781611402,
+						"uv_sha256": "d2519bfa39d7bd1e45fd8261b056fceda3aa1e66f1a02854de20a53d874d53d0",
+						"vertices": 639
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							-1.4300000667572,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 1,
+					"index": 6,
+					"original_clipped_vertices": 756,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							4.29500007629395,
+							3.48750019073486
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 2,
+					"raw_mesh": {
+						"color_sha256": "ecd75c78fbd1d862673f14b53243407641b0776ccf514c6393239dddc12bc2ab",
+						"logical_arrays_sha256": "03b4907aef35ee274102eb733fb5b5d0ea639ae8cdeee0ca9e7e8cad92627392",
+						"normal_sha256": "bb3ea5f9942273665f395173bda6b29163fbd7b094075def32c2ca8b12c39e0d",
+						"position_sha256": "d37934a112e721c6724bd71133ffbc39edbe5f78ffd7c6403b228956d0e59036",
+						"surface_count": 1,
+						"triangle_area": 59.629529758342,
+						"uv_sha256": "dcde1f265fbba48c34e5cad59c5309e292c99f360e95fb10f25f5537bf2d6de9",
+						"vertices": 780
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "990ee3214883ca5a875cd23f784f0d703328df509cf6d67c96eac1a25d7178a8",
+						"logical_arrays_sha256": "aa7b9c5fe36ba9b1307c470abbc757896d59b67d982fa595e3d6a27f22835acd",
+						"normal_sha256": "8649d4853358e2f3acdb1dc190a2695479a178b26f4bc157562c714e60952218",
+						"position_sha256": "3c8059075cc15db0d695b491b79b73baf9d2ac20539104ff83a9878b76f5ca2e",
+						"surface_count": 1,
+						"triangle_area": 34.1392796477157,
+						"uv_sha256": "3c6a4f4a4c1740918e054d5f12d7890eab12f39154ebd20cdecb6efd6e5a3fc2",
+						"vertices": 756
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							-1.4300000667572,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 1,
+					"index": 7,
+					"original_clipped_vertices": 708,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							4.29500007629395,
+							3.48750019073486
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 3,
+					"raw_mesh": {
+						"color_sha256": "44394823df59344489b020f9747d0ec82fe074f9473960c8c799d4096a8ff4a9",
+						"logical_arrays_sha256": "08471296d0728cc0ecbb4e602cfeb34c36c94874e44adb2e16eb2299ba819ae7",
+						"normal_sha256": "e8a22cb7e9c5bb2b180f3c5df1dda9a0395be4bec0f637f91f52618dd2094827",
+						"position_sha256": "055ea2feded6c30229efb4c0bc1998f8dba37665927c373693b0a231f8744944",
+						"surface_count": 1,
+						"triangle_area": 59.1288395212468,
+						"uv_sha256": "d37a853a755ae95b17604d55b9b2facabc71bb56cf72dde9fd3a8f3abbff48f5",
+						"vertices": 732
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "372c4f982e6928519f0c7d914ece4d6e83d0a24a0960287557dcfebfeb82c182",
+						"logical_arrays_sha256": "917e98bbef8eb8d49b4806b71ab0d76549fe1cd71fdc852b008ad4e914beef87",
+						"normal_sha256": "391422047c95f07159f8f31b8f34ce96a62ab9810b99322eacbba68e1de1d15d",
+						"position_sha256": "e713e32fc44f3dbdbd1a659fb565f4850235f2f0f50c781e827213ad0b7acda8",
+						"surface_count": 1,
+						"triangle_area": 33.6385894106206,
+						"uv_sha256": "a4e3c4f369f45b9fe5d0741fa4a44f8cf2e72494505bdc7af9d3f877af6cf02c",
+						"vertices": 708
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							0.43999981880188,
+							-3.17499995231628
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 2,
+					"index": 8,
+					"original_clipped_vertices": 438,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							7.26499938964844,
+							-3.28749990463257
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 0,
+					"raw_mesh": {
+						"color_sha256": "92313a66cc92f80d147617bfb040a945e4adfe3cde03036d3d694f7763b99384",
+						"logical_arrays_sha256": "ac4701070e539bd2db941da64d918d1e5f3ea193a4dae24c88a4ebc5bca540e0",
+						"normal_sha256": "1a7ad68550f63733f155aa261d6e1b3454a507fedea329f17d328ea43c4f1a80",
+						"position_sha256": "17c5c6ed480eeb665b7c8d65db3484cb962e40542d011e3c2c2cc7f708f64716",
+						"surface_count": 1,
+						"triangle_area": 65.6154629761149,
+						"uv_sha256": "b650249e9e3630e2664f2ccf27d399374fff89f4d6866154de82d48164a4cd67",
+						"vertices": 462
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "9c98e6bccb52533181643fd7da25d01199af8228171fd7bfe90465348262b99a",
+						"logical_arrays_sha256": "853c6ef90bf5a25fba2f2286063feb3f013ae8f70d579154e7689d7a1fd64778",
+						"normal_sha256": "b6b9b7272391c72f8343105e3fc33e55f698df4d0c9f60e89247062a376c3ee4",
+						"position_sha256": "41e5b38640e52afe2ada996519bcd4e7bd127bd5e763382f18b88d008a1e7a65",
+						"surface_count": 1,
+						"triangle_area": 40.1252128654887,
+						"uv_sha256": "b0ed5e92bf3ce2e2adc6db43eb0f492d7da6f18d480e67d3ce67ed3e4acb3295",
+						"vertices": 438
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							0.43999981880188,
+							-3.17499995231628
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 2,
+					"index": 9,
+					"original_clipped_vertices": 390,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							7.26499938964844,
+							-3.28749990463257
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 1,
+					"raw_mesh": {
+						"color_sha256": "86d2a46391f41460f30293dce548ff8ad8e39dbc0169951f65d37ab59c2290a3",
+						"logical_arrays_sha256": "9ab1cdb410d396aab68e6bc0e00097c8fdbefbddc0aa5bd514ead003a4f7364f",
+						"normal_sha256": "50e81e49fff45ec1645ad34f6722533aa331125337083e8b53651b779819d254",
+						"position_sha256": "12909899fb793d3970440d0a01ae38f46aa23a512295dfbb979adda5532e4184",
+						"surface_count": 1,
+						"triangle_area": 64.6117505502189,
+						"uv_sha256": "db2ad7653953fd098138c4c0f2566e7cb17db4a9b1d3f2555165caa5d5f34d56",
+						"vertices": 414
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "b07de7ce4493abc0f7fed4deb40aaf7a156e78e5d45eb32196a4d7d3e65f19ba",
+						"logical_arrays_sha256": "93f3cef168694616c9948d935c97cce360ec2360d39452432cb51778236040c1",
+						"normal_sha256": "465e3920eb22776967b1d9f5f4c6fc82ea9ca101075e6e3f87a46a99971cb096",
+						"position_sha256": "bc509ea1be0b70f374962da1dc3082188462c80339b15a854c0a436c71927701",
+						"surface_count": 1,
+						"triangle_area": 39.1215004395926,
+						"uv_sha256": "8dfb28de3a065d395830e807e1c1c768c82b96c9ba496abffe77f763eee6cdaa",
+						"vertices": 390
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							0.43999981880188,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 2,
+					"index": 10,
+					"original_clipped_vertices": 480,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							7.26499938964844,
+							3.48750019073486
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 2,
+					"raw_mesh": {
+						"color_sha256": "9056078b2775a49e121591d0ea1a97d5eebf22e41336bf911d4fc0f191cf635e",
+						"logical_arrays_sha256": "25d2a11eb2e44fce2ae093db8513f7f75d081e2c01e6a03e5ad6b064626dc127",
+						"normal_sha256": "ce078e40d422fb3494cd86d6a0c7050ae481664153aa54e2cb7d023f23ab5703",
+						"position_sha256": "b37a2f2d9bb030dd3ba317ca76af7828f1b36bb9d161bbbcc4e9ca84368cb127",
+						"surface_count": 1,
+						"triangle_area": 64.5944203911349,
+						"uv_sha256": "e97ce3f7ab811b50c8368734d0e22ade96f752db7b69f34df6b9554c89de8f6e",
+						"vertices": 504
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "df57b3cd510d47dd64fdf197b7a851857eb34238d553cb5289b9651d0909cd33",
+						"logical_arrays_sha256": "80ba5986686e321709ac3b8c5ed4b9645e5b2214da087b82b772f444050f59d3",
+						"normal_sha256": "1d14c93464ca8f6da792d6ad12b5501ab452f7241cce616f06b9fa5dcadcdd64",
+						"position_sha256": "b6e29d9668dde4fc8aa50e5104d5ed1a2d1a2c79dc5625ebe8926fa97bb7df6e",
+						"surface_count": 1,
+						"triangle_area": 39.1041702805087,
+						"uv_sha256": "2361f79dc7713d438a53bd4a7cc7132c8decf25ef1a9ff07fb81109c95f01ddf",
+						"vertices": 480
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							0.43999981880188,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 2,
+					"index": 11,
+					"original_clipped_vertices": 420,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							7.26499938964844,
+							3.48750019073486
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 3,
+					"raw_mesh": {
+						"color_sha256": "7977b8f970f9aa1ca6cd90768ed92a40a41c393a6e1a806469ab9feaaef1e162",
+						"logical_arrays_sha256": "ad7a9a52e35d0150517a2af334a6e3424b047f66feb1dd92ae537c45130971b6",
+						"normal_sha256": "e97caf3ac972e642fbfeb4af510026211ea7b30f7eb9dd4e9875393dd64b9079",
+						"position_sha256": "58bea6eb21e7656eef533ecbabdfdfeb05165ffce8f176eabc9a28a145ea90f0",
+						"surface_count": 1,
+						"triangle_area": 63.658381022542,
+						"uv_sha256": "e220f309c544f462ecb64e41857d02991aaf9342430814c88fb13bc595895e61",
+						"vertices": 444
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "4c5d2976b63dc9df05fc6f2c81bfebe2a337687c6afe838cc6d7e3228ca80ff4",
+						"logical_arrays_sha256": "5be700e518cab76457fc46a51fb99b224b907f741e2757f653a24e4d435be595",
+						"normal_sha256": "b626e3418d14966a1e4fe164815deba22d16ba42392b5d1c9354e08b29c2b504",
+						"position_sha256": "7bdd344e6e54701b54c5a3d769c08ba5954a69f8bdbfe7a3e111e6904ecf303b",
+						"surface_count": 1,
+						"triangle_area": 38.1681309119158,
+						"uv_sha256": "f3d7cd24c073ddfbf6b03b7b035d031ed18bd491c6ac29ff8378ee30335548d1",
+						"vertices": 420
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							2.30999970436096,
+							-3.17499995231628
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 3,
+					"index": 12,
+					"original_clipped_vertices": 324,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							10.2349996566772,
+							-3.28749990463257
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 0,
+					"raw_mesh": {
+						"color_sha256": "e0453690e743d73e5e11736e3e1bc01185911ba7be89e98306d9223d59ed221c",
+						"logical_arrays_sha256": "8ea2fdc639328db6b3e90a178e4acb27c034d31b92c3588d76b3c38ae704bf18",
+						"normal_sha256": "2efac00028a612e555b059cac844839ab326d364379cf8b742c4603a7f77b55c",
+						"position_sha256": "cab0503f3c0f96cdcf7d94683ba35a6a73cceb4991a3b6fb0dbdcb76117fadd2",
+						"surface_count": 1,
+						"triangle_area": 27.0654117619978,
+						"uv_sha256": "b0d4ce833ed4c0707f1ae21819c1350d2ee6ed1c65dfae3076b2fac36d5609ab",
+						"vertices": 342
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "59287130bb5d52aa9c113eb944ac61e065e71e07c969c541daea43c9946650e5",
+						"logical_arrays_sha256": "38cf4afb2c81302dcf383f2b162f2c9ec349e8978ef81b22161e7c36b8ce79cf",
+						"normal_sha256": "fc32becc3aa89db28fee4be0951b7f19d664c04a2f2a95cc8720a721361210b5",
+						"position_sha256": "744602bcc3456775864b2a282bdeeaeaf3b3a9d05e1de190eb75765d0b974444",
+						"surface_count": 1,
+						"triangle_area": 9.10766191840037,
+						"uv_sha256": "aa1b9935d5154aa978998f4465e7914fc67d61a7e9c2ade4e1296d6cea98dbb6",
+						"vertices": 324
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							2.30999970436096,
+							-3.17499995231628
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 3,
+					"index": 13,
+					"original_clipped_vertices": 303,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							10.2349996566772,
+							-3.28749990463257
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 1,
+					"raw_mesh": {
+						"color_sha256": "d622018317dab13bf3dff2a94eea1ac33ffa2f5c98173d4dc0005f77b055cc50",
+						"logical_arrays_sha256": "780b7e2e345040adc9a04cd0ab21600c3d5204543b33eb869c057f836f3f5efc",
+						"normal_sha256": "07d863f2588b8717a0052b22cd5df5a88f580a6f8592382991be6973269c66c5",
+						"position_sha256": "e01482d7ba7195d770e12da6f3ab7a9c37914591de6ae3fd8f1440177eecc90a",
+						"surface_count": 1,
+						"triangle_area": 24.9608221946879,
+						"uv_sha256": "92db21bfe13efcda6fcd58d24eb683bc59943bf3bf6dce8b03e818b4f9232a5c",
+						"vertices": 321
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "d564de8e71a161ef4efed38aa485d8fc1dde487805f161ce4d5905ea6e3888b6",
+						"logical_arrays_sha256": "c74d70ba357eee272a2534733d2fef80e2b49d0e920b13f49bd5c703b3704dd7",
+						"normal_sha256": "3a4f72bf79ba7e5e78ae95df99835ea14ee320723f53caefa26a998778e5cc01",
+						"position_sha256": "1cb00b9e286667c36dc95d4752d191cea235c0f0f82387d71af7a2085d00befd",
+						"surface_count": 1,
+						"triangle_area": 7.00307235109051,
+						"uv_sha256": "d5940f14feddf675ac59cfae137e08594de190cce2dc94d6e2de865662257a2e",
+						"vertices": 303
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							2.30999970436096,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 3,
+					"index": 14,
+					"original_clipped_vertices": 102,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							10.2349996566772,
+							3.48750019073486
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 2,
+					"raw_mesh": {
+						"color_sha256": "67b8ca2fc0a4b710f4acf06c941cfffa72eda9faec4967de2c5e03fc7e3e25d5",
+						"logical_arrays_sha256": "ba0a7ce5528cda24fa7d51c79f53db80dafbbbe3031c66fa33ce2f7851b4cf37",
+						"normal_sha256": "8685041c952e37540f5521daaacc9d4cecb5b19c69314deb58f2ed1611f450c4",
+						"position_sha256": "d0a68fb0d5462c4571293ccd7a9bbee8bebcd0ed6752e792496aa45d5e02776b",
+						"surface_count": 1,
+						"triangle_area": 24.7267343547361,
+						"uv_sha256": "37d19cc91bcff094c390fb950488935d29b9704dd9336ef0e8ab35bd049a47f2",
+						"vertices": 120
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "d1ab3e84cc3dc896128b32057447f1960ed6da1d38fdb15cd809dc54c6862a4f",
+						"logical_arrays_sha256": "e6cde3e7bd1d2c365d1d9532351ca5fb99e75a59869da022295c373c01b4142c",
+						"normal_sha256": "ca5dc74b24a90ed6a364c1a654633829a3d53f4d54465c814c9685101ff0f514",
+						"position_sha256": "264ad4ef6f20c67ba979b6a624beef098ce81fbc3dbd42cb798a86b03dfa17d2",
+						"surface_count": 1,
+						"triangle_area": 6.7689845111387,
+						"uv_sha256": "556e4e2afeb40154093a2949ff2e57a4717fd476521a284b41e51115557056ca",
+						"vertices": 102
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							2.30999970436096,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.27500009536743
+						]
+					},
+					"course": 3,
+					"index": 15,
+					"original_clipped_vertices": 48,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							10.2349996566772,
+							3.48750019073486
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 3,
+					"raw_mesh": {
+						"color_sha256": "1291793b44e0aaa61a90537197d6d813a0db30144378784589d72ffff4304ba2",
+						"logical_arrays_sha256": "495fcd74475737bf36dcb5c472d96682ef144f6f947957d802b551d9136255e8",
+						"normal_sha256": "5677067e3b9141db0869eb9dd7da7a16ca5a05438c6851db41067cc9243dce7a",
+						"position_sha256": "0f2a1f1f179a2331f9cde42417bee41f666edf3b07e03667a336d1cb029c7b07",
+						"surface_count": 1,
+						"triangle_area": 24.2819854846894,
+						"uv_sha256": "ba76f3095484a6f4486bb809767e879dbdb124c227b87447162d1ffcfd8be794",
+						"vertices": 66
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "b6268042022bcd54401e46917b032c045d6700a3ff2655285d0ce67ff84a2090",
+						"logical_arrays_sha256": "dfe17e662f0e3822945815d8de01b116c7817c92a25eb49990670b18799dc8dc",
+						"normal_sha256": "d8651085be95951e6c28d691bd460bf3877c89d3d50149a48e6d7c21870a1c63",
+						"position_sha256": "3410667b4c04b6b597e35a7848bc6c65770a0cc5c79cf14f44b4b1afb32ef11f",
+						"surface_count": 1,
+						"triangle_area": 6.32423564109195,
+						"uv_sha256": "ca4235bc80353e2e804d8505452b9f6644ce437a991e3bf942e3224405ff6fce",
+						"vertices": 48
+					}
+				}
+			]
+		},
+		{
+			"asset": "031_townhouse_01",
+			"cache_path": "res://assets/fractures/031_townhouse_01.res",
+			"cache_sha256": "7810f771c7799ce0d2e33e6d35cd49750f08ecdbeb1807d5293e323026c7c550",
+			"images": [
+				{
+					"angle": "isometric",
+					"camera": {
+						"origin": [
+							15.0,
+							18.2999992370605,
+							20.0
+						],
+						"x": [
+							0.800000011920929,
+							0.0,
+							-0.600000083446503
+						],
+						"y": [
+							-0.276811629533768,
+							0.887216806411743,
+							-0.369082152843475
+						],
+						"z": [
+							0.53233015537262,
+							0.461352705955505,
+							0.709773480892181
+						]
+					},
+					"file": "031_townhouse_01-isometric.png",
+					"orthographic_size": 17.5,
+					"projection": "orthographic",
+					"sha256": "1dbeef272ac30d68fa424fb7c419fc974444d126536107537c218f9db87ed31c",
+					"target": [
+						0.0,
+						5.30000019073486,
+						0.0
+					]
+				},
+				{
+					"angle": "upper-cut",
+					"camera": {
+						"origin": [
+							7.0,
+							29.2999992370605,
+							11.0
+						],
+						"x": [
+							0.843661487102509,
+							0.0,
+							-0.536875486373901
+						],
+						"y": [
+							-0.471753835678101,
+							0.477369874715805,
+							-0.741327464580536
+						],
+						"z": [
+							0.256288170814514,
+							0.878702461719513,
+							0.40273854136467
+						]
+					},
+					"file": "031_townhouse_01-upper-cut.png",
+					"orthographic_size": 17.5,
+					"projection": "orthographic",
+					"sha256": "a5a0a3a806cc6e02920d50453d054a20f3ba489c78d54e9ffffaba63dd452361",
+					"target": [
+						0.0,
+						5.30000019073486,
+						0.0
+					]
+				}
+			],
+			"kind": "townhouse",
+			"model_path": "res://assets/city_kit/031_townhouse_01.glb",
+			"model_sha256": "69fc9442e398e1501fcf810f5d7f764309d3aa61cb2310501c808cb34e0f75e4",
+			"original_body_pose": {
+				"origin": [
+					0.0,
+					3.33999991416931,
+					0.0
+				],
+				"x": [
+					1.0,
+					0.0,
+					0.0
+				],
+				"y": [
+					0.0,
+					1.0,
+					0.0
+				],
+				"z": [
+					0.0,
+					0.0,
+					1.0
+				]
+			},
+			"pieces": [
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							-3.29999995231628,
+							-3.46249985694885
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 0,
+					"index": 0,
+					"original_clipped_vertices": 69,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							1.32499980926514,
+							-3.43124985694885
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 0,
+					"raw_mesh": {
+						"color_sha256": "13f9e34fe24b97a9305d3a6070f5d770305ee9eb1bce58348a291723b235d5b6",
+						"logical_arrays_sha256": "79746a187e630cea5e927e3f96754934f6a3ecfaee6913f6560cb2f581e5c454",
+						"normal_sha256": "c367d4085fe50fb518c502e3b04773d6b42f504476d73f9ce659fca17dd83c91",
+						"position_sha256": "60a6d28052b83da8ef466b1510a518bc1a903c8f148ff266e80268c2aca039e2",
+						"surface_count": 1,
+						"triangle_area": 51.6114044003189,
+						"uv_sha256": "06a442ce5bedeb3b62d7cc073cf6e1feac058d5af0671c24f1be219e98044113",
+						"vertices": 87
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "381cc2e563a9416ced17bc106445e24eb198eb65e09244dfa1e31eb5debbb94d",
+						"logical_arrays_sha256": "6962899c8d74eead9f225096c5e0649470f809f6252da78dfbba60b4484ad48c",
+						"normal_sha256": "fcfbd35af4bb1c293e491e6d5a6448b1b284c5cb562730d711c86df8244b8a02",
+						"position_sha256": "1f66b297799f51ec0fb463d0889f09246d26986b8ea990ecac5f654c282f9a95",
+						"surface_count": 1,
+						"triangle_area": 32.4547805599868,
+						"uv_sha256": "0bf44eda44d0839906d3de4516d5f5246d790b3f475421f42e1e3285cce6b3f2",
+						"vertices": 69
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							-3.29999995231628,
+							-3.46249985694885
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 0,
+					"index": 1,
+					"original_clipped_vertices": 60,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							1.32499980926514,
+							-3.43124985694885
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 1,
+					"raw_mesh": {
+						"color_sha256": "f853bd8bb274dbdddb4dec802c70207486376672157aab69eddb276958eed5a2",
+						"logical_arrays_sha256": "a2869ca4f23bb4481cbebc8367a8632ebdb4c5b4aaf95a661deca6d39e4ec208",
+						"normal_sha256": "9450bbf1c6d1be7c944c64a8b998f12215b758adbfd6f170a9e033fbda7cf506",
+						"position_sha256": "e2f7310e8f87282e9b5895c37afafdd4023887ff4b4977b65419dd11a4371dc9",
+						"surface_count": 1,
+						"triangle_area": 51.6105516776443,
+						"uv_sha256": "7e78e1d2b83d954ee50b1ad56cd7dbb10f15431ad2faf71899b3352c1109d16c",
+						"vertices": 78
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "e766603de419891fa0f68faf7a58c787670841934f8137f218a85d460cb2a51b",
+						"logical_arrays_sha256": "fbe3271a98252603335e754a56ef565f651e6243b3e3bd7ce35d7ad2f21669e3",
+						"normal_sha256": "d728d92894dc0f6ff0157a1834f645ed1def84c8493a20d2a54eadc9d2348a1f",
+						"position_sha256": "bc6df78e9c1fa8091b4895bf1630832e92db57ee99cf9678a5f9255a16391ece",
+						"surface_count": 1,
+						"triangle_area": 32.4539278373122,
+						"uv_sha256": "c8ea4937c329bee6e60aa1669fdcb43496fa889cce352feec65b11a82f03cc2e",
+						"vertices": 60
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							-3.29999995231628,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 0,
+					"index": 2,
+					"original_clipped_vertices": 309,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							1.32499980926514,
+							3.63125014305115
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 2,
+					"raw_mesh": {
+						"color_sha256": "0368dcbd15a8bdd016a2e769079a3f3b3dac1d2f2c24b671baa6094699f6cc5d",
+						"logical_arrays_sha256": "412799786dc9e6cc88919d11d2f039bc06dc1568d7c387f0c371a5adb30c97f6",
+						"normal_sha256": "4974e435c18cdf45f1ad4acd3e00293d0439487ac4a3a2dab18e5ca76420f783",
+						"position_sha256": "192044bcff4bea5c1ff01bbffec4acdee6ea9974f83d915a178f7b1c16f6b66c",
+						"surface_count": 1,
+						"triangle_area": 53.0017754225992,
+						"uv_sha256": "ad69ce85cf0d1628a9740a8bb771370d97aa93fbc25df8777547085a9e7bcab8",
+						"vertices": 327
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "4db1387e7236437f66d396b9dab06d9acc7dcb1928500b4b50128ad64899297a",
+						"logical_arrays_sha256": "05e3e81df867cb8c77eacc54233fed68a5aff850d6698dcfe3a6d5f674d7cdbd",
+						"normal_sha256": "44b8b9e002adaaed07ca4492ff78f36a015aa725057c1a3e66fc5c7d5c93b503",
+						"position_sha256": "b42668b861aafed28dc5b4e80552aa5b8d3ddff7b62772a5bbf26d5648a3f117",
+						"surface_count": 1,
+						"triangle_area": 33.8451515822671,
+						"uv_sha256": "13adac542b694330d28947b3b8719ea94ae935cad9891d3257bdf30706f2b42f",
+						"vertices": 309
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							-3.29999995231628,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 0,
+					"index": 3,
+					"original_clipped_vertices": 336,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							1.32499980926514,
+							3.63125014305115
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 3,
+					"raw_mesh": {
+						"color_sha256": "b332de1990cf79c67cec4761c0755791f766f1cf83901a056bebbd15e0e7b057",
+						"logical_arrays_sha256": "5745f2dbccd1bd8d5a2464e86eacbbd5c0e5d5eef3815ce12ef499731c91b74b",
+						"normal_sha256": "97f4696caa67fe00c59fffafd7f1eba96a996bebfd09ecc369636c718a9f12d4",
+						"position_sha256": "7853b274bb6db15bb4f54430dd84aa3d2a5da77b63c73deda3c2d6699a85fb15",
+						"surface_count": 1,
+						"triangle_area": 53.0685334429145,
+						"uv_sha256": "d7c6cb819141576d9c8b29d6bab620adaf4fd51b2c382ae6a08a9f184f66b51d",
+						"vertices": 354
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "ee1b091e748aa57efe3742bf57408f063bec4a05f909899975063f1eb18978de",
+						"logical_arrays_sha256": "c291067d59fc1bdd09e1dd419cde0355fc82def8e632282b9783ca9f84078ec0",
+						"normal_sha256": "48ce792a86e19ba51d58aaa18b76a8102d1889f474a153dc656b2c892dcc0536",
+						"position_sha256": "0f323f229837d15dffc73209cd2e7660cff2c0ada16e42b31ff48b369efca2de",
+						"surface_count": 1,
+						"triangle_area": 33.9119096025825,
+						"uv_sha256": "8ce07c098350396a03b2381b619a408a9f6bedb71972b70c60846b384f744d1e",
+						"vertices": 336
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							-1.4300000667572,
+							-3.46249985694885
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 1,
+					"index": 4,
+					"original_clipped_vertices": 645,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							4.29500007629395,
+							-3.43124985694885
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 0,
+					"raw_mesh": {
+						"color_sha256": "3622434572c122aa91474cc08347f1c3300e8da689363131f097302af359d78a",
+						"logical_arrays_sha256": "6f98f269cfeb5a23a54acab3040ac2749146c5e2afe8cbe5d77ccb14e73f2c10",
+						"normal_sha256": "06d044fdbf3ac813e9cb78be6dd3178106a0eedf21c4aa3eb7143a181574bb36",
+						"position_sha256": "8fc4cb5146fc54840083cc274f131eba08e6d5724b52e6700825cc427a2dbe63",
+						"surface_count": 1,
+						"triangle_area": 63.0425703299334,
+						"uv_sha256": "f33a07d9b460ad1411d93d5c797bc415700401e9044681212e2933976ddf8807",
+						"vertices": 669
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "73db5d1deb3d17895c2a908fbf45fbee7b11d23171a584c8533bd4cbf09ceeca",
+						"logical_arrays_sha256": "80d333eab9a6d8e9d608b787f0cf772ee795a2c1c7ed44af0ac964b481ee564a",
+						"normal_sha256": "69bd8b6bed4b2f276944775d3b16a5d98a04e0ee91233602e329fd7c7f8ad251",
+						"position_sha256": "fb56ee8c2dbbb0101b509ce200d130e98d83c5fc07759b5bc8ef9fb4902bddd4",
+						"surface_count": 1,
+						"triangle_area": 35.6921970618059,
+						"uv_sha256": "ae31737686ee0127cc10f3f7b67eafebb53f56a931d697e64e94b1f3684829b3",
+						"vertices": 645
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							-1.4300000667572,
+							-3.46249985694885
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 1,
+					"index": 5,
+					"original_clipped_vertices": 639,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							4.29500007629395,
+							-3.43124985694885
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 1,
+					"raw_mesh": {
+						"color_sha256": "82dd6b8361c58e16fb817351bfc0aa2398de672d04706621fa6e05a25b8f2b37",
+						"logical_arrays_sha256": "296c3b37951e37ee828cdd1cd8f3752abf957814b9b089229b176c8420ebaeca",
+						"normal_sha256": "1c4a243e7efb5c83fc7a0ef136dcea2fe838500c4d015f181cbd02fecc5ea679",
+						"position_sha256": "37813bf8b219aa6dcac16acb9c7baab80652a30f62a4b6e68417093cb3e8311c",
+						"surface_count": 1,
+						"triangle_area": 63.0414371578445,
+						"uv_sha256": "f28385737510308462de4b9e6704b90a0481b5277b1cba1be4aca085c1798c8b",
+						"vertices": 663
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "6d49544e17806b4de228037ee5f71bb3ee23993df50cb895ca64ea046257547a",
+						"logical_arrays_sha256": "0e37b94eb40b66688a4d4cb0f8dc889a201f50485c83452766d99efd01c71bc3",
+						"normal_sha256": "6cf660f9a006a4d4eb0ded19ddd3543315a43b329571d2f213f764ef3ac3f20d",
+						"position_sha256": "384013b722d0fb49e684569218d8bb506ff15ec6b9a1fe8f4482685b220d85f4",
+						"surface_count": 1,
+						"triangle_area": 35.691063889717,
+						"uv_sha256": "d2519bfa39d7bd1e45fd8261b056fceda3aa1e66f1a02854de20a53d874d53d0",
+						"vertices": 639
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							-1.4300000667572,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 1,
+					"index": 6,
+					"original_clipped_vertices": 756,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							4.29500007629395,
+							3.63125014305115
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 2,
+					"raw_mesh": {
+						"color_sha256": "55c084b9f1648aa98ab883ebe4fb05316a73d7b473622f4af717ef4f1c410374",
+						"logical_arrays_sha256": "52fd540af891206d893457fc40f81130530a4bcadf6170217620d5a36c985262",
+						"normal_sha256": "bb3ea5f9942273665f395173bda6b29163fbd7b094075def32c2ca8b12c39e0d",
+						"position_sha256": "66ae3fc9f0bfdebb64174d146d38b14be8b9359abfc9162b78e1e3cf655d2308",
+						"surface_count": 1,
+						"triangle_area": 59.6545894584597,
+						"uv_sha256": "dcde1f265fbba48c34e5cad59c5309e292c99f360e95fb10f25f5537bf2d6de9",
+						"vertices": 780
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "5f8df89337ac476e92f5351dec261f4743169de6cd9461c4978abadb15fcb134",
+						"logical_arrays_sha256": "cfc3323dec8e7e5ebbaeb6c69706a2266b0b6c34dbba8986978665ef48968e4b",
+						"normal_sha256": "8649d4853358e2f3acdb1dc190a2695479a178b26f4bc157562c714e60952218",
+						"position_sha256": "aea864a1d43bd71d273ebfaf87dc15578d2560dcc8e80644d15c5a0c2524eccc",
+						"surface_count": 1,
+						"triangle_area": 32.3042161903322,
+						"uv_sha256": "3c6a4f4a4c1740918e054d5f12d7890eab12f39154ebd20cdecb6efd6e5a3fc2",
+						"vertices": 756
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							-1.4300000667572,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 1,
+					"index": 7,
+					"original_clipped_vertices": 786,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							4.29500007629395,
+							3.63125014305115
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 3,
+					"raw_mesh": {
+						"color_sha256": "a8c52e0a3ce834c1772a072750c35075ff0c36865d64f9b416f16182af94edb2",
+						"logical_arrays_sha256": "0ff7030608aeff29a0ca9e3da46ef05e079358ff33de86f1c418843f244d6649",
+						"normal_sha256": "cde8962b2be7aa8d9a8eceab9ade1f65fb4f1d9e3041b396e760b56561f8934e",
+						"position_sha256": "775eb8cae9df61d042908ab7c780454509813fd29f515c715c6c20b7e886f075",
+						"surface_count": 1,
+						"triangle_area": 65.8974829900726,
+						"uv_sha256": "18462ff8ac2527a13d8f94c78411aab4f8e69b827df3759a1096e90d2ac71b17",
+						"vertices": 810
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "75d7809750a6af9a13ebfe227ee6b948824992e1b7599cd5c8a559c83fd5af5a",
+						"logical_arrays_sha256": "7cb7764c7b288c6eb0830f9b6df2b034ee3a4c4445e7538c07cfb2a9fa9ac8b8",
+						"normal_sha256": "2a9e8da2d22b8a748a576340f346ced1d392a9020018b6e67dee492d6e675d32",
+						"position_sha256": "da0efe92dc4c5454d7031ac9656e4d1ac83722be069cb56a1010e312e3880d26",
+						"surface_count": 1,
+						"triangle_area": 38.5471097219452,
+						"uv_sha256": "e3b45f7323825a7cb1bb8d0be4d6f925f56b1561cddcafd74ce9ce779521c852",
+						"vertices": 786
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							0.43999981880188,
+							-3.46249985694885
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 2,
+					"index": 8,
+					"original_clipped_vertices": 438,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							7.26499938964844,
+							-3.43124985694885
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 0,
+					"raw_mesh": {
+						"color_sha256": "ca00e69f5544469e54e881986f34c3dbe4c575d2aa20f6681018be87a51a8461",
+						"logical_arrays_sha256": "d5598763d2785c022d343bcc44bfd14d6a96528e1698b11283abdb53e0b58d99",
+						"normal_sha256": "1a7ad68550f63733f155aa261d6e1b3454a507fedea329f17d328ea43c4f1a80",
+						"position_sha256": "3b9c7b825ca885128f3262538da4e39bd2049720430488f1aafc5c1cf67c75cc",
+						"surface_count": 1,
+						"triangle_area": 70.0554070384678,
+						"uv_sha256": "b650249e9e3630e2664f2ccf27d399374fff89f4d6866154de82d48164a4cd67",
+						"vertices": 462
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "cd37a4e78d5197b9c2aad470c7e9b2a4582692608744e67ccaab85d95b038d96",
+						"logical_arrays_sha256": "c4d45a35042d5266ca42c1b6296a5bbb53e0e40fab6cde4f17ee060704d686a6",
+						"normal_sha256": "b6b9b7272391c72f8343105e3fc33e55f698df4d0c9f60e89247062a376c3ee4",
+						"position_sha256": "ef46206bd38a70c8701b7fce5fc409eb6ea00062d9936f97d6bddb6c926b1d6d",
+						"surface_count": 1,
+						"triangle_area": 42.7050337703404,
+						"uv_sha256": "b0ed5e92bf3ce2e2adc6db43eb0f492d7da6f18d480e67d3ce67ed3e4acb3295",
+						"vertices": 438
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							0.43999981880188,
+							-3.46249985694885
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 2,
+					"index": 9,
+					"original_clipped_vertices": 390,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							7.26499938964844,
+							-3.43124985694885
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 1,
+					"raw_mesh": {
+						"color_sha256": "ed34c7693a21df4900613d6c917dd3a1553e4fe37ec86fbe2ce87f943b8c6c27",
+						"logical_arrays_sha256": "49809f0a43f44627013b4524e6a994928ca25735e0b8e90331a4367c9736bdf1",
+						"normal_sha256": "50e81e49fff45ec1645ad34f6722533aa331125337083e8b53651b779819d254",
+						"position_sha256": "d6d9e43516265ad646fba3ebf14d9cc4552bfde41a665f1161d776ed44470eb1",
+						"surface_count": 1,
+						"triangle_area": 69.0514357450884,
+						"uv_sha256": "db2ad7653953fd098138c4c0f2566e7cb17db4a9b1d3f2555165caa5d5f34d56",
+						"vertices": 414
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "6fb16a87338291b92f1cc6fa2690d536668d14ce2de769f73e4689d43d0ef6fd",
+						"logical_arrays_sha256": "e1740949c941a3d9d43d5758f60fcdda419990ceb4bf9901107558c56baa111e",
+						"normal_sha256": "465e3920eb22776967b1d9f5f4c6fc82ea9ca101075e6e3f87a46a99971cb096",
+						"position_sha256": "9b1365672a863fd88b648de4f82d823e2bc8b7c624bb28326dffc08d4357d1a0",
+						"surface_count": 1,
+						"triangle_area": 41.7010624769609,
+						"uv_sha256": "8dfb28de3a065d395830e807e1c1c768c82b96c9ba496abffe77f763eee6cdaa",
+						"vertices": 390
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							0.43999981880188,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 2,
+					"index": 10,
+					"original_clipped_vertices": 480,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							7.26499938964844,
+							3.63125014305115
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 2,
+					"raw_mesh": {
+						"color_sha256": "bd99e5ca393b81139febea319cdc1ff204e022c5defafd902d9be52c835f5265",
+						"logical_arrays_sha256": "d4e17eafa9dea12dcb8a545ec4ad45b62aabf461b640f108b3c769ac488caa46",
+						"normal_sha256": "ce078e40d422fb3494cd86d6a0c7050ae481664153aa54e2cb7d023f23ab5703",
+						"position_sha256": "8e9ba3bb11928b8e6562de6953294cced47671920916504d83539b00f61571c5",
+						"surface_count": 1,
+						"triangle_area": 63.8751532177994,
+						"uv_sha256": "e97ce3f7ab811b50c8368734d0e22ade96f752db7b69f34df6b9554c89de8f6e",
+						"vertices": 504
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "e7c02b87a06038a8400f2848f01086634c8083a71637dab31cd6cf8a4284446e",
+						"logical_arrays_sha256": "fc3641f36cbb4b3502828319b687a8c30f1ca7692b089d684baa4eb99b0faa8a",
+						"normal_sha256": "1d14c93464ca8f6da792d6ad12b5501ab452f7241cce616f06b9fa5dcadcdd64",
+						"position_sha256": "0fcad7f3c6d58158dbd6523ba2ff1a7dd8e3c857e27b9e593ed2a1099beb4bb4",
+						"surface_count": 1,
+						"triangle_area": 36.5247799496719,
+						"uv_sha256": "2361f79dc7713d438a53bd4a7cc7132c8decf25ef1a9ff07fb81109c95f01ddf",
+						"vertices": 480
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							0.43999981880188,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 2,
+					"index": 11,
+					"original_clipped_vertices": 462,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							7.26499938964844,
+							3.63125014305115
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 3,
+					"raw_mesh": {
+						"color_sha256": "648c0b2664b3f35b7228149d1e3dd422b5ff4c82a008813eb774dd9bc56cf7d3",
+						"logical_arrays_sha256": "9e325920a1a6bbea976321e22f5ad2516294770b02447da7bde47f1a24e2baa8",
+						"normal_sha256": "67fcc0abb3b7ae40624f506d724e2b81d152a469aad86e7c0bf24f07252d43e3",
+						"position_sha256": "f6cd5b549e161fab2849cc4081ab1efcf453f30cc476b5ad6e3f6cb9fd324420",
+						"surface_count": 1,
+						"triangle_area": 64.0066492971964,
+						"uv_sha256": "12bb24fb533b5dbdb52dd2b6f8228b9900d4f76fa4cbb28bf88902309be7ba4b",
+						"vertices": 486
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "309b55a2d9c86a0716188258367a75de6a2baf94c11b9195d828b8c10be327de",
+						"logical_arrays_sha256": "5961de978f1e6806f538c3f2af56791d6bbc35fc91e3276ddf2a6c77e7797b74",
+						"normal_sha256": "fa7da7476ebcac2a84ec70179afa4b04ccee0dde62163c6ec16f10a5d6d74962",
+						"position_sha256": "169948587816e31f9a31a7654e5e40828a2fe5b1cd754a5cfec06356fb7fb09b",
+						"surface_count": 1,
+						"triangle_area": 36.656276029069,
+						"uv_sha256": "88fe6a3b89618a16eb26221524bf4d999cd7585d2d0d5d9a60a33df6230b92ec",
+						"vertices": 462
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							2.30999970436096,
+							-3.46249985694885
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 3,
+					"index": 12,
+					"original_clipped_vertices": 324,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							10.2349996566772,
+							-3.43124985694885
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 0,
+					"raw_mesh": {
+						"color_sha256": "cf942e11f734076affafae5f0fad134f1a1422abb4422fb9eb9c1912c938e2e3",
+						"logical_arrays_sha256": "a19aecc5902beb48b26b2f894efe6d4e88985a7f166317f220b968182b269308",
+						"normal_sha256": "2efac00028a612e555b059cac844839ab326d364379cf8b742c4603a7f77b55c",
+						"position_sha256": "c12198c93fb507a5333aebdfbd0b58b64086225e6e781a02f09d554131258ba5",
+						"surface_count": 1,
+						"triangle_area": 28.8131354498527,
+						"uv_sha256": "b0d4ce833ed4c0707f1ae21819c1350d2ee6ed1c65dfae3076b2fac36d5609ab",
+						"vertices": 342
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "1728996305cb2478ea9822bfba2dc8cc801da363e58c90497f6019ce34f1d0d9",
+						"logical_arrays_sha256": "9011b99424a0a8fb470985379300275e662a92156b0c384c55bbc2c581c6c39c",
+						"normal_sha256": "fc32becc3aa89db28fee4be0951b7f19d664c04a2f2a95cc8720a721361210b5",
+						"position_sha256": "c6b6607f76110bc21d58d97ab86d364cb711376276c4f3c57598dc09b530a71b",
+						"surface_count": 1,
+						"triangle_area": 9.65651160952064,
+						"uv_sha256": "aa1b9935d5154aa978998f4465e7914fc67d61a7e9c2ade4e1296d6cea98dbb6",
+						"vertices": 324
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							2.30999970436096,
+							-3.46249985694885
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 3,
+					"index": 13,
+					"original_clipped_vertices": 303,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							10.2349996566772,
+							-3.43124985694885
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 1,
+					"raw_mesh": {
+						"color_sha256": "d622018317dab13bf3dff2a94eea1ac33ffa2f5c98173d4dc0005f77b055cc50",
+						"logical_arrays_sha256": "1d28bb3fbcea70c5193eda59b4b03e05501784f0fe69cbc7301944dea1eba94e",
+						"normal_sha256": "07d863f2588b8717a0052b22cd5df5a88f580a6f8592382991be6973269c66c5",
+						"position_sha256": "133b7395def09a66a89311ca959094435aa529295fa14c1fe30a5e2ed26c3886",
+						"surface_count": 1,
+						"triangle_area": 26.7081390122081,
+						"uv_sha256": "92db21bfe13efcda6fcd58d24eb683bc59943bf3bf6dce8b03e818b4f9232a5c",
+						"vertices": 321
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "d564de8e71a161ef4efed38aa485d8fc1dde487805f161ce4d5905ea6e3888b6",
+						"logical_arrays_sha256": "0d58ff6f48e237bba086231e4c9ce5ba53be5e7b804589e2759a8ebddfec750b",
+						"normal_sha256": "3a4f72bf79ba7e5e78ae95df99835ea14ee320723f53caefa26a998778e5cc01",
+						"position_sha256": "9e1653cae2db73cc3185f47cc660c06794f81de315a02b4257a022026c13cc4f",
+						"surface_count": 1,
+						"triangle_area": 7.55151517187608,
+						"uv_sha256": "d5940f14feddf675ac59cfae137e08594de190cce2dc94d6e2de865662257a2e",
+						"vertices": 303
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							-2.29999995231628,
+							2.30999970436096,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 3,
+					"index": 14,
+					"original_clipped_vertices": 102,
+					"pose": {
+						"origin": [
+							-2.69999980926514,
+							10.2349996566772,
+							3.63125014305115
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 2,
+					"raw_mesh": {
+						"color_sha256": "67b8ca2fc0a4b710f4acf06c941cfffa72eda9faec4967de2c5e03fc7e3e25d5",
+						"logical_arrays_sha256": "9468a4b2eb86f5ac8bac9baedf2fc40019170362ccf8ac4378b2546402e7d3e9",
+						"normal_sha256": "8685041c952e37540f5521daaacc9d4cecb5b19c69314deb58f2ed1611f450c4",
+						"position_sha256": "f8122847a64ed859e99a06b670611f8235be49a3afd0868ea5cc3008e650b8b3",
+						"surface_count": 1,
+						"triangle_area": 25.5544506260564,
+						"uv_sha256": "37d19cc91bcff094c390fb950488935d29b9704dd9336ef0e8ab35bd049a47f2",
+						"vertices": 120
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "d1ab3e84cc3dc896128b32057447f1960ed6da1d38fdb15cd809dc54c6862a4f",
+						"logical_arrays_sha256": "cdc373f98d6fe99a3f0048522ede28d8749d42c9da89a717af3eb98ba67f93da",
+						"normal_sha256": "ca5dc74b24a90ed6a364c1a654633829a3d53f4d54465c814c9685101ff0f514",
+						"position_sha256": "098f1d3e4a469f65827157cada76020ef378bcac1146361c8ccfff607ed82a01",
+						"surface_count": 1,
+						"triangle_area": 6.39782678572432,
+						"uv_sha256": "556e4e2afeb40154093a2949ff2e57a4717fd476521a284b41e51115557056ca",
+						"vertices": 102
+					}
+				},
+				{
+					"cell": {
+						"position": [
+							0.0,
+							2.30999970436096,
+							0.100000143051147
+						],
+						"size": [
+							2.29999995231628,
+							1.86999988555908,
+							3.5625
+						]
+					},
+					"course": 3,
+					"index": 15,
+					"original_clipped_vertices": 48,
+					"pose": {
+						"origin": [
+							2.69999980926514,
+							10.2349996566772,
+							3.63125014305115
+						],
+						"x": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"y": [
+							0.0,
+							1.0,
+							0.0
+						],
+						"z": [
+							0.0,
+							0.0,
+							1.0
+						]
+					},
+					"quadrant": 3,
+					"raw_mesh": {
+						"color_sha256": "1291793b44e0aaa61a90537197d6d813a0db30144378784589d72ffff4304ba2",
+						"logical_arrays_sha256": "37759a8a9f9d00152a52c2e5047dd41509244911c9fffd1e43a7d13317c71053",
+						"normal_sha256": "5677067e3b9141db0869eb9dd7da7a16ca5a05438c6851db41067cc9243dce7a",
+						"position_sha256": "e6cab2aadc16f916bfc1f6153ece3950d865145157dc83ba3d31a9049d86a1bc",
+						"surface_count": 1,
+						"triangle_area": 25.1097127080575,
+						"uv_sha256": "ba76f3095484a6f4486bb809767e879dbdb124c227b87447162d1ffcfd8be794",
+						"vertices": 66
+					},
+					"score": 3,
+					"used_mesh": {
+						"color_sha256": "b6268042022bcd54401e46917b032c045d6700a3ff2655285d0ce67ff84a2090",
+						"logical_arrays_sha256": "ca3a35305de66c3e6f537a2550349b282e07c16a66aef50a61beb6a1cd733c39",
+						"normal_sha256": "d8651085be95951e6c28d691bd460bf3877c89d3d50149a48e6d7c21870a1c63",
+						"position_sha256": "1b6056867e13908d092e2c3646f838e677179f04515b24102bd4888bbceeb692",
+						"surface_count": 1,
+						"triangle_area": 5.95308886772546,
+						"uv_sha256": "ca4235bc80353e2e804d8505452b9f6644ce437a991e3bf942e3224405ff6fce",
+						"vertices": 48
+					}
+				}
+			]
+		}
+	],
+	"schema": 1,
+	"scope": "QA exploded fixture: actual City.read_catalog()/place() and actual fracture_building(null) path. Sixteen emitted rigid bodies are frozen immediately, then assigned the exact recorded poses to expose cut faces. No physics pacing, saves, wallet, SDK, player or natural collapse proof.",
+	"source_version": "0.12.5",
+	"store_media": false,
+	"variant": "after"
+}

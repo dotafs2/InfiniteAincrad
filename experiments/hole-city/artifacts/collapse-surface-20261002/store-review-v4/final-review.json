@@ -1,0 +1,115 @@
+{
+  "version": "0.12.7",
+  "review": "V4",
+  "cut_surface_fix_visual_verified": true,
+  "source_gate_sha256": "b4d732ed91a3ebff35c36d2f4a99a4c27152adddfc7bb4c6af7afdde1f45a90a",
+  "source_suites": {
+    "verified_reuse": 51,
+    "fresh": 34,
+    "total_checks": 67170
+  },
+  "package_suites": {
+    "fresh": 85,
+    "total_checks": 67170
+  },
+  "guarded_inputs_unchanged": 810,
+  "whole_building_receipts": [
+    {
+      "asset_id": "001_row_house_01",
+      "building_fragment": false,
+      "category": "building",
+      "elapsed": 82.6999999999966,
+      "footprint": 3.92053890228271,
+      "fracture_parent": "",
+      "height": 6.59999990463257,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 2481,
+      "name": "building_001",
+      "points": 48,
+      "world_position": [
+        -16.2579517364502,
+        -8.51215744018555,
+        47.2002906799316
+      ]
+    }
+  ],
+  "root_visual_review": [
+    "All five current PNG cards",
+    "Food/city contact sheets",
+    "Natural city frame2400",
+    "Current encoded city fall frame16.4s"
+  ],
+  "independent_visual_review": "All five PNGs, four adjacent actual city fall candidates, late natural frames and both contacts; cut surfaces removed, no full-video watching claim by independent reviewer",
+  "videos": {
+    "food": {
+      "sha256": "c26735a504b5591db52107025bf91eefa203c3ac9c580f6789a20287184f16ee",
+      "seconds": 20.0,
+      "resolution": [
+        886,
+        1920
+      ],
+      "normal_speed": true,
+      "full_decode_verified": true
+    },
+    "city": {
+      "sha256": "3ec53b6160a1373909af7cc7dc263265c35dd964332f8ed27ac55840e4545daa",
+      "seconds": 20.0,
+      "resolution": [
+        886,
+        1920
+      ],
+      "normal_speed": true,
+      "full_decode_verified": true
+    }
+  },
+  "browser_playback": {
+    "url": "http://127.0.0.1:8774/store-review-v4/index.html",
+    "videos": [
+      {
+        "currentTime": 20,
+        "duration": 20,
+        "ended": true,
+        "error": null,
+        "id": "food",
+        "muted": true,
+        "paused": true
+      },
+      {
+        "currentTime": 20,
+        "duration": 20,
+        "ended": true,
+        "error": null,
+        "id": "city",
+        "muted": true,
+        "paused": true
+      }
+    ],
+    "scope": "Actual in-app browser silent playback only; no phone or App Store processing proof"
+  },
+  "browser_proof_sha256": "aec5bda1419e43379a32cf9ba6b53725da4dbef0055664550b10d4c2df5fefd3",
+  "browser_screenshot_sha256": "b86f7e264f63877b0c5a0ad7e1b727030a74cae2627fdd04e0476e2d162252be",
+  "rendered_zip_receipt": {
+    "file": "Hole-Feast-Store-Review-V4.zip",
+    "sha256": "7485229b57c9de92356a16b60fdbcc4d6a52e27c07452df38dde0c6c3f6540ef",
+    "file_count": 43,
+    "private_raw_masters_included": false,
+    "integrity_verified": true
+  },
+  "zip_bytes_and_member_hashes_verified": true,
+  "user_art_review_pending": true,
+  "remaining_visual_limitations": [
+    "Broad stippled occlusion on neighboring buildings remains visible and is not general visual-polish acceptance",
+    "The diagnostic does not identify every contained item, so it is not proof that every visible small item belongs to or falls from the target"
+  ],
+  "release_boundaries": {
+    "physical_iphone_capture": false,
+    "new_native_compile": false,
+    "new_device_installation": false,
+    "phone_baseline": "0.12.4 build16; saves untouched",
+    "app_store_upload": false,
+    "app_review_submission": false,
+    "root_git_publication": false
+  },
+  "scope": "Root browser verifies complete silent20s playback; actual normal gameplay media verifies this cut-surface fix only. The unchanged43-file ZIP remains the rendered user-review pack; final evidence is separate."
+}

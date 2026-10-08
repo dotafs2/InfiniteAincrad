@@ -1,0 +1,6835 @@
+{
+	"baked_skins": 200,
+	"baker_sha256": "e6a9ad64c6f7c7f997f7c22aac19ff8c52e1c95ed723446ceb63759994cd8f88",
+	"camera_framing": "SkinVisual.frame_preview(card=true), minimum3.8 with8percent margin; bounded12percent expansion when alpha touches5px frame margin.",
+	"catalog_sha256": "50110e8f07e490035e00161e5344fe182173bc2a711c3dfb06d8940cd75bf3a0",
+	"checks": 2005,
+	"complete": true,
+	"dimensions": [
+		256,
+		256
+	],
+	"directional_lights": 2,
+	"display_server": "macOS",
+	"engine": {
+		"build": "official",
+		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+		"hex": 263938,
+		"major": 4,
+		"minor": 7,
+		"patch": 2,
+		"status": "stable",
+		"string": "4.7.2-stable (official)",
+		"timestamp": 0
+	},
+	"expected_skins": 200,
+	"failures": [],
+	"reusable_subviewports": 1,
+	"scope": "Actual Godot GPU SkinVisual idle models, including their preview mouth. Transparent offline renders; no image composition and no gameplay/reward event.",
+	"settle_delta_seconds": 0.0166666666666667,
+	"settle_steps": 36,
+	"skin_visual_sha256": "1ab67324031d796125b29027b6f9b59106ceb15d96ce4412df8080151ea86531",
+	"skins": [
+		{
+			"alpha": {
+				"bounds_px": [
+					29,
+					63,
+					198,
+					135
+				],
+				"partial_alpha_pixels": 13327,
+				"transparent_pixels": 44054,
+				"visible_pixels": 21017,
+				"within_margin": true
+			},
+			"bytes": 40525,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "core_shell.png",
+			"frame_attempts": 1,
+			"id": "core_shell",
+			"model_id": "core_shell",
+			"name": "Core Shell",
+			"rarity": "legendary",
+			"sha256": "434b1b72d8e10193a3a1b417650fabf10983d2c5687d8a751189099ad8094971",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					50,
+					76,
+					156,
+					108
+				],
+				"partial_alpha_pixels": 825,
+				"transparent_pixels": 53441,
+				"visible_pixels": 12095,
+				"within_margin": true
+			},
+			"bytes": 12380,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "copper_ring.png",
+			"frame_attempts": 1,
+			"id": "copper_ring",
+			"model_id": "copper_ring",
+			"name": "Copper Ring",
+			"rarity": "epic",
+			"sha256": "e9f2ab75fbe3463aa397738a1fb4f4d22ca4fa5a6bad64506b150604ee818d0a",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					31,
+					61,
+					194,
+					136
+				],
+				"partial_alpha_pixels": 666,
+				"transparent_pixels": 53085,
+				"visible_pixels": 12451,
+				"within_margin": true
+			},
+			"bytes": 10265,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "moss_bloom.png",
+			"frame_attempts": 1,
+			"id": "moss_bloom",
+			"model_id": "moss_bloom",
+			"name": "Moss Bloom",
+			"rarity": "epic",
+			"sha256": "53916161ec23951af3cf7ff61b12f71657889a47070a055b9d1bc222779a51ba",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					46,
+					67,
+					164,
+					117
+				],
+				"partial_alpha_pixels": 541,
+				"transparent_pixels": 52675,
+				"visible_pixels": 12861,
+				"within_margin": true
+			},
+			"bytes": 9109,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "gravitas.png",
+			"frame_attempts": 1,
+			"id": "gravitas",
+			"model_id": "gravitas",
+			"name": "Gravitas",
+			"rarity": "epic",
+			"sha256": "bd5af9f6f1ff4f2d2c103bde105ef0b9cc50ff18a470df27d4f6e60392757686",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					55,
+					47,
+					146,
+					131
+				],
+				"partial_alpha_pixels": 511,
+				"transparent_pixels": 54189,
+				"visible_pixels": 11347,
+				"within_margin": true
+			},
+			"bytes": 3734,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "lantern.png",
+			"frame_attempts": 1,
+			"id": "lantern",
+			"model_id": "lantern",
+			"name": "Lantern",
+			"rarity": "epic",
+			"sha256": "a6167178c6e575bd0aacfae77d1e5a06ac5cee439ffa9979ddc8bcab12d0f9e6",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					51,
+					58,
+					156,
+					134
+				],
+				"partial_alpha_pixels": 578,
+				"transparent_pixels": 52881,
+				"visible_pixels": 12655,
+				"within_margin": true
+			},
+			"bytes": 7498,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "shard.png",
+			"frame_attempts": 1,
+			"id": "shard",
+			"model_id": "shard",
+			"name": "Shard",
+			"rarity": "epic",
+			"sha256": "2f24636d0343d01d674da327aadb3be68f87bf25e437214efcc72d0fdb53c02a",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					58,
+					150,
+					122
+				],
+				"partial_alpha_pixels": 3513,
+				"transparent_pixels": 52216,
+				"visible_pixels": 13258,
+				"within_margin": true
+			},
+			"bytes": 21469,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "cinder.png",
+			"frame_attempts": 1,
+			"id": "cinder",
+			"model_id": "cinder",
+			"name": "Cinder",
+			"rarity": "legendary",
+			"sha256": "6b04c767dc6105b1ad4a0c7423c47dfe5a5c99d600fd3a95adc36152746b2712",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					35,
+					66,
+					186,
+					128
+				],
+				"partial_alpha_pixels": 10321,
+				"transparent_pixels": 47199,
+				"visible_pixels": 18239,
+				"within_margin": true
+			},
+			"bytes": 27634,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "tide.png",
+			"frame_attempts": 1,
+			"id": "tide",
+			"model_id": "tide",
+			"name": "Tide",
+			"rarity": "legendary",
+			"sha256": "959823f279b99c4d4df88756c2728a2ace90d5c71d8a9b24f87c394faaf527f1",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					29,
+					63,
+					198,
+					135
+				],
+				"partial_alpha_pixels": 13331,
+				"transparent_pixels": 44050,
+				"visible_pixels": 21021,
+				"within_margin": true
+			},
+			"bytes": 42223,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "orbit.png",
+			"frame_attempts": 1,
+			"id": "orbit",
+			"model_id": "orbit",
+			"name": "Orbit",
+			"rarity": "prismatic",
+			"sha256": "94bc0b30daa5ae4ef6b67b19a77a17855316fcd456e592a26a689f6cfa48b9a0",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					51,
+					56,
+					154,
+					126
+				],
+				"partial_alpha_pixels": 4934,
+				"transparent_pixels": 50372,
+				"visible_pixels": 15073,
+				"within_margin": true
+			},
+			"bytes": 24621,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "prism_vale.png",
+			"frame_attempts": 1,
+			"id": "prism_vale",
+			"model_id": "prism_vale",
+			"name": "Prism Vale",
+			"rarity": "legendary",
+			"sha256": "67981219581cf26756ee901d31699e9b3196628d7a6b3fc1dfc338bf78f2dd7d",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7427,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "sunny_side.png",
+			"frame_attempts": 1,
+			"id": "sunny_side",
+			"model_id": "sunny_side",
+			"name": "Sunny Side",
+			"rarity": "common",
+			"sha256": "9b99e40b0013472c13fde03bdaebd6715a4703ca847f84b0aff65b0e2c097164",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7380,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "sugar_glaze.png",
+			"frame_attempts": 1,
+			"id": "sugar_glaze",
+			"model_id": "sugar_glaze",
+			"name": "Sugar Glaze",
+			"rarity": "common",
+			"sha256": "9836841d86c177e578bcdbbd5c7a64107056e42bfaa54c76646cd879030d7696",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7559,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "berry_crown.png",
+			"frame_attempts": 1,
+			"id": "berry_crown",
+			"model_id": "berry_crown",
+			"name": "Berry Crown",
+			"rarity": "common",
+			"sha256": "7d04ce276f723fd160cb536a439fd6f10b867c23465eeda170321d697e7aafda",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					55,
+					178,
+					138
+				],
+				"partial_alpha_pixels": 371,
+				"transparent_pixels": 47430,
+				"visible_pixels": 18106,
+				"within_margin": true
+			},
+			"bytes": 24634,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "citrus_slice.png",
+			"frame_attempts": 1,
+			"id": "citrus_slice",
+			"model_id": "citrus_slice",
+			"name": "Citrus Slice",
+			"rarity": "uncommon",
+			"sha256": "f5199e78702213b8d09b291e361a35025dcffc7c7b81015da1e3137392f110e9",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					66,
+					176,
+					126
+				],
+				"partial_alpha_pixels": 345,
+				"transparent_pixels": 47681,
+				"visible_pixels": 17855,
+				"within_margin": true
+			},
+			"bytes": 24497,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "melon_munch.png",
+			"frame_attempts": 1,
+			"id": "melon_munch",
+			"model_id": "melon_munch",
+			"name": "Melon Munch",
+			"rarity": "uncommon",
+			"sha256": "8bb6c4acf0a8716a8170ac070dcc8b9c940d4a7f0282a5758f8c36b4e9e11bfd",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7469,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pretzel_twist.png",
+			"frame_attempts": 1,
+			"id": "pretzel_twist",
+			"model_id": "pretzel_twist",
+			"name": "Pretzel Twist",
+			"rarity": "common",
+			"sha256": "f052866cf04c484c44135d6d16246162ea0d719771e04cfed80fbf2a6cdc20a4",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					50,
+					58,
+					154,
+					123
+				],
+				"partial_alpha_pixels": 616,
+				"transparent_pixels": 53268,
+				"visible_pixels": 12268,
+				"within_margin": true
+			},
+			"bytes": 4131,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "popcorn_pot.png",
+			"frame_attempts": 1,
+			"id": "popcorn_pot",
+			"model_id": "popcorn_pot",
+			"name": "Popcorn Pot",
+			"rarity": "rare",
+			"sha256": "a83b3fa7f2c6fe7bbe7725a00a7b1993f925e73fbb730416a5ef7f7eb9439fbf",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					49,
+					70,
+					158,
+					115
+				],
+				"partial_alpha_pixels": 454,
+				"transparent_pixels": 51236,
+				"visible_pixels": 14300,
+				"within_margin": true
+			},
+			"bytes": 15626,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pizza_party.png",
+			"frame_attempts": 1,
+			"id": "pizza_party",
+			"model_id": "pizza_party",
+			"name": "Pizza Party",
+			"rarity": "rare",
+			"sha256": "40faae4f552739d42d4910cb8221ebccd37855f71dd6ddd35c6c4c802b8468be",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					63,
+					177,
+					129
+				],
+				"partial_alpha_pixels": 357,
+				"transparent_pixels": 47867,
+				"visible_pixels": 17669,
+				"within_margin": true
+			},
+			"bytes": 23995,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "cookie_bite.png",
+			"frame_attempts": 1,
+			"id": "cookie_bite",
+			"model_id": "cookie_bite",
+			"name": "Cookie Bite",
+			"rarity": "uncommon",
+			"sha256": "1cd199e8ac67e23b1565884364a6e20b429070779c63c3468162b3c7139b2f5a",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7477,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "waffle_stack.png",
+			"frame_attempts": 1,
+			"id": "waffle_stack",
+			"model_id": "waffle_stack",
+			"name": "Waffle Stack",
+			"rarity": "common",
+			"sha256": "2f23732cee7818b1f61b1316b4c9e524610bba53feb673890b6e6d93c711912c",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					62,
+					174,
+					130
+				],
+				"partial_alpha_pixels": 353,
+				"transparent_pixels": 47518,
+				"visible_pixels": 18018,
+				"within_margin": true
+			},
+			"bytes": 29312,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pancake_stack.png",
+			"frame_attempts": 1,
+			"id": "pancake_stack",
+			"model_id": "pancake_stack",
+			"name": "Pancake Stack",
+			"rarity": "uncommon",
+			"sha256": "b905a9afc551faca98e70dd77d8a9dfdafd3a10e13f04a6371a2f7a4b71fc207",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					67,
+					176,
+					126
+				],
+				"partial_alpha_pixels": 350,
+				"transparent_pixels": 48504,
+				"visible_pixels": 17032,
+				"within_margin": true
+			},
+			"bytes": 27106,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "bacon_curl.png",
+			"frame_attempts": 1,
+			"id": "bacon_curl",
+			"model_id": "bacon_curl",
+			"name": "Bacon Curl",
+			"rarity": "uncommon",
+			"sha256": "134505ab491718ff4caaf49907865eecd9f79858de44ceb33055f4557dfef1a5",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					65,
+					175,
+					128
+				],
+				"partial_alpha_pixels": 399,
+				"transparent_pixels": 47601,
+				"visible_pixels": 17935,
+				"within_margin": true
+			},
+			"bytes": 23013,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "cocoa_square.png",
+			"frame_attempts": 1,
+			"id": "cocoa_square",
+			"model_id": "cocoa_square",
+			"name": "Slate Ring",
+			"rarity": "common",
+			"sha256": "5d5bf87e62e35675ff95a66b3834f289165df39b391a49b536cf36bd7c0a800b",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					49,
+					58,
+					158,
+					125
+				],
+				"partial_alpha_pixels": 456,
+				"transparent_pixels": 50376,
+				"visible_pixels": 15160,
+				"within_margin": true
+			},
+			"bytes": 14585,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "frosted_cake.png",
+			"frame_attempts": 1,
+			"id": "frosted_cake",
+			"model_id": "frosted_cake",
+			"name": "Frosted Cake",
+			"rarity": "rare",
+			"sha256": "1197d2cce2b8fde13a3c9d8cf6bcddcd7d373cb0062e58bba4a7efac1f4769a2",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					54,
+					150,
+					125
+				],
+				"partial_alpha_pixels": 576,
+				"transparent_pixels": 54102,
+				"visible_pixels": 11434,
+				"within_margin": true
+			},
+			"bytes": 3732,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pineapple_top.png",
+			"frame_attempts": 1,
+			"id": "pineapple_top",
+			"model_id": "pineapple_top",
+			"name": "Pineapple Top",
+			"rarity": "rare",
+			"sha256": "8a8963a2991fdcf566b74924ec284f307e8051fda2e7b4769fd45803731fecd1",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					46,
+					181,
+					136
+				],
+				"partial_alpha_pixels": 807,
+				"transparent_pixels": 52150,
+				"visible_pixels": 13386,
+				"within_margin": true
+			},
+			"bytes": 4571,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "crab_cove.png",
+			"frame_attempts": 1,
+			"id": "crab_cove",
+			"model_id": "crab_cove",
+			"name": "Crab Cove",
+			"rarity": "rare",
+			"sha256": "82540b7cfdedba7445339ac6878db624eb122ec7083644ba185dbc280cc9a379",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					52,
+					39,
+					159,
+					144
+				],
+				"partial_alpha_pixels": 490,
+				"transparent_pixels": 50796,
+				"visible_pixels": 14740,
+				"within_margin": true
+			},
+			"bytes": 15529,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "fox_den.png",
+			"frame_attempts": 1,
+			"id": "fox_den",
+			"model_id": "fox_den",
+			"name": "Fox Den",
+			"rarity": "rare",
+			"sha256": "1b83d4e94626e88143259a8f835446e6b9ec4fbaf938c7e4ae76f733e85efb42",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					38,
+					150,
+					144
+				],
+				"partial_alpha_pixels": 495,
+				"transparent_pixels": 51060,
+				"visible_pixels": 14476,
+				"within_margin": true
+			},
+			"bytes": 10953,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "bunny_burrow.png",
+			"frame_attempts": 1,
+			"id": "bunny_burrow",
+			"model_id": "bunny_burrow",
+			"name": "Bunny Burrow",
+			"rarity": "rare",
+			"sha256": "99768acac9734797df7064152f8b34df7ea0d6f8bee7c85dcd06e22baa3f9c9d",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7425,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "frog_pond.png",
+			"frame_attempts": 1,
+			"id": "frog_pond",
+			"model_id": "frog_pond",
+			"name": "Frog Pond",
+			"rarity": "common",
+			"sha256": "105427ec869ac6ef63ad31dacfb76fb880f1050f2841df708c0930e6bcec0a75",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					46,
+					151,
+					132
+				],
+				"partial_alpha_pixels": 579,
+				"transparent_pixels": 53895,
+				"visible_pixels": 11641,
+				"within_margin": true
+			},
+			"bytes": 3921,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "owl_hollow.png",
+			"frame_attempts": 1,
+			"id": "owl_hollow",
+			"model_id": "owl_hollow",
+			"name": "Owl Hollow",
+			"rarity": "rare",
+			"sha256": "a812bf8cf44cecfdf1df93fea6861b643d65f5150a1e66f6af7d323dbd4b1961",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7520,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "turtle_shell.png",
+			"frame_attempts": 1,
+			"id": "turtle_shell",
+			"model_id": "turtle_shell",
+			"name": "Turtle Shell",
+			"rarity": "common",
+			"sha256": "177678f5e391b42b05dfedc00546bd3be219ad4bc4c119a05501b8f8a1943d58",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					53,
+					141,
+					125
+				],
+				"partial_alpha_pixels": 584,
+				"transparent_pixels": 53924,
+				"visible_pixels": 11612,
+				"within_margin": true
+			},
+			"bytes": 4342,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "snail_trail.png",
+			"frame_attempts": 1,
+			"id": "snail_trail",
+			"model_id": "snail_trail",
+			"name": "Snail Trail",
+			"rarity": "rare",
+			"sha256": "794804e5e874a35cddffc64b01c0478e7836990e2edf3c4eea438ffdbb7d2553",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7480,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "clockwork_key.png",
+			"frame_attempts": 1,
+			"id": "clockwork_key",
+			"model_id": "clockwork_key",
+			"name": "Clockwork Key",
+			"rarity": "common",
+			"sha256": "6aebd278002b12a8d9074fcee12d9a4801e65c39fd170b3d390260678f41c46e",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					51,
+					50,
+					152,
+					128
+				],
+				"partial_alpha_pixels": 634,
+				"transparent_pixels": 52888,
+				"visible_pixels": 12648,
+				"within_margin": true
+			},
+			"bytes": 12894,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "royal_gate.png",
+			"frame_attempts": 1,
+			"id": "royal_gate",
+			"model_id": "royal_gate",
+			"name": "Royal Gate",
+			"rarity": "epic",
+			"sha256": "dd58744ee7c2240fd9c4c349656c74c6f0eb0ce9e45a597a56a7c09dbd47e4e8",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					54,
+					178,
+					124
+				],
+				"partial_alpha_pixels": 534,
+				"transparent_pixels": 52862,
+				"visible_pixels": 12674,
+				"within_margin": true
+			},
+			"bytes": 6603,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "satellite_dish.png",
+			"frame_attempts": 1,
+			"id": "satellite_dish",
+			"model_id": "satellite_dish",
+			"name": "Satellite Dish",
+			"rarity": "epic",
+			"sha256": "16064284882a00038b51322f9dadf406bdfc47a9933238ec888a19710967e6e8",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					49,
+					150,
+					131
+				],
+				"partial_alpha_pixels": 667,
+				"transparent_pixels": 52729,
+				"visible_pixels": 12807,
+				"within_margin": true
+			},
+			"bytes": 7419,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "carnival_tent.png",
+			"frame_attempts": 1,
+			"id": "carnival_tent",
+			"model_id": "carnival_tent",
+			"name": "Carnival Tent",
+			"rarity": "epic",
+			"sha256": "c261ca62c991cdd570a27ac7f91481c645e735befac71b359a89ef0ab29f8453",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					52,
+					46,
+					152,
+					137
+				],
+				"partial_alpha_pixels": 458,
+				"transparent_pixels": 51528,
+				"visible_pixels": 14008,
+				"within_margin": true
+			},
+			"bytes": 14745,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "rocket_port.png",
+			"frame_attempts": 1,
+			"id": "rocket_port",
+			"model_id": "rocket_port",
+			"name": "Rocket Port",
+			"rarity": "epic",
+			"sha256": "cba42810632d9bdd17a719be71b79f549a4c913fcf01d798ac00a56a15b05c5e",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					51,
+					148,
+					127
+				],
+				"partial_alpha_pixels": 599,
+				"transparent_pixels": 53115,
+				"visible_pixels": 12421,
+				"within_margin": true
+			},
+			"bytes": 7831,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "rainbow_bridge.png",
+			"frame_attempts": 1,
+			"id": "rainbow_bridge",
+			"model_id": "rainbow_bridge",
+			"name": "Rainbow Bridge",
+			"rarity": "legendary",
+			"sha256": "479f0404544c35e9338a4748721d3e74732b5600525c60701461a19a2a025b5f",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					49,
+					141,
+					129
+				],
+				"partial_alpha_pixels": 526,
+				"transparent_pixels": 53631,
+				"visible_pixels": 11905,
+				"within_margin": true
+			},
+			"bytes": 4804,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "storm_cloud.png",
+			"frame_attempts": 1,
+			"id": "storm_cloud",
+			"model_id": "storm_cloud",
+			"name": "Storm Cloud",
+			"rarity": "epic",
+			"sha256": "290db7083f450cf14aa70bc3e60e6fe35c43b48c46aa8bc0a94d71287da73757",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					52,
+					42,
+					171,
+					141
+				],
+				"partial_alpha_pixels": 547,
+				"transparent_pixels": 50580,
+				"visible_pixels": 14956,
+				"within_margin": true
+			},
+			"bytes": 16196,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "dragon_roost.png",
+			"frame_attempts": 1,
+			"id": "dragon_roost",
+			"model_id": "dragon_roost",
+			"name": "Dragon Roost",
+			"rarity": "epic",
+			"sha256": "fb409f941b8edcb2d33446bcae958929ad7968b7ab433879c6d0e834a73e1d53",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					48,
+					59,
+					160,
+					119
+				],
+				"partial_alpha_pixels": 683,
+				"transparent_pixels": 51706,
+				"visible_pixels": 13830,
+				"within_margin": true
+			},
+			"bytes": 6014,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "jelly_veil.png",
+			"frame_attempts": 1,
+			"id": "jelly_veil",
+			"model_id": "jelly_veil",
+			"name": "Jelly Veil",
+			"rarity": "epic",
+			"sha256": "e2b081fe2f183032f7ef4f20814932a855ede2f03fcb3f397055ecafee037f94",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					56,
+					138,
+					122
+				],
+				"partial_alpha_pixels": 557,
+				"transparent_pixels": 54204,
+				"visible_pixels": 11332,
+				"within_margin": true
+			},
+			"bytes": 3784,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "moon_dream.png",
+			"frame_attempts": 1,
+			"id": "moon_dream",
+			"model_id": "moon_dream",
+			"name": "Moon Dream",
+			"rarity": "rare",
+			"sha256": "c15222992d1d131f9b829aa0f844a4dff9d19ac4c27fe72506e7300f97759874",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					52,
+					144,
+					126
+				],
+				"partial_alpha_pixels": 568,
+				"transparent_pixels": 53981,
+				"visible_pixels": 11555,
+				"within_margin": true
+			},
+			"bytes": 3936,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "coral_reef.png",
+			"frame_attempts": 1,
+			"id": "coral_reef",
+			"model_id": "coral_reef",
+			"name": "Coral Reef",
+			"rarity": "rare",
+			"sha256": "b78b9e69d83bdfe4582ba60b142c7d280584e80cc7e5afe5cc5c92829519345b",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					57,
+					47,
+					142,
+					131
+				],
+				"partial_alpha_pixels": 563,
+				"transparent_pixels": 53356,
+				"visible_pixels": 12180,
+				"within_margin": true
+			},
+			"bytes": 4133,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "music_stage.png",
+			"frame_attempts": 1,
+			"id": "music_stage",
+			"model_id": "music_stage",
+			"name": "Music Stage",
+			"rarity": "rare",
+			"sha256": "e170e4d36624f557d7f5d2161c715228e9e311ff2cf7b48c5d3b18225e9a6641",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					51,
+					43,
+					153,
+					154
+				],
+				"partial_alpha_pixels": 17593,
+				"transparent_pixels": 47889,
+				"visible_pixels": 17106,
+				"within_margin": true
+			},
+			"bytes": 40739,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.723174691200256,
+				0.569313228130341,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "tempest.png",
+			"frame_attempts": 1,
+			"id": "tempest",
+			"model_id": "tempest",
+			"name": "Tempest",
+			"rarity": "prismatic",
+			"sha256": "d6734fe6d5b27b6f056b5618ad9fb6367cf5f3c6588149931a2b497ff9b2ff30",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					55,
+					150,
+					156
+				],
+				"partial_alpha_pixels": 16074,
+				"transparent_pixels": 49451,
+				"visible_pixels": 15799,
+				"within_margin": true
+			},
+			"bytes": 35378,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.690053403377533,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "rainfall.png",
+			"frame_attempts": 1,
+			"id": "rainfall",
+			"model_id": "rainfall",
+			"name": "Rainfall",
+			"rarity": "prismatic",
+			"sha256": "7b474397a957a4d1ed8dee06df3589188fe662efa56fe1c0ba4222ed9660f5e1",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					44,
+					47,
+					168,
+					146
+				],
+				"partial_alpha_pixels": 386,
+				"transparent_pixels": 48785,
+				"visible_pixels": 16751,
+				"within_margin": true
+			},
+			"bytes": 13314,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "paper_boat.png",
+			"frame_attempts": 1,
+			"id": "paper_boat",
+			"model_id": "paper_boat",
+			"name": "Paper Boat",
+			"rarity": "uncommon",
+			"sha256": "bb00728447d4f6fa7f7f14db786b6979aea341fd4fb5189b1b1f733366eb9f13",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					37,
+					61,
+					182,
+					130
+				],
+				"partial_alpha_pixels": 398,
+				"transparent_pixels": 46704,
+				"visible_pixels": 18832,
+				"within_margin": true
+			},
+			"bytes": 20093,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "toy_tire.png",
+			"frame_attempts": 1,
+			"id": "toy_tire",
+			"model_id": "toy_tire",
+			"name": "Toy Tire",
+			"rarity": "uncommon",
+			"sha256": "66c5c6fc3d24f4325b745e02a1998fb09b75447797b785d6a1a8d76a737cc575",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					61,
+					175,
+					131
+				],
+				"partial_alpha_pixels": 375,
+				"transparent_pixels": 47454,
+				"visible_pixels": 18082,
+				"within_margin": true
+			},
+			"bytes": 24047,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "leaf_cup.png",
+			"frame_attempts": 1,
+			"id": "leaf_cup",
+			"model_id": "leaf_cup",
+			"name": "Leaf Cup",
+			"rarity": "uncommon",
+			"sha256": "2c6037ae72525d60018013ad218a5af5474789c4e40f63409bbf2013d705a713",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					42,
+					61,
+					172,
+					129
+				],
+				"partial_alpha_pixels": 384,
+				"transparent_pixels": 47998,
+				"visible_pixels": 17538,
+				"within_margin": true
+			},
+			"bytes": 30429,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "wooden_tub.png",
+			"frame_attempts": 1,
+			"id": "wooden_tub",
+			"model_id": "wooden_tub",
+			"name": "Wooden Tub",
+			"rarity": "uncommon",
+			"sha256": "f1f247de128a037eaf2d01c8e9ff0eb9342866e28227c58ebe98e3f0cb455c16",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					43,
+					61,
+					170,
+					134
+				],
+				"partial_alpha_pixels": 403,
+				"transparent_pixels": 48235,
+				"visible_pixels": 17301,
+				"within_margin": true
+			},
+			"bytes": 24737,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "rope_coil.png",
+			"frame_attempts": 1,
+			"id": "rope_coil",
+			"model_id": "rope_coil",
+			"name": "Rope Coil",
+			"rarity": "uncommon",
+			"sha256": "4d662a47c861f192ecea3d5b4fa46fc7580d3b99909307626351a4a607ff1e17",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					62,
+					176,
+					128
+				],
+				"partial_alpha_pixels": 389,
+				"transparent_pixels": 47591,
+				"visible_pixels": 17945,
+				"within_margin": true
+			},
+			"bytes": 23681,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "clay_pot.png",
+			"frame_attempts": 1,
+			"id": "clay_pot",
+			"model_id": "clay_pot",
+			"name": "Clay Pot",
+			"rarity": "uncommon",
+			"sha256": "26fb8bfd269a0d81818741b26d0257f03549ea5d463f85814032efe72622e82d",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					37,
+					61,
+					182,
+					131
+				],
+				"partial_alpha_pixels": 366,
+				"transparent_pixels": 47595,
+				"visible_pixels": 17941,
+				"within_margin": true
+			},
+			"bytes": 21497,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "shell_cup.png",
+			"frame_attempts": 1,
+			"id": "shell_cup",
+			"model_id": "shell_cup",
+			"name": "Shell Cup",
+			"rarity": "uncommon",
+			"sha256": "2991a7e3a89763cdad6adf3735e40c708d4b4b7464fce56ade4ea9774dd9b630",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					64,
+					178,
+					128
+				],
+				"partial_alpha_pixels": 511,
+				"transparent_pixels": 48410,
+				"visible_pixels": 17126,
+				"within_margin": true
+			},
+			"bytes": 26062,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "woven_nest.png",
+			"frame_attempts": 1,
+			"id": "woven_nest",
+			"model_id": "woven_nest",
+			"name": "Woven Nest",
+			"rarity": "uncommon",
+			"sha256": "2db6c6742b9830ad0c9d08395c63948bcfd261bc26b51fdc8f6db1aba99ec65c",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					46,
+					53,
+					169,
+					137
+				],
+				"partial_alpha_pixels": 582,
+				"transparent_pixels": 47600,
+				"visible_pixels": 17936,
+				"within_margin": true
+			},
+			"bytes": 26254,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "paint_tin.png",
+			"frame_attempts": 1,
+			"id": "paint_tin",
+			"model_id": "paint_tin",
+			"name": "Paint Tin",
+			"rarity": "uncommon",
+			"sha256": "e0fb9ce0c675c6d18ae50cb57d6f9636395add6f76b625e62b8d26f098227484",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					68,
+					184,
+					129
+				],
+				"partial_alpha_pixels": 413,
+				"transparent_pixels": 49577,
+				"visible_pixels": 15959,
+				"within_margin": true
+			},
+			"bytes": 20070,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "denim_pocket.png",
+			"frame_attempts": 1,
+			"id": "denim_pocket",
+			"model_id": "denim_pocket",
+			"name": "Denim Pocket",
+			"rarity": "uncommon",
+			"sha256": "05cf9afccaad938e33dca503f1263dea0f9c3b2f5dfaa019a4e84aa2cc38edc9",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					50,
+					175,
+					141
+				],
+				"partial_alpha_pixels": 403,
+				"transparent_pixels": 46560,
+				"visible_pixels": 18976,
+				"within_margin": true
+			},
+			"bytes": 26030,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "catchers_mitt.png",
+			"frame_attempts": 1,
+			"id": "catchers_mitt",
+			"model_id": "catchers_mitt",
+			"name": "Catcher's Mitt",
+			"rarity": "uncommon",
+			"sha256": "70f745dee6b117b223805228bd5aa7132f8fe13eab48e0c47c32837a3aad4991",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					34,
+					65,
+					188,
+					126
+				],
+				"partial_alpha_pixels": 438,
+				"transparent_pixels": 46976,
+				"visible_pixels": 18560,
+				"within_margin": true
+			},
+			"bytes": 15516,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "enamel_basin.png",
+			"frame_attempts": 1,
+			"id": "enamel_basin",
+			"model_id": "enamel_basin",
+			"name": "Enamel Basin",
+			"rarity": "uncommon",
+			"sha256": "ea0a5c7f1a9139651e61194e10cb6b9c42f7187f599b7f911767c99cbce0f445",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					35,
+					60,
+					186,
+					135
+				],
+				"partial_alpha_pixels": 376,
+				"transparent_pixels": 47302,
+				"visible_pixels": 18234,
+				"within_margin": true
+			},
+			"bytes": 28065,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "acorn_cup.png",
+			"frame_attempts": 1,
+			"id": "acorn_cup",
+			"model_id": "acorn_cup",
+			"name": "Acorn Cup",
+			"rarity": "uncommon",
+			"sha256": "e70846133b30fd333ce0cdde340bcc77251998ef4fa618007d47281d3bf0869f",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					61,
+					178,
+					132
+				],
+				"partial_alpha_pixels": 372,
+				"transparent_pixels": 47190,
+				"visible_pixels": 18346,
+				"within_margin": true
+			},
+			"bytes": 23274,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "knit_cap.png",
+			"frame_attempts": 1,
+			"id": "knit_cap",
+			"model_id": "knit_cap",
+			"name": "Knit Cap",
+			"rarity": "uncommon",
+			"sha256": "c67ba83dc5b8fcc3988178db170aecc990e09f2a0a5e89577fcfbf92ae6c4a2c",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					50,
+					81,
+					156,
+					108
+				],
+				"partial_alpha_pixels": 306,
+				"transparent_pixels": 52222,
+				"visible_pixels": 13314,
+				"within_margin": true
+			},
+			"bytes": 11937,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "plain_loop.png",
+			"frame_attempts": 1,
+			"id": "plain_loop",
+			"model_id": "plain_loop",
+			"name": "Plain Loop",
+			"rarity": "common",
+			"sha256": "3b1ba77c7ce13b5f1aa5e58c95b8327f38766ed8b44a3c159c578ac191addccc",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					42,
+					69,
+					172,
+					124
+				],
+				"partial_alpha_pixels": 302,
+				"transparent_pixels": 48846,
+				"visible_pixels": 16690,
+				"within_margin": true
+			},
+			"bytes": 18323,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "button_wheel.png",
+			"frame_attempts": 1,
+			"id": "button_wheel",
+			"model_id": "button_wheel",
+			"name": "Button Wheel",
+			"rarity": "uncommon",
+			"sha256": "8300396ec0320758e550a4ea9d9a12ae06a8393182a4e3be77bf002d49df7dd0",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					42,
+					41,
+					172,
+					154
+				],
+				"partial_alpha_pixels": 409,
+				"transparent_pixels": 48168,
+				"visible_pixels": 17368,
+				"within_margin": true
+			},
+			"bytes": 23355,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "pocket_arcade.png",
+			"frame_attempts": 1,
+			"id": "pocket_arcade",
+			"model_id": "pocket_arcade",
+			"name": "Pocket Arcade",
+			"rarity": "epic",
+			"sha256": "3c57fa14cd8f7ceee03c24e7eba0a2d2ab66155567df283dabecc16028e86c97",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					42,
+					36,
+					180,
+					159
+				],
+				"partial_alpha_pixels": 655,
+				"transparent_pixels": 46646,
+				"visible_pixels": 18890,
+				"within_margin": true
+			},
+			"bytes": 25058,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "sakura_pavilion.png",
+			"frame_attempts": 1,
+			"id": "sakura_pavilion",
+			"model_id": "sakura_pavilion",
+			"name": "Sakura Pavilion",
+			"rarity": "epic",
+			"sha256": "250dd82f040839d4548a8494ec232ffa2b1183ca956335b2db2f63fb66182ec6",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					36,
+					53,
+					184,
+					143
+				],
+				"partial_alpha_pixels": 717,
+				"transparent_pixels": 46766,
+				"visible_pixels": 18770,
+				"within_margin": true
+			},
+			"bytes": 27745,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "clockwork_orbit.png",
+			"frame_attempts": 1,
+			"id": "clockwork_orbit",
+			"model_id": "clockwork_orbit",
+			"name": "Clockwork Orbit",
+			"rarity": "legendary",
+			"sha256": "c678134b4c5184a92aec47356d5e72661d44d8ef767598ce3204707d63f986e5",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					27,
+					187,
+					165
+				],
+				"partial_alpha_pixels": 606,
+				"transparent_pixels": 46472,
+				"visible_pixels": 19064,
+				"within_margin": true
+			},
+			"bytes": 25397,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "phoenix_nest.png",
+			"frame_attempts": 1,
+			"id": "phoenix_nest",
+			"model_id": "phoenix_nest",
+			"name": "Phoenix Nest",
+			"rarity": "legendary",
+			"sha256": "1001062f528b2663b7999f39887d3ca3a1b329d9d01b4fd0440246c4714efecf",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					26,
+					172,
+					169
+				],
+				"partial_alpha_pixels": 517,
+				"transparent_pixels": 46622,
+				"visible_pixels": 18914,
+				"within_margin": true
+			},
+			"bytes": 25968,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "crystal_crown.png",
+			"frame_attempts": 1,
+			"id": "crystal_crown",
+			"model_id": "crystal_crown",
+			"name": "Crystal Crown",
+			"rarity": "legendary",
+			"sha256": "ac29b3859c5b762b73a908d36ee31167100b8b27afc68e590e5d1771c04dceb8",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					36,
+					34,
+					184,
+					162
+				],
+				"partial_alpha_pixels": 4197,
+				"transparent_pixels": 42145,
+				"visible_pixels": 23315,
+				"within_margin": true
+			},
+			"bytes": 36563,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "aurora_rift.png",
+			"frame_attempts": 1,
+			"id": "aurora_rift",
+			"model_id": "aurora_rift",
+			"name": "Aurora Rift",
+			"rarity": "prismatic",
+			"sha256": "2a4f01af18f2b45751e8f6780e8671c0daa466048afcb4dfe1c0ecd85236695b",
+			"variant_index": 0
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					29,
+					63,
+					198,
+					135
+				],
+				"partial_alpha_pixels": 13327,
+				"transparent_pixels": 44054,
+				"visible_pixels": 21017,
+				"within_margin": true
+			},
+			"bytes": 40267,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "core_shell__solar_core.png",
+			"frame_attempts": 1,
+			"id": "core_shell__solar_core",
+			"model_id": "core_shell",
+			"name": "Core Shell · Solar Core",
+			"rarity": "legendary",
+			"sha256": "ec30b5d96fa86bd7940472bcf6fdb0a0c361145a86c0a1dabc0e319cedfec172",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					50,
+					76,
+					156,
+					108
+				],
+				"partial_alpha_pixels": 825,
+				"transparent_pixels": 53441,
+				"visible_pixels": 12095,
+				"within_margin": true
+			},
+			"bytes": 12569,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "copper_ring__verdigris.png",
+			"frame_attempts": 1,
+			"id": "copper_ring__verdigris",
+			"model_id": "copper_ring",
+			"name": "Copper Ring · Verdigris",
+			"rarity": "epic",
+			"sha256": "2d0899117942f6446dc97bcb5cf61d0401a234132d7bdd44ab8f24ff4bc5ca7c",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					31,
+					61,
+					194,
+					136
+				],
+				"partial_alpha_pixels": 666,
+				"transparent_pixels": 53085,
+				"visible_pixels": 12451,
+				"within_margin": true
+			},
+			"bytes": 10759,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "moss_bloom__autumn_bloom.png",
+			"frame_attempts": 1,
+			"id": "moss_bloom__autumn_bloom",
+			"model_id": "moss_bloom",
+			"name": "Moss Bloom · Autumn Bloom",
+			"rarity": "epic",
+			"sha256": "a9912c22bf3732a1d48d5742e9ac7c42e04868b09fedb19c4bd37b14942b98e6",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					46,
+					67,
+					164,
+					117
+				],
+				"partial_alpha_pixels": 541,
+				"transparent_pixels": 52675,
+				"visible_pixels": 12861,
+				"within_margin": true
+			},
+			"bytes": 8599,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "gravitas__marble_gold.png",
+			"frame_attempts": 1,
+			"id": "gravitas__marble_gold",
+			"model_id": "gravitas",
+			"name": "Gravitas · Marble Gold",
+			"rarity": "epic",
+			"sha256": "bb7ca47517675822e38068f8171465a909651de133fc30ad5e011cbd91f90d30",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					55,
+					47,
+					146,
+					131
+				],
+				"partial_alpha_pixels": 511,
+				"transparent_pixels": 54189,
+				"visible_pixels": 11347,
+				"within_margin": true
+			},
+			"bytes": 3873,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "lantern__festival_rose.png",
+			"frame_attempts": 1,
+			"id": "lantern__festival_rose",
+			"model_id": "lantern",
+			"name": "Lantern · Festival Rose",
+			"rarity": "epic",
+			"sha256": "090df0fe14eabf4688ec148bed2db8e8659c16fdfe53f5484517619a54522cdd",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					51,
+					58,
+					156,
+					134
+				],
+				"partial_alpha_pixels": 578,
+				"transparent_pixels": 52881,
+				"visible_pixels": 12655,
+				"within_margin": true
+			},
+			"bytes": 7552,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "shard__amethyst_shards.png",
+			"frame_attempts": 1,
+			"id": "shard__amethyst_shards",
+			"model_id": "shard",
+			"name": "Shard · Amethyst Shards",
+			"rarity": "epic",
+			"sha256": "c9a6d85e50043808a2246bc9ebb9114f15d8ca2a9f7cce1bfdaa27731ed5e38d",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					58,
+					150,
+					122
+				],
+				"partial_alpha_pixels": 3513,
+				"transparent_pixels": 52216,
+				"visible_pixels": 13258,
+				"within_margin": true
+			},
+			"bytes": 23053,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "cinder__azure_flame.png",
+			"frame_attempts": 1,
+			"id": "cinder__azure_flame",
+			"model_id": "cinder",
+			"name": "Cinder · Azure Flame",
+			"rarity": "legendary",
+			"sha256": "b1dec0bfeb0ae1e4897f59f3e5a735ade90f0f1540a161fe780a58410994eac9",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					35,
+					66,
+					186,
+					128
+				],
+				"partial_alpha_pixels": 10321,
+				"transparent_pixels": 47199,
+				"visible_pixels": 18239,
+				"within_margin": true
+			},
+			"bytes": 29389,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "tide__rosewater.png",
+			"frame_attempts": 1,
+			"id": "tide__rosewater",
+			"model_id": "tide",
+			"name": "Tide · Rosewater",
+			"rarity": "legendary",
+			"sha256": "02108b0b2e8ddb8a8eb1bd589f0c34a010a080c8e95379d21824f129df09e05f",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					29,
+					63,
+					198,
+					135
+				],
+				"partial_alpha_pixels": 13331,
+				"transparent_pixels": 44050,
+				"visible_pixels": 21021,
+				"within_margin": true
+			},
+			"bytes": 40645,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "orbit__golden_nebula.png",
+			"frame_attempts": 1,
+			"id": "orbit__golden_nebula",
+			"model_id": "orbit",
+			"name": "Orbit · Golden Nebula",
+			"rarity": "prismatic",
+			"sha256": "3c696dfb992c6f2815a27f965c60c377104660c558db9a607de49e1f28641abd",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					51,
+					56,
+					154,
+					126
+				],
+				"partial_alpha_pixels": 4934,
+				"transparent_pixels": 50372,
+				"visible_pixels": 15073,
+				"within_margin": true
+			},
+			"bytes": 23661,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "prism_vale__dawn_veil.png",
+			"frame_attempts": 1,
+			"id": "prism_vale__dawn_veil",
+			"model_id": "prism_vale",
+			"name": "Prism Vale · Dawn Veil",
+			"rarity": "legendary",
+			"sha256": "2df07a6ccbabe57ef2a3d172a1451efae94067fbe72cdc488805d205f39651b1",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7338,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "sunny_side__moonlight.png",
+			"frame_attempts": 1,
+			"id": "sunny_side__moonlight",
+			"model_id": "sunny_side",
+			"name": "Sunny Side · Moonlight",
+			"rarity": "common",
+			"sha256": "cd8804d37187f1f64a375fbfd9fe9000ce3b8c2c3ec841b6a7986e6cc8ece9cd",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7408,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "sunny_side__mint_cream.png",
+			"frame_attempts": 1,
+			"id": "sunny_side__mint_cream",
+			"model_id": "sunny_side",
+			"name": "Sunny Side · Mint Cream",
+			"rarity": "common",
+			"sha256": "368914109c7bfb677fee9c012d8ca1c1453b7e70e4307e901f9cd52b94c4ba77",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7428,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "sunny_side__peach_glow.png",
+			"frame_attempts": 1,
+			"id": "sunny_side__peach_glow",
+			"model_id": "sunny_side",
+			"name": "Sunny Side · Peach Glow",
+			"rarity": "common",
+			"sha256": "dc178232d35a2bc56c696480acbbe734bc0c06b572e1dbbce7f695fa8b8b0696",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7466,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "sugar_glaze__blueberry.png",
+			"frame_attempts": 1,
+			"id": "sugar_glaze__blueberry",
+			"model_id": "sugar_glaze",
+			"name": "Sugar Glaze · Blueberry",
+			"rarity": "common",
+			"sha256": "ff75c1152aa754d17b5dea16ba29b9d1b3457cc03029c88e881718468ac6b6dd",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7443,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "sugar_glaze__pistachio.png",
+			"frame_attempts": 1,
+			"id": "sugar_glaze__pistachio",
+			"model_id": "sugar_glaze",
+			"name": "Sugar Glaze · Pistachio",
+			"rarity": "common",
+			"sha256": "6f79919b3dcef78c42ed4d615a7316c5e7f52dac395335db60478c8e3a4efaef",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7504,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "sugar_glaze__cocoa_icing.png",
+			"frame_attempts": 1,
+			"id": "sugar_glaze__cocoa_icing",
+			"model_id": "sugar_glaze",
+			"name": "Sugar Glaze · Cocoa Icing",
+			"rarity": "common",
+			"sha256": "2117b87f8949ab1e1fcf91beeed0b88c6ace444992598d3786e24f088b0e5961",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7579,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "berry_crown__blackcurrant.png",
+			"frame_attempts": 1,
+			"id": "berry_crown__blackcurrant",
+			"model_id": "berry_crown",
+			"name": "Berry Crown · Blackcurrant",
+			"rarity": "common",
+			"sha256": "c816c5d47174440d3bae41d6369957304fc00656de6e6e6f8669e2b2385de174",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7365,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "berry_crown__strawberry_cream.png",
+			"frame_attempts": 1,
+			"id": "berry_crown__strawberry_cream",
+			"model_id": "berry_crown",
+			"name": "Berry Crown · Strawberry Cream",
+			"rarity": "common",
+			"sha256": "302418a32d14e6606338d41fe746d7f5baad86f61a1665e4d644a0e5f8d2e014",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7227,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "berry_crown__golden_berry.png",
+			"frame_attempts": 1,
+			"id": "berry_crown__golden_berry",
+			"model_id": "berry_crown",
+			"name": "Berry Crown · Golden Berry",
+			"rarity": "common",
+			"sha256": "a89e1ed7b5f06f3b7078352355c4b14681a42bb8969449b5aa39c1e94ecea8cc",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					55,
+					178,
+					138
+				],
+				"partial_alpha_pixels": 371,
+				"transparent_pixels": 47430,
+				"visible_pixels": 18106,
+				"within_margin": true
+			},
+			"bytes": 25496,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "citrus_slice__ruby_orange.png",
+			"frame_attempts": 1,
+			"id": "citrus_slice__ruby_orange",
+			"model_id": "citrus_slice",
+			"name": "Citrus Slice · Ruby Orange",
+			"rarity": "uncommon",
+			"sha256": "8b0152a3bebef0cd453861237e3e531d25b11bc60728ea6a90739caff6af431d",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					55,
+					178,
+					138
+				],
+				"partial_alpha_pixels": 371,
+				"transparent_pixels": 47430,
+				"visible_pixels": 18106,
+				"within_margin": true
+			},
+			"bytes": 26172,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "citrus_slice__lime_slice.png",
+			"frame_attempts": 1,
+			"id": "citrus_slice__lime_slice",
+			"model_id": "citrus_slice",
+			"name": "Citrus Slice · Lime Slice",
+			"rarity": "uncommon",
+			"sha256": "4b9e6eb92c9cd9d4a6779515b0837718c2b5d42b95a87c35ae707cf60c0da77b",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					66,
+					176,
+					126
+				],
+				"partial_alpha_pixels": 345,
+				"transparent_pixels": 47681,
+				"visible_pixels": 17855,
+				"within_margin": true
+			},
+			"bytes": 24733,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "melon_munch__golden_melon.png",
+			"frame_attempts": 1,
+			"id": "melon_munch__golden_melon",
+			"model_id": "melon_munch",
+			"name": "Melon Munch · Golden Melon",
+			"rarity": "uncommon",
+			"sha256": "a5ec73e2b7e4c8323be0c2cf188db148ad0add66b38cc2956e58731c20c81b80",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					66,
+					176,
+					126
+				],
+				"partial_alpha_pixels": 345,
+				"transparent_pixels": 47681,
+				"visible_pixels": 17855,
+				"within_margin": true
+			},
+			"bytes": 23941,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "melon_munch__honeydew.png",
+			"frame_attempts": 1,
+			"id": "melon_munch__honeydew",
+			"model_id": "melon_munch",
+			"name": "Melon Munch · Honeydew",
+			"rarity": "uncommon",
+			"sha256": "dd418ee4243f58265972aa8137ab896eef75dcb25d07efbfae921549f9172425",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7360,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pretzel_twist__dark_rye.png",
+			"frame_attempts": 1,
+			"id": "pretzel_twist__dark_rye",
+			"model_id": "pretzel_twist",
+			"name": "Pretzel Twist · Olive Rye",
+			"rarity": "common",
+			"sha256": "2782c90490e683bb3a38907fd02dbcbf91fbdbb445efb3dafe269c5fabb3053f",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7598,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pretzel_twist__sea_salt.png",
+			"frame_attempts": 1,
+			"id": "pretzel_twist__sea_salt",
+			"model_id": "pretzel_twist",
+			"name": "Pretzel Twist · Sea Salt",
+			"rarity": "common",
+			"sha256": "ad78fca784b8fa840ebe477ec9e69317b93f7430ab3345e149d3804c3790559d",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7432,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pretzel_twist__cinnamon.png",
+			"frame_attempts": 1,
+			"id": "pretzel_twist__cinnamon",
+			"model_id": "pretzel_twist",
+			"name": "Pretzel Twist · Cinnamon",
+			"rarity": "common",
+			"sha256": "950ef03fe9c9ed05380aea1b6abf1bd69cbf3cbba9da62524add91509de329f8",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					50,
+					58,
+					154,
+					123
+				],
+				"partial_alpha_pixels": 616,
+				"transparent_pixels": 53268,
+				"visible_pixels": 12268,
+				"within_margin": true
+			},
+			"bytes": 4316,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "popcorn_pot__caramel_cinema.png",
+			"frame_attempts": 1,
+			"id": "popcorn_pot__caramel_cinema",
+			"model_id": "popcorn_pot",
+			"name": "Popcorn Pot · Caramel Cinema",
+			"rarity": "rare",
+			"sha256": "d13fef5f81b5e97c0e9f430133a9487efac5bb8a115da337bfbf5156575c7853",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					50,
+					58,
+					154,
+					123
+				],
+				"partial_alpha_pixels": 616,
+				"transparent_pixels": 53268,
+				"visible_pixels": 12268,
+				"within_margin": true
+			},
+			"bytes": 4085,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "popcorn_pot__blue_matinee.png",
+			"frame_attempts": 1,
+			"id": "popcorn_pot__blue_matinee",
+			"model_id": "popcorn_pot",
+			"name": "Popcorn Pot · Blue Matinee",
+			"rarity": "rare",
+			"sha256": "ce1cf61e1c6bd513e0803ce8ad78ccf6fb33d51fe13dbcefb2d57f7661e40f89",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					50,
+					58,
+					154,
+					123
+				],
+				"partial_alpha_pixels": 616,
+				"transparent_pixels": 53268,
+				"visible_pixels": 12268,
+				"within_margin": true
+			},
+			"bytes": 4308,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "popcorn_pot__plum_premiere.png",
+			"frame_attempts": 1,
+			"id": "popcorn_pot__plum_premiere",
+			"model_id": "popcorn_pot",
+			"name": "Popcorn Pot · Plum Premiere",
+			"rarity": "rare",
+			"sha256": "db94663b1c160b26d6749c199aa8ae83302957b0982956c185bc33abb5a94988",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					49,
+					70,
+					158,
+					115
+				],
+				"partial_alpha_pixels": 454,
+				"transparent_pixels": 51236,
+				"visible_pixels": 14300,
+				"within_margin": true
+			},
+			"bytes": 16643,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pizza_party__pesto_party.png",
+			"frame_attempts": 1,
+			"id": "pizza_party__pesto_party",
+			"model_id": "pizza_party",
+			"name": "Pizza Party · Pesto Party",
+			"rarity": "rare",
+			"sha256": "aa7169cc16c2089b85cf34e2acffb8063f69944e2fbcb20fac4e0bb1d3712b4d",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					49,
+					70,
+					158,
+					115
+				],
+				"partial_alpha_pixels": 454,
+				"transparent_pixels": 51236,
+				"visible_pixels": 14300,
+				"within_margin": true
+			},
+			"bytes": 16180,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pizza_party__spicy_fiesta.png",
+			"frame_attempts": 1,
+			"id": "pizza_party__spicy_fiesta",
+			"model_id": "pizza_party",
+			"name": "Pizza Party · Spicy Fiesta",
+			"rarity": "rare",
+			"sha256": "6a7623bf3095ed7a79159149a5779109f10c5b11ed468a435a5d446c1ef391f8",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					49,
+					70,
+					158,
+					115
+				],
+				"partial_alpha_pixels": 454,
+				"transparent_pixels": 51236,
+				"visible_pixels": 14300,
+				"within_margin": true
+			},
+			"bytes": 16412,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pizza_party__truffle_night.png",
+			"frame_attempts": 1,
+			"id": "pizza_party__truffle_night",
+			"model_id": "pizza_party",
+			"name": "Pizza Party · Truffle Night",
+			"rarity": "rare",
+			"sha256": "66efaf454c873cf28d45016f7a8d2b563502170d26fed6e964b52a1f6600f9d8",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					63,
+					177,
+					129
+				],
+				"partial_alpha_pixels": 357,
+				"transparent_pixels": 47867,
+				"visible_pixels": 17669,
+				"within_margin": true
+			},
+			"bytes": 23448,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "cookie_bite__double_cocoa.png",
+			"frame_attempts": 1,
+			"id": "cookie_bite__double_cocoa",
+			"model_id": "cookie_bite",
+			"name": "Cookie Bite · Double Cocoa",
+			"rarity": "uncommon",
+			"sha256": "6ce071953cebf62b3d80b71ed553c3b124bb429dd7f275c920d8292447dcba40",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					63,
+					177,
+					129
+				],
+				"partial_alpha_pixels": 357,
+				"transparent_pixels": 47867,
+				"visible_pixels": 17669,
+				"within_margin": true
+			},
+			"bytes": 23433,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "cookie_bite__red_velvet.png",
+			"frame_attempts": 1,
+			"id": "cookie_bite__red_velvet",
+			"model_id": "cookie_bite",
+			"name": "Cookie Bite · Red Velvet",
+			"rarity": "uncommon",
+			"sha256": "0b77de179c7179415903bb4abafafcf1cf25e46ec9f644171bab173eb1250b39",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 6993,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "waffle_stack__cocoa_waffle.png",
+			"frame_attempts": 1,
+			"id": "waffle_stack__cocoa_waffle",
+			"model_id": "waffle_stack",
+			"name": "Waffle Stack · Cocoa Waffle",
+			"rarity": "common",
+			"sha256": "5b3841e7660729b961a191f25e0b5877cccfc85f1e43a514a50a16537b25baeb",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7413,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "waffle_stack__berry_syrup.png",
+			"frame_attempts": 1,
+			"id": "waffle_stack__berry_syrup",
+			"model_id": "waffle_stack",
+			"name": "Waffle Stack · Berry Syrup",
+			"rarity": "common",
+			"sha256": "c3292d825079667a8b10aac246fa86af960356805e692b3765d7d160053954c4",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7494,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "waffle_stack__matcha_waffle.png",
+			"frame_attempts": 1,
+			"id": "waffle_stack__matcha_waffle",
+			"model_id": "waffle_stack",
+			"name": "Waffle Stack · Matcha Waffle",
+			"rarity": "common",
+			"sha256": "1e1c6da639bf40ed49d4739dc797bb997eb13936c0b376e2bbe59a544fd5faa0",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					62,
+					174,
+					130
+				],
+				"partial_alpha_pixels": 353,
+				"transparent_pixels": 47518,
+				"visible_pixels": 18018,
+				"within_margin": true
+			},
+			"bytes": 28590,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pancake_stack__blueberry_stack.png",
+			"frame_attempts": 1,
+			"id": "pancake_stack__blueberry_stack",
+			"model_id": "pancake_stack",
+			"name": "Pancake Stack · Blueberry Stack",
+			"rarity": "uncommon",
+			"sha256": "f65a30b251aba46203adbe606f7eeb1a3b0fbacf9b7df181ab84526d1499a7af",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					62,
+					174,
+					130
+				],
+				"partial_alpha_pixels": 353,
+				"transparent_pixels": 47518,
+				"visible_pixels": 18018,
+				"within_margin": true
+			},
+			"bytes": 29914,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pancake_stack__cocoa_stack.png",
+			"frame_attempts": 1,
+			"id": "pancake_stack__cocoa_stack",
+			"model_id": "pancake_stack",
+			"name": "Pancake Stack · Cocoa Stack",
+			"rarity": "uncommon",
+			"sha256": "08b5cda2be997b02c89171a20d1ce6cf76a912504bda48822a7db314b221e7b0",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					67,
+					176,
+					126
+				],
+				"partial_alpha_pixels": 350,
+				"transparent_pixels": 48504,
+				"visible_pixels": 17032,
+				"within_margin": true
+			},
+			"bytes": 27753,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "bacon_curl__maple_crisp.png",
+			"frame_attempts": 1,
+			"id": "bacon_curl__maple_crisp",
+			"model_id": "bacon_curl",
+			"name": "Bacon Curl · Maple Crisp",
+			"rarity": "uncommon",
+			"sha256": "b2889cd64ae2a885aa8f3dcf5dc7de6570f8cde9ea47233d164e77bbc00217e9",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					67,
+					176,
+					126
+				],
+				"partial_alpha_pixels": 350,
+				"transparent_pixels": 48504,
+				"visible_pixels": 17032,
+				"within_margin": true
+			},
+			"bytes": 27922,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "bacon_curl__pepper_crisp.png",
+			"frame_attempts": 1,
+			"id": "bacon_curl__pepper_crisp",
+			"model_id": "bacon_curl",
+			"name": "Bacon Curl · Pepper Crisp",
+			"rarity": "uncommon",
+			"sha256": "509c86e920288933d84f79c47a3e7eea9ff496a9921a3ff8bd07c4f29d2a21d1",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					65,
+					175,
+					128
+				],
+				"partial_alpha_pixels": 399,
+				"transparent_pixels": 47601,
+				"visible_pixels": 17935,
+				"within_margin": true
+			},
+			"bytes": 22566,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "cocoa_square__basalt.png",
+			"frame_attempts": 1,
+			"id": "cocoa_square__basalt",
+			"model_id": "cocoa_square",
+			"name": "Slate Ring · Basalt",
+			"rarity": "common",
+			"sha256": "daba5b5a647ed160f386cf4e2417d5d8fa22a8bb7d83e0334962df27bfe1f5cc",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					65,
+					175,
+					128
+				],
+				"partial_alpha_pixels": 399,
+				"transparent_pixels": 47601,
+				"visible_pixels": 17935,
+				"within_margin": true
+			},
+			"bytes": 23469,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "cocoa_square__sandstone.png",
+			"frame_attempts": 1,
+			"id": "cocoa_square__sandstone",
+			"model_id": "cocoa_square",
+			"name": "Slate Ring · Sandstone",
+			"rarity": "common",
+			"sha256": "d6bc0d8dc84d7496e004fe1e6981930e7d469b8aee3b54eefbf7ae746ab17a43",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					65,
+					175,
+					128
+				],
+				"partial_alpha_pixels": 399,
+				"transparent_pixels": 47601,
+				"visible_pixels": 17935,
+				"within_margin": true
+			},
+			"bytes": 23338,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "cocoa_square__rose_quartz.png",
+			"frame_attempts": 1,
+			"id": "cocoa_square__rose_quartz",
+			"model_id": "cocoa_square",
+			"name": "Slate Ring · Rose Quartz",
+			"rarity": "common",
+			"sha256": "e669fd6ddd361d87bc2bebbb4ea22ac88ad1cc95385362a7cb68a4604f50dadc",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					49,
+					58,
+					158,
+					125
+				],
+				"partial_alpha_pixels": 456,
+				"transparent_pixels": 50376,
+				"visible_pixels": 15160,
+				"within_margin": true
+			},
+			"bytes": 14748,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "frosted_cake__blueberry_cake.png",
+			"frame_attempts": 1,
+			"id": "frosted_cake__blueberry_cake",
+			"model_id": "frosted_cake",
+			"name": "Frosted Cake · Blueberry Cake",
+			"rarity": "rare",
+			"sha256": "d76a2c5474326aa42ba58ec759b4f733a553e63a066ecfea422e5a0f96c75d63",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					49,
+					58,
+					158,
+					125
+				],
+				"partial_alpha_pixels": 456,
+				"transparent_pixels": 50376,
+				"visible_pixels": 15160,
+				"within_margin": true
+			},
+			"bytes": 15203,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "frosted_cake__lemon_cake.png",
+			"frame_attempts": 1,
+			"id": "frosted_cake__lemon_cake",
+			"model_id": "frosted_cake",
+			"name": "Frosted Cake · Lemon Cake",
+			"rarity": "rare",
+			"sha256": "58d9662a462fc76ca1d1265bc53f28cbc6e103ee8a3aeff380e107d1bb46e463",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					49,
+					58,
+					158,
+					125
+				],
+				"partial_alpha_pixels": 456,
+				"transparent_pixels": 50376,
+				"visible_pixels": 15160,
+				"within_margin": true
+			},
+			"bytes": 15521,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "frosted_cake__matcha_cake.png",
+			"frame_attempts": 1,
+			"id": "frosted_cake__matcha_cake",
+			"model_id": "frosted_cake",
+			"name": "Frosted Cake · Matcha Cake",
+			"rarity": "rare",
+			"sha256": "c2ab7bcff9685293dec6db3ef395049cabd85745c810e2d6b87c3aafbe7d8d60",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					54,
+					150,
+					125
+				],
+				"partial_alpha_pixels": 576,
+				"transparent_pixels": 54102,
+				"visible_pixels": 11434,
+				"within_margin": true
+			},
+			"bytes": 3806,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pineapple_top__sunset_pineapple.png",
+			"frame_attempts": 1,
+			"id": "pineapple_top__sunset_pineapple",
+			"model_id": "pineapple_top",
+			"name": "Pineapple Top · Sunset Pineapple",
+			"rarity": "rare",
+			"sha256": "1e0b7656615a99067def18c9127c61e7dd0f6a4f11448f6b068995957ce8aa0f",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					54,
+					150,
+					125
+				],
+				"partial_alpha_pixels": 576,
+				"transparent_pixels": 54102,
+				"visible_pixels": 11434,
+				"within_margin": true
+			},
+			"bytes": 3668,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pineapple_top__silver_pineapple.png",
+			"frame_attempts": 1,
+			"id": "pineapple_top__silver_pineapple",
+			"model_id": "pineapple_top",
+			"name": "Pineapple Top · Silver Pineapple",
+			"rarity": "rare",
+			"sha256": "967c590a21a6e5f98214c6463eef6d4a661082ea29cdaa1652f03cfeffac5201",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					54,
+					150,
+					125
+				],
+				"partial_alpha_pixels": 576,
+				"transparent_pixels": 54102,
+				"visible_pixels": 11434,
+				"within_margin": true
+			},
+			"bytes": 3735,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "pineapple_top__ruby_pineapple.png",
+			"frame_attempts": 1,
+			"id": "pineapple_top__ruby_pineapple",
+			"model_id": "pineapple_top",
+			"name": "Pineapple Top · Ruby Pineapple",
+			"rarity": "rare",
+			"sha256": "67f5ab70c0416374bbf623bad690cb6814aea1a4816964d0b2d4f8065e69af1c",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					46,
+					181,
+					136
+				],
+				"partial_alpha_pixels": 807,
+				"transparent_pixels": 52150,
+				"visible_pixels": 13386,
+				"within_margin": true
+			},
+			"bytes": 4437,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "crab_cove__blue_crab.png",
+			"frame_attempts": 1,
+			"id": "crab_cove__blue_crab",
+			"model_id": "crab_cove",
+			"name": "Crab Cove · Blue Crab",
+			"rarity": "rare",
+			"sha256": "150c6729264434aeb3fb88d40c099dbb4ba02e3c4557a6356d7c412fa5634834",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					46,
+					181,
+					136
+				],
+				"partial_alpha_pixels": 807,
+				"transparent_pixels": 52150,
+				"visible_pixels": 13386,
+				"within_margin": true
+			},
+			"bytes": 4439,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "crab_cove__golden_crab.png",
+			"frame_attempts": 1,
+			"id": "crab_cove__golden_crab",
+			"model_id": "crab_cove",
+			"name": "Crab Cove · Golden Crab",
+			"rarity": "rare",
+			"sha256": "3366dc87b0e634c486f1d59769fa954a20ac327c4fb19bc34d39936b5d2f67c6",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					46,
+					181,
+					136
+				],
+				"partial_alpha_pixels": 807,
+				"transparent_pixels": 52150,
+				"visible_pixels": 13386,
+				"within_margin": true
+			},
+			"bytes": 4620,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "crab_cove__rose_crab.png",
+			"frame_attempts": 1,
+			"id": "crab_cove__rose_crab",
+			"model_id": "crab_cove",
+			"name": "Crab Cove · Rose Crab",
+			"rarity": "rare",
+			"sha256": "ef245b10f567aa7ae46c9f747fb1f98e7c0397109bb2a0de41a9bf240b4daccf",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					52,
+					39,
+					159,
+					144
+				],
+				"partial_alpha_pixels": 490,
+				"transparent_pixels": 50796,
+				"visible_pixels": 14740,
+				"within_margin": true
+			},
+			"bytes": 12546,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "fox_den__arctic_fox.png",
+			"frame_attempts": 1,
+			"id": "fox_den__arctic_fox",
+			"model_id": "fox_den",
+			"name": "Fox Den · Arctic Fox",
+			"rarity": "rare",
+			"sha256": "43a8807ff281eddb8559050d321f7759eded43f3592d8ee019469dd8e140b01f",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					52,
+					39,
+					159,
+					144
+				],
+				"partial_alpha_pixels": 490,
+				"transparent_pixels": 50796,
+				"visible_pixels": 14740,
+				"within_margin": true
+			},
+			"bytes": 16351,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "fox_den__dusky_fox.png",
+			"frame_attempts": 1,
+			"id": "fox_den__dusky_fox",
+			"model_id": "fox_den",
+			"name": "Fox Den · Dusky Fox",
+			"rarity": "rare",
+			"sha256": "80d780c4af315c338931a1ac640a8af9ab26f16878b52687d0afd2aca2d59300",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					52,
+					39,
+					159,
+					144
+				],
+				"partial_alpha_pixels": 490,
+				"transparent_pixels": 50796,
+				"visible_pixels": 14740,
+				"within_margin": true
+			},
+			"bytes": 15367,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "fox_den__fennec_fox.png",
+			"frame_attempts": 1,
+			"id": "fox_den__fennec_fox",
+			"model_id": "fox_den",
+			"name": "Fox Den · Fennec Fox",
+			"rarity": "rare",
+			"sha256": "29c7502d1ab81c55a3c0b0cae57dc14e4c4d1b2d8d4f2e0b0ab9ccbfda5130f5",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					38,
+					150,
+					144
+				],
+				"partial_alpha_pixels": 495,
+				"transparent_pixels": 51060,
+				"visible_pixels": 14476,
+				"within_margin": true
+			},
+			"bytes": 15172,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "bunny_burrow__honey_bunny.png",
+			"frame_attempts": 1,
+			"id": "bunny_burrow__honey_bunny",
+			"model_id": "bunny_burrow",
+			"name": "Bunny Burrow · Honey Bunny",
+			"rarity": "rare",
+			"sha256": "620da8ee06d03c8325235667e36ded8f56d6c45c41aa0a559810144ea617192d",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					38,
+					150,
+					144
+				],
+				"partial_alpha_pixels": 495,
+				"transparent_pixels": 51060,
+				"visible_pixels": 14476,
+				"within_margin": true
+			},
+			"bytes": 14967,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "bunny_burrow__blue_bunny.png",
+			"frame_attempts": 1,
+			"id": "bunny_burrow__blue_bunny",
+			"model_id": "bunny_burrow",
+			"name": "Bunny Burrow · Blue Bunny",
+			"rarity": "rare",
+			"sha256": "184fdd4a1e86b43bde650fdc9d4f6bc59ed082cb9d45199a1262197652785009",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					38,
+					150,
+					144
+				],
+				"partial_alpha_pixels": 495,
+				"transparent_pixels": 51060,
+				"visible_pixels": 14476,
+				"within_margin": true
+			},
+			"bytes": 16286,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "bunny_burrow__cocoa_bunny.png",
+			"frame_attempts": 1,
+			"id": "bunny_burrow__cocoa_bunny",
+			"model_id": "bunny_burrow",
+			"name": "Bunny Burrow · Cocoa Bunny",
+			"rarity": "rare",
+			"sha256": "ba20d2bfb82d23a058e87f731a1e35b3998928ed3634b1a3bc7af52e6949f775",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7466,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "frog_pond__blue_pond.png",
+			"frame_attempts": 1,
+			"id": "frog_pond__blue_pond",
+			"model_id": "frog_pond",
+			"name": "Frog Pond · Blue Pond",
+			"rarity": "common",
+			"sha256": "2ae05962c17558ca6fb6f36e4f8133c7a1dadda772d035760d4984c4575b0167",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7387,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "frog_pond__golden_reed.png",
+			"frame_attempts": 1,
+			"id": "frog_pond__golden_reed",
+			"model_id": "frog_pond",
+			"name": "Frog Pond · Golden Reed",
+			"rarity": "common",
+			"sha256": "6a99ff955c3faeada90e0e9273711514725471c604bd4b4bc4fd7ae9082ecd1b",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7446,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "frog_pond__lilac_pond.png",
+			"frame_attempts": 1,
+			"id": "frog_pond__lilac_pond",
+			"model_id": "frog_pond",
+			"name": "Frog Pond · Lilac Pond",
+			"rarity": "common",
+			"sha256": "71a84b3008f5754feb6e123e6b29f50ae0b429177b35d65a6cac8306c4ff44ea",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					46,
+					151,
+					132
+				],
+				"partial_alpha_pixels": 579,
+				"transparent_pixels": 53895,
+				"visible_pixels": 11641,
+				"within_margin": true
+			},
+			"bytes": 3992,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "owl_hollow__snow_owl.png",
+			"frame_attempts": 1,
+			"id": "owl_hollow__snow_owl",
+			"model_id": "owl_hollow",
+			"name": "Owl Hollow · Snow Owl",
+			"rarity": "rare",
+			"sha256": "4f84c403af1bbcb55971943a3d4319c34c650de4370d351d27b8308f3f6599d0",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					46,
+					151,
+					132
+				],
+				"partial_alpha_pixels": 579,
+				"transparent_pixels": 53895,
+				"visible_pixels": 11641,
+				"within_margin": true
+			},
+			"bytes": 4057,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "owl_hollow__copper_owl.png",
+			"frame_attempts": 1,
+			"id": "owl_hollow__copper_owl",
+			"model_id": "owl_hollow",
+			"name": "Owl Hollow · Copper Owl",
+			"rarity": "rare",
+			"sha256": "5f20650a619ac455b042e7d68a937404a2a52f59d9e20348d2a16a676488be30",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					46,
+					151,
+					132
+				],
+				"partial_alpha_pixels": 579,
+				"transparent_pixels": 53895,
+				"visible_pixels": 11641,
+				"within_margin": true
+			},
+			"bytes": 4050,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "owl_hollow__moss_owl.png",
+			"frame_attempts": 1,
+			"id": "owl_hollow__moss_owl",
+			"model_id": "owl_hollow",
+			"name": "Owl Hollow · Moss Owl",
+			"rarity": "rare",
+			"sha256": "e06c363a2c36e2cf1637e79045200564bf966f9082761bbfa0fb1bf299519c9b",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7447,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "turtle_shell__lagoon.png",
+			"frame_attempts": 1,
+			"id": "turtle_shell__lagoon",
+			"model_id": "turtle_shell",
+			"name": "Turtle Shell · Lagoon",
+			"rarity": "common",
+			"sha256": "8074a9a843dfb4f70d6d20ddec9c862e596ab4fa85cb6ef54cb5637cf12292ac",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7549,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "turtle_shell__amber_shell.png",
+			"frame_attempts": 1,
+			"id": "turtle_shell__amber_shell",
+			"model_id": "turtle_shell",
+			"name": "Turtle Shell · Amber Shell",
+			"rarity": "common",
+			"sha256": "cb0e86ca2fd1c0f8e2fa696d72e90ee3a09488be48996cec117d413f5f544d69",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7427,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "turtle_shell__midnight_shell.png",
+			"frame_attempts": 1,
+			"id": "turtle_shell__midnight_shell",
+			"model_id": "turtle_shell",
+			"name": "Turtle Shell · Midnight Shell",
+			"rarity": "common",
+			"sha256": "9f6a817c74014e960248bf144207ad5504882f76412ba4d6e41b7c36db78251f",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					53,
+					141,
+					125
+				],
+				"partial_alpha_pixels": 584,
+				"transparent_pixels": 53924,
+				"visible_pixels": 11612,
+				"within_margin": true
+			},
+			"bytes": 4334,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "snail_trail__coral_snail.png",
+			"frame_attempts": 1,
+			"id": "snail_trail__coral_snail",
+			"model_id": "snail_trail",
+			"name": "Snail Trail · Coral Snail",
+			"rarity": "rare",
+			"sha256": "a128ca2708fbc0f32cee667551422a97b950b30a5feaca66988bd799f56a801d",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					53,
+					141,
+					125
+				],
+				"partial_alpha_pixels": 584,
+				"transparent_pixels": 53924,
+				"visible_pixels": 11612,
+				"within_margin": true
+			},
+			"bytes": 4325,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "snail_trail__lavender_snail.png",
+			"frame_attempts": 1,
+			"id": "snail_trail__lavender_snail",
+			"model_id": "snail_trail",
+			"name": "Snail Trail · Lavender Snail",
+			"rarity": "rare",
+			"sha256": "c8c7326d24aa051defe54572046c5ef9be6938a17c4a468f2bfd5c14a5751bbf",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					53,
+					141,
+					125
+				],
+				"partial_alpha_pixels": 584,
+				"transparent_pixels": 53924,
+				"visible_pixels": 11612,
+				"within_margin": true
+			},
+			"bytes": 4358,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "snail_trail__lemon_snail.png",
+			"frame_attempts": 1,
+			"id": "snail_trail__lemon_snail",
+			"model_id": "snail_trail",
+			"name": "Snail Trail · Lemon Snail",
+			"rarity": "rare",
+			"sha256": "8978e156f160c3141d308331e45c488103ae49f21b42dc6422148dca8e7f8787",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7545,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "clockwork_key__rose_brass.png",
+			"frame_attempts": 1,
+			"id": "clockwork_key__rose_brass",
+			"model_id": "clockwork_key",
+			"name": "Clockwork Key · Rose Brass",
+			"rarity": "common",
+			"sha256": "0c0bcba1577899f7720fa00e9d8df554e4b19cb61a800911940ed7db47a3d8cd",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7407,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "clockwork_key__steel_blue.png",
+			"frame_attempts": 1,
+			"id": "clockwork_key__steel_blue",
+			"model_id": "clockwork_key",
+			"name": "Clockwork Key · Steel Blue",
+			"rarity": "common",
+			"sha256": "344c625548a1d0741968e5b951bd88669bd7288eac84d9545267bc4be4e85227",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					82,
+					144,
+					99
+				],
+				"partial_alpha_pixels": 914,
+				"transparent_pixels": 54522,
+				"visible_pixels": 11014,
+				"within_margin": true
+			},
+			"bytes": 7239,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "clockwork_key__black_nickel.png",
+			"frame_attempts": 1,
+			"id": "clockwork_key__black_nickel",
+			"model_id": "clockwork_key",
+			"name": "Clockwork Key · Black Nickel",
+			"rarity": "common",
+			"sha256": "f8e116001cd7e7afaec90e1e8e233e1c36c81377a76fadbae08a79eca001be7a",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					51,
+					50,
+					152,
+					128
+				],
+				"partial_alpha_pixels": 634,
+				"transparent_pixels": 52888,
+				"visible_pixels": 12648,
+				"within_margin": true
+			},
+			"bytes": 13668,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "royal_gate__rose_palace.png",
+			"frame_attempts": 1,
+			"id": "royal_gate__rose_palace",
+			"model_id": "royal_gate",
+			"name": "Royal Gate · Rose Palace",
+			"rarity": "epic",
+			"sha256": "85bcac4b566add28a23a44b996a0359509f3252eaf17349da68afa02a5c0c689",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					54,
+					178,
+					124
+				],
+				"partial_alpha_pixels": 534,
+				"transparent_pixels": 52862,
+				"visible_pixels": 12674,
+				"within_margin": true
+			},
+			"bytes": 6972,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "satellite_dish__copper_signal.png",
+			"frame_attempts": 1,
+			"id": "satellite_dish__copper_signal",
+			"model_id": "satellite_dish",
+			"name": "Satellite Dish · Copper Signal",
+			"rarity": "epic",
+			"sha256": "6e2c6c2e5e58bc8f10c79b3dcc2d63d6bf24addfa3dde9cd7314a98c135721c4",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					49,
+					150,
+					131
+				],
+				"partial_alpha_pixels": 667,
+				"transparent_pixels": 52729,
+				"visible_pixels": 12807,
+				"within_margin": true
+			},
+			"bytes": 7613,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "carnival_tent__midnight_circus.png",
+			"frame_attempts": 1,
+			"id": "carnival_tent__midnight_circus",
+			"model_id": "carnival_tent",
+			"name": "Carnival Tent · Midnight Circus",
+			"rarity": "epic",
+			"sha256": "1f6c4a4b58b426ac40447e59f3a81514ff4c725a5eb298c48e8e60a05829726e",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					52,
+					46,
+					152,
+					137
+				],
+				"partial_alpha_pixels": 458,
+				"transparent_pixels": 51528,
+				"visible_pixels": 14008,
+				"within_margin": true
+			},
+			"bytes": 15014,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "rocket_port__solar_rocket.png",
+			"frame_attempts": 1,
+			"id": "rocket_port__solar_rocket",
+			"model_id": "rocket_port",
+			"name": "Rocket Port · Solar Rocket",
+			"rarity": "epic",
+			"sha256": "9eab380102ea815589a80a8f0b13a399ac3f9ecba00c6917cfad7907b7c6acca",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					51,
+					148,
+					127
+				],
+				"partial_alpha_pixels": 599,
+				"transparent_pixels": 53115,
+				"visible_pixels": 12421,
+				"within_margin": true
+			},
+			"bytes": 7269,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "rainbow_bridge__opal_bridge.png",
+			"frame_attempts": 1,
+			"id": "rainbow_bridge__opal_bridge",
+			"model_id": "rainbow_bridge",
+			"name": "Rainbow Bridge · Opal Bridge",
+			"rarity": "legendary",
+			"sha256": "7f8e36b0fb1a89146a83cdb67d7c21684ecd468b6620cde3a566690455f9135a",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					49,
+					141,
+					129
+				],
+				"partial_alpha_pixels": 526,
+				"transparent_pixels": 53631,
+				"visible_pixels": 11905,
+				"within_margin": true
+			},
+			"bytes": 4764,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "storm_cloud__sunset_storm.png",
+			"frame_attempts": 1,
+			"id": "storm_cloud__sunset_storm",
+			"model_id": "storm_cloud",
+			"name": "Storm Cloud · Sunset Storm",
+			"rarity": "epic",
+			"sha256": "c3515d24448c3e25d7ca6e265b19fc620d00d4a9111f8e2dc91ce92c4847cdbd",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					52,
+					42,
+					171,
+					141
+				],
+				"partial_alpha_pixels": 547,
+				"transparent_pixels": 50580,
+				"visible_pixels": 14956,
+				"within_margin": true
+			},
+			"bytes": 17282,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "dragon_roost__jade_dragon.png",
+			"frame_attempts": 1,
+			"id": "dragon_roost__jade_dragon",
+			"model_id": "dragon_roost",
+			"name": "Dragon Roost · Jade Dragon",
+			"rarity": "epic",
+			"sha256": "42d520489c048bc89fb049f5af4f104a6cb59e4ef18fe0965e6503690cfbb796",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					48,
+					59,
+					160,
+					119
+				],
+				"partial_alpha_pixels": 683,
+				"transparent_pixels": 51706,
+				"visible_pixels": 13830,
+				"within_margin": true
+			},
+			"bytes": 6069,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "jelly_veil__golden_jelly.png",
+			"frame_attempts": 1,
+			"id": "jelly_veil__golden_jelly",
+			"model_id": "jelly_veil",
+			"name": "Jelly Veil · Golden Jelly",
+			"rarity": "epic",
+			"sha256": "47a54170ecf5469d995988477036b52006e2187392f3fdc55540dbde07b67cf9",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					56,
+					138,
+					122
+				],
+				"partial_alpha_pixels": 557,
+				"transparent_pixels": 54204,
+				"visible_pixels": 11332,
+				"within_margin": true
+			},
+			"bytes": 3691,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "moon_dream__rose_moon.png",
+			"frame_attempts": 1,
+			"id": "moon_dream__rose_moon",
+			"model_id": "moon_dream",
+			"name": "Moon Dream · Rose Moon",
+			"rarity": "rare",
+			"sha256": "cbe58813dc305c2be8c9487cab1905deb2a182819807c647de57705eb7a33c8d",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					56,
+					138,
+					122
+				],
+				"partial_alpha_pixels": 557,
+				"transparent_pixels": 54204,
+				"visible_pixels": 11332,
+				"within_margin": true
+			},
+			"bytes": 3806,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "moon_dream__golden_moon.png",
+			"frame_attempts": 1,
+			"id": "moon_dream__golden_moon",
+			"model_id": "moon_dream",
+			"name": "Moon Dream · Golden Moon",
+			"rarity": "rare",
+			"sha256": "ea73482a11bbf8cb9936f38f9ca852cb1598a4b1ef6002e9880b516e0ee2cf84",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					60,
+					56,
+					138,
+					122
+				],
+				"partial_alpha_pixels": 557,
+				"transparent_pixels": 54204,
+				"visible_pixels": 11332,
+				"within_margin": true
+			},
+			"bytes": 3752,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "moon_dream__ice_moon.png",
+			"frame_attempts": 1,
+			"id": "moon_dream__ice_moon",
+			"model_id": "moon_dream",
+			"name": "Moon Dream · Ice Moon",
+			"rarity": "rare",
+			"sha256": "dc0d574bd52de1fbd48ad2c7da0788e97f2ab99f02f3de71f5c678cd1034766c",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					52,
+					144,
+					126
+				],
+				"partial_alpha_pixels": 568,
+				"transparent_pixels": 53981,
+				"visible_pixels": 11555,
+				"within_margin": true
+			},
+			"bytes": 3876,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "coral_reef__lavender_reef.png",
+			"frame_attempts": 1,
+			"id": "coral_reef__lavender_reef",
+			"model_id": "coral_reef",
+			"name": "Coral Reef · Lavender Reef",
+			"rarity": "rare",
+			"sha256": "3e353ee7cf3a48f29677e7a192c5a2ce5ec6257b2a3fe48012d879517a813b33",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					52,
+					144,
+					126
+				],
+				"partial_alpha_pixels": 568,
+				"transparent_pixels": 53981,
+				"visible_pixels": 11555,
+				"within_margin": true
+			},
+			"bytes": 3875,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "coral_reef__lagoon_reef.png",
+			"frame_attempts": 1,
+			"id": "coral_reef__lagoon_reef",
+			"model_id": "coral_reef",
+			"name": "Coral Reef · Lagoon Reef",
+			"rarity": "rare",
+			"sha256": "ac85fd0cfd3bbd9ee51e470843e6b7af16304f1daf2c75a2d138a11dc8a0db76",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					56,
+					52,
+					144,
+					126
+				],
+				"partial_alpha_pixels": 568,
+				"transparent_pixels": 53981,
+				"visible_pixels": 11555,
+				"within_margin": true
+			},
+			"bytes": 3878,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "coral_reef__sunrise_reef.png",
+			"frame_attempts": 1,
+			"id": "coral_reef__sunrise_reef",
+			"model_id": "coral_reef",
+			"name": "Coral Reef · Sunrise Reef",
+			"rarity": "rare",
+			"sha256": "c58f9964bf0504788a3d2fe67e45afb4efe2863ba3c77b0076e6179e194bfbeb",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					57,
+					47,
+					142,
+					131
+				],
+				"partial_alpha_pixels": 563,
+				"transparent_pixels": 53356,
+				"visible_pixels": 12180,
+				"within_margin": true
+			},
+			"bytes": 4065,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "music_stage__jazz_night.png",
+			"frame_attempts": 1,
+			"id": "music_stage__jazz_night",
+			"model_id": "music_stage",
+			"name": "Music Stage · Jazz Night",
+			"rarity": "rare",
+			"sha256": "c4d1eb0b9320f0ac3811c6ae9c66c7e604ef29de55cd1835b0393f3edbca2016",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					57,
+					47,
+					142,
+					131
+				],
+				"partial_alpha_pixels": 563,
+				"transparent_pixels": 53356,
+				"visible_pixels": 12180,
+				"within_margin": true
+			},
+			"bytes": 4040,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "music_stage__pop_neon.png",
+			"frame_attempts": 1,
+			"id": "music_stage__pop_neon",
+			"model_id": "music_stage",
+			"name": "Music Stage · Pop Neon",
+			"rarity": "rare",
+			"sha256": "df59a95269dab792a15bfce1c34fc3d3936070d98aa00d91a7f4e56e2e2ae6e5",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					57,
+					47,
+					142,
+					131
+				],
+				"partial_alpha_pixels": 563,
+				"transparent_pixels": 53356,
+				"visible_pixels": 12180,
+				"within_margin": true
+			},
+			"bytes": 4133,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.752675235271454,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "music_stage__blue_session.png",
+			"frame_attempts": 1,
+			"id": "music_stage__blue_session",
+			"model_id": "music_stage",
+			"name": "Music Stage · Blue Session",
+			"rarity": "rare",
+			"sha256": "64f4122ffe0b39d14b6ee08500b3cb6c7f537989af2475c244d9a9c5326d9447",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					51,
+					43,
+					153,
+					154
+				],
+				"partial_alpha_pixels": 17593,
+				"transparent_pixels": 47889,
+				"visible_pixels": 17106,
+				"within_margin": true
+			},
+			"bytes": 37899,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.723174691200256,
+				0.569313228130341,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "tempest__cobalt_storm.png",
+			"frame_attempts": 1,
+			"id": "tempest__cobalt_storm",
+			"model_id": "tempest",
+			"name": "Tempest · Cobalt Storm",
+			"rarity": "prismatic",
+			"sha256": "30d2ba73270c37ea1f34eb7e958cd0ad5c1c8dce305a43dac3366b00c05ccd23",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					53,
+					55,
+					150,
+					156
+				],
+				"partial_alpha_pixels": 16074,
+				"transparent_pixels": 49451,
+				"visible_pixels": 15799,
+				"within_margin": true
+			},
+			"bytes": 31424,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.690053403377533,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "rainfall__rose_rain.png",
+			"frame_attempts": 1,
+			"id": "rainfall__rose_rain",
+			"model_id": "rainfall",
+			"name": "Rainfall · Rose Rain",
+			"rarity": "prismatic",
+			"sha256": "ad68466e6fa7e5431a0712977b35d30c2b6a9de8e175560537d978044d16b275",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					44,
+					47,
+					168,
+					146
+				],
+				"partial_alpha_pixels": 386,
+				"transparent_pixels": 48785,
+				"visible_pixels": 16751,
+				"within_margin": true
+			},
+			"bytes": 19251,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "paper_boat__blue_print.png",
+			"frame_attempts": 1,
+			"id": "paper_boat__blue_print",
+			"model_id": "paper_boat",
+			"name": "Paper Boat · Blue Print",
+			"rarity": "uncommon",
+			"sha256": "a4383bcfba668261091d03c8c030d83d5a098076eb86c861399df597afbd56da",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					44,
+					47,
+					168,
+					146
+				],
+				"partial_alpha_pixels": 386,
+				"transparent_pixels": 48785,
+				"visible_pixels": 16751,
+				"within_margin": true
+			},
+			"bytes": 19147,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "paper_boat__rose_letter.png",
+			"frame_attempts": 1,
+			"id": "paper_boat__rose_letter",
+			"model_id": "paper_boat",
+			"name": "Paper Boat · Rose Letter",
+			"rarity": "uncommon",
+			"sha256": "02cc50c0369707c9812830ac3d121f8ddd587fe608f674b8d13b4c06eb1e1856",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					37,
+					61,
+					182,
+					130
+				],
+				"partial_alpha_pixels": 398,
+				"transparent_pixels": 46704,
+				"visible_pixels": 18832,
+				"within_margin": true
+			},
+			"bytes": 24201,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "toy_tire__rally_red.png",
+			"frame_attempts": 1,
+			"id": "toy_tire__rally_red",
+			"model_id": "toy_tire",
+			"name": "Toy Tire · Rally Red",
+			"rarity": "uncommon",
+			"sha256": "4697ad0a30238eee419a163cb608b62d6acf8faa18d5a5de2dc17791d03f053d",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					37,
+					61,
+					182,
+					130
+				],
+				"partial_alpha_pixels": 398,
+				"transparent_pixels": 46704,
+				"visible_pixels": 18832,
+				"within_margin": true
+			},
+			"bytes": 22509,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "toy_tire__ice_track.png",
+			"frame_attempts": 1,
+			"id": "toy_tire__ice_track",
+			"model_id": "toy_tire",
+			"name": "Toy Tire · Ice Track",
+			"rarity": "uncommon",
+			"sha256": "93c4f2ff4c53c0756d99de5be5ba8eba060d82dd063c2d8cad6e1bce67777f77",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					61,
+					175,
+					131
+				],
+				"partial_alpha_pixels": 375,
+				"transparent_pixels": 47454,
+				"visible_pixels": 18082,
+				"within_margin": true
+			},
+			"bytes": 24151,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "leaf_cup__autumn_leaf.png",
+			"frame_attempts": 1,
+			"id": "leaf_cup__autumn_leaf",
+			"model_id": "leaf_cup",
+			"name": "Leaf Cup · Autumn Leaf",
+			"rarity": "uncommon",
+			"sha256": "f83715249c6e00d6d07c306df1793526ba844c4b7f520d31d693d04e2939adb9",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					61,
+					175,
+					131
+				],
+				"partial_alpha_pixels": 375,
+				"transparent_pixels": 47454,
+				"visible_pixels": 18082,
+				"within_margin": true
+			},
+			"bytes": 22994,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "leaf_cup__frost_leaf.png",
+			"frame_attempts": 1,
+			"id": "leaf_cup__frost_leaf",
+			"model_id": "leaf_cup",
+			"name": "Leaf Cup · Frost Leaf",
+			"rarity": "uncommon",
+			"sha256": "b44f053808c62e014026fc8d99e03e687af6e5556ff0bd51e79e45b146133d40",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					42,
+					61,
+					172,
+					129
+				],
+				"partial_alpha_pixels": 384,
+				"transparent_pixels": 47998,
+				"visible_pixels": 17538,
+				"within_margin": true
+			},
+			"bytes": 30803,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "wooden_tub__cedar.png",
+			"frame_attempts": 1,
+			"id": "wooden_tub__cedar",
+			"model_id": "wooden_tub",
+			"name": "Wooden Tub · Cedar",
+			"rarity": "uncommon",
+			"sha256": "690359949c08abe0dbce205708e85b0e33576211f83b5d369a9b87362dbff4ec",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					42,
+					61,
+					172,
+					129
+				],
+				"partial_alpha_pixels": 384,
+				"transparent_pixels": 47998,
+				"visible_pixels": 17538,
+				"within_margin": true
+			},
+			"bytes": 29965,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "wooden_tub__white_oak.png",
+			"frame_attempts": 1,
+			"id": "wooden_tub__white_oak",
+			"model_id": "wooden_tub",
+			"name": "Wooden Tub · White Oak",
+			"rarity": "uncommon",
+			"sha256": "7e0534d8c560629a48242fec310c97c6a71c8195e1d16313629286acd48b6216",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					43,
+					61,
+					170,
+					134
+				],
+				"partial_alpha_pixels": 403,
+				"transparent_pixels": 48235,
+				"visible_pixels": 17301,
+				"within_margin": true
+			},
+			"bytes": 24421,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "rope_coil__blue_mariner.png",
+			"frame_attempts": 1,
+			"id": "rope_coil__blue_mariner",
+			"model_id": "rope_coil",
+			"name": "Rope Coil · Blue Mariner",
+			"rarity": "uncommon",
+			"sha256": "17ce604c8aa580d748681debedb0811ffbb8e75bd13d4b5faf5ef4cd0213ec99",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					43,
+					61,
+					170,
+					134
+				],
+				"partial_alpha_pixels": 403,
+				"transparent_pixels": 48235,
+				"visible_pixels": 17301,
+				"within_margin": true
+			},
+			"bytes": 25208,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "rope_coil__terracotta_cord.png",
+			"frame_attempts": 1,
+			"id": "rope_coil__terracotta_cord",
+			"model_id": "rope_coil",
+			"name": "Rope Coil · Terracotta Cord",
+			"rarity": "uncommon",
+			"sha256": "7fd91eb941f0973eba5130034eca169c9b02b21ead47442510c8394b3fed0768",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					62,
+					176,
+					128
+				],
+				"partial_alpha_pixels": 389,
+				"transparent_pixels": 47591,
+				"visible_pixels": 17945,
+				"within_margin": true
+			},
+			"bytes": 22612,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "clay_pot__olive_glaze.png",
+			"frame_attempts": 1,
+			"id": "clay_pot__olive_glaze",
+			"model_id": "clay_pot",
+			"name": "Clay Pot · Olive Glaze",
+			"rarity": "uncommon",
+			"sha256": "4cda28354daebef4ba2f43d5c2c6e50ef978f7e0f9dee10a5257210d01738866",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					62,
+					176,
+					128
+				],
+				"partial_alpha_pixels": 389,
+				"transparent_pixels": 47591,
+				"visible_pixels": 17945,
+				"within_margin": true
+			},
+			"bytes": 19148,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "clay_pot__azure_glaze.png",
+			"frame_attempts": 1,
+			"id": "clay_pot__azure_glaze",
+			"model_id": "clay_pot",
+			"name": "Clay Pot · Azure Glaze",
+			"rarity": "uncommon",
+			"sha256": "11068fd7f8f8eecd7d3a29be31be14527a49d8ebe8203848a5b334ffbdfedc91",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					37,
+					61,
+					182,
+					131
+				],
+				"partial_alpha_pixels": 366,
+				"transparent_pixels": 47595,
+				"visible_pixels": 17941,
+				"within_margin": true
+			},
+			"bytes": 22021,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "shell_cup__rose_shell.png",
+			"frame_attempts": 1,
+			"id": "shell_cup__rose_shell",
+			"model_id": "shell_cup",
+			"name": "Shell Cup · Rose Shell",
+			"rarity": "uncommon",
+			"sha256": "5dde03508ed70de5790d60bd52dbd035354a84822a4cea39a1a1245d60ff6f76",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					37,
+					61,
+					182,
+					131
+				],
+				"partial_alpha_pixels": 366,
+				"transparent_pixels": 47595,
+				"visible_pixels": 17941,
+				"within_margin": true
+			},
+			"bytes": 21961,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "shell_cup__pearl_tide.png",
+			"frame_attempts": 1,
+			"id": "shell_cup__pearl_tide",
+			"model_id": "shell_cup",
+			"name": "Shell Cup · Pearl Tide",
+			"rarity": "uncommon",
+			"sha256": "4976773c2e2618f86d7ab048e35a49cb2d24b0bb2c9bf5e05d9a575df59b8e09",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					64,
+					178,
+					128
+				],
+				"partial_alpha_pixels": 511,
+				"transparent_pixels": 48410,
+				"visible_pixels": 17126,
+				"within_margin": true
+			},
+			"bytes": 26283,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "woven_nest__willow_nest.png",
+			"frame_attempts": 1,
+			"id": "woven_nest__willow_nest",
+			"model_id": "woven_nest",
+			"name": "Woven Nest · Willow Nest",
+			"rarity": "uncommon",
+			"sha256": "fb544cf0dc87299f06436810518496805ef49ee691493975f02198c40e181bd3",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					64,
+					178,
+					128
+				],
+				"partial_alpha_pixels": 511,
+				"transparent_pixels": 48410,
+				"visible_pixels": 17126,
+				"within_margin": true
+			},
+			"bytes": 26135,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "woven_nest__rose_willow.png",
+			"frame_attempts": 1,
+			"id": "woven_nest__rose_willow",
+			"model_id": "woven_nest",
+			"name": "Woven Nest · Rose Willow",
+			"rarity": "uncommon",
+			"sha256": "fe8d3402702a4ccd552f22bf43e609b83fddbc21a8a8870f02b6dd31f790d265",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					46,
+					53,
+					169,
+					137
+				],
+				"partial_alpha_pixels": 582,
+				"transparent_pixels": 47600,
+				"visible_pixels": 17936,
+				"within_margin": true
+			},
+			"bytes": 26405,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "paint_tin__sunflower_paint.png",
+			"frame_attempts": 1,
+			"id": "paint_tin__sunflower_paint",
+			"model_id": "paint_tin",
+			"name": "Paint Tin · Sunflower Paint",
+			"rarity": "uncommon",
+			"sha256": "e418d7de05985ce59bc1752c55880d4727e0449b8e18602d967db4d4c1b38394",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					46,
+					53,
+					169,
+					137
+				],
+				"partial_alpha_pixels": 582,
+				"transparent_pixels": 47600,
+				"visible_pixels": 17936,
+				"within_margin": true
+			},
+			"bytes": 26443,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "paint_tin__berry_paint.png",
+			"frame_attempts": 1,
+			"id": "paint_tin__berry_paint",
+			"model_id": "paint_tin",
+			"name": "Paint Tin · Berry Paint",
+			"rarity": "uncommon",
+			"sha256": "6bf1e619ced8d3480c00251eb86769fd3cdca93324eb0bc212b7cbc2c014ebd8",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					68,
+					184,
+					129
+				],
+				"partial_alpha_pixels": 413,
+				"transparent_pixels": 49577,
+				"visible_pixels": 15959,
+				"within_margin": true
+			},
+			"bytes": 19397,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "denim_pocket__indigo_denim.png",
+			"frame_attempts": 1,
+			"id": "denim_pocket__indigo_denim",
+			"model_id": "denim_pocket",
+			"name": "Denim Pocket · Indigo Denim",
+			"rarity": "uncommon",
+			"sha256": "077ed88433237dc7d80e7cc05186113fa170b6624cc88acace49230224a5593c",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					40,
+					68,
+					184,
+					129
+				],
+				"partial_alpha_pixels": 413,
+				"transparent_pixels": 49577,
+				"visible_pixels": 15959,
+				"within_margin": true
+			},
+			"bytes": 20412,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "denim_pocket__washed_rose.png",
+			"frame_attempts": 1,
+			"id": "denim_pocket__washed_rose",
+			"model_id": "denim_pocket",
+			"name": "Denim Pocket · Washed Rose",
+			"rarity": "uncommon",
+			"sha256": "473ae525c88efe1114e7d38d55d7fb7e2e9a5326223050e93e855ed1a2d5479a",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					50,
+					175,
+					141
+				],
+				"partial_alpha_pixels": 403,
+				"transparent_pixels": 46560,
+				"visible_pixels": 18976,
+				"within_margin": true
+			},
+			"bytes": 25364,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "catchers_mitt__chocolate_leather.png",
+			"frame_attempts": 1,
+			"id": "catchers_mitt__chocolate_leather",
+			"model_id": "catchers_mitt",
+			"name": "Catcher's Mitt · Chocolate Leather",
+			"rarity": "uncommon",
+			"sha256": "65cb6132f28d9b538602a6f1cdde8fbdc2f0b738e66e21d14eff690b1f31979f",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					50,
+					175,
+					141
+				],
+				"partial_alpha_pixels": 403,
+				"transparent_pixels": 46560,
+				"visible_pixels": 18976,
+				"within_margin": true
+			},
+			"bytes": 25689,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "catchers_mitt__navy_leather.png",
+			"frame_attempts": 1,
+			"id": "catchers_mitt__navy_leather",
+			"model_id": "catchers_mitt",
+			"name": "Catcher's Mitt · Navy Leather",
+			"rarity": "uncommon",
+			"sha256": "03e27edd5ae21fb745fb07e78dd8874c0883a1cb77d4d76cc56ead89676813d1",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					34,
+					65,
+					188,
+					126
+				],
+				"partial_alpha_pixels": 438,
+				"transparent_pixels": 46976,
+				"visible_pixels": 18560,
+				"within_margin": true
+			},
+			"bytes": 15474,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "enamel_basin__mint_enamel.png",
+			"frame_attempts": 1,
+			"id": "enamel_basin__mint_enamel",
+			"model_id": "enamel_basin",
+			"name": "Enamel Basin · Mint Enamel",
+			"rarity": "uncommon",
+			"sha256": "c4255b8d109d8d8ab51e24786cf4506faa265fa1eaab86ba1b86277f9fd35628",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					34,
+					65,
+					188,
+					126
+				],
+				"partial_alpha_pixels": 438,
+				"transparent_pixels": 46976,
+				"visible_pixels": 18560,
+				"within_margin": true
+			},
+			"bytes": 15377,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "enamel_basin__apricot_enamel.png",
+			"frame_attempts": 1,
+			"id": "enamel_basin__apricot_enamel",
+			"model_id": "enamel_basin",
+			"name": "Enamel Basin · Apricot Enamel",
+			"rarity": "uncommon",
+			"sha256": "babf4ffca75e29d84c6358c125506cee84914a6cf31f1df4314f2eebe0c3aac8",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					35,
+					60,
+					186,
+					135
+				],
+				"partial_alpha_pixels": 376,
+				"transparent_pixels": 47302,
+				"visible_pixels": 18234,
+				"within_margin": true
+			},
+			"bytes": 27750,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "acorn_cup__chestnut.png",
+			"frame_attempts": 1,
+			"id": "acorn_cup__chestnut",
+			"model_id": "acorn_cup",
+			"name": "Acorn Cup · Chestnut",
+			"rarity": "uncommon",
+			"sha256": "2ce19b3485260838b6e1aeb4c7d064cedfa581a714cf40d33c0bf31466d6532a",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					35,
+					60,
+					186,
+					135
+				],
+				"partial_alpha_pixels": 376,
+				"transparent_pixels": 47302,
+				"visible_pixels": 18234,
+				"within_margin": true
+			},
+			"bytes": 28160,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "acorn_cup__forest_acorn.png",
+			"frame_attempts": 1,
+			"id": "acorn_cup__forest_acorn",
+			"model_id": "acorn_cup",
+			"name": "Acorn Cup · Forest Acorn",
+			"rarity": "uncommon",
+			"sha256": "8227072f5db12c18ec3c71cd56ffa3fafb36379a0998820e16e1a61a4317c25e",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					61,
+					178,
+					132
+				],
+				"partial_alpha_pixels": 372,
+				"transparent_pixels": 47190,
+				"visible_pixels": 18346,
+				"within_margin": true
+			},
+			"bytes": 23214,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "knit_cap__seaside_knit.png",
+			"frame_attempts": 1,
+			"id": "knit_cap__seaside_knit",
+			"model_id": "knit_cap",
+			"name": "Knit Cap · Seaside Knit",
+			"rarity": "uncommon",
+			"sha256": "467e0797e5fea455b0313f75bd281c919290b190b00819ac1b045020bae81f83",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					39,
+					61,
+					178,
+					132
+				],
+				"partial_alpha_pixels": 372,
+				"transparent_pixels": 47190,
+				"visible_pixels": 18346,
+				"within_margin": true
+			},
+			"bytes": 23441,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.747263789176941,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.10400009155273,
+			"file": "knit_cap__mustard_knit.png",
+			"frame_attempts": 1,
+			"id": "knit_cap__mustard_knit",
+			"model_id": "knit_cap",
+			"name": "Knit Cap · Mustard Knit",
+			"rarity": "uncommon",
+			"sha256": "2d9f5bdb1c0d069193552309d2c45e2947b31f9f8add7c60c7e0e1471c094d2e",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					50,
+					81,
+					156,
+					108
+				],
+				"partial_alpha_pixels": 306,
+				"transparent_pixels": 52222,
+				"visible_pixels": 13314,
+				"within_margin": true
+			},
+			"bytes": 13358,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "plain_loop__coral.png",
+			"frame_attempts": 1,
+			"id": "plain_loop__coral",
+			"model_id": "plain_loop",
+			"name": "Plain Loop · Coral",
+			"rarity": "common",
+			"sha256": "7d6ebbd16094e26266cfb1027b53209aa49a4a04618f4a99d5dda9af22a39ee7",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					50,
+					81,
+					156,
+					108
+				],
+				"partial_alpha_pixels": 306,
+				"transparent_pixels": 52222,
+				"visible_pixels": 13314,
+				"within_margin": true
+			},
+			"bytes": 13055,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "plain_loop__sea_glass.png",
+			"frame_attempts": 1,
+			"id": "plain_loop__sea_glass",
+			"model_id": "plain_loop",
+			"name": "Plain Loop · Sea Glass",
+			"rarity": "common",
+			"sha256": "a06f01751d282a21b9b05e311d4b21aec38f6ee39397e8e74ac72edf988178a0",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					50,
+					81,
+					156,
+					108
+				],
+				"partial_alpha_pixels": 306,
+				"transparent_pixels": 52222,
+				"visible_pixels": 13314,
+				"within_margin": true
+			},
+			"bytes": 14087,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "plain_loop__night_ink.png",
+			"frame_attempts": 1,
+			"id": "plain_loop__night_ink",
+			"model_id": "plain_loop",
+			"name": "Plain Loop · Night Ink",
+			"rarity": "common",
+			"sha256": "3d19f753985783380e21bd7c56a810aceaced808f0862fe6932db6b1e221ea8d",
+			"variant_index": 3
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					42,
+					69,
+					172,
+					124
+				],
+				"partial_alpha_pixels": 302,
+				"transparent_pixels": 48846,
+				"visible_pixels": 16690,
+				"within_margin": true
+			},
+			"bytes": 18970,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "button_wheel__teal_button.png",
+			"frame_attempts": 1,
+			"id": "button_wheel__teal_button",
+			"model_id": "button_wheel",
+			"name": "Button Wheel · Teal Button",
+			"rarity": "uncommon",
+			"sha256": "b6eac32f53e50c4dc303da059f75b6a1e223b947e392ed6c188a72a71c265895",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					42,
+					69,
+					172,
+					124
+				],
+				"partial_alpha_pixels": 302,
+				"transparent_pixels": 48846,
+				"visible_pixels": 16690,
+				"within_margin": true
+			},
+			"bytes": 18159,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "button_wheel__lilac_button.png",
+			"frame_attempts": 1,
+			"id": "button_wheel__lilac_button",
+			"model_id": "button_wheel",
+			"name": "Button Wheel · Lilac Button",
+			"rarity": "uncommon",
+			"sha256": "d8f8cbf2f1b75d28768128e538df99f0dd2e4f5dbcd6fff5a83b6efd628fefbe",
+			"variant_index": 2
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					42,
+					41,
+					172,
+					154
+				],
+				"partial_alpha_pixels": 409,
+				"transparent_pixels": 48168,
+				"visible_pixels": 17368,
+				"within_margin": true
+			},
+			"bytes": 23676,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "pocket_arcade__berry_arcade.png",
+			"frame_attempts": 1,
+			"id": "pocket_arcade__berry_arcade",
+			"model_id": "pocket_arcade",
+			"name": "Pocket Arcade · Berry Arcade",
+			"rarity": "epic",
+			"sha256": "12c6ec713dfac37bb6ea0eaeaa29088b5d9492f5082a21c672c411a515aece75",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					42,
+					36,
+					180,
+					159
+				],
+				"partial_alpha_pixels": 655,
+				"transparent_pixels": 46646,
+				"visible_pixels": 18890,
+				"within_margin": true
+			},
+			"bytes": 25009,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "sakura_pavilion__moon_pavilion.png",
+			"frame_attempts": 1,
+			"id": "sakura_pavilion__moon_pavilion",
+			"model_id": "sakura_pavilion",
+			"name": "Sakura Pavilion · Moon Pavilion",
+			"rarity": "epic",
+			"sha256": "1f5fd6e8405394330475b525d8a347ce543884afd65c769fff292625c7192903",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					36,
+					53,
+					184,
+					143
+				],
+				"partial_alpha_pixels": 717,
+				"transparent_pixels": 46766,
+				"visible_pixels": 18770,
+				"within_margin": true
+			},
+			"bytes": 25499,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "clockwork_orbit__silver_mechanism.png",
+			"frame_attempts": 1,
+			"id": "clockwork_orbit__silver_mechanism",
+			"model_id": "clockwork_orbit",
+			"name": "Clockwork Orbit · Silver Mechanism",
+			"rarity": "legendary",
+			"sha256": "248ac31dab53495b547a5cdfb1e85ef9bc97469050a8a1ef02934bb27f54674a",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					27,
+					187,
+					165
+				],
+				"partial_alpha_pixels": 606,
+				"transparent_pixels": 46472,
+				"visible_pixels": 19064,
+				"within_margin": true
+			},
+			"bytes": 24429,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "phoenix_nest__frost_phoenix.png",
+			"frame_attempts": 1,
+			"id": "phoenix_nest__frost_phoenix",
+			"model_id": "phoenix_nest",
+			"name": "Phoenix Nest · Frost Phoenix",
+			"rarity": "legendary",
+			"sha256": "266a49631274fa18b39639d9483b703f05199e78f2f647d55d142c5efb6d9f9e",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					41,
+					26,
+					172,
+					169
+				],
+				"partial_alpha_pixels": 517,
+				"transparent_pixels": 46622,
+				"visible_pixels": 18914,
+				"within_margin": true
+			},
+			"bytes": 26019,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "crystal_crown__emerald_crown.png",
+			"frame_attempts": 1,
+			"id": "crystal_crown__emerald_crown",
+			"model_id": "crystal_crown",
+			"name": "Crystal Crown · Emerald Crown",
+			"rarity": "legendary",
+			"sha256": "4a20eb4aab48ad8b0bd4298b4ada5298a3ba9452d7058ac607eabd6fe7d34ba7",
+			"variant_index": 1
+		},
+		{
+			"alpha": {
+				"bounds_px": [
+					36,
+					34,
+					184,
+					162
+				],
+				"partial_alpha_pixels": 4197,
+				"transparent_pixels": 42145,
+				"visible_pixels": 23315,
+				"within_margin": true
+			},
+			"bytes": 36328,
+			"camera_position": [
+				3.20000004768372,
+				5.69999980926514,
+				5.0
+			],
+			"camera_rotation": [
+				-0.741797506809235,
+				0.569313168525696,
+				0.0
+			],
+			"camera_size": 4.21199989318848,
+			"file": "aurora_rift__solar_rift.png",
+			"frame_attempts": 1,
+			"id": "aurora_rift__solar_rift",
+			"model_id": "aurora_rift",
+			"name": "Aurora Rift · Solar Rift",
+			"rarity": "prismatic",
+			"sha256": "7cd808a63fe2b64b69d31ba0341b782e2f9e8d48e853e1acae0b7a969246b320",
+			"variant_index": 1
+		}
+	],
+	"transparent_background": true
+}

@@ -1,0 +1,925 @@
+{
+  "game_version": "0.12.7",
+  "map": "food",
+  "base_seconds": 60.0,
+  "source_sha256": "4f873506c5d98a31387d48d15c55a903fde142fde9185e77fc96081014cedc98",
+  "output": "artifacts/collapse-surface-20261002/store-review-v4/videos/01-food-feast.mp4",
+  "output_sha256": "c26735a504b5591db52107025bf91eefa203c3ac9c580f6789a20287184f16ee",
+  "width": 886,
+  "height": 1920,
+  "fps": 30,
+  "seconds": 20.0,
+  "source_ranges_seconds": [
+    [
+      11,
+      17
+    ],
+    [
+      46,
+      53
+    ],
+    [
+      53,
+      60
+    ]
+  ],
+  "source_range_decision": {
+    "policy": "Preserved normal food ranges",
+    "actual_city_event": null
+  },
+  "source_capture_sha256": "e7b769b49bf02d91fcb139438634b5d03814cfdc595cee8d71b6a1e7d7708b66",
+  "selected_physical_swallow_receipts": [
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_pancake",
+      "elapsed": 11.0000000000001,
+      "footprint": 0.358900010585785,
+      "fracture_parent": "",
+      "height": 0.334850013256073,
+      "hole_level": 2,
+      "hole_radius": 1.2,
+      "movie_frame": 330,
+      "name": "food_pancake_1772",
+      "points": 1,
+      "world_position": [
+        3.18197274208069,
+        -3.87226533889771,
+        21.8660984039307
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_burger",
+      "elapsed": 11.6833333333335,
+      "footprint": 0.960000038146973,
+      "fracture_parent": "",
+      "height": 1.34467887878418,
+      "hole_level": 2,
+      "hole_radius": 1.2,
+      "movie_frame": 351,
+      "name": "food_burger_2329",
+      "points": 1,
+      "world_position": [
+        5.39884948730469,
+        -4.33297872543335,
+        19.9248218536377
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_cake",
+      "elapsed": 13.3333333333336,
+      "footprint": 0.504000008106232,
+      "fracture_parent": "",
+      "height": 0.911519944667816,
+      "hole_level": 2,
+      "hole_radius": 1.2,
+      "movie_frame": 400,
+      "name": "food_cake_2935",
+      "points": 2,
+      "world_position": [
+        6.21592473983765,
+        -4.28507661819458,
+        17.809211730957
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_sushi",
+      "elapsed": 13.6333333333336,
+      "footprint": 0.595606327056885,
+      "fracture_parent": "",
+      "height": 0.384000033140182,
+      "hole_level": 2,
+      "hole_radius": 1.2,
+      "movie_frame": 409,
+      "name": "food_sushi_2950",
+      "points": 2,
+      "world_position": [
+        5.67523860931396,
+        -3.87286710739136,
+        17.6542472839355
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_pizza",
+      "elapsed": 14.7500000000003,
+      "footprint": 0.600000023841858,
+      "fracture_parent": "",
+      "height": 0.26129999756813,
+      "hole_level": 2,
+      "hole_radius": 1.2,
+      "movie_frame": 443,
+      "name": "food_pizza_2942",
+      "points": 2,
+      "world_position": [
+        8.04021835327148,
+        -4.18082141876221,
+        18.2509918212891
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_egg",
+      "elapsed": 16.2833333333337,
+      "footprint": 0.508699119091034,
+      "fracture_parent": "",
+      "height": 0.295680046081543,
+      "hole_level": 2,
+      "hole_radius": 1.2,
+      "movie_frame": 489,
+      "name": "food_egg_2174",
+      "points": 2,
+      "world_position": [
+        10.3946380615234,
+        -3.67408418655396,
+        15.3978338241577
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 49.0666666666652,
+      "footprint": 1.26651918888092,
+      "fracture_parent": "",
+      "height": 0.691964566707611,
+      "hole_level": 4,
+      "hole_radius": 2.2,
+      "movie_frame": 1472,
+      "name": "food_donut_792",
+      "points": 12,
+      "world_position": [
+        -46.7677230834961,
+        -4.84216070175171,
+        -47.9376335144043
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 49.1333333333318,
+      "footprint": 1.23485624790192,
+      "fracture_parent": "",
+      "height": 0.674665451049805,
+      "hole_level": 4,
+      "hole_radius": 2.2,
+      "movie_frame": 1474,
+      "name": "food_donut_793",
+      "points": 8,
+      "world_position": [
+        -46.9130020141602,
+        -4.56134796142578,
+        -47.9283638000488
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 49.2499999999985,
+      "footprint": 1.20319330692291,
+      "fracture_parent": "",
+      "height": 0.657366394996643,
+      "hole_level": 4,
+      "hole_radius": 2.2,
+      "movie_frame": 1478,
+      "name": "food_donut_794",
+      "points": 8,
+      "world_position": [
+        -46.9680862426758,
+        -4.3982253074646,
+        -47.6923980712891
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 49.3666666666651,
+      "footprint": 1.17153024673462,
+      "fracture_parent": "",
+      "height": 0.640067219734192,
+      "hole_level": 4,
+      "hole_radius": 2.2,
+      "movie_frame": 1481,
+      "name": "food_donut_795",
+      "points": 8,
+      "world_position": [
+        -47.172420501709,
+        -4.20409917831421,
+        -47.9545478820801
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 49.4999999999985,
+      "footprint": 1.13986730575562,
+      "fracture_parent": "",
+      "height": 0.62276816368103,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1485,
+      "name": "food_donut_796",
+      "points": 8,
+      "world_position": [
+        -46.9561042785645,
+        -4.28978776931763,
+        -47.9395065307617
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 49.6333333333318,
+      "footprint": 1.10820436477661,
+      "fracture_parent": "",
+      "height": 0.605469048023224,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1489,
+      "name": "food_donut_797",
+      "points": 8,
+      "world_position": [
+        -47.1582374572754,
+        -4.42740488052368,
+        -48.0144081115723
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 49.7499999999985,
+      "footprint": 1.07654130458832,
+      "fracture_parent": "",
+      "height": 0.588169872760773,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1493,
+      "name": "food_donut_798",
+      "points": 8,
+      "world_position": [
+        -46.8171195983887,
+        -4.34674406051636,
+        -48.0978317260742
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 49.8333333333318,
+      "footprint": 0.455946922302246,
+      "fracture_parent": "",
+      "height": 0.249107256531715,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1495,
+      "name": "food_donut_799",
+      "points": 3,
+      "world_position": [
+        -47.0662040710449,
+        -3.90110516548157,
+        -47.8056716918945
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_cookie",
+      "elapsed": 50.3333333333318,
+      "footprint": 1.34999990463257,
+      "fracture_parent": "",
+      "height": 0.560999989509583,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1510,
+      "name": "food_cookie_2641",
+      "points": 1,
+      "world_position": [
+        -45.9567031860352,
+        -3.91950654983521,
+        -51.2035217285156
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_pancake",
+      "elapsed": 50.8333333333317,
+      "footprint": 0.960000038146973,
+      "fracture_parent": "",
+      "height": 0.895670115947723,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1525,
+      "name": "food_pancake_1963",
+      "points": 2,
+      "world_position": [
+        -43.7678642272949,
+        -4.83534908294678,
+        -51.3527793884277
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_bacon",
+      "elapsed": 51.6999999999983,
+      "footprint": 0.583289444446564,
+      "fracture_parent": "",
+      "height": 0.154950141906738,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1551,
+      "name": "food_bacon_2022",
+      "points": 2,
+      "world_position": [
+        -45.9704246520996,
+        -3.74444913864136,
+        -54.9693717956543
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 51.716666666665,
+      "footprint": 0.959999978542328,
+      "fracture_parent": "",
+      "height": 0.524497389793396,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1552,
+      "name": "food_donut_2016",
+      "points": 1,
+      "world_position": [
+        -44.1562538146973,
+        -4.64143562316895,
+        -53.817943572998
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_bacon",
+      "elapsed": 52.1999999999983,
+      "footprint": 0.960000276565552,
+      "fracture_parent": "",
+      "height": 0.255022913217545,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1566,
+      "name": "food_bacon_2682",
+      "points": 2,
+      "world_position": [
+        -42.226318359375,
+        -4.32768154144287,
+        -55.9183044433594
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_cake",
+      "elapsed": 52.3499999999983,
+      "footprint": 0.960000097751617,
+      "fracture_parent": "",
+      "height": 1.73622846603394,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1571,
+      "name": "food_cake_2069",
+      "points": 2,
+      "world_position": [
+        -42.586986541748,
+        -4.96220302581787,
+        -53.5027809143066
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_berry",
+      "elapsed": 52.416666666665,
+      "footprint": 0.960000038146973,
+      "fracture_parent": "",
+      "height": 1.92014527320862,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1573,
+      "name": "food_berry_1899",
+      "points": 2,
+      "world_position": [
+        -44.5482063293457,
+        -5.06141948699951,
+        -55.2926940917969
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 52.9999999999983,
+      "footprint": 0.419999986886978,
+      "fracture_parent": "",
+      "height": 0.22946760058403,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1590,
+      "name": "food_donut_2125",
+      "points": 1,
+      "world_position": [
+        -40.7351417541504,
+        -3.70719003677368,
+        -54.7456169128418
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_sushi",
+      "elapsed": 53.2166666666649,
+      "footprint": 0.694874048233032,
+      "fracture_parent": "",
+      "height": 0.4480000436306,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1597,
+      "name": "food_sushi_2036",
+      "points": 2,
+      "world_position": [
+        -38.7655410766602,
+        -3.78490138053894,
+        -54.693660736084
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_sushi",
+      "elapsed": 53.2166666666649,
+      "footprint": 0.521155476570129,
+      "fracture_parent": "",
+      "height": 0.336000025272369,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1597,
+      "name": "food_sushi_2317",
+      "points": 1,
+      "world_position": [
+        -39.9206390380859,
+        -3.84090161323547,
+        -56.3423080444336
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_egg",
+      "elapsed": 53.4166666666649,
+      "footprint": 0.545034825801849,
+      "fracture_parent": "",
+      "height": 0.316800057888031,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1603,
+      "name": "food_egg_3044",
+      "points": 2,
+      "world_position": [
+        -39.9086303710938,
+        -4.25908803939819,
+        -52.576961517334
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_burger",
+      "elapsed": 54.3499999999982,
+      "footprint": 0.554400026798248,
+      "fracture_parent": "",
+      "height": 0.776552021503448,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1631,
+      "name": "food_burger_2052",
+      "points": 2,
+      "world_position": [
+        -38.3377265930176,
+        -4.00694417953491,
+        -52.5372467041016
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_cake",
+      "elapsed": 54.7666666666648,
+      "footprint": 0.588000059127808,
+      "fracture_parent": "",
+      "height": 1.06343996524811,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1643,
+      "name": "food_cake_2538",
+      "points": 2,
+      "world_position": [
+        -35.8373260498047,
+        -4.0628023147583,
+        -53.9211578369141
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_egg",
+      "elapsed": 55.4166666666648,
+      "footprint": 0.654041767120361,
+      "fracture_parent": "",
+      "height": 0.380160063505173,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1663,
+      "name": "food_egg_3054",
+      "points": 2,
+      "world_position": [
+        -37.5897598266602,
+        -3.91042304039001,
+        -53.1457138061523
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_berry",
+      "elapsed": 55.5833333333315,
+      "footprint": 0.960000038146973,
+      "fracture_parent": "",
+      "height": 1.92014527320862,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1668,
+      "name": "food_berry_2713",
+      "points": 1,
+      "world_position": [
+        -38.1667518615723,
+        -4.82753658294678,
+        -51.4711227416992
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_cake",
+      "elapsed": 55.8333333333314,
+      "footprint": 0.960000097751617,
+      "fracture_parent": "",
+      "height": 1.73622846603394,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1675,
+      "name": "food_cake_2436",
+      "points": 1,
+      "world_position": [
+        -41.3321990966797,
+        -4.56412792205811,
+        -50.456184387207
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_cake",
+      "elapsed": 56.4999999999981,
+      "footprint": 0.756000101566315,
+      "fracture_parent": "",
+      "height": 1.36728000640869,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1695,
+      "name": "food_cake_3045",
+      "points": 2,
+      "world_position": [
+        -40.2868804931641,
+        -4.58402156829834,
+        -50.465950012207
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_cake",
+      "elapsed": 56.6999999999981,
+      "footprint": 1.35000002384186,
+      "fracture_parent": "",
+      "height": 2.44157123565674,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 1701,
+      "name": "food_cake_2261",
+      "points": 2,
+      "world_position": [
+        -42.4365348815918,
+        -5.50410795211792,
+        -49.6662330627441
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 57.4333333333314,
+      "footprint": 1.6425154209137,
+      "fracture_parent": "",
+      "height": 0.89739066362381,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1723,
+      "name": "food_donut_485",
+      "points": 12,
+      "world_position": [
+        -37.2913475036621,
+        -5.08393573760986,
+        -48.6541366577148
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 57.5166666666647,
+      "footprint": 1.60145258903503,
+      "fracture_parent": "",
+      "height": 0.874955892562866,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1726,
+      "name": "food_donut_486",
+      "points": 8,
+      "world_position": [
+        -37.2708282470703,
+        -4.99393510818481,
+        -48.7378845214844
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_pizza",
+      "elapsed": 57.5666666666647,
+      "footprint": 0.479999989271164,
+      "fracture_parent": "",
+      "height": 0.209039986133575,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1727,
+      "name": "food_pizza_3052",
+      "points": 2,
+      "world_position": [
+        -38.208122253418,
+        -3.879634141922,
+        -45.7156028747559
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 57.599999999998,
+      "footprint": 1.56038975715637,
+      "fracture_parent": "",
+      "height": 0.852521181106567,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1728,
+      "name": "food_donut_487",
+      "points": 8,
+      "world_position": [
+        -37.2063179016113,
+        -4.60067892074585,
+        -48.3517379760742
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 57.7333333333313,
+      "footprint": 1.51932680606842,
+      "fracture_parent": "",
+      "height": 0.830086350440979,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1732,
+      "name": "food_donut_488",
+      "points": 8,
+      "world_position": [
+        -37.0856513977051,
+        -4.48807859420776,
+        -48.5251235961914
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 57.8833333333313,
+      "footprint": 1.47826397418976,
+      "fracture_parent": "",
+      "height": 0.80765163898468,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1737,
+      "name": "food_donut_489",
+      "points": 8,
+      "world_position": [
+        -37.0990829467773,
+        -4.69834995269775,
+        -48.3142013549805
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_donut",
+      "elapsed": 57.949999999998,
+      "footprint": 0.591305553913116,
+      "fracture_parent": "",
+      "height": 0.323060631752014,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1739,
+      "name": "food_donut_490",
+      "points": 3,
+      "world_position": [
+        -37.2052841186523,
+        -3.84002661705017,
+        -48.4590644836426
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_cake",
+      "elapsed": 58.9999999999979,
+      "footprint": 2.17781257629395,
+      "fracture_parent": "",
+      "height": 1.41774964332581,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1770,
+      "name": "food_cake_514",
+      "points": 12,
+      "world_position": [
+        -32.1426773071289,
+        -5.09587383270264,
+        -51.676326751709
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_cake",
+      "elapsed": 59.0999999999979,
+      "footprint": 2.10782170295715,
+      "fracture_parent": "",
+      "height": 1.23903560638428,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1773,
+      "name": "food_cake_515",
+      "points": 8,
+      "world_position": [
+        -31.9472827911377,
+        -4.53079175949097,
+        -51.7810211181641
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_egg",
+      "elapsed": 59.1999999999979,
+      "footprint": 0.508699119091034,
+      "fracture_parent": "",
+      "height": 0.295680046081543,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1776,
+      "name": "food_egg_2273",
+      "points": 2,
+      "world_position": [
+        -28.8862266540527,
+        -3.67408418655396,
+        -51.7795906066895
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_berry",
+      "elapsed": 59.2166666666646,
+      "footprint": 0.372131079435349,
+      "fracture_parent": "",
+      "height": 0.744318425655365,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1777,
+      "name": "food_berry_516",
+      "points": 3,
+      "world_position": [
+        -31.7854232788086,
+        -3.99838328361511,
+        -51.7597503662109
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_pizza",
+      "elapsed": 59.3999999999979,
+      "footprint": 0.560000002384186,
+      "fracture_parent": "",
+      "height": 0.243879988789558,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1782,
+      "name": "food_pizza_2244",
+      "points": 2,
+      "world_position": [
+        -31.6475009918213,
+        -3.69998407363892,
+        -55.9702415466309
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_egg",
+      "elapsed": 59.5333333333312,
+      "footprint": 0.436027824878693,
+      "fracture_parent": "",
+      "height": 0.253440022468567,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1786,
+      "name": "food_egg_3064",
+      "points": 2,
+      "world_position": [
+        -34.8792991638184,
+        -3.77673506736755,
+        -51.0503349304199
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "food_berry",
+      "elapsed": 59.6333333333312,
+      "footprint": 0.342974036931992,
+      "fracture_parent": "",
+      "height": 0.685999929904938,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 1789,
+      "name": "food_berry_2426",
+      "points": 1,
+      "world_position": [
+        -33.199405670166,
+        -3.85700702667236,
+        -56.2210426330566
+      ]
+    }
+  ],
+  "normal_play_swallow_count": 82,
+  "full_decode_verified": true,
+  "natural_building_fragment_count": 0,
+  "selected_building_fragment_count": 0,
+  "natural_whole_building_count": 0,
+  "selected_whole_building_count": 0,
+  "audio": {
+    "mean_db": -33.3,
+    "peak_db": -17.2
+  },
+  "normal_speed_chronological_cuts": true,
+  "physical_iphone_capture": false,
+  "full_frame_hud_uncovered": true,
+  "video_caption_overlay": false,
+  "poster_is_uncovered_video_frame": true,
+  "visual_review_required": true,
+  "uploaded": false,
+  "scope": "Fresh actual current Mac scene/audio capture with real physics receipts. Complete HUD remains visible; no title banner, generated gameplay, HUD replacement or old media reuse. Titles appear outside the HTML player only."
+}

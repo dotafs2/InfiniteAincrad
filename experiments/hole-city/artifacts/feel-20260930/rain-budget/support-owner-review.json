@@ -1,0 +1,44 @@
+{
+  "checks": 89,
+  "failures": [],
+  "observed_admissions": [
+    {
+      "actual_added": 6,
+      "airborne_before": 0,
+      "permitted": 6,
+      "retained_before": 6
+    },
+    {
+      "actual_added": 6,
+      "airborne_before": 6,
+      "permitted": 6,
+      "retained_before": 12
+    },
+    {
+      "actual_added": 6,
+      "airborne_before": 12,
+      "permitted": 6,
+      "retained_before": 18
+    },
+    {
+      "actual_added": 6,
+      "airborne_before": 18,
+      "permitted": 6,
+      "retained_before": 24
+    },
+    {
+      "actual_added": 0,
+      "airborne_before": 24,
+      "permitted": 0,
+      "retained_before": 30
+    },
+    {
+      "actual_added": 0,
+      "airborne_before": 30,
+      "permitted": 0,
+      "retained_before": 30
+    }
+  ],
+  "peak_after_deliberate_relaunch": 30,
+  "scope": "Independent real contacts, reawakening, support removal, normal collection and synchronous admission snapshots; no global physics cap, renderer or phone-FPS claim."
+}

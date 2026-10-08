@@ -1,0 +1,15 @@
+--- authenticated-before/perimeter_frontage_acceptance.gd
++++ tests/perimeter_frontage_acceptance.gd
+@@ -64,8 +64,10 @@
+ 	check(tiny_by_district.values()==[6,6,6,6],"All four perimeter districts retain six genuinely small starter foods")
+ 	check(max_height<17.0,"Actual top of every enlarged building stays below 18 m rain spawn altitude")
+ 	check(max_size/min_size>1.4,"Physical frontage sizes remain visibly varied")
+-	check(game.city.foods.size()==2922 and game.city.mesh_cache.size()<=40,"Denser footprint uses the same bounded body and shared-mesh budgets")
+-	var result:={"checks":checks,"failures":failures,"actual_maximum_new_building_height":max_height,"new_building_size_range":[min_size,max_size],"small_foods_per_district":tiny_by_district,"initial_objects":game.city.foods.size(),"mesh_cache_count":game.city.mesh_cache.size(),"scope":"Real geometry/support/clearance; no rendered appearance or phone-performance claim"}
++	var train_count:int=game.city.foods.filter(func(body):return body.get_meta("train_car",false)).size()
++	check(game.city.foods.size()-train_count==2922 and game.city.mesh_cache.size()<=40,"Denser footprint retains exactly 2922 original bodies and its shared-mesh budget")
++	check(train_count==8 and game.city.foods.size()==2930,"Sushi Express adds exactly eight independent cars within its explicit extra budget")
++	var result:={"checks":checks,"failures":failures,"actual_maximum_new_building_height":max_height,"new_building_size_range":[min_size,max_size],"small_foods_per_district":tiny_by_district,"initial_objects":game.city.foods.size(),"train_objects":train_count,"mesh_cache_count":game.city.mesh_cache.size(),"scope":"Real geometry/support/clearance; no rendered appearance or phone-performance claim"}
+ 	game.free();await process_frame
+ 	print("PERIMETER_FRONTAGE_ACCEPTANCE "+JSON.stringify(result))
+ 	quit(0 if failures.is_empty() else 1)

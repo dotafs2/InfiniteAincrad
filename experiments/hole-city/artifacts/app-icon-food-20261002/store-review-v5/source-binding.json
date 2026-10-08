@@ -1,0 +1,4357 @@
+{
+  "gate": "artifacts/collapse-surface-20261002/web-gate-02/release.json",
+  "gate_sha256": "b4d732ed91a3ebff35c36d2f4a99a4c27152adddfc7bb4c6af7afdde1f45a90a",
+  "source_checks": 67170,
+  "packaged_checks": 67170,
+  "guarded_count": 810,
+  "version": "0.12.7",
+  "actual_suite_reports": {
+    "source": {
+      "suite_count": 85,
+      "actual_total": 67170,
+      "reports": {
+        "release_info": {
+          "checks": 37,
+          "report_sha256": "b7873e24b4f5b451444d6c8617f3e5b0ea6c8fd0ce83bc3cd7eea4bafa0cb681",
+          "log_sha256": "42d8294c0de5954113b08fa609cf959105f9efb01a2f3f28896edef57de45904",
+          "engine_log_sha256": "42d8294c0de5954113b08fa609cf959105f9efb01a2f3f28896edef57de45904",
+          "execution": "verified_reuse"
+        },
+        "native_polish": {
+          "checks": 267,
+          "report_sha256": "af784f2426c5d42ac1f69f64d20b555801abb5d9d5b3b3bd20e26a54b7dcca2a",
+          "log_sha256": "dab6e78cf14e6dd6bb603b11cf57e3a718751a888e57dd01cfd658444f4cb188",
+          "engine_log_sha256": "dab6e78cf14e6dd6bb603b11cf57e3a718751a888e57dd01cfd658444f4cb188",
+          "execution": "verified_reuse"
+        },
+        "viewport_layout": {
+          "checks": 41,
+          "report_sha256": "1fd08e01babdf3c1864623c050acaba1fdf8440b71b57636afacdab9ebcf37a6",
+          "log_sha256": "651f2240215f8062c35d0dd463fdb0ff33927e2034a08eb162d1839819f19dd2",
+          "engine_log_sha256": "651f2240215f8062c35d0dd463fdb0ff33927e2034a08eb162d1839819f19dd2",
+          "execution": "verified_reuse"
+        },
+        "application_lifecycle": {
+          "checks": 70,
+          "report_sha256": "551f6287996bfcba351c7015315a60262d69ba075b76b6758889bc2a05f56c58",
+          "log_sha256": "9a59fb4ae3046ea57a44d5f0462cc1b61ff6b5ace0be9fc4fe8c056b18377601",
+          "engine_log_sha256": "9a59fb4ae3046ea57a44d5f0462cc1b61ff6b5ace0be9fc4fe8c056b18377601",
+          "execution": "verified_reuse"
+        },
+        "scene_qa": {
+          "checks": 765,
+          "report_sha256": "145ad89bed5701592258949010c321d1b2dcb8882faa9d4f5e750fc1ff1b1bdc",
+          "log_sha256": "35c6aa92a3677eba149e3c6c747bd06803b68c9b81659f41a0b0d0cec8b16205",
+          "engine_log_sha256": "35c6aa92a3677eba149e3c6c747bd06803b68c9b81659f41a0b0d0cec8b16205",
+          "execution": "verified_reuse"
+        },
+        "street_prop_qa": {
+          "checks": 835,
+          "report_sha256": "44689e7f1e3d2e978c15c9731f1b092ed37894f7f04476e583cab980df2dd056",
+          "log_sha256": "d09e746829b04216173f3ff6b18b421914ee426df3710a8d4dfaf681c8061af4",
+          "engine_log_sha256": "d09e746829b04216173f3ff6b18b421914ee426df3710a8d4dfaf681c8061af4",
+          "execution": "verified_reuse"
+        },
+        "claim_recovery": {
+          "checks": 10,
+          "report_sha256": "40ece0877feab7a0154c80f0c834d1bccd1e9412940803995361ee15343564c3",
+          "log_sha256": "86afcc6d81bbc02fea8e7f4ef1fe8aeb51cfd3a981a3d315842d9e3137a50a62",
+          "engine_log_sha256": "86afcc6d81bbc02fea8e7f4ef1fe8aeb51cfd3a981a3d315842d9e3137a50a62",
+          "execution": "verified_reuse"
+        },
+        "full_city_qa": {
+          "checks": 1539,
+          "report_sha256": "feed022b5a4a10d7eb392848d731a643e523fa768cffe43fd5c451ec175ab365",
+          "log_sha256": "a3e4ffdf3c6ab8b6792d9be17695f344b19c1506b077439edc8fcf7d1ad2d967",
+          "engine_log_sha256": "a3e4ffdf3c6ab8b6792d9be17695f344b19c1506b077439edc8fcf7d1ad2d967",
+          "execution": "verified_reuse"
+        },
+        "skin_collection": {
+          "checks": 374,
+          "report_sha256": "37f0e55a5973b161a5d73d019785b8519fbe1265481d1fa3ee8ad5d5a7e6b88a",
+          "log_sha256": "d0f075cb0b56512ec3a0b25c5b47d875ecf29e96fe46a637a9142e562c9f87d9",
+          "engine_log_sha256": "d0f075cb0b56512ec3a0b25c5b47d875ecf29e96fe46a637a9142e562c9f87d9",
+          "execution": "verified_reuse"
+        },
+        "skin_fx": {
+          "checks": 414,
+          "report_sha256": "953b6528ff7187d86b71ed6634ac0401db98a21e16f8ab4eee91245c7b6db6b0",
+          "log_sha256": "f917988f28f9bd9411abceead63590135d74651b6175ae119b72fcac01c1c666",
+          "engine_log_sha256": "f917988f28f9bd9411abceead63590135d74651b6175ae119b72fcac01c1c666",
+          "execution": "verified_reuse"
+        },
+        "title_navigation": {
+          "checks": 37,
+          "report_sha256": "8c830d19084cbda14a90a495de8ac85601c4d7459bc1167e3bac14e598abc11f",
+          "log_sha256": "30d308dcf743492385236b562f2954ff9333fa2bd339aac73386818d767f827d",
+          "engine_log_sha256": "30d308dcf743492385236b562f2954ff9333fa2bd339aac73386818d767f827d",
+          "execution": "verified_reuse"
+        },
+        "ui_redesign": {
+          "checks": 1843,
+          "report_sha256": "65d25671b94dcc67e8f88c9db116c3beb837d93dc83389045dbbe545cd7a442c",
+          "log_sha256": "de41ed3703386b9deec54f7c3a0cd5170721bbdbf7dce543d7799e50d7f075a4",
+          "engine_log_sha256": "de41ed3703386b9deec54f7c3a0cd5170721bbdbf7dce543d7799e50d7f075a4",
+          "execution": "verified_reuse"
+        },
+        "map_preview": {
+          "checks": 79,
+          "report_sha256": "43922b3ff364b3d0820f9426d2b7aa86f59f511387211f4a877ebdb9524503f4",
+          "log_sha256": "68db364fdf50c54da6e89aa8fb4f27fc56819dea1e7d4c3bb2d6327cd73ca52f",
+          "engine_log_sha256": "68db364fdf50c54da6e89aa8fb4f27fc56819dea1e7d4c3bb2d6327cd73ca52f",
+          "execution": "verified_reuse"
+        },
+        "food_preview": {
+          "checks": 483,
+          "report_sha256": "7a48248e4cf3d80878cb3e39d4acc0cb8c1346329a5ff117cdb94ea795be5f0a",
+          "log_sha256": "1141b891545e6fba216df6113b1a6bf389f1eca0065bc5d835f0a223da86fb93",
+          "engine_log_sha256": "1141b891545e6fba216df6113b1a6bf389f1eca0065bc5d835f0a223da86fb93",
+          "execution": "verified_reuse"
+        },
+        "map_preview_review": {
+          "checks": 716,
+          "report_sha256": "8bcf042c07d975747ad3b5a8737fff6e9a091cae56c13dd66631fbc697b746b4",
+          "log_sha256": "f5dde22ce5d688a8e081a6c4bd5806ba434a8f7b002c4c79e844a3dbfc81052f",
+          "engine_log_sha256": "f5dde22ce5d688a8e081a6c4bd5806ba434a8f7b002c4c79e844a3dbfc81052f",
+          "execution": "verified_reuse"
+        },
+        "coin_skins": {
+          "checks": 412,
+          "report_sha256": "14d37288dd194486c458fcbbe275623d4c93bfc031413a0f94e424aef33e1766",
+          "log_sha256": "ad0c00959713b6e3170c8c01986d600dba65eefd8e562fd9680dd5c4781d8afb",
+          "engine_log_sha256": "ad0c00959713b6e3170c8c01986d600dba65eefd8e562fd9680dd5c4781d8afb",
+          "execution": "verified_reuse"
+        },
+        "skin_skill": {
+          "checks": 130,
+          "report_sha256": "78a71fddbcf3902967518e61b7331a2d830cbd09122ab3915307b53e1ae12340",
+          "log_sha256": "6a396b5c7b3879f6549af0e4de6a9d690d89d408a4cc872e910540661b8046c0",
+          "engine_log_sha256": "6a396b5c7b3879f6549af0e4de6a9d690d89d408a4cc872e910540661b8046c0",
+          "execution": "verified_reuse"
+        },
+        "snack_city": {
+          "checks": 80,
+          "report_sha256": "2e4b0274e7241894f7812c5670bb7a834a7d5f9f3ad545c2d994e5c15714b6ab",
+          "log_sha256": "95fab8822ceba05962e5cfc546454858648b026fe0710a7ca65d05e8e28facaf",
+          "engine_log_sha256": "95fab8822ceba05962e5cfc546454858648b026fe0710a7ca65d05e8e28facaf",
+          "execution": "verified_reuse"
+        },
+        "food_city_density": {
+          "checks": 1667,
+          "report_sha256": "aaa5c67c44a47fb0ccc95f8155e239dc973b27df02725c9afd2289b01d906984",
+          "log_sha256": "4a796fbb2bb5ca302673afe318b082417b08b557d6924ad257eca8af447da97e",
+          "engine_log_sha256": "4a796fbb2bb5ca302673afe318b082417b08b557d6924ad257eca8af447da97e",
+          "execution": "verified_reuse"
+        },
+        "food_round": {
+          "checks": 2,
+          "report_sha256": "0f40810f4f8e88ae2e39799cc25ab45bf048a6cad1157175ad35fdea26183ec2",
+          "log_sha256": "68b8da94594425a34fae2fa11976ee89ec06cbeb90411732f1ca6f28a6391cea",
+          "engine_log_sha256": "68b8da94594425a34fae2fa11976ee89ec06cbeb90411732f1ca6f28a6391cea",
+          "execution": "verified_reuse"
+        },
+        "food_finish": {
+          "checks": 136,
+          "report_sha256": "19a77333469ac098db65590d3a68d15b7d9a687676805c325cbb81c6e303c921",
+          "log_sha256": "12823b6acdb56f03556b2f2705b204902927834267a62e78d7ed5c3eb91d6361",
+          "engine_log_sha256": "12823b6acdb56f03556b2f2705b204902927834267a62e78d7ed5c3eb91d6361",
+          "execution": "verified_reuse"
+        },
+        "food_neighborhoods": {
+          "checks": 323,
+          "report_sha256": "55cb1e622614949a550fca7770be2034265176d3e4e5a6ce4763e682ce3ffb50",
+          "log_sha256": "24d62ee24a601d0b4d27c78c3a91301efeb71eeed2dfee684362d34cff5a6e67",
+          "engine_log_sha256": "24d62ee24a601d0b4d27c78c3a91301efeb71eeed2dfee684362d34cff5a6e67",
+          "execution": "verified_reuse"
+        },
+        "mobile_maps": {
+          "checks": 29,
+          "report_sha256": "51799f1c11f073bdc922d3b7e1eaba69dad4145207c5e3ecb5d71a78ad665f6d",
+          "log_sha256": "6d63f37b36a519235dc8c39bba162d91c678a4822cde2065111064036d51ed36",
+          "engine_log_sha256": "6d63f37b36a519235dc8c39bba162d91c678a4822cde2065111064036d51ed36",
+          "execution": "verified_reuse"
+        },
+        "performance": {
+          "checks": 271,
+          "report_sha256": "2d6049ae5b5305e70661d04b21af47ed3ce0dffc6adc60cf5c5b0577bdbb98a9",
+          "log_sha256": "7dfbd744fd2f797d599ae07cd712a29e6a6f815aebaa9e95c5bbe66ec5c0085b",
+          "engine_log_sha256": "7dfbd744fd2f797d599ae07cd712a29e6a6f815aebaa9e95c5bbe66ec5c0085b",
+          "execution": "verified_reuse"
+        },
+        "portrait": {
+          "checks": 30,
+          "report_sha256": "4dccef10427214e507e888fe041c982b6aab14c7f5f4076e5aff0e4964b5d58e",
+          "log_sha256": "3107b5c66a0c4b1e442b42e9f0d952d2ef950eca6237ac00fad3d22bf51b556a",
+          "engine_log_sha256": "3107b5c66a0c4b1e442b42e9f0d952d2ef950eca6237ac00fad3d22bf51b556a",
+          "execution": "verified_reuse"
+        },
+        "progression": {
+          "checks": 15,
+          "report_sha256": "826506c7a4c6de705045509594ea9bfbefff2d421abdb4ecdb699e3beee0406c",
+          "log_sha256": "84e8639ce48ce4b158262e317c896161e50cf5586c8a8e483361605f10e63d01",
+          "engine_log_sha256": "84e8639ce48ce4b158262e317c896161e50cf5586c8a8e483361605f10e63d01",
+          "execution": "verified_reuse"
+        },
+        "store": {
+          "checks": 17,
+          "report_sha256": "e1aa7235f6628e184b23513498dc50e2fc99e2dd425d26bf631c282784bd3b8d",
+          "log_sha256": "0232bf4883a757d0c05af765b02ccc103c959d4b204f03eb80d3d213a40ac02c",
+          "engine_log_sha256": "0232bf4883a757d0c05af765b02ccc103c959d4b204f03eb80d3d213a40ac02c",
+          "execution": "verified_reuse"
+        },
+        "city_motion": {
+          "checks": 22,
+          "report_sha256": "87f89607192fd5d764c6952fa939c1c56a03d4762de1a0d7588ac32b26462a4b",
+          "log_sha256": "059c0cefd939205c02bb3d3df13bac6356a93d82adfe2c2a9fb1b4624f7a96f5",
+          "engine_log_sha256": "059c0cefd939205c02bb3d3df13bac6356a93d82adfe2c2a9fb1b4624f7a96f5",
+          "execution": "verified_reuse"
+        },
+        "city_districts": {
+          "checks": 2718,
+          "report_sha256": "c9dd5c476513ef69c01b83a4116716e922b04528482e00242200c5bcaabe8035",
+          "log_sha256": "a18f1e558e77cb3a7e6f8ec0d6e6ebb00ace3ebebad3f08c7ba3780cfd7a9e47",
+          "engine_log_sha256": "a18f1e558e77cb3a7e6f8ec0d6e6ebb00ace3ebebad3f08c7ba3780cfd7a9e47",
+          "execution": "verified_reuse"
+        },
+        "skin_catalog": {
+          "checks": 897,
+          "report_sha256": "85121507a330d7e91ae7b92bb40320cefb524c248e55e667ef54f73f81a1be28",
+          "log_sha256": "253d7b95c4c426d928a727f43589f92879fa4e18163b1ac6980dea7c68de020d",
+          "engine_log_sha256": "253d7b95c4c426d928a727f43589f92879fa4e18163b1ac6980dea7c68de020d",
+          "execution": "verified_reuse"
+        },
+        "food_rain_continuity": {
+          "checks": 38,
+          "report_sha256": "ea79c755c04877701ea14704f74642f4678fae3d31869ed8969ec099ab8c0fb0",
+          "log_sha256": "d19e725e935508c30d72d88d0547520aa55f34f740e6ad96ecb551a2e8330b71",
+          "engine_log_sha256": "d19e725e935508c30d72d88d0547520aa55f34f740e6ad96ecb551a2e8330b71",
+          "execution": "verified_reuse"
+        },
+        "food_city_revision": {
+          "checks": 135,
+          "report_sha256": "2be8254c809f5317862affe325d086daef13e34a2473076c544b89772e77823d",
+          "log_sha256": "6fa1b1a70ea49de49f8b59ec1561cfc246782d02d82d5a737bacdb3f10c3d7b0",
+          "engine_log_sha256": "6fa1b1a70ea49de49f8b59ec1561cfc246782d02d82d5a737bacdb3f10c3d7b0",
+          "execution": "verified_reuse"
+        },
+        "food_impact": {
+          "checks": 256,
+          "report_sha256": "ef8eab33a73d56c31f27d0d89b7f151fc31cab41e867a09c8023b110c0b40e04",
+          "log_sha256": "d07a1188639b45f236d9c78fe47dad5494cdae77fd54dada2e4140e323e8836e",
+          "engine_log_sha256": "d07a1188639b45f236d9c78fe47dad5494cdae77fd54dada2e4140e323e8836e",
+          "execution": "verified_reuse"
+        },
+        "ui_collection_review": {
+          "checks": 1905,
+          "report_sha256": "b679a3a0a304dadc364f65783438ba7dce4e7910241ccb8bffa46bbcef7719f1",
+          "log_sha256": "7c454b126b1c7509233cd2b012f3c5f9172a16857c75ae738b4c741e5d45a476",
+          "engine_log_sha256": "7c454b126b1c7509233cd2b012f3c5f9172a16857c75ae738b4c741e5d45a476",
+          "execution": "verified_reuse"
+        },
+        "food_goals_review": {
+          "checks": 37,
+          "report_sha256": "61c85b33a1d595eb96b87145472dc777ddb8b8c3fe0984bc0b99388893ac54a8",
+          "log_sha256": "68ba4f328da3ca2d45ac4523f9ee72738cb5c66b212854aff4adcc5466c0eb74",
+          "engine_log_sha256": "68ba4f328da3ca2d45ac4523f9ee72738cb5c66b212854aff4adcc5466c0eb74",
+          "execution": "verified_reuse"
+        },
+        "progression_review": {
+          "checks": 10,
+          "report_sha256": "a5dc0f692e1ed3aa69d82fff7103c7650e95d9a33f902fae2e1ebf09bdcbe0cf",
+          "log_sha256": "84ff803cb8e24c5dd380fdd6e6a782f7b3b25f85654b393d19c0bf420319c69f",
+          "engine_log_sha256": "84ff803cb8e24c5dd380fdd6e6a782f7b3b25f85654b393d19c0bf420319c69f",
+          "execution": "verified_reuse"
+        },
+        "rain_review": {
+          "checks": 9,
+          "report_sha256": "396187da0680828a6658a4c7b72e47ac798dcfad30c69bce6af7f1f88dc5db03",
+          "log_sha256": "c7629dc518df0571ae9ef530e6ad7929ff9acb6568d81af52e19af06d14fa435",
+          "engine_log_sha256": "c7629dc518df0571ae9ef530e6ad7929ff9acb6568d81af52e19af06d14fa435",
+          "execution": "verified_reuse"
+        },
+        "crowd_review": {
+          "checks": 17,
+          "report_sha256": "05bad7c30f67bc71e1e6be5c1a319073e6479dea976495803be40becf8a691e7",
+          "log_sha256": "d312f1fb9ecd72a3e3e5effde0a888f2d95c82d4447a251f1f165c2b322c2d23",
+          "engine_log_sha256": "d312f1fb9ecd72a3e3e5effde0a888f2d95c82d4447a251f1f165c2b322c2d23",
+          "execution": "verified_reuse"
+        },
+        "district_review": {
+          "checks": 4,
+          "report_sha256": "18dfe00ac3f026e9826ffaae8f417e1adb4efbf361fc08b64baa879f2bcc0faa",
+          "log_sha256": "3b3c624d719d7934d20b288c1d04fa5e0e51a631eba3534b3707116af0f99d13",
+          "engine_log_sha256": "3b3c624d719d7934d20b288c1d04fa5e0e51a631eba3534b3707116af0f99d13",
+          "execution": "verified_reuse"
+        },
+        "food_revision_review": {
+          "checks": 11,
+          "report_sha256": "66aad3e66e2057c9559c7753a6e5782610af9a9d8b6ac8f8ac44dc88264e7a6f",
+          "log_sha256": "63362612d528a44a7ef35c92fdc4fced0be213f4516ba33db5faf67cffba58a0",
+          "engine_log_sha256": "63362612d528a44a7ef35c92fdc4fced0be213f4516ba33db5faf67cffba58a0",
+          "execution": "verified_reuse"
+        },
+        "skin_catalog_review": {
+          "checks": 206,
+          "report_sha256": "29f2429bf0e93c4832679e4962dc5ad9c72150ef8fb84e91348bea4992440d63",
+          "log_sha256": "90852e369b80c6113603f39fea052f5e6e2929dd03cbab6279f5b48c91845238",
+          "engine_log_sha256": "90852e369b80c6113603f39fea052f5e6e2929dd03cbab6279f5b48c91845238",
+          "execution": "verified_reuse"
+        },
+        "mobile_thumbnail": {
+          "checks": 3847,
+          "report_sha256": "efd6c88e93391ea33a253f30538cc90499070e917a67ead9cd92acafe2e2898a",
+          "log_sha256": "894bcdc2d94d61187a0c37ee9568d3711815a165f6aa18204885fb761dccb18c",
+          "engine_log_sha256": "894bcdc2d94d61187a0c37ee9568d3711815a165f6aa18204885fb761dccb18c",
+          "execution": "verified_reuse"
+        },
+        "procedural_filtering": {
+          "checks": 27,
+          "report_sha256": "f5bbf36265f7dea40e078c0d69560064f3fd367a5b7fc08def0422b5d517d32e",
+          "log_sha256": "c52054c45a0e84a240041a70ec7cbc6fb359f8ca055dea2937d976bdbc8c76ba",
+          "engine_log_sha256": "c52054c45a0e84a240041a70ec7cbc6fb359f8ca055dea2937d976bdbc8c76ba",
+          "execution": "verified_reuse"
+        },
+        "selective_reveal": {
+          "checks": 75,
+          "report_sha256": "4c7756bad88b2201ba38b1e5392d04d81134cdeac4e6087ffd6850a47574f447",
+          "log_sha256": "763fe96a93f610d5cd1fd877e79d582a9f1b29810edd301502955e6a3d154a1f",
+          "engine_log_sha256": "763fe96a93f610d5cd1fd877e79d582a9f1b29810edd301502955e6a3d154a1f",
+          "execution": "verified_reuse"
+        },
+        "selective_reveal_review": {
+          "checks": 491,
+          "report_sha256": "4f914d8d693331b280d175df303abfc80b9cdd9c771810e32f7385bb7501b749",
+          "log_sha256": "15c157821dce002e9f636db0db3992fff9f8e1a924ec9e77fe8671fb39dec399",
+          "engine_log_sha256": "15c157821dce002e9f636db0db3992fff9f8e1a924ec9e77fe8671fb39dec399",
+          "execution": "verified_reuse"
+        },
+        "building_only_reveal_review": {
+          "checks": 213,
+          "report_sha256": "9b4d0ef17237a39746d73cd213af961d5c7ec9680d359f9dbcefef6a693fe2e4",
+          "log_sha256": "628a235dff67fb6e2f5e1d91e6bbe7b929a87180baa4574d9ff87adac29523c8",
+          "engine_log_sha256": "628a235dff67fb6e2f5e1d91e6bbe7b929a87180baa4574d9ff87adac29523c8",
+          "execution": "verified_reuse"
+        },
+        "building_surface_artifacts": {
+          "checks": 1438,
+          "report_sha256": "575ed2bc549c5380e90621a14225a2a921395bf3c05d12010f633ca85ff3844f",
+          "log_sha256": "ab7f4efd06bbab948f83c63ed7640d342dace4008810e4b5b6697a5d0fdf5dac",
+          "engine_log_sha256": "ab7f4efd06bbab948f83c63ed7640d342dace4008810e4b5b6697a5d0fdf5dac",
+          "execution": "verified_reuse"
+        },
+        "growth_extension": {
+          "checks": 1978,
+          "report_sha256": "c3837ba7ec3de07600faf8a3d017a65ca0db7c8ead4b56d92134e36ff1b0fdc9",
+          "log_sha256": "aef8672df345b0439328f6d3a0658830ea5c21885ce0bce0d9676c3a70dc7291",
+          "engine_log_sha256": "aef8672df345b0439328f6d3a0658830ea5c21885ce0bce0d9676c3a70dc7291",
+          "execution": "verified_reuse"
+        },
+        "rival_combat": {
+          "checks": 58,
+          "report_sha256": "64b21293c74bb0513812dac3e5d57b6f869ed8a7e9b44a0b439c535a26889a8d",
+          "log_sha256": "dd42a49134ab6750d8f8c54cb1d390f132f6d076f4694aac9b1410f88b9bf2f5",
+          "engine_log_sha256": "dd42a49134ab6750d8f8c54cb1d390f132f6d076f4694aac9b1410f88b9bf2f5",
+          "execution": "verified_reuse"
+        },
+        "large_growth_world": {
+          "checks": 258,
+          "report_sha256": "d32ea689d2ab7cbc7ac92f855062ccf4fb3d9ff6d90739019dff41194993dfc2",
+          "log_sha256": "f0c53d01fd94bed8ff1b4288ad01e551705666de25f691d3238c06f789a72b86",
+          "engine_log_sha256": "f0c53d01fd94bed8ff1b4288ad01e551705666de25f691d3238c06f789a72b86",
+          "execution": "verified_reuse"
+        },
+        "pedestrian_swallow_review": {
+          "checks": 120,
+          "report_sha256": "71bfe0a5e5a135c6298e7596c7d79391d31f619f7de72f696dffb7684e6eb8f8",
+          "log_sha256": "ad8b000cef4fe7e1245deba936e67c36bab37ac657862d275582b4371168a7b7",
+          "engine_log_sha256": "ad8b000cef4fe7e1245deba936e67c36bab37ac657862d275582b4371168a7b7",
+          "execution": "verified_reuse"
+        },
+        "growth_rivals_review": {
+          "checks": 291,
+          "report_sha256": "74230da63dba57c73113f5d926e223bf5546a3a705503a4b3c5d3bcbdd775142",
+          "log_sha256": "d55e3f611bf9ab4fe7637f4c69b821ece75cd2287969a117640859202cdbd32c",
+          "engine_log_sha256": "d55e3f611bf9ab4fe7637f4c69b821ece75cd2287969a117640859202cdbd32c",
+          "execution": "fresh"
+        },
+        "growth_integration_review": {
+          "checks": 1606,
+          "report_sha256": "dfa94b16ad22e6bc4f7b15c996218aa71072f1fbd3b5ba120ba795fabf1249d7",
+          "log_sha256": "5633e13cb6ff15a8b11d987a5e61efde198a84c29baa3291615ad9f1454ecb37",
+          "engine_log_sha256": "5633e13cb6ff15a8b11d987a5e61efde198a84c29baa3291615ad9f1454ecb37",
+          "execution": "fresh"
+        },
+        "food_collision": {
+          "checks": 156,
+          "report_sha256": "e48bb513ea2b07113bd48d496238ad6731cffbcefb862ca3bf5675667a60a0f4",
+          "log_sha256": "d9ffe6cead51f2c22100ce8fcb659eec5135eb26246dd07a78af79ebecb81176",
+          "engine_log_sha256": "d9ffe6cead51f2c22100ce8fcb659eec5135eb26246dd07a78af79ebecb81176",
+          "execution": "fresh"
+        },
+        "food_collision_review": {
+          "checks": 18386,
+          "report_sha256": "e66db0d528fed000906fdcdf9a1658bfdf231d82f575f0cff4cce5618caf4366",
+          "log_sha256": "229a8903ec8300eea4186031978010ddb87d9785c024fd838da134d8bc8a17b9",
+          "engine_log_sha256": "229a8903ec8300eea4186031978010ddb87d9785c024fd838da134d8bc8a17b9",
+          "execution": "fresh"
+        },
+        "music": {
+          "checks": 129,
+          "report_sha256": "f9636a2eb13e5dbcef7018de8ca0c0f33606b641981d5bdaf7bd4955c5a129dd",
+          "log_sha256": "57582f21c782d2ae386859bc76839307c9de2fa425cf6084ad993854464a82c9",
+          "engine_log_sha256": "57582f21c782d2ae386859bc76839307c9de2fa425cf6084ad993854464a82c9",
+          "execution": "fresh"
+        },
+        "music_review": {
+          "checks": 120,
+          "report_sha256": "f66b3e8b2e2c3bcc32542b78d3ac954928dd8189176db1da4fdd01929320b764",
+          "log_sha256": "8d2af1c2275f6221cf9799dc1915f0bd7f3bb26e593a153b49bd0379dee0a984",
+          "engine_log_sha256": "8d2af1c2275f6221cf9799dc1915f0bd7f3bb26e593a153b49bd0379dee0a984",
+          "execution": "fresh"
+        },
+        "shop_theme_review": {
+          "checks": 55,
+          "report_sha256": "998d243168163250ee32aa748af2c98fdd380d1b731a4a353de9c1a7c0a5fed2",
+          "log_sha256": "789ae108e441d90fb2017be9107b241a7034db1e00cfd0c9c586f390b732c1a6",
+          "engine_log_sha256": "789ae108e441d90fb2017be9107b241a7034db1e00cfd0c9c586f390b732c1a6",
+          "execution": "fresh"
+        },
+        "food_color": {
+          "checks": 55,
+          "report_sha256": "8e7a2fcb8993339ec1d775d234de60171b5065d9ac61a3265a25352111a3fd0a",
+          "log_sha256": "7a8fa72b8b9186c87258c25194d24a5f956762e5aa05f63e061a289b1d878796",
+          "engine_log_sha256": "7a8fa72b8b9186c87258c25194d24a5f956762e5aa05f63e061a289b1d878796",
+          "execution": "fresh"
+        },
+        "food_color_review": {
+          "checks": 1351,
+          "report_sha256": "91af5c6c4dbe3e35d4275ac50901055b318e1602300c33129cec64f56ae82e70",
+          "log_sha256": "1d46d9090db20899603dd77016ce344ba9c078c674776089b0e89de4aca84c81",
+          "engine_log_sha256": "1d46d9090db20899603dd77016ce344ba9c078c674776089b0e89de4aca84c81",
+          "execution": "fresh"
+        },
+        "skin_rarity": {
+          "checks": 556,
+          "report_sha256": "420027bd3f38d69628693fede9547fc76c53a1d5b6ebea0d7fcf82b218c1f6a6",
+          "log_sha256": "ce5f51d5a9eead508e3df61f55748c909661985d29cccdd978f16f9e7f1a993d",
+          "engine_log_sha256": "ce5f51d5a9eead508e3df61f55748c909661985d29cccdd978f16f9e7f1a993d",
+          "execution": "fresh"
+        },
+        "skin_rarity_review": {
+          "checks": 1555,
+          "report_sha256": "a073e6f7f3418ae6ba8443b97cb17b46340208ef4a99731ac1d2bda3271240f1",
+          "log_sha256": "c58790f0bdb7fb5e1617d6659e47c2d70a656de07f26fca8dac075daaf6a1697",
+          "engine_log_sha256": "c58790f0bdb7fb5e1617d6659e47c2d70a656de07f26fca8dac075daaf6a1697",
+          "execution": "fresh"
+        },
+        "world_expansion": {
+          "checks": 57,
+          "report_sha256": "58093c333970237d3b68cc9df6f87e414abfefb00a58899001c8969e28dde58b",
+          "log_sha256": "6dd474a0fe51c3626904f76a852bf20dbeba121ca307ae54d0c1dda54279524d",
+          "engine_log_sha256": "6dd474a0fe51c3626904f76a852bf20dbeba121ca307ae54d0c1dda54279524d",
+          "execution": "fresh"
+        },
+        "world_expansion_review": {
+          "checks": 284,
+          "report_sha256": "23be1d2acfadd84dabdb0d060da8b349c020024e1685e2289b2cef171576d712",
+          "log_sha256": "c302b6083d5dad5340b755e4af53eb1aaddb4c88e06d7e0c90af0015ae99ba7b",
+          "engine_log_sha256": "c302b6083d5dad5340b755e4af53eb1aaddb4c88e06d7e0c90af0015ae99ba7b",
+          "execution": "fresh"
+        },
+        "monetization_bridges": {
+          "checks": 116,
+          "report_sha256": "b30d336d9774722ea0ccc91bcf0a04a0911d4ce49703093059bf68051a374391",
+          "log_sha256": "35c3083e7389de313370cf8449fae758a809d9136dd9f35df1243120f4fd0bfe",
+          "engine_log_sha256": "35c3083e7389de313370cf8449fae758a809d9136dd9f35df1243120f4fd0bfe",
+          "execution": "fresh"
+        },
+        "economy_continuation": {
+          "checks": 120,
+          "report_sha256": "4ecadb1fba23ec40f75d6f8660989c747604d67eb7a11cea10bb6f9d8994e0ae",
+          "log_sha256": "30f84305fdc27abbf92bc82f48f0558b4a91134143762a47ad851ebdcc58e803",
+          "engine_log_sha256": "30f84305fdc27abbf92bc82f48f0558b4a91134143762a47ad851ebdcc58e803",
+          "execution": "fresh"
+        },
+        "diamond_boundary_review": {
+          "checks": 25,
+          "report_sha256": "924aacda3fc831c29f91377bfec5dc8c6ea8cee73311a9799c54f63ebce7deb7",
+          "log_sha256": "aa28228969ea6a6b4a06911e8dad0da0c8cd6fdaf51358b3b835afe424d02281",
+          "engine_log_sha256": "aa28228969ea6a6b4a06911e8dad0da0c8cd6fdaf51358b3b835afe424d02281",
+          "execution": "fresh"
+        },
+        "retention": {
+          "checks": 67,
+          "report_sha256": "d710e1d32f2f5a5248f370cb09fe365396214a8a913b4261d4d1d82cc0558fa3",
+          "log_sha256": "3f91a3ca3027867bda41347c9ccf9a9f9aceff489e9f98695e463f55971e892f",
+          "engine_log_sha256": "3f91a3ca3027867bda41347c9ccf9a9f9aceff489e9f98695e463f55971e892f",
+          "execution": "fresh"
+        },
+        "retention_review": {
+          "checks": 590,
+          "report_sha256": "61cafc4bdf65b3178f2c41ee0e63fe0e08bd5fe3210da55bd884f92bd89c9f73",
+          "log_sha256": "f81632c9eddf43c9f8ad4988054a08da10eb4902708caba04865dc96e1409308",
+          "engine_log_sha256": "f81632c9eddf43c9f8ad4988054a08da10eb4902708caba04865dc96e1409308",
+          "execution": "fresh"
+        },
+        "retention_ui_review": {
+          "checks": 8188,
+          "report_sha256": "39160ac80e5f46eb204c68c3c31ae0ab421fcd5a0a49653f444cab76dd64784c",
+          "log_sha256": "11401b6548c891b3e582c86d64199a08b9fef037ef69285d9466d1cef533cc6a",
+          "engine_log_sha256": "11401b6548c891b3e582c86d64199a08b9fef037ef69285d9466d1cef533cc6a",
+          "execution": "fresh"
+        },
+        "perimeter_frontage": {
+          "checks": 631,
+          "report_sha256": "57cf905a9c968f334dc52bb53b91396e40b9b5715a188fbe9caa1b26bcf6c955",
+          "log_sha256": "cecb9726d84b95cddda5133f659ca0c32702237b5543411ce4923e3d21410966",
+          "engine_log_sha256": "cecb9726d84b95cddda5133f659ca0c32702237b5543411ce4923e3d21410966",
+          "execution": "fresh"
+        },
+        "food_extension_collision_review": {
+          "checks": 199,
+          "report_sha256": "f5a2c353f4afc96da7c756aa86563279dcdc2074df40ab35e477b326456bdee9",
+          "log_sha256": "cf8f891f28096b47bdeb22e1fb7555d17b0ed7d83b6d66b52501a67c8f865554",
+          "engine_log_sha256": "cf8f891f28096b47bdeb22e1fb7555d17b0ed7d83b6d66b52501a67c8f865554",
+          "execution": "fresh"
+        },
+        "train": {
+          "checks": 220,
+          "report_sha256": "92c3be34301e1d5e5d405d63f0fa990db90dd2deaafb0c53a121fac609a062c3",
+          "log_sha256": "8cf86b7041d867a3a2022a6a9e181c47c8a4f284a712077188f9b98e8ee76d93",
+          "engine_log_sha256": "8cf86b7041d867a3a2022a6a9e181c47c8a4f284a712077188f9b98e8ee76d93",
+          "execution": "fresh"
+        },
+        "train_surface": {
+          "checks": 161,
+          "report_sha256": "7fd504dec73753407404a316367bbf48c85332177418c40d2b2d3be6ffb7dffa",
+          "log_sha256": "b7477c4f202e887bc83ea6f93a8c030bc15e328753bca95f250876aa6d5e8bdb",
+          "engine_log_sha256": "b7477c4f202e887bc83ea6f93a8c030bc15e328753bca95f250876aa6d5e8bdb",
+          "execution": "fresh"
+        },
+        "train_review": {
+          "checks": 388,
+          "report_sha256": "136a5b55b9e36dc4e5678c1ab0f8b9c66127285620a9238d97bd78ec2c7d9f7e",
+          "log_sha256": "96c850ab22c7a1d1ba93f444e08922c9b92bd4e37a7bd433eb8d302ac91bbc15",
+          "engine_log_sha256": "96c850ab22c7a1d1ba93f444e08922c9b92bd4e37a7bd433eb8d302ac91bbc15",
+          "execution": "fresh"
+        },
+        "train_surface_review": {
+          "checks": 1121,
+          "report_sha256": "b06ce79eb9c896ebe3056b860b0c4d1aa2b29cbf44da30151331909a91bd67c1",
+          "log_sha256": "301659de4a0a50eeaf9ca87764d4bf5fa30d351ab716b951cfeba549c6b946f6",
+          "engine_log_sha256": "301659de4a0a50eeaf9ca87764d4bf5fa30d351ab716b951cfeba549c6b946f6",
+          "execution": "fresh"
+        },
+        "boost": {
+          "checks": 55,
+          "report_sha256": "bb568f787dd8b711fae02d28f5fa3f9b4af7dd86128f6eeb59fe50a25c555921",
+          "log_sha256": "4137bd853794243f6cf59036fef1c5a549381737f7c6ca2eabca3656da2a3ee3",
+          "engine_log_sha256": "4137bd853794243f6cf59036fef1c5a549381737f7c6ca2eabca3656da2a3ee3",
+          "execution": "fresh"
+        },
+        "boost_review": {
+          "checks": 98,
+          "report_sha256": "16017d45f52e8615aef80cef8e87519e675cd8df88a3f96cd5954b0cf6050318",
+          "log_sha256": "95f3ecb323945180b6ccdfcebace424e3d1ca16df12a55bee579799613c20e77",
+          "engine_log_sha256": "95f3ecb323945180b6ccdfcebace424e3d1ca16df12a55bee579799613c20e77",
+          "execution": "fresh"
+        },
+        "skin_polish": {
+          "checks": 486,
+          "report_sha256": "b3c7954611743ceb6a9a53c29c4330cfb8959b882c96aea97dd6eb1d4f15110b",
+          "log_sha256": "92b744653fd2d3f8179b3d4dc6fb6a282131ac7fb14fee1a7835b39e876d936a",
+          "engine_log_sha256": "92b744653fd2d3f8179b3d4dc6fb6a282131ac7fb14fee1a7835b39e876d936a",
+          "execution": "fresh"
+        },
+        "skin_polish_review": {
+          "checks": 760,
+          "report_sha256": "aec663d4399375eef3b1598de1b6c5f02aa6ddef220011f945bbe79d18ca8c07",
+          "log_sha256": "f15da10e92d432e8576027eefdbf57d6a9c422067f9bc6956cd597b3a73beefd",
+          "engine_log_sha256": "f15da10e92d432e8576027eefdbf57d6a9c422067f9bc6956cd597b3a73beefd",
+          "execution": "fresh"
+        },
+        "food_growth": {
+          "checks": 2202,
+          "report_sha256": "e8a2376d0a381cfa51dd3b653eb4c0a3e7f86b2ca1aff6b1352794d9cb87f416",
+          "log_sha256": "8dfe45ea02c0e49f596157f3e34c4addefdb57ecbb7cdf710a7a7f6adb1e1a1a",
+          "engine_log_sha256": "8dfe45ea02c0e49f596157f3e34c4addefdb57ecbb7cdf710a7a7f6adb1e1a1a",
+          "execution": "fresh"
+        },
+        "food_growth_review": {
+          "checks": 1476,
+          "report_sha256": "bd84198a769af2557f62e4f31031f0900b9f4d9eeb9064c81799034634f7acc6",
+          "log_sha256": "fb6f1d4254d557a6cb03d0dc67bb784b116d5479c2f98fc2214885343d5dd594",
+          "engine_log_sha256": "fb6f1d4254d557a6cb03d0dc67bb784b116d5479c2f98fc2214885343d5dd594",
+          "execution": "fresh"
+        },
+        "rain_admission": {
+          "checks": 71,
+          "report_sha256": "b8aceecd76fb09c904509fde0a915b75012ddd3aab202410081947f331bafabe",
+          "log_sha256": "3e13c9248b77ebb912e3fda16c41adb231cca51266dfdd943e381bb6009cc9e6",
+          "engine_log_sha256": "3e13c9248b77ebb912e3fda16c41adb231cca51266dfdd943e381bb6009cc9e6",
+          "execution": "fresh"
+        },
+        "rain_admission_review": {
+          "checks": 101,
+          "report_sha256": "43c19c5ccba8247452ba82e0768749350b75fa18dad6746db89f9c47aa9818cb",
+          "log_sha256": "d5ebfdf7c35fcbfe7d19e24ed7b0b8024f9970ff59930f66e37b45656bc9357d",
+          "engine_log_sha256": "d5ebfdf7c35fcbfe7d19e24ed7b0b8024f9970ff59930f66e37b45656bc9357d",
+          "execution": "fresh"
+        },
+        "rain_support": {
+          "checks": 102,
+          "report_sha256": "3ab721241d4392924d4d566cb079695dfefc0b71ac22a10f8b5def2481d7e191",
+          "log_sha256": "6d55cb7029dcfedbfe39a2a9fe7c7609c56d3604bc61ecd661f59b6fc24a3552",
+          "engine_log_sha256": "6d55cb7029dcfedbfe39a2a9fe7c7609c56d3604bc61ecd661f59b6fc24a3552",
+          "execution": "fresh"
+        }
+      }
+    },
+    "package": {
+      "suite_count": 85,
+      "actual_total": 67170,
+      "reports": {
+        "release_info": {
+          "checks": 37,
+          "report_sha256": "b7873e24b4f5b451444d6c8617f3e5b0ea6c8fd0ce83bc3cd7eea4bafa0cb681",
+          "log_sha256": "42d8294c0de5954113b08fa609cf959105f9efb01a2f3f28896edef57de45904",
+          "engine_log_sha256": "42d8294c0de5954113b08fa609cf959105f9efb01a2f3f28896edef57de45904",
+          "execution": "fresh"
+        },
+        "native_polish": {
+          "checks": 267,
+          "report_sha256": "af784f2426c5d42ac1f69f64d20b555801abb5d9d5b3b3bd20e26a54b7dcca2a",
+          "log_sha256": "dab6e78cf14e6dd6bb603b11cf57e3a718751a888e57dd01cfd658444f4cb188",
+          "engine_log_sha256": "dab6e78cf14e6dd6bb603b11cf57e3a718751a888e57dd01cfd658444f4cb188",
+          "execution": "fresh"
+        },
+        "viewport_layout": {
+          "checks": 41,
+          "report_sha256": "1fd08e01babdf3c1864623c050acaba1fdf8440b71b57636afacdab9ebcf37a6",
+          "log_sha256": "651f2240215f8062c35d0dd463fdb0ff33927e2034a08eb162d1839819f19dd2",
+          "engine_log_sha256": "651f2240215f8062c35d0dd463fdb0ff33927e2034a08eb162d1839819f19dd2",
+          "execution": "fresh"
+        },
+        "application_lifecycle": {
+          "checks": 70,
+          "report_sha256": "551f6287996bfcba351c7015315a60262d69ba075b76b6758889bc2a05f56c58",
+          "log_sha256": "9a59fb4ae3046ea57a44d5f0462cc1b61ff6b5ace0be9fc4fe8c056b18377601",
+          "engine_log_sha256": "9a59fb4ae3046ea57a44d5f0462cc1b61ff6b5ace0be9fc4fe8c056b18377601",
+          "execution": "fresh"
+        },
+        "scene_qa": {
+          "checks": 765,
+          "report_sha256": "145ad89bed5701592258949010c321d1b2dcb8882faa9d4f5e750fc1ff1b1bdc",
+          "log_sha256": "35c6aa92a3677eba149e3c6c747bd06803b68c9b81659f41a0b0d0cec8b16205",
+          "engine_log_sha256": "35c6aa92a3677eba149e3c6c747bd06803b68c9b81659f41a0b0d0cec8b16205",
+          "execution": "fresh"
+        },
+        "street_prop_qa": {
+          "checks": 835,
+          "report_sha256": "44689e7f1e3d2e978c15c9731f1b092ed37894f7f04476e583cab980df2dd056",
+          "log_sha256": "d09e746829b04216173f3ff6b18b421914ee426df3710a8d4dfaf681c8061af4",
+          "engine_log_sha256": "d09e746829b04216173f3ff6b18b421914ee426df3710a8d4dfaf681c8061af4",
+          "execution": "fresh"
+        },
+        "claim_recovery": {
+          "checks": 10,
+          "report_sha256": "40ece0877feab7a0154c80f0c834d1bccd1e9412940803995361ee15343564c3",
+          "log_sha256": "86afcc6d81bbc02fea8e7f4ef1fe8aeb51cfd3a981a3d315842d9e3137a50a62",
+          "engine_log_sha256": "86afcc6d81bbc02fea8e7f4ef1fe8aeb51cfd3a981a3d315842d9e3137a50a62",
+          "execution": "fresh"
+        },
+        "full_city_qa": {
+          "checks": 1539,
+          "report_sha256": "feed022b5a4a10d7eb392848d731a643e523fa768cffe43fd5c451ec175ab365",
+          "log_sha256": "a3e4ffdf3c6ab8b6792d9be17695f344b19c1506b077439edc8fcf7d1ad2d967",
+          "engine_log_sha256": "a3e4ffdf3c6ab8b6792d9be17695f344b19c1506b077439edc8fcf7d1ad2d967",
+          "execution": "fresh"
+        },
+        "skin_collection": {
+          "checks": 374,
+          "report_sha256": "37f0e55a5973b161a5d73d019785b8519fbe1265481d1fa3ee8ad5d5a7e6b88a",
+          "log_sha256": "d0f075cb0b56512ec3a0b25c5b47d875ecf29e96fe46a637a9142e562c9f87d9",
+          "engine_log_sha256": "d0f075cb0b56512ec3a0b25c5b47d875ecf29e96fe46a637a9142e562c9f87d9",
+          "execution": "fresh"
+        },
+        "skin_fx": {
+          "checks": 414,
+          "report_sha256": "953b6528ff7187d86b71ed6634ac0401db98a21e16f8ab4eee91245c7b6db6b0",
+          "log_sha256": "f917988f28f9bd9411abceead63590135d74651b6175ae119b72fcac01c1c666",
+          "engine_log_sha256": "f917988f28f9bd9411abceead63590135d74651b6175ae119b72fcac01c1c666",
+          "execution": "fresh"
+        },
+        "title_navigation": {
+          "checks": 37,
+          "report_sha256": "8c830d19084cbda14a90a495de8ac85601c4d7459bc1167e3bac14e598abc11f",
+          "log_sha256": "30d308dcf743492385236b562f2954ff9333fa2bd339aac73386818d767f827d",
+          "engine_log_sha256": "30d308dcf743492385236b562f2954ff9333fa2bd339aac73386818d767f827d",
+          "execution": "fresh"
+        },
+        "ui_redesign": {
+          "checks": 1843,
+          "report_sha256": "65d25671b94dcc67e8f88c9db116c3beb837d93dc83389045dbbe545cd7a442c",
+          "log_sha256": "de41ed3703386b9deec54f7c3a0cd5170721bbdbf7dce543d7799e50d7f075a4",
+          "engine_log_sha256": "de41ed3703386b9deec54f7c3a0cd5170721bbdbf7dce543d7799e50d7f075a4",
+          "execution": "fresh"
+        },
+        "map_preview": {
+          "checks": 79,
+          "report_sha256": "43922b3ff364b3d0820f9426d2b7aa86f59f511387211f4a877ebdb9524503f4",
+          "log_sha256": "68db364fdf50c54da6e89aa8fb4f27fc56819dea1e7d4c3bb2d6327cd73ca52f",
+          "engine_log_sha256": "68db364fdf50c54da6e89aa8fb4f27fc56819dea1e7d4c3bb2d6327cd73ca52f",
+          "execution": "fresh"
+        },
+        "food_preview": {
+          "checks": 483,
+          "report_sha256": "7a48248e4cf3d80878cb3e39d4acc0cb8c1346329a5ff117cdb94ea795be5f0a",
+          "log_sha256": "1141b891545e6fba216df6113b1a6bf389f1eca0065bc5d835f0a223da86fb93",
+          "engine_log_sha256": "1141b891545e6fba216df6113b1a6bf389f1eca0065bc5d835f0a223da86fb93",
+          "execution": "fresh"
+        },
+        "map_preview_review": {
+          "checks": 716,
+          "report_sha256": "8bcf042c07d975747ad3b5a8737fff6e9a091cae56c13dd66631fbc697b746b4",
+          "log_sha256": "f5dde22ce5d688a8e081a6c4bd5806ba434a8f7b002c4c79e844a3dbfc81052f",
+          "engine_log_sha256": "f5dde22ce5d688a8e081a6c4bd5806ba434a8f7b002c4c79e844a3dbfc81052f",
+          "execution": "fresh"
+        },
+        "coin_skins": {
+          "checks": 412,
+          "report_sha256": "14d37288dd194486c458fcbbe275623d4c93bfc031413a0f94e424aef33e1766",
+          "log_sha256": "6b42a8cd08d475460d61a71243b07d993621d296ee853082fe80e3c51375943e",
+          "engine_log_sha256": "6b42a8cd08d475460d61a71243b07d993621d296ee853082fe80e3c51375943e",
+          "execution": "fresh"
+        },
+        "skin_skill": {
+          "checks": 130,
+          "report_sha256": "78a71fddbcf3902967518e61b7331a2d830cbd09122ab3915307b53e1ae12340",
+          "log_sha256": "6a396b5c7b3879f6549af0e4de6a9d690d89d408a4cc872e910540661b8046c0",
+          "engine_log_sha256": "6a396b5c7b3879f6549af0e4de6a9d690d89d408a4cc872e910540661b8046c0",
+          "execution": "fresh"
+        },
+        "snack_city": {
+          "checks": 80,
+          "report_sha256": "b17d21412e5df84d63d366be0e22daf06753e55f2ccc5f589677500ca300c34e",
+          "log_sha256": "ce2c04cfacb9fb1ffb99cafc4ace3194a6005cd9dfc4bf172e4f0df91b71df1f",
+          "engine_log_sha256": "ce2c04cfacb9fb1ffb99cafc4ace3194a6005cd9dfc4bf172e4f0df91b71df1f",
+          "execution": "fresh"
+        },
+        "food_city_density": {
+          "checks": 1667,
+          "report_sha256": "aaa5c67c44a47fb0ccc95f8155e239dc973b27df02725c9afd2289b01d906984",
+          "log_sha256": "4a796fbb2bb5ca302673afe318b082417b08b557d6924ad257eca8af447da97e",
+          "engine_log_sha256": "4a796fbb2bb5ca302673afe318b082417b08b557d6924ad257eca8af447da97e",
+          "execution": "fresh"
+        },
+        "food_round": {
+          "checks": 2,
+          "report_sha256": "0f40810f4f8e88ae2e39799cc25ab45bf048a6cad1157175ad35fdea26183ec2",
+          "log_sha256": "68b8da94594425a34fae2fa11976ee89ec06cbeb90411732f1ca6f28a6391cea",
+          "engine_log_sha256": "68b8da94594425a34fae2fa11976ee89ec06cbeb90411732f1ca6f28a6391cea",
+          "execution": "fresh"
+        },
+        "food_finish": {
+          "checks": 136,
+          "report_sha256": "19a77333469ac098db65590d3a68d15b7d9a687676805c325cbb81c6e303c921",
+          "log_sha256": "12823b6acdb56f03556b2f2705b204902927834267a62e78d7ed5c3eb91d6361",
+          "engine_log_sha256": "12823b6acdb56f03556b2f2705b204902927834267a62e78d7ed5c3eb91d6361",
+          "execution": "fresh"
+        },
+        "food_neighborhoods": {
+          "checks": 323,
+          "report_sha256": "55cb1e622614949a550fca7770be2034265176d3e4e5a6ce4763e682ce3ffb50",
+          "log_sha256": "24d62ee24a601d0b4d27c78c3a91301efeb71eeed2dfee684362d34cff5a6e67",
+          "engine_log_sha256": "24d62ee24a601d0b4d27c78c3a91301efeb71eeed2dfee684362d34cff5a6e67",
+          "execution": "fresh"
+        },
+        "mobile_maps": {
+          "checks": 29,
+          "report_sha256": "51799f1c11f073bdc922d3b7e1eaba69dad4145207c5e3ecb5d71a78ad665f6d",
+          "log_sha256": "6d63f37b36a519235dc8c39bba162d91c678a4822cde2065111064036d51ed36",
+          "engine_log_sha256": "6d63f37b36a519235dc8c39bba162d91c678a4822cde2065111064036d51ed36",
+          "execution": "fresh"
+        },
+        "performance": {
+          "checks": 271,
+          "report_sha256": "2d6049ae5b5305e70661d04b21af47ed3ce0dffc6adc60cf5c5b0577bdbb98a9",
+          "log_sha256": "7dfbd744fd2f797d599ae07cd712a29e6a6f815aebaa9e95c5bbe66ec5c0085b",
+          "engine_log_sha256": "7dfbd744fd2f797d599ae07cd712a29e6a6f815aebaa9e95c5bbe66ec5c0085b",
+          "execution": "fresh"
+        },
+        "portrait": {
+          "checks": 30,
+          "report_sha256": "4dccef10427214e507e888fe041c982b6aab14c7f5f4076e5aff0e4964b5d58e",
+          "log_sha256": "3107b5c66a0c4b1e442b42e9f0d952d2ef950eca6237ac00fad3d22bf51b556a",
+          "engine_log_sha256": "3107b5c66a0c4b1e442b42e9f0d952d2ef950eca6237ac00fad3d22bf51b556a",
+          "execution": "fresh"
+        },
+        "progression": {
+          "checks": 15,
+          "report_sha256": "826506c7a4c6de705045509594ea9bfbefff2d421abdb4ecdb699e3beee0406c",
+          "log_sha256": "84e8639ce48ce4b158262e317c896161e50cf5586c8a8e483361605f10e63d01",
+          "engine_log_sha256": "84e8639ce48ce4b158262e317c896161e50cf5586c8a8e483361605f10e63d01",
+          "execution": "fresh"
+        },
+        "store": {
+          "checks": 17,
+          "report_sha256": "e1aa7235f6628e184b23513498dc50e2fc99e2dd425d26bf631c282784bd3b8d",
+          "log_sha256": "0232bf4883a757d0c05af765b02ccc103c959d4b204f03eb80d3d213a40ac02c",
+          "engine_log_sha256": "0232bf4883a757d0c05af765b02ccc103c959d4b204f03eb80d3d213a40ac02c",
+          "execution": "fresh"
+        },
+        "city_motion": {
+          "checks": 22,
+          "report_sha256": "87f89607192fd5d764c6952fa939c1c56a03d4762de1a0d7588ac32b26462a4b",
+          "log_sha256": "059c0cefd939205c02bb3d3df13bac6356a93d82adfe2c2a9fb1b4624f7a96f5",
+          "engine_log_sha256": "059c0cefd939205c02bb3d3df13bac6356a93d82adfe2c2a9fb1b4624f7a96f5",
+          "execution": "fresh"
+        },
+        "city_districts": {
+          "checks": 2718,
+          "report_sha256": "c4bca7bb73df17002b5673d65859924aeffbf3540f05d708ee4cf65461734e5a",
+          "log_sha256": "1de51335b5f5badd26fdb2aafcaabad43da8f4cb80ab00fe7cfeb211255395d2",
+          "engine_log_sha256": "1de51335b5f5badd26fdb2aafcaabad43da8f4cb80ab00fe7cfeb211255395d2",
+          "execution": "fresh"
+        },
+        "skin_catalog": {
+          "checks": 897,
+          "report_sha256": "85121507a330d7e91ae7b92bb40320cefb524c248e55e667ef54f73f81a1be28",
+          "log_sha256": "253d7b95c4c426d928a727f43589f92879fa4e18163b1ac6980dea7c68de020d",
+          "engine_log_sha256": "253d7b95c4c426d928a727f43589f92879fa4e18163b1ac6980dea7c68de020d",
+          "execution": "fresh"
+        },
+        "food_rain_continuity": {
+          "checks": 38,
+          "report_sha256": "ea79c755c04877701ea14704f74642f4678fae3d31869ed8969ec099ab8c0fb0",
+          "log_sha256": "d19e725e935508c30d72d88d0547520aa55f34f740e6ad96ecb551a2e8330b71",
+          "engine_log_sha256": "d19e725e935508c30d72d88d0547520aa55f34f740e6ad96ecb551a2e8330b71",
+          "execution": "fresh"
+        },
+        "food_city_revision": {
+          "checks": 135,
+          "report_sha256": "2be8254c809f5317862affe325d086daef13e34a2473076c544b89772e77823d",
+          "log_sha256": "6fa1b1a70ea49de49f8b59ec1561cfc246782d02d82d5a737bacdb3f10c3d7b0",
+          "engine_log_sha256": "6fa1b1a70ea49de49f8b59ec1561cfc246782d02d82d5a737bacdb3f10c3d7b0",
+          "execution": "fresh"
+        },
+        "food_impact": {
+          "checks": 256,
+          "report_sha256": "ef8eab33a73d56c31f27d0d89b7f151fc31cab41e867a09c8023b110c0b40e04",
+          "log_sha256": "d07a1188639b45f236d9c78fe47dad5494cdae77fd54dada2e4140e323e8836e",
+          "engine_log_sha256": "d07a1188639b45f236d9c78fe47dad5494cdae77fd54dada2e4140e323e8836e",
+          "execution": "fresh"
+        },
+        "ui_collection_review": {
+          "checks": 1905,
+          "report_sha256": "b679a3a0a304dadc364f65783438ba7dce4e7910241ccb8bffa46bbcef7719f1",
+          "log_sha256": "7c454b126b1c7509233cd2b012f3c5f9172a16857c75ae738b4c741e5d45a476",
+          "engine_log_sha256": "7c454b126b1c7509233cd2b012f3c5f9172a16857c75ae738b4c741e5d45a476",
+          "execution": "fresh"
+        },
+        "food_goals_review": {
+          "checks": 37,
+          "report_sha256": "61c85b33a1d595eb96b87145472dc777ddb8b8c3fe0984bc0b99388893ac54a8",
+          "log_sha256": "68ba4f328da3ca2d45ac4523f9ee72738cb5c66b212854aff4adcc5466c0eb74",
+          "engine_log_sha256": "68ba4f328da3ca2d45ac4523f9ee72738cb5c66b212854aff4adcc5466c0eb74",
+          "execution": "fresh"
+        },
+        "progression_review": {
+          "checks": 10,
+          "report_sha256": "6dc6503c61de600c097aa816ba0602db34aed624ef3129ccc17311fff9f5e052",
+          "log_sha256": "05180f1a3009deed8481603cfc86b79c8db3241604a8cd39b7062db198df84d8",
+          "engine_log_sha256": "05180f1a3009deed8481603cfc86b79c8db3241604a8cd39b7062db198df84d8",
+          "execution": "fresh"
+        },
+        "rain_review": {
+          "checks": 9,
+          "report_sha256": "5b3b0584f49837364dfb0a149d33e22545ab54d758d9e06f4a51e969d181211b",
+          "log_sha256": "41171ef015de5094d7956467a849420b751f825cbbcff462a8ad82506da2a019",
+          "engine_log_sha256": "41171ef015de5094d7956467a849420b751f825cbbcff462a8ad82506da2a019",
+          "execution": "fresh"
+        },
+        "crowd_review": {
+          "checks": 17,
+          "report_sha256": "05bad7c30f67bc71e1e6be5c1a319073e6479dea976495803be40becf8a691e7",
+          "log_sha256": "d312f1fb9ecd72a3e3e5effde0a888f2d95c82d4447a251f1f165c2b322c2d23",
+          "engine_log_sha256": "d312f1fb9ecd72a3e3e5effde0a888f2d95c82d4447a251f1f165c2b322c2d23",
+          "execution": "fresh"
+        },
+        "district_review": {
+          "checks": 4,
+          "report_sha256": "18dfe00ac3f026e9826ffaae8f417e1adb4efbf361fc08b64baa879f2bcc0faa",
+          "log_sha256": "3b3c624d719d7934d20b288c1d04fa5e0e51a631eba3534b3707116af0f99d13",
+          "engine_log_sha256": "3b3c624d719d7934d20b288c1d04fa5e0e51a631eba3534b3707116af0f99d13",
+          "execution": "fresh"
+        },
+        "food_revision_review": {
+          "checks": 11,
+          "report_sha256": "efade5b84b2f57fc074f2179b3551ea08233a5ef76675cc0e5466c0eac91b42e",
+          "log_sha256": "a9f1c9e032baa637b8bef44a8e02d86b82f709451a2d7721b0495702524d4e70",
+          "engine_log_sha256": "a9f1c9e032baa637b8bef44a8e02d86b82f709451a2d7721b0495702524d4e70",
+          "execution": "fresh"
+        },
+        "skin_catalog_review": {
+          "checks": 206,
+          "report_sha256": "af3438dc847c76198ac3579d1ec36821f946533e52217131351ff1f94870f082",
+          "log_sha256": "0d7645e2c9732e0996e3ff90d0f100409a41d468fcf2e8c39dedce17750d1f45",
+          "engine_log_sha256": "0d7645e2c9732e0996e3ff90d0f100409a41d468fcf2e8c39dedce17750d1f45",
+          "execution": "fresh"
+        },
+        "mobile_thumbnail": {
+          "checks": 3847,
+          "report_sha256": "efd6c88e93391ea33a253f30538cc90499070e917a67ead9cd92acafe2e2898a",
+          "log_sha256": "894bcdc2d94d61187a0c37ee9568d3711815a165f6aa18204885fb761dccb18c",
+          "engine_log_sha256": "894bcdc2d94d61187a0c37ee9568d3711815a165f6aa18204885fb761dccb18c",
+          "execution": "fresh"
+        },
+        "procedural_filtering": {
+          "checks": 27,
+          "report_sha256": "f5bbf36265f7dea40e078c0d69560064f3fd367a5b7fc08def0422b5d517d32e",
+          "log_sha256": "c52054c45a0e84a240041a70ec7cbc6fb359f8ca055dea2937d976bdbc8c76ba",
+          "engine_log_sha256": "c52054c45a0e84a240041a70ec7cbc6fb359f8ca055dea2937d976bdbc8c76ba",
+          "execution": "fresh"
+        },
+        "selective_reveal": {
+          "checks": 75,
+          "report_sha256": "4c7756bad88b2201ba38b1e5392d04d81134cdeac4e6087ffd6850a47574f447",
+          "log_sha256": "763fe96a93f610d5cd1fd877e79d582a9f1b29810edd301502955e6a3d154a1f",
+          "engine_log_sha256": "763fe96a93f610d5cd1fd877e79d582a9f1b29810edd301502955e6a3d154a1f",
+          "execution": "fresh"
+        },
+        "selective_reveal_review": {
+          "checks": 491,
+          "report_sha256": "4f914d8d693331b280d175df303abfc80b9cdd9c771810e32f7385bb7501b749",
+          "log_sha256": "15c157821dce002e9f636db0db3992fff9f8e1a924ec9e77fe8671fb39dec399",
+          "engine_log_sha256": "15c157821dce002e9f636db0db3992fff9f8e1a924ec9e77fe8671fb39dec399",
+          "execution": "fresh"
+        },
+        "building_only_reveal_review": {
+          "checks": 213,
+          "report_sha256": "9b4d0ef17237a39746d73cd213af961d5c7ec9680d359f9dbcefef6a693fe2e4",
+          "log_sha256": "628a235dff67fb6e2f5e1d91e6bbe7b929a87180baa4574d9ff87adac29523c8",
+          "engine_log_sha256": "628a235dff67fb6e2f5e1d91e6bbe7b929a87180baa4574d9ff87adac29523c8",
+          "execution": "fresh"
+        },
+        "building_surface_artifacts": {
+          "checks": 1438,
+          "report_sha256": "575ed2bc549c5380e90621a14225a2a921395bf3c05d12010f633ca85ff3844f",
+          "log_sha256": "ab7f4efd06bbab948f83c63ed7640d342dace4008810e4b5b6697a5d0fdf5dac",
+          "engine_log_sha256": "ab7f4efd06bbab948f83c63ed7640d342dace4008810e4b5b6697a5d0fdf5dac",
+          "execution": "fresh"
+        },
+        "growth_extension": {
+          "checks": 1978,
+          "report_sha256": "c3837ba7ec3de07600faf8a3d017a65ca0db7c8ead4b56d92134e36ff1b0fdc9",
+          "log_sha256": "aef8672df345b0439328f6d3a0658830ea5c21885ce0bce0d9676c3a70dc7291",
+          "engine_log_sha256": "aef8672df345b0439328f6d3a0658830ea5c21885ce0bce0d9676c3a70dc7291",
+          "execution": "fresh"
+        },
+        "rival_combat": {
+          "checks": 58,
+          "report_sha256": "64b21293c74bb0513812dac3e5d57b6f869ed8a7e9b44a0b439c535a26889a8d",
+          "log_sha256": "dd42a49134ab6750d8f8c54cb1d390f132f6d076f4694aac9b1410f88b9bf2f5",
+          "engine_log_sha256": "dd42a49134ab6750d8f8c54cb1d390f132f6d076f4694aac9b1410f88b9bf2f5",
+          "execution": "fresh"
+        },
+        "large_growth_world": {
+          "checks": 258,
+          "report_sha256": "d32ea689d2ab7cbc7ac92f855062ccf4fb3d9ff6d90739019dff41194993dfc2",
+          "log_sha256": "f0c53d01fd94bed8ff1b4288ad01e551705666de25f691d3238c06f789a72b86",
+          "engine_log_sha256": "f0c53d01fd94bed8ff1b4288ad01e551705666de25f691d3238c06f789a72b86",
+          "execution": "fresh"
+        },
+        "pedestrian_swallow_review": {
+          "checks": 120,
+          "report_sha256": "6b696023b84f58a714e852c1d6cdbaa9a963d2943d2d285478fb7d6906a2869f",
+          "log_sha256": "d12bea2c3da9c4ea54e11c920842f823c4ff7746cf9f338f5e91304efdfe23da",
+          "engine_log_sha256": "d12bea2c3da9c4ea54e11c920842f823c4ff7746cf9f338f5e91304efdfe23da",
+          "execution": "fresh"
+        },
+        "growth_rivals_review": {
+          "checks": 291,
+          "report_sha256": "74230da63dba57c73113f5d926e223bf5546a3a705503a4b3c5d3bcbdd775142",
+          "log_sha256": "d55e3f611bf9ab4fe7637f4c69b821ece75cd2287969a117640859202cdbd32c",
+          "engine_log_sha256": "d55e3f611bf9ab4fe7637f4c69b821ece75cd2287969a117640859202cdbd32c",
+          "execution": "fresh"
+        },
+        "growth_integration_review": {
+          "checks": 1606,
+          "report_sha256": "dfa94b16ad22e6bc4f7b15c996218aa71072f1fbd3b5ba120ba795fabf1249d7",
+          "log_sha256": "5633e13cb6ff15a8b11d987a5e61efde198a84c29baa3291615ad9f1454ecb37",
+          "engine_log_sha256": "5633e13cb6ff15a8b11d987a5e61efde198a84c29baa3291615ad9f1454ecb37",
+          "execution": "fresh"
+        },
+        "food_collision": {
+          "checks": 156,
+          "report_sha256": "e48bb513ea2b07113bd48d496238ad6731cffbcefb862ca3bf5675667a60a0f4",
+          "log_sha256": "d9ffe6cead51f2c22100ce8fcb659eec5135eb26246dd07a78af79ebecb81176",
+          "engine_log_sha256": "d9ffe6cead51f2c22100ce8fcb659eec5135eb26246dd07a78af79ebecb81176",
+          "execution": "fresh"
+        },
+        "food_collision_review": {
+          "checks": 18386,
+          "report_sha256": "e66db0d528fed000906fdcdf9a1658bfdf231d82f575f0cff4cce5618caf4366",
+          "log_sha256": "229a8903ec8300eea4186031978010ddb87d9785c024fd838da134d8bc8a17b9",
+          "engine_log_sha256": "229a8903ec8300eea4186031978010ddb87d9785c024fd838da134d8bc8a17b9",
+          "execution": "fresh"
+        },
+        "music": {
+          "checks": 129,
+          "report_sha256": "7c1ece3c7aa1f5847d4aa39dde1f961839cc121f19e0907e043f907e4f5ccf31",
+          "log_sha256": "e08494cbcf983c6b16d69961f6b53473562efa4921173777aa30cbda9e4c75e6",
+          "engine_log_sha256": "e08494cbcf983c6b16d69961f6b53473562efa4921173777aa30cbda9e4c75e6",
+          "execution": "fresh"
+        },
+        "music_review": {
+          "checks": 120,
+          "report_sha256": "f66b3e8b2e2c3bcc32542b78d3ac954928dd8189176db1da4fdd01929320b764",
+          "log_sha256": "8d2af1c2275f6221cf9799dc1915f0bd7f3bb26e593a153b49bd0379dee0a984",
+          "engine_log_sha256": "8d2af1c2275f6221cf9799dc1915f0bd7f3bb26e593a153b49bd0379dee0a984",
+          "execution": "fresh"
+        },
+        "shop_theme_review": {
+          "checks": 55,
+          "report_sha256": "998d243168163250ee32aa748af2c98fdd380d1b731a4a353de9c1a7c0a5fed2",
+          "log_sha256": "789ae108e441d90fb2017be9107b241a7034db1e00cfd0c9c586f390b732c1a6",
+          "engine_log_sha256": "789ae108e441d90fb2017be9107b241a7034db1e00cfd0c9c586f390b732c1a6",
+          "execution": "fresh"
+        },
+        "food_color": {
+          "checks": 55,
+          "report_sha256": "8e7a2fcb8993339ec1d775d234de60171b5065d9ac61a3265a25352111a3fd0a",
+          "log_sha256": "7a8fa72b8b9186c87258c25194d24a5f956762e5aa05f63e061a289b1d878796",
+          "engine_log_sha256": "7a8fa72b8b9186c87258c25194d24a5f956762e5aa05f63e061a289b1d878796",
+          "execution": "fresh"
+        },
+        "food_color_review": {
+          "checks": 1351,
+          "report_sha256": "91af5c6c4dbe3e35d4275ac50901055b318e1602300c33129cec64f56ae82e70",
+          "log_sha256": "1d46d9090db20899603dd77016ce344ba9c078c674776089b0e89de4aca84c81",
+          "engine_log_sha256": "1d46d9090db20899603dd77016ce344ba9c078c674776089b0e89de4aca84c81",
+          "execution": "fresh"
+        },
+        "skin_rarity": {
+          "checks": 556,
+          "report_sha256": "420027bd3f38d69628693fede9547fc76c53a1d5b6ebea0d7fcf82b218c1f6a6",
+          "log_sha256": "ce5f51d5a9eead508e3df61f55748c909661985d29cccdd978f16f9e7f1a993d",
+          "engine_log_sha256": "ce5f51d5a9eead508e3df61f55748c909661985d29cccdd978f16f9e7f1a993d",
+          "execution": "fresh"
+        },
+        "skin_rarity_review": {
+          "checks": 1555,
+          "report_sha256": "a073e6f7f3418ae6ba8443b97cb17b46340208ef4a99731ac1d2bda3271240f1",
+          "log_sha256": "c58790f0bdb7fb5e1617d6659e47c2d70a656de07f26fca8dac075daaf6a1697",
+          "engine_log_sha256": "c58790f0bdb7fb5e1617d6659e47c2d70a656de07f26fca8dac075daaf6a1697",
+          "execution": "fresh"
+        },
+        "world_expansion": {
+          "checks": 57,
+          "report_sha256": "58093c333970237d3b68cc9df6f87e414abfefb00a58899001c8969e28dde58b",
+          "log_sha256": "6dd474a0fe51c3626904f76a852bf20dbeba121ca307ae54d0c1dda54279524d",
+          "engine_log_sha256": "6dd474a0fe51c3626904f76a852bf20dbeba121ca307ae54d0c1dda54279524d",
+          "execution": "fresh"
+        },
+        "world_expansion_review": {
+          "checks": 284,
+          "report_sha256": "23be1d2acfadd84dabdb0d060da8b349c020024e1685e2289b2cef171576d712",
+          "log_sha256": "c302b6083d5dad5340b755e4af53eb1aaddb4c88e06d7e0c90af0015ae99ba7b",
+          "engine_log_sha256": "c302b6083d5dad5340b755e4af53eb1aaddb4c88e06d7e0c90af0015ae99ba7b",
+          "execution": "fresh"
+        },
+        "monetization_bridges": {
+          "checks": 116,
+          "report_sha256": "b30d336d9774722ea0ccc91bcf0a04a0911d4ce49703093059bf68051a374391",
+          "log_sha256": "35c3083e7389de313370cf8449fae758a809d9136dd9f35df1243120f4fd0bfe",
+          "engine_log_sha256": "35c3083e7389de313370cf8449fae758a809d9136dd9f35df1243120f4fd0bfe",
+          "execution": "fresh"
+        },
+        "economy_continuation": {
+          "checks": 120,
+          "report_sha256": "4ecadb1fba23ec40f75d6f8660989c747604d67eb7a11cea10bb6f9d8994e0ae",
+          "log_sha256": "30f84305fdc27abbf92bc82f48f0558b4a91134143762a47ad851ebdcc58e803",
+          "engine_log_sha256": "30f84305fdc27abbf92bc82f48f0558b4a91134143762a47ad851ebdcc58e803",
+          "execution": "fresh"
+        },
+        "diamond_boundary_review": {
+          "checks": 25,
+          "report_sha256": "924aacda3fc831c29f91377bfec5dc8c6ea8cee73311a9799c54f63ebce7deb7",
+          "log_sha256": "aa28228969ea6a6b4a06911e8dad0da0c8cd6fdaf51358b3b835afe424d02281",
+          "engine_log_sha256": "aa28228969ea6a6b4a06911e8dad0da0c8cd6fdaf51358b3b835afe424d02281",
+          "execution": "fresh"
+        },
+        "retention": {
+          "checks": 67,
+          "report_sha256": "d710e1d32f2f5a5248f370cb09fe365396214a8a913b4261d4d1d82cc0558fa3",
+          "log_sha256": "3f91a3ca3027867bda41347c9ccf9a9f9aceff489e9f98695e463f55971e892f",
+          "engine_log_sha256": "3f91a3ca3027867bda41347c9ccf9a9f9aceff489e9f98695e463f55971e892f",
+          "execution": "fresh"
+        },
+        "retention_review": {
+          "checks": 590,
+          "report_sha256": "61cafc4bdf65b3178f2c41ee0e63fe0e08bd5fe3210da55bd884f92bd89c9f73",
+          "log_sha256": "f81632c9eddf43c9f8ad4988054a08da10eb4902708caba04865dc96e1409308",
+          "engine_log_sha256": "f81632c9eddf43c9f8ad4988054a08da10eb4902708caba04865dc96e1409308",
+          "execution": "fresh"
+        },
+        "retention_ui_review": {
+          "checks": 8188,
+          "report_sha256": "39160ac80e5f46eb204c68c3c31ae0ab421fcd5a0a49653f444cab76dd64784c",
+          "log_sha256": "11401b6548c891b3e582c86d64199a08b9fef037ef69285d9466d1cef533cc6a",
+          "engine_log_sha256": "11401b6548c891b3e582c86d64199a08b9fef037ef69285d9466d1cef533cc6a",
+          "execution": "fresh"
+        },
+        "perimeter_frontage": {
+          "checks": 631,
+          "report_sha256": "57cf905a9c968f334dc52bb53b91396e40b9b5715a188fbe9caa1b26bcf6c955",
+          "log_sha256": "cecb9726d84b95cddda5133f659ca0c32702237b5543411ce4923e3d21410966",
+          "engine_log_sha256": "cecb9726d84b95cddda5133f659ca0c32702237b5543411ce4923e3d21410966",
+          "execution": "fresh"
+        },
+        "food_extension_collision_review": {
+          "checks": 199,
+          "report_sha256": "f5a2c353f4afc96da7c756aa86563279dcdc2074df40ab35e477b326456bdee9",
+          "log_sha256": "cf8f891f28096b47bdeb22e1fb7555d17b0ed7d83b6d66b52501a67c8f865554",
+          "engine_log_sha256": "cf8f891f28096b47bdeb22e1fb7555d17b0ed7d83b6d66b52501a67c8f865554",
+          "execution": "fresh"
+        },
+        "train": {
+          "checks": 220,
+          "report_sha256": "92c3be34301e1d5e5d405d63f0fa990db90dd2deaafb0c53a121fac609a062c3",
+          "log_sha256": "8cf86b7041d867a3a2022a6a9e181c47c8a4f284a712077188f9b98e8ee76d93",
+          "engine_log_sha256": "8cf86b7041d867a3a2022a6a9e181c47c8a4f284a712077188f9b98e8ee76d93",
+          "execution": "fresh"
+        },
+        "train_surface": {
+          "checks": 161,
+          "report_sha256": "476f04d0d316dcf43aa0ad1f8e1bdab905a162a4c8bc798814bd6460f1522eff",
+          "log_sha256": "7ca0a5cd5299a590bc6dab26d69bd3e0e30d602607c249e8f33bd0e94a3386d3",
+          "engine_log_sha256": "7ca0a5cd5299a590bc6dab26d69bd3e0e30d602607c249e8f33bd0e94a3386d3",
+          "execution": "fresh"
+        },
+        "train_review": {
+          "checks": 388,
+          "report_sha256": "2a57e2e006dc903ead5508fe00c898f78d36ab5bf666a3120b09a46165c47d07",
+          "log_sha256": "46acf79f89863d9b7006a04d22b7445c8c38096d140e04c49204424def37b284",
+          "engine_log_sha256": "46acf79f89863d9b7006a04d22b7445c8c38096d140e04c49204424def37b284",
+          "execution": "fresh"
+        },
+        "train_surface_review": {
+          "checks": 1121,
+          "report_sha256": "b06ce79eb9c896ebe3056b860b0c4d1aa2b29cbf44da30151331909a91bd67c1",
+          "log_sha256": "301659de4a0a50eeaf9ca87764d4bf5fa30d351ab716b951cfeba549c6b946f6",
+          "engine_log_sha256": "301659de4a0a50eeaf9ca87764d4bf5fa30d351ab716b951cfeba549c6b946f6",
+          "execution": "fresh"
+        },
+        "boost": {
+          "checks": 55,
+          "report_sha256": "bb568f787dd8b711fae02d28f5fa3f9b4af7dd86128f6eeb59fe50a25c555921",
+          "log_sha256": "4137bd853794243f6cf59036fef1c5a549381737f7c6ca2eabca3656da2a3ee3",
+          "engine_log_sha256": "4137bd853794243f6cf59036fef1c5a549381737f7c6ca2eabca3656da2a3ee3",
+          "execution": "fresh"
+        },
+        "boost_review": {
+          "checks": 98,
+          "report_sha256": "16017d45f52e8615aef80cef8e87519e675cd8df88a3f96cd5954b0cf6050318",
+          "log_sha256": "95f3ecb323945180b6ccdfcebace424e3d1ca16df12a55bee579799613c20e77",
+          "engine_log_sha256": "95f3ecb323945180b6ccdfcebace424e3d1ca16df12a55bee579799613c20e77",
+          "execution": "fresh"
+        },
+        "skin_polish": {
+          "checks": 486,
+          "report_sha256": "b3c7954611743ceb6a9a53c29c4330cfb8959b882c96aea97dd6eb1d4f15110b",
+          "log_sha256": "92b744653fd2d3f8179b3d4dc6fb6a282131ac7fb14fee1a7835b39e876d936a",
+          "engine_log_sha256": "92b744653fd2d3f8179b3d4dc6fb6a282131ac7fb14fee1a7835b39e876d936a",
+          "execution": "fresh"
+        },
+        "skin_polish_review": {
+          "checks": 760,
+          "report_sha256": "aec663d4399375eef3b1598de1b6c5f02aa6ddef220011f945bbe79d18ca8c07",
+          "log_sha256": "f15da10e92d432e8576027eefdbf57d6a9c422067f9bc6956cd597b3a73beefd",
+          "engine_log_sha256": "f15da10e92d432e8576027eefdbf57d6a9c422067f9bc6956cd597b3a73beefd",
+          "execution": "fresh"
+        },
+        "food_growth": {
+          "checks": 2202,
+          "report_sha256": "66e093e8a0b5964f956150055a938d104aab2406eab6bc4af8ce60eab6719843",
+          "log_sha256": "f1ce63cc6d707382e21d0a4e50cec9ac4c41c35f9f9839326f4247ba56a77a7b",
+          "engine_log_sha256": "f1ce63cc6d707382e21d0a4e50cec9ac4c41c35f9f9839326f4247ba56a77a7b",
+          "execution": "fresh"
+        },
+        "food_growth_review": {
+          "checks": 1476,
+          "report_sha256": "71858700ed631faa8c13cbea5b51fe4797bda40c6aa2b810430fb969f918f26f",
+          "log_sha256": "b2bc5029c0367d5293421a154bcf4726401aa2fae3257eb6e15f8e6b77fd71fc",
+          "engine_log_sha256": "b2bc5029c0367d5293421a154bcf4726401aa2fae3257eb6e15f8e6b77fd71fc",
+          "execution": "fresh"
+        },
+        "rain_admission": {
+          "checks": 71,
+          "report_sha256": "b8aceecd76fb09c904509fde0a915b75012ddd3aab202410081947f331bafabe",
+          "log_sha256": "3e13c9248b77ebb912e3fda16c41adb231cca51266dfdd943e381bb6009cc9e6",
+          "engine_log_sha256": "3e13c9248b77ebb912e3fda16c41adb231cca51266dfdd943e381bb6009cc9e6",
+          "execution": "fresh"
+        },
+        "rain_admission_review": {
+          "checks": 101,
+          "report_sha256": "43c19c5ccba8247452ba82e0768749350b75fa18dad6746db89f9c47aa9818cb",
+          "log_sha256": "d5ebfdf7c35fcbfe7d19e24ed7b0b8024f9970ff59930f66e37b45656bc9357d",
+          "engine_log_sha256": "d5ebfdf7c35fcbfe7d19e24ed7b0b8024f9970ff59930f66e37b45656bc9357d",
+          "execution": "fresh"
+        },
+        "rain_support": {
+          "checks": 102,
+          "report_sha256": "3ab721241d4392924d4d566cb079695dfefc0b71ac22a10f8b5def2481d7e191",
+          "log_sha256": "6d55cb7029dcfedbfe39a2a9fe7c7609c56d3604bc61ecd661f59b6fc24a3552",
+          "engine_log_sha256": "6d55cb7029dcfedbfe39a2a9fe7c7609c56d3604bc61ecd661f59b6fc24a3552",
+          "execution": "fresh"
+        }
+      }
+    }
+  },
+  "acceptance_execution": {
+    "path": "artifacts/collapse-surface-20261002/web-gate-02/acceptance-provenance.json",
+    "sha256": "e279bdfdcc962f8dd59b3655b1c77c4e97de5859be39a52e2c247b90d63d2b32",
+    "reused_source_suites": 51,
+    "fresh_source_suites": 34,
+    "fresh_package_suites": 85,
+    "receipt": {
+      "status": "complete_verified",
+      "at_utc": "2026-10-02T06:12:18.809204+00:00",
+      "version": "0.12.7",
+      "source_reused_suites": 51,
+      "source_fresh_suites": 34,
+      "package_reused_suites": 0,
+      "package_fresh_suites": 85,
+      "current_engine_sha256": "c7cccbf8fb143e34e02fd6521e09be2c2b974f0d5db080b19071c9c570718ccf",
+      "source_reused_names": [
+        "release_info",
+        "native_polish",
+        "viewport_layout",
+        "application_lifecycle",
+        "scene_qa",
+        "street_prop_qa",
+        "claim_recovery",
+        "full_city_qa",
+        "skin_collection",
+        "skin_fx",
+        "title_navigation",
+        "ui_redesign",
+        "map_preview",
+        "food_preview",
+        "map_preview_review",
+        "coin_skins",
+        "skin_skill",
+        "snack_city",
+        "food_city_density",
+        "food_round",
+        "food_finish",
+        "food_neighborhoods",
+        "mobile_maps",
+        "performance",
+        "portrait",
+        "progression",
+        "store",
+        "city_motion",
+        "city_districts",
+        "skin_catalog",
+        "food_rain_continuity",
+        "food_city_revision",
+        "food_impact",
+        "ui_collection_review",
+        "food_goals_review",
+        "progression_review",
+        "rain_review",
+        "crowd_review",
+        "district_review",
+        "food_revision_review",
+        "skin_catalog_review",
+        "mobile_thumbnail",
+        "procedural_filtering",
+        "selective_reveal",
+        "selective_reveal_review",
+        "building_only_reveal_review",
+        "building_surface_artifacts",
+        "growth_extension",
+        "rival_combat",
+        "large_growth_world",
+        "pedestrian_swallow_review"
+      ],
+      "source_fresh_names": [
+        "growth_rivals_review",
+        "growth_integration_review",
+        "food_collision",
+        "food_collision_review",
+        "music",
+        "music_review",
+        "shop_theme_review",
+        "food_color",
+        "food_color_review",
+        "skin_rarity",
+        "skin_rarity_review",
+        "world_expansion",
+        "world_expansion_review",
+        "monetization_bridges",
+        "economy_continuation",
+        "diamond_boundary_review",
+        "retention",
+        "retention_review",
+        "retention_ui_review",
+        "perimeter_frontage",
+        "food_extension_collision_review",
+        "train",
+        "train_surface",
+        "train_review",
+        "train_surface_review",
+        "boost",
+        "boost_review",
+        "skin_polish",
+        "skin_polish_review",
+        "food_growth",
+        "food_growth_review",
+        "rain_admission",
+        "rain_admission_review",
+        "rain_support"
+      ],
+      "package_fresh_names": [
+        "release_info",
+        "native_polish",
+        "viewport_layout",
+        "application_lifecycle",
+        "scene_qa",
+        "street_prop_qa",
+        "claim_recovery",
+        "full_city_qa",
+        "skin_collection",
+        "skin_fx",
+        "title_navigation",
+        "ui_redesign",
+        "map_preview",
+        "food_preview",
+        "map_preview_review",
+        "coin_skins",
+        "skin_skill",
+        "snack_city",
+        "food_city_density",
+        "food_round",
+        "food_finish",
+        "food_neighborhoods",
+        "mobile_maps",
+        "performance",
+        "portrait",
+        "progression",
+        "store",
+        "city_motion",
+        "city_districts",
+        "skin_catalog",
+        "food_rain_continuity",
+        "food_city_revision",
+        "food_impact",
+        "ui_collection_review",
+        "food_goals_review",
+        "progression_review",
+        "rain_review",
+        "crowd_review",
+        "district_review",
+        "food_revision_review",
+        "skin_catalog_review",
+        "mobile_thumbnail",
+        "procedural_filtering",
+        "selective_reveal",
+        "selective_reveal_review",
+        "building_only_reveal_review",
+        "building_surface_artifacts",
+        "growth_extension",
+        "rival_combat",
+        "large_growth_world",
+        "pedestrian_swallow_review",
+        "growth_rivals_review",
+        "growth_integration_review",
+        "food_collision",
+        "food_collision_review",
+        "music",
+        "music_review",
+        "shop_theme_review",
+        "food_color",
+        "food_color_review",
+        "skin_rarity",
+        "skin_rarity_review",
+        "world_expansion",
+        "world_expansion_review",
+        "monetization_bridges",
+        "economy_continuation",
+        "diamond_boundary_review",
+        "retention",
+        "retention_review",
+        "retention_ui_review",
+        "perimeter_frontage",
+        "food_extension_collision_review",
+        "train",
+        "train_surface",
+        "train_review",
+        "train_surface_review",
+        "boost",
+        "boost_review",
+        "skin_polish",
+        "skin_polish_review",
+        "food_growth",
+        "food_growth_review",
+        "rain_admission",
+        "rain_admission_review",
+        "rain_support"
+      ],
+      "source_report_reuse": {
+        "origin_version": "0.12.7",
+        "origin_provenance": "artifacts/collapse-surface-20261002/web-gate-01/acceptance-provenance.json",
+        "origin_provenance_sha256": "984b10c835ca22e425cef2d5c9a84596af323a26a3a8a6bb3c6793865217b6b2",
+        "origin_source_before": "build/collapse-surface-20261002/web-gate-01/source-before.json",
+        "origin_source_before_sha256": "b79236099e6bd4e2cc10297e058ea143356e83d35a4d81c20c7fa70bd767e7a1",
+        "current_source_before": "build/collapse-surface-20261002/web-gate-02/source-before.json",
+        "current_source_before_sha256": "8a63c2cc98904456bda05ce9277365c1ea0de5b4112e100e71924b0ead1f7379",
+        "changed_input": "tests/growth_rivals_review.gd",
+        "old_sha256": "a18c4c9f2af6657dccb1b6092aff19902fb0650b2051892de13b469f10ba5a80",
+        "current_sha256": "515879c3a34aedd7a418050356088ad343195c2e96d3fa4b9183339a6b392a4c",
+        "only_guarded_difference": true,
+        "unchanged_source_inputs": 809,
+        "unused_fixture_reference_scanned": [
+          "tests/release_info_acceptance.gd",
+          "tests/native_polish_acceptance.gd",
+          "tests/viewport_layout_acceptance.gd",
+          "tests/application_lifecycle_acceptance.gd",
+          "tests/scene_qa_acceptance.gd",
+          "tests/street_prop_qa_acceptance.gd",
+          "tests/claim_recovery_acceptance.gd",
+          "tests/full_city_qa_acceptance.gd",
+          "tests/skin_collection_acceptance.gd",
+          "tests/skin_fx_acceptance.gd",
+          "tests/title_navigation_acceptance.gd",
+          "tests/ui_redesign_acceptance.gd",
+          "tests/map_preview_acceptance.gd",
+          "tests/food_preview_acceptance.gd",
+          "tests/map_preview_review.gd",
+          "tests/coin_skins_acceptance.gd",
+          "tests/skin_skill_acceptance.gd",
+          "tests/snack_city_acceptance.gd",
+          "tests/food_city_density_acceptance.gd",
+          "tests/food_round_acceptance.gd",
+          "tests/food_finish_acceptance.gd",
+          "tests/food_neighborhoods_acceptance.gd",
+          "tests/mobile_maps_acceptance.gd",
+          "tests/performance_acceptance.gd",
+          "tests/portrait_acceptance.gd",
+          "tests/progression_acceptance.gd",
+          "tests/store_acceptance.gd",
+          "tests/city_motion_acceptance.gd",
+          "tests/city_districts_acceptance.gd",
+          "tests/skin_catalog_acceptance.gd",
+          "tests/food_rain_continuity_acceptance.gd",
+          "tests/food_city_revision_acceptance.gd",
+          "tests/food_impact_acceptance.gd",
+          "tests/review_ui_collection.gd",
+          "tests/review_food_goals.gd",
+          "tests/city_review_progression.gd",
+          "tests/city_review_food_rain.gd",
+          "tests/food_crowd_review.gd",
+          "tests/food_review_city_districts.gd",
+          "tests/city_review_food_revision.gd",
+          "tests/city_review_skin_catalog.gd",
+          "tests/mobile_thumbnail_acceptance.gd",
+          "tests/procedural_filtering_acceptance.gd",
+          "tests/selective_reveal_acceptance.gd",
+          "tests/selective_reveal_review.gd",
+          "tests/building_only_reveal_review.gd",
+          "tests/building_surface_artifacts_acceptance.gd",
+          "tests/growth_extension_acceptance.gd",
+          "tests/rival_combat_acceptance.gd",
+          "tests/large_growth_world_acceptance.gd",
+          "tests/pedestrian_swallow_review.gd",
+          "fidelity/ads_bridge.gd",
+          "fidelity/art.gd",
+          "fidelity/asphalt.gdshader",
+          "fidelity/audio.gd",
+          "fidelity/audio_bus_layout.tres",
+          "fidelity/catalog_city.gd",
+          "fidelity/cinder_flame.gdshader",
+          "fidelity/city_districts.gd",
+          "fidelity/commerce_bridge.gd",
+          "fidelity/cut_ground.gd",
+          "fidelity/device_qa.gd",
+          "fidelity/edible_train.gd",
+          "fidelity/facade.gdshader",
+          "fidelity/food_body.gd",
+          "fidelity/food_city.gd",
+          "fidelity/food_glaze.gdshader",
+          "fidelity/food_neighborhoods.gd",
+          "fidelity/food_preview.gd",
+          "fidelity/food_query.gd",
+          "fidelity/food_shapes.gd",
+          "fidelity/food_surface.gd",
+          "fidelity/fracture_cache.gd",
+          "fidelity/game.gd",
+          "fidelity/hole.gd",
+          "fidelity/hole_reveal.gd",
+          "fidelity/hole_reveal.gdshaderinc",
+          "fidelity/hole_reveal_standard.gdshader",
+          "fidelity/main.tscn",
+          "fidelity/map_catalog.gd",
+          "fidelity/mesh_batch.gd",
+          "fidelity/native_qa.gd",
+          "fidelity/palette.gdshader",
+          "fidelity/placement_grid.gd",
+          "fidelity/prop_collision_cache.gd",
+          "fidelity/release_info.gd",
+          "fidelity/rim_body.gd",
+          "fidelity/rival_burst.gd",
+          "fidelity/scene_audit.gd",
+          "fidelity/shaders/accretion.gdshader",
+          "fidelity/shaders/aurora.gdshader",
+          "fidelity/shaders/solid_skin.gdshader",
+          "fidelity/shaders/tide.gdshader",
+          "fidelity/skin_catalog.gd",
+          "fidelity/skin_draw.gd",
+          "fidelity/skin_motifs.gd",
+          "fidelity/skin_rarity.gd",
+          "fidelity/skin_sculpt.gd",
+          "fidelity/skin_visual.gd",
+          "fidelity/static_batch.gd",
+          "fidelity/street_layout.gd",
+          "fidelity/swallow_feedback.gd",
+          "fidelity/swallowable.gd",
+          "fidelity/train_assets.gd",
+          "fidelity/train_car.gd",
+          "fidelity/train_routes.gd",
+          "fidelity/train_track_surface.gd",
+          "fidelity/ui.gd",
+          "fidelity/viewport_layout.gd",
+          "fidelity/world_bounds.gd",
+          "scripts/city.gd",
+          "scripts/game.gd",
+          "scripts/hole.gd",
+          "scripts/hud.gd",
+          "scripts/minimap.gd",
+          "scripts/swallowable.gd",
+          "Scenes/hole.tscn",
+          "shaders/street.gdshader",
+          "shaders/windows.gdshader"
+        ],
+        "unused_fixture_reference_scan_verified": true,
+        "reports": {
+          "release_info": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-release_info.json",
+            "checks": 37,
+            "sha256": {
+              ".json": "b7873e24b4f5b451444d6c8617f3e5b0ea6c8fd0ce83bc3cd7eea4bafa0cb681",
+              ".log": "42d8294c0de5954113b08fa609cf959105f9efb01a2f3f28896edef57de45904",
+              ".engine.log": "42d8294c0de5954113b08fa609cf959105f9efb01a2f3f28896edef57de45904"
+            },
+            "execution": "verified_reuse"
+          },
+          "native_polish": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-native_polish.json",
+            "checks": 267,
+            "sha256": {
+              ".json": "af784f2426c5d42ac1f69f64d20b555801abb5d9d5b3b3bd20e26a54b7dcca2a",
+              ".log": "dab6e78cf14e6dd6bb603b11cf57e3a718751a888e57dd01cfd658444f4cb188",
+              ".engine.log": "dab6e78cf14e6dd6bb603b11cf57e3a718751a888e57dd01cfd658444f4cb188"
+            },
+            "execution": "verified_reuse"
+          },
+          "viewport_layout": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-viewport_layout.json",
+            "checks": 41,
+            "sha256": {
+              ".json": "1fd08e01babdf3c1864623c050acaba1fdf8440b71b57636afacdab9ebcf37a6",
+              ".log": "651f2240215f8062c35d0dd463fdb0ff33927e2034a08eb162d1839819f19dd2",
+              ".engine.log": "651f2240215f8062c35d0dd463fdb0ff33927e2034a08eb162d1839819f19dd2"
+            },
+            "execution": "verified_reuse"
+          },
+          "application_lifecycle": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-application_lifecycle.json",
+            "checks": 70,
+            "sha256": {
+              ".json": "551f6287996bfcba351c7015315a60262d69ba075b76b6758889bc2a05f56c58",
+              ".log": "9a59fb4ae3046ea57a44d5f0462cc1b61ff6b5ace0be9fc4fe8c056b18377601",
+              ".engine.log": "9a59fb4ae3046ea57a44d5f0462cc1b61ff6b5ace0be9fc4fe8c056b18377601"
+            },
+            "execution": "verified_reuse"
+          },
+          "scene_qa": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-scene_qa.json",
+            "checks": 765,
+            "sha256": {
+              ".json": "145ad89bed5701592258949010c321d1b2dcb8882faa9d4f5e750fc1ff1b1bdc",
+              ".log": "35c6aa92a3677eba149e3c6c747bd06803b68c9b81659f41a0b0d0cec8b16205",
+              ".engine.log": "35c6aa92a3677eba149e3c6c747bd06803b68c9b81659f41a0b0d0cec8b16205"
+            },
+            "execution": "verified_reuse"
+          },
+          "street_prop_qa": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-street_prop_qa.json",
+            "checks": 835,
+            "sha256": {
+              ".json": "44689e7f1e3d2e978c15c9731f1b092ed37894f7f04476e583cab980df2dd056",
+              ".log": "d09e746829b04216173f3ff6b18b421914ee426df3710a8d4dfaf681c8061af4",
+              ".engine.log": "d09e746829b04216173f3ff6b18b421914ee426df3710a8d4dfaf681c8061af4"
+            },
+            "execution": "verified_reuse"
+          },
+          "claim_recovery": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-claim_recovery.json",
+            "checks": 10,
+            "sha256": {
+              ".json": "40ece0877feab7a0154c80f0c834d1bccd1e9412940803995361ee15343564c3",
+              ".log": "86afcc6d81bbc02fea8e7f4ef1fe8aeb51cfd3a981a3d315842d9e3137a50a62",
+              ".engine.log": "86afcc6d81bbc02fea8e7f4ef1fe8aeb51cfd3a981a3d315842d9e3137a50a62"
+            },
+            "execution": "verified_reuse"
+          },
+          "full_city_qa": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-full_city_qa.json",
+            "checks": 1539,
+            "sha256": {
+              ".json": "feed022b5a4a10d7eb392848d731a643e523fa768cffe43fd5c451ec175ab365",
+              ".log": "a3e4ffdf3c6ab8b6792d9be17695f344b19c1506b077439edc8fcf7d1ad2d967",
+              ".engine.log": "a3e4ffdf3c6ab8b6792d9be17695f344b19c1506b077439edc8fcf7d1ad2d967"
+            },
+            "execution": "verified_reuse"
+          },
+          "skin_collection": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-skin_collection.json",
+            "checks": 374,
+            "sha256": {
+              ".json": "37f0e55a5973b161a5d73d019785b8519fbe1265481d1fa3ee8ad5d5a7e6b88a",
+              ".log": "d0f075cb0b56512ec3a0b25c5b47d875ecf29e96fe46a637a9142e562c9f87d9",
+              ".engine.log": "d0f075cb0b56512ec3a0b25c5b47d875ecf29e96fe46a637a9142e562c9f87d9"
+            },
+            "execution": "verified_reuse"
+          },
+          "skin_fx": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-skin_fx.json",
+            "checks": 414,
+            "sha256": {
+              ".json": "953b6528ff7187d86b71ed6634ac0401db98a21e16f8ab4eee91245c7b6db6b0",
+              ".log": "f917988f28f9bd9411abceead63590135d74651b6175ae119b72fcac01c1c666",
+              ".engine.log": "f917988f28f9bd9411abceead63590135d74651b6175ae119b72fcac01c1c666"
+            },
+            "execution": "verified_reuse"
+          },
+          "title_navigation": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-title_navigation.json",
+            "checks": 37,
+            "sha256": {
+              ".json": "8c830d19084cbda14a90a495de8ac85601c4d7459bc1167e3bac14e598abc11f",
+              ".log": "30d308dcf743492385236b562f2954ff9333fa2bd339aac73386818d767f827d",
+              ".engine.log": "30d308dcf743492385236b562f2954ff9333fa2bd339aac73386818d767f827d"
+            },
+            "execution": "verified_reuse"
+          },
+          "ui_redesign": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-ui_redesign.json",
+            "checks": 1843,
+            "sha256": {
+              ".json": "65d25671b94dcc67e8f88c9db116c3beb837d93dc83389045dbbe545cd7a442c",
+              ".log": "de41ed3703386b9deec54f7c3a0cd5170721bbdbf7dce543d7799e50d7f075a4",
+              ".engine.log": "de41ed3703386b9deec54f7c3a0cd5170721bbdbf7dce543d7799e50d7f075a4"
+            },
+            "execution": "verified_reuse"
+          },
+          "map_preview": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-map_preview.json",
+            "checks": 79,
+            "sha256": {
+              ".json": "43922b3ff364b3d0820f9426d2b7aa86f59f511387211f4a877ebdb9524503f4",
+              ".log": "68db364fdf50c54da6e89aa8fb4f27fc56819dea1e7d4c3bb2d6327cd73ca52f",
+              ".engine.log": "68db364fdf50c54da6e89aa8fb4f27fc56819dea1e7d4c3bb2d6327cd73ca52f"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_preview": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_preview.json",
+            "checks": 483,
+            "sha256": {
+              ".json": "7a48248e4cf3d80878cb3e39d4acc0cb8c1346329a5ff117cdb94ea795be5f0a",
+              ".log": "1141b891545e6fba216df6113b1a6bf389f1eca0065bc5d835f0a223da86fb93",
+              ".engine.log": "1141b891545e6fba216df6113b1a6bf389f1eca0065bc5d835f0a223da86fb93"
+            },
+            "execution": "verified_reuse"
+          },
+          "map_preview_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-map_preview_review.json",
+            "checks": 716,
+            "sha256": {
+              ".json": "8bcf042c07d975747ad3b5a8737fff6e9a091cae56c13dd66631fbc697b746b4",
+              ".log": "f5dde22ce5d688a8e081a6c4bd5806ba434a8f7b002c4c79e844a3dbfc81052f",
+              ".engine.log": "f5dde22ce5d688a8e081a6c4bd5806ba434a8f7b002c4c79e844a3dbfc81052f"
+            },
+            "execution": "verified_reuse"
+          },
+          "coin_skins": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-coin_skins.json",
+            "checks": 412,
+            "sha256": {
+              ".json": "14d37288dd194486c458fcbbe275623d4c93bfc031413a0f94e424aef33e1766",
+              ".log": "ad0c00959713b6e3170c8c01986d600dba65eefd8e562fd9680dd5c4781d8afb",
+              ".engine.log": "ad0c00959713b6e3170c8c01986d600dba65eefd8e562fd9680dd5c4781d8afb"
+            },
+            "execution": "verified_reuse"
+          },
+          "skin_skill": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-skin_skill.json",
+            "checks": 130,
+            "sha256": {
+              ".json": "78a71fddbcf3902967518e61b7331a2d830cbd09122ab3915307b53e1ae12340",
+              ".log": "6a396b5c7b3879f6549af0e4de6a9d690d89d408a4cc872e910540661b8046c0",
+              ".engine.log": "6a396b5c7b3879f6549af0e4de6a9d690d89d408a4cc872e910540661b8046c0"
+            },
+            "execution": "verified_reuse"
+          },
+          "snack_city": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-snack_city.json",
+            "checks": 80,
+            "sha256": {
+              ".json": "2e4b0274e7241894f7812c5670bb7a834a7d5f9f3ad545c2d994e5c15714b6ab",
+              ".log": "95fab8822ceba05962e5cfc546454858648b026fe0710a7ca65d05e8e28facaf",
+              ".engine.log": "95fab8822ceba05962e5cfc546454858648b026fe0710a7ca65d05e8e28facaf"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_city_density": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_city_density.json",
+            "checks": 1667,
+            "sha256": {
+              ".json": "aaa5c67c44a47fb0ccc95f8155e239dc973b27df02725c9afd2289b01d906984",
+              ".log": "4a796fbb2bb5ca302673afe318b082417b08b557d6924ad257eca8af447da97e",
+              ".engine.log": "4a796fbb2bb5ca302673afe318b082417b08b557d6924ad257eca8af447da97e"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_round": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_round.json",
+            "checks": 2,
+            "sha256": {
+              ".json": "0f40810f4f8e88ae2e39799cc25ab45bf048a6cad1157175ad35fdea26183ec2",
+              ".log": "68b8da94594425a34fae2fa11976ee89ec06cbeb90411732f1ca6f28a6391cea",
+              ".engine.log": "68b8da94594425a34fae2fa11976ee89ec06cbeb90411732f1ca6f28a6391cea"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_finish": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_finish.json",
+            "checks": 136,
+            "sha256": {
+              ".json": "19a77333469ac098db65590d3a68d15b7d9a687676805c325cbb81c6e303c921",
+              ".log": "12823b6acdb56f03556b2f2705b204902927834267a62e78d7ed5c3eb91d6361",
+              ".engine.log": "12823b6acdb56f03556b2f2705b204902927834267a62e78d7ed5c3eb91d6361"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_neighborhoods": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_neighborhoods.json",
+            "checks": 323,
+            "sha256": {
+              ".json": "55cb1e622614949a550fca7770be2034265176d3e4e5a6ce4763e682ce3ffb50",
+              ".log": "24d62ee24a601d0b4d27c78c3a91301efeb71eeed2dfee684362d34cff5a6e67",
+              ".engine.log": "24d62ee24a601d0b4d27c78c3a91301efeb71eeed2dfee684362d34cff5a6e67"
+            },
+            "execution": "verified_reuse"
+          },
+          "mobile_maps": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-mobile_maps.json",
+            "checks": 29,
+            "sha256": {
+              ".json": "51799f1c11f073bdc922d3b7e1eaba69dad4145207c5e3ecb5d71a78ad665f6d",
+              ".log": "6d63f37b36a519235dc8c39bba162d91c678a4822cde2065111064036d51ed36",
+              ".engine.log": "6d63f37b36a519235dc8c39bba162d91c678a4822cde2065111064036d51ed36"
+            },
+            "execution": "verified_reuse"
+          },
+          "performance": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-performance.json",
+            "checks": 271,
+            "sha256": {
+              ".json": "2d6049ae5b5305e70661d04b21af47ed3ce0dffc6adc60cf5c5b0577bdbb98a9",
+              ".log": "7dfbd744fd2f797d599ae07cd712a29e6a6f815aebaa9e95c5bbe66ec5c0085b",
+              ".engine.log": "7dfbd744fd2f797d599ae07cd712a29e6a6f815aebaa9e95c5bbe66ec5c0085b"
+            },
+            "execution": "verified_reuse"
+          },
+          "portrait": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-portrait.json",
+            "checks": 30,
+            "sha256": {
+              ".json": "4dccef10427214e507e888fe041c982b6aab14c7f5f4076e5aff0e4964b5d58e",
+              ".log": "3107b5c66a0c4b1e442b42e9f0d952d2ef950eca6237ac00fad3d22bf51b556a",
+              ".engine.log": "3107b5c66a0c4b1e442b42e9f0d952d2ef950eca6237ac00fad3d22bf51b556a"
+            },
+            "execution": "verified_reuse"
+          },
+          "progression": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-progression.json",
+            "checks": 15,
+            "sha256": {
+              ".json": "826506c7a4c6de705045509594ea9bfbefff2d421abdb4ecdb699e3beee0406c",
+              ".log": "84e8639ce48ce4b158262e317c896161e50cf5586c8a8e483361605f10e63d01",
+              ".engine.log": "84e8639ce48ce4b158262e317c896161e50cf5586c8a8e483361605f10e63d01"
+            },
+            "execution": "verified_reuse"
+          },
+          "store": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-store.json",
+            "checks": 17,
+            "sha256": {
+              ".json": "e1aa7235f6628e184b23513498dc50e2fc99e2dd425d26bf631c282784bd3b8d",
+              ".log": "0232bf4883a757d0c05af765b02ccc103c959d4b204f03eb80d3d213a40ac02c",
+              ".engine.log": "0232bf4883a757d0c05af765b02ccc103c959d4b204f03eb80d3d213a40ac02c"
+            },
+            "execution": "verified_reuse"
+          },
+          "city_motion": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-city_motion.json",
+            "checks": 22,
+            "sha256": {
+              ".json": "87f89607192fd5d764c6952fa939c1c56a03d4762de1a0d7588ac32b26462a4b",
+              ".log": "059c0cefd939205c02bb3d3df13bac6356a93d82adfe2c2a9fb1b4624f7a96f5",
+              ".engine.log": "059c0cefd939205c02bb3d3df13bac6356a93d82adfe2c2a9fb1b4624f7a96f5"
+            },
+            "execution": "verified_reuse"
+          },
+          "city_districts": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-city_districts.json",
+            "checks": 2718,
+            "sha256": {
+              ".json": "c9dd5c476513ef69c01b83a4116716e922b04528482e00242200c5bcaabe8035",
+              ".log": "a18f1e558e77cb3a7e6f8ec0d6e6ebb00ace3ebebad3f08c7ba3780cfd7a9e47",
+              ".engine.log": "a18f1e558e77cb3a7e6f8ec0d6e6ebb00ace3ebebad3f08c7ba3780cfd7a9e47"
+            },
+            "execution": "verified_reuse"
+          },
+          "skin_catalog": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-skin_catalog.json",
+            "checks": 897,
+            "sha256": {
+              ".json": "85121507a330d7e91ae7b92bb40320cefb524c248e55e667ef54f73f81a1be28",
+              ".log": "253d7b95c4c426d928a727f43589f92879fa4e18163b1ac6980dea7c68de020d",
+              ".engine.log": "253d7b95c4c426d928a727f43589f92879fa4e18163b1ac6980dea7c68de020d"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_rain_continuity": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_rain_continuity.json",
+            "checks": 38,
+            "sha256": {
+              ".json": "ea79c755c04877701ea14704f74642f4678fae3d31869ed8969ec099ab8c0fb0",
+              ".log": "d19e725e935508c30d72d88d0547520aa55f34f740e6ad96ecb551a2e8330b71",
+              ".engine.log": "d19e725e935508c30d72d88d0547520aa55f34f740e6ad96ecb551a2e8330b71"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_city_revision": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_city_revision.json",
+            "checks": 135,
+            "sha256": {
+              ".json": "2be8254c809f5317862affe325d086daef13e34a2473076c544b89772e77823d",
+              ".log": "6fa1b1a70ea49de49f8b59ec1561cfc246782d02d82d5a737bacdb3f10c3d7b0",
+              ".engine.log": "6fa1b1a70ea49de49f8b59ec1561cfc246782d02d82d5a737bacdb3f10c3d7b0"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_impact": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_impact.json",
+            "checks": 256,
+            "sha256": {
+              ".json": "ef8eab33a73d56c31f27d0d89b7f151fc31cab41e867a09c8023b110c0b40e04",
+              ".log": "d07a1188639b45f236d9c78fe47dad5494cdae77fd54dada2e4140e323e8836e",
+              ".engine.log": "d07a1188639b45f236d9c78fe47dad5494cdae77fd54dada2e4140e323e8836e"
+            },
+            "execution": "verified_reuse"
+          },
+          "ui_collection_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-ui_collection_review.json",
+            "checks": 1905,
+            "sha256": {
+              ".json": "b679a3a0a304dadc364f65783438ba7dce4e7910241ccb8bffa46bbcef7719f1",
+              ".log": "7c454b126b1c7509233cd2b012f3c5f9172a16857c75ae738b4c741e5d45a476",
+              ".engine.log": "7c454b126b1c7509233cd2b012f3c5f9172a16857c75ae738b4c741e5d45a476"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_goals_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_goals_review.json",
+            "checks": 37,
+            "sha256": {
+              ".json": "61c85b33a1d595eb96b87145472dc777ddb8b8c3fe0984bc0b99388893ac54a8",
+              ".log": "68ba4f328da3ca2d45ac4523f9ee72738cb5c66b212854aff4adcc5466c0eb74",
+              ".engine.log": "68ba4f328da3ca2d45ac4523f9ee72738cb5c66b212854aff4adcc5466c0eb74"
+            },
+            "execution": "verified_reuse"
+          },
+          "progression_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-progression_review.json",
+            "checks": 10,
+            "sha256": {
+              ".json": "a5dc0f692e1ed3aa69d82fff7103c7650e95d9a33f902fae2e1ebf09bdcbe0cf",
+              ".log": "84ff803cb8e24c5dd380fdd6e6a782f7b3b25f85654b393d19c0bf420319c69f",
+              ".engine.log": "84ff803cb8e24c5dd380fdd6e6a782f7b3b25f85654b393d19c0bf420319c69f"
+            },
+            "execution": "verified_reuse"
+          },
+          "rain_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-rain_review.json",
+            "checks": 9,
+            "sha256": {
+              ".json": "396187da0680828a6658a4c7b72e47ac798dcfad30c69bce6af7f1f88dc5db03",
+              ".log": "c7629dc518df0571ae9ef530e6ad7929ff9acb6568d81af52e19af06d14fa435",
+              ".engine.log": "c7629dc518df0571ae9ef530e6ad7929ff9acb6568d81af52e19af06d14fa435"
+            },
+            "execution": "verified_reuse"
+          },
+          "crowd_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-crowd_review.json",
+            "checks": 17,
+            "sha256": {
+              ".json": "05bad7c30f67bc71e1e6be5c1a319073e6479dea976495803be40becf8a691e7",
+              ".log": "d312f1fb9ecd72a3e3e5effde0a888f2d95c82d4447a251f1f165c2b322c2d23",
+              ".engine.log": "d312f1fb9ecd72a3e3e5effde0a888f2d95c82d4447a251f1f165c2b322c2d23"
+            },
+            "execution": "verified_reuse"
+          },
+          "district_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-district_review.json",
+            "checks": 4,
+            "sha256": {
+              ".json": "18dfe00ac3f026e9826ffaae8f417e1adb4efbf361fc08b64baa879f2bcc0faa",
+              ".log": "3b3c624d719d7934d20b288c1d04fa5e0e51a631eba3534b3707116af0f99d13",
+              ".engine.log": "3b3c624d719d7934d20b288c1d04fa5e0e51a631eba3534b3707116af0f99d13"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_revision_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_revision_review.json",
+            "checks": 11,
+            "sha256": {
+              ".json": "66aad3e66e2057c9559c7753a6e5782610af9a9d8b6ac8f8ac44dc88264e7a6f",
+              ".log": "63362612d528a44a7ef35c92fdc4fced0be213f4516ba33db5faf67cffba58a0",
+              ".engine.log": "63362612d528a44a7ef35c92fdc4fced0be213f4516ba33db5faf67cffba58a0"
+            },
+            "execution": "verified_reuse"
+          },
+          "skin_catalog_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-skin_catalog_review.json",
+            "checks": 206,
+            "sha256": {
+              ".json": "29f2429bf0e93c4832679e4962dc5ad9c72150ef8fb84e91348bea4992440d63",
+              ".log": "90852e369b80c6113603f39fea052f5e6e2929dd03cbab6279f5b48c91845238",
+              ".engine.log": "90852e369b80c6113603f39fea052f5e6e2929dd03cbab6279f5b48c91845238"
+            },
+            "execution": "verified_reuse"
+          },
+          "mobile_thumbnail": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-mobile_thumbnail.json",
+            "checks": 3847,
+            "sha256": {
+              ".json": "efd6c88e93391ea33a253f30538cc90499070e917a67ead9cd92acafe2e2898a",
+              ".log": "894bcdc2d94d61187a0c37ee9568d3711815a165f6aa18204885fb761dccb18c",
+              ".engine.log": "894bcdc2d94d61187a0c37ee9568d3711815a165f6aa18204885fb761dccb18c"
+            },
+            "execution": "verified_reuse"
+          },
+          "procedural_filtering": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-procedural_filtering.json",
+            "checks": 27,
+            "sha256": {
+              ".json": "f5bbf36265f7dea40e078c0d69560064f3fd367a5b7fc08def0422b5d517d32e",
+              ".log": "c52054c45a0e84a240041a70ec7cbc6fb359f8ca055dea2937d976bdbc8c76ba",
+              ".engine.log": "c52054c45a0e84a240041a70ec7cbc6fb359f8ca055dea2937d976bdbc8c76ba"
+            },
+            "execution": "verified_reuse"
+          },
+          "selective_reveal": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-selective_reveal.json",
+            "checks": 75,
+            "sha256": {
+              ".json": "4c7756bad88b2201ba38b1e5392d04d81134cdeac4e6087ffd6850a47574f447",
+              ".log": "763fe96a93f610d5cd1fd877e79d582a9f1b29810edd301502955e6a3d154a1f",
+              ".engine.log": "763fe96a93f610d5cd1fd877e79d582a9f1b29810edd301502955e6a3d154a1f"
+            },
+            "execution": "verified_reuse"
+          },
+          "selective_reveal_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-selective_reveal_review.json",
+            "checks": 491,
+            "sha256": {
+              ".json": "4f914d8d693331b280d175df303abfc80b9cdd9c771810e32f7385bb7501b749",
+              ".log": "15c157821dce002e9f636db0db3992fff9f8e1a924ec9e77fe8671fb39dec399",
+              ".engine.log": "15c157821dce002e9f636db0db3992fff9f8e1a924ec9e77fe8671fb39dec399"
+            },
+            "execution": "verified_reuse"
+          },
+          "building_only_reveal_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-building_only_reveal_review.json",
+            "checks": 213,
+            "sha256": {
+              ".json": "9b4d0ef17237a39746d73cd213af961d5c7ec9680d359f9dbcefef6a693fe2e4",
+              ".log": "628a235dff67fb6e2f5e1d91e6bbe7b929a87180baa4574d9ff87adac29523c8",
+              ".engine.log": "628a235dff67fb6e2f5e1d91e6bbe7b929a87180baa4574d9ff87adac29523c8"
+            },
+            "execution": "verified_reuse"
+          },
+          "building_surface_artifacts": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-building_surface_artifacts.json",
+            "checks": 1438,
+            "sha256": {
+              ".json": "575ed2bc549c5380e90621a14225a2a921395bf3c05d12010f633ca85ff3844f",
+              ".log": "ab7f4efd06bbab948f83c63ed7640d342dace4008810e4b5b6697a5d0fdf5dac",
+              ".engine.log": "ab7f4efd06bbab948f83c63ed7640d342dace4008810e4b5b6697a5d0fdf5dac"
+            },
+            "execution": "verified_reuse"
+          },
+          "growth_extension": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-growth_extension.json",
+            "checks": 1978,
+            "sha256": {
+              ".json": "c3837ba7ec3de07600faf8a3d017a65ca0db7c8ead4b56d92134e36ff1b0fdc9",
+              ".log": "aef8672df345b0439328f6d3a0658830ea5c21885ce0bce0d9676c3a70dc7291",
+              ".engine.log": "aef8672df345b0439328f6d3a0658830ea5c21885ce0bce0d9676c3a70dc7291"
+            },
+            "execution": "verified_reuse"
+          },
+          "rival_combat": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-rival_combat.json",
+            "checks": 58,
+            "sha256": {
+              ".json": "64b21293c74bb0513812dac3e5d57b6f869ed8a7e9b44a0b439c535a26889a8d",
+              ".log": "dd42a49134ab6750d8f8c54cb1d390f132f6d076f4694aac9b1410f88b9bf2f5",
+              ".engine.log": "dd42a49134ab6750d8f8c54cb1d390f132f6d076f4694aac9b1410f88b9bf2f5"
+            },
+            "execution": "verified_reuse"
+          },
+          "large_growth_world": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-large_growth_world.json",
+            "checks": 258,
+            "sha256": {
+              ".json": "d32ea689d2ab7cbc7ac92f855062ccf4fb3d9ff6d90739019dff41194993dfc2",
+              ".log": "f0c53d01fd94bed8ff1b4288ad01e551705666de25f691d3238c06f789a72b86",
+              ".engine.log": "f0c53d01fd94bed8ff1b4288ad01e551705666de25f691d3238c06f789a72b86"
+            },
+            "execution": "verified_reuse"
+          },
+          "pedestrian_swallow_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-pedestrian_swallow_review.json",
+            "checks": 120,
+            "sha256": {
+              ".json": "71bfe0a5e5a135c6298e7596c7d79391d31f619f7de72f696dffb7684e6eb8f8",
+              ".log": "ad8b000cef4fe7e1245deba936e67c36bab37ac657862d275582b4371168a7b7",
+              ".engine.log": "ad8b000cef4fe7e1245deba936e67c36bab37ac657862d275582b4371168a7b7"
+            },
+            "execution": "verified_reuse"
+          }
+        },
+        "scope": "51 completed current-runtime source reports copied exactly. Only the unused ownership fixture differs; all85 current Web-PCK suites execute fresh. Failed origin gate is preserved and never claimed fully accepted."
+      },
+      "source_report_reuse_proof_sha256": "c5600b2eab521e7f3eea2369e09a6ed0f0e1235f8e9ad541fec4ba07519ecbe3",
+      "scope": "Explicit verified51 source continuation; remaining34 source and all85 current Web-PCK execute fresh.",
+      "historical_baseline_gate": "artifacts/simple-ui-20261002/web-gate-03/release.json",
+      "suite_results": [
+        {
+          "phase": "source",
+          "suite": "release_info",
+          "checks": 37,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "native_polish",
+          "checks": 267,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "viewport_layout",
+          "checks": 41,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "application_lifecycle",
+          "checks": 70,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "scene_qa",
+          "checks": 765,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "street_prop_qa",
+          "checks": 835,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "claim_recovery",
+          "checks": 10,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "full_city_qa",
+          "checks": 1539,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "skin_collection",
+          "checks": 374,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "skin_fx",
+          "checks": 414,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "title_navigation",
+          "checks": 37,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "ui_redesign",
+          "checks": 1843,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "map_preview",
+          "checks": 79,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "food_preview",
+          "checks": 483,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "map_preview_review",
+          "checks": 716,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "coin_skins",
+          "checks": 412,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "skin_skill",
+          "checks": 130,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "snack_city",
+          "checks": 80,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "food_city_density",
+          "checks": 1667,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "food_round",
+          "checks": 2,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "food_finish",
+          "checks": 136,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "food_neighborhoods",
+          "checks": 323,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "mobile_maps",
+          "checks": 29,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "performance",
+          "checks": 271,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "portrait",
+          "checks": 30,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "progression",
+          "checks": 15,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "store",
+          "checks": 17,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "city_motion",
+          "checks": 22,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "city_districts",
+          "checks": 2718,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "skin_catalog",
+          "checks": 897,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "food_rain_continuity",
+          "checks": 38,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "food_city_revision",
+          "checks": 135,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "food_impact",
+          "checks": 256,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "ui_collection_review",
+          "checks": 1905,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "food_goals_review",
+          "checks": 37,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "progression_review",
+          "checks": 10,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "rain_review",
+          "checks": 9,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "crowd_review",
+          "checks": 17,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "district_review",
+          "checks": 4,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "food_revision_review",
+          "checks": 11,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "skin_catalog_review",
+          "checks": 206,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "mobile_thumbnail",
+          "checks": 3847,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "procedural_filtering",
+          "checks": 27,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "selective_reveal",
+          "checks": 75,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "selective_reveal_review",
+          "checks": 491,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "building_only_reveal_review",
+          "checks": 213,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "building_surface_artifacts",
+          "checks": 1438,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "growth_extension",
+          "checks": 1978,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "rival_combat",
+          "checks": 58,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "large_growth_world",
+          "checks": 258,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "pedestrian_swallow_review",
+          "checks": 120,
+          "execution": "verified_reuse"
+        },
+        {
+          "phase": "source",
+          "suite": "growth_rivals_review",
+          "checks": 291,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "growth_integration_review",
+          "checks": 1606,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "food_collision",
+          "checks": 156,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "food_collision_review",
+          "checks": 18386,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "music",
+          "checks": 129,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "music_review",
+          "checks": 120,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "shop_theme_review",
+          "checks": 55,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "food_color",
+          "checks": 55,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "food_color_review",
+          "checks": 1351,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "skin_rarity",
+          "checks": 556,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "skin_rarity_review",
+          "checks": 1555,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "world_expansion",
+          "checks": 57,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "world_expansion_review",
+          "checks": 284,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "monetization_bridges",
+          "checks": 116,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "economy_continuation",
+          "checks": 120,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "diamond_boundary_review",
+          "checks": 25,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "retention",
+          "checks": 67,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "retention_review",
+          "checks": 590,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "retention_ui_review",
+          "checks": 8188,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "perimeter_frontage",
+          "checks": 631,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "food_extension_collision_review",
+          "checks": 199,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "train",
+          "checks": 220,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "train_surface",
+          "checks": 161,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "train_review",
+          "checks": 388,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "train_surface_review",
+          "checks": 1121,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "boost",
+          "checks": 55,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "boost_review",
+          "checks": 98,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "skin_polish",
+          "checks": 486,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "skin_polish_review",
+          "checks": 760,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "food_growth",
+          "checks": 2202,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "food_growth_review",
+          "checks": 1476,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "rain_admission",
+          "checks": 71,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "rain_admission_review",
+          "checks": 101,
+          "execution": "fresh"
+        },
+        {
+          "phase": "source",
+          "suite": "rain_support",
+          "checks": 102,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "release_info",
+          "checks": 37,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "native_polish",
+          "checks": 267,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "viewport_layout",
+          "checks": 41,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "application_lifecycle",
+          "checks": 70,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "scene_qa",
+          "checks": 765,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "street_prop_qa",
+          "checks": 835,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "claim_recovery",
+          "checks": 10,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "full_city_qa",
+          "checks": 1539,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "skin_collection",
+          "checks": 374,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "skin_fx",
+          "checks": 414,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "title_navigation",
+          "checks": 37,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "ui_redesign",
+          "checks": 1843,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "map_preview",
+          "checks": 79,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_preview",
+          "checks": 483,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "map_preview_review",
+          "checks": 716,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "coin_skins",
+          "checks": 412,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "skin_skill",
+          "checks": 130,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "snack_city",
+          "checks": 80,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_city_density",
+          "checks": 1667,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_round",
+          "checks": 2,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_finish",
+          "checks": 136,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_neighborhoods",
+          "checks": 323,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "mobile_maps",
+          "checks": 29,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "performance",
+          "checks": 271,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "portrait",
+          "checks": 30,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "progression",
+          "checks": 15,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "store",
+          "checks": 17,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "city_motion",
+          "checks": 22,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "city_districts",
+          "checks": 2718,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "skin_catalog",
+          "checks": 897,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_rain_continuity",
+          "checks": 38,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_city_revision",
+          "checks": 135,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_impact",
+          "checks": 256,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "ui_collection_review",
+          "checks": 1905,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_goals_review",
+          "checks": 37,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "progression_review",
+          "checks": 10,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "rain_review",
+          "checks": 9,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "crowd_review",
+          "checks": 17,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "district_review",
+          "checks": 4,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_revision_review",
+          "checks": 11,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "skin_catalog_review",
+          "checks": 206,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "mobile_thumbnail",
+          "checks": 3847,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "procedural_filtering",
+          "checks": 27,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "selective_reveal",
+          "checks": 75,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "selective_reveal_review",
+          "checks": 491,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "building_only_reveal_review",
+          "checks": 213,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "building_surface_artifacts",
+          "checks": 1438,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "growth_extension",
+          "checks": 1978,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "rival_combat",
+          "checks": 58,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "large_growth_world",
+          "checks": 258,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "pedestrian_swallow_review",
+          "checks": 120,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "growth_rivals_review",
+          "checks": 291,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "growth_integration_review",
+          "checks": 1606,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_collision",
+          "checks": 156,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_collision_review",
+          "checks": 18386,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "music",
+          "checks": 129,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "music_review",
+          "checks": 120,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "shop_theme_review",
+          "checks": 55,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_color",
+          "checks": 55,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_color_review",
+          "checks": 1351,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "skin_rarity",
+          "checks": 556,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "skin_rarity_review",
+          "checks": 1555,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "world_expansion",
+          "checks": 57,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "world_expansion_review",
+          "checks": 284,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "monetization_bridges",
+          "checks": 116,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "economy_continuation",
+          "checks": 120,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "diamond_boundary_review",
+          "checks": 25,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "retention",
+          "checks": 67,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "retention_review",
+          "checks": 590,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "retention_ui_review",
+          "checks": 8188,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "perimeter_frontage",
+          "checks": 631,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_extension_collision_review",
+          "checks": 199,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "train",
+          "checks": 220,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "train_surface",
+          "checks": 161,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "train_review",
+          "checks": 388,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "train_surface_review",
+          "checks": 1121,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "boost",
+          "checks": 55,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "boost_review",
+          "checks": 98,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "skin_polish",
+          "checks": 486,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "skin_polish_review",
+          "checks": 760,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_growth",
+          "checks": 2202,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "food_growth_review",
+          "checks": 1476,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "rain_admission",
+          "checks": 71,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "rain_admission_review",
+          "checks": 101,
+          "execution": "fresh"
+        },
+        {
+          "phase": "package",
+          "suite": "rain_support",
+          "checks": 102,
+          "execution": "fresh"
+        }
+      ],
+      "fresh_executions": [
+        {
+          "phase": "source",
+          "suite": "growth_rivals_review",
+          "checks": 291
+        },
+        {
+          "phase": "source",
+          "suite": "growth_integration_review",
+          "checks": 1606
+        },
+        {
+          "phase": "source",
+          "suite": "food_collision",
+          "checks": 156
+        },
+        {
+          "phase": "source",
+          "suite": "food_collision_review",
+          "checks": 18386
+        },
+        {
+          "phase": "source",
+          "suite": "music",
+          "checks": 129
+        },
+        {
+          "phase": "source",
+          "suite": "music_review",
+          "checks": 120
+        },
+        {
+          "phase": "source",
+          "suite": "shop_theme_review",
+          "checks": 55
+        },
+        {
+          "phase": "source",
+          "suite": "food_color",
+          "checks": 55
+        },
+        {
+          "phase": "source",
+          "suite": "food_color_review",
+          "checks": 1351
+        },
+        {
+          "phase": "source",
+          "suite": "skin_rarity",
+          "checks": 556
+        },
+        {
+          "phase": "source",
+          "suite": "skin_rarity_review",
+          "checks": 1555
+        },
+        {
+          "phase": "source",
+          "suite": "world_expansion",
+          "checks": 57
+        },
+        {
+          "phase": "source",
+          "suite": "world_expansion_review",
+          "checks": 284
+        },
+        {
+          "phase": "source",
+          "suite": "monetization_bridges",
+          "checks": 116
+        },
+        {
+          "phase": "source",
+          "suite": "economy_continuation",
+          "checks": 120
+        },
+        {
+          "phase": "source",
+          "suite": "diamond_boundary_review",
+          "checks": 25
+        },
+        {
+          "phase": "source",
+          "suite": "retention",
+          "checks": 67
+        },
+        {
+          "phase": "source",
+          "suite": "retention_review",
+          "checks": 590
+        },
+        {
+          "phase": "source",
+          "suite": "retention_ui_review",
+          "checks": 8188
+        },
+        {
+          "phase": "source",
+          "suite": "perimeter_frontage",
+          "checks": 631
+        },
+        {
+          "phase": "source",
+          "suite": "food_extension_collision_review",
+          "checks": 199
+        },
+        {
+          "phase": "source",
+          "suite": "train",
+          "checks": 220
+        },
+        {
+          "phase": "source",
+          "suite": "train_surface",
+          "checks": 161
+        },
+        {
+          "phase": "source",
+          "suite": "train_review",
+          "checks": 388
+        },
+        {
+          "phase": "source",
+          "suite": "train_surface_review",
+          "checks": 1121
+        },
+        {
+          "phase": "source",
+          "suite": "boost",
+          "checks": 55
+        },
+        {
+          "phase": "source",
+          "suite": "boost_review",
+          "checks": 98
+        },
+        {
+          "phase": "source",
+          "suite": "skin_polish",
+          "checks": 486
+        },
+        {
+          "phase": "source",
+          "suite": "skin_polish_review",
+          "checks": 760
+        },
+        {
+          "phase": "source",
+          "suite": "food_growth",
+          "checks": 2202
+        },
+        {
+          "phase": "source",
+          "suite": "food_growth_review",
+          "checks": 1476
+        },
+        {
+          "phase": "source",
+          "suite": "rain_admission",
+          "checks": 71
+        },
+        {
+          "phase": "source",
+          "suite": "rain_admission_review",
+          "checks": 101
+        },
+        {
+          "phase": "source",
+          "suite": "rain_support",
+          "checks": 102
+        },
+        {
+          "phase": "package",
+          "suite": "release_info",
+          "checks": 37
+        },
+        {
+          "phase": "package",
+          "suite": "native_polish",
+          "checks": 267
+        },
+        {
+          "phase": "package",
+          "suite": "viewport_layout",
+          "checks": 41
+        },
+        {
+          "phase": "package",
+          "suite": "application_lifecycle",
+          "checks": 70
+        },
+        {
+          "phase": "package",
+          "suite": "scene_qa",
+          "checks": 765
+        },
+        {
+          "phase": "package",
+          "suite": "street_prop_qa",
+          "checks": 835
+        },
+        {
+          "phase": "package",
+          "suite": "claim_recovery",
+          "checks": 10
+        },
+        {
+          "phase": "package",
+          "suite": "full_city_qa",
+          "checks": 1539
+        },
+        {
+          "phase": "package",
+          "suite": "skin_collection",
+          "checks": 374
+        },
+        {
+          "phase": "package",
+          "suite": "skin_fx",
+          "checks": 414
+        },
+        {
+          "phase": "package",
+          "suite": "title_navigation",
+          "checks": 37
+        },
+        {
+          "phase": "package",
+          "suite": "ui_redesign",
+          "checks": 1843
+        },
+        {
+          "phase": "package",
+          "suite": "map_preview",
+          "checks": 79
+        },
+        {
+          "phase": "package",
+          "suite": "food_preview",
+          "checks": 483
+        },
+        {
+          "phase": "package",
+          "suite": "map_preview_review",
+          "checks": 716
+        },
+        {
+          "phase": "package",
+          "suite": "coin_skins",
+          "checks": 412
+        },
+        {
+          "phase": "package",
+          "suite": "skin_skill",
+          "checks": 130
+        },
+        {
+          "phase": "package",
+          "suite": "snack_city",
+          "checks": 80
+        },
+        {
+          "phase": "package",
+          "suite": "food_city_density",
+          "checks": 1667
+        },
+        {
+          "phase": "package",
+          "suite": "food_round",
+          "checks": 2
+        },
+        {
+          "phase": "package",
+          "suite": "food_finish",
+          "checks": 136
+        },
+        {
+          "phase": "package",
+          "suite": "food_neighborhoods",
+          "checks": 323
+        },
+        {
+          "phase": "package",
+          "suite": "mobile_maps",
+          "checks": 29
+        },
+        {
+          "phase": "package",
+          "suite": "performance",
+          "checks": 271
+        },
+        {
+          "phase": "package",
+          "suite": "portrait",
+          "checks": 30
+        },
+        {
+          "phase": "package",
+          "suite": "progression",
+          "checks": 15
+        },
+        {
+          "phase": "package",
+          "suite": "store",
+          "checks": 17
+        },
+        {
+          "phase": "package",
+          "suite": "city_motion",
+          "checks": 22
+        },
+        {
+          "phase": "package",
+          "suite": "city_districts",
+          "checks": 2718
+        },
+        {
+          "phase": "package",
+          "suite": "skin_catalog",
+          "checks": 897
+        },
+        {
+          "phase": "package",
+          "suite": "food_rain_continuity",
+          "checks": 38
+        },
+        {
+          "phase": "package",
+          "suite": "food_city_revision",
+          "checks": 135
+        },
+        {
+          "phase": "package",
+          "suite": "food_impact",
+          "checks": 256
+        },
+        {
+          "phase": "package",
+          "suite": "ui_collection_review",
+          "checks": 1905
+        },
+        {
+          "phase": "package",
+          "suite": "food_goals_review",
+          "checks": 37
+        },
+        {
+          "phase": "package",
+          "suite": "progression_review",
+          "checks": 10
+        },
+        {
+          "phase": "package",
+          "suite": "rain_review",
+          "checks": 9
+        },
+        {
+          "phase": "package",
+          "suite": "crowd_review",
+          "checks": 17
+        },
+        {
+          "phase": "package",
+          "suite": "district_review",
+          "checks": 4
+        },
+        {
+          "phase": "package",
+          "suite": "food_revision_review",
+          "checks": 11
+        },
+        {
+          "phase": "package",
+          "suite": "skin_catalog_review",
+          "checks": 206
+        },
+        {
+          "phase": "package",
+          "suite": "mobile_thumbnail",
+          "checks": 3847
+        },
+        {
+          "phase": "package",
+          "suite": "procedural_filtering",
+          "checks": 27
+        },
+        {
+          "phase": "package",
+          "suite": "selective_reveal",
+          "checks": 75
+        },
+        {
+          "phase": "package",
+          "suite": "selective_reveal_review",
+          "checks": 491
+        },
+        {
+          "phase": "package",
+          "suite": "building_only_reveal_review",
+          "checks": 213
+        },
+        {
+          "phase": "package",
+          "suite": "building_surface_artifacts",
+          "checks": 1438
+        },
+        {
+          "phase": "package",
+          "suite": "growth_extension",
+          "checks": 1978
+        },
+        {
+          "phase": "package",
+          "suite": "rival_combat",
+          "checks": 58
+        },
+        {
+          "phase": "package",
+          "suite": "large_growth_world",
+          "checks": 258
+        },
+        {
+          "phase": "package",
+          "suite": "pedestrian_swallow_review",
+          "checks": 120
+        },
+        {
+          "phase": "package",
+          "suite": "growth_rivals_review",
+          "checks": 291
+        },
+        {
+          "phase": "package",
+          "suite": "growth_integration_review",
+          "checks": 1606
+        },
+        {
+          "phase": "package",
+          "suite": "food_collision",
+          "checks": 156
+        },
+        {
+          "phase": "package",
+          "suite": "food_collision_review",
+          "checks": 18386
+        },
+        {
+          "phase": "package",
+          "suite": "music",
+          "checks": 129
+        },
+        {
+          "phase": "package",
+          "suite": "music_review",
+          "checks": 120
+        },
+        {
+          "phase": "package",
+          "suite": "shop_theme_review",
+          "checks": 55
+        },
+        {
+          "phase": "package",
+          "suite": "food_color",
+          "checks": 55
+        },
+        {
+          "phase": "package",
+          "suite": "food_color_review",
+          "checks": 1351
+        },
+        {
+          "phase": "package",
+          "suite": "skin_rarity",
+          "checks": 556
+        },
+        {
+          "phase": "package",
+          "suite": "skin_rarity_review",
+          "checks": 1555
+        },
+        {
+          "phase": "package",
+          "suite": "world_expansion",
+          "checks": 57
+        },
+        {
+          "phase": "package",
+          "suite": "world_expansion_review",
+          "checks": 284
+        },
+        {
+          "phase": "package",
+          "suite": "monetization_bridges",
+          "checks": 116
+        },
+        {
+          "phase": "package",
+          "suite": "economy_continuation",
+          "checks": 120
+        },
+        {
+          "phase": "package",
+          "suite": "diamond_boundary_review",
+          "checks": 25
+        },
+        {
+          "phase": "package",
+          "suite": "retention",
+          "checks": 67
+        },
+        {
+          "phase": "package",
+          "suite": "retention_review",
+          "checks": 590
+        },
+        {
+          "phase": "package",
+          "suite": "retention_ui_review",
+          "checks": 8188
+        },
+        {
+          "phase": "package",
+          "suite": "perimeter_frontage",
+          "checks": 631
+        },
+        {
+          "phase": "package",
+          "suite": "food_extension_collision_review",
+          "checks": 199
+        },
+        {
+          "phase": "package",
+          "suite": "train",
+          "checks": 220
+        },
+        {
+          "phase": "package",
+          "suite": "train_surface",
+          "checks": 161
+        },
+        {
+          "phase": "package",
+          "suite": "train_review",
+          "checks": 388
+        },
+        {
+          "phase": "package",
+          "suite": "train_surface_review",
+          "checks": 1121
+        },
+        {
+          "phase": "package",
+          "suite": "boost",
+          "checks": 55
+        },
+        {
+          "phase": "package",
+          "suite": "boost_review",
+          "checks": 98
+        },
+        {
+          "phase": "package",
+          "suite": "skin_polish",
+          "checks": 486
+        },
+        {
+          "phase": "package",
+          "suite": "skin_polish_review",
+          "checks": 760
+        },
+        {
+          "phase": "package",
+          "suite": "food_growth",
+          "checks": 2202
+        },
+        {
+          "phase": "package",
+          "suite": "food_growth_review",
+          "checks": 1476
+        },
+        {
+          "phase": "package",
+          "suite": "rain_admission",
+          "checks": 71
+        },
+        {
+          "phase": "package",
+          "suite": "rain_admission_review",
+          "checks": 101
+        },
+        {
+          "phase": "package",
+          "suite": "rain_support",
+          "checks": 102
+        }
+      ],
+      "source_reused_checks": 25392,
+      "source_fresh_checks": 41778,
+      "package_fresh_checks": 67170
+    },
+    "owned_gate_summary_sha256": "929c991e734d595942045a012e44bbcd9e6e8034ff1e63c1984e050a982cd3fe",
+    "source_reuse_proof": {
+      "path": "build/collapse-surface-20261002/web-gate-02/source-reuse-proof.json",
+      "sha256": "c5600b2eab521e7f3eea2369e09a6ed0f0e1235f8e9ad541fec4ba07519ecbe3",
+      "receipt": {
+        "origin_version": "0.12.7",
+        "origin_provenance": "artifacts/collapse-surface-20261002/web-gate-01/acceptance-provenance.json",
+        "origin_provenance_sha256": "984b10c835ca22e425cef2d5c9a84596af323a26a3a8a6bb3c6793865217b6b2",
+        "origin_source_before": "build/collapse-surface-20261002/web-gate-01/source-before.json",
+        "origin_source_before_sha256": "b79236099e6bd4e2cc10297e058ea143356e83d35a4d81c20c7fa70bd767e7a1",
+        "current_source_before": "build/collapse-surface-20261002/web-gate-02/source-before.json",
+        "current_source_before_sha256": "8a63c2cc98904456bda05ce9277365c1ea0de5b4112e100e71924b0ead1f7379",
+        "changed_input": "tests/growth_rivals_review.gd",
+        "old_sha256": "a18c4c9f2af6657dccb1b6092aff19902fb0650b2051892de13b469f10ba5a80",
+        "current_sha256": "515879c3a34aedd7a418050356088ad343195c2e96d3fa4b9183339a6b392a4c",
+        "only_guarded_difference": true,
+        "unchanged_source_inputs": 809,
+        "unused_fixture_reference_scanned": [
+          "tests/release_info_acceptance.gd",
+          "tests/native_polish_acceptance.gd",
+          "tests/viewport_layout_acceptance.gd",
+          "tests/application_lifecycle_acceptance.gd",
+          "tests/scene_qa_acceptance.gd",
+          "tests/street_prop_qa_acceptance.gd",
+          "tests/claim_recovery_acceptance.gd",
+          "tests/full_city_qa_acceptance.gd",
+          "tests/skin_collection_acceptance.gd",
+          "tests/skin_fx_acceptance.gd",
+          "tests/title_navigation_acceptance.gd",
+          "tests/ui_redesign_acceptance.gd",
+          "tests/map_preview_acceptance.gd",
+          "tests/food_preview_acceptance.gd",
+          "tests/map_preview_review.gd",
+          "tests/coin_skins_acceptance.gd",
+          "tests/skin_skill_acceptance.gd",
+          "tests/snack_city_acceptance.gd",
+          "tests/food_city_density_acceptance.gd",
+          "tests/food_round_acceptance.gd",
+          "tests/food_finish_acceptance.gd",
+          "tests/food_neighborhoods_acceptance.gd",
+          "tests/mobile_maps_acceptance.gd",
+          "tests/performance_acceptance.gd",
+          "tests/portrait_acceptance.gd",
+          "tests/progression_acceptance.gd",
+          "tests/store_acceptance.gd",
+          "tests/city_motion_acceptance.gd",
+          "tests/city_districts_acceptance.gd",
+          "tests/skin_catalog_acceptance.gd",
+          "tests/food_rain_continuity_acceptance.gd",
+          "tests/food_city_revision_acceptance.gd",
+          "tests/food_impact_acceptance.gd",
+          "tests/review_ui_collection.gd",
+          "tests/review_food_goals.gd",
+          "tests/city_review_progression.gd",
+          "tests/city_review_food_rain.gd",
+          "tests/food_crowd_review.gd",
+          "tests/food_review_city_districts.gd",
+          "tests/city_review_food_revision.gd",
+          "tests/city_review_skin_catalog.gd",
+          "tests/mobile_thumbnail_acceptance.gd",
+          "tests/procedural_filtering_acceptance.gd",
+          "tests/selective_reveal_acceptance.gd",
+          "tests/selective_reveal_review.gd",
+          "tests/building_only_reveal_review.gd",
+          "tests/building_surface_artifacts_acceptance.gd",
+          "tests/growth_extension_acceptance.gd",
+          "tests/rival_combat_acceptance.gd",
+          "tests/large_growth_world_acceptance.gd",
+          "tests/pedestrian_swallow_review.gd",
+          "fidelity/ads_bridge.gd",
+          "fidelity/art.gd",
+          "fidelity/asphalt.gdshader",
+          "fidelity/audio.gd",
+          "fidelity/audio_bus_layout.tres",
+          "fidelity/catalog_city.gd",
+          "fidelity/cinder_flame.gdshader",
+          "fidelity/city_districts.gd",
+          "fidelity/commerce_bridge.gd",
+          "fidelity/cut_ground.gd",
+          "fidelity/device_qa.gd",
+          "fidelity/edible_train.gd",
+          "fidelity/facade.gdshader",
+          "fidelity/food_body.gd",
+          "fidelity/food_city.gd",
+          "fidelity/food_glaze.gdshader",
+          "fidelity/food_neighborhoods.gd",
+          "fidelity/food_preview.gd",
+          "fidelity/food_query.gd",
+          "fidelity/food_shapes.gd",
+          "fidelity/food_surface.gd",
+          "fidelity/fracture_cache.gd",
+          "fidelity/game.gd",
+          "fidelity/hole.gd",
+          "fidelity/hole_reveal.gd",
+          "fidelity/hole_reveal.gdshaderinc",
+          "fidelity/hole_reveal_standard.gdshader",
+          "fidelity/main.tscn",
+          "fidelity/map_catalog.gd",
+          "fidelity/mesh_batch.gd",
+          "fidelity/native_qa.gd",
+          "fidelity/palette.gdshader",
+          "fidelity/placement_grid.gd",
+          "fidelity/prop_collision_cache.gd",
+          "fidelity/release_info.gd",
+          "fidelity/rim_body.gd",
+          "fidelity/rival_burst.gd",
+          "fidelity/scene_audit.gd",
+          "fidelity/shaders/accretion.gdshader",
+          "fidelity/shaders/aurora.gdshader",
+          "fidelity/shaders/solid_skin.gdshader",
+          "fidelity/shaders/tide.gdshader",
+          "fidelity/skin_catalog.gd",
+          "fidelity/skin_draw.gd",
+          "fidelity/skin_motifs.gd",
+          "fidelity/skin_rarity.gd",
+          "fidelity/skin_sculpt.gd",
+          "fidelity/skin_visual.gd",
+          "fidelity/static_batch.gd",
+          "fidelity/street_layout.gd",
+          "fidelity/swallow_feedback.gd",
+          "fidelity/swallowable.gd",
+          "fidelity/train_assets.gd",
+          "fidelity/train_car.gd",
+          "fidelity/train_routes.gd",
+          "fidelity/train_track_surface.gd",
+          "fidelity/ui.gd",
+          "fidelity/viewport_layout.gd",
+          "fidelity/world_bounds.gd",
+          "scripts/city.gd",
+          "scripts/game.gd",
+          "scripts/hole.gd",
+          "scripts/hud.gd",
+          "scripts/minimap.gd",
+          "scripts/swallowable.gd",
+          "Scenes/hole.tscn",
+          "shaders/street.gdshader",
+          "shaders/windows.gdshader"
+        ],
+        "unused_fixture_reference_scan_verified": true,
+        "reports": {
+          "release_info": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-release_info.json",
+            "checks": 37,
+            "sha256": {
+              ".json": "b7873e24b4f5b451444d6c8617f3e5b0ea6c8fd0ce83bc3cd7eea4bafa0cb681",
+              ".log": "42d8294c0de5954113b08fa609cf959105f9efb01a2f3f28896edef57de45904",
+              ".engine.log": "42d8294c0de5954113b08fa609cf959105f9efb01a2f3f28896edef57de45904"
+            },
+            "execution": "verified_reuse"
+          },
+          "native_polish": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-native_polish.json",
+            "checks": 267,
+            "sha256": {
+              ".json": "af784f2426c5d42ac1f69f64d20b555801abb5d9d5b3b3bd20e26a54b7dcca2a",
+              ".log": "dab6e78cf14e6dd6bb603b11cf57e3a718751a888e57dd01cfd658444f4cb188",
+              ".engine.log": "dab6e78cf14e6dd6bb603b11cf57e3a718751a888e57dd01cfd658444f4cb188"
+            },
+            "execution": "verified_reuse"
+          },
+          "viewport_layout": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-viewport_layout.json",
+            "checks": 41,
+            "sha256": {
+              ".json": "1fd08e01babdf3c1864623c050acaba1fdf8440b71b57636afacdab9ebcf37a6",
+              ".log": "651f2240215f8062c35d0dd463fdb0ff33927e2034a08eb162d1839819f19dd2",
+              ".engine.log": "651f2240215f8062c35d0dd463fdb0ff33927e2034a08eb162d1839819f19dd2"
+            },
+            "execution": "verified_reuse"
+          },
+          "application_lifecycle": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-application_lifecycle.json",
+            "checks": 70,
+            "sha256": {
+              ".json": "551f6287996bfcba351c7015315a60262d69ba075b76b6758889bc2a05f56c58",
+              ".log": "9a59fb4ae3046ea57a44d5f0462cc1b61ff6b5ace0be9fc4fe8c056b18377601",
+              ".engine.log": "9a59fb4ae3046ea57a44d5f0462cc1b61ff6b5ace0be9fc4fe8c056b18377601"
+            },
+            "execution": "verified_reuse"
+          },
+          "scene_qa": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-scene_qa.json",
+            "checks": 765,
+            "sha256": {
+              ".json": "145ad89bed5701592258949010c321d1b2dcb8882faa9d4f5e750fc1ff1b1bdc",
+              ".log": "35c6aa92a3677eba149e3c6c747bd06803b68c9b81659f41a0b0d0cec8b16205",
+              ".engine.log": "35c6aa92a3677eba149e3c6c747bd06803b68c9b81659f41a0b0d0cec8b16205"
+            },
+            "execution": "verified_reuse"
+          },
+          "street_prop_qa": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-street_prop_qa.json",
+            "checks": 835,
+            "sha256": {
+              ".json": "44689e7f1e3d2e978c15c9731f1b092ed37894f7f04476e583cab980df2dd056",
+              ".log": "d09e746829b04216173f3ff6b18b421914ee426df3710a8d4dfaf681c8061af4",
+              ".engine.log": "d09e746829b04216173f3ff6b18b421914ee426df3710a8d4dfaf681c8061af4"
+            },
+            "execution": "verified_reuse"
+          },
+          "claim_recovery": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-claim_recovery.json",
+            "checks": 10,
+            "sha256": {
+              ".json": "40ece0877feab7a0154c80f0c834d1bccd1e9412940803995361ee15343564c3",
+              ".log": "86afcc6d81bbc02fea8e7f4ef1fe8aeb51cfd3a981a3d315842d9e3137a50a62",
+              ".engine.log": "86afcc6d81bbc02fea8e7f4ef1fe8aeb51cfd3a981a3d315842d9e3137a50a62"
+            },
+            "execution": "verified_reuse"
+          },
+          "full_city_qa": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-full_city_qa.json",
+            "checks": 1539,
+            "sha256": {
+              ".json": "feed022b5a4a10d7eb392848d731a643e523fa768cffe43fd5c451ec175ab365",
+              ".log": "a3e4ffdf3c6ab8b6792d9be17695f344b19c1506b077439edc8fcf7d1ad2d967",
+              ".engine.log": "a3e4ffdf3c6ab8b6792d9be17695f344b19c1506b077439edc8fcf7d1ad2d967"
+            },
+            "execution": "verified_reuse"
+          },
+          "skin_collection": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-skin_collection.json",
+            "checks": 374,
+            "sha256": {
+              ".json": "37f0e55a5973b161a5d73d019785b8519fbe1265481d1fa3ee8ad5d5a7e6b88a",
+              ".log": "d0f075cb0b56512ec3a0b25c5b47d875ecf29e96fe46a637a9142e562c9f87d9",
+              ".engine.log": "d0f075cb0b56512ec3a0b25c5b47d875ecf29e96fe46a637a9142e562c9f87d9"
+            },
+            "execution": "verified_reuse"
+          },
+          "skin_fx": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-skin_fx.json",
+            "checks": 414,
+            "sha256": {
+              ".json": "953b6528ff7187d86b71ed6634ac0401db98a21e16f8ab4eee91245c7b6db6b0",
+              ".log": "f917988f28f9bd9411abceead63590135d74651b6175ae119b72fcac01c1c666",
+              ".engine.log": "f917988f28f9bd9411abceead63590135d74651b6175ae119b72fcac01c1c666"
+            },
+            "execution": "verified_reuse"
+          },
+          "title_navigation": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-title_navigation.json",
+            "checks": 37,
+            "sha256": {
+              ".json": "8c830d19084cbda14a90a495de8ac85601c4d7459bc1167e3bac14e598abc11f",
+              ".log": "30d308dcf743492385236b562f2954ff9333fa2bd339aac73386818d767f827d",
+              ".engine.log": "30d308dcf743492385236b562f2954ff9333fa2bd339aac73386818d767f827d"
+            },
+            "execution": "verified_reuse"
+          },
+          "ui_redesign": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-ui_redesign.json",
+            "checks": 1843,
+            "sha256": {
+              ".json": "65d25671b94dcc67e8f88c9db116c3beb837d93dc83389045dbbe545cd7a442c",
+              ".log": "de41ed3703386b9deec54f7c3a0cd5170721bbdbf7dce543d7799e50d7f075a4",
+              ".engine.log": "de41ed3703386b9deec54f7c3a0cd5170721bbdbf7dce543d7799e50d7f075a4"
+            },
+            "execution": "verified_reuse"
+          },
+          "map_preview": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-map_preview.json",
+            "checks": 79,
+            "sha256": {
+              ".json": "43922b3ff364b3d0820f9426d2b7aa86f59f511387211f4a877ebdb9524503f4",
+              ".log": "68db364fdf50c54da6e89aa8fb4f27fc56819dea1e7d4c3bb2d6327cd73ca52f",
+              ".engine.log": "68db364fdf50c54da6e89aa8fb4f27fc56819dea1e7d4c3bb2d6327cd73ca52f"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_preview": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_preview.json",
+            "checks": 483,
+            "sha256": {
+              ".json": "7a48248e4cf3d80878cb3e39d4acc0cb8c1346329a5ff117cdb94ea795be5f0a",
+              ".log": "1141b891545e6fba216df6113b1a6bf389f1eca0065bc5d835f0a223da86fb93",
+              ".engine.log": "1141b891545e6fba216df6113b1a6bf389f1eca0065bc5d835f0a223da86fb93"
+            },
+            "execution": "verified_reuse"
+          },
+          "map_preview_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-map_preview_review.json",
+            "checks": 716,
+            "sha256": {
+              ".json": "8bcf042c07d975747ad3b5a8737fff6e9a091cae56c13dd66631fbc697b746b4",
+              ".log": "f5dde22ce5d688a8e081a6c4bd5806ba434a8f7b002c4c79e844a3dbfc81052f",
+              ".engine.log": "f5dde22ce5d688a8e081a6c4bd5806ba434a8f7b002c4c79e844a3dbfc81052f"
+            },
+            "execution": "verified_reuse"
+          },
+          "coin_skins": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-coin_skins.json",
+            "checks": 412,
+            "sha256": {
+              ".json": "14d37288dd194486c458fcbbe275623d4c93bfc031413a0f94e424aef33e1766",
+              ".log": "ad0c00959713b6e3170c8c01986d600dba65eefd8e562fd9680dd5c4781d8afb",
+              ".engine.log": "ad0c00959713b6e3170c8c01986d600dba65eefd8e562fd9680dd5c4781d8afb"
+            },
+            "execution": "verified_reuse"
+          },
+          "skin_skill": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-skin_skill.json",
+            "checks": 130,
+            "sha256": {
+              ".json": "78a71fddbcf3902967518e61b7331a2d830cbd09122ab3915307b53e1ae12340",
+              ".log": "6a396b5c7b3879f6549af0e4de6a9d690d89d408a4cc872e910540661b8046c0",
+              ".engine.log": "6a396b5c7b3879f6549af0e4de6a9d690d89d408a4cc872e910540661b8046c0"
+            },
+            "execution": "verified_reuse"
+          },
+          "snack_city": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-snack_city.json",
+            "checks": 80,
+            "sha256": {
+              ".json": "2e4b0274e7241894f7812c5670bb7a834a7d5f9f3ad545c2d994e5c15714b6ab",
+              ".log": "95fab8822ceba05962e5cfc546454858648b026fe0710a7ca65d05e8e28facaf",
+              ".engine.log": "95fab8822ceba05962e5cfc546454858648b026fe0710a7ca65d05e8e28facaf"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_city_density": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_city_density.json",
+            "checks": 1667,
+            "sha256": {
+              ".json": "aaa5c67c44a47fb0ccc95f8155e239dc973b27df02725c9afd2289b01d906984",
+              ".log": "4a796fbb2bb5ca302673afe318b082417b08b557d6924ad257eca8af447da97e",
+              ".engine.log": "4a796fbb2bb5ca302673afe318b082417b08b557d6924ad257eca8af447da97e"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_round": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_round.json",
+            "checks": 2,
+            "sha256": {
+              ".json": "0f40810f4f8e88ae2e39799cc25ab45bf048a6cad1157175ad35fdea26183ec2",
+              ".log": "68b8da94594425a34fae2fa11976ee89ec06cbeb90411732f1ca6f28a6391cea",
+              ".engine.log": "68b8da94594425a34fae2fa11976ee89ec06cbeb90411732f1ca6f28a6391cea"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_finish": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_finish.json",
+            "checks": 136,
+            "sha256": {
+              ".json": "19a77333469ac098db65590d3a68d15b7d9a687676805c325cbb81c6e303c921",
+              ".log": "12823b6acdb56f03556b2f2705b204902927834267a62e78d7ed5c3eb91d6361",
+              ".engine.log": "12823b6acdb56f03556b2f2705b204902927834267a62e78d7ed5c3eb91d6361"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_neighborhoods": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_neighborhoods.json",
+            "checks": 323,
+            "sha256": {
+              ".json": "55cb1e622614949a550fca7770be2034265176d3e4e5a6ce4763e682ce3ffb50",
+              ".log": "24d62ee24a601d0b4d27c78c3a91301efeb71eeed2dfee684362d34cff5a6e67",
+              ".engine.log": "24d62ee24a601d0b4d27c78c3a91301efeb71eeed2dfee684362d34cff5a6e67"
+            },
+            "execution": "verified_reuse"
+          },
+          "mobile_maps": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-mobile_maps.json",
+            "checks": 29,
+            "sha256": {
+              ".json": "51799f1c11f073bdc922d3b7e1eaba69dad4145207c5e3ecb5d71a78ad665f6d",
+              ".log": "6d63f37b36a519235dc8c39bba162d91c678a4822cde2065111064036d51ed36",
+              ".engine.log": "6d63f37b36a519235dc8c39bba162d91c678a4822cde2065111064036d51ed36"
+            },
+            "execution": "verified_reuse"
+          },
+          "performance": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-performance.json",
+            "checks": 271,
+            "sha256": {
+              ".json": "2d6049ae5b5305e70661d04b21af47ed3ce0dffc6adc60cf5c5b0577bdbb98a9",
+              ".log": "7dfbd744fd2f797d599ae07cd712a29e6a6f815aebaa9e95c5bbe66ec5c0085b",
+              ".engine.log": "7dfbd744fd2f797d599ae07cd712a29e6a6f815aebaa9e95c5bbe66ec5c0085b"
+            },
+            "execution": "verified_reuse"
+          },
+          "portrait": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-portrait.json",
+            "checks": 30,
+            "sha256": {
+              ".json": "4dccef10427214e507e888fe041c982b6aab14c7f5f4076e5aff0e4964b5d58e",
+              ".log": "3107b5c66a0c4b1e442b42e9f0d952d2ef950eca6237ac00fad3d22bf51b556a",
+              ".engine.log": "3107b5c66a0c4b1e442b42e9f0d952d2ef950eca6237ac00fad3d22bf51b556a"
+            },
+            "execution": "verified_reuse"
+          },
+          "progression": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-progression.json",
+            "checks": 15,
+            "sha256": {
+              ".json": "826506c7a4c6de705045509594ea9bfbefff2d421abdb4ecdb699e3beee0406c",
+              ".log": "84e8639ce48ce4b158262e317c896161e50cf5586c8a8e483361605f10e63d01",
+              ".engine.log": "84e8639ce48ce4b158262e317c896161e50cf5586c8a8e483361605f10e63d01"
+            },
+            "execution": "verified_reuse"
+          },
+          "store": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-store.json",
+            "checks": 17,
+            "sha256": {
+              ".json": "e1aa7235f6628e184b23513498dc50e2fc99e2dd425d26bf631c282784bd3b8d",
+              ".log": "0232bf4883a757d0c05af765b02ccc103c959d4b204f03eb80d3d213a40ac02c",
+              ".engine.log": "0232bf4883a757d0c05af765b02ccc103c959d4b204f03eb80d3d213a40ac02c"
+            },
+            "execution": "verified_reuse"
+          },
+          "city_motion": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-city_motion.json",
+            "checks": 22,
+            "sha256": {
+              ".json": "87f89607192fd5d764c6952fa939c1c56a03d4762de1a0d7588ac32b26462a4b",
+              ".log": "059c0cefd939205c02bb3d3df13bac6356a93d82adfe2c2a9fb1b4624f7a96f5",
+              ".engine.log": "059c0cefd939205c02bb3d3df13bac6356a93d82adfe2c2a9fb1b4624f7a96f5"
+            },
+            "execution": "verified_reuse"
+          },
+          "city_districts": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-city_districts.json",
+            "checks": 2718,
+            "sha256": {
+              ".json": "c9dd5c476513ef69c01b83a4116716e922b04528482e00242200c5bcaabe8035",
+              ".log": "a18f1e558e77cb3a7e6f8ec0d6e6ebb00ace3ebebad3f08c7ba3780cfd7a9e47",
+              ".engine.log": "a18f1e558e77cb3a7e6f8ec0d6e6ebb00ace3ebebad3f08c7ba3780cfd7a9e47"
+            },
+            "execution": "verified_reuse"
+          },
+          "skin_catalog": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-skin_catalog.json",
+            "checks": 897,
+            "sha256": {
+              ".json": "85121507a330d7e91ae7b92bb40320cefb524c248e55e667ef54f73f81a1be28",
+              ".log": "253d7b95c4c426d928a727f43589f92879fa4e18163b1ac6980dea7c68de020d",
+              ".engine.log": "253d7b95c4c426d928a727f43589f92879fa4e18163b1ac6980dea7c68de020d"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_rain_continuity": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_rain_continuity.json",
+            "checks": 38,
+            "sha256": {
+              ".json": "ea79c755c04877701ea14704f74642f4678fae3d31869ed8969ec099ab8c0fb0",
+              ".log": "d19e725e935508c30d72d88d0547520aa55f34f740e6ad96ecb551a2e8330b71",
+              ".engine.log": "d19e725e935508c30d72d88d0547520aa55f34f740e6ad96ecb551a2e8330b71"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_city_revision": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_city_revision.json",
+            "checks": 135,
+            "sha256": {
+              ".json": "2be8254c809f5317862affe325d086daef13e34a2473076c544b89772e77823d",
+              ".log": "6fa1b1a70ea49de49f8b59ec1561cfc246782d02d82d5a737bacdb3f10c3d7b0",
+              ".engine.log": "6fa1b1a70ea49de49f8b59ec1561cfc246782d02d82d5a737bacdb3f10c3d7b0"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_impact": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_impact.json",
+            "checks": 256,
+            "sha256": {
+              ".json": "ef8eab33a73d56c31f27d0d89b7f151fc31cab41e867a09c8023b110c0b40e04",
+              ".log": "d07a1188639b45f236d9c78fe47dad5494cdae77fd54dada2e4140e323e8836e",
+              ".engine.log": "d07a1188639b45f236d9c78fe47dad5494cdae77fd54dada2e4140e323e8836e"
+            },
+            "execution": "verified_reuse"
+          },
+          "ui_collection_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-ui_collection_review.json",
+            "checks": 1905,
+            "sha256": {
+              ".json": "b679a3a0a304dadc364f65783438ba7dce4e7910241ccb8bffa46bbcef7719f1",
+              ".log": "7c454b126b1c7509233cd2b012f3c5f9172a16857c75ae738b4c741e5d45a476",
+              ".engine.log": "7c454b126b1c7509233cd2b012f3c5f9172a16857c75ae738b4c741e5d45a476"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_goals_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_goals_review.json",
+            "checks": 37,
+            "sha256": {
+              ".json": "61c85b33a1d595eb96b87145472dc777ddb8b8c3fe0984bc0b99388893ac54a8",
+              ".log": "68ba4f328da3ca2d45ac4523f9ee72738cb5c66b212854aff4adcc5466c0eb74",
+              ".engine.log": "68ba4f328da3ca2d45ac4523f9ee72738cb5c66b212854aff4adcc5466c0eb74"
+            },
+            "execution": "verified_reuse"
+          },
+          "progression_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-progression_review.json",
+            "checks": 10,
+            "sha256": {
+              ".json": "a5dc0f692e1ed3aa69d82fff7103c7650e95d9a33f902fae2e1ebf09bdcbe0cf",
+              ".log": "84ff803cb8e24c5dd380fdd6e6a782f7b3b25f85654b393d19c0bf420319c69f",
+              ".engine.log": "84ff803cb8e24c5dd380fdd6e6a782f7b3b25f85654b393d19c0bf420319c69f"
+            },
+            "execution": "verified_reuse"
+          },
+          "rain_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-rain_review.json",
+            "checks": 9,
+            "sha256": {
+              ".json": "396187da0680828a6658a4c7b72e47ac798dcfad30c69bce6af7f1f88dc5db03",
+              ".log": "c7629dc518df0571ae9ef530e6ad7929ff9acb6568d81af52e19af06d14fa435",
+              ".engine.log": "c7629dc518df0571ae9ef530e6ad7929ff9acb6568d81af52e19af06d14fa435"
+            },
+            "execution": "verified_reuse"
+          },
+          "crowd_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-crowd_review.json",
+            "checks": 17,
+            "sha256": {
+              ".json": "05bad7c30f67bc71e1e6be5c1a319073e6479dea976495803be40becf8a691e7",
+              ".log": "d312f1fb9ecd72a3e3e5effde0a888f2d95c82d4447a251f1f165c2b322c2d23",
+              ".engine.log": "d312f1fb9ecd72a3e3e5effde0a888f2d95c82d4447a251f1f165c2b322c2d23"
+            },
+            "execution": "verified_reuse"
+          },
+          "district_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-district_review.json",
+            "checks": 4,
+            "sha256": {
+              ".json": "18dfe00ac3f026e9826ffaae8f417e1adb4efbf361fc08b64baa879f2bcc0faa",
+              ".log": "3b3c624d719d7934d20b288c1d04fa5e0e51a631eba3534b3707116af0f99d13",
+              ".engine.log": "3b3c624d719d7934d20b288c1d04fa5e0e51a631eba3534b3707116af0f99d13"
+            },
+            "execution": "verified_reuse"
+          },
+          "food_revision_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-food_revision_review.json",
+            "checks": 11,
+            "sha256": {
+              ".json": "66aad3e66e2057c9559c7753a6e5782610af9a9d8b6ac8f8ac44dc88264e7a6f",
+              ".log": "63362612d528a44a7ef35c92fdc4fced0be213f4516ba33db5faf67cffba58a0",
+              ".engine.log": "63362612d528a44a7ef35c92fdc4fced0be213f4516ba33db5faf67cffba58a0"
+            },
+            "execution": "verified_reuse"
+          },
+          "skin_catalog_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-skin_catalog_review.json",
+            "checks": 206,
+            "sha256": {
+              ".json": "29f2429bf0e93c4832679e4962dc5ad9c72150ef8fb84e91348bea4992440d63",
+              ".log": "90852e369b80c6113603f39fea052f5e6e2929dd03cbab6279f5b48c91845238",
+              ".engine.log": "90852e369b80c6113603f39fea052f5e6e2929dd03cbab6279f5b48c91845238"
+            },
+            "execution": "verified_reuse"
+          },
+          "mobile_thumbnail": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-mobile_thumbnail.json",
+            "checks": 3847,
+            "sha256": {
+              ".json": "efd6c88e93391ea33a253f30538cc90499070e917a67ead9cd92acafe2e2898a",
+              ".log": "894bcdc2d94d61187a0c37ee9568d3711815a165f6aa18204885fb761dccb18c",
+              ".engine.log": "894bcdc2d94d61187a0c37ee9568d3711815a165f6aa18204885fb761dccb18c"
+            },
+            "execution": "verified_reuse"
+          },
+          "procedural_filtering": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-procedural_filtering.json",
+            "checks": 27,
+            "sha256": {
+              ".json": "f5bbf36265f7dea40e078c0d69560064f3fd367a5b7fc08def0422b5d517d32e",
+              ".log": "c52054c45a0e84a240041a70ec7cbc6fb359f8ca055dea2937d976bdbc8c76ba",
+              ".engine.log": "c52054c45a0e84a240041a70ec7cbc6fb359f8ca055dea2937d976bdbc8c76ba"
+            },
+            "execution": "verified_reuse"
+          },
+          "selective_reveal": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-selective_reveal.json",
+            "checks": 75,
+            "sha256": {
+              ".json": "4c7756bad88b2201ba38b1e5392d04d81134cdeac4e6087ffd6850a47574f447",
+              ".log": "763fe96a93f610d5cd1fd877e79d582a9f1b29810edd301502955e6a3d154a1f",
+              ".engine.log": "763fe96a93f610d5cd1fd877e79d582a9f1b29810edd301502955e6a3d154a1f"
+            },
+            "execution": "verified_reuse"
+          },
+          "selective_reveal_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-selective_reveal_review.json",
+            "checks": 491,
+            "sha256": {
+              ".json": "4f914d8d693331b280d175df303abfc80b9cdd9c771810e32f7385bb7501b749",
+              ".log": "15c157821dce002e9f636db0db3992fff9f8e1a924ec9e77fe8671fb39dec399",
+              ".engine.log": "15c157821dce002e9f636db0db3992fff9f8e1a924ec9e77fe8671fb39dec399"
+            },
+            "execution": "verified_reuse"
+          },
+          "building_only_reveal_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-building_only_reveal_review.json",
+            "checks": 213,
+            "sha256": {
+              ".json": "9b4d0ef17237a39746d73cd213af961d5c7ec9680d359f9dbcefef6a693fe2e4",
+              ".log": "628a235dff67fb6e2f5e1d91e6bbe7b929a87180baa4574d9ff87adac29523c8",
+              ".engine.log": "628a235dff67fb6e2f5e1d91e6bbe7b929a87180baa4574d9ff87adac29523c8"
+            },
+            "execution": "verified_reuse"
+          },
+          "building_surface_artifacts": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-building_surface_artifacts.json",
+            "checks": 1438,
+            "sha256": {
+              ".json": "575ed2bc549c5380e90621a14225a2a921395bf3c05d12010f633ca85ff3844f",
+              ".log": "ab7f4efd06bbab948f83c63ed7640d342dace4008810e4b5b6697a5d0fdf5dac",
+              ".engine.log": "ab7f4efd06bbab948f83c63ed7640d342dace4008810e4b5b6697a5d0fdf5dac"
+            },
+            "execution": "verified_reuse"
+          },
+          "growth_extension": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-growth_extension.json",
+            "checks": 1978,
+            "sha256": {
+              ".json": "c3837ba7ec3de07600faf8a3d017a65ca0db7c8ead4b56d92134e36ff1b0fdc9",
+              ".log": "aef8672df345b0439328f6d3a0658830ea5c21885ce0bce0d9676c3a70dc7291",
+              ".engine.log": "aef8672df345b0439328f6d3a0658830ea5c21885ce0bce0d9676c3a70dc7291"
+            },
+            "execution": "verified_reuse"
+          },
+          "rival_combat": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-rival_combat.json",
+            "checks": 58,
+            "sha256": {
+              ".json": "64b21293c74bb0513812dac3e5d57b6f869ed8a7e9b44a0b439c535a26889a8d",
+              ".log": "dd42a49134ab6750d8f8c54cb1d390f132f6d076f4694aac9b1410f88b9bf2f5",
+              ".engine.log": "dd42a49134ab6750d8f8c54cb1d390f132f6d076f4694aac9b1410f88b9bf2f5"
+            },
+            "execution": "verified_reuse"
+          },
+          "large_growth_world": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-large_growth_world.json",
+            "checks": 258,
+            "sha256": {
+              ".json": "d32ea689d2ab7cbc7ac92f855062ccf4fb3d9ff6d90739019dff41194993dfc2",
+              ".log": "f0c53d01fd94bed8ff1b4288ad01e551705666de25f691d3238c06f789a72b86",
+              ".engine.log": "f0c53d01fd94bed8ff1b4288ad01e551705666de25f691d3238c06f789a72b86"
+            },
+            "execution": "verified_reuse"
+          },
+          "pedestrian_swallow_review": {
+            "origin_report": "artifacts/collapse-surface-20261002/web-gate-01/source-pedestrian_swallow_review.json",
+            "checks": 120,
+            "sha256": {
+              ".json": "71bfe0a5e5a135c6298e7596c7d79391d31f619f7de72f696dffb7684e6eb8f8",
+              ".log": "ad8b000cef4fe7e1245deba936e67c36bab37ac657862d275582b4371168a7b7",
+              ".engine.log": "ad8b000cef4fe7e1245deba936e67c36bab37ac657862d275582b4371168a7b7"
+            },
+            "execution": "verified_reuse"
+          }
+        },
+        "scope": "51 completed current-runtime source reports copied exactly. Only the unused ownership fixture differs; all85 current Web-PCK suites execute fresh. Failed origin gate is preserved and never claimed fully accepted."
+      },
+      "origin_gate_fully_accepted": false,
+      "origin_completed_source_suites": 51,
+      "byte_exact_source_reports_and_logs": true,
+      "single_unused_fixture_exception_verified": true
+    },
+    "historical_origin_only": "artifacts/simple-ui-20261002/web-gate-03/release.json",
+    "current_runtime_origin_reports_reused_for_current_gate": true,
+    "historical_pre_0_12_7_reports_reused_for_current_gate": false
+  },
+  "supplementary_snapshot_inputs": [
+    {
+      "path": "icon.svg",
+      "source": "icon.svg",
+      "sha256": "c4190fc8a21f79e364115377db542e921ca9e8de165ec81e04e1ec5704b8884e",
+      "scope": "Current root icon copied only into fresh V4 private capture project; never into historical V2/V3",
+      "included_in_gate_map": false
+    }
+  ],
+  "private_helper_sha256": {
+    "store_media_v4.py": "94d82942dbc33c403c1b320e9d8d76101367e74e8556945d96088fa0892ad6d8",
+    "store-movie-v4.gd": "f0aef4ab2ef01dd61856310093353ebe165546ce95fac3aaed23fd55d1f43411",
+    "store-features-v4.gd": "87d60ec9ca7104b23d48e62c2fe5e6728442475ff571af332cd299fa06b10b55",
+    "compose_store_v4.cjs": "0b9a5e7db512a3de5ff6703e3b7d61f2f85c0c1a39c9706908e0774dc090b102",
+    "store-captions-v4.json": "0069ab129588f1dbced1070aaa466ec9254f5497e2a4b3ebe4814071157b9dcb",
+    "store-copy-v4.md": "04cbffa691eb96a3ee388532c4d5c9067921c1ecfe4ec8b8d59c59ac67a0884c"
+  }
+}

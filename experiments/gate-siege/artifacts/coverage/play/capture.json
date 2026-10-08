@@ -1,0 +1,84 @@
+{
+  "elapsed": 178.100000000034,
+  "frames": 2687,
+  "health": 100.0,
+  "members": 36,
+  "metrics": {
+    "bosses": 8,
+    "breaches": 0,
+    "chain_hits": 205,
+    "damage": 750071566.0,
+    "elites": 22,
+    "gate2": 849,
+    "gate5": 819,
+    "gate999": 721,
+    "losses": 0,
+    "peak_fields": 20,
+    "peak_packets": 0,
+    "recruits": 3,
+    "shots": 25526,
+    "soldiers": 35,
+    "splash_hits": 63,
+    "wave_clears": 8,
+    "wins": 1
+  },
+  "milestones": [
+    {
+      "members": 1,
+      "tier": 0,
+      "time": 0.0666666666666667,
+      "wave": 1
+    },
+    {
+      "members": 11,
+      "tier": 3,
+      "time": 11.8000000000002,
+      "wave": 2
+    },
+    {
+      "members": 15,
+      "tier": 3,
+      "time": 16.6000000000003,
+      "wave": 3
+    },
+    {
+      "members": 36,
+      "tier": 3,
+      "time": 56.1999999999981,
+      "wave": 4
+    },
+    {
+      "members": 36,
+      "tier": 3,
+      "time": 79.9999999999967,
+      "wave": 5
+    },
+    {
+      "members": 36,
+      "tier": 3,
+      "time": 105.333333333329,
+      "wave": 6
+    },
+    {
+      "members": 36,
+      "tier": 3,
+      "time": 130.599999999996,
+      "wave": 7
+    },
+    {
+      "members": 36,
+      "tier": 3,
+      "time": 155.000000000015,
+      "wave": 8
+    }
+  ],
+  "mode": "fixed60Hz simulation,15FPS rendered normal-control movie; no injected combat state",
+  "phase": "won",
+  "tier": 3,
+  "wave": 8,
+  "immutable_pck": "artifacts/coverage/coverage-release-1.pck",
+  "pck_sha256": "81412f9adbc68a57530cc3b556e08939c08505d59ddf2f26871860ea8f5083e0",
+  "recorded_fps": 15,
+  "source_fallback": false,
+  "policy": "normal input sweep; newest unlocked weapon first, then four-second cycling"
+}

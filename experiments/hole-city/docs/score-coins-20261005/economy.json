@@ -1,0 +1,34 @@
+{
+  "rule": "coins = floor(max(points, 0) / 10)",
+  "examples": [
+    {
+      "points": 100,
+      "coins": 10
+    },
+    {
+      "points": 500,
+      "coins": 50
+    },
+    {
+      "points": 963,
+      "coins": 96
+    },
+    {
+      "points": 1000,
+      "coins": 100
+    },
+    {
+      "points": 2000,
+      "coins": 200
+    }
+  ],
+  "minimum_coins": 0,
+  "finish_bonus": 0,
+  "coin_cap": null,
+  "boost": "base + floor(base / 2)",
+  "continuation": "same receipt; only positive difference is paid, including additional boosted coins",
+  "draw_price_coins": 50,
+  "existing_wallet_migration": "none; preserve balances and historical receipts",
+  "new_native_build": 31,
+  "uploaded": false
+}

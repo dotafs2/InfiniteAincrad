@@ -1,0 +1,28 @@
+--- artifacts/building-only-reveal-20260929/author/prior-selective-reveal-acceptance.gd
++++ tests/selective_reveal_acceptance.gd
+@@ -25,6 +25,7 @@
+ 	if not ok:failures.append(label);push_error(label)
+ func fixture(category:String,at:Vector3,size:Vector3)->Fixture:
+ 	var body:=Fixture.new();body.category=category;body.half_size=size*.5;body.height=size.y
++	body.set_meta("dither_building",category=="building")
+ 	body.name="Fixture_%03d_%s"%[fixture_serial,category];fixture_serial+=1
+ 	body.freeze=true;body.collision_layer=4;body.collision_mask=5;body.mass=7.25
+ 	var shape:=BoxShape3D.new();shape.size=size
+@@ -114,15 +115,14 @@
+ 	var floor:=fixture("food_cake",Vector3(0,3,3),Vector3(4,.6,4))
+ 	floor.set_meta("food_building",true);floor.set_meta("structural_shell",true)
+ 	floor.set_meta("structure_width",4.0);floor.set_meta("structure_height",8.0)
+-	check(game.reveal.is_structural_candidate(floor) and game.reveal.blocks_core(floor,game.camera,game.player),"Broad thin floor of a large food building qualifies by intact group size")
++	check(not game.reveal.is_structural_candidate(floor) and not game.reveal.blocks_core(floor,game.camera,game.player),"Thin food layer cannot borrow its tall stack's dimensions to qualify as a building")
+ 	floor.set_meta("structural_shell",false)
+ 	check(not game.reveal.is_structural_candidate(floor),"Small topper with tower membership but no shell opt-in stays opaque")
+ 	floor.set_meta("structural_shell",true);floor.set_meta("structure_height",2.0)
+ 	check(not game.reveal.is_structural_candidate(floor),"Low food assembly fails the large structure threshold")
+ 	floor.set_meta("structure_height",8.0);floor.set_meta("structure_width",1.0)
+ 	check(not game.reveal.is_structural_candidate(floor),"Narrow food assembly fails the large structure threshold")
+-	# Do not register the synthetic food floor without a real batch; actual
+-	# food batches and release semantics have a separate independent suite.
++	# The independent suite also checks actual food batches and shader output.
+ 	floor.set_meta("structural_shell",false)
+ 	building.freeze=false
+ 	check(not game.reveal.is_intact(building) and not game.reveal.blocks_core(building,game.camera,game.player),"Released building immediately stops being a reveal blocker")

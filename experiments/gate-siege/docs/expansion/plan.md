@@ -1,0 +1,13 @@
+# Squad campaign acceptance contract
+
+The second supplied clip shows a separate additive +1 lane and whole-formation class upgrades. Existing members continue firing during the upgrade jump. Add36 persistent members at most; the cap is authored and visible, not inferred from the video. All modes retain the same member count, muzzle logic, damage and enemies.
+
+Retain the earlier multiplier-gate loop as a hybrid. Move into the visible right-hand +1 lane to collect each approaching card once. New soldiers enter a compact formation with individual firing origins. Clear the upgrade statue to transform every member on landing; pending upgrades do not change active weapons early. Bound the formation within the road at both lateral extremes. Keep independent contact and directional shadows.
+
+Eight authored waves introduce brute, shield/golem, fast six-legged skitter, flying dragon and mixed groups. Dragon wings must flap with articulated joints in real gameplay, not only in a preview; pause freezes them. Flying targets must receive visibly aimed projectile paths and real damage. Telegraph hazards before they hit. A visible cyan shield-core ring is the shared squad hurtbox; red warnings aim at this same point. The full36 formation can steer this core out of every warning. All members still fire independently; shield health is shared, not per-soldier health. Victory occurs only after all eight bosses, troops and elites are defeated. Restart clears campaign state.
+
+Five selectable weapon modes differ mechanically: rapid per-member fire, five-pellet scatter, piercing rail, area-damage rockets and chain lightning. Unlock them through campaign waves. Each packet records owner, mode and launched tier; old shots do not retroactively switch. New allies continue using the current class and selected mode. Cosmetic caps must sample all members fairly.
+
+Rendering acceptance: improve hero costume/weapon forms and readable scale; restore smooth silhouettes at a1280px portrait3D long axis in mobile profiles (720×1280 at9:16), with crisp full-resolution UI; use blue city depth, substantial gates, soft continuous luminous trails and ground shadows. Keep30-FPS mobile target through batching/spatial collision/pool limits, not by removing gameplay entities. Desktop rendering is evidence only; target-phone30FPS still requires physical-device acceptance. Reference quality is judged against actual captures, not claimed from settings.
+
+Two independent reviewers audit each phase: reference/specification, models/rendering, mechanics, then exported-package playthrough and stress. Do not describe a visual or gameplay condition as passed while their concrete findings remain open.

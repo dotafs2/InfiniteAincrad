@@ -1,0 +1,578 @@
+{
+  "city_immediately_after_start": {
+    "largest_scale_component_error": 0.0,
+    "map_basis_columns": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "map_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "nonunit": [],
+    "nonunit_count": 0,
+    "total_bodies": 812,
+    "train_bodies": 4
+  },
+  "city_same_as_failed_fixture_before_step": {
+    "largest_scale_component_error": 0.0,
+    "map_basis_columns": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "map_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "nonunit": [],
+    "nonunit_count": 0,
+    "total_bodies": 812,
+    "train_bodies": 4
+  },
+  "city_train_traveled": 0.0,
+  "food_immediately_after_start": {
+    "largest_scale_component_error": 5.96046447753906e-08,
+    "map_basis_columns": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "map_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "nonunit": [
+      {
+        "approx_unit_1e6": true,
+        "asset": "res://assets/trains/sushi_gunkan.glb",
+        "basis_column_lengths": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "basis_columns": [
+          [
+            -0.707392990589142,
+            0.0,
+            -0.706820428371429
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.706820428371429,
+            0.0,
+            -0.707392990589142
+          ]
+        ],
+        "basis_pair_dots": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "determinant": 0.999999940395355,
+        "frozen": true,
+        "half_size": [
+          0.513000011444092,
+          0.61018580198288,
+          0.784999966621399
+        ],
+        "name": "TrainCar_sushi_00",
+        "position": [
+          -72.0,
+          0.645185828208923,
+          -73.0
+        ],
+        "scale": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "scale_error": [
+          5.96046447753906e-08,
+          0.0,
+          5.96046447753906e-08
+        ],
+        "train": true
+      },
+      {
+        "approx_unit_1e6": true,
+        "asset": "res://assets/trains/sushi_salmon.glb",
+        "basis_column_lengths": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "basis_columns": [
+          [
+            -0.771445989608765,
+            0.0,
+            -0.636294782161713
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.636294782161713,
+            0.0,
+            -0.771445989608765
+          ]
+        ],
+        "basis_pair_dots": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "determinant": 0.999999940395355,
+        "frozen": true,
+        "half_size": [
+          0.513000011444092,
+          0.409185767173767,
+          0.784999966621399
+        ],
+        "name": "TrainCar_sushi_01",
+        "position": [
+          -73.4508972167969,
+          0.444185763597488,
+          -71.4350967407227
+        ],
+        "scale": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "scale_error": [
+          5.96046447753906e-08,
+          0.0,
+          5.96046447753906e-08
+        ],
+        "train": true
+      },
+      {
+        "approx_unit_1e6": true,
+        "asset": "res://assets/trains/sushi_tuna.glb",
+        "basis_column_lengths": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "basis_columns": [
+          [
+            -0.807910442352295,
+            0.0,
+            -0.589305222034454
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.589305222034454,
+            0.0,
+            -0.807910442352295
+          ]
+        ],
+        "basis_pair_dots": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "determinant": 0.99999988079071,
+        "frozen": true,
+        "half_size": [
+          0.513000011444092,
+          0.414185762405396,
+          0.784999966621399
+        ],
+        "name": "TrainCar_sushi_02",
+        "position": [
+          -74.7948303222656,
+          0.449185758829117,
+          -69.7776031494141
+        ],
+        "scale": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "scale_error": [
+          5.96046447753906e-08,
+          0.0,
+          5.96046447753906e-08
+        ],
+        "train": true
+      },
+      {
+        "approx_unit_1e6": true,
+        "asset": "res://assets/trains/sushi_tamago.glb",
+        "basis_column_lengths": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "basis_columns": [
+          [
+            -0.887001872062683,
+            0.0,
+            -0.461765795946121
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.461765795946121,
+            0.0,
+            -0.887001872062683
+          ]
+        ],
+        "basis_pair_dots": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "determinant": 0.999999940395355,
+        "frozen": true,
+        "half_size": [
+          0.513000011444092,
+          0.448185741901398,
+          0.784999966621399
+        ],
+        "name": "TrainCar_sushi_05",
+        "position": [
+          -78.2360916137695,
+          0.483185738325119,
+          -64.3863525390625
+        ],
+        "scale": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "scale_error": [
+          5.96046447753906e-08,
+          0.0,
+          5.96046447753906e-08
+        ],
+        "train": true
+      }
+    ],
+    "nonunit_count": 4,
+    "total_bodies": 2930,
+    "train_bodies": 8
+  },
+  "food_same_as_failed_fixture_before_step": {
+    "largest_scale_component_error": 5.96046447753906e-08,
+    "map_basis_columns": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "map_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "nonunit": [
+      {
+        "approx_unit_1e6": true,
+        "asset": "res://assets/trains/sushi_gunkan.glb",
+        "basis_column_lengths": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "basis_columns": [
+          [
+            -0.707392990589142,
+            0.0,
+            -0.706820428371429
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.706820428371429,
+            0.0,
+            -0.707392990589142
+          ]
+        ],
+        "basis_pair_dots": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "determinant": 0.999999940395355,
+        "frozen": true,
+        "half_size": [
+          0.513000011444092,
+          0.61018580198288,
+          0.784999966621399
+        ],
+        "name": "TrainCar_sushi_00",
+        "position": [
+          -72.0,
+          0.645185828208923,
+          -73.0
+        ],
+        "scale": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "scale_error": [
+          5.96046447753906e-08,
+          0.0,
+          5.96046447753906e-08
+        ],
+        "train": true
+      },
+      {
+        "approx_unit_1e6": true,
+        "asset": "res://assets/trains/sushi_salmon.glb",
+        "basis_column_lengths": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "basis_columns": [
+          [
+            -0.771445989608765,
+            0.0,
+            -0.636294782161713
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.636294782161713,
+            0.0,
+            -0.771445989608765
+          ]
+        ],
+        "basis_pair_dots": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "determinant": 0.999999940395355,
+        "frozen": true,
+        "half_size": [
+          0.513000011444092,
+          0.409185767173767,
+          0.784999966621399
+        ],
+        "name": "TrainCar_sushi_01",
+        "position": [
+          -73.4508972167969,
+          0.444185763597488,
+          -71.4350967407227
+        ],
+        "scale": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "scale_error": [
+          5.96046447753906e-08,
+          0.0,
+          5.96046447753906e-08
+        ],
+        "train": true
+      },
+      {
+        "approx_unit_1e6": true,
+        "asset": "res://assets/trains/sushi_tuna.glb",
+        "basis_column_lengths": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "basis_columns": [
+          [
+            -0.807910442352295,
+            0.0,
+            -0.589305222034454
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.589305222034454,
+            0.0,
+            -0.807910442352295
+          ]
+        ],
+        "basis_pair_dots": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "determinant": 0.99999988079071,
+        "frozen": true,
+        "half_size": [
+          0.513000011444092,
+          0.414185762405396,
+          0.784999966621399
+        ],
+        "name": "TrainCar_sushi_02",
+        "position": [
+          -74.7948303222656,
+          0.449185758829117,
+          -69.7776031494141
+        ],
+        "scale": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "scale_error": [
+          5.96046447753906e-08,
+          0.0,
+          5.96046447753906e-08
+        ],
+        "train": true
+      },
+      {
+        "approx_unit_1e6": true,
+        "asset": "res://assets/trains/sushi_tamago.glb",
+        "basis_column_lengths": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "basis_columns": [
+          [
+            -0.887001872062683,
+            0.0,
+            -0.461765795946121
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.461765795946121,
+            0.0,
+            -0.887001872062683
+          ]
+        ],
+        "basis_pair_dots": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "determinant": 0.999999940395355,
+        "frozen": true,
+        "half_size": [
+          0.513000011444092,
+          0.448185741901398,
+          0.784999966621399
+        ],
+        "name": "TrainCar_sushi_05",
+        "position": [
+          -78.2360916137695,
+          0.483185738325119,
+          -64.3863525390625
+        ],
+        "scale": [
+          0.999999940395355,
+          1.0,
+          0.999999940395355
+        ],
+        "scale_error": [
+          5.96046447753906e-08,
+          0.0,
+          5.96046447753906e-08
+        ],
+        "train": true
+      }
+    ],
+    "nonunit_count": 4,
+    "total_bodies": 2930,
+    "train_bodies": 8
+  },
+  "food_train_traveled": 0.0,
+  "source_hashes_before": {
+    "fidelity/game.gd": "f0f9df7e7052e2e505f678977c69eca4c31938ae1f65bfa98eae05eb133ac61a",
+    "fidelity/edible_train.gd": "2886758208c9eb7fb5e0d89d448c561bd404f182f4c8e516d0ef706a7a014d3f",
+    "fidelity/train_car.gd": "28a0de04cb3222c1c9e15df60ab8313defc8bbbe2572ad82115120282155ce86",
+    "fidelity/train_assets.gd": "1d95b9acece92c32ec9e75c43e3db617d8a0bb4a525fc640204d503eb43159da",
+    "tests/world_expansion_review.gd": "4d13fd220fffcdbd50ce03f520b2e71bb077eab1c2dd8ef3f5aa617befc99b94"
+  },
+  "source_hashes_after": {
+    "fidelity/game.gd": "f0f9df7e7052e2e505f678977c69eca4c31938ae1f65bfa98eae05eb133ac61a",
+    "fidelity/edible_train.gd": "2886758208c9eb7fb5e0d89d448c561bd404f182f4c8e516d0ef706a7a014d3f",
+    "fidelity/train_car.gd": "28a0de04cb3222c1c9e15df60ab8313defc8bbbe2572ad82115120282155ce86",
+    "fidelity/train_assets.gd": "1d95b9acece92c32ec9e75c43e3db617d8a0bb4a525fc640204d503eb43159da",
+    "tests/world_expansion_review.gd": "4d13fd220fffcdbd50ce03f520b2e71bb077eab1c2dd8ef3f5aa617befc99b94"
+  },
+  "inputs_unchanged": true,
+  "unexpected_engine_errors": []
+}

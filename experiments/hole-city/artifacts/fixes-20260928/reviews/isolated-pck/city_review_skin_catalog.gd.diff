@@ -1,0 +1,47 @@
+--- city_review_skin_catalog.gd before
++++ city_review_skin_catalog.gd after
+@@ -7,6 +7,30 @@
+ func check(ok:bool,label:String)->void:
+ 	checks+=1
+ 	if not ok:failures.append(label);push_error(label)
++func review_source_hash(path:String)->Variant:
++	# Exported packages can contain compiled scripts without original source text.
++	if not FileAccess.file_exists(path):return null
++	var digest:=FileAccess.get_sha256(path)
++	return null if digest.is_empty() else digest
++func write_optional_report(result:Dictionary)->bool:
++	var output:=""
++	for arg in OS.get_cmdline_user_args():
++		if arg.begins_with("--report="):output=arg.trim_prefix("--report=")
++		elif arg.begins_with("--output="):output=arg.trim_prefix("--output=")
++	if output.is_empty():return true
++	if not output.is_absolute_path() or "://" in output:
++		push_error("Review report requires an absolute filesystem path: "+output)
++		return false
++	var file:=FileAccess.open(output,FileAccess.WRITE)
++	if file==null:
++		push_error("Could not write review report: %s (error %d)"%[output,FileAccess.get_open_error()])
++		return false
++	file.store_string(JSON.stringify(result,"\t")+"\n");file.flush()
++	var error:=file.get_error();file.close()
++	if error!=OK:
++		push_error("Could not finish review report: %s (error %d)"%[output,error])
++		return false
++	return true
+ func run()->void:
+ 	if not OS.get_cmdline_user_args().has("--test"):quit(2);return
+ 	var model:=Visual.new();root.add_child(model);model.set_process(false)
+@@ -53,8 +77,10 @@
+ 			check(unclosed==0,"Every extruded motif has two triangles per closed boundary edge: "+definition.id)
+ 		metrics.append({"id":definition.id,"minimum_geometry_radius":smallest,"mesh_count":first_count,"extruded_meshes":solid_motifs,"inside_out":inside_out,"unclosed":unclosed})
+ 	var hashes:={}
+-	for path in ["fidelity/skin_catalog.gd","fidelity/skin_motifs.gd","fidelity/skin_visual.gd","fidelity/shaders/accretion.gdshader"]:hashes[path]=FileAccess.get_sha256("res://"+path)
++	for path in ["fidelity/skin_catalog.gd","fidelity/skin_motifs.gd","fidelity/skin_visual.gd","fidelity/shaders/accretion.gdshader"]:hashes[path]=review_source_hash("res://"+path)
+ 	var result:={"checks":checks,"failures":failures,"source_hashes":hashes,"forms":metrics}
++	model.free()
++	result["source_hash_note"]="Null means source text is unavailable in this runtime; package identity is recorded by the release gate."
++	var report_ok:=write_optional_report(result)
+ 	print("CITY_REVIEW_SKIN_CATALOG "+JSON.stringify(result))
+-	FileAccess.open("res://artifacts/audit-fixes-20260928/skin-catalog-independent.json",FileAccess.WRITE).store_string(JSON.stringify(result,"\t"))
+-	model.free();quit(0 if failures.is_empty() else 1)
++	quit(0 if failures.is_empty() and report_ok else 1)

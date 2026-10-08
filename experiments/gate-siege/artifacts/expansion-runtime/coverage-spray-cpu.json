@@ -1,0 +1,548 @@
+{
+  "coverage_solver": true,
+  "display": "headless",
+  "dt": 0.0166666666666667,
+  "engine": {
+    "build": "official",
+    "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "hex": 263938,
+    "major": 4,
+    "minor": 7,
+    "patch": 2,
+    "status": "stable",
+    "string": "4.7.2-stable (official)",
+    "timestamp": 0
+  },
+  "label": "coverage-gpu-spray-source",
+  "notes": "Accelerated fixed-step CPU timing only. All modes use 36 members, 544 high-HP troops, mixed high-HP elites and a high-HP dragon boss in wave 8. Actual normal physics is timed; no rendering or phone FPS claim. Damage values may differ between reviewed combat contracts. Setup and deferred deletion are outside timed calls.",
+  "processor": "Apple M1 Pro",
+  "repeats": 3,
+  "requested_simulation_seconds": 20.0,
+  "results": [
+    {
+      "between_tick_us": {
+        "max": 1320.0,
+        "mean": 403.876,
+        "min": 192.0,
+        "p50": 359.0,
+        "p95": 888.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 3062.0,
+        "mean": 1884.205,
+        "min": 210.0,
+        "p50": 1872.0,
+        "p95": 2528.0,
+        "samples": 200
+      },
+      "damage": 31595613.5019409,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rifle",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 17,
+      "phase": "playing",
+      "physics_us": {
+        "max": 3062.0,
+        "mean": 650.5975,
+        "min": 192.0,
+        "p50": 378.0,
+        "p95": 1970.0,
+        "samples": 1200
+      },
+      "repeat": 0,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1519.0,
+        "mean": 406.467,
+        "min": 193.0,
+        "p50": 360.0,
+        "p95": 890.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 3043.0,
+        "mean": 1905.125,
+        "min": 210.0,
+        "p50": 1861.0,
+        "p95": 2690.0,
+        "samples": 200
+      },
+      "damage": 31595613.5019409,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rifle",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 17,
+      "phase": "playing",
+      "physics_us": {
+        "max": 3043.0,
+        "mean": 656.243333333333,
+        "min": 193.0,
+        "p50": 377.0,
+        "p95": 2013.0,
+        "samples": 1200
+      },
+      "repeat": 1,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1328.0,
+        "mean": 410.459,
+        "min": 194.0,
+        "p50": 363.0,
+        "p95": 901.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 3123.0,
+        "mean": 1919.165,
+        "min": 208.0,
+        "p50": 1884.0,
+        "p95": 2608.0,
+        "samples": 200
+      },
+      "damage": 31595613.5019409,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rifle",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 17,
+      "phase": "playing",
+      "physics_us": {
+        "max": 3123.0,
+        "mean": 661.91,
+        "min": 194.0,
+        "p50": 382.0,
+        "p95": 2026.0,
+        "samples": 1200
+      },
+      "repeat": 2,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1322.0,
+        "mean": 284.264,
+        "min": 183.0,
+        "p50": 211.0,
+        "p95": 860.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 2269.0,
+        "mean": 1115.65,
+        "min": 208.0,
+        "p50": 1063.0,
+        "p95": 1810.0,
+        "samples": 200
+      },
+      "damage": 30489335.8265655,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "scatter",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 9,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2269.0,
+        "mean": 422.828333333333,
+        "min": 183.0,
+        "p50": 218.0,
+        "p95": 1281.0,
+        "samples": 1200
+      },
+      "repeat": 0,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1227.0,
+        "mean": 283.665,
+        "min": 179.0,
+        "p50": 211.0,
+        "p95": 857.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 2318.0,
+        "mean": 1101.89,
+        "min": 216.0,
+        "p50": 1074.0,
+        "p95": 1807.0,
+        "samples": 200
+      },
+      "damage": 30489335.8265655,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "scatter",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 9,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2318.0,
+        "mean": 420.035833333333,
+        "min": 179.0,
+        "p50": 221.0,
+        "p95": 1241.0,
+        "samples": 1200
+      },
+      "repeat": 1,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1382.0,
+        "mean": 283.146,
+        "min": 181.0,
+        "p50": 211.0,
+        "p95": 865.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 2212.0,
+        "mean": 1107.425,
+        "min": 234.0,
+        "p50": 1072.0,
+        "p95": 1754.0,
+        "samples": 200
+      },
+      "damage": 30489335.8265655,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "scatter",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 9,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2212.0,
+        "mean": 420.525833333333,
+        "min": 181.0,
+        "p50": 223.0,
+        "p95": 1276.0,
+        "samples": 1200
+      },
+      "repeat": 2,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1248.0,
+        "mean": 270.375,
+        "min": 182.0,
+        "p50": 205.0,
+        "p95": 862.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 1958.0,
+        "mean": 771.28,
+        "min": 190.0,
+        "p50": 715.0,
+        "p95": 1503.0,
+        "samples": 200
+      },
+      "damage": 158000510.631043,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rail",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 6,
+      "phase": "playing",
+      "physics_us": {
+        "max": 1958.0,
+        "mean": 353.859166666667,
+        "min": 182.0,
+        "p50": 211.0,
+        "p95": 1003.0,
+        "samples": 1200
+      },
+      "repeat": 0,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1381.0,
+        "mean": 270.295,
+        "min": 182.0,
+        "p50": 205.0,
+        "p95": 859.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 2030.0,
+        "mean": 766.24,
+        "min": 187.0,
+        "p50": 721.0,
+        "p95": 1485.0,
+        "samples": 200
+      },
+      "damage": 158000510.631043,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rail",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 6,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2030.0,
+        "mean": 352.9525,
+        "min": 182.0,
+        "p50": 211.0,
+        "p95": 988.0,
+        "samples": 1200
+      },
+      "repeat": 1,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1150.0,
+        "mean": 271.207,
+        "min": 182.0,
+        "p50": 205.0,
+        "p95": 857.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 2002.0,
+        "mean": 762.185,
+        "min": 189.0,
+        "p50": 747.0,
+        "p95": 1433.0,
+        "samples": 200
+      },
+      "damage": 158000510.631043,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rail",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 6,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2002.0,
+        "mean": 353.036666666667,
+        "min": 182.0,
+        "p50": 211.0,
+        "p95": 985.0,
+        "samples": 1200
+      },
+      "repeat": 2,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1313.0,
+        "mean": 272.571,
+        "min": 179.0,
+        "p50": 212.0,
+        "p95": 855.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 1640.0,
+        "mean": 893.255,
+        "min": 202.0,
+        "p50": 872.0,
+        "p95": 1397.0,
+        "samples": 200
+      },
+      "damage": 45786830.8396042,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rocket",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 10,
+      "phase": "playing",
+      "physics_us": {
+        "max": 1640.0,
+        "mean": 376.018333333333,
+        "min": 179.0,
+        "p50": 218.0,
+        "p95": 1041.0,
+        "samples": 1200
+      },
+      "repeat": 0,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1169.0,
+        "mean": 274.034,
+        "min": 182.0,
+        "p50": 212.0,
+        "p95": 858.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 1632.0,
+        "mean": 888.84,
+        "min": 202.0,
+        "p50": 880.0,
+        "p95": 1369.0,
+        "samples": 200
+      },
+      "damage": 45786830.8396042,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rocket",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 10,
+      "phase": "playing",
+      "physics_us": {
+        "max": 1632.0,
+        "mean": 376.501666666667,
+        "min": 182.0,
+        "p50": 219.0,
+        "p95": 1027.0,
+        "samples": 1200
+      },
+      "repeat": 1,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1348.0,
+        "mean": 275.357,
+        "min": 182.0,
+        "p50": 212.0,
+        "p95": 860.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 1562.0,
+        "mean": 893.56,
+        "min": 209.0,
+        "p50": 885.0,
+        "p95": 1364.0,
+        "samples": 200
+      },
+      "damage": 45786830.8396042,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "rocket",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 10,
+      "phase": "playing",
+      "physics_us": {
+        "max": 1562.0,
+        "mean": 378.390833333333,
+        "min": 182.0,
+        "p50": 218.0,
+        "p95": 1029.0,
+        "samples": 1200
+      },
+      "repeat": 2,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1096.0,
+        "mean": 296.88,
+        "min": 182.0,
+        "p50": 221.0,
+        "p95": 871.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 2935.0,
+        "mean": 1383.625,
+        "min": 203.0,
+        "p50": 1261.0,
+        "p95": 2254.0,
+        "samples": 200
+      },
+      "damage": 38148557.3457677,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "arc",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 11,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2935.0,
+        "mean": 478.004166666667,
+        "min": 182.0,
+        "p50": 248.0,
+        "p95": 1467.0,
+        "samples": 1200
+      },
+      "repeat": 0,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1252.0,
+        "mean": 294.061,
+        "min": 188.0,
+        "p50": 217.0,
+        "p95": 869.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 2755.0,
+        "mean": 1352.765,
+        "min": 204.0,
+        "p50": 1249.0,
+        "p95": 2184.0,
+        "samples": 200
+      },
+      "damage": 38148557.3457677,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "arc",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 11,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2755.0,
+        "mean": 470.511666666667,
+        "min": 188.0,
+        "p50": 235.0,
+        "p95": 1458.0,
+        "samples": 1200
+      },
+      "repeat": 1,
+      "simulation_seconds": 20.0000000000001
+    },
+    {
+      "between_tick_us": {
+        "max": 1301.0,
+        "mean": 295.212,
+        "min": 183.0,
+        "p50": 220.0,
+        "p95": 873.0,
+        "samples": 1000
+      },
+      "combat_tick_us": {
+        "max": 2793.0,
+        "mean": 1369.205,
+        "min": 203.0,
+        "p50": 1243.0,
+        "p95": 2260.0,
+        "samples": 200
+      },
+      "damage": 38148557.3457677,
+      "living_crowd": 544,
+      "members": 36,
+      "mode": "arc",
+      "peak_cosmetics_or_legacy_packets": 0,
+      "peak_coverage_fields": 11,
+      "phase": "playing",
+      "physics_us": {
+        "max": 2793.0,
+        "mean": 474.210833333333,
+        "min": 183.0,
+        "p50": 251.0,
+        "p95": 1466.0,
+        "samples": 1200
+      },
+      "repeat": 2,
+      "simulation_seconds": 20.0000000000001
+    }
+  ]
+}

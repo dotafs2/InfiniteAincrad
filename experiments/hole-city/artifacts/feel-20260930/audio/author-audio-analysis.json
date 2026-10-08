@@ -1,0 +1,590 @@
+{
+  "result": "pass",
+  "checks": 102,
+  "failures": [],
+  "method": "Offline decoded-signal measurements plus authored score invariants and deterministic regeneration. No audio playback or subjective audition.",
+  "runtime_mix_scope": "Existing Music bus -14dB, SFX bus 0dB, player routes and attenuation untouched. Effective RMS assumes the default master gain; actual acoustic level depends on device volume and output. Food impact rate/voices unchanged.",
+  "inputs": {
+    "tools/build_music.py": "ade0fd3054367acb9955effd05c2f1397f6e685677ba490d88bcb0bae1299a79",
+    "fidelity/audio.gd": "30775280c6450bc9d3ee3cf4a03da44fe811ae4846dc1bef7b36eea6c2f618e5",
+    "fidelity/audio_bus_layout.tres": "a8b1b249f22929c4305c60424b0c35a0b1734c1ed5d7b1ab36fa2348d0bf4c56",
+    "assets/audio/music_manifest.json": "2596187b19adfc675ee87babdb3e947650b943fa2958cad10f652778f4bf65f1",
+    "artifacts/feel-20260930/audio/analyze_music.py": "edea728ffe29bcbcbd777c413a7b81c944d82feb019160a80336feba9ce8d6aa"
+  },
+  "tracks": [
+    {
+      "name": "sunny_city_loop",
+      "before_spectrum": {
+        "method": "Mean stereo channel power; 4096-point Hann windows, 50% overlap; normalized spectral energy, not perceived brightness.",
+        "centroid_hz": 424.5133374809546,
+        "energy_fraction": {
+          "0-120": 0.3063300847221102,
+          "120-500": 0.2655478671167202,
+          "500-2000": 0.42627206076373036,
+          "2000-4000": 0.0017577682005905316,
+          "4000-8000": 8.831064314115756e-05,
+          "8000-22051": 3.908553704605051e-06
+        },
+        "energy_above_2000hz": 0.0018499873974362946,
+        "energy_above_4000hz": 9.221919684576284e-05
+      },
+      "after_spectrum": {
+        "method": "Mean stereo channel power; 4096-point Hann windows, 50% overlap; normalized spectral energy, not perceived brightness.",
+        "centroid_hz": 395.43889517066697,
+        "energy_fraction": {
+          "0-120": 0.11730439357916775,
+          "120-500": 0.513443156786325,
+          "500-2000": 0.3692502260184935,
+          "2000-4000": 2.11560308504477e-06,
+          "4000-8000": 1.0790432624861037e-07,
+          "8000-22051": 1.0860834125844919e-10
+        },
+        "energy_above_2000hz": 2.223616019634638e-06,
+        "energy_above_4000hz": 1.0801293458986881e-07
+      },
+      "before_decoded": {
+        "samples_per_channel": 1411200,
+        "duration_seconds": 32.0,
+        "sample_rate": 44100,
+        "channels": 2,
+        "peak_linear": 0.6756669282913208,
+        "peak_dbfs": -3.405346757273431,
+        "rms_dbfs": -17.19209754679452,
+        "dc_max_absolute": 3.582028148230165e-05,
+        "clipped_samples": 0,
+        "seam_jump_per_channel": [
+          0.0027886261232197285,
+          0.002257332671433687
+        ],
+        "seam_jump_max": 0.0027886261232197285,
+        "interior_step_p99": 0.031942956149578094,
+        "interior_step_max": 0.07436881959438324,
+        "boundary_20ms_rms_dbfs": -19.667397249416187,
+        "stereo_correlation": 0.9638651675759992,
+        "integrated_lufs": -15.3,
+        "true_peak_dbtp": -3.4
+      },
+      "after_decoded": {
+        "samples_per_channel": 1628308,
+        "duration_seconds": 36.92308390022676,
+        "sample_rate": 44100,
+        "channels": 2,
+        "peak_linear": 0.2970443665981293,
+        "peak_dbfs": -10.543573590778433,
+        "rms_dbfs": -24.482458218465858,
+        "dc_max_absolute": 6.308425327006262e-06,
+        "clipped_samples": 0,
+        "seam_jump_per_channel": [
+          0.00039485562592744827,
+          0.0002490833285264671
+        ],
+        "seam_jump_max": 0.00039485562592744827,
+        "interior_step_p99": 0.011695630848407745,
+        "interior_step_max": 0.024486202746629715,
+        "boundary_20ms_rms_dbfs": -33.45363540771438,
+        "stereo_correlation": 0.9845470996096656,
+        "integrated_lufs": -21.9,
+        "true_peak_dbtp": -10.5
+      },
+      "before_events_per_second": 21.53125,
+      "after_events_per_second": 3.547915996236584,
+      "after_written_lead_rest_fraction": 0.55078125,
+      "master_effective_rms_dbfs_before": -31.19209754679452,
+      "master_effective_rms_dbfs_after": -38.48245821846586,
+      "old_sha256": "f606d1f9720ebf512fbe1f1110f70992b416a61c990823ee09955e2546df7177",
+      "new_sha256": "bcf2e7af8fa53a568b287a03e6034ae6631f0694b6e2d17692b9c47943868c25"
+    },
+    {
+      "name": "snack_garden_loop",
+      "before_spectrum": {
+        "method": "Mean stereo channel power; 4096-point Hann windows, 50% overlap; normalized spectral energy, not perceived brightness.",
+        "centroid_hz": 499.12029923719183,
+        "energy_fraction": {
+          "0-120": 0.31076862152735013,
+          "120-500": 0.2211445127805432,
+          "500-2000": 0.46367279717879617,
+          "2000-4000": 0.0037805250039687375,
+          "4000-8000": 0.0006323771551686652,
+          "8000-22051": 1.1663541738111523e-06
+        },
+        "energy_above_2000hz": 0.004414068513311208,
+        "energy_above_4000hz": 0.0006335435093424746
+      },
+      "after_spectrum": {
+        "method": "Mean stereo channel power; 4096-point Hann windows, 50% overlap; normalized spectral energy, not perceived brightness.",
+        "centroid_hz": 366.7758787251843,
+        "energy_fraction": {
+          "0-120": 0.1057146001739358,
+          "120-500": 0.6632998985382852,
+          "500-2000": 0.2309835457871101,
+          "2000-4000": 1.8566583892224936e-06,
+          "4000-8000": 9.874778497426505e-08,
+          "8000-22051": 9.449949745639755e-11
+        },
+        "energy_above_2000hz": 1.955500673694207e-06,
+        "energy_above_4000hz": 9.884228447172167e-08
+      },
+      "before_decoded": {
+        "samples_per_channel": 1512000,
+        "duration_seconds": 34.285714285714285,
+        "sample_rate": 44100,
+        "channels": 2,
+        "peak_linear": 0.6821203231811523,
+        "peak_dbfs": -3.3227802170022325,
+        "rms_dbfs": -17.878698455684656,
+        "dc_max_absolute": 4.0102160710375756e-05,
+        "clipped_samples": 0,
+        "seam_jump_per_channel": [
+          0.00624130992218852,
+          0.004336200188845396
+        ],
+        "seam_jump_max": 0.00624130992218852,
+        "interior_step_p99": 0.03453242778778076,
+        "interior_step_max": 0.0822727158665657,
+        "boundary_20ms_rms_dbfs": -20.899810613470784,
+        "stereo_correlation": 0.9711371067442179,
+        "integrated_lufs": -15.8,
+        "true_peak_dbtp": -3.3
+      },
+      "after_decoded": {
+        "samples_per_channel": 1568000,
+        "duration_seconds": 35.55555555555556,
+        "sample_rate": 44100,
+        "channels": 2,
+        "peak_linear": 0.2776522934436798,
+        "peak_dbfs": -11.129974696965624,
+        "rms_dbfs": -24.48673119897798,
+        "dc_max_absolute": 9.338864401797764e-06,
+        "clipped_samples": 0,
+        "seam_jump_per_channel": [
+          0.0009461687295697629,
+          0.001910671591758728
+        ],
+        "seam_jump_max": 0.001910671591758728,
+        "interior_step_p99": 0.010255523025989532,
+        "interior_step_max": 0.019320987164974213,
+        "boundary_20ms_rms_dbfs": -33.30031468598601,
+        "stereo_correlation": 0.9845164843009595,
+        "integrated_lufs": -22.0,
+        "true_peak_dbtp": -11.1
+      },
+      "before_events_per_second": 16.245833333333334,
+      "after_events_per_second": 3.6843749999999997,
+      "after_written_lead_rest_fraction": 0.55078125,
+      "master_effective_rms_dbfs_before": -31.878698455684656,
+      "master_effective_rms_dbfs_after": -38.48673119897798,
+      "old_sha256": "10c680b090cdef83e1520893eb41c4157ab8440d3c5b22e27610b167ce22897b",
+      "new_sha256": "a12e247ad82b7098b7cbc0c1dff191661c92e1d88d4660510091567e935ae92e"
+    }
+  ],
+  "assertions": [
+    {
+      "check": "sunny_city_loop: source-bound encoded hash",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: four separate instrument parts",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: fewer than half the original events per second",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: written melody has at least 45% rests",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: lead remains below F5",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: no metallic counterline or continuous hats",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: only major/minor triads",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: chord notes avoid adjacent semitones",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 1 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 1 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 2 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 2 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 3 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 3 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 4 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 5 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 5 note 1.75 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: passing note is brief",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 5 note 2.75 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 6 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 6 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 7 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 7 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 8 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 8 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 9 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 9 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 10 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 10 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 11 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 11 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 12 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 12 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 13 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 13 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 14 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 14 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 15 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 16 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: bar 16 note 2.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: mostly chord tones with only short passing notes",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: comfortable melodic leaps including loop",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: over four dB softer than old decoded file",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: lower absolute high-frequency energy",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: decoded level remains within gentle target",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: true peak retains 6dB headroom",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: decoded raw sample and seam safeguards",
+      "pass": true
+    },
+    {
+      "check": "sunny_city_loop: completely different musical PCM",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: source-bound encoded hash",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: four separate instrument parts",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: fewer than half the original events per second",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: written melody has at least 45% rests",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: lead remains below F5",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: no metallic counterline or continuous hats",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: only major/minor triads",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: chord notes avoid adjacent semitones",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 1 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 1 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 2 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 2 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 3 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 3 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 4 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 5 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 5 note 1.75 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: passing note is brief",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 5 note 2.75 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 6 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 6 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 7 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 7 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 8 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 8 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 9 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 9 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 10 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 10 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 11 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 11 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 12 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 12 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 13 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 13 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 14 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 14 note 2 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 15 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 16 note 0.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: bar 16 note 2.5 leaves valid nonoverlapping phrase",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: mostly chord tones with only short passing notes",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: comfortable melodic leaps including loop",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: over four dB softer than old decoded file",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: lower absolute high-frequency energy",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: decoded level remains within gentle target",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: true peak retains 6dB headroom",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: decoded raw sample and seam safeguards",
+      "pass": true
+    },
+    {
+      "check": "snack_garden_loop: completely different musical PCM",
+      "pass": true
+    },
+    {
+      "check": "Different maps retain different recording hashes",
+      "pass": true
+    },
+    {
+      "check": "Runtime audio controller unchanged",
+      "pass": true
+    },
+    {
+      "check": "Music and SFX buses unchanged",
+      "pass": true
+    },
+    {
+      "check": "Deterministic rebuild: sunny_city_loop.ogg",
+      "pass": true
+    },
+    {
+      "check": "Deterministic rebuild: snack_garden_loop.ogg",
+      "pass": true
+    },
+    {
+      "check": "Deterministic rebuild: music_manifest.json",
+      "pass": true
+    }
+  ]
+}

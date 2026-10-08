@@ -1,0 +1,601 @@
+{
+  "version": "0.8.5",
+  "failures": [],
+  "verified_at_utc": "2026-09-28T16:26:10.614858+00:00",
+  "source_checks": 33734,
+  "packaged_checks": 33734,
+  "suites_per_phase": 49,
+  "device_recorder_checks": 12,
+  "device_recorder_log_sha256": "dc9130f3cfe8f5d41ff6ccfd6fbe71c5daddadf5ec43d1a21e20ac519c00fe6f",
+  "shader_receipt_sha256": "80ebf4434cb3f96f5af0897bae513a4d2c087eb998341cddd048211f8a7791ea",
+  "shader_programs": 10,
+  "shader_cases": 45,
+  "food_opacity_evidence": "All nine isolated cases retain every pixel; separate source guard excludes ALPHA outputs, includes and discard. The fixed-output wrapper alone does not validate alpha blending.",
+  "release_sha256": "155574117328ec6c7a9d46be947a618149f1711ac8515d5de79cfdf0566cb01c",
+  "verifier_sha256": "0a801162acd37708426efde47d69d30001477243b6e73d66f056ef4fb15f49b8",
+  "receipts": {
+    "source-scene_qa.json": {
+      "sha256": "0e14c78782f61de5c052c0c13cd2d1ca93f5b9d7be4595a3f3b8a8e042d419c8",
+      "log_sha256": "3d9add30d12a8f776933ca43d9d2417b0d764cfb66b9d91fd43cfcd82cde2688",
+      "checks": 765
+    },
+    "source-street_prop_qa.json": {
+      "sha256": "44689e7f1e3d2e978c15c9731f1b092ed37894f7f04476e583cab980df2dd056",
+      "log_sha256": "82b60dd7c17eb9024d27cb064f508f81f3e54503992d8e731fc281aa5735bd92",
+      "checks": 835
+    },
+    "source-claim_recovery.json": {
+      "sha256": "40ece0877feab7a0154c80f0c834d1bccd1e9412940803995361ee15343564c3",
+      "log_sha256": "1a36d10b2dea5d4748b1a58a9808d11bf48e72f9e39ae6c9d35bb25927db87d3",
+      "checks": 10
+    },
+    "source-full_city_qa.json": {
+      "sha256": "b68059c801cddf75f8f194f3bb8fb224ee9da1c93c2efb6ad8678e6d8cd8a228",
+      "log_sha256": "a9391c7c677a94f757aeddcede1b36357509c35bbf579094137571e8da01be3a",
+      "checks": 1229
+    },
+    "source-skin_fx.json": {
+      "sha256": "449e14052c046dda5935aac321c6266dfa43548da9d3deba27b99d9303e931e3",
+      "log_sha256": "f2fbd59433862d8b161a644c5b5b45ac5b9333ab6096a31b9247cf69c29cfb42",
+      "checks": 414
+    },
+    "source-title_navigation.json": {
+      "sha256": "c10d98894a3d72d9526dcc97f5a6498d0e8805c896d52eccf7f09e0f148dfa45",
+      "log_sha256": "544ffd5b4d2768f3f6723a08b447b2e0a5ae5afd8b288cb19bae3f812f08e250",
+      "checks": 36
+    },
+    "source-ui_redesign.json": {
+      "sha256": "a5e7b965b1a5ed880d3976b560a60ba0224686dd3900370d6c7f2ed49622a482",
+      "log_sha256": "65f9965cda275c9377287af051ad4c082c631cfd847ccf8f3c6dcbaeac47378c",
+      "checks": 1641
+    },
+    "source-map_preview.json": {
+      "sha256": "43922b3ff364b3d0820f9426d2b7aa86f59f511387211f4a877ebdb9524503f4",
+      "log_sha256": "98e6fb7def148c00338ba2a208f8fcd4b61aa60efa2f34604c22f236a75b2f91",
+      "checks": 79
+    },
+    "source-food_preview.json": {
+      "sha256": "7a48248e4cf3d80878cb3e39d4acc0cb8c1346329a5ff117cdb94ea795be5f0a",
+      "log_sha256": "7cdcc0b5bef5cc424cf61ce43760993a854879fbf5de2ea7f9a4884effaa61cf",
+      "checks": 483
+    },
+    "source-map_preview_review.json": {
+      "sha256": "8bcf042c07d975747ad3b5a8737fff6e9a091cae56c13dd66631fbc697b746b4",
+      "log_sha256": "26dba23985c649408c4bc738168639e4cfec72509ed642e7c9f76cf6cadeecf5",
+      "checks": 716
+    },
+    "source-coin_skins.json": {
+      "sha256": "9781975ba864a9f26f4d3aac3e34bb9ab246526989810366d003ed67d1096e8b",
+      "log_sha256": "a9f0a31d2094ab5880ba14c60e791d5af9ec606fff92582eb90696b783099261",
+      "checks": 403
+    },
+    "source-skin_skill.json": {
+      "sha256": "78a71fddbcf3902967518e61b7331a2d830cbd09122ab3915307b53e1ae12340",
+      "log_sha256": "301b636343e35d0ac0ffd6029f6eb500462d3644b26cecd029e38106eec66763",
+      "checks": 130
+    },
+    "source-snack_city.json": {
+      "sha256": "2a1f429f9180b30e17b306b1c288f9008c76bac8cc5340f900a762e6c036b2fd",
+      "log_sha256": "4900dcd62133375cabbc4e15d28a4962dd7c33ccf3b27ccee958459b949955e1",
+      "checks": 39
+    },
+    "source-food_city_density.json": {
+      "sha256": "04071de4a8829be6dfd1746627166a5d62389063a09d286597a19007678d6093",
+      "log_sha256": "1f35582d2721c3d3954d3c9cf2ea331a040b180f8817f9bc21c68843f343d5ca",
+      "checks": 1187
+    },
+    "source-food_round.json": {
+      "sha256": "ac064f9bac244d7e806caeb188385379705f9166e5668eb471c37600c2155615",
+      "log_sha256": "99b3d89e5e339e99b3f775f5ec52efbdfdd65f33e793ed2b3286c6e5ab6934fa",
+      "checks": 2
+    },
+    "source-food_finish.json": {
+      "sha256": "f446c2171265641055e349519b6b02fcbfc88d612ccba6a6064af1e0165d76b1",
+      "log_sha256": "2a423d2766a24a003d899b74075afa45157edab563574e9c3819025daaa4d568",
+      "checks": 117
+    },
+    "source-food_neighborhoods.json": {
+      "sha256": "9f768d15865709624e4a4386c851ad2176db3ff7e72df6f8c42272b732d1b074",
+      "log_sha256": "1815b491e1ab943d6d44769fbd4142b0086b1bf51169bcb4b7fb00205d858381",
+      "checks": 237
+    },
+    "source-mobile_maps.json": {
+      "sha256": "51799f1c11f073bdc922d3b7e1eaba69dad4145207c5e3ecb5d71a78ad665f6d",
+      "log_sha256": "3c515bcb1dc1f62e4b3215b914e53308b2ecb8dd374be4897f7a7b28954ec30a",
+      "checks": 29
+    },
+    "source-performance.json": {
+      "sha256": "04588dd9214c4e29e9d817ea59281a11e152867a824e1f953d52acca6603b9c4",
+      "log_sha256": "11f274a94572a00da56f1e27e63b48207e9ebef064aac2a0c756624e838ab6f0",
+      "checks": 269
+    },
+    "source-portrait.json": {
+      "sha256": "0d26c36b2f8c1193071687e162286140431b1ed612c2a7b77c8be84d4a6b6e55",
+      "log_sha256": "7bf49550d318a7733d61a09decc8fb045d282fdd6a263fd2028034c35d8f16df",
+      "checks": 30
+    },
+    "source-progression.json": {
+      "sha256": "826506c7a4c6de705045509594ea9bfbefff2d421abdb4ecdb699e3beee0406c",
+      "log_sha256": "d539e21dfa87286d5a34e25b3cddf86c3a0d80015f4e7559e1829c8af6645fbe",
+      "checks": 15
+    },
+    "source-store.json": {
+      "sha256": "e1aa7235f6628e184b23513498dc50e2fc99e2dd425d26bf631c282784bd3b8d",
+      "log_sha256": "9280be033b7451c4b43dc65734bf370c6a727a676548933828f10bf389d6dde9",
+      "checks": 17
+    },
+    "source-city_motion.json": {
+      "sha256": "87f89607192fd5d764c6952fa939c1c56a03d4762de1a0d7588ac32b26462a4b",
+      "log_sha256": "f6fe9ee067700d2239b106f5fa12ebe943748714ebc125b251b2c52129ed67b8",
+      "checks": 22
+    },
+    "source-city_districts.json": {
+      "sha256": "a676404c897804b942d079bec64c335289a92f14f0d41feec459512aaffa5c79",
+      "log_sha256": "c62528255adbe28081cc5fce5311be3f20d3abd35d984c72b6091e5e24d4db82",
+      "checks": 1242
+    },
+    "source-skin_catalog.json": {
+      "sha256": "c8df475246acb78ca61f553fabf4b545d137d90f135649fdc4fe5de7ac9fc384",
+      "log_sha256": "e83d84d0ac03c42b9a659da416ea6648ed96ad30b5b5885f06c617912abc9010",
+      "checks": 991
+    },
+    "source-food_rain_continuity.json": {
+      "sha256": "9b762762ca0d276aaa7f99959c7feb399767703ffee97d0be55e69818bcc557d",
+      "log_sha256": "0a10f97aac6e1ae2fd82c8f069a2bd84866067080105dfe9d950ec49e2820004",
+      "checks": 33
+    },
+    "source-food_city_revision.json": {
+      "sha256": "bc6dfac1d4c6b5198fc65412e5bb5c85f404eeddb5978aa5c5350fdca8058371",
+      "log_sha256": "1be4bb5e8f4c9db85d665424905633fa1127e32aa2a039fa494aae99cc46ee00",
+      "checks": 85
+    },
+    "source-food_impact.json": {
+      "sha256": "a325d3e46f64156cd848788027ea0fa1d6ff5c658f9395184c9f680a26c5cdf8",
+      "log_sha256": "83eb50fcabc109781896b71bdfda3db421d7283ed28bf64ae3a4e02940407062",
+      "checks": 249
+    },
+    "source-ui_collection_review.json": {
+      "sha256": "0a129219a8ed619b726c835806d615c961cec351a9780b2b42d9dcbdb3220064",
+      "log_sha256": "6bea55f56dc0407543dbf928d8eb7899db3a15c92cd131d62d771d72e6c2318c",
+      "checks": 156
+    },
+    "source-food_goals_review.json": {
+      "sha256": "7d699c66c46d96a86d018a97c6a23aa1189dc8d9426a7a4e4b5c7d5e2ef4f5fc",
+      "log_sha256": "ae619e196c7633036edc9003d47b50bac1273708f4f61bec937c2806968bc387",
+      "checks": 36
+    },
+    "source-progression_review.json": {
+      "sha256": "9fd9c0e2a58edae6642704a8a025d1977884464d776784fc2eef1890f2b8485b",
+      "log_sha256": "f2998aa42a621d824dfc1e78f2e856feb5749480030fef20585cf3abfcfad34a",
+      "checks": 10
+    },
+    "source-rain_review.json": {
+      "sha256": "aec35f00323cb0a10c34057713e34cb9dbb6b1c15ab3ec2e9db9b6e51c5726a2",
+      "log_sha256": "6e35fd00ad9a1d5870c1c3bf5893ef5f10539b3a4100217de721c63fa2ff82be",
+      "checks": 9
+    },
+    "source-crowd_review.json": {
+      "sha256": "900ca2fb69b014b152969ccc0c8b3388b5560ee1e047a09c6fc7413921f71ead",
+      "log_sha256": "a945d425609c11d275ef631894c3342db650260e7f4783ac73100a651aa7b924",
+      "checks": 17
+    },
+    "source-district_review.json": {
+      "sha256": "7f350b5ed7f46588f705c4e0ec633e6e4f4bbac949072a8d92a2263cfb68fa02",
+      "log_sha256": "d65002500154b435277e3f0f398ab71518f0fc8fb5864a88e200c3dd895e9e7d",
+      "checks": 4
+    },
+    "source-food_revision_review.json": {
+      "sha256": "6095ca86f6ffefd552cfed600f87953018a1b150a0e4b0a5a0def5e8469fba62",
+      "log_sha256": "3cd2179bfe50619f12a01cab2eb27b08df6349e0be9b6b96721fd71dbb2a804d",
+      "checks": 11
+    },
+    "source-skin_catalog_review.json": {
+      "sha256": "95cd39766f3c67d90a47700c3bd48ec75584177a0ac67d94df641b7353b4e573",
+      "log_sha256": "35f5d3f714a08bfbb4233707c39022d008941d644529c47be6dcaa0dcadc9216",
+      "checks": 212
+    },
+    "source-mobile_thumbnail.json": {
+      "sha256": "d6c4df67f4a07d33c826c75cbd60e99b6325d53b88c67046dbd58ff8ffa834c8",
+      "log_sha256": "d25710b92b086a07993f02ff1643d1284f475735a2789d00a89314e2b596c217",
+      "checks": 695
+    },
+    "source-procedural_filtering.json": {
+      "sha256": "f994c1064968c75728a4c05e5180d32eb541ae62eb605d2726c74a52e09ab225",
+      "log_sha256": "55f11dd3df9a2fc0bc3ae4d348dc943f20fa00b2026a235441599fd08c072d6b",
+      "checks": 27
+    },
+    "source-selective_reveal.json": {
+      "sha256": "4c7756bad88b2201ba38b1e5392d04d81134cdeac4e6087ffd6850a47574f447",
+      "log_sha256": "c530ff7436c9570b9477793f600cd0cddbbcdd577812004ca3c9bad14ccf835d",
+      "checks": 75
+    },
+    "source-selective_reveal_review.json": {
+      "sha256": "e042c3ab3c010bd4782c84c6bef124887dccff9a03b2a4ca4d8eaf76de92e7fe",
+      "log_sha256": "8985334fe7abb8b84ba9d6406bd5965aa17c568cc0c8a7490a7f0b414fe41af2",
+      "checks": 434
+    },
+    "source-building_only_reveal_review.json": {
+      "sha256": "4f52cd8f09cf69df26f562f3f1036db6fa409b850e06d3da1d6b04c074d8a2ed",
+      "log_sha256": "c2606cef52ddfeb5eff0e5b0df3f4c8a7f4d8f4dcd48837c36f0d97b5972c515",
+      "checks": 176
+    },
+    "source-growth_extension.json": {
+      "sha256": "c3837ba7ec3de07600faf8a3d017a65ca0db7c8ead4b56d92134e36ff1b0fdc9",
+      "log_sha256": "636369b8750909c5464fa1d15bff7bb9d74400e74a476e788bc6d6c3daee7423",
+      "checks": 1978
+    },
+    "source-rival_combat.json": {
+      "sha256": "64b21293c74bb0513812dac3e5d57b6f869ed8a7e9b44a0b439c535a26889a8d",
+      "log_sha256": "8ae87b3a300c1fdaacf5faa5b9690fdc71704526c413129f6b6dbefa33a0a3d1",
+      "checks": 58
+    },
+    "source-large_growth_world.json": {
+      "sha256": "773732a133e8635d212909d86d2f1de5de055d3e679c37daf24e7998ebb035d2",
+      "log_sha256": "8a5049489522d3f5e7bba155f7cf4708fc057b0d0dd6be83b9c551998571542c",
+      "checks": 250
+    },
+    "source-pedestrian_swallow_review.json": {
+      "sha256": "c56320874d457b6d2a8e440b6738403bf9e0b492fe50ef2a8c0f2bde7442eed0",
+      "log_sha256": "0ce61b623795f552af1693ca4b0e8e10de5a4124faf2c5953319d7a585512acb",
+      "checks": 120
+    },
+    "source-growth_rivals_review.json": {
+      "sha256": "74230da63dba57c73113f5d926e223bf5546a3a705503a4b3c5d3bcbdd775142",
+      "log_sha256": "0b684b1cd6ece2819b5d75c719783ddaef479eb2d1bbdc29f8cc213faa7916cd",
+      "checks": 291
+    },
+    "source-growth_integration_review.json": {
+      "sha256": "dfa94b16ad22e6bc4f7b15c996218aa71072f1fbd3b5ba120ba795fabf1249d7",
+      "log_sha256": "ff1aa533689fd94a862e8a858db5c68a688894b88083751701a9942ff551ebe5",
+      "checks": 1606
+    },
+    "source-food_collision.json": {
+      "sha256": "5cec1a22c9d74ace7d7c4020b9ff8352abc8ed0f654ab96c5df96fabfeb954b9",
+      "log_sha256": "176d3c80d69d9b36fb9eb48b94716cb673cf93ae3418a525ea6d0f5747d2ded9",
+      "checks": 96
+    },
+    "source-food_collision_review.json": {
+      "sha256": "1994aca5abdcf6ae317594337ce1df694d951dcd5e1d60ed0702a94756925efc",
+      "log_sha256": "3fd6769b0992b16c0dd9a60754e9988a4aa77f593add1affc9c836e13e7e98c1",
+      "checks": 16168
+    },
+    "package-scene_qa.json": {
+      "sha256": "0e14c78782f61de5c052c0c13cd2d1ca93f5b9d7be4595a3f3b8a8e042d419c8",
+      "log_sha256": "3d9add30d12a8f776933ca43d9d2417b0d764cfb66b9d91fd43cfcd82cde2688",
+      "checks": 765
+    },
+    "package-street_prop_qa.json": {
+      "sha256": "44689e7f1e3d2e978c15c9731f1b092ed37894f7f04476e583cab980df2dd056",
+      "log_sha256": "82b60dd7c17eb9024d27cb064f508f81f3e54503992d8e731fc281aa5735bd92",
+      "checks": 835
+    },
+    "package-claim_recovery.json": {
+      "sha256": "40ece0877feab7a0154c80f0c834d1bccd1e9412940803995361ee15343564c3",
+      "log_sha256": "1a36d10b2dea5d4748b1a58a9808d11bf48e72f9e39ae6c9d35bb25927db87d3",
+      "checks": 10
+    },
+    "package-full_city_qa.json": {
+      "sha256": "b68059c801cddf75f8f194f3bb8fb224ee9da1c93c2efb6ad8678e6d8cd8a228",
+      "log_sha256": "a9391c7c677a94f757aeddcede1b36357509c35bbf579094137571e8da01be3a",
+      "checks": 1229
+    },
+    "package-skin_fx.json": {
+      "sha256": "449e14052c046dda5935aac321c6266dfa43548da9d3deba27b99d9303e931e3",
+      "log_sha256": "f2fbd59433862d8b161a644c5b5b45ac5b9333ab6096a31b9247cf69c29cfb42",
+      "checks": 414
+    },
+    "package-title_navigation.json": {
+      "sha256": "c10d98894a3d72d9526dcc97f5a6498d0e8805c896d52eccf7f09e0f148dfa45",
+      "log_sha256": "544ffd5b4d2768f3f6723a08b447b2e0a5ae5afd8b288cb19bae3f812f08e250",
+      "checks": 36
+    },
+    "package-ui_redesign.json": {
+      "sha256": "a5e7b965b1a5ed880d3976b560a60ba0224686dd3900370d6c7f2ed49622a482",
+      "log_sha256": "65f9965cda275c9377287af051ad4c082c631cfd847ccf8f3c6dcbaeac47378c",
+      "checks": 1641
+    },
+    "package-map_preview.json": {
+      "sha256": "43922b3ff364b3d0820f9426d2b7aa86f59f511387211f4a877ebdb9524503f4",
+      "log_sha256": "98e6fb7def148c00338ba2a208f8fcd4b61aa60efa2f34604c22f236a75b2f91",
+      "checks": 79
+    },
+    "package-food_preview.json": {
+      "sha256": "7a48248e4cf3d80878cb3e39d4acc0cb8c1346329a5ff117cdb94ea795be5f0a",
+      "log_sha256": "7cdcc0b5bef5cc424cf61ce43760993a854879fbf5de2ea7f9a4884effaa61cf",
+      "checks": 483
+    },
+    "package-map_preview_review.json": {
+      "sha256": "8bcf042c07d975747ad3b5a8737fff6e9a091cae56c13dd66631fbc697b746b4",
+      "log_sha256": "26dba23985c649408c4bc738168639e4cfec72509ed642e7c9f76cf6cadeecf5",
+      "checks": 716
+    },
+    "package-coin_skins.json": {
+      "sha256": "9781975ba864a9f26f4d3aac3e34bb9ab246526989810366d003ed67d1096e8b",
+      "log_sha256": "7475a700d9a50a953402322ac35bb35a222aa7cdf09c014c5925eeb5023f70be",
+      "checks": 403
+    },
+    "package-skin_skill.json": {
+      "sha256": "78a71fddbcf3902967518e61b7331a2d830cbd09122ab3915307b53e1ae12340",
+      "log_sha256": "301b636343e35d0ac0ffd6029f6eb500462d3644b26cecd029e38106eec66763",
+      "checks": 130
+    },
+    "package-snack_city.json": {
+      "sha256": "2a1f429f9180b30e17b306b1c288f9008c76bac8cc5340f900a762e6c036b2fd",
+      "log_sha256": "4900dcd62133375cabbc4e15d28a4962dd7c33ccf3b27ccee958459b949955e1",
+      "checks": 39
+    },
+    "package-food_city_density.json": {
+      "sha256": "04071de4a8829be6dfd1746627166a5d62389063a09d286597a19007678d6093",
+      "log_sha256": "1f35582d2721c3d3954d3c9cf2ea331a040b180f8817f9bc21c68843f343d5ca",
+      "checks": 1187
+    },
+    "package-food_round.json": {
+      "sha256": "ac064f9bac244d7e806caeb188385379705f9166e5668eb471c37600c2155615",
+      "log_sha256": "99b3d89e5e339e99b3f775f5ec52efbdfdd65f33e793ed2b3286c6e5ab6934fa",
+      "checks": 2
+    },
+    "package-food_finish.json": {
+      "sha256": "f446c2171265641055e349519b6b02fcbfc88d612ccba6a6064af1e0165d76b1",
+      "log_sha256": "2a423d2766a24a003d899b74075afa45157edab563574e9c3819025daaa4d568",
+      "checks": 117
+    },
+    "package-food_neighborhoods.json": {
+      "sha256": "9f768d15865709624e4a4386c851ad2176db3ff7e72df6f8c42272b732d1b074",
+      "log_sha256": "1815b491e1ab943d6d44769fbd4142b0086b1bf51169bcb4b7fb00205d858381",
+      "checks": 237
+    },
+    "package-mobile_maps.json": {
+      "sha256": "51799f1c11f073bdc922d3b7e1eaba69dad4145207c5e3ecb5d71a78ad665f6d",
+      "log_sha256": "3c515bcb1dc1f62e4b3215b914e53308b2ecb8dd374be4897f7a7b28954ec30a",
+      "checks": 29
+    },
+    "package-performance.json": {
+      "sha256": "04588dd9214c4e29e9d817ea59281a11e152867a824e1f953d52acca6603b9c4",
+      "log_sha256": "11f274a94572a00da56f1e27e63b48207e9ebef064aac2a0c756624e838ab6f0",
+      "checks": 269
+    },
+    "package-portrait.json": {
+      "sha256": "0d26c36b2f8c1193071687e162286140431b1ed612c2a7b77c8be84d4a6b6e55",
+      "log_sha256": "7bf49550d318a7733d61a09decc8fb045d282fdd6a263fd2028034c35d8f16df",
+      "checks": 30
+    },
+    "package-progression.json": {
+      "sha256": "826506c7a4c6de705045509594ea9bfbefff2d421abdb4ecdb699e3beee0406c",
+      "log_sha256": "d539e21dfa87286d5a34e25b3cddf86c3a0d80015f4e7559e1829c8af6645fbe",
+      "checks": 15
+    },
+    "package-store.json": {
+      "sha256": "e1aa7235f6628e184b23513498dc50e2fc99e2dd425d26bf631c282784bd3b8d",
+      "log_sha256": "9280be033b7451c4b43dc65734bf370c6a727a676548933828f10bf389d6dde9",
+      "checks": 17
+    },
+    "package-city_motion.json": {
+      "sha256": "87f89607192fd5d764c6952fa939c1c56a03d4762de1a0d7588ac32b26462a4b",
+      "log_sha256": "f6fe9ee067700d2239b106f5fa12ebe943748714ebc125b251b2c52129ed67b8",
+      "checks": 22
+    },
+    "package-city_districts.json": {
+      "sha256": "d3103ee88a7c030b903d7a6a15fa40eefa7639415d74ff2fc17bd3b916550f27",
+      "log_sha256": "de0b8dd1bcb553c97151cb7ca012b667539b0f2878ffaf703e173e874eb4c05d",
+      "checks": 1242
+    },
+    "package-skin_catalog.json": {
+      "sha256": "c8df475246acb78ca61f553fabf4b545d137d90f135649fdc4fe5de7ac9fc384",
+      "log_sha256": "e83d84d0ac03c42b9a659da416ea6648ed96ad30b5b5885f06c617912abc9010",
+      "checks": 991
+    },
+    "package-food_rain_continuity.json": {
+      "sha256": "9b762762ca0d276aaa7f99959c7feb399767703ffee97d0be55e69818bcc557d",
+      "log_sha256": "0a10f97aac6e1ae2fd82c8f069a2bd84866067080105dfe9d950ec49e2820004",
+      "checks": 33
+    },
+    "package-food_city_revision.json": {
+      "sha256": "bc6dfac1d4c6b5198fc65412e5bb5c85f404eeddb5978aa5c5350fdca8058371",
+      "log_sha256": "1be4bb5e8f4c9db85d665424905633fa1127e32aa2a039fa494aae99cc46ee00",
+      "checks": 85
+    },
+    "package-food_impact.json": {
+      "sha256": "a325d3e46f64156cd848788027ea0fa1d6ff5c658f9395184c9f680a26c5cdf8",
+      "log_sha256": "83eb50fcabc109781896b71bdfda3db421d7283ed28bf64ae3a4e02940407062",
+      "checks": 249
+    },
+    "package-ui_collection_review.json": {
+      "sha256": "0a129219a8ed619b726c835806d615c961cec351a9780b2b42d9dcbdb3220064",
+      "log_sha256": "6bea55f56dc0407543dbf928d8eb7899db3a15c92cd131d62d771d72e6c2318c",
+      "checks": 156
+    },
+    "package-food_goals_review.json": {
+      "sha256": "7d699c66c46d96a86d018a97c6a23aa1189dc8d9426a7a4e4b5c7d5e2ef4f5fc",
+      "log_sha256": "ae619e196c7633036edc9003d47b50bac1273708f4f61bec937c2806968bc387",
+      "checks": 36
+    },
+    "package-progression_review.json": {
+      "sha256": "6dc6503c61de600c097aa816ba0602db34aed624ef3129ccc17311fff9f5e052",
+      "log_sha256": "570a719551b5ece5387b201f4d404621e3e18d3e19ab521a3afe1df3d0cc5f4d",
+      "checks": 10
+    },
+    "package-rain_review.json": {
+      "sha256": "5b3b0584f49837364dfb0a149d33e22545ab54d758d9e06f4a51e969d181211b",
+      "log_sha256": "8c8051dd9f511a4b0ae802aeb3cfcd1fd8b45dffc307056d6ba9e049a4ed9390",
+      "checks": 9
+    },
+    "package-crowd_review.json": {
+      "sha256": "900ca2fb69b014b152969ccc0c8b3388b5560ee1e047a09c6fc7413921f71ead",
+      "log_sha256": "a945d425609c11d275ef631894c3342db650260e7f4783ac73100a651aa7b924",
+      "checks": 17
+    },
+    "package-district_review.json": {
+      "sha256": "7f350b5ed7f46588f705c4e0ec633e6e4f4bbac949072a8d92a2263cfb68fa02",
+      "log_sha256": "d65002500154b435277e3f0f398ab71518f0fc8fb5864a88e200c3dd895e9e7d",
+      "checks": 4
+    },
+    "package-food_revision_review.json": {
+      "sha256": "efade5b84b2f57fc074f2179b3551ea08233a5ef76675cc0e5466c0eac91b42e",
+      "log_sha256": "5051a5a4c6fdf8274056aca6c792e98356414c949df7165bca9cdb78e3e04801",
+      "checks": 11
+    },
+    "package-skin_catalog_review.json": {
+      "sha256": "e74658485a9917eaf10ab883111f4a904c6aa610d40e58f7c5fe16e79e79675b",
+      "log_sha256": "966a7cae49e7647eeb74dc6d033648e73d7483849c6b117f99a1cbe322668eef",
+      "checks": 212
+    },
+    "package-mobile_thumbnail.json": {
+      "sha256": "d6c4df67f4a07d33c826c75cbd60e99b6325d53b88c67046dbd58ff8ffa834c8",
+      "log_sha256": "d25710b92b086a07993f02ff1643d1284f475735a2789d00a89314e2b596c217",
+      "checks": 695
+    },
+    "package-procedural_filtering.json": {
+      "sha256": "f994c1064968c75728a4c05e5180d32eb541ae62eb605d2726c74a52e09ab225",
+      "log_sha256": "55f11dd3df9a2fc0bc3ae4d348dc943f20fa00b2026a235441599fd08c072d6b",
+      "checks": 27
+    },
+    "package-selective_reveal.json": {
+      "sha256": "4c7756bad88b2201ba38b1e5392d04d81134cdeac4e6087ffd6850a47574f447",
+      "log_sha256": "c530ff7436c9570b9477793f600cd0cddbbcdd577812004ca3c9bad14ccf835d",
+      "checks": 75
+    },
+    "package-selective_reveal_review.json": {
+      "sha256": "e042c3ab3c010bd4782c84c6bef124887dccff9a03b2a4ca4d8eaf76de92e7fe",
+      "log_sha256": "8985334fe7abb8b84ba9d6406bd5965aa17c568cc0c8a7490a7f0b414fe41af2",
+      "checks": 434
+    },
+    "package-building_only_reveal_review.json": {
+      "sha256": "4f52cd8f09cf69df26f562f3f1036db6fa409b850e06d3da1d6b04c074d8a2ed",
+      "log_sha256": "c2606cef52ddfeb5eff0e5b0df3f4c8a7f4d8f4dcd48837c36f0d97b5972c515",
+      "checks": 176
+    },
+    "package-growth_extension.json": {
+      "sha256": "c3837ba7ec3de07600faf8a3d017a65ca0db7c8ead4b56d92134e36ff1b0fdc9",
+      "log_sha256": "636369b8750909c5464fa1d15bff7bb9d74400e74a476e788bc6d6c3daee7423",
+      "checks": 1978
+    },
+    "package-rival_combat.json": {
+      "sha256": "64b21293c74bb0513812dac3e5d57b6f869ed8a7e9b44a0b439c535a26889a8d",
+      "log_sha256": "8ae87b3a300c1fdaacf5faa5b9690fdc71704526c413129f6b6dbefa33a0a3d1",
+      "checks": 58
+    },
+    "package-large_growth_world.json": {
+      "sha256": "773732a133e8635d212909d86d2f1de5de055d3e679c37daf24e7998ebb035d2",
+      "log_sha256": "8a5049489522d3f5e7bba155f7cf4708fc057b0d0dd6be83b9c551998571542c",
+      "checks": 250
+    },
+    "package-pedestrian_swallow_review.json": {
+      "sha256": "3143027adde77c8a80015e181bb455e28c866e5b9018ecda57b28e7530d30c71",
+      "log_sha256": "489c121c8519360453f6f82768c28bf2ead25d52ab6fd257011c5fe38e727a03",
+      "checks": 120
+    },
+    "package-growth_rivals_review.json": {
+      "sha256": "74230da63dba57c73113f5d926e223bf5546a3a705503a4b3c5d3bcbdd775142",
+      "log_sha256": "0b684b1cd6ece2819b5d75c719783ddaef479eb2d1bbdc29f8cc213faa7916cd",
+      "checks": 291
+    },
+    "package-growth_integration_review.json": {
+      "sha256": "dfa94b16ad22e6bc4f7b15c996218aa71072f1fbd3b5ba120ba795fabf1249d7",
+      "log_sha256": "ff1aa533689fd94a862e8a858db5c68a688894b88083751701a9942ff551ebe5",
+      "checks": 1606
+    },
+    "package-food_collision.json": {
+      "sha256": "5cec1a22c9d74ace7d7c4020b9ff8352abc8ed0f654ab96c5df96fabfeb954b9",
+      "log_sha256": "176d3c80d69d9b36fb9eb48b94716cb673cf93ae3418a525ea6d0f5747d2ded9",
+      "checks": 96
+    },
+    "package-food_collision_review.json": {
+      "sha256": "1994aca5abdcf6ae317594337ce1df694d951dcd5e1d60ed0702a94756925efc",
+      "log_sha256": "3fd6769b0992b16c0dd9a60754e9988a4aa77f593add1affc9c836e13e7e98c1",
+      "checks": 16168
+    }
+  },
+  "http_artifacts": {
+    "index.apple-touch-icon.png": {
+      "sha256": "1706a7bd4a44e619bee9149b9bad4be7635910e0ea24ac17d4d8b0569a2c56f3",
+      "bytes": 10367,
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.wasm": {
+      "sha256": "f6090f055e16765bcef5dc3a031f68ab40c151d9e7f0541d9d7eb61e92dc5051",
+      "bytes": 38820072,
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.icon.png": {
+      "sha256": "921c12a6e542b19617674e285a52e839bc0f5fc7dbe7407e802dd8428dd81768",
+      "bytes": 4636,
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "device-qa.js": {
+      "sha256": "128c4d196a0da5952514a96c6c91a89756a5d1196f29f99ac395208ada06059e",
+      "bytes": 5755,
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.html": {
+      "sha256": "e1e7868c42db76fea02ac52617c83b2cde7d2dda04a9b8550fff9ca49aed6b7c",
+      "bytes": 5899,
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.png": {
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e",
+      "bytes": 21443,
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.audio.worklet.js": {
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+      "bytes": 7298,
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.js": {
+      "sha256": "1e5437ee16d35bf6f8a3b28e6f70f310ee5da12acab3222a06e8c223cb61757c",
+      "bytes": 314653,
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.audio.position.worklet.js": {
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+      "bytes": 2973,
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.pck": {
+      "sha256": "b8b570dff718a472640cdb8bcc7617728513ec4196fd346911fe2b2db32efaf8",
+      "bytes": 8533520,
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    }
+  },
+  "scope": "Native headless scene/UI geometry and static HTTP bytes. No browser appearance, GPU frame rate or iPhone performance acceptance."
+}

@@ -1,0 +1,49 @@
+{
+  "checks": 174,
+  "evidence": {
+    "actual_loop_position": 0.0657823160290718,
+    "ad_scope": "In-memory typed provider through actual Game/AdsBridge. No native SDK or physical ad interruption measurement.",
+    "case_duck_db": -7.0,
+    "total_packet_bytes": 5745068,
+    "tracks": [
+      {
+        "duration": 88.0,
+        "packet_bytes": 1236196,
+        "packet_sha256": "5d0053ae1d9ee3c8627fe9f6cfecd9f0126fc6c9eaae65ad47b01c7049f71fe0",
+        "route": "menu"
+      },
+      {
+        "duration": 90.0,
+        "packet_bytes": 1208308,
+        "packet_sha256": "4564af9e75725038eab98b8f99e7740c5c42febc9ddae21abf8adb405708d9d2",
+        "route": "city"
+      },
+      {
+        "duration": 112.340431213379,
+        "packet_bytes": 1723448,
+        "packet_sha256": "ada21fc441f4b983996f5539abc2915774b0b2b55ceaad0e9948944d33ee14c6",
+        "route": "food"
+      },
+      {
+        "duration": 64.0,
+        "packet_bytes": 854980,
+        "packet_sha256": "1825042b45b43315a826feda96fc4d6b93e30389e3092ec0066c6fd157b4e615",
+        "route": "toys"
+      },
+      {
+        "duration": 34.2857131958008,
+        "packet_bytes": 491972,
+        "packet_sha256": "dc111533a7615da607255a48829109c368f9ed0ece8daa0b05f21179ec3c4302",
+        "route": "frost"
+      },
+      {
+        "duration": 40.0,
+        "packet_bytes": 230164,
+        "packet_sha256": "f5355ce3d0870d00065987a6b494ab39574356546618d2ea8902a7d52be890b1",
+        "route": "case"
+      }
+    ]
+  },
+  "failures": [],
+  "scope": "Independent imported-stream, six-route, actual game/UI and fake-provider lifecycle review; memory-only progression, Dummy driver, no subjective listening or physical-phone certification."
+}

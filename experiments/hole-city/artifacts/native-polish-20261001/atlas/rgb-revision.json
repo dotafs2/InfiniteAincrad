@@ -1,0 +1,90 @@
+{
+  "baseline_rgb_sha256": "e8ec9250f323a4206c152b04f489d6a1b2e7e75f4e57e3f734799b9cd55e32ed",
+  "current_rgb_sha256": "7f6d3598ed5ae40be9d58f4b615fdcc1c29205c7ca73536ca5a9585c1803eb7d",
+  "bytes": 12582912,
+  "changed_pixels": 23656,
+  "changed_fraction": 0.0056400299072265625,
+  "changed_bounds": [
+    782,
+    1040,
+    1204,
+    1454
+  ],
+  "changed_plots": [
+    {
+      "index": 12,
+      "before": {
+        "at": [
+          -14.569069778215292,
+          19.530054273834857
+        ],
+        "size": 1.3843186894909536,
+        "radius": 2.021105286656792,
+        "yaw": 0.12597850887376866,
+        "kind": "cake",
+        "floors": 2,
+        "flavor": 2,
+        "district": 4,
+        "route": 32,
+        "role": "shop",
+        "family": "cakery"
+      },
+      "after": {
+        "at": [
+          13,
+          6
+        ],
+        "size": 3.4,
+        "radius": 3.8,
+        "yaw": -2.719175438167586,
+        "kind": "cake",
+        "floors": 2,
+        "flavor": 2,
+        "district": 4,
+        "route": 23,
+        "role": "landmark",
+        "family": "wedding_cake",
+        "skyline_courses": 2,
+        "skyline": "one_minute_landmark"
+      }
+    },
+    {
+      "index": 88,
+      "before": {
+        "at": [
+          -20.926167364090112,
+          21.478477622341966
+        ],
+        "size": 1.1966050608277465,
+        "radius": 1.74704338880851,
+        "yaw": 0.4451266032501967,
+        "kind": "cake",
+        "floors": 3,
+        "flavor": 1,
+        "district": 4,
+        "route": 32,
+        "role": "shop",
+        "family": "cakery"
+      },
+      "after": {
+        "at": [
+          -15,
+          36
+        ],
+        "size": 4.8,
+        "radius": 5.35,
+        "yaw": -2.653859856635656,
+        "kind": "cake",
+        "floors": 2,
+        "flavor": 0,
+        "district": 4,
+        "route": 32,
+        "role": "landmark",
+        "family": "wedding_cake",
+        "skyline_courses": 2,
+        "skyline": "one_minute_landmark"
+      }
+    }
+  ],
+  "scope": "Independent Sharp RGB decode against the preserved native baseline; intentional skyline plot/footprint revision, not a filtering change."
+}

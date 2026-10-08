@@ -1,0 +1,14 @@
+{
+  "checks": 129,
+  "failures": [
+    "city: middle cut updates the real planned bypass exactly once",
+    "food: middle cut updates the real planned bypass exactly once",
+    "city: middle cut updates the real planned bypass exactly once",
+    "Engine process failed; inspect the engine log"
+  ],
+  "metrics": {
+    "city_build_ms": 631.0,
+    "food_build_ms": 2304.198
+  },
+  "scope": "Real scene/ground/CanvasItem assertions; no browser or mobile FPS claim"
+}

@@ -1,0 +1,162 @@
+{
+  "label": "OFFLINE PREVIEW; NOT a Godot/browser/device recording",
+  "source_sha256": {
+    "fidelity/game.gd": "3721eb4de3f20ee9db0f12cd42feb807b7d7efb65cd53832d6c40314d267b2eb",
+    "fidelity/food_city.gd": "8c17ec4f719f1943f39c8e3131131b255e3bc4112cd2bad74bb8dc8c595edc25",
+    "fidelity/food_body.gd": "f1efeff87c1526f3e03466e35366f7f9ecacf3cd22343a45b7eae12cc74adc9c",
+    "fidelity/food_shapes.gd": "83808ada67a6dca18fe0597f16d8923912aab9a82aa34e98af3e3199f08fa496",
+    "fidelity/food_surface.gd": "86fecdfb022611d5a03d9b7938abca41e55083498aa5d703ebb898a878fb2a5b",
+    "fidelity/food_neighborhoods.gd": "0be501f102e34a9a8fc7707ec133de783885148908aa35be6ae42600c9cf0d8a",
+    "fidelity/food_glaze.gdshader": "24359cbb82e77823f6ea5e6f3410a29dc11c685188d424c23d4111d9b45bba36",
+    "fidelity/hole.gd": "8111aa2d6d3c55ed506c7d12882da56189559cf8f585e0dc90aa3707552b7ee7",
+    "scripts/hole.gd": "21e27b9fb9ad341ff3f0a2d75f30a3c1f849220a840e3d455f1b6e3dbe0d2a5b",
+    "scripts/swallowable.gd": "590e00fc0a73a9a7bf67358219e010a99254e8c659879652fddb3279be3e5392",
+    "assets/food_city/neighborhoods.json": "49fd672f1390a5de3057f78bb0eb0347881aabef0a1f31326496e72740e52ee4",
+    "assets/food_city/streets.png": "45270d120ae26b2864151ce968442283d2cefdd0ed4bcac4c9e5a607253d3f25"
+  },
+  "matches_final_release_source": true,
+  "rendering": {
+    "stills": "windowless CGL, actual geometry and copied shipped food GLSL equations",
+    "video": "CPU triangle projection, actual physics transforms, shipped sRGB/reflection equations evaluated at vertices",
+    "lighting": "approximate; no Godot shadows/postprocessing",
+    "omissions": [
+      "NPC rigs",
+      "game UI",
+      "decorative hole skin",
+      "contact crumbs/ripples",
+      "audio",
+      "active opponents",
+      "NPC and traffic controller motion"
+    ],
+    "cgl_video_attempt": "Owned 120-second CGL scene render timed out after producing two stills; process ended. CPU fallback completed full video."
+  },
+  "simulation": {
+    "controlled_hole_motion": "6 metres beneath the pile over 1.5 seconds, beginning at t=1",
+    "controlled_hole_radius": 3.5,
+    "fps": 12,
+    "frames": 120,
+    "npc_and_traffic_controllers_disabled": true,
+    "opponents_disabled": true,
+    "physics_hz": 60,
+    "pile_at": "(4.608904, 0.0, 6.901029)",
+    "pile_original_pieces": 59,
+    "pile_remaining": 0,
+    "rain_spawned": 30,
+    "rain_waves": 5,
+    "score_after": 122,
+    "score_before": 0,
+    "score_injection": false,
+    "simulation_seconds": 10
+  },
+  "qa_fixture": "Pre-grown level 5/radius 3.5 hole moves six metres to the real central authored heap; runtime support, gravity, admission and collection are unchanged. Scores start at zero and only change through actual collection. This is not normal human gameplay.",
+  "video_probe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 540,
+        "height": 960,
+        "coded_width": 540,
+        "coded_height": 960,
+        "closed_captions": 0,
+        "film_grain": 0,
+        "has_b_frames": 2,
+        "pix_fmt": "yuv420p",
+        "level": 31,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "12/1",
+        "avg_frame_rate": "12/1",
+        "time_base": "1/12288",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 122880,
+        "duration": "10.000000",
+        "bit_rate": "325096",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "120",
+        "extradata_size": 45,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc61.19.101 libx264"
+        }
+      }
+    ],
+    "format": {
+      "filename": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/video-showcase-20260928/food/food-collapse-rain.mp4",
+      "nb_streams": 1,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "10.000000",
+      "size": "408659",
+      "bit_rate": "326927",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.100"
+      }
+    }
+  },
+  "files": {
+    "opening.png": {
+      "bytes": 198173,
+      "sha256": "b6909a03521133cc686079e819c5a792610cabbc514e34ebdddd343e6a9a5694"
+    },
+    "overview.png": {
+      "bytes": 182730,
+      "sha256": "735e4488d480394b2409d8d7d76254b16ac2981f0d828db7673d14a5b6538b73"
+    },
+    "food-collapse-rain.mp4": {
+      "bytes": 408659,
+      "sha256": "376163d325ffb94a6f448e61eeade54c9679ca390df3530d0b4de46c736eb6b5"
+    },
+    "collapse-poster.png": {
+      "bytes": 545073,
+      "sha256": "a478771d28df42d1a391199e5aa9559b6ba353e6435d0321dc9c61ca122fa9d4"
+    }
+  },
+  "helpers_sha256": {
+    "food_cpu_preview.mm": "6510f5408972f7fbdb1757afebce3cf895a78caded67b4daacb6da350b6b7015",
+    "prepare_food_shader.py": "544fb4d03bd7fbb7f52b40c92dbf144d136b5bc7fce425f655a390199872a515",
+    "food_scene_offscreen.m": "9b4ef81a84b7f1253436083996389176f3e0c0317f9db5424334a1b3e828d880",
+    "export_food_showcase.gd": "31de3118384816d5d31bb853f623d7b0fc1f56f99339dbd398346dab0eee3111",
+    "encode_showcase.py": "aba4f8546f0d429bcc6b6340bdba0126e15ae373f9c8aae47d47dc66c6a0fb73"
+  }
+}

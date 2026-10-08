@@ -1,0 +1,50 @@
+[
+  {
+    "suite": "food_rain_continuity",
+    "status": "FAIL",
+    "checks": 0,
+    "failures": [
+      "Missing completion marker; inspect the engine log"
+    ]
+  },
+  {
+    "suite": "food_city_revision",
+    "status": "PASS",
+    "checks": 135,
+    "failures": []
+  },
+  {
+    "suite": "food_impact",
+    "status": "FAIL",
+    "checks": 250,
+    "failures": [
+      "Feedback lies at actual ground contact, not the body center",
+      "Feedback lies at actual ground contact, not the body center",
+      "Engine process failed; inspect the engine log"
+    ]
+  },
+  {
+    "suite": "rain_review",
+    "status": "PASS",
+    "checks": 9,
+    "failures": []
+  },
+  {
+    "suite": "food_revision_review",
+    "status": "PASS",
+    "checks": 11,
+    "failures": []
+  },
+  {
+    "suite": "mobile_maps",
+    "status": "PASS",
+    "checks": 29,
+    "failures": []
+  },
+  {
+    "suite": "portrait",
+    "status": "PASS",
+    "checks": 30,
+    "failures": []
+  }
+]

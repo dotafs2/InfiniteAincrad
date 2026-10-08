@@ -1,0 +1,29 @@
+{
+	"checks": 12,
+	"failures": [
+		"An admitted ice rock completes a real physics swallow",
+		"Ice-rock score delta equals its authored points",
+		"Glacier score delta equals its authored points",
+		"Glacier swallow increments the shared eaten counter once"
+	],
+	"metrics": {
+		"coins": 256,
+		"glacier": {
+			"admitted": true,
+			"consumed": true,
+			"eaten_delta": 4,
+			"points": 96,
+			"score_delta": 168
+		},
+		"remaining": 84.7833333333336,
+		"rock": {
+			"admitted": true,
+			"consumed": false,
+			"eaten_delta": 1,
+			"points": 6,
+			"score_delta": 0
+		},
+		"scope": "Real Frostlight body admission and score receipt; no production save or SDK claim",
+		"score": 2568
+	}
+}

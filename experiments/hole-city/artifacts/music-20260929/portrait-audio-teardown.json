@@ -1,0 +1,13 @@
+{
+  "checks": 30,
+  "citizens": 64,
+  "edible_objects": 656,
+  "failures": [
+    "on-screen pause works without a keyboard",
+    "on-screen resume restores play",
+    "moving pedestrian uses locomotion instead of sliding through its role gesture",
+    "nearby hole triggers the run clip",
+    "Engine process failed; inspect the engine log"
+  ],
+  "unique_models": 208
+}

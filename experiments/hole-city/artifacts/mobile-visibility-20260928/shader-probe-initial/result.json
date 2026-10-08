@@ -1,0 +1,138 @@
+{
+  "scope": "Isolated current shader equations in windowless CGL; not Godot/browser/device pixels",
+  "programs": [
+    {
+      "name": "asphalt",
+      "cases": [],
+      "compiled": true
+    },
+    {
+      "name": "facade",
+      "cases": [],
+      "compiled": true
+    },
+    {
+      "name": "palette",
+      "cases": [],
+      "compiled": true
+    },
+    {
+      "name": "food_glaze",
+      "cases": [],
+      "compiled": true
+    },
+    {
+      "name": "reveal-coverage",
+      "cases": [
+        {
+          "name": "central_ray_height_0.05",
+          "visible_pixels": 256,
+          "total_pixels": 4096
+        },
+        {
+          "name": "central_ray_height_0.25",
+          "visible_pixels": 256,
+          "total_pixels": 4096
+        },
+        {
+          "name": "central_ray_height_0.5",
+          "visible_pixels": 256,
+          "total_pixels": 4096
+        },
+        {
+          "name": "central_ray_height_0.8",
+          "visible_pixels": 256,
+          "total_pixels": 4096
+        },
+        {
+          "name": "central_ray_height_0.98",
+          "visible_pixels": 256,
+          "total_pixels": 4096
+        },
+        {
+          "name": "beyond_small_hole_side_margin",
+          "visible_pixels": 256,
+          "total_pixels": 4096
+        },
+        {
+          "name": "movement_lookahead",
+          "visible_pixels": 256,
+          "total_pixels": 4096
+        },
+        {
+          "name": "outside_expanded_region",
+          "visible_pixels": 4096,
+          "total_pixels": 4096
+        },
+        {
+          "name": "background",
+          "visible_pixels": 4096,
+          "total_pixels": 4096
+        },
+        {
+          "name": "ground_at_hole",
+          "visible_pixels": 4096,
+          "total_pixels": 4096
+        },
+        {
+          "name": "below_ground",
+          "visible_pixels": 4096,
+          "total_pixels": 4096
+        },
+        {
+          "name": "above_camera",
+          "visible_pixels": 4096,
+          "total_pixels": 4096
+        },
+        {
+          "name": "shadow_pass",
+          "visible_pixels": 4096,
+          "total_pixels": 4096
+        },
+        {
+          "name": "home_preview_camera",
+          "visible_pixels": 4096,
+          "total_pixels": 4096
+        },
+        {
+          "name": "other_camera_direction",
+          "visible_pixels": 4096,
+          "total_pixels": 4096
+        },
+        {
+          "name": "disabled_on_title",
+          "visible_pixels": 4096,
+          "total_pixels": 4096
+        },
+        {
+          "name": "above_large_hole",
+          "visible_pixels": 4096,
+          "total_pixels": 4096
+        },
+        {
+          "name": "away_from_camera_lookahead",
+          "visible_pixels": 4096,
+          "total_pixels": 4096
+        },
+        {
+          "name": "large_hole_margin",
+          "visible_pixels": 256,
+          "total_pixels": 4096
+        }
+      ],
+      "compiled": true
+    }
+  ],
+  "renderer": "Apple Software Renderer",
+  "input_sha256": {
+    "fidelity/asphalt.gdshader": "d889999e0ed468fcab4bc2f2678b2ced8a79ef99a4e89d29fa08dd029e70beff",
+    "fidelity/facade.gdshader": "80162c5a3a8286a8ed5b5dd4cc63a907afef8ea602223d911ca0786b32480ca5",
+    "fidelity/palette.gdshader": "fc44a1e85aeda3711220e8102150b49e5ad9a0e070172ffd011fd97f593ab4a8",
+    "fidelity/food_glaze.gdshader": "24359cbb82e77823f6ea5e6f3410a29dc11c685188d424c23d4111d9b45bba36",
+    "fidelity/hole_reveal.gdshaderinc": "b3c9cb9f929b03bdb4a3a23b6ff7ed73159b2a2926cc53167e823e48dcb7d716"
+  },
+  "failures": [
+    "above_large_hole: foreground aperture did not reveal enough",
+    "away_from_camera_lookahead: foreground aperture did not reveal enough"
+  ]
+}

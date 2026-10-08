@@ -1,0 +1,486 @@
+{
+  "source_hashes": {
+    "fidelity/food_city.gd": "4d9523a275990adbbbaa8cd2f2efccfebe747bda119003276a89b06af4a1e84b",
+    "fidelity/food_body.gd": "32ecd84b84f782d522b6de58286409b4f81e4a5e7dab7a3772dab47712edc029",
+    "tests/food_collision_acceptance.gd": "fb31dded75e03c9f978ca78dc23ef1950963f1df7c83eca0fbb6f93e1f187f9f",
+    "artifacts/growth-rivals-20260928/food-collision/settle_trace.gd": "224997414aac713819f0c9aff7f66395c0233e79ff2a422f3222c95d22a1058b"
+  },
+  "prior_package_sha256": "0f706b9a4f0825b5fd3bfe643893905b01af1aefc86b92a1f8d4907eeb1da3ed",
+  "comparison": {
+    "cylinder-pack": {
+      "version": "0.8.2",
+      "samples": 192,
+      "kinds": {
+        "berry": {
+          "last": {
+            "angular_speed": 0.168781504034996,
+            "at": [
+              69.9338531494141,
+              0.374518603086472,
+              20.1406192779541
+            ],
+            "kind": "berry",
+            "kinetic_energy": 0.003827512729913,
+            "linear_speed": 0.0695717558264732,
+            "lowest": -0.0115458305672725,
+            "seconds": 12.0,
+            "shape": "CylinderShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.00382705021183938,
+          "late_max_energy": 0.00382767606060952
+        },
+        "burger": {
+          "last": {
+            "angular_speed": 0.0848965048789978,
+            "at": [
+              69.5594787597656,
+              0.370471686124802,
+              -13.0363903045654
+            ],
+            "kind": "burger",
+            "kinetic_energy": 0.00113530055386946,
+            "linear_speed": 0.0347698554396629,
+            "lowest": -0.0111502077642157,
+            "seconds": 12.0,
+            "shape": "CylinderShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.000659744371660054,
+          "late_max_energy": 0.0195239554159343
+        },
+        "cake": {
+          "last": {
+            "angular_speed": 0.199768021702766,
+            "at": [
+              69.8503265380859,
+              0.510216295719147,
+              -43.8513412475586
+            ],
+            "kind": "cake",
+            "kinetic_energy": 0.0134500828571618,
+            "linear_speed": 0.137243941426277,
+            "lowest": -0.0140121488726924,
+            "seconds": 12.0,
+            "shape": "CylinderShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.00503529608249664,
+          "late_max_energy": 0.0134500828571618
+        },
+        "cookie": {
+          "last": {
+            "angular_speed": 0.537038207054138,
+            "at": [
+              69.9804000854492,
+              0.0877777487039566,
+              4.07729291915894
+            ],
+            "kind": "cookie",
+            "kinetic_energy": 0.0242233779281378,
+            "linear_speed": 0.154511824250221,
+            "lowest": -0.0203546285890479,
+            "seconds": 12.0,
+            "shape": "CylinderShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.020636597648263,
+          "late_max_energy": 0.0242233779281378
+        },
+        "donut": {
+          "last": {
+            "angular_speed": 0.309184104204178,
+            "at": [
+              70.0914077758789,
+              0.138137325644493,
+              -28.3377170562744
+            ],
+            "kind": "donut",
+            "kinetic_energy": 0.00837783725000918,
+            "linear_speed": 0.0799825266003609,
+            "lowest": -0.0146995844691854,
+            "seconds": 12.0,
+            "shape": "CylinderShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.00837756111286581,
+          "late_max_energy": 0.0085859252139926
+        },
+        "egg": {
+          "last": {
+            "angular_speed": 0.408004701137543,
+            "at": [
+              69.9266510009766,
+              0.131048202514648,
+              -60.048828125
+            ],
+            "kind": "egg",
+            "kinetic_energy": 0.0262431786395609,
+            "linear_speed": 0.193560063838959,
+            "lowest": -0.0176896556575736,
+            "seconds": 12.0,
+            "shape": "CylinderShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.0262425136752427,
+          "late_max_energy": 0.0262548560276628
+        },
+        "pancake": {
+          "last": {
+            "angular_speed": 0.185685589909554,
+            "at": [
+              69.9438247680664,
+              0.237993448972702,
+              35.7520790100098
+            ],
+            "kind": "pancake",
+            "kinetic_energy": 0.00377665506675839,
+            "linear_speed": 0.0597517192363739,
+            "lowest": -0.0124340796453598,
+            "seconds": 12.0,
+            "shape": "CylinderShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.00377665506675839,
+          "late_max_energy": 0.0162559445016086
+        },
+        "pizza": {
+          "last": {
+            "angular_speed": 0.474662065505981,
+            "at": [
+              70.503776550293,
+              0.105471231043339,
+              52.3871612548828
+            ],
+            "kind": "pizza",
+            "kinetic_energy": 0.030545367859304,
+            "linear_speed": 0.193120151758194,
+            "lowest": -0.0187705181175,
+            "seconds": 12.0,
+            "shape": "CylinderShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.00500129617284983,
+          "late_max_energy": 0.0305461632087827
+        }
+      }
+    },
+    "convex32-source": {
+      "version": "0.8.3",
+      "samples": 192,
+      "kinds": {
+        "berry": {
+          "last": {
+            "angular_speed": 0.050159890204668,
+            "at": [
+              69.9742736816406,
+              0.381417274475098,
+              19.9144325256348
+            ],
+            "kind": "berry",
+            "kinetic_energy": 0.00031193028553389,
+            "linear_speed": 0.0193715058267117,
+            "lowest": -0.01042640209198,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 3.98745809704337e-08,
+          "late_max_energy": 0.0161210680380464
+        },
+        "burger": {
+          "last": {
+            "angular_speed": 0.380157083272934,
+            "at": [
+              70.0453948974609,
+              0.366761833429337,
+              -13.1687517166138
+            ],
+            "kind": "burger",
+            "kinetic_energy": 0.0335272382944822,
+            "linear_speed": 0.213875159621239,
+            "lowest": -0.019317626953125,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.0101090904790908,
+          "late_max_energy": 0.0546388104557991
+        },
+        "cake": {
+          "last": {
+            "angular_speed": 0.11863935738802,
+            "at": [
+              70.1333923339844,
+              0.518207728862762,
+              -43.9499397277832
+            ],
+            "kind": "cake",
+            "kinetic_energy": 0.00336321408394724,
+            "linear_speed": 0.0623069927096367,
+            "lowest": -0.0143106579780579,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.000157356946147047,
+          "late_max_energy": 0.0112323258072138
+        },
+        "cookie": {
+          "last": {
+            "angular_speed": 0.357778996229172,
+            "at": [
+              70.1288604736328,
+              0.088688887655735,
+              4.07124042510986
+            ],
+            "kind": "cookie",
+            "kinetic_energy": 0.0196835761889815,
+            "linear_speed": 0.168700978159904,
+            "lowest": -0.0165558606386185,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.0196833917871118,
+          "late_max_energy": 0.0925212558358908
+        },
+        "donut": {
+          "last": {
+            "angular_speed": 0.679356098175049,
+            "at": [
+              70.2541732788086,
+              0.129670217633247,
+              -28.7165260314941
+            ],
+            "kind": "donut",
+            "kinetic_energy": 0.0837948806583881,
+            "linear_speed": 0.34289875626564,
+            "lowest": -0.0313829779624939,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.0837947130203247,
+          "late_max_energy": 0.0837959423661232
+        },
+        "egg": {
+          "last": {
+            "angular_speed": 0.589796721935272,
+            "at": [
+              69.977783203125,
+              0.132000267505646,
+              -59.8603439331055
+            ],
+            "kind": "egg",
+            "kinetic_energy": 0.0210138042457402,
+            "linear_speed": 0.103114292025566,
+            "lowest": -0.0191170871257782,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.0210119350813329,
+          "late_max_energy": 0.0580418258905411
+        },
+        "pancake": {
+          "last": {
+            "angular_speed": 0.485859513282776,
+            "at": [
+              69.8116073608398,
+              0.232606947422028,
+              35.213508605957
+            ],
+            "kind": "pancake",
+            "kinetic_energy": 0.047361982986331,
+            "linear_speed": 0.259479492902756,
+            "lowest": -0.0223615765571594,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.0473614437505603,
+          "late_max_energy": 0.047361982986331
+        },
+        "pizza": {
+          "last": {
+            "angular_speed": 0.818876028060913,
+            "at": [
+              70.409782409668,
+              0.0960519015789032,
+              52.7370910644531
+            ],
+            "kind": "pizza",
+            "kinetic_energy": 0.110407046973705,
+            "linear_speed": 0.387285888195038,
+            "lowest": -0.0397732108831406,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.110406931489706,
+          "late_max_energy": 0.110410239547491
+        }
+      }
+    },
+    "convex16-source": {
+      "version": "0.8.3",
+      "samples": 192,
+      "kinds": {
+        "berry": {
+          "last": {
+            "angular_speed": 0.195463106036186,
+            "at": [
+              70.0085220336914,
+              0.373359262943268,
+              20.112548828125
+            ],
+            "kind": "berry",
+            "kinetic_energy": 0.00665474566631019,
+            "linear_speed": 0.0976442843675613,
+            "lowest": -0.0129369497299194,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.00665462343022227,
+          "late_max_energy": 0.0066548545146361
+        },
+        "burger": {
+          "last": {
+            "angular_speed": 0.243894174695015,
+            "at": [
+              70.0878982543945,
+              0.368016004562378,
+              -13.2140970230103
+            ],
+            "kind": "burger",
+            "kinetic_energy": 0.01411706302315,
+            "linear_speed": 0.139542207121849,
+            "lowest": -0.0159272253513336,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.0141168553382158,
+          "late_max_energy": 0.014929611235857
+        },
+        "cake": {
+          "last": {
+            "angular_speed": 0.166691899299622,
+            "at": [
+              69.8633880615234,
+              0.510034739971161,
+              -43.9588661193848
+            ],
+            "kind": "cake",
+            "kinetic_energy": 0.00930335349403322,
+            "linear_speed": 0.113984242081642,
+            "lowest": -0.0139798521995544,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.00930332718417048,
+          "late_max_energy": 0.0093034787569195
+        },
+        "cookie": {
+          "last": {
+            "angular_speed": 0.625226199626923,
+            "at": [
+              70.0154571533203,
+              0.0833999738097191,
+              4.06988573074341
+            ],
+            "kind": "cookie",
+            "kinetic_energy": 0.0518255531787872,
+            "linear_speed": 0.265238672494888,
+            "lowest": -0.0268602445721626,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.0518246274441481,
+          "late_max_energy": 0.052991783246398
+        },
+        "donut": {
+          "last": {
+            "angular_speed": 0.514878571033478,
+            "at": [
+              70.1064453125,
+              0.131718575954437,
+              -28.383171081543
+            ],
+            "kind": "donut",
+            "kinetic_energy": 0.0450353417545557,
+            "linear_speed": 0.247679188847542,
+            "lowest": -0.0252603590488434,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.0450288560241461,
+          "late_max_energy": 0.0450353417545557
+        },
+        "egg": {
+          "last": {
+            "angular_speed": 0.55033814907074,
+            "at": [
+              69.9414367675781,
+              0.126978486776352,
+              -60.0520172119141
+            ],
+            "kind": "egg",
+            "kinetic_energy": 0.0429928731173277,
+            "linear_speed": 0.242201745510101,
+            "lowest": -0.0247142612934113,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.0429917015135288,
+          "late_max_energy": 0.0430240128189325
+        },
+        "pancake": {
+          "last": {
+            "angular_speed": 0.392837315797806,
+            "at": [
+              69.8872375488281,
+              0.233048841357231,
+              35.6086387634277
+            ],
+            "kind": "pancake",
+            "kinetic_energy": 0.0276185087859631,
+            "linear_speed": 0.193416088819504,
+            "lowest": -0.0204262882471085,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.027562377974391,
+          "late_max_energy": 0.027845099568367
+        },
+        "pizza": {
+          "last": {
+            "angular_speed": 0.571023166179657,
+            "at": [
+              70.8340835571289,
+              0.100449033081532,
+              52.2039375305176
+            ],
+            "kind": "pizza",
+            "kinetic_energy": 0.0518120620399714,
+            "linear_speed": 0.263032227754593,
+            "lowest": -0.0270589366555214,
+            "seconds": 12.0,
+            "shape": "ConvexPolygonShape3D",
+            "sleeping": false
+          },
+          "late_min_energy": 0.0517886318266392,
+          "late_max_energy": 0.0518124513328075
+        }
+      }
+    }
+  },
+  "scope": "Controlled functional comparison; raw timings from diagnostic opening traces are not accepted performance evidence. The three twelve-second comparison variants precede the final ordinary-food penetration guard."
+}

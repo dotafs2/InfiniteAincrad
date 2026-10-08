@@ -1,0 +1,9 @@
+{
+  "checks": 188,
+  "failures": [
+    "Upward screen-touch swipe advances one page",
+    "Engine process failed; inspect the engine log"
+  ],
+  "input": "InputEventScreenTouch and InputEventScreenDrag through actual viewport",
+  "scope": "Headless input/resource/save review; no screenshots or phone GPU evidence"
+}

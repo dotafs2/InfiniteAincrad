@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "suite": "boost",
+      "checks": 55,
+      "minimum": 55,
+      "report_sha256": "bb568f787dd8b711fae02d28f5fa3f9b4af7dd86128f6eeb59fe50a25c555921"
+    },
+    {
+      "suite": "boost_review",
+      "checks": 98,
+      "minimum": 98,
+      "report_sha256": "16017d45f52e8615aef80cef8e87519e675cd8df88a3f96cd5954b0cf6050318"
+    }
+  ],
+  "checks": 153,
+  "unchanged_inputs": true,
+  "guarded_inputs": 810,
+  "elapsed_seconds": 10.455,
+  "scope": "Serial source-only focused headless acceptance; no full gate, GPU, native build or phone action"
+}

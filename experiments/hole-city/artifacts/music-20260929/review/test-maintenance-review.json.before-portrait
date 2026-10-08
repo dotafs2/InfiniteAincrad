@@ -1,0 +1,100 @@
+{
+  "pass": true,
+  "review_type": "Read-only independent exact source comparison; no engine or runtime edits",
+  "files": [
+    {
+      "file": "tests/city_review_portrait_probe.gd",
+      "before_sha256": "309eca6bf86f4ffbb1066955fb11bbfb91155888d67aa41478307d1154946b33",
+      "after_sha256": "f63aa6459135bc3f68d047f2d42c22f514ee9e1bf94a18fa94c1cb6cd79acbc7",
+      "exact_allowed_changes": [
+        "Stop test-owned BGM and drain independent mixer for 120ms before scene destruction"
+      ],
+      "all_other_source_unchanged": true
+    },
+    {
+      "file": "tests/coin_skins_acceptance.gd",
+      "before_sha256": "16cc3bf6f21e25ee2acd7d114fd0db934a2f657cbbde10b07a8359325da80160",
+      "after_sha256": "0c6a2b91d2556759798ba9f57dcb6982a266a5e17c1df1a633c99606c8be021e",
+      "exact_allowed_changes": [
+        "Stop test-owned BGM and drain independent mixer for 120ms before scene destruction"
+      ],
+      "all_other_source_unchanged": true
+    },
+    {
+      "file": "tests/fidelity_acceptance.gd",
+      "before_sha256": "f94687779c2338834f7b048237a179cc5c76fa5b7d955651f7e60fe8fbf20d8d",
+      "after_sha256": "e6db2adbc5709a82f55b4bc1be152b7e55a20076e84d7769d85e52e878cd9244",
+      "exact_allowed_changes": [
+        "Stop test-owned BGM and drain independent mixer for 120ms before scene destruction"
+      ],
+      "all_other_source_unchanged": true
+    },
+    {
+      "file": "tests/food_review_skill_economy.gd",
+      "before_sha256": "0d97e3ff92d584ec4dcbd8ffd9aa95e1856c04f294432b97353c79f3bf7be08a",
+      "after_sha256": "868ae69f6a3a843150ab02fae23ab465e02ccb940d255556f23c9965e1b7e1c5",
+      "exact_allowed_changes": [
+        "Stop test-owned BGM and drain independent mixer for 120ms before scene destruction"
+      ],
+      "all_other_source_unchanged": true
+    },
+    {
+      "file": "tests/music_acceptance.gd",
+      "before_sha256": "a7f8297db7f059d15c2c6808019aa96f47f2aa2137c975fabca73bff21d8d05f",
+      "after_sha256": "85ed8f9a123712709af096556c94afd63c763230ca2081709657bf4db156b66c",
+      "exact_allowed_changes": [
+        "Strengthen touch target to 44 phone points instead of 44 design pixels"
+      ],
+      "all_other_source_unchanged": true
+    },
+    {
+      "file": "tests/portrait_acceptance.gd",
+      "before_sha256": "2bd15add3caa71c09ec3d406147add37547c92b0ee14226c7b9d5ee0d5222578",
+      "after_sha256": "e3bca520758ba52b71cf095405ffaf13cfc463d71bb9d10a6c55e291ffd60a84",
+      "exact_allowed_changes": [
+        "Stop test-owned BGM and drain independent mixer for 120ms before scene destruction"
+      ],
+      "all_other_source_unchanged": true
+    },
+    {
+      "file": "tests/review_ui_collection.gd",
+      "before_sha256": "e7ac10bcc147738c4dbb9083add6043b04564f06458dbbeae4299da463e88717",
+      "after_sha256": "62a1f43dfd380b6cd3a3440ee03d1593cfa1e13e8d4fcf002c15ab08e6475f3e",
+      "exact_allowed_changes": [
+        "Stop test-owned BGM and drain independent mixer for 120ms before scene destruction",
+        "Equivalent separation of adjacent cold.free/game.free statements"
+      ],
+      "all_other_source_unchanged": true
+    },
+    {
+      "file": "tests/skin_library_capture.gd",
+      "before_sha256": "644d5f76f71b66ace5a5eaf4e6736789604e582db8ea0be6cdbd0659c696b2fa",
+      "after_sha256": "8fdd9ea71529ee096da663912b22775de971c3c7e8b91a8edfe9930276bd7a51",
+      "exact_allowed_changes": [
+        "Stop test-owned BGM and drain independent mixer for 120ms before scene destruction"
+      ],
+      "all_other_source_unchanged": true
+    },
+    {
+      "file": "tests/skin_skill_acceptance.gd",
+      "before_sha256": "a109b0964f8c20561c1009831072a1c09239d1f2d68752536cd20509c46a0aa4",
+      "after_sha256": "fe2031655d7bec7b9a51d2ce86dc98897259e080b04a92d1e3a979e837e54fcf",
+      "exact_allowed_changes": [
+        "Stop test-owned BGM and drain independent mixer for 120ms before scene destruction"
+      ],
+      "all_other_source_unchanged": true
+    },
+    {
+      "file": "tests/ui_redesign_acceptance.gd",
+      "before_sha256": "7efb0e5dd4b0ef0d762b33ad46755b488c47871b9f603191e1a0bd82463b348e",
+      "after_sha256": "75d60c648174341c9d1d2436563551e2ea4eeb90f33ff08ff412502e8b8d927a",
+      "exact_allowed_changes": [
+        "Stop test-owned BGM and drain independent mixer for 120ms before scene destruction",
+        "Exact home control count 7 to 9 accounts for two explicitly verified new audio controls"
+      ],
+      "all_other_source_unchanged": true
+    }
+  ],
+  "conclusion": "All ten files contain only the requested bounded teardown or explicitly justified assertion updates. No failure detector, completion marker, assertion count, scene action or unrelated assertion is weakened.",
+  "scope": "Supplied before snapshots are hash-recorded here; this comparison does not independently claim those snapshots match a published package."
+}

@@ -1,0 +1,80 @@
+{
+  "checks": 96,
+  "failures": [
+    "pizza: ordinary contact settles rather than exploding",
+    "Engine process failed; inspect the engine log"
+  ],
+  "metrics": {
+    "contacts": {
+      "after_six_seconds": [
+        {
+          "angular_velocity": "(0.235537, -0.011805, 0.540577)",
+          "at": "(69.95538, 0.132, -59.95913)",
+          "kind": "egg",
+          "lowest_contact": -0.0191168636083603,
+          "velocity": "(-0.079107, -0.057212, 0.033177)"
+        },
+        {
+          "angular_velocity": "(0.023558, -0.000204, -0.133058)",
+          "at": "(70.2727, 0.520295, -44.28764)",
+          "kind": "cake",
+          "lowest_contact": -0.0125056505203247,
+          "velocity": "(0.069348, -0.008835, 0.012378)"
+        },
+        {
+          "angular_velocity": "(-0.476537, 0.019989, 0.514067)",
+          "at": "(69.99037, 0.13577, -28.16119)",
+          "kind": "donut",
+          "lowest_contact": -0.022463321685791,
+          "velocity": "(-0.08002, -0.111079, -0.069882)"
+        },
+        {
+          "angular_velocity": "(0.206238, 0.006623, -0.167235)",
+          "at": "(70.17404, 0.370366, -10.93187)",
+          "kind": "burger",
+          "lowest_contact": -0.01504847407341,
+          "velocity": "(0.065218, -0.054206, 0.078298)"
+        },
+        {
+          "angular_velocity": "(0.479887, 0.000487, -0.396876)",
+          "at": "(70.01594, 0.085106, 3.900417)",
+          "kind": "cookie",
+          "lowest_contact": -0.0248745158314705,
+          "velocity": "(0.041802, -0.291646, 0.050318)"
+        },
+        {
+          "angular_velocity": "(-0.000324, 0.00003, 0.000172)",
+          "at": "(69.96575, 0.382547, 19.78046)",
+          "kind": "berry",
+          "lowest_contact": -0.010076642036438,
+          "velocity": "(-0.000069, 0.000064, -0.000129)"
+        },
+        {
+          "angular_velocity": "(-0.087278, 0.011567, 0.473636)",
+          "at": "(69.77858, 0.23609, 35.70166)",
+          "kind": "pancake",
+          "lowest_contact": -0.0176520794630051,
+          "velocity": "(-0.118764, -0.073653, -0.020089)"
+        },
+        {
+          "angular_velocity": "(0.81536, 0.00123, 0.076037)",
+          "at": "(70.42781, 0.096052, 52.58871)",
+          "kind": "pizza",
+          "lowest_contact": -0.0397743582725525,
+          "velocity": "(-0.007923, -0.374759, 0.097395)"
+        }
+      ],
+      "maximum_drop_speed": 10.2172985076904,
+      "ordinary_bodies": 8,
+      "rain_bodies": 8,
+      "target_receipts": 8
+    },
+    "inventory": {
+      "native_cylinders": 0,
+      "rectangular_food_bodies": 598,
+      "rounded_food_bodies": 1942,
+      "shared_round_resources": 454
+    }
+  },
+  "scope": "Actual food scene collider inventory, physics-space support rays, tilted ordinary/rain contacts and independent gravity collection. No visual or performance certification."
+}

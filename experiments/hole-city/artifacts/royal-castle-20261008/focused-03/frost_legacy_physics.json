@@ -1,0 +1,25 @@
+{
+  "checks": 57,
+  "failures": [],
+  "metrics": {
+    "historical_payloads_recomputed": 5,
+    "kinds": {
+      "block_tower": 58,
+      "bubble_turret": 42,
+      "grand_castle": 10,
+      "toy_arch": 46,
+      "toy_castle": 24
+    },
+    "owners": 180,
+    "supported_owners": 24,
+    "world_issues": {
+      "admission": [],
+      "colliders": [],
+      "extent": [],
+      "rim": [],
+      "support": [],
+      "visual": []
+    }
+  },
+  "scope": "Exact legacy physics inputs and frozen real Frost owners; no ordinary-play, phone-performance, save or native-release claim"
+}

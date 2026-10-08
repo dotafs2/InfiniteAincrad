@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "target_version": "0.12.5",
+  "scope": "Current 0.12.5 caption and authentic recapture draft only. Earlier V1 and partial V2 evidence is preserved; no current gameplay media is rendered or uploaded.",
+  "preserve_previous_pack": "artifacts/store-review-20261001-v1/",
+  "screenshot_size": [
+    1320,
+    2868
+  ],
+  "cards": [
+    {
+      "order": 1,
+      "id": "01-black-hole-food-city",
+      "headline": [
+        "BLACK HOLE.",
+        "BIG APPETITE."
+      ],
+      "benefit": "SWALLOW A FOOD CITY",
+      "accent": "#ffcf60",
+      "legacy_composition": "artifacts/store-review-20261001-v1/screenshots/01-black-hole-food-city.svg",
+      "current_source": null,
+      "capture_requirement": "Actual 0.12.5 Snack Garden gameplay, small hole beside substantial appetizing towers, current score/coin HUD. Preserve the food city and growth hierarchy."
+    },
+    {
+      "order": 2,
+      "id": "02-eat-grow",
+      "headline": [
+        "BITE. GROW.",
+        "DEVOUR."
+      ],
+      "benefit": "WATCH THE STACKS FALL",
+      "accent": "#97ead8",
+      "legacy_composition": "artifacts/store-review-20261001-v1/screenshots/02-eat-grow.svg",
+      "current_source": null,
+      "capture_requirement": "Actual current food stack visibly falling into the black hole during normal movement/physics. Do not paint a new coin HUD over old pixels."
+    },
+    {
+      "order": 3,
+      "id": "03-sushi-express",
+      "headline": [
+        "SUSHI.",
+        "ON THE MOVE."
+      ],
+      "benefit": "CHASE THE SUSHI EXPRESS",
+      "accent": "#ffc0ba",
+      "legacy_composition": "artifacts/store-review-20261001-v1/screenshots/03-sushi-express.svg",
+      "current_source": null,
+      "capture_requirement": "Actual current moving Sushi Express with recognizable sushi cars. The old still has no identified numerical economy contradiction but remains documented as 0.12.3 footage."
+    },
+    {
+      "order": 4,
+      "id": "04-swallow-city",
+      "headline": [
+        "EAT YOUR WAY",
+        "THROUGH TOWN."
+      ],
+      "benefit": "90 SECONDS IN SUNNY CITY",
+      "accent": "#9adbf5",
+      "legacy_composition": "artifacts/store-review-20261001-v1/screenshots/04-swallow-city.svg",
+      "current_source": null,
+      "capture_requirement": "Actual current Sunny City object/tram swallowing frame within a 90-second base round, honest timer and capped score coins."
+    },
+    {
+      "order": 5,
+      "id": "05-original-skins",
+      "headline": [
+        "A FEAST",
+        "OF STYLES."
+      ],
+      "benefit": "44 ORIGINAL HOLE SKINS",
+      "accent": "#dbbcff",
+      "legacy_composition": "artifacts/store-review-20261001-v1/screenshots/05-original-skins.svg",
+      "current_source": null,
+      "capture_requirement": "Current actual one-list collection with low-to-high order, visible wallet and UNLOCK RANDOM control. Do not grant entitlements for a commercial review screenshot."
+    }
+  ],
+  "optional_continuation_card": {
+    "headline": [
+      "ONE MORE",
+      "MOUTHFUL."
+    ],
+    "benefit": "ONE EXTRA 30 SECONDS",
+    "current_source": null,
+    "capture_requirement": "Actual ordinary 0.12.5 timeout: optional rewarded video or five diamonds for one +30-second period, independent of one optional 1.5x coin boost. Honest actual video availability; no timer or score fixture for commercial media."
+  },
+  "previews": [
+    {
+      "map": "food",
+      "base_seconds": 60,
+      "export_seconds": 20,
+      "headline": "EAT. GROW. DEVOUR.",
+      "subheading": "A FOOD CITY. ONE HUNGRY HOLE.",
+      "current_master": null
+    },
+    {
+      "map": "city",
+      "base_seconds": 90,
+      "export_seconds": 20,
+      "headline": "SWALLOW THE CITY.",
+      "subheading": "90 SECONDS. A BIG APPETITE.",
+      "current_master": null
+    }
+  ],
+  "ready_for_render": false,
+  "ready_for_upload": false,
+  "preserve_partial_v2": "artifacts/diamond-economy-20261002/store-review-v2/",
+  "optional_coin_boost_card": {
+    "headline": [
+      "YOUR RUN.",
+      "YOUR REWARD."
+    ],
+    "benefit": "1.5x COINS",
+    "current_source": null,
+    "capture_requirement": "Actual ordinary settled 0.12.5 run with one optional 1.5x boost for one diamond or an available earned-and-dismissed video. No fake SDK availability, coin grant or score fixture."
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "at_utc": "2026-10-01T09:49:22.922134+00:00",
+  "scope": "Actual extracted native Swift ad methods, controlled SDK/UI boundaries and manually released timer clock; no live Google/Apple request. Not physical SDK callback acceptance.",
+  "source_sha256": "543e78adcaac1b749d67823493bc0c40a7972fc8a88cff4ca823fd2b69fed11a",
+  "extracted_sha256": "69bf8c2c95ae93a2ab1a7b883e54db2fb758b6b4be29683901375a1ab7a5caa5",
+  "fixtures_sha256": {
+    "tests/native_ads_recovery_stubs.swift": "a2d4063959dc32daba58ffce61e58778f162546936b097228a3d8060d8284ea3",
+    "tests/native_ads_recovery_harness.swift": "067cb39217c2da28f983d34bf757793eed24bdb53b1c47061bf240cb2a17640c"
+  },
+  "timer_clock": "Manual boundary, actual computed seconds retained",
+  "timer_expression_substitutions": 2,
+  "checks": 36,
+  "failures": [],
+  "scenarios": [
+    {
+      "checks": 5,
+      "failures": [],
+      "load_calls": 1,
+      "retry_delays": [
+        15
+      ],
+      "scenario": "network",
+      "sdk_starts": 1,
+      "update_calls": 2,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 1,
+      "retry_delays": [],
+      "scenario": "background",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 3,
+      "failures": [],
+      "load_calls": 1,
+      "retry_delays": [],
+      "scenario": "suspend-update",
+      "sdk_starts": 1,
+      "update_calls": 2,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 0,
+      "retry_delays": [],
+      "scenario": "denied",
+      "sdk_starts": 0,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 1,
+      "retry_delays": [
+        15
+      ],
+      "scenario": "cached",
+      "sdk_starts": 1,
+      "update_calls": 2,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 1,
+      "retry_delays": [
+        15
+      ],
+      "scenario": "form-failure",
+      "sdk_starts": 1,
+      "update_calls": 2,
+      "exit_code": 0
+    },
+    {
+      "checks": 5,
+      "failures": [],
+      "load_calls": 2,
+      "retry_delays": [],
+      "scenario": "privacy-race",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 2,
+      "retry_delays": [],
+      "scenario": "privacy-closes-first",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 5,
+      "failures": [],
+      "load_calls": 2,
+      "retry_delays": [],
+      "scenario": "reward",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 8,
+      "failures": [],
+      "load_calls": 0,
+      "retry_delays": [
+        15,
+        30,
+        60,
+        120,
+        240,
+        300,
+        300,
+        300
+      ],
+      "scenario": "backoff",
+      "sdk_starts": 0,
+      "update_calls": 8,
+      "exit_code": 0
+    }
+  ]
+}

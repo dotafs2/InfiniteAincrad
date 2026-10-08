@@ -1,0 +1,27 @@
+--- authenticated-before/world_expansion_review.gd
++++ tests/world_expansion_review.gd
+@@ -34,9 +34,14 @@
+ 	return closest
+ func inspect_bodies(map_id:String)->void:
+ 	var outside:=[];var outer:Array[Node3D]=[];var quadrants:={};var scaled:=[];var awake:=0
++	var maximum_scale_error:=0.0
+ 	for body in game.city.foods:
+ 		if not is_instance_valid(body):continue
+-		if body.scale!=Vector3.ONE:scaled.append(str(body.name))
++		# Decomposing an oblique rotation can differ from unit scale by one
++		# float32 ULP. Keep all bodies, including trains, within a fixed 1e-6.
++		var scale_error:float=body.scale.distance_to(Vector3.ONE)
++		maximum_scale_error=maxf(maximum_scale_error,scale_error)
++		if scale_error>0.000001:scaled.append(str(body.name))
+ 		var h:Vector3=body.half_size;var bad:=false
+ 		for sx in [-1,1]:
+ 			for sy in [-1,1]:
+@@ -56,7 +61,7 @@
+ 		if body.freeze and body.footprint<.8 and not body.has_meta("tower_id") and not body.has_meta("pile_id"):
+ 			if game.city.query_foods(body.global_position,1.0).has(body):query_found+=1
+ 	check(query_found>=20,map_id+": new loose foods participate in the actual spatial collection query")
+-	metrics[map_id]={"all_edibles":game.city.foods.size(),"outer_edibles":outer.size(),"queryable_small_food":query_found,"outside":outside}
++	metrics[map_id]={"all_edibles":game.city.foods.size(),"outer_edibles":outer.size(),"queryable_small_food":query_found,"outside":outside,"maximum_scale_error":maximum_scale_error,"scale_tolerance":0.000001}
+ func ground_samples(map_id:String)->void:
+ 	check(game.WORLD_LIMIT==96.0 and game.ground.HALF==100.0,map_id+": player and cut terrain use the real expanded coordinates")
+ 	check(game.ground.surface.get_shader_parameter("world_half")==100.0,map_id+": material receives the shared enlarged atlas domain")

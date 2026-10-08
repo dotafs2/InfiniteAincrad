@@ -1,0 +1,54 @@
+[
+  {
+    "suite": "portrait",
+    "passed": false,
+    "report": {
+      "checks": 30,
+      "citizens": 64,
+      "edible_objects": 604,
+      "failures": [
+        "on-screen pause works without a keyboard"
+      ],
+      "unique_models": 208
+    }
+  },
+  {
+    "suite": "skin_skill",
+    "passed": true,
+    "report": {
+      "checks": 22,
+      "failures": [],
+      "progress": 420,
+      "skins": 10
+    }
+  },
+  {
+    "suite": "title_navigation",
+    "passed": true,
+    "report": {
+      "checks": 17,
+      "classic_slots": 5,
+      "failures": [],
+      "special_slots": 5
+    }
+  },
+  {
+    "suite": "mobile_maps",
+    "passed": false,
+    "report": {
+      "checks": 27,
+      "failures": [
+        "berry: eligible object enters physical fall",
+        "berry: score and order advance only after a complete fall"
+      ]
+    }
+  },
+  {
+    "suite": "actor_fall",
+    "passed": true,
+    "report": {
+      "checks": 32,
+      "failures": []
+    }
+  }
+]

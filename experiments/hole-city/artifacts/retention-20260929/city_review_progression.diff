@@ -1,0 +1,29 @@
+--- artifacts/retention-20260929/test-maintenance-before/city_review_progression.gd
++++ tests/city_review_progression.gd
+@@ -45,7 +45,7 @@
+ 	check(game.phase=="playing" and game.stage==7,"Unknown settlement reason is rejected")
+ 	game.finish("timeout")
+ 	var coins:int=game.coins;var eaten:int=game.eaten
+-	check(game.round_coins==4 and game.stage==7,"Timeout floors score coins and never advances stage")
++	check(game.round_coins==24 and game.stage==8,"Timed completion floors score coins, adds finish bonus and advances stage once")
+ 	check(not food.freeze,"Actual claimed cone remains physically released")
+ 	for tick in 180:
+ 		await physics_frame
+@@ -55,14 +55,14 @@
+ 	game.phase="playing";game.player.score=500
+ 	game.test_progress_path="/tmp/nonexistent-city-review-%d/progress.cfg"%OS.get_process_id()
+ 	game.finish("complete")
+-	check(game.progress_dirty and game.stage==8,"Failed disk write keeps awarded progress dirty for retry")
++	check(game.progress_dirty and game.stage==9,"Failed disk write keeps awarded progress dirty for retry")
+ 	var retry_coins:int=game.coins;game.finish("complete")
+-	check(game.stage==8 and game.coins==retry_coins,"Failed save does not permit duplicate settlement")
++	check(game.stage==9 and game.coins==retry_coins,"Failed save does not permit duplicate settlement")
+ 	var path:="/tmp/city-review-progress-%d.cfg"%OS.get_process_id()
+ 	game.test_progress_path=path
+ 	check(game.save_player_progress() and not game.progress_dirty,"Later writable save completes settlement retry")
+ 	var cfg:=ConfigFile.new();cfg.load(path)
+-	check(cfg.get_value("progress","stage")==8 and cfg.get_value("progress","coins")==retry_coins,"Retry persists the single awarded stage and balance")
++	check(cfg.get_value("progress","stage")==9 and cfg.get_value("progress","coins")==retry_coins,"Retry persists the single awarded stage and balance")
+ 	var result:={"checks":checks,"failures":failures,"game_sha256":review_source_hash("res://fidelity/game.gd")}
+ 	game.free();await process_frame
+ 	for suffix in ["",".tmp",".pre-coins.cfg"]:

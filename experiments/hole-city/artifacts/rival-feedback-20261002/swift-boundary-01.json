@@ -1,0 +1,151 @@
+{
+  "at_utc": "2026-10-02T00:44:15.821842+00:00",
+  "scope": "Actual extracted native Swift advertising and haptic methods, controlled SDK/UI boundaries and manually released timer clock; no live Google/Apple request or physical vibration. Not physical SDK callback acceptance.",
+  "source_sha256": "584b5d5332ddd143d1a9c8d51a5b6cc344c3602f7f9a7663a913dfb329bb9955",
+  "extracted_sha256": "c99248932b8ee56b0548acfdf5e64a408f4633619c651b0b2c9ab9435c27bbe9",
+  "fixtures_sha256": {
+    "tests/native_ads_recovery_stubs.swift": "f0c5d472c05c9f62b22d9c0e46c9a915fbcae5dbf2cd3c6e255edecbb418700c",
+    "tests/native_ads_recovery_harness.swift": "99cc3bd043b576cdca9bd658da23e3d890de7c3f7fa3ce82fcf514baf417d48e"
+  },
+  "timer_clock": "Manual boundary, actual computed seconds retained",
+  "timer_expression_substitutions": 2,
+  "checks": 48,
+  "failures": [],
+  "scenarios": [
+    {
+      "checks": 5,
+      "failures": [],
+      "load_calls": 1,
+      "retry_delays": [
+        15
+      ],
+      "scenario": "network",
+      "sdk_starts": 1,
+      "update_calls": 2,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 1,
+      "retry_delays": [],
+      "scenario": "background",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 3,
+      "failures": [],
+      "load_calls": 1,
+      "retry_delays": [],
+      "scenario": "suspend-update",
+      "sdk_starts": 1,
+      "update_calls": 2,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 0,
+      "retry_delays": [],
+      "scenario": "denied",
+      "sdk_starts": 0,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 1,
+      "retry_delays": [
+        15
+      ],
+      "scenario": "cached",
+      "sdk_starts": 1,
+      "update_calls": 2,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 1,
+      "retry_delays": [
+        15
+      ],
+      "scenario": "form-failure",
+      "sdk_starts": 1,
+      "update_calls": 2,
+      "exit_code": 0
+    },
+    {
+      "checks": 5,
+      "failures": [],
+      "load_calls": 2,
+      "retry_delays": [],
+      "scenario": "privacy-race",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 2,
+      "failures": [],
+      "load_calls": 2,
+      "retry_delays": [],
+      "scenario": "privacy-closes-first",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 6,
+      "failures": [],
+      "load_calls": 2,
+      "retry_delays": [],
+      "scenario": "reward",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 8,
+      "failures": [],
+      "load_calls": 0,
+      "retry_delays": [
+        15,
+        30,
+        60,
+        120,
+        240,
+        300,
+        300,
+        300
+      ],
+      "scenario": "backoff",
+      "sdk_starts": 0,
+      "update_calls": 8,
+      "exit_code": 0
+    },
+    {
+      "checks": 3,
+      "failures": [],
+      "load_calls": 1,
+      "retry_delays": [],
+      "scenario": "privacy-inactive",
+      "sdk_starts": 1,
+      "update_calls": 1,
+      "exit_code": 0
+    },
+    {
+      "checks": 8,
+      "failures": [],
+      "load_calls": 0,
+      "retry_delays": [],
+      "scenario": "haptic",
+      "sdk_starts": 0,
+      "update_calls": 0,
+      "exit_code": 0
+    }
+  ]
+}

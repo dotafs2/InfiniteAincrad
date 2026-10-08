@@ -1,0 +1,31 @@
+{
+  "status": "draft_only_not_created_in_App_Store_Connect",
+  "product_id": "sink_city.diamonds_100",
+  "type": "Consumable",
+  "reference_name": "100 Diamonds",
+  "display_name_en_US": "100 Diamonds",
+  "description_en_US": "100 diamonds for boosts, time or 250 coins.",
+  "planned_base_territory": "United States",
+  "planned_currency": "USD",
+  "planned_price": "1.99",
+  "fulfillment": {
+    "diamonds": 100
+  },
+  "exchange": {
+    "diamonds": 100,
+    "coins": 250
+  },
+  "normal_completed_round_coins": 50,
+  "skin_draw_coins": 50,
+  "required_before_release": [
+    "Restore App Store Connect authentication",
+    "Create actual consumable and US price using live Apple options",
+    "Finish required metadata and verify StoreKit sandbox purchase/fulfillment",
+    "Include with the accepted native release and review submission"
+  ],
+  "preserve_legacy_skus": [
+    "sink_city.diamonds_60",
+    "sink_city.diamonds_360",
+    "sink_city.diamonds_1800"
+  ]
+}

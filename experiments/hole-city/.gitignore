@@ -1,0 +1,23 @@
+.build/
+build/
+.godot/
+
+# Local render intermediates and reproducible compiled/review bundles.
+artifacts/**/*.avi
+artifacts/**/*.ppm
+artifacts/**/*.rgba
+artifacts/**/*.zip
+artifacts/**/*.pck
+artifacts/video-showcase-20260928/food/food_scene_offscreen
+
+# Account-console screenshots and private operational follow-up stay local.
+artifacts/**/asc-*
+artifacts/**/apple-paid-*.png
+artifacts/**/iap-two-products-saved.jpg
+artifacts/**/privacy-six-categories-draft.png
+artifacts/**/account-followup/
+
+# Local convenience aliases; actual versioned gallery directories are included.
+artifacts/store-review-20261001-v1/store-review-v3
+artifacts/store-review-20261001-v1/store-review-v4
+artifacts/store-review-20261001-v1/store-review-v5

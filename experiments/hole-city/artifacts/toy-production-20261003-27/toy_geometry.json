@@ -1,0 +1,105 @@
+{
+  "checks": 131,
+  "failures": [],
+  "metrics": {
+    "geometry": {
+      "block_tower": {
+        "natural_size": "(1.121426, 2.13, 1.121426)",
+        "signature": "2504376562",
+        "triangles": 1000,
+        "vertices": 700,
+        "welded_edges": 1500
+      },
+      "bubble_turret": {
+        "natural_size": "(1.075, 2.4798, 1.075)",
+        "signature": "2971866447",
+        "triangles": 1012,
+        "vertices": 602,
+        "welded_edges": 1518
+      },
+      "grand_castle": {
+        "natural_size": "(3.346, 4.1584, 2.564)",
+        "signature": "3321683520",
+        "triangles": 10524,
+        "vertices": 6686,
+        "welded_edges": 15786
+      },
+      "toy_arch": {
+        "natural_size": "(1.39, 1.39, 0.48)",
+        "signature": "1980278462",
+        "triangles": 1900,
+        "vertices": 1218,
+        "welded_edges": 2850
+      },
+      "toy_ball": {
+        "natural_size": "(0.98, 0.96, 0.964127)",
+        "signature": "3319071549",
+        "triangles": 580,
+        "vertices": 298,
+        "welded_edges": 870
+      },
+      "toy_block": {
+        "natural_size": "(0.88, 0.8, 0.914364)",
+        "signature": "1569789598",
+        "triangles": 500,
+        "vertices": 320,
+        "welded_edges": 750
+      },
+      "toy_car": {
+        "natural_size": "(1.182, 0.975, 1.398042)",
+        "signature": "1805751142",
+        "triangles": 1612,
+        "vertices": 1136,
+        "welded_edges": 2418
+      },
+      "toy_castle": {
+        "natural_size": "(2.828, 2.6024, 2.276)",
+        "signature": "2471077622",
+        "triangles": 9512,
+        "vertices": 6084,
+        "welded_edges": 14268
+      },
+      "toy_duck": {
+        "natural_size": "(0.96, 0.96, 1.289232)",
+        "signature": "3474304410",
+        "triangles": 1360,
+        "vertices": 760,
+        "welded_edges": 2040
+      },
+      "toy_train": {
+        "natural_size": "(1.182, 1.285, 1.762063)",
+        "signature": "797550469",
+        "triangles": 2272,
+        "vertices": 1588,
+        "welded_edges": 3408
+      }
+    },
+    "preview": {
+      "court_roles": [
+        "guard",
+        "sentry",
+        "king",
+        "courier",
+        "jester",
+        "royal_drone"
+      ],
+      "kinds": [
+        "grand_castle",
+        "toy_castle",
+        "bubble_turret",
+        "block_tower",
+        "toy_arch",
+        "toy_train",
+        "toy_car",
+        "toy_duck",
+        "toy_block",
+        "toy_ball"
+      ],
+      "meshes": 37,
+      "nodes": 38,
+      "unique_materials": 1,
+      "unique_meshes": 33
+    }
+  },
+  "scope": "Actual generated arrays, cache reuse, bounds/topology and visual-only ownership; no GPU pixels or phone performance claimed."
+}

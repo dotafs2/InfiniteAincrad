@@ -1,0 +1,55 @@
+{
+  "checks": 716,
+  "failures": [],
+  "metrics": {
+    "city after gameplay_angle_advance": 0.0200000028125942,
+    "city home_angle_advance": 0.0200000028125942,
+    "city return home_angle_advance": 0.0199999865144491,
+    "city_geometry": {
+      "behind_camera": 0,
+      "mesh_count": 64,
+      "minimum_border_pixels": 43.9421272277832,
+      "outside_safe_rect": 0,
+      "projected_aabb_corners": 36864,
+      "scope": "Actual mesh bounds and camera projection; no renderer pixel assertion."
+    },
+    "food after gameplay_angle_advance": 0.0200000028125942,
+    "food home_angle_advance": 0.0200000032782555,
+    "food return home_angle_advance": 0.0199999809265137,
+    "food_composition": {
+      "clusters": 14,
+      "food_instances": 68,
+      "layers": {
+        "background": {
+          "count": 20,
+          "depth": -3.04224580526352,
+          "top": 7.8632116317749
+        },
+        "foreground": {
+          "count": 34,
+          "depth": 2.8010033316472,
+          "top": 1.34493231773376
+        },
+        "midground": {
+          "count": 14,
+          "depth": -0.253416248730251,
+          "top": 4.08511257171631
+        }
+      },
+      "recipe_count": 10,
+      "staggered_stacks": 6,
+      "tilted_instances": 54,
+      "unique_food_materials": 1,
+      "unique_food_meshes": 20
+    },
+    "food_geometry": {
+      "behind_camera": 0,
+      "mesh_count": 87,
+      "minimum_border_pixels": 44.76318359375,
+      "outside_safe_rect": 0,
+      "projected_aabb_corners": 50112,
+      "scope": "Actual mesh bounds and camera projection; no renderer pixel assertion."
+    }
+  },
+  "scope": "Independent natural SceneTree processing, lifecycle, visual-only structure and projected mesh bounds. Gameplay world is frozen during UI route checks; no browser, rendered-pixel or performance claim."
+}

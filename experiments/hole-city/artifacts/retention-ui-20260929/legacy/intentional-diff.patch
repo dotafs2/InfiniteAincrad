@@ -1,0 +1,98 @@
+--- before/title_navigation_acceptance.gd
++++ tests/title_navigation_acceptance.gd
+@@ -1,4 +1,6 @@
+ extends SceneTree
++
++const Rarity=preload("res://fidelity/skin_rarity.gd")
+ 
+ var checks:=0
+ var failures:Array[String]=[]
+@@ -28,6 +30,10 @@
+ 	check(game.phase=="title" and game.ui.menu_screen=="home","title starts on home menu")
+ 	check(named_button("holes-nav")!=null,"home exposes the Holes navigation target")
+ 	check(game.ui.hero.visible,"home keeps the authored miniature visible")
++	check(game.selected_skin_id==Rarity.NEW_PLAYER_SKIN and game.skin_unlocked(Rarity.NEW_PLAYER_SKIN) and not game.skin_unlocked("core_shell"),"Fresh collection owns only its Common starter, without granting Legendary Core Shell")
++	# Explicit grandfathered ownership fixture preserves the original advanced-FX checks.
++	game.owned_skin_ids.append("core_shell")
++	check(game.select_skin("core_shell"),"Grandfathered Core Shell remains equippable")
+ 	named_button("holes-nav").pressed.emit()
+ 	await frames(2)
+ 	check(game.ui.menu_screen=="holes" and not game.ui.hero.visible,"Holes opens without starting a round")
+--- before/ui_redesign_acceptance.gd
++++ tests/ui_redesign_acceptance.gd
+@@ -1,4 +1,5 @@
+ extends SceneTree
++const Rarity=preload("res://fidelity/skin_rarity.gd")
+ ## Real viewport pointer routing, phone-sized hit targets, preview lifecycle and
+ ## food-order state. Test progress is session-local; no player save is written.
+ var game:Node3D
+@@ -96,7 +97,7 @@
+ 			thumbnail_framing();layout(category+" page "+str(page+1))
+ 	game.ui.choose_holes_tab("special");await frames()
+ 	await click("hole-slot-special-02")
+-	check(game.ui.preview_skin_id=="gravitas" and game.selected_skin_id=="core_shell","Locked card previews without equipping")
++	check(game.ui.preview_skin_id=="gravitas" and game.selected_skin_id==Rarity.NEW_PLAYER_SKIN,"Locked card previews without equipping")
+ 	check(game.ui.toast_time>0,"Locked card explains its real unlock requirement")
+ 	game.owned_skin_ids.append("shard") # Skill fixture; acquisition has dedicated coin QA.
+ 	await click("hole-slot-special-04")
+@@ -119,7 +120,7 @@
+ 	game.food_collected={"bacon":2,"egg":3,"pizza":7,"donut":1,"cake":0}
+ 	check(game.ui.food_order_counts()==[10,1,0],"Order icons cap the correct grouped receipt counts")
+ 	game.food_collected={"egg":10,"donut":4,"cake":1}
+-	check(game.ui.food_order_counts()==[10,4,1] and game.food_order_complete() and not game.food_goal_complete(),"Completed food badges do not bypass remaining city objectives")
++	check(game.ui.food_order_counts()==[10,4,1] and game.food_order_complete() and not game.food_goal_complete(),"Optional completed food badges do not complete the timed run")
+ 	game.finish("eaten");await frames()
+ 	layout("eaten")
+ 	check(target("REVIVE")==null and target("WATCH VIDEO")==null,"Web fallback presents working replay/home actions")
+@@ -134,7 +135,7 @@
+ 		game.ui.choose_holes_tab("special");await frames()
+ 		game.ui.close_menu();await frames()
+ 	check(game.ui.find_children("*","SubViewport",true,false).size()==2,"Repeated menu navigation retains only two reusable preview viewports")
+-	check(game.ui.find_children("*","Button",true,false).size()==9,"Repeated menu navigation retains exactly nine home controls, including two independent audio controls")
++	check(game.ui.find_children("*","Button",true,false).size()==10,"Repeated menu navigation retains exactly ten home controls, including map chooser and two independent audio controls")
+ 	var result:={"checks":checks,"failures":failures,"input":"Actual viewport mouse down/up","minimum_test_width_points":375}
+ 	print("UI_REDESIGN_ACCEPTANCE "+JSON.stringify(result))
+ 	for arg in OS.get_cmdline_user_args():
+--- before/review_ui_collection.gd
++++ tests/review_ui_collection.gd
+@@ -1,6 +1,7 @@
+ extends SceneTree
+ ## Independent reviewer: real screen-touch routing and cold restore. This test
+ ## has a PID-specific save and never loads the user's progress.
++const Rarity=preload("res://fidelity/skin_rarity.gd")
+ const Game=preload("res://fidelity/game.gd")
+ var checks:=0
+ var failures:Array[String]=[]
+@@ -68,10 +69,13 @@
+ 	check(cold.load_player_progress() and cold.gems==15 and cold.coins==370 and cold.shop_gift_claimed_stage==1,"UI transactions cold restore correctly");cold.free()
+ 	await tap("holes-nav")
+ 	check(game.ui.menu_screen=="holes","Touch opens collection from store")
++	check(game.ui.preview_skin_id==Rarity.NEW_PLAYER_SKIN and game.ui.skin_page==game.ui.tab_skin_ids().find(Rarity.NEW_PLAYER_SKIN)/6,"Fresh collection focuses its actual Common starter page")
++	check_page("Classic starter")
++	while game.ui.skin_page>0:await tap("skins-previous")
+ 	check_page("Classic first")
+ 	await swipe()
+ 	check(game.ui.skin_page==1,"Upward screen-touch swipe advances one page")
+-	check(game.selected_skin_id=="core_shell","Paging does not equip a touched locked card")
++	check(game.selected_skin_id==Rarity.NEW_PLAYER_SKIN,"Paging does not equip a touched locked card")
+ 	check_page("Classic page two")
+ 	await swipe(false)
+ 	check(game.ui.skin_page==0,"Downward screen-touch swipe returns one page")
+--- before/skin_skill_acceptance.gd
++++ tests/skin_skill_acceptance.gd
+@@ -1,4 +1,6 @@
+ extends SceneTree
++
++const Rarity=preload("res://fidelity/skin_rarity.gd")
+ 
+ var checks:=0
+ var failures:Array[String]=[]
+@@ -60,7 +62,7 @@
+ 	await frames(4)
+ 	check(game.SKIN_DEFS.size()==44,"the full catalog defines 44 skins")
+ 	check(game.skin_ids("foundation").size()==27 and game.skin_ids("resonance").size()==17,"27 Classic and 17 Special forms retain five original functional skills")
+-	check(game.skin_unlocked("core_shell") and not game.skin_unlocked("copper_ring"),"new collection only owns the base form")
++	check(game.skin_unlocked(Rarity.NEW_PLAYER_SKIN) and game.selected_skin_id==Rarity.NEW_PLAYER_SKIN and not game.skin_unlocked("core_shell") and not game.skin_unlocked("copper_ring"),"new collection only owns its Common base form")
+ 	await start_with_lesson_check()
+ 	game.player.award(25)
+ 	check(game.skin_progress>=25 and not game.skin_unlocked("copper_ring"),"best score no longer unlocks skins")

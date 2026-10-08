@@ -1,0 +1,54 @@
+{
+	"city": {
+		"buildings": 48,
+		"moving_vehicles": 8,
+		"sidewalk_regions": 4
+	},
+	"crowd": {
+		"citizens": 64,
+		"closest": {
+			"a": 1,
+			"a_kind": "thief",
+			"b": 32,
+			"b_kind": "police",
+			"distance_m": 0.0,
+			"time": 12.9
+		},
+		"overlapping_unique_pairs": 57,
+		"radius_each_m": 0.23
+	},
+	"heading": [
+		{
+			"changed_heading": 0,
+			"hz": 60,
+			"sample": {
+				"distance_m": 1.36339581012726,
+				"final_heading": 1.70000004768372,
+				"kind": "mech",
+				"start_heading": 1.7
+			},
+			"travelled_over_0_1m": 56
+		},
+		{
+			"changed_heading": 56,
+			"hz": 30,
+			"sample": {
+				"distance_m": 1.37157213687897,
+				"final_heading": -4.76375579833984,
+				"kind": "mech",
+				"start_heading": 1.7
+			},
+			"travelled_over_0_1m": 56
+		}
+	],
+	"scope": "headless manual controller steps; no visual or GPU evidence",
+	"traffic_wrap": {
+		"axis": "z",
+		"from": "(27.2, 0.765, -46.99085)",
+		"jump_m": 93.9908447265625,
+		"time": 40.0833333333333,
+		"to": "(27.2, 0.765, 47.0)",
+		"vehicle": 7
+	},
+	"version": "0.7.0"
+}

@@ -1,0 +1,43 @@
+{
+  "checks": 98,
+  "failures": [
+    "city: naturally scheduled movement scales exactly once at radius 0.85",
+    "food: naturally scheduled movement scales exactly once at radius 0.85",
+    "Engine process failed; inspect the engine log"
+  ],
+  "measurements": [
+    {
+      "boosted_distance": 2.08602499961853,
+      "joystick": 0.6,
+      "map": "city",
+      "ordinary_distance": 1.32407379150391,
+      "radius": 0.85,
+      "ratio": 1.57545977648964
+    },
+    {
+      "boosted_distance": 0.96977424621582,
+      "joystick": 0.6,
+      "map": "city",
+      "ordinary_distance": 0.625594913959503,
+      "radius": 24.88,
+      "ratio": 1.55016325193238
+    },
+    {
+      "boosted_distance": 2.08602499961853,
+      "joystick": 0.6,
+      "map": "food",
+      "ordinary_distance": 1.32407379150391,
+      "radius": 0.85,
+      "ratio": 1.57545977648964
+    },
+    {
+      "boosted_distance": 0.96977424621582,
+      "joystick": 0.6,
+      "map": "food",
+      "ordinary_distance": 0.625594913959503,
+      "radius": 24.88,
+      "ratio": 1.55016325193238
+    }
+  ],
+  "scope": "Non-author actual input and natural CharacterBody physics; collection isolated to keep radius constant. No phone FPS, browser rendering or subjective feel claim."
+}

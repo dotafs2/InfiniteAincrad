@@ -1,5 +1,2808 @@
 # 历史全部流水
 
+## 2026-10-08 · User-authorized public development snapshot
+
+The user requests uploading all current local work to their existing GitHub.
+Prepare branch `codex/publish-local-20261008` from the unchanged remote main,
+including Hole Feast, Gate Siege, original source/assets, development evidence,
+updated roadmap/history, and available visible-message archives. Preserve all
+local private saves and signing/account material. Review media uses Git LFS;
+raw render/compiled duplicates and account-console screenshots stay local.
+The current chat is exported by exact task identity with explicit public contact
+redactions and attachment fingerprints. No original local session is changed.
+Seven focused archive regression tests pass. Existing game acceptance evidence
+is preserved; no runtime change or repeated engine build is part of publication.
+The Apple watch has been stopped by the user. Mainland Douyin is research only.
+See [scope and restore notes](docs/publication-20261008/README.md). Publication
+is complete only after the remote branch and downloaded archive hashes match.
+
+
+## 2026-10-08 · User-authorized area combat and GPU cosmetic bullets
+
+The user explicitly permits fake bullets, area-based damage and Monte Carlo-style
+approximation for performance. Choose deterministic weights rather than random
+sampling. Version0.3.1 aggregates every member's firing energy into32 lateral
+cells and advances coverage at10Hz, with delayed fronts, partial gate overlap,
+pre-mitigation armor debit, fractional HP and ordered target layers. No live
+individual projectile objects remain. Rail has six contacts per covered cell;
+Rocket and Arc use one grouped secondary discharge per field. These are explicit
+approximations authorized by the user, not preserved physical-bullet semantics.
+
+Move decorative trail movement to a fixed1600-slot GPU batch with lower quality
+budgets; per-frame CPU work sets one clock. Split birth time avoids Compatibility
+half-float phase loss over a multi-minute run. Retain per-member muzzles, multiplier
+fans, colors, ground shadows, recruit timing and the eight-wave/five-weapon game.
+Two requested reviewers test conservation, quality equivalence, visual density,
+actual controls and performance. Root independently inspects the auditor-authored
+renderer; the runtime auditor checks the root-authored solver and integration.
+
+Source and isolated-package197 focused checks pass. All four quality modes share180 complete-run
+checkpoints; the ordinary-input sweep controller wins at178.10simulated seconds,
+while idle loses at41.72. The controller reacts to visible enemies/warnings and
+never injects health, damage, roster or wave state. Same-fixture3×20second desktop
+CPU comparisons reduce mean complete physics work by42.8–73.3%, depending on
+weapon. Largest observed coverage tick is3.123ms. Source active real-GPU modes
+have no sampled>50ms frames, including first fire/impact/warnings. A synthetic
+cold full-scene first-presentation loading peak remains and is retained in the
+reports; neither all-frame smoothness nor physical-phone30FPS is claimed.
+
+The immutable0.3.1 package SHA-256 is
+`81412f9adbc68a57530cc3b556e08939c08505d59ddf2f26871860ea8f5083e0`.
+Current exact-package receipts and actual-input capture are under
+`experiments/gate-siege/artifacts/coverage/` and `artifacts/expansion-runtime/`.
+Older physical-packet evidence is explicitly historical. Keep preview8810 and
+all unrelated applications. No commit/push/public hosting, phone build, Hole Feast
+or resident-world change occurs. [Current handoff](experiments/gate-siege/docs/CONTINUE.md).
+
+## 2026-10-08 · Gate Siege squad campaign expansion
+
+The second user-supplied clip requests actual +1 squad growth and whole-squad
+upgrades while preserving the visual target, with more waves, flying dragons,
+more weapons and exactly two stepwise auditors. Version0.3.0 implements36
+persistent independent shooters, eight configured waves, five mechanically
+distinct weapons, troop/elite HP, swept collision ordering and articulated
+brute/dragon/golem/skitter enemies. Rockets discharge once with area damage;
+arc shots discharge once across distinct chained targets. The cyan core ahead
+of the roster is the shared-health hurtbox for telegraphed attacks.
+
+Review rejects early creature/costume simplicity, obscured wing membranes,
+full-formation glow whiteout and capacity text overlap. Final original meshes
+have matte clothing, separate hardware and broader articulated membranes;
+actual hero meshes supply rebaked ground silhouettes. Colored alpha trails
+preserve road and multiplier readability. Full squads retire unusable+1 cards
+and show SQUAD FULL. Batching, cached meshes/shaders, actual menu prewarming,
+crowd LOD and bounded effects retain all logical combatants at a1280px portrait
+3D floor. A repeated first-warning shader stall was found and repaired.
+
+Source and isolated final package pass156 focused checks, including capacity
+retirement and restart. The superseded physical-packet candidate SHA-256 is
+`d543c6ec50bc7f377559266d0de7706b15c4024267d89dacdb475147485e1faf`.
+The runtime/visual reports and final delivery manifest hold full evidence and
+measurement boundaries. The controller supplies ordinary steering/weapon
+inputs and reacts to visible warnings; fixed-step15FPS recordings are not
+phone recordings or FPS measurements. A supplemental capture that read a
+mutable package during export was rejected and its failure note retained.
+
+The two auditors also authored specific repairs; root independently inspected
+those changes and rendered results. No exact original-game identity or
+sustained phone30FPS is certified. Work stays local and isolated; no commit,
+push, public hosting, resident-world or Hole Feast change occurs. The visible
+conversation archive records its actual cutoff, excluding future messages and
+other chats. [Current handoff](experiments/gate-siege/docs/CONTINUE.md).
+
+## 2026-10-08 · Gate Siege grounded player shadows
+
+The user rejects the faint protagonist shadow. Replace the model-parented blob
+with a world-grounded silhouette/contact rig for infantry, gunner and mech.
+Bake three small alpha masks from actual model triangles and the scene sunlight;
+keep them in Low/Battery, retain real directional shadows in High, and clip at
+the runway edges. Add a soft height-dependent recruit footprint and clean it up
+on landing/restart. Recoil, steering lean and player bob cannot tilt the floor.
+
+Three independent reviewers verify asset projection, visible grounding and
+runtime lifecycle. Source and isolated0.2.1 PCK each pass209 checks. Low/Battery
+add one draw call/two primitives; full crowd now55/54 draws, High unchanged90.
+No target-phone FPS claim is added. PCK SHA-256:
+684b08d7ccecc2ceee5627993f168b26f4e7a93a458677e52e1470e15fc8c033.
+Staged exact-package images and delivery receipt are in
+`experiments/gate-siege/artifacts/player-shadow/`. Preview8810 is updated;
+all test helpers exit. No Git publication or resident/Hole Feast changes.
+[Current handoff](experiments/gate-siege/docs/CONTINUE.md).
+
+
+## 2026-10-08 · Gate Siege articulated bosses and mobile optimization
+
+Respond to the user's static-boss report with two original13-bone/6,398-triangle
+skins and manual walk, attack, recoil and1.7-second death playback. Align the
+close-range fatal hit with the visible punch, preserve pause and restart, and
+limit repeated hit/flash resets so fast fire does not hide the motion.
+
+Keep all544 troops per wave and all logical damage while adding compact mobile
+heroes, three explicit crowd LODs, scenery/gold-plate batching, bounded cosmetic
+pools, separate cosmetic RNG, reduced3D resolution and30-FPS AUTO/LOW graphics.
+Three agents independently find and verify fixes for a Compatibility custom-data
+color-binding defect, repeated shader/mesh compilation stalls at recruitment,
+low/high lighting imbalance and half-float readback assumptions in a test.
+
+Final source and isolated PCK each pass57 lifecycle and66 mobile assertions;
+all four quality modes retain21 identical gameplay fingerprints. Twenty-second
+real desktop traces remove the reproducible230–382ms landing stalls: capped
+mean33.328ms, maximum48.953ms, zero frames over50ms. Final low full-crowd draw
+calls fall393→54; these are M1 Pro results, not weak-phone guarantees. The user
+asks for an audience-informed floor; choose casual short-session players and a
+provisional Snapdragon665/HelioG80,3–4GB Android target, with older iPhones as a
+secondary group. Physical sustained30-FPS and thermal acceptance remain open.
+
+Final PCK SHA-256 is8152cae2d2879f3da8cb3d509ebe60c2bb1536a0fb2189a37ae30a9e5d31aa7c.
+The existing loopback preview is updated and browser startup/drag/recruit/pause/
+quality control are checked with no console warnings/errors. The9.93-second
+exact-package animation video is explicitly labeled staged injected-damage
+capture, encoded at15 FPS; it is not a phone or performance recording. Preserve
+the old package and intermediate failures as evidence. No Git upload, public
+hosting or changes to Hole Feast/resident worlds occur.
+[Handoff](experiments/gate-siege/docs/CONTINUE.md).
+
+
+## 2026-10-08 · Close obsolete preview workloads
+
+The user requests closing unused conversations/pages to reduce power usage.
+Inspect task status, browser tabs and exact process ownership. All owned review
+agents are completed; another pinned project remains active and is preserved.
+Close ten obsolete/duplicate tabs, retaining the current Common skin review
+and final Royal Court gallery. Gracefully stop eight obsolete owned preview
+servers8787–8794 after exact command/cwd verification; all exits are confirmed.
+Keep8786 gallery,8795 final castle preview and the unrelated8810 service.
+No running Godot/Blender/ffmpeg/awake helper was found. Preserve all files, saves,
+conversation history and the three-hour Apple review monitor. No battery-drain
+percentage is claimed. Receipt is in the ignored
+`experiments/hole-city/build/cleanup-20261008/power-cleanup.json`.
+
+## 2026-10-08 · Standalone Gate Siege video reconstruction
+
+Read the user-selected 28.93-second video through a Finder-created temporary
+copy after macOS denied direct reads from the WeChat container. Gameplay lasts
+about 25.5 seconds and shows a multiplier shooter, not the adjacent hole game.
+Search official Godot/creator templates; build a focused standalone scene after
+finding no suitable matching camera/loop among the examined templates.
+
+Seven original Blender models, sparse portrait UI, physically traveling volley
+packets, opposed gates, progressive recruit shells, hero leaps, rising replacement
+statues, colored weapons, white death flashes and three complete waves are local
+in experiments/gate-siege. Three agents contribute original art, precise reference
+observation and independent adversarial visual/runtime review. Fix six runtime
+fault categories plus vertex-color, exposure, geometry, font and overlapping-hit-
+flash defects. Source and exact isolated final PCK each pass 57 checks with clean
+logs. Pointer steering wins all three waves; unattended play loses. The optimized
+18.80-second strategy is a reachability result, not original-game timing.
+
+Preview 8810 opens and accepts ordinary browser drag input with no observed
+console warnings/errors. A final exact-PCK 36.03-second GPU movie uses scripted
+steering and fixed-step movie mode, not phone capture or performance evidence.
+Core observed visual actions are accepted; detailed art, upper framing, cyan
+softness and choreography still differ. Completed gold/rocket unlocks and later
+waves are reconstructed extensions. Do not claim complete identity.
+
+Hole Feast code/saves and resident worlds remain separate. No Git publication,
+public hosting or phone build occurs. All helper/capture processes exit except
+the retained loopback preview server. A visible-message archive of this exact
+chat is refreshed with its explicit cutoff; other chats and future messages are
+not included. [Handoff](experiments/gate-siege/docs/CONTINUE.md).
+
+## 2026-10-08 · Original royal castle quality rebuild
+
+Rebuild the actual third map after the user rejects its architectural simplicity
+and requests Disney castle references plus joint agent review. Study official
+Paris/Florida presentations for mass hierarchy and entry/garden treatment;
+author original Blender meshes, not reference textures or copied layouts.
+Five new model families total32,184 triangles within unchanged family budgets.
+Raised central keeps, unequal towers, curved layered roofs, real portals and
+window relief replace the broad-roof/plain-box silhouette. Two palace courts
+and sixteen independently edible garden props add depth. Available world
+points rise4169→4233; currency conversion, prices and saves remain unchanged.
+
+Frost extends Toy and retains its physics, so a separate frozen provider
+preserves actual old horizontal vertices, compact hulls, rim order and compound
+parts for180 architecture owners including24 supported owners. Model-worker
+and root review that isolation separately. Toy scene815 bodies /876 mesh
+instances /1077 collision parts remain within existing budgets; all55 original
+size classes retain counts, supports and swallow levels.
+
+Two independent reviewers reject and correct the first plain entry, oversized
+roof details, weak garden staging and thumbnail compositions. Preserve all
+failed generations/captures. Accepted six-view GPU art, two deterministic
+ordinary90-second rounds,574 actual UI-card checks and a clearly labeled
+14.57-second level12 staged swallow video demonstrate the final result.
+The staged movie records seven unique receipts totaling120 points, including
+the grand castle exactly once. It is not ordinary growth/pacing evidence.
+
+The complete final gate passes98 suites per phase:176,870 source and176,860
+exact-PCK checks. The10-check difference is historical-source-only Frost
+comparison. All1,342 inputs and18 exports match; independent full-log review
+finds no unexpected warnings/errors/leaks. New browser preview8795 verifies
+Toy selection/intro, drag movement, four points collected and return HOME with
+empty warning/error logs. First PLAY dispatch timed out during construction;
+subsequent observation confirmed correct loading without reload. Review HTML
+uses existing isolated unlocked-Toy flags, hashes separately and preserves the
+tested PCK. Gallery/video on8786 and earlier previews remain available.
+
+No phone/native upload, Apple/AdMob, Git publication or real-save changes.
+Phone performance and broad human-play coverage remain unverified.
+[Handoff](experiments/hole-city/docs/royal-castle-20261008/CONTINUE.md).
+
+## 2026-10-08 · Closer thematic map thumbnails
+
+Replace four distant selection overviews with actual close GPU screenshots:
+six City streetfronts and people, a pastry/cake/burger block with pedestrians,
+colorful Toy castle fronts and palace guards, and faceted Arctic ice with four
+visible penguins. Preserve secondary food stacks rather than claiming an exact
+six-object limit. Only the capture helper and four880×620 PNGs change; no game
+world, lighting, actor placement, import settings, UI logic or save changes.
+
+Two independent reviewers guide repeated camera-only compositions and accept
+final raw images plus actual short/tall, locked and safe-area card layouts.
+The helper explicitly isolates entitlements and verifies actual map identity,
+initial Idle pose, disabled holes and empty save path. Preserve both earlier
+surveys. Existing GPU carousel574 checks pass; source and exact PCK each pass
+carousel561 + unlock92 =653 focused checks. All1,333 inputs and18 export hashes
+match, with exactly5 intended deltas from the prior accepted celebration build.
+No full97-suite rerun or phone validation is claimed.
+
+Browser startup confirms new City artwork at8794 with no observed warnings or
+errors. A four-image before/after toggle gallery is ready on8786. Preserve all
+prior previews, actual saves and submitted native build34; no account/upload,
+phone or Git action. [Handoff](experiments/hole-city/docs/map-thumbnails-close-20261008/CONTINUE.md).
+
+## 2026-10-08 · Celebratory skin-reveal sparks
+
+Add an original 1.6-second rarity-colored burst at OPENING → NEW SKIN: luminous
+comet tails and small stars expand behind the live model, then drift out and
+fade. A bounded 26–36 particles in one canvas control adds no viewport or light.
+Natural finish and SKIP trigger once; saved-result restoration and repeated
+callbacks do not replay. Controls remain usable immediately. Clear on exit,
+independent lifecycle suspension, local RNG and unchanged save/economy state
+are verified.
+
+Two reused independent reviewers reject the first dim presentation, then find
+and reject eight ribbon triangulation errors in the brighter second capture.
+Preserve the failures. Explicit gradient triangles fix the slow-tail folding
+case; the third continuous GPU capture and complete logs are clean. Both final
+reviewers accept the corrected appearance, responsive layouts and exact package.
+GPU UI passes 712 checks; focused source and PCK each pass four suites / 1,123
+checks, with 1,333 guarded inputs and 18 matching export hashes. Exactly two
+existing guarded files plus the new effect differ from the previous full gate;
+this is not a new 97-suite run.
+
+A muted 10.07-second actual Mac clip and review gallery are ready; local Web
+startup at 8793 is verified. Preserve previous previews, actual saves and
+submitted native build 34. No phone, Apple/AdMob or Git publication action.
+[Handoff](experiments/hole-city/docs/case-celebration-20261008/CONTINUE.md).
+
+## 2026-10-08 · Six distinct musical contexts and exact-package review
+
+The user requests distinct music for every map, overall menus and skin cases,
+with usable licenses or original composition, plus two independent GPT-6 ultra
+reviewers. Dispatch music_art_review and music_runtime_review on GPT-6 Astra
+with ultra effort; the root session model is not changed by a tool. Review
+actual world imagery and primary author pages before choosing recordings.
+
+Retain Cleyton Kauffman's CC0 Buy Something! for menus only. Assign Juhani
+Junkala's CC0 Hometown to City and Sunshine Coast to Food, Cleyton Kauffman's CC0
+Children's March to Toys and the author-slowed Through the Snow to the Arctic
+world. Compose the original 40-second D-major A Little Wonder for cases with
+no third-party samples. Preserve full external compositions; apply bounded
+constant-gain mastering, modest EQ and loop-edge guards to new recordings.
+Record source/member/output hashes, original notes, measurements and tool
+versions. Synchronize source, in-app and exported license notices. All six
+unique music packets total 5,532,402 bytes.
+
+Replace the shared-map routing with explicit menu/gameplay/case contexts and one
+streamed voice, 200 ms fade-out / 300 ms fade-in, separate session bookmarks,
+latest-target handling and 7 dB case-roll ducking. Extend the original open cue
+to the real 4.25-second roll; seven other cue WAVs remain byte-identical. Retain
+independent Music/Sound preferences and focus/pause/browser-gesture behavior.
+Silence music and effects before rewarded-ad presentation and keep them silent
+through earned-before-close callbacks, using authoritative ad visibility rather
+than an unclaimed reward receipt.
+
+Both independent reviewers accept scene matching, provenance, prepared signals,
+runtime behavior and final exact-package evidence within explicit scope. The
+new independent suite passes 190 checks including actual native Ogg boundary
+crossings for all four maps. Actual 45.35-second Mac GPU/mixer capture shows menu,
+four map introductions, a full case opening and early skip; these are not normal
+full-round map playthroughs. Host speakers remain muted. Two isolated 100-coin
+draws leave the fixture at 300 from 500. Recorded stereo 48 kHz PCM has zero
+clipped samples; no subjective listening or physical-phone claim is made.
+
+Preserve failed preparation/fixture logs and Gate 01's strict rejection of an
+Ogg decoder teardown leak after 1,701 passing coin/skin assertions. Verbose
+reproduction confirms a pending route could restart playback after a fixture's
+stop/drain. Freeze route processing at the end of seven affected fixtures,
+after all behavioral checks; no assertion or error filter is weakened. Focused
+reproduction becomes leak-free. Gate 02 passes 97 suites and 176,645 checks per
+source and exact-package phase, with 1,332 unchanged inputs and 18 matching
+export files. Browser HOME renders without observed warning/error logs at 8792.
+
+Deliver six manual-playback tracks and the captured video through the gallery
+on 8786. Keep the new 8792 loopback preview and all previous previews. Preserve
+all actual player saves, economy, skins, maps and submitted native build 34.
+No phone, Apple/AdMob, native upload, Git publication or real purchase occurs.
+Physical output, native SDK interruption and subjective audition remain open
+limitations. [Handoff](experiments/hole-city/docs/music-worlds-20261008/CONTINUE.md).
+
+## 2026-10-08 · Skin acquisition through original animated cases
+
+The user requests a Counter-Strike-style case-opening experience with random
+skins, rarity categories and sounds. Replace the visible direct unlock action
+with HOLES → OPEN CASE, a dedicated dark reel, cached actual skin thumbnails,
+a fixed gold marker, 4.25-second deceleration, SKIP, and a separate result/equip
+choice. Retain the six existing tiers, 200-skin catalog, 100-coin cost, no-duplicate
+pool, current odds/guarantees, recharge and exchange. All case art and eight
+bounded sound cues are original. Existing currency and map progression remain.
+
+Persist the debit, awarded skin, pity and pending receipt atomically before the
+animation. Returning restores the same result; a failed save rolls the transaction
+back. Equip is explicit. A late interaction review finds that rapid CONTINUE taps
+could land on the next OPEN target; add an800ms guard and verify real pointer
+replay plus normal re-enable. The reel uses cached256px PNGs and one disabled-until-
+result 3D viewport. SFX preference, focus loss and bounded audio voices are covered.
+
+Three delegated workers cover transaction safety, original audio/assets, and
+independent UI/interaction review. Final GPU UI647, transaction133, audio122 and
+actual-model thumbnail bake2,005 checks pass. The real540×960/60fps/9.42s desktop
+clip records one isolated1000→900 opening and explicit Fox Den equip. Labelled
+Common/Prismatic single-item fixtures and short/tall/safe-area images are retained.
+No physical-phone or subjective full-speed audio-listening claim is made.
+
+Preserve early type/fixture errors, the stale viewport-count gate01 failure and
+intentionally interrupted gate02. Final gate03 passes96 suites /176,455 checks
+in each source and exact-package phase, with1,318 unchanged inputs and18 matching
+export hashes. The final browser boots without observed console warnings/errors
+at8791; the review gallery and final capture04 are available on8786. Test progress
+is isolated. No Apple, AdMob, phone, native upload or Git publication action occurs;
+submitted native build34 and all previous previews remain.
+[Handoff](experiments/hole-city/docs/case-opening-20261008/CONTINUE.md).
+
+## 2026-10-08 · Screenshot carousel and earned world access
+
+The user requests one horizontal swipe row with recognizable map screenshots
+and sequential unlock conditions. Replace the split HOME/vertical chooser with
+four actual world screenshot cards, a visible neighbor edge, short lock goals,
+progress indicators, and one focused PLAY action. Preserve the established
+HOME / STORE / HOLES dock. The old home miniature viewport stays disabled;
+static cards add no per-map viewport. Four actual 880×620 GPU world screenshots
+are reviewed before integration; all authored assets remain original.
+
+City is initially available. A completed positive-score City round unlocks
+Food; completed Food score 200 unlocks Toys; completed Toys score 300 unlocks
+Frost. A new versioned entitlement/completed-best state uses the existing atomic
+save. Positive legacy map bests or valid settled receipts preserve played
+worlds, while a selected thumbnail alone does not invent play history. Currency,
+skins, rewards, preferences and unknown config sections are retained.
+
+Preserve and fix three actual focused-regression failures: leaving HOME during
+a snap kept PLAY briefly disabled; released-card easing blocked immediate PLAY;
+consuming a new card release prevented the audio gesture gate from seeing it.
+Also route keyboard Enter through the focused-card guard so a locked preview
+cannot launch the previous selected world. Both existing reviewers accept the
+final visual and interaction evidence. Old miniature-specific gate suites are
+replaced by carousel and unlock suites; other legacy map tests explicitly opt
+into entitled fixtures. Plain test mode still starts City-only.
+
+Final Mac GPU UI/input verification passes 561 checks with 13 actual images,
+including a labelled phone safe-area simulation. The isolated unlock suite
+passes 92 checks. Final source and exact Web package each pass 93 suites and
+175,537 checks with 893 unchanged inputs; all 18 exported file hashes match.
+Browser testing at 8790 verifies both swipe directions, locked PLAY/Enter
+rejection, immediate City launch and genuine movement/collection. The minimal
+1-point City smoke run expires naturally and then unlocks Food in the actual
+browser Home; no timer, score or access state was injected. Browser QA is
+muted, uses no-save test mode and makes no native ad/purchase calls.
+
+Preserve previous previews, all real saves, the accepted score economy, all
+200 skins, other maps, and submitted native build 34. This is a local UI/gameplay
+change; no phone, Apple/AdMob, TestFlight or Git publication action. Physical
+phone layout/performance is not established by the desktop captures.
+[Handoff](experiments/hole-city/docs/map-carousel-20261008/CONTINUE.md).
+
+## 2026-10-08 · Rebuild and independently review the Arctic glacier map
+
+The user requests two reviewers, Frozen visual research and original Blender
+models until the reviewers accept. Inspect the neighboring Frostlight task and
+preserve its baseline before editing. Both reviewers reject repeated cones,
+brick streets, detached snow and the first box-like replacement. The second
+Blender revision provides calving cliffs, windcut ridges, terraced shelves,
+split seracs, ice boulders and floes, with inclined crests and owned snow caps.
+All shipped geometry and surfaces are original; official Disney lighting
+research informs value and material separation without using Disney assets.
+
+Replace inherited toy silhouettes with polar species/research equipment, retain
+their existing controllers, add 16 edible low glacier shoulders and change
+paving to irregular frozen leads. The 872-body world has 609 imported edible
+ice owners. Static batching and cached merged actor surfaces reduce the same
+initial portrait fixture from 958 to 464 draw calls. This is not phone FPS data.
+
+Both reviewers accept actual close-ups, reverse angles, map overview, home
+miniature and ordinary gameplay. Focused acceptance passes 2,487 checks. Two
+normal 90-second isolated rounds, without injected points or target teleports,
+earn 341/409 points and reach levels 7/8. A 90-second muted desktop gameplay
+video and comparison gallery are delivered. Larger targets remain at the end.
+
+Final source and exact Web package gates each pass 93 suites / 175,836 checks,
+with 881 unchanged guarded inputs. All 18 exported file hashes match the gate.
+Fresh browser startup, world selection, launch and movement render at port 8789;
+no console warnings/errors are observed. A launch-input timeout resolves to a
+successfully loaded world; it is not silently treated as a failed launch.
+Music and sound are off in the isolated preview, which is left paused.
+
+Preserve early Blender/harness/fixture failures and reviewer rejections. Real
+saves, all 200 skins, accepted economy, other maps and submitted native build 34
+remain unchanged. No Apple/AdMob, phone, TestFlight or Git publication action.
+[Handoff](experiments/hole-city/docs/glacier-frozen-review-20261007/CONTINUE.md).
+
+## 2026-10-07 · Expand the real skin collection to200 and grade by visual specification
+
+The user explicitly permits palette variants and asks for exactly200 real skins
+using the previous production method. Implement40 Common,60 Uncommon,48 Rare,
+28 Epic,16 Legendary and8 Prismatic entries:68 named bases and132 variants,
+including eight new procedural mesh families. Original60 IDs, names, order,
+legacy entitlements and five active abilities remain. New entries are cosmetic;
+old simple rings move down and nineteen detailed everyday forms move up.
+Grades and pool membership change; base tier weights, price, guarantees and
+accepted score economy remain. Do not claim identical individual skin odds.
+
+Per-variant material resources avoid recoloring siblings. Legacy meshes, shader
+variants and new assemblies share canonical renderer families. Weather variants
+retain single-entry intake timing. All ordinary models now use bounded item/rival
+feedback; Phoenix has shoulder-hinged opposite wings and Aurora a single shader
+ribbon. Collection cards render actual models and fit full base/palette names.
+
+Independent reviewers reject initial weak palettes, a washed-out Snow Owl,
+preview mouth gaps, flat Epic ornaments and clipped captions; final repairs pass
+qualified visual review. Produce400actual idle/rival model images, six tier
+sheets, five collection screenshots, a Phoenix motion study and two40-second
+ordinary full-map videos. Both gameplay videos record23items and one rival,
+score0→36, without injected entities or rewards. Early details still compete
+with boost/HUD/building dither. No native-phone frame-rate claim is made.
+
+Focused real GPU2,996checks, weather791, collection1,680 and UI71,619 pass.
+Preserve early parse failures, Pavilion triangle/caption failures and two full
+source-gate fixture failures: funding100draws instead of199, then a corruption
+fixture that needed explicit flush/close. The repaired acquisition fixture passes
+1,677checks without changing runtime save guards. Final gate03 passes 92 suites / 173,349 source checks and 92 suites / 173,349 exact-package checks; GPU 2,996 and weather 791 checks; 867 unchanged guarded inputs.
+The exactPCK GPUrows match the source; browser startup andHOLES200render at8788.
+Real saves, native0.13.0/build34, accounts and Git remain.
+[Production handoff](experiments/hole-city/docs/skin-production-200-20261007/CONTINUE.md).
+
+
+## 2026-10-07 · Build and integrate all twenty Common skins
+
+The user asks for the complete Common image set, then explicitly requests
+installation in the game. Produce twenty original concepts and implement twenty
+cached 3D runtime models rather than substituting concept pictures for gameplay.
+Six existing Common IDs are reworked; fourteen IDs append to the unchanged first46.
+The local catalog reaches60. Menu/player use the same geometry; fixed eight-slot
+cosmetic feedback handles items and rivals with different timing and intensity.
+Physics, rewards, price amounts, draw guarantees and real user saves remain.
+
+Independent visual review rejects initial gaps and weak silhouettes, then accepts
+Capture04 after repairing Mitt, Acorn, Knit, Nest and several material joins.
+Twenty actual model pairs, one contact sheet and two normal collection screenshots
+are delivered. Two muted40-second Sunny City clips each record23objects and one
+rival with normal entities/input rules and no injected rewards. They are fixed
+simulation captures, not native-phone or real-time performance evidence. Runtime
+art remains simpler than the concept illustrations; pooled motion families are
+not twenty separately articulated animation rigs.
+
+Source gate03 passes92suites/77,763checks, with725real-GPU Common checks and117
+Rainfall checks. Earlier gates preserve failures for a stale generic burst fixture
+and three genuine description overflows, both fixed. The first final export uses
+the wrong MONO editor and fails; the existing standard4.7.2 editor exports
+successfully at the identical engine revision. All92packaged suites pass77,763
+checks; all863guarded inputs remain unchanged. Exact-PCK GPU acceptance passes725
+checks with source-identical geometry/effect rows. Browser startup and collection60
+render correctly at8787, with muted test state; original concepts, actual models
+and normal gameplay videos remain available at8786.
+Submitted0.13.0/build34, accounts and Git are unchanged.
+[Handoff](experiments/hole-city/docs/skin-collection-200-20261007/CONTINUE.md).
+
+
+## 2026-10-07 · Plan 200 authored skins and visible rival feedback
+
+The user rejects plain recolors, requests rival-swallow effects on all skins,
+and asks for a commercially sensible tier allocation before reviewing colors
+one tier at a time. Two existing independent reviewers assess the current code,
+economy and ordinary gameplay evidence. Propose 20/40/60/44/24/12 across the six
+tiers, including the current 46; preserve all IDs and ownership. Replace the
+proposed Common/Uncommon quality floor with sculpted forms and thematic feedback,
+starting with Cookie Bite. Explain that inventory shares are not draw odds and
+that 199 nonduplicate draws complete a 200-skin collection after one starter.
+Current prices, score rewards, probabilities, saves and submitted34 remain
+unchanged. This is a pending art proposal, not completed skin production or a
+proven revenue optimum.
+[Plan](experiments/hole-city/docs/skin-collection-200-20261007/PLAN.md).
+
+
+## 2026-10-07 · Record the weather skins in ordinary full-map gameplay
+
+Following the user's request for actual in-game footage, record two uninterrupted
+40-second Sunny City excerpts on the Mac, retaining normal HUD/camera/timer and
+all seven AI. Scripted movement/normal charged boost begins at score0; each skin
+records23objects, one rival at15.133seconds and36points, with no staged entities
+or injected rewards/effects. Both muted540x1174videos contain1200verified frames
+at30fps and decode cleanly. Source hashes stay unchanged; no regression gate,
+phone work, release or Git operation is repeated. Early-level skin details are
+naturally smaller behind the standard label/HUD than in isolated close-ups.
+[Handoff](experiments/hole-city/docs/weather-prismatic-20261007/CONTINUE.md).
+
+## 2026-10-07 · Promote and differentiate the Prismatic weather pair
+
+The user requests distinct colors, small motif variations, highest-tier placement
+and independent subagent review. Existing Tempest/Rainfall IDs move to Prismatic
+Tier6 without changing identity, save migration or economic amounts. Tempest gains
+violet/lilac storm layers and restrained gold electrical accents. Rainfall gains
+clear jade water, cool pearl clouds/drops and an opal rim; an independent reviewer
+rejects the first muddy green candidate, leading to a second palette pass.
+
+Eight focused suites / 3,466 checks pass, including added cold-save/highest-tier
+checks and preserved one-entry/timing behavior. Runtime intake/rim/controller
+files remain byte-identical. Matched Mac render calls stay6/7/11 for idle/object/
+rival states; shader arithmetic changes, so no zero-cost or phone-FPS claim is made.
+Two independent reviewers inspect actual before/after light/dark frames, final
+encoded entry/rival frames and real highest-tier collection UI. A muted14-second
+video, screenshots, exact hashes and failed/repaired test/capture evidence remain.
+No native/Web package, phone work, account change or Git publication.
+[Handoff](experiments/hole-city/docs/weather-prismatic-20261007/CONTINUE.md).
+
+## 2026-10-07 · Remove Rainfall's duplicate visual fall
+
+The user's video review catches a failure missed by the preceding timing tests:
+a full model respawns at collection after the original has already sunk. Actual
+encoded frames reproduce it. Replace the post-collection afterimage with one exact
+render handoff on initial water entry, retaining the original mesh/material/pose,
+hiding the original render atomically and finishing a quick 0.42-second rocking
+sink attached to the moving hole. Collection now only ripples. Ordinary physics
+and reward timing remain unchanged except for a cosmetic admission watch hook.
+
+Ten focused suites / 4,457 checks pass, including exact pose handoff, no replay,
+monotonic visual descent, movement eight units away, skin-preview lifetime and
+30/60/120 Hz scoring parity. Preserve rejected media/source and initial fixture
+and preview-parent errors alongside corrected reruns. Fixed pool/surface budgets
+remain; no phone performance claim or full release gate. Local Mac development
+only; prior submitted build 34, user saves and release/account state are unchanged.
+[Handoff](experiments/hole-city/docs/rainfall-skin-20261007/CONTINUE.md).
+
+## 2026-10-07 · Correct Rainfall to quick cosmetic intake
+
+The user rejects the real buoyancy slowdown and requests a faster animation after
+confirmed consumption. The original rim physics is restored byte-for-byte, the
+buoyancy controller is removed, and collection awards before creating a 0.42-second
+mesh afterimage attached to the moving hole. A fixed three-echo/six-surface pool
+borrows existing geometry without creating bodies or delaying subsequent eating.
+Unsupported or over-budget models retain ripple feedback instead of a partial mesh.
+
+Ten suites / 4,412 checks pass, including original/Rainfall collection timing at
+30/60/120 Hz within one physics tick, reward-before-animation, no collision or
+repeated award, pause, movement and pool retirement. Actual Mac frames expose an
+initial transparent self-occlusion issue; a depth-writing screen-door fade fixes
+it and preserves the first images. Isolated rendering uses 3 idle / 11 peak draws
+under saturated afterimages plus rival splash, not the prior 3/5 maximum. No phone
+or whole-map frame-rate claim is made. A muted 19-second verified video, source
+hashes and receipts are saved. User saves, prior media and submitted34 remain;
+no phone, account, native release or Git publication work occurs.
+[Handoff](experiments/hole-city/docs/rainfall-skin-20261007/CONTINUE.md).
+
+## 2026-10-07 · Rainfall rocking buoyancy and gradual sinking
+
+The user requests floating objects, then explicitly asks for visible left/right
+rocking, slow descent and restrained performance cost. Rainfall alone now uses
+one bounded controller on each existing admitted rigid body: 1.05 seconds of
+rocking, then a size-scaled 1.7–3.0 second sink. Ground/support collision stays
+live; ownership loss cancels buoyancy, and full physical descent still gates the
+original reward. Water contact reuses one analytic shader ripple over the
+unchanged offline shallow-water atlas. No new fluid simulation, collider or
+fragment system is introduced.
+
+Actual 30/60/120 Hz physics acceptance passes 423 checks; the final Rainfall GPU
+and settlement suite passes 117. Whole buildings retain their surfaces and
+release roof contents correctly; the sequential building/cargo case takes 6.28
+seconds and awards 48+2 once. Mac render counters remain 3 idle / 5 peak draws,
+with mobile performance explicitly unmeasured. Initial fixture-contract errors,
+the rain-continuity runner correction and the six-second cargo timeout are
+preserved alongside successful retries. Muted Mac close-up and gameplay media
+are captured with source hashes. User saves, prior media and submitted34 remain
+unchanged; no phone, account, upload or Git operation occurs.
+[Handoff](experiments/hole-city/docs/rainfall-skin-20261007/CONTINUE.md).
+
+## 2026-10-07 · Rainfall skin with baked shallow-water ripples
+
+The user requests falling rain over a shallow-water opening and allows a baked
+loop. An original staggered-grid linear shallow-water simulation generates a
+three-second, 48-frame atlas and matching 48-drop schedule. Runtime interpolates
+baked frames, with no ongoing PDE solve. Seven soft clouds and the rain each
+use a single batch; rival intake uses a fixed 24-slot splash. Local collection
+includes the new 46th Legendary skin without changing prior definitions or saves.
+
+Eleven suites pass 5,877 checks, including actual GPU timing/position data and
+lossless atlas import, physical receipts, purchases/cold saves and old skin
+regressions. Fixed-camera renders at 0 and 3 seconds are pixel-identical. Muted
+actual gameplay and a standalone loop are recorded with exact hashes. Isolated
+Mac counters are 3 idle / 5 peak draws; phone FPS is untested. First rendering,
+headless-readback and catalog-count failures remain preserved. No release,
+phone, account or publication operation occurs.
+[Handoff](experiments/hole-city/docs/rainfall-skin-20261007/CONTINUE.md).
+
+## 2026-10-07 · Restore Tempest cloud detail and improve visibility
+
+The user rejects the overly simplified storm and requests the earlier cloud
+richness with greater transparency. Nine staggered billboards retain one batch;
+three-scale warped density, internal shading and translucent grey-blue spiral
+wisps replace the smooth five-lobe treatment. Cloud, funnel and ground-field
+opacity are reduced to reveal objects. Preview-disk clipping remains fixed.
+
+Five focused suites pass 3,822 checks. Isolated Mac GPU render counters remain
+3 idle / 6 peak burst draws; additional geometry and shader noise restore detail,
+so unchanged GPU cost is not claimed. Actual muted gameplay video and exact source
+hashes are recorded in a separate detail-revision directory. Existing saves,
+physics/economy and submitted 34 are untouched; no phone or publication work.
+[Handoff](experiments/hole-city/docs/tempest-skin-20261007/CONTINUE.md).
+
+## 2026-10-07 · Unified thunderstorm skin and lower render cost
+
+The user asks for the wind and clouds to form one storm with less detail and
+rendering pressure. Shared grey-blue density shading replaces the bright funnel
+filaments. The upper ribbons/halo are removed; five cloud billboards batch in one
+MultiMesh. Four object fragments and twelve rival fragments share a 32-slot pool;
+two brief lightning branches retain the stronger rival feedback.
+
+Five focused suites pass 3,822 checks. Actual isolated M1 Pro render counters
+compare preserved previous source against the candidate: idle draws 13 to 3,
+busy peak draws 16 to 6. GPU timings are unavailable; no phone or full-game FPS
+claim is made. Muted actual desktop gameplay is captured with source hashes and
+physical collection/combat receipts. Earlier versions, saves and submitted 34
+remain intact. No publication or phone work occurs.
+[Handoff](experiments/hole-city/docs/tempest-skin-20261007/CONTINUE.md).
+
+## 2026-10-07 · Tempest storm-cloud base revision
+
+The user asks to replace the disk with dark clouds and layered noise. The local
+revision uses a three-scale warped noise field, softened perimeter and nine
+feathered density lobes with stable seeds, subtle drift and slow rotation.
+Early flat, faceted and overlapping transparent versions are visually inspected
+and retained before selecting the softer cloud treatment. The center remains
+storm blue; actual swallowing, combat, rewards and saves remain unchanged.
+
+Five focused suites pass3,843checks. The revised form stays within the existing
+budget at16mesh nodes/3,254triangles, plus its unchanged72-slot debris pool.
+Fresh muted Mac GPU capture replaces the review video in a separate cloud-revision
+artifact directory, preserving the first video. No phone, accounts or release
+operations occur. [Handoff](experiments/hole-city/docs/tempest-skin-20261007/CONTINUE.md).
+
+## 2026-10-07 · Original Tempest tornado skin and desktop review video
+
+The user requests a visible tornado center, different prop/rival storm effects,
+and a video, then explicitly confirms Mac-only development. No phone is touched.
+The45thskin, Tempest, uses original curved geometry and animated polar shaders.
+The blue-white funnel and center follow the player's normal physical mouth;
+confirmed objects produce inward debris, while a rival triggers lightning,
+outward fragments and an expanding wind ring. A72-instance fixed pool and
+seven mesh nodes keep effect allocation bounded. Thumbnail framing and labels
+accommodate the height; all44previous skin definitions remain identical.
+
+Twelve focused suites pass7,271checks, including physical gravity/combat receipts,
+1,000-effect lifecycle stress, collection/save compatibility and original skins.
+Actual muted Mac GPU captures show nine object collections and one rival; input
+is scripted and the rival start is staged. Initial compiler/framing/count/contrast
+failures are retained. Source hashes and video metadata are recorded locally.
+This is a desktop candidate; no new package, phone benchmark, upload or Git push.
+Submitted0.13.0/build34 remains preserved.
+[Handoff](experiments/hole-city/docs/tempest-skin-20261007/CONTINUE.md).
+
+## 2026-10-07 · Build34 and three consumables formally enter the review queue
+
+Apple confirms four submitted items at12:40Shanghai:0.13.0(34),100Diamonds,
+360Diamonds and1800Diamonds, all Waiting for Review. Submission ID
+`842ccbb6-e210-418f-b71d-907124dbf42d`. TestFlight Owner Testing remains enabled;
+manual release after approval remains selected. This is not approval or launch.
+
+The original user1:50recording imports wirelessly through AirDrop to this Mac.
+Its final971points earn97coins, with wallet1765→1862and118diamonds unchanged.
+Original bytes and SHA256 are preserved. A174.767second labelled physical-device
+launch/gameplay/Sandbox compilation is uploaded, and seven-item final Notes are
+saved and reloaded before submission. They explicitly distinguish physical32
+footage from34numeric changes. No physical34test is claimed. Old60SKU remains
+for legacy receipts; the cancelled old review thread exposes no Reply control,
+so a separate prepared reply is not sent. All information is in the new submission.
+No phone reinstall/save reset, real purchase, Git publication or new automation.
+[Verified handoff](experiments/hole-city/docs/review-resubmission-20261007/CONTINUE.md).
+
+## 2026-10-07 · Device commerce verified, build33 configured, economy34 prepared
+
+Physical build32 plays an official test ad and credits exactly3diamonds; the
+100diamond Sandbox purchase credits exactly100, survives relaunch and cannot
+repeat. Saves are preserved. Production33 uploads, processes, joins existing
+Owner Testing and is saved as review build. Score-based store text, seven-item
+Notes, actual paid-feature video and the100diamond IAP screenshot persist.
+Review remains unsubmitted. The latest1:50user video is found in phone Photos;
+AirDrop/LAN import fails and the phone later times out. Mac Photos has no match.
+An accidentally opened rednote editor was exited by discarding only that unsaved
+draft, without posting. All transfer failures remain documented.
+
+The user explicitly chooses the future200skin assumption over fragments.
+Local economy34sets100coins/draw,20coins/diamond exchange and2diamond optional
+boost/extension. Score/10, all44existing skins and user wallets remain. Source
+and exactPCK each pass9suites/9469checks, including old fallback promises and a
+64-seed synthetic200catalog. Actual muted Mac GPU UI is inspected. Only2runtime
+files differ from frozen33;795others match. Archive/distribution signing succeeds;
+one authorized official34upload succeeds at12:00:19Shanghai. Apple processes34,
+adds it to the existing Owner Testing group and saves the updated review draft.
+The user restores Chrome login. No updated-phone installation, gameplay
+import, review submission, Git publication or200newskins are claimed.
+[Handoff](experiments/hole-city/docs/review-resubmission-20261007/CONTINUE.md).
+
+## 2026-10-05 · Build31 officially uploaded with score-based coins
+
+The user's current keychain confirmation succeeds. Attempt03 verifies the
+Development archive and23fresh native-PCK suites/23,574checks. Distribution
+export verifies actual Apple Distribution signature, App Store provisioning,
+unchanged assets/PCK and a40,472,623-byte IPA. Existing838gameplay inputs still
+match the accepted91-suite gate. The continuous authorized command uploads
+0.13.0/build31 at03:52:53UTC (11:52:53Shanghai); Apple begins processing.
+
+Xcode exits0 and records a successful App Store upload event for31. The local
+wrapper misses Xcode's EXPORT SUCCEEDED completion format for destination=upload;
+its failure is preserved. Independent read-only verification confirms success,
+unchanged app/symbols/original archive metadata and valid signature. No re-upload
+occurs. A trivial date-type reconciliation error is retained and corrected.
+All owned build/upload helpers end; the local preview remains available.
+
+Chrome's Apple web session now needs the user's password directly on Apple.
+Processing completion and adding31 to the existing one-owner internal group
+remain; no download availability or App Review submission is claimed. The
+original actual phone video still lacks the requested paid-feature walkthrough.
+[Verified upload](experiments/hole-city/artifacts/score-coins-testflight-20261005-31/upload-verified.json).
+
+## 2026-10-05 · Build31 continuation survives the signing handoff
+
+The user replies OK after attempt02 already expired. Fresh attempt03 preserves
+all evidence and reuses the same exported inputs/compiled objects with a longer,
+bounded signing window. A sequential owned continuation waits for actual strict
+archive and23native-suite success, then performs verified Distribution export,
+freezes exact upload evidence and executes one authorized official upload.
+No automatic retry or security-window interaction is allowed. Current signing
+still waits for the human; no build31 upload/download success is claimed.
+
+## 2026-10-05 · Build31 upload authorized; owner TestFlight group prepared
+
+The user explicitly authorizes upload. Prior native31 codesign attempt01 had
+expired at its900-second bound; all failure evidence remains. Attempt02 reuses
+the exact exported project and compiled objects in a fresh archive directory,
+then again waits at the local Apple Development keychain prompt. The authorized
+upload has not executed. The full91-suite gate is not rerun because its838
+inputs remain accepted. Controlled Distribution and one-shot upload helpers
+are prepared for the verified archive; no user saves or phone are touched.
+
+Actual Chrome confirms processedbuild30, creates manual internal Owner Testing,
+and adds only the existing account holder. Readback shows one tester, zero
+builds, and No Builds Available. Build31 must finish signing, exact-native
+acceptance, Distribution export and Apple processing before adding it to this
+group. The user has been asked to handle the new system signing prompt; neither
+SecurityAgent nor passwords are accessed. No App Review or Git publication.
+
+## 2026-10-05 · User confirms 1,000 points = 100 coins
+
+The user explicitly supersedes the fixed 50-coin completion economy with one
+coin per ten points. The imported actual iPhone video is inspected: Toy Town
+ends at 963 points and the old 50 coins. New settlement returns 96 coins, or144
+with the optional 1.5x offer. No minimum or completion bonus remains; continuation
+credits only additional score coins and the earned multiplier difference. The
+live HUD and in-game support wording follow the new behavior. Existing wallet,
+transaction history and legacy pending receipts are preserved.
+
+Eleven focused standard-engine suites pass11,662 checks; rounding boundaries,
+the actual963-point example, boost/continuation order and durable retry are
+covered. The full source/Web gate then passes91suites/71,320checks per phase
+with838unchanged inputs. Actual muted Mac GPU captures verify96/144coins for963
+points and150boosted coins after extending to1000points. Preview8779 is served.
+Native31 compiles and reaches codesign, awaiting local keychain authorization. The
+physical recording is privately preserved and does not include paid-feature
+navigation. Build30 remains the old uploaded/installed rule; no successor upload
+or App Review submission is claimed. Phone reconnection is not requested.
+[Current work](experiments/hole-city/docs/score-coins-20261005/CONTINUE.md).
+
+## 2026-10-05 · Build30 processed and selected;100-diamond product created
+
+The user's completed phone update is independently verified as iOS27.2 Beta
+(24B5089g), not asserted to be a public stable release. A fresh44-file Documents
+backup succeeds and the unchanged0.13.0/build30 launches normally. CLI recording
+reports an unsupported capability, QuickTime screen-source recording fails, and
+Device Hub coordinate input reports noWindowsAvailable. Failures remain local.
+After a transient disconnection the user reconnects; the actual game HOME is
+visually inspected on the physical phone. The user is asked to make the required
+launch/gameplay/paid-entry recording with the phone's own recorder.
+
+The user explicitly selects Chrome and restores Apple login. Live TestFlight
+shows30 processed and Ready to Submit, with no groups/testers. The App Store
+version is switched from build26 to30 and saved; current three-world/economy
+promotional text and description are also saved. Actual new consumable
+sink_city.diamonds_100 is created with Apple ID6819063987, United States
+availability selection, US$1.99 base pricing and EnglishUS localization. Review
+notes are entered; final saved-state readback, a current review screenshot and
+Sandbox fulfillment remain pending. No review response, review submission or
+public release is claimed. No game rebuild, gate rerun or Git publication occurs.
+
+[Progress receipt](experiments/hole-city/artifacts/review-resubmission-20261005/apple-config-progress-01.json).
+
+## 2026-10-05 · Mac cleanup reclaims45.5GB after iPhone backup-space failure
+
+Finder downloads the authorized27.0.1 update and receives the user's phone
+confirmation, but full-device backup fails because the Mac lacks space. A fresh
+device-details query still reports26.7.1; no OS completion is claimed. The user
+then explicitly asks for junk cleanup. Root removes only obsolete regenerable
+device-symbol/compiler/package caches, two old update caches and the downloaded
+Xcode14.2 installer. Measured reclaimed space totals45,524,766,720bytes; available
+space rises from about49.1GB to94.6GB. The actual27.0 Xcode, current device symbols,
+old extracted14.2 app, active updater/browser data, user documents and all game
+source/build/evidence remain. Protected device backups and Trash are not accessed.
+
+Exact accepted Distribution30IPA/PCK hashes and all44 saved-document backup hashes
+still match. No full gate or native rebuild runs. Apple review URL now appears
+without the login redirect, but its browser operation still times out. Current-OS
+recording,100-diamond live catalog/Sandbox and App Review response/submission remain.
+[Cleanup receipt](experiments/hole-city/artifacts/review-resubmission-20261005/cleanup-summary.json).
+
+## 2026-10-05 · Apple response corrected; native30 installed with identical saves
+
+The user requests completing Apple's outstanding requirements and release.
+The bounded Gmail check still finds the October3 Guideline2.1 information request,
+not a new build30 rejection. Root prepares a new seven-item reply and2974-character
+Notes draft for the real three-world build30/economy; physical recording and live
+catalog markers deliberately remain unresolved. Nothing is sent to the reviewer.
+
+Read-only device checks find the wired iPhone16ProMax on26.7.1 withbuild27.
+Complete Documents backup succeeds. A guarded successor verifies the actual
+signed app identity, eligible device profile and accepted838inputs/23native suites,
+then installs30 without uninstalling. All44 Documents files compare identically
+before/after; no ordinary launch or paid-flow claim follows. The first helper's
+overly narrow profile-identifier assertion failed before device mutation and is
+preserved beside the corrected attempt. No game rebuild or gate rerun occurs.
+
+Finder's fresh update check and Apple's release page identify iOS27.0.1. The user
+explicitly approves the displayed license and update; the download starts.
+The Apple web UI still redirects to authResult=FAILED and its DOM read times out.
+Current-OS recording, new100-diamond USD1.99 product, genuine Sandbox acceptance,
+Apple processing/internal group verification and review resubmission remain.
+No new legal agreement beyond the approved iOS license, banking/tax change or
+Git publication is performed.
+[Release handoff](experiments/hole-city/docs/review-resubmission-20261005/CONTINUE.md).
+
+## 2026-10-05 · Build30 officially uploaded; TestFlight group verification pending
+
+After the user's local authorization, Organizer completes signing but fails at
+IPA creation because its inherited rsync receiver rejects Apple's extended-
+attributes option. The failed UI attempt and private logs are preserved. A new
+one-shot CLI attempt reuses the exact accepted archive with a child-only system
+PATH and succeeds: Xcode exit0, Apple `UPLOAD SUCCEEDED with no errors`, and
+processing started at2026-10-04T16:25:45Z / October5 at00:25:45 Asia/Shanghai.
+
+The wrapper exits1 on a conservative whole-archive check because Apple appends a
+successful upload event to Info.plist. Separate read-only verification confirms
+that only this metadata file changed, all its original fields match, all app and
+symbol bytes match, strict signing passes, and838 runtime inputs plus the actual
+23native suites/23,560checks retain exact binding. Both original and supplemental
+receipts remain. No source rebuild, repeated gameplay gate or second upload follows.
+
+All upload helpers are complete. Browser DOM and screenshot operations still
+time out and both tabs redirect to login failure; native Codex control is denied
+and is not bypassed. The user is asked to restore Apple web login. Processing
+completion, internal test-group availability, invitation and physical installation
+remain unverified. [Verified receipt](experiments/hole-city/artifacts/testflight-20261005-30/upload-verified.json)
+and [handoff](experiments/hole-city/docs/fairytale-city-20261004/testflight-30.md).
+
+## 2026-10-05 · Verified Distribution30 retained; official Organizer continuation
+
+The user requests continuation of the remote TestFlight upload. Distribution
+export02 really succeeds; a separate read-only recovery fixes its receipt path
+and verifies the existing40,475,254-byte IPA, strict signature, profile,
+entitlements and exact tested PCK/icon. IPA SHA256 is
+`6592f9e968bc059b4df11df15df5b160eece23166008529f4d2cb94a56364705`.
+Upload01 times out at900seconds at signing without official success; the exact
+owned signer is stopped and all failure outputs remain. Its workflow contains no
+upload-step/completion marker, but remote build absence is still unverified.
+
+Browser operations time out, while native Xcode works. Root opens the exact
+verified0.13.0(30) archive in Organizer, checks version/bundle/team, and starts
+App Store Connect distribution. It currently waits at signing, with human local
+keychain authorization requested. No SecurityAgent automation, parallel upload,
+source change, repeated full gate, phone-save modification or Git publication
+occurs. Actual TestFlight processing and internal availability remain unchecked.
+[TestFlight handoff](experiments/hole-city/docs/fairytale-city-20261004/testflight-30.md).
+
+## 2026-10-04 · Remote TestFlight build30 explicitly authorized
+
+The user asks to upload the current castle/economy candidate to TestFlight for
+remote installation. Native0.13.0/build30 actually compiles, links and archives
+with a strict valid Development signature and23fresh native-PCK suites passing
+23,560checks. The user allows the Development keychain prompt. Controlled
+Distribution export then waits on the separate Distribution-key authorization;
+Apple web login is expired and its login iframe interaction is unreliable.
+Exact outputs and upload helpers are retained. No new upload receipt or
+TestFlight availability is claimed at this checkpoint; real phone saves remain
+untouched. [TestFlight handoff](experiments/hole-city/docs/fairytale-city-20261004/testflight-30.md).
+
+## 2026-10-04 · Original modular castle city and one-round economy accepted
+
+The user requests exactly one draw per ordinary round and visibly assembled
+building-block houses. Five original Blender meshes now use staggered plastic
+blocks, real studs, segmented towers and glossy curved roofs. The city has 78
+buildings, a 5–38m skyline and 80 living court characters. Normal positive-score
+completed rounds award exactly 50 coins; draws cost50 and optional1.5x gives75.
+100 diamonds exchange for250 coins; the proposed USD1.99 entry product remains
+an unconfigured Apple draft because actual navigation finds expired login.
+
+Final source and Web-PCK gates each pass91 suites/71,306checks, independently
+binding838 inputs and18 bundle files. Actual muted Mac GPU images and an ordinary
+90-second run verify two castle/six house collections and exactly50 saved coins.
+Desktop frame spikes remain; no iPhone FPS or new native install/upload is claimed.
+Playable8777 and review8778 are retained; all heavy jobs/workers are complete.
+Existing saves, previews, failed evidence and the installed27/rejected26 history
+remain intact. Automations stay paused and no Git publication occurs.
+[Current handoff](experiments/hole-city/docs/fairytale-city-20261004/CONTINUE.md).
+
+## 2026-10-03 · Normal rounds fund a skin draw; successor acceptance underway
+
+The user reports a 13-coin round and requests at least 50 coins, enough for one
+skin draw. Root changes only the finish bonus from 5 to 50 and replaces the
+50/70/90/110/140 draw ladder with a fixed 50-coin price. Positive-score normal
+completions earn 50–80 coins; the optional 1.5x boost gives 75–120. An empty or
+abandoned round receives no finish bonus. Existing wallet, ownership, odds,
+pity, transaction records and legacy pending 13-coin reward receipts remain.
+Twelve focused source suites pass 11,876 checks with 824 unchanged guarded
+inputs; root verifies the report/log hashes and before/after snapshots.
+Fresh gate 02 then passes all 90 source and 90 packaged suites, 71,221 checks
+each, independently verifying 180 markers, 540 evidence hashes and 18 package
+files. Accepted coin preview 8776 preserves earlier previews. Development
+build 28 compiles/links but its Development archive times out at codesign
+after 900 seconds. The exact captured owned signer is verified and terminated;
+no new native28/PCK/installation success is claimed. V6-03 fails before its
+first HOME frame; owned capture processes stop and all failure outputs remain.
+
+Recording-only diagnostic05 fixes the first-image wait without changing any
+guarded game input. Four ordinary Mac rounds then complete with actual rewards
+56/52/53/50 for City/Food/Toy/Sushi, each with finish bonus50 and draw price50.
+City collects nine whole buildings; Toy collects two whole castles. The separate
+Sushi marketing framing threshold fails, so the complete new media export is
+not claimed. Root preserves all raw recordings and binds real coin receipts in
+`experiments/hole-city/artifacts/coin-balance-20261003/ordinary-rounds-05.json`.
+Fresh native29 recovery helpers pass independent static review only; they are
+not executed while current human signing availability is pending. Phone27 still
+has the earlier coin rules.
+
+The preceding Development build 27 is actually installed on the paired phone,
+with its immediate 2,291-byte save preserved exactly and ordinary launch PID967.
+A physical image depicts early Toy gameplay and full portrait coverage, rather
+than HOME or measured phone FPS. Official CLI screen recording is unsupported on
+this device; its failed attempt and outputs are retained. Distribution 27 ended
+in a signing timeout. The phone last reported 26.7.1, while Apple lists 27.0.1 as
+latest, and the subsequent capture preflight reports unavailable connectivity.
+No new review video, Sandbox purchase, IPA upload or review reply is claimed.
+The toy heartbeat stays PAUSED at the user's explicit request.
+
+## 2026-10-03 · Scheduled toy task paused; final three-world gate passes
+
+The user explicitly stops the scheduled task. `hole-feast-toy-city-iteration`
+is PAUSED; no later scheduled wake or previous-deadline wait is authorized. The
+owned temporary caffeinate helper is terminated and all changes/evidence remain.
+The direct combined release request continues when the user returns with an
+updated phone.
+
+The already owned final gate completes cleanly:90freshsource+90freshWeb-PCK
+suites,71,202checks per phase, zero reused,824 unchangedinputs. Exact180markers,
+logs,reports andengine provenance pass independent review. All18testedpackage
+files match the separately served accepted preview; priorbuild/web is unchanged.
+OrdinaryGPU06/07each collect two wholepalaces in90seconds,ending306/333points.
+Cold and late desktop spikes remain; these are not physicaliPhoneFPSresults.
+Native27 preparation binds the accepted gate and21freshsuite minima; archive
+signing resumes after the user's system authorization. Finalnativeacceptance,
+export,install,physicalrecording/upload remain inprogress atthiscutoff.
+Actualphone is wired/paired/DeveloperModeEnabled but is26.7.1/23H30 after update.
+Apple'scurrent primaryrelease page says27.0.1; root requests the majorupgrade
+while independent package/media preparation continues. No rootGitpublication,
+reviewreply or newfinancial/legalstatement has occurred in this checkpoint.
+
+
+## 2026-10-03 · Combined three-world release explicitly authorized
+
+After reading Apple's2.1 request, the user asks root to finish the supplemental
+materials, combine the castle map and upload together, emphasizing freely
+selected worlds in the store. This supersedes the earlier read-only review scope;
+root owns Apple/native/device work. The original five-hour map deadline remains
+08:20:14UTC. Preserve the rejected0.12.7/build26 bytes, saves and prior receipts.
+
+Core04 passes2,946 and revisedCourt04/05 pass639 checks. Actual eight lowerpalaces
+fit level5; ordinary90s GPU04 reaches219points/radius5.1 but collects no palace,
+so four existing beacons are moved to clear front-door approach locations without
+new reward grants. GPU05 is stopped after a root capture diagnostic references a
+nonexistent bodies property; its exact fixture and failure remain. Root corrects
+the diagnostic to actualstatic_foods and level metadata, without runtimebehavior
+changes. Three-world five-board copy/art drafts are inspected; their mixednative
+source versions stay honest draft provenance. Newbuild27 and fresh90-suite gate
+helpers are prepared only. Two valid local signing identities and current Apple
+login are verified. The phone is unavailable; user is asked to reconnect. No new
+physical recording, native package, upload, externalreply or resubmission is
+claimed at this snapshot. No Git publication occurs.
+
+## 2026-10-03 · Apple information request and toy NPC focused milestone
+
+The user asks root to inspect Gmail for Apple's publication issue. Two official
+12:25 Asia/Shanghai emails and the live submission details confirm0.12.7/build26
+is Rejected under Guideline2.1 Information Needed. The developer's limited review
+history triggers a physical-device latest-OS recording from launch plus six
+written explanations, in a reply and App Review Notes. Three IAPs are Ready for
+Review and Resubmit is disabled. Root reads only, preserves the original receipt
+and frozen IPA, records a new safe observation and prepares an unsent English
+reply/Notes draft. Required current-build physical recording and actual sandbox
+purchase remain unavailable. No message, metadata save or resubmission occurs.
+
+The independent toy iteration continues on the same five-hour deadline. Five
+new focused suites pass3,979 checks before a small court/UI polish cohort;
+seventeen original court models include sixteen living costumes. Actual Toy
+construction has80 living/236 comparable world actors against City's64/217.
+Real controller fixtures verify delivery, formation, return-to-station, pursuit,
+flee/alarm and29,742 planar heading/contact samples; a guard physically falls
+intact and credits3points once. Ordinary90s Mac GPU play improves from151 to298
+points, radius6. These do not prove late-castle progression or iPhone performance.
+Courier/parade state churn and raw upper-part validity are locally polished;
+selected Toy-only14.5/1.6 home framing passes all eight actual rotation views.
+An owned120s normal capture with a real5-diamond continuation finishes clean:
+90s score161 varies from prior298; first wholecastle credits91.18s and120s
+finishes455/radius7.2 with5whole castles. Pacing variability remains under review.
+The complete90-suite source/PCK gate and separate preview
+remain pending. Saves, prior previews and native submission bytes are preserved.
+[Map handoff](experiments/hole-city/docs/toy-city-20261003/CONTINUE.md) and
+[review request/draft](experiments/hole-city/docs/release-completion-20261003/information-needed-20261003.md)
+record these exact boundaries.
+
+## 2026-10-03 · Authorized toy castle city and palace NPC iteration underway
+
+The user authorizes five hours of original toy-city work with parallel agents,
+then requests a palace-guard atmosphere and independently judged NPC complexity
+no lower than the first map. The fixed window is 03:20:14–08:20:14 UTC. A new
+thread heartbeat records that deadline; source begins at local candidate 0.13.0,
+leaving the submitted 0.12.7/build 26 untouched. All 810 initial guarded inputs
+are separately backed up and verified; user saves and dirty source are preserved.
+
+Three-map selection, a visual-only toy miniature, calm shared music and a
+90-second toy round are integrated. Geometry after the softly bulged turret
+profile passes 131 checks; seven initial palace-role meshes pass 73 checks.
+Actual Mac GPU galleries complete without engine errors. A white-clipped play
+mat is corrected and inspected using the production cut slab. An initial parse
+failure, exact logs and its repaired smoke run remain preserved. The first real
+normal 90-second auto-play finishes at only 151 points / radius 3.5, so root
+rejects progression and assigns clustered starter bites, intermediate targets
+and ground interaction anchors instead of granting artificial growth.
+
+Sunny City's source benchmark includes 64 living citizens with 16 appearance
+variants and richer ambient/recipe activity. Root requests 16 distinct original
+living court costumes plus a separate drone, with real patrol, changing guard,
+formation, rest, alarm and pursuit/flee behavior. These remain active work and
+must pass actual construction, physical release and ordinary-play acceptance.
+No final full gate, physical iPhone result, native upload or Git publication is
+claimed. [Current map handoff](experiments/hole-city/docs/toy-city-20261003/CONTINUE.md)
+preserves current process ownership and the remaining acceptance plan.
+
+## 2026-10-03 · Actual four-item App Review submission: Waiting for Review
+
+Root clicks Submit for Review under existing explicit user authorization; no new
+legal modal appears. Apple confirms 4 Items Submitted. The actual submission
+09f163eb-1c42-49cf-9643-366c13bb8680 shows iOS 0.12.7 (26) and60/360/1,800-diamond
+consumables all Waiting for Review, with Date Submitted October 3, 2026 at 10:25 AM
+Asia/Shanghai. Actual details and private confirmation screenshots are retained.
+All three products have saved English US metadata, US-only availability without
+automatic future-territory enrollment, review notes/RGB image and actual US prices
+US$0.99 / US$4.99 / US$19.99. Paid Apps, bank and both US tax forms are Active; seven
+privacy categories are Published and the processed current build/media are saved.
+
+Final submission is complete; approval and public availability are not claimed.
+Release is manual after approval. Actual sandbox purchase acceptance remains
+unverified, latest phone connection is unavailable and no new device installation
+or save reset occurs. Current handoff/roadmap/active-work now distinguish submitted
+true from released false. Prior immutable receipts, progress snapshots and exact
+pre-edit documents are preserved. No game/source mutation, heavy job, browser
+operation or Git publication is performed by this documentation worker. See
+[the current handoff](experiments/hole-city/docs/release-completion-20261003/CONTINUE.md)
+and [safe submitted-review receipt](experiments/hole-city/artifacts/release-completion-20261003/submitted-review-receipt-03.json).
+
+## 2026-10-03 · Release phase02 progress: published privacy and processed build
+
+Root verifies seven configured-v4 privacy categories Published after explicit
+user action-time accuracy approval. Apple completes processing0.12.7/build26;
+the current build is selected and saved into iOS version0.12.7. The five V5
+screenshots remain ordered1–5, and both uploaded previews show actual gameplay
+thumbnails without a red video error. All four Business prerequisites stay
+Active. Live US pricing for the60-diamond consumable is verified asUS$0.99;
+its review screenshot/notes are saved and it is Ready for Review in a new Draft
+Submission. Root is still completing360/1800 review metadata, app-version Add
+for Review and final submission. Draft state is not a submitted review receipt,
+and no real sandbox purchase success is inferred from it.
+
+Current active-work top-level pointers and statuses are refreshed so historical
+login, signing and tax blockers do not reappear as required actions. All prior
+phase02 package/upload receipts, snapshots and documentation bytes are retained;
+new progress is separately hash-bound. No gameplay, browser/account operation,
+heavy job, device update or Git publication is performed by this worker. See
+[the current handoff](experiments/hole-city/docs/release-completion-20261003/CONTINUE.md)
+and [account progress evidence](experiments/hole-city/artifacts/release-completion-20261003/phase-02-account-progress-02.json).
+
+## 2026-10-03 · Release phase02: signed build26 and successful official upload
+
+Production26 completes archive/export, strict distribution signing and sixteen
+fresh actual-native-PCK suites/19,012 checks with810 unchanged inputs. Its current
+food-icon local IPA is40,010,014 bytes, SHA256
+2967510bbf18715dc899f5a4a1e2ade699617f859194d7593a6bcc41ac56ec93.
+Private completion and public candidate receipts are separately hash-bound;
+compiled Assets.car is bound to the catalog/actual build but not decoded.
+Upload attempt01 fails at local Xcode account access; attempt02 passes signing
+then fails local rsync packaging before transfer. Both failures remain exact.
+Fresh attempt03 uses child-only system PATH and completes official upload with
+exit0/EXPORT SUCCEEDED at2026-10-03T01:56:16.460440Z. The uploaded re-signed ZIP is
+not claimed byte-identical to the prior local IPA. Apple processing/build selection
+and App Review submission remain unverified at this snapshot.
+
+Root saves0.12.7 metadata and uploads five V5 screenshots/two previews in6.9-inch,
+ordering screenshots1–5. Fresh Apple Business shows the Paid Apps agreement,
+bank account and both US tax forms Active, superseding prior missing-information
+observations. Seven privacy drafts are corrected to configured-v4; accuracy
+Publish confirmation remains pending. Existing diamond metadata, first-IAP
+attachment and actual sandbox acceptance remain root's live work. A lossless
+opaque RGB derivative of the existing honest unavailable-shop image is prepared;
+all five store PNGs also pass byte/dimension/no-alpha checks. No live catalog or
+purchase is inferred from an image. Phone0.12.4/build16 and saves remain unchanged.
+Owned jobs33803/5391/44001/85169 are completed; outputs and prior docs are retained.
+No new gameplay test/capture, device action, root GitHub publication or automation
+restart occurs during handoff preparation. See
+[the phase02 handoff](experiments/hole-city/docs/release-completion-20261003/CONTINUE.md)
+and [safe package evidence](experiments/hole-city/artifacts/release-completion-20261003/phase-02-package-upload-evidence.json).
+
+## 2026-10-03 · Authorized US release execution and support Site v6
+
+The user hands over the computer and authorizes continuing the release. Three
+existing workers prepare exact diamond fields, privacy evidence and a separately
+bound food-icon production helper. Production25 completes Xcode compilation and
+linking, then times out after 900 seconds at Apple Development codesign. Only
+its owned process group is terminated; compiled files and exact failure receipts
+are retained. No successful current archive, IPA, phone update, upload or review
+submission is claimed. Apple login buttons remain unresponsive through supported
+browser interactions, so direct sign-in is left to the user. SecurityAgent stays
+explicitly tool-blocked; no password or keychain bypass occurs.
+
+Actual AdMob inspection finds default-only mediation, empty waterfall sources,
+no linked Google Ads access and the game's US privacy message still in draft.
+Global PFID is enabled while this app disables it in SDK; an irreversible
+all-app deletion prompt is canceled. Seven data-category drafts are prepared,
+but effective buyer sharing/tracking and actual StoreKit sandbox acceptance
+remain unresolved. Account bank/tax status needs fresh Apple authentication.
+
+Public support Site v6 is successfully deployed with the food icon, corrected
+no-ad-service home wording, current 1.5x coin rewards and provider-processing
+disclosures. Same audience, contact, credits and app-ads.txt are preserved.
+Four pages pass local link/asset and script-free checks; the Site source commit
+and actual deployment receipt are verified. Private source preserves 458 visible
+task messages through 2026-10-02T20:00:20.411Z, excluding later messages and other
+tasks; conversation history is outside deployed dist/. Native 0.12.7 inputs,
+phone saves and V5 media remain unchanged. No owned heavy job remains, and no
+root public GitHub publication or automation restart occurs. See
+[the current handoff](experiments/hole-city/docs/release-completion-20261003/CONTINUE.md).
+
+## 2026-10-03 · Publication readiness recheck
+
+The user asks whether Hole Feast can now publish. Read-only inspection confirms
+no successful current production23 archive/IPA and only the unsigned native24
+food-icon project; V5 media is prepared, with no current upload/submission
+receipt. The actual Apple Business refresh redirects to failed authentication
+and the sign-in widget. Current banking/tax and diamond settings therefore
+cannot be reverified; prior incomplete account values remain historical.
+The login tab is a handoff. No build, device update, source/account mutation,
+purchase, submission or root Git publication occurs during the status check.
+See [the updated handoff](experiments/hole-city/docs/app-icon-food-20261002/CONTINUE.md).
+
+## 2026-10-02 · Original black-hole food-swallowing app icon
+
+The user requests a new avatar showing the black hole eating food. Built-in
+image generation creates original salmon sushi, croissant and strawberry artwork
+with the sushi partially inside a large black opening. The selected opaque
+1024-square RGB master is bound at `experiments/hole-city/branding/app-icon.png`;
+the original generation and former building icon are preserved. Actual small
+thumbnails remain readable. The native helper now selects and separately binds
+this master; all16 unsigned AppIcon exports are verified, with the1024 original
+byte-identical to the master. The810 accepted gameplay inputs stay unchanged.
+V5 updates the review icon/header and preserves40 V4 media members byte-for-byte,
+including five screenshots and two videos. Its45-member ZIP and actual browser
+icon/muted-video loading are checked; the review tab is the user deliverable.
+Previous production23 fails at blocked codesign timeout900s; owned workers stop
+and output is retained. No current signed icon package, phone update, upload,
+financial form, App Review submission or Git publication is claimed. The phone
+still has0.12.4 build16. See
+[the icon handoff](experiments/hole-city/docs/app-icon-food-20261002/CONTINUE.md).
+
+## 2026-10-02 · Current release readiness and production build23 attempt
+
+The user asks whether Hole Feast can publish. Accepted 0.12.7 game/Web evidence
+and V4 media remain unchanged. The current production23 helper prepares the
+accepted PCK, configures real production services and completes Xcode compilation
+and linking; archive signing is waiting for a local keychain action at this
+checkpoint. No successful current archive/export/upload or review submission is
+claimed. Exact owned job/log/status evidence remains under
+`experiments/hole-city/build/collapse-surface-production-20261002-23`.
+App Store Connect redirects to login after showing existing IAP drafts. The
+user receives direct Apple login and blocked-system-window handoffs. Prior bank
+and tax prerequisites,360/1800 diamond setup, actual sandbox acceptance, accurate
+Device ID tracking declaration and final listing/upload/review remain open.
+An authorized read-only worker prepares exact product fields, review notes and
+a sandbox checklist without changing guarded inputs or operating accounts.
+The phone remains0.12.4 build16 and no save/device/Git publication occurs here.
+See the current release-readiness follow-up in
+[the handoff](experiments/hole-city/docs/collapse-surface-20261002/CONTINUE.md).
+
+## 2026-10-02 · Building cut-surface correction after V3 rejection
+
+The user rejects the actual store video because building cut surfaces remain.
+The previous original-triangle count and exploded-pose inspection did not prove
+normal camera rendering: localized dither exposed rear faces, and grid-clipped
+facade fragments were open paper walls with empty-volume cell colliders.
+Historical 0.12.6 gate/V3 captures and exports remain exact evidence of that
+rejected visual baseline; previous acceptance is not relabeled.
+
+Current 0.12.7 keeps the actual instantiated whole building and its
+placement-dependent dressing, pose, original collider and velocity while gravity
+tips and swallows it. No runtime grid-shell fragments are emitted. The former
+48-point total is payable only after full physical collection; loose contents
+release even without a cache, after canceled claims/pulls, and on fast falls.
+Successful movement admission clears reveal material immediately. Intact building
+occluders now share one spatially uniform Bayer pattern across all surfaces,
+with gameplay-camera, shadow and UI-preview isolation retained. Actual windowless
+GL validates identical front/roof/back pixel patterns at full and half fade.
+The four actual-camera diagnostic cases pass with consistent explicit level,
+score and radius fixtures; original roofs and facades remain continuous while
+falling. Historical failed fixtures and unchanged rejected V3 media are preserved.
+Gate02 passes source 67,170 checks (51 byte-exact explicitly reused suites plus 34
+fresh suites) and all 85 fresh Web-PCK suites/67,170 checks with 810 unchanged
+inputs. Independent review verifies all reports/logs and the exact 18-file bundle.
+The .7 Web preview is served at 8768. Fresh V4 uses normal 60-second food and 90-second
+city rounds, five 1320×2868 screenshots and two  20-second normal-speed videos.
+Natural whole-building fall at 82.7s pays 48 once with zero fragment receipts.
+Root and independent actual-pixel review accept the specific cut-surface fix;
+broad stippled neighbor occlusion remains a separate visual-polish limitation.
+Both videos finish actual muted browser playback without errors. ZIP 43 members
+are byte-verified; SHA 7485229b57c9de92356a16b60fdbcc4d6a52e27c07452df38dde0c6c3f6540ef.
+Port 8774/store-review-v4/index.html is the marked user-review deliverable. Native 22/23
+helpers are prepared only; phone remains .4 build 16 with saves untouched. No heavy
+job, root Git publication, new device installation, account action, upload or
+App Review submission is claimed.
+See [current handoff](experiments/hole-city/docs/collapse-surface-20261002/CONTINUE.md).
+
+## 2026-10-02 · Home-first navigation and responsive skin descriptions
+
+The user asks for Home to precede Store and Holes and stand out. Current source
+is 0.12.6. Every menu now uses HOME on the left, STORE in the center and HOLES on
+the right, with equal stable touch targets shared by drawing and input. A bright
+cream/gold pill and larger dark label identify the current destination; an original house symbol identifies
+Home. The orange PLAY button remains primary. Secondary pages highlight their
+parent destination while permitting a direct return to it. Existing safe-height
+layout, collection scrolling, compact result offers and building repairs remain.
+
+Actual Mac GPU inspection discovers a tall-screen skin description above its
+white detail card. All four wrapped-text callers pass authored coordinates and
+ignore the returned baseline. The shared paragraph origin now maps once while
+preserving font size, width, word wrapping and line spacing. Focused integration
+02 passes six source suites and 16,232 checks with 810 unchanged guarded inputs:
+title navigation 37, retention UI 8,188, UI redesign 1,843, collection UI 1,905,
+mobile thumbnails 3,847 and coin skins 412. Actual forwarded draw measurements
+cover all 44 skin descriptions at short and tall canvas heights, plus the starter.
+Every description fits at most two lines inside the painted card and clears the
+unlock control. Previewing adds no ownership; isolated acceptance fixtures remain
+separate from player saves and commercial screenshots.
+
+Root independently reviews actual Mac GPU captures 09/10 of Home, Store, Holes
+and the Sunny City intro. The set includes explicit iPhone 16 Pro Max safe-area
+emulation; it is desktop evidence, not physical-phone acceptance. Earlier
+captures 07/08 are preserved. Full fresh gate 03 passes all 85 source and all 85
+exported-package suites with 69,866 checks per phase and 810 unchanged guarded
+inputs. Every suite in both phases executes fresh, with no report reuse. The
+accepted 0.12.5 gate 02 and its earlier exact Web preview at port 8768 remain
+preserved historical evidence.
+
+Historical 0.12.5 native test build 18 completes strict development signing and
+12,777 native-PCK checks. Its installation attempt stops during the immediate
+phone-save backup: Apple CoreDevice error 4016 cannot assert the required trusted
+device-service states. No installation or new save write occurs. Current test 20
+compiles to codesign but waits for local keychain authorization. Root cancels only
+the owned Xcode group and exact orphan codesign worker, preserving both receipts
+and the compiled candidate. SecurityAgent and user applications remain untouched.
+Prepared resume-sign-02 binds the compiled files and will check twelve core and
+two additional Home-first native-PCK suites. No current signature/installation
+is claimed. Production 21 and current install/launch helpers remain unexecuted.
+
+Authentic V3 media completes from a fresh isolated 0.12.6 snapshot bound to gate 03.
+Normal 60-second food and 90-second city rounds pay seven coins each; city records
+43 real natural fragment receipts. Five original 1320x2868 PNG compositions with
+editable SVGs and two 20-second 886x1920
+H264/AAC previews are exported. Root inspects all five PNGs, both contact sheets
+and a natural city frame. Original-facade translucency remains visible during
+swallowing. Both actual browser videos play muted to the end with no error, and
+both files decode fully. The new review URL at
+http://127.0.0.1:8774/store-review-v3/index.html preserves the V1 root through a new
+directory symlink. The 42-file ZIP excludes private raw masters and has SHA256
+ecc7ba768a1ce17c85730cd9f7ba3b3d89a45ea55fbf0469a96972c39c1bcc8d.
+Later browser/root review receipts stay alongside this exact export. User review
+is pending; media is from Mac, not a physical iPhone or StoreKit test.
+No new upload or App Review receipt is claimed. The missing consumable drafts are created:
+360 Diamonds (`sink_city.diamonds_360`, ID 6818406986) and 1,800 Diamonds
+(`sink_city.diamonds_1800`, ID 6818407795). Their returned-list entries are verified,
+but pricing, localization and availability are not configured and no review is
+submitted; the existing 60-diamond and legacy drafts remain. Apple bank/tax remains
+deferred; privacy, IAP and physical sandbox acceptance remain open. No root Git
+publication occurs; earlier
+packages, failures, saves and both previews are preserved. See the
+[current handoff](experiments/hole-city/docs/simple-ui-20261002/CONTINUE.md).
+
+## 2026-10-02 · Simplified portrait UI and original building breakup
+
+The user supersedes the complex result menu with a 1.5x coin offer through video
+or diamonds, and an independent 30-second continuation. The user also reports
+unused iPhone portrait space and invented faces during building fracture.
+Current source is 0.12.5. Three previously authorized workers simplify UI,
+protect incremental durable rewards and review integration while root repairs
+fracture geometry. One low-priority heavy job remains serial.
+
+The UI now uses the complete safe height, with shared drawing/touch transforms,
+top status and bottom anchors. Building caches previously appended rectangular
+cell caps across empty rooms/roof gaps. Runtime retains original clipped facade
+triangles and preserves sixteen pieces/48 points; future bakes omit those caps.
+Fresh geometry acceptance, including incomplete-cache fallback, passes 4,132
+checks across 48 assets and removes 16,128 unused cap vertices. Economy passes
+120 checks and pure viewport conversion/fit passes 41. Focused integration 07
+passes seven suites and 11,654 checks. Actual Mac GPU UI captures 05/06 include
+explicit iPhone 16 Pro Max safe-area emulation. Fracture capture 01 reviews two
+houses in exploded poses from two camera angles. Both visual sets are independently
+reviewed; they do not establish physical-phone or natural-play acceptance.
+
+Full gate 01 stops at an obsolete raw-design BOOST tap coordinate; the failure
+and exact prior fixture bytes are preserved. The corrected touch fixture retains
+all 55 checks, and its independent boost review passes 98. Gate 02 passes 85
+suites and 68,920 checks per source/exported phase with 810 stable guarded inputs.
+Its explicit source provenance reuses 76 unchanged suites/63,569 checks and runs
+nine suites/5,351 checks fresh; all 85 exported-package suites run fresh. The
+accepted exact 0.12.5 Web package is published at the existing port 8768.
+
+Historical 0.12.4 build 16 is strict-signed/installed with the then-latest save
+identical before ordinary launch. Its console helper is already absent; no signal
+is sent to the phone game. Old store V2 authentic capture completes but encoding
+fails on an ffmpeg duration spelling; failure and raw frames remain. Current
+native test build 18 is being prepared from accepted gate 02; no current native
+installation or upload is claimed. Authentic store media V3 is prepared only.
+Apple bank/tax remains deferred, privacy/sandbox/IAP prerequisites remain open,
+and root Git is not published. See the
+[current handoff](experiments/hole-city/docs/simple-ui-20261002/CONTINUE.md).
+
+## 2026-10-02 · Parallel diamond economy and current store preparation
+
+The user confirms stronger rival vibration and skin particles in installed
+build 14, then requests slower coins, a 90-second first map, one 30-second extra
+run through rewarded video or diamonds, diamond purchases, diamond-to-coin
+exchange and video-earned diamonds. The user explicitly authorizes subagents.
+Three bounded workers implement gameplay/economy, native commerce and UI, then
+independently review callback/storage and media boundaries. One heavy job remains
+serial at low priority to keep the computer responsive.
+
+Current 0.12.4 source uses 90/60-second city/food bases, one same-world continuation
+and five-diamond cost. A real earned ad must actually close before the timer
+resumes. Google determines creative duration, so no 15-second promise is made.
+Score coins are floor(score/100), capped at 30, with a single five-coin finish bonus
+for points. A continuation pays only the incremental score portion. Legacy
+balances/skins remain; the saved gems key becomes DIAMONDS in presentation.
+New profiles receive 10 diamonds; a successful video grants 3 with a persisted
+120-second cooldown. Exchanges and three new diamond StoreKit products are
+implemented with durable verified credits and legacy coin-receipt compatibility.
+Cross-product replay conflicts and terminal standalone-video ledger growth are
+fixed after independent review; pending and late-callback bindings remain intact.
+
+Focused checks pass 86 economy, 25 independent boundaries, 116 commerce, 1947
+unified UI, 7699 retention UI and 30 isolated actual-phone-save compatibility.
+Six silent actual Mac GPU QA frames verify the new tutorial/store/result layout;
+an initial caption overlap was repaired and the old frames retained. The first
+83-suite gate stops at obsolete coin_skins assertions. Three economy fixtures
+are corrected and pass 410/37/10 focused checks; final gate02 passes 83 suites and 65,537 checks per source/exported phase,
+with 807 unchanged guarded inputs. Root verifies each report and the current
+hash map. Four ordinary 60/90-second rounds follow; no new native installation
+or upload is yet claimed.
+
+Production 15's official Xcode validation failed Copy failed: the selected rsync
+rejects --extended-attributes. Original logs/signatures/export evidence remain;
+that package is superseded by 0.12.4. Fresh test 16/production 17 preparation
+scripts require the accepted new gate and exact adapter, but have not run.
+The 60 Diamonds ASC draft saves English U.S. localization, U.S.-only availability,
+USD 0.99 and accurate review notes after reload; two larger drafts remain missing
+when backend input loses response. Existing five screenshots/two videos expose
+old economy or city timing and must be authentically recaptured before replacement.
+
+Sites publishes support/privacy version 5 with diamonds/continuation wording,
+retaining hosting/preload disclosure, contact, public audience and app-ads.txt.
+The private Site source commit is a2534dc9aa21eeb6985a966504de47d65d424c81,
+with dotafs2 author/committer. Its refreshed visible-task archive preserves 345
+messages through 2026-10-02T01:57:53.822Z; later messages are outside this cutoff.
+Only dist/ is public website output; no root GitHub commit/push occurs. Bank/tax
+remains deferred, actual sandbox purchase/cancel/redelivery and native review
+screenshots are open, and Device ID tracking/final accuracy publication remain
+unresolved. No new contract or financial form is completed. See the
+[current handoff](experiments/hole-city/docs/diamond-economy-20261002/CONTINUE.md).
+
+## 2026-10-02 · Verified item haptics and skin-specific rival feedback
+
+The user restored Apple access/phone connectivity and personally authorized
+keychain signing. Production build 12 now exports with a strict-valid App Store
+signature but is retained as superseded, not uploaded. Ordinary build 11
+launches; the user reports no physical vibration. A foreground-view-bound UIKit
+light generator repairs the issue in signed/installed build 13, preserving the
+user's newly earned 1,705-byte save exactly. Real device diagnostics record 50
+calls and the user confirms vibration works. The old Godot null-error message
+is an unconditional logging defect and cannot alone prove haptic failure.
+
+The user requests stronger rival feedback and skin-dependent particles. The
+native adapter now uses a separate view-bound medium generator at 0.90 for rival
+receipts, while items retain light pulses. Actual extracted Swift methods pass
+48 controlled checks. Real player victories emit 28 cosmetic instances in one
+MultiMesh draw using skin tint/accent, five shape families and a 0.85-second
+lifetime. All 44 skins and one-victory/one-effect boundaries pass. Initial Mac
+GPU review found particles inside the mouth; the owned partial gate was stopped
+before changing guarded travel. Five final GPU frames verify four rendered
+families, while confetti is covered by headless checks. Earlier failed fixtures,
+captures and the cancelled gate remain preserved.
+
+The final changed gate passes 81 suites and 65,317 checks per source/exported
+phase with 805 unchanged inputs. Fresh test build 14 passes 8,769 exact native
+PCK checks and strict development signing. The first immediate backup fails on
+a closed phone tunnel; a helper-path retry error is also preserved. Following
+user reconnection, retry 03 installs build 14 without uninstalling and verifies
+the latest 1,705-byte save remains identical. Its ordinary console launch
+succeeds; physical stronger-rival/particle acceptance is pending. Production
+build 15 independently compiles, archives and exports with strict distribution
+signature/profile, real ad identifiers, original vendor manifests and 8,769
+native-package checks. It is imported into Xcode for official validation; no
+upload or App Review submission is yet claimed.
+
+All three consumable drafts now save English U.S. copy, U.S.-only availability,
+USD 0.99 / 4.99 / 19.99 prices and correct STORE > COIN SHOP review notes,
+independently verified after reload. The application is verified free and U.S.
+only; existing five screenshots and two actual gameplay previews remain saved.
+Paid Apps bank/tax forms stay explicitly deferred. Apple sandbox purchase
+acceptance/review screenshots and Device ID tracking reconciliation remain
+open; privacy publication requires confirmation of a concrete accurate draft.
+The AdMob account remains under verification; its publisher first-party control
+is enabled, while the app explicitly disables the SDK identifier. This alone
+does not establish No Tracking. No new legal/financial action, production-ad
+test, subagent, automation restart or root Git publication occurs. Both local
+previews and all prior saves/packages remain. See the
+[current handoff](experiments/hole-city/docs/rival-feedback-20261002/CONTINUE.md).
+
+## 2026-10-01 · Independent release preparation after financial deferral
+
+The user explicitly deferred Apple bank/tax forms and requested completion of
+independent work. Production 0.12.3 build 12 compiles and links the actual SDKs
+at low priority with one Xcode job, but its 900-second archive attempt stops at
+Apple Development codesign awaiting local keychain access. The owned process
+group ends and original outputs/failure remain. SecurityAgent restrictions are
+not bypassed. The exact prepared production PCK passes 8,547 fresh focused
+desktop checks with all 804 guarded inputs unchanged; the full gate is not
+repeated. No accepted new archive, IPA or upload is claimed.
+
+Six of seven collected-data categories now have saved App Privacy setups;
+Device ID tracking reconciliation and publication remain open. ASC has saved
+consumable 320/2000 drafts; the new 2000 product saves English localization,
+US-only availability and a USD 4.99 starting-price schedule. Its corrected
+STORE > COIN SHOP review-note edit did not persist after browser controls lost
+response; the prior inaccurate entry-path note must be replaced. The 320 price
+and 9600 product remain incomplete. A documented recovery tab reads server
+state but click/keyboard actions do not produce the creation dialog, and no
+page WebMCP tools exist. No hidden interface is used to bypass that failure.
+
+Three silent actual Mac GPU captures of packaged store/coin-shop/odds menus are
+prepared as drafts, truthfully showing unavailable native StoreKit prices.
+No fake price, transaction, SDK state or phone save is inserted. All owned
+build/check/capture helpers ended; both preview servers and prior evidence stay.
+Bank/tax, physical build-11 haptic acceptance, sandbox purchases, privacy,
+signing/upload and review remain open. No source change, subagent, automation
+restart, Git publication or App Review submission occurs. See the
+[current handoff](experiments/hole-city/docs/upload-preparation-20261001-10/CONTINUE.md).
+
+## 2026-10-01 · Signed upload preparation, actual rewarded credit and native feedback
+
+Apple GUI account access recovered. The user specifically authorized creation
+of Apple Distribution credentials and personally allowed keychain signing.
+Production build 9 archives and exports; strict signature, App Store profile,
+production advertising IDs and exact accepted PCK pass. The IPA is retained,
+superseded by a new native haptic repair and not uploaded. Five original store
+screenshots, two real Mac-gameplay videos and accurate copy/review notes are
+saved in ASC. Actual official-test-ad playback succeeds after the user restores
+network access; the copied durable wallet verifies 35 base plus 35 bonus coins,
+one earned request and one doubled completed round without changing old rounds.
+
+Normal device logs exposed Godot haptic-engine errors. A UIKit soft-impact native
+bridge retains saved preferences/throttling, rejects invalid/background requests,
+caps intensity and reuses the generator. Actual extracted Swift checks pass
+46 assertions in 12 scenarios; the initial missing UIKit fixture is retained.
+One changed guarded game input triggers a fresh full gate: 81 suites and 65,095
+checks per source/packaged phase pass. Build 11 compiles/links/signs, passes 8,547
+fresh native-PCK checks and installs without uninstalling. The actual 1,553-byte
+phone save remains byte-identical. It has not been launched for physical haptic
+acceptance. Production build 12 is prepared unsigned, not compiled or uploaded.
+
+The user specifically authorized dividing the existing Apple address without
+changing its content, then personally entered 2FA. Legal-entity validation is
+unblocked. The newly displayed Paid Apps Agreement was separately approved and
+accepted; its status is Pending User Info. Bank/tax final actions remain with
+the user. Seven collected-data categories are now an unpublished privacy draft;
+Device ID tracking reconciliation and other category setups remain open.
+
+At the user's request to reduce computer lag, owned heavy work is deferred;
+all owned gate/build/install/console jobs are confirmed ended and the temporary
+privacy tab is closed after saving. A bounded CPU snapshot observes high
+WindowServer/OpenClaw usage without asserting causality. User applications are
+not stopped without specific authorization. Preview ports 8768/8774, previous
+packages, real progress and failures remain. No subagent, automation restart,
+production-ad test, final privacy publication, new binary upload, App Review
+submission, public release or root Git publication is claimed. See
+[current handoff](experiments/hole-city/docs/upload-preparation-20261001-10/CONTINUE.md).
+
+## 2026-10-01 · Complete Mac-captured store review with two swallowing videos
+
+The user authorized Mac screenshots and requested a concrete first version to
+review, then added two videos showing food/objects falling into the black hole.
+Store Review V1 now contains five original opaque 1320×2868 compositions, two
+normal-speed chronological 20-second 886×1920 gameplay videos, editable SVGs,
+posters, English copy and a ZIP review pack. Food and city export intervals
+contain 46/22 actual item-swallow receipts. The moving eight-car Sushi Express
+and current unified collection are captured from the real Mac renderer, with
+no added score, size, position, wallet, unlocks or fake drop effect. Mac capture
+is explicitly distinguished from physical-iPhone evidence.
+
+Both final MP4s pass exact format/duration, audio and full-decode checks; both
+play silently in the real in-app browser, where all five images load and the
+train screenshot opens at full size. Earlier wrong-resolution, full-range,
+SFX-only, gesture and incomplete capture attempts are preserved. At the user's
+request, only the owned audible recorder is stopped, and final city capture
+uses a silent output driver while retaining recorded game audio. System volume,
+user apps, phone saves and all 804 guarded game inputs remain unchanged. The
+local review server at port 8774 and prior game preview at 8768 are retained.
+The unchanged full gate is not repeated. No new native signature, installation,
+store upload, App Review submission, legal/financial action, subagent, automation
+or root Git publication is claimed. Apple login remains deferred, the overnight
+automation remains PAUSED and production build 9 is still unsigned. See
+[Store Review V1](experiments/hole-city/docs/store-review-20261001-v1/README.md).
+
+## 2026-10-01 · Native ad recovery while Apple login is deferred
+
+The user deferred restoring Apple login and requested independent work first.
+The native adapter now recovers failed UMP updates/required forms with bounded
+retries and current foreground presenters, retaining Google's canRequestAds as
+the only permission authority. Privacy changes invalidate stale preload
+callbacks; unpresentable privacy actions restore untouched valid preloads on
+foreground return. Presented videos cannot become ready again via foreground
+events. Earned rewards retain the actual SDK callback/request identity.
+
+The final extracted actual Swift methods pass 40 controlled boundary checks
+across 11 scenarios. A controlled preserved-build comparison exposes 19 failures
+in 36 earlier-source checks. Initial accelerated-clock fixture failures and
+original files are retained without attributing all failures to the game.
+Current production 0.12.3 build 9 compiles/links the real SDKs and passes 8,547
+fresh native-PCK checks, with all 804 game/Web inputs unchanged. Its exact
+adapter/PCK hashes and original vendor-manifest checks are retained. Build 9
+is unsigned/uninstalled/not uploaded; build 7's signed archive and build 8's
+intermediate package remain recoverable prior checkpoints. No live production
+ad request, physical callback acceptance, root Git publication or new review
+submission is claimed. Phone saves and local preview remain preserved; owned
+test/build helpers complete. See [native recovery](experiments/hole-city/docs/ad-recovery-20261001-08/README.md)
+and [release handoff](experiments/hole-city/docs/app-store-release-20261001/README.md).
+
+## 2026-10-01 · Formal App Store release authorized; account-blocked export
+
+The user explicitly authorized formal screenshots, a new package upload and
+App Review submission. Three original opaque 1320×2868 store compositions now
+use verified physical-iPhone 0.12.3 gameplay. Current train/collection frames
+remain blocked by the phone lock. Fresh production-ID build 7 passes 8,547
+new native-PCK desktop checks and completes strict-verified archiving with all
+804 Web inputs unchanged. Two separate distribution export attempts fail with
+No Accounts and no matching iOS Distribution private key. Exact archive/export
+outputs are retained; the existing archive is recoverable. ASC browser login
+also expired. No new IPA, store screenshot upload, build upload or App Review
+submission is claimed. The user is asked to restore both Apple logins.
+
+The existing public support Site version 4 publishes truthful 0.12.3 SDK,
+purchase, rewarded-preload and earlier-version privacy scope. Native save/deploy
+succeeds. Its private source author/committer uses dotafs2; the safe visible-task
+archive covers 207 messages through 2026-10-01T09:31:08.083Z and is excluded from
+public dist/. Root Git was not published. Final privacy answers, agreements,
+products and actual SDK/sandbox acceptance remain separate prerequisites. No
+financial form, new legal agreement, production-ad test, subagent or automation
+was performed. Owned helpers complete; phone saves, prior packages and local
+preview remain preserved. See [release handoff](experiments/hole-city/docs/app-store-release-20261001/README.md).
+
+## 2026-10-01 · Signed current iPhone test candidate and save backup
+
+After the user's reconnection reply, retry 02 installed 0.12.3 build 6 in the
+same bundle. The actual save stays byte-identical before launch and after two
+automatic physical QA rounds. Both complete sixty-second play with full
+1320×2868 frames, continuous music output and 56/39 swallow receipts; food
+includes a rival receipt. Native frame/audio state is not sensory or sustained
+GPU-FPS certification. The user tried video during the deliberately SDK-free
+QA mode. Normal mode is launched afterward with official test IDs; UMP startup
+is observed, but ad callbacks remain unverified. Failed read-only diagnostic
+attempts and signal-9 termination are retained without an inferred cause.
+Relaunch is blocked by the phone's current lock. The user is asked to test the
+video in ordinary play. No production ad or store upload/release is claimed.
+The paragraphs below retain the initial connection failure and package evidence.
+
+The user reported finishing the phone connection. A live device listing
+confirmed the 16 Pro Max connected, and its actual app save was backed up
+before any update. The installed version remains 0.11.2 build 1. Fresh isolated
+0.12.3 build 6 uses official Google test identifiers, compiles/links and passes
+strict development-signature, exact entitlement, valid profile and registered
+device checks. Original wildcard-profile expectation and textual-entitlement
+parse failures are retained and corrected without removing signature checks.
+Its new PCK passes 8,547 fresh desktop assertions; all 804 Web inputs remain.
+The production build 5 and historical phone saves/packages remain intact.
+
+The immediate preinstallation save-copy request failed on device connectivity
+assertions; a fresh listing reports unavailable. Installation was not reached.
+The user was asked to reconnect/unlock and keep the phone connected. At that
+initial checkpoint, no new installation, launch, upload, SDK callback, native store screenshot or sensory
+acceptance is claimed. Owned helpers completed, preview remains, automation
+stays PAUSED and no root Git publication occurred. See
+[signed-device handoff](experiments/hole-city/docs/device-acceptance-20261001-06/README.md).
+
+## 2026-10-01 · User-submitted AdMob payment profile verified
+
+The user reported completing payment information. The authenticated Payments
+overview confirms an existing AdSense (China) payment account and the missing
+payment banner is gone. Home now states that account verification is in
+progress and the app requires a published store listing for application
+approval. A stale overview tab failed three times; the working account tab
+recovered the actual current state. No financial fields were entered/submitted
+by the agent and no new agreement was accepted. Account captures stay ignored.
+
+The current candidate's original vendor privacy bundles retain their exact
+hashes. Their seven combined data categories and declared purposes are
+recorded in a release review, retaining Google's device-ID tracking flag as
+an unresolved verification item. The existing native policy is extracted into
+a local website draft with hosting disclosure preserved. Nothing was published
+to privacy labels/messages or the support Site. The accepted 0.12.3 package,
+unsigned build 5, phone baseline/saves and preview remain unchanged; no full
+game gate was repeated. No new signature, installation, upload, App Review
+submission, root Git publication or automation occurred. See
+[current monetization status](experiments/hole-city/docs/monetization-20261001/README.md).
+
+## 2026-10-01 · One ascending, vertically scrolling skin collection
+
+The user requested merging Classic/Special, low-to-high order and vertical
+scrolling. Source/accepted preview 0.12.3 presents all 44 stable IDs in six
+numbered rarity bands, with real clipping, drag/flick/wheel input and fixed
+wallet/detail/draw/navigation controls. Only visible rows own models and only
+a visible focused form animates. Drag/cancel cannot equip or spend. Unified
+draws use disclosed tier weights and 5/10/20 guarantees, inheriting the stronger
+legacy counter per tier; currency, equipment, entitlements and unrelated save
+fields remain. Shared prices advance 50/70/90/110/140, capped at 140.
+
+All 81 source/Web-PCK suites pass 65,095 checks per phase. The first full run
+caught two old train-surface fixture override signatures. Failed logs/original
+bytes are retained. Only those unpassed fixture files changed; the resumed gate
+retains 69 unchanged successful source reports with exact provenance and runs
+the remaining 12 plus every packaged suite under 804 frozen current inputs.
+No error detection or release threshold was weakened. All 18 served files match.
+Actual 440×956 browser review reaches the highest tiers, verifies preview and
+RATES/BACK, and preserves the user's level 2 / 390 coins / owned starter. Browser
+warning/error captures are empty and the viewport override is reset.
+
+Fresh isolated 0.12.3 build 5 compiles/links unsigned with the verified production
+advertising configuration, passing 8,547 native-PCK desktop checks. Its PCK is
+10,680,840 bytes, SHA-256
+`51adf0e091c42128d663f7f574623deb1875a2eb94ac384477fe11386ac49290`.
+No new signature, phone installation/launch, upload, App Review submission or
+root Git publication is claimed. Baseline, previous candidates and phone saves
+remain preserved; final native/account/privacy/purchase/store-image work stays
+open. The earlier skin screenshot draft needs the new native interface. Owned
+helpers completed/stopped, the main preview is preserved and the completed
+four-hour automation remains PAUSED. See
+[the collection handoff](experiments/hole-city/docs/skin-collection-20261001/README.md).
+
+## 2026-10-01 · AdMob resumed and production configuration prepared
+
+The user resumed AdMob with the replacement Google account and completed local
+identity verification. That account already had a normal-status publisher
+profile. The iOS game Black Hole Feast: Eat & Grow and optional Rewarded - Double
+Round Coins ad unit were created and confirmed in the console. Production IDs
+are retained in ignored native build configuration. Fresh 0.12.2 build 4 compiles
+and links with those identifiers and all 50 Google-published SKAdNetwork buyers.
+Its native PCK passes 202 focused monetization/device/lifecycle assertions;
+all 803 previously accepted Web inputs and original vendor privacy manifests
+remain unchanged. No production ad request, signature, installation or upload
+is claimed. Earlier test/production candidates and failed signing logs remain.
+
+The existing public support Site's exact Google-provided app-ads.txt line was
+published as Site version 2, with native deployment success. The source push
+used dotafs2 for author/committer and retained the task's visible conversation
+through 2026-10-01T07:31:26.799Z (158 messages), outside public dist/. Existing
+archived messages remain unchanged. The exporter now excludes automatic browser
+context and rejects authentication query URLs, preventing ephemeral tokens from
+entering refreshed archives while preserving human requests and corrections.
+Its focused privacy assertions and archive hash review pass. The game GitHub
+repository was not committed or pushed. The English US privacy message is saved
+as a draft and not published; an initial application-selector load failure is
+retained and its retry succeeded. The public privacy policy still covers the
+separate no-SDK baseline and must be reconciled before monetized release.
+
+AdMob still reports missing payment information. The real payment-profile form
+is retained for the user. No complete address is present in this handoff and
+financial-account submission requires local user handoff; no payment data was
+entered/submitted and no new terms accepted. Phone signing/acceptance, Apple
+purchases, privacy disclosures, screenshots and App Review remain open. The
+overnight automation stays PAUSED and the accepted local preview is preserved.
+
+## 2026-10-01 · Manual iteration with AdMob account setup deferred
+
+The user asked to defer AdMob and continue iteration. The completed four-hour
+automation remains PAUSED. A real-touch scene reproduction found that music
+stopped on focus loss while gameplay retained steering, lost 0.1833 seconds and
+travelled 1.1534 meters over twelve physics frames. Source 0.12.2 pauses a playing
+round on focus loss or application suspension, clears touch/mouse movement and
+velocity, and requires explicit resume after both lifecycle conditions recover.
+Manual pause, intro/menu/results, round rewards and saved preferences remain
+independent. Both maps pass 70 focused lifecycle assertions. Initial helper/audio
+mixer cleanup failures are retained and corrected without weakening assertions.
+The full 80-suite source/PCK gate passes 54,361 checks per phase with 803
+unchanged inputs. All 18 actual served artifacts and their isolation/no-store
+headers match. Real 440×956 browser review verifies opening, manual pause,
+frozen 00:59 timer, explicit resume and HOME; the visible existing stage 2 /
+70 coins are preserved. The viewport override was reset. Hidden-tab creation
+did not establish actual focus loss, and native app selection timed out twice;
+visual OS-interruption or physical-device acceptance is not claimed.
+
+The resumed 0.12.1 xcodebuild printed BUILD SUCCEEDED, but strict signature
+verification rejected its sealed temporary-file reference. No new signed delivery
+or installation is implied. The fresh 0.12.2 build 2 native snapshot compiles and
+links arm64; its exported PCK passes 413 focused desktop-engine assertions and
+both original vendor privacy bundles retain their hashes. Its signing wait was
+cancelled pending local keychain authorization, with all logs and resumable
+project retained. No new device installation or upload occurred; the original
+baseline and phone-backup bytes remain preserved. The phone's
+connection tunnel was unavailable, and the user was asked to handle the local
+keychain prompt and reconnect/unlock it. AdMob account work is deferred; test
+SDK configuration is not a production release. No new legal agreement, App
+Review submission or Git publication occurred. Owned test/GUI/signing helpers
+are stopped, while the intentional preview service remains available.
+
+See [manual continuation](experiments/hole-city/docs/native-polish-20261001/CONTINUATION.md).
+
+## 2026-10-01 · US iOS upload, native services and requested overnight fixes
+
+The user adopted Black Hole Feast: Eat & Grow for the store and Hole Feast for
+the game, selected US-only launch, and provided a public support contact.
+After the approved toolchain/account steps, the no-SDK 0.11.2 build was signed,
+installed and uploaded to App Store Connect. The final source/PCK gate passed
+53,900 checks per phase across 78 suites. The update preserved the phone save
+before gameplay resumed. Upload success does not establish processing, App
+Review approval or public release; no App Review submission occurred.
+
+The user then required Google advertising and Apple consumables before privacy
+publication. Official AdMob 13.11.0 / UMP 3.1.0 and a StoreKit 2 adapter now
+compile and link in an isolated baseline-PCK prototype, without installation
+or release. Receipt/wallet deduplication includes an observer-first regression;
+the guarded 0.12.0 Web gate passes 53,903 checks per phase with 798 unchanged
+inputs. Native reward callbacks and sandbox purchases remain unverified.
+AdMob signup requires correction from the initially requested Hong Kong region
+to the user's subsequently confirmed mainland residence/payment country;
+phone verification and production identifiers are absent. Apple requires legal
+entity review before its still-New Paid Apps Agreement. The user performs
+truthful personal bank/tax steps. The 320 Coins draft has US availability saved;
+a pricing attempt failed and was not saved. Data Not Collected was not published.
+
+On the actual iPhone, the user reported absent background music and swallow
+feedback, long rounds and top/bottom letterboxing. They requested 60-second
+rounds, an appetizing food city with genuine large stacked targets, autonomous
+bug acceptance and a four-hour scheduled iteration. A thread heartbeat was
+created every 15 minutes through October 1 at 05:48 Asia/Shanghai. Current
+0.12.1 source expands the world viewport, fits proportional UI inside safe
+areas, enables iOS Playback audio with native startup, adds subtle synthesized
+gulps/light throttled haptics and a saved haptic switch, and changes rounds to
+60 seconds. Food heaps gain real large courses within the existing body budget,
+and two inner plots become original tiered-cake landmarks with collision-aware
+snack relocation. The first focused run found an audio-restart regression; it
+was corrected, and failed intermediate type-inference logs remain preserved.
+The final 79-suite source/PCK gate passes 54,291 checks per phase with 802
+unchanged inputs. Failed earlier gates remain preserved; the same geometry,
+collision and wallet/receipt budgets are enforced. Actual rendering also found
+and corrected the food shader's double sRGB conversion and the brown/cull-hidden
+hole cavity. New rain starts above real tall colliders instead of inside them.
+A fresh arm64 SDK candidate compiles and links; its exported native PCK passes
+357 focused checks in the desktop engine. The backed-up phone save retains all
+preexisting values through 27 isolated compatibility checks. Development signing
+waits for local keychain authorization; Computer Use refuses the SecurityAgent
+app, and no bypass was attempted. The new candidate is not signed, installed or
+uploaded. Five original store layout drafts use genuine gameplay/collection
+frames and remain explicitly unsuitable for upload until native frames replace
+them. Twelve normal simulated one-minute rounds pass 84 checks, alternating
+six runs per map. Food runs reach level 5 with 70–71 larger future targets
+remaining. The initial soak helper errors are preserved and corrected without
+changing runtime inputs. All 18 actual localhost artifacts and their isolation
+headers match the final receipt. The final scheduled wake stayed active with
+bounded waits until the actual September 30 21:48:17 UTC deadline. Scope additions
+stopped then, and the app tool paused the heartbeat at 21:48:32.691 UTC with its
+existing prompt, recurrence and thread preserved. All 802 guarded inputs, the
+native PCK and original phone-backup bytes still match the accepted evidence.
+The blocked signing session exited 75 during deadline cleanup; its owned worker
+and the temporary awake helper are stopped. Logs, failed fixtures and the
+resumable native project remain preserved. The port-8768 preview remains an
+intentional deliverable. The new candidate is still unsigned and uninstalled;
+physical-device acceptance and commercial account requirements remain open.
+The final public receipt is `artifacts/native-polish-20261001/window-close.json`
+under the game directory, with exact private verification kept in ignored build.
+No root commit/push, paid agreement acceptance or account deletion was
+performed. Private address/device/account screenshots remain ignored.
+
+See [the current handoff](experiments/hole-city/docs/ios-release-20260930/README.md)
+and [overnight acceptance](experiments/hole-city/docs/native-polish-20261001/README.md).
+
+## 2026-09-30 · Post-update iOS toolchain continuation
+
+After the user reported update completion and requested continuation, `sw_vers`
+verified macOS 27.0.1 (26A434). The selected Xcode was still 16.2 with iOS SDK
+18.2, and the signing identity lookup still returned zero identities. The
+official Apple Xcode 27.0 product page in App Store offered Update; the update
+was initiated and observed downloading. The existing 791 Web input hashes and
+47 native export hashes were rechecked unchanged. Xcode installation, native
+compilation and signing results are not implied by download initiation.
+
+The update subsequently reached 100%, and `xcodebuild -version` now confirms
+Xcode 27.0 (27A266a). Launching Xcode displays the new Xcode and Apple SDKs
+Agreement (EA2002, June 8, 2026). `xcodebuild -showsdks` exits 69 and explicitly
+requires license acceptance; first-launch status also exits 69. User approval
+was requested at this actual agreement step. The Agree button remains untouched
+pending that response. Native compilation has not run. App Store Connect was
+opened for the user to sign in with the paid developer account; login completion
+has not yet been confirmed. No credentials were entered or copied.
+
+## 2026-09-30 · Authorized macOS upgrade initiated
+
+After the prepared iPhone project and toolchain blocker were reported, the user
+explicitly approved updating the Mac. At approximately 03:09 UTC, the native
+Software Update interface's Upgrade Now button for macOS 27.0.1 (14.8 GB) was
+pressed and the installation license accepted. The observed UI then showed
+"Downloading macOS 27.0.1". This confirms initiation only; successful
+installation and restart are not yet verified. Administrator authentication,
+if requested, is left to the user locally. No password is requested in chat.
+After restart, verify the OS and continue with a supported stable Xcode/SDK
+before signing or TestFlight work. The existing isolated game project and its
+verification evidence remain available on disk.
+
+The user then requested Clash Verge and Codex to reopen automatically after
+updating. Both were added to macOS Open at Login through System Settings and
+verified visibly. The installed Codex application is named ChatGPT and has the
+verified `com.openai.codex` bundle identifier. The existing Steam login item,
+background permissions and proxy configuration remain untouched. Normal user
+login is still required; launch ordering and automatic agent-turn continuation
+are not claimed. Software Update continued downloading in the background.
+
+The complete 14.80 GB download subsequently finished. The latest observed UI
+shows "Preparing macOS 27.0.1", with about 30 minutes remaining. No installer
+failure or local-authentication prompt was visible at that observation; OS
+installation/restart completion still requires verification afterward.
+
+## 2026-09-30 · Xcode sign-in and isolated iPhone project
+
+The user authorized computer operation and completed Xcode Apple ID sign-in.
+The paid team was verified in native Xcode rather than using a stale free-team
+cache or the browser's different account. No account credentials or raw account
+preferences were copied into repository documentation.
+
+The standard Godot 4.7.2 iOS template was downloaded from the official release
+using bounded HTTPS ranges. Its member and inner ZIP CRCs passed; its complete
+outer archive SHA was not verified because that archive was not downloaded.
+The pre-existing Mono template differs and remains untouched. The standard ZIP
+was also installed into this game's private portable editor template directory.
+
+A new helper copies 752 runtime files into a fresh ignored build directory,
+enables mobile texture import only there, derives opaque iOS icons from the
+original SVG and exports project files only. Two actual failures remain saved:
+missing installed template despite custom paths, then the iOS exporter's empty
+error for missing ETC2/ASTC imports. Both causes were checked against upstream
+source; the third export succeeds without suppressing unexpected errors.
+
+The generated SinkCity Xcode project parses successfully and carries the real
+team with a local draft Bundle ID. The native PCK is 10,555,176 bytes, SHA-256
+`cee0c5f49200859f4fc023b5d966111894e81219aade2f1d52b15e4784f7e2c6`.
+Independent review loads 315 resources and eight plain files, including the
+complete 88-second Shop Theme. It also finds a real upstream simulator mismatch:
+Info.plist advertises arm64 and x86_64, but the simulator archive has only x86_64.
+The physical iPhone archive is arm64. No metadata was changed to conceal this;
+native device compilation, execution and simulator compatibility are unproven.
+All 791 original Web release inputs remain unchanged.
+
+macOS 14.5 and Xcode 16.2/iOS SDK 18.2 remain below Apple's current upload
+requirements. The Software Update page offers macOS 27.0.1 (14.8 GB), but no
+download, upgrade, license acceptance or restart was initiated. Signing identity
+lookup still finds none. No certificate, provisioning profile, registered App
+ID, native archive/IPA, device installation, TestFlight upload or Git publication
+was created. The local project, evidence and next steps are documented in
+[the iOS handoff](experiments/hole-city/docs/ios-20260930/README.md).
+
+## 2026-09-30 · Shop Theme replacement and publication preparation
+
+The user selected Shop Theme and asked to begin preparing publication. Local
+v0.11.1 replaces both maps' synthesized loops with the complete 88-second normal
+Buy Something! recording by Cleyton Kauffman. Its creator page declares CC0.
+The pinned source receives only -7.1 dB constant gain and Vorbis compression;
+one streamed voice preserves its decoder/bookmark when maps change. Gesture
+unlock, Music/SFX preferences, background/pause behavior and saves are retained.
+Previous original music and its provenance are archived outside exports.
+
+Non-author review independently verifies the source archive and license,
+byte-identical rebuilt audio packets/PCM, actual native loop decoding and 298
+audio lifecycle checks. Two suites each maintain only two obsolete distinct-track
+expectations. A separate 12-check isolated-PCK probe verifies music/provenance
+and absence of both old tracks. Its first command-line identity assertion was
+incorrect because Godot consumes --main-pack; that artifact-only failure and
+its narrowed package identity correction are preserved.
+
+The Web gate now distributes game/font/music/engine notices and a credits page.
+Fifteen packaging tests plus 17 real copied-export/integration checks pass,
+including strict errors, exact hashes and rollback. A separate review strengthens
+final evidence binding: complete inventory, report/log identity, source guards,
+release/verification hashes and preservation of old receipts before retries.
+The complete 77-suite source and PCK gate passes 53,843 checks per phase with
+791 unchanged inputs. All 18 HTTP artifacts match; PCK SHA-256 is
+`31f638ff480f368d9bdb32462aa279285cf388972277ed2b32ecaf46a212be7e`.
+The 18,892,166-byte Web ZIP is re-read and verified member by member, SHA-256
+`47a865b52b624092286d217c540a6a05b70d8f057d997ac289f162b357a4ce25`.
+
+Publication preparation includes an independently reviewed Web-then-TestFlight
+plan and factual English listing draft. The audit identifies missing public
+HTTPS hosting, actual privacy/support details, current iPhone acceptance and
+iOS identity/signing/export work. Selected local Xcode 16.2 does not meet the
+current Xcode 26/iOS 26 SDK upload requirement. The permanent in-game credits
+and privacy entries are still release work. No live ads/payments are claimed.
+Only the existing local preview was updated; no external deployment, purchase,
+account action, Git commit/push or store submission occurred. Browser pixels,
+phone listening and sustained iPhone 14 60 FPS remain unverified. All owned
+helpers exited; user saves, unrelated resident worlds and applications remain
+untouched. See [delivery and evidence](experiments/hole-city/docs/shop-theme-20260930/README.md).
+
+## 2026-09-30 · Music, food progression, original skins and BOOST
+
+The user reported noisy music, abrupt food-map growth, unpolished skins and an
+ineffective BOOST button. Local v0.11.0 recomposes both original tracks into
+four sparse parts at 104/108 BPM. It redistributes 182 existing foods into
+intermediate physical sizes and turns three existing heaps into level-six
+cookie foundations with 58 separate upper pieces each. Inventory, ownership,
+base growth rules and the remaining 38 skin forms are retained.
+
+Six original skin forms gain rounded geometry and lit materials. Non-author
+review also found and fixed missing lights in the actual collection cards.
+BOOST previously spent charge on a pull without changing speed; real touch
+tests now measure a 1.55 speed ratio for 2.5 seconds, with independent Beacon
+Step timing. A natural-touch food route, with rain and rivals isolated, verifies
+177 separate heap receipts only after complete descent. Original music previews
+and Blender model comparisons are retained; neither is a phone gameplay capture.
+
+The complete gate exposed an obsolete rain assertion: the limit of 24 controls
+new-wave admission, while previously landed food can legitimately wake again.
+The maintained test observes actual body IDs at every wave, preserves the old
+continuity/retirement bounds and rejects an extra spawn. Independent physical
+review then found a real bug: swept-rest food could sleep without a reliable
+native support contact and remain suspended after that support disappeared.
+The focused fix tracks the actual support through a weak reference and wakes
+the existing body when its owner, transform or collision layer changes. It adds
+no extra rays, pose override, forced deletion or permanent awake state. A broader
+contact-slop prototype was rejected and retained with its failed evidence.
+
+Every implementation received non-author review, including 392 final rain
+checks. Music-duration, six-skin mesh and measured opening-view budget fixtures
+were narrowly maintained and separately reviewed. The first gate failure and
+a later explicitly interrupted fixture-parse run remain preserved. Final
+76-suite source and isolated-PCK gates pass 53,788 source checks and 53,788 package checks; all
+785 input hashes remain stable and all ten served files match. PCK SHA-256:
+`dd34dfe38ff87f63170deac423242315de5258617d30f28b926b0eff6d92557f`.
+
+The existing preview is updated locally. Browser pixels, subjective musical
+preference, actual retention and sustained iPhone 14 60 FPS remain unverified.
+Player progress, unrelated resident worlds and user applications are preserved.
+No Git commit or publication was requested.
+See [complete iteration evidence](experiments/hole-city/docs/feel-20260930/README.md).
+
+## 2026-09-29 · Edible Sushi Express and City Tram
+
+The user requested a Blender-authored sushi train in the food city, with
+separately edible cars: eating a middle section must leave the downstream cars
+stationary while the head continues looping. They also requested corresponding
+light rail in Sunny City to reuse the behavior.
+
+Local v0.10.0 adds eight distinct sushi cars and a four-car tram, keeping both
+maps' original traffic. Actual Blender 3.6.23 authored ten independent GLBs and
+an editable source file after newer local builds failed during Metal startup.
+The complete model set has 9,844 triangles and 581,572 GLB bytes. Each car has
+its own collider and ordinary physical fall/score path. Detached cars remain
+edible and never reattach or respawn. The head's recorded trajectory controls
+followers; collision-checked passing branches let it return past a parked tail.
+Ground-bound rail paint opens with the hole and introduces no supporting floor.
+
+Non-author review found disabled imported vertex-color material flags, an
+unretried initial bypass rejection while a car was still falling, and retained
+controller/track references on return home. The complete gate additionally
+caught a stale-owner access when the unchanged rival fixture replaced its city.
+All were fixed and independently retested, including head/middle/tail cuts,
+player/AI receipts, repeated laps, deletion, scene replacement and touch input.
+
+Two legacy assertions were maintained with separate review and preserved
+evidence. Inventory now keeps exactly 2,922 original food bodies plus eight
+train cars, with the original shared-mesh limit. Four oblique train poses had
+only 5.96e-8 component-scale roundoff; the unit-scale test now uses a fixed
+1e-6 vector tolerance while retaining every body and all collision bounds.
+Counterexamples still reject actual scale changes and additional objects.
+
+The final 67-suite source and isolated-package gates each pass 48,255 checks;
+246 direct asset checks also pass. All 775 input hashes remain stable and all
+ten actual HTTP artifacts match the tested export at the existing local
+preview. The PCK SHA-256 is
+`f62eecd2a3f5deb45afca81b948086a5c853048fd40b08e057e35df9b45f364f`.
+Blender renders are model previews, not gameplay screenshots. Initial native
+controller timings are explicitly bound to the earlier guard-free checkpoint;
+they do not establish whole-game or iPhone frame rate. Browser appearance and
+sustained phone 60 FPS remain unverified. Owned helpers exited; user saves,
+the existing server and unrelated resident worlds remain intact. No Git commit
+or publication was requested.
+
+See [complete train delivery evidence](experiments/hole-city/docs/trains-20260929/README.md).
+
+## 2026-09-29 · Six skin tiers, timed coin runs and larger connected maps
+
+The user requested six visual rarity levels, simpler low-tier skins, an initial
+draw/progression design, optional rewarded doubling of one round's coins, a
+purchase entry, three future-map cards and larger timer-only maps. They also
+reported that all food appeared black and requested that correction first.
+
+The separately delivered v0.8.7 hotfix initializes packed MultiMesh instance
+color lanes to white for static food and settled rain. Zero-initialized colors
+had multiplied the existing ingredient palette to black. Independent setter
+traces and windowless software OpenGL probes support the correction. Its
+isolated 53-suite source/package gate passed 35,173 checks per phase, followed
+by ten verified served files. Its source snapshot and delivery receipt remain
+separate from the broader update.
+
+Local v0.9.0 retains 44 stable skin IDs and existing ownership while adding
+Common, Uncommon, Rare, Epic, Legendary and Prismatic. Base draw weights are
+45/28/16/8/2.5/0.5 percent; the UI discloses actual normalized eligible-pool odds.
+Draws never duplicate owned skins. Each collection has five/ten/twenty-draw
+Epic+/Legendary+/Prismatic guarantees while qualifying unowned rewards remain.
+Common skins use one recolored ring; Core Shell, Tide and Cinder are Legendary.
+These are initial design values, not empirically optimal retention rates.
+
+Both playable maps gain approximately 59.6% more player-center travel area.
+Sunny City adds a connected outer avenue, 24 houses and 128 independent props.
+Snack Garden gains 24 food buildings, two heaps and 120 loose foods. The first
+full gate correctly rejected sparse new districts; their physical content was
+repacked to 16.96%–28.26% occupied ground without increasing body or triangle
+counts. Large-food collision, tier release and reachable perimeter rain received
+independent review. Animal Kingdom, Star Voyage and Toy Factory remain explicit
+non-playable Coming Soon entries.
+
+Runs now finish only at 240 seconds. Being swallowed causes a two-second respawn
+with score retained. Nonempty timed runs earn floor(score / 10) + 20 coins.
+Optional rewarded doubling binds to its original durable round receipt, and
+native purchases require verified transaction IDs saved with the wallet before
+acknowledgement. Save failures, duplicate and reordered callbacks, pending
+approval and migration were tested independently. Real ad/payment SDKs, store
+products and production configuration are absent; the local UI reports those
+actions unavailable rather than simulating payment or advertising.
+
+Expanded food occupied several old fixed test coordinates. Reviewed fixtures
+now prove clear air and real terrain while retaining actual gravity, original
+fall windows, separate receipts and full descent requirements. One legacy pile
+oracle deliberately replaces a single solver-speed sample with sustained actual
+horizontal travel; the original displacement, rotation and vertical-range
+limits remain. Raw old/new traces, rejected alternatives and baseline failures
+are retained. The reports explicitly establish bounded motion, not complete
+stillness, and do not claim every old assertion was unchanged.
+
+The final guarded release passes all 63 source and 63 isolated-package suites,
+46,356 checks per phase. All 741 input hashes remain stable, and all ten actual
+HTTP artifacts match the tested v0.9.0 export. The PCK SHA-256 is
+`ecf42e7dfc5ff6c4534493555f8468dbff338bb3ea2477433f1783de19b00b22`.
+Owned helpers exited; player saves, the preview server and unrelated resident
+worlds remain intact. Browser appearance, live monetization, measured player
+retention and sustained iPhone 14 60 FPS remain unverified. No Git commit or
+publication was performed.
+[Rules, reviews and exact delivery evidence](experiments/hole-city/docs/collection-20260929/README.md).
+
+## 2026-09-29 · Original map music with persistent audio controls
+
+The user reported missing music. Inspection confirmed that the active game
+implemented collection pings and food impacts but no background score. Local
+v0.8.6 adds two original instrumental Ogg loops: 32 seconds for Sunny City and
+34.286 seconds for Snack Garden, totaling 571,698 bytes. A deterministic local
+generator supplies the original compositions without downloaded samples.
+
+One persistent streaming player changes tracks with the selected map. Separate
+Music/SFX controls save through the existing atomic progress file. Music waits
+for a released input gesture, preserves its playhead while muted or paused,
+and treats focus loss and application suspension as independent conditions.
+Background effects also mute. Reviews caught premature keyboard-triggered
+playback and premature focus-based resume; both have regression coverage.
+
+The first full gate rejected undersized phone controls. They now remain above
+44 points at a 375-point viewport width. Added controls also exposed old fixed
+button-index fixtures, which now locate the intended actions semantically.
+Input-driven tests explicitly stop and drain their audio mixer before immediate
+headless exit. Eleven test-maintenance diffs received independent exact review;
+the original gameplay assertions and strict error handling remain. Failed and
+interrupted gates were retained without replacing the preview.
+
+Two non-author music suites pass 125 and 118 checks. Final source and isolated
+PCK acceptance passes all 51 suites and 34,009 checks per phase. The verification
+receipt binds current inputs, independent decoded-audio checks, test-maintenance
+reviews, engine logs and all ten statically served files to v0.8.6. MP3 previews
+are available for user listening. No browser or native audition was performed,
+and phone speaker output, subjective mix and iPhone performance remain open.
+Owned helpers exited; the preview server, player saves and unrelated resident
+worlds were preserved. No Git commit or publication was performed.
+[Implementation and evidence](experiments/hole-city/docs/music-20260929/README.md).
+
+## 2026-09-29 · Building-only dither with explicit identity and size gates
+
+The user rejected the remaining broad dither behavior and requested buildings
+only, or an explicit size threshold. Version 0.8.5 requires both building
+identity and sufficient individual dimensions before testing real mesh
+obstruction. Only the catalog's house path sets `dither_building`; food identity
+and fragment markers are explicit exclusions. Defaults are 3.0 world units of
+local height and 2.4 units of maximum local horizontal span, including global
+scale. Merely being large or near the hole does not activate dither.
+
+Independent comparison found the broad food path: individual edible tower
+layers inherited the entire assembly's height/width. At the same confirmed
+blocking camera pose, a 1.922-unit burger layer borrowed a 9.915-unit height
+and a 0.877-unit donut layer borrowed 6.597 units. Both had reveal weight 1.0
+in the preserved v0.8.4 package and 0.0 in the new source. The city catalog
+audit found real houses correctly classified, with several large trees proving
+why a size-only policy would introduce false positives.
+
+Food shader reveal includes, varying weights and discard execution are removed.
+Legacy uniforms remain load-compatible but unused, batch opt-in is disabled,
+and legacy body writes clamp to zero. Collapse/support/objective metadata stays
+available. Independent reviews pass 176 building and 434 scene/material checks;
+the food map's 2,588 objects register zero occluders. Fresh isolated shader
+execution passes 45 cases across ten programs, including nine food cases with
+all 4,096 pixels retained. The fixed-output harness measures discard rather
+than alpha blending; source validation separately excludes alpha outputs.
+
+The first full source gate rejected an old collision-suite assertion requiring
+the entire ingredient shader to remain byte-identical. The failed run is kept,
+and it did not replace the preview. The corrected comparison pins the verified
+prior ingredient-finish program while excluding only six exact legacy reveal
+statements and nonfunctional blank/full-comment lines. All 41 mesh pins and
+physical assertions remain. A non-author audit verifies prior-source hashes,
+exact assertion-only changes, nineteen semantic mutations and deletion of all
+twenty-six protected lines. The corrected suite passes 16,168 checks.
+
+Final source and isolated-PCK acceptance passes all 49 suites and 33,734 checks
+per phase. Static HTTP verification binds current source, shader provenance,
+log receipts and all ten delivered files to v0.8.5. Existing tabs require a
+reload. No browser inspection or indirect capture was attempted under the
+saved permission restriction; actual browser appearance and phone performance
+remain unverified. All owned helpers exited, and the user's preview server,
+player saves and unrelated resident worlds were preserved. No Git commit or
+publication was performed.
+[Implementation and complete evidence](experiments/hole-city/docs/building-only-reveal-20260929/README.md).
+
+## 2026-09-29 · Animated, layered Snack Garden home miniature
+
+The user reported that the food-map miniature stayed still unlike Sunny City
+and looked flat. An independent probe against the preserved v0.8.3 PCK confirmed
+that Sunny City's pivot advanced during natural process frames while the food
+preview had processing disabled and no valid pivot. The old miniature also
+retained twenty-five unnecessary rigid bodies and collision shapes.
+
+Local v0.8.4 introduces a separate visual-only food district: 68 food pieces
+across ten recipes, three height/depth layers and six staggered stacks, on a
+biscuit-and-cream base with branching chocolate streets. Shared game meshes
+retain rounded ingredient geometry and gloss. Both miniatures rotate at 0.10
+radians per second on the home screen and stop processing/rendering when
+hidden. Initial environment setup now precedes the first model, giving saved
+food selections consistent lighting. Old models are freed on map changes.
+
+Natural-frame lifecycle QA exposed a separate existing error: after returning
+home, the reveal controller passed a freed player into a typed argument.
+Inactive phases now reset and return before passing that object. A non-author
+review ran thirty lifecycle checks plus the unchanged 75-check reveal suite
+with the real game process enabled. The initial failed log is retained.
+
+The new author suites pass 79 lifecycle and 483 geometry/resource checks; an
+independent 716-check suite covers animation, hidden states, twenty repeated
+switches, physical-system isolation and full-turn camera bounds. All 48 source
+and isolated exported-PCK suites pass 33,349 checks per phase. Static HTTP
+verification confirms all ten served files match v0.8.4 and the required
+WebAssembly isolation headers. The artifact verifier itself received a separate
+read-only review; old-success output handling and log/receipt binding were
+corrected before final delivery verification.
+
+No browser inspection or indirect UI workaround was attempted under the saved
+permission restriction. Headless geometry checks do not establish subjective
+appearance or phone GPU performance. Owned helpers exited, and the preview
+server remains running. Player saves, resident worlds and Git publication were
+not changed. Existing browser tabs require a reload.
+[Implementation and complete evidence](experiments/hole-city/docs/map-preview-20260929/README.md).
+
+## 2026-09-29 · Extended hole growth, rival swallowing and reduced AI strength
+
+The user reported a level-12 size ceiling, AI unable to eat each other, inability
+to eat NPCs and overly strong opponents. Local v0.8.3 preserves the first twelve
+growth thresholds, then continues increasing size with progressively larger
+score costs. Radius approaches a finite 48-unit world safety bound rather than
+claiming an infinitely expanding map. The camera and growth hints support the
+extended range. Player-to-AI swallowing now requires a 1.15 radius ratio,
+AI-to-AI 1.20 and AI-to-player 1.40, followed by complete smaller-mouth containment.
+AI actively pursues eligible rivals. Opening protection applies only to the
+player as victim. AI base speed changes from 4.6 to 3.5, and exact carried
+fractional rewards give 70% credit. Player movement, rewards and saves retain
+their existing rules. Pending food ownership follows swallowed opponents;
+duplicate and post-result receipts cannot add score.
+
+Non-author tests verify growth boundaries, real pursuit at 30/60/120 Hz,
+player-controlled captures, ownership chains, large-ground openings, camera
+frusta and ordinary pedestrian falls on both maps. The final CPU trace exposed
+native cylinder-contact errors; shared 16-sided food collision prisms avoid
+that path while preserving outer dimensions and all 41 visible food meshes.
+Independent pile testing also reproduced an existing thin-food terrain tunnel
+in the old PCK. A near-ground support fallback now requires actual terrain
+under the body and stops correcting after entry into an opening. Independent
+tests verify separate full-descent receipts, rim release and no moving-hole
+pullback. Rejected prototypes and failed traces remain available.
+
+The first full gate rejected an old goal fixture that marked the player inactive
+before awarding receipts. All original 34 assertions were preserved, two living
+owner preconditions added, and independent 36-check goal plus 34-check receipt
+reviews passed without weakening runtime validation. The complete final gate
+passes 45 suites and 32,070 checks against both source and isolated exported PCK.
+All ten HTTP-served artifacts match v0.8.3. The unchanged shader inputs match a
+reused 41-case receipt; no fresh shader or browser rendering run is claimed.
+
+Final headless Mac samples cover 2,400 standard intervals and 1,200 intervals
+with the full large-growth gameplay loop active. Final standard P95 spans
+7.976–11.757 ms, with three City-opening intervals above 16.667 ms. Final large
+City/Food P95 is 7.590/13.069 ms; the Food scene observes 205 dynamic bodies,
+706 measured collections and one AI swallow, with the player reaching level 20.
+Earlier samples of identical runtime had substantial spikes, including Food
+stress P95 18.134 ms and maximum 95.528 ms. Both sets remain; the repeated sample
+followed only a test-fixture change and is not an optimization delta. Actual
+browser appearance and sustained iPhone 60 FPS remain unverified under the
+previously saved browser permission restriction. Owned helpers exited, the
+user's preview server remains running, and no player save, unrelated resident
+world, Git commit or publication was changed.
+[Implementation and complete evidence](experiments/hole-city/docs/growth-rivals-20260928/README.md).
+
+## 2026-09-28 · Selective building reveal after all-object dither feedback
+
+The user reported that nearby objects all dithered and became unreadable,
+and clarified that only large obstructing buildings should reveal. The
+v0.8.1 all-object tests encoded an overly broad gameplay rule. Version 0.8.2
+replaces that rule with explicit large, intact structure membership and
+camera-to-mouth obstruction checks. Projected oriented bounds are followed
+by cached real-mesh triangle queries; empty arch and donut openings do not
+activate merely because their bounds overlap. The finite sample set is not
+claimed to be pixel-perfect. The wider feathered shoulder and movement
+lookahead apply only after actual structural obstruction qualifies.
+
+Ordinary people, vehicles, props, snacks, rain and loose fragments keep their
+original materials and opacity. Food batches retain independent per-instance
+weights without extra structural draw groups; compaction carries the moved
+member's state, and release clears it immediately. Original facade finish,
+scene shadows and main 4× MSAA remain enabled. Independent review also caught
+duplicate binding and freed-node access, repaired before final acceptance.
+
+The preserved public mbMayer template's nine files match pinned provenance;
+it contains no building occlusion implementation and is not Hole.io's
+commercial source. The earlier local city implementation targeted buildings
+only but used proximity. Three agents investigated original behavior and
+reviewed each other's implementation. Geometry acceptance passes 75 checks,
+independent scene/material review 225, and a separate controller review 65.
+The 37 source and isolated exported-PCK suites each pass 11,501 checks;
+41 isolated shader cases pass. Final verification binds current source,
+shader receipts, twelve CPU traces and all ten HTTP-served artifacts. The
+local preview now serves v0.8.2; existing open pages need a reload.
+
+The 7,200 measured headless Mac CPU intervals include reveal updates on
+every frame. Median per-run P95 is 7.775/7.524 ms for city opening/grown and
+8.276/9.830 ms for food opening/grown. Three intervals exceed 16.667 ms; the
+global maximum is 38.737 ms. Browser/GPU/iPhone thermal work is unmeasured.
+The browser tool rejected local-preview access because of a saved user
+permission setting; no alternate UI surface or indirect workaround was used.
+Actual gameplay appearance and phone 60 FPS remain unverified. Owned helpers
+completed or were stopped; the user's server and apps were preserved. No
+player save, resident world, Git commit or publication was changed.
+[Correction and evidence](experiments/hole-city/docs/selective-reveal-20260928/README.md).
+
+## 2026-09-28 · Mobile clarity and expanded camera-to-hole reveal
+
+The user requested the mobile visual corrections and reported foreground
+objects failing to dither between the camera and hole. The revealed region
+also needed to extend beyond the mouth so the player could see the route.
+Version 0.8.1 replaces building-center proximity checks with a per-fragment
+camera-ray aperture, a feathered shoulder and smoothed movement lookahead.
+City props, skinned actors, traffic, food batches, rain and both fracture
+paths share it. Shadow passes, ground, player skins and menu cameras remain
+outside the cut; physical bodies and swallowing are unchanged.
+
+Visible collection cards now use capped pixel-aware targets with 2× MSAA,
+while retaining one selected animation and a bounded page cache. Food roads
+gain a complete mip chain and trilinear sampling. Procedural paving, lane
+marks and miniature windows filter subpixel coverage while preserving their
+nominal shape and palette. Main-scene 4× MSAA and shadows remain enabled.
+
+Every implementation unit received a non-author subagent review. Review
+caught a bad foreground half-plane, stale reset radius and incorrect vertex
+color conversion before release. The final visibility review passes 1,700
+checks; its author suite passes 191. Thumbnail review passes 695 checks, and
+filtering passes 27 resource checks plus 1,848 scalar cases. An independent
+windowless shader harness compiles five shipped fragment bodies and passes
+19 reveal-coverage plus 12 material-color cases. It does not reproduce the
+complete Godot rendering pipeline or a phone screen.
+
+All 37 source and truly isolated exported-PCK suites pass 13,092 checks per
+phase, and the local Web preview is updated. The gate now fingerprints import
+recipes. Independent helper reviews also corrected error acceptance, stale
+reports, incomplete counters and truncated evidence. Final verification binds
+the scene receipts, shader source, engine, twelve CPU traces and all ten
+HTTP-served artifacts; every served hash matches the release.
+
+Three isolated runs per map/scenario measure 7,200 frame intervals with
+reveal updates active throughout and none above 16.67 ms. Median per-run P95
+is 6.971/7.130 ms for city opening/grown and 5.032/6.880 ms for food
+opening/grown. These are headless Mac CPU wall times; rasterization, dither,
+MSAA, browser behavior, phone GPU and thermal cost are excluded. The renewed
+authorized computer-use attempt still reports a locked Mac and unavailable
+browser. Actual visual and iPhone 14 acceptance remain unverified. No player
+save, reference application, resident world or Git publication was changed.
+[Implementation and evidence](experiments/hole-city/docs/mobile-visibility-20260928/README.md).
+
+## 2026-09-28 · Visual-quality reference alignment after offline preview feedback
+
+The user questioned missing shadows and visible aliasing in the offline
+showcase, then asked how reference games achieve a cleaner result. Three
+independent read-only reviews examined current runtime code, official Unity
+and Godot guidance, retained reference records and installed app metadata.
+Hole.io and Hole Em All are installed Unity iPhoneOS builds with packaged URP
+components; their active AA, shadow and post-processing settings were not
+established. No apps were launched, assets extracted or external people
+contacted.
+
+The current main scene still requests 4× MSAA and a shadowed sun. The showcase
+used different single-sample rendering and omitted cast shadows. Real runtime
+gaps include 144×106 collection thumbnails without AA, a food street texture
+without mipmaps, and hard procedural window/paving masks. Food already has
+rounded geometry and per-ingredient finish; blindly increasing all geometry
+or enabling a large post-processing stack is not the recommended correction.
+
+The renewed computer-use inventory still reports a locked Mac. A prioritized
+implementation/acceptance report distinguishes source findings, reference
+metadata, hypotheses and unverified device appearance. This pass changes only
+documentation; v0.8.0 source/deployment, player saves and resident worlds remain
+unchanged. No Git publication occurred.
+[Comparison and evidence](experiments/hole-city/docs/visual-quality-20260928/README.md).
+
+## 2026-09-28 · Audit corrections and independent review after every fix
+
+The user requested all identified fixes and a separate subagent review after
+each one. Implementation and review were assigned to different agents; failed
+reviews returned to their authors. Version 0.8.0 corrects velocity-based NPC
+facing across frame rates, sidewalk crowd spacing and continuous vehicle
+routes. Sunny City now has four different districts while retaining its
+catalog assets and independently swallowed objects.
+
+Snack Garden separates airborne and retained food budgets, sustains rain,
+batches settled pieces and retires only old, distant, off-camera food. Nearby
+storefronts, six building families and three distinct edible landmark forms
+improve composition. Branch streets carry traffic. Actual-contact crumbs,
+glaze and sound accompany physical collapses. Round completion now includes
+real building, landmark and large-heap collection receipts; started falls can
+finish after settlement without granting late rewards.
+
+The library contains 27 Classic and 17 Special original forms, with focused
+animation, touch paging, equipped-page re-entry and honest ability/cosmetic
+descriptions. A working virtual store, exact coin shortfalls, visible earning
+rules and persistent level advancement complete the tested loop. A final
+scope audit caught two missed details, so first-use skill instructions and
+exact missing-coin feedback were added and independently reviewed too.
+
+The final 33-suite source and isolated PCK phases each pass 10,479 checks.
+Release review also corrected incomplete source guards, ignored native errors,
+unsafe partial installation, source-directory fallback during PCK tests and
+implicit resource-tree report writes. Fault injection verifies rollback and
+failure detection. The final performance/delivery evidence binds source,
+assets, engine, reports and served bytes; see the linked report for its cutoff.
+
+Final isolated CPU runs cover 7,800 measured frames without an interval above
+16.67 ms. Median P95 is 7.004/6.866 ms for city opening/grown and 5.043/6.835 ms
+for food opening/grown. A trace after four simulated minutes of rain retains
+623 rain bodies at P95 8.119 ms. All 450 profile inputs and the engine binary
+match before and after; all ten HTTP-served artifacts match the final release.
+The additional 183-check skill/economy review passes separately on both source
+and the final PCK. These are native CPU/physics and static delivery checks.
+
+The local preview is updated. Browser inventory reports a locked Mac and
+User unavailable, despite prior user authorization. No actual browser capture
+or physical iPhone 14 ten-minute-per-map result is claimed. The opt-in local
+device recorder uses test progress, exports build-bound frame cadence and
+does not upload data or automatically certify phone performance. Reference
+economy and visual parity remain explicitly limited to observed evidence.
+No player progress reset, resident-world change or Git publication occurred.
+[Fixes and independent acceptance](experiments/hole-city/docs/fixes/20260928-summary.md).
+
+## 2026-09-28 · Three-agent current-game reference audit
+
+The user requested interface and both-map gameplay screenshots, or three
+agents to identify gaps against the targets. The authorized browser inventory
+again returned User unavailable. The task followed the explicitly authorized
+three-agent alternative: UI/economy, Sunny City/actors and Snack Garden.
+
+Focused --test probes found that 56 moving NPCs never change facing at 60 Hz
+while all 56 do at 30 Hz; 57 pedestrian pairs overlap in a 20-second controller
+trace; 24 rain bodies exhaust the airborne budget and prevent new waves
+through 75 seconds; and a completed round does not advance the home level.
+The parent independently reproduced Special-tab re-entry hiding the equipped
+skin and non-advancing stage, and reran the existing 30-check portrait suite.
+
+A normal solo automatic food route finishes at 45.67 seconds with only 3 of
+136 buildings consumed. This is automated pacing evidence, not human speed.
+Reports also distinguish four repeated food building recipes, sparse starting
+frontage, static skin previews, omitted skill explanations, incomplete
+reference collection features and traffic coverage from proven physics bugs.
+The existing connected food streets, individual falls and rounded/glossy
+materials are not falsely reported as missing. Phone rendering and sustained
+60 FPS remain unverified; native headless acceptance does not cover them.
+
+English reports, retained probes, raw measurements, acceptance criteria and
+source hashes are under docs/audits and artifacts/reference-audit-20260928.
+Runtime and delivered bundle hashes match v0.7.0: this was an audit, not a fix
+or redeployment. All owned helpers completed. No player save, foreground app,
+provider, resident world or Git publication was changed.
+[Audit summary](experiments/hole-city/docs/audits/20260928-summary.md).
+
+## 2026-09-28 · Coin unlocks and the reference collection interface
+
+The user requested Hole.io-style coin unlocks and the same selection flow.
+Version 0.7.0 replaces the large skin detail panel with HOLES, a coin balance,
+Classic/Special tabs, a three-column collection, a green UNLOCK RANDOM action
+and Home/Holes/Play navigation. It retains ten implemented skins and reports
+actual collection counts. Purchased skins are highlighted and equipped.
+
+The old score-only unlock rule is replaced by explicit owned IDs. Each tab's
+first unlock costs 50 coins; later prices and the one-coin-per-ten-points plus
+20-coin completion reward are documented authored tuning, not a claim that
+all reference economy rules were observed. Unlocks never duplicate ownership,
+cross categories or spend insufficient funds. Rapid repeat requests are
+blocked. Settlement pays once; an abandoned or empty lost round pays nothing.
+
+Wallet, ownership and selection save together via temporary-file replacement.
+Legacy saves retain previously earned skins, currencies, selected map and
+unrelated sections, with a byte-identical backup before migration. Failed
+purchase saves roll back the charge and grant; malformed files are preserved.
+Actual pointer tests and cold restores use isolated process-owned /tmp files.
+The final source/PCK release gate each passes 5,285 checks in 16 suites,
+including 119 coin/save checks, 310 UI checks and both-map regressions.
+
+Code-derived layout review also corrected the post-unlock button caption so
+the next price is clearly associated with the next random purchase. The final
+release gate was rerun after that correction. Browser control returned User
+unavailable. Layout reconstructions explicitly omit 3D views; they are not
+browser screenshots. The game server and user applications were left running.
+No publication, provider request or resident-world change was performed.
+[Evidence](experiments/hole-city/docs/coin-skins-20260928.md).
+
+## 2026-09-28 · Reference-guided bubble UI rebuild
+
+After the UI comparison, the user authorized rebuilding the actual interface.
+Version 0.6.0 adds 15 original vector illustrations, illustrated map choices,
+larger skin model cards, clearer equipped/locked states, food-icon objectives,
+completion checks and a consistent tutorial, pause and results theme. Existing
+skin rules, score targets, physics and both map populations are unchanged.
+Web defeat actions now prioritize replay/home; unavailable gem revival is
+removed and rewarded video appears only with the native bridge present.
+
+Real pointer QA passes 260 checks, including phone-scaled 44-point targets,
+non-overlapping controls, locked previews, equipment, actual PLAY/pause/replay,
+food receipt-to-goal agreement and repeated menu cleanup. The pass fixed a
+menu-toast leak into gameplay. A release candidate was stopped before delivery
+when taller cards exposed narrow skin framing. The adjusted camera admits all
+ten base silhouettes with a four-pixel margin. The final 15-suite source and
+PCK runs each pass 5,114 checks, and deployed package/source hashes match.
+
+Panel styles are reused, menu preview viewports stop during play, and thumbnail
+viewports are released on exit. No new phone FPS claim is made. Browser control
+again returned User unavailable. Eleven 2D layout reconstructions use current
+draw commands and original icon assets, explicitly omit 3D scene/skin views,
+and use isolated fixture state. They are not engine/browser screenshots.
+All owned helper processes finished or were cleaned up; the existing preview
+server and foreground apps remained untouched. No Git publication, provider
+call or resident-world mutation occurred.
+[Evidence](experiments/hole-city/docs/ui-redesign-20260928.md).
+
+## 2026-09-28 · Performance measurements and optimization for both maps
+
+The user requested performance testing and optimization for both maps. Version
+0.5.5 replaces repeated polygon-edge scans with monotonic convex sections,
+shares an exact spatial index across both maps, computes moving interaction
+positions once per scan, batches repeated stationary city meshes, compacts food
+instance slots on release and lazily loads only used catalog scenes. Models,
+food population, shadow settings, physics rate and individual falls are retained.
+
+Each map/scenario was measured in three isolated headless Mac runs, with 60
+warm-up and 600 measured frames per run. Median P95 CPU time changes from
+11.446 to 6.473 ms for city opening, 10.459 to 6.489 ms for city grown holes,
+5.019 to 3.882 ms for food opening, and 8.319 to 5.910 ms for food grown holes.
+None of the 7,200 optimized samples exceeds 16.67 ms. These exclude rendering,
+WebAssembly overhead and phone thermals; the browser control interface returned
+User unavailable. No browser/device FPS claim or alternate access path was used.
+
+City whole-scene surface submissions decrease from 970 to 906, while geometry
+is unchanged. Food grown-hole compaction avoids 1,469,848 hidden triangle
+submissions for the measured end state. The food catalog cache contains two
+character scenes instead of 208. A supplementary static-allocation snapshot
+falls from 205,653,154 to 193,221,176 bytes, excluding GPU memory and process RSS.
+
+The new 269-check suite compares 72 legacy/new ground arrangements, exact
+spatial queries, nearest-edible selection, original visual restoration, compact
+instance ownership and release of batch resources on map changes. The maximum
+ground-coordinate difference is 0.038 mm. Full street testing exposed a fixture
+reading an object after it finished falling during an await; it now verifies
+collection when the object has already been removed. The release runner stops
+owned children promptly on script errors; its deliberate error probe exits in
+0.11 seconds. Final source and PCK each pass 4,853 checks, and the deployed
+preview matches the manifest and profiled runtime. Both contested and solo
+food demonstrations complete (429 and 420 points) without injected receipts.
+
+A native contact-limit warning seen in all three baseline food-opening runs
+was absent in all three optimized runs. This is non-reproduction, not a claim
+to have fixed every native-engine contact issue. All owned test/helper processes
+completed or were cleaned up. The existing preview server and foreground apps
+remain untouched. No Git publication, provider call or resident-world mutation
+occurred. [Evidence](experiments/hole-city/docs/performance-20260928.md).
+
+## 2026-09-28 · Replacing the retained nine-cell food-city skeleton
+
+The user correctly observed that v0.5.3 still looked like nine square cells:
+its four primary avenues had not changed. Version 0.5.4 replaces them with a
+connected curved boulevard, oblique commercial street and branching avenues.
+Fifteen road segments join twelve nodes and six branch junctions. Seven unequal
+polygonal neighborhoods contain 136 buildings, 15 heaps and 2,594 edibles.
+The same authored plan controls paving, facade orientation, 35 walking paths
+and eight sushi vehicles. All 48 citizens use the new pedestrian corridors.
+
+The initial candidate exceeded the 4.5M triangle cap by 18,564 triangles;
+capping ordinary burger housing at five floors brings the final scene to
+4,443,584. Supported upper pieces remain separate rigid bodies. Density QA
+passes 1,203 checks, including a complete 59-piece cascade and four tower
+shapes. Network QA passes 237 checks: 17 vehicle laps, no seam teleports or
+vehicle overlap, clear footprints, and one minute of safe pedestrian movement.
+Solo play completes at 420 points; the contested demonstration ends when an
+opponent eats the player at 51 points, a valid loss rather than a claimed win.
+
+An in-progress export candidate was discarded after a test was extended. The
+release tool now verifies input hashes before export and before delivery,
+rejecting mixed source revisions. A later grown-hole stress trace exposed a
+freed vehicle node being assigned before validity checking, aborting updates
+for later cars. Validating first fixes it; a real swallow-and-continue regression
+is now included. Final frozen source and PCK each pass 4,584 checks, and preview
+hashes match the release manifest. Isolated 600-frame headless CPU P95 is
+5.042 ms opening and 8.347 ms grown, without GDScript exceptions. Both traces
+stay below 16.67 ms, excluding GPU work. The plan and atlas regenerate exactly.
+
+The opening CPU log retains one native Godot SAT contact-limit diagnostic;
+its engine-level cause remains unresolved. The full-city preview uses actual
+mesh poses and the atlas in a windowless renderer, with approximate lighting
+and no NPC/UI/contact shadows. Browser and physical iPhone 14 acceptance remain
+open. All owned helper processes exited; the existing preview server and
+foreground applications were left running. No publication, provider call or
+resident-world mutation occurred.
+[Evidence](experiments/hole-city/docs/food-street-network-20260928.md).
+
+## 2026-09-28 · Curved neighborhoods, a market court and varied frontage
+
+The user reported that orthogonal, equally spaced food still did not feel like
+a city. Version 0.5.3 replaces row/column placement with street-front parcels,
+twelve curved neighborhood walks, two diagonal market connectors, low shops
+and taller landmarks. There are 132 buildings (41 shops, nine landmarks), 123
+non-axis-aligned facades, 15 heaps and 2,547 initial edibles. Heights span
+2.04–13.46 m. All 48 citizens use the walking paths painted in the authored
+2048-pixel atlas. The established traffic lanes retain their movement rules.
+
+Layout QA found a heap blocking the market's west connection and corrected its
+placement. Independent cascades pass 1,165 checks; the new neighborhood suite
+passes 165 checks across frontage, paving agreement, clearance and a minute of
+normal/panic movement. A broader fixture initially used an enlarged level-one
+mouth: a nearby NPC receipt restored radius 0.85 before a donut drop. Giving
+that test a coherent level-eight score/radius resolves the fixture failure
+without changing growth rules. Its 27 checks pass. Contested and solo normal
+rounds complete at 420 and 425 points. The guarded export passes 4,474 checks
+on source and 4,474 on PCK before updating the local preview. Final 600-frame
+headless CPU traces have P95 4.659 ms opening and 7.697 ms grown, with no sampled
+frame above 16.67 ms. The plan and atlas regenerate identically.
+
+Windowless previews use the actual mesh poses and atlas with approximate final
+lighting. They are not Godot/browser screenshots; physical iPhone 14 GPU and
+thermal acceptance remain open. No publication, provider call, resident-world
+mutation or foreground application access occurred.
+[Evidence](experiments/hole-city/docs/food-neighborhoods-20260928.md).
+
+## 2026-09-28 · Rounded food geometry and ingredient highlights
+
+The user identified absent highlights and rounded forms. Version 0.5.2 adds
+rounded box/disc edges with preserved outer bounds and smoother major spheres.
+It replaces uniform food finish with per-ingredient roughness encoded during
+mesh merging. The shared opaque shader retains engine lighting/shadows and
+adds two view-dependent studio reflection lobes for icing, syrup and yolks.
+Food ambient light falls to 0.48; the city-map lighting remains 0.78. Falling
+pieces retain the same mesh/material. Tiny decoration simplification reduces
+initial food triangles from 4,839,808 to 4,490,428 before spatial culling.
+
+The new finish suite checks 111 geometry/material properties. The earlier food
+suite needed its obsolete StandardMaterial property access replaced by a check
+of actual saturated vertex color. Its 39 checks then pass, and the guarded
+source/package gate includes both suites. An independent windowless render
+compiles exact food surface functions; a zero-glaze negative control changes
+2,412 pixels by more than 15 summed RGB levels. Final scene lighting remains
+approximate, so these images are not Godot/browser screenshots. Actual browser
+review and iPhone GPU performance remain open. No publication, provider call,
+resident-world mutation or foreground application access occurred.
+[Evidence](experiments/hole-city/docs/food-finish-20260928.md).
+
+## 2026-09-28 · Food downtown, saturated frosting and independent cascades
+
+The user requested a denser food city, stronger reference-inspired colors and
+large stacks that visibly collapse. Version 0.5.1 builds twelve street blocks
+with 91 food buildings, 15 heaps and 2,639 initial edible bodies. Square cake
+apartments and wafer shops join burger/donut towers; mint paving, cream roads
+and strawberry, blue, grape and pistachio frosting separate the color groups.
+The assets remain original procedural geometry.
+
+There are 976 independently supported upper pieces. Losing support wakes even
+an oversized piece, and delayed child release, gravity and food-to-food contact
+produce successive falls. QA caught a bridging starter heap and slow full-map
+scans; aligned starter supports and a spatial query index correct both. The
+59-piece pyramid and four building types collect each piece exactly once.
+Source and exported PCK each pass 4,075 checks. A solo normal-admission round
+completes at 427 points; the contested round ends eaten at 79 points. Final
+600-frame headless CPU samples show P95 4.81 ms opening and 8.32 ms grown, with
+no sampled frame above 16.67 ms. These are not browser/GPU/device results.
+
+Windowless previews render exported real food meshes and physical poses with
+approximated materials; they are not Godot screenshots. Browser visual review
+and iPhone 14 sustained 60 FPS remain unverified. The guarded export refreshed
+the existing local preview. No Git publication, provider call or resident-world
+mutation occurred. [Evidence](experiments/hole-city/docs/food-downtown-20260928.md).
+
+## 2026-09-28 · Distinct shader skins and casual UI
+
+The user identified the common orbiting-sphere template and requested water,
+black-hole shader references and a closer Hole.io-like UI. Version 0.5.0 replaces
+that emitter with original water, accretion, flame, aurora and solid-skin effects.
+Reference author pages and the earlier observed Hole.io UI ledger inform the
+new geometry and menu hierarchy; no ShaderToy or commercial game source/assets
+are copied. Unlock thresholds and skill behavior remain intact.
+
+The collection now renders actual model thumbnails. Home emphasizes the city
+miniature and PLAY; the HUD uses compact pills/circular actions, hides inactive
+cosmetic skill controls and labels players with LVL/growth. Hidden previews stop
+processing and thumbnail viewports render once. Source and PCK each pass 2,965
+checks, including the previous full-scene physical QA. An independent windowless
+CGL probe compiles all five shaders and renders ten exported mesh/material sets
+at two times. These images are not browser or Godot screenshots, and no iPhone
+performance claim is made. The saved browser restriction is respected; the
+existing local preview server remains running. No publication, resident-world
+change or provider call occurred.
+[Evidence](experiments/hole-city/docs/skin-ui-20260928.md).
+
+## 2026-09-28 · Lamp recovery, shallow rim and complete city traversal
+
+The next user report exposed gaps in the previous recipe-only QA. Directional
+tests reproduced lamps hanging on their union boxes or the deep collision
+shaft. Partial objects also retained departed owners, and sleeping contacts
+did not reliably wake when the opening moved. Version 0.4.1 adds mesh-derived
+colliders for 64 street-prop variants, primitive hulls for beacons/robots, a
+shallow physical rim, claim handoff/recovery credit and support-based aiming.
+Genuine size gates now show their required level. Public scenery placement
+and actual-width park fencing eliminate overlapping blockers.
+
+The guarded export runs four suites on source and PCK: both pass 2,806 checks.
+Every one of the 656 initial city objects is accounted for, with 608 individual
+collection receipts and 48 fractured shells, and no focused drop remains
+stuck. The 256 street-prop directional cases, partial-fall handoff and sleep
+recovery also pass. Ten broader suites pass; final-layout city rounds reach
+420 points in both contested and solo play. Headless CPU traces contain no
+frame above 16.67 ms in the two 600-frame samples, but no physical-device or
+rendered-browser claim is made. The existing server remains running; refresh
+and start a new round to load v0.4.1. No publication, provider call or resident
+world mutation occurred. [Evidence](experiments/hole-city/docs/street-prop-recovery-20260928.md).
+
+## 2026-09-28 · Independent scene objects and guarded physical QA
+
+The user's blue-transit screenshot exposed missing part ownership: the whole
+district was not merged, but loose luggage and rack plates shared their frame's
+collision box. Full primitive diameters and degree rotations were also read
+incorrectly. One hundred recipes now produce 152 independently registered
+bodies, with support release and per-object animation handoff. A scene sweep
+found nine additional stalls caused by overlap with vehicles, bins, kiosks and
+building edges; startup placement repair clears outdoor collisions while
+retaining protected building interiors.
+
+Source and exported PCK each pass 756 scene checks, including actual collection
+receipts for all 152 objects, 23 interior pieces released through eight building
+shells, 16 NPC variants and four intentionally injected negative controls.
+Seven focused regressions add 156 checks; city and food full-round suites also
+pass, including 24 city checks. The new guarded local-export command
+tests source and candidate package before replacing the preview. No Git
+publication, provider call or resident-world mutation occurred. Saved browser
+denial still prevents visual playtesting; CPU traces are not iPhone FPS proof.
+[Evidence](experiments/hole-city/docs/scene-qa-20260928.md).
+
+## 2026-09-28 · Dense food city, physical rain and bubble menus
+
+Snack Garden now contains 38 layered food buildings, 1,048 food bodies and 48
+citizens. Ten original recipes rain down, land on real collision surfaces and
+can subsequently be swallowed. Shared meshes and fourteen static batches keep
+the denser scene bounded; rain has a 96-body population limit and a 24-awake-body
+admission limit. The UI uses rounded cards, bright colors and licensed Fredoka
+type. Food vertex colors are decoded from sRGB instead of appearing washed out.
+
+NPCs now use body-sized capsules and relinquish route control before stepping
+across an opening. A swept contact check addresses thin rain-food tunneling.
+Headless tests cover initial-size NPC swallowing, all ten landings and later
+collection, support release, controls, reset and complete city/food rounds.
+The Web package is refreshed locally. Browser visual access remains blocked
+by the earlier saved denial; no bypass, publication, provider call or resident
+world mutation occurred. [Full evidence](experiments/hole-city/docs/snack-city-20260928.md).
+
+## 2026-09-27 · Actor gravity, facade fragments and bounded character motion
+
+The independent hole-city follow-up fixes four reported defects: building
+contents now release with their host, NPCs and procedural actors hand motion to
+gravity, building pieces preserve original exterior geometry and colors, and
+all 16 character rigs use bounded rest-based locomotion and gestures. Held props
+follow forearms; released traffic no longer snaps back to lane control. The city
+has 604 edible bodies and 48 buildings supply 768 offline-baked fragments.
+
+Headless acceptance covers actual falling/scoring, 576 sampled rig poses and
+conserved original facade area. Final verification finished on September 28
+with 14 suites and 1,238 assertions passing; a food-round watchdog interruption
+was retained and its targeted retry passed. The Web Review package is updated locally. The
+user explicitly allowed playtesting, but a saved browser denial still rejected
+reload of the local origin; no workaround was attempted. Visual acceptance and
+sustained iPhone 14 60 FPS remain open. No publication, provider call or resident
+world mutation occurred. [Changes and final evidence](experiments/hole-city/docs/actor-fracture-fixes-20260927.md).
+
+## 2026-09-27 · Black-hole game maps, traffic and mobile CPU work
+
+The independent `experiments/hole-city` working copy adds Sunny City and Snack
+Garden, physical food progression, map selection, shared road/sidewalk bounds,
+intersection reservations, rounded original character geometry, static mesh
+batching and a triangulated physical hole surface. It also fixes animation drift,
+AI abandoning newly released food and missing runtime JSON in exports. The
+baseline sibling checkout and resident worlds remain unchanged; no publication
+or provider call occurred.
+
+Twelve headless suites passed, covering 214 assertions and food-round acceptance.
+City and food maps both complete real automated movement/fall/score rounds with
+seven rivals, plus isolated reachability fixtures. Controlled Mac CPU opening
+P95 improved from 23.07 ms to 7.08 ms for city; food measured 5.16 ms. The grown
+city stress trace still has a 35.94 ms peak. These are headless timings, not
+mobile/rendered FPS. The target is iPhone 14, but sustained 60 FPS and Hole.io
+visual quality remain unverified. Local browser preview access was denied;
+no bypass was attempted. [Detailed evidence and run instructions](experiments/hole-city/docs/mobile-iteration-20260927.md).
+
 ## 2026-09-23 · Offline NPC dialogue, authority and axe lifecycle
 
 The overnight fixture added a bounded dialogue receipt, 30-case/ten-resident
@@ -44,7 +2847,7 @@ verification blockers. [Art validation](docs/validation/starting-city-art-pass-2
 
 ## 2026-09-21 · Git attribution and main publication
 
-GitHub's API resolves both current author emails (`qdotafs@gmail.com` and `148285081+dotafs2@users.noreply.github.com`) to `dotafs2`. The latest continuation branch at `e3511b28` has 132 commits beyond default branch `main` at `13fd766e`; all 132 use those associated emails. Their absence from the default branch explains the missing recent profile contributions. The local global fallback was still `dotafs <dotafs@work>`; global and repository defaults are now the verified `dotafs2` noreply identity, and the repository instructions pin this identity for subsequent authorized commits.
+GitHub's API resolves both current author emails (`[private developer account]` and `148285081+dotafs2@users.noreply.github.com`) to `dotafs2`. The latest continuation branch at `e3511b28` has 132 commits beyond default branch `main` at `13fd766e`; all 132 use those associated emails. Their absence from the default branch explains the missing recent profile contributions. The local global fallback was still `dotafs <dotafs@work>`; global and repository defaults are now the verified `dotafs2` noreply identity, and the repository instructions pin this identity for subsequent authorized commits.
 
 The user authorized integrating the complete continuation history into `main`. This delivery preserves existing commit hashes and uses fast-forward integration. Fresh Godot 4.7.2 resident graph checks passed 33/33, and full-map checks passed 15,217/15,217 across 762 routes; both owned processes exited cleanly. These are bounded navigation regressions, not a full-project certification. The September 13 legacy commit `02110668` uses the unassociated `dotafs@work` address and remains unchanged; correcting that original object's identity would require a separate historical rewrite. The current visible conversation is refreshed in its existing archive before publication; final remote SHA, GitHub attribution and downloaded archive hashes are verified after pushing.
 

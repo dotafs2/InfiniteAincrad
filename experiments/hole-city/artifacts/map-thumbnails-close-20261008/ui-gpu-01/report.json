@@ -1,0 +1,241 @@
+{
+	"checks": 574,
+	"failures": [],
+	"observations": [
+		{
+			"canvas": "(540.0, 1174.0)",
+			"file": "fresh-city-tall.png",
+			"focus": "city",
+			"selected_map": "city",
+			"status": {
+				"available": true,
+				"condition": "Ready to play",
+				"current": 0,
+				"id": "city",
+				"progress": "Unlocked",
+				"required_map": "",
+				"required_name": "",
+				"target": 0,
+				"unlocked": true
+			},
+			"viewport": "(540, 1174)"
+		},
+		{
+			"canvas": "(540.0, 1174.0)",
+			"file": "locked-food-tall.png",
+			"focus": "food",
+			"selected_map": "city",
+			"status": {
+				"available": true,
+				"condition": "Finish Sunny City",
+				"current": 0,
+				"id": "food",
+				"progress": "0 / 1 RUN",
+				"required_map": "city",
+				"required_name": "Sunny City",
+				"target": 1,
+				"unlocked": false
+			},
+			"viewport": "(540, 1174)"
+		},
+		{
+			"canvas": "(540.0, 1174.0)",
+			"file": "locked-frost-tall.png",
+			"focus": "frost",
+			"selected_map": "city",
+			"status": {
+				"available": true,
+				"condition": "Score 300 in Bubble Toy Town",
+				"current": 0,
+				"id": "frost",
+				"progress": "0 / 300 POINTS",
+				"required_map": "toys",
+				"required_name": "Bubble Toy Town",
+				"target": 300,
+				"unlocked": false
+			},
+			"viewport": "(540, 1174)"
+		},
+		{
+			"canvas": "(540.0, 1174.0)",
+			"file": "toy-progress-tall.png",
+			"focus": "toys",
+			"selected_map": "city",
+			"status": {
+				"available": true,
+				"condition": "Score 200 in Snack Garden",
+				"current": 125,
+				"id": "toys",
+				"progress": "125 / 200 POINTS",
+				"required_map": "food",
+				"required_name": "Snack Garden",
+				"target": 200,
+				"unlocked": false
+			},
+			"viewport": "(540, 1174)"
+		},
+		{
+			"canvas": "(540.0, 1174.0)",
+			"file": "unlocked-city-tall.png",
+			"focus": "city",
+			"selected_map": "city",
+			"status": {
+				"available": true,
+				"condition": "Ready to play",
+				"current": 0,
+				"id": "city",
+				"progress": "Unlocked",
+				"required_map": "",
+				"required_name": "",
+				"target": 0,
+				"unlocked": true
+			},
+			"viewport": "(540, 1174)"
+		},
+		{
+			"canvas": "(540.0, 1174.0)",
+			"file": "unlocked-food-tall.png",
+			"focus": "food",
+			"selected_map": "food",
+			"status": {
+				"available": true,
+				"condition": "Finish Sunny City",
+				"current": 1,
+				"id": "food",
+				"progress": "Unlocked",
+				"required_map": "city",
+				"required_name": "Sunny City",
+				"target": 1,
+				"unlocked": true
+			},
+			"viewport": "(540, 1174)"
+		},
+		{
+			"canvas": "(540.0, 1174.0)",
+			"file": "unlocked-toys-tall.png",
+			"focus": "toys",
+			"selected_map": "toys",
+			"status": {
+				"available": true,
+				"condition": "Score 200 in Snack Garden",
+				"current": 125,
+				"id": "toys",
+				"progress": "Unlocked",
+				"required_map": "food",
+				"required_name": "Snack Garden",
+				"target": 200,
+				"unlocked": true
+			},
+			"viewport": "(540, 1174)"
+		},
+		{
+			"canvas": "(540.0, 1174.0)",
+			"file": "unlocked-frost-tall.png",
+			"focus": "frost",
+			"selected_map": "frost",
+			"status": {
+				"available": true,
+				"condition": "Score 300 in Bubble Toy Town",
+				"current": 0,
+				"id": "frost",
+				"progress": "Unlocked",
+				"required_map": "toys",
+				"required_name": "Bubble Toy Town",
+				"target": 300,
+				"unlocked": true
+			},
+			"viewport": "(540, 1174)"
+		},
+		{
+			"canvas": "(540.0, 961.0)",
+			"file": "layout-375-city.png",
+			"focus": "city",
+			"selected_map": "city",
+			"status": {
+				"available": true,
+				"condition": "Ready to play",
+				"current": 0,
+				"id": "city",
+				"progress": "Unlocked",
+				"required_map": "",
+				"required_name": "",
+				"target": 0,
+				"unlocked": true
+			},
+			"viewport": "(374, 666)"
+		},
+		{
+			"canvas": "(540.0, 961.0)",
+			"file": "layout-375-frost.png",
+			"focus": "frost",
+			"selected_map": "frost",
+			"status": {
+				"available": true,
+				"condition": "Score 300 in Bubble Toy Town",
+				"current": 0,
+				"id": "frost",
+				"progress": "Unlocked",
+				"required_map": "toys",
+				"required_name": "Bubble Toy Town",
+				"target": 300,
+				"unlocked": true
+			},
+			"viewport": "(374, 666)"
+		},
+		{
+			"canvas": "(540.0, 1173.0)",
+			"file": "layout-440-city.png",
+			"focus": "city",
+			"selected_map": "city",
+			"status": {
+				"available": true,
+				"condition": "Ready to play",
+				"current": 0,
+				"id": "city",
+				"progress": "Unlocked",
+				"required_map": "",
+				"required_name": "",
+				"target": 0,
+				"unlocked": true
+			},
+			"viewport": "(440, 956)"
+		},
+		{
+			"canvas": "(540.0, 1173.0)",
+			"file": "layout-440-frost.png",
+			"focus": "frost",
+			"selected_map": "frost",
+			"status": {
+				"available": true,
+				"condition": "Score 300 in Bubble Toy Town",
+				"current": 0,
+				"id": "frost",
+				"progress": "Unlocked",
+				"required_map": "toys",
+				"required_name": "Bubble Toy Town",
+				"target": 300,
+				"unlocked": true
+			},
+			"viewport": "(440, 956)"
+		},
+		{
+			"canvas": "(540.0, 1055.209)",
+			"file": "safe-insets-frost.png",
+			"focus": "frost",
+			"selected_map": "frost",
+			"status": {
+				"available": true,
+				"condition": "Score 300 in Bubble Toy Town",
+				"current": 0,
+				"id": "frost",
+				"progress": "Unlocked",
+				"required_map": "toys",
+				"required_name": "Bubble Toy Town",
+				"target": 300,
+				"unlocked": true
+			},
+			"viewport": "(440, 956)"
+		}
+	],
+	"scope": "Real touch/mouse viewport routing, locked browsing, layout and screenshot resources. Entitlements in the existing-player section are explicit test fixtures; acquisition is checked separately."
+}

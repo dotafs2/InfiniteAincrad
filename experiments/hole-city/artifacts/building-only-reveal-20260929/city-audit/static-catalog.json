@@ -1,0 +1,81 @@
+{
+  "scope": "Read-only static city catalog/material audit before root building-policy revision; no engine, browser, pixels or runtime mutation.",
+  "asset_count": 208,
+  "building_count": 48,
+  "building_kinds": {
+    "row_house": 6,
+    "corner_shop": 6,
+    "brick_apartment": 6,
+    "office": 6,
+    "warehouse": 6,
+    "townhouse": 6,
+    "hotel": 6,
+    "civic_hall": 6
+  },
+  "building_dimensions_min": [
+    4.325,
+    4.47,
+    6.35
+  ],
+  "non_buildings_passing_old_numeric_dimensions": [
+    {
+      "id": "159_palm_03",
+      "group": "plant",
+      "kind": "palm",
+      "size": [
+        2.4,
+        3.0100000000000002,
+        2.4
+      ]
+    },
+    {
+      "id": "160_palm_04",
+      "group": "plant",
+      "kind": "palm",
+      "size": [
+        2.3823543678751973,
+        3.24,
+        2.419106024082717
+      ]
+    },
+    {
+      "id": "164_birch_04",
+      "group": "plant",
+      "kind": "birch",
+      "size": [
+        2.4075835490610857,
+        3.90505,
+        2.3819348378609266
+      ]
+    },
+    {
+      "id": "168_maple_04",
+      "group": "plant",
+      "kind": "maple",
+      "size": [
+        2.5040282637597095,
+        3.5850000000000004,
+        2.4280346643471473
+      ]
+    },
+    {
+      "id": "172_oak_04",
+      "group": "plant",
+      "kind": "oak",
+      "size": [
+        2.4075835490610857,
+        3.5850000000000004,
+        2.4280346643471473
+      ]
+    }
+  ],
+  "actual_nonbuilding_category_misclassifications_found": [],
+  "analyzed_reveal_source_sha256": "add22f020b110425f6bb5002f4b58c324ba9a387c448b354f560ffa7f22ddd6a",
+  "current_read_hashes": {
+    "assets/city_kit/manifest.json": "5e63b98e3d996f13785b48d14bd17c32a959dddf9065a126c62db1eefbeffc70",
+    "fidelity/catalog_city.gd": "ef3b0bb740f5f0a97e270bc1460514a766893c7523533a562a75f80647d66b28",
+    "fidelity/static_batch.gd": "5a81f7177ee0ff8d473a52abd5741e56dd20e2e84fbcfd4c3740b91d2f3b1ae3",
+    "fidelity/palette.gdshader": "c5897f00cc44319c25bc69ce994a0e6864e60a88944294565f9e2fcc34558e91",
+    "fidelity/swallowable.gd": "0f65a7eebe9628fd49ff0879f07a64a8b7980a556dd79ec346aaba4f96d9a78b"
+  }
+}

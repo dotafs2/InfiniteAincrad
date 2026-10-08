@@ -1,0 +1,313 @@
+[
+  {
+    "suite": "portrait",
+    "passed": true,
+    "report": {
+      "checks": 30,
+      "citizens": 64,
+      "edible_objects": 604,
+      "failures": [],
+      "unique_models": 208
+    }
+  },
+  {
+    "suite": "destruction_traffic",
+    "passed": true,
+    "report": {
+      "checks": 10,
+      "failures": [],
+      "fragments": 32,
+      "styles": 6,
+      "traffic": 8
+    }
+  },
+  {
+    "suite": "skin_skill",
+    "passed": true,
+    "report": {
+      "checks": 22,
+      "failures": [],
+      "progress": 420,
+      "skins": 10
+    }
+  },
+  {
+    "suite": "skin_fx",
+    "passed": true,
+    "report": {
+      "checks": 31,
+      "failures": [],
+      "shader_profiles": 9,
+      "skins": 10
+    }
+  },
+  {
+    "suite": "title_navigation",
+    "passed": true,
+    "report": {
+      "checks": 17,
+      "classic_slots": 5,
+      "failures": [],
+      "special_slots": 5
+    }
+  },
+  {
+    "suite": "no_tether",
+    "passed": true,
+    "report": {
+      "checks": 10,
+      "failures": []
+    }
+  },
+  {
+    "suite": "resonance_action",
+    "passed": true,
+    "report": {
+      "checks": 13,
+      "failures": [],
+      "pulls": 2,
+      "pylons": 5
+    }
+  },
+  {
+    "suite": "ads_bridge",
+    "passed": true,
+    "report": {
+      "checks": 5,
+      "failures": [],
+      "native_available": false
+    }
+  },
+  {
+    "suite": "mobile_maps",
+    "passed": true,
+    "report": {
+      "checks": 27,
+      "failures": []
+    }
+  },
+  {
+    "suite": "rim_fall",
+    "passed": true,
+    "report": {
+      "checks": 25,
+      "failures": [],
+      "results": [
+        {
+          "case": "car",
+          "collected": 1,
+          "max_tilt_deg": 164.219400962865,
+          "seconds": 1.2,
+          "visible_tilt_deg": 102.00674598804
+        },
+        {
+          "case": "turned_car",
+          "collected": 1,
+          "max_tilt_deg": 128.63534842968,
+          "seconds": 1.06666666666667,
+          "visible_tilt_deg": 82.3198991675988
+        },
+        {
+          "case": "lamp",
+          "collected": 1,
+          "max_tilt_deg": 63.927843226139,
+          "seconds": 2.48333333333333,
+          "visible_tilt_deg": 63.927843226139
+        },
+        {
+          "case": "tall_box_bridge",
+          "collected": 0,
+          "max_tilt_deg": 60.0951779328967,
+          "seconds": 15.0,
+          "visible_tilt_deg": 60.0951779328967
+        },
+        {
+          "case": "centered_box",
+          "collected": 1,
+          "max_tilt_deg": 0.0,
+          "seconds": 0.716666666666667,
+          "visible_tilt_deg": 0.0
+        }
+      ]
+    }
+  },
+  {
+    "suite": "fidelity",
+    "passed": true,
+    "report": {
+      "checks": 24,
+      "city_reachability": {
+        "level": 8,
+        "phase": "complete",
+        "rivals_retired_for_fixture": true,
+        "score": 422,
+        "seconds": 117.549999999995,
+        "ticks": 7053
+      },
+      "failures": [],
+      "live_rival_run": {
+        "level": 8,
+        "phase": "complete",
+        "score": 425,
+        "seconds": 103.233333333329,
+        "ticks": 6194
+      },
+      "objects": 604
+    }
+  },
+  {
+    "suite": "food_round",
+    "passed": true,
+    "report": {
+      "passed": true,
+      "rounds": [
+        {
+          "contested": true,
+          "food": {
+            "berry": 10,
+            "burger": 8,
+            "cake": 7,
+            "cookie": 9,
+            "donut": 8,
+            "person": 3,
+            "signal_pylon": 1,
+            "sushi": 3
+          },
+          "phase": "complete",
+          "score": 426,
+          "seconds": 106.349999999995
+        },
+        {
+          "contested": false,
+          "food": {
+            "berry": 72,
+            "burger": 9,
+            "cake": 1,
+            "cookie": 68,
+            "donut": 38,
+            "person": 30,
+            "signal_pylon": 5,
+            "sushi": 3
+          },
+          "phase": "complete",
+          "score": 488,
+          "seconds": 160.633333333353
+        }
+      ]
+    }
+  },
+  {
+    "suite": "actor_fall",
+    "passed": true,
+    "report": {
+      "checks": 30,
+      "failures": []
+    }
+  },
+  {
+    "suite": "rig_fracture",
+    "passed": true,
+    "report": {
+      "checks": 992,
+      "failures": [],
+      "rigs": [
+        {
+          "max_diagonal": 1.93890249729156,
+          "max_y": 1.61339008808136,
+          "min_y": 0.00297252740710974,
+          "role": "police"
+        },
+        {
+          "max_diagonal": 1.85158431529999,
+          "max_y": 1.48179018497467,
+          "min_y": -0.000582762062549591,
+          "role": "thief"
+        },
+        {
+          "max_diagonal": 2.41581964492798,
+          "max_y": 2.03549003601074,
+          "min_y": -0.00110990554094315,
+          "role": "mech"
+        },
+        {
+          "max_diagonal": 1.88415598869324,
+          "max_y": 1.50099003314972,
+          "min_y": 0.00292149093002081,
+          "role": "fat_fries"
+        },
+        {
+          "max_diagonal": 2.05084419250488,
+          "max_y": 1.64419007301331,
+          "min_y": 0.00302332639694214,
+          "role": "firefighter"
+        },
+        {
+          "max_diagonal": 1.92102432250977,
+          "max_y": 1.58179020881653,
+          "min_y": 0.00287086982280016,
+          "role": "chef"
+        },
+        {
+          "max_diagonal": 1.95364487171173,
+          "max_y": 1.42799019813538,
+          "min_y": -0.0679000020027161,
+          "role": "skateboarder"
+        },
+        {
+          "max_diagonal": 1.81325399875641,
+          "max_y": 1.501540184021,
+          "min_y": 0.00289629912003875,
+          "role": "photographer"
+        },
+        {
+          "max_diagonal": 1.82029986381531,
+          "max_y": 1.48179018497467,
+          "min_y": 0.00287086982280016,
+          "role": "jogger"
+        },
+        {
+          "max_diagonal": 1.9633754491806,
+          "max_y": 1.54479026794434,
+          "min_y": 0.0029978035017848,
+          "role": "musician"
+        },
+        {
+          "max_diagonal": 2.14257645606995,
+          "max_y": 1.66959011554718,
+          "min_y": 0.00305018573999405,
+          "role": "construction"
+        },
+        {
+          "max_diagonal": 1.86462688446045,
+          "max_y": 1.5217901468277,
+          "min_y": 0.00287086982280016,
+          "role": "nurse"
+        },
+        {
+          "max_diagonal": 1.73287963867188,
+          "max_y": 1.42299020290375,
+          "min_y": -0.000529985874891281,
+          "role": "cyclist"
+        },
+        {
+          "max_diagonal": 2.15604996681213,
+          "max_y": 1.74779009819031,
+          "min_y": 0.00294089317321777,
+          "role": "superhero"
+        },
+        {
+          "max_diagonal": 1.9105908870697,
+          "max_y": 1.52074003219604,
+          "min_y": 0.00294709787704051,
+          "role": "delivery"
+        },
+        {
+          "max_diagonal": 1.85748767852783,
+          "max_y": 1.53179013729095,
+          "min_y": 0.00110981706529856,
+          "role": "dancer"
+        }
+      ]
+    }
+  }
+]

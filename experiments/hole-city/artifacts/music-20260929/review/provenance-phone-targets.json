@@ -1,0 +1,164 @@
+{
+  "before": {
+    "fidelity/audio.gd": "30775280c6450bc9d3ee3cf4a03da44fe811ae4846dc1bef7b36eea6c2f618e5",
+    "fidelity/audio_bus_layout.tres": "a8b1b249f22929c4305c60424b0c35a0b1734c1ed5d7b1ab36fa2348d0bf4c56",
+    "fidelity/game.gd": "8256e56f4e7d602b8c9a962ad0862e7a1e38f48e08bf5e3123f195690e574a88",
+    "fidelity/ui.gd": "528639a8531eadd50ef46aa76bcf0897c6bc9a64d9b1ad9fb6eca225ab473a91",
+    "fidelity/food_city.gd": "c5eb2bba5632233f07d618e447061fb06e02637fdde4191f97c71de73c31f4f6",
+    "project.godot": "845b8a8b57a3c5b7198bcd56b9cf96cb7a49dfa046d076212f4b63552e724906",
+    "tests/music_review.gd": "7fc7b968ec9026de475a489621e96b2f4e4f858dd688352983fd41d5656dc359",
+    "assets/audio/sunny_city_loop.ogg": "f606d1f9720ebf512fbe1f1110f70992b416a61c990823ee09955e2546df7177",
+    "assets/audio/snack_garden_loop.ogg": "10c680b090cdef83e1520893eb41c4157ab8440d3c5b22e27610b167ce22897b"
+  },
+  "after": {
+    "fidelity/audio.gd": "30775280c6450bc9d3ee3cf4a03da44fe811ae4846dc1bef7b36eea6c2f618e5",
+    "fidelity/audio_bus_layout.tres": "a8b1b249f22929c4305c60424b0c35a0b1734c1ed5d7b1ab36fa2348d0bf4c56",
+    "fidelity/game.gd": "8256e56f4e7d602b8c9a962ad0862e7a1e38f48e08bf5e3123f195690e574a88",
+    "fidelity/ui.gd": "528639a8531eadd50ef46aa76bcf0897c6bc9a64d9b1ad9fb6eca225ab473a91",
+    "fidelity/food_city.gd": "c5eb2bba5632233f07d618e447061fb06e02637fdde4191f97c71de73c31f4f6",
+    "project.godot": "845b8a8b57a3c5b7198bcd56b9cf96cb7a49dfa046d076212f4b63552e724906",
+    "tests/music_review.gd": "7fc7b968ec9026de475a489621e96b2f4e4f858dd688352983fd41d5656dc359",
+    "assets/audio/sunny_city_loop.ogg": "f606d1f9720ebf512fbe1f1110f70992b416a61c990823ee09955e2546df7177",
+    "assets/audio/snack_garden_loop.ogg": "10c680b090cdef83e1520893eb41c4157ab8440d3c5b22e27610b167ce22897b"
+  },
+  "stable": true,
+  "result": {
+    "checks": 118,
+    "evidence": {
+      "phone_targets": [
+        {
+          "font_size": 18,
+          "glyph_width": 86.0,
+          "label": "MUSIC ON",
+          "points_375": [
+            77.7777709960938,
+            44.4444427490234
+          ],
+          "rect": [
+            166.0,
+            20.0,
+            112.0,
+            64.0
+          ],
+          "screen": "home"
+        },
+        {
+          "font_size": 18,
+          "glyph_width": 67.0,
+          "label": "SFX ON",
+          "points_375": [
+            68.055549621582,
+            44.4444427490234
+          ],
+          "rect": [
+            286.0,
+            20.0,
+            98.0,
+            64.0
+          ],
+          "screen": "home"
+        },
+        {
+          "font_size": 18,
+          "glyph_width": 96.0,
+          "label": "MUSIC OFF",
+          "points_375": [
+            77.7777709960938,
+            44.4444427490234
+          ],
+          "rect": [
+            166.0,
+            20.0,
+            112.0,
+            64.0
+          ],
+          "screen": "home"
+        },
+        {
+          "font_size": 18,
+          "glyph_width": 77.0,
+          "label": "SFX OFF",
+          "points_375": [
+            68.055549621582,
+            44.4444427490234
+          ],
+          "rect": [
+            286.0,
+            20.0,
+            98.0,
+            64.0
+          ],
+          "screen": "home"
+        },
+        {
+          "font_size": 21,
+          "glyph_width": 101.0,
+          "label": "MUSIC ON",
+          "points_375": [
+            120.83332824707,
+            44.4444427490234
+          ],
+          "rect": [
+            90.0,
+            681.0,
+            174.0,
+            64.0
+          ],
+          "screen": "pause"
+        },
+        {
+          "font_size": 21,
+          "glyph_width": 77.0,
+          "label": "SFX ON",
+          "points_375": [
+            120.83332824707,
+            44.4444427490234
+          ],
+          "rect": [
+            276.0,
+            681.0,
+            174.0,
+            64.0
+          ],
+          "screen": "pause"
+        },
+        {
+          "font_size": 21,
+          "glyph_width": 112.0,
+          "label": "MUSIC OFF",
+          "points_375": [
+            120.83332824707,
+            44.4444427490234
+          ],
+          "rect": [
+            90.0,
+            681.0,
+            174.0,
+            64.0
+          ],
+          "screen": "pause"
+        },
+        {
+          "font_size": 21,
+          "glyph_width": 88.0,
+          "label": "SFX OFF",
+          "points_375": [
+            120.83332824707,
+            44.4444427490234
+          ],
+          "rect": [
+            276.0,
+            681.0,
+            174.0,
+            64.0
+          ],
+          "screen": "pause"
+        }
+      ]
+    },
+    "failures": [],
+    "scope": "Actual headless engine state and UI input dispatch; no audible/browser autoplay certification."
+  },
+  "prior_evidence": "before-phone-targets/ preserves prior 106-check test and log; it does not certify this revision.",
+  "owned_helper_exit": "Exited with no remaining helper."
+}

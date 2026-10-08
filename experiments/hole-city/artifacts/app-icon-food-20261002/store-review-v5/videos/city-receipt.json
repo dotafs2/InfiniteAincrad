@@ -1,0 +1,303 @@
+{
+  "game_version": "0.12.7",
+  "map": "city",
+  "base_seconds": 90.0,
+  "source_sha256": "9e0430a6049a004a371ecd881e574eb3ed83e3e81b915e6cba760733af0911a7",
+  "output": "artifacts/collapse-surface-20261002/store-review-v4/videos/02-city-swallow.mp4",
+  "output_sha256": "3ec53b6160a1373909af7cc7dc263265c35dd964332f8ed27ac55840e4545daa",
+  "width": 886,
+  "height": 1920,
+  "fps": 30,
+  "seconds": 20.0,
+  "source_ranges_seconds": [
+    [
+      14,
+      20
+    ],
+    [
+      60.0,
+      67.0
+    ],
+    [
+      78.1999999999966,
+      85.1999999999966
+    ]
+  ],
+  "source_range_decision": {
+    "policy": "Actual late whole-building receipt determines last window; all chronological normal-speed cuts",
+    "eligibility": "category=building, elapsed40..<89 from this exact fresh normal capture",
+    "ranking": "Largest actual height * footprint; original receipt order breaks ties",
+    "actual_city_event": {
+      "asset_id": "001_row_house_01",
+      "building_fragment": false,
+      "category": "building",
+      "elapsed": 82.6999999999966,
+      "footprint": 3.92053890228271,
+      "fracture_parent": "",
+      "height": 6.59999990463257,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 2481,
+      "name": "building_001",
+      "points": 48,
+      "world_position": [
+        -16.2579517364502,
+        -8.51215744018555,
+        47.2002906799316
+      ]
+    },
+    "requested_receipt_offset_seconds": -4.5,
+    "last_start_bounds_seconds": [
+      35,
+      83
+    ],
+    "last_end_limit_seconds": 90,
+    "middle_window_rule": "max(25,min(60,last_start-9)), seven seconds",
+    "source_ranges_seconds": [
+      [
+        14,
+        20
+      ],
+      [
+        60.0,
+        67.0
+      ],
+      [
+        78.1999999999966,
+        85.1999999999966
+      ]
+    ],
+    "selected_event_inside_last_window": true,
+    "retimed_or_generated_gameplay": false
+  },
+  "source_capture_sha256": "1e5fe6cb5f49f36b3516b8c1026ab641e9b730af3e8a9294975f9fd62423fed3",
+  "selected_physical_swallow_receipts": [
+    {
+      "asset_id": "089_lamp_01",
+      "building_fragment": false,
+      "category": "lamp",
+      "elapsed": 15.616666666667,
+      "footprint": 0.868340194225311,
+      "fracture_parent": "",
+      "height": 3.26837301254272,
+      "hole_level": 2,
+      "hole_radius": 1.2,
+      "movie_frame": 469,
+      "name": "lamp_206",
+      "points": 1,
+      "world_position": [
+        1.0,
+        -5.17409944534302,
+        6.30000019073486
+      ]
+    },
+    {
+      "asset_id": "090_lamp_02",
+      "building_fragment": false,
+      "category": "lamp",
+      "elapsed": 17.2333333333336,
+      "footprint": 0.868841886520386,
+      "fracture_parent": "",
+      "height": 3.4783730506897,
+      "hole_level": 2,
+      "hole_radius": 1.2,
+      "movie_frame": 517,
+      "name": "lamp_207",
+      "points": 1,
+      "world_position": [
+        3.5,
+        -5.31214046478271,
+        6.30000019073486
+      ]
+    },
+    {
+      "asset_id": "091_lamp_03",
+      "building_fragment": false,
+      "category": "lamp",
+      "elapsed": 18.7500000000002,
+      "footprint": 0.868340194225311,
+      "fracture_parent": "",
+      "height": 3.68837308883667,
+      "hole_level": 2,
+      "hole_radius": 1.2,
+      "movie_frame": 563,
+      "name": "lamp_208",
+      "points": 1,
+      "world_position": [
+        6.0,
+        -5.45404815673828,
+        6.30000019073486
+      ]
+    },
+    {
+      "asset_id": "084_bin_04",
+      "building_fragment": false,
+      "category": "bin",
+      "elapsed": 60.6333333333312,
+      "footprint": 0.49074199795723,
+      "fracture_parent": "",
+      "height": 0.834999978542328,
+      "hole_level": 4,
+      "hole_radius": 2.2,
+      "movie_frame": 1819,
+      "name": "bin_197",
+      "points": 1,
+      "world_position": [
+        36.7999992370605,
+        -3.97772026062012,
+        39.5
+      ]
+    },
+    {
+      "asset_id": "200_photographer_01",
+      "building_fragment": false,
+      "category": "person",
+      "elapsed": 63.983333333331,
+      "footprint": 0.26,
+      "fracture_parent": "",
+      "height": 1.4847000837326,
+      "hole_level": 4,
+      "hole_radius": 2.2,
+      "movie_frame": 1920,
+      "name": "person_522",
+      "points": 1,
+      "world_position": [
+        21.3500003814697,
+        -4.26296806335449,
+        43.9630317687988
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "authored_actor",
+      "elapsed": 65.9833333333309,
+      "footprint": 0.604152143001556,
+      "fracture_parent": "",
+      "height": 1.32999992370605,
+      "hole_level": 4,
+      "hole_radius": 2.2,
+      "movie_frame": 1980,
+      "name": "Recipe_canal_pump_frame",
+      "points": 3,
+      "world_position": [
+        18.3873996734619,
+        -4.34031820297241,
+        50.1660003662109
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "authored_actor",
+      "elapsed": 80.2499999999967,
+      "footprint": 0.901387810707092,
+      "fracture_parent": "",
+      "height": 1.50499999523163,
+      "hole_level": 5,
+      "hole_radius": 3.5,
+      "movie_frame": 2408,
+      "name": "Recipe_interferometer_frame",
+      "points": 3,
+      "world_position": [
+        -11.8165607452393,
+        -4.65172576904297,
+        46.1125526428223
+      ]
+    },
+    {
+      "asset_id": "",
+      "building_fragment": false,
+      "category": "authored_actor",
+      "elapsed": 80.4833333333301,
+      "footprint": 0.559304594993591,
+      "fracture_parent": "",
+      "height": 1.34999990463257,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 2415,
+      "name": "Recipe_star_projector_frame",
+      "points": 3,
+      "world_position": [
+        -11.6816596984863,
+        -4.33031845092773,
+        47.7612419128418
+      ]
+    },
+    {
+      "asset_id": "208_dancer_01",
+      "building_fragment": false,
+      "category": "person",
+      "elapsed": 82.5333333333299,
+      "footprint": 0.26,
+      "fracture_parent": "",
+      "height": 1.51499998569489,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 2476,
+      "name": "person_562",
+      "points": 1,
+      "world_position": [
+        -20.8737201690674,
+        -4.45927381515503,
+        46.56201171875
+      ]
+    },
+    {
+      "asset_id": "001_row_house_01",
+      "building_fragment": false,
+      "category": "building",
+      "elapsed": 82.6999999999966,
+      "footprint": 3.92053890228271,
+      "fracture_parent": "",
+      "height": 6.59999990463257,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 2481,
+      "name": "building_001",
+      "points": 48,
+      "world_position": [
+        -16.2579517364502,
+        -8.51215744018555,
+        47.2002906799316
+      ]
+    },
+    {
+      "asset_id": "196_fat_fries_01",
+      "building_fragment": false,
+      "category": "person",
+      "elapsed": 83.1833333333299,
+      "footprint": 0.26,
+      "fracture_parent": "",
+      "height": 1.48409998416901,
+      "hole_level": 6,
+      "hole_radius": 5.1,
+      "movie_frame": 2496,
+      "name": "person_566",
+      "points": 1,
+      "world_position": [
+        -19.3390502929688,
+        -4.26326847076416,
+        43.1500015258789
+      ]
+    }
+  ],
+  "normal_play_swallow_count": 77,
+  "full_decode_verified": true,
+  "natural_building_fragment_count": 0,
+  "selected_building_fragment_count": 0,
+  "natural_whole_building_count": 1,
+  "selected_whole_building_count": 1,
+  "audio": {
+    "mean_db": -33.3,
+    "peak_db": -16.5
+  },
+  "normal_speed_chronological_cuts": true,
+  "physical_iphone_capture": false,
+  "full_frame_hud_uncovered": true,
+  "video_caption_overlay": false,
+  "poster_is_uncovered_video_frame": true,
+  "visual_review_required": true,
+  "uploaded": false,
+  "scope": "Fresh actual current Mac scene/audio capture with real physics receipts. Complete HUD remains visible; no title banner, generated gameplay, HUD replacement or old media reuse. Titles appear outside the HTML player only."
+}

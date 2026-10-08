@@ -1,0 +1,14 @@
+{
+  "checks": 483,
+  "receipt": "final.json",
+  "source_sha256": {
+    "fidelity/food_preview.gd": "ffeb9e939e03de4b0aaeb1ea11a7f2a3fc645c4b6bc66fa022b14bad7f69df9b",
+    "tests/food_preview_acceptance.gd": "ccefaa5a9f37cafd7b2e5dd41883d7c5fdb9bd1b0e62b576ed4405b0b5b95c6e",
+    "fidelity/food_city.gd": "4d9523a275990adbbbaa8cd2f2efccfebe747bda119003276a89b06af4a1e84b",
+    "fidelity/food_shapes.gd": "83808ada67a6dca18fe0597f16d8923912aab9a82aa34e98af3e3199f08fa496",
+    "fidelity/food_glaze.gdshader": "75d79551d9715bf8796490fcb5bfe63cb508622074bcc12b57fc7491893526b2"
+  },
+  "headless": true,
+  "scope": "Actual mesh bounds/resources/process callback only; no screenshot, browser or phone performance claim",
+  "initial_harness_parse_errors": "Two WeakRef variable annotations corrected in the new author test; retained parse-failed logs."
+}

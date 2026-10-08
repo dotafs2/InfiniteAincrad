@@ -1,0 +1,291 @@
+{
+  "authoring": "Original purpose-built crowd LODs and reduced derivatives of Gate Siege's authored hero meshes.",
+  "builder": "art_source/build_mobile_lods.py",
+  "blender_version": "5.2.2 LTS",
+  "source_glbs_unchanged": true,
+  "source_models": {
+    "zombie": {
+      "triangles": 1948,
+      "surfaces": 1,
+      "vertices": 1382,
+      "bounds_godot": {
+        "min": [
+          -0.15973010659217834,
+          0,
+          -0.202201709151268
+        ],
+        "max": [
+          0.15973009169101715,
+          0.6499999761581421,
+          0.1274147778749466
+        ]
+      },
+      "all_surfaces_vertex_color": true,
+      "material_classes": [
+        "zombie_vertex_palette"
+      ],
+      "bytes": 73820,
+      "sha256": "9a5bdde6a67f48d506380063608dd4489dd7acf29dbebbcdf3bf639621657975"
+    },
+    "infantry": {
+      "triangles": 3410,
+      "surfaces": 1,
+      "vertices": 2638,
+      "bounds_godot": {
+        "min": [
+          -0.22208739817142487,
+          0,
+          -0.5107887983322144
+        ],
+        "max": [
+          0.22208739817142487,
+          1,
+          0.15017388761043549
+        ]
+      },
+      "all_surfaces_vertex_color": true,
+      "material_classes": [
+        "infantry_vertex_palette"
+      ],
+      "bytes": 137848,
+      "sha256": "8b5d873f63bd20f17ef277517396219637971562da4b260a509c568a8d94716e"
+    },
+    "gunner": {
+      "triangles": 14308,
+      "surfaces": 12,
+      "vertices": 10621,
+      "bounds_godot": {
+        "min": [
+          -0.6069355607032776,
+          0,
+          -1.016844630241394
+        ],
+        "max": [
+          0.6069356203079224,
+          1.7999999523162842,
+          0.4362349510192871
+        ]
+      },
+      "all_surfaces_vertex_color": false,
+      "material_classes": [
+        "black",
+        "dark_steel",
+        "navy",
+        "steel",
+        "blue",
+        "blue_light",
+        "skin",
+        "tan",
+        "skin_light",
+        "ivory",
+        "gold",
+        "light_gold"
+      ],
+      "bytes": 437488,
+      "sha256": "9ce1490a96751dface8d2cf5b637f8fa04b490111d3ddc5eba3ae2119d57dfdf"
+    },
+    "mech": {
+      "triangles": 14256,
+      "surfaces": 7,
+      "vertices": 9673,
+      "bounds_godot": {
+        "min": [
+          -1.0144755840301514,
+          0,
+          -0.5875923037528992
+        ],
+        "max": [
+          1.0144755840301514,
+          3.4000000953674316,
+          0.45952728390693665
+        ]
+      },
+      "all_surfaces_vertex_color": false,
+      "material_classes": [
+        "dark_steel",
+        "gold",
+        "light_gold",
+        "blue",
+        "cyan",
+        "steel",
+        "black"
+      ],
+      "bytes": 402148,
+      "sha256": "5464b6aaf6d77098fa804a684eecdc90dbddb4059498bf2156a34a7eea2ab61b"
+    }
+  },
+  "models": [
+    {
+      "triangles": 320,
+      "surfaces": 1,
+      "vertices": 230,
+      "bounds_godot": {
+        "min": [
+          -0.15973010659217834,
+          0,
+          -0.202201709151268
+        ],
+        "max": [
+          0.15973009169101715,
+          0.6499999761581421,
+          0.1274147778749466
+        ]
+      },
+      "all_surfaces_vertex_color": true,
+      "material_classes": [
+        "mobile_crowd"
+      ],
+      "bytes": 11368,
+      "sha256": "7d6a477e7b589ad6b8c7e733585d68717bd0d6aac855ce50615462124ee3fcc4",
+      "name": "zombie_near",
+      "triangle_budget": 350,
+      "facing_godot": "-Z",
+      "origin": "feet",
+      "textures": 0
+    },
+    {
+      "triangles": 144,
+      "surfaces": 1,
+      "vertices": 110,
+      "bounds_godot": {
+        "min": [
+          -0.15973010659217834,
+          0,
+          -0.202201709151268
+        ],
+        "max": [
+          0.15973009169101715,
+          0.6499999761581421,
+          0.1274147778749466
+        ]
+      },
+      "all_surfaces_vertex_color": true,
+      "material_classes": [
+        "mobile_crowd.001"
+      ],
+      "bytes": 5992,
+      "sha256": "c1d91779f3f4002c009f7ac511485839c9361386e43fe94f1987ad88f8f84039",
+      "name": "zombie_mid",
+      "triangle_budget": 160,
+      "facing_godot": "-Z",
+      "origin": "feet",
+      "textures": 0
+    },
+    {
+      "triangles": 66,
+      "surfaces": 1,
+      "vertices": 127,
+      "bounds_godot": {
+        "min": [
+          -0.15973010659217834,
+          0,
+          -0.202201709151268
+        ],
+        "max": [
+          0.15973009169101715,
+          0.6499999761581421,
+          0.1274147778749466
+        ]
+      },
+      "all_surfaces_vertex_color": true,
+      "material_classes": [
+        "mobile_crowd.002"
+      ],
+      "bytes": 6132,
+      "sha256": "992a4da3305bad2042a076fe31543615f229fa795316f943537d761b7058d8b3",
+      "name": "zombie_far",
+      "triangle_budget": 70,
+      "facing_godot": "-Z",
+      "origin": "feet",
+      "textures": 0
+    },
+    {
+      "triangles": 2199,
+      "surfaces": 1,
+      "vertices": 1931,
+      "bounds_godot": {
+        "min": [
+          -0.22208739817142487,
+          0,
+          -0.5107887983322144
+        ],
+        "max": [
+          0.22208739817142487,
+          1,
+          0.15017388761043549
+        ]
+      },
+      "all_surfaces_vertex_color": true,
+      "material_classes": [
+        "mobile_soft"
+      ],
+      "bytes": 83872,
+      "sha256": "1cadb48c4b074f1c01550c99df7a216d28830130fac2f3516cc5bf095f789089",
+      "name": "infantry",
+      "triangle_budget": 4000,
+      "facing_godot": "-Z",
+      "origin": "feet",
+      "textures": 0
+    },
+    {
+      "triangles": 3599,
+      "surfaces": 2,
+      "vertices": 3566,
+      "bounds_godot": {
+        "min": [
+          -0.6069355607032776,
+          0,
+          -1.016844630241394
+        ],
+        "max": [
+          0.6069356203079224,
+          1.7999999523162842,
+          0.4362349510192871
+        ]
+      },
+      "all_surfaces_vertex_color": true,
+      "material_classes": [
+        "mobile_soft.001",
+        "mobile_metal"
+      ],
+      "bytes": 152024,
+      "sha256": "bada821ef3c87e3a2191eab06246364402dc096b281c6f57033724869c568f5c",
+      "name": "gunner",
+      "triangle_budget": 4000,
+      "facing_godot": "-Z",
+      "origin": "feet",
+      "textures": 0
+    },
+    {
+      "triangles": 3700,
+      "surfaces": 3,
+      "vertices": 3082,
+      "bounds_godot": {
+        "min": [
+          -1.0144755840301514,
+          0,
+          -0.5875923037528992
+        ],
+        "max": [
+          1.0144755840301514,
+          3.4000000953674316,
+          0.45952728390693665
+        ]
+      },
+      "all_surfaces_vertex_color": true,
+      "material_classes": [
+        "mobile_metal.001",
+        "mobile_soft.002",
+        "mobile_emissive"
+      ],
+      "bytes": 136160,
+      "sha256": "a505eec57aa79d185873896a1c4c631d3573a0f8d9012589749e9f7ac2c3af0b",
+      "name": "mech",
+      "triangle_budget": 4000,
+      "facing_godot": "-Z",
+      "origin": "feet",
+      "textures": 0
+    }
+  ],
+  "scope": "Mesh substitution only; no enemy deletion, collision, wave, damage, save or hitbox edits."
+}

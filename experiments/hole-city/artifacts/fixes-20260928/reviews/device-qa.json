@@ -1,0 +1,26 @@
+{
+  "injection": {
+    "checks": 17,
+    "failures": [],
+    "scope": "Synthetic local HTML/package fixtures; not browser or phone evidence"
+  },
+  "recorder": {
+    "checks": 19,
+    "failures": [],
+    "scope": "Independent synthetic VM/clock/DOM; not browser or phone performance"
+  },
+  "author_suite": {
+    "checks": 12,
+    "failures": [],
+    "scope": "Synthetic DOM/frame clock; not browser rendering or phone evidence"
+  },
+  "reviewed_sha256": {
+    "tools/device_qa.js": "128c4d196a0da5952514a96c6c91a89756a5d1196f29f99ac395208ada06059e",
+    "fidelity/device_qa.gd": "b9246ba88c85a499515cab0368bd28a1e0b58429fd593c4e7ee209d24abab429",
+    "fidelity/game.gd": "b408061e409281654bd10497cb36e492621f369ec282600aa3f298e02bb3cff7",
+    "tools/release_web.py": "41c67d76d687b30f0f3544f52b357314042ce6281a610602601da553747da608",
+    "tests/device_qa_test.cjs": "6279b323e044bc2393643c965dfddaef86c354bf1710d36086815647373d75cd",
+    "tests/review_device_qa.py": "4b18af760ffc8778c67f2701f99332d8bb7a8446e5a96da2af71cf339b7e2d87",
+    "tests/review_device_qa.cjs": "25aee5121164ffd7a85e54a4f088b574bcc72db18cfbd63e31781c4e5b4dc866"
+  }
+}

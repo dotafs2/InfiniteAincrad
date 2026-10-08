@@ -1,0 +1,116 @@
+{
+  "version": "0.8.3",
+  "failures": [],
+  "source_checks": 32070,
+  "packaged_checks": 32070,
+  "shader_programs": 10,
+  "shader_cases": 41,
+  "cpu_samples": 2400,
+  "traces": [
+    {
+      "file": "cpu/city-opening-1.json",
+      "sha256": "7c8de6ac5b553ec425c3d190b0a87cf74a961be8f5bc7c37f17c32953b3ea09d"
+    },
+    {
+      "file": "cpu/city-grown-1.json",
+      "sha256": "069bc9470497a0e5c6bacb088ff213a4c83dbb5d8d99dbbd081db9aaa84d42db"
+    },
+    {
+      "file": "cpu/food-opening-1.json",
+      "sha256": "bb6587f0a3b17256c74bbd241672def0e137e3e1e6bf9a937264f1078a8346b6"
+    },
+    {
+      "file": "cpu/food-grown-1.json",
+      "sha256": "1c79fd29599c601516c0cffa0d61f9d679809419a17d50499bc5a11329603a0b"
+    }
+  ],
+  "http_artifacts": {
+    "index.apple-touch-icon.png": {
+      "sha256": "1706a7bd4a44e619bee9149b9bad4be7635910e0ea24ac17d4d8b0569a2c56f3",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.wasm": {
+      "sha256": "f6090f055e16765bcef5dc3a031f68ab40c151d9e7f0541d9d7eb61e92dc5051",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.icon.png": {
+      "sha256": "921c12a6e542b19617674e285a52e839bc0f5fc7dbe7407e802dd8428dd81768",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "device-qa.js": {
+      "sha256": "128c4d196a0da5952514a96c6c91a89756a5d1196f29f99ac395208ada06059e",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.html": {
+      "sha256": "89ee42915869e8c11a55671564fc3c1f3f31d2c564582c5726ef4eb97394183f",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.png": {
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.audio.worklet.js": {
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.js": {
+      "sha256": "1e5437ee16d35bf6f8a3b28e6f70f310ee5da12acab3222a06e8c223cb61757c",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.audio.position.worklet.js": {
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    },
+    "index.pck": {
+      "sha256": "8d7146294219af06ad467873181533d52ccb2e4ee3031588a60071f4550ad847",
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cache-Control": "no-store"
+      }
+    }
+  },
+  "receipt_sha256": {
+    "release/release.json": "314b4afe58a2facc0940f87c6d91476fe31a31287a1b15ee1099ad92e5c287f5",
+    "shader-probe-final/result.json": "42ac38f55372c249c38fb8adf7de13617560ec09ac8cebcbe30bb0c5f1a6073f",
+    "cpu/summary.json": "13858641be6f274af043b42bcae972a97b3488471884e0a17d716ea87b11d416"
+  },
+  "verification_tool_sha256": "f56e30737b537defbc72318ce9f27e2991864b87b613df14e8e6b12c82824794",
+  "limitation": "Static HTTP delivery, headless scene/CPU checks and isolated shader equations; no browser/game capture or iPhone certification"
+}

@@ -1,0 +1,104 @@
+{
+  "scope": "Python fixtures only; no Godot, network, real release or CPU execution",
+  "verifier_sha256": "7e96ec267e461df858c33ea85fa1b288781e89ec039b688bdabf6038971349c2",
+  "cases": [
+    {
+      "case": "complete valid evidence",
+      "result": "accepted"
+    },
+    {
+      "case": "empty source acceptance log",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "mismatched acceptance completion",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "extra stale served file",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "wrong recorder completion count",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "wrong HTTP cache header",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "wrong served bytes",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "profile helper changed after measurements",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "engine changed after measurements",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "raw data corruption",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "wrong raw scenario with matching logs and hashes",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "wrong percentile with matching logs and hashes",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "wrong sample count with matching logs and hashes",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "wrong version with matching logs and hashes",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "insufficient soak duration",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "insufficient retained food rain",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "wrong aggregate with matching raw hash",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "engine error after valid completion",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "missing raw evidence manifest member",
+      "result": "rejected",
+      "error_type": "AssertionError"
+    },
+    {
+      "case": "HTTP redirect",
+      "result": "rejected"
+    }
+  ]
+}

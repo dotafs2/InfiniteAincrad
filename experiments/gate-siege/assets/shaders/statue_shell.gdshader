@@ -1,0 +1,1 @@
+shader_type spatial; varying float wy; uniform float reveal_y=8.0; uniform vec4 shell_color:source_color=vec4(0.7,0.72,0.78,1.0); void vertex(){wy=(MODEL_MATRIX*vec4(VERTEX,1.0)).y;} void fragment(){if(wy>reveal_y){discard;} ALBEDO=shell_color.rgb; METALLIC=0.78; ROUGHNESS=0.26;}

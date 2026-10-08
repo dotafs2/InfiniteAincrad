@@ -1,0 +1,95 @@
+{
+  "checks": 11,
+  "failures": [],
+  "metrics": {
+    "structural_contacts": [
+      {
+        "at": "(69.6877, 0.025, 43.80433)",
+        "color": "(1.0, 0.3216, 0.6196, 1.0)",
+        "kind": "cake",
+        "serial": 0,
+        "strength": 1.4,
+        "style": "thud",
+        "time": 0.0
+      }
+    ],
+    "traffic": [
+      {
+        "branches": [
+          "Biscuit Approach",
+          "Harbor High Street",
+          "Sundae Avenue",
+          "Frosting Rise",
+          "Market Diagonal"
+        ],
+        "distance_m": [
+          449.997663415968,
+          471.354791479185,
+          482.694187358022,
+          449.776073936373,
+          449.938758656383,
+          490.616468723863,
+          449.997085422277,
+          461.850433550775
+        ],
+        "hz": 30,
+        "jumps": 0,
+        "offroad_corners": 0,
+        "overlaps": 0
+      },
+      {
+        "branches": [
+          "Biscuit Approach",
+          "Harbor High Street",
+          "Sundae Avenue",
+          "Frosting Rise",
+          "Market Diagonal"
+        ],
+        "distance_m": [
+          449.998869679868,
+          471.479316546582,
+          482.695339333266,
+          449.905990974978,
+          449.983913220465,
+          490.712719622999,
+          449.998558741063,
+          461.994034734555
+        ],
+        "hz": 60,
+        "jumps": 0,
+        "offroad_corners": 0,
+        "overlaps": 0
+      },
+      {
+        "branches": [
+          "Biscuit Approach",
+          "Harbor High Street",
+          "Sundae Avenue",
+          "Frosting Rise",
+          "Market Diagonal"
+        ],
+        "distance_m": [
+          449.999536024407,
+          471.537606694736,
+          482.718867652118,
+          449.947407435626,
+          450.006429713219,
+          490.797964996658,
+          449.999355241656,
+          462.032342982478
+        ],
+        "hz": 120,
+        "jumps": 0,
+        "offroad_corners": 0,
+        "overlaps": 0
+      }
+    ]
+  },
+  "source_hash_note": "Null means source text is unavailable in this runtime; package identity is recorded by the release gate.",
+  "source_hashes": {
+    "fidelity/food_body.gd": "acc24c145f8eae9f312c481af8fec9ff482fcf5f34159e56b45d403acc9fd22c",
+    "fidelity/food_city.gd": "0d9303ec16ef78b9cc46bd339d6e8a7b8a1ebb33beab5bf10951a0b8a9223967",
+    "fidelity/food_neighborhoods.gd": "0be501f102e34a9a8fc7707ec133de783885148908aa35be6ae42600c9cf0d8a",
+    "fidelity/food_shapes.gd": "83808ada67a6dca18fe0597f16d8923912aab9a82aa34e98af3e3199f08fa496"
+  }
+}

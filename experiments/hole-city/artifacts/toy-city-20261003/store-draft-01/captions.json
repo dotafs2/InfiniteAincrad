@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "target": "Subsequent accepted three-world release; exact native build pending",
+  "status": "Mixed-version actual-source design draft only",
+  "screenshot_size": [
+    1320,
+    2868
+  ],
+  "gameplay_capture_executed": false,
+  "physical_device_capture": false,
+  "ready_for_upload": false,
+  "cards": [
+    {
+      "order": 1,
+      "id": "01-three-worlds",
+      "headline": [
+        "THREE WORLDS.",
+        "ONE HUNGRY HOLE."
+      ],
+      "benefit": "CHOOSE YOUR WORLD ON HOME",
+      "accent": "#ffcf60",
+      "source": "artifacts/toy-city-20261003/gpu-play-03/toy-home.png",
+      "source_sha256": "e6a25a6e6c30e8226c79c1d5d4c31474a4ff379187837ec170d7f119c4d9213d",
+      "source_version": "0.13.0",
+      "source_scope": "Actual local-candidate HOME with three available map cards; not played-world or device proof.",
+      "headline_font_size": 90
+    },
+    {
+      "order": 2,
+      "id": "02-food-stacks",
+      "headline": [
+        "SMALL BITES.",
+        "GIANT FEASTS."
+      ],
+      "benefit": "WATCH THE FOOD STACKS FALL",
+      "accent": "#97ead8",
+      "source": "artifacts/app-icon-food-20261002/store-review-v5/captures/food-swallow-1.png",
+      "source_sha256": "8af7dcf496d76139dcb9fb5e81f0ac370fe9efbed56e5aa0b678d896a2e04f71",
+      "source_version": "0.12.7",
+      "source_scope": "Preserved authentic V5/V4 normal Mac gameplay; current-candidate recapture pending.",
+      "headline_font_size": 112
+    },
+    {
+      "order": 3,
+      "id": "03-sushi-express",
+      "headline": [
+        "SUSHI.",
+        "ON THE MOVE."
+      ],
+      "benefit": "CHASE THE SUSHI EXPRESS",
+      "accent": "#ffc0ba",
+      "source": "artifacts/app-icon-food-20261002/store-review-v5/captures/sushi-midpoint-3.png",
+      "source_sha256": "d4ac0690399b99909a804e47b3e38136070376a3f3a3947d38ae5eb6efd11b5a",
+      "source_version": "0.12.7",
+      "source_scope": "Preserved actual train-scene Mac capture; current-candidate recapture pending.",
+      "headline_font_size": 112
+    },
+    {
+      "order": 4,
+      "id": "04-toy-castles",
+      "headline": [
+        "TOY CASTLES.",
+        "BIG APPETITE."
+      ],
+      "benefit": "BUBBLE TOY TOWN & ROYAL GUARDS",
+      "accent": "#dbbcff",
+      "source": "artifacts/toy-city-20261003/gpu-play-03/toy-play-105.png",
+      "source_sha256": "677a0c83c0e8044934ebf34ae74b890834ecb134a67781c2a6302160197e6b82",
+      "source_version": "0.13.0",
+      "source_scope": "Actual normal collecting after the paid thirty-second continuation in an isolated QA wallet, at105.0667s; no score/radius/position grants.",
+      "headline_font_size": 112
+    },
+    {
+      "order": 5,
+      "id": "05-sunny-city",
+      "headline": [
+        "EAT YOUR WAY",
+        "THROUGH TOWN."
+      ],
+      "benefit": "SWALLOW SUNNY CITY",
+      "accent": "#9adbf5",
+      "source": "artifacts/app-icon-food-20261002/store-review-v5/captures/city-swallow-1.png",
+      "source_sha256": "e65204f5bda4d1cadbeddd4ec1b1e21eaaeb8623db864de25d7992344bb8764a",
+      "source_version": "0.12.7",
+      "source_scope": "Preserved authentic V5/V4 normal Mac whole-building fall; current-candidate recapture pending.",
+      "headline_font_size": 112
+    }
+  ]
+}

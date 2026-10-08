@@ -1,0 +1,27 @@
+{
+  "scope": "Focused isolated source economy test before root sets0.12.5. Includes real same-world receipts and explicit accepted local SDK fixture callbacks, no real ads/purchases/phone. UI can still change independently.",
+  "before": {
+    "fidelity/game.gd": "504a27f40c60a405045d29fe7472ed8e5c543a77e648acbf4a2281d22ea5ade7",
+    "fidelity/ads_bridge.gd": "0a3769eaddad851ed984671ee3a5e298fbc3b11ee5ed0bcb27ec140dd5f16859",
+    "fidelity/commerce_bridge.gd": "fe08f9bf468b8753a5610f374fee226183823b57a3aa23062db98e93bcb47cf7",
+    "tests/economy_continuation_acceptance.gd": "3b7ba2e94f4222d9331135580aff00a96cc978c535b845540d1782cbc5b28d85"
+  },
+  "after": {
+    "fidelity/game.gd": "504a27f40c60a405045d29fe7472ed8e5c543a77e648acbf4a2281d22ea5ade7",
+    "fidelity/ads_bridge.gd": "0a3769eaddad851ed984671ee3a5e298fbc3b11ee5ed0bcb27ec140dd5f16859",
+    "fidelity/commerce_bridge.gd": "fe08f9bf468b8753a5610f374fee226183823b57a3aa23062db98e93bcb47cf7",
+    "tests/economy_continuation_acceptance.gd": "3b7ba2e94f4222d9331135580aff00a96cc978c535b845540d1782cbc5b28d85"
+  },
+  "ok": true,
+  "unchanged": true,
+  "exit_code": 0,
+  "checks": 120,
+  "failures": [],
+  "engine_errors": [],
+  "ended_at": "2026-10-02T02:43:17.633509+00:00",
+  "report_sha256": "60254b4c6e9c316ea2070c40bd2d976a7df938bf97bb504228460718a96d0acb",
+  "engine_log_sha256": "30f84305fdc27abbf92bc82f48f0558b4a91134143762a47ad851ebdcc58e803",
+  "session_id": 42051,
+  "owned_engine_pid": 27442,
+  "process_state": "ended"
+}

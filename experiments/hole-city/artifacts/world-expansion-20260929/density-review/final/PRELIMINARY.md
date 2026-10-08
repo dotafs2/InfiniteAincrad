@@ -1,0 +1,1 @@
+These receipts cover the first dense layout. A later author correction changes the berry leaf packing coefficient from .71 to .73 and regenerates placement. Do not bind these receipts to the corrected final plan without rerunning. Original files retained.

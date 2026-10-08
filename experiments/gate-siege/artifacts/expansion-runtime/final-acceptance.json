@@ -1,0 +1,308 @@
+{
+  "utc_written": "2026-10-08T12:29:50.614643+00:00",
+  "version": "0.3.1",
+  "status": "accepted_with_measured_limits",
+  "scope": "User-authorized deterministic coverage combat and cosmetic GPU trails. Runtime/integration and short desktop performance acceptance; physical-phone performance and exact-reference visual identity are not certified.",
+  "package": {
+    "path": "artifacts/expansion-runtime/coverage-release-81412f.pck",
+    "sha256": "81412f9adbc68a57530cc3b556e08939c08505d59ddf2f26871860ea8f5083e0",
+    "bytes": 2128804,
+    "source_export": "artifacts/coverage/coverage-release-1.pck",
+    "source_export_same_hash": true
+  },
+  "engine": "Godot4.7.2 stable official ed1daf0bf",
+  "isolation": {
+    "cwd": "/private/tmp/gate-siege-expansion-acceptance-empty",
+    "cwd_entries": [],
+    "main_pack": "absolute immutable coverage-release-81412f.pck",
+    "scripts": "absolute external test/profiler helpers",
+    "fallback_to_source": false
+  },
+  "focused": {
+    "exact_package": {
+      "checks": 197,
+      "failed": 0,
+      "suites": [
+        {
+          "suite": "coverage_review",
+          "checks": 60,
+          "failed": 0,
+          "log": "final-coverage-coverage_review.log"
+        },
+        {
+          "suite": "expansion_review",
+          "checks": 137,
+          "failed": 0,
+          "log": "final-coverage-expansion_review.log"
+        }
+      ]
+    }
+  },
+  "quality_comparison": {
+    "low": {
+      "checkpoints": 180,
+      "equal_to_low": true,
+      "equal_to_reviewed_source": true,
+      "phase": "won",
+      "elapsed": 178.100000000034,
+      "members": 36,
+      "kills": 4374,
+      "bosses": 8,
+      "peak_fields": 20,
+      "peak_moving_projectile_objects": 0
+    },
+    "high": {
+      "checkpoints": 180,
+      "equal_to_low": true,
+      "equal_to_reviewed_source": true,
+      "phase": "won",
+      "elapsed": 178.100000000034,
+      "members": 36,
+      "kills": 4374,
+      "bosses": 8,
+      "peak_fields": 20,
+      "peak_moving_projectile_objects": 0
+    },
+    "battery": {
+      "checkpoints": 180,
+      "equal_to_low": true,
+      "equal_to_reviewed_source": true,
+      "phase": "won",
+      "elapsed": 178.100000000034,
+      "members": 36,
+      "kills": 4374,
+      "bosses": 8,
+      "peak_fields": 20,
+      "peak_moving_projectile_objects": 0
+    },
+    "auto": {
+      "checkpoints": 180,
+      "equal_to_low": true,
+      "equal_to_reviewed_source": true,
+      "phase": "won",
+      "elapsed": 178.100000000034,
+      "members": 36,
+      "kills": 4374,
+      "bosses": 8,
+      "peak_fields": 20,
+      "peak_moving_projectile_objects": 0
+    }
+  },
+  "idle": {
+    "damage_events": 11,
+    "elapsed": 41.7166666666656,
+    "health": 0.0,
+    "kills": 166,
+    "members": 1,
+    "metrics": {
+      "bosses": 0,
+      "breaches": 15,
+      "chain_hits": 0,
+      "damage": 631.393772678135,
+      "elites": 0,
+      "gate2": 42,
+      "gate5": 95,
+      "gate999": 0,
+      "losses": 1,
+      "peak_fields": 9,
+      "peak_packets": 0,
+      "recruits": 0,
+      "shots": 209,
+      "soldiers": 0,
+      "splash_hits": 0,
+      "wave_clears": 0,
+      "wins": 0
+    },
+    "minimum_health": 0.0,
+    "peak_members": 1,
+    "phase": "lost",
+    "policy": "idle",
+    "quality": "low",
+    "seen_waves": [
+      0
+    ],
+    "tier": 0,
+    "wall_seconds": 0.469472,
+    "wave": 1,
+    "wave_entries": [
+      {
+        "elapsed": 0.0,
+        "health": 100.0,
+        "members": 1,
+        "tier": 0,
+        "wave": 1
+      }
+    ]
+  },
+  "gpu": [
+    {
+      "report": "final-coverage-gpu-capped.json",
+      "cap": 30,
+      "adapter": "Apple M1 Pro",
+      "movie_mode": false,
+      "warmup_seconds": 0,
+      "draw_calls_full_scene": 106.0,
+      "primitives_full_scene": 161712.0,
+      "active_max_frame_ms": 38.325,
+      "active_frames_over50ms": 0,
+      "first_scene_outliers": [
+        {
+          "boss_hp": 1000000000000.0,
+          "damage": 0,
+          "elapsed": 0.0,
+          "fields": 0,
+          "ms": 94.419,
+          "nodes": 198,
+          "packets": 0,
+          "physics_us": 0,
+          "recruit_hp": 60.0,
+          "visual_us": 7,
+          "wall": 0.094419,
+          "weapon": "rifle"
+        }
+      ],
+      "measured_package_sha256": "81412f9adbc68a57530cc3b556e08939c08505d59ddf2f26871860ea8f5083e0"
+    },
+    {
+      "report": "final-coverage-gpu-uncapped.json",
+      "cap": 0,
+      "adapter": "Apple M1 Pro",
+      "movie_mode": false,
+      "warmup_seconds": 0,
+      "draw_calls_full_scene": 106.0,
+      "primitives_full_scene": 161712.0,
+      "active_max_frame_ms": 9.647,
+      "active_frames_over50ms": 0,
+      "first_scene_outliers": [
+        {
+          "boss_hp": 1000000000000.0,
+          "damage": 0,
+          "elapsed": 0.0,
+          "fields": 0,
+          "ms": 59.079,
+          "nodes": 198,
+          "packets": 0,
+          "physics_us": 3,
+          "recruit_hp": 60.0,
+          "visual_us": 13,
+          "wall": 0.100628,
+          "weapon": "rifle"
+        }
+      ],
+      "measured_package_sha256": "81412f9adbc68a57530cc3b556e08939c08505d59ddf2f26871860ea8f5083e0"
+    }
+  ],
+  "gpu_limits": [
+    "Apple M1 Pro Compatibility,720x1280,three seconds per scene,normal real60Hz physics,normal engine/driver caches retained.",
+    "Active first-shot/impact/first-warning scenes passed, but first constructed frozen full-scene presentation still records59.079ms uncapped and94.419ms capped.",
+    "No no-stall, cold-install, sustained mobile or low-end Android guarantee."
+  ],
+  "cpu_comparison": {
+    "baseline_package_sha256": "d543c6ec50bc7f377559266d0de7706b15c4024267d89dacdb475147485e1faf",
+    "baseline_file": "physical-cpu-baseline.json",
+    "coverage_file": "coverage-spray-cpu.json",
+    "fixture": "36 members,544 high-HP troops,mixed elites,dragon boss;20 seconds fixed60Hz \u00d73/mode",
+    "rows": [
+      {
+        "mode": "rifle",
+        "physical_mean_us": 1516.4522222222233,
+        "coverage_mean_us": 656.2502777777777,
+        "decrease_percent": 56.72463212747301,
+        "coverage_tick_max_us": 3123.0,
+        "coverage_peak_fields": 17
+      },
+      {
+        "mode": "scatter",
+        "physical_mean_us": 1578.7930555555567,
+        "coverage_mean_us": 421.12999999999965,
+        "decrease_percent": 73.32582642683278,
+        "coverage_tick_max_us": 2318.0,
+        "coverage_peak_fields": 9
+      },
+      {
+        "mode": "rail",
+        "physical_mean_us": 656.7030555555557,
+        "coverage_mean_us": 353.282777777778,
+        "decrease_percent": 46.203573321444516,
+        "coverage_tick_max_us": 2030.0,
+        "coverage_peak_fields": 6
+      },
+      {
+        "mode": "rocket",
+        "physical_mean_us": 658.8633333333333,
+        "coverage_mean_us": 376.97027777777765,
+        "decrease_percent": 42.78475387746913,
+        "coverage_tick_max_us": 1640.0,
+        "coverage_peak_fields": 10
+      },
+      {
+        "mode": "arc",
+        "physical_mean_us": 1560.2066666666667,
+        "coverage_mean_us": 474.2422222222223,
+        "decrease_percent": 69.60388438568678,
+        "coverage_tick_max_us": 2935.0,
+        "coverage_peak_fields": 11
+      }
+    ],
+    "limits": "Combined deterministic coverage,analytic GPU-trail emission,aim lookup and duplicate formation-update optimization. CPU physics timing on this Mac only; not a phone or render-FPS estimate. Damage totals differ under the explicitly revised area contract.",
+    "evidence_hashes": {
+      "physical-cpu-baseline.json": "e02068f2598ddb9ebbf6bf63e006d6952767768d1da810f3dea77322ac968ab6",
+      "coverage-spray-cpu.json": "5d9f301d65189a75b8f953e586b59edd5711cb4206500b67d73a44edd3ff8db0"
+    }
+  },
+  "source_file_sha256": {
+    "project.godot": "8f134483df9d63660332e1ba57c719da4211ae6f48d3336e8874bf97a9b5d508",
+    "scripts/game.gd": "904f2ba29a33c2d5a4757e2665a12ba49fda82a621f131d8c130c98381551ae1",
+    "scripts/squad.gd": "6453b07413b8749fea49ff797fb76a2e739b4fd88a43dcb1b29910d01247d844",
+    "scripts/campaign.gd": "91af8c955244f59d28ba7ccc999dab81528f55eec6c2a86a87abe051123eda49",
+    "scripts/encounters.gd": "76e4b6ed35c10ce9bd58440faf59fb122132cc8b87aea5573238e6d0850b47e4",
+    "scripts/creature_motion.gd": "8370f54487d17176326aaa68eab36b61c8cc493adfe52e06657ae5edc20c1fb8",
+    "scripts/hud.gd": "114846eaefea30ec677c5edd8952808337cfd0eb27770e3fb4fdfcd6ef31bb59",
+    "scripts/coverage_combat.gd": "d37478f371488b635c7dfcc5e4f84e1639765163060fc3d5d0abe937d8735558",
+    "scripts/spray_visual.gd": "b393ad7b656ceb386ad4611b145526e0fc822da9808f5cc2607353646ee2a2fc",
+    "tests/coverage_review.gd": "aa3440759e058ecbd1adada08741d8c4b1b6fcfe38e7f3f0c756ee7b38092e07",
+    "tests/expansion_review.gd": "f481a6409d444e5123b3f2aa517b948cd758bf81b31a840e5149885bcc9cb538",
+    "tools/profile_combat_cpu.gd": "6e9427bb0ad20242e7fdb45ddb57bf63ba6c1fb17f5adb176f7d3ae2a399ae78",
+    "tools/profile_expansion.gd": "994c7dd407427db3618ee3b08a714c3a94e8b5ce318ab0e986db139ec710f639",
+    "assets/shaders/spray_visual.gdshader": "8719eaa2eff304ad57604ed36ff483c87f8e26f4decd2337e6d52c27697f8836",
+    "assets/shaders/attack_warning.gdshader": "131ee71b2f6de120e9fea89a80434cebcb2b4e54c23ec6dfb0fd5d2b6a589c05",
+    "assets/expansion/manifest.json": "3064701e28b4f4e3bd6f603de7b849083545d781927e78da01dbc9245bcfd6f7",
+    "assets/expansion/shadows/manifest.json": "0fe0e3e59155e0d1a6dcb35dd1705ec9923626c7e04ac004c0537c73b2f4b9f1"
+  },
+  "art_sha256": {
+    "assets/expansion/infantry.glb": "8397f76c2b8a787070cd3ebd31aced391475e81c5f8b593c13bc437b3e139528",
+    "assets/expansion/gunner.glb": "68791434d76e55643cdca7da9cdc35d5dd7d4ab0aba4a782141cc3035b6841c0",
+    "assets/expansion/golem.glb": "ac5d03235285d28d07000412cb2161554c00f8828f6dba0c121f52b9c95829cc",
+    "assets/expansion/skitter.glb": "9196991065e35935506c4addb7aabad048f233ca49d86179f05b9c06e49d99de",
+    "assets/expansion/dragon.glb": "0ec53d03e8790736e07ab9516610ac564b905f09e151356f97cfa81287ea738c",
+    "assets/expansion/mech.glb": "0835dccac4e09d9ca7a120e1b456d21518450c5cca2173c678aaa2e88633ff33",
+    "assets/expansion/shadows/mech.png": "379324a1d3e40a6c7fd259537faeec95f282fafed146a3775d58c53637bd8937",
+    "assets/expansion/shadows/infantry.png": "c0cc438bf4b63adc7ee85dc5783bb0c544bff81f315f7d2e322d9ea486fd0bce",
+    "assets/expansion/shadows/gunner.png": "4fbc0cafa8166fe822daa352b938b4b8fdc17f0c628ad87c2e035e29d7ce88f6"
+  },
+  "evidence_sha256": {
+    "final-coverage-gpu-uncapped.json": "8204ca81b542c60316471f0d56ce24587f48f0fc1373c3cd80e1e7a4a26d9942",
+    "final-coverage-gpu-capped.json": "ad9ca8a0e9f973198d5805711fa91751aeb73aa3a3df45578b431db82837ecf4",
+    "final-coverage-quality-auto.json": "f2839c1a5011afd3a342b8f8006574965d1995baaf9f62a7b46eef3eefb76ef8",
+    "final-coverage-quality-low.json": "f0d6942865577d49dcb623d3a70c02971744a0033de68646f2dd7a29a1df99b9",
+    "final-coverage-quality-high.json": "9dd758154cd363f79ee48412c6c70fba4a130d52610e6452c0546309fab5e96d",
+    "final-coverage-idle.json": "82c89b201c37927b24af49475c1373ca799c3520b1465ba7a74bf8198361280a",
+    "final-coverage-quality-battery.json": "e66660d07d89a40f7cebf32633949633cead5ffa24b243731de9c2ff5ac64fe3",
+    "final-coverage-expansion_review.log": "7c1f5eba71947be28bfb7c6a32bd78ed1f30a1d9440e36cc40436bf1c677b045",
+    "final-coverage-coverage_review.log": "7f258b789a030bdf3fac9594a31c88721dadc433dac1d3b74d69ddc4568d48d0",
+    "final-coverage-quality-auto.log": "5504fc106094c3624f7eab259749b5d203ebb901e6ff1c976837292fe5e67f0c",
+    "final-coverage-idle.log": "eb3d74ca3536cdb9a9e65a22dcfaf629d1183f117acaf156104fb35aef220b40",
+    "final-coverage-quality-low.log": "189a4745d948b571db4385788012b0270d308a8a966d95a3e3b8a98284228b02",
+    "final-coverage-gpu-capped.log": "7376ad393dc945be404b55f8c4d68d1860802cd572ba7dc69d8f89cb3c464c9e",
+    "final-coverage-quality-battery.log": "14e95bc457205f606c49b3aee254b0e4822f7eb4ff2db651a877e08b6d046478",
+    "final-coverage-quality-high.log": "932b33e4ec29cdefb10ba2e344e5a3a236bea9644ba6b3175b635ec8973b7336",
+    "final-coverage-gpu-uncapped.log": "33e4d2dbd7b1dae961a2d234dfbdc0ccddc9ef1bd1bbccbbc597e1f9144551f8",
+    "physical-cpu-baseline.json": "e02068f2598ddb9ebbf6bf63e006d6952767768d1da810f3dea77322ac968ab6",
+    "coverage-spray-cpu.json": "5d9f301d65189a75b8f953e586b59edd5711cb4206500b67d73a44edd3ff8db0",
+    "coverage-cpu-comparison.json": "9bfb3942d28cedf7a9acd475a225386c94730b7320994c4e47ad93599a4e9cf3"
+  },
+  "note_on_compiled_resources": "Source hashes are measured separately; exported scripts are compiled/remapped. Empty raw res://.gd hash fields in GPU JSON are not claimed to decode package contents.",
+  "helper_processes": "All reviewer-owned test/profile processes exited normally. GPU released before final root capture.",
+  "previous_receipt": "previous-physical-589468-final-acceptance.json",
+  "superseded_contract": "Historical physical-packet153/156 acceptance is preserved and is not treated as current coverage acceptance. Cosmetic per-projectile data is excluded from gameplay fingerprints; every member contribution and actual coverage state is included."
+}

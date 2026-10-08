@@ -1,0 +1,27 @@
+{
+  "at_utc": "2026-10-01T11:55:24.741620+00:00",
+  "version": "0.12.3",
+  "build": "11",
+  "test_ads": true,
+  "uses_production_ad_identifiers": false,
+  "compiled_and_linked": true,
+  "strict_signature_valid": true,
+  "exact_signed_app_entitlement_verified": true,
+  "provisioned_phone_verified": true,
+  "native_adapter_sha256": "d09a4ca8519728814ba05043d8fc563aa6fe90d7258d16e1a4835dfe1dc287d9",
+  "native_pck_sha256": "e19e247c655f7013dc1a2664e35a9cc7304a23c4088b3447ecf2b5fb929e86e1",
+  "native_pck_bytes": 10680952,
+  "pck_equals_verified_production_9": false,
+  "reused_native_pck_checks": 0,
+  "new_native_pck_checks": 8547,
+  "vendor_privacy_manifest_sha256": {
+    "GoogleMobileAds": "69fb112582fc23fc06c635c961d262a3f7b4b5654d284787491de3000dadf9d2",
+    "UserMessagingPlatform": "45b7adb99fcd2d962a1c800fbfcc1325b57a7fa4165f416182323bb5ffe9c900"
+  },
+  "guarded_inputs_unchanged": 804,
+  "installed": false,
+  "launched": false,
+  "uploaded": false,
+  "production_release": false,
+  "prior_candidate_receipt": "artifacts/ad-recovery-20261001-08/native-09/production-candidate.json"
+}

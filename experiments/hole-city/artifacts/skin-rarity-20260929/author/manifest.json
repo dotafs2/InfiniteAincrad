@@ -1,0 +1,381 @@
+{
+  "scope": "Author implementation and focused strict headless checks; independent review and economy integration are separate.",
+  "source_sha256": {
+    "fidelity/skin_rarity.gd": "dc532376060506100c2eb9fa22da7addb43cf696826c271cc54ec8a34a7fc3a7",
+    "fidelity/skin_catalog.gd": "b32ac45522b7924eb2173a75d5f055a5f5c297cf6bfa99f933fd2b5fd63d8b8b",
+    "fidelity/skin_visual.gd": "32e0ca8f804402ea0e29bba61357f429156869b63af827b6e1743e2502b8b3ef",
+    "tests/skin_rarity_acceptance.gd": "15ef8679e31ca263bab21ef73e4e22a8d0f2c6b99d0448ccf2238f3a91d854bc",
+    "tests/skin_catalog_acceptance.gd": "51a8cfb369ababc39463e63f42c8a142531caf51002948c6e5a064f1836349a6",
+    "tests/skin_fx_acceptance.gd": "7d18f380ac0d1389696e0c42533318646c408883ccc28bcd62b5a9c97b3ddd63",
+    "tests/city_review_skin_catalog.gd": "fe43f99ce68ca48f4905725d49a30ed8dfde1b5aaa37b225e85461061cc4659b"
+  },
+  "before_sha256": {
+    "artifacts/skin-rarity-20260929/before/city_review_skin_catalog.gd": "fe43f99ce68ca48f4905725d49a30ed8dfde1b5aaa37b225e85461061cc4659b",
+    "artifacts/skin-rarity-20260929/before/skin_catalog.gd": "8fd8df7f1590ab635e5ce2a5b4b21757d3f938f493d9135a65fcc3bc867ec2be",
+    "artifacts/skin-rarity-20260929/before/skin_catalog_acceptance.gd": "9628036be544956985ea628854d090ada6cfb5908728593606a48c9e779849eb",
+    "artifacts/skin-rarity-20260929/before/skin_fx_acceptance.gd": "758ed31d39f97748838539eee6fdea04ab09c30746ab473ddad096dd8b62ace2",
+    "artifacts/skin-rarity-20260929/before/skin_visual.gd": "06a90d95ad2364d63cc206525c3a5556cc0947471d1439d46627236103a2163c"
+  },
+  "catalog_field_changes": {
+    "core_shell": {
+      "rarity": {
+        "before": null,
+        "after": "legendary"
+      }
+    },
+    "copper_ring": {
+      "rarity": {
+        "before": null,
+        "after": "epic"
+      }
+    },
+    "moss_bloom": {
+      "rarity": {
+        "before": null,
+        "after": "epic"
+      }
+    },
+    "gravitas": {
+      "rarity": {
+        "before": null,
+        "after": "epic"
+      }
+    },
+    "lantern": {
+      "rarity": {
+        "before": null,
+        "after": "epic"
+      }
+    },
+    "shard": {
+      "rarity": {
+        "before": null,
+        "after": "epic"
+      }
+    },
+    "cinder": {
+      "rarity": {
+        "before": null,
+        "after": "legendary"
+      }
+    },
+    "tide": {
+      "rarity": {
+        "before": null,
+        "after": "legendary"
+      }
+    },
+    "orbit": {
+      "rarity": {
+        "before": null,
+        "after": "prismatic"
+      }
+    },
+    "prism_vale": {
+      "rarity": {
+        "before": null,
+        "after": "prismatic"
+      }
+    },
+    "sunny_side": {
+      "rarity": {
+        "before": null,
+        "after": "uncommon"
+      },
+      "skill_desc": {
+        "before": "A sunny egg rim with a raised golden yolk.",
+        "after": "A warm ivory ring with a fine golden trim and soft sheen."
+      }
+    },
+    "sugar_glaze": {
+      "rarity": {
+        "before": null,
+        "after": "uncommon"
+      },
+      "skill_desc": {
+        "before": "A soft glazed doughnut rim with six bright sprinkles.",
+        "after": "A pink glazed ring with a fine cream trim and soft sheen."
+      }
+    },
+    "berry_crown": {
+      "rarity": {
+        "before": null,
+        "after": "uncommon"
+      },
+      "skill_desc": {
+        "before": "A strawberry crown with a pointed green calyx.",
+        "after": "A berry-red ring with a fine green trim and soft sheen."
+      }
+    },
+    "citrus_slice": {
+      "rarity": {
+        "before": null,
+        "after": "common"
+      },
+      "skill_desc": {
+        "before": "Eight juicy orange wedges frame the opening.",
+        "after": "A simple citrus-orange ring with a solid finish."
+      }
+    },
+    "melon_munch": {
+      "rarity": {
+        "before": null,
+        "after": "common"
+      },
+      "skill_desc": {
+        "before": "Watermelon wedges with dark seeds and a green rind.",
+        "after": "A simple watermelon-pink ring with a solid finish."
+      }
+    },
+    "pretzel_twist": {
+      "rarity": {
+        "before": null,
+        "after": "uncommon"
+      },
+      "skill_desc": {
+        "before": "Three toasted pretzel loops around a salted rim.",
+        "after": "A toasted brown ring with a fine cream trim and soft sheen."
+      }
+    },
+    "popcorn_pot": {
+      "rarity": {
+        "before": null,
+        "after": "rare"
+      }
+    },
+    "pizza_party": {
+      "rarity": {
+        "before": null,
+        "after": "rare"
+      }
+    },
+    "cookie_bite": {
+      "rarity": {
+        "before": null,
+        "after": "common"
+      },
+      "skill_desc": {
+        "before": "A scalloped cookie edge studded with chocolate chunks.",
+        "after": "A simple toasted-cookie ring with a solid finish."
+      }
+    },
+    "waffle_stack": {
+      "rarity": {
+        "before": null,
+        "after": "uncommon"
+      },
+      "skill_desc": {
+        "before": "A square waffle frame with a crisp crosshatched surface.",
+        "after": "A golden ring with a fine butter-yellow trim and soft sheen."
+      }
+    },
+    "pancake_stack": {
+      "rarity": {
+        "before": null,
+        "after": "common"
+      },
+      "skill_desc": {
+        "before": "Three golden pancake layers topped with butter.",
+        "after": "A simple maple-brown ring with a solid finish."
+      }
+    },
+    "bacon_curl": {
+      "rarity": {
+        "before": null,
+        "after": "common"
+      },
+      "skill_desc": {
+        "before": "Wavy bacon ribbons with pale marbling.",
+        "after": "A simple rosy-red ring with a solid finish."
+      }
+    },
+    "cocoa_square": {
+      "rarity": {
+        "before": null,
+        "after": "common"
+      },
+      "accent": {
+        "before": "d18d55",
+        "after": "dce2eb"
+      },
+      "tint": {
+        "before": "794237",
+        "after": "9da4b0"
+      },
+      "name": {
+        "before": "Cocoa Square",
+        "after": "Slate Ring"
+      },
+      "skill_desc": {
+        "before": "A chunky chocolate frame with raised corner squares.",
+        "after": "A simple slate-gray ring with a solid finish."
+      }
+    },
+    "frosted_cake": {
+      "rarity": {
+        "before": null,
+        "after": "rare"
+      }
+    },
+    "pineapple_top": {
+      "rarity": {
+        "before": null,
+        "after": "rare"
+      }
+    },
+    "crab_cove": {
+      "rarity": {
+        "before": null,
+        "after": "rare"
+      }
+    },
+    "fox_den": {
+      "rarity": {
+        "before": null,
+        "after": "rare"
+      }
+    },
+    "bunny_burrow": {
+      "rarity": {
+        "before": null,
+        "after": "rare"
+      }
+    },
+    "frog_pond": {
+      "rarity": {
+        "before": null,
+        "after": "uncommon"
+      },
+      "skill_desc": {
+        "before": "A frog rim with raised eyes and wide webbed feet.",
+        "after": "A green ring with a fine lime trim and soft sheen."
+      }
+    },
+    "owl_hollow": {
+      "rarity": {
+        "before": null,
+        "after": "rare"
+      }
+    },
+    "turtle_shell": {
+      "rarity": {
+        "before": null,
+        "after": "uncommon"
+      },
+      "skill_desc": {
+        "before": "A plated turtle shell with four flippers and a small head.",
+        "after": "A sea-green ring with a fine mint trim and soft sheen."
+      }
+    },
+    "snail_trail": {
+      "rarity": {
+        "before": null,
+        "after": "rare"
+      }
+    },
+    "clockwork_key": {
+      "rarity": {
+        "before": null,
+        "after": "uncommon"
+      },
+      "skill_desc": {
+        "before": "A wind-up key, brass teeth and four dark rivets.",
+        "after": "A brass-colored ring with a fine pale-gold trim and soft sheen."
+      }
+    },
+    "royal_gate": {
+      "rarity": {
+        "before": null,
+        "after": "epic"
+      }
+    },
+    "satellite_dish": {
+      "rarity": {
+        "before": null,
+        "after": "epic"
+      }
+    },
+    "carnival_tent": {
+      "rarity": {
+        "before": null,
+        "after": "epic"
+      }
+    },
+    "rocket_port": {
+      "rarity": {
+        "before": null,
+        "after": "epic"
+      }
+    },
+    "rainbow_bridge": {
+      "rarity": {
+        "before": null,
+        "after": "prismatic"
+      },
+      "skill_desc": {
+        "before": "Three bright arches stretch over the back edge.",
+        "after": "Three bright arches rise above a flowing rainbow-colored rim."
+      }
+    },
+    "storm_cloud": {
+      "rarity": {
+        "before": null,
+        "after": "epic"
+      }
+    },
+    "dragon_roost": {
+      "rarity": {
+        "before": null,
+        "after": "epic"
+      }
+    },
+    "jelly_veil": {
+      "rarity": {
+        "before": null,
+        "after": "epic"
+      }
+    },
+    "moon_dream": {
+      "rarity": {
+        "before": null,
+        "after": "rare"
+      }
+    },
+    "coral_reef": {
+      "rarity": {
+        "before": null,
+        "after": "rare"
+      }
+    },
+    "music_stage": {
+      "rarity": {
+        "before": null,
+        "after": "rare"
+      }
+    }
+  },
+  "tests": {
+    "rarity": {
+      "checks": 556,
+      "failures": [],
+      "receipt_sha256": "7989050b4780a54e92dd918386f457952828e3ada085b6e72ea793a1f7ae4992"
+    },
+    "skin_catalog": {
+      "checks": 842,
+      "failures": [],
+      "receipt_sha256": "62961da591bd5f5f759d8dca4bdaa3968d27b9fb13d07d292c1110978b2ea049"
+    },
+    "skin_fx": {
+      "checks": 414,
+      "failures": [],
+      "receipt_sha256": "00ad1334119ee65831f9cc212aa1fa8911df4cfb03c35328bde08a4eb86385c3"
+    },
+    "skin_catalog_review": {
+      "checks": 202,
+      "failures": [],
+      "receipt_sha256": "255f4da25ebef7756d2df20aa5802b7dc125d08f5b1f45c37bd16ade80d5d7c5"
+    }
+  },
+  "independent_geometry_test_unchanged": true,
+  "runtime_or_engine_helpers_remaining": false
+}

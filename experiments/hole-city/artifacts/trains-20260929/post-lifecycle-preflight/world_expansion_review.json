@@ -1,0 +1,22 @@
+{
+  "checks": 284,
+  "failures": [
+    "food: added area does not rescale existing food or map geometry",
+    "Engine process failed; inspect the engine log"
+  ],
+  "metrics": {
+    "city": {
+      "all_edibles": 812,
+      "outer_edibles": 156,
+      "outside": [],
+      "queryable_small_food": 97
+    },
+    "food": {
+      "all_edibles": 2930,
+      "outer_edibles": 238,
+      "outside": [],
+      "queryable_small_food": 29
+    }
+  },
+  "scope": "Independent real geometry, movement, physics rays, food atlas and original traffic; no GPU image or frame-rate claim."
+}

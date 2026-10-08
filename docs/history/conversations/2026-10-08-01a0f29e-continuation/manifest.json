@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "thread_id": "01a0f29e-6205-79e0-abcc-9e68a76aca55",
+  "exported_at_utc": "2026-10-08T13:39:14.103463+00:00",
+  "source_basename": "rollout-2026-10-08T21-08-22-01a0f29e-6205-79e0-abcc-9e68a76aca55_01a11ba1-1105-7591-8cd2-309d8ae778dc.jsonl",
+  "source_snapshot_bytes": 1524299,
+  "source_snapshot_sha256": "ff36d75779e11b32074746e9f2c2fb8bac5b3c0efc876098abfdaf5bd0e5b43c",
+  "first_message_at": "2026-10-08T13:08:26.233Z",
+  "last_message_at": "2026-10-08T13:37:50.162Z",
+  "message_count": 8,
+  "role_counts": {
+    "user": 2,
+    "assistant": 6
+  },
+  "excluded_record_counts": {
+    "session_meta": 1,
+    "event_msg": 103,
+    "turn_context": 2,
+    "non_conversation_role": 2,
+    "image_payloads_retained_locally": 0,
+    "response_item": 73,
+    "token_usage_record": 25,
+    "injected_page_context": 1
+  },
+  "coverage": "visible text messages in this task only; no other tasks, tool logs, internal reasoning, or future messages",
+  "files": {
+    "conversation.json": "ceefed2d7e59653c3468c7ac4d3f4fc1a59d24bcbb15fd7fd228f98da45e08b9",
+    "conversation.md": "5888c8c3792e26cbcf668b079a6bb559dd344e20059373f81c52e149ec44359f"
+  },
+  "public_edition": {
+    "redacted_fields": [
+      "email",
+      "phone"
+    ],
+    "image_payloads": "local-only; source block fingerprints retained"
+  }
+}

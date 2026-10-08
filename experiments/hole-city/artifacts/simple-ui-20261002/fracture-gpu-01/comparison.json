@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "passed": true,
+  "comparisons": [
+    {
+      "asset": "001_row_house_01",
+      "old_runtime_area": 794.0071994064592,
+      "new_runtime_area": 446.4231997726702,
+      "invented_cap_vertices_removed": 336,
+      "same_models_cache_cells_poses_camera": true
+    },
+    {
+      "asset": "031_townhouse_01",
+      "old_runtime_area": 834.1024279745137,
+      "new_runtime_area": 462.0464511068375,
+      "invented_cap_vertices_removed": 336,
+      "same_models_cache_cells_poses_camera": true
+    }
+  ],
+  "before_version": "0.12.4",
+  "after_version": "0.12.5",
+  "ordinary_gameplay": false,
+  "store_media": false,
+  "scope": "Source and actual-mesh geometry comparison of explicit exploded QA fixtures. PNGs require independent visual review; no natural motion or device-performance claim."
+}

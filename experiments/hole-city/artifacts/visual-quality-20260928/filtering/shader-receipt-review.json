@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "case": "clean",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "case": "truncated-reveal",
+      "pass": true,
+      "failures": [
+        "Reveal case receipt is incomplete"
+      ]
+    },
+    {
+      "case": "truncated-albedo",
+      "pass": true,
+      "failures": [
+        "Material case receipt is incomplete"
+      ]
+    },
+    {
+      "case": "mismatched-identity",
+      "pass": true,
+      "failures": [
+        "Material case receipt is incomplete"
+      ]
+    }
+  ],
+  "passed": true,
+  "source_sha256": "6432cdfcfdf1a0dd7ae71ee77b2246cab22243ca3758fde812d6b8606e03aa7b",
+  "scope": "Mocked native probe receipt only; no GL/Godot/HTTP process and no source mutation"
+}

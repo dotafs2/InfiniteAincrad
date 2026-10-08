@@ -1,0 +1,1 @@
+shader_type spatial; uniform float clock=0.0; varying float phase; void vertex(){ float bob=sin(clock*9.0+INSTANCE_CUSTOM.x)*0.024; VERTEX.y+=bob; VERTEX.x+=sin(clock*9.0+INSTANCE_CUSTOM.x)*0.015*VERTEX.y; } void fragment(){ALBEDO=COLOR.rgb;ROUGHNESS=0.82;}

@@ -1,0 +1,20 @@
+[
+  {
+    "suite": "food_growth_acceptance",
+    "exit_code": 0,
+    "errors": []
+  },
+  {
+    "suite": "food_growth_review",
+    "exit_code": 0,
+    "errors": []
+  },
+  {
+    "suite": "food_neighborhoods_acceptance",
+    "exit_code": 1,
+    "errors": [
+      "ERROR: Frontage faces its actual local walking street: 12",
+      "ERROR: Frontage faces its actual local walking street: 88"
+    ]
+  }
+]

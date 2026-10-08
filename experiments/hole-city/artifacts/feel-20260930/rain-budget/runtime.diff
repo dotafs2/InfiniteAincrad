@@ -1,0 +1,48 @@
+--- before/food_city.gd
++++ fidelity/food_city.gd
+@@ -10,7 +10,11 @@
+ var urban_plan:Dictionary={}
+ var delivery_junctions:Array[Vector2]=[]
+ const RAIN_LIMIT:=640
++# Admission cap for new sky drops, not a clamp on already-landed physics.
++# Food may naturally wake or fall again after another body removes support.
+ const AIRBORNE_LIMIT:=24
++signal rain_admission_started(snapshot:Dictionary)
++signal rain_admission_finished(snapshot:Dictionary)
+ const RAIN_RETIRE_DISTANCE:=34.0
+ var food_kind_counts:Dictionary={}
+ var mesh_cache:Dictionary={}
+@@ -32,6 +36,8 @@
+ var rain_clock:=0.0
+ var rain_serial:=0
+ var rain_waves:=0
++var rain_admission_serial:=0
++var last_rain_admission:Dictionary={}
+ var rain_retirements:Array[Dictionary]=[]
+ var rain_batches:Dictionary={}
+ var rain_enabled:=true
+@@ -592,13 +598,22 @@
+ 		# Sleep is an engine optimization, not proof of support. Swept contact
+ 		# tells us whether a food has landed even if its rigid body stays awake.
+ 		if not body.rain_landed:airborne+=1
+-	var count:=mini(6,mini(RAIN_LIMIT-rain_bodies.size(),AIRBORNE_LIMIT-airborne))
+-	if count<=0:return
++	var count:=maxi(0,mini(6,mini(RAIN_LIMIT-rain_bodies.size(),AIRBORNE_LIMIT-airborne)))
++	rain_admission_serial+=1
++	var admission:={"event":rain_admission_serial,"serial_before":rain_serial,"retained_before":rain_bodies.size(),"airborne_before":airborne,"requested":count}
++	# Synchronous observation exposes the actual admission state before any
++	# spawn. A copy prevents diagnostics from altering the production budget.
++	rain_admission_started.emit(admission.duplicate())
+ 	for i in count:
+ 		# The retained budget covers an entire four-minute idle round. Nearby
+ 		# landed foods stay edible, while only distant hidden foods can retire.
+ 		var at:=rain_spawn_position()
+ 		spawn_rain(Shapes.KINDS[rain_serial%10],at,18.0+float(i%3)*2.0)
++	admission["spawned"]=rain_serial-int(admission.serial_before)
++	admission["serial_after"]=rain_serial
++	last_rain_admission=admission
++	rain_admission_finished.emit(admission.duplicate())
++	if count<=0:return
+ 	rain_waves+=1
+ 	if rain_waves==1 or rain_waves%8==0:
+ 		game.notice="FOOD RAIN!";game.notice_time=1.8

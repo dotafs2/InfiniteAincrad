@@ -1,0 +1,73 @@
+{
+  "checks": 482,
+  "evidence": {
+    "city": {
+      "incorrectly_enabled": [],
+      "nonstructural": 736,
+      "protected_categories": {
+        "ambient_actor": 48,
+        "authored_actor": 152,
+        "barrier": 4,
+        "bench": 28,
+        "bike_rack": 4,
+        "bin": 78,
+        "bollard": 28,
+        "bus_stop": 4,
+        "cone": 74,
+        "cover": 2,
+        "dumpster": 4,
+        "fence": 44,
+        "hydrant": 4,
+        "kiosk": 4,
+        "lamp": 32,
+        "mailbox": 4,
+        "person": 64,
+        "planter": 4,
+        "railing": 36,
+        "sign": 4,
+        "signal_pylon": 5,
+        "traffic_light": 4,
+        "tree": 56,
+        "vehicle": 49
+      },
+      "structural": 72
+    },
+    "food": {
+      "incorrectly_enabled": [],
+      "nonstructural": 2922,
+      "protected_categories": {
+        "food_bacon": 96,
+        "food_berry": 179,
+        "food_burger": 278,
+        "food_cake": 308,
+        "food_cookie": 350,
+        "food_donut": 803,
+        "food_egg": 102,
+        "food_pancake": 515,
+        "food_pizza": 120,
+        "food_sushi": 123,
+        "person": 48
+      },
+      "structural": 0
+    },
+    "food_policy_poisoning": {
+      "instance_custom": "(1,1,1,1)",
+      "legacy_uniforms": 1,
+      "recipes": 10,
+      "registered_food_occluders": 0,
+      "scope": "CPU dispatch/material graph only; shipped vertex/fragment execution is verified by the separate windowless GL harness."
+    },
+    "hollow_arch": {
+      "clear_opening_probe_count": 65,
+      "clear_opening_ray_hits": 0,
+      "solid_side_center_ray_hits": 1
+    },
+    "hollow_donut": {
+      "clear_opening_probe_count": 65,
+      "clear_opening_ray_hits": 0,
+      "solid_dough_center_ray_hits": 1
+    }
+  },
+  "failures": [],
+  "scope": "Independent buildings-only policy, actual food obstruction, stale-state/material and lifecycle review; GPU equation coverage is separate and no phone performance is claimed"
+}

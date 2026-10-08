@@ -1,0 +1,37 @@
+{
+  "verified_utc": "2026-10-07T18:04:44.265586+00:00",
+  "url": "http://127.0.0.1:8790/?qa=1",
+  "mode": "No-save isolated browser QA; music and sound disabled through real Settings; no native ads or purchases",
+  "observations": [
+    "Fresh City-only Home renders all four screenshot cards",
+    "Real pointer drags browse left and right",
+    "Locked Food rejects main-action click and keyboard Enter",
+    "Arrows reach locked Frost with its 300-point Toy Town requirement",
+    "Returning to City and immediately clicking PLAY starts the correct 90-second world",
+    "A genuine drag starts play and collects one point",
+    "The untouched timer reaches TIME\u2019S UP without a score/timer injection",
+    "Returning Home and swiping to Food shows READY TO PLAY and an enabled PLAY action"
+  ],
+  "round": {
+    "map": "city",
+    "points": 1,
+    "coins": 0,
+    "scope": "Minimal launch/unlock smoke test, not a progression balance or sustained active-play measurement"
+  },
+  "console_warning_error_entries": 0,
+  "source_checks": 175537,
+  "packaged_checks": 175537,
+  "export_pck_sha256": "4ca5e65de14f6d5c506c4042b40c163269c52458003a606b0cab8438886b2044",
+  "files_sha256": {
+    "browser/city-launched.png": "ffbfce932a1c8ecf63980ca89647a8b79e21be6b51a0b4c091695d0f63a25a2e",
+    "browser/console.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "browser/food-unlocked-ui.png": "4318e24b7ab52e2d65f112d794b2780712cc63c25748221fd2c78796e5efd7e3",
+    "browser/food-unlocked.png": "8ac9e08c851dce06d1ee5e1f6b9ef3c5f498c9f8524d826d99d1d77136568b4f",
+    "browser/locked-food.png": "2d3bd5236b9bb9f4a0478103d143648bd1166800ddc8697d61ab188c074367b6",
+    "browser/natural-city-result.png": "6c28bd8b8604f5807774c7fae801078cf9d257ab86981949d9702fee853e7b42"
+  },
+  "limitations": [
+    "Desktop Web rendering only; no physical phone validation",
+    "This QA session does not persist player progress; isolated config persistence is verified by the unlock suite"
+  ]
+}

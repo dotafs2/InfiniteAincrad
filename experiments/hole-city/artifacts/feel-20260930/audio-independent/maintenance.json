@@ -1,0 +1,9 @@
+{
+  "changed_lines": 1,
+  "before_sha256": "7fc7b968ec9026de475a489621e96b2f4e4f858dd688352983fd41d5656dc359",
+  "after_sha256": "7dcf725e42bd68fad33d14edf37c1b8d61f25b55d316d4ace01568622ab64745",
+  "preserved_check_count": 118,
+  "old_assertion": "\tcheck(game.audio.TRACKS.city.resource_path!=game.audio.TRACKS.food.resource_path and absf(game.audio.TRACKS.city.get_length()-32)<.01 and game.audio.TRACKS.food.get_length()>34,\"Both distinct imported Vorbis resources decode to expected duration\")",
+  "new_assertion": "\tcheck(game.audio.TRACKS.city.resource_path!=game.audio.TRACKS.food.resource_path and absf(game.audio.TRACKS.city.get_length()-(16.0*4.0*60.0/104.0))<.01 and absf(game.audio.TRACKS.food.get_length()-(16.0*4.0*60.0/108.0))<.01,\"Both distinct imported Vorbis resources decode to expected duration\")",
+  "reason": "New original 16-bar compositions intentionally change Sunny City from 32 seconds to 36.923 seconds, and specify Snack Garden precisely at 35.556 seconds. No duration tolerance increased; other assertions untouched."
+}

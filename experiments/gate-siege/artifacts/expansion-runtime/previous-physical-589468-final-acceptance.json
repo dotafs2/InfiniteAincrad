@@ -1,0 +1,212 @@
+{
+  "utc_written": "2026-10-08T11:20:32.624087+00:00",
+  "scope": "Gate Siege expansion runtime review; no phone performance or exact-reference visual identity claim.",
+  "package": {
+    "path": "artifacts/expansion-runtime/delivery-589468.pck",
+    "sha256": "5894686cc8a52f96df33874a72a83478e7056acadd07baafa97857f5aab54469",
+    "bytes": 2115924,
+    "source_export": "artifacts/expansion/delivery.pck",
+    "source_export_same_hash": true
+  },
+  "engine": "Godot4.7.2 stable official ed1daf0bf",
+  "isolation": {
+    "cwd": "/private/tmp/gate-siege-expansion-acceptance-empty",
+    "cwd_entries": [],
+    "main_pack": "absolute immutable delivery-589468.pck",
+    "script": "absolute external tests/expansion_review.gd",
+    "fallback_to_source": false
+  },
+  "focused": {
+    "source": {
+      "checks": 153,
+      "failed": 0,
+      "log": "final-source-checks.log"
+    },
+    "exact_package": {
+      "checks": 153,
+      "failed": 0,
+      "log": "delivery-589468-checks.log"
+    }
+  },
+  "quality_comparison": {
+    "low": {
+      "checkpoints": 123,
+      "equal_to_high": true,
+      "equal_to_previous_package": true,
+      "phase": "won",
+      "elapsed": 121.466666666661,
+      "members": 36,
+      "kills": 4374,
+      "bosses": 8
+    },
+    "high": {
+      "checkpoints": 123,
+      "equal_to_high": true,
+      "equal_to_previous_package": true,
+      "phase": "won",
+      "elapsed": 121.466666666661,
+      "members": 36,
+      "kills": 4374,
+      "bosses": 8
+    },
+    "battery": {
+      "checkpoints": 123,
+      "equal_to_high": true,
+      "equal_to_previous_package": true,
+      "phase": "won",
+      "elapsed": 121.466666666661,
+      "members": 36,
+      "kills": 4374,
+      "bosses": 8
+    },
+    "auto": {
+      "checkpoints": 123,
+      "equal_to_high": true,
+      "equal_to_previous_package": true,
+      "phase": "won",
+      "elapsed": 121.466666666661,
+      "members": 36,
+      "kills": 4374,
+      "bosses": 8
+    }
+  },
+  "idle": {
+    "damage_events": 9,
+    "elapsed": 39.9833333333323,
+    "health": 0.0,
+    "kills": 152,
+    "members": 1,
+    "metrics": {
+      "bosses": 0,
+      "breaches": 20,
+      "chain_hits": 0,
+      "damage": 626.0,
+      "elites": 0,
+      "gate2": 35,
+      "gate5": 84,
+      "gate999": 0,
+      "losses": 1,
+      "peak_packets": 3,
+      "recruits": 0,
+      "shots": 200,
+      "soldiers": 0,
+      "splash_hits": 0,
+      "wave_clears": 0,
+      "wins": 0
+    },
+    "minimum_health": 0.0,
+    "peak_members": 1,
+    "phase": "lost",
+    "policy": "idle",
+    "quality": "low",
+    "seen_waves": [
+      0
+    ],
+    "tier": 0,
+    "wall_seconds": 0.437364,
+    "wave": 1,
+    "wave_entries": [
+      {
+        "elapsed": 0.0,
+        "health": 100.0,
+        "members": 1,
+        "tier": 0,
+        "wave": 1
+      }
+    ]
+  },
+  "gpu": {
+    "report": "final-package-low-stress.json",
+    "geometry": "36soldiers,544highHPtroops,4mixedelites,dragonboss",
+    "draw_calls_full_scene": 130,
+    "primitives_full_scene": 161862,
+    "max_frame_ms": 37.301,
+    "over50ms": 0,
+    "cap": 30,
+    "resolution": "720x1280",
+    "adapter": "Apple M1 Pro",
+    "movie_mode": false,
+    "physical_phone_test": false,
+    "measured_package_sha256": "db19601884767d054281242cd7ae58a038ad3d3164d7b2c75a3b3ae37d79c686",
+    "applicability_to_delivery": "All80 nonmetadata packed resources are byte-identical; only shadow provenance JSON differs. GPU measurement was not falsely relabeled as a rerun."
+  },
+  "source_file_sha256": {
+    "scripts/game.gd": "4c738d3673093f8246dce08b211bf986871aaec84771bb22acaeeac35f9671a3",
+    "scripts/squad.gd": "a9b5bd1feffe38905ab00d3b2466c4ac37d47a7668a063acc12b3f56de37c30a",
+    "scripts/campaign.gd": "91af8c955244f59d28ba7ccc999dab81528f55eec6c2a86a87abe051123eda49",
+    "scripts/encounters.gd": "76e4b6ed35c10ce9bd58440faf59fb122132cc8b87aea5573238e6d0850b47e4",
+    "scripts/creature_motion.gd": "8370f54487d17176326aaa68eab36b61c8cc493adfe52e06657ae5edc20c1fb8",
+    "scripts/hud.gd": "114846eaefea30ec677c5edd8952808337cfd0eb27770e3fb4fdfcd6ef31bb59",
+    "tests/expansion_review.gd": "82f9b1f7b475374bd001c8be3c489cee203e8f2fb8076e9d069161ce56ceec52",
+    "tools/profile_expansion.gd": "6d03797285d51c63cac60ba093a1f1e9b373663594f77bd7efd2c411ebf4127e",
+    "assets/shaders/attack_warning.gdshader": "131ee71b2f6de120e9fea89a80434cebcb2b4e54c23ec6dfb0fd5d2b6a589c05",
+    "assets/expansion/manifest.json": "3064701e28b4f4e3bd6f603de7b849083545d781927e78da01dbc9245bcfd6f7",
+    "assets/expansion/shadows/manifest.json": "0fe0e3e59155e0d1a6dcb35dd1705ec9923626c7e04ac004c0537c73b2f4b9f1",
+    "tools/manifest_package.gd": "23a136f34f085fa05d0c495d78f4ec5abe3cb1334bf6cbefb36d58a7f300ed09"
+  },
+  "note_on_compiled_resources": "Export remaps scripts to compiled resources; raw res://.gd hashes in the external profiler are unavailable. The source hashes above are separately measured source files, not claimed decoded package hashes.",
+  "art_sha256": {
+    "assets/expansion/dragon.glb": "0ec53d03e8790736e07ab9516610ac564b905f09e151356f97cfa81287ea738c",
+    "assets/expansion/golem.glb": "ac5d03235285d28d07000412cb2161554c00f8828f6dba0c121f52b9c95829cc",
+    "assets/expansion/gunner.glb": "68791434d76e55643cdca7da9cdc35d5dd7d4ab0aba4a782141cc3035b6841c0",
+    "assets/expansion/infantry.glb": "8397f76c2b8a787070cd3ebd31aced391475e81c5f8b593c13bc437b3e139528",
+    "assets/expansion/mech.glb": "0835dccac4e09d9ca7a120e1b456d21518450c5cca2173c678aaa2e88633ff33",
+    "assets/expansion/skitter.glb": "9196991065e35935506c4addb7aabad048f233ca49d86179f05b9c06e49d99de"
+  },
+  "helper_processes": "All owned test/profile processes exited normally; none retained.",
+  "evidence_sha256": {
+    "final-candidate.pck": "db19601884767d054281242cd7ae58a038ad3d3164d7b2c75a3b3ae37d79c686",
+    "final-package-auto-campaign.json": "dc160eb277a2e5503df573927e3bb4b846bab5b9d6bf5f71df772dbbff9732b0",
+    "final-package-auto-campaign.log": "84b495eecd14467d4312a5e886caa317fe6e36cebb0943aa71e39dd8b9b6cf77",
+    "final-package-battery-campaign.json": "33d5f1e20bc502ce245cb4dc370c7bda8cc28d363ccef9ce850e437738cfb1ba",
+    "final-package-battery-campaign.log": "05b7e74fe3a574a70952568f972bae1d123a353397859539eef679a2e38f2457",
+    "final-package-checks.log": "45edeff78041741c9ae00be7ec4333c4dd63b9a35e8bea9c3ab275dedd45cd2d",
+    "final-package-high-campaign.json": "7e33824f834759f2145da3e845e3afe5be97a5aeb71908a7bb3bf9ffca89a5d2",
+    "final-package-high-campaign.log": "ec854dd42ec0ca4f3ffc177e966bae40a1382582368496ed7ea8793b727a2253",
+    "final-package-low-campaign.json": "bf7894671554518ef9710af9038a5dafac833958bfce8f40cc7f2adcef3ace17",
+    "final-package-low-campaign.log": "ad28197fcec2eec0149786fb6de7bf9b8d488740979c7c8a57031c7b58691f85",
+    "final-package-low-idle.json": "3b15b7a1f1d9de554cbe8dfe1bb92af1559a7eed8c3b35801044204680dc6f74",
+    "final-package-low-idle.log": "9c2110c81d12e1db6b5455664b3ee043155a31a0921de77d2a1350bb169fa09d",
+    "final-package-low-stress.json": "ad0c1919faec79f2e23a65376c20493184d2c9a74a319a1c395c41e47d390df8",
+    "final-package-low-stress.log": "46c9e4800375b5800609a59548ecae65574eb2f6bc75c9115b35282392b0ad83",
+    "final-source-checks.log": "45edeff78041741c9ae00be7ec4333c4dd63b9a35e8bea9c3ab275dedd45cd2d",
+    "delivery-589468-auto-campaign.json": "27c3a195dcfa04bbc1815d462052ca63442c9d478bfea4172cca6785eba64614",
+    "delivery-589468-auto.log": "f3760e978dafcabbb106b399eb485c282495244857a0b02fd4525299507f54c8",
+    "delivery-589468-battery-campaign.json": "813692951338961aca8c5c2357e4c81e06fd4fa1836401d9b2e3a07f6874d9fe",
+    "delivery-589468-battery.log": "bcf2c2ed61f4dca58ca094664bb34c1bcfa9a097331b9f05a126473e32fbc364",
+    "delivery-589468-checks.log": "45edeff78041741c9ae00be7ec4333c4dd63b9a35e8bea9c3ab275dedd45cd2d",
+    "delivery-589468-high-campaign.json": "4c7c1de51d7238b4c483de6c985132a7e03cb0f5cfb0ef6017438253e5c5d71c",
+    "delivery-589468-high.log": "1a92dcd1450c86dd9fe5b649fded8386d01421c0f0ea58f8adcb12e2c2ef9ba0",
+    "delivery-589468-idle.json": "2f592ba72849c093280f3cd14e0c5405affae863ffe7e0da239d4c464d02dbd3",
+    "delivery-589468-idle.log": "33841ded3b6196bd7e77e3c176b09da5c23829115e517220907d8a83d340e436",
+    "delivery-589468-low-campaign.json": "abcf11eafd9b3c11104040aa93411d5a538fb9d31f51fe5183dcedfeb77873dc",
+    "delivery-589468-low.log": "dd5dc1b4ff3d23b0324f603f321d4dc5bbe656bef9322914a0400596ce847377",
+    "delivery-589468-resources-delivery-589468.pck.log": "cae9fec1e737ae5f539a50b78cd09a402d3cbaf8c308fe773ffe922eb961c9f6",
+    "delivery-589468-resources-final-candidate.pck.log": "cae9fec1e737ae5f539a50b78cd09a402d3cbaf8c308fe773ffe922eb961c9f6",
+    "delivery-589468.pck": "5894686cc8a52f96df33874a72a83478e7056acadd07baafa97857f5aab54469",
+    "delivery-resource-equivalence.json": "af104b2d914741d794777d238ddbcf8c683f79a2802e5b8af1d5084ae9590c9e",
+    "previous-db196-acceptance.json": "0907e7f3e88e8fb747e67e626eed3799805fef78c0d6e9f24496828153646d7f",
+    "resources-delivery-589468.pck.json": "6184198184bbe812386e8218a331223a24ad3e71dade49de15a5305a1b6d7cb2",
+    "resources-final-candidate.pck.json": "13f3af50506406b62d6e43ddd32bdfd2b03f51b743e5b937f28eae59d8ae1a3b"
+  },
+  "previous_receipt": "previous-db196-acceptance.json",
+  "metadata_only_resource_equivalence": {
+    "previous_pck_sha256": "db19601884767d054281242cd7ae58a038ad3d3164d7b2c75a3b3ae37d79c686",
+    "delivery_pck_sha256": "5894686cc8a52f96df33874a72a83478e7056acadd07baafa97857f5aab54469",
+    "resource_count_each": 81,
+    "identical_resources": 80,
+    "added_resources": [],
+    "removed_resources": [],
+    "changed_resources": {
+      "res://assets/expansion/shadows/manifest.json": {
+        "before": "9a0d3cc45d4aa7e2fb763f6589005c227fa2450562bc8345f1abd0e7a47a8a10",
+        "after": "0fe0e3e59155e0d1a6dcb35dd1705ec9923626c7e04ac004c0537c73b2f4b9f1"
+      }
+    },
+    "manifests": [
+      "resources-final-candidate.pck.json",
+      "resources-delivery-589468.pck.json"
+    ],
+    "method": "Enumerate and SHA256 every readable packed resource with Godot DirAccess/FileAccess from the same empty cwd and absolute --main-pack. Includes remapped compiled/imported resources; all81 hashes are nonempty."
+  }
+}

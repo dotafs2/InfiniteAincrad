@@ -1,0 +1,46 @@
+{
+  "scope": "Headless macOS CPU, 3 independent runs x 600 measured frames per map/scenario; lower is better. No phone or browser GPU FPS claim.",
+  "rows": [
+    {
+      "scenario": "city-opening",
+      "before_p95_ms": 11.446,
+      "after_p95_ms": 6.473,
+      "reduction_percent": 43.45,
+      "before_over_budget": 2,
+      "after_over_budget": 0
+    },
+    {
+      "scenario": "city-grown",
+      "before_p95_ms": 10.459,
+      "after_p95_ms": 6.489,
+      "reduction_percent": 37.96,
+      "before_over_budget": 0,
+      "after_over_budget": 0
+    },
+    {
+      "scenario": "food-opening",
+      "before_p95_ms": 5.019,
+      "after_p95_ms": 3.882,
+      "reduction_percent": 22.65,
+      "before_over_budget": 0,
+      "after_over_budget": 0
+    },
+    {
+      "scenario": "food-grown",
+      "before_p95_ms": 8.319,
+      "after_p95_ms": 5.91,
+      "reduction_percent": 28.96,
+      "before_over_budget": 0,
+      "after_over_budget": 0
+    }
+  ],
+  "geometry_preserved": {
+    "food_initial_triangles": 4443584,
+    "city_scene_triangles": 507766
+  },
+  "limitations": [
+    "Browser interface returned User unavailable.",
+    "No iPhone 14 GPU or thermal measurement.",
+    "Native contact-limit diagnostic appeared in baseline food opening; absent in 3 optimized opening traces, not claimed as an engine-wide fix."
+  ]
+}

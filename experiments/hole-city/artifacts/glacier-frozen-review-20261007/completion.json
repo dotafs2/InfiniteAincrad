@@ -1,0 +1,37 @@
+{
+  "completed_utc": "2026-10-07T16:30:12.153942+00:00",
+  "status": "complete",
+  "reviewers": {
+    "art": "accepted",
+    "play": "accepted"
+  },
+  "source_suites": 93,
+  "package_suites": 93,
+  "checks_each": 175836,
+  "guarded_inputs": 881,
+  "protected_inputs": {
+    "fidelity/game.gd": true,
+    "fidelity/toy_city.gd": true,
+    "fidelity/food_city.gd": true,
+    "fidelity/skin_catalog.gd": true,
+    "fidelity/skin_draw.gd": true,
+    "fidelity/collection_geometry.gd": true,
+    "fidelity/rainfall_intake.gd": true
+  },
+  "package_sha256": "81e4541ae53cb16ec051af3d883378701e715e32634870f48e1d26ffde9f8b99",
+  "gallery": "http://127.0.0.1:8786/glacier-frozen-review-20261007/index.html",
+  "play": "http://127.0.0.1:8789/?qa=1",
+  "video": "artifacts/glacier-frozen-review-20261007/glacier-normal-gameplay.mp4",
+  "browser": {
+    "tab": "15",
+    "muted": true,
+    "paused": true,
+    "console_warnings_errors": [],
+    "evidence": "artifacts/glacier-frozen-review-20261007/browser-gameplay.png"
+  },
+  "limitations": [
+    "Phone performance unmeasured",
+    "Local desktop/Web content; not uploaded to TestFlight",
+    "Compact board footprint and inherited actor controllers"
+  ]
+}

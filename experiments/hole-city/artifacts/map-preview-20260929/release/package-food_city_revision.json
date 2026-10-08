@@ -1,0 +1,87 @@
+{
+  "checks": 85,
+  "failures": [],
+  "metrics": {
+    "branches": [
+      "Biscuit Approach",
+      "Harbor High Street",
+      "Sundae Avenue",
+      "Frosting Rise",
+      "Market Diagonal"
+    ],
+    "distance": 7389.21476706117,
+    "families": [
+      "cakery",
+      "diner",
+      "apartments",
+      "wafer_gate",
+      "berry_water_tower",
+      "wedding_cake"
+    ],
+    "jumps": 0,
+    "landmarks": {
+      "berry_water_tower": {
+        "height": 3.17247527837753,
+        "pieces": 17,
+        "roots": 4
+      },
+      "wafer_gate": {
+        "height": 2.73092713952065,
+        "pieces": 14,
+        "roots": 2
+      },
+      "wedding_cake": {
+        "height": 7.13345644927025,
+        "pieces": 4,
+        "roots": 1
+      }
+    },
+    "nearest_building": 4.92442893981934,
+    "off_road_footprints": 0,
+    "opening_frontages": 2,
+    "overlaps": 0,
+    "traffic": [
+      {
+        "at": "(35.897, 0.368, -40.49171)",
+        "progress": 171.965637207031,
+        "route": 0
+      },
+      {
+        "at": "(-10.12119, 0.368, 2.041101)",
+        "progress": 52.4849731445328,
+        "route": 1
+      },
+      {
+        "at": "(-32.46302, 0.368, 51.03086)",
+        "progress": 343.058932556155,
+        "route": 0
+      },
+      {
+        "at": "(31.22724, 0.368, -19.43072)",
+        "progress": 99.3743515014648,
+        "route": 1
+      },
+      {
+        "at": "(-55.96089, 0.368, 33.68573)",
+        "progress": 17.6610465087905,
+        "route": 0
+      },
+      {
+        "at": "(-7.119469, 0.368, -1.256234)",
+        "progress": 298.909729858402,
+        "route": 1
+      },
+      {
+        "at": "(-45.20101, 0.368, -24.4992)",
+        "progress": 78.5863418579102,
+        "route": 0
+      },
+      {
+        "at": "(-14.16469, 0.368, -49.33519)",
+        "progress": 365.019108215334,
+        "route": 1
+      }
+    ],
+    "wraps": 18
+  }
+}

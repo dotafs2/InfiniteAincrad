@@ -1,0 +1,34 @@
+{
+  "scope": "Independent agent visual inspection of eight actual GPU PNGs; explicit frozen exploded QA fixture, not natural collapse or commercial media.",
+  "images_sha256": {
+    "after/001_row_house_01-isometric.png": "6892478ee4cf2817482666d94da8b209214b80f79efbbd603dbc1485bdac8be5",
+    "after/001_row_house_01-upper-cut.png": "e231f4c0948ebddca31086cbb278b28df2cadefac59a0edde474e3146c975849",
+    "after/031_townhouse_01-isometric.png": "1dbeef272ac30d68fa424fb7c419fc974444d126536107537c218f9db87ed31c",
+    "after/031_townhouse_01-upper-cut.png": "a5a0a3a806cc6e02920d50453d054a20f3ba489c78d54e9ffffaba63dd452361",
+    "before/001_row_house_01-isometric.png": "e8ab37ddb5f04dab9a0cfd8fc5c0e6ae07eef26a7dbf23d1783e8f7dc36b26c6",
+    "before/001_row_house_01-upper-cut.png": "9c9f1a57b6b14b696f5a0ba9d85f9929166b4bd61ddfec1a0f5f5229409026c2",
+    "before/031_townhouse_01-isometric.png": "53f73f3b4a0d8fcfe94756b1d1a1347c5df78f1f68d7489cfe2715aa99462bec",
+    "before/031_townhouse_01-upper-cut.png": "9ca50906776cf655db27d38edf744b85648ee0f7dc1205ea701ef10587bbc68e"
+  },
+  "views_reviewed": [
+    "001_row_house_01-isometric",
+    "001_row_house_01-upper-cut",
+    "031_townhouse_01-isometric",
+    "031_townhouse_01-upper-cut"
+  ],
+  "observations": [
+    "Before: broad peach rectangular panels cover inner cut faces and extend above the original roof geometry.",
+    "After: those unrelated cut panels are absent, leaving the actual clipped facade, trim, roof and chimney geometry visible.",
+    "Both chosen buildings and both camera views clearly show the panel removal; no additional camera or lighting change was used."
+  ],
+  "comparison_framing_accepted": true,
+  "ordinary_gameplay_accepted": false,
+  "store_media_accepted": false,
+  "physical_device_proof": false,
+  "source_and_baseline_preserved": true,
+  "owned_pids": [
+    49528,
+    49573
+  ],
+  "owned_pids_confirmed_absent": true
+}

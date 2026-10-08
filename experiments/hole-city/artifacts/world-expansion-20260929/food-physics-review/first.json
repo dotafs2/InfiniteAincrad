@@ -1,0 +1,52 @@
+{
+  "checks": 179,
+  "failures": [
+    "Perimeter rain stays independently collectible: bacon",
+    "Perimeter rain stays independently collectible: cake",
+    "Engine process failed; inspect the engine log"
+  ],
+  "metrics": {
+    "inventory": {
+      "extension_bodies": 334,
+      "extension_loose": 120,
+      "maximum_scale": 4.22535228729248,
+      "overlap_pairs": []
+    },
+    "perimeter_rain": {
+      "former_clamp_min_distance": 29.0006561279297,
+      "landed_recipes": 10,
+      "max_spawn_distance": 15.9446430206299,
+      "maximum_airborne": 23,
+      "maximum_retained": 78,
+      "waves_spawned": 78
+    },
+    "plaza": {
+      "at": "(-73.69755, 2.727264, -41.94333)",
+      "grown_radius": 6.0,
+      "maximum_fall_speed": 8.6785364151001,
+      "minimum_bottom_during_contact": -0.0309879779815674,
+      "receipt": {
+        "count": 1,
+        "player": true,
+        "points": 2,
+        "top": -3.51483184490907
+      },
+      "scale": 2.8301887512207
+    },
+    "towers": [
+      {
+        "kind": "burger",
+        "pieces": 4,
+        "radius": 6.0,
+        "tilted": true
+      },
+      {
+        "kind": "cake",
+        "pieces": 3,
+        "radius": 6.0,
+        "tilted": true
+      }
+    ]
+  },
+  "scope": "Independent actual enlarged food collider/support/contact/collection; no renderer or performance claim"
+}

@@ -1,0 +1,43 @@
+{
+  "title": "Shop Theme",
+  "recording_title": "Buy Something!",
+  "author": "Cleyton Kauffman",
+  "source_url": "https://opengameart.org/content/shop-theme",
+  "license": "CC0-1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source_archive_sha256": "127e5556a7ef9d944e5a44b012ffc6f833fa673c4c2091b71909159b9965c836",
+  "source_member": "shop_theme/Buy Something!.ogg",
+  "source_member_sha256": "fa023f1d2e3d3194136bb8f877925d5547e5489439b24658698fbbb458de5b21",
+  "original_metadata_artist": "Cleyton R. Xavier",
+  "processing": {
+    "constant_gain_db": -7.1,
+    "codec": "libvorbis",
+    "quality": 3,
+    "trimmed": false,
+    "edge_fades": false,
+    "tempo_changed": false,
+    "note": "Full normal version; no added instruments or arrangement changes."
+  },
+  "maps": [
+    "city",
+    "food"
+  ],
+  "asset": "shop_theme_loop.ogg",
+  "bytes": 1194690,
+  "sha256": "3a7e60a8a8cbf1a5cf56d8cd147ccfe84946278ef5c58468640cb19528a5e235",
+  "measurements": {
+    "frames": 3880800,
+    "sample_rate": 44100,
+    "channels": 2,
+    "duration_seconds": 88.0,
+    "integrated_lufs": -22.0,
+    "true_peak_dbfs": -7.4,
+    "sample_peak": 0.42631033062934875,
+    "rms_dbfs": -23.723621763529707,
+    "boundary_sample_jump": 0.019624754581986467,
+    "first_10ms_rms": 7.15114192483953e-06,
+    "last_10ms_rms": 0.016749340655250237
+  },
+  "ffmpeg_version": "ffmpeg version 7.1.1 Copyright (c) 2000-2025 the FFmpeg developers",
+  "limits": "Numerical measurements and decoder checks do not establish listening quality on a phone."
+}

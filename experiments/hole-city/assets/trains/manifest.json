@@ -1,0 +1,386 @@
+{
+  "schema": 1,
+  "authoring_tool": "Blender 3.6.23",
+  "blender_build_hash": "e467db79ca8c",
+  "generator": "tools/build_train_assets.py",
+  "generator_sha256": "f423122a6cc23e9dc6af48bf2886a309673993e6a319b0c56e70e111f5aa0208",
+  "source": "art_source/trains/train_assets.blend",
+  "source_sha256": "26261558186fbdbef6282ee68755e541bd391eabae5b1067bd5471faf2d6539f",
+  "license": "Original project-authored geometry and palette; no downloaded assets.",
+  "coordinate_contract": {
+    "godot_up": "+Y",
+    "godot_forward": "+Z",
+    "blender_up": "+Z",
+    "blender_forward": "-Y",
+    "origin": "XZ center at ground Y=0",
+    "units": "meters"
+  },
+  "limits": {
+    "max_triangles_per_asset": 1500,
+    "max_material_surfaces": 4,
+    "actual_shared_material_surfaces": 1
+  },
+  "assets": [
+    {
+      "key": "sushi_gunkan",
+      "file": "res://assets/trains/sushi_gunkan.glb",
+      "sha256": "ba557bb7bb65197f04921245196d5067b101cce7bdcb2a1f434b20307c4c9e3f",
+      "bytes": 80456,
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          1.2203716039657593,
+          0.7849999666213989
+        ],
+        "size": [
+          1.0260000228881836,
+          1.2203716039657593,
+          1.5699999332427979
+        ]
+      },
+      "triangles": 1228,
+      "material_surfaces": 1,
+      "materials": 1,
+      "vertices": 1492,
+      "embedded_texture_bytes": 0,
+      "forward": [
+        0,
+        0,
+        1
+      ],
+      "base_y": 0,
+      "source_object": "sushi_gunkan",
+      "semantic": "engine"
+    },
+    {
+      "key": "sushi_salmon",
+      "file": "res://assets/trains/sushi_salmon.glb",
+      "sha256": "ea837147e9dc63bced3d379c5697b0abf09717c52ece41f8901b8a02387947fb",
+      "bytes": 50836,
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.8183715343475342,
+          0.7849999666213989
+        ],
+        "size": [
+          1.0260000228881836,
+          0.8183715343475342,
+          1.5699999332427979
+        ]
+      },
+      "triangles": 892,
+      "material_surfaces": 1,
+      "materials": 1,
+      "vertices": 917,
+      "embedded_texture_bytes": 0,
+      "forward": [
+        0,
+        0,
+        1
+      ],
+      "base_y": 0,
+      "source_object": "sushi_salmon",
+      "semantic": "car"
+    },
+    {
+      "key": "sushi_tuna",
+      "file": "res://assets/trains/sushi_tuna.glb",
+      "sha256": "f20e3252241d81e132be0261a14c55edbcd405eccbf95ab3e10fe8a2a307f072",
+      "bytes": 49944,
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.828371524810791,
+          0.7849999666213989
+        ],
+        "size": [
+          1.0260000228881836,
+          0.828371524810791,
+          1.5699999332427979
+        ]
+      },
+      "triangles": 872,
+      "material_surfaces": 1,
+      "materials": 1,
+      "vertices": 901,
+      "embedded_texture_bytes": 0,
+      "forward": [
+        0,
+        0,
+        1
+      ],
+      "base_y": 0,
+      "source_object": "sushi_tuna",
+      "semantic": "car"
+    },
+    {
+      "key": "sushi_shrimp",
+      "file": "res://assets/trains/sushi_shrimp.glb",
+      "sha256": "48f4ac4117900b0382a04e2525fe3e61794a7fce1eedb86435078be48e2f8351",
+      "bytes": 55252,
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.8230961561203003,
+          0.7849999666213989
+        ],
+        "size": [
+          1.0260000228881836,
+          0.8230961561203003,
+          1.5699999332427979
+        ]
+      },
+      "triangles": 1100,
+      "material_surfaces": 1,
+      "materials": 1,
+      "vertices": 983,
+      "embedded_texture_bytes": 0,
+      "forward": [
+        0,
+        0,
+        1
+      ],
+      "base_y": 0,
+      "source_object": "sushi_shrimp",
+      "semantic": "car"
+    },
+    {
+      "key": "sushi_eel",
+      "file": "res://assets/trains/sushi_eel.glb",
+      "sha256": "b6b1c4c0d99842e05cbf4f63aef4e4ce1125fed97e078013f03e97395cc5b4ae",
+      "bytes": 53804,
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.8218715190887451,
+          0.7849999666213989
+        ],
+        "size": [
+          1.0260000228881836,
+          0.8218715190887451,
+          1.5699999332427979
+        ]
+      },
+      "triangles": 972,
+      "material_surfaces": 1,
+      "materials": 1,
+      "vertices": 969,
+      "embedded_texture_bytes": 0,
+      "forward": [
+        0,
+        0,
+        1
+      ],
+      "base_y": 0,
+      "source_object": "sushi_eel",
+      "semantic": "car"
+    },
+    {
+      "key": "sushi_tamago",
+      "file": "res://assets/trains/sushi_tamago.glb",
+      "sha256": "996ccf254d31c0caf06efc5ed1b495ea001f5b0b8616d405bfd0b3bb54e0d9ae",
+      "bytes": 59792,
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.8963714838027954,
+          0.7849999666213989
+        ],
+        "size": [
+          1.0260000228881836,
+          0.8963714838027954,
+          1.5699999332427979
+        ]
+      },
+      "triangles": 1064,
+      "material_surfaces": 1,
+      "materials": 1,
+      "vertices": 1082,
+      "embedded_texture_bytes": 0,
+      "forward": [
+        0,
+        0,
+        1
+      ],
+      "base_y": 0,
+      "source_object": "sushi_tamago",
+      "semantic": "car"
+    },
+    {
+      "key": "sushi_roe",
+      "file": "res://assets/trains/sushi_roe.glb",
+      "sha256": "0a88ea86dcfe1d6254e10b54ab19497688019e3684de070d3716702b6f543cef",
+      "bytes": 65016,
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.9118715524673462,
+          0.7849999666213989
+        ],
+        "size": [
+          1.0260000228881836,
+          0.9118715524673462,
+          1.5699999332427979
+        ]
+      },
+      "triangles": 1064,
+      "material_surfaces": 1,
+      "materials": 1,
+      "vertices": 1191,
+      "embedded_texture_bytes": 0,
+      "forward": [
+        0,
+        0,
+        1
+      ],
+      "base_y": 0,
+      "source_object": "sushi_roe",
+      "semantic": "car"
+    },
+    {
+      "key": "sushi_mackerel",
+      "file": "res://assets/trains/sushi_mackerel.glb",
+      "sha256": "bc49e6c481756469e11481239d247a55b22416ab0af4d023019f930fa36e322e",
+      "bytes": 50840,
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.8113715648651123,
+          0.7849999666213989
+        ],
+        "size": [
+          1.0260000228881836,
+          0.8113715648651123,
+          1.5699999332427979
+        ]
+      },
+      "triangles": 892,
+      "material_surfaces": 1,
+      "materials": 1,
+      "vertices": 917,
+      "embedded_texture_bytes": 0,
+      "forward": [
+        0,
+        0,
+        1
+      ],
+      "base_y": 0,
+      "source_object": "sushi_mackerel",
+      "semantic": "car"
+    },
+    {
+      "key": "rail_cab",
+      "file": "res://assets/trains/rail_cab.glb",
+      "sha256": "95bb935a8f5a33146f69afeb6650099867e53539ca246bf3989da02bbd2d41c3",
+      "bytes": 54960,
+      "bounds": {
+        "min": [
+          -0.6259999871253967,
+          0.0,
+          -1.0749999284744263
+        ],
+        "max": [
+          0.6259999871253967,
+          1.3431479930877686,
+          1.0749999284744263
+        ],
+        "size": [
+          1.2519999742507935,
+          1.3431479930877686,
+          2.1499998569488525
+        ]
+      },
+      "triangles": 804,
+      "material_surfaces": 1,
+      "materials": 1,
+      "vertices": 1014,
+      "embedded_texture_bytes": 0,
+      "forward": [
+        0,
+        0,
+        1
+      ],
+      "base_y": 0,
+      "source_object": "rail_cab",
+      "semantic": "cab"
+    },
+    {
+      "key": "rail_car",
+      "file": "res://assets/trains/rail_car.glb",
+      "sha256": "8a3124f399037c97975e8bcfe789167594d48113d0ba211f6dbd854b97782204",
+      "bytes": 60672,
+      "bounds": {
+        "min": [
+          -0.6259999871253967,
+          0.0,
+          -1.0749999284744263
+        ],
+        "max": [
+          0.6259999871253967,
+          1.3431479930877686,
+          1.0749999284744263
+        ],
+        "size": [
+          1.2519999742507935,
+          1.3431479930877686,
+          2.1499998569488525
+        ]
+      },
+      "triangles": 956,
+      "material_surfaces": 1,
+      "materials": 1,
+      "vertices": 1114,
+      "embedded_texture_bytes": 0,
+      "forward": [
+        0,
+        0,
+        1
+      ],
+      "base_y": 0,
+      "source_object": "rail_car",
+      "semantic": "car"
+    }
+  ],
+  "total_glb_bytes": 581572
+}

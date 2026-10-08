@@ -1,0 +1,38 @@
+{
+  "plan_sha256": "86decaffa2e1385d118033d2304e1e490727f79d09be51bf7f1c980ebd10eda0",
+  "capture_sha256": "3f087b7dcc37a96788748ea1ecd59a945ce8882accb0c42d6a3ebfd970855dea",
+  "districts": [
+    {
+      "district": "Marshmallow Reach",
+      "eligible": 4086,
+      "occupied_axis": 693,
+      "ratio_axis": 0.1696035242290749,
+      "ratio_rotated_rectangles": 0.17205090553108174
+    },
+    {
+      "district": "Syrup Waterfront",
+      "eligible": 2660,
+      "occupied_axis": 614,
+      "ratio_axis": 0.23082706766917294,
+      "ratio_rotated_rectangles": 0.23383458646616542
+    },
+    {
+      "district": "Custard Commons",
+      "eligible": 4109,
+      "occupied_axis": 791,
+      "ratio_axis": 0.19250425894378195,
+      "ratio_rotated_rectangles": 0.19128741786322706
+    },
+    {
+      "district": "Cookie End",
+      "eligible": 2665,
+      "occupied_axis": 753,
+      "ratio_axis": 0.2825515947467167,
+      "ratio_rotated_rectangles": 0.2791744840525328
+    }
+  ],
+  "new_unsupported_foods": 194,
+  "clearance_violations": [],
+  "density_pass": true,
+  "scope": "Actual unsupported-body half extents reproduce the unchanged gate; rotated rectangles are an independent presentation-footprint estimate. New body clearances use actual collider circumradii. No image or performance claim."
+}

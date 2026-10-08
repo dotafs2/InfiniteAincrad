@@ -1,0 +1,246 @@
+extends SceneTree
+## Independent regression for structural-only reveal. Nearby edible objects
+## must remain visible even when they share meshes/batches with a building.
+const Reveal=preload("res://fidelity/hole_reveal.gd")
+const FoodCity=preload("res://fidelity/food_city.gd")
+const Palette=preload("res://fidelity/palette.gdshader")
+class FixtureBody:
+	extends Node3D
+	var category:="building"
+	var height:=3.2
+	var half_size:=Vector3(1.2,1.6,1.2)
+	var freeze:=true
+	var consumed:=false
+	var fractured:=false
+	var claimed_by:Node3D
+class FixtureCity:
+	extends Node3D
+	var foods:Array[Node3D]=[]
+var game:Node3D
+var checks:=0
+var failures:Array[String]=[]
+var evidence:Dictionary={}
+func _initialize()->void:run.call_deferred()
+func check(ok:bool,label:String)->void:
+	checks+=1
+	if not ok:failures.append(label);push_error(label)
+func pause_simulation()->void:
+	game.set_process(false);game.set_physics_process(false);game.city.set_process(false);game.city.set_physics_process(false)
+	for body in game.city.foods:
+		if is_instance_valid(body):body.set_physics_process(false)
+	for h in game.holes:h.set_process(false);h.set_physics_process(false)
+func materials(node:Node)->Array:
+	var out:Array=[]
+	if node is GeometryInstance3D and node.material_override!=null:out.append(node.material_override)
+	elif node is MeshInstance3D and node.mesh!=null:
+		for i in node.mesh.get_surface_count():out.append(node.get_active_material(i))
+	for child in node.get_children():out.append_array(materials(child))
+	return out
+func material_weight(material:Material)->float:
+	if not material is ShaderMaterial or material.shader==null:return 0.0
+	if not "hole_reveal_discard" in material.shader.code and not "hole_reveal_mask" in material.shader.code:return 0.0
+	var value=material.get_shader_parameter("reveal_occluder")
+	# A reveal shader with no explicit zero-default opt-in is the broad v0.8.1
+	# behavior this independent review is intended to catch.
+	if value==null:return 1.0
+	return float(value)
+func effective_weight(body:Node3D)->float:
+	if "batch" in body and body.batch!=null:
+		# Read CPU-authoritative dispatch state. The headless dummy renderer does
+		# not retain native MultiMesh buffers; GPU execution is a separate probe.
+		return body.reveal_weight
+	var result:=0.0
+	for material in materials(body):result=maxf(result,material_weight(material))
+	return result
+func fixture_body(owner:FixtureCity,size:Vector3,at:Vector3,category:="building")->FixtureBody:
+	var body:=FixtureBody.new();body.half_size=size*.5;body.height=size.y;body.category=category
+	owner.add_child(body);body.position=at
+	var view:=MeshInstance3D.new();var mesh:=BoxMesh.new();mesh.size=size;view.mesh=mesh
+	var material:=ShaderMaterial.new();material.shader=Palette;material.set_shader_parameter("reveal_occluder",0.0);view.material_override=material;body.add_child(view)
+	owner.foods.append(body);return body
+func overhead_camera()->void:
+	game.player.position=Vector3.ZERO;game.player.radius=.85;game.player.velocity=Vector3.ZERO
+	game.camera.position=Vector3(0,18,0);game.camera.look_at(Vector3.ZERO,Vector3.FORWARD)
+func geometry_fixture()->void:
+	var city:=FixtureCity.new();root.add_child(city)
+	var reveal:=Reveal.new();overhead_camera()
+	var margin:=fixture_body(city,Vector3(2.4,3.2,2.4),Vector3(2.4,1.625,0))
+	var core:=fixture_body(city,Vector3(2.4,3.2,2.4),Vector3(0,1.625,0))
+	var wide:=fixture_body(city,Vector3(10,3.2,2.4),Vector3(4.5,1.625,0))
+	var below:=fixture_body(city,Vector3(3,4,3),Vector3(0,-2.1,0))
+	var above:=fixture_body(city,Vector3(3,4,3),Vector3(0,22,0))
+	var low:=fixture_body(city,Vector3(12,1,12),Vector3(0,.525,0))
+	var thin:=fixture_body(city,Vector3(1,8,1),Vector3(0,4.025,0))
+	var tall:=fixture_body(city,Vector3(3,24,3),Vector3(2,12.025,0))
+	var excluded:Array=[]
+	for category in ["person","vehicle","lamp","sign","ambient_actor","authored_actor","food_cake","building_fragment"]:
+		excluded.append(fixture_body(city,Vector3(6,6,6),Vector3(0,3.025,0),category))
+	reveal.bind_city(city);reveal.tick(game.camera,game.player,1,true)
+	# Under this vertical camera every point on the side building has projected
+	# x>=1.2*18/(18-.025)>1.2: rigorously outside the actual .85 mouth, although
+	# the near wall is inside the expanded1.85 aperture. No hull-copy oracle.
+	check(1.2*18.0/(18.0-.025)>game.player.radius,"Independent projection bound excludes the nearby building from the actual mouth")
+	check(reveal.sample_mask(Vector3(1.2,1,0),game.camera.position,game.camera.global_basis.z)>.1,"False-positive fixture really lies inside the expanded shader aperture")
+	check(not reveal.blocks_core(margin,game.camera,game.player) and reveal.body_reveal_weight(margin)==0 and effective_weight(margin)==0,"Nearby building outside actual mouth stays solid despite expanded margin")
+	check(reveal.blocks_core(core,game.camera,game.player) and reveal.body_reveal_weight(core)>0 and effective_weight(core)>0,"True large intact shell covering the mouth can reveal")
+	check(reveal.blocks_core(wide,game.camera,game.player) and reveal.body_reveal_weight(wide)>0,"A wide building edge qualifies even with distant body center")
+	check(not reveal.blocks_core(below,game.camera,game.player) and reveal.body_reveal_weight(below)==0,"Below-ground building cannot be foreground")
+	check(not reveal.blocks_core(above,game.camera,game.player) and reveal.body_reveal_weight(above)==0,"Building wholly above camera cannot cover the opening")
+	check(not reveal.is_structural_candidate(low) and reveal.body_reveal_weight(low)==0,"Large flat mass does not qualify as large architecture")
+	check(not reveal.is_structural_candidate(thin) and reveal.body_reveal_weight(thin)==0,"Tall narrow pole does not qualify as large architecture")
+	check(reveal.blocks_core(tall,game.camera,game.player),"Camera-height clipping retains a genuinely covering tall building")
+	for body in excluded:check(not reveal.is_structural_candidate(body) and reveal.body_reveal_weight(body)==0 and effective_weight(body)==0,"Oversized "+body.category+" stays solid on the exact opening ray")
+	game.player.velocity=Vector3(7,0,0);reveal.tick(game.camera,game.player,1,true)
+	check(reveal.lookahead.length()>1 and reveal.body_reveal_weight(margin)==0,"Movement lookahead cannot enable a nonblocking nearby shell")
+	core.claimed_by=game.player;reveal.tick(game.camera,game.player,1,true)
+	check(reveal.body_reveal_weight(core)==0 and effective_weight(core)==0,"Claimed structural mass becomes fully visible immediately")
+	core.claimed_by=null;core.freeze=false;reveal.tick(game.camera,game.player,1,true)
+	check(reveal.body_reveal_weight(core)==0 and effective_weight(core)==0,"Released structural mass is never fading debris")
+	core.freeze=true;core.consumed=true;reveal.tick(game.camera,game.player,1,true)
+	check(reveal.body_reveal_weight(core)==0,"Consumed structure cannot retain a reveal weight")
+	core.consumed=false
+	for yaw in [0.0,PI*.5,PI,PI*1.5]:
+		var offset:=Basis(Vector3.UP,yaw)*Vector3(10,18,14)
+		game.camera.position=offset;game.camera.look_at(Vector3.ZERO)
+		var lateral:=Vector3(-offset.z,0,offset.x).normalized()
+		margin.position=lateral*5.0+Vector3.UP*1.625;game.player.velocity=lateral*7.0
+		reveal.tick(game.camera,game.player,1,true)
+		check(reveal.blocks_core(core,game.camera,game.player) and reveal.body_reveal_weight(core)>0,"Actual diagonal follow-camera ray recognizes a covering shell at each yaw")
+		check(not reveal.blocks_core(margin,game.camera,game.player) and reveal.body_reveal_weight(margin)==0,"Actual diagonal follow-camera ignores side structure despite movement toward it")
+	reveal.reset(true);city.free()
+func visible_triangle_hits(body:Node3D,endpoints:Array[Vector3])->int:
+	# Independent direct triangle intersections, not the controller's cached BVH
+	# or its projected-box/ring-sample implementation.
+	var triangles:=PackedVector3Array()
+	for node in body.find_children("*","MeshInstance3D",true,false):
+		if node.mesh==null:continue
+		for point in node.mesh.get_faces():triangles.append(node.global_transform*point)
+	var hits:=0
+	for endpoint in endpoints:
+		for i in range(0,triangles.size(),3):
+			if Geometry3D.segment_intersects_triangle(game.camera.global_position,endpoint,triangles[i],triangles[i+1],triangles[i+2])!=null:
+				hits+=1;break
+	return hits
+func mouth_probes()->Array[Vector3]:
+	var points:Array[Vector3]=[game.player.global_position]
+	for radius in [.5,1.0]:
+		for i in 32:
+			var angle:=float(i)*TAU/32.0
+			points.append(game.player.global_position+Vector3(cos(angle),0,sin(angle))*game.player.radius*radius)
+	return points
+func hollow_fixture()->void:
+	var city:=FixtureCity.new();root.add_child(city)
+	var arch:=FixtureBody.new();arch.height=9;arch.half_size=Vector3(1.7,4.5,.3)
+	city.add_child(arch);arch.position=Vector3(0,4.525,3.5);city.foods.append(arch)
+	for piece in [{"at":Vector3(-1.45,0,0),"size":Vector3(.5,9,.6)},{"at":Vector3(1.45,0,0),"size":Vector3(.5,9,.6)},{"at":Vector3(0,4,0),"size":Vector3(3.4,1,.6)}]:
+		var mesh:=BoxMesh.new();mesh.size=piece.size
+		var view:=MeshInstance3D.new();view.mesh=mesh;view.position=piece.at
+		var material:=ShaderMaterial.new();material.shader=Palette;material.set_shader_parameter("reveal_occluder",0.0)
+		view.material_override=material;arch.add_child(view)
+	var reveal:=Reveal.new();game.player.position=Vector3.ZERO;game.player.radius=.85;game.player.velocity=Vector3.ZERO
+	game.camera.position=Vector3(0,18,14);game.camera.look_at(Vector3.ZERO)
+	reveal.bind_city(city);reveal.tick(game.camera,game.player,1,true)
+	var empty_hits:=visible_triangle_hits(arch,mouth_probes())
+	check(reveal.blocks_core(arch,game.camera,game.player),"Hollow arch deliberately overlaps the mouth with its broad bounds")
+	check(empty_hits==0,"Independent65ray triangle probe passes through the arch opening")
+	check(reveal.sample_mask(Vector3(1.2,4.5,3.5),game.camera.position,game.camera.global_basis.z)>.1,"Visible arch side lies inside expanded mask and would be incorrectly faded by bounds alone")
+	check(reveal.body_reveal_weight(arch)==0 and effective_weight(arch)==0,"Arch with clear opening stays entirely opaque despite intersecting broad bounds")
+	game.player.position.x=1.9;game.camera.look_at(game.player.position);reveal.tick(game.camera,game.player,1,true)
+	var solid_hits:=visible_triangle_hits(arch,[game.player.global_position])
+	check(solid_hits==1 and reveal.body_reveal_weight(arch)>0 and effective_weight(arch)>0,"Moving mouth ray onto solid arch pillar enables reveal")
+	evidence["hollow_arch"]={"clear_opening_ray_hits":empty_hits,"solid_side_center_ray_hits":solid_hits,"clear_opening_probe_count":65}
+	reveal.reset(true);city.free()
+	# Actual food geometry, including its glaze/sprinkle mesh and hidden static
+	# source visual, must preserve the center of a large donut as empty space.
+	var food_city:=FoodCity.new();root.add_child(food_city);food_city.game=game
+	var donut:Node3D=food_city.food("donut",Vector2.ZERO,3.0,8,true)
+	donut.position.y=5.0;donut.set_meta("food_building",true);donut.set_meta("structural_shell",true)
+	donut.set_meta("structure_height",6.0);donut.set_meta("structure_width",6.0);food_city.batch_static_food()
+	overhead_camera();reveal=Reveal.new();reveal.bind_city(food_city);reveal.tick(game.camera,game.player,1,true)
+	empty_hits=visible_triangle_hits(donut,mouth_probes())
+	check(reveal.blocks_core(donut,game.camera,game.player) and empty_hits==0,"Actual donut broad bounds cover the mouth while65independent mesh rays pass through its center")
+	check(reveal.body_reveal_weight(donut)==0 and donut.reveal_weight==0,"Hollow batched food shell remains opaque through its open center")
+	game.player.position.x=2.7;game.camera.look_at(game.player.position,Vector3.FORWARD);reveal.tick(game.camera,game.player,1,true)
+	solid_hits=visible_triangle_hits(donut,[game.player.global_position])
+	check(solid_hits==1 and reveal.body_reveal_weight(donut)>0 and donut.reveal_weight>0,"Moving mouth ray onto actual donut dough activates its own instance")
+	evidence["hollow_donut"]={"clear_opening_ray_hits":empty_hits,"solid_dough_center_ray_hits":solid_hits,"clear_opening_probe_count":65}
+	reveal.reset(true);food_city.free()
+func actual_map(map_id:String)->void:
+	game.selected_map=map_id;game.start_level();pause_simulation();game.begin_play();overhead_camera()
+	game.update_reveal(1)
+	var categories:Dictionary={};var nonstructural:=0;var incorrectly_enabled:=[];var structural:=0
+	for body in game.city.foods:
+		if game.reveal.is_structural_candidate(body):structural+=1;continue
+		nonstructural+=1;categories[body.category]=int(categories.get(body.category,0))+1
+		if game.reveal.body_reveal_weight(body)!=0 or effective_weight(body)!=0:incorrectly_enabled.append(str(body.name))
+	check(nonstructural>200 and incorrectly_enabled.is_empty(),map_id+": all nonstructural scene objects stay fully visible")
+	check(structural>0,map_id+": actual large architecture remains eligible")
+	evidence[map_id]={"nonstructural":nonstructural,"structural":structural,"protected_categories":categories,"incorrectly_enabled":incorrectly_enabled}
+	if map_id=="city":
+		for mode in ["cached","fallback"]:
+			var body:Node3D=game.city.building_visuals[0 if mode=="cached" else 1].body
+			body.position=Vector3(0,body.height*.5+.025,0)
+			game.update_reveal(1)
+			check(game.reveal.body_reveal_weight(body)>0,"Fracture parent really was a revealed blocker before "+mode+" release")
+			if mode=="fallback":body.fracture_cache=null
+			var name_before:String=body.name;body.fracture_building(game.player)
+			var count:=0;var bad:=0
+			for piece in game.city.foods:
+				if is_instance_valid(piece) and piece.get_meta("fracture_parent","")==name_before:
+					count+=1;piece.freeze=true;piece.set_physics_process(false)
+					if effective_weight(piece)!=0 or game.reveal.is_structural_candidate(piece):bad+=1
+			check(count==16 and bad==0,mode+": all16 independent fragments stay visible despite inherited facade appearance")
+			await process_frame;await process_frame;game.update_reveal(.016)
+			check(not is_instance_valid(body) and game.phase=="playing","Freed fracture parent cannot break later active reveal updates")
+	else:
+		var toppers:=0
+		for tower in game.city.towers:
+			var last:Node3D=tower.tiers.back()
+			if tower.family!="berry_water_tower":
+				toppers+=1;check(not last.get_meta("structural_shell",false) and effective_weight(last)==0,"Small roof decoration never becomes a blocker merely from tower_id")
+		check(toppers>50,"Real small topper/crown exclusions are exercised")
+		game.city.rain_enabled=false
+		for kind in game.city.Shapes.KINDS:
+			var rain:Node3D=game.city.spawn_rain(kind,Vector2.ZERO,8)
+			check(not game.reveal.is_structural_candidate(rain) and effective_weight(rain)==0,"Airborne "+kind+" remains solid inside the opening ray")
+			rain.freeze=true;rain.set_physics_process(false);rain.rain_landed=true;rain.sleeping=true;game.city.batch_settled_rain()
+			check(rain.batch!=null and effective_weight(rain)==0,"Settled "+kind+" has zero per-instance reveal")
+			rain.expose_visual();check(effective_weight(rain)==0,"Released "+kind+" still uses opaque individual material")
+	game.finish("timeout");game.back_home();await process_frame;await process_frame
+func mixed_food_batch()->void:
+	var city:=FoodCity.new();root.add_child(city);city.game=game
+	var bodies:Array=[]
+	for i in 3:
+		var body:Node3D=city.food("cake",Vector2(.1*i,0),1.5,2,true)
+		body.set_meta("structural_shell",i!=1);body.set_meta("food_building",i!=1);body.set_meta("structure_height",6.0);body.set_meta("structure_width",3.0)
+		bodies.append(body)
+	city.batch_static_food();var mm:MultiMesh=bodies[0].batch
+	check(mm==bodies[1].batch and mm==bodies[2].batch,"Independent fixture truly mixes loose and structural copies of same mesh in one batch")
+	var reveal:=Reveal.new();overhead_camera();reveal.bind_city(city);reveal.tick(game.camera,game.player,1,true)
+	check(reveal.body_reveal_weight(bodies[0])>0 and reveal.body_reveal_weight(bodies[2])>0 and reveal.body_reveal_weight(bodies[1])==0,"Shared batch controller enables only actual structural members")
+	check(bodies[0].reveal_weight>0 and bodies[2].reveal_weight>0 and bodies[1].reveal_weight==0,"Controller dispatch reaches only the structural food bodies' authoritative state")
+	check(city.food_material.get_shader_parameter("reveal_use_instance")==false and city.food_material.get_shader_parameter("reveal_occluder")==0,"Standalone Glaze stays explicitly nonoccluding")
+	check(city.food_batch_material!=city.food_material and city.food_batch_material.get_shader_parameter("reveal_use_instance")==true,"Only static batch material reads per-instance opt-in")
+	var retained_weight:float=bodies[2].reveal_weight
+	bodies[0].expose_visual()
+	check(bodies[2].batch_index==0 and bodies[1].batch_index==1 and bodies[2].batch_members[0]==bodies[2],"Actual native batch release compacts the moved member's ownership index")
+	check(bodies[2].reveal_weight==retained_weight and bodies[1].reveal_weight==0 and bodies[0].reveal_weight==0,"Compaction preserves moved eligibility while clearing released food state")
+	check(mm.visible_instance_count==2 and bodies[2].batch_members.size()==2,"Released slot leaves the active batch range")
+	check(not bodies[0].get_meta("structural_shell") and bodies[0].batch==null and effective_weight(bodies[0])==0,"Detached building piece immediately becomes visible debris")
+	reveal.tick(game.camera,game.player,1,true)
+	check(reveal.body_reveal_weight(bodies[2])>0 and reveal.body_reveal_weight(bodies[1])==0 and effective_weight(bodies[0])==0,"Controller retains structural selection without leaking to loose or detached peers")
+	bodies[2].lose_support(game.player);bodies[2].freeze=true;bodies[2].set_physics_process(false);reveal.tick(game.camera,game.player,1,true)
+	check(not bodies[2].get_meta("structural_shell") and effective_weight(bodies[2])==0,"Support loss clears structural eligibility even if debris later sleeps")
+	reveal.reset(true);city.free()
+func run()->void:
+	if not OS.get_cmdline_user_args().has("--test"):quit(2);return
+	game=load("res://fidelity/main.tscn").instantiate();root.add_child(game)
+	check(game.progress_file().is_empty(),"Review does not access player progress")
+	game.start_level();pause_simulation()
+	geometry_fixture();hollow_fixture();await actual_map("city");await actual_map("food")
+	# Restore a live player after Home removed its world, for the independent
+	# three-member batch fixture without rebuilding the complete food scene.
+	game.selected_map="city";game.start_level();pause_simulation();mixed_food_batch()
+	game.free();await process_frame
+	print("SELECTIVE_REVEAL_REVIEW "+JSON.stringify({"checks":checks,"failures":failures,"evidence":evidence,"scope":"Independent structural-only selection/material/lifecycle fixtures; not GPU or phone validation"}))
+	quit(0 if failures.is_empty() else 1)

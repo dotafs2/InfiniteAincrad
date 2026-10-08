@@ -1,0 +1,166 @@
+{
+  "checks": 18270,
+  "failures": [
+    "Tilted round-food pile remains within a bounded three-second contact envelope",
+    "Tilted round-food pile remains within a bounded three-second contact envelope",
+    "Tilted round-food pile remains within a bounded three-second contact envelope",
+    "Engine process failed; inspect the engine log"
+  ],
+  "metrics": {
+    "box_bodies": 674,
+    "collection_receipts": 35,
+    "ingredient_finish_sha256": "b5067e4791261ecf18471418955af77d2b38ab4fa39e468e0d2ed75e19a64a4a",
+    "landed_rain": 10,
+    "max_radial_inset_fraction": 0.0192148113360766,
+    "pile_fixture": {
+      "at": "(0.0, 88.0)",
+      "empty_drop_volume": true
+    },
+    "pile_receipts": 6,
+    "pile_rest": [
+      {
+        "angular_speed": 0.7368403673172,
+        "kind": "cookie",
+        "max_displacement_3s": 0.0311222076416016,
+        "max_rotation_degrees_3s": 2.64115773930259,
+        "position": "(-0.634492, 0.105292, 87.56821)",
+        "speed": 0.39220342040062,
+        "vertical_range_3s": 0.0387132316827774
+      },
+      {
+        "angular_speed": 0.211803808808327,
+        "kind": "burger",
+        "max_displacement_3s": 0.0243302248418331,
+        "max_rotation_degrees_3s": 0.712168830357567,
+        "position": "(1.232131, 0.471646, 87.72465)",
+        "speed": 0.14397805929184,
+        "vertical_range_3s": 9.7423791885376e-05
+      },
+      {
+        "angular_speed": 0.624918282032013,
+        "kind": "cookie",
+        "max_displacement_3s": 0.0172929856926203,
+        "max_rotation_degrees_3s": 2.28824293210509,
+        "position": "(0.157324, 0.108787, 88.53634)",
+        "speed": 0.331337690353394,
+        "vertical_range_3s": 0.014913022518158
+      },
+      {
+        "angular_speed": 4.67551581095904e-05,
+        "kind": "burger",
+        "max_displacement_3s": 3.99975579057354e-05,
+        "max_rotation_degrees_3s": 0.0,
+        "position": "(0.87858, 0.672192, 85.97449)",
+        "speed": 3.49727270076983e-05,
+        "vertical_range_3s": 1.01923942565918e-05
+      },
+      {
+        "angular_speed": 0.753024101257324,
+        "kind": "cookie",
+        "max_displacement_3s": 0.117692820727825,
+        "max_rotation_degrees_3s": 4.21584333829705,
+        "position": "(-0.506451, 0.357005, 87.72468)",
+        "speed": 0.380475372076035,
+        "vertical_range_3s": 0.0264820754528046
+      },
+      {
+        "angular_speed": 0.000156315974891186,
+        "kind": "burger",
+        "max_displacement_3s": 0.000269967596977949,
+        "max_rotation_degrees_3s": 0.0559529096807445,
+        "position": "(-1.071838, 0.674457, 86.44167)",
+        "speed": 0.000147696322528645,
+        "vertical_range_3s": 6.95586204528809e-05
+      }
+    ],
+    "rain_rest": [
+      {
+        "angular_speed": 0.0283799059689045,
+        "kind": "bacon",
+        "landed": true,
+        "position": "(62.0, 0.227743, 40.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0307769868522882,
+        "kind": "egg",
+        "landed": true,
+        "position": "(69.0, 0.481608, 40.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.215671077370644,
+        "kind": "cake",
+        "landed": true,
+        "position": "(75.56754, 1.175524, 39.95949)",
+        "sleeping": true,
+        "speed": 0.0606056302785873
+      },
+      {
+        "angular_speed": 0.0299562681466341,
+        "kind": "donut",
+        "landed": true,
+        "position": "(62.0, 0.357891, 48.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0333765372633934,
+        "kind": "burger",
+        "landed": true,
+        "position": "(69.0, 0.741023, 48.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0316201932728291,
+        "kind": "cookie",
+        "landed": true,
+        "position": "(76.0, 0.586654, 48.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0307769868522882,
+        "kind": "berry",
+        "landed": true,
+        "position": "(62.0, 0.4585, 56.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0307769868522882,
+        "kind": "sushi",
+        "landed": true,
+        "position": "(69.0, 0.496332, 56.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0333765372633934,
+        "kind": "pancake",
+        "landed": true,
+        "position": "(76.0, 0.73218, 56.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0291574355214834,
+        "kind": "pizza",
+        "landed": true,
+        "position": "(62.0, 0.242089, 64.0)",
+        "sleeping": true,
+        "speed": 0.0
+      }
+    ],
+    "round_bodies": 2260,
+    "settled_batch_count": 10,
+    "structural_box_bodies": 437,
+    "structural_round_bodies": 323,
+    "target_rain_receipts": 10,
+    "unique_dimensions": 544
+  },
+  "scope": "Non-author real food creation, resource identity, prism support, contact/drop and collection evidence; no renderer or CPU timing claim."
+}

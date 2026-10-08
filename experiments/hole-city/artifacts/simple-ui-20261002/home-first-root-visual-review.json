@@ -1,0 +1,17 @@
+{
+  "version": "0.12.6",
+  "reviewed": "Root actual Mac GPU images; explicit16PM safe-area emulation, not phone evidence",
+  "captures": {
+    "home": "52080af6bacdcda487f3cb1e6e89e0722cb0755e8ac4de3944a6b337e9a8e32b",
+    "store": "3c1e4cb874995e2795a4f06e0a802c36d4d10a77428903f61900f9aff03ca011",
+    "holes": "d2e783c2417be1832001856577714b6f19c96a12daa868b2db95cdb9c9e9f622",
+    "sunny-city-intro": "fe42301671bd31a7cab297aea9a702d146dd68c76c2bad560e9d6de8dbed1712"
+  },
+  "findings": [
+    "HOMEfirsthouseicon and cream/gold currentpage clear; PLAYprimary",
+    "Store/Holes stable targets and activepage match",
+    "Skin description stays in whitepanel after singlemapping",
+    "Intro topstatus/gesture anchor fit entireportrait"
+  ],
+  "guarded_inputs": 810
+}

@@ -1,0 +1,313 @@
+{
+  "passed": true,
+  "checks": 76,
+  "failures": [],
+  "cases": [
+    {
+      "label": "clean",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed clean",
+      "pass": true
+    },
+    {
+      "label": "raw sample total matches four traces",
+      "pass": true
+    },
+    {
+      "label": "all artifact bytes visited",
+      "pass": true
+    },
+    {
+      "label": "release-failure",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed release-failure",
+      "pass": true
+    },
+    {
+      "label": "source-changed",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed source-changed",
+      "pass": true
+    },
+    {
+      "label": "low-source-checks",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed low-source-checks",
+      "pass": true
+    },
+    {
+      "label": "low-package-checks",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed low-package-checks",
+      "pass": true
+    },
+    {
+      "label": "missing-source-suite",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed missing-source-suite",
+      "pass": true
+    },
+    {
+      "label": "missing-package-suite",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed missing-package-suite",
+      "pass": true
+    },
+    {
+      "label": "failed-suite",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed failed-suite",
+      "pass": true
+    },
+    {
+      "label": "short-suite",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed short-suite",
+      "pass": true
+    },
+    {
+      "label": "empty-artifacts",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed empty-artifacts",
+      "pass": true
+    },
+    {
+      "label": "missing-pck",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed missing-pck",
+      "pass": true
+    },
+    {
+      "label": "bad-artifact-name",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed bad-artifact-name",
+      "pass": true
+    },
+    {
+      "label": "shader-failure",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed shader-failure",
+      "pass": true
+    },
+    {
+      "label": "empty-shader-inputs",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed empty-shader-inputs",
+      "pass": true
+    },
+    {
+      "label": "missing-shader-input",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed missing-shader-input",
+      "pass": true
+    },
+    {
+      "label": "wrong-shader-hash",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed wrong-shader-hash",
+      "pass": true
+    },
+    {
+      "label": "empty-programs",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed empty-programs",
+      "pass": true
+    },
+    {
+      "label": "missing-program",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed missing-program",
+      "pass": true
+    },
+    {
+      "label": "short-reveal-cases",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed short-reveal-cases",
+      "pass": true
+    },
+    {
+      "label": "short-albedo-cases",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed short-albedo-cases",
+      "pass": true
+    },
+    {
+      "label": "duplicate-program",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed duplicate-program",
+      "pass": true
+    },
+    {
+      "label": "uncompiled-program",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed uncompiled-program",
+      "pass": true
+    },
+    {
+      "label": "invalid-reveal-result",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed invalid-reveal-result",
+      "pass": true
+    },
+    {
+      "label": "invalid-albedo-result",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed invalid-albedo-result",
+      "pass": true
+    },
+    {
+      "label": "profile-stale",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed profile-stale",
+      "pass": true
+    },
+    {
+      "label": "profile-changed",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed profile-changed",
+      "pass": true
+    },
+    {
+      "label": "zero-repeats",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed zero-repeats",
+      "pass": true
+    },
+    {
+      "label": "false-repeats",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed false-repeats",
+      "pass": true
+    },
+    {
+      "label": "missing-trace",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed missing-trace",
+      "pass": true
+    },
+    {
+      "label": "invalid-trace",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed invalid-trace",
+      "pass": true
+    },
+    {
+      "label": "inflated-summary-samples",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed inflated-summary-samples",
+      "pass": true
+    },
+    {
+      "label": "false-summary-p95",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed false-summary-p95",
+      "pass": true
+    },
+    {
+      "label": "missing-summary-scenario",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed missing-summary-scenario",
+      "pass": true
+    },
+    {
+      "label": "corrupt-http",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed corrupt-http",
+      "pass": true
+    },
+    {
+      "label": "missing-coop",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed missing-coop",
+      "pass": true
+    },
+    {
+      "label": "missing-coep",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed missing-coep",
+      "pass": true
+    },
+    {
+      "label": "http-error",
+      "pass": true
+    },
+    {
+      "label": "stale verification removed http-error",
+      "pass": true
+    }
+  ],
+  "verifier_sha256": "4cf8e446a7762a25759f8fe4c52c6dff545cb974d3b0cfca78ac262d1260a89b",
+  "scope": "Temporary synthetic receipts and mocked HTTP only; no network, Godot, runtime edits or live preview"
+}

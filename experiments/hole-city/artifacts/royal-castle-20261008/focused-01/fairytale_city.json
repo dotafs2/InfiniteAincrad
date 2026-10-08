@@ -1,0 +1,1266 @@
+{
+  "checks": 169,
+  "failures": [],
+  "metrics": {
+    "arch_opening": {
+      "from": "(0.0, 0.25, -0.8)",
+      "passage_hit": false,
+      "roof_hit": true,
+      "to": "(0.0, 0.25, 0.8)"
+    },
+    "density": {
+      "fairytale": {
+        "cells": {
+          "(0, 1)": 1,
+          "(0, 2)": 1,
+          "(0, 3)": 1,
+          "(0, 6)": 1,
+          "(1, 0)": 1,
+          "(1, 1)": 1,
+          "(1, 2)": 1,
+          "(1, 3)": 2,
+          "(1, 4)": 1,
+          "(1, 5)": 2,
+          "(1, 7)": 2,
+          "(2, 2)": 2,
+          "(2, 3)": 1,
+          "(2, 4)": 2,
+          "(2, 5)": 3,
+          "(3, 0)": 1,
+          "(3, 1)": 1,
+          "(3, 2)": 4,
+          "(3, 3)": 2,
+          "(3, 4)": 2,
+          "(3, 5)": 4,
+          "(3, 6)": 1,
+          "(3, 7)": 2,
+          "(4, 0)": 1,
+          "(4, 1)": 1,
+          "(4, 2)": 4,
+          "(4, 3)": 2,
+          "(4, 4)": 2,
+          "(4, 5)": 5,
+          "(4, 7)": 2,
+          "(5, 2)": 2,
+          "(5, 3)": 1,
+          "(5, 4)": 2,
+          "(5, 5)": 2,
+          "(5, 6)": 1,
+          "(6, 0)": 1,
+          "(6, 1)": 1,
+          "(6, 2)": 1,
+          "(6, 3)": 1,
+          "(6, 4)": 1,
+          "(6, 5)": 2,
+          "(6, 7)": 2,
+          "(7, 1)": 1,
+          "(7, 2)": 1,
+          "(7, 3)": 2,
+          "(7, 6)": 1
+        },
+        "count": 78,
+        "heights": [
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.5,
+          5.5,
+          5.5,
+          5.59999990463257,
+          5.59999990463257,
+          5.59999990463257,
+          5.59999990463257,
+          5.59999990463257,
+          5.59999990463257,
+          5.80000019073486,
+          5.80000019073486,
+          6.5,
+          6.5,
+          6.5,
+          7.0,
+          7.0,
+          7.0,
+          7.0,
+          7.0,
+          7.0,
+          7.0,
+          7.0,
+          8.0,
+          8.0,
+          8.0,
+          8.0,
+          8.0,
+          8.0,
+          8.0,
+          8.0,
+          8.0,
+          9.0,
+          9.0,
+          9.0,
+          9.0,
+          9.0,
+          9.0,
+          10.0,
+          10.0,
+          10.0,
+          10.0,
+          10.0,
+          10.5,
+          10.5,
+          10.5,
+          10.5,
+          10.5,
+          10.5,
+          11.3999996185303,
+          12.0,
+          12.0,
+          12.0,
+          12.0,
+          14.1999998092651,
+          15.0,
+          15.0,
+          15.6000003814697,
+          16.0,
+          16.0,
+          18.0,
+          18.0,
+          21.0,
+          21.0,
+          22.0,
+          24.0,
+          24.0,
+          27.0,
+          27.0,
+          30.0,
+          33.0,
+          33.0,
+          38.0,
+          38.0
+        ],
+        "maximum_height": 38.0,
+        "median_nearest_distance": 12.806248664856,
+        "minimum_height": 5.0,
+        "occupied_cells": 46,
+        "scope": "Actual habitable bodies in the common 192-metre square; 24-metre cells; NPCs, arches and turrets excluded"
+      },
+      "high": 14,
+      "low": 16,
+      "middle": 48,
+      "sunny_city": {
+        "cells": {
+          "(0, 1)": 1,
+          "(0, 2)": 1,
+          "(0, 3)": 1,
+          "(0, 4)": 1,
+          "(0, 6)": 2,
+          "(1, 0)": 1,
+          "(1, 7)": 1,
+          "(2, 0)": 1,
+          "(2, 1)": 1,
+          "(2, 2)": 1,
+          "(2, 3)": 1,
+          "(2, 4)": 1,
+          "(2, 5)": 2,
+          "(2, 7)": 1,
+          "(3, 0)": 1,
+          "(3, 1)": 3,
+          "(3, 2)": 2,
+          "(3, 3)": 3,
+          "(3, 4)": 3,
+          "(3, 5)": 2,
+          "(3, 6)": 3,
+          "(3, 7)": 1,
+          "(4, 0)": 1,
+          "(4, 1)": 4,
+          "(4, 2)": 3,
+          "(4, 3)": 3,
+          "(4, 4)": 3,
+          "(4, 5)": 3,
+          "(4, 6)": 4,
+          "(4, 7)": 1,
+          "(5, 2)": 1,
+          "(5, 3)": 1,
+          "(5, 4)": 1,
+          "(5, 5)": 2,
+          "(5, 6)": 1,
+          "(6, 0)": 2,
+          "(6, 7)": 2,
+          "(7, 1)": 1,
+          "(7, 2)": 1,
+          "(7, 3)": 1,
+          "(7, 4)": 1,
+          "(7, 6)": 2
+        },
+        "count": 72,
+        "heights": [
+          4.46999979019165,
+          4.71000003814697,
+          4.94999980926514,
+          5.19000005722046,
+          5.42999982833862,
+          5.67000007629395,
+          5.86999988555908,
+          5.86999988555908,
+          5.86999988555908,
+          5.86999988555908,
+          5.86999988555908,
+          6.59999990463257,
+          6.59999990463257,
+          6.59999990463257,
+          6.59999990463257,
+          6.59999990463257,
+          7.0,
+          7.0,
+          7.0,
+          7.0,
+          7.0,
+          7.73000001907349,
+          7.73000001907349,
+          7.73000001907349,
+          7.73000001907349,
+          7.73000001907349,
+          7.73000001907349,
+          8.13000011444092,
+          8.13000011444092,
+          8.13000011444092,
+          8.67000007629395,
+          8.85999965667725,
+          8.85999965667725,
+          8.85999965667725,
+          8.85999965667725,
+          8.85999965667725,
+          9.26000022888184,
+          9.26000022888184,
+          9.26000022888184,
+          9.26000022888184,
+          9.26000022888184,
+          9.77000045776367,
+          9.77000045776367,
+          10.0500001907349,
+          10.0500001907349,
+          10.0500001907349,
+          10.0500001907349,
+          10.0500001907349,
+          10.0500001907349,
+          10.3900003433228,
+          10.3900003433228,
+          10.3900003433228,
+          10.3900003433228,
+          10.8699998855591,
+          10.8699998855591,
+          11.3000001907349,
+          11.3000001907349,
+          11.3000001907349,
+          11.3000001907349,
+          11.3000001907349,
+          11.3000001907349,
+          11.5200004577637,
+          11.5200004577637,
+          11.5200004577637,
+          11.9700002670288,
+          11.9700002670288,
+          12.5500001907349,
+          12.5500001907349,
+          12.5500001907349,
+          13.0699996948242,
+          13.0699996948242,
+          14.1700000762939
+        ],
+        "maximum_height": 14.1700000762939,
+        "median_nearest_distance": 14.0,
+        "minimum_height": 4.46999979019165,
+        "occupied_cells": 42,
+        "scope": "Actual habitable bodies in the common 192-metre square; 24-metre cells; NPCs, arches and turrets excluded"
+      }
+    },
+    "environment": {
+      "ambient_energy": 0.340000003576279,
+      "reflected_light_source": 2,
+      "scope": "Configuration only; no rendered highlight verdict",
+      "shadows": true,
+      "sky_assigned": true,
+      "sun_energy": 0.920000016689301
+    },
+    "geometry": {
+      "block_tower": {
+        "assembly": {
+          "components": 142,
+          "coral_plastic_vertex_samples": 3144,
+          "course_bands": 4,
+          "course_surfaces": [
+            {
+              "bands": 4,
+              "courses": 4,
+              "surface": "front"
+            },
+            {
+              "bands": 4,
+              "courses": 4,
+              "surface": "back"
+            },
+            {
+              "bands": 4,
+              "courses": 4,
+              "surface": "east"
+            },
+            {
+              "bands": 4,
+              "courses": 4,
+              "surface": "west"
+            }
+          ],
+          "four_segment_towers": 0,
+          "max_coral_color_delta": 0.0,
+          "mounted_studs": 12,
+          "real_brick_joints": 32,
+          "roles": {
+            "block_course": 48,
+            "detail": 66,
+            "gable_panel": 8,
+            "plastic_frame": 8,
+            "stud": 12
+          },
+          "staggered_pairs": 12,
+          "stud_contacts": [
+            {
+              "base": 0.0475879013538361,
+              "gap": 6.93889390390723e-18,
+              "name": "Gingerbeam Townhouse foundation stud-1-0",
+              "support_height": 0.0475879013538361,
+              "top": 0.0733648017048836
+            },
+            {
+              "base": 0.0475879013538361,
+              "gap": 0.0,
+              "name": "Gingerbeam Townhouse foundation stud-1-1",
+              "support_height": 0.0475879013538361,
+              "top": 0.0733648017048836
+            },
+            {
+              "base": 0.0475879013538361,
+              "gap": 0.0,
+              "name": "Gingerbeam Townhouse foundation stud-1-2",
+              "support_height": 0.0475879013538361,
+              "top": 0.0733648017048836
+            },
+            {
+              "base": 0.0475879013538361,
+              "gap": 0.0,
+              "name": "Gingerbeam Townhouse foundation stud-1-3",
+              "support_height": 0.0475879013538361,
+              "top": 0.0733648017048836
+            },
+            {
+              "base": 0.0475879013538361,
+              "gap": 0.0,
+              "name": "Gingerbeam Townhouse foundation stud-1-4",
+              "support_height": 0.0475879013538361,
+              "top": 0.0733648017048836
+            },
+            {
+              "base": 0.0475879013538361,
+              "gap": 0.0,
+              "name": "Gingerbeam Townhouse foundation stud-1-5",
+              "support_height": 0.0475879013538361,
+              "top": 0.0733648017048836
+            },
+            {
+              "base": 0.0475879013538361,
+              "gap": 0.0,
+              "name": "Gingerbeam Townhouse foundation stud1-0",
+              "support_height": 0.0475879013538361,
+              "top": 0.0733648017048836
+            },
+            {
+              "base": 0.0475879013538361,
+              "gap": 0.0,
+              "name": "Gingerbeam Townhouse foundation stud1-1",
+              "support_height": 0.0475879013538361,
+              "top": 0.0733648017048836
+            },
+            {
+              "base": 0.0475879013538361,
+              "gap": 0.0,
+              "name": "Gingerbeam Townhouse foundation stud1-2",
+              "support_height": 0.0475879013538361,
+              "top": 0.0733648017048836
+            },
+            {
+              "base": 0.0475879013538361,
+              "gap": 0.0,
+              "name": "Gingerbeam Townhouse foundation stud1-3",
+              "support_height": 0.0475879013538361,
+              "top": 0.0733648017048836
+            },
+            {
+              "base": 0.0475879013538361,
+              "gap": 0.0,
+              "name": "Gingerbeam Townhouse foundation stud1-4",
+              "support_height": 0.0475879013538361,
+              "top": 0.0733648017048836
+            },
+            {
+              "base": 0.0475879013538361,
+              "gap": 0.0,
+              "name": "Gingerbeam Townhouse foundation stud1-5",
+              "support_height": 0.0475879013538361,
+              "top": 0.0733648017048836
+            }
+          ],
+          "studs": 12
+        },
+        "collision_parts": 1,
+        "max_source_normal_delta": 0.000117053888970986,
+        "max_source_vertex_delta": 0.0,
+        "mesh_signature": "9a142f2400585cd53c681903a2babc514c52eb5811b4f8286c8ae4d410477c61",
+        "min_source_normal_alignment": 0.999999821186066,
+        "natural_size": "(2.78, 5.068, 2.37)",
+        "source_geometry_sha256": "acd0a6a693c65bfcd1503f0250b1a6363a6dcaae977cce858763bce49b84302e",
+        "triangles": 5120,
+        "vertices": 9564
+      },
+      "bubble_turret": {
+        "assembly": {
+          "components": 43,
+          "coral_plastic_vertex_samples": 288,
+          "course_bands": 0,
+          "course_surfaces": [],
+          "four_segment_towers": 1,
+          "max_coral_color_delta": 0.0,
+          "mounted_studs": 4,
+          "real_brick_joints": 0,
+          "roles": {
+            "detail": 34,
+            "plastic_frame": 1,
+            "stud": 4,
+            "tower_segment": 4
+          },
+          "staggered_pairs": 0,
+          "stud_contacts": [
+            {
+              "base": 0.0311661008745432,
+              "gap": 0.0,
+              "name": "Starlight Watchtower foot stud0",
+              "support_height": 0.0311661008745432,
+              "top": 0.0519436001777649
+            },
+            {
+              "base": 0.0311661008745432,
+              "gap": 0.0,
+              "name": "Starlight Watchtower foot stud1",
+              "support_height": 0.0311661008745432,
+              "top": 0.0519436001777649
+            },
+            {
+              "base": 0.0311661008745432,
+              "gap": 0.0,
+              "name": "Starlight Watchtower foot stud2",
+              "support_height": 0.0311661008745432,
+              "top": 0.0519436001777649
+            },
+            {
+              "base": 0.0311661008745432,
+              "gap": 0.0,
+              "name": "Starlight Watchtower foot stud3",
+              "support_height": 0.0311661008745432,
+              "top": 0.0519436001777649
+            }
+          ],
+          "studs": 4
+        },
+        "collision_parts": 1,
+        "max_source_normal_delta": 0.000107233630842529,
+        "max_source_vertex_delta": 0.0,
+        "mesh_signature": "d03befe193720577f691edf9ffe75376de41ee193ce0e76241cdd30f1f699716",
+        "min_source_normal_alignment": 0.99999988079071,
+        "natural_size": "(2.3232, 6.0835, 2.3232)",
+        "source_geometry_sha256": "5e9b646c91045a217746892ce7cfb43e5f419a4c5e2ec2cec1ff3200fb6c7d8b",
+        "triangles": 1660,
+        "vertices": 1748
+      },
+      "grand_castle": {
+        "assembly": {
+          "components": 295,
+          "coral_plastic_vertex_samples": 3528,
+          "course_bands": 4,
+          "course_surfaces": [
+            {
+              "bands": 4,
+              "courses": 4,
+              "surface": "front"
+            },
+            {
+              "bands": 4,
+              "courses": 4,
+              "surface": "back"
+            },
+            {
+              "bands": 4,
+              "courses": 4,
+              "surface": "east"
+            },
+            {
+              "bands": 4,
+              "courses": 4,
+              "surface": "west"
+            }
+          ],
+          "four_segment_towers": 5,
+          "max_coral_color_delta": 0.0,
+          "mounted_studs": 28,
+          "real_brick_joints": 32,
+          "roles": {
+            "block_course": 48,
+            "detail": 181,
+            "gable_panel": 8,
+            "plastic_frame": 10,
+            "stud": 28,
+            "tower_segment": 20
+          },
+          "staggered_pairs": 12,
+          "stud_contacts": [
+            {
+              "base": 0.0291971005499363,
+              "gap": 0.0,
+              "name": "Sunspell Palace terrace connector-1-0",
+              "support_height": 0.0291971005499363,
+              "top": 0.0437956005334854
+            },
+            {
+              "base": 0.0291971005499363,
+              "gap": 0.0,
+              "name": "Sunspell Palace terrace connector-1-1",
+              "support_height": 0.0291971005499363,
+              "top": 0.0437956005334854
+            },
+            {
+              "base": 0.0291971005499363,
+              "gap": 0.0,
+              "name": "Sunspell Palace terrace connector-1-2",
+              "support_height": 0.0291971005499363,
+              "top": 0.0437956005334854
+            },
+            {
+              "base": 0.0291971005499363,
+              "gap": 0.0,
+              "name": "Sunspell Palace terrace connector-1-3",
+              "support_height": 0.0291971005499363,
+              "top": 0.0437956005334854
+            },
+            {
+              "base": 0.0291971005499363,
+              "gap": 0.0,
+              "name": "Sunspell Palace terrace connector-1-4",
+              "support_height": 0.0291971005499363,
+              "top": 0.0437956005334854
+            },
+            {
+              "base": 0.0291971005499363,
+              "gap": 0.0,
+              "name": "Sunspell Palace terrace connector-1-5",
+              "support_height": 0.0291971005499363,
+              "top": 0.0437956005334854
+            },
+            {
+              "base": 0.0291971005499363,
+              "gap": 0.0,
+              "name": "Sunspell Palace terrace connector1-0",
+              "support_height": 0.0291971005499363,
+              "top": 0.0437956005334854
+            },
+            {
+              "base": 0.0291971005499363,
+              "gap": 3.46944695195361e-18,
+              "name": "Sunspell Palace terrace connector1-1",
+              "support_height": 0.0291971005499363,
+              "top": 0.0437956005334854
+            },
+            {
+              "base": 0.0291971005499363,
+              "gap": 0.0,
+              "name": "Sunspell Palace terrace connector1-2",
+              "support_height": 0.0291971005499363,
+              "top": 0.0437956005334854
+            },
+            {
+              "base": 0.0291971005499363,
+              "gap": -3.46944695195361e-18,
+              "name": "Sunspell Palace terrace connector1-3",
+              "support_height": 0.0291971005499363,
+              "top": 0.0437956005334854
+            },
+            {
+              "base": 0.0291971005499363,
+              "gap": 0.0,
+              "name": "Sunspell Palace terrace connector1-4",
+              "support_height": 0.0291971005499363,
+              "top": 0.0437956005334854
+            },
+            {
+              "base": 0.0291971005499363,
+              "gap": -3.46944695195361e-18,
+              "name": "Sunspell Palace terrace connector1-5",
+              "support_height": 0.0291971005499363,
+              "top": 0.0437956005334854
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner0 foot stud0",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner0 foot stud1",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner0 foot stud2",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner0 foot stud3",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner1 foot stud0",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner1 foot stud1",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner1 foot stud2",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner1 foot stud3",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner2 foot stud0",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner2 foot stud1",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner2 foot stud2",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner2 foot stud3",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner3 foot stud0",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner3 foot stud1",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 0.0,
+              "name": "Sunspell Palace corner3 foot stud2",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            },
+            {
+              "base": 0.0218978002667427,
+              "gap": 3.46944695195361e-18,
+              "name": "Sunspell Palace corner3 foot stud3",
+              "support_height": 0.0218978002667427,
+              "top": 0.0364963002502918
+            }
+          ],
+          "studs": 28
+        },
+        "collision_parts": 6,
+        "max_source_normal_delta": 0.000115236558485776,
+        "max_source_vertex_delta": 0.0,
+        "mesh_signature": "0b825ca6ab3029703306d754ef3fb326512015dffc21947aa2e94c9dfa46203b",
+        "min_source_normal_alignment": 0.999999821186066,
+        "natural_size": "(6.5472, 7.79, 4.4756)",
+        "source_geometry_sha256": "98c297cac4b1bdc0b1012db6df714cc4c533ce15c1692f6a07f31efb97a43da5",
+        "triangles": 11860,
+        "vertices": 15280
+      },
+      "toy_arch": {
+        "assembly": {
+          "components": 38,
+          "coral_plastic_vertex_samples": 264,
+          "course_bands": 0,
+          "course_surfaces": [],
+          "four_segment_towers": 0,
+          "max_coral_color_delta": 0.0,
+          "mounted_studs": 8,
+          "real_brick_joints": 0,
+          "roles": {
+            "detail": 22,
+            "gable_panel": 2,
+            "stud": 8,
+            "tower_segment": 6
+          },
+          "staggered_pairs": 0,
+          "stud_contacts": [
+            {
+              "base": 0.0577777996659279,
+              "gap": 0.0,
+              "name": "Moonbridge base stud",
+              "support_height": 0.0577777996659279,
+              "top": 0.0811111032962799
+            },
+            {
+              "base": 0.0577777996659279,
+              "gap": 0.0,
+              "name": "Moonbridge base stud.001",
+              "support_height": 0.0577777996659279,
+              "top": 0.0811111032962799
+            },
+            {
+              "base": 0.0577777996659279,
+              "gap": 0.0,
+              "name": "Moonbridge base stud.002",
+              "support_height": 0.0577777996659279,
+              "top": 0.0811111032962799
+            },
+            {
+              "base": 0.0577777996659279,
+              "gap": 6.93889390390723e-18,
+              "name": "Moonbridge base stud.003",
+              "support_height": 0.0577777996659279,
+              "top": 0.0811111032962799
+            },
+            {
+              "base": 0.0577777996659279,
+              "gap": 0.0,
+              "name": "Moonbridge base stud.004",
+              "support_height": 0.0577777996659279,
+              "top": 0.0811111032962799
+            },
+            {
+              "base": 0.0577777996659279,
+              "gap": 0.0,
+              "name": "Moonbridge base stud.005",
+              "support_height": 0.0577777996659279,
+              "top": 0.0811111032962799
+            },
+            {
+              "base": 0.0577777996659279,
+              "gap": 0.0,
+              "name": "Moonbridge base stud.006",
+              "support_height": 0.0577777996659279,
+              "top": 0.0811111032962799
+            },
+            {
+              "base": 0.0577777996659279,
+              "gap": 6.93889390390723e-18,
+              "name": "Moonbridge base stud.007",
+              "support_height": 0.0577777996659279,
+              "top": 0.0811111032962799
+            }
+          ],
+          "studs": 8
+        },
+        "collision_parts": 3,
+        "max_source_normal_delta": 0.000109701795736328,
+        "max_source_vertex_delta": 0.0,
+        "mesh_signature": "d66cabf9868c851c957c13d9395f74eb731a4bdbfe48f834ac8fab4f5f5d766a",
+        "min_source_normal_alignment": 0.99999988079071,
+        "natural_size": "(3.15, 4.5, 1.17)",
+        "source_geometry_sha256": "0924ba3fa2eacd08c9c64e9c82b208c1a2329e861ba6316710f5127a42b635a3",
+        "triangles": 1892,
+        "vertices": 2282
+      },
+      "toy_castle": {
+        "assembly": {
+          "components": 295,
+          "coral_plastic_vertex_samples": 3528,
+          "course_bands": 4,
+          "course_surfaces": [
+            {
+              "bands": 4,
+              "courses": 4,
+              "surface": "front"
+            },
+            {
+              "bands": 4,
+              "courses": 4,
+              "surface": "back"
+            },
+            {
+              "bands": 4,
+              "courses": 4,
+              "surface": "east"
+            },
+            {
+              "bands": 4,
+              "courses": 4,
+              "surface": "west"
+            }
+          ],
+          "four_segment_towers": 5,
+          "max_coral_color_delta": 0.0,
+          "mounted_studs": 28,
+          "real_brick_joints": 32,
+          "roles": {
+            "block_course": 48,
+            "detail": 181,
+            "gable_panel": 8,
+            "plastic_frame": 10,
+            "stud": 28,
+            "tower_segment": 20
+          },
+          "staggered_pairs": 12,
+          "stud_contacts": [
+            {
+              "base": 0.0380349010229111,
+              "gap": 0.0,
+              "name": "Rosewater Keep terrace connector-1-0",
+              "support_height": 0.0380349010229111,
+              "top": 0.0570522993803024
+            },
+            {
+              "base": 0.0380349010229111,
+              "gap": 0.0,
+              "name": "Rosewater Keep terrace connector-1-1",
+              "support_height": 0.0380349010229111,
+              "top": 0.0570522993803024
+            },
+            {
+              "base": 0.0380349010229111,
+              "gap": 0.0,
+              "name": "Rosewater Keep terrace connector-1-2",
+              "support_height": 0.0380349010229111,
+              "top": 0.0570522993803024
+            },
+            {
+              "base": 0.0380349010229111,
+              "gap": 0.0,
+              "name": "Rosewater Keep terrace connector-1-3",
+              "support_height": 0.0380349010229111,
+              "top": 0.0570522993803024
+            },
+            {
+              "base": 0.0380349010229111,
+              "gap": 0.0,
+              "name": "Rosewater Keep terrace connector-1-4",
+              "support_height": 0.0380349010229111,
+              "top": 0.0570522993803024
+            },
+            {
+              "base": 0.0380349010229111,
+              "gap": 6.93889390390723e-18,
+              "name": "Rosewater Keep terrace connector-1-5",
+              "support_height": 0.0380349010229111,
+              "top": 0.0570522993803024
+            },
+            {
+              "base": 0.0380349010229111,
+              "gap": 0.0,
+              "name": "Rosewater Keep terrace connector1-0",
+              "support_height": 0.0380349010229111,
+              "top": 0.0570522993803024
+            },
+            {
+              "base": 0.0380349010229111,
+              "gap": 0.0,
+              "name": "Rosewater Keep terrace connector1-1",
+              "support_height": 0.0380349010229111,
+              "top": 0.0570522993803024
+            },
+            {
+              "base": 0.0380349010229111,
+              "gap": 0.0,
+              "name": "Rosewater Keep terrace connector1-2",
+              "support_height": 0.0380349010229111,
+              "top": 0.0570522993803024
+            },
+            {
+              "base": 0.0380349010229111,
+              "gap": 0.0,
+              "name": "Rosewater Keep terrace connector1-3",
+              "support_height": 0.0380349010229111,
+              "top": 0.0570522993803024
+            },
+            {
+              "base": 0.0380349010229111,
+              "gap": 0.0,
+              "name": "Rosewater Keep terrace connector1-4",
+              "support_height": 0.0380349010229111,
+              "top": 0.0570522993803024
+            },
+            {
+              "base": 0.0380349010229111,
+              "gap": 0.0,
+              "name": "Rosewater Keep terrace connector1-5",
+              "support_height": 0.0380349010229111,
+              "top": 0.0570522993803024
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner0 foot stud0",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner0 foot stud1",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner0 foot stud2",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner0 foot stud3",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner1 foot stud0",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner1 foot stud1",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner1 foot stud2",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner1 foot stud3",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner2 foot stud0",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner2 foot stud1",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner2 foot stud2",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner2 foot stud3",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner3 foot stud0",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner3 foot stud1",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 0.0,
+              "name": "Rosewater Keep corner3 foot stud2",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            },
+            {
+              "base": 0.0285261999815702,
+              "gap": 3.46944695195361e-18,
+              "name": "Rosewater Keep corner3 foot stud3",
+              "support_height": 0.0285261999815702,
+              "top": 0.0475436002016068
+            }
+          ],
+          "studs": 28
+        },
+        "collision_parts": 6,
+        "max_source_normal_delta": 0.000122215016745031,
+        "max_source_vertex_delta": 0.0,
+        "mesh_signature": "b008c4a85cac62d9d436e3313fad7f09ff5bce62b682f4a750eb3fb0460a918c",
+        "min_source_normal_alignment": 0.99999988079071,
+        "natural_size": "(5.0952, 5.9174, 3.7676)",
+        "source_geometry_sha256": "b168b4483d3b67d84ee9e9b693897861da6790af0c307c5c331d582b3f1f94de",
+        "triangles": 11860,
+        "vertices": 15280
+      }
+    },
+    "physical": {
+      "all_player_points": 22,
+      "expected_points": 22,
+      "palace_id": 405488548806,
+      "receipts": [
+        {
+          "mesh_authored": true,
+          "player": true,
+          "points": 22,
+          "top": -3.70047473907471
+        }
+      ],
+      "scope": "Explicitly positioned level-five fixture; not ordinary 90-second pacing"
+    },
+    "provenance": {
+      "assets": {
+        "block_tower": {
+          "arch_opening_probe": null,
+          "collision_parts": 1.0,
+          "component_objects": 142.0,
+          "natural_size": [
+            2.78,
+            5.0679998,
+            2.3699999
+          ],
+          "path": "res://assets/fairytale_castles/block_tower.json",
+          "sha256": "64fdf057d8b96e877e42879118d242c9403db31f223e9623c5b5647b46f1b130",
+          "source_geometry_sha256": "acd0a6a693c65bfcd1503f0250b1a6363a6dcaae977cce858763bce49b84302e",
+          "structural_counts": {
+            "block_course": 48.0,
+            "detail": 66.0,
+            "gable_panel": 8.0,
+            "plastic_frame": 8.0,
+            "stud": 12.0
+          },
+          "triangle_budget": 6000.0,
+          "triangles": 5120.0,
+          "vertices": 9564.0
+        },
+        "bubble_turret": {
+          "arch_opening_probe": null,
+          "collision_parts": 1.0,
+          "component_objects": 43.0,
+          "natural_size": [
+            2.3232,
+            6.0834999,
+            2.3232
+          ],
+          "path": "res://assets/fairytale_castles/bubble_turret.json",
+          "sha256": "a58809d6c5e64bd6fc22555ce58769fcc51a881dabb73f1dccc0e39f34276701",
+          "source_geometry_sha256": "5e9b646c91045a217746892ce7cfb43e5f419a4c5e2ec2cec1ff3200fb6c7d8b",
+          "structural_counts": {
+            "detail": 34.0,
+            "plastic_frame": 1.0,
+            "stud": 4.0,
+            "tower_segment": 4.0
+          },
+          "triangle_budget": 6000.0,
+          "triangles": 1660.0,
+          "vertices": 1748.0
+        },
+        "grand_castle": {
+          "arch_opening_probe": null,
+          "collision_parts": 6.0,
+          "component_objects": 295.0,
+          "natural_size": [
+            6.5471997,
+            7.79,
+            4.4756002
+          ],
+          "path": "res://assets/fairytale_castles/grand_castle.json",
+          "sha256": "99e32393e318ae7d3ec6ded4d298c6832eec96cf1b722c6b30147250bf285ea6",
+          "source_geometry_sha256": "98c297cac4b1bdc0b1012db6df714cc4c533ce15c1692f6a07f31efb97a43da5",
+          "structural_counts": {
+            "block_course": 48.0,
+            "detail": 181.0,
+            "gable_panel": 8.0,
+            "plastic_frame": 10.0,
+            "stud": 28.0,
+            "tower_segment": 20.0
+          },
+          "triangle_budget": 12000.0,
+          "triangles": 11860.0,
+          "vertices": 15280.0
+        },
+        "toy_arch": {
+          "arch_opening_probe": {
+            "expected_clear": true,
+            "from": [
+              0.0,
+              0.25,
+              -0.8
+            ],
+            "to": [
+              0.0,
+              0.25,
+              0.8
+            ]
+          },
+          "collision_parts": 3.0,
+          "component_objects": 38.0,
+          "natural_size": [
+            3.1500001,
+            4.5,
+            1.17
+          ],
+          "path": "res://assets/fairytale_castles/toy_arch.json",
+          "sha256": "5ce73c4f1c29ea2eafc45f966918ad66cd298a6e871675265783a557bd80f35d",
+          "source_geometry_sha256": "0924ba3fa2eacd08c9c64e9c82b208c1a2329e861ba6316710f5127a42b635a3",
+          "structural_counts": {
+            "detail": 22.0,
+            "gable_panel": 2.0,
+            "stud": 8.0,
+            "tower_segment": 6.0
+          },
+          "triangle_budget": 2500.0,
+          "triangles": 1892.0,
+          "vertices": 2282.0
+        },
+        "toy_castle": {
+          "arch_opening_probe": null,
+          "collision_parts": 6.0,
+          "component_objects": 295.0,
+          "natural_size": [
+            5.0952001,
+            5.9173999,
+            3.7676001
+          ],
+          "path": "res://assets/fairytale_castles/toy_castle.json",
+          "sha256": "5f394a6e322a69a7a552bef033910cf670bf6cd12e27ce83531e7d610de84927",
+          "source_geometry_sha256": "b168b4483d3b67d84ee9e9b693897861da6790af0c307c5c331d582b3f1f94de",
+          "structural_counts": {
+            "block_course": 48.0,
+            "detail": 181.0,
+            "gable_panel": 8.0,
+            "plastic_frame": 10.0,
+            "stud": 28.0,
+            "tower_segment": 20.0
+          },
+          "triangle_budget": 12000.0,
+          "triangles": 11860.0,
+          "vertices": 15280.0
+        }
+      },
+      "authoring_tool": "Blender",
+      "blender_binary_sha256": "beaa57b8b1b6d46af53bf8a51944519cd7b439faee1dccd53a2476c8f105071f",
+      "blender_version": "4.2.13 LTS",
+      "generator": "tools/build_fairytale_castles.py",
+      "generator_sha256": "3937f008ab83908a70cac657a9a0c374406362289d61929e66007d10cdd89707",
+      "kinds": [
+        "toy_castle",
+        "grand_castle",
+        "bubble_turret",
+        "toy_arch",
+        "block_tower"
+      ],
+      "license": "Original project-authored geometry; no third-party models or textures",
+      "name": "Original Sunspell Royal Snap-Together Castle Kit",
+      "rendered_or_gameplay_verified": false,
+      "runtime_format": "Indexed normalized unit mesh, real corner normals, opaque RGBA vertex colors, role IDs, major compound hull points",
+      "schema": 1.0,
+      "source_blend": "source/fairytale_castles.blend",
+      "source_blend_sha256": "4d09fdecf27c2a52f0286ddc68da4573e4eb880ce290e2b7c845696cd5f214c0"
+    },
+    "scene": {
+      "admission_levels": {
+        "1": 221,
+        "2": 110,
+        "3": 24,
+        "4": 6,
+        "5": 64,
+        "6": 8,
+        "7": 4,
+        "8": 4,
+        "9": 2,
+        "10": 4,
+        "12": 8
+      },
+      "authored_kinds": {
+        "block_tower": 48,
+        "bubble_turret": 14,
+        "grand_castle": 10,
+        "toy_arch": 6,
+        "toy_castle": 24
+      },
+      "bodies": 799,
+      "bridge_palaces": 8,
+      "colliders": 1061,
+      "late_castles": 14,
+      "meshes": 856,
+      "nodes": 2717,
+      "opening_targets": 68
+    }
+  },
+  "scope": "Actual authored mesh arrays, colliders, same-area density and explicit whole-body physics; no user save, production SDK, rendered gloss, ordinary-round pacing or phone performance claim"
+}

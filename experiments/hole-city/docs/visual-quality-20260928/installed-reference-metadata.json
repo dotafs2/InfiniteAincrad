@@ -1,0 +1,155 @@
+{
+  "scope": "Read-only known bundle Info.plist, framework metadata, boot.config, ScriptingAssemblies.json and first 1024 bytes of standard serialized metadata. No launch, save access, decryption or asset extraction.",
+  "apps": [
+    {
+      "application": "Black Hole Attack Games",
+      "bundle": "/Applications/Black Hole Attack Games.app/Wrapper/Black Hole Attack Games.app",
+      "bundle_id": "com.gp.black.hole.attack.game",
+      "app_version": "1.0.14",
+      "build": "14",
+      "platform": "iphoneos",
+      "engine": "Unity",
+      "engine_evidence": "/Applications/Black Hole Attack Games.app/Wrapper/Black Hole Attack Games.app/Frameworks/UnityFramework.framework",
+      "serialized_metadata": "/Applications/Black Hole Attack Games.app/Wrapper/Black Hole Attack Games.app/Data/globalgamemanagers",
+      "header_unity_versions": [
+        "2022.3.13f1"
+      ],
+      "boot_config": [
+        "wait-for-native-debugger=0",
+        "hdr-display-enabled=0",
+        "gc-max-time-slice=3",
+        "build-guid=353ab95b4d7b400a8d9e9b5e1f57eb13"
+      ],
+      "render_related_assembly_names": [
+        "Unity.RenderPipelines.Core.Runtime.dll",
+        "Unity.RenderPipelines.Core.ShaderLibrary.dll",
+        "Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll",
+        "Unity.RenderPipelines.Universal.Runtime.dll",
+        "Unity.RenderPipeline.Universal.ShaderLibrary.dll",
+        "Unity.RenderPipelines.Universal.Shaders.dll"
+      ],
+      "metadata_sha256": {
+        "Info.plist": "27d0296d8714a3863e4ea1b011bf74e10c7d0fa45973b956ac6f601d9d291ef3",
+        "Frameworks/UnityFramework.framework/Info.plist": "bece27f8f373411847dbeed48cf29c8ae6d86e393a61315f04fbd3c712a305fd",
+        "Data/boot.config": "d39ba5304e8d38447ee05c57fbc2f8a6a5db2be76eda2a53a82e1d66c8a8a24b",
+        "Data/ScriptingAssemblies.json": "8a05b99e947d0769ff9a1268acaeb7297ee00c5dcafc0453213c608ab78724dc"
+      },
+      "quality_settings": "Not established: no existing UnityPy/unitypack parser is available in the checked bundled Python. No serialized assets were extracted or modified.",
+      "serialized_file_bytes": 1871564,
+      "first_1024_bytes_sha256": "a51e053251daa4197c4d0c3543074ed6096d0ea672ff5f9b5d811b191706cb08",
+      "first_100_bytes_hex": "00000000000000000000001600000000000000000000048600000000001c8ecc00000000000004c00000000000000000323032322e332e31336631000900000000120000008100000000fffff3f78f64ddf470754adb0eeade1196c20d00000000ffff59"
+    },
+    {
+      "application": "Eat Em All Black Hole",
+      "bundle": "/Applications/Eat Em All Black Hole.app/Wrapper/EatEmAllBlackHole.app",
+      "bundle_id": "com.INFINITY.eat.all.black.hole.game",
+      "app_version": "1.0.0",
+      "build": "0",
+      "platform": "iphoneos",
+      "engine": "Unity",
+      "engine_evidence": "/Applications/Eat Em All Black Hole.app/Wrapper/EatEmAllBlackHole.app/Frameworks/UnityFramework.framework",
+      "serialized_metadata": "/Applications/Eat Em All Black Hole.app/Wrapper/EatEmAllBlackHole.app/Data/globalgamemanagers",
+      "header_unity_versions": [
+        "2020.3.48f1"
+      ],
+      "boot_config": [
+        "wait-for-native-debugger=0",
+        "hdr-display-enabled=0"
+      ],
+      "render_related_assembly_names": [],
+      "metadata_sha256": {
+        "Info.plist": "aee61a4984e287be3aa814b29884ad2681f5f0be4ee185692495d5a4c7bfa2d8",
+        "Frameworks/UnityFramework.framework/Info.plist": "6de9cfe3caf3be6753275c1e44eade0671baed4d5d11872292a7fbd3a20d873e",
+        "Data/boot.config": "c92f81ae694ceb6d2f59ad7b35f14fb34f491afbfd18ed40c5c8b34044b2808c",
+        "Data/ScriptingAssemblies.json": "79840ee3153304f4b2abeaff0ef8a4faa01a606002ebfa015965784c63ac8454"
+      },
+      "quality_settings": "Not established: no existing UnityPy/unitypack parser is available in the checked bundled Python. No serialized assets were extracted or modified.",
+      "serialized_file_bytes": 205940,
+      "first_1024_bytes_sha256": "fedb0ae77c7c5c8d2f55732822ee8313e2427ee5e30a86adeb4c0fc3ccafdb44",
+      "first_100_bytes_hex": "000000000000000000000016000000000000000000000486000000000003247400000000000010000000000000000000323032302e332e34386631000900000000120000008100000000ffff51b2319ece4b697acb0b103e5a7d780f0d00000000ffff15"
+    },
+    {
+      "application": "Hole Em All",
+      "bundle": "/Applications/Hole Em All.app/Wrapper/HoleEmAll.app",
+      "bundle_id": "com.brainworks.holeemall",
+      "app_version": "2.15.1",
+      "build": "421",
+      "platform": "iphoneos",
+      "engine": "Unity",
+      "engine_evidence": "/Applications/Hole Em All.app/Wrapper/HoleEmAll.app/Frameworks/UnityFramework.framework",
+      "serialized_metadata": "/Applications/Hole Em All.app/Wrapper/HoleEmAll.app/Data/data.unity3d",
+      "header_unity_versions": [
+        "2022.3.67f2"
+      ],
+      "boot_config": [
+        "wait-for-native-debugger=0",
+        "hdr-display-enabled=0",
+        "gc-max-time-slice=3",
+        "build-guid=6429c62d0c04489dab7e9bfcc4e17e43"
+      ],
+      "render_related_assembly_names": [
+        "Unity.RenderPipelines.Universal.Config.Runtime.dll",
+        "Unity.RenderPipelines.Core.ShaderLibrary.dll",
+        "Unity.RenderPipelines.Universal.Runtime.dll",
+        "Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll",
+        "Unity.RenderPipelines.Universal.2D.Internal.dll",
+        "Unity.RenderPipeline.Universal.ShaderLibrary.dll",
+        "Unity.RenderPipelines.Universal.Shaders.dll",
+        "Unity.RenderPipelines.Core.Runtime.dll"
+      ],
+      "metadata_sha256": {
+        "Info.plist": "fc4400d8144967c92f8605a2f16e23d7df22a3c79d134bfc56fe1df44eaf1cb2",
+        "Frameworks/UnityFramework.framework/Info.plist": "32b0810ad1d10e5b5593f50c4981166651308f9554eb078fd8f254bf849438a4",
+        "Data/boot.config": "014c26643be771dc1ea47fbf51fe5e68d5f4bec4769fccd71dc1655cdc85c148",
+        "Data/ScriptingAssemblies.json": "943f0f951ce4ef8e64e7d81fa6b3921fa67d348ca59a1287d3eaad2feac8a775"
+      },
+      "quality_settings": "Not established: no existing UnityPy/unitypack parser is available in the checked bundled Python. No serialized assets were extracted or modified.",
+      "serialized_file_bytes": 153946280,
+      "first_1024_bytes_sha256": "87956f19c45121bbeff6a61c3de6f6a3ab3c5053786abf5e8b257fdf56e6f481",
+      "first_100_bytes_hex": "556e69747946530000000008352e782e7800323032322e332e363766320000000000092d08a800002fc1000076910000024300000000000000000000000000001d000100c20b8400020000000153f200030a00236bc50a00340097350a002480be0a0024"
+    },
+    {
+      "application": "Hole.io",
+      "bundle": "/Applications/Hole.io.app/Wrapper/Hole.io.app",
+      "bundle_id": "com.nguyenvh.holeio",
+      "app_version": "2.53.5",
+      "build": "23736",
+      "platform": "iphoneos",
+      "engine": "Unity",
+      "engine_evidence": "/Applications/Hole.io.app/Wrapper/Hole.io.app/Frameworks/UnityFramework.framework",
+      "serialized_metadata": "/Applications/Hole.io.app/Wrapper/Hole.io.app/Data/data.unity3d",
+      "header_unity_versions": [
+        "6000.3.2f1"
+      ],
+      "boot_config": [
+        "gfx-threading-mode=4",
+        "wait-for-native-debugger=0",
+        "hdr-display-enabled=0",
+        "gc-max-time-slice=3",
+        "build-guid=38adb9ec007843cfa9cc0f8a56983366"
+      ],
+      "render_related_assembly_names": [
+        "Unity.RenderPipeline.Universal.ShaderLibrary.dll",
+        "Unity.RenderPipelines.Core.Runtime.dll",
+        "Unity.RenderPipelines.Core.Runtime.Shared.dll",
+        "Unity.RenderPipelines.Core.ShaderLibrary.dll",
+        "Unity.RenderPipelines.GPUDriven.Runtime.dll",
+        "Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll",
+        "Unity.RenderPipelines.Universal.2D.Runtime.dll",
+        "Unity.RenderPipelines.Universal.Config.Runtime.dll",
+        "Unity.RenderPipelines.Universal.Runtime.dll",
+        "Unity.RenderPipelines.Universal.Shaders.dll"
+      ],
+      "metadata_sha256": {
+        "Info.plist": "b5e423f1df003d7b0090ac08f3178da526f3a80e808316e116b531f4d7ea963f",
+        "Frameworks/UnityFramework.framework/Info.plist": "12d821105f2de293ce698808ee324161db9133c4d6d4e8f9d385d28a06e1894c",
+        "Data/boot.config": "0ad63ef96e8a75032d29778d1e0883b299b49cb16de43f117af4d1e7caaa5397",
+        "Data/ScriptingAssemblies.json": "a0ee6b4b07b491d694ba7a13ebd7c5beb58962fcd1934a1902f955f150d67bf7"
+      },
+      "quality_settings": "Not established: no existing UnityPy/unitypack parser is available in the checked bundled Python. No serialized assets were extracted or modified.",
+      "serialized_file_bytes": 10740394,
+      "first_1024_bytes_sha256": "7e5bbf3fcf57e7f9ae318cbdbf9cfc02d8a8f746948844966bdcb4d3f431aaf0",
+      "first_100_bytes_hex": "556e69747946530000000008352e782e7800363030302e332e326631000000000000a3e2aa0000048800000959000002430000000000000000000000000000001e000100b2c7000200000001485600030a002340d40a003400859a0a002476090a002484"
+    }
+  ]
+}

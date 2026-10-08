@@ -1,0 +1,36 @@
+{
+  "checks": 124,
+  "evidence": {
+    "isolated_save": {
+      "combinations": 4,
+      "failure_rollback": true,
+      "legacy_default": true,
+      "scope": "Owned temporary files only; no real user progress file is opened."
+    },
+    "tracks": [
+      {
+        "encoded_packet_sha256": "1b006f53a37124ebf62930cdf2175bc1196495f0739965ead843ba5417ff1246",
+        "length_seconds": 32.0,
+        "loop": true,
+        "map": "city"
+      },
+      {
+        "encoded_packet_sha256": "aeaa51375995a852645d5f643e5708495d20563569f121a16f074ae4287f2318",
+        "length_seconds": 34.2857131958008,
+        "loop": true,
+        "map": "food"
+      }
+    ]
+  },
+  "failures": [
+    "Menu cycle 0 and same-map selection preserve the existing playback",
+    "Menu cycle 1 and same-map selection preserve the existing playback",
+    "Menu cycle 2 and same-map selection preserve the existing playback",
+    "Menu cycle 3 and same-map selection preserve the existing playback",
+    "Menu cycle 4 and same-map selection preserve the existing playback",
+    "Food round entry also preserves its song and playback position",
+    "Food return home leaves the existing playback intact",
+    "Engine process failed; inspect the engine log"
+  ],
+  "scope": "Independent headless audio/resource/control/save acceptance. No browser autoplay, listening-quality or device-performance claim."
+}

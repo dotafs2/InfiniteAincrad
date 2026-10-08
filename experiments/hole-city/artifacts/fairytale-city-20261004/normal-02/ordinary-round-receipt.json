@@ -1,0 +1,61 @@
+{
+  "scope": "Ordinary 90-second muted Mac GPU round of final modular kit; normal automatic collecting; no injected growth or player movement",
+  "result": {
+    "elapsed": 90.0166666666628,
+    "score": 310,
+    "level": 7,
+    "player_collection_summary": {
+      "kinds": {
+        "balloon_vendor": 1,
+        "block_tower": 6,
+        "bubble_turret": 4,
+        "royal_drone": 8,
+        "toy_arch": 4,
+        "toy_ball": 20,
+        "toy_block": 18,
+        "toy_car": 8,
+        "toy_castle": 2,
+        "toy_duck": 15
+      },
+      "objects": 86,
+      "tiers": {
+        "1": 61,
+        "2": 8,
+        "3": 4,
+        "4": 2,
+        "5": 6,
+        "6": 5
+      }
+    }
+  },
+  "new_save_initial_coins": 50,
+  "saved_coins": 100,
+  "saved_base_coins": 50,
+  "saved_final_coins": 50,
+  "capture_sha256": "adbf1d628506a3d81288437f6fd2705f2cfa1d6751f92d5993b423b830b4764d",
+  "process_sha256": "4d177fe3629c64adc1e8bf2fc60fffefaf43c4d80966c30e30bc864c30e51d92",
+  "save_sha256": "dd56f22622fd27f2d5f1d41ad25d2a49c356b30949938169a4c5f75732d87b5d",
+  "save_path": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/fairytale-city-20261004/normal-play-saves/normal-60912.cfg",
+  "desktop_frames": {
+    "max_ms": 153.554,
+    "mean_ms": 16.8548124171872,
+    "median_ms": 16.687,
+    "p95_ms": 17.797,
+    "sample_count": 5283,
+    "scope": "Actual desktop GPU frame intervals during normal play; excludes capture waits and PNG writes; not iPhone performance"
+  },
+  "steady_desktop_frames": {
+    "max_ms": 91.102,
+    "mean_ms": 16.6657716824416,
+    "median_ms": 16.687,
+    "p95_ms": 17.756,
+    "sample_count": 5177,
+    "scope": "Actual desktop GPU frame intervals during normal play; excludes capture waits and PNG writes; not iPhone performance"
+  },
+  "scene_build_ms": 2523.478,
+  "limitations": [
+    "Single desktop round, not physical iPhone performance",
+    "Cold frame spikes153.554ms and a later91.102ms outlier remain",
+    "No production ad or purchase requested in isolated test mode"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "scope": "Identical 14,400-frame stationary source/isolated old-PCK diagnostic; !rain_landed is the existing conservative body classification, not a measured count of unsupported geometry.",
+  "source": {
+    "max_classified_airborne_per_frame": 29,
+    "transitions": 771,
+    "last_serial": 598,
+    "first_overflow_tick": 8897,
+    "first_overflow": {
+      "airborne": 26,
+      "awake_landed": 15,
+      "serial": 372,
+      "tick": 8897
+    },
+    "last_wave_before_overflow": {
+      "airborne": 20,
+      "awake_landed": 18,
+      "serial": 372,
+      "tick": 8846
+    }
+  },
+  "old_package": {
+    "max_classified_airborne_per_frame": 22,
+    "transitions": 710,
+    "last_serial": 600,
+    "sha256": "f62eecd2a3f5deb45afca81b948086a5c853048fd40b08e057e35df9b45f364f"
+  },
+  "runtime_change": "Observable exact admission snapshots only; no falling/contact/sleep/visibility/collection physics changes.",
+  "runtime_sha256": "a8591b3b5b43e10440018e5b365411c64bf9d20e5addedcd97a9aaa97128b999",
+  "food_body_unchanged": true,
+  "test_sha256": "d2a7e8e6796c190d4ec5e39390e8c3a0e9e0853644c1a0c49949c6f284bfb316",
+  "author_checks": 71,
+  "author_receipt_sha256": "b8aceecd76fb09c904509fde0a915b75012ddd3aab202410081947f331bafabe",
+  "helpers": "All author-owned helpers exited"
+}

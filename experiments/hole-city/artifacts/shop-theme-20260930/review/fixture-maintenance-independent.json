@@ -1,0 +1,7 @@
+{
+  "status": "pass",
+  "music_acceptance_checks": 125,
+  "music_review_checks": 118,
+  "changed_assertion_statements_per_suite": 2,
+  "scope": "Both changes implement the explicit one-shared-recording policy; all other assertions, input dispatch, lifecycle, saves, UI geometry and cleanup are unchanged. Map-change cases now additionally require decoder/playhead preservation."
+}

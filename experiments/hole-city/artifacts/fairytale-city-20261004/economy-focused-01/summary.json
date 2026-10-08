@@ -1,0 +1,111 @@
+{
+  "ok": true,
+  "error": null,
+  "unchanged_inputs": true,
+  "guarded_inputs": 837,
+  "engine_sha256": "c7cccbf8fb143e34e02fd6521e09be2c2b974f0d5db080b19071c9c570718ccf",
+  "driver_sha256": "4c5395cf71026c859ae3d0f36868ff6d6a6ed9a1c9868234f3556206ecf2ca89",
+  "elapsed_seconds": 74.629,
+  "results": [
+    {
+      "suite": "economy_continuation",
+      "checks": 154,
+      "report_sha256": "1a15ced505348642409408e753b75053040e4c5a7e2ea469789ae22987131221",
+      "log_sha256": "183ca5c45ff9e1856f345b08982d4ca79f9f346584ea4d818a9471b7582f6ca9",
+      "engine_log_sha256": "183ca5c45ff9e1856f345b08982d4ca79f9f346584ea4d818a9471b7582f6ca9"
+    },
+    {
+      "suite": "coin_skins",
+      "checks": 412,
+      "report_sha256": "14d37288dd194486c458fcbbe275623d4c93bfc031413a0f94e424aef33e1766",
+      "log_sha256": "360d7af9d2dee46c61d2826a12737a4915b1a7302e883c6569e26bfa519a8d86",
+      "engine_log_sha256": "360d7af9d2dee46c61d2826a12737a4915b1a7302e883c6569e26bfa519a8d86"
+    },
+    {
+      "suite": "skin_collection",
+      "checks": 374,
+      "report_sha256": "37f0e55a5973b161a5d73d019785b8519fbe1265481d1fa3ee8ad5d5a7e6b88a",
+      "log_sha256": "d0f075cb0b56512ec3a0b25c5b47d875ecf29e96fe46a637a9142e562c9f87d9",
+      "engine_log_sha256": "d0f075cb0b56512ec3a0b25c5b47d875ecf29e96fe46a637a9142e562c9f87d9"
+    },
+    {
+      "suite": "progression",
+      "checks": 15,
+      "report_sha256": "826506c7a4c6de705045509594ea9bfbefff2d421abdb4ecdb699e3beee0406c",
+      "log_sha256": "84e8639ce48ce4b158262e317c896161e50cf5586c8a8e483361605f10e63d01",
+      "engine_log_sha256": "84e8639ce48ce4b158262e317c896161e50cf5586c8a8e483361605f10e63d01"
+    },
+    {
+      "suite": "retention",
+      "checks": 67,
+      "report_sha256": "d710e1d32f2f5a5248f370cb09fe365396214a8a913b4261d4d1d82cc0558fa3",
+      "log_sha256": "3f91a3ca3027867bda41347c9ccf9a9f9aceff489e9f98695e463f55971e892f",
+      "engine_log_sha256": "3f91a3ca3027867bda41347c9ccf9a9f9aceff489e9f98695e463f55971e892f"
+    },
+    {
+      "suite": "progression_review",
+      "checks": 10,
+      "report_sha256": "794707df59839a876c4c441ffc05e7fb81b1fc7c9a40e99277a9e4e489f158f2",
+      "log_sha256": "e1e338fccc7733f55ecc85b0a3b702aa69e2f5c4d8c9bc4a668e1f0a003d595f",
+      "engine_log_sha256": "e1e338fccc7733f55ecc85b0a3b702aa69e2f5c4d8c9bc4a668e1f0a003d595f"
+    },
+    {
+      "suite": "food_goals_review",
+      "checks": 37,
+      "report_sha256": "61c85b33a1d595eb96b87145472dc777ddb8b8c3fe0984bc0b99388893ac54a8",
+      "log_sha256": "68ba4f328da3ca2d45ac4523f9ee72738cb5c66b212854aff4adcc5466c0eb74",
+      "engine_log_sha256": "68ba4f328da3ca2d45ac4523f9ee72738cb5c66b212854aff4adcc5466c0eb74"
+    },
+    {
+      "suite": "retention_review",
+      "checks": 590,
+      "report_sha256": "61cafc4bdf65b3178f2c41ee0e63fe0e08bd5fe3210da55bd884f92bd89c9f73",
+      "log_sha256": "f81632c9eddf43c9f8ad4988054a08da10eb4902708caba04865dc96e1409308",
+      "engine_log_sha256": "f81632c9eddf43c9f8ad4988054a08da10eb4902708caba04865dc96e1409308"
+    },
+    {
+      "suite": "toy_map_integration",
+      "checks": 76,
+      "report_sha256": "66acfe1c5939d2ddc1551cd30178a99556ddf0e6fd6b900f223d189e5b92ebf4",
+      "log_sha256": "d3380881f71c7598bb45d05000a41c7653994addcaa54a899b27c25ba5014409",
+      "engine_log_sha256": "d3380881f71c7598bb45d05000a41c7653994addcaa54a899b27c25ba5014409"
+    },
+    {
+      "suite": "retention_ui_review",
+      "checks": 8226,
+      "report_sha256": "42cbc9fc50c7b7c0933c26083b3d5812cf2d6c828157d4795bc10569a949e513",
+      "log_sha256": "d750c31814d83061fce9895cc9f446499e3a97189f7dfe35d2285484a93217e2",
+      "engine_log_sha256": "d750c31814d83061fce9895cc9f446499e3a97189f7dfe35d2285484a93217e2"
+    },
+    {
+      "suite": "ui_collection_review",
+      "checks": 1905,
+      "report_sha256": "b679a3a0a304dadc364f65783438ba7dce4e7910241ccb8bffa46bbcef7719f1",
+      "log_sha256": "7c454b126b1c7509233cd2b012f3c5f9172a16857c75ae738b4c741e5d45a476",
+      "engine_log_sha256": "7c454b126b1c7509233cd2b012f3c5f9172a16857c75ae738b4c741e5d45a476"
+    },
+    {
+      "suite": "diamond_boundary_review",
+      "checks": 25,
+      "report_sha256": "924aacda3fc831c29f91377bfec5dc8c6ea8cee73311a9799c54f63ebce7deb7",
+      "log_sha256": "aa28228969ea6a6b4a06911e8dad0da0c8cd6fdaf51358b3b835afe424d02281",
+      "engine_log_sha256": "aa28228969ea6a6b4a06911e8dad0da0c8cd6fdaf51358b3b835afe424d02281"
+    },
+    {
+      "suite": "monetization_bridges",
+      "checks": 119,
+      "report_sha256": "89f061104ccbf200e0ab260bdce3a0cf166d0e596886a5935666eb552012bec9",
+      "log_sha256": "247a31cb77a21b747b03b27bff6d72cc60151eb52f195d5febf48b5009be16cf",
+      "engine_log_sha256": "247a31cb77a21b747b03b27bff6d72cc60151eb52f195d5febf48b5009be16cf"
+    },
+    {
+      "suite": "store",
+      "checks": 17,
+      "report_sha256": "e1aa7235f6628e184b23513498dc50e2fc99e2dd425d26bf631c282784bd3b8d",
+      "log_sha256": "0232bf4883a757d0c05af765b02ccc103c959d4b204f03eb80d3d213a40ac02c",
+      "engine_log_sha256": "0232bf4883a757d0c05af765b02ccc103c959d4b204f03eb80d3d213a40ac02c"
+    }
+  ],
+  "checks": 12027,
+  "scope": "Serial source-only current reward/draw fixtures. Exactly50 normal coins,75boost,10-diamond optional choices and the new100-diamond allowlist; existing wallet/legacy60 and13-coin unfinished receipts preserved. Planned$1.99 is not account-configured. No package/native/ad playback/device claim. The nonregistered historical food_review_skill_economy fixture was adapted but not included in the release registry."
+}

@@ -1,0 +1,14 @@
+{
+  "changed_inputs": {
+    "tests/review_food_goals.gd": {
+      "before": "8064043be49d6e4c0e50ab3ebf1eb1241c0a33030ac845f6ea5711db60362109",
+      "after": "104efa04422cbc6dfbd2fef92b8740e133e6d2ced443f25a0174e26a50caaf43"
+    },
+    "tools/release_web.py": {
+      "before": "1945a5cb92c5aedd49e1dbfdaebf444114f6557dc516158f78b60d4a4dc1f6b1",
+      "after": "d6f5c17fe4877f94bb437229c6acf4f1c0169e174d98ef0c203c386398dc394c"
+    }
+  },
+  "runtime_unchanged": true,
+  "scope": "Earlier sample retained; fixture-only changes do not explain or establish a runtime performance improvement."
+}

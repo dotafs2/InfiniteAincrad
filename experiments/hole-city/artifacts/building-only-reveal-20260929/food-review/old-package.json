@@ -1,0 +1,30 @@
+{
+  "checks": 6,
+  "expected_old_policy": true,
+  "failures": [],
+  "observations": [
+    {
+      "actual_mesh_blocks": true,
+      "aggregate_height": 9.91487505197525,
+      "aggregate_width": 2.9632628262043,
+      "at": "(-17.90997, 28.47883)",
+      "candidate": true,
+      "kind": "burger",
+      "own_height": 1.92235565185547,
+      "own_width": 2.74483585357666,
+      "weight": 1.0
+    },
+    {
+      "actual_mesh_blocks": true,
+      "aggregate_height": 6.59718081617355,
+      "aggregate_width": 3.3190740942955,
+      "at": "(-25.01169, 15.78829)",
+      "candidate": true,
+      "kind": "donut",
+      "own_height": 0.877079486846924,
+      "own_width": 3.21067881584167,
+      "weight": 1.0
+    }
+  ],
+  "scope": "Controlled camera over real food tiers; no browser, saved progress or performance claim"
+}

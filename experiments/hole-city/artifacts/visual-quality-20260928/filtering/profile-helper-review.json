@@ -1,0 +1,377 @@
+{
+  "passed": true,
+  "checks": 91,
+  "failures": [],
+  "cases": [
+    {
+      "label": "valid trace accepted",
+      "pass": true
+    },
+    {
+      "label": "reject map='food'",
+      "pass": true
+    },
+    {
+      "label": "reject scenario='grown'",
+      "pass": true
+    },
+    {
+      "label": "reject version='stale'",
+      "pass": true
+    },
+    {
+      "label": "reject headless=False",
+      "pass": true
+    },
+    {
+      "label": "reject samples=599",
+      "pass": true
+    },
+    {
+      "label": "reject frame_times_ms=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,",
+      "pass": true
+    },
+    {
+      "label": "reject frame_times_ms=[nan, nan, nan, nan, nan, nan, nan, nan, nan,",
+      "pass": true
+    },
+    {
+      "label": "reject frame_times_ms=[inf, inf, inf, inf, inf, inf, inf, inf, inf,",
+      "pass": true
+    },
+    {
+      "label": "reject frame_times_ms=[-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1",
+      "pass": true
+    },
+    {
+      "label": "reject frame_times_ms=[True, True, True, True, True, True, True, Tr",
+      "pass": true
+    },
+    {
+      "label": "reject measured_reveal_updates=599",
+      "pass": true
+    },
+    {
+      "label": "reject measured_reveal_updates=nan",
+      "pass": true
+    },
+    {
+      "label": "reject measured_reveal_updates=inf",
+      "pass": true
+    },
+    {
+      "label": "reject reveal_strength=0.98",
+      "pass": true
+    },
+    {
+      "label": "reject reveal_strength=nan",
+      "pass": true
+    },
+    {
+      "label": "reject reveal_strength=inf",
+      "pass": true
+    },
+    {
+      "label": "reject reveal_strength=1.1",
+      "pass": true
+    },
+    {
+      "label": "reject reveal_per_frame_scene_scans=1",
+      "pass": true
+    },
+    {
+      "label": "reject p95_ms=2",
+      "pass": true
+    },
+    {
+      "label": "reject over_16_67_ms=1",
+      "pass": true
+    },
+    {
+      "label": "run clean",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed clean",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch clean",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test clean",
+      "pass": true
+    },
+    {
+      "label": "run ca",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed ca",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch ca",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test ca",
+      "pass": true
+    },
+    {
+      "label": "run native",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed native",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch native",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test native",
+      "pass": true
+    },
+    {
+      "label": "run shader",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed shader",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch shader",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test shader",
+      "pass": true
+    },
+    {
+      "label": "run script",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed script",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch script",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test script",
+      "pass": true
+    },
+    {
+      "label": "run fatal",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed fatal",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch fatal",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test fatal",
+      "pass": true
+    },
+    {
+      "label": "run ansi",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed ansi",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch ansi",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test ansi",
+      "pass": true
+    },
+    {
+      "label": "run nonzero",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed nonzero",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch nonzero",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test nonzero",
+      "pass": true
+    },
+    {
+      "label": "run no-marker",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed no-marker",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch no-marker",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test no-marker",
+      "pass": true
+    },
+    {
+      "label": "run missing-report",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed missing-report",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch missing-report",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test missing-report",
+      "pass": true
+    },
+    {
+      "label": "run malformed-report",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed malformed-report",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch malformed-report",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test malformed-report",
+      "pass": true
+    },
+    {
+      "label": "run stale-report",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed stale-report",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch stale-report",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test stale-report",
+      "pass": true
+    },
+    {
+      "label": "run bad-metadata",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed bad-metadata",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch bad-metadata",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test bad-metadata",
+      "pass": true
+    },
+    {
+      "label": "run input-change",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed input-change",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch input-change",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test input-change",
+      "pass": true
+    },
+    {
+      "label": "run engine-change",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed engine-change",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch engine-change",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test engine-change",
+      "pass": true
+    },
+    {
+      "label": "run timeout",
+      "pass": true
+    },
+    {
+      "label": "stale summary removed timeout",
+      "pass": true
+    },
+    {
+      "label": "prior reports removed before launch timeout",
+      "pass": true
+    },
+    {
+      "label": "command remains headless isolated test timeout",
+      "pass": true
+    },
+    {
+      "label": "fingerprint contains tools/profile_maps.py",
+      "pass": true
+    },
+    {
+      "label": "fingerprint contains tests/mobile_profile.gd",
+      "pass": true
+    },
+    {
+      "label": "fingerprint contains fidelity/hole_reveal.gdshaderinc",
+      "pass": true
+    },
+    {
+      "label": "fingerprint contains assets/food_city/streets.png.import",
+      "pass": true
+    },
+    {
+      "label": "fingerprint contains engine_binary",
+      "pass": true
+    },
+    {
+      "label": "engine fingerprint binds actual bytes",
+      "pass": true
+    }
+  ],
+  "sha256": {
+    "tools/release_web.py": "0c72beb93ca16080f208532638dbf4a77ed07340bd7aa5da8d8f7029957886b9",
+    "tools/profile_maps.py": "088f5efcf9b6d1f7afd8b624676d201b1c634ef3c6cb76a85e59b019122a947d",
+    "tests/mobile_profile.gd": "ba179497a8ac406d1a392595cd940b17da9c6fbd2b6f816b672173d24b1e0cc1"
+  },
+  "scope": "Direct trace validation and mocked subprocesses in temporary owned output folders; no Godot, source mutation, timing measurement or preview access"
+}

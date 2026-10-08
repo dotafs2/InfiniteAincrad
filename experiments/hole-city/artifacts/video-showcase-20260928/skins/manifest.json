@@ -1,0 +1,884 @@
+{
+  "scope": "OFFLINE ASSET PREVIEWS from current exported Godot meshes and material parameters in a windowless CGL renderer; not Godot screenshots, gameplay capture, or device performance evidence. Geometry sampled at 0.5s. Flat materials preserve actual unshaded colors; shipped procedural shader equations translated to GLSL. Camera is an elevated orthographic showcase framing, not a gameplay camera. No player progress loaded or written.",
+  "size": [
+    540,
+    540
+  ],
+  "format": "PNG, RGBA, straight alpha",
+  "core_blue_verified": true,
+  "count": 44,
+  "groups": {
+    "foundation": 27,
+    "resonance": 17
+  },
+  "renderer_log": "Renderer: Apple Software Renderer\nRendered core_shell 540x540 RGBA at 0.5s\nRendered copper_ring 540x540 RGBA at 0.5s\nRendered moss_bloom 540x540 RGBA at 0.5s\nRendered gravitas 540x540 RGBA at 0.5s\nRendered lantern 540x540 RGBA at 0.5s\nRendered shard 540x540 RGBA at 0.5s\nRendered cinder 540x540 RGBA at 0.5s\nRendered tide 540x540 RGBA at 0.5s\nRendered orbit 540x540 RGBA at 0.5s\nRendered prism_vale 540x540 RGBA at 0.5s\nRendered sunny_side 540x540 RGBA at 0.5s\nRendered sugar_glaze 540x540 RGBA at 0.5s\nRendered berry_crown 540x540 RGBA at 0.5s\nRendered citrus_slice 540x540 RGBA at 0.5s\nRendered melon_munch 540x540 RGBA at 0.5s\nRendered pretzel_twist 540x540 RGBA at 0.5s\nRendered popcorn_pot 540x540 RGBA at 0.5s\nRendered pizza_party 540x540 RGBA at 0.5s\nRendered cookie_bite 540x540 RGBA at 0.5s\nRendered waffle_stack 540x540 RGBA at 0.5s\nRendered pancake_stack 540x540 RGBA at 0.5s\nRendered bacon_curl 540x540 RGBA at 0.5s\nRendered cocoa_square 540x540 RGBA at 0.5s\nRendered frosted_cake 540x540 RGBA at 0.5s\nRendered pineapple_top 540x540 RGBA at 0.5s\nRendered crab_cove 540x540 RGBA at 0.5s\nRendered fox_den 540x540 RGBA at 0.5s\nRendered bunny_burrow 540x540 RGBA at 0.5s\nRendered frog_pond 540x540 RGBA at 0.5s\nRendered owl_hollow 540x540 RGBA at 0.5s\nRendered turtle_shell 540x540 RGBA at 0.5s\nRendered snail_trail 540x540 RGBA at 0.5s\nRendered clockwork_key 540x540 RGBA at 0.5s\nRendered royal_gate 540x540 RGBA at 0.5s\nRendered satellite_dish 540x540 RGBA at 0.5s\nRendered carnival_tent 540x540 RGBA at 0.5s\nRendered rocket_port 540x540 RGBA at 0.5s\nRendered rainbow_bridge 540x540 RGBA at 0.5s\nRendered storm_cloud 540x540 RGBA at 0.5s\nRendered dragon_roost 540x540 RGBA at 0.5s\nRendered jelly_veil 540x540 RGBA at 0.5s\nRendered moon_dream 540x540 RGBA at 0.5s\nRendered coral_reef 540x540 RGBA at 0.5s\nRendered music_stage 540x540 RGBA at 0.5s\nOFFLINE_ASSET_RENDER rendered 44 exact current forms; not a game screenshot\n",
+  "source_sha256": {
+    "fidelity/skin_catalog.gd": "8fd8df7f1590ab635e5ce2a5b4b21757d3f938f493d9135a65fcc3bc867ec2be",
+    "fidelity/skin_visual.gd": "06a90d95ad2364d63cc206525c3a5556cc0947471d1439d46627236103a2163c",
+    "fidelity/skin_motifs.gd": "0db569773783e174b088ecf716bf10592b448c432b7508a173af58665f7a637e",
+    "fidelity/shaders/accretion.gdshader": "1284055f6b342308a8bb30b7e65d98d7d5f64049b8fa1285ddcb15735042146a",
+    "fidelity/shaders/aurora.gdshader": "38f339f6ab05cce1afd9ed18b52bf00e360f15dfed283fcdc11467271df23800",
+    "fidelity/shaders/solid_skin.gdshader": "2e008f85c1c60fe3582a1cad9571f55c6c04eb0cbb0dd24e6336b67e8a297843",
+    "fidelity/shaders/tide.gdshader": "e2a3ad7347f8049c5ee0814ba51e40eaf69a1f1d34a574a892d4689b6e62f1d1",
+    "fidelity/cinder_flame.gdshader": "ecf6a514855efc1e93684e4e91b51e13b04faf12870627fb8e1c02ffe3c43907"
+  },
+  "catalog": [
+    {
+      "id": "core_shell",
+      "name": "Core Shell",
+      "group": "foundation",
+      "tint": "249cff",
+      "accent": "bfeaff",
+      "file": "core_shell.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        41,
+        131,
+        499,
+        433
+      ],
+      "meshes": 4,
+      "triangles": 2976,
+      "sha256": "5d7c1553c8ae8deecebf4329d59daf8617512fb33ea72cede6984981d9dce589"
+    },
+    {
+      "id": "copper_ring",
+      "name": "Copper Ring",
+      "group": "resonance",
+      "tint": "e58a37",
+      "accent": "ffe9a6",
+      "file": "copper_ring.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        94,
+        157,
+        446,
+        401
+      ],
+      "meshes": 9,
+      "triangles": 2376,
+      "sha256": "86fbe7550d95c935fa8f17dc48320b660e185bdc9d6ae7a2b29b9ee3ce95e525"
+    },
+    {
+      "id": "moss_bloom",
+      "name": "Moss Bloom",
+      "group": "resonance",
+      "tint": "25c96a",
+      "accent": "b2ff60",
+      "file": "moss_bloom.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        45,
+        128,
+        495,
+        430
+      ],
+      "meshes": 14,
+      "triangles": 1600,
+      "sha256": "7f3961dcb37cd24ff16372e7cf366eca0f321a3ed35d5c1a071f2ce5382567ef"
+    },
+    {
+      "id": "gravitas",
+      "name": "Gravitas",
+      "group": "resonance",
+      "tint": "5d5478",
+      "accent": "ffbe39",
+      "file": "gravitas.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        95,
+        131,
+        445,
+        411
+      ],
+      "meshes": 8,
+      "triangles": 1608,
+      "sha256": "7e68c8bf6a78418136ae31f9276803c697410f495d6649d904c3a5dbf61a0fe1"
+    },
+    {
+      "id": "lantern",
+      "name": "Lantern",
+      "group": "resonance",
+      "tint": "ffb32b",
+      "accent": "fff3a1",
+      "file": "lantern.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        87,
+        90,
+        453,
+        397
+      ],
+      "meshes": 15,
+      "triangles": 1626,
+      "sha256": "7ccd895af52114b3e1d48429fd0178ab55f3b4650f592652b2618de633b3b4e4"
+    },
+    {
+      "id": "shard",
+      "name": "Shard",
+      "group": "resonance",
+      "tint": "24baff",
+      "accent": "e0ffff",
+      "file": "shard.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        89,
+        130,
+        451,
+        413
+      ],
+      "meshes": 11,
+      "triangles": 1608,
+      "sha256": "987b6aa402dd84a5599d40ffc96b4e6f52ea4fdf1f53f30b25c96480ad8a5550"
+    },
+    {
+      "id": "cinder",
+      "name": "Cinder",
+      "group": "foundation",
+      "tint": "ff4e15",
+      "accent": "ffd04a",
+      "file": "cinder.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        95,
+        91,
+        439,
+        391
+      ],
+      "meshes": 14,
+      "triangles": 1844,
+      "sha256": "173ecba8677f2417cca9c6c45c1bd7f49b7cd5e3551ee85b207211cae73a1fed"
+    },
+    {
+      "id": "tide",
+      "name": "Tide",
+      "group": "foundation",
+      "tint": "009eed",
+      "accent": "acffff",
+      "file": "tide.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        57,
+        140,
+        483,
+        421
+      ],
+      "meshes": 5,
+      "triangles": 1632,
+      "sha256": "6e2b4f25463e4a27331ea26299fcc183a3a771487e6eb091b872d0e97e612317"
+    },
+    {
+      "id": "orbit",
+      "name": "Orbit",
+      "group": "foundation",
+      "tint": "8541ed",
+      "accent": "9fecff",
+      "file": "orbit.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        41,
+        131,
+        499,
+        433
+      ],
+      "meshes": 4,
+      "triangles": 2976,
+      "sha256": "eb20f29d104a174c9e3bdb45c55cc1aa6c8960f0691b040d1719cf9620429248"
+    },
+    {
+      "id": "prism_vale",
+      "name": "Prism Vale",
+      "group": "foundation",
+      "tint": "ff55bc",
+      "accent": "60ffda",
+      "file": "prism_vale.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        95,
+        110,
+        445,
+        402
+      ],
+      "meshes": 10,
+      "triangles": 1872,
+      "sha256": "07a1d9ccca0cbbdfca8beaa299c8f3035d408484841ba2cf2f5b3221cc078dad"
+    },
+    {
+      "id": "sunny_side",
+      "name": "Sunny Side",
+      "group": "foundation",
+      "tint": "fff3bb",
+      "accent": "ffb521",
+      "file": "sunny_side.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        84,
+        131,
+        456,
+        420
+      ],
+      "meshes": 8,
+      "triangles": 3120,
+      "sha256": "7881a3c1a8aa160afac66de6dd0d70b0132f05cb0969c243a2ecb2dfbe3e265a"
+    },
+    {
+      "id": "sugar_glaze",
+      "name": "Sugar Glaze",
+      "group": "foundation",
+      "tint": "ff75b9",
+      "accent": "fff4c9",
+      "file": "sugar_glaze.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        82,
+        144,
+        458,
+        402
+      ],
+      "meshes": 9,
+      "triangles": 1992,
+      "sha256": "a9588755628703583863798e42e4884264710a3be38d02dcd3a8cc1c840af67c"
+    },
+    {
+      "id": "berry_crown",
+      "name": "Berry Crown",
+      "group": "foundation",
+      "tint": "fa376d",
+      "accent": "50e88a",
+      "file": "berry_crown.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        90,
+        110,
+        450,
+        412
+      ],
+      "meshes": 12,
+      "triangles": 2296,
+      "sha256": "bec7f0bb39781ec2d63ce39884948623a4e6e4d69857f7b23931b7bfbc00c8fc"
+    },
+    {
+      "id": "citrus_slice",
+      "name": "Citrus Slice",
+      "group": "foundation",
+      "tint": "ff9f20",
+      "accent": "fff07d",
+      "file": "citrus_slice.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        85,
+        152,
+        455,
+        403
+      ],
+      "meshes": 11,
+      "triangles": 2208,
+      "sha256": "ccd9750d383b5547433c50910bb12a836579229e372b2b90a50b1e8456e9ae01"
+    },
+    {
+      "id": "melon_munch",
+      "name": "Melon Munch",
+      "group": "foundation",
+      "tint": "fa4878",
+      "accent": "46d983",
+      "file": "melon_munch.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        80,
+        152,
+        460,
+        405
+      ],
+      "meshes": 11,
+      "triangles": 2640,
+      "sha256": "5bbcbc278e59593a5b111188c4d147db3f4cdea1e3c5406c227b48cdefaf5110"
+    },
+    {
+      "id": "pretzel_twist",
+      "name": "Pretzel Twist",
+      "group": "foundation",
+      "tint": "c87a35",
+      "accent": "fff0bb",
+      "file": "pretzel_twist.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        82,
+        182,
+        458,
+        411
+      ],
+      "meshes": 8,
+      "triangles": 2724,
+      "sha256": "11e8905582003ea4a82feee2210c5219dbaac1439cf27e98d0dfdb27d3ecc8b1"
+    },
+    {
+      "id": "popcorn_pot",
+      "name": "Popcorn Pot",
+      "group": "foundation",
+      "tint": "ff5454",
+      "accent": "fff2aa",
+      "file": "popcorn_pot.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        96,
+        140,
+        444,
+        400
+      ],
+      "meshes": 13,
+      "triangles": 3048,
+      "sha256": "c51d93360929beabb7d866522483465dee63d3939ba227936ede5549d3f60928"
+    },
+    {
+      "id": "pizza_party",
+      "name": "Pizza Party",
+      "group": "foundation",
+      "tint": "ffbc48",
+      "accent": "ed484b",
+      "file": "pizza_party.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        80,
+        150,
+        460,
+        408
+      ],
+      "meshes": 15,
+      "triangles": 3000,
+      "sha256": "37ed43a97abec0c20cad819c0635c25e3e55b9110c7833a33297caa355ca38ad"
+    },
+    {
+      "id": "cookie_bite",
+      "name": "Cookie Bite",
+      "group": "foundation",
+      "tint": "d89852",
+      "accent": "62382e",
+      "file": "cookie_bite.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        85,
+        152,
+        455,
+        411
+      ],
+      "meshes": 13,
+      "triangles": 2592,
+      "sha256": "835521581685d437c4934060b8a735c898d692a7096805266b16361f7ccc0ae3"
+    },
+    {
+      "id": "waffle_stack",
+      "name": "Waffle Stack",
+      "group": "foundation",
+      "tint": "efac47",
+      "accent": "ffedb1",
+      "file": "waffle_stack.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        94,
+        143,
+        446,
+        401
+      ],
+      "meshes": 14,
+      "triangles": 1680,
+      "sha256": "f190db5578344f14281dbaf3c8f049af897668b8da2f5d5ae06b3d3ed6180bbb"
+    },
+    {
+      "id": "pancake_stack",
+      "name": "Pancake Stack",
+      "group": "foundation",
+      "tint": "cb8240",
+      "accent": "ffe77b",
+      "file": "pancake_stack.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        91,
+        118,
+        449,
+        400
+      ],
+      "meshes": 6,
+      "triangles": 2700,
+      "sha256": "a592f7ad5541b53ad19368637e7b6e874cc85cfb0f8de307db5adf84c41e5e7e"
+    },
+    {
+      "id": "bacon_curl",
+      "name": "Bacon Curl",
+      "group": "foundation",
+      "tint": "e96a69",
+      "accent": "ffd8b6",
+      "file": "bacon_curl.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        101,
+        124,
+        439,
+        389
+      ],
+      "meshes": 10,
+      "triangles": 1824,
+      "sha256": "0d6c07f50162f82573bcd10d16e7347e0c77491b64cc8306aac649ece22686a4"
+    },
+    {
+      "id": "cocoa_square",
+      "name": "Cocoa Square",
+      "group": "foundation",
+      "tint": "794237",
+      "accent": "d18d55",
+      "file": "cocoa_square.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        99,
+        138,
+        441,
+        399
+      ],
+      "meshes": 10,
+      "triangles": 1632,
+      "sha256": "803f2caf9c5579cf5cd3b71653356a1a91af80a3ca437994d9e475cfa6e088b2"
+    },
+    {
+      "id": "frosted_cake",
+      "name": "Frosted Cake",
+      "group": "foundation",
+      "tint": "fd85b8",
+      "accent": "fff8df",
+      "file": "frosted_cake.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        92,
+        144,
+        448,
+        395
+      ],
+      "meshes": 10,
+      "triangles": 3132,
+      "sha256": "10e0c3c3b9d5ac2d95894df9140625f837ea2b01f2d457e5f7469dca159a90cf"
+    },
+    {
+      "id": "pineapple_top",
+      "name": "Pineapple Top",
+      "group": "foundation",
+      "tint": "ffd03e",
+      "accent": "58c947",
+      "file": "pineapple_top.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        111,
+        96,
+        429,
+        401
+      ],
+      "meshes": 13,
+      "triangles": 1648,
+      "sha256": "1856161286cbc0225d17fb3f85ee9646e2891b1281ee5f6917b92088881344bc"
+    },
+    {
+      "id": "crab_cove",
+      "name": "Crab Cove",
+      "group": "foundation",
+      "tint": "f8694d",
+      "accent": "ffcab4",
+      "file": "crab_cove.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        73,
+        123,
+        467,
+        386
+      ],
+      "meshes": 14,
+      "triangles": 2232,
+      "sha256": "5bdb22f18e159ccdfff5d32957b2abf3f61b901bd5df98405ce911153e0ed747"
+    },
+    {
+      "id": "fox_den",
+      "name": "Fox Den",
+      "group": "foundation",
+      "tint": "f79642",
+      "accent": "fff2d8",
+      "file": "fox_den.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        114,
+        99,
+        426,
+        386
+      ],
+      "meshes": 11,
+      "triangles": 2276,
+      "sha256": "20c6ecfbc24acd979993e9a654ff55c5531d979efd07787b2215675cef11ef3f"
+    },
+    {
+      "id": "bunny_burrow",
+      "name": "Bunny Burrow",
+      "group": "foundation",
+      "tint": "f8e7fa",
+      "accent": "ffa8d6",
+      "file": "bunny_burrow.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        115,
+        84,
+        425,
+        386
+      ],
+      "meshes": 11,
+      "triangles": 3276,
+      "sha256": "bc3e4697f4804fe39c777e6ecb03a234fdcf2e6061fb9670375d6942eed5358c"
+    },
+    {
+      "id": "frog_pond",
+      "name": "Frog Pond",
+      "group": "foundation",
+      "tint": "66d849",
+      "accent": "ebffa8",
+      "file": "frog_pond.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        73,
+        151,
+        478,
+        386
+      ],
+      "meshes": 8,
+      "triangles": 2160,
+      "sha256": "abcedf8f7738bba285b55a1dca5a38d4fadef88e5299646c1aa41fdb0e0b5cb8"
+    },
+    {
+      "id": "owl_hollow",
+      "name": "Owl Hollow",
+      "group": "foundation",
+      "tint": "ab7a52",
+      "accent": "ffe6a1",
+      "file": "owl_hollow.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        115,
+        122,
+        425,
+        386
+      ],
+      "meshes": 9,
+      "triangles": 2136,
+      "sha256": "8630e26ad119883d27d263762706d30e732f5f610447e7f2c9296554fd6efd0c"
+    },
+    {
+      "id": "turtle_shell",
+      "name": "Turtle Shell",
+      "group": "foundation",
+      "tint": "44b49c",
+      "accent": "b4f49a",
+      "file": "turtle_shell.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        91,
+        126,
+        449,
+        404
+      ],
+      "meshes": 13,
+      "triangles": 3840,
+      "sha256": "07c1c6044953bb4710597a546549babe76838eda3b1fed21a2bf7b5aff8765ea"
+    },
+    {
+      "id": "snail_trail",
+      "name": "Snail Trail",
+      "group": "foundation",
+      "tint": "b67fec",
+      "accent": "ffe99d",
+      "file": "snail_trail.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        115,
+        107,
+        425,
+        386
+      ],
+      "meshes": 10,
+      "triangles": 2904,
+      "sha256": "3d22a5956571bc653c9b4b18558e8d03ed56542f7a345c4c7d91ff3cc03af0dd"
+    },
+    {
+      "id": "clockwork_key",
+      "name": "Clockwork Key",
+      "group": "resonance",
+      "tint": "dba946",
+      "accent": "fff0ac",
+      "file": "clockwork_key.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        115,
+        76,
+        425,
+        386
+      ],
+      "meshes": 11,
+      "triangles": 2544,
+      "sha256": "a949c10bda1d8914cf86ab486a8b03af9ee3902a22875ad841e53149b618c41f"
+    },
+    {
+      "id": "royal_gate",
+      "name": "Royal Gate",
+      "group": "resonance",
+      "tint": "ffbd3f",
+      "accent": "ff65a2",
+      "file": "royal_gate.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        97,
+        122,
+        443,
+        390
+      ],
+      "meshes": 13,
+      "triangles": 3300,
+      "sha256": "852bbd58687d05ec89bdc01f310b52da069a8bb5d0c6eff6fe18f9685cd57ae7"
+    },
+    {
+      "id": "satellite_dish",
+      "name": "Satellite Dish",
+      "group": "resonance",
+      "tint": "c5d8fa",
+      "accent": "58c6ff",
+      "file": "satellite_dish.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        80,
+        95,
+        460,
+        386
+      ],
+      "meshes": 11,
+      "triangles": 1776,
+      "sha256": "56b029619041ba3d2f33982b35d3d9a0239304e9fe57c917a91aeefcdd5d1e65"
+    },
+    {
+      "id": "carnival_tent",
+      "name": "Carnival Tent",
+      "group": "resonance",
+      "tint": "f75577",
+      "accent": "fff1c0",
+      "file": "carnival_tent.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        106,
+        82,
+        434,
+        386
+      ],
+      "meshes": 12,
+      "triangles": 1620,
+      "sha256": "c58f2827b8e33232f8bea74e3344f8ae8bddb666288a00107d0cd012e3fdcf8d"
+    },
+    {
+      "id": "rocket_port",
+      "name": "Rocket Port",
+      "group": "resonance",
+      "tint": "dce9fb",
+      "accent": "ff703e",
+      "file": "rocket_port.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        115,
+        79,
+        425,
+        386
+      ],
+      "meshes": 8,
+      "triangles": 2116,
+      "sha256": "7477697c2eb33b561447a43bce3dc4ef079a465e2577258aa204368fced52f2a"
+    },
+    {
+      "id": "rainbow_bridge",
+      "name": "Rainbow Bridge",
+      "group": "resonance",
+      "tint": "fd759c",
+      "accent": "71e5df",
+      "file": "rainbow_bridge.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        115,
+        96,
+        425,
+        386
+      ],
+      "meshes": 7,
+      "triangles": 2508,
+      "sha256": "363425ed66ecf5147b07f84aadb49e565b22b7a42eacb7264b56e4eaa8a94252"
+    },
+    {
+      "id": "storm_cloud",
+      "name": "Storm Cloud",
+      "group": "resonance",
+      "tint": "aaa4e1",
+      "accent": "fff360",
+      "file": "storm_cloud.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        115,
+        106,
+        425,
+        386
+      ],
+      "meshes": 8,
+      "triangles": 3000,
+      "sha256": "638f2902f8804e8929ab3228b2bc4440ecfcaff16b1a070957d428e58575705d"
+    },
+    {
+      "id": "dragon_roost",
+      "name": "Dragon Roost",
+      "group": "resonance",
+      "tint": "8265d9",
+      "accent": "e1afef",
+      "file": "dragon_roost.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        71,
+        115,
+        469,
+        386
+      ],
+      "meshes": 8,
+      "triangles": 2136,
+      "sha256": "77c5b0ecacbcd51bae52d930a275345e28ebd11b43ed84027e67ca5868f32999"
+    },
+    {
+      "id": "jelly_veil",
+      "name": "Jelly Veil",
+      "group": "resonance",
+      "tint": "f48cd0",
+      "accent": "92f3ff",
+      "file": "jelly_veil.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        88,
+        112,
+        452,
+        393
+      ],
+      "meshes": 9,
+      "triangles": 2088,
+      "sha256": "b7bdaa0c1d31530a2c6aa48b64cfd2d5c9558d7beac6f5630984f0d7f41e89b8"
+    },
+    {
+      "id": "moon_dream",
+      "name": "Moon Dream",
+      "group": "resonance",
+      "tint": "a58af3",
+      "accent": "fff1a0",
+      "file": "moon_dream.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        115,
+        97,
+        425,
+        386
+      ],
+      "meshes": 6,
+      "triangles": 1684,
+      "sha256": "6f2e7e19e7df40126e59b04ca7f617ae046944ff870e8d6bdb1ae4d965379fff"
+    },
+    {
+      "id": "coral_reef",
+      "name": "Coral Reef",
+      "group": "resonance",
+      "tint": "ff769b",
+      "accent": "8ae8d5",
+      "file": "coral_reef.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        105,
+        97,
+        435,
+        386
+      ],
+      "meshes": 6,
+      "triangles": 1776,
+      "sha256": "27c876665bf747600b77283b0b5ca48988ba91c3ff367010266c3aa20195d91f"
+    },
+    {
+      "id": "music_stage",
+      "name": "Music Stage",
+      "group": "resonance",
+      "tint": "ad65f0",
+      "accent": "6df0d9",
+      "file": "music_stage.png",
+      "width": 540,
+      "height": 540,
+      "alpha_bounds": [
+        94,
+        103,
+        445,
+        386
+      ],
+      "meshes": 13,
+      "triangles": 2460,
+      "sha256": "d80a836cb879c9fbfb79d5ddb85acdabdc20d3259e03e77c8355e9ca5b55936b"
+    }
+  ],
+  "render_inputs_sha256": "d8355c76ea4f067816906fcdc6d31b66caaa862e83b31223f8f1a305ad859846",
+  "limitations": [
+    "Windowless CGL equations/geometry visualization; no Godot lighting, tone mapping, viewport compositor, or GPU timing claims.",
+    "Standard flat materials retain exported colors; billboard sparks use exported poses, not the engine billboard compositor.",
+    "Square stills use showcase orthographic framing; composite with preserved aspect ratio.",
+    "Animation advances shader time only; ornament and particle mesh poses are fixed at 0.5 seconds."
+  ],
+  "animation": {
+    "path": "animation/manifest.json",
+    "frames": 48,
+    "fps": 24,
+    "seconds": 2
+  },
+  "helpers_sha256": {
+    "prepare_shaders.py": "16efe5f1330d78f28aebcf9986014df8cbead2e6b84cd13963b8091fc4ec102f",
+    "finish_previews.py": "6964bf3b860cd47e3c0fdd5fbd842b0130a5c3755e430b03f3b9ac5093df08cc",
+    "finish_animation.py": "e007acc0d35ff833da0130e1a9683345dbd5dedefea29385265ec0f24fc2d590",
+    "render_skins.m": "aac3bdbf92a3da1d2d62776a3b9f2cf3504cbc8fa8ddbd52117c400c514107e4",
+    "render_shader_motion.m": "13c08aad91f40e88c27ba888203cad686c8d18f779e64140290c21c26d7464c1",
+    "export_current_skins.gd": "5d954d9ea3aae20b5cd04bfb1b2dbf6d9bce81a400eb19995fd818a4a3937018"
+  }
+}

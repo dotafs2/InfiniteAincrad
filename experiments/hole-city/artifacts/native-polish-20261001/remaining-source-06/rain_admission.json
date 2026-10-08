@@ -1,0 +1,70 @@
+{
+  "checks": 71,
+  "events": [
+    {
+      "airborne_before": 0,
+      "event": 1,
+      "requested": 6,
+      "retained_before": 0,
+      "serial_after": 6,
+      "serial_before": 0,
+      "spawned": 6
+    },
+    {
+      "airborne_before": 23,
+      "event": 2,
+      "requested": 1,
+      "retained_before": 23,
+      "serial_after": 24,
+      "serial_before": 23,
+      "spawned": 1
+    },
+    {
+      "airborne_before": 24,
+      "event": 3,
+      "requested": 0,
+      "retained_before": 24,
+      "serial_after": 24,
+      "serial_before": 24,
+      "spawned": 0
+    },
+    {
+      "airborne_before": 26,
+      "event": 4,
+      "requested": 0,
+      "retained_before": 26,
+      "serial_after": 26,
+      "serial_before": 26,
+      "spawned": 0
+    },
+    {
+      "airborne_before": 16,
+      "event": 5,
+      "requested": 6,
+      "retained_before": 26,
+      "serial_after": 32,
+      "serial_before": 26,
+      "spawned": 6
+    },
+    {
+      "airborne_before": 21,
+      "event": 6,
+      "requested": 3,
+      "retained_before": 30,
+      "serial_after": 35,
+      "serial_before": 32,
+      "spawned": 3
+    },
+    {
+      "airborne_before": 0,
+      "event": 7,
+      "requested": 0,
+      "retained_before": 640,
+      "serial_after": 642,
+      "serial_before": 642,
+      "spawned": 0
+    }
+  ],
+  "failures": [],
+  "scope": "Scheduler state fixtures and real spawned body IDs; no physical landing or all-time motion-cap claim."
+}

@@ -1,0 +1,98 @@
+{
+  "started_at": "2026-10-02T02:18:28.953387+00:00",
+  "status": "passed",
+  "ok": true,
+  "scope": "Four ordinary simulated base rounds: two Snack Garden60s and two Sunny City90s, automatic movement with real physics and disposable profiles. No continuation, human retention, native SDK, speaker, haptic or phone GPU claim.",
+  "failures": [],
+  "gate_receipt": "artifacts/diamond-economy-20261002/web-gate-02/release.json",
+  "gate_sha256": "d47cf2774e1706c09a7a485343c2731311f2380d9bc459092e1f63ba68a5afb8",
+  "guarded_input_count": 807,
+  "game_sha256": "a2b1b384f18a24970229754072f0a8205ab6fa1e328a161b7d08b5bf04b074ba",
+  "soak_sha256": "0bf077c7e2be3c6d0f90373af3164f79668acd789fa687d62b1c603b26e6ae26",
+  "runner_sha256": "fdd6f4a04e7b1f7aecb561d1a202ee1ccd70257a8781aa92565958a1ffa33b39",
+  "godot_sha256": "c7cccbf8fb143e34e02fd6521e09be2c2b974f0d5db080b19071c9c570718ccf",
+  "command": [
+    "/usr/bin/nice",
+    "-n",
+    "15",
+    "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/.build/godot-standard/Godot.app/Contents/MacOS/Godot",
+    "--headless",
+    "--audio-driver",
+    "Dummy",
+    "--path",
+    "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city",
+    "--script",
+    "tests/one_minute_soak.gd",
+    "--",
+    "--test",
+    "--soak-rounds=4",
+    "--report=/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/diamond-economy-20261002/normal-soak-01/rounds.json"
+  ],
+  "exit_code": 0,
+  "checks": 28,
+  "round_summary": [
+    {
+      "map": "food",
+      "seed": 1501,
+      "elapsed": 60.0166666666645,
+      "score": 151,
+      "level": 5,
+      "radius": 3.5,
+      "deaths": 0,
+      "feedback_events": 54,
+      "targets_at_finish": {
+        "edible": 1183,
+        "edible_within_25m": 81,
+        "larger": 71
+      }
+    },
+    {
+      "map": "city",
+      "seed": 1502,
+      "elapsed": 90.0166666666628,
+      "score": 137,
+      "level": 5,
+      "radius": 3.5,
+      "deaths": 0,
+      "feedback_events": 71,
+      "targets_at_finish": {
+        "edible": 295,
+        "edible_within_25m": 3,
+        "larger": 72
+      }
+    },
+    {
+      "map": "food",
+      "seed": 1503,
+      "elapsed": 60.0166666666645,
+      "score": 151,
+      "level": 5,
+      "radius": 3.5,
+      "deaths": 0,
+      "feedback_events": 55,
+      "targets_at_finish": {
+        "edible": 1183,
+        "edible_within_25m": 81,
+        "larger": 71
+      }
+    },
+    {
+      "map": "city",
+      "seed": 1504,
+      "elapsed": 90.0166666666628,
+      "score": 137,
+      "level": 5,
+      "radius": 3.5,
+      "deaths": 0,
+      "feedback_events": 71,
+      "targets_at_finish": {
+        "edible": 295,
+        "edible_within_25m": 3,
+        "larger": 72
+      }
+    }
+  ],
+  "round_report_sha256": "247c9a7c748568287ebfeb9bb4e0e9f27f78da466026ba64d8f1ae0170271586",
+  "private_engine_log_sha256": "4f82572f651a4ade2ca50e8c219646083a460ffc169f458230cfd4c605f7423f",
+  "ended_at": "2026-10-02T02:23:34.634627+00:00"
+}

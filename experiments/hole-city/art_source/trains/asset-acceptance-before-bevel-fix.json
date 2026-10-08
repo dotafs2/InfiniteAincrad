@@ -1,0 +1,230 @@
+{
+  "checks": 246,
+  "failures": [
+    "sushi_gunkan: no zero-area exported triangles",
+    "rail_car: no zero-area exported triangles"
+  ],
+  "assets": [
+    {
+      "key": "sushi_gunkan",
+      "triangles": 1228,
+      "vertices": 1492,
+      "colors": 9,
+      "closed_components": 28,
+      "positive_volume_components": 28,
+      "minimum_triangle_area": 0.0,
+      "geometry_content_sha256": "a07bf9de88f1103316daa805ad53ec9de93f1745cfc566288e3c7e2f11f21142",
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          1.2203716039657593,
+          0.7849999666213989
+        ]
+      }
+    },
+    {
+      "key": "sushi_salmon",
+      "triangles": 892,
+      "vertices": 917,
+      "colors": 7,
+      "closed_components": 23,
+      "positive_volume_components": 23,
+      "minimum_triangle_area": 0.00015138979669754383,
+      "geometry_content_sha256": "c7ee2b8c9184e60205de3746e4dca2df920750e91618c6e6f40e3a14f9457f16",
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.8183715343475342,
+          0.7849999666213989
+        ]
+      }
+    },
+    {
+      "key": "sushi_tuna",
+      "triangles": 872,
+      "vertices": 901,
+      "colors": 8,
+      "closed_components": 23,
+      "positive_volume_components": 23,
+      "minimum_triangle_area": 0.00015138979669754383,
+      "geometry_content_sha256": "89def19ba724f43f9bd030d95a59504f3db52e88ba3c0347d6be819c630a8db1",
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.828371524810791,
+          0.7849999666213989
+        ]
+      }
+    },
+    {
+      "key": "sushi_shrimp",
+      "triangles": 1100,
+      "vertices": 983,
+      "colors": 8,
+      "closed_components": 28,
+      "positive_volume_components": 28,
+      "minimum_triangle_area": 0.00015138979669754383,
+      "geometry_content_sha256": "21e10afcbb5b53bab8ff53a12e27668a3b274b0d3ef576eaacc6092252385fcd",
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.8230961561203003,
+          0.7849999666213989
+        ]
+      }
+    },
+    {
+      "key": "sushi_eel",
+      "triangles": 972,
+      "vertices": 969,
+      "colors": 8,
+      "closed_components": 26,
+      "positive_volume_components": 26,
+      "minimum_triangle_area": 0.00015138979669754383,
+      "geometry_content_sha256": "d9fa1142050bd70bf0934597ef295a1e69afb514540a65af1f0b11c74819afc6",
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.8218715190887451,
+          0.7849999666213989
+        ]
+      }
+    },
+    {
+      "key": "sushi_tamago",
+      "triangles": 1064,
+      "vertices": 1082,
+      "colors": 7,
+      "closed_components": 28,
+      "positive_volume_components": 28,
+      "minimum_triangle_area": 2.121402697743932e-06,
+      "geometry_content_sha256": "5fdff06f430e0b7028dadb2a42c0f32d6d1af71ee1c6833dd7950ba6a13b12b8",
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.8963714838027954,
+          0.7849999666213989
+        ]
+      }
+    },
+    {
+      "key": "sushi_roe",
+      "triangles": 1064,
+      "vertices": 1191,
+      "colors": 7,
+      "closed_components": 28,
+      "positive_volume_components": 28,
+      "minimum_triangle_area": 0.00015138979669754383,
+      "geometry_content_sha256": "23b3b15e54827315ac7739226764fcd660a877bdee9c6fc62a8ccaab5167ab4c",
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.9118715524673462,
+          0.7849999666213989
+        ]
+      }
+    },
+    {
+      "key": "sushi_mackerel",
+      "triangles": 892,
+      "vertices": 917,
+      "colors": 7,
+      "closed_components": 23,
+      "positive_volume_components": 23,
+      "minimum_triangle_area": 0.00015138979669754383,
+      "geometry_content_sha256": "6f8b44fd6095bc3fbc3d9f3e27c2ffe94e9556f68ee8bd1d10636ead636145b6",
+      "bounds": {
+        "min": [
+          -0.5130000114440918,
+          0.0,
+          -0.7849999666213989
+        ],
+        "max": [
+          0.5130000114440918,
+          0.8113715648651123,
+          0.7849999666213989
+        ]
+      }
+    },
+    {
+      "key": "rail_cab",
+      "triangles": 804,
+      "vertices": 1014,
+      "colors": 8,
+      "closed_components": 14,
+      "positive_volume_components": 14,
+      "minimum_triangle_area": 5.177465240535639e-06,
+      "geometry_content_sha256": "11ad1dace334bc98fc57084e814ad65a31287e1f03d7130059e2e5319d5e93e2",
+      "bounds": {
+        "min": [
+          -0.6259999871253967,
+          0.0,
+          -1.0749999284744263
+        ],
+        "max": [
+          0.6259999871253967,
+          1.3431479930877686,
+          1.0749999284744263
+        ]
+      }
+    },
+    {
+      "key": "rail_car",
+      "triangles": 956,
+      "vertices": 1114,
+      "colors": 7,
+      "closed_components": 14,
+      "positive_volume_components": 14,
+      "minimum_triangle_area": 0.0,
+      "geometry_content_sha256": "2baef5372b775dc3986f6c1b289d52e32b407e7e54eac37d3460caf441e91dc1",
+      "bounds": {
+        "min": [
+          -0.6259999871253967,
+          0.0,
+          -1.0749999284744263
+        ],
+        "max": [
+          0.6259999871253967,
+          1.3431479930877686,
+          1.0749999284744263
+        ]
+      }
+    }
+  ],
+  "scope": "Direct final GLB binary and source hash validation; no runtime physics, browser or mobile FPS claim."
+}

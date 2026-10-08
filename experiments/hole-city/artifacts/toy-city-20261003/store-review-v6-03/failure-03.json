@@ -1,0 +1,44 @@
+{
+  "version": "0.13.0",
+  "target_build": "28",
+  "attempt": "03",
+  "status": "stopped_capture_startup_no_first_frame",
+  "cancelled_at_utc": "2026-10-03T07:25:49.335817+00:00",
+  "gate_sha256": "40b53f486ba9d542d2a495f9293e2f81cc559c3e82527c55cd2de095b03e3b7f",
+  "guarded_count": 824,
+  "helper_sha256": "8e1b4eae45ca9ba2b83788c664d11b33536781df182b27367ee379c71e9b7651",
+  "snapshot_sha256": "606c07cff9c1925bbdf4df3fe6affbe77601ddb36dca88c06d5e12e3268d87aa",
+  "actual_engine": {
+    "pid": 39351,
+    "exit_code": -15,
+    "wall_seconds": 253.871
+  },
+  "wrapper_exit_code": 1,
+  "raw": {
+    "path": "build/toy-city-20261003/store-review-v6-03/city-raw.avi",
+    "bytes": 2584186880,
+    "sha256": "06106802af68a8417af96bd8dcdba28580dc864e188a316f3c604265975eeb71",
+    "finalization_verified": false,
+    "decoded": false
+  },
+  "first_home_png_recorded": false,
+  "gameplay_receipt_recorded": false,
+  "other_masters_started": false,
+  "encoder_or_export_started": false,
+  "window_state_verified": false,
+  "no_script_or_shader_errors_logged": true,
+  "files_sha256": {
+    "build/toy-city-20261003/store-review-v6-03/city-cold-start-sample.txt": "d4ee319496f0713f3b955910100d6f6b2c43adcf6df2dd9f46176084e224e902",
+    "build/toy-city-20261003/store-review-v6-03/movie-city.log": "724f75204b7b2da932d2e74503ffe8a59e422b1a11404d021f54f11ad4940229",
+    "build/toy-city-20261003/store-review-v6-03/movie-city-owned-process.json": "0d9094349c737777668a1ac759bdad38515d4e1c5bbc5fc5b3c33d3b351398a3",
+    "build/toy-city-20261003/store-review-v6-03/capture-stop-01.json": "1090c72387826f8d6e7a259a97f6d50ac3f66076de838da2e3316a7a8f9e03fc",
+    "build/toy-city-20261003/store-media-03-capture.log": "2b0a1bcb4f617fc6a8be34671f442b13e56f936a6abca1987adc4bf7b1c20930",
+    "build/toy-city-20261003/store-media-03-capture-owned-process.json": "aa84981189e09433b5e3536cc3236ec0a2d986cd9a4a5eb3914fdc57971383ae",
+    "build/toy-city-20261003/store-review-v6-03/snapshot-sha256.json": "606c07cff9c1925bbdf4df3fe6affbe77601ddb36dca88c06d5e12e3268d87aa",
+    "build/toy-city-20261003/store-review-v6-03/capture-project/movie.gd": "1865175838f0e45a9d45c7879b47aa319d28eb3dc151ffe444a5b27b06ed8dc7"
+  },
+  "reason": "Exact owned MovieWriter kept writing AVI with no first HOME PNG or gameplay progress for253.871seconds. Root authorized cancellation; only owned engine group39351 received SIGTERM. Helper exited honestly with failure; no retry or encode. The cause and window/frame-post-draw state remain unverified.",
+  "ready_for_upload": false,
+  "uploaded": false,
+  "physical_iphone_capture": false
+}

@@ -1,0 +1,15 @@
+{
+  "checks": 590,
+  "failures": [
+    "Timer settles retained score once even during respawn: city",
+    "Repeated finish cannot settle the timed run twice: city",
+    "Timer settles retained score once even during respawn: food",
+    "Repeated finish cannot settle the timed run twice: food",
+    "Late approval credits exact product and does not close newer presentation",
+    "Duplicate verified transaction cannot duplicate wallet",
+    "Verified store receipt redelivery retries wallet commit",
+    "Acknowledgement retry does not grant coins again",
+    "Engine process failed; inspect the engine log"
+  ],
+  "scope": "Real game timer/combat/respawn and production native bridges with test-only typed providers; all saves process-owned /tmp"
+}

@@ -1,0 +1,357 @@
+{
+  "checks": 136,
+  "extension_triangles": 583532,
+  "failures": [
+    "Entire expanded food scene stays under 5M triangles before spatial culling",
+    "Opening-view batch submission respects the reviewed growth-content budget at radius 0.85",
+    "Opening-view batch submission respects the reviewed growth-content budget at radius 7.2",
+    "Engine process failed; inspect the engine log"
+  ],
+  "initial_food_triangles": 5054236,
+  "meshes": [
+    {
+      "mesh": "cake_shop",
+      "roughness_percent": [
+        40,
+        58,
+        20
+      ],
+      "triangles": 1752
+    },
+    {
+      "mesh": "cake_tower_0",
+      "roughness_percent": [
+        58,
+        40,
+        20
+      ],
+      "triangles": 2128
+    },
+    {
+      "mesh": "berry",
+      "roughness_percent": [
+        27,
+        40
+      ],
+      "triangles": 1720
+    },
+    {
+      "mesh": "burger_shop",
+      "roughness_percent": [
+        40,
+        58,
+        27
+      ],
+      "triangles": 1752
+    },
+    {
+      "mesh": "burger",
+      "roughness_percent": [
+        58,
+        40,
+        27
+      ],
+      "triangles": 3164
+    },
+    {
+      "mesh": "donut_0",
+      "roughness_percent": [
+        58,
+        20,
+        40
+      ],
+      "triangles": 1104
+    },
+    {
+      "mesh": "burger_tower",
+      "roughness_percent": [
+        58,
+        40,
+        27
+      ],
+      "triangles": 3260
+    },
+    {
+      "mesh": "cake_tower_3",
+      "roughness_percent": [
+        58,
+        40,
+        20
+      ],
+      "triangles": 2128
+    },
+    {
+      "mesh": "donut_3",
+      "roughness_percent": [
+        58,
+        20,
+        40
+      ],
+      "triangles": 1104
+    },
+    {
+      "mesh": "pancake_tower_1",
+      "roughness_percent": [
+        58,
+        40
+      ],
+      "triangles": 1584
+    },
+    {
+      "mesh": "donut_1",
+      "roughness_percent": [
+        58,
+        20,
+        40
+      ],
+      "triangles": 1104
+    },
+    {
+      "mesh": "pancake_tower_3",
+      "roughness_percent": [
+        58,
+        40
+      ],
+      "triangles": 1584
+    },
+    {
+      "mesh": "cake_tower_2",
+      "roughness_percent": [
+        58,
+        40,
+        20
+      ],
+      "triangles": 2128
+    },
+    {
+      "mesh": "donut_2",
+      "roughness_percent": [
+        58,
+        20,
+        40
+      ],
+      "triangles": 1104
+    },
+    {
+      "mesh": "cake_tower_1",
+      "roughness_percent": [
+        58,
+        40,
+        20
+      ],
+      "triangles": 2128
+    },
+    {
+      "mesh": "cake_2",
+      "roughness_percent": [
+        58,
+        40,
+        20,
+        27
+      ],
+      "triangles": 2640
+    },
+    {
+      "mesh": "donut_tower_1",
+      "roughness_percent": [
+        58,
+        20,
+        40
+      ],
+      "triangles": 1200
+    },
+    {
+      "mesh": "pancake_tower_2",
+      "roughness_percent": [
+        58,
+        40
+      ],
+      "triangles": 1584
+    },
+    {
+      "mesh": "donut_tower_2",
+      "roughness_percent": [
+        58,
+        20,
+        40
+      ],
+      "triangles": 1200
+    },
+    {
+      "mesh": "cake_1",
+      "roughness_percent": [
+        58,
+        40,
+        20,
+        27
+      ],
+      "triangles": 2640
+    },
+    {
+      "mesh": "pancake_tower_0",
+      "roughness_percent": [
+        58,
+        40
+      ],
+      "triangles": 1584
+    },
+    {
+      "mesh": "donut_tower_3",
+      "roughness_percent": [
+        58,
+        20,
+        40
+      ],
+      "triangles": 1200
+    },
+    {
+      "mesh": "cake_0",
+      "roughness_percent": [
+        58,
+        40,
+        20,
+        27
+      ],
+      "triangles": 2640
+    },
+    {
+      "mesh": "donut_tower_0",
+      "roughness_percent": [
+        58,
+        20,
+        40
+      ],
+      "triangles": 1200
+    },
+    {
+      "mesh": "cookie_0",
+      "roughness_percent": [
+        58,
+        40
+      ],
+      "triangles": 816
+    },
+    {
+      "mesh": "cookie_1",
+      "roughness_percent": [
+        58,
+        20,
+        40
+      ],
+      "triangles": 1056
+    },
+    {
+      "mesh": "cookie_3",
+      "roughness_percent": [
+        58,
+        20,
+        40
+      ],
+      "triangles": 1056
+    },
+    {
+      "mesh": "cookie_2",
+      "roughness_percent": [
+        58,
+        20,
+        40
+      ],
+      "triangles": 1056
+    },
+    {
+      "mesh": "pancake",
+      "roughness_percent": [
+        58,
+        40,
+        20
+      ],
+      "triangles": 1812
+    },
+    {
+      "mesh": "cake_3",
+      "roughness_percent": [
+        58,
+        40,
+        20,
+        27
+      ],
+      "triangles": 2640
+    },
+    {
+      "mesh": "bacon",
+      "roughness_percent": [
+        27,
+        40
+      ],
+      "triangles": 2916
+    },
+    {
+      "mesh": "egg",
+      "roughness_percent": [
+        40,
+        20
+      ],
+      "triangles": 1504
+    },
+    {
+      "mesh": "sushi",
+      "roughness_percent": [
+        40,
+        27
+      ],
+      "triangles": 1800
+    },
+    {
+      "mesh": "pizza",
+      "roughness_percent": [
+        58,
+        27,
+        40
+      ],
+      "triangles": 2512
+    }
+  ],
+  "original_food_triangles": 4470704,
+  "portrait_static_submission": [
+    {
+      "cells": 73,
+      "triangles": 796676
+    },
+    {
+      "cells": 130,
+      "triangles": 1223896
+    },
+    {
+      "cells": 50,
+      "triangles": 465936
+    },
+    {
+      "cells": 18,
+      "triangles": 58388
+    },
+    {
+      "cells": 32,
+      "triangles": 200896
+    },
+    {
+      "cells": 154,
+      "triangles": 1249420
+    },
+    {
+      "cells": 167,
+      "triangles": 1430552
+    },
+    {
+      "cells": 104,
+      "triangles": 726236
+    },
+    {
+      "cells": 17,
+      "triangles": 144460
+    },
+    {
+      "cells": 19,
+      "triangles": 134944
+    }
+  ]
+}

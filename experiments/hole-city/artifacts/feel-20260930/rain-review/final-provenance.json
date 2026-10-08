@@ -1,0 +1,28 @@
+{
+  "result": "pass",
+  "checks": {
+    "rain_admission_review": 101,
+    "food_rain_continuity": 38,
+    "snack_city": 80,
+    "rain_admission": 71,
+    "rain_support": 102
+  },
+  "inputs_before": {
+    "fidelity/food_city.gd": "a8591b3b5b43e10440018e5b365411c64bf9d20e5addedcd97a9aaa97128b999",
+    "fidelity/food_body.gd": "5b6e749279f4b5b213bad72cc5c51ddb7ae63d0b6a3ae81945ce2b8da56726f9",
+    "tests/food_rain_continuity_acceptance.gd": "26bc20ab882f8329f9612e80b06189de17a4da709b9dfe09123525e57051bf8d",
+    "tests/rain_admission_review.gd": "b0cc59efc2f1b618454f5f9f01e1be8185ed48ea318d8a71444b9fc4bee1674d",
+    "tests/snack_city_acceptance.gd": "5db4c8485fb6b6974593549f3497deb9513cc350d86a32ffe02cdbaa08b529e8",
+    "tests/rain_admission_acceptance.gd": "d2a7e8e6796c190d4ec5e39390e8c3a0e9e0853644c1a0c49949c6f284bfb316",
+    "tests/rain_support_acceptance.gd": "4f1e54e9d806e078f6fe99319cf4ef20d201437b0ed621852cc5551434a4af7d"
+  },
+  "inputs_after": {
+    "fidelity/food_city.gd": "a8591b3b5b43e10440018e5b365411c64bf9d20e5addedcd97a9aaa97128b999",
+    "fidelity/food_body.gd": "5b6e749279f4b5b213bad72cc5c51ddb7ae63d0b6a3ae81945ce2b8da56726f9",
+    "tests/food_rain_continuity_acceptance.gd": "26bc20ab882f8329f9612e80b06189de17a4da709b9dfe09123525e57051bf8d",
+    "tests/rain_admission_review.gd": "b0cc59efc2f1b618454f5f9f01e1be8185ed48ea318d8a71444b9fc4bee1674d",
+    "tests/snack_city_acceptance.gd": "5db4c8485fb6b6974593549f3497deb9513cc350d86a32ffe02cdbaa08b529e8",
+    "tests/rain_admission_acceptance.gd": "d2a7e8e6796c190d4ec5e39390e8c3a0e9e0853644c1a0c49949c6f284bfb316",
+    "tests/rain_support_acceptance.gd": "4f1e54e9d806e078f6fe99319cf4ef20d201437b0ed621852cc5551434a4af7d"
+  }
+}

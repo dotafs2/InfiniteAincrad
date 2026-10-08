@@ -1,0 +1,41 @@
+{
+  "checks": 1121,
+  "failures": [],
+  "metrics": {
+    "palette_cache_sizes_after_city_food_city_food": [
+      2,
+      10,
+      10,
+      10
+    ]
+  },
+  "scope": "Independent native scene/actual touch/mask/lifetime evidence, not browser screenshots or phone performance",
+  "unexpected_engine_errors": [
+    "ERROR: 1 resources still in use at exit (run with --verbose for details)."
+  ],
+  "source_hashes_before": {
+    "fidelity/train_routes.gd": "d65e6bce78c0fa4b0b81eb7bfe810412c1a56bff7af04343f331dd9d5e0129d8",
+    "fidelity/train_track_surface.gd": "3ffd9f8ee1248f82eb447a9d0a96f2677f6a4cdb55305a658a1b4824c1583c2e",
+    "fidelity/train_assets.gd": "1d95b9acece92c32ec9e75c43e3db617d8a0bb4a525fc640204d503eb43159da",
+    "fidelity/edible_train.gd": "b9457560e12648f82a021aae087ce2d190bf3650e00bc9a209e343eb22c3cc32",
+    "fidelity/train_car.gd": "28a0de04cb3222c1c9e15df60ab8313defc8bbbe2572ad82115120282155ce86",
+    "fidelity/asphalt.gdshader": "50effa4606298aa9d86af5fea0a6c99dcc8fe8ca4a2c608c3ca62332ed8e6deb",
+    "fidelity/game.gd": "f0f9df7e7052e2e505f678977c69eca4c31938ae1f65bfa98eae05eb133ac61a",
+    "fidelity/ui.gd": "f05ecf05b484095658a948db6f925320be10460b92ef9063223ea05470f1f0e6",
+    "tests/train_surface_acceptance.gd": "c1d240a2971c1a3d7d5b67fdb56f55eb4eb2a1cb3265dc837326c2d41d45b3da",
+    "artifacts/trains-20260929/surface-review/probe.gd": "5abbab6024fd871e2391fda49f7be19361cb71805c86e88b6130133049f02b7b"
+  },
+  "source_hashes_after": {
+    "fidelity/train_routes.gd": "d65e6bce78c0fa4b0b81eb7bfe810412c1a56bff7af04343f331dd9d5e0129d8",
+    "fidelity/train_track_surface.gd": "3ffd9f8ee1248f82eb447a9d0a96f2677f6a4cdb55305a658a1b4824c1583c2e",
+    "fidelity/train_assets.gd": "1d95b9acece92c32ec9e75c43e3db617d8a0bb4a525fc640204d503eb43159da",
+    "fidelity/edible_train.gd": "b9457560e12648f82a021aae087ce2d190bf3650e00bc9a209e343eb22c3cc32",
+    "fidelity/train_car.gd": "28a0de04cb3222c1c9e15df60ab8313defc8bbbe2572ad82115120282155ce86",
+    "fidelity/asphalt.gdshader": "50effa4606298aa9d86af5fea0a6c99dcc8fe8ca4a2c608c3ca62332ed8e6deb",
+    "fidelity/game.gd": "f0f9df7e7052e2e505f678977c69eca4c31938ae1f65bfa98eae05eb133ac61a",
+    "fidelity/ui.gd": "f05ecf05b484095658a948db6f925320be10460b92ef9063223ea05470f1f0e6",
+    "tests/train_surface_acceptance.gd": "c1d240a2971c1a3d7d5b67fdb56f55eb4eb2a1cb3265dc837326c2d41d45b3da",
+    "artifacts/trains-20260929/surface-review/probe.gd": "5abbab6024fd871e2391fda49f7be19361cb71805c86e88b6130133049f02b7b"
+  },
+  "inputs_unchanged": true
+}

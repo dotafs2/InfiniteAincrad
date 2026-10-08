@@ -1,0 +1,22 @@
+{
+  "after": {
+    "environments": 3,
+    "lamps": 3,
+    "lit_parts": 0,
+    "views": 3
+  },
+  "before": {
+    "environments": 0,
+    "lamps": 0,
+    "lit_parts": 0,
+    "views": 3
+  },
+  "checks": 4,
+  "failures": [
+    "Original actual UI mounts six cards including per-pixel sculpture",
+    "Current actual UI mounts the same geometry payload",
+    "Current actual UI adds one lamp and one ambient environment per isolated card",
+    "Engine process failed; inspect the engine log"
+  ],
+  "scope": "Actual old/new UI instances. No pixel capture; establishes absence and addition of illumination in isolated worlds."
+}

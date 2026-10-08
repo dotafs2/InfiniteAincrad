@@ -1,0 +1,311 @@
+{
+  "checks": 639,
+  "failures": [],
+  "metrics": {
+    "court": {
+      "comparison_scope": "Built population and behavior review; sixteen City appearances and one hundred original City recipes remain separately reported",
+      "distinct_living_geometry": 16,
+      "living_costumes": [
+        "guard",
+        "sentry",
+        "captain",
+        "knight",
+        "king",
+        "queen",
+        "princess",
+        "steward",
+        "courier",
+        "page",
+        "herald",
+        "courtier",
+        "jester",
+        "drummer",
+        "toymaker",
+        "balloon_vendor"
+      ],
+      "physics_owners": 344,
+      "query_members": 244,
+      "scene": {
+        "bodies": 815,
+        "colliders": 1077,
+        "meshes": 876,
+        "nodes": 2769
+      },
+      "summary": {
+        "active_assemblies": 244,
+        "activity_receipts": 0,
+        "ambient": 48,
+        "assemblies": 244,
+        "beacons": 8,
+        "distinct_recipes": 10,
+        "gate_beacons": [
+          {
+            "at": "(-13.0, 51.43102)",
+            "beacon": "Toy_588_bubble_turret",
+            "beacon_radius": 0.311021208763123,
+            "district": "rose_courtyard",
+            "facade_half_depth": 2.0,
+            "front_clearance": 0.12,
+            "front_offset": 2.43102120876312,
+            "nearest_actor_route_distance": 8.56897752322044,
+            "nearest_other_toy_clearance": 2.03119829297066,
+            "palace": "Toy_021_toy_castle",
+            "palace_at": "(-13.0, 49.0)",
+            "palace_minimum_level": 5,
+            "palace_required_radius": 3.06215023040772
+          },
+          {
+            "at": "(33.0, 51.43102)",
+            "beacon": "Toy_589_bubble_turret",
+            "beacon_radius": 0.311021208763123,
+            "district": "mint_playground",
+            "facade_half_depth": 2.0,
+            "front_clearance": 0.12,
+            "front_offset": 2.43102120876312,
+            "nearest_actor_route_distance": 8.56897752322044,
+            "nearest_other_toy_clearance": 1.59108227491379,
+            "palace": "Toy_030_toy_castle",
+            "palace_at": "(33.0, 49.0)",
+            "palace_minimum_level": 5,
+            "palace_required_radius": 3.06215023040772
+          },
+          {
+            "at": "(-13.0, 0.431021)",
+            "beacon": "Toy_590_bubble_turret",
+            "beacon_radius": 0.311021208763123,
+            "district": "sky_block_quarter",
+            "facade_half_depth": 2.0,
+            "front_clearance": 0.12,
+            "front_offset": 2.43102120876312,
+            "nearest_actor_route_distance": 13.0,
+            "nearest_other_toy_clearance": 0.986400961875916,
+            "palace": "Toy_039_toy_castle",
+            "palace_at": "(-13.0, -2.0)",
+            "palace_minimum_level": 5,
+            "palace_required_radius": 3.06215023040772
+          },
+          {
+            "at": "(33.0, 0.431021)",
+            "beacon": "Toy_591_bubble_turret",
+            "beacon_radius": 0.311021208763123,
+            "district": "apricot_garden",
+            "facade_half_depth": 2.0,
+            "front_clearance": 0.12,
+            "front_offset": 2.43102120876312,
+            "nearest_actor_route_distance": 11.0,
+            "nearest_other_toy_clearance": 0.986401915550232,
+            "palace": "Toy_048_toy_castle",
+            "palace_at": "(33.0, -2.0)",
+            "palace_minimum_level": 5,
+            "palace_required_radius": 3.06215023040772
+          }
+        ],
+        "installations": 100,
+        "living": 80,
+        "living_roles": {
+          "balloon_vendor": 4,
+          "captain": 4,
+          "courier": 4,
+          "courtier": 8,
+          "drummer": 4,
+          "guard": 16,
+          "herald": 4,
+          "jester": 4,
+          "king": 4,
+          "knight": 4,
+          "page": 4,
+          "princess": 4,
+          "queen": 4,
+          "sentry": 4,
+          "steward": 4,
+          "toymaker": 4
+        },
+        "parade": 8,
+        "released": 0,
+        "routes": {
+          "formation_columns": 2,
+          "formation_spacing": 1.05,
+          "guards_change_every": 18.0,
+          "half_width": 2.8,
+          "paths": [
+            [
+              "(-44.0, 18.0)",
+              "(0.0, 18.0)",
+              "(0.0, 60.0)",
+              "(-44.0, 60.0)"
+            ],
+            [
+              "(0.0, 18.0)",
+              "(44.0, 18.0)",
+              "(44.0, 60.0)",
+              "(0.0, 60.0)"
+            ],
+            [
+              "(-44.0, -36.0)",
+              "(0.0, -36.0)",
+              "(0.0, 18.0)",
+              "(-44.0, 18.0)"
+            ],
+            [
+              "(0.0, -36.0)",
+              "(44.0, -36.0)",
+              "(44.0, 18.0)",
+              "(0.0, 18.0)"
+            ],
+            [
+              "(-84.0, -84.0)",
+              "(84.0, -84.0)",
+              "(84.0, 84.0)",
+              "(-84.0, 84.0)"
+            ],
+            [
+              "(-44.0, -36.0)",
+              "(44.0, -36.0)",
+              "(44.0, 60.0)",
+              "(-44.0, 60.0)"
+            ]
+          ],
+          "world_limit": 94.0
+        },
+        "separation_passes": 0,
+        "source_city_benchmark": {
+          "ambient": 48,
+          "beacons": 5,
+          "installations": 100,
+          "living": 64,
+          "traffic": 8,
+          "world_actors": 217
+        },
+        "world_actors": 236
+      }
+    },
+    "formation": {
+      "largest_column_error": 1.52587890633882e-06,
+      "largest_rank_error": 3.05175781245559e-06,
+      "members": 6,
+      "moving": 6,
+      "samples": 1080,
+      "scope": "Isolated real six-body marching controller; other residents excluded from this local formation fixture"
+    },
+    "handoff": {
+      "downward_velocity_observed": true,
+      "no_script_motion": true,
+      "original_geometry": true,
+      "receipts": [
+        {
+          "consumed": true,
+          "player": true,
+          "points": 3,
+          "top": -3.56677371263504
+        }
+      ]
+    },
+    "heading": [
+      {
+        "escaped_samples": 0,
+        "hz": 30,
+        "largest_error_degrees": 15.0000060038281,
+        "minimum_clearance": 0.0399894118309021,
+        "overlap_samples": 0,
+        "samples": 4238,
+        "wrong_heading": 0
+      },
+      {
+        "escaped_samples": 0,
+        "hz": 60,
+        "largest_error_degrees": 15.0000090386904,
+        "minimum_clearance": 0.0399875044822693,
+        "overlap_samples": 0,
+        "samples": 8496,
+        "wrong_heading": 0
+      },
+      {
+        "escaped_samples": 0,
+        "hz": 120,
+        "largest_error_degrees": 15.0000092648137,
+        "minimum_clearance": 0.0399895906448364,
+        "overlap_samples": 0,
+        "samples": 17008,
+        "wrong_heading": 0
+      }
+    ],
+    "interactions": {
+      "alarm": true,
+      "flee": true,
+      "guard_change": true,
+      "pursuit": true,
+      "scope": "Explicit local positions and controller clocks; no reward, save or normal travel injected"
+    },
+    "natural": {
+      "actual_corner_deliveries": 8,
+      "events": [
+        "guard_change",
+        "state_changed",
+        "delivery"
+      ],
+      "hz": 60,
+      "invalid_deliveries": 0,
+      "motion_measure": "Accumulated horizontal distance; idle vertical breathing excluded",
+      "moving_installations": 100,
+      "moving_living": 60,
+      "scope": "Simulated controller clock, not a real-time or FPS measurement",
+      "seconds": 22,
+      "states": {
+        "courier_delivery": 12496,
+        "courier_dropoff": 576,
+        "courtyard_walk": 9056,
+        "craft_display": 5352,
+        "guard_change": 1022,
+        "guard_evade": 1551,
+        "march": 18381,
+        "market_walk": 4248,
+        "mischief": 7761,
+        "pursuit": 8013,
+        "rest": 10744,
+        "royal_idle": 21120,
+        "sentry": 5280
+      }
+    },
+    "removed_upper": {
+      "base_retained": true,
+      "recipe": "crown_spinner",
+      "scope": "Explicit test-owned removal and actual controller updates; no physical-fall or reward claim"
+    },
+    "sunny_city": {
+      "ambient": 48,
+      "assemblies": 217,
+      "beacons": 5,
+      "distinct_authored_recipes": 100,
+      "edibles": 812,
+      "installations": 100,
+      "living": 64,
+      "living_appearance_role_kinds": [
+        "police",
+        "thief",
+        "mech",
+        "fat_fries",
+        "firefighter",
+        "chef",
+        "skateboarder",
+        "photographer",
+        "jogger",
+        "musician",
+        "construction",
+        "nurse",
+        "cyclist",
+        "superhero",
+        "delivery",
+        "dancer"
+      ],
+      "living_query_members": 64,
+      "scene": {
+        "bodies": 812,
+        "colliders": 2804,
+        "meshes": 1141,
+        "nodes": 5828
+      },
+      "traffic": 8
+    }
+  },
+  "scope": "Actual sequential City/Toy scenes, simulated real controllers and physical guard fall; no real saves, SDK traffic, GPU pixels, ordinary pacing or phone FPS claim"
+}

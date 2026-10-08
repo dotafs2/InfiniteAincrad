@@ -1,0 +1,39 @@
+{
+  "checks": 98,
+  "failures": [],
+  "measurements": [
+    {
+      "boosted_distance": 2.08748645335436,
+      "joystick": 0.6,
+      "map": "city",
+      "ordinary_distance": 1.34676520526409,
+      "radius": 0.85,
+      "ratio": 1.55000028601498
+    },
+    {
+      "boosted_distance": 0.969783913344145,
+      "joystick": 0.6,
+      "map": "city",
+      "ordinary_distance": 0.625664845108986,
+      "radius": 24.88,
+      "ratio": 1.55000543969386
+    },
+    {
+      "boosted_distance": 2.08748645335436,
+      "joystick": 0.6,
+      "map": "food",
+      "ordinary_distance": 1.34676520526409,
+      "radius": 0.85,
+      "ratio": 1.55000028601498
+    },
+    {
+      "boosted_distance": 0.969783913344145,
+      "joystick": 0.6,
+      "map": "food",
+      "ordinary_distance": 0.625664845108986,
+      "radius": 24.88,
+      "ratio": 1.55000543969386
+    }
+  ],
+  "scope": "Non-author actual input and natural CharacterBody physics; collection isolated to keep radius constant. No phone FPS, browser rendering or subjective feel claim."
+}

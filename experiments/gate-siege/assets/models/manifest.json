@@ -1,0 +1,61 @@
+{
+  "authoring": "Original geometric character sculptures authored for Gate Siege; no external textures or model dependencies.",
+  "models": [
+    {
+      "name": "infantry",
+      "height_m": 1.0,
+      "triangles": 3410,
+      "materials": 1,
+      "facing_godot": "-Z",
+      "origin": "feet"
+    },
+    {
+      "name": "gunner",
+      "height_m": 1.8,
+      "triangles": 14308,
+      "materials": 12,
+      "facing_godot": "-Z",
+      "origin": "feet"
+    },
+    {
+      "name": "mech",
+      "height_m": 3.4,
+      "triangles": 14256,
+      "materials": 7,
+      "facing_godot": "-Z",
+      "origin": "feet"
+    },
+    {
+      "name": "brute",
+      "height_m": 3.4,
+      "triangles": 14908,
+      "materials": 9,
+      "facing_godot": "-Z",
+      "origin": "feet"
+    },
+    {
+      "name": "brute_vest",
+      "height_m": 3.4,
+      "triangles": 19136,
+      "materials": 10,
+      "facing_godot": "-Z",
+      "origin": "feet"
+    },
+    {
+      "name": "zombie",
+      "height_m": 0.65,
+      "triangles": 1948,
+      "materials": 1,
+      "facing_godot": "-Z",
+      "origin": "feet"
+    },
+    {
+      "name": "gunner_silver",
+      "height_m": 1.8,
+      "triangles": 14308,
+      "materials": 2,
+      "facing_godot": "-Z",
+      "origin": "feet"
+    }
+  ]
+}

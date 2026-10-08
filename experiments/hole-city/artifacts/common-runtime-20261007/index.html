@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en" data-view="idle"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Common skins · In-engine review</title>
+<style>
+:root{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#192639;background:#f1f5f9;font-synthesis:none}*{box-sizing:border-box}body{margin:0}main{max-width:1560px;margin:auto;padding:48px 36px 34px}.eyebrow{font-size:12px;font-weight:750;text-transform:uppercase;letter-spacing:.16em;color:#62758d;margin:0 0 12px}h1{font-size:clamp(29px,4vw,49px);line-height:1.13;letter-spacing:-.05em;margin:0 0 16px;font-weight:750}.intro{max-width:880px;font-size:15px;line-height:1.7;margin:0;color:#52667c}.scope{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:21px 0 27px;font-size:12px;line-height:1.7}.badge{font-weight:750;background:#e2ebf5;color:#38536f;padding:6px 10px;border-radius:7px}.scope a{color:#345f8c;text-underline-offset:3px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:20px;position:sticky;top:0;background:#f1f5f9ee;backdrop-filter:blur(10px);border-top:1px solid #d6e0eb;border-bottom:1px solid #d6e0eb;padding:15px 0;margin-bottom:24px;z-index:2}.switch{display:flex;padding:4px;background:#e0e7f0;border-radius:12px;gap:3px}button{font:inherit;font-size:13px;font-weight:700;padding:10px 19px;border:0;border-radius:8px;color:#52647d;cursor:pointer;background:transparent}button[aria-pressed=true]{background:#fff;color:#192c46;box-shadow:0 2px 6px #243e5f18}button:focus-visible,a:focus-visible{outline:3px solid #326ba5;outline-offset:3px}.toolbar p{font-size:12px;line-height:1.55;margin:0;color:#61738a}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:19px}.card{background:#fff;border:1px solid #dbe4ee;border-radius:16px;overflow:hidden;box-shadow:0 3px 12px #1d34520c}.images{position:relative;background:#edf1f5}.frame{position:relative;display:block;color:#374c68}.frame img{width:100%;height:auto;display:block}.frame.rival{display:none}html[data-view=rival] .frame.idle{display:none}html[data-view=rival] .frame.rival{display:block}.state,.expand{position:absolute;top:11px;padding:5px 8px;border:1px solid #dce5ee;border-radius:7px;background:#fffffff0;font-size:11px;font-weight:750}.state{left:11px}.expand{right:11px}.copy{padding:16px}.heading{display:flex;align-items:baseline;gap:10px}.number{font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;color:#77879c}h2{font-size:17px;line-height:1.25;letter-spacing:-.02em;margin:0}.links{display:flex;flex-wrap:wrap;gap:7px 15px;margin-top:13px;padding-top:12px;border-top:1px solid #ebeff4}.links a{font-size:11px;color:#526b8a;text-decoration:none}.links a:hover{text-decoration:underline;text-underline-offset:3px}footer{margin-top:24px;font-size:12px;line-height:1.7;color:#687b91}footer a{color:inherit;text-underline-offset:3px}noscript p{background:#fff6db;padding:13px;border-radius:8px;color:#66552c;font-size:13px}@media(max-width:800px){main{padding:28px 16px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.copy{padding:12px}h2{font-size:15px}.heading{gap:7px}.links{gap:8px}.links a{font-size:10px}.toolbar{align-items:start;gap:10px}.toolbar p{max-width:155px;font-size:11px}button{font-size:12px;padding:9px 11px}.state,.expand{top:8px}.state{left:8px}.expand{right:8px}.scope{gap:9px}h1{letter-spacing:-.045em}}
+</style></head><body><main>
+<header><p class="eyebrow">Hole Feast / Tier 01 / Model &amp; effect review</p><h1>Common skins · In-engine review</h1>
+<p class="intro">Actual Godot GPU captures of twenty isolated SkinVisual models. The rival cosmetic effect is manually triggered for inspection; these images are not normal gameplay captures. Switch all cards between idle appearance and rival feedback, or open either original image at full size.</p>
+<div class="scope"><span class="badge">Actual engine renders</span><span>Isolated models · Manual rival trigger</span><a href="all-20-in-game.png">All twenty models on one sheet ↗</a><a href="../common-concepts-20261007/index.html">Original concept art ↗</a><a href="../common-gameplay-20261007/Cookie_Bite-full-gameplay.mp4">Cookie Bite · 40s Mac gameplay ↗</a><a href="../common-gameplay-20261007/Rope_Coil-full-gameplay.mp4">Rope Coil · 40s Mac gameplay ↗</a></div></header>
+<div class="toolbar"><div class="switch" role="group" aria-label="Capture state"><button type="button" data-state="idle" aria-pressed="true">Idle models</button><button type="button" data-state="rival" aria-pressed="false">Rival feedback</button></div><p id="view-status" role="status" aria-live="polite">Showing idle appearance · 20 skins</p></div>
+<noscript><p>JavaScript is disabled. Idle captures remain visible; use each card's full-size rival link to inspect its effect.</p></noscript>
+<section class="grid" aria-label="Twenty authored Common skin models">
+<article class="card" id="cookie_bite"><div class="images"><a class="frame idle" href="cookie_bite-idle.png" target="_blank" rel="noopener" aria-label="Open Cookie Bite idle capture at full size">
+     <img src="cookie_bite-idle.png" alt="Actual Godot GPU capture of Cookie Bite, idle state" width="700" height="700" loading="eager" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="cookie_bite-rival.png" target="_blank" rel="noopener" aria-label="Open Cookie Bite rival fx capture at full size">
+     <img src="cookie_bite-rival.png" alt="Actual Godot GPU capture of Cookie Bite, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">01</span><h2>Cookie Bite</h2></div>
+     <div class="links"><a href="cookie_bite-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="cookie_bite-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="citrus_slice"><div class="images"><a class="frame idle" href="citrus_slice-idle.png" target="_blank" rel="noopener" aria-label="Open Citrus Slice idle capture at full size">
+     <img src="citrus_slice-idle.png" alt="Actual Godot GPU capture of Citrus Slice, idle state" width="700" height="700" loading="eager" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="citrus_slice-rival.png" target="_blank" rel="noopener" aria-label="Open Citrus Slice rival fx capture at full size">
+     <img src="citrus_slice-rival.png" alt="Actual Godot GPU capture of Citrus Slice, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">02</span><h2>Citrus Slice</h2></div>
+     <div class="links"><a href="citrus_slice-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="citrus_slice-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="melon_munch"><div class="images"><a class="frame idle" href="melon_munch-idle.png" target="_blank" rel="noopener" aria-label="Open Melon Munch idle capture at full size">
+     <img src="melon_munch-idle.png" alt="Actual Godot GPU capture of Melon Munch, idle state" width="700" height="700" loading="eager" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="melon_munch-rival.png" target="_blank" rel="noopener" aria-label="Open Melon Munch rival fx capture at full size">
+     <img src="melon_munch-rival.png" alt="Actual Godot GPU capture of Melon Munch, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">03</span><h2>Melon Munch</h2></div>
+     <div class="links"><a href="melon_munch-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="melon_munch-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="pancake_stack"><div class="images"><a class="frame idle" href="pancake_stack-idle.png" target="_blank" rel="noopener" aria-label="Open Pancake Stack idle capture at full size">
+     <img src="pancake_stack-idle.png" alt="Actual Godot GPU capture of Pancake Stack, idle state" width="700" height="700" loading="eager" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="pancake_stack-rival.png" target="_blank" rel="noopener" aria-label="Open Pancake Stack rival fx capture at full size">
+     <img src="pancake_stack-rival.png" alt="Actual Godot GPU capture of Pancake Stack, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">04</span><h2>Pancake Stack</h2></div>
+     <div class="links"><a href="pancake_stack-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="pancake_stack-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="bacon_curl"><div class="images"><a class="frame idle" href="bacon_curl-idle.png" target="_blank" rel="noopener" aria-label="Open Bacon Curl idle capture at full size">
+     <img src="bacon_curl-idle.png" alt="Actual Godot GPU capture of Bacon Curl, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="bacon_curl-rival.png" target="_blank" rel="noopener" aria-label="Open Bacon Curl rival fx capture at full size">
+     <img src="bacon_curl-rival.png" alt="Actual Godot GPU capture of Bacon Curl, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">05</span><h2>Bacon Curl</h2></div>
+     <div class="links"><a href="bacon_curl-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="bacon_curl-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="cocoa_square"><div class="images"><a class="frame idle" href="cocoa_square-idle.png" target="_blank" rel="noopener" aria-label="Open Slate Ring idle capture at full size">
+     <img src="cocoa_square-idle.png" alt="Actual Godot GPU capture of Slate Ring, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="cocoa_square-rival.png" target="_blank" rel="noopener" aria-label="Open Slate Ring rival fx capture at full size">
+     <img src="cocoa_square-rival.png" alt="Actual Godot GPU capture of Slate Ring, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">06</span><h2>Slate Ring</h2></div>
+     <div class="links"><a href="cocoa_square-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="cocoa_square-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="paper_boat"><div class="images"><a class="frame idle" href="paper_boat-idle.png" target="_blank" rel="noopener" aria-label="Open Paper Boat idle capture at full size">
+     <img src="paper_boat-idle.png" alt="Actual Godot GPU capture of Paper Boat, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="paper_boat-rival.png" target="_blank" rel="noopener" aria-label="Open Paper Boat rival fx capture at full size">
+     <img src="paper_boat-rival.png" alt="Actual Godot GPU capture of Paper Boat, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">07</span><h2>Paper Boat</h2></div>
+     <div class="links"><a href="paper_boat-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="paper_boat-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="toy_tire"><div class="images"><a class="frame idle" href="toy_tire-idle.png" target="_blank" rel="noopener" aria-label="Open Toy Tire idle capture at full size">
+     <img src="toy_tire-idle.png" alt="Actual Godot GPU capture of Toy Tire, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="toy_tire-rival.png" target="_blank" rel="noopener" aria-label="Open Toy Tire rival fx capture at full size">
+     <img src="toy_tire-rival.png" alt="Actual Godot GPU capture of Toy Tire, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">08</span><h2>Toy Tire</h2></div>
+     <div class="links"><a href="toy_tire-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="toy_tire-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="leaf_cup"><div class="images"><a class="frame idle" href="leaf_cup-idle.png" target="_blank" rel="noopener" aria-label="Open Leaf Cup idle capture at full size">
+     <img src="leaf_cup-idle.png" alt="Actual Godot GPU capture of Leaf Cup, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="leaf_cup-rival.png" target="_blank" rel="noopener" aria-label="Open Leaf Cup rival fx capture at full size">
+     <img src="leaf_cup-rival.png" alt="Actual Godot GPU capture of Leaf Cup, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">09</span><h2>Leaf Cup</h2></div>
+     <div class="links"><a href="leaf_cup-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="leaf_cup-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="wooden_tub"><div class="images"><a class="frame idle" href="wooden_tub-idle.png" target="_blank" rel="noopener" aria-label="Open Wooden Tub idle capture at full size">
+     <img src="wooden_tub-idle.png" alt="Actual Godot GPU capture of Wooden Tub, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="wooden_tub-rival.png" target="_blank" rel="noopener" aria-label="Open Wooden Tub rival fx capture at full size">
+     <img src="wooden_tub-rival.png" alt="Actual Godot GPU capture of Wooden Tub, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">10</span><h2>Wooden Tub</h2></div>
+     <div class="links"><a href="wooden_tub-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="wooden_tub-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="rope_coil"><div class="images"><a class="frame idle" href="rope_coil-idle.png" target="_blank" rel="noopener" aria-label="Open Rope Coil idle capture at full size">
+     <img src="rope_coil-idle.png" alt="Actual Godot GPU capture of Rope Coil, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="rope_coil-rival.png" target="_blank" rel="noopener" aria-label="Open Rope Coil rival fx capture at full size">
+     <img src="rope_coil-rival.png" alt="Actual Godot GPU capture of Rope Coil, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">11</span><h2>Rope Coil</h2></div>
+     <div class="links"><a href="rope_coil-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="rope_coil-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="clay_pot"><div class="images"><a class="frame idle" href="clay_pot-idle.png" target="_blank" rel="noopener" aria-label="Open Clay Pot idle capture at full size">
+     <img src="clay_pot-idle.png" alt="Actual Godot GPU capture of Clay Pot, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="clay_pot-rival.png" target="_blank" rel="noopener" aria-label="Open Clay Pot rival fx capture at full size">
+     <img src="clay_pot-rival.png" alt="Actual Godot GPU capture of Clay Pot, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">12</span><h2>Clay Pot</h2></div>
+     <div class="links"><a href="clay_pot-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="clay_pot-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="shell_cup"><div class="images"><a class="frame idle" href="shell_cup-idle.png" target="_blank" rel="noopener" aria-label="Open Shell Cup idle capture at full size">
+     <img src="shell_cup-idle.png" alt="Actual Godot GPU capture of Shell Cup, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="shell_cup-rival.png" target="_blank" rel="noopener" aria-label="Open Shell Cup rival fx capture at full size">
+     <img src="shell_cup-rival.png" alt="Actual Godot GPU capture of Shell Cup, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">13</span><h2>Shell Cup</h2></div>
+     <div class="links"><a href="shell_cup-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="shell_cup-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="woven_nest"><div class="images"><a class="frame idle" href="woven_nest-idle.png" target="_blank" rel="noopener" aria-label="Open Woven Nest idle capture at full size">
+     <img src="woven_nest-idle.png" alt="Actual Godot GPU capture of Woven Nest, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="woven_nest-rival.png" target="_blank" rel="noopener" aria-label="Open Woven Nest rival fx capture at full size">
+     <img src="woven_nest-rival.png" alt="Actual Godot GPU capture of Woven Nest, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">14</span><h2>Woven Nest</h2></div>
+     <div class="links"><a href="woven_nest-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="woven_nest-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="paint_tin"><div class="images"><a class="frame idle" href="paint_tin-idle.png" target="_blank" rel="noopener" aria-label="Open Paint Tin idle capture at full size">
+     <img src="paint_tin-idle.png" alt="Actual Godot GPU capture of Paint Tin, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="paint_tin-rival.png" target="_blank" rel="noopener" aria-label="Open Paint Tin rival fx capture at full size">
+     <img src="paint_tin-rival.png" alt="Actual Godot GPU capture of Paint Tin, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">15</span><h2>Paint Tin</h2></div>
+     <div class="links"><a href="paint_tin-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="paint_tin-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="denim_pocket"><div class="images"><a class="frame idle" href="denim_pocket-idle.png" target="_blank" rel="noopener" aria-label="Open Denim Pocket idle capture at full size">
+     <img src="denim_pocket-idle.png" alt="Actual Godot GPU capture of Denim Pocket, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="denim_pocket-rival.png" target="_blank" rel="noopener" aria-label="Open Denim Pocket rival fx capture at full size">
+     <img src="denim_pocket-rival.png" alt="Actual Godot GPU capture of Denim Pocket, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">16</span><h2>Denim Pocket</h2></div>
+     <div class="links"><a href="denim_pocket-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="denim_pocket-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="catchers_mitt"><div class="images"><a class="frame idle" href="catchers_mitt-idle.png" target="_blank" rel="noopener" aria-label="Open Catcher&#x27;s Mitt idle capture at full size">
+     <img src="catchers_mitt-idle.png" alt="Actual Godot GPU capture of Catcher&#x27;s Mitt, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="catchers_mitt-rival.png" target="_blank" rel="noopener" aria-label="Open Catcher&#x27;s Mitt rival fx capture at full size">
+     <img src="catchers_mitt-rival.png" alt="Actual Godot GPU capture of Catcher&#x27;s Mitt, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">17</span><h2>Catcher&#x27;s Mitt</h2></div>
+     <div class="links"><a href="catchers_mitt-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="catchers_mitt-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="enamel_basin"><div class="images"><a class="frame idle" href="enamel_basin-idle.png" target="_blank" rel="noopener" aria-label="Open Enamel Basin idle capture at full size">
+     <img src="enamel_basin-idle.png" alt="Actual Godot GPU capture of Enamel Basin, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="enamel_basin-rival.png" target="_blank" rel="noopener" aria-label="Open Enamel Basin rival fx capture at full size">
+     <img src="enamel_basin-rival.png" alt="Actual Godot GPU capture of Enamel Basin, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">18</span><h2>Enamel Basin</h2></div>
+     <div class="links"><a href="enamel_basin-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="enamel_basin-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="acorn_cup"><div class="images"><a class="frame idle" href="acorn_cup-idle.png" target="_blank" rel="noopener" aria-label="Open Acorn Cup idle capture at full size">
+     <img src="acorn_cup-idle.png" alt="Actual Godot GPU capture of Acorn Cup, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="acorn_cup-rival.png" target="_blank" rel="noopener" aria-label="Open Acorn Cup rival fx capture at full size">
+     <img src="acorn_cup-rival.png" alt="Actual Godot GPU capture of Acorn Cup, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">19</span><h2>Acorn Cup</h2></div>
+     <div class="links"><a href="acorn_cup-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="acorn_cup-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+<article class="card" id="knit_cap"><div class="images"><a class="frame idle" href="knit_cap-idle.png" target="_blank" rel="noopener" aria-label="Open Knit Cap idle capture at full size">
+     <img src="knit_cap-idle.png" alt="Actual Godot GPU capture of Knit Cap, idle state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Idle</span><span class="expand" aria-hidden="true">↗</span>
+    </a><a class="frame rival" href="knit_cap-rival.png" target="_blank" rel="noopener" aria-label="Open Knit Cap rival fx capture at full size">
+     <img src="knit_cap-rival.png" alt="Actual Godot GPU capture of Knit Cap, rival fx state" width="700" height="700" loading="lazy" decoding="async">
+     <span class="state">Rival FX</span><span class="expand" aria-hidden="true">↗</span>
+    </a></div>
+    <div class="copy"><div class="heading"><span class="number">20</span><h2>Knit Cap</h2></div>
+     <div class="links"><a href="knit_cap-idle.png" target="_blank" rel="noopener">Full-size idle ↗</a><a href="knit_cap-rival.png" target="_blank" rel="noopener">Full-size rival ↗</a></div>
+    </div></article>
+</section><footer>These captures assess authored geometry, materials and a single cosmetic effect state. Normal gameplay readability, physics and device performance are reviewed separately. Original PNG files are linked directly and are not edited by this page. <a href="capture-receipt.json">Capture receipt</a></footer>
+</main><script>
+const buttons = Array.from(document.querySelectorAll('button[data-state]'));
+for (const button of buttons) {
+ button.addEventListener('click', () => {
+  const state = button.dataset.state;
+  document.documentElement.dataset.view = state;
+  for (const item of buttons) item.setAttribute('aria-pressed', String(item === button));
+  document.getElementById('view-status').textContent = (state === 'rival' ? 'Showing manually triggered rival feedback' : 'Showing idle appearance') + ' · 20 skins';
+ });
+}
+</script></body></html>

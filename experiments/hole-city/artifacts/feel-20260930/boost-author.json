@@ -1,0 +1,33 @@
+{
+  "source_sha256": {
+    "fidelity/hole.gd": "3f6c3e3a18e12860abba1bf4929f16e71d75be1ba9ed6d30da90c7f59c881739",
+    "fidelity/game.gd": "076b88d23f540f3865202d1784aa2e3f3c10f1221141f802675fb2c0eac2d291",
+    "fidelity/ui.gd": "f785d28ecc58a07f1eead33b27532bddb28e6e1749af1856e91542d4769920dd",
+    "tests/boost_acceptance.gd": "75a94589f92c2f3840b395437a1ad617ae2fbfd4dd2bedb38f0784f7def73fc0"
+  },
+  "before": {
+    "charge_after": 0.0,
+    "joystick_after_release_over_boost": -1,
+    "joystick_finger": 0,
+    "resonance_count": 1,
+    "speed_after": 7.48201465606689,
+    "speed_before": 7.48201465606689,
+    "speed_boost_time": 0.0
+  },
+  "strict_focused_suites": {
+    "boost": {
+      "checks": 55,
+      "report": "artifacts/feel-20260930/focused-root-v2/boost.json"
+    },
+    "growth_extension": {
+      "checks": 1978,
+      "report": "artifacts/feel-20260930/focused-root-v2/growth_extension.json"
+    },
+    "skin_skill": {
+      "checks": 130,
+      "report": "artifacts/feel-20260930/focused-root-v2/skin_skill.json"
+    }
+  },
+  "retained_failure": "focused-root/boost.json: all behavior checks passed, but fixed-fps shutdown outpaced the audio thread; the test now drains its own stopped decoder before freeing. Runtime audio is unchanged.",
+  "limits": "Controller/touch/physics acceptance, not browser visuals or device frame rate."
+}

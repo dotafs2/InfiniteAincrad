@@ -1,0 +1,40 @@
+[
+  {
+    "suite": "native_polish_acceptance",
+    "exit_code": 0,
+    "errors": []
+  },
+  {
+    "suite": "music_acceptance",
+    "exit_code": 0,
+    "errors": []
+  },
+  {
+    "suite": "music_review",
+    "exit_code": 0,
+    "errors": []
+  },
+  {
+    "suite": "retention_ui_review",
+    "exit_code": 0,
+    "errors": []
+  },
+  {
+    "suite": "food_city_density_acceptance",
+    "exit_code": 0,
+    "errors": []
+  },
+  {
+    "suite": "food_growth_acceptance",
+    "exit_code": 1,
+    "errors": [
+      "ERROR: The city retains buildings, heaps, actors and eight train cars",
+      "ERROR: The remaining 58 bodies fit inside the old reserved heap circle",
+      "ERROR: The remaining 58 bodies fit inside the old reserved heap circle",
+      "ERROR: The remaining 58 bodies fit inside the old reserved heap circle",
+      "ERROR: Removing the platter releases its separately simulated upper food",
+      "ERROR: Removing the platter releases its separately simulated upper food",
+      "ERROR: Removing the platter releases its separately simulated upper food"
+    ]
+  }
+]

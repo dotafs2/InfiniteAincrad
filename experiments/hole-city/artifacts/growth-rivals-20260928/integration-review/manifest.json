@@ -1,0 +1,28 @@
+{
+  "checks": 1606,
+  "failures": [],
+  "tested_source_sha256": {
+    "fidelity/game.gd": "b4aaaff3146f320cef2fedeaa262d71a51625635bda45894fb8121c8c6dfb68c",
+    "fidelity/hole.gd": "6633da90a596026bcadd87e404235e16c0f6f9d6bb7527f56d92a2965403f117",
+    "fidelity/cut_ground.gd": "d6130898639fe621e2776c4e3cea84c1332381684e239d3a93134502e19e1b69",
+    "tests/large_growth_world_acceptance.gd": "a906b421974e1ce62c2f9e68df0106fb9ddd4d7b685c0f5a40c1db443d0fcd4f",
+    "tests/growth_integration_review.gd": "524b1075a81c0c6d083ec561155cda29c6a656edb2fa9612836a5b0b4d912f88"
+  },
+  "game_matches_announced_freeze": true,
+  "root_250_check_receipt_diagnostic_review": [
+    {
+      "file": "artifacts/growth-rivals-20260928/large-growth.log",
+      "unexpected_engine_errors": []
+    },
+    {
+      "file": "artifacts/growth-rivals-20260928/large-growth.engine.log",
+      "unexpected_engine_errors": []
+    }
+  ],
+  "owned_engine_process": "completed; no process retained",
+  "limits": [
+    "Headless geometry, camera mathematics and collision queries only",
+    "No browser rendering, phone GPU timing or dynamic frame-time claim",
+    "Hashes recorded after focused run; game also matches author-announced frozen hash"
+  ]
+}

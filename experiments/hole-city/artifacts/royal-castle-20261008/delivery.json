@@ -1,0 +1,55 @@
+{
+  "verified_utc": "2026-10-08T06:20:07.250989+00:00",
+  "preview_url": "http://127.0.0.1:8795/royal-review.html",
+  "gallery_url": "http://127.0.0.1:8786/royal-castle-20261008/index.html",
+  "source_checks": 176870,
+  "package_checks": 176860,
+  "suites_per_phase": 98,
+  "guarded_input_count": 1342,
+  "verified_export_count": 18,
+  "release_sha256": "e1174c847489eb053141d4604a319b91c23aaa760e893607b9c2562d5d1b0a1d",
+  "pck_sha256": "60750bb44a19a1f388449f9a1cb4267eb730e23f5e06b2eaa72142b2aea73297",
+  "additional_review_html_sha256": "7f50f703cb4ff4d85ee69ac6ec97c7f228fb451a682d9b29439f6870592c9171",
+  "review_args": [
+    "--",
+    "--test",
+    "--qa-unlocked-worlds",
+    "--qa-map=toys"
+  ],
+  "review_wrapper_note": "Additional QA HTML was not part of the 18 gate-verified export files; exact PCK and all original exports remain unchanged. Isolated test wallet, no save path or SDK initialization.",
+  "browser": {
+    "observed": [
+      "Toy card",
+      "90 second intro",
+      "drag movement",
+      "four points collected",
+      "pause and return HOME",
+      "music and sound disabled in isolated settings"
+    ],
+    "console_warn_error_count": 0,
+    "limitation": "One first-PLAY mouse dispatch timed out during world construction; next screenshot showed the correct loaded intro without reload. Not a performance measurement."
+  },
+  "artifact_sha256": {
+    "browser-title.png": "810684c6541f62c4178a9f341190efb9a3402b03b7d7c0c6aa24a3d6a855c0f3",
+    "browser-play.png": "24d5dc4159393065d7059edf7456bf8456b34819cd80f0d1f94d4be4756ebaa7",
+    "browser-console.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "index.html": "91f8a5792716665e797b09d48d4cf005ca8d8662451ced54d0f1a3ce7b8d8045",
+    "overview.png": "d15c72f8e60e6bb245b6e48dfed85ce2bfecf4ba70cf8b6cc6083f695cce1359",
+    "swallow-04/royal.mp4": "5620ab71689952df04754dcff468fdceb8bdb65e897862d718bf69f3f8191f61"
+  },
+  "limitations": [
+    "No native upload or App Review changes",
+    "No physical iPhone performance certification",
+    "Ordinary GPU route is deterministic automatic movement, not human-play coverage",
+    "Grand-castle movie uses a clearly labeled level-12 fixture"
+  ],
+  "review_documents_sha256": {
+    "ART_REVIEW.md": "67272cdecbe62e6c693ca24f6abdf008fcaa57a953d411c083a35d22ac9c9d80",
+    "RUNTIME_REVIEW.md": "9f6044a362e6f49b36ad322c67399d0671da880151dd2f7bd9b1b2e5fdd5f1a1",
+    "MODELS.md": "afed1032ebb0b4ac924f1ba3b72719f761a48bd005e72c3abcaa08af7106f287"
+  },
+  "review_verdicts": {
+    "art": "ACCEPT",
+    "runtime": "ACCEPT"
+  }
+}

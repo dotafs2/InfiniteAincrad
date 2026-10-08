@@ -1,0 +1,1034 @@
+{
+  "procedural_filtering": {
+    "checks": 27,
+    "failures": [],
+    "metrics": {
+      "base_rgb_sha256": "7f6d3598ed5ae40be9d58f4b615fdcc1c29205c7ca73536ca5a9585c1803eb7d",
+      "height": 2048,
+      "mip_levels_after_base": 11,
+      "rgb_bytes": 16777215,
+      "width": 2048
+    }
+  },
+  "selective_reveal": {
+    "checks": 75,
+    "failures": [],
+    "metrics": {
+      "geometry": [
+        {
+          "expected": true,
+          "mouth_ray_hits": 769,
+          "name": "Centered large building",
+          "rays": 769,
+          "selected": true
+        },
+        {
+          "expected": true,
+          "mouth_ray_hits": 13,
+          "name": "Wide edge without center-ray hit",
+          "rays": 769,
+          "selected": true
+        },
+        {
+          "expected": true,
+          "mouth_ray_hits": 769,
+          "name": "Raised roof across camera-to-hole path",
+          "rays": 769,
+          "selected": true
+        },
+        {
+          "expected": true,
+          "mouth_ray_hits": 769,
+          "name": "Tall facade crossing camera-height plane",
+          "rays": 769,
+          "selected": true
+        },
+        {
+          "expected": false,
+          "mouth_ray_hits": 0,
+          "name": "Complete structure behind ground target",
+          "rays": 769,
+          "selected": false
+        },
+        {
+          "expected": false,
+          "mouth_ray_hits": 0,
+          "name": "Complete structure above camera plane",
+          "rays": 769,
+          "selected": false
+        },
+        {
+          "expected": false,
+          "mouth_ray_hits": 0,
+          "name": "Complete structure below ground plane",
+          "rays": 769,
+          "selected": false
+        },
+        {
+          "expected": false,
+          "mouth_ray_hits": 0,
+          "name": "Rotated empty corner of world AABB",
+          "rays": 769,
+          "selected": false
+        },
+        {
+          "expected": true,
+          "mouth_ray_hits": 769,
+          "name": "Oriented wall 0",
+          "rays": 769,
+          "selected": true
+        },
+        {
+          "expected": true,
+          "mouth_ray_hits": 769,
+          "name": "Oriented wall 1",
+          "rays": 769,
+          "selected": true
+        },
+        {
+          "expected": true,
+          "mouth_ray_hits": 769,
+          "name": "Oriented wall 2",
+          "rays": 769,
+          "selected": true
+        },
+        {
+          "expected": true,
+          "mouth_ray_hits": 519,
+          "name": "Oriented wall 3",
+          "rays": 769,
+          "selected": true
+        },
+        {
+          "expected": true,
+          "mouth_ray_hits": 769,
+          "name": "Oriented wall 4",
+          "rays": 769,
+          "selected": true
+        },
+        {
+          "expected": false,
+          "mouth_ray_hits": 0,
+          "name": "Nearby building outside actual mouth",
+          "rays": 769,
+          "selected": false
+        },
+        {
+          "expected": true,
+          "mouth_ray_hits": 769,
+          "name": "Directly overhead camera sees covered mouth",
+          "rays": 769,
+          "selected": true
+        },
+        {
+          "expected": false,
+          "mouth_ray_hits": 0,
+          "name": "Overhead camera preserves lateral structure",
+          "rays": 769,
+          "selected": false
+        }
+      ]
+    },
+    "scope": "Actual gameplay controller plus controlled RigidBody3D geometry; independent 769-ray slab oracle. No rendered image or device performance claim."
+  },
+  "selective_reveal_review": {
+    "checks": 482,
+    "evidence": {
+      "city": {
+        "incorrectly_enabled": [],
+        "nonstructural": 740,
+        "protected_categories": {
+          "ambient_actor": 48,
+          "authored_actor": 152,
+          "barrier": 4,
+          "bench": 28,
+          "bike_rack": 4,
+          "bin": 78,
+          "bollard": 28,
+          "bus_stop": 4,
+          "cone": 74,
+          "cover": 2,
+          "dumpster": 4,
+          "fence": 44,
+          "hydrant": 4,
+          "kiosk": 4,
+          "lamp": 32,
+          "mailbox": 4,
+          "person": 64,
+          "planter": 4,
+          "railing": 36,
+          "sign": 4,
+          "signal_pylon": 5,
+          "traffic_light": 4,
+          "tram": 4,
+          "tree": 56,
+          "vehicle": 49
+        },
+        "structural": 72
+      },
+      "food": {
+        "incorrectly_enabled": [],
+        "nonstructural": 2930,
+        "protected_categories": {
+          "food_bacon": 96,
+          "food_berry": 179,
+          "food_burger": 278,
+          "food_cake": 322,
+          "food_cookie": 882,
+          "food_donut": 397,
+          "food_egg": 102,
+          "food_pancake": 375,
+          "food_pizza": 120,
+          "food_sushi": 123,
+          "person": 48,
+          "sushi": 8
+        },
+        "structural": 0
+      },
+      "food_policy_poisoning": {
+        "instance_custom": "(1,1,1,1)",
+        "legacy_uniforms": 1,
+        "recipes": 10,
+        "registered_food_occluders": 0,
+        "scope": "CPU dispatch/material graph only; shipped vertex/fragment execution is verified by the separate windowless GL harness."
+      },
+      "hollow_arch": {
+        "clear_opening_probe_count": 65,
+        "clear_opening_ray_hits": 0,
+        "solid_side_center_ray_hits": 1
+      },
+      "hollow_donut": {
+        "clear_opening_probe_count": 65,
+        "clear_opening_ray_hits": 0,
+        "solid_dough_center_ray_hits": 1
+      }
+    },
+    "failures": [],
+    "scope": "Independent buildings-only policy, actual food obstruction, stale-state/material and lifecycle review; GPU equation coverage is separate and no phone performance is claimed"
+  },
+  "building_only_reveal_review": {
+    "checks": 224,
+    "failures": [],
+    "metrics": {
+      "actual_city": {
+        "buildings": 72,
+        "other_bodies": 740,
+        "wrong_materials": [],
+        "wrongly_opted": []
+      },
+      "actual_fracture_pieces": 16
+    },
+    "scope": "Non-author real catalog/material/mesh obstruction and strict semantic/size/lifecycle policy. Synthetic thresholds are identified; no browser image or device-performance claim."
+  },
+  "growth_extension": {
+    "checks": 1978,
+    "failures": [],
+    "metrics": {
+      "extended_level": 212,
+      "extended_radius": 45.3364055299539,
+      "maximum_level": 607400105,
+      "maximum_radius": 47.9999990484032,
+      "maximum_score": "9223372036854775807",
+      "npc_small_food_score": 10,
+      "npc_small_food_tenths": 5
+    },
+    "scope": "Real hole awards, badges and movement; isolated callback fixture, no player-save access"
+  },
+  "rival_combat": {
+    "checks": 58,
+    "failures": [],
+    "metrics": {
+      "pursuit": [
+        {
+          "events": [
+            {
+              "elapsed": 1.66666666666667,
+              "hunter": "Rowan",
+              "reward_base": 5,
+              "victim": "Lumen",
+              "victim_score": 0
+            }
+          ],
+          "hunter_distance": 5.28098583221436,
+          "hunter_score": 33,
+          "hunter_start": "(0.0, 0.0, 0.0)",
+          "hz": 30,
+          "physics_frames": 51,
+          "prey_distance": 1.99996709823608,
+          "prey_start": "(0.0, 0.0, 4.0)",
+          "pursuit_frames": 49,
+          "seconds": 1.7
+        },
+        {
+          "events": [
+            {
+              "elapsed": 1.63333333333333,
+              "hunter": "Rowan",
+              "reward_base": 5,
+              "victim": "Lumen",
+              "victim_score": 0
+            }
+          ],
+          "hunter_distance": 5.2271032333374,
+          "hunter_score": 33,
+          "hunter_start": "(0.0, 0.0, 0.0)",
+          "hz": 60,
+          "physics_frames": 97,
+          "prey_distance": 1.99992990493774,
+          "prey_start": "(0.0, 0.0, 4.0)",
+          "pursuit_frames": 96,
+          "seconds": 1.61666666666667
+        },
+        {
+          "events": [
+            {
+              "elapsed": 1.61666666666666,
+              "hunter": "Rowan",
+              "reward_base": 5,
+              "victim": "Lumen",
+              "victim_score": 0
+            }
+          ],
+          "hunter_distance": 5.2001576423645,
+          "hunter_score": 33,
+          "hunter_start": "(0.0, 0.0, 0.0)",
+          "hz": 120,
+          "physics_frames": 193,
+          "prey_distance": 1.99986028671265,
+          "prey_start": "(0.0, 0.0, 4.0)",
+          "pursuit_frames": 192,
+          "seconds": 1.60833333333333
+        }
+      ]
+    },
+    "scope": "Headless real controllers/physical pursuit plus geometric and lifecycle regressions; no browser or phone FPS claim."
+  },
+  "large_growth_world": {
+    "checks": 258,
+    "failures": [],
+    "measurements": [
+      {
+        "camera_far": 220.0,
+        "level": 12,
+        "map": "city",
+        "radius": 14.0,
+        "score": 1250
+      },
+      {
+        "camera_far": 220.0,
+        "level": 13,
+        "map": "city",
+        "radius": 15.8888888888889,
+        "score": 1600
+      },
+      {
+        "camera_far": 220.0,
+        "level": 19,
+        "map": "city",
+        "radius": 23.9166666666667,
+        "score": 5000
+      },
+      {
+        "camera_far": 220.0,
+        "level": 50,
+        "map": "city",
+        "radius": 37.4909090909091,
+        "score": 50000
+      },
+      {
+        "camera_far": 233.419006347656,
+        "level": 6330,
+        "map": "city",
+        "radius": 47.9087608524073,
+        "score": 1000000000
+      },
+      {
+        "camera_far": 220.0,
+        "level": 12,
+        "map": "food",
+        "radius": 14.0,
+        "score": 1250
+      },
+      {
+        "camera_far": 220.0,
+        "level": 13,
+        "map": "food",
+        "radius": 15.8888888888889,
+        "score": 1600
+      },
+      {
+        "camera_far": 220.0,
+        "level": 19,
+        "map": "food",
+        "radius": 23.9166666666667,
+        "score": 5000
+      },
+      {
+        "camera_far": 220.0,
+        "level": 50,
+        "map": "food",
+        "radius": 37.4909090909091,
+        "score": 50000
+      },
+      {
+        "camera_far": 233.419006347656,
+        "level": 6330,
+        "map": "food",
+        "radius": 47.9087608524073,
+        "score": 1000000000
+      }
+    ]
+  },
+  "pedestrian_swallow_review": {
+    "cases": [
+      {
+        "chase_distance_m": 0.0,
+        "claim_frame": 0,
+        "claim_seen": true,
+        "downward_gravity_seen": true,
+        "entry_position": "(-18.05084, 0.8382, 5.0)",
+        "footprint": 0.26,
+        "frame": 48,
+        "height": 1.59640002250671,
+        "kind": "police",
+        "map": "city",
+        "minimum_top": -3.62037336826324,
+        "motion_clip": "Walk",
+        "motion_m": 0.38665771484375,
+        "name": "city/starter/police/underfoot",
+        "physics_released": true,
+        "points": 1,
+        "radius": 0.85,
+        "rain_enabled": false,
+        "receipts": [
+          {
+            "case": "city/starter/police/underfoot",
+            "claim_matches": true,
+            "consumed": true,
+            "frame": 48,
+            "hole_id": 363528731376,
+            "player_id": 363528731376,
+            "points": 1,
+            "score_after": 1,
+            "target_id": 266086656739,
+            "top_at_collect": -3.62037336826324
+          }
+        ],
+        "score_delta_all_nearby_objects": 1,
+        "target_freed": true,
+        "target_id": 266086656739
+      },
+      {
+        "chase_distance_m": 0.0,
+        "claim_frame": 0,
+        "claim_seen": true,
+        "downward_gravity_seen": true,
+        "entry_position": "(-18.81959, 0.77255, -23.4)",
+        "footprint": 0.26,
+        "frame": 47,
+        "height": 1.46510004997253,
+        "kind": "thief",
+        "map": "city",
+        "minimum_top": -3.54021799564362,
+        "motion_clip": "Walk",
+        "motion_m": 0.38665771484375,
+        "name": "city/starter/thief/underfoot",
+        "physics_released": true,
+        "points": 1,
+        "radius": 0.85,
+        "rain_enabled": false,
+        "receipts": [
+          {
+            "case": "city/starter/thief/underfoot",
+            "claim_matches": true,
+            "consumed": true,
+            "frame": 47,
+            "hole_id": 683201792499,
+            "player_id": 683201792499,
+            "points": 1,
+            "score_after": 1,
+            "target_id": 586296602888,
+            "top_at_collect": -3.54021799564362
+          }
+        ],
+        "score_delta_all_nearby_objects": 1,
+        "target_freed": true,
+        "target_id": 586296602888
+      },
+      {
+        "chase_distance_m": 0.0,
+        "claim_frame": 0,
+        "claim_seen": true,
+        "downward_gravity_seen": true,
+        "entry_position": "(-18.05084, 0.8382, 5.0)",
+        "footprint": 0.26,
+        "frame": 48,
+        "height": 1.59640002250671,
+        "kind": "police",
+        "map": "city",
+        "minimum_top": -3.62037336826324,
+        "motion_clip": "Walk",
+        "motion_m": 0.38665771484375,
+        "name": "city/grown/police/underfoot",
+        "physics_released": true,
+        "points": 1,
+        "radius": 1.65,
+        "rain_enabled": false,
+        "receipts": [
+          {
+            "case": "city/grown/police/underfoot",
+            "claim_matches": true,
+            "consumed": true,
+            "frame": 48,
+            "hole_id": 1001868234627,
+            "player_id": 1001868234627,
+            "points": 1,
+            "score_after": 31,
+            "target_id": 904459729114,
+            "top_at_collect": -3.62037336826324
+          }
+        ],
+        "score_delta_all_nearby_objects": 1,
+        "target_freed": true,
+        "target_id": 904459729114
+      },
+      {
+        "chase_distance_m": 0.0,
+        "claim_frame": 0,
+        "claim_seen": true,
+        "downward_gravity_seen": true,
+        "entry_position": "(-18.81959, 0.77255, -23.4)",
+        "footprint": 0.26,
+        "frame": 47,
+        "height": 1.46510004997253,
+        "kind": "thief",
+        "map": "city",
+        "minimum_top": -3.54021799564362,
+        "motion_clip": "Walk",
+        "motion_m": 0.38665771484375,
+        "name": "city/grown/thief/underfoot",
+        "physics_released": true,
+        "points": 1,
+        "radius": 1.65,
+        "rain_enabled": false,
+        "receipts": [
+          {
+            "case": "city/grown/thief/underfoot",
+            "claim_matches": true,
+            "consumed": true,
+            "frame": 47,
+            "hole_id": 1320652114907,
+            "player_id": 1320652114907,
+            "points": 1,
+            "score_after": 31,
+            "target_id": 1223746917455,
+            "top_at_collect": -3.54021799564362
+          }
+        ],
+        "score_delta_all_nearby_objects": 1,
+        "target_freed": true,
+        "target_id": 1223746917455
+      },
+      {
+        "chase_distance_m": 3.11751365661621,
+        "claim_frame": 24,
+        "claim_seen": true,
+        "downward_gravity_seen": true,
+        "entry_position": "(-18.05084, 0.8382, 5.0)",
+        "footprint": 0.26,
+        "frame": 83,
+        "height": 1.59640002250671,
+        "kind": "police",
+        "map": "city",
+        "minimum_top": -3.57205977898273,
+        "motion_clip": "Walk",
+        "motion_m": 0.38665771484375,
+        "name": "city/starter/police/chase",
+        "physics_released": true,
+        "points": 1,
+        "radius": 0.85,
+        "rain_enabled": false,
+        "receipts": [
+          {
+            "case": "city/starter/police/chase",
+            "claim_matches": true,
+            "consumed": true,
+            "frame": 83,
+            "hole_id": 1639234674016,
+            "player_id": 1639234674016,
+            "points": 1,
+            "score_after": 1,
+            "target_id": 1541826155008,
+            "top_at_collect": -3.57205977898273
+          }
+        ],
+        "score_delta_all_nearby_objects": 1,
+        "target_freed": true,
+        "target_id": 1541826155008
+      },
+      {
+        "chase_distance_m": 0.0,
+        "claim_frame": 0,
+        "claim_seen": true,
+        "downward_gravity_seen": true,
+        "entry_position": "(-59.49993, 0.8225, 44.17935)",
+        "footprint": 0.26,
+        "frame": 48,
+        "height": 1.56500005722046,
+        "kind": "chef",
+        "map": "food",
+        "minimum_top": -3.65177369117737,
+        "motion_clip": "Walk",
+        "motion_m": 0.384682059288025,
+        "name": "food/starter/chef/underfoot",
+        "physics_released": true,
+        "points": 1,
+        "radius": 0.85,
+        "rain_enabled": true,
+        "receipts": [
+          {
+            "case": "food/starter/chef/underfoot",
+            "claim_matches": true,
+            "consumed": true,
+            "frame": 48,
+            "hole_id": 1969326409421,
+            "player_id": 1969326409421,
+            "points": 1,
+            "score_after": 1,
+            "target_id": 1934094253868,
+            "top_at_collect": -3.65177369117737
+          }
+        ],
+        "score_delta_all_nearby_objects": 1,
+        "target_freed": true,
+        "target_id": 1934094253868
+      },
+      {
+        "chase_distance_m": 0.0,
+        "claim_frame": 0,
+        "claim_seen": true,
+        "downward_gravity_seen": true,
+        "entry_position": "(-4.606586, 0.7919, -47.20643)",
+        "footprint": 0.26,
+        "frame": 47,
+        "height": 1.50380003452301,
+        "kind": "delivery",
+        "map": "food",
+        "minimum_top": -3.50151842832565,
+        "motion_clip": "Walk",
+        "motion_m": 0.38630148768425,
+        "name": "food/starter/delivery/underfoot",
+        "physics_released": true,
+        "points": 1,
+        "radius": 0.85,
+        "rain_enabled": true,
+        "receipts": [
+          {
+            "case": "food/starter/delivery/underfoot",
+            "claim_matches": true,
+            "consumed": true,
+            "frame": 47,
+            "hole_id": 2311480937376,
+            "player_id": 2311480937376,
+            "points": 1,
+            "score_after": 1,
+            "target_id": 2276903109279,
+            "top_at_collect": -3.50151842832565
+          }
+        ],
+        "score_delta_all_nearby_objects": 1,
+        "target_freed": true,
+        "target_id": 2276903109279
+      },
+      {
+        "chase_distance_m": 0.0,
+        "claim_frame": 0,
+        "claim_seen": true,
+        "downward_gravity_seen": true,
+        "entry_position": "(-59.49993, 0.8225, 44.17935)",
+        "footprint": 0.26,
+        "frame": 48,
+        "height": 1.56500005722046,
+        "kind": "chef",
+        "map": "food",
+        "minimum_top": -3.65177369117737,
+        "motion_clip": "Walk",
+        "motion_m": 0.384682059288025,
+        "name": "food/grown/chef/underfoot",
+        "physics_released": true,
+        "points": 1,
+        "radius": 1.65,
+        "rain_enabled": true,
+        "receipts": [
+          {
+            "case": "food/grown/chef/underfoot",
+            "claim_matches": true,
+            "consumed": true,
+            "frame": 48,
+            "hole_id": 2653333496426,
+            "player_id": 2653333496426,
+            "points": 1,
+            "score_after": 31,
+            "target_id": 2618235565139,
+            "top_at_collect": -3.65177369117737
+          }
+        ],
+        "score_delta_all_nearby_objects": 1,
+        "target_freed": true,
+        "target_id": 2618235565139
+      },
+      {
+        "chase_distance_m": 0.0,
+        "claim_frame": 0,
+        "claim_seen": true,
+        "downward_gravity_seen": true,
+        "entry_position": "(-4.606586, 0.7919, -47.20643)",
+        "footprint": 0.26,
+        "frame": 47,
+        "height": 1.50380003452301,
+        "kind": "delivery",
+        "map": "food",
+        "minimum_top": -3.50151842832565,
+        "motion_clip": "Walk",
+        "motion_m": 0.38630148768425,
+        "name": "food/grown/delivery/underfoot",
+        "physics_released": true,
+        "points": 1,
+        "radius": 1.65,
+        "rain_enabled": true,
+        "receipts": [
+          {
+            "case": "food/grown/delivery/underfoot",
+            "claim_matches": true,
+            "consumed": true,
+            "frame": 47,
+            "hole_id": 2995387375231,
+            "player_id": 2995387375231,
+            "points": 1,
+            "score_after": 31,
+            "target_id": 2960809534326,
+            "top_at_collect": -3.50151842832565
+          }
+        ],
+        "score_delta_all_nearby_objects": 1,
+        "target_freed": true,
+        "target_id": 2960809534326
+      },
+      {
+        "chase_distance_m": 3.11749961972237,
+        "claim_frame": 24,
+        "claim_seen": true,
+        "downward_gravity_seen": true,
+        "entry_position": "(-59.49993, 0.8225, 44.17935)",
+        "footprint": 0.26,
+        "frame": 83,
+        "height": 1.56500005722046,
+        "kind": "chef",
+        "map": "food",
+        "minimum_top": -3.69446613415527,
+        "motion_clip": "Walk",
+        "motion_m": 0.384682059288025,
+        "name": "food/starter/chef/chase",
+        "physics_released": true,
+        "points": 1,
+        "radius": 0.85,
+        "rain_enabled": true,
+        "receipts": [
+          {
+            "case": "food/starter/chef/chase",
+            "claim_matches": true,
+            "consumed": true,
+            "frame": 83,
+            "hole_id": 3337206373800,
+            "player_id": 3337206373800,
+            "points": 1,
+            "score_after": 1,
+            "target_id": 3302108439919,
+            "top_at_collect": -3.69446613415527
+          }
+        ],
+        "score_delta_all_nearby_objects": 1,
+        "target_freed": true,
+        "target_id": 3302108439919
+      }
+    ],
+    "checks": 120,
+    "failures": [],
+    "scope": "Actual current map, imported walking citizens, normal update/query/claim/ground/rigid-body/collect chain. Rival holes are inactive to isolate ownership. Underfoot cases place only the player at the resident; chase cases use the actual player controller. Grown score is a test setup award. Food rain remains enabled. No browser, visual or performance claim; no saves.",
+    "source_after": {
+      "fidelity/catalog_city.gd": "e84e91de200a5293cc780b59366fbb224ccc46140b756e0e17801d2b9efc1bbb",
+      "fidelity/cut_ground.gd": "eeed81da762660f35e3f4a64a746ab71401e5aab796c8b58048b21e4ec645b0c",
+      "fidelity/food_body.gd": "5b6e749279f4b5b213bad72cc5c51ddb7ae63d0b6a3ae81945ce2b8da56726f9",
+      "fidelity/food_city.gd": "69df52a5e6a64bf20092292cdbe14c3b9f9ca4710363ea41399325d38bd3405d",
+      "fidelity/food_query.gd": "74940e06712db9f83e9926395f5fbbe2751125e4b57918729c7a376ac1a50f22",
+      "fidelity/game.gd": "471b78bd950f3a9e8dcdb5d9943ab307c53865f4b281c0886c957f97ec637742",
+      "fidelity/hole.gd": "3f6c3e3a18e12860abba1bf4929f16e71d75be1ba9ed6d30da90c7f59c881739",
+      "fidelity/rim_body.gd": "9089dfaa7c890977e69f604d58c721fce1961ef4b7e104d9c5ba1d0162706c5f",
+      "scripts/swallowable.gd": "590e00fc0a73a9a7bf67358219e010a99254e8c659879652fddb3279be3e5392"
+    },
+    "source_before": {
+      "fidelity/catalog_city.gd": "e84e91de200a5293cc780b59366fbb224ccc46140b756e0e17801d2b9efc1bbb",
+      "fidelity/cut_ground.gd": "eeed81da762660f35e3f4a64a746ab71401e5aab796c8b58048b21e4ec645b0c",
+      "fidelity/food_body.gd": "5b6e749279f4b5b213bad72cc5c51ddb7ae63d0b6a3ae81945ce2b8da56726f9",
+      "fidelity/food_city.gd": "69df52a5e6a64bf20092292cdbe14c3b9f9ca4710363ea41399325d38bd3405d",
+      "fidelity/food_query.gd": "74940e06712db9f83e9926395f5fbbe2751125e4b57918729c7a376ac1a50f22",
+      "fidelity/game.gd": "471b78bd950f3a9e8dcdb5d9943ab307c53865f4b281c0886c957f97ec637742",
+      "fidelity/hole.gd": "3f6c3e3a18e12860abba1bf4929f16e71d75be1ba9ed6d30da90c7f59c881739",
+      "fidelity/rim_body.gd": "9089dfaa7c890977e69f604d58c721fce1961ef4b7e104d9c5ba1d0162706c5f",
+      "scripts/swallowable.gd": "590e00fc0a73a9a7bf67358219e010a99254e8c659879652fddb3279be3e5392"
+    },
+    "source_unchanged_during_run": true
+  },
+  "growth_rivals_review": {
+    "checks": 291,
+    "failures": [],
+    "metrics": {
+      "city_moving_capture": {
+        "distance_m": 2.69811391830444,
+        "frame": 22,
+        "radius": 1.2
+      },
+      "food_moving_capture": {
+        "distance_m": 2.69811391830444,
+        "frame": 21,
+        "radius": 1.2
+      }
+    },
+    "scope": "Independent growth arithmetic and controlled real-scene combat review, with actual player movement on both maps. Scene updates are isolated for deterministic mechanic boundaries. Separate pedestrian review proves actual rigid-body collection. No save, browser or device-performance claim."
+  },
+  "growth_integration_review": {
+    "checks": 1606,
+    "failures": [],
+    "metrics": {
+      "actual_camera_aspects": [
+        0.5625,
+        0.46208530664444,
+        0.461822658777237,
+        0.375,
+        0.5625,
+        2.16410255432129,
+        1.77777779102325
+      ],
+      "camera_cases": 105,
+      "ground_ray_samples": 1156
+    },
+    "scope": "Independent headless integration, no browser or device timing claim"
+  },
+  "food_collision": {
+    "checks": 156,
+    "failures": [],
+    "metrics": {
+      "contacts": {
+        "after_six_seconds": [
+          {
+            "angular_velocity": "(0.429292, 0.000037, -0.342993)",
+            "at": "(58.0646, 0.127012, -87.89127)",
+            "kind": "egg",
+            "lowest_contact": -0.024621993303299,
+            "velocity": "(0.051765, -0.22733, 0.064758)"
+          },
+          {
+            "angular_velocity": "(-0.051787, -0.001601, -0.148991)",
+            "at": "(41.91119, 0.510065, -88.04799)",
+            "kind": "cake",
+            "lowest_contact": -0.013809859752655,
+            "velocity": "(0.075812, -0.078622, -0.027085)"
+          },
+          {
+            "angular_velocity": "(-0.503825, -0.003994, -0.147484)",
+            "at": "(34.09718, 0.131836, 87.80956)",
+            "kind": "donut",
+            "lowest_contact": -0.025321751832962,
+            "velocity": "(0.023399, -0.233215, -0.076247)"
+          },
+          {
+            "angular_velocity": "(0.000285, 0.000026, 0.000342)",
+            "at": "(49.00829, 0.530105, 86.33547)",
+            "kind": "burger",
+            "lowest_contact": -0.00500941276550293,
+            "velocity": "(-0.000191, -0.000016, 0.000167)"
+          },
+          {
+            "angular_velocity": "(0.440263, -0.000144, 0.453708)",
+            "at": "(74.08508, 0.083293, -87.90634)",
+            "kind": "cookie",
+            "lowest_contact": -0.0271041542291641,
+            "velocity": "(-0.049604, -0.259101, 0.048057)"
+          },
+          {
+            "angular_velocity": "(0.012807, -0.001147, 0.19388)",
+            "at": "(14.1334, 0.373334, -88.12349)",
+            "kind": "berry",
+            "lowest_contact": -0.0128964483737946,
+            "velocity": "(-0.074209, -0.064439, 0.003605)"
+          },
+          {
+            "angular_velocity": "(0.239008, 0.000569, 0.335607)",
+            "at": "(65.7188, 0.232844, 83.80022)",
+            "kind": "pancake",
+            "lowest_contact": -0.0209380984306335,
+            "velocity": "(-0.073639, -0.181769, 0.054389)"
+          },
+          {
+            "angular_velocity": "(-0.521806, 0.003409, 0.233499)",
+            "at": "(86.41223, 0.100228, 56.99361)",
+            "kind": "pizza",
+            "lowest_contact": -0.0273188725113869,
+            "velocity": "(-0.028048, -0.256927, -0.06509)"
+          }
+        ],
+        "landing_preconditions": [
+          {
+            "actual_ground": true,
+            "at": "(58.0, -88.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(62.0, -88.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(42.0, -88.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(46.0, -88.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(34.0, 88.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(38.0, 88.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(50.0, 88.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(54.0, 88.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(74.0, -88.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(78.0, -88.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(14.0, -88.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(18.0, -88.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(66.0, 84.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(70.0, 84.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(86.0, 56.0)",
+            "empty_air": true
+          },
+          {
+            "actual_ground": true,
+            "at": "(90.0, 56.0)",
+            "empty_air": true
+          }
+        ],
+        "maximum_drop_speed": 9.96382236480713,
+        "ordinary_bodies": 8,
+        "rain_bodies": 8,
+        "target_receipts": 8
+      },
+      "inventory": {
+        "native_cylinders": 0,
+        "rectangular_food_bodies": 652,
+        "rounded_food_bodies": 2222,
+        "shared_round_resources": 584
+      },
+      "support_rays": [
+        {
+          "hits": 64,
+          "kind": "egg",
+          "maximum_inset": 0.0193955040562629,
+          "maximum_outer_ratio": 1.00016788221137,
+          "outward_overshoot_count": 0
+        },
+        {
+          "hits": 64,
+          "kind": "cake",
+          "maximum_inset": 0.0193870793675972,
+          "maximum_outer_ratio": 1.00017151540306,
+          "outward_overshoot_count": 0
+        },
+        {
+          "hits": 64,
+          "kind": "donut",
+          "maximum_inset": 0.0193904982190558,
+          "maximum_outer_ratio": 1.0001613582911,
+          "outward_overshoot_count": 0
+        },
+        {
+          "hits": 64,
+          "kind": "burger",
+          "maximum_inset": 0.0193967958504847,
+          "maximum_outer_ratio": 1.00017012696133,
+          "outward_overshoot_count": 0
+        },
+        {
+          "hits": 64,
+          "kind": "cookie",
+          "maximum_inset": 0.0193952569461645,
+          "maximum_outer_ratio": 1.00015989182608,
+          "outward_overshoot_count": 0
+        },
+        {
+          "hits": 64,
+          "kind": "berry",
+          "maximum_inset": 0.0193906155843763,
+          "maximum_outer_ratio": 1.00016818297968,
+          "outward_overshoot_count": 0
+        },
+        {
+          "hits": 64,
+          "kind": "pancake",
+          "maximum_inset": 0.0193971416106246,
+          "maximum_outer_ratio": 1.00016757770769,
+          "outward_overshoot_count": 0
+        },
+        {
+          "hits": 64,
+          "kind": "pizza",
+          "maximum_inset": 0.0193904982190558,
+          "maximum_outer_ratio": 1.0001613582911,
+          "outward_overshoot_count": 0
+        }
+      ]
+    },
+    "scope": "Actual food scene collider inventory, physics-space support rays, tilted ordinary/rain contacts and independent gravity collection. No visual or performance certification."
+  }
+}

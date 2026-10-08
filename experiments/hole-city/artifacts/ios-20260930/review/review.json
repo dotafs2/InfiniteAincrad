@@ -1,0 +1,361 @@
+{
+  "status": "PASS_FOR_DEVICE_XCODE_PROJECT_PREPARATION_WITH_SIMULATOR_LIMITATION",
+  "scope": "Read-only helper, template, Xcode metadata and desktop-headless PCK resource loading. No native compilation, signing, installation, upload, credentials or device execution.",
+  "preparation_report_sha256": "1c5dad2a44b65a6d58da77a7a9731baac20aa644c893af772fcd4458c98e879a",
+  "helper_sha256": "7cc927ef412accd05f0e7af2fc5dca23fe049c44d95369a883a88f5765a05a4e",
+  "native_readme_sha256_at_review": "4bb27b64dce95c00ad64c4ee377044c2dbffe7356ad864c7b676638ea3a25749",
+  "template_provenance_sha256": "ea726de7da155cec705c59528ca3f094397cea3ae183cbe1e34c25f017be5fa7",
+  "web_receipt_sha256_matches": true,
+  "web_inputs": 791,
+  "changed_web_inputs": [],
+  "copied_source_files": 752,
+  "original_copied_inputs_changed": [],
+  "prepared_copy_differences": [
+    "project.godot"
+  ],
+  "unexpected_copy_differences": [],
+  "snapshot_settings_exact_expected_override": true,
+  "exported_files": 47,
+  "exported_files_match_author_hashes": true,
+  "pck_sha256": "cee0c5f49200859f4fc023b5d966111894e81219aade2f1d52b15e4784f7e2c6",
+  "pck_bytes": 10555176,
+  "target_configs": [
+    {
+      "name": "Debug",
+      "DEVELOPMENT_TEAM": "KAMZHRWY33",
+      "PRODUCT_BUNDLE_IDENTIFIER": "io.github.dotafs2.sinkcity",
+      "MARKETING_VERSION": "0.11.1",
+      "CURRENT_PROJECT_VERSION": "1",
+      "IPHONEOS_DEPLOYMENT_TARGET": "15.0",
+      "TARGETED_DEVICE_FAMILY": "1",
+      "CODE_SIGN_STYLE": "Automatic",
+      "CODE_SIGN_IDENTITY": "Apple Development"
+    },
+    {
+      "name": "Release",
+      "DEVELOPMENT_TEAM": "KAMZHRWY33",
+      "PRODUCT_BUNDLE_IDENTIFIER": "io.github.dotafs2.sinkcity",
+      "MARKETING_VERSION": "0.11.1",
+      "CURRENT_PROJECT_VERSION": "1",
+      "IPHONEOS_DEPLOYMENT_TARGET": "15.0",
+      "TARGETED_DEVICE_FAMILY": "1",
+      "CODE_SIGN_STYLE": "Automatic",
+      "CODE_SIGN_IDENTITY": "Apple Distribution"
+    }
+  ],
+  "resource_build_phase": [
+    "Images.xcassets",
+    "SinkCity.pck",
+    "Launch Screen.storyboard",
+    null,
+    "PrivacyInfo.xcprivacy"
+  ],
+  "shell_script_phase_present": false,
+  "icons": [
+    {
+      "file": "Icon-58.png",
+      "pixels": [
+        58,
+        58
+      ],
+      "expected_pixels": 58,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-87.png",
+      "pixels": [
+        87,
+        87
+      ],
+      "expected_pixels": 87,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-40.png",
+      "pixels": [
+        40,
+        40
+      ],
+      "expected_pixels": 40,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-60.png",
+      "pixels": [
+        60,
+        60
+      ],
+      "expected_pixels": 60,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-76.png",
+      "pixels": [
+        76,
+        76
+      ],
+      "expected_pixels": 76,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-114.png",
+      "pixels": [
+        114,
+        114
+      ],
+      "expected_pixels": 114,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-80.png",
+      "pixels": [
+        80,
+        80
+      ],
+      "expected_pixels": 80,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-120.png",
+      "pixels": [
+        120,
+        120
+      ],
+      "expected_pixels": 120,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-120-1.png",
+      "pixels": [
+        120,
+        120
+      ],
+      "expected_pixels": 120,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-180.png",
+      "pixels": [
+        180,
+        180
+      ],
+      "expected_pixels": 180,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-167.png",
+      "pixels": [
+        167,
+        167
+      ],
+      "expected_pixels": 167,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-152.png",
+      "pixels": [
+        152,
+        152
+      ],
+      "expected_pixels": 152,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-128.png",
+      "pixels": [
+        128,
+        128
+      ],
+      "expected_pixels": 128,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-192.png",
+      "pixels": [
+        192,
+        192
+      ],
+      "expected_pixels": 192,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-136.png",
+      "pixels": [
+        136,
+        136
+      ],
+      "expected_pixels": 136,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    },
+    {
+      "file": "Icon-1024.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "expected_pixels": 1024,
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "valid": true
+    }
+  ],
+  "privacy": {
+    "NSPrivacyAccessedAPITypes": [
+      {
+        "NSPrivacyAccessedAPITypeReasons": [
+          "C617.1"
+        ],
+        "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp"
+      },
+      {
+        "NSPrivacyAccessedAPITypeReasons": [
+          "35F9.1"
+        ],
+        "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime"
+      },
+      {
+        "NSPrivacyAccessedAPITypeReasons": [
+          "E174.1"
+        ],
+        "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryDiskSpace"
+      }
+    ],
+    "NSPrivacyTracking": false
+  },
+  "entitlements": {},
+  "unused_permission_descriptions": {
+    "NSCameraUsageDescription": "",
+    "NSPhotoLibraryUsageDescription": "",
+    "NSMicrophoneUsageDescription": ""
+  },
+  "orientation": [
+    "UIInterfaceOrientationPortrait"
+  ],
+  "no_ipa_or_archive": true,
+  "dylibs_files": [
+    "SinkCity/dylibs/empty"
+  ],
+  "resource_probe": {
+    "failures": [],
+    "main_scene": "res://fidelity/main.tscn",
+    "mobile_texture_import": true,
+    "music_seconds": 88.0,
+    "plain_files": 8,
+    "project_name": "Sink City",
+    "resource_types": {
+      "AudioBusLayout": 1,
+      "AudioStreamOggVorbis": 1,
+      "CompressedTexture2D": 16,
+      "FontFile": 1,
+      "GDScript": 47,
+      "PackedScene": 236,
+      "Shader": 12,
+      "ShaderInclude": 1
+    },
+    "resources": 315,
+    "scope": "Desktop Godot reads the exported iOS PCK; no scene instances, native compilation, signing, audio playback or phone validation.",
+    "version": "0.11.1"
+  },
+  "unexpected_resource_probe_errors": [],
+  "actual_library_architectures": {
+    "godot_device": [
+      "arm64"
+    ],
+    "godot_simulator": [
+      "x86_64"
+    ],
+    "moltenvk_device": [
+      "arm64"
+    ]
+  },
+  "declared_simulator_architectures": [
+    "arm64",
+    "x86_64"
+  ],
+  "limitations": [
+    "The official simulator slice declares arm64+x86_64 but actually contains only x86_64; native Apple Silicon simulator support is not established.",
+    "Real-device arm64 libraries are present; native linking and execution were not tested.",
+    "Privacy reason codes are populated, not independently certified for a future final archive or future SDKs.",
+    "Unused empty camera/photo/microphone purpose strings remain from the template; review them before final submission.",
+    "Permanent native credits/privacy/support entries remain release work.",
+    "The standard template member is verified by official HTTPS ranges and ZIP CRC; the complete 1.28 GB archive hash was not verified."
+  ]
+}

@@ -1,0 +1,52 @@
+--- before/food_collision_acceptance.gd
++++ tests/food_collision_acceptance.gd
+@@ -1,6 +1,7 @@
+ extends SceneTree
+ ## Rounded-food collider geometry, actual contacts and independent swallowing.
+ const ROUND_KINDS:=["egg","cake","donut","burger","cookie","berry","pancake","pizza"]
++const CONTACT_CENTERS:=[Vector2(60,-88),Vector2(44,-88),Vector2(36,88),Vector2(52,88),Vector2(76,-88),Vector2(16,-88),Vector2(68,84),Vector2(88,56)]
+ var checks:=0
+ var failures:Array[String]=[]
+ var metrics:Dictionary={}
+@@ -88,12 +89,30 @@
+ func contacts_and_swallow()->void:
+ 	var ordinary:Array[Node3D]=[];var rain:Array[Node3D]=[]
+ 	var kinds:Array=[]
++	# These are isolated ground-contact probes, not drops onto authored towers.
++	# Validate every pair before spawning any specimens; keep the original 4 m
++	# ordinary/rain spacing and at least 16 m between separate paired trials.
++	var landing_checks:Array=[]
++	var volume:=BoxShape3D.new();volume.size=Vector3(5.6,12,5.6)
++	for i in CONTACT_CENTERS.size():
++		for j in range(i):check(CONTACT_CENTERS[i].distance_to(CONTACT_CENTERS[j])>=16.0,"Separate contact pairs retain their original minimum spacing")
++		for offset in [-2.0,2.0]:
++			var at:Vector2=CONTACT_CENTERS[i]+Vector2(offset,0)
++			var air:=PhysicsShapeQueryParameters3D.new();air.shape=volume;air.collision_mask=3;air.exclude=[game.ground.body.get_rid()]
++			air.transform=Transform3D(Basis.IDENTITY,Vector3(at.x,6.015,at.y))
++			var clear:=game.get_world_3d().direct_space_state.intersect_shape(air,1).is_empty()
++			var query:=PhysicsRayQueryParameters3D.create(Vector3(at.x,.06,at.y),Vector3(at.x,-.08,at.y),1)
++			var hit:=game.get_world_3d().direct_space_state.intersect_ray(query)
++			var terrain:bool=not hit.is_empty() and hit.rid==game.ground.body.get_rid()
++			check(clear,"Full tilted-drop air volume clears unrelated scene bodies: "+str(at))
++			check(terrain,"Isolated contact probe has real uncut ground: "+str(at))
++			landing_checks.append({"at":str(at),"empty_air":clear,"actual_ground":terrain})
+ 	for i in ROUND_KINDS.size():
+ 		var kind:String=ROUND_KINDS[i]
+-		var body:Node3D=game.city.food(kind,Vector2(70,-60+i*16),.55,2)
++		var body:Node3D=game.city.food(kind,CONTACT_CENTERS[i]-Vector2(2,0),.55,2)
+ 		body.position.y=3.5;body.rotation=Vector3(deg_to_rad([0,3,25,87][i%4]),.13*i,.09)
+ 		body.lose_support(null);ordinary.append(body);kinds.append(kind)
+-		var drop:Node3D=game.city.spawn_rain(kind,Vector2(74,-60+i*16),5.0)
++		var drop:Node3D=game.city.spawn_rain(kind,CONTACT_CENTERS[i]+Vector2(2,0),5.0)
+ 		drop.rotation=Vector3(deg_to_rad([2,40,80,15][i%4]),.19*i,.05)
+ 		rain.append(drop)
+ 	var max_speed:=0.0
+@@ -124,7 +143,7 @@
+ 		check(receipts.has(id) and receipts[id].count==1 and receipts[id].player,ROUND_KINDS[i]+": independently released food still falls through and awards exactly once")
+ 		if receipts.has(id):check(receipts[id].top< -3.5,ROUND_KINDS[i]+": collection still waits for complete physical descent")
+ 		check(is_instance_valid(rain[i]) and not rain[i].consumed,ROUND_KINDS[i]+": neighbouring food remains independent while this piece is swallowed")
+-	metrics["contacts"]={"ordinary_bodies":ordinary.size(),"rain_bodies":rain.size(),"maximum_drop_speed":max_speed,"target_receipts":ordinary.size(),"after_six_seconds":resting}
++	metrics["contacts"]={"ordinary_bodies":ordinary.size(),"rain_bodies":rain.size(),"maximum_drop_speed":max_speed,"target_receipts":ordinary.size(),"after_six_seconds":resting,"landing_preconditions":landing_checks}
+ func run()->void:
+ 	if not OS.get_cmdline_user_args().has("--test"):quit(2);return
+ 	game=load("res://fidelity/main.tscn").instantiate();root.add_child(game)

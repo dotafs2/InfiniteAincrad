@@ -1,0 +1,438 @@
+{
+  "version": "0.13.0",
+  "source_gate_sha256": "40b53f486ba9d542d2a495f9293e2f81cc559c3e82527c55cd2de095b03e3b7f",
+  "capture_failure_sha256": "23007f91b38b84fe11493583fad2a7c921a7a699dedaef9bb9770017d6d9e277",
+  "scope": "Nine authorized serial one-frame decodes plus header reads; actual Mac pixels, no game/retry/full encoding",
+  "actual_decoded_images": [
+    {
+      "master": "city",
+      "requested_zero_based_frame": 2485,
+      "requested_seconds": 82.83333333333333,
+      "decoder_first_pts": 2485,
+      "decoder_first_pts_seconds": 82.833333,
+      "decoder_checksum": "82833915",
+      "png": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/city-raw-frame-2485.png",
+      "image_sha256": "c54bd6ba0de6c4690865d0c0ab31429fb67cd34c9828e35367c11abe8757ccba",
+      "scope": "One actual AVI-decoded frame; no full movie encoding or compositing"
+    },
+    {
+      "master": "city",
+      "requested_zero_based_frame": 2486,
+      "requested_seconds": 82.86666666666666,
+      "decoder_first_pts": 2486,
+      "decoder_first_pts_seconds": 82.866667,
+      "decoder_checksum": "2045AE01",
+      "png": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/city-raw-frame-2486.png",
+      "image_sha256": "a96c827c247dc15d2817e5ed9ea58c3499bb92ff596d38fa442ca2c7c968e440",
+      "scope": "One actual AVI-decoded frame; no full movie encoding or compositing"
+    },
+    {
+      "master": "city",
+      "requested_zero_based_frame": 2487,
+      "requested_seconds": 82.9,
+      "decoder_first_pts": 2487,
+      "decoder_first_pts_seconds": 82.9,
+      "decoder_checksum": "525E1C00",
+      "png": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/city-raw-frame-2487.png",
+      "image_sha256": "f4b8b6fe806446da836f4f5e40ae5fddecd091b5a45b5b9d143619d20508b284",
+      "scope": "One actual AVI-decoded frame; no full movie encoding or compositing"
+    },
+    {
+      "master": "food",
+      "requested_zero_based_frame": 1568,
+      "requested_seconds": 52.266666666666666,
+      "decoder_first_pts": 1568,
+      "decoder_first_pts_seconds": 52.266667,
+      "decoder_checksum": "D0391F38",
+      "png": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/food-raw-frame-1568.png",
+      "image_sha256": "68b648e1a539fcf3319c458f6532ff7574e2c39e84120ca8aad62bed4091e087",
+      "scope": "One actual AVI-decoded frame; no full movie encoding or compositing"
+    },
+    {
+      "master": "food",
+      "requested_zero_based_frame": 1569,
+      "requested_seconds": 52.3,
+      "decoder_first_pts": 1569,
+      "decoder_first_pts_seconds": 52.3,
+      "decoder_checksum": "DD90D951",
+      "png": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/food-raw-frame-1569.png",
+      "image_sha256": "0d21bafe27e581c70cbde71bcfb2a34ecc3404599eaba90810acebdaa96511e8",
+      "scope": "One actual AVI-decoded frame; no full movie encoding or compositing"
+    },
+    {
+      "master": "toys",
+      "requested_zero_based_frame": 2468,
+      "requested_seconds": 82.26666666666667,
+      "decoder_first_pts": 2468,
+      "decoder_first_pts_seconds": 82.266667,
+      "decoder_checksum": "BC823DAE",
+      "png": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/toys-raw-frame-2468.png",
+      "image_sha256": "ffcf3e5632df1feb84e868f13526d8c944501b9721fb3c8c59d8718df3d78434",
+      "scope": "One actual AVI-decoded frame; no full movie encoding or compositing"
+    },
+    {
+      "master": "toys",
+      "requested_zero_based_frame": 2469,
+      "requested_seconds": 82.3,
+      "decoder_first_pts": 2469,
+      "decoder_first_pts_seconds": 82.3,
+      "decoder_checksum": "0D025DC5",
+      "png": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/toys-raw-frame-2469.png",
+      "image_sha256": "1d567caae46645d8318c672f42225bbfa53d6ecfbfababcfd9e3acc00a0ec4d7",
+      "scope": "One actual AVI-decoded frame; no full movie encoding or compositing"
+    },
+    {
+      "master": "sushi",
+      "requested_zero_based_frame": 1815,
+      "requested_seconds": 60.5,
+      "decoder_first_pts": 1815,
+      "decoder_first_pts_seconds": 60.5,
+      "decoder_checksum": "218D4FDF",
+      "png": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/sushi-raw-frame-1815.png",
+      "image_sha256": "9d70ea41ff6181742b6c01a1bcc39923c16b3a2b862792ea717bca03e7111023",
+      "scope": "One actual AVI-decoded frame; no full movie encoding or compositing"
+    },
+    {
+      "master": "food",
+      "requested_zero_based_frame": 1567,
+      "requested_seconds": 52.233333333333334,
+      "decoder_first_pts": 1567,
+      "decoder_first_pts_seconds": 52.233333,
+      "decoder_checksum": "13880E7E",
+      "png": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/food-raw-frame-1567.png",
+      "image_sha256": "c4cc4a211da96764f335a771e8679acbb7dc4d53aaf5b1dc4553abc222301d6b",
+      "scope": "One additional explicit root-authorized Food alignment read; originals unchanged"
+    }
+  ],
+  "metadata_receipt_sha256": "49f82892d649a7f2eec3e3f5bfc27d2bd1b60084bda3a3a7ebf77672ac0fc7b4",
+  "pixel_comparison_sha256": "d4f73f7502b1c8861b4ad9d1861778481a528e4fa445aca4c6f94050de269fa5",
+  "pixel_measurements": [
+    {
+      "master": "city",
+      "source_saved_png": "frame-2400.png",
+      "actual_raw_pts_frame": 2485,
+      "full_view": {
+        "mean_abs_rgb_difference": 3.599067869011788,
+        "fraction_channels_over_8": 0.0736971328693253
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 4.162991476028436,
+        "fraction_channels_over_8": 0.06939371988814393
+      }
+    },
+    {
+      "master": "city",
+      "source_saved_png": "frame-2400.png",
+      "actual_raw_pts_frame": 2486,
+      "full_view": {
+        "mean_abs_rgb_difference": 2.0987549379232506,
+        "fraction_channels_over_8": 0.06340430618259343
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 1.8446127152050134,
+        "fraction_channels_over_8": 0.050810844198870206
+      }
+    },
+    {
+      "master": "city",
+      "source_saved_png": "frame-2400.png",
+      "actual_raw_pts_frame": 2487,
+      "full_view": {
+        "mean_abs_rgb_difference": 3.6972606282919487,
+        "fraction_channels_over_8": 0.07794786180085277
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 3.997472569432746,
+        "fraction_channels_over_8": 0.06905315409408937
+      }
+    },
+    {
+      "master": "city",
+      "motion_between_actual_raw_frames": [
+        2485,
+        2486
+      ],
+      "full_view": {
+        "mean_abs_rgb_difference": 2.6802970983822423,
+        "fraction_channels_over_8": 0.04643352614747931
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 3.217420796693732,
+        "fraction_channels_over_8": 0.04486455981941309
+      }
+    },
+    {
+      "master": "city",
+      "motion_between_actual_raw_frames": [
+        2486,
+        2487
+      ],
+      "full_view": {
+        "mean_abs_rgb_difference": 2.298123197266115,
+        "fraction_channels_over_8": 0.0394710543641836
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 2.772493626674753,
+        "fraction_channels_over_8": 0.03775731949732152
+      }
+    },
+    {
+      "master": "food",
+      "source_saved_png": "frame-1500.png",
+      "actual_raw_pts_frame": 1567,
+      "full_view": {
+        "mean_abs_rgb_difference": 4.604154517807876,
+        "fraction_channels_over_8": 0.11922184599949837
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 4.912350774344979,
+        "fraction_channels_over_8": 0.1211681434812394
+      }
+    },
+    {
+      "master": "food",
+      "source_saved_png": "frame-1500.png",
+      "actual_raw_pts_frame": 1568,
+      "full_view": {
+        "mean_abs_rgb_difference": 15.559213733697016,
+        "fraction_channels_over_8": 0.2282468804865814
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 16.69357276821311,
+        "fraction_channels_over_8": 0.23062902193322327
+      }
+    },
+    {
+      "master": "food",
+      "source_saved_png": "frame-1500.png",
+      "actual_raw_pts_frame": 1569,
+      "full_view": {
+        "mean_abs_rgb_difference": 19.96527150739905,
+        "fraction_channels_over_8": 0.26834810791321795
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 21.776835629976528,
+        "fraction_channels_over_8": 0.27398139101333063
+      }
+    },
+    {
+      "master": "food",
+      "motion_between_actual_raw_frames": [
+        1567,
+        1568
+      ],
+      "full_view": {
+        "mean_abs_rgb_difference": 14.496812100263355,
+        "fraction_channels_over_8": 0.22536152652370203
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 15.239194546455083,
+        "fraction_channels_over_8": 0.22969239580876655
+      }
+    },
+    {
+      "master": "food",
+      "motion_between_actual_raw_frames": [
+        1568,
+        1569
+      ],
+      "full_view": {
+        "mean_abs_rgb_difference": 11.861574923187861,
+        "fraction_channels_over_8": 0.1972512227238525
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 12.334264624956482,
+        "fraction_channels_over_8": 0.20593982682524173
+      }
+    },
+    {
+      "master": "toys",
+      "source_saved_png": "frame-2400.png",
+      "actual_raw_pts_frame": 2468,
+      "full_view": {
+        "mean_abs_rgb_difference": 1.8359373040506646,
+        "fraction_channels_over_8": 0.04410212095560572
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 1.7424314656963489,
+        "fraction_channels_over_8": 0.0396246757184731
+      }
+    },
+    {
+      "master": "toys",
+      "source_saved_png": "frame-2400.png",
+      "actual_raw_pts_frame": 2469,
+      "full_view": {
+        "mean_abs_rgb_difference": 5.385447430712315,
+        "fraction_channels_over_8": 0.11760741942563331
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 4.8961083409139405,
+        "fraction_channels_over_8": 0.11026498433341195
+      }
+    },
+    {
+      "master": "toys",
+      "motion_between_actual_raw_frames": [
+        2468,
+        2469
+      ],
+      "full_view": {
+        "mean_abs_rgb_difference": 4.755786775771257,
+        "fraction_channels_over_8": 0.10973711437170805
+      },
+      "gameplay_region_y260_1600": {
+        "mean_abs_rgb_difference": 4.435505879181968,
+        "fraction_channels_over_8": 0.11105842121222331
+      }
+    }
+  ],
+  "observations": {
+    "city": {
+      "engine_snapshot_frame": 2486,
+      "best_sampled_avi_frame": 2486,
+      "adjacent_raw_motion_observed": true,
+      "visual": "Intact tilted whole building within black-hole mouth; no added cut wall observed in this actual sample"
+    },
+    "food": {
+      "engine_snapshot_frame": 1568,
+      "raw_hud_matches_snapshot_at_frame": 1568,
+      "closest_sampled_geometry_frame": 1567,
+      "adjacent_raw_motion_observed": true,
+      "visual": "Real food stack and pancake motion; frame1567 HUD128, frame1568 HUD131 matches snapshot; camera/body layout changes at this process boundary",
+      "exact_full_image_alignment": false
+    },
+    "toys": {
+      "engine_snapshot_frame": 2468,
+      "best_sampled_avi_frame": 2468,
+      "adjacent_raw_motion_observed": true,
+      "visual": "Actual guard formation, rounded castle gate and toys; nearby occluder stipple remains visible, so final screenshot selection should prefer unobscured earned frames"
+    },
+    "sushi": {
+      "sampled_avi_frame": 1815,
+      "raw_sample_seconds": 60.5,
+      "visual": "Only two train cars at left edge; current Sushi marketing framing fails explicitly"
+    }
+  },
+  "raw_frame_headers": {
+    "city": [
+      2801,
+      2799
+    ],
+    "food": [
+      1901,
+      1899
+    ],
+    "toys": [
+      2801,
+      2799
+    ],
+    "sushi": [
+      1901,
+      1899
+    ]
+  },
+  "timing_limits": "Observed City/Toy screenshot matching and Food HUD matching bind sampled timestamps to within the observed one-frame process/render boundary. No universal full-image offset or full-movie decode acceptance is asserted. Future gameplay cards/cuts must use actual AVI pixels and receive final visual/motion/full-decode review.",
+  "long_still_frame_failure_in_sampled_segments": false,
+  "all_movie_frames_decoded_or_verified": false,
+  "full_store_export_completed": false,
+  "sushi_failure_preserved": true,
+  "engine_or_encoder_started": false,
+  "only_bounded_frame_decoders_used": true,
+  "owned_diagnostic_children": [
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/extract-city-2485-owned-process.json",
+      "sha256": "cd7bf9a061d576733c07260fd8289c3b4d20c0abd19d791ae4720868dee774a4",
+      "pid": 61336,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/extract-city-2486-owned-process.json",
+      "sha256": "b6f4c707c562a1e7865192a664d7526f860ac45475cbd42c473117efa879bc3e",
+      "pid": 61345,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/extract-city-2487-owned-process.json",
+      "sha256": "d0891d5465d898a2606109bc5be508a73cbdfbbc9e185bcf80ca5c802eb961c4",
+      "pid": 61349,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/extract-food-1567-owned-process.json",
+      "sha256": "f77a5216c3e5637c629f5c3a2ed7f4cebf680ab6cba1ea923982495af829d8e8",
+      "pid": 63794,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/extract-food-1568-owned-process.json",
+      "sha256": "0fdb6c2e8cdd927eb65724ccf056e346a66ec22ada9b19bb59e31b33ee378064",
+      "pid": 61352,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/extract-food-1569-owned-process.json",
+      "sha256": "e54946c140031ac38c26c2d64898592c6138d3cfb585029a44a1d9c39edb2d51",
+      "pid": 61356,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/extract-sushi-1815-owned-process.json",
+      "sha256": "9e161a565126bba04cb8823c1b49e614d38717c496c613b9353b5e1117f8b434",
+      "pid": 61369,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/extract-toys-2468-owned-process.json",
+      "sha256": "64d2bc9c62a591b06cc71af475475d5bb42e651b30941c121a220a44dab05abd",
+      "pid": 61362,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/extract-toys-2469-owned-process.json",
+      "sha256": "7b978030df843ff94ef3d380e383663ceb7bde18f22d5f8581f2f72e10f58d49",
+      "pid": 61364,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/ffprobe-city-owned-process.json",
+      "sha256": "317258e9260c89393775cc043fa5531adff3646ece2a8c7331ceb309709756bb",
+      "pid": 60838,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/ffprobe-food-owned-process.json",
+      "sha256": "28b9d4cefc3d2d238059a08d8db7d10790f32c8a8ddbd9c9c9a912877e679a4c",
+      "pid": 60846,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/ffprobe-sushi-owned-process.json",
+      "sha256": "89254fdb4b522e5c7757300be2fbffaa051b6fdb0c00d7968fa6eee79ec8f2c0",
+      "pid": 60859,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/ffprobe-toys-owned-process.json",
+      "sha256": "4ccf650d8bb179d3cdd508b8c76e56ac331ad3aac48dd670b1075f3e94ebc0d0",
+      "pid": 60850,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/pixel-compare-02-owned-process.json",
+      "sha256": "1fe4bddbf6387333fe975874e06e493911774e8e7528be7e7d17dfcb40c47c6d",
+      "pid": 63797,
+      "exit_code": 0
+    },
+    {
+      "receipt": "build/toy-city-20261003/store-review-v6-05/raw-diagnostics-01/pixel-compare-owned-process.json",
+      "sha256": "65aa56f8214887058f73073b8270acf3a16bd56f391bc98656c573cbed8867c7",
+      "pid": 61609,
+      "exit_code": 0
+    }
+  ],
+  "owned_process_absence_evidence": "",
+  "all_owned_diagnostics_ended": true,
+  "physical_iphone_capture": false,
+  "ready_for_upload": false
+}

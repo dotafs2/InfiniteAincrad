@@ -1,0 +1,73 @@
+--- /Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/world-expansion-20260929/impact-fixture/food_impact_acceptance-before.gd
++++ /Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/tests/food_impact_acceptance.gd
+@@ -2,19 +2,50 @@
+ ## Food feedback must originate at real physical contacts and remain bounded.
+ var checks:=0
+ var failures:Array[String]=[]
++var game:Node3D
++var drop_sites:Array[Vector2]=[]
+ func _initialize()->void:run.call_deferred()
+ func check(ok:bool,label:String)->void:
+ 	checks+=1
+ 	if not ok:failures.append(label);push_error(label)
++func clear_drop_site(at:Vector2)->bool:
++	# Ground-contact feedback needs empty air as well as solid ground. New
++	# perimeter food heaps legitimately occupy the old hard-coded positions.
++	var shape:=BoxShape3D.new();shape.size=Vector3(4,12,4)
++	var query:=PhysicsShapeQueryParameters3D.new();query.shape=shape
++	query.transform=Transform3D(Basis.IDENTITY,Vector3(at.x,6.07,at.y));query.collision_mask=3
++	if not game.get_world_3d().direct_space_state.intersect_shape(query,1).is_empty():return false
++	for offset in [Vector2.ZERO,Vector2(-2,-2),Vector2(2,-2),Vector2(2,2),Vector2(-2,2)]:
++		var point:Vector2=at+offset
++		var ray:=PhysicsRayQueryParameters3D.create(Vector3(point.x,12,point.y),Vector3(point.x,-1,point.y),1)
++		var hit:=game.get_world_3d().direct_space_state.intersect_ray(ray)
++		if hit.is_empty() or hit.rid!=game.ground.body.get_rid():return false
++	return true
++func choose_drop_sites()->Array[Vector2]:
++	var result:Array[Vector2]=[]
++	for x in range(50,91,3):
++		for z in range(15,61,3):
++			var at:=Vector2(x,z)
++			if at.distance_to(Vector2(71,36))>30.0:continue
++			if result.any(func(old:Vector2):return old.distance_to(at)<6.0):continue
++			if clear_drop_site(at):result.append(at)
++			if result.size()==3:return result
++	return result
+ func run()->void:
+ 	if not OS.get_cmdline_user_args().has("--test"):quit(2);return
+-	var game:Node3D=load("res://fidelity/main.tscn").instantiate();root.add_child(game)
++	game=load("res://fidelity/main.tscn").instantiate();root.add_child(game)
+ 	game.selected_map="food";game.start_level();game.begin_play();game.set_physics_process(false);game.city.set_process(false);game.city.rain_enabled=false
+ 	for hole in game.holes:hole.enabled=false;hole.active=false
+ 	game.player.position=Vector3(71,0,36)
+ 	var city:Node3D=game.city;var drops:Array[Node3D]=[]
+-	for i in 3:
+-		var body:Node3D=city.spawn_rain(["cookie","egg","cake"][i],Vector2(71,42+i*6),8)
++	game.ground.sync()
++	for i in 2:await physics_frame
++	drop_sites=choose_drop_sites()
++	check(drop_sites.size()==3,"All three contact styles have physically verified clear-ground fixtures")
++	for i in drop_sites.size():
++		check(clear_drop_site(drop_sites[i]),"Contact style %d starts above empty air and real terrain"%i)
++		var body:Node3D=city.spawn_rain(["cookie","egg","cake"][i],drop_sites[i],8)
++		check(body.half_size.length()<2.0,"Contact style %d fits the measured clear column at every rotation"%i)
+ 		if i==2:body.set_meta("tower_id",0)
+ 		drops.append(body)
+ 	for i in 5:await physics_frame
+@@ -25,7 +56,8 @@
+ 	var styles:Dictionary={}
+ 	for event in city.food_impact_events:
+ 		styles[event.style]=true
+-		check(absf(event.at.x-71)<1.5 and event.at.y>=-.05 and event.at.y<.25,"Feedback lies at actual ground contact, not the body center")
++		var near_drop:bool=drop_sites.any(func(at:Vector2):return at.distance_to(Vector2(event.at.x,event.at.z))<1.5)
++		check(near_drop and event.at.y>=-.05 and event.at.y<.25,"Feedback lies at actual ground contact, not the body center")
+ 	check(styles.size()==3,"Crisp food, soft food and structural tiers produce distinct contact feedback")
+ 	check(city.impact_sounds.size()==3,"Three food impact sound envelopes are cached")
+ 	var sounds:Dictionary={}
+@@ -39,5 +71,5 @@
+ 	check(city.crumb_batch.visible_instance_count<=72 and city.glaze_batch.visible_instance_count<=12,"Contact feedback uses two bounded shared draw batches")
+ 	for i in 180:await physics_frame
+ 	check(city.impacts.is_empty() and city.crumb_batch.visible_instance_count==0 and city.glaze_batch.visible_instance_count==0,"All presentation fragments expire without leaving world obstacles")
+-	print("FOOD_IMPACT_ACCEPTANCE "+JSON.stringify({"checks":checks,"failures":failures,"styles":styles.keys(),"peak_bursts":peak,"events":city.food_impact_events.size(),"scope":"Physics/contact and waveform evidence, not audio audition or rendered capture"}))
++	print("FOOD_IMPACT_ACCEPTANCE "+JSON.stringify({"checks":checks,"failures":failures,"styles":styles.keys(),"peak_bursts":peak,"events":city.food_impact_events.size(),"drop_sites":drop_sites,"scope":"Physics/contact and waveform evidence, not audio audition or rendered capture"}))
+ 	game.free();await process_frame;quit(0 if failures.is_empty() else 1)

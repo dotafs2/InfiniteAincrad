@@ -16,6 +16,33 @@ def log(messages):
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_public_archive_redacts_contacts_and_fingerprints_images(self):
+        rows = [json.loads(line) for line in log([('user', None, 'Contact person@example.com +86 13812345678; keep my correction')]).splitlines()]
+        rows[1]['payload']['content'].append({'type': 'input_image', 'image_url': 'data:private'})
+        data = '\n'.join(json.dumps(row) for row in rows).encode()
+        messages, excluded = extract(iter(data.splitlines()), 'test-thread', public=True)
+        text = messages[0]['text']
+        self.assertNotIn('person@example.com', text)
+        self.assertNotIn('13812345678', text)
+        self.assertNotIn('data:private', text)
+        self.assertIn('keep my correction', text)
+        self.assertIn('source block SHA-256', text)
+        self.assertEqual(messages[0]['public_redactions'], {'email': 1, 'phone': 1})
+        self.assertEqual(excluded['image_payloads_retained_locally'], 1)
+        with self.assertRaisesRegex(ValueError, 'credential'):
+            extract(log([('user', None, 'sk-' + 'x' * 30)]), 'test-thread', public=True)
+
+    def test_streamed_source_hash_and_browser_context(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp); source = root / 'source.jsonl'
+            data = log([('user', None, '<in-app-browser-context source="ambient-ui-state">?rapt=private</in-app-browser-context>\nKeep me')])
+            source.write_bytes(data)
+            manifest = archive(source, root / 'out', 'test-thread', public=True)
+            self.assertEqual(manifest['source_snapshot_bytes'], len(data))
+            self.assertEqual(manifest['source_snapshot_sha256'], digest(data))
+            result = json.loads((root / 'out' / 'conversation.json').read_text())
+            self.assertEqual(result['messages'][0]['text'], 'Keep me')
+
     def test_empty_heartbeat_does_not_hide_messages_or_attachments(self):
         data = log([('user', None, 'keep me'), ('assistant', 'final', ''),
                     ('assistant', 'commentary', ' '), ('user', None, 'keep me')])

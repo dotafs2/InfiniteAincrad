@@ -1,0 +1,18 @@
+{
+  "checks": 7663,
+  "failures": [
+    "Home PLAY uses the skin equipped in the collection",
+    "Menu toast does not leak into gameplay",
+    "Functional skill and boost remain available",
+    "Navigation target exists: pause-action",
+    "Pointer pauses without leaving a stuck joystick",
+    "Navigation target exists: KEEP PLAYING",
+    "Pointer resumes the same round",
+    "Navigation target exists: PLAY AGAIN",
+    "Replay keeps the food map and clears the order",
+    "Navigation target exists: HOME",
+    "Engine process failed; inspect the engine log"
+  ],
+  "input": "Actual viewport mouse down/up",
+  "minimum_test_width_points": 375
+}

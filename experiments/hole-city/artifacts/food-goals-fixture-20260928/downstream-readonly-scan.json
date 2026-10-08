@@ -1,0 +1,341 @@
+[
+  {
+    "suite": "progression_review",
+    "path": "tests/city_review_progression.gd",
+    "matches": [
+      {
+        "line": 37,
+        "code": "for h in game.holes:h.enabled=false;h.active=false"
+      },
+      {
+        "line": 38,
+        "code": "game.player.active=true;game.player.radius=2.0;game.player._sync_shape()"
+      },
+      {
+        "line": 43,
+        "code": "game.player.score=49;game.stage=7"
+      },
+      {
+        "line": 54,
+        "code": "check(game.player.score==49 and game.coins==coins and game.eaten==eaten,\"Late physical receipt cannot modify score, coins or counts\")"
+      },
+      {
+        "line": 55,
+        "code": "game.phase=\"playing\";game.player.score=500"
+      }
+    ]
+  },
+  {
+    "suite": "rain_review",
+    "path": "tests/city_review_food_rain.gd",
+    "matches": [
+      {
+        "line": 38,
+        "code": "for h in game.holes:h.enabled=false;h.active=false"
+      },
+      {
+        "line": 51,
+        "code": "game.player.active=true;game.player.radius=2.5;game.player._sync_shape()"
+      },
+      {
+        "line": 53,
+        "code": "var score:int=game.player.score"
+      },
+      {
+        "line": 59,
+        "code": "check(not is_instance_valid(food) and game.player.score>score,\"Woken landed food completes real gravity fall and awards points\")"
+      },
+      {
+        "line": 61,
+        "code": "game.player.active=false;game.player.position=Vector3(70,0,70)"
+      }
+    ]
+  },
+  {
+    "suite": "crowd_review",
+    "path": "tests/food_crowd_review.gd",
+    "matches": [
+      {
+        "line": 14,
+        "code": "for hole in game.holes:hole.enabled=false;hole.active=false"
+      },
+      {
+        "line": 51,
+        "code": "game.player.position=Vector3(body.position.x,0,body.position.z);game.player.active=true;game.player.radius=2;game.player._sync_shape()"
+      }
+    ]
+  },
+  {
+    "suite": "district_review",
+    "path": "tests/food_review_city_districts.gd",
+    "matches": [
+      {
+        "line": 22,
+        "code": "for h in game.holes:h.active=false;h.enabled=false"
+      },
+      {
+        "line": 58,
+        "code": "game.player.position=Vector3(at.x,0,at.y);game.player.radius=1.2;game.player.active=true;game.player._sync_shape()"
+      }
+    ]
+  },
+  {
+    "suite": "food_revision_review",
+    "path": "tests/city_review_food_revision.gd",
+    "matches": [
+      {
+        "line": 38,
+        "code": "for h in game.holes:h.enabled=false;h.active=false"
+      }
+    ]
+  },
+  {
+    "suite": "skin_catalog_review",
+    "path": "tests/city_review_skin_catalog.gd",
+    "matches": []
+  },
+  {
+    "suite": "mobile_thumbnail",
+    "path": "tests/mobile_thumbnail_acceptance.gd",
+    "matches": []
+  },
+  {
+    "suite": "procedural_filtering",
+    "path": "tests/procedural_filtering_acceptance.gd",
+    "matches": []
+  },
+  {
+    "suite": "selective_reveal",
+    "path": "tests/selective_reveal_acceptance.gd",
+    "matches": [
+      {
+        "line": 169,
+        "code": "blocker.freeze=true;game.phase=\"playing\";game.player.active=true;game.update_reveal(1.0)"
+      },
+      {
+        "line": 173,
+        "code": "game.toggle_pause();game.player.active=false;game.update_reveal(.016)"
+      },
+      {
+        "line": 175,
+        "code": "game.player.active=true;game.update_reveal(1);game.finish(\"timeout\")"
+      }
+    ]
+  },
+  {
+    "suite": "selective_reveal_review",
+    "path": "tests/selective_reveal_review.gd",
+    "matches": []
+  },
+  {
+    "suite": "growth_extension",
+    "path": "tests/growth_extension_acceptance.gd",
+    "matches": []
+  },
+  {
+    "suite": "rival_combat",
+    "path": "tests/rival_combat_acceptance.gd",
+    "matches": [
+      {
+        "line": 23,
+        "code": "h.set_physics_process(false);h.active=false;h.enabled=false;h.target=null"
+      },
+      {
+        "line": 30,
+        "code": "h.active=true;h.enabled=true;h.position=at;h._update_badge()"
+      },
+      {
+        "line": 45,
+        "code": "var score:int=game.player.score;var count:int=game.player.collected"
+      },
+      {
+        "line": 47,
+        "code": "check(game.player.score==score and game.player.collected==count and game.kills==1,\"Repeated scans cannot award the same retired rival again\")"
+      },
+      {
+        "line": 109,
+        "code": "check(game.player.score==1540 and game.kills==2 and game.rival_combat_events.size()==2,\"Largest-first simultaneous combat awards each original victim once, array reversed=%s\"%reverse_order)"
+      },
+      {
+        "line": 119,
+        "code": "var prior:int=game.player.score;var retired_score:int=victim.score"
+      },
+      {
+        "line": 120,
+        "code": "game.collect(held,victim)"
+      },
+      {
+        "line": 121,
+        "code": "check(game.player.score==prior+3 and victim.score==retired_score,\"Late physical receipt resolves to the surviving owner\")"
+      },
+      {
+        "line": 131,
+        "code": "victim.active=false;hunter.settle_time=0"
+      }
+    ]
+  },
+  {
+    "suite": "large_growth_world",
+    "path": "tests/large_growth_world_acceptance.gd",
+    "matches": [
+      {
+        "line": 34,
+        "code": "game.player.award(total_score-game.player.score)"
+      },
+      {
+        "line": 74,
+        "code": "h.active=true;h.enabled=false;h.radius=47.99"
+      }
+    ]
+  },
+  {
+    "suite": "pedestrian_swallow_review",
+    "path": "tests/pedestrian_swallow_review.gd",
+    "matches": [
+      {
+        "line": 23,
+        "code": "for hole in game.holes:hole.active=false;hole.enabled=false"
+      },
+      {
+        "line": 42,
+        "code": "game.player.active=true"
+      },
+      {
+        "line": 47,
+        "code": "var before_score:int=game.player.score"
+      },
+      {
+        "line": 75,
+        "code": "active_case[\"score_delta_all_nearby_objects\"]=game.player.score-before_score"
+      },
+      {
+        "line": 85,
+        "code": "check(game.player.score>=before_score+int(active_case.points),prefix+\": score reflects the real collection\")"
+      },
+      {
+        "line": 93,
+        "code": "game.item_collected.connect(collected)"
+      }
+    ]
+  },
+  {
+    "suite": "growth_rivals_review",
+    "path": "tests/growth_rivals_review.gd",
+    "matches": [
+      {
+        "line": 17,
+        "code": "h.active=false;h.enabled=false;h.test_direction=Vector2.ZERO;h.target=null;h.settle_time=0.0"
+      },
+      {
+        "line": 22,
+        "code": "h.active=true;h.radius=radius;h.position=at;h.score=points;h.level=Hole.level_for_score(points)"
+      },
+      {
+        "line": 53,
+        "code": "check(player.score==Hole.MAX_SCORE and player.level>12 and player.radius<48,\"real player awards saturate numeric score safely without authored level cap\")"
+      },
+      {
+        "line": 55,
+        "code": "player.score=0;player.level=1;player.radius=.85;player._sync_shape();game.update_camera(1,true)"
+      },
+      {
+        "line": 80,
+        "code": "a.active=false"
+      },
+      {
+        "line": 123,
+        "code": "var before:int=player.score;var points:int=item.points"
+      },
+      {
+        "line": 124,
+        "code": "item.finish_swallow();item.finish_swallow()"
+      },
+      {
+        "line": 125,
+        "code": "check(player.score==before+points and item.consumed,\"two completion calls cannot duplicate one object's reward\")"
+      },
+      {
+        "line": 127,
+        "code": "before=player.score;game.collect(late,victim)"
+      },
+      {
+        "line": 128,
+        "code": "check(player.score==before+late.points and not victim.active,\"late callback to retired original owner is redirected exactly once by this callback\")"
+      },
+      {
+        "line": 129,
+        "code": "game.phase=\"complete\";before=player.score;game.collect(late,victim)"
+      },
+      {
+        "line": 130,
+        "code": "check(player.score==before,\"result phase rejects any further delayed score mutation\")"
+      }
+    ]
+  },
+  {
+    "suite": "growth_integration_review",
+    "path": "tests/growth_integration_review.gd",
+    "matches": [
+      {
+        "line": 47,
+        "code": "game.player.score=0;game.player.level=1;game.player.radius=.85;game.player.position=Vector3(76,0,-76)"
+      }
+    ]
+  },
+  {
+    "suite": "food_collision",
+    "path": "tests/food_collision_acceptance.gd",
+    "matches": [
+      {
+        "line": 112,
+        "code": "game.player.score=0;game.player.level=1;game.player.award(60)"
+      },
+      {
+        "line": 113,
+        "code": "game.player.active=true"
+      },
+      {
+        "line": 133,
+        "code": "for hole in game.holes:hole.enabled=false;hole.active=false"
+      },
+      {
+        "line": 134,
+        "code": "game.item_collected.connect(collected)"
+      }
+    ]
+  },
+  {
+    "suite": "food_collision_review",
+    "path": "tests/food_collision_review.gd",
+    "matches": [
+      {
+        "line": 209,
+        "code": "for h in game.holes:h.active=false"
+      },
+      {
+        "line": 213,
+        "code": "hole.active=true;hole.enabled=false;hole.radius=2.2;hole.position=Vector3(body.position.x,0,body.position.z);hole._sync_shape()"
+      },
+      {
+        "line": 228,
+        "code": "for hole in game.holes:hole.active=false"
+      },
+      {
+        "line": 229,
+        "code": "game.player.active=true;game.player.enabled=false;game.player.score=0;game.player.award(240)"
+      },
+      {
+        "line": 268,
+        "code": "game.player.score=0;game.player.award(10);game.player.position=Vector3(69.05,0,16);game.ground.sync()"
+      },
+      {
+        "line": 294,
+        "code": "for h in game.holes:h.enabled=false;h.active=false;h.set_physics_process(false)"
+      },
+      {
+        "line": 296,
+        "code": "game.item_collected.connect(receipt)"
+      }
+    ]
+  }
+]

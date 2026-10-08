@@ -1,0 +1,33 @@
+{
+  "checks": 3,
+  "failures": [],
+  "changed_pixels_over_rgb15": 2412,
+  "maximum_rgb_delta": 266,
+  "shipped_reflection_function_compiled": true,
+  "same_mesh_camera_light_negative_control": "glaze_strength=0",
+  "food_triangles_before": 4839808,
+  "food_triangles_after": 4490428,
+  "triangle_change_percent": -7.22,
+  "source_sha256": {
+    "fidelity/food_glaze.gdshader": "24359cbb82e77823f6ea5e6f3410a29dc11c685188d424c23d4111d9b45bba36",
+    "fidelity/food_surface.gd": "86fecdfb022611d5a03d9b7938abca41e55083498aa5d703ebb898a878fb2a5b",
+    "fidelity/food_city.gd": "bef2d6a059a655657fd3260420c1c8c699ebd9480ff55bc306bdd0a65d175cbd",
+    "fidelity/mesh_batch.gd": "ee226d2766047943300b3626e6a7fa9d86fce91ef815c3bdc44b3602ec821f26",
+    "tools/prepare_food_shader.py": "a4c883c0f2f6f7aa23386538224902fcc7302da947daa413ab18d9b310670ab3",
+    "tools/food_scene_offscreen.m": "e37eb5718df7601b42170bcf8d148d01dcea82648b72e8ab5d8cf3dbcd8fa4b5",
+    "tools/export_food_render_fixture.gd": "52667fd459475a0baa5ccd331d256522f717021c5c1004b9146fb0a9ef299aa1"
+  },
+  "scope": "Windowless CGL render of real cached food meshes. Exact shipped material/reflection functions, approximate final scene lighting. No Godot/browser/device render claim.",
+  "artifact_sha256": {
+    "food-finish.vert": "02e36df867feeaa7b28e1b29c21bb98dfc22f30123f015a7d246050f94a346ee",
+    "food-finish.frag": "929fa64db413019325325de555e616332f4495412a5f407db2d33a679171e594",
+    "ingredients.json": "d48d5bf0b409da032bb437ea14e190db51dc045c1ef0bf6ff8cf18832cddb2ac",
+    "ingredients-no-glaze.json": "691a944b458d43b178f6da8199a6796668fc88a9bd4e027c4dcb94ba9f52a3df",
+    "opening.json": "cb9a81cfcfe06827bc605182965254e6131464577e55cb73459cde4bcc393c45",
+    "render-meshes.json": "f7879bdd7972c1e534017c29b742dfb108a1c6293ab4d9d0faa5ba71353581bb",
+    "opening.png": "d59478cc6237589994584f8250c10d3f65c5c552e8efdabf1889f88d33231480",
+    "ingredients.png": "8c5f730a1a0df6f47633efc7baa113ef715c298e90f318e4526394981f1c2df6",
+    "ingredients.ppm": "620da348c98a83ae69893fb35d143052c088b7da34ec3552faaa0fd82a5102a8",
+    "ingredients-no-glaze.ppm": "abaf1dfb8af54433015d38e64f6002abaf83057bebaa8c2af17a8651909028e1"
+  }
+}

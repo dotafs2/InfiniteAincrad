@@ -1,0 +1,83 @@
+{
+  "version": "0.3.1",
+  "created_utc": "2026-10-08T12:36:56.111884+00:00",
+  "package": {
+    "path": "artifacts/coverage/coverage-release-1.pck",
+    "sha256": "81412f9adbc68a57530cc3b556e08939c08505d59ddf2f26871860ea8f5083e0",
+    "bytes": 2128804
+  },
+  "preview": "http://127.0.0.1:8810/",
+  "gallery": "http://127.0.0.1:8810/review.html",
+  "features": {
+    "squad_cap": 36,
+    "waves": 8,
+    "weapons": [
+      "Rapid",
+      "Scatter",
+      "Rail",
+      "Rocket",
+      "Arc"
+    ],
+    "creatures": [
+      "brute",
+      "golem",
+      "skitter",
+      "dragon",
+      "drake"
+    ],
+    "combat": "32-cell deterministic area energy,10Hz delayed fronts; no live individual gameplay projectiles",
+    "cosmetics": "analytic GPU instanced trails; separate from damage"
+  },
+  "runtime_receipt": "artifacts/expansion-runtime/final-acceptance.json",
+  "visual_report": "docs/expansion-reference-visual-audit.md",
+  "runtime_report": "docs/expansion-runtime-review.md",
+  "focused_checks": 197,
+  "quality_checkpoints_per_mode": 180,
+  "physical_phone_test": false,
+  "git_publication": false,
+  "public_hosting": false,
+  "movie": {
+    "path": "artifacts/coverage/squad-campaign.mp4",
+    "sha256": "bbeb3ed843107b54f61486bb84277d2272a298e3c08b8b47c84aea1d4ee73dca",
+    "bytes": 57044467,
+    "duration_seconds": 179.133333,
+    "size": [
+      720,
+      1280
+    ],
+    "encoded_fps": 15,
+    "simulation_hz": 60,
+    "purpose": "Uninterrupted actual-input progression; fixed-step rendered capture, not real-time or phone FPS",
+    "simulation_victory_seconds": 178.100000000034,
+    "health_or_wave_injection": false
+  },
+  "boundaries": [
+    "Original assets and authored additions, not certified pixel identity",
+    "Desktop CPU/GPU measurements do not certify sustained phone30FPS",
+    "First constructed frozen stress scene retains59–94ms presentation outliers in final package",
+    "Coverage point-samples moving targets at10Hz as an intentional user-authorized approximation"
+  ],
+  "browser": "artifacts/coverage/browser-verification.json",
+  "http": "artifacts/coverage/http-verification.json",
+  "source_inputs": "artifacts/coverage/source-manifest.json",
+  "staged_capture": "artifacts/coverage/accepted/capture.json",
+  "play_capture": "artifacts/coverage/play/capture.json",
+  "evidence_hashes": {
+    "artifacts/expansion-runtime/final-acceptance.json": "afd5dc7fc43de36cb3739af748ae8d474878353c9077b98143cc707117da72d5",
+    "artifacts/coverage/browser-verification.json": "537839c5b46bc626eaf6dcb639e83d175f7b8d203fc51a31f775d9cc487592b6",
+    "artifacts/coverage/http-verification.json": "d149191ee2b2266fffe990427d5b44726381c732d44543eb0dd7006f154caaaa",
+    "artifacts/coverage/source-manifest.json": "1af73829f897ef6e346abb0c85c4c8765c9aa9d2ba6cb585eed6f9029404182d",
+    "artifacts/coverage/accepted/capture.json": "1dedacd3f1b6b1a0e0b3dff4178717bd7068375f0fbe4d280a105dff23233991",
+    "artifacts/coverage/play/capture.json": "a20fe7d250149997f91785df75d645ab217ef73c3a59772370ee62b8f6ba5f31",
+    "docs/expansion-runtime-review.md": "7f4022bcee7c6d47f2fcd994bda98f0e6e4be853f5db0c2133b78fa7d7620d75",
+    "docs/expansion-reference-visual-audit.md": "7d73cfd8b2cc3829b676f5f0fdb124302142bfca923dd9999e3719a8e7c2c9dd"
+  },
+  "finalized_utc": "2026-10-08T12:42:24.439672+00:00",
+  "review_acceptance": {
+    "runtime": "Passed 197 focused checks, quality invariance and ordinary-input campaign validation against the exact final package.",
+    "visual": "Passed bounded visual and integration review of exact-package staged images and selected continuous-play frames, including squad growth, class transitions, weapon readability and dragon wing articulation.",
+    "visual_scope": "Selected frames and independently verified receipts; not a frame-by-frame review of the full movie. Reviewer-authored art and spray were cross-reviewed by root and the runtime reviewer.",
+    "package_sha256": "81412f9adbc68a57530cc3b556e08939c08505d59ddf2f26871860ea8f5083e0"
+  },
+  "process_disposition": "Owned capture, encoding and test helpers exited; preview server and the user browser game remain running."
+}

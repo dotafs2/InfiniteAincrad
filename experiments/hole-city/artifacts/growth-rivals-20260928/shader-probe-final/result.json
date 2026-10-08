@@ -1,0 +1,523 @@
+{
+  "scope": "Isolated current shader equations in windowless CGL; not Godot/browser/device pixels",
+  "programs": [
+    {
+      "name": "asphalt",
+      "cases": [],
+      "compiled": true
+    },
+    {
+      "name": "facade",
+      "cases": [],
+      "compiled": true
+    },
+    {
+      "name": "palette",
+      "cases": [],
+      "compiled": true
+    },
+    {
+      "name": "food_glaze",
+      "cases": [],
+      "compiled": true
+    },
+    {
+      "name": "hole_reveal_standard",
+      "cases": [],
+      "compiled": true
+    },
+    {
+      "name": "reveal-coverage",
+      "cases": [
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "central_ray_height_0.05",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        },
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "central_ray_height_0.25",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        },
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "central_ray_height_0.5",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        },
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "central_ray_height_0.8",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        },
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "central_ray_height_0.98",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        },
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "beyond_small_hole_side_margin",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        },
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "movement_lookahead",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "outside_expanded_region",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "background",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "ground_at_hole",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "below_ground",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "above_camera",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "shadow_pass",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "home_preview_camera",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "other_camera_direction",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "disabled_on_title",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "above_large_hole",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        },
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "away_from_camera_lookahead",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        },
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "large_hole_margin",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        }
+      ],
+      "compiled": true
+    },
+    {
+      "name": "adapter-albedo",
+      "cases": [
+        {
+          "center_rgba8": [
+            179,
+            204,
+            230,
+            255
+          ],
+          "name": "vertex_False_srgb_False_rgb_[0.8, 0.4, 0.2]",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            179,
+            204,
+            230,
+            255
+          ],
+          "name": "vertex_False_srgb_True_rgb_[0.8, 0.4, 0.2]",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            179,
+            204,
+            230,
+            255
+          ],
+          "name": "vertex_False_srgb_False_rgb_[0.24, 0.52, 0.76]",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            179,
+            204,
+            230,
+            255
+          ],
+          "name": "vertex_False_srgb_True_rgb_[0.24, 0.52, 0.76]",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            179,
+            204,
+            230,
+            255
+          ],
+          "name": "vertex_False_srgb_False_rgb_[0.5, 0.5, 0.5]",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            179,
+            204,
+            230,
+            255
+          ],
+          "name": "vertex_False_srgb_True_rgb_[0.5, 0.5, 0.5]",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            143,
+            82,
+            46,
+            255
+          ],
+          "name": "vertex_True_srgb_False_rgb_[0.8, 0.4, 0.2]",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            143,
+            82,
+            46,
+            255
+          ],
+          "name": "vertex_True_srgb_True_rgb_[0.8, 0.4, 0.2]",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            43,
+            106,
+            174,
+            255
+          ],
+          "name": "vertex_True_srgb_False_rgb_[0.24, 0.52, 0.76]",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            43,
+            106,
+            174,
+            255
+          ],
+          "name": "vertex_True_srgb_True_rgb_[0.24, 0.52, 0.76]",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            89,
+            102,
+            115,
+            255
+          ],
+          "name": "vertex_True_srgb_False_rgb_[0.5, 0.5, 0.5]",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            89,
+            102,
+            115,
+            255
+          ],
+          "name": "vertex_True_srgb_True_rgb_[0.5, 0.5, 0.5]",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        }
+      ],
+      "compiled": true
+    },
+    {
+      "name": "selective-palette",
+      "cases": [
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "intact_unblocked_building",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "blocked_large_building",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "building_shadow",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        }
+      ],
+      "compiled": true
+    },
+    {
+      "name": "selective-food_glaze",
+      "cases": [
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "ordinary_food",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "ordinary_food_in_mixed_batch",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "blocked_structural_tier_in_mixed_batch",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "released_food_tier",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "food_structure_shadow",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        }
+      ],
+      "compiled": true
+    },
+    {
+      "name": "selective-hole_reveal_standard",
+      "cases": [
+        {
+          "center_rgba8": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "name": "default_actor_or_debris",
+          "total_pixels": 4096,
+          "visible_pixels": 4096
+        },
+        {
+          "center_rgba8": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "name": "explicit_structural_adapter",
+          "total_pixels": 4096,
+          "visible_pixels": 256
+        }
+      ],
+      "compiled": true
+    }
+  ],
+  "renderer": "Apple Software Renderer",
+  "input_sha256": {
+    "fidelity/asphalt.gdshader": "d889999e0ed468fcab4bc2f2678b2ced8a79ef99a4e89d29fa08dd029e70beff",
+    "fidelity/facade.gdshader": "8690435464f5b43d8bf55c611f2973a12a8991d7d17a7b3e5266c22df07f6084",
+    "fidelity/palette.gdshader": "c5897f00cc44319c25bc69ce994a0e6864e60a88944294565f9e2fcc34558e91",
+    "fidelity/food_glaze.gdshader": "75d79551d9715bf8796490fcb5bfe63cb508622074bcc12b57fc7491893526b2",
+    "fidelity/hole_reveal_standard.gdshader": "ce257b4dbc3cea64d6f0b09110dba09584acea7ac4b1703bfb3a0c9779e20834",
+    "fidelity/hole_reveal.gdshaderinc": "171e449e1c3104cc9db0ca1fec1603c55ea5af67b79430e98a4e4bed3e15722f",
+    "tools/validate_mobile_visual_shaders.py": "11ec9e24755a0d034a01da91dd64384720a93295f0b6a074c1f5bd40b5728bc3",
+    "tools/visual_shader_probe.m": "153d183431b30ba4f7c98888a047b32315e7a3347db80a1559403422139ef9c6"
+  },
+  "failures": []
+}

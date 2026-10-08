@@ -1,0 +1,25 @@
+{
+  "checks": 30,
+  "failures": [],
+  "observations": [
+    {
+      "game_processing": true,
+      "home_frames": 30,
+      "map": "city",
+      "player_freed": true,
+      "returned_from": "results",
+      "reveal_strength": 0.0,
+      "ui_animation_delta": 0.499999999999998
+    },
+    {
+      "game_processing": true,
+      "home_frames": 30,
+      "map": "food",
+      "player_freed": true,
+      "returned_from": "pause",
+      "reveal_strength": 0.0,
+      "ui_animation_delta": 0.499999999999998
+    }
+  ],
+  "scope": "Natural game/menu lifecycle without disabling Game._process; active geometry/material behavior additionally checked by the unmodified selective-reveal suite. No renderer or device-performance claim."
+}

@@ -1,0 +1,49 @@
+{
+  "status": "audio assets frozen; author asset/functional acceptance complete; legacy duration fixture maintenance assigned to independent reviewer",
+  "hashes": {
+    "tools/build_music.py": "ade0fd3054367acb9955effd05c2f1397f6e685677ba490d88bcb0bae1299a79",
+    "fidelity/audio.gd": "30775280c6450bc9d3ee3cf4a03da44fe811ae4846dc1bef7b36eea6c2f618e5",
+    "fidelity/audio_bus_layout.tres": "a8b1b249f22929c4305c60424b0c35a0b1734c1ed5d7b1ab36fa2348d0bf4c56",
+    "assets/audio/README.md": "7f2fe1ecc461e6426592031c1a8867fc948b00847f9361be8325d35fc9ccf706",
+    "assets/audio/music_manifest.json": "2596187b19adfc675ee87babdb3e947650b943fa2958cad10f652778f4bf65f1",
+    "assets/audio/rebuild_verification.json": "49e2a231fe1bf0f571ebf824152d6c2b7880d0ce3646e875e06652045142fc20",
+    "assets/audio/sunny_city_loop.ogg": "bcf2e7af8fa53a568b287a03e6034ae6631f0694b6e2d17692b9c47943868c25",
+    "assets/audio/snack_garden_loop.ogg": "a12e247ad82b7098b7cbc0c1dff191661c92e1d88d4660510091567e935ae92e",
+    "assets/audio/sunny_city_loop.ogg.import": "c2e5d77accbcf5a12e53a4a4dbca87ba327ace693f3c6ccb86577d4e4ee7b454",
+    "assets/audio/snack_garden_loop.ogg.import": "c68af194dc74bbe7e67bd9fc7d695a8863a8c76759f7ae63f629b2be1e148be4"
+  },
+  "author_checks": {
+    "decoded_file": 24,
+    "arrangement_comparison_and_rebuild": 102,
+    "music_acceptance": 125
+  },
+  "old_review": {
+    "checks": 118,
+    "failed_checks": [
+      "obsolete Sunny City duration=32 seconds; new score is 16 bars at104 BPM=36.92308s"
+    ],
+    "artifact": "artifacts/feel-20260930/audio/music_review.json",
+    "maintenance_owner": "independent reviewer"
+  },
+  "changed_scope": [
+    "tools/build_music.py",
+    "assets/audio/*.ogg",
+    "assets/audio/music_manifest.json",
+    "assets/audio/rebuild_verification.json",
+    "assets/audio/README.md"
+  ],
+  "unchanged": [
+    "fidelity/audio.gd",
+    "fidelity/audio_bus_layout.tres",
+    "saved preferences",
+    "v0.10 release files"
+  ],
+  "helpers": "All owned generator/ffmpeg/import/Godot helpers have exited; no foreground or speaker playback.",
+  "limits": "No subjective listening acceptance or phone/web audio performance certification. Signal analysis and score review are not a substitute for the user auditioning the supplied preview.",
+  "independent_review": {
+    "reviewer": "Erdos / expand_skin_catalog",
+    "reported_result": "128 independent audio checks passed; maintained music_review 118 passed strict",
+    "evidence": "artifacts/feel-20260930/audio-independent/",
+    "scope": "Reported by the independent reviewer after own file/decode/score and runtime review; no subjective audition."
+  }
+}

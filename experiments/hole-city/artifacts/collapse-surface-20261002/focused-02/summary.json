@@ -1,0 +1,46 @@
+{
+  "ok": false,
+  "failed_suite": "rim_fall",
+  "error": "'rim_fall'",
+  "results": [
+    {
+      "suite": "building_surface_artifacts",
+      "checks": 1438,
+      "minimum": 1438,
+      "report_sha256": "575ed2bc549c5380e90621a14225a2a921395bf3c05d12010f633ca85ff3844f"
+    },
+    {
+      "suite": "selective_reveal",
+      "checks": 75,
+      "minimum": 75,
+      "report_sha256": "4c7756bad88b2201ba38b1e5392d04d81134cdeac4e6087ffd6850a47574f447"
+    },
+    {
+      "suite": "selective_reveal_review",
+      "checks": 491,
+      "minimum": 491,
+      "report_sha256": "4f914d8d693331b280d175df303abfc80b9cdd9c771810e32f7385bb7501b749"
+    },
+    {
+      "suite": "building_only_reveal_review",
+      "checks": 213,
+      "minimum": 213,
+      "report_sha256": "9b4d0ef17237a39746d73cd213af961d5c7ec9680d359f9dbcefef6a693fe2e4"
+    },
+    {
+      "suite": "full_city_qa",
+      "checks": 1539,
+      "minimum": 600,
+      "report_sha256": "feed022b5a4a10d7eb392848d731a643e523fa768cffe43fd5c451ec175ab365"
+    },
+    {
+      "suite": "scene_qa",
+      "checks": 765,
+      "minimum": 400,
+      "report_sha256": "145ad89bed5701592258949010c321d1b2dcb8882faa9d4f5e750fc1ff1b1bdc"
+    }
+  ],
+  "unchanged_inputs": true,
+  "elapsed_seconds": 79.245,
+  "scope": "Serial source-only focused headless acceptance; no full gate, GPU, native build or phone action"
+}

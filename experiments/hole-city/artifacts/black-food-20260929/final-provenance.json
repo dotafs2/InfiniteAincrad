@@ -1,0 +1,32 @@
+{
+  "runtime_and_test_sha256": {
+    "fidelity/food_city.gd": "4a98288a9d9698829c41010b50f66de87b1d6aeafea2f7b58a48fdcf66f54fd4",
+    "fidelity/food_glaze.gdshader": "54a890cdf065e4613a203e7fc9834d4440dd73d27ab6a47e3179aa27f721e2cc",
+    "fidelity/food_preview.gd": "ffeb9e939e03de4b0aaeb1ea11a7f2a3fc645c4b6bc66fa022b14bad7f69df9b",
+    "fidelity/food_shapes.gd": "83808ada67a6dca18fe0597f16d8923912aab9a82aa34e98af3e3199f08fa496",
+    "fidelity/food_surface.gd": "86fecdfb022611d5a03d9b7938abca41e55083498aa5d703ebb898a878fb2a5b",
+    "fidelity/mesh_batch.gd": "ee226d2766047943300b3626e6a7fa9d86fce91ef815c3bdc44b3602ec821f26",
+    "tests/food_color_acceptance.gd": "cb63e24b7d3b1a493e84129c12ec929a37476d59af2da9dd6db86cce07a5bfe5"
+  },
+  "unchanged_appearance_files": {
+    "fidelity/food_glaze.gdshader": true,
+    "fidelity/food_preview.gd": true,
+    "fidelity/food_shapes.gd": true,
+    "fidelity/food_surface.gd": true,
+    "fidelity/mesh_batch.gd": true
+  },
+  "old_pck_sha256": "27913ff7c5e0455c163090dfbffcecd2a36a83ce2106be599f27a27724b40fab",
+  "source_trace_sha256": "1f748ed27fa8e317bb89c739b43c6ac60ee69eb15781d750bde5ad8d474f6605",
+  "trace_report_sha256": "db2109a1cee89bef38b38bd920ff8b3a16b84b0bc5fd5c40b9e0713809a2c594",
+  "gpu_probe_sha256": "0ce264a198780e7709829977d6aabf3882bf0e14d04079ec00082c3366b339ad",
+  "gpu_report_sha256": "0bc59765504cad8328c9f33b0db3d9d9b175f20744f7b362fe3d436c4a23f6eb",
+  "upstream_revision": "ed1daf0bf",
+  "upstream_sha256": {
+    "material.cpp": "1e0c14e2ca82d14cc8896fb79aff95dc01e002db93718f6e31a1c0509ded1453",
+    "material_storage.cpp": "8fa1b214a67605a5e3deeed941711933c4f4e6ccd96691ac55e78f993ffefcd7",
+    "mesh_storage.cpp": "799e81b40f02ebf9dc330b2279304502b6847410f4f61bd8ba404dd09d5d03e1",
+    "scene-ed1daf0bf.glsl": "2c77be0c85b7ab1a85ed8009c77cdb6216f1494d43083592213ad68f9e812977",
+    "scene-master.glsl": "53a44f0900e11e76209d44fdca5e1b2a759dc8a73aacb97ba17aae9587997cf1"
+  },
+  "scope": "Food batch attribute identity fix. GPU evidence is isolated CGL execution, not a native Godot scene or browser capture."
+}

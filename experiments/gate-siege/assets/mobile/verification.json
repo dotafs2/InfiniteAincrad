@@ -1,0 +1,44 @@
+{
+  "source_originals_unchanged": true,
+  "model_checks": [
+    {
+      "name": "zombie_near",
+      "max_bounds_error": 0.0,
+      "geometry_and_gpu_import_match": true
+    },
+    {
+      "name": "zombie_mid",
+      "max_bounds_error": 0.0,
+      "geometry_and_gpu_import_match": true
+    },
+    {
+      "name": "zombie_far",
+      "max_bounds_error": 0.0,
+      "geometry_and_gpu_import_match": true
+    },
+    {
+      "name": "infantry",
+      "max_bounds_error": 0.0,
+      "geometry_and_gpu_import_match": true
+    },
+    {
+      "name": "gunner",
+      "max_bounds_error": 0.0,
+      "geometry_and_gpu_import_match": true
+    },
+    {
+      "name": "mech",
+      "max_bounds_error": 0.0,
+      "geometry_and_gpu_import_match": true
+    }
+  ],
+  "all_budgets_and_gpu_imports_pass": true,
+  "builder_sha256": "787cbba92f62bc6ce42a2bee56769f29a7d35ff2ef3d15db5f49490548a331c3",
+  "contact_sha256": "810c413381125a799062fdcf72cdcc720306874365eeb25fc30e8d38b4b40593",
+  "device_fps_claim": null,
+  "original_544_crowd_triangles": 1059712,
+  "near_544_crowd_triangles": 174080,
+  "mid_544_crowd_triangles": 78336,
+  "far_544_crowd_triangles": 35904,
+  "accepted_gameplay_crowd_count": 544
+}

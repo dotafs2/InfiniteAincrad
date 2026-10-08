@@ -1,0 +1,39 @@
+{
+  "input_sha256": {
+    "tools/build_food_neighborhoods.py": "c29ddf4ee9021be43d3e884f87b8f39baa107d3f59062e292f37336b1a9fb68f",
+    "assets/food_city/neighborhoods.json": "86decaffa2e1385d118033d2304e1e490727f79d09be51bf7f1c980ebd10eda0",
+    "assets/food_city/streets.png": "e2b1c3d2f40a777cc5123eed9449a064a31459f8349079ff448094d028db36cb",
+    "assets/food_city/streets.png.import": "996eeb37acf3820402c56b79ed7deb9e4b500cf8ec10518037c5f37514f833db",
+    "tests/perimeter_frontage_acceptance.gd": "871034ee40be845356913d616d551f67f0ab36de79fb3c1807b3b38d6b7ed21a",
+    "tests/procedural_filtering_acceptance.gd": "da5068300b5938033043f725b1c16332ab45390ba59a92f0c591d722661864bf",
+    "tests/food_city_density_acceptance.gd": "a259be1f12b84e9f063a53e081dae34ab7859e3bb4e018181bfc8f1721e37d56"
+  },
+  "author_suites": {
+    "perimeter_frontage": {
+      "checks": 630,
+      "failures": [],
+      "sha256": "931fa19924d36d01b77bead356c40475d7cd97c8aab9fed94370fc187b98ee60"
+    },
+    "food_neighborhoods": {
+      "checks": 323,
+      "failures": [],
+      "sha256": "3bb9fe53b2bba082dea7d48833db2d6619c72b930a6cb9aca0ed1f0efcd68a3c"
+    },
+    "procedural_filtering": {
+      "checks": 27,
+      "failures": [],
+      "sha256": "06f1d63b6610e4e8994add114d642aab55df31f9ea6cc27e9e3d7b2ab1ab2237"
+    },
+    "world_expansion": {
+      "checks": 57,
+      "failures": [],
+      "sha256": "f554a27410abb1fae42c2959dfdcde740917f55ee5e30e12a75861d971dacb92"
+    }
+  },
+  "initial_bodies": 2922,
+  "shared_meshes": 34,
+  "extension_bodies": 334,
+  "all_owned_helpers_exited": true,
+  "density_threshold_unchanged": 0.12,
+  "scope": "Final density correction; independent reviews and full source/PCK acceptance are separate."
+}

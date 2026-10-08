@@ -1,0 +1,41 @@
+{
+  "verified_utc": "2026-10-04T16:30:32.233718+00:00",
+  "version": "0.13.0",
+  "build": "30",
+  "bundle_identifier": "io.github.dotafs2.sinkcity",
+  "official_upload_succeeded": true,
+  "apple_processing_started": true,
+  "apple_processing_complete": false,
+  "internal_test_available": false,
+  "official_uploaded_utc": "2026-10-04T16:25:45Z",
+  "official_success_marker": "UPLOAD SUCCEEDED with no errors",
+  "retained_original_wrapper_exit_code": 1,
+  "wrapper_exit_explanation": "Xcode appended a successful Distributions event to archive Info.plist; all other archive bytes and all original core metadata are identical.",
+  "changed_archive_paths": [
+    "Info.plist"
+  ],
+  "original_core_archive_metadata_identical": true,
+  "archive_app_and_symbols_identical": true,
+  "strict_archive_signature_valid": true,
+  "guarded_inputs_unchanged": 838,
+  "native_pck_suites": 23,
+  "native_pck_checks": 23560,
+  "native_pck_sha256": "0eb2803816d61d07b9fe75e8d741d8205e81774527486f80b3e471eda19b010c",
+  "original_upload_result_sha256": "7ea2b0bbece0750411171debca0b4fff2bcbbd582f05a1c4af5351900fad2e81",
+  "original_static_readiness_sha256": "aaaa2f1046838494f2bbb212de54a0792b3d30d64fe39b20c75d8dd2082af7da",
+  "archive_info_before_sha256": "a8b8aa72071394cbab943d4780530edb2c6bac2f6e696dca5e76ecb07a69a5dc",
+  "archive_info_after_sha256": "a780839cb1177d87aced0cd644017a985d66482cbf4634ac5380741e0b2e3130",
+  "local_completed_ipa_sha256": "6592f9e968bc059b4df11df15df5b160eece23166008529f4d2cb94a56364705",
+  "private_official_log_sha256": {
+    "IDEDistributionProvisioning.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "DVTITunesSoftwareService.log": "6bbaf92ff3ef8104f2f8a6e9bd033c520521186681b650f574393aad97374b7a",
+    "IDEDistribution.standard.log": "8d6b15496f004e332ea989b7c60385f4a8185c5a09aaf621f14dbc188e0122c9",
+    "IDEDistributionPipeline.log": "9f0855d5b880dc3599b197988d3464f3d96b08573363a25d71a1fd82ee446a37",
+    "ContentDelivery.log": "7f5b2103e659c95cd9d760576d3b0850470e95a05206b479775251b2d9a6b0d9",
+    "IDEDistribution.critical.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "IDEDistributionAppStoreConnect.log": "7a4460fd5cec15a774e60a29c824774a357d864f60cc8f9ea0429eadc6e1414e",
+    "IDEDistribution.verbose.log": "5a07dc4cd6fa45a14f693b4d033e7b0622629777f8be47ed489f1b0163684d89"
+  },
+  "verification_helper_sha256": "a52ffb9572b2d5417fa77a77550a905100a495e82fc352746d998ef1f9d97de9",
+  "scope": "Read-only evidence reconciliation after official upload. No new upload, source change, gate execution, App Review submission or physical device installation."
+}

@@ -1,0 +1,17 @@
+{
+  "checks": 1120,
+  "evidence": {
+    "colored_vertices": 47027,
+    "native_color_writes_observed": 2679,
+    "rain_capacity": 64,
+    "rain_population": 34,
+    "scope": "Headless real scene flags/geometry and transparent production setter instrumentation; no GPU getter or browser pixel claim.",
+    "shader_sha256": "54a890cdf065e4613a203e7fc9834d4440dd73d27ab6a47e3179aa27f721e2cc",
+    "source_sha256": "4a98288a9d9698829c41010b50f66de87b1d6aeafea2f7b58a48fdcf66f54fd4",
+    "static_batches": 527
+  },
+  "failures": [
+    "New settled food reuses the vacated batch capacity",
+    "Engine process failed; inspect the engine log"
+  ]
+}

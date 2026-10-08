@@ -1,0 +1,303 @@
+--- baseline/fidelity/game.gd
++++ current/fidelity/game.gd
+@@ -102,6 +102,8 @@
+ var skin_progress:=0
+ var owned_skin_ids:Array[String]=[Rarity.NEW_PLAYER_SKIN]
+ var draw_pity:Dictionary={"foundation":SkinDraw.clean_counters({}),"resonance":SkinDraw.clean_counters({})}
++var skin_case_serial:=0
++var skin_case_receipt:Dictionary={}
+ var completed_runs:=0
+ var best_scores:Dictionary={"city":0,"food":0,"toys":0,"frost":0}
+ var unlocked_map_ids:Array[String]=["city"]
+@@ -588,11 +590,91 @@
+ 		# Carry the strongest existing guarantee in each tier into the unified
+ 		# collection. Do not erase legacy counters or fabricate extra draws.
+ 		for tier in SkinDraw.GUARANTEES:
+-			counters[tier]=maxi(int(draw_pity.foundation.get(tier,0)),int(draw_pity.resonance.get(tier,0)))
++			counters[tier]=maxi(int(draw_pity.get("foundation",{}).get(tier,0)),int(draw_pity.get("resonance",{}).get(tier,0)))
+ 	return SkinDraw.offer(SKIN_DEFS,owned_skin_ids,group,counters)
+ 
+ func unlock_random_skin(group:String)->Dictionary:
++	# Kept for legacy callers; the visible case flow uses one collection and
++	# postpones equipment until the result's explicit EQUIP action.
++	return _commit_skin_draw(group,false)
++
++func _skin_case_odds(offer:Dictionary)->Dictionary:
++	var entries:Array[Dictionary]=[]
++	for entry:Dictionary in offer.entries:
++		entries.append({"rarity":str(entry.rarity),"weight":int(entry.weight),"count":entry.ids.size(),"chance":float(entry.chance)})
++	return {"entries":entries,"total_weight":int(offer.total_weight),"guarantee":str(offer.guarantee),"counters":offer.counters.duplicate(true)}
++
++func _clean_skin_case_receipt(value:Variant)->Dictionary:
++	# A receipt describes an already-owned award. It is never an entitlement,
++	# a debit instruction, or a reason to reroll after cold restore.
++	if not value is Dictionary or value.get("schema")!=1:return {}
++	var serial:Variant=value.get("serial")
++	var id:Variant=value.get("id")
++	var case_id:Variant=value.get("case_id")
++	var rarity:Variant=value.get("rarity")
++	var price:Variant=value.get("price")
++	var seed_value:Variant=value.get("presentation_seed")
++	if not serial is int or serial<=0:return {}
++	if not case_id is String or case_id!="skin-case-%d"%serial:return {}
++	if not id is String or not skin_unlocked(id):return {}
++	if not rarity is String or Rarity.index_of(rarity)<0:return {}
++	if not price is int or price!=COIN_DRAW_PRICE:return {}
++	if not seed_value is int or seed_value<0 or seed_value>2147483647:return {}
++	var raw_odds:Variant=value.get("odds")
++	if not raw_odds is Dictionary:return {}
++	var raw_entries:Variant=raw_odds.get("entries")
++	if not raw_entries is Array or raw_entries.size()!=Rarity.ORDER.size():return {}
++	var entries:Array[Dictionary]=[]
++	var total:=0
++	var total_count:=0
++	var winning_tier_present:=false
++	for index in Rarity.ORDER.size():
++		var entry:Variant=raw_entries[index]
++		if not entry is Dictionary or entry.get("rarity")!=Rarity.ORDER[index]:return {}
++		var count:Variant=entry.get("count")
++		var weight:Variant=entry.get("weight")
++		if not count is int or count<0 or count>SKIN_DEFS.size():return {}
++		if not weight is int or weight<0 or weight>10000 or count==0 and weight!=0:return {}
++		total+=int(weight);total_count+=int(count)
++		if entry.rarity==rarity:winning_tier_present=count>0 and weight>0
++		entries.append({"rarity":Rarity.ORDER[index],"weight":int(weight),"count":int(count),"chance":0.0})
++	if total<=0 or total_count>SKIN_DEFS.size() or not winning_tier_present:return {}
++	if not raw_odds.get("total_weight") is int or raw_odds.total_weight!=total:return {}
++	var guarantee:Variant=raw_odds.get("guarantee","")
++	var counters:Variant=raw_odds.get("counters")
++	if not guarantee is String or (not guarantee.is_empty() and not SkinDraw.GUARANTEES.has(guarantee)):return {}
++	if not counters is Dictionary:return {}
++	for tier in SkinDraw.GUARANTEES:
++		if not counters.get(tier) is int:return {}
++	for entry:Dictionary in entries:entry.chance=float(entry.weight)/float(total)
++	return {"schema":1,"serial":int(serial),"case_id":str(case_id),"id":str(id),"rarity":str(rarity),"price":int(price),"presentation_seed":int(seed_value),
++		"odds":{"entries":entries,"total_weight":total,"guarantee":str(guarantee),"counters":SkinDraw.clean_counters(counters)}}
++
++func pending_skin_case()->Dictionary:
++	return _clean_skin_case_receipt(skin_case_receipt)
++
++func open_skin_case()->Dictionary:
++	if phase!="title":return {"ok":false,"message":"Return home to open cases"}
++	var pending:=pending_skin_case()
++	if not pending.is_empty():
++		pending.merge({"ok":true,"resumed":true},true)
++		return pending
++	return _commit_skin_draw("collection",true)
++
++func acknowledge_skin_case(case_id:String)->bool:
++	# A delayed callback from an earlier opening cannot dismiss a new result.
++	if case_id.is_empty() or skin_case_receipt.get("case_id","")!=case_id:return false
++	var previous:Dictionary=skin_case_receipt.duplicate(true)
++	skin_case_receipt={}
++	if not save_player_progress():
++		skin_case_receipt=previous
++		return false
++	return true
++
++func _commit_skin_draw(group:String,case_opening:bool)->Dictionary:
+ 	if phase!="title":return {"ok":false,"message":"Return home to unlock skins"}
++	if not pending_skin_case().is_empty():return {"ok":false,"message":"Finish your current case first"}
++	if case_opening and skin_case_serial>=9223372036854775806:return {"ok":false,"message":"Case unavailable"}
+ 	var pool:=locked_skin_ids(group)
+ 	if pool.is_empty():return {"ok":false,"message":"COLLECTION COMPLETE"}
+ 	var price:=skin_unlock_price(group)
+@@ -606,13 +688,25 @@
+ 	if id.is_empty():return {"ok":false,"message":"COLLECTION COMPLETE"}
+ 	var previous_skin:=selected_skin_id
+ 	var previous_pity:Dictionary=draw_pity.duplicate(true)
+-	coins-=price;owned_skin_ids.append(id);selected_skin_id=id
++	var previous_case:Dictionary=skin_case_receipt.duplicate(true)
++	var previous_serial:=skin_case_serial
++	coins-=price;owned_skin_ids.append(id)
++	if not case_opening:selected_skin_id=id
+ 	draw_pity[group]=SkinDraw.advance(offer.counters,str(skin_definition(id).rarity))
++	if case_opening:
++		skin_case_serial+=1
++		skin_case_receipt={"schema":1,"serial":skin_case_serial,"case_id":"skin-case-%d"%skin_case_serial,"id":id,"rarity":str(skin_definition(id).rarity),
++			"price":price,"presentation_seed":randi_range(1,2147483646),"odds":_skin_case_odds(offer)}
+ 	if not save_player_progress():
+ 		coins+=price;owned_skin_ids.erase(id);selected_skin_id=previous_skin
+ 		draw_pity=previous_pity
++		skin_case_receipt=previous_case;skin_case_serial=previous_serial
+ 		return {"ok":false,"message":"Could not save. No coins spent."}
+ 	last_unlock_msec=Time.get_ticks_msec()
++	if case_opening:
++		var result:=pending_skin_case()
++		result.merge({"ok":true,"resumed":false},true)
++		return result
+ 	return {"ok":true,"id":id,"price":price,"rarity":skin_definition(id).rarity}
+ 
+ func unlocked_skin_count(group:String)->int:
+@@ -702,6 +796,10 @@
+ 		for group in draw_pity:
+ 			if saved_pity.get(group) is Dictionary:draw_pity[group]=SkinDraw.clean_counters(saved_pity[group])
+ 		if saved_pity.get("collection") is Dictionary:draw_pity.collection=SkinDraw.clean_counters(saved_pity.collection)
++	var saved_case_serial:Variant=cfg.get_value("collection","case_serial",0)
++	skin_case_serial=maxi(0,int(saved_case_serial)) if saved_case_serial is int else 0
++	skin_case_receipt=_clean_skin_case_receipt(cfg.get_value("collection","pending_case",{}))
++	if not skin_case_receipt.is_empty():skin_case_serial=maxi(skin_case_serial,int(skin_case_receipt.serial))
+ 	completed_runs=maxi(0,int(cfg.get_value("progress","completed_runs",0)))
+ 	round_serial=maxi(0,int(cfg.get_value("progress","round_serial",0)))
+ 	var saved_best=cfg.get_value("progress","best_scores",{})
+@@ -781,6 +879,8 @@
+ 	cfg.set_value("progress","unlocked_map_ids",unlocked_map_ids)
+ 	cfg.set_value("progress","map_completed_best_scores",map_completed_best_scores)
+ 	cfg.set_value("collection","pity",draw_pity)
++	cfg.set_value("collection","case_serial",skin_case_serial)
++	cfg.set_value("collection","pending_case",skin_case_receipt)
+ 	cfg.set_value("rewards","rounds",reward_receipts)
+ 	cfg.set_value("rewards","purchases",redeemed_transactions)
+ 	cfg.set_value("rewards","video_requests",rewarded_requests)
+--- baseline/fidelity/ui.gd
++++ current/fidelity/ui.gd
+@@ -9,6 +9,7 @@
+ const SkinVisual=preload("res://fidelity/skin_visual.gd")
+ const Rarity=preload("res://fidelity/skin_rarity.gd")
+ const MapCatalog=preload("res://fidelity/map_catalog.gd")
++const CaseOpening=preload("res://fidelity/case_opening.gd")
+ const MapCarousel=preload("res://fidelity/map_carousel.gd")
+ const ReleaseInfo=preload("res://fidelity/release_info.gd")
+ const ViewportLayout=preload("res://fidelity/viewport_layout.gd")
+@@ -18,6 +19,8 @@
+ var game:Node3D
+ var font:Font
+ var buttons:Array[Button]=[]
++var case_opening:Control
++var rates_return:="holes"
+ var map_carousel:Control
+ var home_play_button:Button
+ var hero:TextureRect
+@@ -95,6 +98,8 @@
+ 	make_map_carousel()
+ 	make_skin_preview()
+ 	make_skin_collection()
++	case_opening=CaseOpening.new();case_opening.ui=self;case_opening.game=game
++	add_child(case_opening);case_opening.hide()
+ 	refresh()
+ 
+ func make_skin_collection()->void:
+@@ -449,7 +454,7 @@
+ 	apply_skin_preview(skin_id)
+ 	var definition:Dictionary=game.skin_definition(skin_id)
+ 	if not game.skin_unlocked(skin_id):
+-		toast="Use UNLOCK RANDOM to get new skins"
++		toast="Open a case to discover a new skin"
+ 		toast_time=1.5
+ 	else:
+ 		var equipped:bool=game.select_skin(skin_id)
+@@ -500,7 +505,11 @@
+ 		skin_view.render_target_update_mode=SubViewport.UPDATE_ALWAYS if skin_texture.visible else SubViewport.UPDATE_DISABLED
+ 		apply_skin_preview(preview_skin_id)
+ 		skin_preview.set_process(skin_texture.visible)
+-	if game.phase=="title" and menu_screen=="home":
++	if is_instance_valid(case_opening):
++		case_opening.visible=game.phase=="title" and menu_screen=="case"
++	if game.phase=="title" and menu_screen=="case":
++		case_opening.controls()
++	elif game.phase=="title" and menu_screen=="home":
+ 		var settings:=button(Rect2(412,20,104,64),"SETTINGS",open_settings,Color("638be7"))
+ 		settings.name="home-settings";settings.add_theme_font_size_override("font_size",14)
+ 		home_play_button=button(Rect2(86,744,368,82),"PLAY",play_focused_map,Color("ffa51c"))
+@@ -520,8 +529,8 @@
+ 			slot_hotspot(slot_rect(index),ids[index])
+ 		focus_card_previews()
+ 		var unlock:=hotspot("unlock-random",Rect2(90,757,360,81),request_unlock)
+-		unlock.disabled=game.locked_skin_ids(active_skin_group()).is_empty() or unlock_feedback_time>0
+-		unlock.tooltip_text="Spend coins to unlock one unowned skin from the entire collection"
++		unlock.disabled=game.locked_skin_ids(active_skin_group()).is_empty() and game.pending_skin_case().is_empty()
++		unlock.tooltip_text="Preview the skin case and its current odds"
+ 		make_navigation("holes")
+ 	elif game.phase=="title" and menu_screen=="store":
+ 		hotspot("store-diamond-video",STORE_VIDEO_RECT,request_diamond_video)
+@@ -591,10 +600,11 @@
+ 	menu_screen="home";map_carousel.focus_map(id,true,true)
+ 
+ func open_rates()->void:
++	rates_return=menu_screen
+ 	menu_screen="rates";toast_time=0;refresh()
+ 
+ func close_rates()->void:
+-	menu_screen="holes";toast_time=0;refresh()
++	menu_screen=rates_return;toast_time=0;refresh()
+ 
+ func open_purchases()->void:
+ 	menu_screen="purchases";toast_time=0;refresh()
+@@ -761,17 +771,9 @@
+ 	return "collection"
+ 
+ func request_unlock()->void:
+-	if unlock_feedback_time>0:return
+-	var result:Dictionary=game.unlock_random_skin(active_skin_group())
+-	if result.ok:
+-		preview_skin_id=result.id
+-		scroll_to_skin(preview_skin_id)
+-		unlock_feedback_time=1.0
+-		toast="%s UNLOCKED!"%game.skin_definition(result.id).name
+-		apply_skin_preview(result.id)
+-	else:toast=result.message
+-	toast_time=2.5
+-	refresh()
++	if menu_screen=="case":return
++	menu_screen="case";toast_time=0
++	case_opening.enter();refresh()
+ 
+ func request_skin_skill() -> void:
+ 	if is_instance_valid(game.player) and game.player.trigger_skin_skill():
+@@ -900,7 +902,9 @@
+ 			drag_skin_collection(canvas_point(event.position),event.velocity/scale)
+ 			get_viewport().set_input_as_handled()
+ 	if event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_ESCAPE:
+-		if game.phase=="title" and menu_screen!="home":close_menu()
++		if game.phase=="title" and menu_screen=="case":case_opening.back()
++		elif game.phase=="title" and menu_screen=="rates":close_rates()
++		elif game.phase=="title" and menu_screen!="home":close_menu()
+ 		else:game.toggle_pause()
+ 		get_viewport().set_input_as_handled()
+ 
+@@ -988,6 +992,7 @@
+ func _draw() -> void:
+ 	if font==null:return
+ 	if game.phase=="title":contour_wallpaper()
++	if game.phase=="title" and menu_screen=="case":return
+ 	if game.phase=="title" and menu_screen=="rates":draw_rates();return
+ 	if game.phase=="title" and menu_screen=="purchases":draw_purchases();return
+ 	if game.phase=="title" and menu_screen=="settings":draw_settings();return
+@@ -1082,7 +1087,7 @@
+ func draw_rates()->void:
+ 	contour_wallpaper()
+ 	text_center("SKIN CHANCES",Vector2(270,132),36,PAPER)
+-	text_center("ALL 44 SKINS · ONE COLLECTION",Vector2(270,162),18,PAPER,false)
++	text_center("ALL %d SKINS · ONE COLLECTION"%game.SKIN_DEFS.size(),Vector2(270,162),18,PAPER,false)
+ 	var offer:Dictionary=game.skin_draw_offer(active_skin_group())
+ 	for i in Rarity.ORDER.size():
+ 		var entry:Dictionary=offer.entries[i]
+@@ -1202,7 +1207,7 @@
+ 	var affordable:bool=game.coins>=price
+ 	var color:=Color("54c532") if affordable and not complete else Color("849cb2")
+ 	box(Rect2(90,757,360,81),color,19,Color("bdf978") if affordable and not complete else Color("d1dfec"),3)
+-	text_center("COLLECTION COMPLETE" if complete else "UNLOCK RANDOM",Vector2(270,791),24 if complete else 28,PAPER)
++	text_center("VIEW RESULT" if not game.pending_skin_case().is_empty() else "COLLECTION COMPLETE" if complete else "OPEN CASE",Vector2(270,791),24 if complete else 28,PAPER)
+ 	if not complete:
+ 		icon("coin",Vector2(238,818),30)
+ 		text_center(str(price),Vector2(288,828),24,PAPER)
+--- baseline/tools/release_web.py
++++ current/tools/release_web.py
+@@ -28,7 +28,7 @@
+           ("claim_recovery", [], 8), ("full_city_qa", [], 600), ("skin_collection", [], 350),
+           ("skin_fx", [], 100), ("title_navigation", [], 25), ("ui_redesign", [], 150),
+           ("map_carousel", [], 450), ("map_unlock", [], 90), ("food_preview", [], 483),
+-          ("coin_skins", [], 80), ("skin_skill", [], 20),
++          ("coin_skins", [], 80), ("skin_case_transaction", [], 130), ("skin_case_ui", [], 540), ("skin_case_audio", [], 70), ("skin_skill", [], 20),
+           ("snack_city", [], 80), ("food_city_density", [], 1000), ("food_round", [], 2),
+           ("food_finish", [], 136), ("food_neighborhoods", [], 150), ("mobile_maps", [], 25),
+           ("performance", ["--reference-ground="+str(ROOT/"tests/fixtures/ground_before_performance.gd")], 260),
+@@ -171,7 +171,7 @@
+               ROOT / "tools/runtime_licenses.gd", ROOT / "tests/test_web_notices.py",
+               ROOT / "LICENSE", ROOT / "THIRD_PARTY.md", ROOT / "third_party/mbmayer/LICENSE",
+               ROOT / "tools/build_actor_recipes.py", ROOT / "tools/build_food_neighborhoods.py", ROOT / "tools/build_ui_icons.py", ROOT / "tools/build_music.py",
+-              ROOT / "tests/map_thumbnail_capture.gd", ROOT / "tools/build_frost_blender_assets.py", ROOT / "art_source/frostlight/frostlight_assets.blend",
++              ROOT / "tools/build_case_audio.py", ROOT / "tools/bake_skin_case_thumbnails.gd", ROOT / "tests/map_thumbnail_capture.gd", ROOT / "tools/build_frost_blender_assets.py", ROOT / "art_source/frostlight/frostlight_assets.blend",
+               ROOT / "art_source/frostlight/asset-manifest.json", ROOT / "tools/build_train_assets.py", ROOT / "tools/build_fairytale_castles.py", ROOT / "art_source/.gdignore",
+               ROOT / "art_source/trains/train_assets.blend", ROOT / "art_source/trains/validate_assets.py",
+               *[ROOT / "tests" / suite_script(suite) for suite, _, _ in SUITES]]

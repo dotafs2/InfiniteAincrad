@@ -1,0 +1,63 @@
+{
+	"grown_city_update": {
+		"p50_ms": 1.204,
+		"p95_ms": 1.688,
+		"samples": 120
+	},
+	"grown_geometry": {
+		"camera_batch_triangles": 41168,
+		"camera_surface_submissions": 141,
+		"multimeshes": 0,
+		"override_materials": 612,
+		"scene_surface_submissions": 970,
+		"scene_triangles": 508882,
+		"scope": "Conservative geometry inventory; excludes UI, shadow passes and GPU timings",
+		"unique_meshes": 765
+	},
+	"grown_ground": {
+		"p50_ms": 1.414,
+		"p95_ms": 1.634,
+		"samples": 120
+	},
+	"grown_nearest_eight": {
+		"p50_ms": 4.285,
+		"p95_ms": 4.995,
+		"samples": 40
+	},
+	"grown_scan": {
+		"p50_ms": 4.394,
+		"p95_ms": 4.731,
+		"samples": 40
+	},
+	"map": "city",
+	"opening_city_update": {
+		"p50_ms": 1.156,
+		"p95_ms": 1.62,
+		"samples": 120
+	},
+	"opening_geometry": {
+		"camera_batch_triangles": 105734,
+		"camera_surface_submissions": 165,
+		"multimeshes": 0,
+		"override_materials": 612,
+		"scene_surface_submissions": 970,
+		"scene_triangles": 507766,
+		"scope": "Conservative geometry inventory; excludes UI, shadow passes and GPU timings",
+		"unique_meshes": 765
+	},
+	"opening_ground": {
+		"p50_ms": 1.848,
+		"p95_ms": 2.081,
+		"samples": 120
+	},
+	"opening_nearest_eight": {
+		"p50_ms": 3.4,
+		"p95_ms": 4.228,
+		"samples": 40
+	},
+	"opening_scan": {
+		"p50_ms": 3.615,
+		"p95_ms": 4.41,
+		"samples": 40
+	}
+}

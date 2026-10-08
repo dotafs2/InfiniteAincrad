@@ -1,0 +1,325 @@
+"""Compile current visual shader equations in an isolated windowless GL harness.
+
+This supplements headless scene QA. It is not Godot rendering, a browser
+capture, or evidence of iPhone GPU performance. No game/runtime state is used.
+"""
+from pathlib import Path
+import argparse
+import hashlib
+import json
+import re
+import subprocess
+import tempfile
+import math
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def expand(path):
+    code = path.read_text()
+    def include(match):
+        name = match.group(1)
+        target = ROOT / name[6:] if name.startswith('res://') else path.parent / name
+        return expand(target)
+    return re.sub(r'^\s*#include\s+"([^"]+)"\s*$', include, code, flags=re.M)
+
+
+def remove_function(code, name):
+    match = re.search(r'void\s+'+name+r'\s*\([^)]*\)\s*\{', code)
+    if not match: return code
+    depth, i = 1, match.end()
+    while depth:
+        if code[i]=='{': depth += 1
+        elif code[i]=='}': depth -= 1
+        i += 1
+    return code[:match.start()] + code[i:]
+
+
+def fragment(path, output='vec4(1.0)', run_vertex=False):
+    code = expand(path)
+    code = re.sub(r'^\s*(?:shader_type|render_mode)\s+[^;]+;', '', code, flags=re.M)
+    code = re.sub(r'\bgroup_uniforms[^;]*;', '', code)
+    code = re.sub(r'\bglobal\s+uniform\b', 'uniform', code)
+    code = re.sub(r'(uniform\s+\w+\s+\w+)\s*:[^=;]*(?=[=;])', r'\1', code)
+    code = re.sub(r'\bvarying\s+(?:flat\s+)?', '' if run_vertex else 'uniform ', code)
+    if run_vertex:
+        code=code.replace('void vertex()', 'void shipped_vertex()')
+        code=code.replace('uniform vec3 reveal_world_position;', 'vec3 reveal_world_position;')
+    else: code = remove_function(code, 'vertex')
+    code = code.replace('void fragment()', 'void shipped_fragment()')
+    result = '''#version 150
+uniform bool probe_bool_shadow = false;
+// Translate the probe readback pixel through one complete Bayer tile. The
+// actual shipped threshold and fragment discard execute without replacement.
+uniform vec2 probe_pixel_offset = vec2(0.0);
+#define IN_SHADOW_PASS probe_bool_shadow
+#define FRAGCOORD vec4(gl_FragCoord.xy + probe_pixel_offset, gl_FragCoord.zw)
+const bool OUTPUT_IS_SRGB = true;
+uniform float TIME = 0.0;
+uniform vec3 VERTEX = vec3(0.0);
+uniform vec4 INSTANCE_CUSTOM = vec4(0.0);
+uniform vec4 COLOR = vec4(0.8, 0.4, 0.2, 1.0);
+uniform vec3 NORMAL = vec3(0.0, 1.0, 0.0);
+uniform vec3 VIEW = vec3(0.0, 1.0, 0.0);
+uniform vec2 UV = vec2(0.3);
+uniform vec2 UV2 = vec2(0.3);
+uniform vec2 SCREEN_UV = vec2(0.5);
+uniform vec2 VIEWPORT_SIZE = vec2(64.0);
+uniform vec3 CAMERA_POSITION_WORLD = vec3(0.0, 18.0, 14.0);
+uniform vec3 CAMERA_DIRECTION_WORLD = vec3(0.0, -1.0, 0.0);
+uniform mat4 MODEL_MATRIX = mat4(1.0);
+uniform mat3 MODEL_NORMAL_MATRIX = mat3(1.0);
+uniform mat4 VIEW_MATRIX = mat4(1.0);
+uniform mat4 INV_VIEW_MATRIX = mat4(1.0);
+uniform mat4 MAIN_CAM_INV_VIEW_MATRIX = mat4(1.0);
+uniform mat4 PROJECTION_MATRIX = mat4(1.0);
+uniform mat4 INV_PROJECTION_MATRIX = mat4(1.0);
+vec3 ALBEDO = vec3(1.0);
+vec3 EMISSION = vec3(0.0);
+float ROUGHNESS = 1.0;
+float METALLIC = 0.0;
+float SPECULAR = 0.5;
+float ALPHA = 1.0;
+out vec4 probe_color;
+''' + code + '\nvoid main(){'+('COLOR=probe_vertex_color;shipped_vertex();' if run_vertex else '')+'shipped_fragment();probe_color='+output+';}\n'
+    if run_vertex:
+        result=result.replace('uniform vec4 COLOR = vec4(0.8, 0.4, 0.2, 1.0);', 'uniform vec4 probe_vertex_color = vec4(0.8,0.4,0.2,1.0);\nvec4 COLOR;')
+    return result
+
+
+def run_probe(out, fixture):
+    out.mkdir(parents=True, exist_ok=True)
+    (out/'probe.vert').write_text('''#version 150
+void main(){vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);gl_Position=vec4(p*2.0-1.0,0.0,1.0);}
+''')
+    (out/'fixture.json').write_text(json.dumps(fixture, indent=2)+'\n')
+    with tempfile.TemporaryDirectory(prefix='sink-visual-shader-') as scratch:
+        binary = str(Path(scratch)/'probe')
+        compile_result = subprocess.run(['xcrun','clang',str(ROOT/'tools/visual_shader_probe.m'),
+            '-framework','Foundation','-framework','OpenGL','-Wno-deprecated-declarations',
+            '-Wno-incompatible-pointer-types','-o',binary],capture_output=True,text=True,timeout=60)
+        (out/'compile.log').write_text(compile_result.stdout+compile_result.stderr)
+        if compile_result.returncode: raise RuntimeError('Probe compilation failed')
+        result = subprocess.run([binary,str(out),str(out/'fixture.json')],capture_output=True,text=True,timeout=60)
+        (out/'probe.log').write_text(result.stdout+result.stderr)
+        if result.returncode: raise RuntimeError('Current shader compilation/coverage failed; inspect probe.log')
+        return json.loads(result.stdout)
+
+
+def reveal_job(out):
+    """Independent camera-ray scenarios exercise the shipped include directly."""
+    path=ROOT/'fidelity/hole_reveal.gdshaderinc'
+    if not path.exists():return None
+    code=expand(path).replace('global uniform','uniform')
+    (out/'reveal-coverage.frag').write_text('''#version 150
+uniform vec3 probe_world;
+uniform vec3 probe_camera;
+uniform vec3 probe_back;
+uniform bool probe_bool_shadow;
+out vec4 probe_color;
+'''+code+'''
+void main(){
+    if(hole_reveal_discard(probe_world,gl_FragCoord.xy,probe_camera,probe_back,probe_bool_shadow))discard;
+    probe_color=vec4(1.0);
+}
+''')
+    camera=[10.,18.,14.]
+    length=math.sqrt(sum(v*v for v in camera))
+    back=[v/length for v in camera]
+    base={'hole_reveal_target':[0.,0.,0.,1.],'hole_reveal_camera':camera+[0.],
+          'hole_reveal_aperture':[3.,.7,2.,0.],'hole_reveal_back':back+[0.],
+          'probe_camera':camera,'probe_back':back,'probe_bool_shadow':False}
+    cases=[]
+    def case(name,world,expected,**updates):
+        values=dict(base);values['probe_world']=world;values.update(updates)
+        cases.append({'name':name,'uniforms':values,'expected':expected})
+    def ray(ground,t):return [c*(1-t)+g*t for c,g in zip(camera,ground)]
+    for t in [.05,.25,.5,.8,.98]:
+        case('central_ray_height_'+str(t),ray([0,0,0],t),'cut')
+    case('beyond_small_hole_side_margin',ray([0,0,2],.6),'cut')
+    case('movement_lookahead',ray([4,0,0],.6),'cut')
+    case('outside_expanded_region',ray([0,0,6],.6),'solid')
+    case('background',[-8,2,-10],'solid')
+    case('ground_at_hole',[0,0,0],'solid')
+    case('below_ground',[0,-1,0],'solid')
+    case('above_camera',[8,19,6],'solid')
+    case('shadow_pass',ray([0,0,0],.6),'solid',probe_bool_shadow=True)
+    case('home_preview_camera',ray([0,0,0],.6),'solid',probe_camera=[19,24,26])
+    case('other_camera_direction',ray([0,0,0],.6),'solid',probe_back=[1,0,0])
+    case('disabled_on_title',ray([0,0,0],.6),'solid',hole_reveal_target=[0,0,0,0])
+    case('above_large_hole',[0,3,0],'cut',hole_reveal_aperture=[10,1,0,0])
+    case('away_from_camera_lookahead',ray([0,0,-7],.8),'cut',hole_reveal_aperture=[3,.7,0,-7])
+    case('large_hole_margin',ray([0,0,16],.6),'cut',hole_reveal_aperture=[20,2,0,0])
+    return {'name':'reveal-coverage','vertex':'probe.vert','fragment':'reveal-coverage.frag','cases':cases}
+
+
+def material_jobs(out):
+    """Unlit albedo-equation swatches, not a substitute for Godot lighting."""
+    path=ROOT/'fidelity/hole_reveal_standard.gdshader'
+    cases=[]
+    # Compatibility's BaseMaterial3D multiplies vertex and material RGB
+    # unchanged. These midtones detect accidental unconditional sRGB decode.
+    for vertex_enabled in [False,True]:
+        for color in [[.8,.4,.2,1.],[.24,.52,.76,1.],[.5,.5,.5,1.]]:
+            for srgb in [False,True]:
+                albedo=[.7,.8,.9,1.]
+                expected=[round(a*(v if vertex_enabled else 1.)*255) for a,v in zip(albedo[:3],color[:3])]+[255]
+                cases.append({'name':f'vertex_{vertex_enabled}_srgb_{srgb}_rgb_{color[:3]}',
+                    'uniforms':{'hole_reveal_target':[0.,0.,0.,0.], 'source_albedo':albedo,
+                    'probe_vertex_color':color, 'source_vertex_color':vertex_enabled, 'source_vertex_srgb':srgb},
+                    'expected_rgba8':expected})
+    (out/'adapter-albedo.frag').write_text(fragment(path,'vec4(ALBEDO,1.0)',run_vertex=True))
+    return [{'name':'adapter-albedo','vertex':'probe.vert','fragment':'adapter-albedo.frag','cases':cases}]
+
+
+def selective_jobs(out):
+    """Execute opt-in shaders and compare every pixel of their Bayer tile.
+
+    Whole-building coverage must be identical at front, roof, back and outside
+    the old projected-plane region. Pixel counts alone cannot detect a shifted
+    or complementary front/back pattern, so sample all sixteen tile positions.
+    """
+    camera=[10.,18.,14.];length=math.sqrt(sum(v*v for v in camera));back=[v/length for v in camera]
+    def view_matrix(at, direction):
+        return [1.,0.,0.,0.,0.,1.,0.,0.,*direction,0.,*at,1.]
+    matrix=view_matrix(camera,back)
+    base={'hole_reveal_target':[0.,0.,0.,1.],'hole_reveal_camera':camera+[0.],
+          'hole_reveal_aperture':[3.,.7,2.,0.],'hole_reveal_back':back+[0.],
+          'VERTEX':[4.,7.2,5.6],'INV_VIEW_MATRIX':matrix,'probe_bool_shadow':False,
+          'reveal_occluder':0.,'reveal_use_instance':False,'INSTANCE_CUSTOM':[0.,0.,0.,0.],
+          'probe_pixel_offset':[0.,0.]}
+    specs={
+        'palette': [('intact_unblocked_building','solid',{}),('blocked_large_building','cut',{'reveal_occluder':1.}),('building_shadow','solid',{'reveal_occluder':1.,'probe_bool_shadow':True})],
+        # Food has no reveal branch under the buildings-only policy. Execute
+        # both shipped stages with deliberately stale uniforms/custom data;
+        # classification alone would not catch a remaining fragment discard.
+        'food_glaze': [
+            ('ordinary_food','solid',{'INSTANCE_CUSTOM':[1.,0.,0.,0.]}),
+            ('ordinary_food_in_mixed_batch','solid',{'reveal_use_instance':True}),
+            ('legacy_structural_tier_in_mixed_batch','solid',{'reveal_use_instance':True,'INSTANCE_CUSTOM':[1.,0.,0.,0.]}),
+            ('released_food_tier','solid',{'INSTANCE_CUSTOM':[1.,0.,0.,0.]}),
+            ('food_structure_shadow','solid',{'reveal_use_instance':True,'INSTANCE_CUSTOM':[1.,0.,0.,0.],'probe_bool_shadow':True}),
+            ('stale_positive_standalone_uniform','solid',{'reveal_occluder':1.}),
+            ('stale_positive_uniform_and_full_instance','solid',{'reveal_occluder':1.,'reveal_use_instance':True,'INSTANCE_CUSTOM':[1.,1.,1.,1.]}),
+            ('giant_aperture_food_stays_solid','solid',{'reveal_occluder':1.,'reveal_use_instance':True,'INSTANCE_CUSTOM':[1.,1.,1.,1.],'hole_reveal_aperture':[100.,2.,0.,0.]}),
+            ('gloss_alpha_is_not_transparency','solid',{'reveal_occluder':1.,'reveal_use_instance':True,'INSTANCE_CUSTOM':[1.,1.,1.,1.],'probe_vertex_color':[.8,.4,.2,.18]}),
+        ],
+        'hole_reveal_standard': [('default_actor_or_debris','solid',{}),('explicit_structural_adapter','cut',{'reveal_occluder':1.})],
+    }
+    jobs=[]
+    for shader,cases in specs.items():
+        name='selective-'+shader
+        (out/(name+'.frag')).write_text(fragment(ROOT/'fidelity'/(shader+'.gdshader'),run_vertex=True))
+        prepared=[{'name':label,'expected':expected,'uniforms':dict(base,**updates)} for label,expected,updates in cases]
+        if shader in ['palette','hole_reveal_standard']:
+            guards=[
+                ('body_shadow_guard',{'probe_bool_shadow':True}),
+                ('body_other_camera_position',{'INV_VIEW_MATRIX':view_matrix([19.,24.,26.],back)}),
+                ('body_other_camera_basis',{'INV_VIEW_MATRIX':view_matrix(camera,[1.,0.,0.])}),
+                ('body_disabled_global',{'hole_reveal_target':[0.,0.,0.,0.]}),
+            ]
+            for label,updates in guards:
+                prepared.append({'name':label,'expected':'solid','uniforms':dict(base,reveal_occluder=1.,**updates)})
+            surfaces={
+                'front':[4.,7.2,5.6],
+                'roof':[8.,14.4,11.2],
+                'back':[-8.,2.,-10.],
+                'ground':[0.,0.,0.],
+                'outside_camera_plane':[8.,19.,6.],
+                'outside_aperture':[40.,3.,40.],
+            }
+            for family,opt_in,selected in [
+                ('whole_body_full',1.,surfaces),
+                ('whole_body_half',.5,{key:surfaces[key] for key in ['front','back']}),
+            ]:
+                for surface,position in selected.items():
+                    for y in range(4):
+                        for x in range(4):
+                            prepared.append({
+                                'name':f'{family}_{surface}_pixel_{x}_{y}',
+                                'expected':'cut' if opt_in==1. else 'fade',
+                                'expected_visible_pixels':256 if opt_in==1. else 2048,
+                                'coverage_family':family,'coverage_surface':surface,
+                                'coverage_pixel':[x,y],
+                                'uniforms':dict(base,reveal_occluder=opt_in,VERTEX=position,probe_pixel_offset=[float(x),float(y)]),
+                            })
+        jobs.append({'name':name,'vertex':'probe.vert','fragment':name+'.frag','cases':prepared})
+    return jobs
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output',type=Path,required=True)
+    args=parser.parse_args()
+    out=args.output.resolve();out.mkdir(parents=True,exist_ok=True)
+    paths=[ROOT/'fidelity'/name for name in ['asphalt.gdshader','facade.gdshader','palette.gdshader','food_glaze.gdshader','hole_reveal_standard.gdshader']]
+    # New occluder adapter shaders are included without loading scene/user data.
+    paths.extend(sorted((ROOT/'fidelity').glob('*occluder*.gdshader')))
+    paths.extend(sorted((ROOT/'fidelity').glob('*occlusion*.gdshader')))
+    paths=list(dict.fromkeys(paths))
+    jobs=[]
+    for path in paths:
+        (out/(path.stem+'.frag')).write_text(fragment(path))
+        jobs.append({'name':path.stem,'vertex':'probe.vert','fragment':path.stem+'.frag','cases':[]})
+    reveal=reveal_job(out)
+    if reveal:jobs.append(reveal)
+    swatches=material_jobs(out);jobs.extend(swatches)
+    selective=selective_jobs(out);jobs.extend(selective)
+    result=run_probe(out,{'programs':jobs})
+    inputs=paths+list((ROOT/'fidelity').glob('*.gdshaderinc'))+[Path(__file__),ROOT/'tools/visual_shader_probe.m']
+    result['input_sha256']={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs}
+    result['failures']=[]
+    result['whole_body_coverage']={}
+    for job in selective:
+        measurements=next(p for p in result['programs'] if p['name']==job['name'])['cases']
+        if [c['name'] for c in measurements]!=[c['name'] for c in job['cases']]:
+            result['failures'].append('Selective material case receipt is incomplete')
+        for case,measured in zip(job['cases'],measurements):
+            visible=measured['visible_pixels']/measured['total_pixels']
+            if case['expected']=='solid' and visible!=1.0:result['failures'].append(case['name']+': readable object was cut')
+            if case['expected']=='cut' and not 0<visible<=.15:result['failures'].append(case['name']+': blocked structure was not revealed')
+            if case['expected']=='fade' and not 0<visible<1.0:result['failures'].append(case['name']+': intermediate whole-building fade lost its partial coverage')
+            if 'expected_visible_pixels' in case and measured['visible_pixels']!=case['expected_visible_pixels']:
+                result['failures'].append(case['name']+': whole-building coverage differs from the requested fade strength')
+        families={}
+        for case,measured in zip(job['cases'],measurements):
+            if 'coverage_family' not in case:continue
+            surfaces=families.setdefault(case['coverage_family'],{})
+            pixels=surfaces.setdefault(case['coverage_surface'],[])
+            alpha=measured['center_rgba8'][3]
+            if alpha not in [0,255]:result['failures'].append(case['name']+': opaque screen-door sample has unexpected fractional alpha')
+            pixels.append(alpha==255)
+        for family,surfaces in families.items():
+            reference=surfaces.get('front',[])
+            if len(reference)!=16:result['failures'].append(job['name']+'/'+family+': front tile receipt is incomplete')
+            for surface,pixels in surfaces.items():
+                if len(pixels)!=16 or pixels!=reference:
+                    result['failures'].append(job['name']+'/'+family+'/'+surface+': face exposes a different Bayer pixel than the facade')
+            result['whole_body_coverage'][job['name']+'/'+family]={
+                'tile_pixels':16,'surfaces':list(surfaces),'visible_tile_pixels':sum(reference),
+                'visible_pixel_pattern':reference,'identical_patterns':all(pixels==reference for pixels in surfaces.values()),
+                'scope':'Actual shipped vertex/fragment functions, all sixteen FRAGCOORD phases; no CPU mask substitute.',
+            }
+    if reveal:
+        measurements=next(p for p in result['programs'] if p['name']=='reveal-coverage')['cases']
+        if [c['name'] for c in measurements]!=[c['name'] for c in reveal['cases']]:
+            result['failures'].append('Reveal case receipt is incomplete')
+        for case,measured in zip(reveal['cases'],measurements):
+            visible=measured['visible_pixels']/measured['total_pixels']
+            if case['expected']=='solid' and visible!=1.0:
+                result['failures'].append(case['name']+': non-occluder was cut')
+            if case['expected']=='cut' and not 0<visible<=.15:
+                result['failures'].append(case['name']+': foreground aperture did not reveal enough')
+    for job in swatches:
+        measurements=next(p for p in result['programs'] if p['name']==job['name'])['cases']
+        if [c['name'] for c in measurements]!=[c['name'] for c in job['cases']]:
+            result['failures'].append('Material case receipt is incomplete')
+        for case,measured in zip(job['cases'],measurements):
+            if max(abs(a-b) for a,b in zip(case['expected_rgba8'],measured['center_rgba8']))>1:
+                result['failures'].append(case['name']+': adapter changed Compatibility albedo')
+    (out/'result.json').write_text(json.dumps(result,indent=2)+'\n')
+    print('VISUAL_SHADER_PROBE '+json.dumps(result))
+    if result['failures']:raise SystemExit(1)
+
+
+if __name__=='__main__':main()

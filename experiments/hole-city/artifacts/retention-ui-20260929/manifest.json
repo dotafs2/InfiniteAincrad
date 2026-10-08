@@ -1,0 +1,35 @@
+{
+  "test_inputs": {
+    "tests/title_navigation_acceptance.gd": "78c9f30c6ed730ec3f17815356f1bb3191686356f1dafdc52d5becee4241498b",
+    "tests/ui_redesign_acceptance.gd": "41225f7adb92a1a3d1b2152a8404c8616b5e1ec6e014fe304b8201b9bd9c31aa",
+    "tests/review_ui_collection.gd": "d9eb930cc7d738580a67af96986a771c21d1471cdf6a7a9978a2dc4651c43d37",
+    "tests/skin_skill_acceptance.gd": "77223ea4834b197656799377b248171924f6ceb3a493879a2bed9d18e1095125",
+    "tests/retention_ui_review.gd": "29de1dca6ffd1c94ffbfe930b06241ec78394789a912d882df362bee4fdcf3a5"
+  },
+  "receipts": {
+    "legacy/ui_redesign.json": {
+      "sha256": "fd667302316b17f1de330dffc1aa2adbb6bd22cd62f9ee6e02d7c8728943bad3",
+      "checks": 1871
+    },
+    "legacy/ui_collection_review.json": {
+      "sha256": "2810a93edf7f8d3c5aba34981b10a2870363aef8dfa823a507dabf08236942a7",
+      "checks": 188
+    },
+    "legacy/title_navigation.json": {
+      "sha256": "d028aa453801ac2d8e269578f76da073097896826b13f7e75006b899a83b9be1",
+      "checks": 39
+    },
+    "legacy/skin_skill.json": {
+      "sha256": "78a71fddbcf3902967518e61b7331a2d830cbd09122ab3915307b53e1ae12340",
+      "checks": 130
+    },
+    "review/retention_ui.json": {
+      "sha256": "3ab4d27fcee5265ebb522d78e86e83aee359791a413247590f6d9b497786ee71",
+      "checks": 2443
+    }
+  },
+  "total_checks": 4671,
+  "all_helpers_exited": true,
+  "runtime_edits_by_reviewer": false,
+  "browser_used": false
+}

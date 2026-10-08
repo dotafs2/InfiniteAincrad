@@ -1,0 +1,677 @@
+extends Control
+## Rounded toy-like interface with generous touch targets and candy colors.
+## Every graphic here is drawn locally; the miniature and skin preview use
+## authored Godot geometry rather than reference assets.
+const Art=preload("res://fidelity/art.gd")
+const SkinVisual=preload("res://fidelity/skin_visual.gd")
+var game:Node3D
+var font:Font
+var buttons:Array[Button]=[]
+var hero:TextureRect
+var hero_models:Node3D
+var hero_view:SubViewport
+var skin_view:SubViewport
+var skin_texture:TextureRect
+var skin_preview:Node3D
+var skin_preview_void:MeshInstance3D
+var skin_preview_ring:MeshInstance3D
+var skin_cards:Array[SubViewport]=[]
+var card_textures:Array[TextureRect]=[]
+var animation:=0.0
+var toast:=""
+var toast_time:=0.0
+var menu_screen:="home"
+var holes_tab:="classic"
+var preview_skin_id:="core_shell"
+var icons:Dictionary={}
+var panel_styles:Dictionary={}
+var goal_pop:=[0.0,0.0,0.0]
+var last_goal_counts:=[0,0,0]
+var displayed_phase:=""
+const ICON_NAMES:=["coin","trophy","boost","check","lock","pause","back","play","clock","donut","cake","treats","skins","city","food-map"]
+const MAP_CARD_RECTS:=[Rect2(24,556,238,130),Rect2(278,556,238,130)]
+const CLASSIC_SLOT_COUNT:=5
+const SPECIAL_SLOT_COUNT:=5
+const INK:=Color("263467")
+const PAPER:=Color("fffdf7")
+const RUST:=Color("ffae12")
+const OCHRE:=Color("fff080")
+const MINT:=Color("cafffb")
+const MOSS:=Color("56ccff")
+const SLATE:=Color("3771ce")
+
+func _ready() -> void:
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	mouse_filter=Control.MOUSE_FILTER_IGNORE
+	process_mode=Node.PROCESS_MODE_ALWAYS
+	var bold:=FontVariation.new()
+	bold.base_font=load("res://assets/fonts/Fredoka.ttf")
+	bold.variation_opentype={"wght":650.0}
+	bold.variation_embolden=0.65
+	font=bold
+	for id in ICON_NAMES:icons[id]=load("res://assets/ui/"+id+".svg")
+	make_hero()
+	make_skin_preview()
+	refresh()
+
+func make_hero() -> void:
+	hero_view=SubViewport.new()
+	hero_view.size=Vector2i(640,560)
+	hero_view.transparent_bg=true
+	hero_view.own_world_3d=true
+	hero_view.msaa_3d=Viewport.MSAA_2X
+	add_child(hero_view)
+	update_map_preview()
+	var envnode:=WorldEnvironment.new()
+	var env:=Environment.new()
+	env.background_mode=Environment.BG_CLEAR_COLOR
+	env.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR
+	env.ambient_light_color=Color.WHITE
+	env.ambient_light_energy=0.8
+	envnode.environment=env
+	hero_view.add_child(envnode)
+	var light:=DirectionalLight3D.new()
+	light.rotation_degrees=Vector3(-42,-32,0)
+	light.light_color=Color.WHITE
+	light.light_energy=0.9
+	light.shadow_enabled=true
+	hero_view.add_child(light)
+	var camera:=Camera3D.new()
+	camera.projection=Camera3D.PROJECTION_ORTHOGONAL
+	camera.size=21
+	hero_view.add_child(camera)
+	camera.position=Vector3(19,24,26)
+	camera.look_at(Vector3(0,4.0,0))
+	camera.current=true
+	hero=TextureRect.new()
+	hero.texture=hero_view.get_texture()
+	hero.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+	hero.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	# Keep the 3D miniature below the status line so the model never paints
+	# over the only instruction on the home screen.
+	hero.position=Vector2(-8,188)
+	hero.size=Vector2(556,296)
+	hero.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	add_child(hero)
+
+func make_skin_preview() -> void:
+	skin_view=SubViewport.new()
+	skin_view.size=Vector2i(360,190)
+	skin_view.transparent_bg=true
+	skin_view.own_world_3d=true
+	skin_view.msaa_3d=Viewport.MSAA_2X
+	add_child(skin_view)
+	var envnode:=WorldEnvironment.new()
+	var env:=Environment.new()
+	env.background_mode=Environment.BG_CLEAR_COLOR
+	env.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR
+	env.ambient_light_color=Color("b8d8ff")
+	env.ambient_light_energy=0.75
+	envnode.environment=env
+	skin_view.add_child(envnode)
+	var light:=DirectionalLight3D.new()
+	light.rotation_degrees=Vector3(-48,-24,0)
+	light.light_color=Color("ffd166")
+	light.light_energy=1.1
+	skin_view.add_child(light)
+	var camera:=Camera3D.new()
+	camera.projection=Camera3D.PROJECTION_ORTHOGONAL
+	camera.size=2.65
+	camera.position=Vector3(0,6.6,8.0)
+	skin_view.add_child(camera)
+	camera.look_at(Vector3(0,.16,0))
+	camera.current=true
+	skin_preview=SkinVisual.new()
+	skin_view.add_child(skin_preview)
+	skin_texture=TextureRect.new()
+	skin_texture.texture=skin_view.get_texture()
+	skin_texture.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+	skin_texture.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	skin_texture.position=Vector2(90,170)
+	skin_texture.size=Vector2(360,132)
+	skin_texture.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	skin_texture.visible=false
+	add_child(skin_texture)
+
+func apply_skin_preview(id:String) -> void:
+	if not is_instance_valid(skin_preview):return
+	if skin_preview.skin_id!=id or not is_instance_valid(skin_preview.main_ring):
+		skin_preview.build(game.skin_definition(id),true)
+	skin_preview_ring=skin_preview.main_ring
+	skin_preview_void=skin_preview.mouth
+
+func box(rect:Rect2,color:Color,radius:=24,border:=Color("ffffff"),stroke:=2) -> void:
+	var corner:=mini(int(rect.size.y*.5),radius)
+	var key:="%s:%s:%d:%d:%s"%[color.to_html(),border.to_html(),corner,stroke,rect.size.y>30]
+	if not panel_styles.has(key):
+		var fresh:=StyleBoxFlat.new()
+		fresh.bg_color=color
+		fresh.set_corner_radius_all(corner)
+		fresh.border_color=border
+		fresh.set_border_width_all(stroke)
+		if rect.size.y>30:
+			fresh.shadow_color=Color("26316b",.25)
+			fresh.shadow_size=2;fresh.shadow_offset=Vector2(0,6)
+		panel_styles[key]=fresh
+	var style:StyleBoxFlat=panel_styles[key]
+	draw_style_box(style,rect)
+	if rect.size.y>=44:
+		draw_line(rect.position+Vector2(corner+5,7),rect.position+Vector2(rect.size.x-corner-5,7),Color(1,1,1,.20),3,true)
+
+func icon(id:String,at:Vector2,size_:float=48.0,alpha:float=1.0) -> void:
+	if icons.has(id):draw_texture_rect(icons[id],Rect2(at-Vector2.ONE*size_*.5,Vector2.ONE*size_),false,Color(1,1,1,alpha))
+
+func text_center(message:String,at:Vector2,font_size:int,tint:=Color.WHITE,outline:=true) -> void:
+	var width:=font.get_string_size(message,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x
+	var pos:=at-Vector2(width/2,0)
+	if outline:draw_string_outline(font,pos,message,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,3,Color("273766"))
+	draw_string(font,pos,message,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,tint)
+
+func button(rect:Rect2,title:String,callback:Callable,tint:=Color("ffa51b")) -> Button:
+	var b:=Button.new()
+	b.position=rect.position
+	b.size=rect.size
+	b.text=title
+	b.mouse_default_cursor_shape=Control.CURSOR_POINTING_HAND
+	b.add_theme_font_size_override("font_size",40 if title=="PLAY" else 23)
+	b.add_theme_font_override("font",font)
+	var ink_text:=tint.get_luminance()>.65 and title!="PLAY"
+	b.add_theme_color_override("font_color",INK if ink_text else PAPER)
+	b.add_theme_color_override("font_hover_color",INK if ink_text else PAPER)
+	b.add_theme_color_override("font_pressed_color",INK if ink_text else PAPER)
+	b.add_theme_color_override("font_outline_color",Color(0,0,0,0.35))
+	b.add_theme_constant_override("outline_size",2)
+	for state in ["normal","hover","pressed"]:
+		var s:=StyleBoxFlat.new()
+		s.bg_color=tint.lightened(0.12) if state=="hover" else tint.darkened(0.12) if state=="pressed" else tint
+		s.border_color=tint.lightened(.65) if tint.a>0 else Color(1,1,1,.35)
+		s.border_width_left=2
+		s.border_width_top=2
+		s.border_width_right=2
+		s.border_width_bottom=5 if tint.a>0 else 0
+		s.set_corner_radius_all(mini(36,int(rect.size.y*.5)))
+		s.shadow_color=tint.darkened(.30) if tint.a>0 else Color("3946a2",.25)
+		s.shadow_size=1
+		s.shadow_offset=Vector2(0,7 if state!="pressed" else 2)
+		b.add_theme_stylebox_override(state,s)
+	var focus:=StyleBoxFlat.new();focus.bg_color=Color.TRANSPARENT
+	focus.border_color=Color("fff4ad");focus.set_border_width_all(3);focus.set_corner_radius_all(30)
+	b.add_theme_stylebox_override("focus",focus)
+	if title=="PLAY":
+		b.icon=icons.play
+		b.add_theme_constant_override("icon_max_width",32)
+		b.add_theme_constant_override("h_separation",12)
+	b.pressed.connect(callback)
+	add_child(b)
+	buttons.append(b)
+	return b
+
+func hotspot(id:String,rect:Rect2,callback:Callable) -> Button:
+	var b:=Button.new()
+	b.name=id
+	b.position=rect.position
+	b.size=rect.size
+	b.flat=true
+	b.mouse_default_cursor_shape=Control.CURSOR_POINTING_HAND
+	for state in ["normal","hover","pressed","focus"]:
+		var s:=StyleBoxFlat.new()
+		s.bg_color=Color(1,1,1,.12) if state=="hover" else Color("213a7b",.18) if state=="pressed" else Color.TRANSPARENT
+		if state=="focus":s.border_color=Color("fff4ad");s.set_border_width_all(3)
+		s.set_corner_radius_all(26)
+		b.add_theme_stylebox_override(state,s)
+	b.pressed.connect(callback)
+	add_child(b)
+	buttons.append(b)
+	return b
+
+func tab_skin_ids() -> Array[String]:
+	return game.skin_ids("foundation" if holes_tab=="classic" else "resonance")
+
+func slot_rect(index:int) -> Rect2:
+	return Rect2(20+(index%3)*170,352+(index/3)*176,160,164)
+
+func slot_hotspot(index:int,rect:Rect2,skin_id:String) -> void:
+	var id:="hole-slot-%s-%02d"%[holes_tab,index]
+	hotspot(id,rect,Callable(self,"select_hole_slot").bind(skin_id))
+
+func select_hole_slot(skin_id:String) -> void:
+	preview_skin_id=skin_id
+	apply_skin_preview(skin_id)
+	var definition:Dictionary=game.skin_definition(skin_id)
+	if not game.skin_unlocked(skin_id):
+		toast="UNLOCK AT %d POINTS"%int(definition.unlock)
+		toast_time=1.5
+	else:
+		game.select_skin(skin_id)
+		toast="%s EQUIPPED"%definition.name
+		toast_time=1.5
+	queue_redraw()
+
+func open_holes() -> void:
+	menu_screen="holes"
+	holes_tab="classic"
+	var ids:=tab_skin_ids()
+	preview_skin_id=game.selected_skin_id if ids.has(game.selected_skin_id) else ids[0]
+	refresh()
+
+func choose_holes_tab(tab:String) -> void:
+	if tab!="classic" and tab!="special":return
+	holes_tab=tab
+	var ids:=tab_skin_ids()
+	preview_skin_id=game.selected_skin_id if ids.has(game.selected_skin_id) else ids[0]
+	refresh()
+
+func close_menu() -> void:
+	menu_screen="home"
+	refresh()
+
+func refresh() -> void:
+	if displayed_phase!=game.phase:
+		displayed_phase=game.phase
+		toast_time=0.0
+		last_goal_counts=[0,0,0]
+		goal_pop=[0.0,0.0,0.0]
+	for b in buttons:
+		b.hide()
+		# Refresh can be called from a pressed signal. Keep the emitting button
+		# deferred-free, but release its name so the next menu can reuse it.
+		b.name="_old-ui-%s"%b.get_instance_id()
+		b.queue_free()
+	buttons.clear()
+	for texture in card_textures:texture.queue_free()
+	for view in skin_cards:view.queue_free()
+	card_textures.clear();skin_cards.clear()
+	hero.visible=game.phase=="title" and menu_screen=="home"
+	hero_view.render_target_update_mode=SubViewport.UPDATE_ALWAYS if hero.visible else SubViewport.UPDATE_DISABLED
+	if is_instance_valid(hero_models):hero_models.set_process(hero.visible and game.selected_map=="city")
+	if is_instance_valid(skin_texture):
+		skin_texture.visible=game.phase=="title" and menu_screen=="holes"
+		skin_view.render_target_update_mode=SubViewport.UPDATE_ALWAYS if skin_texture.visible else SubViewport.UPDATE_DISABLED
+		apply_skin_preview(preview_skin_id)
+		skin_preview.set_process(skin_texture.visible)
+	if game.phase=="title" and menu_screen=="home":
+		button(Rect2(86,724,368,82),"PLAY",game.start_level,Color("ffa51c"))
+		hotspot("holes-nav",Rect2(146,843,248,70),open_holes).tooltip_text="Choose a hole skin"
+		hotspot("home-map-nav",MAP_CARD_RECTS[0],Callable(game,"select_map").bind("city")).tooltip_text="Sunny City"
+		hotspot("home-food-nav",MAP_CARD_RECTS[1],Callable(game,"select_map").bind("food")).tooltip_text="Snack Garden"
+	elif game.phase=="title" and menu_screen=="holes":
+		hotspot("holes-home",Rect2(20,24,64,64),close_menu).tooltip_text="Back to home"
+		hotspot("holes-classic-tab",Rect2(24,104,238,64),Callable(self,"choose_holes_tab").bind("classic"))
+		hotspot("holes-special-tab",Rect2(278,104,238,64),Callable(self,"choose_holes_tab").bind("special"))
+		var ids:=tab_skin_ids()
+		for index in ids.size():
+			make_card_preview(ids[index],slot_rect(index))
+			slot_hotspot(index,slot_rect(index),ids[index])
+		button(Rect2(104,866,332,64),"PLAY",game.start_level,Color("ffa51c"))
+	elif game.phase=="eaten":
+		button(Rect2(90,624,360,68),"PLAY AGAIN",game.start_level,Color("ffa51c"))
+		button(Rect2(142,719,256,64),"HOME",game.back_home,Color("5f88e8"))
+		if is_instance_valid(game.ads) and game.ads.native_available:
+			button(Rect2(128,806,284,64),"WATCH VIDEO",show_no_video,Color("5bbd90"))
+	elif game.phase in ["timeout","complete"]:
+		button(Rect2(90,624,360,68),"PLAY AGAIN",game.start_level,Color("ffa51c"))
+		button(Rect2(142,719,256,64),"HOME",game.back_home,Color("5f88e8"))
+	elif get_tree().paused:
+		button(Rect2(90,491,360,70),"KEEP PLAYING",game.toggle_pause,Color("49d08a"))
+		button(Rect2(142,589,256,64),"HOME",game.back_home,Color("638be7"))
+	elif game.phase=="playing":
+		hotspot("pause-action",Rect2(456,20,64,64),game.toggle_pause).tooltip_text="Pause"
+		if game.skin_definition(game.player.skin_id).kind!="cosmetic":
+			hotspot("skin-action",Rect2(414,680,104,94),Callable(self,"request_skin_skill"))
+		hotspot("pulse-action",Rect2(414,797,104,112),Callable(self,"request_pulse")).tooltip_text="Eat to charge your boost"
+	queue_redraw()
+
+func request_skin_skill() -> void:
+	if is_instance_valid(game.player) and game.player.trigger_skin_skill():
+		queue_redraw()
+		return
+	if not is_instance_valid(game.player):return
+	var definition:Dictionary=game.skin_definition(game.player.skin_id)
+	if definition.kind=="bloom":toast="AUTO SKILL"
+	elif definition.kind=="cosmetic":toast="LOOKS ONLY"
+	elif game.player.skin_cooldown>0.0:toast="COOLDOWN %.1f"%game.player.skin_cooldown
+	else:toast="SKILL UNAVAILABLE"
+	toast_time=1.3
+	queue_redraw()
+
+func request_pulse() -> void:
+	if is_instance_valid(game.player) and game.player.trigger_pulse():
+		queue_redraw()
+	else:
+		toast="Eat to charge your boost"
+		toast_time=1.3
+
+func show_no_gems() -> void:
+	toast="Not enough gems"
+	toast_time=2.0
+
+func show_no_video() -> void:
+	if is_instance_valid(game.ads) and game.ads.show_rewarded():
+		toast="Loading reward..."
+	else:
+		toast="No video available"
+	toast_time=2.0
+
+func _process(delta:float) -> void:
+	animation+=delta
+	toast_time=maxf(0,toast_time-delta)
+	if game.phase=="playing" and game.selected_map=="food" and not get_tree().paused:
+		var counts:=food_order_counts()
+		for i in 3:
+			goal_pop[i]=maxf(0,goal_pop[i]-delta)
+			if counts[i]>last_goal_counts[i]:goal_pop[i]=.32
+			last_goal_counts[i]=counts[i]
+	if is_instance_valid(skin_preview) and is_instance_valid(skin_texture) and skin_texture.visible:
+		skin_preview.rotation.y+=delta*.20
+	if game.phase=="title" or toast_time>0:queue_redraw()
+
+func _input(event:InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_ESCAPE:
+		if game.phase=="title" and menu_screen=="holes":close_menu()
+		else:game.toggle_pause()
+		get_viewport().set_input_as_handled()
+
+func crossed_axes(at:Vector2) -> void:
+	draw_set_transform(at,-0.45,Vector2.ONE)
+	var white:=Color("f5f4fc")
+	draw_line(Vector2(-21,-16),Vector2(21,16),white,8,true)
+	draw_line(Vector2(-21,16),Vector2(21,-16),white,8,true)
+	for x in [-1,1]:
+		draw_colored_polygon(PackedVector2Array([Vector2(x*13,-21),Vector2(x*25,-18),Vector2(x*27,-5),Vector2(x*21,0),Vector2(x*11,-9)]),white)
+		draw_rect(Rect2(x*15-4,14,8,12),white)
+	draw_set_transform(Vector2.ZERO)
+
+func lock_icon(at:Vector2) -> void:
+	draw_arc(at+Vector2(0,-6),9,PI,TAU,18,Color("626a91"),3,true)
+	box(Rect2(at-Vector2(12,3),Vector2(24,21)),Color("c7cbea"),7,Color("6b7293"),2)
+	draw_circle(at+Vector2(0,5),2.5,Color("626585"))
+	draw_line(at+Vector2(0,6),at+Vector2(0,11),Color("626585"),2)
+
+func home_icon(at:Vector2) -> void:
+	draw_circle(at+Vector2(0,10),35,Color("0b1519"))
+	draw_arc(at+Vector2(0,10),32,0,TAU,32,RUST,3,true)
+	draw_arc(at+Vector2(0,10),24,0,TAU,32,MINT,2,true)
+	draw_line(at+Vector2(-17,10),at+Vector2(17,10),OCHRE,3,true)
+	draw_line(at+Vector2(0,-7),at+Vector2(0,27),OCHRE,3,true)
+	draw_colored_polygon(PackedVector2Array([at+Vector2(-9,10),at+Vector2(0,-3),at+Vector2(9,10)]),PAPER)
+
+func contour_wallpaper() -> void:
+	for i in 24:
+		var tint:=Color("7260de").lerp(Color("479de9"),float(i)/23.0)
+		draw_rect(Rect2(0,i*40,540,41),tint)
+	for i in 10:
+		var at:=Vector2(float((i*193+33)%680)-70,float((i*223+77)%1120)-60+sin(animation*.18+i)*8)
+		var radius:=float(28+(i%4)*15)
+		draw_circle(at,radius,Color(1,1,1,.055))
+		draw_arc(at,radius,-2.7,-1.3,20,Color(1,1,1,.19),3,true)
+
+func signal_mark(at:Vector2,scale:=1.0) -> void:
+	# A glossy hole badge replaces the previous technical crosshair emblem.
+	var r:=38.0*scale
+	draw_circle(at+Vector2(0,6)*scale,r+6*scale,Color("3e52ae",.30))
+	draw_circle(at,r+4*scale,PAPER)
+	draw_circle(at,r,Color("ff4b98"))
+	draw_circle(at,r*.72,Color("293b75"))
+	draw_arc(at,r*.87,-2.7,-1.1,24,Color("ffb9d9"),5*scale,true)
+	draw_circle(at+Vector2(-18,-24)*scale,5*scale,Color.WHITE)
+	if game.phase=="complete":star(at,r*.56,OCHRE)
+	else:
+		for x in [-1,1]:
+			draw_circle(at+Vector2(x*10,-5)*scale,6*scale,PAPER)
+			draw_circle(at+Vector2(x*10,-3)*scale,2.5*scale,INK)
+		draw_arc(at+Vector2(0,3)*scale,12*scale,.1,PI-.1,18,PAPER,3*scale,true)
+
+func star(at:Vector2,radius:float,tint:Color) -> void:
+	var vertices:=PackedVector2Array()
+	for i in 10:
+		var a:float=-PI/2+i*PI/5
+		vertices.append(at+Vector2(cos(a),sin(a))*radius*(1.0 if i%2==0 else 0.43))
+	draw_colored_polygon(vertices,tint)
+
+func _draw() -> void:
+	if font==null:return
+	if game.phase=="title" and menu_screen=="holes":
+		draw_holes_menu()
+		return
+	if game.phase=="title":
+		contour_wallpaper()
+		box(Rect2(24,26,130,50),PAPER,25,Color.WHITE,2)
+		icon("trophy",Vector2(48,50),40)
+		text_center("LVL %d"%game.stage,Vector2(108,59),21,INK,false)
+		draw_wallet()
+		text_center("SINK CITY",Vector2(270,155),66,Color("444295"))
+		text_center("SINK CITY",Vector2(270,148),66,PAPER)
+		text_center("A BIG LITTLE APPETITE",Vector2(270,183),16,Color("eeeaff"),false)
+		draw_set_transform(Vector2(270,435),0,Vector2(1,.34))
+		draw_circle(Vector2.ZERO,228,Color(1,1,1,.07))
+		draw_arc(Vector2.ZERO,219,0,TAU,72,Color(1,1,1,.22),4,true)
+		draw_set_transform(Vector2.ZERO)
+		text_center(game.MAPS[game.selected_map],Vector2(270,516),30,PAPER)
+		text_center("It's raining delicious!" if game.selected_map=="food" else "Little hole. Whole city.",Vector2(270,540),17,Color("e6f8ff"),false)
+		for i in 2:
+			var rect:Rect2=MAP_CARD_RECTS[i]
+			var active:bool=game.selected_map==["city","food"][i]
+			box(rect,Color("f5fff5") if active else Color("d9e9ff"),26,Color("adffc8") if active else Color("f5f7ff"),3)
+			icon(["city","food-map"][i],rect.position+Vector2(53,60),96)
+			text_center(["SUNNY","SNACK"][i],rect.position+Vector2(160,45),23,INK,false)
+			text_center(["CITY","GARDEN"][i],rect.position+Vector2(160,73),23,INK,false)
+			if active:
+				icon("check",rect.position+Vector2(124,103),24)
+				text_center("SELECTED",rect.position+Vector2(176,109),12,Color("269a65"),false)
+			else:text_center("TAP TO PICK",rect.position+Vector2(162,109),12,SLATE,false)
+		box(Rect2(146,843,248,70),Color("f6f1ff"),32,Color.WHITE,2)
+		icon("skins",Vector2(187,876),62)
+		text_center("SKINS",Vector2(290,888),26,INK,false)
+		text_center("Drag to move. Eat to grow.",Vector2(270,948),15,PAPER,false)
+		return
+	if game.phase in ["intro","playing"]:
+		draw_game_hud()
+		if game.phase=="intro":
+			draw_rect(Rect2(0,236,540,724),Color("354c89",.30))
+			var points:=PackedVector2Array()
+			for i in 65:
+				var t:float=float(i)/64*TAU
+				points.append(Vector2(270+63*cos(t),695+30*sin(2*t)))
+			draw_polyline(points,PAPER,8,true)
+			draw_circle(Vector2(270+63*cos(animation*2),695+30*sin(animation*4)),15,OCHRE)
+			text_center("SWIPE TO EAT",Vector2(270,782),32,PAPER)
+			text_center("Collect snacks, donuts and cake!" if game.selected_map=="food" else "Start small. Grow into the whole city.",Vector2(270,817),19,PAPER,false)
+	elif game.phase in ["eaten","complete","timeout"]:draw_result()
+	if get_tree().paused:
+		draw_rect(Rect2(0,0,540,960),Color("25356f",.68))
+		box(Rect2(54,255,432,434),PAPER,40,Color.WHITE,3)
+		box(Rect2(222,290,96,88),Color("8981e9"),36,Color("cbc7ff"),3)
+		icon("pause",Vector2(270,334),66)
+		text_center("TAKE A BREAK",Vector2(270,428),36,INK,false)
+		text_center("Your city can wait.",Vector2(270,460),19,SLATE,false)
+	if toast_time>0:
+		box(Rect2(65,303,410,50),PAPER,25,Color("bbd8ff"),2)
+		text_center(toast,Vector2(270,336),18,INK,false)
+
+func draw_wallet() -> void:
+	box(Rect2(394,26,122,50),PAPER,25,Color.WHITE,2)
+	icon("coin",Vector2(414,49),43)
+	text_center(str(game.coins),Vector2(474,59),23,INK,false)
+
+func draw_result() -> void:
+	draw_rect(Rect2(0,0,540,960),Color("2b3778",.70))
+	box(Rect2(54,239,432,563),PAPER,40,Color.WHITE,3)
+	var won:bool=game.phase=="complete"
+	text_center("DELICIOUS!" if won else "GOBBLED UP!" if game.phase=="eaten" else "TIME'S UP!",Vector2(270,305),39,INK,false)
+	if won:
+		for i in 3:star(Vector2(204+i*66,352-12*(i%2)),23,Color("ffbe35"))
+		icon("trophy",Vector2(270,423),119)
+	else:signal_mark(Vector2(270,406),1.28)
+	text_center("%d"%game.player.score,Vector2(270,527),48,INK,false)
+	text_center("POINTS",Vector2(270,554),16,SLATE,false)
+	text_center("A whole lot of yum!" if won else "A bigger hole got you." if game.phase=="eaten" else "One more bite?",Vector2(270,596),20,INK,false)
+
+func text_wrapped(message:String,at:Vector2,width:float,font_size:int,tint:Color) -> float:
+	var line:=""
+	var baseline:=at.y
+	for word in message.split(" "):
+		var candidate:=word if line.is_empty() else line+" "+word
+		if not line.is_empty() and font.get_string_size(candidate,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x>width:
+			draw_string(font,Vector2(at.x,baseline),line,HORIZONTAL_ALIGNMENT_LEFT,width,font_size,tint)
+			baseline+=font_size+5
+			line=word
+		else:line=candidate
+	draw_string(font,Vector2(at.x,baseline),line,HORIZONTAL_ALIGNMENT_LEFT,width,font_size,tint)
+	return baseline
+
+func draw_holes_menu() -> void:
+	contour_wallpaper()
+	box(Rect2(20,24,64,64),Color("9585ee"),28,Color("c7bfff"),2)
+	icon("back",Vector2(52,56),42)
+	text_center("SKINS",Vector2(259,68),43,PAPER)
+	draw_wallet()
+	box(Rect2(24,104,238,64),PAPER if holes_tab=="classic" else Color("5e66bd"),29,Color.WHITE if holes_tab=="classic" else Color("a2b1ee"),2)
+	box(Rect2(278,104,238,64),PAPER if holes_tab=="special" else Color("5e66bd"),29,Color.WHITE if holes_tab=="special" else Color("a2b1ee"),2)
+	text_center("CLASSIC  %d/5"%game.unlocked_skin_count("foundation"),Vector2(143,142),21,INK if holes_tab=="classic" else PAPER,false)
+	text_center("SPECIAL  %d/5"%game.unlocked_skin_count("resonance"),Vector2(397,142),21,INK if holes_tab=="special" else PAPER,false)
+	var detail:Dictionary=game.skin_definition(preview_skin_id)
+	var detail_unlocked:bool=game.skin_unlocked(preview_skin_id)
+	draw_set_transform(Vector2(270,280),0,Vector2(1,.30))
+	draw_circle(Vector2.ZERO,149,Color(1,1,1,.10))
+	draw_arc(Vector2.ZERO,149,0,TAU,64,Color(1,1,1,.20),3,true)
+	draw_set_transform(Vector2.ZERO)
+	text_center(detail.name,Vector2(270,337),28,PAPER)
+	var ids:=tab_skin_ids()
+	for index in ids.size():
+		var rect:=slot_rect(index)
+		var definition:Dictionary=game.skin_definition(ids[index])
+		var unlocked:bool=game.skin_unlocked(ids[index])
+		var equipped:bool=game.selected_skin_id==definition.id
+		var selected:bool=preview_skin_id==definition.id
+		box(rect,Color("eafff0") if equipped else Color("f5f1ff") if holes_tab=="special" else Color("e3f1ff"),26,Color("98ffc0") if equipped else Color("ffec9a") if selected else Color.WHITE,4 if selected or equipped else 2)
+		text_center(definition.name,rect.position+Vector2(80,127),18,INK,false)
+		if equipped:
+			icon("check",rect.position+Vector2(140,146),23)
+			text_center("EQUIPPED",rect.position+Vector2(74,152),12,Color("24885a"),false)
+		elif unlocked:text_center("TAP TO USE",rect.position+Vector2(80,152),13,SLATE,false)
+		else:
+			icon("lock",rect.position+Vector2(35,144),23)
+			text_center("%d PTS"%int(definition.unlock),rect.position+Vector2(91,152),14,SLATE,false)
+	icon("trophy",Vector2(440,570),52)
+	text_center(str(game.skin_progress),Vector2(440,627),29,PAPER)
+	text_center("BEST ROUND",Vector2(440,652),13,PAPER,false)
+	box(Rect2(20,712,500,128),PAPER,28,Color.WHITE,2)
+	text_center("EQUIPPED" if game.selected_skin_id==detail.id else "%d POINTS TO UNLOCK"%int(detail.unlock) if not detail_unlocked else "READY TO PLAY",Vector2(270,743),19,Color("278c65") if detail_unlocked else SLATE,false)
+	text_wrapped(detail.skill_desc,Vector2(40,774),460,18,INK)
+	if toast_time>0:
+		box(Rect2(82,811,376,36),Color("d9f8e8") if detail_unlocked else Color("fff0c5"),18,Color.WHITE,2)
+		text_center(toast,Vector2(270,835),15,INK,false)
+
+func draw_game_hud() -> void:
+	box(Rect2(186,24,168,56),PAPER,28,Color.WHITE,3)
+	icon("clock",Vector2(207,51),48)
+	var seconds:=int(ceil(game.remaining))
+	text_center("%02d:%02d"%[seconds/60,seconds%60],Vector2(285,64),30,Color("e25a64") if seconds<=30 else INK,false)
+	box(Rect2(151,94,238,52),Color("5889d8",.96),24,Color("c6eaff"),2)
+	text_center("%d / %d"%[game.player.score,game.SCORE_TARGET],Vector2(270,121),24,PAPER)
+	box(Rect2(174,132,192,7),Color("3459a5"),4,Color.TRANSPARENT,0)
+	var ratio:float=clampf(float(game.player.score)/float(game.SCORE_TARGET),0,1)
+	if ratio>0:box(Rect2(174,132,192*ratio,7),Color("98f4a1"),4,Color.TRANSPARENT,0)
+	box(Rect2(20,24,116,56),Color("5889d8",.96),28,Color("c6eaff"),2)
+	icon("trophy",Vector2(45,51),45)
+	text_center(str(game.kills),Vector2(90,64),29,PAPER)
+	if game.phase=="playing":
+		box(Rect2(456,20,64,64),Color("6996e7"),28,Color("d7eaff"),2)
+		icon("pause",Vector2(488,52),42)
+	if game.selected_map=="food":draw_food_order()
+	if game.phase!="playing":return
+	var origin:=Vector2(270,801)
+	var knob:=Vector2.ZERO
+	if game.player.touch_index>=0:
+		origin=game.player.touch_origin;knob=game.player.joystick.limit_length()*43
+	elif game.player.dragged:
+		origin=game.player.mouse_origin;knob=((get_viewport().get_mouse_position()-origin)/80).limit_length()*43
+	if game.player.touch_index>=0 or game.player.dragged:
+		draw_circle(origin,62,Color(1,1,1,.12))
+		draw_arc(origin,62,0,TAU,64,Color(1,1,1,.42),3,true)
+		draw_circle(origin+knob,25,Color(1,1,1,.7))
+	var pulse_ratio:float=clampf(game.player.pulse_charge/100.0,0,1)
+	var pulse_at:=Vector2(466,845)
+	box(Rect2(pulse_at-Vector2(45,45),Vector2(90,90)),Color("ffa51c") if pulse_ratio>=1 else Color("739ce8"),45,Color("ffecaa") if pulse_ratio>=1 else Color("d7eaff"),3)
+	draw_arc(pulse_at,38,-PI/2,-PI/2+TAU*maxf(.001,pulse_ratio),48,Color("fff7b6"),4,true)
+	icon("boost",pulse_at-Vector2(0,7),53)
+	text_center("GO!" if pulse_ratio>=1 else "%d%%"%int(pulse_ratio*100),pulse_at+Vector2(0,29),18,PAPER)
+	text_center("BOOST",pulse_at+Vector2(0,65),16,PAPER)
+	var skin:Dictionary=game.skin_definition(game.player.skin_id)
+	if skin.kind!="cosmetic":
+		var skill_at:=Vector2(466,725)
+		box(Rect2(skill_at-Vector2(43,43),Vector2(86,86)),Color("58c898") if game.player.skin_cooldown<=0 else Color("899ed8"),43,Color("d2ffea"),3)
+		text_center(skin.skill_short,skill_at+Vector2(0,-2),16,PAPER)
+		var state:="AUTO" if skin.kind=="bloom" else "GO!" if game.player.skin_cooldown<=0 else "%.1fs"%game.player.skin_cooldown
+		text_center(state,skill_at+Vector2(0,23),19,PAPER)
+		if float(skin.cooldown)>0.0:
+			var ready:float=1.0-clampf(game.player.skin_cooldown/float(skin.cooldown),0,1)
+			draw_arc(skill_at,35,-PI/2,-PI/2+TAU*maxf(.001,ready),48,Color("97ffd0"),3,true)
+	if game.player.pulse_time>0.0:
+		var pulse_screen:Vector2=game.camera.unproject_position(game.player.global_position+Vector3.UP*.2)
+		var pulse_radius:float=minf(190.0,50.0+game.player.radius*14.0)
+		draw_arc(pulse_screen,pulse_radius,0,TAU,48,Color("a9d8b5",.70),5,true)
+		draw_arc(pulse_screen,pulse_radius+8,-PI/2,-PI/2+TAU*(game.player.pulse_time/.72),32,RUST,.95*8,true)
+	if game.notice_time>0:
+		box(Rect2(87,253,366,46),Color("ffc04b"),23,Color.WHITE,3)
+		text_center(game.notice,Vector2(270,285),23,INK,false)
+	elif game.swallow_hint!="":
+		box(Rect2(140,253,260,45),Color("fff9df"),22,Color.WHITE,3)
+		text_center(game.swallow_hint,Vector2(270,283),18,INK,false)
+
+func draw_food_order() -> void:
+	var amounts:=food_order_counts()
+	box(Rect2(20,163,500,68),PAPER,30,Color.WHITE,3)
+	for i in 3:
+		var x:=26.0+i*166
+		if i>0:draw_line(Vector2(x-2,178),Vector2(x-2,217),Color("d6e5f6"),2,true)
+		var done:bool=amounts[i]>=[10,4,1][i]
+		var bounce:float=1.0+sin(float(goal_pop[i])/.32*PI)*.13
+		icon(["treats","donut","cake"][i],Vector2(x+33,194),57*bounce)
+		text_center("%d/%d"%[amounts[i],[10,4,1][i]],Vector2(x+109,205),26,Color("268958") if done else INK,false)
+		if done:icon("check",Vector2(x+145,178),22)
+
+func food_order_counts() -> Array:
+	return [mini(10,game.small_food_collected()),mini(4,int(game.food_collected.get("donut",0))),mini(1,int(game.food_collected.get("cake",0)))]
+
+func update_map_preview()->void:
+	for child in hero_view.get_children():
+		if child is WorldEnvironment:child.environment.ambient_light_energy=.48 if game.selected_map=="food" else .8
+	if is_instance_valid(hero_models):
+		hero_view.remove_child(hero_models)
+		hero_models.queue_free()
+	if game.selected_map=="food":
+		hero_models=game.FoodCity.new()
+		hero_view.add_child(hero_models)
+		hero_models.game=game
+		hero_models.set_process(false)
+		hero_models.build_tower(Vector2(-3,-2),0,{"floors":6,"yaw":-.25,"size":1.45})
+		hero_models.build_tower(Vector2(3,-2),1,{"floors":2,"yaw":.4,"size":1.65})
+		hero_models.build_pile(Vector2(2,4),201,3,.65)
+		hero_models.food("egg",Vector2(-4,4),1.1,1)
+		hero_models.box(hero_models,Vector3(0,-.5,0),Vector3(15,1,13),Color("67d4b5"))
+	else:
+		hero_models=Art.new()
+		hero_view.add_child(hero_models)
+		hero_models.build_preview()
+
+func cycle_map() -> void:
+	game.select_map("food" if game.selected_map=="city" else "city")
+
+func make_card_preview(id:String,rect:Rect2) -> void:
+	# One rendered frame per thumbnail. Only the large selected preview animates.
+	var view:=SubViewport.new()
+	view.size=Vector2i(144,106);view.transparent_bg=true;view.own_world_3d=true
+	view.render_target_update_mode=SubViewport.UPDATE_ONCE
+	add_child(view);skin_cards.append(view)
+	var model:=SkinVisual.new();view.add_child(model)
+	model.build(game.skin_definition(id),true);model._process(.65);model.set_process(false)
+	var camera:=Camera3D.new();camera.projection=Camera3D.PROJECTION_ORTHOGONAL
+	# Taller cards have a narrower aspect ratio; preserve the wide water/plasma
+	# silhouettes rather than cropping them with the previous 2.2 m framing.
+	camera.size=3.1;view.add_child(camera);camera.position=Vector3(0,6.6,8)
+	camera.look_at(Vector3(0,.14,0));camera.current=true
+	var texture:=TextureRect.new();texture.texture=view.get_texture()
+	texture.position=rect.position+Vector2(8,4);texture.size=Vector2(144,106)
+	texture.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	add_child(texture);card_textures.append(texture)

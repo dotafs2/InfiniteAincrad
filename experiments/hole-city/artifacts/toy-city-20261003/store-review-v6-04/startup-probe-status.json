@@ -1,0 +1,145 @@
+{
+  "version": "0.13.0",
+  "status": "failed_or_watchdog_stopped",
+  "source_gate_sha256": "40b53f486ba9d542d2a495f9293e2f81cc559c3e82527c55cd2de095b03e3b7f",
+  "startup_only": true,
+  "watchdog_seconds": 60,
+  "error": "TimeoutExpired: Command '['/usr/bin/nice', '-n', '15', '/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/.build/godot-standard/Godot.app/Contents/MacOS/Godot', '--path', '/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/toy-city-20261003/store-review-v6-04/capture-project', '--audio-driver', 'Dummy', '--write-movie', '/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/toy-city-20261003/store-review-v6-04/startup-probe-raw.avi', '--fixed-fps', '30', '--script', '/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/toy-city-20261003/store-review-v6-04/capture-project/movie.gd', '--', '--test', '--record-map=city', '--capture-dir=/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/toy-city-20261003/store-review-v6-04/movie-probe', '--startup-probe']' timed out after 60 seconds",
+  "last_stage": {
+    "game_phase": "title",
+    "map": "city",
+    "menu": "home",
+    "movie_frame": 5,
+    "picture": "home-initial",
+    "render_loop_enabled": true,
+    "stage": "picture_post_draw_wait",
+    "startup_probe": true,
+    "ticks_usec": 2214329,
+    "window_visible": true
+  },
+  "stages": [
+    {
+      "map": "city",
+      "movie_frame": 0,
+      "render_loop_enabled": true,
+      "stage": "run_directory_ready",
+      "startup_probe": true,
+      "ticks_usec": 1135508,
+      "window_visible": true
+    },
+    {
+      "map": "city",
+      "movie_frame": 0,
+      "render_loop_enabled": true,
+      "stage": "scene_load_begin",
+      "startup_probe": true,
+      "ticks_usec": 1135740,
+      "window_visible": true
+    },
+    {
+      "map": "city",
+      "movie_frame": 0,
+      "render_loop_enabled": true,
+      "stage": "scene_load_done",
+      "startup_probe": true,
+      "ticks_usec": 1624742,
+      "window_visible": true
+    },
+    {
+      "map": "city",
+      "movie_frame": 0,
+      "render_loop_enabled": true,
+      "stage": "scene_instantiate_begin",
+      "startup_probe": true,
+      "ticks_usec": 1624906,
+      "window_visible": true
+    },
+    {
+      "game_phase": "title",
+      "map": "city",
+      "menu": "not_ready",
+      "movie_frame": 0,
+      "render_loop_enabled": true,
+      "stage": "scene_instantiate_done",
+      "startup_probe": true,
+      "ticks_usec": 1625063,
+      "window_visible": true
+    },
+    {
+      "game_phase": "title",
+      "map": "city",
+      "menu": "not_ready",
+      "movie_frame": 0,
+      "render_loop_enabled": true,
+      "stage": "root_add_child_begin",
+      "startup_probe": true,
+      "ticks_usec": 1625103,
+      "window_visible": true
+    },
+    {
+      "game_phase": "title",
+      "map": "city",
+      "menu": "home",
+      "movie_frame": 0,
+      "render_loop_enabled": true,
+      "stage": "root_add_child_done",
+      "startup_probe": true,
+      "ticks_usec": 1654750,
+      "window_visible": true
+    },
+    {
+      "count": 6,
+      "game_phase": "title",
+      "map": "city",
+      "menu": "home",
+      "movie_frame": 0,
+      "render_loop_enabled": true,
+      "stage": "initial_six_frames_begin",
+      "startup_probe": true,
+      "ticks_usec": 1654847,
+      "window_visible": true
+    },
+    {
+      "count": 6,
+      "game_phase": "title",
+      "map": "city",
+      "menu": "home",
+      "movie_frame": 5,
+      "render_loop_enabled": true,
+      "stage": "initial_six_frames_done",
+      "startup_probe": true,
+      "ticks_usec": 2214201,
+      "window_visible": true
+    },
+    {
+      "game_phase": "title",
+      "map": "city",
+      "menu": "home",
+      "movie_frame": 5,
+      "picture": "home-initial",
+      "render_loop_enabled": true,
+      "stage": "picture_enter",
+      "startup_probe": true,
+      "ticks_usec": 2214296,
+      "window_visible": true
+    },
+    {
+      "game_phase": "title",
+      "map": "city",
+      "menu": "home",
+      "movie_frame": 5,
+      "picture": "home-initial",
+      "render_loop_enabled": true,
+      "stage": "picture_post_draw_wait",
+      "startup_probe": true,
+      "ticks_usec": 2214329,
+      "window_visible": true
+    }
+  ],
+  "raw_bytes": 572297216,
+  "raw_finalization_verified": false,
+  "force_draw_used": false,
+  "full_round_or_encoder_started": false,
+  "physical_iphone_capture": false,
+  "scope": "Private diagnostic only; logs/raw remain preserved, no retry or commercial claim"
+}

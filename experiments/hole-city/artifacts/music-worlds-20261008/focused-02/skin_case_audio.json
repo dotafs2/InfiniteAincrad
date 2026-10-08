@@ -1,0 +1,93 @@
+{
+  "checks": 122,
+  "evidence": {
+    "streams": [
+      {
+        "cue": "open",
+        "decoded_frames": 187422,
+        "decoded_peak": 0.21994760632515,
+        "duration": 4.25,
+        "encoded_sha256": "863fb036d3e7f84401a78dc781395b9ae13e49c4ef382839d4534d171f96b842",
+        "import_format": 3,
+        "mix_rate": 32000,
+        "mono": true
+      },
+      {
+        "cue": "tick",
+        "decoded_frames": 1235,
+        "decoded_peak": 0.120279587805271,
+        "duration": 0.028,
+        "encoded_sha256": "a401ce252960a089d746a61c089a6b75b86484d47fc5d50e300341206e05ef8a",
+        "import_format": 3,
+        "mix_rate": 32000,
+        "mono": true
+      },
+      {
+        "cue": "common",
+        "decoded_frames": 20287,
+        "decoded_peak": 0.240014865994453,
+        "duration": 0.46,
+        "encoded_sha256": "c4084ee6788d7c693124278d641aa10373351e37e7e1b81d267451f78f4a49d9",
+        "import_format": 3,
+        "mix_rate": 32000,
+        "mono": true
+      },
+      {
+        "cue": "uncommon",
+        "decoded_frames": 26461,
+        "decoded_peak": 0.239922925829887,
+        "duration": 0.6,
+        "encoded_sha256": "16d11a5805a780dfd2a8466752f9e2027c3d823ace7f1bb1114b74ad05748e6a",
+        "import_format": 3,
+        "mix_rate": 32000,
+        "mono": true
+      },
+      {
+        "cue": "rare",
+        "decoded_frames": 32635,
+        "decoded_peak": 0.240167811512947,
+        "duration": 0.74,
+        "encoded_sha256": "b3a2e414dda739efcbac122eb93134fecd79a2dc4df1fee7ee76867e31edd851",
+        "import_format": 3,
+        "mix_rate": 32000,
+        "mono": true
+      },
+      {
+        "cue": "epic",
+        "decoded_frames": 39691,
+        "decoded_peak": 0.239970088005066,
+        "duration": 0.9,
+        "encoded_sha256": "71e6e782950a3861bb0f02d4805c6783892cca174ff4c1850d5f5f6d4118125f",
+        "import_format": 3,
+        "mix_rate": 32000,
+        "mono": true
+      },
+      {
+        "cue": "legendary",
+        "decoded_frames": 47629,
+        "decoded_peak": 0.240175485610962,
+        "duration": 1.08,
+        "encoded_sha256": "4d5942ca9c4736998c6def64922785f46ad6c782692abfe70d5b4aa9d51c3ab0",
+        "import_format": 3,
+        "mix_rate": 32000,
+        "mono": true
+      },
+      {
+        "cue": "prismatic",
+        "decoded_frames": 54685,
+        "decoded_peak": 0.239906683564186,
+        "duration": 1.24,
+        "encoded_sha256": "2d6a717d5d4416fea1925b5de9ef5ba4a5c96832b19c25843eed8153175eaa90",
+        "import_format": 3,
+        "mix_rate": 32000,
+        "mono": true
+      }
+    ],
+    "voice_ids": [
+      31692162533,
+      31725716967
+    ]
+  },
+  "failures": [],
+  "scope": "Actual imported WAV decoding and two-player lifecycle; memory only, no Game/save/commerce. Dummy audio state is not physical-device listening."
+}

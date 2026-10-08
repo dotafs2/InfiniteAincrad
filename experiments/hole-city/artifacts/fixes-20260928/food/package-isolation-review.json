@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "label": "root-cwd-reproduces-source-tool-fallback",
+      "passed": true
+    },
+    {
+      "label": "root-cwd-reproduces-new-sentinel-fallback",
+      "passed": true
+    },
+    {
+      "label": "candidate-cwd-excludes-source-tool",
+      "passed": true
+    },
+    {
+      "label": "candidate-cwd-excludes-new-source-sentinel",
+      "passed": true
+    },
+    {
+      "label": "candidate-cwd-keeps-packaged-main-scene",
+      "passed": true
+    },
+    {
+      "label": "reviewed-pack-unchanged",
+      "passed": true
+    },
+    {
+      "label": "reviewed-gate-unchanged",
+      "passed": true
+    }
+  ],
+  "count": 7,
+  "passed": true,
+  "gate_sha256": "5d4ffb3422c191076063c29b60dde1a9593bb90219fbe056f628e3406da7bb05",
+  "pack_sha256": "ee7d292a754c36270ced0a6285f415f4fd25fd83dfb45e87ef1ee858aed0b7b9",
+  "pack": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/package-isolation-review/index.pck",
+  "control": {
+    "checks": 3,
+    "excluded_tool_visible": true,
+    "failures": [],
+    "globalized_res": "",
+    "isolated": false,
+    "packaged_main_scene_visible": true,
+    "source_only_sentinel_visible": true
+  },
+  "isolated": {
+    "checks": 3,
+    "excluded_tool_visible": false,
+    "failures": [],
+    "globalized_res": "",
+    "isolated": true,
+    "packaged_main_scene_visible": true,
+    "source_only_sentinel_visible": false
+  },
+  "scope": "Real headless packaged-resource existence checks through actual gate.acceptance/run cwd propagation; no scene instantiation, preview publication, save writes, or CPU timing"
+}

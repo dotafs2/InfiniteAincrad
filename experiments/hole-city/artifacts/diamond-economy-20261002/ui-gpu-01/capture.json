@@ -1,0 +1,443 @@
+{
+	"audio": "Master bus muted; launch should additionally use Dummy driver",
+	"captures": [
+		{
+			"coins": 50,
+			"controls": [
+				{
+					"disabled": false,
+					"id": "audio-music",
+					"rect": [
+						166.0,
+						20.0,
+						112.0,
+						64.0
+					],
+					"text": "MUSIC ON"
+				},
+				{
+					"disabled": false,
+					"id": "audio-sfx",
+					"rect": [
+						286.0,
+						20.0,
+						98.0,
+						64.0
+					],
+					"text": "SFX ON"
+				},
+				{
+					"disabled": false,
+					"id": "release-info",
+					"rect": [
+						438.0,
+						188.0,
+						78.0,
+						64.0
+					],
+					"text": "INFO"
+				},
+				{
+					"disabled": false,
+					"id": "all-maps",
+					"rect": [
+						24.0,
+						486.0,
+						492.0,
+						64.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": false,
+					"id": "@Button@97",
+					"rect": [
+						86.0,
+						724.0,
+						368.0,
+						82.0
+					],
+					"text": "PLAY"
+				},
+				{
+					"disabled": false,
+					"id": "store-nav",
+					"rect": [
+						20.0,
+						854.0,
+						116.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": true,
+					"id": "holes-home",
+					"rect": [
+						148.0,
+						854.0,
+						116.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": false,
+					"id": "holes-nav",
+					"rect": [
+						276.0,
+						854.0,
+						116.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": false,
+					"id": "home-play-dock",
+					"rect": [
+						404.0,
+						854.0,
+						116.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": false,
+					"id": "home-map-nav",
+					"rect": [
+						24.0,
+						556.0,
+						238.0,
+						130.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": false,
+					"id": "home-food-nav",
+					"rect": [
+						278.0,
+						556.0,
+						238.0,
+						130.0
+					],
+					"text": ""
+				}
+			],
+			"diamonds": 10,
+			"label": "home",
+			"map": "city",
+			"path": "res://artifacts/diamond-economy-20261002/ui-gpu-01/home.png",
+			"phase": "title",
+			"remaining": 60.0,
+			"scope": "Actual fresh profile: Sunny City 90s and Snack Garden 60s cards",
+			"sha256": "fcb0666827275b8b91c7e8f2a4c4ac2ecd929edb1fdf66282020fa972008f75d"
+		},
+		{
+			"coins": 50,
+			"controls": [
+				{
+					"disabled": true,
+					"id": "store-diamond-video",
+					"rect": [
+						40.0,
+						199.0,
+						460.0,
+						100.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": true,
+					"id": "store-pack-0",
+					"rect": [
+						40.0,
+						324.0,
+						460.0,
+						96.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": true,
+					"id": "store-pack-1",
+					"rect": [
+						40.0,
+						446.0,
+						460.0,
+						96.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": true,
+					"id": "store-pack-2",
+					"rect": [
+						40.0,
+						568.0,
+						460.0,
+						96.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": false,
+					"id": "diamond-shop",
+					"rect": [
+						90.0,
+						735.0,
+						360.0,
+						68.0
+					],
+					"text": "DIAMOND SHOP"
+				},
+				{
+					"disabled": true,
+					"id": "store-nav",
+					"rect": [
+						20.0,
+						854.0,
+						116.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": false,
+					"id": "holes-home",
+					"rect": [
+						148.0,
+						854.0,
+						116.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": false,
+					"id": "holes-nav",
+					"rect": [
+						276.0,
+						854.0,
+						116.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": false,
+					"id": "@Button@101",
+					"rect": [
+						404.0,
+						854.0,
+						116.0,
+						74.0
+					],
+					"text": "PLAY"
+				}
+			],
+			"diamonds": 10,
+			"label": "store",
+			"map": "city",
+			"path": "res://artifacts/diamond-economy-20261002/ui-gpu-01/store.png",
+			"phase": "title",
+			"remaining": 60.0,
+			"scope": "Actual fresh 50-coin/10-diamond wallet; absent rewarded SDK; locked unaffordable exchanges",
+			"sha256": "cea05930a92c6cb621db6566f2c47b9c2d682d6d3d90054f6944e0024c7f9a22"
+		},
+		{
+			"coins": 50,
+			"controls": [
+				{
+					"disabled": false,
+					"id": "purchase-back",
+					"rect": [
+						20.0,
+						20.0,
+						122.0,
+						64.0
+					],
+					"text": "BACK"
+				},
+				{
+					"disabled": true,
+					"id": "purchase-0",
+					"rect": [
+						40.0,
+						236.0,
+						460.0,
+						126.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": true,
+					"id": "purchase-1",
+					"rect": [
+						40.0,
+						392.0,
+						460.0,
+						126.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": true,
+					"id": "purchase-2",
+					"rect": [
+						40.0,
+						548.0,
+						460.0,
+						126.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": true,
+					"id": "store-nav",
+					"rect": [
+						20.0,
+						854.0,
+						116.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": false,
+					"id": "holes-home",
+					"rect": [
+						148.0,
+						854.0,
+						116.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": false,
+					"id": "holes-nav",
+					"rect": [
+						276.0,
+						854.0,
+						116.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"disabled": false,
+					"id": "@Button@103",
+					"rect": [
+						404.0,
+						854.0,
+						116.0,
+						74.0
+					],
+					"text": "PLAY"
+				}
+			],
+			"diamonds": 10,
+			"label": "diamond-shop-unavailable",
+			"map": "city",
+			"path": "res://artifacts/diamond-economy-20261002/ui-gpu-01/diamond-shop-unavailable.png",
+			"phase": "title",
+			"remaining": 60.0,
+			"scope": "Actual diamond packs with UNAVAILABLE prices; no provider, purchase or native review receipt",
+			"sha256": "6809451ce78f940cb68aebc3da0e26f71a6ab4e824b7f8e462a569b8026b7d0e"
+		},
+		{
+			"coins": 50,
+			"controls": [],
+			"diamonds": 10,
+			"label": "sunny-city-intro",
+			"map": "city",
+			"path": "res://artifacts/diamond-economy-20261002/ui-gpu-01/sunny-city-intro.png",
+			"phase": "intro",
+			"remaining": 90.0,
+			"scope": "Actual authored 90-second tutorial; frozen isolated physics for a readable GPU frame",
+			"sha256": "d680442992e53ff0d5a1dbef802948d8683af8bc0695867138c4ed38dd07d42d"
+		},
+		{
+			"coins": 50,
+			"controls": [
+				{
+					"disabled": true,
+					"id": "extend-video",
+					"rect": [
+						90.0,
+						566.0,
+						360.0,
+						64.0
+					],
+					"text": "WATCH VIDEO · +30s"
+				},
+				{
+					"disabled": false,
+					"id": "extend-diamonds",
+					"rect": [
+						90.0,
+						647.0,
+						360.0,
+						64.0
+					],
+					"text": "5 DIAMONDS · +30s"
+				},
+				{
+					"disabled": false,
+					"id": "result-play-again",
+					"rect": [
+						90.0,
+						735.0,
+						360.0,
+						68.0
+					],
+					"text": "PLAY AGAIN"
+				},
+				{
+					"disabled": false,
+					"id": "result-home",
+					"rect": [
+						142.0,
+						820.0,
+						256.0,
+						64.0
+					],
+					"text": "HOME"
+				}
+			],
+			"diamonds": 10,
+			"label": "timeout-continuation",
+			"map": "city",
+			"path": "res://artifacts/diamond-economy-20261002/ui-gpu-01/timeout-continuation.png",
+			"phase": "complete",
+			"remaining": 0.0,
+			"scope": "Actual timer-boundary result in an isolated fresh world; unavailable video and affordable 5-diamond continuation",
+			"sha256": "e909f20d837ffd388575033aaa436071bc96655f451c2ee68e79b6f31d922c14"
+		},
+		{
+			"coins": 50,
+			"controls": [],
+			"diamonds": 10,
+			"label": "snack-garden-intro",
+			"map": "food",
+			"path": "res://artifacts/diamond-economy-20261002/ui-gpu-01/snack-garden-intro.png",
+			"phase": "intro",
+			"remaining": 60.0,
+			"scope": "Actual authored 60-second food-map tutorial; frozen isolated physics",
+			"sha256": "cca65fca93e62cf8c639e52075025f3d3ad96274a995c5be505e77b00f394ad0"
+		}
+	],
+	"inputs": {
+		"game": "a2b1b384f18a24970229754072f0a8205ab6fa1e328a161b7d08b5bf04b074ba",
+		"ui": "d600cb59aa4e7bfc6713beaabcc88ba6390b56510875970aa92152de62cd0c76"
+	},
+	"schema": 1,
+	"scope": "Actual Mac GPU scene frames in --test mode, unchanged starter wallet, no SDK and no real-money transactions. Not native StoreKit review screenshots, phone safe-area evidence, physical haptic evidence or a full-duration soak.",
+	"window": [
+		540,
+		1174
+	]
+}

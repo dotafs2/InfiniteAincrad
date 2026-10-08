@@ -1,0 +1,17 @@
+{
+  "scope": "Controlled commerce boundary acceptance; no real StoreKit purchase, ad, native SDK compilation, sandbox or account action.",
+  "command": "nice -n 15 .build/godot-standard/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/monetization_bridges_acceptance.gd -- --test",
+  "exit_code": 0,
+  "checks": 116,
+  "failures": [],
+  "native_catalog_exact_match": true,
+  "preserved_native_noncommerce_source_sha256": "584b5d5332ddd143d1a9c8d51a5b6cc344c3602f7f9a7663a913dfb329bb9955",
+  "sources": {
+    "fidelity/commerce_bridge.gd": "fe08f9bf468b8753a5610f374fee226183823b57a3aa23062db98e93bcb47cf7",
+    "native/ios/HoleFeastServices.swift": "4796be1bac3627e4bed3f548fa11ab3bc298938756cb8b0091447f397ab5eb08",
+    "tests/monetization_bridges_acceptance.gd": "e3706bb2fa29e6936da648dc433fcb580026adcc96211eb2fd5b282e3567826a",
+    "fidelity/release_info.gd": "891f48e411deeb7e4abb3aa57a4bcf6c43c1f182c88646914c9f75127fbea1b8",
+    "tests/release_info_acceptance.gd": "e94ca613ee3c77cc5b1235787f8e1a5e4e5c11289fee75694da91d52b918899b"
+  },
+  "release_info_suite": "Not run by this agent while the game and UI are being integrated."
+}

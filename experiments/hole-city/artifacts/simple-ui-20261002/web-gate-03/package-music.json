@@ -1,0 +1,40 @@
+{
+  "checks": 129,
+  "evidence": {
+    "actual_loop": {
+      "after_wall_wait_seconds": 0.15,
+      "map": "food",
+      "playing": true,
+      "position": 0.158662125468254,
+      "seek_seconds": 87.97
+    },
+    "isolated_save": {
+      "combinations": 4,
+      "failure_rollback": true,
+      "legacy_default": true,
+      "scope": "Owned temporary files only; no real user progress file is opened."
+    },
+    "seek_playback": {
+      "after": -9223371955149731752,
+      "before": -9223371955267172247,
+      "note": "Explicit seek may replace the decoder; the no-restart oracle is captured after this intentional operation.",
+      "position": 3.00290250778198
+    },
+    "tracks": [
+      {
+        "encoded_packet_sha256": "5d0053ae1d9ee3c8627fe9f6cfecd9f0126fc6c9eaae65ad47b01c7049f71fe0",
+        "length_seconds": 88.0,
+        "loop": true,
+        "map": "city"
+      },
+      {
+        "encoded_packet_sha256": "5d0053ae1d9ee3c8627fe9f6cfecd9f0126fc6c9eaae65ad47b01c7049f71fe0",
+        "length_seconds": 88.0,
+        "loop": true,
+        "map": "food"
+      }
+    ]
+  },
+  "failures": [],
+  "scope": "Independent headless audio/resource/control/save acceptance. No browser autoplay, listening-quality or device-performance claim."
+}

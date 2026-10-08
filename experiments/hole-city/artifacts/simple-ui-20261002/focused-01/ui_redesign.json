@@ -1,0 +1,21 @@
+{
+  "checks": 1879,
+  "failures": [
+    "Navigation target exists: PLAY",
+    "Library PLAY uses the equipped skin",
+    "Menu toast does not leak into gameplay",
+    "Thumbnail viewports are released on round entry",
+    "Functional skill and boost remain available",
+    "Navigation target exists: pause-action",
+    "Pointer pauses without leaving a stuck joystick",
+    "Navigation target exists: KEEP PLAYING",
+    "Pointer resumes the same round",
+    "Navigation target exists: PLAY AGAIN",
+    "Replay keeps the food map and clears the order",
+    "Navigation target exists: HOME",
+    "Results HOME restores the miniature",
+    "Engine process failed; inspect the engine log"
+  ],
+  "input": "Actual viewport mouse down/up",
+  "minimum_test_width_points": 375
+}

@@ -1,0 +1,598 @@
+{
+  "result": "pass",
+  "review_checks": 1476,
+  "marker": "FOOD_GROWTH_REVIEW",
+  "runtime_input_hashes": {
+    "fidelity/food_city.gd": "1a4b33a2b4890411fef3304a29e46a3c4b6d1ca38a1e2f81be1f47f2ee430755",
+    "fidelity/food_body.gd": "acc24c145f8eae9f312c481af8fec9ff482fcf5f34159e56b45d403acc9fd22c",
+    "assets/food_city/neighborhoods.json": "8c0a6329f65b237279dadaefd047c3c7aca375a3a19f4e2f6fc8d478a27ea784",
+    "tools/build_food_neighborhoods.py": "217e2087da9ec5ad6cd5aab98e9e84f8fbccf585e23cb90ca783d8945308e90d",
+    "tests/food_growth_review.gd": "a12c757e09714eac0240f09b51581cbb6cadda87e488156cbf0fda5cae31bc43",
+    "tests/food_finish_acceptance.gd": "b87588fdeeaa8b7bbf217dfbd6f6ee95465007f5cb7ee932373135628e1998e8"
+  },
+  "food_finish_checks": 136,
+  "geometry_comparison": {
+    "result": "pass",
+    "old_package_sha256": "f62eecd2a3f5deb45afca81b948086a5c853048fd40b08e057e35df9b45f364f",
+    "old_version": "0.10.0",
+    "shared_mesh_count": 34,
+    "all_mesh_arrays_identical": true,
+    "body_count_before_after": [
+      2930,
+      2930
+    ],
+    "total_triangles_before_after": [
+      4961996,
+      4961612
+    ],
+    "batch_cell_before_after": [
+      24.0,
+      24.0
+    ],
+    "opening": [
+      {
+        "radius": 0.85,
+        "before": {
+          "cells": 67,
+          "individually_visible_bodies": 123,
+          "individually_visible_triangles": 211252,
+          "radius": 0.85,
+          "triangles": 721252
+        },
+        "after": {
+          "cells": 69,
+          "individually_visible_bodies": 129,
+          "individually_visible_triangles": 215064,
+          "radius": 0.85,
+          "triangles": 744252
+        },
+        "deltas": [
+          {
+            "batch": "bacon@-1,0",
+            "submitted_delta": -2916,
+            "individually_visible_delta": -2916
+          },
+          {
+            "batch": "bacon@-1,1",
+            "submitted_delta": 11664,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "bacon@0,0",
+            "submitted_delta": -2916,
+            "individually_visible_delta": -2916
+          },
+          {
+            "batch": "bacon@0,1",
+            "submitted_delta": 0,
+            "individually_visible_delta": -2916
+          },
+          {
+            "batch": "berry@-1,-1",
+            "submitted_delta": 1720,
+            "individually_visible_delta": 1720
+          },
+          {
+            "batch": "berry@-1,1",
+            "submitted_delta": 1720,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "berry@0,1",
+            "submitted_delta": -1720,
+            "individually_visible_delta": -1720
+          },
+          {
+            "batch": "burger@-1,-1",
+            "submitted_delta": 3164,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "burger@-1,1",
+            "submitted_delta": 15820,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "burger@-2,-1",
+            "submitted_delta": -9492,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "burger@0,1",
+            "submitted_delta": -3164,
+            "individually_visible_delta": -3164
+          },
+          {
+            "batch": "cookie_0@0,0",
+            "submitted_delta": 1632,
+            "individually_visible_delta": 816
+          },
+          {
+            "batch": "cookie_0@0,1",
+            "submitted_delta": -816,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "cookie_2@0,0",
+            "submitted_delta": 1056,
+            "individually_visible_delta": 1056
+          },
+          {
+            "batch": "cookie_3@-2,-1",
+            "submitted_delta": -3168,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "cookie_3@-2,0",
+            "submitted_delta": -2112,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "cookie_3@0,0",
+            "submitted_delta": -16896,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "donut_0@-1,0",
+            "submitted_delta": 1104,
+            "individually_visible_delta": 1104
+          },
+          {
+            "batch": "donut_0@-1,1",
+            "submitted_delta": -4416,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "donut_2@-1,1",
+            "submitted_delta": -1104,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "donut_2@0,0",
+            "submitted_delta": -1104,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "donut_3@-2,-1",
+            "submitted_delta": -1104,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "donut_3@-2,0",
+            "submitted_delta": 6624,
+            "individually_visible_delta": 1104
+          },
+          {
+            "batch": "egg@-1,1",
+            "submitted_delta": 7520,
+            "individually_visible_delta": 1504
+          },
+          {
+            "batch": "egg@0,0",
+            "submitted_delta": 7520,
+            "individually_visible_delta": 1504
+          },
+          {
+            "batch": "pancake@-2,-1",
+            "submitted_delta": 1812,
+            "individually_visible_delta": 1812
+          },
+          {
+            "batch": "pancake@-2,0",
+            "submitted_delta": 1812,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "pizza@-2,-1",
+            "submitted_delta": 0,
+            "individually_visible_delta": 2512
+          },
+          {
+            "batch": "pizza@0,0",
+            "submitted_delta": 12560,
+            "individually_visible_delta": 2512
+          },
+          {
+            "batch": "sushi@-1,0",
+            "submitted_delta": 5400,
+            "individually_visible_delta": 5400
+          },
+          {
+            "batch": "sushi@-2,-1",
+            "submitted_delta": -1800,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "sushi@0,0",
+            "submitted_delta": -1800,
+            "individually_visible_delta": -1800
+          },
+          {
+            "batch": "sushi@0,1",
+            "submitted_delta": -3600,
+            "individually_visible_delta": -1800
+          }
+        ]
+      },
+      {
+        "radius": 7.2,
+        "before": {
+          "cells": 119,
+          "individually_visible_bodies": 369,
+          "individually_visible_triangles": 656936,
+          "radius": 7.2,
+          "triangles": 1144048
+        },
+        "after": {
+          "cells": 124,
+          "individually_visible_bodies": 369,
+          "individually_visible_triangles": 660260,
+          "radius": 7.2,
+          "triangles": 1149552
+        },
+        "deltas": [
+          {
+            "batch": "bacon@-1,-1",
+            "submitted_delta": 2916,
+            "individually_visible_delta": 2916
+          },
+          {
+            "batch": "bacon@-1,0",
+            "submitted_delta": -2916,
+            "individually_visible_delta": -2916
+          },
+          {
+            "batch": "bacon@-1,1",
+            "submitted_delta": 11664,
+            "individually_visible_delta": 5832
+          },
+          {
+            "batch": "bacon@-2,-2",
+            "submitted_delta": -2916,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "bacon@0,0",
+            "submitted_delta": -2916,
+            "individually_visible_delta": -2916
+          },
+          {
+            "batch": "berry@-1,-1",
+            "submitted_delta": 1720,
+            "individually_visible_delta": 1720
+          },
+          {
+            "batch": "berry@-1,-2",
+            "submitted_delta": -5160,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "berry@-1,1",
+            "submitted_delta": 1720,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "berry@0,1",
+            "submitted_delta": -1720,
+            "individually_visible_delta": -1720
+          },
+          {
+            "batch": "berry@1,1",
+            "submitted_delta": 5160,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "burger@-1,-1",
+            "submitted_delta": 3164,
+            "individually_visible_delta": 3164
+          },
+          {
+            "batch": "burger@-1,-2",
+            "submitted_delta": -12656,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "burger@-1,1",
+            "submitted_delta": 15820,
+            "individually_visible_delta": 3164
+          },
+          {
+            "batch": "burger@-2,-1",
+            "submitted_delta": -3164,
+            "individually_visible_delta": -3164
+          },
+          {
+            "batch": "burger@-3,-2",
+            "submitted_delta": -6328,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "burger@0,1",
+            "submitted_delta": -3164,
+            "individually_visible_delta": -3164
+          },
+          {
+            "batch": "cake_0@-2,-2",
+            "submitted_delta": -2640,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "cake_0@0,0",
+            "submitted_delta": 7920,
+            "individually_visible_delta": 2640
+          },
+          {
+            "batch": "cake_3@-2,0",
+            "submitted_delta": -5280,
+            "individually_visible_delta": -2640
+          },
+          {
+            "batch": "cookie_0@-3,-2",
+            "submitted_delta": 4080,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "cookie_0@0,0",
+            "submitted_delta": 1632,
+            "individually_visible_delta": 816
+          },
+          {
+            "batch": "cookie_0@0,1",
+            "submitted_delta": -816,
+            "individually_visible_delta": -816
+          },
+          {
+            "batch": "cookie_2@-1,1",
+            "submitted_delta": 3168,
+            "individually_visible_delta": 1056
+          },
+          {
+            "batch": "cookie_2@0,0",
+            "submitted_delta": 1056,
+            "individually_visible_delta": 1056
+          },
+          {
+            "batch": "cookie_3@-2,0",
+            "submitted_delta": -2112,
+            "individually_visible_delta": -1056
+          },
+          {
+            "batch": "cookie_3@0,0",
+            "submitted_delta": 0,
+            "individually_visible_delta": -1056
+          },
+          {
+            "batch": "donut_0@-1,0",
+            "submitted_delta": 1104,
+            "individually_visible_delta": 1104
+          },
+          {
+            "batch": "donut_0@-1,1",
+            "submitted_delta": -1104,
+            "individually_visible_delta": -1104
+          },
+          {
+            "batch": "donut_0@-3,-2",
+            "submitted_delta": -36432,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "donut_1@-1,-2",
+            "submitted_delta": 4416,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "donut_1@0,-1",
+            "submitted_delta": 34224,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "donut_2@-1,1",
+            "submitted_delta": -1104,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "donut_2@0,0",
+            "submitted_delta": -1104,
+            "individually_visible_delta": -3312
+          },
+          {
+            "batch": "donut_3@-2,-1",
+            "submitted_delta": -1104,
+            "individually_visible_delta": -1104
+          },
+          {
+            "batch": "donut_3@-2,0",
+            "submitted_delta": -1104,
+            "individually_visible_delta": 1104
+          },
+          {
+            "batch": "egg@-1,1",
+            "submitted_delta": 3008,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "egg@-2,-1",
+            "submitted_delta": 1504,
+            "individually_visible_delta": 1504
+          },
+          {
+            "batch": "egg@0,0",
+            "submitted_delta": 1504,
+            "individually_visible_delta": 1504
+          },
+          {
+            "batch": "pancake@-1,-2",
+            "submitted_delta": -10872,
+            "individually_visible_delta": -1812
+          },
+          {
+            "batch": "pancake@-2,-1",
+            "submitted_delta": 1812,
+            "individually_visible_delta": 1812
+          },
+          {
+            "batch": "pancake@-2,0",
+            "submitted_delta": 1812,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "pizza@-1,-2",
+            "submitted_delta": 7536,
+            "individually_visible_delta": 2512
+          },
+          {
+            "batch": "pizza@-1,1",
+            "submitted_delta": -5024,
+            "individually_visible_delta": -2512
+          },
+          {
+            "batch": "pizza@-2,-2",
+            "submitted_delta": -2512,
+            "individually_visible_delta": 0
+          },
+          {
+            "batch": "pizza@0,0",
+            "submitted_delta": 2512,
+            "individually_visible_delta": 2512
+          },
+          {
+            "batch": "sushi@-1,0",
+            "submitted_delta": 5400,
+            "individually_visible_delta": 5400
+          },
+          {
+            "batch": "sushi@-2,-1",
+            "submitted_delta": -1800,
+            "individually_visible_delta": -1800
+          },
+          {
+            "batch": "sushi@0,0",
+            "submitted_delta": -1800,
+            "individually_visible_delta": -1800
+          },
+          {
+            "batch": "sushi@0,1",
+            "submitted_delta": -3600,
+            "individually_visible_delta": -3600
+          }
+        ]
+      }
+    ]
+  },
+  "route": {
+    "distance": 194.744994931907,
+    "grade_receipts": {
+      "1": 281,
+      "2": 16,
+      "3": 16,
+      "4": 15,
+      "6": 3
+    },
+    "level": 10,
+    "levels": [
+      {
+        "at": [
+          1.0,
+          23.0
+        ],
+        "level": 1,
+        "score": 0,
+        "time": 0.0
+      },
+      {
+        "at": [
+          3.28530526161194,
+          21.915599822998
+        ],
+        "level": 2,
+        "score": 10,
+        "time": 5.18333333333332
+      },
+      {
+        "at": [
+          -5.06791925430298,
+          24.0126457214355
+        ],
+        "level": 3,
+        "score": 36,
+        "time": 10.7333333333334
+      },
+      {
+        "at": [
+          3.00001311302185,
+          18.4999904632568
+        ],
+        "level": 4,
+        "score": 70,
+        "time": 22.8333333333333
+      },
+      {
+        "at": [
+          16.347749710083,
+          26.0786933898926
+        ],
+        "level": 5,
+        "score": 103,
+        "time": 27.1166666666664
+      },
+      {
+        "at": [
+          8.14204502105713,
+          32.0651969909668
+        ],
+        "level": 6,
+        "score": 160,
+        "time": 30.7166666666662
+      },
+      {
+        "at": [
+          0.805858552455902,
+          35.9189605712891
+        ],
+        "level": 7,
+        "score": 248,
+        "time": 32.0499999999995
+      },
+      {
+        "at": [
+          -5.92318820953369,
+          39.4539337158203
+        ],
+        "level": 8,
+        "score": 359,
+        "time": 33.616666666666
+      },
+      {
+        "at": [
+          4.60308122634888,
+          6.91902542114258
+        ],
+        "level": 9,
+        "score": 524,
+        "time": 40.3166666666657
+      },
+      {
+        "at": [
+          34.9821891784668,
+          13.8760595321655
+        ],
+        "level": 10,
+        "score": 701,
+        "time": 46.733333333332
+      }
+    ],
+    "platter_receipts": 177,
+    "score": 820,
+    "seconds": 47.6166666666652,
+    "visited_platters": [
+      6,
+      2,
+      4
+    ]
+  },
+  "receipt_count": 331,
+  "all_receipts_unique": true,
+  "all_collected_tops_below_negative3_5": true,
+  "owned_helpers": "All geometry/source Godot processes and strict wrappers exited. No browser, rendering or timing benchmark was run."
+}

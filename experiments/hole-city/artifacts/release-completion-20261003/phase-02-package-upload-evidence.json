@@ -1,0 +1,219 @@
+{
+  "schema": 1,
+  "recorded_at_utc": "2026-10-03T02:01:13.468863+00:00",
+  "status": "production26_signed_exported_and_official_upload_succeeded_processing_unverified",
+  "version": "0.12.7",
+  "build": "26",
+  "bundle_id": "io.github.dotafs2.sinkcity",
+  "production_completion_receipt": {
+    "path": "build/food-icon-production-20261003-26/completion-status.json",
+    "sha256": "339631fc2a51ef4416bb95bdf2fcd1360679e9b9698c127725c8c3c506fc40db"
+  },
+  "public_production_candidate": {
+    "path": "artifacts/food-icon-production-20261003-26/production-candidate.json",
+    "sha256": "d80d5214dbe372e3eaea92e433f5a7146f3d2ae6204e8f04793e7935db8f50b8"
+  },
+  "receipt_difference": "Private completion includes phase; all shared fields are equal. These are distinct byte hashes.",
+  "local_distribution_ipa": {
+    "sha256": "2967510bbf18715dc899f5a4a1e2ade699617f859194d7593a6bcc41ac56ec93",
+    "bytes": 40010014,
+    "strict_distribution_signature_valid": true,
+    "app_store_distribution_profile_valid": true,
+    "scope": "Local exported distribution candidate. No assertion that the officially uploaded re-signed ZIP is byte-identical."
+  },
+  "native_pck": {
+    "sha256": "3239ed166a46ebd0559d3d7e6a4c178ce80800f0abf64daa9226af9a2aaf0c46",
+    "bytes": 11597424,
+    "fresh_suites": 16,
+    "fresh_checks": 19012,
+    "reused_checks": 0,
+    "report_bindings": [
+      {
+        "suite": "release_info",
+        "checks": 37,
+        "report_sha256": "b7873e24b4f5b451444d6c8617f3e5b0ea6c8fd0ce83bc3cd7eea4bafa0cb681",
+        "process_receipt_sha256": "c61eae780df4f8e15f8eb41d60476fc24ae3935d277f7c4111e536e89a1532f7",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "monetization_bridges",
+        "checks": 116,
+        "report_sha256": "b30d336d9774722ea0ccc91bcf0a04a0911d4ce49703093059bf68051a374391",
+        "process_receipt_sha256": "142710992478b81eda2ae313b7649cc529a60b30a28ff584061d5397dc9ccfb6",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "economy_continuation",
+        "checks": 120,
+        "report_sha256": "4ecadb1fba23ec40f75d6f8660989c747604d67eb7a11cea10bb6f9d8994e0ae",
+        "process_receipt_sha256": "7b8554cffc96a3340bd4376d915ebfae47948a6aece0683e3f96ceb8b391865b",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "diamond_boundary_review",
+        "checks": 25,
+        "report_sha256": "924aacda3fc831c29f91377bfec5dc8c6ea8cee73311a9799c54f63ebce7deb7",
+        "process_receipt_sha256": "483496c02b329a8de3c0104f9e970b810e8e89901ad53cf124551d7ad0b51009",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "native_polish",
+        "checks": 267,
+        "report_sha256": "af784f2426c5d42ac1f69f64d20b555801abb5d9d5b3b3bd20e26a54b7dcca2a",
+        "process_receipt_sha256": "c891c782df523523fabbd07205754bcd1cda6576199dfa6d5fcc831c56b756f0",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "application_lifecycle",
+        "checks": 70,
+        "report_sha256": "551f6287996bfcba351c7015315a60262d69ba075b76b6758889bc2a05f56c58",
+        "process_receipt_sha256": "810b07387d79cccfc279863ffd621f6866f74b4947cbc99fe7ff32cebd325cb4",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "skin_collection",
+        "checks": 374,
+        "report_sha256": "37f0e55a5973b161a5d73d019785b8519fbe1265481d1fa3ee8ad5d5a7e6b88a",
+        "process_receipt_sha256": "74b0cd847613924c13f16efbcbbe80a1316c003d904c08649d7047599b171e6a",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "ui_collection_review",
+        "checks": 1905,
+        "report_sha256": "b679a3a0a304dadc364f65783438ba7dce4e7910241ccb8bffa46bbcef7719f1",
+        "process_receipt_sha256": "1d5ef6e8723ba69fbc034e21870f33e2c9b0f66e3c57b4c9d09445bb652f8898",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "ui_redesign",
+        "checks": 1843,
+        "report_sha256": "65d25671b94dcc67e8f88c9db116c3beb837d93dc83389045dbbe545cd7a442c",
+        "process_receipt_sha256": "237e404dde075ef0211cac245bc076e9336cf3459cc858248126e1935a97037b",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "mobile_thumbnail",
+        "checks": 3847,
+        "report_sha256": "efd6c88e93391ea33a253f30538cc90499070e917a67ead9cd92acafe2e2898a",
+        "process_receipt_sha256": "4632d3184e60ff15f30cc13494d29fa5f59108ab76a169cdedf1f4cda012fdad",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "viewport_layout",
+        "checks": 41,
+        "report_sha256": "1fd08e01babdf3c1864623c050acaba1fdf8440b71b57636afacdab9ebcf37a6",
+        "process_receipt_sha256": "f6047f636cab764db08badb33d56ed1eee90f16a05b52e4e4e19a0993316ae07",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "building_surface_artifacts",
+        "checks": 1438,
+        "report_sha256": "575ed2bc549c5380e90621a14225a2a921395bf3c05d12010f633ca85ff3844f",
+        "process_receipt_sha256": "e7b08ffcd8e8d71a438407d512a8f3d1dec1003116d6744393ca5e53ef078314",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "selective_reveal_review",
+        "checks": 491,
+        "report_sha256": "4f914d8d693331b280d175df303abfc80b9cdd9c771810e32f7385bb7501b749",
+        "process_receipt_sha256": "34c03463df160d2aeb4320884b515d36fd56aeaf967f86d9760a7b67087cb6a1",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "building_only_reveal_review",
+        "checks": 213,
+        "report_sha256": "9b4d0ef17237a39746d73cd213af961d5c7ec9680d359f9dbcefef6a693fe2e4",
+        "process_receipt_sha256": "f33835b841a97bae10d27565e692d003a8e3eca90d9103664b86853861e45cac",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "title_navigation",
+        "checks": 37,
+        "report_sha256": "8c830d19084cbda14a90a495de8ac85601c4d7459bc1167e3bac14e598abc11f",
+        "process_receipt_sha256": "ec37b63a20e8b0beca1dd02a49b75716c89642f6055ede6db002133875daf11d",
+        "actual_exit_code": 0
+      },
+      {
+        "suite": "retention_ui_review",
+        "checks": 8188,
+        "report_sha256": "39160ac80e5f46eb204c68c3c31ae0ab421fcd5a0a49653f444cab76dd64784c",
+        "process_receipt_sha256": "47b5cdaf6b73b724908c0221418854e1d959a49008300d4677b946ae73345eb9",
+        "actual_exit_code": 0
+      }
+    ],
+    "physical_phone_or_sandbox_acceptance": false
+  },
+  "accepted_web": {
+    "release_sha256": "b4d732ed91a3ebff35c36d2f4a99a4c27152adddfc7bb4c6af7afdde1f45a90a",
+    "suites_each_phase": 85,
+    "source_reused_suites": 51,
+    "source_fresh_suites": 34,
+    "package_fresh_suites": 85,
+    "checks_each_phase": 67170,
+    "unchanged_guarded_inputs": 810
+  },
+  "native_adapter_sha256": "4796be1bac3627e4bed3f548fa11ab3bc298938756cb8b0091447f397ab5eb08",
+  "native_plugin_sha256": "3ca5ba322ef70d60853fa9d2e6e636af030c35920ef82b60fbf6a7d8e13c9a07",
+  "icon_master_sha256": "2f59bdc2392bbb654d66b4b18e71ae227104f63bde4ed0cf359c89d33bf30a02",
+  "archive_and_local_ipa_assets_car_sha256": "a266ae574fb71b27c9b645cd5dc0b9788d94d172c41c8b0879cb66df7db3bc1c",
+  "assets_car_decoded": false,
+  "production_ads_configured": true,
+  "official_test_ads": false,
+  "official_upload": {
+    "attempt": 3,
+    "result_path": "build/release-completion-20261003/upload-26-attempt-03/upload-result.json",
+    "result_sha256": "3b2cb7825005ad85bf2fab854d5f2fa35e7c89f8fb7ea6a8230e48e447b6aed9",
+    "official_tool_exit_code": 0,
+    "success_marker": "EXPORT SUCCEEDED",
+    "log_sha256": "9fc74fbc56cd1159cebd6275fb95ff38565e18eef9f5e7cc88998ca39d4274ef",
+    "completed_utc": "2026-10-03T01:56:16.460440+00:00",
+    "archive_app_bytes_unchanged": true,
+    "apple_build_processing_verified": false,
+    "app_review_submitted": false
+  },
+  "business": {
+    "status": "all_active",
+    "paid_apps_agreement": "Active",
+    "bank_account": "Active",
+    "us_certificate_of_foreign_status_of_beneficial_owner": "Active",
+    "us_form_w8ben": "Active",
+    "submitted_date": "2026-10-03",
+    "evidence_scope": "Latest direct Apple Business observation reported by root; no financial values or account screenshots copied into public evidence."
+  },
+  "listing": {
+    "version_metadata": "0.12.7 saved, directly observed by root",
+    "media": "Five V5 PNGs and two V5 videos uploaded into 6.9-inch section; screenshots ordered 1 through 5, directly observed by root",
+    "apple_media_processing_verification": "Not independently established by this evidence",
+    "unchanged_local_media_receipt": "build/release-completion-20261003/commerce/upload-inventory.json"
+  },
+  "privacy": {
+    "configuration": "app-store-labels-configured-v4.json",
+    "configuration_sha256": "2d6de1d8c84c12cd946d4ae2792a57f76e26e2cf4882ec9f03f03d690a6d6e2d",
+    "data_categories": 7,
+    "developer_advertising_marketing_purpose_removed": true,
+    "device_id_completed": true,
+    "accuracy_publish_confirmation_pending": true,
+    "published": false,
+    "scope": "Root reports current label draft corrected to configured-v4; final accuracy attestation is pending, not performed by this worker."
+  },
+  "commerce": {
+    "existing_product_ids": [
+      "sink_city.diamonds_60",
+      "sink_city.diamonds_360",
+      "sink_city.diamonds_1800"
+    ],
+    "preserve_legacy_coin_products": true,
+    "final_live_metadata_attachment_and_sandbox": "Root owns live backend verification; no successful actual purchase receipt is asserted here",
+    "iap_upload_image": "build/release-completion-20261003/commerce/iap-review-diamond-shop-opaque-rgb.png",
+    "iap_upload_image_sha256": "6797b7d6ffc6d669f92e486a4e6537233f79859144bd42fd6a0def4872ac6db3",
+    "image_scope": "Exact current UI layout matches original 0.12.6 Mac capture; lossless opaque RGB derivative, UNAVAILABLE prices, no catalog/purchase proof"
+  },
+  "historical_failures_preserved": [
+    "production25 owned codesign timeout",
+    "upload26 attempt01 local Xcode account-access failure",
+    "upload26 attempt02 local rsync packaging failure before transfer"
+  ],
+  "phone_baseline": "0.12.4 build16 historical baseline, no new installation or save mutation in this phase",
+  "root_git_publication": false,
+  "scope": "Receipt-derived safe package metadata and attributed root account observations only. No legal address, banking digits, raw account logs, credential values, signing identities or private device identifiers."
+}

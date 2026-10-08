@@ -1,0 +1,116 @@
+{
+  "checks": 16,
+  "failures": [],
+  "runs": [
+    {
+      "diagnostics": {
+        "attached": 4,
+        "blocked": false,
+        "blocked_steps": 0,
+        "cars": 4,
+        "detachments": 0,
+        "detours": [],
+        "head_distance": 72.0020431317163,
+        "history_samples": 81,
+        "parked": 0,
+        "planning_count": 0,
+        "route_length": 668.3148188591,
+        "traveled": 72.0000734627247
+      },
+      "map": "city",
+      "max_ms": 1.569,
+      "mean_ms": 0.685455,
+      "median_ms": 0.63,
+      "p95_ms": 1.239,
+      "p99_ms": 1.43,
+      "samples": 600,
+      "scenario": "intact"
+    },
+    {
+      "diagnostics": {
+        "attached": 2,
+        "blocked": false,
+        "blocked_steps": 0,
+        "cars": 4,
+        "detachments": 1,
+        "detours": [
+          {
+            "end": 741.301066900151,
+            "lateral": 1.6,
+            "start": 722.301067186253
+          }
+        ],
+        "head_distance": 144.003344025015,
+        "history_samples": 33,
+        "parked": 1,
+        "planning_count": 1,
+        "route_length": 668.3148188591,
+        "traveled": 144.001370459795
+      },
+      "map": "city",
+      "max_ms": 10.96,
+      "mean_ms": 0.375295,
+      "median_ms": 0.301,
+      "p95_ms": 0.939,
+      "p99_ms": 1.028,
+      "samples": 600,
+      "scenario": "middle_cut_including_initial_planning"
+    },
+    {
+      "diagnostics": {
+        "attached": 8,
+        "blocked": false,
+        "blocked_steps": 0,
+        "cars": 8,
+        "detachments": 0,
+        "detours": [],
+        "head_distance": 63.999995455039,
+        "history_samples": 151,
+        "parked": 0,
+        "planning_count": 0,
+        "route_length": 609.324145197868,
+        "traveled": 63.9997128248215
+      },
+      "map": "food",
+      "max_ms": 0.846,
+      "mean_ms": 0.548183333333333,
+      "median_ms": 0.527,
+      "p95_ms": 0.732,
+      "p99_ms": 0.798,
+      "samples": 600,
+      "scenario": "intact"
+    },
+    {
+      "diagnostics": {
+        "attached": 2,
+        "blocked": false,
+        "blocked_steps": 0,
+        "cars": 8,
+        "detachments": 1,
+        "detours": [
+          {
+            "end": 675.841238118744,
+            "lateral": 1.35,
+            "start": 649.46403661712
+          }
+        ],
+        "head_distance": 127.99997994023,
+        "history_samples": 31,
+        "parked": 5,
+        "planning_count": 1,
+        "route_length": 609.324145197868,
+        "traveled": 127.999655380845
+      },
+      "map": "food",
+      "max_ms": 8.758,
+      "mean_ms": 0.158736666666667,
+      "median_ms": 0.129,
+      "p95_ms": 0.332,
+      "p99_ms": 0.374,
+      "samples": 600,
+      "scenario": "middle_cut_including_initial_planning"
+    }
+  ],
+  "scope": "Isolated native Mac headless controller.step CPU durations; includes actual physics queries and branch-change callbacks, excludes rendering and all remaining game costs. Not iPhone or whole-frame FPS.",
+  "stable_source": true
+}

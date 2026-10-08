@@ -1,0 +1,13 @@
+{
+  "checks": 1673,
+  "failures": [
+    "home: >=44 pt at 375 pt width audio-music",
+    "home: >=44 pt at 375 pt width audio-sfx",
+    "pause: >=44 pt at 375 pt width audio-music",
+    "pause: >=44 pt at 375 pt width audio-sfx",
+    "Repeated menu navigation retains only seven home controls",
+    "Engine process failed; inspect the engine log"
+  ],
+  "input": "Actual viewport mouse down/up",
+  "minimum_test_width_points": 375
+}

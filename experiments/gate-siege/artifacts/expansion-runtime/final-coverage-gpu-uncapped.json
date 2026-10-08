@@ -1,0 +1,561 @@
+{
+  "adapter": "Apple M1 Pro",
+  "cap": 0,
+  "coverage_combat": true,
+  "engine": {
+    "build": "official",
+    "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "hex": 263938,
+    "major": 4,
+    "minor": 7,
+    "patch": 2,
+    "status": "stable",
+    "string": "4.7.2-stable (official)",
+    "timestamp": 0
+  },
+  "movie_mode": false,
+  "notes": "High-HP staged stress retains36 soldiers,544 troops,mixed elites and a dragon boss. Weapon scenes use normal real60-Hz physics and actual production combat. Full-crowd/paused intentionally freeze gameplay. Submitted trail slots may include shader-expired/unborn slots; they are not a CPU live-particle count. Desktop timings are not phone performance or ordinary-gameplay averages.",
+  "os": "macOS",
+  "processor": "Apple M1 Pro",
+  "quality": "low",
+  "results": [
+    {
+      "coverage_fields": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "samples": 959
+      },
+      "crowd": {
+        "max": 544.0,
+        "mean": 544.0,
+        "min": 544.0,
+        "p50": 544.0,
+        "p95": 544.0,
+        "samples": 959
+      },
+      "draw_calls": {
+        "max": 106.0,
+        "mean": 106.0,
+        "min": 106.0,
+        "p50": 106.0,
+        "p95": 106.0,
+        "samples": 959
+      },
+      "elites": 4,
+      "frame_ms": {
+        "max": 59.079,
+        "mean": 3.12868091762253,
+        "min": 1.883,
+        "p50": 2.661,
+        "p95": 5.018,
+        "samples": 959
+      },
+      "members": 36,
+      "outliers": [
+        {
+          "boss_hp": 1000000000000.0,
+          "damage": 0,
+          "elapsed": 0.0,
+          "fields": 0,
+          "ms": 59.079,
+          "nodes": 198,
+          "packets": 0,
+          "physics_us": 3,
+          "recruit_hp": 60.0,
+          "visual_us": 13,
+          "wall": 0.100628,
+          "weapon": "rifle"
+        }
+      ],
+      "over50ms": 1,
+      "packets": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "samples": 959
+      },
+      "phase": "playing",
+      "physics_cpu_us": {
+        "samples": 0
+      },
+      "primitives": {
+        "max": 161712.0,
+        "mean": 161712.0,
+        "min": 161712.0,
+        "p50": 161712.0,
+        "p95": 161712.0,
+        "samples": 959
+      },
+      "scenario": "full_crowd",
+      "submitted_trail_slots": 0,
+      "visual_cap": 900,
+      "visual_cpu_us": {
+        "max": 56.0,
+        "mean": 5.10427528675704,
+        "min": 2.0,
+        "p50": 5.0,
+        "p95": 8.0,
+        "samples": 959
+      }
+    },
+    {
+      "coverage_fields": {
+        "max": 17.0,
+        "mean": 11.8697183098592,
+        "min": 0.0,
+        "p50": 15.0,
+        "p95": 17.0,
+        "samples": 852
+      },
+      "crowd": {
+        "max": 544.0,
+        "mean": 544.0,
+        "min": 544.0,
+        "p50": 544.0,
+        "p95": 544.0,
+        "samples": 852
+      },
+      "draw_calls": {
+        "max": 110.0,
+        "mean": 108.380281690141,
+        "min": 106.0,
+        "p50": 108.0,
+        "p95": 109.0,
+        "samples": 852
+      },
+      "elites": 4,
+      "frame_ms": {
+        "max": 9.647,
+        "mean": 3.52298474178404,
+        "min": 1.997,
+        "p50": 3.215,
+        "p95": 6.212,
+        "samples": 852
+      },
+      "members": 36,
+      "outliers": [],
+      "over50ms": 0,
+      "packets": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "samples": 852
+      },
+      "phase": "playing",
+      "physics_cpu_us": {
+        "max": 3064.0,
+        "mean": 788.265193370166,
+        "min": 299.0,
+        "p50": 557.0,
+        "p95": 2153.0,
+        "samples": 181
+      },
+      "primitives": {
+        "max": 184982.0,
+        "mean": 173610.476525822,
+        "min": 161712.0,
+        "p50": 172758.0,
+        "p95": 184874.0,
+        "samples": 852
+      },
+      "scenario": "rifle",
+      "submitted_trail_slots": 900,
+      "visual_cap": 900,
+      "visual_cpu_us": {
+        "max": 80.0,
+        "mean": 12.7734741784038,
+        "min": 2.0,
+        "p50": 5.0,
+        "p95": 49.0,
+        "samples": 852
+      }
+    },
+    {
+      "coverage_fields": {
+        "max": 9.0,
+        "mean": 5.97078651685393,
+        "min": 0.0,
+        "p50": 8.0,
+        "p95": 9.0,
+        "samples": 890
+      },
+      "crowd": {
+        "max": 544.0,
+        "mean": 544.0,
+        "min": 544.0,
+        "p50": 544.0,
+        "p95": 544.0,
+        "samples": 890
+      },
+      "draw_calls": {
+        "max": 108.0,
+        "mean": 107.208988764045,
+        "min": 106.0,
+        "p50": 107.0,
+        "p95": 108.0,
+        "samples": 890
+      },
+      "elites": 4,
+      "frame_ms": {
+        "max": 9.335,
+        "mean": 3.37169213483146,
+        "min": 1.91,
+        "p50": 3.105,
+        "p95": 5.952,
+        "samples": 890
+      },
+      "members": 36,
+      "outliers": [],
+      "over50ms": 0,
+      "packets": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "samples": 890
+      },
+      "phase": "playing",
+      "physics_cpu_us": {
+        "max": 1523.0,
+        "mean": 559.618784530387,
+        "min": 287.0,
+        "p50": 392.0,
+        "p95": 1319.0,
+        "samples": 181
+      },
+      "primitives": {
+        "max": 184208.0,
+        "mean": 172720.451685393,
+        "min": 161652.0,
+        "p50": 171850.0,
+        "p95": 184138.0,
+        "samples": 890
+      },
+      "scenario": "scatter",
+      "submitted_trail_slots": 900,
+      "visual_cap": 900,
+      "visual_cpu_us": {
+        "max": 99.0,
+        "mean": 9.2876404494382,
+        "min": 2.0,
+        "p50": 5.0,
+        "p95": 30.0,
+        "samples": 890
+      }
+    },
+    {
+      "coverage_fields": {
+        "max": 6.0,
+        "mean": 3.84588235294118,
+        "min": 0.0,
+        "p50": 4.0,
+        "p95": 6.0,
+        "samples": 850
+      },
+      "crowd": {
+        "max": 544.0,
+        "mean": 544.0,
+        "min": 544.0,
+        "p50": 544.0,
+        "p95": 544.0,
+        "samples": 850
+      },
+      "draw_calls": {
+        "max": 108.0,
+        "mean": 107.16,
+        "min": 106.0,
+        "p50": 107.0,
+        "p95": 108.0,
+        "samples": 850
+      },
+      "elites": 4,
+      "frame_ms": {
+        "max": 8.979,
+        "mean": 3.53201176470588,
+        "min": 1.936,
+        "p50": 3.324,
+        "p95": 6.685,
+        "samples": 850
+      },
+      "members": 36,
+      "outliers": [],
+      "over50ms": 0,
+      "packets": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "samples": 850
+      },
+      "phase": "playing",
+      "physics_cpu_us": {
+        "max": 2007.0,
+        "mean": 532.95,
+        "min": 299.0,
+        "p50": 390.0,
+        "p95": 1166.0,
+        "samples": 180
+      },
+      "primitives": {
+        "max": 184316.0,
+        "mean": 171709.461176471,
+        "min": 161660.0,
+        "p50": 171168.0,
+        "p95": 184174.0,
+        "samples": 850
+      },
+      "scenario": "rail",
+      "submitted_trail_slots": 900,
+      "visual_cap": 900,
+      "visual_cpu_us": {
+        "max": 81.0,
+        "mean": 9.34705882352941,
+        "min": 1.0,
+        "p50": 5.0,
+        "p95": 30.0,
+        "samples": 850
+      }
+    },
+    {
+      "coverage_fields": {
+        "max": 8.0,
+        "mean": 4.70828729281768,
+        "min": 0.0,
+        "p50": 4.0,
+        "p95": 8.0,
+        "samples": 905
+      },
+      "crowd": {
+        "max": 544.0,
+        "mean": 544.0,
+        "min": 544.0,
+        "p50": 544.0,
+        "p95": 544.0,
+        "samples": 905
+      },
+      "draw_calls": {
+        "max": 108.0,
+        "mean": 107.203314917127,
+        "min": 106.0,
+        "p50": 107.0,
+        "p95": 108.0,
+        "samples": 905
+      },
+      "elites": 4,
+      "frame_ms": {
+        "max": 8.755,
+        "mean": 3.31579447513812,
+        "min": 1.937,
+        "p50": 3.088,
+        "p95": 5.662,
+        "samples": 905
+      },
+      "members": 36,
+      "outliers": [],
+      "over50ms": 0,
+      "packets": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "samples": 905
+      },
+      "phase": "playing",
+      "physics_cpu_us": {
+        "max": 2173.0,
+        "mean": 512.088888888889,
+        "min": 287.0,
+        "p50": 363.0,
+        "p95": 1246.0,
+        "samples": 180
+      },
+      "primitives": {
+        "max": 183952.0,
+        "mean": 172140.974585635,
+        "min": 161652.0,
+        "p50": 170898.0,
+        "p95": 183854.0,
+        "samples": 905
+      },
+      "scenario": "rocket",
+      "submitted_trail_slots": 744,
+      "visual_cap": 900,
+      "visual_cpu_us": {
+        "max": 49.0,
+        "mean": 8.70497237569061,
+        "min": 2.0,
+        "p50": 5.0,
+        "p95": 28.0,
+        "samples": 905
+      }
+    },
+    {
+      "coverage_fields": {
+        "max": 11.0,
+        "mean": 7.02120535714286,
+        "min": 0.0,
+        "p50": 9.0,
+        "p95": 10.0,
+        "samples": 896
+      },
+      "crowd": {
+        "max": 544.0,
+        "mean": 544.0,
+        "min": 544.0,
+        "p50": 544.0,
+        "p95": 544.0,
+        "samples": 896
+      },
+      "draw_calls": {
+        "max": 108.0,
+        "mean": 107.212053571429,
+        "min": 106.0,
+        "p50": 107.0,
+        "p95": 108.0,
+        "samples": 896
+      },
+      "elites": 4,
+      "frame_ms": {
+        "max": 8.788,
+        "mean": 3.34957366071429,
+        "min": 1.946,
+        "p50": 3.073,
+        "p95": 5.653,
+        "samples": 896
+      },
+      "members": 36,
+      "outliers": [],
+      "over50ms": 0,
+      "packets": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "samples": 896
+      },
+      "phase": "playing",
+      "physics_cpu_us": {
+        "max": 2476.0,
+        "mean": 604.817679558011,
+        "min": 298.0,
+        "p50": 416.0,
+        "p95": 1486.0,
+        "samples": 181
+      },
+      "primitives": {
+        "max": 184496.0,
+        "mean": 173185.529017857,
+        "min": 161696.0,
+        "p50": 171724.0,
+        "p95": 184414.0,
+        "samples": 896
+      },
+      "scenario": "arc",
+      "submitted_trail_slots": 900,
+      "visual_cap": 900,
+      "visual_cpu_us": {
+        "max": 51.0,
+        "mean": 9.64397321428571,
+        "min": 2.0,
+        "p50": 5.0,
+        "p95": 34.0,
+        "samples": 896
+      }
+    },
+    {
+      "coverage_fields": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "samples": 929
+      },
+      "crowd": {
+        "max": 544.0,
+        "mean": 544.0,
+        "min": 544.0,
+        "p50": 544.0,
+        "p95": 544.0,
+        "samples": 929
+      },
+      "draw_calls": {
+        "max": 107.0,
+        "mean": 107.0,
+        "min": 107.0,
+        "p50": 107.0,
+        "p95": 107.0,
+        "samples": 929
+      },
+      "elites": 4,
+      "frame_ms": {
+        "max": 20.53,
+        "mean": 3.23057588805166,
+        "min": 1.939,
+        "p50": 2.995,
+        "p95": 5.417,
+        "samples": 929
+      },
+      "members": 36,
+      "outliers": [],
+      "over50ms": 0,
+      "packets": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "samples": 929
+      },
+      "phase": "paused",
+      "physics_cpu_us": {
+        "samples": 0
+      },
+      "primitives": {
+        "max": 161176.0,
+        "mean": 161176.0,
+        "min": 161176.0,
+        "p50": 161176.0,
+        "p95": 161176.0,
+        "samples": 929
+      },
+      "scenario": "paused",
+      "submitted_trail_slots": 0,
+      "visual_cap": 900,
+      "visual_cpu_us": {
+        "max": 34.0,
+        "mean": 4.60172228202368,
+        "min": 2.0,
+        "p50": 4.0,
+        "p95": 7.0,
+        "samples": 929
+      }
+    }
+  ],
+  "scale": 1.0,
+  "scenario_warmup_seconds": 0.0,
+  "source_hashes": {
+    "res://assets/shaders/spray_visual.gdshader": "8719eaa2eff304ad57604ed36ff483c87f8e26f4decd2337e6d52c27697f8836",
+    "res://scripts/campaign.gd": "",
+    "res://scripts/coverage_combat.gd": "",
+    "res://scripts/creature_motion.gd": "",
+    "res://scripts/encounters.gd": "",
+    "res://scripts/game.gd": "",
+    "res://scripts/spray_visual.gd": "",
+    "res://scripts/squad.gd": ""
+  },
+  "viewport": "(720, 1280)",
+  "vsync": "disabled",
+  "window": "(720, 1280)"
+}

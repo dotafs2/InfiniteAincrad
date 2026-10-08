@@ -16,6 +16,18 @@ game/assets/floor1/meshy_houses_lod/**/*.jpg filter=lfs diff=lfs merge=lfs -text
 *.py text eol=lf
 *.cs text eol=lf
 *.csproj text eol=lf
+# Preserve experimental evidence bytes; keep large review media in Git LFS.
+experiments/hole-city/artifacts/** -text
+experiments/gate-siege/artifacts/** -text
+experiments/*/artifacts/**/*.png filter=lfs diff=lfs merge=lfs -text
+experiments/*/artifacts/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+experiments/*/artifacts/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+experiments/*/artifacts/**/*.mp3 filter=lfs diff=lfs merge=lfs -text
+experiments/*/artifacts/**/*.wav filter=lfs diff=lfs merge=lfs -text
+experiments/hole-city/artifacts/video-showcase-20260928/city/render-meshes.json filter=lfs diff=lfs merge=lfs -text
+experiments/hole-city/third_party/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
+experiments/hole-city/assets/legal/MBMAYER_LICENSE.txt -text
+experiments/hole-city/tools/record_mobile_preview.ps1 -text
 # Pinned upstream hashes refer to exact original bytes.
 third_party/OpenGameAgent/** -text
 game/addons/open_game_agent/** -text

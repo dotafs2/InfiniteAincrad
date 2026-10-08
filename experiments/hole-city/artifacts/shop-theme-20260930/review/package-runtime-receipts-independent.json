@@ -1,0 +1,58 @@
+{
+  "status": "pass",
+  "reviewer": "Sagan; read-only review of root-owned actual exported-package executions",
+  "checks": 298,
+  "suites": {
+    "music": {
+      "checks": 125,
+      "failures": [],
+      "strict_log_errors": [],
+      "report_sha256": "b66af5c18537eebfc9c2783e9a3a822a74bfcded95e7dd5c3a53d9484f74a8c7",
+      "log_sha256": "a0c6dc81692765af9e94537dd66a16b55fd08a5cf17dbad2b0138441af89d083",
+      "marker": "MUSIC_ACCEPTANCE"
+    },
+    "music_review": {
+      "checks": 118,
+      "failures": [],
+      "strict_log_errors": [],
+      "report_sha256": "77cb467956cbdf3fd0b09edb4f1656bcecf02b69e58bb1b42317ed9693a24779",
+      "log_sha256": "ed98de780e2541c00dc8a17d71da000b51e0799d07985a4bbb7973ccfbbb8a4a",
+      "marker": "MUSIC_REVIEW"
+    },
+    "shop_theme_review": {
+      "checks": 55,
+      "failures": [],
+      "strict_log_errors": [],
+      "report_sha256": "998d243168163250ee32aa748af2c98fdd380d1b731a4a353de9c1a7c0a5fed2",
+      "log_sha256": "789ae108e441d90fb2017be9107b241a7034db1e00cfd0c9c586f390b732c1a6",
+      "marker": "SHOP_THEME_REVIEW",
+      "actual_native_decode": {
+        "energy": 86.1038705199281,
+        "frames": 17640,
+        "loops": 1,
+        "peak": 0.305156350135803,
+        "position": 0.350544217687075
+      }
+    }
+  },
+  "published_local_pck": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/web/index.pck",
+  "pck_sha256": "31f638ff480f368d9bdb32462aa279285cf388972277ed2b32ecaf46a212be7e",
+  "candidate_transition": "Original qa-candidate-f_00f11j directory was removed after successful local publication; current build/web/index.pck has the exact independently pinned candidate hash.",
+  "unchanged_audio_and_test_inputs": {
+    "fidelity/audio.gd": "bea6a9936b26ea6569348b24882b8ec687b61205c652bcf86194bcb9ab988620",
+    "fidelity/audio_bus_layout.tres": "a8b1b249f22929c4305c60424b0c35a0b1734c1ed5d7b1ab36fa2348d0bf4c56",
+    "assets/audio/shop_theme_loop.ogg": "0e5af2a8c1ea6969bfcadbd727e33a4c7f87379aa211b465322f98f026538b02",
+    "assets/audio/music_manifest.json": "21cd9b52c6835674db60c2304744b314cd14e8556e31e5e2cda86d04317ac087",
+    "tools/prepare_shop_theme.py": "d20373677ef42390bcc55c652dbb816fbbd2e4f2e57b9e8044682968578d340f",
+    "tests/music_acceptance.gd": "9d3bdb3998bbe2f6fde080ce144d3dc0303111505d84cb82208bad4cc2ace02d",
+    "tests/music_review.gd": "332fd6dbabed0774e82367cb37fe7a3cb51244bf726298516797a58e488faf52",
+    "tests/shop_theme_review.gd": "b12adc3eb783f5b049c0064a1ebf1713e1938510fa80f2c4ade3a0d8787bc688"
+  },
+  "release_helper_sha256": "8b51893a1b34defb2be47725d56dfbc868748612b28e329e36036ffaa77bb07e",
+  "release_manifest_sha256": "0144e340e33c089c088ad5c36e5951d0b29286ea52c072e58b7a05b376911c10",
+  "release_totals_read": {
+    "source": 53843,
+    "package": 53843
+  },
+  "scope": "All three package audio reports exactly match their sole completion marker and strict logs; reviewed source inputs match final release input manifest, and published PCK equals the independently probed candidate. No engine rerun, user audio, browser or subjective listening claim."
+}

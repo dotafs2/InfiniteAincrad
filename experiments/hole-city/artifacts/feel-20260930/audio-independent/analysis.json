@@ -1,0 +1,50 @@
+{
+  "checks": 128,
+  "failures": [],
+  "inputs": {
+    "tools/build_music.py": "ade0fd3054367acb9955effd05c2f1397f6e685677ba490d88bcb0bae1299a79",
+    "assets/audio/music_manifest.json": "2596187b19adfc675ee87babdb3e947650b943fa2958cad10f652778f4bf65f1",
+    "assets/audio/sunny_city_loop.ogg": "bcf2e7af8fa53a568b287a03e6034ae6631f0694b6e2d17692b9c47943868c25",
+    "assets/audio/snack_garden_loop.ogg": "a12e247ad82b7098b7cbc0c1dff191661c92e1d88d4660510091567e935ae92e",
+    "fidelity/audio.gd": "30775280c6450bc9d3ee3cf4a03da44fe811ae4846dc1bef7b36eea6c2f618e5",
+    "fidelity/audio_bus_layout.tres": "a8b1b249f22929c4305c60424b0c35a0b1734c1ed5d7b1ab36fa2348d0bf4c56",
+    "tests/music_review.gd": "7dcf725e42bd68fad33d14edf37c1b8d61f25b55d316d4ace01568622ab64745"
+  },
+  "tracks": [
+    {
+      "name": "sunny_city_loop",
+      "samples": 1628308,
+      "duration": 36.92308390022676,
+      "peak_dbfs": -10.543573590778433,
+      "rms_dbfs": -24.482458218465858,
+      "prior_rms_dbfs": -17.19209754679452,
+      "seam_jump": 0.00039485562592744827,
+      "interior_step_p99": 0.011695630848407745,
+      "written_rest_fraction": 0.55078125,
+      "parts": {
+        "nylon": 48,
+        "bass": 24,
+        "wood": 31,
+        "brush": 28
+      }
+    },
+    {
+      "name": "snack_garden_loop",
+      "samples": 1568000,
+      "duration": 35.55555555555556,
+      "peak_dbfs": -11.129974696965624,
+      "rms_dbfs": -24.48673119897798,
+      "prior_rms_dbfs": -17.878698455684656,
+      "seam_jump": 0.001910671591758728,
+      "interior_step_p99": 0.010255523025989532,
+      "written_rest_fraction": 0.55078125,
+      "parts": {
+        "nylon": 48,
+        "bass": 24,
+        "thumb_piano": 31,
+        "brush": 28
+      }
+    }
+  ],
+  "scope": "Independent decoded-file and score analysis, not hearing or speaker/browser playback. Subjective musical preference and SFX balance remain unauditioned."
+}

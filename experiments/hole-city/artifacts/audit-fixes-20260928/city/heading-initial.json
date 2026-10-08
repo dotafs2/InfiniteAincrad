@@ -1,0 +1,27 @@
+{
+	"checks": 6,
+	"failures": [],
+	"metrics": {
+		"heading": [
+			{
+				"hz": 30,
+				"largest_error_degrees": 15.0046700490194,
+				"samples": 18884,
+				"wrong_heading_samples": 0
+			},
+			{
+				"hz": 60,
+				"largest_error_degrees": 15.0115284560481,
+				"samples": 37754,
+				"wrong_heading_samples": 0
+			},
+			{
+				"hz": 120,
+				"largest_error_degrees": 15.0224927040151,
+				"samples": 75507,
+				"wrong_heading_samples": 0
+			}
+		]
+	},
+	"scope": "Headless controller evidence; no browser or device FPS claim"
+}

@@ -1,0 +1,117 @@
+{
+	"display": "macOS",
+	"muted": true,
+	"native_capture": false,
+	"records": [
+		{
+			"elapsed": 0.0,
+			"file": "toy-home.png",
+			"level": 0,
+			"map": "toys",
+			"menu": "home",
+			"phase": "title",
+			"radius": 0,
+			"scope": "Actual home preview; no playable world or granted progress",
+			"score": 0,
+			"viewport": "(600, 1300)"
+		},
+		{
+			"elapsed": 0.0,
+			"file": "toy-map-chooser.png",
+			"level": 0,
+			"map": "toys",
+			"menu": "maps",
+			"phase": "title",
+			"radius": 0,
+			"scope": "Actual map chooser and responsive controls",
+			"score": 0,
+			"viewport": "(600, 1300)"
+		},
+		{
+			"elapsed": 0.316666666666667,
+			"file": "toy-play-00.png",
+			"level": 1,
+			"map": "toys",
+			"menu": "home",
+			"phase": "playing",
+			"radius": 0.85,
+			"scope": "Ordinary automatic collecting, real physics and shipped following camera; no injected position, score, radius, wallet or ownership",
+			"score": 0,
+			"viewport": "(600, 1300)"
+		},
+		{
+			"elapsed": 12.0500000000002,
+			"file": "toy-play-12.png",
+			"level": 1,
+			"map": "toys",
+			"menu": "home",
+			"phase": "playing",
+			"radius": 0.85,
+			"scope": "Ordinary automatic collecting, real physics and shipped following camera; no injected position, score, radius, wallet or ownership",
+			"score": 8,
+			"viewport": "(600, 1300)"
+		},
+		{
+			"elapsed": 30.0666666666662,
+			"file": "toy-play-30.png",
+			"level": 2,
+			"map": "toys",
+			"menu": "home",
+			"phase": "playing",
+			"radius": 1.2,
+			"scope": "Ordinary automatic collecting, real physics and shipped following camera; no injected position, score, radius, wallet or ownership",
+			"score": 28,
+			"viewport": "(600, 1300)"
+		},
+		{
+			"elapsed": 60.0666666666645,
+			"file": "toy-play-60.png",
+			"level": 4,
+			"map": "toys",
+			"menu": "home",
+			"phase": "playing",
+			"radius": 2.2,
+			"scope": "Ordinary automatic collecting, real physics and shipped following camera; no injected position, score, radius, wallet or ownership",
+			"score": 73,
+			"viewport": "(600, 1300)"
+		},
+		{
+			"elapsed": 89.0666666666629,
+			"file": "toy-play-89.png",
+			"level": 5,
+			"map": "toys",
+			"menu": "home",
+			"phase": "playing",
+			"radius": 3.5,
+			"scope": "Ordinary automatic collecting, real physics and shipped following camera; no injected position, score, radius, wallet or ownership",
+			"score": 139,
+			"viewport": "(600, 1300)"
+		},
+		{
+			"elapsed": 90.0166666666628,
+			"file": "toy-results.png",
+			"level": 5,
+			"map": "toys",
+			"menu": "home",
+			"phase": "complete",
+			"radius": 3.5,
+			"scope": "Actual timeout results from the normal round",
+			"score": 151,
+			"viewport": "(600, 1300)"
+		},
+		{
+			"elapsed": 0.0,
+			"file": "toy-city-overview.png",
+			"level": 1,
+			"map": "toys",
+			"menu": "home",
+			"phase": "intro",
+			"radius": 0.85,
+			"scope": "Staged art-direction camera of the actual newly built map; not a gameplay growth claim",
+			"score": 0,
+			"viewport": "(1280, 960)"
+		}
+	],
+	"renderer": "gl_compatibility",
+	"version": "0.13.0"
+}

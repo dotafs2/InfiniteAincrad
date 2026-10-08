@@ -14,11 +14,16 @@ import re
 
 VISIBLE_PHASES = {'commentary', 'final', 'final_answer'}
 CONTEXT_PREFIXES = ('# AGENTS.md instructions', '<environment_context>')
+AMBIENT_CONTEXT = re.compile(
+    r'<in-app-browser-context\b[^>]*source="ambient-ui-state"[^>]*>.*?</in-app-browser-context>',
+    re.DOTALL,
+)
 SECRET_PATTERNS = (
     r'\bsk-[A-Za-z0-9_-]{20,}',
     r'\b(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})',
     r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----',
     r'(?i)\b(?:api[_-]?key|access[_-]?token|authorization)\s*[=:]\s*["\']?(?:Bearer\s+)?[A-Za-z0-9_-]{24,}',
+    r'(?i)[?&](?:rapt|access_token|id_token|auth_code|TL)=[^\s&<>"\']+',
 )
 
 
@@ -26,10 +31,11 @@ def digest(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def extract(data, expected_thread):
+def extract(data, expected_thread, public=False):
     messages, excluded = [], Counter()
     meta = None
-    for number, line in enumerate(data.splitlines(), 1):
+    lines = data.splitlines() if isinstance(data, bytes) else data
+    for number, line in enumerate(lines, 1):
         if not line.strip():
             continue
         # A truncated or malformed log must not silently become a complete archive.
@@ -49,12 +55,41 @@ def extract(data, expected_thread):
             excluded['non_visible_assistant_phase'] += 1
             continue
         content = payload.get('content', [])
-        if any(block.get('type') not in ('input_text', 'output_text', 'text') for block in content):
+        attachments = [block for block in content if block.get('type') not in ('input_text', 'output_text', 'text')]
+        if attachments and not public:
             raise ValueError(f'Message at source line {number} includes an attachment; archive it explicitly first')
+        if any(block.get('type') != 'input_image' for block in attachments):
+            raise ValueError(f'Unsupported attachment at source line {number}')
         body = ''.join(block.get('text', '') for block in content)
         if role == 'user' and body.lstrip().startswith(CONTEXT_PREFIXES):
             excluded['injected_workspace_context'] += 1
             continue
+        if role == 'user' and AMBIENT_CONTEXT.search(body):
+            # Client-supplied browser state is not a visible human message and
+            # can include ephemeral login tokens. Retain the actual request.
+            body = AMBIENT_CONTEXT.sub('', body).lstrip('\n')
+            excluded['injected_browser_context'] += 1
+            if not body.strip():
+                excluded['empty_after_browser_context'] += 1
+                continue
+        if role == 'user' and body.lstrip().startswith('<external_codex_apps_open_page>'):
+            excluded['injected_page_context'] += 1
+            continue
+        redactions = Counter()
+        if public:
+            # Public archives retain corrections and decisions, while the exact
+            # original log stays local. Do not silently redact possible secrets.
+            for label, pattern in (
+                ('email', r'(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b'),
+                ('phone', r'(?<![\w])(?:\+?86[ -]?)?1[3-9]\d{9}(?![\w])'),
+            ):
+                body, count = re.subn(pattern, '[redacted ' + label + ']', body)
+                if count:
+                    redactions[label] += count
+            for block in attachments:
+                fingerprint = digest(json.dumps(block, sort_keys=True).encode('utf-8'))
+                body += '\n[Image attachment retained locally; source block SHA-256: ' + fingerprint + ']'
+            excluded['image_payloads_retained_locally'] += len(attachments)
         # Quiet heartbeat turns can finish with no visible text. Record that
         # omission explicitly; attachment checks still run before this branch.
         # Empty user messages remain unsupported, and whitespace is preserved.
@@ -68,6 +103,8 @@ def extract(data, expected_thread):
         messages.append({'source_line': number, 'timestamp': record.get('timestamp'),
                          'role': role, 'phase': phase, 'text': body,
                          'text_sha256': digest(body.encode('utf-8'))})
+        if redactions:
+            messages[-1]['public_redactions'] = dict(redactions)
     if not meta or meta.get('id') != expected_thread:
         raise ValueError('Source task identity does not match --thread-id')
     if not messages or not any(row['role'] == 'user' for row in messages):
@@ -75,12 +112,21 @@ def extract(data, expected_thread):
     return messages, excluded
 
 
-def archive(source, output, thread_id):
+def archive(source, output, thread_id, public=False):
     # Snapshot once; a concurrent append is outside this recorded byte boundary.
     with source.open('rb') as stream:
         size = source.stat().st_size
-        data = stream.read(size)
-    messages, excluded = extract(data, thread_id)
+        source_hash = hashlib.sha256()
+        def snapshot_lines():
+            remaining = size
+            while remaining:
+                line = stream.readline(remaining)
+                if not line:
+                    raise ValueError('Source shortened while reading snapshot')
+                remaining -= len(line)
+                source_hash.update(line)
+                yield line
+        messages, excluded = extract(snapshot_lines(), thread_id, public=public)
     snapshot = {'schema_version': 1, 'thread_id': thread_id, 'messages': messages}
     serialized = (json.dumps(snapshot, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
     markdown = ['# 本任务对话原文快照\n', f'任务：`{thread_id}`\n',
@@ -88,6 +134,10 @@ def archive(source, output, thread_id):
                 '保留用户消息、助手进度和最终答复；不含内部推理、系统指令、工具日志与注入环境信息。'
                 '没有补写未留存的旧对话；本文件是截至上述时间的快照。Markdown 展示去除行尾空格，'
                 '含完整空白的结构化原文与校验见同目录 JSON 文件。\n']
+    if public:
+        markdown.append('Public edition: email addresses and phone numbers are explicitly redacted; '
+                        'image payloads remain local with attachment fingerprints. Original visible '
+                        'wording is otherwise preserved. This is not a byte-identical private-log copy.\n')
     for index, row in enumerate(messages, 1):
         label = '用户' if row['role'] == 'user' else '助手'
         markdown.append(f'## {index}. {label} · {row["timestamp"]}\n')
@@ -97,13 +147,16 @@ def archive(source, output, thread_id):
     rendered = '\n'.join(markdown).encode('utf-8')
     manifest = {'schema_version': 1, 'thread_id': thread_id,
                 'exported_at_utc': datetime.now(timezone.utc).isoformat(),
-                'source_basename': source.name, 'source_snapshot_bytes': len(data),
-                'source_snapshot_sha256': digest(data),
+                'source_basename': source.name, 'source_snapshot_bytes': size,
+                'source_snapshot_sha256': source_hash.hexdigest(),
                 'first_message_at': messages[0]['timestamp'], 'last_message_at': messages[-1]['timestamp'],
                 'message_count': len(messages), 'role_counts': dict(Counter(row['role'] for row in messages)),
                 'excluded_record_counts': dict(excluded),
                 'coverage': 'visible text messages in this task only; no other tasks, tool logs, internal reasoning, or future messages',
                 'files': {'conversation.json': digest(serialized), 'conversation.md': digest(rendered)}}
+    if public:
+        manifest['public_edition'] = {'redacted_fields': ['email', 'phone'],
+                                      'image_payloads': 'local-only; source block fingerprints retained'}
     # Refuse a refresh that would erase already archived messages or change their text.
     existing = output / 'conversation.json'
     if existing.exists():
@@ -124,8 +177,9 @@ def main():
     parser.add_argument('--session', type=Path, required=True)
     parser.add_argument('--thread-id', required=True)
     parser.add_argument('--out', type=Path, required=True)
+    parser.add_argument('--public', action='store_true', help='Redact contact details and retain image payloads only locally')
     args = parser.parse_args()
-    manifest = archive(args.session, args.out, args.thread_id)
+    manifest = archive(args.session, args.out, args.thread_id, public=args.public)
     print(json.dumps({key: manifest[key] for key in ('thread_id', 'message_count', 'role_counts', 'last_message_at', 'files')}))
 
 

@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "checks": 125,
+  "failures": [],
+  "marker": "MUSIC_ACCEPTANCE",
+  "current_source_sha256": {
+    "fidelity/audio.gd": "30775280c6450bc9d3ee3cf4a03da44fe811ae4846dc1bef7b36eea6c2f618e5",
+    "fidelity/game.gd": "8256e56f4e7d602b8c9a962ad0862e7a1e38f48e08bf5e3123f195690e574a88",
+    "fidelity/ui.gd": "eafcd9cd303442873a61c1ee82d50b86dd40f31a6c66e1d45f12b29dbcfb59da",
+    "fidelity/food_city.gd": "c5eb2bba5632233f07d618e447061fb06e02637fdde4191f97c71de73c31f4f6",
+    "fidelity/audio_bus_layout.tres": "a8b1b249f22929c4305c60424b0c35a0b1734c1ed5d7b1ab36fa2348d0bf4c56",
+    "project.godot": "845b8a8b57a3c5b7198bcd56b9cf96cb7a49dfa046d076212f4b63552e724906",
+    "tests/music_acceptance.gd": "a7f8297db7f059d15c2c6808019aa96f47f2aa2137c975fabca73bff21d8d05f",
+    "assets/audio/sunny_city_loop.ogg": "f606d1f9720ebf512fbe1f1110f70992b416a61c990823ee09955e2546df7177",
+    "assets/audio/snack_garden_loop.ogg": "10c680b090cdef83e1520893eb41c4157ab8440d3c5b22e27610b167ce22897b",
+    "assets/audio/sunny_city_loop.ogg.import": "c2e5d77accbcf5a12e53a4a4dbca87ba327ace693f3c6ccb86577d4e4ee7b454",
+    "assets/audio/snack_garden_loop.ogg.import": "c68af194dc74bbe7e67bd9fc7d695a8863a8c76759f7ae63f629b2be1e148be4",
+    ".build/godot-standard/Godot.app/Contents/MacOS/Godot": "c7cccbf8fb143e34e02fd6521e09be2c2b974f0d5db080b19071c9c570718ccf"
+  },
+  "report_sha256": "efef43e6b1d3fc6fe4b75768d8672cad0e9d198dbb8771bfa1d624c900ef4cb3",
+  "log_sha256": "e6849228e3f654e1e6237e53ec5376b9439bc2b404f841bb0b7bea15fb95f0c4",
+  "first_attempt": "acceptance-first.json",
+  "source_guard_scope": "These hashes were captured immediately after the passing run. The final release source/PCK gate independently binds all inputs before/after its execution. No claim of an earlier full hash snapshot for the second local run.",
+  "helpers": "All owned native helper sessions (97096 and 48663) exited.",
+  "test_save_scope": "Only /tmp/hole-music-qa-<own PID>-* fixtures; cleanup completed."
+}

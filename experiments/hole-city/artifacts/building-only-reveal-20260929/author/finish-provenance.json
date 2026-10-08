@@ -1,0 +1,14 @@
+{
+  "old_shader_sha256": "75d79551d9715bf8796490fcb5bfe63cb508622074bcc12b57fc7491893526b2",
+  "new_shader_sha256": "54a890cdf065e4613a203e7fc9834d4440dd73d27ab6a47e3179aa27f721e2cc",
+  "expected_finish_sha256": "b5067e4791261ecf18471418955af77d2b38ab4fa39e468e0d2ed75e19a64a4a",
+  "excluded_exact_lines": [
+    "#include \"res://fidelity/hole_reveal.gdshaderinc\"",
+    "uniform float reveal_occluder = 0.0;",
+    "uniform bool reveal_use_instance = false;",
+    "varying float food_reveal_weight;",
+    "food_reveal_weight = reveal_use_instance ? INSTANCE_CUSTOM.r : reveal_occluder;",
+    "if (food_reveal_weight > 0.0 && food_reveal_weight * hole_reveal_mask(food_world_position, INV_VIEW_MATRIX[3].xyz, INV_VIEW_MATRIX[2].xyz, IN_SHADOW_PASS) > hole_reveal_threshold(FRAGCOORD.xy)) { discard; }"
+  ],
+  "provenance": "Old shader reconstructed by reversing current reveal-only edit; exact SHA matches preserved v0.8.4 release manifest. Appearance baseline derives from that verified old source."
+}

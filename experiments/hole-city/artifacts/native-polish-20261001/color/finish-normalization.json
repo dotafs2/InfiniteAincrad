@@ -1,0 +1,7 @@
+{
+  "old_albedo": "ALBEDO = mix(pow((COLOR.rgb + vec3(0.055)) / 1.055, vec3(2.4)), COLOR.rgb / 12.92, lessThan(COLOR.rgb, vec3(0.04045)));",
+  "new_albedo": "ALBEDO = OUTPUT_IS_SRGB ? COLOR.rgb : mix(pow((COLOR.rgb + vec3(0.055)) / 1.055, vec3(2.4)), COLOR.rgb / 12.92, lessThan(COLOR.rgb, vec3(0.04045)));",
+  "remaining_noncomment_shader_lines_unchanged": true,
+  "gpu_color_evidence": "color/gpu-01/result.json",
+  "scope": "Only the exact accepted renderer-dependent decode differs. Geometry/material-finish collision pins remain original."
+}

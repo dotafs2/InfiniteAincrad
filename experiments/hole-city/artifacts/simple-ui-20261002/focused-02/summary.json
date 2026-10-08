@@ -1,0 +1,16 @@
+{
+  "ok": false,
+  "failed_suite": "mobile_thumbnail",
+  "error": "Scene QA failed; previous preview preserved. See /Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/simple-ui-20261002/focused-02/mobile_thumbnail.json",
+  "results": [
+    {
+      "suite": "ui_redesign",
+      "checks": 1843,
+      "minimum": 150,
+      "report_sha256": "65d25671b94dcc67e8f88c9db116c3beb837d93dc83389045dbbe545cd7a442c"
+    }
+  ],
+  "unchanged_inputs": true,
+  "elapsed_seconds": 7.761,
+  "scope": "Serial source-only focused headless acceptance; no full gate, GPU, native build or phone action"
+}

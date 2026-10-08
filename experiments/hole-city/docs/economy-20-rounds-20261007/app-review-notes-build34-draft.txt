@@ -1,0 +1,19 @@
+DRAFT — NOT SUBMITTED. Update physical evidence/build differences before use.
+
+Version 0.13.0 (34). Guideline 2.1 information for submission 09f163eb-1c42-49cf-9643-366c13bb8680.
+
+1. Device demonstration: The existing paid-features-physical-iphone.mp4 shows the real iPhone 16 Pro Max, iOS 27.2 (24B5089g), running development build 32. It shows HOME, HOLES, STORE, Diamond Shop, Apple's no-charge Sandbox purchase and the then-current 100-diamond/250-coin exchange. Build 34 retains the same three worlds and native commerce/ad-retry code, but changes draw/exchange/optional diamond costs as listed below; this older video must not be represented as a build-34 walkthrough. The recording uses actual iPhone Mirroring frames with idle/authentication gaps omitted. New normal-gameplay footage exists on the phone but has not been imported. Updated evidence/clear scope explanation remains required before submission.
+
+2. Purpose/audience: Single-player casual collecting/growth arcade game with computer-controlled rivals. Freely choose Sunny City, Snack Garden or Bubble Toy Town on HOME between rounds; no world-unlock purchase. Snack Garden includes Sushi Express. Progress and skins are saved locally.
+
+3. Setup/access: No app account, credentials or files required. HOME > choose world > PLAY. Drag to move; charged BOOST increases speed. City and Toy Town start at 90 seconds; Snack Garden at 60. HOLES opens skins. SETTINGS > PRIVACY & SUPPORT opens support, privacy and credits.
+
+4. Services: Core gameplay runs locally, without our own game backend, cloud saves or AI service. Optional rewarded ads use Google AdMob; applicable privacy forms use Google UMP. Purchases use Apple StoreKit 2. Ads request non-personalized delivery; publisher first-party ID/personalization are disabled. SDK data processing is disclosed in the privacy policy and App Privacy information. Ads depend on network/provider availability. Build 34 includes retry after failed ad requests; a matched development-device test earned exactly 3 diamonds and preloaded the next test ad.
+
+5. Regions: Initial release targets the United States. Worlds/core gameplay have no country-specific branches. Prices come from Apple's catalog; ads and privacy forms vary with provider/region.
+
+6. Material/licenses: Casual entertainment, no regulated service. Game models, UI and skins are original, including Blender-authored block castles; no proprietary reference-game assets. Credits cover Godot/template code (MIT), Fredoka (SIL OFL), and Shop Theme by Cleyton Kauffman (CC0).
+
+7. IAP: HOME > STORE > DIAMOND SHOP offers 100/360/1800 consumable diamonds with Apple's prices/payment sheet. Verified transactions credit the local wallet. On October 7, Sandbox purchases of sink_city.diamonds_100 each credited exactly 100 diamonds. The first credit remained after relaunch without duplication. No real charge occurred.
+STORE exchanges: 100 diamonds = 2,000 coins, 250 = 5,000, 1000 = 20,000. HOLES > UNLOCK RANDOM costs 100 coins; RATES shows probabilities/guarantees before spending. Round coins are floor(points / 10), with no minimum or completion bonus; 1000 points = 100 coins. Eligible results offer 1.5x coins or +30 seconds for 2 diamonds each, once per option. Continuation pays only the new score-derived difference including any earned multiplier. Optional rewarded videos are alternatives; STORE offers a video for +3 diamonds. Only earned rewards are granted; video duration is set by the provider.
+Currency has no cash value, is non-transferable and saved locally; no cross-device wallet restore is claimed. All worlds/core play require no purchase.

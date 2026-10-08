@@ -1,0 +1,358 @@
+{
+	"checks": 144,
+	"failures": [
+		"090_lamp_02 (-0.55, 0.0): actual collection within six seconds",
+		"090_lamp_02 (0.55, 0.0): actual collection within six seconds",
+		"092_lamp_04 (-0.55, 0.0): actual collection within six seconds",
+		"092_lamp_04 (0.55, 0.0): actual collection within six seconds",
+		"131_traffic_light_03 (-0.55, 0.0): actual collection within six seconds",
+		"131_traffic_light_03 (0.55, 0.0): actual collection within six seconds",
+		"131_traffic_light_03 (0.0, 0.55): actual collection within six seconds",
+		"132_traffic_light_04 (-0.55, 0.0): actual collection within six seconds",
+		"132_traffic_light_04 (0.55, 0.0): actual collection within six seconds"
+	],
+	"rows": [
+		{
+			"approach": "(0.0, 0.0)",
+			"asset": "089_lamp_01",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(-0.55, 0.0)",
+			"asset": "089_lamp_01",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.55, 0.0)",
+			"asset": "089_lamp_01",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.55)",
+			"asset": "089_lamp_01",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.0)",
+			"asset": "090_lamp_02",
+			"collected": true,
+			"radius": 1.2
+		},
+		{
+			"approach": "(-0.55, 0.0)",
+			"asset": "090_lamp_02",
+			"collected": false,
+			"end": {
+				"claimed": true,
+				"position": "(63.77582, 0.588971, 64.99832)",
+				"sleeping": true,
+				"tilt": 51.045213369483
+			},
+			"radius": 1.2
+		},
+		{
+			"approach": "(0.55, 0.0)",
+			"asset": "090_lamp_02",
+			"collected": false,
+			"end": {
+				"claimed": true,
+				"position": "(66.2254, 0.59269, 65.00497)",
+				"sleeping": true,
+				"tilt": 51.2390836608366
+			},
+			"radius": 1.2
+		},
+		{
+			"approach": "(0.0, 0.55)",
+			"asset": "090_lamp_02",
+			"collected": true,
+			"radius": 1.2
+		},
+		{
+			"approach": "(0.0, 0.0)",
+			"asset": "091_lamp_03",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(-0.55, 0.0)",
+			"asset": "091_lamp_03",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.55, 0.0)",
+			"asset": "091_lamp_03",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.55)",
+			"asset": "091_lamp_03",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.0)",
+			"asset": "092_lamp_04",
+			"collected": true,
+			"radius": 1.2
+		},
+		{
+			"approach": "(-0.55, 0.0)",
+			"asset": "092_lamp_04",
+			"collected": false,
+			"end": {
+				"claimed": true,
+				"position": "(63.61996, 0.7151, 64.99773)",
+				"sleeping": true,
+				"tilt": 52.2285720295166
+			},
+			"radius": 1.2
+		},
+		{
+			"approach": "(0.55, 0.0)",
+			"asset": "092_lamp_04",
+			"collected": false,
+			"end": {
+				"claimed": true,
+				"position": "(66.38933, 0.73626, 65.01512)",
+				"sleeping": true,
+				"tilt": 49.8615632231547
+			},
+			"radius": 1.2
+		},
+		{
+			"approach": "(0.0, 0.55)",
+			"asset": "092_lamp_04",
+			"collected": true,
+			"radius": 1.2
+		},
+		{
+			"approach": "(0.0, 0.0)",
+			"asset": "133_sign_01",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(-0.55, 0.0)",
+			"asset": "133_sign_01",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.55, 0.0)",
+			"asset": "133_sign_01",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.55)",
+			"asset": "133_sign_01",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.0)",
+			"asset": "134_sign_02",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(-0.55, 0.0)",
+			"asset": "134_sign_02",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.55, 0.0)",
+			"asset": "134_sign_02",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.55)",
+			"asset": "134_sign_02",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.0)",
+			"asset": "135_sign_03",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(-0.55, 0.0)",
+			"asset": "135_sign_03",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.55, 0.0)",
+			"asset": "135_sign_03",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.55)",
+			"asset": "135_sign_03",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.0)",
+			"asset": "136_sign_04",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(-0.55, 0.0)",
+			"asset": "136_sign_04",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.55, 0.0)",
+			"asset": "136_sign_04",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.55)",
+			"asset": "136_sign_04",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.0)",
+			"asset": "129_traffic_light_01",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(-0.55, 0.0)",
+			"asset": "129_traffic_light_01",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.55, 0.0)",
+			"asset": "129_traffic_light_01",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.55)",
+			"asset": "129_traffic_light_01",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.0)",
+			"asset": "130_traffic_light_02",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(-0.55, 0.0)",
+			"asset": "130_traffic_light_02",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.55, 0.0)",
+			"asset": "130_traffic_light_02",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.55)",
+			"asset": "130_traffic_light_02",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.0)",
+			"asset": "131_traffic_light_03",
+			"collected": true,
+			"radius": 0.85
+		},
+		{
+			"approach": "(-0.55, 0.0)",
+			"asset": "131_traffic_light_03",
+			"collected": false,
+			"end": {
+				"claimed": true,
+				"position": "(63.92733, 0.821812, 65.00336)",
+				"sleeping": true,
+				"tilt": 46.6297762976835
+			},
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.55, 0.0)",
+			"asset": "131_traffic_light_03",
+			"collected": false,
+			"end": {
+				"claimed": true,
+				"position": "(66.07298, 0.825664, 65.00567)",
+				"sleeping": true,
+				"tilt": 46.4451376553319
+			},
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.55)",
+			"asset": "131_traffic_light_03",
+			"collected": false,
+			"end": {
+				"claimed": true,
+				"position": "(65.00359, 1.59508, 65.00203)",
+				"sleeping": true,
+				"tilt": 0.044234660174789
+			},
+			"radius": 0.85
+		},
+		{
+			"approach": "(0.0, 0.0)",
+			"asset": "132_traffic_light_04",
+			"collected": true,
+			"radius": 1.2
+		},
+		{
+			"approach": "(-0.55, 0.0)",
+			"asset": "132_traffic_light_04",
+			"collected": false,
+			"end": {
+				"claimed": true,
+				"position": "(63.87389, 0.514237, 64.99909)",
+				"sleeping": true,
+				"tilt": 50.6260079725912
+			},
+			"radius": 1.2
+		},
+		{
+			"approach": "(0.55, 0.0)",
+			"asset": "132_traffic_light_04",
+			"collected": false,
+			"end": {
+				"claimed": true,
+				"position": "(66.12498, 0.511468, 65.00098)",
+				"sleeping": true,
+				"tilt": 51.0757723230657
+			},
+			"radius": 1.2
+		},
+		{
+			"approach": "(0.0, 0.55)",
+			"asset": "132_traffic_light_04",
+			"collected": true,
+			"radius": 1.2
+		}
+	]
+}

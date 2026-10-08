@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "name": "Original Sunspell Royal Snap-Together Castle Kit",
+  "authoring_tool": "Blender",
+  "blender_version": "4.2.13 LTS",
+  "generator": "tools/build_fairytale_castles.py",
+  "generator_sha256": "020d213386d20e22c0a2dca51301f172784ab27f264fadd9ec275a4611de5631",
+  "blender_binary_sha256": "beaa57b8b1b6d46af53bf8a51944519cd7b439faee1dccd53a2476c8f105071f",
+  "source_blend": "source/fairytale_castles.blend",
+  "source_blend_sha256": "f174e03bbbd5c18e4532e817fc125a29fc27e6a30eee361e89774b40a7e09766",
+  "license": "Original project-authored geometry; no third-party models or textures",
+  "runtime_format": "Indexed normalized unit mesh, real corner normals, opaque RGBA vertex colors, role IDs, major compound hull points",
+  "kinds": [
+    "toy_castle",
+    "grand_castle",
+    "bubble_turret",
+    "toy_arch",
+    "block_tower"
+  ],
+  "assets": {
+    "toy_castle": {
+      "path": "res://assets/fairytale_castles/toy_castle.json",
+      "sha256": "8fd54ae898626812e68bc00d805b44b5f79bcde17b098a60b0cf8fcb40fe15c9",
+      "source_geometry_sha256": "64ec2338b797caf3457af2d951734cf2d5fd57e7f6304cf15b65792225c7a75c",
+      "triangles": 11756,
+      "vertices": 15108,
+      "natural_size": [
+        5.0952001,
+        5.9173999,
+        3.7676001
+      ],
+      "collision_parts": 6,
+      "component_objects": 291,
+      "structural_counts": {
+        "block_course": 48,
+        "detail": 179,
+        "gable_panel": 6,
+        "plastic_frame": 10,
+        "stud": 28,
+        "tower_segment": 20
+      },
+      "triangle_budget": 12000,
+      "arch_opening_probe": null
+    },
+    "grand_castle": {
+      "path": "res://assets/fairytale_castles/grand_castle.json",
+      "sha256": "574b2ed3b033fd6649f102b0b13f8220b73ed720f7817c05907579b10a9f6cec",
+      "source_geometry_sha256": "22330d85128f6295165009c765aab77972bc2d28f712ceb968ad859231e1f5de",
+      "triangles": 11756,
+      "vertices": 15108,
+      "natural_size": [
+        6.5471997,
+        7.79,
+        4.4756002
+      ],
+      "collision_parts": 6,
+      "component_objects": 291,
+      "structural_counts": {
+        "block_course": 48,
+        "detail": 179,
+        "gable_panel": 6,
+        "plastic_frame": 10,
+        "stud": 28,
+        "tower_segment": 20
+      },
+      "triangle_budget": 12000,
+      "arch_opening_probe": null
+    },
+    "bubble_turret": {
+      "path": "res://assets/fairytale_castles/bubble_turret.json",
+      "sha256": "ef1a29c8a1c83746b85cc32ddcb3fab2e10739df75d512d9b8dd1b26a7335c90",
+      "source_geometry_sha256": "5e9b646c91045a217746892ce7cfb43e5f419a4c5e2ec2cec1ff3200fb6c7d8b",
+      "triangles": 1660,
+      "vertices": 1748,
+      "natural_size": [
+        2.3232,
+        6.0834999,
+        2.3232
+      ],
+      "collision_parts": 1,
+      "component_objects": 43,
+      "structural_counts": {
+        "detail": 34,
+        "plastic_frame": 1,
+        "stud": 4,
+        "tower_segment": 4
+      },
+      "triangle_budget": 6000,
+      "arch_opening_probe": null
+    },
+    "toy_arch": {
+      "path": "res://assets/fairytale_castles/toy_arch.json",
+      "sha256": "870993d797da0ee54d3bc288f9744e293cffe7d6f88c98e1432bdc8f2c7994ae",
+      "source_geometry_sha256": "0924ba3fa2eacd08c9c64e9c82b208c1a2329e861ba6316710f5127a42b635a3",
+      "triangles": 1892,
+      "vertices": 2282,
+      "natural_size": [
+        3.1500001,
+        4.5,
+        1.17
+      ],
+      "collision_parts": 3,
+      "component_objects": 38,
+      "structural_counts": {
+        "detail": 22,
+        "gable_panel": 2,
+        "stud": 8,
+        "tower_segment": 6
+      },
+      "triangle_budget": 2500,
+      "arch_opening_probe": {
+        "from": [
+          0,
+          0.25,
+          -0.8
+        ],
+        "to": [
+          0,
+          0.25,
+          0.8
+        ],
+        "expected_clear": true
+      }
+    },
+    "block_tower": {
+      "path": "res://assets/fairytale_castles/block_tower.json",
+      "sha256": "37d07c00b6c9a17aa1b7decbddaf9543df10fcf48577072147c132ee66e82b1c",
+      "source_geometry_sha256": "acd0a6a693c65bfcd1503f0250b1a6363a6dcaae977cce858763bce49b84302e",
+      "triangles": 5120,
+      "vertices": 9564,
+      "natural_size": [
+        2.78,
+        5.0679998,
+        2.3699999
+      ],
+      "collision_parts": 1,
+      "component_objects": 142,
+      "structural_counts": {
+        "block_course": 48,
+        "detail": 66,
+        "gable_panel": 8,
+        "plastic_frame": 8,
+        "stud": 12
+      },
+      "triangle_budget": 6000,
+      "arch_opening_probe": null
+    }
+  },
+  "rendered_or_gameplay_verified": false
+}

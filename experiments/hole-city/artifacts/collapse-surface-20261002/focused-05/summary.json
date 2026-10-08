@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "suite": "no_tether",
+      "checks": 10,
+      "minimum": 10,
+      "report_sha256": "40ece0877feab7a0154c80f0c834d1bccd1e9412940803995361ee15343564c3"
+    }
+  ],
+  "checks": 10,
+  "unchanged_inputs": true,
+  "guarded_inputs": 810,
+  "elapsed_seconds": 0.837,
+  "scope": "Serial source-only focused headless acceptance; no full gate, GPU, native build or phone action"
+}

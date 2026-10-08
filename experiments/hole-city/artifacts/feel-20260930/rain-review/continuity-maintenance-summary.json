@@ -1,0 +1,13 @@
+{
+  "original_assertion_statements": 6,
+  "unchanged_original_statements": 5,
+  "replaced_statement": "check(max_airborne<=city.AIRBORNE_LIMIT,\"Only actually airborne food uses the 24-body budget\")",
+  "replacement": "Synchronous actual body-ID admission snapshots, 24 airborne and 640 retained capacities, no old-ID deletion",
+  "fixed_limits": {
+    "airborne_admission": 24,
+    "retained": 640,
+    "per_wave": 6
+  },
+  "new_boundary_or_negative_checks": 5,
+  "peak_sampling": "Every physics tick; no enforced all-time population cap"
+}

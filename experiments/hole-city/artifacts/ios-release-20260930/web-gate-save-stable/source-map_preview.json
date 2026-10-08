@@ -1,0 +1,73 @@
+{
+  "checks": 79,
+  "failures": [],
+  "observations": [
+    {
+      "active": true,
+      "angle_change": 0.0300000002607703,
+      "case": "food home",
+      "elapsed": 0.3
+    },
+    {
+      "active": false,
+      "angle_change": 0.0,
+      "case": "food collection",
+      "elapsed": 0.300000000000001
+    },
+    {
+      "active": true,
+      "angle_change": 0.0299999751150608,
+      "case": "food return home",
+      "elapsed": 0.3
+    },
+    {
+      "active": false,
+      "angle_change": 0.0,
+      "case": "food store",
+      "elapsed": 0.299999999999999
+    },
+    {
+      "active": true,
+      "angle_change": 0.0299999988637865,
+      "case": "city home",
+      "elapsed": 0.299999999999999
+    },
+    {
+      "active": false,
+      "angle_change": 0.0,
+      "case": "city store",
+      "elapsed": 0.299999999999999
+    },
+    {
+      "active": false,
+      "angle_change": 0.0,
+      "case": "food intro",
+      "elapsed": 0.299999999999999
+    },
+    {
+      "active": false,
+      "angle_change": 0.0,
+      "case": "food gameplay",
+      "elapsed": 0.299999999999999
+    },
+    {
+      "active": false,
+      "angle_change": 0.0,
+      "case": "paused gameplay",
+      "elapsed": 0.299999999999999
+    },
+    {
+      "active": false,
+      "angle_change": 0.0,
+      "case": "food results",
+      "elapsed": 0.299999999999999
+    },
+    {
+      "active": true,
+      "angle_change": 0.0299999918788671,
+      "case": "results home",
+      "elapsed": 0.299999999999999
+    }
+  ],
+  "scope": "Natural SceneTree frame motion, menu lifecycle, initial lighting and ownership; no browser pixels or phone FPS."
+}

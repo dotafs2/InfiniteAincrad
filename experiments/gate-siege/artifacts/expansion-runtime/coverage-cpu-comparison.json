@@ -1,0 +1,53 @@
+{
+  "baseline_package_sha256": "d543c6ec50bc7f377559266d0de7706b15c4024267d89dacdb475147485e1faf",
+  "baseline_file": "physical-cpu-baseline.json",
+  "coverage_file": "coverage-spray-cpu.json",
+  "fixture": "36 members,544 high-HP troops,mixed elites,dragon boss;20 seconds fixed60Hz \u00d73/mode",
+  "rows": [
+    {
+      "mode": "rifle",
+      "physical_mean_us": 1516.4522222222233,
+      "coverage_mean_us": 656.2502777777777,
+      "decrease_percent": 56.72463212747301,
+      "coverage_tick_max_us": 3123.0,
+      "coverage_peak_fields": 17
+    },
+    {
+      "mode": "scatter",
+      "physical_mean_us": 1578.7930555555567,
+      "coverage_mean_us": 421.12999999999965,
+      "decrease_percent": 73.32582642683278,
+      "coverage_tick_max_us": 2318.0,
+      "coverage_peak_fields": 9
+    },
+    {
+      "mode": "rail",
+      "physical_mean_us": 656.7030555555557,
+      "coverage_mean_us": 353.282777777778,
+      "decrease_percent": 46.203573321444516,
+      "coverage_tick_max_us": 2030.0,
+      "coverage_peak_fields": 6
+    },
+    {
+      "mode": "rocket",
+      "physical_mean_us": 658.8633333333333,
+      "coverage_mean_us": 376.97027777777765,
+      "decrease_percent": 42.78475387746913,
+      "coverage_tick_max_us": 1640.0,
+      "coverage_peak_fields": 10
+    },
+    {
+      "mode": "arc",
+      "physical_mean_us": 1560.2066666666667,
+      "coverage_mean_us": 474.2422222222223,
+      "decrease_percent": 69.60388438568678,
+      "coverage_tick_max_us": 2935.0,
+      "coverage_peak_fields": 11
+    }
+  ],
+  "limits": "Combined deterministic coverage,analytic GPU-trail emission,aim lookup and duplicate formation-update optimization. CPU physics timing on this Mac only; not a phone or render-FPS estimate. Damage totals differ under the explicitly revised area contract.",
+  "evidence_hashes": {
+    "physical-cpu-baseline.json": "e02068f2598ddb9ebbf6bf63e006d6952767768d1da810f3dea77322ac968ab6",
+    "coverage-spray-cpu.json": "5d9f301d65189a75b8f953e586b59edd5711cb4206500b67d73a44edd3ff8db0"
+  }
+}

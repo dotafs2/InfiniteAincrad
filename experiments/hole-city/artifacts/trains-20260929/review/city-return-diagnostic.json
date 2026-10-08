@@ -1,0 +1,63 @@
+{
+  "checks": 107,
+  "failures": [
+    "Surviving head completes the required physical return distance"
+  ],
+  "metrics": {
+    "city": {
+      "assets": 2,
+      "cars": 4,
+      "cut_return": {
+        "blocked_frames": 709,
+        "collider_overlaps": 0,
+        "head_distance": 1334.552811702,
+        "max_car_step": 1.08010864257812,
+        "max_history_samples": 33,
+        "parked_pose_changes": 0,
+        "requested_distance": 768.562041687965,
+        "ticks": 1312
+      },
+      "detachment_events": 2,
+      "max_car_triangles": 956,
+      "receipts": {
+        "363595840193": {
+          "count": 1,
+          "player": true,
+          "points": 15,
+          "top": -3.6671701669693
+        },
+        "363679726277": {
+          "count": 1,
+          "player": true,
+          "points": 15,
+          "top": -3.6671701669693
+        },
+        "363763612362": {
+          "count": 1,
+          "player": true,
+          "points": 15,
+          "top": -3.6671701669693
+        },
+        "363847498447": {
+          "count": 1,
+          "player": true,
+          "points": 15,
+          "top": -3.6671701669693
+        }
+      },
+      "surfaces": 4,
+      "triangles": 3672,
+      "unbroken_loop": {
+        "blocked_frames": 0,
+        "collider_overlaps": 0,
+        "head_distance": 677.057163344071,
+        "max_car_step": 1.08010864257812,
+        "max_history_samples": 82,
+        "parked_pose_changes": 0,
+        "requested_distance": 672.3148188591,
+        "ticks": 623
+      }
+    }
+  },
+  "scope": "Independent actual-map/imported-model/physics/coupling checks, no browser, save or performance claim."
+}

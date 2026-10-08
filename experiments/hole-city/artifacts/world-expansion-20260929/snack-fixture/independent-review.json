@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "reviewer": "Sagan (non-author)",
+  "test_sha256": "5db4c8485fb6b6974593549f3497deb9513cc350d86a32ffe02cdbaa08b529e8",
+  "prior_test_sha256": "f63310fed22133102747bfa0120e1d0042bd7d23e3f7ec0d3a01a8341e61a8fd",
+  "exact_diff_sha256": "40932f306f340b5f6ae081b7435f30ce8b43b0d2c6a23976c90a7553fe195160",
+  "checks": 80,
+  "failures": [],
+  "original_static_check_statements": 19,
+  "unchanged_original_static_statements": 18,
+  "only_changed_original_check": {
+    "before": "check(drops.all(func(b):return is_instance_valid(b) and not b.consumed and not is_instance_valid(b.claimed_by)),\"food landing on the ground remains uncollected and awards no rain receipt\")",
+    "after": "check(drops.all(func(b):return is_instance_valid(b) and not b.consumed and not is_instance_valid(b.claimed_by) and not rain_receipts.has(b.get_instance_id())),\"food landing on the ground remains uncollected and awards no rain receipt\")",
+    "reason": "Adds actual emitted-receipt absence to the existing not-consumed/not-claimed condition."
+  },
+  "preserved_cases": [
+    "Original UI, NPC physical swallowing, supported food release, rain limits, play-phase and restart assertions",
+    "All ten kinds; 12m spawn; 240 physical frames to land; original y and velocity bounds",
+    "1.5m hole; normal scan_food; 360-frame full fall deadline"
+  ],
+  "added_evidence": [
+    "Actual 6x6x24 empty columns and five terrain RID rays",
+    "Rotated whole-body bounding-sphere clearance",
+    "Actual terrain support after landing",
+    "Exactly one player item_collected receipt per dropped instance, emitted only after top < -3.5"
+  ],
+  "scope": "Headless actual physics/lifecycle. No rendered appearance, browser interaction, audio audition or phone performance claim.",
+  "owned_helpers_running": false
+}

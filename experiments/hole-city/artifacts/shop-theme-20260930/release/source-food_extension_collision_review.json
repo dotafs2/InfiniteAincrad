@@ -1,0 +1,192 @@
+{
+  "checks": 189,
+  "failures": [],
+  "metrics": {
+    "inventory": {
+      "extension_bodies": 334,
+      "extension_loose": 120,
+      "maximum_scale": 4.19999980926514,
+      "overlap_pairs": []
+    },
+    "perimeter_rain": {
+      "former_clamp_min_distance": 29.0006561279297,
+      "landed_recipes": 10,
+      "max_spawn_distance": 15.9446430206299,
+      "maximum_airborne": 20,
+      "maximum_retained": 77,
+      "waves_spawned": 78
+    },
+    "plaza": {
+      "at": "(-73.69755, 2.727264, -41.94333)",
+      "grown_radius": 6.0,
+      "maximum_fall_speed": 8.6785364151001,
+      "minimum_bottom_during_contact": -0.0309879779815674,
+      "receipt": {
+        "count": 1,
+        "player": true,
+        "points": 2,
+        "top": -3.51483184490907
+      },
+      "scale": 2.8301887512207
+    },
+    "rain_collection": [
+      {
+        "claimed": false,
+        "final": "freed",
+        "hole_radius": 7.2,
+        "initial": "(86.37527, 1.448578, 86.13053)",
+        "kind": "bacon",
+        "receipt": {
+          "count": 1,
+          "player": true,
+          "points": 2,
+          "top": -3.55878237163642
+        },
+        "support": {
+          "food": "donut",
+          "footprint": 0.519999980926514,
+          "name": "food_donut_1736",
+          "position": "(86.72147, 1.161234, 86.27195)",
+          "required_radius": 2.68296040534973,
+          "root": "food_donut_1686"
+        },
+        "velocity": "freed"
+      },
+      {
+        "claimed": false,
+        "final": "freed",
+        "hole_radius": 7.2,
+        "initial": "(88.58472, 0.455412, 93.00301)",
+        "kind": "egg",
+        "receipt": {
+          "count": 1,
+          "player": true,
+          "points": 2,
+          "top": -3.54804513038375
+        },
+        "support": {
+          "food": "none",
+          "footprint": null,
+          "name": "@StaticBody3D@7476",
+          "position": "(0.0, 0.0, 0.0)"
+        },
+        "velocity": "freed"
+      },
+      {
+        "claimed": false,
+        "final": "freed",
+        "hole_radius": 7.2,
+        "initial": "(97.37033, 0.931347, 95.96708)",
+        "kind": "cake",
+        "receipt": {
+          "count": 1,
+          "player": true,
+          "points": 2,
+          "top": -3.57954456701633
+        },
+        "support": {
+          "food": "none",
+          "footprint": null,
+          "name": "@StaticBody3D@7476",
+          "position": "(0.0, 0.0, 0.0)"
+        },
+        "velocity": "freed"
+      },
+      {
+        "collected_with_neighbor": true,
+        "kind": "donut",
+        "receipt": {
+          "count": 1,
+          "player": true,
+          "points": 2,
+          "top": -3.5214440173545
+        }
+      },
+      {
+        "collected_with_neighbor": true,
+        "kind": "burger",
+        "receipt": {
+          "count": 1,
+          "player": true,
+          "points": 2,
+          "top": -3.52277027331045
+        }
+      },
+      {
+        "collected_with_neighbor": true,
+        "kind": "cookie",
+        "receipt": {
+          "count": 1,
+          "player": true,
+          "points": 2,
+          "top": -3.52857001266284
+        }
+      },
+      {
+        "collected_with_neighbor": true,
+        "kind": "berry",
+        "receipt": {
+          "count": 1,
+          "player": true,
+          "points": 2,
+          "top": -3.59580926995128
+        }
+      },
+      {
+        "collected_with_neighbor": true,
+        "kind": "sushi",
+        "receipt": {
+          "count": 1,
+          "player": true,
+          "points": 2,
+          "top": -3.50525011710278
+        }
+      },
+      {
+        "claimed": false,
+        "final": "freed",
+        "hole_radius": 7.2,
+        "initial": "(81.02892, 0.470774, 93.0)",
+        "kind": "pancake",
+        "receipt": {
+          "count": 1,
+          "player": true,
+          "points": 2,
+          "top": -3.53625618569318
+        },
+        "support": {
+          "food": "none",
+          "footprint": null,
+          "name": "@StaticBody3D@7476",
+          "position": "(0.0, 0.0, 0.0)"
+        },
+        "velocity": "freed"
+      },
+      {
+        "collected_with_neighbor": true,
+        "kind": "pizza",
+        "receipt": {
+          "count": 1,
+          "player": true,
+          "points": 2,
+          "top": -3.5418523016561
+        }
+      }
+    ],
+    "towers": [
+      {
+        "kind": "burger",
+        "pieces": 4,
+        "radius": 6.0,
+        "tilted": true
+      },
+      {
+        "kind": "cake",
+        "pieces": 3,
+        "radius": 6.0,
+        "tilted": true
+      }
+    ]
+  },
+  "scope": "Independent actual enlarged food collider/support/contact/collection; no renderer or performance claim"
+}

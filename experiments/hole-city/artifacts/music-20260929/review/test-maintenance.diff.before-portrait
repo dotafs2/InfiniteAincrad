@@ -1,0 +1,113 @@
+--- city_review_portrait_probe.gd.before
++++ city_review_portrait_probe.gd.after
+@@ -117,4 +117,6 @@
+ 	for arg in OS.get_cmdline_user_args():
+ 		if arg.begins_with("--report="):
+ 			var out:=FileAccess.open(arg.trim_prefix("--report="),FileAccess.WRITE);out.store_string(JSON.stringify(result,"\t")+"\n")
++	# Release the streamed music decoder on its audio thread before freeing the game.
++	game.audio.music.stop();OS.delay_msec(120);await process_frame
+ 	game.queue_free();await process_frame;await process_frame;quit(0 if failures.is_empty() else 1)
+--- coin_skins_acceptance.gd.before
++++ coin_skins_acceptance.gd.after
+@@ -173,6 +173,8 @@
+ 	owner.free()
+ 	game.owned_skin_ids=game.skin_ids("foundation")+game.skin_ids("resonance");game.ui.open_holes();await frames()
+ 	check(target("unlock-random").disabled,"Complete collection disables the purchase control")
++	# Release the streamed music decoder on its audio thread before freeing the game.
++	game.audio.music.stop();OS.delay_msec(120);await process_frame
+ 	game.free();await frames()
+ 	for owned_path in paths:
+ 		if FileAccess.file_exists(owned_path):DirAccess.remove_absolute(owned_path)
+--- fidelity_acceptance.gd.before
++++ fidelity_acceptance.gd.after
+@@ -129,6 +129,8 @@
+ 		if arg.begins_with("--report="):
+ 			var out:=FileAccess.open(arg.trim_prefix("--report="),FileAccess.WRITE)
+ 			out.store_string(JSON.stringify(result,"\t")+"\n")
++	# Release the streamed music decoder on its audio thread before freeing the game.
++	game.audio.music.stop();OS.delay_msec(120);await process_frame
+ 	game.queue_free()
+ 	await process_frame
+ 	await process_frame
+--- food_review_skill_economy.gd.before
++++ food_review_skill_economy.gd.after
+@@ -158,6 +158,8 @@
+ 	game.owned_skin_ids.assign(game.skin_ids("foundation"));game.coins=0
+ 	var complete:Dictionary=game.unlock_random_skin("foundation")
+ 	check(not complete.ok and complete.message=="COLLECTION COMPLETE" and not complete.has("missing_coins"),"Complete collection does not invent a coin deficit")
++	# Release the streamed music decoder on its audio thread before freeing the game.
++	game.audio.music.stop();OS.delay_msec(120);await process_frame
+ 	game.free();await frames()
+ 	for suffix in ["",".tmp"]:
+ 		if FileAccess.file_exists(save_path+suffix):DirAccess.remove_absolute(save_path+suffix)
+--- music_acceptance.gd.before
++++ music_acceptance.gd.after
+@@ -51,7 +51,7 @@
+ 		var button:=target(id)
+ 		check(button!=null,label+": separate "+id+" control exists")
+ 		if button==null:continue
+-		check(button.size.x>=44 and button.size.y>=44,label+": audio touch target is at least 44 design pixels")
++		check(button.size.x*375.0/540.0>=44 and button.size.y*375.0/540.0>=44,label+": audio touch target is at least 44 points at 375-point phone width")
+ 		check(Rect2(Vector2.ZERO,Vector2(540,960)).encloses(button.get_global_rect()),label+": audio button fits the portrait viewport")
+ 		var style:=button.get_theme_stylebox("normal")
+ 		check(style is StyleBoxFlat and style.corner_radius_top_left>0,label+": audio control retains the rounded interface style")
+--- portrait_acceptance.gd.before
++++ portrait_acceptance.gd.after
+@@ -102,4 +102,6 @@
+ 	for arg in OS.get_cmdline_user_args():
+ 		if arg.begins_with("--report="):
+ 			var out:=FileAccess.open(arg.trim_prefix("--report="),FileAccess.WRITE);out.store_string(JSON.stringify(result,"\t")+"\n")
++	# Release the streamed music decoder on its audio thread before freeing the game.
++	game.audio.music.stop();OS.delay_msec(120);await process_frame
+ 	game.queue_free();await process_frame;await process_frame;quit(0 if failures.is_empty() else 1)
+--- review_ui_collection.gd.before
++++ review_ui_collection.gd.after
+@@ -115,7 +115,10 @@
+ 	cold=Game.new();cold.test_progress_path=save_path
+ 	check(cold.load_player_progress() and cold.stage==2 and cold.selected_skin_id=="music_stage" and cold.coins==wallet,"New stage, last-page equipment and wallet persist together")
+ 	check(cold.claim_shop_gift().ok and cold.gems==20,"New completed level enables one new store gift")
+-	cold.free();game.free();await frames()
++	cold.free()
++	# Release the streamed music decoder on its audio thread before freeing the game.
++	game.audio.music.stop();OS.delay_msec(120);await process_frame
++	game.free();await frames()
+ 	for suffix in ["",".tmp"]:
+ 		if FileAccess.file_exists(save_path+suffix):DirAccess.remove_absolute(save_path+suffix)
+ 	var result:={"checks":checks,"failures":failures,"input":"InputEventScreenTouch and InputEventScreenDrag through actual viewport","scope":"Headless input/resource/save review; no screenshots or phone GPU evidence"}
+--- skin_library_capture.gd.before
++++ skin_library_capture.gd.after
+@@ -124,6 +124,8 @@
+ 		var report:=FileAccess.open(report_path,FileAccess.WRITE)
+ 		report.store_string(JSON.stringify(result,"\t")+"\n")
+ 	print("SKIN_INPUT_CAPTURE "+JSON.stringify(result))
++	# Release the streamed music decoder on its audio thread before freeing the game.
++	game.audio.music.stop();OS.delay_msec(120);await process_frame
+ 	game.queue_free()
+ 	layer.queue_free()
+ 	await process_frame
+--- skin_skill_acceptance.gd.before
++++ skin_skill_acceptance.gd.after
+@@ -141,6 +141,8 @@
+ 		if arg.begins_with("--report="):
+ 			var out:=FileAccess.open(arg.trim_prefix("--report="),FileAccess.WRITE)
+ 			out.store_string(JSON.stringify(result,"\t")+"\n")
++	# Release the streamed music decoder on its audio thread before freeing the game.
++	game.audio.music.stop();OS.delay_msec(120);await process_frame
+ 	game.queue_free()
+ 	await process_frame
+ 	quit(0 if failures.is_empty() else 1)
+--- ui_redesign_acceptance.gd.before
++++ ui_redesign_acceptance.gd.after
+@@ -134,9 +134,11 @@
+ 		game.ui.choose_holes_tab("special");await frames()
+ 		game.ui.close_menu();await frames()
+ 	check(game.ui.find_children("*","SubViewport",true,false).size()==2,"Repeated menu navigation retains only two reusable preview viewports")
+-	check(game.ui.find_children("*","Button",true,false).size()==7,"Repeated menu navigation retains only seven home controls")
++	check(game.ui.find_children("*","Button",true,false).size()==9,"Repeated menu navigation retains exactly nine home controls, including two independent audio controls")
+ 	var result:={"checks":checks,"failures":failures,"input":"Actual viewport mouse down/up","minimum_test_width_points":375}
+ 	print("UI_REDESIGN_ACCEPTANCE "+JSON.stringify(result))
+ 	for arg in OS.get_cmdline_user_args():
+ 		if arg.begins_with("--report="):FileAccess.open(arg.trim_prefix("--report="),FileAccess.WRITE).store_string(JSON.stringify(result,"\t"))
++	# Release the streamed music decoder on its audio thread before freeing the game.
++	game.audio.music.stop();OS.delay_msec(120);await process_frame
+ 	game.free();await process_frame;quit(0 if failures.is_empty() else 1)

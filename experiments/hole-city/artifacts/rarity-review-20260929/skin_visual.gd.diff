@@ -1,0 +1,210 @@
+--- before/skin_visual.gd
++++ current/skin_visual.gd
+@@ -1,6 +1,7 @@
+ extends Node3D
+ ## Authored silhouettes shared by the collection and player. Effects never own physics.
+ const Motifs=preload("res://fidelity/skin_motifs.gd")
++const Rarity=preload("res://fidelity/skin_rarity.gd")
+ const Water=preload("res://fidelity/shaders/tide.gdshader")
+ const Accretion=preload("res://fidelity/shaders/accretion.gdshader")
+ const Solid=preload("res://fidelity/shaders/solid_skin.gdshader")
+@@ -20,6 +21,8 @@
+ var parts:Array[MeshInstance3D]=[]
+ var tint:=Color.WHITE
+ var fx_family:=""
++var rarity_id:=""
++var visual_profile:=""
+ 
+ func shader_material(shader:Shader) -> ShaderMaterial:
+ 	var result:=ShaderMaterial.new()
+@@ -42,10 +45,10 @@
+ 	parent.add_child(result)
+ 	return result
+ 
+-func band(parent:Node3D,inner:float,outer:float,mat:Material) -> MeshInstance3D:
++func band(parent:Node3D,inner:float,outer:float,mat:Material,segments:=64) -> MeshInstance3D:
+ 	var mesh:=TorusMesh.new()
+ 	mesh.inner_radius=inner;mesh.outer_radius=outer
+-	mesh.rings=64;mesh.ring_segments=6
++	mesh.rings=segments;mesh.ring_segments=6
+ 	var result:=mesh_part(parent,mesh,Vector3(0,.07,0),mat)
+ 	result.scale.y=.3
+ 	return result
+@@ -105,92 +108,103 @@
+ 	for child in get_children():child.free()
+ 	materials.clear();motes.clear();parts.clear()
+ 	skin_id=definition.id;tint=Color(definition.tint);accent=Color(definition.accent)
++	rarity_id=Rarity.for_skin(skin_id)
++	visual_profile=str(Rarity.data(rarity_id).get("profile","unknown"))
+ 	clock_time=0.0;effect_time=0.0;mouth=null
+ 	ornaments=Node3D.new();add_child(ornaments)
+ 	var solid:=shader_material(Solid)
+-	var style:int={"copper_ring":1,"moss_bloom":2,"gravitas":3,"lantern":4,"shard":5,"cinder":6,"prism_vale":7}.get(skin_id,0)
++	var style:int={"copper_ring":1,"moss_bloom":2,"gravitas":3,"lantern":4,"shard":5,"cinder":6,"prism_vale":7,"rainbow_bridge":7}.get(skin_id,5 if rarity_id=="epic" else 1 if rarity_id=="uncommon" else 0)
+ 	solid.set_shader_parameter("base_color",tint);solid.set_shader_parameter("accent_color",accent);solid.set_shader_parameter("style",style)
+-	main_ring=band(self,.96,1.09,solid)
++	main_ring=band(self,.96,1.09,solid,32 if rarity_id in ["common","uncommon"] else 64)
+ 	if with_mouth:
+ 		var disk:=CylinderMesh.new();disk.top_radius=.98;disk.bottom_radius=.98;disk.height=.02;disk.radial_segments=64
+ 		mouth=mesh_part(self,disk,Vector3(0,.025,0),flat_material(tint.darkened(.97)))
+-	match skin_id:
+-		"core_shell","orbit":
+-			fx_family="accretion" if skin_id=="core_shell" else "lensed_vortex"
+-			var disk_mat:=shader_material(Accretion)
+-			disk_mat.set_shader_parameter("spectral",0.0 if skin_id=="core_shell" else 1.0)
+-			disk_mat.set_shader_parameter("core_blue",1.0 if skin_id=="core_shell" else 0.0)
+-			main_ring.free()
+-			main_ring=ribbon(1.0,1.62,.085,disk_mat)
+-			var lens_mat:=shader_material(Accretion)
+-			lens_mat.set_shader_parameter("spectral",0.0 if skin_id=="core_shell" else 1.0)
+-			lens_mat.set_shader_parameter("core_blue",1.0 if skin_id=="core_shell" else 0.0)
+-			lens_mat.set_shader_parameter("lensed",1.0)
+-			ribbon(1.015,1.22,.11,lens_mat,false,0.0,TAU,.20 if skin_id=="core_shell" else .75)
+-			band(self,.99,1.015,flat_material(Color("bfeaff") if skin_id=="core_shell" else Color("9aedff")))
+-		"tide":
+-			fx_family="water"
+-			var water_mat:=shader_material(Water)
+-			main_ring.free();main_ring=ribbon(.99,1.50,.10,water_mat)
+-			var splash_mat:=shader_material(Water);splash_mat.set_shader_parameter("splash",1.0)
+-			for i in 3:ribbon(1.10,1.22,.28,splash_mat,true,float(i)*TAU/3.0,.62)
+-		"cinder":
+-			fx_family="flame"
+-			for i in 2:
+-				var flame:=shader_material(CinderFlame);flame.set_shader_parameter("phase_shift",float(i)*2.1);flame.set_shader_parameter("warmth",float(i))
+-				ribbon(1.03+i*.10,1.10+i*.10,.88-i*.22,flame,true)
+-			add_sparks(10,Color("ffd35a"))
+-		"moss_bloom":
+-			fx_family="leaves"
+-			var leaf:=leaf_mesh()
+-			for i in 8:
+-				var a:=float(i)*TAU/8.0
+-				var part:=mesh_part(ornaments,leaf,Vector3(sin(a)*1.17,.12,cos(a)*1.17),solid)
+-				part.rotation.y=a;parts.append(part)
+-			for i in 4:
+-				var a:=float(i)*TAU/4.0+.3
+-				jewel(Vector3(sin(a)*1.10,.20,cos(a)*1.10),Vector3(.17,.20,.17),flat_material(Color("ff79be")),a)
+-		"copper_ring":
+-			fx_family="mechanical"
+-			band(self,1.20,1.24,solid)
+-			for i in 6:
+-				var a:=float(i)*TAU/6.0
+-				block(Vector3(sin(a)*1.12,.12,cos(a)*1.12),Vector3(.36,.16,.18),solid,a)
+-		"gravitas":
+-			fx_family="stone"
+-			for i in 6:
+-				var a:=float(i)*TAU/6.0
+-				var part:=block(Vector3(sin(a)*1.16,.19,cos(a)*1.16),Vector3(.39,.32,.28),solid,a)
+-				part.rotation.z=.12 if i%2==0 else -.12
+-		"lantern":
+-			fx_family="lanterns"
+-			for i in 4:
+-				var a:=float(i)*TAU/4.0
+-				var at:=Vector3(sin(a)*1.15,.3,cos(a)*1.15)
+-				block(at,Vector3(.20,.38,.20),solid,a)
+-				jewel(at+Vector3.UP*.24,Vector3(.28,.14,.28),flat_material(Color("ff742c")),a)
+-			add_sparks(5,Color("ffe891"))
+-		"shard":
+-			fx_family="crystals"
+-			for i in 9:
+-				var a:=float(i)*TAU/9.0
+-				var part:=jewel(Vector3(sin(a)*1.15,.19,cos(a)*1.15),Vector3(.24,.40+float(i%3)*.13,.22),solid,a)
+-				part.rotation.z=.25 if i%2==0 else -.25
+-		"prism_vale":
+-			fx_family="aurora"
+-			var aurora:=shader_material(Aurora)
+-			for i in 2:ribbon(1.07+i*.14,1.09+i*.14,.55-i*.16,aurora,true)
+-			for i in 6:
+-				var a:=float(i)*TAU/6.0
+-				jewel(Vector3(sin(a)*1.10,.14,cos(a)*1.10),Vector3(.2,.26,.18),flat_material(Color.from_hsv(float(i)/6.0,.8,1.0)),a)
+-		_:
+-			fx_family=skin_id
+-			Motifs.build(self)
++	if rarity_id=="common":
++		# Deliberate recolors share one quiet surface; rarity is cosmetic only.
++		fx_family="solid_recolor"
++	elif rarity_id=="uncommon":
++		fx_family="simple_trim"
++		band(self,1.11,1.15,flat_material(accent),32)
++	else:
++		match skin_id:
++			"core_shell","orbit":
++				fx_family="accretion" if skin_id=="core_shell" else "lensed_vortex"
++				var disk_mat:=shader_material(Accretion)
++				disk_mat.set_shader_parameter("spectral",0.0 if skin_id=="core_shell" else 1.0)
++				disk_mat.set_shader_parameter("core_blue",1.0 if skin_id=="core_shell" else 0.0)
++				main_ring.free()
++				main_ring=ribbon(1.0,1.62,.085,disk_mat)
++				var lens_mat:=shader_material(Accretion)
++				lens_mat.set_shader_parameter("spectral",0.0 if skin_id=="core_shell" else 1.0)
++				lens_mat.set_shader_parameter("core_blue",1.0 if skin_id=="core_shell" else 0.0)
++				lens_mat.set_shader_parameter("lensed",1.0)
++				ribbon(1.015,1.22,.11,lens_mat,false,0.0,TAU,.20 if skin_id=="core_shell" else .75)
++				band(self,.99,1.015,flat_material(Color("bfeaff") if skin_id=="core_shell" else Color("9aedff")))
++			"tide":
++				fx_family="water"
++				var water_mat:=shader_material(Water)
++				main_ring.free();main_ring=ribbon(.99,1.50,.10,water_mat)
++				var splash_mat:=shader_material(Water);splash_mat.set_shader_parameter("splash",1.0)
++				for i in 3:ribbon(1.10,1.22,.28,splash_mat,true,float(i)*TAU/3.0,.62)
++			"cinder":
++				fx_family="flame"
++				for i in 2:
++					var flame:=shader_material(CinderFlame);flame.set_shader_parameter("phase_shift",float(i)*2.1);flame.set_shader_parameter("warmth",float(i))
++					ribbon(1.03+i*.10,1.10+i*.10,.88-i*.22,flame,true)
++				add_sparks(10,Color("ffd35a"))
++			"moss_bloom":
++				fx_family="leaves"
++				var leaf:=leaf_mesh()
++				for i in 8:
++					var a:=float(i)*TAU/8.0
++					var part:=mesh_part(ornaments,leaf,Vector3(sin(a)*1.17,.12,cos(a)*1.17),solid)
++					part.rotation.y=a;parts.append(part)
++				for i in 4:
++					var a:=float(i)*TAU/4.0+.3
++					jewel(Vector3(sin(a)*1.10,.20,cos(a)*1.10),Vector3(.17,.20,.17),flat_material(Color("ff79be")),a)
++			"copper_ring":
++				fx_family="mechanical"
++				band(self,1.20,1.24,solid)
++				for i in 6:
++					var a:=float(i)*TAU/6.0
++					block(Vector3(sin(a)*1.12,.12,cos(a)*1.12),Vector3(.36,.16,.18),solid,a)
++			"gravitas":
++				fx_family="stone"
++				for i in 6:
++					var a:=float(i)*TAU/6.0
++					var part:=block(Vector3(sin(a)*1.16,.19,cos(a)*1.16),Vector3(.39,.32,.28),solid,a)
++					part.rotation.z=.12 if i%2==0 else -.12
++			"lantern":
++				fx_family="lanterns"
++				for i in 4:
++					var a:=float(i)*TAU/4.0
++					var at:=Vector3(sin(a)*1.15,.3,cos(a)*1.15)
++					block(at,Vector3(.20,.38,.20),solid,a)
++					jewel(at+Vector3.UP*.24,Vector3(.28,.14,.28),flat_material(Color("ff742c")),a)
++				add_sparks(5,Color("ffe891"))
++			"shard":
++				fx_family="crystals"
++				for i in 9:
++					var a:=float(i)*TAU/9.0
++					var part:=jewel(Vector3(sin(a)*1.15,.19,cos(a)*1.15),Vector3(.24,.40+float(i%3)*.13,.22),solid,a)
++					part.rotation.z=.25 if i%2==0 else -.25
++			"prism_vale":
++				fx_family="aurora"
++				var aurora:=shader_material(Aurora)
++				for i in 2:ribbon(1.07+i*.14,1.09+i*.14,.55-i*.16,aurora,true)
++				for i in 6:
++					var a:=float(i)*TAU/6.0
++					jewel(Vector3(sin(a)*1.10,.14,cos(a)*1.10),Vector3(.2,.26,.18),flat_material(Color.from_hsv(float(i)/6.0,.8,1.0)),a)
++			_:
++				fx_family=skin_id
++				Motifs.build(self)
+ 	skin_shader=(main_ring.material_override as ShaderMaterial).shader
+ 	wave=band(self,1.05,1.11,flat_material(accent))
+ 	wave.material_override.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA
+ 	wave.visible=false
+ 	set_meta("visual_id",skin_id)
++	set_meta("rarity",rarity_id)
++	set_meta("visual_profile",visual_profile)
+ 	_process(0.0)
+ 
+ func flash() -> void:effect_time=.70

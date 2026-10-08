@@ -1,0 +1,121 @@
+{
+  "checks": 75,
+  "failures": [],
+  "metrics": {
+    "geometry": [
+      {
+        "expected": true,
+        "mouth_ray_hits": 769,
+        "name": "Centered large building",
+        "rays": 769,
+        "selected": true
+      },
+      {
+        "expected": true,
+        "mouth_ray_hits": 13,
+        "name": "Wide edge without center-ray hit",
+        "rays": 769,
+        "selected": true
+      },
+      {
+        "expected": true,
+        "mouth_ray_hits": 769,
+        "name": "Raised roof across camera-to-hole path",
+        "rays": 769,
+        "selected": true
+      },
+      {
+        "expected": true,
+        "mouth_ray_hits": 769,
+        "name": "Tall facade crossing camera-height plane",
+        "rays": 769,
+        "selected": true
+      },
+      {
+        "expected": false,
+        "mouth_ray_hits": 0,
+        "name": "Complete structure behind ground target",
+        "rays": 769,
+        "selected": false
+      },
+      {
+        "expected": false,
+        "mouth_ray_hits": 0,
+        "name": "Complete structure above camera plane",
+        "rays": 769,
+        "selected": false
+      },
+      {
+        "expected": false,
+        "mouth_ray_hits": 0,
+        "name": "Complete structure below ground plane",
+        "rays": 769,
+        "selected": false
+      },
+      {
+        "expected": false,
+        "mouth_ray_hits": 0,
+        "name": "Rotated empty corner of world AABB",
+        "rays": 769,
+        "selected": false
+      },
+      {
+        "expected": true,
+        "mouth_ray_hits": 769,
+        "name": "Oriented wall 0",
+        "rays": 769,
+        "selected": true
+      },
+      {
+        "expected": true,
+        "mouth_ray_hits": 769,
+        "name": "Oriented wall 1",
+        "rays": 769,
+        "selected": true
+      },
+      {
+        "expected": true,
+        "mouth_ray_hits": 769,
+        "name": "Oriented wall 2",
+        "rays": 769,
+        "selected": true
+      },
+      {
+        "expected": true,
+        "mouth_ray_hits": 519,
+        "name": "Oriented wall 3",
+        "rays": 769,
+        "selected": true
+      },
+      {
+        "expected": true,
+        "mouth_ray_hits": 769,
+        "name": "Oriented wall 4",
+        "rays": 769,
+        "selected": true
+      },
+      {
+        "expected": false,
+        "mouth_ray_hits": 0,
+        "name": "Nearby building outside actual mouth",
+        "rays": 769,
+        "selected": false
+      },
+      {
+        "expected": true,
+        "mouth_ray_hits": 769,
+        "name": "Directly overhead camera sees covered mouth",
+        "rays": 769,
+        "selected": true
+      },
+      {
+        "expected": false,
+        "mouth_ray_hits": 0,
+        "name": "Overhead camera preserves lateral structure",
+        "rays": 769,
+        "selected": false
+      }
+    ]
+  },
+  "scope": "Actual gameplay controller plus controlled RigidBody3D geometry; independent 769-ray slab oracle. No rendered image or device performance claim."
+}

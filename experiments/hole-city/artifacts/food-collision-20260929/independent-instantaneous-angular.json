@@ -1,0 +1,143 @@
+{
+  "checks": 16168,
+  "failures": [
+    "Tilted round-food pile settles without persistent rocking",
+    "Tilted round-food pile settles without persistent rocking",
+    "Tilted round-food pile settles without persistent rocking",
+    "Engine process failed; inspect the engine log"
+  ],
+  "metrics": {
+    "box_bodies": 616,
+    "collection_receipts": 39,
+    "landed_rain": 10,
+    "max_radial_inset_fraction": 0.0192148113360766,
+    "pile_receipts": 6,
+    "pile_rest": [
+      {
+        "angular_speed": 0.527672469615936,
+        "kind": "cookie",
+        "position": "(69.3203, 0.111145, 23.55373)",
+        "speed": 0.290317803621292
+      },
+      {
+        "angular_speed": 0.211802825331688,
+        "kind": "burger",
+        "position": "(71.22365, 0.471646, 23.72409)",
+        "speed": 0.14397856593132
+      },
+      {
+        "angular_speed": 0.506482779979706,
+        "kind": "cookie",
+        "position": "(70.09666, 0.114916, 24.54017)",
+        "speed": 0.267131954431534
+      },
+      {
+        "angular_speed": 0.000193790925550275,
+        "kind": "burger",
+        "position": "(70.87722, 0.676825, 21.97453)",
+        "speed": 0.000156521040480584
+      },
+      {
+        "angular_speed": 0.544169902801514,
+        "kind": "cookie",
+        "position": "(69.37882, 0.368048, 23.87969)",
+        "speed": 0.233958140015602
+      },
+      {
+        "angular_speed": 8.78085629665293e-05,
+        "kind": "burger",
+        "position": "(68.92232, 0.67647, 22.45937)",
+        "speed": 8.55453399708495e-05
+      }
+    ],
+    "rain_rest": [
+      {
+        "angular_speed": 0.0283799059689045,
+        "kind": "bacon",
+        "landed": true,
+        "position": "(62.0, 0.227743, 40.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0307769868522882,
+        "kind": "egg",
+        "landed": true,
+        "position": "(69.0, 0.481608, 40.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0371873155236244,
+        "kind": "cake",
+        "landed": true,
+        "position": "(76.0, 1.131976, 40.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0299562681466341,
+        "kind": "donut",
+        "landed": true,
+        "position": "(62.0, 0.35789, 48.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0333765372633934,
+        "kind": "burger",
+        "landed": true,
+        "position": "(69.0, 0.741022, 48.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0316201932728291,
+        "kind": "cookie",
+        "landed": true,
+        "position": "(76.0, 0.586654, 48.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0307769868522882,
+        "kind": "berry",
+        "landed": true,
+        "position": "(62.0, 0.4585, 56.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0307769868522882,
+        "kind": "sushi",
+        "landed": true,
+        "position": "(69.0, 0.496332, 56.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0333765372633934,
+        "kind": "pancake",
+        "landed": true,
+        "position": "(76.0, 0.73218, 56.0)",
+        "sleeping": true,
+        "speed": 0.0
+      },
+      {
+        "angular_speed": 0.0291574355214834,
+        "kind": "pizza",
+        "landed": true,
+        "position": "(62.0, 0.242089, 64.0)",
+        "sleeping": true,
+        "speed": 0.0
+      }
+    ],
+    "round_bodies": 1984,
+    "settled_batch_count": 10,
+    "structural_box_bodies": 401,
+    "structural_round_bodies": 287,
+    "target_rain_receipts": 10,
+    "unique_dimensions": 467
+  },
+  "scope": "Non-author real food creation, resource identity, prism support, contact/drop and collection evidence; no renderer or CPU timing claim."
+}

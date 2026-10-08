@@ -1,0 +1,85 @@
+{
+  "source_hashes": {
+    "fidelity/skin_visual.gd": "f40045b57c687059fee80170ead7eb58a14122c4a6a67fd6780168b520f73f55",
+    "fidelity/skin_sculpt.gd": "1450155da9582b85135d56b39415e0e0bac5a7ec131977d442abd44a10477f37",
+    "fidelity/skin_catalog.gd": "6b1d4434047703cb2a8ca1dcd5d781f6f2adf7d2568a81a08fe7f4b086d8dd33",
+    "fidelity/skin_motifs.gd": "0db569773783e174b088ecf716bf10592b448c432b7508a173af58665f7a637e",
+    "fidelity/skin_rarity.gd": "dc532376060506100c2eb9fa22da7addb43cf696826c271cc54ec8a34a7fc3a7",
+    "tests/skin_polish_acceptance.gd": "33e8e373417959391df5a1987cbd13378363ff0879ba511560552c90bbce55f0"
+  },
+  "changed_ids": [
+    "pizza_party",
+    "frosted_cake",
+    "fox_den",
+    "bunny_burrow",
+    "rocket_port",
+    "dragon_roost"
+  ],
+  "before_hashes": {
+    "before/skin_visual.gd": "32e0ca8f804402ea0e29bba61357f429156869b63af827b6e1743e2502b8b3ef",
+    "before/skin_catalog.gd": "b32ac45522b7924eb2173a75d5f055a5f5c297cf6bfa99f933fd2b5fd63d8b8b",
+    "before/skin_motifs.gd": "0db569773783e174b088ecf716bf10592b448c432b7508a173af58665f7a637e",
+    "before/skin_rarity_review.gd": "e98bcfc57160f41f694c3cb3607a83e0ab068de9de207b4d34f40af7bcacce7e"
+  },
+  "scope": "Six original existing Rare/Epic cosmetics. Blender CPU actual mesh previews, approximate Godot materials; no game/browser screenshot or phone-FPS claim. Thin original ring shader shown by base color.",
+  "reference_scope": "Official store URLs resolved but tool did not expose inspectable image pixels. No current direct visual parity claim.",
+  "receipts": {
+    "final-skin_fx_acceptance": 414,
+    "final-skin_polish_acceptance": 486,
+    "final-skin_rarity_acceptance": 556,
+    "final-skin_catalog_acceptance": 897,
+    "final-city_review_skin_catalog": 206
+  },
+  "catalog_changes": {
+    "pizza_party": {
+      "skill_desc": {
+        "before": "Cheesy slices and pepperoni around a toasted crust.",
+        "after": "A rounded toasted crust, melted cheese, pepperoni and fresh basil."
+      }
+    },
+    "frosted_cake": {
+      "skill_desc": {
+        "before": "A layered frosted cake with three little candles.",
+        "after": "A berry-filled sponge ring with scalloped icing and three strawberries."
+      }
+    },
+    "fox_den": {
+      "skill_desc": {
+        "before": "Pointed fox ears and cream cheeks frame the dark opening.",
+        "after": "A glazed fox mask with sculpted ears, cream cheeks and a tiny dark nose."
+      }
+    },
+    "bunny_burrow": {
+      "skill_desc": {
+        "before": "Two long rabbit ears with pink inner patches.",
+        "after": "A porcelain bunny with uneven rounded ears and soft pink cheek patches."
+      }
+    },
+    "rocket_port": {
+      "skill_desc": {
+        "before": "A silver rocket with swept fins and a warm exhaust.",
+        "after": "A rounded enamel rocket with swept fins and a turquoise glass porthole."
+      }
+    },
+    "dragon_roost": {
+      "skill_desc": {
+        "before": "Two angular wings, twin horns and little ivory fangs.",
+        "after": "A curled purple dragon with sculpted wings, ivory horns and slit eyes."
+      }
+    }
+  },
+  "render_hashes": {
+    "author/renders/bunny_burrow.png": "23664c8e73f51ccea2efabad9f34a42d94a6a223ee488fa0214aa0d6a63aaa83",
+    "author/renders/frosted_cake.png": "68f5b2fe71ceee92b2caeb0e8ac8eabb9a898b3fad584daa83c0b2263f7340ba",
+    "author/renders/fox_den.png": "0329bb60d89d0e95438d5674c0a4f8fca83563191a8a0be76cd7b4f2aa2bcd32",
+    "author/renders/pizza_party.png": "0e6a596ca71cfd35b143ab5ebdf9bf1eae8c8cb7f28aa95bee6b2a04bc477cfa",
+    "author/renders/dragon_roost.png": "00780c42285207728099cc88223d442e2f9a75678813851b81d6556680576a7f",
+    "author/renders/rocket_port.png": "cd40e2fe60eced0353bf9b6d7933a9069bb465d1ed1eb08d791b55c66ee7e8e3",
+    "before/renders/bunny_burrow.png": "fb753a1e306b53ecdc94bcf0b026d2d9270113fa5e31ade601c1fb8e794fecf1",
+    "before/renders/frosted_cake.png": "d4a5169807cc2c36600fc75f580a77782ab2b68e044b8a1cd7d0ec1a72d441fa",
+    "before/renders/fox_den.png": "3753374c264d4d2de8c3c213a669526d7d9fee49c017e6d4aba292564f054812",
+    "before/renders/pizza_party.png": "d4906acbc0f1d6fa1b2dfdc482b1964cf2588030155fd2076cf87d2f7cf12b1f",
+    "before/renders/dragon_roost.png": "b73c8efa460149ea37f55e15da82a86f4f9547fe807243c158260e9a94bb4c87",
+    "before/renders/rocket_port.png": "42131042de040e68e0567ca5c1e1744fc530cf303caf5c94a72afc27e09992c3"
+  }
+}

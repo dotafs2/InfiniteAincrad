@@ -1,0 +1,1816 @@
+{
+  "checks": 2399,
+  "failures": [],
+  "forms": [
+    {
+      "all_meshes": 4,
+      "family": "accretion",
+      "id": "core_shell",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 2976,
+      "visible_meshes": 3
+    },
+    {
+      "all_meshes": 9,
+      "family": "mechanical",
+      "id": "copper_ring",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 2376,
+      "visible_meshes": 8
+    },
+    {
+      "all_meshes": 14,
+      "family": "leaves",
+      "id": "moss_bloom",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 1600,
+      "visible_meshes": 13
+    },
+    {
+      "all_meshes": 8,
+      "family": "stone",
+      "id": "gravitas",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 1608,
+      "visible_meshes": 7
+    },
+    {
+      "all_meshes": 15,
+      "family": "lanterns",
+      "id": "lantern",
+      "rarity": "epic",
+      "sparks": 5,
+      "triangles": 1626,
+      "visible_meshes": 14
+    },
+    {
+      "all_meshes": 11,
+      "family": "crystals",
+      "id": "shard",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 1608,
+      "visible_meshes": 10
+    },
+    {
+      "all_meshes": 14,
+      "family": "flame",
+      "id": "cinder",
+      "rarity": "legendary",
+      "sparks": 10,
+      "triangles": 1844,
+      "visible_meshes": 13
+    },
+    {
+      "all_meshes": 5,
+      "family": "water",
+      "id": "tide",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 1632,
+      "visible_meshes": 4
+    },
+    {
+      "all_meshes": 4,
+      "family": "lensed_vortex",
+      "id": "orbit",
+      "rarity": "prismatic",
+      "sparks": 0,
+      "triangles": 2976,
+      "visible_meshes": 3
+    },
+    {
+      "all_meshes": 10,
+      "family": "aurora",
+      "id": "prism_vale",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 1872,
+      "visible_meshes": 9
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "sunny_side",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "sugar_glaze",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "berry_crown",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 2,
+      "family": "citrus_slice",
+      "id": "citrus_slice",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3388,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "melon_munch",
+      "id": "melon_munch",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3244,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "pretzel_twist",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 13,
+      "family": "popcorn_pot",
+      "id": "popcorn_pot",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 3048,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 12,
+      "family": "pizza_party",
+      "id": "pizza_party",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 3044,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 2,
+      "family": "cookie_bite",
+      "id": "cookie_bite",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3432,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "waffle_stack",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 2,
+      "family": "pancake_stack",
+      "id": "pancake_stack",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3220,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "bacon_curl",
+      "id": "bacon_curl",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3264,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "cocoa_square",
+      "id": "cocoa_square",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1660,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 11,
+      "family": "frosted_cake",
+      "id": "frosted_cake",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 3132,
+      "visible_meshes": 10
+    },
+    {
+      "all_meshes": 13,
+      "family": "pineapple_top",
+      "id": "pineapple_top",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 1648,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 14,
+      "family": "crab_cove",
+      "id": "crab_cove",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2232,
+      "visible_meshes": 13
+    },
+    {
+      "all_meshes": 12,
+      "family": "fox_den",
+      "id": "fox_den",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2668,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 12,
+      "family": "bunny_burrow",
+      "id": "bunny_burrow",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2768,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "frog_pond",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 9,
+      "family": "owl_hollow",
+      "id": "owl_hollow",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2136,
+      "visible_meshes": 8
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "turtle_shell",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 10,
+      "family": "snail_trail",
+      "id": "snail_trail",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2904,
+      "visible_meshes": 9
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "clockwork_key",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 13,
+      "family": "royal_gate",
+      "id": "royal_gate",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 3300,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 11,
+      "family": "satellite_dish",
+      "id": "satellite_dish",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 1776,
+      "visible_meshes": 10
+    },
+    {
+      "all_meshes": 12,
+      "family": "carnival_tent",
+      "id": "carnival_tent",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 1620,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 12,
+      "family": "rocket_port",
+      "id": "rocket_port",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 2928,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 7,
+      "family": "rainbow_bridge",
+      "id": "rainbow_bridge",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 2508,
+      "visible_meshes": 6
+    },
+    {
+      "all_meshes": 8,
+      "family": "storm_cloud",
+      "id": "storm_cloud",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 3000,
+      "visible_meshes": 7
+    },
+    {
+      "all_meshes": 13,
+      "family": "dragon_roost",
+      "id": "dragon_roost",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 2880,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 9,
+      "family": "jelly_veil",
+      "id": "jelly_veil",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 2088,
+      "visible_meshes": 8
+    },
+    {
+      "all_meshes": 6,
+      "family": "moon_dream",
+      "id": "moon_dream",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 1684,
+      "visible_meshes": 5
+    },
+    {
+      "all_meshes": 6,
+      "family": "coral_reef",
+      "id": "coral_reef",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 1776,
+      "visible_meshes": 5
+    },
+    {
+      "all_meshes": 13,
+      "family": "music_stage",
+      "id": "music_stage",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2460,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 5,
+      "family": "tornado",
+      "id": "tempest",
+      "rarity": "prismatic",
+      "sparks": 0,
+      "triangles": 1968,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 9,
+      "family": "rainfall",
+      "id": "rainfall",
+      "rarity": "prismatic",
+      "sparks": 0,
+      "triangles": 2112,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "paper_boat",
+      "id": "paper_boat",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 1316,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "toy_tire",
+      "id": "toy_tire",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3328,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "leaf_cup",
+      "id": "leaf_cup",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3192,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "wooden_tub",
+      "id": "wooden_tub",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3456,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "rope_coil",
+      "id": "rope_coil",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3210,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "clay_pot",
+      "id": "clay_pot",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3424,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "shell_cup",
+      "id": "shell_cup",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3374,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "woven_nest",
+      "id": "woven_nest",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2420,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "paint_tin",
+      "id": "paint_tin",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3304,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "denim_pocket",
+      "id": "denim_pocket",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2366,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "catchers_mitt",
+      "id": "catchers_mitt",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2116,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "enamel_basin",
+      "id": "enamel_basin",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2752,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "acorn_cup",
+      "id": "acorn_cup",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2720,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "knit_cap",
+      "id": "knit_cap",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3472,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "plain_loop",
+      "id": "plain_loop",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1476,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "button_wheel",
+      "id": "button_wheel",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2080,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "pocket_arcade",
+      "id": "pocket_arcade",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 2568,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "sakura_pavilion",
+      "id": "sakura_pavilion",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 4412,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 3,
+      "family": "clockwork_orbit",
+      "id": "clockwork_orbit",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 3920,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 4,
+      "family": "phoenix_nest",
+      "id": "phoenix_nest",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 1876,
+      "visible_meshes": 3
+    },
+    {
+      "all_meshes": 2,
+      "family": "crystal_crown",
+      "id": "crystal_crown",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 2484,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 4,
+      "family": "aurora_rift",
+      "id": "aurora_rift",
+      "rarity": "prismatic",
+      "sparks": 0,
+      "triangles": 3480,
+      "visible_meshes": 3
+    },
+    {
+      "all_meshes": 4,
+      "family": "accretion",
+      "id": "core_shell__solar_core",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 2976,
+      "visible_meshes": 3
+    },
+    {
+      "all_meshes": 9,
+      "family": "mechanical",
+      "id": "copper_ring__verdigris",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 2376,
+      "visible_meshes": 8
+    },
+    {
+      "all_meshes": 14,
+      "family": "leaves",
+      "id": "moss_bloom__autumn_bloom",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 1600,
+      "visible_meshes": 13
+    },
+    {
+      "all_meshes": 8,
+      "family": "stone",
+      "id": "gravitas__marble_gold",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 1608,
+      "visible_meshes": 7
+    },
+    {
+      "all_meshes": 15,
+      "family": "lanterns",
+      "id": "lantern__festival_rose",
+      "rarity": "epic",
+      "sparks": 5,
+      "triangles": 1626,
+      "visible_meshes": 14
+    },
+    {
+      "all_meshes": 11,
+      "family": "crystals",
+      "id": "shard__amethyst_shards",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 1608,
+      "visible_meshes": 10
+    },
+    {
+      "all_meshes": 14,
+      "family": "flame",
+      "id": "cinder__azure_flame",
+      "rarity": "legendary",
+      "sparks": 10,
+      "triangles": 1844,
+      "visible_meshes": 13
+    },
+    {
+      "all_meshes": 5,
+      "family": "water",
+      "id": "tide__rosewater",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 1632,
+      "visible_meshes": 4
+    },
+    {
+      "all_meshes": 4,
+      "family": "lensed_vortex",
+      "id": "orbit__golden_nebula",
+      "rarity": "prismatic",
+      "sparks": 0,
+      "triangles": 2976,
+      "visible_meshes": 3
+    },
+    {
+      "all_meshes": 10,
+      "family": "aurora",
+      "id": "prism_vale__dawn_veil",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 1872,
+      "visible_meshes": 9
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "sunny_side__moonlight",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "sunny_side__mint_cream",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "sunny_side__peach_glow",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "sugar_glaze__blueberry",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "sugar_glaze__pistachio",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "sugar_glaze__cocoa_icing",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "berry_crown__blackcurrant",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "berry_crown__strawberry_cream",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "berry_crown__golden_berry",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 2,
+      "family": "citrus_slice",
+      "id": "citrus_slice__ruby_orange",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3388,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "citrus_slice",
+      "id": "citrus_slice__lime_slice",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3388,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "melon_munch",
+      "id": "melon_munch__golden_melon",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3244,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "melon_munch",
+      "id": "melon_munch__honeydew",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3244,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "pretzel_twist__dark_rye",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "pretzel_twist__sea_salt",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "pretzel_twist__cinnamon",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 13,
+      "family": "popcorn_pot",
+      "id": "popcorn_pot__caramel_cinema",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 3048,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 13,
+      "family": "popcorn_pot",
+      "id": "popcorn_pot__blue_matinee",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 3048,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 13,
+      "family": "popcorn_pot",
+      "id": "popcorn_pot__plum_premiere",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 3048,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 12,
+      "family": "pizza_party",
+      "id": "pizza_party__pesto_party",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 3044,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 12,
+      "family": "pizza_party",
+      "id": "pizza_party__spicy_fiesta",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 3044,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 12,
+      "family": "pizza_party",
+      "id": "pizza_party__truffle_night",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 3044,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 2,
+      "family": "cookie_bite",
+      "id": "cookie_bite__double_cocoa",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3432,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "cookie_bite",
+      "id": "cookie_bite__red_velvet",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3432,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "waffle_stack__cocoa_waffle",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "waffle_stack__berry_syrup",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "waffle_stack__matcha_waffle",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 2,
+      "family": "pancake_stack",
+      "id": "pancake_stack__blueberry_stack",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3220,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "pancake_stack",
+      "id": "pancake_stack__cocoa_stack",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3220,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "bacon_curl",
+      "id": "bacon_curl__maple_crisp",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3264,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "bacon_curl",
+      "id": "bacon_curl__pepper_crisp",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3264,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "cocoa_square",
+      "id": "cocoa_square__basalt",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1660,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "cocoa_square",
+      "id": "cocoa_square__sandstone",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1660,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "cocoa_square",
+      "id": "cocoa_square__rose_quartz",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1660,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 11,
+      "family": "frosted_cake",
+      "id": "frosted_cake__blueberry_cake",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 3132,
+      "visible_meshes": 10
+    },
+    {
+      "all_meshes": 11,
+      "family": "frosted_cake",
+      "id": "frosted_cake__lemon_cake",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 3132,
+      "visible_meshes": 10
+    },
+    {
+      "all_meshes": 11,
+      "family": "frosted_cake",
+      "id": "frosted_cake__matcha_cake",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 3132,
+      "visible_meshes": 10
+    },
+    {
+      "all_meshes": 13,
+      "family": "pineapple_top",
+      "id": "pineapple_top__sunset_pineapple",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 1648,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 13,
+      "family": "pineapple_top",
+      "id": "pineapple_top__silver_pineapple",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 1648,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 13,
+      "family": "pineapple_top",
+      "id": "pineapple_top__ruby_pineapple",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 1648,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 14,
+      "family": "crab_cove",
+      "id": "crab_cove__blue_crab",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2232,
+      "visible_meshes": 13
+    },
+    {
+      "all_meshes": 14,
+      "family": "crab_cove",
+      "id": "crab_cove__golden_crab",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2232,
+      "visible_meshes": 13
+    },
+    {
+      "all_meshes": 14,
+      "family": "crab_cove",
+      "id": "crab_cove__rose_crab",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2232,
+      "visible_meshes": 13
+    },
+    {
+      "all_meshes": 12,
+      "family": "fox_den",
+      "id": "fox_den__arctic_fox",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2668,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 12,
+      "family": "fox_den",
+      "id": "fox_den__dusky_fox",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2668,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 12,
+      "family": "fox_den",
+      "id": "fox_den__fennec_fox",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2668,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 12,
+      "family": "bunny_burrow",
+      "id": "bunny_burrow__honey_bunny",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2768,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 12,
+      "family": "bunny_burrow",
+      "id": "bunny_burrow__blue_bunny",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2768,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 12,
+      "family": "bunny_burrow",
+      "id": "bunny_burrow__cocoa_bunny",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2768,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "frog_pond__blue_pond",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "frog_pond__golden_reed",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "frog_pond__lilac_pond",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 9,
+      "family": "owl_hollow",
+      "id": "owl_hollow__snow_owl",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2136,
+      "visible_meshes": 8
+    },
+    {
+      "all_meshes": 9,
+      "family": "owl_hollow",
+      "id": "owl_hollow__copper_owl",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2136,
+      "visible_meshes": 8
+    },
+    {
+      "all_meshes": 9,
+      "family": "owl_hollow",
+      "id": "owl_hollow__moss_owl",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2136,
+      "visible_meshes": 8
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "turtle_shell__lagoon",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "turtle_shell__amber_shell",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "turtle_shell__midnight_shell",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 10,
+      "family": "snail_trail",
+      "id": "snail_trail__coral_snail",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2904,
+      "visible_meshes": 9
+    },
+    {
+      "all_meshes": 10,
+      "family": "snail_trail",
+      "id": "snail_trail__lavender_snail",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2904,
+      "visible_meshes": 9
+    },
+    {
+      "all_meshes": 10,
+      "family": "snail_trail",
+      "id": "snail_trail__lemon_snail",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2904,
+      "visible_meshes": 9
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "clockwork_key__rose_brass",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "clockwork_key__steel_blue",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 3,
+      "family": "simple_trim",
+      "id": "clockwork_key__black_nickel",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1536,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 13,
+      "family": "royal_gate",
+      "id": "royal_gate__rose_palace",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 3300,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 11,
+      "family": "satellite_dish",
+      "id": "satellite_dish__copper_signal",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 1776,
+      "visible_meshes": 10
+    },
+    {
+      "all_meshes": 12,
+      "family": "carnival_tent",
+      "id": "carnival_tent__midnight_circus",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 1620,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 12,
+      "family": "rocket_port",
+      "id": "rocket_port__solar_rocket",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 2928,
+      "visible_meshes": 11
+    },
+    {
+      "all_meshes": 7,
+      "family": "rainbow_bridge",
+      "id": "rainbow_bridge__opal_bridge",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 2508,
+      "visible_meshes": 6
+    },
+    {
+      "all_meshes": 8,
+      "family": "storm_cloud",
+      "id": "storm_cloud__sunset_storm",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 3000,
+      "visible_meshes": 7
+    },
+    {
+      "all_meshes": 13,
+      "family": "dragon_roost",
+      "id": "dragon_roost__jade_dragon",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 2880,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 9,
+      "family": "jelly_veil",
+      "id": "jelly_veil__golden_jelly",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 2088,
+      "visible_meshes": 8
+    },
+    {
+      "all_meshes": 6,
+      "family": "moon_dream",
+      "id": "moon_dream__rose_moon",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 1684,
+      "visible_meshes": 5
+    },
+    {
+      "all_meshes": 6,
+      "family": "moon_dream",
+      "id": "moon_dream__golden_moon",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 1684,
+      "visible_meshes": 5
+    },
+    {
+      "all_meshes": 6,
+      "family": "moon_dream",
+      "id": "moon_dream__ice_moon",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 1684,
+      "visible_meshes": 5
+    },
+    {
+      "all_meshes": 6,
+      "family": "coral_reef",
+      "id": "coral_reef__lavender_reef",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 1776,
+      "visible_meshes": 5
+    },
+    {
+      "all_meshes": 6,
+      "family": "coral_reef",
+      "id": "coral_reef__lagoon_reef",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 1776,
+      "visible_meshes": 5
+    },
+    {
+      "all_meshes": 6,
+      "family": "coral_reef",
+      "id": "coral_reef__sunrise_reef",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 1776,
+      "visible_meshes": 5
+    },
+    {
+      "all_meshes": 13,
+      "family": "music_stage",
+      "id": "music_stage__jazz_night",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2460,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 13,
+      "family": "music_stage",
+      "id": "music_stage__pop_neon",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2460,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 13,
+      "family": "music_stage",
+      "id": "music_stage__blue_session",
+      "rarity": "rare",
+      "sparks": 0,
+      "triangles": 2460,
+      "visible_meshes": 12
+    },
+    {
+      "all_meshes": 5,
+      "family": "tornado",
+      "id": "tempest__cobalt_storm",
+      "rarity": "prismatic",
+      "sparks": 0,
+      "triangles": 1968,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 9,
+      "family": "rainfall",
+      "id": "rainfall__rose_rain",
+      "rarity": "prismatic",
+      "sparks": 0,
+      "triangles": 2112,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "paper_boat",
+      "id": "paper_boat__blue_print",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 1316,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "paper_boat",
+      "id": "paper_boat__rose_letter",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 1316,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "toy_tire",
+      "id": "toy_tire__rally_red",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3328,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "toy_tire",
+      "id": "toy_tire__ice_track",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3328,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "leaf_cup",
+      "id": "leaf_cup__autumn_leaf",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3192,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "leaf_cup",
+      "id": "leaf_cup__frost_leaf",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3192,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "wooden_tub",
+      "id": "wooden_tub__cedar",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3456,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "wooden_tub",
+      "id": "wooden_tub__white_oak",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3456,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "rope_coil",
+      "id": "rope_coil__blue_mariner",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3210,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "rope_coil",
+      "id": "rope_coil__terracotta_cord",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3210,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "clay_pot",
+      "id": "clay_pot__olive_glaze",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3424,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "clay_pot",
+      "id": "clay_pot__azure_glaze",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3424,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "shell_cup",
+      "id": "shell_cup__rose_shell",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3374,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "shell_cup",
+      "id": "shell_cup__pearl_tide",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3374,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "woven_nest",
+      "id": "woven_nest__willow_nest",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2420,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "woven_nest",
+      "id": "woven_nest__rose_willow",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2420,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "paint_tin",
+      "id": "paint_tin__sunflower_paint",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3304,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "paint_tin",
+      "id": "paint_tin__berry_paint",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3304,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "denim_pocket",
+      "id": "denim_pocket__indigo_denim",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2366,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "denim_pocket",
+      "id": "denim_pocket__washed_rose",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2366,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "catchers_mitt",
+      "id": "catchers_mitt__chocolate_leather",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2116,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "catchers_mitt",
+      "id": "catchers_mitt__navy_leather",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2116,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "enamel_basin",
+      "id": "enamel_basin__mint_enamel",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2752,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "enamel_basin",
+      "id": "enamel_basin__apricot_enamel",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2752,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "acorn_cup",
+      "id": "acorn_cup__chestnut",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2720,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "acorn_cup",
+      "id": "acorn_cup__forest_acorn",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2720,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "knit_cap",
+      "id": "knit_cap__seaside_knit",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3472,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "knit_cap",
+      "id": "knit_cap__mustard_knit",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 3472,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "plain_loop",
+      "id": "plain_loop__coral",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1476,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "plain_loop",
+      "id": "plain_loop__sea_glass",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1476,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "plain_loop",
+      "id": "plain_loop__night_ink",
+      "rarity": "common",
+      "sparks": 0,
+      "triangles": 1476,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "button_wheel",
+      "id": "button_wheel__teal_button",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2080,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "button_wheel",
+      "id": "button_wheel__lilac_button",
+      "rarity": "uncommon",
+      "sparks": 0,
+      "triangles": 2080,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "pocket_arcade",
+      "id": "pocket_arcade__berry_arcade",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 2568,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 2,
+      "family": "sakura_pavilion",
+      "id": "sakura_pavilion__moon_pavilion",
+      "rarity": "epic",
+      "sparks": 0,
+      "triangles": 4412,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 3,
+      "family": "clockwork_orbit",
+      "id": "clockwork_orbit__silver_mechanism",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 3920,
+      "visible_meshes": 2
+    },
+    {
+      "all_meshes": 4,
+      "family": "phoenix_nest",
+      "id": "phoenix_nest__frost_phoenix",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 1876,
+      "visible_meshes": 3
+    },
+    {
+      "all_meshes": 2,
+      "family": "crystal_crown",
+      "id": "crystal_crown__emerald_crown",
+      "rarity": "legendary",
+      "sparks": 0,
+      "triangles": 2484,
+      "visible_meshes": 1
+    },
+    {
+      "all_meshes": 4,
+      "family": "aurora_rift",
+      "id": "aurora_rift__solar_rift",
+      "rarity": "prismatic",
+      "sparks": 0,
+      "triangles": 3480,
+      "visible_meshes": 3
+    }
+  ],
+  "identity_gameplay_sha256": "1ac110ae13f762658a63741dd75912504aae98fc1caf4f637eccc11bc6663748",
+  "scope": "Actual catalog/resources/lifecycle; no draw-economy, GPU, browser or phone-performance claim",
+  "tiers": {
+    "common": 40,
+    "epic": 28,
+    "legendary": 16,
+    "prismatic": 8,
+    "rare": 48,
+    "uncommon": 60
+  }
+}

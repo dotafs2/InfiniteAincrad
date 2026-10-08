@@ -1,0 +1,38 @@
+{
+  "scope": "Local0.13.0 English copy and character limits only; no ranking/save/upload claim",
+  "fields": {
+    "Name": {
+      "characters": 28,
+      "limit": 30,
+      "passed": true
+    },
+    "Subtitle": {
+      "characters": 28,
+      "limit": 30,
+      "passed": true
+    },
+    "Keywords": {
+      "characters": 99,
+      "limit": 100,
+      "passed": true
+    },
+    "Promotional text": {
+      "characters": 138,
+      "limit": 170,
+      "passed": true
+    },
+    "Description": {
+      "characters": 1877,
+      "limit": 4000,
+      "passed": true
+    }
+  },
+  "keyword_ascii_bytes": 99,
+  "copy_sha256": "2c7a85aa2f2a8e87ea3d71f84b25cbc383f4d1e06f8a049a6dad8a0aebf84426",
+  "derived_from": "artifacts/toy-city-20261003/store-draft-01/store-copy.md",
+  "prior_draft_copy_sha256": "931a487182c978e8c41fb30e8d2be22e56ffc488fe0c97e99d7fb53585253af9",
+  "source_gate": "artifacts/toy-city-20261003/web-gate-01/release.json",
+  "source_gate_sha256": "90282062e4106474c22549fb8dba87ee8a28d959b68cc862c1ca1aca983506c4",
+  "saved_to_app_store_connect": false,
+  "uploaded": false
+}

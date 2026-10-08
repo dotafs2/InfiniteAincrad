@@ -1,0 +1,61 @@
+{
+  "checks": [
+    {
+      "label": "Guard assets/food_city/streets.png.import",
+      "pass": true
+    },
+    {
+      "label": "Shader include guarded",
+      "pass": true,
+      "paths": [
+        "fidelity/hole_reveal.gdshaderinc"
+      ]
+    },
+    {
+      "label": "Guard fidelity/hole_reveal.gd",
+      "pass": true
+    },
+    {
+      "label": "Guard tests/procedural_filtering_acceptance.gd",
+      "pass": true
+    },
+    {
+      "label": "Guard tests/mobile_thumbnail_acceptance.gd",
+      "pass": true
+    },
+    {
+      "label": "Guard tests/hole_reveal_acceptance.gd",
+      "pass": true
+    },
+    {
+      "label": "Guard tests/visibility_review.gd",
+      "pass": true
+    },
+    {
+      "label": "All suite paths/markers exist and IDs unique",
+      "pass": true
+    },
+    {
+      "label": "Guard rejects modified import",
+      "pass": true
+    },
+    {
+      "label": "Guard rejects removed import",
+      "pass": true
+    },
+    {
+      "label": "Guard rejects added import",
+      "pass": true
+    }
+  ],
+  "all_gate_checks_pass": true,
+  "gate_suites": 37,
+  "guarded_inputs": 694,
+  "profiler_shader_error_accepted": true,
+  "sha256": {
+    "tools/release_web.py": "0c72beb93ca16080f208532638dbf4a77ed07340bd7aa5da8d8f7029957886b9",
+    "tools/profile_maps.py": "0ea58a98b313908b7648ec1370d996ec39b881bae21fd3bcea7b54c45734439f",
+    "tests/mobile_profile.gd": "8b794c843453681e7571cd38ace9256e7bd3ac780de8bc85cbacbedc19775b65"
+  },
+  "scope": "Temporary source fixtures and mocked profiler subprocess only; no game or preview changes"
+}

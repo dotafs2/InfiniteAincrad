@@ -1,0 +1,19 @@
+{
+  "reports": [
+    {
+      "checks": 86,
+      "failures": []
+    },
+    {
+      "checks": 590,
+      "failures": [],
+      "scope": "Real game timer/combat/respawn and production native bridges with test-only typed providers; all saves process-owned /tmp"
+    },
+    {
+      "checks": 25,
+      "failures": [],
+      "scope": "Independent durable-wallet faults and accepted provider callbacks in isolated --test fixtures; no real SDK purchase or ad."
+    }
+  ],
+  "checks": 701
+}

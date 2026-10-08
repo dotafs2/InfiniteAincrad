@@ -1,0 +1,2775 @@
+{
+  "audits": [
+    {
+      "categories": {
+        "ambient_actor": 48,
+        "authored_actor": 152,
+        "barrier": 4,
+        "bench": 4,
+        "bike_rack": 4,
+        "bin": 54,
+        "bollard": 4,
+        "building": 48,
+        "bus_stop": 4,
+        "cone": 26,
+        "cover": 2,
+        "dumpster": 4,
+        "fence": 44,
+        "hydrant": 4,
+        "kiosk": 4,
+        "lamp": 32,
+        "mailbox": 4,
+        "person": 64,
+        "planter": 4,
+        "railing": 36,
+        "sign": 4,
+        "signal_pylon": 5,
+        "traffic_light": 4,
+        "tree": 48,
+        "vehicle": 49
+      },
+      "clearance_issues": [],
+      "issues": [],
+      "map": "city",
+      "placement_repairs": [
+        {
+          "from": [
+            37.7000007629395,
+            -1.70000004768372
+          ],
+          "id": "espresso_cart",
+          "interior": false,
+          "to": [
+            39.0587997436523,
+            3.37111067771912
+          ]
+        },
+        {
+          "from": [
+            39.8499984741211,
+            1.74000000953674
+          ],
+          "id": "bread_oven",
+          "interior": false,
+          "to": [
+            41.440990447998,
+            3.33099031448364
+          ]
+        },
+        {
+          "from": [
+            42.0,
+            -1.70000004768372
+          ],
+          "id": "fish_counter",
+          "interior": false,
+          "to": [
+            43.3587989807129,
+            3.37111067771912
+          ]
+        },
+        {
+          "from": [
+            44.1500015258789,
+            1.70000004768372
+          ],
+          "id": "fruit_stand",
+          "interior": false,
+          "to": [
+            45.7409934997559,
+            3.29099035263062
+          ]
+        },
+        {
+          "from": [
+            46.2999992370605,
+            -1.70000004768372
+          ],
+          "id": "flower_bar",
+          "interior": false,
+          "to": [
+            47.6587982177734,
+            3.37111067771912
+          ]
+        },
+        {
+          "from": [
+            37.7000007629395,
+            1.70000004768372
+          ],
+          "id": "noodle_booth",
+          "interior": false,
+          "to": [
+            39.5750007629395,
+            4.94759511947632
+          ]
+        },
+        {
+          "from": [
+            39.8499984741211,
+            -1.70000004768372
+          ],
+          "id": "market_balance",
+          "interior": false,
+          "to": [
+            36.8499984741211,
+            3.49615216255188
+          ]
+        },
+        {
+          "from": [
+            42.0,
+            1.70000004768372
+          ],
+          "id": "juice_press",
+          "interior": false,
+          "to": [
+            42.7764587402344,
+            4.59777736663818
+          ]
+        },
+        {
+          "from": [
+            44.1500015258789,
+            -1.70000004768372
+          ],
+          "id": "pretzel_rack",
+          "interior": false,
+          "to": [
+            42.5970878601074,
+            -7.49555492401123
+          ]
+        },
+        {
+          "from": [
+            46.2999992370605,
+            1.70000004768372
+          ],
+          "id": "street_grill",
+          "interior": false,
+          "to": [
+            47.0764579772949,
+            4.59777736663818
+          ]
+        },
+        {
+          "from": [
+            34.0717010498047,
+            26.8558006286621
+          ],
+          "id": "print_farm",
+          "interior": false,
+          "to": [
+            37.8217010498047,
+            26.8558006286621
+          ]
+        },
+        {
+          "from": [
+            37.5503997802734,
+            29.38330078125
+          ],
+          "id": "drill_press",
+          "interior": false,
+          "to": [
+            37.3562850952148,
+            28.6588554382324
+          ]
+        },
+        {
+          "from": [
+            32.6322975158691,
+            25.5921001434326
+          ],
+          "id": "assembly_arm",
+          "interior": false,
+          "to": [
+            34.2232894897461,
+            24.0011100769043
+          ]
+        },
+        {
+          "from": [
+            35.8110008239746,
+            28.1196002960205
+          ],
+          "id": "solder_station",
+          "interior": false,
+          "to": [
+            38.8110008239746,
+            28.1196002960205
+          ]
+        },
+        {
+          "from": [
+            39.548900604248,
+            26.6526012420654
+          ],
+          "id": "tool_chest",
+          "interior": false,
+          "to": [
+            38.7724418640137,
+            29.5503787994385
+          ]
+        },
+        {
+          "from": [
+            15.4299001693726,
+            41.9869003295898
+          ],
+          "id": "lock_wheel",
+          "interior": false,
+          "to": [
+            14.3049001693726,
+            43.9354591369629
+          ]
+        },
+        {
+          "from": [
+            12.8606996536255,
+            45.0822982788086
+          ],
+          "id": "mooring_bollard",
+          "interior": false,
+          "to": [
+            12.2111806869507,
+            45.4572982788086
+          ]
+        },
+        {
+          "from": [
+            14.1893997192383,
+            49.1719017028809
+          ],
+          "id": "waterwheel",
+          "interior": true,
+          "to": [
+            14.1893997192383,
+            48.7550048828125
+          ]
+        },
+        {
+          "from": [
+            12.1962995529175,
+            43.0376014709473
+          ],
+          "id": "navigation_buoy",
+          "interior": false,
+          "to": [
+            12.1962995529175,
+            46.7876014709473
+          ]
+        },
+        {
+          "from": [
+            -10.0331001281738,
+            36.380199432373
+          ],
+          "id": "reflector_telescope",
+          "interior": false,
+          "to": [
+            -12.1544208526611,
+            38.5015182495117
+          ]
+        },
+        {
+          "from": [
+            -13.9310998916626,
+            37.3742980957031
+          ],
+          "id": "radio_dish",
+          "interior": false,
+          "to": [
+            -16.8288764953613,
+            38.1507568359375
+          ]
+        },
+        {
+          "from": [
+            -11.3243474960327,
+            40.4696998596191
+          ],
+          "id": "solar_orrery",
+          "interior": false,
+          "to": [
+            -13.9759979248047,
+            37.8180503845215
+          ]
+        },
+        {
+          "from": [
+            -15.2599000930786,
+            41.4637985229492
+          ],
+          "id": "gyroscope",
+          "interior": false,
+          "to": [
+            -18.4418811798096,
+            38.2818183898926
+          ]
+        },
+        {
+          "from": [
+            -12.6906995773315,
+            44.5992012023926
+          ],
+          "id": "meteor_cabinet",
+          "interior": false,
+          "to": [
+            -11.9406995773315,
+            44.5992012023926
+          ]
+        },
+        {
+          "from": [
+            -13.2666997909546,
+            35.3294982910156
+          ],
+          "id": "telemetry_mast",
+          "interior": false,
+          "to": [
+            -14.3916997909546,
+            33.3809394836426
+          ]
+        },
+        {
+          "from": [
+            -14.5954999923706,
+            39.4189987182617
+          ],
+          "id": "weather_balloon",
+          "interior": false,
+          "to": [
+            -8.79994487762451,
+            37.8660850524902
+          ]
+        },
+        {
+          "from": [
+            -12.0263004302979,
+            42.5144996643066
+          ],
+          "id": "interferometer",
+          "interior": false,
+          "to": [
+            -12.0263004302979,
+            46.2644996643066
+          ]
+        },
+        {
+          "from": [
+            -15.9242992401123,
+            43.5186004638672
+          ],
+          "id": "star_projector",
+          "interior": false,
+          "to": [
+            -11.681658744812,
+            47.7612419128418
+          ]
+        },
+        {
+          "from": [
+            -32.3322982788086,
+            25.5921001434326
+          ],
+          "id": "hydroponic_rack",
+          "interior": false,
+          "to": [
+            -33.0567436218262,
+            25.397985458374
+          ]
+        },
+        {
+          "from": [
+            -39.548900604248,
+            26.6326007843018
+          ],
+          "id": "irrigation_fan",
+          "interior": true,
+          "to": [
+            -39.5999984741211,
+            26.6326007843018
+          ]
+        },
+        {
+          "from": [
+            -39.2897987365723,
+            30.6469993591309
+          ],
+          "id": "sprout_bed",
+          "interior": false,
+          "to": [
+            -39.0956840515137,
+            31.3714447021484
+          ]
+        },
+        {
+          "from": [
+            -34.0717010498047,
+            26.8558006286621
+          ],
+          "id": "mushroom_log",
+          "interior": false,
+          "to": [
+            -35.5717010498047,
+            26.8558006286621
+          ]
+        },
+        {
+          "from": [
+            -44.7000007629395,
+            1.72749996185303
+          ],
+          "id": "ticket_machine",
+          "interior": false,
+          "to": [
+            -43.6393394470215,
+            2.7881600856781
+          ]
+        },
+        {
+          "from": [
+            -46.8499984741211,
+            -1.70000004768372
+          ],
+          "id": "turnstile",
+          "interior": false,
+          "to": [
+            -45.4911994934082,
+            3.37111067771912
+          ]
+        },
+        {
+          "from": [
+            -48.9500007629395,
+            1.70000004768372
+          ],
+          "id": "curb_charger",
+          "interior": false,
+          "to": [
+            -47.8893394470215,
+            2.76066017150879
+          ]
+        },
+        {
+          "from": [
+            -51.1500015258789,
+            -1.70000004768372
+          ],
+          "id": "bicycle_dock",
+          "interior": false,
+          "to": [
+            -49.791202545166,
+            3.37111067771912
+          ]
+        },
+        {
+          "from": [
+            -53.2999992370605,
+            1.70000004768372
+          ],
+          "id": "rail_buffer",
+          "interior": false,
+          "to": [
+            -52.1749992370605,
+            3.64855718612671
+          ]
+        },
+        {
+          "from": [
+            -44.7000007629395,
+            -1.70000004768372
+          ],
+          "id": "rain_shelter",
+          "interior": false,
+          "to": [
+            -41.7000007629395,
+            3.49615216255188
+          ]
+        },
+        {
+          "from": [
+            -46.8499984741211,
+            1.70000004768372
+          ],
+          "id": "luggage_carousel",
+          "interior": false,
+          "to": [
+            -47.4323425292969,
+            3.8733332157135
+          ]
+        },
+        {
+          "from": [
+            -48.560001373291,
+            -1.70000004768372
+          ],
+          "id": "crossing_semaphore",
+          "interior": false,
+          "to": [
+            -50.1129150390625,
+            4.09555530548096
+          ]
+        },
+        {
+          "from": [
+            -51.1500015258789,
+            1.73750007152557
+          ],
+          "id": "tram_stop",
+          "interior": false,
+          "to": [
+            -50.3735427856445,
+            4.63527774810791
+          ]
+        },
+        {
+          "from": [
+            -53.2999992370605,
+            -1.70000004768372
+          ],
+          "id": "route_globe",
+          "interior": false,
+          "to": [
+            -54.6587982177734,
+            3.37111067771912
+          ]
+        },
+        {
+          "from": [
+            -31.4992027282715,
+            -20.784200668335
+          ],
+          "id": "pocket_ferris_wheel",
+          "interior": false,
+          "to": [
+            -35.2492027282715,
+            -20.784200668335
+          ]
+        },
+        {
+          "from": [
+            -31.2401008605957,
+            -24.7985992431641
+          ],
+          "id": "carousel",
+          "interior": false,
+          "to": [
+            -37.7352905273438,
+            -21.0485992431641
+          ]
+        },
+        {
+          "from": [
+            -34.7188987731934,
+            -27.2985000610352
+          ],
+          "id": "speaker_stack",
+          "interior": false,
+          "to": [
+            -34.1365547180176,
+            -25.1251678466797
+          ]
+        },
+        {
+          "from": [
+            -38.4566993713379,
+            -25.8390998840332
+          ],
+          "id": "pipe_organ",
+          "interior": false,
+          "to": [
+            -38.4566993713379,
+            -24.3390998840332
+          ]
+        },
+        {
+          "from": [
+            -29.5006999969482,
+            -23.5347995758057
+          ],
+          "id": "lantern_mobile",
+          "interior": false,
+          "to": [
+            -32.3984756469727,
+            -24.3112564086914
+          ]
+        },
+        {
+          "from": [
+            -32.9794998168945,
+            -26.0622997283936
+          ],
+          "id": "swing_spinner",
+          "interior": false,
+          "to": [
+            -32.9794998168945,
+            -23.0622997283936
+          ]
+        },
+        {
+          "from": [
+            -36.4583015441895,
+            -28.5897998809814
+          ],
+          "id": "puppet_booth",
+          "interior": false,
+          "to": [
+            -38.0112152099609,
+            -22.7942447662354
+          ]
+        },
+        {
+          "from": [
+            -14.3482999801636,
+            -38.6156997680664
+          ],
+          "id": "wind_turbine",
+          "interior": false,
+          "to": [
+            -13.8179702758789,
+            -38.0853691101074
+          ]
+        },
+        {
+          "from": [
+            -11.7791004180908,
+            -41.7536010742188
+          ],
+          "id": "transformer",
+          "interior": false,
+          "to": [
+            -10.6541004180908,
+            -43.7021598815918
+          ]
+        },
+        {
+          "from": [
+            -15.6771001815796,
+            -42.7476997375488
+          ],
+          "id": "flywheel_generator",
+          "interior": false,
+          "to": [
+            -14.6164398193359,
+            -43.8083610534668
+          ]
+        },
+        {
+          "from": [
+            -13.1078996658325,
+            -45.8432006835938
+          ],
+          "id": "cooling_tower",
+          "interior": false,
+          "to": [
+            -12.3578996658325,
+            -45.8432006835938
+          ]
+        },
+        {
+          "from": [
+            -11.1147003173828,
+            -39.7089004516602
+          ],
+          "id": "solar_tracker",
+          "interior": false,
+          "to": [
+            -18.3591442108154,
+            -37.7677574157715
+          ]
+        },
+        {
+          "from": [
+            -15.0127000808716,
+            -40.8655014038086
+          ],
+          "id": "street_sweeper",
+          "interior": false,
+          "to": [
+            -20.8082542419434,
+            -39.3125877380371
+          ]
+        },
+        {
+          "from": [
+            -16.3414993286133,
+            -44.7924995422363
+          ],
+          "id": "heat_exchanger",
+          "interior": false,
+          "to": [
+            -17.4021587371826,
+            -43.7318382263184
+          ]
+        },
+        {
+          "from": [
+            -13.7722997665405,
+            -47.8879013061523
+          ],
+          "id": "cable_spool",
+          "interior": false,
+          "to": [
+            -12.2722997665405,
+            -47.8879013061523
+          ]
+        },
+        {
+          "from": [
+            12.1962995529175,
+            -43.0376014709473
+          ],
+          "id": "parcel_quadcopter",
+          "interior": false,
+          "to": [
+            11.8212995529175,
+            -43.6871223449707
+          ]
+        },
+        {
+          "from": [
+            16.0942001342773,
+            -44.0092010498047
+          ],
+          "id": "parcel_locker",
+          "interior": false,
+          "to": [
+            16.8186454772949,
+            -43.8150863647461
+          ]
+        },
+        {
+          "from": [
+            13.5249996185303,
+            -47.1271018981934
+          ],
+          "id": "landing_beacon",
+          "interior": true,
+          "to": [
+            13.8799991607666,
+            -47.1271018981934
+          ]
+        },
+        {
+          "from": [
+            14.8537998199463,
+            -51.2165985107422
+          ],
+          "id": "baggage_tug",
+          "interior": true,
+          "to": [
+            14.8537998199463,
+            -50.5085830688477
+          ]
+        },
+        {
+          "from": [
+            15.4299011230469,
+            -41.9869003295898
+          ],
+          "id": "luggage_scanner",
+          "interior": false,
+          "to": [
+            18.6774959564209,
+            -43.8619003295898
+          ]
+        },
+        {
+          "from": [
+            12.8606996536255,
+            -45.0822982788086
+          ],
+          "id": "cargo_pod",
+          "interior": false,
+          "to": [
+            12.1106996536255,
+            -45.0822982788086
+          ]
+        },
+        {
+          "from": [
+            18.0874004364014,
+            -50.1660003662109
+          ],
+          "id": "radar_pedestal",
+          "interior": true,
+          "to": [
+            17.8699989318848,
+            -50.1660003662109
+          ]
+        },
+        {
+          "from": [
+            29.5006999969482,
+            -23.5347995758057
+          ],
+          "id": "kinetic_arch",
+          "interior": false,
+          "to": [
+            35.296257019043,
+            -21.9818859100342
+          ]
+        },
+        {
+          "from": [
+            33.2386016845703,
+            -22.0478992462158
+          ],
+          "id": "spiral_totem",
+          "interior": false,
+          "to": [
+            34.2992630004883,
+            -20.9872398376465
+          ]
+        },
+        {
+          "from": [
+            32.9794998168945,
+            -26.0622997283936
+          ],
+          "id": "balance_stones",
+          "interior": false,
+          "to": [
+            37.5261344909668,
+            -23.4372997283936
+          ]
+        },
+        {
+          "from": [
+            36.7173004150391,
+            -24.5753993988037
+          ],
+          "id": "chime_frame",
+          "interior": false,
+          "to": [
+            35.9673004150391,
+            -24.5753993988037
+          ]
+        },
+        {
+          "from": [
+            36.4583015441895,
+            -28.5897998809814
+          ],
+          "id": "pendulum_clock",
+          "interior": false,
+          "to": [
+            40.1706123352051,
+            -24.8774890899658
+          ]
+        },
+        {
+          "from": [
+            31.4992008209229,
+            -20.784200668335
+          ],
+          "id": "sundial",
+          "interior": false,
+          "to": [
+            35.9991989135742,
+            -20.784200668335
+          ]
+        },
+        {
+          "from": [
+            31.2401008605957,
+            -24.7985992431641
+          ],
+          "id": "mirror_fan",
+          "interior": false,
+          "to": [
+            37.7352905273438,
+            -21.0485992431641
+          ]
+        },
+        {
+          "from": [
+            34.9779014587402,
+            -23.3117008209229
+          ],
+          "id": "ribbon_gate",
+          "interior": false,
+          "to": [
+            35.5082321166992,
+            -22.7813701629639
+          ]
+        },
+        {
+          "from": [
+            34.7188987731934,
+            -27.326000213623
+          ],
+          "id": "fractal_tree",
+          "interior": false,
+          "to": [
+            38.961540222168,
+            -23.0833587646484
+          ]
+        },
+        {
+          "from": [
+            38.4566993713379,
+            -25.8390998840332
+          ],
+          "id": "mist_fountain",
+          "interior": false,
+          "to": [
+            41.1083488464355,
+            -23.1874504089355
+          ]
+        }
+      ],
+      "recipe_objects": 152,
+      "registered_bodies": 656
+    },
+    {
+      "categories": {
+        "food_bacon": 87,
+        "food_berry": 153,
+        "food_burger": 240,
+        "food_cake": 273,
+        "food_cookie": 303,
+        "food_donut": 705,
+        "food_egg": 89,
+        "food_pancake": 471,
+        "food_pizza": 109,
+        "food_sushi": 110,
+        "person": 48
+      },
+      "issues": [],
+      "map": "food",
+      "recipe_objects": 0,
+      "registered_bodies": 2588
+    }
+  ],
+  "checks": 765,
+  "failures": [],
+  "negative_controls": [
+    {
+      "fault": "old single-owner luggage fixture",
+      "issues": [
+        {
+          "code": "shared_physics_owner",
+          "id": "luggage_carousel/suitcase",
+          "other": "luggage_carousel/frame"
+        },
+        {
+          "actual": "(1.9, 0.805, 1.0)",
+          "code": "geometry_exceeds_authored_size",
+          "expected": "(0.52, 0.45, 0.38)",
+          "id": "luggage_carousel/suitcase"
+        }
+      ]
+    },
+    {
+      "fault": "old diameter-as-radius mesh",
+      "issues": [
+        {
+          "actual": "(1.635817, 2.24, 1.72)",
+          "code": "geometry_exceeds_authored_size",
+          "expected": "(0.86, 1.81, 0.86)",
+          "id": "route_globe/frame"
+        },
+        {
+          "code": "visual_outside_collider",
+          "id": "route_globe/frame"
+        },
+        {
+          "code": "oversized_collision_box",
+          "id": "route_globe/frame"
+        }
+      ]
+    },
+    {
+      "fault": "missing registry owner",
+      "issues": [
+        {
+          "code": "missing_swallow_registration",
+          "id": "route_globe/frame"
+        }
+      ]
+    },
+    {
+      "fault": "spawned in solid obstacle",
+      "issues": [
+        {
+          "blocker": "building_001",
+          "code": "spawn_interpenetration",
+          "id": "route_globe/frame",
+          "position": "(-16.5, 3.34, 47.0)"
+        }
+      ]
+    }
+  ],
+  "recipe_coverage": {
+    "collected": 152,
+    "declared": 152
+  },
+  "traversal": [
+    {
+      "footprint": 0.32202485203743,
+      "id": "luggage_carousel/suitcase",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        -47.4323425292969,
+        1.07999992370605,
+        3.8733332157135
+      ]
+    },
+    {
+      "footprint": 0.254950970411301,
+      "id": "bicycle_dock/dock_0",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.75,
+      "start": [
+        -50.3912010192871,
+        0.625,
+        3.37111067771912
+      ]
+    },
+    {
+      "footprint": 0.59341686964035,
+      "id": "route_globe/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        -54.6587982177734,
+        0.944999992847443,
+        3.37111067771912
+      ]
+    },
+    {
+      "footprint": 0.943398118019104,
+      "id": "espresso_cart/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        39.0587997436523,
+        1.01999998092651,
+        3.37111067771912
+      ]
+    },
+    {
+      "footprint": 0.736613869667053,
+      "id": "bread_oven/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        41.440990447998,
+        0.95250004529953,
+        3.33099031448364
+      ]
+    },
+    {
+      "footprint": 0.324260830879211,
+      "id": "fish_counter/fish_0",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        42.8087997436523,
+        1.07999992370605,
+        3.37111067771912
+      ]
+    },
+    {
+      "id": "fish_counter/fish_1",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.324260830879211,
+      "id": "fish_counter/fish_2",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        43.9087982177734,
+        1.07999992370605,
+        3.37111067771912
+      ]
+    },
+    {
+      "footprint": 0.986154139041901,
+      "id": "fish_counter/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.75,
+      "start": [
+        43.3587989807129,
+        0.525000035762787,
+        3.37111067771912
+      ]
+    },
+    {
+      "footprint": 0.172504901885986,
+      "id": "fruit_stand/fruit_-0.4_-0.2",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        45.340991973877,
+        1.07999992370605,
+        3.0909903049469
+      ]
+    },
+    {
+      "id": "fruit_stand/fruit_-0.4_0.2",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "fruit_stand/fruit_0_-0.2",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "fruit_stand/fruit_0_0.2",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.172504901885986,
+      "id": "fruit_stand/fruit_0.4_-0.2",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        46.1409950256348,
+        1.07999992370605,
+        3.0909903049469
+      ]
+    },
+    {
+      "id": "fruit_stand/fruit_0.4_0.2",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.943398118019104,
+      "id": "fruit_stand/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        45.7409934997559,
+        1.0699999332428,
+        3.29099035263062
+      ]
+    },
+    {
+      "footprint": 0.248407065868378,
+      "id": "flower_bar/flower_-0.5",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        47.1587982177734,
+        1.1599999666214,
+        3.37111067771912
+      ]
+    },
+    {
+      "id": "flower_bar/flower_0",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.248407080769539,
+      "id": "flower_bar/flower_0.5",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.683333333333333,
+      "start": [
+        48.1559791564941,
+        0.429675877094269,
+        3.36712193489075
+      ]
+    },
+    {
+      "id": "flower_bar/frame",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.367695510387421,
+      "id": "noodle_booth/noodle_bowl",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        39.2750015258789,
+        1.12249994277954,
+        4.94759511947632
+      ]
+    },
+    {
+      "footprint": 1.11635565757751,
+      "id": "noodle_booth/frame",
+      "radius": 1.65,
+      "result": "collected",
+      "seconds": 0.85,
+      "start": [
+        39.5750007629395,
+        1.1949999332428,
+        4.94759511947632
+      ]
+    },
+    {
+      "footprint": 0.613209247589111,
+      "id": "market_balance/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        36.8499984741211,
+        0.737500011920929,
+        3.49615216255188
+      ]
+    },
+    {
+      "footprint": 0.566789209842682,
+      "id": "juice_press/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        42.7764587402344,
+        0.910000026226044,
+        4.59777736663818
+      ]
+    },
+    {
+      "footprint": 0.176705971360207,
+      "id": "pretzel_rack/pretzel_-0.3_0.55",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.75,
+      "start": [
+        42.2970886230469,
+        0.790000021457672,
+        -7.49555492401123
+      ]
+    },
+    {
+      "id": "pretzel_rack/pretzel_0.3_0.55",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "pretzel_rack/pretzel_-0.3_1",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "pretzel_rack/pretzel_0.3_1",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "pretzel_rack/pretzel_-0.3_1.45",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "pretzel_rack/pretzel_0.3_1.45",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "pretzel_rack/frame",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.850000023841858,
+      "id": "street_grill/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        47.0764579772949,
+        0.915000021457672,
+        4.59777736663818
+      ]
+    },
+    {
+      "footprint": 0.901387810707092,
+      "id": "laser_cutter/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        34.3306999206543,
+        0.889999985694885,
+        22.8414001464844
+      ]
+    },
+    {
+      "footprint": 0.318198055028915,
+      "id": "print_farm/printed_part",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        37.8217010498047,
+        1.17999994754791,
+        26.8558006286621
+      ]
+    },
+    {
+      "footprint": 0.806225776672363,
+      "id": "print_farm/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        37.8217010498047,
+        0.985000014305115,
+        26.8558006286621
+      ]
+    },
+    {
+      "footprint": 0.9290452003479,
+      "id": "precision_lathe/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        37.8095016479492,
+        0.725000023841858,
+        25.3689002990723
+      ]
+    },
+    {
+      "footprint": 0.548292815685272,
+      "id": "drill_press/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        37.3562850952148,
+        0.990000069141388,
+        28.6588554382324
+      ]
+    },
+    {
+      "footprint": 0.320156216621399,
+      "id": "welding_bench/workpiece",
+      "result": "protected_by_building",
+      "start": [
+        41.2882995605469,
+        1.2024998664856,
+        27.8964004516602
+      ]
+    },
+    {
+      "footprint": 0.205182835459709,
+      "id": "welding_bench/welder",
+      "result": "protected_by_building",
+      "start": [
+        40.6883010864258,
+        0.439999997615814,
+        27.6963996887207
+      ]
+    },
+    {
+      "footprint": 0.874642789363861,
+      "id": "welding_bench/frame",
+      "result": "protected_by_building",
+      "start": [
+        41.2882995605469,
+        0.495000004768372,
+        27.8964004516602
+      ]
+    },
+    {
+      "footprint": 0.751797199249268,
+      "id": "assembly_arm/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        34.2232894897461,
+        0.780000030994415,
+        24.0011100769043
+      ]
+    },
+    {
+      "footprint": 0.30103987455368,
+      "id": "roller_conveyor/parcel",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        36.0700988769531,
+        1.03999996185303,
+        24.1051998138428
+      ]
+    },
+    {
+      "footprint": 0.930657684803009,
+      "id": "roller_conveyor/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.733333333333333,
+      "start": [
+        36.0700988769531,
+        0.439999997615814,
+        24.1051998138428
+      ]
+    },
+    {
+      "footprint": 0.28999999165535,
+      "id": "solder_station/station",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        38.5610008239746,
+        1.07999992370605,
+        28.1196002960205
+      ]
+    },
+    {
+      "id": "solder_station/circuit_board",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "solder_station/iron",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "solder_station/frame",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.649250864982605,
+      "id": "tool_chest/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        38.7724418640137,
+        0.615000009536743,
+        29.5503787994385
+      ]
+    },
+    {
+      "footprint": 0.919238805770874,
+      "id": "workshop_gantry/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.866666666666667,
+      "start": [
+        39.2897987365723,
+        1.23499989509583,
+        30.6469993591309
+      ]
+    },
+    {
+      "footprint": 0.555090069770813,
+      "id": "lock_wheel/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        14.3049001693726,
+        0.704999983310699,
+        43.9354591369629
+      ]
+    },
+    {
+      "footprint": 0.585768699645996,
+      "id": "mooring_bollard/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.716666666666667,
+      "start": [
+        12.2111806869507,
+        0.340000003576279,
+        45.4572982788086
+      ]
+    },
+    {
+      "footprint": 1.06213223934174,
+      "id": "canal_lift_bridge/frame",
+      "result": "protected_by_building",
+      "start": [
+        16.7586002349854,
+        0.764999985694885,
+        46.0764007568359
+      ]
+    },
+    {
+      "footprint": 0.847657859325409,
+      "id": "waterwheel/frame",
+      "result": "protected_by_building",
+      "start": [
+        14.1893997192383,
+        0.915000021457672,
+        48.7550048828125
+      ]
+    },
+    {
+      "footprint": 0.604152143001556,
+      "id": "canal_pump/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        18.3873996734619,
+        0.704999983310699,
+        50.1660003662109
+      ]
+    },
+    {
+      "footprint": 0.565685451030731,
+      "id": "navigation_buoy/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        12.1962995529175,
+        0.777500033378601,
+        46.7876014709473
+      ]
+    },
+    {
+      "footprint": 0.805931150913239,
+      "id": "sluice_gate/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        16.0942001342773,
+        1.00999999046326,
+        44.0317001342773
+      ]
+    },
+    {
+      "footprint": 0.759539365768433,
+      "id": "cargo_crane/frame",
+      "result": "protected_by_building",
+      "start": [
+        14.0450000762939,
+        1.1599999666214,
+        47.1271018981934
+      ]
+    },
+    {
+      "footprint": 1.03077673912048,
+      "id": "survey_skiff/frame",
+      "result": "protected_by_building",
+      "start": [
+        17.4230003356934,
+        0.439999967813492,
+        48.0212020874023
+      ]
+    },
+    {
+      "footprint": 0.615045547485352,
+      "id": "tow_winch/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        14.8662996292114,
+        0.595000028610229,
+        51.2165985107422
+      ]
+    },
+    {
+      "footprint": 0.916845619678497,
+      "id": "reflector_telescope/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        -12.1544208526611,
+        1.10031545162201,
+        38.5015182495117
+      ]
+    },
+    {
+      "footprint": 0.989949584007263,
+      "id": "radio_dish/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.85,
+      "start": [
+        -16.8288764953613,
+        1.13499999046326,
+        38.1507568359375
+      ]
+    },
+    {
+      "footprint": 0.867248177528381,
+      "id": "solar_orrery/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -13.9759979248047,
+        0.752500057220459,
+        37.8180503845215
+      ]
+    },
+    {
+      "footprint": 0.640312433242798,
+      "id": "gyroscope/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -18.4418811798096,
+        0.777499973773956,
+        38.2818183898926
+      ]
+    },
+    {
+      "footprint": 0.441477358341217,
+      "id": "meteor_cabinet/meteor",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -11.9406995773315,
+        1.12000000476837,
+        44.5592002868652
+      ]
+    },
+    {
+      "id": "meteor_cabinet/frame",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.555787742137909,
+      "id": "telemetry_mast/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.866666666666667,
+      "start": [
+        -14.3916997909546,
+        1.32999992370605,
+        33.3809394836426
+      ]
+    },
+    {
+      "footprint": 0.459619373083115,
+      "id": "prism_tower/prism_0.8",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.75,
+      "start": [
+        -10.6975002288818,
+        0.840000033378601,
+        38.4249000549316
+      ]
+    },
+    {
+      "id": "prism_tower/prism_1.35",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "prism_tower/prism_1.9",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "prism_tower/frame",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.690019607543945,
+      "id": "weather_balloon/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.866666666666667,
+      "start": [
+        -8.79994487762451,
+        1.28749990463257,
+        37.8660850524902
+      ]
+    },
+    {
+      "footprint": 0.901387810707092,
+      "id": "interferometer/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -12.0263004302979,
+        0.792500019073486,
+        46.2644996643066
+      ]
+    },
+    {
+      "footprint": 0.559304594993591,
+      "id": "star_projector/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -11.6816596984863,
+        0.714999973773956,
+        47.7612419128418
+      ]
+    },
+    {
+      "footprint": 0.190918833017349,
+      "id": "hydroponic_rack/plant_-0.5_0.55",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.75,
+      "start": [
+        -33.5567436218262,
+        0.850000023841858,
+        25.397985458374
+      ]
+    },
+    {
+      "id": "hydroponic_rack/plant_0_0.55",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.190918833017349,
+      "id": "hydroponic_rack/plant_0.5_0.55",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.75,
+      "start": [
+        -32.5567436218262,
+        0.850000023841858,
+        25.397985458374
+      ]
+    },
+    {
+      "id": "hydroponic_rack/plant_-0.5_1.1",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "hydroponic_rack/plant_0_1.1",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "hydroponic_rack/plant_0.5_1.1",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "hydroponic_rack/plant_-0.5_1.65",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "hydroponic_rack/plant_0_1.65",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "hydroponic_rack/plant_0.5_1.65",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.881490230560303,
+      "id": "hydroponic_rack/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        -33.0567436218262,
+        0.902500033378601,
+        25.397985458374
+      ]
+    },
+    {
+      "footprint": 0.815785527229309,
+      "id": "seed_sorter/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        -36.0700988769531,
+        0.892500042915344,
+        24.2826995849609
+      ]
+    },
+    {
+      "footprint": 0.735272109508514,
+      "id": "compost_tumbler/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -35.8110008239746,
+        0.70250004529953,
+        28.1196002960205
+      ]
+    },
+    {
+      "footprint": 0.883883476257324,
+      "id": "irrigation_fan/frame",
+      "result": "protected_by_building",
+      "start": [
+        -39.5999984741211,
+        0.737500011920929,
+        26.6326007843018
+      ]
+    },
+    {
+      "footprint": 0.922293305397034,
+      "id": "sprout_bed/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.716666666666667,
+      "start": [
+        -39.0956840515137,
+        0.374999970197678,
+        31.3714447021484
+      ]
+    },
+    {
+      "footprint": 0.919238746166229,
+      "id": "rain_collector/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -34.3306999206543,
+        0.775000035762787,
+        22.8414001464844
+      ]
+    },
+    {
+      "footprint": 0.740000009536743,
+      "id": "mushroom_log/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.75,
+      "start": [
+        -35.5717010498047,
+        0.5,
+        26.8558006286621
+      ]
+    },
+    {
+      "footprint": 0.383739173412323,
+      "id": "soil_scanner/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        -37.7570037841797,
+        0.605000019073486,
+        25.3689002990723
+      ]
+    },
+    {
+      "footprint": 0.794119000434875,
+      "id": "grow_lamp/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        -37.5503997802734,
+        0.930000066757202,
+        29.38330078125
+      ]
+    },
+    {
+      "footprint": 0.442295134067535,
+      "id": "pollinator_hive/hive_tray_0.55",
+      "result": "protected_by_building",
+      "start": [
+        -41.2882995605469,
+        0.590000033378601,
+        27.8964004516602
+      ]
+    },
+    {
+      "footprint": 0.442295134067535,
+      "id": "pollinator_hive/hive_tray_0.82",
+      "result": "protected_by_building",
+      "start": [
+        -41.2882995605469,
+        0.860000014305115,
+        27.8964004516602
+      ]
+    },
+    {
+      "footprint": 0.442295134067535,
+      "id": "pollinator_hive/hive_tray_1.09",
+      "result": "protected_by_building",
+      "start": [
+        -41.2882995605469,
+        1.12999999523163,
+        27.8964004516602
+      ]
+    },
+    {
+      "footprint": 0.636396110057831,
+      "id": "pollinator_hive/hive_lid",
+      "result": "protected_by_building",
+      "start": [
+        -41.2882995605469,
+        1.4099999666214,
+        27.8964004516602
+      ]
+    },
+    {
+      "footprint": 0.519831776618958,
+      "id": "pollinator_hive/frame",
+      "result": "protected_by_building",
+      "start": [
+        -41.2882995605469,
+        0.240000009536743,
+        27.906400680542
+      ]
+    },
+    {
+      "footprint": 0.427353739738464,
+      "id": "ticket_machine/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        -43.6393394470215,
+        0.89000004529953,
+        2.7881600856781
+      ]
+    },
+    {
+      "footprint": 0.790569365024567,
+      "id": "turnstile/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        -45.4911994934082,
+        0.590000033378601,
+        3.37111067771912
+      ]
+    },
+    {
+      "footprint": 0.335409849882126,
+      "id": "curb_charger/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -47.8893394470215,
+        0.752500057220459,
+        2.76066017150879
+      ]
+    },
+    {
+      "id": "bicycle_dock/dock_0",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "bicycle_dock/dock_1",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.254950970411301,
+      "id": "bicycle_dock/dock_2",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.75,
+      "start": [
+        -49.1912040710449,
+        0.625,
+        3.37111067771912
+      ]
+    },
+    {
+      "footprint": 0.896172404289246,
+      "id": "bicycle_dock/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.683333333333333,
+      "start": [
+        -49.791202545166,
+        0.140000000596046,
+        3.37111067771912
+      ]
+    },
+    {
+      "footprint": 0.986154139041901,
+      "id": "rail_buffer/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.716666666666667,
+      "start": [
+        -52.1749992370605,
+        0.359999984502792,
+        3.64855718612671
+      ]
+    },
+    {
+      "footprint": 0.790569424629211,
+      "id": "rain_shelter/bench",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.716666666666667,
+      "start": [
+        -41.7000007629395,
+        0.344999998807907,
+        3.49615216255188
+      ]
+    },
+    {
+      "id": "rain_shelter/frame",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "luggage_carousel/suitcase",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 1.07354545593262,
+      "id": "luggage_carousel/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.733333333333333,
+      "start": [
+        -47.4323425292969,
+        0.442499965429306,
+        3.8733332157135
+      ]
+    },
+    {
+      "id": "crossing_semaphore/frame",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.423858761787415,
+      "id": "tram_stop/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        -50.3735427856445,
+        1.11000001430511,
+        4.63527774810791
+      ]
+    },
+    {
+      "id": "route_globe/frame",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.89220255613327,
+      "id": "pocket_ferris_wheel/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        -35.2491989135742,
+        1.11500000953674,
+        -20.784200668335
+      ]
+    },
+    {
+      "footprint": 1.27279222011566,
+      "id": "carousel/frame",
+      "radius": 1.65,
+      "result": "collected",
+      "seconds": 0.85,
+      "start": [
+        -37.7352905273438,
+        1.12749993801117,
+        -21.0485992431641
+      ]
+    },
+    {
+      "footprint": 1.11018013954163,
+      "id": "drum_stage/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.75,
+      "start": [
+        -34.9779014587402,
+        0.550000011920929,
+        -23.3117008209229
+      ]
+    },
+    {
+      "footprint": 0.503841638565063,
+      "id": "speaker_stack/upper_speaker",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -34.1365547180176,
+        1.11000001430511,
+        -25.1251678466797
+      ]
+    },
+    {
+      "id": "speaker_stack/frame",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.850000023841858,
+      "id": "pipe_organ/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.866666666666667,
+      "start": [
+        -38.4566993713379,
+        1.30499994754791,
+        -24.3390998840332
+      ]
+    },
+    {
+      "footprint": 0.829290807247162,
+      "id": "lantern_mobile/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.85,
+      "start": [
+        -32.3984756469727,
+        1.18999993801117,
+        -24.3112564086914
+      ]
+    },
+    {
+      "footprint": 0.654312610626221,
+      "id": "popcorn_machine/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        -33.2386016845703,
+        0.95250004529953,
+        -22.0478992462158
+      ]
+    },
+    {
+      "footprint": 0.838152766227722,
+      "id": "swing_spinner/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        -32.9794998168945,
+        1.06499993801117,
+        -23.0622997283936
+      ]
+    },
+    {
+      "footprint": 0.703118324279785,
+      "id": "balloon_cart/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.85,
+      "start": [
+        -36.7173004150391,
+        1.17750000953674,
+        -24.5753993988037
+      ]
+    },
+    {
+      "footprint": 0.917878031730652,
+      "id": "puppet_booth/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        -38.0112152099609,
+        1.0699999332428,
+        -22.7942447662354
+      ]
+    },
+    {
+      "footprint": 0.907637596130371,
+      "id": "wind_turbine/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.916666666666667,
+      "start": [
+        -13.8179702758789,
+        1.58999991416931,
+        -38.0853691101074
+      ]
+    },
+    {
+      "footprint": 0.68007355928421,
+      "id": "transformer/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        -10.6541004180908,
+        0.965000033378601,
+        -43.7021598815918
+      ]
+    },
+    {
+      "footprint": 0.818916976451874,
+      "id": "flywheel_generator/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -14.6164398193359,
+        0.777499973773956,
+        -43.8083610534668
+      ]
+    },
+    {
+      "footprint": 0.848528146743774,
+      "id": "cooling_tower/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.85,
+      "start": [
+        -12.3578996658325,
+        1.16499996185303,
+        -45.8432006835938
+      ]
+    },
+    {
+      "footprint": 0.664831101894379,
+      "id": "battery_stack/frame",
+      "result": "protected_by_building",
+      "start": [
+        -17.0058002471924,
+        0.790000021457672,
+        -46.8372993469238
+      ]
+    },
+    {
+      "footprint": 0.961793005466461,
+      "id": "solar_tracker/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        -18.3591442108154,
+        0.866623163223267,
+        -37.7677574157715
+      ]
+    },
+    {
+      "footprint": 0.98400092124939,
+      "id": "street_sweeper/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.733333333333333,
+      "start": [
+        -20.8082542419434,
+        0.457500010728836,
+        -39.3125877380371
+      ]
+    },
+    {
+      "footprint": 0.670559465885162,
+      "id": "water_purifier/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        -12.4434995651245,
+        0.990000009536743,
+        -43.7984008789062
+      ]
+    },
+    {
+      "footprint": 0.735272109508514,
+      "id": "heat_exchanger/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        -17.4021587371826,
+        0.839999973773956,
+        -43.7318382263184
+      ]
+    },
+    {
+      "footprint": 0.788051426410675,
+      "id": "cable_spool/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        -12.2722997665405,
+        0.665000021457672,
+        -47.8879013061523
+      ]
+    },
+    {
+      "footprint": 0.873856723308563,
+      "id": "parcel_quadcopter/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.733333333333333,
+      "start": [
+        11.8212995529175,
+        0.577499985694885,
+        -43.6871223449707
+      ]
+    },
+    {
+      "footprint": 0.681180000305176,
+      "id": "parcel_locker/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        16.8186454772949,
+        0.990000009536743,
+        -43.8150863647461
+      ]
+    },
+    {
+      "footprint": 0.636396110057831,
+      "id": "landing_beacon/frame",
+      "result": "protected_by_building",
+      "start": [
+        13.8799991607666,
+        0.660000026226044,
+        -47.1271018981934
+      ]
+    },
+    {
+      "footprint": 0.760345339775085,
+      "id": "fuel_cart/frame",
+      "result": "protected_by_building",
+      "start": [
+        17.4230003356934,
+        0.645000040531158,
+        -48.1212005615234
+      ]
+    },
+    {
+      "footprint": 0.992471575737,
+      "id": "baggage_tug/frame",
+      "result": "protected_by_building",
+      "start": [
+        14.8537998199463,
+        0.685000002384186,
+        -50.5085830688477
+      ]
+    },
+    {
+      "footprint": 0.28999999165535,
+      "id": "luggage_scanner/luggage",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.75,
+      "start": [
+        18.6774940490723,
+        0.920000016689301,
+        -43.8619003295898
+      ]
+    },
+    {
+      "footprint": 0.995301425457001,
+      "id": "luggage_scanner/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        18.6774940490723,
+        0.855000019073486,
+        -43.8619003295898
+      ]
+    },
+    {
+      "footprint": 0.870703756809235,
+      "id": "cargo_pod/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        12.1106996536255,
+        0.665000021457672,
+        -45.0822982788086
+      ]
+    },
+    {
+      "footprint": 0.405624359846115,
+      "id": "windsock/frame",
+      "result": "protected_by_building",
+      "start": [
+        17.0461006164551,
+        1.25249993801117,
+        -46.0764007568359
+      ]
+    },
+    {
+      "footprint": 0.84926438331604,
+      "id": "control_tower/frame",
+      "result": "protected_by_building",
+      "start": [
+        14.1893997192383,
+        1.18999993801117,
+        -49.1719017028809
+      ]
+    },
+    {
+      "footprint": 0.782623767852783,
+      "id": "radar_pedestal/frame",
+      "result": "protected_by_building",
+      "start": [
+        17.8699989318848,
+        0.95250004529953,
+        -50.1660003662109
+      ]
+    },
+    {
+      "footprint": 0.908239960670471,
+      "id": "kinetic_arch/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        35.296257019043,
+        1.01750004291534,
+        -21.9818859100342
+      ]
+    },
+    {
+      "footprint": 0.530330061912537,
+      "id": "spiral_totem/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.85,
+      "start": [
+        34.2992630004883,
+        1.13999998569489,
+        -20.9872398376465
+      ]
+    },
+    {
+      "footprint": 0.403904318809509,
+      "id": "balance_stones/stone_1",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.733333333333333,
+      "start": [
+        37.5261344909668,
+        0.685000002384186,
+        -23.4372997283936
+      ]
+    },
+    {
+      "id": "balance_stones/stone_2",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "id": "balance_stones/frame",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.881419658660889,
+      "id": "chime_frame/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        35.9673004150391,
+        1.05999994277954,
+        -24.5753993988037
+      ]
+    },
+    {
+      "footprint": 0.589428126811981,
+      "id": "pendulum_clock/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        40.1706123352051,
+        1.01499998569489,
+        -24.8774890899658
+      ]
+    },
+    {
+      "footprint": 0.70710676908493,
+      "id": "sundial/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.766666666666667,
+      "start": [
+        35.9991989135742,
+        0.677500009536743,
+        -20.784200668335
+      ]
+    },
+    {
+      "footprint": 0.602992534637451,
+      "id": "mirror_fan/frame",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        37.7352905273438,
+        1.08226978778839,
+        -21.0485992431641
+      ]
+    },
+    {
+      "id": "ribbon_gate/frame",
+      "result": "already_collected_in_nearby_probe"
+    },
+    {
+      "footprint": 0.789240419864655,
+      "id": "fractal_tree/frame",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        38.961540222168,
+        1.02749991416931,
+        -23.0833587646484
+      ]
+    },
+    {
+      "footprint": 1.13137090206146,
+      "id": "mist_fountain/frame",
+      "radius": 1.65,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        41.1083488464355,
+        0.752499997615814,
+        -23.1874504089355
+      ]
+    },
+    {
+      "children": 3,
+      "id": "building_040",
+      "radius": 5.1,
+      "remaining": [],
+      "result": "collected"
+    },
+    {
+      "children": 4,
+      "id": "building_031",
+      "radius": 5.1,
+      "remaining": [],
+      "result": "collected"
+    },
+    {
+      "children": 6,
+      "id": "building_029",
+      "radius": 6.0,
+      "remaining": [],
+      "result": "collected"
+    },
+    {
+      "children": 1,
+      "id": "building_043",
+      "radius": 5.1,
+      "remaining": [],
+      "result": "collected"
+    },
+    {
+      "children": 6,
+      "id": "building_047",
+      "radius": 5.1,
+      "remaining": [],
+      "result": "collected"
+    },
+    {
+      "footprint": 1.07354545593262,
+      "id": "luggage_carousel/counter_support_loss",
+      "radius": 1.2,
+      "result": "collected",
+      "seconds": 0.733333333333333,
+      "start": [
+        -47.4323425292969,
+        0.442499965429306,
+        3.8733332157135
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_00",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        -18.4375,
+        0.838200032711029,
+        5.0
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_01",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -19.2062492370605,
+        0.772550046443939,
+        -23.3999996185303
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_02",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.833333333333333,
+      "start": [
+        -18.6812496185303,
+        1.0489000082016,
+        -71.0
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_03",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -18.6812496185303,
+        0.782050013542175,
+        42.4000015258789
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_04",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        -8.5625,
+        0.853550016880035,
+        5.0
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_05",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        -11.8937492370605,
+        0.822500050067902,
+        -23.3999996185303
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_06",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -9.61874961853027,
+        0.782050013542175,
+        -71.0
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_07",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -9.61874961853027,
+        0.782350063323975,
+        42.4000015258789
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_08",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        1.3125,
+        0.772500038146973,
+        5.0
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_09",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        -4.58124923706055,
+        0.803875029087067,
+        -23.3999996185303
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_10",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        -0.556249618530273,
+        0.866200029850006,
+        -71.0
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_11",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        -0.556249618530273,
+        0.792500019073486,
+        42.4000015258789
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_12",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        11.1875019073486,
+        0.743200063705444,
+        5.0
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_13",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.816666666666667,
+      "start": [
+        2.73125076293945,
+        0.905200004577637,
+        -23.3999996185303
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_14",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.783333333333333,
+      "start": [
+        8.50625038146973,
+        0.791900038719177,
+        -71.0
+      ]
+    },
+    {
+      "footprint": 0.26,
+      "id": "citizen_variant_15",
+      "radius": 0.85,
+      "result": "collected",
+      "seconds": 0.8,
+      "start": [
+        8.50625038146973,
+        0.797500014305115,
+        42.4000015258789
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "checks": 57,
+  "failures": [
+    "food: outer collectible physically falls and awards score",
+    "Engine process failed; inspect the engine log"
+  ],
+  "measurements": {
+    "city": {
+      "initial_outer_edibles": 152,
+      "outer_frozen": 152,
+      "quadrants": 4,
+      "remaining_food": 807
+    },
+    "food": {
+      "initial_outer_edibles": 267,
+      "outer_frozen": 267,
+      "quadrants": 4,
+      "remaining_food": 2922
+    },
+    "food_additional_bodies": 334
+  },
+  "scope": "Real expanded geometry and collection; no browser, rendered appearance or phone-frame-rate claim"
+}

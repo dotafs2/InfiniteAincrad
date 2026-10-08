@@ -1,0 +1,63 @@
+{
+  "attached": 2,
+  "blocked": true,
+  "blocked_steps": 1,
+  "cars": 4,
+  "detachments": 1,
+  "detours": [],
+  "head_distance": 1334.552811702,
+  "history_samples": 33,
+  "next_queries": [
+    {
+      "at": "(78.44318, -84.4)",
+      "forward": "(1.0, 0.0)",
+      "hits": [
+        {
+          "at": "(80.62414, 0.706574, -84.38531)",
+          "name": "TrainCar_tram_03",
+          "train_index": 3
+        }
+      ],
+      "index": 0
+    },
+    {
+      "at": "(75.60458, -84.4)",
+      "forward": "(1.0, 0.0)",
+      "hits": [],
+      "index": 1
+    }
+  ],
+  "parked": 1,
+  "planning_count": 1,
+  "poses": [
+    {
+      "at": "(78.32317, 0.706574, -84.4)",
+      "attached": true,
+      "freeze": true,
+      "half": "(0.626, 0.671574, 1.075)",
+      "index": 0,
+      "rotation": "(0.0, 1.570796, 0.0)",
+      "route_distance": 1334.552811702
+    },
+    {
+      "at": "(75.48457, 0.706574, -84.4)",
+      "attached": true,
+      "freeze": true,
+      "half": "(0.626, 0.671574, 1.075)",
+      "index": 1,
+      "rotation": "(0.0, 1.570796, 0.0)",
+      "route_distance": 1331.71421460486
+    },
+    {
+      "at": "(80.62414, 0.706574, -84.38531)",
+      "attached": false,
+      "freeze": true,
+      "half": "(0.626, 0.671574, 1.075)",
+      "index": 3,
+      "rotation": "(0.0, 1.505332, 0.0)",
+      "route_distance": 668.539434729561
+    }
+  ],
+  "route_length": 668.3148188591,
+  "traveled": 1334.53703963757
+}

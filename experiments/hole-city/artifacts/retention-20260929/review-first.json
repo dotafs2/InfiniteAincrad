@@ -1,0 +1,13 @@
+{
+  "checks": 331,
+  "failures": [
+    "Protection expires without permanent invulnerability: city",
+    "Timer settles retained score once even during respawn: city",
+    "Repeated finish cannot settle the timed run twice: city",
+    "Protection expires without permanent invulnerability: food",
+    "Timer settles retained score once even during respawn: food",
+    "Repeated finish cannot settle the timed run twice: food",
+    "Engine process failed; inspect the engine log"
+  ],
+  "scope": "Real game timer/combat/respawn and production native bridges with test-only typed providers; all saves process-owned /tmp"
+}

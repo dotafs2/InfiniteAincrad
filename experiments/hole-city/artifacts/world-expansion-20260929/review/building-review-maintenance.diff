@@ -1,0 +1,23 @@
+--- before
++++ after
+@@ -87,9 +87,9 @@
+ 			if body.get_meta("dither_building",false) or game.reveal.is_structural_candidate(body) or game.reveal.entries.has(body.get_instance_id()):wrongly_opted.append(str(body.name))
+ 			for mesh in meshes(body):
+ 				if shader_weight(mesh.material_override)!=0.0:wrong_materials.append(str(body.name))
+-	check(buildings==48 and other_bodies>500,"Actual full city exercises all 48 buildings and hundreds of ordinary physics owners")
++	check(buildings==72 and other_bodies>500,"Actual full city exercises all 72 buildings and hundreds of ordinary physics owners")
+ 	check(wrongly_opted.is_empty() and wrong_materials.is_empty(),"No actual city prop, actor or traffic body receives building eligibility or a nonzero dither material")
+-	check(game.reveal.entries.size()==48,"Only the 48 catalog buildings are initially registered")
++	check(game.reveal.entries.size()==72,"Only the 72 catalog buildings are initially registered")
+ 	metrics["actual_city"]={"buildings":buildings,"other_bodies":other_bodies,"wrongly_opted":wrongly_opted,"wrong_materials":wrong_materials}
+ 	var ids:=["159_palm_03","160_palm_04","164_birch_04","168_maple_04","172_oak_04"]
+ 	var negative_entries:Array=[]
+@@ -109,7 +109,7 @@
+ 	check(not game.reveal.is_structural_candidate(actor),"Actual oversized recipe actor is excluded")
+ 	actor.scale=original_scale
+ 	game.reveal.bind_city(game.city)
+-	check(game.reveal.entries.size()==48,"Registering again cannot admit oversized ordinary props or duplicate houses")
++	check(game.reveal.entries.size()==72,"Registering again cannot admit oversized ordinary props or duplicate houses")
+ 	for body in negatives:body.free()
+ func real_food_spoof()->void:
+ 	var food_city:Node3D=load("res://fidelity/food_city.gd").new();game.add_child(food_city);food_city.game=game

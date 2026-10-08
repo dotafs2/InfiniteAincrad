@@ -1,0 +1,34 @@
+{
+  "at_utc": "2026-10-01T09:22:14.418177+00:00",
+  "version": "0.12.3",
+  "build": "7",
+  "native_compile_and_link": true,
+  "signed": false,
+  "installed": false,
+  "uploaded": false,
+  "production_ready": false,
+  "production_ad_identifiers_from_verified_console": true,
+  "ad_config_sha256": "ed29a1faa3577291919a6ec859a9a95a1d917ab972649a5b289b19f8ac1774a0",
+  "native_services_receipt_sha256": "cbc516a2d8c5e9b1d9ffc6721a0dbe2e1887a22c3ad52ec76f7674bf32243dcd",
+  "native_pck_sha256": "80afeb51ca030d94e561fa233db89e02169328d1b5c3c34b34fb08979dbeecb2",
+  "native_pck_bytes": 10680744,
+  "matches_accepted_native_pck": false,
+  "reused_native_pck_checks": 0,
+  "new_native_pck_checks": 8547,
+  "unchanged_web_inputs": 804,
+  "skadnetwork_identifier_count": 50,
+  "configurator_sha256": "466814448b28e7bdb3cd32e604de8921da6acba809e39161ee7436228f106e16",
+  "vendor_privacy_manifest_sha256": {
+    "GoogleMobileAds": "69fb112582fc23fc06c635c961d262a3f7b4b5654d284787491de3000dadf9d2",
+    "UserMessagingPlatform": "45b7adb99fcd2d962a1c800fbfcc1325b57a7fa4165f416182323bb5ffe9c900"
+  },
+  "blockers": [
+    "AdMob account/app approval and normal-mode SDK callback acceptance",
+    "Native signing and physical iPhone acceptance",
+    "Final privacy disclosures and App Store release materials"
+  ],
+  "limitations": [
+    "No production ad request was made",
+    "Desktop PCK tests do not exercise native SDK callbacks"
+  ]
+}

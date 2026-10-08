@@ -1,0 +1,57 @@
+{
+  "reviewer": "expand_skin_catalog; independent of UI compositor and final assembly author",
+  "status": "PASS after correction",
+  "video_sha256": "db47f3d7f8588512514c9457a3ec7ceb0ba967f9ca11272bca08ecd549104355",
+  "assembly_source_sha256": "5dab2abccadf50c6a0e0234963d627082d43ca09ee8dc1d3e264ef487310dd83",
+  "compositor_source_sha256": "db05888f34e41d0ece91638a6f3099e10d40d6e12133da7cbc0ff9da543a88ef",
+  "ui_states": 24,
+  "chapters": 33,
+  "unique_skins": 44,
+  "current_source_hashes_verified": 446,
+  "source_hash_mismatches": [],
+  "shader_crop_checks": {
+    "sample_frames": 48,
+    "skins": 3,
+    "crop_y": [
+      55,
+      327
+    ],
+    "union_bounds": {
+      "core_shell": [
+        26,
+        119,
+        294,
+        296
+      ],
+      "tide": [
+        34,
+        123,
+        286,
+        289
+      ],
+      "cinder": [
+        56,
+        94,
+        260,
+        272
+      ]
+    },
+    "clipped_objects": []
+  },
+  "findings": [
+    {
+      "issue": "Gem claim chapter was incorrectly titled Coin gift although the actual action grants +5 gems.",
+      "resolution": "Author changed title to Gem gift and rebuilt clip, final MP4, contact sheet and manifest. Independently decoded final video at 16.5 seconds and verified caption and +5 GEMS state."
+    }
+  ],
+  "remaining_bugs": [],
+  "visual_inspection": [
+    "Final 33-chapter contact sheet",
+    "Full-resolution home and locked-skin composites",
+    "Full-resolution shader assembly still",
+    "Decoded MP4 shader frame at 61 seconds",
+    "Decoded corrected final MP4 gem-gift frame at 16.5 seconds"
+  ],
+  "disclosure_check": "Every still/motion frame goes through shared frame() with permanent OFFLINE PREVIEW \u00b7 NOT A SCREEN RECORDING footer; tested encoded samples retain it. Intro explains draw/mesh reconstruction; shader caption specifies fixed geometry, food caption specifies controlled 3.5 m hole/12 fps pose replay, outro rejects phone performance inference.",
+  "limitations": "Review confirms declared asset/UI coverage, provenance, crop bounds and assembly labeling. It is not live gameplay QA, a full video visual frame-by-frame audit, or phone GPU/FPS evidence."
+}

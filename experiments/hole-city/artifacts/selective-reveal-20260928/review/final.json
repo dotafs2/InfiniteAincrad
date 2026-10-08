@@ -1,0 +1,56 @@
+{
+  "checks": 217,
+  "evidence": {
+    "city": {
+      "incorrectly_enabled": [],
+      "nonstructural": 608,
+      "protected_categories": {
+        "ambient_actor": 48,
+        "authored_actor": 152,
+        "barrier": 4,
+        "bench": 4,
+        "bike_rack": 4,
+        "bin": 54,
+        "bollard": 4,
+        "bus_stop": 4,
+        "cone": 26,
+        "cover": 2,
+        "dumpster": 4,
+        "fence": 44,
+        "hydrant": 4,
+        "kiosk": 4,
+        "lamp": 32,
+        "mailbox": 4,
+        "person": 64,
+        "planter": 4,
+        "railing": 36,
+        "sign": 4,
+        "signal_pylon": 5,
+        "traffic_light": 4,
+        "tree": 48,
+        "vehicle": 49
+      },
+      "structural": 48
+    },
+    "food": {
+      "incorrectly_enabled": [],
+      "nonstructural": 1958,
+      "protected_categories": {
+        "food_bacon": 87,
+        "food_berry": 151,
+        "food_burger": 100,
+        "food_cake": 103,
+        "food_cookie": 303,
+        "food_donut": 571,
+        "food_egg": 89,
+        "food_pancake": 287,
+        "food_pizza": 109,
+        "food_sushi": 110,
+        "person": 48
+      },
+      "structural": 630
+    }
+  },
+  "failures": [],
+  "scope": "Independent structural-only selection/material/lifecycle fixtures; not GPU or phone validation"
+}

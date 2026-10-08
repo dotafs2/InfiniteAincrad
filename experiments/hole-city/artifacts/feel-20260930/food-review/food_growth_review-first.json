@@ -1,0 +1,1373 @@
+{
+  "checks": 1473,
+  "failures": [
+    "Engine process failed; inspect the engine log"
+  ],
+  "metrics": {
+    "inventory": {
+      "body_count": 2930,
+      "changed": 182,
+      "district_bins": {
+        "0": {
+          "2": 14,
+          "3": 8,
+          "4": 4
+        },
+        "1": {
+          "2": 14,
+          "3": 8,
+          "4": 4
+        },
+        "2": {
+          "2": 14,
+          "3": 8,
+          "4": 4
+        },
+        "3": {
+          "2": 14,
+          "3": 8,
+          "4": 4
+        },
+        "4": {
+          "2": 14,
+          "3": 8,
+          "4": 4
+        },
+        "5": {
+          "2": 14,
+          "3": 8,
+          "4": 4
+        },
+        "6": {
+          "2": 14,
+          "3": 8,
+          "4": 4
+        }
+      },
+      "opening_20m": {
+        "2": 14,
+        "3": 8,
+        "4": 4
+      }
+    },
+    "route": {
+      "distance": 127.075704353475,
+      "grade_receipts": {
+        "1": 105,
+        "2": 10,
+        "3": 9,
+        "4": 10,
+        "6": 1
+      },
+      "level": 8,
+      "levels": [
+        {
+          "at": [
+            1.0,
+            23.0
+          ],
+          "level": 1,
+          "score": 0,
+          "time": 0.0
+        },
+        {
+          "at": [
+            3.28530526161194,
+            21.915599822998
+          ],
+          "level": 2,
+          "score": 10,
+          "time": 5.18333333333332
+        },
+        {
+          "at": [
+            -5.06791925430298,
+            24.0126457214355
+          ],
+          "level": 3,
+          "score": 36,
+          "time": 10.7333333333334
+        },
+        {
+          "at": [
+            3.00001311302185,
+            18.4999904632568
+          ],
+          "level": 4,
+          "score": 70,
+          "time": 22.8333333333333
+        },
+        {
+          "at": [
+            16.347749710083,
+            26.0786933898926
+          ],
+          "level": 5,
+          "score": 103,
+          "time": 27.1166666666664
+        },
+        {
+          "at": [
+            8.14204502105713,
+            32.0651969909668
+          ],
+          "level": 6,
+          "score": 160,
+          "time": 30.7166666666662
+        },
+        {
+          "at": [
+            0.805858552455902,
+            35.9189605712891
+          ],
+          "level": 7,
+          "score": 248,
+          "time": 32.0499999999995
+        },
+        {
+          "at": [
+            -5.92318820953369,
+            39.4539337158203
+          ],
+          "level": 8,
+          "score": 359,
+          "time": 33.616666666666
+        }
+      ],
+      "platter_at": [
+        -5.92319917678833,
+        39.4539413452148
+      ],
+      "platter_receipts": 59,
+      "receipts": [
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 239796759561,
+          "jump": 0,
+          "points": 1,
+          "score": 1,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 240467848233,
+          "jump": 0,
+          "points": 1,
+          "score": 2,
+          "top": -3.5925019964173
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 240048417813,
+          "jump": 0,
+          "points": 1,
+          "score": 3,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 240132303897,
+          "jump": 0,
+          "points": 1,
+          "score": 4,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 239880645645,
+          "jump": 0,
+          "points": 1,
+          "score": 5,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 240551734317,
+          "jump": 0,
+          "points": 1,
+          "score": 6,
+          "top": -3.581952463145
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 239964531729,
+          "jump": 0,
+          "points": 1,
+          "score": 7,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 239712873477,
+          "jump": 0,
+          "points": 1,
+          "score": 8,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 239628987393,
+          "jump": 0,
+          "points": 1,
+          "score": 9,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 240383962149,
+          "jump": 1,
+          "points": 1,
+          "score": 10,
+          "top": -3.57554657787268
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 239545101309,
+          "jump": 0,
+          "points": 1,
+          "score": 11,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 240300076065,
+          "jump": 0,
+          "points": 1,
+          "score": 12,
+          "top": -3.59561500330983
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 240635620401,
+          "jump": 0,
+          "points": 1,
+          "score": 13,
+          "top": -3.6321070724001
+        },
+        {
+          "changed": true,
+          "grade": 2,
+          "id": 290799498756,
+          "jump": 0,
+          "points": 1,
+          "score": 14,
+          "top": -3.66063928604126
+        },
+        {
+          "changed": true,
+          "grade": 2,
+          "id": 319958301622,
+          "jump": 0,
+          "points": 1,
+          "score": 15,
+          "top": -3.64200928807259
+        },
+        {
+          "changed": true,
+          "grade": 2,
+          "id": 285263017201,
+          "jump": 0,
+          "points": 1,
+          "score": 16,
+          "top": -3.51209628582001
+        },
+        {
+          "changed": false,
+          "grade": 2,
+          "id": 61639493687,
+          "jump": 0,
+          "points": 12,
+          "score": 28,
+          "top": -3.59422013163567
+        },
+        {
+          "changed": false,
+          "grade": 2,
+          "id": 62595795031,
+          "jump": 1,
+          "points": 8,
+          "score": 36,
+          "top": -3.70206551649335
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 63266883721,
+          "jump": 0,
+          "points": 3,
+          "score": 39,
+          "top": -3.63324302681337
+        },
+        {
+          "changed": true,
+          "grade": 2,
+          "id": 314925136569,
+          "jump": 0,
+          "points": 1,
+          "score": 40,
+          "top": -3.59052440562035
+        },
+        {
+          "changed": true,
+          "grade": 3,
+          "id": 248336362931,
+          "jump": 0,
+          "points": 1,
+          "score": 41,
+          "top": -3.5897356146285
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 240719506485,
+          "jump": 0,
+          "points": 1,
+          "score": 42,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 240971164737,
+          "jump": 0,
+          "points": 1,
+          "score": 43,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 240803392569,
+          "jump": 0,
+          "points": 1,
+          "score": 44,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 241055050821,
+          "jump": 0,
+          "points": 1,
+          "score": 45,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 241474481241,
+          "jump": 0,
+          "points": 1,
+          "score": 46,
+          "top": -3.58174036203387
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 240887278653,
+          "jump": 0,
+          "points": 1,
+          "score": 47,
+          "top": -3.63477388769388
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 241138936905,
+          "jump": 0,
+          "points": 1,
+          "score": 48,
+          "top": -3.62965796424617
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 241558367325,
+          "jump": 0,
+          "points": 1,
+          "score": 49,
+          "top": -3.52888576659876
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 241726139493,
+          "jump": 0,
+          "points": 1,
+          "score": 50,
+          "top": -3.65596076244818
+        },
+        {
+          "changed": true,
+          "grade": 3,
+          "id": 303667624067,
+          "jump": 0,
+          "points": 1,
+          "score": 51,
+          "top": -3.51943104730335
+        },
+        {
+          "changed": true,
+          "grade": 3,
+          "id": 279458100171,
+          "jump": 0,
+          "points": 2,
+          "score": 53,
+          "top": -3.54082907472338
+        },
+        {
+          "changed": true,
+          "grade": 3,
+          "id": 323984833662,
+          "jump": 0,
+          "points": 1,
+          "score": 54,
+          "top": -3.65027566254139
+        },
+        {
+          "changed": true,
+          "grade": 3,
+          "id": 277008626512,
+          "jump": 0,
+          "points": 1,
+          "score": 55,
+          "top": -3.55897752534966
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 277780378487,
+          "jump": 0,
+          "points": 2,
+          "score": 57,
+          "top": -3.52624416351318
+        },
+        {
+          "changed": true,
+          "grade": 3,
+          "id": 283820176551,
+          "jump": 0,
+          "points": 1,
+          "score": 58,
+          "top": -3.69857032840335
+        },
+        {
+          "changed": false,
+          "grade": 3,
+          "id": 58669926271,
+          "jump": 1,
+          "points": 12,
+          "score": 70,
+          "top": -3.59422013163567
+        },
+        {
+          "changed": false,
+          "grade": 3,
+          "id": 60213430105,
+          "jump": 0,
+          "points": 8,
+          "score": 78,
+          "top": -3.66455044759008
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 60951627521,
+          "jump": 0,
+          "points": 3,
+          "score": 81,
+          "top": -3.62474592244319
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 240216189981,
+          "jump": 0,
+          "points": 1,
+          "score": 82,
+          "top": -3.55234615244096
+        },
+        {
+          "changed": true,
+          "grade": 4,
+          "id": 292309448270,
+          "jump": 0,
+          "points": 1,
+          "score": 83,
+          "top": -3.58689931558207
+        },
+        {
+          "changed": false,
+          "grade": 4,
+          "id": 121886479676,
+          "jump": 0,
+          "points": 12,
+          "score": 95,
+          "top": -3.65269092232748
+        },
+        {
+          "changed": false,
+          "grade": 4,
+          "id": 121987142977,
+          "jump": 1,
+          "points": 8,
+          "score": 103,
+          "top": -3.50060494095996
+        },
+        {
+          "changed": false,
+          "grade": 4,
+          "id": 122087806278,
+          "jump": 0,
+          "points": 8,
+          "score": 111,
+          "top": -3.64385797533305
+        },
+        {
+          "changed": false,
+          "grade": 3,
+          "id": 122188469579,
+          "jump": 0,
+          "points": 8,
+          "score": 119,
+          "top": -3.63458715659038
+        },
+        {
+          "changed": false,
+          "grade": 4,
+          "id": 136650430536,
+          "jump": 0,
+          "points": 12,
+          "score": 131,
+          "top": -3.61539804970543
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 318700010358,
+          "jump": 0,
+          "points": 1,
+          "score": 132,
+          "top": -3.50351172685623
+        },
+        {
+          "changed": false,
+          "grade": 4,
+          "id": 136734316621,
+          "jump": 0,
+          "points": 8,
+          "score": 140,
+          "top": -3.67957836273108
+        },
+        {
+          "changed": false,
+          "grade": 4,
+          "id": 136818202706,
+          "jump": 0,
+          "points": 8,
+          "score": 148,
+          "top": -3.67308278283518
+        },
+        {
+          "changed": false,
+          "grade": 4,
+          "id": 136902088791,
+          "jump": 0,
+          "points": 8,
+          "score": 156,
+          "top": -3.70114344892347
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 136985974876,
+          "jump": 0,
+          "points": 3,
+          "score": 159,
+          "top": -3.70266720940098
+        },
+        {
+          "changed": true,
+          "grade": 4,
+          "id": 249410104809,
+          "jump": 1,
+          "points": 1,
+          "score": 160,
+          "top": -3.67589972161439
+        },
+        {
+          "changed": true,
+          "grade": 2,
+          "id": 299372656556,
+          "jump": 0,
+          "points": 2,
+          "score": 162,
+          "top": -3.69867843257416
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 104404619636,
+          "jump": 0,
+          "points": 5,
+          "score": 167,
+          "top": -3.53050372004509
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 104740163976,
+          "jump": 0,
+          "points": 5,
+          "score": 172,
+          "top": -3.53050372004509
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 104488505721,
+          "jump": 0,
+          "points": 5,
+          "score": 177,
+          "top": -3.68855858099164
+        },
+        {
+          "changed": true,
+          "grade": 2,
+          "id": 278115922824,
+          "jump": 0,
+          "points": 1,
+          "score": 178,
+          "top": -3.69601368904114
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 104572391806,
+          "jump": 0,
+          "points": 5,
+          "score": 183,
+          "top": -3.56306696761818
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 104824050061,
+          "jump": 0,
+          "points": 5,
+          "score": 188,
+          "top": -3.68882072347185
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 104656277891,
+          "jump": 0,
+          "points": 5,
+          "score": 193,
+          "top": -3.59661615916789
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 104907936146,
+          "jump": 0,
+          "points": 5,
+          "score": 198,
+          "top": -3.59483485204005
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 104991822231,
+          "jump": 0,
+          "points": 5,
+          "score": 203,
+          "top": -3.53386863218818
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 105243480486,
+          "jump": 0,
+          "points": 8,
+          "score": 211,
+          "top": -3.60550568551928
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 105075708316,
+          "jump": 0,
+          "points": 8,
+          "score": 219,
+          "top": -3.62478427278325
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 105159594401,
+          "jump": 0,
+          "points": 8,
+          "score": 227,
+          "top": -3.63199192353153
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 105327366571,
+          "jump": 0,
+          "points": 8,
+          "score": 235,
+          "top": -3.69828722200231
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 105411252656,
+          "jump": 1,
+          "points": 8,
+          "score": 243,
+          "top": -3.51536525122072
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 105495138741,
+          "jump": 0,
+          "points": 5,
+          "score": 248,
+          "top": -3.63260443937787
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 303080421477,
+          "jump": 0,
+          "points": 2,
+          "score": 250,
+          "top": -3.56090135872364
+        },
+        {
+          "changed": true,
+          "grade": 2,
+          "id": 304338712741,
+          "jump": 0,
+          "points": 1,
+          "score": 251,
+          "top": -3.66063928604126
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 295178352348,
+          "jump": 0,
+          "points": 2,
+          "score": 253,
+          "top": -3.61248409748077
+        },
+        {
+          "changed": true,
+          "grade": 4,
+          "id": 291806131765,
+          "jump": 0,
+          "points": 2,
+          "score": 255,
+          "top": -3.51093152817107
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 198977791086,
+          "jump": 0,
+          "points": 2,
+          "score": 257,
+          "top": -3.55528816324284
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 199061677170,
+          "jump": 0,
+          "points": 2,
+          "score": 259,
+          "top": -3.58927311500279
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 199145563254,
+          "jump": 0,
+          "points": 2,
+          "score": 261,
+          "top": -3.60685387469316
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 199481107590,
+          "jump": 0,
+          "points": 2,
+          "score": 263,
+          "top": -3.52224373405709
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 199564993674,
+          "jump": 0,
+          "points": 2,
+          "score": 265,
+          "top": -3.58386515972119
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 198893905002,
+          "jump": 0,
+          "points": 2,
+          "score": 267,
+          "top": -3.66195676585811
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 199900538010,
+          "jump": 0,
+          "points": 2,
+          "score": 269,
+          "top": -3.64755965895645
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 199397221506,
+          "jump": 0,
+          "points": 2,
+          "score": 271,
+          "top": -3.58006494191979
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 199816651926,
+          "jump": 0,
+          "points": 2,
+          "score": 273,
+          "top": -3.54273452367029
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 198810018918,
+          "jump": 0,
+          "points": 2,
+          "score": 275,
+          "top": -3.65495460301763
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 199313335422,
+          "jump": 0,
+          "points": 2,
+          "score": 277,
+          "top": -3.57433293605732
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 200319968430,
+          "jump": 0,
+          "points": 2,
+          "score": 279,
+          "top": -3.64668965385659
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 199732765842,
+          "jump": 0,
+          "points": 2,
+          "score": 281,
+          "top": -3.60627953086155
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 199229449338,
+          "jump": 0,
+          "points": 2,
+          "score": 283,
+          "top": -3.60827301584732
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 200152196262,
+          "jump": 0,
+          "points": 2,
+          "score": 285,
+          "top": -3.5847468645587
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 200236082346,
+          "jump": 0,
+          "points": 2,
+          "score": 287,
+          "top": -3.71790164245962
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 200823284934,
+          "jump": 0,
+          "points": 2,
+          "score": 289,
+          "top": -3.59816497463111
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 200907171018,
+          "jump": 0,
+          "points": 2,
+          "score": 291,
+          "top": -3.57846978567635
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 200991057102,
+          "jump": 0,
+          "points": 2,
+          "score": 293,
+          "top": -3.58413095039899
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 201074943186,
+          "jump": 0,
+          "points": 2,
+          "score": 295,
+          "top": -3.59585047304205
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 201242715354,
+          "jump": 0,
+          "points": 2,
+          "score": 297,
+          "top": -3.58129210153496
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 201326601438,
+          "jump": 0,
+          "points": 2,
+          "score": 299,
+          "top": -3.60776755364581
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 201410487522,
+          "jump": 0,
+          "points": 2,
+          "score": 301,
+          "top": -3.58903979366932
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 201662145774,
+          "jump": 0,
+          "points": 2,
+          "score": 303,
+          "top": -3.52141505301724
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 201746031858,
+          "jump": 0,
+          "points": 2,
+          "score": 305,
+          "top": -3.57870814820924
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 200739398850,
+          "jump": 0,
+          "points": 2,
+          "score": 307,
+          "top": -3.67385514711
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 199648879758,
+          "jump": 0,
+          "points": 2,
+          "score": 309,
+          "top": -3.57728045003992
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 200068310178,
+          "jump": 0,
+          "points": 2,
+          "score": 311,
+          "top": -3.67131771808763
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 200655512766,
+          "jump": 0,
+          "points": 2,
+          "score": 313,
+          "top": -3.57072829959909
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 201158829270,
+          "jump": 0,
+          "points": 2,
+          "score": 315,
+          "top": -3.59529649473881
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 201578259690,
+          "jump": 0,
+          "points": 2,
+          "score": 317,
+          "top": -3.70669819738351
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 202081576194,
+          "jump": 0,
+          "points": 2,
+          "score": 319,
+          "top": -3.70558065593389
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 201997690110,
+          "jump": 0,
+          "points": 2,
+          "score": 321,
+          "top": -3.61103234122178
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 200571626682,
+          "jump": 0,
+          "points": 2,
+          "score": 323,
+          "top": -3.62918658576675
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 201494373606,
+          "jump": 0,
+          "points": 2,
+          "score": 325,
+          "top": -3.64049359581261
+        },
+        {
+          "changed": true,
+          "grade": 6,
+          "id": 198726132834,
+          "jump": 0,
+          "points": 10,
+          "score": 335,
+          "top": -3.68811093363375
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 199984424094,
+          "jump": 0,
+          "points": 2,
+          "score": 337,
+          "top": -3.52672644142607
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 201913804026,
+          "jump": 0,
+          "points": 2,
+          "score": 339,
+          "top": -3.65282698710554
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 200487740598,
+          "jump": 0,
+          "points": 2,
+          "score": 341,
+          "top": -3.59909491015992
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 201829917942,
+          "jump": 0,
+          "points": 2,
+          "score": 343,
+          "top": -3.64647837639909
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 202165462278,
+          "jump": 0,
+          "points": 2,
+          "score": 345,
+          "top": -3.57939653198564
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 202249348362,
+          "jump": 0,
+          "points": 2,
+          "score": 347,
+          "top": -3.53441097599151
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 202333234446,
+          "jump": 0,
+          "points": 2,
+          "score": 349,
+          "top": -3.54033675805406
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 202417120530,
+          "jump": 1,
+          "points": 2,
+          "score": 351,
+          "top": -3.59008984494825
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 202501006614,
+          "jump": 0,
+          "points": 2,
+          "score": 353,
+          "top": -3.54983173123467
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 202584892698,
+          "jump": 0,
+          "points": 2,
+          "score": 355,
+          "top": -3.578198150396
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 202752664866,
+          "jump": 0,
+          "points": 2,
+          "score": 357,
+          "top": -3.5429818207254
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 202836550950,
+          "jump": 0,
+          "points": 2,
+          "score": 359,
+          "top": -3.59504800702688
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 202668778782,
+          "jump": 0,
+          "points": 2,
+          "score": 361,
+          "top": -3.64356181872548
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 200403854514,
+          "jump": 0,
+          "points": 2,
+          "score": 363,
+          "top": -3.56009653500783
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 320377732042,
+          "jump": 0,
+          "points": 1,
+          "score": 364,
+          "top": -3.62880170345306
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 202920437034,
+          "jump": 0,
+          "points": 2,
+          "score": 366,
+          "top": -3.53987425551751
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 203004323118,
+          "jump": 0,
+          "points": 2,
+          "score": 368,
+          "top": -3.539688128027
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 203088209202,
+          "jump": 0,
+          "points": 2,
+          "score": 370,
+          "top": -3.73028253085993
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 203172095286,
+          "jump": 0,
+          "points": 2,
+          "score": 372,
+          "top": -3.70630533544008
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 203255981370,
+          "jump": 0,
+          "points": 2,
+          "score": 374,
+          "top": -3.66341900280454
+        },
+        {
+          "changed": true,
+          "grade": 2,
+          "id": 270935274013,
+          "jump": 0,
+          "points": 1,
+          "score": 375,
+          "top": -3.68175850410465
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 203339867454,
+          "jump": 0,
+          "points": 2,
+          "score": 377,
+          "top": -3.63312899159536
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 256557199179,
+          "jump": 0,
+          "points": 1,
+          "score": 378,
+          "top": -3.67290160059929
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 318364466020,
+          "jump": 0,
+          "points": 1,
+          "score": 379,
+          "top": -3.61759266257286
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 203423753538,
+          "jump": 0,
+          "points": 2,
+          "score": 381,
+          "top": -3.75214360741014
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 203507639622,
+          "jump": 0,
+          "points": 2,
+          "score": 383,
+          "top": -3.71195046388001
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 203591525706,
+          "jump": 0,
+          "points": 2,
+          "score": 385,
+          "top": -3.76728708984632
+        },
+        {
+          "changed": false,
+          "grade": 1,
+          "id": 285179131117,
+          "jump": 0,
+          "points": 2,
+          "score": 387,
+          "top": -3.61248409748077
+        }
+      ],
+      "score": 385,
+      "seconds": 34.316666666666
+    }
+  },
+  "scope": "Independent actual meshes/colliders and real viewport-directed physical play; rivals retired and rain disabled for deterministic target review. No phone FPS or human play claim."
+}

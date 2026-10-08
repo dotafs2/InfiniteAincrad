@@ -1,0 +1,515 @@
+--- before/fidelity/game.gd
++++ after/fidelity/game.gd
+@@ -37,7 +37,7 @@
+ const COIN_BOOST_GEM_COST:=10
+ const VIDEO_DIAMONDS:=3
+ const DIAMOND_VIDEO_COOLDOWN:=120.0
+-const FINISH_COIN_BONUS:=50
++const POINTS_PER_COIN:=10
+ const SCORE_TARGET:=500
+ const WorldBounds=preload("res://fidelity/world_bounds.gd")
+ const WORLD_LIMIT:=WorldBounds.PLAY_LIMIT
+@@ -931,18 +931,21 @@
+ 	notice_time=1.5
+ 	ui.refresh()
+ 
++func score_coin_reward(score:int)->int:
++	return maxi(0,score)/POINTS_PER_COIN
++
+ func finish(reason:String) -> void:
+ 	if phase!="playing":return
+ 	if reason not in ["complete","timeout","eaten"]:return
+ 	phase=reason
+ 	reveal.reset()
+-	# A played completion funds one draw. Continuation reuses the same
+-	# receipt and never pays another finish reward or score-derived coins.
++	# Pay only earned points. A continuation updates the same receipt and
++	# credits only its new score coins and any additional 1.5x bonus.
+ 	var old_total:=int(round_receipt.get("base_coins",0))
+ 	var old_boost_bonus:=int(round_receipt.get("coin_boost_bonus",0))
+-	round_score_coins=0
++	round_score_coins=score_coin_reward(player.score)
+ 	var completed:bool=reason in ["complete","timeout"] and player.score>0
+-	round_win_coins=FINISH_COIN_BONUS if completed or bool(round_receipt.get("completion_credited",false)) else 0
++	round_win_coins=0
+ 	var new_base:=maxi(old_total,round_score_coins+round_win_coins)
+ 	var boost_bonus:int=new_base/2 if bool(round_receipt.get("coin_boosted",false)) else 0
+ 	round_coins=new_base+boost_bonus
+--- before/fidelity/ui.gd
++++ after/fidelity/ui.gd
+@@ -1192,7 +1192,7 @@
+ 	text_center("%02d:%02d"%[seconds/60,seconds%60],Vector2(285,64),30,Color("e25a64") if seconds<=30 else INK,false)
+ 	box(Rect2(151,94,238,52),Color("5889d8",.96),24,Color("c6eaff"),2)
+ 	text_center("%d POINTS"%game.player.score,Vector2(270,117),23,PAPER)
+-	text_center("FINISH +%d COINS"%game.FINISH_COIN_BONUS,Vector2(270,137),14,Color("fff4aa"),false)
++	text_center("+%d COINS"%game.score_coin_reward(game.player.score),Vector2(270,137),14,Color("fff4aa"),false)
+ 	box(Rect2(20,24,116,56),Color("5889d8",.96),28,Color("c6eaff"),2)
+ 	icon("trophy",Vector2(45,51),45)
+ 	text_center(str(game.kills),Vector2(90,64),29,PAPER)
+--- before/fidelity/release_info.gd
++++ after/fidelity/release_info.gd
+@@ -34,7 +34,7 @@
+ 
+ Progress is stored locally. App removal may delete it; we do not operate a cloud-save service.
+ 
+-Three maps are playable: Sunny City, Snack Garden and Bubble Toy Town. Rival holes are controlled by the game. Additional map cards are marked Coming Soon. Ads and real-money purchases are unavailable in this version."""
++Three maps are playable: Sunny City, Snack Garden and Bubble Toy Town. Rival holes are controlled by the game. Earn one coin per ten points, rounded down, with no finish bonus. A skin draw costs 50 coins. Additional map cards are marked Coming Soon. Ads and real-money purchases are unavailable in this version."""
+ const NOTICE_FILES:=["LICENSE.txt","MBMAYER_LICENSE.txt","FREDOKA_OFL.txt","MUSIC_CREDITS.txt","GODOT_LICENSES.txt"]
+ var body:RichTextLabel
+ var tabs:Array[Button]=[]
+@@ -55,7 +55,7 @@
+ We check Google's consent status before requesting ads. Where required, Google's privacy form is presented. When Google requires a privacy-choice entry, it is available below in this Privacy page. Optional rewarded videos can earn diamonds, grant one 1.5x round coin boost or grant one 30-second extension in the same run. The coin boost and extension are independent and available at most once per run. Coin boosts and extensions are applied after the ad confirms your reward and you close the video. Closing it without earning a reward gives no bonus. The ad provider determines video length.
+ 
+ Apple purchases on iOS
+-Apple handles optional diamond purchases. Diamonds can be exchanged for coins, spent on one 1.5x round coin boost for one diamond or spent on one 30-second round extension for five diamonds. The boost and extension are independent. Fractional boosted coins are rounded down. The app receives Apple-verified product and transaction information to deliver the purchased currency and prevent duplicate grants. Unfinished verified purchases of earlier coin packs remain valid and credit coins. We do not receive payment-card details, your Apple account credentials or Apple's billing address. Diamond and legacy coin packs are consumable items. Completed purchases and spent currency are not a cloud backup and cannot be restored by us after local data is lost. Contact Apple about billing or refunds, and contact us about missing currency.
++Apple handles optional diamond purchases. Diamonds can be exchanged for coins, spent on one 1.5x round coin boost for ten diamonds or spent on one 30-second round extension for ten diamonds. The boost and extension are independent. Fractional boosted coins are rounded down. The app receives Apple-verified product and transaction information to deliver the purchased currency and prevent duplicate grants. Unfinished verified purchases of earlier coin packs remain valid and credit coins. We do not receive payment-card details, your Apple account credentials or Apple's billing address. Diamond and legacy coin packs are consumable items. Completed purchases and spent currency are not a cloud backup and cannot be restored by us after local data is lost. Contact Apple about billing or refunds, and contact us about missing currency.
+ 
+ Optional reports and support
+ Testing reports are created locally only in testing mode and are not automatically uploaded. If you email us, we receive your email address, message and any attachments you choose to send. We use them for support and retain them only as needed. You may request deletion of support correspondence.
+@@ -129,7 +129,7 @@
+ 	for tab in tabs:tab.disabled=tab.text==page
+ 	if page=="Privacy":body.text=IOS_PRIVACY_TEXT if Engine.has_singleton("GoogleMobileAds") else PRIVACY_TEXT
+ 	elif page=="Support":
+-		body.text=SUPPORT_TEXT.replace("Ads and real-money purchases are unavailable in this version.","iOS supports optional rewarded videos and Apple diamond purchases when the services are available. One 1.5x coin boost costs one diamond or a completed rewarded video. One 30-second extension in the same run costs five diamonds or a completed rewarded video. These two choices are independent and each can be used once per run. Fractional boosted coins are rounded down. Diamonds can also convert to coins. Music, Sound, Haptics, Privacy and Support are available in Settings. Earlier verified coin purchases remain valid. Contact Apple about billing and refunds; email us about missing currency.") if Engine.has_singleton("SinkCityCommerce") else SUPPORT_TEXT
++		body.text=SUPPORT_TEXT.replace("Ads and real-money purchases are unavailable in this version.","iOS supports optional rewarded videos and Apple diamond purchases when the services are available. One 1.5x coin boost costs ten diamonds or a completed rewarded video. One 30-second extension in the same run costs ten diamonds or a completed rewarded video. These two choices are independent and each can be used once per run. Fractional boosted coins are rounded down. Diamonds can also convert to coins. Music, Sound, Haptics, Privacy and Support are available in Settings. Earlier verified coin purchases remain valid. Contact Apple about billing and refunds; email us about missing currency.") if Engine.has_singleton("SinkCityCommerce") else SUPPORT_TEXT
+ 	else:
+ 		var text:="Credits and licenses\n\nOriginal game additions: InfiniteAincrad contributors.\nDeveloper: Chenxi\nMusic: Buy Something! / Shop Theme by Cleyton Kauffman (CC0).\nFont: Fredoka (SIL OFL).\nEngine: Godot (MIT).\nTemplate: mbMayer (MIT).\n\n"
+ 		for filename in NOTICE_FILES:
+--- before/tests/retention_acceptance.gd
++++ after/tests/retention_acceptance.gd
+@@ -70,7 +70,7 @@
+ 		var score:int=game.player.score
+ 		game.remaining=.01;game._physics_process(.02)
+ 		check(game.phase=="complete" and game.remaining==0.0,map_id+": timer alone settles the run")
+-		check(game.round_coins==50 and game.round_score_coins==0 and game.coins==wallet+50,map_id+": completed round earns exactly one draw independent of score")
++		check(game.round_coins==score/10 and game.round_score_coins==score/10 and game.coins==wallet+score/10,map_id+": completed round pays one coin per ten earned points")
+ 		check(game.round_receipt.base_coins==game.round_coins and not game.round_receipt.doubled,map_id+": original round reward is immutable receipt basis")
+ 		wallet=game.coins;game.finish("complete");game._physics_process(1)
+ 		check(game.coins==wallet,map_id+": repeat finish never credits twice")
+@@ -124,7 +124,7 @@
+ func monetization_tests()->void:
+ 	game.start_level();game.begin_play();quiet_world();game.player.score=1234;game.finish("complete")
+ 	var base_coins:int=game.round_coins;var wallet:int=game.coins
+-	check(base_coins==50 and not game.request_round_double().ok and game.coins==wallet,"No real ad SDK means no simulated video or reward")
++	check(base_coins==123 and not game.request_round_double().ok and game.coins==wallet,"No real ad SDK means no simulated video or reward")
+ 	check(not game.request_coin_purchase(SMALL).ok and game.coins==wallet,"No store SDK means no simulated purchase or balance grant")
+ 	game.ads.free();game.ads=Ads.new();game.add_child(game.ads)
+ 	var video:=Video.new();check(game.ads.bind_test_native(video),"Test injects versioned video provider explicitly")
+--- before/tests/coin_skins_acceptance.gd
++++ after/tests/coin_skins_acceptance.gd
+@@ -74,27 +74,27 @@
+ 	check(game.phase=="intro" and game.player.skin_id==chosen,"Home PLAY equips the purchased model in the actual round")
+ 	game.begin_play();game.player.score=125
+ 	game.finish("timeout")
+-	check(game.round_coins==50 and game.round_score_coins==0 and game.round_win_coins==50 and game.coins==500,"Timed city settlement awards exactly one50-coin draw")
++	check(game.round_coins==12 and game.round_score_coins==12 and game.round_win_coins==0 and game.coins==462,"125 points award 12 coins")
+ 	game.finish("timeout")
+-	check(game.coins==500,"Repeated finish does not pay twice")
++	check(game.coins==462,"Repeated finish does not pay twice")
+ 	game.back_home();game.selected_map="food";game.start_level();game.begin_play()
+ 	game.player.score=500;game.finish("complete")
+-	check(game.round_coins==50 and game.round_score_coins==0 and game.round_win_coins==50 and game.coins==550,"Food completion pays exactly one50-coin draw")
++	check(game.round_coins==50 and game.round_score_coins==50 and game.round_win_coins==0 and game.coins==512,"Food completion pays exactly one50-coin draw")
+ 	var after_round:=restored(game.test_progress_path)
+-	check(after_round.coins==550 and after_round.selected_skin_id==chosen,"Round earnings and purchased equipment survive a cold restore")
++	check(after_round.coins==512 and after_round.selected_skin_id==chosen,"Round earnings and purchased equipment survive a cold restore")
+ 	after_round.free()
+ 	game.start_level();game.begin_play();game.player.score=0;game.finish("eaten")
+-	check(game.round_coins==0 and game.coins==550,"Empty defeats do not mint coins")
++	check(game.round_coins==0 and game.coins==512,"Empty defeats do not mint coins")
+ 	game.start_level();game.begin_play();game.player.score=100;game.back_home()
+-	check(game.coins==550,"Leaving a round does not award a completion")
+-	check(not game.unlock_random_skin("unknown").ok and game.coins==550,"Unknown categories cannot spend coins")
++	check(game.coins==512,"Leaving a round does not award a completion")
++	check(not game.unlock_random_skin("unknown").ok and game.coins==512,"Unknown categories cannot spend coins")
+ 	# Recheck shortage after a real settlement and a subsequent successful purchase.
+ 	game.coins=0
+ 	for group in ["foundation","resonance"]:
+ 		deficit=game.unlock_random_skin(group)
+ 		check(deficit.get("missing_coins")==game.skin_unlock_price(group) and deficit.message=="Need %d more coins"%game.skin_unlock_price(group),"Independent group price yields precise shortage: "+group)
+-	game.start_level();game.begin_play();game.player.score=95;game.finish("timeout");game.back_home()
+-	check(game.coins==50 and game.round_score_coins==0 and game.round_win_coins==50,"Small played completion funds a draw without a score coin or fixture top-up")
++	game.start_level();game.begin_play();game.player.score=500;game.finish("timeout");game.back_home()
++	check(game.coins==50 and game.round_score_coins==50 and game.round_win_coins==0,"500 earned points fund exactly one draw")
+ 	check(game.skin_unlock_price("foundation")==50 and game.coins==game.skin_unlock_price("foundation"),"Actual normal completion can afford the next draw after prior unlocks")
+ 	game.last_unlock_msec=-1000
+ 	check(game.unlock_random_skin("foundation").ok and game.coins==0,"Exact balance can buy the next skin")
+@@ -105,12 +105,12 @@
+ 	check(game.ui.toast=="Need %d more coins"%game.skin_unlock_price("collection"),"Actual UI reflects the updated post-purchase shortage")
+ 	check(game.ui.font.get_string_size(game.ui.toast,HORIZONTAL_ALIGNMENT_LEFT,-1,18).x<=378,"Exact shortage toast fits portrait")
+ 	# Independent payout boundaries retain real settlement and durable balances;
+-	# every positive score earns exactly one draw, including huge scores.
+-	for reward_case in [[0,0,0],[99,0,50],[100,0,50],[3099,0,50],[9100,0,50]]:
++	# whole coins follow the score with no floor, bonus or upper cap.
++	for reward_case in [[0,0,0],[1,0,0],[9,0,0],[10,1,1],[19,1,1],[99,9,9],[100,10,10],[963,96,96],[999,99,99],[1000,100,100],[3099,309,309],[9100,910,910]]:
+ 		game.start_level();game.begin_play();game.player.score=int(reward_case[0])
+ 		var before_reward:int=game.coins
+ 		game.finish("timeout")
+-		check(game.round_score_coins==int(reward_case[1]) and game.round_win_coins==(50 if int(reward_case[0])>0 else 0) and game.round_coins==int(reward_case[2]),"Actual settlement keeps one draw independent of score at %d points"%int(reward_case[0]))
++		check(game.round_score_coins==int(reward_case[1]) and game.round_win_coins==0 and game.round_coins==int(reward_case[2]),"Actual settlement scales with %d points"%int(reward_case[0]))
+ 		check(game.coins==before_reward+int(reward_case[2]),"Actual wallet receives exactly the earned reward at %d points"%int(reward_case[0]))
+ 	game.back_home()
+ 
+--- before/tests/food_review_skill_economy.gd
++++ after/tests/food_review_skill_economy.gd
+@@ -2,6 +2,7 @@
+ ## Independent review of equipped-skill onboarding and live coin shortfalls.
+ ## Uses real viewport touch events and an owned temporary save; no player save.
+ const Game=preload("res://fidelity/game.gd")
++const Rarity=preload("res://fidelity/skin_rarity.gd")
+ var game:Node3D
+ var checks:=0
+ var failures:Array[String]=[]
+@@ -119,8 +120,8 @@
+ 	game._physics_process(.01)
+ 	check(game.player.skin_cooldown==12,"Actual automatic path starts the documented repeated cooldown")
+ 	# Reuse the real settlement and unlock paths, with explicit fixture scores.
+-	game.phase="title";game.selected_skin_id="core_shell";game.player.skin_id="core_shell"
+-	game.owned_skin_ids.assign(["core_shell"]);game.coins=49;game.stage=1
++	game.phase="title";game.selected_skin_id=Rarity.NEW_PLAYER_SKIN;game.player.skin_id=Rarity.NEW_PLAYER_SKIN
++	game.owned_skin_ids.assign([Rarity.NEW_PLAYER_SKIN]);game.coins=49;game.stage=1
+ 	check(game.save_player_progress(),"Owned fixture baseline saves successfully")
+ 	var before_file:=FileAccess.get_file_as_string(save_path)
+ 	var denied:Dictionary=game.unlock_random_skin("foundation")
+@@ -129,27 +130,28 @@
+ 	game.ui.open_holes();await frames()
+ 	await tap("unlock-random",0)
+ 	check(game.ui.toast.contains("1") and game.ui.toast.contains("coins"),"Real collection touch presents current shortfall")
+-	check(button("unlock-random").disabled,"A one-coin shortage disables the actual draw action")
++	check(not button("unlock-random").disabled and game.coins==49 and game.owned_skin_ids.size()==1,"Shortfall action remains reachable for feedback without charging or granting a skin")
+ 	check(button("unlock-random").get_global_rect().size.x<=540,"The draw action fits the portrait collection")
+ 	check(game.ui.font.get_string_size(game.ui.toast,HORIZONTAL_ALIGNMENT_LEFT,-1,18).x<=400,"The actual exact-shortfall notice fits the portrait card")
+-	game.phase="playing";game.player.score=397;game.finish("eaten")
++	game.phase="playing";game.player.score=0;game.finish("eaten")
+ 	check(game.coins==49 and game.round_score_coins==0 and game.round_win_coins==0,"Real losing settlement cannot mint coins")
+-	game.start_level();game.begin_play();game.player.score=397;game.finish("timeout")
+-	check(game.coins==99 and game.round_coins==50,"A played normal completion funds exactly one additional draw")
++	game.start_level();game.begin_play();game.player.score=100;game.finish("timeout")
++	check(game.coins==59 and game.round_coins==10,"Earned ten coins bridge the existing one-coin draw deficit")
+ 	game.phase="title";game.last_unlock_msec=-1000
+ 	var bought:Dictionary=game.unlock_random_skin("foundation")
+-	check(bought.ok and game.coins==49 and game.owned_skin_ids.size()==2,"Earned coins enable a real initial random unlock")
++	check(bought.ok and game.coins==9 and game.owned_skin_ids.size()==2,"Earned coins enable a real initial random unlock")
+ 	denied=game.unlock_random_skin("foundation")
+-	check(not denied.ok and denied.price==50 and denied.missing_coins==1 and denied.message=="Need 1 more coins","Shortfall reflects the new wallet while retaining the fixed price")
++	check(not denied.ok and denied.price==50 and denied.missing_coins==41 and denied.message=="Need 41 more coins","Shortfall reflects the new wallet while retaining the fixed price")
+ 	game.start_level();game.begin_play();game.player.score=500;game.finish("complete")
+-	check(game.coins==99 and game.round_score_coins==0 and game.round_win_coins==50,"Real victory contributes exactly one50-coin draw")
++	check(game.coins==59 and game.round_score_coins==50 and game.round_win_coins==0,"Real victory contributes exactly one50-coin draw")
+ 	game.phase="title";game.last_unlock_msec=-1000
+ 	bought=game.unlock_random_skin("foundation")
+-	check(bought.ok and game.coins==49 and game.owned_skin_ids.size()==3,"Second earned unlock consumes the same50-coin price")
++	check(bought.ok and game.coins==9 and game.owned_skin_ids.size()==3,"Second earned unlock consumes the same50-coin price")
+ 	denied=game.unlock_random_skin("foundation")
+-	check(not denied.ok and denied.price==50 and denied.missing_coins==1,"Deficit refreshes again after victory and second unlock")
++	check(not denied.ok and denied.price==50 and denied.missing_coins==41,"Deficit refreshes again after victory and second unlock")
+ 	var cold:=Game.new();cold.test_progress_path=save_path
+-	check(cold.load_player_progress() and cold.coins==49 and cold.stage==3 and cold.owned_skin_ids.size()==3 and cold.selected_skin_id==game.selected_skin_id,"Cold restore retains real reward/unlock results")
++	var loaded_ok:=cold.load_player_progress()
++	check(loaded_ok and cold.coins==9 and cold.stage==3 and cold.owned_skin_ids.size()==3 and cold.selected_skin_id==game.selected_skin_id,"Cold restore retains real reward/unlock results")
+ 	cold.free()
+ 	game.phase="title";game.coins=200;game.last_unlock_msec=-1000
+ 	var owned_before:Array=game.owned_skin_ids.duplicate();var selected_before:String=game.selected_skin_id
+--- before/tests/economy_continuation_acceptance.gd
++++ after/tests/economy_continuation_acceptance.gd
+@@ -59,15 +59,15 @@
+ func completion_funds_actual_draw()->void:
+ 	game.coins=0
+ 	var owned:int=game.owned_skin_ids.size()
+-	open_round("city",1)
+-	check(game.coins==0 and game.round_receipt.is_empty(),"Positive mid-round score cannot pay the50-coin finish reward early")
++	open_round("city",500)
++	check(game.coins==0 and game.round_receipt.is_empty(),"Mid-round score is a preview and does not pay coins early")
+ 	end_round()
+-	check(game.round_coins==50 and game.coins==50 and game.round_score_coins==0 and game.round_win_coins==50,"Smallest played completed round funds exactly one50-coin draw")
++	check(game.round_coins==50 and game.coins==50 and game.round_score_coins==50 and game.round_win_coins==0,"500 points earn exactly one 50-coin draw")
+ 	var loaded:=restored(game.test_progress_path)
+ 	check(loaded.coins==50,"Played completion balance survives restart before any draw")
+ 	loaded.free()
+ 	game.gems=10
+-	check(game.request_round_coin_boost_gems().ok and game.coins==75 and game.round_coins==75,"Minimum earned completion can be boosted to75coins exactly once")
++	check(game.request_round_coin_boost_gems().ok and game.coins==75 and game.round_coins==75,"A 50-coin score reward can be boosted to 75 exactly once")
+ 	game.back_home();game.last_unlock_msec=-1000
+ 	var receipt:Dictionary=game.unlock_random_skin("collection")
+ 	check(receipt.ok and receipt.price==50 and game.coins==25 and game.owned_skin_ids.size()==owned+1,"Actual earned wallet buys one new skin at the fixed50-coin price")
+@@ -78,7 +78,7 @@
+ 	open_round("city",800)
+ 	var wallet:int=game.coins
+ 	game.finish("eaten")
+-	check(game.round_coins==0 and game.round_win_coins==0 and game.coins==wallet,"A defeat cannot mint a finish or score-derived reward")
++	check(game.round_coins==80 and game.round_win_coins==0 and game.coins==wallet+80,"A terminal defeat retains its earned points without any finish bonus")
+ 	game.back_home()
+ 
+ func timing_and_debit()->void:
+@@ -92,7 +92,7 @@
+ 		check(game.remaining==duration and game.round_duration()==duration,map_id+": map duration is exact")
+ 		var wallet:int=game.coins;var stages:int=game.stage;var completed:int=game.completed_runs
+ 		end_round()
+-		check(game.round_score_coins==0 and game.round_win_coins==50 and game.coins==wallet+50,map_id+": played completion pays exactly one50-coin draw")
++		check(game.round_score_coins==80 and game.round_win_coins==0 and game.coins==wallet+80,map_id+": 800 earned points pay 80 coins")
+ 		var original_world:Node3D=game.world;var receipt_id:String=game.round_receipt.id
+ 		var serial:int=game.round_serial;var before_gems:int=game.gems
+ 		game.eaten=123;game.kills=4
+@@ -100,21 +100,21 @@
+ 		check(game.world==original_world and game.phase=="playing" and game.remaining==30 and game.player.score==800 and game.eaten==123 and game.kills==4,map_id+": continuation preserves world, score, consumption and kills")
+ 		check(game.gems==before_gems-10 and game.extension_used and game.round_receipt.id==receipt_id,map_id+": ten diamonds and original receipt commit together")
+ 		game.player.score=1700;end_round()
+-		check(game.round_coins==50 and game.coins==wallet+50 and game.round_serial==serial,map_id+": extra score cannot repeat or enlarge the fixed finish reward")
++		check(game.round_coins==170 and game.coins==wallet+170 and game.round_serial==serial,map_id+": extra score adds only its new 90 coins to the original receipt")
+ 		check(game.stage==stages+1 and game.completed_runs==completed+1,map_id+": continuation cannot advance completion or stage twice")
+ 		check(not game.can_extend_round() and not game.request_round_extension_gems().ok and not game.request_round_extension_video().ok,map_id+": second continuation is rejected")
+ 		wallet=game.coins;game.finish("complete")
+ 		check(game.coins==wallet,map_id+": repeated settlement is inert")
+ 		game.gems=10
+ 	open_round("city",90000);end_round()
+-	check(game.round_coins==50 and game.round_score_coins==0,"Even a high score earns exactly one50-coin draw")
++	check(game.round_coins==9000 and game.round_score_coins==9000,"Large earned scores retain the same uncapped conversion")
+ 	open_round("city",0)
+ 	var stages:int=game.stage;var completed:int=game.completed_runs
+ 	end_round()
+ 	check(game.round_coins==0 and game.stage==stages,"An empty run earns no free coins or stage")
+ 	check(game.request_round_extension_gems().ok,"An empty timed world can still use its one continuation")
+ 	game.player.score=250;end_round()
+-	check(game.round_coins==50 and game.stage==stages+1 and game.completed_runs==completed+1,"First real score in continuation receives exactly one fixed completion reward")
++	check(game.round_coins==25 and game.stage==stages+1 and game.completed_runs==completed+1,"First real score in continuation receives only its 25 earned coins")
+ 	open_round();end_round()
+ 	game.gems=10
+ 	var saved_path:String=game.test_progress_path;var wallet:int=game.coins;var receipt:Dictionary=game.round_receipt.duplicate(true)
+@@ -128,31 +128,31 @@
+ 	var wallet:int=game.coins;var before_gems:int=game.gems
+ 	var stage:int=game.stage;var runs:int=game.completed_runs;var serial:int=game.round_serial
+ 	var world:Node3D=game.world;var receipt_id:String=game.round_receipt.id
+-	check(game.round_coins==50 and game.round_coin_boost_bonus()==25 and game.can_boost_round_coins(),"Base50 exposes its exact25-coin1.5x offer")
+-	check(game.request_round_coin_boost_gems().ok and game.coins==wallet+25 and game.gems==before_gems-10,"Ten diamonds commit exactly25bonus coins at the exchange conversion rate")
+-	check(game.round_receipt.base_coins==50 and game.round_receipt.coin_boost_bonus==25 and game.round_coins==75 and game.round_receipt.final_coins==75,"Multiplier keeps its original base and displays exactly75coins")
++	check(game.round_coins==80 and game.round_coin_boost_bonus()==40 and game.can_boost_round_coins(),"Base 80 exposes its exact 40-coin 1.5x offer")
++	check(game.request_round_coin_boost_gems().ok and game.coins==wallet+40 and game.gems==before_gems-10,"Ten diamonds commit exactly 40 bonus coins")
++	check(game.round_receipt.base_coins==80 and game.round_receipt.coin_boost_bonus==40 and game.round_coins==120 and game.round_receipt.final_coins==120,"Multiplier keeps its score-derived base and displays 120 coins")
+ 	check(not game.can_boost_round_coins() and not game.request_round_coin_boost_gems().ok and not game.request_round_coin_boost_video().ok and not game.request_round_double().ok,"A boosted receipt cannot buy, watch or legacy-double its multiplier again")
+ 	check(game.can_extend_round() and game.request_round_extension_gems().ok,"One multiplier and one continuation remain independent choices")
+-	check(game.world==world and game.round_receipt.id==receipt_id and game.coins==wallet+25,"Continuation cannot reset a boosted world or replay its existing payment")
++	check(game.world==world and game.round_receipt.id==receipt_id and game.coins==wallet+40,"Continuation cannot reset a boosted world or replay its existing payment")
+ 	game.player.score=1700;end_round()
+-	check(game.round_receipt.base_coins==50 and game.round_receipt.coin_boost_bonus==25 and game.round_coins==75 and game.coins==wallet+25,"Extended score cannot enlarge either the fixed base or its settled multiplier")
+-	check(game.stage==stage and game.completed_runs==runs and game.round_serial==serial and game.round_win_coins==50,"Boosted continuation never repeats completion, stage, receipt or finish bonus")
++	check(game.round_receipt.base_coins==170 and game.round_receipt.coin_boost_bonus==85 and game.round_coins==255 and game.coins==wallet+175,"Extended points add only the new base and multiplier difference")
++	check(game.stage==stage and game.completed_runs==runs and game.round_serial==serial and game.round_win_coins==0,"Boosted continuation never repeats completion, stage, receipt or finish bonus")
+ 	wallet=game.coins;game.finish("complete")
+ 	check(game.coins==wallet and not game.can_boost_round_coins() and not game.can_extend_round(),"Repeated final settlement cannot repeat either once-per-round choice")
+ 	open_round("food",800);end_round();game.gems=20
+ 	wallet=game.coins
+ 	check(game.request_round_extension_gems().ok,"Continuation-before-multiplier order also starts the same run")
+ 	game.player.score=1700;end_round()
+-	check(game.request_round_coin_boost_gems().ok and game.round_coins==75 and game.coins==wallet+25 and game.gems==0,"A multiplier after continuation adds25coins once; each optional choice spends10diamonds")
++	check(game.request_round_coin_boost_gems().ok and game.round_coins==255 and game.coins==wallet+175 and game.gems==0,"Either choice order produces the same 255 coins and spends 20 diamonds")
+ 	open_round("city",90000);end_round();game.gems=10
+ 	wallet=game.coins
+-	check(game.request_round_coin_boost_gems().ok and game.round_receipt.base_coins==50 and game.round_coins==75 and game.coins==wallet+25,"High scores still settle50coins or75with the one multiplier")
++	check(game.request_round_coin_boost_gems().ok and game.round_receipt.base_coins==9000 and game.round_coins==13500 and game.coins==wallet+4500,"A high-score multiplier keeps the same 1.5x ratio")
+ 	open_round("city",0);end_round();wallet=game.coins
+ 	check(not game.can_boost_round_coins() and not game.request_round_coin_boost_gems().ok and game.coins==wallet,"An empty run cannot manufacture a multiplier or spend diamonds")
+ 	open_round("city",800);end_round();game.gems=10
+ 	var saved_path:String=game.test_progress_path;var before:Dictionary=game.round_receipt.duplicate(true)
+ 	wallet=game.coins;game.test_progress_path=base+"-missing/coin-boost.cfg"
+-	check(not game.request_round_coin_boost_gems().ok and game.coins==wallet and game.gems==10 and game.round_receipt==before and game.round_coins==50,"Failed paid multiplier save rolls back both currencies, receipt and displayed total")
++	check(not game.request_round_coin_boost_gems().ok and game.coins==wallet and game.gems==10 and game.round_receipt==before and game.round_coins==80,"Failed paid multiplier save rolls back both currencies, receipt and displayed total")
+ 	game.test_progress_path=saved_path
+ 	check(game.request_round_coin_boost_video().ok and game.reward_video_pending(),"Multiplier video binds the actual accepted round before SDK dispatch")
+ 	var request:String=video.requests[-1]
+@@ -160,9 +160,9 @@
+ 	video.rewarded_earned.emit(request)
+ 	check(game.coins==wallet and not game.round_receipt.get("coin_boosted",false) and game.reward_video_pending(),"Earned multiplier waits for actual dismissal before granting coins")
+ 	video.rewarded_closed.emit(request)
+-	check(game.coins==wallet+25 and game.round_coins==75 and game.gems==10 and not game.reward_video_pending(),"Dismissed genuinely earned multiplier grants25coins without spending diamonds")
++	check(game.coins==wallet+40 and game.round_coins==120 and game.gems==10 and not game.reward_video_pending(),"Dismissed genuinely earned multiplier grants 40 coins without spending diamonds")
+ 	video.rewarded_earned.emit(request);video.rewarded_closed.emit(request);game.credit_round_double(request)
+-	check(game.coins==wallet+25,"Duplicate multiplier earned/closed callbacks cannot pay again")
++	check(game.coins==wallet+40,"Duplicate multiplier earned/closed callbacks cannot pay again")
+ 	open_round("city",800);end_round();game.gems=10
+ 	wallet=game.coins;check(game.request_round_coin_boost_video().ok,"Close-before-earned multiplier opens an actual request")
+ 	request=video.requests[-1];video.rewarded_closed.emit(request)
+@@ -170,9 +170,9 @@
+ 	check(not game.request_round_double().ok,"A pending late1.5x callback cannot acquire a conflicting legacy2x offer")
+ 	check(game.request_round_extension_gems().ok,"Late multiplier callback may coexist with a legitimate already-started continuation")
+ 	game.player.score=1700;video.rewarded_earned.emit(request)
+-	check(game.phase=="playing" and game.coins==wallet+25 and game.round_coins==75,"Late earned callback boosts only the settled base while the same world continues")
++	check(game.phase=="playing" and game.coins==wallet+40 and game.round_coins==120,"Late earned callback boosts only the settled base while the same world continues")
+ 	end_round()
+-	check(game.round_coins==75 and game.coins==wallet+25,"Later settlement preserves the already paid multiplier without additional coins")
++	check(game.round_coins==255 and game.coins==wallet+175,"Later settlement tops up only the new score and earned multiplier")
+ 	open_round("city",800);end_round();check(game.request_round_coin_boost_video().ok,"Historical multiplier opens a genuinely accepted binding")
+ 	request=video.requests[-1];receipt_id=game.round_receipt.id;video.rewarded_closed.emit(request)
+ 	for index in 40:
+@@ -182,7 +182,7 @@
+ 	var current_receipt:String=game.round_receipt.id;world=game.world
+ 	check(game.reward_receipts.has(receipt_id) and game.rewarded_requests.has(request),"History trimming retains valid close-before-earned multiplier binding")
+ 	video.rewarded_earned.emit(request)
+-	check(game.coins==wallet+25 and game.round_receipt.id==current_receipt and game.round_coins==50 and game.world==world and game.phase=="complete","Late old multiplier pays its old base only, without mutating or reviving the current world")
++	check(game.coins==wallet+40 and game.round_receipt.id==current_receipt and game.round_coins==170 and game.world==world and game.phase=="complete","Late old multiplier pays its old base only, without mutating or reviving the current world")
+ 	game.back_home()
+ 
+ func coin_boost_restart_failure()->void:
+--- before/tests/review_ui_collection.gd
++++ after/tests/review_ui_collection.gd
+@@ -172,7 +172,7 @@
+ 	check(game.phase=="intro" and game.player.skin_id=="music_stage" and game.ui.skin_cards.is_empty(),"PLAY equips the chosen new form and releases collection resources")
+ 	game.begin_play();game.player.score=Game.SCORE_TARGET
+ 	game.finish("complete")
+-	check(game.stage==2 and game.round_score_coins==0 and game.round_win_coins==50,"Completion advances stage with one50-coin draw")
++	check(game.stage==2 and game.round_score_coins==50 and game.round_win_coins==0,"Completion advances stage with one50-coin draw")
+ 	var wallet:int=game.coins;game.finish("complete")
+ 	check(game.stage==2 and game.coins==wallet,"Repeated settlement cannot duplicate level or coins")
+ 	cold=Game.new();cold.test_progress_path=save_path
+--- before/tests/city_review_progression.gd
++++ after/tests/city_review_progression.gd
+@@ -45,7 +45,7 @@
+ 	check(game.phase=="playing" and game.stage==7,"Unknown settlement reason is rejected")
+ 	game.finish("timeout")
+ 	var coins:int=game.coins;var eaten:int=game.eaten
+-	check(game.round_coins==50 and game.round_score_coins==0 and game.round_win_coins==50 and game.stage==8,"Timed completion pays exactly one draw and advances stage once")
++	check(game.round_coins==4 and game.round_score_coins==4 and game.round_win_coins==0 and game.stage==8,"49 points pay four whole coins and advance stage once")
+ 	check(not food.freeze,"Actual claimed cone remains physically released")
+ 	for tick in 180:
+ 		await physics_frame
+--- before/tests/progression_acceptance.gd
++++ after/tests/progression_acceptance.gd
+@@ -18,7 +18,7 @@
+ 	var start_y:float=moving.position.y
+ 	game.finish("complete")
+ 	check(game.stage==5 and game.round_start_stage==4,"Completion advances the visible persistent stage once")
+-	check(game.round_coins==50 and game.round_score_coins==0 and game.round_win_coins==50,"Normal completion funds exactly one draw without score-derived inflation")
++	check(game.round_coins==50 and game.round_score_coins==50 and game.round_win_coins==0,"500 points earn 50 coins with no completion bonus")
+ 	check(not moving.freeze,"Result does not freeze a body in the air")
+ 	for i in 30:await physics_frame
+ 	check(is_instance_valid(moving) and moving.position.y<start_y-1,"Released object continues descending after settlement")
+@@ -33,7 +33,7 @@
+ 	for result in ["timeout","eaten"]:
+ 		game.start_level();game.begin_play();game.player.score=40;game.finish(result)
+ 		check(game.stage==6,"Timed completion advances stage once; legacy eaten settlement does not: "+result)
+-		check(game.round_score_coins==0 and game.round_win_coins==(50 if result=="timeout" else 0),"Timed completion receives finish bonus; eaten result receives no unearned finish reward")
++		check(game.round_score_coins==4 and game.round_win_coins==0,"Both terminal outcomes pay only earned points")
+ 	game.start_level();game.begin_play();game.back_home()
+ 	check(game.stage==6,"Abandoning a round does not advance rank")
+ 	game.start_level();game.begin_play();game.player.score=0;game.finish("complete")
+--- before/tests/review_food_goals.gd
++++ after/tests/review_food_goals.gd
+@@ -103,7 +103,7 @@
+ 	tick()
+ 	check(game.phase=="playing" and game.stage==1 and game.round_coins==0,"All score and optional food objectives leave the timed run active")
+ 	game.remaining=.005;tick()
+-	check(game.phase=="complete" and game.stage==2 and game.round_coins==50 and game.round_score_coins==0 and game.round_win_coins==50,"Timer expiry settles once through the real game tick")
++	check(game.phase=="complete" and game.stage==2 and game.round_coins==50 and game.round_score_coins==50 and game.round_win_coins==0,"Timer expiry settles once through the real game tick")
+ 	before_score=game.player.score;var final_progress:Dictionary=city.collection_progress.duplicate(true)
+ 	receipt(ordinary[11].tiers[0],game.player)
+ 	check(game.player.score==before_score and city.collection_progress==final_progress,"Late result-screen physical receipts cannot alter settled score or city goals")
+--- before/tests/toy_map_integration_acceptance.gd
++++ after/tests/toy_map_integration_acceptance.gd
+@@ -162,7 +162,7 @@
+ 	expire(89.75)
+ 	check(game.phase=="playing" and is_equal_approx(game.remaining,.25),"Controlled timer fixture retains the final quarter second of the 90-second round")
+ 	expire(.26)
+-	check(game.phase=="complete" and game.remaining==0 and game.round_coins==50 and game.coins==wallet+50,"Actual timeout settles exactly one50-coin draw")
++	check(game.phase=="complete" and game.remaining==0 and game.round_coins==80 and game.coins==wallet+80,"800-point timeout settles 80 coins")
+ 	check(game.round_receipt.map=="toys" and game.best_scores.toys>=800 and game.stage==stage+1 and game.completed_runs==runs+1,"Toy completion records its map ID, independent score and one completion")
+ 	var receipt:String=game.round_receipt.id;var serial:int=game.round_serial
+ 	game.eaten=23;game.kills=2
+@@ -170,7 +170,7 @@
+ 	check(game.world==original_world and game.city==original_city and game.phase=="playing" and game.remaining==30.0 and game.player.score==800 and game.eaten==23 and game.kills==2,"Continuation preserves the same world and score for exactly 30 more seconds")
+ 	check(game.gems==0 and game.extension_used and game.round_receipt.id==receipt,"The diamond debit and one continuation stay bound to the original receipt")
+ 	fixture_score(1700);expire(30.01)
+-	check(game.coins==wallet+50 and game.round_coins==50 and game.round_serial==serial and game.stage==stage+1 and game.completed_runs==runs+1,"Continuation cannot add coins or duplicate the stage, finish bonus or round")
++	check(game.coins==wallet+170 and game.round_coins==170 and game.round_serial==serial and game.stage==stage+1 and game.completed_runs==runs+1,"Continuation credits only its 90 new coins without duplicating stage or round")
+ 	check(not game.can_extend_round() and not game.request_round_extension_gems().ok and not game.request_round_extension_video().ok,"A toy round cannot buy or watch a second continuation")
+ 	var final_wallet:int=game.coins;game.finish("complete")
+ 	check(game.coins==final_wallet,"Repeated completion cannot pay the toy round again")
+--- before/tests/retention_review.gd
++++ after/tests/retention_review.gd
+@@ -179,8 +179,8 @@
+   game.elapsed=game.player_protected_until;game.reset_rival_state();game.scan_rivals()
+   check(not game.player.active and game.round_deaths==2,"Protection expires without permanent invulnerability: "+map_id)
+   game.remaining=.001;game._physics_process(.002)
+-  check(game.phase=="complete" and game.round_coins==50 and game.stage==initial_stage+1 and game.coins==initial_wallet+50,"Timer settles retained score once even during respawn: "+map_id)
+-  game.finish("complete");check(game.coins==initial_wallet+50,"Repeated finish cannot settle the timed run twice: "+map_id)
++  check(game.phase=="complete" and game.round_coins==21 and game.stage==initial_stage+1 and game.coins==initial_wallet+21,"Timer settles retained score once even during respawn: "+map_id)
++  game.finish("complete");check(game.coins==initial_wallet+21,"Repeated finish cannot settle the timed run twice: "+map_id)
+   await frames()
+ 
+ func monetary_callbacks()->void:
+@@ -193,10 +193,10 @@
+  for i in 3:check(target("purchase-%d"%i)!=null and target("purchase-%d"%i).disabled,"No native SDK disables purchase product "+str(i))
+  check(not game.request_coin_purchase(SMALL).ok and game.coins==before,"Unavailable coin purchase cannot debit or award")
+  install_protocols()
+- # Each current normal completion settles exactly50 coins.
++ # Settlement and delayed callbacks retain their own score-derived amounts.
+  game.start_level();game.begin_play();freeze_play();settle(129)
+  before=game.coins;var first_round:String=game.round_receipt.id
+- check(game.round_coins==50 and game.request_round_double().ok,"A settled round binds a real opt-in request")
++ check(game.round_coins==12 and game.request_round_double().ok,"A settled round binds a real opt-in request")
+  var first_request:String=ad.requests.back()
+  check(not game.request_round_double().ok and ad.requests.size()==1,"A loading round cannot create duplicate presentation")
+  ad.rewarded_earned.emit("wrong-id");check(game.coins==before,"Unknown callback ID cannot affect wallet")
+@@ -205,9 +205,9 @@
+  game.start_level();game.begin_play();freeze_play();settle(999)
+  var second_round:String=game.round_receipt.id;before=game.coins
+  ad.rewarded_earned.emit(first_request)
+- check(game.coins==before+50 and game.reward_receipts[first_round].doubled,"Late earned signal adds exact old base, not current wallet or new run")
+- check(game.round_receipt.id==second_round and not game.round_receipt.doubled and game.round_coins==50,"Late old signal leaves new result receipt unchanged")
+- ad.rewarded_earned.emit(first_request);check(game.coins==before+50,"Repeated native old reward stays deduplicated")
++ check(game.coins==before+12 and game.reward_receipts[first_round].doubled,"Late earned signal adds exact old base, not current wallet or new run")
++ check(game.round_receipt.id==second_round and not game.round_receipt.doubled and game.round_coins==99,"Late old signal leaves new result receipt unchanged")
++ ad.rewarded_earned.emit(first_request);check(game.coins==before+12,"Repeated native old reward stays deduplicated")
+  var good_path:String=game.test_progress_path
+  game.test_progress_path=good_path+"/blocked/save.cfg"
+  before=game.coins;var requests:int=ad.requests.size()
+@@ -224,11 +224,11 @@
+  var restored:=Game.new();restored.test_progress_path=good_path
+  check(restored.load_player_progress() and restored.verified_rewards_waiting.has(second_request),"Verified pending reward survives a cold restore")
+  restored.retry_verified_rewards()
+- check(restored.coins==before+50 and restored.reward_receipts[second_round].doubled and restored.verified_rewards_waiting.is_empty(),"Cold retry grants exactly the stored second-round base")
+- restored.retry_verified_rewards();check(restored.coins==before+50,"Cold retry cannot duplicate reward")
++ check(restored.coins==before+99 and restored.reward_receipts[second_round].doubled and restored.verified_rewards_waiting.is_empty(),"Cold retry grants exactly the stored second-round base")
++ restored.retry_verified_rewards();check(restored.coins==before+99,"Cold retry cannot duplicate reward")
+  restored.free()
+  game.retry_verified_rewards()
+- check(game.coins==before+50 and game.round_receipt.doubled,"Live retry updates current result display receipt")
++ check(game.coins==before+99 and game.round_receipt.doubled,"Live retry updates current result display receipt")
+  game.back_home();await frames()
+  # Native store: grant only a verified receipt, commit before acknowledge.
+  check(game.request_coin_purchase(SMALL).ok,"Known available localized product opens store")
+--- before/tests/retention_ui_review.gd
++++ after/tests/retention_ui_review.gd
+@@ -365,7 +365,7 @@
+ 	await touch_at(Vector2(120,420))
+ 	check(game.phase=="playing" and game.player.touch_index==-1,"Released intro touch starts play without stuck input")
+ 	game.player.score=1234;game.remaining=61.1;game.ui.queue_redraw();await frames()
+-	check(has_text("01:02") and has_text("1234 POINTS") and has_text("FINISH +50 COINS"),"HUD paints ceiling time and the prospective fixed finish reward")
++	check(has_text("01:02") and has_text("1234 POINTS") and has_text("+123 COINS"),"HUD paints ceiling time and the live score-derived reward")
+ 	layout("playing")
+ 	await tap("pause-action");layout("paused")
+ 	check(paused,"Actual pause target pauses tree")
+@@ -373,14 +373,14 @@
+ 	check(not paused and game.phase=="playing","Pause resume preserves active round")
+ 	game.remaining=.01;game._physics_process(.02);await frames()
+ 	check(game.phase=="complete" and has_text("TIME'S UP!") and has_text("1234 POINTS"),"Actual timer expiry produces honest timed result")
+-	check(game.round_score_coins==0 and game.round_win_coins==50 and has_text("+50 COINS"),"Timed result draws exactly one50-coin reward")
++	check(game.round_score_coins==123 and game.round_win_coins==0 and has_text("+123 COINS"),"Timed result draws 123 coins for 1234 points")
+ 	layout("timed result")
+ 	check(target("double-round-coins")==null and target("extend-video").disabled and not target("extend-diamonds").disabled and target("coin-boost-video").disabled and not target("coin-boost-diamonds").disabled,"Result offers one independent boost and continuation with unavailable videos disabled")
+ 	check(target("extend-video").text=="NOT READY" and has_text("1.5× COINS") and has_text("+30 SECONDS") and not has_text("100 pts = 1 coin · Max 30 · Finish with points: +5"),"Result shows two concise offers without the old rule paragraphs")
+ 	game.gems=20;game.ui.refresh();await frames()
+ 	var before_boost_coins:int=game.coins
+ 	await tap("coin-boost-diamonds")
+-	check(game.phase=="complete" and game.coins==before_boost_coins+25 and game.gems==10 and game.round_coins==75,"Actual ten-diamond touch boosts50settled coins to75 exactly once")
++	check(game.phase=="complete" and game.coins==before_boost_coins+61 and game.gems==10 and game.round_coins==184,"Actual ten-diamond touch boosts 123 coins to 184 exactly once")
+ 	check(target("coin-boost-video")==null and target("coin-boost-diamonds")==null and target("extend-diamonds")!=null,"Claimed boost disappears while the independent continuation remains")
+ 	layout("boosted result")
+ 	var original_world:int=game.world.get_instance_id()
+@@ -390,7 +390,7 @@
+ 	check(game.phase=="playing" and is_equal_approx(game.remaining,30.0) and game.world.get_instance_id()==original_world,"Actual diamond touch continues the existing world for 30 seconds")
+ 	check(game.gems==original_diamonds-10 and game.coins==original_coins,"Continuation spends diamonds without replaying settled coins")
+ 	game.player.score=2200;game.remaining=.01;game._physics_process(.02);await frames()
+-	check(target("extend-video")==null and target("extend-diamonds")==null and target("coin-boost-video")==null and game.round_coins==75,"Second timeout removes used choices without enlarging the boosted receipt")
++	check(target("extend-video")==null and target("extend-diamonds")==null and target("coin-boost-video")==null and game.round_coins==330 and game.coins==original_coins+146,"Second timeout credits new score and its boost without offering duplicate choices")
+ 	layout("extended result")
+ 	# A controlled provider checks actual touch routing and earned/closed order.
+ 	# It is explicitly a test boundary, not native ad playback evidence.

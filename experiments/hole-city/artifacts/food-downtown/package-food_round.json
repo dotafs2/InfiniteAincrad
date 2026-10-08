@@ -1,0 +1,44 @@
+{
+  "checks": 2,
+  "failures": [],
+  "passed": true,
+  "rounds": [
+    {
+      "contested": true,
+      "food": {
+        "bacon": 5,
+        "berry": 4,
+        "burger": 4,
+        "cake": 5,
+        "cookie": 7,
+        "donut": 9,
+        "egg": 4,
+        "pancake": 5,
+        "person": 3,
+        "pizza": 5,
+        "sushi": 5
+      },
+      "phase": "eaten",
+      "score": 79,
+      "seconds": 65.5166666666642
+    },
+    {
+      "contested": false,
+      "food": {
+        "bacon": 7,
+        "berry": 9,
+        "burger": 10,
+        "cake": 12,
+        "cookie": 31,
+        "donut": 61,
+        "egg": 8,
+        "pancake": 28,
+        "pizza": 8,
+        "sushi": 5
+      },
+      "phase": "complete",
+      "score": 427,
+      "seconds": 106.366666666662
+    }
+  ]
+}

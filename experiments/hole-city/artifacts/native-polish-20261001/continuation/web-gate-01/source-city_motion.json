@@ -1,0 +1,64 @@
+{
+  "checks": 22,
+  "failures": [],
+  "metrics": {
+    "crowd": {
+      "hz": 60,
+      "minimum_center_spacing_m": 0.480000793933868,
+      "off_sidewalk_samples": 0,
+      "overlap_samples": 0,
+      "seconds": 60
+    },
+    "dense_minimum_spacing_m": 0.477570295333862,
+    "heading": [
+      {
+        "hz": 30,
+        "largest_error_degrees": 15.0000056537404,
+        "samples": 19025,
+        "wrong_heading_samples": 0
+      },
+      {
+        "hz": 60,
+        "largest_error_degrees": 15.0000056537404,
+        "samples": 38055,
+        "wrong_heading_samples": 0
+      },
+      {
+        "hz": 120,
+        "largest_error_degrees": 15.0000056537404,
+        "samples": 76111,
+        "wrong_heading_samples": 0
+      }
+    ],
+    "traffic": {
+      "distance_m": [
+        431.999764174223,
+        464.532926760614,
+        503.99957093969,
+        431.999688185751,
+        467.999691892415,
+        500.872835371643,
+        431.999737676233,
+        467.999631509185
+      ],
+      "hz": 60,
+      "jumps": 0,
+      "maximum_frame_displacement_m": 0.0466690622270107,
+      "offroad_samples": 0,
+      "overlap_samples": 0,
+      "seam_crossings": [
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "seconds": 180,
+      "wrong_heading_samples": 0
+    }
+  },
+  "scope": "Headless controller evidence; no browser or device FPS claim"
+}

@@ -1,0 +1,154 @@
+{
+  "checks": [
+    {
+      "label": "native",
+      "passed": true
+    },
+    {
+      "label": "ca",
+      "passed": true
+    },
+    {
+      "label": "wrong-ca",
+      "passed": true
+    },
+    {
+      "label": "fixture",
+      "passed": true
+    },
+    {
+      "label": "outside-suite",
+      "passed": true
+    },
+    {
+      "label": "other-cfg",
+      "passed": true
+    },
+    {
+      "label": "late-native",
+      "passed": true
+    },
+    {
+      "label": "ansi",
+      "passed": true
+    },
+    {
+      "label": "indent",
+      "passed": true
+    },
+    {
+      "label": "shader",
+      "passed": true
+    },
+    {
+      "label": "fatal",
+      "passed": true
+    },
+    {
+      "label": "clean",
+      "passed": true
+    },
+    {
+      "label": "missing-marker",
+      "passed": true
+    },
+    {
+      "label": "nonzero",
+      "passed": true
+    },
+    {
+      "label": "low-checks",
+      "passed": true
+    },
+    {
+      "label": "failed-assertion",
+      "passed": true
+    },
+    {
+      "label": "success",
+      "passed": true
+    },
+    {
+      "label": "copy-failure",
+      "passed": true
+    },
+    {
+      "label": "stage-corruption",
+      "passed": true
+    },
+    {
+      "label": "backup-failure",
+      "passed": true
+    },
+    {
+      "label": "swap-failure",
+      "passed": true
+    },
+    {
+      "label": "verify-failure",
+      "passed": true
+    },
+    {
+      "label": "rollback-failure",
+      "passed": true
+    },
+    {
+      "label": "rollback-failure-discloses-retained-backup",
+      "passed": true
+    },
+    {
+      "label": "guard-scripts/swallowable.gd",
+      "passed": true
+    },
+    {
+      "label": "guard-fidelity/main.tscn",
+      "passed": true
+    },
+    {
+      "label": "guard-export_presets.cfg",
+      "passed": true
+    },
+    {
+      "label": "guard-assets/city_kit/manifest.json",
+      "passed": true
+    },
+    {
+      "label": "guard-assets/fonts/Fredoka.ttf",
+      "passed": true
+    },
+    {
+      "label": "guard-rejects-modified",
+      "passed": true
+    },
+    {
+      "label": "guard-rejects-removed",
+      "passed": true
+    },
+    {
+      "label": "guard-rejects-added",
+      "passed": true
+    },
+    {
+      "label": "all-suite-paths-and-markers-match",
+      "passed": true
+    },
+    {
+      "label": "independent-food-revision-included",
+      "passed": true
+    },
+    {
+      "label": "independent-skin-catalog-included",
+      "passed": true
+    },
+    {
+      "label": "release-source-unchanged-during-review",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "count": 36,
+  "inputs": 446,
+  "suites": 33,
+  "sha256": "5d4ffb3422c191076063c29b60dde1a9593bb90219fbe056f628e3406da7bb05",
+  "scope": "Synthetic subprocesses and temporary fixture directories; no live preview, saves or Godot processes"
+}

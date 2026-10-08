@@ -1,0 +1,39 @@
+{
+	"checks": 144,
+	"failures": [
+		"Interior exposes ground/base at radius 3.5 pitch 65.0 fraction 0.6 angle 6"
+	],
+	"rows": [
+		{
+			"maximum_interior_channel": 0.0,
+			"pitch": 45.0,
+			"radius": 0.85
+		},
+		{
+			"maximum_interior_channel": 0.0,
+			"pitch": 65.0,
+			"radius": 0.85
+		},
+		{
+			"maximum_interior_channel": 0.0980392172932625,
+			"pitch": 45.0,
+			"radius": 3.5
+		},
+		{
+			"maximum_interior_channel": 0.929411768913269,
+			"pitch": 65.0,
+			"radius": 3.5
+		},
+		{
+			"maximum_interior_channel": 0.0980392172932625,
+			"pitch": 45.0,
+			"radius": 7.2
+		},
+		{
+			"maximum_interior_channel": 0.0980392172932625,
+			"pitch": 65.0,
+			"radius": 7.2
+		}
+	],
+	"scope": "Real GPU pixels through production cut-ground and hole materials; isolated radius/camera fixtures."
+}

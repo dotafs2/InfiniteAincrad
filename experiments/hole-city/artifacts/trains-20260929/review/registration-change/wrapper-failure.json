@@ -1,0 +1,8 @@
+{
+  "functional_checks": 366,
+  "functional_failures": [],
+  "strict_engine_diagnostics_pass": true,
+  "full_input_guard_pass": false,
+  "changed_input": "tools/release_web.py",
+  "reason": "Parent registered additional suites during the independent run. Runtime, test and asset hashes were unchanged. The wrapper raised AssertionError: Release inputs changed. This run was not certified as stable final acceptance."
+}

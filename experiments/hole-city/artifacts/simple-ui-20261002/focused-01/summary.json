@@ -1,0 +1,28 @@
+{
+  "ok": false,
+  "failed_suite": "ui_redesign",
+  "error": "Scene QA failed; previous preview preserved. See /Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/simple-ui-20261002/focused-01/ui_redesign.json",
+  "results": [
+    {
+      "suite": "release_info",
+      "checks": 37,
+      "minimum": 32,
+      "report_sha256": "b7873e24b4f5b451444d6c8617f3e5b0ea6c8fd0ce83bc3cd7eea4bafa0cb681"
+    },
+    {
+      "suite": "music",
+      "checks": 129,
+      "minimum": 125,
+      "report_sha256": "16c60daf562336da1a4bed0faf8eb1d8a8ab74b8f0ae1d1ae088fec527b9b255"
+    },
+    {
+      "suite": "music_review",
+      "checks": 120,
+      "minimum": 118,
+      "report_sha256": "f66b3e8b2e2c3bcc32542b78d3ac954928dd8189176db1da4fdd01929320b764"
+    }
+  ],
+  "unchanged_inputs": true,
+  "elapsed_seconds": 10.486,
+  "scope": "Serial source-only focused headless acceptance; no full gate, GPU, native build or phone action"
+}

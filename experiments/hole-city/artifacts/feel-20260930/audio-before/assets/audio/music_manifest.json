@@ -1,0 +1,196 @@
+{
+  "schema": 1,
+  "generator": "tools/build_music.py",
+  "generator_sha256": "0e0fe1971f8dbc4ee509e382dd3f7a5fac4e69b5e415c127a4cb6996afb878d4",
+  "numpy_version": "2.3.5",
+  "ffmpeg_version": "ffmpeg version 7.1.1 Copyright (c) 2000-2025 the FFmpeg developers",
+  "provenance": "Original authored melody, arrangement and additive/percussive synthesis. No downloaded music, samples, external recordings or model audio generation.",
+  "license": "CC0-1.0; see README.md",
+  "tracks": [
+    {
+      "file": "sunny_city_loop.ogg",
+      "title": "Sunny Side Streets",
+      "bytes": 290770,
+      "sha256": "f606d1f9720ebf512fbe1f1110f70992b416a61c990823ee09955e2546df7177",
+      "source_pcm_sha256": "412f49811be30664a4b9aa645fa26bad0f4056cc9c4bac2b624d5a385c0dd786",
+      "source_pcm": {
+        "samples_per_channel": 1411200,
+        "duration_seconds": 32.0,
+        "sample_rate": 44100,
+        "channels": 2,
+        "peak_linear": 0.6800000071525574,
+        "peak_dbfs": -3.3498216545130326,
+        "rms_dbfs": -17.194347350343662,
+        "dc_max_absolute": 5.630434679915197e-05,
+        "clipped_samples": 0,
+        "seam_jump_per_channel": [
+          0.0,
+          0.0
+        ],
+        "seam_jump_max": 0.0,
+        "interior_step_p99": 0.0319686084985733,
+        "interior_step_max": 0.07551106810569763,
+        "boundary_20ms_rms_dbfs": -19.70043871973671,
+        "stereo_correlation": 0.9657169390764169
+      },
+      "decoded_vorbis": {
+        "samples_per_channel": 1411200,
+        "duration_seconds": 32.0,
+        "sample_rate": 44100,
+        "channels": 2,
+        "peak_linear": 0.6756669282913208,
+        "peak_dbfs": -3.405346757273431,
+        "rms_dbfs": -17.19209754679452,
+        "dc_max_absolute": 3.582028148230165e-05,
+        "clipped_samples": 0,
+        "seam_jump_per_channel": [
+          0.0027886261232197285,
+          0.002257332671433687
+        ],
+        "seam_jump_max": 0.0027886261232197285,
+        "interior_step_p99": 0.031942956149578094,
+        "interior_step_max": 0.07436881959438324,
+        "boundary_20ms_rms_dbfs": -19.667397249416187,
+        "stereo_correlation": 0.9638651675759992,
+        "integrated_lufs": -15.3,
+        "true_peak_dbtp": -3.4
+      },
+      "checks": {
+        "exact_sample_count": true,
+        "vorbis_stereo_44100": true,
+        "duration_20_to_40_seconds": true,
+        "under_500_kib": true,
+        "no_clipping": true,
+        "useful_dynamic_level": true,
+        "small_boundary_step": true,
+        "no_dc_offset": true,
+        "no_silent_loop_gap": true,
+        "finite_samples": true
+      },
+      "encoding": "Ogg Vorbis, libvorbis quality 3, bitexact container flags",
+      "arrangement": {
+        "bars": 16,
+        "meter": "4/4",
+        "bpm": 120,
+        "key": "C major",
+        "seed": 29092026,
+        "chord_progression": [
+          "Cmaj9",
+          "Am7",
+          "Fmaj9",
+          "G6",
+          "Em7",
+          "Am7",
+          "Dm9",
+          "G13"
+        ],
+        "progression_repeats": 2,
+        "unique_authored_melody_bars": 16,
+        "event_counts": {
+          "keys": 288,
+          "bass": 64,
+          "mallet": 57,
+          "pluck": 56,
+          "kick": 32,
+          "rim": 32,
+          "brush": 32,
+          "shaker": 128
+        },
+        "loop_strategy": "Circular note tails, room reflections and master filtering, with a 2.5 ms cosine edge guard; no musical fade-out gap."
+      }
+    },
+    {
+      "file": "snack_garden_loop.ogg",
+      "title": "Sugar Stack Stroll",
+      "bytes": 280928,
+      "sha256": "10c680b090cdef83e1520893eb41c4157ab8440d3c5b22e27610b167ce22897b",
+      "source_pcm_sha256": "26916fb0215e6960a237b6e92428b040aeb0ba0a07b4e21a3abdaa756d0bb25a",
+      "source_pcm": {
+        "samples_per_channel": 1512000,
+        "duration_seconds": 34.285714285714285,
+        "sample_rate": 44100,
+        "channels": 2,
+        "peak_linear": 0.6800000071525574,
+        "peak_dbfs": -3.3498216545130326,
+        "rms_dbfs": -17.883885540003874,
+        "dc_max_absolute": 3.7550875276792794e-05,
+        "clipped_samples": 0,
+        "seam_jump_per_channel": [
+          0.0,
+          0.0
+        ],
+        "seam_jump_max": 0.0,
+        "interior_step_p99": 0.03445911407470703,
+        "interior_step_max": 0.08480750769376755,
+        "boundary_20ms_rms_dbfs": -20.81149229641759,
+        "stereo_correlation": 0.9725974066521194
+      },
+      "decoded_vorbis": {
+        "samples_per_channel": 1512000,
+        "duration_seconds": 34.285714285714285,
+        "sample_rate": 44100,
+        "channels": 2,
+        "peak_linear": 0.6821203231811523,
+        "peak_dbfs": -3.3227802170022325,
+        "rms_dbfs": -17.878698455684656,
+        "dc_max_absolute": 4.0102160710375756e-05,
+        "clipped_samples": 0,
+        "seam_jump_per_channel": [
+          0.00624130992218852,
+          0.004336200188845396
+        ],
+        "seam_jump_max": 0.00624130992218852,
+        "interior_step_p99": 0.03453242778778076,
+        "interior_step_max": 0.0822727158665657,
+        "boundary_20ms_rms_dbfs": -20.899810613470784,
+        "stereo_correlation": 0.9711371067442179,
+        "integrated_lufs": -15.8,
+        "true_peak_dbtp": -3.3
+      },
+      "checks": {
+        "exact_sample_count": true,
+        "vorbis_stereo_44100": true,
+        "duration_20_to_40_seconds": true,
+        "under_500_kib": true,
+        "no_clipping": true,
+        "useful_dynamic_level": true,
+        "small_boundary_step": true,
+        "no_dc_offset": true,
+        "no_silent_loop_gap": true,
+        "finite_samples": true
+      },
+      "encoding": "Ogg Vorbis, libvorbis quality 3, bitexact container flags",
+      "arrangement": {
+        "bars": 16,
+        "meter": "4/4",
+        "bpm": 112,
+        "key": "F major",
+        "seed": 29092027,
+        "chord_progression": [
+          "F6",
+          "C/E",
+          "Dm7",
+          "Bbmaj9",
+          "Gm7",
+          "C6",
+          "Fmaj9",
+          "C7sus4-C7"
+        ],
+        "progression_repeats": 2,
+        "unique_authored_melody_bars": 16,
+        "event_counts": {
+          "keys": 230,
+          "bass": 64,
+          "celeste": 51,
+          "pluck": 52,
+          "kick": 32,
+          "rim": 32,
+          "brush": 32,
+          "shaker": 64
+        },
+        "loop_strategy": "Circular note tails, room reflections and master filtering, with a 2.5 ms cosine edge guard; no musical fade-out gap."
+      }
+    }
+  ],
+  "limitations": "Objective file, amplitude and loop-boundary checks only. No native playback, browser audition or subjective listening acceptance was performed."
+}

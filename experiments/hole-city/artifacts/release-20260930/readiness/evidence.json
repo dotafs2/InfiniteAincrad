@@ -1,0 +1,366 @@
+{
+  "schema": 1,
+  "audit_utc": "2026-09-30T01:45:32.642974+00:00",
+  "scope": "Read-only repository/configuration and official-public-document review. No browser, native capture, game execution, network traffic observation, publication, account access or tool installation. Report/artifact writes only.",
+  "cutoff": "Delivered v0.11.0 baseline; parent replacing BGM separately. This receipt does not approve that pending replacement.",
+  "source_inputs": [
+    {
+      "path": "project.godot",
+      "bytes": 1342,
+      "sha256": "95e1a97f71292c03f5e7a1de4d0de5742e1df8d17e03777795e9ba789348dda4"
+    },
+    {
+      "path": "export_presets.cfg",
+      "bytes": 2023,
+      "sha256": "a3e3e823f45476973c1478386bf02641a0970efbadb434383232155bdbc19bd3"
+    },
+    {
+      "path": "tools/serve_review.py",
+      "bytes": 1159,
+      "sha256": "e33471265b5ee936da6680edba719575f4ba728a936a7f032cbce37a530f686c"
+    },
+    {
+      "path": "tools/release_web.py",
+      "bytes": 16892,
+      "sha256": "fa6f3a198ec45976996eafdd30a9c8762b7972e2c0bbd2049aea2e0dc9b42c82"
+    },
+    {
+      "path": "tools/package_windows.py",
+      "bytes": 4063,
+      "sha256": "2126e2b28c9577fe6263b404ddef1d565b3941ca455d935f5184553be95467d1"
+    },
+    {
+      "path": "tools/runtime_licenses.gd",
+      "bytes": 1185,
+      "sha256": "ee1804c97577e91db8897bdbbea4f0ffa77ec1c24de119998b65768c059d0b3c"
+    },
+    {
+      "path": "fidelity/main.tscn",
+      "bytes": 175,
+      "sha256": "f63e29fd25989b106db394055ca5f09a120b9773f4684d15929979e02c7e888f"
+    },
+    {
+      "path": "fidelity/ui.gd",
+      "bytes": 53406,
+      "sha256": "a712da36e7cce8e3124b5fe502e933d440c64baf34ec3b3e29a20a220e63762c"
+    },
+    {
+      "path": "fidelity/game.gd",
+      "bytes": 47072,
+      "sha256": "076b88d23f540f3865202d1784aa2e3f3c10f1221141f802675fb2c0eac2d291"
+    },
+    {
+      "path": "fidelity/audio.gd",
+      "bytes": 3044,
+      "sha256": "30775280c6450bc9d3ee3cf4a03da44fe811ae4846dc1bef7b36eea6c2f618e5"
+    },
+    {
+      "path": "fidelity/ads_bridge.gd",
+      "bytes": 5748,
+      "sha256": "d0aa5658ddf026403064a3b5dd22802b4c5718ba077967e6ce1344335d37ad76"
+    },
+    {
+      "path": "fidelity/commerce_bridge.gd",
+      "bytes": 8409,
+      "sha256": "db3f3e1b414b17230d2a7c2b3694271e868d3746f552b9c93a2396d84162af3a"
+    },
+    {
+      "path": "fidelity/device_qa.gd",
+      "bytes": 934,
+      "sha256": "b9246ba88c85a499515cab0368bd28a1e0b58429fd593c4e7ee209d24abab429"
+    },
+    {
+      "path": "tools/device_qa.js",
+      "bytes": 5755,
+      "sha256": "128c4d196a0da5952514a96c6c91a89756a5d1196f29f99ac395208ada06059e"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1112,
+      "sha256": "63fcfd62d5011aed4b992dba98fe3c2bfd79cafb63fd82780bd86b5a6f0c1f47"
+    },
+    {
+      "path": "THIRD_PARTY.md",
+      "bytes": 3068,
+      "sha256": "5b1e17838e44e4d1f3ad29ce4b45ccdbba4cebda87ebc55892c551cd8999f31a"
+    },
+    {
+      "path": "third_party/mbmayer/LICENSE",
+      "bytes": 1085,
+      "sha256": "2fb5455ce9e79572a4e1828b180c6e579478e1f7b980e60371fbf56266016b11"
+    },
+    {
+      "path": "third_party/mbmayer/provenance.json",
+      "bytes": 1410,
+      "sha256": "0ddb66f8befc45a1d3fdae50a9d9bd124bbe49ca9f25256fe9e465c4d7c06f74"
+    },
+    {
+      "path": "assets/fonts/OFL.txt",
+      "bytes": 4388,
+      "sha256": "5c9e7eee5c6b25f4b05b8d53b2e470ea4962f9ced742d044a98f7d95d1375bab"
+    },
+    {
+      "path": "assets/city_kit/manifest.json",
+      "bytes": 119199,
+      "sha256": "5e63b98e3d996f13785b48d14bd17c32a959dddf9065a126c62db1eefbeffc70"
+    },
+    {
+      "path": "assets/trains/manifest.json",
+      "bytes": 9228,
+      "sha256": "6735dc304eca5ec1cd1c2e18f0cd99e82dcd6e38a8994aa7b44f50a5a0516f7b"
+    },
+    {
+      "path": "assets/audio/music_manifest.json",
+      "bytes": 58713,
+      "sha256": "2596187b19adfc675ee87babdb3e947650b943fa2958cad10f652778f4bf65f1"
+    },
+    {
+      "path": "icon.svg",
+      "bytes": 434,
+      "sha256": "c4190fc8a21f79e364115377db542e921ca9e8de165ec81e04e1ec5704b8884e"
+    },
+    {
+      "path": "docs/fixes/device-acceptance.md",
+      "bytes": 2444,
+      "sha256": "e8ba19f75a4d6e0933e3d3278ea8d4545baf25175df9d72048903fda7875e5ae"
+    },
+    {
+      "path": "docs/monetization-20260929/bridges.md",
+      "bytes": 6102,
+      "sha256": "547a77026545c0d35a34c9dcae0afed2940e63f215ca8a0f3f88f1ab914c0594"
+    },
+    {
+      "path": "artifacts/feel-20260930/verification.json",
+      "bytes": 2269,
+      "sha256": "f7d22f3f91c6b1604d6f4d439a8f970ae36eb0a8ae6080b64fbff9114d01b22c"
+    }
+  ],
+  "web_inventory": [
+    {
+      "path": "build/web/device-qa.js",
+      "bytes": 5755,
+      "sha256": "128c4d196a0da5952514a96c6c91a89756a5d1196f29f99ac395208ada06059e"
+    },
+    {
+      "path": "build/web/index.apple-touch-icon.png",
+      "bytes": 10367,
+      "sha256": "1706a7bd4a44e619bee9149b9bad4be7635910e0ea24ac17d4d8b0569a2c56f3"
+    },
+    {
+      "path": "build/web/index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "build/web/index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "build/web/index.html",
+      "bytes": 5900,
+      "sha256": "1bc840e4e3d4e04b48e9662aab2281a3d10b2ff63909f3146d7ae094ab7e1e1a"
+    },
+    {
+      "path": "build/web/index.icon.png",
+      "bytes": 4636,
+      "sha256": "921c12a6e542b19617674e285a52e839bc0f5fc7dbe7407e802dd8428dd81768"
+    },
+    {
+      "path": "build/web/index.js",
+      "bytes": 314653,
+      "sha256": "1e5437ee16d35bf6f8a3b28e6f70f310ee5da12acab3222a06e8c223cb61757c"
+    },
+    {
+      "path": "build/web/index.pck",
+      "bytes": 9693968,
+      "sha256": "dd34dfe38ff87f63170deac423242315de5258617d30f28b926b0eff6d92557f"
+    },
+    {
+      "path": "build/web/index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "build/web/index.wasm",
+      "bytes": 38820072,
+      "sha256": "f6090f055e16765bcef5dc3a031f68ab40c151d9e7f0541d9d7eb61e92dc5051"
+    }
+  ],
+  "web_total_bytes": 48887065,
+  "local_files_match_previous_http_receipt": true,
+  "previous_receipt": {
+    "path": "artifacts/feel-20260930/verification.json",
+    "version": "0.11.0",
+    "verified_utc": "2026-09-29T19:17:18.512376+00:00",
+    "suites_per_phase": 76,
+    "checks": {
+      "source": 53788,
+      "package": 53788
+    },
+    "tested_input_count": 785
+  },
+  "read_only_toolchain_commands": {
+    "xcode-select -p": {
+      "exit_code": 0,
+      "stdout": "/Applications/Xcode.app/Contents/Developer\n",
+      "stderr": ""
+    },
+    "xcodebuild -version": {
+      "exit_code": 0,
+      "stdout": "Xcode 16.2\nBuild version 16C5032a\n",
+      "stderr": ""
+    }
+  },
+  "bounded_source_scans": {
+    "authored_network_clients": {
+      "scanned_files": [
+        "fidelity/ads_bridge.gd",
+        "fidelity/art.gd",
+        "fidelity/audio.gd",
+        "fidelity/catalog_city.gd",
+        "fidelity/city_districts.gd",
+        "fidelity/commerce_bridge.gd",
+        "fidelity/cut_ground.gd",
+        "fidelity/device_qa.gd",
+        "fidelity/edible_train.gd",
+        "fidelity/food_body.gd",
+        "fidelity/food_city.gd",
+        "fidelity/food_neighborhoods.gd",
+        "fidelity/food_preview.gd",
+        "fidelity/food_query.gd",
+        "fidelity/food_shapes.gd",
+        "fidelity/food_surface.gd",
+        "fidelity/fracture_cache.gd",
+        "fidelity/game.gd",
+        "fidelity/hole.gd",
+        "fidelity/hole_reveal.gd",
+        "fidelity/map_catalog.gd",
+        "fidelity/mesh_batch.gd",
+        "fidelity/placement_grid.gd",
+        "fidelity/prop_collision_cache.gd",
+        "fidelity/rim_body.gd",
+        "fidelity/scene_audit.gd",
+        "fidelity/skin_catalog.gd",
+        "fidelity/skin_draw.gd",
+        "fidelity/skin_motifs.gd",
+        "fidelity/skin_rarity.gd",
+        "fidelity/skin_sculpt.gd",
+        "fidelity/skin_visual.gd",
+        "fidelity/static_batch.gd",
+        "fidelity/street_layout.gd",
+        "fidelity/swallowable.gd",
+        "fidelity/train_assets.gd",
+        "fidelity/train_car.gd",
+        "fidelity/train_routes.gd",
+        "fidelity/train_track_surface.gd",
+        "fidelity/ui.gd",
+        "fidelity/world_bounds.gd",
+        "scripts/city.gd",
+        "scripts/game.gd",
+        "scripts/hole.gd",
+        "scripts/hud.gd",
+        "scripts/minimap.gd",
+        "scripts/swallowable.gd",
+        "tools/device_qa.js",
+        "build/web/index.html"
+      ],
+      "matches": []
+    },
+    "javascript_bridge": {
+      "scanned_files": [
+        "fidelity/ads_bridge.gd",
+        "fidelity/art.gd",
+        "fidelity/audio.gd",
+        "fidelity/catalog_city.gd",
+        "fidelity/city_districts.gd",
+        "fidelity/commerce_bridge.gd",
+        "fidelity/cut_ground.gd",
+        "fidelity/device_qa.gd",
+        "fidelity/edible_train.gd",
+        "fidelity/food_body.gd",
+        "fidelity/food_city.gd",
+        "fidelity/food_neighborhoods.gd",
+        "fidelity/food_preview.gd",
+        "fidelity/food_query.gd",
+        "fidelity/food_shapes.gd",
+        "fidelity/food_surface.gd",
+        "fidelity/fracture_cache.gd",
+        "fidelity/game.gd",
+        "fidelity/hole.gd",
+        "fidelity/hole_reveal.gd",
+        "fidelity/map_catalog.gd",
+        "fidelity/mesh_batch.gd",
+        "fidelity/placement_grid.gd",
+        "fidelity/prop_collision_cache.gd",
+        "fidelity/rim_body.gd",
+        "fidelity/scene_audit.gd",
+        "fidelity/skin_catalog.gd",
+        "fidelity/skin_draw.gd",
+        "fidelity/skin_motifs.gd",
+        "fidelity/skin_rarity.gd",
+        "fidelity/skin_sculpt.gd",
+        "fidelity/skin_visual.gd",
+        "fidelity/static_batch.gd",
+        "fidelity/street_layout.gd",
+        "fidelity/swallowable.gd",
+        "fidelity/train_assets.gd",
+        "fidelity/train_car.gd",
+        "fidelity/train_routes.gd",
+        "fidelity/train_track_surface.gd",
+        "fidelity/ui.gd",
+        "fidelity/world_bounds.gd",
+        "scripts/city.gd",
+        "scripts/game.gd",
+        "scripts/hole.gd",
+        "scripts/hud.gd",
+        "scripts/minimap.gd",
+        "scripts/swallowable.gd",
+        "tools/device_qa.js",
+        "build/web/index.html"
+      ],
+      "matches": [
+        {
+          "file": "fidelity/device_qa.gd",
+          "line": 16,
+          "text": "JavaScriptBridge.eval(\"window.SinkDeviceQA && window.SinkDeviceQA.state(\"+JSON.stringify(context)+\");\")"
+        }
+      ]
+    },
+    "active_ui_license_privacy_entry": {
+      "scanned_files": [
+        "fidelity/ui.gd"
+      ],
+      "matches": []
+    }
+  },
+  "official_sources": {
+    "selected_music": "https://opengameart.org/content/shop-theme",
+    "web_export": "https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html",
+    "ios_export": "https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_ios.html",
+    "engine_notices": "https://docs.godotengine.org/en/stable/about/complying_with_licenses.html",
+    "apple_upload_requirements": "https://developer.apple.com/news/upcoming-requirements/",
+    "apple_review": "https://developer.apple.com/app-store/review/guidelines/",
+    "apple_privacy": "https://developer.apple.com/app-store/app-privacy-details/",
+    "testflight": "https://developer.apple.com/testflight/"
+  },
+  "facts": {
+    "export_platforms": [
+      "Windows Desktop",
+      "Web"
+    ],
+    "web_threads": true,
+    "web_pwa": false,
+    "web_mobile_vram_compression": false,
+    "local_server_bind": "127.0.0.1",
+    "target_device": "iPhone 14 at 60 Hz; not iOS 14",
+    "apple_account_and_signing_status": "Not inspected",
+    "native_package_privacy_manifest": "Not assessable before an iOS export is produced",
+    "public_host_privacy_and_logs": "Not selected or inspected"
+  },
+  "limits": [
+    "No current HTTP requests were made; the historical receipt was compared only with current local bytes.",
+    "Source scans cannot prove absence of all data collection in a final binary, native SDK or hosting provider.",
+    "Headless receipts do not prove Safari visuals, subjective audio, touch, thermal stability or sustained 60 FPS."
+  ]
+}

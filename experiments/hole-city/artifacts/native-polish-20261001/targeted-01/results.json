@@ -1,0 +1,36 @@
+[
+  {
+    "suite": "native_polish_acceptance",
+    "exit_code": 0,
+    "errors": []
+  },
+  {
+    "suite": "music_acceptance",
+    "exit_code": 1,
+    "errors": [
+      "ERROR: Returning home preserves the same ongoing music instead of replaying its intro",
+      "ERROR: Switching maps preserves the shared Shop Theme decoder and bookmark in the sole player"
+    ]
+  },
+  {
+    "suite": "music_review",
+    "exit_code": 1,
+    "errors": [
+      "ERROR: Mute/unmute preserves the existing stream playback",
+      "ERROR: Selecting the same map does not restart the track",
+      "ERROR: Actual map control preserves the shared Shop Theme stream and decoder"
+    ]
+  },
+  {
+    "suite": "retention_acceptance",
+    "exit_code": 0,
+    "errors": []
+  },
+  {
+    "suite": "retention_ui_review",
+    "exit_code": 0,
+    "errors": [
+      "ERROR: 1 resources still in use at exit (run with --verbose for details)."
+    ]
+  }
+]

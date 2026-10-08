@@ -1,0 +1,163 @@
+{
+  "suite_count": 74,
+  "unique_suite_count": 74,
+  "guarded_input_count": 783,
+  "coverage": {
+    "music": [
+      {
+        "suite": "music",
+        "minimum": 125,
+        "test": "tests/music_acceptance.gd",
+        "guarded": true
+      },
+      {
+        "suite": "music_review",
+        "minimum": 118,
+        "test": "tests/music_review.gd",
+        "guarded": true
+      }
+    ],
+    "boost": [
+      {
+        "suite": "boost",
+        "minimum": 55,
+        "test": "tests/boost_acceptance.gd",
+        "guarded": true
+      },
+      {
+        "suite": "boost_review",
+        "minimum": 98,
+        "test": "tests/boost_review.gd",
+        "guarded": true
+      }
+    ],
+    "skins": [
+      {
+        "suite": "skin_polish",
+        "minimum": 486,
+        "test": "tests/skin_polish_acceptance.gd",
+        "guarded": true
+      },
+      {
+        "suite": "skin_polish_review",
+        "minimum": 760,
+        "test": "tests/skin_polish_review.gd",
+        "guarded": true
+      },
+      {
+        "suite": "skin_rarity_review",
+        "minimum": 1555,
+        "test": "tests/skin_rarity_review.gd",
+        "guarded": true
+      },
+      {
+        "suite": "mobile_thumbnail",
+        "minimum": 695,
+        "test": "tests/mobile_thumbnail_acceptance.gd",
+        "guarded": true
+      }
+    ],
+    "food_growth": [
+      {
+        "suite": "food_growth",
+        "minimum": 2202,
+        "test": "tests/food_growth_acceptance.gd",
+        "guarded": true
+      },
+      {
+        "suite": "food_growth_review",
+        "minimum": 1476,
+        "test": "tests/food_growth_review.gd",
+        "guarded": true
+      },
+      {
+        "suite": "food_finish",
+        "minimum": 136,
+        "test": "tests/food_finish_acceptance.gd",
+        "guarded": true
+      },
+      {
+        "suite": "food_collision",
+        "minimum": 156,
+        "test": "tests/food_collision_acceptance.gd",
+        "guarded": true
+      },
+      {
+        "suite": "food_collision_review",
+        "minimum": 18276,
+        "test": "tests/food_collision_review.gd",
+        "guarded": true
+      },
+      {
+        "suite": "food_rain_continuity",
+        "minimum": 33,
+        "test": "tests/food_rain_continuity_acceptance.gd",
+        "guarded": true
+      }
+    ]
+  },
+  "required_source_inputs": {
+    "fidelity/game.gd": "076b88d23f540f3865202d1784aa2e3f3c10f1221141f802675fb2c0eac2d291",
+    "fidelity/hole.gd": "3f6c3e3a18e12860abba1bf4929f16e71d75be1ba9ed6d30da90c7f59c881739",
+    "fidelity/ui.gd": "a712da36e7cce8e3124b5fe502e933d440c64baf34ec3b3e29a20a220e63762c",
+    "fidelity/skin_sculpt.gd": "1450155da9582b85135d56b39415e0e0bac5a7ec131977d442abd44a10477f37",
+    "fidelity/skin_visual.gd": "f40045b57c687059fee80170ead7eb58a14122c4a6a67fd6780168b520f73f55",
+    "fidelity/skin_catalog.gd": "6b1d4434047703cb2a8ca1dcd5d781f6f2adf7d2568a81a08fe7f4b086d8dd33",
+    "fidelity/skin_rarity.gd": "dc532376060506100c2eb9fa22da7addb43cf696826c271cc54ec8a34a7fc3a7",
+    "fidelity/audio.gd": "30775280c6450bc9d3ee3cf4a03da44fe811ae4846dc1bef7b36eea6c2f618e5",
+    "fidelity/audio_bus_layout.tres": "a8b1b249f22929c4305c60424b0c35a0b1734c1ed5d7b1ab36fa2348d0bf4c56",
+    "fidelity/food_city.gd": "a8591b3b5b43e10440018e5b365411c64bf9d20e5addedcd97a9aaa97128b999",
+    "fidelity/food_body.gd": "acc24c145f8eae9f312c481af8fec9ff482fcf5f34159e56b45d403acc9fd22c",
+    "tools/build_music.py": "ade0fd3054367acb9955effd05c2f1397f6e685677ba490d88bcb0bae1299a79",
+    "tools/build_food_neighborhoods.py": "217e2087da9ec5ad6cd5aab98e9e84f8fbccf585e23cb90ca783d8945308e90d",
+    "assets/audio/music_manifest.json": "2596187b19adfc675ee87babdb3e947650b943fa2958cad10f652778f4bf65f1",
+    "assets/audio/sunny_city_loop.ogg": "bcf2e7af8fa53a568b287a03e6034ae6631f0694b6e2d17692b9c47943868c25",
+    "assets/audio/snack_garden_loop.ogg": "a12e247ad82b7098b7cbc0c1dff191661c92e1d88d4660510091567e935ae92e",
+    "assets/audio/sunny_city_loop.ogg.import": "c2e5d77accbcf5a12e53a4a4dbca87ba327ace693f3c6ccb86577d4e4ee7b454",
+    "assets/audio/snack_garden_loop.ogg.import": "c68af194dc74bbe7e67bd9fc7d695a8863a8c76759f7ae63f629b2be1e148be4",
+    "assets/food_city/neighborhoods.json": "8c0a6329f65b237279dadaefd047c3c7aca375a3a19f4e2f6fc8d478a27ea784",
+    "project.godot": "95e1a97f71292c03f5e7a1de4d0de5742e1df8d17e03777795e9ba789348dda4",
+    "export_presets.cfg": "a3e3e823f45476973c1478386bf02641a0970efbadb434383232155bdbc19bd3",
+    "tools/release_web.py": "040794f6635cac90450253ecc1258ec1f5e5871361099d95c7bd1a463821cf47"
+  },
+  "receipt_scope": "Existing focused reports, not a final release pass",
+  "focused_receipts": {
+    "artifacts/feel-20260930/audio-independent/analysis.json": {
+      "checks": 128,
+      "failures": []
+    },
+    "artifacts/feel-20260930/audio-independent/music_review.json": {
+      "checks": 118,
+      "failures": []
+    },
+    "artifacts/skin-polish-20260930/review/skin_polish_review-final.json": {
+      "checks": 760,
+      "failures": []
+    },
+    "artifacts/skin-polish-20260930/review/skin_rarity_review-final.json": {
+      "checks": 1555,
+      "failures": []
+    },
+    "artifacts/feel-20260930/boost-review/final.json": {
+      "checks": 98,
+      "failures": []
+    },
+    "artifacts/feel-20260930/food-review/food_growth_review-final.json": {
+      "checks": 1476,
+      "failures": []
+    }
+  },
+  "draft_readme_sha256": "6222ef644c62ebd1a2a9e5fdfff7015ceb319f4b4c4dc963f3e441f6f112cc7e",
+  "pending": [
+    "Final rain-admission diagnostics and continuity/reactivation review are still being integrated; this registry cutoff is not the final freeze.",
+    "README currently says the full73-suite gate is running; root reports it stopped at the obsolete all-time airborne invariant.",
+    "README lists three changed historical expectations; the pending rain-budget maintenance adds another intentionally changed expectation.",
+    "The genuine touch-driven food-growth route explicitly disables rivals and rain for reproducibility; make that fixture limit visible in the summary too."
+  ],
+  "scope": "Read-only source/registration/hash audit; did not start Godot, browser, full gate, or native capture; not delivery proof.",
+  "draft_report_followup": {
+    "status": "Root revised all three wording findings before final gate",
+    "sha256": "e9c26fcd4d6b8174f46fa5adee4c5898b0064a7b4fb1c54fd27d2f4850bba929",
+    "scope": "Registration audit cutoff remains 74 suites / 783 inputs. Future75/784 is expected, not yet certified by this snapshot."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "result": "pass",
+  "checks": 98,
+  "inputs_before": {
+    "fidelity/game.gd": "076b88d23f540f3865202d1784aa2e3f3c10f1221141f802675fb2c0eac2d291",
+    "fidelity/hole.gd": "3f6c3e3a18e12860abba1bf4929f16e71d75be1ba9ed6d30da90c7f59c881739",
+    "fidelity/ui.gd": "f785d28ecc58a07f1eead33b27532bddb28e6e1749af1856e91542d4769920dd",
+    "tests/boost_review.gd": "1f5dc4b784e825180b0bca3d0d713e57fa6a7bc01e6f012f6efc2c01a913348d",
+    "tests/boost_acceptance.gd": "75a94589f92c2f3840b395437a1ad617ae2fbfd4dd2bedb38f0784f7def73fc0"
+  },
+  "inputs_after": {
+    "fidelity/game.gd": "076b88d23f540f3865202d1784aa2e3f3c10f1221141f802675fb2c0eac2d291",
+    "fidelity/hole.gd": "3f6c3e3a18e12860abba1bf4929f16e71d75be1ba9ed6d30da90c7f59c881739",
+    "fidelity/ui.gd": "f785d28ecc58a07f1eead33b27532bddb28e6e1749af1856e91542d4769920dd",
+    "tests/boost_review.gd": "1f5dc4b784e825180b0bca3d0d713e57fa6a7bc01e6f012f6efc2c01a913348d",
+    "tests/boost_acceptance.gd": "75a94589f92c2f3840b395437a1ad617ae2fbfd4dd2bedb38f0784f7def73fc0"
+  },
+  "scope": "Non-author actual input and natural CharacterBody physics; collection isolated to keep radius constant. No phone FPS, browser rendering or subjective feel claim.",
+  "helpers": "Owned Godot process exited normally; source/gameplay files were not changed by reviewer."
+}

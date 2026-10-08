@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "source_sha256": {
+    "fidelity/skin_sculpt.gd": "1450155da9582b85135d56b39415e0e0bac5a7ec131977d442abd44a10477f37",
+    "fidelity/skin_visual.gd": "f40045b57c687059fee80170ead7eb58a14122c4a6a67fd6780168b520f73f55",
+    "fidelity/skin_catalog.gd": "6b1d4434047703cb2a8ca1dcd5d781f6f2adf7d2568a81a08fe7f4b086d8dd33",
+    "fidelity/skin_rarity.gd": "dc532376060506100c2eb9fa22da7addb43cf696826c271cc54ec8a34a7fc3a7",
+    "fidelity/skin_motifs.gd": "0db569773783e174b088ecf716bf10592b448c432b7508a173af58665f7a637e",
+    "fidelity/ui.gd": "a712da36e7cce8e3124b5fe502e933d440c64baf34ec3b3e29a20a220e63762c",
+    "tests/skin_rarity_review.gd": "2d4caef9a73cf8968218b8d483cdbfb43fbb733548ea6e4c071ea731565e95c4",
+    "tests/skin_polish_review.gd": "e6c8b15864024a45483ccc4f7fb5ad428a8f86600f59cc1d0f1f014e57dc09d6",
+    "tests/skin_polish_acceptance.gd": "33e8e373417959391df5a1987cbd13378363ff0879ba511560552c90bbce55f0"
+  },
+  "stable_release_inputs": 782,
+  "checks": {
+    "skin_polish_review": 760,
+    "skin_rarity_review": 1555,
+    "actual_old_new_card_lighting": 4
+  },
+  "changed_geometry_ids": [
+    "bunny_burrow",
+    "dragon_roost",
+    "fox_den",
+    "frosted_cake",
+    "pizza_party",
+    "rocket_port"
+  ],
+  "unchanged_geometry_count": 38,
+  "rarity_maintenance": {
+    "original_count": 1555,
+    "final_count": 1555,
+    "entire_probability_tail_unchanged": true,
+    "old_visual_constant_unchanged": true,
+    "only_high_tier_visual_assertion_has_six_id_branch": true
+  },
+  "evidence_sha256": {
+    "rarity-maintenance.diff": "43e8ebf3b06982de6f7a7de8d9458ea7f2d776f8cd073876af42daee880a679b",
+    "final-inputs-before.json": "80096ea41853c3ff90e561999495e772c17e8e738e8624ef9543ff0a34b6f5f7",
+    "baseline_probe.gd": "5109d0e0d2bbe0b5d06cd25984ab4d71bc42f2d4806bc4777e8c8eaedbca0c2d",
+    "skin_rarity_review-before.gd": "e98bcfc57160f41f694c3cb3607a83e0ab068de9de207b4d34f40af7bcacce7e",
+    "baseline.json": "d383ab3fe63473d65d5ecf3ded68b7e1c698f9ab5ba3a9207a317b1943385896",
+    "skin_rarity_review-initial.json": "a073e6f7f3418ae6ba8443b97cb17b46340208ef4a99731ac1d2bda3271240f1",
+    "lighting_baseline_probe.gd": "a04f5c05b20a6ccb0f8b94b1c0b6066b7ebe761d3375845d423637b6dc55afc2",
+    "ui-before-review.gd": "f785d28ecc58a07f1eead33b27532bddb28e6e1749af1856e91542d4769920dd",
+    "skin_polish_review-second.json": "aec663d4399375eef3b1598de1b6c5f02aa6ddef220011f945bbe79d18ca8c07",
+    "lighting-baseline-wrong-page.json": "4de639271b3d620fc31e84a8ef161368e6fc7efb22848cf6774bd75eddcd2dd9",
+    "final-inputs-after.json": "80096ea41853c3ff90e561999495e772c17e8e738e8624ef9543ff0a34b6f5f7",
+    "skin_rarity_review-final.json": "a073e6f7f3418ae6ba8443b97cb17b46340208ef4a99731ac1d2bda3271240f1",
+    "skin_polish_review-final.json": "aec663d4399375eef3b1598de1b6c5f02aa6ddef220011f945bbe79d18ca8c07",
+    "lighting-baseline.json": "c7b12ff58846171a6161b1d7a2c8909740b037b01fa411f03993839548e7a95b",
+    "skin_polish_review-initial.json": "dcf58bff85adf72283f0ee0c20a6673aa9183eaa5a8ce9835ad71cfcfcaff55a"
+  },
+  "helpers": "All owned Godot helpers completed with exit 0; no server or user applications stopped",
+  "limitations": [
+    "Headless tests measure geometry/material/camera/lifecycle, not pixels.",
+    "Blender comparison is an offline lighting approximation.",
+    "Browser/device visual quality and phone frame time remain unmeasured."
+  ]
+}

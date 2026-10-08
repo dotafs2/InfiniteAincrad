@@ -1,0 +1,77 @@
+{
+  "checks": 1,
+  "events": [
+    {
+      "at": [
+        71.0,
+        5.82842445373535,
+        54.0
+      ],
+      "kind": "cake",
+      "style": "thud"
+    },
+    {
+      "at": [
+        71.3958435058594,
+        2.20093488693237,
+        41.8611221313477
+      ],
+      "kind": "cookie",
+      "style": "crumb"
+    },
+    {
+      "at": [
+        71.0,
+        0.035000029951334,
+        48.0
+      ],
+      "kind": "egg",
+      "style": "glaze"
+    },
+    {
+      "at": [
+        70.4462051391602,
+        0.0350000001490116,
+        42.2513084411621
+      ],
+      "kind": "cookie",
+      "style": "crumb"
+    }
+  ],
+  "failures": [],
+  "surfaces": [
+    {
+      "collider": "@StaticBody3D@105",
+      "hit": "(71.0, 0.0, 42.0)",
+      "is_ground": true,
+      "kind": "",
+      "spawn": [
+        71.0,
+        8,
+        42.0
+      ]
+    },
+    {
+      "collider": "@StaticBody3D@105",
+      "hit": "(71.0, 0.0, 48.0)",
+      "is_ground": true,
+      "kind": "",
+      "spawn": [
+        71.0,
+        8,
+        48.0
+      ]
+    },
+    {
+      "collider": "food_berry_2769",
+      "hit": "(71.0, 5.793425, 54.0)",
+      "is_ground": false,
+      "kind": "berry",
+      "spawn": [
+        71.0,
+        8,
+        54.0
+      ]
+    }
+  ]
+}

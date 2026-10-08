@@ -1,0 +1,33 @@
+{
+  "status": "local_project_only_no_native_build_or_upload",
+  "verified_original_web_inputs": 791,
+  "verified_original_web_artifacts": 18,
+  "ios_project_directory": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/ios-preparation-20260930-03/xcode/SinkCity.xcodeproj",
+  "helper_sha256": "7cc927ef412accd05f0e7af2fc5dca23fe049c44d95369a883a88f5765a05a4e",
+  "preparation_receipt_sha256": "1c5dad2a44b65a6d58da77a7a9731baac20aa644c893af772fcd4458c98e879a",
+  "native_pck_sha256": "cee0c5f49200859f4fc023b5d966111894e81219aade2f1d52b15e4784f7e2c6",
+  "project_parse": "xcodebuild -list -json exited 0; native compilation not attempted",
+  "local_toolchain": {
+    "macos": "14.5",
+    "xcode": "16.2",
+    "ios_sdk": "18.2",
+    "valid_signing_identities": 0
+  },
+  "remaining": [
+    "Supported host OS and Xcode/SDK upgrade",
+    "Final Bundle ID and signing setup",
+    "Official simulator archive lacks advertised arm64 slice",
+    "Native device build and iPhone 14 testing",
+    "Store credits, privacy/support and metadata",
+    "App Store Connect/TestFlight setup and explicitly authorized upload"
+  ],
+  "bound_evidence_sha256": {
+    "artifacts/ios-20260930/template-provenance.json": "ea726de7da155cec705c59528ca3f094397cea3ae183cbe1e34c25f017be5fa7",
+    "artifacts/ios-20260930/xcode-project-list.stdout.json": "e7621bbf4aa090d4ab75e9d3af4ae814872a7aa4497558df5def30d560c9f3f6",
+    "artifacts/ios-20260930/xcode-project-list.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/ios-20260930/review/resources.json": "43c9a4c98023cdd54eafa9b9da9629e2f2d10a669dad974fee837eaa5a347e11",
+    "artifacts/ios-20260930/review/resource_probe.gd": "2ec247512df47efb351312554fca3bfb846ec50187eb91884b4b38a55fe89f6b",
+    "artifacts/ios-20260930/review/review.json": "f1c2907ff687e307d37b177fe99716d04b15638d84066518c106cf44f4f3619d"
+  },
+  "independent_review_status": "PASS_FOR_DEVICE_XCODE_PROJECT_PREPARATION_WITH_SIMULATOR_LIMITATION"
+}

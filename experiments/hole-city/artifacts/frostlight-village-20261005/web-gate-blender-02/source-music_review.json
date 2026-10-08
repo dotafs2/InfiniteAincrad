@@ -1,0 +1,137 @@
+{
+  "checks": 120,
+  "evidence": {
+    "phone_targets": [
+      {
+        "font_size": 23,
+        "glyph_width": 116.0,
+        "label": "MUSIC  ON",
+        "points_375": [
+          249.999984741211,
+          48.6111106872559
+        ],
+        "rect": [
+          90.0,
+          236.0,
+          360.0,
+          70.0
+        ],
+        "screen": "settings"
+      },
+      {
+        "font_size": 23,
+        "glyph_width": 126.0,
+        "label": "SOUND  ON",
+        "points_375": [
+          249.999984741211,
+          48.6111106872559
+        ],
+        "rect": [
+          90.0,
+          332.0,
+          360.0,
+          70.0
+        ],
+        "screen": "settings"
+      },
+      {
+        "font_size": 23,
+        "glyph_width": 129.0,
+        "label": "MUSIC  OFF",
+        "points_375": [
+          249.999984741211,
+          48.6111106872559
+        ],
+        "rect": [
+          90.0,
+          236.0,
+          360.0,
+          70.0
+        ],
+        "screen": "settings"
+      },
+      {
+        "font_size": 23,
+        "glyph_width": 139.0,
+        "label": "SOUND  OFF",
+        "points_375": [
+          249.999984741211,
+          48.6111106872559
+        ],
+        "rect": [
+          90.0,
+          332.0,
+          360.0,
+          70.0
+        ],
+        "screen": "settings"
+      },
+      {
+        "font_size": 15,
+        "glyph_width": 72.0,
+        "label": "MUSIC ON",
+        "points_375": [
+          77.7777709960938,
+          44.4444427490234
+        ],
+        "rect": [
+          90.0,
+          681.0,
+          112.0,
+          64.0
+        ],
+        "screen": "pause"
+      },
+      {
+        "font_size": 17,
+        "glyph_width": 63.0,
+        "label": "SFX ON",
+        "points_375": [
+          77.7777709960938,
+          44.4444427490234
+        ],
+        "rect": [
+          214.0,
+          681.0,
+          112.0,
+          64.0
+        ],
+        "screen": "pause"
+      },
+      {
+        "font_size": 15,
+        "glyph_width": 81.0,
+        "label": "MUSIC OFF",
+        "points_375": [
+          77.7777709960938,
+          44.4444427490234
+        ],
+        "rect": [
+          90.0,
+          681.0,
+          112.0,
+          64.0
+        ],
+        "screen": "pause"
+      },
+      {
+        "font_size": 17,
+        "glyph_width": 72.0,
+        "label": "SFX OFF",
+        "points_375": [
+          77.7777709960938,
+          44.4444427490234
+        ],
+        "rect": [
+          214.0,
+          681.0,
+          112.0,
+          64.0
+        ],
+        "screen": "pause"
+      }
+    ]
+  },
+  "failures": [],
+  "scope": "Actual headless engine state and UI input dispatch; no audible/browser autoplay certification."
+}

@@ -1,0 +1,11 @@
+--- before/skin_fx_acceptance.gd
++++ current/skin_fx_acceptance.gd
+@@ -54,7 +54,7 @@
+ 		families[player.fx_family]=true
+ 		metrics.append({"id":definition.id,"family":player.fx_family,"draw_meshes":rendered.size(),"triangles":triangles,"sparks":player.motes.size()})
+ 		preview.free();player.free()
+-	check(families.size()==44,"44 skins expose distinct geometry/motion families")
++	check(families.size()==32,"Thirty sculpted/effect families and two deliberately shared low-rarity surface families")
+ 	var result:={"checks":checks,"failures":failures,"skins":metrics}
+ 	print("SKIN_FX_ACCEPTANCE "+JSON.stringify(result))
+ 	for arg in OS.get_cmdline_user_args():

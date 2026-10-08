@@ -1,0 +1,27 @@
+--- artifacts/retention-20260929/test-maintenance-before/review_food_goals.gd
++++ tests/review_food_goals.gd
+@@ -90,18 +90,20 @@
+ 	game.food_collected={"egg":10,"donut":4,"cake":1}
+ 	check(game.ui.food_order_counts()==[10,4,1],"Displayed food-order receipt counts agree with goal gates")
+ 	game.player.score=499;tick()
+-	check(game.phase=="playing","Complete food and city goals cannot finish below 500 points")
++	check(game.phase=="playing","Complete food and city goals cannot end the timed run below the old milestone")
+ 	game.player.score=500
+ 	for key in ["buildings","landmarks","heaps"]:
+ 		var value:int=city.collection_progress[key];city.collection_progress[key]=value-1;tick()
+-		check(game.phase=="playing","500 points and all other goals cannot bypass missing "+key)
++		check(game.phase=="playing","Crossing the old score milestone cannot finish the timer with missing "+key)
+ 		city.collection_progress[key]=value
+ 	for key in ["egg","donut","cake"]:
+ 		var value:int=game.food_collected[key];game.food_collected[key]=value-1;tick()
+-		check(game.phase=="playing","500 points and city goals cannot bypass food receipt "+key)
++		check(game.phase=="playing","Crossing the old score milestone cannot finish the timer with missing food "+key)
+ 		game.food_collected[key]=value
+ 	tick()
+-	check(game.phase=="complete" and game.stage==2 and game.round_coins==70,"All exact thresholds settle once through the real game tick")
++	check(game.phase=="playing" and game.stage==1 and game.round_coins==0,"All score and optional food objectives leave the timed run active")
++	game.remaining=.005;tick()
++	check(game.phase=="complete" and game.stage==2 and game.round_coins==70,"Timer expiry settles once through the real game tick")
+ 	before_score=game.player.score;var final_progress:Dictionary=city.collection_progress.duplicate(true)
+ 	receipt(ordinary[11].tiers[0],game.player)
+ 	check(game.player.score==before_score and city.collection_progress==final_progress,"Late result-screen physical receipts cannot alter settled score or city goals")

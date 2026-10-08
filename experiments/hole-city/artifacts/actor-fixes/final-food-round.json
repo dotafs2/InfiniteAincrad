@@ -1,0 +1,43 @@
+[
+  {
+    "suite": "food_round",
+    "passed": true,
+    "report": {
+      "passed": true,
+      "rounds": [
+        {
+          "contested": true,
+          "food": {
+            "berry": 10,
+            "burger": 8,
+            "cake": 7,
+            "cookie": 9,
+            "donut": 8,
+            "person": 3,
+            "signal_pylon": 1,
+            "sushi": 3
+          },
+          "phase": "complete",
+          "score": 426,
+          "seconds": 106.349999999995
+        },
+        {
+          "contested": false,
+          "food": {
+            "berry": 72,
+            "burger": 9,
+            "cake": 1,
+            "cookie": 68,
+            "donut": 38,
+            "person": 30,
+            "signal_pylon": 5,
+            "sushi": 3
+          },
+          "phase": "complete",
+          "score": 488,
+          "seconds": 160.633333333353
+        }
+      ]
+    }
+  }
+]

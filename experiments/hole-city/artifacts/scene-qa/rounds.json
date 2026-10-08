@@ -1,0 +1,73 @@
+[
+  {
+    "suite": "fidelity",
+    "passed": true,
+    "report": {
+      "checks": 24,
+      "city_reachability": {
+        "level": 8,
+        "phase": "complete",
+        "rivals_retired_for_fixture": true,
+        "score": 422,
+        "seconds": 106.233333333329,
+        "ticks": 6374
+      },
+      "failures": [],
+      "live_rival_run": {
+        "level": 8,
+        "phase": "complete",
+        "score": 420,
+        "seconds": 93.5333333333293,
+        "ticks": 5612
+      },
+      "objects": 656
+    }
+  },
+  {
+    "suite": "food_round",
+    "passed": true,
+    "report": {
+      "passed": true,
+      "rounds": [
+        {
+          "contested": true,
+          "food": {
+            "bacon": 11,
+            "berry": 10,
+            "burger": 12,
+            "cake": 11,
+            "cookie": 18,
+            "donut": 9,
+            "egg": 13,
+            "pancake": 14,
+            "person": 9,
+            "pizza": 9,
+            "sushi": 14
+          },
+          "phase": "complete",
+          "score": 420,
+          "seconds": 105.483333333329
+        },
+        {
+          "contested": false,
+          "food": {
+            "bacon": 9,
+            "berry": 9,
+            "burger": 13,
+            "cake": 11,
+            "cookie": 22,
+            "donut": 31,
+            "egg": 11,
+            "pancake": 14,
+            "person": 11,
+            "pizza": 11,
+            "sushi": 10
+          },
+          "phase": "complete",
+          "score": 422,
+          "seconds": 87.666666666663
+        }
+      ]
+    }
+  }
+]

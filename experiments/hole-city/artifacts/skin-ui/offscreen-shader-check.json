@@ -1,0 +1,70 @@
+{
+  "renderer": "Apple Software Renderer / OpenGL 4.1",
+  "shaders_compiled": 5,
+  "skins_rendered": 10,
+  "samples_seconds": [
+    0.5,
+    1.5
+  ],
+  "frames": [
+    {
+      "skin": "core_shell",
+      "changed_pixels": 17906,
+      "mean_rgb_delta": 3.831
+    },
+    {
+      "skin": "copper_ring",
+      "changed_pixels": 3253,
+      "mean_rgb_delta": 1.326
+    },
+    {
+      "skin": "moss_bloom",
+      "changed_pixels": 0,
+      "mean_rgb_delta": 0.0
+    },
+    {
+      "skin": "gravitas",
+      "changed_pixels": 693,
+      "mean_rgb_delta": 0.065
+    },
+    {
+      "skin": "lantern",
+      "changed_pixels": 4978,
+      "mean_rgb_delta": 0.632
+    },
+    {
+      "skin": "shard",
+      "changed_pixels": 3667,
+      "mean_rgb_delta": 1.261
+    },
+    {
+      "skin": "cinder",
+      "changed_pixels": 13475,
+      "mean_rgb_delta": 5.091
+    },
+    {
+      "skin": "tide",
+      "changed_pixels": 15849,
+      "mean_rgb_delta": 7.578
+    },
+    {
+      "skin": "orbit",
+      "changed_pixels": 18915,
+      "mean_rgb_delta": 4.038
+    },
+    {
+      "skin": "prism_vale",
+      "changed_pixels": 16713,
+      "mean_rgb_delta": 4.555
+    }
+  ],
+  "failures": [],
+  "scope": "Shipped shader equations and exported meshes in a windowless CGL harness; not a Godot frame, browser review or device benchmark. Geometry sampled at 0.5 seconds; local leaf/stone/spark motion is checked separately in Godot.",
+  "shader_sha256": {
+    "fidelity/shaders/accretion.gdshader": "73f110a8e0a1b8eadeb8426dba79bc36727909d4f865fa6f7ca43737ea14e8f6",
+    "fidelity/shaders/aurora.gdshader": "38f339f6ab05cce1afd9ed18b52bf00e360f15dfed283fcdc11467271df23800",
+    "fidelity/shaders/solid_skin.gdshader": "2e008f85c1c60fe3582a1cad9571f55c6c04eb0cbb0dd24e6336b67e8a297843",
+    "fidelity/shaders/tide.gdshader": "e2a3ad7347f8049c5ee0814ba51e40eaf69a1f1d34a574a892d4689b6e62f1d1",
+    "fidelity/cinder_flame.gdshader": "ecf6a514855efc1e93684e4e91b51e13b04faf12870627fb8e1c02ffe3c43907"
+  }
+}

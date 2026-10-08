@@ -1,0 +1,1822 @@
+{
+	"audits": [
+		{
+			"categories": {
+				"ambient_actor": 48,
+				"authored_actor": 152,
+				"barrier": 4,
+				"bench": 4,
+				"bike_rack": 4,
+				"bin": 54,
+				"bollard": 4,
+				"building": 48,
+				"bus_stop": 4,
+				"cone": 26,
+				"cover": 2,
+				"dumpster": 4,
+				"fence": 44,
+				"hydrant": 4,
+				"kiosk": 4,
+				"lamp": 32,
+				"mailbox": 4,
+				"person": 64,
+				"planter": 4,
+				"railing": 36,
+				"sign": 4,
+				"signal_pylon": 5,
+				"traffic_light": 4,
+				"tree": 48,
+				"vehicle": 49
+			},
+			"issues": [],
+			"map": "city",
+			"recipe_objects": 152,
+			"registered_bodies": 656
+		},
+		{
+			"categories": {
+				"food_bacon": 66,
+				"food_berry": 84,
+				"food_burger": 108,
+				"food_cake": 93,
+				"food_cookie": 174,
+				"food_donut": 210,
+				"food_egg": 83,
+				"food_pancake": 91,
+				"food_pizza": 64,
+				"food_sushi": 75,
+				"person": 48
+			},
+			"issues": [],
+			"map": "food",
+			"recipe_objects": 0,
+			"registered_bodies": 1096
+		}
+	],
+	"checks": 435,
+	"failures": [
+		"print_farm/frame: complete gravity fall is collected",
+		"solder_station/frame: complete gravity fall is collected",
+		"radio_dish/frame: complete gravity fall is collected",
+		"meteor_cabinet/frame: complete gravity fall is collected",
+		"prism_tower/prism_1.9: complete gravity fall is collected",
+		"weather_balloon/frame: complete gravity fall is collected",
+		"solar_tracker/frame: complete gravity fall is collected",
+		"street_sweeper/frame: complete gravity fall is collected",
+		"ribbon_gate/frame: complete gravity fall is collected"
+	],
+	"negative_controls": [
+		{
+			"fault": "old single-owner luggage fixture",
+			"issues": [
+				{
+					"code": "shared_physics_owner",
+					"id": "luggage_carousel/suitcase",
+					"other": "luggage_carousel/frame"
+				},
+				{
+					"actual": "(1.9, 0.805, 1.0)",
+					"code": "geometry_exceeds_authored_size",
+					"expected": "(0.52, 0.45, 0.38)",
+					"id": "luggage_carousel/suitcase"
+				}
+			]
+		},
+		{
+			"fault": "old diameter-as-radius mesh",
+			"issues": [
+				{
+					"actual": "(1.635817, 2.24, 1.72)",
+					"code": "geometry_exceeds_authored_size",
+					"expected": "(0.86, 1.81, 0.86)",
+					"id": "route_globe/frame"
+				},
+				{
+					"code": "visual_outside_collider",
+					"id": "route_globe/frame"
+				},
+				{
+					"code": "oversized_collision_box",
+					"id": "route_globe/frame"
+				}
+			]
+		},
+		{
+			"fault": "missing registry owner",
+			"issues": [
+				{
+					"code": "missing_swallow_registration",
+					"id": "route_globe/frame"
+				}
+			]
+		}
+	],
+	"traversal": [
+		{
+			"footprint": 0.32202485203743,
+			"id": "luggage_carousel/suitcase",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.766666666666667,
+			"start": [
+				-46.8499984741211,
+				1.07999992370605,
+				1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.254950970411301,
+			"id": "bicycle_dock/dock_0",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.75,
+			"start": [
+				-51.75,
+				0.625,
+				-1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.59341686964035,
+			"id": "route_globe/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.816666666666667,
+			"start": [
+				-53.2999992370605,
+				0.944999992847443,
+				-1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.943398118019104,
+			"id": "espresso_cart/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.833333333333333,
+			"start": [
+				37.7000007629395,
+				1.01999998092651,
+				-1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.736613869667053,
+			"id": "bread_oven/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.816666666666667,
+			"start": [
+				39.8499984741211,
+				0.95250004529953,
+				1.74000000953674
+			]
+		},
+		{
+			"footprint": 0.986154139041901,
+			"id": "fish_counter/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.75,
+			"start": [
+				42.0,
+				0.525000035762787,
+				-1.70000004768372
+			]
+		},
+		{
+			"id": "fish_counter/fish_1",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "fish_counter/fish_2",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 0.943398118019104,
+			"id": "fruit_stand/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.833333333333333,
+			"start": [
+				44.1500015258789,
+				1.0699999332428,
+				1.70000004768372
+			]
+		},
+		{
+			"id": "fruit_stand/fruit_-0.4_-0.2",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "fruit_stand/fruit_-0.4_0.2",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "fruit_stand/fruit_0_-0.2",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "fruit_stand/fruit_0_0.2",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "fruit_stand/fruit_0.4_-0.2",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "fruit_stand/fruit_0.4_0.2",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 0.782623767852783,
+			"id": "flower_bar/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.733333333333333,
+			"start": [
+				46.2999992370605,
+				0.394999980926514,
+				-1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.248407065868378,
+			"id": "flower_bar/flower_-0.5",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.0166666666666667,
+			"start": [
+				45.7999992370605,
+				-3.47452235221863,
+				-1.70000004768372
+			]
+		},
+		{
+			"id": "flower_bar/flower_0",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "flower_bar/flower_0.5",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 1.11635565757751,
+			"id": "noodle_booth/frame",
+			"radius": 1.65,
+			"result": "collected",
+			"seconds": 0.85,
+			"start": [
+				37.7000007629395,
+				1.1949999332428,
+				1.70000004768372
+			]
+		},
+		{
+			"id": "noodle_booth/noodle_bowl",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 0.613209247589111,
+			"id": "market_balance/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				39.8499984741211,
+				0.737500011920929,
+				-1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.566789209842682,
+			"id": "juice_press/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.816666666666667,
+			"start": [
+				42.0,
+				0.910000026226044,
+				1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.64924955368042,
+			"id": "pretzel_rack/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.8,
+			"start": [
+				44.1500015258789,
+				0.865000009536743,
+				-1.70000004768372
+			]
+		},
+		{
+			"id": "pretzel_rack/pretzel_-0.3_0.55",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "pretzel_rack/pretzel_0.3_0.55",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "pretzel_rack/pretzel_-0.3_1",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "pretzel_rack/pretzel_0.3_1",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "pretzel_rack/pretzel_0.3_1.45",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 0.850000023841858,
+			"id": "street_grill/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.816666666666667,
+			"start": [
+				46.2999992370605,
+				0.915000021457672,
+				1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.901387810707092,
+			"id": "laser_cutter/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.8,
+			"start": [
+				34.3306999206543,
+				0.889999985694885,
+				22.8414001464844
+			]
+		},
+		{
+			"end": {
+				"claimed": true,
+				"frozen": false,
+				"mask": 1,
+				"position": "(33.1892, 0.934904, 26.85474)"
+			},
+			"footprint": 0.806225776672363,
+			"id": "print_farm/frame",
+			"radius": 1.2,
+			"result": "stuck",
+			"seconds": 6.0,
+			"start": [
+				34.0717010498047,
+				0.985000014305115,
+				26.8558006286621
+			]
+		},
+		{
+			"id": "print_farm/printed_part",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 0.9290452003479,
+			"id": "precision_lathe/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				37.8095016479492,
+				0.725000023841858,
+				25.3689002990723
+			]
+		},
+		{
+			"footprint": 0.548292815685272,
+			"id": "drill_press/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.816666666666667,
+			"start": [
+				37.5503997802734,
+				0.990000069141388,
+				29.38330078125
+			]
+		},
+		{
+			"footprint": 0.874642789363861,
+			"id": "welding_bench/frame",
+			"result": "protected_by_building",
+			"start": [
+				41.2882995605469,
+				0.495000004768372,
+				27.8964004516602
+			]
+		},
+		{
+			"footprint": 0.320156216621399,
+			"id": "welding_bench/workpiece",
+			"result": "protected_by_building",
+			"start": [
+				41.2882995605469,
+				1.2024998664856,
+				27.8964004516602
+			]
+		},
+		{
+			"footprint": 0.205182835459709,
+			"id": "welding_bench/welder",
+			"result": "protected_by_building",
+			"start": [
+				40.6883010864258,
+				0.439999997615814,
+				27.6963996887207
+			]
+		},
+		{
+			"footprint": 0.751797199249268,
+			"id": "assembly_arm/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				32.6322975158691,
+				0.780000030994415,
+				25.5921001434326
+			]
+		},
+		{
+			"footprint": 0.930657684803009,
+			"id": "roller_conveyor/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.733333333333333,
+			"start": [
+				36.0700988769531,
+				0.439999997615814,
+				24.1051998138428
+			]
+		},
+		{
+			"end": {
+				"claimed": true,
+				"frozen": false,
+				"mask": 1,
+				"position": "(36.66856, 0.445881, 28.11908)"
+			},
+			"footprint": 0.695071935653687,
+			"id": "solder_station/frame",
+			"radius": 0.85,
+			"result": "stuck",
+			"seconds": 6.0,
+			"start": [
+				35.8110008239746,
+				0.495000004768372,
+				28.1196002960205
+			]
+		},
+		{
+			"id": "solder_station/station",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "solder_station/circuit_board",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "solder_station/iron",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 0.649250864982605,
+			"id": "tool_chest/frame",
+			"result": "protected_by_building",
+			"start": [
+				39.548900604248,
+				0.615000009536743,
+				26.6526012420654
+			]
+		},
+		{
+			"footprint": 0.919238805770874,
+			"id": "workshop_gantry/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.866666666666667,
+			"start": [
+				39.2897987365723,
+				1.23499989509583,
+				30.6469993591309
+			]
+		},
+		{
+			"footprint": 0.555090069770813,
+			"id": "lock_wheel/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				15.4299001693726,
+				0.704999983310699,
+				41.9869003295898
+			]
+		},
+		{
+			"footprint": 0.585768699645996,
+			"id": "mooring_bollard/frame",
+			"result": "protected_by_building",
+			"start": [
+				12.8606996536255,
+				0.340000003576279,
+				45.0822982788086
+			]
+		},
+		{
+			"footprint": 1.06213223934174,
+			"id": "canal_lift_bridge/frame",
+			"result": "protected_by_building",
+			"start": [
+				16.7586002349854,
+				0.764999985694885,
+				46.0764007568359
+			]
+		},
+		{
+			"footprint": 0.847657859325409,
+			"id": "waterwheel/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.816666666666667,
+			"start": [
+				14.1893997192383,
+				0.915000021457672,
+				49.1719017028809
+			]
+		},
+		{
+			"footprint": 0.604152143001556,
+			"id": "canal_pump/frame",
+			"result": "protected_by_building",
+			"start": [
+				18.3873996734619,
+				0.704999983310699,
+				50.1660003662109
+			]
+		},
+		{
+			"footprint": 0.565685451030731,
+			"id": "navigation_buoy/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				12.1962995529175,
+				0.777500033378601,
+				43.0376014709473
+			]
+		},
+		{
+			"footprint": 0.805931150913239,
+			"id": "sluice_gate/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.833333333333333,
+			"start": [
+				16.0942001342773,
+				1.00999999046326,
+				44.0317001342773
+			]
+		},
+		{
+			"footprint": 0.759539365768433,
+			"id": "cargo_crane/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.85,
+			"start": [
+				14.0450000762939,
+				1.1599999666214,
+				47.1271018981934
+			]
+		},
+		{
+			"footprint": 1.03077673912048,
+			"id": "survey_skiff/frame",
+			"result": "protected_by_building",
+			"start": [
+				17.4230003356934,
+				0.439999967813492,
+				48.0212020874023
+			]
+		},
+		{
+			"footprint": 0.615045547485352,
+			"id": "tow_winch/frame",
+			"result": "protected_by_building",
+			"start": [
+				14.8662996292114,
+				0.595000028610229,
+				51.2165985107422
+			]
+		},
+		{
+			"footprint": 0.916845619678497,
+			"id": "reflector_telescope/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.85,
+			"start": [
+				-10.0331001281738,
+				1.10031545162201,
+				36.380199432373
+			]
+		},
+		{
+			"end": {
+				"claimed": true,
+				"frozen": false,
+				"mask": 1,
+				"position": "(-13.78913, 0.843335, 37.22365)"
+			},
+			"footprint": 0.989949584007263,
+			"id": "radio_dish/frame",
+			"radius": 1.2,
+			"result": "stuck",
+			"seconds": 6.0,
+			"start": [
+				-13.9310998916626,
+				1.13499999046326,
+				37.3742980957031
+			]
+		},
+		{
+			"footprint": 0.867248177528381,
+			"id": "solar_orrery/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				-11.3243474960327,
+				0.752500057220459,
+				40.4696998596191
+			]
+		},
+		{
+			"footprint": 0.640312433242798,
+			"id": "gyroscope/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				-15.2599000930786,
+				0.777499973773956,
+				41.4637985229492
+			]
+		},
+		{
+			"end": {
+				"claimed": true,
+				"frozen": false,
+				"mask": 1,
+				"position": "(-12.69162, 0.433457, 44.27319)"
+			},
+			"footprint": 0.647476077079773,
+			"id": "meteor_cabinet/frame",
+			"radius": 0.85,
+			"result": "stuck",
+			"seconds": 6.0,
+			"start": [
+				-12.6906995773315,
+				0.485000014305115,
+				44.5992012023926
+			]
+		},
+		{
+			"id": "meteor_cabinet/meteor",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 0.555787742137909,
+			"id": "telemetry_mast/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.866666666666667,
+			"start": [
+				-13.2666997909546,
+				1.32999992370605,
+				35.3294982910156
+			]
+		},
+		{
+			"footprint": 0.459619373083115,
+			"id": "prism_tower/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.666666666666667,
+			"start": [
+				-10.6975002288818,
+				0.28999999165535,
+				38.4249000549316
+			]
+		},
+		{
+			"footprint": 0.459619373083115,
+			"id": "prism_tower/prism_0.8",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.633333333333333,
+			"start": [
+				-10.7159118652344,
+				0.259144246578217,
+				37.6779403686523
+			]
+		},
+		{
+			"end": {
+				"claimed": true,
+				"frozen": false,
+				"mask": 1,
+				"position": "(-11.34588, 2.291557, 38.30933)"
+			},
+			"footprint": 0.459619373083115,
+			"id": "prism_tower/prism_1.9",
+			"radius": 0.85,
+			"result": "stuck",
+			"seconds": 6.0,
+			"start": [
+				-10.6974973678589,
+				2.34000182151794,
+				38.4249000549316
+			]
+		},
+		{
+			"end": {
+				"claimed": false,
+				"frozen": false,
+				"mask": 1,
+				"position": "(-12.86208, 0.45598, 40.5881)"
+			},
+			"footprint": 0.690019607543945,
+			"id": "weather_balloon/frame",
+			"radius": 0.85,
+			"result": "stuck",
+			"seconds": 6.0,
+			"start": [
+				-14.5954999923706,
+				1.28749990463257,
+				39.4189987182617
+			]
+		},
+		{
+			"footprint": 0.901387810707092,
+			"id": "interferometer/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				-12.0263004302979,
+				0.792500019073486,
+				42.5144996643066
+			]
+		},
+		{
+			"footprint": 0.559304594993591,
+			"id": "star_projector/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				-15.9243001937866,
+				0.714999973773956,
+				43.5186004638672
+			]
+		},
+		{
+			"footprint": 0.881490230560303,
+			"id": "hydroponic_rack/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.816666666666667,
+			"start": [
+				-32.3322982788086,
+				0.902500033378601,
+				25.5921001434326
+			]
+		},
+		{
+			"id": "hydroponic_rack/plant_-0.5_0.55",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "hydroponic_rack/plant_0_0.55",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "hydroponic_rack/plant_0.5_0.55",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "hydroponic_rack/plant_-0.5_1.1",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "hydroponic_rack/plant_0_1.1",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "hydroponic_rack/plant_0.5_1.1",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "hydroponic_rack/plant_0_1.65",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "hydroponic_rack/plant_0.5_1.65",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 0.815785527229309,
+			"id": "seed_sorter/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.8,
+			"start": [
+				-36.0700988769531,
+				0.892500042915344,
+				24.2826995849609
+			]
+		},
+		{
+			"footprint": 0.735272109508514,
+			"id": "compost_tumbler/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				-35.8110008239746,
+				0.70250004529953,
+				28.1196002960205
+			]
+		},
+		{
+			"footprint": 0.883883476257324,
+			"id": "irrigation_fan/frame",
+			"result": "protected_by_building",
+			"start": [
+				-39.548900604248,
+				0.737500011920929,
+				26.6326007843018
+			]
+		},
+		{
+			"footprint": 0.922293305397034,
+			"id": "sprout_bed/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.716666666666667,
+			"start": [
+				-39.2897987365723,
+				0.374999970197678,
+				30.6469993591309
+			]
+		},
+		{
+			"footprint": 0.919238746166229,
+			"id": "rain_collector/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.733333333333333,
+			"start": [
+				-34.3289909362793,
+				0.725005209445953,
+				22.8338012695312
+			]
+		},
+		{
+			"footprint": 0.740000009536743,
+			"id": "mushroom_log/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.683333333333333,
+			"start": [
+				-35.0117874145508,
+				0.451131522655487,
+				26.7761154174805
+			]
+		},
+		{
+			"footprint": 0.383739173412323,
+			"id": "soil_scanner/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.766666666666667,
+			"start": [
+				-37.7570037841797,
+				0.605000019073486,
+				25.3689002990723
+			]
+		},
+		{
+			"footprint": 0.794119000434875,
+			"id": "grow_lamp/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.816666666666667,
+			"start": [
+				-37.5503997802734,
+				0.930000066757202,
+				29.38330078125
+			]
+		},
+		{
+			"footprint": 0.519831776618958,
+			"id": "pollinator_hive/frame",
+			"result": "protected_by_building",
+			"start": [
+				-41.2882995605469,
+				0.240000009536743,
+				27.906400680542
+			]
+		},
+		{
+			"footprint": 0.442295134067535,
+			"id": "pollinator_hive/hive_tray_0.55",
+			"result": "protected_by_building",
+			"start": [
+				-41.2882995605469,
+				0.590000033378601,
+				27.8964004516602
+			]
+		},
+		{
+			"footprint": 0.442295134067535,
+			"id": "pollinator_hive/hive_tray_0.82",
+			"result": "protected_by_building",
+			"start": [
+				-41.2882995605469,
+				0.860000014305115,
+				27.8964004516602
+			]
+		},
+		{
+			"footprint": 0.442295134067535,
+			"id": "pollinator_hive/hive_tray_1.09",
+			"result": "protected_by_building",
+			"start": [
+				-41.2882995605469,
+				1.12999999523163,
+				27.8964004516602
+			]
+		},
+		{
+			"footprint": 0.636396110057831,
+			"id": "pollinator_hive/hive_lid",
+			"result": "protected_by_building",
+			"start": [
+				-41.2882995605469,
+				1.4099999666214,
+				27.8964004516602
+			]
+		},
+		{
+			"footprint": 0.427353739738464,
+			"id": "ticket_machine/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.8,
+			"start": [
+				-44.7000007629395,
+				0.89000004529953,
+				1.72749996185303
+			]
+		},
+		{
+			"footprint": 0.790569365024567,
+			"id": "turnstile/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.766666666666667,
+			"start": [
+				-46.8499984741211,
+				0.590000033378601,
+				-1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.335409849882126,
+			"id": "curb_charger/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				-48.9500007629395,
+				0.752500057220459,
+				1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.896172404289246,
+			"id": "bicycle_dock/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.683333333333333,
+			"start": [
+				-51.1500015258789,
+				0.140000000596046,
+				-1.70000004768372
+			]
+		},
+		{
+			"id": "bicycle_dock/dock_0",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"id": "bicycle_dock/dock_1",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 0.254950970411301,
+			"id": "bicycle_dock/dock_2",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.0166666666666667,
+			"start": [
+				-50.5500030517578,
+				-3.42390179634094,
+				-1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.986154139041901,
+			"id": "rail_buffer/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.716666666666667,
+			"start": [
+				-53.2999992370605,
+				0.359999984502792,
+				1.70000004768372
+			]
+		},
+		{
+			"footprint": 1.1025538444519,
+			"id": "rain_shelter/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.85,
+			"start": [
+				-44.7000007629395,
+				1.11999988555908,
+				-1.70000004768372
+			]
+		},
+		{
+			"id": "rain_shelter/bench",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 1.07354545593262,
+			"id": "luggage_carousel/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.733333333333333,
+			"start": [
+				-46.8499984741211,
+				0.442499965429306,
+				1.70000004768372
+			]
+		},
+		{
+			"id": "luggage_carousel/suitcase",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 0.579870760440826,
+			"id": "crossing_semaphore/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.833333333333333,
+			"start": [
+				-48.560001373291,
+				1.03999996185303,
+				-1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.423858761787415,
+			"id": "tram_stop/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.833333333333333,
+			"start": [
+				-51.1500015258789,
+				1.11000001430511,
+				1.73750007152557
+			]
+		},
+		{
+			"id": "route_globe/frame",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 0.89220255613327,
+			"id": "pocket_ferris_wheel/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.833333333333333,
+			"start": [
+				-31.4992008209229,
+				1.11500000953674,
+				-20.784200668335
+			]
+		},
+		{
+			"footprint": 1.27279222011566,
+			"id": "carousel/frame",
+			"radius": 1.65,
+			"result": "collected",
+			"seconds": 1.7,
+			"start": [
+				-31.2401008605957,
+				1.12749993801117,
+				-24.7985992431641
+			]
+		},
+		{
+			"footprint": 1.11018013954163,
+			"id": "drum_stage/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.75,
+			"start": [
+				-34.9779014587402,
+				0.550000011920929,
+				-23.3117008209229
+			]
+		},
+		{
+			"footprint": 0.503841638565063,
+			"id": "speaker_stack/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.716666666666667,
+			"start": [
+				-34.7188987731934,
+				0.389999985694885,
+				-27.2985000610352
+			]
+		},
+		{
+			"footprint": 0.503841638565063,
+			"id": "speaker_stack/upper_speaker",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.0166666666666667,
+			"start": [
+				-34.7188987731934,
+				-3.32522010803223,
+				-27.2985000610352
+			]
+		},
+		{
+			"footprint": 0.850000023841858,
+			"id": "pipe_organ/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.866666666666667,
+			"start": [
+				-38.4566993713379,
+				1.30499994754791,
+				-25.8390998840332
+			]
+		},
+		{
+			"footprint": 0.829290807247162,
+			"id": "lantern_mobile/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.85,
+			"start": [
+				-29.5006999969482,
+				1.18999993801117,
+				-23.5347995758057
+			]
+		},
+		{
+			"footprint": 0.654312610626221,
+			"id": "popcorn_machine/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.816666666666667,
+			"start": [
+				-33.2386016845703,
+				0.95250004529953,
+				-22.0478992462158
+			]
+		},
+		{
+			"footprint": 0.838152766227722,
+			"id": "swing_spinner/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.833333333333333,
+			"start": [
+				-32.9794998168945,
+				1.06499993801117,
+				-26.0622997283936
+			]
+		},
+		{
+			"footprint": 0.703118324279785,
+			"id": "balloon_cart/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.85,
+			"start": [
+				-36.7173004150391,
+				1.17750000953674,
+				-24.5753993988037
+			]
+		},
+		{
+			"footprint": 0.917878031730652,
+			"id": "puppet_booth/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.833333333333333,
+			"start": [
+				-36.4583015441895,
+				1.0699999332428,
+				-28.5897998809814
+			]
+		},
+		{
+			"footprint": 0.907637596130371,
+			"id": "wind_turbine/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.916666666666667,
+			"start": [
+				-14.3482999801636,
+				1.58999991416931,
+				-38.6156997680664
+			]
+		},
+		{
+			"footprint": 0.68007355928421,
+			"id": "transformer/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.816666666666667,
+			"start": [
+				-11.7791004180908,
+				0.965000033378601,
+				-41.7536010742188
+			]
+		},
+		{
+			"footprint": 0.818916976451874,
+			"id": "flywheel_generator/frame",
+			"result": "protected_by_building",
+			"start": [
+				-15.6771001815796,
+				0.777499973773956,
+				-42.7476997375488
+			]
+		},
+		{
+			"footprint": 0.848528146743774,
+			"id": "cooling_tower/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.85,
+			"start": [
+				-13.1078996658325,
+				1.16499996185303,
+				-45.8432006835938
+			]
+		},
+		{
+			"footprint": 0.664831101894379,
+			"id": "battery_stack/frame",
+			"result": "protected_by_building",
+			"start": [
+				-17.0058002471924,
+				0.790000021457672,
+				-46.8372993469238
+			]
+		},
+		{
+			"end": {
+				"claimed": false,
+				"frozen": false,
+				"mask": 1,
+				"position": "(-14.98997, 0.951783, -41.59112)"
+			},
+			"footprint": 0.961793005466461,
+			"id": "solar_tracker/frame",
+			"radius": 1.2,
+			"result": "stuck",
+			"seconds": 6.0,
+			"start": [
+				-11.1147003173828,
+				0.866623163223267,
+				-39.7089004516602
+			]
+		},
+		{
+			"end": {
+				"claimed": true,
+				"frozen": false,
+				"mask": 1,
+				"position": "(-15.13993, 0.383622, -41.39659)"
+			},
+			"footprint": 0.98400092124939,
+			"id": "street_sweeper/frame",
+			"radius": 1.2,
+			"result": "stuck",
+			"seconds": 6.0,
+			"start": [
+				-15.0127000808716,
+				0.457500010728836,
+				-40.8655014038086
+			]
+		},
+		{
+			"footprint": 0.670559465885162,
+			"id": "water_purifier/frame",
+			"result": "protected_by_building",
+			"start": [
+				-12.4434995651245,
+				0.990000009536743,
+				-43.7984008789062
+			]
+		},
+		{
+			"footprint": 0.735272109508514,
+			"id": "heat_exchanger/frame",
+			"result": "protected_by_building",
+			"start": [
+				-16.3414993286133,
+				0.839999973773956,
+				-44.7924995422363
+			]
+		},
+		{
+			"footprint": 0.788051426410675,
+			"id": "cable_spool/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.766666666666667,
+			"start": [
+				-13.7722997665405,
+				0.665000021457672,
+				-47.8879013061523
+			]
+		},
+		{
+			"footprint": 0.873856723308563,
+			"id": "parcel_quadcopter/frame",
+			"result": "protected_by_building",
+			"start": [
+				12.1962995529175,
+				0.577499985694885,
+				-43.0376014709473
+			]
+		},
+		{
+			"footprint": 0.681180000305176,
+			"id": "parcel_locker/frame",
+			"result": "protected_by_building",
+			"start": [
+				16.0942001342773,
+				0.990000009536743,
+				-44.0092010498047
+			]
+		},
+		{
+			"footprint": 0.636396110057831,
+			"id": "landing_beacon/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.766666666666667,
+			"start": [
+				13.5249996185303,
+				0.660000026226044,
+				-47.1271018981934
+			]
+		},
+		{
+			"footprint": 0.760345339775085,
+			"id": "fuel_cart/frame",
+			"result": "protected_by_building",
+			"start": [
+				17.4230003356934,
+				0.645000040531158,
+				-48.1212005615234
+			]
+		},
+		{
+			"footprint": 0.992471575737,
+			"id": "baggage_tug/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.766666666666667,
+			"start": [
+				14.8537998199463,
+				0.685000002384186,
+				-51.2165985107422
+			]
+		},
+		{
+			"footprint": 0.995301425457001,
+			"id": "luggage_scanner/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.8,
+			"start": [
+				15.4299001693726,
+				0.855000019073486,
+				-41.9869003295898
+			]
+		},
+		{
+			"id": "luggage_scanner/luggage",
+			"result": "already_collected_in_nearby_probe"
+		},
+		{
+			"footprint": 0.870703756809235,
+			"id": "cargo_pod/frame",
+			"result": "protected_by_building",
+			"start": [
+				12.8606996536255,
+				0.665000021457672,
+				-45.0822982788086
+			]
+		},
+		{
+			"footprint": 0.405624359846115,
+			"id": "windsock/frame",
+			"result": "protected_by_building",
+			"start": [
+				17.0461006164551,
+				1.25249993801117,
+				-46.0764007568359
+			]
+		},
+		{
+			"footprint": 0.84926438331604,
+			"id": "control_tower/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.85,
+			"start": [
+				14.1893997192383,
+				1.18999993801117,
+				-49.1719017028809
+			]
+		},
+		{
+			"footprint": 0.782623767852783,
+			"id": "radar_pedestal/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.816666666666667,
+			"start": [
+				18.0874004364014,
+				0.95250004529953,
+				-50.1660003662109
+			]
+		},
+		{
+			"footprint": 0.908239960670471,
+			"id": "kinetic_arch/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.833333333333333,
+			"start": [
+				29.5006999969482,
+				1.01750004291534,
+				-23.5347995758057
+			]
+		},
+		{
+			"footprint": 0.530330061912537,
+			"id": "spiral_totem/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.85,
+			"start": [
+				33.2386016845703,
+				1.13999998569489,
+				-22.0478992462158
+			]
+		},
+		{
+			"footprint": 0.528182625770569,
+			"id": "balance_stones/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.7,
+			"start": [
+				32.9794998168945,
+				0.254999965429306,
+				-26.0622997283936
+			]
+		},
+		{
+			"footprint": 0.881419658660889,
+			"id": "chime_frame/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.733333333333333,
+			"start": [
+				36.7173004150391,
+				1.0300931930542,
+				-24.5753993988037
+			]
+		},
+		{
+			"footprint": 0.589428126811981,
+			"id": "pendulum_clock/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.75,
+			"start": [
+				36.458309173584,
+				0.960232138633728,
+				-28.5897941589355
+			]
+		},
+		{
+			"footprint": 0.70710676908493,
+			"id": "sundial/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.766666666666667,
+			"start": [
+				31.4992008209229,
+				0.677500009536743,
+				-20.784200668335
+			]
+		},
+		{
+			"footprint": 0.602992534637451,
+			"id": "mirror_fan/frame",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.766666666666667,
+			"start": [
+				31.240104675293,
+				1.02736580371857,
+				-24.7985877990723
+			]
+		},
+		{
+			"end": {
+				"claimed": true,
+				"frozen": false,
+				"mask": 1,
+				"position": "(34.98131, 0.04966, -21.79181)"
+			},
+			"footprint": 0.889542579650879,
+			"id": "ribbon_gate/frame",
+			"radius": 1.2,
+			"result": "stuck",
+			"seconds": 6.0,
+			"start": [
+				34.9764823913574,
+				0.089998871088028,
+				-21.790283203125
+			]
+		},
+		{
+			"footprint": 0.789240419864655,
+			"id": "fractal_tree/frame",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.766666666666667,
+			"start": [
+				34.7189102172852,
+				0.977505028247833,
+				-27.3259925842285
+			]
+		},
+		{
+			"footprint": 1.13137090206146,
+			"id": "mist_fountain/frame",
+			"radius": 1.65,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				38.4566993713379,
+				0.752499997615814,
+				-25.8390998840332
+			]
+		},
+		{
+			"footprint": 1.07354545593262,
+			"id": "luggage_carousel/counter_support_loss",
+			"radius": 1.2,
+			"result": "collected",
+			"seconds": 0.733333333333333,
+			"start": [
+				-46.8499984741211,
+				0.442499965429306,
+				1.70000004768372
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_00",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.866666666666667,
+			"start": [
+				-15.9769821166992,
+				0.838200032711029,
+				6.12675285339355
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_01",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				-7.83931255340576,
+				0.772550046443939,
+				6.34436225891113
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_02",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.833333333333333,
+			"start": [
+				4.72157573699951,
+				1.0489000082016,
+				5.8189172744751
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_03",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				12.5575351715088,
+				0.782050013542175,
+				6.11972999572754
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_04",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.8,
+			"start": [
+				-16.5785636901855,
+				0.853550016880035,
+				-8.11174488067627
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_05",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.8,
+			"start": [
+				-7.89169788360596,
+				0.822500050067902,
+				-9.25264930725098
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_06",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				2.53649425506592,
+				0.782050013542175,
+				-9.47803497314453
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_07",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				12.995849609375,
+				0.782350063323975,
+				-8.4711389541626
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_08",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				-16.100170135498,
+				0.772500038146973,
+				40.5003623962402
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_09",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.8,
+			"start": [
+				-7.61903238296509,
+				0.803875029087067,
+				38.7467613220215
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_10",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.8,
+			"start": [
+				2.1678261756897,
+				0.866200029850006,
+				39.0148391723633
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_11",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.8,
+			"start": [
+				13.255654335022,
+				0.792500019073486,
+				38.6743583679199
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_12",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				-17.2876014709473,
+				0.743200063705444,
+				-24.0802326202393
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_13",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.816666666666667,
+			"start": [
+				-7.26803064346313,
+				0.905200004577637,
+				-23.6883335113525
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_14",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.783333333333333,
+			"start": [
+				3.0337085723877,
+				0.791900038719177,
+				-23.267599105835
+			]
+		},
+		{
+			"footprint": 0.26,
+			"id": "citizen_variant_15",
+			"radius": 0.85,
+			"result": "collected",
+			"seconds": 0.8,
+			"start": [
+				12.2170610427856,
+				0.797500014305115,
+				-22.606538772583
+			]
+		}
+	]
+}

@@ -1,0 +1,28 @@
+{
+  "checks": 483,
+  "failures": [],
+  "metrics": {
+    "average_depth": {
+      "background": -3.04224580526352,
+      "foreground": 2.8010033316472,
+      "midground": -0.253416248730251
+    },
+    "draw_meshes": 87,
+    "food_pieces": 68,
+    "layer_counts": {
+      "background": 20,
+      "foreground": 34,
+      "midground": 14
+    },
+    "maximum_height": {
+      "background": 7.8632116317749,
+      "foreground": 1.34493231773376,
+      "midground": 4.08511257171631
+    },
+    "minimum_rotation_margin_px": 44.76318359375,
+    "saturated_vertex_fraction": 0.801146193771626,
+    "triangles": 123104,
+    "unique_meshes": 27
+  },
+  "scope": "Headless mesh/resource/bounds/controller acceptance; no browser or phone performance claim"
+}

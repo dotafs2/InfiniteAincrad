@@ -1,0 +1,138 @@
+{
+  "checks": 96,
+  "failures": [
+    "berry: actual rain food lands with its support state intact",
+    "Engine process failed; inspect the engine log"
+  ],
+  "metrics": {
+    "contacts": {
+      "after_six_seconds": [
+        {
+          "angular_velocity": "(0.144378, 0.000052, -0.531889)",
+          "at": "(69.53208, 0.12697, -59.89832)",
+          "kind": "egg",
+          "lowest_contact": -0.0247293561697006,
+          "velocity": "(0.078299, -0.227895, 0.021706)"
+        },
+        {
+          "angular_velocity": "(0.000532, 0.000104, 0.000043)",
+          "at": "(69.54424, 0.56263, -44.15904)",
+          "kind": "cake",
+          "lowest_contact": -0.00622856616973877,
+          "velocity": "(0.000003, 0.000013, 0.000274)"
+        },
+        {
+          "angular_velocity": "(-0.001605, 0.00151, 0.524908)",
+          "at": "(70.06123, 0.13179, -28.24558)",
+          "kind": "donut",
+          "lowest_contact": -0.0254925340414047,
+          "velocity": "(-0.079601, -0.233501, -0.001465)"
+        },
+        {
+          "angular_velocity": "(0.000261, 0.000011, 0.00028)",
+          "at": "(69.01813, 0.531084, -13.67436)",
+          "kind": "burger",
+          "lowest_contact": -0.00459611415863037,
+          "velocity": "(-0.000146, 0.000017, 0.000139)"
+        },
+        {
+          "angular_velocity": "(0.440263, -0.000144, 0.453707)",
+          "at": "(70.08508, 0.083293, 4.093765)",
+          "kind": "cookie",
+          "lowest_contact": -0.0271041318774223,
+          "velocity": "(-0.049604, -0.259099, 0.048057)"
+        },
+        {
+          "angular_velocity": "(0.012804, -0.001148, 0.19388)",
+          "at": "(70.13307, 0.373334, 19.87638)",
+          "kind": "berry",
+          "lowest_contact": -0.0128964185714722,
+          "velocity": "(-0.074209, -0.064438, 0.003603)"
+        },
+        {
+          "angular_velocity": "(0.239008, 0.000569, 0.335606)",
+          "at": "(69.7188, 0.232844, 35.80019)",
+          "kind": "pancake",
+          "lowest_contact": -0.02093805372715,
+          "velocity": "(-0.073638, -0.181769, 0.054389)"
+        },
+        {
+          "angular_velocity": "(0.000108, 0.000007, -0.000148)",
+          "at": "(69.44526, 0.539121, 52.68583)",
+          "kind": "pizza",
+          "lowest_contact": -0.00055307149887085,
+          "velocity": "(0.000142, 0.000026, 0.000051)"
+        }
+      ],
+      "maximum_drop_speed": 9.96382236480713,
+      "ordinary_bodies": 8,
+      "rain_bodies": 8,
+      "target_receipts": 8
+    },
+    "inventory": {
+      "native_cylinders": 0,
+      "rectangular_food_bodies": 656,
+      "rounded_food_bodies": 2218,
+      "shared_round_resources": 531
+    },
+    "support_rays": [
+      {
+        "hits": 64,
+        "kind": "egg",
+        "maximum_inset": 0.0193955040562629,
+        "maximum_outer_ratio": 1.00016788221137,
+        "outward_overshoot_count": 0
+      },
+      {
+        "hits": 64,
+        "kind": "cake",
+        "maximum_inset": 0.0193870793675972,
+        "maximum_outer_ratio": 1.00017151540306,
+        "outward_overshoot_count": 0
+      },
+      {
+        "hits": 64,
+        "kind": "donut",
+        "maximum_inset": 0.0193904982190558,
+        "maximum_outer_ratio": 1.0001613582911,
+        "outward_overshoot_count": 0
+      },
+      {
+        "hits": 64,
+        "kind": "burger",
+        "maximum_inset": 0.0193967958504847,
+        "maximum_outer_ratio": 1.00017012696133,
+        "outward_overshoot_count": 0
+      },
+      {
+        "hits": 64,
+        "kind": "cookie",
+        "maximum_inset": 0.0193952569461645,
+        "maximum_outer_ratio": 1.00015989182608,
+        "outward_overshoot_count": 0
+      },
+      {
+        "hits": 64,
+        "kind": "berry",
+        "maximum_inset": 0.0193906155843763,
+        "maximum_outer_ratio": 1.00016818297968,
+        "outward_overshoot_count": 0
+      },
+      {
+        "hits": 64,
+        "kind": "pancake",
+        "maximum_inset": 0.0193971416106246,
+        "maximum_outer_ratio": 1.00016757770769,
+        "outward_overshoot_count": 0
+      },
+      {
+        "hits": 64,
+        "kind": "pizza",
+        "maximum_inset": 0.0193904982190558,
+        "maximum_outer_ratio": 1.0001613582911,
+        "outward_overshoot_count": 0
+      }
+    ]
+  },
+  "scope": "Actual food scene collider inventory, physics-space support rays, tilted ordinary/rain contacts and independent gravity collection. No visual or performance certification."
+}

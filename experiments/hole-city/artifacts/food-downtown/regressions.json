@@ -1,0 +1,172 @@
+[
+  {
+    "suite": "portrait",
+    "passed": true,
+    "report": {
+      "checks": 30,
+      "citizens": 64,
+      "edible_objects": 656,
+      "failures": [],
+      "unique_models": 208
+    }
+  },
+  {
+    "suite": "no_tether",
+    "passed": true,
+    "report": {
+      "checks": 10,
+      "failures": []
+    }
+  },
+  {
+    "suite": "mobile_maps",
+    "passed": true,
+    "report": {
+      "checks": 27,
+      "failures": []
+    }
+  },
+  {
+    "suite": "snack_city",
+    "passed": true,
+    "report": {
+      "buildings": 91,
+      "checks": 39,
+      "failures": [],
+      "initial_edibles": 2639,
+      "npc_count": 48,
+      "types": 10
+    }
+  },
+  {
+    "suite": "food_city_density",
+    "passed": true,
+    "report": {
+      "buildings": 91,
+      "cascades": [
+        {
+          "case": "59-piece pyramid",
+          "collected_once": 59,
+          "pieces": 59,
+          "tilted": true
+        },
+        {
+          "case": "cake building",
+          "collected_once": 6,
+          "pieces": 6,
+          "tilted": true
+        },
+        {
+          "case": "burger building",
+          "collected_once": 5,
+          "pieces": 5,
+          "tilted": true
+        },
+        {
+          "case": "pancake building",
+          "collected_once": 8,
+          "pieces": 8,
+          "tilted": true
+        },
+        {
+          "case": "donut building",
+          "collected_once": 9,
+          "pieces": 9,
+          "tilted": true
+        }
+      ],
+      "checks": 1069,
+      "district_coverage": [
+        {
+          "occupied_ratio": 0.204633204633205,
+          "origin": [
+            -69.0,
+            -64.0
+          ]
+        },
+        {
+          "occupied_ratio": 0.189189189189189,
+          "origin": [
+            -69.0,
+            -23.0
+          ]
+        },
+        {
+          "occupied_ratio": 0.298298298298298,
+          "origin": [
+            -69.0,
+            9.0
+          ]
+        },
+        {
+          "occupied_ratio": 0.227967097532315,
+          "origin": [
+            -69.0,
+            44.0
+          ]
+        },
+        {
+          "occupied_ratio": 0.220099667774086,
+          "origin": [
+            -21.0,
+            -64.0
+          ]
+        },
+        {
+          "occupied_ratio": 0.22093023255814,
+          "origin": [
+            -21.0,
+            -23.0
+          ]
+        },
+        {
+          "occupied_ratio": 0.287683031869078,
+          "origin": [
+            -21.0,
+            9.0
+          ]
+        },
+        {
+          "occupied_ratio": 0.236602628918099,
+          "origin": [
+            -21.0,
+            44.0
+          ]
+        },
+        {
+          "occupied_ratio": 0.222448979591837,
+          "origin": [
+            34.0,
+            -64.0
+          ]
+        },
+        {
+          "occupied_ratio": 0.197619047619048,
+          "origin": [
+            34.0,
+            -23.0
+          ]
+        },
+        {
+          "occupied_ratio": 0.315343915343915,
+          "origin": [
+            34.0,
+            9.0
+          ]
+        },
+        {
+          "occupied_ratio": 0.242236024844721,
+          "origin": [
+            34.0,
+            44.0
+          ]
+        }
+      ],
+      "failures": [],
+      "initial_objects": 2639,
+      "piles": 15,
+      "starter_collections": 3,
+      "supported_pieces": 976
+    }
+  }
+]

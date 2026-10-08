@@ -1,0 +1,20 @@
+{
+  "phase": "final regression after traffic ownership fix",
+  "passed_suites_before_timeout": [
+    "portrait",
+    "destruction_traffic",
+    "skin_skill",
+    "skin_fx",
+    "title_navigation",
+    "no_tether",
+    "resonance_action",
+    "ads_bridge",
+    "mobile_maps",
+    "rim_fall",
+    "fidelity"
+  ],
+  "interrupted_suite": "food_round",
+  "timeout_seconds": 240,
+  "acceptance_result": "unavailable; watchdog terminated the run",
+  "retry": "food_round only, 600 second watchdog; fixed 60 Hz physics unchanged"
+}

@@ -1,0 +1,43 @@
+{
+  "status": "pass",
+  "checks": 12,
+  "candidate": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/qa-candidate-f_00f11j/index.pck",
+  "pck_sha256_before": "31f638ff480f368d9bdb32462aa279285cf388972277ed2b32ecaf46a212be7e",
+  "pck_sha256_after": "31f638ff480f368d9bdb32462aa279285cf388972277ed2b32ecaf46a212be7e",
+  "probe_sha256": "621db1722499f66ab771c12b3c1ada2e895db0d99850700633fbce76253d16f8",
+  "engine_sha256": "c7cccbf8fb143e34e02fd6521e09be2c2b974f0d5db080b19071c9c570718ccf",
+  "cwd": "Fresh isolated /private/tmp/shop-package-review-* directory, removed after exit",
+  "command": [
+    "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/.build/godot-standard/Godot.app/Contents/MacOS/Godot",
+    "--headless",
+    "--audio-driver",
+    "Dummy",
+    "--main-pack",
+    "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/qa-candidate-f_00f11j/index.pck",
+    "--script",
+    "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/shop-theme-20260930/review/package_content_probe.gd",
+    "--quit-after",
+    "30",
+    "--",
+    "--test"
+  ],
+  "runtime_music_gate_status": "The full root-owned package gate is running separately; this receipt proves actual package contents only.",
+  "executed_command": [
+    "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/.build/godot-standard/Godot.app/Contents/MacOS/Godot",
+    "--headless",
+    "--audio-driver",
+    "Dummy",
+    "--main-pack",
+    "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/qa-candidate-f_00f11j/index.pck",
+    "--script",
+    "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/shop-theme-20260930/review/package_content_probe.gd",
+    "--quit-after",
+    "30",
+    "--log-file",
+    "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/shop-theme-20260930/review/package-content.engine.log",
+    "--",
+    "--test"
+  ],
+  "command_note": "The strict gate helper inserts its absolute engine log argument before user arguments; executed_command records that insertion.",
+  "instrumentation_correction": "First artifact probe incorrectly expected OS.get_cmdline_args() to retain the consumed --main-pack engine option. The retained failure had all 11 actual content checks passing. Only the identity check changed to exported project.binary present/source project.godot absent, while the external absolute --main-pack command, isolated cwd and PCK hashes bind package identity."
+}

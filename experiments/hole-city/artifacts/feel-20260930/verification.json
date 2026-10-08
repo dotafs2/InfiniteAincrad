@@ -1,0 +1,78 @@
+{
+  "version": "0.11.0",
+  "verified_utc": "2026-09-29T19:17:18.512376+00:00",
+  "suites_per_phase": 76,
+  "checks": {
+    "source": 53788,
+    "package": 53788
+  },
+  "tested_input_count": 785,
+  "inputs_unchanged": true,
+  "train_asset_checks": 246,
+  "served_artifacts": [
+    {
+      "file": "index.apple-touch-icon.png",
+      "sha256": "1706a7bd4a44e619bee9149b9bad4be7635910e0ea24ac17d4d8b0569a2c56f3",
+      "bytes": 10367,
+      "http_status": 200
+    },
+    {
+      "file": "index.wasm",
+      "sha256": "f6090f055e16765bcef5dc3a031f68ab40c151d9e7f0541d9d7eb61e92dc5051",
+      "bytes": 38820072,
+      "http_status": 200
+    },
+    {
+      "file": "index.icon.png",
+      "sha256": "921c12a6e542b19617674e285a52e839bc0f5fc7dbe7407e802dd8428dd81768",
+      "bytes": 4636,
+      "http_status": 200
+    },
+    {
+      "file": "device-qa.js",
+      "sha256": "128c4d196a0da5952514a96c6c91a89756a5d1196f29f99ac395208ada06059e",
+      "bytes": 5755,
+      "http_status": 200
+    },
+    {
+      "file": "index.html",
+      "sha256": "1bc840e4e3d4e04b48e9662aab2281a3d10b2ff63909f3146d7ae094ab7e1e1a",
+      "bytes": 5900,
+      "http_status": 200
+    },
+    {
+      "file": "index.png",
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e",
+      "bytes": 21443,
+      "http_status": 200
+    },
+    {
+      "file": "index.audio.worklet.js",
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+      "bytes": 7298,
+      "http_status": 200
+    },
+    {
+      "file": "index.js",
+      "sha256": "1e5437ee16d35bf6f8a3b28e6f70f310ee5da12acab3222a06e8c223cb61757c",
+      "bytes": 314653,
+      "http_status": 200
+    },
+    {
+      "file": "index.audio.position.worklet.js",
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+      "bytes": 2973,
+      "http_status": 200
+    },
+    {
+      "file": "index.pck",
+      "sha256": "dd34dfe38ff87f63170deac423242315de5258617d30f28b926b0eff6d92557f",
+      "bytes": 9693968,
+      "http_status": 200
+    }
+  ],
+  "limitations": [
+    "Static HTTP artifact bytes only; no browser capture or runtime inspection.",
+    "Headless physics, Blender asset renders and desktop controller timings do not establish iPhone GPU FPS."
+  ]
+}

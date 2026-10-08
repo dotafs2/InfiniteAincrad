@@ -1,0 +1,25 @@
+--- before/skin_catalog_acceptance.gd
++++ current/skin_catalog_acceptance.gd
+@@ -57,8 +57,11 @@
+ 		check(fits,"Entire thumbnail silhouette fits four-pixel margins: "+d.id+" "+str(bound))
+ 		check(all.size()-1<=18 and triangles<=4500,"Player skin stays within 18 meshes and 4500 triangles: "+d.id)
+ 		check(model.find_children("*","CollisionObject3D",true,false).is_empty(),"Skin does not own physics: "+d.id)
+-		check(model.fx_family!="" and not families.has(model.fx_family),"Distinct visual family: "+d.id);families[model.fx_family]=true
+-		if not old.has(d.id):
++		if d.rarity in ["common","uncommon"]:
++			check(model.fx_family==("solid_recolor" if d.rarity=="common" else "simple_trim"),"Low rarity deliberately shares a simple surface family: "+d.id)
++		else:check(model.fx_family!="" and not families.has(model.fx_family),"Sculpted and effect tiers retain their distinct visual family: "+d.id)
++		families[model.fx_family]=true
++		if not old.has(d.id) and d.rarity not in ["common","uncommon"]:
+ 			var fingerprint:=var_to_bytes(vertices).hex_encode().sha256_text()
+ 			check(not fingerprints.has(fingerprint),"Geometry differs without considering colors: "+d.id)
+ 			fingerprints[fingerprint]=d.id
+@@ -68,7 +71,7 @@
+ 		metrics.append({"id":d.id,"draw_meshes_player":all.size()-1,"triangles_preview":triangles,"bounds":str(bound),"family":model.fx_family})
+ 		model.free()
+ 	check(groups.foundation==27 and groups.resonance==17,"Real groups match Classic 27 and Special 17")
+-	check(fingerprints.size()==34,"Thirty-four new structural signatures are different without colors")
++	check(fingerprints.size()==20,"Twenty sculpted/effect additions retain different geometry; fourteen low-tier recolors intentionally share basic shapes")
+ 	view.free()
+ 	var result:={"checks":checks,"failures":failures,"groups":groups,"skins":metrics,"scope":"Actual geometry and definitions; no GPU/image claim"}
+ 	print("SKIN_CATALOG_ACCEPTANCE "+JSON.stringify(result))

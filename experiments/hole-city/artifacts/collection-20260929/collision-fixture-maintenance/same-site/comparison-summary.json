@@ -1,0 +1,380 @@
+{
+  "prior-v0.8.7": {
+    "empty_volume": true,
+    "initial_conditions": [
+      {
+        "angular_velocity": "(0.0, 0.0, 0.0)",
+        "at": "(-22.0, 0.853452, -44.0)",
+        "gravity_scale": 1.0,
+        "linear_velocity": "(0.0, 0.0, 0.0)",
+        "name": "food_cookie_2659",
+        "rotation": "(0.0, 0.0, 0.2)"
+      },
+      {
+        "angular_velocity": "(0.0, 0.0, 0.0)",
+        "at": "(-22.0, 1.897185, -44.0)",
+        "gravity_scale": 1.0,
+        "linear_velocity": "(0.0, 0.0, 0.0)",
+        "name": "food_burger_2660",
+        "rotation": "(0.12, 0.17, 0.2)"
+      },
+      {
+        "angular_velocity": "(0.0, 0.0, 0.0)",
+        "at": "(-22.0, 3.003936, -44.0)",
+        "gravity_scale": 1.0,
+        "linear_velocity": "(0.0, 0.0, 0.0)",
+        "name": "food_cookie_2661",
+        "rotation": "(0.24, 0.34, 0.2)"
+      },
+      {
+        "angular_velocity": "(0.0, 0.0, 0.0)",
+        "at": "(-22.0, 4.200438, -44.0)",
+        "gravity_scale": 1.0,
+        "linear_velocity": "(0.0, 0.0, 0.0)",
+        "name": "food_burger_2662",
+        "rotation": "(0.36, 0.51, 0.2)"
+      },
+      {
+        "angular_velocity": "(0.0, 0.0, 0.0)",
+        "at": "(-22.0, 5.505523, -44.0)",
+        "gravity_scale": 1.0,
+        "linear_velocity": "(0.0, 0.0, 0.0)",
+        "name": "food_cookie_2663",
+        "rotation": "(0.48, 0.68, 0.2)"
+      },
+      {
+        "angular_velocity": "(0.0, 0.0, 0.0)",
+        "at": "(-22.0, 6.88816, -44.0)",
+        "gravity_scale": 1.0,
+        "linear_velocity": "(0.0, 0.0, 0.0)",
+        "name": "food_burger_2664",
+        "rotation": "(0.6, 0.85, 0.2)"
+      }
+    ],
+    "records": [
+      {
+        "kind": "cookie",
+        "mean_solver_speed": 0.26987719755759626,
+        "maximum_solver_speed": 0.4301997423172,
+        "final_solver_speed": 0.358967632055283,
+        "mean_horizontal_solver_speed": 0.06015263161002886,
+        "absolute_average_solver_vertical": 0.2605068417155053,
+        "net_pose_speed": 0.00501140823017594,
+        "pose_path_speed": 0.25724552628794056,
+        "maximum_frame_pose_speed": 1.8395479852179242,
+        "maximum_displacement": 0.030656367839673914,
+        "vertical_range": 0.037091769278049
+      },
+      {
+        "kind": "burger",
+        "mean_solver_speed": 0.14713683906528685,
+        "maximum_solver_speed": 0.152703031897545,
+        "final_solver_speed": 0.143977925181389,
+        "mean_horizontal_solver_speed": 0.08241375403592886,
+        "absolute_average_solver_vertical": 0.12176475603547358,
+        "net_pose_speed": 0.007853621757008112,
+        "pose_path_speed": 0.08243891958371047,
+        "maximum_frame_pose_speed": 0.08913766047830537,
+        "maximum_displacement": 0.024336033477006556,
+        "vertical_range": 9.745359420698652e-05
+      },
+      {
+        "kind": "cookie",
+        "mean_solver_speed": 0.3004516244909609,
+        "maximum_solver_speed": 0.410192370414734,
+        "final_solver_speed": 0.344727903604507,
+        "mean_horizontal_solver_speed": 0.07128413210557925,
+        "absolute_average_solver_vertical": 0.29119085769231484,
+        "net_pose_speed": 0.0037250926313903416,
+        "pose_path_speed": 0.1554616962319563,
+        "maximum_frame_pose_speed": 0.8473018222554313,
+        "maximum_displacement": 0.012897636690927045,
+        "vertical_range": 0.014728844165802002
+      },
+      {
+        "kind": "burger",
+        "mean_solver_speed": 0.0001015019490094144,
+        "maximum_solver_speed": 0.000266616989392787,
+        "final_solver_speed": 5.05540228914469e-05,
+        "mean_horizontal_solver_speed": 9.588102924566246e-05,
+        "absolute_average_solver_vertical": 2.6920603381262858e-06,
+        "net_pose_speed": 9.331125514770583e-06,
+        "pose_path_speed": 9.412804205143257e-05,
+        "maximum_frame_pose_speed": 0.00032370755531056767,
+        "maximum_displacement": 4.234669864342162e-05,
+        "vertical_range": 1.3649463653009342e-05
+      },
+      {
+        "kind": "cookie",
+        "mean_solver_speed": 0.3620606310611442,
+        "maximum_solver_speed": 0.671597838401794,
+        "final_solver_speed": 0.418474644422531,
+        "mean_horizontal_solver_speed": 0.09415690373290306,
+        "absolute_average_solver_vertical": 0.3428707307595283,
+        "net_pose_speed": 0.044422158661721146,
+        "pose_path_speed": 0.3261491591896232,
+        "maximum_frame_pose_speed": 1.3495737086252153,
+        "maximum_displacement": 0.15103500982324755,
+        "vertical_range": 0.027378439903259
+      },
+      {
+        "kind": "burger",
+        "mean_solver_speed": 0.00010371889991094779,
+        "maximum_solver_speed": 0.000213984298170544,
+        "final_solver_speed": 7.81730559538119e-05,
+        "mean_horizontal_solver_speed": 9.85067453153038e-05,
+        "absolute_average_solver_vertical": 7.817356122864618e-06,
+        "net_pose_speed": 2.489316629859625e-05,
+        "pose_path_speed": 9.527440136525415e-05,
+        "maximum_frame_pose_speed": 0.0002328703986509434,
+        "maximum_displacement": 7.443341074487557e-05,
+        "vertical_range": 2.4855136872004024e-05
+      }
+    ],
+    "rest": [
+      {
+        "angular_speed": 0.677551567554474,
+        "kind": "cookie",
+        "max_displacement_3s": 0.0306563675403595,
+        "max_rotation_degrees_3s": 1.98504806008387,
+        "position": "(-22.6519, 0.108144, -44.40349)",
+        "speed": 0.358967632055283,
+        "vertical_range_3s": 0.0370917692780495
+      },
+      {
+        "angular_speed": 0.211803659796715,
+        "kind": "burger",
+        "max_displacement_3s": 0.0243360325694084,
+        "max_rotation_degrees_3s": 0.713267050070911,
+        "position": "(-20.79759, 0.471646, -44.27125)",
+        "speed": 0.143977925181389,
+        "vertical_range_3s": 9.74535942077637e-05
+      },
+      {
+        "angular_speed": 0.636167347431183,
+        "kind": "cookie",
+        "max_displacement_3s": 0.0128976367413998,
+        "max_rotation_degrees_3s": 2.15467730222502,
+        "position": "(-21.85221, 0.106545, -43.44515)",
+        "speed": 0.344727903604507,
+        "vertical_range_3s": 0.014728844165802
+      },
+      {
+        "angular_speed": 0.000101264347904362,
+        "kind": "burger",
+        "max_displacement_3s": 4.23466990469024e-05,
+        "max_rotation_degrees_3s": 0.0,
+        "position": "(-21.11974, 0.67847, -46.02095)",
+        "speed": 5.05540228914469e-05,
+        "vertical_range_3s": 1.36494636535645e-05
+      },
+      {
+        "angular_speed": 0.366235345602036,
+        "kind": "cookie",
+        "max_displacement_3s": 0.151035010814667,
+        "max_rotation_degrees_3s": 5.05632885151838,
+        "position": "(-22.51556, 0.361334, -44.19086)",
+        "speed": 0.418474644422531,
+        "vertical_range_3s": 0.0273784399032593
+      },
+      {
+        "angular_speed": 0.000134178480948322,
+        "kind": "burger",
+        "max_displacement_3s": 7.44334101909772e-05,
+        "max_rotation_degrees_3s": 0.0395646811852521,
+        "position": "(-23.01276, 0.673952, -45.5773)",
+        "speed": 7.81730559538119e-05,
+        "vertical_range_3s": 2.48551368713379e-05
+      }
+    ]
+  },
+  "current": {
+    "empty_volume": true,
+    "initial_conditions": [
+      {
+        "angular_velocity": "(0.0, 0.0, 0.0)",
+        "at": "(-22.0, 0.853452, -44.0)",
+        "gravity_scale": 1.0,
+        "linear_velocity": "(0.0, 0.0, 0.0)",
+        "name": "food_cookie_2993",
+        "rotation": "(0.0, 0.0, 0.2)"
+      },
+      {
+        "angular_velocity": "(0.0, 0.0, 0.0)",
+        "at": "(-22.0, 1.897185, -44.0)",
+        "gravity_scale": 1.0,
+        "linear_velocity": "(0.0, 0.0, 0.0)",
+        "name": "food_burger_2994",
+        "rotation": "(0.12, 0.17, 0.2)"
+      },
+      {
+        "angular_velocity": "(0.0, 0.0, 0.0)",
+        "at": "(-22.0, 3.003936, -44.0)",
+        "gravity_scale": 1.0,
+        "linear_velocity": "(0.0, 0.0, 0.0)",
+        "name": "food_cookie_2995",
+        "rotation": "(0.24, 0.34, 0.2)"
+      },
+      {
+        "angular_velocity": "(0.0, 0.0, 0.0)",
+        "at": "(-22.0, 4.200438, -44.0)",
+        "gravity_scale": 1.0,
+        "linear_velocity": "(0.0, 0.0, 0.0)",
+        "name": "food_burger_2996",
+        "rotation": "(0.36, 0.51, 0.2)"
+      },
+      {
+        "angular_velocity": "(0.0, 0.0, 0.0)",
+        "at": "(-22.0, 5.505523, -44.0)",
+        "gravity_scale": 1.0,
+        "linear_velocity": "(0.0, 0.0, 0.0)",
+        "name": "food_cookie_2997",
+        "rotation": "(0.48, 0.68, 0.2)"
+      },
+      {
+        "angular_velocity": "(0.0, 0.0, 0.0)",
+        "at": "(-22.0, 6.88816, -44.0)",
+        "gravity_scale": 1.0,
+        "linear_velocity": "(0.0, 0.0, 0.0)",
+        "name": "food_burger_2998",
+        "rotation": "(0.6, 0.85, 0.2)"
+      }
+    ],
+    "records": [
+      {
+        "kind": "cookie",
+        "mean_solver_speed": 0.2576225292493797,
+        "maximum_solver_speed": 0.455262929201126,
+        "final_solver_speed": 0.310277938842773,
+        "mean_horizontal_solver_speed": 0.06021480797054376,
+        "absolute_average_solver_vertical": 0.24626671506222114,
+        "net_pose_speed": 0.005742551246333087,
+        "pose_path_speed": 0.31496017454540776,
+        "maximum_frame_pose_speed": 1.8580611124709208,
+        "maximum_displacement": 0.033632379234917326,
+        "vertical_range": 0.03851515799760802
+      },
+      {
+        "kind": "burger",
+        "mean_solver_speed": 0.14713726432787044,
+        "maximum_solver_speed": 0.152755081653595,
+        "final_solver_speed": 0.143977984786034,
+        "mean_horizontal_solver_speed": 0.08241394129901636,
+        "absolute_average_solver_vertical": 0.12176493327650759,
+        "net_pose_speed": 0.007849091337594845,
+        "pose_path_speed": 0.08243516263787647,
+        "maximum_frame_pose_speed": 0.0891252366593145,
+        "maximum_displacement": 0.024323493425799425,
+        "vertical_range": 9.754300117498227e-05
+      },
+      {
+        "kind": "cookie",
+        "mean_solver_speed": 0.2983512245255245,
+        "maximum_solver_speed": 0.39375913143158,
+        "final_solver_speed": 0.328907608985901,
+        "mean_horizontal_solver_speed": 0.07125932829743513,
+        "absolute_average_solver_vertical": 0.28917418811720885,
+        "net_pose_speed": 0.0060791387531905555,
+        "pose_path_speed": 0.14240353206227907,
+        "maximum_frame_pose_speed": 0.7945397371320079,
+        "maximum_displacement": 0.018181096404666777,
+        "vertical_range": 0.013241313397883994
+      },
+      {
+        "kind": "burger",
+        "mean_solver_speed": 7.856900531603766e-05,
+        "maximum_solver_speed": 0.00017344816296827,
+        "final_solver_speed": 0.000132018045405857,
+        "mean_horizontal_solver_speed": 7.020694139744308e-05,
+        "absolute_average_solver_vertical": 1.2706758247481458e-06,
+        "net_pose_speed": 1.0661656301909901e-05,
+        "pose_path_speed": 6.348945877389317e-05,
+        "maximum_frame_pose_speed": 0.0002561224866309743,
+        "maximum_displacement": 3.1807274634031203e-05,
+        "vertical_range": 1.3351440428910344e-05
+      },
+      {
+        "kind": "cookie",
+        "mean_solver_speed": 0.3609141474175785,
+        "maximum_solver_speed": 0.713074088096619,
+        "final_solver_speed": 0.452658295631409,
+        "mean_horizontal_solver_speed": 0.08940149380924932,
+        "absolute_average_solver_vertical": 0.34431875769255893,
+        "net_pose_speed": 0.00735829491379726,
+        "pose_path_speed": 0.2824009701407069,
+        "maximum_frame_pose_speed": 1.1359877883027525,
+        "maximum_displacement": 0.038556127501623676,
+        "vertical_range": 0.026371300220489002
+      },
+      {
+        "kind": "burger",
+        "mean_solver_speed": 0.00011334831871055132,
+        "maximum_solver_speed": 0.000252706609899178,
+        "final_solver_speed": 0.000101186451502144,
+        "mean_horizontal_solver_speed": 0.00010752820976180046,
+        "absolute_average_solver_vertical": 3.373312453428901e-06,
+        "net_pose_speed": 6.183912613726233e-06,
+        "pose_path_speed": 0.00010431487309113455,
+        "maximum_frame_pose_speed": 0.00032753715265432254,
+        "maximum_displacement": 3.6393455921886584e-05,
+        "vertical_range": 1.5676021575039556e-05
+      }
+    ],
+    "rest": [
+      {
+        "angular_speed": 0.586087167263031,
+        "kind": "cookie",
+        "max_displacement_3s": 0.0336323790252209,
+        "max_rotation_degrees_3s": 3.05710238593462,
+        "position": "(-22.69658, 0.112216, -44.41425)",
+        "speed": 0.310277938842773,
+        "vertical_range_3s": 0.0385151579976082
+      },
+      {
+        "angular_speed": 0.211803764104843,
+        "kind": "burger",
+        "max_displacement_3s": 0.0243234932422638,
+        "max_rotation_degrees_3s": 0.713267050070911,
+        "position": "(-20.71633, 0.471646, -44.28177)",
+        "speed": 0.143977984786034,
+        "vertical_range_3s": 9.75430011749268e-05
+      },
+      {
+        "angular_speed": 0.608821272850037,
+        "kind": "cookie",
+        "max_displacement_3s": 0.0181810967624187,
+        "max_rotation_degrees_3s": 2.04487923655272,
+        "position": "(-21.81472, 0.10702, -43.51302)",
+        "speed": 0.328907608985901,
+        "vertical_range_3s": 0.0132413133978844
+      },
+      {
+        "angular_speed": 0.000198255249415524,
+        "kind": "burger",
+        "max_displacement_3s": 3.18072743539233e-05,
+        "max_rotation_degrees_3s": 0.0395646811852521,
+        "position": "(-21.1247, 0.675989, -46.01746)",
+        "speed": 0.000132018045405857,
+        "vertical_range_3s": 1.33514404296875e-05
+      },
+      {
+        "angular_speed": 0.257807284593582,
+        "kind": "cookie",
+        "max_displacement_3s": 0.0385561287403107,
+        "max_rotation_degrees_3s": 4.88912283242871,
+        "position": "(-22.70018, 0.361789, -44.3381)",
+        "speed": 0.452658295631409,
+        "vertical_range_3s": 0.0263713002204895
+      },
+      {
+        "angular_speed": 0.000145556055940688,
+        "kind": "burger",
+        "max_displacement_3s": 3.63934559572954e-05,
+        "max_rotation_degrees_3s": 0.0559529096807445,
+        "position": "(-23.0521, 0.677159, -45.52319)",
+        "speed": 0.000101186451502144,
+        "vertical_range_3s": 1.56760215759277e-05
+      }
+    ]
+  }
+}

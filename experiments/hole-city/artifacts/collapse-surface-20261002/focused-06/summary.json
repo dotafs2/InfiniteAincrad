@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "suite": "growth_rivals_review",
+      "checks": 291,
+      "minimum": 291,
+      "report_sha256": "74230da63dba57c73113f5d926e223bf5546a3a705503a4b3c5d3bcbdd775142"
+    }
+  ],
+  "checks": 291,
+  "unchanged_inputs": true,
+  "guarded_inputs": 810,
+  "elapsed_seconds": 3.443,
+  "scope": "Serial source-only focused headless acceptance; no full gate, GPU, native build or phone action"
+}

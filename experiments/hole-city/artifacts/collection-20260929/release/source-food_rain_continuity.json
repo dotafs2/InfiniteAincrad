@@ -1,0 +1,98 @@
+{
+  "checks": 33,
+  "failures": [],
+  "sessions": [
+    {
+      "batch_draws": 52,
+      "batched": 530,
+      "farthest_new_spawn": 15.9981212615967,
+      "max_airborne": 24,
+      "retirements": 0,
+      "samples": [
+        {
+          "alive": 78,
+          "landed": 67,
+          "seconds": 30.0,
+          "spawned": 78
+        },
+        {
+          "alive": 150,
+          "landed": 141,
+          "seconds": 60.0,
+          "spawned": 150
+        },
+        {
+          "alive": 228,
+          "landed": 213,
+          "seconds": 90.0,
+          "spawned": 228
+        },
+        {
+          "alive": 299,
+          "landed": 285,
+          "seconds": 120.0,
+          "spawned": 300
+        },
+        {
+          "alive": 376,
+          "landed": 361,
+          "seconds": 150.0,
+          "spawned": 378
+        },
+        {
+          "alive": 448,
+          "landed": 435,
+          "seconds": 180.0,
+          "spawned": 450
+        },
+        {
+          "alive": 519,
+          "landed": 508,
+          "seconds": 210.0,
+          "spawned": 522
+        },
+        {
+          "alive": 595,
+          "landed": 578,
+          "seconds": 240.0,
+          "spawned": 600
+        }
+      ],
+      "traveling": false
+    },
+    {
+      "batch_draws": 160,
+      "batched": 30,
+      "farthest_new_spawn": 15.9981212615967,
+      "max_airborne": 17,
+      "retirements": 128,
+      "samples": [
+        {
+          "alive": 41,
+          "landed": 29,
+          "seconds": 30.0,
+          "spawned": 78
+        },
+        {
+          "alive": 45,
+          "landed": 37,
+          "seconds": 60.0,
+          "spawned": 150
+        },
+        {
+          "alive": 42,
+          "landed": 26,
+          "seconds": 90.0,
+          "spawned": 228
+        },
+        {
+          "alive": 54,
+          "landed": 42,
+          "seconds": 120.0,
+          "spawned": 300
+        }
+      ],
+      "traveling": true
+    }
+  ]
+}

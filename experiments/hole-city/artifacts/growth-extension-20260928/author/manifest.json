@@ -1,0 +1,21 @@
+{
+  "source_sha256": {
+    "fidelity/hole.gd": "6633da90a596026bcadd87e404235e16c0f6f9d6bb7527f56d92a2965403f117",
+    "tests/growth_extension_acceptance.gd": "8722523a5008ffef4ca8912bd77e91cc0b73c147966a9db0c7e01982a7585574"
+  },
+  "command": [
+    ".build/godot-standard/Godot.app/Contents/MacOS/Godot",
+    "--headless",
+    "--path",
+    "PROJECT",
+    "--script",
+    "tests/growth_extension_acceptance.gd",
+    "--log-file",
+    "ABSOLUTE_ENGINE_LOG",
+    "--",
+    "--test"
+  ],
+  "receipt": "growth.json",
+  "checks": 1978,
+  "scope": "Real hole controller with isolated callbacks; headless numeric/controller correctness, not a device performance claim; no save path or main scene loaded."
+}

@@ -1,0 +1,105 @@
+{
+  "at_utc": "2026-10-01T09:11:14.170553+00:00",
+  "version": "0.12.3",
+  "build": "6",
+  "physical_device_model": "iPhone 16 Pro Max",
+  "qa_save_isolation": true,
+  "actual_player_save_after_both_rounds_unchanged": true,
+  "actual_player_save_sha256": "138bddb386464f964ff77b1093d2cf2256a64147ca83cc2a409a32565675a7ed",
+  "native_services_initialized_during_gameplay_qa": false,
+  "native_sdk_callbacks_accepted": false,
+  "rounds": {
+    "food": {
+      "elapsed_physics_seconds": 60.0166666666645,
+      "score": 152,
+      "audio_samples": 65,
+      "all_music_samples_playing_unmuted": true,
+      "highest_music_peak_db": -19.3601398468018,
+      "swallow_feedback_events": 56,
+      "rival_feedback_events": 1,
+      "screen_pixels": "(1320, 2868)",
+      "safe_pixels": "[P: (0, 186), S: (1320, 2580)]",
+      "mean_frame_ms": 16.6614238356165,
+      "p95_frame_ms": 23.624,
+      "frame_samples": 3650,
+      "captures": [
+        {
+          "file": "food-00.png",
+          "sha256": "6afc21d92ab28056f4baf337ec26ab6db2daeaa95dbcc77cb7d2bc3623216836",
+          "native_gpu_capture": true
+        },
+        {
+          "file": "food-01.png",
+          "sha256": "0fc9f0833d16650b6437edd6ade01837b72c162745b6b9e420d5e9080db1991f",
+          "native_gpu_capture": true
+        },
+        {
+          "file": "food-02.png",
+          "sha256": "2e0697d23548e716b02ed77a084104df68349b8e79e4bf054b717800b584986b",
+          "native_gpu_capture": true
+        },
+        {
+          "file": "food-03.png",
+          "sha256": "50ca082bb697dedad4528a3751330b6a6fe984764abe3910e5e15b460c60a3c4",
+          "native_gpu_capture": true
+        },
+        {
+          "file": "food-04.png",
+          "sha256": "3e326fb1ee21e42525f83071d86e0fe5625e673340b6221d6cc9ee52b5ec62bc",
+          "native_gpu_capture": true
+        }
+      ],
+      "subjective_audio_haptics_verified": false,
+      "sustained_gpu_fps_certified": false
+    },
+    "city": {
+      "elapsed_physics_seconds": 60.0166666666645,
+      "score": 58,
+      "audio_samples": 64,
+      "all_music_samples_playing_unmuted": true,
+      "highest_music_peak_db": -17.7678337097168,
+      "swallow_feedback_events": 39,
+      "rival_feedback_events": 0,
+      "screen_pixels": "(1320, 2868)",
+      "safe_pixels": "[P: (0, 186), S: (1320, 2580)]",
+      "mean_frame_ms": 16.7670270420965,
+      "p95_frame_ms": 23.151,
+      "frame_samples": 3587,
+      "captures": [
+        {
+          "file": "city-00.png",
+          "sha256": "a666dd73565a39b92dfd11f116f909a5985e95c6ad0d57cf3ae9563a9d2a9f68",
+          "native_gpu_capture": true
+        },
+        {
+          "file": "city-01.png",
+          "sha256": "80ac2c5dcf16bc7a7171d29d062d9b28d95ef361d54814454c18340ee95fde62",
+          "native_gpu_capture": true
+        },
+        {
+          "file": "city-02.png",
+          "sha256": "40900d0bdca969c60a7d532fb0702d4c8e25df35e7440feec4a5e252dd112a26",
+          "native_gpu_capture": true
+        },
+        {
+          "file": "city-03.png",
+          "sha256": "4ed30099d7428dec93fbb8c18117015720e9bd1e87aa5f622692f9811fd00640",
+          "native_gpu_capture": true
+        },
+        {
+          "file": "city-04.png",
+          "sha256": "7da76e8ca1145c55ab94ab6f5ca6c5b633f7793dddf4b35fb0e4ff78e3a3b416",
+          "native_gpu_capture": true
+        }
+      ],
+      "subjective_audio_haptics_verified": false,
+      "sustained_gpu_fps_certified": false
+    }
+  },
+  "limitations": [
+    "Frame cadence is not direct GPU timing or sustained performance certification.",
+    "Audio output state and haptic receipt routing do not certify subjective audibility or sensation.",
+    "Normal-mode official-test-ad follow-up is pending; account/app production approval is separate."
+  ],
+  "two_automatic_native_qa_rounds_completed": true
+}

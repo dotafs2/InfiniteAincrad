@@ -1,0 +1,29 @@
+{
+  "results": {
+    "progression_review": {
+      "checks": 10,
+      "failures": [],
+      "explicit_report_matches_stdout": true,
+      "script_sha256": "f0cff4b298267e62e380008eafa4fbe80ba23582d2efa4e33f68fa4cf081e16d"
+    },
+    "rain_review": {
+      "checks": 9,
+      "failures": [],
+      "explicit_report_matches_stdout": true,
+      "script_sha256": "3291450e5cd016eeeb935f064faefe378224b8a3ebc8d82a0b443115a5986647"
+    },
+    "food_revision_review": {
+      "checks": 11,
+      "failures": [],
+      "explicit_report_matches_stdout": true,
+      "script_sha256": "73918bd2a3509cd23843a89f8b2f107f316b624264aa03bd9e26f47308fda5f3"
+    },
+    "skin_catalog_review": {
+      "checks": 212,
+      "failures": [],
+      "explicit_report_matches_stdout": true,
+      "script_sha256": "fe43f99ce68ca48f4905725d49a30ed8dfde1b5aaa37b225e85461061cc4659b"
+    }
+  },
+  "scope": "Source execution under actual release acceptance and engine-error rules; explicit report equals completion marker"
+}

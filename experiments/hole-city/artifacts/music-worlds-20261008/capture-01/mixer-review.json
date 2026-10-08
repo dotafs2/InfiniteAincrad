@@ -1,0 +1,50 @@
+{
+  "rate": 48000,
+  "channels": 2,
+  "seconds": 45.35,
+  "peak": 0.1590576171875,
+  "rms_dbfs": -35.10161350078482,
+  "clipped_samples": 0,
+  "skip_at_seconds": 42.3166666666667,
+  "skip_window_peak": 0.13763427734375,
+  "skip_window_max_adjacent_sample_step": 0.004180908203125,
+  "full_mix_max_adjacent_sample_step": 0.061004638671875,
+  "route_intervals": [
+    {
+      "context": "menu",
+      "from_seconds": 1.05,
+      "rms_dbfs": -36.94208859549778
+    },
+    {
+      "context": "city",
+      "from_seconds": 5.05,
+      "rms_dbfs": -38.2168216303228
+    },
+    {
+      "context": "food",
+      "from_seconds": 11.65,
+      "rms_dbfs": -36.92791105313772
+    },
+    {
+      "context": "toys",
+      "from_seconds": 18.25,
+      "rms_dbfs": -35.741442692612324
+    },
+    {
+      "context": "frost",
+      "from_seconds": 24.85,
+      "rms_dbfs": -34.75215055855224
+    },
+    {
+      "context": "case",
+      "from_seconds": 31.45,
+      "rms_dbfs": -36.03888189072673
+    }
+  ],
+  "scope": "Actual MovieWriter PCM, objective signal and integration evidence; no subjective listening or phone claim",
+  "sha256": {
+    "music-showcase.mp4": "db9a075de926f87975b08a49642be2d7ea8b91a38eced3d6a1b4c51bd8ee685a",
+    "mixer.wav": "911333e6d292766f0222487cc314a1d26d011c6dff9b2d5c3434c848c3041143",
+    "capture.json": "d82ebc321d026a2be2397c765af2f0cc14efc306af681d9489e4c1ca63624249"
+  }
+}

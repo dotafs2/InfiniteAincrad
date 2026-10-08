@@ -1,0 +1,50 @@
+{
+  "at_utc": "2026-10-01T10:40:40.585201+00:00",
+  "user_authorized": [
+    "formal_screenshots",
+    "new_build_upload",
+    "app_review_submission"
+  ],
+  "version": "0.12.3",
+  "build": "9",
+  "native_archive_receipt": "artifacts/app-store-release-20261001/native-07/archive-receipt.json",
+  "screenshot_manifest": "artifacts/app-store-release-20261001/screenshots/manifest.json",
+  "support_site_publication": "artifacts/app-store-release-20261001/support-site-publication.json",
+  "screenshots_prepared": 3,
+  "screenshots_uploaded": 0,
+  "build_uploaded": false,
+  "app_review_submitted": false,
+  "owned_helpers_complete": true,
+  "preview_server_preserved": true,
+  "automation": "PAUSED",
+  "root_git_publication": false,
+  "blocking_user_actions": [
+    "Restore ASC login",
+    "Restore developer account in Xcode Settings > Accounts",
+    "Unlock the connected phone for native SDK acceptance"
+  ],
+  "remaining_release_acceptance": [
+    "Final truthful privacy labels and accuracy statement",
+    "Paid Apps Agreement, product prices and required user bank/tax forms",
+    "Physical normal-mode ad callbacks and sandbox purchases"
+  ],
+  "native_candidate": "build/ios-ad-recovery-20261001-09",
+  "native_candidate_receipt": "artifacts/ad-recovery-20261001-08/native-09/production-candidate.json",
+  "native_ad_recovery_receipt": "artifacts/ad-recovery-20261001-08/after-03.json",
+  "native_ad_recovery_checks": 40,
+  "native_pck_checks": 8547,
+  "candidate_signed": false,
+  "candidate_installed": false,
+  "candidate_uploaded": false,
+  "user_deferred_apple_login": true,
+  "prior_archive_superseded_by_native_repair": true,
+  "no_unchanged_login_or_export_retry_after_deferral": true,
+  "store_review_v1": {
+    "receipt": "artifacts/store-review-20261001-v1/review-package.json",
+    "screenshots": 5,
+    "videos": 2,
+    "user_authorized_mac_capture": true,
+    "user_review_pending": true,
+    "uploaded": false
+  }
+}

@@ -1,0 +1,883 @@
+{
+  "checks": 2946,
+  "failures": [],
+  "metrics": {
+    "admission_levels": {
+      "1": 251,
+      "2": 130,
+      "3": 29,
+      "4": 6,
+      "5": 24,
+      "6": 6,
+      "7": 4,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 2,
+      "12": 6
+    },
+    "admission_targets": [
+      {
+        "count": 2,
+        "kind": "grand_castle",
+        "minimum_level": 12,
+        "required_radius": 12.0340853118896,
+        "size": "(18.0, 24.0, 17.0)",
+        "supported": 0,
+        "tier": 9
+      },
+      {
+        "count": 2,
+        "kind": "block_tower",
+        "minimum_level": 11,
+        "required_radius": 11.1184270477295,
+        "size": "(18.0, 7.0, 17.0)",
+        "supported": 0,
+        "tier": 9
+      },
+      {
+        "count": 2,
+        "kind": "toy_block",
+        "minimum_level": 9,
+        "required_radius": 7.33510694503784,
+        "size": "(12.0, 18.0, 10.0)",
+        "supported": 2,
+        "tier": 8
+      },
+      {
+        "count": 2,
+        "kind": "grand_castle",
+        "minimum_level": 6,
+        "required_radius": 4.56439189910889,
+        "size": "(7.2, 13.0, 6.0)",
+        "supported": 2,
+        "tier": 7
+      },
+      {
+        "count": 2,
+        "kind": "grand_castle",
+        "minimum_level": 12,
+        "required_radius": 12.0340853118896,
+        "size": "(18.0, 33.0, 17.0)",
+        "supported": 0,
+        "tier": 9
+      },
+      {
+        "count": 1,
+        "kind": "grand_castle",
+        "minimum_level": 12,
+        "required_radius": 12.0340853118896,
+        "size": "(18.0, 27.0, 17.0)",
+        "supported": 0,
+        "tier": 9
+      },
+      {
+        "count": 1,
+        "kind": "grand_castle",
+        "minimum_level": 12,
+        "required_radius": 12.0340853118896,
+        "size": "(18.0, 30.0, 17.0)",
+        "supported": 0,
+        "tier": 9
+      },
+      {
+        "count": 1,
+        "kind": "grand_castle",
+        "minimum_level": 10,
+        "required_radius": 9.28176704406738,
+        "size": "(14.0, 22.0, 13.0)",
+        "supported": 0,
+        "tier": 8
+      },
+      {
+        "count": 1,
+        "kind": "grand_castle",
+        "minimum_level": 10,
+        "required_radius": 9.28176704406738,
+        "size": "(14.0, 27.0, 13.0)",
+        "supported": 0,
+        "tier": 8
+      },
+      {
+        "count": 2,
+        "kind": "toy_castle",
+        "minimum_level": 9,
+        "required_radius": 7.7384857749939,
+        "size": "(12.0, 18.0, 10.4)",
+        "supported": 0,
+        "tier": 8
+      },
+      {
+        "count": 2,
+        "kind": "toy_castle",
+        "minimum_level": 8,
+        "required_radius": 6.75938558578491,
+        "size": "(10.4, 16.0, 9.2)",
+        "supported": 0,
+        "tier": 8
+      },
+      {
+        "count": 2,
+        "kind": "toy_castle",
+        "minimum_level": 8,
+        "required_radius": 6.75938558578491,
+        "size": "(10.4, 15.0, 9.2)",
+        "supported": 0,
+        "tier": 8
+      },
+      {
+        "count": 2,
+        "kind": "toy_castle",
+        "minimum_level": 10,
+        "required_radius": 8.99095859527588,
+        "size": "(14.0, 21.0, 12.0)",
+        "supported": 0,
+        "tier": 8
+      },
+      {
+        "count": 1,
+        "kind": "toy_castle",
+        "minimum_level": 7,
+        "required_radius": 5.66741683959961,
+        "size": "(8.8, 11.4, 7.6)",
+        "supported": 0,
+        "tier": 7
+      },
+      {
+        "count": 4,
+        "kind": "toy_castle",
+        "minimum_level": 5,
+        "required_radius": 3.32364423751831,
+        "size": "(5.2, 9.0, 4.4)",
+        "supported": 0,
+        "tier": 6
+      },
+      {
+        "count": 2,
+        "kind": "toy_castle",
+        "minimum_level": 5,
+        "required_radius": 3.32364423751831,
+        "size": "(5.2, 10.0, 4.4)",
+        "supported": 0,
+        "tier": 6
+      },
+      {
+        "count": 4,
+        "kind": "block_tower",
+        "minimum_level": 5,
+        "required_radius": 3.31413222312927,
+        "size": "(5.4, 4.0, 5.0)",
+        "supported": 0,
+        "tier": 6
+      },
+      {
+        "count": 4,
+        "kind": "toy_block",
+        "minimum_level": 5,
+        "required_radius": 2.67394000053406,
+        "size": "(4.2, 4.0, 3.9)",
+        "supported": 4,
+        "tier": 5
+      },
+      {
+        "count": 4,
+        "kind": "bubble_turret",
+        "minimum_level": 3,
+        "required_radius": 1.62,
+        "size": "(3.0, 4.6, 2.8)",
+        "supported": 4,
+        "tier": 4
+      },
+      {
+        "count": 4,
+        "kind": "toy_arch",
+        "minimum_level": 4,
+        "required_radius": 1.90982985019684,
+        "size": "(2.8, 3.5, 2.6)",
+        "supported": 0,
+        "tier": 4
+      },
+      {
+        "count": 1,
+        "kind": "bubble_turret",
+        "minimum_level": 5,
+        "required_radius": 2.26799989700317,
+        "size": "(4.2, 7.0, 4.0)",
+        "supported": 0,
+        "tier": 5
+      },
+      {
+        "count": 4,
+        "kind": "bubble_turret",
+        "minimum_level": 5,
+        "required_radius": 2.26799989700317,
+        "size": "(4.2, 5.5, 4.0)",
+        "supported": 0,
+        "tier": 5
+      },
+      {
+        "count": 1,
+        "kind": "toy_castle",
+        "minimum_level": 7,
+        "required_radius": 5.66741683959961,
+        "size": "(8.8, 10.0, 7.6)",
+        "supported": 0,
+        "tier": 7
+      },
+      {
+        "count": 2,
+        "kind": "toy_castle",
+        "minimum_level": 5,
+        "required_radius": 3.32364423751831,
+        "size": "(5.2, 7.0, 4.4)",
+        "supported": 0,
+        "tier": 6
+      },
+      {
+        "count": 1,
+        "kind": "bubble_turret",
+        "minimum_level": 5,
+        "required_radius": 2.26799989700317,
+        "size": "(4.2, 6.0, 4.0)",
+        "supported": 0,
+        "tier": 5
+      },
+      {
+        "count": 1,
+        "kind": "toy_castle",
+        "minimum_level": 7,
+        "required_radius": 5.66741683959961,
+        "size": "(8.8, 15.6, 7.6)",
+        "supported": 0,
+        "tier": 7
+      },
+      {
+        "count": 1,
+        "kind": "bubble_turret",
+        "minimum_level": 5,
+        "required_radius": 2.26799989700317,
+        "size": "(4.2, 10.0, 4.0)",
+        "supported": 0,
+        "tier": 5
+      },
+      {
+        "count": 1,
+        "kind": "toy_castle",
+        "minimum_level": 7,
+        "required_radius": 5.66741683959961,
+        "size": "(8.8, 14.2, 7.6)",
+        "supported": 0,
+        "tier": 7
+      },
+      {
+        "count": 1,
+        "kind": "bubble_turret",
+        "minimum_level": 5,
+        "required_radius": 2.26799989700317,
+        "size": "(4.2, 9.0, 4.0)",
+        "supported": 0,
+        "tier": 5
+      },
+      {
+        "count": 1,
+        "kind": "toy_block",
+        "minimum_level": 3,
+        "required_radius": 1.31801806926727,
+        "size": "(2.05, 1.2, 1.95)",
+        "supported": 0,
+        "tier": 3
+      },
+      {
+        "count": 54,
+        "kind": "toy_car",
+        "minimum_level": 2,
+        "required_radius": 0.928228769302368,
+        "size": "(1.45, 0.9, 1.12)",
+        "supported": 1,
+        "tier": 2
+      },
+      {
+        "count": 44,
+        "kind": "toy_duck",
+        "minimum_level": 1,
+        "required_radius": 0.388812085390091,
+        "size": "(0.72, 0.65, 0.68)",
+        "supported": 1,
+        "tier": 1
+      },
+      {
+        "count": 48,
+        "kind": "toy_ball",
+        "minimum_level": 1,
+        "required_radius": 0.24666539311409,
+        "size": "(0.4, 0.38, 0.38)",
+        "supported": 0,
+        "tier": 1
+      },
+      {
+        "count": 48,
+        "kind": "toy_block",
+        "minimum_level": 1,
+        "required_radius": 0.257037994265556,
+        "size": "(0.4, 0.38, 0.38)",
+        "supported": 0,
+        "tier": 1
+      },
+      {
+        "count": 48,
+        "kind": "toy_duck",
+        "minimum_level": 1,
+        "required_radius": 0.216006810665131,
+        "size": "(0.4, 0.38, 0.38)",
+        "supported": 0,
+        "tier": 1
+      },
+      {
+        "count": 49,
+        "kind": "toy_ball",
+        "minimum_level": 1,
+        "required_radius": 0.443060481548309,
+        "size": "(0.72, 0.65, 0.68)",
+        "supported": 0,
+        "tier": 1
+      },
+      {
+        "count": 4,
+        "kind": "toy_block",
+        "minimum_level": 1,
+        "required_radius": 0.46155356168747,
+        "size": "(0.72, 0.65, 0.68)",
+        "supported": 0,
+        "tier": 1
+      },
+      {
+        "count": 3,
+        "kind": "toy_car",
+        "minimum_level": 2,
+        "required_radius": 0.928228769302368,
+        "size": "(1.45, 0.82, 1.12)",
+        "supported": 0,
+        "tier": 2
+      },
+      {
+        "count": 3,
+        "kind": "toy_train",
+        "minimum_level": 2,
+        "required_radius": 0.905852901935577,
+        "size": "(1.45, 0.82, 1.12)",
+        "supported": 0,
+        "tier": 2
+      },
+      {
+        "count": 46,
+        "kind": "toy_block",
+        "minimum_level": 2,
+        "required_radius": 0.864136869907379,
+        "size": "(1.45, 0.9, 1.12)",
+        "supported": 0,
+        "tier": 2
+      },
+      {
+        "count": 22,
+        "kind": "toy_block",
+        "minimum_level": 3,
+        "required_radius": 1.31801806926727,
+        "size": "(2.05, 1.7, 1.95)",
+        "supported": 0,
+        "tier": 3
+      },
+      {
+        "count": 24,
+        "kind": "toy_duck",
+        "minimum_level": 2,
+        "required_radius": 1.10703486442566,
+        "size": "(2.05, 1.7, 1.95)",
+        "supported": 0,
+        "tier": 3
+      },
+      {
+        "count": 4,
+        "kind": "toy_castle",
+        "minimum_level": 6,
+        "required_radius": 3.81382106781006,
+        "size": "(6.0, 8.0, 5.0)",
+        "supported": 0,
+        "tier": 6
+      },
+      {
+        "count": 2,
+        "kind": "bubble_turret",
+        "minimum_level": 3,
+        "required_radius": 1.51199997425079,
+        "size": "(2.8, 3.2, 2.6)",
+        "supported": 0,
+        "tier": 4
+      },
+      {
+        "count": 10,
+        "kind": "toy_car",
+        "minimum_level": 1,
+        "required_radius": 0.497994868755341,
+        "size": "(0.72, 0.65, 0.68)",
+        "supported": 0,
+        "tier": 1
+      },
+      {
+        "count": 2,
+        "kind": "toy_arch",
+        "minimum_level": 4,
+        "required_radius": 1.90982985019684,
+        "size": "(2.8, 3.2, 2.6)",
+        "supported": 0,
+        "tier": 4
+      }
+    ],
+    "opening_targets": 72,
+    "physical": {
+      "completed_stack_points": 7,
+      "expected_stack_points": 7,
+      "receipts": {
+        "70346869325": [
+          {
+            "name": "Toy_059_toy_block",
+            "player": true,
+            "points": 4,
+            "score": 34,
+            "top": -3.59789454936981
+          }
+        ],
+        "70481087060": [
+          {
+            "name": "Toy_060_toy_car",
+            "player": true,
+            "points": 2,
+            "score": 36,
+            "top": -3.52670389413834
+          }
+        ],
+        "70715968094": [
+          {
+            "name": "Toy_061_toy_duck",
+            "player": true,
+            "points": 1,
+            "score": 37,
+            "top": -3.53688269853592
+          }
+        ]
+      },
+      "remote_tower_id": "toy_tower_01",
+      "scope": "Explicit small-stack and remote-pull fixtures; real gravity and callbacks, not a timed growth soak",
+      "starter_tower_id": "toy_tower_21"
+    },
+    "planning": {
+      "blocked_landmarks": 0,
+      "reachable": 470,
+      "scope": "One-body admission graph only; no travel-time or ordinary 90-second pacing claim",
+      "score": 2983,
+      "thresholds": [
+        {
+          "admitted": 0,
+          "level": 1,
+          "radius": 0.85,
+          "score": 0
+        },
+        {
+          "admitted": 10,
+          "level": 2,
+          "radius": 1.2,
+          "score": 10
+        },
+        {
+          "admitted": 30,
+          "level": 3,
+          "radius": 1.65,
+          "score": 30
+        },
+        {
+          "admitted": 60,
+          "level": 4,
+          "radius": 2.2,
+          "score": 60
+        },
+        {
+          "admitted": 100,
+          "level": 5,
+          "radius": 3.5,
+          "score": 100
+        },
+        {
+          "admitted": 160,
+          "level": 6,
+          "radius": 5.1,
+          "score": 160
+        },
+        {
+          "admitted": 240,
+          "level": 7,
+          "radius": 6.0,
+          "score": 240
+        },
+        {
+          "admitted": 300,
+          "level": 8,
+          "radius": 7.2,
+          "score": 350
+        },
+        {
+          "admitted": 365,
+          "level": 9,
+          "radius": 8.7,
+          "score": 500
+        },
+        {
+          "admitted": 411,
+          "level": 10,
+          "radius": 10.2,
+          "score": 700
+        },
+        {
+          "admitted": 431,
+          "level": 11,
+          "radius": 12.0,
+          "score": 960
+        },
+        {
+          "admitted": 445,
+          "level": 12,
+          "radius": 14.0,
+          "score": 1267
+        },
+        {
+          "admitted": 452,
+          "level": 13,
+          "radius": 15.8888888888889,
+          "score": 1631
+        },
+        {
+          "admitted": 458,
+          "level": 14,
+          "radius": 17.5789473684211,
+          "score": 2015
+        },
+        {
+          "admitted": 465,
+          "level": 15,
+          "radius": 19.1,
+          "score": 2503
+        },
+        {
+          "admitted": 470,
+          "level": 16,
+          "radius": 20.4761904761905,
+          "score": 2983
+        }
+      ]
+    },
+    "population": {
+      "actor_mesh_cache_entries": 17,
+      "bodies": 814,
+      "collision_parts": 1290,
+      "court": {
+        "active_assemblies": 244,
+        "activity_receipts": 0,
+        "ambient": 48,
+        "assemblies": 244,
+        "beacons": 8,
+        "distinct_recipes": 10,
+        "gate_beacons": [
+          {
+            "at": "(-13.0, 51.63)",
+            "beacon": "Toy_603_bubble_turret",
+            "beacon_radius": 0.310000002384186,
+            "district": "rose_courtyard",
+            "facade_half_depth": 2.20000004768372,
+            "front_clearance": 0.12,
+            "front_offset": 2.6300000500679,
+            "nearest_actor_route_distance": 8.36999908994171,
+            "nearest_other_toy_clearance": 1.85959205031395,
+            "palace": "Toy_025_toy_castle",
+            "palace_at": "(-13.0, 49.0)",
+            "palace_minimum_level": 5,
+            "palace_required_radius": 3.32364423751831
+          },
+          {
+            "at": "(33.0, 51.63)",
+            "beacon": "Toy_604_bubble_turret",
+            "beacon_radius": 0.310000002384186,
+            "district": "mint_playground",
+            "facade_half_depth": 2.20000004768372,
+            "front_clearance": 0.12,
+            "front_offset": 2.6300000500679,
+            "nearest_actor_route_distance": 8.36999908994171,
+            "nearest_other_toy_clearance": 1.41947603225708,
+            "palace": "Toy_034_toy_castle",
+            "palace_at": "(33.0, 49.0)",
+            "palace_minimum_level": 5,
+            "palace_required_radius": 3.32364423751831
+          },
+          {
+            "at": "(-13.0, 0.63)",
+            "beacon": "Toy_605_bubble_turret",
+            "beacon_radius": 0.310000002384186,
+            "district": "sky_block_quarter",
+            "facade_half_depth": 2.20000004768372,
+            "front_clearance": 0.12,
+            "front_offset": 2.6300000500679,
+            "nearest_actor_route_distance": 13.0,
+            "nearest_other_toy_clearance": 1.58239811658859,
+            "palace": "Toy_043_toy_castle",
+            "palace_at": "(-13.0, -2.0)",
+            "palace_minimum_level": 5,
+            "palace_required_radius": 3.32364423751831
+          },
+          {
+            "at": "(33.0, 0.63)",
+            "beacon": "Toy_606_bubble_turret",
+            "beacon_radius": 0.310000002384186,
+            "district": "apricot_garden",
+            "facade_half_depth": 2.20000004768372,
+            "front_clearance": 0.12,
+            "front_offset": 2.6300000500679,
+            "nearest_actor_route_distance": 11.0,
+            "nearest_other_toy_clearance": 1.36013334989548,
+            "palace": "Toy_052_toy_castle",
+            "palace_at": "(33.0, -2.0)",
+            "palace_minimum_level": 5,
+            "palace_required_radius": 3.32364423751831
+          }
+        ],
+        "installations": 100,
+        "living": 80,
+        "living_roles": {
+          "balloon_vendor": 4,
+          "captain": 4,
+          "courier": 4,
+          "courtier": 8,
+          "drummer": 4,
+          "guard": 16,
+          "herald": 4,
+          "jester": 4,
+          "king": 4,
+          "knight": 4,
+          "page": 4,
+          "princess": 4,
+          "queen": 4,
+          "sentry": 4,
+          "steward": 4,
+          "toymaker": 4
+        },
+        "parade": 8,
+        "released": 0,
+        "routes": {
+          "formation_columns": 2,
+          "formation_spacing": 1.05,
+          "guards_change_every": 18.0,
+          "half_width": 2.8,
+          "paths": [
+            [
+              "(-44.0, 18.0)",
+              "(0.0, 18.0)",
+              "(0.0, 60.0)",
+              "(-44.0, 60.0)"
+            ],
+            [
+              "(0.0, 18.0)",
+              "(44.0, 18.0)",
+              "(44.0, 60.0)",
+              "(0.0, 60.0)"
+            ],
+            [
+              "(-44.0, -36.0)",
+              "(0.0, -36.0)",
+              "(0.0, 18.0)",
+              "(-44.0, 18.0)"
+            ],
+            [
+              "(0.0, -36.0)",
+              "(44.0, -36.0)",
+              "(44.0, 18.0)",
+              "(0.0, 18.0)"
+            ],
+            [
+              "(-84.0, -84.0)",
+              "(84.0, -84.0)",
+              "(84.0, 84.0)",
+              "(-84.0, 84.0)"
+            ],
+            [
+              "(-44.0, -36.0)",
+              "(44.0, -36.0)",
+              "(44.0, 60.0)",
+              "(-44.0, 60.0)"
+            ]
+          ],
+          "world_limit": 94.0
+        },
+        "separation_passes": 0,
+        "source_city_benchmark": {
+          "ambient": 48,
+          "beacons": 5,
+          "installations": 100,
+          "living": 64,
+          "traffic": 8,
+          "world_actors": 217
+        },
+        "world_actors": 236
+      },
+      "kind_counts": {
+        "block_tower": 6,
+        "bubble_turret": 14,
+        "grand_castle": 10,
+        "toy_arch": 6,
+        "toy_ball": 97,
+        "toy_block": 127,
+        "toy_car": 67,
+        "toy_castle": 24,
+        "toy_duck": 116,
+        "toy_train": 3
+      },
+      "largest_height": 38.0635986328125,
+      "largest_required_radius": 12.0340853118896,
+      "legacy_models_loaded": 0,
+      "map_id": "toys",
+      "mesh_cache_entries": 10,
+      "name": "Bubble Toy Town",
+      "neighborhood_counts": {
+        "apricot_garden": 89,
+        "crown_heights": 10,
+        "east_bubble_walk": 19,
+        "mint_playground": 121,
+        "rose_courtyard": 118,
+        "sky_block_quarter": 90,
+        "sunset_castles": 4,
+        "west_bubble_walk": 19
+      },
+      "physical_towers": 7,
+      "shape_cache_entries": 76,
+      "static_batches": {
+        "batches": 58,
+        "meshes": 369
+      },
+      "static_bodies": 470,
+      "tier_counts": {
+        "1": 251,
+        "2": 106,
+        "3": 47,
+        "4": 12,
+        "5": 12,
+        "6": 16,
+        "7": 6,
+        "8": 12,
+        "9": 8
+      },
+      "total_points": 3671,
+      "whole_castles": 32
+    },
+    "scene": {
+      "collision_parts": 1290,
+      "fragments": 0,
+      "mesh_instances": 874
+    },
+    "supports": [
+      {
+        "actual_contact_gap": 0.0250091552734375,
+        "body": "Toy_003_toy_block",
+        "global_aabb_gap_diagnostic": -0.00140094757080078,
+        "parent": "Toy_002_block_tower",
+        "support_ray_hits": 1
+      },
+      {
+        "actual_contact_gap": 0.0249996185302734,
+        "body": "Toy_004_grand_castle",
+        "global_aabb_gap_diagnostic": 0.0249996185302734,
+        "parent": "Toy_003_toy_block",
+        "support_ray_hits": 9
+      },
+      {
+        "actual_contact_gap": 0.0250091552734375,
+        "body": "Toy_006_toy_block",
+        "global_aabb_gap_diagnostic": -0.00140094757080078,
+        "parent": "Toy_005_block_tower",
+        "support_ray_hits": 1
+      },
+      {
+        "actual_contact_gap": 0.0249996185302734,
+        "body": "Toy_007_grand_castle",
+        "global_aabb_gap_diagnostic": 0.0249996185302734,
+        "parent": "Toy_006_toy_block",
+        "support_ray_hits": 9
+      },
+      {
+        "actual_contact_gap": 0.0249943733215332,
+        "body": "Toy_027_toy_block",
+        "global_aabb_gap_diagnostic": 0.0099029541015625,
+        "parent": "Toy_026_block_tower",
+        "support_ray_hits": 2
+      },
+      {
+        "actual_contact_gap": 0.0249996185302734,
+        "body": "Toy_028_bubble_turret",
+        "global_aabb_gap_diagnostic": 0.0249998569488525,
+        "parent": "Toy_027_toy_block",
+        "support_ray_hits": 10
+      },
+      {
+        "actual_contact_gap": 0.0249943733215332,
+        "body": "Toy_036_toy_block",
+        "global_aabb_gap_diagnostic": 0.0099029541015625,
+        "parent": "Toy_035_block_tower",
+        "support_ray_hits": 2
+      },
+      {
+        "actual_contact_gap": 0.0249996185302734,
+        "body": "Toy_037_bubble_turret",
+        "global_aabb_gap_diagnostic": 0.0249998569488525,
+        "parent": "Toy_036_toy_block",
+        "support_ray_hits": 10
+      },
+      {
+        "actual_contact_gap": 0.0249943733215332,
+        "body": "Toy_045_toy_block",
+        "global_aabb_gap_diagnostic": 0.0099029541015625,
+        "parent": "Toy_044_block_tower",
+        "support_ray_hits": 2
+      },
+      {
+        "actual_contact_gap": 0.0249996185302734,
+        "body": "Toy_046_bubble_turret",
+        "global_aabb_gap_diagnostic": 0.0249998569488525,
+        "parent": "Toy_045_toy_block",
+        "support_ray_hits": 10
+      },
+      {
+        "actual_contact_gap": 0.0249943733215332,
+        "body": "Toy_054_toy_block",
+        "global_aabb_gap_diagnostic": 0.0099029541015625,
+        "parent": "Toy_053_block_tower",
+        "support_ray_hits": 2
+      },
+      {
+        "actual_contact_gap": 0.0249996185302734,
+        "body": "Toy_055_bubble_turret",
+        "global_aabb_gap_diagnostic": 0.0249998569488525,
+        "parent": "Toy_054_toy_block",
+        "support_ray_hits": 10
+      },
+      {
+        "actual_contact_gap": 0.0250002145767212,
+        "body": "Toy_060_toy_car",
+        "global_aabb_gap_diagnostic": 0.0249999761581421,
+        "parent": "Toy_059_toy_block",
+        "support_ray_hits": 20
+      },
+      {
+        "actual_contact_gap": 0.0250003337860107,
+        "body": "Toy_061_toy_duck",
+        "global_aabb_gap_diagnostic": 0.0219910144805908,
+        "parent": "Toy_060_toy_car",
+        "support_ray_hits": 7
+      }
+    ]
+  },
+  "scope": "Actual toy geometry, collision, support and explicit physics fixtures; no real save, production SDK, phone FPS or 90-second pacing claim"
+}

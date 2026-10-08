@@ -1,0 +1,46 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "suite": "title_navigation",
+      "checks": 37,
+      "minimum": 25,
+      "report_sha256": "8c830d19084cbda14a90a495de8ac85601c4d7459bc1167e3bac14e598abc11f"
+    },
+    {
+      "suite": "retention_ui_review",
+      "checks": 7421,
+      "minimum": 2443,
+      "report_sha256": "fd8c18d8af38dd7aa2c6b543f282746f603f701780fe21da38ec8fbb7fcb6d43"
+    },
+    {
+      "suite": "ui_redesign",
+      "checks": 1843,
+      "minimum": 150,
+      "report_sha256": "65d25671b94dcc67e8f88c9db116c3beb837d93dc83389045dbbe545cd7a442c"
+    },
+    {
+      "suite": "ui_collection_review",
+      "checks": 1905,
+      "minimum": 150,
+      "report_sha256": "b679a3a0a304dadc364f65783438ba7dce4e7910241ccb8bffa46bbcef7719f1"
+    },
+    {
+      "suite": "mobile_thumbnail",
+      "checks": 3847,
+      "minimum": 695,
+      "report_sha256": "efd6c88e93391ea33a253f30538cc90499070e917a67ead9cd92acafe2e2898a"
+    },
+    {
+      "suite": "coin_skins",
+      "checks": 412,
+      "minimum": 80,
+      "report_sha256": "14d37288dd194486c458fcbbe275623d4c93bfc031413a0f94e424aef33e1766"
+    }
+  ],
+  "checks": 15465,
+  "unchanged_inputs": true,
+  "guarded_inputs": 810,
+  "elapsed_seconds": 31.491,
+  "scope": "Serial source-only focused headless acceptance; no full gate, GPU, native build or phone action"
+}

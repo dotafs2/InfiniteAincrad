@@ -1,0 +1,49 @@
+[
+  {
+    "suite": "food_rain_continuity",
+    "status": "PASS",
+    "checks": 33,
+    "failures": [],
+    "report": "food_rain_continuity-full.json",
+    "prior_attempt": "summary.json retains an early harness quit at 18000 frames, before this script's 21600-frame duration; rerun ceiling 30000."
+  },
+  {
+    "suite": "food_city_revision",
+    "status": "PASS",
+    "checks": 135,
+    "failures": []
+  },
+  {
+    "suite": "food_impact",
+    "status": "PASS; author and independent reviewer",
+    "checks": 256,
+    "failures": [],
+    "report": "../impact-fixture/source-final.json",
+    "prior_attempt": "Original elevated contact failures are retained; only three ground-contact fixture positions were relocated after actual terrain/air clearance queries.",
+    "independent_report": "../impact-fixture/independent-final.json"
+  },
+  {
+    "suite": "rain_review",
+    "status": "PASS",
+    "checks": 9,
+    "failures": []
+  },
+  {
+    "suite": "food_revision_review",
+    "status": "PASS",
+    "checks": 11,
+    "failures": []
+  },
+  {
+    "suite": "mobile_maps",
+    "status": "PASS",
+    "checks": 29,
+    "failures": []
+  },
+  {
+    "suite": "portrait",
+    "status": "PASS",
+    "checks": 30,
+    "failures": []
+  }
+]

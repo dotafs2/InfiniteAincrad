@@ -1,0 +1,27 @@
+{
+	"checks": 12,
+	"failures": [
+		"Glacier score delta equals its authored points",
+		"Glacier swallow increments the shared eaten counter once"
+	],
+	"metrics": {
+		"coins": 257,
+		"glacier": {
+			"admitted": true,
+			"consumed": true,
+			"eaten_delta": 5,
+			"points": 96,
+			"score_delta": 168
+		},
+		"remaining": 87.1833333333335,
+		"rock": {
+			"admitted": true,
+			"consumed": true,
+			"eaten_delta": 1,
+			"points": 6,
+			"score_delta": 6
+		},
+		"scope": "Real Frostlight body admission and score receipt; no production save or SDK claim",
+		"score": 2574
+	}
+}

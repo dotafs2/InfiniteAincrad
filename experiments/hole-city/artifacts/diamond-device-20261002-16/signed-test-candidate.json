@@ -1,0 +1,41 @@
+{
+  "at_utc": "2026-10-02T02:28:18.874906+00:00",
+  "version": "0.12.4",
+  "build": "16",
+  "test_ads": true,
+  "uses_production_ad_identifiers": false,
+  "compiled_and_linked": true,
+  "strict_signature_valid": true,
+  "exact_signed_app_entitlement_verified": true,
+  "provisioned_phone_verified": true,
+  "native_adapter_sha256": "4796be1bac3627e4bed3f548fa11ab3bc298938756cb8b0091447f397ab5eb08",
+  "native_plugin_sha256": "3ca5ba322ef70d60853fa9d2e6e636af030c35920ef82b60fbf6a7d8e13c9a07",
+  "native_pck_sha256": "b0fadd61a1ffa182d93500752e2eecceb6fad4edc30c6aca15b2c7a9fd2ab505",
+  "native_pck_bytes": 10686816,
+  "reused_native_pck_checks": 0,
+  "web_gate_suites_per_phase": 83,
+  "accepted_web_receipt_sha256": "d47cf2774e1706c09a7a485343c2731311f2380d9bc459092e1f63ba68a5afb8",
+  "native_acceptance_suites": [
+    "release_info",
+    "monetization_bridges",
+    "economy_continuation",
+    "diamond_boundary_review",
+    "native_polish",
+    "application_lifecycle",
+    "skin_collection",
+    "ui_collection_review",
+    "ui_redesign",
+    "mobile_thumbnail"
+  ],
+  "new_native_pck_checks": 8948,
+  "vendor_privacy_manifest_sha256": {
+    "GoogleMobileAds": "69fb112582fc23fc06c635c961d262a3f7b4b5654d284787491de3000dadf9d2",
+    "UserMessagingPlatform": "45b7adb99fcd2d962a1c800fbfcc1325b57a7fa4165f416182323bb5ffe9c900"
+  },
+  "guarded_inputs_unchanged": 807,
+  "installed": false,
+  "launched": false,
+  "uploaded": false,
+  "production_release": false,
+  "prior_candidate_receipt": "artifacts/ad-recovery-20261001-08/native-09/production-candidate.json"
+}

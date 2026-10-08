@@ -1,0 +1,104 @@
+[
+  {
+    "suite": "portrait",
+    "passed": true,
+    "report": {
+      "checks": 30,
+      "citizens": 64,
+      "edible_objects": 604,
+      "failures": [],
+      "unique_models": 208
+    }
+  },
+  {
+    "suite": "mobile_maps",
+    "passed": true,
+    "report": {
+      "checks": 27,
+      "failures": []
+    }
+  },
+  {
+    "suite": "fidelity",
+    "passed": true,
+    "report": {
+      "checks": 24,
+      "city_reachability": {
+        "level": 8,
+        "phase": "complete",
+        "rivals_retired_for_fixture": true,
+        "score": 421,
+        "seconds": 120.433333333328,
+        "ticks": 7226
+      },
+      "failures": [],
+      "live_rival_run": {
+        "level": 8,
+        "phase": "complete",
+        "score": 422,
+        "seconds": 115.766666666661,
+        "ticks": 6946
+      },
+      "objects": 604
+    }
+  },
+  {
+    "suite": "food_round",
+    "passed": true,
+    "report": {
+      "passed": true,
+      "rounds": [
+        {
+          "contested": true,
+          "food": {
+            "bacon": 18,
+            "berry": 16,
+            "burger": 14,
+            "cake": 17,
+            "cookie": 23,
+            "donut": 26,
+            "egg": 14,
+            "pancake": 12,
+            "person": 2,
+            "pizza": 15,
+            "sushi": 11
+          },
+          "phase": "complete",
+          "score": 420,
+          "seconds": 105.566666666662
+        },
+        {
+          "contested": false,
+          "food": {
+            "bacon": 15,
+            "berry": 20,
+            "burger": 17,
+            "cake": 20,
+            "cookie": 30,
+            "donut": 25,
+            "egg": 18,
+            "pancake": 12,
+            "person": 7,
+            "pizza": 14,
+            "sushi": 15
+          },
+          "phase": "complete",
+          "score": 420,
+          "seconds": 66.8999999999975
+        }
+      ]
+    }
+  },
+  {
+    "suite": "snack_city",
+    "passed": true,
+    "report": {
+      "buildings": 38,
+      "checks": 39,
+      "failures": [],
+      "initial_edibles": 1096,
+      "npc_count": 48,
+      "types": 10
+    }
+  }
+]

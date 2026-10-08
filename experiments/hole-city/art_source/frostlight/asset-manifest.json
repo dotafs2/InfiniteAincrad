@@ -1,0 +1,82 @@
+{
+  "schema": 2,
+  "authoring_tool": "Blender",
+  "blender_version": "5.2.2 LTS",
+  "assets": [
+    {
+      "id": "glacier",
+      "path": "res://assets/frost/glacier.glb",
+      "triangles": 2790,
+      "closed_edges": true,
+      "sha256": "d35bca30b01eada1859028fba2a9e4608b43ea7f5a446a2700ca9683c3c4d1c8",
+      "unit_bounds": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "glacier_ridge",
+      "path": "res://assets/frost/glacier_ridge.glb",
+      "triangles": 2696,
+      "closed_edges": true,
+      "sha256": "18280d3e6e0ac1bf5130418693559615a377fdc6af33eae340e22d5965bb29ff",
+      "unit_bounds": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "glacier_shelf",
+      "path": "res://assets/frost/glacier_shelf.glb",
+      "triangles": 2384,
+      "closed_edges": true,
+      "sha256": "7401d64ff472b07be841eaf2d30786f74cda48fd6485632ae5e7c2bee3397d49",
+      "unit_bounds": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "glacier_serac",
+      "path": "res://assets/frost/glacier_serac.glb",
+      "triangles": 1722,
+      "closed_edges": true,
+      "sha256": "e9c1f5588de22454126c050a17786467af8eff94dd67ca9ab169ba5223dd2cbe",
+      "unit_bounds": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "ice_rock",
+      "path": "res://assets/frost/ice_rock.glb",
+      "triangles": 1064,
+      "closed_edges": true,
+      "sha256": "3078b547092e8ca8766daccf6b35f748331286e1873951bcdf08cbddf98e39a0",
+      "unit_bounds": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "ice_floe",
+      "path": "res://assets/frost/ice_floe.glb",
+      "triangles": 1098,
+      "closed_edges": true,
+      "sha256": "98f3b9478ad032b477a14e0d1341e5c9f9e170988055d74285138b844a93060b",
+      "unit_bounds": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "reference_policy": "Original procedural meshes. Frozen 2 official ice look/lighting research informs material hierarchy only. No copied characters, imagery, meshes, layouts, or textures.",
+  "source_blend": "art_source/frostlight/frostlight_assets.blend",
+  "source_blend_sha256": "78f276886439b57369e1a02d8fad40b7da0e1c197a72475d006751a415918b0b"
+}

@@ -1,0 +1,1098 @@
+{
+	"audio": "Master bus muted; launch should additionally use Dummy driver",
+	"captures": [
+		{
+			"coins": 50,
+			"controls": [
+				{
+					"canvas_touch_rect": [
+						1007.11108398438,
+						234.888885498047,
+						254.222213745117,
+						156.444442749023
+					],
+					"disabled": false,
+					"id": "home-settings",
+					"rect": [
+						412.0,
+						20.0,
+						104.0,
+						64.0
+					],
+					"text": "SETTINGS"
+				},
+				{
+					"canvas_touch_rect": [
+						58.6666641235352,
+						1494.73278808594,
+						1202.66662597656,
+						176.462356567383
+					],
+					"disabled": false,
+					"id": "all-maps",
+					"rect": [
+						24.0,
+						535.390686035156,
+						492.0,
+						72.1891479492188
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						210.222213745117,
+						2150.9521484375,
+						899.555541992188,
+						226.092315673828
+					],
+					"disabled": false,
+					"id": "@Button@186",
+					"rect": [
+						86.0,
+						803.844055175781,
+						368.0,
+						92.4923095703125
+					],
+					"text": "PLAY"
+				},
+				{
+					"canvas_touch_rect": [
+						48.8888893127441,
+						2506.88891601562,
+						381.333343505859,
+						180.888885498047
+					],
+					"disabled": false,
+					"id": "store-nav",
+					"rect": [
+						20.0,
+						949.45458984375,
+						156.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						469.333312988281,
+						2506.88891601562,
+						381.333343505859,
+						180.888885498047
+					],
+					"disabled": true,
+					"id": "holes-home",
+					"rect": [
+						192.0,
+						949.45458984375,
+						156.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						889.777770996094,
+						2506.88891601562,
+						381.333343505859,
+						180.888885498047
+					],
+					"disabled": false,
+					"id": "holes-nav",
+					"rect": [
+						364.0,
+						949.45458984375,
+						156.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						58.6666641235352,
+						1687.73852539062,
+						581.777770996094,
+						358.439056396484
+					],
+					"disabled": false,
+					"id": "home-map-nav",
+					"rect": [
+						24.0,
+						614.347595214844,
+						238.0,
+						146.634155273438
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						679.555541992188,
+						1687.73852539062,
+						581.777770996094,
+						358.439056396484
+					],
+					"disabled": false,
+					"id": "home-food-nav",
+					"rect": [
+						278.0,
+						614.347595214844,
+						238.0,
+						146.634155273438
+					],
+					"text": ""
+				}
+			],
+			"device_safe_area_emulation": true,
+			"diamonds": 10,
+			"label": "home",
+			"logical_viewport": [
+				1320.0,
+				2868.0
+			],
+			"map": "city",
+			"path": "res://artifacts/simple-ui-20261002/ui-gpu-06/home.png",
+			"phase": "title",
+			"remaining": 60.0,
+			"scope": "Actual fresh profile with full-height portrait anchors; two wallets, one Play, secondary Settings",
+			"sha256": "3e51c913cedf8f6d2ca48dbb8520247e0be4ec054d0fa5baf7ac2e37a8f1760a",
+			"ui_canvas": [
+				540.0,
+				1055.45458984375
+			],
+			"ui_origin": [
+				0.0,
+				186.0
+			],
+			"ui_scale": [
+				2.44444441795349,
+				2.44444441795349
+			]
+		},
+		{
+			"coins": 50,
+			"controls": [
+				{
+					"canvas_touch_rect": [
+						48.8888893127441,
+						234.888885498047,
+						298.222229003906,
+						156.444442749023
+					],
+					"disabled": false,
+					"id": "settings-back",
+					"rect": [
+						20.0,
+						20.0,
+						122.0,
+						64.0
+					],
+					"text": "BACK"
+				},
+				{
+					"canvas_touch_rect": [
+						220.0,
+						805.426879882812,
+						880.0,
+						193.005630493164
+					],
+					"disabled": false,
+					"id": "audio-music",
+					"rect": [
+						90.0,
+						253.401916503906,
+						360.0,
+						78.9568481445312
+					],
+					"text": "MUSIC  ON"
+				},
+				{
+					"canvas_touch_rect": [
+						220.0,
+						1070.12036132812,
+						880.0,
+						193.005630493164
+					],
+					"disabled": false,
+					"id": "audio-sfx",
+					"rect": [
+						90.0,
+						361.685607910156,
+						360.0,
+						78.9568481445312
+					],
+					"text": "SOUND  ON"
+				},
+				{
+					"canvas_touch_rect": [
+						220.0,
+						1334.81384277344,
+						880.0,
+						193.005630493164
+					],
+					"disabled": false,
+					"id": "feedback-haptics",
+					"rect": [
+						90.0,
+						469.969299316406,
+						360.0,
+						78.9568481445312
+					],
+					"text": "HAPTICS  ON"
+				},
+				{
+					"canvas_touch_rect": [
+						220.0,
+						1737.36853027344,
+						880.0,
+						193.005630493164
+					],
+					"disabled": false,
+					"id": "release-info",
+					"rect": [
+						90.0,
+						634.650756835938,
+						360.0,
+						78.9568481445312
+					],
+					"text": "PRIVACY & SUPPORT"
+				},
+				{
+					"canvas_touch_rect": [
+						48.8888893127441,
+						2506.88891601562,
+						381.333343505859,
+						180.888885498047
+					],
+					"disabled": false,
+					"id": "store-nav",
+					"rect": [
+						20.0,
+						949.45458984375,
+						156.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						469.333312988281,
+						2506.88891601562,
+						381.333343505859,
+						180.888885498047
+					],
+					"disabled": true,
+					"id": "holes-home",
+					"rect": [
+						192.0,
+						949.45458984375,
+						156.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						889.777770996094,
+						2506.88891601562,
+						381.333343505859,
+						180.888885498047
+					],
+					"disabled": false,
+					"id": "holes-nav",
+					"rect": [
+						364.0,
+						949.45458984375,
+						156.0,
+						74.0
+					],
+					"text": ""
+				}
+			],
+			"device_safe_area_emulation": true,
+			"diamonds": 10,
+			"label": "settings",
+			"logical_viewport": [
+				1320.0,
+				2868.0
+			],
+			"map": "city",
+			"path": "res://artifacts/simple-ui-20261002/ui-gpu-06/settings.png",
+			"phase": "title",
+			"remaining": 60.0,
+			"scope": "Actual secondary music, sound, haptics, privacy and support controls",
+			"sha256": "c6234f4d811dbdda0097116f925714b45a2471ba91c601f71908a5507da929d4",
+			"ui_canvas": [
+				540.0,
+				1055.45458984375
+			],
+			"ui_origin": [
+				0.0,
+				186.0
+			],
+			"ui_scale": [
+				2.44444441795349,
+				2.44444441795349
+			]
+		},
+		{
+			"coins": 50,
+			"controls": [
+				{
+					"canvas_touch_rect": [
+						97.7777786254883,
+						703.409606933594,
+						1124.44445800781,
+						275.722412109375
+					],
+					"disabled": true,
+					"id": "store-diamond-video",
+					"rect": [
+						40.0,
+						211.667572021484,
+						460.0,
+						112.795532226562
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						97.7777786254883,
+						1048.0625,
+						1124.44445800781,
+						264.693450927734
+					],
+					"disabled": true,
+					"id": "store-pack-0",
+					"rect": [
+						40.0,
+						352.661956787109,
+						460.0,
+						108.28369140625
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						97.7777786254883,
+						1384.44384765625,
+						1124.44445800781,
+						264.693542480469
+					],
+					"disabled": true,
+					"id": "store-pack-1",
+					"rect": [
+						40.0,
+						490.272491455078,
+						460.0,
+						108.283721923828
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						97.7777786254883,
+						1720.8251953125,
+						1124.44445800781,
+						264.693450927734
+					],
+					"disabled": true,
+					"id": "store-pack-2",
+					"rect": [
+						40.0,
+						627.883056640625,
+						460.0,
+						108.28369140625
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						220.0,
+						2181.28173828125,
+						880.0,
+						187.491149902344
+					],
+					"disabled": false,
+					"id": "diamond-shop",
+					"rect": [
+						90.0,
+						816.251586914062,
+						360.0,
+						76.700927734375
+					],
+					"text": "DIAMOND SHOP"
+				},
+				{
+					"canvas_touch_rect": [
+						48.8888893127441,
+						2506.88891601562,
+						381.333343505859,
+						180.888885498047
+					],
+					"disabled": true,
+					"id": "store-nav",
+					"rect": [
+						20.0,
+						949.45458984375,
+						156.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						469.333312988281,
+						2506.88891601562,
+						381.333343505859,
+						180.888885498047
+					],
+					"disabled": false,
+					"id": "holes-home",
+					"rect": [
+						192.0,
+						949.45458984375,
+						156.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						889.777770996094,
+						2506.88891601562,
+						381.333343505859,
+						180.888885498047
+					],
+					"disabled": false,
+					"id": "holes-nav",
+					"rect": [
+						364.0,
+						949.45458984375,
+						156.0,
+						74.0
+					],
+					"text": ""
+				}
+			],
+			"device_safe_area_emulation": true,
+			"diamonds": 10,
+			"label": "store",
+			"logical_viewport": [
+				1320.0,
+				2868.0
+			],
+			"map": "city",
+			"path": "res://artifacts/simple-ui-20261002/ui-gpu-06/store.png",
+			"phase": "title",
+			"remaining": 60.0,
+			"scope": "Actual fresh 50-coin/10-diamond wallet; absent rewarded SDK; locked unaffordable exchanges",
+			"sha256": "90e023f309c8f5d9a41091cdc3d570ea1046057494122040260f7b960142d685",
+			"ui_canvas": [
+				540.0,
+				1055.45458984375
+			],
+			"ui_origin": [
+				0.0,
+				186.0
+			],
+			"ui_scale": [
+				2.44444441795349,
+				2.44444441795349
+			]
+		},
+		{
+			"coins": 50,
+			"controls": [
+				{
+					"canvas_touch_rect": [
+						48.8888893127441,
+						234.888885498047,
+						298.222229003906,
+						156.444442749023
+					],
+					"disabled": false,
+					"id": "purchase-back",
+					"rect": [
+						20.0,
+						20.0,
+						122.0,
+						64.0
+					],
+					"text": "BACK"
+				},
+				{
+					"canvas_touch_rect": [
+						97.7777786254883,
+						805.426879882812,
+						1124.44445800781,
+						347.410247802734
+					],
+					"disabled": true,
+					"id": "purchase-0",
+					"rect": [
+						40.0,
+						253.401916503906,
+						460.0,
+						142.122375488281
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						97.7777786254883,
+						1235.55383300781,
+						1124.44445800781,
+						347.410247802734
+					],
+					"disabled": true,
+					"id": "purchase-1",
+					"rect": [
+						40.0,
+						429.362915039062,
+						460.0,
+						142.122375488281
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						97.7777786254883,
+						1665.6806640625,
+						1124.44445800781,
+						347.410247802734
+					],
+					"disabled": true,
+					"id": "purchase-2",
+					"rect": [
+						40.0,
+						605.323913574219,
+						460.0,
+						142.122375488281
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						48.8888893127441,
+						2506.88891601562,
+						381.333343505859,
+						180.888885498047
+					],
+					"disabled": true,
+					"id": "store-nav",
+					"rect": [
+						20.0,
+						949.45458984375,
+						156.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						469.333312988281,
+						2506.88891601562,
+						381.333343505859,
+						180.888885498047
+					],
+					"disabled": false,
+					"id": "holes-home",
+					"rect": [
+						192.0,
+						949.45458984375,
+						156.0,
+						74.0
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						889.777770996094,
+						2506.88891601562,
+						381.333343505859,
+						180.888885498047
+					],
+					"disabled": false,
+					"id": "holes-nav",
+					"rect": [
+						364.0,
+						949.45458984375,
+						156.0,
+						74.0
+					],
+					"text": ""
+				}
+			],
+			"device_safe_area_emulation": true,
+			"diamonds": 10,
+			"label": "diamond-shop-unavailable",
+			"logical_viewport": [
+				1320.0,
+				2868.0
+			],
+			"map": "city",
+			"path": "res://artifacts/simple-ui-20261002/ui-gpu-06/diamond-shop-unavailable.png",
+			"phase": "title",
+			"remaining": 60.0,
+			"scope": "Actual diamond packs with UNAVAILABLE prices; no provider, purchase or native review receipt",
+			"sha256": "57479ba881cef220c0ba7160ce25643e6350c583d808299a3076384313f073bf",
+			"ui_canvas": [
+				540.0,
+				1055.45458984375
+			],
+			"ui_origin": [
+				0.0,
+				186.0
+			],
+			"ui_scale": [
+				2.44444441795349,
+				2.44444441795349
+			]
+		},
+		{
+			"coins": 50,
+			"controls": [],
+			"device_safe_area_emulation": true,
+			"diamonds": 10,
+			"label": "sunny-city-intro",
+			"logical_viewport": [
+				1320.0,
+				2868.0
+			],
+			"map": "city",
+			"path": "res://artifacts/simple-ui-20261002/ui-gpu-06/sunny-city-intro.png",
+			"phase": "intro",
+			"remaining": 90.0,
+			"scope": "Actual authored 90-second tutorial; frozen isolated physics for a readable GPU frame",
+			"sha256": "30bcf4a06b75fe9b2b7ad207f617b6843a7a31c4ff7eb7236d263fbd44ff03b1",
+			"ui_canvas": [
+				540.0,
+				1055.45458984375
+			],
+			"ui_origin": [
+				0.0,
+				186.0
+			],
+			"ui_scale": [
+				2.44444441795349,
+				2.44444441795349
+			]
+		},
+		{
+			"coins": 50,
+			"controls": [
+				{
+					"canvas_touch_rect": [
+						1114.66662597656,
+						234.888885498047,
+						156.444442749023,
+						156.444442749023
+					],
+					"disabled": false,
+					"id": "pause-action",
+					"rect": [
+						456.0,
+						20.0,
+						64.0,
+						64.0
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						1012.0,
+						2352.2294921875,
+						254.222213745117,
+						289.103881835938
+					],
+					"disabled": false,
+					"id": "pulse-action",
+					"rect": [
+						414.0,
+						886.184814453125,
+						104.0,
+						118.269775390625
+					],
+					"text": ""
+				}
+			],
+			"device_safe_area_emulation": true,
+			"diamonds": 10,
+			"label": "sunny-city-playing",
+			"logical_viewport": [
+				1320.0,
+				2868.0
+			],
+			"map": "city",
+			"path": "res://artifacts/simple-ui-20261002/ui-gpu-06/sunny-city-playing.png",
+			"phase": "playing",
+			"remaining": 90.0,
+			"scope": "Actual playing UI and full-height Boost anchor; physics frozen solely for layout review",
+			"sha256": "573ece5b091b17742a32c6a1660106da6952a6cdc9acf77083bc3723044db499",
+			"ui_canvas": [
+				540.0,
+				1055.45458984375
+			],
+			"ui_origin": [
+				0.0,
+				186.0
+			],
+			"ui_scale": [
+				2.44444441795349,
+				2.44444441795349
+			]
+		},
+		{
+			"coins": 67,
+			"controls": [
+				{
+					"canvas_touch_rect": [
+						190.66667175293,
+						1243.82543945312,
+						425.333343505859,
+						176.462280273438
+					],
+					"disabled": true,
+					"id": "coin-boost-video",
+					"rect": [
+						78.0,
+						432.746795654297,
+						174.0,
+						72.1891174316406
+					],
+					"text": "NOT READY"
+				},
+				{
+					"canvas_touch_rect": [
+						704.0,
+						1243.82543945312,
+						425.333343505859,
+						176.462280273438
+					],
+					"disabled": false,
+					"id": "coin-boost-diamonds",
+					"rect": [
+						288.0,
+						432.746795654297,
+						174.0,
+						72.1891174316406
+					],
+					"text": "1 DIAMOND"
+				},
+				{
+					"canvas_touch_rect": [
+						190.66667175293,
+						1701.52465820312,
+						425.333343505859,
+						176.462356567383
+					],
+					"disabled": true,
+					"id": "extend-video",
+					"rect": [
+						78.0,
+						619.987365722656,
+						174.0,
+						72.1891479492188
+					],
+					"text": "NOT READY"
+				},
+				{
+					"canvas_touch_rect": [
+						704.0,
+						1701.52465820312,
+						425.333343505859,
+						176.462356567383
+					],
+					"disabled": false,
+					"id": "extend-diamonds",
+					"rect": [
+						288.0,
+						619.987365722656,
+						174.0,
+						72.1891479492188
+					],
+					"text": "5 DIAMONDS"
+				},
+				{
+					"canvas_touch_rect": [
+						220.0,
+						2181.28173828125,
+						880.0,
+						187.491149902344
+					],
+					"disabled": false,
+					"id": "result-play-again",
+					"rect": [
+						90.0,
+						816.251586914062,
+						360.0,
+						76.700927734375
+					],
+					"text": "PLAY AGAIN"
+				},
+				{
+					"canvas_touch_rect": [
+						347.111114501953,
+						2415.6455078125,
+						625.777770996094,
+						164.576721191406
+					],
+					"disabled": false,
+					"id": "result-home",
+					"rect": [
+						142.0,
+						912.127746582031,
+						256.0,
+						67.3268432617188
+					],
+					"text": "HOME"
+				}
+			],
+			"device_safe_area_emulation": true,
+			"diamonds": 10,
+			"label": "timeout-two-offers",
+			"logical_viewport": [
+				1320.0,
+				2868.0
+			],
+			"map": "city",
+			"path": "res://artifacts/simple-ui-20261002/ui-gpu-06/timeout-two-offers.png",
+			"phase": "complete",
+			"remaining": 0.0,
+			"scope": "Isolated UI QA score fixture 1234 at timer boundary: 17 earned coins, unavailable video, one-diamond 1.5x and five-diamond 30s offers. Not ordinary gameplay or store media.",
+			"sha256": "b8b9e67b2bf5c1ec85a5466f7a4680e3eb6b1c409eb1cc85fd11abcec80cbde6",
+			"ui_canvas": [
+				540.0,
+				1055.45458984375
+			],
+			"ui_origin": [
+				0.0,
+				186.0
+			],
+			"ui_scale": [
+				2.44444441795349,
+				2.44444441795349
+			]
+		},
+		{
+			"coins": 75,
+			"controls": [
+				{
+					"canvas_touch_rect": [
+						190.66667175293,
+						1243.82543945312,
+						425.333343505859,
+						176.462280273438
+					],
+					"disabled": true,
+					"id": "extend-video",
+					"rect": [
+						78.0,
+						432.746795654297,
+						174.0,
+						72.1891174316406
+					],
+					"text": "NOT READY"
+				},
+				{
+					"canvas_touch_rect": [
+						704.0,
+						1243.82543945312,
+						425.333343505859,
+						176.462280273438
+					],
+					"disabled": false,
+					"id": "extend-diamonds",
+					"rect": [
+						288.0,
+						432.746795654297,
+						174.0,
+						72.1891174316406
+					],
+					"text": "5 DIAMONDS"
+				},
+				{
+					"canvas_touch_rect": [
+						220.0,
+						2181.28173828125,
+						880.0,
+						187.491149902344
+					],
+					"disabled": false,
+					"id": "result-play-again",
+					"rect": [
+						90.0,
+						816.251586914062,
+						360.0,
+						76.700927734375
+					],
+					"text": "PLAY AGAIN"
+				},
+				{
+					"canvas_touch_rect": [
+						347.111114501953,
+						2415.6455078125,
+						625.777770996094,
+						164.576721191406
+					],
+					"disabled": false,
+					"id": "result-home",
+					"rect": [
+						142.0,
+						912.127746582031,
+						256.0,
+						67.3268432617188
+					],
+					"text": "HOME"
+				}
+			],
+			"device_safe_area_emulation": true,
+			"diamonds": 9,
+			"label": "timeout-boost-used",
+			"logical_viewport": [
+				1320.0,
+				2868.0
+			],
+			"map": "city",
+			"path": "res://artifacts/simple-ui-20261002/ui-gpu-06/timeout-boost-used.png",
+			"phase": "complete",
+			"remaining": 0.0,
+			"scope": "Isolated UI QA: actual one-diamond transaction boosts 17 to 25 coins; only independent continuation remains",
+			"sha256": "f8c1bf2a5c27a111a86c26457b6ff28d3e641d258c05969420f8d3a7aeededbb",
+			"ui_canvas": [
+				540.0,
+				1055.45458984375
+			],
+			"ui_origin": [
+				0.0,
+				186.0
+			],
+			"ui_scale": [
+				2.44444441795349,
+				2.44444441795349
+			]
+		},
+		{
+			"coins": 75,
+			"controls": [
+				{
+					"canvas_touch_rect": [
+						1114.66662597656,
+						234.888885498047,
+						156.444442749023,
+						156.444442749023
+					],
+					"disabled": false,
+					"id": "pause-action",
+					"rect": [
+						456.0,
+						20.0,
+						64.0,
+						64.0
+					],
+					"text": ""
+				},
+				{
+					"canvas_touch_rect": [
+						1012.0,
+						2352.2294921875,
+						254.222213745117,
+						289.103881835938
+					],
+					"disabled": false,
+					"id": "pulse-action",
+					"rect": [
+						414.0,
+						886.184814453125,
+						104.0,
+						118.269775390625
+					],
+					"text": ""
+				}
+			],
+			"device_safe_area_emulation": true,
+			"diamonds": 4,
+			"label": "continued-playing",
+			"logical_viewport": [
+				1320.0,
+				2868.0
+			],
+			"map": "city",
+			"path": "res://artifacts/simple-ui-20261002/ui-gpu-06/continued-playing.png",
+			"phase": "playing",
+			"remaining": 30.0,
+			"scope": "Isolated UI QA: actual five-diamond continuation of same world; 30-second timer and bottom Boost anchor",
+			"sha256": "6a9c1d4f8d4b4f8ca4b0a930df1b30933b30a5ca17adb57ff4db09857a230c35",
+			"ui_canvas": [
+				540.0,
+				1055.45458984375
+			],
+			"ui_origin": [
+				0.0,
+				186.0
+			],
+			"ui_scale": [
+				2.44444441795349,
+				2.44444441795349
+			]
+		},
+		{
+			"coins": 75,
+			"controls": [],
+			"device_safe_area_emulation": true,
+			"diamonds": 4,
+			"label": "snack-garden-intro",
+			"logical_viewport": [
+				1320.0,
+				2868.0
+			],
+			"map": "food",
+			"path": "res://artifacts/simple-ui-20261002/ui-gpu-06/snack-garden-intro.png",
+			"phase": "intro",
+			"remaining": 60.0,
+			"scope": "Actual authored 60-second food-map tutorial; frozen isolated physics",
+			"sha256": "540e45c2a0843744497bee14650306aed962b83422c00b9e5d92bba23ddb8d61",
+			"ui_canvas": [
+				540.0,
+				1055.45458984375
+			],
+			"ui_origin": [
+				0.0,
+				186.0
+			],
+			"ui_scale": [
+				2.44444441795349,
+				2.44444441795349
+			]
+		}
+	],
+	"device_safe_area_emulation": true,
+	"emulated_bottom_inset_pixels": 102,
+	"emulated_device_pixels": [
+		1320,
+		2868
+	],
+	"emulated_safe_pixels": [
+		0,
+		186,
+		1320,
+		2580
+	],
+	"inputs": {
+		"game": "504a27f40c60a405045d29fe7472ed8e5c543a77e648acbf4a2281d22ea5ade7",
+		"helper": "c4f05354e4455cc38a837c4afc1a32dc4b17ac43d396c7a7ba961bbb0f617bad",
+		"ui": "8aa0b2b2f138112e3a0ae586d7ecd7c93ee1966b8d8973963a76c92a0e16efa0",
+		"viewport": "c25520f680439dad03aa8b3c88eb86a60648e9e93b757e34c99388321a7923e1"
+	},
+	"physical_phone_proof": false,
+	"recorded_native_logical_viewport_reference": [
+		540,
+		1173
+	],
+	"schema": 2,
+	"scope": "Actual Mac GPU scene frames in --test mode, initial unmodified starter wallet, no SDK and no real-money transactions. Optional device insets are explicitly emulated via one pure physical-to-logical conversion and one fit result; inherited drawing and touch geometry share the same UI transform. Result frames use an explicit score 1234 fixture and timer-boundary advance; diamond debit paths are actual runtime methods. Not ordinary gameplay, commercial screenshot evidence, native StoreKit review screenshots, actual phone safe-area proof, physical haptic evidence or a full-duration soak.",
+	"version": "0.12.5",
+	"window": [
+		1320,
+		2868
+	]
+}

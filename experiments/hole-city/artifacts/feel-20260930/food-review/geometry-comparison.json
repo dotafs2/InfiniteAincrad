@@ -1,0 +1,469 @@
+{
+  "result": "pass",
+  "old_package_sha256": "f62eecd2a3f5deb45afca81b948086a5c853048fd40b08e057e35df9b45f364f",
+  "old_version": "0.10.0",
+  "shared_mesh_count": 34,
+  "all_mesh_arrays_identical": true,
+  "body_count_before_after": [
+    2930,
+    2930
+  ],
+  "total_triangles_before_after": [
+    4961996,
+    4961612
+  ],
+  "batch_cell_before_after": [
+    24.0,
+    24.0
+  ],
+  "opening": [
+    {
+      "radius": 0.85,
+      "before": {
+        "cells": 67,
+        "individually_visible_bodies": 123,
+        "individually_visible_triangles": 211252,
+        "radius": 0.85,
+        "triangles": 721252
+      },
+      "after": {
+        "cells": 69,
+        "individually_visible_bodies": 129,
+        "individually_visible_triangles": 215064,
+        "radius": 0.85,
+        "triangles": 744252
+      },
+      "deltas": [
+        {
+          "batch": "bacon@-1,0",
+          "submitted_delta": -2916,
+          "individually_visible_delta": -2916
+        },
+        {
+          "batch": "bacon@-1,1",
+          "submitted_delta": 11664,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "bacon@0,0",
+          "submitted_delta": -2916,
+          "individually_visible_delta": -2916
+        },
+        {
+          "batch": "bacon@0,1",
+          "submitted_delta": 0,
+          "individually_visible_delta": -2916
+        },
+        {
+          "batch": "berry@-1,-1",
+          "submitted_delta": 1720,
+          "individually_visible_delta": 1720
+        },
+        {
+          "batch": "berry@-1,1",
+          "submitted_delta": 1720,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "berry@0,1",
+          "submitted_delta": -1720,
+          "individually_visible_delta": -1720
+        },
+        {
+          "batch": "burger@-1,-1",
+          "submitted_delta": 3164,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "burger@-1,1",
+          "submitted_delta": 15820,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "burger@-2,-1",
+          "submitted_delta": -9492,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "burger@0,1",
+          "submitted_delta": -3164,
+          "individually_visible_delta": -3164
+        },
+        {
+          "batch": "cookie_0@0,0",
+          "submitted_delta": 1632,
+          "individually_visible_delta": 816
+        },
+        {
+          "batch": "cookie_0@0,1",
+          "submitted_delta": -816,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "cookie_2@0,0",
+          "submitted_delta": 1056,
+          "individually_visible_delta": 1056
+        },
+        {
+          "batch": "cookie_3@-2,-1",
+          "submitted_delta": -3168,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "cookie_3@-2,0",
+          "submitted_delta": -2112,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "cookie_3@0,0",
+          "submitted_delta": -16896,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "donut_0@-1,0",
+          "submitted_delta": 1104,
+          "individually_visible_delta": 1104
+        },
+        {
+          "batch": "donut_0@-1,1",
+          "submitted_delta": -4416,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "donut_2@-1,1",
+          "submitted_delta": -1104,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "donut_2@0,0",
+          "submitted_delta": -1104,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "donut_3@-2,-1",
+          "submitted_delta": -1104,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "donut_3@-2,0",
+          "submitted_delta": 6624,
+          "individually_visible_delta": 1104
+        },
+        {
+          "batch": "egg@-1,1",
+          "submitted_delta": 7520,
+          "individually_visible_delta": 1504
+        },
+        {
+          "batch": "egg@0,0",
+          "submitted_delta": 7520,
+          "individually_visible_delta": 1504
+        },
+        {
+          "batch": "pancake@-2,-1",
+          "submitted_delta": 1812,
+          "individually_visible_delta": 1812
+        },
+        {
+          "batch": "pancake@-2,0",
+          "submitted_delta": 1812,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "pizza@-2,-1",
+          "submitted_delta": 0,
+          "individually_visible_delta": 2512
+        },
+        {
+          "batch": "pizza@0,0",
+          "submitted_delta": 12560,
+          "individually_visible_delta": 2512
+        },
+        {
+          "batch": "sushi@-1,0",
+          "submitted_delta": 5400,
+          "individually_visible_delta": 5400
+        },
+        {
+          "batch": "sushi@-2,-1",
+          "submitted_delta": -1800,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "sushi@0,0",
+          "submitted_delta": -1800,
+          "individually_visible_delta": -1800
+        },
+        {
+          "batch": "sushi@0,1",
+          "submitted_delta": -3600,
+          "individually_visible_delta": -1800
+        }
+      ]
+    },
+    {
+      "radius": 7.2,
+      "before": {
+        "cells": 119,
+        "individually_visible_bodies": 369,
+        "individually_visible_triangles": 656936,
+        "radius": 7.2,
+        "triangles": 1144048
+      },
+      "after": {
+        "cells": 124,
+        "individually_visible_bodies": 369,
+        "individually_visible_triangles": 660260,
+        "radius": 7.2,
+        "triangles": 1149552
+      },
+      "deltas": [
+        {
+          "batch": "bacon@-1,-1",
+          "submitted_delta": 2916,
+          "individually_visible_delta": 2916
+        },
+        {
+          "batch": "bacon@-1,0",
+          "submitted_delta": -2916,
+          "individually_visible_delta": -2916
+        },
+        {
+          "batch": "bacon@-1,1",
+          "submitted_delta": 11664,
+          "individually_visible_delta": 5832
+        },
+        {
+          "batch": "bacon@-2,-2",
+          "submitted_delta": -2916,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "bacon@0,0",
+          "submitted_delta": -2916,
+          "individually_visible_delta": -2916
+        },
+        {
+          "batch": "berry@-1,-1",
+          "submitted_delta": 1720,
+          "individually_visible_delta": 1720
+        },
+        {
+          "batch": "berry@-1,-2",
+          "submitted_delta": -5160,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "berry@-1,1",
+          "submitted_delta": 1720,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "berry@0,1",
+          "submitted_delta": -1720,
+          "individually_visible_delta": -1720
+        },
+        {
+          "batch": "berry@1,1",
+          "submitted_delta": 5160,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "burger@-1,-1",
+          "submitted_delta": 3164,
+          "individually_visible_delta": 3164
+        },
+        {
+          "batch": "burger@-1,-2",
+          "submitted_delta": -12656,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "burger@-1,1",
+          "submitted_delta": 15820,
+          "individually_visible_delta": 3164
+        },
+        {
+          "batch": "burger@-2,-1",
+          "submitted_delta": -3164,
+          "individually_visible_delta": -3164
+        },
+        {
+          "batch": "burger@-3,-2",
+          "submitted_delta": -6328,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "burger@0,1",
+          "submitted_delta": -3164,
+          "individually_visible_delta": -3164
+        },
+        {
+          "batch": "cake_0@-2,-2",
+          "submitted_delta": -2640,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "cake_0@0,0",
+          "submitted_delta": 7920,
+          "individually_visible_delta": 2640
+        },
+        {
+          "batch": "cake_3@-2,0",
+          "submitted_delta": -5280,
+          "individually_visible_delta": -2640
+        },
+        {
+          "batch": "cookie_0@-3,-2",
+          "submitted_delta": 4080,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "cookie_0@0,0",
+          "submitted_delta": 1632,
+          "individually_visible_delta": 816
+        },
+        {
+          "batch": "cookie_0@0,1",
+          "submitted_delta": -816,
+          "individually_visible_delta": -816
+        },
+        {
+          "batch": "cookie_2@-1,1",
+          "submitted_delta": 3168,
+          "individually_visible_delta": 1056
+        },
+        {
+          "batch": "cookie_2@0,0",
+          "submitted_delta": 1056,
+          "individually_visible_delta": 1056
+        },
+        {
+          "batch": "cookie_3@-2,0",
+          "submitted_delta": -2112,
+          "individually_visible_delta": -1056
+        },
+        {
+          "batch": "cookie_3@0,0",
+          "submitted_delta": 0,
+          "individually_visible_delta": -1056
+        },
+        {
+          "batch": "donut_0@-1,0",
+          "submitted_delta": 1104,
+          "individually_visible_delta": 1104
+        },
+        {
+          "batch": "donut_0@-1,1",
+          "submitted_delta": -1104,
+          "individually_visible_delta": -1104
+        },
+        {
+          "batch": "donut_0@-3,-2",
+          "submitted_delta": -36432,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "donut_1@-1,-2",
+          "submitted_delta": 4416,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "donut_1@0,-1",
+          "submitted_delta": 34224,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "donut_2@-1,1",
+          "submitted_delta": -1104,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "donut_2@0,0",
+          "submitted_delta": -1104,
+          "individually_visible_delta": -3312
+        },
+        {
+          "batch": "donut_3@-2,-1",
+          "submitted_delta": -1104,
+          "individually_visible_delta": -1104
+        },
+        {
+          "batch": "donut_3@-2,0",
+          "submitted_delta": -1104,
+          "individually_visible_delta": 1104
+        },
+        {
+          "batch": "egg@-1,1",
+          "submitted_delta": 3008,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "egg@-2,-1",
+          "submitted_delta": 1504,
+          "individually_visible_delta": 1504
+        },
+        {
+          "batch": "egg@0,0",
+          "submitted_delta": 1504,
+          "individually_visible_delta": 1504
+        },
+        {
+          "batch": "pancake@-1,-2",
+          "submitted_delta": -10872,
+          "individually_visible_delta": -1812
+        },
+        {
+          "batch": "pancake@-2,-1",
+          "submitted_delta": 1812,
+          "individually_visible_delta": 1812
+        },
+        {
+          "batch": "pancake@-2,0",
+          "submitted_delta": 1812,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "pizza@-1,-2",
+          "submitted_delta": 7536,
+          "individually_visible_delta": 2512
+        },
+        {
+          "batch": "pizza@-1,1",
+          "submitted_delta": -5024,
+          "individually_visible_delta": -2512
+        },
+        {
+          "batch": "pizza@-2,-2",
+          "submitted_delta": -2512,
+          "individually_visible_delta": 0
+        },
+        {
+          "batch": "pizza@0,0",
+          "submitted_delta": 2512,
+          "individually_visible_delta": 2512
+        },
+        {
+          "batch": "sushi@-1,0",
+          "submitted_delta": 5400,
+          "individually_visible_delta": 5400
+        },
+        {
+          "batch": "sushi@-2,-1",
+          "submitted_delta": -1800,
+          "individually_visible_delta": -1800
+        },
+        {
+          "batch": "sushi@0,0",
+          "submitted_delta": -1800,
+          "individually_visible_delta": -1800
+        },
+        {
+          "batch": "sushi@0,1",
+          "submitted_delta": -3600,
+          "individually_visible_delta": -3600
+        }
+      ]
+    }
+  ]
+}

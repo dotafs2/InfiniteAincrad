@@ -1,0 +1,22 @@
+{
+  "ok": false,
+  "failed_suite": "ui_collection_review",
+  "error": "Missing scene QA completion marker: /Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/simple-ui-20261002-focused-05/logs/ui_collection_review.log",
+  "results": [
+    {
+      "suite": "mobile_thumbnail",
+      "checks": 3847,
+      "minimum": 695,
+      "report_sha256": "efd6c88e93391ea33a253f30538cc90499070e917a67ead9cd92acafe2e2898a"
+    },
+    {
+      "suite": "coin_skins",
+      "checks": 412,
+      "minimum": 80,
+      "report_sha256": "14d37288dd194486c458fcbbe275623d4c93bfc031413a0f94e424aef33e1766"
+    }
+  ],
+  "unchanged_inputs": true,
+  "elapsed_seconds": 18.381,
+  "scope": "Serial source-only focused headless acceptance; no full gate, GPU, native build or phone action"
+}

@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "scope": "Actual shipped scalar shader helpers compiled as C++ float arithmetic; independent interval-intersection oracle. Not browser/device pixels.",
+  "results": {
+    "asphalt": {
+      "periodic_cases": 616,
+      "max_coverage_error": 0.0005493760012221793,
+      "single_interval_cases": 616,
+      "max_interval_error": 2.3364999999553326e-05,
+      "integer_period_phase_cases": 308,
+      "max_duty_cycle_error": 7.630000000702353e-07
+    },
+    "facade": {
+      "periodic_cases": 616,
+      "max_coverage_error": 0.0005493760012221793,
+      "single_interval_cases": 0,
+      "max_interval_error": 0,
+      "integer_period_phase_cases": 308,
+      "max_duty_cycle_error": 7.630000000702353e-07
+    }
+  },
+  "source_sha256": {
+    "fidelity/asphalt.gdshader": "d889999e0ed468fcab4bc2f2678b2ced8a79ef99a4e89d29fa08dd029e70beff",
+    "fidelity/facade.gdshader": "8690435464f5b43d8bf55c611f2973a12a8991d7d17a7b3e5266c22df07f6084",
+    "tests/procedural_filtering_math.py": "c928364a40424d4fea1138b8980e21b74a8c2b7f8e2cfdc50fb1578252826d38"
+  }
+}

@@ -1,0 +1,346 @@
+{
+  "checks": 2487,
+  "failures": [],
+  "metrics": {
+    "imported": {
+      "batched_candidates": {
+        "glacier_iceberg": 32,
+        "ice_chip": 282,
+        "ice_rock": 12
+      },
+      "floating_caps": 0,
+      "instances": 609,
+      "unique_meshes": [
+        {
+          "boundary_edges": 0,
+          "degenerate_triangles": 0,
+          "node": "glacier_serac",
+          "overused_edges": 0,
+          "triangles": 1722
+        },
+        {
+          "boundary_edges": 0,
+          "degenerate_triangles": 0,
+          "node": "glacier_shelf",
+          "overused_edges": 0,
+          "triangles": 2384
+        },
+        {
+          "boundary_edges": 0,
+          "degenerate_triangles": 0,
+          "node": "glacier",
+          "overused_edges": 0,
+          "triangles": 2790
+        },
+        {
+          "boundary_edges": 0,
+          "degenerate_triangles": 0,
+          "node": "glacier_ridge",
+          "overused_edges": 0,
+          "triangles": 2696
+        },
+        {
+          "boundary_edges": 0,
+          "degenerate_triangles": 0,
+          "node": "ice_rock",
+          "overused_edges": 0,
+          "triangles": 1064
+        },
+        {
+          "boundary_edges": 0,
+          "degenerate_triangles": 0,
+          "node": "ice_floe",
+          "overused_edges": 0,
+          "triangles": 1098
+        }
+      ],
+      "variants": [
+        "split_serac",
+        "terraced_shelf",
+        "calving_cliff",
+        "windcut_ridge",
+        "ice_boulder",
+        "pancake_floe"
+      ],
+      "worst_floor_error": 2.38418579101562e-07,
+      "worst_visible_width_ratio": 0.950000149011606
+    },
+    "initial_render": {
+      "draw_calls": 0.0,
+      "gpu_available": false,
+      "node_count": 4701.0,
+      "objects": 0.0,
+      "primitives": 0.0
+    },
+    "lifecycle": [
+      {
+        "admitted": true,
+        "body": "Frost_001_ice_rock",
+        "consumed": true,
+        "eaten_delta": 1,
+        "owned_visuals": 1,
+        "points": 6,
+        "remaining_owned_visuals": 0,
+        "retired_batch_handles": 1,
+        "score_delta": 6
+      },
+      {
+        "admitted": true,
+        "body": "Toy_007_grand_castle",
+        "consumed": true,
+        "eaten_delta": 1,
+        "owned_visuals": 1,
+        "points": 96,
+        "remaining_owned_visuals": 0,
+        "retired_batch_handles": 1,
+        "score_delta": 96
+      },
+      {
+        "admitted": true,
+        "body": "Toy_102_toy_ball",
+        "consumed": true,
+        "eaten_delta": 1,
+        "owned_visuals": 1,
+        "points": 1,
+        "remaining_owned_visuals": 0,
+        "retired_batch_handles": 1,
+        "score_delta": 1
+      }
+    ],
+    "population": {
+      "actor_mesh_cache_entries": 17,
+      "arctic_dominant": true,
+      "arctic_ice_structures": 180,
+      "blender_assets": {
+        "glacier_iceberg": 180,
+        "ice_chip": 401,
+        "ice_rock": 28
+      },
+      "bodies": 872,
+      "castle_visuals_removed": 180,
+      "collision_parts": 1110,
+      "court": {
+        "active_assemblies": 244,
+        "activity_receipts": 255,
+        "ambient": 48,
+        "assemblies": 244,
+        "beacons": 8,
+        "distinct_recipes": 10,
+        "gate_beacons": [
+          {
+            "at": "(-13.0, 51.43)",
+            "beacon": "Toy_588_bubble_turret",
+            "beacon_radius": 0.310000002384186,
+            "district": "rose_courtyard",
+            "facade_half_depth": 2.0,
+            "front_clearance": 0.12,
+            "front_offset": 2.43000000238419,
+            "nearest_actor_route_distance": 8.56999958479,
+            "nearest_other_toy_clearance": 2.03311571478844,
+            "palace": "Toy_021_toy_castle",
+            "palace_at": "(-13.0, 49.0)",
+            "palace_minimum_level": 5,
+            "palace_required_radius": 3.09304953575134
+          },
+          {
+            "at": "(33.0, 51.43)",
+            "beacon": "Toy_589_bubble_turret",
+            "beacon_radius": 0.310000002384186,
+            "district": "mint_playground",
+            "facade_half_depth": 2.0,
+            "front_clearance": 0.12,
+            "front_offset": 2.43000000238419,
+            "nearest_actor_route_distance": 8.56999958479,
+            "nearest_other_toy_clearance": 1.59299969673157,
+            "palace": "Toy_030_toy_castle",
+            "palace_at": "(33.0, 49.0)",
+            "palace_minimum_level": 5,
+            "palace_required_radius": 3.09304953575134
+          },
+          {
+            "at": "(-13.0, 0.43)",
+            "beacon": "Toy_590_bubble_turret",
+            "beacon_radius": 0.310000002384186,
+            "district": "sky_block_quarter",
+            "facade_half_depth": 2.0,
+            "front_clearance": 0.12,
+            "front_offset": 2.43000000238419,
+            "nearest_actor_route_distance": 13.0,
+            "nearest_other_toy_clearance": 0.989277780056,
+            "palace": "Toy_039_toy_castle",
+            "palace_at": "(-13.0, -2.0)",
+            "palace_minimum_level": 5,
+            "palace_required_radius": 3.09304953575134
+          },
+          {
+            "at": "(33.0, 0.43)",
+            "beacon": "Toy_591_bubble_turret",
+            "beacon_radius": 0.310000002384186,
+            "district": "apricot_garden",
+            "facade_half_depth": 2.0,
+            "front_clearance": 0.12,
+            "front_offset": 2.43000000238419,
+            "nearest_actor_route_distance": 11.0,
+            "nearest_other_toy_clearance": 0.989278733730316,
+            "palace": "Toy_048_toy_castle",
+            "palace_at": "(33.0, -2.0)",
+            "palace_minimum_level": 5,
+            "palace_required_radius": 3.09304953575134
+          }
+        ],
+        "installations": 100,
+        "living": 80,
+        "living_roles": {
+          "balloon_vendor": 4,
+          "captain": 4,
+          "courier": 4,
+          "courtier": 8,
+          "drummer": 4,
+          "guard": 16,
+          "herald": 4,
+          "jester": 4,
+          "king": 4,
+          "knight": 4,
+          "page": 4,
+          "princess": 4,
+          "queen": 4,
+          "sentry": 4,
+          "steward": 4,
+          "toymaker": 4
+        },
+        "parade": 8,
+        "released": 0,
+        "routes": {
+          "formation_columns": 2,
+          "formation_spacing": 1.05,
+          "guards_change_every": 18.0,
+          "half_width": 2.8,
+          "paths": [
+            [
+              "(-44.0, 18.0)",
+              "(0.0, 18.0)",
+              "(0.0, 60.0)",
+              "(-44.0, 60.0)"
+            ],
+            [
+              "(0.0, 18.0)",
+              "(44.0, 18.0)",
+              "(44.0, 60.0)",
+              "(0.0, 60.0)"
+            ],
+            [
+              "(-44.0, -36.0)",
+              "(0.0, -36.0)",
+              "(0.0, 18.0)",
+              "(-44.0, 18.0)"
+            ],
+            [
+              "(0.0, -36.0)",
+              "(44.0, -36.0)",
+              "(44.0, 18.0)",
+              "(0.0, 18.0)"
+            ],
+            [
+              "(-84.0, -84.0)",
+              "(84.0, -84.0)",
+              "(84.0, 84.0)",
+              "(-84.0, 84.0)"
+            ],
+            [
+              "(-44.0, -36.0)",
+              "(44.0, -36.0)",
+              "(44.0, 60.0)",
+              "(-44.0, 60.0)"
+            ]
+          ],
+          "world_limit": 94.0
+        },
+        "separation_passes": 4,
+        "source_city_benchmark": {
+          "ambient": 48,
+          "beacons": 5,
+          "installations": 100,
+          "living": 64,
+          "traffic": 8,
+          "world_actors": 217
+        },
+        "world_actors": 236
+      },
+      "frost_species": {
+        "aurora_drone": 3,
+        "cargo_sled": 4,
+        "glacier_crystal": 5,
+        "ice_rock": 12,
+        "icebreaker": 1,
+        "igloo_observatory": 2,
+        "penguin": 8,
+        "polar_bear": 2,
+        "research_station": 2,
+        "scientist": 4,
+        "seal": 5,
+        "snow_fox": 3,
+        "snowmobile": 4,
+        "walrus": 2
+      },
+      "frost_system_count": 14,
+      "frozen_ponds": 3,
+      "ice_family_count": 6,
+      "ice_material_roughness": 0.0700000002980232,
+      "ice_spires": 9,
+      "kind_counts": {
+        "block_tower": 48,
+        "bubble_turret": 14,
+        "grand_castle": 10,
+        "toy_arch": 6,
+        "toy_ball": 82,
+        "toy_block": 182,
+        "toy_car": 59,
+        "toy_castle": 24,
+        "toy_duck": 100,
+        "toy_train": 3
+      },
+      "largest_height": 38.0400009155273,
+      "largest_required_radius": 12.2559301757813,
+      "legacy_models_loaded": 0,
+      "map_id": "frost",
+      "mesh_cache_entries": 10,
+      "name": "Frostlight Village",
+      "neighborhood_counts": {
+        "apricot_garden": 86,
+        "calving_basin": 16,
+        "crown_heights": 10,
+        "east_bubble_walk": 23,
+        "frost_ecology": 57,
+        "mint_playground": 117,
+        "rose_courtyard": 110,
+        "sky_block_quarter": 78,
+        "sunset_castles": 8,
+        "west_bubble_walk": 23
+      },
+      "physical_towers": 5,
+      "polar_visuals_converted": 619,
+      "shape_cache_entries": 102,
+      "snow_decorations": 40,
+      "snow_material_roughness": 0.239999994635582,
+      "static_batches": {
+        "batches": 79,
+        "meshes": 414
+      },
+      "static_bodies": 455,
+      "tier_counts": {
+        "1": 221,
+        "2": 111,
+        "3": 50,
+        "4": 19,
+        "5": 53,
+        "6": 47,
+        "7": 8,
+        "8": 11,
+        "9": 8
+      },
+      "total_points": 5071,
+      "whole_castles": 0
+    }
+  },
+  "scope": "Dynamic source-mesh bounds/topology and explicitly isolated real physics lifecycle. Probe growth/position are staged. Ordinary 90-second progression is separate. No phone, production save or SDK claim."
+}

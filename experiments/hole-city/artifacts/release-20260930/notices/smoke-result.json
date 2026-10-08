@@ -1,0 +1,136 @@
+{
+  "checks": 17,
+  "failures": [],
+  "assertions": [
+    {
+      "check": "Actual engine install repeated byte-identically",
+      "passed": true
+    },
+    {
+      "check": "Nine installed artifacts match returned SHA-256",
+      "passed": true
+    },
+    {
+      "check": "Exact source bytes: LICENSE",
+      "passed": true
+    },
+    {
+      "check": "Exact source bytes: THIRD_PARTY.md",
+      "passed": true
+    },
+    {
+      "check": "Exact source bytes: assets/fonts/OFL.txt",
+      "passed": true
+    },
+    {
+      "check": "Exact source bytes: third_party/mbmayer/LICENSE",
+      "passed": true
+    },
+    {
+      "check": "Exact source bytes: assets/audio/MUSIC_CREDITS.txt",
+      "passed": true
+    },
+    {
+      "check": "Existing engine removes status overlay including credits entry",
+      "passed": true
+    },
+    {
+      "check": "Exactly one entry of each type",
+      "passed": true
+    },
+    {
+      "check": "Existing engine bootstrap script unchanged",
+      "passed": true
+    },
+    {
+      "check": "Served Web build untouched",
+      "passed": true
+    },
+    {
+      "check": "All release inputs untouched",
+      "passed": true
+    },
+    {
+      "check": "Recursive publisher carries and checks nested license artifacts",
+      "passed": true
+    },
+    {
+      "check": "Nested notice hash failure preserves old preview",
+      "passed": true
+    },
+    {
+      "check": "Failed final swap restores prior nested preview",
+      "passed": true
+    },
+    {
+      "check": "All source notices/helper/tests/generator participate in gate input hashes",
+      "passed": true
+    },
+    {
+      "check": "Release integration imports via verifier importlib entry point",
+      "passed": true
+    }
+  ],
+  "engine_runs": [
+    {
+      "command": [
+        "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/.build/godot-standard/Godot.app/Contents/MacOS/Godot",
+        "--headless",
+        "--path",
+        "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city",
+        "--script",
+        "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/tools/runtime_licenses.gd",
+        "--log-file",
+        "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/release-20260930/notices/web-notices-hvpzye7z/engine.log",
+        "--",
+        "--test",
+        "--license-out=/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/release-20260930/notices/web-notices-hvpzye7z/payload/notices/GODOT_LICENSES.txt"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/.build/godot-standard/Godot.app/Contents/MacOS/Godot",
+        "--headless",
+        "--path",
+        "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city",
+        "--script",
+        "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/tools/runtime_licenses.gd",
+        "--log-file",
+        "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/release-20260930/notices/web-notices-ib1sdwff/engine.log",
+        "--",
+        "--test",
+        "--license-out=/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/artifacts/release-20260930/notices/web-notices-ib1sdwff/payload/notices/GODOT_LICENSES.txt"
+      ],
+      "returncode": 0
+    }
+  ],
+  "artifacts": {
+    "credits.html": "c3f28e6842688410ffff8f96ce7214630152f3172ab737065c85088462fce3d0",
+    "index.html": "6401235acbc38904e73cc38235b00bff4558b27a65f52d377a8f31b9fc0a3b47",
+    "notices/FREDOKA_OFL.txt": "5c9e7eee5c6b25f4b05b8d53b2e470ea4962f9ced742d044a98f7d95d1375bab",
+    "notices/GODOT_LICENSES.txt": "24ac8071d1ce7dedd595c3195fb65553f2407cd1f402f55fead968a5edead014",
+    "notices/LICENSE.txt": "63fcfd62d5011aed4b992dba98fe3c2bfd79cafb63fd82780bd86b5a6f0c1f47",
+    "notices/MBMAYER_LICENSE.txt": "2fb5455ce9e79572a4e1828b180c6e579478e1f7b980e60371fbf56266016b11",
+    "notices/MUSIC_CREDITS.txt": "eabdbe1a5c7039c71617452183dd3ffe721ed472dc80d77aec7698ad7f39e012",
+    "notices/THIRD_PARTY.md": "06add3a507528c6d2789d4b85766d95bf7fd389e6d015b4333761c5a2df72211",
+    "notices/manifest.json": "bad68acc0eab31edf41f0e96e3d0c35cacd7144791bb9aa8ab658d0f48ba6378"
+  },
+  "input_sha256": {
+    "tools/package_web_notices.py": "1c61e47d4f3eaa3cc664a10f98733b1907df445fc03403662c8527b701f99361",
+    "tests/test_web_notices.py": "671723fe1a54828f829d788efcf3ed447eb37e2b56ad231168019f94b335bece",
+    "tools/runtime_licenses.gd": "ee1804c97577e91db8897bdbbea4f0ffa77ec1c24de119998b65768c059d0b3c",
+    "LICENSE": "63fcfd62d5011aed4b992dba98fe3c2bfd79cafb63fd82780bd86b5a6f0c1f47",
+    "THIRD_PARTY.md": "06add3a507528c6d2789d4b85766d95bf7fd389e6d015b4333761c5a2df72211",
+    "third_party/mbmayer/LICENSE": "2fb5455ce9e79572a4e1828b180c6e579478e1f7b980e60371fbf56266016b11",
+    "assets/fonts/OFL.txt": "5c9e7eee5c6b25f4b05b8d53b2e470ea4962f9ced742d044a98f7d95d1375bab",
+    "assets/audio/MUSIC_CREDITS.txt": "eabdbe1a5c7039c71617452183dd3ffe721ed472dc80d77aec7698ad7f39e012",
+    "tools/release_web.py": "8b51893a1b34defb2be47725d56dfbc868748612b28e329e36036ffaa77bb07e"
+  },
+  "engine_notice_bytes": 94795,
+  "limitations": [
+    "Copied export HTML and actual headless engine license generation; no browser/UI verification.",
+    "Credits entry exists only during the engine loading overlay; credits.html remains directly accessible.",
+    "No publication or served build mutation."
+  ]
+}

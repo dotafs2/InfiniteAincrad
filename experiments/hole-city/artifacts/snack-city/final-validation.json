@@ -1,0 +1,190 @@
+{
+  "date": "2026-09-28",
+  "suite_count": 8,
+  "assertions": 191,
+  "suites": [
+    {
+      "suite": "portrait",
+      "passed": true,
+      "report": {
+        "checks": 30,
+        "citizens": 64,
+        "edible_objects": 604,
+        "failures": [],
+        "unique_models": 208
+      }
+    },
+    {
+      "suite": "skin_skill",
+      "passed": true,
+      "report": {
+        "checks": 22,
+        "failures": [],
+        "progress": 420,
+        "skins": 10
+      }
+    },
+    {
+      "suite": "title_navigation",
+      "passed": true,
+      "report": {
+        "checks": 17,
+        "classic_slots": 5,
+        "failures": [],
+        "special_slots": 5
+      }
+    },
+    {
+      "suite": "mobile_maps",
+      "passed": true,
+      "report": {
+        "checks": 27,
+        "failures": []
+      }
+    },
+    {
+      "suite": "actor_fall",
+      "passed": true,
+      "report": {
+        "checks": 32,
+        "failures": []
+      }
+    },
+    {
+      "suite": "fidelity",
+      "passed": true,
+      "report": {
+        "checks": 24,
+        "city_reachability": {
+          "level": 8,
+          "phase": "complete",
+          "rivals_retired_for_fixture": true,
+          "score": 421,
+          "seconds": 120.433333333328,
+          "ticks": 7226
+        },
+        "failures": [],
+        "live_rival_run": {
+          "level": 8,
+          "phase": "complete",
+          "score": 422,
+          "seconds": 115.766666666661,
+          "ticks": 6946
+        },
+        "objects": 604
+      }
+    },
+    {
+      "suite": "food_round",
+      "passed": true,
+      "report": {
+        "passed": true,
+        "rounds": [
+          {
+            "contested": true,
+            "food": {
+              "bacon": 11,
+              "berry": 10,
+              "burger": 12,
+              "cake": 11,
+              "cookie": 18,
+              "donut": 9,
+              "egg": 13,
+              "pancake": 14,
+              "person": 9,
+              "pizza": 9,
+              "sushi": 14
+            },
+            "phase": "complete",
+            "score": 420,
+            "seconds": 105.483333333329
+          },
+          {
+            "contested": false,
+            "food": {
+              "bacon": 9,
+              "berry": 9,
+              "burger": 13,
+              "cake": 11,
+              "cookie": 22,
+              "donut": 31,
+              "egg": 11,
+              "pancake": 14,
+              "person": 11,
+              "pizza": 11,
+              "sushi": 10
+            },
+            "phase": "complete",
+            "score": 422,
+            "seconds": 87.666666666663
+          }
+        ]
+      },
+      "evidence": "export-rounds.json"
+    },
+    {
+      "suite": "snack_city",
+      "passed": true,
+      "report": {
+        "buildings": 38,
+        "checks": 39,
+        "failures": [],
+        "initial_edibles": 1096,
+        "npc_count": 48,
+        "types": 10
+      },
+      "evidence": "export-acceptance.json"
+    }
+  ],
+  "browser_visual_review": "Not completed; previously saved browser denial remains unresolved",
+  "iphone14_device_profile": "Not performed",
+  "file_sha256": {
+    "fidelity/ads_bridge.gd": "43cc95c71bd60b7eb1db196ea7794337de7e6683414adaf6dfd94d541ee1eef1",
+    "fidelity/art.gd": "3d20f4b3e320d8f701c807165570111fa2ff34eaa63954b3d8f0e1f361f61a16",
+    "fidelity/asphalt.gdshader": "24f76c2d72fccd799f579f7a8ea3ebf9bb4c3af97b299f48b72ff6b248d9199a",
+    "fidelity/catalog_city.gd": "cff45ca7db2c2f1510a9d5475381ddca499dced4fc6b07c1954a468379e96f03",
+    "fidelity/cinder_flame.gdshader": "692bc4ccf52721d42cb5aabecece9e00156db3dee62cb164cb5c25e16a408fb0",
+    "fidelity/cut_ground.gd": "da7850dd2e4acb4a737dd5017db19090606199a53fc66dbcc4b0bc9632a54a09",
+    "fidelity/facade.gdshader": "cb0124fa77535788e65ac35bc4e7b5ce0d36338fe83e1948da7bc11570588159",
+    "fidelity/food_body.gd": "914a9828fb9b47016829bbc74390fbebd0f0e0690487944839eced5049b8dae7",
+    "fidelity/food_city.gd": "e2e211ff9c25eb86bc831385e41fe64d56330e64616d96e8bf8fd56e2336813f",
+    "fidelity/food_shapes.gd": "51b24216c27486f9305fff0d579b3d3dbee13b45c06c99763be9847f4563e2f8",
+    "fidelity/fracture_cache.gd": "f7425ec6bf09b3434ddab7a3d34879109800038fda07802f7ff36de66ab79785",
+    "fidelity/game.gd": "8229adbaa92bc9eabe558ca7a20888a166211f68f451bc5e48a69095426100d4",
+    "fidelity/hole.gd": "b027e19247260e238d413db8c3b2f7e5e50db6927b370630a3d0c5ca68e42dc4",
+    "fidelity/mesh_batch.gd": "4978cb979977998fbe18ef83d7f1ceb73e6a966552c1673686250ca3ebb66237",
+    "fidelity/palette.gdshader": "fc44a1e85aeda3711220e8102150b49e5ad9a0e070172ffd011fd97f593ab4a8",
+    "fidelity/rim_body.gd": "7710c6de7770265a30437d522d24ed081a459895f443bb1a5a1747ee28276db0",
+    "fidelity/skin_visual.gd": "612a70c697febbf26b8de5567a7e577273ace39dda4ba6fc4ae4372638f27acf",
+    "fidelity/street_layout.gd": "469f29bb690f2d49c7f2517eddcf966443d7d69f7637d6817e547b1d0199904a",
+    "fidelity/swallowable.gd": "1438b7b2ef3bad532578e58023a6e631f778fc2adb52c79a5ea24f3c877c3b96",
+    "fidelity/ui.gd": "aff59c4ca9bea6277b4662c95da6220cd47c076e01676330a2ff8829e29f6c2d",
+    "tests/acceptance.gd": "42eec71d56c62d362ca190d71c51888830faef9ad6ce2ec078c5578c0f71a89c",
+    "tests/actor_fall_acceptance.gd": "674fc16f1b734a71c0e96f7c64ce44bf921377c2dd146eede2197beffedda1a9",
+    "tests/ads_bridge_acceptance.gd": "4a767fd8e228307905b4a0d8c188c3617551035bb35061e61301b9337f7f0578",
+    "tests/character_showcase.gd": "433affd3b10cf6ab75f98e23e8a0bb1d3b39d26b07e8b160760402a1b636483e",
+    "tests/destruction_traffic_acceptance.gd": "da27288c87cac123a0f2c31e0ccf3e2274d00cbe3de3526fce546d888ce9c592",
+    "tests/fidelity_acceptance.gd": "d984e553cfe6a849575b4f0baf9aee7c1bc05bc85c01ad75c74c074d785e2642",
+    "tests/food_round_acceptance.gd": "09f2fd2dfad72a0c7cdb8221fa7e61d0ae64995924fdd41d16c1326123c0ec56",
+    "tests/mobile_maps_acceptance.gd": "53c5690115a4c9ac1f0aebf6ddd91a7759cceb9a5ce188ddd70935ead8c7d5be",
+    "tests/mobile_profile.gd": "956970f2b6d347f9cb04aa8c3a47aad06d7358feb930a1cb27892b222abe39d5",
+    "tests/mobile_visual_capture.gd": "064271d1a92604b418a7a1bea07273fc50461236b8ee93d21f1775c05101d18a",
+    "tests/no_tether_acceptance.gd": "9e3a4e9580ad8075f4bc016bbd17402775a99bd0a8761a3bbd6cfbdb1b12c659",
+    "tests/portrait_acceptance.gd": "a0eaa780d9009530c8526688fcb10e55c043d526e4dc4d149f0d01a92088df0d",
+    "tests/resonance_action_acceptance.gd": "f8ebe70526b9ef07eb19be7db34f050704c9941b1c8fca20f601ab0c83344bb3",
+    "tests/rig_fracture_acceptance.gd": "32f8b46a0c7c8c0c867127baf42cbb42fe1be70ec6bb0b8819f888d1f32afdac",
+    "tests/rim_fall_acceptance.gd": "79562e154ca074547c12e3aa1359b7b7f0b1e5902b3c67c46e6c02e8617f8616",
+    "tests/skin_fx_acceptance.gd": "682c6bd89d3bc19bbf91dd8d5da274bc9ee4704eba2972838471612100058ec8",
+    "tests/skin_library_capture.gd": "1f372929a19d3d5c9059f45c81afef6cc7ed99a2f0e046b041b423928757a561",
+    "tests/skin_skill_acceptance.gd": "f00dd244b1ea6d27f9414ce06982b074ad6f00c9e2e60e75537e9662cccdce67",
+    "tests/snack_city_acceptance.gd": "ab3ac4e604957413259c558b3d99a00f7601dc39597ef9d96db16fbb2e8ed69a",
+    "tests/title_navigation_acceptance.gd": "1ae89a599f0b806377d4da8cf869c05404852b4e966230348675b3227dc50449",
+    "assets/fonts/Fredoka.ttf": "2ba02e68b152868aef9ba28e24b3648c7d457fe6f25c761f2c2c53fb61a73fc8",
+    "assets/fonts/OFL.txt": "5c9e7eee5c6b25f4b05b8d53b2e470ea4962f9ced742d044a98f7d95d1375bab",
+    "build/web/index.pck": "375819743460c640d157e52c341a373ed15c10e4ef1bcba7d7742f72ffea5358",
+    "build/web/index.html": "3b3db7a590ff5c15e009c30927510cc72301c73d96ad27eb53ce44903e14a275",
+    "build/web/index.js": "1e5437ee16d35bf6f8a3b28e6f70f310ee5da12acab3222a06e8c223cb61757c",
+    "build/web/index.wasm": "f6090f055e16765bcef5dc3a031f68ab40c151d9e7f0541d9d7eb61e92dc5051",
+    "export_presets.cfg": "181edfeeb927a129207861aef851345b16af17c1e8c6ab3628f5aafc932a9fed"
+  }
+}

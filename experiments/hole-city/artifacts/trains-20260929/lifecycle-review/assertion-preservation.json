@@ -1,0 +1,20 @@
+{
+  "before_sha256": "1ced8edf2774c5d25dc76dd161ee317ed687eddcb1ba2a81d80eb90649640470",
+  "after_sha256": "fb8e8b03e2824d9bba500f0d6e2b62114b1086503ab72f24bf13294c95180779",
+  "original_static_assertions": 52,
+  "retained_static_assertions": 52,
+  "removed": [],
+  "added": [
+    "check(controller.attached_count>0 and not controller.couplers.is_empty(),\"Lifecycle review begins with an actual surviving coupled train\")",
+    "check(controller.traveled>before,\"A separately freed coupler visual does not break movement of live car bodies\")",
+    "check(is_equal_approx(controller.traveled,prior) and controller.attached_count==attached and controller.detach_events.size()==events,\"A controller whose city was replaced performs no further movement or detachment\")",
+    "check(pose_changes==0,\"Replaced-owner no-op preserves all still-live old-city car poses\")",
+    "check(other.global_transform==other_pose and arena.foods.size()==1 and other.freeze,\"Stale train calls do not move or release replacement-city actors\")",
+    "check(game.elapsed>elapsed_before and other.global_transform==other_pose and game.player.score==player_score and game.coins==wallet,\"The actual game loop keeps running with the replacement arena without stale-train side effects\")",
+    "check(controller.attached_count==1,\"Legitimate detachment tolerates the independently freed coupler visual\")",
+    "check(is_equal_approx(controller.traveled,prior) and controller.attached_count==attached and controller.detach_events.size()==events,\"Freed-owner calls are safe no-ops even when the game still stores its freed city reference\")",
+    "check(game.elapsed>elapsed_before and other.global_transform==other_pose and game.player.score==player_score and game.coins==wallet,\"After owner destruction the real game loop preserves unrelated actor and reward state\")",
+    "check(controller.parked_cars().is_empty(),\"Destroyed owner leaves no valid parked car accessible through the old controller\")",
+    "check(controller.attached_count==0 and other.global_transform==other_pose and game.player.score==player_score and game.coins==wallet,\"Explicit stale detachment safely clears retired internal coupling without touching replacement actors or rewards\")"
+  ]
+}

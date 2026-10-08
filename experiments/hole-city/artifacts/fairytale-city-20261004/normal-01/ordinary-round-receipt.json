@@ -1,0 +1,61 @@
+{
+  "scope": "Ordinary 90-second muted Mac GPU round; normal automatic collecting; no injected growth or player movement",
+  "result": {
+    "elapsed": 90.0166666666628,
+    "score": 288,
+    "level": 7,
+    "player_collection_summary": {
+      "kinds": {
+        "balloon_vendor": 1,
+        "block_tower": 5,
+        "bubble_turret": 4,
+        "royal_drone": 8,
+        "toy_arch": 4,
+        "toy_ball": 20,
+        "toy_block": 18,
+        "toy_car": 8,
+        "toy_castle": 2,
+        "toy_duck": 15
+      },
+      "objects": 85,
+      "tiers": {
+        "1": 61,
+        "2": 8,
+        "3": 4,
+        "4": 2,
+        "5": 6,
+        "6": 4
+      }
+    }
+  },
+  "new_save_initial_coins": 50,
+  "saved_coins": 100,
+  "saved_base_coins": 50,
+  "saved_final_coins": 50,
+  "capture_sha256": "aaf66ac23b3117d32d8e0558ad81e2976b898e7399b3e7a0465d48866e29576b",
+  "process_sha256": "86ed47547811cf1b2741c8d6d43323bc421c4d894278a3eecbcb65356464d9ac",
+  "save_sha256": "f33522e71a78167735a591568a96c44b495f8beacad99a18d1604b7f825bcc6e",
+  "save_path": "/Users/dotafs/Documents/ChatGPT/New project/experiments/hole-city/build/fairytale-city-20261004/normal-play-saves/normal-44111.cfg",
+  "desktop_frames": {
+    "max_ms": 159.937,
+    "mean_ms": 16.8486296576508,
+    "median_ms": 16.678,
+    "p95_ms": 18.182,
+    "sample_count": 5287,
+    "scope": "Actual desktop GPU frame intervals during normal play; excludes capture waits and PNG writes; not iPhone performance"
+  },
+  "steady_desktop_frames": {
+    "max_ms": 31.257,
+    "mean_ms": 16.6524057131827,
+    "median_ms": 16.674,
+    "p95_ms": 18.128,
+    "sample_count": 5181,
+    "scope": "Actual desktop GPU frame intervals during normal play; excludes capture waits and PNG writes; not iPhone performance"
+  },
+  "scene_build_ms": 2366.664,
+  "limitations": [
+    "A single ordinary desktop round is not physical iPhone performance",
+    "No production ad or purchase was requested; NOT READY is the isolated test mode",
+    "One real current draw is independently exercised in economy acceptance; this saved round itself ends at results"
+  ]
+}

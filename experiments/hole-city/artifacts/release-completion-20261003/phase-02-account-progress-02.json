@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "recorded_at_utc": "2026-10-03T02:11:47.005674+00:00",
+  "scope": "Latest root-verified live App Store Connect observations; this documentation worker does not operate browser/accounts. No final submission is asserted.",
+  "version": "0.12.7",
+  "build": "26",
+  "previous_immutable_package_evidence": {
+    "path": "artifacts/release-completion-20261003/phase-02-package-upload-evidence.json",
+    "sha256": "84e085df2518fe20fc24de14a656af6c64f6497db3ef26d55f5c7bb4242e36d3",
+    "purpose": "Exact package/upload bindings; its account state is an earlier snapshot."
+  },
+  "apple_build_processing_verified": true,
+  "selected_build": {
+    "version": "0.12.7",
+    "build": "26",
+    "saved_to_ios_version": true
+  },
+  "privacy": {
+    "seven_categories_published": true,
+    "accuracy_approval": "Explicit user action-time approval reported by root",
+    "configuration": "app-store-labels-configured-v4.json",
+    "configuration_sha256": "2d6de1d8c84c12cd946d4ae2792a57f76e26e2cf4882ec9f03f03d690a6d6e2d",
+    "publish_confirmation_pending": false
+  },
+  "media": {
+    "screenshots": 5,
+    "videos": 2,
+    "section": "6.9-inch",
+    "screenshots_ordered_1_through_5": true,
+    "video_gameplay_thumbnails_visible": true,
+    "red_video_error_visible": false,
+    "source": "Root live UI verification; no new capture/encode by this worker."
+  },
+  "business": {
+    "paid_apps_agreement": "Active",
+    "bank_account": "Active",
+    "us_certificate_of_foreign_status_of_beneficial_owner": "Active",
+    "us_form_w8ben": "Active"
+  },
+  "iap60": {
+    "apple_id": "6818371007",
+    "product_id": "sink_city.diamonds_60",
+    "price_usd": 0.99,
+    "price_verified_in_actual_us_catalog": true,
+    "review_screenshot_and_notes_saved": true,
+    "status": "Ready for Review",
+    "added_to_draft_submission": true
+  },
+  "other_iap": {
+    "360": {
+      "apple_id": "6818406986",
+      "product_id": "sink_city.diamonds_360",
+      "final_review_metadata": "Root is completing; not verified complete at this snapshot"
+    },
+    "1800": {
+      "apple_id": "6818407795",
+      "product_id": "sink_city.diamonds_1800",
+      "final_review_metadata": "Root is completing; not verified complete at this snapshot"
+    }
+  },
+  "submission": {
+    "state": "Draft Submission",
+    "version_added_for_review": false,
+    "final_submitted": false,
+    "receipt_verified": false,
+    "pending": [
+      "Finish 360/1800 diamond review metadata",
+      "Add iOS version0.12.7/build26 for review",
+      "Complete final submission and record actual receipt"
+    ]
+  },
+  "actual_sandbox_purchase_verified": false,
+  "public_account_capture_images_included": false,
+  "root_git_publication": false
+}

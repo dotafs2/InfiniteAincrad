@@ -1,0 +1,249 @@
+{
+  "adapter": "Apple M1 Pro",
+  "cap": 0,
+  "engine": {
+    "build": "official",
+    "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "hex": 263938,
+    "major": 4,
+    "minor": 7,
+    "patch": 2,
+    "status": "stable",
+    "string": "4.7.2-stable (official)",
+    "timestamp": 0
+  },
+  "movie_mode": false,
+  "notes": "High-HP staged stress population retains36 real soldiers,544 troops,mixed elites and a dragon boss. Weapon scenes use normal real60-Hz physics and actual collisions. Full-crowd/paused scenes freeze gameplay intentionally. Frame times are this desktop only, not phone performance or ordinary-gameplay averages.",
+  "os": "macOS",
+  "processor": "Apple M1 Pro",
+  "quality": "low",
+  "results": [
+    {
+      "crowd": {
+        "max": 544.0,
+        "mean": 544.0,
+        "min": 544.0,
+        "p50": 544.0,
+        "p95": 544.0,
+        "samples": 547
+      },
+      "draw_calls": {
+        "max": 106.0,
+        "mean": 106.0,
+        "min": 106.0,
+        "p50": 106.0,
+        "p95": 106.0,
+        "samples": 547
+      },
+      "elites": 4,
+      "frame_ms": {
+        "max": 57.497,
+        "mean": 4.57908043875685,
+        "min": 1.994,
+        "p50": 4.316,
+        "p95": 7.667,
+        "samples": 547
+      },
+      "members": 36,
+      "outliers": [
+        {
+          "elapsed": 0.0,
+          "ms": 57.497,
+          "nodes": 198,
+          "packets": 0,
+          "physics_us": 2,
+          "visual_us": 5,
+          "wall": 0.057497,
+          "weapon": "rifle"
+        }
+      ],
+      "over50ms": 1,
+      "packets": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "samples": 547
+      },
+      "phase": "playing",
+      "physics_cpu_us": {
+        "samples": 0
+      },
+      "primitives": {
+        "max": 161710.0,
+        "mean": 161710.0,
+        "min": 161710.0,
+        "p50": 161710.0,
+        "p95": 161710.0,
+        "samples": 547
+      },
+      "scenario": "full_crowd",
+      "visible_bullets": 0,
+      "visual_cap": 900,
+      "visual_cpu_us": {
+        "max": 27.0,
+        "mean": 6.13711151736746,
+        "min": 2.0,
+        "p50": 6.0,
+        "p95": 9.0,
+        "samples": 547
+      }
+    },
+    {
+      "crowd": {
+        "max": 544.0,
+        "mean": 544.0,
+        "min": 544.0,
+        "p50": 544.0,
+        "p95": 544.0,
+        "samples": 496
+      },
+      "draw_calls": {
+        "max": 109.0,
+        "mean": 108.213709677419,
+        "min": 106.0,
+        "p50": 108.0,
+        "p95": 109.0,
+        "samples": 496
+      },
+      "elites": 4,
+      "frame_ms": {
+        "max": 116.153,
+        "mean": 5.04345564516129,
+        "min": 1.93,
+        "p50": 4.343,
+        "p95": 8.858,
+        "samples": 496
+      },
+      "members": 36,
+      "outliers": [
+        {
+          "elapsed": 1.03333333333333,
+          "ms": 116.153,
+          "nodes": 198,
+          "packets": 108,
+          "physics_us": 1757,
+          "visual_us": 10,
+          "wall": 1.051912,
+          "weapon": "rifle"
+        }
+      ],
+      "over50ms": 1,
+      "packets": {
+        "max": 124.0,
+        "mean": 102.536290322581,
+        "min": 0.0,
+        "p50": 110.0,
+        "p95": 122.0,
+        "samples": 496
+      },
+      "phase": "playing",
+      "physics_cpu_us": {
+        "max": 3375.0,
+        "mean": 1849.44666666667,
+        "min": 464.0,
+        "p50": 1859.0,
+        "p95": 2581.0,
+        "samples": 150
+      },
+      "primitives": {
+        "max": 179514.0,
+        "mean": 171194.286290323,
+        "min": 161710.0,
+        "p50": 171516.0,
+        "p95": 179438.0,
+        "samples": 496
+      },
+      "scenario": "rifle",
+      "visible_bullets": 169,
+      "visual_cap": 900,
+      "visual_cpu_us": {
+        "max": 760.0,
+        "mean": 144.791015625,
+        "min": 1.0,
+        "p50": 7.0,
+        "p95": 612.0,
+        "samples": 512
+      }
+    },
+    {
+      "crowd": {
+        "max": 544.0,
+        "mean": 544.0,
+        "min": 544.0,
+        "p50": 544.0,
+        "p95": 544.0,
+        "samples": 507
+      },
+      "draw_calls": {
+        "max": 108.0,
+        "mean": 107.228796844181,
+        "min": 106.0,
+        "p50": 108.0,
+        "p95": 108.0,
+        "samples": 507
+      },
+      "elites": 4,
+      "frame_ms": {
+        "max": 24.313,
+        "mean": 4.93411045364891,
+        "min": 2.006,
+        "p50": 4.457,
+        "p95": 8.666,
+        "samples": 507
+      },
+      "members": 36,
+      "outliers": [],
+      "over50ms": 0,
+      "packets": {
+        "max": 200.0,
+        "mean": 141.477317554241,
+        "min": 0.0,
+        "p50": 153.0,
+        "p95": 198.0,
+        "samples": 507
+      },
+      "phase": "playing",
+      "physics_cpu_us": {
+        "max": 3513.0,
+        "mean": 2273.76821192053,
+        "min": 787.0,
+        "p50": 2366.0,
+        "p95": 3193.0,
+        "samples": 151
+      },
+      "primitives": {
+        "max": 179552.0,
+        "mean": 170567.972386588,
+        "min": 161652.0,
+        "p50": 171056.0,
+        "p95": 179100.0,
+        "samples": 507
+      },
+      "scenario": "scatter",
+      "visible_bullets": 200,
+      "visual_cap": 900,
+      "visual_cpu_us": {
+        "max": 1438.0,
+        "mean": 157.386587771203,
+        "min": 2.0,
+        "p50": 6.0,
+        "p95": 766.0,
+        "samples": 507
+      }
+    }
+  ],
+  "scale": 1.0,
+  "scenario_warmup_seconds": 0.0,
+  "source_hashes": {
+    "res://scripts/campaign.gd": "91af8c955244f59d28ba7ccc999dab81528f55eec6c2a86a87abe051123eda49",
+    "res://scripts/creature_motion.gd": "8370f54487d17176326aaa68eab36b61c8cc493adfe52e06657ae5edc20c1fb8",
+    "res://scripts/encounters.gd": "76e4b6ed35c10ce9bd58440faf59fb122132cc8b87aea5573238e6d0850b47e4",
+    "res://scripts/game.gd": "4dfbe23375f247241524bd27b5d75f9b4bc1281122897eeb79172adb2f1fba88",
+    "res://scripts/squad.gd": "a9b5bd1feffe38905ab00d3b2466c4ac37d47a7668a063acc12b3f56de37c30a"
+  },
+  "viewport": "(720, 1280)",
+  "vsync": "disabled",
+  "window": "(720, 1280)"
+}

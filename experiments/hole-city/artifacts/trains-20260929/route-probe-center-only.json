@@ -1,0 +1,271 @@
+{
+  "city": {
+    "inner_existing_outer_lane": [
+      {
+        "blocked_samples": 52,
+        "blockers": {
+          "bin_143": {
+            "at": "(-21.2, 0.4575, -34.5)",
+            "category": "bin",
+            "kind": ""
+          },
+          "bin_157": {
+            "at": "(23.8, 0.4575, -34.5)",
+            "category": "bin",
+            "kind": ""
+          },
+          "bin_173": {
+            "at": "(-31.2, 0.4575, -23.5)",
+            "category": "bin",
+            "kind": ""
+          },
+          "bin_175": {
+            "at": "(-31.2, 0.4575, -10.5)",
+            "category": "bin",
+            "kind": ""
+          },
+          "vehicle_090": {
+            "at": "(-24.8, 0.6325, -31.8)",
+            "category": "traffic",
+            "kind": ""
+          },
+          "vehicle_094": {
+            "at": "(26.8, 0.705, -0.199999)",
+            "category": "traffic",
+            "kind": ""
+          }
+        },
+        "center_off_road": 0,
+        "footprint_length": 2.35,
+        "footprint_width": 1.45,
+        "length": 175.527172088623,
+        "offset": -1.8,
+        "pedestrian_corridor_overlap_samples": 0,
+        "sample_pitch_max": 0.6,
+        "samples": 600,
+        "sharpest_polyline_turn_degrees": 4.19106981529058
+      },
+      {
+        "blocked_samples": 81,
+        "blockers": {
+          "vehicle_090": {
+            "at": "(-24.8, 0.6325, -31.8)",
+            "category": "traffic",
+            "kind": ""
+          },
+          "vehicle_092": {
+            "at": "(19.08319, 0.6575, -31.8)",
+            "category": "traffic",
+            "kind": ""
+          },
+          "vehicle_094": {
+            "at": "(26.8, 0.705, -0.199999)",
+            "category": "traffic",
+            "kind": ""
+          },
+          "vehicle_096": {
+            "at": "(-17.08319, 0.705, -0.199999)",
+            "category": "traffic",
+            "kind": ""
+          }
+        },
+        "center_off_road": 0,
+        "footprint_length": 2.35,
+        "footprint_width": 1.45,
+        "length": 175.527172088623,
+        "offset": 0.0,
+        "pedestrian_corridor_overlap_samples": 0,
+        "sample_pitch_max": 0.6,
+        "samples": 600,
+        "sharpest_polyline_turn_degrees": 4.19106981529058
+      },
+      {
+        "blocked_samples": 10,
+        "blockers": {
+          "vehicle_090": {
+            "at": "(-24.8, 0.6325, -31.8)",
+            "category": "traffic",
+            "kind": ""
+          },
+          "vehicle_094": {
+            "at": "(26.8, 0.705, -0.199999)",
+            "category": "traffic",
+            "kind": ""
+          }
+        },
+        "center_off_road": 0,
+        "footprint_length": 2.35,
+        "footprint_width": 1.45,
+        "length": 175.527172088623,
+        "offset": 1.8,
+        "pedestrian_corridor_overlap_samples": 0,
+        "sample_pitch_max": 0.6,
+        "samples": 600,
+        "sharpest_polyline_turn_degrees": 4.19106981529058
+      }
+    ],
+    "outer_ring_r6": [
+      {
+        "blocked_samples": 0,
+        "blockers": {},
+        "center_off_road": 0,
+        "footprint_length": 2.35,
+        "footprint_width": 1.45,
+        "length": 661.672192156315,
+        "offset": -1.8,
+        "pedestrian_corridor_overlap_samples": 0,
+        "sample_pitch_max": 0.6,
+        "samples": 1136,
+        "sharpest_polyline_turn_degrees": 7.50060297290077
+      },
+      {
+        "blocked_samples": 0,
+        "blockers": {},
+        "center_off_road": 0,
+        "footprint_length": 2.35,
+        "footprint_width": 1.45,
+        "length": 661.672192156315,
+        "offset": 0.0,
+        "pedestrian_corridor_overlap_samples": 0,
+        "sample_pitch_max": 0.6,
+        "samples": 1136,
+        "sharpest_polyline_turn_degrees": 7.50060297290077
+      },
+      {
+        "blocked_samples": 0,
+        "blockers": {},
+        "center_off_road": 0,
+        "footprint_length": 2.35,
+        "footprint_width": 1.45,
+        "length": 661.672192156315,
+        "offset": 1.8,
+        "pedestrian_corridor_overlap_samples": 0,
+        "sample_pitch_max": 0.6,
+        "samples": 1136,
+        "sharpest_polyline_turn_degrees": 7.50060297290077
+      }
+    ]
+  },
+  "food": {
+    "main_ring": [
+      {
+        "blocked_samples": 6,
+        "blockers": {
+          "food_sushi_2868": {
+            "at": "(-59.93642, 0.368, 8.350869)",
+            "category": "traffic",
+            "kind": "sushi"
+          }
+        },
+        "center_off_road": 0,
+        "footprint_length": 1.75,
+        "footprint_width": 1.25,
+        "length": 369.998588562012,
+        "offset": -1.35,
+        "pedestrian_corridor_overlap_samples": 0,
+        "sample_pitch_max": 0.6,
+        "samples": 741,
+        "sharpest_polyline_turn_degrees": 7.68757427878799
+      },
+      {
+        "blocked_samples": 8,
+        "blockers": {
+          "food_sushi_2867": {
+            "at": "(-49.9483, 0.368, 50.15358)",
+            "category": "traffic",
+            "kind": "sushi"
+          },
+          "food_sushi_2868": {
+            "at": "(-59.93642, 0.368, 8.350869)",
+            "category": "traffic",
+            "kind": "sushi"
+          }
+        },
+        "center_off_road": 0,
+        "footprint_length": 1.75,
+        "footprint_width": 1.25,
+        "length": 369.998588562012,
+        "offset": 0.0,
+        "pedestrian_corridor_overlap_samples": 0,
+        "sample_pitch_max": 0.6,
+        "samples": 741,
+        "sharpest_polyline_turn_degrees": 7.68757427878799
+      },
+      {
+        "blocked_samples": 29,
+        "blockers": {
+          "food_sushi_2867": {
+            "at": "(-49.9483, 0.368, 50.15358)",
+            "category": "traffic",
+            "kind": "sushi"
+          },
+          "food_sushi_2869": {
+            "at": "(-37.99079, 0.368, -33.80911)",
+            "category": "traffic",
+            "kind": "sushi"
+          },
+          "food_sushi_2871": {
+            "at": "(42.35958, 0.368, -34.54183)",
+            "category": "traffic",
+            "kind": "sushi"
+          },
+          "food_sushi_2873": {
+            "at": "(35.53643, 0.368, 47.51442)",
+            "category": "traffic",
+            "kind": "sushi"
+          }
+        },
+        "center_off_road": 0,
+        "footprint_length": 1.75,
+        "footprint_width": 1.25,
+        "length": 369.998588562012,
+        "offset": 1.35,
+        "pedestrian_corridor_overlap_samples": 0,
+        "sample_pitch_max": 0.6,
+        "samples": 741,
+        "sharpest_polyline_turn_degrees": 7.68757427878799
+      }
+    ],
+    "outer_food_ring": [
+      {
+        "blocked_samples": 0,
+        "blockers": {},
+        "center_off_road": 0,
+        "footprint_length": 1.75,
+        "footprint_width": 1.25,
+        "length": 609.324145197868,
+        "offset": -1.35,
+        "pedestrian_corridor_overlap_samples": 0,
+        "sample_pitch_max": 0.6,
+        "samples": 1165,
+        "sharpest_polyline_turn_degrees": 3.87833508998957
+      },
+      {
+        "blocked_samples": 0,
+        "blockers": {},
+        "center_off_road": 0,
+        "footprint_length": 1.75,
+        "footprint_width": 1.25,
+        "length": 609.324145197868,
+        "offset": 0.0,
+        "pedestrian_corridor_overlap_samples": 0,
+        "sample_pitch_max": 0.6,
+        "samples": 1165,
+        "sharpest_polyline_turn_degrees": 3.87833508998957
+      },
+      {
+        "blocked_samples": 0,
+        "blockers": {},
+        "center_off_road": 0,
+        "footprint_length": 1.75,
+        "footprint_width": 1.25,
+        "length": 609.324145197868,
+        "offset": 1.35,
+        "pedestrian_corridor_overlap_samples": 0,
+        "sample_pitch_max": 0.6,
+        "samples": 1165,
+        "sharpest_polyline_turn_degrees": 3.87833508998957
+      }
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+[
+  {
+    "suite": "no_tether",
+    "passed": true,
+    "report": {
+      "checks": 10,
+      "failures": []
+    }
+  },
+  {
+    "suite": "rim_fall",
+    "passed": true,
+    "report": {
+      "checks": 25,
+      "failures": [],
+      "results": [
+        {
+          "case": "car",
+          "collected": 1,
+          "max_tilt_deg": 164.219400962865,
+          "seconds": 1.2,
+          "visible_tilt_deg": 102.00674598804
+        },
+        {
+          "case": "turned_car",
+          "collected": 1,
+          "max_tilt_deg": 128.63534842968,
+          "seconds": 1.06666666666667,
+          "visible_tilt_deg": 82.3198991675988
+        },
+        {
+          "case": "lamp",
+          "collected": 1,
+          "max_tilt_deg": 57.5971843170848,
+          "seconds": 2.33333333333333,
+          "visible_tilt_deg": 57.5971843170848
+        },
+        {
+          "case": "tall_box_bridge",
+          "collected": 0,
+          "max_tilt_deg": 60.0951779328967,
+          "seconds": 15.0,
+          "visible_tilt_deg": 60.0951779328967
+        },
+        {
+          "case": "centered_box",
+          "collected": 1,
+          "max_tilt_deg": 0.0,
+          "seconds": 0.716666666666667,
+          "visible_tilt_deg": 0.0
+        }
+      ]
+    }
+  },
+  {
+    "suite": "actor_fall",
+    "passed": false,
+    "report": {
+      "error": "missing acceptance report",
+      "log_tail": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nERROR: Condition \"ret != noErr\" is true. Returning: \"\"\n   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)\nSCRIPT ERROR: Parse Error: Could not preload resource script \"res://fidelity/catalog_city.gd\".\n          at: GDScript::reload (res://fidelity/game.gd:3)\n          GDScript backtrace (most recent call first):\n              [0] run (res://tests/actor_fall_acceptance.gd:25)\nSCRIPT ERROR: Parse Error: Could not resolve script \"res://fidelity/catalog_city.gd\".\n          at: GDScript::reload (res://fidelity/game.gd:3)\n          GDScript backtrace (most recent call first):\n              [0] run (res://tests/actor_fall_acceptance.gd:25)\nSCRIPT ERROR: Parse Error: Could not resolve script \"res://fidelity/food_city.gd\".\n          at: GDScript::reload (res://fidelity/game.gd:4)\n          GDScript backtrace (most recent call first):\n              [0] run (res://tests/actor_fall_acceptance.gd:25)\nERROR: Failed to load script \"res://fidelity/game.gd\" with error \"Parse error\".\n   at: load (modules/gdscript/gdscript_resource_format.cpp:46)\n   GDScript backtrace (most recent call first):\n       [0] run (res://tests/actor_fall_acceptance.gd:25)\nSCRIPT ERROR: Invalid call. Nonexistent function 'start_level' in base 'Node3D'.\n          at: run (res://tests/actor_fall_acceptance.gd:25)\n          GDScript backtrace (most recent call first):\n              [0] run (res://tests/actor_fall_acceptance.gd:25)\n"
+    }
+  },
+  {
+    "suite": "scene_qa",
+    "passed": false,
+    "report": {
+      "error": "missing acceptance report",
+      "log_tail": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nERROR: Condition \"ret != noErr\" is true. Returning: \"\"\n   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)\nSCRIPT ERROR: Parse Error: Could not preload resource script \"res://fidelity/catalog_city.gd\".\n          at: GDScript::reload (res://fidelity/game.gd:3)\n          GDScript backtrace (most recent call first):\n              [0] run (res://tests/scene_qa_acceptance.gd:98)\nSCRIPT ERROR: Parse Error: Could not resolve script \"res://fidelity/catalog_city.gd\".\n          at: GDScript::reload (res://fidelity/game.gd:3)\n          GDScript backtrace (most recent call first):\n              [0] run (res://tests/scene_qa_acceptance.gd:98)\nSCRIPT ERROR: Parse Error: Could not resolve script \"res://fidelity/food_city.gd\".\n          at: GDScript::reload (res://fidelity/game.gd:4)\n          GDScript backtrace (most recent call first):\n              [0] run (res://tests/scene_qa_acceptance.gd:98)\nERROR: Failed to load script \"res://fidelity/game.gd\" with error \"Parse error\".\n   at: load (modules/gdscript/gdscript_resource_format.cpp:46)\n   GDScript backtrace (most recent call first):\n       [0] run (res://tests/scene_qa_acceptance.gd:98)\nSCRIPT ERROR: Invalid access to property or key 'item_collected' on a base object of type 'Node3D'.\n          at: run (res://tests/scene_qa_acceptance.gd:99)\n          GDScript backtrace (most recent call first):\n              [0] run (res://tests/scene_qa_acceptance.gd:99)\n"
+    }
+  }
+]

@@ -1,0 +1,71 @@
+--- before/food_body.gd
++++ fidelity/food_body.gd
+@@ -10,6 +10,8 @@
+ var rain_landed:=false
+ var rain_contact_time:=0.0
+ var rain_age:=0.0
++var rain_support:WeakRef
++var rain_support_transform:=Transform3D.IDENTITY
+ var release_delay:=0.0
+ var release_hole:Node3D
+ var collapse_started:=false
+@@ -69,6 +71,27 @@
+ 	state.linear_velocity.y=0.0
+ 	terrain_previous_pose=pose
+ 
++func remember_rain_support(collider:Object)->void:
++	if not collider is CollisionObject3D:
++		rain_support=null
++		return
++	if rain_support==null or rain_support.get_ref()!=collider:rain_support=weakref(collider)
++	rain_support_transform=collider.global_transform
++
++func wake_after_rain_support_change()->void:
++	if not sleeping or not rain_landed or rain_support==null:return
++	var support=rain_support.get_ref()
++	# Swept support may settle slightly above a collider and native sleeping
++	# contacts do not reliably wake after removal. Track the actual ray owner,
++	# not a height plane. Existing rain physics callbacks need no extra rays.
++	if is_instance_valid(support) and support.is_inside_tree() and not support.is_queued_for_deletion():
++		if (support.collision_layer&collision_mask)!=0 and support.global_transform.is_equal_approx(rain_support_transform):return
++	rain_support=null
++	rain_landed=false;rain_contact_time=0.0;sleeping=false
++	# Remove the cached pose immediately. Gravity moves the original body;
++	# no new body, teleport, score, artificial freeze or support is introduced.
++	expose_visual()
++
+ func _integrate_forces(state:PhysicsDirectBodyState3D)->void:
+ 	if (is_rain or collapse_started) and impact_cooldown<=0.0 and prior_fall_speed>1.8 and state.get_contact_count()>0:
+ 		for i in state.get_contact_count():
+@@ -82,6 +105,7 @@
+ 		return
+ 	state.linear_velocity.y=maxf(state.linear_velocity.y,-5.5)
+ 	if state.linear_velocity.y>.15:
++		rain_support=null
+ 		rain_landed=false;rain_contact_time=0.0
+ 		return
+ 	# A swept foot contact handles sub-centimetre triangle contact loss. Query
+@@ -92,6 +116,7 @@
+ 	var query:=PhysicsRayQueryParameters3D.create(from,to,collision_mask,[get_rid()])
+ 	var hit:=state.get_space_state().intersect_ray(query)
+ 	if not hit.is_empty() and hit.normal.y>.7:
++		remember_rain_support(hit.collider)
+ 		if -state.linear_velocity.y>1.8 and impact_cooldown<=0.0:contact_feedback(hit.position,-state.linear_velocity.y)
+ 		var pose:=state.transform
+ 		pose.origin.y=hit.position.y+extent+.008
+@@ -102,6 +127,7 @@
+ 		if rain_contact_time>.65 and state.linear_velocity.length()<.18 and state.angular_velocity.length()<.3 and not is_instance_valid(claimed_by):
+ 			state.sleeping=true
+ 	else:
++		rain_support=null
+ 		rain_contact_time=0.0;rain_landed=false
+ 
+ func contact_feedback(at:Vector3,speed:float)->void:
+@@ -188,6 +214,7 @@
+ 	prior_fall_speed=maxf(0.0,-linear_velocity.y)
+ 	if is_rain:
+ 		rain_age+=delta
++		wake_after_rain_support_change()
+ 		if batch!=null and not sleeping:expose_visual()
+ 	if release_delay>0.0:
+ 		release_delay=maxf(0.0,release_delay-delta)

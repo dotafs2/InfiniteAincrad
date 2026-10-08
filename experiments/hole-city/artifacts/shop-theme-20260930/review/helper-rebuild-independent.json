@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "helper_sha256": "d20373677ef42390bcc55c652dbb816fbbd2e4f2e57b9e8044682968578d340f",
+  "source_output_sha256": "0e5af2a8c1ea6969bfcadbd727e33a4c7f87379aa211b465322f98f026538b02",
+  "rebuilt_output_sha256": "3a7e60a8a8cbf1a5cf56d8cd147ccfe84946278ef5c58468640cb19528a5e235",
+  "ogg_file_byte_identical": false,
+  "ogg_packets_byte_identical": true,
+  "packets": 5523,
+  "decoded_pcm_byte_identical": true,
+  "pcm_sha256": "da9fee86734574b240b2c101582b8b3e19f60520e57ae679b1c1d59b5f00e57c",
+  "scope": "Independent Ogg packet reconstruction and complete decoded PCM comparison; container serial bytes are intentionally not the reproducibility oracle."
+}

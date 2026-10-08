@@ -1,0 +1,49 @@
+{
+  "tracks": [
+    {
+      "file": "sunny_city_loop.ogg",
+      "sha256": "f606d1f9720ebf512fbe1f1110f70992b416a61c990823ee09955e2546df7177",
+      "bytes": 290770,
+      "codec": "vorbis",
+      "rate": 44100,
+      "channels": 2,
+      "samples_per_channel": 1411200,
+      "duration": 32.0,
+      "rms_dbfs": -17.19209754679452,
+      "peak": 0.6756669282913208,
+      "peak_dbfs": -3.405346757273431,
+      "clipped": 0,
+      "dc": [
+        -3.3583448203544815e-05,
+        -3.5819210327184906e-05
+      ],
+      "last_to_first_step": 0.00278862621053122,
+      "adjacent_step_p99_subsample": 0.028517000377178192,
+      "boundary_20ms_rms_dbfs": -19.667397249416187
+    },
+    {
+      "file": "snack_garden_loop.ogg",
+      "sha256": "10c680b090cdef83e1520893eb41c4157ab8440d3c5b22e27610b167ce22897b",
+      "bytes": 280928,
+      "codec": "vorbis",
+      "rate": 44100,
+      "channels": 2,
+      "samples_per_channel": 1512000,
+      "duration": 34.285714285714285,
+      "rms_dbfs": -17.878698455684656,
+      "peak": 0.6821203231811523,
+      "peak_dbfs": -3.3227802170022325,
+      "clipped": 0,
+      "dc": [
+        -1.8424305790579786e-05,
+        4.010297880468733e-05
+      ],
+      "last_to_first_step": 0.006241310096811503,
+      "adjacent_step_p99_subsample": 0.03061680495738983,
+      "boundary_20ms_rms_dbfs": -20.899810613470784
+    }
+  ],
+  "waveform_correlation_subsample": 0.00173731998859678,
+  "pass": true,
+  "limits": "Decoded asset measurements; no audition or browser autoplay certification."
+}
